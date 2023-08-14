@@ -56,6 +56,9 @@ module.exports = {
 			new webpack.DefinePlugin({
 				process: '{}',
 			}),
+			new webpack.ProvidePlugin({
+				Buffer: ['buffer', 'Buffer'],
+			}),
 		);
 		return config;
 	},
@@ -117,6 +120,7 @@ const webpackConfig = (config) => {
 	];
 	config.resolve.alias = {
 		...config.resolve.alias,
+		Buffer: 'buffer',
 	};
 	return config;
 };

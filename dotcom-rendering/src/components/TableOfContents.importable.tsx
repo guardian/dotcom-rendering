@@ -12,9 +12,8 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
-import { useBridgetVersion } from '../lib/useBridgetVersion';
 import type { TableOfContentsItem } from '../types/frontend';
 import type { Palette } from '../types/palette';
 
@@ -125,13 +124,6 @@ const verticalStyle = css`
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	const palette = decidePalette(format);
 	const [open, setOpen] = useState(tableOfContents.length < 5);
-
-	const bridgetVersion = useBridgetVersion();
-	useEffect(() => {
-		setTimeout(() => {
-			console.log(`Bridget version: ${bridgetVersion ?? 'pending'}`);
-		}, 10000);
-	});
 
 	return (
 		<details
