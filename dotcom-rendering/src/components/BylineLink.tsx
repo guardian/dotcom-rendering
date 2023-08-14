@@ -145,6 +145,7 @@ export const BylineLink = ({
 					<Follow
 						displayName={soleContributor.title}
 						id={soleContributor.id}
+						format={format}
 					/>
 				</Island>
 			) : null}
