@@ -197,11 +197,17 @@ const decideLeftContent = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { abTests, isPaidContent, hasPageSkin: hasPageSkinConfig },
+		config: {
+			switches,
+			abTests,
+			isPaidContent,
+			hasPageSkin: hasPageSkinConfig,
+		},
 	} = front;
 
 	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
 	const isInFrontsBannerTest =
+		!!switches.frontsBannerAdsDcr &&
 		abTests.frontsBannerAdsDcrVariant === 'variant';
 
 	const merchHighPosition = getMerchHighPosition(
