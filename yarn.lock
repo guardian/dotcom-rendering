@@ -3120,10 +3120,10 @@
     read-pkg-up "7.0.1"
     yargs "^17.6.2"
 
-"@guardian/commercial@10.15.0":
-  version "10.15.0"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-10.15.0.tgz#35357141e918e50f0f2c015f41c23c4987b70faa"
-  integrity sha512-EJn6P4f962oJG+o90ngHXaTlV/oPVwdv5dlaK0biwvOpm7YkHK1X3JTNxi0HYax38mpKlUGMoKiubboum5/DAQ==
+"@guardian/commercial@10.17.0":
+  version "10.17.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-10.17.0.tgz#09304997478490ed36690475b89884ea6bf40763"
+  integrity sha512-AZTIyKqD39waxhi4hr6iyiUbVI0EvQKszPbbDLJaB8uYItVDteSeQ7kgXZxC4Nn+suXwnFcyY2eUv5v5hoke9Q==
   dependencies:
     "@changesets/cli" "^2.26.1"
     "@guardian/ab-core" "^5.0.0"
