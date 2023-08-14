@@ -8,7 +8,9 @@ export const useBridgetVersion = (): string | undefined => {
 	useEffect(() => {
 		void environmentClient
 			.nativeThriftPackageVersion()
-			.then(setBridgetVersion);
+			.then(setBridgetVersion)
+			// we don't care enough :)
+			.catch((e) => console.error(e));
 	}, []);
 
 	return bridgetVersion;
