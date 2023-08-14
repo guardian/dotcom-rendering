@@ -1,9 +1,21 @@
-import '../webpackPublicPath';
 import { isAdBlockInUse } from '@guardian/commercial';
+import { log, startPerformanceMeasure } from '@guardian/libs';
+import '../webpackPublicPath';
 
-const loadSentry = (): void => {
+/** Sentry errors are only sent to the console */
+const stubSentry = (): void => {
+	window.guardian.modules.sentry.reportError = (error) => {
+		console.error(error);
+	};
+};
+
+/**
+ * Set up error handlers to inject and call Sentry.
+ * If no error happen, Sentry is not loaded.
+ */
+const loadSentryOnError = (): void => {
 	try {
-		// Downloading and initiliasing Sentry is asynchronous so we need a way
+		// Downloading and initialising Sentry is asynchronous so we need a way
 		// to ensure injection only happens once and to capture any other errors that
 		// might happen while this script is loading
 		let injected = false;
@@ -11,6 +23,11 @@ const loadSentry = (): void => {
 
 		// Function that gets called when an error happens before Sentry is ready
 		const injectSentry = async (error?: Error) => {
+			const { endPerformanceMeasure } = startPerformanceMeasure(
+				'dotcom',
+				'sentryLoader',
+				'inject',
+			);
 			// Remember this error for later
 			if (error) queue.push(error);
 
@@ -33,6 +50,7 @@ const loadSentry = (): void => {
 
 			// Load sentry.ts
 			const { reportError } = await import(
+				/* webpackChunkName: "lazy" */
 				/* webpackChunkName: "sentry" */ './sentry'
 			);
 
@@ -47,14 +65,19 @@ const loadSentry = (): void => {
 				const queuedError = queue.shift();
 				if (queuedError) reportError(queuedError);
 			}
+			log(
+				'openJournalism',
+				`Injected Sentry in ${endPerformanceMeasure()}ms`,
+			);
 		};
 
 		// This is how we lazy load Sentry. We setup custom functions and
 		// listeners to inject Sentry when an error happens
 		window.onerror = (message, url, line, column, error) =>
 			injectSentry(error);
-		window.onunhandledrejection = (event: undefined | { reason?: any }) =>
-			event && injectSentry(event.reason);
+		window.onunhandledrejection = (
+			event: undefined | { reason?: unknown },
+		) => event?.reason instanceof Error && injectSentry(event.reason);
 		window.guardian.modules.sentry.reportError = (error) => {
 			injectSentry(error).catch((e) =>
 				console.error(`injectSentry - error: ${String(e)}`),
@@ -65,4 +88,4 @@ const loadSentry = (): void => {
 	}
 };
 
-export { loadSentry };
+export { loadSentryOnError, stubSentry };
