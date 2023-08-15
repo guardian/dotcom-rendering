@@ -155,7 +155,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 };
 
 const sublinkStyles = css`
-	display: block;
+	display: inline-block;
 	/* See: https://css-tricks.com/nested-links/ */
 	${getZIndex('card-nested-link')}
 	/* The following styles turn off those provided by Link */
