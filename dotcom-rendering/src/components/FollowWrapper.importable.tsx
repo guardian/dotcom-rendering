@@ -11,7 +11,9 @@ type Props = {
 };
 
 export const FollowWrapper = ({ id, displayName, format }: Props) => {
-	const [isFollowing, setIsFollowing] = useState<boolean>(false);
+	const [isFollowing, setIsFollowing] = useState<boolean | undefined>(
+		undefined,
+	);
 	useEffect(() => {
 		const topic = new Topic({
 			id,
@@ -49,9 +51,11 @@ export const FollowWrapper = ({ id, displayName, format }: Props) => {
 			`}
 		>
 			<FollowButton
-				isFollowing={isFollowing}
+				isFollowing={isFollowing ?? false}
 				displayName={displayName}
-				onClickHandler={handler}
+				onClickHandler={
+					isFollowing !== undefined ? handler : () => undefined
+				}
 				format={format}
 			/>
 		</div>
