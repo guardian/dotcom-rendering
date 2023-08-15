@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { CartoonComponent } from './CartoonComponent';
-import { cartoon } from './CartoonComponent.mocks';
+import {
+	cartoon,
+	cartoonWithoutCreditOrCaption,
+} from './CartoonComponent.mocks';
 import { Figure } from './Figure';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
@@ -52,4 +55,23 @@ export const Cartoon = () => {
 		</Wrapper>
 	);
 };
-Cartoon.storyName = 'Cartoon';
+Cartoon.storyName = 'with credit and caption';
+
+export const CartoonWithoutCredit = () => {
+	return (
+		<Wrapper>
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				}}
+				isMainMedia={false}
+				role="inline"
+			>
+				<CartoonComponent element={cartoonWithoutCreditOrCaption} />
+			</Figure>
+		</Wrapper>
+	);
+};
+CartoonWithoutCredit.storyName = 'with no credit or caption';

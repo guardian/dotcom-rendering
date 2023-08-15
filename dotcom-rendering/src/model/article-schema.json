@@ -1326,18 +1326,6 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
-                "caption": {
-                    "type": "string"
-                },
-                "credit": {
-                    "type": "string"
-                },
-                "displayCredit": {
-                    "type": "boolean"
-                },
-                "alt": {
-                    "type": "string"
-                },
                 "variants": {
                     "type": "array",
                     "items": {
@@ -1362,14 +1350,22 @@
                             "viewportSize"
                         ]
                     }
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "displayCredit": {
+                    "type": "boolean"
+                },
+                "alt": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "alt",
-                "caption",
-                "credit",
-                "displayCredit",
                 "role",
                 "variants"
             ]
