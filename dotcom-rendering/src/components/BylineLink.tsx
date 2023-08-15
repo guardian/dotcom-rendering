@@ -6,7 +6,7 @@ import {
 } from '../lib/byline';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
-import { Follow } from './Follow.importable';
+import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
 
 type Props = {
@@ -142,7 +142,7 @@ export const BylineLink = ({
 			{renderedTokens}
 			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
 				<Island>
-					<Follow
+					<FollowWrapper
 						displayName={soleContributor.title}
 						id={soleContributor.id}
 						format={format}

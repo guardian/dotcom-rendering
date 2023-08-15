@@ -1,18 +1,12 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render, waitFor } from '@testing-library/react';
-import { Follow } from './Follow.importable';
-
-let isFollowingMock = false;
-jest.mock('../lib/bridgetApi', () => ({
-	notificationsClient: {
-		isFollowing: jest.fn().mockResolvedValue(() => isFollowingMock),
-	},
-}));
+import { FollowButton } from './FollowButton';
 
 it('should show a follow button for a single contributor when rendering for apps', () => {
 	const { getByText } = render(
-		<Follow
-			id="profile/gwyntopham"
+		<FollowButton
+			isFollowing={false}
+			onClickHandler={() => undefined}
 			displayName="Gwyn Topham"
 			format={{
 				display: ArticleDisplay.Standard,
@@ -25,11 +19,11 @@ it('should show a follow button for a single contributor when rendering for apps
 });
 
 it('should show a follow button for a single contributor when rendering for apps', async () => {
-	isFollowingMock = true;
 	const { getByText } = render(
-		<Follow
-			id="profile/gwyntopham"
+		<FollowButton
+			onClickHandler={() => undefined}
 			displayName="Gwyn Topham"
+			isFollowing={true}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
