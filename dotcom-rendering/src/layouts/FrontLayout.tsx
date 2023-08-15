@@ -87,6 +87,7 @@ export const decideAdSlot = (
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
 	isInFrontsBannerTest?: boolean,
+	isBrandedSection?: boolean,
 ) => {
 	if (!renderAds) return null;
 
@@ -103,7 +104,7 @@ export const decideAdSlot = (
 				hasPageskin={hasPageSkin}
 			/>
 		);
-	} else if (mobileAdPositions.includes(index)) {
+	} else if (!isBrandedSection && mobileAdPositions.includes(index)) {
 		return (
 			<Hide from="tablet">
 				<AdSlot
@@ -551,34 +552,51 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						renderAds
 					) {
 						return (
-							<LabsSection
-								key={ophanName}
-								title={collection.displayName}
-								collectionId={collection.id}
-								pageId={front.pressedPage.id}
-								ajaxUrl={front.config.ajaxUrl}
-								sectionId={`container-${ophanName}`}
-								ophanComponentName={ophanName}
-								ophanComponentLink={ophanComponentLink}
-								containerName={collection.collectionType}
-								canShowMore={collection.canShowMore}
-								url={collection.href}
-								badge={collection.badge}
-								data-print-layout="hide"
-								hasPageSkin={hasPageSkin}
-							>
-								<DecideContainer
-									trails={trailsWithoutBranding}
-									groupedTrails={collection.grouped}
-									containerType={collection.collectionType}
-									containerPalette={
-										collection.containerPalette
-									}
-									imageLoading={imageLoading}
-									adIndex={desktopAdPositions.indexOf(index)}
-									renderAds={renderMpuAds}
-								/>
-							</LabsSection>
+							<Fragment key={ophanName}>
+								<LabsSection
+									title={collection.displayName}
+									collectionId={collection.id}
+									pageId={front.pressedPage.id}
+									ajaxUrl={front.config.ajaxUrl}
+									sectionId={`container-${ophanName}`}
+									ophanComponentName={ophanName}
+									ophanComponentLink={ophanComponentLink}
+									containerName={collection.collectionType}
+									canShowMore={collection.canShowMore}
+									url={collection.href}
+									badge={collection.badge}
+									data-print-layout="hide"
+									hasPageSkin={hasPageSkin}
+								>
+									<DecideContainer
+										trails={trailsWithoutBranding}
+										groupedTrails={collection.grouped}
+										containerType={
+											collection.collectionType
+										}
+										containerPalette={
+											collection.containerPalette
+										}
+										imageLoading={imageLoading}
+										adIndex={desktopAdPositions.indexOf(
+											index,
+										)}
+										renderAds={renderMpuAds}
+									/>
+								</LabsSection>
+								{decideAdSlot(
+									renderAds,
+									index,
+									front.isNetworkFront,
+									front.pressedPage.collections.length,
+									front.pressedPage.frontProperties
+										.isPaidContent,
+									mobileAdPositions,
+									hasPageSkin,
+									isInFrontsBannerTest,
+									true,
+								)}
+							</Fragment>
 						);
 					}
 
