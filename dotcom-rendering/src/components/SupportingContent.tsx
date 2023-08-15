@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, neutral, until } from '@guardian/source-foundations';
+import { from, neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { transparentColour } from '../lib/transparentColour';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
@@ -102,7 +102,6 @@ export const SupportingContent = ({
 				if (!subLink.headline) return null;
 				const shouldPadLeft =
 					!isDynamo && index > 0 && alignment === 'horizontal';
-				const isLast = index === length - 1;
 				return (
 					<li
 						key={subLink.url}
