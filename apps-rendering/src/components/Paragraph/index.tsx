@@ -54,8 +54,8 @@ const styles = (
 					${dropCapWeight(format)}
 					color: ${text.dropCap(format)};
 					float: left;
-					font-size: 7.375rem;
-					line-height: 6.188rem;
+					font-size: 6.75rem;
+					line-height: 5.7rem;
 					vertical-align: text-top;
 					pointer-events: none;
 					margin-right: ${remSpace[1]};
