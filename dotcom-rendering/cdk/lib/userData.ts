@@ -41,5 +41,5 @@ export const getUserData = ({
 		`/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${region} ${elkStreamId} /var/log/dotcom-rendering/dotcom-rendering.log`,
 	].join('\n');
 
-	return userData;
+	return Buffer.from(userData).toString('base64');
 };
