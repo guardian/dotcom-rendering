@@ -33,6 +33,7 @@ export const Analytics = ({
 			<script type="application/json">
 				{
 					"requests": {
+						"pageViewWithConsentTest": "http://localhost:8000/receive?componentEvent=\${componentEvent}",
 						"pageViewWithConsent": "\${additionalBase}&componentEvent=\${componentEvent}"
 					},
 					"triggers": {
@@ -40,7 +41,7 @@ export const Analytics = ({
 							"on": "visible",
 							"request": "pageViewWithConsent",
 							"vars": {
-								"componentEvent": "%7B%22componentEvent%22:%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%22%5B'08:\${consentState}','09:\${consentString}'%5D%22%7D,%22action%22:%22MANAGE_CONSENT%22%7D%7D"
+								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%22%5B'08:\${consentState}','09:\${consentString'}'%5D%22%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
 							}
 						}
 					},
