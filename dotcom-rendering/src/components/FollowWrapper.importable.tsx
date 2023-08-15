@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { useEffect, useState } from 'react';
 import { notificationsClient } from '../lib/bridgetApi';
@@ -42,11 +43,17 @@ export const FollowWrapper = ({ id, displayName, format }: Props) => {
 					.catch((e) => console.error(e));
 	};
 	return (
-		<FollowButton
-			isFollowing={isFollowing}
-			displayName={displayName}
-			onClickHandler={handler}
-			format={format}
-		/>
+		<div
+			css={css`
+				min-height: 24px;
+			`}
+		>
+			<FollowButton
+				isFollowing={isFollowing}
+				displayName={displayName}
+				onClickHandler={handler}
+				format={format}
+			/>
+		</div>
 	);
 };
