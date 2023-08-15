@@ -112,17 +112,15 @@ const decideAvatarUrl = (
 /**
  * This function decides the best URL to link to on a Card or Supporting Content. It will pick the first non-undefined property of the following:
  *
- * `trail.properties.webUrl` - Where CAPI expects the content to be. Fully qualified but turned into a relative URL by DCR if possible.
- *                             Ignored if the trail is type LinkSnap.
+ * `trail.properties.webUrl` - Where CAPI expects the content to be. Fully qualified but turned into a relative URL by DCR if possible. Ignored if the trail is type LinkSnap.
  * `trail.properties.href` - Location that a LinkSnap references.
- * `trail.header.url` - Where Frontend/FAPI expects the content to be. Usually identical to a relative-ized webUrl.
+ * `trail.header.url` - Where Frontend/FAPI expects the content to be. Usually identical to a relative-ized webUrl. In theory this should never get picked but it's the only URL where we're guaranteed it not be undefined which makes TypeScript happy.
  */
 const decideUrl = (trail: FESupportingContent | FEFrontCard) => {
 	/**
 	 * Frontend gives us fully qualified webUrls (https://www.theguardian.com/a/thing) which we want as relative URLs instead
 	 *
-	 * Don't try to provide a relative URL for LinkSnap, these will link to domains other than www.theguardian.com
-	 * and therefore wont have a relative path.
+	 * Don't try to provide a relative URL for LinkSnap, these will link to domains other than www.theguardian.com and therefore wont have a relative path.
 	 */
 	if (
 		trail.properties.webUrl !== undefined &&
@@ -135,7 +133,7 @@ const decideUrl = (trail: FESupportingContent | FEFrontCard) => {
 			 * In theory CAPI/FAPI/Frontend should never give us an webURL but
 			 * lets just fallback to a non relative URL just in case.
 			 *
-			 * Unfortunately we can't access `logger` from here as this code also needs to be ran on the client by ShowMore.
+			 * Ideally we'd like to know when this happens, but unfortunately we can't access `logger` from here as this code also needs to be ran on the client by ShowMore.
 			 */
 		}
 	}
