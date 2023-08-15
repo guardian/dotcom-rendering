@@ -1094,8 +1094,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
               "Fn::Join": [
                 "",
                 [
-                  "
-		#!/bin/bash -ev
+                  "#!/bin/bash -ev
 
 		groupadd frontend
 		useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering

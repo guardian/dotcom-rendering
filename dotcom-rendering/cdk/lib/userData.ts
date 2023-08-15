@@ -13,8 +13,7 @@ export const getUserData = ({
 	region,
 	stage,
 	elkStreamId,
-}: UserDataProps): string => `
-		#!/bin/bash -ev
+}: UserDataProps): string => `#!/bin/bash -ev
 
 		groupadd frontend
 		useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
