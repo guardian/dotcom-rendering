@@ -59,8 +59,11 @@ const liStyles = css`
 	flex: 1;
 	padding-top: 2px;
 	position: relative;
-	margin-top: 8px;
+	&:first-child {
+		margin-top: 8px;
+	}
 	${from.tablet} {
+		margin-top: 8px;
 		margin-bottom: 4px;
 	}
 `;
@@ -76,12 +79,6 @@ const dynamoLiStyles = css`
 const leftMargin = css`
 	${from.tablet} {
 		margin-left: 10px;
-	}
-`;
-
-const bottomMargin = css`
-	${until.tablet} {
-		margin-bottom: 8px;
 	}
 `;
 
@@ -122,7 +119,6 @@ export const SupportingContent = ({
 								  ]
 								: liStyles,
 							shouldPadLeft && leftMargin,
-							isLast && bottomMargin,
 						]}
 						data-link-name={`sublinks | ${index + 1}`}
 					>
