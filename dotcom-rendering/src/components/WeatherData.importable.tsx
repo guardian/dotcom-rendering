@@ -1,5 +1,5 @@
+import type { EditionId } from '../lib/edition';
 import { useApi } from '../lib/useApi';
-import type { FEFrontConfigType } from '../types/front';
 import { Weather } from './Weather';
 
 /**
@@ -56,7 +56,7 @@ export type WeatherApiData = {
 
 type Props = {
 	ajaxUrl: string;
-	edition: FEFrontConfigType['edition'];
+	edition: EditionId;
 };
 
 export const WeatherData = ({ ajaxUrl, edition }: Props) => {

@@ -42,7 +42,8 @@ const articleWrapperStyles = (item: ArticleFormat): SerializedStyles => css`
 	min-height: 100%;
 	background-color: ${item.design === ArticleDesign.Gallery ||
 	item.design === ArticleDesign.Audio ||
-	item.design === ArticleDesign.Video
+	item.design === ArticleDesign.Video ||
+	item.design === ArticleDesign.Picture
 		? neutral[7]
 		: 'inherit'};
 `;
@@ -91,6 +92,7 @@ const bodyStyles = (item: Item): SerializedStyles => {
 
 	switch (item.design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.Picture:
 			return css(
 				defaultStyles,
 				css`
@@ -160,6 +162,7 @@ const getSectionStyles = (item: ArticleFormat): SerializedStyles[] => {
 		item.design === ArticleDesign.Gallery ||
 		item.design === ArticleDesign.Audio ||
 		item.design === ArticleDesign.Video ||
+		item.design === ArticleDesign.Picture ||
 		item.display === ArticleDisplay.Immersive
 	) {
 		return [];
@@ -169,6 +172,7 @@ const getSectionStyles = (item: ArticleFormat): SerializedStyles[] => {
 
 const Layout: FC<Props> = ({ item }) => {
 	if (
+		item.design === ArticleDesign.Timeline ||
 		item.design === ArticleDesign.Profile ||
 		item.design === ArticleDesign.Explainer ||
 		item.design === ArticleDesign.Analysis ||
@@ -180,6 +184,7 @@ const Layout: FC<Props> = ({ item }) => {
 		item.design === ArticleDesign.Gallery ||
 		item.design === ArticleDesign.Audio ||
 		item.design === ArticleDesign.Video ||
+		item.design === ArticleDesign.Picture ||
 		item.design === ArticleDesign.Editorial ||
 		item.design === ArticleDesign.Letter ||
 		item.design === ArticleDesign.Quiz ||
@@ -201,7 +206,8 @@ const Layout: FC<Props> = ({ item }) => {
 							bodyWrapperStyles,
 							articleStyles,
 							isPicture(item.tags) && extendedBodyStyles,
-							item.design === ArticleDesign.Gallery
+							item.design === ArticleDesign.Gallery ||
+							item.design === ArticleDesign.Picture
 								? galleryWrapperStyles
 								: null,
 							item.design === ArticleDesign.Audio ||

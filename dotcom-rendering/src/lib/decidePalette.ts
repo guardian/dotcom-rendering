@@ -1446,7 +1446,7 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReport:
 					return opinion[550];
 				default:
-					return neutral[46];
+					return neutral[86];
 			}
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
@@ -1464,7 +1464,7 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 					return brandAlt[400];
 				case ArticleSpecial.Labs:
 				default:
-					return BLACK;
+					return neutral[86];
 			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -1486,6 +1486,8 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 					return culture[500];
 				case ArticleSpecial.Labs:
 					return labs[400];
+				default:
+					return neutral[86];
 			}
 		default:
 			switch (format.theme) {

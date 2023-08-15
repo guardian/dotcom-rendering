@@ -70,7 +70,7 @@ export const footerLinks: Link[][] = [
 		},
 		{
 			title: 'Modern Slavery Act',
-			url: 'https://www.theguardian.com/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+			url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
 		},
 		{
 			title: 'Digital newspaper archive',

@@ -3,7 +3,7 @@ import type { ConsentState } from '@guardian/consent-management-platform/dist/ty
 import type { OphanAction, OphanComponentType } from '@guardian/libs';
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
-import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
+import { injectPrivacySettingsLinkWhenReady } from '../lib/injectPrivacySettingsLink';
 import { submitComponentEvent } from './ophan/ophan';
 
 export const bootCmp = async (): Promise<void> => {
@@ -85,15 +85,8 @@ export const bootCmp = async (): Promise<void> => {
 		submitComponentEvent(event);
 	});
 
-	document.onreadystatechange = () => {
-		if (
-			document.readyState === 'interactive' ||
-			document.readyState === 'complete'
-		) {
-			// Manually updates the footer DOM because it's not hydrated
-			injectPrivacySettingsLink();
-		}
-	};
+	// Manually updates the footer DOM because it's not hydrated
+	void injectPrivacySettingsLinkWhenReady();
 
 	cmp.init({
 		pubData: {

@@ -6,14 +6,14 @@ import {
 	waitForElementToBeRemoved,
 } from '@testing-library/react';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
-import { App } from './App';
+import { Comments } from './Comments';
 
 mockRESTCalls();
 
 describe('App', () => {
 	it('should not render the comment form if user is logged out', async () => {
 		render(
-			<App
+			<Comments
 				shortUrl="p/39f5z"
 				baseUrl="https://discussion.theguardian.com/discussion-api"
 				pillar={Pillar.Culture}

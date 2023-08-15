@@ -3088,10 +3088,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-5.0.0.tgz#cce32ff4cdfb6b24c013723bf352dcd61135d34d"
   integrity sha512-Td5gtK2sARl+fXj1Qe6RuFqf/zxuZjW1q2Jck09zXPIfMgU+sJoTi549zbNeC1cldCBhPWy/qPQ0r+8klfF7jg==
 
-"@guardian/atoms-rendering@32.2.3":
-  version "32.2.3"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-32.2.3.tgz#2abea32bf948844988c4a9fe4b4edd1c8c5d4e12"
-  integrity sha512-mwxDvJys+lbe7GyzyK7zi7dcjddYotGtKh7kOsYXZwDy4E5ptJ1m2BJwT7dXnzZ40B+Idys7rK3pyLynIIiqZg==
+"@guardian/atoms-rendering@33.0.0":
+  version "33.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-33.0.0.tgz#aee296d42b928feb53f10dbdde761c96a4df7af1"
+  integrity sha512-nOVNewOTydkg/silbls/15v+fG/4bWqa+RcOwiDGu00Awev6wdRfUir0vG+cqVBXVxXhZ5HcOfX6bkPnCg8l0g==
   dependencies:
     is-mobile "3.1.1"
 
@@ -3157,10 +3157,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-13.5.0.tgz#61a97c823f6b18f62a6517a3374f6e7bdfca121d"
   integrity sha512-9iz04lyonWAbUeZ7B+fNp0KbgAervsWDO3A4CE/3e+d876AQj0I3TwU7W4jpWxI4tthcA6UVk7Y6faaS8l+lFw==
 
-"@guardian/core-web-vitals@5.0.0", "@guardian/core-web-vitals@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-5.0.0.tgz#ab74da6001427f3414a84d15f57bac1a888a140a"
-  integrity sha512-Mq3v8Y/YJGs7p/8NWmYHFKdVqRThjDJSfpoo1zSb6DgpQ1Ko8RjvOa2Q9P9ABWfKJCaDp0kcGK3dk0AjDSi/Qw==
+"@guardian/core-web-vitals@5.1.0", "@guardian/core-web-vitals@^5.0.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-5.1.0.tgz#1a7224ff69e773e30698fa16bdd5be608a554ebf"
+  integrity sha512-/6L5Ri+/bXBAZ6na8zQ30I1+eHXBHyGFNiLAGvw1bryOnbq2PjCLkmyHQq0EisWCXBWMvdB7p2HdS1DmFLM3Jg==
 
 "@guardian/eslint-config-typescript@6.0.1":
   version "6.0.1"
@@ -3182,10 +3182,10 @@
     eslint-plugin-eslint-comments "3.2.0"
     eslint-plugin-import "2.27.5"
 
-"@guardian/eslint-plugin-source-react-components@17.0.0":
-  version "17.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-17.0.0.tgz#56a2545c62ff3864fd51ea91b1ca5220fcad681d"
-  integrity sha512-E2F47A4Cin8vVt2oRBnc9yUxyXqZHLs2DKvjpfHX35O5uQ3ubdGa4QrOIgUayy+Ar27lEtLv7HhJkdH+Y3FLeA==
+"@guardian/eslint-plugin-source-react-components@18.0.0":
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-18.0.0.tgz#a1b3279d90c2fc9250b6437c21cebdd30a969321"
+  integrity sha512-dIQsHg5T9gPvfR0Sd/EO1cWmqbFVort/9ScZc7lXLlSSAmPv0Sui0+Pz8NwhDjtnVDRbW+4A9gmVoIKw+bEwOQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "5.46.1"
     "@typescript-eslint/parser" "5.59.9"
@@ -3210,7 +3210,12 @@
   resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.1.0.tgz#a919fd08cb298cba0b7363d128f0da38e598ec98"
   integrity sha512-1USL3EuhwhyUANjWeVBZx2mRVCydE0QAzUIOV2ukojp92ZAWyt2RqxV8luTEPgUxbDAtma9MuO6lgTshTk5nYw==
 
-"@guardian/prettier@4.0.0", "@guardian/prettier@^4.0.0":
+"@guardian/prettier@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/prettier/-/prettier-5.0.0.tgz#0cd36b105512510192ea9fd18da3d3df2d7b3b72"
+  integrity sha512-gJSQuuP7JVDOWQj4EUrwyJTnMt+frLkw0D2sLg70nHn76L3LmH2xTQtYMPUsqyqn37qocDPzgdvBdmATi50zRQ==
+
+"@guardian/prettier@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@guardian/prettier/-/prettier-4.0.0.tgz#1ad1d7d079194937bfd0107789dde7b0fb84fa11"
   integrity sha512-JvvnDnI04NcmpuD2mF5ZXTWI7tand1pj1s33fh4JxHNAV00QXwTWZBI2/QWS3ck7KjpYjpRaz8CDUcMz35hReg==
@@ -3222,22 +3227,29 @@
   dependencies:
     tslib "^2.0.0"
 
-"@guardian/source-foundations@12.0.0", "@guardian/source-foundations@^12.0.0":
+"@guardian/source-foundations@13.0.0":
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-foundations/-/source-foundations-13.0.0.tgz#3e8f4e67dcd5fe706001fd04df582f69210b132f"
+  integrity sha512-1+z20ySfwm0K2GiQXh2JlWIjOKBwHxISRdAgAKivOdT1QUCh5VdU+2xCVE07juMI4lBBfIzXe/qZXAI7II6tQQ==
+  dependencies:
+    mini-svg-data-uri "1.4.4"
+
+"@guardian/source-foundations@^12.0.0":
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/@guardian/source-foundations/-/source-foundations-12.0.0.tgz#3f75d5dd26dae0d3fe13fd93aabe1e837cf0ddbb"
   integrity sha512-sq+htAsvPlaZBjfSZ8ISZZdAnFQwuZ7xeCrI/C369HA+MDl3pQ1dFWz3YmqCP/vkXS8Wr3qVlxXNqWGwKKrYrw==
   dependencies:
     mini-svg-data-uri "1.4.4"
 
-"@guardian/source-react-components-development-kitchen@13.0.1":
-  version "13.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-13.0.1.tgz#c8072f9369cbb06272d9f9174c2f6637d258c885"
-  integrity sha512-aQ39E0qQ6KCDgJqTnxG7d36HWfmHcLVImbDq/4TnbFGV100CUtPe19VBzMKgGP7/CYYnC22QKDa6cNgVcZysjQ==
+"@guardian/source-react-components-development-kitchen@14.0.0":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-14.0.0.tgz#9678ae07aa745f62df6b44d2d56f4a502c8f569e"
+  integrity sha512-hl295B88dKpkv7NJl7vzx0wT+luUSSXcZes64B0F1lW0y6NtiRGkEsLQ6gnSTPfXM04FDd2jeZR4nFMsMypieQ==
 
-"@guardian/source-react-components@15.0.1":
-  version "15.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-15.0.1.tgz#c584f507181fc88761bf702b7a6068b28a54003b"
-  integrity sha512-a4IBy0wmvb7UvnsT41I7VRdxeGaYz7l3LTV8PUE7swmS5UC/6SCQjOmsmXE54UiasdolUGMEt6C5p5oTxTDrdg==
+"@guardian/source-react-components@16.0.0":
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-16.0.0.tgz#2d04a3cd2443ed46de2533351f89082eaccc2365"
+  integrity sha512-oSRa1TjRvbnfYIEa+qMz23aCM6V73pIvP2ca64dP9dNopNR1PgooNlf7PihjXDEkyBo4ks9udMRzzAd3nfst6A==
 
 "@guardian/support-dotcom-components@1.0.7", "@guardian/support-dotcom-components@^1.0.7":
   version "1.0.7"

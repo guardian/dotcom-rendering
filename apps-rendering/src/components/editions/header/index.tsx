@@ -11,7 +11,6 @@ import Lines from 'components/editions/lines';
 import Series from 'components/editions/series';
 import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
-import { isPicture } from 'item';
 import { maybeRender } from 'lib';
 import type { FC, ReactElement } from 'react';
 import {
@@ -279,11 +278,9 @@ const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 		item.design === ArticleDesign.Audio ||
 		item.design === ArticleDesign.Video
 	) {
-		return isPicture(item.tags) ? (
-			<PictureHeader item={item} />
-		) : (
-			<GalleryHeader item={item} />
-		);
+		return <GalleryHeader item={item} />;
+	} else if (item.design === ArticleDesign.Picture) {
+		return <PictureHeader item={item} />;
 	} else {
 		return <StandardHeader item={item} />;
 	}

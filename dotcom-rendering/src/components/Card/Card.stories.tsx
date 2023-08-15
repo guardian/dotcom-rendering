@@ -32,7 +32,7 @@ const basicCardProps: CardProps = {
 	imagePosition: 'top',
 	showAge: true,
 	isExternalLink: false,
-	videoSize: 'large enough to play: at least 480px',
+	isPlayableMediaCard: true,
 };
 
 const aBasicLink = {
@@ -969,7 +969,7 @@ export const WhenVideoWithPlayButton = () => {
 						}}
 						imagePosition="top"
 						mainMedia={mainVideo}
-						videoSize="too small to play: 479px or less"
+						isPlayableMediaCard={false}
 					/>
 				</LI>
 			</UL>
@@ -1000,7 +1000,7 @@ export const WhenVideoWithPlayButton = () => {
 								}}
 								imagePosition="left"
 								mainMedia={mainVideo}
-								videoSize="too small to play: 479px or less"
+								isPlayableMediaCard={false}
 							/>
 						</LI>
 						<LI padSides={true}>
@@ -1013,7 +1013,7 @@ export const WhenVideoWithPlayButton = () => {
 								}}
 								imagePosition="right"
 								mainMedia={mainVideo}
-								videoSize="too small to play: 479px or less"
+								isPlayableMediaCard={false}
 							/>
 						</LI>
 
@@ -1027,7 +1027,7 @@ export const WhenVideoWithPlayButton = () => {
 								}}
 								imagePosition="right"
 								mainMedia={mainVideo}
-								videoSize="too small to play: 479px or less"
+								isPlayableMediaCard={false}
 							/>
 						</LI>
 					</UL>

@@ -35,6 +35,7 @@ const Credit: FC<Props> = ({ format, credit }) =>
 				case ArticleDesign.Gallery:
 				case ArticleDesign.Audio:
 				case ArticleDesign.Video:
+				case ArticleDesign.Picture:
 					return <p css={mediaStyles}>{cred}</p>;
 				default:
 					return <span css={defaultStyles}> {cred}</span>;

@@ -1,3 +1,5 @@
+import type { Guard } from '../lib/guard';
+import { guard } from '../lib/guard';
 import type {
 	SignedInWithCookies,
 	SignedInWithOkta,
@@ -114,9 +116,17 @@ export type UserNameResponse = {
 	errors?: UserNameError[];
 };
 
-export type OrderByType = 'newest' | 'oldest' | 'recommendations';
-export type ThreadsType = 'collapsed' | 'expanded' | 'unthreaded';
-export type PageSizeType = 25 | 50 | 100;
+const orderBy = ['newest', 'oldest', 'recommendations'] as const;
+export const isOrderBy = guard(orderBy);
+export type OrderByType = Guard<typeof orderBy>;
+
+const threads = ['collapsed', 'expanded', 'unthreaded'] as const;
+export const isThreads = guard(threads);
+export type ThreadsType = Guard<typeof threads>;
+
+const pageSize = [25, 50, 100] as const;
+export const isPageSize = guard(pageSize);
+export type PageSizeType = Guard<typeof pageSize>;
 export interface FilterOptions {
 	orderBy: OrderByType;
 	pageSize: PageSizeType;
