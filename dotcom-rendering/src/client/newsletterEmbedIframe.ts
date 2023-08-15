@@ -10,12 +10,12 @@ export const newsletterEmbedIframe = (): Promise<void> => {
 	// Tell the iframes to resize once this script is loaded
 	// Otherwise, earlier resize events might be missed
 	// So we don't have to load this script as a priority on each load
-	allIframes.forEach((iframe) => {
+	for (const iframe of allIframes) {
 		iframe.contentWindow?.postMessage(
 			'resize',
 			'https://www.theguardian.com',
 		);
-	});
+	}
 
 	window.addEventListener('message', (event) => {
 		if (!allowedOrigins.includes(event.origin)) return;
@@ -38,7 +38,7 @@ export const newsletterEmbedIframe = (): Promise<void> => {
 
 				switch (message.type) {
 					case 'set-height':
-						iframes.forEach((iframe) => {
+						for (const iframe of iframes) {
 							if (typeof message.value === 'number') {
 								iframe.height = `${message.value}`;
 							} else if (typeof message.value === 'string') {
@@ -47,7 +47,7 @@ export const newsletterEmbedIframe = (): Promise<void> => {
 									iframe.height = `${value}`;
 								}
 							}
-						});
+						}
 						break;
 					default:
 				}

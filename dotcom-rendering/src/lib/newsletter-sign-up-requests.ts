@@ -22,9 +22,9 @@ const buildNewsletterSignUpFormData = (
 	formData.append('csrfToken', ''); // TO DO - PR on form handlers in frontend/identity to see how/if this is needed
 
 	if (Array.isArray(newsletterIdOrList)) {
-		newsletterIdOrList.forEach((newsletterId, index) => {
+		for (const [index, newsletterId] of newsletterIdOrList.entries()) {
 			formData.append(`listNames[${index}]`, newsletterId);
-		});
+		}
 	} else {
 		formData.append('listName', newsletterIdOrList);
 	}
@@ -45,13 +45,13 @@ const postFormData = async (
 ): Promise<Response> => {
 	const requestBodyStrings: string[] = [];
 
-	formData.forEach((value, key) => {
+	for (const [key, value] of formData.entries()) {
 		requestBodyStrings.push(
 			`${encodeURIComponent(key)}=${encodeURIComponent(
 				value.toString(),
 			)}`,
 		);
-	});
+	}
 
 	return fetch(endpoint, {
 		method: 'POST',

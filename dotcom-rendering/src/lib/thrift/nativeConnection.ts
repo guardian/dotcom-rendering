@@ -81,14 +81,14 @@ export class NativeConnection<Context = void> extends ThriftConnection {
 		if (oldConnectionId === this.connectionId && window.nativeConnections) {
 			console.warn('Reseting connection ' + oldConnectionId);
 			delete window.nativeConnections[this.connectionId];
-			this.promises.forEach((promise) => {
+			for (const promise of this.promises) {
 				promise.reject(
 					new TApplicationException(
 						TApplicationExceptionType.UNKNOWN,
 						'Timeout error',
 					),
 				);
-			});
+			}
 			this.promises = [];
 			this.connectionId = uuid.v4();
 			window.nativeConnections[this.connectionId] = this;

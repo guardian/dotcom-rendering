@@ -174,7 +174,7 @@
 		"doctoc": "2.2.1",
 		"dompurify": "3.0.3",
 		"dynamic-import-polyfill": "0.1.1",
-		"eslint": "8.34.0",
+		"eslint": "8.44.0",
 		"eslint-config-airbnb-base": "15.0.0",
 		"eslint-config-airbnb-typescript": "17.0.0",
 		"eslint-config-prettier": "8.6.0",

@@ -31,15 +31,15 @@ export const getSpeedFromTrails = (trails: FEFrontCard[]): 'slow' | 'fast' => {
 	// <tag id, number of occurrences>
 	const tagMap = new Map<string, number>();
 
-	trails.forEach((trail) => {
+	for (const trail of trails) {
 		const tags = trail.properties.maybeContent?.tags.tags;
 		if (tags) {
-			tags.forEach((tag) => {
+			for (const tag of tags) {
 				const count = tagMap.get(tag.properties.id) ?? 0;
 				tagMap.set(tag.properties.id, count + 1);
-			});
+			}
 		}
-	});
+	}
 
 	const matchingSlowTag = slowTags.find(
 		(tagId) =>
