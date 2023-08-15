@@ -166,7 +166,7 @@ const sublinkStyles = css`
 	font-size: inherit;
 	font-weight: ${fontWeights.medium};
 	line-height: inherit;
-	${until.desktop} {
+	${until.tablet} {
 		min-height: 48px;
 	}
 	/* This css is used to remove any underline from the kicker but still
