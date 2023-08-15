@@ -56,6 +56,7 @@ module.exports = {
 			new webpack.DefinePlugin({
 				process: '{}',
 			}),
+			// We rely on Buffer for our bridget thrift client
 			new webpack.ProvidePlugin({
 				Buffer: ['buffer', 'Buffer'],
 			}),
