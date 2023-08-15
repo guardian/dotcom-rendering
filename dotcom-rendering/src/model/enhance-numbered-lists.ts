@@ -92,7 +92,7 @@ const isStarableImage = (element: FEElement | undefined): boolean => {
 const starifyImages = (elements: FEElement[]): FEElement[] => {
 	const starified: FEElement[] = [];
 	let previousRating: number | undefined;
-	elements.forEach((thisElement, index) => {
+	for (const [index, thisElement] of elements.entries()) {
 		switch (thisElement._type) {
 			case 'model.dotcomrendering.pageElements.TextBlockElement':
 				if (
@@ -126,7 +126,7 @@ const starifyImages = (elements: FEElement[]): FEElement[] => {
 				// Pass through
 				starified.push(thisElement);
 		}
-	});
+	}
 	return starified;
 };
 
@@ -229,7 +229,7 @@ const addH3s = (elements: FEElement[]): FEElement[] => {
 	 */
 	const withH3s: FEElement[] = [];
 	let previousItem: FEElement | undefined;
-	elements.forEach((thisElement) => {
+	for (const thisElement of elements) {
 		if (
 			thisElement._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
@@ -260,13 +260,13 @@ const addH3s = (elements: FEElement[]): FEElement[] => {
 			withH3s.push(thisElement);
 		}
 		previousItem = thisElement;
-	});
+	}
 	return withH3s;
 };
 
 const addItemLinks = (elements: FEElement[]): FEElement[] => {
 	const withItemLink: FEElement[] = [];
-	elements.forEach((thisElement) => {
+	for (const thisElement of elements) {
 		if (
 			thisElement._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
@@ -287,7 +287,7 @@ const addItemLinks = (elements: FEElement[]): FEElement[] => {
 			// Pass through
 			withItemLink.push(thisElement);
 		}
-	});
+	}
 	return withItemLink;
 };
 
@@ -304,7 +304,7 @@ const addTitles = (elements: FEElement[], format: FEFormat): FEElement[] => {
 	 */
 	const withTitles: FEElement[] = [];
 	let position = 1;
-	elements.forEach((thisElement) => {
+	for (const thisElement of elements) {
 		if (
 			thisElement._type ===
 			'model.dotcomrendering.pageElements.SubheadingBlockElement'
@@ -329,7 +329,7 @@ const addTitles = (elements: FEElement[], format: FEFormat): FEElement[] => {
 			// Pass through
 			withTitles.push(thisElement);
 		}
-	});
+	}
 	return withTitles;
 };
 

@@ -81,7 +81,7 @@ const styles = (
 	return css`
 		${body.medium()}
 		overflow-wrap: break-word;
-		margin: 0 0 ${remSpace[3]};
+		margin: 0 0 0.875rem;
 		color: ${text.paragraph(format)};
 
 		${isEditions

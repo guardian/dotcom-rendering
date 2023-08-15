@@ -84,10 +84,11 @@ function revealPendingBlocks() {
 	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
 	const pendingBlocks =
 		blogBody?.querySelectorAll<HTMLElement>('.pending.block');
-	pendingBlocks?.forEach((block) => {
-		block.classList.add('reveal-slowly');
-		block.classList.remove('pending');
-	});
+	if (pendingBlocks)
+		for (const block of pendingBlocks) {
+			block.classList.add('reveal-slowly');
+			block.classList.remove('pending');
+		}
 
 	if (pendingBlocks !== undefined && pendingBlocks.length > 0)
 		// Notify commercial that new blocks are available and they can re-run spacefinder

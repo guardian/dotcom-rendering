@@ -282,14 +282,12 @@ Immersive.storyName = 'Immersive carousel';
 export const SpecialReportAlt = () => {
 	const specialReportTrails = [...trails];
 
-	specialReportTrails.forEach(
-		(trail) =>
-			(trail.format = {
-				theme: ArticleSpecial.SpecialReportAlt,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}),
-	);
+	for (const trail of specialReportTrails)
+		trail.format = {
+			theme: ArticleSpecial.SpecialReportAlt,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		};
 
 	return (
 		<>

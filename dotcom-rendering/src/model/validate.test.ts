@@ -17,7 +17,7 @@ describe('validate', () => {
 		expect(() => validateAsArticleType(data)).toThrowError(TypeError);
 	});
 
-	urlsToTest.forEach((url) => {
+	for (const url of urlsToTest) {
 		it('confirm valid data', () => {
 			return fetch(`${url}&purge=${Date.now()}`)
 				.then((response) => response.json())
@@ -25,5 +25,5 @@ describe('validate', () => {
 					expect(validateAsArticleType(myJson)).toBe(myJson);
 				});
 		});
-	});
+	}
 });

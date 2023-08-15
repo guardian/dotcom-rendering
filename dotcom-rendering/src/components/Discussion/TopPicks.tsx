@@ -60,11 +60,10 @@ export const TopPicks = ({
 }: Props) => {
 	const leftColComments: CommentType[] = [];
 	const rightColComments: CommentType[] = [];
-	comments.forEach((comment, index) =>
+	for (const [index, comment] of comments.entries())
 		index % 2 === 0
 			? leftColComments.push(comment)
-			: rightColComments.push(comment),
-	);
+			: rightColComments.push(comment);
 	return (
 		<div css={picksWrapper}>
 			<div css={twoColCommentsStyles}>

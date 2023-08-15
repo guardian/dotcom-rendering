@@ -94,13 +94,13 @@ const postFormData = async (
 ): Promise<Response> => {
 	const requestBodyStrings: string[] = [];
 
-	formData.forEach((value, key) => {
+	for (const [key, value] of formData.entries()) {
 		requestBodyStrings.push(
 			`${encodeURIComponent(key)}=${encodeURIComponent(
 				value.toString(),
 			)}`,
 		);
-	});
+	}
 
 	return fetch(endpoint, {
 		method: 'POST',
@@ -323,21 +323,21 @@ export const SecureSignupIframe = ({
 
 		// get all the fontFaces on the parent matching the list of font names
 		const requiredFonts: FontFace[] = [];
-		document.fonts.forEach((fontFace) => {
+		for (const fontFace of document.fonts) {
 			if (requiredFontNames.includes(fontFace.family)) {
 				requiredFonts.push(fontFace);
 			}
-		});
+		}
 
 		// add the fonts to the iframe
-		requiredFonts.forEach((font) => {
+		for (const font of requiredFonts) {
 			try {
 				iframeFontFaceSet.add(font);
 			} catch (error) {
 				// Safari throws an InvalidModificationError
 				// https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/add#exceptions
 			}
-		});
+		}
 	};
 
 	const onIFrameLoad = (): void => {

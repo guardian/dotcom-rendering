@@ -97,11 +97,9 @@ export const Form = ({
 
 	const validateForm = (): boolean => {
 		const errors: { [key in string]: string } = {};
-		let isValid = true;
-		formFields.forEach((field: CampaignFieldType) => {
+		for (const field of formFields) {
 			if (field.required && !formData[field.id]) {
 				errors[field.id] = 'This field is required';
-				isValid = false;
 			}
 			if (field.type === 'select' && field.required) {
 				if (formData[field.id] === 'Please choose an option') {
@@ -113,7 +111,6 @@ export const Form = ({
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 				if (!emailRegex.test(formData[field.id] as string)) {
 					errors[field.id] = 'Please enter a valid email address';
-					isValid = false;
 				}
 			}
 			if (
@@ -123,16 +120,13 @@ export const Form = ({
 				const numberRegex = /^[\d ()+-]+$/;
 				if (!numberRegex.test(formData[field.id] as string)) {
 					errors[field.id] = 'Please enter a valid number';
-					isValid = false;
 				}
 				const noWhiteSpace = formData[field.id] as string;
 				if (noWhiteSpace.length < 10) {
 					errors[field.id] = 'Please include your dialling/area code';
-					isValid = false;
 				}
 			}
-			return isValid;
-		});
+		}
 		setValidationErrors(errors);
 		return Object.keys(errors).length === 0;
 	};

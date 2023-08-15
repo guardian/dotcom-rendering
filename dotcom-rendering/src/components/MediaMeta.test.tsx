@@ -12,9 +12,9 @@ describe(`MediaText`, () => {
 			`9:59:59`,
 			`1:00:01`,
 		];
-		secss.forEach((secs, i) => {
+		for (const [i, secs] of secss.entries()) {
 			const result = secondsToDuration(secs);
 			expect(result).toBe(expected[i]);
-		});
+		}
 	});
 });
