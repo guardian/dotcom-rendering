@@ -47,10 +47,10 @@ export const FetchOnwardsData = ({
 			const pendingElements = document.querySelectorAll<HTMLElement>(
 				'.onwards > .pending',
 			);
-			pendingElements.forEach((element) => {
+			for (const element of pendingElements) {
 				element.classList.add('reveal');
 				element.classList.remove('pending');
-			});
+			}
 		}
 	});
 

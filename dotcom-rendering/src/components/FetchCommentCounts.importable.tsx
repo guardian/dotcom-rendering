@@ -1,4 +1,5 @@
 import { CacheProvider } from '@emotion/react';
+import { isNonNullable } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { getEmotionCache } from '../client/islands/emotion';
@@ -37,30 +38,28 @@ type EnhancedCountType = {
  * Reads the dom looking for markers that contain the information needed to render the
  * count
  */
-function extractMarkers() {
-	const markers: MarkerType[] = [];
-	document
-		.querySelectorAll('[data-discussion-id]')
-		.forEach((element: Element) => {
+const extractMarkers = () =>
+	Array.from(document.querySelectorAll('[data-discussion-id]'))
+		.map<MarkerType | undefined>((element: Element) => {
 			if (element instanceof HTMLElement) {
 				try {
 					const { discussionId, format, isDynamo, containerPalette } =
 						element.dataset;
 					if (discussionId && format) {
-						markers.push({
+						return {
 							discussionId,
 							format: JSON.parse(format),
 							isDynamo: isDynamo ? true : undefined,
 							containerPalette,
-						});
+						};
 					}
 				} catch (e) {
 					// Do nothing
 				}
 			}
-		});
-	return markers;
-}
+			return undefined;
+		})
+		.filter(isNonNullable);
 
 /**
  * @description
@@ -111,7 +110,7 @@ function enhanceCounts(
  * Takes the long and short version of each count and renders onto the page with react
  */
 function renderCounts(counts: EnhancedCountType[]) {
-	counts.forEach((count) => {
+	for (const count of counts) {
 		const container = document.querySelector(
 			`[data-discussion-id="${count.id}"]`,
 		);
@@ -132,7 +131,7 @@ function renderCounts(counts: EnhancedCountType[]) {
 
 			container.setAttribute('aria-label', `${count.short} Comments`);
 		}
-	});
+	}
 }
 
 /**

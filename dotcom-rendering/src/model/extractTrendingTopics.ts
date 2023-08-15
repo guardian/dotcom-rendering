@@ -96,14 +96,11 @@ export const extractTrendingTopicsFomFront = (
 ): FETagType[] => {
 	// Get a single array of all trails in the collections
 	const trails = new Map<string, NarrowedFEFrontCard>();
-	collections
-		.flatMap((collection) => [
-			...collection.curated,
-			...collection.backfill,
-		])
-		.forEach((card) =>
-			trails.set(card.properties.maybeContentId ?? card.card.id, card),
-		);
+	for (const card of collections.flatMap((collection) => [
+		...collection.curated,
+		...collection.backfill,
+	]))
+		trails.set(card.properties.maybeContentId ?? card.card.id, card);
 
 	return extractTrendingTopics([...trails.values()], pageId);
 };

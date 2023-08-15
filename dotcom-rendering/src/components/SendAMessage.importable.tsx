@@ -167,17 +167,14 @@ const Form = ({
 
 	const validateForm = (): boolean => {
 		const errors: { [key in string]: string } = {};
-		let isValid = true;
-		formFields.forEach((field: MessageUsFieldType) => {
+		for (const field of formFields) {
 			if (field.required && !formData[field.id]) {
 				errors[field.id] = 'This field is required';
-				isValid = false;
 			}
 			if (field.type === 'email' && formData[field.id]) {
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 				if (!emailRegex.test(formData[field.id] as string)) {
 					errors[field.id] = 'Please enter a valid email address';
-					isValid = false;
 				}
 			}
 			if (
@@ -187,17 +184,14 @@ const Form = ({
 				const numberRegex = /^[\d ()+-]+$/;
 				if (!numberRegex.test(formData[field.id] as string)) {
 					errors[field.id] = 'Please enter a valid number';
-					isValid = false;
 				}
 				const noWhiteSpace = formData[field.id] as string;
 				if (noWhiteSpace.length < 10) {
 					errors[field.id] = 'Please include your dialling/area code';
-					isValid = false;
 				}
 				// We should have checks here for min length and max length - this work is ticketed here https://trello.com/c/7sYM6Zzd/822-add-validation-for-max-min-length-on-the-message-us-work
 			}
-			return isValid;
-		});
+		}
 		setValidationErrors(errors);
 		return Object.keys(errors).length === 0;
 	};

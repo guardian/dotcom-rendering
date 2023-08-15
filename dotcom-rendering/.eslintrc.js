@@ -133,6 +133,9 @@ module.exports = {
 
 		'object-shorthand': ['error', 'always'],
 
+		/** @see https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-array-for-each.md */
+		'unicorn/no-array-for-each': 'error',
+
 		'import/no-extraneous-dependencies': [
 			'error',
 			// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options

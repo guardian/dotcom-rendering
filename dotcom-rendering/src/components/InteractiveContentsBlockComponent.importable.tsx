@@ -240,9 +240,8 @@ export const InteractiveContentsBlockComponent = ({
 				rootMargin: `0px 0px -100% 0px`,
 			});
 
-			enhancedSubheadings.forEach(
-				(item) => item.ref && observer.observe(item.ref),
-			);
+			for (const item of enhancedSubheadings)
+				item.ref && observer.observe(item.ref);
 
 			if (endDocumentElementId) {
 				const endDocumentRef =

@@ -136,7 +136,7 @@ export const addLightboxData = (elements: FEElement[]): FEElement[] =>
 
 const addMultiImageElements = (elements: FEElement[]): FEElement[] => {
 	const withMultiImageElements: FEElement[] = [];
-	elements.forEach((thisElement, i) => {
+	for (const [i, thisElement] of elements.entries()) {
 		const nextElement = elements[i + 1];
 		if (isHalfWidthImage(thisElement) && isHalfWidthImage(nextElement)) {
 			// Pair found. Add a multi element and remove the next entry
@@ -149,13 +149,13 @@ const addMultiImageElements = (elements: FEElement[]): FEElement[] => {
 			// Pass through
 			withMultiImageElements.push(thisElement);
 		}
-	});
+	}
 	return withMultiImageElements;
 };
 
 const addTitles = (elements: FEElement[]): FEElement[] => {
 	const withTitles: FEElement[] = [];
-	elements.forEach((thisElement, i) => {
+	for (const [i, thisElement] of elements.entries()) {
 		const nextElement = elements[i + 1];
 		const subsequentElement = elements[i + 2];
 		if (isImage(thisElement) && isTitle(nextElement)) {
@@ -182,13 +182,13 @@ const addTitles = (elements: FEElement[]): FEElement[] => {
 			// Pass through
 			withTitles.push(thisElement);
 		}
-	});
+	}
 	return withTitles;
 };
 
 const addCaptionsToImages = (elements: FEElement[]): FEElement[] => {
 	const withSpecialCaptions: FEElement[] = [];
-	elements.forEach((thisElement, i) => {
+	for (const [i, thisElement] of elements.entries()) {
 		const nextElement = elements[i + 1];
 		const subsequentElement = elements[i + 2];
 		if (isImage(thisElement) && isCaption(nextElement)) {
@@ -221,13 +221,13 @@ const addCaptionsToImages = (elements: FEElement[]): FEElement[] => {
 			// Pass through
 			withSpecialCaptions.push(thisElement);
 		}
-	});
+	}
 	return withSpecialCaptions;
 };
 
 const addCaptionsToMultis = (elements: FEElement[]): FEElement[] => {
 	const withSpecialCaptions: FEElement[] = [];
-	elements.forEach((thisElement, i) => {
+	for (const [i, thisElement] of elements.entries()) {
 		const nextElement = elements[i + 1];
 		const subsequentElement = elements[i + 2];
 		if (isMultiImage(thisElement) && isCaption(nextElement)) {
@@ -252,7 +252,7 @@ const addCaptionsToMultis = (elements: FEElement[]): FEElement[] => {
 			// Pass through
 			withSpecialCaptions.push(thisElement);
 		}
-	});
+	}
 	return withSpecialCaptions;
 };
 
