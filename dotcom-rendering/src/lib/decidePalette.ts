@@ -1639,11 +1639,10 @@ const borderNavPillar: (format: ArticleFormat) => string = (format) =>
 	pillarPalette[format.theme].bright;
 
 const borderArticle: (format: ArticleFormat) => string = (format) => {
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt ||
-		format.design === ArticleDesign.Picture
-	)
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
+	if (format.design === ArticleDesign.Picture)
+		return transparentColour(neutral[60], 0.5);
 
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 
@@ -1666,7 +1665,7 @@ const borderLines = (format: ArticleFormat): string => {
 	)
 		return transparentColour(neutral[60], 0.3);
 	if (format.design === ArticleDesign.Picture)
-		return transparentColour(neutral[60], 0.3);
+		return transparentColour(neutral[60], 0.5);
 
 	return neutral[86];
 };
@@ -1696,12 +1695,10 @@ const borderKeyEvent = (): string => neutral[46];
 const borderFilterButton = (): string => neutral[60];
 
 const borderSecondary = (format: ArticleFormat) => {
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt ||
-		format.design === ArticleDesign.Picture
-	)
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
-
+	if (format.design === ArticleDesign.Picture)
+		return transparentColour(neutral[60], 0.5);
 	return neutral[86];
 };
 

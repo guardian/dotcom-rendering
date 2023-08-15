@@ -242,6 +242,9 @@ export const ShowcaseLayout = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const showSubNavTopBorder =
+		format.design !== ArticleDesign.Picture ? true : false;
+
 	return (
 		<>
 			{!isLabs ? (
@@ -334,6 +337,7 @@ export const ShowcaseLayout = ({
 									padSides={false}
 									element="aside"
 									format={format}
+									showTopBorder={showSubNavTopBorder}
 								>
 									<Island deferUntil="idle">
 										<SubNav
@@ -793,7 +797,6 @@ export const ShowcaseLayout = ({
 							currentNavLink={NAV.currentNavLink}
 							linkHoverColour={palette.text.articleLinkHover}
 							borderColour={palette.border.subNav}
-							subNavLinkColour={palette.text.subNavLink}
 						/>
 					</Island>
 				</Section>
