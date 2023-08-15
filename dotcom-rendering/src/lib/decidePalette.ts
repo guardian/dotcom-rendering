@@ -272,11 +272,8 @@ const textHeadlineByline = (format: ArticleFormat): string => {
 };
 
 const textStandfirst = (format: ArticleFormat): string => {
-	if (
-		format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.Picture
-	)
-		return palette.neutral[86];
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.DeadBlog
