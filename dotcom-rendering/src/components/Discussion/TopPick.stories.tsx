@@ -104,7 +104,10 @@ export const ShortPick = () => (
 		`}
 	>
 		<TopPick
-			format={format}
+			format={{
+				...format,
+				theme: Pillar.Opinion,
+			}}
 			comment={commentWithShortBody}
 			authStatus={signedInStatus}
 			userMadeComment={false}
@@ -139,7 +142,10 @@ export const ShortPickContributor = () => (
 		`}
 	>
 		<TopPick
-			format={format}
+			format={{
+				...format,
+				theme: Pillar.Opinion,
+			}}
 			comment={contributorCommentWithShortBody}
 			authStatus={signedInStatus}
 			userMadeComment={false}

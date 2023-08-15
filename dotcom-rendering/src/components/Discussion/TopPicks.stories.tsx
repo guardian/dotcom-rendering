@@ -69,7 +69,10 @@ SingleComment.storyName = 'Single Comment';
 
 export const MulitColumn = () => (
 	<TopPicks
-		format={format}
+		format={{
+			...format,
+			theme: Pillar.Culture,
+		}}
 		comments={[
 			commentWithLongBody,
 			commentWithShortBody,
@@ -84,7 +87,10 @@ MulitColumn.storyName = 'Mulitple Columns Comments';
 
 export const SingleColumn = () => (
 	<TopPicks
-		format={format}
+		format={{
+			...format,
+			theme: Pillar.Sport,
+		}}
 		comments={[
 			commentWithLongBody,
 			commentWithShortBody,
