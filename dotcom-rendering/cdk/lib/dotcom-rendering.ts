@@ -208,6 +208,7 @@ export class DotcomRendering extends GuStack {
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
 			vpcSubnets: { subnets: publicSubnets },
+			withoutImdsv2: true,
 		});
 		this.overrideLogicalId(asg, {
 			logicalId: 'AutoscalingGroup',
