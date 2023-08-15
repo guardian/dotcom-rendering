@@ -18,13 +18,12 @@ const initialiseDynamicImport = () => {
 
 // Provides an import function to use for dynamic imports. **Designed for
 // legacy browsers. Dynamic loads a ~4k bundle.**
-const initialiseDynamicImportLegacy = () => {
-	return import(/* webpackChunkName: "shimport" */ '@guardian/shimport').then(
-		(shimport) => {
-			shimport.initialise(); // note this adds a __shimport__ global
-			window.guardianPolyfilledImport = shimport.load;
-		},
+const initialiseDynamicImportLegacy = async () => {
+	const shimport = await import(
+		/* webpackChunkName: "shimport" */ '@guardian/shimport'
 	);
+	shimport.initialise(); // note this adds a __shimport__ global
+	window.guardianPolyfilledImport = shimport.load;
 };
 
 export const dynamicImport = (): Promise<void> => {
