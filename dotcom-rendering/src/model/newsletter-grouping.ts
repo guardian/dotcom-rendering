@@ -218,7 +218,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'film-today',
 				'bookmarks',
 				'whats-on',
-				'art-weekly', // was missing on the list - TO DO: check with editorial
+				'art-weekly',
 				'design-review',
 			],
 		},
