@@ -36,6 +36,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "gu:cdk:constructs": [
       "GuVpcParameter",
       "GuSubnetListParameter",
+      "GuSubnetListParameter",
       "GuSecurityGroup",
       "GuStringParameter",
       "GuClassicLoadBalancer",
@@ -131,6 +132,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Default": "",
       "Description": "(Optional) ARN of action to execute when notification alarms change state",
       "Type": "CommaDelimitedList",
+    },
+    "PrivateSubnets": {
+      "Default": "/account/vpc/primary/subnets/private",
+      "Description": "A list of private subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
     "PublicSubnets": {
       "Default": "/account/vpc/primary/subnets/public",
@@ -379,7 +385,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
         ],
         "VPCZoneIdentifier": {
-          "Ref": "PublicSubnets",
+          "Ref": "PrivateSubnets",
         },
       },
       "Type": "AWS::AutoScaling::AutoScalingGroup",
@@ -1087,7 +1093,33 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             },
           ],
           "UserData": {
-            "Fn::Base64": "IyEvYmluL2Jhc2ggLWV2Cmdyb3VwYWRkIGZyb250ZW5kCnVzZXJhZGQgLXIgLW0gLXMgL3Vzci9iaW4vbm9sb2dpbiAtZyBmcm9udGVuZCBkb3Rjb20tcmVuZGVyaW5nCnVzZXJtb2QgLWEgLUcgZnJvbnRlbmQgYXdzLWtpbmVzaXMtYWdlbnQtdXNlcgpjZCAvaG9tZS9kb3Rjb20tcmVuZGVyaW5nCmF3cyAtLXJlZ2lvbiBldS13ZXN0LTEgczMgY3AgczM6Ly9hd3MtZnJvbnRlbmQtYXJ0aWZhY3RzL2Zyb250ZW5kL1RFU1QvcmVuZGVyaW5nL3JlbmRlcmluZy56aXAgLi8KdW56aXAgLXEgcmVuZGVyaW5nLnppcCAtZCByZW5kZXJpbmcKY2hvd24gLVIgZG90Y29tLXJlbmRlcmluZzpmcm9udGVuZCByZW5kZXJpbmcKY2QgcmVuZGVyaW5nCmV4cG9ydCBURVJNPXh0ZXJtLTI1NmNvbG9yCmV4cG9ydCBOT0RFX0VOVj1wcm9kdWN0aW9uCmV4cG9ydCBHVV9TVEFHRT1URVNUCm1rZGlyIC92YXIvbG9nL2RvdGNvbS1yZW5kZXJpbmcKY2hvd24gLVIgZG90Y29tLXJlbmRlcmluZzpmcm9udGVuZCAvdmFyL2xvZy9kb3Rjb20tcmVuZGVyaW5nCm1ha2Ugc3RhcnQtcHJvZAovb3B0L2F3cy1raW5lc2lzLWFnZW50L2NvbmZpZ3VyZS1hd3Mta2luZXNpcy1hZ2VudCBldS13ZXN0LTEgJHtUb2tlbltUT0tFTi43MjNdfSAvdmFyL2xvZy9kb3Rjb20tcmVuZGVyaW5nL2RvdGNvbS1yZW5kZXJpbmcubG9n",
+            "Fn::Base64": {
+              "Fn::Join": [
+                "",
+                [
+                  "#!/bin/bash -ev
+groupadd frontend
+useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
+usermod -a -G frontend aws-kinesis-agent-user
+cd /home/dotcom-rendering
+aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/TEST/rendering/rendering.zip ./
+unzip -q rendering.zip -d rendering
+chown -R dotcom-rendering:frontend rendering
+cd rendering
+export TERM=xterm-256color
+export NODE_ENV=production
+export GU_STAGE=TEST
+mkdir /var/log/dotcom-rendering
+chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
+make start-prod
+/opt/aws-kinesis-agent/configure-aws-kinesis-agent eu-west-1 ",
+                  {
+                    "Ref": "ELKStreamId",
+                  },
+                  " /var/log/dotcom-rendering/dotcom-rendering.log",
+                ],
+              ],
+            },
           },
         },
         "TagSpecifications": [

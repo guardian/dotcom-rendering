@@ -39,6 +39,9 @@ export class DotcomRendering extends GuStack {
 		const publicSubnets = GuVpc.subnetsFromParameter(this, {
 			type: SubnetType.PUBLIC,
 		});
+		const privateSubnets = GuVpc.subnetsFromParameter(this, {
+			type: SubnetType.PRIVATE,
+		});
 
 		const lbSecurityGroup = new GuSecurityGroup(
 			this,
@@ -207,7 +210,7 @@ export class DotcomRendering extends GuStack {
 			imageRecipe: props.amiRecipe,
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
-			vpcSubnets: { subnets: publicSubnets },
+			vpcSubnets: { subnets: privateSubnets },
 			withoutImdsv2: true,
 		});
 		this.overrideLogicalId(asg, {
