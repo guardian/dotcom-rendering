@@ -130,16 +130,11 @@ export const decideFrontsBannerAdSlot = (
 	collectionName: string,
 	numBannerAdsInserted: React.MutableRefObject<number>,
 ) => {
-	// We're not using contentType === "Network Front", just
-	// in case Europe goes live before the testing concludes.
-	// We don't want Europe in this test.
-	const networkFrontPageIds = ['uk', 'us', 'au', 'international'];
 	const targetedSections = frontsBannerAdSections[pageId];
 
 	if (
 		!renderAds ||
 		!isInFrontsBannerTest ||
-		!networkFrontPageIds.includes(pageId) ||
 		!targetedSections?.includes(collectionName)
 	) {
 		return null;
@@ -207,9 +202,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	} = front;
 
 	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
+
+	// For the FrontsBannerAds test, we're not using contentType === "Network Front",
+	// just in case Europe goes live before the testing concludes.
+	// We don't want Europe in this test.
+	const networkFrontPageIds = ['uk', 'us', 'au', 'international'];
 	const isInFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
-		abTests.frontsBannerAdsDcrVariant === 'variant';
+		abTests.frontsBannerAdsDcrVariant === 'variant' &&
+		networkFrontPageIds.includes(front.config.pageId);
 
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
@@ -229,7 +230,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const numBannerAdsInserted = useRef(0);
 
-	const renderMpuAds = !isInFrontsBannerTest && renderAds;
+	const renderMpuAds = renderAds && !isInFrontsBannerTest;
 
 	const showMostPopular =
 		front.config.switches.deeplyRead &&
