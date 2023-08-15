@@ -9,4 +9,12 @@ export interface DCRProps extends GuStackProps {
 	 * The region in AWS where the application will run
 	 */
 	region: string;
+	/**
+	 * EC2 Instance Type to use for dotcom-rendering
+	 */
+	instanceType: string;
 }
+
+export type UserDataProps = Pick<DCRProps, 'app' | 'region' | 'stage'> & {
+	elkStreamId: string;
+};

@@ -13,8 +13,10 @@ const sharedProps = {
 new DotcomRendering(app, 'DotcomRendering-PROD', {
 	...sharedProps,
 	stage: 'PROD',
+	instanceType: 't4g.small',
 });
 new DotcomRendering(app, 'DotcomRendering-CODE', {
 	...sharedProps,
 	stage: 'CODE',
+	instanceType: 't4g.micro',
 });

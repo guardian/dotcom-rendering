@@ -15,6 +15,7 @@ describe('The DotcomRendering stack', () => {
 			stage: 'TEST',
 			app: 'rendering',
 			region: 'eu-west-1',
+			instanceType: 't4g.micro',
 		});
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();

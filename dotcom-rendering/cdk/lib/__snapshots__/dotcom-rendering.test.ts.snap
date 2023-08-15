@@ -62,6 +62,8 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuDistributionBucketParameter",
       "GuGetDistributablePolicy",
       "GuParameterStoreReadPolicy",
+      "GuStringParameter",
+      "GuAmiParameter",
     ],
     "gu:cdk:version": "TEST",
   },
@@ -79,6 +81,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "AMI": {
       "Description": "AMI to use for instances",
       "Type": "AWS::EC2::Image::Id",
+    },
+    "AMIRendering": {
+      "Default": "/TEST/frontend/rendering/ami.imageId",
+      "Description": "Amazon Machine Image ID for the app rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
     },
     "App": {
       "Default": "rendering",
@@ -113,6 +120,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "ELKStream": {
       "Description": "name of the kinesis stream to use to send logs to the central ELK stack",
       "Type": "String",
+    },
+    "ELKStreamId": {
+      "Default": "/TEST/frontend/rendering/logging.stream.name",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "InstanceType": {
       "Description": "EC2 Instance Type to use for dotcom-rendering",
@@ -843,11 +854,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           "Ref": "InstanceProfile",
         },
         "ImageId": {
-          "Ref": "AMI",
+          "Ref": "AMIRendering",
         },
-        "InstanceType": {
-          "Ref": "InstanceType",
-        },
+        "InstanceType": "t4g.micro",
         "SecurityGroups": [
           {
             "Fn::GetAtt": [
@@ -857,33 +866,31 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
         ],
         "UserData": {
-          "Fn::Base64": {
-            "Fn::Sub": "#!/bin/bash -ev
-
+          "Fn::Join": [
+            "",
+            [
+              "#!/bin/bash -ev
 groupadd frontend
 useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
 usermod -a -G frontend aws-kinesis-agent-user
 cd /home/dotcom-rendering
-
-aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/\${Stage}/\${App}/\${App}.zip ./
-unzip -q \${App}.zip -d \${App}
-
-chown -R dotcom-rendering:frontend \${App}
-
-cd \${App}
-
+aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/TEST/rendering/rendering.zip ./
+unzip -q rendering.zip -d rendering
+chown -R dotcom-rendering:frontend rendering
+cd rendering
 export TERM=xterm-256color
 export NODE_ENV=production
-export GU_STAGE=\${Stage}
-
+export GU_STAGE=TEST
 mkdir /var/log/dotcom-rendering
 chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-
 make start-prod
-
-/opt/aws-kinesis-agent/configure-aws-kinesis-agent \${AWS::Region} \${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
-",
-          },
+/opt/aws-kinesis-agent/configure-aws-kinesis-agent eu-west-1 ",
+              {
+                "Ref": "ELKStreamId",
+              },
+              " /var/log/dotcom-rendering/dotcom-rendering.log",
+            ],
+          ],
         },
       },
       "Type": "AWS::AutoScaling::LaunchConfiguration",

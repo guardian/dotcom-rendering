@@ -1,5 +1,9 @@
 import { join } from 'node:path';
-import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
+import {
+	GuAmiParameter,
+	GuStack,
+	GuStringParameter,
+} from '@guardian/cdk/lib/constructs/core';
 import {
 	GuSecurityGroup,
 	GuVpc,
@@ -12,10 +16,13 @@ import {
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration } from 'aws-cdk-lib';
+import { CfnLaunchConfiguration } from 'aws-cdk-lib/aws-autoscaling';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
+import { CfnInstanceProfile } from 'aws-cdk-lib/aws-iam';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 import type { DCRProps } from './types';
+import { getUserData } from './userData';
 
 export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
@@ -175,6 +182,30 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
+		const instanceProfile = new CfnInstanceProfile(
+			this,
+			'InstanceProfile',
+			{ path: '/', roles: [instanceRole.roleName] },
+		);
+
+		const elkStreamId = new GuStringParameter(this, 'ELKStreamId', {
+			fromSSM: true,
+			default: `${ssmPrefix}/logging.stream.name`,
+		}).valueAsString;
+
+		const launchConfig = new CfnLaunchConfiguration(this, 'LaunchConfig', {
+			imageId: new GuAmiParameter(this, {
+				app,
+				fromSSM: true,
+				default: `${ssmPrefix}/ami.imageId`,
+			}).valueAsString,
+			securityGroups: [instanceSecurityGroup.securityGroupId],
+			instanceType: props.instanceType,
+			iamInstanceProfile: instanceProfile.ref,
+			associatePublicIpAddress: true,
+			userData: getUserData({ app, region, stage, elkStreamId }),
+		});
+
 		const yamlTemplateFilePath = join(
 			__dirname,
 			'../..',
@@ -187,7 +218,7 @@ export class DotcomRendering extends GuStack {
 				VpcId: vpc.vpcId,
 				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
 				InternalLoadBalancer: loadBalancer.loadBalancerName,
-				InstanceRole: instanceRole.roleName,
+				LaunchConfig: launchConfig.ref,
 			},
 		});
 
