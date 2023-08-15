@@ -10,7 +10,7 @@ import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { Loading } from './CardPicture';
+import type { Loading } from './CardPicture';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -199,17 +199,12 @@ const ThreeColumnSliceWithAdSlot = ({
 	);
 };
 
-/**
- * FixedMediumSlowXIIMPU
- *
- */
 export const FixedMediumSlowXIIMPU = ({
 	trails,
 	containerPalette,
 	showAge,
 	adIndex,
 	renderAds,
-	padBottom,
 	imageLoading,
 }: Props) => {
 	const firstSlice = trails.slice(0, 3);

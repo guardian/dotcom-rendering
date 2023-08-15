@@ -12,7 +12,7 @@ import {
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import { AdSlot } from '../components/AdSlot';
 import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
@@ -36,6 +36,7 @@ import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { frontsBannerAdSections } from '../lib/frontsBannerAbTestAdPositions';
 import {
 	getDesktopAdPositions,
 	getMerchHighPosition,
@@ -85,12 +86,15 @@ export const decideAdSlot = (
 	isPaidContent: boolean | undefined,
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
+	isInFrontsBannerTest?: boolean,
 ) => {
 	if (!renderAds) return null;
+
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
 		collectionCount > minContainers &&
-		index === getMerchHighPosition(collectionCount)
+		index === getMerchHighPosition(collectionCount) &&
+		!(isInFrontsBannerTest && isNetworkFront)
 	) {
 		return (
 			<AdSlot
@@ -110,7 +114,42 @@ export const decideAdSlot = (
 			</Hide>
 		);
 	}
+
 	return null;
+};
+
+/**
+ * Renders a fronts-banner ad when in the fronts banner AB test.
+ * Only applies to network fronts on desktop screens and wider.
+ */
+export const decideFrontsBannerAdSlot = (
+	renderAds: boolean,
+	hasPageSkin: boolean,
+	isInFrontsBannerTest: boolean,
+	pageId: string,
+	collectionName: string,
+	numBannerAdsInserted: React.MutableRefObject<number>,
+) => {
+	const targetedSections = frontsBannerAdSections[pageId];
+
+	if (
+		!renderAds ||
+		!isInFrontsBannerTest ||
+		!targetedSections?.includes(collectionName)
+	) {
+		return null;
+	}
+
+	numBannerAdsInserted.current = numBannerAdsInserted.current + 1;
+
+	return (
+		<AdSlot
+			data-print-layout="hide"
+			position="fronts-banner"
+			index={numBannerAdsInserted.current}
+			hasPageskin={hasPageSkin}
+		/>
+	);
 };
 
 const decideLeftContent = (
@@ -154,10 +193,24 @@ const decideLeftContent = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { abTests, isPaidContent, hasPageSkin: hasPageSkinConfig },
+		config: {
+			switches,
+			abTests,
+			isPaidContent,
+			hasPageSkin: hasPageSkinConfig,
+		},
 	} = front;
 
 	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
+
+	// For the FrontsBannerAds test, we're not using contentType === "Network Front",
+	// just in case Europe goes live before the testing concludes.
+	// We don't want Europe in this test.
+	const networkFrontPageIds = ['uk', 'us', 'au', 'international'];
+	const isInFrontsBannerTest =
+		!!switches.frontsBannerAdsDcr &&
+		abTests.frontsBannerAdsDcrVariant === 'variant' &&
+		networkFrontPageIds.includes(front.config.pageId);
 
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
@@ -174,6 +227,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const desktopAdPositions = renderAds
 		? getDesktopAdPositions(front.pressedPage.collections)
 		: [];
+
+	const numBannerAdsInserted = useRef(0);
+
+	const renderMpuAds = renderAds && !isInFrontsBannerTest;
 
 	const showMostPopular =
 		front.config.switches.deeplyRead &&
@@ -362,6 +419,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						return (
 							<Fragment key={ophanName}>
 								<div css={[hasPageSkin && pageSkinContainer]}>
+									{decideFrontsBannerAdSlot(
+										renderAds,
+										hasPageSkin,
+										isInFrontsBannerTest,
+										front.config.pageId,
+										collection.displayName,
+										numBannerAdsInserted,
+									)}
 									{!!trail.embedUri && (
 										<SnapCssSandbox
 											snapData={trail.snapData}
@@ -398,6 +463,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											.isPaidContent,
 										mobileAdPositions,
 										hasPageSkin,
+										isInFrontsBannerTest,
 									)}
 								</div>
 							</Fragment>
@@ -414,6 +480,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							: undefined;
 						return (
 							<>
+								{decideFrontsBannerAdSlot(
+									renderAds,
+									hasPageSkin,
+									isInFrontsBannerTest,
+									front.config.pageId,
+									collection.displayName,
+									numBannerAdsInserted,
+								)}
 								<FrontSection
 									toggleable={true}
 									key={ophanName}
@@ -466,6 +540,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
+									isInFrontsBannerTest,
 								)}
 							</>
 						);
@@ -501,7 +576,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									imageLoading={imageLoading}
 									adIndex={desktopAdPositions.indexOf(index)}
-									renderAds={false}
+									renderAds={renderMpuAds}
 								/>
 							</LabsSection>
 						);
@@ -517,6 +592,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							decideContainerOverrides(containerPalette);
 						return (
 							<Fragment key={ophanName}>
+								{decideFrontsBannerAdSlot(
+									renderAds,
+									hasPageSkin,
+									isInFrontsBannerTest,
+									front.config.pageId,
+									collection.displayName,
+									numBannerAdsInserted,
+								)}
 								<Section
 									title={collection.displayName}
 									sectionId={`container-${ophanName}`}
@@ -570,6 +653,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
+									isInFrontsBannerTest,
 								)}
 							</Fragment>
 						);
@@ -577,6 +661,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					return (
 						<Fragment key={ophanName}>
+							{decideFrontsBannerAdSlot(
+								renderAds,
+								hasPageSkin,
+								isInFrontsBannerTest,
+								front.config.pageId,
+								collection.displayName,
+								numBannerAdsInserted,
+							)}
 							<FrontSection
 								title={collection.displayName}
 								description={collection.description}
@@ -631,7 +723,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									imageLoading={imageLoading}
 									adIndex={desktopAdPositions.indexOf(index)}
-									renderAds={renderAds}
+									renderAds={renderMpuAds}
 								/>
 							</FrontSection>
 							{decideAdSlot(
@@ -642,6 +734,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.pressedPage.frontProperties.isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
+								isInFrontsBannerTest,
 							)}
 						</Fragment>
 					);
