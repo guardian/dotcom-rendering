@@ -87,7 +87,6 @@ export const decideAdSlot = (
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
 	isInFrontsBannerTest?: boolean,
-	isBrandedSection?: boolean,
 ) => {
 	if (!renderAds) return null;
 
@@ -104,7 +103,7 @@ export const decideAdSlot = (
 				hasPageskin={hasPageSkin}
 			/>
 		);
-	} else if (!isBrandedSection && mobileAdPositions.includes(index)) {
+	} else if (mobileAdPositions.includes(index)) {
 		return (
 			<Hide from="tablet">
 				<AdSlot
@@ -594,7 +593,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 									hasPageSkin,
 									isInFrontsBannerTest,
-									true,
 								)}
 							</Fragment>
 						);
