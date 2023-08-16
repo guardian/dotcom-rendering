@@ -129,13 +129,15 @@ export const decideFrontsBannerAdSlot = (
 	pageId: string,
 	collectionName: string,
 	numBannerAdsInserted: React.MutableRefObject<number>,
+	isFirstContainer: boolean,
 ) => {
 	const targetedSections = frontsBannerAdSections[pageId];
 
 	if (
 		!renderAds ||
 		!isInFrontsBannerTest ||
-		!targetedSections?.includes(collectionName)
+		!targetedSections?.includes(collectionName) ||
+		isFirstContainer
 	) {
 		return null;
 	}
@@ -426,6 +428,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										front.config.pageId,
 										collection.displayName,
 										numBannerAdsInserted,
+										index === 0,
 									)}
 									{!!trail.embedUri && (
 										<SnapCssSandbox
@@ -487,6 +490,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.config.pageId,
 									collection.displayName,
 									numBannerAdsInserted,
+									index === 0,
 								)}
 								<FrontSection
 									toggleable={true}
@@ -615,6 +619,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.config.pageId,
 									collection.displayName,
 									numBannerAdsInserted,
+									index === 0,
 								)}
 								<Section
 									title={collection.displayName}
@@ -684,6 +689,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.config.pageId,
 								collection.displayName,
 								numBannerAdsInserted,
+								index === 0,
 							)}
 							<FrontSection
 								title={collection.displayName}
