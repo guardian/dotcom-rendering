@@ -535,8 +535,9 @@ type FEFrontPropertiesType = {
 export type FESupportingContent = {
 	properties: {
 		href?: string;
+		webUrl?: string;
 	};
-	header?: {
+	header: {
 		kicker?: {
 			item?: {
 				properties: {
