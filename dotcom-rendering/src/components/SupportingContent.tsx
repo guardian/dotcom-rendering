@@ -67,6 +67,8 @@ const liStyles = css`
 
 const dynamoLiStyles = css`
 	background-color: ${transparentColour(neutral[97], 0.875)};
+	/* Creates a containing block which allows Ophan heatmap to place bubbles correctly. */
+	position: relative;
 	border-top: 1px solid;
 	/* 20% is arbitrary, but the cards should expand thanks for flex-grow */
 	flex: 1 0 25%;
