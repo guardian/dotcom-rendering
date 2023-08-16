@@ -21,6 +21,9 @@ const wrapperStyles = css`
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-bottom: 5px;
+	@media (pointer: coarse) {
+		padding-bottom: 0;
+	}
 `;
 
 const directionStyles = (alignment: Alignment) => {
