@@ -64,7 +64,7 @@ const getGroups = (
 	newsletterPageData: FENewslettersPageType,
 ): GroupedNewsletters => {
 	const { newsletters, editionId } = newsletterPageData;
-	const staticGroup = groups[editionId];
+	const staticGroup = groups[editionId] ?? groups['UK'];
 
 	return staticGroup
 		? mapStaticGroups(staticGroup, newsletters)
