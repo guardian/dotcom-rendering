@@ -6,7 +6,7 @@ import type {
 } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { Loading } from './CardPicture';
+import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
 
 type Props = {

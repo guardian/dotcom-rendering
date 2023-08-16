@@ -1,4 +1,4 @@
-import { FEElement } from '../types/content';
+import type { FEElement } from '../types/content';
 
 export const mainMediaElements: FEElement[] = [
 	{

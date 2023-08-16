@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { RoleType } from '../types/content';
+import type { RoleType } from '../types/content';
 import { Caption } from './Caption';
 import { ClickToView } from './ClickToView';
 import { MaintainAspectRatio } from './MaintainAspectRatio';

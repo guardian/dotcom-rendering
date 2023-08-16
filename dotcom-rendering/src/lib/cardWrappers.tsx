@@ -1,4 +1,4 @@
-import { Loading } from '../components/CardPicture';
+import type { Loading } from '../components/CardPicture';
 import { FrontCard } from '../components/FrontCard';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 

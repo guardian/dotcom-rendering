@@ -14,7 +14,7 @@ import { CfnOutput } from 'aws-cdk-lib';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
 import { CfnLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
-import { DCRProps } from './types';
+import type { DCRProps } from './types';
 
 export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
