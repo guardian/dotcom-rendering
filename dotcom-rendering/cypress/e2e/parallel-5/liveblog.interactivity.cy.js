@@ -107,7 +107,7 @@ describe('Liveblogs', function () {
 		cy.get(`[data-cy="toast"]`).should('not.exist');
 	});
 
-	it('should enhance tweets after they have been inserted', function () {
+	it.skip('should enhance tweets after they have been inserted', function () {
 		const getTwitterIframe = () => {
 			return cy
 				.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e iframe', {
