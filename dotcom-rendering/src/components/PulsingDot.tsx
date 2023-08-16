@@ -1,6 +1,6 @@
 import { css, keyframes } from '@emotion/react';
-import { storage } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { allowFlashingElements } from '../lib/allowFlashingElements';
 
 const dotStyles = (colour?: string) => css`
 	color: ${colour && colour};
@@ -40,19 +40,8 @@ interface Props {
 
 export const PulsingDot = ({ colour }: Props) => {
 	const [hydrated, setHydrated] = useState(false);
-	const [shouldFlash, setShouldFlash] = useState(false);
 
 	useEffect(() => {
-		// Respect the accessibility flag set here
-		// https://www.theguardian.com/help/accessibility-help
-
-		const flashingPreference = storage.local.get(
-			'gu.prefs.accessibility.flashing-elements',
-		);
-
-		// flashingPreference is null if no preference exists and explicitly
-		// false when the reader has said they don't want flashing
-		setShouldFlash(flashingPreference !== false);
 		// We use this to track if the flashing dot is hydrated
 		// Uses of pulsing dot that aren't in islands can instead be animated by
 		// the 'AnimatePulsingDots.importable.tsx' component
@@ -81,7 +70,7 @@ export const PulsingDot = ({ colour }: Props) => {
 			 * before setting the 'animate' property. This method allows us to enable the animation through both methods
 			 * outlined above.
 			 */
-			data-animate={shouldFlash}
+			data-animate={allowFlashingElements}
 		/>
 	);
 };

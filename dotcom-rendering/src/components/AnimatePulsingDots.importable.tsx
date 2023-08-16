@@ -1,5 +1,5 @@
-import { storage } from '@guardian/libs';
-import { useEffect } from 'react';
+import { allowFlashingElements } from '../lib/allowFlashingElements';
+import { useOnce } from '../lib/useOnce';
 
 const animatePulsingDots = () => {
 	// Get all the elements that aren't hydrated
@@ -22,19 +22,11 @@ const animatePulsingDots = () => {
  * - We use this for fronts, where we add pulsing dots to the page which aren't wrapped in islands
  */
 export const AnimatePulsingDots = () => {
-	useEffect(() => {
-		// Respect the accessibility flag set here
-		// https://www.theguardian.com/help/accessibility-help
-		const flashingPreference = storage.local.get(
-			'gu.prefs.accessibility.flashing-elements',
-		);
-
-		// If the user hasn't explicitly set their flashing preference to 'false'
-		// then we can animate the pulsing dots
-		if (flashingPreference !== false) {
+	useOnce(() => {
+		if (allowFlashingElements) {
 			animatePulsingDots();
 		}
-	});
+	}, []);
 
 	return null;
 };
