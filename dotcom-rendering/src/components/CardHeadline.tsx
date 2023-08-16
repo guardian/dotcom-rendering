@@ -166,6 +166,9 @@ const sublinkStyles = css`
 	font-size: inherit;
 	font-weight: ${fontWeights.medium};
 	line-height: inherit;
+	@media (pointer: coarse) {
+		min-height: 44px;
+	}
 	/* This css is used to remove any underline from the kicker but still
 	 * have it applied to the headline when the kicker is hovered */
 	:hover {
