@@ -42,8 +42,10 @@ boot('bootCmp', () =>
 		bootCmp(),
 	),
 );
-boot('ophan', () =>
-	import(/* webpackMode: "eager" */ './ophan').then(({ ophan }) => ophan()),
+boot('recordInitialPageEvents', () =>
+	import(/* webpackMode: "eager" */ './ophan/recordInitialPageEvents').then(
+		({ recordInitialPageEvents }) => recordInitialPageEvents(),
+	),
 );
 boot('ga', () =>
 	import(/* webpackMode: "eager" */ './ga').then(({ ga }) => ga()),
