@@ -22,6 +22,16 @@ echo "filteredFiles: $filteredFiles"
 # Github actions sets this by default but we also want this variable set in TeamCity
 export CI=true
 
+# TeamCity is going away soon, and having a completely different
+# build step for main that takes over twice as long prevents getting
+# any meaningful estimates from TeamCity.
+# Cypress is also run by our GitHub Actions, where their flakiness
+# is not as problematic, because they can be re-run independently.
+#
+# At the time of writing this, Aug 16 2023, 75% of main runs in TC
+# failed over a 24h period.
+export SKIP_CYPRESS=true
+
 # run the ci steps if either of the followings is true
 # - filteredFiles is empty (all changes were in apps-rendering)
 # - we are in the main branch
