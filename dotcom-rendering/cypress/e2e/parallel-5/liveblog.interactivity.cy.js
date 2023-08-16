@@ -107,6 +107,12 @@ describe('Liveblogs', function () {
 		cy.get(`[data-cy="toast"]`).should('not.exist');
 	});
 
+	/**
+	 * Note: This test periodically failed when running in TeamCity
+	 * It passes locally _almost_ every time.
+	 *
+	 * Cypress tests have now been disabled in TeamCity
+	 */
 	it('should enhance tweets after they have been inserted', function () {
 		const getTwitterIframe = () => {
 			return cy
@@ -130,6 +136,7 @@ describe('Liveblogs', function () {
 				mostRecentBlockId: 'abc',
 			});
 		});
+		// Should we use cy.get('#liveblog-body').scrollIntoView(); instead here?
 		cy.scrollTo(0, 1200);
 		getTwitterIframe().contains(
 			'They will prepare the extraordinary European Council meeting tonight',
