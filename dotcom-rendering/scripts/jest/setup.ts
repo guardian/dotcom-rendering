@@ -14,8 +14,7 @@ const windowGuardianConfig = {
 		browserId: 'jest-browser-id',
 		pageViewId: 'jest-page-view-id',
 	},
-	tests: {
-	}
+	tests: {},
 } as WindowGuardianConfig;
 
 const windowGuardian = {
@@ -110,6 +109,17 @@ Object.defineProperty(window, 'localStorage', {
  */
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
+
+global.matchMedia = () => ({
+	matches: false,
+	media: 'jest',
+	onchange: () => void 0,
+	addListener: () => void 0,
+	removeListener: () => void 0,
+	addEventListener: () => void 0,
+	removeEventListener: () => void 0,
+	dispatchEvent: () => false,
+});
 
 // Mocks the version number used by CDK, we don't want our tests to fail every time we update our cdk dependency.
 jest.mock('@guardian/cdk/lib/constants/tracking-tag');
