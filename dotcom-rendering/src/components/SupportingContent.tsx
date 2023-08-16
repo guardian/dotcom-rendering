@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, neutral } from '@guardian/source-foundations';
+import { from, neutral, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { transparentColour } from '../lib/transparentColour';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
@@ -62,11 +62,14 @@ const liStyles = css`
 	flex: 1;
 	padding-top: 2px;
 	position: relative;
-	&:first-child {
-		margin-top: 8px;
+	margin-top: 8px;
+	@media (pointer: coarse) {
+		margin-top: 0;
+		&:first-child {
+			margin-top: 8px;
+		}
 	}
 	${from.tablet} {
-		margin-top: 8px;
 		margin-bottom: 4px;
 	}
 `;
@@ -79,6 +82,15 @@ const dynamoLiStyles = css`
 	/* 20% is arbitrary, but the cards should expand thanks for flex-grow */
 	flex: 1 0 25%;
 	margin: 0;
+`;
+
+const bottomMargin = css`
+	${until.tablet} {
+		margin-bottom: 8px;
+		@media (pointer: coarse) {
+			margin-bottom: 0;
+		}
+	}
 `;
 
 const leftMargin = css`
@@ -107,6 +119,7 @@ export const SupportingContent = ({
 				if (!subLink.headline) return null;
 				const shouldPadLeft =
 					!isDynamo && index > 0 && alignment === 'horizontal';
+				const isLast = index === length - 1;
 				return (
 					<li
 						key={subLink.url}
@@ -123,6 +136,7 @@ export const SupportingContent = ({
 								  ]
 								: liStyles,
 							shouldPadLeft && leftMargin,
+							isLast && bottomMargin,
 						]}
 						data-link-name={`sublinks | ${index + 1}`}
 					>
