@@ -62,7 +62,8 @@ export const NewslettersPageHeading = ({
 					<span>Newsletters</span>
 				</h1>
 				<p css={subtitleStyle}>
-					Choose from {newsletterCount} available newsletters
+					Choose from {newsletterCount} available newsletters. The
+					best Guardian journalism, free to your inbox
 				</p>
 
 				{!!mmaUrl && (
