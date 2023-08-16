@@ -82,19 +82,19 @@ export const record: OphanRecordFunction = (event) => {
 /**
  * @deprecated use `submitComponentEvent` instead
  */
-export const __OLD__submitComponentEvent = (
+export const deprecatedSubmitComponentEvent = (
 	componentEvent: OphanComponentEvent,
 	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
 ): void => {
 	ophanRecord({ componentEvent });
 };
 
-// temporarily wrap __OLD__submitComponentEvent while using `getOphan`
+// temporarily wrap deprecatedSubmitComponentEvent while using `getOphan`
 export const submitComponentEvent = async (
 	componentEvent: OphanComponentEvent,
 ): Promise<void> => {
 	const ophan = await getOphan();
-	__OLD__submitComponentEvent(componentEvent, ophan.record);
+	deprecatedSubmitComponentEvent(componentEvent, ophan.record);
 };
 
 interface SdcTestMeta extends OphanABTestMeta {
@@ -104,7 +104,7 @@ interface SdcTestMeta extends OphanABTestMeta {
 /**
  * @deprecated use `sendOphanComponentEvent` instead
  */
-export const __OLD__sendOphanComponentEvent = (
+export const deprecatedSendOphanComponentEvent = (
 	action: OphanAction,
 	testMeta: SdcTestMeta,
 	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
@@ -133,16 +133,16 @@ export const __OLD__sendOphanComponentEvent = (
 		action,
 	};
 
-	__OLD__submitComponentEvent(componentEvent, ophanRecord);
+	deprecatedSubmitComponentEvent(componentEvent, ophanRecord);
 };
 
-// temporarily wrap __OLD__sendOphanComponentEvent while using `getOphan`
+// temporarily wrap deprecatedSendOphanComponentEvent while using `getOphan`
 export const sendOphanComponentEvent = async (
 	action: OphanAction,
 	testMeta: SdcTestMeta,
 ): Promise<void> => {
 	const ophan = await getOphan();
-	__OLD__sendOphanComponentEvent(action, testMeta, ophan.record);
+	deprecatedSendOphanComponentEvent(action, testMeta, ophan.record);
 };
 
 export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {

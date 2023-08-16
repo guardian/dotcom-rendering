@@ -12,7 +12,7 @@ import {
 } from '@guardian/source-react-components';
 import { useCallback, useEffect, useState } from 'react';
 import {
-	__OLD__submitComponentEvent,
+	deprecatedSubmitComponentEvent,
 	getOphanRecordFunction,
 } from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
@@ -169,7 +169,7 @@ export const NewsletterCard = ({
 			timestamp: Date.now(),
 		};
 
-		__OLD__submitComponentEvent(
+		deprecatedSubmitComponentEvent(
 			{
 				component: {
 					componentType: 'CARD',

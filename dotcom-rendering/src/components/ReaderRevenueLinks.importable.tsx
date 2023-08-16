@@ -20,8 +20,8 @@ import type {
 import { useEffect, useState } from 'react';
 import type { OphanRecordFunction } from '../client/ophan/ophan';
 import {
-	__OLD__sendOphanComponentEvent,
-	__OLD__submitComponentEvent,
+	deprecatedSendOphanComponentEvent,
+	deprecatedSubmitComponentEvent,
 	getOphanRecordFunction,
 } from '../client/ophan/ophan';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
@@ -246,7 +246,10 @@ const ReaderRevenueLinksRemote = ({
 					submitComponentEvent={(
 						componentEvent: OphanComponentEvent,
 					) =>
-						__OLD__submitComponentEvent(componentEvent, ophanRecord)
+						deprecatedSubmitComponentEvent(
+							componentEvent,
+							ophanRecord,
+						)
 					}
 					{...supportHeaderResponse.props}
 				/>
@@ -297,14 +300,14 @@ const ReaderRevenueLinksNative = ({
 
 	useEffect(() => {
 		if (!hideSupportMessaging && inHeader) {
-			__OLD__sendOphanComponentEvent('INSERT', tracking, ophanRecord);
+			deprecatedSendOphanComponentEvent('INSERT', tracking, ophanRecord);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		if (hasBeenSeen && inHeader) {
-			__OLD__sendOphanComponentEvent('VIEW', tracking, ophanRecord);
+			deprecatedSendOphanComponentEvent('VIEW', tracking, ophanRecord);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hasBeenSeen]);

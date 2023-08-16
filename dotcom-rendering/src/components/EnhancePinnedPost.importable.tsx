@@ -1,6 +1,6 @@
 import { startPerformanceMeasure } from '@guardian/libs';
 import { useEffect, useRef, useState } from 'react';
-import { __OLD__submitComponentEvent } from '../client/ophan/ophan';
+import { deprecatedSubmitComponentEvent } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
 import { useIsInView } from '../lib/useIsInView';
 
@@ -59,7 +59,7 @@ function scrollOnCollapse() {
 const handleClickTracking = () => {
 	if (pinnedPostCheckBox instanceof HTMLInputElement) {
 		if (pinnedPostCheckBox.checked) {
-			__OLD__submitComponentEvent({
+			deprecatedSubmitComponentEvent({
 				component: {
 					componentType: 'LIVE_BLOG_PINNED_POST',
 					id: pinnedPost?.id,
@@ -68,7 +68,7 @@ const handleClickTracking = () => {
 				value: 'show-more',
 			});
 		} else {
-			__OLD__submitComponentEvent({
+			deprecatedSubmitComponentEvent({
 				component: {
 					componentType: 'LIVE_BLOG_PINNED_POST',
 					id: pinnedPost?.id,
@@ -147,7 +147,7 @@ export const EnhancePinnedPost = () => {
 			const timeTaken = pinnedPostTiming.current?.endPerformanceMeasure();
 			if (timeTaken !== undefined) {
 				const timeTakenInSeconds = timeTaken / 1000;
-				__OLD__submitComponentEvent({
+				deprecatedSubmitComponentEvent({
 					component: {
 						componentType: 'LIVE_BLOG_PINNED_POST',
 						id: pinnedPost.id,

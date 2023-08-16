@@ -11,7 +11,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useState } from 'react';
 import { trackNonClickInteraction } from '../../client/ga/ga';
-import { __OLD__submitComponentEvent } from '../../client/ophan/ophan';
+import { deprecatedSubmitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
 import {
 	getLastOneOffContributionDate,
@@ -363,7 +363,7 @@ const RemoteBanner = ({
 				{}
 				<Banner
 					{...module.props}
-					submitComponentEvent={__OLD__submitComponentEvent}
+					submitComponentEvent={deprecatedSubmitComponentEvent}
 					fetchEmail={fetchEmail}
 				/>
 			</div>

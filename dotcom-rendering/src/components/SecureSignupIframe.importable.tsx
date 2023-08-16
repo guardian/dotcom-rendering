@@ -16,7 +16,7 @@ import { useRef, useState } from 'react';
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import {
-	__OLD__submitComponentEvent,
+	deprecatedSubmitComponentEvent,
 	getOphanRecordFunction,
 } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
@@ -164,7 +164,7 @@ const sendTracking = (
 		timestamp: Date.now(),
 	});
 
-	__OLD__submitComponentEvent(
+	deprecatedSubmitComponentEvent(
 		{
 			action,
 			value,

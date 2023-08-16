@@ -15,7 +15,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useEffect, useMemo, useState } from 'react';
-import { __OLD__submitComponentEvent } from '../client/ophan/ophan';
+import { deprecatedSubmitComponentEvent } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
@@ -306,7 +306,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				notification.logImpression?.();
 			}
 
-			__OLD__submitComponentEvent({
+			deprecatedSubmitComponentEvent({
 				component: ophanComponent,
 				action: 'VIEW',
 			});
@@ -321,7 +321,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 
 	useOnce(() => {
 		if (ophanComponent) {
-			__OLD__submitComponentEvent({
+			deprecatedSubmitComponentEvent({
 				component: ophanComponent,
 				action: 'INSERT',
 			});
@@ -347,7 +347,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				data-link-name={link.dataLinkName}
 				onClick={() => {
 					if (ophanComponent) {
-						__OLD__submitComponentEvent({
+						deprecatedSubmitComponentEvent({
 							component: ophanComponent,
 							action: 'CLICK',
 						});

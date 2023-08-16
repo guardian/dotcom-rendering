@@ -8,7 +8,7 @@ import type {
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
-import { __OLD__submitComponentEvent } from './ophan/ophan';
+import { deprecatedSubmitComponentEvent } from './ophan/ophan';
 
 const submitConsentEventsToOphan = () =>
 	onConsent().then((consentState: ConsentState) => {
@@ -78,7 +78,7 @@ const submitConsentEventsToOphan = () =>
 			action,
 		} satisfies OphanComponentEvent;
 
-		__OLD__submitComponentEvent(event);
+		deprecatedSubmitComponentEvent(event);
 	});
 
 const initialiseCmp = () =>

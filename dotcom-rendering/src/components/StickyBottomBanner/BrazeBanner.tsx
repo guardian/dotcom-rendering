@@ -5,7 +5,7 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { useEffect, useState } from 'react';
-import { __OLD__submitComponentEvent } from '../../client/ophan/ophan';
+import { deprecatedSubmitComponentEvent } from '../../client/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import { getZIndex } from '../../lib/getZIndex';
@@ -115,7 +115,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 		meta.logImpressionWithBraze();
 
 		// Log VIEW event with Ophan
-		__OLD__submitComponentEvent({
+		deprecatedSubmitComponentEvent({
 			component: {
 				componentType: 'RETENTION_ENGAGEMENT_BANNER',
 				id:
@@ -152,7 +152,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 		<div css={containerStyles}>
 			<BrazeComponent
 				logButtonClickWithBraze={meta.logButtonClickWithBraze}
-				submitComponentEvent={__OLD__submitComponentEvent}
+				submitComponentEvent={deprecatedSubmitComponentEvent}
 				componentName={componentName}
 				brazeMessageProps={meta.dataFromBraze}
 				subscribeToNewsletter={subscribeToNewsletter}

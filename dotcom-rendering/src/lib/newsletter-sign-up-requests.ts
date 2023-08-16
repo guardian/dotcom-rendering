@@ -1,6 +1,6 @@
 import type { OphanAction } from '@guardian/libs';
 import {
-	__OLD__submitComponentEvent,
+	deprecatedSubmitComponentEvent,
 	getOphanRecordFunction,
 } from '../client/ophan/ophan';
 
@@ -142,7 +142,7 @@ export const reportTrackingEvent = (
 		timestamp: Date.now(),
 	};
 
-	__OLD__submitComponentEvent(
+	deprecatedSubmitComponentEvent(
 		{
 			component: {
 				componentType: 'NEWSLETTER_SUBSCRIPTION',
