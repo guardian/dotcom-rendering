@@ -15,6 +15,7 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -979,6 +980,22 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						</Island>
 					</BannerWrapper>
 					<MobileStickyContainer data-print-layout="hide" />
+				</>
+			)}
+
+			{!isWeb && (
+				<>
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						padSides={false}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Island>
+							<AppsFooter />
+						</Island>
+					</Section>
 				</>
 			)}
 		</>
