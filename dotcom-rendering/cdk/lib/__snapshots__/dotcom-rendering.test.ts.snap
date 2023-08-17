@@ -871,9 +871,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "MetricName": "Latency",
         "Namespace": "AWS/ELB",
         "OKActions": [
-          {
-            "Ref": "ScaleDownPolicy",
-          },
+          "ScaleDownPolicy",
         ],
         "Period": 60,
         "Statistic": "Average",
