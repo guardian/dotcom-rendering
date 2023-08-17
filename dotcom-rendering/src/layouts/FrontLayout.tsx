@@ -417,6 +417,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								!!eB.branding,
 						);
 
+					const isFirstContainer = index === 0;
+
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<Fragment key={ophanName}>
@@ -428,7 +430,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										front.config.pageId,
 										collection.displayName,
 										numBannerAdsInserted,
-										index === 0,
+										isFirstContainer,
 									)}
 									{!!trail.embedUri && (
 										<SnapCssSandbox
@@ -490,7 +492,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.config.pageId,
 									collection.displayName,
 									numBannerAdsInserted,
-									index === 0,
+									isFirstContainer,
 								)}
 								<FrontSection
 									toggleable={true}
@@ -619,7 +621,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.config.pageId,
 									collection.displayName,
 									numBannerAdsInserted,
-									index === 0,
+									isFirstContainer,
 								)}
 								<Section
 									title={collection.displayName}
@@ -689,7 +691,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.config.pageId,
 								collection.displayName,
 								numBannerAdsInserted,
-								index === 0,
+								isFirstContainer,
 							)}
 							<FrontSection
 								title={collection.displayName}
