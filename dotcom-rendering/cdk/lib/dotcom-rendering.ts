@@ -17,7 +17,7 @@ import {
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration } from 'aws-cdk-lib';
-import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
+import { AdjustmentType, CfnScalingPolicy, HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
@@ -220,6 +220,13 @@ export class DotcomRendering extends GuStack {
 
 		asg.attachToClassicLB(loadBalancer);
 
+		const scaleDownPolicy = new CfnScalingPolicy(this, 'ScaleDownPolicy', {
+			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
+			autoScalingGroupName: asg.autoScalingGroupName,
+			cooldown: '120',
+			scalingAdjustment: -1,
+		  });
+
 		const yamlTemplateFilePath = join(
 			__dirname,
 			'../..',
@@ -232,6 +239,7 @@ export class DotcomRendering extends GuStack {
 				AutoscalingGroup: asg.autoScalingGroupName,
 				InternalLoadBalancer: loadBalancer.loadBalancerName,
 				InstanceRole: instanceRole.roleName,
+				ScaleDownPolicy: scaleDownPolicy.logicalId,
 			},
 		});
 
