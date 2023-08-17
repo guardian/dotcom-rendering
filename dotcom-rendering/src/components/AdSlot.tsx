@@ -3,12 +3,10 @@ import { adSizes, constants } from '@guardian/commercial';
 import type { SlotName } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
-	border,
 	breakpoints,
 	from,
-	neutral,
+	palette,
 	space,
-	text,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
@@ -56,10 +54,10 @@ const individualLabelCSS = css`
 	${textSans.xxsmall()};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
-	background-color: ${neutral[97]};
+	background-color: ${palette.neutral[97]};
 	padding: 0 8px;
-	border-top: 1px solid ${border.secondary};
-	color: ${text.supporting};
+	border-top: 1px solid ${palette.neutral[86]};
+	color: ${palette.neutral[46]};
 	text-align: left;
 	box-sizing: border-box;
 `;
@@ -227,15 +225,19 @@ const mobileFrontAdStyles = css`
 	}
 `;
 
-const frontsBannerAdContainerStyles = css`
+const frontsBannerAdTopContainerStyles = css`
 	display: flex;
 	justify-content: center;
-	background-color: ${neutral[97]};
 	min-height: ${250 + labelHeight}px;
+	background-color: ${palette.neutral[97]};
 
 	${until.desktop} {
 		display: none;
 	}
+`;
+
+const frontsBannerAdContainerStyles = css`
+	max-width: ${breakpoints['wide']}px;
 `;
 
 const frontsBannerCollapseStyles = css`
@@ -328,8 +330,8 @@ const mobileStickyAdStyles = css`
 	.ad-slot__close-button svg {
 		height: 0.75rem;
 		width: 0.75rem;
-		stroke: ${neutral[7]};
-		fill: ${neutral[7]};
+		stroke: ${palette.neutral[7]};
+		fill: ${palette.neutral[7]};
 		stroke-linecap: round;
 		stroke-width: 0;
 		text-align: center;
@@ -338,7 +340,7 @@ const mobileStickyAdStyles = css`
 		display: block;
 	}
 	.ad-slot__close-button__x {
-		stroke: ${neutral[7]};
+		stroke: ${palette.neutral[7]};
 		fill: transparent;
 		stroke-linecap: round;
 		stroke-width: 2;
@@ -622,33 +624,35 @@ export const AdSlot = ({
 		case 'fronts-banner': {
 			const advertId = `fronts-banner-${index}`;
 			return (
-				<div
-					className="ad-slot-container"
-					css={[
-						adContainerStyles,
-						frontsBannerAdContainerStyles,
-						hasPageskin && frontsBannerCollapseStyles,
-					]}
-				>
+				<div css={frontsBannerAdTopContainerStyles}>
 					<div
-						id={`dfp-ad--${advertId}`}
-						className={[
-							'js-ad-slot',
-							'ad-slot',
-							`ad-slot--${advertId}`,
-							'ad-slot--rendered',
-							hasPageskin && 'ad-slot--collapse',
-						].join(' ')}
+						className="ad-slot-container"
 						css={[
-							fluidAdStyles,
-							fluidFullWidthAdStyles,
-							frontsBannerAdStyles,
+							adContainerStyles,
+							frontsBannerAdContainerStyles,
+							hasPageskin && frontsBannerCollapseStyles,
 						]}
-						data-link-name={`ad slot ${advertId}`}
-						data-name={`${advertId}`}
-						data-refresh="false"
-						aria-hidden="true"
-					/>
+					>
+						<div
+							id={`dfp-ad--${advertId}`}
+							className={[
+								'js-ad-slot',
+								'ad-slot',
+								`ad-slot--${advertId}`,
+								'ad-slot--rendered',
+								hasPageskin && 'ad-slot--collapse',
+							].join(' ')}
+							css={[
+								fluidAdStyles,
+								fluidFullWidthAdStyles,
+								frontsBannerAdStyles,
+							]}
+							data-link-name={`ad slot ${advertId}`}
+							data-name={`${advertId}`}
+							data-refresh="false"
+							aria-hidden="true"
+						/>
+					</div>
 				</div>
 			);
 		}
