@@ -82,12 +82,11 @@ export const sendPageView = (): void => {
 	const { GAData } = window.guardian;
 	const userCookie = getCookie({ name: 'GU_U', shouldMemoize: true });
 	const { ga } = window;
-	const isArticle = window.guardian.config.page.contentType;
+	const isArticle = window.guardian.config.page.contentType === 'Article';
 
 	if (!ga) {
 		return;
 	}
-	console.log('TEST', window.guardian.config.page.contentType === 'Article');
 	ga(set, 'forceSSL', true);
 	isArticle && ga(set, 'title', GAData.webTitle);
 	ga(set, 'anonymizeIp', true);
