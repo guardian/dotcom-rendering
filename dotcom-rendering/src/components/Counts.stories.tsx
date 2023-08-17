@@ -15,15 +15,17 @@ export default {
 	title: 'Components/Counts',
 };
 
-const Wrapper = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			margin: 40px;
-		`}
-	>
-		{children}
-	</div>
-);
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
+	return (
+		<div
+			css={css`
+				margin: 40px;
+			`}
+		>
+			{children}
+		</div>
+	);
+};
 
 const format = {
 	theme: Pillar.News,
@@ -49,14 +51,11 @@ export const Both = () => {
 		)
 		// Comment count
 		.getOnce(
-			'begin:https://discussion.theguardian.com/discussion/p/fmmj65',
+			'begin:https://discussion.theguardian.com/getCommentCounts',
 			{
 				status: 200,
 				body: {
-					discussion: {
-						commentCount: 239,
-						isClosedForComments: false,
-					},
+					'p/fmmj65': 239,
 				},
 			},
 			{ overwriteRoutes: false },
@@ -104,14 +103,11 @@ export const Themes = () => {
 		)
 		// Comment count
 		.getOnce(
-			'begin:https://discussion.theguardian.com/discussion/p/3bdii8',
+			'begin:https://discussion.theguardian.com/getCommentCounts',
 			{
 				status: 200,
 				body: {
-					discussion: {
-						commentCount: 239,
-						isClosedForComments: false,
-					},
+					'p/3bdii8': 239,
 				},
 			},
 			{ overwriteRoutes: false },
@@ -261,14 +257,11 @@ export const CommentOnly = () => {
 		)
 		// Comment count
 		.getOnce(
-			'begin:https://discussion.theguardian.com/discussion/p/sd4lki',
+			'begin:https://discussion.theguardian.com/getCommentCounts',
 			{
 				status: 200,
 				body: {
-					discussion: {
-						commentCount: 239,
-						isClosedForComments: false,
-					},
+					'p/sd4lki': 239,
 				},
 			},
 			{ overwriteRoutes: false },
@@ -316,14 +309,11 @@ export const ZeroComments = () => {
 		)
 		// Comment count
 		.getOnce(
-			'begin:https://discussion.theguardian.com/discussion/p/u7ytrg',
+			'begin:https://discussion.theguardian.com/getCommentCounts',
 			{
 				status: 200,
 				body: {
-					discussion: {
-						commentCount: 0,
-						isClosedForComments: false,
-					},
+					'p/u7ytrg': 0,
 				},
 			},
 			{ overwriteRoutes: false },
@@ -371,14 +361,11 @@ export const BigNumbers = () => {
 		)
 		// Comment count
 		.getOnce(
-			'begin:https://discussion.theguardian.com/discussion/p/bhgyt',
+			'begin:https://discussion.theguardian.com/getCommentCounts',
 			{
 				status: 200,
 				body: {
-					discussion: {
-						commentCount: 4320,
-						isClosedForComments: false,
-					},
+					'p/bhgyt': 4320,
 				},
 			},
 			{ overwriteRoutes: false },

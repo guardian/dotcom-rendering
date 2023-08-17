@@ -27,7 +27,7 @@ interface ApiResponse<T> {
  * A custom hook to make a GET request using the given url using the SWR lib (https://swr.vercel.app/)
  * returns { loading, error, data }
  * @param {String} url - The url to fetch
- * @param {SWRConfiguration} options - The SWR config object - https://swr.vercel.app/docs/options
+ * @param {SWRConfiguration} options - The SWR config object - https://swr.vercel.app/docs/api#options
  * @param {RequestInit} init - The fetch init object - https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options
  * */
 export const useApi = <T,>(

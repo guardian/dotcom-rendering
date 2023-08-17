@@ -24,7 +24,6 @@ import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import type { Loading } from './CardPicture';
-import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
 
@@ -980,7 +979,6 @@ export const Carousel = ({
 			data-link-name={formatAttrString(heading)}
 			data-component={isVideoContainer ? 'video-playlist' : undefined}
 		>
-			<FetchCommentCounts />
 			<LeftColumn
 				borderType="partial"
 				size={leftColSize}
