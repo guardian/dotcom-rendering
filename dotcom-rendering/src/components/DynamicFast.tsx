@@ -20,7 +20,7 @@ import type {
 } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { Loading } from './CardPicture';
+import type { Loading } from './CardPicture';
 
 /**
  * Not sure where to start? This PR documents a lot of the key features

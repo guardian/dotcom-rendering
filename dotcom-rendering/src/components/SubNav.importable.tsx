@@ -158,7 +158,7 @@ export const SubNav = ({
 		const ulEl = ulRef.current;
 
 		const lis = ulEl?.querySelectorAll('li');
-		const lastLi = lis && lis[lis.length - 1];
+		const lastLi = lis?.[lis.length - 1];
 
 		if (ulEl && lastLi) {
 			const ulTop = ulEl.getBoundingClientRect().top;

@@ -1,6 +1,6 @@
 import { LI } from '../components/Card/components/LI';
 import { UL } from '../components/Card/components/UL';
-import { Loading } from '../components/CardPicture';
+import type { Loading } from '../components/CardPicture';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,

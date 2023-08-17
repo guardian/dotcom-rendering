@@ -14,15 +14,6 @@ const rulesToOverrideGuardianConfig = {
 		'index-signature',
 	],
 
-	// be explicit when you only want to import a type:
-	// `import type { Foo } from 'Foo';`
-	'@typescript-eslint/consistent-type-imports': [
-		'warn',
-		{
-			prefer: 'type-imports',
-		},
-	],
-
 	// This is not safe to remove whilst we have noUncheckedIndexedAccess
 	'@typescript-eslint/no-unnecessary-condition': 'warn',
 };
@@ -194,6 +185,19 @@ module.exports = {
 			files: ['**/**.ts'],
 			rules: {
 				'@typescript-eslint/explicit-module-boundary-types': 'error',
+			},
+		},
+		{
+			files: ['**/**.d.ts'],
+			rules: {
+				'@typescript-eslint/consistent-type-imports': [
+					'error',
+					{
+						prefer: 'type-imports',
+						// that’s the way declaration files do it!
+						disallowTypeAnnotations: false,
+					},
+				],
 			},
 		},
 		{
