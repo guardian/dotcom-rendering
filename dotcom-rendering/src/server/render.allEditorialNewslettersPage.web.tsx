@@ -5,11 +5,10 @@ import {
 import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
 import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';
-import { makeWindowGuardian } from '../model/window-guardian';
+import { createGuardian } from '../model/guardian';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
@@ -61,33 +60,23 @@ export const renderEditorialNewslettersPage = ({
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	/**
-	 * We escape windowGuardian here to prevent errors when the data
-	 * is placed in a script tag on the page
-	 */
-	const windowGuardian = escapeData(
-		JSON.stringify(
-			makeWindowGuardian({
-				editionId: newslettersPage.editionId,
-				stage: newslettersPage.config.stage,
-				frontendAssetsFullURL:
-					newslettersPage.config.frontendAssetsFullURL,
-				revisionNumber: newslettersPage.config.revisionNumber,
-				sentryPublicApiKey: newslettersPage.config.sentryPublicApiKey,
-				sentryHost: newslettersPage.config.sentryHost,
-				keywordIds: '',
-				dfpAccountId: newslettersPage.config.dfpAccountId,
-				adUnit: newslettersPage.config.adUnit,
-				ajaxUrl: newslettersPage.config.ajaxUrl,
-				googletagUrl: newslettersPage.config.googletagUrl,
-				switches: newslettersPage.config.switches,
-				abTests: newslettersPage.config.abTests,
-				brazeApiKey: newslettersPage.config.brazeApiKey,
-				googleRecaptchaSiteKey:
-					newslettersPage.config.googleRecaptchaSiteKey,
-			}),
-		),
-	);
+	const guardian = createGuardian({
+		editionId: newslettersPage.editionId,
+		stage: newslettersPage.config.stage,
+		frontendAssetsFullURL: newslettersPage.config.frontendAssetsFullURL,
+		revisionNumber: newslettersPage.config.revisionNumber,
+		sentryPublicApiKey: newslettersPage.config.sentryPublicApiKey,
+		sentryHost: newslettersPage.config.sentryHost,
+		keywordIds: '',
+		dfpAccountId: newslettersPage.config.dfpAccountId,
+		adUnit: newslettersPage.config.adUnit,
+		ajaxUrl: newslettersPage.config.ajaxUrl,
+		googletagUrl: newslettersPage.config.googletagUrl,
+		switches: newslettersPage.config.switches,
+		abTests: newslettersPage.config.abTests,
+		brazeApiKey: newslettersPage.config.brazeApiKey,
+		googleRecaptchaSiteKey: newslettersPage.config.googleRecaptchaSiteKey,
+	});
 
 	return htmlPageTemplate({
 		scriptTags,
@@ -95,7 +84,7 @@ export const renderEditorialNewslettersPage = ({
 		html,
 		title,
 		description: newslettersPage.description,
-		windowGuardian,
+		guardian,
 		keywords: '',
 		offerHttp3,
 		renderingTarget: 'Web',

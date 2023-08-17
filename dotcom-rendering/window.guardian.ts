@@ -1,4 +1,4 @@
-import type { EmotionCache } from '@emotion/react';
+import type { EmotionCache } from '@emotion/cache';
 import type {
 	Callback,
 	CMP,
@@ -9,23 +9,21 @@ import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/d
 import type { OphanRecordFunction } from './src/client/ophan/ophan';
 import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
 import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
-import type { WindowGuardianConfig } from './src/model/window-guardian';
+import type { Guardian } from './src/model/guardian';
 
 declare global {
 	/* ~ Here, declare things that go in the global namespace, or augment
 	 *~ existing declarations in the global namespace
 	 */
 	interface Window {
-		guardian: {
+		guardian: Guardian & {
 			mustardCut: boolean;
-			polyfilled: boolean;
 			onPolyfilled: () => void;
 			queue: Array<() => void>;
 			// Olly N 10/01/2022:
 			// The 'emotionCache' property would better live as a singleton package/chunk, but we're currently limited
 			// by having multiple entrypoints in webpack, meaning we can't guarantee singleton behavior
 			emotionCache?: EmotionCache;
-			config: WindowGuardianConfig;
 			ophan?: {
 				setEventEmitter: () => void; // We don't currently have a custom eventEmitter on DCR - like 'mediator' in Frontend.
 				trackComponentAttention: (
@@ -37,11 +35,6 @@ declare global {
 				viewId: string;
 				pageViewId: string;
 			};
-			modules: {
-				sentry: {
-					reportError: (error: Error, feature: string) => void;
-				};
-			};
 			// TODO expose as type from Automat client lib
 			automat: {
 				react: any;
@@ -51,7 +44,6 @@ declare global {
 			readerRevenue: ReaderRevenueDevUtils;
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
 			dailyArticleCount: DailyArticleHistory | undefined;
-			GAData: GADataType;
 		};
 		GoogleAnalyticsObject: string;
 		ga: UniversalAnalytics.ga | null;

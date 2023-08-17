@@ -399,22 +399,6 @@ interface MessageUs {
 	formFields: import('./src/types/content').MessageUsFieldType[];
 }
 
-interface GADataType {
-	pillar: LegacyPillar;
-	webTitle: string;
-	section: string;
-	contentType: string;
-	commissioningDesks: string;
-	contentId: string;
-	authorIds: string;
-	keywordIds: string;
-	toneIds: string;
-	seriesId: string;
-	isHosted: string;
-	edition: string;
-	beaconUrl: string;
-}
-
 // ----------------- //
 // General DataTypes //
 // ----------------- //

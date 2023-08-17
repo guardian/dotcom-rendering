@@ -88,7 +88,7 @@ export const sendPageView = (): void => {
 	}
 
 	ga(set, 'forceSSL', true);
-	ga(set, 'title', GAData.webTitle);
+	ga(set, 'title', GAData?.webTitle);
 	ga(set, 'anonymizeIp', true);
 	/** *************************************************************************************
 	 * Custom dimensions common to all platforms across the whole Guardian estate          *
@@ -98,22 +98,22 @@ export const sendPageView = (): void => {
 	 * Custom dimensions for 'editorial' platforms (this site, the mobile apps, etc.)      *
 	 * Some of these will be undefined for non-content pages, but that's fine.             *
 	 ************************************************************************************** */
-	ga(set, 'dimension4', GAData.section);
-	ga(set, 'dimension5', GAData.contentType);
-	ga(set, 'dimension6', GAData.commissioningDesks);
-	ga(set, 'dimension7', GAData.contentId);
-	ga(set, 'dimension8', GAData.authorIds);
-	ga(set, 'dimension9', GAData.keywordIds);
-	ga(set, 'dimension10', GAData.toneIds);
-	ga(set, 'dimension11', GAData.seriesId);
+	ga(set, 'dimension4', GAData?.section);
+	ga(set, 'dimension5', GAData?.contentType);
+	ga(set, 'dimension6', GAData?.commissioningDesks);
+	ga(set, 'dimension7', GAData?.contentId);
+	ga(set, 'dimension8', GAData?.authorIds);
+	ga(set, 'dimension9', GAData?.keywordIds);
+	ga(set, 'dimension10', GAData?.toneIds);
+	ga(set, 'dimension11', GAData?.seriesId);
 	ga(set, 'dimension16', (userCookie && 'true') || 'false');
 	ga(set, 'dimension21', getQueryParam('INTCMP', window.location.search)); // internal campaign code
 	ga(set, 'dimension22', getQueryParam('CMP_BUNIT', window.location.search)); // campaign business unit
 	ga(set, 'dimension23', getQueryParam('CMP_TU', window.location.search)); // campaign team
-	ga(set, 'dimension26', GAData.isHosted);
+	ga(set, 'dimension26', GAData?.isHosted);
 	ga(set, 'dimension27', navigator.userAgent); // I bet you a pint
 	ga(set, 'dimension29', window.location.href); // That both of these are already tracked.
-	ga(set, 'dimension30', GAData.edition);
+	ga(set, 'dimension30', GAData?.edition);
 
 	// TODO: sponsor logos
 	// ga(set, 'dimension31', GAData.sponsorLogos);
@@ -122,7 +122,7 @@ export const sendPageView = (): void => {
 	// ga(set, 'dimension42', 'GAData.brandingType');
 
 	ga(set, 'dimension43', 'dotcom-rendering');
-	ga(set, 'dimension50', GAData.pillar);
+	ga(set, 'dimension50', GAData?.pillar);
 
 	if (window.location.hash === '#fbLogin') {
 		ga(set, 'referrer', null);
