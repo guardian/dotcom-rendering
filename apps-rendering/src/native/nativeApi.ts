@@ -3,7 +3,6 @@ import * as Analytics from '@guardian/bridget/Analytics';
 import * as Commercial from '@guardian/bridget/Commercial';
 import * as Environment from '@guardian/bridget/Environment';
 import * as Gallery from '@guardian/bridget/Gallery';
-import * as Metrics from '@guardian/bridget/Metrics';
 import * as Navigation from '@guardian/bridget/Navigation';
 import * as Newsletters from '@guardian/bridget/Newsletters';
 import * as Notifications from '@guardian/bridget/Notifications';
@@ -36,9 +35,6 @@ const videoClient: Video.Client<void> = createAppClient<Video.Client<void>>(
 	'buffered',
 	'compact',
 );
-const metricsClient: Metrics.Client<void> = createAppClient<
-	Metrics.Client<void>
->(Metrics.Client, 'buffered', 'compact');
 
 const analyticsClient: Analytics.Client<void> = createAppClient<
 	Analytics.Client<void>
@@ -60,7 +56,6 @@ export {
 	userClient,
 	galleryClient,
 	videoClient,
-	metricsClient,
 	analyticsClient,
 	navigationClient,
 	newslettersClient,
