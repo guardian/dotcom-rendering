@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, isNonNullable } from '@guardian/libs';
 import { useEffect } from 'react';
 import { decideTrail } from '../lib/decideTrail';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
+import { addDiscussionIds } from '../lib/useCommentCount';
 import type { OnwardsSource } from '../types/onwards';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
@@ -74,6 +75,11 @@ export const FetchOnwardsData = ({
 	}
 
 	if (data?.trails) {
+		addDiscussionIds(
+			data.trails
+				.map((trail) => trail.discussion?.discussionId)
+				.filter(isNonNullable),
+		);
 		return (
 			<div css={[minHeight, revealStyles]} className="onwards">
 				<div className="pending">
