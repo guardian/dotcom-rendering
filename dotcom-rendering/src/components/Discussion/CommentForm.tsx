@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import { neutral, space, text, textSans } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -20,7 +19,7 @@ import { Row } from './Row';
 
 type Props = {
 	shortUrl: string;
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	user: SignedInUser;
 	onAddComment: (response: CommentType) => void;
 	setCommentBeingRepliedTo?: () => void;
@@ -201,7 +200,7 @@ const simulateNewComment = (
 
 export const CommentForm = ({
 	shortUrl,
-	pillar,
+	format,
 	onAddComment,
 	user,
 	setCommentBeingRepliedTo,
@@ -417,7 +416,7 @@ export const CommentForm = ({
 	if (userNameMissing && body) {
 		return (
 			<FirstCommentWelcome
-				pillar={pillar}
+				format={format}
 				body={body}
 				error={error}
 				submitForm={submitUserName}
@@ -499,7 +498,7 @@ export const CommentForm = ({
 					<Row>
 						<>
 							<PillarButton
-								pillar={pillar}
+								format={format}
 								type="submit"
 								linkName="post comment"
 								size="small"
@@ -510,7 +509,7 @@ export const CommentForm = ({
 								<>
 									<Space amount={3} />
 									<PillarButton
-										pillar={pillar}
+										format={format}
 										onClick={fetchShowPreview}
 										priority="secondary"
 										linkName="preview-comment"
@@ -521,7 +520,7 @@ export const CommentForm = ({
 									<Space amount={3} />
 
 									<PillarButton
-										pillar={pillar}
+										format={format}
 										onClick={resetForm}
 										priority="subdued"
 										linkName="cancel-post-comment"

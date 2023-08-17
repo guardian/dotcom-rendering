@@ -2150,6 +2150,48 @@ const textSubNavLink = (format: ArticleFormat) => {
 	}
 };
 
+const discussion = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return news[400];
+		case Pillar.Lifestyle:
+			return lifestyle[400];
+		case Pillar.Sport:
+			return sport[400];
+		case Pillar.Culture:
+			return culture[400];
+		case Pillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+		default:
+			return news[400];
+	}
+};
+
+const backgroundDiscussionPillarButton = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return news[300];
+		case Pillar.Lifestyle:
+			return lifestyle[300];
+		case Pillar.Sport:
+			return sport[300];
+		case Pillar.Culture:
+			return culture[300];
+		case Pillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return lifestyle[300];
+		default:
+			return news[300];
+	}
+};
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -2261,6 +2303,7 @@ export const decidePalette = (
 			designTag: backgroundDesignTag(format),
 			pullQuote: backgroundPullQuote(format),
 			messageForm: backgroundMessageForm(format),
+			discussionPillarButton: backgroundDiscussionPillarButton(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
@@ -2312,5 +2355,6 @@ export const decidePalette = (
 			summaryEventBullet: hoverSummaryEventBullet(format),
 			pagination: hoverPagination(format),
 		},
+		discussionGeneric: discussion(format),
 	};
 };

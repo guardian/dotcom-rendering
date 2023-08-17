@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import { border, space } from '@guardian/source-foundations';
 import type {
 	FilterOptions,
@@ -11,7 +10,7 @@ import { Dropdown } from './Dropdown';
 
 type Props = {
 	filters: FilterOptions;
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	onFilterChange: (newFilterObject: FilterOptions) => void;
 	totalPages: number;
 	commentCount: number;
@@ -48,7 +47,7 @@ const filterPadding = css`
 
 export const Filters = ({
 	filters,
-	pillar,
+	format,
 	onFilterChange,
 	totalPages,
 	commentCount,
@@ -58,7 +57,7 @@ export const Filters = ({
 			<Dropdown
 				id="order-by-dropdown"
 				label="Sort by"
-				pillar={pillar}
+				format={format}
 				options={[
 					{
 						title: 'Newest',
@@ -89,7 +88,7 @@ export const Filters = ({
 			<Dropdown
 				id="page-size-dropdown"
 				label="Per page"
-				pillar={pillar}
+				format={format}
 				options={[
 					{
 						title: '25',
@@ -123,7 +122,7 @@ export const Filters = ({
 			<Dropdown
 				id="threads-dropdown"
 				label="Display threads"
-				pillar={pillar}
+				format={format}
 				options={[
 					{
 						title: 'Collapsed',

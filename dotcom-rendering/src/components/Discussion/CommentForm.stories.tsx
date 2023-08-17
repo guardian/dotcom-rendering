@@ -1,4 +1,4 @@
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentForm } from './CommentForm';
 
@@ -56,7 +56,11 @@ const aComment: CommentType = {
 export const Default = () => (
 	<CommentForm
 		shortUrl={shortUrl}
-		pillar={Pillar.News}
+		format={{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		}}
 		user={aUser}
 		onAddComment={(comment) => {}}
 	/>
@@ -67,7 +71,11 @@ Default.storyName = 'default';
 export const Error = () => (
 	<CommentForm
 		shortUrl={'/p/g8g7v'}
-		pillar={Pillar.News}
+		format={{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		}}
 		user={aUser}
 		onAddComment={(comment) => {}}
 	/>
@@ -77,7 +85,11 @@ Error.storyName = 'form with errors';
 export const Active = () => (
 	<CommentForm
 		shortUrl={shortUrl}
-		pillar={Pillar.Culture}
+		format={{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		}}
 		user={aUser}
 		onAddComment={(comment) => {}}
 		commentBeingRepliedTo={aComment}
@@ -88,7 +100,11 @@ Active.storyName = 'form is active';
 export const Premoderated = () => (
 	<CommentForm
 		shortUrl={shortUrl}
-		pillar={Pillar.Opinion}
+		format={{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Opinion,
+		}}
 		user={{
 			...aUser,
 			profile: {

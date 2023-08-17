@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
+import { decidePalette } from '../../lib/decidePalette';
 import { reportAbuse } from '../../lib/discussionApi';
-import { palette } from '../../lib/discussionPalette';
-import { pillarToString } from '../../lib/pillarToString';
 import type {
 	SignedInWithCookies,
 	SignedInWithOkta,
@@ -32,8 +30,8 @@ const formWrapper = css`
 	${textSans.xxsmall()};
 `;
 
-const labelStyles = (pillar: ArticleTheme) => css`
-	color: ${palette[pillarToString(pillar)][400]};
+const labelStyles = (format: ArticleFormat) => css`
+	color: ${decidePalette(format).discussionGeneric};
 	${textSans.small({ fontWeight: 'bold' })}
 `;
 
@@ -62,14 +60,14 @@ const errorMessageStyles = css`
 type Props = {
 	commentId: number;
 	toggleSetShowForm: () => void;
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
 };
 
 export const AbuseReportForm = ({
 	commentId,
 	toggleSetShowForm,
-	pillar,
+	format,
 	authStatus,
 }: Props) => {
 	const modalRef = useRef<HTMLDivElement>(null);
@@ -184,7 +182,7 @@ export const AbuseReportForm = ({
 			});
 	};
 
-	const labelStylesClass = labelStyles(pillar);
+	const labelStylesClass = labelStyles(format);
 	return (
 		<div aria-modal="true" ref={modalRef}>
 			<form css={formWrapper} onSubmit={onSubmit}>

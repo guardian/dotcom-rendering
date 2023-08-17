@@ -1,4 +1,4 @@
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { Comment } from './Comment';
 
@@ -139,10 +139,16 @@ const staffUser: SignedInUser = {
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
+const format = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
+
 export const Root = () => (
 	<Comment
 		comment={commentData}
-		pillar={Pillar.News}
+		format={format}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -162,7 +168,10 @@ Root.story = {
 export const RootMobile = () => (
 	<Comment
 		comment={commentData}
-		pillar={Pillar.Sport}
+		format={{
+			...format,
+			theme: Pillar.Sport,
+		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
 		isClosedForComments={false}
@@ -182,7 +191,10 @@ RootMobile.story = {
 export const ReplyComment = () => (
 	<Comment
 		comment={replyCommentData}
-		pillar={Pillar.Lifestyle}
+		format={{
+			...format,
+			theme: Pillar.Lifestyle,
+		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
@@ -202,7 +214,10 @@ ReplyComment.story = {
 export const MobileReply = () => (
 	<Comment
 		comment={replyCommentData}
-		pillar={Pillar.Culture}
+		format={{
+			...format,
+			theme: Pillar.Culture,
+		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
 		isClosedForComments={false}
@@ -222,7 +237,10 @@ MobileReply.story = {
 export const LongMobileReply = () => (
 	<Comment
 		comment={longReplyCommentData}
-		pillar={Pillar.Culture}
+		format={{
+			...format,
+			theme: Pillar.Culture,
+		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
 		isClosedForComments={false}
@@ -242,7 +260,10 @@ LongMobileReply.story = {
 export const LongBothMobileReply = () => (
 	<Comment
 		comment={longBothReplyCommentData}
-		pillar={Pillar.Culture}
+		format={{
+			...format,
+			theme: Pillar.Culture,
+		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
 		isClosedForComments={false}
@@ -265,7 +286,7 @@ export const PickedComment = () => (
 			...commentData,
 			isHighlighted: true,
 		}}
-		pillar={Pillar.News}
+		format={format}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -279,7 +300,10 @@ PickedComment.storyName = 'Picked Comment';
 export const StaffUserComment = () => (
 	<Comment
 		comment={commentStaffData}
-		pillar={Pillar.Opinion}
+		format={{
+			...format,
+			theme: Pillar.Opinion,
+		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -293,7 +317,10 @@ StaffUserComment.storyName = 'Staff User Comment';
 export const ContributorUserComment = () => (
 	<Comment
 		comment={commentContributorData}
-		pillar={Pillar.Opinion}
+		format={{
+			...format,
+			theme: Pillar.Opinion,
+		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -310,7 +337,7 @@ export const PickedStaffUserComment = () => (
 			...commentStaffData,
 			isHighlighted: true,
 		}}
-		pillar={Pillar.News}
+		format={format}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -333,7 +360,10 @@ export const PickedStaffUserCommentMobile = () => (
 			...commentStaffData,
 			isHighlighted: true,
 		}}
-		pillar={Pillar.Sport}
+		format={{
+			...format,
+			theme: Pillar.Sport,
+		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -357,7 +387,7 @@ export const ContributorUserCommentDesktop = () => (
 			...commentContributorData,
 			isHighlighted: true,
 		}}
-		pillar={Pillar.News}
+		format={format}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -381,7 +411,10 @@ export const ContributorUserCommentMobile = () => (
 			...commentContributorData,
 			isHighlighted: true,
 		}}
-		pillar={Pillar.Sport}
+		format={{
+			...format,
+			theme: Pillar.Sport,
+		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -402,7 +435,10 @@ ContributorUserCommentMobile.story = {
 export const LoggedInAsModerator = () => (
 	<Comment
 		comment={commentData}
-		pillar={Pillar.Lifestyle}
+		format={{
+			...format,
+			theme: Pillar.Lifestyle,
+		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		user={staffUser}
@@ -417,7 +453,10 @@ LoggedInAsModerator.storyName = 'Logged in as moderator';
 export const LoggedInAsUser = () => (
 	<Comment
 		comment={commentData}
-		pillar={Pillar.Lifestyle}
+		format={{
+			...format,
+			theme: Pillar.Lifestyle,
+		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		user={user}
@@ -432,7 +471,10 @@ LoggedInAsUser.storyName = 'Logged in as normal user';
 export const BlockedComment = () => (
 	<Comment
 		comment={blockedCommentData}
-		pillar={Pillar.Culture}
+		format={{
+			...format,
+			theme: Pillar.Culture,
+		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -446,7 +488,10 @@ BlockedComment.storyName = 'Blocked comment';
 export const MutedComment = () => (
 	<Comment
 		comment={blockedCommentData}
-		pillar={Pillar.Sport}
+		format={{
+			...format,
+			theme: Pillar.Sport,
+		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -460,7 +505,7 @@ MutedComment.storyName = 'Muted comment';
 export const ClosedForComments = () => (
 	<Comment
 		comment={commentData}
-		pillar={Pillar.News}
+		format={format}
 		isClosedForComments={true}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}

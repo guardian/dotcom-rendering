@@ -1,10 +1,16 @@
 import { css } from '@emotion/react';
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { SignedInWithCookies } from '../../lib/useAuthStatus';
 import type { CommentType } from '../../types/discussion';
 import { TopPick } from './TopPick';
 
 export default { component: TopPick, title: 'Discussion/TopPick' };
+
+const format = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
 
 const comment: CommentType = {
 	id: 25488498,
@@ -81,7 +87,7 @@ export const LongPick = () => (
 		`}
 	>
 		<TopPick
-			pillar={Pillar.News}
+			format={format}
 			comment={comment}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
@@ -98,7 +104,10 @@ export const ShortPick = () => (
 		`}
 	>
 		<TopPick
-			pillar={Pillar.Opinion}
+			format={{
+				...format,
+				theme: Pillar.Opinion,
+			}}
 			comment={commentWithShortBody}
 			authStatus={signedInStatus}
 			userMadeComment={false}
@@ -116,7 +125,7 @@ export const LongPickContributor = () => (
 		`}
 	>
 		<TopPick
-			pillar={Pillar.News}
+			format={format}
 			comment={commentContributor}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
@@ -133,7 +142,10 @@ export const ShortPickContributor = () => (
 		`}
 	>
 		<TopPick
-			pillar={Pillar.Opinion}
+			format={{
+				...format,
+				theme: Pillar.Opinion,
+			}}
 			comment={contributorCommentWithShortBody}
 			authStatus={signedInStatus}
 			userMadeComment={false}
