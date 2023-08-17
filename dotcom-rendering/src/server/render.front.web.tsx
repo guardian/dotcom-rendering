@@ -7,13 +7,12 @@ import { FrontPage } from '../components/FrontPage';
 import { TagFrontPage } from '../components/TagFrontPage';
 import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { polyfillIO } from '../lib/polyfill.io';
 import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';
 import { extractNAV } from '../model/extract-nav';
-import { makeWindowGuardian } from '../model/window-guardian';
+import { createGuardian } from '../model/guardian';
 import type { DCRFrontType } from '../types/front';
 import type { DCRTagFrontType } from '../types/tagFront';
 import { htmlPageTemplate } from './htmlPageTemplate';
@@ -110,34 +109,26 @@ export const renderFront = ({ front }: Props): string => {
 			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	/**
-	 * We escape windowGuardian here to prevent errors when the data
-	 * is placed in a script tag on the page
-	 */
-	const windowGuardian = escapeData(
-		JSON.stringify(
-			makeWindowGuardian({
-				editionId: front.editionId,
-				stage: front.config.stage,
-				frontendAssetsFullURL: front.config.frontendAssetsFullURL,
-				revisionNumber: front.config.revisionNumber,
-				sentryPublicApiKey: front.config.sentryPublicApiKey,
-				sentryHost: front.config.sentryHost,
-				keywordIds: front.config.keywordIds,
-				dfpAccountId: front.config.dfpAccountId,
-				adUnit: front.config.adUnit,
-				ajaxUrl: front.config.ajaxUrl,
-				googletagUrl: front.config.googletagUrl,
-				switches: front.config.switches,
-				abTests: front.config.abTests,
-				brazeApiKey: front.config.brazeApiKey,
-				googleRecaptchaSiteKey: front.config.googleRecaptchaSiteKey,
-				// Until we understand exactly what config we need to make available client-side,
-				// add everything we haven't explicitly typed as unknown config
-				unknownConfig: front.config,
-			}),
-		),
-	);
+	const guardian = createGuardian({
+		editionId: front.editionId,
+		stage: front.config.stage,
+		frontendAssetsFullURL: front.config.frontendAssetsFullURL,
+		revisionNumber: front.config.revisionNumber,
+		sentryPublicApiKey: front.config.sentryPublicApiKey,
+		sentryHost: front.config.sentryHost,
+		keywordIds: front.config.keywordIds,
+		dfpAccountId: front.config.dfpAccountId,
+		adUnit: front.config.adUnit,
+		ajaxUrl: front.config.ajaxUrl,
+		googletagUrl: front.config.googletagUrl,
+		switches: front.config.switches,
+		abTests: front.config.abTests,
+		brazeApiKey: front.config.brazeApiKey,
+		googleRecaptchaSiteKey: front.config.googleRecaptchaSiteKey,
+		// Until we understand exactly what config we need to make available client-side,
+		// add everything we haven't explicitly typed as unknown config
+		unknownConfig: front.config,
+	});
 
 	const keywords = front.config.keywords;
 
@@ -147,7 +138,7 @@ export const renderFront = ({ front }: Props): string => {
 		html,
 		title,
 		description: front.pressedPage.seoData.description,
-		windowGuardian,
+		guardian,
 		keywords,
 		offerHttp3,
 		renderingTarget: 'Web',
@@ -200,34 +191,26 @@ export const renderTagFront = ({
 			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	/**
-	 * We escape windowGuardian here to prevent errors when the data
-	 * is placed in a script tag on the page
-	 */
-	const windowGuardian = escapeData(
-		JSON.stringify(
-			makeWindowGuardian({
-				editionId: tagFront.editionId,
-				stage: tagFront.config.stage,
-				frontendAssetsFullURL: tagFront.config.frontendAssetsFullURL,
-				revisionNumber: tagFront.config.revisionNumber,
-				sentryPublicApiKey: tagFront.config.sentryPublicApiKey,
-				sentryHost: tagFront.config.sentryHost,
-				keywordIds: tagFront.config.keywordIds,
-				dfpAccountId: tagFront.config.dfpAccountId,
-				adUnit: tagFront.config.adUnit,
-				ajaxUrl: tagFront.config.ajaxUrl,
-				googletagUrl: tagFront.config.googletagUrl,
-				switches: tagFront.config.switches,
-				abTests: tagFront.config.abTests,
-				brazeApiKey: tagFront.config.brazeApiKey,
-				googleRecaptchaSiteKey: tagFront.config.googleRecaptchaSiteKey,
-				// Until we understand exactly what config we need to make available client-side,
-				// add everything we haven't explicitly typed as unknown config
-				unknownConfig: tagFront.config,
-			}),
-		),
-	);
+	const guardian = createGuardian({
+		editionId: tagFront.editionId,
+		stage: tagFront.config.stage,
+		frontendAssetsFullURL: tagFront.config.frontendAssetsFullURL,
+		revisionNumber: tagFront.config.revisionNumber,
+		sentryPublicApiKey: tagFront.config.sentryPublicApiKey,
+		sentryHost: tagFront.config.sentryHost,
+		keywordIds: tagFront.config.keywordIds,
+		dfpAccountId: tagFront.config.dfpAccountId,
+		adUnit: tagFront.config.adUnit,
+		ajaxUrl: tagFront.config.ajaxUrl,
+		googletagUrl: tagFront.config.googletagUrl,
+		switches: tagFront.config.switches,
+		abTests: tagFront.config.abTests,
+		brazeApiKey: tagFront.config.brazeApiKey,
+		googleRecaptchaSiteKey: tagFront.config.googleRecaptchaSiteKey,
+		// Until we understand exactly what config we need to make available client-side,
+		// add everything we haven't explicitly typed as unknown config
+		unknownConfig: tagFront.config,
+	});
 
 	const keywords = tagFront.config.keywords;
 
@@ -237,7 +220,7 @@ export const renderTagFront = ({
 		html,
 		title,
 		description: tagFront.header.description,
-		windowGuardian,
+		guardian,
 		keywords,
 		offerHttp3,
 		renderingTarget: 'Web',

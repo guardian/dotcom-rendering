@@ -1,47 +1,66 @@
 import type { EditionId } from '../lib/edition';
 import type { ConfigType, ServerSideTests, Switches } from '../types/config';
+import type { GADataType } from './extract-ga';
 
-export interface WindowGuardianConfig {
-	isDotcomRendering: boolean;
-	isDev: boolean;
-	stage: StageType;
-	frontendAssetsFullURL: string;
-	page: {
-		dcrCouldRender: boolean;
-		contentType: string;
-		edition: EditionId;
-		revisionNumber: string;
-		dcrSentryDsn: string;
-		sentryHost: string;
-		sentryPublicApiKey: string;
-		keywordIds: string;
-		dfpAccountId: string;
-		adUnit: string;
-		showRelatedContent: boolean;
-		ajaxUrl: string;
-		shouldHideReaderRevenue: boolean;
-		googleRecaptchaSiteKey?: string;
-		brazeApiKey?: string;
-		isPaidContent?: boolean;
-		isDev?: boolean;
-		hasInlineMerchandise?: boolean;
+export interface Guardian {
+	polyfilled: boolean;
+	/**
+	 * The 'config' attribute is derived from CAPIArticle and contains
+	 * all the data that, for legacy reasons, for instance compatibility
+	 * with the frontend commercial stack, or other scripts, we want to find
+	 * at window.guardian.config
+	 */
+	config: {
+		isDotcomRendering: boolean;
+		isDev: boolean;
+		stage: StageType;
+		frontendAssetsFullURL: string;
+		page: {
+			dcrCouldRender: boolean;
+			contentType: string;
+			edition: EditionId;
+			revisionNumber: string;
+			dcrSentryDsn: string;
+			sentryHost: string;
+			sentryPublicApiKey: string;
+			keywordIds: string;
+			dfpAccountId: string;
+			adUnit: string;
+			showRelatedContent: boolean;
+			ajaxUrl: string;
+			shouldHideReaderRevenue: boolean;
+			googleRecaptchaSiteKey?: string;
+			brazeApiKey?: string;
+			isPaidContent?: boolean;
+			isDev?: boolean;
+			hasInlineMerchandise?: boolean;
+		};
+		libs: {
+			googletag: string;
+		};
+		switches: Switches;
+		tests: ServerSideTests;
+		ophan: {
+			pageViewId: string;
+			browserId: string;
+		};
 	};
-	libs: {
-		googletag: string;
+	modules: {
+		sentry: {
+			reportError: (error: Error, feature: string) => void;
+		};
 	};
-	switches: Switches;
-	tests: ServerSideTests;
-	ophan: {
-		pageViewId: string;
-		browserId: string;
-	};
+	GAData?: GADataType;
+	adBlockers: unknown;
 }
 
 /**
- * This function constructs the data object that gets written to the global
- * window.guardian property
+ * This function constructs the `Guardian` data object
+ *
+ * In `htmlPageTemplate.ts`, it is written to
+ * the global `window.guardian` property
  */
-export const makeWindowGuardian = ({
+export const createGuardian = ({
 	stage,
 	frontendAssetsFullURL,
 	revisionNumber,
@@ -94,21 +113,7 @@ export const makeWindowGuardian = ({
 	 * commercial code failing because it depended on a property we removed
 	 */
 	unknownConfig?: ConfigType | object;
-}): {
-	// The 'config' attribute is derived from CAPIArticle and contains
-	// all the data that, for legacy reasons, for instance compatibility
-	// with the frontend commercial stack, or other scripts, we want to find
-	// at window.guardian.config
-	config: WindowGuardianConfig;
-	polyfilled: boolean;
-	adBlockers: any;
-	modules: {
-		sentry: {
-			reportError: (error: Error, feature: string) => void;
-		};
-	};
-	GAData?: GADataType;
-} => {
+}): Guardian => {
 	return {
 		config: {
 			// This indicates to the client side code that we are running a dotcom-rendering rendered page.
