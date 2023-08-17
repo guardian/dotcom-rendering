@@ -17,7 +17,7 @@ import {
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration } from 'aws-cdk-lib';
-import { CfnScalingPolicy, HealthCheck, AdjustmentType } from 'aws-cdk-lib/aws-autoscaling';
+import { AdjustmentType, CfnScalingPolicy, HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
