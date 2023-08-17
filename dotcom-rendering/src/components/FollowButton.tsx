@@ -40,6 +40,7 @@ const buttonStyles = (format: ArticleFormat) => css`
 	margin-left: 0;
 	min-height: ${remSpace[6]};
 	padding: 0;
+	text-align: left;
 
 	svg {
 		fill: currentColor;
