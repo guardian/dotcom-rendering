@@ -13,133 +13,199 @@
 
 import type { FEArticleType } from '../../../src/types/frontend';
 
-export const Letter: FEArticleType = {
+export const Picture: FEArticleType = {
 	slotMachineFlags: '',
-	main: '<figure class="element element-image" data-media-id="0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0"> <img src="https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg" alt="Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975." width="1000" height="797" class="gu-image" /> <figcaption> <span class="element-image__caption">Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.</span> <span class="element-image__credit">Photograph: taken from picture library</span> </figcaption> </figure>',
+	main: '<figure class="element element-image" data-media-id="332083af16a1d51a7d6d70e0ad266f19ab57fd96"> <img src="https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/1000.jpg" alt="Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with \'Sleaze\' paint" width="1000" height="600" class="gu-image" /> </figure>',
 	subMetaSectionLinks: [
 		{
-			url: '/world/gender',
-			title: 'Gender',
+			url: '/politics/boris-johnson',
+			title: 'Boris Johnson',
+		},
+		{
+			url: '/commentisfree/series/guardian-comment-cartoon',
+			title: 'Guardian Opinion cartoon',
 		},
 	],
 	commercialProperties: {
 		US: {
 			adTargeting: [
 				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'ct',
+					value: 'picture',
+				},
+				{
 					name: 'edition',
 					value: 'us',
 				},
 				{
-					name: 'ct',
-					value: 'article',
+					name: 'url',
+					value: '/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 				},
 				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/h7t8f',
 				},
 				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
 					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
+					value: [
+						'dominic-cummings',
+						'politics',
+						'conservatives',
+						'uk/uk',
+						'boris-johnson',
+					],
 				},
 				{
 					name: 'tn',
-					value: ['letters'],
+					value: ['comment', 'cartoons'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-comment-cartoon'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'co',
+					value: ['nicola-jennings'],
 				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'ct',
+					value: 'picture',
+				},
+				{
 					name: 'edition',
 					value: 'au',
 				},
 				{
-					name: 'ct',
-					value: 'article',
+					name: 'url',
+					value: '/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 				},
 				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/h7t8f',
 				},
 				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
 					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
+					value: [
+						'dominic-cummings',
+						'politics',
+						'conservatives',
+						'uk/uk',
+						'boris-johnson',
+					],
 				},
 				{
 					name: 'tn',
-					value: ['letters'],
+					value: ['comment', 'cartoons'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-comment-cartoon'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'co',
+					value: ['nicola-jennings'],
 				},
 			],
 		},
 		UK: {
 			adTargeting: [
 				{
-					name: 'edition',
-					value: 'uk',
+					name: 'su',
+					value: ['0'],
 				},
 				{
 					name: 'ct',
-					value: 'article',
+					value: 'picture',
 				},
 				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/h7t8f',
 				},
 				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'su',
-					value: ['0'],
+					name: 'url',
+					value: '/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
+				},
+				{
+					name: 'edition',
+					value: 'uk',
 				},
 				{
 					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
+					value: [
+						'dominic-cummings',
+						'politics',
+						'conservatives',
+						'uk/uk',
+						'boris-johnson',
+					],
 				},
 				{
 					name: 'tn',
-					value: ['letters'],
+					value: ['comment', 'cartoons'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-comment-cartoon'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'co',
+					value: ['nicola-jennings'],
 				},
 			],
 		},
 		INT: {
 			adTargeting: [
 				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
 					name: 'ct',
-					value: 'article',
+					value: 'picture',
 				},
 				{
 					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+					value: '/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/h7t8f',
 				},
 				{
 					name: 'edition',
@@ -150,32 +216,50 @@ export const Letter: FEArticleType = {
 					value: 'ng',
 				},
 				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
 					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
+					value: [
+						'dominic-cummings',
+						'politics',
+						'conservatives',
+						'uk/uk',
+						'boris-johnson',
+					],
 				},
 				{
 					name: 'tn',
-					value: ['letters'],
+					value: ['comment', 'cartoons'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-comment-cartoon'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'co',
+					value: ['nicola-jennings'],
 				},
 			],
 		},
 		EUR: {
 			adTargeting: [
 				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
 					name: 'ct',
-					value: 'article',
+					value: 'picture',
 				},
 				{
 					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+					value: '/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/h7t8f',
 				},
 				{
 					name: 'edition',
@@ -186,20 +270,30 @@ export const Letter: FEArticleType = {
 					value: 'ng',
 				},
 				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
 					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
+					value: [
+						'dominic-cummings',
+						'politics',
+						'conservatives',
+						'uk/uk',
+						'boris-johnson',
+					],
 				},
 				{
 					name: 'tn',
-					value: ['letters'],
+					value: ['comment', 'cartoons'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-comment-cartoon'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'co',
+					value: ['nicola-jennings'],
 				},
 			],
 		},
@@ -207,29 +301,25 @@ export const Letter: FEArticleType = {
 	beaconURL: '//phar.gu-web.net',
 	hasRelated: true,
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Mon 5 Apr 2021 18.36 BST',
+		'Last modified on Sun 25 Apr 2021 21.28 BST',
 	editionLongForm: 'UK edition',
 	publication: 'The Guardian',
 	trailText:
-		'Letters: <strong>Rosemary Johnson</strong> and <strong>Margaret Davis</strong> reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while <strong>Brian Saperia</strong> looks back to 1939',
+		'Former adviser Dominic Cummings has alleged that Boris Johnson hatched a ‘possibly illegal’ plan for donors to pay to renovate his flat',
 	subMetaKeywordLinks: [
 		{
-			url: '/lifeandstyle/women',
-			title: 'Women',
+			url: '/politics/conservatives',
+			title: 'Conservatives',
 		},
 		{
-			url: '/lifeandstyle/family',
-			title: 'Family',
-		},
-		{
-			url: '/tone/letters',
-			title: 'letters',
+			url: '/politics/dominic-cummings',
+			title: 'Dominic Cummings',
 		},
 	],
-	contentType: 'Article',
+	contentType: 'ImageContent',
 	isRightToLeftLang: false,
 	nav: {
-		currentUrl: '/lifeandstyle/family',
+		currentUrl: '/commentisfree',
 		pillars: [
 			{
 				title: 'News',
@@ -934,81 +1024,29 @@ export const Letter: FEArticleType = {
 				url: 'https://licensing.theguardian.com/',
 			},
 		],
-		currentNavLinkTitle: 'Family',
-		currentPillarTitle: 'Lifestyle',
+		currentNavLinkTitle: 'Opinion',
+		currentPillarTitle: 'Opinion',
 		subNavSections: {
 			links: [
 				{
-					title: 'Fashion',
-					url: '/fashion',
+					title: 'The Guardian view',
+					url: '/profile/editorial',
 				},
 				{
-					title: 'Food',
-					url: '/food',
+					title: 'Columnists',
+					url: '/index/contributors',
 				},
 				{
-					title: 'Recipes',
-					url: '/tone/recipes',
+					title: 'Cartoons',
+					url: '/cartoons/archive',
 				},
 				{
-					title: 'Love & sex',
-					url: '/lifeandstyle/love-and-sex',
+					title: 'Opinion videos',
+					url: '/type/video+tone/comment',
 				},
 				{
-					title: 'Home & garden',
-					url: '/lifeandstyle/home-and-garden',
-				},
-				{
-					title: 'Health & fitness',
-					url: '/lifeandstyle/health-and-wellbeing',
-				},
-				{
-					title: 'Family',
-					url: '/lifeandstyle/family',
-				},
-				{
-					title: 'Travel',
-					url: '/travel',
-					children: [
-						{
-							title: 'US',
-							url: '/travel/usa',
-						},
-						{
-							title: 'Europe',
-							url: '/travel/europe',
-						},
-						{
-							title: 'UK',
-							url: '/travel/uk',
-						},
-					],
-				},
-				{
-					title: 'Money',
-					url: '/money',
-					children: [
-						{
-							title: 'Property',
-							url: '/money/property',
-						},
-						{
-							title: 'Pensions',
-							url: '/money/pensions',
-						},
-						{
-							title: 'Savings',
-							url: '/money/savings',
-						},
-						{
-							title: 'Borrowing',
-							url: '/money/debt',
-						},
-						{
-							title: 'Careers',
-							url: '/money/work-and-careers',
-						},
-					],
+					title: 'Letters',
+					url: '/tone/letters',
 				},
 			],
 		},
@@ -1066,69 +1104,94 @@ export const Letter: FEArticleType = {
 		},
 	},
 	author: {
-		byline: 'Letters',
+		byline: 'Nicola Jennings',
 	},
 	designType: 'Comment',
 	editionId: 'UK',
 	format: {
-		design: 'LetterDesign',
+		design: 'CommentDesign',
 		theme: 'OpinionPillar',
 		display: 'StandardDisplay',
 	},
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
-		'article:author': 'Letters',
+			'http://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=dcd621765221570f91e3ac722f3a4b02',
+			'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjEucG5n&enable=upscale&s=913a7e653703880750cbc27a96064ed9',
 		'al:ios:url':
-			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:title': 'Why is a woman’s work never done? | Letters',
+			'gnmguardian://commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon?contenttype=Article&source=applinks',
+		'og:title': 'Nicola Jennings on the No 10 sleaze scandal – cartoon',
 		'fb:app_id': '180444840287',
-		'article:modified_time': '2021-04-05T17:36:25.000Z',
 		'og:image:height': '720',
 		'og:description':
-			'Letters: Rosemary Johnson and Margaret Davis reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while Brian Saperia looks back to 1939',
-		'og:type': 'article',
+			'Former adviser Dominic Cummings has alleged that Boris Johnson hatched a ‘possibly illegal’ plan for donors to pay to renovate his flat',
+		'og:type': 'website',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'World news',
-		'article:published_time': '2021-04-05T16:04:21.000Z',
-		'article:tag': 'Gender,Women,Family',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
 	},
-	standfirst:
-		'<p><strong>Rosemary Johnson</strong> and <strong>Margaret Davis</strong> reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while <strong>Brian Saperia</strong> looks back to 1939</p>',
-	sectionUrl: 'world/gender',
-	pageId: 'world/2021/apr/05/why-is-a-womans-work-never-done',
+	standfirst: '',
+	sectionUrl: 'politics/boris-johnson',
+	pageId: 'commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 	version: 3,
 	tags: [
 		{
-			id: 'world/gender',
-			type: 'Keyword',
-			title: 'Gender',
+			id: 'commentisfree/series/guardian-comment-cartoon',
+			type: 'Series',
+			title: 'Guardian Opinion cartoon',
 		},
 		{
-			id: 'lifeandstyle/women',
+			id: 'politics/boris-johnson',
 			type: 'Keyword',
-			title: 'Women',
+			title: 'Boris Johnson',
 		},
 		{
-			id: 'lifeandstyle/family',
+			id: 'politics/conservatives',
 			type: 'Keyword',
-			title: 'Family',
+			title: 'Conservatives',
 		},
 		{
-			id: 'type/article',
+			id: 'politics/politics',
+			type: 'Keyword',
+			title: 'Politics',
+		},
+		{
+			id: 'uk/uk',
+			type: 'Keyword',
+			title: 'UK news',
+		},
+		{
+			id: 'politics/dominic-cummings',
+			type: 'Keyword',
+			title: 'Dominic Cummings',
+		},
+		{
+			id: 'commentisfree/commentisfree',
+			type: 'Blog',
+			title: 'Opinion',
+		},
+		{
+			id: 'type/picture',
 			type: 'Type',
-			title: 'Article',
+			title: 'Picture',
 		},
 		{
-			id: 'tone/letters',
+			id: 'tone/comment',
 			type: 'Tone',
-			title: 'Letters',
+			title: 'Comment',
+		},
+		{
+			id: 'tone/cartoons',
+			type: 'Tone',
+			title: 'Cartoons',
+		},
+		{
+			id: 'profile/nicola-jennings',
+			type: 'Contributor',
+			title: 'Nicola Jennings',
+			bylineImageUrl:
+				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2008/11/17/nicola_jennings_140x140.jpg?width=300&quality=85&auto=format&fit=max&s=e19486772fea93fda81c6fc66c22766c',
 		},
 		{
 			id: 'publication/theguardian',
@@ -1141,21 +1204,21 @@ export const Letter: FEArticleType = {
 			title: 'Journal',
 		},
 		{
-			id: 'theguardian/journal/letters',
+			id: 'theguardian/journal/opinion',
 			type: 'NewspaperBookSection',
-			title: 'Letters',
+			title: 'Opinion',
 		},
 		{
-			id: 'tracking/commissioningdesk/uk-letters-and-leader-writers',
+			id: 'tracking/commissioningdesk/uk-opinion',
 			type: 'Tracking',
-			title: 'UK Letters and Leader Writers',
+			title: 'UK Opinion',
 		},
 	],
-	pillar: 'news',
-	webURL: 'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
-	showBottomSocialButtons: true,
+	pillar: 'opinion',
+	webURL: 'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
+	showBottomSocialButtons: false,
 	isImmersive: false,
-	sectionLabel: 'Gender',
+	sectionLabel: 'Boris Johnson',
 	shouldHideReaderRevenue: false,
 	isAdFreeUser: false,
 	pageFooter: {
@@ -1315,17 +1378,17 @@ export const Letter: FEArticleType = {
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+			'guardian://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 		'twitter:app:url:iphone':
-			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=twitter',
+			'gnmguardian://commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=c2fa1bf478107e8638d4ec680e498e54',
+			'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjEucG5n&s=5d771fdc4d57a164549e054a69b60645',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=twitter',
+			'gnmguardian://commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon?contenttype=Article&source=twitter',
 	},
-	sectionName: 'world',
-	webPublicationDateDeprecated: '2021-04-05T16:04:21.000Z',
+	sectionName: 'commentisfree',
+	webPublicationDateDeprecated: '2021-04-25T19:00:14.000Z',
 	pageType: {
 		hasShowcaseMainElement: false,
 		isFront: false,
@@ -1339,11 +1402,11 @@ export const Letter: FEArticleType = {
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	showTableOfContents: false,
 	lang: 'en',
-	byline: 'Letters',
-	headline: 'Why is a woman’s work never done?',
+	byline: 'Nicola Jennings',
+	headline: 'Nicola Jennings on the No 10 sleaze scandal – cartoon',
 	guardianBaseURL: 'https://www.theguardian.com',
 	isLegacyInteractive: false,
-	webPublicationDate: '2021-04-05T16:04:21.000Z',
+	webPublicationDate: '2021-04-25T19:00:14.000Z',
 	mainMediaElements: [
 		{
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1352,61 +1415,69 @@ export const Letter: FEArticleType = {
 					{
 						index: 0,
 						fields: {
-							height: '797',
-							width: '1000',
+							height: '1200',
+							width: '2000',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg',
+						url: 'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/2000.jpg',
 					},
 					{
 						index: 1,
 						fields: {
-							height: '398',
-							width: '500',
+							height: '600',
+							width: '1000',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/500.jpg',
+						url: 'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/1000.jpg',
 					},
 					{
 						index: 2,
 						fields: {
-							height: '112',
-							width: '140',
+							height: '300',
+							width: '500',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/140.jpg',
+						url: 'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/500.jpg',
 					},
 					{
 						index: 3,
 						fields: {
-							height: '1569',
-							width: '1969',
+							height: '84',
+							width: '140',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1969.jpg',
+						url: 'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/140.jpg',
 					},
 					{
 						index: 4,
 						fields: {
-							isMaster: 'true',
-							height: '1569',
-							width: '1969',
+							height: '1819',
+							width: '3031',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
+						url: 'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/3031.jpg',
+					},
+					{
+						index: 5,
+						fields: {
+							isMaster: 'true',
+							height: '1819',
+							width: '3031',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url: 'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg',
 					},
 				],
 			},
 			data: {
-				alt: 'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975.',
-				caption:
-					'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
-				credit: 'Photograph: taken from picture library',
+				alt: "Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with 'Sleaze' paint",
+				credit: 'Illustration: Nicola Jennings/The Guardian',
 			},
 			displayCredit: true,
 			role: 'inline',
@@ -1415,43 +1486,43 @@ export const Letter: FEArticleType = {
 					weighting: 'inline',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=85&auto=format&fit=max&s=1f3d2604f5f42157c0f835704df3df5b',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=620&quality=85&auto=format&fit=max&s=de4ab7f335b214b41958660f24102947',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=57358d92e519b7c9465d844b8a5e78a7',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=67a18ab9c935ff7b2c258a86d7163516',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=85&auto=format&fit=max&s=305c14aa09350922fa5a797582a8aac3',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=700&quality=85&auto=format&fit=max&s=f3d37101eb3ef369d6241a1e22fdbbff',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b6f129625fdc59832270453bcf3ce20a',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=87e0d8e2af50beacd8cffabc8634743b',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=85&auto=format&fit=max&s=1f3d2604f5f42157c0f835704df3df5b',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=620&quality=85&auto=format&fit=max&s=de4ab7f335b214b41958660f24102947',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=57358d92e519b7c9465d844b8a5e78a7',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=67a18ab9c935ff7b2c258a86d7163516',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=85&auto=format&fit=max&s=12645523c60c498f296c1b0f94696459',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=645&quality=85&auto=format&fit=max&s=1e5407c8300330d13f57a95e7fb6d9e5',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ab91a38b049c3661442d65bce068f763',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1795cf0ecc5bee2976595f9e590b4003',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=85&auto=format&fit=max&s=96f5ed2e131330bc05e6ba8430582f4a',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=465&quality=85&auto=format&fit=max&s=79f32853e93e97ad19d84f5ddbf73acc',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d2027d3d7649734adac3b725ba7028ba',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=4f652af5613e682cafb030f0e1a6cfa7',
 							width: 930,
 						},
 					],
@@ -1468,59 +1539,59 @@ export const Letter: FEArticleType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1020&quality=85&auto=format&fit=max&s=01977e915850756ef009921e35451689',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1020&quality=85&auto=format&fit=max&s=53199ceabf66c171adecd2df29f66244',
 							width: 1020,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=7db29d90d0358e8a4aa7011da6547d92',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=9ffef119b9f6f8ade999b5005ef2cfe7',
 							width: 2040,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=940&quality=85&auto=format&fit=max&s=c54597c69361d189cbea06a6b5bc5e06',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=940&quality=85&auto=format&fit=max&s=0d6d277295fc7c5a4c10d5867604a43f',
 							width: 940,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=4b92d2d3876eacf153fc898762e34892',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=4e818dc15500d650274bff5bdb029576',
 							width: 1880,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=85&auto=format&fit=max&s=305c14aa09350922fa5a797582a8aac3',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=700&quality=85&auto=format&fit=max&s=f3d37101eb3ef369d6241a1e22fdbbff',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b6f129625fdc59832270453bcf3ce20a',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=87e0d8e2af50beacd8cffabc8634743b',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=85&auto=format&fit=max&s=305c14aa09350922fa5a797582a8aac3',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=700&quality=85&auto=format&fit=max&s=f3d37101eb3ef369d6241a1e22fdbbff',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b6f129625fdc59832270453bcf3ce20a',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=87e0d8e2af50beacd8cffabc8634743b',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=85&auto=format&fit=max&s=0e27793c5d46a0d77625b8f714dada4f',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=660&quality=85&auto=format&fit=max&s=ca12d060368ddcbe60312705bdc18967',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=bdd2ed73acbd2b05e31c5a46086bf6ac',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=f582b1faa558acec60d8e4f6e504910f',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=85&auto=format&fit=max&s=12645523c60c498f296c1b0f94696459',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=645&quality=85&auto=format&fit=max&s=1e5407c8300330d13f57a95e7fb6d9e5',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ab91a38b049c3661442d65bce068f763',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1795cf0ecc5bee2976595f9e590b4003',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=85&auto=format&fit=max&s=96f5ed2e131330bc05e6ba8430582f4a',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=465&quality=85&auto=format&fit=max&s=79f32853e93e97ad19d84f5ddbf73acc',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d2027d3d7649734adac3b725ba7028ba',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=4f652af5613e682cafb030f0e1a6cfa7',
 							width: 930,
 						},
 					],
@@ -1533,111 +1604,75 @@ export const Letter: FEArticleType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1900&quality=85&auto=format&fit=max&s=0ad52cfdedaaf5a649e6324d432b0f2d',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1900&quality=85&auto=format&fit=max&s=66b9180aefacd81730893a42dce79f38',
 							width: 1900,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=e50085b73f9261aedbf0ba67be9c826b',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=3e2bbce1169d90e01a76d30614cc0f47',
 							width: 3800,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1300&quality=85&auto=format&fit=max&s=ae5e780efa6b0cb123859e6ac313bdfe',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1300&quality=85&auto=format&fit=max&s=958ad80d34360cbf231b572b1be4bdf2',
 							width: 1300,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=f87640448b719826caeb1bc3309f4d3b',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=b51d7cab08ac8e167b132352711bd5c5',
 							width: 2600,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1140&quality=85&auto=format&fit=max&s=b8f9a9f85ddb9a2104e438c9a3a573dd',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1140&quality=85&auto=format&fit=max&s=155665f78795ac0165320230331a79d7',
 							width: 1140,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=ced4a9dd31c246dc579f0ad358b8dee8',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=4fcb431692c3678cac5212590cd323ab',
 							width: 2280,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=980&quality=85&auto=format&fit=max&s=5608ba705f3850cbdf3cbceca3475c09',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=980&quality=85&auto=format&fit=max&s=e904d8a07dd10d0054581d9d3ccd8fb3',
 							width: 980,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=cc6a1333940c4d5d4ef070a8c867a952',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=0400fcbd3369eb4482da4fdb5a005bcd',
 							width: 1960,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=740&quality=85&auto=format&fit=max&s=339af6dd6e8afc4fc573b96249f93359',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=740&quality=85&auto=format&fit=max&s=c4f285d16e8afd8c2f60d0e16ba29a46',
 							width: 740,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=f9a4031e030b7496600385ee34a27e04',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=c866f53795943d16661e7e10cc279607',
 							width: 1480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=85&auto=format&fit=max&s=0e27793c5d46a0d77625b8f714dada4f',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=660&quality=85&auto=format&fit=max&s=ca12d060368ddcbe60312705bdc18967',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=bdd2ed73acbd2b05e31c5a46086bf6ac',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=f582b1faa558acec60d8e4f6e504910f',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=480&quality=85&auto=format&fit=max&s=364368597aa50d6b5f88c14fb97f173c',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=480&quality=85&auto=format&fit=max&s=49a868f9a7622c2f4911cd1db0ee176d',
 							width: 480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=b589361f9c52d87c1ee27781b4fee3d2',
+							src: 'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=c0bc7f4b6bb736c1aa9140e09d1b0ef6',
 							width: 960,
 						},
 					],
 				},
 			],
-			elementId: '8484a91e-574c-4b36-9660-ece08069b2df',
+			elementId: '3ef72f59-e961-42a4-b484-baaa0a49f25c',
 		},
 	],
 	canonicalUrl:
-		'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
-	blocks: [
-		{
-			id: '5e74b1928f089367b3d0b644',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
-					elementId: '7295e962-9bc0-4ffd-aedb-c72ee60a1f87',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>• In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
-					elementId: '74ca7450-d677-44db-b5a5-b15481305671',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>• Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p>',
-					elementId: '9ef03d14-54cf-4eb7-9c7e-47c76b2b0ccf',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1617638661000,
-			blockCreatedOnDisplay: '17.04 BST',
-			blockLastUpdated: 1617631119000,
-			blockLastUpdatedDisplay: '14.58 BST',
-			blockFirstPublished: 1617638661000,
-			blockFirstPublishedDisplay: '17.04 BST',
-			blockFirstPublishedDisplayNoTimezone: '17.04',
-			contributors: [],
-			primaryDateLine: 'Mon 5 Apr 2021 17.04 BST',
-			secondaryDateLine: 'Last modified on Mon 5 Apr 2021 18.36 BST',
-		},
-	],
+		'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
+	blocks: [],
 	linkedData: [
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+			'@id': 'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1663,38 +1698,39 @@ export const Letter: FEArticleType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=dcd621765221570f91e3ac722f3a4b02',
-				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=39389ef31ece58316e6c3e82452d88f1',
-				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=fe6ceca60281b25ca63d71a1cdd110dd',
-				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&quality=85&auto=format&fit=max&s=962bb541216e2a5117b6b71475778ad8',
+				'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjEucG5n&enable=upscale&s=913a7e653703880750cbc27a96064ed9',
+				'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=4f69fd0a0c57fd6cdc4a4c71a99d88a7',
+				'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=4ffd19108bbe9835303941d71e69c357',
+				'https://i.guim.co.uk/img/media/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg?width=1200&quality=85&auto=format&fit=max&s=60d3817d58de3c9bb76ea3db522fa9f5',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'Guardian staff reporter',
+					name: 'Nicola Jennings',
+					sameAs: 'https://www.theguardian.com/profile/nicola-jennings',
 				},
 			],
-			datePublished: '2021-04-05T16:04:21.000Z',
-			headline: 'Why is a woman’s work never done?',
-			dateModified: '2021-04-05T17:36:25.000Z',
+			datePublished: '2021-04-25T19:00:14.000Z',
+			headline: 'Nicola Jennings on the No 10 sleaze scandal – cartoon',
+			dateModified: '2021-04-25T20:28:58.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+				'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+			'@id': 'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+				target: 'android-app://com.guardian/https/www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Mon 5 Apr 2021 17.04 BST',
+	webPublicationDateDisplay: 'Sun 25 Apr 2021 20.00 BST',
 	shouldHideAds: false,
-	webTitle: 'Why is a woman’s work never done? | Letters',
+	webTitle: 'Nicola Jennings on the No 10 sleaze scandal – cartoon',
 	isSpecialReport: false,
-	isCommentable: false,
+	isCommentable: true,
 	keyEvents: [],
 	filterKeyEvents: false,
 	config: {

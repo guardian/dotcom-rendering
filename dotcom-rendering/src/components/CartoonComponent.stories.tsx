@@ -50,7 +50,14 @@ export const Cartoon = () => {
 				isMainMedia={false}
 				role="inline"
 			>
-				<CartoonComponent element={cartoon} />
+				<CartoonComponent
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+					element={cartoon}
+				/>
 			</Figure>
 		</Wrapper>
 	);

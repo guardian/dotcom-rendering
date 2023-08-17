@@ -40,3 +40,15 @@ export const AppsStandardStandardNewsPillar = () => {
 	);
 };
 AppsStandardStandardNewsPillar.storyName = 'Apps: Display: Standard, Design: Standard, Theme: NewsPillar';
+
+export const WebShowcasePictureOpinionPillar = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Picture"
+			theme="OpinionPillar"
+			renderingTarget="Web"
+		/>
+	);
+};
+WebShowcasePictureOpinionPillar.storyName = 'Web: Display: Showcase, Design: Picture, Theme: OpinionPillar';

@@ -242,6 +242,9 @@ export const ShowcaseLayout = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const showSubNavTopBorder =
+		format.design !== ArticleDesign.Picture ? true : false;
+
 	return (
 		<>
 			{!isLabs ? (
@@ -299,6 +302,7 @@ export const ShowcaseLayout = ({
 								padSides={false}
 								backgroundColour={brandBackground.primary}
 								element="nav"
+								format={format}
 							>
 								<Nav
 									nav={NAV}
@@ -332,6 +336,8 @@ export const ShowcaseLayout = ({
 									}
 									padSides={false}
 									element="aside"
+									format={format}
+									showTopBorder={showSubNavTopBorder}
 								>
 									<Island deferUntil="idle">
 										<SubNav
@@ -341,6 +347,9 @@ export const ShowcaseLayout = ({
 												palette.text.articleLinkHover
 											}
 											borderColour={palette.border.subNav}
+											subNavLinkColour={
+												palette.text.subNavLink
+											}
 										/>
 									</Island>
 								</Section>
@@ -351,9 +360,11 @@ export const ShowcaseLayout = ({
 								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
+								borderColour={palette.border.secondary}
 							>
 								<StraightLines
 									count={4}
+									color={palette.border.secondary}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -437,6 +448,7 @@ export const ShowcaseLayout = ({
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
 					element="article"
+					borderColour={palette.border.secondary}
 				>
 					<ShowcaseGrid>
 						<GridItem area="media">
@@ -499,7 +511,10 @@ export const ShowcaseLayout = ({
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									<DecideLines format={format} />
+									<DecideLines
+										format={format}
+										color={palette.border.secondary}
+									/>
 								</div>
 							</div>
 						</GridItem>
@@ -598,6 +613,7 @@ export const ShowcaseLayout = ({
 								)}
 								<StraightLines
 									count={4}
+									color={palette.border.secondary}
 									cssOverrides={css`
 										display: block;
 									`}

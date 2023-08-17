@@ -62,6 +62,7 @@ export type Palette = {
 		tableOfContents: Colour;
 		expandableAtom: Colour;
 		expandableAtomHover: Colour;
+		subNavLink: Colour;
 	};
 	background: {
 		article: Colour;

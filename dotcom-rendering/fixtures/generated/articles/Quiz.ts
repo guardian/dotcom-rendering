@@ -408,6 +408,11 @@ export const Quiz: FEArticleType = {
 						url: '/football',
 						children: [
 							{
+								title: "Women's World Cup",
+								url: '/football/womens-world-cup-2023',
+								longTitle: 'football/womens-world-cup-2023',
+							},
+							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -438,11 +443,6 @@ export const Quiz: FEArticleType = {
 								longTitle: 'football/teams',
 							},
 						],
-					},
-					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
 					},
 					{
 						title: 'Business',
@@ -608,6 +608,11 @@ export const Quiz: FEArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
+							{
+								title: "Women's World Cup",
+								url: '/football/womens-world-cup-2023',
+								longTitle: 'football/womens-world-cup-2023',
+							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -993,6 +998,11 @@ export const Quiz: FEArticleType = {
 				url: '/football',
 				children: [
 					{
+						title: "Women's World Cup",
+						url: '/football/womens-world-cup-2023',
+						longTitle: 'football/womens-world-cup-2023',
+					},
+					{
 						title: 'Live scores',
 						url: '/football/live',
 						longTitle: 'football/live',
@@ -1025,6 +1035,11 @@ export const Quiz: FEArticleType = {
 				],
 			},
 			links: [
+				{
+					title: "Women's World Cup",
+					url: '/football/womens-world-cup-2023',
+					longTitle: 'football/womens-world-cup-2023',
+				},
 				{
 					title: 'Live scores',
 					url: '/football/live',
@@ -1273,7 +1288,7 @@ export const Quiz: FEArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
+					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1643,7 +1658,7 @@ export const Quiz: FEArticleType = {
 					],
 				},
 			],
-			elementId: '8d0f357d-5cdf-4e60-8730-d331ca43ced3',
+			elementId: 'aeaa252c-50e3-44e0-987c-1e3997ebc653',
 		},
 	],
 	canonicalUrl:
@@ -2259,7 +2274,7 @@ export const Quiz: FEArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '6322cf66-48a5-40ae-b2b8-08792aa498d6',
+					elementId: '03b8fb21-fad7-418d-ba7d-d868b21831b3',
 				},
 			],
 			attributes: {

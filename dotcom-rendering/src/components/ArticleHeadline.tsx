@@ -781,6 +781,31 @@ export const ArticleHeadline = ({
 							</WithAgeWarning>
 						</div>
 					);
+				case ArticleDesign.Picture:
+					return (
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
+						>
+							<DesignTag format={format} />
+							<h1
+								css={[
+									format.theme === ArticleSpecial.Labs
+										? labsFont
+										: standardFont,
+									topPadding,
+									css`
+										color: ${palette.text.headline};
+									`,
+								]}
+							>
+								{headlineString}
+							</h1>
+						</div>
+					);
 				default:
 					return (
 						<div
