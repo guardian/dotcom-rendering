@@ -76,7 +76,14 @@ export const CartoonWithoutCredit = () => {
 				isMainMedia={false}
 				role="inline"
 			>
-				<CartoonComponent element={cartoonWithoutCreditOrCaption} />
+				<CartoonComponent
+					element={cartoonWithoutCreditOrCaption}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+				/>
 			</Figure>
 		</Wrapper>
 	);
