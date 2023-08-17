@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { useEffect, useState } from 'react';
-import { notificationsClient } from '../lib/bridgetApi';
+import { getNotificationsClient } from '../lib/bridgetApi';
 import { FollowButton } from './FollowButton';
 
 type Props = {
@@ -21,7 +21,7 @@ export const FollowWrapper = ({ id, displayName, format }: Props) => {
 			type: 'tag-contributor',
 		});
 
-		void notificationsClient
+		void getNotificationsClient()
 			.isFollowing(topic)
 			.then(setIsFollowing)
 			.catch((e) => console.error(e));
@@ -35,11 +35,11 @@ export const FollowWrapper = ({ id, displayName, format }: Props) => {
 		});
 
 		isFollowing
-			? void notificationsClient
+			? void getNotificationsClient()
 					.unfollow(topic)
 					.then(() => setIsFollowing(false))
 					.catch((e) => console.error(e))
-			: void notificationsClient
+			: void getNotificationsClient()
 					.follow(topic)
 					.then(() => setIsFollowing(true))
 					.catch((e) => console.error(e));
