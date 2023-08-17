@@ -35,8 +35,9 @@ const contentWrapperStyle = css`
 `;
 
 const sectionWrapperStyle = (hide: boolean) => css`
-	display: ${hide ? 'none' : 'unset'};
+	display: ${hide ? 'none' : 'block'};
 	position: fixed;
+	position: -webkit-sticky;
 	position: sticky;
 	bottom: 0;
 	left: 0;
