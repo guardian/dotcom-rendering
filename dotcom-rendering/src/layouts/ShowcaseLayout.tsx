@@ -52,7 +52,14 @@ import type { FEArticleType } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
-const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
+const ShowcaseGrid = ({
+	children,
+	isPictureContent,
+}: {
+	children: React.ReactNode;
+	isPictureContent: boolean;
+}) => (
+	//add isPic content as decider
 	<div
 		css={css`
 			/* IE Fallback */
@@ -244,6 +251,8 @@ export const ShowcaseLayout = ({
 
 	const showSubNavTopBorder =
 		format.design !== ArticleDesign.Picture ? true : false;
+
+	const isPictureContent = format.design === ArticleDesign.Picture;
 
 	return (
 		<>
@@ -450,7 +459,7 @@ export const ShowcaseLayout = ({
 					element="article"
 					borderColour={palette.border.secondary}
 				>
-					<ShowcaseGrid>
+					<ShowcaseGrid isPictureContent={isPictureContent}>
 						<GridItem area="media">
 							<div css={mainMediaWrapper}>
 								<MainMedia
