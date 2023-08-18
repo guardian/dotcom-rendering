@@ -460,6 +460,7 @@ export const ImmersiveLayout = ({
 										hasStarRating={
 											article.starRating !== undefined
 										}
+										renderingTarget={renderingTarget}
 									/>
 								</Section>
 							</Box>
@@ -538,6 +539,7 @@ export const ImmersiveLayout = ({
 												typeof article.starRating ===
 												'number'
 											}
+											renderingTarget={renderingTarget}
 										/>
 									</div>
 								)}
@@ -555,6 +557,7 @@ export const ImmersiveLayout = ({
 									format={format}
 									tags={article.tags}
 									byline={article.byline}
+									renderingTarget={renderingTarget}
 								/>
 							)}
 						</GridItem>
@@ -606,6 +609,7 @@ export const ImmersiveLayout = ({
 										!!article.config.switches
 											.serverShareCounts
 									}
+									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>

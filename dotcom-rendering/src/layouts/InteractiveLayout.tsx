@@ -439,6 +439,7 @@ export const InteractiveLayout = ({
 											typeof article.starRating ===
 											'number'
 										}
+										renderingTarget={renderingTarget}
 									/>
 								</div>
 								{article.starRating !== undefined ? (
@@ -491,6 +492,7 @@ export const InteractiveLayout = ({
 											!!article.config.switches
 												.serverShareCounts
 										}
+										renderingTarget={renderingTarget}
 									/>
 								</div>
 							</GridItem>

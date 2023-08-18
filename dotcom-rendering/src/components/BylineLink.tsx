@@ -4,12 +4,16 @@ import {
 	getSoleContributor,
 	isContributor,
 } from '../lib/byline';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
+import { FollowWrapper } from './FollowWrapper.importable';
+import { Island } from './Island';
 
 type Props = {
 	byline: string;
 	tags: TagType[];
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 };
 
 const applyCleverOrderingForMatching = (titles: string[]): string[] => {
@@ -103,15 +107,21 @@ function removeComma(bylinePart: string) {
 		: bylinePart;
 }
 
-export const BylineLink = ({ byline, tags, format }: Props) => {
+export const BylineLink = ({
+	byline,
+	tags,
+	format,
+	renderingTarget,
+}: Props) => {
 	const tokens = bylineAsTokens(byline, tags);
-	const hasSingleContributor = !!getSoleContributor(tags, byline);
+	const soleContributor = getSoleContributor(tags, byline);
+	const hasSoleContributor = !!soleContributor;
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
 
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
 		if (typeof bylineComponent === 'string') {
 			const displayString =
-				format.design === ArticleDesign.Analysis && hasSingleContributor
+				format.design === ArticleDesign.Analysis && hasSoleContributor
 					? removeComma(bylineComponent)
 					: bylineComponent;
 			return displayString ? (
@@ -127,5 +137,18 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 		);
 	});
 
-	return <>{renderedTokens}</>;
+	return (
+		<>
+			{renderedTokens}
+			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
+				<Island>
+					<FollowWrapper
+						displayName={soleContributor.title}
+						id={soleContributor.id}
+						format={format}
+					/>
+				</Island>
+			) : null}
+		</>
+	);
 };

@@ -3,6 +3,8 @@ import { render } from '@testing-library/react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { Contributor } from './Contributor';
 
+jest.mock('../lib/bridgetApi', () => jest.fn());
+
 describe('Contributor', () => {
 	it('It should contain legacy class names to support customised styling in interactives', () => {
 		const format = {
@@ -22,6 +24,7 @@ describe('Contributor', () => {
 						title: 'Observer Design',
 					},
 				]}
+				renderingTarget="Web"
 			/>,
 		);
 
@@ -48,6 +51,7 @@ describe('Contributor', () => {
 						title: 'Observer Design',
 					},
 				]}
+				renderingTarget="Web"
 			/>,
 		);
 

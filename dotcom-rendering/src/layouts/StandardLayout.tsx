@@ -501,6 +501,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
+											renderingTarget={renderingTarget}
 										/>
 									</Island>
 								)}
@@ -567,6 +568,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									hasStarRating={
 										typeof article.starRating === 'number'
 									}
+									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
@@ -625,6 +627,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										!!article.config.switches
 											.serverShareCounts
 									}
+									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
