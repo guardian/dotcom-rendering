@@ -15,10 +15,10 @@ const uniqueDiscussionIds = isServer
 				.filter(isNonNullable),
 	  );
 
-const getUrl = (base: string) =>
-	uniqueDiscussionIds
+const getUrl = (base: string, ids: Set<string> | undefined) =>
+	ids
 		? `${base}/getCommentCounts?${new URLSearchParams({
-				'short-urls': [...uniqueDiscussionIds]
+				'short-urls': [...ids]
 					.sort() // ensures identical sets produce the same query parameter
 					.join(','),
 		  }).toString()}`
@@ -30,7 +30,14 @@ export const useCommentCount = (
 ): number | undefined => {
 	uniqueDiscussionIds?.add(shortUrl);
 
-	const { data } = useApi<CommentCounts>(getUrl(discussionApiUrl), {
+	/**
+	 * Generate an URL string or `undefined`,
+	 * to enable conditional fetching with SWR.
+	 * @see https://swr.vercel.app/docs/conditional-fetching#conditional
+	 */
+	const url = getUrl(discussionApiUrl, uniqueDiscussionIds);
+
+	const { data } = useApi<CommentCounts>(url, {
 		// Discussion reponses have a long cache (~300s)
 		refreshInterval: 27_000,
 	});
