@@ -12,26 +12,31 @@ const getInitialSetFromDOMAttribute = (attribute: string) =>
 		.map((element) => element.getAttribute(attribute))
 		.filter(isNonNullable);
 
-const uniqueDiscussionIds = new Set<string>(
-	isServer ? [] : getInitialSetFromDOMAttribute('data-discussion-id'),
-);
+const uniqueDiscussionIds = !isServer
+	? new Set<string>(
+			isServer ? [] : getInitialSetFromDOMAttribute('data-discussion-id'),
+	  )
+	: undefined;
 
 export const useCommentCount = (
 	discussionApiUrl: string,
 	shortUrl: string,
 ): number | undefined => {
-	if (!isServer) {
+	let url;
+	if (uniqueDiscussionIds) {
 		uniqueDiscussionIds.add(shortUrl);
+		const searchParams = new URLSearchParams({
+			'short-urls': [...uniqueDiscussionIds]
+				.sort() // ensures identical sets produce the same query parameter
+				.join(','),
+		});
+		url = `${upgradeToHttps(
+			discussionApiUrl,
+		)}/getCommentCounts?${searchParams.toString()}`;
+	} else {
+		url = `${upgradeToHttps(discussionApiUrl)}/getCommentCounts`;
 	}
 
-	const searchParams = new URLSearchParams({
-		'short-urls': [...uniqueDiscussionIds]
-			.sort() // ensures identical sets produce the same query parameter
-			.join(','),
-	});
-	const url = `${upgradeToHttps(
-		discussionApiUrl,
-	)}/getCommentCounts?${searchParams.toString()}`;
 	const { data } = useApi<CommentCounts>(url, {
 		// Discussion reponses have a long cache (~300s)
 		refreshInterval: isServer ? 0 : 27_000,
