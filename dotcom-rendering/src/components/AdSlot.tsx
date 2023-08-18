@@ -48,7 +48,7 @@ type NonInlineProps = {
  */
 type Props = DefaultProps & (InlineProps | NonInlineProps);
 
-export const labelHeight = constants.AD_LABEL_HEIGHT;
+const labelHeight = constants.AD_LABEL_HEIGHT;
 
 const individualLabelCSS = css`
 	${textSans.xxsmall()};
@@ -199,7 +199,7 @@ const merchandisingAdContainerStyles = css`
 
 const merchandisingAdStyles = css`
 	position: relative;
-	min-height: 250px;
+	min-height: ${adSizes.billboard.height}px;
 `;
 
 const inlineAdStyles = css`
@@ -215,7 +215,7 @@ const liveblogInlineAdStyles = css`
 
 const mobileFrontAdStyles = css`
 	position: relative;
-	min-height: ${250 + labelHeight}px;
+	min-height: ${adSizes.mpu.height + labelHeight}px;
 	min-width: 300px;
 	width: 300px;
 	margin: 12px auto;
@@ -226,11 +226,13 @@ const mobileFrontAdStyles = css`
 `;
 
 const frontsBannerPaddingHeight = 20;
+const frontsBannerMinHeight =
+	adSizes.billboard.height + labelHeight + frontsBannerPaddingHeight;
 
 const frontsBannerAdTopContainerStyles = css`
 	display: flex;
 	justify-content: center;
-	min-height: ${250 + labelHeight + frontsBannerPaddingHeight}px;
+	min-height: ${frontsBannerMinHeight}px;
 	background-color: ${palette.neutral[97]};
 
 	${until.desktop} {
@@ -271,7 +273,7 @@ const articleEndAdStyles = css`
 
 const mostPopAdStyles = css`
 	position: relative;
-	min-height: ${250 + labelHeight}px;
+	min-height: ${adSizes.mpu.height + labelHeight}px;
 	min-width: 300px;
 	width: 300px;
 	margin: 12px auto;
