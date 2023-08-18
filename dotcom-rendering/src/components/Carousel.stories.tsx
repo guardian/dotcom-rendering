@@ -5,6 +5,7 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Section } from './Section';
@@ -206,6 +207,7 @@ export const Headlines = () => (
 					display: ArticleDisplay.Standard,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -219,6 +221,7 @@ export const Headlines = () => (
 					display: ArticleDisplay.Standard,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 	</>
@@ -239,6 +242,7 @@ export const SingleItemCarousel = () => (
 					display: ArticleDisplay.Standard,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 	</>
@@ -259,6 +263,7 @@ export const Immersive = () => (
 					display: ArticleDisplay.Immersive,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -272,6 +277,7 @@ export const Immersive = () => (
 					display: ArticleDisplay.Immersive,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 	</>
@@ -302,6 +308,7 @@ export const SpecialReportAlt = () => {
 						display: ArticleDisplay.Standard,
 					}}
 					leftColSize={'compact'}
+					discussionApiUrl={discussionApiUrl}
 				/>
 			</Section>
 		</>

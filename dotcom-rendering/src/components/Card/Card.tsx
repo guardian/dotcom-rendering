@@ -89,7 +89,7 @@ export type Props = {
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
 	showAge?: boolean;
-	discussionApiUrl?: string;
+	discussionApiUrl: string;
 	discussionId?: string;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
@@ -276,7 +276,7 @@ export const Card = ({
 	containerPalette,
 	containerType,
 	showAge = true,
-	discussionApiUrl = 'http://discussion.theguardian.com/discussion-api', // should require a value
+	discussionApiUrl,
 	discussionId,
 	isDynamo,
 	isCrossword,

@@ -285,12 +285,14 @@ export const enhanceCards = (
 		editionId,
 		containerPalette,
 		pageId,
+		discussionApiUrl,
 	}: {
 		cardInTagFront: boolean;
 		offset?: number;
 		editionId?: EditionId;
 		containerPalette?: DCRContainerPalette;
 		pageId?: string;
+		discussionApiUrl: string;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -348,6 +350,7 @@ export const enhanceCards = (
 						containerPalette,
 				  )
 				: undefined,
+			discussionApiUrl,
 			discussionId: faciaCard.discussion.isCommentable
 				? faciaCard.discussion.discussionId
 				: undefined,

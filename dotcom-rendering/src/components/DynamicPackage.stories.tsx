@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
 import { DynamicPackage } from './DynamicPackage';
@@ -28,7 +29,11 @@ export default {
 };
 
 export const One = () => (
-	<FrontSection title="Dynamic Package" showTopBorder={true}>
+	<FrontSection
+		title="Dynamic Package"
+		showTopBorder={true}
+		discussionApiUrl={discussionApiUrl}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -43,7 +48,11 @@ export const One = () => (
 One.storyName = 'With one standard card';
 
 export const Two = () => (
-	<FrontSection title="Dynamic Package" showTopBorder={true}>
+	<FrontSection
+		title="Dynamic Package"
+		showTopBorder={true}
+		discussionApiUrl={discussionApiUrl}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -58,7 +67,7 @@ export const Two = () => (
 Two.storyName = 'With two standard cards';
 
 export const Three = () => (
-	<FrontSection title="Dynamic Package">
+	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -73,7 +82,7 @@ export const Three = () => (
 Three.storyName = 'With three standard cards';
 
 export const Four = () => (
-	<FrontSection title="Dynamic Package">
+	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -88,7 +97,7 @@ export const Four = () => (
 Four.storyName = 'With four standard cards';
 
 export const Five = () => (
-	<FrontSection title="Dynamic Package">
+	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -103,7 +112,11 @@ export const Five = () => (
 Five.storyName = 'With five standard cards';
 
 export const Six = () => (
-	<FrontSection title="Dynamic Package" showTopBorder={true}>
+	<FrontSection
+		title="Dynamic Package"
+		showTopBorder={true}
+		discussionApiUrl={discussionApiUrl}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -118,7 +131,11 @@ export const Six = () => (
 Six.storyName = 'With six standard cards';
 
 export const Seven = () => (
-	<FrontSection title="Dynamic Package" showTopBorder={true}>
+	<FrontSection
+		title="Dynamic Package"
+		showTopBorder={true}
+		discussionApiUrl={discussionApiUrl}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -133,7 +150,11 @@ export const Seven = () => (
 Seven.storyName = 'With seven standard cards';
 
 export const Eight = () => (
-	<FrontSection title="Dynamic Package" showTopBorder={true}>
+	<FrontSection
+		title="Dynamic Package"
+		showTopBorder={true}
+		discussionApiUrl={discussionApiUrl}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -148,7 +169,11 @@ export const Eight = () => (
 Eight.storyName = 'With eight standard cards';
 
 export const Nine = () => (
-	<FrontSection title="Dynamic Package" showTopBorder={true}>
+	<FrontSection
+		title="Dynamic Package"
+		showTopBorder={true}
+		discussionApiUrl={discussionApiUrl}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -166,7 +191,11 @@ export const Boosted1 = () => {
 	const primary = trails[0];
 
 	return (
-		<FrontSection title="Dynamic Package" showTopBorder={true}>
+		<FrontSection
+			title="Dynamic Package"
+			showTopBorder={true}
+			discussionApiUrl={discussionApiUrl}
+		>
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -187,7 +216,11 @@ export const Boosted2 = () => {
 	const remaining = trails.slice(1, 2);
 
 	return (
-		<FrontSection title="Dynamic Package" showTopBorder={true}>
+		<FrontSection
+			title="Dynamic Package"
+			showTopBorder={true}
+			discussionApiUrl={discussionApiUrl}
+		>
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -208,7 +241,10 @@ export const Boosted3 = () => {
 	const remaining = trails.slice(1, 3);
 
 	return (
-		<FrontSection title="Dynamic Package">
+		<FrontSection
+			title="Dynamic Package"
+			discussionApiUrl={discussionApiUrl}
+		>
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -229,7 +265,10 @@ export const Boosted4 = () => {
 	const remaining = trails.slice(1, 4);
 
 	return (
-		<FrontSection title="Dynamic Package">
+		<FrontSection
+			title="Dynamic Package"
+			discussionApiUrl={discussionApiUrl}
+		>
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -250,7 +289,10 @@ export const Boosted5 = () => {
 	const remaining = trails.slice(1, 5);
 
 	return (
-		<FrontSection title="Dynamic Package">
+		<FrontSection
+			title="Dynamic Package"
+			discussionApiUrl={discussionApiUrl}
+		>
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -271,7 +313,11 @@ export const Boosted8 = () => {
 	const remaining = trails.slice(1, 8);
 
 	return (
-		<FrontSection title="Dynamic Package" showTopBorder={true}>
+		<FrontSection
+			title="Dynamic Package"
+			showTopBorder={true}
+			discussionApiUrl={discussionApiUrl}
+		>
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -292,7 +338,11 @@ export const Boosted9 = () => {
 	const remaining = trails.slice(1, 9);
 
 	return (
-		<FrontSection title="Dynamic Package" showTopBorder={true}>
+		<FrontSection
+			title="Dynamic Package"
+			showTopBorder={true}
+			discussionApiUrl={discussionApiUrl}
+		>
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -309,7 +359,7 @@ export const Boosted9 = () => {
 Boosted9.storyName = 'With nine standard cards - boosted';
 
 export const OneSnapThreeStandard = () => (
-	<FrontSection title="Dynamic Package">
+	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -324,7 +374,7 @@ export const OneSnapThreeStandard = () => (
 OneSnapThreeStandard.storyName = 'With one snap - three standard cards';
 
 export const ThreeSnapTwoStandard = () => (
-	<FrontSection title="Dynamic Package">
+	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -339,7 +389,7 @@ export const ThreeSnapTwoStandard = () => (
 ThreeSnapTwoStandard.storyName = 'With three snaps - two standard cards';
 
 export const ThreeSnapTwoStandard2ndBoosted = () => (
-	<FrontSection title="Dynamic Package">
+	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -355,7 +405,11 @@ ThreeSnapTwoStandard2ndBoosted.storyName =
 	'With three snaps (2nd boosted) - two standard cards';
 
 export const SpecialReportWithoutPalette = () => (
-	<FrontSection title="Dynamic Package" showTopBorder={true}>
+	<FrontSection
+		title="Dynamic Package"
+		showTopBorder={true}
+		discussionApiUrl={discussionApiUrl}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -385,6 +439,7 @@ export const SpecialReportWithoutPalette = () => (
 						byline: 'Luke Harding',
 						snapData: {},
 						isCrossword: false,
+						discussionApiUrl,
 					},
 				],
 			}}

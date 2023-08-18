@@ -639,6 +639,9 @@ export const InteractiveLayout = ({
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
 							/>
 						</Island>
 					</Section>
@@ -664,6 +667,7 @@ export const InteractiveLayout = ({
 						pillar={format.theme}
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
+						discussionApiUrl={article.config.discussionApiUrl}
 					/>
 				</Island>
 

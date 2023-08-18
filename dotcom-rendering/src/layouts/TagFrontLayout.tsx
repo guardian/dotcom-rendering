@@ -292,6 +292,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 										? tagFront.pagination
 										: undefined
 								}
+								discussionApiUrl={
+									tagFront.config.discussionApiUrl
+								}
 							>
 								<ContainerComponent />
 							</FrontSection>

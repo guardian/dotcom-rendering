@@ -24,13 +24,15 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 		} | The Guardian`,
 		pressedPage: {
 			...data.pressedPage,
-			collections: enhanceCollections(
-				data.pressedPage.collections,
-				data.editionId,
-				data.pageId,
-				data.pressedPage.frontProperties.onPageDescription,
-				data.config.isPaidContent,
-			),
+			collections: enhanceCollections({
+				collections: data.pressedPage.collections,
+				editionId: data.editionId,
+				pageId: data.pageId,
+				onPageDescription:
+					data.pressedPage.frontProperties.onPageDescription,
+				isPaidContent: data.config.isPaidContent,
+				discussionApiUrl: data.config.discussionApiUrl,
+			}),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
 		mostCommented: data.mostCommented
@@ -51,6 +53,7 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 	const enhancedCards = enhanceCards(data.contents, {
 		cardInTagFront: true,
 		pageId: data.pageId,
+		discussionApiUrl: data.config.discussionApiUrl,
 	});
 	const speed = getSpeedFromTrails(data.contents);
 

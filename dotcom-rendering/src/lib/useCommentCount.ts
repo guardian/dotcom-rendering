@@ -2,9 +2,6 @@ import { isNonNullable } from '@guardian/libs';
 import { isServer } from './isServer';
 import { useApi } from './useApi';
 
-const REPLACEMENT = [/^http:\/\//, 'https://'] as const;
-const upgradeToHttps = (url: string) => url.replace(...REPLACEMENT);
-
 type CommentCounts = Record<string, number>;
 
 const getInitialSetFromDOMAttribute = (attribute: string) =>
@@ -29,9 +26,7 @@ export const useCommentCount = (
 			.sort() // ensures identical sets produce the same query parameter
 			.join(','),
 	});
-	const url = `${upgradeToHttps(
-		discussionApiUrl,
-	)}/getCommentCounts?${searchParams.toString()}`;
+	const url = `${discussionApiUrl}/getCommentCounts?${searchParams.toString()}`;
 	const { data } = useApi<CommentCounts>(url, {
 		// Discussion reponses have a long cache (~300s)
 		refreshInterval: isServer ? 0 : 27_000,

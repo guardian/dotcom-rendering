@@ -520,6 +520,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									treats={collection.treats}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
+									discussionApiUrl={
+										front.config.discussionApiUrl
+									}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -570,6 +573,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									badge={collection.badge}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
+									discussionApiUrl={
+										front.config.discussionApiUrl
+									}
 								>
 									<DecideContainer
 										trails={trailsWithoutBranding}
@@ -662,6 +668,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											}
 											hasPageSkin={hasPageSkin}
 											url={collection.href}
+											discussionApiUrl={
+												front.config.discussionApiUrl
+											}
 										/>
 									</Island>
 								</Section>
@@ -730,6 +739,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
 								editionBranding={editionBranding}
+								discussionApiUrl={front.config.discussionApiUrl}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}

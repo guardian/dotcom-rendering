@@ -1,4 +1,5 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { DynamicFast } from './DynamicFast';
 import { FrontSection } from './FrontSection';
@@ -29,6 +30,7 @@ export const EventPalette = () => (
 		containerPalette="EventPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -56,6 +58,7 @@ export const EventAltPalette = () => (
 		containerPalette="EventAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -72,6 +75,7 @@ export const SombrePalette = () => (
 		containerPalette="SombrePalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -88,6 +92,7 @@ export const SombreAltPalette = () => (
 		containerPalette="SombreAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -104,6 +109,7 @@ export const BreakingPalette = () => (
 		containerPalette="BreakingPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -120,6 +126,7 @@ export const LongRunningPalette = () => (
 		containerPalette="LongRunningPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -136,6 +143,7 @@ export const LongRunningAltPalette = () => (
 		containerPalette="LongRunningAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -152,6 +160,7 @@ export const InvestigationPalette = () => (
 		containerPalette="InvestigationPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -168,6 +177,7 @@ export const SpecialReportAltPalette = () => (
 		containerPalette="SpecialReportAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -187,6 +197,7 @@ export const BrandedPalette = () => (
 		sectionId={'branded-palette'}
 		ophanComponentName={'branded-palette'}
 		ophanComponentLink={'branded-palette'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -203,6 +214,7 @@ export const MediaPalette = () => (
 		containerPalette="MediaPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -222,6 +234,7 @@ export const PodcastPalette = () => (
 		sectionId={'podcast-palette'}
 		ophanComponentName={'podcast-palette'}
 		ophanComponentLink={'podcast-palette'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}

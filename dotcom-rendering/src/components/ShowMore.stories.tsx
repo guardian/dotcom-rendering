@@ -1,5 +1,6 @@
 import { userEvent, within } from '@storybook/testing-library';
 import fetchMock from 'fetch-mock';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/show-more-trails';
 import { ShowMore } from './ShowMore.importable';
 
@@ -25,7 +26,8 @@ const defaultProps = {
 	collectionId,
 	sectionId,
 	showAge: false,
-};
+	discussionApiUrl,
+} satisfies Parameters<typeof ShowMore>[0];
 
 export default {
 	component: ShowMore,

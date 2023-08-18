@@ -34,6 +34,7 @@ type Props = {
 	url?: string;
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
+	discussionApiUrl: string;
 };
 
 type ArticleProps = Props & {
@@ -470,6 +471,7 @@ type CarouselCardProps = {
 	kickerText?: string;
 	imageUrl?: string;
 	dataLinkName?: string;
+	discussionApiUrl: string;
 	discussionId?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
@@ -495,6 +497,7 @@ const CarouselCard = ({
 	onwardsSource,
 	containerType,
 	imageLoading,
+	discussionApiUrl,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	return (
@@ -529,6 +532,7 @@ const CarouselCard = ({
 				onwardsSource={onwardsSource}
 				containerType={containerType}
 				imageLoading={imageLoading}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</LI>
 	);
@@ -857,6 +861,7 @@ export const Carousel = ({
 	trails,
 	onwardsSource,
 	leftColSize,
+	discussionApiUrl,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselColours = decideCarouselColours(props);
@@ -1085,6 +1090,7 @@ export const Carousel = ({
 								onwardsSource={onwardsSource}
 								containerType={containerType}
 								imageLoading={imageLoading}
+								discussionApiUrl={discussionApiUrl}
 							/>
 						);
 					})}
