@@ -14,6 +14,7 @@ type Props = {
 	limit: number; // Limit the number of items shown (the api often returns more)
 	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
+	discussionApiUrl: string;
 };
 
 type OnwardsResponse = {
@@ -32,6 +33,7 @@ export const FetchOnwardsData = ({
 	limit,
 	onwardsSource,
 	format,
+	discussionApiUrl,
 }: Props) => {
 	const { data, loading, error } = useApi<OnwardsResponse>(url);
 
@@ -87,6 +89,7 @@ export const FetchOnwardsData = ({
 								? 'wide'
 								: 'compact'
 						}
+						discussionApiUrl={discussionApiUrl}
 					/>
 				</div>
 			</div>

@@ -1,4 +1,5 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FrontSection } from './FrontSection';
 import { TagFrontSlowMpu } from './TagFrontSlowMpu';
@@ -19,7 +20,11 @@ export default {
 
 export const WithTwoCards = () => {
 	return (
-		<FrontSection title="Slow MPU" description="With two cards">
+		<FrontSection
+			title="Slow MPU"
+			description="With two cards"
+			discussionApiUrl={discussionApiUrl}
+		>
 			<TagFrontSlowMpu
 				speed="slow"
 				injected={true}
@@ -37,7 +42,11 @@ WithTwoCards.storyName = 'With two cards';
 
 export const WithFourCards = () => {
 	return (
-		<FrontSection title="Slow MPU" description="With four cards">
+		<FrontSection
+			title="Slow MPU"
+			description="With four cards"
+			discussionApiUrl={discussionApiUrl}
+		>
 			<TagFrontSlowMpu
 				speed="slow"
 				injected={true}
@@ -55,7 +64,11 @@ WithFourCards.storyName = 'With four cards';
 
 export const WithFiveCards = () => {
 	return (
-		<FrontSection title="Slow MPU" description="With five cards">
+		<FrontSection
+			title="Slow MPU"
+			description="With five cards"
+			discussionApiUrl={discussionApiUrl}
+		>
 			<TagFrontSlowMpu
 				speed="slow"
 				injected={true}
@@ -73,7 +86,11 @@ WithFiveCards.storyName = 'With five cards';
 
 export const WithSevenCards = () => {
 	return (
-		<FrontSection title="Slow MPU" description="With seven cards">
+		<FrontSection
+			title="Slow MPU"
+			description="With seven cards"
+			discussionApiUrl={discussionApiUrl}
+		>
 			<TagFrontSlowMpu
 				speed="slow"
 				injected={true}

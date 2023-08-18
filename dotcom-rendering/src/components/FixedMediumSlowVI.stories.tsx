@@ -1,4 +1,5 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedMediumSlowVI } from './FixedMediumSlowVI';
 import { FrontSection } from './FrontSection';
@@ -18,7 +19,10 @@ export default {
 };
 
 export const Default = () => (
-	<FrontSection title="Fixed Medium Slow VI">
+	<FrontSection
+		title="Fixed Medium Slow VI"
+		discussionApiUrl={discussionApiUrl}
+	>
 		<FixedMediumSlowVI
 			trails={trails}
 			showAge={true}

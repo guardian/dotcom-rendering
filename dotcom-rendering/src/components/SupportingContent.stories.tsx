@@ -34,6 +34,7 @@ const basicCardProps: CardProps = {
 	showLivePlayable: false,
 	isPlayableMediaCard: true,
 	imageLoading: 'eager',
+	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 };
 
 const aBasicLink = {

@@ -308,6 +308,7 @@ export type DCRFrontCard = {
 	isCrossword?: boolean;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
+	discussionApiUrl: string;
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;

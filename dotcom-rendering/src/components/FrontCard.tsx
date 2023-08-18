@@ -44,6 +44,7 @@ export const FrontCard = (props: Props) => {
 		starRating: trail.starRating,
 		dataLinkName: trail.dataLinkName,
 		snapData: trail.snapData,
+		discussionApiUrl: trail.discussionApiUrl,
 		discussionId: trail.discussionId,
 		avatarUrl: trail.avatarUrl,
 		mainMedia: trail.mainMedia,

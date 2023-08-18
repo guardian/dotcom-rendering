@@ -60,6 +60,8 @@ type Props = {
 	children?: React.ReactNode;
 
 	hasPageSkin?: boolean;
+
+	discussionApiUrl: string;
 };
 
 const leftColumnBackground = (backgroundColour?: string) => css`
@@ -375,6 +377,7 @@ export const LabsSection = ({
 	badge,
 	children,
 	hasPageSkin = false,
+	discussionApiUrl,
 }: Props) => {
 	const overrides = decideContainerOverrides('Branded');
 
@@ -442,6 +445,7 @@ export const LabsSection = ({
 								ajaxUrl={ajaxUrl}
 								containerPalette={'Branded'}
 								showAge={true}
+								discussionApiUrl={discussionApiUrl}
 							/>
 						</Island>
 					)}

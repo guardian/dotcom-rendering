@@ -1158,6 +1158,9 @@ export const LiveLayout = ({
 									onwardsSource="more-on-this-story"
 									format={format}
 									leftColSize={'wide'}
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
 								/>
 							</Island>
 						</Section>
@@ -1185,6 +1188,7 @@ export const LiveLayout = ({
 							pillar={format.theme}
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
+							discussionApiUrl={article.config.discussionApiUrl}
 						/>
 					</Island>
 
