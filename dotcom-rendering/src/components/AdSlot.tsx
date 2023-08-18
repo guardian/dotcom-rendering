@@ -225,10 +225,12 @@ const mobileFrontAdStyles = css`
 	}
 `;
 
+const frontsBannerPaddingHeight = 20;
+
 const frontsBannerAdTopContainerStyles = css`
 	display: flex;
 	justify-content: center;
-	min-height: ${250 + labelHeight}px;
+	min-height: ${250 + labelHeight + frontsBannerPaddingHeight}px;
 	background-color: ${palette.neutral[97]};
 
 	${until.desktop} {
@@ -238,6 +240,14 @@ const frontsBannerAdTopContainerStyles = css`
 
 const frontsBannerAdContainerStyles = css`
 	max-width: ${breakpoints['wide']}px;
+	/*
+		The following flex settings are to stop the visual effect where the
+		advert renders at the top of the ad slot, then is pushed down 24px to the
+		bottom of the slot when the label renders
+	*/
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
 `;
 
 const frontsBannerCollapseStyles = css`
@@ -247,14 +257,7 @@ const frontsBannerCollapseStyles = css`
 const frontsBannerAdStyles = css`
 	max-width: ${breakpoints['wide']}px;
 	overflow: hidden;
-	/*
-		The following flex settings are to stop the visual effect where the
-		advert renders at the top of the ad slot, then is pushed down 24px to the
-		bottom of the slot when the label renders
-	*/
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
+	padding-bottom: ${frontsBannerPaddingHeight}px;
 `;
 
 const articleEndAdStyles = css`
