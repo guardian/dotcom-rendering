@@ -988,6 +988,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
+						backgroundColour={neutral[97]}
 						padSides={false}
 						showSideBorders={false}
 						element="footer"
