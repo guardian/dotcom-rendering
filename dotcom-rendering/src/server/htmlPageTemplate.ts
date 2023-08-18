@@ -207,7 +207,11 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <meta charset="utf-8">
 
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                <meta name="theme-color" content="${brandBackground.primary}" />
+                ${
+					renderingTarget === 'Web'
+						? `<meta name="theme-color" content="${brandBackground.primary}" />`
+						: ``
+				}
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 
                 ${preconnectTags.join('\n')}
