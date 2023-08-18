@@ -37,6 +37,7 @@ const contentWrapperStyle = css`
 const sectionWrapperStyle = (hide: boolean) => css`
 	display: ${hide ? 'none' : 'block'};
 	position: fixed;
+	/* stylelint-disable-next-line value-no-vendor-prefix -- required safari before v13 https://developer.mozilla.org/en-US/docs/Web/CSS/position */
 	position: -webkit-sticky;
 	position: sticky;
 	bottom: 0;
