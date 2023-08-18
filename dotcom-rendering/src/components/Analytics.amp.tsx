@@ -39,7 +39,7 @@ export const Analytics = ({
 					"triggers": {
 						"trackPageview": {
 							"on": "visible",
-							"request": "pageViewWithConsentTest",
+							"request": "pageViewWithConsent",
 							"vars": {
 								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%22%5B'03:\${consentString}','08:\${consentState}'%5D%22%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
 							}
