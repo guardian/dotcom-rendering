@@ -659,7 +659,16 @@ const textCardHeadline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[100];
 
-	if (format.display === ArticleDisplay.Immersive) return BLACK;
+	if (
+		// Galleries are now considered Immersive, which would give them a dark background, so mustn't have `BLACK` text.
+		// There color is decided below in the `format.design` `switch`.
+		// see: https://github.com/guardian/content-api-scala-client/pull/387/files#diff-9384ebc9ebed8b6773587afc23b56246ec6ad014752a9b3718fd68339b705f1fR209
+		format.design !== ArticleDesign.Gallery &&
+		format.display === ArticleDisplay.Immersive
+	) {
+		return BLACK;
+	}
+
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
