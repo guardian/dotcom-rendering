@@ -45,10 +45,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
   "Metadata": {
     "gu:cdk:constructs": [
       "GuVpcParameter",
-      "GuSubnetListParameter",
       "GuSecurityGroup",
+      "GuSubnetListParameter",
       "GuStringParameter",
-      "GuClassicLoadBalancer",
       "GuSecurityGroup",
       "GuAllowPolicy",
       "GuAllowPolicy",
@@ -129,8 +128,8 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "CommaDelimitedList",
     },
     "PublicSubnets": {
-      "Default": "/account/vpc/primary/subnets/public",
-      "Description": "A list of public subnets",
+      "Default": "/TEST/frontend/rendering/vpc.subnets.public",
+      "Description": "Public subnets",
       "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
     "Stack": {
@@ -655,9 +654,8 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Listeners": [
           {
             "InstancePort": "9000",
-            "InstanceProtocol": "http",
             "LoadBalancerPort": "80",
-            "Protocol": "http",
+            "Protocol": "HTTP",
           },
         ],
         "LoadBalancerName": "frontend-TEST-rendering-ELB",
@@ -674,10 +672,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           "Ref": "PublicSubnets",
         },
         "Tags": [
-          {
-            "Key": "App",
-            "Value": "rendering",
-          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -697,55 +691,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
-    },
-    "InternalLoadBalancerRenderingSecurityGroup53E3F9A7": {
-      "Properties": {
-        "GroupDescription": "DotcomRendering/InternalLoadBalancerRendering/SecurityGroup",
-        "SecurityGroupEgress": [
-          {
-            "CidrIp": "255.255.255.255/32",
-            "Description": "Disallow all traffic",
-            "FromPort": 252,
-            "IpProtocol": "icmp",
-            "ToPort": 86,
-          },
-        ],
-        "SecurityGroupIngress": [
-          {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Default rule allow on 80",
-            "FromPort": 80,
-            "IpProtocol": "tcp",
-            "ToPort": 80,
-          },
-        ],
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "TEST",
-          },
-        ],
-        "VpcId": {
-          "Ref": "VpcId",
-        },
-      },
-      "Type": "AWS::EC2::SecurityGroup",
     },
     "InternalLoadBalancerSecurityGroup": {
       "Properties": {
