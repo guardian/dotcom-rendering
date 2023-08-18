@@ -92,24 +92,49 @@ const ShowcaseGrid = ({
 				*/
 				${from.wide} {
 					grid-template-columns: 219px 1px 1fr 300px;
-					grid-template-areas:
-						'title  border  headline    headline'
-						'lines  border  media       media'
-						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'.      border  body        right-column'
-						'.      border  .           right-column';
+					${isPictureContent
+						? css`
+								grid-template-areas:
+									'title  border  headline    headline'
+									'lines  border  standfirst       standfirst'
+									'meta   border  media       media'
+									'meta   border  media       media'
+									'.      border  body        right-column'
+									'.      border  .           right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title  border  headline    headline'
+									'lines  border  media       media'
+									'meta   border  media       media'
+									'meta   border  standfirst  right-column'
+									'.      border  body        right-column'
+									'.      border  .           right-column';
+						  `}
 				}
 
 				${until.wide} {
 					grid-template-columns: 140px 1px 1fr 300px;
-					grid-template-areas:
-						'title  border  headline    headline'
-						'lines  border  media       media'
-						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'.      border  body        right-column'
-						'.      border  .           right-column';
+
+					${isPictureContent
+						? css`
+								grid-template-areas:
+									'title  border  headline    headline'
+									'lines  border  standfirst       standfirst'
+									'meta   border  media       media'
+									'meta   border  media       media'
+									'.      border  body        right-column'
+									'.      border  .           right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title  border  headline    headline'
+									'lines  border  media       media'
+									'meta   border  media       media'
+									'meta   border  standfirst  right-column'
+									'.      border  body        right-column'
+									'.      border  .           right-column';
+						  `}
 				}
 
 				/*
@@ -147,14 +172,27 @@ const ShowcaseGrid = ({
 				${until.tablet} {
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
-					grid-template-areas:
-						'media'
-						'title'
-						'headline'
-						'standfirst'
-						'lines'
-						'meta'
-						'body';
+					${isPictureContent
+						? css`
+								grid-template-areas:
+									'title'
+									'headline'
+									'standfirst'
+									'lines'
+									'media'
+									'meta'
+									'body';
+						  `
+						: css`
+								grid-template-areas:
+									'media'
+									'title'
+									'headline'
+									'standfirst'
+									'lines'
+									'meta'
+									'body';
+						  `}
 				}
 			}
 		`}
