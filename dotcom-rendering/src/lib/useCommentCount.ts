@@ -20,7 +20,10 @@ export const useCommentCount = (
 	discussionApiUrl: string,
 	shortUrl: string,
 ): number | undefined => {
-	uniqueDiscussionIds.add(shortUrl);
+	if (!isServer) {
+		uniqueDiscussionIds.add(shortUrl);
+	}
+
 	const searchParams = new URLSearchParams({
 		'short-urls': [...uniqueDiscussionIds]
 			.sort() // ensures identical sets produce the same query parameter
@@ -31,7 +34,7 @@ export const useCommentCount = (
 	)}/getCommentCounts?${searchParams.toString()}`;
 	const { data } = useApi<CommentCounts>(url, {
 		// Discussion reponses have a long cache (~300s)
-		refreshInterval: 27_000,
+		refreshInterval: isServer ? 0 : 27_000,
 	});
 
 	return data?.[shortUrl];
