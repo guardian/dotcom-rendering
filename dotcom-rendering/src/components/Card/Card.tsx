@@ -5,6 +5,7 @@ import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
+import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import type { Branding } from '../../types/branding';
 import type {
 	DCRContainerPalette,
@@ -326,7 +327,9 @@ export const Card = ({
 				commentCount={
 					discussionId !== undefined ? (
 						<Link
-							data-discussion-id={discussionId}
+							{...{
+								[DISCUSSION_ID_DATA_ATTRIBUTE]: discussionId,
+							}}
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
