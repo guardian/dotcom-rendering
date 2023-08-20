@@ -122,7 +122,7 @@ const extractAboutThreeLines = (text: string) =>
  *
  * ---
  *
- * (No visual story exists)
+ * [`LatestLinks` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-latestlinks)
  */
 export const LatestLinks = ({
 	id,
