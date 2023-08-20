@@ -4,7 +4,12 @@ import {
 	type ArticleFormat,
 	timeAgo as timeAgoHasAWeirdInterface,
 } from '@guardian/libs';
-import { palette, space, textSans } from '@guardian/source-foundations';
+import {
+	lineHeights,
+	palette,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { decidePalette } from '../lib/decidePalette';
 import { revealStyles } from '../lib/revealStyles';
@@ -41,11 +46,10 @@ const vertical = css`
 	padding: 0 ${space[1]}px;
 `;
 
-const li = css`
+const linkStyles = css`
 	${textSans.xsmall()}
 	overflow: hidden;
 	flex-grow: 1;
-	height: calc(4 * 1.35em + 2 * ${space[1]}px);
 `;
 
 const dividerStyles = css`
@@ -148,9 +152,20 @@ export const LatestLinks = ({
 
 	const dividerColour = css`
 		color: ${containerPalette
-			? decideContainerOverrides(containerPalette).border?.container
+			? decideContainerOverrides(containerPalette).border.container
 			: palette.neutral[86]};
 	`;
+
+	const li = [
+		linkStyles,
+		isDynamo
+			? css`
+					max-height: calc(5px + 4 * ${lineHeights.regular}em);
+			  `
+			: css`
+					max-height: calc(4 * ${lineHeights.regular}em);
+			  `,
+	];
 
 	return (
 		<ul
