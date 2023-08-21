@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { cmp, onConsent } from '@guardian/consent-management-platform';
 import type { Framework } from '@guardian/consent-management-platform/dist/types';
 import { palette } from '@guardian/source-foundations';
+import { ButtonLink } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { useOnce } from '../lib/useOnce';
 
@@ -51,9 +52,7 @@ export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 		);
 
 	return (
-		// eslint-disable-next-line jsx-a11y/anchor-is-valid -- that’s what we currently do
-		<a
-			href="#"
+		<ButtonLink
 			className={extraClasses}
 			css={footerLink}
 			data-link-name="privacy-settings"
@@ -65,6 +64,6 @@ export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 			{framework === 'ccpa'
 				? 'California resident – Do Not Sell'
 				: 'Privacy settings'}
-		</a>
+		</ButtonLink>
 	);
 };
