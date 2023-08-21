@@ -17,7 +17,7 @@ const adTargeting = {
 	adUnit: '/59666047/theguardian.com/news/article/ng',
 };
 
-export const NoConsent = (): JSX.Element => {
+export const NoConsent = () => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
@@ -42,7 +42,7 @@ export const NoConsent = (): JSX.Element => {
 	);
 };
 
-export const AdFree = (): JSX.Element => {
+export const AdFree = () => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
@@ -68,7 +68,7 @@ export const AdFree = (): JSX.Element => {
 	);
 };
 
-export const NoOverlay = (): JSX.Element => {
+export const NoOverlay = () => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
@@ -95,7 +95,7 @@ export const NoOverlay = (): JSX.Element => {
 	);
 };
 
-export const WithOverrideImage = (): JSX.Element => {
+export const WithOverrideImage = () => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
@@ -130,7 +130,7 @@ export const WithOverrideImage = (): JSX.Element => {
 	);
 };
 
-export const WithPosterImage = (): JSX.Element => {
+export const WithPosterImage = () => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
@@ -179,7 +179,7 @@ export const WithPosterImage = (): JSX.Element => {
 	);
 };
 
-export const WithOverlayAndPosterImage = (): JSX.Element => {
+export const WithOverlayAndPosterImage = () => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
@@ -238,7 +238,7 @@ export const WithOverlayAndPosterImage = (): JSX.Element => {
 	);
 };
 
-export const GiveConsent = (): JSX.Element => {
+export const GiveConsent = () => {
 	const [consented, setConsented] = useState(false);
 	return (
 		<>
@@ -279,7 +279,7 @@ export const GiveConsent = (): JSX.Element => {
 	);
 };
 
-export const Sticky = (): JSX.Element => {
+export const Sticky = () => {
 	return (
 		<div>
 			<div style={{ fontSize: '36px' }}>⬇️</div>
@@ -309,7 +309,7 @@ export const Sticky = (): JSX.Element => {
 	);
 };
 
-export const StickyMainMedia = (): JSX.Element => {
+export const StickyMainMedia = () => {
 	return (
 		<div>
 			<div style={{ fontSize: '36px' }}>⬇️</div>
@@ -339,7 +339,7 @@ export const StickyMainMedia = (): JSX.Element => {
 	);
 };
 
-export const DuplicateVideos = (): JSX.Element => {
+export const DuplicateVideos = () => {
 	return (
 		<div style={containerStyleSmall}>
 			<YoutubeAtom
@@ -387,7 +387,7 @@ DuplicateVideos.parameters = {
 	chromatic: { disableSnapshot: true },
 };
 
-export const MultipleStickyVideos = (): JSX.Element => {
+export const MultipleStickyVideos = () => {
 	return (
 		<div style={{ width: '500px', height: '5000px' }}>
 			<YoutubeAtom

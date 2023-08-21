@@ -58,7 +58,7 @@ export const YoutubeAtom = ({
 	imaEnabled,
 	abTestParticipations,
 	videoCategory,
-}: Props): JSX.Element => {
+}: Props) => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
 	const [isActive, setIsActive] = useState<boolean>(false);
@@ -126,18 +126,10 @@ export const YoutubeAtom = ({
 	 *
 	 * - The player is not ready
 	 */
-	const showPlaceholder = (!hasOverlay ?? overlayClicked) && !playerReady;
+	const showPlaceholder = (!hasOverlay || overlayClicked) && !playerReady;
 
-	let loadPlayer;
-	if (!hasOverlay) {
-		// load the player if there is no overlay
-		loadPlayer = true;
-	} else if (overlayClicked) {
-		// load the player if the overlay has been clicked
-		loadPlayer = true;
-	} else {
-		loadPlayer = false;
-	}
+	// load the player if there is no overlay or the overlay has been clicked
+	const loadPlayer = !hasOverlay || overlayClicked;
 
 	/**
 	 * Create a stable callback as it will be a useEffect dependency in YoutubeAtomPlayer

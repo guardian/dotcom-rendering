@@ -1,21 +1,15 @@
 /* eslint-disable no-underscore-dangle -- TODO */
 import { loadScript, log } from '@guardian/libs';
 
-declare global {
-	interface Window {
-		onYouTubeIframeAPIReady: () => void;
-	}
-}
-
-let _scriptsPromise: Promise<Array<Event | undefined>>;
-let _youtubeAPIReadyPromise: Promise<typeof YT>;
+let _scriptsPromise: Promise<Array<Event | undefined>> | undefined;
+let _youtubeAPIReadyPromise: Promise<typeof YT> | undefined;
 
 const loadScripts = (enableIma = false) => {
 	/**
 	 * Since loadScripts can be called multiple times on the same page for pages with more than one video,
 	 * only attempt to load the scripts if this is the first call and return the same promise otherwise.
 	 */
-	// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- TODO
+
 	if (_scriptsPromise) {
 		return _scriptsPromise;
 	}
@@ -49,7 +43,7 @@ const youtubeAPIReady = () => {
 	 * Since youtubeAPIReady can be called multiple times on the same page for pages with more than one video,
 	 * only overwrite window.onYouTubeIframeAPIReady if this is the first call and return the same promise otherwise.
 	 */
-	// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- TODO
+
 	if (_youtubeAPIReadyPromise) {
 		return _youtubeAPIReadyPromise;
 	}

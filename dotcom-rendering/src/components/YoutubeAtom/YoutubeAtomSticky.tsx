@@ -133,7 +133,7 @@ export const YoutubeAtomSticky = ({
 	children,
 	isClosed,
 	setIsClosed,
-}: Props): JSX.Element => {
+}: Props) => {
 	const [isSticky, setIsSticky] = useState<boolean>(false);
 	const [stickEventSent, setStickEventSent] = useState<boolean>(false);
 	const [showOverlay, setShowOverlay] = useState<boolean>(isMobile);
