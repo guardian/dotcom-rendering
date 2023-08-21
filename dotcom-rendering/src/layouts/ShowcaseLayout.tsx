@@ -144,16 +144,33 @@ const ShowcaseGrid = ({
 					Right Column
 				*/
 				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
-					grid-template-areas:
-						'title      right-column'
-						'headline   right-column'
-						'standfirst right-column'
-						'media      right-column'
-						'lines      right-column'
-						'meta       right-column'
-						'body       right-column'
-						'.          right-column';
+					${isPictureContent
+						? css`
+								grid-template-columns: 1fr; /* Main content */
+
+								grid-template-areas:
+									'title     '
+									'headline  '
+									'standfirst'
+									'media     '
+									'lines     '
+									'meta      '
+									'body      '
+									'.         ';
+						  `
+						: css`
+								grid-template-columns: 1fr 300px;
+
+								grid-template-areas:
+									'title      right-column'
+									'headline   right-column'
+									'standfirst right-column'
+									'media      right-column'
+									'lines      right-column'
+									'meta       right-column'
+									'body       right-column'
+									'.          right-column';
+						  `}
 				}
 
 				${until.desktop} {
