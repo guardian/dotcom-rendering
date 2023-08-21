@@ -7,7 +7,6 @@ import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { DCRFrontType } from '../types/front';
 import { AlreadyVisited } from './AlreadyVisited.importable';
-import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
@@ -60,9 +59,6 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island clientOnly={true} deferUntil="idle">
 				<AlreadyVisited />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<AnimatePulsingDots />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />

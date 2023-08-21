@@ -7,7 +7,6 @@ import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagFrontType } from '../types/tagFront';
 import { AlreadyVisited } from './AlreadyVisited.importable';
-import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
@@ -57,9 +56,6 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island clientOnly={true} deferUntil="idle">
 				<AlreadyVisited />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<AnimatePulsingDots />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
