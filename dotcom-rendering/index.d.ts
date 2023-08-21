@@ -556,16 +556,5 @@ declare namespace JSX {
 		 * link is clicked.
 		 */
 		'data-link-name'?: string;
-
-		/**
-		 * **Build an initial set of discussions**
-		 *
-		 * Setting this attribute helps build an initial set of discussion IDs.
-		 * Without it, there is a risk that each new usage of `useCommentCount`
-		 * leads to a distinct request to the discussion API
-		 *
-		 * @see {@link ../src/lib/useCommentCount.ts}
-		 */
-		'data-discussion-id'?: string;
 	}
 }
