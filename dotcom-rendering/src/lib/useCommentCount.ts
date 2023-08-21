@@ -4,14 +4,23 @@ import { useApi } from './useApi';
 
 type CommentCounts = Record<string, number>;
 
-const DATA_ATTRIBUTE = 'data-discussion-id';
+/**
+ * **Build an initial set of discussions**
+ *
+ * Setting this attribute helps build an initial set of discussion IDs.
+ * Without it, there is a risk that each new usage of `useCommentCount`
+ * leads to a distinct request to the discussion API
+ */
+export const DISCUSSION_ID_DATA_ATTRIBUTE = 'data-discussion-id';
 
 const uniqueDiscussionIds = isServer
 	? undefined
 	: new Set<string>(
 			// create an initial set of IDs by reading what is in the DOM
-			[...document.querySelectorAll(`[${DATA_ATTRIBUTE}]`)]
-				.map((element) => element.getAttribute(DATA_ATTRIBUTE))
+			[...document.querySelectorAll(`[${DISCUSSION_ID_DATA_ATTRIBUTE}]`)]
+				.map((element) =>
+					element.getAttribute(DISCUSSION_ID_DATA_ATTRIBUTE),
+				)
 				.filter(isNonNullable),
 	  );
 
