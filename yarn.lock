@@ -3079,7 +3079,7 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.1.1.tgz#1a5b1959a528e374e8037c4396c3e825d6cf4a83"
   integrity sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==
 
-"@guardian/ab-core@5.0.0", "@guardian/ab-core@^5.0.0":
+"@guardian/ab-core@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-5.0.0.tgz#cce32ff4cdfb6b24c013723bf352dcd61135d34d"
   integrity sha512-Td5gtK2sARl+fXj1Qe6RuFqf/zxuZjW1q2Jck09zXPIfMgU+sJoTi549zbNeC1cldCBhPWy/qPQ0r+8klfF7jg==
@@ -3125,35 +3125,29 @@
     read-pkg-up "7.0.1"
     yargs "^17.6.2"
 
-"@guardian/commercial@10.17.1":
-  version "10.17.1"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-10.17.1.tgz#46dae51f51c9dcfca92f0ac6a7c713f77e11f4d2"
-  integrity sha512-dz9ePXTFre/Y3EF7No0n9PxokKmw6adOAuF+c+6+rn3K5ZFSjOhs+f3TInQslqPYsANktv9nHrtzHyoTJTdWZw==
+"@guardian/commercial@11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-11.0.0.tgz#6d8e5be7e800a5a20d552899d9f439bd137ed9f6"
+  integrity sha512-rSBjwrqrpmhlCZRJ7F4XJaWQWRrPPCSh3hMAkc0iC/WvNP7HSXPNY3EZ4aLEDcerDL9ntakC71lm6SiB/rIs+A==
   dependencies:
     "@changesets/cli" "^2.26.1"
-    "@guardian/ab-core" "^5.0.0"
-    "@guardian/consent-management-platform" "^13.6.1"
-    "@guardian/core-web-vitals" "^5.0.0"
-    "@guardian/libs" "15.6.4"
-    "@guardian/source-foundations" "^12.0.0"
-    "@guardian/support-dotcom-components" "^1.0.7"
     "@octokit/core" "^4.0.5"
     fastdom "^1.0.11"
     lodash-es "^4.17.21"
     ophan-tracker-js "^1.4.0"
-    prebid.js guardian/prebid.js
+    prebid.js "github:guardian/prebid.js#1d6bbdc"
     process "^0.11.10"
     raven-js "^3.27.2"
     tslib "^2.5.3"
     web-vitals "^3.3.2"
     wolfy87-eventemitter "^5.2.9"
 
-"@guardian/consent-management-platform@13.6.1", "@guardian/consent-management-platform@^13.6.1":
+"@guardian/consent-management-platform@13.6.1":
   version "13.6.1"
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-13.6.1.tgz#528ed9193b1bd96e9f84964a5a1a080de43e29c1"
   integrity sha512-5KQ4dZrqIBKuJCSJ/TTWXZ4F0WXY9ecpMnfOfvNIU9tXF1LAeT+LNv7hfV8eC5qMJskj2yvZZUi7hlwWD+Nq/A==
 
-"@guardian/core-web-vitals@5.1.0", "@guardian/core-web-vitals@^5.0.0":
+"@guardian/core-web-vitals@5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-5.1.0.tgz#1a7224ff69e773e30698fa16bdd5be608a554ebf"
   integrity sha512-/6L5Ri+/bXBAZ6na8zQ30I1+eHXBHyGFNiLAGvw1bryOnbq2PjCLkmyHQq0EisWCXBWMvdB7p2HdS1DmFLM3Jg==
@@ -3230,13 +3224,6 @@
   dependencies:
     mini-svg-data-uri "1.4.4"
 
-"@guardian/source-foundations@^12.0.0":
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/source-foundations/-/source-foundations-12.0.0.tgz#3f75d5dd26dae0d3fe13fd93aabe1e837cf0ddbb"
-  integrity sha512-sq+htAsvPlaZBjfSZ8ISZZdAnFQwuZ7xeCrI/C369HA+MDl3pQ1dFWz3YmqCP/vkXS8Wr3qVlxXNqWGwKKrYrw==
-  dependencies:
-    mini-svg-data-uri "1.4.4"
-
 "@guardian/source-react-components-development-kitchen@14.0.0":
   version "14.0.0"
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-14.0.0.tgz#9678ae07aa745f62df6b44d2d56f4a502c8f569e"
@@ -3247,7 +3234,7 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-16.0.0.tgz#2d04a3cd2443ed46de2533351f89082eaccc2365"
   integrity sha512-oSRa1TjRvbnfYIEa+qMz23aCM6V73pIvP2ca64dP9dNopNR1PgooNlf7PihjXDEkyBo4ks9udMRzzAd3nfst6A==
 
-"@guardian/support-dotcom-components@1.0.7", "@guardian/support-dotcom-components@^1.0.7":
+"@guardian/support-dotcom-components@1.0.7":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.7.tgz#b3aadcca5f6ee35b2c541121144be237d72bd3e0"
   integrity sha512-MhaO+rC+ujXMcaMd1TL5D0t0eEuHWGh3OrFkM8BhPwhMkjela/dCOPeVPvGJDJ0a37o4PeMszqy+dSuiR4BvvQ==
@@ -15016,8 +15003,9 @@ preact@10.15.1:
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.15.1.tgz#a1de60c9fc0c79a522d969c65dcaddc5d994eede"
   integrity sha512-qs2ansoQEwzNiV5eAcRT1p1EC/dmEzaATVDJNiB3g2sRDWdA7b7MurXdJjB2+/WQktGWZwxvDrnuRFbWuIr64g==
 
-prebid.js@guardian/prebid.js:
+"prebid.js@github:guardian/prebid.js#1d6bbdc":
   version "7.26.0"
+  uid "1d6bbdc64411fbe719489eb06bce72b66ac6a4f3"
   resolved "https://codeload.github.com/guardian/prebid.js/tar.gz/1d6bbdc64411fbe719489eb06bce72b66ac6a4f3"
   dependencies:
     "@babel/core" "^7.16.7"
