@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: bundle-analyser-report
-          path: dotcom-rendering/dist/stats/client.modern-bundles.html
+          path: dotcom-rendering/dist/stats/client.modules-bundles.html
           if-no-files-found: error
       - name: Archive code coverage results for legacy bundle
         uses: actions/upload-artifact@v3
@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: bundle-analyser-report
-          path: dotcom-rendering/dist/stats/client.variant-bundles.html
+          path: dotcom-rendering/dist/stats/client.modules.variant-bundles.html
           if-no-files-found: warn # Variant bundle only exists when an active experiment is going on
       - name: Archive code coverage results for apps bundle
         uses: actions/upload-artifact@v3

@@ -27,26 +27,28 @@ const fileExists = async (glob) => {
 
 (async () => {
 	// Check that the manifest files exist
-	await fileExists('manifest.modern.json');
+	await fileExists('manifest.modules.json');
 	await fileExists('manifest.legacy.json');
-	if (BUILD_VARIANT) await fileExists('manifest.variant.json');
+	if (BUILD_VARIANT) await fileExists('manifest.modules.variant.json');
 
 	// Check that the manifest files return values for all the chunks
 	const manifests = [
-		await loadJsonFile('./dist/manifest.modern.json'),
+		await loadJsonFile('./dist/manifest.modules.json'),
 		await loadJsonFile('./dist/manifest.legacy.json'),
 	];
 	if (BUILD_VARIANT) {
-		manifests.push(await loadJsonFile('./dist/manifest.variant.json'));
+		manifests.push(
+			await loadJsonFile('./dist/manifest.modules.variant.json'),
+		);
 	}
 
-	[
+	for (const name of [
 		'index.js',
 		'atomIframe.js',
 		'embedIframe.js',
 		'newsletterEmbedIframe.js',
 		'relativeTime.js',
-	].forEach((name) => {
+	]) {
 		for (const manifest of manifests) {
 			if (manifest[name]) {
 				console.log(`A manifest returned value ${name}`);
@@ -54,5 +56,5 @@ const fileExists = async (glob) => {
 				errorAndThrow(`A manifest did not return a value for ${name}`);
 			}
 		}
-	});
+	}
 })();

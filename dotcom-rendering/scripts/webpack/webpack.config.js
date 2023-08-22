@@ -1,4 +1,3 @@
-/* eslint-disable global-require -- we merge configs in the export */
 // @ts-check
 const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
@@ -20,8 +19,10 @@ const sessionId = uuidv4();
 
 let builds = 0;
 
+/** @typedef {import('../../src/lib/assets').Build} Build */
+
 /**
- * @param {{ platform: 'server' | 'client.legacy' | 'client.modern' | 'client.variant' | 'client.apps'}} options
+ * @param {{ platform: 'server' | `client.${Build}`}} options
  * @returns {import('webpack').Configuration}
  */
 const commonConfigs = ({ platform }) => ({
@@ -134,6 +135,17 @@ const commonConfigs = ({ platform }) => ({
 	},
 });
 
+/** @type {readonly Build[]} */
+const clientBuilds = [
+	'modules',
+	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
+		? /** @type {const} */ (['modules.variant'])
+		: []),
+	// TODO: ignore static files for legacy compilation
+	...(PROD || BUILD_LEGACY ? /** @type {const} */ (['legacy']) : []),
+	'apps',
+];
+
 module.exports = [
 	merge(
 		commonConfigs({
@@ -142,49 +154,15 @@ module.exports = [
 		require(`./webpack.config.server`)({ sessionId }),
 		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
-	merge(
-		commonConfigs({
-			platform: 'client.modern',
-		}),
-		require(`./webpack.config.client`)({
-			bundle: 'modern',
-			sessionId,
-		}),
+	...clientBuilds.map((build) =>
+		merge(
+			commonConfigs({
+				platform: `client.${build}`,
+			}),
+			require(`./webpack.config.client`)({
+				build,
+				sessionId,
+			}),
+		),
 	),
-	merge(
-		commonConfigs({
-			platform: 'client.apps',
-		}),
-		require(`./webpack.config.client`)({
-			bundle: 'apps',
-			sessionId,
-		}),
-	),
-	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
-		? [
-				merge(
-					commonConfigs({
-						platform: 'client.variant',
-					}),
-					require(`./webpack.config.client`)({
-						bundle: 'variant',
-						sessionId,
-					}),
-				),
-		  ]
-		: []),
-	// TODO: ignore static files for legacy compilation
-	...(PROD || BUILD_LEGACY
-		? [
-				merge(
-					commonConfigs({
-						platform: 'client.legacy',
-					}),
-					require(`./webpack.config.client`)({
-						bundle: 'legacy',
-						sessionId,
-					}),
-				),
-		  ]
-		: []),
 ];

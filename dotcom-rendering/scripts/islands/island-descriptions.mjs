@@ -43,7 +43,7 @@ const chunk = zod.object({
 
 /** Sorted by gzipSize */
 const getBundleReport = () =>
-	readFile(resolve(dir, 'client.modern-bundles.json'), 'utf-8')
+	readFile(resolve(dir, 'client.modules-bundles.json'), 'utf-8')
 		.then((bundle_data) => zod.array(chunk).parse(JSON.parse(bundle_data)))
 		.then((report) => report.sort((a, b) => b.gzipSize - a.gzipSize));
 

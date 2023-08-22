@@ -1,6 +1,11 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
+import {
+	BUILD_VARIANT,
+	dcrJavascriptBundle,
+} from '../../scripts/webpack/bundles';
+import type { ServerSideTests, Switches } from '../types/config';
 
 interface AssetHash {
 	[key: string]: string;
@@ -59,22 +64,12 @@ const getManifest = (path: string): AssetHash => {
 	}
 };
 
-type Build = 'apps' | 'modern' | 'variant' | 'legacy';
+export type Build = 'apps' | 'modules' | 'modules.variant' | 'legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
-const getManifestPath = (build: Build): ManifestPath => {
-	switch (build) {
-		case 'apps':
-			return './manifest.apps.json';
-		case 'modern':
-			return './manifest.modern.json';
-		case 'variant':
-			return './manifest.variant.json';
-		case 'legacy':
-			return './manifest.legacy.json';
-	}
-};
+const getManifestPath = (build: Build): ManifestPath =>
+	`./manifest.${build}.json`;
 
 export const getPathFromManifest = (
 	build: Build,
@@ -111,27 +106,37 @@ const getScriptRegex = (build: Build) =>
 	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
 export const LEGACY_SCRIPT = getScriptRegex('legacy');
-export const MODERN_SCRIPT = getScriptRegex('modern');
-export const VARIANT_SCRIPT = getScriptRegex('variant');
+export const MODULES_SCRIPT = getScriptRegex('modules');
+export const MODULES_VARIANT_SCRIPT = getScriptRegex('modules.variant');
 export const APPS_SCRIPT = getScriptRegex('apps');
 
-export const generateScriptTags = (
-	scripts: Array<string | undefined>,
-): string[] =>
+export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {
 		if (script.match(LEGACY_SCRIPT)) {
 			return `<script defer nomodule src="${script}"></script>`;
 		}
 		if (
-			script.match(MODERN_SCRIPT) ||
-			script.match(VARIANT_SCRIPT) ||
+			script.match(MODULES_SCRIPT) ||
+			script.match(MODULES_VARIANT_SCRIPT) ||
 			script.match(APPS_SCRIPT)
 		) {
 			return `<script type="module" src="${script}"></script>`;
 		}
 
 		return [
-			'<!-- The following script does not vary between modern & legacy browsers -->',
+			'<!-- The following script does not vary between browsers that support modules and those that do not -->',
 			`<script defer src="${script}"></script>`,
 		].join('\n');
 	});
+
+export const getModulesBuild = ({
+	tests,
+}: {
+	tests: ServerSideTests;
+	switches: Switches;
+}): Extract<Build, 'modules' | 'modules.variant'> => {
+	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
+		return 'modules.variant';
+	}
+	return 'modules';
+};

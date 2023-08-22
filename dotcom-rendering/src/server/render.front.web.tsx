@@ -1,11 +1,11 @@
 import { isString, Pillar } from '@guardian/libs';
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles';
 import { FrontPage } from '../components/FrontPage';
 import { TagFrontPage } from '../components/TagFrontPage';
-import { generateScriptTags, getPathFromManifest } from '../lib/assets';
+import {
+	generateScriptTags,
+	getModulesBuild,
+	getPathFromManifest,
+} from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { polyfillIO } from '../lib/polyfill.io';
@@ -81,12 +81,10 @@ export const renderFront = ({ front }: Props): string => {
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = front.config.switches;
 
-	const shouldServeVariantBundle: boolean = [
-		BUILD_VARIANT,
-		front.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
-	].every(Boolean);
-
-	const build = shouldServeVariantBundle ? 'variant' : 'modern';
+	const build = getModulesBuild({
+		switches: front.config.switches,
+		tests: front.config.abTests,
+	});
 
 	/**
 	 * The highest priority scripts.
@@ -163,12 +161,10 @@ export const renderTagFront = ({
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = tagFront.config.switches;
 
-	const shouldServeVariantBundle: boolean = [
-		BUILD_VARIANT,
-		tagFront.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
-	].every(Boolean);
-
-	const build = shouldServeVariantBundle ? 'variant' : 'modern';
+	const build = getModulesBuild({
+		switches: tagFront.config.switches,
+		tests: tagFront.config.abTests,
+	});
 
 	/**
 	 * The highest priority scripts.

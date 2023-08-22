@@ -1,9 +1,9 @@
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles';
 import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
-import { generateScriptTags, getPathFromManifest } from '../lib/assets';
+import {
+	generateScriptTags,
+	getModulesBuild,
+	getPathFromManifest,
+} from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { polyfillIO } from '../lib/polyfill.io';
@@ -33,13 +33,10 @@ export const renderEditorialNewslettersPage = ({
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = newslettersPage.config.switches;
 
-	const shouldServeVariantBundle: boolean = [
-		BUILD_VARIANT,
-		newslettersPage.config.abTests[dcrJavascriptBundle('Variant')] ===
-			'variant',
-	].every(Boolean);
-
-	const build = shouldServeVariantBundle ? 'variant' : 'modern';
+	const build = getModulesBuild({
+		switches: newslettersPage.config.switches,
+		tests: newslettersPage.config.abTests,
+	});
 
 	/**
 	 * The highest priority scripts.

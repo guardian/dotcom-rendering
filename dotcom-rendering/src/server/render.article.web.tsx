@@ -1,14 +1,11 @@
 import { ArticleDesign, isString, Pillar } from '@guardian/libs';
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles';
 import { ArticlePage } from '../components/ArticlePage';
 import { isAmpSupported } from '../components/Elements.amp';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
+	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
@@ -81,12 +78,10 @@ export const renderHtml = ({ article }: Props): string => {
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const serveVariantBundle: boolean = [
-		BUILD_VARIANT,
-		article.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
-	].every(Boolean);
-
-	const build = serveVariantBundle ? 'variant' : 'modern';
+	const build = getModulesBuild({
+		tests: article.config.abTests,
+		switches: article.config.switches,
+	});
 
 	/**
 	 * The highest priority scripts.
