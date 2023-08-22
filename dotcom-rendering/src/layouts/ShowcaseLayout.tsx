@@ -221,7 +221,7 @@ const ShowcaseGrid = ({
 	</div>
 );
 
-const maxWidth = (isPictureContent?: boolean) => css`
+const maxWidth = (isPictureContent: boolean) => css`
 	${!isPictureContent && from.desktop} {
 		max-width: 620px;
 	}
@@ -251,14 +251,14 @@ const mainMediaWrapper = (isPictureContent: boolean) => css`
 
 const PositionHeadline = ({
 	design,
+	isPictureContent,
 	children,
 }: {
 	design: ArticleDesign;
+	isPictureContent: boolean;
 	children: React.ReactNode;
 }) => {
 	switch (design) {
-		case ArticleDesign.Picture:
-			return <div>{children}</div>;
 		case ArticleDesign.Interview:
 			return (
 				<div
@@ -268,11 +268,11 @@ const PositionHeadline = ({
 						}
 					`}
 				>
-					<div css={maxWidth()}>{children}</div>
+					<div css={maxWidth(isPictureContent)}>{children}</div>
 				</div>
 			);
 		default:
-			return <div css={maxWidth()}>{children}</div>;
+			return <div css={maxWidth(isPictureContent)}>{children}</div>;
 	}
 };
 
@@ -563,7 +563,10 @@ export const ShowcaseLayout = ({
 							<Border format={format} />
 						</GridItem>
 						<GridItem area="headline">
-							<PositionHeadline design={format.design}>
+							<PositionHeadline
+								design={format.design}
+								isPictureContent={isPictureContent}
+							>
 								<ArticleHeadline
 									format={format}
 									headlineString={article.headline}
