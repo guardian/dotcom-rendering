@@ -1,61 +1,66 @@
 import { log } from '@guardian/libs';
-import { record } from './ophan/ophan';
+import { getOphan } from './ophan/ophan';
+
+const TTFB_THRESHOLD = 1200;
+const FCP_THRESHOLD = 2400;
 
 const logPerformanceInfo = (name: string, data?: unknown) =>
 	log('openJournalism', '⏱', name, data);
 
-const reasons = new Set<string>();
-const recordPoorDeviceConnectivity = (reason: string) => {
-	reasons.add(reason);
-	log('openJournalism', '🐌', reasons);
-	if (reasons.size >= 2) {
-		/** Not sure here if we should duplicate “dotcom-rendering” */
-		const experiences = ['dotcom-rendering', 'poor-page-performance'].join(
-			',',
-		);
-		record({ experiences });
-	}
-};
-
-export const performanceMonitoring = (): Promise<void> => {
-	try {
-		// First contentful paint is the best single indicator
-		// of core web vitals label
+let memoizedFCP: number | undefined;
+/** First contentful paint is the best single indicator of core web vitals label */
+const getFirstContentfulPaint = async () =>
+	(memoizedFCP ??= await new Promise<number>((resolve) => {
 		new PerformanceObserver((entries, observer) => {
-			for (const { name, duration, startTime } of entries.getEntries()) {
-				switch (name) {
-					case 'first-contentful-paint': {
-						logPerformanceInfo(name, { startTime, duration });
-						if (startTime > 2400) {
-							recordPoorDeviceConnectivity('FCP over 2.4s');
-							observer.disconnect();
-						}
-					}
+			for (const { name, startTime, duration } of entries.getEntries()) {
+				if (name === 'first-contentful-paint') {
+					logPerformanceInfo('paint', { name, startTime, duration });
+					observer.disconnect();
+					resolve(startTime);
 				}
 			}
 		}).observe({
 			type: 'paint',
 			buffered: true,
 		});
+	}));
 
+let memoizedTTFB: number | undefined;
+const getTimeToFirstByte = async () =>
+	(memoizedTTFB ??= await new Promise<number>((resolve, reject) => {
 		// Time to first byte is a widely supported performance marker
 		// which is the second-best indicator of core web vitals label
 		const [nav] = window.performance.getEntriesByType('navigation');
 		if (nav) {
-			const info = {
+			logPerformanceInfo('navigation', {
 				domContentLoadedEventEnd: nav.domContentLoadedEventEnd,
 				type: nav.type,
 				responseEnd: nav.responseEnd,
-			};
-			logPerformanceInfo('navigation', info);
-			const ttfb = nav.responseStart - nav.startTime;
-			if (ttfb > 1200) {
-				recordPoorDeviceConnectivity('TTFB over 1.2s');
-			}
+			});
+			resolve(nav.responseStart - nav.startTime);
+		} else {
+			reject('unable to get navigation information');
+		}
+	}));
+
+export const performanceMonitoring = async (): Promise<void> => {
+	try {
+		const [fcp, ttfb] = await Promise.all([
+			getFirstContentfulPaint(),
+			getTimeToFirstByte(),
+		]);
+
+		if (ttfb > TTFB_THRESHOLD && fcp > FCP_THRESHOLD) {
+			/** Not sure here if we should duplicate “dotcom-rendering” */
+			const experiences = [
+				'dotcom-rendering',
+				'poor-page-performance',
+			].join(',');
+			log('openJournalism', '🐌', { ttfb, fcp });
+			const { record } = await getOphan();
+			record({ experiences });
 		}
 	} catch (error) {
 		// do nothing if the performance API is not available
 	}
-
-	return Promise.resolve();
 };
