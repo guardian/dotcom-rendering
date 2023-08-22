@@ -12,8 +12,10 @@ type Props = {
 const articleWidth = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Picture:
+			//This enables the straight lines and submeta in picture content to correctly "stretch" in the container.
+			return null;
 		case ArticleDesign.Interactive: {
-			/* These articles use a special template which manages it's own width */
+			/* These articles use a special template which manages its own width */
 			return null;
 		}
 		case ArticleDesign.LiveBlog:
