@@ -1,7 +1,5 @@
 // ----- Imports ----- //
 
-import { metrics } from 'client/metrics';
-import { metricsClient } from 'native/nativeApi';
 import interactives from './interactives';
 import newsletterEmbeds from './newsletterEmbeds';
 
@@ -18,17 +16,6 @@ function twitter(): void {
 	}
 }
 
-function performanceMetrics(): void {
-	window.addEventListener(
-		'load',
-		() => {
-			const metricsToSend = metrics(performance.getEntries());
-			void metricsClient.sendMetrics(metricsToSend);
-		},
-		{ once: true },
-	);
-}
-
 function platformCSS(): void {
 	const getPlatformClass = (): string => {
 		const ua = navigator.userAgent;
@@ -41,7 +28,6 @@ function platformCSS(): void {
 }
 
 function setup(): void {
-	performanceMetrics();
 	interactives();
 	twitter();
 	platformCSS();
