@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import {
 	headline,
 	neutral,
@@ -14,7 +13,7 @@ import { Row } from './Row';
 
 type Props = {
 	body: string;
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	error?: string;
 	submitForm: (userName: string) => Promise<void>;
 	cancelSubmit: () => void;
@@ -44,7 +43,7 @@ const Text = ({ children }: { children: React.ReactNode }) => (
 
 export const FirstCommentWelcome = ({
 	body,
-	pillar,
+	format,
 	error = '',
 	submitForm,
 	cancelSubmit,
@@ -131,7 +130,7 @@ export const FirstCommentWelcome = ({
 				/>
 				<Row>
 					<PillarButton
-						pillar={pillar}
+						format={format}
 						onClick={() => void submitForm(userName)}
 						linkName="post comment"
 						size="small"
@@ -144,7 +143,7 @@ export const FirstCommentWelcome = ({
 						`}
 					></div>
 					<PillarButton
-						pillar={pillar}
+						format={format}
 						priority="subdued"
 						onClick={cancelSubmit}
 						linkName="cancel-post-comment"

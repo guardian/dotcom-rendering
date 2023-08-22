@@ -94,6 +94,7 @@ type Props = {
 	 *   the page skin background showing through the containers
 	 */
 	hasPageSkin?: boolean;
+	discussionApiUrl: string;
 
 	editionBranding?: DCRFrontType['pressedPage']['frontProperties']['commercial']['editionBrandings'][number];
 };
@@ -496,6 +497,7 @@ export const FrontSection = ({
 	targetedTerritory,
 	hasPageSkin = false,
 	editionBranding,
+	discussionApiUrl,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -711,6 +713,7 @@ export const FrontSection = ({
 							editionId={editionId}
 							containerPalette={containerPalette}
 							showAge={!hideAge.includes(title)}
+							discussionApiUrl={discussionApiUrl}
 						/>
 					</Island>
 				) : null}

@@ -11,6 +11,7 @@ import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
+import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
@@ -208,6 +209,8 @@ export const renderElement = ({
 					isOverlaid={element.isOverlaid}
 				/>
 			);
+		case 'model.dotcomrendering.pageElements.CartoonBlockElement':
+			return <CartoonComponent format={format} element={element} />;
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
 				<Island deferUntil="visible">

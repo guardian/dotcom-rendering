@@ -21,6 +21,9 @@ const wrapperStyles = css`
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-bottom: 5px;
+	@media (pointer: coarse) {
+		padding-bottom: 0;
+	}
 `;
 
 const directionStyles = (alignment: Alignment) => {
@@ -60,6 +63,12 @@ const liStyles = css`
 	padding-top: 2px;
 	position: relative;
 	margin-top: 8px;
+	@media (pointer: coarse) {
+		margin-top: 0;
+		&:first-child {
+			margin-top: 8px;
+		}
+	}
 	${from.tablet} {
 		margin-bottom: 4px;
 	}
@@ -67,21 +76,26 @@ const liStyles = css`
 
 const dynamoLiStyles = css`
 	background-color: ${transparentColour(neutral[97], 0.875)};
+	/* Creates a containing block which allows Ophan heatmap to place bubbles correctly. */
+	position: relative;
 	border-top: 1px solid;
 	/* 20% is arbitrary, but the cards should expand thanks for flex-grow */
 	flex: 1 0 25%;
 	margin: 0;
 `;
 
-const leftMargin = css`
-	${from.tablet} {
-		margin-left: 10px;
-	}
-`;
-
 const bottomMargin = css`
 	${until.tablet} {
 		margin-bottom: 8px;
+		@media (pointer: coarse) {
+			margin-bottom: 0;
+		}
+	}
+`;
+
+const leftMargin = css`
+	${from.tablet} {
+		margin-left: 10px;
 	}
 `;
 

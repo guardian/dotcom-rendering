@@ -1,4 +1,4 @@
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
@@ -171,10 +171,19 @@ const commentDataThreadedWithLongUserNames: CommentType = {
 	},
 };
 
+const format = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
+
 export const defaultStory = () => (
 	<CommentContainer
 		comment={commentData}
-		pillar={Pillar.Sport}
+		format={{
+			...format,
+			theme: Pillar.Sport,
+		}}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -190,7 +199,10 @@ defaultStory.storyName = 'default';
 export const threadedComment = () => (
 	<CommentContainer
 		comment={commentDataThreaded}
-		pillar={Pillar.Lifestyle}
+		format={{
+			...format,
+			theme: Pillar.Lifestyle,
+		}}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -206,7 +218,10 @@ threadedComment.storyName = 'threaded';
 export const threadedCommentWithShowMore = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongThread}
-		pillar={Pillar.Lifestyle}
+		format={{
+			...format,
+			theme: Pillar.Lifestyle,
+		}}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -222,7 +237,10 @@ threadedCommentWithShowMore.storyName = 'threaded with show more button';
 export const threadedCommentWithLongUsernames = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
-		pillar={Pillar.Lifestyle}
+		format={{
+			...format,
+			theme: Pillar.Lifestyle,
+		}}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -238,7 +256,10 @@ threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
 export const threadedCommentWithLongUsernamesMobile = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
-		pillar={Pillar.Lifestyle}
+		format={{
+			...format,
+			theme: Pillar.Lifestyle,
+		}}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}

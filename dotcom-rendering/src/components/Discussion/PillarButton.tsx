@@ -1,13 +1,12 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial, Pillar } from '@guardian/libs';
 import { neutral, textSans } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
-import { palette } from '../../lib/discussionPalette';
-import { pillarToString } from '../../lib/pillarToString';
+import { decidePalette } from '../../lib/decidePalette';
 
 type Props = {
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	onClick?: () => void | Promise<void>;
 	children: string;
 	type?: 'submit';
@@ -20,8 +19,8 @@ type Props = {
 
 // Why this abstraction? To solve an issue where when we use the 800 key in `palette typescript throws errors. Most
 // likely caused by the fact labs only uses 300 & 400 so the union is restricted
-const dark = (pillar: ArticleTheme): string => {
-	switch (pillar) {
+const dark = (format: ArticleFormat): string => {
+	switch (format.theme) {
 		case Pillar.Culture:
 			return '#FBF6EF';
 		case Pillar.Opinion:
@@ -39,7 +38,7 @@ const dark = (pillar: ArticleTheme): string => {
 };
 
 const buttonOverrides = (
-	pillar: ArticleTheme,
+	format: ArticleFormat,
 	priority: 'primary' | 'secondary' | 'subdued',
 ) => {
 	switch (priority) {
@@ -47,13 +46,13 @@ const buttonOverrides = (
 			return css`
 				button {
 					${textSans.small({ fontWeight: 'bold' })}
-					background-color: ${palette[pillarToString(pillar)][300]};
+					background-color: ${decidePalette(format).background
+						.discussionPillarButton};
 					color: ${neutral[100]};
 
 					:hover {
-						background-color: ${palette[
-							pillarToString(pillar)
-						][400]};
+						background-color: ${decidePalette(format)
+							.discussionGeneric};
 					}
 				}
 			`;
@@ -63,11 +62,11 @@ const buttonOverrides = (
 				button {
 					${textSans.small({ fontWeight: 'bold' })}
 					background-color: transparent;
-					border: 1px solid ${palette[pillarToString(pillar)][400]};
-					color: ${palette[pillarToString(pillar)][400]};
+					border: 1px solid ${decidePalette(format).discussionGeneric};
+					color: ${decidePalette(format).discussionGeneric};
 
 					:hover {
-						background-color: ${dark(pillar)};
+						background-color: ${dark(format)};
 					}
 				}
 			`;
@@ -76,7 +75,7 @@ const buttonOverrides = (
 				button {
 					${textSans.small({ fontWeight: 'bold' })}
 					background-color: transparent;
-					color: ${palette[pillarToString(pillar)][400]};
+					color: ${decidePalette(format).discussionGeneric};
 					border-radius: 0;
 				}
 			`;
@@ -84,7 +83,7 @@ const buttonOverrides = (
 };
 
 export const PillarButton = ({
-	pillar,
+	format,
 	onClick,
 	type,
 	priority = 'primary',
@@ -94,7 +93,7 @@ export const PillarButton = ({
 	linkName,
 	size = 'default',
 }: Props) => (
-	<div css={buttonOverrides(pillar, priority)}>
+	<div css={buttonOverrides(format, priority)}>
 		<Button
 			priority={priority}
 			size={size}

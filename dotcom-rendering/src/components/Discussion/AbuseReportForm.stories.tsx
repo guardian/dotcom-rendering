@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { AbuseReportForm } from './AbuseReportForm';
 
 export default { title: 'Discussion/Abuse Report Form' };
@@ -16,7 +16,11 @@ export const Dialog = () => (
 	<div css={wrapperStyles}>
 		<AbuseReportForm
 			toggleSetShowForm={() => {}}
-			pillar={Pillar.Sport}
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: Pillar.Sport,
+			}}
 			commentId={123}
 			authStatus={undefined}
 		/>

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
-import React, { ImgHTMLAttributes } from 'react';
+import type { ImgHTMLAttributes } from 'react';
+import React from 'react';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';

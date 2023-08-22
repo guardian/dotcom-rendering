@@ -1,4 +1,5 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
 import { FrontSection } from './FrontSection';
@@ -18,7 +19,10 @@ export default {
 };
 
 export const FourCards = () => (
-	<FrontSection title="Fixed Small Slow V MPU">
+	<FrontSection
+		title="Fixed Small Slow V MPU"
+		discussionApiUrl={discussionApiUrl}
+	>
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
@@ -32,7 +36,10 @@ export const FourCards = () => (
 FourCards.storyName = 'With 4 cards';
 
 export const ThreeCards = () => (
-	<FrontSection title="Fixed Small Slow V MPU">
+	<FrontSection
+		title="Fixed Small Slow V MPU"
+		discussionApiUrl={discussionApiUrl}
+	>
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 3)}
 			showAge={true}
@@ -46,7 +53,10 @@ export const ThreeCards = () => (
 ThreeCards.storyName = 'With 3 cards';
 
 export const TwoCards = () => (
-	<FrontSection title="Fixed Small Slow V MPU">
+	<FrontSection
+		title="Fixed Small Slow V MPU"
+		discussionApiUrl={discussionApiUrl}
+	>
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 2)}
 			showAge={true}
@@ -60,7 +70,10 @@ export const TwoCards = () => (
 TwoCards.storyName = 'With 2 cards';
 
 export const OneCard = () => (
-	<FrontSection title="Fixed Small Slow V MPU">
+	<FrontSection
+		title="Fixed Small Slow V MPU"
+		discussionApiUrl={discussionApiUrl}
+	>
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 1)}
 			showAge={true}
@@ -74,7 +87,10 @@ export const OneCard = () => (
 OneCard.storyName = 'With 1 card';
 
 export const AdfreeFixedSmallSlowVMPU = () => (
-	<FrontSection title="Fixed Small Slow V MPU">
+	<FrontSection
+		title="Fixed Small Slow V MPU"
+		discussionApiUrl={discussionApiUrl}
+	>
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}

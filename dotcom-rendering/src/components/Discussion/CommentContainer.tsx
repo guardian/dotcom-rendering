@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import { border, neutral, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
@@ -17,7 +16,7 @@ import { PillarButton } from './PillarButton';
 
 type Props = {
 	comment: CommentType;
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	isClosedForComments: boolean;
 	shortUrl: string;
 	user?: SignedInUser;
@@ -73,7 +72,7 @@ export const avatar = (avatarSize: number) => css`
 
 export const CommentContainer = ({
 	comment,
-	pillar,
+	format,
 	isClosedForComments,
 	user,
 	shortUrl,
@@ -125,7 +124,7 @@ export const CommentContainer = ({
 		<div css={[commentToScrollTo === comment.id && selectedStyles]}>
 			<Comment
 				comment={comment}
-				pillar={pillar}
+				format={format}
 				isClosedForComments={isClosedForComments}
 				setCommentBeingRepliedTo={setCommentBeingRepliedTo}
 				user={user}
@@ -144,7 +143,7 @@ export const CommentContainer = ({
 								<li key={responseComment.id}>
 									<Comment
 										comment={responseComment}
-										pillar={pillar}
+										format={format}
 										isClosedForComments={
 											isClosedForComments
 										}
@@ -185,7 +184,7 @@ export const CommentContainer = ({
 										iconSide="left"
 										linkName="Show more replies"
 										onClick={() => expand(comment.id)}
-										pillar={pillar}
+										format={format}
 										size="xsmall"
 									>
 										{loading
@@ -211,12 +210,12 @@ export const CommentContainer = ({
 							css={nestingStyles}
 						>
 							<CommentReplyPreview
-								pillar={pillar}
+								format={format}
 								commentBeingRepliedTo={commentBeingRepliedTo}
 							/>
 							<CommentForm
 								shortUrl={shortUrl}
-								pillar={pillar}
+								format={format}
 								onAddComment={(response) =>
 									setResponses([...responses, response])
 								}

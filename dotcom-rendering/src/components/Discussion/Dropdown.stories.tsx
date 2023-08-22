@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
 import type { DropdownOptionType } from '../../types/discussion';
 import { Dropdown } from './Dropdown';
@@ -13,6 +13,12 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 		{children}
 	</div>
 );
+
+const format = {
+	theme: Pillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+};
 
 const DropdownParent = () => {
 	const [selected, setSelected] = useState<string>();
@@ -38,7 +44,7 @@ const DropdownParent = () => {
 		<Dropdown
 			id="d3"
 			label="Page Size"
-			pillar={Pillar.Culture}
+			format={format}
 			options={pageSizeOptions}
 			onSelect={(value: string) => {
 				setSelected(value);
@@ -87,7 +93,10 @@ export const DropdownActive = () => (
 	<Container>
 		<Dropdown
 			id="d1"
-			pillar={Pillar.Lifestyle}
+			format={{
+				...format,
+				theme: Pillar.Lifestyle,
+			}}
 			label="Threads"
 			options={threadOptions}
 			onSelect={(value: string) => {
@@ -104,7 +113,7 @@ export const DropdownNoActive = () => (
 		<Dropdown
 			id="d2"
 			label="Threads"
-			pillar={Pillar.News}
+			format={format}
 			options={optionsWithNoneActive}
 			onSelect={(value: string) => {
 				console.log('clicked: ', value);

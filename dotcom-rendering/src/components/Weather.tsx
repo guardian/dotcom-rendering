@@ -30,7 +30,7 @@ import {
 import { useId } from 'react';
 import type { EditionId } from '../lib/edition';
 import { WeatherSlot } from './WeatherSlot';
-import type { WeatherData, WeatherForecast } from './WeatherWrapper.importable';
+import type { WeatherApiData, WeatherData } from './WeatherWrapper.importable';
 
 const visuallyHiddenCSS = css`
 	${visuallyHidden}
@@ -186,14 +186,9 @@ const ExternalLinkIcon = () => (
 	</div>
 );
 
-export interface WeatherProps {
-	location: {
-		id: string;
-		city: string;
-		country: string;
-	};
+export interface WeatherProps
+	extends Pick<WeatherApiData, 'location' | 'forecast'> {
 	now: WeatherData;
-	forecast: WeatherForecast;
 	edition: EditionId;
 }
 

@@ -14,14 +14,13 @@ import {
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractGA } from '../model/extract-ga';
 import { extractNAV } from '../model/extract-nav';
-import { makeWindowGuardian } from '../model/window-guardian';
+import { createGuardian as createWindowGuardian } from '../model/guardian';
 import type { FEElement } from '../types/content';
 import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
 import type { TagType } from '../types/tag';
@@ -116,44 +115,40 @@ export const renderHtml = ({ article }: Props): string => {
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
 	 */
-	const windowGuardian = escapeData(
-		JSON.stringify(
-			makeWindowGuardian({
-				editionId: article.editionId,
-				stage: article.config.stage,
-				frontendAssetsFullURL: article.config.frontendAssetsFullURL,
-				revisionNumber: article.config.revisionNumber,
-				sentryPublicApiKey: article.config.sentryPublicApiKey,
-				sentryHost: article.config.sentryHost,
-				keywordIds: article.config.keywordIds,
-				dfpAccountId: article.config.dfpAccountId,
-				adUnit: article.config.adUnit,
-				ajaxUrl: article.config.ajaxUrl,
-				googletagUrl: article.config.googletagUrl,
-				switches: article.config.switches,
-				abTests: article.config.abTests,
-				brazeApiKey: article.config.brazeApiKey,
-				isPaidContent: article.pageType.isPaidContent,
-				contentType: article.contentType,
-				shouldHideReaderRevenue: article.shouldHideReaderRevenue,
-				googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
-				GAData: extractGA({
-					webTitle: article.webTitle,
-					format: article.format,
-					sectionName: article.sectionName,
-					contentType: article.contentType,
-					tags: article.tags,
-					pageId: article.pageId,
-					editionId: article.editionId,
-					beaconURL: article.beaconURL,
-				}),
-				hasInlineMerchandise: article.config.hasInlineMerchandise,
-				// Until we understand exactly what config we need to make available client-side,
-				// add everything we haven't explicitly typed as unknown config
-				unknownConfig: article.config,
-			}),
-		),
-	);
+	const guardian = createWindowGuardian({
+		editionId: article.editionId,
+		stage: article.config.stage,
+		frontendAssetsFullURL: article.config.frontendAssetsFullURL,
+		revisionNumber: article.config.revisionNumber,
+		sentryPublicApiKey: article.config.sentryPublicApiKey,
+		sentryHost: article.config.sentryHost,
+		keywordIds: article.config.keywordIds,
+		dfpAccountId: article.config.dfpAccountId,
+		adUnit: article.config.adUnit,
+		ajaxUrl: article.config.ajaxUrl,
+		googletagUrl: article.config.googletagUrl,
+		switches: article.config.switches,
+		abTests: article.config.abTests,
+		brazeApiKey: article.config.brazeApiKey,
+		isPaidContent: article.pageType.isPaidContent,
+		contentType: article.contentType,
+		shouldHideReaderRevenue: article.shouldHideReaderRevenue,
+		googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
+		GAData: extractGA({
+			webTitle: article.webTitle,
+			format: article.format,
+			sectionName: article.sectionName,
+			contentType: article.contentType,
+			tags: article.tags,
+			pageId: article.pageId,
+			editionId: article.editionId,
+			beaconURL: article.beaconURL,
+		}),
+		hasInlineMerchandise: article.config.hasInlineMerchandise,
+		// Until we understand exactly what config we need to make available client-side,
+		// add everything we haven't explicitly typed as unknown config
+		unknownConfig: article.config,
+	});
 
 	const getAmpLink = (tags: TagType[]) => {
 		if (
@@ -212,7 +207,7 @@ window.twttr = (function(d, s, id) {
 		html,
 		title,
 		description: article.trailText,
-		windowGuardian,
+		guardian,
 		ampLink,
 		openGraphData,
 		twitterData,

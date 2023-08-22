@@ -44,13 +44,21 @@ function getBrandingFromCards(
 		.filter(isNonNullable);
 }
 
-export const enhanceCollections = (
-	collections: FECollectionType[],
-	editionId: EditionId,
-	pageId: string,
-	onPageDescription?: string,
-	isPaidContent?: boolean,
-): DCRCollectionType[] => {
+export const enhanceCollections = ({
+	collections,
+	editionId,
+	pageId,
+	discussionApiUrl,
+	onPageDescription,
+	isPaidContent,
+}: {
+	collections: FECollectionType[];
+	editionId: EditionId;
+	pageId: string;
+	discussionApiUrl: string;
+	onPageDescription?: string;
+	isPaidContent?: boolean;
+}): DCRCollectionType[] => {
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
@@ -92,17 +100,20 @@ export const enhanceCollections = (
 				collection.curated,
 				collection.backfill,
 				editionId,
+				discussionApiUrl,
 				containerPalette,
 			),
 			curated: enhanceCards(collection.curated, {
 				cardInTagFront: false,
 				editionId,
 				containerPalette,
+				discussionApiUrl,
 			}),
 			backfill: enhanceCards(collection.backfill, {
 				cardInTagFront: false,
 				editionId,
 				containerPalette,
+				discussionApiUrl,
 			}),
 			treats: enhanceTreats(
 				collection.treats,

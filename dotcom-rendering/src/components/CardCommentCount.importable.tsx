@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { between, textSans } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import { formatCount } from '../lib/formatCount';
+import { useCommentCount } from '../lib/useCommentCount';
 import CommentIcon from '../static/icons/comment.svg';
 import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
@@ -8,8 +10,8 @@ import type { Palette } from '../types/palette';
 type Props = {
 	containerPalette?: DCRContainerPalette;
 	format: ArticleFormat;
-	short: string;
-	long: string;
+	discussionApiUrl: string;
+	discussionId: string;
 	isDynamo?: true;
 };
 
@@ -52,13 +54,16 @@ const shortStyles = css`
 `;
 
 export const CardCommentCount = ({
-	containerPalette,
 	format,
-	short,
-	long,
+	containerPalette,
+	discussionApiUrl,
+	discussionId,
 	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
+	const count = useCommentCount(discussionApiUrl, discussionId);
+
+	const { long, short } = formatCount(count);
 	return (
 		<div css={containerStyles(palette, isDynamo)}>
 			<div css={svgStyles(palette, isDynamo)}>

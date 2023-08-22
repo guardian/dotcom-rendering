@@ -5,6 +5,7 @@ import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
+import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import type { Branding } from '../../types/branding';
 import type {
 	DCRContainerPalette,
@@ -16,8 +17,10 @@ import type {
 import type { MainMedia } from '../../types/mainMedia';
 import type { Palette } from '../../types/palette';
 import { Avatar } from '../Avatar';
+import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline } from '../CardHeadline';
-import { CardPicture, Loading } from '../CardPicture';
+import type { Loading } from '../CardPicture';
+import { CardPicture } from '../CardPicture';
 import { Hide } from '../Hide';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
@@ -87,6 +90,7 @@ export type Props = {
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
 	showAge?: boolean;
+	discussionApiUrl: string;
 	discussionId?: string;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
@@ -273,6 +277,7 @@ export const Card = ({
 	containerPalette,
 	containerType,
 	showAge = true,
+	discussionApiUrl,
 	discussionId,
 	isDynamo,
 	isCrossword,
@@ -320,15 +325,11 @@ export const Card = ({
 					) : undefined
 				}
 				commentCount={
-					discussionId ? (
+					discussionId !== undefined ? (
 						<Link
-							// This a tag is initially rendered empty. It gets populated later
-							// after a fetch call is made to get all the counts for each Card
-							// on the page with a discussion (see FetchCommentCounts.tsx)
-							data-discussion-id={discussionId}
-							data-format={JSON.stringify(format)}
-							data-is-dynamo={isDynamo ? 'true' : undefined}
-							data-container-palette={containerPalette}
+							{...{
+								[DISCUSSION_ID_DATA_ATTRIBUTE]: discussionId,
+							}}
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
@@ -344,7 +345,15 @@ export const Card = ({
 								text-decoration: none;
 								min-height: 10px;
 							`}
-						/>
+						>
+							<Island deferUntil="visible">
+								<CardCommentCount
+									format={format}
+									discussionApiUrl={discussionApiUrl}
+									discussionId={discussionId}
+								/>
+							</Island>
+						</Link>
 					) : undefined
 				}
 				cardBranding={

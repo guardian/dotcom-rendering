@@ -414,6 +414,11 @@ export const PhotoEssay: FEArticleType = {
 						url: '/football',
 						children: [
 							{
+								title: "Women's World Cup",
+								url: '/football/womens-world-cup-2023',
+								longTitle: 'football/womens-world-cup-2023',
+							},
+							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -444,11 +449,6 @@ export const PhotoEssay: FEArticleType = {
 								longTitle: 'football/teams',
 							},
 						],
-					},
-					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
 					},
 					{
 						title: 'Business',
@@ -614,6 +614,11 @@ export const PhotoEssay: FEArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
+							{
+								title: "Women's World Cup",
+								url: '/football/womens-world-cup-2023',
+								longTitle: 'football/womens-world-cup-2023',
+							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -1252,7 +1257,7 @@ export const PhotoEssay: FEArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
+					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1622,7 +1627,7 @@ export const PhotoEssay: FEArticleType = {
 					],
 				},
 			],
-			elementId: 'deadc5df-2405-463a-a04e-4c9ac28d055b',
+			elementId: '154f20aa-1e2d-4c42-becb-1c6cb9ce7721',
 		},
 	],
 	canonicalUrl:
@@ -1634,17 +1639,17 @@ export const PhotoEssay: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The last embers of my fire flicker orange and red in the dark. It has warmed me after my evening swim shared with a grey seal, a curious female at the water’s edge, under the soft pink hues of the setting sun.</p>',
-					elementId: '377b360e-84eb-44ba-b71d-51a48bdf33bb',
+					elementId: 'bd9d1842-ebd2-49c1-9c39-028f4906e3ef',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The nights are beginning to draw in and the temperature is dropping. Tonight’s home is a magical one: a hidden spot somewhere on the Roseland Heritage coast.</p>',
-					elementId: 'b54be121-adab-4083-852d-510a678b06ca',
+					elementId: '631b0f6a-3232-4a83-adc9-c5ea6af42a65',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I am curled up in my tiny space with only a canvas shell between me and the elements. Tonight is calm: a beautiful moon path marks the ocean and is my view through the open back of my family’s Land Rover. I drift off to sleep to the sound of waves lapping the shore and the call of tawny owls across the night sky.</p>',
-					elementId: 'd4a74209-7001-47a7-81b5-164bd0d1708d',
+					elementId: 'a2263079-f187-4853-a9f4-09478d9d92ee',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1959,32 +1964,32 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'fc901c37-d387-49b4-bdd7-ec06be58f020',
+					elementId: 'f33dc649-acf6-4a1c-b64f-d05e4def2648',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Cat Vinton’s home for the past eight months has been her Land Rover</p></li>\n</ul>',
-					elementId: '1216cb40-198e-4aee-8130-bf4d193870ce',
+					elementId: '855f309b-a2d7-47c9-8148-568d371b140b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the last few years I’ve not called one place home. Instead, I’ve roamed across the globe – from the High Himalaya to the Arctic Circle, the Gobi Desert to the Andaman Sea<strong> </strong>– weaving my life and work as a photographer, more in tune with a wilder spirit and those who still live connected to nature.</p>',
-					elementId: '4cf775f6-3cbe-4eb4-9878-baf03bf64801',
+					elementId: '1b2a8f11-8208-49b6-81eb-64ed6e466f24',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As the world locked down in March, not only my work but my entire way of life ground to a quiet halt, forcing me to look inward and to grapple with the meaning<em> </em>of “home”.</p>',
-					elementId: '4fe25654-4eef-4ddf-91f3-d63e95d0167b',
+					elementId: 'd4a32bc0-076d-45f0-8636-bea976de6542',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>My pull was to the ocean of the south-west of England. Thanks to my friend Louise Middleton, for those three months of lockdown I watched over a wild pocket of the north Cornish coast – an old slate quarry that overlooks the sea at Trebarwith Strand. It is a beautifully curated space, totally off-grid, that Louise has named <a href="https://kudhva.com/">Kudhva</a> (meaning hideout in Cornish). Kudhva is a visionary architectural hideout that draws creative people who thrive on a life connected to the outdoors.</p>',
-					elementId: '2c562ab8-ee64-4918-90a0-708448e8daf3',
+					elementId: '1ce27bf0-5d7f-4ec6-9f2c-cdb9e9f1dbc0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I became part of a community at Kudhva and my days were spent in fascinating conversation, working on the land with the locals. This is what I do on my projects – immerse myself in a way of life, documenting people who are connected to their land and community around the world. I fell into a way of doing the same on home shores.</p>',
-					elementId: 'd532793d-2def-4258-94e3-d3adbfd34f19',
+					elementId: 'e00ae5f1-68ce-44ae-93c3-4585b779302b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2299,7 +2304,7 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'ec8366ce-58ca-4631-9e63-a9d5179ffe4e',
+					elementId: 'b671730b-8573-4a3d-8e55-00c0e26c9f32',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2614,17 +2619,17 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'a1e13562-724b-4d5b-bf34-ec0cc9589622',
+					elementId: '88ca0613-e9e0-4835-9fe9-f8daef283739',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Louise Middleton bought a 45-acre abandoned quarry in 2015 that she named Kudhva, meaning hideout in Cornish</p></li>\n</ul>',
-					elementId: '0afddf1d-a23e-4965-8746-20e4cce35f28',
+					elementId: 'd765f070-93a1-429d-9a08-d003f9b4995c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Sidetracked, an adventure journal which has shared my stories from the remotest corners of the world, joined us as lockdown lifted for some backyard adventures – climbing, biking, cold-water swimming and surfing – with the people who know this land best.</p>',
-					elementId: '6e2a8e0b-0895-4ef3-8fff-94428b759359',
+					elementId: '7129b810-5c99-4ecc-ae5d-8a834eadbbbf',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2939,7 +2944,7 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '56002286-66c1-495f-837e-2e0a352e8ab4',
+					elementId: '24bd1216-5061-4a8d-b19c-c11c4a7843e2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3254,7 +3259,7 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'fbf16295-5887-46b6-8ffd-f43c68ddf496',
+					elementId: 'b40ba229-c489-4ba6-9739-5f2b3634c8e3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3569,7 +3574,7 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '8c470731-a16f-404f-8d87-06c7013f1c10',
+					elementId: '219e6595-0ec3-41cb-883c-79d45761bafc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3884,12 +3889,12 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'f1ac6e3f-d0c9-4ae4-8e80-751f659e1d05',
+					elementId: 'defbb372-ddc9-4e91-b1a4-8a3aee417161',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Backyard adventures in Cornwall with the locals included cold-water swimming, biking and surfing. Shot for Sidetracked magazine at Kudhva and Trebarwith Strand</p></li>\n</ul>',
-					elementId: '012cf691-bed3-4ba7-9afd-3464507f8add',
+					elementId: '8714ab2f-415e-4d61-b7e2-0ce3d0d3434f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4194,29 +4199,29 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '01b029d6-eeee-46e8-840d-d13b30b4071f',
+					elementId: '78ec57c5-c97b-4cc0-b264-f926ba6b8a3d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Then, as the country began to open up again, and Kudhva began to welcome back guests, it was time to move on. I decided this was a gift of time I may never get again. Usually, I’m moving with my work. I had my cameras and a Land Rover that could take me off the beaten track – the perfect companion to explore the Cornish coast and its way of life, and to see if I could still find pockets of solitude, as the tourist floodgates opened.</p>',
-					elementId: '85f1a3df-ec0e-4ced-816d-835ab377cab7',
+					elementId: '746fd59b-ddb7-4786-a640-86703c393d9d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
 					html: 'It’s a simple set-up – I’m free, independent and I am happy',
 					role: 'supporting',
 					isThirdPartyTracking: false,
-					elementId: '9a20c7f7-e751-4a00-9b27-7bba2abad908',
+					elementId: '5bbacbcd-0f2a-432e-a0fb-82a1ec066358',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>A small pile of books is stacked between the seats of the Land Rover; a head torch, tide tables, bikini and my knife are at hand. Everything else I need is packed neatly in the open back, covered with a piece of wood that doubles as a table and my bed. It’s simple – I’m free, independent and happy. With no real plan, I set off west along the north coast.</p>',
-					elementId: '60b79e40-aac1-4002-af43-0cec787e3749',
+					elementId: '2b5b47cf-6406-45fc-9df1-44e183f5a73e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Cornwall has always felt like a haven to me, but even more so now with its gift of space, fresh air, ocean and local produce far from the hustle of city life. Slate and granite cliffs, small rocky coves and headlands, sand dunes, reefs, sandy beaches, green pathways and water shape Cornwall’s 400 miles of coastline.</p>',
-					elementId: '59726bc6-cb3d-4739-8e3f-8c4454062406',
+					elementId: '59222709-e8cc-43f2-a3fa-73280cd4bc5e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4531,7 +4536,7 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '3d37f9a8-d026-45e2-9544-77b181d28480',
+					elementId: '16262768-22e8-4c64-8746-9b9282c3f673',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4846,7 +4851,7 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '929d0912-a44d-4379-8518-5df6d6f85f1f',
+					elementId: '3792afe3-3c06-4517-919c-6de99c5d2eab',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5161,17 +5166,17 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '54a10d5f-955f-445e-8801-f1145c54b165',
+					elementId: 'b4bdb37b-5a3b-4f33-bec4-a1c34e43ec6e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Turquoise waters, green pathways and rocky pools shape Cornwall’s 400 miles of coastline</p></li>\n</ul>',
-					elementId: '88ab338c-7c9d-45e5-8d6d-6fa8e82e9c00',
+					elementId: '870ae88d-26c7-4813-97fd-ff4ddf0635cf',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As my days slowed, I noticed every detail in the shifting light, the sounds, smells and colours, and tuned into the tidal rhythm, mesmerised by the waves that roll in perfect lines.</p>',
-					elementId: '73c9fa3a-58e3-4426-b229-e7fcd538e529',
+					elementId: '7720944b-1066-4e56-b456-b90635322b6a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5486,17 +5491,17 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '3c1a55a9-1ebf-40b2-9394-c9065bc587e5',
+					elementId: '44cbafa5-22d7-4de4-816e-762846f903fd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I weaved my way along the north coast from Trebarwith Strand to the lighthouse on Pendeen Point, almost 100 miles of coast flanked by the Atlantic Ocean. This part of the coast is punctuated with derelict buildings and still-noble chimneys of tin and copper mines that once thrived in a harsh industrial past. Climbers are drawn to the granite cliffs and crags of the Penwith peninsula, and I spent some epic days here, with friends, climbing and exploring the Penwith heritage coast.</p>',
-					elementId: '6b980b07-5a54-469e-a502-1fe8756b5833',
+					elementId: '7551fc5d-14b9-432e-8c2d-e1c82b668013',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The weather had been mostly kind until late August, but the rumblings of thunder carried a wild energy that stirred up the ocean and I lay awake as lightning lit up the night sky, and wind and driving rain whipped the canvas covering of the Land Rover. For 10 days storms Ellen and Francis raged across the ocean, swirled around the end of land and made me appreciate everything – especially how privileged I am to be able to make the choice to live like this. It’s not the easiest way to live and not what most people would choose – but it’s stripped back, simple and connected. Being immersed in the elements is where I find my energy and my balance, giving me a sense of purpose.</p>',
-					elementId: '202bde95-f95e-4ecf-a444-1b929577778d',
+					elementId: '4e8cbb9e-bb13-4a5e-aba1-7d60f94a73d3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5811,24 +5816,24 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'afe6cc30-c027-48fe-a2d7-e7d41493dee1',
+					elementId: '9c54cd7a-c2e4-4608-bf7f-3928a1d16c05',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Storm Francis raging across the ocean in August</p></li>\n</ul>',
-					elementId: '9cab7fb9-47ba-4fb2-a5cc-ad4563ddbadc',
+					elementId: '08f425b1-cec3-415c-bc70-eb5b563cf8f2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Every day is different as I move slowly along this stunning coast. I’ve seen pilot whales, dolphins, seals, barn owls, kestrels, peregrines and choughs, met old Cornish fishermen and made new local friends. I have, of course, also seen the hordes of people who’ve flocked here – but I’ve also found so many empty pockets of Kernow magic. The sea mist comes and goes, as do the sun and the clouds. The sea changes every day, every hour, every minute, as do we – our emotions, our energy and our perspectives. It feels like a lesson – a constant reminder that we are part of nature, not separated from it.</p>',
-					elementId: '544a0541-5e60-4e39-90a2-1532889624b7',
+					elementId: 'b618cb86-0380-477b-910a-f3407ffe45d5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
 					html: 'I’ve seen pilot whales, dolphins, seals, met old Cornish fishermen and made new local friends',
 					role: 'supporting',
 					isThirdPartyTracking: false,
-					elementId: 'b59849f3-324f-41ec-bead-948f5bf87652',
+					elementId: '34c306e3-f10b-4671-8e45-7354e19322dd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6143,7 +6148,7 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '5a7b5e58-80f4-447a-a50b-e549c400a8ad',
+					elementId: '3e2551db-6b45-4da8-af14-c4df5e541904',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6458,7 +6463,7 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'e8fc178d-a6c3-4f31-b150-0e0017152a1f',
+					elementId: '21e66360-5962-4bf0-9666-193d2c4f4c3d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6774,22 +6779,22 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '3eebf4d5-2cdc-408a-84cd-1fab386a1f3a',
+					elementId: '5ccb8f96-1896-4dc3-baf1-e6e3a0fc8535',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Clockwise from top: White horses carried on the on-shore wind at Dollar Cove, on the Lizard; two different views of Logan Rock</p></li>\n</ul>',
-					elementId: 'e186f39d-86a2-4e57-be52-6370e2b5095e',
+					elementId: 'af2faea5-0802-4b75-b815-ba88e296cb60',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Friends have joined me, I’ve swum every day, I’ve climbed, explored and watched the days turn to night by a fire on the beach most evenings. I’ve witnessed the change in the coastal palette of the native wildflowers and fallen into the pace of life here. I navigated the coast around the Lizard, up to Falmouth and on to the Roseland Heritage coast; the south coast is gentler, with sheltered beaches, woodland valleys, tree-lined estuaries, tiny winding roads, and picturesque fishing villages scattered along its shores.</p>',
-					elementId: '0e548c84-e5ba-4989-b884-d72c19191434',
+					elementId: '4bfff8b5-ef93-430b-9f40-35ab400fb52b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I’ve been drawn to like-minded people, who share the same values, who’ve made a home on this coast and who are passionately driven to protect the ocean and the land. Conversations, ideas and projects are the beginnings of collaborations, now and in the future.</p>',
-					elementId: 'c205e286-94d7-4f01-8263-e4260165e173',
+					elementId: '11cb5a54-1c86-4cbf-9c80-156f99320d52',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -7104,17 +7109,17 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '78d62132-048e-4fb0-b2e6-eb94c4719cf5',
+					elementId: '3908fb7d-63a5-45b4-8a54-0582c5036a38',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Joya Burrow, <a href="https://www.therighttoroam.com/">The Right to Roam Films</a> shot for Finisterre, at Kudhva and Trebarwith Strand</p></li>\n</ul>',
-					elementId: '6a7f5cb3-bb6d-4d8c-98d6-fa948a7a7932',
+					elementId: 'b0079cee-1f07-4c06-a0be-da665da38183',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I made it to Mevagissey on the south coast by the beginning of October, with warnings of another storm. I had a commitment to be on Cornwall’s highest point, Brown Willy on Bodmin Moor, by 3 October to photograph an amazing man, explorer <a href="https://www.theguardian.com/travel/2020/oct/14/nature-has-healing-power-britains-covid-heroes-share-their-favourite-outdoor-spaces">Robin Hanbury-Tenison</a> and his family. His story is one of a remarkable recovery from Covid-19, having spent five weeks in an induced coma with little chance of survival. The key moment in his recovery was when he was wheeled into the healing garden of Derriford hospital. Now raising funds for healing gardens across Cornwall, Robin braved the 60mph winds of Storm Alex to reach the summit and fly the Cornish flag of Saint Piran. Another story of the power of nature.</p>',
-					elementId: '1009c3e6-51fa-4ccf-a9e6-dcc17f6b2d23',
+					elementId: 'c11be7a9-d816-404e-b78a-c98b954eb046',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -7429,7 +7434,7 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'e1d87f81-6b7e-4073-ba6a-e411f8538727',
+					elementId: 'ea0d9474-756d-4925-8497-31ff3225c742',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -7744,34 +7749,34 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'f8502a37-95b6-4472-9ed9-26fa45fb7110',
+					elementId: '20dc2f3d-36c3-4b04-82bf-4fe3f04aacbb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Explorer and Covid-19 survivor Robin Hanbury-Tenison climbs Brown Willy on Bodmin Moor in October to raise funds for healing gardens across Cornwall</p></li>\n</ul>',
-					elementId: 'cf6acc6c-fafb-4def-8066-0f9d35b11eed',
+					elementId: 'b30db27e-78e8-4ab8-8d3c-f232bcac2cc1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I’ve been in Cornwall for eight months now. That’s the longest I’ve been in one place for a long time. Cornwall has had my heart for many years, but to have lived through the seasons, entirely off-grid, has connected me more deeply.</p>',
-					elementId: 'fde7568f-cf27-4a19-b274-bdb204fab445',
+					elementId: '640ce8ae-1a85-4ffb-a703-dc320c7fc194',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
 					html: 'There is something incredibly powerful about living so close to nature, in the elements',
 					role: 'supporting',
 					isThirdPartyTracking: false,
-					elementId: 'dd35b30d-bb9c-46ca-92bb-bbb5405b1393',
+					elementId: '7131c22a-fff8-404a-af71-e2bd1a816cb7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>There is something incredibly powerful about living so close to nature, in the elements. I think it’s something we miss living inside closed walls – we are disconnected.</p>',
-					elementId: '50f34843-30e1-4c95-bd0d-0439063aa48e',
+					elementId: 'fb8cc19f-0a38-4d80-9662-7b72de199218',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As the world of free movent has new rules and the future is unknown and precarious, I think it has forced many of us to rethink our pace of life, our relationship to nature, what we really need to be happy and fulfilled, and how we will live our lives on the other side of this.</p>',
-					elementId: '1b9e5113-4066-4096-9bcc-0b088a6b8ba7',
+					elementId: 'cde6461a-0ced-4d49-98fb-60cc3168e086',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -8086,7 +8091,7 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '9369d471-ac99-4ef4-b8a6-f3d535a22eb1',
+					elementId: '7e9dbb66-6305-4921-bc24-3ee7534138b1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -8401,7 +8406,7 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '79da36ea-aa65-42c2-ac0e-d648c7838c8c',
+					elementId: '4de76c2f-b3d9-4f0f-a458-c76ac8204e61',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -8716,17 +8721,17 @@ export const PhotoEssay: FEArticleType = {
 							],
 						},
 					],
-					elementId: '9a8fb293-ece7-4554-8027-f4a3b694a5ab',
+					elementId: '1e67e813-97af-433d-9054-cd95eb361242',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Clockwise from top left: Sunrise at Towan Beach, full corn moon on the Penwith Heritage coast and Cat Vinton’s Land Rover parked up on the Cornish coast</p></li>\n</ul>',
-					elementId: 'af14ccc0-1eff-43a3-ba24-eeb312c8003d',
+					elementId: 'f88a577f-e6a4-4bc4-ab0b-fb71832cc2a6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I have learned so much about the importance and the purpose of life – a moral and ethical code – from the nomadic people of the world’s most remote corners. About the fragile connection between people and nature, and that wealth and success are not measured in belongings and status, but in the strength of our human spirit. I feel, more than ever, that we have so much to learn from these people who have never lost those visceral connections.</p>',
-					elementId: 'db97f30b-0df8-4e4f-a44d-16ec2e237143',
+					elementId: '7555025f-27a4-465d-9803-5df4d9ac88ae',
 				},
 			],
 			attributes: {

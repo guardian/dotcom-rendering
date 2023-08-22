@@ -242,6 +242,7 @@ const buildElementTree =
 						getAttrs(node)?.getNamedItem('data-link-name')?.value,
 					'data-component':
 						getAttrs(node)?.getNamedItem('data-component')?.value,
+					rel: getAttrs(node)?.getNamedItem('rel')?.value,
 					key,
 					children,
 				});

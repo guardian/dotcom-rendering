@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
@@ -39,6 +39,12 @@ const aUser: SignedInUser = {
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
+const format = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
+
 describe('CommentContainer', () => {
 	it('Post a comment to a root comment', async () => {
 		const newCommentText = 'A brand new comment';
@@ -59,7 +65,7 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithoutReply} //TODO: should be comments with reponses
-				pillar={Pillar.News}
+				format={format}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -97,7 +103,7 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithoutReply} //TODO: should be comments with reponses
-				pillar={Pillar.News}
+				format={format}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -134,7 +140,7 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithReply} //TODO: should be comments with reponses
-				pillar={Pillar.News}
+				format={format}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -172,7 +178,7 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithoutReply} //TODO: should be comments with reponses
-				pillar={Pillar.News}
+				format={format}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}

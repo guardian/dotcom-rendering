@@ -50,7 +50,14 @@ export const Cartoon = () => {
 				isMainMedia={false}
 				role="inline"
 			>
-				<CartoonComponent element={cartoon} />
+				<CartoonComponent
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+					element={cartoon}
+				/>
 			</Figure>
 		</Wrapper>
 	);
@@ -69,7 +76,14 @@ export const CartoonWithoutCredit = () => {
 				isMainMedia={false}
 				role="inline"
 			>
-				<CartoonComponent element={cartoonWithoutCreditOrCaption} />
+				<CartoonComponent
+					element={cartoonWithoutCreditOrCaption}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+				/>
 			</Figure>
 		</Wrapper>
 	);

@@ -55,7 +55,6 @@ type KnownBlockElementType =
 	| 'model.dotcomrendering.pageElements.BlockquoteBlockElement'
 	| 'model.dotcomrendering.pageElements.CommentBlockElement'
 	| 'model.dotcomrendering.pageElements.EmbedBlockElement'
-	| 'model.dotcomrendering.pageElements.EmbedBlockElement'
 	| 'model.dotcomrendering.pageElements.GuideAtomBlockElement'
 	| 'model.dotcomrendering.pageElements.ImageBlockElement'
 	| 'model.dotcomrendering.pageElements.InteractiveBlockElement'

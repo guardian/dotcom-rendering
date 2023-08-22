@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
 import { DynamicSlow } from './DynamicSlow';
@@ -43,7 +44,7 @@ export const Avatar = () => {
 		};
 	});
 	return (
-		<FrontSection title="Dynamic Slow">
+		<FrontSection title="Dynamic Slow" discussionApiUrl={discussionApiUrl}>
 			<DynamicSlow
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -68,6 +69,7 @@ export const OneHugeTwoBigsFourStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: oneHuge</br>second slice: twoBigs`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -87,6 +89,7 @@ export const OneVeryBigTwoBigsFourStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: oneVeryBig</br>second slice: twoBigs`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -107,6 +110,7 @@ export const TwoVeryBigsTwoBigsFourStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -127,6 +131,7 @@ export const TwoVeryBigs1stBoostedTwoBigsFourStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigsFirstBoosted</br>second slice: twoBigs`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -147,6 +152,7 @@ export const TwoVeryBigs2ndBoostedTwoBigsFourStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigsSecondBoosted</br>second slice: twoBigs`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -168,6 +174,7 @@ export const TwoVeryBigs8Standards = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: noBigs`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -186,6 +193,7 @@ export const TwoVeryBigsOneBig4Standards = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -206,6 +214,7 @@ export const TwoVeryBigsTwoBigs4Standards = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -229,6 +238,7 @@ export const TwoVeryBigsFiveStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: noBigs`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -248,6 +258,7 @@ export const ThreeVeryBigsFiveStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -267,6 +278,7 @@ export const TwoVeryBigsOneBig = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -286,6 +298,7 @@ export const TwoBigsThreeStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: undefined</br>second slice: twoBigs`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -305,6 +318,7 @@ export const OneVeryBigTwoBigsOneStandard = () => (
 	<FrontSection
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicSlow
 			groupedTrails={{

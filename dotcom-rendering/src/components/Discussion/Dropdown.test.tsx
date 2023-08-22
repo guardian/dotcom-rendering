@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { fireEvent, render, screen } from '@testing-library/react';
 import type { DropdownOptionType } from '../../types/discussion';
 import { Dropdown } from './Dropdown';
@@ -29,13 +29,19 @@ const noActiveOptions: DropdownOptionType[] = threadOptions.map((option) => ({
 	isActive: false,
 }));
 
+const format = {
+	theme: Pillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+};
+
 describe('Dropdown', () => {
 	it('should display the given label', () => {
 		const label = 'I should show';
 		render(
 			<Dropdown
 				id="abc"
-				pillar={Pillar.News}
+				format={format}
 				label={label}
 				options={threadOptions}
 				onSelect={() => {}}
@@ -49,7 +55,7 @@ describe('Dropdown', () => {
 		render(
 			<Dropdown
 				id="abc"
-				pillar={Pillar.News}
+				format={format}
 				label={'The label'}
 				options={noActiveOptions}
 				onSelect={() => {}}
@@ -65,7 +71,7 @@ describe('Dropdown', () => {
 		const { container } = render(
 			<Dropdown
 				id="abc"
-				pillar={Pillar.News}
+				format={format}
 				label={'The label'}
 				options={threadOptions}
 				onSelect={() => {}}
@@ -80,7 +86,7 @@ describe('Dropdown', () => {
 		const { container } = render(
 			<Dropdown
 				id="abc"
-				pillar={Pillar.News}
+				format={format}
 				label={'The label'}
 				options={threadOptions}
 				onSelect={() => {}}
@@ -97,7 +103,7 @@ describe('Dropdown', () => {
 		const { container } = render(
 			<Dropdown
 				id="abc"
-				pillar={Pillar.News}
+				format={format}
 				label={'The label'}
 				options={threadOptions}
 				onSelect={() => {}}
@@ -115,7 +121,7 @@ describe('Dropdown', () => {
 		const { container } = render(
 			<Dropdown
 				id="abc"
-				pillar={Pillar.News}
+				format={format}
 				label={'The label'}
 				options={threadOptions}
 				onSelect={() => {}}
@@ -135,7 +141,7 @@ it('should trigger the correct onSelect callbacks when an option is clicked', (
 	render(
 		<Dropdown
 			id="abc"
-			pillar={Pillar.News}
+			format={format}
 			label={'The label'}
 			options={threadOptions}
 			onSelect={mockCallback}

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { mockRESTCalls } from '../../lib/mockRESTCalls';
@@ -7,12 +7,17 @@ import { AbuseReportForm } from './AbuseReportForm';
 
 const fetchMock = mockRESTCalls();
 
+const format = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.Sport,
+};
 describe('Dropdown', () => {
 	it('Should show the expected label names', () => {
 		const { getByText } = render(
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
-				pillar={Pillar.Sport}
+				format={format}
 				commentId={123}
 				authStatus={undefined}
 			/>,
@@ -27,7 +32,7 @@ describe('Dropdown', () => {
 		const { getByText } = render(
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
-				pillar={Pillar.Sport}
+				format={format}
 				commentId={123}
 				authStatus={undefined}
 			/>,
@@ -44,7 +49,7 @@ describe('Dropdown', () => {
 		const { getByText, getByLabelText, getByRole } = render(
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
-				pillar={Pillar.Sport}
+				format={format}
 				commentId={123}
 				authStatus={undefined}
 			/>,

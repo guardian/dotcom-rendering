@@ -129,13 +129,15 @@ export const decideFrontsBannerAdSlot = (
 	pageId: string,
 	collectionName: string,
 	numBannerAdsInserted: React.MutableRefObject<number>,
+	isFirstContainer: boolean,
 ) => {
 	const targetedSections = frontsBannerAdSections[pageId];
 
 	if (
 		!renderAds ||
 		!isInFrontsBannerTest ||
-		!targetedSections?.includes(collectionName)
+		!targetedSections?.includes(collectionName) ||
+		isFirstContainer
 	) {
 		return null;
 	}
@@ -415,6 +417,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								!!eB.branding,
 						);
 
+					const isFirstContainer = index === 0;
+
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<Fragment key={ophanName}>
@@ -426,6 +430,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										front.config.pageId,
 										collection.displayName,
 										numBannerAdsInserted,
+										isFirstContainer,
 									)}
 									{!!trail.embedUri && (
 										<SnapCssSandbox
@@ -487,6 +492,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.config.pageId,
 									collection.displayName,
 									numBannerAdsInserted,
+									isFirstContainer,
 								)}
 								<FrontSection
 									toggleable={true}
@@ -516,6 +522,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									treats={collection.treats}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
+									discussionApiUrl={
+										front.config.discussionApiUrl
+									}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -566,6 +575,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									badge={collection.badge}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
+									discussionApiUrl={
+										front.config.discussionApiUrl
+									}
 								>
 									<DecideContainer
 										trails={trailsWithoutBranding}
@@ -615,6 +627,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.config.pageId,
 									collection.displayName,
 									numBannerAdsInserted,
+									isFirstContainer,
 								)}
 								<Section
 									title={collection.displayName}
@@ -657,6 +670,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											}
 											hasPageSkin={hasPageSkin}
 											url={collection.href}
+											discussionApiUrl={
+												front.config.discussionApiUrl
+											}
 										/>
 									</Island>
 								</Section>
@@ -684,6 +700,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.config.pageId,
 								collection.displayName,
 								numBannerAdsInserted,
+								isFirstContainer,
 							)}
 							<FrontSection
 								title={collection.displayName}
@@ -724,6 +741,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
 								editionBranding={editionBranding}
+								discussionApiUrl={front.config.discussionApiUrl}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}

@@ -446,6 +446,7 @@ export const LiveLayout = ({
 								webPublicationDateDeprecated={
 									article.webPublicationDateDeprecated
 								}
+								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -482,6 +483,7 @@ export const LiveLayout = ({
 												typeof article.starRating ===
 												'number'
 											}
+											renderingTarget={renderingTarget}
 										/>
 									)}
 								</div>
@@ -568,6 +570,7 @@ export const LiveLayout = ({
 												.serverShareCounts
 										}
 										messageUs={article.messageUs}
+										renderingTarget={renderingTarget}
 									/>
 								</div>
 							</Hide>
@@ -732,6 +735,7 @@ export const LiveLayout = ({
 													.serverShareCounts
 											}
 											messageUs={article.messageUs}
+											renderingTarget={renderingTarget}
 										/>
 									</div>
 								</Hide>
@@ -1154,6 +1158,9 @@ export const LiveLayout = ({
 									onwardsSource="more-on-this-story"
 									format={format}
 									leftColSize={'wide'}
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
 								/>
 							</Island>
 						</Section>
@@ -1181,6 +1188,7 @@ export const LiveLayout = ({
 							pillar={format.theme}
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
+							discussionApiUrl={article.config.discussionApiUrl}
 						/>
 					</Island>
 
