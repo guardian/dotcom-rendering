@@ -67,6 +67,7 @@ const getLoaders = (build) => {
 		case 'apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'web.variant':
+		case 'web.scheduled':
 		case 'web':
 			return swcLoader(getBrowserTargets());
 	}
@@ -79,7 +80,7 @@ const getLoaders = (build) => {
 module.exports = ({ build, sessionId }) => ({
 	entry: {
 		index:
-			build === 'web.variant'
+			build === 'web.scheduled'
 				? './src/client/index.scheduled.ts'
 				: './src/client/index.ts',
 		debug: './src/client/debug/index.ts',

@@ -64,7 +64,12 @@ const getManifest = (path: string): AssetHash => {
 	}
 };
 
-export type Build = 'apps' | 'web' | 'web.variant' | 'web.legacy';
+export type Build =
+	| 'apps'
+	| 'web'
+	| 'web.variant'
+	| 'web.scheduled'
+	| 'web.legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
@@ -108,6 +113,7 @@ const getScriptRegex = (build: Build) =>
 export const WEB = getScriptRegex('web');
 export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');
 export const WEB_LEGACY_SCRIPT = getScriptRegex('web.legacy');
+export const WEB_SCHEDULED_SCRIPT = getScriptRegex('web.scheduled');
 export const APPS_SCRIPT = getScriptRegex('apps');
 
 export const generateScriptTags = (scripts: string[]): string[] =>
@@ -131,12 +137,16 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 
 export const getModulesBuild = ({
 	tests,
+	switches,
 }: {
 	tests: ServerSideTests;
 	switches: Switches;
-}): Extract<Build, 'web' | 'web.variant'> => {
+}): Extract<Build, 'web' | 'web.variant' | 'web.scheduled'> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
 		return 'web.variant';
+	}
+	if (switches.scheduler) {
+		return 'web.scheduled';
 	}
 	return 'web';
 };
