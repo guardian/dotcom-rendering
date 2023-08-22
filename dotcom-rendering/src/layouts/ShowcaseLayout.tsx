@@ -195,8 +195,8 @@ const ShowcaseGrid = ({
 									'title'
 									'headline'
 									'standfirst'
-									'lines'
 									'media'
+									'lines'
 									'meta'
 									'body';
 						  `
@@ -224,19 +224,26 @@ const maxWidth = css`
 	}
 `;
 
-const stretchLines = css`
-	${until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
+const stretchLines = (isPictureContent: boolean) => css`
+	${!isPictureContent && until.phablet} {
+		margin-left: -30px;
+		margin-right: -30px;
 	}
-	${until.mobileLandscape} {
+	${!isPictureContent && until.mobileLandscape} {
 		margin-left: -10px;
 		margin-right: -10px;
 	}
 `;
-
-const mainMediaWrapper = css`
+const mainMediaWrapper = (isPictureContent: boolean) => css`
 	position: relative;
+	${isPictureContent && until.phablet} {
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+	${isPictureContent && until.mobileLandscape} {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
 `;
 
 const PositionHeadline = ({
@@ -516,7 +523,7 @@ export const ShowcaseLayout = ({
 				>
 					<ShowcaseGrid isPictureContent={isPictureContent}>
 						<GridItem area="media">
-							<div css={mainMediaWrapper}>
+							<div css={mainMediaWrapper(isPictureContent)}>
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
@@ -574,7 +581,7 @@ export const ShowcaseLayout = ({
 						</GridItem>
 						<GridItem area="lines">
 							<div css={maxWidth}>
-								<div css={stretchLines}>
+								<div css={stretchLines(isPictureContent)}>
 									<DecideLines
 										format={format}
 										color={palette.border.secondary}
