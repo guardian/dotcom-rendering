@@ -59,7 +59,6 @@ const ShowcaseGrid = ({
 	children: React.ReactNode;
 	isPictureContent: boolean;
 }) => (
-	//add isPic content as decider
 	<div
 		css={css`
 			/* IE Fallback */
@@ -89,20 +88,24 @@ const ShowcaseGrid = ({
 					Vertical grey border
 					Main content
 					Right Column
+					
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
 					${isPictureContent
 						? css`
+								grid-template-columns: 219px 1px 1fr;
+
 								grid-template-areas:
-									'title  border  headline    headline'
-									'lines  border  standfirst       standfirst'
-									'meta   border  media       media'
-									'meta   border  media       media'
-									'.      border  body        right-column'
-									'.      border  .           right-column';
+									'title  border  headline'
+									'lines  border  standfirst'
+									'meta   border  media'
+									'meta   border  media'
+									'.      border  body'
+									'.      border  .';
 						  `
 						: css`
+								grid-template-columns: 219px 1px 1fr 300px;
+
 								grid-template-areas:
 									'title  border  headline    headline'
 									'lines  border  media       media'
@@ -120,11 +123,11 @@ const ShowcaseGrid = ({
 						? css`
 								grid-template-areas:
 									'title  border  headline    headline'
-									'lines  border  standfirst       standfirst'
+									'lines  border  standfirst  standfirst'
 									'meta   border  media       media'
 									'meta   border  media       media'
-									'.      border  body        right-column'
-									'.      border  .           right-column';
+									'.      border  body        body'
+									'.      border  .           . ';
 						  `
 						: css`
 								grid-template-areas:
@@ -218,16 +221,16 @@ const ShowcaseGrid = ({
 	</div>
 );
 
-const maxWidth = css`
-	${from.desktop} {
+const maxWidth = (isPictureContent?: boolean) => css`
+	${!isPictureContent && from.desktop} {
 		max-width: 620px;
 	}
 `;
 
 const stretchLines = (isPictureContent: boolean) => css`
 	${!isPictureContent && until.phablet} {
-		margin-left: -30px;
-		margin-right: -30px;
+		margin-left: -20px;
+		margin-right: -20px;
 	}
 	${!isPictureContent && until.mobileLandscape} {
 		margin-left: -10px;
@@ -254,6 +257,8 @@ const PositionHeadline = ({
 	children: React.ReactNode;
 }) => {
 	switch (design) {
+		case ArticleDesign.Picture:
+			return <div>{children}</div>;
 		case ArticleDesign.Interview:
 			return (
 				<div
@@ -263,11 +268,11 @@ const PositionHeadline = ({
 						}
 					`}
 				>
-					<div css={maxWidth}>{children}</div>
+					<div css={maxWidth()}>{children}</div>
 				</div>
 			);
 		default:
-			return <div css={maxWidth}>{children}</div>;
+			return <div css={maxWidth()}>{children}</div>;
 	}
 };
 
@@ -580,7 +585,7 @@ export const ShowcaseLayout = ({
 							/>
 						</GridItem>
 						<GridItem area="lines">
-							<div css={maxWidth}>
+							<div css={maxWidth(isPictureContent)}>
 								<div css={stretchLines(isPictureContent)}>
 									<DecideLines
 										format={format}
@@ -590,7 +595,7 @@ export const ShowcaseLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="meta" element="aside">
-							<div css={maxWidth}>
+							<div css={maxWidth(isPictureContent)}>
 								<ArticleMeta
 									branding={branding}
 									format={format}
