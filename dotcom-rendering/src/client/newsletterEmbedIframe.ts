@@ -1,11 +1,18 @@
 import { isObject } from '@guardian/libs';
+import { guard } from '../lib/guard';
 
 // No trailing slash!
-const allowedOrigins = ['https://www.theguardian.com'];
+const allowedOrigins = ['https://www.theguardian.com'] as const;
+const isAllowedOrigin = guard(allowedOrigins);
+
 export const newsletterEmbedIframe = (): Promise<void> => {
-	const allIframes: HTMLIFrameElement[] = [].slice.call(
-		document.querySelectorAll('.email-sub__iframe'),
-	);
+	const allIframes: HTMLIFrameElement[] = [
+		...document.querySelectorAll<HTMLIFrameElement>(
+			'iframe.email-sub__iframe',
+		),
+	];
+
+	if (allIframes.length === 0) return Promise.resolve();
 
 	// Tell the iframes to resize once this script is loaded
 	// Otherwise, earlier resize events might be missed
@@ -18,7 +25,7 @@ export const newsletterEmbedIframe = (): Promise<void> => {
 	}
 
 	window.addEventListener('message', (event) => {
-		if (!allowedOrigins.includes(event.origin)) return;
+		if (!isAllowedOrigin(event.origin)) return;
 
 		const iframes: HTMLIFrameElement[] = allIframes.filter((i) => {
 			try {
@@ -33,8 +40,9 @@ export const newsletterEmbedIframe = (): Promise<void> => {
 		if (iframes.length !== 0) {
 			try {
 				const message: unknown = JSON.parse(event.data);
-				if (!isObject(message) || typeof message.type !== 'string')
+				if (!isObject(message) || typeof message.type !== 'string') {
 					return;
+				}
 
 				switch (message.type) {
 					case 'set-height':
@@ -51,8 +59,9 @@ export const newsletterEmbedIframe = (): Promise<void> => {
 						break;
 					default:
 				}
-				// eslint-disable-next-line no-empty
-			} catch (e) {}
+			} catch (e) {
+				// do nothing
+			}
 		}
 	});
 
