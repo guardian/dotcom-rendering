@@ -8,9 +8,6 @@ Parameters:
   Subnets:
     Description: The subnets where rendering instances will run
     Type: List<AWS::EC2::Subnet::Id>
-  VpcId:
-    Description: The VPC in which rendering instances will run
-    Type: AWS::EC2::VPC::Id
   App:
     Description: Application name
     Type: String
@@ -26,9 +23,6 @@ Parameters:
     Description: Stack name
     Type: String
     Default: frontend
-  AMI:
-    Description: AMI to use for instances
-    Type: AWS::EC2::Image::Id
   NotificationAlarmAction:
     Type: CommaDelimitedList
     Description: (Optional) ARN of action to execute when notification alarms change state
@@ -48,11 +42,8 @@ Parameters:
   InstanceType:
     Type: String
     Description: EC2 Instance Type to use for dotcom-rendering
-  ELKStream:
-    Type: String
-    Description: name of the kinesis stream to use to send logs to the central ELK stack
-  InstanceSecurityGroup:
-    Description: Id of instance security group
+  AutoscalingGroup:
+    Description: Name of the Autoscaling group
     Type: String
   InternalLoadBalancer:
     Description: Id of internal load balancer
@@ -60,6 +51,13 @@ Parameters:
   InstanceRole:
     Description: Name of instance role
     Type: String
+  # ! These params are not used but should be kept until the migration is finished
+  ELKStream:
+    Description: name of the kinesis stream to use to send logs to the central ELK stack
+    Type: String
+  AMI:
+    Description: AMI to use for instances
+    Type: AWS::EC2::Image::Id
 
 Conditions:
   HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
@@ -71,13 +69,6 @@ Mappings:
       Value: frontend
     App:
       Value: rendering
-  StageMap:
-    PROD:
-      MinCapacity: 15
-      MaxCapacity: 60
-    CODE:
-      MinCapacity: 1
-      MaxCapacity: 4
 
 Resources:
   InstanceProfile:
@@ -86,72 +77,6 @@ Resources:
       Path: /
       Roles:
         - Ref: InstanceRole
-
-  LaunchConfig:
-    Type: AWS::AutoScaling::LaunchConfiguration
-    Properties:
-      ImageId:
-        Ref: AMI
-      SecurityGroups:
-        - Ref: InstanceSecurityGroup
-      InstanceType: !Ref InstanceType
-      IamInstanceProfile:
-        Ref: InstanceProfile
-      AssociatePublicIpAddress: true
-      UserData:
-        'Fn::Base64': !Sub |
-          #!/bin/bash -ev
-
-          groupadd frontend
-          useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
-          usermod -a -G frontend aws-kinesis-agent-user
-          cd /home/dotcom-rendering
-
-          aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/${App}/${App}.zip ./
-          unzip -q ${App}.zip -d ${App}
-
-          chown -R dotcom-rendering:frontend ${App}
-
-          cd ${App}
-
-          export TERM=xterm-256color
-          export NODE_ENV=production
-          export GU_STAGE=${Stage}
-
-          mkdir /var/log/dotcom-rendering
-          chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-
-          sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make start-prod
-
-          /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} ${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
-
-  AutoscalingGroup:
-    Type: AWS::AutoScaling::AutoScalingGroup
-    Properties:
-      AvailabilityZones: !GetAZs ''
-      VPCZoneIdentifier:
-        Ref: Subnets
-      LaunchConfigurationName:
-        Ref: LaunchConfig
-      MinSize: !FindInMap [StageMap, !Ref Stage, MinCapacity]
-      MaxSize: !FindInMap [StageMap, !Ref Stage, MaxCapacity]
-      HealthCheckType: ELB
-      HealthCheckGracePeriod: 120
-      LoadBalancerNames:
-        - Ref: InternalLoadBalancer
-      Tags:
-        - Key: Stage
-          Value:
-            Ref: Stage
-          PropagateAtLaunch: true
-        - Key: Stack
-          Value:
-            Fn::FindInMap: [Constants, Stack, Value]
-          PropagateAtLaunch: true
-        - Key: App
-          Value:
-            Fn::FindInMap: [Constants, App, Value]
-          PropagateAtLaunch: true
 
   ScaleDownPolicy:
     Type: AWS::AutoScaling::ScalingPolicy

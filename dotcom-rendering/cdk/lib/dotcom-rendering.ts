@@ -1,5 +1,10 @@
 import { join } from 'node:path';
-import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
+import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
+import {
+	GuAmiParameter,
+	GuStack,
+	GuStringParameter,
+} from '@guardian/cdk/lib/constructs/core';
 import {
 	GuSecurityGroup,
 	GuVpc,
@@ -12,10 +17,12 @@ import {
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration } from 'aws-cdk-lib';
-import { Peer } from 'aws-cdk-lib/aws-ec2';
+import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
+import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 import type { DCRProps } from './types';
+import { getUserData } from './userData';
 
 export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
@@ -32,6 +39,9 @@ export class DotcomRendering extends GuStack {
 		const publicSubnets = GuVpc.subnetsFromParameter(this, {
 			type: SubnetType.PUBLIC,
 		});
+		const privateSubnets = GuVpc.subnetsFromParameter(this, {
+			type: SubnetType.PRIVATE,
+		});
 
 		const lbSecurityGroup = new GuSecurityGroup(
 			this,
@@ -43,12 +53,12 @@ export class DotcomRendering extends GuStack {
 				vpc,
 				ingresses: [
 					{
-						range: Peer.ipv4(vpc.vpcCidrBlock),
+						range: Peer.ipv4(vpcCidrBlock),
 						port: 80,
 						description: 'TCP 80 ingress',
 					},
 					{
-						range: Peer.ipv4(vpc.vpcCidrBlock),
+						range: Peer.ipv4(vpcCidrBlock),
 						port: 443,
 						description: 'TCP 443 ingress',
 					},
@@ -166,6 +176,7 @@ export class DotcomRendering extends GuStack {
 					resources: [
 						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
 						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/${ssmPrefix}/*`,
 					],
 				}),
 			],
@@ -174,6 +185,40 @@ export class DotcomRendering extends GuStack {
 			logicalId: 'InstanceRole',
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
+
+		const asg = new GuAutoScalingGroup(this, 'AutoscalingGroup', {
+			app,
+			vpc,
+			instanceType: new InstanceType(props.instanceType),
+			minimumInstances: props.minCapacity,
+			maximumInstances: props.maxCapacity,
+			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
+			userData: getUserData({
+				app,
+				region,
+				stage,
+				elkStreamId: new GuStringParameter(this, 'ELKStreamId', {
+					fromSSM: true,
+					default: `${ssmPrefix}/logging.stream.name`,
+				}).valueAsString,
+			}),
+			imageId: new GuAmiParameter(this, {
+				app,
+				fromSSM: true,
+				default: `${ssmPrefix}/ami.imageId`,
+			}),
+			imageRecipe: props.amiRecipe,
+			role: instanceRole,
+			additionalSecurityGroups: [instanceSecurityGroup],
+			vpcSubnets: { subnets: privateSubnets },
+			withoutImdsv2: true,
+		});
+		this.overrideLogicalId(asg, {
+			logicalId: 'AutoscalingGroup',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
+
+		asg.attachToClassicLB(loadBalancer);
 
 		const yamlTemplateFilePath = join(
 			__dirname,
@@ -184,8 +229,7 @@ export class DotcomRendering extends GuStack {
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
 			parameters: {
-				VpcId: vpc.vpcId,
-				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
+				AutoscalingGroup: asg.autoScalingGroupName,
 				InternalLoadBalancer: loadBalancer.loadBalancerName,
 				InstanceRole: instanceRole.roleName,
 			},

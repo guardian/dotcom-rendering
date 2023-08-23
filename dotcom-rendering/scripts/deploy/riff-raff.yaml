@@ -10,21 +10,8 @@ deployments:
       templateStagePaths:
         CODE: DotcomRendering-CODE.template.json
         PROD: DotcomRendering-PROD.template.json
-      templateParameters:
-        VpcId: "/account/vpc/primary/id"
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
-      templateStageParameters:
-        CODE:
-          InstanceType: t4g.micro
-        PROD:
-          InstanceType: t4g.small
-      amiParametersToTags:
-        AMI:
-          # Keep the Node version in sync with `.nvmrc`
-          Recipe: dotcom-rendering-ARM-jammy-node-18.17.0
-          BuiltBy: amigo
-          AmigoStage: PROD
   rendering:
     type: autoscaling
     parameters:
