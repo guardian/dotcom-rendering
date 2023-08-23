@@ -51,6 +51,12 @@ Parameters:
   InstanceRole:
     Description: Name of instance role
     Type: String
+  ScaleDownPolicy:
+    Description: Ref of scale down policy
+    Type: AWS::AutoScaling::ScalingPolicy
+  ScaleUpPolicy:
+    Description: Ref of scale up policy
+    Type: AWS::AutoScaling::ScalingPolicy
   # ! These params are not used but should be kept until the migration is finished
   ELKStream:
     Description: name of the kinesis stream to use to send logs to the central ELK stack
@@ -77,22 +83,6 @@ Resources:
       Path: /
       Roles:
         - Ref: InstanceRole
-
-  ScaleDownPolicy:
-    Type: AWS::AutoScaling::ScalingPolicy
-    Properties:
-      AdjustmentType: ChangeInCapacity
-      AutoScalingGroupName: !Ref AutoscalingGroup
-      Cooldown: '120'
-      ScalingAdjustment: '-1'
-
-  ScaleUpPolicy:
-    Type: AWS::AutoScaling::ScalingPolicy
-    Properties:
-      AdjustmentType: PercentChangeInCapacity
-      AutoScalingGroupName: !Ref AutoscalingGroup
-      Cooldown: '600'
-      ScalingAdjustment: '100'
 
   LatencyScalingAlarm:
     Condition: HasLatencyScalingAlarm
