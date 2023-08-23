@@ -27,6 +27,7 @@ import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 import type { DCRProps } from './types';
 import { getUserData } from './userData';
+import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 
 export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
@@ -238,6 +239,28 @@ export class DotcomRendering extends GuStack {
 			autoScalingGroupName: asg.autoScalingGroupName,
 			cooldown: '120',
 			scalingAdjustment: -1,
+		});
+
+		new CfnAlarm(this, 'LatencyScalingAlarm', {
+			actionsEnabled: stage === 'PROD',
+			alarmName: 'LatencyScalingAlarm',
+			alarmDescription:
+				'Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds',
+			dimensions: [
+				{
+					name: 'LoadBalancerName',
+					value: loadBalancer.loadBalancerName,
+				},
+			],
+			evaluationPeriods: 1,
+			metricName: 'Latency',
+			namespace: 'AWS/ELB',
+			period: 60,
+			statistic: 'Average',
+			threshold: 0.2,
+			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+			okActions: [scaleDownPolicy.attrArn],
+			alarmActions: [scaleUpPolicy.attrArn],
 		});
 
 		const yamlTemplateFilePath = join(
