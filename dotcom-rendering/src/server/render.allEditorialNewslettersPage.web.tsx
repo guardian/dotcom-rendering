@@ -18,7 +18,7 @@ interface Props {
 
 export const renderEditorialNewslettersPage = ({
 	newslettersPage,
-}: Props): string => {
+}: Props): { html: string; clientScripts: string[] } => {
 	const title = newslettersPage.webTitle;
 	const NAV = extractNAV(newslettersPage.nav);
 
@@ -45,17 +45,16 @@ export const renderEditorialNewslettersPage = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const scriptTags = generateScriptTags(
-		[
-			polyfillIO,
-			getPathFromManifest(build, 'frameworks.js'),
-			getPathFromManifest(build, 'index.js'),
-			getPathFromManifest('web.legacy', 'frameworks.js'),
-			getPathFromManifest('web.legacy', 'index.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				newslettersPage.config.commercialBundleUrl,
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
+	const clientScripts = [
+		polyfillIO,
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
+		getPathFromManifest('web.legacy', 'frameworks.js'),
+		getPathFromManifest('web.legacy', 'index.js'),
+		process.env.COMMERCIAL_BUNDLE_URL ??
+			newslettersPage.config.commercialBundleUrl,
+	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	const scriptTags = generateScriptTags(clientScripts);
 
 	const guardian = createGuardian({
 		editionId: newslettersPage.editionId,
@@ -75,7 +74,7 @@ export const renderEditorialNewslettersPage = ({
 		googleRecaptchaSiteKey: newslettersPage.config.googleRecaptchaSiteKey,
 	});
 
-	return htmlPageTemplate({
+	const pageHtml = htmlPageTemplate({
 		scriptTags,
 		css: extractedCss,
 		html,
@@ -87,4 +86,8 @@ export const renderEditorialNewslettersPage = ({
 		renderingTarget: 'Web',
 		weAreHiring: !!newslettersPage.config.switches.weAreHiring,
 	});
+	return {
+		html: pageHtml,
+		clientScripts,
+	};
 };
