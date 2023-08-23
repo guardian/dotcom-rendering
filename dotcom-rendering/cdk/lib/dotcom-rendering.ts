@@ -22,12 +22,12 @@ import {
 	CfnScalingPolicy,
 	HealthCheck,
 } from 'aws-cdk-lib/aws-autoscaling';
+import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 import type { DCRProps } from './types';
 import { getUserData } from './userData';
-import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 
 export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
