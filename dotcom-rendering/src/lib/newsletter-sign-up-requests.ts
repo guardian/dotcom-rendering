@@ -132,7 +132,9 @@ const trackingEventDescriptionToOphanAction = (
 export const reportTrackingEvent = (
 	componentName: string,
 	eventDescription: TrackingEventDescription,
-	extraDetails?: Partial<Record<string, string | string[]>>,
+	extraDetails?: Partial<
+		Record<string, string | string[] | number | number[]>
+	>,
 ): void => {
 	const record = getOphanRecordFunction();
 

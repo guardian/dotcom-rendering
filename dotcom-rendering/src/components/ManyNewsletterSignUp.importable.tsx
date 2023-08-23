@@ -115,7 +115,7 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 
 export const ManyNewsletterSignUp = () => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
-		string[]
+		{ identityName: string; idNumber: number }[]
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
@@ -136,13 +136,21 @@ export const ManyNewsletterSignUp = () => {
 			if (!(button instanceof HTMLElement)) {
 				return;
 			}
-			const id = button.getAttribute('data-newsletter-id');
-			if (!id) {
+			const identityName = button.getAttribute('data-newsletter-id');
+			const idNumber = Number(
+				button.getAttribute('data-newsletter-number'),
+			);
+			if (!identityName || !idNumber) {
 				return;
 			}
-			const index = newslettersToSignUpFor.indexOf(id);
+			const index = newslettersToSignUpFor.findIndex(
+				(newsletter) => newsletter.identityName === identityName,
+			);
 			if (index === -1) {
-				setNewslettersToSignUpFor([...newslettersToSignUpFor, id]);
+				setNewslettersToSignUpFor([
+					...newslettersToSignUpFor,
+					{ identityName: identityName, idNumber: idNumber },
+				]);
 				button.classList.add(BUTTON_SELECTED_CLASS);
 				const ariaLabelText =
 					button.getAttribute('data-aria-label-when-checked') ??
@@ -196,13 +204,20 @@ export const ManyNewsletterSignUp = () => {
 	}, [toggleNewsletter, newslettersToSignUpFor]);
 
 	const sendRequest = async (reCaptchaToken: string): Promise<void> => {
+		const identityNames = newslettersToSignUpFor.map(
+			(newsletter) => newsletter.identityName,
+		);
+		const idNumbers = newslettersToSignUpFor.map(
+			(newsletter) => newsletter.idNumber,
+		);
+
 		reportTrackingEvent('ManyNewsletterSignUp', 'form-submit', {
-			newsletterIds: newslettersToSignUpFor,
+			idNumbers,
 		});
 
 		const response = await requestMultipleSignUps(
 			email,
-			newslettersToSignUpFor,
+			identityNames,
 			reCaptchaToken,
 		).catch(() => {
 			return undefined;
@@ -213,15 +228,15 @@ export const ManyNewsletterSignUp = () => {
 				? await response.text()
 				: '[fetch failure - no response]';
 			reportTrackingEvent('ManyNewsletterSignUp', 'failure-response', {
-				newsletterIds: newslettersToSignUpFor,
-				responseText,
+				idNumbers,
+				responseText: responseText.substring(0, 100),
 			});
 
 			return setStatus('Failed');
 		}
 
 		reportTrackingEvent('ManyNewsletterSignUp', 'success-response', {
-			newsletterIds: newslettersToSignUpFor,
+			idNumbers,
 		});
 		setStatus('Success');
 	};
