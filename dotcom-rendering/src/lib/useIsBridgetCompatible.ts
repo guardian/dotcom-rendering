@@ -10,6 +10,8 @@ export const useIsBridgetCompatible = (
 	);
 
 	useEffect(() => {
+		console.log('useEffect runs');
+
 		void getEnvironmentClient()
 			.nativeThriftPackageVersion()
 			.then((bridgetVersion) => {
