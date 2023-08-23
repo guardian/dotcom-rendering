@@ -67,7 +67,6 @@ Parameters:
 
 Conditions:
   HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
-  HasBackend5XXAlarm: !Equals [!Ref Stage, 'PROD']
 
 Mappings:
   Constants:
@@ -105,22 +104,4 @@ Resources:
         - !Ref ScaleUpPolicy
     Type: AWS::CloudWatch::Alarm
 
-  Backend5xxAlarm:
-    Type: AWS::CloudWatch::Alarm
-    Condition: HasBackend5XXAlarm
-    Properties:
-      AlarmDescription: !Sub |
-        Alarm if 5XX backend errors are greater than ${Backend5XXAlarmThreshold} over last ${Backend5XXAlarmPeriod} seconds
-      ComparisonOperator: GreaterThanOrEqualToThreshold
-      Dimensions:
-        - Name: LoadBalancerName
-          Value: !Ref InternalLoadBalancer
-      MetricName: HTTPCode_Backend_5XX
-      Namespace: AWS/ELB
-      EvaluationPeriods: !Ref Backend5XXConsecutivePeriod
-      Period: !Ref Backend5XXAlarmPeriod
-      Statistic: Sum
-      Threshold: !Ref Backend5XXAlarmThreshold
-      AlarmActions: !Ref NotificationAlarmAction
-      OKActions: !Ref NotificationAlarmAction
 
