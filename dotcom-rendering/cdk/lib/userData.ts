@@ -36,7 +36,7 @@ export const getUserData = ({
 		`mkdir /var/log/dotcom-rendering`,
 		`chown -R dotcom-rendering:frontend /var/log/dotcom-rendering`,
 
-		`make start-prod`,
+		`sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make start-prod`,
 
 		`/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${region} ${elkStreamId} /var/log/dotcom-rendering/dotcom-rendering.log`,
 	].join('\n');
