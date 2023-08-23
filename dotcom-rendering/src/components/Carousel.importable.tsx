@@ -26,7 +26,6 @@ import { LI } from './Card/components/LI';
 import type { Loading } from './CardPicture';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
-import { getBridgetVersion } from '../lib/getBridgetVersion';
 
 type Props = {
 	heading: string;
@@ -863,7 +862,6 @@ export const Carousel = ({
 	discussionApiUrl,
 	...props
 }: ArticleProps | FrontProps) => {
-	getBridgetVersion();
 	const carouselColours = decideCarouselColours(props);
 
 	const carouselRef = useRef<HTMLUListElement>(null);

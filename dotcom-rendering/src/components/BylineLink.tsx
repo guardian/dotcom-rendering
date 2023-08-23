@@ -141,7 +141,8 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 		<>
 			{renderedTokens}
 			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
-				<Island>
+				// Deferuntil added for testing
+				<Island deferUntil="interaction">
 					<FollowWrapper
 						displayName={soleContributor.title}
 						id={soleContributor.id}
