@@ -1,5 +1,5 @@
 import type { OphanAction } from '@guardian/libs';
-import { submitComponentEvent, getOphan } from '../client/ophan/ophan';
+import { getOphan, submitComponentEvent } from '../client/ophan/ophan';
 
 const isServer = typeof window === 'undefined';
 

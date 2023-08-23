@@ -149,7 +149,7 @@ export const ManyNewsletterSignUp = () => {
 			if (index === -1) {
 				setNewslettersToSignUpFor([
 					...newslettersToSignUpFor,
-					{ identityName: identityName, idNumber: idNumber },
+					{ identityName, idNumber },
 				]);
 				button.classList.add(BUTTON_SELECTED_CLASS);
 				const ariaLabelText =
@@ -211,7 +211,7 @@ export const ManyNewsletterSignUp = () => {
 			(newsletter) => newsletter.idNumber,
 		);
 
-		reportTrackingEvent('ManyNewsletterSignUp', 'form-submit', {
+		void reportTrackingEvent('ManyNewsletterSignUp', 'form-submit', {
 			idNumbers,
 		});
 
@@ -227,15 +227,19 @@ export const ManyNewsletterSignUp = () => {
 			const responseText = response
 				? await response.text()
 				: '[fetch failure - no response]';
-			reportTrackingEvent('ManyNewsletterSignUp', 'failure-response', {
-				idNumbers,
-				responseText: responseText.substring(0, 100),
-			});
+			void reportTrackingEvent(
+				'ManyNewsletterSignUp',
+				'failure-response',
+				{
+					idNumbers,
+					responseText: responseText.substring(0, 100),
+				},
+			);
 
 			return setStatus('Failed');
 		}
 
-		reportTrackingEvent('ManyNewsletterSignUp', 'success-response', {
+		void reportTrackingEvent('ManyNewsletterSignUp', 'success-response', {
 			idNumbers,
 		});
 		setStatus('Success');
@@ -258,7 +262,7 @@ export const ManyNewsletterSignUp = () => {
 		}
 
 		if (!reCaptchaRef.current) {
-			reportTrackingEvent(
+			void reportTrackingEvent(
 				'ManyNewsletterSignUp',
 				'captcha-not-loaded-when-needed',
 			);
@@ -267,21 +271,21 @@ export const ManyNewsletterSignUp = () => {
 		setStatus('Loading');
 		// successful execution triggers a call to sendRequest
 		// with the onChange prop on the captcha Component
-		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-execute');
+		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-execute');
 		const result = await reCaptchaRef.current.executeAsync();
 
 		if (typeof result !== 'string') {
-			reportTrackingEvent('ManyNewsletterSignUp', 'captcha-failure');
+			void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-failure');
 			setStatus('Failed');
 			return;
 		}
 
-		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-success');
+		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-success');
 		return sendRequest(result);
 	};
 
 	const handleCaptchaError: ReactEventHandler<HTMLDivElement> = (event) => {
-		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-error', {
+		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-error', {
 			eventType: event.type,
 			status,
 		});
