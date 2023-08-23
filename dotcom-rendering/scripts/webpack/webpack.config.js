@@ -137,12 +137,12 @@ const commonConfigs = ({ platform }) => ({
 
 /** @type {readonly Build[]} */
 const clientBuilds = [
-	'modules',
+	'web',
 	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
-		? /** @type {const} */ (['modules.variant'])
+		? /** @type {const} */ (['web.variant'])
 		: []),
 	// TODO: ignore static files for legacy compilation
-	...(PROD || BUILD_LEGACY ? /** @type {const} */ (['legacy']) : []),
+	...(PROD || BUILD_LEGACY ? /** @type {const} */ (['web.legacy']) : []),
 	'apps',
 ];
 

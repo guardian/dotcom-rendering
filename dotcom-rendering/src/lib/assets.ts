@@ -64,7 +64,7 @@ const getManifest = (path: string): AssetHash => {
 	}
 };
 
-export type Build = 'apps' | 'modules' | 'modules.variant' | 'legacy';
+export type Build = 'apps' | 'web' | 'web.variant' | 'web.legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
@@ -105,19 +105,19 @@ export const getPathFromManifest = (
 const getScriptRegex = (build: Build) =>
 	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
-export const LEGACY_SCRIPT = getScriptRegex('legacy');
-export const MODULES_SCRIPT = getScriptRegex('modules');
-export const MODULES_VARIANT_SCRIPT = getScriptRegex('modules.variant');
+export const WEB = getScriptRegex('web');
+export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');
+export const WEB_LEGACY_SCRIPT = getScriptRegex('web.legacy');
 export const APPS_SCRIPT = getScriptRegex('apps');
 
 export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {
-		if (script.match(LEGACY_SCRIPT)) {
+		if (script.match(WEB_LEGACY_SCRIPT)) {
 			return `<script defer nomodule src="${script}"></script>`;
 		}
 		if (
-			script.match(MODULES_SCRIPT) ||
-			script.match(MODULES_VARIANT_SCRIPT) ||
+			script.match(WEB) ||
+			script.match(WEB_VARIANT_SCRIPT) ||
 			script.match(APPS_SCRIPT)
 		) {
 			return `<script type="module" src="${script}"></script>`;
@@ -134,9 +134,9 @@ export const getModulesBuild = ({
 }: {
 	tests: ServerSideTests;
 	switches: Switches;
-}): Extract<Build, 'modules' | 'modules.variant'> => {
+}): Extract<Build, 'web' | 'web.variant'> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
-		return 'modules.variant';
+		return 'web.variant';
 	}
-	return 'modules';
+	return 'web';
 };

@@ -98,8 +98,8 @@ export const renderFront = ({ front }: Props): string => {
 			polyfillIO,
 			getPathFromManifest(build, 'frameworks.js'),
 			getPathFromManifest(build, 'index.js'),
-			getPathFromManifest('legacy', 'frameworks.js'),
-			getPathFromManifest('legacy', 'index.js'),
+			getPathFromManifest('web.legacy', 'frameworks.js'),
+			getPathFromManifest('web.legacy', 'index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				front.config.commercialBundleUrl,
 		]
@@ -178,8 +178,8 @@ export const renderTagFront = ({
 			polyfillIO,
 			getPathFromManifest(build, 'frameworks.js'),
 			getPathFromManifest(build, 'index.js'),
-			getPathFromManifest('legacy', 'frameworks.js'),
-			getPathFromManifest('legacy', 'index.js'),
+			getPathFromManifest('web.legacy', 'frameworks.js'),
+			getPathFromManifest('web.legacy', 'index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				tagFront.config.commercialBundleUrl,
 		]

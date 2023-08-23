@@ -36,7 +36,7 @@ const generateName = (build) => {
  */
 const getLoaders = (build) => {
 	switch (build) {
-		case 'legacy':
+		case 'web.legacy':
 			return [
 				{
 					loader: 'babel-loader',
@@ -66,8 +66,8 @@ const getLoaders = (build) => {
 			];
 		case 'apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
-		case 'modules.variant':
-		case 'modules':
+		case 'web.variant':
+		case 'web':
 			return swcLoader(getBrowserTargets());
 	}
 };
@@ -79,7 +79,7 @@ const getLoaders = (build) => {
 module.exports = ({ build, sessionId }) => ({
 	entry: {
 		index:
-			build === 'modules.variant'
+			build === 'web.variant'
 				? './src/client/index.scheduled.ts'
 				: './src/client/index.ts',
 		debug: './src/client/debug/index.ts',
