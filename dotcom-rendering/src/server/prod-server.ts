@@ -36,9 +36,6 @@ const logRenderTime = responseTime(
 		logger.info('Page render time', {
 			renderTime,
 		});
-		console.info('Page render time', {
-			renderTime,
-		});
 	},
 );
 
