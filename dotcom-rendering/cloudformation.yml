@@ -52,11 +52,11 @@ Parameters:
     Description: Name of instance role
     Type: String
   ScaleDownPolicy:
-    Description: Id of scale down policy
-    Type: String
+    Description: Ref of scale down policy
+    Type: AWS::AutoScaling::ScalingPolicy
   ScaleUpPolicy:
-    Description: Id of scale up policy
-    Type: String
+    Description: Ref of scale up policy
+    Type: AWS::AutoScaling::ScalingPolicy
   # ! These params are not used but should be kept until the migration is finished
   ELKStream:
     Description: name of the kinesis stream to use to send logs to the central ELK stack

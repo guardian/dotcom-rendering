@@ -252,8 +252,8 @@ export class DotcomRendering extends GuStack {
 				AutoscalingGroup: asg.autoScalingGroupName,
 				InternalLoadBalancer: loadBalancer.loadBalancerName,
 				InstanceRole: instanceRole.roleName,
-				ScaleUpPolicy: scaleUpPolicy.logicalId,
-				ScaleDownPolicy: scaleDownPolicy.logicalId,
+				ScaleUpPolicy: scaleUpPolicy.ref,
+				ScaleDownPolicy: scaleDownPolicy.ref,
 			},
 		});
 
