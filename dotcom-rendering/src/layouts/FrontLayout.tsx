@@ -47,6 +47,7 @@ import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { EuropeLandingModal } from '../components/EuropeLandingModal.importable';
 
 interface Props {
 	front: DCRFrontType;
@@ -372,7 +373,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-
+			<Island>
+				<EuropeLandingModal />
+			</Island>
 			<main
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
