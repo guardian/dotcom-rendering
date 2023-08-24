@@ -850,7 +850,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
         ],
         "AlarmDescription": "Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds",
-        "AlarmName": "LatencyScalingAlarm",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {

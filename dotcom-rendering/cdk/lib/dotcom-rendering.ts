@@ -241,23 +241,25 @@ export class DotcomRendering extends GuStack {
 			scalingAdjustment: -1,
 		});
 
+		const latencyScalingAlarmThreshold = 0.2;
+		const latencyScalingAlarmEvaluationPeriod = 1;
+		const latencyScalingAlarmPeriod = 60;
+
 		new CfnAlarm(this, 'LatencyScalingAlarm', {
 			actionsEnabled: stage === 'PROD',
-			alarmName: 'LatencyScalingAlarm',
-			alarmDescription:
-				'Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds',
+			alarmDescription: `Scale-Up if latency is greater than ${latencyScalingAlarmThreshold} seconds over ${latencyScalingAlarmEvaluationPeriod} period(s) of ${latencyScalingAlarmPeriod} seconds`,
 			dimensions: [
 				{
 					name: 'LoadBalancerName',
 					value: loadBalancer.loadBalancerName,
 				},
 			],
-			evaluationPeriods: 1,
+			evaluationPeriods: latencyScalingAlarmEvaluationPeriod,
 			metricName: 'Latency',
 			namespace: 'AWS/ELB',
-			period: 60,
+			period: latencyScalingAlarmPeriod,
 			statistic: 'Average',
-			threshold: 0.2,
+			threshold: latencyScalingAlarmThreshold,
 			comparisonOperator: 'GreaterThanOrEqualToThreshold',
 			okActions: [scaleDownPolicy.attrArn],
 			alarmActions: [scaleUpPolicy.attrArn],
