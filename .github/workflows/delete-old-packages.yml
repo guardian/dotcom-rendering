@@ -1,0 +1,27 @@
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/delete-old-packages.yaml"
+  schedule:
+    # Runs "At 7:00am on every day of the week from Monday through Friday"
+    - cron: "0 7 * * 1-5"
+
+name: Delete Old Packages
+
+env:
+  NUM_OF_VERSIONS_TO_KEEP: 5
+
+jobs:
+  delete-old-packages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Delete packages
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: "dotcom-rendering"
+          package-type: "container"
+          min-versions-to-keep: ${{ env.NUM_OF_VERSIONS_TO_KEEP }}
