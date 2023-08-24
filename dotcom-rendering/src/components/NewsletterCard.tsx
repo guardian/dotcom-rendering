@@ -241,8 +241,8 @@ export const NewsletterCard = ({
 							</>
 						}
 						cssOverrides={buttonStyle}
-						data-newsletter-id={newsletter.identityName}
-						data-newsletter-number={newsletter.listId}
+						data-identity-name={newsletter.identityName}
+						data-list-id={newsletter.listId}
 						data-role={BUTTON_ROLE}
 					>
 						Sign up

@@ -115,7 +115,12 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 
 export const ManyNewsletterSignUp = () => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
-		{ identityName: string; idNumber: number }[]
+		{
+			/** unique identifier for the newsletter in kebab-case format */
+			identityName: string;
+			/** unique id number for the newsletter */
+			listId: number;
+		}[]
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
@@ -136,11 +141,9 @@ export const ManyNewsletterSignUp = () => {
 			if (!(button instanceof HTMLElement)) {
 				return;
 			}
-			const identityName = button.getAttribute('data-newsletter-id');
-			const idNumber = Number(
-				button.getAttribute('data-newsletter-number'),
-			);
-			if (!identityName || !idNumber) {
+			const identityName = button.getAttribute('data-identity-name');
+			const listId = Number(button.getAttribute('data-list-id'));
+			if (!identityName || !listId) {
 				return;
 			}
 			const index = newslettersToSignUpFor.findIndex(
@@ -149,7 +152,7 @@ export const ManyNewsletterSignUp = () => {
 			if (index === -1) {
 				setNewslettersToSignUpFor([
 					...newslettersToSignUpFor,
-					{ identityName, idNumber },
+					{ identityName, listId },
 				]);
 				button.classList.add(BUTTON_SELECTED_CLASS);
 				const ariaLabelText =
@@ -207,12 +210,12 @@ export const ManyNewsletterSignUp = () => {
 		const identityNames = newslettersToSignUpFor.map(
 			(newsletter) => newsletter.identityName,
 		);
-		const idNumbers = newslettersToSignUpFor.map(
-			(newsletter) => newsletter.idNumber,
+		const listIds = newslettersToSignUpFor.map(
+			(newsletter) => newsletter.listId,
 		);
 
 		void reportTrackingEvent('ManyNewsletterSignUp', 'form-submit', {
-			idNumbers,
+			listIds,
 		});
 
 		const response = await requestMultipleSignUps(
@@ -231,7 +234,7 @@ export const ManyNewsletterSignUp = () => {
 				'ManyNewsletterSignUp',
 				'failure-response',
 				{
-					idNumbers,
+					listIds,
 					responseText: responseText.substring(0, 100),
 				},
 			);
@@ -240,7 +243,7 @@ export const ManyNewsletterSignUp = () => {
 		}
 
 		void reportTrackingEvent('ManyNewsletterSignUp', 'success-response', {
-			idNumbers,
+			listIds,
 		});
 		setStatus('Success');
 	};
