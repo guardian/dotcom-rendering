@@ -12,14 +12,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PROD",
       ],
     },
-    "HasLatencyScalingAlarm": {
-      "Fn::Equals": [
-        {
-          "Ref": "Stage",
-        },
-        "PROD",
-      ],
-    },
   },
   "Description": "Frontend rendering service",
   "Mappings": {
