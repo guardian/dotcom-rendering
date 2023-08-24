@@ -271,6 +271,31 @@ export class DotcomRendering extends GuStack {
 			'cloudformation.yml',
 		);
 
+		const criticalAlertsTopicArn = `arn:aws:sns:${region}:${this.account}:Frontend-${stage}-CriticalAlerts`;
+		const backend5XXAlarmThreshold = 100;
+		const backend5XXAlarmPeriod = 60;
+		const backend5XXConsecutivePeriod = 5;
+
+		new CfnAlarm(this, 'Backend5xxAlarm', {
+			actionsEnabled: stage === 'PROD',
+			alarmDescription: `Alarm if 5XX backend errors are greater than ${backend5XXAlarmThreshold} over last ${backend5XXAlarmPeriod} seconds`,
+			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+			dimensions: [
+				{
+					name: 'LoadBalancerName',
+					value: loadBalancer.loadBalancerName,
+				},
+			],
+			metricName: 'HTTPCode_Backend_5XX',
+			namespace: 'AWS/ELB',
+			evaluationPeriods: backend5XXConsecutivePeriod,
+			period: backend5XXAlarmPeriod,
+			statistic: 'Sum',
+			threshold: backend5XXAlarmThreshold,
+			alarmActions: [criticalAlertsTopicArn],
+			okActions: [criticalAlertsTopicArn],
+		});
+
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
 			parameters: {

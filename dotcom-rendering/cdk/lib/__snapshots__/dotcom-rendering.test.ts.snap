@@ -3,16 +3,6 @@
 exports[`The DotcomRendering stack matches the snapshot 1`] = `
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Conditions": {
-    "HasBackend5XXAlarm": {
-      "Fn::Equals": [
-        {
-          "Ref": "Stage",
-        },
-        "PROD",
-      ],
-    },
-  },
   "Description": "Frontend rendering service",
   "Mappings": {
     "Constants": {
@@ -383,15 +373,23 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
     "Backend5xxAlarm": {
-      "Condition": "HasBackend5XXAlarm",
       "Properties": {
-        "AlarmActions": {
-          "Ref": "NotificationAlarmAction",
-        },
-        "AlarmDescription": {
-          "Fn::Sub": "Alarm if 5XX backend errors are greater than \${Backend5XXAlarmThreshold} over last \${Backend5XXAlarmPeriod} seconds
-",
-        },
+        "ActionsEnabled": false,
+        "AlarmActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId",
+                },
+                ":Frontend-TEST-CriticalAlerts",
+              ],
+            ],
+          },
+        ],
+        "AlarmDescription": "Alarm if 5XX backend errors are greater than 100 over last 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
@@ -401,21 +399,26 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             },
           },
         ],
-        "EvaluationPeriods": {
-          "Ref": "Backend5XXConsecutivePeriod",
-        },
+        "EvaluationPeriods": 5,
         "MetricName": "HTTPCode_Backend_5XX",
         "Namespace": "AWS/ELB",
-        "OKActions": {
-          "Ref": "NotificationAlarmAction",
-        },
-        "Period": {
-          "Ref": "Backend5XXAlarmPeriod",
-        },
+        "OKActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId",
+                },
+                ":Frontend-TEST-CriticalAlerts",
+              ],
+            ],
+          },
+        ],
+        "Period": 60,
         "Statistic": "Sum",
-        "Threshold": {
-          "Ref": "Backend5XXAlarmThreshold",
-        },
+        "Threshold": 100,
       },
       "Type": "AWS::CloudWatch::Alarm",
     },

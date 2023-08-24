@@ -65,9 +65,6 @@ Parameters:
     Description: AMI to use for instances
     Type: AWS::EC2::Image::Id
 
-Conditions:
-  HasBackend5XXAlarm: !Equals [!Ref Stage, 'PROD']
-
 Mappings:
   Constants:
     Stack:
@@ -84,22 +81,4 @@ Resources:
         - Ref: InstanceRole
 
 
-  Backend5xxAlarm:
-    Type: AWS::CloudWatch::Alarm
-    Condition: HasBackend5XXAlarm
-    Properties:
-      AlarmDescription: !Sub |
-        Alarm if 5XX backend errors are greater than ${Backend5XXAlarmThreshold} over last ${Backend5XXAlarmPeriod} seconds
-      ComparisonOperator: GreaterThanOrEqualToThreshold
-      Dimensions:
-        - Name: LoadBalancerName
-          Value: !Ref InternalLoadBalancer
-      MetricName: HTTPCode_Backend_5XX
-      Namespace: AWS/ELB
-      EvaluationPeriods: !Ref Backend5XXConsecutivePeriod
-      Period: !Ref Backend5XXAlarmPeriod
-      Statistic: Sum
-      Threshold: !Ref Backend5XXAlarmThreshold
-      AlarmActions: !Ref NotificationAlarmAction
-      OKActions: !Ref NotificationAlarmAction
 
