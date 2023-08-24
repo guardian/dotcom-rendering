@@ -70,24 +70,15 @@ const globalOlStyles = () => css`
 	}
 `;
 
-const globalH3Styles = (display: ArticleDisplay) => {
-	switch (display) {
-		case ArticleDisplay.NumberedList:
-			return css`
-				h3 {
-					${headline.xsmall({ fontWeight: 'bold' })};
-					margin-bottom: ${space[2]}px;
-				}
-			`;
-		default:
-			return css`
-				h3 {
-					${body.medium({ fontWeight: 'bold' })};
-					margin-bottom: ${space[4]}px;
-				}
-			`;
-	}
-};
+const globalH3Styles = (display: ArticleDisplay) => css`
+	${display === ArticleDisplay.NumberedList &&
+	`
+		h3 {
+			${headline.xsmall({ fontWeight: 'bold' })};
+			margin-bottom: ${space[2]}px;
+		}
+	`}
+`;
 
 const globalStrongStyles = css`
 	strong {
