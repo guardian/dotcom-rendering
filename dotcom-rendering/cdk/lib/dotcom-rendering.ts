@@ -247,7 +247,7 @@ export class DotcomRendering extends GuStack {
 			'cloudformation.yml',
 		);
 
-		const criticalAlertsTopicArn = `arn:aws:sns:${region}:${this.account}:Frontend-PROD-CriticalAlerts`;
+		const criticalAlertsTopicArn = `arn:aws:sns:${region}:${this.account}:Frontend-${stage}-CriticalAlerts`;
 		const backend5XXAlarmThreshold = 100;
 		const backend5XXAlarmPeriod = 60;
 		const backend5XXConsecutivePeriod = 5;
