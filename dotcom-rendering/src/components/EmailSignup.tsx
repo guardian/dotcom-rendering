@@ -11,7 +11,7 @@ import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
 
-type Props = {
+export type EmailSignupProps = {
 	identityName: string;
 	name: string;
 	description: string;
@@ -83,7 +83,7 @@ export const EmailSignup = ({
 	successDescription,
 	theme,
 	hidePrivacyMessage,
-}: Props) => {
+}: EmailSignupProps) => {
 	return (
 		<aside css={containerStyles} aria-label="newsletter promotion">
 			<div css={stackBelowTabletStyles}>

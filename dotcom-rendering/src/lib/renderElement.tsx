@@ -18,14 +18,12 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import { EmailSignup } from '../components/EmailSignup';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
-import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
@@ -68,6 +66,8 @@ import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
 import { decidePalette } from './decidePalette';
+import { EmailSignupWrapper } from '../components/EmailSignupWrapper.importable';
+import type { RenderingTarget } from '../types/renderingTarget';
 
 type Props = {
 	format: ArticleFormat;
@@ -85,6 +85,7 @@ type Props = {
 	switches: Switches;
 	isPinnedPost?: boolean;
 	abTests?: ServerSideTests;
+	renderingTarget: RenderingTarget;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -139,6 +140,7 @@ export const renderElement = ({
 	isSensitive,
 	isPinnedPost,
 	abTests,
+	renderingTarget,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -455,11 +457,10 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
 			return (
-				<InlineSkipToWrapper
-					id={`EmailSignup-skip-link-${index}`}
-					blockDescription="newsletter promotion"
-				>
-					<EmailSignup
+				<Island clientOnly={true} deferUntil={'idle'}>
+					<EmailSignupWrapper
+						renderingTarget={renderingTarget}
+						skipToIndex={index}
 						identityName={element.newsletter.identityName}
 						description={element.newsletter.description}
 						name={element.newsletter.name}
@@ -469,7 +470,7 @@ export const renderElement = ({
 						}
 						theme={element.newsletter.theme}
 					/>
-				</InlineSkipToWrapper>
+				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
@@ -799,6 +800,7 @@ export const RenderArticleElement = ({
 	switches,
 	isPinnedPost,
 	abTests,
+	renderingTarget,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -818,6 +820,7 @@ export const RenderArticleElement = ({
 		switches,
 		isPinnedPost,
 		abTests,
+		renderingTarget,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

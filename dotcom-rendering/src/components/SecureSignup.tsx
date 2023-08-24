@@ -68,19 +68,19 @@ export const SecureSignup = ({
 
 	return (
 		<>
-			<Island
+			{/* <Island
 				clientOnly={true}
 				deferUntil={'idle'}
 				placeholderHeight={65}
-			>
-				<SecureSignupIframe
-					name={name}
-					html={html}
-					styles={styles}
-					newsletterId={newsletterId}
-					successDescription={successDescription}
-				/>
-			</Island>
+			> */}
+			<SecureSignupIframe
+				name={name}
+				html={html}
+				styles={styles}
+				newsletterId={newsletterId}
+				successDescription={successDescription}
+			/>
+			{/* </Island> */}
 			{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
 		</>
 	);
