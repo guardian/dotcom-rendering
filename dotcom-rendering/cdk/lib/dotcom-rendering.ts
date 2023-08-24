@@ -248,7 +248,7 @@ export class DotcomRendering extends GuStack {
 		);
 
 		const criticalAlertsTopicArn = `arn:aws:sns:${region}:${this.account}:Frontend-${stage}-CriticalAlerts`;
-		const backend5XXAlarmThreshold = 1; /** @todo @cemms1 before merging - change back to 100 */
+		const backend5XXAlarmThreshold = 100;
 		const backend5XXAlarmPeriod = 60;
 		const backend5XXConsecutivePeriod = 5;
 
