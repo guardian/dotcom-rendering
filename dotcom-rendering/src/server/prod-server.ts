@@ -135,9 +135,7 @@ export const prodServer = (): void => {
 	/** @todo @cemms1 - Remove this request before merging */
 	app.get('/trigger-5xx', (req: Request, res: Response) => {
 		if (req.headers['x-trigger-alarm'] === 'true') {
-			return res
-				.status(500)
-				.send('Triggering 500 response for testing alarm');
+			throw new Error('TESTING 500 response');
 		} else {
 			return res
 				.status(200)
