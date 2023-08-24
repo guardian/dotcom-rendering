@@ -12,14 +12,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PROD",
       ],
     },
-    "HasLatencyScalingAlarm": {
-      "Fn::Equals": [
-        {
-          "Ref": "Stage",
-        },
-        "PROD",
-      ],
-    },
   },
   "Description": "Frontend rendering service",
   "Mappings": {
@@ -847,17 +839,17 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::EC2::SecurityGroup",
     },
     "LatencyScalingAlarm": {
-      "Condition": "HasLatencyScalingAlarm",
       "Properties": {
+        "ActionsEnabled": false,
         "AlarmActions": [
           {
-            "Ref": "ScaleUpPolicy",
+            "Fn::GetAtt": [
+              "ScaleUpPolicy",
+              "Arn",
+            ],
           },
         ],
-        "AlarmDescription": {
-          "Fn::Sub": "Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds
-",
-        },
+        "AlarmDescription": "Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
@@ -872,7 +864,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Namespace": "AWS/ELB",
         "OKActions": [
           {
-            "Ref": "ScaleDownPolicy",
+            "Fn::GetAtt": [
+              "ScaleDownPolicy",
+              "Arn",
+            ],
           },
         ],
         "Period": 60,

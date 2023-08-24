@@ -22,6 +22,7 @@ import {
 	CfnScalingPolicy,
 	HealthCheck,
 } from 'aws-cdk-lib/aws-autoscaling';
+import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
@@ -238,6 +239,30 @@ export class DotcomRendering extends GuStack {
 			autoScalingGroupName: asg.autoScalingGroupName,
 			cooldown: '120',
 			scalingAdjustment: -1,
+		});
+
+		const latencyScalingAlarmThreshold = 0.2;
+		const latencyScalingAlarmEvaluationPeriod = 1;
+		const latencyScalingAlarmPeriod = 60;
+
+		new CfnAlarm(this, 'LatencyScalingAlarm', {
+			actionsEnabled: stage === 'PROD',
+			alarmDescription: `Scale-Up if latency is greater than ${latencyScalingAlarmThreshold} seconds over ${latencyScalingAlarmEvaluationPeriod} period(s) of ${latencyScalingAlarmPeriod} seconds`,
+			dimensions: [
+				{
+					name: 'LoadBalancerName',
+					value: loadBalancer.loadBalancerName,
+				},
+			],
+			evaluationPeriods: latencyScalingAlarmEvaluationPeriod,
+			metricName: 'Latency',
+			namespace: 'AWS/ELB',
+			period: latencyScalingAlarmPeriod,
+			statistic: 'Average',
+			threshold: latencyScalingAlarmThreshold,
+			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+			okActions: [scaleDownPolicy.attrArn],
+			alarmActions: [scaleUpPolicy.attrArn],
 		});
 
 		const yamlTemplateFilePath = join(
