@@ -140,9 +140,6 @@ export const reportTrackingEvent = async (
 		message: eventDescription,
 		timestamp: Date.now(),
 	};
-
-	console.log('reportTrackingEvent', { payload });
-
 	submitComponentEvent(
 		{
 			component: {
