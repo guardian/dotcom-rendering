@@ -19,7 +19,9 @@ type DCRLoggingStore = {
 		type?: string;
 		platform?: string;
 	};
-	timing: { [key: string]: number };
+	timing: {
+		[key: string]: { start: number; stop?: number; duration?: number };
+	};
 	error?: {
 		message?: string;
 		stack?: string;
@@ -54,15 +56,19 @@ export const recordTimeStart = (metric: RecordablePeriod): void => {
 	const { timing } = loggingStore.getStore() ?? {};
 
 	if (timing) {
-		timing[metric] = performance.now();
+		timing[metric] = {
+			start: performance.now(),
+		};
 	}
 };
 
 export const recordTimeStop = (metric: RecordablePeriod): void => {
 	const { timing } = loggingStore.getStore() ?? {};
+	const time = timing?.[metric];
 
-	if (timing) {
-		timing[metric] = timing[metric] ?? 0 - performance.now();
+	if (time) {
+		time.stop = performance.now();
+		time.duration = time.start - time.stop;
 	}
 };
 
