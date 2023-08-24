@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { useEffect, useState } from 'react';
 import { getNotificationsClient } from '../lib/bridgetApi';
-import { useIsBridgetCompatible } from '../lib/getBridgetVersion';
 import { FollowButton } from './FollowButton';
 
 type Props = {
@@ -12,8 +11,6 @@ type Props = {
 };
 
 export const FollowWrapper = ({ id, displayName, format }: Props) => {
-	// For testing
-	useIsBridgetCompatible();
 	const [isFollowing, setIsFollowing] = useState<boolean | undefined>(
 		undefined,
 	);

@@ -85,7 +85,7 @@ type Props = {
 	switches: Switches;
 	isPinnedPost?: boolean;
 	abTests?: ServerSideTests;
-	renderingTarget: RenderingTarget;
+	renderingTarget?: RenderingTarget;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most

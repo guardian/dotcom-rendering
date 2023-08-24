@@ -3,7 +3,7 @@ import { EmailSignup, EmailSignupProps } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 
 interface Props extends EmailSignupProps {
-	renderingTarget: string;
+	renderingTarget?: string;
 	skipToIndex: number;
 }
 
@@ -14,7 +14,7 @@ export const EmailSignupWrapper = ({
 }: Props) => {
 	const isCompatible = useIsBridgetCompatible();
 
-	if (renderingTarget === 'Apps' && !isCompatible) {
+	if (!renderingTarget || (renderingTarget === 'Apps' && !isCompatible)) {
 		return null;
 	}
 

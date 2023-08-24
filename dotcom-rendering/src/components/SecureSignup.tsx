@@ -2,7 +2,6 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { renderToString } from 'react-dom/server';
-import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { NewsletterSignupForm } from './NewsletterSignupForm';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
