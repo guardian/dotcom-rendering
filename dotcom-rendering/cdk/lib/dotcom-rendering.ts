@@ -241,6 +241,30 @@ export class DotcomRendering extends GuStack {
 			scalingAdjustment: -1,
 		});
 
+		const latencyScalingAlarmThreshold = 0.2;
+		const latencyScalingAlarmEvaluationPeriod = 1;
+		const latencyScalingAlarmPeriod = 60;
+
+		new CfnAlarm(this, 'LatencyScalingAlarm', {
+			actionsEnabled: stage === 'PROD',
+			alarmDescription: `Scale-Up if latency is greater than ${latencyScalingAlarmThreshold} seconds over ${latencyScalingAlarmEvaluationPeriod} period(s) of ${latencyScalingAlarmPeriod} seconds`,
+			dimensions: [
+				{
+					name: 'LoadBalancerName',
+					value: loadBalancer.loadBalancerName,
+				},
+			],
+			evaluationPeriods: latencyScalingAlarmEvaluationPeriod,
+			metricName: 'Latency',
+			namespace: 'AWS/ELB',
+			period: latencyScalingAlarmPeriod,
+			statistic: 'Average',
+			threshold: latencyScalingAlarmThreshold,
+			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+			okActions: [scaleDownPolicy.attrArn],
+			alarmActions: [scaleUpPolicy.attrArn],
+		});
+
 		const yamlTemplateFilePath = join(
 			__dirname,
 			'../..',

@@ -65,9 +65,6 @@ Parameters:
     Description: AMI to use for instances
     Type: AWS::EC2::Image::Id
 
-Conditions:
-  HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
-
 Mappings:
   Constants:
     Stack:
@@ -83,25 +80,5 @@ Resources:
       Roles:
         - Ref: InstanceRole
 
-  LatencyScalingAlarm:
-    Condition: HasLatencyScalingAlarm
-    Properties:
-      AlarmDescription: !Sub |
-        Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds
-      Dimensions:
-        - Name: LoadBalancerName
-          Value: !Ref InternalLoadBalancer
-      EvaluationPeriods: '1'
-      MetricName: Latency
-      Namespace: AWS/ELB
-      Period: '60'
-      Statistic: Average
-      Threshold: '0.2'
-      ComparisonOperator: GreaterThanOrEqualToThreshold
-      OKActions:
-        - !Ref ScaleDownPolicy
-      AlarmActions:
-        - !Ref ScaleUpPolicy
-    Type: AWS::CloudWatch::Alarm
 
 
