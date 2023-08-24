@@ -68,6 +68,8 @@ import type { FEElement, RoleType } from '../types/content';
 import { decidePalette } from './decidePalette';
 import { EmailSignupWrapper } from '../components/EmailSignupWrapper.importable';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { EmailSignup } from '../components/EmailSignup';
+import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
 
 type Props = {
 	format: ArticleFormat;
@@ -456,11 +458,29 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+			if (renderingTarget === 'Apps')
+				return (
+					<Island clientOnly={true} deferUntil={'idle'}>
+						<EmailSignupWrapper
+							renderingTarget={renderingTarget}
+							skipToIndex={index}
+							identityName={element.newsletter.identityName}
+							description={element.newsletter.description}
+							name={element.newsletter.name}
+							frequency={element.newsletter.frequency}
+							successDescription={
+								element.newsletter.successDescription
+							}
+							theme={element.newsletter.theme}
+						/>
+					</Island>
+				);
 			return (
-				<Island clientOnly={true} deferUntil={'idle'}>
-					<EmailSignupWrapper
-						renderingTarget={renderingTarget}
-						skipToIndex={index}
+				<InlineSkipToWrapper
+					id={`EmailSignup-skip-link-${index}`}
+					blockDescription="newsletter promotion"
+				>
+					<EmailSignup
 						identityName={element.newsletter.identityName}
 						description={element.newsletter.description}
 						name={element.newsletter.name}
@@ -469,8 +489,9 @@ export const renderElement = ({
 							element.newsletter.successDescription
 						}
 						theme={element.newsletter.theme}
+						renderingTarget={renderingTarget}
 					/>
-				</Island>
+				</InlineSkipToWrapper>
 			);
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (

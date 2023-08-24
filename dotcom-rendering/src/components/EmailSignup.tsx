@@ -10,8 +10,9 @@ import {
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
+import { RenderingTarget } from 'src/types/renderingTarget';
 
-export type EmailSignupProps = {
+type EmailSignupProps = {
 	identityName: string;
 	name: string;
 	description: string;
@@ -20,6 +21,7 @@ export type EmailSignupProps = {
 	theme: string;
 	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
 	hidePrivacyMessage?: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 const containerStyles = css`
@@ -83,6 +85,7 @@ export const EmailSignup = ({
 	successDescription,
 	theme,
 	hidePrivacyMessage,
+	renderingTarget,
 }: EmailSignupProps) => {
 	return (
 		<aside css={containerStyles} aria-label="newsletter promotion">
