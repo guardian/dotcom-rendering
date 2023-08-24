@@ -25,17 +25,17 @@
   dependencies:
     default-browser-id "3.0.0"
 
-"@aws-cdk/asset-awscli-v1@^2.2.177", "@aws-cdk/asset-awscli-v1@^2.2.200":
+"@aws-cdk/asset-awscli-v1@^2.2.200":
   version "2.2.200"
   resolved "https://registry.yarnpkg.com/@aws-cdk/asset-awscli-v1/-/asset-awscli-v1-2.2.200.tgz#6ead533f73f705ad7350eb46955e2538e50cd013"
   integrity sha512-Kf5J8DfJK4wZFWT2Myca0lhwke7LwHcHBo+4TvWOGJrFVVKVuuiLCkzPPRBQQVDj0Vtn2NBokZAz8pfMpAqAKg==
 
-"@aws-cdk/asset-kubectl-v20@^2.1.1", "@aws-cdk/asset-kubectl-v20@^2.1.2":
+"@aws-cdk/asset-kubectl-v20@^2.1.2":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@aws-cdk/asset-kubectl-v20/-/asset-kubectl-v20-2.1.2.tgz#d8e20b5f5dc20128ea2000dc479ca3c7ddc27248"
   integrity sha512-3M2tELJOxQv0apCIiuKQ4pAbncz9GuLwnKFqxifWfe77wuMxyTRPmxssYHs42ePqzap1LT6GDcPygGs+hHstLg==
 
-"@aws-cdk/asset-node-proxy-agent-v5@^2.0.148", "@aws-cdk/asset-node-proxy-agent-v5@^2.0.166":
+"@aws-cdk/asset-node-proxy-agent-v5@^2.0.166":
   version "2.0.166"
   resolved "https://registry.yarnpkg.com/@aws-cdk/asset-node-proxy-agent-v5/-/asset-node-proxy-agent-v5-2.0.166.tgz#467507db141cd829ff8aa9d6ea5519310a4276b8"
   integrity sha512-j0xnccpUQHXJKPgCwQcGGNu4lRiC1PptYfdxBIH1L4dRK91iBxtSQHESRQX+yB47oGLaF/WfNN/aF3WXwlhikg==
@@ -2614,7 +2614,7 @@
   resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.0.0.tgz#9be79e1f8c0c4a9ee3829390b9bcb828d78cb4d7"
   integrity sha512-bCNIQuPe74AwR0eZWHgN/at3vumPOB0NxozciTujGUblhun23f+Fagtkkf1zyIqQ2VjaYmSVy5zVug+E5v9auw==
 
-"@guardian/cdk@^50.10.6":
+"@guardian/cdk@^50.10.10":
   version "50.10.10"
   resolved "https://registry.yarnpkg.com/@guardian/cdk/-/cdk-50.10.10.tgz#121844a4f2c56caf79e7b5d3bd656f056144a37e"
   integrity sha512-TsrOKVLNcPL4bI4Cy1pgDRui5+hjkMwPHu0+eBlVUp/PxbNuXnVjYTXvW3d6/Gil/zB71fH3dUiGV0pwHXTg4A==
@@ -5848,25 +5848,6 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-aws-cdk-lib@2.87.0:
-  version "2.87.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.87.0.tgz#585a2569fa139ffecc3ff40ffc399eb7da030a4a"
-  integrity sha512-9kirXX7L7OP/yGmCbaYlkt5OAtowGiGw0AYFIQvSwvx/UU3aJO5XuDwAgDsvToDkRpBi0yX0bNwqa0DItu+C6A==
-  dependencies:
-    "@aws-cdk/asset-awscli-v1" "^2.2.177"
-    "@aws-cdk/asset-kubectl-v20" "^2.1.1"
-    "@aws-cdk/asset-node-proxy-agent-v5" "^2.0.148"
-    "@balena/dockerignore" "^1.0.2"
-    case "1.6.3"
-    fs-extra "^11.1.1"
-    ignore "^5.2.4"
-    jsonschema "^1.4.1"
-    minimatch "^3.1.2"
-    punycode "^2.3.0"
-    semver "^7.5.1"
-    table "^6.8.1"
-    yaml "1.10.2"
-
 aws-cdk-lib@2.90.0:
   version "2.90.0"
   resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.90.0.tgz#0c2018b869991fec95cb79eb5cd5a6103f46ad62"
@@ -5886,10 +5867,10 @@ aws-cdk-lib@2.90.0:
     table "^6.8.1"
     yaml "1.10.2"
 
-aws-cdk@2.87.0:
-  version "2.87.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.87.0.tgz#916febc4477119b7a6b799001ea890f78043dc92"
-  integrity sha512-dBm74nl3dMUxoAzgjcfKnzJyoVNIV//B1sqDN11cC3LXEflYapcBxPxZHAyGcRXg5dW3m14dMdKVQfmt4N970g==
+aws-cdk@2.90.0:
+  version "2.90.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.90.0.tgz#248a9866bc538483ffc5f442d0dce884c2919937"
+  integrity sha512-6u9pCZeDyIo03tQBdutLD723tuHBsbOQDor72FRxq1uNFWRbVCmZ8ROk2/APAjYJbl4BK2lW9SEgAb8hapaybA==
   optionalDependencies:
     fsevents "2.3.2"
 
@@ -11869,7 +11850,7 @@ selfsigned@^2.1.1:
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.2.tgz#48d55db737c3287cd4835e17fa13feace1c41ef8"
   integrity sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==
 
-semver@7.x, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.1, semver@^7.5.3, semver@^7.5.4:
+semver@7.x, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3, semver@^7.5.4:
   version "7.5.4"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.4.tgz#483986ec4ed38e1c6c48c34894a9182dbff68a6e"
   integrity sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==
