@@ -399,7 +399,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             ],
           },
         ],
-        "AlarmDescription": "Alarm if 5XX backend errors are greater than 100 over last 60 seconds",
+        "AlarmDescription": "Alarm if 5XX backend errors are greater than 1 over last 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
@@ -428,7 +428,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
         "Period": 60,
         "Statistic": "Sum",
-        "Threshold": 100,
+        "Threshold": 1,
       },
       "Type": "AWS::CloudWatch::Alarm",
     },

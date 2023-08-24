@@ -132,17 +132,18 @@ export const prodServer = (): void => {
 		handleAppsArticle,
 	);
 
-	// To test CDK 5xx alarm
+	/** @todo @cemms1 - Remove this request before merging */
 	app.get('/trigger-5xx', (req: Request, res: Response) => {
-		if (
-			req.headers['x-trigger-alarm'] === 'true' ||
-			req.cookies['trigger-alarm'] === 'true'
-		) {
-			throw new Error('Intentionally triggered 5xx for alarm testing.');
+		if (req.headers['x-trigger-alarm'] === 'true') {
+			return res
+				.status(500)
+				.send('Triggering 500 response for testing alarm');
 		} else {
-			res.status(200).send(
-				'Endpoint for testing Backend5xxAlarm. Use the correct header or cookie to trigger a 5xx error.',
-			);
+			return res
+				.status(200)
+				.send(
+					'Endpoint for testing Backend5xxAlarm. Use the correct header to trigger a 5xx error.',
+				);
 		}
 	});
 
