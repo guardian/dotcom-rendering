@@ -132,6 +132,11 @@ module.exports = ({ build, sessionId }) => ({
 		chunkFilename: generateName(build),
 		publicPath: '',
 	},
+	resolve: {
+		fallback: {
+			buffer: require.resolve('buffer'),
+		},
+	},
 	plugins: [
 		new WebpackManifestPlugin({
 			fileName: `manifest.${build}.json`,

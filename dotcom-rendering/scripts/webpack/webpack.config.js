@@ -42,10 +42,6 @@ const commonConfigs = ({ platform }) => ({
 		},
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 		symlinks: false,
-		// this fallback should be just for the client please.
-		fallback: {
-			buffer: require.resolve('buffer'),
-		},
 	},
 	ignoreWarnings: [
 		/**
@@ -80,10 +76,6 @@ const commonConfigs = ({ platform }) => ({
 		// We use this if there are optional dependencies (e.g in jsdom, ws) to remove uneccesary warnings in our builds / console outpouts.
 		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
-		}),
-		// why do we need this for bridget version but not for follow etc
-		new webpack.ProvidePlugin({
-			Buffer: ['buffer', 'Buffer'],
 		}),
 		...(DEV
 			? // DEV plugins
