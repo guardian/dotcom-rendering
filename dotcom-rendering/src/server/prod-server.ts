@@ -132,19 +132,6 @@ export const prodServer = (): void => {
 		handleAppsArticle,
 	);
 
-	/** @todo @cemms1 - Remove this request before merging */
-	app.get('/trigger-5xx', (req: Request, res: Response) => {
-		if (req.headers['x-trigger-alarm'] === 'true') {
-			throw new Error('TESTING 500 response');
-		} else {
-			return res
-				.status(200)
-				.send(
-					'Endpoint for testing Backend5xxAlarm. Use the correct header to trigger a 5xx error.',
-				);
-		}
-	});
-
 	app.use('/ArticlePerfTest/*', handleArticlePerfTest);
 	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
 
