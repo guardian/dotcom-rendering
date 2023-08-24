@@ -1,9 +1,7 @@
 import { isObject } from '@guardian/libs';
-import { guard } from '../lib/guard';
 
-// No trailing slash!
-const allowedOrigins = ['https://www.theguardian.com'] as const;
-const isAllowedOrigin = guard(allowedOrigins);
+/* No trailing slash! */
+const guardianOrigin = 'https://www.theguardian.com';
 
 export const newsletterEmbedIframe = (): Promise<void> => {
 	const allIframes: HTMLIFrameElement[] = [
@@ -18,14 +16,11 @@ export const newsletterEmbedIframe = (): Promise<void> => {
 	// Otherwise, earlier resize events might be missed
 	// So we don't have to load this script as a priority on each load
 	for (const iframe of allIframes) {
-		iframe.contentWindow?.postMessage(
-			'resize',
-			'https://www.theguardian.com',
-		);
+		iframe.contentWindow?.postMessage('resize', guardianOrigin);
 	}
 
 	window.addEventListener('message', (event) => {
-		if (!isAllowedOrigin(event.origin)) return;
+		if (event.origin !== guardianOrigin) return;
 
 		const iframes: HTMLIFrameElement[] = allIframes.filter((i) => {
 			try {
