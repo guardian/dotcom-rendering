@@ -20,6 +20,11 @@ const MAX_INLINE_ADS = 8;
 const MIN_SPACE_BETWEEN_ADS = 1_500;
 
 /**
+ * Minimum amount of space in pixels between any pair of inline ads on mobile viewports.
+ */
+const MIN_SPACE_BETWEEN_ADS_MOBILE = 1_200;
+
+/**
  * Estimated margin associated with an element.
  * This can sometimes be slightly more or less.
  */
@@ -35,13 +40,18 @@ type BlockElementTextData = {
 	lineLength: number; // approx number of characters that fit on a line
 };
 
-type BlockElementHeightData = { heightExcludingText: number } & (
+type BlockElementHeightData = {
+	heightExcludingText: number;
+	heightExcludingTextMobile: number;
+} & (
 	| {
 			textHeight: BlockElementTextData;
+			textHeightMobile: BlockElementTextData;
 			text: (element: FEElement) => string;
 	  }
 	| {
 			textHeight?: never;
+			textHeightMobile?: never;
 			text?: never;
 	  }
 );
@@ -68,15 +78,19 @@ type KnownBlockElementType =
 
 /**
  * Approximations of the height of each type of block element in pixels.
- * Predictions are made for MOBILE viewports, as data suggests that the
- * majority of liveblog page views are made using mobile devices.
+ * "Mobile" indicates the value is used for devices up to the tablet breakpoint."
  */
 const elementHeightDataMap: {
 	[key in KnownBlockElementType]: BlockElementHeightData;
 } = {
 	'model.dotcomrendering.pageElements.BlockquoteBlockElement': {
 		heightExcludingText: 0,
+		heightExcludingTextMobile: 0,
 		textHeight: {
+			lineHeight: 25.5,
+			lineLength: 40,
+		},
+		textHeightMobile: {
 			lineHeight: 25.5,
 			lineLength: 40,
 		},
@@ -85,7 +99,12 @@ const elementHeightDataMap: {
 	},
 	'model.dotcomrendering.pageElements.CommentBlockElement': {
 		heightExcludingText: 74,
+		heightExcludingTextMobile: 74,
 		textHeight: {
+			lineHeight: 18,
+			lineLength: 28,
+		},
+		textHeightMobile: {
 			lineHeight: 18,
 			lineLength: 28,
 		},
@@ -94,13 +113,20 @@ const elementHeightDataMap: {
 	},
 	'model.dotcomrendering.pageElements.EmbedBlockElement': {
 		heightExcludingText: 251,
+		heightExcludingTextMobile: 251,
 	},
 	'model.dotcomrendering.pageElements.GuideAtomBlockElement': {
 		heightExcludingText: 77,
+		heightExcludingTextMobile: 77,
 	},
 	'model.dotcomrendering.pageElements.ImageBlockElement': {
 		heightExcludingText: 230,
+		heightExcludingTextMobile: 230,
 		textHeight: {
+			lineHeight: 20,
+			lineLength: 52,
+		},
+		textHeightMobile: {
 			lineHeight: 20,
 			lineLength: 52,
 		},
@@ -108,10 +134,16 @@ const elementHeightDataMap: {
 	},
 	'model.dotcomrendering.pageElements.InteractiveBlockElement': {
 		heightExcludingText: 600,
+		heightExcludingTextMobile: 600,
 	},
 	'model.dotcomrendering.pageElements.RichLinkBlockElement': {
 		heightExcludingText: 65,
+		heightExcludingTextMobile: 65,
 		textHeight: {
+			lineHeight: 16,
+			lineLength: 52,
+		},
+		textHeightMobile: {
 			lineHeight: 16,
 			lineLength: 52,
 		},
@@ -119,7 +151,12 @@ const elementHeightDataMap: {
 	},
 	'model.dotcomrendering.pageElements.SubheadingBlockElement': {
 		heightExcludingText: 0,
+		heightExcludingTextMobile: 0,
 		textHeight: {
+			lineHeight: 23,
+			lineLength: 40,
+		},
+		textHeightMobile: {
 			lineHeight: 23,
 			lineLength: 40,
 		},
@@ -128,10 +165,16 @@ const elementHeightDataMap: {
 	},
 	'model.dotcomrendering.pageElements.TableBlockElement': {
 		heightExcludingText: 32,
+		heightExcludingTextMobile: 32,
 	},
 	'model.dotcomrendering.pageElements.TextBlockElement': {
 		heightExcludingText: 0,
+		heightExcludingTextMobile: 0,
 		textHeight: {
+			lineHeight: 25.5,
+			lineLength: 39,
+		},
+		textHeightMobile: {
 			lineHeight: 25.5,
 			lineLength: 39,
 		},
@@ -140,7 +183,12 @@ const elementHeightDataMap: {
 	},
 	'model.dotcomrendering.pageElements.TweetBlockElement': {
 		heightExcludingText: 190,
+		heightExcludingTextMobile: 190,
 		textHeight: {
+			lineHeight: 19,
+			lineLength: 40,
+		},
+		textHeightMobile: {
 			lineHeight: 19,
 			lineLength: 40,
 		},
@@ -148,14 +196,17 @@ const elementHeightDataMap: {
 	},
 	'model.dotcomrendering.pageElements.VideoYoutubeBlockElement': {
 		heightExcludingText: 215,
+		heightExcludingTextMobile: 215,
 	},
 	'model.dotcomrendering.pageElements.YoutubeBlockElement': {
 		heightExcludingText: 239,
+		heightExcludingTextMobile: 239,
 	},
 };
 
 export const calculateApproximateElementHeight = (
 	element: FEElement,
+	isMobile: boolean,
 ): number => {
 	// Is there a height estimate for this element type?
 	const isElementTypeKnown = Object.keys(elementHeightDataMap).includes(
@@ -170,12 +221,19 @@ export const calculateApproximateElementHeight = (
 	const elementType = element._type as KnownBlockElementType;
 	const heightData = elementHeightDataMap[elementType];
 
-	let estimatedHeight = heightData.heightExcludingText + ELEMENT_MARGIN;
+	const heightExcludingText = isMobile
+		? heightData.heightExcludingText
+		: heightData.heightExcludingTextMobile;
+
+	let estimatedHeight = heightExcludingText + ELEMENT_MARGIN;
+	const textHeight = isMobile
+		? heightData.textHeight
+		: heightData.textHeightMobile;
 
 	// If the element has text that contributes to the height of the element, estimate
 	// the height of the text and increment the height
-	if (heightData.textHeight) {
-		const { lineHeight, lineLength } = heightData.textHeight;
+	if (textHeight && heightData.text) {
+		const { lineHeight, lineLength } = textHeight;
 		const characterCount = heightData.text(element).length;
 
 		estimatedHeight += lineHeight * Math.ceil(characterCount / lineLength);
@@ -189,13 +247,16 @@ export const calculateApproximateElementHeight = (
  * A block is a list of Elements that make up one liveblog update
  * An element can be a few paragraphs of text, an image, a twitter embed, etc.
  */
-const calculateApproximateBlockHeight = (elements: FEElement[]): number => {
+const calculateApproximateBlockHeight = (
+	elements: FEElement[],
+	isMobile: boolean,
+): number => {
 	if (!elements.length) return 0;
 
 	const defaultBlockHeight = BLOCK_HEADER + BLOCK_FOOTER + BLOCK_SPACING;
 
 	return elements.reduce((total, element) => {
-		return total + calculateApproximateElementHeight(element);
+		return total + calculateApproximateElementHeight(element, isMobile);
 	}, defaultBlockHeight);
 };
 
@@ -207,6 +268,7 @@ const shouldDisplayAd = (
 	totalBlocks: number,
 	numAdsInserted: number,
 	numPixelsWithoutAdvert: number,
+	isMobile: boolean,
 ): boolean => {
 	const isFinalBlock = block === totalBlocks;
 	if (isFinalBlock || numAdsInserted >= MAX_INLINE_ADS) {
@@ -219,7 +281,11 @@ const shouldDisplayAd = (
 		return true;
 	}
 
-	return numPixelsWithoutAdvert > MIN_SPACE_BETWEEN_ADS;
+	const minSpaceBetweenAds = isMobile
+		? MIN_SPACE_BETWEEN_ADS
+		: MIN_SPACE_BETWEEN_ADS_MOBILE;
+
+	return numPixelsWithoutAdvert > minSpaceBetweenAds;
 };
 
 export { calculateApproximateBlockHeight, shouldDisplayAd };

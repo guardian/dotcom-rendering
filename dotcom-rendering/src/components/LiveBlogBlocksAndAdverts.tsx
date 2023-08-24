@@ -59,27 +59,49 @@ export const LiveBlogBlocksAndAdverts = ({
 		);
 	}
 
-	let numPixelsOfContentWithoutAdvert = 0;
-	let numAdvertsInserted = 0;
+	let pixelsSinceAdMobile = 0;
+	let mobileAdCounter = 0;
+
+	let pixelsSinceAdLargeScreen = 0;
+	let largeScreenAdCounter = 0;
 
 	return (
 		<>
 			{blocks.map((block, i) => {
-				numPixelsOfContentWithoutAdvert +=
-					calculateApproximateBlockHeight(block.elements);
-
-				const willDisplayAdAfterBlock =
+				pixelsSinceAdMobile += calculateApproximateBlockHeight(
+					block.elements,
+					true,
+				);
+				const willinsertAdOnSmallScreens =
 					!isAdFreeUser &&
 					shouldDisplayAd(
 						i + 1,
 						blocks.length,
-						numAdvertsInserted,
-						numPixelsOfContentWithoutAdvert,
+						mobileAdCounter,
+						pixelsSinceAdMobile,
+						true,
 					);
+				if (willinsertAdOnSmallScreens) {
+					mobileAdCounter++;
+					pixelsSinceAdMobile = 0;
+				}
 
-				if (willDisplayAdAfterBlock) {
-					numAdvertsInserted++;
-					numPixelsOfContentWithoutAdvert = 0;
+				pixelsSinceAdLargeScreen += calculateApproximateBlockHeight(
+					block.elements,
+					false,
+				);
+				const willinsertAdOnLargeScreens =
+					!isAdFreeUser &&
+					shouldDisplayAd(
+						i + 1,
+						blocks.length,
+						largeScreenAdCounter,
+						pixelsSinceAdLargeScreen,
+						false,
+					);
+				if (willinsertAdOnLargeScreens) {
+					largeScreenAdCounter++;
+					pixelsSinceAdLargeScreen = 0;
 				}
 
 				return (
@@ -99,10 +121,16 @@ export const LiveBlogBlocksAndAdverts = ({
 							isPinnedPost={false}
 							pinnedPostId={pinnedPost?.id}
 						/>
-						{willDisplayAdAfterBlock && (
+						{willinsertAdOnSmallScreens && (
+							<AdSlot
+								position="liveblog-inline-mobile"
+								index={mobileAdCounter}
+							/>
+						)}
+						{willinsertAdOnLargeScreens && (
 							<AdSlot
 								position="liveblog-inline"
-								index={numAdvertsInserted}
+								index={largeScreenAdCounter}
 							/>
 						)}
 					</>

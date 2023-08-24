@@ -50,7 +50,7 @@ describe('calculateApproximateBlockHeight', () => {
 
 	describe('zero elements', () => {
 		it('should return zero when there are zero elements', () => {
-			expect(calculateApproximateBlockHeight([])).toEqual(0);
+			expect(calculateApproximateBlockHeight([], false)).toEqual(0);
 		});
 	});
 
@@ -58,11 +58,13 @@ describe('calculateApproximateBlockHeight', () => {
 		const textLineHeight = 25.5;
 
 		it('should return the correct height for varying line length', () => {
-			expect(calculateApproximateBlockHeight(textElementOneLine)).toEqual(
+			expect(
+				calculateApproximateBlockHeight(textElementOneLine, false),
+			).toEqual(
 				textLineHeight + defaultBlockSpacing + defaultElementSpacing,
 			);
 			expect(
-				calculateApproximateBlockHeight(textElementTwoLines),
+				calculateApproximateBlockHeight(textElementTwoLines, false),
 			).toEqual(
 				2 * textLineHeight +
 					defaultBlockSpacing +
@@ -72,16 +74,16 @@ describe('calculateApproximateBlockHeight', () => {
 
 		it('should return the correct height when there are multiple elements', () => {
 			expect(
-				calculateApproximateBlockHeight(multipleTextElements),
+				calculateApproximateBlockHeight(multipleTextElements, false),
 			).toEqual(201);
 		});
 	});
 
 	describe('youtube block elements', () => {
 		it('should return the correct height', () => {
-			expect(calculateApproximateBlockHeight(youtubeElement)).toEqual(
-				239 + defaultBlockSpacing + defaultElementSpacing,
-			);
+			expect(
+				calculateApproximateBlockHeight(youtubeElement, false),
+			).toEqual(239 + defaultBlockSpacing + defaultElementSpacing);
 		});
 	});
 });
@@ -98,6 +100,7 @@ describe('shouldDisplayAd', () => {
 			totalBlocks,
 			numAdsInserted,
 			numPixelsWithoutAdvert,
+			false,
 		);
 
 		expect(result).toBeFalsy();
@@ -114,6 +117,7 @@ describe('shouldDisplayAd', () => {
 			totalBlocks,
 			numAdsInserted,
 			numPixelsWithoutAdvert,
+			false,
 		);
 
 		expect(result).toBeFalsy();
@@ -131,6 +135,7 @@ describe('shouldDisplayAd', () => {
 				totalBlocks,
 				numAdsInserted,
 				numPixelsWithoutAdvert,
+				false,
 			);
 
 			expect(result).toBeTruthy();
@@ -149,6 +154,7 @@ describe('shouldDisplayAd', () => {
 				totalBlocks,
 				numAdsInserted,
 				numPixelsWithoutAdvert,
+				false,
 			);
 
 			expect(result).toBeTruthy();
@@ -165,6 +171,7 @@ describe('shouldDisplayAd', () => {
 				totalBlocks,
 				numAdsInserted,
 				numPixelsWithoutAdvert,
+				false,
 			);
 
 			expect(result).toBeFalsy();
