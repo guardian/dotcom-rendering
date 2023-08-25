@@ -1,4 +1,3 @@
-import { join } from 'node:path';
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
 import {
 	GuAmiParameter,
@@ -17,10 +16,14 @@ import {
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration } from 'aws-cdk-lib';
-import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
+import {
+	AdjustmentType,
+	CfnScalingPolicy,
+	HealthCheck,
+} from 'aws-cdk-lib/aws-autoscaling';
+import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
-import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 import type { DCRProps } from './types';
 import { getUserData } from './userData';
 
@@ -220,19 +223,69 @@ export class DotcomRendering extends GuStack {
 
 		asg.attachToClassicLB(loadBalancer);
 
-		const yamlTemplateFilePath = join(
-			__dirname,
-			'../..',
-			'cloudformation.yml',
-		);
+		/** TODO - migrate these simple scaling policies
+		 * @see https://github.com/guardian/dotcom-rendering/issues/8345#issuecomment-1647502598
+		 */
+		const scaleUpPolicy = new CfnScalingPolicy(this, 'ScaleUpPolicy', {
+			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
+			autoScalingGroupName: asg.autoScalingGroupName,
+			cooldown: '600',
+			scalingAdjustment: 100,
+		});
+		const scaleDownPolicy = new CfnScalingPolicy(this, 'ScaleDownPolicy', {
+			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
+			autoScalingGroupName: asg.autoScalingGroupName,
+			cooldown: '120',
+			scalingAdjustment: -1,
+		});
 
-		new CfnInclude(this, 'YamlTemplate', {
-			templateFile: yamlTemplateFilePath,
-			parameters: {
-				AutoscalingGroup: asg.autoScalingGroupName,
-				InternalLoadBalancer: loadBalancer.loadBalancerName,
-				InstanceRole: instanceRole.roleName,
-			},
+		const latencyScalingAlarmThreshold = 0.2;
+		const latencyScalingAlarmEvaluationPeriod = 1;
+		const latencyScalingAlarmPeriod = 60;
+
+		new CfnAlarm(this, 'LatencyScalingAlarm', {
+			actionsEnabled: stage === 'PROD',
+			alarmDescription: `Scale-Up if latency is greater than ${latencyScalingAlarmThreshold} seconds over ${latencyScalingAlarmEvaluationPeriod} period(s) of ${latencyScalingAlarmPeriod} seconds`,
+			dimensions: [
+				{
+					name: 'LoadBalancerName',
+					value: loadBalancer.loadBalancerName,
+				},
+			],
+			evaluationPeriods: latencyScalingAlarmEvaluationPeriod,
+			metricName: 'Latency',
+			namespace: 'AWS/ELB',
+			period: latencyScalingAlarmPeriod,
+			statistic: 'Average',
+			threshold: latencyScalingAlarmThreshold,
+			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+			okActions: [scaleDownPolicy.attrArn],
+			alarmActions: [scaleUpPolicy.attrArn],
+		});
+
+		const criticalAlertsTopicArn = `arn:aws:sns:${region}:${this.account}:Frontend-${stage}-CriticalAlerts`;
+		const backend5XXAlarmThreshold = 100;
+		const backend5XXAlarmPeriod = 60;
+		const backend5XXConsecutivePeriod = 5;
+
+		new CfnAlarm(this, 'Backend5xxAlarm', {
+			actionsEnabled: stage === 'PROD',
+			alarmDescription: `Alarm if 5XX backend errors are greater than ${backend5XXAlarmThreshold} over last ${backend5XXAlarmPeriod} seconds`,
+			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+			dimensions: [
+				{
+					name: 'LoadBalancerName',
+					value: loadBalancer.loadBalancerName,
+				},
+			],
+			metricName: 'HTTPCode_Backend_5XX',
+			namespace: 'AWS/ELB',
+			evaluationPeriods: backend5XXConsecutivePeriod,
+			period: backend5XXAlarmPeriod,
+			statistic: 'Sum',
+			threshold: backend5XXAlarmThreshold,
+			alarmActions: [criticalAlertsTopicArn],
+			okActions: [criticalAlertsTopicArn],
 		});
 
 		new CfnOutput(this, 'LoadBalancerUrl', {

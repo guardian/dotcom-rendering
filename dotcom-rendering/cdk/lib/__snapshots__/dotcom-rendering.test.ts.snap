@@ -2,36 +2,6 @@
 
 exports[`The DotcomRendering stack matches the snapshot 1`] = `
 {
-  "AWSTemplateFormatVersion": "2010-09-09",
-  "Conditions": {
-    "HasBackend5XXAlarm": {
-      "Fn::Equals": [
-        {
-          "Ref": "Stage",
-        },
-        "PROD",
-      ],
-    },
-    "HasLatencyScalingAlarm": {
-      "Fn::Equals": [
-        {
-          "Ref": "Stage",
-        },
-        "PROD",
-      ],
-    },
-  },
-  "Description": "Frontend rendering service",
-  "Mappings": {
-    "Constants": {
-      "App": {
-        "Value": "rendering",
-      },
-      "Stack": {
-        "Value": "frontend",
-      },
-    },
-  },
   "Metadata": {
     "gu:cdk:constructs": [
       "GuVpcParameter",
@@ -72,34 +42,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
   },
   "Parameters": {
-    "AMI": {
-      "Description": "AMI to use for instances",
-      "Type": "AWS::EC2::Image::Id",
-    },
     "AMIRendering": {
       "Default": "/TEST/frontend/rendering/ami.imageId",
       "Description": "Amazon Machine Image ID for the app rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
       "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
-    },
-    "App": {
-      "Default": "rendering",
-      "Description": "Application name",
-      "Type": "String",
-    },
-    "Backend5XXAlarmPeriod": {
-      "Default": "60",
-      "Description": "(Optional) Duration in seconds before 5XX alarm is triggered",
-      "Type": "String",
-    },
-    "Backend5XXAlarmThreshold": {
-      "Default": "100",
-      "Description": "(Optional) Max number of errors before the 5XX alarm is triggered",
-      "Type": "String",
-    },
-    "Backend5XXConsecutivePeriod": {
-      "Default": "5",
-      "Description": "(Optional) Number of consecutive periods the threshold needs to be reached before 5XX alarm is triggered",
-      "Type": "String",
     },
     "DistributionBucketName": {
       "Default": "/account/services/artifact.bucket",
@@ -111,27 +57,14 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Description": "S3 Bucket Name for ELB logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ELKStream": {
-      "Description": "name of the kinesis stream to use to send logs to the central ELK stack",
-      "Type": "String",
-    },
     "ELKStreamId": {
       "Default": "/TEST/frontend/rendering/logging.stream.name",
       "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-    "InstanceType": {
-      "Description": "EC2 Instance Type to use for dotcom-rendering",
-      "Type": "String",
     },
     "LoggingStreamName": {
       "Default": "/account/services/logging.stream.name",
       "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
       "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-    "NotificationAlarmAction": {
-      "Default": "",
-      "Description": "(Optional) ARN of action to execute when notification alarms change state",
-      "Type": "CommaDelimitedList",
     },
     "PrivateSubnets": {
       "Default": "/account/vpc/primary/subnets/private",
@@ -142,24 +75,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Default": "/account/vpc/primary/subnets/public",
       "Description": "A list of public subnets",
       "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
-    },
-    "Stack": {
-      "Default": "frontend",
-      "Description": "Stack name",
-      "Type": "String",
-    },
-    "Stage": {
-      "AllowedValues": [
-        "PROD",
-        "CODE",
-      ],
-      "Default": "CODE",
-      "Description": "Stage name",
-      "Type": "String",
-    },
-    "Subnets": {
-      "Description": "The subnets where rendering instances will run",
-      "Type": "List<AWS::EC2::Subnet::Id>",
     },
     "VpcId": {
       "Default": "/account/vpc/primary/id",
@@ -391,15 +306,23 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
     "Backend5xxAlarm": {
-      "Condition": "HasBackend5XXAlarm",
       "Properties": {
-        "AlarmActions": {
-          "Ref": "NotificationAlarmAction",
-        },
-        "AlarmDescription": {
-          "Fn::Sub": "Alarm if 5XX backend errors are greater than \${Backend5XXAlarmThreshold} over last \${Backend5XXAlarmPeriod} seconds
-",
-        },
+        "ActionsEnabled": false,
+        "AlarmActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId",
+                },
+                ":Frontend-TEST-CriticalAlerts",
+              ],
+            ],
+          },
+        ],
+        "AlarmDescription": "Alarm if 5XX backend errors are greater than 100 over last 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
@@ -409,21 +332,26 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             },
           },
         ],
-        "EvaluationPeriods": {
-          "Ref": "Backend5XXConsecutivePeriod",
-        },
+        "EvaluationPeriods": 5,
         "MetricName": "HTTPCode_Backend_5XX",
         "Namespace": "AWS/ELB",
-        "OKActions": {
-          "Ref": "NotificationAlarmAction",
-        },
-        "Period": {
-          "Ref": "Backend5XXAlarmPeriod",
-        },
+        "OKActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId",
+                },
+                ":Frontend-TEST-CriticalAlerts",
+              ],
+            ],
+          },
+        ],
+        "Period": 60,
         "Statistic": "Sum",
-        "Threshold": {
-          "Ref": "Backend5XXAlarmThreshold",
-        },
+        "Threshold": 100,
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
@@ -566,17 +494,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "InstanceProfile": {
-      "Properties": {
-        "Path": "/",
-        "Roles": [
-          {
-            "Ref": "InstanceRole",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::InstanceProfile",
     },
     "InstanceRole": {
       "Properties": {
@@ -847,17 +764,17 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::EC2::SecurityGroup",
     },
     "LatencyScalingAlarm": {
-      "Condition": "HasLatencyScalingAlarm",
       "Properties": {
+        "ActionsEnabled": false,
         "AlarmActions": [
           {
-            "Ref": "ScaleUpPolicy",
+            "Fn::GetAtt": [
+              "ScaleUpPolicy",
+              "Arn",
+            ],
           },
         ],
-        "AlarmDescription": {
-          "Fn::Sub": "Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds
-",
-        },
+        "AlarmDescription": "Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
@@ -872,7 +789,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Namespace": "AWS/ELB",
         "OKActions": [
           {
-            "Ref": "ScaleDownPolicy",
+            "Fn::GetAtt": [
+              "ScaleDownPolicy",
+              "Arn",
+            ],
           },
         ],
         "Period": 60,

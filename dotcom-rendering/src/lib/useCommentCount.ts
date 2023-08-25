@@ -50,3 +50,11 @@ export const useCommentCount = (
 
 	return data?.[shortUrl];
 };
+
+/** Ensure that we reduce the number of requests to get comment counts */
+export const addDiscussionIds = (ids: string[]): void => {
+	if (!uniqueDiscussionIds) return;
+	for (const id of ids) {
+		uniqueDiscussionIds.add(id);
+	}
+};
