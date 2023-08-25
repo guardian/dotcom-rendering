@@ -46,6 +46,9 @@ export class DotcomRendering extends GuStack {
 			type: SubnetType.PRIVATE,
 		});
 
+		// ------------------
+		// Load balancer
+		// ------------------
 		const lbSecurityGroup = new GuSecurityGroup(
 			this,
 			'InternalLoadBalancerSecurityGroup',
@@ -122,6 +125,11 @@ export class DotcomRendering extends GuStack {
 		new CfnOutput(this, 'LoadBalancerUrl', {
 			value: loadBalancer.loadBalancerDnsName,
 		});
+		// ------------------
+
+		// ------------------
+		// Autoscaling group
+		// ------------------
 
 		const instanceSecurityGroup = new GuSecurityGroup(
 			this,
@@ -210,6 +218,11 @@ export class DotcomRendering extends GuStack {
 		// ! Important !
 		// Ensure the ASG is attached to the load balancer
 		asg.attachToClassicLB(loadBalancer);
+		// ------------------
+
+		// ------------------
+		// Alarms
+		// ------------------
 
 		/** TODO - migrate these simple scaling policies
 		 * @see https://github.com/guardian/dotcom-rendering/issues/8345#issuecomment-1647502598
@@ -226,10 +239,6 @@ export class DotcomRendering extends GuStack {
 			cooldown: '120',
 			scalingAdjustment: -1,
 		});
-
-		// ------------
-		// Alarms
-		// ------------
 
 		/** Returns an appropriate alarm description given the appropriate configuration object */
 		const getAlarmDescription = ({
@@ -301,5 +310,6 @@ export class DotcomRendering extends GuStack {
 			alarmActions: [criticalAlertsTopicArn],
 			okActions: [criticalAlertsTopicArn],
 		});
+		// ------------------
 	}
 }
