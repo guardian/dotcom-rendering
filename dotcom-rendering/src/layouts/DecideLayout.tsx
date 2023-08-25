@@ -9,9 +9,9 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
+import { PictureLayout } from './PictureLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
-import { PictureLayout } from './PictureLayout';
 
 interface BaseProps {
 	article: DCRArticle;
