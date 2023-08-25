@@ -27,6 +27,16 @@ import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import type { DCRAlarmConfig, DCRProps } from './types';
 import { getUserData } from './userData';
 
+/**
+ * DCR infrastructure provisioning via CDK
+ *
+ * We currently specify resources by using individual CDK constructs but at some
+ * point it would be better to move towards the GuEc2App pattern
+ * @see https://github.com/guardian/cdk/blob/main/src/patterns/ec2-app/base.ts
+ *
+ * For this we'll need to do a dual-stack migration
+ * @see https://github.com/guardian/cdk/blob/main/docs/migration-guide-ec2.md
+ */
 export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
 		super(scope, id, props);
@@ -46,9 +56,9 @@ export class DotcomRendering extends GuStack {
 			type: SubnetType.PRIVATE,
 		});
 
-		// ------------------
-		// Load balancer
-		// ------------------
+		// ------------------------------------
+		// Load balancer related resources
+		// ------------------------------------
 		const lbSecurityGroup = new GuSecurityGroup(
 			this,
 			'InternalLoadBalancerSecurityGroup',
@@ -76,7 +86,10 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining logical ID of resource created via CDK which cannot be changed easily',
 		});
 
-		/** TODO - migrate this ELB to an ALB */
+		/**
+		 * TODO - migrate this ELB (classic load balancer) to an ALB (application load balancer)
+		 * @see https://github.com/guardian/cdk/blob/512536bd590b26d9fcac5d39329e8217103d7859/src/constructs/loadbalancing/elb.ts#L24-L46
+		 */
 		const loadBalancer = new GuClassicLoadBalancer(
 			this,
 			'InternalLoadBalancer',
@@ -133,20 +146,19 @@ export class DotcomRendering extends GuStack {
 		new CfnOutput(this, 'LoadBalancerUrl', {
 			value: loadBalancer.loadBalancerDnsName,
 		});
-		// ------------------
+		// ------------------------------------
 
-		// ------------------
-		// Autoscaling group
-		// ------------------
-
+		// ------------------------------------
+		// Autoscaling group related resources
+		// ------------------------------------
 		const instanceSecurityGroup = new GuSecurityGroup(
 			this,
 			'InstanceSecurityGroup',
 			{
 				app,
 				vpc,
-				// TODO - this description is poor but changing it results in
-				// deletion and recreation of the security group, which is not ideal
+				// This description is poor but changing it results in deletion and
+				// recreation of the security group, which is not ideal
 				description: 'rendering instance',
 				ingresses: [
 					{
@@ -194,7 +206,7 @@ export class DotcomRendering extends GuStack {
 					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
 					resources: [
 						`arn:aws:ssm:${region}:${this.account}:parameter/${ssmPrefix}/*`,
-						// TODO - these SSM prefixes are dated, should convert to the above or removed
+						// TODO - these SSM prefixes are dated, should convert the params to the naming structure above
 						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
 						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
 					],
@@ -235,17 +247,19 @@ export class DotcomRendering extends GuStack {
 		});
 		// ! Important !
 		// Ensure the ASG is attached to the load balancer
+		// This is because our auto scaling group uses the ELB for healthchecks
+		// If the ASG and ELB are not attached, the ASG health checks will fail
 		asg.attachToClassicLB(loadBalancer);
 
 		this.overrideLogicalId(asg, {
 			logicalId: 'AutoscalingGroup',
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
-		// ------------------
+		// ------------------------------------
 
-		// ------------------
+		// ------------------------------------
 		// Alarms
-		// ------------------
+		// ------------------------------------
 
 		/** TODO - migrate these simple scaling policies
 		 * @see https://github.com/guardian/dotcom-rendering/issues/8345#issuecomment-1647502598
@@ -333,6 +347,6 @@ export class DotcomRendering extends GuStack {
 			alarmActions: [criticalAlertsTopicArn],
 			okActions: [criticalAlertsTopicArn],
 		});
-		// ------------------
+		// ------------------------------------
 	}
 }
