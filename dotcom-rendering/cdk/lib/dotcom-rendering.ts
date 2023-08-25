@@ -121,6 +121,10 @@ export class DotcomRendering extends GuStack {
 				},
 			},
 		);
+		this.overrideLogicalId(loadBalancer, {
+			logicalId: 'InternalLoadBalancer',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
 		// Load balancer DNS name output
 		new CfnOutput(this, 'LoadBalancerUrl', {
 			value: loadBalancer.loadBalancerDnsName,
@@ -218,6 +222,11 @@ export class DotcomRendering extends GuStack {
 		// ! Important !
 		// Ensure the ASG is attached to the load balancer
 		asg.attachToClassicLB(loadBalancer);
+
+		this.overrideLogicalId(asg, {
+			logicalId: 'AutoscalingGroup',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
 		// ------------------
 
 		// ------------------

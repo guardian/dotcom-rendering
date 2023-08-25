@@ -35,7 +35,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "LoadBalancerUrl": {
       "Value": {
         "Fn::GetAtt": [
-          "InternalLoadBalancerRenderingCCE9E5AA",
+          "InternalLoadBalancer",
           "DNSName",
         ],
       },
@@ -250,7 +250,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "AutoscalingGroupRenderingASGEC306AE3": {
+    "AutoscalingGroup": {
       "Properties": {
         "HealthCheckGracePeriod": 120,
         "HealthCheckType": "ELB",
@@ -267,7 +267,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         },
         "LoadBalancerNames": [
           {
-            "Ref": "InternalLoadBalancerRenderingCCE9E5AA",
+            "Ref": "InternalLoadBalancer",
           },
         ],
         "MaxSize": "4",
@@ -328,7 +328,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           {
             "Name": "LoadBalancerName",
             "Value": {
-              "Ref": "InternalLoadBalancerRenderingCCE9E5AA",
+              "Ref": "InternalLoadBalancer",
             },
           },
         ],
@@ -596,7 +596,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalLoadBalancerRenderingCCE9E5AA": {
+    "InternalLoadBalancer": {
       "Properties": {
         "AccessLoggingPolicy": {
           "EmitInterval": 5,
@@ -780,7 +780,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           {
             "Name": "LoadBalancerName",
             "Value": {
-              "Ref": "InternalLoadBalancerRenderingCCE9E5AA",
+              "Ref": "InternalLoadBalancer",
             },
           },
         ],
@@ -864,7 +864,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Properties": {
         "AdjustmentType": "ChangeInCapacity",
         "AutoScalingGroupName": {
-          "Ref": "AutoscalingGroupRenderingASGEC306AE3",
+          "Ref": "AutoscalingGroup",
         },
         "Cooldown": "120",
         "ScalingAdjustment": -1,
@@ -875,7 +875,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Properties": {
         "AdjustmentType": "PercentChangeInCapacity",
         "AutoScalingGroupName": {
-          "Ref": "AutoscalingGroupRenderingASGEC306AE3",
+          "Ref": "AutoscalingGroup",
         },
         "Cooldown": "600",
         "ScalingAdjustment": 100,
