@@ -551,7 +551,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
     "InstanceSecurityGroup": {
       "Properties": {
-        "GroupDescription": "DCR instance security group - allows HTTP and HTTPS inbound connections on port 9000 from within the VPC",
+        "GroupDescription": "rendering instance",
         "SecurityGroupEgress": [
           {
             "CidrIp": "0.0.0.0/0",
@@ -711,7 +711,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
     "InternalLoadBalancerSecurityGroup": {
       "Properties": {
-        "GroupDescription": "DCR LB security group - allows HTTP and HTTPS inbound connections from within the VPC",
+        "GroupDescription": "Allows HTTP and HTTPS inbound connections from within the VPC",
         "SecurityGroupEgress": [
           {
             "CidrIp": "0.0.0.0/0",

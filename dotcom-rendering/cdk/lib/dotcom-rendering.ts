@@ -55,7 +55,7 @@ export class DotcomRendering extends GuStack {
 			{
 				app,
 				description:
-					'DCR LB security group - allows HTTP and HTTPS inbound connections from within the VPC',
+					'Allows HTTP and HTTPS inbound connections from within the VPC',
 				vpc,
 				ingresses: [
 					{
@@ -145,8 +145,9 @@ export class DotcomRendering extends GuStack {
 			{
 				app,
 				vpc,
-				description:
-					'DCR instance security group - allows HTTP and HTTPS inbound connections on port 9000 from within the VPC',
+				// TODO - this description is poor but changing it results in
+				// deletion and recreation of the security group, which is not ideal
+				description: 'rendering instance',
 				ingresses: [
 					{
 						range: Peer.ipv4(vpcCidrBlock),
