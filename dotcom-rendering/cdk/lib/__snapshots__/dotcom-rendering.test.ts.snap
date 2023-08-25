@@ -208,6 +208,18 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                       {
                         "Ref": "AWS::AccountId",
                       },
+                      ":parameter//TEST/frontend/rendering/*",
+                    ],
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
                       ":parameter/frontend/*",
                     ],
                   ],
@@ -221,18 +233,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                         "Ref": "AWS::AccountId",
                       },
                       ":parameter/dotcom/*",
-                    ],
-                  ],
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:ssm:eu-west-1:",
-                      {
-                        "Ref": "AWS::AccountId",
-                      },
-                      ":parameter//TEST/frontend/rendering/*",
                     ],
                   ],
                 },

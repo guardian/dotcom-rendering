@@ -188,9 +188,10 @@ export class DotcomRendering extends GuStack {
 				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
 					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
 					resources: [
+						`arn:aws:ssm:${region}:${this.account}:parameter/${ssmPrefix}/*`,
+						// TODO - these SSM prefixes are dated, should convert to the above or removed
 						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
 						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
-						`arn:aws:ssm:${region}:${this.account}:parameter/${ssmPrefix}/*`,
 					],
 				}),
 			],
