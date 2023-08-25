@@ -2,18 +2,6 @@
 
 exports[`The DotcomRendering stack matches the snapshot 1`] = `
 {
-  "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Frontend rendering service",
-  "Mappings": {
-    "Constants": {
-      "App": {
-        "Value": "rendering",
-      },
-      "Stack": {
-        "Value": "frontend",
-      },
-    },
-  },
   "Metadata": {
     "gu:cdk:constructs": [
       "GuVpcParameter",
@@ -54,34 +42,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
   },
   "Parameters": {
-    "AMI": {
-      "Description": "AMI to use for instances",
-      "Type": "AWS::EC2::Image::Id",
-    },
     "AMIRendering": {
       "Default": "/TEST/frontend/rendering/ami.imageId",
       "Description": "Amazon Machine Image ID for the app rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
       "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
-    },
-    "App": {
-      "Default": "rendering",
-      "Description": "Application name",
-      "Type": "String",
-    },
-    "Backend5XXAlarmPeriod": {
-      "Default": "60",
-      "Description": "(Optional) Duration in seconds before 5XX alarm is triggered",
-      "Type": "String",
-    },
-    "Backend5XXAlarmThreshold": {
-      "Default": "100",
-      "Description": "(Optional) Max number of errors before the 5XX alarm is triggered",
-      "Type": "String",
-    },
-    "Backend5XXConsecutivePeriod": {
-      "Default": "5",
-      "Description": "(Optional) Number of consecutive periods the threshold needs to be reached before 5XX alarm is triggered",
-      "Type": "String",
     },
     "DistributionBucketName": {
       "Default": "/account/services/artifact.bucket",
@@ -93,27 +57,14 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Description": "S3 Bucket Name for ELB logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ELKStream": {
-      "Description": "name of the kinesis stream to use to send logs to the central ELK stack",
-      "Type": "String",
-    },
     "ELKStreamId": {
       "Default": "/TEST/frontend/rendering/logging.stream.name",
       "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-    "InstanceType": {
-      "Description": "EC2 Instance Type to use for dotcom-rendering",
-      "Type": "String",
     },
     "LoggingStreamName": {
       "Default": "/account/services/logging.stream.name",
       "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
       "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-    "NotificationAlarmAction": {
-      "Default": "",
-      "Description": "(Optional) ARN of action to execute when notification alarms change state",
-      "Type": "CommaDelimitedList",
     },
     "PrivateSubnets": {
       "Default": "/account/vpc/primary/subnets/private",
@@ -124,24 +75,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Default": "/account/vpc/primary/subnets/public",
       "Description": "A list of public subnets",
       "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
-    },
-    "Stack": {
-      "Default": "frontend",
-      "Description": "Stack name",
-      "Type": "String",
-    },
-    "Stage": {
-      "AllowedValues": [
-        "PROD",
-        "CODE",
-      ],
-      "Default": "CODE",
-      "Description": "Stage name",
-      "Type": "String",
-    },
-    "Subnets": {
-      "Description": "The subnets where rendering instances will run",
-      "Type": "List<AWS::EC2::Subnet::Id>",
     },
     "VpcId": {
       "Default": "/account/vpc/primary/id",
@@ -561,17 +494,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "InstanceProfile": {
-      "Properties": {
-        "Path": "/",
-        "Roles": [
-          {
-            "Ref": "InstanceRole",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::InstanceProfile",
     },
     "InstanceRole": {
       "Properties": {

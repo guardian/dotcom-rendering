@@ -1,4 +1,3 @@
-import { join } from 'node:path';
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
 import {
 	GuAmiParameter,
@@ -25,7 +24,6 @@ import {
 import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
-import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 import type { DCRProps } from './types';
 import { getUserData } from './userData';
 
@@ -265,12 +263,6 @@ export class DotcomRendering extends GuStack {
 			alarmActions: [scaleUpPolicy.attrArn],
 		});
 
-		const yamlTemplateFilePath = join(
-			__dirname,
-			'../..',
-			'cloudformation.yml',
-		);
-
 		const criticalAlertsTopicArn = `arn:aws:sns:${region}:${this.account}:Frontend-${stage}-CriticalAlerts`;
 		const backend5XXAlarmThreshold = 100;
 		const backend5XXAlarmPeriod = 60;
@@ -294,17 +286,6 @@ export class DotcomRendering extends GuStack {
 			threshold: backend5XXAlarmThreshold,
 			alarmActions: [criticalAlertsTopicArn],
 			okActions: [criticalAlertsTopicArn],
-		});
-
-		new CfnInclude(this, 'YamlTemplate', {
-			templateFile: yamlTemplateFilePath,
-			parameters: {
-				AutoscalingGroup: asg.autoScalingGroupName,
-				InternalLoadBalancer: loadBalancer.loadBalancerName,
-				InstanceRole: instanceRole.roleName,
-				ScaleUpPolicy: scaleUpPolicy.ref,
-				ScaleDownPolicy: scaleDownPolicy.ref,
-			},
 		});
 
 		new CfnOutput(this, 'LoadBalancerUrl', {
