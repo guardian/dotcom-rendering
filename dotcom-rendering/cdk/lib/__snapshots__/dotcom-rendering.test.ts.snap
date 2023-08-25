@@ -101,7 +101,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "AllowPolicyCloudwatchLogsA783E5B4",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -136,7 +136,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "AllowPolicyDescribeDecryptKmsE91286F3",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -162,7 +162,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "AllowPolicyDescribeEc2AutoscalingE4175956",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -183,7 +183,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "AllowPolicyGetArtifactsBucket2A1CDA44",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -244,7 +244,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -375,7 +375,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "describe-ec2-policy",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -407,7 +407,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "GetDistributablePolicyRenderingCA2FF5C7",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -489,13 +489,13 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "GuLogShippingPolicy981BFE5A",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "InstanceRoleRenderingB06D827E": {
+    "InstanceRole": {
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -549,7 +549,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
-    "InstanceSecurityGroupRenderingD59E638A": {
+    "InstanceSecurityGroup": {
       "Properties": {
         "GroupDescription": "DCR instance security group - allows HTTP and HTTPS inbound connections on port 9000 from within the VPC",
         "SecurityGroupEgress": [
@@ -854,7 +854,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "parameter-store-read-policy",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -955,7 +955,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             },
             {
               "Fn::GetAtt": [
-                "InstanceSecurityGroupRenderingD59E638A",
+                "InstanceSecurityGroup",
                 "GroupId",
               ],
             },
@@ -1076,7 +1076,7 @@ sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make 
       "Properties": {
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },

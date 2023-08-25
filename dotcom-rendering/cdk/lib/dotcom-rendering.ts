@@ -152,6 +152,10 @@ export class DotcomRendering extends GuStack {
 				],
 			},
 		);
+		this.overrideLogicalId(instanceSecurityGroup, {
+			logicalId: 'InstanceSecurityGroup',
+			reason: 'Retaining logical ID of resource created via CDK which cannot be changed without removing SG from instances',
+		});
 
 		const instanceRole = new GuInstanceRole(this, {
 			app,
