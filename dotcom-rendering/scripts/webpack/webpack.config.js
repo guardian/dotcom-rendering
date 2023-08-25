@@ -138,6 +138,7 @@ const commonConfigs = ({ platform }) => ({
 /** @type {readonly Build[]} */
 const clientBuilds = [
 	'web',
+	'web.scheduled',
 	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
 		? /** @type {const} */ (['web.variant'])
 		: []),
