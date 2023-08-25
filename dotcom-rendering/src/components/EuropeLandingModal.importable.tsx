@@ -83,7 +83,7 @@ export const EuropeLandingModal = () => {
 	return (
 		<dialog css={dialogStyles}>
 			<div css={styles}>
-				{switchEdition ? (
+				{!switchEdition ? (
 					<>
 						<div css={textStyles}>
 							<h1 css={headlineStyles}>
@@ -127,27 +127,27 @@ export const EuropeLandingModal = () => {
 								defaultChecked
 								label="Europe edition"
 								value="EUR"
-								onChange={(event) => setSelectedEdition('EUR')}
+								onChange={() => setSelectedEdition('EUR')}
 							/>
 							<Radio
 								label="UK edition"
 								value="UK"
-								onChange={(event) => setSelectedEdition('UK')}
+								onChange={() => setSelectedEdition('UK')}
 							/>
 							<Radio
 								label="US edition"
 								value="US"
-								onChange={(event) => setSelectedEdition('US')}
+								onChange={() => setSelectedEdition('US')}
 							/>
 							<Radio
 								label="Australia edition"
 								value="AU"
-								onChange={(event) => setSelectedEdition('AU')}
+								onChange={() => setSelectedEdition('AU')}
 							/>
 							<Radio
 								label="International edition"
 								value="INT"
-								onChange={(event) => setSelectedEdition('INT')}
+								onChange={() => setSelectedEdition('INT')}
 							/>
 						</RadioGroup>
 						<Button onClick={() => confirmNewEdition()}>
