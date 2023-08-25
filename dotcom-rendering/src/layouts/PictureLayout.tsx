@@ -77,32 +77,25 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					
 				*/
 				${from.wide} {
-				
-								grid-template-columns: 219px 1px 1fr;
-
-								grid-template-areas:
-									'title  border  headline'
-									'lines  border  media'
-									'meta   border  media'
-									'meta   border  standfirst'
-									'.      border  submeta'
-									'.      border  .';
-						  
-				
+					grid-template-columns: 219px 1px 1fr;
+					grid-template-areas:
+						'title  border  headline'
+						'lines  border  media'
+						'meta   border  media'
+						'meta   border  standfirst'
+						'.      border  submeta'
+						'.      border  .';
 				}
 
 				${until.wide} {
 					grid-template-columns: 140px 1px 1fr 300px;
-
-					
-								grid-template-areas:
-									'title  border  headline    headline'
-									'meta   border  media       media'
-									'meta   border  media       media'
-									'lines  border  standfirst  standfirst'
-									'.      border  submeta     submeta'
-									'.      border  .           . ';
-						
+					grid-template-areas:
+						'title  border  headline    headline'
+						'meta   border  media       media'
+						'meta   border  media       media'
+						'lines  border  standfirst  standfirst'
+						'.      border  submeta     submeta'
+						'.      border  .           . ';
 				}
 
 				/*
@@ -111,23 +104,18 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 					Right Column
 				*/
-				${until.leftCol} {					grid-column-gap: 0px;
-
-					
-								grid-template-columns: 1fr; /* Main content */
-
-								grid-template-areas:
-									'title     '
-									'headline  '
-									'media     '
-									'standfirst'
-									'lines     '
-									'meta      '
-									'submeta   '
-									'.         ';
-						
-							
-						}
+				${until.leftCol} {
+					grid-column-gap: 0px;
+					grid-template-columns: 1fr; /* Main content */
+					grid-template-areas:
+						'title     '
+						'headline  '
+						'media     '
+						'standfirst'
+						'lines     '
+						'meta      '
+						'submeta   '
+						'.         ';
 				}
 
 				${until.desktop} {
@@ -146,18 +134,15 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 				${until.tablet} {
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
-				
-								grid-template-areas:
-									'title'
-									'headline'
-									'lines'
-									'meta'
-									'media'
-									'standfirst'
-									'submeta';
-				}						  
-			
-				
+					grid-template-areas:
+						'title'
+						'headline'
+						'lines'
+						'meta'
+						'media'
+						'standfirst'
+						'submeta';
+				}
 			}
 		`}
 	>
