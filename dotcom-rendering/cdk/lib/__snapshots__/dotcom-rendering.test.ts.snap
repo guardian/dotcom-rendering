@@ -627,7 +627,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "SecurityGroups": [
           {
             "Fn::GetAtt": [
-              "InternalLoadBalancerSecurityGroupRendering26706C0C",
+              "InternalLoadBalancerSecurityGroup",
               "GroupId",
             ],
           },
@@ -709,7 +709,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalLoadBalancerSecurityGroupRendering26706C0C": {
+    "InternalLoadBalancerSecurityGroup": {
       "Properties": {
         "GroupDescription": "DCR LB security group - allows HTTP and HTTPS inbound connections from within the VPC",
         "SecurityGroupEgress": [

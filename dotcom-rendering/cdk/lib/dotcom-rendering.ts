@@ -71,6 +71,10 @@ export class DotcomRendering extends GuStack {
 				],
 			},
 		);
+		this.overrideLogicalId(lbSecurityGroup, {
+			logicalId: 'InternalLoadBalancerSecurityGroup',
+			reason: 'Retaining logical ID of resource created via CDK which cannot be changed easily',
+		});
 
 		/** TODO - migrate this ELB to an ALB */
 		const loadBalancer = new GuClassicLoadBalancer(
@@ -154,7 +158,7 @@ export class DotcomRendering extends GuStack {
 		);
 		this.overrideLogicalId(instanceSecurityGroup, {
 			logicalId: 'InstanceSecurityGroup',
-			reason: 'Retaining logical ID of resource created via CDK which cannot be changed without removing SG from instances',
+			reason: 'Retaining logical ID of resource created via CDK which cannot be changed easily',
 		});
 
 		const instanceRole = new GuInstanceRole(this, {
@@ -198,7 +202,7 @@ export class DotcomRendering extends GuStack {
 		});
 		this.overrideLogicalId(instanceRole, {
 			logicalId: 'InstanceRole',
-			reason: 'Retaining logical ID of resource created via CDK which cannot be changed unless the policies are replaced',
+			reason: 'Retaining logical ID of resource created via CDK which cannot be changed easily',
 		});
 
 		const asg = new GuAutoScalingGroup(this, 'AutoscalingGroup', {
