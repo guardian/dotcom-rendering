@@ -113,6 +113,17 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 	);
 };
 
+const attributeToNumber = (
+	element: Element,
+	attributeName: string,
+): number | undefined => {
+	const value = element.getAttribute(attributeName);
+	if (!value) return undefined;
+	const numericValue = Number(value);
+	if (isNaN(numericValue)) return undefined;
+	return numericValue;
+};
+
 export const ManyNewsletterSignUp = () => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		{
@@ -142,8 +153,8 @@ export const ManyNewsletterSignUp = () => {
 				return;
 			}
 			const identityName = button.getAttribute('data-identity-name');
-			const listId = Number(button.getAttribute('data-list-id'));
-			if (!identityName || !listId) {
+			const listId = attributeToNumber(button, 'data-list-id');
+			if (!identityName || typeof listId === 'undefined') {
 				return;
 			}
 			const index = newslettersToSignUpFor.findIndex(
