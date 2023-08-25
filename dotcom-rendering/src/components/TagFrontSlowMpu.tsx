@@ -6,21 +6,32 @@ import type { GroupedTrailsSlowMpu } from '../types/tagFront';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import type { Loading } from './CardPicture';
 
 const TwoCard = ({
 	trails,
 	adIndex,
+	imageLoading,
 }: {
 	trails: Tuple<DCRFrontCard, 2>;
 	adIndex: number;
+	imageLoading: Loading;
 }) => {
 	return (
 		<UL direction="row">
 			<LI percentage="33.333%" padSides={true}>
-				<Card33Media33 trail={trails[0]} showAge={true} />
+				<Card33Media33
+					trail={trails[0]}
+					showAge={true}
+					imageLoading={imageLoading}
+				/>
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
-				<Card33Media33 trail={trails[1]} showAge={true} />
+				<Card33Media33
+					trail={trails[1]}
+					showAge={true}
+					imageLoading={imageLoading}
+				/>
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
 				<Hide until="tablet">
@@ -34,14 +45,20 @@ const TwoCard = ({
 const FourCard = ({
 	trails,
 	adIndex,
+	imageLoading,
 }: {
 	trails: Tuple<DCRFrontCard, 4>;
 	adIndex: number;
+	imageLoading: Loading;
 }) => {
 	return (
 		<UL direction="row">
 			<LI percentage="33.333%" padSides={true}>
-				<Card33Media33 trail={trails[0]} showAge={true} />
+				<Card33Media33
+					trail={trails[0]}
+					showAge={true}
+					imageLoading={imageLoading}
+				/>
 			</LI>
 			<LI percentage="33.333%">
 				<UL direction="column" showDivider={true}>
@@ -68,29 +85,51 @@ const FourCard = ({
 const FiveCard = ({
 	trails,
 	adIndex,
+	imageLoading,
 }: {
 	trails: Tuple<DCRFrontCard, 5>;
 	adIndex: number;
+	imageLoading: Loading;
 }) => {
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
 				<LI percentage="33.333%" padSides={true}>
-					<Card33Media33 trail={trails[0]} showAge={true} />
+					<Card33Media33
+						trail={trails[0]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33 trail={trails[1]} showAge={true} />
+					<Card33Media33
+						trail={trails[1]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33 trail={trails[2]} showAge={true} />
+					<Card33Media33
+						trail={trails[2]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 			</UL>
 			<UL direction="row">
 				<LI percentage="33.333%" padSides={true}>
-					<Card33Media33 trail={trails[3]} showAge={true} />
+					<Card33Media33
+						trail={trails[3]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33 trail={trails[4]} showAge={true} />
+					<Card33Media33
+						trail={trails[4]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
 					<Hide until="tablet">
@@ -105,37 +144,67 @@ const FiveCard = ({
 const SevenCards = ({
 	trails,
 	adIndex,
+	imageLoading,
 }: {
 	trails: Tuple<DCRFrontCard, 7>;
 	adIndex: number;
+	imageLoading: Loading;
 }) => {
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
 				<LI percentage="50%" padSides={true}>
-					<Card50Media50 trail={trails[0]} showAge={true} />
+					<Card50Media50
+						trail={trails[0]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 				<LI percentage="50%" padSides={true} showDivider={true}>
-					<Card50Media50 trail={trails[1]} showAge={true} />
+					<Card50Media50
+						trail={trails[1]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 			</UL>
 			<UL direction="row" padBottom={true}>
 				<LI percentage="33.333%" padSides={true}>
-					<Card33Media33 trail={trails[2]} showAge={true} />
+					<Card33Media33
+						trail={trails[2]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33 trail={trails[3]} showAge={true} />
+					<Card33Media33
+						trail={trails[3]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33 trail={trails[4]} showAge={true} />
+					<Card33Media33
+						trail={trails[4]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 			</UL>
 			<UL direction="row">
 				<LI percentage="33.333%" padSides={true}>
-					<Card33Media33 trail={trails[5]} showAge={true} />
+					<Card33Media33
+						trail={trails[5]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<Card33Media33 trail={trails[6]} showAge={true} />
+					<Card33Media33
+						trail={trails[6]}
+						showAge={true}
+						imageLoading={imageLoading}
+					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
 					<Hide until="tablet">
@@ -149,17 +218,42 @@ const SevenCards = ({
 
 type Props = GroupedTrailsSlowMpu & {
 	adIndex: number;
+	imageLoading: Loading;
 };
 
-export const TagFrontSlowMpu = ({ trails, adIndex }: Props) => {
+export const TagFrontSlowMpu = ({ trails, adIndex, imageLoading }: Props) => {
 	switch (trails.length) {
 		case 2:
-			return <TwoCard trails={trails} adIndex={adIndex} />;
+			return (
+				<TwoCard
+					trails={trails}
+					adIndex={adIndex}
+					imageLoading={imageLoading}
+				/>
+			);
 		case 4:
-			return <FourCard trails={trails} adIndex={adIndex} />;
+			return (
+				<FourCard
+					trails={trails}
+					adIndex={adIndex}
+					imageLoading={imageLoading}
+				/>
+			);
 		case 5:
-			return <FiveCard trails={trails} adIndex={adIndex} />;
+			return (
+				<FiveCard
+					trails={trails}
+					adIndex={adIndex}
+					imageLoading={imageLoading}
+				/>
+			);
 		case 7:
-			return <SevenCards trails={trails} adIndex={adIndex} />;
+			return (
+				<SevenCards
+					trails={trails}
+					adIndex={adIndex}
+					imageLoading={imageLoading}
+				/>
+			);
 	}
 };

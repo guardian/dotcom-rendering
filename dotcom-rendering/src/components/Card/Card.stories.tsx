@@ -33,6 +33,8 @@ const basicCardProps: CardProps = {
 	showAge: true,
 	isExternalLink: false,
 	isPlayableMediaCard: true,
+	imageLoading: 'eager',
+	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
 };
 
 const aBasicLink = {

@@ -8,7 +8,10 @@ import {
 import { Button, SvgCross } from '@guardian/source-react-components';
 import type { ChangeEventHandler, ReactEventHandler } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ReCAPTCHA } from 'react-google-recaptcha';
+// Note - the package also exports a component as a named export "ReCAPTCHA",
+// that version will compile and render but is non-functional.
+// Use the default export instead.
+import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { isServer } from '../lib/isServer';
 import {
 	getCaptchaSiteKey,
@@ -32,8 +35,10 @@ const contentWrapperStyle = css`
 `;
 
 const sectionWrapperStyle = (hide: boolean) => css`
-	display: ${hide ? 'none' : 'unset'};
+	display: ${hide ? 'none' : 'block'};
 	position: fixed;
+	/* stylelint-disable-next-line value-no-vendor-prefix -- required safari before v13 https://developer.mozilla.org/en-US/docs/Web/CSS/position */
+	position: -webkit-sticky;
 	position: sticky;
 	bottom: 0;
 	left: 0;
@@ -114,7 +119,7 @@ export const ManyNewsletterSignUp = () => {
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
-	const reCaptchaRef = useRef<ReCAPTCHA>(null);
+	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const useReCaptcha = isServer
 		? false
 		: !!window.guardian.config.switches['emailSignupRecaptcha'];
@@ -165,13 +170,13 @@ export const ManyNewsletterSignUp = () => {
 		const signUpButtons = [
 			...document.querySelectorAll(`[data-role=${BUTTON_ROLE}]`),
 		];
-		signUpButtons.forEach((button) => {
+		for (const button of signUpButtons) {
 			button.classList.remove(BUTTON_SELECTED_CLASS);
 			const ariaLabelText =
 				button.getAttribute('data-aria-label-when-unchecked') ??
 				'add to list';
 			button.setAttribute('aria-label', ariaLabelText);
-		});
+		}
 
 		setNewslettersToSignUpFor([]);
 	}, [userCanInteract]);
@@ -180,13 +185,13 @@ export const ManyNewsletterSignUp = () => {
 		const signUpButtons = [
 			...document.querySelectorAll(`[data-role=${BUTTON_ROLE}]`),
 		];
-		signUpButtons.forEach((button) => {
+		for (const button of signUpButtons) {
 			button.addEventListener('click', toggleNewsletter);
-		});
+		}
 		return () => {
-			signUpButtons.forEach((button) => {
+			for (const button of signUpButtons) {
 				button.removeEventListener('click', toggleNewsletter);
-			});
+			}
 		};
 	}, [toggleNewsletter, newslettersToSignUpFor]);
 
@@ -315,13 +320,17 @@ export const ManyNewsletterSignUp = () => {
 
 						{useReCaptcha && !!captchaSiteKey && (
 							<div
+								// The Google documentation specifies that if the 'recaptcha-badge' is hidden,
+								// their T+C's must be displayed instead. While this component hides the
+								// badge, the T+C's are inluded in the ManyNewslettersForm component.
+								// https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 								css={css`
 									.grecaptcha-badge {
 										visibility: hidden;
 									}
 								`}
 							>
-								<ReCAPTCHA
+								<ReactGoogleRecaptcha
 									sitekey={captchaSiteKey}
 									ref={reCaptchaRef}
 									onError={handleCaptchaError}

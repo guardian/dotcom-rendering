@@ -8,9 +8,11 @@ import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import type { Loading } from './CardPicture';
 
 type Props = {
 	trails: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	adIndex: number;
@@ -23,6 +25,7 @@ export const FixedSmallSlowVMPU = ({
 	showAge,
 	adIndex,
 	renderAds,
+	imageLoading,
 }: Props) => {
 	const firstSlice33 = trails.slice(0, 1);
 	const remaining = trails.slice(1, 4);
@@ -35,6 +38,7 @@ export const FixedSmallSlowVMPU = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							imageLoading={imageLoading}
 						/>
 					</LI>
 				))}
@@ -82,6 +86,7 @@ export const FixedSmallSlowVMPU = ({
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
+								imageLoading={imageLoading}
 							/>
 						</LI>
 					);

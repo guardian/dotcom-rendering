@@ -390,7 +390,7 @@ const borderContainer = (containerPalette: DCRContainerPalette): string => {
 		case 'LongRunningPalette':
 			return transparentColour(neutral[60], 0.4);
 		case 'LongRunningAltPalette':
-			return neutral[60];
+			return neutral[86];
 		case 'SombrePalette':
 			return neutral[60];
 		case 'SombreAltPalette':

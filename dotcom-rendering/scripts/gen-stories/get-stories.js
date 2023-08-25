@@ -12,8 +12,8 @@ It should be run whenever any of the Display, Design, or Theme `format` properti
 
 */
 
-const { writeFileSync, readFileSync, mkdirSync } = require('fs');
-const path = require('path');
+const { writeFileSync, readFileSync, mkdirSync } = require('node:fs');
+const path = require('node:path');
 const { log, success, warn } = require('../env/log');
 
 const STORIES_PATH = path.resolve(
@@ -151,6 +151,12 @@ const testLayoutFormats = [
 		design: 'Standard',
 		theme: 'NewsPillar',
 		renderingTarget: 'Apps',
+	},
+	{
+		display: 'Showcase',
+		design: 'Picture',
+		theme: 'OpinionPillar',
+		renderingTarget: 'Web',
 	},
 ];
 

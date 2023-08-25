@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('node:fs');
 const lockfile = require('@yarnpkg/lockfile');
 const pkg = require('../../package.json');
 const { warn, log } = require('./log');

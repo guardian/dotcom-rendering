@@ -21,6 +21,7 @@ import type {
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import type { Loading } from './CardPicture';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;
@@ -28,6 +29,7 @@ type Props = {
 	showAge?: boolean;
 	adIndex: number;
 	renderAds: boolean;
+	imageLoading: Loading;
 };
 
 /* .___________.___________.___________.
@@ -40,8 +42,10 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	containerPalette,
 	showAge,
 	adIndex,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	adIndex: number;
@@ -57,6 +61,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 						trail={card}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -124,8 +129,10 @@ const ColumnOfThree50_Ad50 = ({
 	containerPalette,
 	showAge,
 	adIndex,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	adIndex: number;
@@ -142,6 +149,7 @@ const ColumnOfThree50_Ad50 = ({
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
+								imageLoading={imageLoading}
 							/>
 						</LI>
 					))}
@@ -176,6 +184,7 @@ export const DynamicSlowMPU = ({
 	showAge,
 	adIndex,
 	renderAds,
+	imageLoading,
 }: Props) => {
 	let firstSliceLayout:
 		| undefined
@@ -262,6 +271,7 @@ export const DynamicSlowMPU = ({
 						cards={firstSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'twoBigsFirstBoosted':
@@ -270,6 +280,7 @@ export const DynamicSlowMPU = ({
 						cards={firstSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'twoBigsSecondBoosted':
@@ -278,6 +289,7 @@ export const DynamicSlowMPU = ({
 						cards={firstSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'threeBigs':
@@ -286,6 +298,7 @@ export const DynamicSlowMPU = ({
 						cards={firstSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				);
 			default:
@@ -303,6 +316,7 @@ export const DynamicSlowMPU = ({
 						containerPalette={containerPalette}
 						showAge={showAge}
 						adIndex={adIndex}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'noFirstSlice':
@@ -312,6 +326,7 @@ export const DynamicSlowMPU = ({
 						containerPalette={containerPalette}
 						showAge={showAge}
 						adIndex={adIndex}
+						imageLoading={imageLoading}
 					/>
 				);
 			// Without MPU
@@ -330,6 +345,7 @@ export const DynamicSlowMPU = ({
 						cards={secondSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				);
 
@@ -339,6 +355,7 @@ export const DynamicSlowMPU = ({
 						cards={secondSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'noFirstSliceNoMPUThreeOrMore':
@@ -347,6 +364,7 @@ export const DynamicSlowMPU = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 		}

@@ -26,6 +26,7 @@ node_modules/
 !/scripts/**/*.js
 !/.storybook/**/*.js
 !/index.d.ts
+!/*.js
 !package.json
 
 # Ignore specific files

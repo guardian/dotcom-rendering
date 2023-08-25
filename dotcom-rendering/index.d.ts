@@ -28,6 +28,7 @@ type FETheme = ThemePillar | ThemeSpecial;
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type FEDesign =
 	| 'ArticleDesign'
+	| 'PictureDesign'
 	| 'GalleryDesign'
 	| 'AudioDesign'
 	| 'VideoDesign'
@@ -398,22 +399,6 @@ interface MessageUs {
 	formFields: import('./src/types/content').MessageUsFieldType[];
 }
 
-interface GADataType {
-	pillar: LegacyPillar;
-	webTitle: string;
-	section: string;
-	contentType: string;
-	commissioningDesks: string;
-	contentId: string;
-	authorIds: string;
-	keywordIds: string;
-	toneIds: string;
-	seriesId: string;
-	isHosted: string;
-	edition: string;
-	beaconUrl: string;
-}
-
 // ----------------- //
 // General DataTypes //
 // ----------------- //
@@ -571,13 +556,5 @@ declare namespace JSX {
 		 * link is clicked.
 		 */
 		'data-link-name'?: string;
-
-		/**
-		 * Elements with this attribute will fetch their comment count on
-		 * the client-side.
-		 *
-		 * @see {@link ../src/components/FetchCommentCounts.importable.tsx}
-		 */
-		'data-discussion-id'?: string;
 	}
 }

@@ -14,6 +14,7 @@ import { getSoleContributor } from '../lib/byline';
 import { decidePalette } from '../lib/decidePalette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { Palette } from '../types/palette';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
@@ -41,6 +42,7 @@ type Props = {
 	ajaxUrl: string;
 	showShareCount: boolean;
 	messageUs?: MessageUs;
+	renderingTarget: RenderingTarget;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -107,19 +109,19 @@ const borderColourWhenBackgroundDark = css`
 	}
 `;
 
-const metaExtras = (palette: Palette) => css`
+const metaExtras = (palette: Palette, isPictureContent: boolean) => css`
 	border-top: 1px solid ${palette.border.article};
 	flex-grow: 1;
 	padding-top: 6px;
 
-	${until.phablet} {
+	${!isPictureContent && until.phablet} {
 		margin-left: -20px;
 		margin-right: -20px;
 		padding-left: 20px;
 		padding-right: 20px;
 	}
 
-	${until.mobileLandscape} {
+	${!isPictureContent && until.phablet} {
 		margin-left: -10px;
 		margin-right: -10px;
 		padding-left: 10px;
@@ -131,7 +133,7 @@ const metaExtras = (palette: Palette) => css`
 	}
 `;
 
-const metaNumbers = (palette: Palette) => css`
+const metaNumbers = (palette: Palette, isPictureContent: boolean) => css`
 	border-top: 1px solid ${palette.border.article};
 	display: flex;
 	flex-grow: 1;
@@ -141,14 +143,14 @@ const metaNumbers = (palette: Palette) => css`
 		justify-content: flex-start;
 	}
 
-	${until.phablet} {
+	${!isPictureContent && until.phablet} {
 		margin-left: -20px;
 		margin-right: -20px;
 		padding-left: 20px;
 		padding-right: 20px;
 	}
 
-	${until.mobileLandscape} {
+	${!isPictureContent && until.phablet} {
 		margin-left: -10px;
 		margin-right: -10px;
 		padding-left: 10px;
@@ -313,6 +315,7 @@ export const ArticleMeta = ({
 	ajaxUrl,
 	showShareCount,
 	messageUs,
+	renderingTarget,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -323,6 +326,8 @@ export const ArticleMeta = ({
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
 	const palette = decidePalette(format);
+
+	const isPictureContent = format.design === ArticleDesign.Picture;
 
 	return (
 		<div
@@ -375,6 +380,7 @@ export const ArticleMeta = ({
 									byline={byline}
 									tags={tags}
 									format={format}
+									renderingTarget={renderingTarget}
 								/>
 							)}
 							{messageUs &&
@@ -404,7 +410,7 @@ export const ArticleMeta = ({
 								: ''
 						}
 						css={[
-							metaExtras(palette),
+							metaExtras(palette, isPictureContent),
 							format.design === ArticleDesign.LiveBlog &&
 								css(
 									borderColourWhenBackgroundDark,
@@ -428,7 +434,7 @@ export const ArticleMeta = ({
 								: ''
 						}
 						css={[
-							metaNumbers(palette),
+							metaNumbers(palette, isPictureContent),
 							format.design === ArticleDesign.LiveBlog &&
 								css(
 									borderColourWhenBackgroundDark,

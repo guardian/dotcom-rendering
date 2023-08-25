@@ -34,20 +34,34 @@ const DecideLayoutApps = ({
 	article: FEArticleType;
 	format: ArticleFormat;
 }) => {
-	if (
-		format.display === ArticleDisplay.Standard &&
-		format.design === ArticleDesign.Standard
-	) {
-		return (
-			<StandardLayout
-				article={article}
-				format={format}
-				renderingTarget="Apps"
-			/>
-		);
+	const notSupported = <pre>Not supported</pre>;
+	switch (format.display) {
+		case ArticleDisplay.Standard: {
+			switch (format.design) {
+				case ArticleDesign.Standard:
+					return (
+						<StandardLayout
+							article={article}
+							format={format}
+							renderingTarget="Apps"
+						/>
+					);
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return (
+						<LiveLayout
+							article={article}
+							format={format}
+							renderingTarget="Apps"
+						/>
+					);
+				default:
+					return notSupported;
+			}
+		}
+		default:
+			return notSupported;
 	}
-
-	return <pre>Not supported</pre>;
 };
 
 const DecideLayoutWeb = ({
@@ -147,7 +161,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
+							renderingTarget="Web"
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -167,6 +181,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:

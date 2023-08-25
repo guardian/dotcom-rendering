@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
 import { updateTimeElement } from '../client/relativeTime/updateTimeElements';
 import { isServer } from '../lib/isServer';
@@ -50,8 +51,10 @@ function insert(html: string, enhanceTweetsSwitch: boolean) {
 
 	// Hydrate
 	// -------
-	const islands = fragment.querySelectorAll('gu-island');
-	initHydration(islands);
+	const islands = fragment.querySelectorAll<HTMLElement>('gu-island');
+	void Promise.all(
+		[...islands].map((island) => initHydration(island, getEmotionCache())),
+	);
 
 	// Insert
 	// ------
@@ -84,10 +87,11 @@ function revealPendingBlocks() {
 	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
 	const pendingBlocks =
 		blogBody?.querySelectorAll<HTMLElement>('.pending.block');
-	pendingBlocks?.forEach((block) => {
-		block.classList.add('reveal-slowly');
-		block.classList.remove('pending');
-	});
+	if (pendingBlocks)
+		for (const block of pendingBlocks) {
+			block.classList.add('reveal-slowly');
+			block.classList.remove('pending');
+		}
 
 	if (pendingBlocks !== undefined && pendingBlocks.length > 0)
 		// Notify commercial that new blocks are available and they can re-run spacefinder

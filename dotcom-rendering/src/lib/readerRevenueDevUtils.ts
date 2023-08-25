@@ -77,7 +77,7 @@ const clearCommonReaderRevenueStateAndReload = (
 		return;
 	}
 
-	readerRevenueCookies.forEach((cookie) => removeCookie({ name: cookie }));
+	for (const cookie of readerRevenueCookies) removeCookie({ name: cookie });
 	clearEpicViewLog();
 
 	if (asExistingSupporter) {

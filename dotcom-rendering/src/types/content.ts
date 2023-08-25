@@ -89,6 +89,21 @@ export interface CalloutBlockElementV2 {
 	contacts?: CalloutContactType[];
 }
 
+export interface CartoonBlockElement {
+	_type: 'model.dotcomrendering.pageElements.CartoonBlockElement';
+	role: RoleType;
+	variants: CartoonVariant[];
+	caption?: string;
+	credit?: string;
+	displayCredit?: boolean;
+	alt?: string;
+}
+
+export type CartoonVariant = {
+	viewportSize: 'small' | 'large';
+	images: Image[];
+};
+
 interface ChartAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 	elementId: string;
@@ -615,7 +630,6 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataVideo
 		| WitnessTypeDataText;
 }
-
 export type FEElement =
 	| AudioAtomBlockElement
 	| AudioBlockElement
@@ -623,6 +637,7 @@ export type FEElement =
 	| CaptionBlockElement
 	| CalloutBlockElement
 	| CalloutBlockElementV2
+	| CartoonBlockElement
 	| ChartAtomBlockElement
 	| CodeBlockElement
 	| CommentBlockElement

@@ -7,8 +7,6 @@ import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagFrontType } from '../types/tagFront';
 import { AlreadyVisited } from './AlreadyVisited.importable';
-import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
-import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
@@ -60,9 +58,6 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 				<AlreadyVisited />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
-				<AnimatePulsingDots />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
@@ -71,9 +66,6 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 						!!tagFront.config.switches.commercialMetrics
 					}
 				/>
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<FetchCommentCounts repeat={true} />
 			</Island>
 			<Island clientOnly={true}>
 				<SetABTests

@@ -49,6 +49,22 @@ const convertToLegacyPillar = (theme: FETheme): LegacyPillar => {
 const formatStringForGa = (string: string): string =>
 	string.toLowerCase().split(' ').join('');
 
+export interface GADataType {
+	pillar: LegacyPillar;
+	webTitle: string;
+	section: string;
+	contentType: string;
+	commissioningDesks: string;
+	contentId: string;
+	authorIds: string;
+	keywordIds: string;
+	toneIds: string;
+	seriesId: string;
+	isHosted: string;
+	edition: string;
+	beaconUrl: string;
+}
+
 export const extractGA = ({
 	webTitle,
 	format,

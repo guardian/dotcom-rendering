@@ -20,6 +20,7 @@ import type {
 } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import type { Loading } from './CardPicture';
 
 /**
  * Not sure where to start? This PR documents a lot of the key features
@@ -31,6 +32,7 @@ import { UL } from './Card/components/UL';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -46,8 +48,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 	cards,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -64,6 +68,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			</LI>
 			<LI
@@ -85,6 +90,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
+										imageLoading={imageLoading}
 									/>
 								) : (
 									<CardDefault
@@ -129,8 +135,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	cards,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -145,6 +153,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			</LI>
 			<LI percentage="50%">
@@ -190,8 +199,10 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 		cards,
 		showAge,
 		containerPalette,
+		imageLoading,
 	}: {
 		cards: DCRFrontCard[];
+		imageLoading: Loading;
 		showAge?: boolean;
 		containerPalette?: DCRContainerPalette;
 	}) => {
@@ -231,8 +242,10 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	cards,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -247,6 +260,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			</LI>
 			<LI percentage="75%">
@@ -291,8 +305,10 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	cards,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -316,6 +332,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							imageLoading={imageLoading}
 						/>
 					</LI>
 				);
@@ -363,8 +380,10 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 	cards,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -388,6 +407,7 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							imageLoading={imageLoading}
 						/>
 					</LI>
 				);
@@ -427,6 +447,7 @@ export const DynamicFast = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
+	imageLoading,
 }: Props) => {
 	let firstSliceLayout:
 		| undefined // If there are no very bigs or huges, there is no first slice
@@ -559,6 +580,7 @@ export const DynamicFast = ({
 						cards={firstSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'oneVeryBig':
@@ -567,6 +589,7 @@ export const DynamicFast = ({
 						cards={firstSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'TwoVeryBigsFirstBoosted':
@@ -575,6 +598,7 @@ export const DynamicFast = ({
 						cards={firstSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'TwoVeryBigsSecondBoosted':
@@ -583,6 +607,7 @@ export const DynamicFast = ({
 						cards={firstSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'twoVeryBigs':
@@ -591,6 +616,7 @@ export const DynamicFast = ({
 						cards={firstSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			default:
@@ -606,6 +632,7 @@ export const DynamicFast = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'twoOrMoreBigsFirstBoosted':
@@ -614,6 +641,7 @@ export const DynamicFast = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'noBigs':
@@ -622,6 +650,7 @@ export const DynamicFast = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'oneBig':
@@ -630,6 +659,7 @@ export const DynamicFast = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'twoBigs':
@@ -638,6 +668,7 @@ export const DynamicFast = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'threeBigs':
@@ -646,6 +677,7 @@ export const DynamicFast = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'fourBigs':
@@ -654,6 +686,7 @@ export const DynamicFast = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			default:

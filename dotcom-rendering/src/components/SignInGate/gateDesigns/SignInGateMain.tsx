@@ -21,6 +21,7 @@ import {
 
 export const SignInGateMain = ({
 	signInUrl,
+	registerUrl,
 	guUrl,
 	dismissGate,
 	abTest,
@@ -60,7 +61,7 @@ export const SignInGateMain = ({
 					css={registerButton}
 					priority="primary"
 					size="small"
-					href={signInUrl}
+					href={registerUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'register-link', abTest);
 					}}

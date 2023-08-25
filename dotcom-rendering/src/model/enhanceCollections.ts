@@ -44,19 +44,30 @@ function getBrandingFromCards(
 		.filter(isNonNullable);
 }
 
-export const enhanceCollections = (
-	collections: FECollectionType[],
-	editionId: EditionId,
-	pageId: string,
-	onPageDescription?: string,
-	isPaidContent?: boolean,
-): DCRCollectionType[] => {
+export const enhanceCollections = ({
+	collections,
+	editionId,
+	pageId,
+	discussionApiUrl,
+	onPageDescription,
+	isPaidContent,
+}: {
+	collections: FECollectionType[];
+	editionId: EditionId;
+	pageId: string;
+	discussionApiUrl: string;
+	onPageDescription?: string;
+	isPaidContent?: boolean;
+}): DCRCollectionType[] => {
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
 		const allCards = [...collection.curated, ...collection.backfill];
 		const allBranding = getBrandingFromCards(allCards, editionId);
 		const allCardsHaveBranding = allCards.length === allBranding.length;
+		const isCollectionPaidContent = allBranding.every(
+			({ brandingType }) => brandingType?.name === 'paid-content',
+		);
 
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
@@ -80,24 +91,29 @@ export const enhanceCollections = (
 			badge: decideBadge(
 				collection.config.href,
 				// We only try to use a branded badge for paid content
-				isPaidContent && allCardsHaveBranding ? allBranding : undefined,
+				isCollectionPaidContent && allCardsHaveBranding
+					? allBranding
+					: undefined,
 			),
 			grouped: groupCards(
 				collectionType,
 				collection.curated,
 				collection.backfill,
 				editionId,
+				discussionApiUrl,
 				containerPalette,
 			),
 			curated: enhanceCards(collection.curated, {
 				cardInTagFront: false,
 				editionId,
 				containerPalette,
+				discussionApiUrl,
 			}),
 			backfill: enhanceCards(collection.backfill, {
 				cardInTagFront: false,
 				editionId,
 				containerPalette,
+				discussionApiUrl,
 			}),
 			treats: enhanceTreats(
 				collection.treats,

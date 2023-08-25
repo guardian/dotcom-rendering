@@ -14,15 +14,6 @@ const rulesToOverrideGuardianConfig = {
 		'index-signature',
 	],
 
-	// be explicit when you only want to import a type:
-	// `import type { Foo } from 'Foo';`
-	'@typescript-eslint/consistent-type-imports': [
-		'warn',
-		{
-			prefer: 'type-imports',
-		},
-	],
-
 	// This is not safe to remove whilst we have noUncheckedIndexedAccess
 	'@typescript-eslint/no-unnecessary-condition': 'warn',
 };
@@ -89,6 +80,7 @@ module.exports = {
 		'jsx-a11y',
 		'jsx-expressions',
 		'custom-elements',
+		'unicorn',
 	],
 	rules: {
 		// React, Hooks & JSX
@@ -132,6 +124,9 @@ module.exports = {
 
 		'object-shorthand': ['error', 'always'],
 
+		/** @see https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-array-for-each.md */
+		'unicorn/no-array-for-each': 'error',
+
 		'import/no-extraneous-dependencies': [
 			'error',
 			// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
@@ -167,6 +162,8 @@ module.exports = {
 			},
 		],
 
+		'unicorn/prefer-node-protocol': 'error',
+
 		...rulesToReview,
 		...rulesToEnforce,
 		...rulesToOverrideGuardianConfig,
@@ -178,6 +175,7 @@ module.exports = {
 		{
 			files: ['**/**.js'],
 			rules: {
+				'global-require': 'off',
 				'@typescript-eslint/no-var-requires': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
@@ -187,6 +185,19 @@ module.exports = {
 			files: ['**/**.ts'],
 			rules: {
 				'@typescript-eslint/explicit-module-boundary-types': 'error',
+			},
+		},
+		{
+			files: ['**/**.d.ts'],
+			rules: {
+				'@typescript-eslint/consistent-type-imports': [
+					'error',
+					{
+						prefer: 'type-imports',
+						// that’s the way declaration files do it!
+						disallowTypeAnnotations: false,
+					},
+				],
 			},
 		},
 		{

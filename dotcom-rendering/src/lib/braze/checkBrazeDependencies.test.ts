@@ -1,4 +1,4 @@
-import { setImmediate } from 'timers';
+import { setImmediate } from 'node:timers';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 
 let mockBrazeUuid: string | null;

@@ -53,6 +53,7 @@ export function isCheckoutCompleteCookieData(
 }
 export type SignInGateProps = {
 	signInUrl: string;
+	registerUrl: string;
 	guUrl: string;
 	dismissGate: () => void;
 	ophanComponentId: string;

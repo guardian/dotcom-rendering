@@ -9,9 +9,7 @@ import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
-import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
-import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
@@ -93,14 +91,6 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			{(format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo id={'key-events-carousel'} label="Skip to key events" />
-			)}
-			<Island clientOnly={true} deferUntil="idle">
-				<FetchCommentCounts repeat={true} />
-			</Island>
-			{format.design === ArticleDesign.LiveBlog && (
-				<Island clientOnly={true} deferUntil="idle">
-					<AnimatePulsingDots />
-				</Island>
 			)}
 			{renderingTarget === 'Web' && (
 				<>

@@ -213,6 +213,12 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 						groupedTrails.day !== undefined,
 					);
 
+					const imageLoading =
+						tagFront.config.abTests.lazyLoadImagesVariant ===
+							'variant' && index > 0
+							? 'lazy'
+							: 'eager';
+
 					const ContainerComponent = () => {
 						if (
 							'injected' in groupedTrails &&
@@ -223,6 +229,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 									<TagFrontFastMpu
 										{...groupedTrails}
 										adIndex={1} // There is only ever 1 inline ad in a tag front
+										imageLoading={imageLoading}
 									/>
 								);
 							} else {
@@ -230,6 +237,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 									<TagFrontSlowMpu
 										{...groupedTrails}
 										adIndex={1} // There is only ever 1 inline ad in a tag front
+										imageLoading={imageLoading}
 									/>
 								);
 							}
@@ -238,6 +246,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							<DecideContainerByTrails
 								trails={groupedTrails.trails}
 								speed={tagFront.speed}
+								imageLoading={imageLoading}
 							/>
 						);
 					};
@@ -282,6 +291,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 									index === tagFront.groupedTrails.length - 1
 										? tagFront.pagination
 										: undefined
+								}
+								discussionApiUrl={
+									tagFront.config.discussionApiUrl
 								}
 							>
 								<ContainerComponent />

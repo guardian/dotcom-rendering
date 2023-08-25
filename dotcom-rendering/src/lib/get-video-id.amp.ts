@@ -1,4 +1,4 @@
-import { parse, URLSearchParams } from 'url';
+import { parse, URLSearchParams } from 'node:url';
 import { isString } from '@guardian/libs';
 
 export const getIdFromUrl = (

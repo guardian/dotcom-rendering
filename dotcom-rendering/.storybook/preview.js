@@ -1,4 +1,4 @@
-import { setCookie } from '@guardian/libs';
+import { setCookie, storage } from '@guardian/libs';
 import { AB } from '@guardian/ab-core';
 
 import isChromatic from 'chromatic/isChromatic';
@@ -134,6 +134,16 @@ const guardianViewports = {
 			height: '800px',
 		},
 	},
+};
+
+/** @type {import('@storybook/react').Preview} */
+export default {
+	decorators: [
+		(Story) => {
+			storage.local.clear();
+			return Story();
+		},
+	],
 };
 
 export const viewports = [320, 375, 480, 660, 740, 980, 1140, 1300];

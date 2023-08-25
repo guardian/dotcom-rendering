@@ -11,57 +11,130 @@ import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
 import { createAppClient } from './thrift/nativeConnection';
 
-const environmentClient: Environment.Client<void> = createAppClient<
-	Environment.Client<void>
->(Environment.Client, 'buffered', 'compact');
-const commercialClient: Commercial.Client<void> = createAppClient<
-	Commercial.Client<void>
->(Commercial.Client, 'buffered', 'compact');
-const acquisitionsClient: Acquisitions.Client<void> = createAppClient<
-	Acquisitions.Client<void>
->(Acquisitions.Client, 'buffered', 'compact');
-const notificationsClient: Notifications.Client<void> = createAppClient<
-	Notifications.Client<void>
->(Notifications.Client, 'buffered', 'compact');
-const userClient: User.Client<void> = createAppClient<User.Client<void>>(
-	User.Client,
-	'buffered',
-	'compact',
-);
-const galleryClient: Gallery.Client<void> = createAppClient<
-	Gallery.Client<void>
->(Gallery.Client, 'buffered', 'compact');
-const videoClient: Video.Client<void> = createAppClient<Video.Client<void>>(
-	Video.Client,
-	'buffered',
-	'compact',
-);
-const metricsClient: Metrics.Client<void> = createAppClient<
-	Metrics.Client<void>
->(Metrics.Client, 'buffered', 'compact');
+let environmentClient: Environment.Client<void> | undefined = undefined;
+export const getEnvironmentClient = (): Environment.Client<void> => {
+	if (environmentClient === undefined) {
+		environmentClient = createAppClient<Environment.Client<void>>(
+			Environment.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return environmentClient;
+};
 
-const analyticsClient: Analytics.Client<void> = createAppClient<
-	Analytics.Client<void>
->(Analytics.Client, 'buffered', 'compact');
+let commercialClient: Commercial.Client<void> | undefined = undefined;
+export const getCommercialClient = (): Commercial.Client<void> => {
+	if (commercialClient === undefined) {
+		commercialClient = createAppClient<Commercial.Client<void>>(
+			Commercial.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return commercialClient;
+};
 
-const navigationClient: Navigation.Client<void> = createAppClient<
-	Navigation.Client<void>
->(Navigation.Client, 'buffered', 'compact');
+let acquisitionsClient: Acquisitions.Client<void> | undefined = undefined;
+export const getAcquisitionsClient = (): Acquisitions.Client<void> => {
+	if (!acquisitionsClient) {
+		acquisitionsClient = createAppClient<Acquisitions.Client<void>>(
+			Acquisitions.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return acquisitionsClient;
+};
 
-const newslettersClient: Newsletters.Client<void> = createAppClient<
-	Newsletters.Client<void>
->(Newsletters.Client, 'buffered', 'compact');
+let notificationsClient: Notifications.Client<void> | undefined = undefined;
+export const getNotificationsClient = (): Notifications.Client<void> => {
+	if (!notificationsClient) {
+		notificationsClient = createAppClient<Notifications.Client<void>>(
+			Notifications.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return notificationsClient;
+};
 
-export {
-	environmentClient,
-	commercialClient,
-	acquisitionsClient,
-	notificationsClient,
-	userClient,
-	galleryClient,
-	videoClient,
-	metricsClient,
-	analyticsClient,
-	navigationClient,
-	newslettersClient,
+let userClient: User.Client<void> | undefined = undefined;
+export const getUserClient = (): User.Client<void> => {
+	if (!userClient) {
+		userClient = createAppClient<User.Client<void>>(
+			User.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return userClient;
+};
+let galleryClient: Gallery.Client<void> | undefined = undefined;
+export const getGalleryClient = (): Gallery.Client<void> => {
+	if (!galleryClient) {
+		galleryClient = createAppClient<Gallery.Client<void>>(
+			Gallery.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return galleryClient;
+};
+let videoClient: Video.Client<void> | undefined = undefined;
+export const getVideoClient = (): Video.Client<void> => {
+	if (!videoClient) {
+		videoClient = createAppClient<Video.Client<void>>(
+			Video.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return videoClient;
+};
+let metricsClient: Metrics.Client<void> | undefined = undefined;
+export const getMetricsClient = (): Metrics.Client<void> => {
+	if (!metricsClient) {
+		metricsClient = createAppClient<Metrics.Client<void>>(
+			Metrics.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return metricsClient;
+};
+let analyticsClient: Analytics.Client<void> | undefined = undefined;
+export const getAnalyticsClient = (): Analytics.Client<void> => {
+	if (!analyticsClient) {
+		analyticsClient = createAppClient<Analytics.Client<void>>(
+			Analytics.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return analyticsClient;
+};
+
+let navigationClient: Navigation.Client<void> | undefined = undefined;
+export const getNavigationClient = (): Navigation.Client<void> => {
+	if (!navigationClient) {
+		navigationClient = createAppClient<Navigation.Client<void>>(
+			Navigation.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return navigationClient;
+};
+
+let newslettersClient: Newsletters.Client<void> | undefined = undefined;
+export const getNewslettersClient = (): Newsletters.Client<void> => {
+	if (!newslettersClient) {
+		newslettersClient = createAppClient<Newsletters.Client<void>>(
+			Newsletters.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return newslettersClient;
 };

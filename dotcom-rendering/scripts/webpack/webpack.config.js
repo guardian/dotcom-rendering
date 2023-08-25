@@ -1,6 +1,5 @@
-/* eslint-disable global-require -- we merge configs in the export */
 // @ts-check
-const path = require('path');
+const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -20,8 +19,10 @@ const sessionId = uuidv4();
 
 let builds = 0;
 
+/** @typedef {import('../../src/lib/assets').Build} Build */
+
 /**
- * @param {{ platform: 'server' | 'client.legacy' | 'client.modern' | 'client.variant' | 'client.apps'}} options
+ * @param {{ platform: 'server' | `client.${Build}`}} options
  * @returns {import('webpack').Configuration}
  */
 const commonConfigs = ({ platform }) => ({
@@ -88,16 +89,19 @@ const commonConfigs = ({ platform }) => ({
 						logger: (message) => {
 							// distinguish between initial and subsequent (re)builds in console output
 							if (builds < module.exports.length * 2) {
-								message = message
-									.replace('Building', 'Building initial')
-									.replace('Completed', 'Completed initial');
+								console.log(
+									message
+										.replace('Building', 'Building initial')
+										.replace(
+											'Completed',
+											'Completed initial',
+										),
+								);
 							} else {
-								message = message.replace(
-									'Building',
-									'Rebuilding',
+								console.log(
+									message.replace('Building', 'Rebuilding'),
 								);
 							}
-							console.log(message);
 							builds += 1;
 						},
 					}),
@@ -131,6 +135,18 @@ const commonConfigs = ({ platform }) => ({
 	},
 });
 
+/** @type {readonly Build[]} */
+const clientBuilds = [
+	'web',
+	'web.scheduled',
+	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
+		? /** @type {const} */ (['web.variant'])
+		: []),
+	// TODO: ignore static files for legacy compilation
+	...(PROD || BUILD_LEGACY ? /** @type {const} */ (['web.legacy']) : []),
+	'apps',
+];
+
 module.exports = [
 	merge(
 		commonConfigs({
@@ -139,49 +155,15 @@ module.exports = [
 		require(`./webpack.config.server`)({ sessionId }),
 		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
-	merge(
-		commonConfigs({
-			platform: 'client.modern',
-		}),
-		require(`./webpack.config.client`)({
-			bundle: 'modern',
-			sessionId,
-		}),
+	...clientBuilds.map((build) =>
+		merge(
+			commonConfigs({
+				platform: `client.${build}`,
+			}),
+			require(`./webpack.config.client`)({
+				build,
+				sessionId,
+			}),
+		),
 	),
-	merge(
-		commonConfigs({
-			platform: 'client.apps',
-		}),
-		require(`./webpack.config.client`)({
-			bundle: 'apps',
-			sessionId,
-		}),
-	),
-	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
-		? [
-				merge(
-					commonConfigs({
-						platform: 'client.variant',
-					}),
-					require(`./webpack.config.client`)({
-						bundle: 'variant',
-						sessionId,
-					}),
-				),
-		  ]
-		: []),
-	// TODO: ignore static files for legacy compilation
-	...(PROD || BUILD_LEGACY
-		? [
-				merge(
-					commonConfigs({
-						platform: 'client.legacy',
-					}),
-					require(`./webpack.config.client`)({
-						bundle: 'legacy',
-						sessionId,
-					}),
-				),
-		  ]
-		: []),
 ];

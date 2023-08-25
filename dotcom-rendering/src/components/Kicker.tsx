@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { PulsingDot } from './PulsingDot';
+import { Island } from './Island';
+import { PulsingDot } from './PulsingDot.importable';
 
 // Defines a prefix to be used with a headline (e.g. 'Live /')
 type Props = {
@@ -31,7 +32,11 @@ export const Kicker = ({
 					`,
 			]}
 		>
-			{showPulsingDot && <PulsingDot colour={color} />}
+			{showPulsingDot && (
+				<Island deferUntil="visible">
+					<PulsingDot colour={color} />
+				</Island>
+			)}
 			{text}
 		</div>
 	);

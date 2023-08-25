@@ -13,6 +13,7 @@ import { getAgeWarning } from '../lib/age-warning';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import type { Palette } from '../types/palette';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { AgeWarning } from './AgeWarning';
 import { DesignTag } from './DesignTag';
@@ -27,6 +28,7 @@ type Props = {
 	hasStarRating?: boolean;
 	hasAvatar?: boolean;
 	isMatch?: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 const topPadding = css`
@@ -340,6 +342,7 @@ export const ArticleHeadline = ({
 	hasStarRating,
 	hasAvatar,
 	isMatch,
+	renderingTarget,
 }: Props) => {
 	const palette = decidePalette(format);
 	switch (format.display) {
@@ -415,6 +418,7 @@ export const ArticleHeadline = ({
 									format={format}
 									byline={byline}
 									tags={tags}
+									renderingTarget={renderingTarget}
 								/>
 							)}
 						</div>
@@ -570,6 +574,7 @@ export const ArticleHeadline = ({
 									format={format}
 									byline={byline}
 									tags={tags}
+									renderingTarget={renderingTarget}
 								/>
 							)}
 						</div>
@@ -660,6 +665,7 @@ export const ArticleHeadline = ({
 									format={format}
 									byline={byline}
 									tags={tags}
+									renderingTarget={renderingTarget}
 								/>
 							)}
 						</div>
@@ -700,6 +706,7 @@ export const ArticleHeadline = ({
 									format={format}
 									byline={byline}
 									tags={tags}
+									renderingTarget={renderingTarget}
 								/>
 							)}
 						</div>
@@ -779,6 +786,31 @@ export const ArticleHeadline = ({
 									{headlineString}
 								</h1>
 							</WithAgeWarning>
+						</div>
+					);
+				case ArticleDesign.Picture:
+					return (
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
+						>
+							<DesignTag format={format} />
+							<h1
+								css={[
+									format.theme === ArticleSpecial.Labs
+										? labsFont
+										: standardFont,
+									topPadding,
+									css`
+										color: ${palette.text.headline};
+									`,
+								]}
+							>
+								{headlineString}
+							</h1>
 						</div>
 					);
 				default:

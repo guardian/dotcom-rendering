@@ -2,14 +2,16 @@ import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
 import { islandNoscriptStyles } from '../components/Island';
 import { ASSET_ORIGIN } from '../lib/assets';
+import { escapeData } from '../lib/escapeData';
 import { getFontsCss } from '../lib/fonts-css';
 import { getHttp3Url } from '../lib/getHttp3Url';
+import type { Guardian } from '../model/guardian';
 import type { RenderingTarget } from '../types/renderingTarget';
 
 type BaseProps = {
 	css: string;
 	html: string;
-	windowGuardian: string;
+	guardian: Guardian;
 	scriptTags: string[];
 	title?: string;
 	description?: string;
@@ -18,7 +20,6 @@ type BaseProps = {
 	openGraphData?: { [key: string]: string };
 	twitterData?: { [key: string]: string };
 	initTwitter?: string;
-	recipeMarkup?: string;
 	canonicalUrl?: string;
 	renderingTarget: RenderingTarget;
 	offerHttp3: boolean;
@@ -55,7 +56,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	const {
 		css,
 		html,
-		windowGuardian,
+		guardian,
 		scriptTags,
 		title = 'The Guardian',
 		description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
@@ -64,13 +65,18 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		openGraphData,
 		twitterData,
 		initTwitter,
-		recipeMarkup,
 		canonicalUrl,
 		renderingTarget,
 		offerHttp3,
 		hasPageSkin = false,
 		weAreHiring,
 	} = props;
+
+	/**
+	 * We escape windowGuardian here to prevent errors when the data
+	 * is placed in a script tag on the page
+	 */
+	const windowGuardian = escapeData(JSON.stringify(guardian));
 
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -201,7 +207,11 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <meta charset="utf-8">
 
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                <meta name="theme-color" content="${brandBackground.primary}" />
+                ${
+					renderingTarget === 'Web'
+						? `<meta name="theme-color" content="${brandBackground.primary}" />`
+						: ``
+				}
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 
                 ${preconnectTags.join('\n')}
@@ -356,11 +366,6 @@ https://workforus.theguardian.com/careers/product-engineering/
 
 			<body class="${hasPageSkin ? 'has-page-skin' : ''}">
                 ${html}
-				${
-					recipeMarkup !== undefined
-						? `<script type="application/ld+json">${recipeMarkup}</script>`
-						: '<!-- no recipe markup -->'
-				}
             </body>
         </html>`;
 };

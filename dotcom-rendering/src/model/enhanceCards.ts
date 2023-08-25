@@ -89,12 +89,12 @@ const enhanceSupportingContent = (
 		const supportingContentIsLive =
 			subLink.format?.design === 'LiveBlogDesign';
 
-		const kickerText = subLink.header?.kicker?.item?.properties.kickerText;
+		const kickerText = subLink.header.kicker?.item?.properties.kickerText;
 
 		return {
 			format: presentationFormat,
-			headline: subLink.header?.headline ?? '',
-			url: subLink.properties.href ?? subLink.header?.url,
+			headline: subLink.header.headline ?? '',
+			url: decideUrl(subLink),
 			kickerText:
 				supportingContentIsLive && !kickerText ? 'Live' : kickerText,
 		};
@@ -107,6 +107,38 @@ const decideAvatarUrl = (
 ): string | undefined => {
 	const soleContributor = getSoleContributor(tags, byline);
 	return soleContributor?.bylineLargeImageUrl ?? undefined;
+};
+
+/**
+ * This function decides the best URL to link to on a Card or Supporting Content. It will pick the first non-undefined property of the following:
+ *
+ * `trail.properties.webUrl` - Where CAPI expects the content to be. Fully qualified but turned into a relative URL by DCR if possible. Ignored if the trail is type LinkSnap.
+ * `trail.properties.href` - Location that a LinkSnap references.
+ * `trail.header.url` - Where Frontend/FAPI expects the content to be. Usually identical to a relative-ized webUrl. In theory this should never get picked but it's the only URL where we're guaranteed it not be undefined which makes TypeScript happy.
+ */
+const decideUrl = (trail: FESupportingContent | FEFrontCard) => {
+	/**
+	 * Frontend gives us fully qualified webUrls (https://www.theguardian.com/a/thing) which we want as relative URLs instead
+	 *
+	 * Don't try to provide a relative URL for LinkSnap, these will link to domains other than www.theguardian.com and therefore wont have a relative path.
+	 */
+	if (
+		trail.properties.webUrl !== undefined &&
+		!('type' in trail && trail.type === 'LinkSnap')
+	) {
+		try {
+			return new URL(trail.properties.webUrl).pathname;
+		} catch (_) {
+			/**
+			 * In theory CAPI/FAPI/Frontend should never give us an webURL but
+			 * lets just fallback to a non relative URL just in case.
+			 *
+			 * Ideally we'd like to know when this happens, but unfortunately we can't access `logger` from here as this code also needs to be ran on the client by ShowMore.
+			 */
+		}
+	}
+
+	return trail.properties.webUrl ?? trail.properties.href ?? trail.header.url;
 };
 
 const decideImage = (trail: FEFrontCard) => {
@@ -253,12 +285,14 @@ export const enhanceCards = (
 		editionId,
 		containerPalette,
 		pageId,
+		discussionApiUrl,
 	}: {
 		cardInTagFront: boolean;
 		offset?: number;
 		editionId?: EditionId;
 		containerPalette?: DCRContainerPalette;
 		pageId?: string;
+		discussionApiUrl: string;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -285,17 +319,6 @@ export const enhanceCards = (
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
 			: [];
 
-		/**
-		 * The URL parameter on a Snap header will be a link to the Snap itself, there is a second href
-		 * property which contains what the snap is actually linking to. This is commonly used in the
-		 * NavList container for linking to non-article pages.
-		 * @see NavList
-		 */
-		const url =
-			faciaCard.type === 'LinkSnap' && faciaCard.properties.href
-				? faciaCard.properties.href
-				: faciaCard.header.url;
-
 		const branding = faciaCard.properties.editionBrandings.find(
 			(editionBranding) => editionBranding.edition.id === editionId,
 		)?.branding;
@@ -303,7 +326,7 @@ export const enhanceCards = (
 		return {
 			format,
 			dataLinkName,
-			url,
+			url: decideUrl(faciaCard),
 			headline: faciaCard.header.headline,
 			trailText: faciaCard.card.trailText,
 			starRating: faciaCard.card.starRating,
@@ -327,6 +350,7 @@ export const enhanceCards = (
 						containerPalette,
 				  )
 				: undefined,
+			discussionApiUrl,
 			discussionId: faciaCard.discussion.isCommentable
 				? faciaCard.discussion.discussionId
 				: undefined,

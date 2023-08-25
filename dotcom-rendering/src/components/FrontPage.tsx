@@ -7,9 +7,7 @@ import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { DCRFrontType } from '../types/front';
 import { AlreadyVisited } from './AlreadyVisited.importable';
-import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
-import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
@@ -63,9 +61,6 @@ export const FrontPage = ({ front, NAV }: Props) => {
 				<AlreadyVisited />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
-				<AnimatePulsingDots />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
@@ -74,9 +69,6 @@ export const FrontPage = ({ front, NAV }: Props) => {
 						!!front.config.switches.commercialMetrics
 					}
 				/>
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<FetchCommentCounts repeat={true} />
 			</Island>
 			<Island clientOnly={true}>
 				<ShowHideContainers />

@@ -5,6 +5,7 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Section } from './Section';
@@ -206,6 +207,7 @@ export const Headlines = () => (
 					display: ArticleDisplay.Standard,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -219,6 +221,7 @@ export const Headlines = () => (
 					display: ArticleDisplay.Standard,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 	</>
@@ -239,6 +242,7 @@ export const SingleItemCarousel = () => (
 					display: ArticleDisplay.Standard,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 	</>
@@ -259,6 +263,7 @@ export const Immersive = () => (
 					display: ArticleDisplay.Immersive,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -272,6 +277,7 @@ export const Immersive = () => (
 					display: ArticleDisplay.Immersive,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 	</>
@@ -282,14 +288,12 @@ Immersive.storyName = 'Immersive carousel';
 export const SpecialReportAlt = () => {
 	const specialReportTrails = [...trails];
 
-	specialReportTrails.forEach(
-		(trail) =>
-			(trail.format = {
-				theme: ArticleSpecial.SpecialReportAlt,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}),
-	);
+	for (const trail of specialReportTrails)
+		trail.format = {
+			theme: ArticleSpecial.SpecialReportAlt,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		};
 
 	return (
 		<>
@@ -304,6 +308,7 @@ export const SpecialReportAlt = () => {
 						display: ArticleDisplay.Standard,
 					}}
 					leftColSize={'compact'}
+					discussionApiUrl={discussionApiUrl}
 				/>
 			</Section>
 		</>

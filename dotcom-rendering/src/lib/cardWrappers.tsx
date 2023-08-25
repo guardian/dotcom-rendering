@@ -1,8 +1,10 @@
+import type { Loading } from '../components/CardPicture';
 import { FrontCard } from '../components/FrontCard';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 
 type TrailProps = {
 	trail: DCRFrontCard;
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 };
@@ -43,9 +45,11 @@ export const Card100Media50 = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
+			imageLoading={imageLoading}
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
@@ -90,6 +94,7 @@ export const Card100Media75 = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -102,6 +107,7 @@ export const Card100Media75 = ({
 			imageSize="jumbo"
 			imagePosition="right"
 			imagePositionOnMobile="top"
+			imageLoading={imageLoading}
 			trailText={
 				// Only show trail text if there is no supportContent
 				trail.supportingContent === undefined ||
@@ -138,6 +144,7 @@ export const Card100Media100 = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -149,6 +156,7 @@ export const Card100Media100 = ({
 			imageUrl={trail.image}
 			imagePosition="top"
 			imagePositionOnMobile="top"
+			imageLoading={imageLoading}
 			supportingContent={trail.supportingContent?.slice(0, 4)}
 			supportingContentAlignment="horizontal"
 		/>
@@ -175,6 +183,7 @@ export const Card100Media100Tall = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -186,6 +195,7 @@ export const Card100Media100Tall = ({
 			imageUrl={trail.image}
 			imagePosition="top"
 			imagePositionOnMobile="top"
+			imageLoading={imageLoading}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
 			trailText={trail.trailText}
@@ -211,6 +221,7 @@ export const Card75Media50Right = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -227,6 +238,7 @@ export const Card75Media50Right = ({
 			imagePosition="right"
 			imageSize="large"
 			imagePositionOnMobile="top"
+			imageLoading={imageLoading}
 			headlineSize="large"
 			headlineSizeOnMobile="large"
 		/>
@@ -251,6 +263,7 @@ export const Card75Media50Left = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -267,6 +280,7 @@ export const Card75Media50Left = ({
 			imagePosition="left"
 			imagePositionOnMobile="top"
 			imageSize="large"
+			imageLoading={imageLoading}
 			headlineSize="large"
 			headlineSizeOnMobile="large"
 		/>
@@ -291,6 +305,7 @@ export const Card25Media25 = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -302,6 +317,7 @@ export const Card25Media25 = ({
 			imagePosition="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
+			imageLoading={imageLoading}
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
 			isPlayableMediaCard={false}
@@ -327,6 +343,7 @@ export const Card25Media25SmallHeadline = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -338,6 +355,7 @@ export const Card25Media25SmallHeadline = ({
 			imagePosition="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
+			imageLoading={imageLoading}
 			headlineSize="small"
 			headlineSizeOnMobile="medium"
 			isPlayableMediaCard={false}
@@ -364,6 +382,7 @@ export const Card25Media25Tall = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -373,6 +392,7 @@ export const Card25Media25Tall = ({
 			imagePosition="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
+			imageLoading={imageLoading}
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
 			trailText={
@@ -406,6 +426,7 @@ export const Card25Media25TallNoTrail = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -415,6 +436,7 @@ export const Card25Media25TallNoTrail = ({
 			imagePosition="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
+			imageLoading={imageLoading}
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
 			supportingContent={trail.supportingContent?.slice(0, 2)}
@@ -441,6 +463,7 @@ export const Card25Media25TallSmallHeadline = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -450,6 +473,7 @@ export const Card25Media25TallSmallHeadline = ({
 			imagePosition="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
+			imageLoading={imageLoading}
 			headlineSize="small"
 			headlineSizeOnMobile="medium"
 			supportingContent={trail.supportingContent?.slice(0, 2)}
@@ -476,6 +500,7 @@ export const Card50Media50 = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -486,6 +511,7 @@ export const Card50Media50 = ({
 			imageSize="medium"
 			imagePosition="top"
 			imagePositionOnMobile="top"
+			imageLoading={imageLoading}
 			showAge={showAge}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment="horizontal"
@@ -512,6 +538,7 @@ export const Card50Media50Tall = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -524,6 +551,7 @@ export const Card50Media50Tall = ({
 			imagePosition="top"
 			imagePositionOnMobile="top"
 			imageSize="medium"
+			imageLoading={imageLoading}
 			headlineSize="large"
 			headlineSizeOnMobile="large"
 		/>
@@ -548,6 +576,7 @@ export const Card66Media66 = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -560,6 +589,7 @@ export const Card66Media66 = ({
 			imagePosition="top"
 			imagePositionOnMobile="top"
 			imageSize="large"
+			imageLoading={imageLoading}
 		/>
 	);
 };
@@ -582,6 +612,7 @@ export const Card33Media33 = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -592,6 +623,7 @@ export const Card33Media33 = ({
 			imageSize="medium"
 			imagePosition="top"
 			imagePositionOnMobile="left"
+			imageLoading={imageLoading}
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
 		/>
@@ -615,6 +647,7 @@ export const Card33Media33Tall = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -624,6 +657,7 @@ export const Card33Media33Tall = ({
 			imageSize="medium"
 			imagePosition="top"
 			imagePositionOnMobile="left"
+			imageLoading={imageLoading}
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
 			supportingContent={trail.supportingContent?.slice(0, 2)}
@@ -650,6 +684,7 @@ export const Card33Media33MobileTopTall = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -660,6 +695,7 @@ export const Card33Media33MobileTopTall = ({
 			imageSize="medium"
 			imagePosition="top"
 			imagePositionOnMobile="top"
+			imageLoading={imageLoading}
 			headlineSize="medium"
 			headlineSizeOnMobile="large"
 			supportingContent={trail.supportingContent?.slice(0, 2)}
@@ -684,13 +720,14 @@ export const CardDefault = ({
 	trail,
 	showAge,
 	containerPalette,
-}: TrailProps) => {
+}: Omit<TrailProps, 'imageLoading'>) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
 			imageUrl={undefined}
+			imageLoading={'lazy'}
 			avatarUrl={undefined}
 			headlineSize="small"
 			headlineSizeOnMobile="small"
@@ -715,6 +752,7 @@ export const CardDefaultMedia = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -724,6 +762,7 @@ export const CardDefaultMedia = ({
 			imageSize="small"
 			imagePosition="left"
 			imagePositionOnMobile="none"
+			imageLoading={imageLoading}
 			headlineSize="small"
 			headlineSizeOnMobile="small"
 			isPlayableMediaCard={false}
@@ -747,6 +786,7 @@ export const CardDefaultMediaMobile = ({
 	trail,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -756,6 +796,7 @@ export const CardDefaultMediaMobile = ({
 			imageSize="small"
 			imagePosition="left"
 			imagePositionOnMobile="left"
+			imageLoading={imageLoading}
 			headlineSize="small"
 			headlineSizeOnMobile="small"
 			isPlayableMediaCard={false}

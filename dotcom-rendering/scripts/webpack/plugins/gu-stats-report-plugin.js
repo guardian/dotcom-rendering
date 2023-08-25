@@ -1,8 +1,8 @@
 // @ts-check
-const fetch = require('node-fetch');
-const os = require('os');
-const { exec } = require('child_process');
+const { exec } = require('node:child_process');
+const os = require('node:os');
 const chalk = require('chalk');
+const fetch = require('node-fetch');
 
 const PLUGIN_NAME = 'GuStatsReportPlugin';
 
@@ -14,10 +14,10 @@ const PLUGIN_NAME = 'GuStatsReportPlugin';
 class GuStatsReportPlugin {
 	/** @param {Config} config */
 	constructor(config) {
-		this.buildName = config?.buildName;
-		this.project = config?.project;
-		this.team = config?.team;
-		this.sessionId = config?.sessionId;
+		this.buildName = config.buildName;
+		this.project = config.project;
+		this.team = config.team;
+		this.sessionId = config.sessionId;
 		this.buildCount = 0;
 		/** @type {Record<'log' | 'warn' | 'error', (...args: unknown[]) => void>} */
 		this.logger = console;
@@ -30,7 +30,7 @@ class GuStatsReportPlugin {
 		this.fetchGitBranch();
 		this.fetchGitHash();
 
-		if (config?.displayDisclaimer)
+		if (config.displayDisclaimer)
 			console.log(
 				chalk.yellow.dim(
 					'This project reports compilation and machine stats to improve the development experience.',
@@ -66,13 +66,13 @@ class GuStatsReportPlugin {
 			// Increment the buildCount
 			this.buildCount += 1;
 
-			if (!this.isValidConfig)
+			if (!this.isValidConfig())
 				return this.logger.error(
 					'Unable to report stats - invalid config',
 				);
 
 			const URL = 'https://logs.guardianapis.com/log';
-			// @ts-ignore -- the type declaration isn’t playing nice
+			// @ts-expect-error -- the type declaration isn’t playing nice
 			fetch(URL, {
 				method: 'POST',
 				body: JSON.stringify({
@@ -97,11 +97,11 @@ class GuStatsReportPlugin {
 						},
 						{
 							name: 'gitHash',
-							value: this.gitHash || 'unknown',
+							value: this.gitHash ?? 'unknown',
 						},
 						{
 							name: 'gitBranch',
-							value: this.gitBranch || 'unknown',
+							value: this.gitBranch ?? 'unknown',
 						},
 						{
 							name: 'sessionId',
@@ -154,10 +154,8 @@ class GuStatsReportPlugin {
 				);
 		};
 
-		if (compiler.hooks) {
-			const plugin = { name: PLUGIN_NAME };
-			compiler.hooks.done.tap(plugin, onDone);
-		}
+		const plugin = { name: PLUGIN_NAME };
+		compiler.hooks.done.tap(plugin, onDone);
 	}
 }
 

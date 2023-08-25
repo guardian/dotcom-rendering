@@ -3,11 +3,10 @@ import { adSizes, constants } from '@guardian/commercial';
 import type { SlotName } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
-	border,
+	breakpoints,
 	from,
-	neutral,
+	palette,
 	space,
-	text,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
@@ -17,6 +16,7 @@ import { AD_CONTAINER_HEIGHT } from '../lib/liveblog-right-ad-constants';
 import { TopRightAdSlot } from './TopRightAdSlot';
 
 type InlinePosition =
+	| 'fronts-banner'
 	| 'inline'
 	| 'liveblog-inline'
 	| 'liveblog-right'
@@ -48,16 +48,16 @@ type NonInlineProps = {
  */
 type Props = DefaultProps & (InlineProps | NonInlineProps);
 
-export const labelHeight = constants.AD_LABEL_HEIGHT.toString();
+const labelHeight = constants.AD_LABEL_HEIGHT;
 
 const individualLabelCSS = css`
 	${textSans.xxsmall()};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
-	background-color: ${neutral[97]};
+	background-color: ${palette.neutral[97]};
 	padding: 0 8px;
-	border-top: 1px solid ${border.secondary};
-	color: ${text.supporting};
+	border-top: 1px solid ${palette.neutral[86]};
+	color: ${palette.neutral[46]};
 	text-align: left;
 	box-sizing: border-box;
 `;
@@ -149,14 +149,131 @@ const adSlotCollapseStyles = css`
 	}
 `;
 
+/**
+ * For CSS in Frontend, see mark: 9473ae05-a901-4a8d-a51d-1b9c894d6e1f
+ */
+const fluidAdStyles = css`
+	&.ad-slot--fluid {
+		min-height: 250px;
+		line-height: 10px;
+		padding: 0;
+		margin: 0;
+		overflow: visible;
+	}
+`;
+
+/**
+ * Usage according to DAP (Digital Ad Production)
+ *
+ * #### Desktop
+ * - `fabric` &rarr; `top-above-nav`,`merchandising-high`,`merchandising`
+ * - `fabric-custom` &rarr; `top-above-nav`,`merchandising-high`,`merchandising`
+ * - `fabric-expandable` &rarr; `merchandising-high`
+ * - `fabric-third-party` &rarr; `top-above-nav`,`merchandising-high`,`merchandising`
+ * - `fabric-video` &rarr; `top-above-nav`,`merchandising-high`
+ * - `fabric-video-expandable` &rarr; `merchandising-high`
+ *
+ * #### Mobile
+ * - `interscroller` &rarr; `top-above-nav`
+ * - `mobile-revealer` &rarr; `top-above-nav`
+ */
+const fluidFullWidthAdStyles = css`
+	&.ad-slot--fluid {
+		width: 100%;
+	}
+`;
+
+const topAboveNavStyles = css`
+	position: relative;
+	margin: 0 auto;
+	min-height: ${adSizes.leaderboard.height}px;
+	min-width: ${adSizes.leaderboard.width}px;
+	text-align: left;
+	display: block;
+`;
+
+const merchandisingAdContainerStyles = css`
+	display: flex;
+	justify-content: center;
+`;
+
 const merchandisingAdStyles = css`
 	position: relative;
-	min-height: 250px;
+	min-height: ${adSizes.billboard.height}px;
+`;
+
+const inlineAdStyles = css`
+	position: relative;
+	${until.tablet} {
+		display: none;
+	}
+`;
+
+const liveblogInlineAdStyles = css`
+	position: relative;
+`;
+
+const mobileFrontAdStyles = css`
+	position: relative;
+	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-width: 300px;
+	width: 300px;
+	margin: 12px auto;
+
+	${from.tablet} {
+		display: none;
+	}
+`;
+
+const frontsBannerPaddingHeight = 20;
+const frontsBannerMinHeight =
+	adSizes.billboard.height + labelHeight + frontsBannerPaddingHeight;
+
+const frontsBannerAdTopContainerStyles = css`
+	display: flex;
+	justify-content: center;
+	min-height: ${frontsBannerMinHeight}px;
+	background-color: ${palette.neutral[97]};
+
+	${until.desktop} {
+		display: none;
+	}
+`;
+
+const frontsBannerAdContainerStyles = css`
+	max-width: ${breakpoints['wide']}px;
+	/*
+		The following flex settings are to stop the visual effect where the
+		advert renders at the top of the ad slot, then is pushed down 24px to the
+		bottom of the slot when the label renders
+	*/
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+`;
+
+const frontsBannerCollapseStyles = css`
+	display: none;
+`;
+
+const frontsBannerAdStyles = css`
+	max-width: ${breakpoints['wide']}px;
+	overflow: hidden;
+	padding-bottom: ${frontsBannerPaddingHeight}px;
+`;
+
+const articleEndAdStyles = css`
+	position: relative;
+	min-height: 450px;
+
+	&.ad-slot--fluid {
+		min-height: 450px;
+	}
 `;
 
 const mostPopAdStyles = css`
 	position: relative;
-	min-height: 274px;
+	min-height: ${adSizes.mpu.height + labelHeight}px;
 	min-width: 300px;
 	width: 300px;
 	margin: 12px auto;
@@ -166,7 +283,7 @@ const mostPopAdStyles = css`
 		width: auto;
 	}
 	${from.wide} {
-		padding-top: 25px;
+		margin-top: 25px;
 	}
 `;
 
@@ -190,39 +307,6 @@ export const carrotAdStyles = css`
 			margin-left: -240px;
 			width: 220px;
 		}
-	}
-`;
-
-/**
- * For CSS in Frontend, see mark: 9473ae05-a901-4a8d-a51d-1b9c894d6e1f
- */
-const fluidAdStyles = css`
-	&.ad-slot--fluid {
-		min-height: 250px;
-		line-height: 10px;
-		padding: 0;
-		margin: 0;
-	}
-`;
-
-/**
- * Usage according to DAP (Digital Ad Production)
- *
- * #### Desktop
- * - `fabric` &rarr; `top-above-nav`,`merchandising-high`,`merchandising`
- * - `fabric-custom` &rarr; `top-above-nav`,`merchandising-high`,`merchandising`
- * - `fabric-expandable` &rarr; `merchandising-high`
- * - `fabric-third-party` &rarr; `top-above-nav`,`merchandising-high`,`merchandising`
- * - `fabric-video` &rarr; `top-above-nav`,`merchandising-high`
- * - `fabric-video-expandable` &rarr; `merchandising-high`
- *
- * #### Mobile
- * - `interscroller` &rarr; `top-above-nav`
- * - `mobile-revealer` &rarr; `top-above-nav`
- */
-const fluidFullWidthAdStyles = css`
-	&.ad-slot--fluid {
-		width: 100%;
 	}
 `;
 
@@ -251,8 +335,8 @@ const mobileStickyAdStyles = css`
 	.ad-slot__close-button svg {
 		height: 0.75rem;
 		width: 0.75rem;
-		stroke: ${neutral[7]};
-		fill: ${neutral[7]};
+		stroke: ${palette.neutral[7]};
+		fill: ${palette.neutral[7]};
 		stroke-linecap: round;
 		stroke-width: 0;
 		text-align: center;
@@ -261,7 +345,7 @@ const mobileStickyAdStyles = css`
 		display: block;
 	}
 	.ad-slot__close-button__x {
-		stroke: ${neutral[7]};
+		stroke: ${palette.neutral[7]};
 		fill: transparent;
 		stroke-linecap: round;
 		stroke-width: 2;
@@ -336,7 +420,7 @@ export const AdSlot = ({
 				<div
 					className="ad-slot-container"
 					css={[
-						labelStyles,
+						adContainerStyles,
 						css`
 							height: ${AD_CONTAINER_HEIGHT}px;
 						`,
@@ -385,14 +469,6 @@ export const AdSlot = ({
 			);
 		}
 		case 'top-above-nav': {
-			const adSlotAboveNav = css`
-				position: relative;
-				margin: 0 auto;
-				min-height: ${adSizes.leaderboard.height}px;
-				text-align: left;
-				display: block;
-				min-width: 728px;
-			`;
 			return (
 				<div
 					id="dfp-ad--top-above-nav"
@@ -406,7 +482,7 @@ export const AdSlot = ({
 					css={[
 						fluidAdStyles,
 						fluidFullWidthAdStyles,
-						adSlotAboveNav,
+						topAboveNavStyles,
 					]}
 					data-link-name="ad slot top-above-nav"
 					data-name="top-above-nav"
@@ -439,10 +515,7 @@ export const AdSlot = ({
 				<div
 					className="ad-slot-container"
 					css={[
-						css`
-							display: flex;
-							justify-content: center;
-						`,
+						merchandisingAdContainerStyles,
 						hasPageskin && pageSkinContainer,
 						adContainerStyles,
 					]}
@@ -471,13 +544,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="ad-slot-container"
-					css={[
-						css`
-							display: flex;
-							justify-content: center;
-						`,
-						adContainerStyles,
-					]}
+					css={[merchandisingAdContainerStyles, adContainerStyles]}
 				>
 					<div
 						id="dfp-ad--merchandising"
@@ -530,20 +597,7 @@ export const AdSlot = ({
 							'ad-slot--container-inline',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[
-							/**
-							 * commercial code will look for slots that are display: none
-							 * and remove them from the dom
-							 *
-							 * on desktop we hide mobile inline slots
-							 */
-							css`
-								position: relative;
-								${until.tablet} {
-									display: none;
-								}
-							`,
-						]}
+						css={[inlineAdStyles]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						aria-hidden="true"
@@ -564,15 +618,46 @@ export const AdSlot = ({
 							'ad-slot--liveblog-inline',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[
-							css`
-								position: relative;
-							`,
-						]}
+						css={[liveblogInlineAdStyles]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						aria-hidden="true"
 					/>
+				</div>
+			);
+		}
+		case 'fronts-banner': {
+			const advertId = `fronts-banner-${index}`;
+			return (
+				<div css={frontsBannerAdTopContainerStyles}>
+					<div
+						className="ad-slot-container"
+						css={[
+							adContainerStyles,
+							frontsBannerAdContainerStyles,
+							hasPageskin && frontsBannerCollapseStyles,
+						]}
+					>
+						<div
+							id={`dfp-ad--${advertId}`}
+							className={[
+								'js-ad-slot',
+								'ad-slot',
+								`ad-slot--${advertId}`,
+								'ad-slot--rendered',
+								hasPageskin && 'ad-slot--collapse',
+							].join(' ')}
+							css={[
+								fluidAdStyles,
+								fluidFullWidthAdStyles,
+								frontsBannerAdStyles,
+							]}
+							data-link-name={`ad slot ${advertId}`}
+							data-name={`${advertId}`}
+							data-refresh="false"
+							aria-hidden="true"
+						/>
+					</div>
 				</div>
 			);
 		}
@@ -591,27 +676,7 @@ export const AdSlot = ({
 							'mobile-only',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[
-							css`
-								position: relative;
-								min-height: 274px;
-								min-width: 300px;
-								width: 300px;
-								margin: 12px auto;
-							`,
-							/**
-							 * commercial code will look for slots that are display: none
-							 * and remove them from the dom
-							 *
-							 * on mobile we hide desktop inline slots
-							 */
-							css`
-								${from.tablet} {
-									display: none;
-								}
-							`,
-							fluidFullWidthAdStyles,
-						]}
+						css={[mobileFrontAdStyles, fluidFullWidthAdStyles]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						aria-hidden="true"
@@ -656,14 +721,7 @@ export const AdSlot = ({
 						css={[
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
-							css`
-								position: relative;
-								min-height: 450px;
-
-								&.ad-slot--fluid {
-									min-height: 450px;
-								}
-							`,
+							articleEndAdStyles,
 						]}
 						data-link-name="ad slot article-end"
 						data-name="article-end"

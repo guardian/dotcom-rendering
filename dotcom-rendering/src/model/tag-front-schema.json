@@ -631,6 +631,9 @@
                                     "properties": {
                                         "href": {
                                             "type": "string"
+                                        },
+                                        "webUrl": {
+                                            "type": "string"
                                         }
                                     }
                                 },
@@ -694,6 +697,7 @@
                                 }
                             },
                             "required": [
+                                "header",
                                 "properties"
                             ]
                         }
@@ -1211,6 +1215,7 @@
                 "NewsletterSignupDesign",
                 "ObituaryDesign",
                 "PhotoEssayDesign",
+                "PictureDesign",
                 "PrintShopDesign",
                 "ProfileDesign",
                 "QuizDesign",

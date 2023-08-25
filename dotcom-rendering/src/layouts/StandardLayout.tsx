@@ -15,6 +15,7 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -501,6 +502,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
+											renderingTarget={renderingTarget}
 										/>
 									</Island>
 								)}
@@ -567,6 +569,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									hasStarRating={
 										typeof article.starRating === 'number'
 									}
+									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
@@ -625,6 +628,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										!!article.config.switches
 											.serverShareCounts
 									}
+									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
@@ -797,6 +801,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
 							/>
 						</Island>
 					</Section>
@@ -826,6 +833,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								pillar={format.theme}
 								editionId={article.editionId}
 								shortUrlId={article.config.shortUrlId}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
 							/>
 						</Island>
 
@@ -976,6 +986,23 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						</Island>
 					</BannerWrapper>
 					<MobileStickyContainer data-print-layout="hide" />
+				</>
+			)}
+
+			{!isWeb && (
+				<>
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						backgroundColour={neutral[97]}
+						padSides={false}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Island>
+							<AppsFooter />
+						</Island>
+					</Section>
 				</>
 			)}
 		</>

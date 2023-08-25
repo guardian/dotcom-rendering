@@ -27,7 +27,7 @@ const enhance = (elements: FEElement[]): FEElement[] => {
 			.find((element) => 'elementId' in element);
 
 		// replace interactive content block
-		elements.forEach((element) => {
+		for (const element of elements) {
 			if (isLegacyTableOfContents(element)) {
 				updatedElements.push({
 					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
@@ -52,7 +52,7 @@ const enhance = (elements: FEElement[]): FEElement[] => {
 			} else {
 				updatedElements.push(element);
 			}
-		});
+		}
 
 		return updatedElements;
 	}

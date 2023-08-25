@@ -18,7 +18,14 @@ const SignInGateMain = React.lazy(() => {
 });
 
 export const signInGateMandatoryComponent: SignInGateComponent = {
-	gate: ({ ophanComponentId, dismissGate, guUrl, signInUrl, abTest }) => (
+	gate: ({
+		ophanComponentId,
+		dismissGate,
+		guUrl,
+		signInUrl,
+		registerUrl,
+		abTest,
+	}) => (
 		<Lazy margin={300}>
 			<Suspense fallback={<></>}>
 				<SignInGateMain
@@ -26,6 +33,7 @@ export const signInGateMandatoryComponent: SignInGateComponent = {
 					dismissGate={dismissGate}
 					guUrl={guUrl}
 					signInUrl={signInUrl}
+					registerUrl={registerUrl}
 					abTest={abTest}
 					isMandatory={true}
 				/>

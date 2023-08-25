@@ -21,6 +21,7 @@ import {
 
 export const SignInGateCopyTestJan2023 = ({
 	signInUrl,
+	registerUrl,
 	guUrl,
 	dismissGate,
 	abTest,
@@ -77,7 +78,7 @@ export const SignInGateCopyTestJan2023 = ({
 					css={registerButton}
 					priority="primary"
 					size="small"
-					href={signInUrl}
+					href={registerUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'register-link', abTest);
 					}}

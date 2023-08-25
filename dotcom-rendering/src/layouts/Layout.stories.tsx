@@ -14,6 +14,7 @@ import { MatchReport } from '../../fixtures/generated/articles/MatchReport';
 import { NewsletterSignup } from '../../fixtures/generated/articles/NewsletterSignup';
 import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
 import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
+import { Picture } from '../../fixtures/generated/articles/Picture';
 import { PrintShop } from '../../fixtures/generated/articles/PrintShop';
 import { Quiz } from '../../fixtures/generated/articles/Quiz';
 import { Recipe } from '../../fixtures/generated/articles/Recipe';
@@ -24,7 +25,6 @@ import { Video } from '../../fixtures/generated/articles/Video';
 import { embedIframe } from '../client/embedIframe';
 import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
-import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
@@ -56,6 +56,7 @@ const Fixtures: { [key: string]: FEArticleType } = {
 	NumberedList,
 	NewsletterSignup,
 	Explainer,
+	Picture,
 };
 
 mockRESTCalls();
@@ -76,8 +77,6 @@ const HydratedLayout = ({
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${String(e)}`),
 		);
-		// Manually updates the footer DOM because it's not hydrated
-		injectPrivacySettingsLink();
 		doStorybookHydration();
 	}, [serverArticle]);
 

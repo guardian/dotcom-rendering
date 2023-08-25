@@ -361,7 +361,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	// --------------------------------------------------------------------------------
 	// EVENT LISTENERS
 	// --------------------------------------------------------------------------------
-	pictures.forEach((picture) => {
+	for (const picture of pictures) {
 		// Clicking on the image toggles the caption
 		picture.addEventListener('mousedown', (event) => {
 			toggleInfo();
@@ -371,7 +371,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		});
 		// Remove the loader once the image has been downloaded
 		const index = picture.closest('li')?.dataset.index;
-		if (index === undefined) return;
+		if (index === undefined) continue;
 		const position = parseInt(index, 10);
 		const image = picture.querySelector('img');
 		if (image?.complete) {
@@ -379,7 +379,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		} else {
 			image?.addEventListener('load', () => removeLoader(position));
 		}
-	});
+	}
 
 	imageList?.addEventListener(
 		'scroll',
@@ -403,7 +403,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	nextButton?.addEventListener('click', goForward);
 	infoButton?.addEventListener('click', toggleInfo);
 
-	captionLinks.forEach((link) => {
+	for (const link of captionLinks) {
 		link.addEventListener('click', (event) => {
 			// This prevents the event listener from this element's LI parent
 			// from firing. That LI event listener would have tried to hide the
@@ -412,7 +412,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 			// cause a weird flash
 			event.stopPropagation();
 		});
-	});
+	}
 
 	/**
 	 * We listen for the fullscreenchange event here so that we can fire our
