@@ -2,18 +2,15 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	border,
 	brandBackground,
 	brandBorder,
 	brandLine,
 	from,
-	labs,
 	neutral,
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
-import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
@@ -27,16 +24,12 @@ import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
@@ -104,9 +97,9 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					
 								grid-template-areas:
 									'title  border  headline    headline'
+									'meta   border  media       media'
+									'meta   border  media       media'
 									'lines  border  standfirst  standfirst'
-									'meta   border  media       media'
-									'meta   border  media       media'
 									'.      border  submeta     submeta'
 									'.      border  .           . ';
 						
@@ -118,18 +111,19 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 					Right Column
 				*/
-				${until.leftCol} {
+				${until.leftCol} {					grid-column-gap: 0px;
+
 					
 								grid-template-columns: 1fr; /* Main content */
 
 								grid-template-areas:
 									'title     '
 									'headline  '
-									'standfirst'
 									'media     '
+									'standfirst'
 									'lines     '
 									'meta      '
-									'submeta      '
+									'submeta   '
 									'.         ';
 						
 							
@@ -142,10 +136,10 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title'
 						'headline'
-						'standfirst'
-						'media'
 						'lines'
 						'meta'
+						'media'
+						'standfirst'
 						'submeta';
 				}
 
@@ -156,10 +150,10 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 								grid-template-areas:
 									'title'
 									'headline'
-									'standfirst'
-									'media'
 									'lines'
 									'meta'
+									'media'
+									'standfirst'
 									'submeta';
 				}						  
 			

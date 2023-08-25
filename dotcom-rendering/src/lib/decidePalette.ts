@@ -565,6 +565,13 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 				return pillarPalette[format.theme].dark;
 		}
 	}
+
+	if (
+		format.design === ArticleDesign.Picture &&
+		format.theme === Pillar.Opinion
+	)
+		return palette.opinion[500];
+
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[400];
 
