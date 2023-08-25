@@ -246,6 +246,11 @@ export const ManyNewsletterSignUp = () => {
 				'failure-response',
 				{
 					listIds,
+					// If the backend handles the failure and responds with an informative
+					// error message (E.G. "Service unavailable", "Invalid email" etc) this
+					// should be included in the event data.
+					// If not, the response text will be the HTML for the default error page
+					// which would not be helpful to include it in the tracking data.
 					responseText: responseText.substring(0, 100),
 				},
 			);
