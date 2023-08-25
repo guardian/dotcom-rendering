@@ -11,6 +11,7 @@ import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
+import { PictureLayout } from './PictureLayout';
 
 interface BaseProps {
 	article: DCRArticle;
@@ -112,6 +113,15 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+						/>
+					);
+				case ArticleDesign.Picture:
+					return (
+						<PictureLayout
+							article={article}
+							NAV={NAV}
+							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
