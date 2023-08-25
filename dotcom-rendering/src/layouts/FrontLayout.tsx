@@ -373,7 +373,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-			<Island>
+			<Island clientOnly={true}>
 				<EuropeLandingModal />
 			</Island>
 			<main
