@@ -24,7 +24,7 @@ import {
 import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
-import type { DCRProps } from './types';
+import type { DCRAlarmConfig, DCRProps } from './types';
 import { getUserData } from './userData';
 
 export class DotcomRendering extends GuStack {
@@ -52,7 +52,7 @@ export class DotcomRendering extends GuStack {
 			{
 				app,
 				description:
-					'Allows HTTP and HTTPS inbound connections from within the VPC',
+					'DCR LB security group - allows HTTP and HTTPS inbound connections from within the VPC',
 				vpc,
 				ingresses: [
 					{
@@ -68,11 +68,8 @@ export class DotcomRendering extends GuStack {
 				],
 			},
 		);
-		this.overrideLogicalId(lbSecurityGroup, {
-			logicalId: 'InternalLoadBalancerSecurityGroup',
-			reason: 'Retaining a stateful resource previously defined in YAML',
-		});
 
+		/** TODO - migrate this ELB to an ALB */
 		const loadBalancer = new GuClassicLoadBalancer(
 			this,
 			'InternalLoadBalancer',
@@ -121,9 +118,9 @@ export class DotcomRendering extends GuStack {
 				},
 			},
 		);
-		this.overrideLogicalId(loadBalancer, {
-			logicalId: 'InternalLoadBalancer',
-			reason: 'Retaining a stateful resource previously defined in YAML',
+		// Load balancer DNS name output
+		new CfnOutput(this, 'LoadBalancerUrl', {
+			value: loadBalancer.loadBalancerDnsName,
 		});
 
 		const instanceSecurityGroup = new GuSecurityGroup(
@@ -131,8 +128,9 @@ export class DotcomRendering extends GuStack {
 			'InstanceSecurityGroup',
 			{
 				app,
-				description: 'rendering instance',
 				vpc,
+				description:
+					'DCR instance security group - allows HTTP and HTTPS inbound connections on port 9000 from within the VPC',
 				ingresses: [
 					{
 						range: Peer.ipv4(vpcCidrBlock),
@@ -142,15 +140,12 @@ export class DotcomRendering extends GuStack {
 				],
 			},
 		);
-		this.overrideLogicalId(instanceSecurityGroup, {
-			logicalId: 'InstanceSecurityGroup',
-			reason: 'Retaining a stateful resource previously defined in YAML',
-		});
 
 		const instanceRole = new GuInstanceRole(this, {
 			app,
 			additionalPolicies: [
-				//todo: do we need the first two policies? They are provided by default?
+				// TODO - double check if we are duplicating policies that
+				// are provided by default through GuCDK
 				new GuAllowPolicy(this, 'AllowPolicyGetArtifactsBucket', {
 					actions: ['s3:GetObject'],
 					resources: ['arn:aws:s3:::aws-frontend-artifacts/*'],
@@ -184,10 +179,6 @@ export class DotcomRendering extends GuStack {
 				}),
 			],
 		});
-		this.overrideLogicalId(instanceRole, {
-			logicalId: 'InstanceRole',
-			reason: 'Retaining a stateful resource previously defined in YAML',
-		});
 
 		const asg = new GuAutoScalingGroup(this, 'AutoscalingGroup', {
 			app,
@@ -216,11 +207,8 @@ export class DotcomRendering extends GuStack {
 			vpcSubnets: { subnets: privateSubnets },
 			withoutImdsv2: true,
 		});
-		this.overrideLogicalId(asg, {
-			logicalId: 'AutoscalingGroup',
-			reason: 'Retaining a stateful resource previously defined in YAML',
-		});
-
+		// ! Important !
+		// Ensure the ASG is attached to the load balancer
 		asg.attachToClassicLB(loadBalancer);
 
 		/** TODO - migrate these simple scaling policies
@@ -239,39 +227,65 @@ export class DotcomRendering extends GuStack {
 			scalingAdjustment: -1,
 		});
 
-		const latencyScalingAlarmThreshold = 0.2;
-		const latencyScalingAlarmEvaluationPeriod = 1;
-		const latencyScalingAlarmPeriod = 60;
+		// ------------
+		// Alarms
+		// ------------
 
+		/** Returns an appropriate alarm description given the appropriate configuration object */
+		const getAlarmDescription = ({
+			title,
+			comparisonOperator,
+			threshold,
+			evaluationPeriod,
+			period,
+		}: { title: string } & DCRAlarmConfig): string =>
+			`${title} is ${comparisonOperator} of ${threshold} over ${evaluationPeriod} period(s) of ${period} seconds`;
+
+		// Latency scaling alarm
+		const latencyScalingAlarmConfig: DCRAlarmConfig = {
+			threshold: 0.2,
+			period: 60,
+			evaluationPeriod: 1,
+			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+		};
 		new CfnAlarm(this, 'LatencyScalingAlarm', {
 			actionsEnabled: stage === 'PROD',
-			alarmDescription: `Scale-Up if latency is greater than ${latencyScalingAlarmThreshold} seconds over ${latencyScalingAlarmEvaluationPeriod} period(s) of ${latencyScalingAlarmPeriod} seconds`,
+			alarmDescription: getAlarmDescription({
+				title: 'Scale up if latency',
+				...latencyScalingAlarmConfig,
+			}),
 			dimensions: [
 				{
 					name: 'LoadBalancerName',
 					value: loadBalancer.loadBalancerName,
 				},
 			],
-			evaluationPeriods: latencyScalingAlarmEvaluationPeriod,
+			evaluationPeriods: latencyScalingAlarmConfig.evaluationPeriod,
 			metricName: 'Latency',
 			namespace: 'AWS/ELB',
-			period: latencyScalingAlarmPeriod,
+			period: latencyScalingAlarmConfig.period,
 			statistic: 'Average',
-			threshold: latencyScalingAlarmThreshold,
-			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+			threshold: latencyScalingAlarmConfig.threshold,
+			comparisonOperator: latencyScalingAlarmConfig.comparisonOperator,
 			okActions: [scaleDownPolicy.attrArn],
 			alarmActions: [scaleUpPolicy.attrArn],
 		});
 
+		// Backend 5XX alarm
 		const criticalAlertsTopicArn = `arn:aws:sns:${region}:${this.account}:Frontend-${stage}-CriticalAlerts`;
-		const backend5XXAlarmThreshold = 100;
-		const backend5XXAlarmPeriod = 60;
-		const backend5XXConsecutivePeriod = 5;
-
+		const backend5XXAlarmConfig: DCRAlarmConfig = {
+			threshold: 100,
+			period: 60,
+			evaluationPeriod: 5,
+			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+		};
 		new CfnAlarm(this, 'Backend5xxAlarm', {
 			actionsEnabled: stage === 'PROD',
-			alarmDescription: `Alarm if 5XX backend errors are greater than ${backend5XXAlarmThreshold} over last ${backend5XXAlarmPeriod} seconds`,
-			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+			alarmDescription: getAlarmDescription({
+				title: 'Notify if 5XX backend errors',
+				...backend5XXAlarmConfig,
+			}),
+			comparisonOperator: backend5XXAlarmConfig.comparisonOperator,
 			dimensions: [
 				{
 					name: 'LoadBalancerName',
@@ -280,16 +294,12 @@ export class DotcomRendering extends GuStack {
 			],
 			metricName: 'HTTPCode_Backend_5XX',
 			namespace: 'AWS/ELB',
-			evaluationPeriods: backend5XXConsecutivePeriod,
-			period: backend5XXAlarmPeriod,
+			evaluationPeriods: backend5XXAlarmConfig.evaluationPeriod,
+			period: backend5XXAlarmConfig.period,
 			statistic: 'Sum',
-			threshold: backend5XXAlarmThreshold,
+			threshold: backend5XXAlarmConfig.threshold,
 			alarmActions: [criticalAlertsTopicArn],
 			okActions: [criticalAlertsTopicArn],
-		});
-
-		new CfnOutput(this, 'LoadBalancerUrl', {
-			value: loadBalancer.loadBalancerDnsName,
 		});
 	}
 }

@@ -35,7 +35,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "LoadBalancerUrl": {
       "Value": {
         "Fn::GetAtt": [
-          "InternalLoadBalancer",
+          "InternalLoadBalancerRenderingCCE9E5AA",
           "DNSName",
         ],
       },
@@ -101,7 +101,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "AllowPolicyCloudwatchLogsA783E5B4",
         "Roles": [
           {
-            "Ref": "InstanceRole",
+            "Ref": "InstanceRoleRenderingB06D827E",
           },
         ],
       },
@@ -136,7 +136,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "AllowPolicyDescribeDecryptKmsE91286F3",
         "Roles": [
           {
-            "Ref": "InstanceRole",
+            "Ref": "InstanceRoleRenderingB06D827E",
           },
         ],
       },
@@ -162,7 +162,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "AllowPolicyDescribeEc2AutoscalingE4175956",
         "Roles": [
           {
-            "Ref": "InstanceRole",
+            "Ref": "InstanceRoleRenderingB06D827E",
           },
         ],
       },
@@ -183,7 +183,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "AllowPolicyGetArtifactsBucket2A1CDA44",
         "Roles": [
           {
-            "Ref": "InstanceRole",
+            "Ref": "InstanceRoleRenderingB06D827E",
           },
         ],
       },
@@ -244,13 +244,13 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
         "Roles": [
           {
-            "Ref": "InstanceRole",
+            "Ref": "InstanceRoleRenderingB06D827E",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "AutoscalingGroup": {
+    "AutoscalingGroupRenderingASGEC306AE3": {
       "Properties": {
         "HealthCheckGracePeriod": 120,
         "HealthCheckType": "ELB",
@@ -267,7 +267,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         },
         "LoadBalancerNames": [
           {
-            "Ref": "InternalLoadBalancer",
+            "Ref": "InternalLoadBalancerRenderingCCE9E5AA",
           },
         ],
         "MaxSize": "4",
@@ -322,13 +322,13 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             ],
           },
         ],
-        "AlarmDescription": "Alarm if 5XX backend errors are greater than 100 over last 60 seconds",
+        "AlarmDescription": "Notify if 5XX backend errors is GreaterThanOrEqualToThreshold of 100 over 5 period(s) of 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
             "Name": "LoadBalancerName",
             "Value": {
-              "Ref": "InternalLoadBalancer",
+              "Ref": "InternalLoadBalancerRenderingCCE9E5AA",
             },
           },
         ],
@@ -375,7 +375,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "describe-ec2-policy",
         "Roles": [
           {
-            "Ref": "InstanceRole",
+            "Ref": "InstanceRoleRenderingB06D827E",
           },
         ],
       },
@@ -407,7 +407,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "GetDistributablePolicyRenderingCA2FF5C7",
         "Roles": [
           {
-            "Ref": "InstanceRole",
+            "Ref": "InstanceRoleRenderingB06D827E",
           },
         ],
       },
@@ -489,13 +489,13 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "GuLogShippingPolicy981BFE5A",
         "Roles": [
           {
-            "Ref": "InstanceRole",
+            "Ref": "InstanceRoleRenderingB06D827E",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "InstanceRole": {
+    "InstanceRoleRenderingB06D827E": {
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -549,9 +549,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
-    "InstanceSecurityGroup": {
+    "InstanceSecurityGroupRenderingD59E638A": {
       "Properties": {
-        "GroupDescription": "rendering instance",
+        "GroupDescription": "DCR instance security group - allows HTTP and HTTPS inbound connections on port 9000 from within the VPC",
         "SecurityGroupEgress": [
           {
             "CidrIp": "0.0.0.0/0",
@@ -596,7 +596,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalLoadBalancer": {
+    "InternalLoadBalancerRenderingCCE9E5AA": {
       "Properties": {
         "AccessLoggingPolicy": {
           "EmitInterval": 5,
@@ -627,7 +627,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "SecurityGroups": [
           {
             "Fn::GetAtt": [
-              "InternalLoadBalancerSecurityGroup",
+              "InternalLoadBalancerSecurityGroupRendering26706C0C",
               "GroupId",
             ],
           },
@@ -709,9 +709,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalLoadBalancerSecurityGroup": {
+    "InternalLoadBalancerSecurityGroupRendering26706C0C": {
       "Properties": {
-        "GroupDescription": "Allows HTTP and HTTPS inbound connections from within the VPC",
+        "GroupDescription": "DCR LB security group - allows HTTP and HTTPS inbound connections from within the VPC",
         "SecurityGroupEgress": [
           {
             "CidrIp": "0.0.0.0/0",
@@ -774,13 +774,13 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             ],
           },
         ],
-        "AlarmDescription": "Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds",
+        "AlarmDescription": "Scale up if latency is GreaterThanOrEqualToThreshold of 0.2 over 1 period(s) of 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
             "Name": "LoadBalancerName",
             "Value": {
-              "Ref": "InternalLoadBalancer",
+              "Ref": "InternalLoadBalancerRenderingCCE9E5AA",
             },
           },
         ],
@@ -854,7 +854,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "parameter-store-read-policy",
         "Roles": [
           {
-            "Ref": "InstanceRole",
+            "Ref": "InstanceRoleRenderingB06D827E",
           },
         ],
       },
@@ -864,7 +864,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Properties": {
         "AdjustmentType": "ChangeInCapacity",
         "AutoScalingGroupName": {
-          "Ref": "AutoscalingGroup",
+          "Ref": "AutoscalingGroupRenderingASGEC306AE3",
         },
         "Cooldown": "120",
         "ScalingAdjustment": -1,
@@ -875,7 +875,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Properties": {
         "AdjustmentType": "PercentChangeInCapacity",
         "AutoScalingGroupName": {
-          "Ref": "AutoscalingGroup",
+          "Ref": "AutoscalingGroupRenderingASGEC306AE3",
         },
         "Cooldown": "600",
         "ScalingAdjustment": 100,
@@ -955,7 +955,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             },
             {
               "Fn::GetAtt": [
-                "InstanceSecurityGroup",
+                "InstanceSecurityGroupRenderingD59E638A",
                 "GroupId",
               ],
             },
@@ -1076,7 +1076,7 @@ sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make 
       "Properties": {
         "Roles": [
           {
-            "Ref": "InstanceRole",
+            "Ref": "InstanceRoleRenderingB06D827E",
           },
         ],
       },

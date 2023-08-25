@@ -27,3 +27,10 @@ export interface DCRProps extends GuStackProps {
 	 */
 	amiRecipe: string;
 }
+
+export interface DCRAlarmConfig {
+	comparisonOperator: string;
+	threshold: number;
+	evaluationPeriod: number;
+	period: number;
+}
