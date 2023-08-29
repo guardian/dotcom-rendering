@@ -152,7 +152,7 @@ export const ManyNewsletterSignUp = () => {
 			if (!(button instanceof HTMLElement)) {
 				return;
 			}
-			const identityName = button.getAttribute('data-identity-name');
+			const { identityName } = button.dataset;
 			const listId = attributeToNumber(button, 'data-list-id');
 			if (!identityName || typeof listId === 'undefined') {
 				return;
@@ -166,20 +166,21 @@ export const ManyNewsletterSignUp = () => {
 					{ identityName, listId },
 				]);
 				button.classList.add(BUTTON_SELECTED_CLASS);
-				const ariaLabelText =
-					button.getAttribute('data-aria-label-when-checked') ??
-					'remove from list';
-				button.setAttribute('aria-label', ariaLabelText);
+				button.setAttribute(
+					'aria-label',
+					button.dataset.ariaLabelWhenChecked ?? 'remove from list',
+				);
 			} else {
 				setNewslettersToSignUpFor([
 					...newslettersToSignUpFor.slice(0, index),
 					...newslettersToSignUpFor.slice(index + 1),
 				]);
 				button.classList.remove(BUTTON_SELECTED_CLASS);
-				const ariaLabelText =
-					button.getAttribute('data-aria-label-when-unchecked') ??
-					'add to list';
-				button.setAttribute('aria-label', ariaLabelText);
+
+				button.setAttribute(
+					'aria-label',
+					button.dataset.ariaLabelWhenUnchecked ?? 'add to list',
+				);
 			}
 		},
 		[newslettersToSignUpFor, userCanInteract],
@@ -195,8 +196,10 @@ export const ManyNewsletterSignUp = () => {
 		for (const button of signUpButtons) {
 			button.classList.remove(BUTTON_SELECTED_CLASS);
 			const ariaLabelText =
-				button.getAttribute('data-aria-label-when-unchecked') ??
-				'add to list';
+				button instanceof HTMLElement
+					? button.dataset.ariaLabelWhenUnchecked ?? 'add to list'
+					: 'add to list';
+
 			button.setAttribute('aria-label', ariaLabelText);
 		}
 
