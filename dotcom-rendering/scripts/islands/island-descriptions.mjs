@@ -24,7 +24,7 @@ const getRegExForIsland = (name) =>
 		'\n/\\*\\*\n?' +
 			'((?: \\*.*\n)+)' +
 			' \\*\\/' +
-			`\nexport const ${name} =`,
+			`\\s+export const ${name} =`,
 		'm',
 	);
 
