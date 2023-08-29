@@ -163,8 +163,6 @@ type Props = {
 };
 
 /**
- * # Branding
- *
  * Wrapper around the logo and link for sponsored or paid for content.
  *
  * ## Why does this need to be an Island?

@@ -142,8 +142,6 @@ function getKey(
 }
 
 /**
- * # Liveness
- *
  * Allow new blocks on live blogs to be added without page reload.
  * Polls the content API inserts news blocks if the user
  * is at the top of the article.

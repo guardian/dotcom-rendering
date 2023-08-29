@@ -2,11 +2,15 @@ import { useEffect } from 'react';
 import { incrementAlreadyVisited } from '../lib/alreadyVisited';
 
 /**
- * # AlreadyVisited
- *
  * Increment the already visited count.
  *
- * @returns {} _No visual or DOM output_
+ * ## Why does this need to be an Island?
+ *
+ * This modifies local storage values.
+ *
+ * ---
+ *
+ * Does not render **anything**.
  */
 export const AlreadyVisited = () => {
 	useEffect(() => {

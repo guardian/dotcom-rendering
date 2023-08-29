@@ -173,8 +173,6 @@ type Props = {
 };
 
 /**
- * # Onwards Upper
- *
  * A wrapper around `Carousel` for showing related articles at the bottom
  * of an article. This contains the logic around which articles to show,
  * depending on a series of factors (story package, paid content, series tag, …)

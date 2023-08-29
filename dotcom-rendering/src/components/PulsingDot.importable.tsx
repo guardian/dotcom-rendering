@@ -35,8 +35,6 @@ interface Props {
 }
 
 /**
- * # Pulsing Dot
- *
  * Used for indicating an article is updating live
  *
  * ## Why does this need to be an Island?

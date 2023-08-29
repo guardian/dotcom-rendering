@@ -112,10 +112,11 @@ const getIslands = async (report) => {
 				: '';
 
 			const description =
-				matched?.[1]
+				`# ${name.replaceAll(/([A-Z])/g, ' $1')}\n` +
+				(matched?.[1]
 					?.split('\n')
 					.map((jsdoc_line) => jsdoc_line.slice(3))
-					.join('\n') ?? `# ${name} \n No description yet… 😢`;
+					.join('\n') ?? `No description yet… 😢`);
 
 			const html = await processor.process(description);
 

@@ -49,8 +49,6 @@ export const cleanTeamData = (team: TeamType): TeamType => ({
 });
 
 /**
- * # Get Match Stats
- *
  * Wrapper around `MatchStats`.
  *
  * ## Why does this need to be an Island?
