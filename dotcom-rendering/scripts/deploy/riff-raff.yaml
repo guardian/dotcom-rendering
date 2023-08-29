@@ -23,6 +23,11 @@ deployments:
     type: aws-s3
     parameters:
       bucketSsmKey: /account/services/dotcom-static.bucket
-      cacheControl: public, max-age=315360000, immutable
+      cacheControl:
+        # assets hashed by Webpack
+        - pattern: "\.[0-9a-f]{20}\.js"
+          value: public, max-age=315360000, immutable
+        - pattern: ".*"
+          value: max-age=3600
       prefixStack: false
       publicReadAcl: false
