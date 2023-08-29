@@ -208,6 +208,18 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                       {
                         "Ref": "AWS::AccountId",
                       },
+                      ":parameter//TEST/frontend/rendering/*",
+                    ],
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
                       ":parameter/frontend/*",
                     ],
                   ],
@@ -221,18 +233,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                         "Ref": "AWS::AccountId",
                       },
                       ":parameter/dotcom/*",
-                    ],
-                  ],
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:ssm:eu-west-1:",
-                      {
-                        "Ref": "AWS::AccountId",
-                      },
-                      ":parameter//TEST/frontend/rendering/*",
                     ],
                   ],
                 },
@@ -322,7 +322,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             ],
           },
         ],
-        "AlarmDescription": "Alarm if 5XX backend errors are greater than 100 over last 60 seconds",
+        "AlarmDescription": "Notify if 5XX backend errors is GreaterThanOrEqualToThreshold of 100 over 5 period(s) of 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
@@ -774,7 +774,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             ],
           },
         ],
-        "AlarmDescription": "Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds",
+        "AlarmDescription": "Scale up if latency is GreaterThanOrEqualToThreshold of 0.2 over 1 period(s) of 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
