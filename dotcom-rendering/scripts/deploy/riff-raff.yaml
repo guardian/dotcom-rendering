@@ -25,9 +25,9 @@ deployments:
       bucketSsmKey: /account/services/dotcom-static.bucket
       cacheControl:
         # assets hashed by Webpack
-        - pattern: "\.[0-9a-f]{20}\.js"
+        - pattern: \.[0-9a-f]{20}\.js
           value: public, max-age=315360000, immutable
-        - pattern: ".*"
+        - pattern: .*
           value: max-age=3600
       prefixStack: false
       publicReadAcl: false
