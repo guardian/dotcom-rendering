@@ -208,6 +208,7 @@ export const Headlines = () => (
 				}}
 				leftColSize={'compact'}
 				discussionApiUrl={discussionApiUrl}
+				renderingTarget="Web"
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -222,6 +223,7 @@ export const Headlines = () => (
 				}}
 				leftColSize={'compact'}
 				discussionApiUrl={discussionApiUrl}
+				renderingTarget="Web"
 			/>
 		</Section>
 	</>
@@ -243,6 +245,7 @@ export const SingleItemCarousel = () => (
 				}}
 				leftColSize={'compact'}
 				discussionApiUrl={discussionApiUrl}
+				renderingTarget="Web"
 			/>
 		</Section>
 	</>
@@ -264,6 +267,7 @@ export const Immersive = () => (
 				}}
 				leftColSize={'compact'}
 				discussionApiUrl={discussionApiUrl}
+				renderingTarget="Web"
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -278,6 +282,7 @@ export const Immersive = () => (
 				}}
 				leftColSize={'compact'}
 				discussionApiUrl={discussionApiUrl}
+				renderingTarget="Web"
 			/>
 		</Section>
 	</>
@@ -309,6 +314,7 @@ export const SpecialReportAlt = () => {
 					}}
 					leftColSize={'compact'}
 					discussionApiUrl={discussionApiUrl}
+					renderingTarget="Web"
 				/>
 			</Section>
 		</>

@@ -804,6 +804,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -836,6 +837,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								renderingTarget={renderingTarget}
 							/>
 						</Island>
 

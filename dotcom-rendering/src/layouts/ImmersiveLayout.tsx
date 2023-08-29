@@ -775,6 +775,7 @@ export const ImmersiveLayout = ({
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -801,6 +802,7 @@ export const ImmersiveLayout = ({
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						renderingTarget={renderingTarget}
 					/>
 				</Island>
 

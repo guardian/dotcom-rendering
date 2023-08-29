@@ -673,6 +673,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											discussionApiUrl={
 												front.config.discussionApiUrl
 											}
+											renderingTarget="Web"
 										/>
 									</Island>
 								</Section>

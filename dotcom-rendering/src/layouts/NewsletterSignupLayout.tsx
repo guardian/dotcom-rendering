@@ -526,6 +526,7 @@ export const NewsletterSignupLayout = ({
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -552,6 +553,7 @@ export const NewsletterSignupLayout = ({
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						renderingTarget={renderingTarget}
 					/>
 				</Island>
 			</main>

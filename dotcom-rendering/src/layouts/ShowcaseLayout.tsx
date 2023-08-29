@@ -88,7 +88,7 @@ const ShowcaseGrid = ({
 					Vertical grey border
 					Main content
 					Right Column
-					
+
 				*/
 				${from.wide} {
 					${isPictureContent
@@ -781,6 +781,7 @@ export const ShowcaseLayout = ({
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -807,6 +808,7 @@ export const ShowcaseLayout = ({
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						renderingTarget={renderingTarget}
 					/>
 				</Island>
 

@@ -99,6 +99,11 @@ export type Props = {
 	showLivePlayable?: boolean;
 	onwardsSource?: string;
 	pauseOffscreenVideo?: boolean;
+	/**
+	 * Represents if the card content has been read or "seen" by the user already.
+	 * Only relevant for apps-rendered content.
+	 */
+	hasBeenSeen?: boolean;
 };
 
 const StarRatingComponent = ({
@@ -286,6 +291,7 @@ export const Card = ({
 	showLivePlayable = false,
 	onwardsSource,
 	pauseOffscreenVideo = false,
+	hasBeenSeen = false,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -392,6 +398,7 @@ export const Card = ({
 			format={format}
 			containerPalette={containerPalette}
 			isDynamo={isDynamo}
+			hasBeenSeen={hasBeenSeen}
 		>
 			<CardLink
 				linkTo={linkTo}

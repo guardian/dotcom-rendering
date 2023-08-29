@@ -729,6 +729,7 @@ export const CommentLayout = ({
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -755,6 +756,7 @@ export const CommentLayout = ({
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						renderingTarget={renderingTarget}
 					/>
 				</Island>
 

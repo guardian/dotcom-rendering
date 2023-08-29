@@ -12,6 +12,11 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
+	/**
+	 * Represents if the card content has been read or "seen" by the user already.
+	 * Only relevant for apps-rendered content.
+	 */
+	hasBeenSeen?: boolean;
 };
 
 const cardStyles = (
@@ -172,11 +177,16 @@ const topBarStyles = ({
 	`;
 };
 
+const fadedStyles = css`
+	opacity: 0.7;
+`;
+
 export const CardWrapper = ({
 	children,
 	format,
 	containerPalette,
 	isDynamo,
+	hasBeenSeen = false,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
@@ -184,6 +194,7 @@ export const CardWrapper = ({
 			css={[
 				cardStyles(format, palette, isDynamo, containerPalette),
 				topBarStyles({ isDynamo, palette }),
+				hasBeenSeen && fadedStyles,
 			]}
 		>
 			{children}

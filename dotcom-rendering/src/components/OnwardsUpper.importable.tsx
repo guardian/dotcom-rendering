@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { joinUrl, Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import type { OnwardsSource } from '../types/onwards';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Section } from './Section';
@@ -170,6 +171,7 @@ type Props = {
 	pillar: ArticleTheme;
 	shortUrlId: string;
 	discussionApiUrl: string;
+	renderingTarget: RenderingTarget;
 };
 
 /**
@@ -203,6 +205,7 @@ export const OnwardsUpper = ({
 	editionId,
 	shortUrlId,
 	discussionApiUrl,
+	renderingTarget,
 }: Props) => {
 	// Related content can be a collection of articles based on
 	// two things, 1: A popular tag, or 2: A generic text match
@@ -290,6 +293,7 @@ export const OnwardsUpper = ({
 						onwardsSource={onwardsSource}
 						format={format}
 						discussionApiUrl={discussionApiUrl}
+						renderingTarget={renderingTarget}
 					/>
 				</Section>
 			)}
@@ -301,6 +305,7 @@ export const OnwardsUpper = ({
 						onwardsSource="curated-content"
 						format={format}
 						discussionApiUrl={discussionApiUrl}
+						renderingTarget={renderingTarget}
 					/>
 				</Section>
 			)}

@@ -642,6 +642,7 @@ export const InteractiveLayout = ({
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -668,6 +669,7 @@ export const InteractiveLayout = ({
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						renderingTarget={renderingTarget}
 					/>
 				</Island>
 

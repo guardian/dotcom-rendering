@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
+// import { getUserClient } from '../lib/bridgetApi';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
@@ -20,6 +21,7 @@ import type { Branding } from '../types/branding';
 import type { DCRContainerPalette, DCRContainerType } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
@@ -35,6 +37,7 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
 	discussionApiUrl: string;
+	renderingTarget: RenderingTarget;
 };
 
 type ArticleProps = Props & {
@@ -479,6 +482,11 @@ type CarouselCardProps = {
 	verticalDividerColour?: string;
 	onwardsSource?: string;
 	containerType?: DCRContainerType;
+	/**
+	 * Represents if the card content has been read or "seen" by the user already.
+	 * Only relevant for apps-rendered content.
+	 */
+	hasBeenSeen?: boolean;
 };
 
 const CarouselCard = ({
@@ -498,6 +506,7 @@ const CarouselCard = ({
 	containerType,
 	imageLoading,
 	discussionApiUrl,
+	hasBeenSeen,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	return (
@@ -533,6 +542,7 @@ const CarouselCard = ({
 				containerType={containerType}
 				imageLoading={imageLoading}
 				discussionApiUrl={discussionApiUrl}
+				hasBeenSeen={hasBeenSeen}
 			/>
 		</LI>
 	);
@@ -860,6 +870,7 @@ export const Carousel = ({
 	onwardsSource,
 	leftColSize,
 	discussionApiUrl,
+	renderingTarget,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselColours = decideCarouselColours(props);
@@ -975,6 +986,14 @@ export const Carousel = ({
 	// using old data to determine the max index. Instead we say update maxIndex
 	// when index changes and compare it against the prior maxIndex only.
 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
+
+	// const identifySeenCards = async (trails: TrailType[]): Promise<TrailType & { isSeen?: boolean }[]> => {
+	// 	const seenCardUrls = await getUserClient().filterSeenArticles(trails.map(x => x.url))
+	// 	return trails.map(t => ({...t, isSeen: seenCardUrls.find(value => value === t.url)}))
+	// }
+	// useEffect(() => {
+	// 	renderingTarget === "Apps" && getUserClient().filterSeenArticles(trails.map(_ => _.))
+	// }, []);
 
 	return (
 		<div
