@@ -22,8 +22,6 @@ type Props = {
 const Loading = () => <Placeholder height={230} />;
 
 /**
- * # Get Match Nav
- *
  * Wrapper around `MatchNav` with loading and fallback.
  *
  * ## Why does this need to be an Island?

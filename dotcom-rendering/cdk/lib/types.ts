@@ -27,3 +27,15 @@ export interface DCRProps extends GuStackProps {
 	 */
 	amiRecipe: string;
 }
+
+export interface UserDataProps
+	extends Pick<DCRProps, 'app' | 'region' | 'stage'> {
+	elkStreamId: string;
+}
+
+export interface DCRAlarmConfig {
+	comparisonOperator: string;
+	threshold: number;
+	evaluationPeriod: number;
+	period: number;
+}

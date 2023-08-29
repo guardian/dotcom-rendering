@@ -40,6 +40,19 @@ const labelStyles = css`
 type Props = {
 	targetedTerritory: AustralianTerritory;
 };
+
+/**
+ * Allows containers targetted to a specific territory to be changed
+ * to a different territory. E.g New South Wales to Victoria
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We use cookies to set the user’s territory.
+ *
+ * ---
+ *
+ * [`AustralianTerritorySwitcher` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-australianterritoryswitcher--victoria&buildNumber=2967)
+ */
 export const AustralianTerritorySwitcher = ({ targetedTerritory }: Props) => {
 	const [expanded, setExpanded] = useState(false);
 
