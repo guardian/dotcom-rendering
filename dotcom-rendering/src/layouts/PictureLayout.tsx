@@ -110,10 +110,10 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title     '
 						'headline  '
-						'media     '
-						'standfirst'
 						'lines     '
 						'meta      '
+						'media     '
+						'standfirst'
 						'submeta   '
 						'.         ';
 				}
