@@ -843,8 +843,6 @@ const decideCarouselColours = (
 };
 
 /**
- * # Carousel
- *
  * A carousel of cards, mainly used in onward journeys,
  * at the bottom of articles
  *

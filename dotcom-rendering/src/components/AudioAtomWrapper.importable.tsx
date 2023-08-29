@@ -19,8 +19,14 @@ type Props = {
 };
 
 /**
- * # AudioAtomWrapper
+ * ## Why does this need to be an Island?
  *
+ * The audio atom is interactive.
+ * Requires consent to use audio ads.
+ *
+ * ---
+ *
+ * (No visual story exists)
  */
 export const AudioAtomWrapper = ({
 	id,

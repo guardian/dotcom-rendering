@@ -39,6 +39,14 @@ type Props = {
 /**
  * In the right hand column, there will be the right ad slot, followed
  * by as many liveblog-right ad slots that can fit
+ *
+ * ## Why does this need to be an Island?
+ *
+ * Ads are rendered client-side.
+ *
+ * ---
+ *
+ * (No visual story exists)
  */
 export const LiveblogRightMultipleAdSlots = ({
 	display,

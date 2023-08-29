@@ -13,6 +13,14 @@ import { useOnce } from '../lib/useOnce';
  *
  * If we didn't do this then you'd end up back where you were when you pasted the
  * url into the browser and unable to access the article under the lightbox.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * This behaviour is entirely client-side.
+ *
+ * ---
+ *
+ * Does not render **anything**.
  */
 export const LightboxHash = () => {
 	useOnce(() => {

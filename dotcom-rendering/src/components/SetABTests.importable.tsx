@@ -16,6 +16,17 @@ type Props = {
 	pageIsSensitive: CoreAPIConfig['pageIsSensitive'];
 };
 
+/**
+ * Initialises the values of `useAB` and sends relevant Ophan events.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * All this logic is client-side.
+ *
+ * ---
+ *
+ * Does not render **anything**.
+ */
 export const SetABTests = ({
 	isDev,
 	pageIsSensitive,
