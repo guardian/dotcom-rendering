@@ -108,6 +108,7 @@ export const ShowcaseInterview = () => {
 						isAdFreeUser={false}
 						isSensitive={false}
 						switches={{}}
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -152,6 +153,7 @@ export const ShowcaseInterviewNobyline = () => {
 						isAdFreeUser={false}
 						isSensitive={false}
 						switches={{}}
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -194,6 +196,7 @@ export const Interview = () => {
 						isAdFreeUser={false}
 						isSensitive={false}
 						switches={{}}
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -236,6 +239,7 @@ export const InterviewSpecialReport = () => {
 						isAdFreeUser={false}
 						isSensitive={false}
 						switches={{}}
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -279,6 +283,7 @@ export const InterviewNoByline = () => {
 						isAdFreeUser={false}
 						isSensitive={false}
 						switches={{}}
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>

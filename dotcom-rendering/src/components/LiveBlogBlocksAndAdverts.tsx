@@ -3,6 +3,7 @@ import {
 	shouldDisplayAd,
 } from '../lib/liveblogAdSlots';
 import type { Switches } from '../types/config';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { AdSlot } from './AdSlot';
 import { LiveBlock } from './LiveBlock';
 
@@ -19,6 +20,7 @@ type Props = {
 	isSensitive: boolean;
 	isLiveUpdate?: boolean;
 	isInLiveblogAdSlotTest?: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 export const LiveBlogBlocksAndAdverts = ({
@@ -34,6 +36,7 @@ export const LiveBlogBlocksAndAdverts = ({
 	isSensitive,
 	isLiveUpdate,
 	isInLiveblogAdSlotTest = false,
+	renderingTarget,
 }: Props) => {
 	if (!isInLiveblogAdSlotTest) {
 		return (
@@ -53,6 +56,7 @@ export const LiveBlogBlocksAndAdverts = ({
 						isSensitive={isSensitive}
 						isPinnedPost={false}
 						pinnedPostId={pinnedPost?.id}
+						renderingTarget={renderingTarget}
 					/>
 				))}
 			</>
@@ -98,6 +102,7 @@ export const LiveBlogBlocksAndAdverts = ({
 							isSensitive={isSensitive}
 							isPinnedPost={false}
 							pinnedPostId={pinnedPost?.id}
+							renderingTarget={renderingTarget}
 						/>
 						{willDisplayAdAfterBlock && (
 							<AdSlot

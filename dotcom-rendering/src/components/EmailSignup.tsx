@@ -8,7 +8,6 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
 
@@ -21,7 +20,6 @@ type EmailSignupProps = {
 	theme: string;
 	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
 	hidePrivacyMessage?: boolean;
-	renderingTarget: RenderingTarget;
 };
 
 const containerStyles = css`
@@ -85,7 +83,6 @@ export const EmailSignup = ({
 	successDescription,
 	theme,
 	hidePrivacyMessage,
-	renderingTarget,
 }: EmailSignupProps) => {
 	return (
 		<aside css={containerStyles} aria-label="newsletter promotion">

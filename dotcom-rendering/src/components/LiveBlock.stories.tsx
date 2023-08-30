@@ -77,6 +77,7 @@ export const VideoAsSecond = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -122,6 +123,7 @@ export const Title = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -188,6 +190,7 @@ export const Video = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -229,6 +232,7 @@ export const RichLink = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -261,6 +265,7 @@ export const FirstImage = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -319,6 +324,7 @@ export const ImageRoles = () => {
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -366,6 +372,7 @@ export const Thumbnail = () => {
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -399,6 +406,7 @@ export const ImageAndTitle = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -428,6 +436,7 @@ export const Updated = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -461,6 +470,7 @@ export const Contributor = () => {
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -492,6 +502,7 @@ export const NoAvatar = () => {
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -526,6 +537,7 @@ export const TitleAndContributor = () => {
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);

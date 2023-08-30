@@ -492,6 +492,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
 									hideCaption={true}
+									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</Column>

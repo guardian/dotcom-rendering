@@ -39,7 +39,6 @@ export const Default = ({
 	hidePrivacyMessage?: boolean;
 }) => (
 	<EmailSignup
-		renderingTarget="Web"
 		identityName="patriarchy"
 		description="Reviewing the most important stories on feminism and sexism and those fighting for equality"
 		name="The Week in Patriarchy"
@@ -56,7 +55,6 @@ export const NewsTheme = ({
 	hidePrivacyMessage?: boolean;
 }) => (
 	<EmailSignup
-		renderingTarget="Web"
 		identityName="morning-briefing"
 		description="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
 		name="First Edition"
@@ -73,7 +71,6 @@ export const IrregularFrequency = ({
 	hidePrivacyMessage?: boolean;
 }) => (
 	<EmailSignup
-		renderingTarget="Web"
 		identityName="documentaries"
 		description="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
 		name="Guardian Documentaries"

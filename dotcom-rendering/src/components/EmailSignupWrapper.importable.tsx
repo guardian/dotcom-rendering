@@ -9,14 +9,12 @@ import {
 } from '@guardian/source-foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { useIsBridgetCompatible } from '../lib/getBridgetVersion';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterDetail } from './NewsletterDetail';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { SecureReCAPTCHASignup } from './SecureReCAPTCHASignup';
 
 interface Props extends EmailSignupProps {
-	renderingTarget?: RenderingTarget;
 	skipToIndex: number;
 }
 
@@ -115,13 +113,12 @@ export const EmailSignup = ({
 };
 
 export const EmailSignupWrapper = ({
-	renderingTarget,
 	skipToIndex,
 	...EmailSignUpProps
 }: Props) => {
 	const isCompatible = useIsBridgetCompatible();
 
-	if (!renderingTarget || (renderingTarget === 'Apps' && !isCompatible)) {
+	if (!isCompatible) {
 		return null;
 	}
 

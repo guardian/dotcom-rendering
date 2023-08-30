@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { Switches } from '../types/config';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { LastUpdated } from './LastUpdated';
 import { LiveBlockContainer } from './LiveBlockContainer';
 import { ShareIcons } from './ShareIcons';
@@ -18,6 +19,7 @@ type Props = {
 	isLiveUpdate?: boolean;
 	isPinnedPost: boolean;
 	pinnedPostId?: string;
+	renderingTarget: RenderingTarget;
 };
 
 export const LiveBlock = ({
@@ -33,6 +35,7 @@ export const LiveBlock = ({
 	isLiveUpdate,
 	isPinnedPost,
 	pinnedPostId,
+	renderingTarget,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 
@@ -76,6 +79,7 @@ export const LiveBlock = ({
 					isSensitive={isSensitive}
 					switches={switches}
 					isPinnedPost={isPinnedPost}
+					renderingTarget={renderingTarget}
 				/>
 			))}
 			<footer

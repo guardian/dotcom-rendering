@@ -187,6 +187,7 @@ export const ArticleBody = ({
 					selectedTopics={selectedTopics}
 					keywordIds={keywordIds}
 					isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
+					renderingTarget={renderingTarget}
 				/>
 			</div>
 		);

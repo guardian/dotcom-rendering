@@ -87,7 +87,7 @@ type Props = {
 	switches: Switches;
 	isPinnedPost?: boolean;
 	abTests?: ServerSideTests;
-	renderingTarget?: RenderingTarget;
+	renderingTarget: RenderingTarget;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -462,7 +462,6 @@ export const renderElement = ({
 				return (
 					<Island clientOnly={true} deferUntil={'idle'}>
 						<EmailSignupWrapper
-							renderingTarget={renderingTarget}
 							skipToIndex={index}
 							identityName={element.newsletter.identityName}
 							description={element.newsletter.description}
@@ -489,7 +488,6 @@ export const renderElement = ({
 							element.newsletter.successDescription
 						}
 						theme={element.newsletter.theme}
-						renderingTarget={renderingTarget}
 					/>
 				</InlineSkipToWrapper>
 			);

@@ -12,6 +12,7 @@ import {
 	TopicFilterBank,
 } from '../components/TopicFilterBank';
 import type { Switches } from '../types/config';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 
 type Props = {
@@ -38,6 +39,7 @@ type Props = {
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
 	isInLiveblogAdSlotTest?: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 export const LiveBlogRenderer = ({
@@ -64,6 +66,7 @@ export const LiveBlogRenderer = ({
 	availableTopics,
 	selectedTopics,
 	isInLiveblogAdSlotTest = false,
+	renderingTarget,
 }: Props) => {
 	const filtered =
 		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
@@ -88,6 +91,7 @@ export const LiveBlogRenderer = ({
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
 							isPinnedPost={true}
+							renderingTarget={renderingTarget}
 						/>
 					</PinnedPost>
 				</>
@@ -142,6 +146,7 @@ export const LiveBlogRenderer = ({
 				isSensitive={isSensitive}
 				pinnedPost={pinnedPost}
 				isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
+				renderingTarget={renderingTarget}
 			/>
 			{blocks.length > 4 && (
 				<Island clientOnly={true}>
