@@ -90,9 +90,9 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 140px 1px 1fr 300px;
 					grid-template-areas:
 						'title  border  headline    headline'
+						'lines  border  media       media'
 						'meta   border  media       media'
-						'meta   border  media       media'
-						'lines  border  standfirst  standfirst'
+						'meta   border  standfirst  standfirst'
 						'.      border  submeta     submeta'
 						'.      border  .           . ';
 				}
@@ -155,16 +155,6 @@ const maxWidth = css`
 	}
 `;
 
-// const stretchLines = (isPictureContent: boolean) => css`
-// 	${!isPictureContent && until.phablet} {
-// 		margin-left: -20px;
-// 		margin-right: -20px;
-// 	}
-// 	${!isPictureContent && until.mobileLandscape} {
-// 		margin-left: -10px;
-// 		margin-right: -10px;
-// 	}
-// `;
 const mainMediaWrapper = css`
 	position: relative;
 	${until.phablet} {
@@ -176,11 +166,6 @@ const mainMediaWrapper = css`
 		margin-right: 10px;
 	}
 `;
-
-const PositionHeadline = ({ children }: { children: React.ReactNode }) => {
-	return <div css={maxWidth}>{children}</div>;
-};
-
 interface Props {
 	article: FEArticleType;
 	NAV: NavType;
@@ -364,7 +349,7 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 							<Border format={format} />
 						</GridItem>
 						<GridItem area="headline">
-							<PositionHeadline>
+							<div css={maxWidth}>
 								<ArticleHeadline
 									format={format}
 									headlineString={article.headline}
@@ -377,7 +362,7 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 										article.starRating !== undefined
 									}
 								/>
-							</PositionHeadline>
+							</div>
 						</GridItem>
 						<GridItem area="media">
 							<div css={mainMediaWrapper}>
