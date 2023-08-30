@@ -1,6 +1,8 @@
+import { BUILD_VARIANT } from '../../scripts/webpack/bundles';
 import {
 	APPS_SCRIPT,
 	decideAssetOrigin,
+	getModulesBuild,
 	WEB,
 	WEB_LEGACY_SCRIPT,
 	WEB_SCHEDULED_SCRIPT,
@@ -76,5 +78,37 @@ describe('regular expression to match files', () => {
 		expect(
 			'https://assets.guim.co.uk/assets/ophan.web.eb74205c979f58659ed7.js?http3=true',
 		).toMatch(WEB);
+	});
+});
+
+describe('getModulesBuild', () => {
+	it('should default to web', () => {
+		const build = getModulesBuild({ tests: {}, switches: {} });
+		expect(build).toBe('web');
+	});
+
+	it('should support variant build when in test, if enabled', () => {
+		const build = getModulesBuild({
+			tests: { dcrJavascriptBundleVariant: 'variant' },
+			switches: {},
+		});
+		const expected = BUILD_VARIANT ? 'web.variant' : 'web';
+		expect(build).toBe(expected);
+	});
+
+	it('should serve the scheduled build when in adaptive test', () => {
+		const build = getModulesBuild({
+			tests: { adaptiveSiteVariant: 'variant' },
+			switches: {},
+		});
+		expect(build).toBe('web.scheduled');
+	});
+
+	it('should serve the scheduled build when switched on', () => {
+		const build = getModulesBuild({
+			tests: {},
+			switches: { scheduler: true },
+		});
+		expect(build).toBe('web.scheduled');
 	});
 });
