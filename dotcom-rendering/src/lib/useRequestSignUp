@@ -1,0 +1,25 @@
+import { useEffect, useState } from 'react';
+import { newslettersClient } from '../../../apps-rendering/src/native/nativeApi';
+
+
+export const useRequestSignUp = (
+	input: string,
+	identityName: string,
+): boolean | undefined => {
+	const [isSuccess, setIsSuccess] = useState<boolean | undefined>(undefined);
+
+	useEffect(() => {
+		if (input) {
+			newslettersClient
+				.requestSignUp(input, identityName)
+				.then((success) => {
+					setIsSuccess(success);
+				})
+				.catch(() => {
+					setIsSuccess(false);
+				});
+		}
+	}, [input, identityName]);
+
+	return isSuccess;
+};
