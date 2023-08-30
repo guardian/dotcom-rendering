@@ -1,5 +1,5 @@
 import { SecureSignup } from '../components/SecureSignup';
-import { useIsBridgetCompatible } from '../lib/getBridgetVersion';
+import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
