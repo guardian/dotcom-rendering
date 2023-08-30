@@ -129,6 +129,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					</Island>
 				</>
 			)}
+
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout
 					article={article}

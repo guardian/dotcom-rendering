@@ -49,7 +49,6 @@ import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const ShowcaseGrid = ({
@@ -88,7 +87,7 @@ const ShowcaseGrid = ({
 					Vertical grey border
 					Main content
 					Right Column
-					
+
 				*/
 				${from.wide} {
 					${isPictureContent
@@ -280,15 +279,9 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 }
 
-export const ShowcaseLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -578,7 +571,6 @@ export const ShowcaseLayout = ({
 									hasStarRating={
 										article.starRating !== undefined
 									}
-									renderingTarget={renderingTarget}
 								/>
 							</PositionHeadline>
 						</GridItem>
@@ -623,7 +615,6 @@ export const ShowcaseLayout = ({
 										!!article.config.switches
 											.serverShareCounts
 									}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
@@ -661,7 +652,6 @@ export const ShowcaseLayout = ({
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									renderingTarget={renderingTarget}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>

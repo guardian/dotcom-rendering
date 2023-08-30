@@ -33,7 +33,6 @@ describe('ArticleMeta', () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>,
 		);
 
@@ -74,7 +73,6 @@ describe('ArticleMeta', () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>,
 		);
 

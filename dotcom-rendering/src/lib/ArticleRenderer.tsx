@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
+import { useContext } from 'react';
 import { adContainerStyles } from '../components/AdSlot';
+import { RenderingTargetContext } from '../components/RenderingTarget';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { RenderArticleElement } from './renderElement';
 import { withSignInGateSlot } from './withSignInGateSlot';
@@ -42,7 +43,6 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	abTests?: ServerSideTests;
-	renderingTarget: RenderingTarget;
 };
 
 export const ArticleRenderer = ({
@@ -63,7 +63,6 @@ export const ArticleRenderer = ({
 	isSensitive,
 	isDev,
 	abTests,
-	renderingTarget,
 }: Props) => {
 	const renderedElements = elements.map((element, index) => {
 		return (
@@ -86,6 +85,8 @@ export const ArticleRenderer = ({
 		);
 	});
 
+	const renderingTargetContext = useContext(RenderingTargetContext);
+
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -105,7 +106,7 @@ export const ArticleRenderer = ({
 			].join(' ')}
 			css={[adStylesDynamic, commercialPosition]}
 		>
-			{renderingTarget === 'Apps'
+			{renderingTargetContext === 'Apps'
 				? renderedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
 				  withSignInGateSlot({

@@ -1,19 +1,19 @@
 import { ArticleDesign } from '@guardian/libs';
+import { useContext } from 'react';
 import {
 	getBylineComponentsFromTokens,
 	getSoleContributor,
 	isContributor,
 } from '../lib/byline';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
+import { RenderingTargetContext } from './RenderingTarget';
 
 type Props = {
 	byline: string;
 	tags: TagType[];
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 };
 
 const applyCleverOrderingForMatching = (titles: string[]): string[] => {
@@ -107,12 +107,7 @@ function removeComma(bylinePart: string) {
 		: bylinePart;
 }
 
-export const BylineLink = ({
-	byline,
-	tags,
-	format,
-	renderingTarget,
-}: Props) => {
+export const BylineLink = ({ byline, tags, format }: Props) => {
 	const tokens = bylineAsTokens(byline, tags);
 	const soleContributor = getSoleContributor(tags, byline);
 	const hasSoleContributor = !!soleContributor;
@@ -137,10 +132,13 @@ export const BylineLink = ({
 		);
 	});
 
+	const renderingTargetContext = useContext(RenderingTargetContext);
+
 	return (
 		<>
 			{renderedTokens}
-			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
+			{renderingTargetContext === 'Apps' &&
+			soleContributor !== undefined ? (
 				<Island>
 					<FollowWrapper
 						displayName={soleContributor.title}

@@ -2,6 +2,7 @@ import { ArticleDesign, isString, Pillar } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { isAmpSupported } from '../components/Elements.amp';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
+import { RenderingTargetContext } from '../components/RenderingTarget';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -48,12 +49,14 @@ export const renderHtml = ({
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<ArticlePage
-			format={format}
-			article={article}
-			NAV={NAV}
-			renderingTarget="Web"
-		/>,
+		<RenderingTargetContext.Provider value="Web">
+			<ArticlePage
+				format={format}
+				article={article}
+				NAV={NAV}
+				renderingTarget="Web"
+			/>
+		</RenderingTargetContext.Provider>,
 	);
 
 	// We want to only insert script tags for the elements or main media elements on this page view

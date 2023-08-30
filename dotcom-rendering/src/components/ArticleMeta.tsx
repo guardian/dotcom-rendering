@@ -14,7 +14,6 @@ import { getSoleContributor } from '../lib/byline';
 import { decidePalette } from '../lib/decidePalette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { Palette } from '../types/palette';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
@@ -42,7 +41,6 @@ type Props = {
 	ajaxUrl: string;
 	showShareCount: boolean;
 	messageUs?: MessageUs;
-	renderingTarget: RenderingTarget;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -315,7 +313,6 @@ export const ArticleMeta = ({
 	ajaxUrl,
 	showShareCount,
 	messageUs,
-	renderingTarget,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -380,7 +377,6 @@ export const ArticleMeta = ({
 									byline={byline}
 									tags={tags}
 									format={format}
-									renderingTarget={renderingTarget}
 								/>
 							)}
 							{messageUs &&

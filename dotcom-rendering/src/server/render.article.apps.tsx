@@ -1,5 +1,6 @@
 import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
+import { RenderingTargetContext } from '../components/RenderingTarget';
 import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
@@ -16,11 +17,13 @@ export const renderArticle = (
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<ArticlePage
-			format={format}
-			article={article}
-			renderingTarget="Apps"
-		/>,
+		<RenderingTargetContext.Provider value="Apps">
+			<ArticlePage
+				format={format}
+				article={article}
+				renderingTarget="Apps"
+			/>
+		</RenderingTargetContext.Provider>,
 	);
 
 	const clientScripts = [getPathFromManifest('apps', 'index.js')];
