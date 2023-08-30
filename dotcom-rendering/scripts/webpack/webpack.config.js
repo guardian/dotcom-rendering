@@ -42,10 +42,6 @@ const commonConfigs = ({ platform }) => ({
 		},
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 		symlinks: false,
-		fallback: {
-			buffer: require.resolve('buffer'),
-			stream: require.resolve('stream-browserify'),
-		},
 	},
 	ignoreWarnings: [
 		/**
@@ -81,9 +77,7 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
-		new webpack.ProvidePlugin({
-			Buffer: ['buffer', 'Buffer'],
-		}),
+
 		...(DEV
 			? // DEV plugins
 			  [

@@ -18,12 +18,15 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
+import { EmailSignup } from '../components/EmailSignup';
+import { EmailSignupWrapper } from '../components/EmailSignupWrapper.importable';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
+import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
@@ -65,11 +68,8 @@ import {
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
-import { decidePalette } from './decidePalette';
-import { EmailSignupWrapper } from '../components/EmailSignupWrapper.importable';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { EmailSignup } from '../components/EmailSignup';
-import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
+import { decidePalette } from './decidePalette';
 
 type Props = {
 	format: ArticleFormat;

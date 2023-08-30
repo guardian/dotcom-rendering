@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanAction } from '@guardian/libs';
-import { neutral, space, until, textSans } from '@guardian/source-foundations';
+import { neutral, space, textSans, until } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
@@ -11,7 +11,7 @@ import {
 	SvgSpinner,
 	TextInput,
 } from '@guardian/source-react-components';
-import type { ReactEventHandler } from 'react';
+import type { FormEvent, ReactEventHandler } from 'react';
 import { useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
@@ -21,7 +21,6 @@ import {
 	getOphanRecordFunction,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
-import { isServer } from '../lib/isServer';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
@@ -198,9 +197,10 @@ const sendTracking = (
 		{
 			action,
 			value,
+			//check if this can be used or needs to be added
 			component: {
 				componentType: 'NEWSLETTER_SUBSCRIPTION',
-				id: `DCR SecureSignup ${newsletterId}`,
+				id: `AR SecureSignup ${newsletterId}`,
 			},
 		},
 		ophanRecord,
@@ -208,7 +208,7 @@ const sendTracking = (
 };
 
 /**
- * # Secure Signup
+ * # Secure ReCAPTCHA Signup
  *
  * We can only inject ReCAPTCHA client-side, and need to respond to user input.
  *
@@ -216,7 +216,10 @@ const sendTracking = (
  *
  * [`EmailSignup` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-emailsignup)
  */
-export const SecureSignupV2 = ({ newsletterId, successDescription }: Props) => {
+export const SecureReCAPTCHASignup = ({
+	newsletterId,
+	successDescription,
+}: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 
 	const [isWaitingForResponse, setIsWaitingForResponse] =
@@ -286,7 +289,8 @@ export const SecureSignupV2 = ({ newsletterId, successDescription }: Props) => {
 		sendTracking(newsletterId, 'click-button');
 	};
 
-	const handleSubmit = (): void => {
+	const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+		event.preventDefault();
 		if (isWaitingForResponse) {
 			return;
 		}
@@ -295,9 +299,7 @@ export const SecureSignupV2 = ({ newsletterId, successDescription }: Props) => {
 		recaptchaRef.current?.execute();
 	};
 
-	const captchaSiteKey = isServer
-		? undefined
-		: window.guardian.config.page.googleRecaptchaSiteKey;
+	const captchaSiteKey = window.guardian.config.page.googleRecaptchaSiteKey;
 
 	return (
 		<>

@@ -8,9 +8,9 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
-import { RenderingTarget } from 'src/types/renderingTarget';
 
 type EmailSignupProps = {
 	identityName: string;

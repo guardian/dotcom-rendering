@@ -1,19 +1,19 @@
-import { RenderingTarget } from 'src/types/renderingTarget';
-import { useIsBridgetCompatible } from '../lib/getBridgetVersion';
-import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { css } from '@emotion/react';
 import {
-	neutral,
-	space,
 	from,
 	headline,
+	neutral,
+	space,
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
+import { useIsBridgetCompatible } from '../lib/getBridgetVersion';
+import type { RenderingTarget } from '../types/renderingTarget';
+import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterDetail } from './NewsletterDetail';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
-import { SecureSignupV2 } from './SecureSignupV2';
+import { SecureReCAPTCHASignup } from './SecureReCAPTCHASignup';
 
 interface Props extends EmailSignupProps {
 	renderingTarget?: RenderingTarget;
@@ -105,7 +105,7 @@ export const EmailSignup = ({
 			</div>
 			<p css={descriptionStyles}>{description}</p>
 
-			<SecureSignupV2
+			<SecureReCAPTCHASignup
 				newsletterId={identityName}
 				successDescription={successDescription}
 			/>
