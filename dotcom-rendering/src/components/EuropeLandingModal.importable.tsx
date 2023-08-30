@@ -1,11 +1,11 @@
-import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
 import { css } from '@emotion/react';
-import { headline, body, space, palette } from '@guardian/source-foundations';
-import { SvgFlagsInCircle } from './SvgFlagsInCircle';
-import { useState } from 'react';
-import { EditionId } from '../lib/edition';
 import { getCookie, setCookie } from '@guardian/libs';
+import { body, headline, palette, space } from '@guardian/source-foundations';
+import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
+import { useState } from 'react';
+import type { EditionId } from '../lib/edition';
 import { SvgClose } from './SvgClose';
+import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
 // todo change z index
 const dialogStyles = css`
@@ -124,7 +124,7 @@ export const EuropeLandingModal = () => {
 							orientation="vertical"
 						>
 							<Radio
-								defaultChecked
+								defaultChecked={true}
 								label="Europe edition"
 								value="EUR"
 								onChange={() => setSelectedEdition('EUR')}
