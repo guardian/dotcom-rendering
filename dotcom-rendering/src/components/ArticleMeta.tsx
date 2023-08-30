@@ -402,31 +402,34 @@ export const ArticleMeta = ({
 						</div>
 					</>
 				</RowBelowLeftCol>
+
 				<div data-print-layout="hide" css={metaFlex}>
-					<div
-						className={
-							isInteractive
-								? interactiveLegacyClasses.shareIcons
-								: ''
-						}
-						css={[
-							metaExtras(palette, isPictureContent),
-							format.design === ArticleDesign.LiveBlog &&
-								css(
-									borderColourWhenBackgroundDark,
-									metaExtrasLiveBlog,
-								),
-						]}
-					>
-						<ShareIcons
-							pageId={pageId}
-							webTitle={webTitle}
-							format={format}
-							displayIcons={['facebook', 'twitter', 'email']}
-							size="medium"
-							context="ArticleMeta"
-						/>
-					</div>
+					{renderingTarget === 'Web' && (
+						<div
+							className={
+								isInteractive
+									? interactiveLegacyClasses.shareIcons
+									: ''
+							}
+							css={[
+								metaExtras(palette, isPictureContent),
+								format.design === ArticleDesign.LiveBlog &&
+									css(
+										borderColourWhenBackgroundDark,
+										metaExtrasLiveBlog,
+									),
+							]}
+						>
+							<ShareIcons
+								pageId={pageId}
+								webTitle={webTitle}
+								format={format}
+								displayIcons={['facebook', 'twitter', 'email']}
+								size="medium"
+								context="ArticleMeta"
+							/>
+						</div>
+					)}
 					<div
 						className={
 							isInteractive
@@ -445,15 +448,19 @@ export const ArticleMeta = ({
 						<Counts format={format}>
 							{/* The meta-number css is needed by Counts.tsx */}
 							<div className="meta-number">
-								{showShareCount && (
-									<Island clientOnly={true} deferUntil="idle">
-										<ShareCount
-											ajaxUrl={ajaxUrl}
-											pageId={pageId}
-											format={format}
-										/>
-									</Island>
-								)}
+								{showShareCount &&
+									renderingTarget === 'Web' && (
+										<Island
+											clientOnly={true}
+											deferUntil="idle"
+										>
+											<ShareCount
+												ajaxUrl={ajaxUrl}
+												pageId={pageId}
+												format={format}
+											/>
+										</Island>
+									)}
 							</div>
 							<div className="meta-number">
 								{isCommentable && (
