@@ -6,7 +6,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
-const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } = require('./bundles');
+const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } = require('./builds');
 
 const dist = path.resolve(__dirname, '..', '..', 'dist');
 const PROD = process.env.NODE_ENV === 'production';

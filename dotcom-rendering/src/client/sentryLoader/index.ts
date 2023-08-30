@@ -1,7 +1,7 @@
 import {
 	BUILD_VARIANT,
 	isInWebVariantBuild,
-} from '../../../scripts/webpack/bundles';
+} from '../../../scripts/webpack/builds';
 import { loadSentryOnError, stubSentry } from './loadSentry';
 
 type IsSentryEnabled = {

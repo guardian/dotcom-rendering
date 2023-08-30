@@ -1,9 +1,6 @@
+import { getWebBuild } from '../../scripts/webpack/builds';
 import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
-import {
-	generateScriptTags,
-	getModulesBuild,
-	getPathFromManifest,
-} from '../lib/assets';
+import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { polyfillIO } from '../lib/polyfill.io';
@@ -33,7 +30,7 @@ export const renderEditorialNewslettersPage = ({
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = newslettersPage.config.switches;
 
-	const build = getModulesBuild({
+	const build = getWebBuild({
 		switches: newslettersPage.config.switches,
 		tests: newslettersPage.config.abTests,
 	});

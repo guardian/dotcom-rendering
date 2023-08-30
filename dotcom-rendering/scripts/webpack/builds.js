@@ -26,7 +26,26 @@ const BUILD_VARIANT = true;
 const isInWebVariantBuild = (tests) =>
 	tests.dcrJavascriptBundleVariant === 'variant';
 
+/**
+ * Get the appropriate web build for the current page
+ *
+ * @param {object} options
+ * @param {ServerSideTests} options.tests
+ * @param {import("../../src/types/config").Switches} options.switches
+ */
+const getWebBuild = ({ tests, switches }) => {
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- it may be true or false
+	if (BUILD_VARIANT && isInWebVariantBuild(tests)) {
+		return 'web.variant';
+	}
+	if (switches.scheduler) {
+		return 'web.scheduled';
+	}
+	return 'web';
+};
+
 module.exports = {
 	BUILD_VARIANT,
 	isInWebVariantBuild,
+	getWebBuild,
 };

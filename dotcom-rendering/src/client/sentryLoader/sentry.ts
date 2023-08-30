@@ -4,7 +4,7 @@ import { CaptureConsole } from '@sentry/integrations';
 import {
 	BUILD_VARIANT,
 	isInWebVariantBuild,
-} from '../../../scripts/webpack/bundles';
+} from '../../../scripts/webpack/builds';
 
 const allowUrls: BrowserOptions['allowUrls'] = [
 	/webpack-internal/,

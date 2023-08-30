@@ -1,11 +1,11 @@
 import { ArticleDesign, isString, Pillar } from '@guardian/libs';
+import { getWebBuild } from '../../scripts/webpack/builds';
 import { ArticlePage } from '../components/ArticlePage';
 import { isAmpSupported } from '../components/Elements.amp';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
-	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
@@ -80,7 +80,7 @@ export const renderHtml = ({
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const build = getModulesBuild({
+	const build = getWebBuild({
 		tests: article.config.abTests,
 		switches: article.config.switches,
 	});

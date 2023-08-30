@@ -1,11 +1,8 @@
 import { isString, Pillar } from '@guardian/libs';
+import { getWebBuild } from '../../scripts/webpack/builds';
 import { FrontPage } from '../components/FrontPage';
 import { TagFrontPage } from '../components/TagFrontPage';
-import {
-	generateScriptTags,
-	getModulesBuild,
-	getPathFromManifest,
-} from '../lib/assets';
+import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { polyfillIO } from '../lib/polyfill.io';
@@ -83,7 +80,7 @@ export const renderFront = ({
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = front.config.switches;
 
-	const build = getModulesBuild({
+	const build = getWebBuild({
 		switches: front.config.switches,
 		tests: front.config.abTests,
 	});
@@ -166,7 +163,7 @@ export const renderTagFront = ({
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = tagFront.config.switches;
 
-	const build = getModulesBuild({
+	const build = getWebBuild({
 		switches: tagFront.config.switches,
 		tests: tagFront.config.abTests,
 	});

@@ -1,11 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
-import {
-	BUILD_VARIANT,
-	isInWebVariantBuild,
-} from '../../scripts/webpack/bundles';
-import type { ServerSideTests, Switches } from '../types/config';
 
 interface AssetHash {
 	[key: string]: string;
@@ -134,19 +129,3 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 			`<script defer src="${script}"></script>`,
 		].join('\n');
 	});
-
-export const getModulesBuild = ({
-	tests,
-	switches,
-}: {
-	tests: ServerSideTests;
-	switches: Switches;
-}): Extract<Build, 'web' | 'web.variant' | 'web.scheduled'> => {
-	if (BUILD_VARIANT && isInWebVariantBuild(tests)) {
-		return 'web.variant';
-	}
-	if (switches.scheduler) {
-		return 'web.scheduled';
-	}
-	return 'web';
-};
