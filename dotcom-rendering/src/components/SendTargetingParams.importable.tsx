@@ -15,14 +15,14 @@ export const SendTargetingParams = ({ editionCommercialProperties }: Props) => {
 	}
 
 	useEffect(() => {
-		const targetingParams = getTargetingParams(editionCommercialProperties);
-
 		void getAnalyticsClient()
-			.sendTargetingParams(targetingParams)
+			.sendTargetingParams(
+				getTargetingParams(editionCommercialProperties),
+			)
 			.catch(() => undefined);
 
 		log('commercial', '🎯 Targeting Params', editionCommercialProperties);
-	});
+	}, [editionCommercialProperties]);
 
 	return null;
 };
