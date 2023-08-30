@@ -24,6 +24,7 @@ import {
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
 import type { TagType } from '../../types/tag';
+import { getBrazeUuid } from '../../lib/getBrazeUuid';
 
 export type EpicConfig = {
 	module: ModuleData;
@@ -96,6 +97,7 @@ const buildPayload = async (data: CanShowData): Promise<EpicPayload> => ({
 			? data.browserId
 			: undefined,
 		isSignedIn: data.isSignedIn,
+		brazeUUID: 'test-uuid', //getBrazeUuid(data.idApiUrl),
 	},
 });
 

@@ -30,6 +30,8 @@ type Props = {
 	keywordIds: string;
 };
 
+const getBrazeUUIDLocal = () => 'TODO';
+
 const useCountryCode = () => {
 	const [countryCode, setCountryCode] = useState<CountryCode | null>();
 
@@ -141,6 +143,7 @@ const usePayload = ({
 			hasOptedOutOfArticleCount,
 			modulesVersion: 'v3',
 			url: window.location.origin + window.location.pathname,
+			brazeUUID: getBrazeUUIDLocal(),
 		},
 	};
 };
@@ -208,6 +211,8 @@ const Fetch = ({
 	const props = {
 		...response.data.module.props,
 		submitComponentEvent,
+		fetchBrazeUUID: () => Promise.resolve(getBrazeUUIDLocal()),
+		stage: 'CODE',
 	};
 
 	// Take any returned module and render it
