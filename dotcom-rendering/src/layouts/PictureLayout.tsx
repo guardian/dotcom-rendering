@@ -42,6 +42,9 @@ import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { getSoleContributor } from '../lib/byline';
+import { ContributorAvatar } from '../components/ContributorAvatar';
+import { ReactNode } from 'react';
 
 const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -166,6 +169,76 @@ const mainMediaWrapper = css`
 		margin-right: 10px;
 	}
 `;
+
+const avatarHeadlineWrapper = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
+
+const minHeightWithAvatar = css`
+	min-height: 259px;
+`;
+
+// If in mobile increase the margin top and margin right deficit
+const avatarPositionStyles = css`
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	margin-bottom: -29px;
+	margin-top: -50px;
+	pointer-events: none;
+	${until.tablet} {
+		overflow: hidden;
+	}
+
+	/*  Why target img element?
+
+        Because only in this context, where we have overflow: hidden
+        and the margin-bottom and margin-top of avatarPositionStyles
+        do we also want to apply our margin-right. These styles
+        are tightly coupled in this context, and so it does not
+        make sense to move them to the avatar component.
+
+        It's imperfect from the perspective of DCR, the alternative is to bust
+        the combined elements into a separate component (with the
+        relevant stories) and couple them that way, which might be what
+        you want to do if you find yourself adding more styles
+        to this section. For now, this works without making me 🤢.
+    */
+
+	${from.mobile} {
+		img {
+			margin-right: -1.85rem;
+		}
+	}
+	${from.mobileLandscape} {
+		img {
+			margin-right: -1.25rem;
+		}
+	}
+`;
+
+const LeftColLines = ({
+	avatarUrl,
+	children,
+}: {
+	avatarUrl: string | undefined;
+	children: ReactNode;
+}) => {
+	if (avatarUrl !== undefined) {
+		return (
+			<div
+				css={css`
+					margin-top: -29px;
+				`}
+			>
+				{children}
+			</div>
+		);
+	} else return <div>{children}</div>;
+};
+
 interface Props {
 	article: FEArticleType;
 	NAV: NavType;
@@ -195,6 +268,11 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 	const renderAds = canRenderAds(article);
 
 	const showSubNavTopBorder = false;
+
+	const avatarUrl = getSoleContributor(
+		article.tags,
+		article.byline,
+	)?.bylineLargeImageUrl;
 
 	return (
 		<>
@@ -348,22 +426,74 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 						<GridItem area="border">
 							<Border format={format} />
 						</GridItem>
-						<GridItem area="headline">
-							<div css={maxWidth}>
-								<ArticleHeadline
-									format={format}
-									headlineString={article.headline}
-									tags={article.tags}
-									byline={article.byline}
-									webPublicationDateDeprecated={
-										article.webPublicationDateDeprecated
-									}
-									hasStarRating={
-										article.starRating !== undefined
-									}
-								/>
-							</div>
-						</GridItem>
+
+						{avatarUrl ? (
+							<GridItem area="headline">
+								<div css={maxWidth}>
+									<div
+										css={[
+											avatarHeadlineWrapper,
+											avatarUrl && minHeightWithAvatar,
+										]}
+									>
+										{/* TOP - we position content in groups here using flex */}
+										<ArticleHeadline
+											format={format}
+											headlineString={article.headline}
+											tags={article.tags}
+											byline={article.byline}
+											webPublicationDateDeprecated={
+												article.webPublicationDateDeprecated
+											}
+											hasStarRating={
+												typeof article.starRating ===
+												'number'
+											}
+											hasAvatar={!!avatarUrl}
+											renderingTarget={renderingTarget}
+										/>
+										{/* BOTTOM */}
+										<div>
+											{!!avatarUrl && (
+												<div css={avatarPositionStyles}>
+													<ContributorAvatar
+														imageSrc={avatarUrl}
+														imageAlt={
+															article.byline ?? ''
+														}
+													/>
+												</div>
+											)}
+											<StraightLines
+												count={8}
+												cssOverrides={css`
+													display: block;
+												`}
+												color={palette.border.secondary}
+											/>
+										</div>
+									</div>
+								</div>
+							</GridItem>
+						) : (
+							<GridItem area="headline">
+								<div css={maxWidth}>
+									<ArticleHeadline
+										format={format}
+										headlineString={article.headline}
+										tags={article.tags}
+										byline={article.byline}
+										webPublicationDateDeprecated={
+											article.webPublicationDateDeprecated
+										}
+										hasStarRating={
+											article.starRating !== undefined
+										}
+										renderingTarget={renderingTarget}
+									/>
+								</div>
+							</GridItem>
+						)}
 						<GridItem area="media">
 							<div css={mainMediaWrapper}>
 								<MainMedia
@@ -393,14 +523,12 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 							/>
 						</GridItem>
 						<GridItem area="lines">
-							<div>
-								<div>
-									<DecideLines
-										format={format}
-										color={palette.border.secondary}
-									/>
-								</div>
-							</div>
+							<LeftColLines avatarUrl={avatarUrl}>
+								<DecideLines
+									format={format}
+									color={palette.border.secondary}
+								/>
+							</LeftColLines>
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div>
