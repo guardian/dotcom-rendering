@@ -4752,6 +4752,13 @@
   resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-7.2.0.tgz#b53db12c966b1036d2fb22425e2ccbd59118833b"
   integrity sha512-Y1o8vGBnbZ/bYsukPiK33CHURSob3tywg8WRtAuwWnDaZiM9IXgkEHbOK1zfkPTnz2gSXEX19KlpTmMxm0W//w==
 
+"@storybook/core-events@7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-7.4.0.tgz#0d50d254d65a678065d5906ac1dcab64396f2f6a"
+  integrity sha512-JavEo4dw7TQdF5pSKjk4RtqLgsG2R/eWRI8vZ3ANKa0ploGAnQR/eMTfSxf6TUH3ElBWLJhi+lvUCkKXPQD+dw==
+  dependencies:
+    ts-dedent "^2.0.0"
+
 "@storybook/core-server@7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@storybook/core-server/-/core-server-7.2.0.tgz#65a85bc3bc1887ad551f8376cfdffdec53fd6d4e"
