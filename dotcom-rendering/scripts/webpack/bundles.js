@@ -1,3 +1,5 @@
+/** @typedef {import("../../src/types/config").ServerSideTests} ServerSideTests */
+
 /**
  * Controls whether we should build the variant bundle.
  *
@@ -19,11 +21,12 @@ const BUILD_VARIANT = true;
  *
  * @see https://github.com/guardian/frontend/blob/main/common/app/experiments/Experiments.scala
  *
- * @type {(variant: 'Variant' | 'Control') => import("../../src/types/config").ServerSideTestNames}
+ * @type {(tests: ServerSideTests) => boolean}
  */
-const dcrJavascriptBundle = (variant) => `adaptiveSite${variant}`;
+const isInWebVariantBuild = (tests) =>
+	tests.dcrJavascriptBundleVariant === 'variant';
 
 module.exports = {
 	BUILD_VARIANT,
-	dcrJavascriptBundle,
+	isInWebVariantBuild,
 };

@@ -9,7 +9,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: false,
 				enableSentryReporting: false,
-				isInBrowserVariantTest: true,
+				isInBuildTest: true,
 				random: 99 / 100,
 			}),
 		).toEqual(false);
@@ -19,7 +19,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: true,
 				enableSentryReporting: true,
-				isInBrowserVariantTest: true,
+				isInBuildTest: true,
 				random: 1 / 100,
 			}),
 		).toEqual(false);
@@ -29,7 +29,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: false,
 				enableSentryReporting: true,
-				isInBrowserVariantTest: true,
+				isInBuildTest: true,
 				random: 1 / 100,
 			}),
 		).toEqual(true);
@@ -39,7 +39,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: false,
 				enableSentryReporting: true,
-				isInBrowserVariantTest: false,
+				isInBuildTest: false,
 				random: 1 / 100,
 			}),
 		).toEqual(false);
@@ -47,7 +47,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: false,
 				enableSentryReporting: true,
-				isInBrowserVariantTest: false,
+				isInBuildTest: false,
 				random: 99 / 100,
 			}),
 		).toEqual(false);
@@ -55,7 +55,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: false,
 				enableSentryReporting: true,
-				isInBrowserVariantTest: false,
+				isInBuildTest: false,
 				random: 99.0001 / 100,
 			}),
 		).toEqual(true);
@@ -63,7 +63,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			isSentryEnabled({
 				isDev: false,
 				enableSentryReporting: true,
-				isInBrowserVariantTest: false,
+				isInBuildTest: false,
 				random: 100 / 100,
 			}),
 		).toEqual(true);

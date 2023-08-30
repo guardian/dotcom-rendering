@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
-	dcrJavascriptBundle,
+	isInWebVariantBuild,
 } from '../../scripts/webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
 
@@ -142,7 +142,7 @@ export const getModulesBuild = ({
 	tests: ServerSideTests;
 	switches: Switches;
 }): Extract<Build, 'web' | 'web.variant' | 'web.scheduled'> => {
-	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
+	if (BUILD_VARIANT && isInWebVariantBuild(tests)) {
 		return 'web.variant';
 	}
 	if (switches.scheduler) {

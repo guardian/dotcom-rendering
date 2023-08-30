@@ -3,7 +3,7 @@ import type { BrowserOptions } from '@sentry/browser';
 import { CaptureConsole } from '@sentry/integrations';
 import {
 	BUILD_VARIANT,
-	dcrJavascriptBundle,
+	isInWebVariantBuild,
 } from '../../../scripts/webpack/bundles';
 
 const allowUrls: BrowserOptions['allowUrls'] = [
@@ -51,11 +51,8 @@ Sentry.init({
 	// sampleRate: // We use Math.random in init.ts to sample errors
 });
 
-if (
-	BUILD_VARIANT &&
-	window.guardian.config.tests[dcrJavascriptBundle('Variant')] === 'variant'
-) {
-	Sentry.setTag('dcr.bundle', dcrJavascriptBundle('Variant'));
+if (BUILD_VARIANT && isInWebVariantBuild(window.guardian.config.tests)) {
+	Sentry.setTag('dcr.bundle', 'web.variant');
 }
 
 export const reportError = (error: Error, feature?: string): void => {

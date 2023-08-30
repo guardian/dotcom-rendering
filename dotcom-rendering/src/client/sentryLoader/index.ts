@@ -1,20 +1,20 @@
 import {
 	BUILD_VARIANT,
-	dcrJavascriptBundle,
+	isInWebVariantBuild,
 } from '../../../scripts/webpack/bundles';
 import { loadSentryOnError, stubSentry } from './loadSentry';
 
 type IsSentryEnabled = {
 	enableSentryReporting: boolean;
 	isDev: boolean;
-	isInBrowserVariantTest: boolean;
+	isInBuildTest: boolean;
 	random: number;
 };
 
 const isSentryEnabled = ({
 	enableSentryReporting,
 	isDev,
-	isInBrowserVariantTest,
+	isInBuildTest,
 	random,
 }: IsSentryEnabled): boolean => {
 	// We don't send errors on the dev server, or if the enableSentryReporting switch is off
@@ -24,7 +24,7 @@ const isSentryEnabled = ({
 	// If the sample size of the variant test is > 1% adjust the sample rates for _both_
 	// the variant and control so they each represent 1% of the overall traffic.
 	// This will allow a like for like comparison in Sentry.
-	if (isInBrowserVariantTest) return true;
+	if (isInBuildTest) return true;
 	// Sentry lets you configure sampleRate to reduce the volume of events sent
 	// but this filter only happens _after_ the library is loaded. The Guardian
 	// measures page views in the billions so we only want to log 1% of errors that
@@ -38,13 +38,12 @@ const isSentryEnabled = ({
 export const sentryLoader = (): Promise<void> => {
 	const { switches, isDev, tests } = window.guardian.config;
 	const enableSentryReporting = !!switches.enableSentryReporting;
-	const isInBrowserVariantTest =
-		BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant';
+	const isInBuildTest = BUILD_VARIANT && isInWebVariantBuild(tests);
 
 	const canLoadSentry = isSentryEnabled({
 		enableSentryReporting,
 		isDev,
-		isInBrowserVariantTest,
+		isInBuildTest,
 		random: Math.random(),
 	});
 	canLoadSentry ? loadSentryOnError() : stubSentry();
