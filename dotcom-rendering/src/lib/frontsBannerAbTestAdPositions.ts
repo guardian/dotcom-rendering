@@ -13,7 +13,7 @@ type FrontsBannerAdSections = {
 	[key: string]: string[];
 };
 
-export const frontsBannerAdSections: FrontsBannerAdSections = {
+export const networkFrontsBannerAdSections: FrontsBannerAdSections = {
 	uk: [
 		'Spotlight',
 		'Opinion',
@@ -48,5 +48,68 @@ export const frontsBannerAdSections: FrontsBannerAdSections = {
 		'Culture',
 		'Around the world',
 		'Take part',
+	],
+};
+
+export const sectionFrontsBannerAdSections: FrontsBannerAdSections = {
+	'uk/sport': [
+		'News and features',
+		// 'football', has football weekly thrasher above atm
+		'Video',
+		'Other sports',
+		'The big picture',
+	],
+	football: [
+		// multiline array
+		'News and features',
+		'Regulars',
+		'Next generation',
+	],
+	'uk/culture': [
+		// multiline array
+		'Best culture for kids',
+		'Reviews',
+		'You may have missed',
+	],
+	'uk/lifeandstyle': [
+		// multiline array
+		'Fashion',
+		'Money',
+		'The big picture',
+	],
+	'uk/commentisfree': [
+		'The Heat or Eat Diaries',
+		"Starmer's path to power",
+		'Spotlight',
+		'This is Europe',
+		'Columnists',
+	],
+	'uk-news': [
+		// multiline array
+		'UK politics',
+		'Education',
+		'Multimedia',
+	],
+	world: [
+		// multiline array
+		'Americas',
+		'Australia',
+		'Middle East',
+		'UK',
+	],
+	'us-news': [
+		// multiline array
+		'Opinion',
+		'Video',
+	],
+	'uk/business': [
+		// multiline array
+		'Opinion & analysis',
+		'Multimedia',
+	],
+	'australia-news': [
+		// multiline array
+		'Australian politics',
+		'Video',
 	],
 };
