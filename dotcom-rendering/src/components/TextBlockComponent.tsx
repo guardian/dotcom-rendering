@@ -301,6 +301,13 @@ const buildElementTree =
 					key,
 					children,
 				});
+			case 'OL':
+				return jsx('ol', {
+					'data-ignore':
+						getAttrs(node)?.getNamedItem('data-ignore')?.value,
+					key,
+					children,
+				});
 			case 'FOOTER':
 			case 'SUB':
 			case 'SUP':
@@ -310,7 +317,6 @@ const buildElementTree =
 			case 'B':
 			case 'EM':
 			case 'UL':
-			case 'OL':
 			case 'LI':
 			case 'MARK':
 			case 'S':
