@@ -1,4 +1,4 @@
-import { isUndefined, startPerformanceMeasure } from '@guardian/libs';
+import { startPerformanceMeasure } from '@guardian/libs';
 
 const START = Date.now();
 
@@ -84,11 +84,13 @@ function getNextTask() {
 
 	for (const priority of PRIORITIES) {
 		const { lastStartTime, tasks } = queue[priority];
-		if (runningTime < lastStartTime) {
-			const nextTask = tasks.shift();
-			if (nextTask?.canRun({ runningTime })) {
-				return nextTask;
-			}
+		const nextTask = tasks.shift();
+		if (
+			nextTask &&
+			runningTime < lastStartTime &&
+			nextTask.canRun({ runningTime })
+		) {
+			return nextTask;
 		}
 	}
 
@@ -107,7 +109,7 @@ function getNextTask() {
  */
 function run() {
 	const nextTask = getNextTask();
-	if (isUndefined(nextTask)) return;
+	if (!nextTask) return;
 
 	RUNNING_TASK_COUNT++;
 
