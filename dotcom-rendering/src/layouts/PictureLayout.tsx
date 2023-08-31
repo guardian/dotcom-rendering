@@ -17,6 +17,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -34,6 +35,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
@@ -42,9 +44,6 @@ import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
-import { getSoleContributor } from '../lib/byline';
-import { ContributorAvatar } from '../components/ContributorAvatar';
-import { ReactNode } from 'react';
 
 const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -158,7 +157,7 @@ const maxWidth = css`
 	}
 `;
 
-const mainMediaWrapper = css`
+const mainMediaWrapper = (displayAvatarUrl: boolean) => css`
 	position: relative;
 	${until.phablet} {
 		margin-left: 20px;
@@ -168,16 +167,17 @@ const mainMediaWrapper = css`
 		margin-left: 10px;
 		margin-right: 10px;
 	}
+	${displayAvatarUrl
+		? css`
+				margin-top: 8px;
+		  `
+		: ``}
 `;
 
 const avatarHeadlineWrapper = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-`;
-
-const minHeightWithAvatar = css`
-	min-height: 259px;
 `;
 
 // If in mobile increase the margin top and margin right deficit
@@ -219,25 +219,14 @@ const avatarPositionStyles = css`
 	}
 `;
 
-const LeftColLines = ({
-	avatarUrl,
-	children,
-}: {
-	avatarUrl: string | undefined;
-	children: ReactNode;
-}) => {
-	if (avatarUrl !== undefined) {
-		return (
-			<div
-				css={css`
-					margin-top: -29px;
-				`}
-			>
-				{children}
-			</div>
-		);
-	} else return <div>{children}</div>;
-};
+const LeftColLines = (displayAvatarUrl: boolean) => css`
+	${displayAvatarUrl
+		? css`
+				margin-top: -29px;
+				margin-bottom: 8px;
+		  `
+		: ''}
+`;
 
 interface Props {
 	article: FEArticleType;
@@ -273,6 +262,8 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 		article.tags,
 		article.byline,
 	)?.bylineLargeImageUrl;
+
+	const displayAvatarUrl = avatarUrl ? true : false;
 
 	return (
 		<>
@@ -427,16 +418,10 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 							<Border format={format} />
 						</GridItem>
 
-						{avatarUrl ? (
+						{displayAvatarUrl ? (
 							<GridItem area="headline">
-								<div css={maxWidth}>
-									<div
-										css={[
-											avatarHeadlineWrapper,
-											avatarUrl && minHeightWithAvatar,
-										]}
-									>
-										{/* TOP - we position content in groups here using flex */}
+								<div css={[avatarHeadlineWrapper, avatarUrl]}>
+									<div css={maxWidth}>
 										<ArticleHeadline
 											format={format}
 											headlineString={article.headline}
@@ -449,29 +434,29 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 												typeof article.starRating ===
 												'number'
 											}
-											hasAvatar={!!avatarUrl}
+											hasAvatar={displayAvatarUrl}
 											renderingTarget={renderingTarget}
 										/>
-										{/* BOTTOM */}
-										<div>
-											{!!avatarUrl && (
-												<div css={avatarPositionStyles}>
-													<ContributorAvatar
-														imageSrc={avatarUrl}
-														imageAlt={
-															article.byline ?? ''
-														}
-													/>
-												</div>
-											)}
-											<StraightLines
-												count={8}
-												cssOverrides={css`
-													display: block;
-												`}
-												color={palette.border.secondary}
-											/>
-										</div>
+									</div>
+
+									<div>
+										{!!avatarUrl && (
+											<div css={avatarPositionStyles}>
+												<ContributorAvatar
+													imageSrc={avatarUrl}
+													imageAlt={
+														article.byline ?? ''
+													}
+												/>
+											</div>
+										)}
+										<StraightLines
+											count={8}
+											cssOverrides={css`
+												display: block;
+											`}
+											color={palette.border.secondary}
+										/>
 									</div>
 								</div>
 							</GridItem>
@@ -495,7 +480,7 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 							</GridItem>
 						)}
 						<GridItem area="media">
-							<div css={mainMediaWrapper}>
+							<div css={mainMediaWrapper(displayAvatarUrl)}>
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
@@ -523,12 +508,15 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 							/>
 						</GridItem>
 						<GridItem area="lines">
-							<LeftColLines avatarUrl={avatarUrl}>
-								<DecideLines
-									format={format}
+							<div css={LeftColLines(displayAvatarUrl)}>
+								<StraightLines
+									count={displayAvatarUrl ? 8 : 4}
+									cssOverrides={css`
+										display: block;
+									`}
 									color={palette.border.secondary}
 								/>
-							</LeftColLines>
+							</div>
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div>
@@ -560,12 +548,9 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="submeta">
 							<ArticleContainer format={format}>
-								<StraightLines
-									count={4}
+								<DecideLines
 									color={palette.border.secondary}
-									cssOverrides={css`
-										display: block;
-									`}
+									format={format}
 								/>
 								<SubMeta
 									format={format}
