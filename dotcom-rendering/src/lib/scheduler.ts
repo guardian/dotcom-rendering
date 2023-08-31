@@ -85,11 +85,7 @@ function getNextTask() {
 	for (const priority of PRIORITIES) {
 		const { lastStartTime, tasks } = queue[priority];
 		const nextTask = tasks.shift();
-		if (
-			nextTask &&
-			runningTime < lastStartTime &&
-			nextTask.canRun({ runningTime })
-		) {
+		if (runningTime <= lastStartTime && nextTask?.canRun({ runningTime })) {
 			return nextTask;
 		}
 	}
