@@ -92,7 +92,7 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 | <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />                                                 | Chromatic is a visual regression testing tool that reviews our Storybook components at PR time.                                                                                                                                                                                                                                                   |
 | <img alt="Cypress" src="./docs/images/logo-cypress.png" width="350" />                                                     | Cypress is an integration testing tool that runs tests in the browser. You will find the Cypress tests in the [cypress folder](./cypress).                                                                                                                                                                                                        |
 | <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />                                                      | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                                        |
-| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                               | The [A/B Testing library](https://github.com/guardian/ab-testing) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                               |
+| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                               | The [A/B Testing library](https://github.com/guardian/csnx/tree/main/libs/@guardian/ab-core) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                               |
 | <img alt="Deno" title="Deno logo, MIT License: https://deno.land/artwork" src="./docs/images/logo-deno.svg" width="350" /> | [Deno](https://deno.land/) is a JavaScript runtime that we've started incorporating into some of our Github Actions workflows. You will only need to install it if you are planning to run the workflow scripts locally. Some installation and troubleshooting instructions can be found in the [Deno scripts folder](../scripts/deno/README.md). |
 
 ### UI Design System
@@ -154,7 +154,7 @@ If you get lint errors, you can attempt to automatically fix them with:
 $ make fix
 ```
 
-See [the makefile](/guardian/dotcom-rendering/blob/main/dotcom-rendering/makefile) for the full list.
+See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/makefile) for the full list.
 
 [Read about testing tools and testing strategy](docs/testing.md).
 
