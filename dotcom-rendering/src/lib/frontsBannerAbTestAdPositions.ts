@@ -9,11 +9,11 @@
  * inserted above it. At the time of this AB test, the setting does not yet exist.
  */
 
-type FrontsBannerAdSections = {
+type FrontsBannerAdCollections = {
 	[key: string]: string[];
 };
 
-export const networkFrontsBannerAdSections: FrontsBannerAdSections = {
+export const networkFrontsBannerAdCollections: FrontsBannerAdCollections = {
 	uk: [
 		'Spotlight',
 		'Opinion',
@@ -51,7 +51,7 @@ export const networkFrontsBannerAdSections: FrontsBannerAdSections = {
 	],
 };
 
-export const sectionFrontsBannerAdSections: FrontsBannerAdSections = {
+export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 	'uk/sport': [
 		'News and features',
 		// 'football', has football weekly thrasher above atm

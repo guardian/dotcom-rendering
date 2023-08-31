@@ -37,8 +37,8 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import {
-	networkFrontsBannerAdSections,
-	sectionFrontsBannerAdSections,
+	networkFrontsBannerAdCollections,
+	sectionFrontsBannerAdCollections,
 } from '../lib/frontsBannerAbTestAdPositions';
 import {
 	getDesktopAdPositions,
@@ -128,14 +128,14 @@ export const decideAdSlot = (
 export const decideFrontsBannerAdSlot = (
 	renderAds: boolean,
 	hasPageSkin: boolean,
-	targetedFrontSections: string[] | undefined,
+	targetedCollections: string[] | undefined,
 	collectionName: string,
 	numBannerAdsInserted: React.MutableRefObject<number>,
 	isFirstContainer: boolean,
 ) => {
 	if (
 		!renderAds ||
-		!targetedFrontSections?.includes(collectionName) ||
+		!targetedCollections?.includes(collectionName) ||
 		isFirstContainer
 	) {
 		return null;
@@ -207,7 +207,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const isInNetworkFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
 		abTests.frontsBannerAdsDcrVariant === 'variant' &&
-		Object.keys(networkFrontsBannerAdSections).includes(
+		Object.keys(networkFrontsBannerAdCollections).includes(
 			front.config.pageId,
 		);
 
@@ -215,14 +215,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		!!switches.frontsBannerAdsDcr &&
 		true &&
 		// abTests.sectionBannerAdsVariant === 'variant' &&
-		Object.keys(sectionFrontsBannerAdSections).includes(
+		Object.keys(sectionFrontsBannerAdCollections).includes(
 			front.config.pageId,
 		);
 
-	const frontsBannerTargetedSections = isInNetworkFrontsBannerTest
-		? networkFrontsBannerAdSections[front.config.pageId]
+	const frontsBannerTargetedCollections = isInNetworkFrontsBannerTest
+		? networkFrontsBannerAdCollections[front.config.pageId]
 		: isInSectionFrontsBannerTest
-		? sectionFrontsBannerAdSections[front.config.pageId]
+		? sectionFrontsBannerAdCollections[front.config.pageId]
 		: [];
 
 	const merchHighPosition = getMerchHighPosition(
@@ -440,7 +440,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									{decideFrontsBannerAdSlot(
 										renderAds,
 										hasPageSkin,
-										frontsBannerTargetedSections,
+										frontsBannerTargetedCollections,
 										collection.displayName,
 										numBannerAdsInserted,
 										isFirstContainer,
@@ -501,7 +501,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
-									frontsBannerTargetedSections,
+									frontsBannerTargetedCollections,
 									collection.displayName,
 									numBannerAdsInserted,
 									isFirstContainer,
@@ -635,7 +635,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
-									frontsBannerTargetedSections,
+									frontsBannerTargetedCollections,
 									collection.displayName,
 									numBannerAdsInserted,
 									isFirstContainer,
@@ -707,7 +707,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
-								frontsBannerTargetedSections,
+								frontsBannerTargetedCollections,
 								collection.displayName,
 								numBannerAdsInserted,
 								isFirstContainer,
