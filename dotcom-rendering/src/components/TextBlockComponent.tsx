@@ -227,9 +227,8 @@ const getAttributes = (node: Node): Attributes => {
 	if (!namedNodeMap) {
 		return {};
 	}
-	const attrs = Array.prototype.slice.call(namedNodeMap) as Attr[];
 	const attributes = Object.fromEntries(
-		attrs.map((attr) => [attr.name, attr.value]),
+		Array.from(namedNodeMap, (attr) => [attr.name, attr.value]),
 	);
 	return attributes;
 };
@@ -325,13 +324,12 @@ const buildElementTree =
 					key,
 					children,
 				});
-			case 'OL': {
+			case 'OL':
 				return jsx('ol', {
 					...attributes,
 					key,
 					children,
 				});
-			}
 			case 'FOOTER':
 			case 'SUB':
 			case 'SUP':
