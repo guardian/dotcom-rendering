@@ -28,11 +28,28 @@ export const SignInGateMain = ({
 	ophanComponentId,
 	isMandatory = false,
 }: SignInGateProps) => {
+	const getCopyTextFromVariant: (abVariant: string | undefined) => string = (
+		abVariant,
+	) => {
+		switch (abVariant) {
+			case 'quick-and-easy': {
+				return 'Register: it’s quick and easy';
+			}
+			case 'take-a-moment': {
+				return 'Take a moment to register';
+			}
+			default: {
+				return 'You need to register to keep reading';
+			}
+		}
+	};
 	return (
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
-			<h1 css={headingStyles}>You need to register to keep reading</h1>
+			<h1 css={headingStyles}>
+				{getCopyTextFromVariant(abTest?.variant)}
+			</h1>
 			<p css={bodyBold}>
 				It’s still free to read – this is not a paywall
 			</p>

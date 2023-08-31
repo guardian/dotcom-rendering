@@ -6,7 +6,6 @@ import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main
 // Sign in Gate Types
 import { signInGateComponent as gateMainControl } from './gates/main-control';
 import { signInGateComponent as gateMainVariant } from './gates/main-variant';
-import { signInGateCopyTestJan2023Component } from './gates/sign-in-gate-copy-test-jan2023';
 import type { SignInGateTestMap } from './types';
 
 /* When adding a new test, you need to add the test name to the tests array below,
@@ -23,8 +22,8 @@ export const signInGateTests: ReadonlyArray<ABTest> = [
 export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 	'main-control-4': gateMainControl,
 	'main-variant-4': gateMainVariant,
-	'quick-and-easy': signInGateCopyTestJan2023Component,
-	'take-a-moment': signInGateCopyTestJan2023Component,
+	'quick-and-easy': gateMainVariant,
+	'take-a-moment': gateMainVariant,
 	'sign-in-copy-control': gateMainVariant,
 };
 

@@ -104,8 +104,20 @@ describe('Sign In Gate Tests', function () {
 			visitArticleAndScrollToGateForLazyLoad();
 
 			cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+			cy.get('[data-cy=sign-in-gate-main]').contains(
+				'Register: it’s quick and easy',
+			);
 		});
 
+		it('should load the sign in gate with alternative copy based on MVT cookie', function () {
+			setMvtCookie('500001');
+			visitArticleAndScrollToGateForLazyLoad();
+
+			cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+			cy.get('[data-cy=sign-in-gate-main]').contains(
+				'Take a moment to register',
+			);
+		});
 		it('should not load the sign in gate if the user has not read at least 3 article in a day', function () {
 			setArticleCount(1);
 
@@ -132,8 +144,8 @@ describe('Sign In Gate Tests', function () {
 				'gu.prefs.sign-in-gate',
 				`{
                     "value": {
-                        "SignInGateMain-main-variant-4": "2020-07-22T08:25:05.567Z",
-                        "gate-dismissed-count-SignInGateMain-main-variant-4": 6
+                        "SignInGateMain-quick-and-easy": "2020-07-22T08:25:05.567Z",
+                        "gate-dismissed-count-SignInGateMain-quick-and-easy": 6
                     }
                 }`,
 			);
@@ -226,7 +238,7 @@ describe('Sign In Gate Tests', function () {
 
 				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 				cy.get('[data-cy=sign-in-gate-main]').contains(
-					'You need to register to keep reading',
+					'Register: it’s quick and easy',
 				);
 				cy.get('[data-cy=sign-in-gate-main]').contains(
 					'It’s still free to read – this is not a paywall',
@@ -250,7 +262,7 @@ describe('Sign In Gate Tests', function () {
 
 				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 				cy.get('[data-cy=sign-in-gate-main]').contains(
-					'You need to register to keep reading',
+					'Register: it’s quick and easy',
 				);
 				cy.get('[data-cy=sign-in-gate-main_register]')
 					.should('have.attr', 'href')
@@ -485,7 +497,7 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You need to register to keep reading',
+						'Register: it’s quick and easy',
 					);
 					cy.get('[data-cy=sign-in-gate-main_register]')
 						.should('have.attr', 'href')
