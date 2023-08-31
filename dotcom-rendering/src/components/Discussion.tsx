@@ -75,7 +75,7 @@ export const Discussion = ({
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
 	const [commentOrderBy, setCommentOrderBy] = useState<
 		'newest' | 'oldest' | 'recommendations'
-	>();
+	>('recommendations');
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
 		commentIdFromUrl(),
