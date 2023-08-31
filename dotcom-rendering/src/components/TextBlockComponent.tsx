@@ -24,6 +24,10 @@ type Props = {
 	forceDropCap?: boolean;
 };
 
+type Attributes = {
+	[key: string]: any;
+};
+
 const isLetter = (letter: string) => {
 	return letter.toLowerCase() !== letter.toUpperCase();
 };
@@ -218,36 +222,47 @@ const styles = (format: ArticleFormat) => css`
 	}
 `;
 
+const getAttributes = (node: Node): Attributes => {
+	const namedNodeMap = getAttrs(node);
+	if (!namedNodeMap) {
+		return {};
+	}
+	const attrs = Array.prototype.slice.call(namedNodeMap) as Attr[];
+	const attributes = Object.fromEntries(
+		attrs.map((attr) => [attr.name, attr.value]),
+	);
+	return attributes;
+};
+
 const buildElementTree =
 	(html: string, format: ArticleFormat, showDropCaps: boolean) =>
 	(node: Node, key: number): ReactNode => {
 		const children = Array.from(node.childNodes).map(
 			buildElementTree(html, format, showDropCaps),
 		);
-
+		const attributes = getAttributes(node);
 		switch (node.nodeName) {
-			case 'P': {
-				return jsx('p', { css: styles(format), children });
-			}
+			case 'P':
+				return jsx('p', {
+					...attributes,
+					css: styles(format),
+					children,
+				});
 			case 'BLOCKQUOTE':
 				return jsx('blockquote', {
+					...attributes,
 					key,
 					children,
 				});
 			case 'A':
 				return jsx('a', {
-					href: getAttrs(node)?.getNamedItem('href')?.value,
-					target: getAttrs(node)?.getNamedItem('target')?.value,
-					'data-link-name':
-						getAttrs(node)?.getNamedItem('data-link-name')?.value,
-					'data-component':
-						getAttrs(node)?.getNamedItem('data-component')?.value,
-					rel: getAttrs(node)?.getNamedItem('rel')?.value,
+					...attributes,
 					key,
 					children,
 				});
 			case 'STRONG':
 				return jsx('strong', {
+					...attributes,
 					key,
 					children,
 				});
@@ -274,10 +289,13 @@ const buildElementTree =
 							</>
 						);
 					}
-
 					return node.textContent;
 				}
-				return jsx('p', { css: styles(format), children });
+				return jsx('p', {
+					...attributes,
+					css: styles(format),
+					children,
+				});
 			}
 			case 'SPAN':
 				if (
@@ -290,24 +308,30 @@ const buildElementTree =
 						children,
 					});
 				}
-				return jsx('p', { css: styles(format), children });
+				return jsx('p', {
+					...attributes,
+					css: styles(format),
+					children,
+				});
 			case 'BR':
 				return jsx('br', {
+					...attributes,
 					key,
 				});
 			case 'STRIKE':
 				return jsx('s', {
+					...attributes,
 					css: styles(format),
 					key,
 					children,
 				});
-			case 'OL':
+			case 'OL': {
 				return jsx('ol', {
-					'data-ignore':
-						getAttrs(node)?.getNamedItem('data-ignore')?.value,
+					...attributes,
 					key,
 					children,
 				});
+			}
 			case 'FOOTER':
 			case 'SUB':
 			case 'SUP':
@@ -325,6 +349,7 @@ const buildElementTree =
 			case 'U':
 			case 'DEL':
 				return jsx(node.nodeName.toLowerCase(), {
+					...attributes,
 					css: styles(format),
 					key,
 					children,
