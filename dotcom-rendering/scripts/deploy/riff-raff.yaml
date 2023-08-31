@@ -23,6 +23,12 @@ deployments:
     type: aws-s3
     parameters:
       bucketSsmKey: /account/services/dotcom-static.bucket
-      cacheControl: public, max-age=315360000, immutable
+      cacheControl:
+        - pattern: \/stats\/ # stats file can change on each deploy
+          value: max-age=3600 # one hour in seconds
+          # assume all other assets are hashed and never change,
+          # even though this is not the case–e.g. icons
+        - pattern: .*
+          value: public, max-age=315360000, immutable # one year in seconds
       prefixStack: false
       publicReadAcl: false

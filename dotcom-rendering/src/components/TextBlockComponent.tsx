@@ -260,7 +260,11 @@ const buildElementTree =
 						dropCappedSentence &&
 						node.textContent.startsWith(
 							stripHtmlFromString(html).slice(0, 10),
-						)
+						) &&
+						// The node is at the root of the document avoiding nodes like <a>
+						// tags embedded in <p> tags dropping their cap
+						node.parentNode?.parentNode?.nodeName ===
+							'#document-fragment'
 					) {
 						const { dropCap, restOfSentence } = dropCappedSentence;
 						return (
@@ -297,6 +301,13 @@ const buildElementTree =
 					key,
 					children,
 				});
+			case 'OL':
+				return jsx('ol', {
+					'data-ignore':
+						getAttrs(node)?.getNamedItem('data-ignore')?.value,
+					key,
+					children,
+				});
 			case 'FOOTER':
 			case 'SUB':
 			case 'SUP':
@@ -306,7 +317,6 @@ const buildElementTree =
 			case 'B':
 			case 'EM':
 			case 'UL':
-			case 'OL':
 			case 'LI':
 			case 'MARK':
 			case 'S':
