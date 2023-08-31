@@ -77,7 +77,6 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
-
 		...(DEV
 			? // DEV plugins
 			  [
