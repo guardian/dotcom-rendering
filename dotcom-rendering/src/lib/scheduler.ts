@@ -67,10 +67,10 @@ const queue: Record<
 };
 
 /**
- * Checks whether its ok to start running another task.
+ * Checks whether there's spare task-running capacity.
  */
-function canRunAnotherTask() {
-	return RUNNING_TASK_COUNT < CONCURRENCY_COUNT;
+function atConcurrencyLimit() {
+	return RUNNING_TASK_COUNT === CONCURRENCY_COUNT;
 }
 
 /**
@@ -78,21 +78,23 @@ function canRunAnotherTask() {
  * scheduled.
  */
 function getNextTask() {
-	if (canRunAnotherTask()) {
-		const runningTime = Date.now() - START;
+	if (atConcurrencyLimit()) return undefined;
 
-		for (const priority of PRIORITIES) {
-			const { lastStartTime, tasks } = queue[priority];
-			const nextTask = tasks.shift();
-			if (
-				nextTask &&
-				runningTime < lastStartTime &&
-				nextTask.canRun({ runningTime })
-			) {
-				return nextTask;
-			}
+	const runningTime = Date.now() - START;
+
+	for (const priority of PRIORITIES) {
+		const { lastStartTime, tasks } = queue[priority];
+		const nextTask = tasks.shift();
+		if (
+			nextTask &&
+			runningTime < lastStartTime &&
+			nextTask.canRun({ runningTime })
+		) {
+			return nextTask;
 		}
 	}
+
+	// found no suitable tasks, so return undefined
 	return undefined;
 }
 
