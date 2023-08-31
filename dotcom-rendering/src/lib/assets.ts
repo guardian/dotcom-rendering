@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
 import {
+	adaptive,
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../scripts/webpack/bundles';
@@ -145,7 +146,7 @@ export const getModulesBuild = ({
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
 		return 'web.variant';
 	}
-	if (switches.scheduler) {
+	if (switches.scheduler || tests[adaptive('Variant')] === 'variant') {
 		return 'web.scheduled';
 	}
 	return 'web';

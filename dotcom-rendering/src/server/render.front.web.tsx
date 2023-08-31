@@ -69,7 +69,9 @@ const extractFrontNav = (front: DCRFrontType): NavType => {
 	};
 };
 
-export const renderFront = ({ front }: Props): string => {
+export const renderFront = ({
+	front,
+}: Props): { html: string; clientScripts: string[] } => {
 	const title = front.webTitle;
 	const NAV = extractFrontNav(front);
 
@@ -93,19 +95,17 @@ export const renderFront = ({ front }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const scriptTags = generateScriptTags(
-		[
-			polyfillIO,
-			getPathFromManifest(build, 'frameworks.js'),
-			getPathFromManifest(build, 'index.js'),
-			getPathFromManifest('web.legacy', 'frameworks.js'),
-			getPathFromManifest('web.legacy', 'index.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				front.config.commercialBundleUrl,
-		]
-			.filter(isString)
-			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
+	const clientScripts = [
+		polyfillIO,
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
+		getPathFromManifest('web.legacy', 'frameworks.js'),
+		getPathFromManifest('web.legacy', 'index.js'),
+		process.env.COMMERCIAL_BUNDLE_URL ?? front.config.commercialBundleUrl,
+	]
+		.filter(isString)
+		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	const scriptTags = generateScriptTags(clientScripts);
 
 	const guardian = createGuardian({
 		editionId: front.editionId,
@@ -130,7 +130,7 @@ export const renderFront = ({ front }: Props): string => {
 
 	const keywords = front.config.keywords;
 
-	return htmlPageTemplate({
+	const pageHtml = htmlPageTemplate({
 		scriptTags,
 		css: extractedCss,
 		html,
@@ -143,13 +143,18 @@ export const renderFront = ({ front }: Props): string => {
 		hasPageSkin: front.config.hasPageSkin,
 		weAreHiring: !!front.config.switches.weAreHiring,
 	});
+
+	return {
+		html: pageHtml,
+		clientScripts,
+	};
 };
 
 export const renderTagFront = ({
 	tagFront,
 }: {
 	tagFront: DCRTagFrontType;
-}): string => {
+}): { html: string; clientScripts: string[] } => {
 	const title = tagFront.webTitle;
 	const NAV = extractNAV(tagFront.nav);
 
@@ -173,19 +178,18 @@ export const renderTagFront = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const scriptTags = generateScriptTags(
-		[
-			polyfillIO,
-			getPathFromManifest(build, 'frameworks.js'),
-			getPathFromManifest(build, 'index.js'),
-			getPathFromManifest('web.legacy', 'frameworks.js'),
-			getPathFromManifest('web.legacy', 'index.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				tagFront.config.commercialBundleUrl,
-		]
-			.filter(isString)
-			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
+	const clientScripts = [
+		polyfillIO,
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
+		getPathFromManifest('web.legacy', 'frameworks.js'),
+		getPathFromManifest('web.legacy', 'index.js'),
+		process.env.COMMERCIAL_BUNDLE_URL ??
+			tagFront.config.commercialBundleUrl,
+	]
+		.filter(isString)
+		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	const scriptTags = generateScriptTags(clientScripts);
 
 	const guardian = createGuardian({
 		editionId: tagFront.editionId,
@@ -210,7 +214,7 @@ export const renderTagFront = ({
 
 	const keywords = tagFront.config.keywords;
 
-	return htmlPageTemplate({
+	const pageHtml = htmlPageTemplate({
 		scriptTags,
 		css: extractedCss,
 		html,
@@ -222,4 +226,8 @@ export const renderTagFront = ({
 		renderingTarget: 'Web',
 		weAreHiring: !!tagFront.config.switches.weAreHiring,
 	});
+	return {
+		html: pageHtml,
+		clientScripts,
+	};
 };

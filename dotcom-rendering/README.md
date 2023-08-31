@@ -92,12 +92,12 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 | <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />                                                 | Chromatic is a visual regression testing tool that reviews our Storybook components at PR time.                                                                                                                                                                                                                                                   |
 | <img alt="Cypress" src="./docs/images/logo-cypress.png" width="350" />                                                     | Cypress is an integration testing tool that runs tests in the browser. You will find the Cypress tests in the [cypress folder](./cypress).                                                                                                                                                                                                        |
 | <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />                                                      | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                                        |
-| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                               | The [A/B Testing library](https://github.com/guardian/ab-testing) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                               |
+| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                               | The [A/B Testing library](https://github.com/guardian/csnx/tree/main/libs/@guardian/ab-core) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                               |
 | <img alt="Deno" title="Deno logo, MIT License: https://deno.land/artwork" src="./docs/images/logo-deno.svg" width="350" /> | [Deno](https://deno.land/) is a JavaScript runtime that we've started incorporating into some of our Github Actions workflows. You will only need to install it if you are planning to run the workflow scripts locally. Some installation and troubleshooting instructions can be found in the [Deno scripts folder](../scripts/deno/README.md). |
 
 ### UI Design System
 
-[Source](https://theguardian.design) is the Guardian's design system. For detailed and up-to-date information on how to use it, see the [Source developer guide](https://guardian.github.io/source).
+[Source](https://theguardian.design) is the Guardian's design system. For detailed and up-to-date information on how to use it, see the [Source guide](https://github.com/guardian/csnx/blob/main/docs/source/README.md).
 
 For a high-level overview of some of the key ideas behind the design of the Dotcom website, see [design.theguardian.com](https://design.theguardian.com/).
 This resource was made in 2018 and is not maintained so it <strong>should not be taken as authoritative</strong> on details, but most of it still applies and it gives a very quick and visual overview. It also provides an explanation of some journalism- or Guardian-specific terms that you might see in the codebase, like 'kicker' and 'standfirst'.
@@ -108,23 +108,21 @@ There are some concepts to learn, that will make working with Dotcom Rendering c
 
 -   Design and Display Types use the [Switch Pattern](docs/patterns/switch-on-display-design.md)
 -   [DecideLayout](docs/patterns/decide-layout.md)
--   [Prop Drilling](https://kentcdodds.com/blog/prop-drilling/) (and [why we don't use React Context](docs/architecture/018-react-context-api.md))
+-   [Prop Drilling](https://kentcdodds.com/blog/prop-drilling/) (and [why we don't use React Context](docs/architecture/016-react-context-api.md))
 -   Dynamic imports
 -   [EnhanceCAPI](docs/patterns/enhance-capi.md)
 -   Data generated in Frontend
 
 ### Visual Debugging
 
-DCR provides a visual debuging tool through a bookmarklet which you can find out more about in the [debug tool docs](./src/web/browser/debug/README.md).
+DCR provides a visual debugging tool through a bookmarklet which you can find out more about in the [debug tool docs](./src/client/debug/README.md).
 
 ### Feedback
 
 After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup
 questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSdwFc05qejwW_Gtl3pyW4N22KqmY5zXoDKAUAjrkOwb2uXNcQ/viewform?vc=0&c=0&w=1). It should only take 3 minutes and will help us improve this documentation and the setup process in the future. Thank you! 🙏
 
-## Where can I see Dotcom Rendering in Production?
-
-As of April 2021, most articles are rendered with Dotcom Rendering.
+## Dotcom Rendering now renders most articles and fronts in Production
 
 You can force DCR on or off explicitly with
 [`?dcr=true` or `?dcr=false`](https://github.com/guardian/frontend/pull/21753).
@@ -156,7 +154,7 @@ If you get lint errors, you can attempt to automatically fix them with:
 $ make fix
 ```
 
-See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/makefile) for the full list.
+See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/makefile) for the full list.
 
 [Read about testing tools and testing strategy](docs/testing.md).
 

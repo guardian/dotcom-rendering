@@ -389,8 +389,6 @@ const summaryStyles = css`
 `;
 
 /**
- * # Send a Message Component
- *
  * A callout for readers to get in touch with a liveblogger directly.
  *
  * ## Why does this need to be an Island?

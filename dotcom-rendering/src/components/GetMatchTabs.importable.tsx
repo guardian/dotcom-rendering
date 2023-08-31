@@ -9,6 +9,15 @@ type Props = {
 
 const Loading = () => <Placeholder height={40} />;
 
+/**
+ * ## Why does this need to be an Island?
+ *
+ * Data is fetched from an API on the client-side.
+ *
+ * ---
+ *
+ * (No visual story exists)
+ */
 export const GetMatchTabs = ({ matchUrl, format }: Props) => {
 	const { data, error, loading } = useApi<{
 		reportUrl?: string;

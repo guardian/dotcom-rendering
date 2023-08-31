@@ -178,8 +178,6 @@ const sendTracking = (
 };
 
 /**
- * # Secure Signup iFrame
- *
  * A descendent of `EmailSignup` used to prevent users from entering their email
  * on the same page as the one we run third-party scripts on.
  *

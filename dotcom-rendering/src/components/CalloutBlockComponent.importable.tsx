@@ -11,8 +11,6 @@ const collapsibleCalloutStyle = css`
 `;
 
 /**
- * # Callout Block Component
- *
  * A callout to readers to share their stories.
  * This is the updated version of the CalloutEmbedBlockComponent.
  *

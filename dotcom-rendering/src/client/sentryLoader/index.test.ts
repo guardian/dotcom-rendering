@@ -10,7 +10,6 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: false,
 				isInBrowserVariantTest: true,
-				isInOktaVariantTest: false,
 				random: 99 / 100,
 			}),
 		).toEqual(false);
@@ -21,7 +20,6 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: true,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: true,
-				isInOktaVariantTest: true,
 				random: 1 / 100,
 			}),
 		).toEqual(false);
@@ -32,18 +30,6 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: true,
-				isInOktaVariantTest: false,
-				random: 1 / 100,
-			}),
-		).toEqual(true);
-	});
-	it('does enable Sentry when the user is in the Okta variant test', () => {
-		expect(
-			isSentryEnabled({
-				isDev: false,
-				enableSentryReporting: true,
-				isInBrowserVariantTest: false,
-				isInOktaVariantTest: true,
 				random: 1 / 100,
 			}),
 		).toEqual(true);
@@ -54,7 +40,6 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
-				isInOktaVariantTest: false,
 				random: 1 / 100,
 			}),
 		).toEqual(false);
@@ -63,7 +48,6 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
-				isInOktaVariantTest: false,
 				random: 99 / 100,
 			}),
 		).toEqual(false);
@@ -72,7 +56,6 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
-				isInOktaVariantTest: false,
 				random: 99.0001 / 100,
 			}),
 		).toEqual(true);
@@ -81,7 +64,6 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
-				isInOktaVariantTest: false,
 				random: 100 / 100,
 			}),
 		).toEqual(true);

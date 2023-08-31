@@ -21,9 +21,13 @@ const BUILD_VARIANT = true;
  *
  * @type {(variant: 'Variant' | 'Control') => import("../../src/types/config").ServerSideTestNames}
  */
-const dcrJavascriptBundle = (variant) => `adaptiveSite${variant}`;
+const dcrJavascriptBundle = (variant) => `dcrJavascriptBundle${variant}`;
+
+/** @type {(variant: 'Variant' | 'Control') => import("../../src/types/config").ServerSideTestNames} */
+const adaptive = (variant) => `adaptiveSite${variant}`;
 
 module.exports = {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
+	adaptive,
 };
