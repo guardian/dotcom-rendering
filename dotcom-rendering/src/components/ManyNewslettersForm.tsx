@@ -23,7 +23,7 @@ interface FormProps {
 const CARD_CONTAINER_WIDTH = 240;
 const CARD_CONTAINER_PADDING = 10;
 
-export const formFrameStyle = css`
+const formFrameStyle = css`
 	border: ${palette.brand[400]} 2px dashed;
 	border-radius: 12px;
 	padding: ${space[2]}px;
@@ -39,7 +39,7 @@ export const formFrameStyle = css`
 	}
 `;
 
-export const formFieldsStyle = css`
+const formFieldsStyle = css`
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
@@ -53,7 +53,7 @@ export const formFieldsStyle = css`
 	}
 `;
 
-export const inputWrapperStyle = css`
+const inputWrapperStyle = css`
 	margin-bottom: ${space[2]}px;
 	${from.desktop} {
 		margin-bottom: 0;
@@ -62,10 +62,10 @@ export const inputWrapperStyle = css`
 	}
 `;
 
-export const formAsideStyle = (hideOnMobile: boolean) => css`
+const formAsideStyle = (hideOnMobile: boolean) => css`
 	overflow: hidden;
-	transition: max-height 1s;
-	max-height: 200px;
+	transition: max-height 1.5s linear;
+	max-height: 300px;
 
 	${hideOnMobile &&
 	css`
@@ -80,7 +80,7 @@ export const formAsideStyle = (hideOnMobile: boolean) => css`
 	}
 `;
 
-export const signUpButtonStyle = css`
+const signUpButtonStyle = css`
 	justify-content: center;
 	background-color: ${palette.neutral[0]};
 	border-color: ${palette.neutral[0]};
@@ -95,7 +95,7 @@ export const signUpButtonStyle = css`
 	}
 `;
 
-export const successMessageStyle = css`
+const successMessageStyle = css`
 	${headlineObjectStyles.xsmall({
 		lineHeight: 'tight',
 		fontWeight: 'bold',
