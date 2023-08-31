@@ -97,7 +97,7 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 
 ### UI Design System
 
-[Source](https://theguardian.design) is the Guardian's design system. For detailed and up-to-date information on how to use it, see the [Source developer guide](https://guardian.github.io/source).
+[Source](https://theguardian.design) is the Guardian's design system. For detailed and up-to-date information on how to use it, see the [Source guide](https://github.com/guardian/csnx/blob/main/docs/source/README.md).
 
 For a high-level overview of some of the key ideas behind the design of the Dotcom website, see [design.theguardian.com](https://design.theguardian.com/).
 This resource was made in 2018 and is not maintained so it <strong>should not be taken as authoritative</strong> on details, but most of it still applies and it gives a very quick and visual overview. It also provides an explanation of some journalism- or Guardian-specific terms that you might see in the codebase, like 'kicker' and 'standfirst'.
@@ -115,16 +115,14 @@ There are some concepts to learn, that will make working with Dotcom Rendering c
 
 ### Visual Debugging
 
-DCR provides a visual debuging tool through a bookmarklet which you can find out more about in the [debug tool docs](./src/web/browser/debug/README.md).
+DCR provides a visual debugging tool through a bookmarklet which you can find out more about in the [debug tool docs](./src/client/debug/README.md).
 
 ### Feedback
 
 After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup
 questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSdwFc05qejwW_Gtl3pyW4N22KqmY5zXoDKAUAjrkOwb2uXNcQ/viewform?vc=0&c=0&w=1). It should only take 3 minutes and will help us improve this documentation and the setup process in the future. Thank you! 🙏
 
-## Where can I see Dotcom Rendering in Production?
-
-As of April 2021, most articles are rendered with Dotcom Rendering.
+## Dotcom Rendering now renders most articles and fronts in Production
 
 You can force DCR on or off explicitly with
 [`?dcr=true` or `?dcr=false`](https://github.com/guardian/frontend/pull/21753).
@@ -156,7 +154,7 @@ If you get lint errors, you can attempt to automatically fix them with:
 $ make fix
 ```
 
-See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/makefile) for the full list.
+See [the makefile](/guardian/dotcom-rendering/blob/main/dotcom-rendering/makefile) for the full list.
 
 [Read about testing tools and testing strategy](docs/testing.md).
 
