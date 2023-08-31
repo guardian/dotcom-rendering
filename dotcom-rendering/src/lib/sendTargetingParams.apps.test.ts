@@ -1,4 +1,4 @@
-import { getTargetingParams } from './sendTargetingParams';
+import { getTargetingParams } from './sendTargetingParams.apps';
 
 describe('getTargetingParams', () => {
 	it('extracts ad targeting params from editionCommercialProperties in the format Bridget consumes', () => {
