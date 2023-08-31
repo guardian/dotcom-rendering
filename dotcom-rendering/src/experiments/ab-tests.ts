@@ -7,7 +7,6 @@ import { integrateIma } from './tests/integrate-ima';
 import { limitInlineMerch } from './tests/limit-inline-merch';
 import { liveblogRightColumnAds } from './tests/liveblog-right-column-ads';
 import { publicGoodTest } from './tests/public-good';
-import { signInGateCopyTestJan2023 } from './tests/sign-in-gate-copy-test-variants';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 
@@ -17,7 +16,6 @@ export const tests: ABTest[] = [
 	abTestTest,
 	signInGateMainVariant,
 	signInGateMainControl,
-	signInGateCopyTestJan2023,
 	consentlessAds,
 	integrateIma,
 	billboardsInMerchHigh,

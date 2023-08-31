@@ -1,6 +1,5 @@
 import type { ABTest } from '@guardian/ab-core';
 // Sign in Gate A/B Tests
-import { signInGateCopyTestJan2023 } from '../../experiments/tests/sign-in-gate-copy-test-variants';
 import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant';
 // Sign in Gate Types
@@ -16,7 +15,6 @@ import type { SignInGateTestMap } from './types';
 export const signInGateTests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
 	signInGateMainControl,
-	signInGateCopyTestJan2023,
 ];
 
 export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
@@ -32,5 +30,4 @@ export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 export const signInGateTestIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_4',
 	SignInGateMainControl: 'main_control_4',
-	SignInGateCopyTestJan2023: 'sign_in_gate_copy_test_jan2023',
 };
