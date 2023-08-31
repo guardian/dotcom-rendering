@@ -65,7 +65,7 @@ export const SecureSignup = ({
 	name,
 }: Props) => {
 	const { html, styles } = generateForm(newsletterId);
-
+	console.log('secure signup');
 	return (
 		<>
 			<Island

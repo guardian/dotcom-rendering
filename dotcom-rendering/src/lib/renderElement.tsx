@@ -22,8 +22,8 @@ import { EmailSignup } from '../components/EmailSignup';
 import { EmailSignupWrapper } from '../components/EmailSignupWrapper.importable';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
-import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
+import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
@@ -42,6 +42,7 @@ import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable'
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
+import { SecureSignup } from '../components/SecureSignup';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
 import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent';
@@ -488,7 +489,13 @@ export const renderElement = ({
 							element.newsletter.successDescription
 						}
 						theme={element.newsletter.theme}
-					/>
+					>
+						<SecureSignup
+							name={element.newsletter.name}
+							newsletterId={element.newsletter.identityName}
+							successDescription={element.newsletter.description}
+						/>
+					</EmailSignup>
 				</InlineSkipToWrapper>
 			);
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
