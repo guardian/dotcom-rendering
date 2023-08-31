@@ -12,6 +12,7 @@ import { Lazy } from '../src/components/Lazy';
 import { Picture } from '../src/components/Picture';
 import { mockRESTCalls } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
+import { RenderingContextDecorator } from './decorators/renderingContextDecorator';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -139,6 +140,7 @@ const guardianViewports = {
 /** @type {import('@storybook/react').Preview} */
 export default {
 	decorators: [
+		RenderingContextDecorator,
 		(Story) => {
 			storage.local.clear();
 			return Story();

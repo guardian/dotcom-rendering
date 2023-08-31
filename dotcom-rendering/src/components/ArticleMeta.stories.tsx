@@ -90,6 +90,32 @@ export const ArticleStory = () => {
 	);
 };
 
+export const ArticleAppsStory = () => {
+	return (
+		<Wrapper>
+			<ArticleMeta
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				}}
+				pageId=""
+				webTitle=""
+				byline="Lanre Bakare"
+				tags={tagsWithLargeBylineImage}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
+			/>
+		</Wrapper>
+	);
+};
+ArticleAppsStory.args = { renderingContext: { target: 'Apps' } };
+
 export const BrandingStory = () => {
 	return (
 		<Wrapper>

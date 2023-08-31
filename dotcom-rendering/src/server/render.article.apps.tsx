@@ -1,11 +1,12 @@
 import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
-import { RenderingTargetContext } from '../components/RenderingTarget';
+import { RenderingContext } from '../components/RenderingContext';
 import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { createGuardian } from '../model/guardian';
 import type { FEArticleType } from '../types/frontend';
+import type { RenderingContextType } from '../types/renderingContext';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 export const renderArticle = (
@@ -16,14 +17,16 @@ export const renderArticle = (
 } => {
 	const format: ArticleFormat = decideFormat(article.format);
 
+	const renderingContext: RenderingContextType = { target: 'Apps' };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<RenderingTargetContext.Provider value="Apps">
+		<RenderingContext.Provider value={renderingContext}>
 			<ArticlePage
 				format={format}
 				article={article}
 				renderingTarget="Apps"
 			/>
-		</RenderingTargetContext.Provider>,
+		</RenderingContext.Provider>,
 	);
 
 	const clientScripts = [getPathFromManifest('apps', 'index.js')];
