@@ -160,6 +160,7 @@
 		"browserslist": "4.21.9",
 		"buffer": "6.0.3",
 		"chalk": "4.1.2",
+		"compare-versions": "6.1.0",
 		"compression": "1.7.4",
 		"constructs": "10.2.69",
 		"cpy": "10.1.0",

@@ -1,16 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getEnvironmentClient } from './bridgetApi';
-
-const isCorrectBridgetVersion = (
-	version: string,
-	requiredVersion: number,
-): boolean => {
-	const majorVersion = parseInt(version);
-	return majorVersion >= requiredVersion;
-};
+import { compare } from 'compare-versions';
 
 export const useIsBridgetCompatible = (
-	requiredVersion = 2,
+	requiredVersion = '2.0.0',
 ): boolean | undefined => {
 	const [isCompatible, setIsCompatible] = useState<boolean | undefined>(
 		undefined,
@@ -20,9 +13,7 @@ export const useIsBridgetCompatible = (
 		void getEnvironmentClient()
 			.nativeThriftPackageVersion()
 			.then((bridgetVersion) => {
-				setIsCompatible(
-					isCorrectBridgetVersion(bridgetVersion, requiredVersion),
-				);
+				setIsCompatible(compare(bridgetVersion, requiredVersion, '>='));
 			})
 			.catch((error) => {
 				setIsCompatible(false);
