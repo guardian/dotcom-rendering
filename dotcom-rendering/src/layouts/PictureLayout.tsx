@@ -220,10 +220,10 @@ const avatarPositionStyles = css`
 `;
 
 const LeftColLines = (displayAvatarUrl: boolean) => css`
+	margin-bottom: 4px;
 	${displayAvatarUrl
 		? css`
 				margin-top: -29px;
-				margin-bottom: 8px;
 		  `
 		: ''}
 `;
