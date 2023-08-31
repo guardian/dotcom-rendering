@@ -148,7 +148,8 @@ export const Blocks = ({
 		<>
 			{liveBlogBlocks.map((item, i) => {
 				if (slotIndexes.includes(i)) {
-					const adSlotId = `ad-${i + 1}` as const;
+					const slotIndex = slotIndexes.indexOf(i);
+					const adSlotId = `ad-${slotIndex + 1}` as const;
 					return (
 						<>
 							{item}

@@ -154,7 +154,8 @@ export const Body = ({ data, config }: Props) => {
 		<>
 			{elementsWithoutAds.map((item, i) => {
 				if (slotIndexes.includes(i)) {
-					const adSlotId = `ad-${i + 1}` as const;
+					const slotIndex = slotIndexes.indexOf(i);
+					const adSlotId = `ad-${slotIndex + 1}` as const;
 					return (
 						<React.Fragment key={item.key}>
 							{item}
