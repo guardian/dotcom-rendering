@@ -18,16 +18,15 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import {
-	AppEmailSignupWrapper,
-	WebEmailSignupWrapper,
-} from '../components/EmailSignupWrapper.importable';
+import { EmailSignup } from '../components/EmailSignup';
+import { EmailSignUpWrapper } from '../components/EmailSignupWrapper.importable';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
-import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
+import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
+import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
@@ -43,6 +42,7 @@ import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable'
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
+import { SecureSignup } from '../components/SecureSignup';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
 import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent';
@@ -470,16 +470,24 @@ export const renderElement = ({
 			};
 			return renderingTarget === 'Apps' ? (
 				<Island clientOnly={true} deferUntil={'idle'}>
-					<AppEmailSignupWrapper
+					<EmailSignUpWrapper
 						skipToIndex={index}
 						{...emailSignUpProps}
 					/>
 				</Island>
 			) : (
-				<WebEmailSignupWrapper
-					skipToIndex={index}
-					{...emailSignUpProps}
-				/>
+				<InlineSkipToWrapper
+					id={`EmailSignup-skip-link-${index}`}
+					blockDescription="newsletter promotion"
+				>
+					<EmailSignup {...emailSignUpProps}>
+						<SecureSignup
+							name={emailSignUpProps.name}
+							newsletterId={emailSignUpProps.identityName}
+							successDescription={emailSignUpProps.description}
+						/>
+					</EmailSignup>
+				</InlineSkipToWrapper>
 			);
 
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':

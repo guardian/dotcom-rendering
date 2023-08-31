@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { WebEmailSignupWrapper } from './EmailSignupWrapper.importable';
+import { EmailSignup } from './EmailSignup';
 import { Section } from './Section';
-
+import { SecureSignup } from './SecureSignup';
 const withSectionWrapper = (Story: typeof NewsTheme) => (
 	<Section
 		title="EmailSignup"
@@ -14,7 +14,7 @@ const withSectionWrapper = (Story: typeof NewsTheme) => (
 );
 
 export default {
-	component: WebEmailSignupWrapper,
+	component: EmailSignup,
 	title: 'Components/EmailSignup',
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
@@ -38,8 +38,7 @@ export const Default = ({
 }: {
 	hidePrivacyMessage?: boolean;
 }) => (
-	<WebEmailSignupWrapper
-		skipToIndex={1}
+	<EmailSignup
 		identityName="patriarchy"
 		description="Reviewing the most important stories on feminism and sexism and those fighting for equality"
 		name="The Week in Patriarchy"
@@ -47,7 +46,13 @@ export const Default = ({
 		successDescription="You have signed up, but the newsletter is fake"
 		theme="opinion"
 		hidePrivacyMessage={hidePrivacyMessage}
-	/>
+	>
+		<SecureSignup
+			name="The Week in Patriarchy"
+			newsletterId="patriarchy"
+			successDescription="Reviewing the most important stories on feminism and sexism and those fighting for equality"
+		/>
+	</EmailSignup>
 );
 
 export const NewsTheme = ({
@@ -55,8 +60,7 @@ export const NewsTheme = ({
 }: {
 	hidePrivacyMessage?: boolean;
 }) => (
-	<WebEmailSignupWrapper
-		skipToIndex={1}
+	<EmailSignup
 		identityName="morning-briefing"
 		description="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
 		name="First Edition"
@@ -64,7 +68,13 @@ export const NewsTheme = ({
 		successDescription="You have signed up, but the newsletter is fake"
 		theme="news"
 		hidePrivacyMessage={hidePrivacyMessage}
-	/>
+	>
+		<SecureSignup
+			name="First Edition"
+			newsletterId="morning-briefing"
+			successDescription="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
+		/>
+	</EmailSignup>
 );
 
 export const IrregularFrequency = ({
@@ -72,8 +82,7 @@ export const IrregularFrequency = ({
 }: {
 	hidePrivacyMessage?: boolean;
 }) => (
-	<WebEmailSignupWrapper
-		skipToIndex={1}
+	<EmailSignup
 		identityName="documentaries"
 		description="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
 		name="Guardian Documentaries"
@@ -81,7 +90,13 @@ export const IrregularFrequency = ({
 		successDescription="You have signed up, but the newsletter is fake"
 		theme="features"
 		hidePrivacyMessage={hidePrivacyMessage}
-	/>
+	>
+		<SecureSignup
+			name="Guardian Documentaries"
+			newsletterId="documentaries"
+			successDescription="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
+		/>
+	</EmailSignup>
 );
 
 Default.storyName = 'default';

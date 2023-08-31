@@ -15,6 +15,11 @@ export const useIsBridgetCompatible = (
 		void getEnvironmentClient()
 			.nativeThriftPackageVersion()
 			.then((bridgetVersion) => {
+				console.log(
+					bridgetVersion,
+					requiredVersion,
+					compare(bridgetVersion, requiredVersion, '>='),
+				);
 				setIsCompatible(compare(bridgetVersion, requiredVersion, '>='));
 			})
 			.catch((error) => {

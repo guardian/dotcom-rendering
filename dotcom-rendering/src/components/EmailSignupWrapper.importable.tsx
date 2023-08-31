@@ -1,4 +1,3 @@
-import { SecureSignup } from '../components/SecureSignup';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
@@ -10,12 +9,12 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	skipToIndex: number;
 }
 
-export const AppEmailSignupWrapper = ({
+export const EmailSignUpWrapper = ({
 	skipToIndex,
 	...emailSignUpProps
 }: EmailSignUpWrapperProps) => {
 	const isCompatible = useIsBridgetCompatible();
-
+	console.log('is compatible:::', isCompatible);
 	if (!isCompatible) {
 		return null;
 	}
@@ -37,21 +36,3 @@ export const AppEmailSignupWrapper = ({
 		</InlineSkipToWrapper>
 	);
 };
-
-export const WebEmailSignupWrapper = ({
-	skipToIndex,
-	...emailSignUpProps
-}: EmailSignUpWrapperProps) => (
-	<InlineSkipToWrapper
-		id={`EmailSignup-skip-link-${skipToIndex}`}
-		blockDescription="newsletter promotion"
-	>
-		<EmailSignup {...emailSignUpProps}>
-			<SecureSignup
-				name={emailSignUpProps.name}
-				newsletterId={emailSignUpProps.identityName}
-				successDescription={emailSignUpProps.description}
-			/>
-		</EmailSignup>
-	</InlineSkipToWrapper>
-);
