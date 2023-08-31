@@ -8,6 +8,7 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -18,6 +19,10 @@ interface Props {
 const imgStyles = css`
 	background: none;
 	width: 125px;
+
+	${darkModeCss`
+		background: none;
+	`}
 `;
 
 const sizes: Sizes = {
