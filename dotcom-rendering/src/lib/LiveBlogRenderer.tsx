@@ -1,6 +1,6 @@
 import { Hide } from '@guardian/source-react-components';
 import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
-import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
+import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle';
 import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { LiveBlock } from '../components/LiveBlock';
@@ -103,12 +103,10 @@ export const LiveBlogRenderer = ({
 						/>
 					</Island>
 					{(!switches.automaticFilters || !availableTopics) && (
-						<Island deferUntil="visible">
-							<FilterKeyEventsToggle
-								filterKeyEvents={filterKeyEvents}
-								id="filter-toggle-mobile"
-							/>
-						</Island>
+						<FilterKeyEventsToggle
+							filterKeyEvents={filterKeyEvents}
+							id="filter-toggle-mobile"
+						/>
 					)}
 				</Hide>
 			) : (

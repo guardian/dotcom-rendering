@@ -24,7 +24,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
+import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle';
 import { Footer } from '../components/Footer';
 import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
@@ -795,14 +795,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								<div id="maincontent" css={bodyWrapper}>
 									{showKeyEventsToggle ? (
 										<Hide below="desktop">
-											<Island deferUntil="visible">
-												<FilterKeyEventsToggle
-													filterKeyEvents={
-														article.filterKeyEvents
-													}
-													id="filter-toggle-desktop"
-												/>
-											</Island>
+											<FilterKeyEventsToggle
+												filterKeyEvents={
+													article.filterKeyEvents
+												}
+												id="filter-toggle-desktop"
+											/>
 										</Hide>
 									) : (
 										<></>
