@@ -239,7 +239,9 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 								)}
 								{modalType === 'ModalNowSeeing' && (
 									<Button
-										onClick={() => {}}
+										onClick={() => {
+											//todo
+										}}
 										cssOverrides={OKButtonStyles}
 									>
 										{' '}

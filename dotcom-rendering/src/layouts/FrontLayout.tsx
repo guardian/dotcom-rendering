@@ -17,6 +17,7 @@ import { AdSlot } from '../components/AdSlot';
 import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
+import { EuropeLandingModal } from '../components/EuropeLandingModal.importable';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import { FrontSection } from '../components/FrontSection';
@@ -47,7 +48,6 @@ import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { EuropeLandingModal } from '../components/EuropeLandingModal.importable';
 
 interface Props {
 	front: DCRFrontType;
