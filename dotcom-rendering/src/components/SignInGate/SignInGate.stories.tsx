@@ -81,26 +81,6 @@ export const fakeSocialStandaloneVertical = () => {
 };
 fakeSocialStandaloneVertical.storyName = 'fake_social_standalone_vertical';
 
-export const signInGateCopyTest = () => {
-	return (
-		<Section fullWidth={true}>
-			<SignInGateCopyTestJan2023
-				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/signin"
-				registerUrl="https://profile.theguardian.com/register"
-				dismissGate={() => {}}
-				ophanComponentId="test"
-				abTest={{
-					id: 'sign-in-gate-copy-test-jan-2023',
-					name: 'sign-in-gate-copy-test-jan-2023',
-					variant: 'quick-and-easy',
-				}}
-			/>
-		</Section>
-	);
-};
-signInGateCopyTest.storyName = 'sign_in_gate_copy_test';
-
 export const signInGateMainCheckoutCompletePersonalisedCopy = (
 	args: CheckoutCompleteCookieData,
 ) => {
