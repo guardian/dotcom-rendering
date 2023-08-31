@@ -213,8 +213,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const isInSectionFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
-		true &&
-		// abTests.sectionBannerAdsVariant === 'variant' &&
+		abTests.sectionBannerAdsVariant === 'variant' &&
 		Object.keys(sectionFrontsBannerAdCollections).includes(
 			front.config.pageId,
 		);
