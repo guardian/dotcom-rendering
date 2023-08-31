@@ -374,7 +374,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				</>
 			</div>
 			<Island clientOnly={true}>
-				<EuropeLandingModal />
+				<EuropeLandingModal edition={front.editionId} />
 			</Island>
 			<main
 				data-layout="FrontLayout"

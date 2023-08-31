@@ -4,6 +4,8 @@ import { body, headline, palette, space } from '@guardian/source-foundations';
 import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { EditionId } from '../lib/edition';
+import { getEditionFromId } from '../lib/edition';
+import { guard } from '../lib/guard';
 import { SvgClose } from './SvgClose';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
@@ -60,22 +62,135 @@ const closeButtonStyles = css`
 	padding: 0 10px;
 `;
 
-export const EuropeLandingModal = () => {
-	const [isOpen, setIsOpen] = useState(!getCookie({ name: 'GU_EDITION' }));
-	const [switchEdition, setSwitchEdition] = useState(false);
-	const [selectedEdition, setSelectedEdition] = useState<EditionId>('EUR');
+type ModalType =
+	| 'NoModal'
+	| 'ModalSwitched'
+	| 'ModalDoYouWantToSwitch'
+	| 'ModalNowSeeing';
 
-	const confirmNewEdition = () => {
+const coe = [
+	'AL',
+	'AD',
+	'AM',
+	'AT',
+	'AZ',
+	'BE',
+	'BA',
+	'BG',
+	'HR',
+	'CY',
+	'CZ',
+	'DK',
+	'EE',
+	'FI',
+	'FR',
+	'GE',
+	'DE',
+	'GR',
+	'HU',
+	'IS',
+	'IE',
+	'IT',
+	'LV',
+	'LI',
+	'LT',
+	'LU',
+	'MT',
+	'MC',
+	'ME',
+	'NL',
+	'MK',
+	'NO',
+	'PL',
+	'PT',
+	'MD',
+	'RO',
+	'SM',
+	'RS',
+	'SK',
+	'SI',
+	'ES',
+	'SE',
+	'CH',
+	'TR',
+	'UA',
+];
+
+const ukUsAusCountries = ['UK', 'US', 'AU'];
+
+const ukUsAusEditions = ['UK', 'US', 'AUS'];
+
+const isValidEdition = guard(['EUR', 'US', 'UK', 'AU', 'INT'] as const);
+
+const getModalType = (): ModalType => {
+	const editionCookie = getCookie({ name: 'GU_EDITION' });
+
+	const geoCountryCookie = getCookie({ name: 'GU_geo_country' });
+	const modalDismissedCookie = getCookie({ name: 'GU_eu_modal_dismissed' });
+	if (!geoCountryCookie) {
+		return 'NoModal';
+	}
+	if (modalDismissedCookie) {
+		return 'NoModal';
+	}
+	if (editionCookie === 'INT' && coe.includes(geoCountryCookie)) {
+		return 'ModalSwitched';
+	}
+
+	if (
+		editionCookie === 'INT' &&
+		!coe.includes(geoCountryCookie) &&
+		!ukUsAusCountries.includes(geoCountryCookie)
+	) {
+		return 'ModalDoYouWantToSwitch';
+	}
+
+	if (
+		editionCookie &&
+		ukUsAusEditions.includes(editionCookie) &&
+		coe.includes(geoCountryCookie)
+	) {
+		return 'ModalDoYouWantToSwitch';
+	}
+
+	if (!editionCookie && coe.includes(geoCountryCookie)) {
+		return 'ModalNowSeeing';
+	}
+	return 'NoModal';
+};
+
+interface Props {
+	edition: EditionId;
+}
+export const EuropeLandingModal = ({ edition }: Props) => {
+	const editionCookie = getCookie({ name: 'GU_EDITION' });
+	const modalType = getModalType();
+	const [isOpen, setIsOpen] = useState(modalType !== 'NoModal');
+	const [switchEdition, setSwitchEdition] = useState(false);
+	const [selectedEdition, setSelectedEdition] = useState<EditionId>(
+		isValidEdition(editionCookie) ? editionCookie : edition,
+	);
+
+	const confirmNewEdition = (editionId: EditionId) => {
 		setCookie({
 			name: 'GU_EDITION',
-			value: selectedEdition,
+			value: editionId,
 			isCrossSubdomain: true,
 		});
-		if (selectedEdition === 'EUR') {
+		if (editionId === edition) {
 			setIsOpen(false);
 		} else {
-			window.location.reload();
+			window.location.replace(getEditionFromId(editionId).url);
 		}
+	};
+
+	const dismissModal = () => {
+		setCookie({
+			name: 'GU_eu_modal_dismissed',
+			value: 'true',
+			daysToLive: 100, //todo - check how long
+		});
+		setIsOpen(false);
 	};
 
 	if (!isOpen) return <></>;
@@ -87,21 +202,50 @@ export const EuropeLandingModal = () => {
 					<>
 						<div css={textStyles}>
 							<h1 css={headlineStyles}>
-								We've switched you to the new Europe edition of
-								the Guardian
+								{modalType === 'ModalSwitched' &&
+									"We've switched you to the new Europe edition of the Guardian"}
+								{modalType === 'ModalDoYouWantToSwitch' &&
+									'Would you like to switch to our new Europe edition?'}
+								{modalType === 'ModalNowSeeing' && 'todo'}{' '}
+								{/* todo - get text for this*/}
 							</h1>
 							<p css={bodyStyles}>
-								You're now getting more coverage tailored for
-								readers in Europe
+								{modalType === 'ModalSwitched' &&
+									"You're now getting more coverage tailored for readers in Europe"}
+								{modalType === 'ModalDoYouWantToSwitch' &&
+									'We’ve launched a new edition of the Guardian with our global coverage tailored for readers in Europe'}
+								{modalType === 'ModalNowSeeing' && 'todo'}{' '}
+								{/* todo - get text for this*/}
 							</p>
 							<div css={buttonDivStyles}>
-								<Button
-									onClick={() => setIsOpen(false)}
-									cssOverrides={OKButtonStyles}
-								>
-									{' '}
-									OK, Thanks{' '}
-								</Button>
+								{modalType === 'ModalSwitched' && (
+									<Button
+										onClick={() => {
+											confirmNewEdition('EUR');
+										}}
+										cssOverrides={OKButtonStyles}
+									>
+										OK, Thanks
+									</Button>
+								)}
+								{modalType === 'ModalDoYouWantToSwitch' && (
+									<Button
+										onClick={() => dismissModal()}
+										cssOverrides={OKButtonStyles}
+									>
+										{' '}
+										No, Thanks{' '}
+									</Button>
+								)}
+								{modalType === 'ModalNowSeeing' && (
+									<Button
+										onClick={() => {}}
+										cssOverrides={OKButtonStyles}
+									>
+										{' '}
+										TODO{' '}
+									</Button>
+								)}
 								<Button
 									priority={'subdued'}
 									onClick={() => setSwitchEdition(true)}
@@ -124,39 +268,44 @@ export const EuropeLandingModal = () => {
 							orientation="vertical"
 						>
 							<Radio
-								defaultChecked={true}
+								defaultChecked={selectedEdition === 'EUR'}
 								label="Europe edition"
 								value="EUR"
 								onChange={() => setSelectedEdition('EUR')}
 							/>
 							<Radio
+								defaultChecked={selectedEdition === 'UK'}
 								label="UK edition"
 								value="UK"
 								onChange={() => setSelectedEdition('UK')}
 							/>
 							<Radio
+								defaultChecked={selectedEdition === 'US'}
 								label="US edition"
 								value="US"
 								onChange={() => setSelectedEdition('US')}
 							/>
 							<Radio
+								defaultChecked={selectedEdition === 'AU'}
 								label="Australia edition"
 								value="AU"
 								onChange={() => setSelectedEdition('AU')}
 							/>
 							<Radio
+								defaultChecked={selectedEdition === 'INT'}
 								label="International edition"
 								value="INT"
 								onChange={() => setSelectedEdition('INT')}
 							/>
 						</RadioGroup>
-						<Button onClick={() => confirmNewEdition()}>
+						<Button
+							onClick={() => confirmNewEdition(selectedEdition)}
+						>
 							Confirm
 						</Button>
-						{/*todo - think about what to do here for function and cross*/}
 						<Button
 							cssOverrides={closeButtonStyles}
-							onClick={() => confirmNewEdition()}
+							onClick={() => dismissModal()}
 						>
 							<SvgClose />
 						</Button>
