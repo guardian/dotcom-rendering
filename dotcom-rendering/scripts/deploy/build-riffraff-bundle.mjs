@@ -41,6 +41,16 @@ const copyCfn = () => {
 	);
 };
 
+const copyRenderingInteractiveCfn = () => {
+	log(' - copying cloudformation config');
+	return cpy(
+		[
+			'cdk.out/DotcomRendering-interactive-CODE.template.json',
+		],
+		path.resolve(target, 'rendering-interactive'),
+	);
+};
+
 const copyStatic = () => {
 	log(' - copying static');
 	return cpy(

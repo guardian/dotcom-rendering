@@ -12,6 +12,13 @@ deployments:
         PROD: DotcomRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
+  rendering-interactive:
+    type: cloud-formation
+    parameters:
+      templateStagePaths:
+        CODE: DotcomRendering-interactive-CODE.template.json
+      cloudFormationStackByTags: false
+      cloudFormationStackName: rendering-interactive
   rendering:
     type: autoscaling
     parameters:
@@ -19,13 +26,6 @@ deployments:
     dependencies:
       - frontend-static
       - frontend-cfn
-  frontend-cfn:
-    type: cloud-formation
-    parameters:
-      templateStagePaths:
-        CODE: DotcomRendering-interactive-CODE.template.json
-      cloudFormationStackByTags: false
-      cloudFormationStackName: rendering-interactive
   frontend-static:
     type: aws-s3
     parameters:
