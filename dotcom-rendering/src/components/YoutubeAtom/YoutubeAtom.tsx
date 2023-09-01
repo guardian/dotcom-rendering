@@ -18,7 +18,7 @@ import { YoutubeAtomSticky } from './YoutubeAtomSticky';
 type Props = {
 	elementId: string;
 	videoId: string;
-	overrideImage?: ImageSource[];
+	overrideImage?: string;
 	posterImage?: ImageSource[];
 	adTargeting?: AdTargeting;
 	consentState?: ConsentState;

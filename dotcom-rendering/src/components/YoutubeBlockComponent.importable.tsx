@@ -193,20 +193,7 @@ export const YoutubeBlockComponent = ({
 			<YoutubeAtom
 				elementId={elementId}
 				videoId={assetId}
-				overrideImage={
-					overrideImage
-						? [
-								{
-									srcSet: [
-										{
-											src: overrideImage,
-											width: 500, // we do not have width for overlayImage so set a random number
-										},
-									],
-								},
-						  ]
-						: undefined
-				}
+				overrideImage={overrideImage}
 				posterImage={
 					posterImage.length > 0
 						? [

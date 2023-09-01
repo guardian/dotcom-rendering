@@ -5,9 +5,10 @@ import type {
 	RoleType,
 	SrcSetItem,
 } from '../../types/youtubeAtom';
+import { Sources } from '../Picture';
 
 type Props = {
-	imageSources: ImageSource[];
+	imageSources: string;
 	role: RoleType;
 	alt: string;
 	height: number;
@@ -113,28 +114,20 @@ const getSizes = (role: RoleType, isMainMedia: boolean): string => {
 };
 
 export const Picture = ({
-	imageSources,
+	imageSrc,
 	role,
 	alt,
 	height,
 	width,
 	isMainMedia = false,
 }: Props): JSX.Element => {
-	const hdpiSources = getSources('hdpi', imageSources);
-	const mdpiSources = getSources('mdpi', imageSources);
 	const fallbackSrc = getFallback('hdpi', imageSources);
 	const sizes = getSizes(role, isMainMedia);
+	const sources = generateSources(getSourceImageUrl(fallbackSrc), widths);
 
 	return (
-		<picture itemProp="contentUrl">
-			{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
-			<source
-				srcSet={hdpiSources}
-				sizes={sizes}
-				media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-			/>
-			{/* MDPI Source (DPR1) - images in this srcset have `quality=85` in the url */}
-			<source srcSet={mdpiSources} sizes={sizes} />
+		<picture css={block}>
+			<Sources sources={sources} />
 			<img
 				alt={alt}
 				src={fallbackSrc}
@@ -147,5 +140,26 @@ export const Picture = ({
 				`}
 			/>
 		</picture>
+		// <picture itemProp="contentUrl">
+		// 	{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
+		// 	<source
+		// 		srcSet={hdpiSources}
+		// 		sizes={sizes}
+		// 		media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+		// 	/>
+		// 	{/* MDPI Source (DPR1) - images in this srcset have `quality=85` in the url */}
+		// 	<source srcSet={mdpiSources} sizes={sizes} />
+		// 	<img
+		// 		alt={alt}
+		// 		src={fallbackSrc}
+		// 		height={height}
+		// 		width={width}
+		// 		// https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
+		// 		// why did we add the css `vertical-align: middle;` to the img tag
+		// 		css={css`
+		// 			vertical-align: middle;
+		// 		`}
+		// 	/>
+		// </picture>
 	);
 };
