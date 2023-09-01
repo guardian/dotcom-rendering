@@ -1,6 +1,6 @@
 {
 	"background_color": "#052962",
-	"display": "minimal-ui",
+	"display": "browser",
 	"display_override": ["minimal-ui"],
 	"icons": [
 		{
