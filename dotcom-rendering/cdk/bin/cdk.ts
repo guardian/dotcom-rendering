@@ -27,9 +27,9 @@ new DotcomRendering(app, 'DotcomRendering-CODE', {
 	instanceType: 't4g.micro',
 });
 
-new DotcomRendering(app, 'DotcomRendering-interactive-CODE', {
+new DotcomRendering(app, 'DotcomRendering-fronts-CODE', {
 	...sharedProps,
-	app: 'rendering-i9e',
+	app: 'rendering-fronts',
 	stage: 'CODE',
 	minCapacity: 1,
 	maxCapacity: 4,
