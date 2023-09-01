@@ -2,7 +2,7 @@
  * This file is temporary.
  *
  * For the Fronts banner AB test, we will target
- * specific sections on the page to insert ads above.
+ * specific collections on the page to insert ads above.
  *
  * When we go live with fronts-banner ads, there will be a setting in
  * the fronts config tool which will decide whether a section has an ad
