@@ -17,7 +17,7 @@ const target = path.resolve(dirname, '../..', 'target');
 // ├── frontend-cfn
 // │   ├── DotcomRendering-CODE.template.json
 // │   ├── DotcomRendering-PROD.template.json
-// ├── rendering-front
+// ├── render-front
 // │   ├── DotcomRendering-CODE-front.template.json
 // ├── frontend-static
 // │   ├── assets
@@ -49,7 +49,7 @@ const copyRenderingFrontCfn = () => {
 		[
 			'cdk.out/DotcomRendering-front-CODE.template.json',
 		],
-		path.resolve(target, 'rendering-front'),
+		path.resolve(target, 'render-front'),
 	);
 };
 
