@@ -25,7 +25,9 @@ export const timedExpressJsonMiddleware: RequestHandler = (req, res, next) => {
 	recordTimeStart('json');
 
 	// Pass a wrapper around Express's next() callback which record when expressJsonMiddleware calls next()
+	logger.info('Checkpoint 3');
 	expressJsonMiddleware(req, res, () => {
+		logger.info('Checkpoint 4');
 		recordTimeStop('json');
 		next();
 	});
@@ -48,9 +50,12 @@ export const loggingStoreMiddleware: RequestHandler = (req, res, next) => {
 		},
 	};
 
-	loggingStore.run(loggerState, () => {
-		next();
-	});
+	logger.info('Checkpoint 1');
+
+	// loggingStore.run(loggerState, () => {
+	logger.info('Checkpoint 2');
+	next();
+	// });
 };
 
 /**
@@ -59,8 +64,10 @@ export const loggingStoreMiddleware: RequestHandler = (req, res, next) => {
 export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 	// We don't have access to the page ID until after the express.json() middleware runs.
 	recordPageId(hasPageId(req.body) ? req.body.pageId : 'no-page-id-found');
+	logger.info('Checkpoint 5');
 
 	res.on('finish', () => {
+		logger.info('Checkpoint 6');
 		recordTimeStop('total');
 
 		logger.info('Rendered page', {

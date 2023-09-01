@@ -57,7 +57,7 @@ export const recordTimeStart = (metric: RecordablePeriod): void => {
 
 	if (timing) {
 		timing[metric] = {
-			start: performance.now(),
+			start: Date.now(),
 		};
 	}
 };
@@ -67,8 +67,8 @@ export const recordTimeStop = (metric: RecordablePeriod): void => {
 	const time = timing?.[metric];
 
 	if (time) {
-		time.stop = performance.now();
-		time.duration = time.start - time.stop;
+		time.stop = Date.now();
+		time.duration = time.stop - time.start;
 	}
 };
 
