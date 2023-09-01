@@ -212,6 +212,11 @@ https://workforus.theguardian.com/careers/product-engineering/
 						? `<meta name="theme-color" content="${brandBackground.primary}" />`
 						: ``
 				}
+				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon.svg" sizes="any">
+				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon-512.png" sizes="512x512">
+				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon-360.png" sizes="360x360">
+				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon-240.png" sizes="240x240">
+				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon-120.png" sizes="120x120">
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 
                 ${preconnectTags.join('\n')}
