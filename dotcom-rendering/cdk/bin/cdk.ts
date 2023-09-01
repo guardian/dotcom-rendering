@@ -29,7 +29,7 @@ new DotcomRendering(app, 'DotcomRendering-CODE', {
 
 new DotcomRendering(app, 'DotcomRendering-interactive-CODE', {
 	...sharedProps,
-	app: 'rendering-interactive',
+	app: 'rendering-i9e',
 	stage: 'CODE',
 	minCapacity: 1,
 	maxCapacity: 4,
