@@ -367,7 +367,7 @@ const mobileStickyAdStyles = css`
 `;
 
 const nonExpandingContainerStyles = css`
-	width: max-content;
+	width: 300px;
 	margin: auto;
 `;
 
