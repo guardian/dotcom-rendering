@@ -17,6 +17,8 @@ const target = path.resolve(dirname, '../..', 'target');
 // ├── frontend-cfn
 // │   ├── DotcomRendering-CODE.template.json
 // │   ├── DotcomRendering-PROD.template.json
+// ├── render-front
+// │   ├── DotcomRendering-front-CODE.template.json
 // ├── frontend-static
 // │   ├── assets
 // │   │   └── **
@@ -38,6 +40,16 @@ const copyCfn = () => {
 			'cdk.out/DotcomRendering-PROD.template.json',
 		],
 		path.resolve(target, 'frontend-cfn'),
+	);
+};
+
+const copyRenderingFrontCfn = () => {
+	log(' - copying cloudformation config');
+	return cpy(
+		[
+			'cdk.out/DotcomRendering-front-CODE.template.json',
+		],
+		path.resolve(target, 'render-front'),
 	);
 };
 
@@ -124,6 +136,7 @@ const createBuildConfig = () => {
 
 Promise.all([
 	copyCfn(),
+	copyRenderingFrontCfn(),
 	copyMakefile(),
 	copyStatic(),
 	copyDist(),

@@ -24,6 +24,7 @@ import {
 import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
+import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import type { DCRAlarmConfig, DCRProps } from './types';
 import { getUserData } from './userData';
 
@@ -146,6 +147,13 @@ export class DotcomRendering extends GuStack {
 		new CfnOutput(this, 'LoadBalancerUrl', {
 			value: loadBalancer.loadBalancerDnsName,
 		});
+
+		new StringParameter(this, 'ec2RoleArn', {
+			// Annoyingly this doesn't follow the same pattern as the other SSM parameters
+			parameterName: `/test/${stack}/${stage}/${app}.baseURL`,
+			stringValue: loadBalancer.loadBalancerDnsName,
+		});
+
 		// ------------------------------------
 
 		// ------------------------------------

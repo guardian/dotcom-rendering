@@ -12,6 +12,13 @@ deployments:
         PROD: DotcomRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
+  render-front:
+    type: cloud-formation
+    parameters:
+      templateStagePaths:
+        CODE: DotcomRendering-front-CODE.template.json
+      cloudFormationStackByTags: false
+      cloudFormationStackName: render-front
   rendering:
     type: autoscaling
     parameters:
