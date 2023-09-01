@@ -134,6 +134,7 @@ const createBuildConfig = () => {
 
 Promise.all([
 	copyCfn(),
+	copyRenderingInteractiveCfn(),
 	copyMakefile(),
 	copyStatic(),
 	copyDist(),
