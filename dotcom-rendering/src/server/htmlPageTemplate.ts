@@ -212,6 +212,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 						? `<meta name="theme-color" content="${brandBackground.primary}" />`
 						: ``
 				}
+				<link rel="manifest" href="${ASSET_ORIGIN}static/frontend/manifest.json" />
 				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon.svg" sizes="any">
 				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon-512.png" sizes="512x512">
 				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon-360.png" sizes="360x360">
