@@ -14,7 +14,7 @@ const sharedProps = {
 new DotcomRendering(app, 'DotcomRendering-PROD', {
 	...sharedProps,
 	stage: 'PROD',
-	minCapacity: 15,
+	minCapacity: 30,
 	maxCapacity: 60,
 	instanceType: 't4g.small',
 });
