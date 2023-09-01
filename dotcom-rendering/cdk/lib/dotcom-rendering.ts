@@ -150,7 +150,7 @@ export class DotcomRendering extends GuStack {
 
 		new StringParameter(this, 'ec2RoleArn', {
 			// Annoyingly this doesn't follow the same pattern as the other SSM parameters
-			parameterName: `/test/${stack}/${stage}/${app}.baseURL`,
+			parameterName: `/${stack}/${stage}/${app}.loadBalancerDnsName`,
 			stringValue: loadBalancer.loadBalancerDnsName,
 		});
 
