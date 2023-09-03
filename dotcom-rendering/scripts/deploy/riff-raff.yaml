@@ -1,8 +1,8 @@
 stacks: [frontend]
 regions: [eu-west-1]
 allowedStages:
-    - CODE
-    - PROD
+  - CODE
+  - PROD
 deployments:
   frontend-cfn:
     type: cloud-formation
