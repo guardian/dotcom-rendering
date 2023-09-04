@@ -275,15 +275,27 @@ const mostPopAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
 	min-width: 300px;
-	width: 300px;
+	width: min-content;
 	margin: 12px auto;
 	text-align: center;
 	${from.desktop} {
 		margin: 0;
-		width: auto;
+		width: 300px;
 	}
 	${from.wide} {
 		margin-top: 25px;
+	}
+`;
+
+const mostPopContainerStyles = css`
+	position: relative;
+	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-width: 300px;
+	width: min-content;
+	margin: 0px auto;
+	${from.desktop} {
+		margin: 0;
+		width: 300px;
 	}
 `;
 
@@ -363,20 +375,6 @@ const mobileStickyAdStyles = css`
 		display: block;
 		position: relative;
 		${individualLabelCSS}
-	}
-`;
-
-const mostPopContainerStyles = css`
-	min-height: ${adSizes.mpu.height + labelHeight}px;
-	min-width: 300px;
-	width: 300px;
-	margin: 0px auto;
-	${from.desktop} {
-		margin: 0;
-		width: auto;
-	}
-	${from.wide} {
-		margin-top: 25px;
 	}
 `;
 
