@@ -154,6 +154,9 @@ export const Body = ({ data, config }: Props) => {
 		<>
 			{elementsWithoutAds.map((item, elementIndex) => {
 				if (insertSlotsAfter.includes(elementIndex)) {
+					// Ad slot ids take the form: `ad-1`, `ad-2`, `ad-3`, ...
+					// Looking up the element index in the array of ad insertion points
+					// gives us the slot indexes
 					const slotIndex = insertSlotsAfter.indexOf(elementIndex);
 					const adSlotId = `ad-${slotIndex + 1}` as const;
 					return (
