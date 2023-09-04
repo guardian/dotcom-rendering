@@ -1,5 +1,8 @@
-import { createContext } from 'react';
-import type { RenderingContextType } from '../types/renderingContext';
+import { createContext, useContext } from 'react';
+import type {
+	RenderingContextType,
+	RenderingTargetContextType,
+} from '../types/renderingContext';
 
 /** Represents the initial or default value for the app context */
 const defaultContext: RenderingContextType = {
@@ -13,3 +16,36 @@ const defaultContext: RenderingContextType = {
  */
 export const RenderingContext =
 	createContext<RenderingContextType>(defaultContext);
+
+/**
+ * useContext hook for rendering target details
+ *
+ * @example
+ * const { isWeb } = useRenderingTarget();
+ *
+ *	if (isWeb) {
+ * 	...
+ *  } else {
+ *  ...
+ *  }
+ *
+ */
+export const useRenderingTarget = (): RenderingTargetContextType => {
+	const context = useContext(RenderingContext);
+
+	if (context === undefined) {
+		throw Error(
+			'useRenderingTarget must be used within the RenderingContext provider',
+		);
+	}
+
+	const { target } = context;
+
+	const renderingTarget = {
+		target,
+		isWeb: target === 'Web',
+		isApps: target === 'Apps',
+	};
+
+	return renderingTarget;
+};

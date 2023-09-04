@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { useContext } from 'react';
 import { adContainerStyles } from '../components/AdSlot';
-import { RenderingContext } from '../components/RenderingContext';
+import { useRenderingTarget } from '../components/RenderingContext';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
@@ -85,7 +84,7 @@ export const ArticleRenderer = ({
 		);
 	});
 
-	const { target } = useContext(RenderingContext);
+	const { isApps } = useRenderingTarget();
 
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -106,7 +105,7 @@ export const ArticleRenderer = ({
 			].join(' ')}
 			css={[adStylesDynamic, commercialPosition]}
 		>
-			{target === 'Apps'
+			{isApps
 				? renderedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
 				  withSignInGateSlot({

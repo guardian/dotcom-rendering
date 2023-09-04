@@ -114,6 +114,7 @@ export const ArticleAppsStory = () => {
 		</Wrapper>
 	);
 };
+/** @see /dotcom-rendering/docs/development/storybook.md */
 ArticleAppsStory.args = { renderingContext: { target: 'Apps' } };
 
 export const BrandingStory = () => {

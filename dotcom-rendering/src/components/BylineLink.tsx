@@ -1,5 +1,4 @@
 import { ArticleDesign } from '@guardian/libs';
-import { useContext } from 'react';
 import {
 	getBylineComponentsFromTokens,
 	getSoleContributor,
@@ -8,7 +7,7 @@ import {
 import type { TagType } from '../types/tag';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
-import { RenderingContext } from './RenderingContext';
+import { useRenderingTarget } from './RenderingContext';
 
 type Props = {
 	byline: string;
@@ -132,12 +131,12 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 		);
 	});
 
-	const { target } = useContext(RenderingContext);
+	const { isApps } = useRenderingTarget();
 
 	return (
 		<>
 			{renderedTokens}
-			{target === 'Apps' && soleContributor !== undefined ? (
+			{isApps && soleContributor !== undefined ? (
 				<Island>
 					<FollowWrapper
 						displayName={soleContributor.title}
