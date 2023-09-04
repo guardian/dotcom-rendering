@@ -1,0 +1,47 @@
+{
+	"background_color": "#052962",
+	"display": "browser",
+	"display_override": ["minimal-ui"],
+	"icons": [
+		{
+			"purpose": "any",
+			"sizes": "any",
+			"src": "/static/frontend/icons/homescreen/roundel.svg",
+			"type": "image/svg+xml"
+		},
+		{
+			"purpose": "any",
+			"sizes": "512x512",
+			"src": "/static/frontend/icons/homescreen/roundel-512x512.png",
+			"type": "image/png"
+		},
+		{
+			"purpose": "any",
+			"sizes": "256x256",
+			"src": "/static/frontend/icons/homescreen/roundel-256x256.png",
+			"type": "image/png"
+		},
+		{
+			"purpose": "any",
+			"sizes": "192x192",
+			"src": "/static/frontend/icons/homescreen/roundel-192x192.png",
+			"type": "image/png"
+		},
+		{
+			"purpose": "any",
+			"sizes": "152x152",
+			"src": "/static/frontend/icons/homescreen/roundel-152x152.png",
+			"type": "image/png"
+		},
+		{
+			"purpose": "any",
+			"sizes": "114x114",
+			"src": "/static/frontend/icons/homescreen/roundel-114x114.png",
+			"type": "image/png"
+		}
+	],
+	"name": "The Guardian",
+	"scope": "https://www.theguardian.com/",
+	"start_url": "https://www.theguardian.com/",
+	"theme_color": "#052962"
+}

@@ -125,7 +125,7 @@ export const Body = ({ data, config }: Props) => {
 		data.isImmersive,
 		adTargeting,
 	);
-	const slotIndexes = findAdSlots(bodyElements);
+	const insertSlotsAfter = findAdSlots(bodyElements);
 	const adInfo = {
 		adUnit: config.adUnit,
 		section: data.sectionName,
@@ -152,9 +152,13 @@ export const Body = ({ data, config }: Props) => {
 		<>{elementsWithoutAds}</>
 	) : (
 		<>
-			{elementsWithoutAds.map((item, i) => {
-				if (slotIndexes.includes(i)) {
-					const adSlotId = `ad-${i + 1}` as const;
+			{elementsWithoutAds.map((item, elementIndex) => {
+				if (insertSlotsAfter.includes(elementIndex)) {
+					// Ad slot ids take the form: `ad-1`, `ad-2`, `ad-3`, ...
+					// Looking up the element index in the array of ad insertion points
+					// gives us the slot indexes
+					const slotIndex = insertSlotsAfter.indexOf(elementIndex);
+					const adSlotId = `ad-${slotIndex + 1}` as const;
 					return (
 						<React.Fragment key={item.key}>
 							{item}

@@ -207,6 +207,7 @@ export type FEFrontCard = {
 			elements: {
 				mainVideo?: unknown;
 				mediaAtoms: FEMediaAtom[];
+				mainMediaAtom?: FEMediaAtom;
 			};
 			tags: { tags: FETagType[] };
 		};
