@@ -1,6 +1,6 @@
+import { compare } from 'compare-versions';
 import { useEffect, useState } from 'react';
 import { getEnvironmentClient } from './bridgetApi';
-import { compare } from 'compare-versions';
 
 export const useIsBridgetCompatible = (
 	requiredVersion = '2.0.0',
