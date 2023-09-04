@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { newslettersClient } from '../../../apps-rendering/src/native/nativeApi';
+import { getNewslettersClient } from './bridgetApi';
 
 export const useRequestSignUp = (
 	input: string,
@@ -9,7 +9,7 @@ export const useRequestSignUp = (
 
 	useEffect(() => {
 		if (input) {
-			newslettersClient
+			getNewslettersClient()
 				.requestSignUp(input, identityName)
 				.then((success) => {
 					setIsSuccess(success);
