@@ -219,6 +219,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			front.config.pageId,
 		);
 
+	// This will be the targeted collections, if the current page is in the fronts banner AB test.
 	const frontsBannerTargetedCollections = isInNetworkFrontsBannerTest
 		? networkFrontsBannerAdCollections[front.config.pageId]
 		: isInSectionFrontsBannerTest
