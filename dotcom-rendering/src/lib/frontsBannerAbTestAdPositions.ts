@@ -57,38 +57,38 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		// 'football', has football weekly thrasher above atm
 		'Video',
 		'Other sports',
-		'The big picture',
 	],
 	football: [
 		// multiline array
-		'News and features',
+		'In depth',
 		'Regulars',
 		'Next generation',
 	],
 	'uk/culture': [
 		// multiline array
-		'Best culture for kids',
-		'Reviews',
+		'News',
 		'You may have missed',
 	],
 	'uk/lifeandstyle': [
 		// multiline array
 		'Fashion',
+		'Health & wellbeing',
 		'Money',
 		'The big picture',
 	],
 	'uk/commentisfree': [
 		'The Heat or Eat Diaries',
-		"Starmer's path to power",
-		'Spotlight',
-		'This is Europe',
-		'Columnists',
+		'Why I quit',
+		'The Guardian view',
+		'You may have missed',
+		'Cartoons',
+		'Letters',
 	],
 	'uk-news': [
 		// multiline array
 		'UK politics',
-		'Education',
-		'Multimedia',
+		'Culture',
+		'Society',
 	],
 	world: [
 		// multiline array
@@ -100,6 +100,7 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 	'us-news': [
 		// multiline array
 		'Opinion',
+		'US politics',
 		'Video',
 	],
 	'uk/business': [

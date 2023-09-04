@@ -84,12 +84,12 @@ const isToggleable = (
 export const decideAdSlot = (
 	renderAds: boolean,
 	index: number,
-	isNetworkFront: boolean | undefined,
 	collectionCount: number,
 	isPaidContent: boolean | undefined,
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
-	isInFrontsBannerTest?: boolean,
+	isInNetworkFrontsBannerTest?: boolean,
+	isInSectionFrontsBannerTest?: boolean,
 ) => {
 	if (!renderAds) return null;
 
@@ -97,7 +97,8 @@ export const decideAdSlot = (
 	if (
 		collectionCount > minContainers &&
 		index === getMerchHighPosition(collectionCount) &&
-		!(isInFrontsBannerTest && isNetworkFront)
+		!isInNetworkFrontsBannerTest &&
+		!isInSectionFrontsBannerTest
 	) {
 		return (
 			<AdSlot
@@ -474,13 +475,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									{decideAdSlot(
 										renderAds,
 										index,
-										front.isNetworkFront,
 										front.pressedPage.collections.length,
 										front.pressedPage.frontProperties
 											.isPaidContent,
 										mobileAdPositions,
 										hasPageSkin,
 										isInNetworkFrontsBannerTest,
+										isInSectionFrontsBannerTest,
 									)}
 								</div>
 							</Fragment>
@@ -554,13 +555,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideAdSlot(
 									renderAds,
 									index,
-									front.isNetworkFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
 									isInNetworkFrontsBannerTest,
+									isInSectionFrontsBannerTest,
 								)}
 							</>
 						);
@@ -609,13 +610,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideAdSlot(
 									renderAds,
 									index,
-									front.isNetworkFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
 									isInNetworkFrontsBannerTest,
+									isInSectionFrontsBannerTest,
 								)}
 							</Fragment>
 						);
@@ -689,13 +690,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideAdSlot(
 									renderAds,
 									index,
-									front.isNetworkFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
 									isInNetworkFrontsBannerTest,
+									isInSectionFrontsBannerTest,
 								)}
 							</Fragment>
 						);
@@ -772,12 +773,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							{decideAdSlot(
 								renderAds,
 								index,
-								front.isNetworkFront,
 								front.pressedPage.collections.length,
 								front.pressedPage.frontProperties.isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
 								isInNetworkFrontsBannerTest,
+								isInSectionFrontsBannerTest,
 							)}
 						</Fragment>
 					);
