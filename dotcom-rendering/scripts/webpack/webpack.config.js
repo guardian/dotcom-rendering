@@ -17,8 +17,6 @@ const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
 
 const sessionId = uuidv4();
 
-let builds = 0;
-
 /** @typedef {import('../../src/lib/assets').Build} Build */
 
 /**
@@ -85,25 +83,6 @@ const commonConfigs = ({ platform }) => ({
 					// @ts-expect-error -- somehow the type declaration isn’t playing nice
 					new WebpackMessages({
 						name: platform,
-						/** @type {(message: string) => void} */
-						logger: (message) => {
-							// distinguish between initial and subsequent (re)builds in console output
-							if (builds < module.exports.length * 2) {
-								console.log(
-									message
-										.replace('Building', 'Building initial')
-										.replace(
-											'Completed',
-											'Completed initial',
-										),
-								);
-							} else {
-								console.log(
-									message.replace('Building', 'Rebuilding'),
-								);
-							}
-							builds += 1;
-						},
 					}),
 			  ]
 			: // PROD plugins
