@@ -62,13 +62,13 @@ const closeButtonStyles = css`
 	padding: 0 10px;
 `;
 
-type ModalType =
+export type ModalType =
 	| 'NoModal'
 	| 'ModalSwitched'
 	| 'ModalDoYouWantToSwitch'
 	| 'ModalNowSeeing';
 
-const coe = [
+const coe: string[] = [
 	'AL',
 	'AD',
 	'AM',
@@ -116,13 +116,13 @@ const coe = [
 	'UA',
 ];
 
-const ukUsAusCountries = ['UK', 'US', 'AU'];
+const ukUsAusCountries: string[] = ['UK', 'US', 'AU'];
 
-const ukUsAusEditions = ['UK', 'US', 'AUS'];
+const ukUsAusEditions: string[] = ['UK', 'US', 'AUS'];
 
-const isValidEdition = guard(['EUR', 'US', 'UK', 'AU', 'INT'] as const);
+export const isValidEdition = guard(['EUR', 'US', 'UK', 'AU', 'INT'] as const);
 
-const getModalType = (): ModalType => {
+export const getModalType = (): ModalType => {
 	const editionCookie = getCookie({ name: 'GU_EDITION' });
 
 	const geoCountryCookie = getCookie({ name: 'GU_geo_country' });
