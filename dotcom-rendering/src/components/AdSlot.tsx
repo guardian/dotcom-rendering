@@ -366,9 +366,18 @@ const mobileStickyAdStyles = css`
 	}
 `;
 
-const nonExpandingContainerStyles = css`
+const mostPopContainerStyles = css`
+	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-width: 300px;
 	width: 300px;
-	margin: auto;
+	margin: 0px auto;
+	${from.desktop} {
+		margin: 0;
+		width: auto;
+	}
+	${from.wide} {
+		margin-top: 25px;
+	}
 `;
 
 export const adContainerStyles = [adContainerCollapseStyles, labelStyles];
@@ -499,7 +508,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="ad-slot-container"
-					css={[adContainerStyles, nonExpandingContainerStyles]}
+					css={[adContainerStyles, mostPopContainerStyles]}
 				>
 					<div
 						id="dfp-ad--mostpop"
@@ -630,10 +639,7 @@ export const AdSlot = ({
 		case 'inline': {
 			const advertId = `inline${index + 1}`;
 			return (
-				<div
-					className="ad-slot-container"
-					css={[adContainerStyles, nonExpandingContainerStyles]}
-				>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
@@ -675,10 +681,7 @@ export const AdSlot = ({
 		case 'mobile-front': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div
-					className="ad-slot-container"
-					css={[adContainerStyles, nonExpandingContainerStyles]}
-				>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
