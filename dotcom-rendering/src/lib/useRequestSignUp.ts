@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { newslettersClient } from '../../../apps-rendering/src/native/nativeApi';
 
-
 export const useRequestSignUp = (
 	input: string,
 	identityName: string,
