@@ -43,9 +43,8 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
   },
   "Parameters": {
     "AMIRendering": {
-      "Default": "/TEST/frontend/rendering/ami.imageId",
       "Description": "Amazon Machine Image ID for the app rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
-      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+      "Type": "AWS::EC2::Image::Id",
     },
     "DistributionBucketName": {
       "Default": "/account/services/artifact.bucket",

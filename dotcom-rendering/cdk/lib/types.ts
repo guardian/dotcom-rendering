@@ -22,10 +22,6 @@ export interface DCRProps extends GuStackProps {
 	 * The region in AWS where this app will run
 	 */
 	region: string;
-	/**
-	 * AMI Recipe to use
-	 */
-	amiRecipe: string;
 }
 
 export interface UserDataProps
