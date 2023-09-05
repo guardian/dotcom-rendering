@@ -8,7 +8,6 @@ const sharedProps = {
 	app: 'rendering',
 	stack: 'frontend',
 	region: 'eu-west-1',
-	amiRecipe: 'dotcom-rendering-ARM-jammy-node-18.17.0',
 };
 
 new DotcomRendering(app, 'DotcomRendering-PROD', {

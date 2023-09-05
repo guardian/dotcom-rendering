@@ -1,6 +1,5 @@
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
 import {
-	GuAmiParameter,
 	GuStack,
 	GuStringParameter,
 } from '@guardian/cdk/lib/constructs/core';
@@ -234,12 +233,6 @@ export class DotcomRendering extends GuStack {
 					default: `${ssmPrefix}/logging.stream.name`,
 				}).valueAsString,
 			}),
-			imageId: new GuAmiParameter(this, {
-				app,
-				fromSSM: true,
-				default: `${ssmPrefix}/ami.imageId`,
-			}),
-			imageRecipe: props.amiRecipe,
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
 			vpcSubnets: { subnets: privateSubnets },

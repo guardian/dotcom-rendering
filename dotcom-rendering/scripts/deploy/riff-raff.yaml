@@ -12,6 +12,12 @@ deployments:
         PROD: DotcomRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
+      amiParameter: AMIRendering
+      amiEncrypted: true
+      amiTags:
+        # Keep the Node version in sync with `.nvmrc`
+        Recipe: dotcom-rendering-ARM-jammy-node-18.17.0
+        AmigoStage: PROD
   rendering:
     type: autoscaling
     parameters:
