@@ -2,18 +2,18 @@
  * This file is temporary.
  *
  * For the Fronts banner AB test, we will target
- * specific sections on the page to insert ads above.
+ * specific collections on the page to insert ads above.
  *
  * When we go live with fronts-banner ads, there will be a setting in
  * the fronts config tool which will decide whether a section has an ad
  * inserted above it. At the time of this AB test, the setting does not yet exist.
  */
 
-type FrontsBannerAdSections = {
+type FrontsBannerAdCollections = {
 	[key: string]: string[];
 };
 
-export const frontsBannerAdSections: FrontsBannerAdSections = {
+export const networkFrontsBannerAdCollections: FrontsBannerAdCollections = {
 	uk: [
 		'Spotlight',
 		'Opinion',
@@ -48,5 +48,69 @@ export const frontsBannerAdSections: FrontsBannerAdSections = {
 		'Culture',
 		'Around the world',
 		'Take part',
+	],
+};
+
+export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
+	'uk/sport': [
+		'News and features',
+		// 'football', has football weekly thrasher above atm
+		'Video',
+		'Other sports',
+	],
+	football: [
+		// multiline array
+		'In depth',
+		'Regulars',
+		'Next generation',
+	],
+	'uk/culture': [
+		// multiline array
+		'News',
+		'You may have missed',
+	],
+	'uk/lifeandstyle': [
+		// multiline array
+		'Fashion',
+		'Health & wellbeing',
+		'Money',
+		'The big picture',
+	],
+	'uk/commentisfree': [
+		'The Heat or Eat Diaries',
+		'Why I quit',
+		'The Guardian view',
+		'You may have missed',
+		'Cartoons',
+		'Letters',
+	],
+	'uk-news': [
+		// multiline array
+		'UK politics',
+		'Culture',
+		'Society',
+	],
+	world: [
+		// multiline array
+		'Americas',
+		'Australia',
+		'Middle East',
+		'UK',
+	],
+	'us-news': [
+		// multiline array
+		'Opinion',
+		'US politics',
+		'Video',
+	],
+	'uk/business': [
+		// multiline array
+		'Opinion & analysis',
+		'Multimedia',
+	],
+	'australia-news': [
+		// multiline array
+		'Australian politics',
+		'Video',
 	],
 };

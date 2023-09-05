@@ -3,9 +3,19 @@ regions: [eu-west-1]
 allowedStages:
   - CODE
   - PROD
+templates:
+  cloudformation:
+    type: cloud-formation
+    parameters:
+      amiParameter: AMIRendering
+      amiEncrypted: true
+      amiTags:
+        # Keep the Node version in sync with `.nvmrc`
+        Recipe: dotcom-rendering-ARM-jammy-node-18.17.0
+        AmigoStage: PROD
 deployments:
   frontend-cfn:
-    type: cloud-formation
+    template: cloudformation
     parameters:
       templateStagePaths:
         CODE: DotcomRendering-CODE.template.json
@@ -13,7 +23,7 @@ deployments:
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
   render-front:
-    type: cloud-formation
+    template: cloudformation
     parameters:
       templateStagePaths:
         CODE: DotcomRendering-front-CODE.template.json
