@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, keyframes } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
+import { isString } from '@guardian/libs';
 import {
 	from,
 	palette,
@@ -8,7 +8,6 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { isNull } from 'lodash';
 import { lazy, Suspense } from 'react';
 import { type EditionId, getEditionFromId } from '../lib/edition';
 import type { WeatherData } from './WeatherWrapper.importable';
@@ -137,7 +136,6 @@ const LoadingIcon = () => (
 export type WeatherSlotProps = WeatherData & {
 	edition: EditionId;
 	css?: SerializedStyles;
-	dateTime?: string;
 };
 
 export const WeatherSlot = ({
@@ -148,7 +146,7 @@ export const WeatherSlot = ({
 	edition,
 	...props
 }: WeatherSlotProps) => {
-	const isNow = isUndefined(dateTime) || isNull(dateTime);
+	const isNow = !isString(dateTime);
 
 	const Icon = lazy(() =>
 		import(`../static/icons/weather/weather-${icon}.svg`).then(
