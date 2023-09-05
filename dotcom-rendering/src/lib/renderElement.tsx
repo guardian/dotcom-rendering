@@ -18,7 +18,6 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import { EmailSignup } from '../components/EmailSignup';
 import { EmailSignupWrapper } from '../components/EmailSignupWrapper.importable';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
@@ -26,7 +25,6 @@ import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
-import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
@@ -42,7 +40,6 @@ import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable'
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
-import { SecureSignup } from '../components/SecureSignup';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
 import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent';
@@ -459,45 +456,19 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
-			if (renderingTarget === 'Apps')
-				return (
-					<Island clientOnly={true} deferUntil={'idle'}>
-						<EmailSignupWrapper
-							skipToIndex={index}
-							identityName={element.newsletter.identityName}
-							description={element.newsletter.description}
-							name={element.newsletter.name}
-							frequency={element.newsletter.frequency}
-							successDescription={
-								element.newsletter.successDescription
-							}
-							theme={element.newsletter.theme}
-						/>
-					</Island>
-				);
 			return (
-				<InlineSkipToWrapper
-					id={`EmailSignup-skip-link-${index}`}
-					blockDescription="newsletter promotion"
-				>
-					<EmailSignup
-						identityName={element.newsletter.identityName}
-						description={element.newsletter.description}
-						name={element.newsletter.name}
-						frequency={element.newsletter.frequency}
-						successDescription={
-							element.newsletter.successDescription
-						}
-						theme={element.newsletter.theme}
-					>
-						<SecureSignup
-							name={element.newsletter.name}
-							newsletterId={element.newsletter.identityName}
-							successDescription={element.newsletter.description}
-						/>
-					</EmailSignup>
-				</InlineSkipToWrapper>
+				<EmailSignupWrapper
+					renderingTarget={renderingTarget}
+					skipToIndex={index}
+					identityName={element.newsletter.identityName}
+					description={element.newsletter.description}
+					name={element.newsletter.name}
+					frequency={element.newsletter.frequency}
+					successDescription={element.newsletter.successDescription}
+					theme={element.newsletter.theme}
+				/>
 			);
+
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent

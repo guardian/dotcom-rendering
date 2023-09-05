@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { EmailSignup } from './EmailSignup';
+import { EmailSignupWrapper } from './EmailSignupWrapper.importable';
 import { Section } from './Section';
 
 const withSectionWrapper = (Story: typeof NewsTheme) => (
@@ -14,7 +14,7 @@ const withSectionWrapper = (Story: typeof NewsTheme) => (
 );
 
 export default {
-	component: EmailSignup,
+	component: EmailSignupWrapper,
 	title: 'Components/EmailSignup',
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
@@ -38,7 +38,9 @@ export const Default = ({
 }: {
 	hidePrivacyMessage?: boolean;
 }) => (
-	<EmailSignup
+	<EmailSignupWrapper
+		skipToIndex={1}
+		renderingTarget="Web"
 		identityName="patriarchy"
 		description="Reviewing the most important stories on feminism and sexism and those fighting for equality"
 		name="The Week in Patriarchy"
@@ -54,7 +56,9 @@ export const NewsTheme = ({
 }: {
 	hidePrivacyMessage?: boolean;
 }) => (
-	<EmailSignup
+	<EmailSignupWrapper
+		skipToIndex={1}
+		renderingTarget="Web"
 		identityName="morning-briefing"
 		description="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
 		name="First Edition"
@@ -70,7 +74,9 @@ export const IrregularFrequency = ({
 }: {
 	hidePrivacyMessage?: boolean;
 }) => (
-	<EmailSignup
+	<EmailSignupWrapper
+		skipToIndex={1}
+		renderingTarget="Web"
 		identityName="documentaries"
 		description="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
 		name="Guardian Documentaries"
