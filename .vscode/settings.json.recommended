@@ -10,10 +10,6 @@
 	"files.watcherExclude": {
 		"**/target": true
 	},
-	"workbench.colorCustomizations": {
-		"titleBar.activeBackground": "#648FFF",
-		"titleBar.activeForeground": "#000000"
-	},
 	"jest.jestCommandLine": "yarn workspaces run test",
 	"gitlens.advanced.blame.customArguments": [
 		"--ignore-revs-file",
