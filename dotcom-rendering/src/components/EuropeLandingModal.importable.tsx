@@ -200,13 +200,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 						<div css={textStyles}>
 							<h1 css={headlineStyles}>
 								{modalType === 'ModalSwitched' &&
-									"We've switched you to the new Europe edition of the Guardian"}
+									'We’ve switched you to the new Europe edition of the Guardian'}
 								{modalType === 'ModalDoYouWantToSwitch' &&
 									'Would you like to switch to our new Europe edition?'}
 							</h1>
 							<p css={bodyStyles}>
 								{modalType === 'ModalSwitched' &&
-									"You're now getting more coverage tailored for readers in Europe"}
+									'You’re now getting more coverage tailored for readers in Europe'}
 								{modalType === 'ModalDoYouWantToSwitch' &&
 									'We’ve launched a new edition of the Guardian with our global coverage tailored for readers in Europe'}
 							</p>
