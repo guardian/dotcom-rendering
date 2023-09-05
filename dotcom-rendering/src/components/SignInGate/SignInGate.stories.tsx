@@ -4,6 +4,7 @@ import { SignInGateCopyTestJan2023 } from './gateDesigns/SignInGateCopyTestJan20
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
+import { SignInGateRealSocial } from './gateDesigns/SignInGateRealSocial';
 import type { CheckoutCompleteCookieData } from './types';
 import { ALL_PRODUCTS, ALL_USER_TYPES } from './types';
 
@@ -120,6 +121,21 @@ export const signInGateMainCheckoutCompletePersonalisedCopy = (
 };
 signInGateMainCheckoutCompletePersonalisedCopy.storyName =
 	'main_checkout_complete_personalised';
+
+export const realSocialStandalone = () => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateRealSocial
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/signin"
+				registerUrl="https://profile.theguardian.com/register"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+			/>
+		</Section>
+	);
+};
+realSocialStandalone.storyName = 'real_social_standalone';
 
 const defaultCheckoutCompleteCookieData: CheckoutCompleteCookieData = {
 	userType: 'new',
