@@ -435,7 +435,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						  })
 						: trails;
 
-					const editionBranding =
+					const frontEditionBranding =
 						front.pressedPage.frontProperties.commercial.editionBrandings.find(
 							(eB) =>
 								eB.edition.id === front.editionId &&
@@ -761,7 +761,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								index={index}
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
-								editionBranding={editionBranding}
+								frontEditionBranding={frontEditionBranding}
 								discussionApiUrl={front.config.discussionApiUrl}
 							>
 								<DecideContainer

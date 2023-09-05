@@ -96,7 +96,7 @@ type Props = {
 	hasPageSkin?: boolean;
 	discussionApiUrl: string;
 
-	editionBranding?: DCRFrontType['pressedPage']['frontProperties']['commercial']['editionBrandings'][number];
+	frontEditionBranding?: DCRFrontType['pressedPage']['frontProperties']['commercial']['editionBrandings'][number];
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -496,7 +496,7 @@ export const FrontSection = ({
 	index,
 	targetedTerritory,
 	hasPageSkin = false,
-	editionBranding,
+	frontEditionBranding,
 	discussionApiUrl,
 }: Props) => {
 	const overrides =
@@ -628,29 +628,29 @@ export const FrontSection = ({
 								editionId={editionId}
 							/>
 							{!isOnPaidContentFront &&
-								!!editionBranding &&
-								editionBranding.branding &&
+								!!frontEditionBranding &&
+								frontEditionBranding.branding &&
 								index === 0 && (
 									<>
 										<p css={labelStyles}>
 											{
-												editionBranding.branding.logo
-													.label
+												frontEditionBranding.branding
+													.logo.label
 											}
 										</p>
 										<Badge
 											imageSrc={
-												editionBranding.branding.logo
-													.src
+												frontEditionBranding.branding
+													.logo.src
 											}
 											href={
-												editionBranding.branding.logo
-													.link
+												frontEditionBranding.branding
+													.logo.link
 											}
 										/>
 										<a
 											href={
-												editionBranding.branding
+												frontEditionBranding.branding
 													.aboutThisLink
 											}
 											css={aboutThisLinkStyles}
