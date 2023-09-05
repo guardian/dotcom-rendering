@@ -37,7 +37,10 @@ const fixedWidthsPageSkin = css`
 `;
 
 const mostPopMargin = css`
-	margin: 9px 0 0 10px;
+	margin: 0 0 0 10px;
+	${from.desktop} {
+		margin: 9px 0 0 10px;
+	}
 	${from.leftCol} {
 		margin: 6px 0 0 10px;
 	}
