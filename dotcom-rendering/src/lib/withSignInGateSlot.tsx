@@ -9,7 +9,6 @@ import type { TagType } from '../types/tag';
 
 type Props = {
 	renderedElements: (JSX.Element | null | undefined)[];
-	format: ArticleFormat;
 	contentType: string;
 	sectionId: string;
 	tags: TagType[];
@@ -25,7 +24,6 @@ type Props = {
 
 export const withSignInGateSlot = ({
 	renderedElements,
-	format,
 	contentType,
 	sectionId,
 	tags,
@@ -45,7 +43,6 @@ export const withSignInGateSlot = ({
 					<div id="sign-in-gate">
 						<Island clientOnly={true}>
 							<SignInGateSelector
-								format={format}
 								contentType={contentType}
 								sectionId={sectionId}
 								tags={tags}

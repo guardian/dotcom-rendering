@@ -88,7 +88,7 @@ const ShowcaseGrid = ({
 					Vertical grey border
 					Main content
 					Right Column
-					
+
 				*/
 				${from.wide} {
 					${isPictureContent
@@ -741,9 +741,6 @@ export const ShowcaseLayout = ({
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
 									/>
 								</RightColumn>
 							</div>

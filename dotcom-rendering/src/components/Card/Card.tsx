@@ -542,11 +542,6 @@ export const Card = ({
 									containerPalette={containerPalette}
 									format={format}
 									mediaType={mainMedia.type}
-									mediaDuration={
-										mainMedia.type === 'Audio'
-											? mainMedia.duration
-											: undefined
-									}
 									hasKicker={!!kickerText}
 								/>
 							)}

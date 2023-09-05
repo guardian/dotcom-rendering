@@ -92,6 +92,7 @@ module.exports = {
 		'react/jsx-one-expression-per-line': 'off',
 		'react/no-danger': 'off', // We use `dangerouslySetInnerHTML` in several components
 		'react/prop-types': 'off',
+		'react/no-unused-prop-types': 'error',
 		'jsx-expressions/strict-logical-expressions': 'error',
 		'jsx-a11y/aria-role': [
 			'error',
