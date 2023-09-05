@@ -96,7 +96,9 @@ export const enhanceCollections = ({
 			badge: decideBadge(
 				collection.config.href,
 				// We only try to use a branded badge for paid content
-				allCardsHaveBranding ? allBranding : undefined,
+				isCollectionPaidContent && allCardsHaveBranding
+					? allBranding
+					: undefined,
 			),
 			grouped: groupCards(
 				collectionType,

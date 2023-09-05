@@ -16,6 +16,7 @@ import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
 import type { DCRBadgeType } from '../types/badge';
+import type { Branding } from '../types/branding';
 import type {
 	DCRContainerPalette,
 	DCRFrontType,
@@ -31,7 +32,6 @@ import { Island } from './Island';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
-import { Branding } from '../types/branding';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
@@ -96,10 +96,8 @@ type Props = {
 	 */
 	hasPageSkin?: boolean;
 	discussionApiUrl: string;
-
 	frontEditionBranding?: DCRFrontType['pressedPage']['frontProperties']['commercial']['editionBrandings'][number];
-
-	containerEditionBranding?: Branding;
+	containerSponsorBranding?: Branding;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -501,7 +499,7 @@ export const FrontSection = ({
 	hasPageSkin = false,
 	frontEditionBranding,
 	discussionApiUrl,
-	containerEditionBranding,
+	containerSponsorBranding,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -601,19 +599,9 @@ export const FrontSection = ({
 					</div>
 				) : (
 					<>
-						{!isOnPaidContentFront && (
-							<Hide until="leftCol">
-								{badge && (
-									<Badge
-										imageSrc={badge.imageSrc}
-										href={badge.href}
-									/>
-								)}
-							</Hide>
-						)}
-						<div css={titleStyle}>
-							{!isOnPaidContentFront && (
-								<Hide from="leftCol">
+						{!isOnPaidContentFront &&
+							containerSponsorBranding === undefined && (
+								<Hide until="leftCol">
 									{badge && (
 										<Badge
 											imageSrc={badge.imageSrc}
@@ -622,6 +610,18 @@ export const FrontSection = ({
 									)}
 								</Hide>
 							)}
+						<div css={titleStyle}>
+							{!isOnPaidContentFront &&
+								containerSponsorBranding === undefined && (
+									<Hide from="leftCol">
+										{badge && (
+											<Badge
+												imageSrc={badge.imageSrc}
+												href={badge.href}
+											/>
+										)}
+									</Hide>
+								)}
 							<ContainerTitle
 								title={title}
 								fontColour={overrides?.text.container}
@@ -663,6 +663,30 @@ export const FrontSection = ({
 										</a>
 									</>
 								)}
+
+							{containerSponsorBranding && (
+								<>
+									<p css={labelStyles}>
+										{containerSponsorBranding.logo.label}
+									</p>
+									<Badge
+										imageSrc={
+											containerSponsorBranding.logo.src
+										}
+										href={
+											containerSponsorBranding.logo.link
+										}
+									/>
+									<a
+										href={
+											containerSponsorBranding.aboutThisLink
+										}
+										css={aboutThisLinkStyles}
+									>
+										About this content
+									</a>
+								</>
+							)}
 						</div>
 					</>
 				)}
