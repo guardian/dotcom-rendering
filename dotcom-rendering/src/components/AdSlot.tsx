@@ -275,12 +275,12 @@ const mostPopAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
 	min-width: 300px;
-	width: min-content;
+	width: 300px;
 	margin: 12px auto;
 	text-align: center;
 	${from.desktop} {
 		margin: 0;
-		width: 300px;
+		width: auto;
 	}
 	${from.wide} {
 		margin-top: 25px;
@@ -288,15 +288,10 @@ const mostPopAdStyles = css`
 `;
 
 const mostPopContainerStyles = css`
-	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
 	min-width: 300px;
-	width: min-content;
+	width: fit-content;
 	margin: 0px auto;
-	${from.desktop} {
-		margin: 0;
-		width: 300px;
-	}
 `;
 
 /**
@@ -517,7 +512,11 @@ export const AdSlot = ({
 							'ad-slot--mpu-banner-ad',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[mostPopAdStyles]}
+						css={[
+							fluidAdStyles,
+							fluidFullWidthAdStyles,
+							mostPopAdStyles,
+						]}
 						data-link-name="ad slot mostpop"
 						data-name="mostpop"
 						aria-hidden="true"
