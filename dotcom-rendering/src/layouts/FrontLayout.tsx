@@ -204,7 +204,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		},
 	} = front;
 
-	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
+	const isInEuropeTest = !!(
+		abTests.europeNetworkFrontVariant === 'variant' ||
+		front.config.switches['todo']
+	);
 
 	// For the FrontsBannerAds test, we're not using contentType === "Network Front",
 	// just in case Europe goes live before the testing concludes.
@@ -373,9 +376,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-			<Island clientOnly={true}>
-				<EuropeLandingModal edition={front.editionId} />
-			</Island>
+			{isInEuropeTest && (
+				<Island clientOnly={true}>
+					<EuropeLandingModal edition={front.editionId} />
+				</Island>
+			)}
 			<main
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}

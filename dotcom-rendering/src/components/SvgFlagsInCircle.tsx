@@ -1,12 +1,13 @@
 import { css } from '@emotion/react';
 
 const svgStyle = css`
-	height: 100%;
+	height: 120%;
+	transform: translate(0%, -10%);
 `;
 export const SvgFlagsInCircle = () => (
 	<svg
 		css={svgStyle}
-		viewBox="0 50 200 250"
+		viewBox="0 0 351 362"
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
 	>

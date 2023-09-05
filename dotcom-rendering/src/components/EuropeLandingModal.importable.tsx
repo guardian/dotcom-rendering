@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 import { getCookie, setCookie } from '@guardian/libs';
-import { body, headline, palette, space } from '@guardian/source-foundations';
+import {
+	body,
+	from,
+	headline,
+	palette,
+	space,
+} from '@guardian/source-foundations';
 import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { EditionId } from '../lib/edition';
@@ -9,8 +15,8 @@ import { guard } from '../lib/guard';
 import { SvgClose } from './SvgClose';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
-// todo change z index
 const dialogStyles = css`
+	padding: 10px;
 	top: 0;
 	position: fixed;
 	border: none;
@@ -43,14 +49,21 @@ const editionSectionDivStyles = css`
 `;
 
 const headlineStyles = css`
-	${headline.small({ fontWeight: 'bold' })};
+	${headline.xsmall({ fontWeight: 'bold' })};
+	${from.tablet} {
+		${headline.small({ fontWeight: 'bold' })};
+	}
 `;
 const bodyStyles = css`
 	${body.medium()};
 	margin-top: ${space[3]}px;
 `;
 const buttonDivStyles = css`
-	margin-top: 77px;
+	display: flex;
+	margin-top: 33px;
+	${from.tablet} {
+		margin-top: 77px;
+	}
 `;
 const OKButtonStyles = css`
 	margin-right: ${space[2]}px;
@@ -62,11 +75,7 @@ const closeButtonStyles = css`
 	padding: 0 10px;
 `;
 
-export type ModalType =
-	| 'NoModal'
-	| 'ModalSwitched'
-	| 'ModalDoYouWantToSwitch'
-	| 'ModalNowSeeing';
+export type ModalType = 'NoModal' | 'ModalSwitched' | 'ModalDoYouWantToSwitch';
 
 const coe: string[] = [
 	'AL',
@@ -116,10 +125,6 @@ const coe: string[] = [
 	'UA',
 ];
 
-const ukUsAusCountries: string[] = ['UK', 'US', 'AU'];
-
-const ukUsAusEditions: string[] = ['UK', 'US', 'AUS'];
-
 export const isValidEdition = guard(['EUR', 'US', 'UK', 'AU', 'INT'] as const);
 
 export const getModalType = (): ModalType => {
@@ -127,34 +132,26 @@ export const getModalType = (): ModalType => {
 
 	const geoCountryCookie = getCookie({ name: 'GU_geo_country' });
 	const modalDismissedCookie = getCookie({ name: 'GU_eu_modal_dismissed' });
+
 	if (!geoCountryCookie) {
 		return 'NoModal';
 	}
 	if (modalDismissedCookie) {
 		return 'NoModal';
 	}
-	if (editionCookie === 'INT' && coe.includes(geoCountryCookie)) {
-		return 'ModalSwitched';
-	}
-
-	if (
-		editionCookie === 'INT' &&
-		!coe.includes(geoCountryCookie) &&
-		!ukUsAusCountries.includes(geoCountryCookie)
-	) {
+	// If selected INT and not in COE show do u want to switch
+	if (editionCookie === 'INT' && !coe.includes(geoCountryCookie)) {
 		return 'ModalDoYouWantToSwitch';
 	}
-
-	if (
-		editionCookie &&
-		ukUsAusEditions.includes(editionCookie) &&
-		coe.includes(geoCountryCookie)
-	) {
-		return 'ModalDoYouWantToSwitch';
-	}
-
-	if (!editionCookie && coe.includes(geoCountryCookie)) {
-		return 'ModalNowSeeing';
+	// If in COE
+	if (coe.includes(geoCountryCookie)) {
+		if (editionCookie === 'INT' || !editionCookie) {
+			// If INT edition or no edition
+			return 'ModalSwitched';
+		} else {
+			// If US, UK, AUS edition
+			return 'ModalDoYouWantToSwitch';
+		}
 	}
 	return 'NoModal';
 };
@@ -206,20 +203,17 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 									"We've switched you to the new Europe edition of the Guardian"}
 								{modalType === 'ModalDoYouWantToSwitch' &&
 									'Would you like to switch to our new Europe edition?'}
-								{modalType === 'ModalNowSeeing' && 'todo'}{' '}
-								{/* todo - get text for this*/}
 							</h1>
 							<p css={bodyStyles}>
 								{modalType === 'ModalSwitched' &&
 									"You're now getting more coverage tailored for readers in Europe"}
 								{modalType === 'ModalDoYouWantToSwitch' &&
 									'We’ve launched a new edition of the Guardian with our global coverage tailored for readers in Europe'}
-								{modalType === 'ModalNowSeeing' && 'todo'}{' '}
-								{/* todo - get text for this*/}
 							</p>
 							<div css={buttonDivStyles}>
 								{modalType === 'ModalSwitched' && (
 									<Button
+										size={'small'}
 										onClick={() => {
 											confirmNewEdition('EUR');
 										}}
@@ -230,6 +224,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 								)}
 								{modalType === 'ModalDoYouWantToSwitch' && (
 									<Button
+										size={'small'}
 										onClick={() => dismissModal()}
 										cssOverrides={OKButtonStyles}
 									>
@@ -237,18 +232,8 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 										No, Thanks{' '}
 									</Button>
 								)}
-								{modalType === 'ModalNowSeeing' && (
-									<Button
-										onClick={() => {
-											//todo
-										}}
-										cssOverrides={OKButtonStyles}
-									>
-										{' '}
-										TODO{' '}
-									</Button>
-								)}
 								<Button
+									size={'small'}
 									priority={'subdued'}
 									onClick={() => setSwitchEdition(true)}
 								>
@@ -301,11 +286,14 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							/>
 						</RadioGroup>
 						<Button
+							size={'small'}
 							onClick={() => confirmNewEdition(selectedEdition)}
 						>
 							Confirm
 						</Button>
+						// todo fix this button mobile
 						<Button
+							size={'small'}
 							cssOverrides={closeButtonStyles}
 							onClick={() => dismissModal()}
 						>

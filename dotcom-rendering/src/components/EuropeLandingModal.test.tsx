@@ -21,7 +21,7 @@ describe('getModalType', () => {
 
 	it('should return "NoModal" if modalDismissedCookie is set', () => {
 		mockGetCookie.mockImplementation((arg) => {
-			if (arg.name === 'GU_geo_country') return 'US';
+			if (arg.name === 'GU_geo_country') return 'DE';
 			if (arg.name === 'GU_eu_modal_dismissed') return 'true';
 			return null;
 		});
@@ -61,7 +61,7 @@ describe('getModalType', () => {
 			if (arg.name === 'GU_geo_country') return 'DE'; // Assuming 'DE' (Germany) is in COE
 			return null;
 		});
-		expect(getModalType()).toEqual('ModalNowSeeing');
+		expect(getModalType()).toEqual('ModalSwitched');
 	});
 
 	it('should return "NoModal" for all other cases', () => {
