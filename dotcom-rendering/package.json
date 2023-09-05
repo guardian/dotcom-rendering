@@ -247,6 +247,7 @@
 		"start-server-and-test": "1.15.5",
 		"storybook": "7.2.0",
 		"storybook-addon-turbo-build": "2.0.1",
+		"stream-browserify": "3.0.0",
 		"stylelint": "14.16.1",
 		"stylelint-config-standard": "29.0.0",
 		"stylelint-config-styled-components": "0.1.1",

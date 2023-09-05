@@ -42,6 +42,9 @@ const commonConfigs = ({ platform }) => ({
 		},
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 		symlinks: false,
+		fallback: {
+			stream: require.resolve('stream-browserify'),
+		},
 	},
 	ignoreWarnings: [
 		/**

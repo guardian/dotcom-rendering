@@ -18,7 +18,10 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import { EmailSignupWrapper } from '../components/EmailSignupWrapper.importable';
+import {
+	AppEmailSignupWrapper,
+	WebEmailSignupWrapper,
+} from '../components/EmailSignupWrapper.importable';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
@@ -456,16 +459,26 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
-			return (
-				<EmailSignupWrapper
-					renderingTarget={renderingTarget}
+			const emailSignUpProps = {
+				renderingTarget,
+				identityName: element.newsletter.identityName,
+				description: element.newsletter.description,
+				name: element.newsletter.name,
+				frequency: element.newsletter.frequency,
+				successDescription: element.newsletter.successDescription,
+				theme: element.newsletter.theme,
+			};
+			return renderingTarget === 'Apps' ? (
+				<Island clientOnly={true} deferUntil={'idle'}>
+					<AppEmailSignupWrapper
+						skipToIndex={index}
+						{...emailSignUpProps}
+					/>
+				</Island>
+			) : (
+				<WebEmailSignupWrapper
 					skipToIndex={index}
-					identityName={element.newsletter.identityName}
-					description={element.newsletter.description}
-					name={element.newsletter.name}
-					frequency={element.newsletter.frequency}
-					successDescription={element.newsletter.successDescription}
-					theme={element.newsletter.theme}
+					{...emailSignUpProps}
 				/>
 			);
 
