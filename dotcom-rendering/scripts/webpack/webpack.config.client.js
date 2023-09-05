@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
 const { getBrowserTargets } = require('./browser-targets');
-const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -135,16 +134,6 @@ module.exports = ({ build, sessionId }) => ({
 					}),
 					new webpack.ProvidePlugin({
 						Buffer: ['buffer', 'Buffer'],
-					}),
-			  ]
-			: []),
-		...(DEV
-			? [
-					new GuStatsReportPlugin({
-						buildName: `${build}-client`,
-						project: 'dotcom-rendering',
-						team: 'dotcom',
-						sessionId,
 					}),
 			  ]
 			: []),
