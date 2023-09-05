@@ -9,7 +9,7 @@ const jsonPayload = new SharedArray('jsonPayload', function () {
 
 export const options = {
 	vus: 10,
-	duration: '10s',
+	duration: '60s',
 };
 
 export default function () {
