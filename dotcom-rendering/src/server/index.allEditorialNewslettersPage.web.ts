@@ -12,8 +12,8 @@ export const handleAllEditorialNewslettersPage: RequestHandler = (
 	recordTypeAndPlatform('newsletters');
 	const feNewslettersData = validateAsAllEditorialNewslettersPageType(body);
 	const newslettersPage = enhanceNewslettersPage(feNewslettersData);
-	const { html, clientScripts } = renderEditorialNewslettersPage({
+	const { html, prefetchScripts } = renderEditorialNewslettersPage({
 		newslettersPage,
 	});
-	res.status(200).set('Link', makePrefetchHeader(clientScripts)).send(html);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };

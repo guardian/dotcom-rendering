@@ -36,7 +36,7 @@ const decideTitle = (article: FEArticleType): string => {
 
 export const renderHtml = ({
 	article,
-}: Props): { html: string; clientScripts: string[] } => {
+}: Props): { html: string; prefetchScripts: string[] } => {
 	const NAV = {
 		...extractNAV(article.nav),
 		selectedPillar: getCurrentPillar(article),
@@ -92,19 +92,26 @@ export const renderHtml = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const clientScripts = [
+	const prefetchScripts = [
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ?? article.config.commercialBundleUrl,
 		pageHasNonBootInteractiveElements &&
 			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 	]
 		.filter(isString)
 		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
-	const scriptTags = generateScriptTags(clientScripts);
+
+	const legacyScripts = [
+		getPathFromManifest('web.legacy', 'frameworks.js'),
+		getPathFromManifest('web.legacy', 'index.js'),
+	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+
+	const scriptTags = generateScriptTags([
+		...prefetchScripts,
+		...legacyScripts,
+	]);
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -217,7 +224,7 @@ window.twttr = (function(d, s, id) {
 		weAreHiring: !!article.config.switches.weAreHiring,
 	});
 
-	return { html: pageHtml, clientScripts };
+	return { html: pageHtml, prefetchScripts };
 };
 
 /**
