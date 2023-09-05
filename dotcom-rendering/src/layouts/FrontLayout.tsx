@@ -444,6 +444,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					const isFirstContainer = index === 0;
 
+					const containerEditionBranding = undefined;
+
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<Fragment key={ophanName}>
@@ -763,6 +765,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								hasPageSkin={hasPageSkin}
 								frontEditionBranding={frontEditionBranding}
 								discussionApiUrl={front.config.discussionApiUrl}
+								containerEditionBranding={
+									containerEditionBranding
+								}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}

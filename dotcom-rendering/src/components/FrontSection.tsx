@@ -31,6 +31,7 @@ import { Island } from './Island';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
+import { Branding } from '../types/branding';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
@@ -97,6 +98,8 @@ type Props = {
 	discussionApiUrl: string;
 
 	frontEditionBranding?: DCRFrontType['pressedPage']['frontProperties']['commercial']['editionBrandings'][number];
+
+	containerEditionBranding?: Branding;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -498,6 +501,7 @@ export const FrontSection = ({
 	hasPageSkin = false,
 	frontEditionBranding,
 	discussionApiUrl,
+	containerEditionBranding,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
