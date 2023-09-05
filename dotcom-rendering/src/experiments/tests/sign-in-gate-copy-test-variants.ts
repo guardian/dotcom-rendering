@@ -6,7 +6,7 @@ export const signInGateCopyTestJan2023: ABTest = {
 	expiry: '2025-12-01',
 	author: 'Lindsey Dew',
 	description: 'Test varying the copy in the call to action for sign in gate',
-	audience: 0.0,
+	audience: 0.9,
 	audienceOffset: 0.0,
 	successMeasure: 'Users sign in or create a Guardian account',
 	audienceCriteria:
@@ -23,10 +23,6 @@ export const signInGateCopyTestJan2023: ABTest = {
 		},
 		{
 			id: 'take-a-moment',
-			test: (): void => {},
-		},
-		{
-			id: 'sign-in-copy-control',
 			test: (): void => {},
 		},
 	],
