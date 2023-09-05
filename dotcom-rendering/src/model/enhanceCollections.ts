@@ -75,7 +75,12 @@ export const enhanceCollections = ({
 			 * We do this because Frontend had logic to ignore the "Branded" palette tag in the Fronts tool
 			 * when rendering a paid front or when non-paid content is curated inside a "Branded" container
 			 */
-			{ canBeBranded: !isPaidContent && allCardsHaveBranding },
+			{
+				canBeBranded:
+					!isPaidContent &&
+					allCardsHaveBranding &&
+					isCollectionPaidContent,
+			},
 		);
 
 		return {
