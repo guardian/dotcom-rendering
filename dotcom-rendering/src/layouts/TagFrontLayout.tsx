@@ -301,7 +301,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							{decideAdSlot(
 								renderAds,
 								index,
-								false,
 								tagFront.groupedTrails.length,
 								tagFront.config.isPaidContent,
 								mobileAdPositions,
