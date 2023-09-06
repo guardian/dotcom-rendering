@@ -1,5 +1,6 @@
 import { storage } from '@guardian/libs';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { Standard } from '../../../fixtures/generated/articles/Standard';
 
 const idapiIdentifiersResponse = `{ "id": "000000000", "brazeUuid": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", "puzzleUuid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "googleTagId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }`;
 
@@ -32,6 +33,29 @@ const cmpIframe = () => {
 		.then(cy.wrap);
 };
 
+const visitArticle = () =>
+	cy.visit('/Article', {
+		method: 'POST',
+		body: JSON.stringify({
+			...Standard,
+			config: {
+				...Standard.config,
+				switches: {
+					...Standard.config.switches,
+					/**
+					 * We want to continue using cookies for signed in features
+					 * until we figure out how to use Okta in Cypress.
+					 * See https://github.com/guardian/dotcom-rendering/issues/8758
+					 */
+					okta: false,
+				},
+			},
+		}),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
+
 describe('Braze messaging', function () {
 	beforeEach(function () {
 		cy.clearLocalStorage();
@@ -54,18 +78,14 @@ describe('Braze messaging', function () {
 
 		storage.local.set('gu.geo.override', 'GB');
 
-		cy.visit(
-			'/Article/https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-		);
+		visitArticle();
 		cy.intercept('POST', '**/choice/gdpr/**').as('tcfRequest');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
 		cmpIframe().find(`[title="Yes, I’m happy"]`).click();
 		// eslint-disable-next-line cypress/no-unnecessary-waiting
 		cy.wait('@tcfRequest');
-		cy.visit(
-			'/Article/https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-		);
+		visitArticle();
 		cy.waitUntil(() => localStorage.getItem('gu.brazeUserSet') === 'true', {
 			errorMsg: 'Error waiting for gu.brazeUserSet to be "true"',
 		});
@@ -85,9 +105,7 @@ describe('Braze messaging', function () {
 		cy.setCookie('bwid', 'myBrowserId');
 
 		storage.local.set('gu.geo.override', 'GB');
-		cy.visit(
-			'/Article/https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-		);
+		visitArticle();
 
 		cy.intercept('POST', '**/choice/gdpr/**').as('tcfRequest');
 		// Open the Privacy setting dialogue
@@ -96,7 +114,7 @@ describe('Braze messaging', function () {
 		cy.wait('@tcfRequest');
 
 		// Make second page load with consent
-		cy.reload();
+		visitArticle();
 
 		cy.waitUntil(() => localStorage.getItem('gu.brazeUserSet') === 'true', {
 			errorMsg: 'Error waiting for gu.brazeUserSet to be "true"',
@@ -110,7 +128,7 @@ describe('Braze messaging', function () {
 			cy.intercept('GET', '**/user/me/identifiers', { statusCode: 403 });
 
 			// Make a third call when logged out
-			cy.reload();
+			visitArticle();
 
 			cy.waitUntil(
 				() => localStorage.getItem('gu.brazeUserSet') !== 'true',
