@@ -86,12 +86,13 @@ module.exports = {
 		// React, Hooks & JSX
 		'react-hooks/exhaustive-deps': 'error',
 		'react-hooks/rules-of-hooks': 'error',
-		'react/jsx-boolean-value': [2, 'always'],
+		'react/jsx-boolean-value': ['error', 'always'],
 		'react/jsx-key': 'error',
 		'react/jsx-no-target-blank': 'error',
 		'react/jsx-one-expression-per-line': 'off',
 		'react/no-danger': 'off', // We use `dangerouslySetInnerHTML` in several components
-		'react/prop-types': [0],
+		'react/prop-types': 'off',
+		'react/no-unused-prop-types': 'error',
 		'jsx-expressions/strict-logical-expressions': 'error',
 		'jsx-a11y/aria-role': [
 			'error',

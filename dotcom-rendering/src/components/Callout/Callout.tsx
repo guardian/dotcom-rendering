@@ -48,7 +48,6 @@ export interface CalloutBlockProps {
 	formFields: CampaignFieldType[];
 	formId: string;
 	submissionURL: string;
-	isExpired: boolean;
 	isNonCollapsible: boolean;
 	contacts?: CalloutContactType[];
 	pageId: string;

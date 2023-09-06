@@ -296,6 +296,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 export type BannerProps = {
 	meta: any;
 	module: ModuleData;
+	// eslint-disable-next-line react/no-unused-prop-types -- ESLint is wrong: it is used in ReaderRevenueBanner
 	fetchEmail?: () => Promise<string | null>;
 };
 

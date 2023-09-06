@@ -1,3 +1,4 @@
+import type { ArticleFormat } from '@guardian/libs';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import { Body } from '../ExpandableAtom/Body';
 import { Container } from '../ExpandableAtom/Container';
@@ -5,7 +6,6 @@ import { Footer } from '../ExpandableAtom/Footer';
 
 export type GuideAtomProps = {
 	id: string;
-	label?: string;
 	title: string;
 	image?: string;
 	html: string;
