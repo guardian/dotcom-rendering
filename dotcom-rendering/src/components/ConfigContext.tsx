@@ -34,8 +34,5 @@ export const useConfig = (): ApplicationConfig => {
 		throw Error('useConfig must be used within the ConfigContext provider');
 	}
 
-	// TODO - remove console.log
-	// console.log('\n🕹️ `useConfig` => ', context);
-
 	return context;
 };
