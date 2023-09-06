@@ -5,7 +5,7 @@ import { log, startPerformanceMeasure } from '@guardian/libs';
 import { createElement } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { ConfigProvider } from '../../components/ConfigContext';
-import type { ApplicationConfig } from '../../types/configContext';
+import type { Config } from '../../types/configContext';
 
 declare global {
 	interface DOMStringMap {
@@ -35,7 +35,7 @@ export const doHydration = async (
 	data: { [key: string]: unknown } | null,
 	element: HTMLElement,
 	emotionCache: EmotionCache,
-	config: ApplicationConfig,
+	config: Config,
 ): Promise<void> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time

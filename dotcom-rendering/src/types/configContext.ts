@@ -6,6 +6,6 @@ import type { RenderingTarget } from './renderingTarget';
  * This should not contain any properties which are likely to change between re-renders
  * @see /dotcom-rendering/docs/architecture/proposed-adrs/react-context-api.md
  */
-export interface ApplicationConfig {
+export interface Config {
 	renderingTarget: RenderingTarget;
 }

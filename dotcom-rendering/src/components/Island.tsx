@@ -135,6 +135,13 @@ export const Island = ({
 	rootMargin,
 	children,
 }: Props) => {
+	/**
+	 * Where is this coming from?
+	 * Config value is set at high in the component tree within a React context
+	 * @see /dotcom-rendering/src/components/ArticlePage.tsx or look for a `<ConfigProvider />`
+	 *
+	 * This is here so that we can provide the config information to the hydrated, client-side rendered components
+	 */
 	const config = useConfig();
 
 	return (
