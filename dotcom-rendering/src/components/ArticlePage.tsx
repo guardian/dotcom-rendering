@@ -10,6 +10,7 @@ import type { FEArticleType } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
+import { ConfigProvider } from './ConfigContext';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
@@ -17,7 +18,6 @@ import { LightboxJavascript } from './LightboxJavascript.importable';
 import { LightboxLayout } from './LightboxLayout';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
-import { RenderingContextProvider } from './RenderingContext';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
@@ -40,7 +40,8 @@ interface AppProps extends BaseProps {
 
 /**
  * @description
- * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
+ * Article is a high level wrapper for article pages on Dotcom.
+ * Sets strict mode and some globals, as well as providing high-level context.
  * */
 export const ArticlePage = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
@@ -54,11 +55,15 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		adUnit: article.config.adUnit,
 	});
 
-	const renderingContext = { target: renderingTarget };
+	/**
+	 * The static, immutable context value for the app
+	 * @see /dotcom-rendering/src/components/ConfigContext.tsx
+	 */
+	const configContext = { renderingTarget };
 
 	return (
 		<StrictMode>
-			<RenderingContextProvider value={renderingContext}>
+			<ConfigProvider value={configContext}>
 				<Global
 					styles={css`
 						/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
@@ -164,7 +169,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 						renderingTarget={renderingTarget}
 					/>
 				)}
-			</RenderingContextProvider>
+			</ConfigProvider>
 		</StrictMode>
 	);
 };

@@ -115,7 +115,7 @@ export const ArticleAppsStory = () => {
 	);
 };
 /** @see /dotcom-rendering/docs/development/storybook.md */
-ArticleAppsStory.args = { renderingContext: { target: 'Apps' } };
+ArticleAppsStory.args = { config: { renderingTarget: 'Apps' } };
 
 export const BrandingStory = () => {
 	return (

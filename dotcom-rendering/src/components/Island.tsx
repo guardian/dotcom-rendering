@@ -1,3 +1,4 @@
+import { useConfig } from './ConfigContext';
 import { Placeholder } from './Placeholder';
 
 /**
@@ -133,18 +134,23 @@ export const Island = ({
 	placeholderHeight,
 	rootMargin,
 	children,
-}: Props) => (
-	<gu-island
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
-		name={children.type.name}
-		deferUntil={deferUntil}
-		props={JSON.stringify(children.props)}
-		clientOnly={clientOnly}
-		rootMargin={rootMargin}
-	>
-		{decideChildren(children, clientOnly, placeholderHeight)}
-	</gu-island>
-);
+}: Props) => {
+	const config = useConfig();
+
+	return (
+		<gu-island
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
+			name={children.type.name}
+			deferUntil={deferUntil}
+			props={JSON.stringify(children.props)}
+			clientOnly={clientOnly}
+			rootMargin={rootMargin}
+			config={JSON.stringify(config)}
+		>
+			{decideChildren(children, clientOnly, placeholderHeight)}
+		</gu-island>
+	);
+};
 
 /**
  * If JavaScript is disabled, hide client-only islands

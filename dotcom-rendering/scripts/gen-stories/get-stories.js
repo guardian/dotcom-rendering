@@ -119,7 +119,7 @@ export const ${storyVariableName} = () => {
 	);
 };
 ${storyVariableName}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}';
-${storyVariableName}.args = { renderingContext: { target: '${renderingTarget}' } };
+${storyVariableName}.args = { config: { renderingTarget: '${renderingTarget}' } };
 `;
 };
 

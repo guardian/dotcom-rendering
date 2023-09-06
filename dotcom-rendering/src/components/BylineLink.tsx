@@ -5,9 +5,9 @@ import {
 	isContributor,
 } from '../lib/byline';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
-import { useRenderingContext } from './RenderingContext';
 
 type Props = {
 	byline: string;
@@ -131,12 +131,12 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 		);
 	});
 
-	const { isApps } = useRenderingContext();
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
 			{renderedTokens}
-			{isApps && soleContributor !== undefined ? (
+			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
 				<Island>
 					<FollowWrapper
 						displayName={soleContributor.title}
