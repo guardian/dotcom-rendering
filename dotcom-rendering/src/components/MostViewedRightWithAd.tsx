@@ -7,7 +7,6 @@ type Props = {
 	display: ArticleDisplay;
 	isPaidContent: boolean;
 	renderAds: boolean;
-	shouldHideReaderRevenue: boolean;
 };
 
 /**

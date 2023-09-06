@@ -92,10 +92,10 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 export const handleFront: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('front');
 	const front = enhanceFront(body);
-	const { html, clientScripts } = renderFront({
+	const { html, prefetchScripts } = renderFront({
 		front,
 	});
-	res.status(200).set('Link', makePrefetchHeader(clientScripts)).send(html);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
 export const handleFrontJson: RequestHandler = ({ body }, res) => {
@@ -105,10 +105,10 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 export const handleTagFront: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('tagFront');
 	const tagFront = enhanceTagFront(body);
-	const { html, clientScripts } = renderTagFront({
+	const { html, prefetchScripts } = renderTagFront({
 		tagFront,
 	});
-	res.status(200).set('Link', makePrefetchHeader(clientScripts)).send(html);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
 export const handleTagFrontJson: RequestHandler = ({ body }, res) => {

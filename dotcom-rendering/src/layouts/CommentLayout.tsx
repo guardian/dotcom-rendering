@@ -679,9 +679,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
 									/>
 								</RightColumn>
 							</div>

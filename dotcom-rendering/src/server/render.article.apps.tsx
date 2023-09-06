@@ -10,7 +10,7 @@ import { htmlPageTemplate } from './htmlPageTemplate';
 export const renderArticle = (
 	article: FEArticleType,
 ): {
-	clientScripts: string[];
+	prefetchScripts: string[];
 	html: string;
 } => {
 	const format: ArticleFormat = decideFormat(article.format);
@@ -58,7 +58,7 @@ export const renderArticle = (
 	});
 
 	return {
-		clientScripts,
+		prefetchScripts: clientScripts,
 		html: renderedPage,
 	};
 };

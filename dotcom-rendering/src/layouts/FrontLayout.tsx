@@ -96,17 +96,27 @@ export const decideAdSlot = (
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
 		collectionCount > minContainers &&
-		index === getMerchHighPosition(collectionCount) &&
-		!isInNetworkFrontsBannerTest &&
-		!isInSectionFrontsBannerTest
+		index === getMerchHighPosition(collectionCount)
 	) {
-		return (
-			<AdSlot
-				data-print-layout="hide"
-				position="merchandising-high"
-				hasPageskin={hasPageSkin}
-			/>
-		);
+		if (isInNetworkFrontsBannerTest || isInSectionFrontsBannerTest) {
+			return (
+				<Hide from="desktop">
+					<AdSlot
+						data-print-layout="hide"
+						position="merchandising-high"
+						hasPageskin={hasPageSkin}
+					/>
+				</Hide>
+			);
+		} else {
+			return (
+				<AdSlot
+					data-print-layout="hide"
+					position="merchandising-high"
+					hasPageskin={hasPageSkin}
+				/>
+			);
+		}
 	} else if (mobileAdPositions.includes(index)) {
 		return (
 			<Hide from="tablet">

@@ -10,7 +10,6 @@ import {
 import { getCookie } from '@guardian/libs';
 import { billboardsInMerchHigh } from '../experiments/tests/billboards-in-merch-high';
 import { integrateIma } from '../experiments/tests/integrate-ima';
-import { limitInlineMerch } from '../experiments/tests/limit-inline-merch';
 import { liveblogRightColumnAds } from '../experiments/tests/liveblog-right-column-ads';
 import { publicGoodTest } from '../experiments/tests/public-good';
 import { useAB } from '../lib/useAB';
@@ -29,7 +28,6 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 	integrateIma,
-	limitInlineMerch,
 	billboardsInMerchHigh,
 	liveblogRightColumnAds,
 	publicGoodTest,

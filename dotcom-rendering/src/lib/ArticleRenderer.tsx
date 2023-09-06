@@ -110,7 +110,6 @@ export const ArticleRenderer = ({
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
 				  withSignInGateSlot({
 						renderedElements,
-						format,
 						contentType,
 						sectionId,
 						tags,

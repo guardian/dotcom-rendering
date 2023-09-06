@@ -731,9 +731,6 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
 									/>
 								</RightColumn>
 							</div>

@@ -76,11 +76,11 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
 	const article = enhanceArticleType(body);
-	const { html, clientScripts } = renderHtml({
+	const { html, prefetchScripts } = renderHtml({
 		article,
 	});
 
-	res.status(200).set('Link', makePrefetchHeader(clientScripts)).send(html);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
@@ -105,11 +105,11 @@ export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'web');
 	const article = enhanceArticleType(body);
-	const { html, clientScripts } = renderHtml({
+	const { html, prefetchScripts } = renderHtml({
 		article,
 	});
 
-	res.status(200).set('Link', makePrefetchHeader(clientScripts)).send(html);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
 export const handleBlocks: RequestHandler = ({ body }, res) => {
