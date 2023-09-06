@@ -7,7 +7,7 @@ import {
 import type { TagType } from '../types/tag';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
-import { useRenderingTarget } from './RenderingContext';
+import { useRenderingContext } from './RenderingContext';
 
 type Props = {
 	byline: string;
@@ -131,12 +131,13 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 		);
 	});
 
-	const { isApps } = useRenderingTarget();
+	const renderingContext = useRenderingContext();
+	console.log('=====> RENDERING CONTEXT', renderingContext);
 
 	return (
 		<>
 			{renderedTokens}
-			{isApps && soleContributor !== undefined ? (
+			{renderingContext.isApps && soleContributor !== undefined ? (
 				<Island>
 					<FollowWrapper
 						displayName={soleContributor.title}

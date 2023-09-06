@@ -3,17 +3,17 @@ import type { RenderingTarget } from './renderingTarget';
 /**
  * Context for global values (generic)
  *
- * This should not contain any properties which are likely to change between re-renders
+ * Do not add properties which are likely to change between re-renders
+ * @see /dotcom-rendering/docs/architecture/proposed-adrs/react-context-api.md
  */
 export interface RenderingContextType {
 	target: RenderingTarget;
 }
 
 /**
- * Context for rendering target, specifically
+ * Enhanced context based on provided values, making assertions easier
  */
-export interface RenderingTargetContextType {
-	target: RenderingTarget;
+export interface EnhancedRenderingContextType extends RenderingContextType {
 	isApps: boolean;
 	isWeb: boolean;
 }

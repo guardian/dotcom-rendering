@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { adContainerStyles } from '../components/AdSlot';
-import { useRenderingTarget } from '../components/RenderingContext';
+import { useRenderingContext } from '../components/RenderingContext';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
@@ -84,7 +84,7 @@ export const ArticleRenderer = ({
 		);
 	});
 
-	const { isApps } = useRenderingTarget();
+	const { isApps } = useRenderingContext();
 
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,

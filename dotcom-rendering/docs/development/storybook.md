@@ -1,9 +1,7 @@
 # Storybook
 
-We use Storybook to visualise our components in an isolated environment, where we can tweak the conditions to our hearts content.
+We use Storybook to visualise our components in an isolated environment, where we can tweak the conditions as we want.
 We use Chromatic for visual regression testing of Storybook components.
-
-Here is a non-exhaustive list of some useful tips for our Storybook implementation:
 
 ## Rendering context
 
