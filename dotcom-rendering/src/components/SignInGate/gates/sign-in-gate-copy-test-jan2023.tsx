@@ -2,8 +2,8 @@ import { startPerformanceMeasure } from '@guardian/libs';
 import React, { Suspense } from 'react';
 import { Lazy } from '../../Lazy';
 import { canShowSignInGate } from '../displayRule';
-import type { SignInGateComponent } from '../types';
 import { SignInGateMainCheckoutComplete } from '../gateDesigns/SignInGateMainCheckoutComplete';
+import type { SignInGateComponent } from '../types';
 
 const SignInGateCopyTestJan2023 = React.lazy(() => {
 	const { endPerformanceMeasure } = startPerformanceMeasure(
