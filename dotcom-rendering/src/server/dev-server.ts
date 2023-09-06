@@ -22,8 +22,8 @@ const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
 const FRONT_URL = /^\/[a-z-/]+/;
 /** This is imperfect, but covers *some* cases of tag fronts, consider expanding in the future */
 const TAG_FRONT_URL = /^\/(tone|series|profile)\/[a-z-]+/;
-/** assets are paths like /assets/index.xxx.js */
-const ASSETS_URL = /^assets\/.+\.js/;
+/** assets are paths like /assets/client.web/index.xxx.js */
+const ASSETS_URL = /^\/assets\/client\./;
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info

@@ -69,12 +69,6 @@ module.exports = ({ sessionId }) => ({
 				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
-		// @ts-expect-error - webpack-node-externals types are incorrect
-		({ request }, callback) => {
-			return request?.endsWith('manifest.legacy.json')
-				? callback(undefined, `commonjs ${request}`)
-				: callback();
-		},
 	],
 	module: {
 		rules: [

@@ -52,7 +52,7 @@ const isAssetHash = (manifest: unknown): manifest is AssetHash =>
 const getManifest = (path: string): AssetHash => {
 	try {
 		const assetHash: unknown = JSON.parse(
-			readFileSync(resolve(__dirname, path), { encoding: 'utf-8' }),
+			readFileSync(path, { encoding: 'utf-8' }),
 		);
 		if (!isAssetHash(assetHash))
 			throw new Error('Not a valid AssetHash type');
@@ -72,11 +72,6 @@ export type Build =
 	| 'web.scheduled'
 	| 'web.legacy';
 
-type ManifestPath = `./${Build}/manifest.json`;
-
-const getManifestPath = (build: Build): ManifestPath =>
-	`./${build}/manifest.json`;
-
 export const getPathFromManifest = (
 	build: Build,
 	filename: `${string}.js`,
@@ -84,21 +79,23 @@ export const getPathFromManifest = (
 	if (!filename.endsWith('.js'))
 		throw new Error('Invalid filename: extension must be .js');
 
-	if (isDev) {
-		return `${ASSET_ORIGIN}assets/${filename.replace(
-			'.js',
-			`.${build}.js`,
-		)}`;
-	}
-
-	const manifest = getManifest(getManifestPath(build));
+	const manifest = getManifest(
+		resolve(
+			__dirname,
+			'..',
+			'..',
+			'dist',
+			`client.${build}`,
+			'manifest.json',
+		),
+	);
 	const filenameFromManifest = manifest[filename];
 
 	if (!filenameFromManifest) {
 		throw new Error(`Missing manifest for ${filename}`);
 	}
 
-	return `${ASSET_ORIGIN}assets/${filenameFromManifest}`;
+	return `${ASSET_ORIGIN}assets/client.${build}/${filenameFromManifest}`;
 };
 
 /**
@@ -109,7 +106,7 @@ export const getPathFromManifest = (
  * and stripped query parameters.
  */
 const getScriptRegex = (build: Build) =>
-	new RegExp(`assets\\/${build}\\/\\w+\\.(\\w{20}\\.)?js(\\?.*)?$`);
+	new RegExp(`assets\\/client.${build}\\/\\w+\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
 export const WEB = getScriptRegex('web');
 export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');

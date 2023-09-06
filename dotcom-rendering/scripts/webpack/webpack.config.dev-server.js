@@ -26,10 +26,16 @@ module.exports = {
 			overlay: true,
 		},
 		port,
-		static: {
-			directory: path.join(__dirname, '..', '..', 'src', 'static'),
-			publicPath: '/static/frontend',
-		},
+		static: [
+			{
+				directory: path.join(__dirname, '..', '..', 'dist'),
+				publicPath: '/assets',
+			},
+			{
+				directory: path.join(__dirname, '..', '..', 'src', 'static'),
+				publicPath: '/static/frontend',
+			},
+		],
 		allowedHosts: ['r.thegulocal.com'],
 		devMiddleware: {
 			publicPath: '/assets/',
@@ -45,6 +51,7 @@ module.exports = {
 						req.headers.origin,
 					);
 			},
+			writeToDisk: true,
 		},
 		setupMiddlewares: (middlewares, devServer) => {
 			if (!devServer.app) {

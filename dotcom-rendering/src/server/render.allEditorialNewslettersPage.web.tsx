@@ -1,3 +1,4 @@
+import { isString } from '@guardian/libs';
 import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
 import {
 	generateScriptTags,
@@ -10,6 +11,7 @@ import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
+import { BUILD_LEGACY } from './buildLegacy';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
@@ -49,11 +51,13 @@ export const renderEditorialNewslettersPage = ({
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
+		BUILD_LEGACY && getPathFromManifest('web.legacy', 'frameworks.js'),
+		BUILD_LEGACY && getPathFromManifest('web.legacy', 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ??
 			newslettersPage.config.commercialBundleUrl,
-	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	]
+		.filter(isString)
+		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
 	const scriptTags = generateScriptTags(clientScripts);
 
 	const guardian = createGuardian({

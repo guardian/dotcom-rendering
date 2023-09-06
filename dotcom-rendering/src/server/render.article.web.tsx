@@ -21,6 +21,7 @@ import { createGuardian as createWindowGuardian } from '../model/guardian';
 import type { FEElement } from '../types/content';
 import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
 import type { TagType } from '../types/tag';
+import { BUILD_LEGACY } from './buildLegacy';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
@@ -96,8 +97,8 @@ export const renderHtml = ({
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
+		BUILD_LEGACY && getPathFromManifest('web.legacy', 'frameworks.js'),
+		BUILD_LEGACY && getPathFromManifest('web.legacy', 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ?? article.config.commercialBundleUrl,
 		pageHasNonBootInteractiveElements &&
 			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,

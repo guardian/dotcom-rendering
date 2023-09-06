@@ -17,6 +17,10 @@ import type { DCRFrontType } from '../types/front';
 import type { DCRTagFrontType } from '../types/tagFront';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
+const BUILD_LEGACY =
+	process.env.NODE_ENV === 'production' ||
+	process.env.BUILD_LEGACY === 'true';
+
 interface Props {
 	front: DCRFrontType;
 }
@@ -99,8 +103,8 @@ export const renderFront = ({
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
+		BUILD_LEGACY && getPathFromManifest('web.legacy', 'frameworks.js'),
+		BUILD_LEGACY && getPathFromManifest('web.legacy', 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ?? front.config.commercialBundleUrl,
 	]
 		.filter(isString)
@@ -182,8 +186,8 @@ export const renderTagFront = ({
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
+		BUILD_LEGACY && getPathFromManifest('web.legacy', 'frameworks.js'),
+		BUILD_LEGACY && getPathFromManifest('web.legacy', 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ??
 			tagFront.config.commercialBundleUrl,
 	]
