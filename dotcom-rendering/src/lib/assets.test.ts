@@ -49,34 +49,34 @@ describe('decideAssetOrigin for stage', () => {
 
 describe('regular expression to match files', () => {
 	it('should handle CI environment', () => {
-		expect('/assets/ophan.web.eb74205c979f58659ed7.js').toMatch(WEB);
+		expect('/assets/web/ophan.eb74205c979f58659ed7.js').toMatch(WEB);
 	});
 
 	it('should handle DEV environment', () => {
-		expect('/assets/ophan.web.variant.js').toMatch(WEB_VARIANT_SCRIPT);
+		expect('/assets/web.variant/ophan.js').toMatch(WEB_VARIANT_SCRIPT);
 	});
 
 	it('should handle PROD environment', () => {
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.web.abcdefghijklmnopqrst.js',
+			'https://assets.guim.co.uk/assets/web/ophan.abcdefghijklmnopqrst.js',
 		).toMatch(WEB);
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.web.variant.abcdefghijklmnopqrst.js',
+			'https://assets.guim.co.uk/assets/web.variant/ophan.abcdefghijklmnopqrst.js',
 		).toMatch(WEB_VARIANT_SCRIPT);
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.web.scheduled.abcdefghijklmnopqrst.js',
+			'https://assets.guim.co.uk/assets/web.scheduled/ophan.abcdefghijklmnopqrst.js',
 		).toMatch(WEB_SCHEDULED_SCRIPT);
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.web.legacy.eb74205c979f58659ed7.js',
+			'https://assets.guim.co.uk/assets/web.legacy/ophan.eb74205c979f58659ed7.js',
 		).toMatch(WEB_LEGACY_SCRIPT);
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.apps.eb74205c979f58659ed7.js',
+			'https://assets.guim.co.uk/assets/apps/ophan.eb74205c979f58659ed7.js',
 		).toMatch(APPS_SCRIPT);
 	});
 
 	it('should handle http3 query param', () => {
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.web.eb74205c979f58659ed7.js?http3=true',
+			'https://assets.guim.co.uk/assets/web/ophan.eb74205c979f58659ed7.js?http3=true',
 		).toMatch(WEB);
 	});
 });

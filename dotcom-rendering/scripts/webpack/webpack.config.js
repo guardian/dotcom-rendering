@@ -27,7 +27,7 @@ const commonConfigs = ({ platform }) => ({
 	name: platform,
 	mode: DEV ? 'development' : 'production',
 	output: {
-		path: dist,
+		path: path.resolve(dist, platform),
 	},
 	stats: DEV ? 'errors-only' : 'normal',
 	devtool:

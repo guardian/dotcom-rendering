@@ -72,10 +72,10 @@ export type Build =
 	| 'web.scheduled'
 	| 'web.legacy';
 
-type ManifestPath = `./manifest.${Build}.json`;
+type ManifestPath = `./${Build}/manifest.json`;
 
 const getManifestPath = (build: Build): ManifestPath =>
-	`./manifest.${build}.json`;
+	`./${build}/manifest.json`;
 
 export const getPathFromManifest = (
 	build: Build,
@@ -109,7 +109,7 @@ export const getPathFromManifest = (
  * and stripped query parameters.
  */
 const getScriptRegex = (build: Build) =>
-	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
+	new RegExp(`assets\\/${build}\\/\\w+\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
 export const WEB = getScriptRegex('web');
 export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');

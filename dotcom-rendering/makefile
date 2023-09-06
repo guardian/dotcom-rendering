@@ -46,12 +46,12 @@ build-ci: clean-dist install
 
 start-ci: install
 	$(call log, "starting PROD server...")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.js
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server/server.js
 
 start: install
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	NODE_ENV=production pm2 start dist/server.js
+	NODE_ENV=production pm2 start dist/server/server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 	@NODE_ENV=production pm2 logs
@@ -62,7 +62,7 @@ start: install
 start-prod:
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	NODE_ENV=production /usr/local/node/pm2 start dist/server.js
+	NODE_ENV=production /usr/local/node/pm2 start dist/server/server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 
@@ -109,11 +109,11 @@ storybook-dev: clear clean-dist install
 
 cypress: clear clean-dist install build
 	$(call log, "starting PROD server for Cypress")
-	@NODE_ENV=production NODE_OPTIONS="--max-old-space-size=8192" DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
+	@NODE_ENV=production NODE_OPTIONS="--max-old-space-size=8192" DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server/server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 cypress-open: clear clean-dist install build
 	$(call log, "starting PROD server and opening Cypress")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress open --e2e --browser electron'
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server/server.js' 9000 'cypress open --e2e --browser electron'
 
 ampValidation: clean-dist install
 	$(call log, "starting AMP Validation test")

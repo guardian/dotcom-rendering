@@ -27,19 +27,21 @@ const fileExists = async (glob) => {
 
 (async () => {
 	// Check that the manifest files exist
-	await fileExists('manifest.web.json');
-	await fileExists('manifest.web.scheduled.json');
-	await fileExists('manifest.web.legacy.json');
-	if (BUILD_VARIANT) await fileExists('manifest.web.variant.json');
+	await fileExists('client.web/manifest.json');
+	await fileExists('client.web.scheduled/manifest.json');
+	await fileExists('client.web.legacy/manifest.json');
+	if (BUILD_VARIANT) await fileExists('client.web.variant/manifest.json');
 
 	// Check that the manifest files return values for all the chunks
 	const manifests = [
-		await loadJsonFile('./dist/manifest.web.json'),
-		await loadJsonFile('./dist/manifest.web.scheduled.json'),
-		await loadJsonFile('./dist/manifest.web.legacy.json'),
+		await loadJsonFile('./dist/client.web/manifest.json'),
+		await loadJsonFile('./dist/client.web.scheduled/manifest.json'),
+		await loadJsonFile('./dist/client.web.legacy/manifest.json'),
 	];
 	if (BUILD_VARIANT) {
-		manifests.push(await loadJsonFile('./dist/manifest.web.variant.json'));
+		manifests.push(
+			await loadJsonFile('./dist/client.web.variant/manifest.json'),
+		);
 	}
 
 	for (const name of [

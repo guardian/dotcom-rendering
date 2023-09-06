@@ -24,15 +24,6 @@ const swcLoader = (targets) => [
  * @param {Build} build
  * @returns {string}
  */
-const generateName = (build) => {
-	const chunkhashString = DEV ? '' : '.[chunkhash]';
-	return `[name].${build}${chunkhashString}.js`;
-};
-
-/**
- * @param {Build} build
- * @returns {string}
- */
 const getLoaders = (build) => {
 	switch (build) {
 		case 'web.legacy':
@@ -117,16 +108,15 @@ module.exports = ({ build, sessionId }) => ({
 	output: {
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets
-			if (data.chunk.name === 'debug') return `[name].js`;
-			return generateName(build);
+			return data.chunk.name === 'debug' || DEV
+				? `[name].js`
+				: `[name].[chunkhash].js`;
 		},
-		chunkFilename: generateName(build),
+		chunkFilename: DEV ? `[name].js` : `[name].[chunkhash].js`,
 		publicPath: '',
 	},
 	plugins: [
-		new WebpackManifestPlugin({
-			fileName: `manifest.${build}.json`,
-		}),
+		new WebpackManifestPlugin(),
 		...(build === 'apps'
 			? [
 					new webpack.optimize.LimitChunkCountPlugin({
