@@ -275,12 +275,16 @@ const mostPopAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
 	min-width: 300px;
-	width: 300px;
+	max-width: 300px;
 	margin: 12px auto;
 	text-align: center;
-	${from.desktop} {
+	${from.tablet} {
 		margin: 0;
+		max-width: 699px;
+	}
+	${from.desktop} {
 		width: auto;
+		max-width: 300px;
 	}
 	${from.wide} {
 		margin-top: 25px;
@@ -291,7 +295,14 @@ const mostPopContainerStyles = css`
 	min-height: ${adSizes.mpu.height + labelHeight}px;
 	min-width: 300px;
 	width: fit-content;
+	max-width: 300px;
 	margin: 0px auto;
+	${from.tablet} {
+		max-width: 699px;
+	}
+	${from.desktop} {
+		max-width: 300px;
+	}
 `;
 
 /**
