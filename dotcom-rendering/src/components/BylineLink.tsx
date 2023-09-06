@@ -131,13 +131,12 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 		);
 	});
 
-	const renderingContext = useRenderingContext();
-	console.log('=====> RENDERING CONTEXT', renderingContext);
+	const { isApps } = useRenderingContext();
 
 	return (
 		<>
 			{renderedTokens}
-			{renderingContext.isApps && soleContributor !== undefined ? (
+			{isApps && soleContributor !== undefined ? (
 				<Island>
 					<FollowWrapper
 						displayName={soleContributor.title}
