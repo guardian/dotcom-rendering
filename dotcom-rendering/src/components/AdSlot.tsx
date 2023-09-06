@@ -279,7 +279,6 @@ const mostPopAdStyles = css`
 	margin: 12px auto;
 	text-align: center;
 	${from.tablet} {
-		margin: 0;
 		max-width: 699px;
 	}
 	${from.desktop} {
