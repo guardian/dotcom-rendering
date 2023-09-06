@@ -58,6 +58,7 @@ export const ContentABTestProvider = ({
 	children: React.ReactNode;
 }) => {
 	const group = getGroup(pageId);
+	// eslint-disable-next-line react/jsx-no-constructed-context-values -- TODO consider using useMemo?
 	const providerValue = switches.ampContentAbTesting ? { group } : {};
 	return (
 		<Context.Provider value={providerValue}>{children}</Context.Provider>
