@@ -46,7 +46,10 @@ const styles = css`
 `;
 
 const textStyles = css`
-	padding: ${space[4]}px 0 ${space[4]}px ${space[4]}px;
+	${from.tablet} {
+		padding: ${space[4]}px 0 ${space[4]}px ${space[4]}px;
+	}
+	padding: 6px 0 15px 10px;
 	flex: 3;
 `;
 const imageStyles = css`
