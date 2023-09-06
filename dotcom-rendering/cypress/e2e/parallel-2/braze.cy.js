@@ -1,6 +1,6 @@
 import { storage } from '@guardian/libs';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-import { Standard } from '../../../fixtures/generated/articles/Standard';
+import { Standard } from '../../fixtures/manual/standard-article.js';
 
 const idapiIdentifiersResponse = `{ "id": "000000000", "brazeUuid": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", "puzzleUuid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "googleTagId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }`;
 
@@ -48,6 +48,7 @@ const visitArticle = () =>
 					 * See https://github.com/guardian/dotcom-rendering/issues/8758
 					 */
 					okta: false,
+					idCookieRefresh: false,
 				},
 			},
 		}),
