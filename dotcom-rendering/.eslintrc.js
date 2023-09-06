@@ -172,6 +172,10 @@ module.exports = {
 	},
 	settings: {
 		'import/resolver': 'typescript',
+		react: {
+			// Tells eslint-plugin-react to automatically detect the version of React to use
+			version: 'detect',
+		},
 	},
 	overrides: [
 		{
