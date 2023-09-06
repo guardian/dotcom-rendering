@@ -185,6 +185,10 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			modalType !== 'NoModal'
 		) {
 			europeModal.showModal();
+			europeModal.addEventListener('close', () => {
+				hideModal();
+			});
+			document.documentElement.style.overflow = 'hidden';
 		}
 	}, []);
 
@@ -219,6 +223,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		const europeModal = document.getElementById('europe-modal-dialog');
 		if (europeModal instanceof HTMLDialogElement) {
 			europeModal.close();
+			document.documentElement.style.overflow = '';
 		}
 	};
 
