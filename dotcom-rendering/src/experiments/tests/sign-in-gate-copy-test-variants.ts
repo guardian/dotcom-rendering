@@ -1,7 +1,7 @@
 import type { ABTest } from '@guardian/ab-core';
 
-export const signInGateCopyTestJan2023: ABTest = {
-	id: 'SignInGateCopyTestJan2023',
+export const signInGateCopyTestRepeatSept2023: ABTest = {
+	id: 'SignInGateCopyTestRepeatSept2023',
 	start: '2023-01-23',
 	expiry: '2025-12-01',
 	author: 'Lindsey Dew',
