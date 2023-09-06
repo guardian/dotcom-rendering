@@ -42,18 +42,16 @@ export const CalloutBlockComponent = ({
 		contacts,
 	} = callout;
 
-	const isExpired = (date: number | undefined): boolean => {
-		if (date !== undefined) {
-			return Math.floor(new Date().getTime() / 1000) > date;
-		}
-		return false;
-	};
+	const isExpired =
+		activeUntil === undefined
+			? false
+			: Math.floor(new Date().getTime() / 1000) > activeUntil;
 
-	if (!isNonCollapsible && isExpired(activeUntil)) {
+	if (!isNonCollapsible && isExpired) {
 		return null;
 	}
 
-	if (isNonCollapsible && isExpired(activeUntil)) {
+	if (isNonCollapsible && isExpired) {
 		return <CalloutExpired />;
 	}
 
