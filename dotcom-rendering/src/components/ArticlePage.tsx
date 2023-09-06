@@ -17,6 +17,7 @@ import { LightboxJavascript } from './LightboxJavascript.importable';
 import { LightboxLayout } from './LightboxLayout';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
+import { RenderingContextProvider } from './RenderingContext';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
@@ -53,107 +54,117 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		adUnit: article.config.adUnit,
 	});
 
+	const renderingContext = { target: renderingTarget };
+
 	return (
 		<StrictMode>
-			<Global
-				styles={css`
-					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
-					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
-					*:focus {
-						${focusHalo}
-					}
-					::selection {
-						background: ${brandAlt[400]};
-						color: ${neutral[7]};
-					}
-				`}
-			/>
-			<SkipTo id="maincontent" label="Skip to main content" />
-			<SkipTo id="navigation" label="Skip to navigation" />
-			{article.config.switches.lightbox && article.imagesForLightbox && (
-				<>
-					<LightboxLayout
-						imageCount={article.imagesForLightbox.length}
-					/>
-					<Island clientOnly={true}>
-						<LightboxHash />
-					</Island>
-					<Island clientOnly={true} deferUntil="hash">
-						<LightboxJavascript
-							format={format}
-							images={article.imagesForLightbox}
-						/>
-					</Island>
-				</>
-			)}
-			<Island clientOnly={true} deferUntil="idle">
-				<FocusStyles />
-			</Island>
-			{(format.design === ArticleDesign.LiveBlog ||
-				format.design === ArticleDesign.DeadBlog) && (
-				<SkipTo id={'key-events-carousel'} label="Skip to key events" />
-			)}
-			{renderingTarget === 'Web' && (
-				<>
-					<SkipTo id="navigation" label="Skip to navigation" />
-					<Island clientOnly={true} deferUntil="idle">
-						<AlreadyVisited />
-					</Island>
-					<Island clientOnly={true} deferUntil="idle">
-						<Metrics
-							commercialMetricsEnabled={
-								!!article.config.switches.commercialMetrics
-							}
-						/>
-					</Island>
-					<Island clientOnly={true} deferUntil="idle">
-						<BrazeMessaging idApiUrl={article.config.idApiUrl} />
-					</Island>
-					<Island clientOnly={true} deferUntil="idle">
-						<ReaderRevenueDev
-							shouldHideReaderRevenue={
-								article.shouldHideReaderRevenue
-							}
-						/>
-					</Island>
-					<Island clientOnly={true}>
-						<SetABTests
-							abTestSwitches={filterABTestSwitches(
-								article.config.switches,
-							)}
-							pageIsSensitive={article.config.isSensitive}
-							isDev={!!article.config.isDev}
-						/>
-					</Island>
-				</>
-			)}
-			{renderingTarget === 'Web' ? (
-				<Island clientOnly={true}>
-					<SetAdTargeting adTargeting={adTargeting} />
-				</Island>
-			) : (
-				<Island clientOnly={true}>
-					<SendTargetingParams
-						editionCommercialProperties={
-							article.commercialProperties[article.editionId]
+			<RenderingContextProvider value={renderingContext}>
+				<Global
+					styles={css`
+						/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
+						/* The not(.src...) selector is to work with Source's FocusStyleManager. */
+						*:focus {
+							${focusHalo}
 						}
-					/>
+						::selection {
+							background: ${brandAlt[400]};
+							color: ${neutral[7]};
+						}
+					`}
+				/>
+				<SkipTo id="maincontent" label="Skip to main content" />
+				<SkipTo id="navigation" label="Skip to navigation" />
+				{article.config.switches.lightbox &&
+					article.imagesForLightbox && (
+						<>
+							<LightboxLayout
+								imageCount={article.imagesForLightbox.length}
+							/>
+							<Island clientOnly={true}>
+								<LightboxHash />
+							</Island>
+							<Island clientOnly={true} deferUntil="hash">
+								<LightboxJavascript
+									format={format}
+									images={article.imagesForLightbox}
+								/>
+							</Island>
+						</>
+					)}
+				<Island clientOnly={true} deferUntil="idle">
+					<FocusStyles />
 				</Island>
-			)}
-			{renderingTarget === 'Apps' ? (
-				<DecideLayout
-					article={article}
-					format={format}
-					renderingTarget={renderingTarget}
-				/>
-			) : (
-				<DecideLayout
-					article={article}
-					NAV={props.NAV}
-					format={format}
-					renderingTarget={renderingTarget}
-				/>
-			)}
+				{(format.design === ArticleDesign.LiveBlog ||
+					format.design === ArticleDesign.DeadBlog) && (
+					<SkipTo
+						id={'key-events-carousel'}
+						label="Skip to key events"
+					/>
+				)}
+				{renderingTarget === 'Web' && (
+					<>
+						<SkipTo id="navigation" label="Skip to navigation" />
+						<Island clientOnly={true} deferUntil="idle">
+							<AlreadyVisited />
+						</Island>
+						<Island clientOnly={true} deferUntil="idle">
+							<Metrics
+								commercialMetricsEnabled={
+									!!article.config.switches.commercialMetrics
+								}
+							/>
+						</Island>
+						<Island clientOnly={true} deferUntil="idle">
+							<BrazeMessaging
+								idApiUrl={article.config.idApiUrl}
+							/>
+						</Island>
+						<Island clientOnly={true} deferUntil="idle">
+							<ReaderRevenueDev
+								shouldHideReaderRevenue={
+									article.shouldHideReaderRevenue
+								}
+							/>
+						</Island>
+						<Island clientOnly={true}>
+							<SetABTests
+								abTestSwitches={filterABTestSwitches(
+									article.config.switches,
+								)}
+								pageIsSensitive={article.config.isSensitive}
+								isDev={!!article.config.isDev}
+							/>
+						</Island>
+					</>
+				)}
+				{renderingTarget === 'Web' ? (
+					<Island clientOnly={true}>
+						<SetAdTargeting adTargeting={adTargeting} />
+					</Island>
+				) : (
+					<Island clientOnly={true}>
+						<SendTargetingParams
+							editionCommercialProperties={
+								article.commercialProperties[article.editionId]
+							}
+						/>
+					</Island>
+				)}
+				{renderingTarget === 'Apps' ? (
+					<DecideLayout
+						article={article}
+						format={format}
+						renderingTarget={renderingTarget}
+					/>
+				) : (
+					<DecideLayout
+						article={article}
+						NAV={props.NAV}
+						format={format}
+						renderingTarget={renderingTarget}
+					/>
+				)}
+			</RenderingContextProvider>
 		</StrictMode>
 	);
 };

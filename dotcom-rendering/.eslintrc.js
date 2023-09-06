@@ -107,6 +107,8 @@ module.exports = {
 				ignoreNonDOM: true,
 			},
 		],
+		// We want to be careful with context and certainly avoid unnecessary re-renders
+		'react/jsx-no-constructed-context-values': 'error',
 
 		'@typescript-eslint/switch-exhaustiveness-check': 'error',
 		'array-callback-return': 'error',

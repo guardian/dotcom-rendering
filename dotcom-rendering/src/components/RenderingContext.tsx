@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useMemo } from 'react';
 import type {
 	EnhancedRenderingContextType,
 	RenderingContextType,
@@ -17,6 +17,23 @@ import type {
 const RenderingContext = createContext<RenderingContextType | undefined>(
 	undefined,
 );
+
+export const RenderingContextProvider = ({
+	value,
+	children,
+}: {
+	value: RenderingContextType;
+	children: React.ReactNode;
+}) => {
+	// useMemo aims to reduce unnecessary re-renders for context
+	const memoisedValue = useMemo(() => value, [value]);
+
+	return (
+		<RenderingContext.Provider value={memoisedValue}>
+			{children}
+		</RenderingContext.Provider>
+	);
+};
 
 /**
  * useContext hook for safely fetching the rendering context value

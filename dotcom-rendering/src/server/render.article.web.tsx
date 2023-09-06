@@ -2,7 +2,6 @@ import { ArticleDesign, isString, Pillar } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { isAmpSupported } from '../components/Elements.amp';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
-import { RenderingContext } from '../components/RenderingContext';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -21,7 +20,6 @@ import { extractNAV } from '../model/extract-nav';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
 import type { FEElement } from '../types/content';
 import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
-import type { RenderingContextType } from '../types/renderingContext';
 import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
@@ -49,17 +47,13 @@ export const renderHtml = ({
 
 	const format: ArticleFormat = decideFormat(article.format);
 
-	const renderingContext: RenderingContextType = { target: 'Web' };
-
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<RenderingContext.Provider value={renderingContext}>
-			<ArticlePage
-				format={format}
-				article={article}
-				NAV={NAV}
-				renderingTarget="Web"
-			/>
-		</RenderingContext.Provider>,
+		<ArticlePage
+			format={format}
+			article={article}
+			NAV={NAV}
+			renderingTarget="Web"
+		/>,
 	);
 
 	// We want to only insert script tags for the elements or main media elements on this page view
