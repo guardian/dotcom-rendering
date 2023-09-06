@@ -12,10 +12,22 @@ import { useState } from 'react';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 import { guard } from '../lib/guard';
+import { useOnce } from '../lib/useOnce';
 import { SvgClose } from './SvgClose';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
 const dialogStyles = css`
+	dialog::backdrop {
+		background: rgba(18, 18, 18, 0.7);
+	}
+	&[open] {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	max-height: 100vh;
+	max-width: 100vh;
+	background: rgba(0, 0, 0, 0);
 	padding: 10px;
 	top: 0;
 	position: fixed;
@@ -23,13 +35,10 @@ const dialogStyles = css`
 	width: 100vw;
 	height: 100vh;
 	z-index: 1000;
-	background: rgba(18, 18, 18, 0.7);
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	color: ${palette.brand[300]};
 `;
 const styles = css`
+	justify-content: space-between;
 	display: flex;
 	width: 620px;
 	background: white;
@@ -69,10 +78,9 @@ const OKButtonStyles = css`
 	margin-right: ${space[2]}px;
 `;
 const closeButtonStyles = css`
+	margin: 10px;
 	position: relative;
-	left: 451px;
-	bottom: 246px;
-	padding: 0 10px;
+	padding: 0 6px;
 `;
 
 export type ModalType = 'NoModal' | 'ModalSwitched' | 'ModalDoYouWantToSwitch';
@@ -162,11 +170,20 @@ interface Props {
 export const EuropeLandingModal = ({ edition }: Props) => {
 	const editionCookie = getCookie({ name: 'GU_EDITION' });
 	const modalType = getModalType();
-	const [isOpen, setIsOpen] = useState(modalType !== 'NoModal');
 	const [switchEdition, setSwitchEdition] = useState(false);
 	const [selectedEdition, setSelectedEdition] = useState<EditionId>(
 		isValidEdition(editionCookie) ? editionCookie : edition,
 	);
+
+	useOnce(() => {
+		const europeModal = document.getElementById('europe-modal-dialog');
+		if (
+			europeModal instanceof HTMLDialogElement &&
+			modalType !== 'NoModal'
+		) {
+			europeModal.showModal();
+		}
+	}, []);
 
 	const confirmNewEdition = (editionId: EditionId) => {
 		setCookie({
@@ -174,8 +191,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			value: editionId,
 			isCrossSubdomain: true,
 		});
+		setCookie({
+			name: 'GU_eu_modal_dismissed',
+			value: 'true',
+			daysToLive: 100, //todo - check how long
+		});
 		if (editionId === edition) {
-			setIsOpen(false);
+			hideModal();
 		} else {
 			window.location.replace(getEditionFromId(editionId).url);
 		}
@@ -187,13 +209,18 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			value: 'true',
 			daysToLive: 100, //todo - check how long
 		});
-		setIsOpen(false);
+		hideModal();
 	};
 
-	if (!isOpen) return <></>;
+	const hideModal = () => {
+		const europeModal = document.getElementById('europe-modal-dialog');
+		if (europeModal instanceof HTMLDialogElement) {
+			europeModal.close();
+		}
+	};
 
 	return (
-		<dialog css={dialogStyles}>
+		<dialog css={dialogStyles} id={'europe-modal-dialog'}>
 			<div css={styles}>
 				{!switchEdition ? (
 					<>
@@ -291,15 +318,16 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 						>
 							Confirm
 						</Button>
-						// todo fix this button mobile
-						<Button
-							size={'small'}
-							cssOverrides={closeButtonStyles}
-							onClick={() => dismissModal()}
-						>
-							<SvgClose />
-						</Button>
 					</div>
+				)}
+				{switchEdition && (
+					<Button
+						size={'small'}
+						cssOverrides={closeButtonStyles}
+						onClick={() => dismissModal()}
+					>
+						<SvgClose />
+					</Button>
 				)}
 			</div>
 		</dialog>
