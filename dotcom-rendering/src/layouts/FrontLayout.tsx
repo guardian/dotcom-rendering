@@ -260,7 +260,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		!isInSectionFrontsBannerTest;
 
 	const showMostPopular =
-		front.config.switches.deeplyRead &&
+		front.config.switches.deeplyReadSwitch &&
 		front.isNetworkFront &&
 		front.deeplyRead &&
 		front.deeplyRead.length > 0;
