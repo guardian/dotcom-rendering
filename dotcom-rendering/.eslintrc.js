@@ -81,6 +81,7 @@ module.exports = {
 		'jsx-expressions',
 		'custom-elements',
 		'unicorn',
+		'vtex',
 	],
 	rules: {
 		// React, Hooks & JSX
@@ -122,6 +123,7 @@ module.exports = {
 		'no-useless-escape': 'error',
 		'no-redeclare': 'error',
 		'custom-elements/file-name-matches-element': 'error',
+		'vtex/prefer-early-return': 'error',
 
 		'object-shorthand': ['error', 'always'],
 
