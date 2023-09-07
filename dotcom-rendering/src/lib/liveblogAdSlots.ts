@@ -5,8 +5,10 @@ import type {
 	ImageBlockElement,
 	RichLinkBlockElement,
 	SubheadingBlockElement,
+	TableBlockElement,
 	TextBlockElement,
 	TweetBlockElement,
+	YoutubeBlockElement,
 } from '../types/content';
 
 /**
@@ -24,12 +26,6 @@ const MIN_SPACE_BETWEEN_ADS = 1_500;
  */
 const MIN_SPACE_BETWEEN_ADS_MOBILE = 1_200;
 
-/**
- * Estimated margin associated with an element.
- * This can sometimes be slightly more or less.
- */
-export const ELEMENT_MARGIN = 12;
-
 // Extra height found in every block.
 const BLOCK_HEADER = 20; // Date and time
 const BLOCK_FOOTER = 25; // Sharing links (Facebook, Twitter)
@@ -43,6 +39,7 @@ type BlockElementTextData = {
 type BlockElementHeightData = {
 	heightExcludingText: number;
 	heightExcludingTextMobile: number;
+	margin: number;
 } & (
 	| {
 			textHeight: BlockElementTextData;
@@ -78,7 +75,7 @@ type KnownBlockElementType =
 
 /**
  * Approximations of the height of each type of block element in pixels.
- * "Mobile" indicates the value is used for devices up to the tablet breakpoint."
+ * "...Mobile" indicates the value is used for devices up to the tablet breakpoint."
  */
 const elementHeightDataMap: {
 	[key in KnownBlockElementType]: BlockElementHeightData;
@@ -86,79 +83,87 @@ const elementHeightDataMap: {
 	'model.dotcomrendering.pageElements.BlockquoteBlockElement': {
 		heightExcludingText: 0,
 		heightExcludingTextMobile: 0,
+		margin: 16,
 		textHeight: {
-			lineHeight: 25.5,
-			lineLength: 40,
+			lineHeight: 23.8,
+			lineLength: 69,
 		},
 		textHeightMobile: {
-			lineHeight: 25.5,
+			lineHeight: 23.8,
 			lineLength: 40,
 		},
 		text: (element) =>
 			(element as BlockquoteBlockElement).html.replace(/<[^>]+>/g, ''),
 	},
 	'model.dotcomrendering.pageElements.CommentBlockElement': {
-		heightExcludingText: 74,
-		heightExcludingTextMobile: 74,
+		heightExcludingText: 68,
+		heightExcludingTextMobile: 84,
+		margin: 48,
 		textHeight: {
-			lineHeight: 18,
-			lineLength: 28,
+			lineHeight: 22,
+			lineLength: 70,
 		},
 		textHeightMobile: {
-			lineHeight: 18,
-			lineLength: 28,
+			lineHeight: 22,
+			lineLength: 40,
 		},
 		text: (element) =>
 			(element as CommentBlockElement).body.replace(/<[^>]+>/g, ''),
 	},
 	'model.dotcomrendering.pageElements.EmbedBlockElement': {
-		heightExcludingText: 251,
+		heightExcludingText: 178,
 		heightExcludingTextMobile: 251,
+		margin: 12,
 	},
 	'model.dotcomrendering.pageElements.GuideAtomBlockElement': {
-		heightExcludingText: 77,
+		heightExcludingText: 90,
 		heightExcludingTextMobile: 77,
+		margin: 12,
 	},
 	'model.dotcomrendering.pageElements.ImageBlockElement': {
-		heightExcludingText: 230,
-		heightExcludingTextMobile: 230,
+		heightExcludingText: 392,
+		heightExcludingTextMobile: 220,
+		margin: 12,
 		textHeight: {
-			lineHeight: 20,
-			lineLength: 52,
+			lineHeight: 19,
+			lineLength: 85,
 		},
 		textHeightMobile: {
-			lineHeight: 20,
-			lineLength: 52,
+			lineHeight: 19,
+			lineLength: 45,
 		},
 		text: (element) => (element as ImageBlockElement).data.caption ?? '',
 	},
 	'model.dotcomrendering.pageElements.InteractiveBlockElement': {
-		heightExcludingText: 600,
-		heightExcludingTextMobile: 600,
+		heightExcludingText: 537,
+		heightExcludingTextMobile: 449,
+		margin: 0,
 	},
 	'model.dotcomrendering.pageElements.RichLinkBlockElement': {
-		heightExcludingText: 65,
-		heightExcludingTextMobile: 65,
+		heightExcludingText: 45,
+		heightExcludingTextMobile: 52,
+		margin: 12,
 		textHeight: {
-			lineHeight: 16,
-			lineLength: 52,
+			lineHeight: 23,
+			lineLength: 75,
 		},
 		textHeightMobile: {
-			lineHeight: 16,
-			lineLength: 52,
+			lineHeight: 19.5,
+			lineLength: 39,
 		},
 		text: (element) => (element as RichLinkBlockElement).text,
 	},
 	'model.dotcomrendering.pageElements.SubheadingBlockElement': {
 		heightExcludingText: 0,
 		heightExcludingTextMobile: 0,
+		margin: 0,
 		textHeight: {
 			lineHeight: 23,
-			lineLength: 40,
+			lineLength: 65,
 		},
 		textHeightMobile: {
 			lineHeight: 23,
-			lineLength: 40,
+			lineLength: 31,
 		},
 		text: (element) =>
 			(element as SubheadingBlockElement).html.replace(/<[^>]+>/g, ''),
@@ -166,41 +171,64 @@ const elementHeightDataMap: {
 	'model.dotcomrendering.pageElements.TableBlockElement': {
 		heightExcludingText: 32,
 		heightExcludingTextMobile: 32,
+		margin: 12,
+		textHeight: {
+			lineHeight: 32,
+			lineLength: 100,
+		},
+		textHeightMobile: {
+			lineHeight: 32,
+			lineLength: 100,
+		},
+		text: (element) => (element as TableBlockElement).html,
 	},
 	'model.dotcomrendering.pageElements.TextBlockElement': {
 		heightExcludingText: 0,
 		heightExcludingTextMobile: 0,
+		margin: 14,
 		textHeight: {
-			lineHeight: 25.5,
-			lineLength: 39,
+			lineHeight: 23.8,
+			lineLength: 72,
 		},
 		textHeightMobile: {
-			lineHeight: 25.5,
+			lineHeight: 23.8,
 			lineLength: 39,
 		},
 		text: (element) =>
 			(element as TextBlockElement).html.replace(/<[^>]+>/g, ''),
 	},
 	'model.dotcomrendering.pageElements.TweetBlockElement': {
-		heightExcludingText: 190,
+		heightExcludingText: 320,
 		heightExcludingTextMobile: 190,
+		margin: 12,
 		textHeight: {
-			lineHeight: 19,
-			lineLength: 40,
+			lineHeight: 24,
+			lineLength: 70,
 		},
 		textHeightMobile: {
 			lineHeight: 19,
-			lineLength: 40,
+			lineLength: 42,
 		},
-		text: (element) => (element as TweetBlockElement).html,
+		text: (element) => (element as TweetBlockElement).html, // Includes all the markup for the tweet, not just the text
 	},
 	'model.dotcomrendering.pageElements.VideoYoutubeBlockElement': {
-		heightExcludingText: 215,
-		heightExcludingTextMobile: 215,
+		heightExcludingText: 381,
+		heightExcludingTextMobile: 213,
+		margin: 0,
 	},
 	'model.dotcomrendering.pageElements.YoutubeBlockElement': {
-		heightExcludingText: 239,
-		heightExcludingTextMobile: 239,
+		heightExcludingText: 350,
+		heightExcludingTextMobile: 195,
+		margin: 12,
+		textHeight: {
+			lineHeight: 19,
+			lineLength: 95,
+		},
+		textHeightMobile: {
+			lineHeight: 18,
+			lineLength: 45,
+		},
+		text: (element) => (element as YoutubeBlockElement).mediaTitle,
 	},
 };
 
@@ -222,24 +250,26 @@ export const calculateApproximateElementHeight = (
 	const heightData = elementHeightDataMap[elementType];
 
 	const heightExcludingText = isMobile
-		? heightData.heightExcludingText
-		: heightData.heightExcludingTextMobile;
+		? heightData.heightExcludingTextMobile
+		: heightData.heightExcludingText;
 
-	let estimatedHeight = heightExcludingText + ELEMENT_MARGIN;
-	const textHeight = isMobile
-		? heightData.textHeight
-		: heightData.textHeightMobile;
+	const estimatedHeightWithoutText = heightExcludingText + heightData.margin;
+
+	if (!heightData.text) {
+		return estimatedHeightWithoutText;
+	}
 
 	// If the element has text that contributes to the height of the element, estimate
 	// the height of the text and increment the height
-	if (textHeight && heightData.text) {
-		const { lineHeight, lineLength } = textHeight;
-		const characterCount = heightData.text(element).length;
+	const { lineHeight, lineLength } = isMobile
+		? heightData.textHeightMobile
+		: heightData.textHeight;
 
-		estimatedHeight += lineHeight * Math.ceil(characterCount / lineLength);
-	}
-
-	return estimatedHeight;
+	const characterCount = heightData.text(element).length;
+	return (
+		estimatedHeightWithoutText +
+		lineHeight * Math.ceil(characterCount / lineLength)
+	);
 };
 
 /**
