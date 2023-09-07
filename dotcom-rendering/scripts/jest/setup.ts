@@ -118,6 +118,7 @@ jest.mock('@guardian/cdk/lib/constants/tracking-tag');
 jest.mock('../../src/components/ConfigContext.tsx', () => {
 	const mockConfig = { renderingTarget: 'Web' };
 	return {
+		...jest.requireActual('../../src/components/ConfigContext.tsx'),
 		useConfig: () => mockConfig,
 	};
 });
