@@ -39,8 +39,7 @@ interface AppProps extends BaseProps {
 
 /**
  * @description
- * Article is a high level wrapper for article pages on Dotcom.
- * Sets strict mode and some globals, as well as providing config via context.
+ * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
  */
 export const ArticlePage = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;

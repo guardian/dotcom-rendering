@@ -24,8 +24,7 @@ type Props = {
 
 /**
  * @description
- * FrontPage is a high level wrapper for front pages on Dotcom.
- * Sets strict mode and some globals, as well as providing config via context.
+ * FrontPage is a high level wrapper for front pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
  * @param {DCRFrontType} props.front - The article JSON data
