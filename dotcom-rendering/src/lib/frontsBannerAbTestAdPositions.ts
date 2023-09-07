@@ -58,6 +58,15 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		'Video',
 		'Other sports',
 	],
+	'us/sport': [
+		// multiline array
+		'Around the world',
+		'Video',
+	],
+	'au/sport': [
+		'Woman’s World Cup 2023', // Apostrophe is intentionally U+2019 "’" instead of the more common ASCII character U+0060 "`",
+		'Pictures & video',
+	],
 	football: [
 		// multiline array
 		'In depth',
@@ -69,11 +78,35 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		'News',
 		'You may have missed',
 	],
+	'us/culture': [
+		// multiline array
+		'Talking points',
+		'The big picture',
+		'Pictures & video',
+	],
+	'au/culture': [
+		// multiline array
+		'Australia this month',
+		'Reviews',
+		'News',
+	],
 	'uk/lifeandstyle': [
 		// multiline array
 		'Fashion',
 		'Health & wellbeing',
 		'Money',
+		'The big picture',
+	],
+	'us/lifeandstyle': [
+		'Fashion',
+		'Food & drink',
+		'Regulars',
+		'The big picture',
+	],
+	'au/lifeandstyle': [
+		// multiline array
+		'Relationships',
+		'Health & fitness',
 		'The big picture',
 	],
 	'uk/commentisfree': [
@@ -83,6 +116,15 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		'You may have missed',
 		'Cartoons',
 		'Letters',
+	],
+	'us/commentisfree': [
+		// multiline array
+		'The Guardian view',
+	],
+	'au/commentisfree': [
+		// multiline array
+		'Columnists',
+		'Indigenous Australia',
 	],
 	'uk-news': [
 		// multiline array
@@ -108,6 +150,17 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		'Opinion & analysis',
 		'Multimedia',
 	],
+	'us/business': [
+		// multiline array
+		'In depth',
+		'Featured Topics',
+	],
+	'au/business': [
+		// multiline array
+		'Greg Jericho',
+		'World news',
+	],
+
 	'australia-news': [
 		// multiline array
 		'Australian politics',

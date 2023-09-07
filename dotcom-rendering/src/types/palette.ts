@@ -102,6 +102,7 @@ export type Palette = {
 		lightboxDivider: Colour;
 		messageForm: Colour;
 		discussionPillarButton: Colour;
+		subMeta: Colour;
 	};
 	fill: {
 		commentCount: Colour;
