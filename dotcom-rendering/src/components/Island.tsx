@@ -137,8 +137,7 @@ export const Island = ({
 }: Props) => {
 	/**
 	 * Where is this coming from?
-	 * Config value is set at high in the component tree within a React context
-	 * @see /dotcom-rendering/src/components/ArticlePage.tsx or look for a `<ConfigProvider />`
+	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
 	 *
 	 * This is here so that we can provide the config information to the hydrated, client-side rendered components
 	 */

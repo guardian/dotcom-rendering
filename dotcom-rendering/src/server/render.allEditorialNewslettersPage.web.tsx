@@ -1,4 +1,5 @@
 import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
+import { ConfigProvider } from '../components/ConfigContext';
 import {
 	generateScriptTags,
 	getModulesBuild,
@@ -9,6 +10,7 @@ import { getHttp3Url } from '../lib/getHttp3Url';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
+import type { Config } from '../types/configContext';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
@@ -22,11 +24,16 @@ export const renderEditorialNewslettersPage = ({
 	const title = newslettersPage.webTitle;
 	const NAV = extractNAV(newslettersPage.nav);
 
+	// The newsletters page is currently only supported on Web
+	const config: Config = { renderingTarget: 'Web' };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<AllEditorialNewslettersPage
-			newslettersPage={newslettersPage}
-			NAV={NAV}
-		/>,
+		<ConfigProvider value={config}>
+			<AllEditorialNewslettersPage
+				newslettersPage={newslettersPage}
+				NAV={NAV}
+			/>
+		</ConfigProvider>,
 	);
 
 	// Evaluating the performance of HTTP3 over HTTP2

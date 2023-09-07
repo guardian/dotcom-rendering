@@ -86,8 +86,7 @@ export const ArticleRenderer = ({
 
 	/**
 	 * Where is this coming from?
-	 * Config value is set at high in the component tree within a React context
-	 * @see /dotcom-rendering/src/components/ArticlePage.tsx or look for a `<ConfigProvider />`
+	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
 	 */
 	const { renderingTarget } = useConfig();
 
