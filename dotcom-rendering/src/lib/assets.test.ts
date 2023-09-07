@@ -96,6 +96,14 @@ describe('getModulesBuild', () => {
 		expect(build).toBe(expected);
 	});
 
+	it('should support Ophan ESM build when in test', () => {
+		const build = getModulesBuild({
+			tests: { ophanEsmVariant: 'variant' },
+			switches: {},
+		});
+		expect(build).toBe('web.ophan-esm');
+	});
+
 	it('should serve the scheduled build when in adaptive test', () => {
 		const build = getModulesBuild({
 			tests: { adaptiveSiteVariant: 'variant' },

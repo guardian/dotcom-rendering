@@ -18,7 +18,7 @@ interface Props {
 
 export const renderEditorialNewslettersPage = ({
 	newslettersPage,
-}: Props): { html: string; clientScripts: string[] } => {
+}: Props): { html: string; prefetchScripts: string[] } => {
 	const title = newslettersPage.webTitle;
 	const NAV = extractNAV(newslettersPage.nav);
 
@@ -45,16 +45,23 @@ export const renderEditorialNewslettersPage = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const clientScripts = [
+	const prefetchScripts = [
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ??
 			newslettersPage.config.commercialBundleUrl,
 	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
-	const scriptTags = generateScriptTags(clientScripts);
+
+	const legacyScripts = [
+		getPathFromManifest('web.legacy', 'frameworks.js'),
+		getPathFromManifest('web.legacy', 'index.js'),
+	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+
+	const scriptTags = generateScriptTags([
+		...prefetchScripts,
+		...legacyScripts,
+	]);
 
 	const guardian = createGuardian({
 		editionId: newslettersPage.editionId,
@@ -88,6 +95,6 @@ export const renderEditorialNewslettersPage = ({
 	});
 	return {
 		html: pageHtml,
-		clientScripts,
+		prefetchScripts,
 	};
 };

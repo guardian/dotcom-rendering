@@ -8,7 +8,6 @@ type Props = {
 	mediaType: MediaType;
 	containerPalette?: DCRContainerPalette;
 	format: ArticleFormat;
-	mediaDuration?: number;
 	hasKicker: boolean;
 };
 

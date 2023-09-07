@@ -71,7 +71,7 @@ const extractFrontNav = (front: DCRFrontType): NavType => {
 
 export const renderFront = ({
 	front,
-}: Props): { html: string; clientScripts: string[] } => {
+}: Props): { html: string; prefetchScripts: string[] } => {
 	const title = front.webTitle;
 	const NAV = extractFrontNav(front);
 
@@ -95,17 +95,23 @@ export const renderFront = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const clientScripts = [
+	const prefetchScripts = [
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ?? front.config.commercialBundleUrl,
 	]
 		.filter(isString)
 		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
-	const scriptTags = generateScriptTags(clientScripts);
+
+	const legacyScripts = [
+		getPathFromManifest('web.legacy', 'frameworks.js'),
+		getPathFromManifest('web.legacy', 'index.js'),
+	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	const scriptTags = generateScriptTags([
+		...prefetchScripts,
+		...legacyScripts,
+	]);
 
 	const guardian = createGuardian({
 		editionId: front.editionId,
@@ -146,7 +152,7 @@ export const renderFront = ({
 
 	return {
 		html: pageHtml,
-		clientScripts,
+		prefetchScripts,
 	};
 };
 
@@ -154,7 +160,7 @@ export const renderTagFront = ({
 	tagFront,
 }: {
 	tagFront: DCRTagFrontType;
-}): { html: string; clientScripts: string[] } => {
+}): { html: string; prefetchScripts: string[] } => {
 	const title = tagFront.webTitle;
 	const NAV = extractNAV(tagFront.nav);
 
@@ -178,18 +184,24 @@ export const renderTagFront = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const clientScripts = [
+	const prefetchScripts = [
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ??
 			tagFront.config.commercialBundleUrl,
 	]
 		.filter(isString)
 		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
-	const scriptTags = generateScriptTags(clientScripts);
+
+	const legacyScripts = [
+		getPathFromManifest('web.legacy', 'frameworks.js'),
+		getPathFromManifest('web.legacy', 'index.js'),
+	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	const scriptTags = generateScriptTags([
+		...prefetchScripts,
+		...legacyScripts,
+	]);
 
 	const guardian = createGuardian({
 		editionId: tagFront.editionId,
@@ -228,6 +240,6 @@ export const renderTagFront = ({
 	});
 	return {
 		html: pageHtml,
-		clientScripts,
+		prefetchScripts,
 	};
 };

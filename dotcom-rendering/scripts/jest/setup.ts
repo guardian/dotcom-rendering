@@ -15,6 +15,7 @@ const windowGuardianConfig = {
 		pageViewId: 'jest-page-view-id',
 	},
 	tests: {},
+	switches: {},
 } as Guardian['config'];
 
 const windowGuardian = {

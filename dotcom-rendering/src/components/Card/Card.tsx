@@ -346,7 +346,7 @@ export const Card = ({
 								min-height: 10px;
 							`}
 						>
-							<Island deferUntil="visible">
+							<Island clientOnly={true} deferUntil="visible">
 								<CardCommentCount
 									format={format}
 									discussionApiUrl={discussionApiUrl}
@@ -542,11 +542,6 @@ export const Card = ({
 									containerPalette={containerPalette}
 									format={format}
 									mediaType={mainMedia.type}
-									mediaDuration={
-										mainMedia.type === 'Audio'
-											? mainMedia.duration
-											: undefined
-									}
 									hasKicker={!!kickerText}
 								/>
 							)}
