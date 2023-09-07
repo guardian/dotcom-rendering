@@ -12,10 +12,13 @@ An RFC was put together [here](https://github.com/guardian/dotcom-rendering/pull
 
 The decision to allow use of context more generally rests on the following _"lines in the sand"_:
 
--   Context should be considered **global, static, and immutable** for rendered components in dotcom-rendering. It can act as a type of configuration for our application.
--   Context should **only be used for JSX components** (ie. not for JSON responses or non-JSX helper code)
--   Context should **not be used for values that change between re-renders**, since this adds unnecessary complexity and there are alternative solutions for these cases. There is a eslint rule to attempt to prevent this (`react/jsx-no-constructed-context-values`)
+-   Context should be considered **global, static, and immutable** for rendered components in dotcom-rendering.
+    -   It can be thought of as a type of configuration for our application.
+-   Context should **not be used for values that change between re-renders**, since this adds unnecessary complexity and there are alternative solutions for these cases.
+    -   There is a eslint rule to attempt to prevent this (`react/jsx-no-constructed-context-values`)
+-   Context should **only be used for React components** (ie. not for JSON responses or non-JSX helper code)
+    -   This is because the React context API will not work outside of React
 
 ## Status
 
-Proposed
+Approved
