@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, space, textSans, until } from '@guardian/source-foundations';
+import {
+	from,
+	neutral,
+	space,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { BaseLinkType } from '../model/extract-nav';
@@ -47,7 +53,7 @@ const setMetaWidth = (palette: Palette) => css`
 	}
 `;
 
-const listStyleNone = css`
+const listStyleNone = (palette: Palette) => css`
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
@@ -62,17 +68,17 @@ const listStyleNone = css`
 	gap: 1.5rem 0.25rem;
 	background-image: repeating-linear-gradient(
 			to bottom,
-			#fff 0px,
-			#fff 36px,
+			${palette.background.subMeta} 0px,
+			${palette.background.subMeta} 36px,
 			transparent 36px,
 			transparent 37px,
-			#fff 37px,
-			#fff 46px
+			${palette.background.subMeta} 37px,
+			${palette.background.subMeta} 46px
 		),
 		repeating-linear-gradient(
 			to right,
-			#ccc 0px,
-			#ccc 3px,
+			${neutral[86]} 0px,
+			${neutral[86]} 3px,
 			transparent 3px,
 			transparent 5px
 		);
@@ -170,7 +176,7 @@ export const SubMeta = ({
 						Explore more on these topics
 					</span>
 					<div css={listWrapper(palette)}>
-						<ul css={listStyleNone}>
+						<ul css={listStyleNone(palette)}>
 							{links.map((link) => (
 								<li
 									css={listItemStyles(palette)}
