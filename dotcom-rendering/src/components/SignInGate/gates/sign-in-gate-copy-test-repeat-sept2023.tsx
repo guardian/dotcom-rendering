@@ -5,20 +5,20 @@ import { canShowSignInGate } from '../displayRule';
 import { SignInGateMainCheckoutComplete } from '../gateDesigns/SignInGateMainCheckoutComplete';
 import type { SignInGateComponent } from '../types';
 
-const SignInGateCopyTestJan2023 = React.lazy(() => {
+const SignInGateCopyTestRepeatSept2023 = React.lazy(() => {
 	const { endPerformanceMeasure } = startPerformanceMeasure(
 		'identity',
-		'SignInGateCopyTestJan2023',
+		'SignInGateCopyTestRepeatSept2023',
 	);
 	return import(
-		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateCopyTestJan2023'
+		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateCopyTestRepeatSept2023'
 	).then((module) => {
 		endPerformanceMeasure();
-		return { default: module.SignInGateCopyTestJan2023 };
+		return { default: module.SignInGateCopyTestRepeatSept2023 };
 	});
 });
 
-export const signInGateCopyTestJan2023Component: SignInGateComponent = {
+export const signInGateCopyTestRepeatSept2023Component: SignInGateComponent = {
 	gate: ({
 		ophanComponentId,
 		dismissGate,
@@ -43,7 +43,7 @@ export const signInGateCopyTestJan2023Component: SignInGateComponent = {
 						checkoutCompleteCookieData={checkoutCompleteCookieData}
 					/>
 				) : (
-					<SignInGateCopyTestJan2023
+					<SignInGateCopyTestRepeatSept2023
 						ophanComponentId={ophanComponentId}
 						dismissGate={dismissGate}
 						guUrl={guUrl}

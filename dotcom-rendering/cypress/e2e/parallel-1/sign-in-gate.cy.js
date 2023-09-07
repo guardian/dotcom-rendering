@@ -263,7 +263,7 @@ describe('Sign In Gate Tests', function () {
 				cy.get('[data-cy=sign-in-gate-main_register]')
 					.should('have.attr', 'href')
 					.and('contains', '/register?returnUrl=')
-					.and('contains', 'sign_in_gate_copy_test_jan2023')
+					.and('contains', 'sign_in_gate_copy_test_repeat_sept2023')
 					.and('not.contains', 'personalised_new_SupporterPlus');
 			});
 
