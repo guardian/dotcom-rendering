@@ -444,31 +444,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					const isFirstContainer = index === 0;
 
-					const deduplicatedCards = [
-						...collection.curated,
-						...collection.backfill,
-					].filter(
-						(card, cardIndex, allCards) =>
-							cardIndex ===
-							allCards.findIndex((c) => c.url === card.url),
-					);
-
-					const cardsEditionBrandings = deduplicatedCards.map(
-						(card) => card.branding,
-					);
-
-					const containerSponsorBranding =
-						cardsEditionBrandings.every(
-							(branding) =>
-								branding !== undefined &&
-								branding.brandingType?.name === 'sponsored' &&
-								cardsEditionBrandings[0] &&
-								branding.sponsorName ===
-									cardsEditionBrandings[0]?.sponsorName,
-						)
-							? cardsEditionBrandings[0]
-							: undefined;
-
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<Fragment key={ophanName}>
@@ -789,7 +764,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								frontEditionBranding={frontEditionBranding}
 								discussionApiUrl={front.config.discussionApiUrl}
 								containerSponsorBranding={
-									containerSponsorBranding
+									collection.collectionBranding
 								}
 							>
 								<DecideContainer
