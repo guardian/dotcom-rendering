@@ -279,7 +279,7 @@ const mostPopAdStyles = css`
 	margin: 12px auto;
 	text-align: center;
 	${from.tablet} {
-		max-width: 699px;
+		max-width: 700px;
 	}
 	${from.desktop} {
 		width: auto;
@@ -297,7 +297,7 @@ const mostPopContainerStyles = css`
 	max-width: 300px;
 	margin: 0px auto;
 	${from.tablet} {
-		max-width: 699px;
+		max-width: 700px;
 	}
 	${from.desktop} {
 		max-width: 300px;
