@@ -1,3 +1,4 @@
+import assert from 'node:assert';
 import { setImmediate } from 'node:timers';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 
@@ -90,10 +91,9 @@ describe('checkBrazeDependecies', () => {
 
 		expect(got.isSuccessful).toEqual(false);
 		// Condition to keep TypeScript happy
-		if (!got.isSuccessful) {
-			expect(got.failure.field).toEqual('brazeSwitch');
-			expect(got.failure.data).toEqual(false);
-		}
+		assert(!got.isSuccessful);
+		expect(got.failure.field).toEqual('brazeSwitch');
+		expect(got.failure.data).toEqual(false);
 	});
 
 	it('returns the apiKey if the switch is disabled', async () => {
@@ -149,10 +149,9 @@ describe('checkBrazeDependecies', () => {
 
 		expect(got.isSuccessful).toEqual(false);
 		// Condition to keep TypeScript happy
-		if (!got.isSuccessful) {
-			expect(got.failure.field).toEqual('apiKey');
-			expect(got.failure.data).toEqual(null);
-		}
+		assert(!got.isSuccessful);
+		expect(got.failure.field).toEqual('apiKey');
+		expect(got.failure.data).toEqual(null);
 	});
 
 	it('fails if the brazeUuid is not available', async () => {
@@ -182,10 +181,9 @@ describe('checkBrazeDependecies', () => {
 			apiKey: 'fake-api-key',
 		});
 		// Condition to keep TypeScript happy
-		if (!got.isSuccessful) {
-			expect(got.failure.field).toEqual('brazeUuid');
-			expect(got.failure.data).toEqual(null);
-		}
+		assert(!got.isSuccessful);
+		expect(got.failure.field).toEqual('brazeUuid');
+		expect(got.failure.data).toEqual(null);
 	});
 
 	it('fails when the user is not signed in', async () => {
@@ -214,10 +212,9 @@ describe('checkBrazeDependecies', () => {
 			apiKey: 'fake-api-key',
 		});
 		// Condition to keep TypeScript happy
-		if (!got.isSuccessful) {
-			expect(got.failure.field).toEqual('brazeUuid');
-			expect(got.failure.data).toEqual(null);
-		}
+		assert(!got.isSuccessful);
+		expect(got.failure.field).toEqual('brazeUuid');
+		expect(got.failure.data).toEqual(null);
 	});
 
 	it('fails if the required consents are not given', async () => {
@@ -248,10 +245,9 @@ describe('checkBrazeDependecies', () => {
 			apiKey: 'fake-api-key',
 		});
 		// Condition to keep TypeScript happy
-		if (!got.isSuccessful) {
-			expect(got.failure.field).toEqual('consent');
-			expect(got.failure.data).toEqual(false);
-		}
+		assert(!got.isSuccessful);
+		expect(got.failure.field).toEqual('consent');
+		expect(got.failure.data).toEqual(false);
 	});
 
 	it('fails if the page is a paid content page', async () => {
@@ -283,10 +279,9 @@ describe('checkBrazeDependecies', () => {
 			brazeUuid: 'fake-uuid',
 		});
 		// Condition to keep TypeScript happy
-		if (!got.isSuccessful) {
-			expect(got.failure.field).toEqual('isNotPaidContent');
-			expect(got.failure.data).toEqual(false);
-		}
+		assert(!got.isSuccessful);
+		expect(got.failure.field).toEqual('isNotPaidContent');
+		expect(got.failure.data).toEqual(false);
 	});
 
 	it('fails if any underlying async operation fails', async () => {
@@ -317,9 +312,8 @@ describe('checkBrazeDependecies', () => {
 			apiKey: 'fake-api-key',
 		});
 		// Condition to keep TypeScript happy
-		if (!got.isSuccessful) {
-			expect(got.failure.field).toEqual('consent');
-			expect(got.failure.data).toEqual('something went wrong');
-		}
+		assert(!got.isSuccessful);
+		expect(got.failure.field).toEqual('consent');
+		expect(got.failure.data).toEqual('something went wrong');
 	});
 });

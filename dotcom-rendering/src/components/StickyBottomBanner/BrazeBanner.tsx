@@ -132,20 +132,22 @@ const BrazeBannerWithSatisfiedDependencies = ({
 
 	const subscribeToNewsletter = async (newsletterId: string) => {
 		if (
-			authStatus.kind == 'SignedInWithCookies' ||
-			authStatus.kind == 'SignedInWithOkta'
+			authStatus.kind != 'SignedInWithCookies' &&
+			authStatus.kind != 'SignedInWithOkta'
 		) {
-			const options = getOptionsHeadersWithOkta(authStatus);
-
-			await fetch(`${idApiUrl}/users/me/newsletters`, {
-				method: 'PATCH',
-				body: JSON.stringify({
-					id: newsletterId,
-					subscribed: true,
-				}),
-				...options,
-			});
+			return;
 		}
+
+		const options = getOptionsHeadersWithOkta(authStatus);
+
+		await fetch(`${idApiUrl}/users/me/newsletters`, {
+			method: 'PATCH',
+			body: JSON.stringify({
+				id: newsletterId,
+				subscribed: true,
+			}),
+			...options,
+		});
 	};
 
 	return (

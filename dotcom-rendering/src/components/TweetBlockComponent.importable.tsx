@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import { body, border } from '@guardian/source-foundations';
 import { useEffect } from 'react';
 import { unescapeData } from '../lib/escapeData';
@@ -48,19 +49,20 @@ const loadTweet = (element: TweetBlockElement) => {
 	const tweetContainer = document.getElementById(
 		`tweet-container-${element.elementId}`,
 	);
+	if (!tweetContainer) return;
 	const tweet = document.querySelector(
 		`#tweet-container-${element.elementId} > blockquote.nojs-tweet`,
 	);
+	if (!tweet) return;
+	if (isUndefined(twttr)) return;
 
-	if (tweetContainer && tweet && typeof twttr !== 'undefined') {
-		// We need this classname to exist as this is what Twitter uses
-		// to find the tweet on the page. We *remove* this class in
-		// enhanceTweets()
-		tweet.classList.add('twitter-tweet');
-		twttr.ready((twitter) => {
-			twitter.widgets.load(tweetContainer);
-		});
-	}
+	// We need this classname to exist as this is what Twitter uses
+	// to find the tweet on the page. We *remove* this class in
+	// enhanceTweets()
+	tweet.classList.add('twitter-tweet');
+	twttr.ready((twitter) => {
+		twitter.widgets.load(tweetContainer);
+	});
 };
 
 export const TweetBlockComponent = ({ element }: Props) => {

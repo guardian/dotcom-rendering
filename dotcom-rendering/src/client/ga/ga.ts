@@ -167,20 +167,20 @@ export const sendPageView = async (): Promise<void> => {
 	const randomPerc = Math.random() * 100;
 	const coreVitalsSampleRate = 5;
 
-	if (coreVitalsSampleRate >= randomPerc) {
-		const { onCLS, onFID, onLCP } = await import(
-			// we only want to download the web-vitals if it’s going to be used
-			/* webpackMode: 'lazy' */ 'web-vitals'
-		);
+	if (coreVitalsSampleRate < randomPerc) return;
 
-		// CLS and LCP are captured when the page lifecycle changes to 'hidden'.
-		// https://developers.google.com/web/updates/2018/07/page-lifecycle-api#advice-hidden
-		onCLS(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#oncls (This is actually DCLS, as doesn't track CLS in iframes, see https://github.com/WICG/layout-instability#cumulative-scores)
-		onLCP(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#onlcp
+	const { onCLS, onFID, onLCP } = await import(
+		// we only want to download the web-vitals if it’s going to be used
+		/* webpackMode: 'lazy' */ 'web-vitals'
+	);
 
-		// FID is captured when a user interacts with the page
-		onFID(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#onfid
-	}
+	// CLS and LCP are captured when the page lifecycle changes to 'hidden'.
+	// https://developers.google.com/web/updates/2018/07/page-lifecycle-api#advice-hidden
+	onCLS(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#oncls (This is actually DCLS, as doesn't track CLS in iframes, see https://github.com/WICG/layout-instability#cumulative-scores)
+	onLCP(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#onlcp
+
+	// FID is captured when a user interacts with the page
+	onFID(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#onfid
 };
 
 export const trackNonClickInteraction = (actionName: string): void => {

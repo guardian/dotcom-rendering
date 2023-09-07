@@ -9,9 +9,8 @@ export const useOnce = (task: () => void, waitFor: unknown[]): void => {
 	const [alreadyRun, setAlreadyRun] = useState(false);
 	const isReady = waitFor.every((dep) => dep !== undefined);
 	useEffect(() => {
-		if (!alreadyRun && isReady) {
-			task();
-			setAlreadyRun(true);
-		}
+		if (alreadyRun || isReady) return;
+		task();
+		setAlreadyRun(true);
 	}, [alreadyRun, isReady, task]);
 };

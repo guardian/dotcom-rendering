@@ -26,21 +26,20 @@ type Props = {
 export const FileUpload = ({ formField, formData, setFormData }: Props) => {
 	const [error, setError] = useState('');
 	const onSelectFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
-		if (event.target.files?.[0]) {
-			setError('');
-			try {
-				const stringifiedFile = await stringifyFileBase64(
-					event.target.files[0],
-				);
-				setFormData({
-					...formData,
-					[formField.id]: stringifiedFile,
-				});
-			} catch (e) {
-				setError(
-					'Sorry there was a problem with the file you uploaded above. Check the size and type. We only accept images, pdfs and .doc or .docx files',
-				);
-			}
+		const file = event.target.files?.[0];
+		if (!file) return;
+
+		setError('');
+		try {
+			const stringifiedFile = await stringifyFileBase64(file);
+			setFormData({
+				...formData,
+				[formField.id]: stringifiedFile,
+			});
+		} catch (e) {
+			setError(
+				'Sorry there was a problem with the file you uploaded above. Check the size and type. We only accept images, pdfs and .doc or .docx files',
+			);
 		}
 	};
 
