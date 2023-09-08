@@ -108,6 +108,8 @@ module.exports = {
 				ignoreNonDOM: true,
 			},
 		],
+		// We want to be careful with context and certainly avoid unnecessary re-renders
+		'react/jsx-no-constructed-context-values': 'error',
 
 		'@typescript-eslint/switch-exhaustiveness-check': 'error',
 		'array-callback-return': 'error',
@@ -171,6 +173,10 @@ module.exports = {
 	},
 	settings: {
 		'import/resolver': 'typescript',
+		react: {
+			// Tells eslint-plugin-react to automatically detect the version of React to use
+			version: 'detect',
+		},
 	},
 	overrides: [
 		{

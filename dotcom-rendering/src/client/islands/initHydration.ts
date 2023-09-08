@@ -1,5 +1,6 @@
 import type { EmotionCache } from '@emotion/cache';
 import { doHydration } from './doHydration';
+import { getConfig } from './getConfig';
 import { getName } from './getName';
 import { getProps } from './getProps';
 import { onInteraction } from './onInteraction';
@@ -36,6 +37,7 @@ export const initHydration = async (
 ): Promise<void> => {
 	const name = getName(element);
 	const props = getProps(element);
+	const config = getConfig(element);
 
 	if (!name) return;
 
@@ -43,7 +45,7 @@ export const initHydration = async (
 	switch (deferUntil) {
 		case 'idle': {
 			whenIdle(() => {
-				void doHydration(name, props, element, emotionCache);
+				void doHydration(name, props, element, emotionCache, config);
 			});
 			return;
 		}
@@ -52,7 +54,13 @@ export const initHydration = async (
 			whenVisible(
 				element,
 				() => {
-					void doHydration(name, props, element, emotionCache);
+					void doHydration(
+						name,
+						props,
+						element,
+						emotionCache,
+						config,
+					);
 				},
 				{ rootMargin },
 			);
@@ -60,17 +68,21 @@ export const initHydration = async (
 		}
 		case 'interaction': {
 			onInteraction(element, (targetElement) => {
-				void doHydration(name, props, element, emotionCache).then(
-					() => {
-						targetElement.dispatchEvent(new MouseEvent('click'));
-					},
-				);
+				void doHydration(
+					name,
+					props,
+					element,
+					emotionCache,
+					config,
+				).then(() => {
+					targetElement.dispatchEvent(new MouseEvent('click'));
+				});
 			});
 			return;
 		}
 		case 'hash': {
 			if (window.location.hash.includes(name) || hasLightboxHash(name)) {
-				void doHydration(name, props, element, emotionCache);
+				void doHydration(name, props, element, emotionCache, config);
 			} else {
 				// If we didn't find a matching hash on page load, set a
 				// listener so that we check again each time the reader
@@ -80,14 +92,20 @@ export const initHydration = async (
 						window.location.hash.includes(name) ||
 						hasLightboxHash(name)
 					) {
-						void doHydration(name, props, element, emotionCache);
+						void doHydration(
+							name,
+							props,
+							element,
+							emotionCache,
+							config,
+						);
 					}
 				});
 			}
 			return;
 		}
 		default: {
-			return doHydration(name, props, element, emotionCache);
+			return doHydration(name, props, element, emotionCache, config);
 		}
 	}
 };

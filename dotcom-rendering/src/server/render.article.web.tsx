@@ -1,5 +1,6 @@
 import { ArticleDesign, isString, Pillar } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
+import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import {
@@ -18,6 +19,7 @@ import { polyfillIO } from '../lib/polyfill.io';
 import { extractGA } from '../model/extract-ga';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
+import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
 import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
 import type { TagType } from '../types/tag';
@@ -47,13 +49,18 @@ export const renderHtml = ({
 
 	const format: ArticleFormat = decideFormat(article.format);
 
+	const renderingTarget = 'Web';
+	const config: Config = { renderingTarget };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<ArticlePage
-			format={format}
-			article={article}
-			NAV={NAV}
-			renderingTarget="Web"
-		/>,
+		<ConfigProvider value={config}>
+			<ArticlePage
+				format={format}
+				article={article}
+				NAV={NAV}
+				renderingTarget={renderingTarget}
+			/>
+		</ConfigProvider>,
 	);
 
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -248,26 +255,31 @@ export const renderBlocks = ({
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
+	// Only currently supported for Web
+	const config: Config = { renderingTarget: 'Web' };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<LiveBlogRenderer
-			blocks={blocks}
-			format={format}
-			host={host}
-			pageId={pageId}
-			webTitle={webTitle}
-			ajaxUrl={ajaxUrl}
-			isSensitive={isSensitive}
-			isAdFreeUser={isAdFreeUser}
-			switches={switches}
-			isLiveUpdate={true}
-			sectionId={section}
-			// The props below are never used because isLiveUpdate is true but, typescript...
-			shouldHideReaderRevenue={false}
-			tags={[]}
-			isPaidContent={false}
-			contributionsServiceUrl=""
-			keywordIds={keywordIds}
-		/>,
+		<ConfigProvider value={config}>
+			<LiveBlogRenderer
+				blocks={blocks}
+				format={format}
+				host={host}
+				pageId={pageId}
+				webTitle={webTitle}
+				ajaxUrl={ajaxUrl}
+				isSensitive={isSensitive}
+				isAdFreeUser={isAdFreeUser}
+				switches={switches}
+				isLiveUpdate={true}
+				sectionId={section}
+				// The props below are never used because isLiveUpdate is true but, typescript...
+				shouldHideReaderRevenue={false}
+				tags={[]}
+				isPaidContent={false}
+				contributionsServiceUrl=""
+				keywordIds={keywordIds}
+			/>
+		</ConfigProvider>,
 	);
 
 	return `${extractedCss}${html}`;
@@ -284,12 +296,16 @@ export const renderKeyEvents = ({
 	format: FEFormat,
 	filterKeyEvents,
 }: FEKeyEventsRequest): string => {
+	const config: Config = { renderingTarget: 'Web' };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<KeyEventsContainer
-			keyEvents={keyEvents}
-			format={decideFormat(FEFormat)}
-			filterKeyEvents={filterKeyEvents}
-		/>,
+		<ConfigProvider value={config}>
+			<KeyEventsContainer
+				keyEvents={keyEvents}
+				format={decideFormat(FEFormat)}
+				filterKeyEvents={filterKeyEvents}
+			/>
+		</ConfigProvider>,
 	);
 
 	return `${extractedCss}${html}`;

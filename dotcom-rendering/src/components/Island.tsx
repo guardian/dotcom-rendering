@@ -1,3 +1,4 @@
+import { useConfig } from './ConfigContext';
 import { Placeholder } from './Placeholder';
 
 /**
@@ -133,18 +134,29 @@ export const Island = ({
 	placeholderHeight,
 	rootMargin,
 	children,
-}: Props) => (
-	<gu-island
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
-		name={children.type.name}
-		deferUntil={deferUntil}
-		props={JSON.stringify(children.props)}
-		clientOnly={clientOnly}
-		rootMargin={rootMargin}
-	>
-		{decideChildren(children, clientOnly, placeholderHeight)}
-	</gu-island>
-);
+}: Props) => {
+	/**
+	 * Where is this coming from?
+	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
+	 *
+	 * This is here so that we can provide the config information to the hydrated, client-side rendered components
+	 */
+	const config = useConfig();
+
+	return (
+		<gu-island
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
+			name={children.type.name}
+			deferUntil={deferUntil}
+			props={JSON.stringify(children.props)}
+			clientOnly={clientOnly}
+			rootMargin={rootMargin}
+			config={JSON.stringify(config)}
+		>
+			{decideChildren(children, clientOnly, placeholderHeight)}
+		</gu-island>
+	);
+};
 
 /**
  * If JavaScript is disabled, hide client-only islands

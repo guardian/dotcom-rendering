@@ -1,4 +1,5 @@
 import { isString, Pillar } from '@guardian/libs';
+import { ConfigProvider } from '../components/ConfigContext';
 import { FrontPage } from '../components/FrontPage';
 import { TagFrontPage } from '../components/TagFrontPage';
 import {
@@ -13,6 +14,7 @@ import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
+import type { Config } from '../types/configContext';
 import type { DCRFrontType } from '../types/front';
 import type { DCRTagFrontType } from '../types/tagFront';
 import { htmlPageTemplate } from './htmlPageTemplate';
@@ -75,8 +77,13 @@ export const renderFront = ({
 	const title = front.webTitle;
 	const NAV = extractFrontNav(front);
 
+	// Fronts are not supported in Apps
+	const config: Config = { renderingTarget: 'Web' };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<FrontPage front={front} NAV={NAV} />,
+		<ConfigProvider value={config}>
+			<FrontPage front={front} NAV={NAV} />,
+		</ConfigProvider>,
 	);
 
 	// Evaluating the performance of HTTP3 over HTTP2
@@ -164,8 +171,13 @@ export const renderTagFront = ({
 	const title = tagFront.webTitle;
 	const NAV = extractNAV(tagFront.nav);
 
+	// Fronts are not supported in Apps
+	const config: Config = { renderingTarget: 'Web' };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<TagFrontPage tagFront={tagFront} NAV={NAV} />,
+		<ConfigProvider value={config}>
+			<TagFrontPage tagFront={tagFront} NAV={NAV} />,
+		</ConfigProvider>,
 	);
 
 	// Evaluating the performance of HTTP3 over HTTP2

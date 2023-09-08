@@ -3,7 +3,6 @@ import { ArticleDesign } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import type { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { ArticleHeadline } from './ArticleHeadline';
 import { cleanTeamData } from './GetMatchStats.importable';
@@ -16,7 +15,6 @@ type Props = {
 	format: ArticleFormat;
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
-	renderingTarget: RenderingTarget;
 };
 
 const Loading = () => <Placeholder height={230} />;
@@ -39,7 +37,6 @@ export const GetMatchNav = ({
 	format,
 	tags,
 	webPublicationDateDeprecated,
-	renderingTarget,
 }: Props) => {
 	const options: SWRConfiguration = { errorRetryCount: 1 };
 	// If this blog is live then poll for new stats
@@ -82,7 +79,6 @@ export const GetMatchNav = ({
 							webPublicationDateDeprecated
 						}
 						isMatch={true}
-						renderingTarget={renderingTarget}
 					/>
 				</div>
 			);

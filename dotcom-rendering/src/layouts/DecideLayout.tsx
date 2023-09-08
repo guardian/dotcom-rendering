@@ -23,17 +23,11 @@ interface AppProps extends BaseProps {
 }
 
 interface WebProps extends BaseProps {
-	renderingTarget: 'Web';
 	NAV: NavType;
+	renderingTarget: 'Web';
 }
 
-const DecideLayoutApps = ({
-	article,
-	format,
-}: {
-	article: FEArticleType;
-	format: ArticleFormat;
-}) => {
+const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 	const notSupported = <pre>Not supported</pre>;
 	switch (format.display) {
 		case ArticleDisplay.Standard: {
@@ -43,7 +37,7 @@ const DecideLayoutApps = ({
 						<StandardLayout
 							article={article}
 							format={format}
-							renderingTarget="Apps"
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.LiveBlog:
@@ -52,7 +46,7 @@ const DecideLayoutApps = ({
 						<LiveLayout
 							article={article}
 							format={format}
-							renderingTarget="Apps"
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
@@ -92,7 +86,6 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
 						/>
 					);
 				}
@@ -119,7 +112,6 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
@@ -128,7 +120,6 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
 						/>
 					);
 			}
@@ -142,7 +133,6 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
@@ -161,7 +151,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget="Web"
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -172,7 +162,6 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
@@ -181,7 +170,6 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
@@ -198,12 +186,18 @@ const DecideLayoutWeb = ({
 	}
 };
 
-export const DecideLayout = (props: AppProps | WebProps) => {
+export const DecideLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
 
 	switch (renderingTarget) {
 		case 'Apps':
-			return <DecideLayoutApps article={article} format={format} />;
+			return (
+				<DecideLayoutApps
+					article={article}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			);
 		case 'Web':
 			return (
 				<DecideLayoutWeb

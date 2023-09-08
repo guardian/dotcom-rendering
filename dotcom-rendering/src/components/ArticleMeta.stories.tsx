@@ -85,11 +85,37 @@ export const ArticleStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
 };
+
+export const ArticleAppsStory = () => {
+	return (
+		<Wrapper>
+			<ArticleMeta
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				}}
+				pageId=""
+				webTitle=""
+				byline="Lanre Bakare"
+				tags={tagsWithLargeBylineImage}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
+			/>
+		</Wrapper>
+	);
+};
+/** @see /dotcom-rendering/docs/development/storybook.md */
+ArticleAppsStory.args = { config: { renderingTarget: 'Apps' } };
 
 export const BrandingStory = () => {
 	return (
@@ -128,7 +154,6 @@ export const BrandingStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -156,7 +181,6 @@ export const FeatureStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -183,7 +207,6 @@ export const FeatureWithMismatchedContributor = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -211,7 +234,6 @@ export const FeatureStoryWithSmallBylineImage = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -238,7 +260,6 @@ export const SpecialReportStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -265,7 +286,6 @@ export const SpecialReportAlt = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -292,7 +312,6 @@ export const CommentStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -319,7 +338,6 @@ export const InterviewStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -346,7 +364,6 @@ export const ImmersiveStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -373,7 +390,6 @@ export const TwoContributorsStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -402,7 +418,6 @@ export const DeadBlogStory = () => {
 						shortUrlId=""
 						ajaxUrl=""
 						showShareCount={true}
-						renderingTarget="Web"
 					/>
 				</Wrapper>
 			))}
@@ -431,7 +446,6 @@ export const Dateline = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
-				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);

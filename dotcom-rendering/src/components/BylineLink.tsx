@@ -4,8 +4,8 @@ import {
 	getSoleContributor,
 	isContributor,
 } from '../lib/byline';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
 
@@ -13,7 +13,6 @@ type Props = {
 	byline: string;
 	tags: TagType[];
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 };
 
 const applyCleverOrderingForMatching = (titles: string[]): string[] => {
@@ -107,12 +106,7 @@ function removeComma(bylinePart: string) {
 		: bylinePart;
 }
 
-export const BylineLink = ({
-	byline,
-	tags,
-	format,
-	renderingTarget,
-}: Props) => {
+export const BylineLink = ({ byline, tags, format }: Props) => {
 	const tokens = bylineAsTokens(byline, tags);
 	const soleContributor = getSoleContributor(tags, byline);
 	const hasSoleContributor = !!soleContributor;
@@ -136,6 +130,12 @@ export const BylineLink = ({
 			/>
 		);
 	});
+
+	/**
+	 * Where is this coming from?
+	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
+	 */
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
