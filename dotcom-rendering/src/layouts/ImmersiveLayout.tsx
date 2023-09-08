@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandBackground,
@@ -12,6 +12,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { useConfig } from 'src/components/ConfigContext';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -33,7 +34,7 @@ import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { minNavHeightPx, Nav } from '../components/Nav/Nav';
+import { Nav, minNavHeightPx } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -270,6 +271,8 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
+
+	const { renderingTarget } = useConfig();
 
 	/**
 	We need change the height values depending on whether the labs header is there or not to keep

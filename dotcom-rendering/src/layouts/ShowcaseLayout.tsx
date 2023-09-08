@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandBackground,
@@ -12,6 +12,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { useConfig } from 'src/components/ConfigContext';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -313,6 +314,8 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 		format.design !== ArticleDesign.Picture ? true : false;
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
+
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
