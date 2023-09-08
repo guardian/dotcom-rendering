@@ -276,7 +276,8 @@ export const ImmersiveLayout = ({
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	/**
 	We need change the height values depending on whether the labs header is there or not to keep

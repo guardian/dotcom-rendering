@@ -213,7 +213,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		},
 	} = front;
 
-	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
+	const isInEuropeTest =
+		abTests.europeNetworkFrontVariant === 'variant' ||
+		switches['europeNetworkFrontSwitch'] === true;
 
 	const isInNetworkFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&

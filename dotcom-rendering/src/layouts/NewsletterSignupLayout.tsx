@@ -203,7 +203,8 @@ export const NewsletterSignupLayout = ({
 	} = article;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
