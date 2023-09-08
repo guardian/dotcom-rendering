@@ -7,6 +7,7 @@ import type {
 	FEFrontCard,
 } from '../types/front';
 import { decideBadge } from './decideBadge';
+import { decideCollectionBranding } from './decideCollectionBranding';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
@@ -68,14 +69,6 @@ export const enhanceCollections = ({
 		const isCollectionPaidContent = allBranding.every(
 			({ brandingType }) => brandingType?.name === 'paid-content',
 		);
-
-		const sponsorBranding = allBranding.every(
-			(branding) =>
-				branding.brandingType?.name === 'sponsored' &&
-				branding.sponsorName === allBranding[0]?.sponsorName,
-		)
-			? allBranding[0]
-			: undefined;
 
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
@@ -139,7 +132,7 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
-			collectionBranding: sponsorBranding,
+			collectionBranding: decideCollectionBranding(allCards, editionId),
 		};
 	});
 };
