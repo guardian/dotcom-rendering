@@ -20,7 +20,6 @@ import { guard } from '../lib/guard';
 import { useOnce } from '../lib/useOnce';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
-const modalDismissedKey = 'gu.euModalDismissed';
 const modalShownKey = 'gu.euModalShown';
 
 const dialogStyles = css`
@@ -136,7 +135,7 @@ const coe: string[] = [
 	'TR',
 	'UA',
 ];
-
+const ukUsAusCC = ['GB', 'US', 'AU'];
 export const isValidEdition = guard(['EUR', 'US', 'UK', 'AU', 'INT'] as const);
 
 export const getModalType = (): ModalType => {
@@ -146,8 +145,12 @@ export const getModalType = (): ModalType => {
 	if (!geoCountryCookie) {
 		return 'NoModal';
 	}
-	if (editionCookie === 'EUR') {
-		return 'NoModal';
+	if (
+		!editionCookie &&
+		!coe.includes(geoCountryCookie) &&
+		!ukUsAusCC.includes(geoCountryCookie)
+	) {
+		return 'ModalDoYouWantToSwitch';
 	}
 	// If selected INT and not in COE show do u want to switch
 	if (editionCookie === 'INT' && !coe.includes(geoCountryCookie)) {
@@ -155,7 +158,11 @@ export const getModalType = (): ModalType => {
 	}
 	// If in COE
 	if (coe.includes(geoCountryCookie)) {
-		if (editionCookie === 'INT' || !editionCookie) {
+		if (
+			editionCookie === 'INT' ||
+			!editionCookie ||
+			editionCookie === 'EUR'
+		) {
 			// If INT edition or no edition
 			return 'ModalSwitched';
 		} else {
@@ -183,7 +190,8 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		if (
 			europeModal instanceof HTMLDialogElement &&
 			modalType !== 'NoModal' &&
-			!modalShown
+			!modalShown &&
+			editionCookie !== 'EUR'
 		) {
 			localStorage.setItem(modalShownKey, 'true');
 			europeModal.showModal();
@@ -191,6 +199,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 				hideModal();
 			});
 			document.documentElement.style.overflow = 'hidden';
+			if (modalType === 'ModalSwitched') {
+				setCookie({
+					name: 'GU_EDITION',
+					value: 'EUR',
+					isCrossSubdomain: true,
+				});
+			}
 		}
 	}, []);
 
@@ -200,7 +215,6 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			value: editionId,
 			isCrossSubdomain: true,
 		});
-		localStorage.setItem(modalDismissedKey, 'true');
 		if (editionId === edition) {
 			hideModal();
 		} else {
@@ -209,7 +223,6 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 	};
 
 	const dismissModal = () => {
-		localStorage.setItem(modalDismissedKey, 'true');
 		hideModal();
 	};
 
@@ -243,7 +256,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 								<Button
 									size={'small'}
 									onClick={() => {
-										confirmNewEdition('EUR');
+										dismissModal();
 									}}
 									cssOverrides={OKButtonStyles}
 								>
