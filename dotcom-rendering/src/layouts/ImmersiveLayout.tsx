@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandBackground,
@@ -21,6 +21,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -270,6 +271,8 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
+
+	const { renderingTarget } = useConfig();
 
 	/**
 	We need change the height values depending on whether the labs header is there or not to keep

@@ -18,6 +18,7 @@ import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
+import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
 import { Counts } from './Counts';
 import { Dateline } from './Dateline';
@@ -325,6 +326,8 @@ export const ArticleMeta = ({
 	const palette = decidePalette(format);
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
+
+	const { renderingTarget } = useConfig();
 
 	return (
 		<div
