@@ -648,7 +648,8 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 										webUrl={article.webURL}
 										webTitle={article.webTitle}
 										showBottomSocialButtons={
-											article.showBottomSocialButtons
+											article.showBottomSocialButtons &&
+											renderingTarget === 'Web'
 										}
 										badge={article.badge?.enhanced}
 									/>
