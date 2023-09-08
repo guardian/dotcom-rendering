@@ -19,12 +19,13 @@ describe('getModalType', () => {
 		expect(getModalType()).toEqual('NoModal');
 	});
 
-	it('should return "NoModal" if modalDismissedCookie is set', () => {
+	it('should return "NoModal" if modalDismissed key is set', () => {
 		mockGetCookie.mockImplementation((arg) => {
 			if (arg.name === 'GU_geo_country') return 'DE';
-			if (arg.name === 'GU_eu_modal_dismissed') return 'true';
 			return null;
 		});
+		jest.spyOn(localStorage, 'getItem');
+		localStorage.getItem = jest.fn(() => 'true');
 		expect(getModalType()).toEqual('NoModal');
 	});
 
@@ -55,7 +56,7 @@ describe('getModalType', () => {
 		expect(getModalType()).toEqual('ModalDoYouWantToSwitch');
 	});
 
-	it('should return "ModalNowSeeing" if editionCookie is not set and country is in COE', () => {
+	it('should return "ModalSwitched" if editionCookie is not set and country is in COE', () => {
 		mockGetCookie.mockImplementation((arg) => {
 			if (arg.name === 'GU_EDITION') return null;
 			if (arg.name === 'GU_geo_country') return 'DE'; // Assuming 'DE' (Germany) is in COE

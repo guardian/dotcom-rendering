@@ -7,42 +7,41 @@ import {
 	palette,
 	space,
 } from '@guardian/source-foundations';
-import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
+import {
+	Button,
+	Radio,
+	RadioGroup,
+	SvgCross,
+} from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 import { guard } from '../lib/guard';
 import { useOnce } from '../lib/useOnce';
-import { SvgClose } from './SvgClose';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
+const modalDismissedKey = 'gu.euModalDismissed';
+
 const dialogStyles = css`
-	dialog::backdrop {
+	&::backdrop {
 		background: rgba(18, 18, 18, 0.7);
+		padding: 10px;
 	}
 	&[open] {
 		display: flex;
-		align-items: center;
-		justify-content: center;
 	}
-	max-height: 100vh;
-	max-width: 100vh;
-	background: rgba(0, 0, 0, 0);
-	padding: 10px;
+	// Cannot use margin as it will effect the backdrop
+	max-width: calc(100vw - 20px);
+	padding: 0;
+	width: 620px;
+	justify-content: space-between;
+	background: white;
+	flex-direction: row;
 	top: 0;
 	position: fixed;
 	border: none;
-	width: 100vw;
-	height: 100vh;
 	z-index: 1000;
 	color: ${palette.brand[300]};
-`;
-const styles = css`
-	justify-content: space-between;
-	display: flex;
-	width: 620px;
-	background: white;
-	flex-direction: row;
 `;
 
 const textStyles = css`
@@ -81,6 +80,7 @@ const OKButtonStyles = css`
 	margin-right: ${space[2]}px;
 `;
 const closeButtonStyles = css`
+	fill: white;
 	margin: 10px;
 	position: relative;
 	padding: 0 6px;
@@ -142,7 +142,7 @@ export const getModalType = (): ModalType => {
 	const editionCookie = getCookie({ name: 'GU_EDITION' });
 
 	const geoCountryCookie = getCookie({ name: 'GU_geo_country' });
-	const modalDismissedCookie = getCookie({ name: 'GU_eu_modal_dismissed' });
+	const modalDismissedCookie = localStorage.getItem(modalDismissedKey);
 
 	if (!geoCountryCookie) {
 		return 'NoModal';
@@ -198,11 +198,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			value: editionId,
 			isCrossSubdomain: true,
 		});
-		setCookie({
-			name: 'GU_eu_modal_dismissed',
-			value: 'true',
-			daysToLive: 100, //todo - check how long
-		});
+		localStorage.setItem(modalDismissedKey, 'true');
 		if (editionId === edition) {
 			hideModal();
 		} else {
@@ -211,11 +207,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 	};
 
 	const dismissModal = () => {
-		setCookie({
-			name: 'GU_eu_modal_dismissed',
-			value: 'true',
-			daysToLive: 100, //todo - check how long
-		});
+		localStorage.setItem(modalDismissedKey, 'true');
 		hideModal();
 	};
 
@@ -229,113 +221,109 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 
 	return (
 		<dialog css={dialogStyles} id={'europe-modal-dialog'}>
-			<div css={styles}>
-				{!switchEdition ? (
-					<>
-						<div css={textStyles}>
-							<h1 css={headlineStyles}>
-								{modalType === 'ModalSwitched' &&
-									'We’ve switched you to the new Europe edition of the Guardian'}
-								{modalType === 'ModalDoYouWantToSwitch' &&
-									'Would you like to switch to our new Europe edition?'}
-							</h1>
-							<p css={bodyStyles}>
-								{modalType === 'ModalSwitched' &&
-									'You’re now getting more coverage tailored for readers in Europe'}
-								{modalType === 'ModalDoYouWantToSwitch' &&
-									'We’ve launched a new edition of the Guardian with our global coverage tailored for readers in Europe'}
-							</p>
-							<div css={buttonDivStyles}>
-								{modalType === 'ModalSwitched' && (
-									<Button
-										size={'small'}
-										onClick={() => {
-											confirmNewEdition('EUR');
-										}}
-										cssOverrides={OKButtonStyles}
-									>
-										OK, Thanks
-									</Button>
-								)}
-								{modalType === 'ModalDoYouWantToSwitch' && (
-									<Button
-										size={'small'}
-										onClick={() => dismissModal()}
-										cssOverrides={OKButtonStyles}
-									>
-										{' '}
-										No, Thanks{' '}
-									</Button>
-								)}
+			{!switchEdition ? (
+				<>
+					<div css={textStyles}>
+						<h1 css={headlineStyles}>
+							{modalType === 'ModalSwitched' &&
+								'We’ve switched you to the new Europe edition of the Guardian'}
+							{modalType === 'ModalDoYouWantToSwitch' &&
+								'Would you like to switch to our new Europe edition?'}
+						</h1>
+						<p css={bodyStyles}>
+							{modalType === 'ModalSwitched' &&
+								'You’re now getting more coverage tailored for readers in Europe'}
+							{modalType === 'ModalDoYouWantToSwitch' &&
+								'We’ve launched a new edition of the Guardian with our global coverage tailored for readers in Europe'}
+						</p>
+						<div css={buttonDivStyles}>
+							{modalType === 'ModalSwitched' && (
 								<Button
 									size={'small'}
-									priority={'subdued'}
-									onClick={() => setSwitchEdition(true)}
+									onClick={() => {
+										confirmNewEdition('EUR');
+									}}
+									cssOverrides={OKButtonStyles}
+								>
+									OK, Thanks
+								</Button>
+							)}
+							{modalType === 'ModalDoYouWantToSwitch' && (
+								<Button
+									size={'small'}
+									onClick={() => dismissModal()}
+									cssOverrides={OKButtonStyles}
 								>
 									{' '}
-									Switch Edition{' '}
+									No, Thanks{' '}
 								</Button>
-							</div>
+							)}
+							<Button
+								size={'small'}
+								priority={'subdued'}
+								onClick={() => setSwitchEdition(true)}
+							>
+								{' '}
+								Switch Edition{' '}
+							</Button>
 						</div>
-						<div css={imageStyles}>
-							<SvgFlagsInCircle />
-						</div>
-					</>
-				) : (
-					<div css={editionSectionDivStyles}>
-						<RadioGroup
-							label="Choose your edition"
-							name="colours"
-						>
-							<Radio
-								defaultChecked={selectedEdition === 'EUR'}
-								label="Europe edition"
-								value="EUR"
-								onChange={() => setSelectedEdition('EUR')}
-							/>
-							<Radio
-								defaultChecked={selectedEdition === 'UK'}
-								label="UK edition"
-								value="UK"
-								onChange={() => setSelectedEdition('UK')}
-							/>
-							<Radio
-								defaultChecked={selectedEdition === 'US'}
-								label="US edition"
-								value="US"
-								onChange={() => setSelectedEdition('US')}
-							/>
-							<Radio
-								defaultChecked={selectedEdition === 'AU'}
-								label="Australia edition"
-								value="AU"
-								onChange={() => setSelectedEdition('AU')}
-							/>
-							<Radio
-								defaultChecked={selectedEdition === 'INT'}
-								label="International edition"
-								value="INT"
-								onChange={() => setSelectedEdition('INT')}
-							/>
-						</RadioGroup>
-						<Button
-							size={'small'}
-							onClick={() => confirmNewEdition(selectedEdition)}
-						>
-							Confirm
-						</Button>
 					</div>
-				)}
-				{switchEdition && (
+					<div css={imageStyles}>
+						<SvgFlagsInCircle />
+					</div>
+				</>
+			) : (
+				<div css={editionSectionDivStyles}>
+					<RadioGroup label="Choose your edition" name="editions">
+						<Radio
+							defaultChecked={selectedEdition === 'EUR'}
+							label="Europe edition"
+							value="EUR"
+							onChange={() => setSelectedEdition('EUR')}
+						/>
+						<Radio
+							defaultChecked={selectedEdition === 'UK'}
+							label="UK edition"
+							value="UK"
+							onChange={() => setSelectedEdition('UK')}
+						/>
+						<Radio
+							defaultChecked={selectedEdition === 'US'}
+							label="US edition"
+							value="US"
+							onChange={() => setSelectedEdition('US')}
+						/>
+						<Radio
+							defaultChecked={selectedEdition === 'AU'}
+							label="Australia edition"
+							value="AU"
+							onChange={() => setSelectedEdition('AU')}
+						/>
+						<Radio
+							defaultChecked={selectedEdition === 'INT'}
+							label="International edition"
+							value="INT"
+							onChange={() => setSelectedEdition('INT')}
+						/>
+					</RadioGroup>
 					<Button
 						size={'small'}
-						cssOverrides={closeButtonStyles}
-						onClick={() => dismissModal()}
+						onClick={() => confirmNewEdition(selectedEdition)}
 					>
-						<SvgClose />
+						Confirm
 					</Button>
-				)}
-			</div>
+				</div>
+			)}
+			{switchEdition && (
+				<Button
+					aria-label={'close modal'}
+					size={'small'}
+					cssOverrides={closeButtonStyles}
+					onClick={() => dismissModal()}
+				>
+					<SvgCross isAnnouncedByScreenReader={true} size="small" />
+				</Button>
+			)}
 		</dialog>
 	);
 };
