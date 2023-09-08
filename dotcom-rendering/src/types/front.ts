@@ -402,6 +402,8 @@ export type DCRCollectionType = {
 	canShowMore?: boolean;
 	badge?: DCRBadgeType;
 	targetedTerritory?: Territory;
+
+	collectionBranding?: Branding;
 };
 
 export type DCRGroupedTrails = {

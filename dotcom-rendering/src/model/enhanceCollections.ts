@@ -69,13 +69,26 @@ export const enhanceCollections = ({
 			({ brandingType }) => brandingType?.name === 'paid-content',
 		);
 
+		const sponsorBranding = allBranding.every(
+			(branding) =>
+				branding.brandingType?.name === 'sponsored' &&
+				branding.sponsorName === allBranding[0]?.sponsorName,
+		)
+			? allBranding[0]
+			: undefined;
+
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
 			/**
 			 * We do this because Frontend had logic to ignore the "Branded" palette tag in the Fronts tool
 			 * when rendering a paid front or when non-paid content is curated inside a "Branded" container
 			 */
-			{ canBeBranded: !isPaidContent && allCardsHaveBranding },
+			{
+				canBeBranded:
+					!isPaidContent &&
+					allCardsHaveBranding &&
+					isCollectionPaidContent,
+			},
 		);
 
 		return {
@@ -126,6 +139,7 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
+			collectionBranding: sponsorBranding,
 		};
 	});
 };
