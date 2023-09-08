@@ -15,4 +15,4 @@ the react context api to extract the `edition` property to prevent this.
 
 ## Status
 
-Superceded by 028-react-context-api.md
+Superseded by 028-react-context-api.md
