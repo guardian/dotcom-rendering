@@ -284,10 +284,8 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 				) : (
 					<div css={editionSectionDivStyles}>
 						<RadioGroup
-							error=""
 							label="Choose your edition"
 							name="colours"
-							orientation="vertical"
 						>
 							<Radio
 								defaultChecked={selectedEdition === 'EUR'}
