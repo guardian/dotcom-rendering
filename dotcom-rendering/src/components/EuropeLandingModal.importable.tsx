@@ -21,6 +21,7 @@ import { useOnce } from '../lib/useOnce';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
 const modalDismissedKey = 'gu.euModalDismissed';
+const modalShownKey = 'gu.euModalShown';
 
 const dialogStyles = css`
 	&::backdrop {
@@ -140,14 +141,12 @@ export const isValidEdition = guard(['EUR', 'US', 'UK', 'AU', 'INT'] as const);
 
 export const getModalType = (): ModalType => {
 	const editionCookie = getCookie({ name: 'GU_EDITION' });
-
 	const geoCountryCookie = getCookie({ name: 'GU_geo_country' });
-	const modalDismissedCookie = localStorage.getItem(modalDismissedKey);
 
 	if (!geoCountryCookie) {
 		return 'NoModal';
 	}
-	if (modalDismissedCookie) {
+	if (editionCookie === 'EUR') {
 		return 'NoModal';
 	}
 	// If selected INT and not in COE show do u want to switch
@@ -180,10 +179,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 
 	useOnce(() => {
 		const europeModal = document.getElementById('europe-modal-dialog');
+		const modalShown = localStorage.getItem(modalShownKey);
 		if (
 			europeModal instanceof HTMLDialogElement &&
-			modalType !== 'NoModal'
+			modalType !== 'NoModal' &&
+			!modalShown
 		) {
+			localStorage.setItem(modalShownKey, 'true');
 			europeModal.showModal();
 			europeModal.addEventListener('close', () => {
 				hideModal();

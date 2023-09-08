@@ -206,7 +206,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const isInEuropeTest =
 		abTests.europeNetworkFrontVariant === 'variant' ||
-		front.config.switches['europeNetworkFrontSwitch'] === true;
+		switches['europeNetworkFrontSwitch'] === true;
 
 	// For the FrontsBannerAds test, we're not using contentType === "Network Front",
 	// just in case Europe goes live before the testing concludes.
@@ -375,7 +375,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-			{!isInEuropeTest && (
+			{isInEuropeTest && (
 				<Island clientOnly={true}>
 					<EuropeLandingModal edition={front.editionId} />
 				</Island>
