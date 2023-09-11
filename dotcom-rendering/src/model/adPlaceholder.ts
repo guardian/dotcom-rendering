@@ -102,3 +102,9 @@ const adPlaceholder = (elements: FEElement[]): FEElement[] => {
 
 	return elementsWithAds.elements;
 };
+
+export const enhanceAdPlaceholders = (blocks: Block[]): Block[] =>
+	blocks.map((b) => ({
+		...b,
+		elements: adPlaceholder(b.elements),
+	}));
