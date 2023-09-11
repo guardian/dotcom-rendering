@@ -6,6 +6,7 @@ import {
 } from '@guardian/atoms-rendering';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
+import { AdPlaceholderSlot } from '../components/AdPlaceholderSlot.apps';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -467,7 +468,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			// TODO - include ad placeholder slot component
 			// @see https://github.com/guardian/dotcom-rendering/pull/8808
-			return <></>;
+			return <div className="ad-placeholder"></div>;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent
