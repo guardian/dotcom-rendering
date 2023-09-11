@@ -144,8 +144,8 @@ describe('Sign In Gate Tests', function () {
 				'gu.prefs.sign-in-gate',
 				`{
                     "value": {
-                        "SignInGateCopyTest-quick-and-easy": "2020-07-22T08:25:05.567Z",
-                        "gate-dismissed-count-SignInGateCopyTest-quick-and-easy": 6
+                        "SignInGateCopyTestRepeatSept2023-quick-and-easy": "2020-07-22T08:25:05.567Z",
+                        "gate-dismissed-count-SignInGateCopyTestRepeatSept2023-quick-and-easy": 6
                     }
                 }`,
 			);

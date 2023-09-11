@@ -12,7 +12,8 @@
 const cypressSwitches = {
 	abAbTestTest: true, // Test switch, used for Cypress integration test
 	abSignInGateMainControl: true,
-	abSignInGateMainVariant: true,
+	// We plan to switch off the main gate variant whilst we run the copy changes
+	abSignInGateMainVariant: false,
 	abSignInGateCopyTestRepeatSept2023: true,
 };
 
