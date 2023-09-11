@@ -1,4 +1,5 @@
 import type { Newsletter } from '../types/content';
+import { enhanceAdPlaceholders } from './adPlaceholder';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
@@ -31,6 +32,16 @@ class BlockEnhancer {
 				this.format,
 				this.options.promotedNewsletter,
 			);
+		}
+		return this;
+	}
+
+	enhanceAdPlaceholders() {
+		if (
+			!(this.format.design === 'LiveBlogDesign') &&
+			!(this.format.design === 'DeadBlogDesign')
+		) {
+			this.blocks = enhanceAdPlaceholders(this.blocks);
 		}
 		return this;
 	}
@@ -106,5 +117,6 @@ export const enhanceBlocks = (
 		.enhanceNumberedLists()
 		.enhanceEmbeds()
 		.enhanceTweets()
-		.enhanceNewsletterSignup().blocks;
+		.enhanceNewsletterSignup()
+		.enhanceAdPlaceholders().blocks;
 };
