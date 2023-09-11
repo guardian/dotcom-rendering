@@ -295,7 +295,7 @@ const mostPopContainerStyles = css`
 	min-width: 300px;
 	width: fit-content;
 	max-width: 300px;
-	margin: 0px auto;
+	margin: 0 auto;
 	${from.tablet} {
 		max-width: 700px;
 	}
