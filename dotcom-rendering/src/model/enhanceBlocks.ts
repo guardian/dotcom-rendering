@@ -106,6 +106,9 @@ type Options = {
 	promotedNewsletter: Newsletter | undefined;
 };
 
+// TODO - add consideration of rendering target / platform
+// so that we can add app-only enhancers
+
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
 // example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
 // as they both effect SubheadingBlockElement
