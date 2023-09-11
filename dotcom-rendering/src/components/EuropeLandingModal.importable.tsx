@@ -30,7 +30,7 @@ const dialogStyles = css`
 	&[open] {
 		display: flex;
 	}
-	// Cannot use margin as it will effect the backdrop
+	// Can't use margin as it will change the backdrop
 	max-width: calc(100vw - 20px);
 	padding: 0;
 	width: 620px;
