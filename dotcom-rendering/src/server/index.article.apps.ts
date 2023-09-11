@@ -6,6 +6,9 @@ import { renderArticle } from './render.article.apps';
 
 export const handleAppsArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'apps');
+
+	// TODO - add renderingTarget so that we can enhance
+	// blocks specifically for Apps
 	const article = enhanceArticleType(body);
 	const { html, prefetchScripts } = renderArticle(article);
 
