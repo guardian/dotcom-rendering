@@ -1,7 +1,6 @@
 // @ts-check
 const nodeExternals = require('webpack-node-externals');
 const swcConfig = require('./.swcrc.json');
-const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 const nodeVersion = process.versions.node;
@@ -77,17 +76,6 @@ module.exports = ({ sessionId }) => ({
 				: callback();
 		},
 	],
-	plugins: DEV
-		? [
-				new GuStatsReportPlugin({
-					displayDisclaimer: true,
-					buildName: 'server',
-					project: 'dotcom-rendering',
-					team: 'dotcom',
-					sessionId,
-				}),
-		  ]
-		: undefined,
 	module: {
 		rules: [
 			{

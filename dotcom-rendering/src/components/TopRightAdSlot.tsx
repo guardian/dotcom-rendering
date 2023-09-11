@@ -10,6 +10,8 @@ import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
  * **Currently**, `ShadyPie` is  disabled, pending the rollout
  * of the new supporter plus product.
  *
+ * ---
+ *
  * (No visual story exists)
  */
 export const TopRightAdSlot = ({

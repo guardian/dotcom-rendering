@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition --
 	We check the existence of window.ga frequently, which is required for browser safety despite the type definitions. */
 import { getCookie } from '@guardian/libs';
-import { getCLS, getFID, getLCP } from 'web-vitals';
 
 interface TrackerConfig {
 	name: string;
@@ -78,7 +77,7 @@ const sendCoreVital = ({ name, delta, id }: CoreVitalsArgsType): void => {
 	});
 };
 
-export const sendPageView = (): void => {
+export const sendPageView = async (): Promise<void> => {
 	const { GAData } = window.guardian;
 	const userCookie = getCookie({ name: 'GU_U', shouldMemoize: true });
 	const { ga } = window;
@@ -169,13 +168,18 @@ export const sendPageView = (): void => {
 	const coreVitalsSampleRate = 5;
 
 	if (coreVitalsSampleRate >= randomPerc) {
+		const { onCLS, onFID, onLCP } = await import(
+			// we only want to download the web-vitals if it’s going to be used
+			/* webpackMode: 'lazy' */ 'web-vitals'
+		);
+
 		// CLS and LCP are captured when the page lifecycle changes to 'hidden'.
 		// https://developers.google.com/web/updates/2018/07/page-lifecycle-api#advice-hidden
-		getCLS(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#getcls (This is actually DCLS, as doesn't track CLS in iframes, see https://github.com/WICG/layout-instability#cumulative-scores)
-		getLCP(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#getlcp
+		onCLS(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#oncls (This is actually DCLS, as doesn't track CLS in iframes, see https://github.com/WICG/layout-instability#cumulative-scores)
+		onLCP(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#onlcp
 
 		// FID is captured when a user interacts with the page
-		getFID(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#getfid
+		onFID(sendCoreVital); // https://github.com/GoogleChrome/web-vitals#onfid
 	}
 };
 

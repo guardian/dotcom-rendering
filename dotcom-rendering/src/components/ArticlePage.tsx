@@ -17,6 +17,7 @@ import { LightboxJavascript } from './LightboxJavascript.importable';
 import { LightboxLayout } from './LightboxLayout';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
+import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
@@ -39,7 +40,7 @@ interface AppProps extends BaseProps {
 /**
  * @description
  * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
- * */
+ */
 export const ArticlePage = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
 
@@ -124,10 +125,20 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							isDev={!!article.config.isDev}
 						/>
 					</Island>
-					<Island clientOnly={true}>
-						<SetAdTargeting adTargeting={adTargeting} />
-					</Island>
 				</>
+			)}
+			{renderingTarget === 'Web' ? (
+				<Island clientOnly={true}>
+					<SetAdTargeting adTargeting={adTargeting} />
+				</Island>
+			) : (
+				<Island clientOnly={true}>
+					<SendTargetingParams
+						editionCommercialProperties={
+							article.commercialProperties[article.editionId]
+						}
+					/>
+				</Island>
 			)}
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout

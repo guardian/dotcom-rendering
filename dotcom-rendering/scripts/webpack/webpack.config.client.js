@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
 const { getBrowserTargets } = require('./browser-targets');
-const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -19,22 +18,24 @@ const swcLoader = (targets) => [
 	},
 ];
 
+/** @typedef {import('../../src/lib/assets').Build} Build*/
+
 /**
- * @param {'legacy' | 'modern' | 'variant' | 'apps'} bundle
+ * @param {Build} build
  * @returns {string}
  */
-const generateName = (bundle) => {
+const generateName = (build) => {
 	const chunkhashString = DEV ? '' : '.[chunkhash]';
-	return `[name].${bundle}${chunkhashString}.js`;
+	return `[name].${build}${chunkhashString}.js`;
 };
 
 /**
- * @param {'legacy' | 'modern' | 'variant' | 'apps'} bundle
+ * @param {Build} build
  * @returns {string}
  */
-const getLoaders = (bundle) => {
-	switch (bundle) {
-		case 'legacy':
+const getLoaders = (build) => {
+	switch (build) {
+		case 'web.legacy':
 			return [
 				{
 					loader: 'babel-loader',
@@ -64,27 +65,37 @@ const getLoaders = (bundle) => {
 			];
 		case 'apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
-		case 'variant':
-		case 'modern':
+		case 'web.variant':
+		case 'web.scheduled':
+		case 'web.ophan-esm':
+		case 'web':
 			return swcLoader(getBrowserTargets());
 	}
 };
 
 /**
- * @param {{ bundle: 'legacy' | 'modern'  | 'variant' | 'apps', sessionId: string }} options
+ * @param {{ build: Build, sessionId: string }} options
  * @returns {import('webpack').Configuration}
  */
-module.exports = ({ bundle, sessionId }) => ({
+module.exports = ({ build, sessionId }) => ({
 	entry: {
 		index:
-			bundle === 'variant'
+			build === 'web.scheduled'
 				? './src/client/index.scheduled.ts'
 				: './src/client/index.ts',
 		debug: './src/client/debug/index.ts',
 	},
+	resolve: {
+		alias: {
+			'ophan-tracker-js':
+				build === 'web.ophan-esm'
+					? 'ophan-tracker-js-esm'
+					: 'ophan-tracker-js',
+		},
+	},
 	optimization:
 		// We don't need chunk optimization for apps as we use the 'LimitChunkCountPlugin' to produce just 1 chunk
-		bundle === 'apps'
+		build === 'apps'
 			? undefined
 			: {
 					splitChunks: {
@@ -116,16 +127,16 @@ module.exports = ({ bundle, sessionId }) => ({
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets
 			if (data.chunk.name === 'debug') return `[name].js`;
-			return generateName(bundle);
+			return generateName(build);
 		},
-		chunkFilename: generateName(bundle),
+		chunkFilename: generateName(build),
 		publicPath: '',
 	},
 	plugins: [
 		new WebpackManifestPlugin({
-			fileName: `manifest.${bundle}.json`,
+			fileName: `manifest.${build}.json`,
 		}),
-		...(bundle === 'apps'
+		...(build === 'apps'
 			? [
 					new webpack.optimize.LimitChunkCountPlugin({
 						maxChunks: 1,
@@ -135,23 +146,13 @@ module.exports = ({ bundle, sessionId }) => ({
 					}),
 			  ]
 			: []),
-		...(DEV
-			? [
-					new GuStatsReportPlugin({
-						buildName: `${bundle}-client`,
-						project: 'dotcom-rendering',
-						team: 'dotcom',
-						sessionId,
-					}),
-			  ]
-			: []),
 	],
 	module: {
 		rules: [
 			{
 				test: /\.[jt]sx?|mjs$/,
 				exclude: module.exports.babelExclude,
-				use: getLoaders(bundle),
+				use: getLoaders(build),
 			},
 			{
 				test: /\.css$/,

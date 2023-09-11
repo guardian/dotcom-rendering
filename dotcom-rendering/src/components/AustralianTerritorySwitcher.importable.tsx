@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { removeCookie, setCookie } from '@guardian/libs';
+import { isString, removeCookie, setCookie } from '@guardian/libs';
 import { space, textSans } from '@guardian/source-foundations';
 import {
 	Button,
@@ -8,7 +8,6 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
-import { isString } from 'lodash';
 import { useState } from 'react';
 import type { AustralianTerritory } from '../types/territory';
 
@@ -40,6 +39,19 @@ const labelStyles = css`
 type Props = {
 	targetedTerritory: AustralianTerritory;
 };
+
+/**
+ * Allows containers targetted to a specific territory to be changed
+ * to a different territory. E.g New South Wales to Victoria
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We use cookies to set the user’s territory.
+ *
+ * ---
+ *
+ * [`AustralianTerritorySwitcher` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-australianterritoryswitcher--victoria&buildNumber=2967)
+ */
 export const AustralianTerritorySwitcher = ({ targetedTerritory }: Props) => {
 	const [expanded, setExpanded] = useState(false);
 

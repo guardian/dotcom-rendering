@@ -11,6 +11,7 @@ import { validateAsArticleType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import type { FEArticleBadgeType } from '../types/badge';
 import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
+import { makePrefetchHeader } from './lib/header';
 import {
 	renderBlocks,
 	renderHtml,
@@ -75,11 +76,11 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
 	const article = enhanceArticleType(body);
-	const resp = renderHtml({
+	const { html, prefetchScripts } = renderHtml({
 		article,
 	});
 
-	res.status(200).send(resp);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
@@ -104,11 +105,11 @@ export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'web');
 	const article = enhanceArticleType(body);
-	const resp = renderHtml({
+	const { html, prefetchScripts } = renderHtml({
 		article,
 	});
 
-	res.status(200).send(resp);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
 export const handleBlocks: RequestHandler = ({ body }, res) => {

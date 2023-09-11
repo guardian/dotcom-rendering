@@ -11,7 +11,17 @@ type Props = {
 };
 
 /**
- * Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it
+ * Wrapping `MostViewedRight` so we can determine whether or not
+ * there's enough vertical space in the container to render it.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We may show the most viewed component depending on the length of the article,
+ * based on the computed height of the container.
+ *
+ * ---
+ *
+ * (No visual story exists)
  */
 export const MostViewedRightWrapper = ({
 	componentDataAttribute,

@@ -15,6 +15,7 @@ const windowGuardianConfig = {
 		pageViewId: 'jest-page-view-id',
 	},
 	tests: {},
+	switches: {},
 } as Guardian['config'];
 
 const windowGuardian = {
@@ -112,3 +113,12 @@ global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
 
 // Mocks the version number used by CDK, we don't want our tests to fail every time we update our cdk dependency.
 jest.mock('@guardian/cdk/lib/constants/tracking-tag');
+
+// Mocks the useConfig hook in ConfigContext, so that we don't have to use the provider all the time
+jest.mock('../../src/components/ConfigContext.tsx', () => {
+	const mockConfig = { renderingTarget: 'Web' };
+	return {
+		...jest.requireActual('../../src/components/ConfigContext.tsx'),
+		useConfig: () => mockConfig,
+	};
+});

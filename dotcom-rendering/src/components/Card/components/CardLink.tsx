@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { focusHalo } from '@guardian/source-foundations';
 import { getZIndex } from '../../../lib/getZIndex';
-import type { DCRContainerPalette } from '../../../types/front';
 
 const fauxLinkStyles = css`
 	position: absolute;
@@ -20,7 +19,6 @@ const fauxLinkStyles = css`
 type Props = {
 	linkTo: string;
 	headlineText: string;
-	containerPalette?: DCRContainerPalette;
 	dataLinkName?: string;
 	isExternalLink: boolean;
 };
