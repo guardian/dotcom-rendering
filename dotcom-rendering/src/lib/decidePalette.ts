@@ -2243,6 +2243,9 @@ const backgroundSubmeta = (format: ArticleFormat) => {
 	return neutral[100];
 };
 
+const backgroundDynamoSublink = (_format: ArticleFormat): string =>
+	palette.neutral[97];
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -2356,6 +2359,9 @@ export const decidePalette = (
 			messageForm: backgroundMessageForm(format),
 			discussionPillarButton: backgroundDiscussionPillarButton(format),
 			subMeta: backgroundSubmeta(format),
+			dynamoSublink:
+				overrides?.background.dynamoSublink ??
+				backgroundDynamoSublink(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
