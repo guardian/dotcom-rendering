@@ -46,10 +46,15 @@ export const useCommentCount = (
 	 */
 	const url = getUrl(discussionApiUrl, uniqueDiscussionIds);
 
-	const { data } = useApi<CommentCounts>(url, {
-		// Discussion reponses have a long cache (~300s)
-		refreshInterval: 27_000,
-	});
+	const { data } = useApi<CommentCounts>(url);
 
 	return data?.[shortUrl];
+};
+
+/** Ensure that we reduce the number of requests to get comment counts */
+export const addDiscussionIds = (ids: string[]): void => {
+	if (!uniqueDiscussionIds) return;
+	for (const id of ids) {
+		uniqueDiscussionIds.add(id);
+	}
 };

@@ -122,7 +122,7 @@ export const Blocks = ({
 		return <>{liveBlogBlocks}</>;
 	}
 
-	const slotIndexes = findBlockAdSlots(liveBlogBlocks);
+	const insertSlotsAfter = findBlockAdSlots(liveBlogBlocks);
 	const adInfo = {
 		section,
 		editionId,
@@ -146,9 +146,13 @@ export const Blocks = ({
 	};
 	return (
 		<>
-			{liveBlogBlocks.map((item, i) => {
-				if (slotIndexes.includes(i)) {
-					const adSlotId = `ad-${i + 1}` as const;
+			{liveBlogBlocks.map((item, blockIndex) => {
+				if (insertSlotsAfter.includes(blockIndex)) {
+					// Ad slot ids take the form: `ad-1`, `ad-2`, `ad-3`, ...
+					// Looking up the block index in the array of ad insertion points
+					// gives us the slot indexes
+					const slotIndex = insertSlotsAfter.indexOf(blockIndex);
+					const adSlotId = `ad-${slotIndex + 1}` as const;
 					return (
 						<>
 							{item}

@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar, storage } from '@guardian/libs';
 import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { useOnce } from '../lib/useOnce';
 import { DiscussionLayout } from './DiscussionLayout';
@@ -18,6 +18,10 @@ export default {
 	},
 };
 export const Basic = () => {
+	// Aiming to stop flakiness in Chromatic visual diffs by explicitly
+	// setting the desired comments sorting order in local storage
+	storage.local.set('gu.prefs.discussion.order', 'newest');
+
 	return (
 		<HydratedLayout>
 			<DiscussionLayout

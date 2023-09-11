@@ -14,11 +14,11 @@ import { getSoleContributor } from '../lib/byline';
 import { decidePalette } from '../lib/decidePalette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { Palette } from '../types/palette';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
+import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
 import { Counts } from './Counts';
 import { Dateline } from './Dateline';
@@ -42,7 +42,6 @@ type Props = {
 	ajaxUrl: string;
 	showShareCount: boolean;
 	messageUs?: MessageUs;
-	renderingTarget: RenderingTarget;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -315,7 +314,6 @@ export const ArticleMeta = ({
 	ajaxUrl,
 	showShareCount,
 	messageUs,
-	renderingTarget,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -328,6 +326,8 @@ export const ArticleMeta = ({
 	const palette = decidePalette(format);
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
+
+	const { renderingTarget } = useConfig();
 
 	return (
 		<div
@@ -380,7 +380,6 @@ export const ArticleMeta = ({
 									byline={byline}
 									tags={tags}
 									format={format}
-									renderingTarget={renderingTarget}
 								/>
 							)}
 							{messageUs &&
@@ -402,31 +401,34 @@ export const ArticleMeta = ({
 						</div>
 					</>
 				</RowBelowLeftCol>
+
 				<div data-print-layout="hide" css={metaFlex}>
-					<div
-						className={
-							isInteractive
-								? interactiveLegacyClasses.shareIcons
-								: ''
-						}
-						css={[
-							metaExtras(palette, isPictureContent),
-							format.design === ArticleDesign.LiveBlog &&
-								css(
-									borderColourWhenBackgroundDark,
-									metaExtrasLiveBlog,
-								),
-						]}
-					>
-						<ShareIcons
-							pageId={pageId}
-							webTitle={webTitle}
-							format={format}
-							displayIcons={['facebook', 'twitter', 'email']}
-							size="medium"
-							context="ArticleMeta"
-						/>
-					</div>
+					{renderingTarget === 'Web' && (
+						<div
+							className={
+								isInteractive
+									? interactiveLegacyClasses.shareIcons
+									: ''
+							}
+							css={[
+								metaExtras(palette, isPictureContent),
+								format.design === ArticleDesign.LiveBlog &&
+									css(
+										borderColourWhenBackgroundDark,
+										metaExtrasLiveBlog,
+									),
+							]}
+						>
+							<ShareIcons
+								pageId={pageId}
+								webTitle={webTitle}
+								format={format}
+								displayIcons={['facebook', 'twitter', 'email']}
+								size="medium"
+								context="ArticleMeta"
+							/>
+						</div>
+					)}
 					<div
 						className={
 							isInteractive
@@ -445,15 +447,19 @@ export const ArticleMeta = ({
 						<Counts format={format}>
 							{/* The meta-number css is needed by Counts.tsx */}
 							<div className="meta-number">
-								{showShareCount && (
-									<Island clientOnly={true} deferUntil="idle">
-										<ShareCount
-											ajaxUrl={ajaxUrl}
-											pageId={pageId}
-											format={format}
-										/>
-									</Island>
-								)}
+								{showShareCount &&
+									renderingTarget === 'Web' && (
+										<Island
+											clientOnly={true}
+											deferUntil="idle"
+										>
+											<ShareCount
+												ajaxUrl={ajaxUrl}
+												pageId={pageId}
+												format={format}
+											/>
+										</Island>
+									)}
 							</div>
 							<div className="meta-number">
 								{isCommentable && (

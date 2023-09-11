@@ -24,7 +24,6 @@ describe('Contributor', () => {
 						title: 'Observer Design',
 					},
 				]}
-				renderingTarget="Web"
 			/>,
 		);
 
@@ -51,7 +50,6 @@ describe('Contributor', () => {
 						title: 'Observer Design',
 					},
 				]}
-				renderingTarget="Web"
 			/>,
 		);
 

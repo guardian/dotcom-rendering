@@ -757,6 +757,9 @@
                                                                     "items": {
                                                                         "$ref": "#/definitions/FEMediaAtom"
                                                                     }
+                                                                },
+                                                                "mainMediaAtom": {
+                                                                    "$ref": "#/definitions/FEMediaAtom"
                                                                 }
                                                             },
                                                             "required": [
@@ -1483,6 +1486,9 @@
                                                                     "items": {
                                                                         "$ref": "#/definitions/FEMediaAtom"
                                                                     }
+                                                                },
+                                                                "mainMediaAtom": {
+                                                                    "$ref": "#/definitions/FEMediaAtom"
                                                                 }
                                                             },
                                                             "required": [
@@ -2209,6 +2215,9 @@
                                                                     "items": {
                                                                         "$ref": "#/definitions/FEMediaAtom"
                                                                     }
+                                                                },
+                                                                "mainMediaAtom": {
+                                                                    "$ref": "#/definitions/FEMediaAtom"
                                                                 }
                                                             },
                                                             "required": [

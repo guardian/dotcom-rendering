@@ -1,7 +1,5 @@
-import { join } from 'node:path';
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
 import {
-	GuAmiParameter,
 	GuStack,
 	GuStringParameter,
 } from '@guardian/cdk/lib/constructs/core';
@@ -17,13 +15,27 @@ import {
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration } from 'aws-cdk-lib';
-import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
+import {
+	AdjustmentType,
+	CfnScalingPolicy,
+	HealthCheck,
+} from 'aws-cdk-lib/aws-autoscaling';
+import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
-import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
-import type { DCRProps } from './types';
+import type { DCRAlarmConfig, DCRProps } from './types';
 import { getUserData } from './userData';
 
+/**
+ * DCR infrastructure provisioning via CDK
+ *
+ * We currently specify resources by using individual CDK constructs but at some
+ * point it would be better to move towards the GuEc2App pattern
+ * @see https://github.com/guardian/cdk/blob/main/src/patterns/ec2-app/base.ts
+ *
+ * For this we'll need to do a dual-stack migration
+ * @see https://github.com/guardian/cdk/blob/main/docs/migration-guide-ec2.md
+ */
 export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
 		super(scope, id, props);
@@ -43,6 +55,9 @@ export class DotcomRendering extends GuStack {
 			type: SubnetType.PRIVATE,
 		});
 
+		// ------------------------------------
+		// Load balancer related resources
+		// ------------------------------------
 		const lbSecurityGroup = new GuSecurityGroup(
 			this,
 			'InternalLoadBalancerSecurityGroup',
@@ -67,9 +82,13 @@ export class DotcomRendering extends GuStack {
 		);
 		this.overrideLogicalId(lbSecurityGroup, {
 			logicalId: 'InternalLoadBalancerSecurityGroup',
-			reason: 'Retaining a stateful resource previously defined in YAML',
+			reason: 'Retaining logical ID of resource created via CDK which cannot be changed easily',
 		});
 
+		/**
+		 * TODO - migrate this ELB (classic load balancer) to an ALB (application load balancer)
+		 * @see https://github.com/guardian/cdk/blob/512536bd590b26d9fcac5d39329e8217103d7859/src/constructs/loadbalancing/elb.ts#L24-L46
+		 */
 		const loadBalancer = new GuClassicLoadBalancer(
 			this,
 			'InternalLoadBalancer',
@@ -122,14 +141,24 @@ export class DotcomRendering extends GuStack {
 			logicalId: 'InternalLoadBalancer',
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
+		// Load balancer DNS name output
+		new CfnOutput(this, 'LoadBalancerUrl', {
+			value: loadBalancer.loadBalancerDnsName,
+		});
+		// ------------------------------------
 
+		// ------------------------------------
+		// Autoscaling group related resources
+		// ------------------------------------
 		const instanceSecurityGroup = new GuSecurityGroup(
 			this,
 			'InstanceSecurityGroup',
 			{
 				app,
-				description: 'rendering instance',
 				vpc,
+				// This description is poor but changing it results in deletion and
+				// recreation of the security group, which is not ideal
+				description: 'rendering instance',
 				ingresses: [
 					{
 						range: Peer.ipv4(vpcCidrBlock),
@@ -141,13 +170,14 @@ export class DotcomRendering extends GuStack {
 		);
 		this.overrideLogicalId(instanceSecurityGroup, {
 			logicalId: 'InstanceSecurityGroup',
-			reason: 'Retaining a stateful resource previously defined in YAML',
+			reason: 'Retaining logical ID of resource created via CDK which cannot be changed easily',
 		});
 
 		const instanceRole = new GuInstanceRole(this, {
 			app,
 			additionalPolicies: [
-				//todo: do we need the first two policies? They are provided by default?
+				// TODO - double check if we are duplicating policies that
+				// are provided by default through GuCDK
 				new GuAllowPolicy(this, 'AllowPolicyGetArtifactsBucket', {
 					actions: ['s3:GetObject'],
 					resources: ['arn:aws:s3:::aws-frontend-artifacts/*'],
@@ -174,16 +204,17 @@ export class DotcomRendering extends GuStack {
 				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
 					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
 					resources: [
+						`arn:aws:ssm:${region}:${this.account}:parameter/${ssmPrefix}/*`,
+						// TODO - these SSM prefixes are dated, should convert the params to the naming structure above
 						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
 						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
-						`arn:aws:ssm:${region}:${this.account}:parameter/${ssmPrefix}/*`,
 					],
 				}),
 			],
 		});
 		this.overrideLogicalId(instanceRole, {
 			logicalId: 'InstanceRole',
-			reason: 'Retaining a stateful resource previously defined in YAML',
+			reason: 'Retaining logical ID of resource created via CDK which cannot be changed easily',
 		});
 
 		const asg = new GuAutoScalingGroup(this, 'AutoscalingGroup', {
@@ -202,41 +233,113 @@ export class DotcomRendering extends GuStack {
 					default: `${ssmPrefix}/logging.stream.name`,
 				}).valueAsString,
 			}),
-			imageId: new GuAmiParameter(this, {
-				app,
-				fromSSM: true,
-				default: `${ssmPrefix}/ami.imageId`,
-			}),
-			imageRecipe: props.amiRecipe,
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
 			vpcSubnets: { subnets: privateSubnets },
 			withoutImdsv2: true,
 		});
+		// ! Important !
+		// Ensure the ASG is attached to the load balancer
+		// This is because our auto scaling group uses the ELB for healthchecks
+		// If the ASG and ELB are not attached, the ASG health checks will fail
+		asg.attachToClassicLB(loadBalancer);
+
 		this.overrideLogicalId(asg, {
 			logicalId: 'AutoscalingGroup',
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
+		// ------------------------------------
 
-		asg.attachToClassicLB(loadBalancer);
+		// ------------------------------------
+		// Alarms
+		// ------------------------------------
 
-		const yamlTemplateFilePath = join(
-			__dirname,
-			'../..',
-			'cloudformation.yml',
-		);
-
-		new CfnInclude(this, 'YamlTemplate', {
-			templateFile: yamlTemplateFilePath,
-			parameters: {
-				AutoscalingGroup: asg.autoScalingGroupName,
-				InternalLoadBalancer: loadBalancer.loadBalancerName,
-				InstanceRole: instanceRole.roleName,
-			},
+		/** TODO - migrate these simple scaling policies
+		 * @see https://github.com/guardian/dotcom-rendering/issues/8345#issuecomment-1647502598
+		 */
+		const scaleUpPolicy = new CfnScalingPolicy(this, 'ScaleUpPolicy', {
+			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
+			autoScalingGroupName: asg.autoScalingGroupName,
+			cooldown: '600',
+			scalingAdjustment: 100,
+		});
+		const scaleDownPolicy = new CfnScalingPolicy(this, 'ScaleDownPolicy', {
+			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
+			autoScalingGroupName: asg.autoScalingGroupName,
+			cooldown: '120',
+			scalingAdjustment: -1,
 		});
 
-		new CfnOutput(this, 'LoadBalancerUrl', {
-			value: loadBalancer.loadBalancerDnsName,
+		/** Returns an appropriate alarm description given the appropriate configuration object */
+		const getAlarmDescription = ({
+			title,
+			comparisonOperator,
+			threshold,
+			evaluationPeriod,
+			period,
+		}: { title: string } & DCRAlarmConfig): string =>
+			`${title} is ${comparisonOperator} of ${threshold} over ${evaluationPeriod} period(s) of ${period} seconds`;
+
+		// Latency scaling alarm
+		const latencyScalingAlarmConfig: DCRAlarmConfig = {
+			threshold: 0.2,
+			period: 60,
+			evaluationPeriod: 1,
+			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+		};
+		new CfnAlarm(this, 'LatencyScalingAlarm', {
+			actionsEnabled: stage === 'PROD',
+			alarmDescription: getAlarmDescription({
+				title: 'Scale up if latency',
+				...latencyScalingAlarmConfig,
+			}),
+			dimensions: [
+				{
+					name: 'LoadBalancerName',
+					value: loadBalancer.loadBalancerName,
+				},
+			],
+			evaluationPeriods: latencyScalingAlarmConfig.evaluationPeriod,
+			metricName: 'Latency',
+			namespace: 'AWS/ELB',
+			period: latencyScalingAlarmConfig.period,
+			statistic: 'Average',
+			threshold: latencyScalingAlarmConfig.threshold,
+			comparisonOperator: latencyScalingAlarmConfig.comparisonOperator,
+			okActions: [scaleDownPolicy.attrArn],
+			alarmActions: [scaleUpPolicy.attrArn],
 		});
+
+		// Backend 5XX alarm
+		const criticalAlertsTopicArn = `arn:aws:sns:${region}:${this.account}:Frontend-${stage}-CriticalAlerts`;
+		const backend5XXAlarmConfig: DCRAlarmConfig = {
+			threshold: 100,
+			period: 60,
+			evaluationPeriod: 5,
+			comparisonOperator: 'GreaterThanOrEqualToThreshold',
+		};
+		new CfnAlarm(this, 'Backend5xxAlarm', {
+			actionsEnabled: stage === 'PROD',
+			alarmDescription: getAlarmDescription({
+				title: 'Notify if 5XX backend errors',
+				...backend5XXAlarmConfig,
+			}),
+			comparisonOperator: backend5XXAlarmConfig.comparisonOperator,
+			dimensions: [
+				{
+					name: 'LoadBalancerName',
+					value: loadBalancer.loadBalancerName,
+				},
+			],
+			metricName: 'HTTPCode_Backend_5XX',
+			namespace: 'AWS/ELB',
+			evaluationPeriods: backend5XXAlarmConfig.evaluationPeriod,
+			period: backend5XXAlarmConfig.period,
+			statistic: 'Sum',
+			threshold: backend5XXAlarmConfig.threshold,
+			alarmActions: [criticalAlertsTopicArn],
+			okActions: [criticalAlertsTopicArn],
+		});
+		// ------------------------------------
 	}
 }

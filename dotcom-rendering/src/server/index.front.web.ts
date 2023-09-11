@@ -13,6 +13,7 @@ import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../types/front';
 import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront';
+import { makePrefetchHeader } from './lib/header';
 import { renderFront, renderTagFront } from './render.front.web';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
@@ -91,10 +92,10 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 export const handleFront: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('front');
 	const front = enhanceFront(body);
-	const html = renderFront({
+	const { html, prefetchScripts } = renderFront({
 		front,
 	});
-	res.status(200).send(html);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
 export const handleFrontJson: RequestHandler = ({ body }, res) => {
@@ -104,10 +105,10 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 export const handleTagFront: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('tagFront');
 	const tagFront = enhanceTagFront(body);
-	const html = renderTagFront({
+	const { html, prefetchScripts } = renderTagFront({
 		tagFront,
 	});
-	res.status(200).send(html);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
 export const handleTagFrontJson: RequestHandler = ({ body }, res) => {

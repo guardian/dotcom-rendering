@@ -5,9 +5,11 @@ import { resets } from '@guardian/source-foundations';
 import he from 'he';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { ConfigProvider } from '../components/ConfigContext';
 import { epicChoiceCardCss } from '../components/Epic.amp';
 import { stickyAdLabelCss } from '../components/StickyAd.amp';
 import { getFontsCss } from '../lib/fonts-css';
+import type { Config } from '../types/configContext';
 
 interface RenderToStringResult {
 	html: string;
@@ -36,9 +38,15 @@ export const renderArticle = ({
 	const cache = createCache({ key });
 	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const { extractCritical } = createEmotionServer(cache);
+
+	// We are currently considering AMP to be a renderingTarget of Web
+	const config: Config = { renderingTarget: 'Web' };
+
 	const { html, css }: RenderToStringResult = extractCritical(
 		renderToStaticMarkup(
-			<CacheProvider value={cache}>{body}</CacheProvider>,
+			<ConfigProvider value={config}>
+				<CacheProvider value={cache}>{body}</CacheProvider>
+			</ConfigProvider>,
 		),
 	);
 

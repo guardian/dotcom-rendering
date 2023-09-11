@@ -11,8 +11,6 @@ const collapsibleCalloutStyle = css`
 `;
 
 /**
- * # Callout Block Component
- *
  * A callout to readers to share their stories.
  * This is the updated version of the CalloutEmbedBlockComponent.
  *
@@ -44,18 +42,16 @@ export const CalloutBlockComponent = ({
 		contacts,
 	} = callout;
 
-	const isExpired = (date: number | undefined): boolean => {
-		if (date !== undefined) {
-			return Math.floor(new Date().getTime() / 1000) > date;
-		}
-		return false;
-	};
+	const isExpired =
+		activeUntil === undefined
+			? false
+			: Math.floor(new Date().getTime() / 1000) > activeUntil;
 
-	if (!isNonCollapsible && isExpired(activeUntil)) {
+	if (!isNonCollapsible && isExpired) {
 		return null;
 	}
 
-	if (isNonCollapsible && isExpired(activeUntil)) {
+	if (isNonCollapsible && isExpired) {
 		return <CalloutExpired />;
 	}
 
@@ -78,7 +74,6 @@ export const CalloutBlockComponent = ({
 								description={description}
 								formFields={formFields}
 								submissionURL={calloutsUrl}
-								isExpired={isExpired(activeUntil)}
 								isNonCollapsible={isNonCollapsible}
 								contacts={contacts}
 								pageId={pageId}
@@ -95,7 +90,6 @@ export const CalloutBlockComponent = ({
 					description={description}
 					formFields={formFields}
 					submissionURL={calloutsUrl}
-					isExpired={isExpired(activeUntil)}
 					isNonCollapsible={isNonCollapsible}
 					contacts={contacts}
 					pageId={pageId}

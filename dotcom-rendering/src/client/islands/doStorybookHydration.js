@@ -1,5 +1,7 @@
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
+import { ConfigProvider } from '../../components/ConfigContext';
+import { getConfig } from './getConfig';
 import { getName } from './getName';
 import { getProps } from './getProps';
 
@@ -16,13 +18,14 @@ import { getProps } from './getProps';
  *    snapshots
  */
 export const doStorybookHydration = () => {
-	document.querySelectorAll('gu-island').forEach((element) => {
+	for (const element of document.querySelectorAll('gu-island')) {
 		if (element instanceof HTMLElement) {
 			const name = getName(element);
 			const props = getProps(element);
+			const config = getConfig(element);
 
-			if (!name) return;
-			if (element.getAttribute('deferuntil') === 'hash') return;
+			if (!name) continue;
+			if (element.getAttribute('deferuntil') === 'hash') continue;
 
 			import(
 				/* webpackInclude: /\.importable\.tsx$/ */
@@ -34,7 +37,11 @@ export const doStorybookHydration = () => {
 						.querySelector('[data-name="placeholder"]')
 						?.remove();
 					const root = createRoot(element);
-					root.render(createElement(module[name], props));
+					root.render(
+						<ConfigProvider value={config}>
+							{createElement(module[name], props)}
+						</ConfigProvider>,
+					);
 				})
 				.catch((e) =>
 					// eslint-disable-next-line no-console -- We want to log here
@@ -44,5 +51,5 @@ export const doStorybookHydration = () => {
 					),
 				);
 		}
-	});
+	}
 };

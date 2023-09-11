@@ -12,7 +12,6 @@ import {
 import { getSoleContributor } from '../lib/byline';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';
 
@@ -145,15 +144,9 @@ type Props = {
 	format: ArticleFormat;
 	byline: string;
 	tags: TagType[];
-	renderingTarget: RenderingTarget;
 };
 
-export const HeadlineByline = ({
-	format,
-	byline,
-	tags,
-	renderingTarget,
-}: Props) => {
+export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	if (byline === '') {
 		return null;
 	}
@@ -172,7 +165,6 @@ export const HeadlineByline = ({
 							byline={byline}
 							tags={tags}
 							format={format}
-							renderingTarget={renderingTarget}
 						/>
 					</span>
 				</div>
@@ -190,7 +182,6 @@ export const HeadlineByline = ({
 									byline={byline}
 									tags={tags}
 									format={format}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</div>
@@ -210,7 +201,6 @@ export const HeadlineByline = ({
 									byline={byline}
 									tags={tags}
 									format={format}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</div>
@@ -228,7 +218,6 @@ export const HeadlineByline = ({
 									byline={byline}
 									tags={tags}
 									format={format}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</div>

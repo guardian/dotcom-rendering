@@ -192,6 +192,9 @@
                                                 "items": {
                                                     "$ref": "#/definitions/FEMediaAtom"
                                                 }
+                                            },
+                                            "mainMediaAtom": {
+                                                "$ref": "#/definitions/FEMediaAtom"
                                             }
                                         },
                                         "required": [

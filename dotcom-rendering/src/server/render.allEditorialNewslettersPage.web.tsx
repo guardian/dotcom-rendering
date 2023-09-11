@@ -1,14 +1,16 @@
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles';
 import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
-import { generateScriptTags, getPathFromManifest } from '../lib/assets';
+import { ConfigProvider } from '../components/ConfigContext';
+import {
+	generateScriptTags,
+	getModulesBuild,
+	getPathFromManifest,
+} from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
+import type { Config } from '../types/configContext';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
@@ -18,28 +20,30 @@ interface Props {
 
 export const renderEditorialNewslettersPage = ({
 	newslettersPage,
-}: Props): string => {
+}: Props): { html: string; prefetchScripts: string[] } => {
 	const title = newslettersPage.webTitle;
 	const NAV = extractNAV(newslettersPage.nav);
 
+	// The newsletters page is currently only supported on Web
+	const config: Config = { renderingTarget: 'Web' };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<AllEditorialNewslettersPage
-			newslettersPage={newslettersPage}
-			NAV={NAV}
-		/>,
+		<ConfigProvider value={config}>
+			<AllEditorialNewslettersPage
+				newslettersPage={newslettersPage}
+				NAV={NAV}
+			/>
+		</ConfigProvider>,
 	);
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = newslettersPage.config.switches;
 
-	const shouldServeVariantBundle: boolean = [
-		BUILD_VARIANT,
-		newslettersPage.config.abTests[dcrJavascriptBundle('Variant')] ===
-			'variant',
-	].every(Boolean);
-
-	const build = shouldServeVariantBundle ? 'variant' : 'modern';
+	const build = getModulesBuild({
+		switches: newslettersPage.config.switches,
+		tests: newslettersPage.config.abTests,
+	});
 
 	/**
 	 * The highest priority scripts.
@@ -48,17 +52,23 @@ export const renderEditorialNewslettersPage = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const scriptTags = generateScriptTags(
-		[
-			polyfillIO,
-			getPathFromManifest(build, 'frameworks.js'),
-			getPathFromManifest(build, 'index.js'),
-			getPathFromManifest('legacy', 'frameworks.js'),
-			getPathFromManifest('legacy', 'index.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				newslettersPage.config.commercialBundleUrl,
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
+	const prefetchScripts = [
+		polyfillIO,
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
+		process.env.COMMERCIAL_BUNDLE_URL ??
+			newslettersPage.config.commercialBundleUrl,
+	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+
+	const legacyScripts = [
+		getPathFromManifest('web.legacy', 'frameworks.js'),
+		getPathFromManifest('web.legacy', 'index.js'),
+	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+
+	const scriptTags = generateScriptTags([
+		...prefetchScripts,
+		...legacyScripts,
+	]);
 
 	const guardian = createGuardian({
 		editionId: newslettersPage.editionId,
@@ -78,7 +88,7 @@ export const renderEditorialNewslettersPage = ({
 		googleRecaptchaSiteKey: newslettersPage.config.googleRecaptchaSiteKey,
 	});
 
-	return htmlPageTemplate({
+	const pageHtml = htmlPageTemplate({
 		scriptTags,
 		css: extractedCss,
 		html,
@@ -90,4 +100,8 @@ export const renderEditorialNewslettersPage = ({
 		renderingTarget: 'Web',
 		weAreHiring: !!newslettersPage.config.switches.weAreHiring,
 	});
+	return {
+		html: pageHtml,
+		prefetchScripts,
+	};
 };

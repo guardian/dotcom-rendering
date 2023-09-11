@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	brandBackground,
 	brandBorder,
@@ -18,6 +18,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -47,7 +48,6 @@ import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const StandardGrid = ({
@@ -262,15 +262,9 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 }
 
-export const CommentLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const CommentLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -300,6 +294,8 @@ export const CommentLayout = ({
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const renderAds = canRenderAds(article);
+
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
@@ -490,7 +486,6 @@ export const CommentLayout = ({
 											'number'
 										}
 										hasAvatar={!!avatarUrl}
-										renderingTarget={renderingTarget}
 									/>
 									{/* BOTTOM */}
 									<div>
@@ -559,7 +554,6 @@ export const CommentLayout = ({
 										!!article.config.switches
 											.serverShareCounts
 									}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
@@ -600,7 +594,6 @@ export const CommentLayout = ({
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
-										renderingTarget={renderingTarget}
 									/>
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>
@@ -658,7 +651,8 @@ export const CommentLayout = ({
 										webUrl={article.webURL}
 										webTitle={article.webTitle}
 										showBottomSocialButtons={
-											article.showBottomSocialButtons
+											article.showBottomSocialButtons &&
+											renderingTarget === 'Web'
 										}
 										badge={article.badge?.enhanced}
 									/>
@@ -689,9 +683,6 @@ export const CommentLayout = ({
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
 									/>
 								</RightColumn>
 							</div>

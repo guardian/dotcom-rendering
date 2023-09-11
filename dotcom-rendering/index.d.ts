@@ -521,6 +521,11 @@ declare namespace JSX {
 			clientOnly?: boolean;
 			props: any;
 			children: React.ReactNode;
+			/**
+			 * This should be a stringified JSON of `ConfigContext`
+			 * @see /dotcom-rendering/src/types/configContext.ts
+			 */
+			config: string;
 		};
 	}
 
