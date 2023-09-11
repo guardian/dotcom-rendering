@@ -83,7 +83,7 @@ const closeButtonStyles = css`
 	fill: white;
 	margin: 10px;
 	position: relative;
-	padding: 0 6px;
+	padding: 0 5px;
 `;
 
 export type ModalType = 'NoModal' | 'ModalSwitched' | 'ModalDoYouWantToSwitch';
