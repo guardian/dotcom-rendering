@@ -22,6 +22,7 @@ import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
 const modalShownKey = 'gu.euModalShown';
 
+// Have not used margin as it will change the backdrop
 const dialogStyles = css`
 	&::backdrop {
 		background: rgba(18, 18, 18, 0.7);
@@ -30,7 +31,6 @@ const dialogStyles = css`
 	&[open] {
 		display: flex;
 	}
-	// Can't use margin as it will change the backdrop
 	max-width: calc(100vw - 20px);
 	padding: 0;
 	width: 620px;
