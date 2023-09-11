@@ -636,6 +636,7 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataText;
 }
 export type FEElement =
+	| AdPlaceholderSlot
 	| AudioAtomBlockElement
 	| AudioBlockElement
 	| BlockquoteBlockElement
