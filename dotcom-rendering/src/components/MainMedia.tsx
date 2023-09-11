@@ -5,7 +5,6 @@ import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
-import type { RenderingTarget } from '../types/renderingTarget';
 
 const mainMedia = css`
 	height: 100%;
@@ -74,7 +73,6 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: Switches;
-	renderingTarget: RenderingTarget;
 };
 
 export const MainMedia = ({
@@ -89,7 +87,6 @@ export const MainMedia = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
-	renderingTarget,
 }: Props) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -110,7 +107,6 @@ export const MainMedia = ({
 					switches={switches}
 					hideCaption={hideCaption}
 					starRating={starRating}
-					renderingTarget={renderingTarget}
 				/>
 			))}
 		</div>

@@ -83,7 +83,6 @@ export const Sport = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
-					renderingTarget="Web"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -129,7 +128,6 @@ export const News = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
-					renderingTarget="Web"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -175,7 +173,6 @@ export const Culture = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
-					renderingTarget="Web"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -221,7 +218,6 @@ export const Lifestyle = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
-					renderingTarget="Web"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -267,7 +263,6 @@ export const Opinion = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
-					renderingTarget="Web"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -313,7 +308,6 @@ export const SpecialReport = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
-					renderingTarget="Web"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -359,7 +353,6 @@ export const Labs = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
-					renderingTarget="Web"
 				/>
 			</PinnedPost>
 		</Wrapper>

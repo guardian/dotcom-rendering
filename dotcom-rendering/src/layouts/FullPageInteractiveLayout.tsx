@@ -84,7 +84,6 @@ const Renderer = ({
 			isAdFreeUser,
 			isSensitive,
 			switches,
-			renderingTarget,
 		});
 
 		switch (element._type) {

@@ -69,9 +69,8 @@ import {
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { decidePalette } from './decidePalette';
-
+import { useConfig } from '../components/ConfigContext';
 type Props = {
 	format: ArticleFormat;
 	element: FEElement;
@@ -88,7 +87,6 @@ type Props = {
 	switches: Switches;
 	isPinnedPost?: boolean;
 	abTests?: ServerSideTests;
-	renderingTarget: RenderingTarget;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -143,14 +141,14 @@ export const renderElement = ({
 	isSensitive,
 	isPinnedPost,
 	abTests,
-	renderingTarget,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+	console.log('renderingTarget', renderingTarget);
 	const palette = decidePalette(format);
 
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
-
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return (
@@ -460,7 +458,6 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
 			const emailSignUpProps = {
-				renderingTarget,
 				identityName: element.newsletter.identityName,
 				description: element.newsletter.description,
 				name: element.newsletter.name,
@@ -468,6 +465,7 @@ export const renderElement = ({
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
 			};
+			// TODO:: Add context here please
 			return renderingTarget === 'Apps' ? (
 				<Island clientOnly={true} deferUntil={'idle'}>
 					<EmailSignUpWrapper
@@ -818,7 +816,6 @@ export const RenderArticleElement = ({
 	switches,
 	isPinnedPost,
 	abTests,
-	renderingTarget,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -838,7 +835,6 @@ export const RenderArticleElement = ({
 		switches,
 		isPinnedPost,
 		abTests,
-		renderingTarget,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

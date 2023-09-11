@@ -292,7 +292,6 @@ export const renderBlocks = ({
 			switches={switches}
 			isLiveUpdate={true}
 			sectionId={section}
-			renderingTarget="Web"
 			// The props below are never used because isLiveUpdate is true but, typescript...
 			shouldHideReaderRevenue={false}
 			tags={[]}

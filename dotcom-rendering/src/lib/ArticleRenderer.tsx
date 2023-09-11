@@ -80,7 +80,6 @@ export const ArticleRenderer = ({
 				isSensitive={isSensitive}
 				switches={switches}
 				abTests={abTests}
-				renderingTarget={renderingTarget}
 			/>
 		);
 	});

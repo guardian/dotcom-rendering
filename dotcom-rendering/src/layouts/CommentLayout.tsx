@@ -448,7 +448,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>

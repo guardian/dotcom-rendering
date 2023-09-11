@@ -534,7 +534,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
