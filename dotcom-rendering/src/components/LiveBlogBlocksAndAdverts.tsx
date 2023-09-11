@@ -59,49 +59,49 @@ export const LiveBlogBlocksAndAdverts = ({
 		);
 	}
 
-	let pixelsSinceAdMobile = 0;
+	let pxSinceAdMobile = 0;
 	let mobileAdCounter = 0;
 
-	let pixelsSinceAdLargeScreen = 0;
-	let largeScreenAdCounter = 0;
+	let pxSinceAdDesktop = 0;
+	let desktopAdCounter = 0;
 
 	return (
 		<>
 			{blocks.map((block, i) => {
-				pixelsSinceAdMobile += calculateApproximateBlockHeight(
+				pxSinceAdMobile += calculateApproximateBlockHeight(
 					block.elements,
 					true,
 				);
-				const willinsertAdOnSmallScreens =
+				const willinsertAdMobile =
 					!isAdFreeUser &&
 					shouldDisplayAd(
 						i + 1,
 						blocks.length,
 						mobileAdCounter,
-						pixelsSinceAdMobile,
+						pxSinceAdMobile,
 						true,
 					);
-				if (willinsertAdOnSmallScreens) {
+				if (willinsertAdMobile) {
 					mobileAdCounter++;
-					pixelsSinceAdMobile = 0;
+					pxSinceAdMobile = 0;
 				}
 
-				pixelsSinceAdLargeScreen += calculateApproximateBlockHeight(
+				pxSinceAdDesktop += calculateApproximateBlockHeight(
 					block.elements,
 					false,
 				);
-				const willinsertAdOnLargeScreens =
+				const willinsertAdDesktop =
 					!isAdFreeUser &&
 					shouldDisplayAd(
 						i + 1,
 						blocks.length,
-						largeScreenAdCounter,
-						pixelsSinceAdLargeScreen,
+						desktopAdCounter,
+						pxSinceAdDesktop,
 						false,
 					);
-				if (willinsertAdOnLargeScreens) {
-					largeScreenAdCounter++;
-					pixelsSinceAdLargeScreen = 0;
+				if (willinsertAdDesktop) {
+					desktopAdCounter++;
+					pxSinceAdDesktop = 0;
 				}
 
 				return (
@@ -121,16 +121,16 @@ export const LiveBlogBlocksAndAdverts = ({
 							isPinnedPost={false}
 							pinnedPostId={pinnedPost?.id}
 						/>
-						{willinsertAdOnSmallScreens && (
+						{willinsertAdMobile && (
 							<AdSlot
 								position="liveblog-inline-mobile"
 								index={mobileAdCounter}
 							/>
 						)}
-						{willinsertAdOnLargeScreens && (
+						{willinsertAdDesktop && (
 							<AdSlot
 								position="liveblog-inline"
-								index={largeScreenAdCounter}
+								index={desktopAdCounter}
 							/>
 						)}
 					</>

@@ -312,8 +312,8 @@ const shouldDisplayAd = (
 	}
 
 	const minSpaceBetweenAds = isMobile
-		? MIN_SPACE_BETWEEN_ADS
-		: MIN_SPACE_BETWEEN_ADS_MOBILE;
+		? MIN_SPACE_BETWEEN_ADS_MOBILE
+		: MIN_SPACE_BETWEEN_ADS;
 
 	return numPixelsWithoutAdvert > minSpaceBetweenAds;
 };
