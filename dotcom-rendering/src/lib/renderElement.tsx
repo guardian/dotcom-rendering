@@ -18,15 +18,13 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import { EmailSignup } from '../components/EmailSignup';
-import { EmailSignUpWrapper } from '../components/EmailSignupWrapper.importable';
+import { EmailSignUpSwitcher } from '../components/EmailSignUpSwitcher';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
-import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
+import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
-import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
@@ -42,7 +40,6 @@ import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable'
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
-import { SecureSignup } from '../components/SecureSignup';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
 import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent';
@@ -70,7 +67,7 @@ import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
 import { decidePalette } from './decidePalette';
-import { useConfig } from '../components/ConfigContext';
+
 type Props = {
 	format: ArticleFormat;
 	element: FEElement;
@@ -142,8 +139,6 @@ export const renderElement = ({
 	isPinnedPost,
 	abTests,
 }: Props) => {
-	const { renderingTarget } = useConfig();
-	console.log('renderingTarget', renderingTarget);
 	const palette = decidePalette(format);
 
 	const isBlog =
@@ -458,6 +453,7 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
 			const emailSignUpProps = {
+				index,
 				identityName: element.newsletter.identityName,
 				description: element.newsletter.description,
 				name: element.newsletter.name,
@@ -465,29 +461,8 @@ export const renderElement = ({
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
 			};
-			// TODO:: Add context here please
-			return renderingTarget === 'Apps' ? (
-				<Island clientOnly={true} deferUntil={'idle'}>
-					<EmailSignUpWrapper
-						skipToIndex={index}
-						{...emailSignUpProps}
-					/>
-				</Island>
-			) : (
-				<InlineSkipToWrapper
-					id={`EmailSignup-skip-link-${index}`}
-					blockDescription="newsletter promotion"
-				>
-					<EmailSignup {...emailSignUpProps}>
-						<SecureSignup
-							name={emailSignUpProps.name}
-							newsletterId={emailSignUpProps.identityName}
-							successDescription={emailSignUpProps.description}
-						/>
-					</EmailSignup>
-				</InlineSkipToWrapper>
-			);
 
+			return <EmailSignUpSwitcher {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent

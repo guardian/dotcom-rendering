@@ -30,7 +30,6 @@ import type { NavType } from '../model/extract-nav';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -38,7 +37,6 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 }
 
 type RendererProps = {
@@ -51,7 +49,6 @@ type RendererProps = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: Switches;
-	renderingTarget: RenderingTarget;
 };
 
 const Renderer = ({
@@ -64,7 +61,6 @@ const Renderer = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
-	renderingTarget,
 }: RendererProps) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -74,6 +70,7 @@ const Renderer = ({
 	const output = elements.map((element, index) => {
 		const el = renderElement({
 			format,
+
 			element,
 			host,
 			index,
@@ -287,12 +284,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	);
 };
 
-export const FullPageInteractiveLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { host },
 	} = article;
@@ -309,12 +301,7 @@ export const FullPageInteractiveLayout = ({
 					background-color: ${palette.background.article};
 				`}
 			>
-				<NavHeader
-					article={article}
-					NAV={NAV}
-					format={format}
-					renderingTarget={renderingTarget}
-				/>
+				<NavHeader article={article} NAV={NAV} format={format} />
 
 				{format.theme === ArticleSpecial.Labs && (
 					<Stuck>
@@ -358,7 +345,6 @@ export const FullPageInteractiveLayout = ({
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
-						renderingTarget={renderingTarget}
 					/>
 				</article>
 			</Section>

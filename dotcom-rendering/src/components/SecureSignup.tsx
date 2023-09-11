@@ -65,6 +65,7 @@ export const SecureSignup = ({
 	name,
 }: Props) => {
 	const { html, styles } = generateForm(newsletterId);
+
 	return (
 		<>
 			<Island

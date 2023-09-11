@@ -11,14 +11,10 @@ import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { NewsletterDetail } from './NewsletterDetail';
 
 export type EmailSignUpProps = {
-	identityName: string;
 	name: string;
 	description: string;
 	frequency: string;
-	successDescription: string;
 	theme: string;
-	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
-	hidePrivacyMessage?: boolean;
 	children?: React.ReactNode;
 };
 

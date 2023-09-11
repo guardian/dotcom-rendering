@@ -280,25 +280,6 @@ export const renderBlocks = ({
 				keywordIds={keywordIds}
 			/>
 		</ConfigProvider>,
-		<LiveBlogRenderer
-			blocks={blocks}
-			format={format}
-			host={host}
-			pageId={pageId}
-			webTitle={webTitle}
-			ajaxUrl={ajaxUrl}
-			isSensitive={isSensitive}
-			isAdFreeUser={isAdFreeUser}
-			switches={switches}
-			isLiveUpdate={true}
-			sectionId={section}
-			// The props below are never used because isLiveUpdate is true but, typescript...
-			shouldHideReaderRevenue={false}
-			tags={[]}
-			isPaidContent={false}
-			contributionsServiceUrl=""
-			keywordIds={keywordIds}
-		/>,
 	);
 
 	return `${extractedCss}${html}`;
