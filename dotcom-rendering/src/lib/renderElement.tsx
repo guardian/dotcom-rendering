@@ -471,6 +471,8 @@ export const renderElement = ({
 					/>
 				</InlineSkipToWrapper>
 			);
+		case 'model.dotcomrendering.pageElements.AdPlaceholderSlot':
+			return <p>I am an advert placeholder</p>;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent
