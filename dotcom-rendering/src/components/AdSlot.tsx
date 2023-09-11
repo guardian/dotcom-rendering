@@ -274,8 +274,8 @@ const articleEndAdStyles = css`
 const mostPopAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
-	min-width: ${adSizes.mpu.width};
-	max-width: ${adSizes.mpu.width};
+	min-width: ${adSizes.mpu.width}px;
+	max-width: ${adSizes.mpu.width}px;
 	margin: 12px auto;
 	text-align: center;
 	${from.tablet} {
@@ -283,7 +283,7 @@ const mostPopAdStyles = css`
 	}
 	${from.desktop} {
 		width: auto;
-		max-width: ${adSizes.mpu.width};
+		max-width: ${adSizes.mpu.width}px;
 	}
 	${from.wide} {
 		margin-top: 25px;
@@ -292,15 +292,15 @@ const mostPopAdStyles = css`
 
 const mostPopContainerStyles = css`
 	min-height: ${adSizes.mpu.height + labelHeight}px;
-	min-width: ${adSizes.mpu.width};
+	min-width: ${adSizes.mpu.width}px;
 	width: fit-content;
-	max-width: ${adSizes.mpu.width};
+	max-width: ${adSizes.mpu.width}px;
 	margin: 0 auto;
 	${from.tablet} {
 		max-width: 700px;
 	}
 	${from.desktop} {
-		max-width: ${adSizes.mpu.width};
+		max-width: ${adSizes.mpu.width}px;
 	}
 `;
 
