@@ -408,11 +408,6 @@ export const Quiz: FEArticleType = {
 						url: '/football',
 						children: [
 							{
-								title: "Women's World Cup",
-								url: '/football/womens-world-cup-2023',
-								longTitle: 'football/womens-world-cup-2023',
-							},
-							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -608,11 +603,6 @@ export const Quiz: FEArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: "Women's World Cup",
-								url: '/football/womens-world-cup-2023',
-								longTitle: 'football/womens-world-cup-2023',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -998,11 +988,6 @@ export const Quiz: FEArticleType = {
 				url: '/football',
 				children: [
 					{
-						title: "Women's World Cup",
-						url: '/football/womens-world-cup-2023',
-						longTitle: 'football/womens-world-cup-2023',
-					},
-					{
 						title: 'Live scores',
 						url: '/football/live',
 						longTitle: 'football/live',
@@ -1035,11 +1020,6 @@ export const Quiz: FEArticleType = {
 				],
 			},
 			links: [
-				{
-					title: "Women's World Cup",
-					url: '/football/womens-world-cup-2023',
-					longTitle: 'football/womens-world-cup-2023',
-				},
 				{
 					title: 'Live scores',
 					url: '/football/live',
@@ -1658,7 +1638,7 @@ export const Quiz: FEArticleType = {
 					],
 				},
 			],
-			elementId: 'aeaa252c-50e3-44e0-987c-1e3997ebc653',
+			elementId: '58b26b89-6268-46a7-ae37-4b7bef6c8182',
 		},
 	],
 	canonicalUrl:
@@ -2274,7 +2254,7 @@ export const Quiz: FEArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '03b8fb21-fad7-418d-ba7d-d868b21831b3',
+					elementId: '8964ec4d-8c1c-4659-b61c-0d99868df605',
 				},
 			],
 			attributes: {

@@ -4,6 +4,8 @@ import { CacheProvider } from '@emotion/react';
 import { log, startPerformanceMeasure } from '@guardian/libs';
 import { createElement } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
+import { ConfigProvider } from '../../components/ConfigContext';
+import type { Config } from '../../types/configContext';
 
 declare global {
 	interface DOMStringMap {
@@ -26,12 +28,14 @@ declare global {
  * @param data The deserialised props we want to use for hydration
  * @param element The location on the DOM where the component to hydrate exists
  * @param emotionCache An instance of an emotion cache to use for the island
+ * @param config Application configuration to be passed to the config context for the hydrated component
  */
 export const doHydration = async (
 	name: string,
 	data: { [key: string]: unknown } | null,
 	element: HTMLElement,
 	emotionCache: EmotionCache,
+	config: Config,
 ): Promise<void> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
@@ -58,16 +62,20 @@ export const doHydration = async (
 				element.querySelector('[data-name="placeholder"]')?.remove();
 				const root = createRoot(element);
 				root.render(
-					<CacheProvider value={emotionCache}>
-						{createElement(module[name], data)}
-					</CacheProvider>,
+					<ConfigProvider value={config}>
+						<CacheProvider value={emotionCache}>
+							{createElement(module[name], data)}
+						</CacheProvider>
+					</ConfigProvider>,
 				);
 			} else {
 				hydrateRoot(
 					element,
-					<CacheProvider value={emotionCache}>
-						{createElement(module[name], data)}
-					</CacheProvider>,
+					<ConfigProvider value={config}>
+						<CacheProvider value={emotionCache}>
+							{createElement(module[name], data)}
+						</CacheProvider>
+					</ConfigProvider>,
 				);
 			}
 

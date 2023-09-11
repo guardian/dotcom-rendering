@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
-import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandAltBackground,
@@ -22,6 +22,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -48,7 +49,6 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
 import {
 	interactiveGlobalStyles,
 	interactiveLegacyClasses,
@@ -204,15 +204,9 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 }
 
-export const InteractiveLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -232,6 +226,8 @@ export const InteractiveLayout = ({
 	 * This property currently only applies to the header and merchandising slots
 	 */
 	const renderAds = canRenderAds(article);
+
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
@@ -439,7 +435,6 @@ export const InteractiveLayout = ({
 											typeof article.starRating ===
 											'number'
 										}
-										renderingTarget={renderingTarget}
 									/>
 								</div>
 								{article.starRating !== undefined ? (
@@ -492,7 +487,6 @@ export const InteractiveLayout = ({
 											!!article.config.switches
 												.serverShareCounts
 										}
-										renderingTarget={renderingTarget}
 									/>
 								</div>
 							</GridItem>
@@ -531,7 +525,6 @@ export const InteractiveLayout = ({
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
-										renderingTarget={renderingTarget}
 									/>
 								</ArticleContainer>
 							</GridItem>
@@ -605,7 +598,8 @@ export const InteractiveLayout = ({
 						webUrl={article.webURL}
 						webTitle={article.webTitle}
 						showBottomSocialButtons={
-							article.showBottomSocialButtons
+							article.showBottomSocialButtons &&
+							renderingTarget === 'Web'
 						}
 						badge={article.badge?.enhanced}
 					/>

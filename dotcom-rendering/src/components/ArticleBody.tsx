@@ -10,7 +10,6 @@ import { revealStyles } from '../lib/revealStyles';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TableOfContentsItem } from '../types/frontend';
 import type { Palette } from '../types/palette';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
@@ -47,7 +46,6 @@ type Props = {
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
 	isRightToLeftLang?: boolean;
-	renderingTarget: RenderingTarget;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -139,7 +137,6 @@ export const ArticleBody = ({
 	tableOfContents,
 	lang,
 	isRightToLeftLang = false,
-	renderingTarget,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -240,7 +237,6 @@ export const ArticleBody = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					abTests={abTests}
-					renderingTarget={renderingTarget}
 				/>
 			</div>
 		</>

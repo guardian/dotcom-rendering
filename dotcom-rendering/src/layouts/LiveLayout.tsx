@@ -61,6 +61,7 @@ import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
@@ -244,6 +245,7 @@ const paddingBody = css`
 interface BaseProps {
 	article: FEArticleType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
 interface AppsProps extends BaseProps {
@@ -251,8 +253,8 @@ interface AppsProps extends BaseProps {
 }
 
 interface WebProps extends BaseProps {
-	renderingTarget: 'Web';
 	NAV: NavType;
+	renderingTarget: 'Web';
 }
 
 export const LiveLayout = (props: WebProps | AppsProps) => {
@@ -461,7 +463,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								webPublicationDateDeprecated={
 									article.webPublicationDateDeprecated
 								}
-								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -498,7 +499,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												typeof article.starRating ===
 												'number'
 											}
-											renderingTarget={renderingTarget}
 										/>
 									)}
 								</div>
@@ -585,7 +585,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												.serverShareCounts
 										}
 										messageUs={article.messageUs}
-										renderingTarget={renderingTarget}
 									/>
 								</div>
 							</Hide>
@@ -750,7 +749,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													.serverShareCounts
 											}
 											messageUs={article.messageUs}
-											renderingTarget={renderingTarget}
 										/>
 									</div>
 								</Hide>
@@ -904,9 +902,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 															.serverSideLiveblogInlineAdsVariant ===
 														'variant'
 													}
-													renderingTarget={
-														renderingTarget
-													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -946,7 +941,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													webUrl={article.webURL}
 													webTitle={article.webTitle}
 													showBottomSocialButtons={
-														article.showBottomSocialButtons
+														article.showBottomSocialButtons &&
+														renderingTarget ===
+															'Web'
 													}
 													badge={
 														article.badge?.enhanced
@@ -1058,9 +1055,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													isRightToLeftLang={
 														article.isRightToLeftLang
 													}
-													renderingTarget={
-														renderingTarget
-													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1100,7 +1094,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													webUrl={article.webURL}
 													webTitle={article.webTitle}
 													showBottomSocialButtons={
-														article.showBottomSocialButtons
+														article.showBottomSocialButtons &&
+														renderingTarget ===
+															'Web'
 													}
 													badge={
 														article.badge?.enhanced

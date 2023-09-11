@@ -346,7 +346,7 @@ export const Card = ({
 								min-height: 10px;
 							`}
 						>
-							<Island clientOnly={true} deferUntil="visible">
+							<Island deferUntil="visible">
 								<CardCommentCount
 									format={format}
 									discussionApiUrl={discussionApiUrl}

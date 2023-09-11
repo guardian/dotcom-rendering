@@ -5,6 +5,7 @@ import {
 	adaptive,
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
+	ophanEsm,
 } from '../../scripts/webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
 
@@ -69,6 +70,7 @@ export type Build =
 	| 'apps'
 	| 'web'
 	| 'web.variant'
+	| 'web.ophan-esm'
 	| 'web.scheduled'
 	| 'web.legacy';
 
@@ -142,9 +144,12 @@ export const getModulesBuild = ({
 }: {
 	tests: ServerSideTests;
 	switches: Switches;
-}): Extract<Build, 'web' | 'web.variant' | 'web.scheduled'> => {
+}): Exclude<Extract<Build, `web${string}`>, 'web.legacy'> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
 		return 'web.variant';
+	}
+	if (tests[ophanEsm('Variant')] === 'variant') {
+		return 'web.ophan-esm';
 	}
 	if (switches.scheduler || tests[adaptive('Variant')] === 'variant') {
 		return 'web.scheduled';
