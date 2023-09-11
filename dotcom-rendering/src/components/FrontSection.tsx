@@ -513,6 +513,18 @@ export const FrontSection = ({
 		!!pageId &&
 		!!ajaxUrl;
 
+	const frontHasEditorialOrDesignBadge =
+		!isOnPaidContentFront && containerSponsorBranding === undefined;
+
+	// Only show the badge with a "Paid for by" label on the FIRST card of a paid front, aka as Labs front.
+	const isTheFirstContainerOnAPaidFront = isOnPaidContentFront && index === 0;
+
+	const isTheFirstContainerOnASponsoredFront =
+		!isOnPaidContentFront &&
+		!!frontEditionBranding &&
+		frontEditionBranding.branding &&
+		index === 0;
+
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
 	 * this id pre-existed showMore so is probably also being used for something else.
@@ -561,7 +573,7 @@ export const FrontSection = ({
 				]}
 			>
 				{/* Only show the badge with a "Paid for by" label on the FIRST card of a paid front */}
-				{isOnPaidContentFront && index === 0 ? (
+				{isTheFirstContainerOnAPaidFront ? (
 					<div css={titleStyle}>
 						<ContainerTitle
 							title={title}
@@ -599,9 +611,19 @@ export const FrontSection = ({
 					</div>
 				) : (
 					<>
-						{!isOnPaidContentFront &&
-							containerSponsorBranding === undefined && (
-								<Hide until="leftCol">
+						{frontHasEditorialOrDesignBadge && (
+							<Hide until="leftCol">
+								{badge && (
+									<Badge
+										imageSrc={badge.imageSrc}
+										href={badge.href}
+									/>
+								)}
+							</Hide>
+						)}
+						<div css={titleStyle}>
+							{frontHasEditorialOrDesignBadge && (
+								<Hide from="leftCol">
 									{badge && (
 										<Badge
 											imageSrc={badge.imageSrc}
@@ -610,18 +632,6 @@ export const FrontSection = ({
 									)}
 								</Hide>
 							)}
-						<div css={titleStyle}>
-							{!isOnPaidContentFront &&
-								containerSponsorBranding === undefined && (
-									<Hide from="leftCol">
-										{badge && (
-											<Badge
-												imageSrc={badge.imageSrc}
-												href={badge.href}
-											/>
-										)}
-									</Hide>
-								)}
 							<ContainerTitle
 								title={title}
 								fontColour={overrides?.text.container}
@@ -631,7 +641,7 @@ export const FrontSection = ({
 								showDateHeader={showDateHeader}
 								editionId={editionId}
 							/>
-							{!isOnPaidContentFront &&
+							{isTheFirstContainerOnASponsoredFront &&
 								!!frontEditionBranding &&
 								frontEditionBranding.branding &&
 								index === 0 && (
