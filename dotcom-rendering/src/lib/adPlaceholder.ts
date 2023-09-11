@@ -1,4 +1,4 @@
-import type { FEElement } from '../types/content';
+import type { AdPlaceholderSlot, FEElement } from '../types/content';
 
 type Accumulator = {
 	elements: FEElement[];
@@ -41,25 +41,64 @@ const isSuitablePosition = (
 	return (paragraphCounter - firstAdIndex) % adEveryNParagraphs === 0;
 };
 
-const insertPlaceholder = (acc: Accumulator): Accumulator => {};
+const insertPlaceholder = (
+	elements: FEElement[],
+	numberOfAdsInserted: Accumulator['numberOfAdsInserted'],
+): FEElement[] => {
+	const placeholder: AdPlaceholderSlot = {
+		_type: 'model.dotcomrendering.pageElements.AdPlaceholderSlot',
+		// We only insert square ads for the first ad in the article
+		isSquare: numberOfAdsInserted === 0,
+	};
+	return [...elements, placeholder];
+};
 
 /**
  * Inserts advert placeholders
  */
 const adPlaceholder = (elements: FEElement[]): FEElement[] => {
 	const elementsWithAds = elements.reduce(
-		(acc: Accumulator, el: FEElement): Accumulator => {
+		(acc: Accumulator, el: FEElement, idx: number): Accumulator => {
 			const isLastElement = elements.length === idx + 1;
 
-			isSuitablePosition(el, acc.paragraphCounter, isLastElement)
-				? insertPlaceholder(acc)
-				: acc;
+			const {
+				elements: prevElements,
+				paragraphCounter: prevParagraphCounter,
+				numberOfAdsInserted: prevNumberOfAdsInserted,
+			} = acc;
+
+			const currentParagraphCounter =
+				el._type ===
+				'model.dotcomrendering.pageElements.TextBlockElement'
+					? prevParagraphCounter + 1
+					: prevParagraphCounter;
+
+			const shouldInsertAd = isSuitablePosition(
+				currentParagraphCounter,
+				prevNumberOfAdsInserted,
+				isLastElement,
+			);
+
+			const currentElements = shouldInsertAd
+				? insertPlaceholder(prevElements, prevNumberOfAdsInserted)
+				: prevElements;
+
+			const currentNumberOfAdsInserted = shouldInsertAd
+				? prevNumberOfAdsInserted + 1
+				: prevNumberOfAdsInserted;
+
+			return {
+				elements: currentElements,
+				paragraphCounter: currentParagraphCounter,
+				numberOfAdsInserted: currentNumberOfAdsInserted,
+			};
 		},
-		[],
+		{
+			elements: [],
+			paragraphCounter: 0,
+			numberOfAdsInserted: 0,
+		},
 	);
 
-	// TODO - remove the last ad slot if it is in the last paragraph position?
-	elementsWithAds;
-
-	return elementsWithAds;
+	return elementsWithAds.elements;
 };
