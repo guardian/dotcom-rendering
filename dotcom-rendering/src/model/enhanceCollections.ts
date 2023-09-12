@@ -132,7 +132,10 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
-			collectionBranding: decideCollectionBranding(allCards, editionId),
+			collectionBranding: decideCollectionBranding(
+				allCards.length,
+				allBranding,
+			),
 		};
 	});
 };
