@@ -6,7 +6,7 @@ import type {
 	FECollectionType,
 	FEFrontCard,
 } from '../types/front';
-import { decidePaidContentBadge, decideEditorialBadge } from './decideBadge';
+import { decideEditorialBadge, decidePaidContentBadge } from './decideBadge';
 import { decideCollectionBranding } from './decideCollectionBranding';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';

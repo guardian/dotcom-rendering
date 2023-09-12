@@ -61,19 +61,3 @@ export const decideEditorialBadge = (
 			: undefined; // No badge or special badge found
 	}
 };
-
-/**
- * Return a badge based on the series tag or container branding
- *
- * Try to fetch badge using series tag first
- * Otherwise try to fetch badge using branding elements
- * Returns undefined as default / if no matches found
- */
-export const decideBadge = (
-	seriesTag?: string,
-	allBranding?: Branding[],
-): DCRBadgeType | undefined => {
-	return (
-		decideEditorialBadge(seriesTag) ?? decidePaidContentBadge(allBranding)
-	);
-};

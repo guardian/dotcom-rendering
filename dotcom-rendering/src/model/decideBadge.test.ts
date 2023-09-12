@@ -1,8 +1,4 @@
-import {
-	decideBadge,
-	decidePaidContentBadge,
-	decideEditorialBadge,
-} from './decideBadge';
+import { decideEditorialBadge, decidePaidContentBadge } from './decideBadge';
 
 jest.mock('./badges');
 
@@ -116,36 +112,6 @@ describe('Decide badge', () => {
 
 			const result2 = decidePaidContentBadge([]);
 			expect(result2).toEqual(expectedResult);
-		});
-	});
-
-	describe('decideBadge function', () => {
-		it('return series tag match if both seriesTag and branding provided', () => {
-			const branding = [brandingAmazon, brandingAmazon];
-			const tagId = 'uk-news/series/the-brexit-gamble';
-			const expectedResult = {
-				href: `/${tagId}`,
-				imageSrc: `/static/frontend/badges/EUReferendumBadge.svg`,
-			};
-			const result = decideBadge(tagId, branding);
-			expect(result).toMatchObject(expectedResult);
-		});
-
-		it('returns branding sponsor if branding but no series tag match', () => {
-			const branding = [brandingAmazon, brandingAmazon];
-
-			const expectedResult = {
-				imageSrc: brandingAmazon.logo.src,
-				href: brandingAmazon.logo.link,
-			};
-			const result = decideBadge('seriesTag', branding);
-			expect(result).toEqual(expectedResult);
-		});
-
-		it('returns undefined if no match by seriesTag or branding', () => {
-			const expectedResult = undefined;
-			const result = decideBadge('seriesTag', []);
-			expect(result).toEqual(expectedResult);
 		});
 	});
 });
