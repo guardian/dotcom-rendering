@@ -33,7 +33,7 @@ export const getBadgeFromBranding = (
 /**
  * Fetches the corresponding badge using the series tag, if there's a match in the lookup.
  */
-export const getBadgeFromSeriesTag = (
+export const getEditorialBadge = (
 	seriesTag?: string,
 ): DCRBadgeType | undefined => {
 	if (!seriesTag) return undefined;
@@ -73,7 +73,5 @@ export const decideBadge = (
 	seriesTag?: string,
 	allBranding?: Branding[],
 ): DCRBadgeType | undefined => {
-	return (
-		getBadgeFromSeriesTag(seriesTag) ?? getBadgeFromBranding(allBranding)
-	);
+	return getEditorialBadge(seriesTag) ?? getBadgeFromBranding(allBranding);
 };

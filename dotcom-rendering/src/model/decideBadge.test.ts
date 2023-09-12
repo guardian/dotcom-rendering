@@ -1,7 +1,7 @@
 import {
 	decideBadge,
 	getBadgeFromBranding,
-	getBadgeFromSeriesTag,
+	getEditorialBadge,
 } from './decideBadge';
 
 jest.mock('./badges');
@@ -59,7 +59,7 @@ describe('Decide badge', () => {
 				href: `/${tagId}`,
 				imageSrc: `/static/frontend/badges/EUReferendumBadge.svg`,
 			};
-			const result = getBadgeFromSeriesTag(tagId);
+			const result = getEditorialBadge(tagId);
 			expect(result).toMatchObject(expectedResult);
 		});
 
@@ -69,21 +69,21 @@ describe('Decide badge', () => {
 				href: `/${tagId}`,
 				imageSrc: `/static/frontend/badges/newsletter-badge.svg`,
 			};
-			const result = getBadgeFromSeriesTag(tagId);
+			const result = getEditorialBadge(tagId);
 			expect(result).toMatchObject(expectedResult);
 		});
 
 		it('returns undefined if no standard or special badge match found for series tag', () => {
 			const tagId = 'lifeandstyle/home-and-garden';
 			const expectedResult = undefined;
-			const result = getBadgeFromSeriesTag(tagId);
+			const result = getEditorialBadge(tagId);
 			expect(result).toEqual(expectedResult);
 		});
 
 		it('returns undefined for undefined series tag', () => {
 			const tagId = undefined;
 			const expectedResult = undefined;
-			const result = getBadgeFromSeriesTag(tagId);
+			const result = getEditorialBadge(tagId);
 			expect(result).toEqual(expectedResult);
 		});
 	});
