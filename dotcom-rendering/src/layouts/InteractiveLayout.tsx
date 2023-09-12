@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
-import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandAltBackground,
@@ -22,6 +22,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -225,6 +226,8 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 	 * This property currently only applies to the header and merchandising slots
 	 */
 	const renderAds = canRenderAds(article);
+
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
@@ -595,7 +598,8 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						webUrl={article.webURL}
 						webTitle={article.webTitle}
 						showBottomSocialButtons={
-							article.showBottomSocialButtons
+							article.showBottomSocialButtons &&
+							renderingTarget === 'Web'
 						}
 						badge={article.badge?.enhanced}
 					/>

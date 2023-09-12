@@ -941,7 +941,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													webUrl={article.webURL}
 													webTitle={article.webTitle}
 													showBottomSocialButtons={
-														article.showBottomSocialButtons
+														article.showBottomSocialButtons &&
+														renderingTarget ===
+															'Web'
 													}
 													badge={
 														article.badge?.enhanced
@@ -1092,7 +1094,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													webUrl={article.webURL}
 													webTitle={article.webTitle}
 													showBottomSocialButtons={
-														article.showBottomSocialButtons
+														article.showBottomSocialButtons &&
+														renderingTarget ===
+															'Web'
 													}
 													badge={
 														article.badge?.enhanced
