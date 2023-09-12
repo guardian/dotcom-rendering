@@ -401,6 +401,7 @@ export type DCRCollectionType = {
 	 **/
 	canShowMore?: boolean;
 	editorialBadge?: DCRBadgeType;
+	paidContentBadge?: DCRBadgeType;
 	sponsoredContentBranding?: Branding;
 	targetedTerritory?: Territory;
 };

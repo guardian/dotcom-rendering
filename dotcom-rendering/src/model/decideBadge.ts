@@ -7,7 +7,7 @@ import { BADGES, SPECIAL_BADGES } from './badges';
 /**
  * Fetches the badge properties only if ALL branding has the same sponsor.
  */
-export const getBadgeFromBranding = (
+export const decidePaidContentBadge = (
 	branding?: Branding[],
 ): DCRBadgeType | undefined => {
 	// Early return if there are no branding elements
@@ -33,7 +33,7 @@ export const getBadgeFromBranding = (
 /**
  * Fetches the corresponding badge using the series tag, if there's a match in the lookup.
  */
-export const getEditorialBadge = (
+export const decideEditorialBadge = (
 	seriesTag?: string,
 ): DCRBadgeType | undefined => {
 	if (!seriesTag) return undefined;
@@ -73,5 +73,7 @@ export const decideBadge = (
 	seriesTag?: string,
 	allBranding?: Branding[],
 ): DCRBadgeType | undefined => {
-	return getEditorialBadge(seriesTag) ?? getBadgeFromBranding(allBranding);
+	return (
+		decideEditorialBadge(seriesTag) ?? decidePaidContentBadge(allBranding)
+	);
 };

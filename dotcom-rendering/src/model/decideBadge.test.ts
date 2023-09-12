@@ -1,7 +1,7 @@
 import {
 	decideBadge,
-	getBadgeFromBranding,
-	getEditorialBadge,
+	decidePaidContentBadge,
+	decideEditorialBadge,
 } from './decideBadge';
 
 jest.mock('./badges');
@@ -59,7 +59,7 @@ describe('Decide badge', () => {
 				href: `/${tagId}`,
 				imageSrc: `/static/frontend/badges/EUReferendumBadge.svg`,
 			};
-			const result = getEditorialBadge(tagId);
+			const result = decideEditorialBadge(tagId);
 			expect(result).toMatchObject(expectedResult);
 		});
 
@@ -69,21 +69,21 @@ describe('Decide badge', () => {
 				href: `/${tagId}`,
 				imageSrc: `/static/frontend/badges/newsletter-badge.svg`,
 			};
-			const result = getEditorialBadge(tagId);
+			const result = decideEditorialBadge(tagId);
 			expect(result).toMatchObject(expectedResult);
 		});
 
 		it('returns undefined if no standard or special badge match found for series tag', () => {
 			const tagId = 'lifeandstyle/home-and-garden';
 			const expectedResult = undefined;
-			const result = getEditorialBadge(tagId);
+			const result = decideEditorialBadge(tagId);
 			expect(result).toEqual(expectedResult);
 		});
 
 		it('returns undefined for undefined series tag', () => {
 			const tagId = undefined;
 			const expectedResult = undefined;
-			const result = getEditorialBadge(tagId);
+			const result = decideEditorialBadge(tagId);
 			expect(result).toEqual(expectedResult);
 		});
 	});
@@ -96,7 +96,7 @@ describe('Decide badge', () => {
 				imageSrc: brandingAmazon.logo.src,
 				href: brandingAmazon.logo.link,
 			};
-			const result = getBadgeFromBranding(branding);
+			const result = decidePaidContentBadge(branding);
 			expect(result).toEqual(expectedResult);
 		});
 
@@ -104,17 +104,17 @@ describe('Decide badge', () => {
 			const branding = [brandingAmazon, brandingGuardianOrg];
 
 			const expectedResult = undefined;
-			const result = getBadgeFromBranding(branding);
+			const result = decidePaidContentBadge(branding);
 			expect(result).toEqual(expectedResult);
 		});
 
 		it('returns undefined if no branding supplied', () => {
 			const expectedResult = undefined;
 
-			const result = getBadgeFromBranding(undefined);
+			const result = decidePaidContentBadge(undefined);
 			expect(result).toEqual(expectedResult);
 
-			const result2 = getBadgeFromBranding([]);
+			const result2 = decidePaidContentBadge([]);
 			expect(result2).toEqual(expectedResult);
 		});
 	});
