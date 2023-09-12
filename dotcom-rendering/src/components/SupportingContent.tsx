@@ -46,10 +46,10 @@ const dynamoStyles = css`
 	flex-direction: column;
 	column-gap: 5px;
 	width: 100%;
-	margin-top: 5px;
+	padding: 0;
 
 	${from.tablet} {
-		padding: 0;
+		margin-top: 5px;
 		flex-direction: row;
 		position: relative;
 	}
