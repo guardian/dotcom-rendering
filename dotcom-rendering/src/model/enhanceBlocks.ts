@@ -1,5 +1,5 @@
 import type { Newsletter } from '../types/content';
-import { enhanceAdPlaceholders } from './adPlaceholder';
+import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
