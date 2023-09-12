@@ -763,9 +763,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								index={index}
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
-								frontEditionBranding={frontEditionBranding}
+								frontBranding={frontEditionBranding}
 								discussionApiUrl={front.config.discussionApiUrl}
-								containerSponsorBranding={
+								containerBranding={
 									collection.sponsoredContentBranding
 								}
 							>
