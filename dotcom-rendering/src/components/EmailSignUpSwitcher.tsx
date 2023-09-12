@@ -1,4 +1,4 @@
-import { AppEmailSignUpWrapper } from './AppEmailSignUpWrapper.Importable';
+import { AppEmailSignUpWrapper } from './AppEmailSignUpWrapper.importable';
 import { useConfig } from './ConfigContext';
 import type { EmailSignUpProps } from './EmailSignup';
 import { Island } from './Island';
