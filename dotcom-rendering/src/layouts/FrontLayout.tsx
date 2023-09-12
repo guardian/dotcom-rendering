@@ -764,7 +764,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								frontEditionBranding={frontEditionBranding}
 								discussionApiUrl={front.config.discussionApiUrl}
 								containerSponsorBranding={
-									collection.collectionBranding
+									collection.sponsoredContentBranding
 								}
 							>
 								<DecideContainer

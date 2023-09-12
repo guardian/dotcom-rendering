@@ -132,7 +132,7 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
-			collectionBranding: decideCollectionBranding(
+			sponsoredContentBranding: decideCollectionBranding(
 				allCards.length,
 				allBranding,
 			),
