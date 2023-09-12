@@ -267,6 +267,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	const isFirstNonThrasherContainer = (
+		index: number,
+		collections: DCRCollectionType[],
+	) => {
+		return (
+			collections.findIndex(
+				(collection) => collection.collectionType != 'fixed/thrasher',
+			) === index
+		);
+	};
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -435,14 +446,33 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						  })
 						: trails;
 
-					const frontEditionBranding =
-						front.pressedPage.frontProperties.commercial.editionBrandings.find(
+					const isFirstContainer = index === 0;
+
+					const isEditionBranded =
+						!!front.pressedPage.frontProperties.commercial.editionBrandings.find(
 							(eB) =>
 								eB.edition.id === front.editionId &&
 								!!eB.branding,
 						);
 
-					const isFirstContainer = index === 0;
+					const showFrontBranding =
+						isEditionBranded &&
+						isFirstNonThrasherContainer(
+							index,
+							front.pressedPage.collections,
+						);
+
+					// We can either have front branding or container branding on a page. If there is a front branding
+					// no container shows the container branding even if it exists
+					const frontBranding = showFrontBranding
+						? front.pressedPage.frontProperties.commercial.editionBrandings.find(
+								(eB) =>
+									eB.edition.id === front.editionId &&
+									!!eB.branding,
+						  )
+						: undefined;
+
+					const containerBranding = collection.collectionBranding;
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
@@ -761,10 +791,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								index={index}
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
-								frontEditionBranding={frontEditionBranding}
+								frontBranding={frontBranding}
 								discussionApiUrl={front.config.discussionApiUrl}
-								containerSponsorBranding={
-									collection.collectionBranding
+								containerBranding={
+									frontBranding !== undefined
+										? undefined
+										: containerBranding
 								}
 							>
 								<DecideContainer

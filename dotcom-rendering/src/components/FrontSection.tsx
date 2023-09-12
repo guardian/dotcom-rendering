@@ -96,8 +96,8 @@ type Props = {
 	 */
 	hasPageSkin?: boolean;
 	discussionApiUrl: string;
-	frontEditionBranding?: DCRFrontType['pressedPage']['frontProperties']['commercial']['editionBrandings'][number];
-	containerSponsorBranding?: Branding;
+	frontBranding?: DCRFrontType['pressedPage']['frontProperties']['commercial']['editionBrandings'][number];
+	containerBranding?: Branding;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -497,9 +497,9 @@ export const FrontSection = ({
 	index,
 	targetedTerritory,
 	hasPageSkin = false,
-	frontEditionBranding,
+	frontBranding,
 	discussionApiUrl,
-	containerSponsorBranding,
+	containerBranding,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -514,16 +514,10 @@ export const FrontSection = ({
 		!!ajaxUrl;
 
 	const frontHasEditorialOrDesignBadge =
-		!isOnPaidContentFront && containerSponsorBranding === undefined;
+		!isOnPaidContentFront && containerBranding === undefined;
 
 	// Only show the badge with a "Paid for by" label on the FIRST card of a paid front, aka as Labs front.
 	const isTheFirstContainerOnAPaidFront = isOnPaidContentFront && index === 0;
-
-	const isTheFirstContainerOnASponsoredFront =
-		!isOnPaidContentFront &&
-		!!frontEditionBranding &&
-		frontEditionBranding.branding &&
-		index === 0;
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -641,56 +635,39 @@ export const FrontSection = ({
 								showDateHeader={showDateHeader}
 								editionId={editionId}
 							/>
-							{isTheFirstContainerOnASponsoredFront &&
-								!!frontEditionBranding &&
-								frontEditionBranding.branding &&
-								index === 0 && (
-									<>
-										<p css={labelStyles}>
-											{
-												frontEditionBranding.branding
-													.logo.label
-											}
-										</p>
-										<Badge
-											imageSrc={
-												frontEditionBranding.branding
-													.logo.src
-											}
-											href={
-												frontEditionBranding.branding
-													.logo.link
-											}
-										/>
-										<a
-											href={
-												frontEditionBranding.branding
-													.aboutThisLink
-											}
-											css={aboutThisLinkStyles}
-										>
-											About this content
-										</a>
-									</>
-								)}
-
-							{containerSponsorBranding && (
+							{frontBranding?.branding && (
 								<>
 									<p css={labelStyles}>
-										{containerSponsorBranding.logo.label}
+										{frontBranding.branding.logo.label}
 									</p>
 									<Badge
 										imageSrc={
-											containerSponsorBranding.logo.src
+											frontBranding.branding.logo.src
 										}
-										href={
-											containerSponsorBranding.logo.link
-										}
+										href={frontBranding.branding.logo.link}
 									/>
 									<a
 										href={
-											containerSponsorBranding.aboutThisLink
+											frontBranding.branding.aboutThisLink
 										}
+										css={aboutThisLinkStyles}
+									>
+										About this content
+									</a>
+								</>
+							)}
+
+							{containerBranding && (
+								<>
+									<p css={labelStyles}>
+										{containerBranding.logo.label}
+									</p>
+									<Badge
+										imageSrc={containerBranding.logo.src}
+										href={containerBranding.logo.link}
+									/>
+									<a
+										href={containerBranding.aboutThisLink}
 										css={aboutThisLinkStyles}
 									>
 										About this content

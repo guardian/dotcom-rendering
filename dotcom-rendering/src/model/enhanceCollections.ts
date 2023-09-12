@@ -7,7 +7,6 @@ import type {
 	FEFrontCard,
 } from '../types/front';
 import { decideBadge } from './decideBadge';
-import { decideCollectionBranding } from './decideCollectionBranding';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
@@ -132,7 +131,11 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
-			collectionBranding: decideCollectionBranding(allCards, editionId),
+			collectionBranding: undefined,
+			// 	decideCollectionBranding(
+			// 	allCards.length,
+			// 	allBranding,
+			// ),
 		};
 	});
 };
