@@ -400,7 +400,7 @@ export type DCRCollectionType = {
 	 * will always be `false`.
 	 **/
 	canShowMore?: boolean;
-	badge?: DCRBadgeType;
+	editorialBadge?: DCRBadgeType;
 	targetedTerritory?: Territory;
 
 	collectionBranding?: Branding;
