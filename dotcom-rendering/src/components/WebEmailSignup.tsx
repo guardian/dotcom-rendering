@@ -3,7 +3,7 @@ import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { SecureSignup } from './SecureSignup';
 
-interface WebEmailSignUpWrapperProps extends EmailSignUpProps {
+interface WebEmailSignProps extends EmailSignUpProps {
 	index: number;
 	identityName: string;
 	successDescription: string;
@@ -11,10 +11,10 @@ interface WebEmailSignUpWrapperProps extends EmailSignUpProps {
 	hidePrivacyMessage?: boolean;
 }
 
-export const WebEmailSignUpWrapper = ({
+export const WebEmailSignUp = ({
 	index,
 	...emailSignUpProps
-}: WebEmailSignUpWrapperProps) => {
+}: WebEmailSignProps) => {
 	return (
 		<InlineSkipToWrapper
 			id={`EmailSignup-skip-link-${index}`}

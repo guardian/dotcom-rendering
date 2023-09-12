@@ -5,7 +5,7 @@ import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { SecureReCAPTCHASignup } from './SecureReCAPTCHASignup';
 
-interface AppEmailSignUpWrapperProps extends EmailSignUpProps {
+interface AppEmailSignupProps extends EmailSignUpProps {
 	skipToIndex: number;
 	identityName: string;
 	successDescription: string;
@@ -13,12 +13,12 @@ interface AppEmailSignUpWrapperProps extends EmailSignUpProps {
 	hidePrivacyMessage?: boolean;
 }
 
-export const AppEmailSignUpWrapper = ({
+export const AppEmailSignUp = ({
 	skipToIndex,
 	...emailSignUpProps
-}: AppEmailSignUpWrapperProps) => {
+}: AppEmailSignupProps) => {
 	const isCompatible = useIsBridgetCompatible();
-	console.log('is compatible:::', isCompatible);
+
 	if (!isCompatible) {
 		return null;
 	}
@@ -28,8 +28,6 @@ export const AppEmailSignUpWrapper = ({
 			id={`EmailSignup-skip-link-${skipToIndex}`}
 			blockDescription="newsletter promotion"
 		>
-			<p>HELLO APPS WORLD</p>
-
 			<EmailSignup {...emailSignUpProps}>
 				<SecureReCAPTCHASignup
 					newsletterId={emailSignUpProps.identityName}

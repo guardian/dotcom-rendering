@@ -1,8 +1,8 @@
-import { AppEmailSignUpWrapper } from './AppEmailSignUpWrapper.importable';
+import { AppEmailSignUp } from './AppEmailSignUp.importable';
 import { useConfig } from './ConfigContext';
 import type { EmailSignUpProps } from './EmailSignup';
 import { Island } from './Island';
-import { WebEmailSignUpWrapper } from './WebEmailSignup';
+import { WebEmailSignUp } from './WebEmailSignup';
 
 interface EmailSignUpSwitcherProps extends EmailSignUpProps {
 	index: number;
@@ -17,15 +17,14 @@ export const EmailSignUpSwitcher = ({
 	...emailSignUpProps
 }: EmailSignUpSwitcherProps) => {
 	const { renderingTarget } = useConfig();
-	console.log('renderingTarget', renderingTarget);
+
 	return renderingTarget === 'Apps' ? (
 		<Island clientOnly={true} deferUntil={'idle'}>
-			<AppEmailSignUpWrapper skipToIndex={index} {...emailSignUpProps} />
+			<AppEmailSignUp skipToIndex={index} {...emailSignUpProps} />
 		</Island>
 	) : (
 		<>
-			<p>HELLO WORLD Web</p>
-			<WebEmailSignUpWrapper index={index} {...emailSignUpProps} />
+			<WebEmailSignUp index={index} {...emailSignUpProps} />
 		</>
 	);
 };
