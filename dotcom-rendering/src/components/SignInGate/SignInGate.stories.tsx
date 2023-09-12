@@ -1,6 +1,6 @@
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
-import { SignInGateCopyTestJan2023 } from './gateDesigns/SignInGateCopyTestJan2023';
+import { SignInGateCopyTestRepeatSept2023 } from './gateDesigns/SignInGateCopyTestRepeatSept2023';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
@@ -84,7 +84,7 @@ fakeSocialStandaloneVertical.storyName = 'fake_social_standalone_vertical';
 export const signInGateCopyTest = () => {
 	return (
 		<Section fullWidth={true}>
-			<SignInGateCopyTestJan2023
+			<SignInGateCopyTestRepeatSept2023
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/signin"
 				registerUrl="https://profile.theguardian.com/register"
