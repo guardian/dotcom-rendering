@@ -52,6 +52,7 @@ export const enhanceCollections = ({
 	discussionApiUrl,
 	onPageDescription,
 	isPaidContent,
+	isEditionBranded,
 }: {
 	collections: FECollectionType[];
 	editionId: EditionId;
@@ -59,6 +60,7 @@ export const enhanceCollections = ({
 	discussionApiUrl: string;
 	onPageDescription?: string;
 	isPaidContent?: boolean;
+	isEditionBranded?: boolean;
 }): DCRCollectionType[] => {
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
@@ -132,10 +134,9 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
-			sponsoredContentBranding: decideCollectionBranding(
-				allCards.length,
-				allBranding,
-			),
+			sponsoredContentBranding: isEditionBranded
+				? decideCollectionBranding(allCards.length, allBranding)
+				: undefined,
 		};
 	});
 };

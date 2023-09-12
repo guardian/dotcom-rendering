@@ -17,6 +17,7 @@ export const decideCollectionBranding = (
 			(branding) =>
 				branding.sponsorName === allCardsBranding[0]?.sponsorName,
 		);
+
 	const shouldHaveSponsorBranding =
 		allCardsHaveSponsoredBranding && allCardsHaveTheSameSponsor;
 
