@@ -72,7 +72,7 @@ export const LiveBlogBlocksAndAdverts = ({
 					block.elements,
 					true,
 				);
-				const willinsertAdMobile =
+				const willInsertAdMobile =
 					!isAdFreeUser &&
 					shouldDisplayAd(
 						i + 1,
@@ -81,7 +81,7 @@ export const LiveBlogBlocksAndAdverts = ({
 						pxSinceAdMobile,
 						true,
 					);
-				if (willinsertAdMobile) {
+				if (willInsertAdMobile) {
 					mobileAdCounter++;
 					pxSinceAdMobile = 0;
 				}
@@ -90,7 +90,7 @@ export const LiveBlogBlocksAndAdverts = ({
 					block.elements,
 					false,
 				);
-				const willinsertAdDesktop =
+				const willInsertAdDesktop =
 					!isAdFreeUser &&
 					shouldDisplayAd(
 						i + 1,
@@ -99,7 +99,7 @@ export const LiveBlogBlocksAndAdverts = ({
 						pxSinceAdDesktop,
 						false,
 					);
-				if (willinsertAdDesktop) {
+				if (willInsertAdDesktop) {
 					desktopAdCounter++;
 					pxSinceAdDesktop = 0;
 				}
@@ -121,13 +121,13 @@ export const LiveBlogBlocksAndAdverts = ({
 							isPinnedPost={false}
 							pinnedPostId={pinnedPost?.id}
 						/>
-						{willinsertAdMobile && (
+						{willInsertAdMobile && (
 							<AdSlot
 								position="liveblog-inline-mobile"
 								index={mobileAdCounter}
 							/>
 						)}
-						{willinsertAdDesktop && (
+						{willInsertAdDesktop && (
 							<AdSlot
 								position="liveblog-inline"
 								index={desktopAdCounter}

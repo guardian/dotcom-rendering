@@ -64,243 +64,197 @@ describe('calculateApproximateBlockHeight', () => {
 	const defaultBlockSpacing = 75;
 
 	describe('zero elements', () => {
-		describe('desktop', () => {
-			it('should return zero when there are zero elements', () => {
-				expect(calculateApproximateBlockHeight([], false)).toEqual(0);
-			});
-		});
-		describe('mobile', () => {
-			it('should return zero when there are zero elements', () => {
-				expect(calculateApproximateBlockHeight([], true)).toEqual(0);
-			});
-		});
+		it.each(['mobile', 'desktop'])(
+			'should return zero when there are zero elements on %s',
+			(screenSize) => {
+				const isMobile = screenSize === 'mobile';
+				expect(calculateApproximateBlockHeight([], isMobile)).toEqual(
+					0,
+				);
+			},
+		);
 	});
 
 	describe('text block elements', () => {
-		describe('desktop', () => {
-			const textLineHeight = 23.8;
-			const margin = 14;
+		const textLineHeight = 23.8;
+		const margin = 14;
 
-			it('should return the correct height for varying line length', () => {
+		it.each([
+			['mobile', textElementOneLineMobile, textElementTwoLinesMobile],
+			['desktop', textElementOneLineDesktop, textElementTwoLinesDestkop],
+		])(
+			'should return the correct height for varying line length on %s',
+			(screenSize, textElementOneLine, textElementTwoLines) => {
+				const isMobile = screenSize === 'mobile';
+
 				expect(
 					calculateApproximateBlockHeight(
-						textElementOneLineDesktop,
-						false,
+						textElementOneLine,
+						isMobile,
 					),
 				).toEqual(textLineHeight + margin + defaultBlockSpacing);
 				expect(
 					calculateApproximateBlockHeight(
-						textElementTwoLinesDestkop,
-						false,
+						textElementTwoLines,
+						isMobile,
 					),
 				).toEqual(2 * textLineHeight + margin + defaultBlockSpacing);
-			});
+			},
+		);
 
-			it('should return the correct height when there are multiple elements', () => {
+		it.each(['mobile', 'desktop'])(
+			'should return the correct height when there are multiple elements on %s',
+			(screenSize) => {
+				const isMobile = screenSize === 'mobile';
+
 				expect(
 					calculateApproximateBlockHeight(
 						multipleTextElements,
-						false,
+						isMobile,
 					),
 				).toEqual(
 					2 * textLineHeight + 2 * margin + defaultBlockSpacing,
 				);
-			});
-		});
-
-		describe('mobile', () => {
-			const textLineHeight = 23.8;
-			const margin = 14;
-
-			it('should return the correct height for varying line length', () => {
-				expect(
-					calculateApproximateBlockHeight(
-						textElementOneLineMobile,
-						true,
-					),
-				).toEqual(textLineHeight + margin + defaultBlockSpacing);
-				expect(
-					calculateApproximateBlockHeight(
-						textElementTwoLinesMobile,
-						true,
-					),
-				).toEqual(2 * textLineHeight + margin + defaultBlockSpacing);
-			});
-
-			it('should return the correct height when there are multiple elements', () => {
-				expect(
-					calculateApproximateBlockHeight(multipleTextElements, true),
-				).toEqual(
-					2 * textLineHeight + 2 * margin + defaultBlockSpacing,
-				);
-			});
-		});
+			},
+		);
 	});
 
 	describe('youtube block elements', () => {
-		describe('desktop', () => {
-			it('should return the correct height', () => {
-				const heightExcludingText = 350;
+		it.each([
+			['mobile', 195],
+			['desktop', 350],
+		])(
+			'should return the correct height on %s',
+			(screenSize, heightExcludingText) => {
+				const isMobile = screenSize === 'mobile';
 				const margin = 12;
 
 				expect(
-					calculateApproximateBlockHeight(youtubeElement, false),
+					calculateApproximateBlockHeight(youtubeElement, isMobile),
 				).toEqual(heightExcludingText + margin + defaultBlockSpacing);
-			});
-		});
-		describe('mobile', () => {
-			it('should return the correct height', () => {
-				const heightExcludingText = 195;
-				const margin = 12;
-
-				expect(
-					calculateApproximateBlockHeight(youtubeElement, true),
-				).toEqual(heightExcludingText + margin + defaultBlockSpacing);
-			});
-		});
+			},
+		);
 	});
 });
 
 describe('shouldDisplayAd', () => {
-	it('should NOT display an ad if this is the final block', () => {
-		const block = 5;
-		const totalBlocks = 5;
-		const numAdsInserted = 1;
-		const numPixelsWithoutAdvert = 5000;
+	describe('The final block of content', () => {
+		it.each(['mobile', 'desktop'])(
+			'should NOT display an ad if this is the final block on %s',
+			(screenSize) => {
+				const isMobile = screenSize === 'mobile';
 
-		const result = shouldDisplayAd(
-			block,
-			totalBlocks,
-			numAdsInserted,
-			numPixelsWithoutAdvert,
-			false,
+				const block = 5;
+				const totalBlocks = 5;
+				const numAdsInserted = 1;
+				const numPixelsWithoutAdvert = 5000;
+
+				const result = shouldDisplayAd(
+					block,
+					totalBlocks,
+					numAdsInserted,
+					numPixelsWithoutAdvert,
+					isMobile,
+				);
+
+				expect(result).toBeFalsy();
+			},
 		);
-
-		expect(result).toBeFalsy();
 	});
 
-	it('should NOT insert another ad slot if we have reached the limit.', () => {
-		const block = 5;
-		const totalBlocks = 10;
-		const numAdsInserted = 8;
-		const numPixelsWithoutAdvert = 5000;
+	describe('Reaching the ad limit', () => {
+		it.each(['mobile', 'desktop'])(
+			'should NOT insert another ad slot if we have reached the limit on %s.',
+			(screenSize) => {
+				const isMobile = screenSize === 'mobile';
+				const block = 5;
+				const totalBlocks = 10;
+				const numAdsInserted = 8;
+				const numPixelsWithoutAdvert = 5000;
 
-		const resultDesktop = shouldDisplayAd(
-			block,
-			totalBlocks,
-			numAdsInserted,
-			numPixelsWithoutAdvert,
-			false,
-		);
-		const resultMobile = shouldDisplayAd(
-			block,
-			totalBlocks,
-			numAdsInserted,
-			numPixelsWithoutAdvert,
-			true,
-		);
+				const result = shouldDisplayAd(
+					block,
+					totalBlocks,
+					numAdsInserted,
+					numPixelsWithoutAdvert,
+					isMobile,
+				);
 
-		expect(resultDesktop).toBeFalsy();
-		expect(resultMobile).toBeFalsy();
+				expect(result).toBeFalsy();
+			},
+		);
 	});
 
 	describe('inserting the first ad slot', () => {
-		it('should display ad if this is the first block', () => {
-			const block = 1;
-			const totalBlocks = 10;
-			const numAdsInserted = 0;
-			const numPixelsWithoutAdvert = 550;
+		it.each(['mobile', 'desktop'])(
+			'should display ad if this is the first block on %s.',
+			(screenSize) => {
+				const isMobile = screenSize === 'mobile';
+				const block = 1;
+				const totalBlocks = 10;
+				const numAdsInserted = 0;
+				const numPixelsWithoutAdvert = 550;
 
-			const resultDesktop = shouldDisplayAd(
-				block,
-				totalBlocks,
-				numAdsInserted,
-				numPixelsWithoutAdvert,
-				false,
-			);
-			const resultMobile = shouldDisplayAd(
-				block,
-				totalBlocks,
-				numAdsInserted,
-				numPixelsWithoutAdvert,
-				false,
-			);
+				const result = shouldDisplayAd(
+					block,
+					totalBlocks,
+					numAdsInserted,
+					numPixelsWithoutAdvert,
+					isMobile,
+				);
 
-			expect(resultDesktop).toBeTruthy();
-			expect(resultMobile).toBeTruthy();
-		});
+				expect(result).toBeTruthy();
+			},
+		);
 	});
 
 	describe('inserting further ad slots', () => {
-		describe('desktop', () => {
-			it('should display ad if number of pixels without an ad is more than 1500', () => {
+		it.each([
+			[1200, 'mobile'],
+			[1500, 'desktop'],
+		])(
+			'should display ad if number of pixels without an ad is more than %s on %s',
+			(pixels, screenSize) => {
+				const isMobile = screenSize === 'mobile';
 				const block = 5;
 				const totalBlocks = 10;
 				const numAdsInserted = 1;
-				const numPixelsWithoutAdvert = 1550;
+				const numPixelsWithoutAdvert = pixels + 50;
 
 				const result = shouldDisplayAd(
 					block,
 					totalBlocks,
 					numAdsInserted,
 					numPixelsWithoutAdvert,
-					false,
+					isMobile,
 				);
 
 				expect(result).toBeTruthy();
-			});
+			},
+		);
 
-			it('should NOT display ad if number of pixels without an ad is less than 1500', () => {
+		it.each([
+			[1200, 'mobile'],
+			[1500, 'desktop'],
+		])(
+			'should NOT display ad if number of pixels without an ad is less than %s on %s',
+			(pixels, screenSize) => {
+				const isMobile = screenSize === 'mobile';
 				const block = 5;
 				const totalBlocks = 10;
 				const numAdsInserted = 1;
-				const numPixelsWithoutAdvert = 1450;
+				const numPixelsWithoutAdvert = pixels - 50;
 
 				const result = shouldDisplayAd(
 					block,
 					totalBlocks,
 					numAdsInserted,
 					numPixelsWithoutAdvert,
-					false,
+					isMobile,
 				);
 
 				expect(result).toBeFalsy();
-			});
-		});
-		describe('mobile', () => {
-			it('should display ad if number of pixels without an ad is more than 1200', () => {
-				const block = 5;
-				const totalBlocks = 10;
-				const numAdsInserted = 1;
-				const numPixelsWithoutAdvert = 1250;
-
-				const result = shouldDisplayAd(
-					block,
-					totalBlocks,
-					numAdsInserted,
-					numPixelsWithoutAdvert,
-					true,
-				);
-
-				expect(result).toBeTruthy();
-			});
-
-			it('should NOT display ad if number of pixels without an ad is less than 1200', () => {
-				const block = 5;
-				const totalBlocks = 10;
-				const numAdsInserted = 1;
-				const numPixelsWithoutAdvert = 1150;
-
-				const result = shouldDisplayAd(
-					block,
-					totalBlocks,
-					numAdsInserted,
-					numPixelsWithoutAdvert,
-					true,
-				);
-
-				expect(result).toBeFalsy();
-			});
-		});
+			},
+		);
 	});
 });
