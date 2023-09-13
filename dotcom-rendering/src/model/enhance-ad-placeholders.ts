@@ -1,11 +1,5 @@
 import type { AdPlaceholderSlot, FEElement } from '../types/content';
 
-type ReducerAccumulator = {
-	elements: FEElement[];
-	paragraphCounter: number;
-	numberOfAdsInserted: number;
-};
-
 /**
  * Positioning rules:
  *
@@ -15,8 +9,8 @@ type ReducerAccumulator = {
  * - Last paragraph should not be followed by an ad
  */
 const isSuitablePosition = (
-	paragraphIdx: number,
-	numAdsInserted: number,
+	paragraphCounter: number,
+	numberOfAdsInserted: number,
 	isLastElement: boolean,
 ): boolean => {
 	// Rules for ad placement
@@ -25,7 +19,7 @@ const isSuitablePosition = (
 	const maxAds = 15;
 
 	// Don't insert more than `maxAds` ads
-	if (numAdsInserted >= maxAds) {
+	if (numberOfAdsInserted >= maxAds) {
 		return false;
 	}
 
@@ -34,9 +28,9 @@ const isSuitablePosition = (
 		return false;
 	}
 
-	// We want to insert an ad placeholder every `adEveryNParagraphs`
-	// paragraphs, starting from the paragraph at `firstAdIndex`
-	return (paragraphIdx - firstAdIndex) % adEveryNParagraphs === 0;
+	// Insert an ad placeholder every `adEveryNParagraphs` paragraphs,
+	// starting from the paragraph at `firstAdIndex`
+	return (paragraphCounter - firstAdIndex) % adEveryNParagraphs === 0;
 };
 
 const isParagraph = (element: FEElement) =>
@@ -54,11 +48,17 @@ const insertPlaceholder = (
 	return [...elements, placeholder];
 };
 
+type ReducerAccumulator = {
+	elements: FEElement[];
+	paragraphCounter: number;
+	numberOfAdsInserted: number;
+};
+
 /**
  * Inserts advert placeholders
  */
 const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
-	const elementsWithAds = elements.reduce(
+	const elementsWithReducerContext = elements.reduce(
 		(
 			prev: ReducerAccumulator,
 			currentElement: FEElement,
@@ -84,6 +84,7 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 					: prev.numberOfAdsInserted,
 			};
 		},
+		// Initial value for reducer function
 		{
 			elements: [],
 			paragraphCounter: 0,
@@ -91,7 +92,7 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 		},
 	);
 
-	return elementsWithAds.elements;
+	return elementsWithReducerContext.elements;
 };
 
 export const enhanceAdPlaceholders = (blocks: Block[]): Block[] =>
