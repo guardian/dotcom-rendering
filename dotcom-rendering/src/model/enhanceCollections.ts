@@ -107,6 +107,7 @@ export const enhanceCollections = ({
 				allCards.length,
 				allBranding,
 				editionHasBranding,
+				collectionType,
 			),
 			grouped: groupCards(
 				collectionType,
