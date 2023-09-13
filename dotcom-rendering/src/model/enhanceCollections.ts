@@ -7,8 +7,8 @@ import type {
 	FEFrontCard,
 } from '../types/front';
 import { decideEditorialBadge, decidePaidContentBadge } from './decideBadge';
-import { decideCollectionBranding } from './decideCollectionBranding';
 import { decideContainerPalette } from './decideContainerPalette';
+import { decideSponsoredContentBranding } from './decideSponsoredContentBranding';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
@@ -50,17 +50,17 @@ export const enhanceCollections = ({
 	editionId,
 	pageId,
 	discussionApiUrl,
+	editionHasBranding,
 	onPageDescription,
 	isPaidContent,
-	isEditionBranded,
 }: {
 	collections: FECollectionType[];
 	editionId: EditionId;
 	pageId: string;
 	discussionApiUrl: string;
+	editionHasBranding: boolean;
 	onPageDescription?: string;
 	isPaidContent?: boolean;
-	isEditionBranded?: boolean;
 }): DCRCollectionType[] => {
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
@@ -103,6 +103,11 @@ export const enhanceCollections = ({
 					? allBranding
 					: undefined,
 			),
+			sponsoredContentBranding: decideSponsoredContentBranding(
+				allCards.length,
+				allBranding,
+				editionHasBranding,
+			),
 			grouped: groupCards(
 				collectionType,
 				collection.curated,
@@ -134,9 +139,6 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
-			sponsoredContentBranding: isEditionBranded
-				? decideCollectionBranding(allCards.length, allBranding)
-				: undefined,
 		};
 	});
 };

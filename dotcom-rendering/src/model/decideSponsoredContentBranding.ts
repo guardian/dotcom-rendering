@@ -1,8 +1,9 @@
 import type { Branding } from '../types/branding';
 
-export const decideCollectionBranding = (
+export const decideSponsoredContentBranding = (
 	collectionsLength: number,
 	allCardsBranding: Branding[],
+	editionHasBranding: boolean,
 ): Branding | undefined => {
 	const allCardsHaveBranding = collectionsLength === allCardsBranding.length;
 
@@ -19,7 +20,9 @@ export const decideCollectionBranding = (
 		);
 
 	const shouldHaveSponsorBranding =
-		allCardsHaveSponsoredBranding && allCardsHaveTheSameSponsor;
+		editionHasBranding &&
+		allCardsHaveSponsoredBranding &&
+		allCardsHaveTheSameSponsor;
 
 	return shouldHaveSponsorBranding ? allCardsBranding[0] : undefined;
 };

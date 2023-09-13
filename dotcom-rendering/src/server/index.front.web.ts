@@ -18,7 +18,7 @@ import { renderFront, renderTagFront } from './render.front.web';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
-	const isEditionBranded =
+	const editionHasBranding = () =>
 		!!data.pressedPage.frontProperties.commercial.editionBrandings.find(
 			(editionBranding) =>
 				editionBranding.edition.id === data.editionId &&
@@ -40,7 +40,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 					data.pressedPage.frontProperties.onPageDescription,
 				isPaidContent: data.config.isPaidContent,
 				discussionApiUrl: data.config.discussionApiUrl,
-				isEditionBranded,
+				editionHasBranding: editionHasBranding(),
 			}),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
