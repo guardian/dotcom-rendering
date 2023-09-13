@@ -472,7 +472,9 @@ export const renderElement = ({
 				</InlineSkipToWrapper>
 			);
 		case 'model.dotcomrendering.pageElements.AdPlaceholderSlot':
-			return <p>I am an advert placeholder</p>;
+			// TODO - include ad placeholder slot component
+			// @see https://github.com/guardian/dotcom-rendering/pull/8808
+			return <></>;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent
