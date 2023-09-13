@@ -46,11 +46,7 @@ class BlockEnhancer {
 	}
 
 	enhanceAdPlaceholders() {
-		if (
-			this.renderingTarget === 'Apps' &&
-			!(this.format.design === 'LiveBlogDesign') &&
-			!(this.format.design === 'DeadBlogDesign')
-		) {
+		if (this.renderingTarget === 'Apps') {
 			this.blocks = enhanceAdPlaceholders(this.blocks);
 		}
 		return this;

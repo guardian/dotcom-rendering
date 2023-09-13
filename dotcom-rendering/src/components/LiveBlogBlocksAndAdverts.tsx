@@ -3,7 +3,9 @@ import {
 	shouldDisplayAd,
 } from '../lib/liveblogAdSlots';
 import type { Switches } from '../types/config';
+import { AdPlaceholderSlot } from './AdPlaceholderSlot.apps';
 import { AdSlot } from './AdSlot';
+import { useConfig } from './ConfigContext';
 import { LiveBlock } from './LiveBlock';
 
 type Props = {
@@ -35,6 +37,8 @@ export const LiveBlogBlocksAndAdverts = ({
 	isLiveUpdate,
 	isInLiveblogAdSlotTest = false,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+
 	if (!isInLiveblogAdSlotTest) {
 		return (
 			<>
@@ -99,12 +103,18 @@ export const LiveBlogBlocksAndAdverts = ({
 							isPinnedPost={false}
 							pinnedPostId={pinnedPost?.id}
 						/>
-						{willDisplayAdAfterBlock && (
-							<AdSlot
-								position="liveblog-inline"
-								index={numAdvertsInserted}
-							/>
-						)}
+						{willDisplayAdAfterBlock &&
+							(renderingTarget === 'Apps' ? (
+								<AdPlaceholderSlot
+									isHidden={false}
+									isSquare={false}
+								/>
+							) : (
+								<AdSlot
+									position="liveblog-inline"
+									index={numAdvertsInserted}
+								/>
+							))}
 					</>
 				);
 			})}
