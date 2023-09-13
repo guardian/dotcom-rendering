@@ -1,4 +1,5 @@
 import type { Newsletter } from '../types/content';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDividers } from './enhance-dividers';
@@ -17,11 +18,19 @@ class BlockEnhancer {
 
 	format: FEFormat;
 
+	renderingTarget: RenderingTarget;
+
 	options: Options;
 
-	constructor(blocks: Block[], format: FEFormat, options: Options) {
+	constructor(
+		blocks: Block[],
+		format: FEFormat,
+		renderingTarget: RenderingTarget,
+		options: Options,
+	) {
 		this.blocks = blocks;
 		this.format = format;
+		this.renderingTarget = renderingTarget;
 		this.options = options;
 	}
 
@@ -38,6 +47,7 @@ class BlockEnhancer {
 
 	enhanceAdPlaceholders() {
 		if (
+			this.renderingTarget === 'Apps' &&
 			!(this.format.design === 'LiveBlogDesign') &&
 			!(this.format.design === 'DeadBlogDesign')
 		) {
@@ -96,21 +106,21 @@ type Options = {
 	promotedNewsletter: Newsletter | undefined;
 };
 
-// TODO - add consideration of rendering target / platform
-// so that we can add app-only enhancers
-
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
 // example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
 // as they both effect SubheadingBlockElement
 export const enhanceBlocks = (
 	blocks: Block[],
 	format: FEFormat,
+	renderingTarget: RenderingTarget,
 	options?: Options,
 ): Block[] => {
 	const { promotedNewsletter } = options ?? {};
 
 	for (const block of blocks) validateAsBlock(block);
-	return new BlockEnhancer(blocks, format, { promotedNewsletter })
+	return new BlockEnhancer(blocks, format, renderingTarget, {
+		promotedNewsletter,
+	})
 		.enhanceDividers()
 		.enhanceH2s()
 		.enhanceInteractiveContentsElements()

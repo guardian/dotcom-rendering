@@ -7,9 +7,7 @@ import { renderArticle } from './render.article.apps';
 export const handleAppsArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'apps');
 
-	// TODO - add renderingTarget so that we can enhance
-	// blocks specifically for Apps
-	const article = enhanceArticleType(body);
+	const article = enhanceArticleType(body, 'Apps');
 	const { html, prefetchScripts } = renderArticle(article);
 
 	// The Android app will cache these assets to enable offline reading
