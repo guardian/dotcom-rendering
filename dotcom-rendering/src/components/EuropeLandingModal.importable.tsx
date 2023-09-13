@@ -40,7 +40,7 @@ const dialogStyles = css`
 	top: 0;
 	position: fixed;
 	border: none;
-    /* We cant use getZIndex() here as this dialog has to overlap content on the page that does not follow our getZIndex standard (thrashers) */
+	/* We cant use getZIndex() here as this dialog has to overlap content on the page that does not follow our getZIndex standard (thrashers) */
 	z-index: 1000;
 	color: ${palette.brand[300]};
 `;
