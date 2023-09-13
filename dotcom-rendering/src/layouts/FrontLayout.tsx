@@ -428,7 +428,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
-					const trailsWithoutBranding = collection.badge
+					const trailsWithoutBranding = collection.paidContentBadge
 						? trails.map((labTrail) => {
 								return {
 									...labTrail,
@@ -597,7 +597,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerName={collection.collectionType}
 									canShowMore={collection.canShowMore}
 									url={collection.href}
-									badge={collection.badge}
+									badge={collection.paidContentBadge}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
 									discussionApiUrl={
@@ -748,7 +748,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection,
 									hasPageSkin,
 								)}
-								badge={collection.badge}
+								badge={collection.editorialBadge}
 								sectionId={ophanName}
 								collectionId={collection.id}
 								pageId={front.pressedPage.id}
@@ -766,7 +766,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								frontEditionBranding={frontEditionBranding}
 								discussionApiUrl={front.config.discussionApiUrl}
 								containerSponsorBranding={
-									collection.collectionBranding
+									collection.sponsoredContentBranding
 								}
 							>
 								<DecideContainer
