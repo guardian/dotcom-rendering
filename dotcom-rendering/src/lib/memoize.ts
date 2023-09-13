@@ -1,17 +1,15 @@
 /**
- * Cache the results of calling a function with string keys
+ * Cache the results of calling an expensive function
  */
-export const memoize = <T>(f: (key: string) => T): ((key: string) => T) => {
-	const cache: {
-		[key: string]: T;
-	} = {};
-	return (key: string): T => {
-		const memoized = cache[key];
+export const memoize = <K, V>(f: (key: K) => V): ((key: K) => V) => {
+	const cache: Map<K, V> = new Map();
+	return (key: K): V => {
+		const memoized = cache.get(key);
 		if (memoized !== undefined) {
 			return memoized;
 		}
-		const v = f(key);
-		cache[key] = v;
-		return v;
+		const value = f(key);
+		cache.set(key, value);
+		return value;
 	};
 };
