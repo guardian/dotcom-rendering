@@ -513,14 +513,14 @@ export const FrontSection = ({
 		!!pageId &&
 		!!ajaxUrl;
 
-	const frontHasEditorialOrDesignBadge =
-		!isOnPaidContentFront && containerBranding === undefined;
+	const frontHasEditorialOrDesignBadge = !!badge;
 
 	// Only show the badge with a "Paid for by" label on the FIRST card of a paid front, aka as Labs front.
-	const isTheFirstContainerOnAPaidFront = isOnPaidContentFront && index === 0;
+	const isTheFirstContainerOnAPaidFront =
+		isOnPaidContentFront && index === 0 && !!frontBranding;
 
-	const hasFrontBranding =
-		!isOnPaidContentFront && !!frontBranding && index === 0;
+	const isTheFirstContainerOnASponsoredFront =
+		!isOnPaidContentFront && index === 0 && !!frontBranding;
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -582,7 +582,7 @@ export const FrontSection = ({
 							showDateHeader={showDateHeader}
 							editionId={editionId}
 						/>
-						{badge && (
+						{!!frontBranding?.branding?.logo.src && (
 							<div
 								css={css`
 									display: inline-block;
@@ -599,8 +599,8 @@ export const FrontSection = ({
 							>
 								Paid for by
 								<Badge
-									imageSrc={badge.imageSrc}
-									href={badge.href}
+									imageSrc={frontBranding?.branding?.logo.src}
+									href={frontBranding?.branding?.logo.link}
 								/>
 							</div>
 						)}
@@ -609,23 +609,19 @@ export const FrontSection = ({
 					<>
 						{frontHasEditorialOrDesignBadge && (
 							<Hide until="leftCol">
-								{badge && (
-									<Badge
-										imageSrc={badge.imageSrc}
-										href={badge.href}
-									/>
-								)}
+								<Badge
+									imageSrc={badge.imageSrc}
+									href={badge.href}
+								/>
 							</Hide>
 						)}
 						<div css={titleStyle}>
 							{frontHasEditorialOrDesignBadge && (
 								<Hide from="leftCol">
-									{badge && (
-										<Badge
-											imageSrc={badge.imageSrc}
-											href={badge.href}
-										/>
-									)}
+									<Badge
+										imageSrc={badge.imageSrc}
+										href={badge.href}
+									/>
 								</Hide>
 							)}
 							<ContainerTitle
@@ -637,27 +633,31 @@ export const FrontSection = ({
 								showDateHeader={showDateHeader}
 								editionId={editionId}
 							/>
-							{hasFrontBranding && frontBranding?.branding && (
-								<>
-									<p css={labelStyles}>
-										{frontBranding.branding.logo.label}
-									</p>
-									<Badge
-										imageSrc={
-											frontBranding.branding.logo.src
-										}
-										href={frontBranding.branding.logo.link}
-									/>
-									<a
-										href={
-											frontBranding.branding.aboutThisLink
-										}
-										css={aboutThisLinkStyles}
-									>
-										About this content
-									</a>
-								</>
-							)}
+							{isTheFirstContainerOnASponsoredFront &&
+								frontBranding?.branding && (
+									<>
+										<p css={labelStyles}>
+											{frontBranding.branding.logo.label}
+										</p>
+										<Badge
+											imageSrc={
+												frontBranding.branding.logo.src
+											}
+											href={
+												frontBranding.branding.logo.link
+											}
+										/>
+										<a
+											href={
+												frontBranding.branding
+													.aboutThisLink
+											}
+											css={aboutThisLinkStyles}
+										>
+											About this content
+										</a>
+									</>
+								)}
 
 							{containerBranding && (
 								<>
