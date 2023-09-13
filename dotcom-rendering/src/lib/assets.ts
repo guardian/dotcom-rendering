@@ -8,7 +8,7 @@ import {
 	ophanEsm,
 } from '../../scripts/webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
-import { memoize } from './memoize';
+import { makeMemoizedFunction } from './memoize';
 
 interface AssetHash {
 	[key: string]: string;
@@ -51,7 +51,7 @@ const isAssetHash = (manifest: unknown): manifest is AssetHash =>
 		([key, value]) => isString(key) && isString(value),
 	);
 
-const getManifest = memoize((path: string): AssetHash => {
+const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	try {
 		const assetHash: unknown = JSON.parse(
 			readFileSync(resolve(__dirname, path), { encoding: 'utf-8' }),
