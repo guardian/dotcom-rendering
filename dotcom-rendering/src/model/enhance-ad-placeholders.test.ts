@@ -27,7 +27,7 @@ describe('Enhancing ad placeholders', () => {
 		{ paragraphs: 3, expectedPlaceholders: 0, expectedPositions: [] },
 		{ paragraphs: 6, expectedPlaceholders: 1, expectedPositions: [3] },
 		{ paragraphs: 9, expectedPlaceholders: 1, expectedPositions: [3] },
-		{ paragraphs: 10, expectedPlaceholders: 2, expectedPositions: [3, 9] },
+		{ paragraphs: 11, expectedPlaceholders: 2, expectedPositions: [3, 10] },
 	];
 
 	describe.each(testCases)(
@@ -71,11 +71,18 @@ describe('Enhancing ad placeholders', () => {
 				it(`should insert ad placeholder(s) in the expected positions (${JSON.stringify(
 					expectedPositions,
 				)})`, () => {
-					const firstPlaceholderIdx = outputElements.findIndex(
-						elementIsAdPlaceholder,
+					const indexesOfPlaceholders = outputElements.reduce(
+						(idxs: number[], el: FEElement, idx: number) => {
+							if (elementIsAdPlaceholder(el)) {
+								return [...idxs, idx];
+							} else {
+								return idxs;
+							}
+						},
+						[],
 					);
 
-					expect(firstPlaceholderIdx).toEqual(expectedPositions[0]);
+					expect(indexesOfPlaceholders).toEqual(expectedPositions);
 				});
 			}
 		},
