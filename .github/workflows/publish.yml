@@ -35,7 +35,7 @@ jobs:
       - name: Move compressed DCR server files to rendering/
         run: mv rendering.tar.gz rendering/
 
-      - uses: aws-actions/configure-aws-credentials@v4
+      - uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-region: eu-west-1
           role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
