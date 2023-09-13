@@ -5,6 +5,9 @@ on:
         description: 'Image used by DCR service'
         required: true
         type: string
+    secrets:
+      GU_RIFF_RAFF_ROLE_ARN:
+        required: true
 
 permissions:
   # Allow GitHub to request an OIDC JWT ID token, for exchange with `aws-actions/configure-aws-credentials`
