@@ -74,10 +74,15 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 				elements.length === idx + 1,
 			);
 
+			const currentElements = [...prev.elements, currentElement];
+
 			return {
 				elements: shouldInsertAd
-					? insertPlaceholder(prev.elements, prev.numberOfAdsInserted)
-					: prev.elements,
+					? insertPlaceholder(
+							currentElements,
+							prev.numberOfAdsInserted,
+					  )
+					: currentElements,
 				paragraphCounter,
 				numberOfAdsInserted: shouldInsertAd
 					? prev.numberOfAdsInserted + 1

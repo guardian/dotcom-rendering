@@ -71,7 +71,6 @@ describe('Enhancing ad placeholders', () => {
 				it(`should insert ad placeholder(s) in the expected positions (${JSON.stringify(
 					expectedPositions,
 				)})`, () => {
-					console.log({ outputElements });
 					const firstPlaceholderIdx = outputElements.findIndex(
 						elementIsAdPlaceholder,
 					);
