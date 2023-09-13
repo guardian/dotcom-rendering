@@ -8,10 +8,13 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
+import { useEffect, useRef } from 'react';
 
 interface Props {
 	isHidden: boolean;
 	isSquare: boolean;
+	index: number;
+	setAdPlaceholders: any;
 }
 
 const adHeight = '258px';
@@ -91,13 +94,29 @@ const styles = css`
 	}
 `;
 
-export const AdPlaceholderSlot = ({ isHidden, isSquare }: Props) => {
+export const AdPlaceholderSlot = ({
+	isHidden,
+	isSquare,
+	index,
+	setAdPlaceholders,
+}: Props) => {
+	const placeholderRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(
+		() => setAdPlaceholders(index, placeholderRef),
+		[index, setAdPlaceholders],
+	);
+
 	return (
 		<aside css={[styles, isHidden && hiddenStyles]}>
 			<div css={adLabelsStyles}>
 				<p>Advertisement</p>
 			</div>
-			<div css={isSquare ? adSlotSquareStyles : adSlotStyles}>
+			<div
+				css={isSquare ? adSlotSquareStyles : adSlotStyles}
+				ref={placeholderRef}
+				id={`placeholder-${index}`}
+			>
 				<p>I am an ad placeholder slot</p>
 			</div>
 			<div css={supportBannerStyles}>
