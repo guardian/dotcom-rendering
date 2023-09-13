@@ -19,7 +19,7 @@ import {
 	signInLink,
 } from './shared';
 
-export const SignInGateCopyTestJan2023 = ({
+export const SignInGateCopyTestRepeatSept2023 = ({
 	signInUrl,
 	registerUrl,
 	guUrl,
