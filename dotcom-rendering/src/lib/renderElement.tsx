@@ -18,14 +18,13 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import { EmailSignup } from '../components/EmailSignup';
+import { EmailSignUpSwitcher } from '../components/EmailSignUpSwitcher';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
-import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
@@ -454,23 +453,17 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
-			return (
-				<InlineSkipToWrapper
-					id={`EmailSignup-skip-link-${index}`}
-					blockDescription="newsletter promotion"
-				>
-					<EmailSignup
-						identityName={element.newsletter.identityName}
-						description={element.newsletter.description}
-						name={element.newsletter.name}
-						frequency={element.newsletter.frequency}
-						successDescription={
-							element.newsletter.successDescription
-						}
-						theme={element.newsletter.theme}
-					/>
-				</InlineSkipToWrapper>
-			);
+			const emailSignUpProps = {
+				index,
+				identityName: element.newsletter.identityName,
+				description: element.newsletter.description,
+				name: element.newsletter.name,
+				frequency: element.newsletter.frequency,
+				successDescription: element.newsletter.successDescription,
+				theme: element.newsletter.theme,
+			};
+
+			return <EmailSignUpSwitcher {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderSlot':
 			// TODO - include ad placeholder slot component
 			// @see https://github.com/guardian/dotcom-rendering/pull/8808
