@@ -17,14 +17,15 @@ permissions:
 jobs:
   riffraff:
     runs-on: ubuntu-latest
-    container:
-      image: ${{ inputs.container-image }}
 
     steps:
-      # for some reason the ${{ github.workspace }} does not point to the correct workspace folder,
-      # we hardcode the /__w/dotcom-rendering/dotcom-rendering path to fix that.
+      # Annoyingly we can't _easily_ access an Images filesystem without creating a container from the image.
+      # we don't necessarily have to start the container, but we do need to create it.
+      - name: Create DCR Container
+        id: create-container
+        run: echo "CONTAINER_ID=$(docker create ${{ inputs.container-image }})" >> "$GITHUB_OUTPUT"
       - name: Move container files into GHA Workspace
-        run: mkdir -p ${{ github.workspace }} && mv /opt/app/dotcom-rendering/dotcom-rendering/*  /__w/dotcom-rendering/dotcom-rendering
+        run: docker cp ${{ steps.create-container.outputs.CONTAINER_ID }}:/opt/app/dotcom-rendering/dotcom-rendering/. ${{ github.workspace }}
       # We want to avoid uploading the uncompressed files to our riffraff bucket
       # so we create our tarball outside the rendering/ folder, then delete the contents of rendering/
       # and finally move the tarball into rendering
