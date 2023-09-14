@@ -17,6 +17,7 @@ import { AdSlot } from '../components/AdSlot';
 import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
+import { EuropeLandingModal } from '../components/EuropeLandingModal.importable';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import { FrontSection } from '../components/FrontSection';
@@ -213,7 +214,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		},
 	} = front;
 
-	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
+	const isInEuropeTest =
+		abTests.europeNetworkFrontVariant === 'variant' ||
+		switches['europeNetworkFrontSwitch'] === true;
 
 	const isInNetworkFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
@@ -397,7 +400,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-
+			{isInEuropeTest && (
+				<Island clientOnly={true}>
+					<EuropeLandingModal edition={front.editionId} />
+				</Island>
+			)}
 			<main
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
@@ -426,7 +433,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
-					const trailsWithoutBranding = collection.badge
+					const trailsWithoutBranding = collection.paidContentBadge
 						? trails.map((labTrail) => {
 								return {
 									...labTrail,
@@ -595,7 +602,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerName={collection.collectionType}
 									canShowMore={collection.canShowMore}
 									url={collection.href}
-									badge={collection.badge}
+									badge={collection.paidContentBadge}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
 									discussionApiUrl={
@@ -746,7 +753,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection,
 									hasPageSkin,
 								)}
-								badge={collection.badge}
+								badge={collection.editorialBadge}
 								sectionId={ophanName}
 								collectionId={collection.id}
 								pageId={front.pressedPage.id}
@@ -764,7 +771,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								frontEditionBranding={frontEditionBranding}
 								discussionApiUrl={front.config.discussionApiUrl}
 								containerSponsorBranding={
-									collection.collectionBranding
+									collection.sponsoredContentBranding
 								}
 							>
 								<DecideContainer

@@ -6,7 +6,7 @@ import type {
 	FECollectionType,
 	FEFrontCard,
 } from '../types/front';
-import { decideBadge } from './decideBadge';
+import { decideEditorialBadge, decidePaidContentBadge } from './decideBadge';
 import { decideCollectionBranding } from './decideCollectionBranding';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
@@ -94,8 +94,8 @@ export const enhanceCollections = ({
 			collectionType,
 			href,
 			containerPalette,
-			badge: decideBadge(
-				collection.config.href,
+			editorialBadge: decideEditorialBadge(collection.config.href),
+			paidContentBadge: decidePaidContentBadge(
 				// We only try to use a branded badge for paid content
 				isCollectionPaidContent && allCardsHaveBranding
 					? allBranding
@@ -132,7 +132,10 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
-			collectionBranding: decideCollectionBranding(allCards, editionId),
+			sponsoredContentBranding: decideCollectionBranding(
+				allCards.length,
+				allBranding,
+			),
 		};
 	});
 };
