@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { OphanComponent, OphanComponentEvent } from '@guardian/libs';
 import { getCookie, setCookie } from '@guardian/libs';
 import {
 	body,
@@ -14,9 +15,11 @@ import {
 	SvgCross,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 import { guard } from '../lib/guard';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useOnce } from '../lib/useOnce';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
@@ -179,11 +182,27 @@ interface Props {
 }
 export const EuropeLandingModal = ({ edition }: Props) => {
 	const editionCookie = getCookie({ name: 'GU_EDITION' });
+	const geoCountryCookie = getCookie({ name: 'GU_geo_country' });
 	const modalType = getModalType();
 	const [switchEdition, setSwitchEdition] = useState(false);
 	const [selectedEdition, setSelectedEdition] = useState<EditionId>(
 		isValidEdition(editionCookie) ? editionCookie : edition,
 	);
+
+	const component: OphanComponent = {
+		componentType: 'CARD',
+		id: 'DCR European landing modal',
+	};
+
+	const componentEvent: OphanComponentEvent = {
+		action: 'VIEW',
+		component,
+		value: JSON.stringify({
+			modalType,
+			editionCookie,
+			geoCountryCookie,
+		}),
+	};
 
 	useOnce(() => {
 		const europeModal = document.getElementById('europe-modal-dialog');
@@ -195,6 +214,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			editionCookie !== 'EUR'
 		) {
 			localStorage.setItem(modalShownKey, 'true');
+			submitComponentEvent(componentEvent);
 			europeModal.showModal();
 			europeModal.addEventListener('close', () => {
 				hideModal();
@@ -255,6 +275,11 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 						<div css={buttonDivStyles}>
 							{modalType === 'ModalSwitched' && (
 								<Button
+									data-link-name={nestedOphanComponents(
+										'eu-modal',
+										'switched',
+										'ok-thanks',
+									)}
 									size={'small'}
 									onClick={() => {
 										dismissModal();
@@ -266,6 +291,11 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							)}
 							{modalType === 'ModalDoYouWantToSwitch' && (
 								<Button
+									data-link-name={nestedOphanComponents(
+										'eu-modal',
+										'not-switched',
+										'no-thanks',
+									)}
 									size={'small'}
 									onClick={() => dismissModal()}
 									cssOverrides={OKButtonStyles}
@@ -275,6 +305,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 								</Button>
 							)}
 							<Button
+								data-link-name={nestedOphanComponents(
+									'eu-modal',
+									modalType === 'ModalSwitched'
+										? 'switched'
+										: 'not-switched',
+									'switch-edition',
+								)}
 								size={'small'}
 								priority={'subdued'}
 								onClick={() => setSwitchEdition(true)}
@@ -323,6 +360,11 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 						/>
 					</RadioGroup>
 					<Button
+						data-link-name={nestedOphanComponents(
+							'eu-modal',
+							'switch-edition',
+							'confirm-' + selectedEdition,
+						)}
 						size={'small'}
 						onClick={() => confirmNewEdition(selectedEdition)}
 					>
@@ -332,6 +374,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			)}
 			{switchEdition && (
 				<Button
+					data-link-name={nestedOphanComponents(
+						'eu-modal',
+						modalType === 'ModalSwitched'
+							? 'switched'
+							: 'not-switched',
+						'close',
+					)}
 					aria-label={'close modal'}
 					size={'small'}
 					cssOverrides={closeButtonStyles}
