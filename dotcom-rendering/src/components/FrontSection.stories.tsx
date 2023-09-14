@@ -246,17 +246,36 @@ TreatsStory.storyName = 'with treats and date header';
  * Note only the first container should show a badge
  */
 export const MultipleOnAPaidFront = () => {
+	const frontBranding = {
+		edition: {
+			id: 'UK',
+		},
+		branding: {
+			brandingType: {
+				name: 'paid-content',
+			},
+			sponsorName: 'Grounded',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
+				dimensions: {
+					width: 140,
+					height: 90,
+				},
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	};
+
 	return (
 		<>
 			<FrontSection
 				title="Section one"
 				isOnPaidContentFront={true}
 				index={0}
-				badge={{
-					imageSrc:
-						'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
-					href: '/',
-				}}
+				frontBranding={frontBranding}
 				discussionApiUrl={discussionApiUrl}
 			>
 				<Placeholder />
@@ -265,11 +284,7 @@ export const MultipleOnAPaidFront = () => {
 				title="Section two"
 				isOnPaidContentFront={true}
 				index={1}
-				badge={{
-					imageSrc:
-						'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
-					href: '/',
-				}}
+				frontBranding={frontBranding}
 				discussionApiUrl={discussionApiUrl}
 			>
 				<Placeholder />
