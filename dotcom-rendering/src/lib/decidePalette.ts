@@ -2243,6 +2243,27 @@ const backgroundSubmeta = (format: ArticleFormat) => {
 	return neutral[100];
 };
 
+const textYoutubeOverlayKicker = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return news[400];
+		case Pillar.Opinion:
+			return news[400];
+		case Pillar.Sport:
+			return sport[400];
+		case Pillar.Culture:
+			return culture[400];
+		case Pillar.Lifestyle:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
 const backgroundDynamoSublink = (_format: ArticleFormat): string =>
 	palette.neutral[97];
 
@@ -2319,6 +2340,7 @@ export const decidePalette = (
 			expandableAtom: textExpandableAtom(format),
 			expandableAtomHover: textExpandableAtomHover(format),
 			subNavLink: textSubNavLink(format),
+			youtubeOverlayKicker: textYoutubeOverlayKicker(format),
 		},
 		background: {
 			article: backgroundArticle(format),
