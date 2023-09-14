@@ -42,4 +42,4 @@ jobs:
     with:
       container-image: ${{ needs.container.outputs.container-image }}
     secrets:
-      GU_RIFF_RAFF_ROLE_ARN: ${ secrets.GU_RIFF_RAFF_ROLE_ARN }
+      GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
