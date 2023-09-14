@@ -8,14 +8,12 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { useEffect, useRef } from 'react';
+import { forwardRef } from 'react';
 
-type AdSlotRef = React.RefObject<HTMLDivElement>;
 interface Props {
 	isHidden: boolean;
 	isSquare: boolean;
 	index: number;
-	setAdPlaceholders: (n: [number, AdSlotRef]) => void;
 }
 
 const adHeight = '258px';
@@ -95,33 +93,23 @@ const styles = css`
 	}
 `;
 
-export const AdPlaceholderSlot = ({
+export const AdPlaceholderSlot = forwardRef<HTMLDivElement, Props>(({
 	isHidden,
 	isSquare,
 	index,
-	setAdPlaceholders,
-}: Props) => {
-	const placeholderRef = useRef<HTMLDivElement | null>(null);
-	useEffect(() => {
-		if (placeholderRef !== null) {
-			setAdPlaceholders([index, placeholderRef]);
-		}
-	}, [placeholderRef]);
-
-	return (
-		<aside css={[styles, isHidden && hiddenStyles]}>
-			<div css={adLabelsStyles}>
-				<p>Advertisement</p>
-			</div>
-			<div
-				css={isSquare ? adSlotSquareStyles : adSlotStyles}
-				ref={placeholderRef}
-				id={`placeholder-${index}`}
-			></div>
-			<div css={supportBannerStyles}>
-				<p>Support the Guardian and enjoy the app ad-free.</p>
-				<button>Support the Guardian</button>
-			</div>
-		</aside>
-	);
-};
+}, ref) => (
+	<aside css={[styles, isHidden && hiddenStyles]}>
+		<div css={adLabelsStyles}>
+			<p>Advertisement</p>
+		</div>
+		<div
+			css={isSquare ? adSlotSquareStyles : adSlotStyles}
+			ref={ref}
+			id={`placeholder-${index}`}
+		></div>
+		<div css={supportBannerStyles}>
+			<p>Support the Guardian and enjoy the app ad-free.</p>
+			<button>Support the Guardian</button>
+		</div>
+	</aside>
+));
