@@ -17,6 +17,7 @@ import { AdSlot } from '../components/AdSlot';
 import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
+import { EuropeLandingModal } from '../components/EuropeLandingModal.importable';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import { FrontSection } from '../components/FrontSection';
@@ -36,7 +37,10 @@ import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { frontsBannerAdSections } from '../lib/frontsBannerAbTestAdPositions';
+import {
+	networkFrontsBannerAdCollections,
+	sectionFrontsBannerAdCollections,
+} from '../lib/frontsBannerAbTestAdPositions';
 import {
 	getDesktopAdPositions,
 	getMerchHighPosition,
@@ -81,28 +85,39 @@ const isToggleable = (
 export const decideAdSlot = (
 	renderAds: boolean,
 	index: number,
-	isNetworkFront: boolean | undefined,
 	collectionCount: number,
 	isPaidContent: boolean | undefined,
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
-	isInFrontsBannerTest?: boolean,
+	isInNetworkFrontsBannerTest?: boolean,
+	isInSectionFrontsBannerTest?: boolean,
 ) => {
 	if (!renderAds) return null;
 
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
 		collectionCount > minContainers &&
-		index === getMerchHighPosition(collectionCount) &&
-		!(isInFrontsBannerTest && isNetworkFront)
+		index === getMerchHighPosition(collectionCount)
 	) {
-		return (
-			<AdSlot
-				data-print-layout="hide"
-				position="merchandising-high"
-				hasPageskin={hasPageSkin}
-			/>
-		);
+		if (isInNetworkFrontsBannerTest || isInSectionFrontsBannerTest) {
+			return (
+				<Hide from="desktop">
+					<AdSlot
+						data-print-layout="hide"
+						position="merchandising-high"
+						hasPageskin={hasPageSkin}
+					/>
+				</Hide>
+			);
+		} else {
+			return (
+				<AdSlot
+					data-print-layout="hide"
+					position="merchandising-high"
+					hasPageskin={hasPageSkin}
+				/>
+			);
+		}
 	} else if (mobileAdPositions.includes(index)) {
 		return (
 			<Hide from="tablet">
@@ -125,18 +140,14 @@ export const decideAdSlot = (
 export const decideFrontsBannerAdSlot = (
 	renderAds: boolean,
 	hasPageSkin: boolean,
-	isInFrontsBannerTest: boolean,
-	pageId: string,
+	targetedCollections: string[] | undefined,
 	collectionName: string,
 	numBannerAdsInserted: React.MutableRefObject<number>,
 	isFirstContainer: boolean,
 ) => {
-	const targetedSections = frontsBannerAdSections[pageId];
-
 	if (
 		!renderAds ||
-		!isInFrontsBannerTest ||
-		!targetedSections?.includes(collectionName) ||
+		!targetedCollections?.includes(collectionName) ||
 		isFirstContainer
 	) {
 		return null;
@@ -203,16 +214,30 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		},
 	} = front;
 
-	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
+	const isInEuropeTest =
+		abTests.europeNetworkFrontVariant === 'variant' ||
+		switches['europeNetworkFrontSwitch'] === true;
 
-	// For the FrontsBannerAds test, we're not using contentType === "Network Front",
-	// just in case Europe goes live before the testing concludes.
-	// We don't want Europe in this test.
-	const networkFrontPageIds = ['uk', 'us', 'au', 'international'];
-	const isInFrontsBannerTest =
+	const isInNetworkFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
 		abTests.frontsBannerAdsDcrVariant === 'variant' &&
-		networkFrontPageIds.includes(front.config.pageId);
+		Object.keys(networkFrontsBannerAdCollections).includes(
+			front.config.pageId,
+		);
+
+	const isInSectionFrontsBannerTest =
+		!!switches.sectionFrontsBannerAds &&
+		abTests.sectionFrontsBannerAdsVariant === 'variant' &&
+		Object.keys(sectionFrontsBannerAdCollections).includes(
+			front.config.pageId,
+		);
+
+	// This will be the targeted collections, if the current page is in the fronts banner AB test.
+	const frontsBannerTargetedCollections = isInNetworkFrontsBannerTest
+		? networkFrontsBannerAdCollections[front.config.pageId]
+		: isInSectionFrontsBannerTest
+		? sectionFrontsBannerAdCollections[front.config.pageId]
+		: [];
 
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
@@ -232,7 +257,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const numBannerAdsInserted = useRef(0);
 
-	const renderMpuAds = renderAds && !isInFrontsBannerTest;
+	const renderMpuAds =
+		renderAds &&
+		!isInNetworkFrontsBannerTest &&
+		!isInSectionFrontsBannerTest;
 
 	const showMostPopular =
 		front.config.switches.deeplyRead &&
@@ -372,7 +400,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-
+			{isInEuropeTest && (
+				<Island clientOnly={true}>
+					<EuropeLandingModal edition={front.editionId} />
+				</Island>
+			)}
 			<main
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
@@ -401,7 +433,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
-					const trailsWithoutBranding = collection.badge
+					const trailsWithoutBranding = collection.paidContentBadge
 						? trails.map((labTrail) => {
 								return {
 									...labTrail,
@@ -410,7 +442,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						  })
 						: trails;
 
-					const editionBranding =
+					const frontEditionBranding =
 						front.pressedPage.frontProperties.commercial.editionBrandings.find(
 							(eB) =>
 								eB.edition.id === front.editionId &&
@@ -426,8 +458,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									{decideFrontsBannerAdSlot(
 										renderAds,
 										hasPageSkin,
-										isInFrontsBannerTest,
-										front.config.pageId,
+										frontsBannerTargetedCollections,
 										collection.displayName,
 										numBannerAdsInserted,
 										isFirstContainer,
@@ -462,13 +493,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									{decideAdSlot(
 										renderAds,
 										index,
-										front.isNetworkFront,
 										front.pressedPage.collections.length,
 										front.pressedPage.frontProperties
 											.isPaidContent,
 										mobileAdPositions,
 										hasPageSkin,
-										isInFrontsBannerTest,
+										isInNetworkFrontsBannerTest,
+										isInSectionFrontsBannerTest,
 									)}
 								</div>
 							</Fragment>
@@ -488,8 +519,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
-									isInFrontsBannerTest,
-									front.config.pageId,
+									frontsBannerTargetedCollections,
 									collection.displayName,
 									numBannerAdsInserted,
 									isFirstContainer,
@@ -543,13 +573,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideAdSlot(
 									renderAds,
 									index,
-									front.isNetworkFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInFrontsBannerTest,
+									isInNetworkFrontsBannerTest,
+									isInSectionFrontsBannerTest,
 								)}
 							</>
 						);
@@ -572,7 +602,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerName={collection.collectionType}
 									canShowMore={collection.canShowMore}
 									url={collection.href}
-									badge={collection.badge}
+									badge={collection.paidContentBadge}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
 									discussionApiUrl={
@@ -598,13 +628,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideAdSlot(
 									renderAds,
 									index,
-									front.isNetworkFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInFrontsBannerTest,
+									isInNetworkFrontsBannerTest,
+									isInSectionFrontsBannerTest,
 								)}
 							</Fragment>
 						);
@@ -623,8 +653,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
-									isInFrontsBannerTest,
-									front.config.pageId,
+									frontsBannerTargetedCollections,
 									collection.displayName,
 									numBannerAdsInserted,
 									isFirstContainer,
@@ -679,13 +708,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideAdSlot(
 									renderAds,
 									index,
-									front.isNetworkFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInFrontsBannerTest,
+									isInNetworkFrontsBannerTest,
+									isInSectionFrontsBannerTest,
 								)}
 							</Fragment>
 						);
@@ -696,8 +725,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
-								isInFrontsBannerTest,
-								front.config.pageId,
+								frontsBannerTargetedCollections,
 								collection.displayName,
 								numBannerAdsInserted,
 								isFirstContainer,
@@ -725,7 +753,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection,
 									hasPageSkin,
 								)}
-								badge={collection.badge}
+								badge={collection.editorialBadge}
 								sectionId={ophanName}
 								collectionId={collection.id}
 								pageId={front.pressedPage.id}
@@ -740,8 +768,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								index={index}
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
-								editionBranding={editionBranding}
+								frontBranding={frontEditionBranding}
 								discussionApiUrl={front.config.discussionApiUrl}
+								containerBranding={
+									collection.sponsoredContentBranding
+								}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -763,12 +794,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							{decideAdSlot(
 								renderAds,
 								index,
-								front.isNetworkFront,
 								front.pressedPage.collections.length,
 								front.pressedPage.frontProperties.isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
-								isInFrontsBannerTest,
+								isInNetworkFrontsBannerTest,
+								isInSectionFrontsBannerTest,
 							)}
 						</Fragment>
 					);

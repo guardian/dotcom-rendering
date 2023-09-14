@@ -102,6 +102,8 @@ export type Palette = {
 		lightboxDivider: Colour;
 		messageForm: Colour;
 		discussionPillarButton: Colour;
+		subMeta: Colour;
+		dynamoSublink: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -188,6 +190,7 @@ export type ContainerOverrides = {
 		carouselDot: Colour;
 		carouselArrow: Colour;
 		carouselArrowHover: Colour;
+		dynamoSublink: Colour;
 	};
 	topBar?: {
 		card?: Colour;

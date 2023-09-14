@@ -136,13 +136,13 @@ describe('scheduler', () => {
 
 		jest.runAllTimers();
 
-		expect(await featureTask1Result).toBe('feature task 1 result');
+		await expect(featureTask1Result).resolves.toBe('feature task 1 result');
 		expect(featureTask2).not.toHaveBeenCalled();
 		expect(criticalTask).toHaveBeenCalled();
 
 		jest.runAllTimers();
 
-		expect(await criticalTaskResult).toBe('critical task result');
+		await expect(criticalTaskResult).resolves.toBe('critical task result');
 		expect(featureTask2).toHaveBeenCalled();
 
 		jest.runAllTimers();

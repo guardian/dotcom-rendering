@@ -6,7 +6,6 @@ import { getSoleContributor } from '../lib/byline';
 import { decidePalette } from '../lib/decidePalette';
 import TwitterIcon from '../static/icons/twitter.svg';
 import type { Palette } from '../types/palette';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';
 
@@ -96,15 +95,9 @@ type Props = {
 	byline: string;
 	tags: TagType[];
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 };
 
-export const Contributor = ({
-	byline,
-	tags,
-	format,
-	renderingTarget,
-}: Props) => {
+export const Contributor = ({ byline, tags, format }: Props) => {
 	const palette = decidePalette(format);
 
 	const { twitterHandle } = getSoleContributor(tags, byline) ?? {};
@@ -127,12 +120,7 @@ export const Contributor = ({
 						bylineColorStyles(palette, format),
 					]}
 				>
-					<BylineLink
-						byline={byline}
-						tags={tags}
-						format={format}
-						renderingTarget={renderingTarget}
-					/>
+					<BylineLink byline={byline} tags={tags} format={format} />
 				</div>
 			)}
 			{!!twitterHandle && (

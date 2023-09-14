@@ -241,15 +241,14 @@ const frontsBannerAdTopContainerStyles = css`
 `;
 
 const frontsBannerAdContainerStyles = css`
-	max-width: ${breakpoints['wide']}px;
-	/*
-		The following flex settings are to stop the visual effect where the
-		advert renders at the top of the ad slot, then is pushed down 24px to the
-		bottom of the slot when the label renders
-	*/
+	/* Native templates require a width (or min-width) to be explicitly set */
+	width: ${breakpoints['wide']}px;
 	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
+	justify-content: center;
+
+	/* This stops the visual effect where the advert renders at the
+	   top of the ad slot, then is pushed down 24px when the label renders */
+	align-items: flex-end;
 `;
 
 const frontsBannerCollapseStyles = css`
@@ -257,6 +256,7 @@ const frontsBannerCollapseStyles = css`
 `;
 
 const frontsBannerAdStyles = css`
+	position: relative;
 	max-width: ${breakpoints['wide']}px;
 	overflow: hidden;
 	padding-bottom: ${frontsBannerPaddingHeight}px;
@@ -274,16 +274,33 @@ const articleEndAdStyles = css`
 const mostPopAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
-	min-width: 300px;
-	width: 300px;
+	min-width: ${adSizes.mpu.width}px;
+	max-width: ${adSizes.mpu.width}px;
 	margin: 12px auto;
 	text-align: center;
+	${from.tablet} {
+		max-width: 700px;
+	}
 	${from.desktop} {
-		margin: 0;
 		width: auto;
+		max-width: ${adSizes.mpu.width}px;
 	}
 	${from.wide} {
 		margin-top: 25px;
+	}
+`;
+
+const mostPopContainerStyles = css`
+	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-width: ${adSizes.mpu.width}px;
+	width: fit-content;
+	max-width: ${adSizes.mpu.width}px;
+	margin: 0 auto;
+	${from.tablet} {
+		max-width: 700px;
+	}
+	${from.desktop} {
+		max-width: ${adSizes.mpu.width}px;
 	}
 `;
 
@@ -492,7 +509,10 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div
+					className="ad-slot-container"
+					css={[adContainerStyles, mostPopContainerStyles]}
+				>
 					<div
 						id="dfp-ad--mostpop"
 						className={[
@@ -502,7 +522,11 @@ export const AdSlot = ({
 							'ad-slot--mpu-banner-ad',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[mostPopAdStyles]}
+						css={[
+							fluidAdStyles,
+							fluidFullWidthAdStyles,
+							mostPopAdStyles,
+						]}
 						data-link-name="ad slot mostpop"
 						data-name="mostpop"
 						aria-hidden="true"
@@ -565,6 +589,41 @@ export const AdSlot = ({
 				</div>
 			);
 		}
+		case 'fronts-banner': {
+			const advertId = `fronts-banner-${index}`;
+			return (
+				<div css={frontsBannerAdTopContainerStyles}>
+					<div
+						className="ad-slot-container"
+						css={[
+							adContainerStyles,
+							frontsBannerAdContainerStyles,
+							hasPageskin && frontsBannerCollapseStyles,
+						]}
+					>
+						<div
+							id={`dfp-ad--${advertId}`}
+							className={[
+								'js-ad-slot',
+								'ad-slot',
+								`ad-slot--${advertId}`,
+								'ad-slot--rendered',
+								hasPageskin && 'ad-slot--collapse',
+							].join(' ')}
+							css={[
+								fluidAdStyles,
+								fluidFullWidthAdStyles,
+								frontsBannerAdStyles,
+							]}
+							data-link-name={`ad slot ${advertId}`}
+							data-name={`${advertId}`}
+							data-refresh="false"
+							aria-hidden="true"
+						/>
+					</div>
+				</div>
+			);
+		}
 		case 'survey': {
 			return (
 				<div
@@ -623,41 +682,6 @@ export const AdSlot = ({
 						data-name={advertId}
 						aria-hidden="true"
 					/>
-				</div>
-			);
-		}
-		case 'fronts-banner': {
-			const advertId = `fronts-banner-${index}`;
-			return (
-				<div css={frontsBannerAdTopContainerStyles}>
-					<div
-						className="ad-slot-container"
-						css={[
-							adContainerStyles,
-							frontsBannerAdContainerStyles,
-							hasPageskin && frontsBannerCollapseStyles,
-						]}
-					>
-						<div
-							id={`dfp-ad--${advertId}`}
-							className={[
-								'js-ad-slot',
-								'ad-slot',
-								`ad-slot--${advertId}`,
-								'ad-slot--rendered',
-								hasPageskin && 'ad-slot--collapse',
-							].join(' ')}
-							css={[
-								fluidAdStyles,
-								fluidFullWidthAdStyles,
-								frontsBannerAdStyles,
-							]}
-							data-link-name={`ad slot ${advertId}`}
-							data-name={`${advertId}`}
-							data-refresh="false"
-							aria-hidden="true"
-						/>
-					</div>
 				</div>
 			);
 		}

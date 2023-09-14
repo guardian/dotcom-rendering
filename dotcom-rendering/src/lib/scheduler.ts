@@ -1,6 +1,6 @@
-import { log as libsLog, startPerformanceMeasure } from '@guardian/libs';
+import { startPerformanceMeasure } from '@guardian/libs';
 
-const START = performance.now();
+const START = Date.now();
 
 /**
  * Keeps a count of how many tasks are currently running, so we can manage concurrency.
@@ -12,12 +12,6 @@ let RUNNING_TASK_COUNT = 0;
  * @default Infinity
  */
 let CONCURRENCY_COUNT = Infinity;
-
-/**
- * Whether or not to log debug messages.
- * @default process.env.NODE_ENV !== 'production'
- */
-let DEBUG = process.env.NODE_ENV !== 'production';
 
 /**
  * Possible task priorities.
@@ -73,43 +67,30 @@ const queue: Record<
 };
 
 /**
- * Standardised console logging.
+ * Checks whether there's spare task-running capacity.
  */
-const log = (message: string) =>
-	libsLog('openJournalism', `🧑‍💻 Scheduler ${message}`);
+function atConcurrencyLimit() {
+	return RUNNING_TASK_COUNT === CONCURRENCY_COUNT;
+}
 
 /**
  * Gets the next task to run, according to priority and the order they were
  * scheduled.
  */
 function getNextTask() {
-	if (DEBUG) {
-		log(
-			`has ${
-				Object.values(queue).flatMap((_) => _.tasks).length
-			} task(s) waiting`,
-		);
-	}
+	if (atConcurrencyLimit()) return undefined;
+
+	const runningTime = Date.now() - START;
 
 	for (const priority of PRIORITIES) {
 		const { lastStartTime, tasks } = queue[priority];
-
-		if (tasks.length) {
-			if (performance.now() - START < lastStartTime) {
-				if (DEBUG) {
-					log(`found ${tasks.length} ${priority} task(s) waiting`);
-				}
-				return tasks.shift();
-			} else {
-				if (DEBUG) {
-					log(
-						`found ${tasks.length} ${priority} task(s) waiting but it's too late to run them 😢`,
-					);
-				}
-			}
+		const nextTask = tasks.shift();
+		if (runningTime <= lastStartTime && nextTask?.canRun({ runningTime })) {
+			return nextTask;
 		}
 	}
 
+	// found no suitable tasks, so return undefined
 	return undefined;
 }
 
@@ -122,69 +103,26 @@ function getNextTask() {
  * If there are no tasks to run, or the maximum number of tasks are already
  * running, then it does nothing.
  */
-async function run() {
-	if (DEBUG) {
-		log(`is looking to run more tasks`);
+function run() {
+	const nextTask = getNextTask();
+	if (!nextTask) return;
 
-		const availableSlotCount =
-			CONCURRENCY_COUNT === Infinity
-				? 'infinite'
-				: `${
-						CONCURRENCY_COUNT - RUNNING_TASK_COUNT
-				  }/${CONCURRENCY_COUNT}`;
+	RUNNING_TASK_COUNT++;
 
-		log(`has ${availableSlotCount} slots available 🏃‍♂️`);
-	}
-
-	if (RUNNING_TASK_COUNT === CONCURRENCY_COUNT) {
-		if (DEBUG) {
-			log(`is already maxed out 😮‍💨`);
-		}
-	} else {
-		const nextTask = getNextTask();
-
-		// If there was an eligible task waiting in the queue, run it.
-		if (nextTask) {
-			RUNNING_TASK_COUNT += 1;
-
-			if (nextTask.canRun({ runningTime: performance.now() - START })) {
-				if (DEBUG) {
-					log(`is running ${nextTask.name} 🏋️‍♂️`);
-				}
-
-				const { name, task, resolver } = nextTask;
-
-				const { endPerformanceMeasure } = startPerformanceMeasure(
-					'dotcom',
-					'scheduler',
-					name,
-				);
-
-				const result = await (window.scheduler
-					? window.scheduler.postTask(task)
-					: task());
-
-				resolver(result);
-
-				const duration = endPerformanceMeasure();
-				log(
-					`ran "${name}" in ${duration}ms (after ${
-						performance.now() - START
-					}ms) 🥳`,
-				);
-			} else {
-				if (DEBUG) {
-					log(
-						`was going to run ${nextTask.name} but it said not to 🤷‍♂️`,
-					);
-				}
-			}
-
-			RUNNING_TASK_COUNT -= 1;
-
-			void run();
-		}
-	}
+	const { name, task, resolver } = nextTask;
+	const { endPerformanceMeasure } = startPerformanceMeasure(
+		'dotcom',
+		'scheduler',
+		name,
+	);
+	task()
+		.then(resolver)
+		.catch(console.error)
+		.finally(() => {
+			endPerformanceMeasure();
+			RUNNING_TASK_COUNT--;
+			run();
+		});
 }
 
 export type ScheduleOptions = {
@@ -218,31 +156,20 @@ export async function schedule<T>(
 	// we know this is safe because we know function in the new Promise above
 	// is synchronous (even if TS doesn't)
 	queue[priority].tasks.push(queueableTask as QueueableTask);
-
-	log(`scheduled "${name}" (${priority})`);
-
-	void run();
-
+	run();
 	return scheduledTask;
 }
 
 export function setSchedulerConcurrency(
 	concurrency: typeof CONCURRENCY_COUNT,
 ): void {
-	log(`set concurrency to ${concurrency}`);
 	CONCURRENCY_COUNT = concurrency;
-}
-
-export function setSchedulerDebugMode(debug: typeof DEBUG): void {
-	DEBUG = debug;
-	log(`switched debug mode ${DEBUG ? 'on' : 'off'}`);
 }
 
 export function setSchedulerPriorityLastStartTime(
 	priority: TaskPriority,
 	lastStartTime: number,
 ): void {
-	log(`setting ${priority} priority last start time to ${lastStartTime}ms`);
 	queue[priority].lastStartTime = lastStartTime;
-	void run();
+	run();
 }

@@ -48,14 +48,12 @@ import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 };
 
 const mainColWrapperStyle = css`
@@ -191,19 +189,15 @@ const getMainMediaCaptions = (article: FEArticleType): (string | undefined)[] =>
 			: undefined,
 	);
 
-export const NewsletterSignupLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	const {
 		promotedNewsletter,
 		config: { host },
 	} = article;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
@@ -403,7 +397,6 @@ export const NewsletterSignupLayout = ({
 								webPublicationDateDeprecated={
 									article.webPublicationDateDeprecated
 								}
-								renderingTarget={renderingTarget}
 							/>
 							<Standfirst
 								format={format}

@@ -113,9 +113,25 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 	);
 };
 
+const attributeToNumber = (
+	element: Element,
+	attributeName: string,
+): number | undefined => {
+	const value = element.getAttribute(attributeName);
+	if (!value) return undefined;
+	const numericValue = Number(value);
+	if (isNaN(numericValue)) return undefined;
+	return numericValue;
+};
+
 export const ManyNewsletterSignUp = () => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
-		string[]
+		{
+			/** unique identifier for the newsletter in kebab-case format */
+			identityName: string;
+			/** unique id number for the newsletter */
+			listId: number;
+		}[]
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
@@ -136,28 +152,35 @@ export const ManyNewsletterSignUp = () => {
 			if (!(button instanceof HTMLElement)) {
 				return;
 			}
-			const id = button.getAttribute('data-newsletter-id');
-			if (!id) {
+			const { identityName } = button.dataset;
+			const listId = attributeToNumber(button, 'data-list-id');
+			if (!identityName || typeof listId === 'undefined') {
 				return;
 			}
-			const index = newslettersToSignUpFor.indexOf(id);
+			const index = newslettersToSignUpFor.findIndex(
+				(newsletter) => newsletter.identityName === identityName,
+			);
 			if (index === -1) {
-				setNewslettersToSignUpFor([...newslettersToSignUpFor, id]);
+				setNewslettersToSignUpFor([
+					...newslettersToSignUpFor,
+					{ identityName, listId },
+				]);
 				button.classList.add(BUTTON_SELECTED_CLASS);
-				const ariaLabelText =
-					button.getAttribute('data-aria-label-when-checked') ??
-					'remove from list';
-				button.setAttribute('aria-label', ariaLabelText);
+				button.setAttribute(
+					'aria-label',
+					button.dataset.ariaLabelWhenChecked ?? 'remove from list',
+				);
 			} else {
 				setNewslettersToSignUpFor([
 					...newslettersToSignUpFor.slice(0, index),
 					...newslettersToSignUpFor.slice(index + 1),
 				]);
 				button.classList.remove(BUTTON_SELECTED_CLASS);
-				const ariaLabelText =
-					button.getAttribute('data-aria-label-when-unchecked') ??
-					'add to list';
-				button.setAttribute('aria-label', ariaLabelText);
+
+				button.setAttribute(
+					'aria-label',
+					button.dataset.ariaLabelWhenUnchecked ?? 'add to list',
+				);
 			}
 		},
 		[newslettersToSignUpFor, userCanInteract],
@@ -173,8 +196,10 @@ export const ManyNewsletterSignUp = () => {
 		for (const button of signUpButtons) {
 			button.classList.remove(BUTTON_SELECTED_CLASS);
 			const ariaLabelText =
-				button.getAttribute('data-aria-label-when-unchecked') ??
-				'add to list';
+				button instanceof HTMLElement
+					? button.dataset.ariaLabelWhenUnchecked ?? 'add to list'
+					: 'add to list';
+
 			button.setAttribute('aria-label', ariaLabelText);
 		}
 
@@ -196,13 +221,20 @@ export const ManyNewsletterSignUp = () => {
 	}, [toggleNewsletter, newslettersToSignUpFor]);
 
 	const sendRequest = async (reCaptchaToken: string): Promise<void> => {
-		reportTrackingEvent('ManyNewsletterSignUp', 'form-submit', {
-			newsletterIds: newslettersToSignUpFor,
+		const identityNames = newslettersToSignUpFor.map(
+			(newsletter) => newsletter.identityName,
+		);
+		const listIds = newslettersToSignUpFor.map(
+			(newsletter) => newsletter.listId,
+		);
+
+		void reportTrackingEvent('ManyNewsletterSignUp', 'form-submit', {
+			listIds,
 		});
 
 		const response = await requestMultipleSignUps(
 			email,
-			newslettersToSignUpFor,
+			identityNames,
 			reCaptchaToken,
 		).catch(() => {
 			return undefined;
@@ -212,16 +244,25 @@ export const ManyNewsletterSignUp = () => {
 			const responseText = response
 				? await response.text()
 				: '[fetch failure - no response]';
-			reportTrackingEvent('ManyNewsletterSignUp', 'failure-response', {
-				newsletterIds: newslettersToSignUpFor,
-				responseText,
-			});
+			void reportTrackingEvent(
+				'ManyNewsletterSignUp',
+				'failure-response',
+				{
+					listIds,
+					// If the backend handles the failure and responds with an informative
+					// error message (E.G. "Service unavailable", "Invalid email" etc) this
+					// should be included in the event data.
+					// If not, the response text will be the HTML for the default error page
+					// which would not be helpful to include it in the tracking data.
+					responseText: responseText.substring(0, 100),
+				},
+			);
 
 			return setStatus('Failed');
 		}
 
-		reportTrackingEvent('ManyNewsletterSignUp', 'success-response', {
-			newsletterIds: newslettersToSignUpFor,
+		void reportTrackingEvent('ManyNewsletterSignUp', 'success-response', {
+			listIds,
 		});
 		setStatus('Success');
 	};
@@ -243,7 +284,7 @@ export const ManyNewsletterSignUp = () => {
 		}
 
 		if (!reCaptchaRef.current) {
-			reportTrackingEvent(
+			void reportTrackingEvent(
 				'ManyNewsletterSignUp',
 				'captcha-not-loaded-when-needed',
 			);
@@ -252,21 +293,21 @@ export const ManyNewsletterSignUp = () => {
 		setStatus('Loading');
 		// successful execution triggers a call to sendRequest
 		// with the onChange prop on the captcha Component
-		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-execute');
+		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-execute');
 		const result = await reCaptchaRef.current.executeAsync();
 
 		if (typeof result !== 'string') {
-			reportTrackingEvent('ManyNewsletterSignUp', 'captcha-failure');
+			void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-failure');
 			setStatus('Failed');
 			return;
 		}
 
-		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-success');
+		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-success');
 		return sendRequest(result);
 	};
 
 	const handleCaptchaError: ReactEventHandler<HTMLDivElement> = (event) => {
-		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-error', {
+		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-error', {
 			eventType: event.type,
 			status,
 		});

@@ -2,10 +2,13 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
 import {
+	adaptive,
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
+	ophanEsm,
 } from '../../scripts/webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
+import { makeMemoizedFunction } from './memoize';
 
 interface AssetHash {
 	[key: string]: string;
@@ -48,13 +51,14 @@ const isAssetHash = (manifest: unknown): manifest is AssetHash =>
 		([key, value]) => isString(key) && isString(value),
 	);
 
-const getManifest = (path: string): AssetHash => {
+const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	try {
 		const assetHash: unknown = JSON.parse(
 			readFileSync(resolve(__dirname, path), { encoding: 'utf-8' }),
 		);
-		if (!isAssetHash(assetHash))
+		if (!isAssetHash(assetHash)) {
 			throw new Error('Not a valid AssetHash type');
+		}
 
 		return assetHash;
 	} catch (e) {
@@ -62,9 +66,15 @@ const getManifest = (path: string): AssetHash => {
 		console.error('Some filename lookups will fail');
 		return {};
 	}
-};
+});
 
-export type Build = 'apps' | 'web' | 'web.variant' | 'web.legacy';
+export type Build =
+	| 'apps'
+	| 'web'
+	| 'web.variant'
+	| 'web.ophan-esm'
+	| 'web.scheduled'
+	| 'web.legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
@@ -108,6 +118,7 @@ const getScriptRegex = (build: Build) =>
 export const WEB = getScriptRegex('web');
 export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');
 export const WEB_LEGACY_SCRIPT = getScriptRegex('web.legacy');
+export const WEB_SCHEDULED_SCRIPT = getScriptRegex('web.scheduled');
 export const APPS_SCRIPT = getScriptRegex('apps');
 
 export const generateScriptTags = (scripts: string[]): string[] =>
@@ -131,12 +142,19 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 
 export const getModulesBuild = ({
 	tests,
+	switches,
 }: {
 	tests: ServerSideTests;
 	switches: Switches;
-}): Extract<Build, 'web' | 'web.variant'> => {
+}): Exclude<Extract<Build, `web${string}`>, 'web.legacy'> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
 		return 'web.variant';
+	}
+	if (tests[ophanEsm('Variant')] === 'variant') {
+		return 'web.ophan-esm';
+	}
+	if (switches.scheduler || tests[adaptive('Variant')] === 'variant') {
+		return 'web.scheduled';
 	}
 	return 'web';
 };

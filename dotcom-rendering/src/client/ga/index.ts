@@ -21,7 +21,7 @@ const loadGoogleAnalytics = async () => {
 		log('dotcom', 'GA script loaded');
 
 		init();
-		sendPageView();
+		await sendPageView();
 	} catch (error) {
 		isLoaded = false;
 		// We don't need to log script loading errors (these will mostly be adblock, etc),

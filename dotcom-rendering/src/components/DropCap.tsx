@@ -23,8 +23,8 @@ const outerStyles = (palette: Palette) => css`
 const innerStyles = (format: ArticleFormat) => {
 	const baseStyles = css`
 		${headline.large({ fontWeight: 'bold' })}
-		font-size: 118px;
-		line-height: 99px;
+		font-size: 111px;
+		line-height: 93px;
 		vertical-align: text-top;
 		pointer-events: none;
 		margin-right: ${space[1]}px;

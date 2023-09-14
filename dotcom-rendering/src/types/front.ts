@@ -207,6 +207,7 @@ export type FEFrontCard = {
 			elements: {
 				mainVideo?: unknown;
 				mediaAtoms: FEMediaAtom[];
+				mainMediaAtom?: FEMediaAtom;
 			};
 			tags: { tags: FETagType[] };
 		};
@@ -399,7 +400,9 @@ export type DCRCollectionType = {
 	 * will always be `false`.
 	 **/
 	canShowMore?: boolean;
-	badge?: DCRBadgeType;
+	editorialBadge?: DCRBadgeType;
+	paidContentBadge?: DCRBadgeType;
+	sponsoredContentBranding?: Branding;
 	targetedTerritory?: Territory;
 };
 

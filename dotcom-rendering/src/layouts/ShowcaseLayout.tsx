@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandBackground,
@@ -20,6 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -49,7 +50,6 @@ import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const ShowcaseGrid = ({
@@ -88,7 +88,7 @@ const ShowcaseGrid = ({
 					Vertical grey border
 					Main content
 					Right Column
-					
+
 				*/
 				${from.wide} {
 					${isPictureContent
@@ -280,21 +280,16 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 }
 
-export const ShowcaseLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
@@ -320,6 +315,8 @@ export const ShowcaseLayout = ({
 		format.design !== ArticleDesign.Picture ? true : false;
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
+
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
@@ -578,7 +575,6 @@ export const ShowcaseLayout = ({
 									hasStarRating={
 										article.starRating !== undefined
 									}
-									renderingTarget={renderingTarget}
 								/>
 							</PositionHeadline>
 						</GridItem>
@@ -623,7 +619,6 @@ export const ShowcaseLayout = ({
 										!!article.config.switches
 											.serverShareCounts
 									}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
@@ -661,7 +656,6 @@ export const ShowcaseLayout = ({
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									renderingTarget={renderingTarget}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -711,7 +705,8 @@ export const ShowcaseLayout = ({
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons
+										article.showBottomSocialButtons &&
+										renderingTarget === 'Web'
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -741,9 +736,6 @@ export const ShowcaseLayout = ({
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
 									/>
 								</RightColumn>
 							</div>

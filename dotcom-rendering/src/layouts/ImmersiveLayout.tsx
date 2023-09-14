@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandBackground,
@@ -21,6 +21,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -53,7 +54,6 @@ import type { NavType } from '../model/extract-nav';
 import type { FEElement } from '../types/content';
 import type { FEArticleType } from '../types/frontend';
 import type { Palette } from '../types/palette';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -184,7 +184,6 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 }
 
 const decideCaption = (mainMedia: FEElement | undefined): string => {
@@ -243,12 +242,7 @@ const Box = ({
 	</div>
 );
 
-export const ImmersiveLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -276,7 +270,10 @@ export const ImmersiveLayout = ({
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
+
+	const { renderingTarget } = useConfig();
 
 	/**
 	We need change the height values depending on whether the labs header is there or not to keep
@@ -460,7 +457,6 @@ export const ImmersiveLayout = ({
 										hasStarRating={
 											article.starRating !== undefined
 										}
-										renderingTarget={renderingTarget}
 									/>
 								</Section>
 							</Box>
@@ -539,7 +535,6 @@ export const ImmersiveLayout = ({
 												typeof article.starRating ===
 												'number'
 											}
-											renderingTarget={renderingTarget}
 										/>
 									</div>
 								)}
@@ -557,7 +552,6 @@ export const ImmersiveLayout = ({
 									format={format}
 									tags={article.tags}
 									byline={article.byline}
-									renderingTarget={renderingTarget}
 								/>
 							)}
 						</GridItem>
@@ -609,7 +603,6 @@ export const ImmersiveLayout = ({
 										!!article.config.switches
 											.serverShareCounts
 									}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
@@ -647,7 +640,6 @@ export const ImmersiveLayout = ({
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									renderingTarget={renderingTarget}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -696,7 +688,8 @@ export const ImmersiveLayout = ({
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons
+										article.showBottomSocialButtons &&
+										renderingTarget === 'Web'
 									}
 									badge={article.badge?.enhanced}
 								/>

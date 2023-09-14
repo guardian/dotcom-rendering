@@ -34,6 +34,17 @@ describe('RegionalAd', () => {
 		},
 	};
 
+	const expectedJsonAttribute = {
+		targeting: {
+			p: 'amp',
+			rp: 'dotcom-rendering',
+			sens: 'f',
+			slot: 'ad-1',
+			// TODO Should empty strings have been filtered out?
+			urlkw: '',
+		},
+	};
+
 	it('rtc-config contains just a permutive URL and prebid object when `usePermutive` and `usePubmaticPrebid` flags are set to true', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
@@ -64,26 +75,38 @@ describe('RegionalAd', () => {
 			</ContentABTestProvider>,
 		);
 
-		const ampAdElement = container.querySelectorAll('amp-ad');
+		const ampAdElements = Array.from(container.querySelectorAll('amp-ad'));
 
-		expect(ampAdElement).not.toBeNull();
+		expect(ampAdElements).not.toBeNull();
 
-		const [uk, us, au, int] = Array.from(ampAdElement)
+		const [ukJson, usJson, auJson, intJson] = ampAdElements
+			.map((el) => el.getAttribute('json'))
+			.map(
+				(config) =>
+					JSON.parse(config ?? '{}') as Record<string, unknown>,
+			);
+
+		expect(ukJson).toEqual(expectedJsonAttribute);
+		expect(usJson).toEqual(expectedJsonAttribute);
+		expect(auJson).toEqual(expectedJsonAttribute);
+		expect(intJson).toEqual(expectedJsonAttribute);
+
+		const [ukRtc, usRtc, auRtc, intRtc] = ampAdElements
 			.map((el) => el.getAttribute('rtc-config'))
 			.map(
 				(config) =>
 					JSON.parse(config ?? '{}') as Record<string, unknown>,
 			);
 
-		expect(uk?.urls).toEqual([permutiveURL]);
-		expect(us?.urls).toEqual([permutiveURL]);
-		expect(au?.urls).toEqual([permutiveURL]);
-		expect(int?.urls).toEqual([permutiveURL]);
+		expect(ukRtc?.urls).toEqual([permutiveURL]);
+		expect(usRtc?.urls).toEqual([permutiveURL]);
+		expect(auRtc?.urls).toEqual([permutiveURL]);
+		expect(intRtc?.urls).toEqual([permutiveURL]);
 
-		expect(uk?.vendors).toEqual(ukPubmaticVendorObj);
-		expect(us?.vendors).toEqual(usPubmaticVendorObj);
-		expect(au?.vendors).toEqual(auPubmaticVendorObj);
-		expect(int?.vendors).toEqual(intPubmaticVendorObj);
+		expect(ukRtc?.vendors).toEqual(ukPubmaticVendorObj);
+		expect(usRtc?.vendors).toEqual(usPubmaticVendorObj);
+		expect(auRtc?.vendors).toEqual(auPubmaticVendorObj);
+		expect(intRtc?.vendors).toEqual(intPubmaticVendorObj);
 	});
 
 	it('rtc-config contains just a prebid object when `usePubmaticPrebid` is true and other flags are false', () => {
@@ -116,26 +139,38 @@ describe('RegionalAd', () => {
 			</ContentABTestProvider>,
 		);
 
-		const ampAdElement = container.querySelectorAll('amp-ad');
+		const ampAdElements = Array.from(container.querySelectorAll('amp-ad'));
 
-		expect(ampAdElement).not.toBeNull();
+		expect(ampAdElements).not.toBeNull();
 
-		const [uk, us, au, int] = Array.from(ampAdElement)
+		const [ukJson, usJson, auJson, intJson] = ampAdElements
+			.map((el) => el.getAttribute('json'))
+			.map(
+				(config) =>
+					JSON.parse(config ?? '{}') as Record<string, unknown>,
+			);
+
+		expect(ukJson).toEqual(expectedJsonAttribute);
+		expect(usJson).toEqual(expectedJsonAttribute);
+		expect(auJson).toEqual(expectedJsonAttribute);
+		expect(intJson).toEqual(expectedJsonAttribute);
+
+		const [ukRtc, usRtc, auRtc, intRtc] = ampAdElements
 			.map((el) => el.getAttribute('rtc-config'))
 			.map(
 				(config) =>
 					JSON.parse(config ?? '{}') as Record<string, unknown>,
 			);
 
-		expect(uk?.urls).toEqual([]);
-		expect(us?.urls).toEqual([]);
-		expect(au?.urls).toEqual([]);
-		expect(int?.urls).toEqual([]);
+		expect(ukRtc?.urls).toEqual([]);
+		expect(usRtc?.urls).toEqual([]);
+		expect(auRtc?.urls).toEqual([]);
+		expect(intRtc?.urls).toEqual([]);
 
-		expect(uk?.vendors).toEqual(ukPubmaticVendorObj);
-		expect(us?.vendors).toEqual(usPubmaticVendorObj);
-		expect(au?.vendors).toEqual(auPubmaticVendorObj);
-		expect(int?.vendors).toEqual(intPubmaticVendorObj);
+		expect(ukRtc?.vendors).toEqual(ukPubmaticVendorObj);
+		expect(usRtc?.vendors).toEqual(usPubmaticVendorObj);
+		expect(auRtc?.vendors).toEqual(auPubmaticVendorObj);
+		expect(intRtc?.vendors).toEqual(intPubmaticVendorObj);
 	});
 
 	it('rtc-config contains just the permutive URL when `usePermutive` is true and other flags are false', () => {
@@ -168,21 +203,38 @@ describe('RegionalAd', () => {
 			</ContentABTestProvider>,
 		);
 
-		const ampAdElement = container.querySelectorAll('amp-ad');
+		const ampAdElements = Array.from(container.querySelectorAll('amp-ad'));
 
-		expect(ampAdElement).not.toBeNull();
+		expect(ampAdElements).not.toBeNull();
 
-		const [uk, us, au, int] = Array.from(ampAdElement)
+		const [ukJson, usJson, auJson, intJson] = ampAdElements
+			.map((el) => el.getAttribute('json'))
+			.map(
+				(config) =>
+					JSON.parse(config ?? '{}') as Record<string, unknown>,
+			);
+
+		expect(ukJson).toEqual(expectedJsonAttribute);
+		expect(usJson).toEqual(expectedJsonAttribute);
+		expect(auJson).toEqual(expectedJsonAttribute);
+		expect(intJson).toEqual(expectedJsonAttribute);
+
+		const [ukRtc, usRtc, auRtc, intRtc] = ampAdElements
 			.map((el) => el.getAttribute('rtc-config'))
 			.map(
 				(config) =>
 					JSON.parse(config ?? '{}') as Record<string, unknown>,
 			);
 
-		expect(uk?.urls).toEqual([permutiveURL]);
-		expect(us?.urls).toEqual([permutiveURL]);
-		expect(au?.urls).toEqual([permutiveURL]);
-		expect(int?.urls).toEqual([permutiveURL]);
+		expect(ukRtc?.urls).toEqual([permutiveURL]);
+		expect(usRtc?.urls).toEqual([permutiveURL]);
+		expect(auRtc?.urls).toEqual([permutiveURL]);
+		expect(intRtc?.urls).toEqual([permutiveURL]);
+
+		expect(ukRtc?.vendors).toEqual({});
+		expect(usRtc?.vendors).toEqual({});
+		expect(auRtc?.vendors).toEqual({});
+		expect(intRtc?.vendors).toEqual({});
 	});
 
 	it('rtc-config contains the correct vendor config when just `useAmazon` flag is set to true', () => {
@@ -214,22 +266,38 @@ describe('RegionalAd', () => {
 				/>
 			</ContentABTestProvider>,
 		);
+		const ampAdElements = Array.from(container.querySelectorAll('amp-ad'));
 
-		const ampAdElement = container.querySelectorAll('amp-ad');
+		expect(ampAdElements).not.toBeNull();
 
-		expect(ampAdElement).not.toBeNull();
+		const [ukJson, usJson, auJson, intJson] = ampAdElements
+			.map((el) => el.getAttribute('json'))
+			.map(
+				(config) =>
+					JSON.parse(config ?? '{}') as Record<string, unknown>,
+			);
 
-		const [uk, us, au, int] = Array.from(ampAdElement)
+		expect(ukJson).toEqual(expectedJsonAttribute);
+		expect(usJson).toEqual(expectedJsonAttribute);
+		expect(auJson).toEqual(expectedJsonAttribute);
+		expect(intJson).toEqual(expectedJsonAttribute);
+
+		const [ukRtc, usRtc, auRtc, intRtc] = ampAdElements
 			.map((el) => el.getAttribute('rtc-config'))
 			.map(
 				(config) =>
 					JSON.parse(config ?? '{}') as Record<string, unknown>,
 			);
 
-		expect(uk?.vendors).toEqual(apsVendorObj);
-		expect(us?.vendors).toEqual(apsVendorObj);
-		expect(au?.vendors).toEqual(apsVendorObj);
-		expect(int?.vendors).toEqual(apsVendorObj);
+		expect(ukRtc?.urls).toEqual([]);
+		expect(usRtc?.urls).toEqual([]);
+		expect(auRtc?.urls).toEqual([]);
+		expect(intRtc?.urls).toEqual([]);
+
+		expect(ukRtc?.vendors).toEqual(apsVendorObj);
+		expect(usRtc?.vendors).toEqual(apsVendorObj);
+		expect(auRtc?.vendors).toEqual(apsVendorObj);
+		expect(intRtc?.vendors).toEqual(apsVendorObj);
 	});
 
 	it('rtc-config contains no vendor config when all flags are set to false', () => {
@@ -262,20 +330,37 @@ describe('RegionalAd', () => {
 			</ContentABTestProvider>,
 		);
 
-		const ampAdElement = container.querySelectorAll('amp-ad');
+		const ampAdElements = Array.from(container.querySelectorAll('amp-ad'));
 
-		expect(ampAdElement).not.toBeNull();
+		expect(ampAdElements).not.toBeNull();
 
-		const [uk, us, au, int] = Array.from(ampAdElement)
+		const [ukJson, usJson, auJson, intJson] = ampAdElements
+			.map((el) => el.getAttribute('json'))
+			.map(
+				(config) =>
+					JSON.parse(config ?? '{}') as Record<string, unknown>,
+			);
+
+		expect(ukJson).toEqual(expectedJsonAttribute);
+		expect(usJson).toEqual(expectedJsonAttribute);
+		expect(auJson).toEqual(expectedJsonAttribute);
+		expect(intJson).toEqual(expectedJsonAttribute);
+
+		const [ukRtc, usRtc, auRtc, intRtc] = ampAdElements
 			.map((el) => el.getAttribute('rtc-config'))
 			.map(
 				(config) =>
 					JSON.parse(config ?? '{}') as Record<string, unknown>,
 			);
 
-		expect(uk?.vendors).toEqual({});
-		expect(us?.vendors).toEqual({});
-		expect(au?.vendors).toEqual({});
-		expect(int?.vendors).toEqual({});
+		expect(ukRtc?.urls).toEqual([]);
+		expect(usRtc?.urls).toEqual([]);
+		expect(auRtc?.urls).toEqual([]);
+		expect(intRtc?.urls).toEqual([]);
+
+		expect(ukRtc?.vendors).toEqual({});
+		expect(usRtc?.vendors).toEqual({});
+		expect(auRtc?.vendors).toEqual({});
+		expect(intRtc?.vendors).toEqual({});
 	});
 });

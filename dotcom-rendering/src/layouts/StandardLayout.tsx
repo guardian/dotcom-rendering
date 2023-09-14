@@ -307,7 +307,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	} = article;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
@@ -340,7 +341,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	return (
 		<>
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<div data-print-layout="hide" id="bannerandheader">
 					{renderAds && (
 						<Stuck>
@@ -502,7 +503,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
-											renderingTarget={renderingTarget}
 										/>
 									</Island>
 								)}
@@ -569,7 +569,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									hasStarRating={
 										typeof article.starRating === 'number'
 									}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
@@ -628,7 +627,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										!!article.config.switches
 											.serverShareCounts
 									}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
@@ -667,7 +665,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									renderingTarget={renderingTarget}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
@@ -732,7 +729,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons
+										article.showBottomSocialButtons &&
+										renderingTarget === 'Web'
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -762,9 +760,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
 									/>
 								</RightColumn>
 							</div>

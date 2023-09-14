@@ -110,8 +110,6 @@ const extractAboutThreeLines = (text: string) =>
 				.join(' ') + '…'; // join with spaces and add an ellipsis
 
 /**
- * # Latest Links
- *
  * Display the last three blocks from a Liveblog when the fronts
  * tool has enabled showing live updates.
  *
@@ -122,7 +120,7 @@ const extractAboutThreeLines = (text: string) =>
  *
  * ---
  *
- * [`LatestLinks` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-latestlinks)
+ * [`LatestLinks` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-latestlinks&buildNumber=2967)
  */
 export const LatestLinks = ({
 	id,

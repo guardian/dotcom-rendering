@@ -19,7 +19,6 @@ type Props = {
 	showAge?: boolean;
 	adIndex: number;
 	renderAds: boolean;
-	padBottom?: boolean;
 };
 
 type MPUSliceProps = {

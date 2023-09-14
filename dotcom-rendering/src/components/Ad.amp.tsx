@@ -119,6 +119,7 @@ export const Ad = ({
 				adJson([
 					...commercialProperties[editionId].adTargeting,
 					...mapAdTargeting(adTargeting),
+					{ name: 'slot', value: id },
 				]),
 			)}
 			data-slot={ampData(section, contentType)}

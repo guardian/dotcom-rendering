@@ -22,7 +22,6 @@ export const interviewStory = () => {
 			}}
 			byline="Jane Smith"
 			tags={[]}
-			renderingTarget="Web"
 		/>
 	);
 };
@@ -38,7 +37,6 @@ export const commentStory = () => {
 			}}
 			byline="Jane Smith"
 			tags={[]}
-			renderingTarget="Web"
 		/>
 	);
 };
@@ -54,7 +52,6 @@ export const specialStory = () => {
 			}}
 			byline="Jane Smith"
 			tags={[]}
-			renderingTarget="Web"
 		/>
 	);
 };
@@ -80,7 +77,6 @@ export const commentWithBylineImageStory = () => {
 						'https://i.guim.co.uk/img/uploads/2018/01/10/Marina_Hyde,_L.png?width=300&quality=85&auto=format&fit=max&s=6476202195914952e48ef41aadb116ff',
 				},
 			]}
-			renderingTarget="Web"
 		/>
 	);
 };
@@ -102,7 +98,6 @@ export const immersiveStory = () => {
 					title: 'Jane Smith',
 				},
 			]}
-			renderingTarget="Web"
 		/>
 	);
 };
@@ -130,7 +125,6 @@ export const ImmersiveComment = () => {
 						title: 'Jane Smith',
 					},
 				]}
-				renderingTarget="Web"
 			/>
 		</div>
 	);
@@ -163,7 +157,6 @@ export const MultipleStory = () => {
 					title: 'Nae Bevan',
 				},
 			]}
-			renderingTarget="Web"
 		/>
 	);
 };
@@ -190,7 +183,6 @@ export const MultipleDuplicateStory = () => {
 					title: 'Duncan Campbell',
 				},
 			]}
-			renderingTarget="Web"
 		/>
 	);
 };
@@ -207,7 +199,6 @@ export const noBylineStory = () => {
 			}}
 			byline=""
 			tags={[]}
-			renderingTarget="Web"
 		/>
 	);
 };
@@ -229,7 +220,6 @@ export const LabsImmersive = () => {
 					title: 'Jane Smith',
 				},
 			]}
-			renderingTarget="Web"
 		/>
 	);
 };
@@ -251,7 +241,6 @@ export const LabsComment = () => {
 					title: 'Jane Smith',
 				},
 			]}
-			renderingTarget="Web"
 		/>
 	);
 };
@@ -273,7 +262,6 @@ export const LabsInterview = () => {
 					title: 'Jane Smith',
 				},
 			]}
-			renderingTarget="Web"
 		/>
 	);
 };

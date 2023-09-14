@@ -22,8 +22,16 @@ export interface DCRProps extends GuStackProps {
 	 * The region in AWS where this app will run
 	 */
 	region: string;
-	/**
-	 * AMI Recipe to use
-	 */
-	amiRecipe: string;
+}
+
+export interface UserDataProps
+	extends Pick<DCRProps, 'app' | 'region' | 'stage'> {
+	elkStreamId: string;
+}
+
+export interface DCRAlarmConfig {
+	comparisonOperator: string;
+	threshold: number;
+	evaluationPeriod: number;
+	period: number;
 }

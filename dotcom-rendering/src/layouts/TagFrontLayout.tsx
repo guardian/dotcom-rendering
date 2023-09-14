@@ -64,7 +64,8 @@ const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
 
 export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 	const isInEuropeTest =
-		tagFront.config.abTests.europeNetworkFrontVariant === 'variant';
+		tagFront.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		tagFront.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const format = {
 		display: ArticleDisplay.Standard,
@@ -301,7 +302,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							{decideAdSlot(
 								renderAds,
 								index,
-								false,
 								tagFront.groupedTrails.length,
 								tagFront.config.isPaidContent,
 								mobileAdPositions,
