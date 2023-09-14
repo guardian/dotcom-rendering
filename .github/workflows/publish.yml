@@ -40,17 +40,16 @@ jobs:
           aws-region: eu-west-1
           role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
 
-      # Absolutely do not uncomment until TC has been disabled - we don't want conflicting build numbers!
-      # - uses: guardian/actions-riff-raff@v2
-      #   with:
-      #     projectName: dotcom:rendering
-      #     configPath: riff-raff.yaml
-      #     buildNumberOffset: TODO - Last TC build number here!
-      #     contentDirectories: |
-      #       frontend-cfn:
-      #         - frontend-cfn
-      #       rendering:
-      #         - rendering
-      #       frontend-static:
-      #         - frontend-static
+      - uses: guardian/actions-riff-raff@v2
+        with:
+          projectName: dotcom:rendering
+          configPath: riff-raff.yaml
+          buildNumberOffset: 38860
+          contentDirectories: |
+            frontend-cfn:
+              - frontend-cfn
+            rendering:
+              - rendering
+            frontend-static:
+              - frontend-static
 
