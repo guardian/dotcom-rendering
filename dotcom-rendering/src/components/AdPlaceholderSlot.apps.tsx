@@ -10,11 +10,12 @@ import {
 } from '@guardian/source-foundations';
 import { useEffect, useRef } from 'react';
 
+type AdSlotRef = React.RefObject<HTMLDivElement>;
 interface Props {
 	isHidden: boolean;
 	isSquare: boolean;
 	index: number;
-	setAdPlaceholders: any;
+	setAdPlaceholders: (n: [number, AdSlotRef]) => void;
 }
 
 const adHeight = '258px';
@@ -101,10 +102,11 @@ export const AdPlaceholderSlot = ({
 	setAdPlaceholders,
 }: Props) => {
 	const placeholderRef = useRef<HTMLDivElement | null>(null);
-
 	useEffect(() => {
-		if (placeholderRef !== null) setAdPlaceholders(index, placeholderRef);
-	}, [index, setAdPlaceholders]);
+		if (placeholderRef !== null) {
+			setAdPlaceholders([index, placeholderRef]);
+		}
+	}, [placeholderRef]);
 
 	return (
 		<aside css={[styles, isHidden && hiddenStyles]}>
@@ -115,9 +117,7 @@ export const AdPlaceholderSlot = ({
 				css={isSquare ? adSlotSquareStyles : adSlotStyles}
 				ref={placeholderRef}
 				id={`placeholder-${index}`}
-			>
-				<p>I am an ad placeholder slot</p>
-			</div>
+			></div>
 			<div css={supportBannerStyles}>
 				<p>Support the Guardian and enjoy the app ad-free.</p>
 				<button>Support the Guardian</button>
