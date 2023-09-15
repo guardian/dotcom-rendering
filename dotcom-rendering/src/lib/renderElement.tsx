@@ -210,7 +210,13 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.CartoonBlockElement':
-			return <CartoonComponent format={format} element={element} />;
+			return (
+				<CartoonComponent
+					format={format}
+					element={element}
+					switches={switches}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
 				<Island deferUntil="visible">
