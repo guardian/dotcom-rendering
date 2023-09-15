@@ -4,6 +4,7 @@ FROM node:18.17.0-alpine
 
 WORKDIR /opt/app/dotcom-rendering/dotcom-rendering
 
+# Expects the file layout created by `make riffraff-bundle`
 COPY ./dotcom-rendering/target /opt/app/dotcom-rendering/dotcom-rendering
 
 EXPOSE 9000

@@ -98,13 +98,6 @@ const copyRiffRaff = () => {
 	return cpy(['riff-raff.yaml'], target, { cwd: dirname });
 };
 
-const zipBundle = () => {
-	log(' - zipping bundle');
-	return execa('zip', ['--move', '--recurse-paths', 'rendering.zip', '.'], {
-		cwd: path.resolve(target, 'rendering'),
-	});
-};
-
 Promise.all([
 	copyCfn(),
 	copyMakefile(),
