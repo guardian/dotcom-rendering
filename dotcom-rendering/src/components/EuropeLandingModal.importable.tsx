@@ -196,6 +196,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		) {
 			localStorage.setItem(modalShownKey, 'true');
 			europeModal.showModal();
+			document.getElementById('button-to-unfocus')?.blur();
 			europeModal.addEventListener('close', () => {
 				hideModal();
 			});
@@ -255,9 +256,11 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 						<div css={buttonDivStyles}>
 							{modalType === 'ModalSwitched' && (
 								<Button
+									id={'button-to-unfocus'}
 									size={'small'}
 									onClick={() => {
 										dismissModal();
+										window.location.reload();
 									}}
 									cssOverrides={OKButtonStyles}
 								>
@@ -266,6 +269,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							)}
 							{modalType === 'ModalDoYouWantToSwitch' && (
 								<Button
+									id={'button-to-unfocus'}
 									size={'small'}
 									onClick={() => dismissModal()}
 									cssOverrides={OKButtonStyles}

@@ -12,10 +12,10 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Get started',
 			newsletters: [
 				'morning-briefing',
+				'this-is-europe',
 				'green-light',
 				'the-guide-staying-in',
 				'the-long-read',
-				'word-of-mouth',
 			],
 		},
 		{
@@ -23,6 +23,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'whats-on',
 				'tech-scape',
+				'word-of-mouth',
 				'fashion-statement',
 				'pushing-buttons',
 				'cotton-capital',
@@ -53,12 +54,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		},
 		{
 			title: 'The world explained',
-			newsletters: [
-				'this-is-europe',
-				'global-dispatch',
-				'documentaries',
-				'her-stage',
-			],
+			newsletters: ['global-dispatch', 'documentaries', 'her-stage'],
 		},
 		{
 			title: 'Sport',
