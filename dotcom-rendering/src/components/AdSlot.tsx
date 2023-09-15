@@ -274,16 +274,33 @@ const articleEndAdStyles = css`
 const mostPopAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
-	min-width: 300px;
-	width: 300px;
+	min-width: ${adSizes.mpu.width}px;
+	max-width: ${adSizes.mpu.width}px;
 	margin: 12px auto;
 	text-align: center;
+	${from.tablet} {
+		max-width: 700px;
+	}
 	${from.desktop} {
-		margin: 0;
 		width: auto;
+		max-width: ${adSizes.mpu.width}px;
 	}
 	${from.wide} {
 		margin-top: 25px;
+	}
+`;
+
+const mostPopContainerStyles = css`
+	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-width: ${adSizes.mpu.width}px;
+	width: fit-content;
+	max-width: ${adSizes.mpu.width}px;
+	margin: 0 auto;
+	${from.tablet} {
+		max-width: 700px;
+	}
+	${from.desktop} {
+		max-width: ${adSizes.mpu.width}px;
 	}
 `;
 
@@ -492,7 +509,10 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div
+					className="ad-slot-container"
+					css={[adContainerStyles, mostPopContainerStyles]}
+				>
 					<div
 						id="dfp-ad--mostpop"
 						className={[
@@ -502,7 +522,11 @@ export const AdSlot = ({
 							'ad-slot--mpu-banner-ad',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[mostPopAdStyles]}
+						css={[
+							fluidAdStyles,
+							fluidFullWidthAdStyles,
+							mostPopAdStyles,
+						]}
 						data-link-name="ad slot mostpop"
 						data-name="mostpop"
 						aria-hidden="true"

@@ -7,6 +7,7 @@ import type {
 	FEFrontCard,
 } from '../types/front';
 import { decideBadge } from './decideBadge';
+import { decideCollectionBranding } from './decideCollectionBranding';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
@@ -75,7 +76,12 @@ export const enhanceCollections = ({
 			 * We do this because Frontend had logic to ignore the "Branded" palette tag in the Fronts tool
 			 * when rendering a paid front or when non-paid content is curated inside a "Branded" container
 			 */
-			{ canBeBranded: !isPaidContent && allCardsHaveBranding },
+			{
+				canBeBranded:
+					!isPaidContent &&
+					allCardsHaveBranding &&
+					isCollectionPaidContent,
+			},
 		);
 
 		return {
@@ -126,6 +132,7 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
+			collectionBranding: decideCollectionBranding(allCards, editionId),
 		};
 	});
 };

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	brandBackground,
 	brandBorder,
@@ -18,6 +18,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -293,6 +294,8 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const renderAds = canRenderAds(article);
+
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
@@ -648,7 +651,8 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 										webUrl={article.webURL}
 										webTitle={article.webTitle}
 										showBottomSocialButtons={
-											article.showBottomSocialButtons
+											article.showBottomSocialButtons &&
+											renderingTarget === 'Web'
 										}
 										badge={article.badge?.enhanced}
 									/>
