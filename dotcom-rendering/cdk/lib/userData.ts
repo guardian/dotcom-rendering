@@ -18,8 +18,8 @@ export const getUserData = ({
 		`usermod -a -G frontend aws-kinesis-agent-user`,
 		`cd /home/dotcom-rendering`,
 
-		`aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${stage}/${app}/${app}.zip ./`,
-		`unzip -q ${app}.zip -d ${app}`,
+		`aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${stage}/${app}/${app}.tar.gz ./`,
+		`tar -zxf ${app}.tar.gz ${app}`,
 
 		`chown -R dotcom-rendering:frontend ${app}`,
 

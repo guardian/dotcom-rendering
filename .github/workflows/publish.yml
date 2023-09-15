@@ -1,0 +1,56 @@
+on:
+  workflow_call:
+    inputs:
+      container-image:
+        description: 'Image used by DCR service'
+        required: true
+        type: string
+    secrets:
+      GU_RIFF_RAFF_ROLE_ARN:
+        required: true
+
+permissions:
+  # Allow GitHub to request an OIDC JWT ID token, for exchange with `aws-actions/configure-aws-credentials`
+  # See https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#updating-your-github-actions-workflow
+  id-token: write
+
+jobs:
+  riffraff:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Annoyingly we can't _easily_ access an Images filesystem without creating a container from the image.
+      # we don't necessarily have to start the container, but we do need to create it.
+      - name: Create DCR Container
+        id: create-container
+        run: echo "CONTAINER_ID=$(docker create ${{ inputs.container-image }})" >> "$GITHUB_OUTPUT"
+      - name: Move container files into GHA Workspace
+        run: docker cp ${{ steps.create-container.outputs.CONTAINER_ID }}:/opt/app/dotcom-rendering/dotcom-rendering/. ${{ github.workspace }}
+      # We want to avoid uploading the uncompressed files to our riffraff bucket
+      # so we create our tarball outside the rendering/ folder, then delete the contents of rendering/
+      # and finally move the tarball into rendering
+      - name: Compress DCR server files
+        run: tar -zcf rendering.tar.gz rendering
+      - name: Remove uncompressed DCR server files from rendering/
+        run: rm -r rendering/*
+      - name: Move compressed DCR server files to rendering/
+        run: mv rendering.tar.gz rendering/
+
+      - uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: eu-west-1
+          role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+
+      - uses: guardian/actions-riff-raff@v2
+        with:
+          projectName: dotcom:rendering
+          configPath: riff-raff.yaml
+          buildNumberOffset: 38860
+          contentDirectories: |
+            frontend-cfn:
+              - frontend-cfn
+            rendering:
+              - rendering
+            frontend-static:
+              - frontend-static
+
