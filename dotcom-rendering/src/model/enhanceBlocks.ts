@@ -1,4 +1,6 @@
 import type { Newsletter } from '../types/content';
+import type { RenderingTarget } from '../types/renderingTarget';
+import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
@@ -16,11 +18,19 @@ class BlockEnhancer {
 
 	format: FEFormat;
 
+	renderingTarget: RenderingTarget;
+
 	options: Options;
 
-	constructor(blocks: Block[], format: FEFormat, options: Options) {
+	constructor(
+		blocks: Block[],
+		format: FEFormat,
+		renderingTarget: RenderingTarget,
+		options: Options,
+	) {
 		this.blocks = blocks;
 		this.format = format;
+		this.renderingTarget = renderingTarget;
 		this.options = options;
 	}
 
@@ -31,6 +41,17 @@ class BlockEnhancer {
 				this.format,
 				this.options.promotedNewsletter,
 			);
+		}
+		return this;
+	}
+
+	enhanceAdPlaceholders() {
+		if (
+			this.renderingTarget === 'Apps' &&
+			!(this.format.design === 'LiveBlogDesign') &&
+			!(this.format.design === 'DeadBlogDesign')
+		) {
+			this.blocks = enhanceAdPlaceholders(this.blocks);
 		}
 		return this;
 	}
@@ -91,12 +112,15 @@ type Options = {
 export const enhanceBlocks = (
 	blocks: Block[],
 	format: FEFormat,
+	renderingTarget: RenderingTarget,
 	options?: Options,
 ): Block[] => {
 	const { promotedNewsletter } = options ?? {};
 
 	for (const block of blocks) validateAsBlock(block);
-	return new BlockEnhancer(blocks, format, { promotedNewsletter })
+	return new BlockEnhancer(blocks, format, renderingTarget, {
+		promotedNewsletter,
+	})
 		.enhanceDividers()
 		.enhanceH2s()
 		.enhanceInteractiveContentsElements()
@@ -106,5 +130,6 @@ export const enhanceBlocks = (
 		.enhanceNumberedLists()
 		.enhanceEmbeds()
 		.enhanceTweets()
-		.enhanceNewsletterSignup().blocks;
+		.enhanceNewsletterSignup()
+		.enhanceAdPlaceholders().blocks;
 };

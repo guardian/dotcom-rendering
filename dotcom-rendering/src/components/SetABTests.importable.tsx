@@ -65,7 +65,6 @@ export const SetABTests = ({
 		ophanRecord,
 		forcedTestVariants: allForcedTestVariants,
 	});
-
 	const allRunnableTests = ab.allRunnableTests(tests);
 	const participations = runnableTestsToParticipations(allRunnableTests);
 

@@ -32,3 +32,14 @@ jobs:
     uses: ./.github/workflows/amp.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
+
+  publish:
+    permissions:
+      id-token: write
+      contents: read
+    needs: [container, prettier, jest, lint, cypress, amp]
+    uses: ./.github/workflows/publish.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
+    secrets:
+      GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
