@@ -24,13 +24,6 @@ riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
 	@node ./scripts/deploy/build-riffraff-bundle.mjs
 
-riffraff-publish: riffraff-bundle
-	$(call log, "publishing riff-raff bundle")
-	@./scripts/deploy/publish-assets.sh
-
-deploy:
-	@env ./scripts/deploy/build-riffraff-artifact.sh
-
 # prod #########################################
 
 build: clean-dist install
