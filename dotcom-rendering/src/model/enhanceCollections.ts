@@ -6,9 +6,9 @@ import type {
 	FECollectionType,
 	FEFrontCard,
 } from '../types/front';
-import { decideBadge } from './decideBadge';
-import { decideCollectionBranding } from './decideCollectionBranding';
+import { decideEditorialBadge, decidePaidContentBadge } from './decideBadge';
 import { decideContainerPalette } from './decideContainerPalette';
+import { decideSponsoredContentBranding } from './decideSponsoredContentBranding';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
@@ -50,6 +50,7 @@ export const enhanceCollections = ({
 	editionId,
 	pageId,
 	discussionApiUrl,
+	editionHasBranding,
 	onPageDescription,
 	isPaidContent,
 }: {
@@ -57,6 +58,7 @@ export const enhanceCollections = ({
 	editionId: EditionId;
 	pageId: string;
 	discussionApiUrl: string;
+	editionHasBranding: boolean;
 	onPageDescription?: string;
 	isPaidContent?: boolean;
 }): DCRCollectionType[] => {
@@ -94,12 +96,18 @@ export const enhanceCollections = ({
 			collectionType,
 			href,
 			containerPalette,
-			badge: decideBadge(
-				collection.config.href,
+			editorialBadge: decideEditorialBadge(collection.config.href),
+			paidContentBadge: decidePaidContentBadge(
 				// We only try to use a branded badge for paid content
 				isCollectionPaidContent && allCardsHaveBranding
 					? allBranding
 					: undefined,
+			),
+			sponsoredContentBranding: decideSponsoredContentBranding(
+				allCards.length,
+				allBranding,
+				editionHasBranding,
+				collectionType,
 			),
 			grouped: groupCards(
 				collectionType,
@@ -132,7 +140,6 @@ export const enhanceCollections = ({
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
-			collectionBranding: decideCollectionBranding(allCards, editionId),
 		};
 	});
 };
