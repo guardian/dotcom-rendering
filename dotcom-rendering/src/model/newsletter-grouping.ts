@@ -23,6 +23,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'whats-on',
 				'tech-scape',
+				'word-of-mouth',
 				'fashion-statement',
 				'pushing-buttons',
 				'cotton-capital',
