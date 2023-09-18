@@ -3,6 +3,16 @@ import { css } from '@emotion/react';
 import type { EditionId } from './edition';
 import type { AdvertisingRegion } from './real-time-config.amp';
 
+/**
+ * Classes for only displaying an ad slot in specific geographic regions
+ *
+ * These can be used to create ads that contain configuration (placement ids,
+ * zone ids) that only pertains to a certain region. By creating 4 ad with
+ * each of these classes applied, only one will appear for each slot on any
+ * given pageview, depending on the geo.
+ *
+ * See https://amp.dev/documentation/components/amp-geo
+ */
 export const advertisingRegionClasses: {
 	[region in AdvertisingRegion]: SerializedStyles;
 } = {
@@ -32,6 +42,11 @@ export const advertisingRegionClasses: {
 	`,
 };
 
+/**
+ * Classes for only displaying per-edition branding in specific geographic regions
+ *
+ * See https://amp.dev/documentation/components/amp-geo
+ */
 export const editionRegionClasses: {
 	[editionId in EditionId]: SerializedStyles;
 } = {
@@ -55,6 +70,7 @@ export const editionRegionClasses: {
 	`,
 	EUR: css`
 		display: none;
+		/* We define this group ourselves in an <amp-geo> element */
 		.amp-geo-group-eur & {
 			display: block;
 		}
