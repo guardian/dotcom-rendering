@@ -474,7 +474,55 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@18',
 		showQuotedHeadline: false,
-		mainMedia: undefined,
+		supportingContent: [
+			{
+				url: 'https://www.theguardian.com',
+				format: {
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				},
+				headline: 'Headline 1',
+				kickerText: 'Kicker',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				format: {
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				},
+				headline: 'Headline 2',
+				kickerText: 'Kicker',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				format: {
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				},
+				headline: 'Headline 3',
+				kickerText: 'Kicker',
+			},
+		],
+		mainMedia: {
+			type: 'Video',
+			elementId: 'abcdef',
+			videoId: 'abcd',
+			title: 'some title',
+			duration: 378,
+			width: 480,
+			height: 288,
+			origin: 'The Guardian',
+			expired: false,
+			images: [
+				{
+					url: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
+					width: 600,
+				},
+			],
+		},
 		isExternalLink: false,
 		showLivePlayable: false,
 		discussionApiUrl,
