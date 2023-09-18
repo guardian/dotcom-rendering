@@ -1,6 +1,10 @@
-import { AdSlot as BridgetAdSlot } from '@guardian/bridget/AdSlot';
+import {
+	AdSlot as BridgetAdSlot,
+	type AdSlot as TBridgetAdSlot,
+} from '@guardian/bridget/AdSlot';
 import type { IRect as BridgetRect } from '@guardian/bridget/Rect';
 import { isNonNullable } from '@guardian/libs';
+import libDebounce from 'lodash.debounce';
 import type { RefObject } from 'react';
 import { createRef, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -34,7 +38,7 @@ const getIsPremium = () => Promise.resolve(false);
 
 const calculateAdPositions = (
 	adSlots: RefObject<HTMLDivElement>[],
-): BridgetAdSlot[] =>
+): TBridgetAdSlot[] =>
 	adSlots
 		.map((slot) => slot.current)
 		.filter(isNonNullable)
@@ -47,8 +51,8 @@ const calculateAdPositions = (
 		);
 
 const adsHaveMoved = (
-	oldPositions: BridgetAdSlot[],
-	newPositions: BridgetAdSlot[],
+	oldPositions: TBridgetAdSlot[],
+	newPositions: TBridgetAdSlot[],
 ): boolean =>
 	newPositions.some((newPosition, idx) => {
 		const oldPositionRect = oldPositions[idx]?.rect;
@@ -59,6 +63,12 @@ const adsHaveMoved = (
 			return !positionsEqual(newPosition.rect, oldPositionRect);
 		}
 	});
+
+const updateAds = (positions: TBridgetAdSlot[]) => {
+	return getCommercialClient().updateAdverts(positions);
+};
+
+const debounceUpdateAds = libDebounce(updateAds, 100, { leading: true });
 
 export const AdPortals = () => {
 	// Server-rendered placeholder elements for ad slots to be inserted into.
@@ -88,7 +98,6 @@ export const AdPortals = () => {
 	 *
 	 * A resize observer is used for this.
 	 *
-	 * TODO: debounce this to prevent calling the native layer too often?
 	 */
 	useEffect(() => {
 		let resizeObserver: ResizeObserver | undefined = undefined;
@@ -114,9 +123,7 @@ export const AdPortals = () => {
 						);
 
 						if (adsHaveMoved(adPositions.current, newAdPositions)) {
-							void getCommercialClient().updateAdverts(
-								newAdPositions,
-							);
+							void debounceUpdateAds(newAdPositions);
 							adPositions.current = newAdPositions;
 						}
 
