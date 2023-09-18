@@ -60,24 +60,32 @@ export const LiveBlock = ({
 			host={host}
 			pageId={pageId}
 		>
-			{block.elements.map((element, index) => (
-				<RenderArticleElement
-					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
-					key={index}
-					format={format}
-					element={element}
-					ajaxUrl={ajaxUrl}
-					host={host}
-					index={index}
-					isMainMedia={false}
-					pageId={pageId}
-					webTitle={webTitle}
-					isAdFreeUser={isAdFreeUser}
-					isSensitive={isSensitive}
-					switches={switches}
-					isPinnedPost={isPinnedPost}
-				/>
-			))}
+			{block.elements.map((element, index) => {
+				return (
+					<div
+						key={index}
+						className={isPinnedPost ? '' : 'element'}
+						data-elementtype={element._type}
+					>
+						<RenderArticleElement
+							// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
+							key={index}
+							format={format}
+							element={element}
+							ajaxUrl={ajaxUrl}
+							host={host}
+							index={index}
+							isMainMedia={false}
+							pageId={pageId}
+							webTitle={webTitle}
+							isAdFreeUser={isAdFreeUser}
+							isSensitive={isSensitive}
+							switches={switches}
+							isPinnedPost={isPinnedPost}
+						/>
+					</div>
+				);
+			})}
 			<footer
 				css={css`
 					display: flex;
