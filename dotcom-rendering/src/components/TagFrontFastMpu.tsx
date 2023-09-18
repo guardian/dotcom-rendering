@@ -3,7 +3,7 @@ import { Card33Media33, CardDefault } from '../lib/cardWrappers';
 import { type Tuple } from '../lib/tuple';
 import type { DCRFrontCard } from '../types/front';
 import type { GroupedTrailsFastMpu } from '../types/tagFront';
-import { AdSlot } from './AdSlot';
+import { AdSlot } from './AdSlot.web';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
