@@ -147,6 +147,7 @@ export const decideFrontsBannerAdSlot = (
 ) => {
 	if (
 		!renderAds ||
+		hasPageSkin ||
 		!targetedCollections?.includes(collectionName) ||
 		isFirstContainer
 	) {
@@ -218,13 +219,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		abTests.europeNetworkFrontVariant === 'variant' ||
 		switches['europeNetworkFrontSwitch'] === true;
 
+	const renderAds = canRenderAds(front);
+
+	const hasPageSkin = hasPageSkinConfig && renderAds;
+
 	const isInNetworkFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
 		abTests.frontsBannerAdsDcrVariant === 'variant' &&
 		Object.keys(networkFrontsBannerAdCollections).includes(
 			front.config.pageId,
 		);
-
 	const isInSectionFrontsBannerTest =
 		!!switches.sectionFrontsBannerAds &&
 		abTests.sectionFrontsBannerAdsVariant === 'variant' &&
@@ -242,10 +246,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
 	);
-
-	const renderAds = canRenderAds(front);
-
-	const hasPageSkin = hasPageSkinConfig && renderAds;
 
 	const mobileAdPositions = renderAds
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
