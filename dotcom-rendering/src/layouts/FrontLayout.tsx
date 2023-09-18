@@ -99,10 +99,7 @@ export const decideAdSlot = (
 		collectionCount > minContainers &&
 		index === getMerchHighPosition(collectionCount)
 	) {
-		if (
-			(isInNetworkFrontsBannerTest || isInSectionFrontsBannerTest) &&
-			!hasPageSkin
-		) {
+		if (isInNetworkFrontsBannerTest || isInSectionFrontsBannerTest) {
 			return (
 				<Hide from="desktop">
 					<AdSlot
