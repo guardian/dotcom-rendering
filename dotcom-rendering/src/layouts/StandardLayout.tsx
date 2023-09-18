@@ -16,6 +16,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AppsEpic } from '../components/AppsEpic.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -682,6 +683,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										</Island>
 									)}
 
+								{isApps && (
+									<Island
+										// deferUntil="idle"
+										clientOnly={true}
+										// placeholderHeight={800}
+									>
+										<AppsEpic />
+									</Island>
+								)}
+
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
@@ -986,7 +997,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				</>
 			)}
 
-			{!isWeb && (
+			{isApps && (
 				<>
 					<Section
 						fullWidth={true}
