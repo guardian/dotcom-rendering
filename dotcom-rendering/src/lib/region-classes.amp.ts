@@ -55,12 +55,19 @@ export const editionRegionClasses: {
 	`,
 	EUR: css`
 		display: none;
-		/* TODO add Europe */
+		.amp-geo-group-eur & {
+			display: block;
+		}
 	`,
 	INT: css`
 		display: none;
-		/* TODO add Europe */
-		:not(.amp-iso-country-gb, .amp-iso-country-us, .amp-iso-country-au) & {
+		:not(
+				.amp-iso-country-gb,
+				.amp-iso-country-us,
+				.amp-iso-country-au,
+				.amp-geo-group-eur
+			)
+			& {
 			display: block;
 		}
 	`,
