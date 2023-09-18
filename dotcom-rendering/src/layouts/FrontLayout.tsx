@@ -99,7 +99,10 @@ export const decideAdSlot = (
 		collectionCount > minContainers &&
 		index === getMerchHighPosition(collectionCount)
 	) {
-		if (isInNetworkFrontsBannerTest || isInSectionFrontsBannerTest) {
+		if (
+			(isInNetworkFrontsBannerTest || isInSectionFrontsBannerTest) &&
+			!hasPageSkin
+		) {
 			return (
 				<Hide from="desktop">
 					<AdSlot
@@ -147,6 +150,7 @@ export const decideFrontsBannerAdSlot = (
 ) => {
 	if (
 		!renderAds ||
+		hasPageSkin ||
 		!targetedCollections?.includes(collectionName) ||
 		isFirstContainer
 	) {
@@ -224,14 +228,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const isInNetworkFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
-		!hasPageSkin &&
 		abTests.frontsBannerAdsDcrVariant === 'variant' &&
 		Object.keys(networkFrontsBannerAdCollections).includes(
 			front.config.pageId,
 		);
 	const isInSectionFrontsBannerTest =
 		!!switches.sectionFrontsBannerAds &&
-		!hasPageSkin &&
 		abTests.sectionFrontsBannerAdsVariant === 'variant' &&
 		Object.keys(sectionFrontsBannerAdCollections).includes(
 			front.config.pageId,
