@@ -1,7 +1,4 @@
-import {
-	AdSlot as BridgetAdSlot,
-	type AdSlot as TBridgetAdSlot,
-} from '@guardian/bridget/AdSlot';
+import { AdSlot as BridgetAdSlot } from '@guardian/bridget/AdSlot';
 import type { IRect as BridgetRect } from '@guardian/bridget/Rect';
 import { isNonNullable } from '@guardian/libs';
 import libDebounce from 'lodash.debounce';
@@ -9,7 +6,7 @@ import type { RefObject } from 'react';
 import { createRef, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getCommercialClient } from '../lib/bridgetApi';
-import { AdPlaceholderSlot } from './AdPlaceholderSlot.apps';
+import { AdSlot } from './AdSlot.apps';
 
 const calculateAdPosition = (element: Element): BridgetRect => {
 	const elementRect = element.getBoundingClientRect();
@@ -23,6 +20,7 @@ const calculateAdPosition = (element: Element): BridgetRect => {
 			? document.scrollingElement.scrollTop
 			: document.body.scrollTop;
 
+	// Potential optimisation: round these numbers so they are less specific when we compare past and current ad positions. This may result in fewer calls to briget to update ad positions.
 	return {
 		x: elementRect.left + scrollLeft,
 		y: elementRect.top + scrollTop,
@@ -36,26 +34,32 @@ const positionsEqual = (a: BridgetRect, b: BridgetRect): boolean =>
 
 const getIsPremium = () => Promise.resolve(false);
 
+/**
+ * The type for {@linkcode adSlots} can contain null. Whilst we don't believe
+ * any element would result in a null as they will always be defined by the time
+ * this gets called in the react lifecycle, we filter any nulls out so that we
+ * be certain the returned array contains only adslots.
+ */
 const calculateAdPositions = (
 	adSlots: RefObject<HTMLDivElement>[],
-): TBridgetAdSlot[] =>
+): BridgetAdSlot[] =>
 	adSlots
 		.map((slot) => slot.current)
 		.filter(isNonNullable)
 		.map(
-			(slot) =>
+			(slot, index) =>
 				new BridgetAdSlot({
 					rect: calculateAdPosition(slot),
-					isSquare: false,
+					isSquare: index === 0,
 				}),
 		);
 
 const adsHaveMoved = (
-	oldPositions: TBridgetAdSlot[],
-	newPositions: TBridgetAdSlot[],
+	oldPositions: BridgetAdSlot[],
+	newPositions: BridgetAdSlot[],
 ): boolean =>
-	newPositions.some((newPosition, idx) => {
-		const oldPositionRect = oldPositions[idx]?.rect;
+	newPositions.some((newPosition, index) => {
+		const oldPositionRect = oldPositions[index]?.rect;
 
 		if (oldPositionRect === undefined) {
 			return false;
@@ -64,7 +68,7 @@ const adsHaveMoved = (
 		}
 	});
 
-const updateAds = (positions: TBridgetAdSlot[]) => {
+const updateAds = (positions: BridgetAdSlot[]) => {
 	return getCommercialClient().updateAdverts(positions);
 };
 
@@ -157,13 +161,14 @@ export const AdPortals = () => {
 
 	return (
 		<>
-			{adPlaceholders.map((ad, idx) =>
+			{adPlaceholders.map((ad, index) =>
 				createPortal(
-					<AdPlaceholderSlot
+					<AdSlot
+						key={ad.id}
 						isHidden={false}
-						isSquare={false}
-						index={idx}
-						ref={adSlots.current[idx]}
+						isSquare={index === 0}
+						index={index}
+						ref={adSlots.current[index]}
 					/>,
 					ad,
 				),

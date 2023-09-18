@@ -93,23 +93,21 @@ const styles = css`
 	}
 `;
 
-export const AdPlaceholderSlot = forwardRef<HTMLDivElement, Props>(({
-	isHidden,
-	isSquare,
-	index,
-}, ref) => (
-	<aside css={[styles, isHidden && hiddenStyles]}>
-		<div css={adLabelsStyles}>
-			<p>Advertisement</p>
-		</div>
-		<div
-			css={isSquare ? adSlotSquareStyles : adSlotStyles}
-			ref={ref}
-			id={`placeholder-${index}`}
-		></div>
-		<div css={supportBannerStyles}>
-			<p>Support the Guardian and enjoy the app ad-free.</p>
-			<button>Support the Guardian</button>
-		</div>
-	</aside>
-));
+export const AdSlot = forwardRef<HTMLDivElement, Props>(
+	({ isHidden, isSquare, index }, ref) => (
+		<aside css={[styles, isHidden && hiddenStyles]}>
+			<div css={adLabelsStyles}>
+				<p>Advertisement</p>
+			</div>
+			<div
+				css={isSquare ? adSlotSquareStyles : adSlotStyles}
+				ref={ref}
+				id={`placeholder-${index}`}
+			></div>
+			<div css={supportBannerStyles}>
+				<p>Support the Guardian and enjoy the app ad-free.</p>
+				<button>Support the Guardian</button>
+			</div>
+		</aside>
+	),
+);
