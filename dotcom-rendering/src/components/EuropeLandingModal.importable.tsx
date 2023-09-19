@@ -52,10 +52,12 @@ const textStyles = css`
 	padding: 6px 0 15px 10px;
 	flex: 3;
 `;
+
 const imageStyles = css`
 	flex: 2;
 	overflow: hidden;
 `;
+
 const editionSectionDivStyles = css`
 	padding: ${space[3]}px 0 ${space[4]}px ${space[3]}px;
 `;
@@ -66,10 +68,12 @@ const headlineStyles = css`
 		${headline.small({ fontWeight: 'bold' })};
 	}
 `;
+
 const bodyStyles = css`
 	${body.medium()};
 	margin-top: ${space[3]}px;
 `;
+
 const buttonDivStyles = css`
 	display: flex;
 	margin-top: 33px;
@@ -77,9 +81,18 @@ const buttonDivStyles = css`
 		margin-top: 77px;
 	}
 `;
+
 const OKButtonStyles = css`
 	margin-right: ${space[2]}px;
+
+	/* override built in source focus styles */
+	html:not(.src-focus-disabled) &:focus {
+		outline: 2px solid ${palette.focus[400]};
+		outline-offset: 0px;
+		box-shadow: none;
+	}
 `;
+
 const closeButtonStyles = css`
 	fill: white;
 	margin: 10px;
@@ -197,24 +210,10 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			localStorage.setItem(modalShownKey, 'true');
 			europeModal.showModal();
 
-			// showModal autofocuses the first button in a dialog which causes a blue focus halo
-			// to appear around "Ok, Thanks". This halo is still important for accessibility
-			// but we don't want all users to see it.
-			// Use some JS to allow the halo to appear once the button becomes unfocused for the first time.
-			const buttonToUnfocus =
-				document.getElementById('button-to-unfocus');
-			const handleFocusOut = () => {
-				buttonToUnfocus?.classList.remove('src-focus-disabled');
-				buttonToUnfocus?.removeEventListener(
-					'focusout',
-					handleFocusOut,
-				);
-			};
-			buttonToUnfocus?.addEventListener('focusout', handleFocusOut);
-
 			europeModal.addEventListener('close', () => {
 				hideModal();
 			});
+
 			document.documentElement.style.overflow = 'hidden';
 			if (modalType === 'ModalSwitched') {
 				setCookie({
@@ -271,7 +270,6 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 						<div css={buttonDivStyles}>
 							{modalType === 'ModalSwitched' && (
 								<Button
-									id={'button-to-unfocus'}
 									size={'small'}
 									onClick={() => {
 										dismissModal();
@@ -284,7 +282,6 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							)}
 							{modalType === 'ModalDoYouWantToSwitch' && (
 								<Button
-									id={'button-to-unfocus'}
 									size={'small'}
 									onClick={() => dismissModal()}
 									cssOverrides={OKButtonStyles}
