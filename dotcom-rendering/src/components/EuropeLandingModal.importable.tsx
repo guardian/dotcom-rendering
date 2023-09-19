@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { cmp } from '@guardian/consent-management-platform';
 import { getCookie, setCookie } from '@guardian/libs';
 import {
 	body,
@@ -13,7 +14,7 @@ import {
 	RadioGroup,
 	SvgCross,
 } from '@guardian/source-react-components';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 import { guard } from '../lib/guard';
@@ -185,7 +186,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		isValidEdition(editionCookie) ? editionCookie : edition,
 	);
 
-	useOnce(() => {
+	const initialize = useCallback(() => {
 		const europeModal = document.getElementById('europe-modal-dialog');
 		const modalShown = localStorage.getItem(modalShownKey);
 		if (
@@ -208,6 +209,16 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 				});
 			}
 		}
+	}, [editionCookie, modalType]);
+
+	useOnce(() => {
+		void cmp.willShowPrivacyMessage().then((willShowCmp) => {
+			// Don't show the EU modal if its the users first time visiting the site and they haven't
+			// seen the CMP banner yet.
+			if (!willShowCmp) {
+				initialize();
+			}
+		});
 	}, []);
 
 	const confirmNewEdition = (editionId: EditionId) => {
