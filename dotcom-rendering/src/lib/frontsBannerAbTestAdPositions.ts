@@ -61,15 +61,15 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 	'us/sport': [
 		// multiline array
 		'Around the world',
-		'Video',
+		'The big picture',
 	],
 	'au/sport': [
-		'Woman’s World Cup 2023', // Apostrophe is intentionally U+2019 "’" instead of the more common ASCII character U+0060 "`",
-		'Pictures & video',
+		// multiline array
+		'Features',
 	],
 	football: [
 		// multiline array
-		'In depth',
+		'News and features',
 		'Regulars',
 		'Next generation',
 	],
@@ -81,8 +81,7 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 	'us/culture': [
 		// multiline array
 		'Talking points',
-		'The big picture',
-		'Pictures & video',
+		'Reviews',
 	],
 	'au/culture': [
 		// multiline array
@@ -98,16 +97,15 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		'The big picture',
 	],
 	'us/lifeandstyle': [
+		// multiline array
 		'Fashion',
 		'Food & drink',
-		'Regulars',
-		'The big picture',
+		'Advice',
 	],
 	'au/lifeandstyle': [
 		// multiline array
 		'Relationships',
 		'Health & fitness',
-		'The big picture',
 	],
 	'uk/commentisfree': [
 		'The Heat or Eat Diaries',
@@ -118,8 +116,7 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		'Letters',
 	],
 	'us/commentisfree': [
-		// multiline array
-		'The Guardian view',
+		// It's a short front and there's a thrasher right in the middle at the moment
 	],
 	'au/commentisfree': [
 		// multiline array
@@ -143,7 +140,6 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		// multiline array
 		'Opinion',
 		'US politics',
-		'Video',
 	],
 	'uk/business': [
 		// multiline array
@@ -158,7 +154,7 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 	'au/business': [
 		// multiline array
 		'Greg Jericho',
-		'World news',
+		'Global view',
 	],
 
 	'australia-news': [

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
-import { carrotAdStyles, labelStyles } from './AdSlot';
+import { carrotAdStyles, labelStyles } from './AdSlot.web';
 
 type Props = {
 	format: ArticleFormat;

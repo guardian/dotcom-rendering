@@ -3,7 +3,7 @@ import {
 	shouldDisplayAd,
 } from '../lib/liveblogAdSlots';
 import type { Switches } from '../types/config';
-import { AdSlot } from './AdSlot';
+import { AdSlot } from './AdSlot.web';
 import { LiveBlock } from './LiveBlock';
 
 type Props = {
