@@ -14,7 +14,7 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Accordion } from '../components/Accordion';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';

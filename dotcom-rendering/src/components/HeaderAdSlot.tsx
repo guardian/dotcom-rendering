@@ -1,7 +1,7 @@
 import { css, Global } from '@emotion/react';
 import { constants } from '@guardian/commercial';
 import { border, neutral, space } from '@guardian/source-foundations';
-import { adContainerStyles, AdSlot } from './AdSlot';
+import { adContainerStyles, AdSlot } from './AdSlot.web';
 import { Hide } from './Hide';
 
 const headerWrapper = css`

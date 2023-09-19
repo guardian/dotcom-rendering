@@ -22,7 +22,7 @@ import {
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
 import { Footer } from '../components/Footer';

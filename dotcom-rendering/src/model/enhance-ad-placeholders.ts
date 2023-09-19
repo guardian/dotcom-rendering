@@ -1,4 +1,4 @@
-import type { AdPlaceholderSlot, FEElement } from '../types/content';
+import type { AdPlaceholderBlockElement, FEElement } from '../types/content';
 
 /**
  * Positioning rules:
@@ -40,8 +40,8 @@ const insertPlaceholder = (
 	elements: FEElement[],
 	numberOfAdsInserted: number,
 ): FEElement[] => {
-	const placeholder: AdPlaceholderSlot = {
-		_type: 'model.dotcomrendering.pageElements.AdPlaceholderSlot',
+	const placeholder: AdPlaceholderBlockElement = {
+		_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 		// We only insert square ads for the first ad in the article
 		isSquare: numberOfAdsInserted === 0,
 	};
