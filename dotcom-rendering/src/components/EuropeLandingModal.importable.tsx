@@ -18,6 +18,7 @@ import { useCallback, useEffect, useState } from 'react';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 import { guard } from '../lib/guard';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
 const modalShownCookie = 'GU_EU_MODAL_SHOWN';
@@ -200,6 +201,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 				daysToLive: 90,
 			});
 			europeModal.showModal();
+			europeModal.click();
 			europeModal.addEventListener('close', () => {
 				hideModal();
 			});
@@ -250,7 +252,12 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 	};
 
 	return (
-		<dialog css={dialogStyles} id={'europe-modal-dialog'}>
+		<dialog
+			css={dialogStyles}
+			id={'europe-modal-dialog'}
+			data-link-name={nestedOphanComponents('eu-modal', 'open')}
+			data-component={'eu-modal'}
+		>
 			{!switchEdition ? (
 				<>
 					<div css={textStyles}>
@@ -269,6 +276,11 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 						<div css={buttonDivStyles}>
 							{modalType === 'ModalSwitched' && (
 								<Button
+									data-link-name={nestedOphanComponents(
+										'eu-modal',
+										'switched',
+										'ok-thanks',
+									)}
 									size={'small'}
 									onClick={() => {
 										dismissModal();
@@ -280,6 +292,11 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							)}
 							{modalType === 'ModalDoYouWantToSwitch' && (
 								<Button
+									data-link-name={nestedOphanComponents(
+										'eu-modal',
+										'not-switched',
+										'no-thanks',
+									)}
 									size={'small'}
 									onClick={() => dismissModal()}
 									cssOverrides={OKButtonStyles}
@@ -289,6 +306,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 								</Button>
 							)}
 							<Button
+								data-link-name={nestedOphanComponents(
+									'eu-modal',
+									modalType === 'ModalSwitched'
+										? 'switched'
+										: 'not-switched',
+									'switch-edition',
+								)}
 								size={'small'}
 								priority={'subdued'}
 								onClick={() => setSwitchEdition(true)}
@@ -337,6 +361,11 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 						/>
 					</RadioGroup>
 					<Button
+						data-link-name={nestedOphanComponents(
+							'eu-modal',
+							'switch-edition',
+							'confirm-' + selectedEdition,
+						)}
 						size={'small'}
 						onClick={() => confirmNewEdition(selectedEdition)}
 					>
@@ -346,6 +375,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			)}
 			{switchEdition && (
 				<Button
+					data-link-name={nestedOphanComponents(
+						'eu-modal',
+						modalType === 'ModalSwitched'
+							? 'switched'
+							: 'not-switched',
+						'close',
+					)}
 					aria-label={'close modal'}
 					size={'small'}
 					cssOverrides={closeButtonStyles}
