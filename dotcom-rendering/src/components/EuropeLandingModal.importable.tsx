@@ -20,7 +20,7 @@ import { guard } from '../lib/guard';
 import { useOnce } from '../lib/useOnce';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
-const modalShownKey = 'gu.euModalShown';
+const modalShownCookie = 'GU_EU_MODAL_SHOWN';
 
 // Have not used margin as it will change the backdrop
 const dialogStyles = css`
@@ -187,14 +187,18 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 
 	useOnce(() => {
 		const europeModal = document.getElementById('europe-modal-dialog');
-		const modalShown = localStorage.getItem(modalShownKey);
+		const modalShown = getCookie({ name: modalShownCookie });
 		if (
 			europeModal instanceof HTMLDialogElement &&
 			modalType !== 'NoModal' &&
 			!modalShown &&
 			editionCookie !== 'EUR'
 		) {
-			localStorage.setItem(modalShownKey, 'true');
+			setCookie({
+				name: modalShownCookie,
+				value: 'true',
+				daysToLive: 90,
+			});
 			europeModal.showModal();
 			europeModal.addEventListener('close', () => {
 				hideModal();
