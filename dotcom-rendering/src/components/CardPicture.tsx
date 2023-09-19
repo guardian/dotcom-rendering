@@ -119,7 +119,7 @@ export const CardPicture = ({ master, alt, imageSize, loading }: Props) => {
 			})}
 
 			<img
-				alt={alt}
+				alt={alt ?? ''}
 				src={fallbackSource.lowResUrl}
 				css={block}
 				loading={loading}
