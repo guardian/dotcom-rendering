@@ -197,6 +197,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		) {
 			localStorage.setItem(modalShownKey, 'true');
 			europeModal.showModal();
+			europeModal.click();
 			europeModal.addEventListener('close', () => {
 				hideModal();
 			});
@@ -237,7 +238,12 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 	};
 
 	return (
-		<dialog css={dialogStyles} id={'europe-modal-dialog'}>
+		<dialog
+			css={dialogStyles}
+			id={'europe-modal-dialog'}
+			data-link-name={nestedOphanComponents('eu-modal', 'open')}
+			data-component={'eu-modal'}
+		>
 			{!switchEdition ? (
 				<>
 					<div css={textStyles}>
