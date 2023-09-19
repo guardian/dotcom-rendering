@@ -43,7 +43,9 @@ describe('Follow component renders as expected', () => {
 			);
 		});
 
-		expect(container.textContent).toBe('Follow George Monbiot');
+		expect(container.textContent).toContain(
+			'Follow George MonbiotNotifications off',
+		);
 
 		unmountComponentAtNode(container);
 		container.remove();

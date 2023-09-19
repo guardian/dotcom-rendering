@@ -6,6 +6,7 @@ import * as Gallery from '@guardian/bridget/Gallery';
 import * as Navigation from '@guardian/bridget/Navigation';
 import * as Newsletters from '@guardian/bridget/Newsletters';
 import * as Notifications from '@guardian/bridget/Notifications';
+// import * Tags from '@guardian/bridget/Tags';
 import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
 import { createAppClient } from './thrift/nativeConnection';
@@ -19,6 +20,9 @@ const commercialClient: Commercial.Client<void> = createAppClient<
 const acquisitionsClient: Acquisitions.Client<void> = createAppClient<
 	Acquisitions.Client<void>
 >(Acquisitions.Client, 'buffered', 'compact');
+const tagClient: Notifications.Client<void> = createAppClient<
+	Notifications.Client<void>
+>(Notifications.Client, 'buffered', 'compact');
 const notificationsClient: Notifications.Client<void> = createAppClient<
 	Notifications.Client<void>
 >(Notifications.Client, 'buffered', 'compact');
@@ -53,6 +57,7 @@ export {
 	commercialClient,
 	acquisitionsClient,
 	notificationsClient,
+	tagClient,
 	userClient,
 	galleryClient,
 	videoClient,

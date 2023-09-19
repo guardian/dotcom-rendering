@@ -5,7 +5,10 @@ import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace, textSans } from '@guardian/source-foundations';
-import FollowStatus from 'components/FollowStatus';
+import {
+	FollowNotificationStatus,
+	FollowTagStatus,
+} from 'components/FollowStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
 import { text } from 'palette';
@@ -30,18 +33,12 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	margin-top: ${remSpace[1]};
 	min-height: ${remSpace[6]};
 
-	svg {
-		width: ${remSpace[6]};
-		height: ${remSpace[6]};
-		fill: currentColor;
-	}
-
 	${darkModeCss`
 		color: ${text.followDark(format)};
 	`}
 `;
 
-const followStatusStyles = css`
+const followStatusStyles = (): SerializedStyles => css`
 	display: flex;
 	align-items: center;
 	column-gap: 0.2em;
@@ -56,19 +53,40 @@ const Follow: FC<Props> = ({ contributors, format }) => {
 		format.theme !== ArticleSpecial.Labs
 	) {
 		return (
-			<button
-				className="js-follow"
-				css={styles(format)}
-				data-id={contributor.id}
-				data-display-name={contributor.name}
-			>
-				<span className="js-follow-status" css={followStatusStyles}>
-					<FollowStatus
-						isFollowing={false}
-						contributorName={contributor.name}
-					/>
-				</span>
-			</button>
+			<>
+				<button
+					className="js-follow-tag"
+					css={styles(format)}
+					data-id={contributor.id}
+					data-display-name={contributor.name}
+				>
+					<span
+						className="js-follow-tag-status"
+						css={followStatusStyles}
+					>
+						<FollowTagStatus
+							isFollowing={false}
+							contributorName={contributor.name}
+						/>
+					</span>
+				</button>
+				<button
+					className="js-follow-notifications"
+					css={styles(format)}
+					data-id={contributor.id}
+					data-display-name={contributor.name}
+				>
+					<span
+						className="js-follow-notifications-status"
+						css={followStatusStyles}
+					>
+						<FollowNotificationStatus
+							isFollowing={false}
+							contributorName={contributor.name}
+						/>
+					</span>
+				</button>
+			</>
 		);
 	}
 

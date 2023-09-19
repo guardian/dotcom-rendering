@@ -14,7 +14,11 @@ import {
 import setup from 'client/setup';
 import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
 import EpicContent from 'components/EpicContent';
-import FollowStatus from 'components/FollowStatus';
+
+import {
+	FollowNotificationStatus,
+	FollowTagStatus,
+} from 'components/FollowStatus';
 import FooterContent from 'components/FooterContent';
 import { handleErrors, isObject } from 'lib';
 import {
@@ -22,9 +26,12 @@ import {
 	commercialClient,
 	navigationClient,
 	notificationsClient,
+	tagClient,
 	userClient,
 } from 'native/nativeApi';
-import type { ReactElement } from 'react';
+import type { Client as NotificationsClient } from '@guardian/bridget/Notifications';
+// import type { Client as TagClient } from '@guardian/bridget/Tag';
+import type { FC, ReactElement } from 'react';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { logger } from '../logger';
@@ -59,14 +66,22 @@ function getTopic(follow: Element | null): Topic | null {
 	return new Topic({ id, displayName, type: 'tag-contributor' });
 }
 
-function followToggle(topic: Topic): void {
-	const followStatus = document.querySelector('.js-follow-status');
+function followToggle(
+	topic: Topic,
+	querySelector: string,
+	followStatusComponent: FC<{
+		isFollowing: boolean;
+		contributorName: string;
+	}>,
+	bridgetClient: NotificationsClient<void>, //| TagClient<void>,
+): void {
+	const followStatus = document.querySelector(querySelector);
 	if (!followStatus) return;
-	void notificationsClient.isFollowing(topic).then((following) => {
+	void bridgetClient.isFollowing(topic).then((following) => {
 		if (following) {
-			void notificationsClient.unfollow(topic).then((_) => {
+			void bridgetClient.unfollow(topic).then((_) => {
 				ReactDOM.render(
-					h(FollowStatus, {
+					h(followStatusComponent, {
 						isFollowing: false,
 						contributorName: topic.displayName,
 					}),
@@ -74,9 +89,9 @@ function followToggle(topic: Topic): void {
 				);
 			});
 		} else {
-			void notificationsClient.follow(topic).then((_) => {
+			void bridgetClient.follow(topic).then((_) => {
 				ReactDOM.render(
-					h(FollowStatus, {
+					h(followStatusComponent, {
 						isFollowing: true,
 						contributorName: topic.displayName,
 					}),
@@ -87,31 +102,70 @@ function followToggle(topic: Topic): void {
 	});
 }
 
-function topicClick(e: Event): void {
-	const follow = document.querySelector('.js-follow');
+function notificationsFollowClick(e: Event): void {
+	const follow = document.querySelector('.js-follow-notifications');
 	const topic = getTopic(follow);
-
 	if (topic) {
-		followToggle(topic);
+		followToggle(
+			topic,
+			'.js-follow-notifications-status',
+			FollowNotificationStatus,
+			notificationsClient,
+		);
+	}
+}
+
+function tagFollowClick(e: Event): void {
+	const follow = document.querySelector('.js-follow-tag');
+	const topic = getTopic(follow);
+	if (topic) {
+		followToggle(
+			topic,
+			'.js-follow-tag-status',
+			FollowTagStatus,
+			tagClient,
+		);
 	}
 }
 
 function topics(): void {
-	const follow = document.querySelector('.js-follow');
-	const topic = getTopic(follow);
+	const followNotifications = document.querySelector(
+		'.js-follow-notifications',
+	);
+	const followNotificationsStatus = document.querySelector(
+		'.js-follow-notifications-status',
+	);
+	const followTag = document.querySelector('.js-follow-tag');
+	const followTagStatus = document.querySelector('.js-follow-tag-status');
 
-	const followStatus = document.querySelector('.js-follow-status');
-
+	const topic = getTopic(followNotifications) ?? getTopic(followTag);
 	if (topic) {
-		follow?.addEventListener('click', topicClick);
+		followNotifications?.addEventListener(
+			'click',
+			notificationsFollowClick,
+		);
+
+		followTag?.addEventListener('click', tagFollowClick);
+
 		void notificationsClient.isFollowing(topic).then((following) => {
-			if (following && followStatus) {
+			if (following && followNotificationsStatus) {
 				ReactDOM.render(
-					h(FollowStatus, {
+					h(FollowNotificationStatus, {
 						isFollowing: true,
 						contributorName: topic.displayName,
 					}),
-					followStatus,
+					followNotificationsStatus,
+				);
+			}
+		});
+		void tagClient.isFollowing(topic).then((following) => {
+			if (following && followTagStatus) {
+				ReactDOM.render(
+					h(FollowTagStatus, {
+						isFollowing: true,
+						contributorName: topic.displayName,
+					}),
+					followTagStatus,
 				);
 			}
 		});

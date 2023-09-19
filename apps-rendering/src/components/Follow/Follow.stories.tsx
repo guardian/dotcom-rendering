@@ -26,6 +26,24 @@ const Default: FC = () => (
 	/>
 );
 
+const Comment: FC = () => (
+	<Follow
+		contributors={[
+			{
+				id: 'profile/janesmith',
+				apiUrl: 'janesmith.com',
+				name: 'Jane Smith',
+				image: none,
+			},
+		]}
+		format={{
+			theme: ArticlePillar.Opinion,
+			design: ArticleDesign.Comment,
+			display: ArticleDisplay.Standard,
+		}}
+	/>
+);
+
 const Deadblogs: FC = () => {
 	return (
 		<>
@@ -64,4 +82,4 @@ export default {
 	title: 'AR/Follow',
 };
 
-export { Default, Deadblogs };
+export { Default, Comment, Deadblogs };
