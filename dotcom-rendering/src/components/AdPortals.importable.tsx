@@ -5,7 +5,7 @@ import libDebounce from 'lodash.debounce';
 import type { RefObject } from 'react';
 import { createRef, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { getCommercialClient } from '../lib/bridgetApi';
+import { getCommercialClient, getUserClient } from '../lib/bridgetApi';
 import { AdSlot } from './AdSlot.apps';
 
 const calculateAdPosition = (element: Element): BridgetRect => {
@@ -31,8 +31,6 @@ const calculateAdPosition = (element: Element): BridgetRect => {
 
 const positionsEqual = (a: BridgetRect, b: BridgetRect): boolean =>
 	a.height === b.height && a.width === b.width && a.x === b.x && a.y === b.y;
-
-const getIsPremium = () => Promise.resolve(false);
 
 /**
  * The type for {@linkcode adSlots} can contain null. Whilst we don't believe
@@ -106,38 +104,49 @@ export const AdPortals = () => {
 	useEffect(() => {
 		let resizeObserver: ResizeObserver | undefined = undefined;
 
-		void getIsPremium().then((isPremium) => {
-			if (!isPremium) {
-				const placeholders = Array.from(
-					document.getElementsByClassName('ad-portal-placeholder'),
-				);
+		void getUserClient()
+			.isPremium()
+			.then((isPremium) => {
+				if (!isPremium) {
+					const placeholders = Array.from(
+						document.getElementsByClassName(
+							'ad-portal-placeholder',
+						),
+					);
 
-				setAdPlaceholders(placeholders);
-				for (const [i, _] of placeholders.entries()) {
-					adSlots.current[i] = createRef();
-				}
-
-				resizeObserver = new ResizeObserver((entries) => {
-					if (
-						entries[0] !== undefined &&
-						entries[0].target.clientHeight !== bodyHeight.current
-					) {
-						const newAdPositions = calculateAdPositions(
-							adSlots.current,
-						);
-
-						if (adsHaveMoved(adPositions.current, newAdPositions)) {
-							void debounceUpdateAds(newAdPositions);
-							adPositions.current = newAdPositions;
-						}
-
-						bodyHeight.current = entries[0].target.clientHeight;
+					setAdPlaceholders(placeholders);
+					for (const [i, _] of placeholders.entries()) {
+						adSlots.current[i] = createRef();
 					}
-				});
 
-				resizeObserver.observe(document.body);
-			}
-		});
+					resizeObserver = new ResizeObserver((entries) => {
+						if (
+							entries[0] !== undefined &&
+							entries[0].target.clientHeight !==
+								bodyHeight.current
+						) {
+							const newAdPositions = calculateAdPositions(
+								adSlots.current,
+							);
+
+							if (
+								adsHaveMoved(
+									adPositions.current,
+									newAdPositions,
+								)
+							) {
+								void debounceUpdateAds(newAdPositions);
+								adPositions.current = newAdPositions;
+							}
+
+							bodyHeight.current = entries[0].target.clientHeight;
+						}
+					});
+
+					resizeObserver.observe(document.body);
+				}
+			})
+			.catch(() => undefined);
 
 		bodyHeight.current = document.body.clientHeight;
 		return () => resizeObserver?.disconnect();

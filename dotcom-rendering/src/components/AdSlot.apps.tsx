@@ -29,7 +29,8 @@ const adLabelsStyles = css`
 	color: ${palette.neutral[46]};
 	padding: ${remSpace[3]};
 	float: left;
-	// We need to account for padding on both sides
+
+	/* We need to account for padding on both sides */
 	width: calc(100% - 2 * ${remSpace[3]});
 
 	p {
@@ -85,7 +86,7 @@ const styles = css`
 		margin: 1em -${remSpace[3]};
 	}
 
-	// This class is applied if the article has fewer than 15 paragraphs.
+	/* This class is applied if the article has fewer than 15 paragraphs */
 	&.short:nth-of-type(1) {
 		${from.desktop} {
 			top: 0;
