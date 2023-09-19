@@ -53,10 +53,12 @@ const textStyles = css`
 	padding: 6px 0 15px 10px;
 	flex: 3;
 `;
+
 const imageStyles = css`
 	flex: 2;
 	overflow: hidden;
 `;
+
 const editionSectionDivStyles = css`
 	padding: ${space[3]}px 0 ${space[4]}px ${space[3]}px;
 `;
@@ -67,10 +69,12 @@ const headlineStyles = css`
 		${headline.small({ fontWeight: 'bold' })};
 	}
 `;
+
 const bodyStyles = css`
 	${body.medium()};
 	margin-top: ${space[3]}px;
 `;
+
 const buttonDivStyles = css`
 	display: flex;
 	margin-top: 33px;
@@ -78,9 +82,18 @@ const buttonDivStyles = css`
 		margin-top: 77px;
 	}
 `;
+
 const OKButtonStyles = css`
 	margin-right: ${space[2]}px;
+
+	/* override built in source focus styles */
+	html:not(.src-focus-disabled) &:focus {
+		outline: 2px solid ${palette.focus[400]};
+		outline-offset: 0px;
+		box-shadow: none;
+	}
 `;
+
 const closeButtonStyles = css`
 	fill: white;
 	margin: 10px;
@@ -205,6 +218,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			europeModal.addEventListener('close', () => {
 				hideModal();
 			});
+
 			document.documentElement.style.overflow = 'hidden';
 			if (modalType === 'ModalSwitched') {
 				setCookie({
@@ -284,6 +298,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 									size={'small'}
 									onClick={() => {
 										dismissModal();
+										window.location.reload();
 									}}
 									cssOverrides={OKButtonStyles}
 								>
