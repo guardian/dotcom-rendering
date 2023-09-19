@@ -10,15 +10,15 @@ jobs:
       fail-fast: false
       matrix:
         group:
-          - 'http://localhost:9000/Article/https://www.theguardian.com/commentisfree/2020/feb/08/hungary-now-for-the-new-right-what-venezuela-once-was-for-the-left#noads'
-          - 'http://localhost:9000/Front/https://www.theguardian.com/uk'
+          - "http://localhost:9000/Article/https://www.theguardian.com/commentisfree/2020/feb/08/hungary-now-for-the-new-right-what-venezuela-once-was-for-the-left#noads"
+          - "http://localhost:9000/Front/https://www.theguardian.com/uk"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
+          node-version-file: ".nvmrc"
+          cache: "yarn"
       # Make sure we install dependencies in the root directory
       - run: yarn install --frozen-lockfile
       - run: make build
@@ -29,7 +29,7 @@ jobs:
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
           LHCI_URL: ${{ matrix.group }}
         run: |
-          npm install -g puppeteer-core@2.1.0 @lhci/cli@0.10.0
+          npm install -g puppeteer-core@2.1.0 @lhci/cli@0.12.0
           lhci autorun
 
       # https://github.com/denoland/setup-deno#latest-stable-for-a-major
