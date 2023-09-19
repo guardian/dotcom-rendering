@@ -5,6 +5,7 @@ import {
 	buttonThemeReaderRevenue,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
+import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { getAcquisitionsClient } from '../lib/bridgetApi';
 
@@ -28,15 +29,6 @@ const isElementPartiallyInViewport = (
 	return vertInView && horInView;
 };
 
-const debounce = (fn: () => void, time: number): (() => void) => {
-	let timeout: NodeJS.Timeout;
-	return function (...args: []): void {
-		const functionCall = (): void => fn(...args);
-		clearTimeout(timeout);
-		timeout = setTimeout(functionCall, time);
-	};
-};
-
 export function EpicContent({
 	title,
 	body,
@@ -47,7 +39,7 @@ export function EpicContent({
 	const epicContainer = useRef() as React.MutableRefObject<HTMLDivElement>;
 
 	useEffect(() => {
-		const handleSeenEpic = debounce(() => {
+		const handleSeenEpic = libDebounce(() => {
 			if (
 				!impressionSeen &&
 				isElementPartiallyInViewport(epicContainer)
@@ -80,7 +72,6 @@ export function EpicContent({
 			<h1 dangerouslySetInnerHTML={{ __html: title }}></h1>
 			<div dangerouslySetInnerHTML={{ __html: body }}></div>
 			<div className="button-container">
-				<p>SOPHIE TEST</p>
 				<ThemeProvider theme={buttonThemeReaderRevenue}>
 					{epicButton(firstButton, () =>
 						getAcquisitionsClient().launchPurchaseScreen(
