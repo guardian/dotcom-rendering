@@ -638,7 +638,7 @@
                     "$ref": "#/definitions/NewsletterSignupBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/AdPlaceholderSlot"
+                    "$ref": "#/definitions/AdPlaceholderBlockElement"
                 },
                 {
                     "$ref": "#/definitions/NumberedTitleBlockElement"
@@ -2510,12 +2510,12 @@
                 "newsletter"
             ]
         },
-        "AdPlaceholderSlot": {
+        "AdPlaceholderBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.AdPlaceholderSlot"
+                    "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
                 },
                 "isSquare": {
                     "type": "boolean"
