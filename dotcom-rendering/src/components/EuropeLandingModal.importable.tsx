@@ -14,11 +14,10 @@ import {
 	RadioGroup,
 	SvgCross,
 } from '@guardian/source-react-components';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 import { guard } from '../lib/guard';
-import { useOnce } from '../lib/useOnce';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
 const modalShownKey = 'gu.euModalShown';
@@ -211,7 +210,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		}
 	}, [editionCookie, modalType]);
 
-	useOnce(() => {
+	useEffect(() => {
 		void cmp.willShowPrivacyMessage().then((willShowCmp) => {
 			// Don't show the EU modal if its the users first time visiting the site and they haven't
 			// seen the CMP banner yet.
@@ -219,7 +218,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 				initialize();
 			}
 		});
-	}, []);
+	}, [initialize]);
 
 	const confirmNewEdition = (editionId: EditionId) => {
 		setCookie({
