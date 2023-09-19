@@ -19,7 +19,6 @@ import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 import { guard } from '../lib/guard';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { useOnce } from '../lib/useOnce';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
 const modalShownCookie = 'GU_EU_MODAL_SHOWN';
