@@ -196,7 +196,22 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		) {
 			localStorage.setItem(modalShownKey, 'true');
 			europeModal.showModal();
-			document.getElementById('button-to-unfocus')?.blur();
+
+			// showModal autofocuses the first button in a dialog which causes a blue focus halo
+			// to appear around "Ok, Thanks". This halo is still important for accessibility
+			// but we don't want all users to see it.
+			// Use some JS to allow the halo to appear once the button becomes unfocused for the first time.
+			const buttonToUnfocus =
+				document.getElementById('button-to-unfocus');
+			const handleFocusOut = () => {
+				buttonToUnfocus?.classList.remove('src-focus-disabled');
+				buttonToUnfocus?.removeEventListener(
+					'focusout',
+					handleFocusOut,
+				);
+			};
+			buttonToUnfocus?.addEventListener('focusout', handleFocusOut);
+
 			europeModal.addEventListener('close', () => {
 				hideModal();
 			});
