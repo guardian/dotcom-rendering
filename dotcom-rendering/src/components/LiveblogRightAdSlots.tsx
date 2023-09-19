@@ -1,4 +1,4 @@
-import { labelStyles } from './AdSlot';
+import { labelStyles } from './AdSlot.web';
 import { Island } from './Island';
 import { LiveblogRightMultipleAdSlots } from './LiveblogRightMultipleAdSlots.importable';
 import { TopRightAdSlot } from './TopRightAdSlot';

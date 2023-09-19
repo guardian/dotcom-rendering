@@ -7,7 +7,7 @@ import {
 	TOP_RIGHT_AD_STICKY_HEIGHT,
 } from '../lib/liveblog-right-ad-constants';
 import { useAB } from '../lib/useAB';
-import { AdSlot } from './AdSlot';
+import { AdSlot } from './AdSlot.web';
 
 export const calculateNumAdsThatFit = (rightColHeight: number) => {
 	if (rightColHeight < AD_CONTAINER_HEIGHT) return 0;
