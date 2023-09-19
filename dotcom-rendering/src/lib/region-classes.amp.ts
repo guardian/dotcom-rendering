@@ -36,7 +36,8 @@ export const advertisingRegionClasses: {
 	`,
 	ROW: css`
 		display: none;
-		:not(.amp-iso-country-gb, .amp-iso-country-us, .amp-iso-country-au) & {
+		body:not(.amp-iso-country-gb, .amp-iso-country-us, .amp-iso-country-au)
+			& {
 			display: block;
 		}
 	`,
@@ -77,7 +78,7 @@ export const editionRegionClasses: {
 	`,
 	INT: css`
 		display: none;
-		:not(
+		body:not(
 				.amp-iso-country-gb,
 				.amp-iso-country-us,
 				.amp-iso-country-au,
