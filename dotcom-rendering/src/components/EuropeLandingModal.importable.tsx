@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { cmp } from '@guardian/consent-management-platform';
 import { getCookie, setCookie } from '@guardian/libs';
 import {
 	body,
@@ -13,11 +14,10 @@ import {
 	RadioGroup,
 	SvgCross,
 } from '@guardian/source-react-components';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 import { guard } from '../lib/guard';
-import { useOnce } from '../lib/useOnce';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
 const modalShownCookie = 'GU_EU_MODAL_SHOWN';
@@ -185,7 +185,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		isValidEdition(editionCookie) ? editionCookie : edition,
 	);
 
-	useOnce(() => {
+	const initialize = useCallback(() => {
 		const europeModal = document.getElementById('europe-modal-dialog');
 		const modalShown = getCookie({ name: modalShownCookie });
 		if (
@@ -212,7 +212,17 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 				});
 			}
 		}
-	}, []);
+	}, [editionCookie, modalType]);
+
+	useEffect(() => {
+		void cmp.willShowPrivacyMessage().then((willShowCmp) => {
+			// Don't show the EU modal if its the users first time visiting the site and they haven't
+			// seen the CMP banner yet.
+			if (!willShowCmp) {
+				initialize();
+			}
+		});
+	}, [initialize]);
 
 	const confirmNewEdition = (editionId: EditionId) => {
 		setCookie({
