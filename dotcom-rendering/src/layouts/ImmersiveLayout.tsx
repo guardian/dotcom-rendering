@@ -270,7 +270,6 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
 		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const { renderingTarget } = useConfig();

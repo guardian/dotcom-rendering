@@ -141,7 +141,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	const renderAds = canRenderAds(article);
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
 		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	if (isSlimNav) {
