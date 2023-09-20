@@ -465,9 +465,7 @@ export const renderElement = ({
 
 			return <EmailSignUpSwitcher {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
-			// TODO - include ad placeholder slot component
-			// @see https://github.com/guardian/dotcom-rendering/pull/8808
-			return <></>;
+			return <div className="ad-portal-placeholder"></div>;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent

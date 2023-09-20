@@ -2047,14 +2047,10 @@
                 "_type": {
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
-                },
-                "isSquare": {
-                    "type": "boolean"
                 }
             },
             "required": [
-                "_type",
-                "isSquare"
+                "_type"
             ]
         },
         "NumberedTitleBlockElement": {
