@@ -218,15 +218,14 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 				value: 'true',
 				daysToLive: 90,
 			});
-			// Remove data-link-name from europeModal after first click so that no future clicks are recorded
-			europeModal.addEventListener('click', () => {
-				europeModal.attributes.removeNamedItem('data-link-name');
-			});
 			europeModal.addEventListener('close', () => {
 				dismissModal();
 			});
 			europeModal.showModal();
-			europeModal.click();
+
+			// Dirty way of recording that the EU modal has been opened by creating
+			// a synthetic click which gets Ophan to record a "eu-modal : open" click event.
+			document.getElementById('eu-modal-synthetic-click')?.click();
 
 			document.documentElement.style.overflow = 'hidden';
 			if (modalType === 'ModalSwitched') {
@@ -271,9 +270,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		<dialog
 			css={dialogStyles}
 			id={'europe-modal-dialog'}
-			data-link-name={nestedOphanComponents('eu-modal', 'open')}
 			data-component={'eu-modal'}
 		>
+			<div
+				id="eu-modal-synthetic-click"
+				hidden={true}
+				data-link-name={nestedOphanComponents('eu-modal', 'open')}
+			/>
 			{!switchEdition ? (
 				<>
 					<div css={textStyles}>
