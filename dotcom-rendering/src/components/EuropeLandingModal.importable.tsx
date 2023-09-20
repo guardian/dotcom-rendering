@@ -32,6 +32,7 @@ const dialogStyles = css`
 	&[open] {
 		display: flex;
 	}
+	display: none;
 	max-width: calc(100vw - 20px);
 	padding: 0;
 	width: 620px;
