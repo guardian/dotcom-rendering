@@ -338,7 +338,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							</Button>
 						</div>
 					</div>
-					<div css={imageStyles}>
+					<div css={imageStyles} aria-hidden="true">
 						<SvgFlagsInCircle />
 					</div>
 				</>
