@@ -1,10 +1,8 @@
 import type { Pillar } from '@guardian/libs';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import { decideNavPillar } from './decideNavPillar';
 
-export const getCurrentPillar = (
-	article: FEArticleType,
-): Pillar | undefined => {
+export const getCurrentPillar = (article: DCRArticle): Pillar | undefined => {
 	const currentPillar =
 		(article.nav.currentPillarTitle &&
 			(article.nav.currentPillarTitle.toLowerCase() as LegacyPillar)) ||
