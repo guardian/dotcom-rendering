@@ -435,7 +435,6 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 												'number'
 											}
 											hasAvatar={displayAvatarUrl}
-											renderingTarget={renderingTarget}
 										/>
 									</div>
 
@@ -474,7 +473,6 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 										hasStarRating={
 											article.starRating !== undefined
 										}
-										renderingTarget={renderingTarget}
 									/>
 								</div>
 							</GridItem>
