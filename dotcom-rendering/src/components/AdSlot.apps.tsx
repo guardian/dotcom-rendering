@@ -18,7 +18,6 @@ interface Props {
 
 const adHeight = '258px';
 const wideContentWidth = 620;
-// const wideColumnWidth = 220;
 
 const hiddenStyles = css`
 	${visuallyHidden}
@@ -84,13 +83,6 @@ const styles = css`
 
 	${until.phablet} {
 		margin: 1em -${remSpace[3]};
-	}
-
-	/* This class is applied if the article has fewer than 15 paragraphs */
-	&.short:nth-of-type(1) {
-		${from.desktop} {
-			top: 0;
-		}
 	}
 `;
 

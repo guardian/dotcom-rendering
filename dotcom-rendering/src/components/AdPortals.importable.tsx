@@ -145,8 +145,7 @@ export const AdPortals = () => {
 
 					resizeObserver.observe(document.body);
 				}
-			})
-			.catch(() => undefined);
+			});
 
 		bodyHeight.current = document.body.clientHeight;
 		return () => resizeObserver?.disconnect();
