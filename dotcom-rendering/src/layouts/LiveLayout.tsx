@@ -709,6 +709,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										switches={article.config.switches}
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
+										imagesForAppsLightbox={
+											article.imagesForAppsLightbox
+										}
 									/>
 								</div>
 							</GridItem>
@@ -903,6 +906,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 															.serverSideLiveblogInlineAdsVariant ===
 														'variant'
 													}
+													imagesForAppsLightbox={
+														article.imagesForAppsLightbox
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1056,6 +1062,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													isRightToLeftLang={
 														article.isRightToLeftLang
 													}
+													imagesForAppsLightbox={[]}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination

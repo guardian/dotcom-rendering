@@ -456,6 +456,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
+									imagesForAppsLightbox={[]}
 								/>
 							</div>
 						</GridItem>
@@ -566,6 +567,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									imagesForAppsLightbox={[]}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>

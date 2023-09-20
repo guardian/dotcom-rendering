@@ -11,11 +11,15 @@ import {
 import { decidePalette } from '../lib/decidePalette';
 import { getLargest, getMaster } from '../lib/image';
 import { isWideEnough } from '../lib/lightbox';
+import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { Switches } from '../types/config';
 import type { ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
+import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
+import { useConfig } from './ConfigContext';
 import { Hide } from './Hide';
+import { Island } from './Island';
 import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
 import { StarRating } from './StarRating/StarRating';
@@ -30,6 +34,7 @@ type Props = {
 	title?: string;
 	isAvatar?: boolean;
 	switches?: Switches;
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 const starsWrapper = css`
@@ -235,7 +240,9 @@ export const ImageComponent = ({
 	title,
 	isAvatar,
 	switches,
+	imagesForAppsLightbox,
 }: Props) => {
+	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
 	// if so, don't try to render
 	if (element.media.allImages.length === 0) {
@@ -310,16 +317,36 @@ export const ImageComponent = ({
 					position: relative;
 				`}
 			>
-				<Picture
-					role={role}
-					format={format}
-					master={image.url}
-					alt={element.data.alt ?? ''}
-					width={imageWidth}
-					height={imageHeight}
-					isLazy={!isMainMedia}
-					isMainMedia={isMainMedia}
-				/>
+				{renderingTarget === 'Apps' ? (
+					<Island>
+						<AppsLightboxImage
+							images={imagesForAppsLightbox}
+							currentIndex={imagesForAppsLightbox.findIndex(
+								(img) => img.elementId === element.elementId,
+							)}
+							role={role}
+							format={format}
+							master={image.url}
+							alt={element.data.alt ?? ''}
+							width={imageWidth}
+							height={imageHeight}
+							isLazy={!isMainMedia}
+							isMainMedia={isMainMedia}
+						/>
+					</Island>
+				) : (
+					<Picture
+						role={role}
+						format={format}
+						master={image.url}
+						alt={element.data.alt ?? ''}
+						width={imageWidth}
+						height={imageHeight}
+						isLazy={!isMainMedia}
+						isMainMedia={isMainMedia}
+					/>
+				)}
+
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
@@ -357,16 +384,36 @@ export const ImageComponent = ({
 					}
 				`}
 			>
-				<Picture
-					role={role}
-					format={format}
-					master={image.url}
-					alt={element.data.alt ?? ''}
-					width={imageWidth}
-					height={imageHeight}
-					isLazy={!isMainMedia}
-					isMainMedia={isMainMedia}
-				/>
+				{renderingTarget === 'Apps' ? (
+					<Island>
+						<AppsLightboxImage
+							images={imagesForAppsLightbox}
+							currentIndex={imagesForAppsLightbox.findIndex(
+								(img) => img.elementId === element.elementId,
+							)}
+							role={role}
+							format={format}
+							master={image.url}
+							alt={element.data.alt ?? ''}
+							width={imageWidth}
+							height={imageHeight}
+							isLazy={!isMainMedia}
+							isMainMedia={isMainMedia}
+						/>
+					</Island>
+				) : (
+					<Picture
+						role={role}
+						format={format}
+						master={image.url}
+						alt={element.data.alt ?? ''}
+						width={imageWidth}
+						height={imageHeight}
+						isLazy={!isMainMedia}
+						isMainMedia={isMainMedia}
+					/>
+				)}
+
 				{typeof starRating === 'number' && (
 					<PositionStarRating rating={starRating} />
 				)}
@@ -407,16 +454,36 @@ export const ImageComponent = ({
 					}
 				`}
 			>
-				<Picture
-					role={role}
-					format={format}
-					master={image.url}
-					alt={element.data.alt ?? ''}
-					width={imageWidth}
-					height={imageHeight}
-					isLazy={!isMainMedia}
-					isMainMedia={isMainMedia}
-				/>
+				{renderingTarget === 'Apps' ? (
+					<Island>
+						<AppsLightboxImage
+							images={imagesForAppsLightbox}
+							currentIndex={imagesForAppsLightbox.findIndex(
+								(img) => img.elementId === element.elementId,
+							)}
+							role={role}
+							format={format}
+							master={image.url}
+							alt={element.data.alt ?? ''}
+							width={imageWidth}
+							height={imageHeight}
+							isLazy={!isMainMedia}
+							isMainMedia={isMainMedia}
+						/>
+					</Island>
+				) : (
+					<Picture
+						role={role}
+						format={format}
+						master={image.url}
+						alt={element.data.alt ?? ''}
+						width={imageWidth}
+						height={imageHeight}
+						isLazy={!isMainMedia}
+						isMainMedia={isMainMedia}
+					/>
+				)}
+
 				{isMainMedia && (
 					// Below tablet, main media images show an info toggle at the bottom right of
 					// the image which, when clicked, toggles the caption as an overlay
