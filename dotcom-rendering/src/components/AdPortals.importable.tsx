@@ -1,9 +1,14 @@
 import { AdSlot as BridgetAdSlot } from '@guardian/bridget/AdSlot';
+import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
 import type { IRect as BridgetRect } from '@guardian/bridget/Rect';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { getCommercialClient, getUserClient } from '../lib/bridgetApi';
+import {
+	getAcquisitionsClient,
+	getCommercialClient,
+	getUserClient,
+} from '../lib/bridgetApi';
 import { AdSlot } from './AdSlot.apps';
 
 const calculateAdPosition = (element: Element): BridgetRect => {
@@ -150,15 +155,20 @@ export const AdPortals = () => {
 		return () => resizeObserver?.disconnect();
 	}, [adPlaceholders]);
 
+	const handleClickSupportButton = () => {
+		void getAcquisitionsClient().launchPurchaseScreen(
+			PurchaseScreenReason.hideAds,
+		);
+	};
+
 	return (
 		<>
 			{adPlaceholders.map((ad, index) =>
 				createPortal(
 					<AdSlot
 						key={ad.id}
-						isHidden={false}
 						isSquare={index === 0}
-						index={index}
+						onClickSupportButton={handleClickSupportButton}
 						ref={(node) => {
 							if (node !== null) {
 								adSlots.current = [...adSlots.current, node];
