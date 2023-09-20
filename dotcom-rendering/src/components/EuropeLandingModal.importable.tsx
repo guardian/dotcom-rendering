@@ -216,7 +216,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			europeModal.showModal();
 			europeModal.click();
 			europeModal.addEventListener('close', () => {
-				hideModal();
+				dismissModal();
 			});
 
 			document.documentElement.style.overflow = 'hidden';
@@ -247,17 +247,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			isCrossSubdomain: true,
 		});
 		if (editionId === edition) {
-			hideModal();
+			dismissModal();
 		} else {
 			window.location.replace(getEditionFromId(editionId).url);
 		}
 	};
 
 	const dismissModal = () => {
-		hideModal();
-	};
-
-	const hideModal = () => {
 		const europeModal = document.getElementById('europe-modal-dialog');
 		if (europeModal instanceof HTMLDialogElement) {
 			europeModal.close();
