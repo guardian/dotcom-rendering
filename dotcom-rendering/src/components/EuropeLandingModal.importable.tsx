@@ -188,6 +188,7 @@ export const getModalType = (): ModalType => {
 			return 'ModalDoYouWantToSwitch';
 		}
 	}
+
 	return 'NoModal';
 };
 
@@ -217,11 +218,15 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 				value: 'true',
 				daysToLive: 90,
 			});
-			europeModal.showModal();
-			europeModal.click();
+			// Remove data-link-name from europeModal after first click so that no future clicks are recorded
+			europeModal.addEventListener('click', () => {
+				europeModal.attributes.removeNamedItem('data-link-name');
+			});
 			europeModal.addEventListener('close', () => {
 				dismissModal();
 			});
+			europeModal.showModal();
+			europeModal.click();
 
 			document.documentElement.style.overflow = 'hidden';
 			if (modalType === 'ModalSwitched') {
