@@ -249,11 +249,11 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 	}, [initialize]);
 
 	const confirmNewEdition = (editionId: EditionId) => {
+		dismissModal();
+
 		// Always send EUR users to the Edition preference endpoint.
 		// We want them to be redirected to the /europe front.
-		if (editionId === edition && editionId !== 'EUR') {
-			dismissModal();
-		} else {
+		if (editionId !== edition || editionId === 'EUR') {
 			window.location.replace(getEditionFromId(editionId).url);
 		}
 	};
