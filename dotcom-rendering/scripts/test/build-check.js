@@ -27,26 +27,30 @@ const fileExists = async (glob) => {
 
 (async () => {
 	// Check that the manifest files exist
-	await fileExists('manifest.modern.json');
-	await fileExists('manifest.legacy.json');
-	if (BUILD_VARIANT) await fileExists('manifest.variant.json');
+	await fileExists('manifest.web.json');
+	await fileExists('manifest.web.scheduled.json');
+	await fileExists('manifest.web.ophan-esm.json');
+	await fileExists('manifest.web.legacy.json');
+	if (BUILD_VARIANT) await fileExists('manifest.web.variant.json');
 
 	// Check that the manifest files return values for all the chunks
 	const manifests = [
-		await loadJsonFile('./dist/manifest.modern.json'),
-		await loadJsonFile('./dist/manifest.legacy.json'),
+		await loadJsonFile('./dist/manifest.web.json'),
+		await loadJsonFile('./dist/manifest.web.scheduled.json'),
+		await loadJsonFile('./dist/manifest.web.ophan-esm.json'),
+		await loadJsonFile('./dist/manifest.web.legacy.json'),
 	];
 	if (BUILD_VARIANT) {
-		manifests.push(await loadJsonFile('./dist/manifest.variant.json'));
+		manifests.push(await loadJsonFile('./dist/manifest.web.variant.json'));
 	}
 
-	[
+	for (const name of [
 		'index.js',
 		'atomIframe.js',
 		'embedIframe.js',
 		'newsletterEmbedIframe.js',
 		'relativeTime.js',
-	].forEach((name) => {
+	]) {
 		for (const manifest of manifests) {
 			if (manifest[name]) {
 				console.log(`A manifest returned value ${name}`);
@@ -54,5 +58,5 @@ const fileExists = async (glob) => {
 				errorAndThrow(`A manifest did not return a value for ${name}`);
 			}
 		}
-	});
+	}
 })();

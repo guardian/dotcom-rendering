@@ -155,7 +155,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 };
 
 const sublinkStyles = css`
-	display: inline-block;
+	display: block;
 	/* See: https://css-tricks.com/nested-links/ */
 	${getZIndex('card-nested-link')}
 	/* The following styles turn off those provided by Link */
@@ -166,6 +166,9 @@ const sublinkStyles = css`
 	font-size: inherit;
 	font-weight: ${fontWeights.medium};
 	line-height: inherit;
+	@media (pointer: coarse) {
+		min-height: 44px;
+	}
 	/* This css is used to remove any underline from the kicker but still
 	 * have it applied to the headline when the kicker is hovered */
 	:hover {

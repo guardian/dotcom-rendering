@@ -6,9 +6,11 @@ import {
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import type { Loading } from './CardPicture';
 
 type Props = {
 	trails: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -17,6 +19,7 @@ export const FixedMediumSlowVI = ({
 	trails,
 	containerPalette,
 	showAge,
+	imageLoading,
 }: Props) => {
 	const firstSlice75 = trails.slice(0, 1);
 	const firstSlice25 = trails.slice(1, 2);
@@ -31,6 +34,7 @@ export const FixedMediumSlowVI = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							imageLoading={imageLoading}
 						/>
 					</LI>
 				))}
@@ -46,6 +50,7 @@ export const FixedMediumSlowVI = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							imageLoading={imageLoading}
 						/>
 					</LI>
 				))}
@@ -62,6 +67,7 @@ export const FixedMediumSlowVI = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							imageLoading={imageLoading}
 						/>
 					</LI>
 				))}

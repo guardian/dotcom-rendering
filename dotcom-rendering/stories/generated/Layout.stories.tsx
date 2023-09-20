@@ -28,6 +28,7 @@ export const WebStandardStandardNewsPillar = () => {
 	);
 };
 WebStandardStandardNewsPillar.storyName = 'Web: Display: Standard, Design: Standard, Theme: NewsPillar';
+WebStandardStandardNewsPillar.args = { config: { renderingTarget: 'Web' } };
 
 export const AppsStandardStandardNewsPillar = () => {
 	return (
@@ -40,3 +41,17 @@ export const AppsStandardStandardNewsPillar = () => {
 	);
 };
 AppsStandardStandardNewsPillar.storyName = 'Apps: Display: Standard, Design: Standard, Theme: NewsPillar';
+AppsStandardStandardNewsPillar.args = { config: { renderingTarget: 'Apps' } };
+
+export const WebShowcasePictureOpinionPillar = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Picture"
+			theme="OpinionPillar"
+			renderingTarget="Web"
+		/>
+	);
+};
+WebShowcasePictureOpinionPillar.storyName = 'Web: Display: Showcase, Design: Picture, Theme: OpinionPillar';
+WebShowcasePictureOpinionPillar.args = { config: { renderingTarget: 'Web' } };

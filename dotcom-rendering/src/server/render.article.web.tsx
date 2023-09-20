@@ -1,27 +1,25 @@
 import { ArticleDesign, isString, Pillar } from '@guardian/libs';
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles';
 import { ArticlePage } from '../components/ArticlePage';
+import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
+	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractGA } from '../model/extract-ga';
 import { extractNAV } from '../model/extract-nav';
-import { makeWindowGuardian } from '../model/window-guardian';
+import { createGuardian as createWindowGuardian } from '../model/guardian';
+import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
 import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
 import type { TagType } from '../types/tag';
@@ -38,7 +36,9 @@ const decideTitle = (article: FEArticleType): string => {
 	return `${article.headline} | ${article.sectionLabel} | The Guardian`;
 };
 
-export const renderHtml = ({ article }: Props): string => {
+export const renderHtml = ({
+	article,
+}: Props): { html: string; prefetchScripts: string[] } => {
 	const NAV = {
 		...extractNAV(article.nav),
 		selectedPillar: getCurrentPillar(article),
@@ -49,13 +49,18 @@ export const renderHtml = ({ article }: Props): string => {
 
 	const format: ArticleFormat = decideFormat(article.format);
 
+	const renderingTarget = 'Web';
+	const config: Config = { renderingTarget };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<ArticlePage
-			format={format}
-			article={article}
-			NAV={NAV}
-			renderingTarget="Web"
-		/>,
+		<ConfigProvider value={config}>
+			<ArticlePage
+				format={format}
+				article={article}
+				NAV={NAV}
+				renderingTarget={renderingTarget}
+			/>
+		</ConfigProvider>,
 	);
 
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -82,12 +87,10 @@ export const renderHtml = ({ article }: Props): string => {
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const serveVariantBundle: boolean = [
-		BUILD_VARIANT,
-		article.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
-	].every(Boolean);
-
-	const build = serveVariantBundle ? 'variant' : 'modern';
+	const build = getModulesBuild({
+		tests: article.config.abTests,
+		switches: article.config.switches,
+	});
 
 	/**
 	 * The highest priority scripts.
@@ -96,64 +99,65 @@ export const renderHtml = ({ article }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const scriptTags = generateScriptTags(
-		[
-			polyfillIO,
-			getPathFromManifest(build, 'frameworks.js'),
-			getPathFromManifest(build, 'index.js'),
-			getPathFromManifest('legacy', 'frameworks.js'),
-			getPathFromManifest('legacy', 'index.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				article.config.commercialBundleUrl,
-			pageHasNonBootInteractiveElements &&
-				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-		]
-			.filter(isString)
-			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
+	const prefetchScripts = [
+		polyfillIO,
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
+		process.env.COMMERCIAL_BUNDLE_URL ?? article.config.commercialBundleUrl,
+		pageHasNonBootInteractiveElements &&
+			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
+	]
+		.filter(isString)
+		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+
+	const legacyScripts = [
+		getPathFromManifest('web.legacy', 'frameworks.js'),
+		getPathFromManifest('web.legacy', 'index.js'),
+	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+
+	const scriptTags = generateScriptTags([
+		...prefetchScripts,
+		...legacyScripts,
+	]);
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
 	 */
-	const windowGuardian = escapeData(
-		JSON.stringify(
-			makeWindowGuardian({
-				editionId: article.editionId,
-				stage: article.config.stage,
-				frontendAssetsFullURL: article.config.frontendAssetsFullURL,
-				revisionNumber: article.config.revisionNumber,
-				sentryPublicApiKey: article.config.sentryPublicApiKey,
-				sentryHost: article.config.sentryHost,
-				keywordIds: article.config.keywordIds,
-				dfpAccountId: article.config.dfpAccountId,
-				adUnit: article.config.adUnit,
-				ajaxUrl: article.config.ajaxUrl,
-				googletagUrl: article.config.googletagUrl,
-				switches: article.config.switches,
-				abTests: article.config.abTests,
-				brazeApiKey: article.config.brazeApiKey,
-				isPaidContent: article.pageType.isPaidContent,
-				contentType: article.contentType,
-				shouldHideReaderRevenue: article.shouldHideReaderRevenue,
-				googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
-				GAData: extractGA({
-					webTitle: article.webTitle,
-					format: article.format,
-					sectionName: article.sectionName,
-					contentType: article.contentType,
-					tags: article.tags,
-					pageId: article.pageId,
-					editionId: article.editionId,
-					beaconURL: article.beaconURL,
-				}),
-				hasInlineMerchandise: article.config.hasInlineMerchandise,
-				// Until we understand exactly what config we need to make available client-side,
-				// add everything we haven't explicitly typed as unknown config
-				unknownConfig: article.config,
-			}),
-		),
-	);
+	const guardian = createWindowGuardian({
+		editionId: article.editionId,
+		stage: article.config.stage,
+		frontendAssetsFullURL: article.config.frontendAssetsFullURL,
+		revisionNumber: article.config.revisionNumber,
+		sentryPublicApiKey: article.config.sentryPublicApiKey,
+		sentryHost: article.config.sentryHost,
+		keywordIds: article.config.keywordIds,
+		dfpAccountId: article.config.dfpAccountId,
+		adUnit: article.config.adUnit,
+		ajaxUrl: article.config.ajaxUrl,
+		googletagUrl: article.config.googletagUrl,
+		switches: article.config.switches,
+		abTests: article.config.abTests,
+		brazeApiKey: article.config.brazeApiKey,
+		isPaidContent: article.pageType.isPaidContent,
+		contentType: article.contentType,
+		shouldHideReaderRevenue: article.shouldHideReaderRevenue,
+		googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
+		GAData: extractGA({
+			webTitle: article.webTitle,
+			format: article.format,
+			sectionName: article.sectionName,
+			contentType: article.contentType,
+			tags: article.tags,
+			pageId: article.pageId,
+			editionId: article.editionId,
+			beaconURL: article.beaconURL,
+		}),
+		hasInlineMerchandise: article.config.hasInlineMerchandise,
+		// Until we understand exactly what config we need to make available client-side,
+		// add everything we haven't explicitly typed as unknown config
+		unknownConfig: article.config,
+	});
 
 	const getAmpLink = (tags: TagType[]) => {
 		if (
@@ -205,14 +209,14 @@ window.twttr = (function(d, s, id) {
 
 	const { canonicalUrl } = article;
 
-	return htmlPageTemplate({
+	const pageHtml = htmlPageTemplate({
 		linkedData,
 		scriptTags,
 		css: extractedCss,
 		html,
 		title,
 		description: article.trailText,
-		windowGuardian,
+		guardian,
 		ampLink,
 		openGraphData,
 		twitterData,
@@ -226,6 +230,8 @@ window.twttr = (function(d, s, id) {
 		renderingTarget: 'Web',
 		weAreHiring: !!article.config.switches.weAreHiring,
 	});
+
+	return { html: pageHtml, prefetchScripts };
 };
 
 /**
@@ -249,26 +255,31 @@ export const renderBlocks = ({
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
+	// Only currently supported for Web
+	const config: Config = { renderingTarget: 'Web' };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<LiveBlogRenderer
-			blocks={blocks}
-			format={format}
-			host={host}
-			pageId={pageId}
-			webTitle={webTitle}
-			ajaxUrl={ajaxUrl}
-			isSensitive={isSensitive}
-			isAdFreeUser={isAdFreeUser}
-			switches={switches}
-			isLiveUpdate={true}
-			sectionId={section}
-			// The props below are never used because isLiveUpdate is true but, typescript...
-			shouldHideReaderRevenue={false}
-			tags={[]}
-			isPaidContent={false}
-			contributionsServiceUrl=""
-			keywordIds={keywordIds}
-		/>,
+		<ConfigProvider value={config}>
+			<LiveBlogRenderer
+				blocks={blocks}
+				format={format}
+				host={host}
+				pageId={pageId}
+				webTitle={webTitle}
+				ajaxUrl={ajaxUrl}
+				isSensitive={isSensitive}
+				isAdFreeUser={isAdFreeUser}
+				switches={switches}
+				isLiveUpdate={true}
+				sectionId={section}
+				// The props below are never used because isLiveUpdate is true but, typescript...
+				shouldHideReaderRevenue={false}
+				tags={[]}
+				isPaidContent={false}
+				contributionsServiceUrl=""
+				keywordIds={keywordIds}
+			/>
+		</ConfigProvider>,
 	);
 
 	return `${extractedCss}${html}`;
@@ -285,12 +296,16 @@ export const renderKeyEvents = ({
 	format: FEFormat,
 	filterKeyEvents,
 }: FEKeyEventsRequest): string => {
+	const config: Config = { renderingTarget: 'Web' };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<KeyEventsContainer
-			keyEvents={keyEvents}
-			format={decideFormat(FEFormat)}
-			filterKeyEvents={filterKeyEvents}
-		/>,
+		<ConfigProvider value={config}>
+			<KeyEventsContainer
+				keyEvents={keyEvents}
+				format={decideFormat(FEFormat)}
+				filterKeyEvents={filterKeyEvents}
+			/>
+		</ConfigProvider>,
 	);
 
 	return `${extractedCss}${html}`;

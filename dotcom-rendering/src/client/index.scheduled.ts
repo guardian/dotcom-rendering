@@ -5,17 +5,8 @@
 
 import './webpackPublicPath';
 
-// these modules are bundled in the initial (i.e. this) chunk, so that they run ASAP
-
 import type { ScheduleOptions } from '../lib/scheduler';
 import { schedule, setSchedulerConcurrency } from '../lib/scheduler';
-import { bootCmp } from './bootCmp';
-import { dynamicImport } from './dynamicImport';
-import { ga } from './ga';
-import { islands } from './islands';
-import { ophan } from './ophan';
-import { performanceMonitoring } from './performanceMonitoring';
-import { sentryLoader } from './sentryLoader';
 
 if (window.location.hash.includes('concurrency=')) {
 	const match = window.location.hash.match(/concurrency=(\d+)/);
@@ -38,33 +29,92 @@ const boot = (
 	}
 };
 
-boot('bootCmp', bootCmp);
-boot('ophan', ophan);
-boot('ga', ga);
-boot('sentryLoader', sentryLoader);
-boot('dynamicImport', dynamicImport);
-boot('islands', islands);
-boot('performanceMonitoring', performanceMonitoring);
+/*************************************************************
+ *
+ * The following modules are bundled in the entry chunk,
+ * so they can be run immediately, but we still want to report
+ * on the duration of loading and evaluating them.
+ *
+ *************************************************************/
 
-// these modules are loaded as separate chunks, so that they can be lazy-loaded
-void import(/* webpackChunkName: 'atomIframe' */ './atomIframe').then(
-	({ atomIframe }) => boot('atomIframe', atomIframe),
+boot('bootCmp', () =>
+	import(/* webpackMode: "eager" */ './bootCmp').then(({ bootCmp }) =>
+		bootCmp(),
+	),
+);
+boot('recordInitialPageEvents', () =>
+	import(/* webpackMode: "eager" */ './ophan/recordInitialPageEvents').then(
+		({ recordInitialPageEvents }) => recordInitialPageEvents(),
+	),
+);
+boot('ga', () =>
+	import(/* webpackMode: "eager" */ './ga').then(({ ga }) => ga()),
+);
+boot('sentryLoader', () =>
+	import(/* webpackMode: "eager" */ './sentryLoader').then(
+		({ sentryLoader }) => sentryLoader(),
+	),
+);
+boot('dynamicImport', () =>
+	import(/* webpackMode: "eager" */ './dynamicImport').then(
+		({ dynamicImport }) => dynamicImport(),
+	),
+);
+boot('islands', () =>
+	import(/* webpackMode: "eager" */ './islands').then(({ islands }) =>
+		islands(),
+	),
+);
+boot('performanceMonitoring', () =>
+	import(/* webpackMode: "eager" */ './performanceMonitoring').then(
+		({ performanceMonitoring }) => performanceMonitoring(),
+	),
 );
 
-void import(/* webpackChunkName: 'embedIframe' */ './embedIframe').then(
-	({ embedIframe }) => boot('embedIframe', embedIframe),
+/*************************************************************
+ *
+ * The following modules are lazy loaded as separate chunks,
+ * because they are lower priority and do not want to block
+ * the modules above on loading these.
+ *
+ *************************************************************/
+
+boot('atomIframe', () =>
+	import(
+		/* webpackMode: 'lazy' */
+		/* webpackChunkName: 'atomIframe' */
+		'./atomIframe'
+	).then(({ atomIframe }) => atomIframe()),
 );
 
-void import(
-	/* webpackChunkName: 'newsletterEmbedIframe' */ './newsletterEmbedIframe'
-).then(({ newsletterEmbedIframe }) =>
-	boot('newsletterEmbedIframe', newsletterEmbedIframe),
+boot('embedIframe', () =>
+	import(
+		/* webpackMode: 'lazy' */
+		/* webpackChunkName: 'embedIframe' */
+		'./embedIframe'
+	).then(({ embedIframe }) => embedIframe()),
 );
 
-void import(/* webpackChunkName: 'relativeTime' */ './relativeTime').then(
-	({ relativeTime }) => boot('relativeTime', relativeTime),
+boot('newsletterEmbedIframe', () =>
+	import(
+		/* webpackMode: 'lazy' */
+		/* webpackChunkName: 'newsletterEmbedIframe' */
+		'./newsletterEmbedIframe'
+	).then(({ newsletterEmbedIframe }) => newsletterEmbedIframe()),
 );
 
-void import(/* webpackChunkName: 'discussion' */ './discussion').then(
-	({ discussion }) => boot('initDiscussion', discussion),
+boot('relativeTime', () =>
+	import(
+		/* webpackMode: 'lazy' */
+		/* webpackChunkName: 'relativeTime' */
+		'./relativeTime'
+	).then(({ relativeTime }) => relativeTime()),
+);
+
+boot('initDiscussion', () =>
+	import(
+		/* webpackMode: 'lazy' */
+		/* webpackChunkName: 'discussion' */
+		'./discussion'
+	).then(({ discussion }) => discussion()),
 );

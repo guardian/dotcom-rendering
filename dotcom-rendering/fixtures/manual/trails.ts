@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { DCRFrontCard } from '../../src/types/front';
+import { discussionApiUrl } from './discussionApiUrl';
 
 export const trails: [
 	DCRFrontCard,
@@ -74,6 +75,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/dec/02/migration-v-climate-europes-new-political-divide',
@@ -108,6 +110,7 @@ export const trails: [
 		},
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
@@ -127,6 +130,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/nov/27/climate-emergency-world-may-have-crossed-tipping-points',
@@ -145,6 +149,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/26/european-parliament-split-on-declaring-climate-emergency',
@@ -163,6 +168,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/23/north-pole-explorers-on-thin-ice-as-climate-change-hits-expedition',
@@ -182,6 +188,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/oct/25/scientists-glacial-rivers-absorb-carbon-faster-rainforests',
@@ -202,6 +209,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/business/2019/oct/20/uk-urges-world-bank-to-channel-more-money-into-tackling-climate-crisis',
@@ -221,6 +229,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 
 	{
@@ -242,6 +251,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/uk-to-begin-worlds-first-covid-human-challenge-study-within-weeks',
@@ -262,6 +272,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/scottish-government-inadequately-prepared-for-covid-audit-scotland-report',
@@ -282,6 +293,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/society/2021/feb/16/encouraging-signs-covid-vaccine-over-80s-deaths-fall-england',
@@ -302,6 +314,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/contact-tracing-alone-has-little-impact-on-curbing-covid-spread-report-finds',
@@ -322,6 +335,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/covid-almost-2m-more-people-asked-shield-england',
@@ -342,6 +356,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/politics/live/2021/feb/16/uk-covid-live-coronavirus-sturgeon-return-scottish-schools-latest-updates',
@@ -362,6 +377,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/uk-news/2021/feb/16/qcovid-how-improved-algorithm-can-identify-more-higher-risk-adults',
@@ -382,6 +398,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
@@ -400,6 +417,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/society/2023/may/30/trans-activists-disrupt-kathleen-stock-speech-at-oxford-union',
@@ -419,6 +437,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/commentisfree/2023/may/31/price-controls-rishi-sunak-thatcher-prime-minister',
@@ -438,6 +457,7 @@ export const trails: [
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 	{
 		url: 'https://www.theguardian.com/tv-and-radio/2023/may/30/a-revelation-succession-matthew-macfadyen-has-been-a-consummate-shapeshifter',
@@ -454,8 +474,57 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@18',
 		showQuotedHeadline: false,
-		mainMedia: undefined,
+		supportingContent: [
+			{
+				url: 'https://www.theguardian.com',
+				format: {
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				},
+				headline: 'Headline 1',
+				kickerText: 'Kicker',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				format: {
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				},
+				headline: 'Headline 2',
+				kickerText: 'Kicker',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				format: {
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				},
+				headline: 'Headline 3',
+				kickerText: 'Kicker',
+			},
+		],
+		mainMedia: {
+			type: 'Video',
+			elementId: 'abcdef',
+			videoId: 'abcd',
+			title: 'some title',
+			duration: 378,
+			width: 480,
+			height: 288,
+			origin: 'The Guardian',
+			expired: false,
+			images: [
+				{
+					url: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
+					width: 600,
+				},
+			],
+		},
 		isExternalLink: false,
 		showLivePlayable: false,
+		discussionApiUrl,
 	},
 ];

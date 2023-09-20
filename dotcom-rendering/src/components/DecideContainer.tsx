@@ -1,3 +1,4 @@
+import type { ImgHTMLAttributes } from 'react';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
@@ -27,6 +28,7 @@ type Props = {
 	trails: DCRFrontCard[];
 	adIndex: number;
 	groupedTrails: DCRGroupedTrails;
+	imageLoading: NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
@@ -41,6 +43,7 @@ export const DecideContainer = ({
 	containerPalette,
 	showAge,
 	renderAds,
+	imageLoading,
 }: Props) => {
 	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
@@ -50,6 +53,7 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'dynamic/slow':
@@ -58,6 +62,7 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'dynamic/slow-mpu':
@@ -68,6 +73,7 @@ export const DecideContainer = ({
 					showAge={showAge}
 					adIndex={adIndex}
 					renderAds={renderAds}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'dynamic/package':
@@ -76,6 +82,7 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/large/slow-XIV':
@@ -84,6 +91,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/small/slow-IV':
@@ -92,6 +100,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/small/slow-V-mpu':
@@ -102,6 +111,7 @@ export const DecideContainer = ({
 					showAge={showAge}
 					adIndex={adIndex}
 					renderAds={renderAds}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/small/slow-III':
@@ -110,6 +120,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/small/slow-I':
@@ -118,6 +129,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/small/slow-V-third':
@@ -126,6 +138,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/small/slow-V-half':
@@ -134,6 +147,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/medium/slow-VI':
@@ -142,6 +156,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/medium/slow-VII':
@@ -150,6 +165,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/medium/slow-XII-mpu':
@@ -160,6 +176,7 @@ export const DecideContainer = ({
 					showAge={showAge}
 					renderAds={renderAds}
 					adIndex={adIndex}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/medium/fast-XII':
@@ -168,6 +185,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/medium/fast-XI':
@@ -176,6 +194,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'fixed/small/fast-VIII':
@@ -184,6 +203,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			);
 		case 'nav/list':

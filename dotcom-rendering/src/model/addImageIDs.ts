@@ -17,25 +17,22 @@ export const addImageIDs = (
 ): { mainMediaElements: FEElement[]; blocks: Block[] } => {
 	// position needs to be defined outside the addPosition function otherwise
 	// it will get reset to 1 each time
-	let position = 1;
-	const addPosition = (elements: FEElement[]): FEElement[] => {
-		const withPosition: FEElement[] = [];
-		elements.forEach((thisElement) => {
+	let position = 0;
+	const addPosition = (elements: FEElement[]): FEElement[] =>
+		elements.map<FEElement>((thisElement) => {
 			if (
 				thisElement._type ===
 				'model.dotcomrendering.pageElements.ImageBlockElement'
 			) {
-				withPosition.push({
+				position += 1;
+				return {
 					...thisElement,
 					position,
-				});
-				position += 1;
+				};
 			} else {
-				withPosition.push(thisElement);
+				return thisElement;
 			}
 		});
-		return withPosition;
-	};
 
 	return {
 		mainMediaElements: addPosition(data.mainMediaElements),

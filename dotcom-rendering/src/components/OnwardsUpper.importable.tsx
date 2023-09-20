@@ -169,11 +169,10 @@ type Props = {
 	editionId: EditionId;
 	pillar: ArticleTheme;
 	shortUrlId: string;
+	discussionApiUrl: string;
 };
 
 /**
- * # Onwards Upper
- *
  * A wrapper around `Carousel` for showing related articles at the bottom
  * of an article. This contains the logic around which articles to show,
  * depending on a series of factors (story package, paid content, series tag, …)
@@ -203,6 +202,7 @@ export const OnwardsUpper = ({
 	pillar,
 	editionId,
 	shortUrlId,
+	discussionApiUrl,
 }: Props) => {
 	// Related content can be a collection of articles based on
 	// two things, 1: A popular tag, or 2: A generic text match
@@ -289,6 +289,7 @@ export const OnwardsUpper = ({
 						limit={8}
 						onwardsSource={onwardsSource}
 						format={format}
+						discussionApiUrl={discussionApiUrl}
 					/>
 				</Section>
 			)}
@@ -299,6 +300,7 @@ export const OnwardsUpper = ({
 						limit={20}
 						onwardsSource="curated-content"
 						format={format}
+						discussionApiUrl={discussionApiUrl}
 					/>
 				</Section>
 			)}

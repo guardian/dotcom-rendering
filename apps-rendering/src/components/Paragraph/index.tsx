@@ -54,8 +54,8 @@ const styles = (
 					${dropCapWeight(format)}
 					color: ${text.dropCap(format)};
 					float: left;
-					font-size: 7.375rem;
-					line-height: 6.188rem;
+					font-size: 6.75rem;
+					line-height: 5.7rem;
 					vertical-align: text-top;
 					pointer-events: none;
 					margin-right: ${remSpace[1]};
@@ -81,7 +81,7 @@ const styles = (
 	return css`
 		${body.medium()}
 		overflow-wrap: break-word;
-		margin: 0 0 ${remSpace[3]};
+		margin: 0 0 0.875rem;
 		color: ${text.paragraph(format)};
 
 		${isEditions

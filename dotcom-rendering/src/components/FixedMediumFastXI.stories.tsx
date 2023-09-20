@@ -1,4 +1,5 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
 import { FrontSection } from './FrontSection';
@@ -18,78 +19,111 @@ export default {
 };
 
 export const OneTrail = () => (
-	<FrontSection title="Fixed Medium Fast XI">
-		<FixedMediumFastXI trails={trails.slice(0, 1)} />
+	<FrontSection
+		title="Fixed Medium Fast XI"
+		discussionApiUrl={discussionApiUrl}
+	>
+		<FixedMediumFastXI trails={trails.slice(0, 1)} imageLoading="eager" />
 	</FrontSection>
 );
 OneTrail.storyName = 'with one trail';
 
 export const TwoTrails = () => (
-	<FrontSection title="Fixed Medium Fast XI">
-		<FixedMediumFastXI trails={trails.slice(0, 2)} />
+	<FrontSection
+		title="Fixed Medium Fast XI"
+		discussionApiUrl={discussionApiUrl}
+	>
+		<FixedMediumFastXI trails={trails.slice(0, 2)} imageLoading="eager" />
 	</FrontSection>
 );
 TwoTrails.storyName = 'with two trails';
 
 export const ThreeTrails = () => (
-	<FrontSection title="Fixed Medium Fast XI">
-		<FixedMediumFastXI trails={trails.slice(0, 3)} />
+	<FrontSection
+		title="Fixed Medium Fast XI"
+		discussionApiUrl={discussionApiUrl}
+	>
+		<FixedMediumFastXI trails={trails.slice(0, 3)} imageLoading="eager" />
 	</FrontSection>
 );
 ThreeTrails.storyName = 'with three trails';
 
 export const FourTrails = () => (
-	<FrontSection title="Fixed Medium Fast XI">
-		<FixedMediumFastXI trails={trails.slice(0, 4)} />
+	<FrontSection
+		title="Fixed Medium Fast XI"
+		discussionApiUrl={discussionApiUrl}
+	>
+		<FixedMediumFastXI trails={trails.slice(0, 4)} imageLoading="eager" />
 	</FrontSection>
 );
 FourTrails.storyName = 'with four trails';
 
 export const FiveTrails = () => (
-	<FrontSection title="Fixed Medium Fast XI">
-		<FixedMediumFastXI trails={trails.slice(0, 5)} />
+	<FrontSection
+		title="Fixed Medium Fast XI"
+		discussionApiUrl={discussionApiUrl}
+	>
+		<FixedMediumFastXI trails={trails.slice(0, 5)} imageLoading="eager" />
 	</FrontSection>
 );
 FiveTrails.storyName = 'with five trails';
 
 export const SixTrails = () => (
-	<FrontSection title="Fixed Medium Fast XI">
-		<FixedMediumFastXI trails={trails.slice(0, 6)} />
+	<FrontSection
+		title="Fixed Medium Fast XI"
+		discussionApiUrl={discussionApiUrl}
+	>
+		<FixedMediumFastXI trails={trails.slice(0, 6)} imageLoading="eager" />
 	</FrontSection>
 );
 SixTrails.storyName = 'with six trails';
 
 export const SevenTrails = () => (
-	<FrontSection title="Fixed Medium Fast XI">
-		<FixedMediumFastXI trails={trails.slice(0, 7)} />
+	<FrontSection
+		title="Fixed Medium Fast XI"
+		discussionApiUrl={discussionApiUrl}
+	>
+		<FixedMediumFastXI trails={trails.slice(0, 7)} imageLoading="eager" />
 	</FrontSection>
 );
 SevenTrails.storyName = 'with seven trails';
 
 export const EightTrails = () => (
-	<FrontSection title="Fixed Medium Fast XI">
-		<FixedMediumFastXI trails={trails.slice(0, 8)} />
+	<FrontSection
+		title="Fixed Medium Fast XI"
+		discussionApiUrl={discussionApiUrl}
+	>
+		<FixedMediumFastXI trails={trails.slice(0, 8)} imageLoading="eager" />
 	</FrontSection>
 );
 EightTrails.storyName = 'with eight trails';
 
 export const NineTrails = () => (
-	<FrontSection title="Fixed Medium Fast XI">
-		<FixedMediumFastXI trails={trails.slice(0, 9)} />
+	<FrontSection
+		title="Fixed Medium Fast XI"
+		discussionApiUrl={discussionApiUrl}
+	>
+		<FixedMediumFastXI trails={trails.slice(0, 9)} imageLoading="eager" />
 	</FrontSection>
 );
 NineTrails.storyName = 'with nine trails';
 
 export const TenTrails = () => (
-	<FrontSection title="Fixed Medium Fast XI">
-		<FixedMediumFastXI trails={trails.slice(0, 10)} />
+	<FrontSection
+		title="Fixed Medium Fast XI"
+		discussionApiUrl={discussionApiUrl}
+	>
+		<FixedMediumFastXI trails={trails.slice(0, 10)} imageLoading="eager" />
 	</FrontSection>
 );
 TenTrails.storyName = 'with ten trails';
 
 export const ElevenTrails = () => (
-	<FrontSection title="Fixed Medium Fast XI">
-		<FixedMediumFastXI trails={trails.slice(0, 11)} />
+	<FrontSection
+		title="Fixed Medium Fast XI"
+		discussionApiUrl={discussionApiUrl}
+	>
+		<FixedMediumFastXI trails={trails.slice(0, 11)} imageLoading="eager" />
 	</FrontSection>
 );
 ElevenTrails.storyName = 'with eleven trails';

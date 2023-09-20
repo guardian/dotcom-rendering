@@ -11,7 +11,10 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
-import { adContainerStyles, MobileStickyContainer } from '../components/AdSlot';
+import {
+	adContainerStyles,
+	MobileStickyContainer,
+} from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -138,7 +141,8 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	const renderAds = canRenderAds(article);
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	if (isSlimNav) {
 		return (

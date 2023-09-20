@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { LI } from './Card/components/LI';
 import { FrontSection } from './FrontSection';
 import { LabsSection } from './LabsSection';
@@ -59,6 +60,7 @@ export const WithoutBadgeStory = () => {
 			pageId={''}
 			ophanComponentName={''}
 			ophanComponentLink={''}
+			discussionApiUrl={discussionApiUrl}
 		>
 			<Placeholder />
 		</LabsSection>
@@ -81,6 +83,7 @@ export const WithBadgeStory = () => {
 					'https://static.theguardian.com/commercial/sponsor/17/Apr/2023/6c577c8c-b60f-4041-baa3-f4852219d3ff-OS_logo_strapline_colour_rgb_280.png',
 				href: 'https://www.theguardian.com/guardian-labs',
 			}}
+			discussionApiUrl={discussionApiUrl}
 		>
 			<Placeholder />
 		</LabsSection>
@@ -91,7 +94,11 @@ WithBadgeStory.storyName = 'with badge';
 export const InContext = () => {
 	return (
 		<>
-			<FrontSection title="Default Container" showTopBorder={false}>
+			<FrontSection
+				title="Default Container"
+				showTopBorder={false}
+				discussionApiUrl={discussionApiUrl}
+			>
 				<Placeholder />
 			</FrontSection>
 			<LabsSection
@@ -107,10 +114,15 @@ export const InContext = () => {
 						'https://static.theguardian.com/commercial/sponsor/17/Apr/2023/6c577c8c-b60f-4041-baa3-f4852219d3ff-OS_logo_strapline_colour_rgb_280.png',
 					href: 'https://www.theguardian.com/guardian-labs',
 				}}
+				discussionApiUrl={discussionApiUrl}
 			>
 				<Placeholder />
 			</LabsSection>
-			<FrontSection title="Default Container" showTopBorder={true}>
+			<FrontSection
+				title="Default Container"
+				showTopBorder={true}
+				discussionApiUrl={discussionApiUrl}
+			>
 				<Placeholder />
 			</FrontSection>
 		</>

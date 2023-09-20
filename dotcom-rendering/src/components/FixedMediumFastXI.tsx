@@ -3,9 +3,11 @@ import { Card50_Card25_Card25 } from '../lib/dynamicSlices';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import type { Loading } from './CardPicture';
 
 type Props = {
 	trails: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -41,6 +43,7 @@ export const FixedMediumFastXI = ({
 	trails,
 	containerPalette,
 	showAge,
+	imageLoading,
 }: Props) => {
 	const firstSlice = trails.slice(0, 3);
 	const remaining = trails.slice(3, 11);
@@ -50,6 +53,7 @@ export const FixedMediumFastXI = ({
 				cards={firstSlice}
 				containerPalette={containerPalette}
 				showAge={showAge}
+				imageLoading={imageLoading}
 			/>
 			{/*
 			 * This pattern of using wrapCards on the UL + percentage=25 and stretch=true

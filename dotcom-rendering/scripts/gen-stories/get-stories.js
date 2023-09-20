@@ -119,6 +119,7 @@ export const ${storyVariableName} = () => {
 	);
 };
 ${storyVariableName}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}';
+${storyVariableName}.args = { config: { renderingTarget: '${renderingTarget}' } };
 `;
 };
 
@@ -151,6 +152,12 @@ const testLayoutFormats = [
 		design: 'Standard',
 		theme: 'NewsPillar',
 		renderingTarget: 'Apps',
+	},
+	{
+		display: 'Showcase',
+		design: 'Picture',
+		theme: 'OpinionPillar',
+		renderingTarget: 'Web',
 	},
 ];
 

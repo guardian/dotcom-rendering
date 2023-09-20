@@ -1,5 +1,6 @@
 import { ClassNames } from '@emotion/react';
-import { adRegions, regionClasses } from '../lib/region-classes.amp';
+import { advertisingRegions } from '../lib/real-time-config.amp';
+import { advertisingRegionClasses } from '../lib/region-classes.amp';
 import type { BaseAdProps } from './Ad.amp';
 import { Ad } from './Ad.amp';
 
@@ -23,13 +24,13 @@ export const InlineAd = ({
 	adTargeting,
 }: BaseAdProps) => (
 	<>
-		{adRegions.map((adRegion) => (
+		{advertisingRegions.map((adRegion) => (
 			<ClassNames key={adRegion}>
 				{({ css, cx }) => (
 					<div
 						className={cx(
 							css`
-								${regionClasses[adRegion].styles}
+								${advertisingRegionClasses[adRegion].styles}
 							`,
 						)}
 					>

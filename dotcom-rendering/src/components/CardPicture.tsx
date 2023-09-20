@@ -1,13 +1,17 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
+import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';
 
+export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
+
 type Props = {
 	imageSize: ImageSizeType;
 	master: string;
+	loading: Loading;
 	alt?: string;
 };
 
@@ -90,7 +94,7 @@ const aspectRatio = css`
 	}
 `;
 
-export const CardPicture = ({ master, alt, imageSize }: Props) => {
+export const CardPicture = ({ master, alt, imageSize, loading }: Props) => {
 	const sources = generateSources(master, decideImageWidths(imageSize));
 
 	const fallbackSource = getFallbackSource(sources);
@@ -114,7 +118,12 @@ export const CardPicture = ({ master, alt, imageSize }: Props) => {
 				);
 			})}
 
-			<img alt={alt} src={fallbackSource.lowResUrl} css={block} />
+			<img
+				alt={alt ?? ''}
+				src={fallbackSource.lowResUrl}
+				css={block}
+				loading={loading}
+			/>
 		</picture>
 	);
 };

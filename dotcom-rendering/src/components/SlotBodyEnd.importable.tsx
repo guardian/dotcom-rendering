@@ -13,12 +13,11 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useAB } from '../lib/useAB';
 import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
-import { AdSlot } from './AdSlot';
+import { AdSlot } from './AdSlot.web';
 import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 import {
 	canShowReaderRevenueEpic,
@@ -131,12 +130,12 @@ export const SlotBodyEnd = ({
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
-	const ABTestAPI = useAB()?.api;
-	const isInPublicGoodTest =
-		ABTestAPI?.isUserInVariant('PublicGoodTest', 'variant') ?? false;
-
+	// Show the article end slot if the epic is not shown, currently only used in the US for Public Good
 	const showArticleEndSlot =
-		isInPublicGoodTest && renderAds && !isLabs && countryCode === 'US';
+		renderAds &&
+		!isLabs &&
+		countryCode === 'US' &&
+		window.guardian.config.switches.articleEndSlot;
 
 	useEffect(() => {
 		const callFetch = () => {

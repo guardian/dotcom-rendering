@@ -98,30 +98,6 @@ const copyRiffRaff = () => {
 	return cpy(['riff-raff.yaml'], target, { cwd: dirname });
 };
 
-const zipBundle = () => {
-	log(' - zipping bundle');
-	return execa('zip', ['--move', '--recurse-paths', 'rendering.zip', '.'], {
-		cwd: path.resolve(target, 'rendering'),
-	});
-};
-
-const createBuildConfig = () => {
-	log(' - creating build.json');
-	const buildConfig = {
-		projectName: process.env.PROJECT || 'dotcom:rendering',
-		buildNumber: process.env.BUILD_NUMBER || '0',
-		startTime: process.env.BUILD_START_DATE || new Date().toISOString(),
-		revision: process.env.BUILD_VCS_NUMBER || 'unknown',
-		vcsURL: 'git@github.com:guardian/dotcom-rendering.git',
-		branch: process.env.BRANCH_NAME || 'unknown',
-	};
-
-	return writeFile(
-		path.resolve(target, 'build.json'),
-		JSON.stringify(buildConfig, null, 2),
-	);
-};
-
 Promise.all([
 	copyCfn(),
 	copyMakefile(),
@@ -131,8 +107,6 @@ Promise.all([
 	copyScripts(),
 	copyRiffRaff(),
 ])
-	.then(zipBundle)
-	.then(createBuildConfig)
 	.catch((err) => {
 		warn(err.stack);
 		process.exit(1);

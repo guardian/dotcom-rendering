@@ -23,7 +23,7 @@ import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
-import { FetchCommentCounts } from './FetchCommentCounts.importable';
+import type { Loading } from './CardPicture';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
 
@@ -34,6 +34,7 @@ type Props = {
 	url?: string;
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
+	discussionApiUrl: string;
 };
 
 type ArticleProps = Props & {
@@ -466,9 +467,11 @@ type CarouselCardProps = {
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
+	imageLoading: Loading;
 	kickerText?: string;
 	imageUrl?: string;
 	dataLinkName?: string;
+	discussionApiUrl: string;
 	discussionId?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
@@ -493,6 +496,8 @@ const CarouselCard = ({
 	verticalDividerColour,
 	onwardsSource,
 	containerType,
+	imageLoading,
+	discussionApiUrl,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	return (
@@ -526,6 +531,8 @@ const CarouselCard = ({
 				isPlayableMediaCard={isVideoContainer}
 				onwardsSource={onwardsSource}
 				containerType={containerType}
+				imageLoading={imageLoading}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</LI>
 	);
@@ -836,8 +843,6 @@ const decideCarouselColours = (
 };
 
 /**
- * # Carousel
- *
  * A carousel of cards, mainly used in onward journeys,
  * at the bottom of articles
  *
@@ -854,6 +859,7 @@ export const Carousel = ({
 	trails,
 	onwardsSource,
 	leftColSize,
+	discussionApiUrl,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselColours = decideCarouselColours(props);
@@ -976,7 +982,6 @@ export const Carousel = ({
 			data-link-name={formatAttrString(heading)}
 			data-component={isVideoContainer ? 'video-playlist' : undefined}
 		>
-			<FetchCommentCounts />
 			<LeftColumn
 				borderType="partial"
 				size={leftColSize}
@@ -1057,6 +1062,8 @@ export const Carousel = ({
 
 						const imageUrl = image && getSourceImageUrl(image);
 
+						const imageLoading = i > 3 ? 'lazy' : 'eager';
+
 						return (
 							<CarouselCard
 								key={`${trail.url}${i}`}
@@ -1080,6 +1087,8 @@ export const Carousel = ({
 								}
 								onwardsSource={onwardsSource}
 								containerType={containerType}
+								imageLoading={imageLoading}
+								discussionApiUrl={discussionApiUrl}
 							/>
 						);
 					})}

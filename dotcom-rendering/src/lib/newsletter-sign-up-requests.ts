@@ -1,8 +1,5 @@
 import type { OphanAction } from '@guardian/libs';
-import {
-	getOphanRecordFunction,
-	submitComponentEvent,
-} from '../client/ophan/ophan';
+import { getOphan, submitComponentEvent } from '../client/ophan/ophan';
 
 const isServer = typeof window === 'undefined';
 
@@ -22,9 +19,9 @@ const buildNewsletterSignUpFormData = (
 	formData.append('csrfToken', ''); // TO DO - PR on form handlers in frontend/identity to see how/if this is needed
 
 	if (Array.isArray(newsletterIdOrList)) {
-		newsletterIdOrList.forEach((newsletterId, index) => {
+		for (const [index, newsletterId] of newsletterIdOrList.entries()) {
 			formData.append(`listNames[${index}]`, newsletterId);
-		});
+		}
 	} else {
 		formData.append('listName', newsletterIdOrList);
 	}
@@ -45,13 +42,13 @@ const postFormData = async (
 ): Promise<Response> => {
 	const requestBodyStrings: string[] = [];
 
-	formData.forEach((value, key) => {
+	for (const [key, value] of formData.entries()) {
 		requestBodyStrings.push(
 			`${encodeURIComponent(key)}=${encodeURIComponent(
 				value.toString(),
 			)}`,
 		);
-	});
+	}
 
 	return fetch(endpoint, {
 		method: 'POST',
@@ -129,19 +126,20 @@ const trackingEventDescriptionToOphanAction = (
 	}
 };
 
-export const reportTrackingEvent = (
+export const reportTrackingEvent = async (
 	componentName: string,
 	eventDescription: TrackingEventDescription,
-	extraDetails?: Partial<Record<string, string | string[]>>,
-): void => {
-	const record = getOphanRecordFunction();
+	extraDetails?: Partial<
+		Record<string, string | string[] | number | number[]>
+	>,
+): Promise<void> => {
+	const ophan = await getOphan();
 
 	const payload = {
 		...extraDetails,
 		message: eventDescription,
 		timestamp: Date.now(),
 	};
-
 	submitComponentEvent(
 		{
 			component: {
@@ -151,6 +149,6 @@ export const reportTrackingEvent = (
 			action: trackingEventDescriptionToOphanAction(eventDescription),
 			value: JSON.stringify(payload),
 		},
-		record,
+		ophan.record,
 	);
 };

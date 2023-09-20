@@ -207,6 +207,7 @@ export type FEFrontCard = {
 			elements: {
 				mainVideo?: unknown;
 				mediaAtoms: FEMediaAtom[];
+				mainMediaAtom?: FEMediaAtom;
 			};
 			tags: { tags: FETagType[] };
 		};
@@ -308,6 +309,7 @@ export type DCRFrontCard = {
 	isCrossword?: boolean;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
+	discussionApiUrl: string;
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
@@ -398,7 +400,9 @@ export type DCRCollectionType = {
 	 * will always be `false`.
 	 **/
 	canShowMore?: boolean;
-	badge?: DCRBadgeType;
+	editorialBadge?: DCRBadgeType;
+	paidContentBadge?: DCRBadgeType;
+	sponsoredContentBranding?: Branding;
 	targetedTerritory?: Territory;
 };
 
@@ -535,8 +539,9 @@ type FEFrontPropertiesType = {
 export type FESupportingContent = {
 	properties: {
 		href?: string;
+		webUrl?: string;
 	};
-	header?: {
+	header: {
 		kicker?: {
 			item?: {
 				properties: {

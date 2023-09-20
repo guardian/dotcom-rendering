@@ -1,4 +1,5 @@
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,

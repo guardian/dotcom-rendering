@@ -5,13 +5,13 @@ import { bootCmp } from './bootCmp';
 import { dynamicImport } from './dynamicImport';
 import { ga } from './ga';
 import { islands } from './islands';
-import { ophan } from './ophan';
+import { recordInitialPageEvents } from './ophan/recordInitialPageEvents';
 import { performanceMonitoring } from './performanceMonitoring';
 import { sentryLoader } from './sentryLoader';
 import { startup } from './startup';
 
 startup('bootCmp', bootCmp);
-startup('ophan', ophan);
+startup('recordInitialPageEvents', recordInitialPageEvents);
 startup('ga', ga);
 startup('sentryLoader', sentryLoader);
 startup('dynamicImport', dynamicImport);

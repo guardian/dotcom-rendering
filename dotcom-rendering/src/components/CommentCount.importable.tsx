@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import { joinUrl } from '@guardian/libs';
 import { between, textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { formatCount } from '../lib/formatCount';
-import { useDiscussion } from '../lib/useDiscussion';
+import { useCommentCount } from '../lib/useCommentCount';
 import CommentIcon from '../static/icons/comment.svg';
 import type { Palette } from '../types/palette';
 
@@ -73,21 +72,22 @@ const linkStyles = css`
 `;
 
 /**
- * # CommentCount
- *
  * Shows the number of comments at the top of an article.
+ *
+ * ## Why does this need to be an Island?
+ *
  * Fetches the count from the discussion API.
  *
- * [Storybook `Count`](https://637e40d1bc73bf3f604394b9-rzazjyrwhc.chromatic.com/?path=/story/components-counts)
+ * ---
+ *
+ * [`Count` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-counts&buildNumber=2967)
  */
 export const CommentCount = ({
-	format,
 	discussionApiUrl,
+	format,
 	shortUrlId,
 }: Props) => {
-	const { commentCount } = useDiscussion(
-		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
-	);
+	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
 	// If the comment count is 0 we still want to display it
 	if (commentCount === undefined) return null;

@@ -11,7 +11,10 @@ import {
 } from '@guardian/source-react-components';
 import type { ReactEventHandler } from 'react';
 import { useRef, useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+// Note - the package also exports a component as a named export "ReCAPTCHA",
+// that version will compile and render but is non-functional.
+// Use the default export instead.
+import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
@@ -91,13 +94,13 @@ const postFormData = async (
 ): Promise<Response> => {
 	const requestBodyStrings: string[] = [];
 
-	formData.forEach((value, key) => {
+	for (const [key, value] of formData.entries()) {
 		requestBodyStrings.push(
 			`${encodeURIComponent(key)}=${encodeURIComponent(
 				value.toString(),
 			)}`,
 		);
-	});
+	}
 
 	return fetch(endpoint, {
 		method: 'POST',
@@ -175,8 +178,6 @@ const sendTracking = (
 };
 
 /**
- * # Secure Signup iFrame
- *
  * A descendent of `EmailSignup` used to prevent users from entering their email
  * on the same page as the one we run third-party scripts on.
  *
@@ -196,7 +197,7 @@ export const SecureSignupIframe = ({
 	successDescription,
 }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
-	const recaptchaRef = useRef<ReCAPTCHA>(null);
+	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
@@ -320,21 +321,21 @@ export const SecureSignupIframe = ({
 
 		// get all the fontFaces on the parent matching the list of font names
 		const requiredFonts: FontFace[] = [];
-		document.fonts.forEach((fontFace) => {
+		for (const fontFace of document.fonts) {
 			if (requiredFontNames.includes(fontFace.family)) {
 				requiredFonts.push(fontFace);
 			}
-		});
+		}
 
 		// add the fonts to the iframe
-		requiredFonts.forEach((font) => {
+		for (const font of requiredFonts) {
 			try {
 				iframeFontFaceSet.add(font);
 			} catch (error) {
 				// Safari throws an InvalidModificationError
 				// https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/add#exceptions
 			}
-		});
+		}
 	};
 
 	const onIFrameLoad = (): void => {
@@ -421,7 +422,7 @@ export const SecureSignupIframe = ({
 						}
 					`}
 				>
-					<ReCAPTCHA
+					<ReactGoogleRecaptcha
 						sitekey={captchaSiteKey}
 						ref={recaptchaRef}
 						onChange={handleCaptchaComplete}

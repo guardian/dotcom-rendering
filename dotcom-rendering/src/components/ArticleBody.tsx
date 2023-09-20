@@ -10,7 +10,6 @@ import { revealStyles } from '../lib/revealStyles';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TableOfContentsItem } from '../types/frontend';
 import type { Palette } from '../types/palette';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
@@ -47,7 +46,6 @@ type Props = {
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
 	isRightToLeftLang?: boolean;
-	renderingTarget: RenderingTarget;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -70,24 +68,15 @@ const globalOlStyles = () => css`
 	}
 `;
 
-const globalH3Styles = (display: ArticleDisplay) => {
-	switch (display) {
-		case ArticleDisplay.NumberedList:
-			return css`
-				h3 {
-					${headline.xsmall({ fontWeight: 'bold' })};
-					margin-bottom: ${space[2]}px;
-				}
-			`;
-		default:
-			return css`
-				h3 {
-					${body.medium({ fontWeight: 'bold' })};
-					margin-bottom: ${space[4]}px;
-				}
-			`;
-	}
-};
+const globalH3Styles = (display: ArticleDisplay) => css`
+	${display === ArticleDisplay.NumberedList &&
+	`
+		h3 {
+			${headline.xsmall({ fontWeight: 'bold' })};
+			margin-bottom: ${space[2]}px;
+		}
+	`}
+`;
 
 const globalStrongStyles = css`
 	strong {
@@ -148,7 +137,6 @@ export const ArticleBody = ({
 	tableOfContents,
 	lang,
 	isRightToLeftLang = false,
-	renderingTarget,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -249,7 +237,6 @@ export const ArticleBody = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					abTests={abTests}
-					renderingTarget={renderingTarget}
 				/>
 			</div>
 		</>

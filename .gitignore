@@ -19,7 +19,8 @@ node_modules
 .idea
 .vscode/*
 !.vscode/extensions.json
-!.vscode/settings.json
+!.vscode/settings.json.recommended
+!.vscode/settings.json.required
 !.vscode/dcr.code-snippets
 .metals/
 *.iml

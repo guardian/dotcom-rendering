@@ -14,15 +14,6 @@ const rulesToOverrideGuardianConfig = {
 		'index-signature',
 	],
 
-	// be explicit when you only want to import a type:
-	// `import type { Foo } from 'Foo';`
-	'@typescript-eslint/consistent-type-imports': [
-		'warn',
-		{
-			prefer: 'type-imports',
-		},
-	],
-
 	// This is not safe to remove whilst we have noUncheckedIndexedAccess
 	'@typescript-eslint/no-unnecessary-condition': 'warn',
 };
@@ -95,12 +86,13 @@ module.exports = {
 		// React, Hooks & JSX
 		'react-hooks/exhaustive-deps': 'error',
 		'react-hooks/rules-of-hooks': 'error',
-		'react/jsx-boolean-value': [2, 'always'],
+		'react/jsx-boolean-value': ['error', 'always'],
 		'react/jsx-key': 'error',
 		'react/jsx-no-target-blank': 'error',
 		'react/jsx-one-expression-per-line': 'off',
 		'react/no-danger': 'off', // We use `dangerouslySetInnerHTML` in several components
-		'react/prop-types': [0],
+		'react/prop-types': 'off',
+		'react/no-unused-prop-types': 'error',
 		'jsx-expressions/strict-logical-expressions': 'error',
 		'jsx-a11y/aria-role': [
 			'error',
@@ -116,6 +108,8 @@ module.exports = {
 				ignoreNonDOM: true,
 			},
 		],
+		// We want to be careful with context and certainly avoid unnecessary re-renders
+		'react/jsx-no-constructed-context-values': 'error',
 
 		'@typescript-eslint/switch-exhaustiveness-check': 'error',
 		'array-callback-return': 'error',
@@ -132,6 +126,9 @@ module.exports = {
 		'custom-elements/file-name-matches-element': 'error',
 
 		'object-shorthand': ['error', 'always'],
+
+		/** @see https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-array-for-each.md */
+		'unicorn/no-array-for-each': 'error',
 
 		'import/no-extraneous-dependencies': [
 			'error',
@@ -176,6 +173,10 @@ module.exports = {
 	},
 	settings: {
 		'import/resolver': 'typescript',
+		react: {
+			// Tells eslint-plugin-react to automatically detect the version of React to use
+			version: 'detect',
+		},
 	},
 	overrides: [
 		{
@@ -191,6 +192,19 @@ module.exports = {
 			files: ['**/**.ts'],
 			rules: {
 				'@typescript-eslint/explicit-module-boundary-types': 'error',
+			},
+		},
+		{
+			files: ['**/**.d.ts'],
+			rules: {
+				'@typescript-eslint/consistent-type-imports': [
+					'error',
+					{
+						prefer: 'type-imports',
+						// that’s the way declaration files do it!
+						disallowTypeAnnotations: false,
+					},
+				],
 			},
 		},
 		{

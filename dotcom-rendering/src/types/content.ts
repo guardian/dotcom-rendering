@@ -92,14 +92,14 @@ export interface CalloutBlockElementV2 {
 export interface CartoonBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CartoonBlockElement';
 	role: RoleType;
-	caption: string;
-	credit: string;
-	displayCredit: boolean;
-	alt: string;
-	variants: Variant[];
+	variants: CartoonVariant[];
+	caption?: string;
+	credit?: string;
+	displayCredit?: boolean;
+	alt?: string;
 }
 
-type Variant = {
+export type CartoonVariant = {
 	viewportSize: 'small' | 'large';
 	images: Image[];
 };
@@ -359,6 +359,11 @@ export interface NewsletterSignupBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
 	newsletter: Newsletter;
 	elementId?: string;
+}
+
+export interface AdPlaceholderBlockElement {
+	_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
+	isSquare: boolean;
 }
 
 interface NumberedTitleBlockElement {
@@ -631,6 +636,7 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataText;
 }
 export type FEElement =
+	| AdPlaceholderBlockElement
 	| AudioAtomBlockElement
 	| AudioBlockElement
 	| BlockquoteBlockElement

@@ -3,6 +3,7 @@ import {
 	from,
 	neutral,
 	news,
+	palette,
 	text,
 	textSans,
 } from '@guardian/source-foundations';
@@ -15,6 +16,7 @@ type Props = {
 	currentNavLink: string;
 	borderColour: string;
 	linkHoverColour: string;
+	subNavLinkColour?: string;
 };
 
 const wrapperCollapsedStyles = css`
@@ -54,7 +56,7 @@ const collapsedStyles = css`
 	}
 `;
 
-const fontStyle = css`
+const fontStyle = (subNavLinkColour: string) => css`
 	${textSans.small()};
 	font-size: 14px;
 	${from.tablet} {
@@ -62,7 +64,7 @@ const fontStyle = css`
 		font-size: 16px;
 	}
 	font-weight: 500;
-	color: ${neutral[7]};
+	color: ${subNavLinkColour};
 	padding: 0 5px;
 	height: 36px;
 	/* Design System: Line height is being used here for centering layout, we need the primitives */
@@ -76,7 +78,6 @@ const fontStyle = css`
 `;
 
 const linkStyle = (linkHoverColour: string) => css`
-	${fontStyle};
 	float: left;
 	text-decoration: none;
 
@@ -106,8 +107,6 @@ const spaceBetween = css`
 `;
 
 const showMoreStyle = css`
-	${fontStyle};
-
 	padding-left: 10px;
 	padding-right: 10px;
 
@@ -149,6 +148,7 @@ export const SubNav = ({
 	currentNavLink,
 	borderColour,
 	linkHoverColour,
+	subNavLinkColour = palette.neutral[7],
 }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -158,7 +158,7 @@ export const SubNav = ({
 		const ulEl = ulRef.current;
 
 		const lis = ulEl?.querySelectorAll('li');
-		const lastLi = lis && lis[lis.length - 1];
+		const lastLi = lis?.[lis.length - 1];
 
 		if (ulEl && lastLi) {
 			const ulTop = ulEl.getBoundingClientRect().top;
@@ -194,7 +194,10 @@ export const SubNav = ({
 					>
 						<a
 							data-src-focus-disabled={true}
-							css={linkStyle(linkHoverColour)}
+							css={[
+								linkStyle(linkHoverColour),
+								fontStyle(subNavLinkColour),
+							]}
 							href={subNavSections.parent.url}
 						>
 							{subNavSections.parent.title}
@@ -215,7 +218,10 @@ export const SubNav = ({
 						}
 					>
 						<a
-							css={linkStyle(linkHoverColour)}
+							css={[
+								linkStyle(linkHoverColour),
+								fontStyle(subNavLinkColour),
+							]}
 							data-src-focus-disabled={true}
 							href={link.url}
 							data-link-name={nestedOphanComponents(

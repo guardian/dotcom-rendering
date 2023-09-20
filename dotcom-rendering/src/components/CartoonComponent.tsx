@@ -6,10 +6,11 @@ import { Caption } from './Caption';
 import { Picture } from './Picture';
 
 type Props = {
+	format: ArticleFormat;
 	element: CartoonBlockElement;
 };
 
-export const CartoonComponent = ({ element }: Props) => {
+export const CartoonComponent = ({ format, element }: Props) => {
 	const smallVariant = element.variants.find(
 		(variant) => variant.viewportSize === 'small',
 	);
@@ -35,11 +36,13 @@ export const CartoonComponent = ({ element }: Props) => {
 							master={image.url}
 							role={element.role}
 							format={{
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Standard,
-								theme: Pillar.News,
+								display: format.display,
+								design: format.design,
+								theme: format.theme,
 							}}
-							alt={`${element.alt}, panel ${image.index + 1}`}
+							alt={`${
+								element.alt ? `${element.alt}, ` : ''
+							}panel ${image.index + 1}`}
 							height={parseInt(image.fields.height, 10)}
 							width={parseInt(image.fields.width, 10)}
 							key={image.index}
@@ -54,11 +57,13 @@ export const CartoonComponent = ({ element }: Props) => {
 							master={image.url}
 							role={element.role}
 							format={{
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Standard,
-								theme: Pillar.News,
+								display: format.display,
+								design: format.design,
+								theme: format.theme,
 							}}
-							alt={`${element.alt}, panel ${image.index + 1}`}
+							alt={`${
+								element.alt ? `${element.alt}, ` : ''
+							}panel ${image.index + 1}`}
 							height={parseInt(image.fields.height, 10)}
 							width={parseInt(image.fields.width, 10)}
 							key={image.index}

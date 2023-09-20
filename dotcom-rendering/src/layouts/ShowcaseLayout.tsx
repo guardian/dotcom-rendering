@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandBackground,
@@ -12,7 +12,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -20,6 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -49,10 +50,15 @@ import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
-const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
+const ShowcaseGrid = ({
+	children,
+	isPictureContent,
+}: {
+	children: React.ReactNode;
+	isPictureContent: boolean;
+}) => (
 	<div
 		css={css`
 			/* IE Fallback */
@@ -82,27 +88,56 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					Vertical grey border
 					Main content
 					Right Column
+
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
-					grid-template-areas:
-						'title  border  headline    headline'
-						'lines  border  media       media'
-						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'.      border  body        right-column'
-						'.      border  .           right-column';
+					${isPictureContent
+						? css`
+								grid-template-columns: 219px 1px 1fr;
+
+								grid-template-areas:
+									'title  border  headline'
+									'lines  border  standfirst'
+									'meta   border  media'
+									'meta   border  media'
+									'.      border  body'
+									'.      border  .';
+						  `
+						: css`
+								grid-template-columns: 219px 1px 1fr 300px;
+
+								grid-template-areas:
+									'title  border  headline    headline'
+									'lines  border  media       media'
+									'meta   border  media       media'
+									'meta   border  standfirst  right-column'
+									'.      border  body        right-column'
+									'.      border  .           right-column';
+						  `}
 				}
 
 				${until.wide} {
 					grid-template-columns: 140px 1px 1fr 300px;
-					grid-template-areas:
-						'title  border  headline    headline'
-						'lines  border  media       media'
-						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'.      border  body        right-column'
-						'.      border  .           right-column';
+
+					${isPictureContent
+						? css`
+								grid-template-areas:
+									'title  border  headline    headline'
+									'lines  border  standfirst  standfirst'
+									'meta   border  media       media'
+									'meta   border  media       media'
+									'.      border  body        body'
+									'.      border  .           . ';
+						  `
+						: css`
+								grid-template-areas:
+									'title  border  headline    headline'
+									'lines  border  media       media'
+									'meta   border  media       media'
+									'meta   border  standfirst  right-column'
+									'.      border  body        right-column'
+									'.      border  .           right-column';
+						  `}
 				}
 
 				/*
@@ -112,16 +147,33 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
-					grid-template-areas:
-						'title      right-column'
-						'headline   right-column'
-						'standfirst right-column'
-						'media      right-column'
-						'lines      right-column'
-						'meta       right-column'
-						'body       right-column'
-						'.          right-column';
+					${isPictureContent
+						? css`
+								grid-template-columns: 1fr; /* Main content */
+
+								grid-template-areas:
+									'title     '
+									'headline  '
+									'standfirst'
+									'media     '
+									'lines     '
+									'meta      '
+									'body      '
+									'.         ';
+						  `
+						: css`
+								grid-template-columns: 1fr 300px;
+
+								grid-template-areas:
+									'title      right-column'
+									'headline   right-column'
+									'standfirst right-column'
+									'media      right-column'
+									'lines      right-column'
+									'meta       right-column'
+									'body       right-column'
+									'.          right-column';
+						  `}
 				}
 
 				${until.desktop} {
@@ -140,14 +192,27 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 				${until.tablet} {
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
-					grid-template-areas:
-						'media'
-						'title'
-						'headline'
-						'standfirst'
-						'lines'
-						'meta'
-						'body';
+					${isPictureContent
+						? css`
+								grid-template-areas:
+									'title'
+									'headline'
+									'standfirst'
+									'media'
+									'lines'
+									'meta'
+									'body';
+						  `
+						: css`
+								grid-template-areas:
+									'media'
+									'title'
+									'headline'
+									'standfirst'
+									'lines'
+									'meta'
+									'body';
+						  `}
 				}
 			}
 		`}
@@ -156,32 +221,41 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const maxWidth = css`
-	${from.desktop} {
+const maxWidth = (isPictureContent: boolean) => css`
+	${!isPictureContent && from.desktop} {
 		max-width: 620px;
 	}
 `;
 
-const stretchLines = css`
-	${until.phablet} {
+const stretchLines = (isPictureContent: boolean) => css`
+	${!isPictureContent && until.phablet} {
 		margin-left: -20px;
 		margin-right: -20px;
 	}
-	${until.mobileLandscape} {
+	${!isPictureContent && until.mobileLandscape} {
 		margin-left: -10px;
 		margin-right: -10px;
 	}
 `;
-
-const mainMediaWrapper = css`
+const mainMediaWrapper = (isPictureContent: boolean) => css`
 	position: relative;
+	${isPictureContent && until.phablet} {
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+	${isPictureContent && until.mobileLandscape} {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
 `;
 
 const PositionHeadline = ({
 	design,
+	isPictureContent,
 	children,
 }: {
 	design: ArticleDesign;
+	isPictureContent: boolean;
 	children: React.ReactNode;
 }) => {
 	switch (design) {
@@ -194,11 +268,11 @@ const PositionHeadline = ({
 						}
 					`}
 				>
-					<div css={maxWidth}>{children}</div>
+					<div css={maxWidth(isPictureContent)}>{children}</div>
 				</div>
 			);
 		default:
-			return <div css={maxWidth}>{children}</div>;
+			return <div css={maxWidth(isPictureContent)}>{children}</div>;
 	}
 };
 
@@ -206,21 +280,16 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 }
 
-export const ShowcaseLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
@@ -241,6 +310,13 @@ export const ShowcaseLayout = ({
 	const renderAds = canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
+
+	const showSubNavTopBorder =
+		format.design !== ArticleDesign.Picture ? true : false;
+
+	const isPictureContent = format.design === ArticleDesign.Picture;
+
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
@@ -299,6 +375,7 @@ export const ShowcaseLayout = ({
 								padSides={false}
 								backgroundColour={brandBackground.primary}
 								element="nav"
+								format={format}
 							>
 								<Nav
 									nav={NAV}
@@ -332,6 +409,8 @@ export const ShowcaseLayout = ({
 									}
 									padSides={false}
 									element="aside"
+									format={format}
+									showTopBorder={showSubNavTopBorder}
 								>
 									<Island deferUntil="idle">
 										<SubNav
@@ -341,6 +420,9 @@ export const ShowcaseLayout = ({
 												palette.text.articleLinkHover
 											}
 											borderColour={palette.border.subNav}
+											subNavLinkColour={
+												palette.text.subNavLink
+											}
 										/>
 									</Island>
 								</Section>
@@ -351,9 +433,11 @@ export const ShowcaseLayout = ({
 								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
+								borderColour={palette.border.secondary}
 							>
 								<StraightLines
 									count={4}
+									color={palette.border.secondary}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -437,10 +521,11 @@ export const ShowcaseLayout = ({
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
 					element="article"
+					borderColour={palette.border.secondary}
 				>
-					<ShowcaseGrid>
+					<ShowcaseGrid isPictureContent={isPictureContent}>
 						<GridItem area="media">
-							<div css={mainMediaWrapper}>
+							<div css={mainMediaWrapper(isPictureContent)}>
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
@@ -475,7 +560,10 @@ export const ShowcaseLayout = ({
 							<Border format={format} />
 						</GridItem>
 						<GridItem area="headline">
-							<PositionHeadline design={format.design}>
+							<PositionHeadline
+								design={format.design}
+								isPictureContent={isPictureContent}
+							>
 								<ArticleHeadline
 									format={format}
 									headlineString={article.headline}
@@ -497,14 +585,17 @@ export const ShowcaseLayout = ({
 							/>
 						</GridItem>
 						<GridItem area="lines">
-							<div css={maxWidth}>
-								<div css={stretchLines}>
-									<DecideLines format={format} />
+							<div css={maxWidth(isPictureContent)}>
+								<div css={stretchLines(isPictureContent)}>
+									<DecideLines
+										format={format}
+										color={palette.border.secondary}
+									/>
 								</div>
 							</div>
 						</GridItem>
 						<GridItem area="meta" element="aside">
-							<div css={maxWidth}>
+							<div css={maxWidth(isPictureContent)}>
 								<ArticleMeta
 									branding={branding}
 									format={format}
@@ -565,7 +656,6 @@ export const ShowcaseLayout = ({
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									renderingTarget={renderingTarget}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -598,6 +688,7 @@ export const ShowcaseLayout = ({
 								)}
 								<StraightLines
 									count={4}
+									color={palette.border.secondary}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -614,7 +705,8 @@ export const ShowcaseLayout = ({
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons
+										article.showBottomSocialButtons &&
+										renderingTarget === 'Web'
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -644,9 +736,6 @@ export const ShowcaseLayout = ({
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
 									/>
 								</RightColumn>
 							</div>
@@ -681,6 +770,9 @@ export const ShowcaseLayout = ({
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
 							/>
 						</Island>
 					</Section>
@@ -706,6 +798,7 @@ export const ShowcaseLayout = ({
 						pillar={format.theme}
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
+						discussionApiUrl={article.config.discussionApiUrl}
 					/>
 				</Island>
 

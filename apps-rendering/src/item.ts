@@ -524,6 +524,12 @@ const fromCapi =
 				body,
 				...itemFields,
 			};
+		} else if (isPicture(tags)) {
+			return {
+				design: ArticleDesign.Picture,
+				body,
+				...itemFields,
+			};
 		} else if (isReview(tags)) {
 			return {
 				design: ArticleDesign.Review,
@@ -626,12 +632,6 @@ const fromCapi =
 		} else if (isProfile(tags)) {
 			return {
 				design: ArticleDesign.Profile,
-				body,
-				...itemFields,
-			};
-		} else if (isPicture(tags)) {
-			return {
-				design: ArticleDesign.Picture,
 				body,
 				...itemFields,
 			};

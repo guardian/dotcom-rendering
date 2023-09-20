@@ -10,8 +10,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: false,
 				isInBrowserVariantTest: true,
-				isInOktaVariantTest: false,
-				randomCentile: 99,
+				random: 99 / 100,
 			}),
 		).toEqual(false);
 	});
@@ -21,8 +20,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: true,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: true,
-				isInOktaVariantTest: true,
-				randomCentile: 1,
+				random: 1 / 100,
 			}),
 		).toEqual(false);
 	});
@@ -32,19 +30,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: true,
-				isInOktaVariantTest: false,
-				randomCentile: 1,
-			}),
-		).toEqual(true);
-	});
-	it('does enable Sentry when the user is in the Okta variant test', () => {
-		expect(
-			isSentryEnabled({
-				isDev: false,
-				enableSentryReporting: true,
-				isInBrowserVariantTest: false,
-				isInOktaVariantTest: true,
-				randomCentile: 1,
+				random: 1 / 100,
 			}),
 		).toEqual(true);
 	});
@@ -54,8 +40,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
-				isInOktaVariantTest: false,
-				randomCentile: 1,
+				random: 1 / 100,
 			}),
 		).toEqual(false);
 		expect(
@@ -63,8 +48,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
-				isInOktaVariantTest: false,
-				randomCentile: 99,
+				random: 99 / 100,
 			}),
 		).toEqual(false);
 		expect(
@@ -72,8 +56,15 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
-				isInOktaVariantTest: false,
-				randomCentile: 100,
+				random: 99.0001 / 100,
+			}),
+		).toEqual(true);
+		expect(
+			isSentryEnabled({
+				isDev: false,
+				enableSentryReporting: true,
+				isInBrowserVariantTest: false,
+				random: 100 / 100,
 			}),
 		).toEqual(true);
 	});

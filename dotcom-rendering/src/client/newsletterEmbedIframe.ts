@@ -1,24 +1,26 @@
 import { isObject } from '@guardian/libs';
 
-// No trailing slash!
-const allowedOrigins = ['https://www.theguardian.com'];
+/* No trailing slash! */
+const guardianOrigin = 'https://www.theguardian.com';
+
 export const newsletterEmbedIframe = (): Promise<void> => {
-	const allIframes: HTMLIFrameElement[] = [].slice.call(
-		document.querySelectorAll('.email-sub__iframe'),
-	);
+	const allIframes: HTMLIFrameElement[] = [
+		...document.querySelectorAll<HTMLIFrameElement>(
+			'iframe.email-sub__iframe',
+		),
+	];
+
+	if (allIframes.length === 0) return Promise.resolve();
 
 	// Tell the iframes to resize once this script is loaded
 	// Otherwise, earlier resize events might be missed
 	// So we don't have to load this script as a priority on each load
-	allIframes.forEach((iframe) => {
-		iframe.contentWindow?.postMessage(
-			'resize',
-			'https://www.theguardian.com',
-		);
-	});
+	for (const iframe of allIframes) {
+		iframe.contentWindow?.postMessage('resize', guardianOrigin);
+	}
 
 	window.addEventListener('message', (event) => {
-		if (!allowedOrigins.includes(event.origin)) return;
+		if (event.origin !== guardianOrigin) return;
 
 		const iframes: HTMLIFrameElement[] = allIframes.filter((i) => {
 			try {
@@ -33,12 +35,13 @@ export const newsletterEmbedIframe = (): Promise<void> => {
 		if (iframes.length !== 0) {
 			try {
 				const message: unknown = JSON.parse(event.data);
-				if (!isObject(message) || typeof message.type !== 'string')
+				if (!isObject(message) || typeof message.type !== 'string') {
 					return;
+				}
 
 				switch (message.type) {
 					case 'set-height':
-						iframes.forEach((iframe) => {
+						for (const iframe of iframes) {
 							if (typeof message.value === 'number') {
 								iframe.height = `${message.value}`;
 							} else if (typeof message.value === 'string') {
@@ -47,12 +50,13 @@ export const newsletterEmbedIframe = (): Promise<void> => {
 									iframe.height = `${value}`;
 								}
 							}
-						});
+						}
 						break;
 					default:
 				}
-				// eslint-disable-next-line no-empty
-			} catch (e) {}
+			} catch (e) {
+				// do nothing
+			}
 		}
 	});
 

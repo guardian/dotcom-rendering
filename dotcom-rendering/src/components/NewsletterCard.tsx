@@ -207,6 +207,7 @@ export const NewsletterCard = ({
 						imageSize="carousel"
 						alt=""
 						master={newsletter.illustrationCard}
+						loading="lazy"
 					/>
 				</div>
 			) : (
@@ -240,7 +241,8 @@ export const NewsletterCard = ({
 							</>
 						}
 						cssOverrides={buttonStyle}
-						data-newsletter-id={newsletter.identityName}
+						data-identity-name={newsletter.identityName}
+						data-list-id={newsletter.listId}
 						data-role={BUTTON_ROLE}
 					>
 						Sign up

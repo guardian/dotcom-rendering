@@ -1,4 +1,10 @@
-import type { AdRegion } from './region-classes.amp';
+/**
+ * We may wish to use different parameters (placement ids, zone ids, etc)
+ * in four distinct geographical regions
+ */
+export const advertisingRegions = ['UK', 'US', 'AU', 'ROW'] as const;
+
+export type AdvertisingRegion = (typeof advertisingRegions)[number];
 
 /**
  * Type of AMP ad
@@ -9,7 +15,7 @@ export type AdType =
 	| { isSticky: true }
 	| {
 			isSticky?: false;
-			adRegion: AdRegion;
+			adRegion: AdvertisingRegion;
 	  };
 
 type PubmaticRTCParameters = {
@@ -37,7 +43,7 @@ export const pubmaticRtcParameters = (
 	if (
 		adType.isSticky ||
 		adType.adRegion === 'UK' ||
-		adType.adRegion === 'INT'
+		adType.adRegion === 'ROW'
 	) {
 		return {
 			PROFILE_ID: '6611',
@@ -73,8 +79,7 @@ export const criteoRTCParamters = (adType: AdType): CriteoRTCParameters => {
 					ZONE_ID: '1709354',
 				};
 			}
-			case 'INT':
-			case 'EUR': {
+			case 'ROW': {
 				return {
 					ZONE_ID: '1709353',
 				};

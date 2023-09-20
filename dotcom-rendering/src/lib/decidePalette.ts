@@ -88,6 +88,7 @@ const textHeadline = (format: ArticleFormat): string => {
 					return pillarPalette[format.theme].dark;
 				case ArticleDesign.Interview:
 				case ArticleDesign.LiveBlog:
+				case ArticleDesign.Picture:
 					return WHITE;
 				default:
 					return BLACK;
@@ -145,6 +146,8 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 					return blogsGrayBackgroundPalette(format);
 				case ArticleDesign.MatchReport:
 					return BLACK;
+				case ArticleDesign.Picture:
+					return palette.neutral[86];
 				default:
 					return pillarPalette[format.theme].main;
 			}
@@ -215,6 +218,8 @@ const textByline = (format: ArticleFormat): string => {
 				}
 				case ArticleDesign.Interview:
 					return BLACK;
+				case ArticleDesign.Picture:
+					return palette.neutral[86];
 				default:
 					return pillarPalette[format.theme].main;
 			}
@@ -268,6 +273,7 @@ const textHeadlineByline = (format: ArticleFormat): string => {
 
 const textStandfirst = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.DeadBlog
@@ -332,6 +338,8 @@ const textCaption = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.PhotoEssay:
 			return pillarPalette[format.theme].dark;
+		case ArticleDesign.Picture:
+			return palette.neutral[86];
 		default:
 			return text.supporting;
 	}
@@ -354,6 +362,7 @@ const textCaptionLink = (format: ArticleFormat): string => {
 
 const textSubMeta = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
+	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
 	if (
@@ -382,11 +391,13 @@ const textSubMetaLabel = (format: ArticleFormat): string => {
 		format.design != ArticleDesign.DeadBlog
 	)
 		return palette.specialReportAlt[100];
+	if (format.design === ArticleDesign.Picture) return palette.neutral[60];
 	return text.supporting;
 };
 
 const textSubMetaLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
+	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	return text.supporting;
@@ -648,7 +659,16 @@ const textCardHeadline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[100];
 
-	if (format.display === ArticleDisplay.Immersive) return BLACK;
+	if (
+		// Galleries are now considered Immersive, which would give them a dark background, so mustn't have `BLACK` text.
+		// There color is decided below in the `format.design` `switch`.
+		// see: https://github.com/guardian/content-api-scala-client/pull/387/files#diff-9384ebc9ebed8b6773587afc23b56246ec6ad014752a9b3718fd68339b705f1fR209
+		format.design !== ArticleDesign.Gallery &&
+		format.display === ArticleDisplay.Immersive
+	) {
+		return BLACK;
+	}
+
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -818,6 +838,7 @@ const backgroundArticle = (format: ArticleFormat): string => {
 		format.display !== ArticleDisplay.Immersive
 	)
 		return neutral[97];
+	if (format.design === ArticleDesign.Picture) return BLACK;
 
 	return 'transparent';
 };
@@ -1125,6 +1146,9 @@ const fillCommentCount = (format: ArticleFormat): string => {
 				return pillarPalette[format.theme].main;
 		}
 	}
+	if (format.design === ArticleDesign.Picture) {
+		return palette.neutral[86];
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -1181,6 +1205,7 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	)
 		return BLACK;
 
+	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
@@ -1625,6 +1650,8 @@ const borderNavPillar: (format: ArticleFormat) => string = (format) =>
 const borderArticle: (format: ArticleFormat) => string = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
+	if (format.design === ArticleDesign.Picture)
+		return transparentColour(neutral[60], 0.5);
 
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 
@@ -1646,6 +1673,8 @@ const borderLines = (format: ArticleFormat): string => {
 			format.design === ArticleDesign.Letter)
 	)
 		return transparentColour(neutral[60], 0.3);
+	if (format.design === ArticleDesign.Picture)
+		return transparentColour(neutral[60], 0.5);
 
 	return neutral[86];
 };
@@ -1677,7 +1706,8 @@ const borderFilterButton = (): string => neutral[60];
 const borderSecondary = (format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
-
+	if (format.design === ArticleDesign.Picture)
+		return transparentColour(neutral[60], 0.5);
 	return neutral[86];
 };
 
@@ -2120,6 +2150,102 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
+const textSubNavLink = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.Picture:
+			return WHITE;
+		default:
+			return palette.neutral[7];
+	}
+};
+
+const discussion = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return news[400];
+		case Pillar.Lifestyle:
+			return lifestyle[400];
+		case Pillar.Sport:
+			return sport[400];
+		case Pillar.Culture:
+			return culture[400];
+		case Pillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+		default:
+			return news[400];
+	}
+};
+
+const backgroundDiscussionPillarButton = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return news[300];
+		case Pillar.Lifestyle:
+			return lifestyle[300];
+		case Pillar.Sport:
+			return sport[300];
+		case Pillar.Culture:
+			return culture[300];
+		case Pillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return lifestyle[300];
+		default:
+			return news[300];
+	}
+};
+
+const backgroundSubmeta = (format: ArticleFormat) => {
+	// specialreport blogs should have specialreport background
+	if (
+		(format.design === ArticleDesign.LiveBlog ||
+			format.design === ArticleDesign.DeadBlog) &&
+		format.theme !== ArticleSpecial.SpecialReport
+	)
+		return neutral[97];
+
+	// Order matters. We want comment special report pieces to have the opinion background
+	if (format.design === ArticleDesign.Letter) return opinion[800];
+
+	if (format.design === ArticleDesign.Comment) {
+		if (format.theme === ArticleSpecial.SpecialReportAlt)
+			return palette.specialReportAlt[800];
+
+		return opinion[800];
+	}
+	if (format.design === ArticleDesign.Editorial) return opinion[800];
+
+	if (format.design === ArticleDesign.Analysis) {
+		if (format.theme === ArticleSpecial.SpecialReportAlt)
+			return palette.specialReportAlt[800];
+		else return news[800];
+	}
+
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return specialReport[800]; // Note, check theme rather than design here
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[800];
+
+	if (
+		format.theme === ArticleSpecial.Labs &&
+		format.display !== ArticleDisplay.Immersive
+	)
+		return neutral[97];
+	if (format.design === ArticleDesign.Picture) return BLACK;
+
+	return neutral[100];
+};
+
+const backgroundDynamoSublink = (_format: ArticleFormat): string =>
+	palette.neutral[97];
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -2192,6 +2318,7 @@ export const decidePalette = (
 			tableOfContents: textTableOfContents(),
 			expandableAtom: textExpandableAtom(format),
 			expandableAtomHover: textExpandableAtomHover(format),
+			subNavLink: textSubNavLink(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -2230,6 +2357,11 @@ export const decidePalette = (
 			designTag: backgroundDesignTag(format),
 			pullQuote: backgroundPullQuote(format),
 			messageForm: backgroundMessageForm(format),
+			discussionPillarButton: backgroundDiscussionPillarButton(format),
+			subMeta: backgroundSubmeta(format),
+			dynamoSublink:
+				overrides?.background.dynamoSublink ??
+				backgroundDynamoSublink(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
@@ -2281,5 +2413,6 @@ export const decidePalette = (
 			summaryEventBullet: hoverSummaryEventBullet(format),
 			pagination: hoverPagination(format),
 		},
+		discussionGeneric: discussion(format),
 	};
 };

@@ -7,21 +7,23 @@ import {
 } from '../lib/cardWrappers';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
-import { AdSlot } from './AdSlot';
+import { AdSlot } from './AdSlot.web';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import type { Loading } from './CardPicture';
 
 type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
+	imageLoading: Loading;
 	showAge?: boolean;
 	adIndex: number;
 	renderAds: boolean;
-	padBottom?: boolean;
 };
 
 type MPUSliceProps = {
 	trails: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	adIndex: number;
@@ -37,8 +39,10 @@ const Card33_Card33_Card33 = ({
 	containerPalette,
 	showAge,
 	padBottom,
+	imageLoading,
 }: {
 	trails: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	padBottom?: boolean;
@@ -54,6 +58,7 @@ const Card33_Card33_Card33 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -68,6 +73,7 @@ const Card33_Card33_Card33 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -85,8 +91,10 @@ const Card50_Card50 = ({
 	containerPalette,
 	showAge,
 	padBottom,
+	imageLoading,
 }: {
 	trails: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	padBottom?: boolean;
@@ -101,6 +109,7 @@ const Card50_Card50 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -115,6 +124,7 @@ const Card50_Card50 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -138,6 +148,7 @@ const ThreeColumnSliceWithAdSlot = ({
 	containerPalette,
 	showAge,
 	adIndex,
+	imageLoading,
 }: MPUSliceProps) => {
 	return (
 		<UL direction="row">
@@ -187,17 +198,13 @@ const ThreeColumnSliceWithAdSlot = ({
 	);
 };
 
-/**
- * FixedMediumSlowXIIMPU
- *
- */
 export const FixedMediumSlowXIIMPU = ({
 	trails,
 	containerPalette,
 	showAge,
 	adIndex,
 	renderAds,
-	padBottom,
+	imageLoading,
 }: Props) => {
 	const firstSlice = trails.slice(0, 3);
 	const remaining = trails.slice(3, 9);
@@ -212,6 +219,7 @@ export const FixedMediumSlowXIIMPU = ({
 								containerPalette={containerPalette}
 								showAge={showAge}
 								key={trail.url}
+								imageLoading={imageLoading}
 							/>
 						))}
 					</LI>
@@ -221,6 +229,7 @@ export const FixedMediumSlowXIIMPU = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					imageLoading={imageLoading}
 				/>
 			) : (
 				<Card33_Card33_Card33
@@ -228,6 +237,7 @@ export const FixedMediumSlowXIIMPU = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					padBottom={true}
+					imageLoading={imageLoading}
 				/>
 			)}
 			{renderAds && remaining.length > 0 ? (
@@ -236,6 +246,7 @@ export const FixedMediumSlowXIIMPU = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					adIndex={adIndex}
+					imageLoading={imageLoading}
 				/>
 			) : (
 				/**

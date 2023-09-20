@@ -5,17 +5,13 @@ import {
 	palette,
 	space,
 } from '@guardian/source-foundations';
-import {
-	Button,
-	InlineError,
-	TextInput,
-} from '@guardian/source-react-components';
-import type { ChangeEventHandler } from 'react';
+import { Button, TextInput } from '@guardian/source-react-components';
+import { type ChangeEventHandler, useState } from 'react';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
 interface FormProps {
-	status: 'NotSent' | 'Loading' | 'Success' | 'Failed';
+	status: 'NotSent' | 'Loading' | 'Success' | 'Failed' | 'InvalidEmail';
 	email: string;
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
 	handleSubmitButton: { (): Promise<void> | void };
@@ -27,7 +23,7 @@ interface FormProps {
 const CARD_CONTAINER_WIDTH = 240;
 const CARD_CONTAINER_PADDING = 10;
 
-export const formFrameStyle = css`
+const formFrameStyle = css`
 	border: ${palette.brand[400]} 2px dashed;
 	border-radius: 12px;
 	padding: ${space[2]}px;
@@ -37,14 +33,13 @@ export const formFrameStyle = css`
 
 	${from.desktop} {
 		flex-basis: ${4 * CARD_CONTAINER_WIDTH - CARD_CONTAINER_PADDING}px;
-
 		flex-direction: row-reverse;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: space-between;
 	}
 `;
 
-export const formFieldsStyle = css`
+const formFieldsStyle = css`
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
@@ -58,23 +53,34 @@ export const formFieldsStyle = css`
 	}
 `;
 
-export const inputWrapperStyle = css`
+const inputWrapperStyle = css`
 	margin-bottom: ${space[2]}px;
 	${from.desktop} {
 		margin-bottom: 0;
 		margin-right: ${space[2]}px;
-		flex-basis: 280px;
+		flex-basis: 296px;
 	}
 `;
 
-export const formAsideStyle = css`
+const formAsideStyle = (hideOnMobile: boolean) => css`
+	overflow: hidden;
+	transition: max-height 1.5s linear;
+	max-height: 300px;
+
+	${hideOnMobile &&
+	css`
+		max-height: 0;
+	`}
+
 	${from.desktop} {
 		flex: 1;
 		padding-left: ${CARD_CONTAINER_PADDING}px;
+		max-height: unset;
+		transition: none;
 	}
 `;
 
-export const signUpButtonStyle = css`
+const signUpButtonStyle = css`
 	justify-content: center;
 	background-color: ${palette.neutral[0]};
 	border-color: ${palette.neutral[0]};
@@ -89,13 +95,18 @@ export const signUpButtonStyle = css`
 	}
 `;
 
-export const successMessageStyle = css`
+const successMessageStyle = css`
 	${headlineObjectStyles.xsmall({
 		lineHeight: 'tight',
 		fontWeight: 'bold',
 	})}
 
+	padding-bottom: ${space[12]}px;
+	max-width: 340px;
+
 	${from.desktop} {
+		padding-bottom: 0;
+		max-width: unset;
 		flex-basis: 340px;
 	}
 `;
@@ -107,10 +118,20 @@ export const ManyNewslettersForm = ({
 	handleSubmitButton,
 	newsletterCount,
 }: FormProps) => {
+	const [formHasFocus, setFormHasFocus] = useState(false);
+	const hidePrivacyOnMobile = !formHasFocus && email.length === 0;
+
 	const ariaLabel =
 		newsletterCount === 1
 			? 'Sign up for the newsletter you selected'
 			: `Sign up for the ${newsletterCount} newsletters you selected`;
+
+	const errorMessage =
+		status === 'Failed'
+			? 'Sign up failed. Please try again'
+			: status === 'InvalidEmail'
+			? 'Please enter a valid email address'
+			: undefined;
 
 	return (
 		<form
@@ -120,8 +141,14 @@ export const ManyNewslettersForm = ({
 			onSubmit={(submitEvent) => {
 				submitEvent.preventDefault();
 			}}
+			onFocus={() => {
+				setFormHasFocus(true);
+			}}
+			onBlur={() => {
+				setFormHasFocus(false);
+			}}
 		>
-			<aside css={formAsideStyle}>
+			<aside css={formAsideStyle(hidePrivacyOnMobile)}>
 				<InlineSkipToWrapper
 					id={'man-newsletter-form-inline-skip-to-wrapper'}
 					blockDescription="Privacy Notice"
@@ -130,36 +157,36 @@ export const ManyNewslettersForm = ({
 				</InlineSkipToWrapper>
 			</aside>
 
-			{(status === 'NotSent' || status === 'Loading') && (
-				<div css={formFieldsStyle}>
-					<span css={inputWrapperStyle}>
-						<TextInput
-							label="Enter your email"
-							value={email}
-							onChange={handleTextInput}
-						/>
-					</span>
-					<Button
-						aria-label={ariaLabel}
-						isLoading={status === 'Loading'}
-						iconSide="right"
-						onClick={() => {
-							void handleSubmitButton();
-						}}
-						cssOverrides={signUpButtonStyle}
-					>
-						Sign up
-					</Button>
-				</div>
-			)}
-
-			{status === 'Failed' && <InlineError>Sign up failed.</InlineError>}
-
-			{status === 'Success' && (
-				<p css={successMessageStyle}>
-					You are now a subscriber! Thank you for signing up
-				</p>
-			)}
+			<div css={formFieldsStyle}>
+				{status !== 'Success' ? (
+					<>
+						<span css={inputWrapperStyle}>
+							<TextInput
+								label="Enter your email"
+								value={email}
+								onChange={handleTextInput}
+								error={errorMessage}
+								disabled={status === 'Loading'}
+							/>
+						</span>
+						<Button
+							aria-label={ariaLabel}
+							isLoading={status === 'Loading'}
+							iconSide="right"
+							onClick={() => {
+								void handleSubmitButton();
+							}}
+							cssOverrides={signUpButtonStyle}
+						>
+							Sign up
+						</Button>
+					</>
+				) : (
+					<p css={successMessageStyle}>
+						You are now a subscriber! Thank you for signing up
+					</p>
+				)}
+			</div>
 		</form>
 	);
 };

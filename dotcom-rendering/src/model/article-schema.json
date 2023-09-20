@@ -638,6 +638,9 @@
                     "$ref": "#/definitions/NewsletterSignupBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/AdPlaceholderBlockElement"
+                },
+                {
                     "$ref": "#/definitions/NumberedTitleBlockElement"
                 },
                 {
@@ -1326,18 +1329,6 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
-                "caption": {
-                    "type": "string"
-                },
-                "credit": {
-                    "type": "string"
-                },
-                "displayCredit": {
-                    "type": "boolean"
-                },
-                "alt": {
-                    "type": "string"
-                },
                 "variants": {
                     "type": "array",
                     "items": {
@@ -1362,14 +1353,22 @@
                             "viewportSize"
                         ]
                     }
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "displayCredit": {
+                    "type": "boolean"
+                },
+                "alt": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "alt",
-                "caption",
-                "credit",
-                "displayCredit",
                 "role",
                 "variants"
             ]
@@ -2511,6 +2510,22 @@
                 "newsletter"
             ]
         },
+        "AdPlaceholderBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
+                },
+                "isSquare": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "_type",
+                "isSquare"
+            ]
+        },
         "NumberedTitleBlockElement": {
             "type": "object",
             "properties": {
@@ -2575,6 +2590,7 @@
                 "NewsletterSignupDesign",
                 "ObituaryDesign",
                 "PhotoEssayDesign",
+                "PictureDesign",
                 "PrintShopDesign",
                 "ProfileDesign",
                 "QuizDesign",

@@ -1,4 +1,4 @@
-import { setCookie } from '@guardian/libs';
+import { setCookie, storage } from '@guardian/libs';
 import { AB } from '@guardian/ab-core';
 
 import isChromatic from 'chromatic/isChromatic';
@@ -12,6 +12,7 @@ import { Lazy } from '../src/components/Lazy';
 import { Picture } from '../src/components/Picture';
 import { mockRESTCalls } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
+import { ConfigContextDecorator } from './decorators/configContextDecorator';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -134,6 +135,17 @@ const guardianViewports = {
 			height: '800px',
 		},
 	},
+};
+
+/** @type {import('@storybook/react').Preview} */
+export default {
+	decorators: [
+		ConfigContextDecorator,
+		(Story) => {
+			storage.local.clear();
+			return Story();
+		},
+	],
 };
 
 export const viewports = [320, 375, 480, 660, 740, 980, 1140, 1300];

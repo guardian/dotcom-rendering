@@ -68,7 +68,7 @@ const styles = (format: ArticleFormat): string => `
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';
         overflow-x: hidden;
-        line-height: 1.5;
+        line-height: 1.4;
     }
 
     @media (prefers-color-scheme: dark) {

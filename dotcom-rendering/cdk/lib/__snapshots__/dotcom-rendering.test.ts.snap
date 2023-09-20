@@ -2,50 +2,14 @@
 
 exports[`The DotcomRendering stack matches the snapshot 1`] = `
 {
-  "AWSTemplateFormatVersion": "2010-09-09",
-  "Conditions": {
-    "HasBackend5XXAlarm": {
-      "Fn::Equals": [
-        {
-          "Ref": "Stage",
-        },
-        "PROD",
-      ],
-    },
-    "HasLatencyScalingAlarm": {
-      "Fn::Equals": [
-        {
-          "Ref": "Stage",
-        },
-        "PROD",
-      ],
-    },
-  },
-  "Description": "Frontend rendering service",
-  "Mappings": {
-    "Constants": {
-      "App": {
-        "Value": "rendering",
-      },
-      "Stack": {
-        "Value": "frontend",
-      },
-    },
-    "StageMap": {
-      "CODE": {
-        "MaxCapacity": 4,
-        "MinCapacity": 1,
-      },
-      "PROD": {
-        "MaxCapacity": 60,
-        "MinCapacity": 15,
-      },
-    },
-  },
   "Metadata": {
     "gu:cdk:constructs": [
       "GuVpcParameter",
+      "GuSubnetListParameter",
+      "GuSubnetListParameter",
       "GuSecurityGroup",
+      "GuStringParameter",
+      "GuClassicLoadBalancer",
       "GuSecurityGroup",
       "GuAllowPolicy",
       "GuAllowPolicy",
@@ -59,6 +23,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuDistributionBucketParameter",
       "GuGetDistributablePolicy",
       "GuParameterStoreReadPolicy",
+      "GuStringParameter",
+      "GuAmiParameter",
+      "GuHttpsEgressSecurityGroup",
+      "GuWazuhAccess",
+      "GuAutoScalingGroup",
     ],
     "gu:cdk:version": "TEST",
   },
@@ -73,74 +42,38 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
   },
   "Parameters": {
-    "AMI": {
-      "Description": "AMI to use for instances",
+    "AMIRendering": {
+      "Description": "Amazon Machine Image ID for the app rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
       "Type": "AWS::EC2::Image::Id",
-    },
-    "App": {
-      "Default": "rendering",
-      "Description": "Application name",
-      "Type": "String",
-    },
-    "Backend5XXAlarmPeriod": {
-      "Default": "60",
-      "Description": "(Optional) Duration in seconds before 5XX alarm is triggered",
-      "Type": "String",
-    },
-    "Backend5XXAlarmThreshold": {
-      "Default": "100",
-      "Description": "(Optional) Max number of errors before the 5XX alarm is triggered",
-      "Type": "String",
-    },
-    "Backend5XXConsecutivePeriod": {
-      "Default": "5",
-      "Description": "(Optional) Number of consecutive periods the threshold needs to be reached before 5XX alarm is triggered",
-      "Type": "String",
     },
     "DistributionBucketName": {
       "Default": "/account/services/artifact.bucket",
       "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "ELKStream": {
-      "Description": "name of the kinesis stream to use to send logs to the central ELK stack",
-      "Type": "String",
+    "ELBLogsParameter": {
+      "Default": "/TEST/frontend/rendering/elb.logs.bucketName",
+      "Description": "S3 Bucket Name for ELB logs",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "FrontendConfigKey": {
-      "Description": "Parameter store KMS key",
-      "Type": "String",
-    },
-    "InstanceType": {
-      "Description": "EC2 Instance Type to use for dotcom-rendering",
-      "Type": "String",
+    "ELKStreamId": {
+      "Default": "/TEST/frontend/rendering/logging.stream.name",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "LoggingStreamName": {
       "Default": "/account/services/logging.stream.name",
       "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "NotificationAlarmAction": {
-      "Default": "",
-      "Description": "(Optional) ARN of action to execute when notification alarms change state",
-      "Type": "CommaDelimitedList",
+    "PrivateSubnets": {
+      "Default": "/account/vpc/primary/subnets/private",
+      "Description": "A list of private subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
-    "Stack": {
-      "Default": "frontend",
-      "Description": "Stack name",
-      "Type": "String",
-    },
-    "Stage": {
-      "AllowedValues": [
-        "PROD",
-        "CODE",
-      ],
-      "Default": "CODE",
-      "Description": "Stage name",
-      "Type": "String",
-    },
-    "Subnets": {
-      "Description": "The subnets where rendering instances will run",
-      "Type": "List<AWS::EC2::Subnet::Id>",
+    "PublicSubnets": {
+      "Default": "/account/vpc/primary/subnets/public",
+      "Description": "A list of public subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
     "VpcId": {
       "Default": "/account/vpc/primary/id",
@@ -187,11 +120,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:kms:",
-                    {
-                      "Ref": "AWS::Region",
-                    },
-                    ":",
+                    "arn:aws:kms:eu-west-1:",
                     {
                       "Ref": "AWS::AccountId",
                     },
@@ -278,6 +207,18 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                       {
                         "Ref": "AWS::AccountId",
                       },
+                      ":parameter//TEST/frontend/rendering/*",
+                    ],
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
                       ":parameter/frontend/*",
                     ],
                   ],
@@ -310,48 +251,31 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
     "AutoscalingGroup": {
       "Properties": {
-        "AvailabilityZones": {
-          "Fn::GetAZs": "",
-        },
         "HealthCheckGracePeriod": 120,
         "HealthCheckType": "ELB",
-        "LaunchConfigurationName": {
-          "Ref": "LaunchConfig",
+        "LaunchTemplate": {
+          "LaunchTemplateId": {
+            "Ref": "frontendTESTrenderingF3FD9600",
+          },
+          "Version": {
+            "Fn::GetAtt": [
+              "frontendTESTrenderingF3FD9600",
+              "LatestVersionNumber",
+            ],
+          },
         },
         "LoadBalancerNames": [
           {
             "Ref": "InternalLoadBalancer",
           },
         ],
-        "MaxSize": {
-          "Fn::FindInMap": [
-            "StageMap",
-            {
-              "Ref": "Stage",
-            },
-            "MaxCapacity",
-          ],
-        },
-        "MinSize": {
-          "Fn::FindInMap": [
-            "StageMap",
-            {
-              "Ref": "Stage",
-            },
-            "MinCapacity",
-          ],
-        },
+        "MaxSize": "4",
+        "MinSize": "1",
         "Tags": [
           {
             "Key": "App",
             "PropagateAtLaunch": true,
-            "Value": {
-              "Fn::FindInMap": [
-                "Constants",
-                "App",
-                "Value",
-              ],
-            },
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -375,21 +299,29 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
         ],
         "VPCZoneIdentifier": {
-          "Ref": "Subnets",
+          "Ref": "PrivateSubnets",
         },
       },
       "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
     "Backend5xxAlarm": {
-      "Condition": "HasBackend5XXAlarm",
       "Properties": {
-        "AlarmActions": {
-          "Ref": "NotificationAlarmAction",
-        },
-        "AlarmDescription": {
-          "Fn::Sub": "Alarm if 5XX backend errors are greater than \${Backend5XXAlarmThreshold} over last \${Backend5XXAlarmPeriod} seconds
-",
-        },
+        "ActionsEnabled": false,
+        "AlarmActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId",
+                },
+                ":Frontend-TEST-CriticalAlerts",
+              ],
+            ],
+          },
+        ],
+        "AlarmDescription": "Notify if 5XX backend errors is GreaterThanOrEqualToThreshold of 100 over 5 period(s) of 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
@@ -399,21 +331,26 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             },
           },
         ],
-        "EvaluationPeriods": {
-          "Ref": "Backend5XXConsecutivePeriod",
-        },
+        "EvaluationPeriods": 5,
         "MetricName": "HTTPCode_Backend_5XX",
         "Namespace": "AWS/ELB",
-        "OKActions": {
-          "Ref": "NotificationAlarmAction",
-        },
-        "Period": {
-          "Ref": "Backend5XXAlarmPeriod",
-        },
+        "OKActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId",
+                },
+                ":Frontend-TEST-CriticalAlerts",
+              ],
+            ],
+          },
+        ],
+        "Period": 60,
         "Statistic": "Sum",
-        "Threshold": {
-          "Ref": "Backend5XXAlarmThreshold",
-        },
+        "Threshold": 100,
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
@@ -475,6 +412,46 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
+    "GuHttpsEgressSecurityGroupRenderingE17B2710": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
     "GuLogShippingPolicy981BFE5A": {
       "Properties": {
         "PolicyDocument": {
@@ -516,17 +493,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "InstanceProfile": {
-      "Properties": {
-        "Path": "/",
-        "Roles": [
-          {
-            "Ref": "InstanceRole",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::InstanceProfile",
     },
     "InstanceRole": {
       "Properties": {
@@ -634,32 +600,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "AccessLoggingPolicy": {
           "EmitInterval": 5,
           "Enabled": true,
-          "S3BucketName": "gu-elb-logs",
-          "S3BucketPrefix": {
-            "Fn::Join": [
-              "/",
-              [
-                "ELBLogs",
-                {
-                  "Fn::FindInMap": [
-                    "Constants",
-                    "Stack",
-                    "Value",
-                  ],
-                },
-                {
-                  "Fn::FindInMap": [
-                    "Constants",
-                    "App",
-                    "Value",
-                  ],
-                },
-                {
-                  "Ref": "Stage",
-                },
-              ],
-            ],
+          "S3BucketName": {
+            "Ref": "ELBLogsParameter",
           },
+          "S3BucketPrefix": "ELBLogs/frontend/rendering/TEST",
         },
         "CrossZone": true,
         "HealthCheck": {
@@ -672,13 +616,12 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Listeners": [
           {
             "InstancePort": "9000",
+            "InstanceProtocol": "http",
             "LoadBalancerPort": "80",
-            "Protocol": "HTTP",
+            "Protocol": "http",
           },
         ],
-        "LoadBalancerName": {
-          "Fn::Sub": "\${Stack}-\${Stage}-\${App}-ELB",
-        },
+        "LoadBalancerName": "frontend-TEST-rendering-ELB",
         "Scheme": "internal",
         "SecurityGroups": [
           {
@@ -689,18 +632,12 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
         ],
         "Subnets": {
-          "Ref": "Subnets",
+          "Ref": "PublicSubnets",
         },
         "Tags": [
           {
             "Key": "App",
-            "Value": {
-              "Fn::FindInMap": [
-                "Constants",
-                "App",
-                "Value",
-              ],
-            },
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -721,6 +658,55 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
+    },
+    "InternalLoadBalancerRenderingSecurityGroup53E3F9A7": {
+      "Properties": {
+        "GroupDescription": "DotcomRendering/InternalLoadBalancerRendering/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "255.255.255.255/32",
+            "Description": "Disallow all traffic",
+            "FromPort": 252,
+            "IpProtocol": "icmp",
+            "ToPort": 86,
+          },
+        ],
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Default rule allow on 80",
+            "FromPort": 80,
+            "IpProtocol": "tcp",
+            "ToPort": 80,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
     },
     "InternalLoadBalancerSecurityGroup": {
       "Properties": {
@@ -777,17 +763,17 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::EC2::SecurityGroup",
     },
     "LatencyScalingAlarm": {
-      "Condition": "HasLatencyScalingAlarm",
       "Properties": {
+        "ActionsEnabled": false,
         "AlarmActions": [
           {
-            "Ref": "ScaleUpPolicy",
+            "Fn::GetAtt": [
+              "ScaleUpPolicy",
+              "Arn",
+            ],
           },
         ],
-        "AlarmDescription": {
-          "Fn::Sub": "Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds
-",
-        },
+        "AlarmDescription": "Scale up if latency is GreaterThanOrEqualToThreshold of 0.2 over 1 period(s) of 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
@@ -802,7 +788,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Namespace": "AWS/ELB",
         "OKActions": [
           {
-            "Ref": "ScaleDownPolicy",
+            "Fn::GetAtt": [
+              "ScaleDownPolicy",
+              "Arn",
+            ],
           },
         ],
         "Period": 60,
@@ -810,58 +799,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Threshold": 0.2,
       },
       "Type": "AWS::CloudWatch::Alarm",
-    },
-    "LaunchConfig": {
-      "Properties": {
-        "AssociatePublicIpAddress": true,
-        "IamInstanceProfile": {
-          "Ref": "InstanceProfile",
-        },
-        "ImageId": {
-          "Ref": "AMI",
-        },
-        "InstanceType": {
-          "Ref": "InstanceType",
-        },
-        "SecurityGroups": [
-          {
-            "Fn::GetAtt": [
-              "InstanceSecurityGroup",
-              "GroupId",
-            ],
-          },
-        ],
-        "UserData": {
-          "Fn::Base64": {
-            "Fn::Sub": "#!/bin/bash -ev
-
-groupadd frontend
-useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
-usermod -a -G frontend aws-kinesis-agent-user
-cd /home/dotcom-rendering
-
-aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/\${Stage}/\${App}/\${App}.zip ./
-unzip -q \${App}.zip -d \${App}
-
-chown -R dotcom-rendering:frontend \${App}
-
-cd \${App}
-
-export TERM=xterm-256color
-export NODE_ENV=production
-export GU_STAGE=\${Stage}
-
-mkdir /var/log/dotcom-rendering
-chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-
-make start-prod
-
-/opt/aws-kinesis-agent/configure-aws-kinesis-agent \${AWS::Region} \${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
-",
-          },
-        },
-      },
-      "Type": "AWS::AutoScaling::LaunchConfiguration",
     },
     "ParameterStoreReadRenderingFDC91AAA": {
       "Properties": {
@@ -943,6 +880,206 @@ make start-prod
         "ScalingAdjustment": 100,
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "WazuhSecurityGroup": {
+      "Properties": {
+        "GroupDescription": "Allow outbound traffic from wazuh agent to manager",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Wazuh event logging",
+            "FromPort": 1514,
+            "IpProtocol": "tcp",
+            "ToPort": 1514,
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Wazuh agent registration",
+            "FromPort": 1515,
+            "IpProtocol": "tcp",
+            "ToPort": 1515,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "frontendTESTrenderingF3FD9600": {
+      "Properties": {
+        "LaunchTemplateData": {
+          "IamInstanceProfile": {
+            "Arn": {
+              "Fn::GetAtt": [
+                "frontendTESTrenderingProfileA2D2425E",
+                "Arn",
+              ],
+            },
+          },
+          "ImageId": {
+            "Ref": "AMIRendering",
+          },
+          "InstanceType": "t4g.micro",
+          "SecurityGroupIds": [
+            {
+              "Fn::GetAtt": [
+                "GuHttpsEgressSecurityGroupRenderingE17B2710",
+                "GroupId",
+              ],
+            },
+            {
+              "Fn::GetAtt": [
+                "WazuhSecurityGroup",
+                "GroupId",
+              ],
+            },
+            {
+              "Fn::GetAtt": [
+                "InstanceSecurityGroup",
+                "GroupId",
+              ],
+            },
+          ],
+          "TagSpecifications": [
+            {
+              "ResourceType": "instance",
+              "Tags": [
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "DotcomRendering/frontend-TEST-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "TEST",
+                },
+              ],
+            },
+            {
+              "ResourceType": "volume",
+              "Tags": [
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "DotcomRendering/frontend-TEST-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "TEST",
+                },
+              ],
+            },
+          ],
+          "UserData": {
+            "Fn::Base64": {
+              "Fn::Join": [
+                "",
+                [
+                  "#!/bin/bash -ev
+groupadd frontend
+useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
+usermod -a -G frontend aws-kinesis-agent-user
+cd /home/dotcom-rendering
+aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/TEST/rendering/rendering.tar.gz ./
+tar -zxf rendering.tar.gz rendering
+chown -R dotcom-rendering:frontend rendering
+cd rendering
+export TERM=xterm-256color
+export NODE_ENV=production
+export GU_STAGE=TEST
+mkdir /var/log/dotcom-rendering
+chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
+sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make start-prod
+/opt/aws-kinesis-agent/configure-aws-kinesis-agent eu-west-1 ",
+                  {
+                    "Ref": "ELKStreamId",
+                  },
+                  " /var/log/dotcom-rendering/dotcom-rendering.log",
+                ],
+              ],
+            },
+          },
+        },
+        "TagSpecifications": [
+          {
+            "ResourceType": "launch-template",
+            "Tags": [
+              {
+                "Key": "gu:cdk:version",
+                "Value": "TEST",
+              },
+              {
+                "Key": "gu:repo",
+                "Value": "guardian/dotcom-rendering",
+              },
+              {
+                "Key": "Name",
+                "Value": "DotcomRendering/frontend-TEST-rendering",
+              },
+              {
+                "Key": "Stack",
+                "Value": "frontend",
+              },
+              {
+                "Key": "Stage",
+                "Value": "TEST",
+              },
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::EC2::LaunchTemplate",
+    },
+    "frontendTESTrenderingProfileA2D2425E": {
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
     },
   },
 }

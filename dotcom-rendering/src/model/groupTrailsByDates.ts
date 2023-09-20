@@ -34,7 +34,7 @@ const getMeanDayFrequency = (
 const groupByYear = (trails: TrailAndDate[]) => {
 	const trailsByYear: Array<{ year: number; trails: TrailAndDate[] }> = [];
 
-	trails.forEach(({ trail, date }) => {
+	for (const { trail, date } of trails) {
 		const existingYear = trailsByYear.find(
 			({ year }) => year === date.getUTCFullYear(),
 		);
@@ -46,7 +46,7 @@ const groupByYear = (trails: TrailAndDate[]) => {
 				trails: [{ trail, date }],
 			});
 		}
-	});
+	}
 
 	return trailsByYear;
 };
@@ -61,7 +61,7 @@ const groupTrailsByMonth = (trails: TrailAndDate[], year: number) => {
 		trails: TrailAndDate[];
 	}> = [];
 
-	trails.forEach(({ trail, date }) => {
+	for (const { trail, date } of trails) {
 		const existingMonth = trailsByMonth.find(
 			({ month }) => month === date.getUTCMonth(),
 		);
@@ -74,7 +74,7 @@ const groupTrailsByMonth = (trails: TrailAndDate[], year: number) => {
 				trails: [{ trail, date }],
 			});
 		}
-	});
+	}
 
 	return trailsByMonth;
 };
@@ -94,7 +94,7 @@ const groupTrailsByDay = (
 		trails: TrailAndDate[];
 	}> = [];
 
-	trails.forEach(({ trail, date }) => {
+	for (const { trail, date } of trails) {
 		const existingMonth = trailsByDay.find(
 			({ day }) => day === date.getUTCDate(),
 		);
@@ -108,7 +108,7 @@ const groupTrailsByDay = (
 				trails: [{ trail, date }],
 			});
 		}
-	});
+	}
 
 	return trailsByDay;
 };
@@ -148,10 +148,10 @@ export const groupTrailsByDates = (
 	// year, month & potentially day.
 	const groupedTrails: GroupedTrails[] = [];
 
-	trailsByYear.forEach(({ year, trails: trailsForYear }) => {
+	for (const { year, trails: trailsForYear } of trailsByYear) {
 		const trailsByMonth = groupTrailsByMonth(trailsForYear, year);
 
-		trailsByMonth.forEach(({ month, trails: trailsForMonth }) => {
+		for (const { month, trails: trailsForMonth } of trailsByMonth) {
 			const trailsByDay = groupTrailsByDay(trailsForMonth, year, month);
 
 			// Once we have trails grouped by year, month & day, we calculate the day frequency
@@ -191,8 +191,8 @@ export const groupTrailsByDates = (
 					),
 				});
 			}
-		});
-	});
+		}
+	}
 
 	return groupedTrails;
 };

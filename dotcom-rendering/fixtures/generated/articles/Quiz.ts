@@ -440,11 +440,6 @@ export const Quiz: FEArticleType = {
 						],
 					},
 					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
-					},
-					{
 						title: 'Business',
 						url: '/business',
 						children: [
@@ -1273,7 +1268,7 @@ export const Quiz: FEArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
+					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1643,7 +1638,7 @@ export const Quiz: FEArticleType = {
 					],
 				},
 			],
-			elementId: '8d0f357d-5cdf-4e60-8730-d331ca43ced3',
+			elementId: '58b26b89-6268-46a7-ae37-4b7bef6c8182',
 		},
 	],
 	canonicalUrl:
@@ -2259,7 +2254,7 @@ export const Quiz: FEArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '6322cf66-48a5-40ae-b2b8-08792aa498d6',
+					elementId: '8964ec4d-8c1c-4659-b61c-0d99868df605',
 				},
 			],
 			attributes: {

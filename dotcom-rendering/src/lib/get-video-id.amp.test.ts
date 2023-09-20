@@ -31,10 +31,10 @@ describe('getIdFromUrl', () => {
 			},
 		];
 
-		formats.forEach((_) => {
+		for (const _ of formats) {
 			// Search for both in path & query param
 			expect(getIdFromUrl(_.url, youtubeRegEx, true, 'v')).toBe(_.id);
-		});
+		}
 	});
 
 	it('Returns matching ID for Vimeo formats', () => {
@@ -55,9 +55,9 @@ describe('getIdFromUrl', () => {
 			},
 		];
 
-		formats.forEach((_) => {
+		for (const _ of formats) {
 			expect(getIdFromUrl(_.url, vimeoRegEx, true)).toBe(_.id);
-		});
+		}
 	});
 
 	it('Finds ID if both options are allowed', () => {
@@ -67,9 +67,9 @@ describe('getIdFromUrl', () => {
 			'https://theguardian.com/test?a=test',
 		];
 
-		formats.forEach((_) => {
+		for (const _ of formats) {
 			expect(getIdFromUrl(_, 'test', true, 'a')).toBe('test');
-		});
+		}
 	});
 
 	it('Throws an error if it cannot find an ID', () => {

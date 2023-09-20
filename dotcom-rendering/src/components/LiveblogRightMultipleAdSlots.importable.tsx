@@ -7,7 +7,7 @@ import {
 	TOP_RIGHT_AD_STICKY_HEIGHT,
 } from '../lib/liveblog-right-ad-constants';
 import { useAB } from '../lib/useAB';
-import { AdSlot } from './AdSlot';
+import { AdSlot } from './AdSlot.web';
 
 export const calculateNumAdsThatFit = (rightColHeight: number) => {
 	if (rightColHeight < AD_CONTAINER_HEIGHT) return 0;
@@ -39,6 +39,14 @@ type Props = {
 /**
  * In the right hand column, there will be the right ad slot, followed
  * by as many liveblog-right ad slots that can fit
+ *
+ * ## Why does this need to be an Island?
+ *
+ * Ads are rendered client-side.
+ *
+ * ---
+ *
+ * (No visual story exists)
  */
 export const LiveblogRightMultipleAdSlots = ({
 	display,

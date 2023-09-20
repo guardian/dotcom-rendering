@@ -4,7 +4,8 @@ type AuthenticationComponentId =
 	| 'amp_sidebar_signin'
 	| 'guardian_signin_header'
 	| 'signin_to_comment'
-	| 'register_to_comment';
+	| 'register_to_comment'
+	| 'signin_to_reply_comment';
 
 type AuthenticationEventParams = {
 	componentType: string;

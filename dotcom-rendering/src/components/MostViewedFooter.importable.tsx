@@ -35,11 +35,15 @@ const secondTierStyles = css`
 `;
 
 /**
- * # Most Viewed Footer
- *
  * List of 10 most viewed articles to show at the bottom of pages.
  *
- * @Todo add Storybook link
+ * ## Why does this need to be an Island?
+ *
+ * Most viewed data if fetched client-side.
+ *
+ * ---
+ *
+ * (No visual story exists)
  */
 export const MostViewedFooter = ({
 	tabs,
