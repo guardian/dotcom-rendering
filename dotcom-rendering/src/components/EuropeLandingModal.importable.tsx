@@ -160,6 +160,7 @@ export const getModalType = (): ModalType => {
 	if (!geoCountryCookie) {
 		return 'NoModal';
 	}
+
 	if (
 		!editionCookie &&
 		!coe.includes(geoCountryCookie) &&
@@ -167,10 +168,12 @@ export const getModalType = (): ModalType => {
 	) {
 		return 'ModalDoYouWantToSwitch';
 	}
+
 	// If selected INT and not in COE show do u want to switch
 	if (editionCookie === 'INT' && !coe.includes(geoCountryCookie)) {
 		return 'ModalDoYouWantToSwitch';
 	}
+
 	// If in COE
 	if (coe.includes(geoCountryCookie)) {
 		if (
@@ -202,6 +205,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 	const initialize = useCallback(() => {
 		const europeModal = document.getElementById('europe-modal-dialog');
 		const modalShown = getCookie({ name: modalShownCookie });
+
 		if (
 			europeModal instanceof HTMLDialogElement &&
 			modalType !== 'NoModal' &&
@@ -241,12 +245,9 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 	}, [initialize]);
 
 	const confirmNewEdition = (editionId: EditionId) => {
-		setCookie({
-			name: 'GU_EDITION',
-			value: editionId,
-			isCrossSubdomain: true,
-		});
-		if (editionId === edition) {
+		// Always send EUR users to the Edition preference endpoint.
+		// We want them to be redirected to the /europe front.
+		if (editionId === edition && editionId !== 'EUR') {
 			dismissModal();
 		} else {
 			window.location.replace(getEditionFromId(editionId).url);
@@ -293,8 +294,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 									)}
 									size={'small'}
 									onClick={() => {
-										dismissModal();
-										window.location.reload();
+										confirmNewEdition('EUR');
 									}}
 									cssOverrides={OKButtonStyles}
 								>
