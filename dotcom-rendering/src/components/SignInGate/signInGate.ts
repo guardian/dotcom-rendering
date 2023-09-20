@@ -21,8 +21,8 @@ export const signInGateTests: ReadonlyArray<ABTest> = [
 ];
 
 export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
-	'main-control-4': gateMainControl,
-	'main-variant-4': gateMainVariant,
+	'main-control-5': gateMainControl,
+	'main-variant-5': gateMainVariant,
 	'quick-and-easy': signInGateCopyTestRepeatSept2023Component,
 	'take-a-moment': signInGateCopyTestRepeatSept2023Component,
 };
@@ -30,7 +30,7 @@ export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 // Component Id does not need to match gate test name, as ab test info passed separately to ophan
 // Consider Id name relevant to the gate component or design. Use snake_case
 export const signInGateTestIdToComponentId: { [key: string]: string } = {
-	SignInGateMainVariant: 'main_variant_4',
-	SignInGateMainControl: 'main_control_4',
+	SignInGateMainVariant: 'main_variant_5',
+	SignInGateMainControl: 'main_control_5',
 	SignInGateCopyTestRepeatSept2023: 'sign_in_gate_copy_test_repeat_sept2023',
 };
