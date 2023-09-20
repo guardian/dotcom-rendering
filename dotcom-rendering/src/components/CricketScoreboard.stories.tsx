@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { match } from '../../fixtures/manual/cricket-scoreboard';
 import { CricketScoreboard } from './CricketScoreboard';
@@ -20,7 +20,7 @@ export const defaultStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.LiveBlog,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 				match={match}
 				scorecardUrl="/test"

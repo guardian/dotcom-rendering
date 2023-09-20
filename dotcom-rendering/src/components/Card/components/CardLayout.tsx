@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import { until } from '@guardian/source-foundations';
+import type { DCRContainerType } from '../../../types/front';
 import type { ImagePositionType } from './ImageWrapper';
+
+const padding = 20;
 
 type Props = {
 	children: React.ReactNode;
@@ -8,6 +11,7 @@ type Props = {
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
+	containerType?: DCRContainerType;
 };
 
 const decideDirection = (imagePosition: ImagePositionType) => {
@@ -26,7 +30,20 @@ const decideDirection = (imagePosition: ImagePositionType) => {
 	}
 };
 
-const decideWidth = (minWidthInPixels?: number) => {
+// Until mobile landscape, show 1 card on small screens
+// Above mobile landscape, show 1 full card and min 20vw of second card
+const videoWidth = css`
+	min-width: 300px;
+	max-width: 600px;
+	width: calc(80vw - ${padding}px);
+	overflow: hidden;
+
+	${until.mobileLandscape} {
+		width: calc(100vw - ${padding}px);
+	}
+`;
+
+const minWidth = (minWidthInPixels?: number) => {
 	if (minWidthInPixels !== undefined && minWidthInPixels > 0) {
 		return css`
 			min-width: ${minWidthInPixels}px;
@@ -77,6 +94,7 @@ export const CardLayout = ({
 	imagePositionOnMobile,
 	minWidthInPixels,
 	imageType,
+	containerType,
 }: Props) => (
 	<div
 		css={[
@@ -84,7 +102,9 @@ export const CardLayout = ({
 				display: flex;
 				flex-basis: 100%;
 			`,
-			decideWidth(minWidthInPixels),
+			containerType === 'fixed/video'
+				? videoWidth
+				: minWidth(minWidthInPixels),
 			decidePosition(imagePosition, imagePositionOnMobile, imageType),
 		]}
 	>

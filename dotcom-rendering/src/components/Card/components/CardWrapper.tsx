@@ -3,17 +3,13 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { from, neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
-import type {
-	DCRContainerPalette,
-	DCRContainerType,
-} from '../../../types/front';
+import type { DCRContainerPalette } from '../../../types/front';
 import type { Palette } from '../../../types/palette';
 
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
 };
@@ -32,6 +28,17 @@ const cardStyles = (
 		/* We absolutely position the faux link
 		so this is required here */
 		position: relative;
+
+		/* Target Safari 10.1 */
+		/* https://www.browserstack.com/guide/create-browser-specific-css */
+		@media not all and (min-resolution: 0.001dpcm) {
+			@supports (-webkit-appearance: none) and
+				(not (stroke-color: transparent)) {
+				display: grid;
+				grid-auto-rows: min-content;
+				align-content: start;
+			}
+		}
 
 		:hover .image-overlay {
 			position: absolute;
@@ -133,11 +140,9 @@ const cardStyles = (
 const topBarStyles = ({
 	isDynamo,
 	palette,
-	containerType,
 }: {
 	isDynamo?: true;
 	palette: Palette;
-	containerType?: DCRContainerType;
 }) => {
 	/* Styling for top bar */
 	const baseStyles = css`
@@ -145,7 +150,7 @@ const topBarStyles = ({
 			? palette.text.dynamoKicker
 			: palette.topBar.card};
 		content: '';
-		height: ${containerType === 'dynamic/package' ? '4px' : '1px'};
+		height: 1px;
 		z-index: 2;
 		width: 100%;
 	`;
@@ -171,7 +176,6 @@ export const CardWrapper = ({
 	children,
 	format,
 	containerPalette,
-	containerType,
 	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
@@ -179,7 +183,7 @@ export const CardWrapper = ({
 		<div
 			css={[
 				cardStyles(format, palette, isDynamo, containerPalette),
-				topBarStyles({ isDynamo, palette, containerType }),
+				topBarStyles({ isDynamo, palette }),
 			]}
 		>
 			{children}

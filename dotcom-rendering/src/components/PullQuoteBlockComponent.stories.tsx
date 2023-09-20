@@ -1,8 +1,8 @@
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
@@ -16,20 +16,20 @@ export default {
 const defaultFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 const photoEssayNews = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.PhotoEssay,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 // Inline
 export const SportInline = () => {
 	const format = {
 		...defaultFormat,
-		theme: ArticlePillar.Sport,
+		theme: Pillar.Sport,
 	};
 
 	return (
@@ -77,7 +77,7 @@ LabsInline.storyName = 'Labs, inline, Article';
 export const LifestyleInline = () => {
 	const format = {
 		...defaultFormat,
-		theme: ArticlePillar.Lifestyle,
+		theme: Pillar.Lifestyle,
 	};
 
 	return (
@@ -101,7 +101,7 @@ LifestyleInline.storyName = 'Lifestyle, inline, Article';
 export const CultureInline = () => {
 	const format = {
 		...defaultFormat,
-		theme: ArticlePillar.Culture,
+		theme: Pillar.Culture,
 	};
 
 	return (
@@ -145,7 +145,7 @@ export const OpinionInline = () => {
 	const format = {
 		...defaultFormat,
 		design: ArticleDesign.Comment,
-		theme: ArticlePillar.Opinion,
+		theme: Pillar.Opinion,
 	};
 
 	return (
@@ -194,7 +194,7 @@ SpecialReportInline.storyName = 'SpecialReport, inline, Article';
 export const SportSupporting = () => {
 	const format = {
 		...defaultFormat,
-		theme: ArticlePillar.Sport,
+		theme: Pillar.Sport,
 	};
 
 	return (
@@ -242,7 +242,7 @@ LabsSupporting.storyName = 'Labs, supporting, Article';
 export const LifestyleSupporting = () => {
 	const format = {
 		...defaultFormat,
-		theme: ArticlePillar.Lifestyle,
+		theme: Pillar.Lifestyle,
 	};
 
 	return (
@@ -266,7 +266,7 @@ LifestyleSupporting.storyName = 'Lifestyle, supporting, Article';
 export const CultureSupporting = () => {
 	const format = {
 		...defaultFormat,
-		theme: ArticlePillar.Culture,
+		theme: Pillar.Culture,
 	};
 
 	return (
@@ -310,7 +310,7 @@ export const OpinionSupporting = () => {
 	const format = {
 		...defaultFormat,
 		design: ArticleDesign.Comment,
-		theme: ArticlePillar.Opinion,
+		theme: Pillar.Opinion,
 	};
 
 	return (

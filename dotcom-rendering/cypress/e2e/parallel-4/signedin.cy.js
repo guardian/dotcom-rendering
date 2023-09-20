@@ -2,6 +2,7 @@
 /* eslint-disable func-names */
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { Standard } from '../../../fixtures/generated/articles/Standard';
 
 const articleUrl =
 	'https://www.theguardian.com/commentisfree/2020/dec/11/brexit-conservative-rule-breaking-eu';
@@ -10,6 +11,29 @@ const profileResponse =
 	'{"status":"ok","userProfile":{"userId":"102309223","displayName":"Guardian User","webUrl":"https://profile.theguardian.com/user/id/102309223","apiUrl":"https://discussion.guardianapis.com/discussion-api/profile/102309223","avatar":"https://avatar.guim.co.uk/user/102309223","secureAvatarUrl":"https://avatar.guim.co.uk/user/102309223","badge":[],"privateFields":{"canPostComment":true,"isPremoderated":false,"hasCommented":false}}}';
 
 const idapiIdentifiersResponse = `{ "id": "000000000", "brazeUuid": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", "puzzleUuid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "googleTagId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }`;
+
+const visitArticle = () =>
+	cy.visit('/Article', {
+		method: 'POST',
+		body: JSON.stringify({
+			...Standard,
+			config: {
+				...Standard.config,
+				switches: {
+					...Standard.config.switches,
+					/**
+					 * We want to continue using cookies for signed in features
+					 * until we figure out how to use Okta in Cypress.
+					 * See https://github.com/guardian/dotcom-rendering/issues/8758
+					 */
+					okta: false,
+				},
+			},
+		}),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
 
 describe('Signed in readers', function () {
 	beforeEach(function () {
@@ -36,7 +60,7 @@ describe('Signed in readers', function () {
 			'**/profile/me?strict_sanctions_check=false',
 			profileResponse,
 		).as('profileMe');
-		cy.visit(`/Article/${articleUrl}`);
+		visitArticle();
 		cy.wait('@profileMe');
 		// This text is shown in the header for signed in users
 		cy.contains('My account');
@@ -56,7 +80,7 @@ describe('Signed in readers', function () {
 			'**/profile/me?strict_sanctions_check=false',
 			profileResponse,
 		).as('profileMe');
-		cy.visit(`/Article/${articleUrl}`);
+		visitArticle();
 		cy.wait('@profileMe');
 
 		cy.get('a[data-link-name="nav3 : topbar : printsubs"]')
@@ -77,7 +101,7 @@ describe('Signed in readers', function () {
 	});
 
 	it('should not display signed in texts when users are not signed in', function () {
-		cy.visit(`/Article/${articleUrl}`);
+		visitArticle();
 		cy.scrollTo('bottom', { duration: 300 });
 		// We need this second call to fix flakiness where content loads in pushing the page
 		// down and preventing the scroll request to actually reach the bottom. We will fix
@@ -86,10 +110,10 @@ describe('Signed in readers', function () {
 		// Wait for the discussion to be loaded
 		cy.get('gu-island[name=DiscussionContainer]').should(
 			'have.attr',
-			'data-gu-ready',
-			'true',
+			'data-island-status',
+			'rendered',
 		);
 		// Check that the page is showing the reader as signed out
-		cy.contains('sign in or create');
+		cy.contains('Sign in or create');
 	});
 });

@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { CommentCount } from './CommentCount.importable';
@@ -15,18 +15,20 @@ export default {
 	title: 'Components/Counts',
 };
 
-const Wrapper = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			margin: 40px;
-		`}
-	>
-		{children}
-	</div>
-);
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
+	return (
+		<div
+			css={css`
+				margin: 40px;
+			`}
+		>
+			{children}
+		</div>
+	);
+};
 
 const format = {
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 };
@@ -49,14 +51,11 @@ export const Both = () => {
 		)
 		// Comment count
 		.getOnce(
-			'begin:https://discussion.theguardian.com/discussion/p/fmmj65',
+			'begin:https://discussion.theguardian.com/getCommentCounts',
 			{
 				status: 200,
 				body: {
-					discussion: {
-						commentCount: 239,
-						isClosedForComments: false,
-					},
+					'p/fmmj65': 239,
 				},
 			},
 			{ overwriteRoutes: false },
@@ -104,14 +103,11 @@ export const Themes = () => {
 		)
 		// Comment count
 		.getOnce(
-			'begin:https://discussion.theguardian.com/discussion/p/3bdii8',
+			'begin:https://discussion.theguardian.com/getCommentCounts',
 			{
 				status: 200,
 				body: {
-					discussion: {
-						commentCount: 239,
-						isClosedForComments: false,
-					},
+					'p/3bdii8': 239,
 				},
 			},
 			{ overwriteRoutes: false },
@@ -120,83 +116,83 @@ export const Themes = () => {
 
 	return (
 		<Wrapper>
-			<Counts format={{ ...format, theme: ArticlePillar.News }}>
+			<Counts format={{ ...format, theme: Pillar.News }}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={{ ...format, theme: ArticlePillar.News }}
+						format={{ ...format, theme: Pillar.News }}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						discussionApiUrl="https://discussion.theguardian.com"
 						shortUrlId="p/3bdii8"
-						format={{ ...format, theme: ArticlePillar.News }}
+						format={{ ...format, theme: Pillar.News }}
 					/>
 				</div>
 			</Counts>
-			<Counts format={{ ...format, theme: ArticlePillar.Culture }}>
+			<Counts format={{ ...format, theme: Pillar.Culture }}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={{ ...format, theme: ArticlePillar.Culture }}
+						format={{ ...format, theme: Pillar.Culture }}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						discussionApiUrl="https://discussion.theguardian.com"
 						shortUrlId="p/3bdii8"
-						format={{ ...format, theme: ArticlePillar.Culture }}
+						format={{ ...format, theme: Pillar.Culture }}
 					/>
 				</div>
 			</Counts>
-			<Counts format={{ ...format, theme: ArticlePillar.Sport }}>
+			<Counts format={{ ...format, theme: Pillar.Sport }}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={{ ...format, theme: ArticlePillar.Sport }}
+						format={{ ...format, theme: Pillar.Sport }}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						discussionApiUrl="https://discussion.theguardian.com"
 						shortUrlId="p/3bdii8"
-						format={{ ...format, theme: ArticlePillar.Sport }}
+						format={{ ...format, theme: Pillar.Sport }}
 					/>
 				</div>
 			</Counts>
-			<Counts format={{ ...format, theme: ArticlePillar.Lifestyle }}>
+			<Counts format={{ ...format, theme: Pillar.Lifestyle }}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={{ ...format, theme: ArticlePillar.Lifestyle }}
+						format={{ ...format, theme: Pillar.Lifestyle }}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						discussionApiUrl="https://discussion.theguardian.com"
 						shortUrlId="p/3bdii8"
-						format={{ ...format, theme: ArticlePillar.Lifestyle }}
+						format={{ ...format, theme: Pillar.Lifestyle }}
 					/>
 				</div>
 			</Counts>
-			<Counts format={{ ...format, theme: ArticlePillar.Opinion }}>
+			<Counts format={{ ...format, theme: Pillar.Opinion }}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={{ ...format, theme: ArticlePillar.Opinion }}
+						format={{ ...format, theme: Pillar.Opinion }}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						discussionApiUrl="https://discussion.theguardian.com"
 						shortUrlId="p/3bdii8"
-						format={{ ...format, theme: ArticlePillar.Opinion }}
+						format={{ ...format, theme: Pillar.Opinion }}
 					/>
 				</div>
 			</Counts>
@@ -261,14 +257,11 @@ export const CommentOnly = () => {
 		)
 		// Comment count
 		.getOnce(
-			'begin:https://discussion.theguardian.com/discussion/p/sd4lki',
+			'begin:https://discussion.theguardian.com/getCommentCounts',
 			{
 				status: 200,
 				body: {
-					discussion: {
-						commentCount: 239,
-						isClosedForComments: false,
-					},
+					'p/sd4lki': 239,
 				},
 			},
 			{ overwriteRoutes: false },
@@ -316,14 +309,11 @@ export const ZeroComments = () => {
 		)
 		// Comment count
 		.getOnce(
-			'begin:https://discussion.theguardian.com/discussion/p/u7ytrg',
+			'begin:https://discussion.theguardian.com/getCommentCounts',
 			{
 				status: 200,
 				body: {
-					discussion: {
-						commentCount: 0,
-						isClosedForComments: false,
-					},
+					'p/u7ytrg': 0,
 				},
 			},
 			{ overwriteRoutes: false },
@@ -371,14 +361,11 @@ export const BigNumbers = () => {
 		)
 		// Comment count
 		.getOnce(
-			'begin:https://discussion.theguardian.com/discussion/p/bhgyt',
+			'begin:https://discussion.theguardian.com/getCommentCounts',
 			{
 				status: 200,
 				body: {
-					discussion: {
-						commentCount: 4320,
-						isClosedForComments: false,
-					},
+					'p/bhgyt': 4320,
 				},
 			},
 			{ overwriteRoutes: false },

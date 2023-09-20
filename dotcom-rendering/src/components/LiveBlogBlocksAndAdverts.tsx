@@ -3,7 +3,7 @@ import {
 	shouldDisplayAd,
 } from '../lib/liveblogAdSlots';
 import type { Switches } from '../types/config';
-import { AdSlot } from './AdSlot';
+import { AdSlot } from './AdSlot.web';
 import { LiveBlock } from './LiveBlock';
 
 type Props = {
@@ -59,27 +59,49 @@ export const LiveBlogBlocksAndAdverts = ({
 		);
 	}
 
-	let numPixelsOfContentWithoutAdvert = 0;
-	let numAdvertsInserted = 0;
+	let pxSinceAdMobile = 0;
+	let mobileAdCounter = 0;
+
+	let pxSinceAdDesktop = 0;
+	let desktopAdCounter = 0;
 
 	return (
 		<>
 			{blocks.map((block, i) => {
-				numPixelsOfContentWithoutAdvert +=
-					calculateApproximateBlockHeight(block.elements);
-
-				const willDisplayAdAfterBlock =
+				pxSinceAdMobile += calculateApproximateBlockHeight(
+					block.elements,
+					true,
+				);
+				const willInsertAdMobile =
 					!isAdFreeUser &&
 					shouldDisplayAd(
 						i + 1,
 						blocks.length,
-						numAdvertsInserted,
-						numPixelsOfContentWithoutAdvert,
+						mobileAdCounter,
+						pxSinceAdMobile,
+						true,
 					);
+				if (willInsertAdMobile) {
+					mobileAdCounter++;
+					pxSinceAdMobile = 0;
+				}
 
-				if (willDisplayAdAfterBlock) {
-					numAdvertsInserted++;
-					numPixelsOfContentWithoutAdvert = 0;
+				pxSinceAdDesktop += calculateApproximateBlockHeight(
+					block.elements,
+					false,
+				);
+				const willInsertAdDesktop =
+					!isAdFreeUser &&
+					shouldDisplayAd(
+						i + 1,
+						blocks.length,
+						desktopAdCounter,
+						pxSinceAdDesktop,
+						false,
+					);
+				if (willInsertAdDesktop) {
+					desktopAdCounter++;
+					pxSinceAdDesktop = 0;
 				}
 
 				return (
@@ -99,10 +121,16 @@ export const LiveBlogBlocksAndAdverts = ({
 							isPinnedPost={false}
 							pinnedPostId={pinnedPost?.id}
 						/>
-						{willDisplayAdAfterBlock && (
+						{willInsertAdMobile && (
+							<AdSlot
+								position="liveblog-inline-mobile"
+								index={mobileAdCounter}
+							/>
+						)}
+						{willInsertAdDesktop && (
 							<AdSlot
 								position="liveblog-inline"
-								index={numAdvertsInserted}
+								index={desktopAdCounter}
 							/>
 						)}
 					</>

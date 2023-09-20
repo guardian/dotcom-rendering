@@ -175,6 +175,17 @@ export const mockRESTCalls = (): typeof fetchMock => {
 				},
 				{ overwriteRoutes: false },
 			)
+			.get(
+				/^https:\/\/discussion.theguardian.com\/discussion-api\/getCommentCounts\?/,
+				{
+					status: 200,
+					body: {
+						'/p/d8ex5': 496,
+						'/p/zemg8': 11_000,
+					},
+				},
+				{ overwriteRoutes: false },
+			)
 			// Most read by category
 			.get(
 				/.*api.nextgen.guardianapps.co.uk\/most-read.*/,
@@ -483,6 +494,27 @@ export const mockRESTCalls = (): typeof fetchMock => {
 				},
 				{ overwriteRoutes: false },
 			)
+
+			// Return an error response if the request body includes the
+			// phrase 'example.com', otherwise, return a success response.
+			// For use on stories and tests involving posts to the '/email/many'
+			// or '/email'
+			// api endpoint eg:
+			// dotcom-rendering/src/components/ManyNewsletterSignUp.stories.tsx
+			.post(
+				/.*api.nextgen.guardianapps.co.uk\/email[/many]{0,1}.*/,
+				(url, mockRequest) => {
+					const decodedBody = decodeURIComponent(
+						mockRequest.body?.toString() ?? '',
+					);
+
+					return decodedBody.includes('example.com')
+						? { status: 500 }
+						: { status: 200 };
+				},
+				{ overwriteRoutes: false },
+			)
+
 			/** @see https://github.com/wheresrhys/fetch-mock/issues/618 */
 			.spy('end:.hot-update.json')
 	);

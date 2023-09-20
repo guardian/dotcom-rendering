@@ -2,28 +2,36 @@
  * Controls whether we should build the variant bundle.
  *
  * Set this to `true` if you want to serve a server-side experiment against
- * the `dcrJavascriptBundle` A/B test.
+ * the a variant bundle A/B test.
  *
  * Ensure Sentry sampling in sentry/index.ts is adjusted for the sample
  * size of the test
  *
  * @type {boolean} prevent TS from narrowing this to its current value
  */
-const BUILD_VARIANT = false;
+const BUILD_VARIANT = true;
 
 /**
- * Server-side test names for `dcr-javascript-bundle`.
+ * Server-side test names for running variant test.
  *
  * The name is transformed from kebab-case to camelCase,
- * so we have the `dcrJavascriptBundle` prefix.
+ * so we have the relevant prefix captured here.
  *
- * @see https://github.com/guardian/frontend/blob/a602273a/common/app/experiments/Experiments.scala#L20-L27
+ * @see https://github.com/guardian/frontend/blob/main/common/app/experiments/Experiments.scala
  *
  * @type {(variant: 'Variant' | 'Control') => import("../../src/types/config").ServerSideTestNames}
  */
 const dcrJavascriptBundle = (variant) => `dcrJavascriptBundle${variant}`;
 
+/** @type {(variant: 'Variant' | 'Control') => import("../../src/types/config").ServerSideTestNames} */
+const adaptive = (variant) => `adaptiveSite${variant}`;
+
+/** @type {(variant: 'Variant' | 'Control') => import("../../src/types/config").ServerSideTestNames} */
+const ophanEsm = (variant) => `ophanEsm${variant}`;
+
 module.exports = {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
+	adaptive,
+	ophanEsm,
 };

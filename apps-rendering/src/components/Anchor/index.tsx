@@ -46,6 +46,7 @@ const colour = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			return css`
 				color: ${linkDark};
 				border-bottom: 0.0625rem solid ${neutral[20]};

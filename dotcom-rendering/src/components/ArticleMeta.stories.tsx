@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { ArticleMeta } from './ArticleMeta';
@@ -72,7 +72,7 @@ export const ArticleStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				pageId=""
 				webTitle=""
@@ -89,6 +89,33 @@ export const ArticleStory = () => {
 		</Wrapper>
 	);
 };
+
+export const ArticleAppsStory = () => {
+	return (
+		<Wrapper>
+			<ArticleMeta
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				}}
+				pageId=""
+				webTitle=""
+				byline="Lanre Bakare"
+				tags={tagsWithLargeBylineImage}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
+			/>
+		</Wrapper>
+	);
+};
+/** @see /dotcom-rendering/docs/development/storybook.md */
+ArticleAppsStory.args = { config: { renderingTarget: 'Apps' } };
 
 export const BrandingStory = () => {
 	return (
@@ -114,7 +141,7 @@ export const BrandingStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				pageId=""
 				webTitle=""
@@ -141,7 +168,7 @@ export const FeatureStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				pageId=""
 				webTitle=""
@@ -167,7 +194,7 @@ export const FeatureWithMismatchedContributor = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				pageId=""
 				webTitle=""
@@ -194,7 +221,7 @@ export const FeatureStoryWithSmallBylineImage = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				pageId=""
 				webTitle=""
@@ -272,7 +299,7 @@ export const CommentStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Comment,
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 				}}
 				pageId=""
 				webTitle=""
@@ -298,7 +325,7 @@ export const InterviewStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Interview,
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 				}}
 				pageId=""
 				webTitle=""
@@ -324,7 +351,7 @@ export const ImmersiveStory = () => {
 				format={{
 					display: ArticleDisplay.Immersive,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				pageId=""
 				webTitle=""
@@ -350,7 +377,7 @@ export const TwoContributorsStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 				pageId=""
 				webTitle=""
@@ -406,7 +433,7 @@ export const Dateline = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				pageId=""
 				webTitle=""

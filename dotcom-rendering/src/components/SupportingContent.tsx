@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, neutral, until } from '@guardian/source-foundations';
+import { from, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { transparentColour } from '../lib/transparentColour';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
@@ -18,9 +18,12 @@ type Props = {
 const wrapperStyles = css`
 	position: relative;
 	display: flex;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	@media (pointer: coarse) {
+		padding-bottom: 0;
+	}
 `;
 
 const directionStyles = (alignment: Alignment) => {
@@ -43,13 +46,12 @@ const dynamoStyles = css`
 	flex-direction: column;
 	column-gap: 5px;
 	width: 100%;
-	margin: 0;
+	padding: 0;
 
 	${from.tablet} {
-		padding: 0 5px 5px;
+		margin-top: 5px;
 		flex-direction: row;
-		position: absolute;
-		bottom: 0;
+		position: relative;
 	}
 `;
 
@@ -60,28 +62,45 @@ const liStyles = css`
 	padding-top: 2px;
 	position: relative;
 	margin-top: 8px;
+	@media (pointer: coarse) {
+		margin-top: 0;
+		&:first-child {
+			margin-top: 8px;
+		}
+	}
 	${from.tablet} {
 		margin-bottom: 4px;
 	}
 `;
 
-const dynamoLiStyles = css`
-	background-color: ${transparentColour(neutral[97], 0.875)};
+const dynamoLiStyles = (
+	format: ArticleFormat,
+	containerPalette?: DCRContainerPalette,
+) => css`
+	background-color: ${transparentColour(
+		decidePalette(format, containerPalette).background.dynamoSublink,
+		0.875,
+	)};
+	/* Creates a containing block which allows Ophan heatmap to place bubbles correctly. */
+	position: relative;
 	border-top: 1px solid;
 	/* 20% is arbitrary, but the cards should expand thanks for flex-grow */
 	flex: 1 0 25%;
 	margin: 0;
 `;
 
-const leftMargin = css`
-	${from.tablet} {
-		margin-left: 10px;
-	}
-`;
-
 const bottomMargin = css`
 	${until.tablet} {
 		margin-bottom: 8px;
+		@media (pointer: coarse) {
+			margin-bottom: 0;
+		}
+	}
+`;
+
+const leftMargin = css`
+	${from.tablet} {
+		margin-left: 10px;
 	}
 `;
 
@@ -112,7 +131,10 @@ export const SupportingContent = ({
 						css={[
 							isDynamo
 								? [
-										dynamoLiStyles,
+										dynamoLiStyles(
+											parentFormat,
+											containerPalette,
+										),
 										css`
 											border-color: ${decidePalette(
 												parentFormat,

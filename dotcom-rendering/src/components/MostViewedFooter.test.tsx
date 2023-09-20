@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
 import { responseWithTwoTabs } from './MostViewed.mocks';
@@ -25,7 +25,7 @@ describe('MostViewedFooterData', () => {
 			<MostViewedFooterData
 				sectionId="Section Name"
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -64,7 +64,7 @@ describe('MostViewedFooterData', () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				edition="UK"
@@ -121,7 +121,7 @@ describe('MostViewedFooterData', () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				edition="UK"
@@ -163,7 +163,7 @@ describe('MostViewedFooterData', () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				edition="UK"
@@ -182,7 +182,7 @@ describe('MostViewedFooterData', () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				edition="UK"

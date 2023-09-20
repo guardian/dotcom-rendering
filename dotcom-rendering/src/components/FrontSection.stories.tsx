@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { LI } from './Card/components/LI';
 import { FrontSection } from './FrontSection';
 
@@ -73,7 +74,11 @@ const LeftColPlaceholder = ({
 
 export const ContainerStory = () => {
 	return (
-		<FrontSection title="Default Container" showTopBorder={false}>
+		<FrontSection
+			title="Default Container"
+			showTopBorder={false}
+			discussionApiUrl={discussionApiUrl}
+		>
 			<Placeholder />
 		</FrontSection>
 	);
@@ -82,7 +87,7 @@ ContainerStory.storyName = 'default container';
 
 export const NoTitleStory = () => {
 	return (
-		<FrontSection showTopBorder={false}>
+		<FrontSection showTopBorder={false} discussionApiUrl={discussionApiUrl}>
 			<Placeholder />
 		</FrontSection>
 	);
@@ -91,7 +96,7 @@ NoTitleStory.storyName = 'with no title';
 
 export const TopBorderStory = () => {
 	return (
-		<FrontSection title="Borders">
+		<FrontSection title="Borders" discussionApiUrl={discussionApiUrl}>
 			<Placeholder />
 		</FrontSection>
 	);
@@ -105,6 +110,7 @@ export const LeftContentStory = () => {
 			leftContent={
 				<LeftColPlaceholder text="LeftCol" heightInPixels={100} />
 			}
+			discussionApiUrl={discussionApiUrl}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -119,6 +125,7 @@ export const LeftContentOpinionStory = () => {
 			leftContent={
 				<LeftColPlaceholder text="LeftCol" heightInPixels={100} />
 			}
+			discussionApiUrl={discussionApiUrl}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -134,6 +141,7 @@ export const ToggleableStory = () => {
 			toggleable={true}
 			sectionId="section-id"
 			showTopBorder={false}
+			discussionApiUrl={discussionApiUrl}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -144,26 +152,42 @@ ToggleableStory.storyName = 'toggleable container';
 export const MultipleStory = () => {
 	return (
 		<>
-			<FrontSection title="Page Title" showTopBorder={false} />
-			<FrontSection title="Headlines">
+			<FrontSection
+				title="Page Title"
+				showTopBorder={false}
+				discussionApiUrl={discussionApiUrl}
+			/>
+			<FrontSection title="Headlines" discussionApiUrl={discussionApiUrl}>
 				<Placeholder />
 			</FrontSection>
-			<FrontSection title="Useful links" />
+			<FrontSection
+				title="Useful links"
+				discussionApiUrl={discussionApiUrl}
+			/>
 			<FrontSection
 				title="Around the World - I'm a link"
 				url="https://www.theguardian.com/world"
+				discussionApiUrl={discussionApiUrl}
 			>
 				<Placeholder />
 			</FrontSection>
-			<FrontSection showTopBorder={false}>
+			<FrontSection
+				showTopBorder={false}
+				discussionApiUrl={discussionApiUrl}
+			>
 				<h2>Insert call to action here</h2>
 			</FrontSection>
-			<FrontSection title="Videos" showTopBorder={false}>
+			<FrontSection
+				title="Videos"
+				showTopBorder={false}
+				discussionApiUrl={discussionApiUrl}
+			>
 				<Placeholder />
 			</FrontSection>
 			<FrontSection
 				title="Coronavirus"
 				description="A collection of stories about Coronavirus"
+				discussionApiUrl={discussionApiUrl}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -210,6 +234,7 @@ export const TreatsStory = () => {
 			showTopBorder={false}
 			showDateHeader={true}
 			editionId="UK"
+			discussionApiUrl={discussionApiUrl}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -221,17 +246,37 @@ TreatsStory.storyName = 'with treats and date header';
  * Note only the first container should show a badge
  */
 export const MultipleOnAPaidFront = () => {
+	const frontBranding = {
+		edition: {
+			id: 'UK',
+		},
+		branding: {
+			brandingType: {
+				name: 'paid-content',
+			},
+			sponsorName: 'Grounded',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
+				dimensions: {
+					width: 140,
+					height: 90,
+				},
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	};
+
 	return (
 		<>
 			<FrontSection
 				title="Section one"
 				isOnPaidContentFront={true}
 				index={0}
-				badge={{
-					imageSrc:
-						'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
-					href: '/',
-				}}
+				frontBranding={frontBranding}
+				discussionApiUrl={discussionApiUrl}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -239,11 +284,8 @@ export const MultipleOnAPaidFront = () => {
 				title="Section two"
 				isOnPaidContentFront={true}
 				index={1}
-				badge={{
-					imageSrc:
-						'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
-					href: '/',
-				}}
+				frontBranding={frontBranding}
+				discussionApiUrl={discussionApiUrl}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -254,7 +296,11 @@ MultipleOnAPaidFront.storyName = 'two sections on a paid front';
 
 export const PageSkinStory = () => {
 	return (
-		<FrontSection title="Page Skin" hasPageSkin={true}>
+		<FrontSection
+			title="Page Skin"
+			hasPageSkin={true}
+			discussionApiUrl={discussionApiUrl}
+		>
 			<Placeholder text="Page skins constrain my layout to desktop" />
 		</FrontSection>
 	);

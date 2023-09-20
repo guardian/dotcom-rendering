@@ -60,14 +60,15 @@ const styles = (format: ArticleFormat): string => `
         background: ${
 			format.design === ArticleDesign.Gallery ||
 			format.design === ArticleDesign.Audio ||
-			format.design === ArticleDesign.Video
+			format.design === ArticleDesign.Video ||
+			format.design === ArticleDesign.Picture
 				? background.inverse
 				: 'white'
 		};
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';
         overflow-x: hidden;
-        line-height: 1.5;
+        line-height: 1.4;
     }
 
     @media (prefers-color-scheme: dark) {

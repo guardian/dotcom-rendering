@@ -1,7 +1,7 @@
 // add some helpful assertions
 import '@testing-library/jest-dom/extend-expect';
-import { TextDecoder, TextEncoder } from 'util';
-import type { WindowGuardianConfig } from '../../src/model/window-guardian';
+import { TextDecoder, TextEncoder } from 'node:util';
+import type { Guardian } from '../../src/model/guardian';
 
 const windowGuardianConfig = {
 	page: {
@@ -14,9 +14,9 @@ const windowGuardianConfig = {
 		browserId: 'jest-browser-id',
 		pageViewId: 'jest-page-view-id',
 	},
-	tests: {
-	}
-} as WindowGuardianConfig;
+	tests: {},
+	switches: {},
+} as Guardian['config'];
 
 const windowGuardian = {
 	app: {
@@ -113,3 +113,12 @@ global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
 
 // Mocks the version number used by CDK, we don't want our tests to fail every time we update our cdk dependency.
 jest.mock('@guardian/cdk/lib/constants/tracking-tag');
+
+// Mocks the useConfig hook in ConfigContext, so that we don't have to use the provider all the time
+jest.mock('../../src/components/ConfigContext.tsx', () => {
+	const mockConfig = { renderingTarget: 'Web' };
+	return {
+		...jest.requireActual('../../src/components/ConfigContext.tsx'),
+		useConfig: () => mockConfig,
+	};
+});

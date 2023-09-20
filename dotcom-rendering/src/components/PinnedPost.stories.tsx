@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
 import { liveBlock } from '../../fixtures/manual/liveBlock';
@@ -66,7 +66,7 @@ export const Sport = () => {
 		],
 	};
 	const format = {
-		theme: ArticlePillar.Sport,
+		theme: Pillar.Sport,
 		design: ArticleDesign.LiveBlog,
 		display: ArticleDisplay.Standard,
 	};
@@ -111,7 +111,7 @@ export const News = () => {
 		],
 	};
 	const format = {
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 		design: ArticleDesign.LiveBlog,
 		display: ArticleDisplay.Standard,
 	};
@@ -156,7 +156,7 @@ export const Culture = () => {
 		],
 	};
 	const format = {
-		theme: ArticlePillar.Culture,
+		theme: Pillar.Culture,
 		design: ArticleDesign.LiveBlog,
 		display: ArticleDisplay.Standard,
 	};
@@ -201,7 +201,7 @@ export const Lifestyle = () => {
 		],
 	};
 	const format = {
-		theme: ArticlePillar.Lifestyle,
+		theme: Pillar.Lifestyle,
 		design: ArticleDesign.LiveBlog,
 		display: ArticleDisplay.Standard,
 	};
@@ -246,7 +246,7 @@ export const Opinion = () => {
 		],
 	};
 	const format = {
-		theme: ArticlePillar.Opinion,
+		theme: Pillar.Opinion,
 		design: ArticleDesign.LiveBlog,
 		display: ArticleDisplay.Standard,
 	};

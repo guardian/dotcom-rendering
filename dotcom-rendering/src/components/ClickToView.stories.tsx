@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
 import type {
 	DocumentBlockElement,
@@ -73,7 +73,7 @@ const RoleStory = ({
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role={role}
@@ -501,7 +501,7 @@ export const EmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -527,7 +527,7 @@ export const EmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -553,7 +553,7 @@ export const EmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -579,7 +579,7 @@ export const EmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -605,7 +605,7 @@ export const EmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -631,7 +631,7 @@ export const EmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -657,7 +657,7 @@ export const EmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -706,7 +706,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -732,7 +732,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -759,7 +759,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -786,7 +786,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -813,7 +813,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -864,7 +864,7 @@ export const VimeoBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -877,7 +877,7 @@ export const VimeoBlockComponentStory = () => {
 					>
 						<VimeoBlockComponent
 							format={{
-								theme: ArticlePillar.News,
+								theme: Pillar.News,
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
 							}}
@@ -926,7 +926,7 @@ export const DocumentBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -982,7 +982,7 @@ export const SoundCloudBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -1009,7 +1009,7 @@ export const SoundCloudBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -1060,7 +1060,7 @@ export const SpotifyBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -1078,7 +1078,7 @@ export const SpotifyBlockComponentStory = () => {
 							title={spotifyAudioEmbed.title}
 							caption={spotifyAudioEmbed.caption}
 							format={{
-								theme: ArticlePillar.News,
+								theme: Pillar.News,
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
 							}}
@@ -1125,7 +1125,7 @@ export const TweetBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -1173,7 +1173,7 @@ export const InstagramBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -1218,7 +1218,7 @@ export const MapBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"
@@ -1236,7 +1236,7 @@ export const MapBlockComponentStory = () => {
 							title={mapEmbedEmbed.title}
 							caption={mapEmbedEmbed.caption}
 							format={{
-								theme: ArticlePillar.News,
+								theme: Pillar.News,
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
 							}}
@@ -1280,7 +1280,7 @@ export const VineBlockComponentStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="inline"

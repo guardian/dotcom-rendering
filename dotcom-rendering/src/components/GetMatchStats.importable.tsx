@@ -11,9 +11,44 @@ type Props = {
 
 const Loading = () => <Placeholder height={800} />;
 
+const cleanTeamCodes = (team: TeamType): string => {
+	// Need to check the team name as South Korea and South Africa both have SOU as their code
+	switch (team.name) {
+		case 'China PR':
+			return 'CHN';
+		case 'Costa Rica':
+			return 'CRC';
+		case 'Japan':
+			return 'JPN';
+		case 'Morocco':
+			return 'MAR';
+		case 'Netherlands':
+			return 'NED';
+		case 'New Zealand':
+			return 'NZL';
+		case 'Nigeria':
+			return 'NGA';
+		case 'Rep of Ireland':
+			return 'IRL';
+		case 'South Africa':
+			return 'RSA';
+		case 'South Korea':
+			return 'KOR';
+		case 'Spain':
+			return 'ESP';
+		case 'Switzerland':
+			return 'SUI';
+		default:
+			return team.codename;
+	}
+};
+
+export const cleanTeamData = (team: TeamType): TeamType => ({
+	...team,
+	codename: cleanTeamCodes(team),
+});
+
 /**
- * # Get Match Stats
- *
  * Wrapper around `MatchStats`.
  *
  * ## Why does this need to be an Island?
@@ -46,8 +81,8 @@ export const GetMatchStats = ({ matchUrl, format }: Props) => {
 	if (data) {
 		return (
 			<MatchStats
-				home={data.homeTeam}
-				away={data.awayTeam}
+				home={cleanTeamData(data.homeTeam)}
+				away={cleanTeamData(data.awayTeam)}
 				format={format}
 			/>
 		);

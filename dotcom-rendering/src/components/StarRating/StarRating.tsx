@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Breakpoint } from '@guardian/source-foundations';
+import type { Breakpoint } from '@guardian/source-foundations';
 import { Star } from '../../static/icons/Star';
 import type { RatingSizeType } from '../../types/content';
 

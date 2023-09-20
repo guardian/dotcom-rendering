@@ -13,10 +13,17 @@ import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../types/front';
 import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront';
+import { makePrefetchHeader } from './lib/header';
 import { renderFront, renderTagFront } from './render.front.web';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
+	const editionHasBranding = () =>
+		!!data.pressedPage.frontProperties.commercial.editionBrandings.find(
+			(editionBranding) =>
+				editionBranding.edition.id === data.editionId &&
+				!!editionBranding.branding,
+		);
 
 	return {
 		...data,
@@ -25,13 +32,16 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 		} | The Guardian`,
 		pressedPage: {
 			...data.pressedPage,
-			collections: enhanceCollections(
-				data.pressedPage.collections,
-				data.editionId,
-				data.pageId,
-				data.pressedPage.frontProperties.onPageDescription,
-				data.config.isPaidContent,
-			),
+			collections: enhanceCollections({
+				collections: data.pressedPage.collections,
+				editionId: data.editionId,
+				pageId: data.pageId,
+				onPageDescription:
+					data.pressedPage.frontProperties.onPageDescription,
+				isPaidContent: data.config.isPaidContent,
+				discussionApiUrl: data.config.discussionApiUrl,
+				editionHasBranding: editionHasBranding(),
+			}),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
 		mostCommented: data.mostCommented
@@ -52,6 +62,7 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 	const enhancedCards = enhanceCards(data.contents, {
 		cardInTagFront: true,
 		pageId: data.pageId,
+		discussionApiUrl: data.config.discussionApiUrl,
 	});
 	const speed = getSpeedFromTrails(data.contents);
 
@@ -89,10 +100,10 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 export const handleFront: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('front');
 	const front = enhanceFront(body);
-	const html = renderFront({
+	const { html, prefetchScripts } = renderFront({
 		front,
 	});
-	res.status(200).send(html);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
 export const handleFrontJson: RequestHandler = ({ body }, res) => {
@@ -102,10 +113,10 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 export const handleTagFront: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('tagFront');
 	const tagFront = enhanceTagFront(body);
-	const html = renderTagFront({
+	const { html, prefetchScripts } = renderTagFront({
 		tagFront,
 	});
-	res.status(200).send(html);
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
 export const handleTagFrontJson: RequestHandler = ({ body }, res) => {

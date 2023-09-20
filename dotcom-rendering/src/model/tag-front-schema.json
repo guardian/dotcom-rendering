@@ -190,8 +190,11 @@
                                             "mediaAtoms": {
                                                 "type": "array",
                                                 "items": {
-                                                    "$ref": "#/definitions/FEMediaAtoms"
+                                                    "$ref": "#/definitions/FEMediaAtom"
                                                 }
+                                            },
+                                            "mainMediaAtom": {
+                                                "$ref": "#/definitions/FEMediaAtom"
                                             }
                                         },
                                         "required": [
@@ -631,6 +634,9 @@
                                     "properties": {
                                         "href": {
                                             "type": "string"
+                                        },
+                                        "webUrl": {
+                                            "type": "string"
                                         }
                                     }
                                 },
@@ -694,6 +700,7 @@
                                 }
                             },
                             "required": [
+                                "header",
                                 "properties"
                             ]
                         }
@@ -1211,6 +1218,7 @@
                 "NewsletterSignupDesign",
                 "ObituaryDesign",
                 "PhotoEssayDesign",
+                "PictureDesign",
                 "PrintShopDesign",
                 "ProfileDesign",
                 "QuizDesign",
@@ -1243,7 +1251,7 @@
             ],
             "type": "string"
         },
-        "FEMediaAtoms": {
+        "FEMediaAtom": {
             "type": "object",
             "properties": {
                 "id": {

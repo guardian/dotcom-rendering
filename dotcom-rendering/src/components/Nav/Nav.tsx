@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/react';
-import type { ArticlePillar } from '@guardian/libs';
+import type { Pillar } from '@guardian/libs';
 import { until, visuallyHidden } from '@guardian/source-foundations';
 import type { EditionId } from '../../lib/edition';
 import { clearFix } from '../../lib/mixins';
@@ -17,7 +17,7 @@ type Props = {
 	editionId: EditionId;
 	displayRoundel?: boolean;
 	isImmersive?: boolean;
-	selectedPillar?: ArticlePillar;
+	selectedPillar?: Pillar;
 	isInEuropeTest: boolean;
 	headerTopBarSwitch: boolean;
 };

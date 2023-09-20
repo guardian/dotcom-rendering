@@ -1,17 +1,17 @@
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, Pillar } from '@guardian/libs';
 
 export const decideTheme = ({ theme }: Partial<FEFormat>): ArticleTheme => {
 	switch (theme) {
 		case 'NewsPillar':
-			return ArticlePillar.News;
+			return Pillar.News;
 		case 'OpinionPillar':
-			return ArticlePillar.Opinion;
+			return Pillar.Opinion;
 		case 'SportPillar':
-			return ArticlePillar.Sport;
+			return Pillar.Sport;
 		case 'CulturePillar':
-			return ArticlePillar.Culture;
+			return Pillar.Culture;
 		case 'LifestylePillar':
-			return ArticlePillar.Lifestyle;
+			return Pillar.Lifestyle;
 		case 'SpecialReportTheme':
 			return ArticleSpecial.SpecialReport;
 		case 'SpecialReportAltTheme':
@@ -19,6 +19,6 @@ export const decideTheme = ({ theme }: Partial<FEFormat>): ArticleTheme => {
 		case 'Labs':
 			return ArticleSpecial.Labs;
 		default:
-			return ArticlePillar.News;
+			return Pillar.News;
 	}
 };

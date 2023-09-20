@@ -1,4 +1,4 @@
-import { createHash } from 'crypto';
+import { createHash } from 'node:crypto';
 import { ASSET_ORIGIN } from '../lib/assets';
 import type { DCRBadgeType } from '../types/badge';
 import type { Branding } from '../types/branding';
@@ -7,7 +7,7 @@ import { BADGES, SPECIAL_BADGES } from './badges';
 /**
  * Fetches the badge properties only if ALL branding has the same sponsor.
  */
-export const getBadgeFromBranding = (
+export const decidePaidContentBadge = (
 	branding?: Branding[],
 ): DCRBadgeType | undefined => {
 	// Early return if there are no branding elements
@@ -33,7 +33,7 @@ export const getBadgeFromBranding = (
 /**
  * Fetches the corresponding badge using the series tag, if there's a match in the lookup.
  */
-export const getBadgeFromSeriesTag = (
+export const decideEditorialBadge = (
 	seriesTag?: string,
 ): DCRBadgeType | undefined => {
 	if (!seriesTag) return undefined;
@@ -60,20 +60,4 @@ export const getBadgeFromSeriesTag = (
 			  }
 			: undefined; // No badge or special badge found
 	}
-};
-
-/**
- * Return a badge based on the series tag or container branding
- *
- * Try to fetch badge using series tag first
- * Otherwise try to fetch badge using branding elements
- * Returns undefined as default / if no matches found
- */
-export const decideBadge = (
-	seriesTag?: string,
-	allBranding?: Branding[],
-): DCRBadgeType | undefined => {
-	return (
-		getBadgeFromSeriesTag(seriesTag) ?? getBadgeFromBranding(allBranding)
-	);
 };

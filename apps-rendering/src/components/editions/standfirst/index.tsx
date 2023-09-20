@@ -121,7 +121,8 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	if (
 		format.design === ArticleDesign.Gallery ||
 		format.design === ArticleDesign.Audio ||
-		format.design === ArticleDesign.Video
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Picture
 	) {
 		return css(styles(kickerColor), galleryStyles);
 	}

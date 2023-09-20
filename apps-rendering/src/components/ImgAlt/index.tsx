@@ -24,6 +24,7 @@ const backgroundColour = (format: ArticleFormat): string => {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			return neutral[20];
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:

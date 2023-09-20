@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { ArticleContainer } from './ArticleContainer';
 import { Flex } from './Flex';
@@ -35,7 +35,7 @@ export const defaultStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				>
 					<></>
@@ -75,7 +75,7 @@ export const limitItemsStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				>
 					<></>

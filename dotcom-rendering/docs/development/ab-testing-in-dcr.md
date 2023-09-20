@@ -8,8 +8,8 @@ The library docs above explain the integration and the API.
 
 1. [Create a switch in Frontend](https://github.com/guardian/frontend/blob/main/common/app/conf/switches/ABTestSwitches.scala)
 2. Ensure that you [create an A/B test](https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/tests) on _Frontend_.
-3. Add your test to [concurrent tests](https://github.com/guardian/frontend/blob/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts) on _Frontend_.
-4. Copy the JS file into DCR (and update to TS types) in [web/experiments/tests](https://github.com/guardian/dotcom-rendering/tree/main/dotcom-rendering/src/web/experiments/tests)
+3. Add your test to [concurrent tests](https://github.com/guardian/dotcom-rendering/tree/main/dotcom-rendering/src/experiments/tests) on _Frontend_.
+4. Copy the JS file into DCR (and update to TS types) in [web/experiments/tests](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/experiments/ab-tests.ts)
 5. Add it to the test array in [src/web/experiments/ab-tests.ts](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/experiments/ab-tests.ts)
 6. Use the [A/B test API](https://github.com/guardian/csnx/tree/main/libs/%40guardian/ab-core#the-api)
 7. Force the A/B test (ignoring canRun of A/B test and variant) with the URL opt-in http://local...#ab-yourTest=yourVariant

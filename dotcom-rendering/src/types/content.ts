@@ -89,6 +89,21 @@ export interface CalloutBlockElementV2 {
 	contacts?: CalloutContactType[];
 }
 
+export interface CartoonBlockElement {
+	_type: 'model.dotcomrendering.pageElements.CartoonBlockElement';
+	role: RoleType;
+	variants: CartoonVariant[];
+	caption?: string;
+	credit?: string;
+	displayCredit?: boolean;
+	alt?: string;
+}
+
+export type CartoonVariant = {
+	viewportSize: 'small' | 'large';
+	images: Image[];
+};
+
 interface ChartAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 	elementId: string;
@@ -158,9 +173,9 @@ export interface DividerBlockElement {
 export interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.DocumentBlockElement';
 	elementId: string;
-	embedUrl: string;
-	height: number;
-	width: number;
+	embedUrl?: string;
+	height?: number;
+	width?: number;
 	title?: string;
 	role?: RoleType;
 }
@@ -344,6 +359,11 @@ export interface NewsletterSignupBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
 	newsletter: Newsletter;
 	elementId?: string;
+}
+
+export interface AdPlaceholderBlockElement {
+	_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
+	isSquare: boolean;
 }
 
 interface NumberedTitleBlockElement {
@@ -615,14 +635,15 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataVideo
 		| WitnessTypeDataText;
 }
-
 export type FEElement =
+	| AdPlaceholderBlockElement
 	| AudioAtomBlockElement
 	| AudioBlockElement
 	| BlockquoteBlockElement
 	| CaptionBlockElement
 	| CalloutBlockElement
 	| CalloutBlockElementV2
+	| CartoonBlockElement
 	| ChartAtomBlockElement
 	| CodeBlockElement
 	| CommentBlockElement

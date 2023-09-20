@@ -28,6 +28,7 @@ type FETheme = ThemePillar | ThemeSpecial;
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type FEDesign =
 	| 'ArticleDesign'
+	| 'PictureDesign'
 	| 'GalleryDesign'
 	| 'AudioDesign'
 	| 'VideoDesign'
@@ -286,12 +287,7 @@ interface FEKeyEventsRequest {
 	filterKeyEvents: boolean;
 }
 
-type CardImageType =
-	| 'picture'
-	| 'avatar'
-	| 'crossword'
-	| 'slideshow'
-	| 'video';
+type CardImageType = 'picture' | 'avatar' | 'crossword' | 'slideshow' | 'video';
 
 type SmallHeadlineSize =
 	| 'tiny'
@@ -403,22 +399,6 @@ interface MessageUs {
 	formFields: import('./src/types/content').MessageUsFieldType[];
 }
 
-interface GADataType {
-	pillar: LegacyPillar;
-	webTitle: string;
-	section: string;
-	contentType: string;
-	commissioningDesks: string;
-	contentId: string;
-	authorIds: string;
-	keywordIds: string;
-	toneIds: string;
-	seriesId: string;
-	isHosted: string;
-	edition: string;
-	beaconUrl: string;
-}
-
 // ----------------- //
 // General DataTypes //
 // ----------------- //
@@ -487,12 +467,26 @@ declare module 'dynamic-import-polyfill' {
 	}) => void;
 }
 
-// ------------------------------------- //
-// AMP types                             //
-// ------------------------------------- //
+// SVG handling
+declare module '*.svg' {
+	const content: any;
+	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
+	export default content;
+}
+
+// Extend PerformanceEntry from lib.dom.ts with current 'In Draft' properties (to allow access as use in browsers that support)
+// lib.dom.ts: https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.performanceentry.html
+// Draft: https://wicg.github.io/element-timing/#sec-performance-element-timing
+interface PerformanceEntry {
+	loadTime: number;
+	renderTime: number;
+}
 
 declare namespace JSX {
 	interface IntrinsicElements {
+		// ------------------------------------- //
+		// AMP types                             //
+		// ------------------------------------- //
 		'amp-accordion': any;
 		'amp-ad': any;
 		'amp-analytics': any;
@@ -518,26 +512,8 @@ declare namespace JSX {
 		'amp-video': any;
 		'amp-vimeo': any;
 		'amp-youtube': any;
-	}
-}
 
-// SVG handling
-declare module '*.svg' {
-	const content: any;
-	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
-	export default content;
-}
-
-// Extend PerformanceEntry from lib.dom.ts with current 'In Draft' properties (to allow access as use in browsers that support)
-// lib.dom.ts: https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.performanceentry.html
-// Draft: https://wicg.github.io/element-timing/#sec-performance-element-timing
-interface PerformanceEntry {
-	loadTime: number;
-	renderTime: number;
-}
-
-declare namespace JSX {
-	interface IntrinsicElements {
+		/** Island {@link ./src/components/Island.tsx} */
 		'gu-island': {
 			name: string;
 			deferUntil?: 'idle' | 'visible' | 'interaction' | 'hash';
@@ -545,6 +521,11 @@ declare namespace JSX {
 			clientOnly?: boolean;
 			props: any;
 			children: React.ReactNode;
+			/**
+			 * This should be a stringified JSON of `ConfigContext`
+			 * @see /dotcom-rendering/src/types/configContext.ts
+			 */
+			config: string;
 		};
 	}
 
@@ -580,13 +561,5 @@ declare namespace JSX {
 		 * link is clicked.
 		 */
 		'data-link-name'?: string;
-
-		/**
-		 * Elements with this attribute will fetch their comment count on
-		 * the client-side.
-		 *
-		 * @see {@link ../src/components/FetchCommentCounts.importable.tsx}
-		 */
-		'data-discussion-id'?: string;
 	}
 }

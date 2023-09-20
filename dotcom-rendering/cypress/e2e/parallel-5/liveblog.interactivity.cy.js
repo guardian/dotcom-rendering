@@ -47,7 +47,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.scrollTo('center');
 		cy.get(`[data-cy="toast"]`).should('not.exist');
 		cy.window().then(function (win) {
@@ -56,17 +56,17 @@ describe('Liveblogs', function () {
 				html: '<p>New block</p>',
 				mostRecentBlockId: 'abc',
 			});
-			cy.get(`[data-cy="toast"]`).should('exist');
-			cy.contains('1 new update');
-			cy.window().then(function (win) {
-				win.mockLiveUpdate({
-					numNewBlocks: 1,
-					html: '<p>New block</p>',
-					mostRecentBlockId: 'abc',
-				});
-				cy.contains('2 new updates');
+		});
+		cy.get(`[data-cy="toast"]`).should('exist');
+		cy.contains('1 new update');
+		cy.window().then(function (win) {
+			win.mockLiveUpdate({
+				numNewBlocks: 1,
+				html: '<p>New block</p>',
+				mostRecentBlockId: 'abc',
 			});
 		});
+		cy.contains('2 new updates');
 	});
 
 	it('should insert the html from the update call', function () {
@@ -75,15 +75,15 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
 				numNewBlocks: 1,
 				html: '<p>New block</p>',
 				mostRecentBlockId: 'abc',
 			});
-			cy.contains('New block');
 		});
+		cy.contains('New block');
 	});
 
 	it('should scroll the page to the top and reveal content when the toast is clicked', function () {
@@ -92,7 +92,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]', { timeout: 30000 })
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.scrollTo('bottom');
 		cy.get(`[data-cy="toast"]`).should('not.exist');
 		cy.window().then(function (win) {
@@ -101,12 +101,18 @@ describe('Liveblogs', function () {
 				html: '<p>New block</p>',
 				mostRecentBlockId: 'abc',
 			});
-			cy.get(`[data-cy="toast"]`).should('exist');
-			cy.contains('1 new update').click({ force: true });
-			cy.get(`[data-cy="toast"]`).should('not.exist');
 		});
+		cy.get(`[data-cy="toast"]`).should('exist');
+		cy.contains('1 new update').click({ force: true });
+		cy.get(`[data-cy="toast"]`).should('not.exist');
 	});
 
+	/**
+	 * Note: This test periodically failed when running in TeamCity
+	 * It passes locally _almost_ every time.
+	 *
+	 * Cypress tests have now been disabled in TeamCity
+	 */
 	it('should enhance tweets after they have been inserted', function () {
 		const getTwitterIframe = () => {
 			return cy
@@ -122,21 +128,22 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
 				numNewBlocks: 1,
 				html: tweetBlock,
 				mostRecentBlockId: 'abc',
 			});
-			cy.scrollTo(0, 1200);
-			getTwitterIframe().contains(
-				'They will prepare the extraordinary European Council meeting tonight',
-				{
-					timeout: 15000,
-				},
-			);
 		});
+		// Should we use cy.get('#liveblog-body').scrollIntoView(); instead here?
+		cy.scrollTo(0, 1200);
+		getTwitterIframe().contains(
+			'They will prepare the extraordinary European Council meeting tonight',
+			{
+				timeout: 15000,
+			},
+		);
 	});
 
 	it('should use the right block id when polling from the second page', function () {
@@ -164,7 +171,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]', { timeout: 30000 })
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.scrollTo('bottom');
 		cy.get(`[data-cy="toast"]`).should('not.exist');
 		cy.window().then(function (win) {
@@ -173,15 +180,15 @@ describe('Liveblogs', function () {
 				html: '<p>New block</p>',
 				mostRecentBlockId: 'abc',
 			});
-			cy.get(`[data-cy="toast"]`).should('exist');
-			cy.contains('1 new update').click({ force: true });
-			cy.location().should((loc) => {
-				expect(loc.hash).to.eq('#maincontent');
-				expect(loc.pathname).to.eq(
-					'/australia-news/live/2022/feb/22/australia-news-live-updates-scott-morrison-nsw-trains-coronavirus-covid-omicron-weather',
-				);
-				expect(loc.search).to.eq('');
-			});
+		});
+		cy.get(`[data-cy="toast"]`).should('exist');
+		cy.contains('1 new update').click({ force: true });
+		cy.location().should((loc) => {
+			expect(loc.hash).to.eq('#maincontent');
+			expect(loc.pathname).to.eq(
+				'/australia-news/live/2022/feb/22/australia-news-live-updates-scott-morrison-nsw-trains-coronavirus-covid-omicron-weather',
+			);
+			expect(loc.search).to.eq('');
 		});
 	});
 
@@ -191,7 +198,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.scrollTo('bottom', { duration: 1000 });
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
@@ -199,20 +206,20 @@ describe('Liveblogs', function () {
 				html: tweetBlock,
 				mostRecentBlockId: 'abc',
 			});
-			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
-				'not.be.visible',
-			);
-
-			// Previously we were using #maincontent as top of blog.
-			// After repositioning the key events, the test scrolling
-			// was not enough and the tweetBlock was not added to
-			// the page. Using data-gu-name="media" for now to get
-			// around this scroll depth issue
-			cy.get('div[data-gu-name="media"]').scrollIntoView();
-			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e', {
-				timeout: 10000,
-			}).should('be.visible');
 		});
+		cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
+			'not.be.visible',
+		);
+
+		// Previously we were using #maincontent as top of blog.
+		// After repositioning the key events, the test scrolling
+		// was not enough and the tweetBlock was not added to
+		// the page. Using data-gu-name="media" for now to get
+		// around this scroll depth issue
+		cy.get('div[data-gu-name="media"]').scrollIntoView();
+		cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e', {
+			timeout: 10000,
+		}).should('be.visible');
 	});
 
 	// For some reason Sport deadblogs lose their scores after a certain duration. Not quite sure what causes this just yet

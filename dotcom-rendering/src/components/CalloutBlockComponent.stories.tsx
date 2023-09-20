@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { calloutCampaign as calloutCampaignV2 } from '../../fixtures/manual/calloutCampaignV2';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
@@ -52,7 +52,7 @@ export const Collapsible = () => {
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	);
@@ -69,7 +69,7 @@ export const NonCollapsible = () => {
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	);
@@ -86,7 +86,7 @@ export const SubmissionFailure = () => {
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	);
@@ -102,7 +102,7 @@ export const Expired = () => {
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	);
@@ -129,7 +129,7 @@ export const MinimalCallout = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 			/>
 		</>

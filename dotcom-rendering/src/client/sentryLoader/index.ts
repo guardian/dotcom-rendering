@@ -2,20 +2,20 @@ import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../scripts/webpack/bundles';
-import { loadSentry } from './loadSentry';
+import { loadSentryOnError, stubSentry } from './loadSentry';
 
 type IsSentryEnabled = {
 	enableSentryReporting: boolean;
 	isDev: boolean;
 	isInBrowserVariantTest: boolean;
-	randomCentile: number;
+	random: number;
 };
 
 const isSentryEnabled = ({
 	enableSentryReporting,
 	isDev,
 	isInBrowserVariantTest,
-	randomCentile,
+	random,
 }: IsSentryEnabled): boolean => {
 	// We don't send errors on the dev server, or if the enableSentryReporting switch is off
 	if (isDev || !enableSentryReporting) return false;
@@ -31,14 +31,8 @@ const isSentryEnabled = ({
 	// happen but if we used sampleRate to do this we'd be needlessly downloading
 	// Sentry 99% of the time. So instead we just do some math here and use that
 	// to prevent the Sentry script from ever loading.
-	if (randomCentile <= 99) return false;
+	if (random <= 99 / 100) return false;
 	return true;
-};
-
-const stubSentry = () => {
-	window.guardian.modules.sentry.reportError = (error) => {
-		console.error(error);
-	};
 };
 
 export const sentryLoader = (): Promise<void> => {
@@ -46,15 +40,14 @@ export const sentryLoader = (): Promise<void> => {
 	const enableSentryReporting = !!switches.enableSentryReporting;
 	const isInBrowserVariantTest =
 		BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant';
-	// Generate a number between 1 - 100
-	const randomCentile = Math.floor(Math.random() * 100) + 1;
+
 	const canLoadSentry = isSentryEnabled({
 		enableSentryReporting,
 		isDev,
 		isInBrowserVariantTest,
-		randomCentile,
+		random: Math.random(),
 	});
-	canLoadSentry ? loadSentry() : stubSentry();
+	canLoadSentry ? loadSentryOnError() : stubSentry();
 	return Promise.resolve();
 };
 

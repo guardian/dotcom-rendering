@@ -390,7 +390,7 @@ const borderContainer = (containerPalette: DCRContainerPalette): string => {
 		case 'LongRunningPalette':
 			return transparentColour(neutral[60], 0.4);
 		case 'LongRunningAltPalette':
-			return transparentColour(neutral[60], 0.4);
+			return neutral[86];
 		case 'SombrePalette':
 			return neutral[60];
 		case 'SombreAltPalette':
@@ -404,7 +404,7 @@ const borderContainer = (containerPalette: DCRContainerPalette): string => {
 		case 'EventAltPalette':
 			return neutral[86];
 		case 'SpecialReportAltPalette':
-			return transparentColour(neutral[60], 0.3);
+			return neutral[60];
 		case 'Branded':
 			return neutral[46];
 		case 'MediaPalette':
@@ -499,6 +499,21 @@ const backgroundCard = (
 	}
 };
 
+const backgroundDynamoSublink = (
+	containerPalette: DCRContainerPalette,
+): string => {
+	switch (containerPalette) {
+		case 'SombrePalette':
+			return specialReport[300];
+		case 'SombreAltPalette':
+			return specialReport[100];
+		case 'InvestigationPalette':
+			return specialReport[300];
+		default:
+			return palette.neutral[97];
+	}
+};
+
 const topBarCard = textCardKicker;
 
 /**
@@ -535,6 +550,7 @@ export const decideContainerOverrides = (
 				carouselArrow: backgroundCarouselArrow(containerPalette),
 				carouselArrowHover:
 					backgroundCarouselArrowHover(containerPalette),
+				dynamoSublink: backgroundDynamoSublink(containerPalette),
 			},
 		};
 	}
@@ -559,6 +575,7 @@ export const decideContainerOverrides = (
 				carouselArrow: backgroundCarouselArrow(containerPalette),
 				carouselArrowHover:
 					backgroundCarouselArrowHover(containerPalette),
+				dynamoSublink: backgroundDynamoSublink(containerPalette),
 			},
 		};
 	}
@@ -591,6 +608,7 @@ export const decideContainerOverrides = (
 			carouselDot: backgroundCarouselDot(containerPalette),
 			carouselArrow: backgroundCarouselArrow(containerPalette),
 			carouselArrowHover: backgroundCarouselArrowHover(containerPalette),
+			dynamoSublink: backgroundDynamoSublink(containerPalette),
 		},
 		topBar: {
 			card: topBarCard(containerPalette),

@@ -143,7 +143,7 @@ const sanitiserOptions: IOptions = {
 };
 
 const styles = (format: ArticleFormat) => css`
-	margin-bottom: 16px;
+	margin-bottom: 14px;
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
 
@@ -242,6 +242,7 @@ const buildElementTree =
 						getAttrs(node)?.getNamedItem('data-link-name')?.value,
 					'data-component':
 						getAttrs(node)?.getNamedItem('data-component')?.value,
+					rel: getAttrs(node)?.getNamedItem('rel')?.value,
 					key,
 					children,
 				});
@@ -259,7 +260,11 @@ const buildElementTree =
 						dropCappedSentence &&
 						node.textContent.startsWith(
 							stripHtmlFromString(html).slice(0, 10),
-						)
+						) &&
+						// The node is at the root of the document avoiding nodes like <a>
+						// tags embedded in <p> tags dropping their cap
+						node.parentNode?.parentNode?.nodeName ===
+							'#document-fragment'
 					) {
 						const { dropCap, restOfSentence } = dropCappedSentence;
 						return (
@@ -296,6 +301,13 @@ const buildElementTree =
 					key,
 					children,
 				});
+			case 'OL':
+				return jsx('ol', {
+					'data-ignore':
+						getAttrs(node)?.getNamedItem('data-ignore')?.value,
+					key,
+					children,
+				});
 			case 'FOOTER':
 			case 'SUB':
 			case 'SUP':
@@ -305,7 +317,6 @@ const buildElementTree =
 			case 'B':
 			case 'EM':
 			case 'UL':
-			case 'OL':
 			case 'LI':
 			case 'MARK':
 			case 'S':

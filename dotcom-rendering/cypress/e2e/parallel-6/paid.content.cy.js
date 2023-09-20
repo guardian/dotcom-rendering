@@ -4,6 +4,27 @@ import { cmpIframe } from '../../lib/cmpIframe';
 import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
+const handleCommercialErrors = () => {
+	cy.on('uncaught:exception', (err, runnable) => {
+		// When we set the `GU_U` cookie this is causing the commercial bundle to try and do
+		// something with the url which is failing in Cypress with a malformed URI error
+		if (err.message.includes('URI malformed')) {
+			// This error is unrelated to the test in question so return  false to prevent
+			// this commercial error from failing this test
+			return false;
+		}
+		if (
+			err.message.includes(
+				"Cannot read properties of undefined (reading 'map')",
+			)
+		) {
+			// This error is unrelated to the test in question so return  false to prevent
+			// this commercial error from failing this test
+			return false;
+		}
+	});
+};
+
 const paidContentPage =
 	'https://www.theguardian.com/the-future-of-sustainable-entrepreneurship/2023/jun/01/take-your-sustainable-business-to-the-next-level-win-your-own-retail-space-at-one-of-londons-westfield-centres';
 
@@ -16,6 +37,7 @@ const paidContentPage =
  */
 describe('Paid content tests', function () {
 	beforeEach(function () {
+		handleCommercialErrors();
 		setLocalBaseUrl();
 		storage.local.set('gu.geo.override', 'GB');
 	});
@@ -45,8 +67,8 @@ describe('Paid content tests', function () {
 
 		cy.get('gu-island[name=Branding]', { timeout: 30000 }).should(
 			'have.attr',
-			'data-gu-ready',
-			'true',
+			'data-island-status',
+			'hydrated',
 		);
 
 		cy.get('[data-cy=branding-logo]').should('be.visible');
@@ -86,8 +108,8 @@ describe('Paid content tests', function () {
 
 		cy.get('gu-island[name=OnwardsUpper]', { timeout: 30000 }).should(
 			'have.attr',
-			'data-gu-ready',
-			'true',
+			'data-island-status',
+			'rendered',
 		);
 
 		cy.get('[data-cy=card-branding-logo]').should('be.visible');

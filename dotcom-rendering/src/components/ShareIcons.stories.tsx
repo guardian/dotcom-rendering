@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { ShareIcons } from './ShareIcons';
 
 export default {
@@ -9,7 +9,7 @@ export default {
 const defaultFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 export const Medium = () => {

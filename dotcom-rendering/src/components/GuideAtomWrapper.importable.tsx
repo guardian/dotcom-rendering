@@ -1,6 +1,6 @@
-import { GuideAtom } from '@guardian/atoms-rendering';
-import type { GuideAtomType } from '@guardian/atoms-rendering';
+import { GuideAtom } from './GuideAtom/GuideAtom';
+import type { GuideAtomProps } from './GuideAtom/GuideAtom';
 
-export const GuideAtomWrapper = (props: GuideAtomType) => {
+export const GuideAtomWrapper = (props: GuideAtomProps) => {
 	return <GuideAtom {...props} />;
 };

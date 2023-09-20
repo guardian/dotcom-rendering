@@ -243,6 +243,7 @@ const getHeadlineStyles = (
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			return css(sharedStyles, galleryStyles);
 	}
 

@@ -9,7 +9,7 @@
  * For simplicity we're using Node 16's AsyncLocalStorage to handle state instead of any 3rd party dependency like Redux or React Context.
  */
 
-import { AsyncLocalStorage } from 'async_hooks';
+import { AsyncLocalStorage } from 'node:async_hooks';
 
 type DCRLoggingStore = {
 	request: {

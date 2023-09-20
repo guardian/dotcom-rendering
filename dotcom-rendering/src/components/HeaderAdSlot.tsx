@@ -1,21 +1,26 @@
 import { css, Global } from '@emotion/react';
-import { TOP_ABOVE_NAV_HEIGHT } from '@guardian/commercial/dist/esm/core/constants';
+import { constants } from '@guardian/commercial';
 import { border, neutral, space } from '@guardian/source-foundations';
-import { adContainerStyles, AdSlot, labelHeight } from './AdSlot';
+import { adContainerStyles, AdSlot } from './AdSlot.web';
 import { Hide } from './Hide';
 
 const headerWrapper = css`
 	position: static;
 `;
 
+const { TOP_ABOVE_NAV_HEIGHT, AD_LABEL_HEIGHT } = constants;
+
 const padding = space[4] + 2; // 18px - currently being reviewed
+const borderBottomHeight = 1;
+const headerMinHeight =
+	TOP_ABOVE_NAV_HEIGHT + padding + AD_LABEL_HEIGHT + borderBottomHeight;
 
 const headerAdWrapper = css`
 	z-index: 1080;
 	width: 100%;
 	background-color: ${neutral[97]};
-	min-height: ${TOP_ABOVE_NAV_HEIGHT + padding + labelHeight}px;
-	border-bottom: 1px solid ${border.secondary};
+	min-height: ${headerMinHeight}px;
+	border-bottom: ${borderBottomHeight}px solid ${border.secondary};
 	padding-bottom: ${padding}px;
 
 	display: flex;

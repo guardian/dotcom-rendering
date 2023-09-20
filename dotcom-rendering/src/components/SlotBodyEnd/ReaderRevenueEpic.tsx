@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { cmp } from '@guardian/consent-management-platform';
 import type { OphanComponentEvent } from '@guardian/libs';
-import { getCookie, storage } from '@guardian/libs';
+import { getCookie, startPerformanceMeasure, storage } from '@guardian/libs';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
 	EpicPayload,
@@ -10,7 +10,6 @@ import type {
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import { initPerf } from '../../client/initPerf';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
 	getLastOneOffContributionTimestamp,
@@ -116,8 +115,10 @@ export const canShowReaderRevenueEpic = async (
 		// We never serve Reader Revenue epics in this case
 		return Promise.resolve({ show: false });
 	}
-	const dataPerf = initPerf('contributions-epic-data');
-	dataPerf.start();
+	const { endPerformanceMeasure } = startPerformanceMeasure(
+		'supporterRevenue',
+		'contributions-epic-data',
+	);
 
 	const contributionsPayload = await buildPayload(data);
 
@@ -126,6 +127,8 @@ export const canShowReaderRevenueEpic = async (
 		contributionsPayload,
 	);
 	const module: ModuleData | undefined = response.data?.module;
+
+	endPerformanceMeasure();
 
 	if (!module) {
 		return { show: false };
@@ -163,13 +166,15 @@ export const ReaderRevenueEpic = ({
 	useEffect(() => {
 		setAutomat();
 
-		const modulePerf = initPerf('contributions-epic-module');
-		modulePerf.start();
+		const { endPerformanceMeasure } = startPerformanceMeasure(
+			'supporterRevenue',
+			'contributions-epic-module',
+		);
 
 		window
 			.guardianPolyfilledImport(module.url)
 			.then((epicModule: { ContributionsEpic: EpicType }) => {
-				modulePerf.end();
+				endPerformanceMeasure();
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
 			})
 			.catch((error) => {

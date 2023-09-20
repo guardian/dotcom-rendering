@@ -10,7 +10,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: false,
 				isInBrowserVariantTest: true,
-				randomCentile: 99,
+				random: 99 / 100,
 			}),
 		).toEqual(false);
 	});
@@ -20,7 +20,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: true,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: true,
-				randomCentile: 1,
+				random: 1 / 100,
 			}),
 		).toEqual(false);
 	});
@@ -30,7 +30,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: true,
-				randomCentile: 1,
+				random: 1 / 100,
 			}),
 		).toEqual(true);
 	});
@@ -40,7 +40,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
-				randomCentile: 1,
+				random: 1 / 100,
 			}),
 		).toEqual(false);
 		expect(
@@ -48,7 +48,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
-				randomCentile: 99,
+				random: 99 / 100,
 			}),
 		).toEqual(false);
 		expect(
@@ -56,7 +56,15 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
-				randomCentile: 100,
+				random: 99.0001 / 100,
+			}),
+		).toEqual(true);
+		expect(
+			isSentryEnabled({
+				isDev: false,
+				enableSentryReporting: true,
+				isInBrowserVariantTest: false,
+				random: 100 / 100,
 			}),
 		).toEqual(true);
 	});

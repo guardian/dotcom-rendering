@@ -43,7 +43,6 @@ describe('Mobile Ads', () => {
 	it('Should not insert ad after a thrasher container', () => {
 		const merchHighPosition = getMerchHighPosition(
 			defaultTestCollections.length,
-			false,
 		);
 		const testCollections = [...defaultTestCollections];
 		testCollections.splice(6, 0, { collectionType: 'fixed/thrasher' });
@@ -76,10 +75,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(
-			testCollections.length,
-			false,
-		);
+		const merchHighPosition = getMerchHighPosition(testCollections.length);
 
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
@@ -118,10 +114,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(
-			testCollections.length,
-			true,
-		);
+		const merchHighPosition = getMerchHighPosition(testCollections.length);
 
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
@@ -191,10 +184,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(
-			testCollections.length,
-			true,
-		);
+		const merchHighPosition = getMerchHighPosition(testCollections.length);
 
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
@@ -225,17 +215,14 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(
-			testCollections.length,
-			false,
-		);
+		const merchHighPosition = getMerchHighPosition(testCollections.length);
 
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
 			merchHighPosition,
 		);
 
-		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 12, 14]);
+		expect(mobileAdPositions).toEqual([0, 4, 8, 10, 13]);
 	});
 
 	// We used https://www.theguardian.com/tone/recipes as a blueprint
@@ -257,17 +244,14 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(
-			testCollections.length,
-			false,
-		);
+		const merchHighPosition = getMerchHighPosition(testCollections.length);
 
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
 			merchHighPosition,
 		);
 
-		expect(mobileAdPositions).toEqual([2, 4, 6, 8, 10, 12]);
+		expect(mobileAdPositions).toEqual([1, 4, 6, 8, 10, 12]);
 	});
 });
 

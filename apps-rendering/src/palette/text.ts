@@ -503,6 +503,7 @@ const headline = ({ design, display, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.Interview:
 			return neutral[100];
@@ -964,6 +965,7 @@ const articleLink = (format: ArticleFormat): Colour => {
 					return news[400];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.Picture:
 			return neutral[86];
 		case ArticleDesign.Analysis:
 		case ArticleDesign.Comment:
@@ -1109,6 +1111,7 @@ const standfirst = ({ design }: ArticleFormat): Colour => {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			return neutral[86];
 		default:
 			return neutral[7];
@@ -1121,6 +1124,7 @@ const standfirstDark = ({ design, display, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.DeadBlog:
 			return neutral[93];
 		case ArticleDesign.Gallery:
+		case ArticleDesign.Picture:
 			return neutral[86];
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -1174,6 +1178,7 @@ const standfirstLink = ({ design, theme }: ArticleFormat): Colour => {
 					return news[400];
 			}
 		case ArticleDesign.Gallery:
+		case ArticleDesign.Picture:
 			return neutral[86];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -1256,6 +1261,7 @@ const standfirstLinkDark = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			switch (theme) {
 				case ArticlePillar.News:
 					return news[500];
@@ -1331,6 +1337,7 @@ const kicker = (format: ArticleFormat): Colour => {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			switch (format.theme) {
 				case ArticlePillar.News:
 					return news[600];
@@ -1388,6 +1395,7 @@ const editionsKicker = (format: ArticleFormat): Colour => {
 const seriesTitle = ({ design, display, theme }: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.Picture:
 			return neutral[100];
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
@@ -1510,6 +1518,7 @@ const relatedCardTimeAgo = (format: ArticleFormat): Colour => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Gallery:
+		case ArticleDesign.Picture:
 			return neutral[100];
 	}
 	return neutral[46];

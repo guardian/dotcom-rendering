@@ -3,16 +3,9 @@ import type { GroupedTrailsBase } from '../types/tagFront';
 
 type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
 
-export const getMerchHighPosition = (
-	collectionCount: number,
-	isNetworkFront: boolean | undefined,
-): number => {
+export const getMerchHighPosition = (collectionCount: number): number => {
 	if (collectionCount >= 4) {
-		if (isNetworkFront === true) {
-			return 2;
-		} else {
-			return 1;
-		}
+		return 2;
 	} else {
 		return 0;
 	}

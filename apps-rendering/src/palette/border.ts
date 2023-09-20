@@ -111,7 +111,10 @@ const relatedCardDark = (_format: ArticleFormat): Colour => {
 };
 
 const standfirstLink = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.Gallery) {
+	if (
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Picture
+	) {
 		return neutral[46];
 	}
 

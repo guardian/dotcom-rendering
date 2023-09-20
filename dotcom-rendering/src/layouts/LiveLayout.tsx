@@ -14,7 +14,7 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Accordion } from '../components/Accordion';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -175,7 +175,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				/* from wide define fixed body width */
 				${from.wide} {
 					grid-column-gap: 20px;
-					grid-template-columns: 240px 700px 1fr;
+					grid-template-columns: 240px 700px 300px;
 					grid-template-areas:
 						'info		media		right-column'
 						'info		body		right-column';
@@ -231,13 +231,6 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
-interface Props {
-	article: FEArticleType;
-	NAV: NavType;
-	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
-}
-
 const paddingBody = css`
 	padding: ${space[3]}px;
 	${from.mobileLandscape} {
@@ -248,18 +241,30 @@ const paddingBody = css`
 	}
 `;
 
-export const LiveLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+interface BaseProps {
+	article: FEArticleType;
+	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
+}
+
+interface AppsProps extends BaseProps {
+	renderingTarget: 'Apps';
+}
+
+interface WebProps extends BaseProps {
+	NAV: NavType;
+	renderingTarget: 'Web';
+}
+
+export const LiveLayout = (props: WebProps | AppsProps) => {
+	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
 	} = article;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -292,113 +297,126 @@ export const LiveLayout = ({
 	const hasKeyEvents = !!article.keyEvents.length;
 	const showKeyEventsToggle = !showTopicFilterBank && hasKeyEvents;
 
-	const renderAds = canRenderAds(article);
+	const renderAds = canRenderAds(article, renderingTarget);
+
+	const isWeb = renderingTarget === 'Web';
 
 	return (
 		<>
-			<div data-print-layout="hide">
-				{renderAds && (
-					<Stuck>
+			{isWeb && (
+				<div data-print-layout="hide">
+					{renderAds && (
+						<Stuck>
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+								element="aside"
+							>
+								<HeaderAdSlot />
+							</Section>
+						</Stuck>
+					)}
+					<SendToBack>
 						<Section
 							fullWidth={true}
+							shouldCenter={false}
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
-							shouldCenter={false}
-							element="aside"
+							backgroundColour={brandBackground.primary}
+							element="header"
 						>
-							<HeaderAdSlot />
+							<Header
+								editionId={article.editionId}
+								idUrl={article.config.idUrl}
+								mmaUrl={article.config.mmaUrl}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
+								urls={article.nav.readerRevenueLinks.header}
+								remoteHeader={
+									!!article.config.switches.remoteHeader
+								}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								isInEuropeTest={isInEuropeTest}
+								headerTopBarSearchCapiSwitch={
+									!!article.config.switches
+										.headerTopBarSearchCapi
+								}
+							/>
 						</Section>
-					</Stuck>
-				)}
-				<SendToBack>
-					<Section
-						fullWidth={true}
-						shouldCenter={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						padSides={false}
-						backgroundColour={brandBackground.primary}
-						element="header"
-					>
-						<Header
-							editionId={article.editionId}
-							idUrl={article.config.idUrl}
-							mmaUrl={article.config.mmaUrl}
-							discussionApiUrl={article.config.discussionApiUrl}
-							urls={article.nav.readerRevenueLinks.header}
-							remoteHeader={
-								!!article.config.switches.remoteHeader
-							}
-							contributionsServiceUrl={contributionsServiceUrl}
-							idApiUrl={article.config.idApiUrl}
-							isInEuropeTest={isInEuropeTest}
-							headerTopBarSearchCapiSwitch={
-								!!article.config.switches.headerTopBarSearchCapi
-							}
-						/>
-					</Section>
 
-					<Section
-						fullWidth={true}
-						borderColour={brandLine.primary}
-						showTopBorder={false}
-						padSides={false}
-						backgroundColour={brandBackground.primary}
-						element="nav"
-					>
-						<Nav
-							nav={NAV}
-							selectedPillar={NAV.selectedPillar}
-							subscribeUrl={
-								article.nav.readerRevenueLinks.header.subscribe
-							}
-							editionId={article.editionId}
-							headerTopBarSwitch={
-								!!article.config.switches.headerTopNav
-							}
-							isInEuropeTest={isInEuropeTest}
-						/>
-					</Section>
+						<Section
+							fullWidth={true}
+							borderColour={brandLine.primary}
+							showTopBorder={false}
+							padSides={false}
+							backgroundColour={brandBackground.primary}
+							element="nav"
+						>
+							<Nav
+								nav={props.NAV}
+								selectedPillar={props.NAV.selectedPillar}
+								subscribeUrl={
+									article.nav.readerRevenueLinks.header
+										.subscribe
+								}
+								editionId={article.editionId}
+								headerTopBarSwitch={
+									!!article.config.switches.headerTopNav
+								}
+								isInEuropeTest={isInEuropeTest}
+							/>
+						</Section>
 
-					{NAV.subNavSections && (
+						{props.NAV.subNavSections && (
+							<Section
+								fullWidth={true}
+								backgroundColour={palette.background.article}
+								padSides={false}
+								borderColour={palette.border.article}
+								element="aside"
+							>
+								<Island deferUntil="idle">
+									<SubNav
+										subNavSections={
+											props.NAV.subNavSections
+										}
+										currentNavLink={
+											props.NAV.currentNavLink
+										}
+										linkHoverColour={
+											palette.text.articleLinkHover
+										}
+										borderColour={palette.border.subNav}
+									/>
+								</Island>
+							</Section>
+						)}
+
 						<Section
 							fullWidth={true}
 							backgroundColour={palette.background.article}
 							padSides={false}
+							showTopBorder={false}
 							borderColour={palette.border.article}
-							element="aside"
 						>
-							<Island deferUntil="idle">
-								<SubNav
-									subNavSections={NAV.subNavSections}
-									currentNavLink={NAV.currentNavLink}
-									linkHoverColour={
-										palette.text.articleLinkHover
-									}
-									borderColour={palette.border.subNav}
-								/>
-							</Island>
+							<StraightLines
+								count={4}
+								cssOverrides={css`
+									display: block;
+								`}
+							/>
 						</Section>
-					)}
-
-					<Section
-						fullWidth={true}
-						backgroundColour={palette.background.article}
-						padSides={false}
-						showTopBorder={false}
-						borderColour={palette.border.article}
-					>
-						<StraightLines
-							count={4}
-							cssOverrides={css`
-								display: block;
-							`}
-						/>
-					</Section>
-				</SendToBack>
-			</div>
-
+					</SendToBack>
+				</div>
+			)}
 			<main data-layout="LiveLayout">
 				{footballMatchUrl ? (
 					<Section
@@ -884,9 +902,6 @@ export const LiveLayout = ({
 															.serverSideLiveblogInlineAdsVariant ===
 														'variant'
 													}
-													renderingTarget={
-														renderingTarget
-													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -926,7 +941,9 @@ export const LiveLayout = ({
 													webUrl={article.webURL}
 													webTitle={article.webTitle}
 													showBottomSocialButtons={
-														article.showBottomSocialButtons
+														article.showBottomSocialButtons &&
+														renderingTarget ===
+															'Web'
 													}
 													badge={
 														article.badge?.enhanced
@@ -1038,9 +1055,6 @@ export const LiveLayout = ({
 													isRightToLeftLang={
 														article.isRightToLeftLang
 													}
-													renderingTarget={
-														renderingTarget
-													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1080,7 +1094,9 @@ export const LiveLayout = ({
 													webUrl={article.webURL}
 													webTitle={article.webTitle}
 													showBottomSocialButtons={
-														article.showBottomSocialButtons
+														article.showBottomSocialButtons &&
+														renderingTarget ===
+															'Web'
 													}
 													badge={
 														article.badge?.enhanced
@@ -1116,13 +1132,7 @@ export const LiveLayout = ({
 											<AdSlot
 												position="right"
 												display={format.display}
-												shouldHideReaderRevenue={
-													article.shouldHideReaderRevenue
-												}
-												isPaidContent={
-													article.pageType
-														.isPaidContent
-												}
+												isPaidContent={isPaidContent}
 											/>
 										)}
 									</RightColumn>
@@ -1160,6 +1170,9 @@ export const LiveLayout = ({
 									onwardsSource="more-on-this-story"
 									format={format}
 									leftColSize={'wide'}
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
 								/>
 							</Island>
 						</Section>
@@ -1187,6 +1200,7 @@ export const LiveLayout = ({
 							pillar={format.theme}
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
+							discussionApiUrl={article.config.discussionApiUrl}
 						/>
 					</Island>
 
@@ -1262,70 +1276,82 @@ export const LiveLayout = ({
 				</div>
 			</main>
 
-			{NAV.subNavSections && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					element="aside"
-				>
-					<Island deferUntil="visible">
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={palette.text.articleLinkHover}
-							borderColour={palette.border.subNav}
+			{isWeb && (
+				<>
+					{props.NAV.subNavSections && (
+						<Section
+							fullWidth={true}
+							data-print-layout="hide"
+							padSides={false}
+							element="aside"
+						>
+							<Island deferUntil="visible">
+								<SubNav
+									subNavSections={props.NAV.subNavSections}
+									currentNavLink={props.NAV.currentNavLink}
+									linkHoverColour={
+										palette.text.articleLinkHover
+									}
+									borderColour={palette.border.subNav}
+								/>
+							</Island>
+						</Section>
+					)}
+
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						padSides={false}
+						backgroundColour={brandBackground.primary}
+						borderColour={brandBorder.primary}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Footer
+							pageFooter={article.pageFooter}
+							selectedPillar={props.NAV.selectedPillar}
+							pillars={props.NAV.pillars}
+							urls={article.nav.readerRevenueLinks.header}
+							editionId={article.editionId}
+							contributionsServiceUrl={
+								article.contributionsServiceUrl
+							}
 						/>
-					</Island>
-				</Section>
+					</Section>
+
+					<BannerWrapper data-print-layout="hide">
+						<Island deferUntil="idle" clientOnly={true}>
+							<StickyBottomBanner
+								contentType={article.contentType}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								isMinuteArticle={
+									article.pageType.isMinuteArticle
+								}
+								isPaidContent={article.pageType.isPaidContent}
+								isPreview={!!article.config.isPreview}
+								isSensitive={article.config.isSensitive}
+								keywordIds={article.config.keywordIds}
+								pageId={article.pageId}
+								sectionId={article.config.section}
+								shouldHideReaderRevenue={
+									article.shouldHideReaderRevenue
+								}
+								remoteBannerSwitch={
+									!!article.config.switches.remoteBanner
+								}
+								puzzleBannerSwitch={
+									!!article.config.switches.puzzlesBanner
+								}
+								tags={article.tags}
+							/>
+						</Island>
+					</BannerWrapper>
+					<MobileStickyContainer data-print-layout="hide" />
+				</>
 			)}
-
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				backgroundColour={brandBackground.primary}
-				borderColour={brandBorder.primary}
-				showSideBorders={false}
-				element="footer"
-			>
-				<Footer
-					pageFooter={article.pageFooter}
-					selectedPillar={NAV.selectedPillar}
-					pillars={NAV.pillars}
-					urls={article.nav.readerRevenueLinks.header}
-					editionId={article.editionId}
-					contributionsServiceUrl={article.contributionsServiceUrl}
-				/>
-			</Section>
-
-			<BannerWrapper data-print-layout="hide">
-				<Island deferUntil="idle" clientOnly={true}>
-					<StickyBottomBanner
-						contentType={article.contentType}
-						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={article.config.idApiUrl}
-						isMinuteArticle={article.pageType.isMinuteArticle}
-						isPaidContent={article.pageType.isPaidContent}
-						isPreview={!!article.config.isPreview}
-						isSensitive={article.config.isSensitive}
-						keywordIds={article.config.keywordIds}
-						pageId={article.pageId}
-						sectionId={article.config.section}
-						shouldHideReaderRevenue={
-							article.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!article.config.switches.remoteBanner
-						}
-						puzzleBannerSwitch={
-							!!article.config.switches.puzzlesBanner
-						}
-						tags={article.tags}
-					/>
-				</Island>
-			</BannerWrapper>
-			<MobileStickyContainer data-print-layout="hide" />
 		</>
 	);
 };

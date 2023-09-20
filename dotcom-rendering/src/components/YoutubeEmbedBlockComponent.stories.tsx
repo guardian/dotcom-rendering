@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { YoutubeEmbedBlockComponent } from './YoutubeEmbedBlockComponent';
 
 export default {
@@ -30,7 +30,7 @@ export const standardAspectRatio = () => {
 			<YoutubeEmbedBlockComponent
 				embedUrl="https://www.youtube-nocookie.com/embed/79fzeNUqQbQ?wmode=opaque&feature=oembed"
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				}}

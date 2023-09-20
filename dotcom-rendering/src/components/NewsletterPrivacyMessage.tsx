@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
-import { neutral, text, textSans } from '@guardian/source-foundations';
+import { palette, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
+
+interface Props {
+	textColor?: 'supporting' | 'regular';
+}
 
 const GUARDIAN_PRIVACY_POLICY =
 	'https://www.theguardian.com/help/privacy-policy';
@@ -21,26 +25,36 @@ const LegalLink = ({ href, children }: LegalLinkProps) => (
 	</Link>
 );
 
-const termsStyle = css`
+const termsStyle = (textColor: 'supporting' | 'regular') => css`
 	${textSans.xxsmall({ lineHeight: 'tight' })}
-	color: ${text.supporting};
+	color: ${textColor === 'regular'
+		? palette.neutral[20]
+		: palette.neutral[46]};
 	a {
 		${textSans.xxsmall()};
-		color: ${neutral[0]};
+		color: ${textColor === 'regular'
+			? palette.neutral[7]
+			: palette.neutral[0]};
 		text-decoration: underline;
 		:hover {
-			color: ${neutral[0]};
+			color: ${textColor === 'regular'
+				? palette.neutral[7]
+				: palette.neutral[0]};
 			text-decoration: underline;
 		}
 	}
 	strong {
-		color: ${neutral[0]};
+		color: ${textColor === 'regular'
+			? palette.neutral[7]
+			: palette.neutral[0]};
 		font-weight: bold;
 	}
 `;
 
-export const NewsletterPrivacyMessage = () => (
-	<span css={termsStyle}>
+export const NewsletterPrivacyMessage = ({
+	textColor = 'supporting',
+}: Props) => (
+	<span css={termsStyle(textColor)}>
 		<strong>Privacy Notice: </strong>
 		Newsletters may contain info about charities, online ads, and content
 		funded by outside parties. For more information see our{' '}

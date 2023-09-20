@@ -14,7 +14,8 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -306,7 +307,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	} = article;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
@@ -339,7 +341,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	return (
 		<>
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<div data-print-layout="hide" id="bannerandheader">
 					{renderAds && (
 						<Stuck>
@@ -663,7 +665,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									renderingTarget={renderingTarget}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
@@ -703,6 +704,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											}
 											stage={article.config.stage}
 											tags={article.tags}
+											renderAds={renderAds}
+											isLabs={isLabs}
 										/>
 									</Island>
 								)}
@@ -726,7 +729,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons
+										article.showBottomSocialButtons &&
+										renderingTarget === 'Web'
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -756,9 +760,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
 									/>
 								</RightColumn>
 							</div>
@@ -795,6 +796,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
 							/>
 						</Island>
 					</Section>
@@ -824,6 +828,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								pillar={format.theme}
 								editionId={article.editionId}
 								shortUrlId={article.config.shortUrlId}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
 							/>
 						</Island>
 
@@ -974,6 +981,23 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						</Island>
 					</BannerWrapper>
 					<MobileStickyContainer data-print-layout="hide" />
+				</>
+			)}
+
+			{!isWeb && (
+				<>
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						backgroundColour={neutral[97]}
+						padSides={false}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Island>
+							<AppsFooter />
+						</Island>
+					</Section>
 				</>
 			)}
 		</>

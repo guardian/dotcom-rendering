@@ -24,7 +24,6 @@ import type {
 } from './SignInGate/types';
 
 type Props = {
-	format: ArticleFormat;
 	contentType: string;
 	sectionId?: string;
 	tags: TagType[];
@@ -41,8 +40,8 @@ interface ShowSignInGateProps {
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	abTest: CurrentSignInGateABTest;
 	componentId: string;
-	format: ArticleFormat;
 	signInUrl: string;
+	registerUrl: string;
 	gateVariant: SignInGateComponent;
 	host: string;
 	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
@@ -63,21 +62,24 @@ const dismissGate = (
 
 // function to generate the profile.theguardian.com url with tracking params
 // and the return url (link to current article page)
-const generateSignInUrl = ({
-	pageId,
-	pageViewId,
-	idUrl,
-	host,
-	currentTest,
-	componentId,
-}: {
-	pageId: string;
-	pageViewId: string;
-	idUrl: string;
-	host: string;
-	currentTest: CurrentSignInGateABTest;
-	componentId?: string;
-}) => {
+const generateGatewayUrl = (
+	tab: 'register' | 'signin',
+	{
+		pageId,
+		pageViewId,
+		idUrl,
+		host,
+		currentTest,
+		componentId,
+	}: {
+		pageId: string;
+		pageViewId: string;
+		idUrl: string;
+		host: string;
+		currentTest: CurrentSignInGateABTest;
+		componentId?: string;
+	},
+) => {
 	// url of the article, return user here after sign in/registration
 	const returnUrl = `${host}/${pageId}`;
 
@@ -92,7 +94,7 @@ const generateSignInUrl = ({
 		viewId: pageViewId,
 	};
 
-	return `${idUrl}/signin?returnUrl=${returnUrl}&componentEventParams=${encodeURIComponent(
+	return `${idUrl}/${tab}?returnUrl=${returnUrl}&componentEventParams=${encodeURIComponent(
 		constructQuery(queryParams),
 	)}`;
 };
@@ -105,6 +107,7 @@ const ShowSignInGate = ({
 	componentId,
 	setShowGate,
 	signInUrl,
+	registerUrl,
 	gateVariant,
 	host,
 	checkoutCompleteCookieData,
@@ -126,6 +129,7 @@ const ShowSignInGate = ({
 		return gateVariant.gate({
 			guUrl: host,
 			signInUrl,
+			registerUrl,
 			dismissGate: () => {
 				dismissGate(setShowGate, abTest);
 			},
@@ -142,7 +146,6 @@ const ShowSignInGate = ({
 // component with conditional logic which determines if a sign in gate
 // should be shown on the current page
 export const SignInGateSelector = ({
-	format,
 	contentType,
 	sectionId = '',
 	tags,
@@ -257,26 +260,26 @@ export const SignInGateSelector = ({
 		? personaliseComponentId(signInGateComponentId)
 		: signInGateComponentId;
 
-	const signInUrl = generateSignInUrl({
+	const ctaUrlParams = {
 		pageId,
 		host,
 		pageViewId,
 		idUrl,
 		currentTest,
 		componentId,
-	});
+	};
 
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
 			{!isGateDismissed && canShowGate && !!componentId && (
 				<ShowSignInGate
-					format={format}
 					abTest={currentTest}
 					componentId={componentId}
 					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 					setShowGate={(show) => setIsGateDismissed(!show)}
-					signInUrl={signInUrl}
+					signInUrl={generateGatewayUrl('signin', ctaUrlParams)}
+					registerUrl={generateGatewayUrl('register', ctaUrlParams)}
 					gateVariant={gateVariant}
 					host={host}
 					checkoutCompleteCookieData={checkoutCompleteCookieData}

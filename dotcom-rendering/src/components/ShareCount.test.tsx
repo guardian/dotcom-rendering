@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
 import { ShareCount } from './ShareCount.importable';
@@ -28,7 +28,7 @@ describe('ShareCount', () => {
 				ajaxUrl={ajaxUrl}
 				pageId={pageId}
 				format={{
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				}}
@@ -46,7 +46,7 @@ describe('ShareCount', () => {
 				ajaxUrl={ajaxUrl}
 				pageId={pageId}
 				format={{
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				}}
@@ -64,7 +64,7 @@ describe('ShareCount', () => {
 				ajaxUrl={ajaxUrl}
 				pageId={pageId}
 				format={{
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				}}

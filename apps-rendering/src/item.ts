@@ -224,6 +224,11 @@ interface Profile extends Fields {
 	body: BodyElement[];
 }
 
+interface Picture extends Fields {
+	design: ArticleDesign.Picture;
+	body: BodyElement[];
+}
+
 type Item =
 	| LiveBlog
 	| DeadBlog
@@ -250,7 +255,8 @@ type Item =
 	| PrintShop
 	| FullPageInteractive
 	| Timeline
-	| Profile;
+	| Profile
+	| Picture;
 
 // ----- Convenience Types ----- //
 
@@ -500,10 +506,7 @@ const fromCapi =
 				body,
 				...itemFields,
 			};
-			// This isn't accurate, picture pieces look different to galleries.
-			// This is to prevent accidentally breaking Editions until we have
-			// a model for pictures.
-		} else if (isGallery(tags) || isPicture(tags)) {
+		} else if (isGallery(tags)) {
 			return {
 				design: ArticleDesign.Gallery,
 				body,
@@ -518,6 +521,12 @@ const fromCapi =
 		} else if (isVideo(tags)) {
 			return {
 				design: ArticleDesign.Video,
+				body,
+				...itemFields,
+			};
+		} else if (isPicture(tags)) {
+			return {
+				design: ArticleDesign.Picture,
 				body,
 				...itemFields,
 			};

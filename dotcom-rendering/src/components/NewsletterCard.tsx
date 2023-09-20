@@ -52,7 +52,7 @@ const contentWrapperStyle = css`
 	padding-bottom: ${space[2]}px;
 
 	h3 {
-		${headlineObjectStyles.xxxsmall()};
+		${headlineObjectStyles.xxsmall({ fontWeight: 'bold' })};
 		margin-bottom: ${space[3]}px;
 	}
 
@@ -63,10 +63,10 @@ const contentWrapperStyle = css`
 
 const buttonHolderStyle = css`
 	margin-top: auto;
+	padding-top: ${space[6]}px;
 `;
 
 const buttonStyle = css`
-	background-color: ${palette.neutral[100]};
 	color: ${palette.neutral[7]};
 	border-color: ${palette.neutral[7]};
 	.${ICON_TICK_CLASS} {
@@ -89,7 +89,7 @@ const buttonStyle = css`
 		background-color: ${palette.neutral[86]};
 	}
 
-	&.${BUTTON_SELECTED_CLASS}:hover {
+	&${'.'}${BUTTON_SELECTED_CLASS}:hover {
 		background-color: ${palette.neutral[46]};
 		border-color: ${palette.neutral[46]};
 	}
@@ -172,7 +172,7 @@ export const NewsletterCard = ({
 		submitComponentEvent(
 			{
 				component: {
-					componentType: 'NEWSLETTER_SUBSCRIPTION',
+					componentType: 'CARD',
 					id: `DCR NewsletterCard ${newsletter.identityName}`,
 				},
 				action: 'VIEW',
@@ -207,6 +207,7 @@ export const NewsletterCard = ({
 						imageSize="carousel"
 						alt=""
 						master={newsletter.illustrationCard}
+						loading="lazy"
 					/>
 				</div>
 			) : (
@@ -217,7 +218,10 @@ export const NewsletterCard = ({
 				/>
 			)}
 			<div css={contentWrapperStyle}>
-				<NewsletterDetail text={newsletter.frequency} />
+				<NewsletterDetail
+					text={newsletter.frequency}
+					iconSize="small"
+				/>
 				<h3>{newsletter.name}</h3>
 				<p>{newsletter.description}</p>
 				<div css={buttonHolderStyle}>
@@ -237,7 +241,8 @@ export const NewsletterCard = ({
 							</>
 						}
 						cssOverrides={buttonStyle}
-						data-newsletter-id={newsletter.identityName}
+						data-identity-name={newsletter.identityName}
+						data-list-id={newsletter.listId}
 						data-role={BUTTON_ROLE}
 					>
 						Sign up

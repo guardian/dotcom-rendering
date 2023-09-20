@@ -1,6 +1,6 @@
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
-import { SignInGateCopyTestJan2023 } from './gateDesigns/SignInGateCopyTestJan2023';
+import { SignInGateCopyTestRepeatSept2023 } from './gateDesigns/SignInGateCopyTestRepeatSept2023';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
@@ -20,7 +20,8 @@ export const mainStandalone = () => {
 		<Section fullWidth={true}>
 			<SignInGateMain
 				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
+				signInUrl="https://profile.theguardian.com/signin"
+				registerUrl="https://profile.theguardian.com/register"
 				dismissGate={() => {}}
 				ophanComponentId="test"
 			/>
@@ -34,7 +35,8 @@ export const mainStandaloneMandatory = () => {
 		<Section fullWidth={true}>
 			<SignInGateMain
 				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
+				signInUrl="https://profile.theguardian.com/signin"
+				registerUrl="https://profile.theguardian.com/register"
 				dismissGate={() => {}}
 				ophanComponentId="test"
 				isMandatory={true}
@@ -49,7 +51,8 @@ export const fakeSocialStandalone = () => {
 		<Section fullWidth={true}>
 			<SignInGateFakeSocial
 				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
+				signInUrl="https://profile.theguardian.com/signin"
+				registerUrl="https://profile.theguardian.com/register"
 				dismissGate={() => {}}
 				ophanComponentId="test"
 			/>
@@ -63,7 +66,8 @@ export const fakeSocialStandaloneVertical = () => {
 		<Section fullWidth={true}>
 			<SignInGateFakeSocial
 				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
+				signInUrl="https://profile.theguardian.com/signin"
+				registerUrl="https://profile.theguardian.com/register"
 				dismissGate={() => {}}
 				ophanComponentId="test"
 				abTest={{
@@ -80,9 +84,10 @@ fakeSocialStandaloneVertical.storyName = 'fake_social_standalone_vertical';
 export const signInGateCopyTest = () => {
 	return (
 		<Section fullWidth={true}>
-			<SignInGateCopyTestJan2023
+			<SignInGateCopyTestRepeatSept2023
 				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
+				signInUrl="https://profile.theguardian.com/signin"
+				registerUrl="https://profile.theguardian.com/register"
 				dismissGate={() => {}}
 				ophanComponentId="test"
 				abTest={{
@@ -103,7 +108,8 @@ export const signInGateMainCheckoutCompletePersonalisedCopy = (
 		<Section fullWidth={true}>
 			<SignInGateMainCheckoutComplete
 				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/signin?" // this is personalised
+				signInUrl="https://profile.theguardian.com/signin"
+				registerUrl="https://profile.theguardian.com/register"
 				dismissGate={() => {}}
 				ophanComponentId="test"
 				checkoutCompleteCookieData={args}

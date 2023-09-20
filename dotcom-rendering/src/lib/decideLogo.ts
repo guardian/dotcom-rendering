@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
 import type { Branding } from '../types/branding';
 
 const shouldUseLogoForDarkBackground = (format: ArticleFormat): boolean => {
@@ -12,11 +12,11 @@ const shouldUseLogoForDarkBackground = (format: ArticleFormat): boolean => {
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
 					return false;
-				case ArticlePillar.News:
-				case ArticlePillar.Sport:
-				case ArticlePillar.Opinion:
-				case ArticlePillar.Lifestyle:
-				case ArticlePillar.Culture:
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+				case Pillar.Lifestyle:
+				case Pillar.Culture:
 				default:
 					return true;
 			}

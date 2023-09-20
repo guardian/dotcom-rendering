@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandBackground,
@@ -12,7 +12,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -21,6 +21,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -53,7 +54,6 @@ import type { NavType } from '../model/extract-nav';
 import type { FEElement } from '../types/content';
 import type { FEArticleType } from '../types/frontend';
 import type { Palette } from '../types/palette';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -184,7 +184,6 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 }
 
 const decideCaption = (mainMedia: FEElement | undefined): string => {
@@ -243,12 +242,7 @@ const Box = ({
 	</div>
 );
 
-export const ImmersiveLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -276,7 +270,10 @@ export const ImmersiveLayout = ({
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
+
+	const { renderingTarget } = useConfig();
 
 	/**
 	We need change the height values depending on whether the labs header is there or not to keep
@@ -643,7 +640,6 @@ export const ImmersiveLayout = ({
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									renderingTarget={renderingTarget}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -669,6 +665,8 @@ export const ImmersiveLayout = ({
 											}
 											stage={article.config.stage}
 											tags={article.tags}
+											renderAds={renderAds}
+											isLabs={isLabs}
 										/>
 									</Island>
 								)}
@@ -690,7 +688,8 @@ export const ImmersiveLayout = ({
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons
+										article.showBottomSocialButtons &&
+										renderingTarget === 'Web'
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -725,9 +724,6 @@ export const ImmersiveLayout = ({
 													<AdSlot
 														position="right"
 														display={format.display}
-														shouldHideReaderRevenue={
-															article.shouldHideReaderRevenue
-														}
 														isPaidContent={
 															article.pageType
 																.isPaidContent
@@ -769,6 +765,9 @@ export const ImmersiveLayout = ({
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
 							/>
 						</Island>
 					</Section>
@@ -794,6 +793,7 @@ export const ImmersiveLayout = ({
 						pillar={format.theme}
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
+						discussionApiUrl={article.config.discussionApiUrl}
 					/>
 				</Island>
 

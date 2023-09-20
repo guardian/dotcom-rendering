@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { Toast } from './Toast';
@@ -31,7 +31,7 @@ export const Default = () => {
 		<Wrapper>
 			<Toast
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -53,7 +53,7 @@ export const Sport = () => {
 		<Wrapper>
 			<Toast
 				format={{
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -97,7 +97,7 @@ export const One = () => {
 		<Wrapper>
 			<Toast
 				format={{
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -119,7 +119,7 @@ export const Lots = () => {
 		<Wrapper>
 			<Toast
 				format={{
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -141,7 +141,7 @@ export const Mobile = () => {
 		<Wrapper>
 			<Toast
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}

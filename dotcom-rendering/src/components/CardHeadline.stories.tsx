@@ -1,8 +1,8 @@
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { breakpoints, specialReport } from '@guardian/source-foundations';
 import { CardHeadline } from './CardHeadline';
@@ -29,7 +29,7 @@ export const Article = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	</Section>
@@ -50,7 +50,7 @@ export const Analysis = () => (
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Analysis,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						size={size}
 					/>
@@ -65,7 +65,7 @@ export const Analysis = () => (
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Analysis,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 			/>
 		</Section>
@@ -76,7 +76,7 @@ export const Analysis = () => (
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Analysis,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 			/>
 		</Section>
@@ -87,7 +87,7 @@ export const Analysis = () => (
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Analysis,
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 				}}
 			/>
 		</Section>
@@ -98,7 +98,7 @@ export const Analysis = () => (
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Analysis,
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 				}}
 			/>
 		</Section>
@@ -129,7 +129,7 @@ export const Feature = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Feature,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	</Section>
@@ -150,7 +150,7 @@ export const Size = () => (
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						size={size}
 					/>
@@ -176,7 +176,7 @@ export const MobileSize = () => (
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						size="medium"
 						sizeOnMobile={size}
@@ -203,7 +203,7 @@ export const liveStory = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			kickerText="Live"
 		/>
@@ -218,7 +218,7 @@ export const noLineBreak = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			kickerText="Live"
 			hideLineBreak={true}
@@ -234,7 +234,7 @@ export const pulsingDot = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			kickerText="Live"
 			showPulsingDot={true}
@@ -250,7 +250,7 @@ export const cultureVariant = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Feature,
-				theme: ArticlePillar.Culture,
+				theme: Pillar.Culture,
 			}}
 			kickerText="Art and stuff"
 		/>
@@ -265,7 +265,7 @@ export const Opinion = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Comment,
-				theme: ArticlePillar.Opinion,
+				theme: Pillar.Opinion,
 			}}
 			showQuotes={true}
 			size="small"
@@ -288,7 +288,7 @@ export const OpinionKicker = () => (
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
-							theme: ArticlePillar.Opinion,
+							theme: Pillar.Opinion,
 						}}
 						showQuotes={true}
 						kickerText="George Monbiot"
@@ -330,7 +330,7 @@ export const Busy = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Feature,
-				theme: ArticlePillar.Lifestyle,
+				theme: Pillar.Lifestyle,
 			}}
 			showQuotes={true}
 			kickerText="Aerial Yoga"
@@ -360,7 +360,7 @@ export const Byline = () => (
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				byline="News byline"
 				showByline={true}
@@ -373,7 +373,7 @@ export const Byline = () => (
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 				byline="Sport byline"
 				showByline={true}
@@ -386,7 +386,7 @@ export const Byline = () => (
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				byline="Culture byline"
 				showByline={true}
@@ -399,7 +399,7 @@ export const Byline = () => (
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 				}}
 				byline="Lifestyle byline"
 				showByline={true}
@@ -412,7 +412,7 @@ export const Byline = () => (
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 				}}
 				byline="Opinion byline"
 				showByline={true}

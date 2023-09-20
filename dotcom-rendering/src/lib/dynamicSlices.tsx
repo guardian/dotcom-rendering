@@ -1,5 +1,6 @@
 import { LI } from '../components/Card/components/LI';
 import { UL } from '../components/Card/components/UL';
+import type { Loading } from '../components/CardPicture';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
@@ -35,8 +36,10 @@ export const Card50_Card50 = ({
 	cards,
 	containerPalette,
 	showAge,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -56,6 +59,7 @@ export const Card50_Card50 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -72,8 +76,10 @@ export const Card75_Card25 = ({
 	cards,
 	containerPalette,
 	showAge,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -88,6 +94,7 @@ export const Card75_Card25 = ({
 						trail={trail}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -103,6 +110,7 @@ export const Card75_Card25 = ({
 						trail={trail}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -119,8 +127,10 @@ export const Card25_Card75 = ({
 	cards,
 	containerPalette,
 	showAge,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -135,6 +145,7 @@ export const Card25_Card75 = ({
 						trail={trail}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -150,6 +161,7 @@ export const Card25_Card75 = ({
 						trail={trail}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -166,8 +178,10 @@ export const Card50_Card25_Card25 = ({
 	cards,
 	containerPalette,
 	showAge,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -182,6 +196,7 @@ export const Card50_Card25_Card25 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -198,6 +213,7 @@ export const Card50_Card25_Card25 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -215,8 +231,10 @@ export const Card100PictureTop = ({
 	cards,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -230,6 +248,7 @@ export const Card100PictureTop = ({
 						trail={card}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -241,8 +260,10 @@ export const Card25_Card25_Card25_Card25 = ({
 	cards,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -265,6 +286,7 @@ export const Card25_Card25_Card25_Card25 = ({
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							imageLoading={imageLoading}
 						/>
 					</LI>
 				);
@@ -277,8 +299,10 @@ export const ColumnOfCards50_Card25_Card25 = ({
 	cards,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -300,6 +324,7 @@ export const ColumnOfCards50_Card25_Card25 = ({
 							trail={big}
 							showAge={showAge}
 							containerPalette={containerPalette}
+							imageLoading={imageLoading}
 						/>
 					</LI>
 				);
@@ -317,6 +342,7 @@ export const ColumnOfCards50_Card25_Card25 = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
+									imageLoading={imageLoading}
 								/>
 							</LI>
 						);
@@ -337,8 +363,10 @@ export const Card100PictureRight = ({
 	cards,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -352,6 +380,7 @@ export const Card100PictureRight = ({
 						trail={card}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}

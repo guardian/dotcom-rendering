@@ -71,6 +71,7 @@ type Props = {
 	ajaxUrl: string;
 	editionId?: EditionId;
 	containerPalette?: DCRContainerPalette;
+	discussionApiUrl: string;
 };
 
 export const ShowMore = ({
@@ -82,6 +83,7 @@ export const ShowMore = ({
 	ajaxUrl,
 	editionId,
 	containerPalette,
+	discussionApiUrl,
 }: Props) => {
 	const [existingCardLinks, setExistingCardLinks] = useState<string[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
@@ -113,9 +115,11 @@ export const ShowMore = ({
 
 	const cards =
 		data &&
-		enhanceCards(data, { cardInTagFront: false, editionId }).filter(
-			(card) => !existingCardLinks.includes(card.url),
-		);
+		enhanceCards(data, {
+			cardInTagFront: false,
+			editionId,
+			discussionApiUrl,
+		}).filter((card) => !existingCardLinks.includes(card.url));
 
 	const showMoreContainerId = `show-more-${collectionId}`;
 
@@ -170,6 +174,7 @@ export const ShowMore = ({
 											containerPalette={containerPalette}
 											showAge={showAge}
 											headlineSize="small"
+											imageLoading="eager"
 										/>
 									</LI>
 								);

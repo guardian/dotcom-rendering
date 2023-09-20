@@ -88,10 +88,9 @@ const FirstPublished = ({
 						text-decoration: none;
 						display: flex;
 
-						:hover {
+						&:hover {
 							span {
-								height: 16px;
-								width: 16px;
+								transform: scale(1.2);
 							}
 						}
 					`}

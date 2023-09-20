@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { ArticleContainer } from './ArticleContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
@@ -85,7 +85,7 @@ export const InContext = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				>
 					<MatchNav

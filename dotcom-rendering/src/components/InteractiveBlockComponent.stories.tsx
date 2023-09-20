@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { InteractiveBlockComponent } from './InteractiveBlockComponent.importable';
 import { TextBlockComponent } from './TextBlockComponent';
 
@@ -14,7 +14,7 @@ const SomeText = () => (
 	<TextBlockComponent
 		html={textHtml}
 		format={{
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		}}
@@ -46,7 +46,7 @@ export const Default = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 			/>
@@ -71,7 +71,7 @@ export const InlineMap = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 			/>
@@ -95,7 +95,7 @@ export const Showcase = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 			/>
@@ -121,7 +121,7 @@ export const WithCaption = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 			/>
@@ -146,7 +146,7 @@ export const NonBootJs = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 			/>

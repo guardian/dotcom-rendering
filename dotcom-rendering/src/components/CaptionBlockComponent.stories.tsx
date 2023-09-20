@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { CaptionBlockComponent } from './CaptionBlockComponent';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
@@ -55,7 +55,7 @@ export const StandardArticle = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 			/>
 		</Wrapper>
@@ -71,7 +71,7 @@ export const PhotoEssay = () => {
 				format={{
 					display: ArticleDisplay.Immersive,
 					design: ArticleDesign.PhotoEssay,
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 				}}
 				padCaption={false}
 				credit="Credit text"
@@ -92,7 +92,7 @@ export const PhotoEssayHTML = () => {
 				format={{
 					display: ArticleDisplay.Immersive,
 					design: ArticleDesign.PhotoEssay,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 				padCaption={false}
 				credit="Credit text"
@@ -113,7 +113,7 @@ export const Padded = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Analysis,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				padCaption={true}
 				credit="Credit text"
@@ -134,7 +134,7 @@ export const WidthLimited = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Review,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				padCaption={false}
 				credit="Credit text"
@@ -155,7 +155,7 @@ export const Credited = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.MatchReport,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				padCaption={false}
 				credit="Credit text"
@@ -176,7 +176,7 @@ export const Overlaid = () => {
 				format={{
 					display: ArticleDisplay.Showcase,
 					design: ArticleDesign.Comment,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 				padCaption={false}
 				credit="Credit text"

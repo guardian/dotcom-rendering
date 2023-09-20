@@ -1,6 +1,14 @@
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
+import {
+	adaptive,
+	BUILD_VARIANT,
+	dcrJavascriptBundle,
+	ophanEsm,
+} from '../../scripts/webpack/bundles';
+import type { ServerSideTests, Switches } from '../types/config';
+import { makeMemoizedFunction } from './memoize';
 
 interface AssetHash {
 	[key: string]: string;
@@ -43,13 +51,14 @@ const isAssetHash = (manifest: unknown): manifest is AssetHash =>
 		([key, value]) => isString(key) && isString(value),
 	);
 
-const getManifest = (path: string): AssetHash => {
+const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	try {
 		const assetHash: unknown = JSON.parse(
 			readFileSync(resolve(__dirname, path), { encoding: 'utf-8' }),
 		);
-		if (!isAssetHash(assetHash))
+		if (!isAssetHash(assetHash)) {
 			throw new Error('Not a valid AssetHash type');
+		}
 
 		return assetHash;
 	} catch (e) {
@@ -57,24 +66,20 @@ const getManifest = (path: string): AssetHash => {
 		console.error('Some filename lookups will fail');
 		return {};
 	}
-};
+});
 
-type Build = 'apps' | 'modern' | 'variant' | 'legacy';
+export type Build =
+	| 'apps'
+	| 'web'
+	| 'web.variant'
+	| 'web.ophan-esm'
+	| 'web.scheduled'
+	| 'web.legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
-const getManifestPath = (build: Build): ManifestPath => {
-	switch (build) {
-		case 'apps':
-			return './manifest.apps.json';
-		case 'modern':
-			return './manifest.modern.json';
-		case 'variant':
-			return './manifest.variant.json';
-		case 'legacy':
-			return './manifest.legacy.json';
-	}
-};
+const getManifestPath = (build: Build): ManifestPath =>
+	`./manifest.${build}.json`;
 
 export const getPathFromManifest = (
 	build: Build,
@@ -110,28 +115,46 @@ export const getPathFromManifest = (
 const getScriptRegex = (build: Build) =>
 	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
-export const LEGACY_SCRIPT = getScriptRegex('legacy');
-export const MODERN_SCRIPT = getScriptRegex('modern');
-export const VARIANT_SCRIPT = getScriptRegex('variant');
+export const WEB = getScriptRegex('web');
+export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');
+export const WEB_LEGACY_SCRIPT = getScriptRegex('web.legacy');
+export const WEB_SCHEDULED_SCRIPT = getScriptRegex('web.scheduled');
 export const APPS_SCRIPT = getScriptRegex('apps');
 
-export const generateScriptTags = (
-	scripts: Array<string | undefined>,
-): string[] =>
+export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {
-		if (script.match(LEGACY_SCRIPT)) {
+		if (script.match(WEB_LEGACY_SCRIPT)) {
 			return `<script defer nomodule src="${script}"></script>`;
 		}
 		if (
-			script.match(MODERN_SCRIPT) ||
-			script.match(VARIANT_SCRIPT) ||
+			script.match(WEB) ||
+			script.match(WEB_VARIANT_SCRIPT) ||
 			script.match(APPS_SCRIPT)
 		) {
 			return `<script type="module" src="${script}"></script>`;
 		}
 
 		return [
-			'<!-- The following script does not vary between modern & legacy browsers -->',
+			'<!-- The following script does not vary between browsers that support modules and those that do not -->',
 			`<script defer src="${script}"></script>`,
 		].join('\n');
 	});
+
+export const getModulesBuild = ({
+	tests,
+	switches,
+}: {
+	tests: ServerSideTests;
+	switches: Switches;
+}): Exclude<Extract<Build, `web${string}`>, 'web.legacy'> => {
+	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
+		return 'web.variant';
+	}
+	if (tests[ophanEsm('Variant')] === 'variant') {
+		return 'web.ophan-esm';
+	}
+	if (switches.scheduler || tests[adaptive('Variant')] === 'variant') {
+		return 'web.scheduled';
+	}
+	return 'web';
+};

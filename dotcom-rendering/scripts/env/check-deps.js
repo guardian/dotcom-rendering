@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('node:fs');
 const lockfile = require('@yarnpkg/lockfile');
 const pkg = require('../../package.json');
 const { warn, log } = require('./log');
@@ -9,13 +9,13 @@ if (pkg.devDependencies) {
 	process.exit(1);
 }
 
-/** @type {{ object: import('@types/yarnpkg__lockfile').LockFileObject }}*/
 const { object: json } = lockfile.parse(
 	fs.readFileSync('../yarn.lock', 'utf8'),
 );
 
 const knownNonSemver = /** @type {const} */ ([
 	'https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0',
+	'npm:ophan-tracker-js@2.0.0-beta-5',
 ]);
 
 const mismatches = Object.entries(pkg.dependencies)

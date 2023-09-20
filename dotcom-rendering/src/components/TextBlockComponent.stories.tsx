@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { TextBlockComponent } from './TextBlockComponent';
 
 const html =
@@ -35,7 +35,7 @@ export const defaultStory = () => {
 			<TextBlockComponent
 				html={html}
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -53,7 +53,7 @@ export const DropCap = () => {
 				html={html}
 				forceDropCap={true}
 				format={{
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Immersive,
 				}}
@@ -71,7 +71,7 @@ export const QuotedDropCap = () => {
 				html={quotedHtml}
 				forceDropCap={false}
 				format={{
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 					design: ArticleDesign.Comment,
 					display: ArticleDisplay.Standard,
 				}}
@@ -89,7 +89,7 @@ export const ShortText = () => {
 				html={shortHtml}
 				forceDropCap={true}
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -107,7 +107,7 @@ export const NoTags = () => {
 				html={differentWrapperTags}
 				forceDropCap={true}
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -125,7 +125,7 @@ export const FeatureDropCap = () => {
 				html={html}
 				forceDropCap={false}
 				format={{
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 					design: ArticleDesign.Feature,
 					display: ArticleDisplay.Standard,
 				}}
@@ -143,7 +143,7 @@ export const AList = () => {
 				html={aListHtml}
 				forceDropCap={true}
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -161,7 +161,7 @@ export const BadMarkup = () => {
 				html={badMarkup}
 				forceDropCap={false}
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -179,7 +179,7 @@ export const SubSupscript = () => {
 				html="<p><strong>P<sub>kj</sub> = (1-r<sub>j</sub>)C<sup>kj</sup> + r<sub>j</sub>(C<sub>kj</sub> + q<sub>kj</sub> - p<sub>kj</sub>)</strong></p><p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>"
 				forceDropCap={false}
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -196,7 +196,7 @@ export const dotStory = () => {
 			<TextBlockComponent
 				html={htmlWithDot}
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
@@ -213,7 +213,7 @@ export const longWordStory = () => {
 			<TextBlockComponent
 				html={longWords}
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}

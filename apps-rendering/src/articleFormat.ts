@@ -4,7 +4,7 @@
 
 // ----- Imports ----- //
 
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import type { ArticleFormat, ArticleTheme, Pillar } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -28,7 +28,7 @@ import { Optional } from 'optional';
  * @example
  * const maybePillar = getPillarFromId("pillar/arts") // Some<ArticlePillar.Culture>
  */
-const getPillarFromId = (pillarId: string): Optional<ArticlePillar> => {
+const getPillarFromId = (pillarId: string): Optional<Pillar> => {
 	switch (pillarId) {
 		case 'pillar/opinion':
 			return Optional.some(ArticlePillar.Opinion);
@@ -58,7 +58,7 @@ const getPillarFromId = (pillarId: string): Optional<ArticlePillar> => {
  * const pillar = getPillarOrElseNews("pillar/arts") // ArticlePillar.Culture
  * const pillar = getPillarOrElseNews("invalid id") // ArticlePillar.News
  */
-const getPillarOrElseNews = (pillarId: string): ArticlePillar =>
+const getPillarOrElseNews = (pillarId: string): Pillar =>
 	getPillarFromId(pillarId).withDefault(ArticlePillar.News);
 
 /**
@@ -72,7 +72,7 @@ const getPillarOrElseNews = (pillarId: string): ArticlePillar =>
  * @example
  * const pillarString = pillarToId(ArticlePillar.Culture) // "pillar/arts"
  */
-const pillarToId = (pillar: ArticlePillar): string => {
+const pillarToId = (pillar: Pillar): string => {
 	switch (pillar) {
 		case ArticlePillar.Opinion:
 			return 'pillar/opinion';
@@ -103,7 +103,7 @@ const pillarToId = (pillar: ArticlePillar): string => {
  * const themeTwo: ArticleTheme = ArticleSpecial.SpecialReport
  * const pillar: ArticlePillar = themeToPillar(themeTwo) // ArticlePillar.News
  */
-const themeToPillar = (theme: ArticleTheme): ArticlePillar => {
+const themeToPillar = (theme: ArticleTheme): Pillar => {
 	switch (theme) {
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.SpecialReportAlt:
@@ -175,6 +175,8 @@ const designToString = (design: ArticleDesign): string => {
 			return 'Timeline';
 		case ArticleDesign.Profile:
 			return 'Profile';
+		case ArticleDesign.Picture:
+			return 'Picture';
 	}
 };
 

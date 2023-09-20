@@ -9,7 +9,7 @@ import { Optional } from 'optional';
  * native APIs are not available. The call will hang and
  * eventually throw a timeout error.
  *
- * @returns The version of Briget the client is running, or
+ * @returns The version of Bridget the client is running, or
  * None if the native API does not return a value.
  */
 export const getBridgetVersion = async (): Promise<Optional<string>> => {

@@ -1,12 +1,10 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { useEffect } from 'react';
+import { ArticleDesign, ArticleDisplay, Pillar, storage } from '@guardian/libs';
 import { doStorybookHydration } from '../client/islands/doStorybookHydration';
+import { useOnce } from '../lib/useOnce';
 import { DiscussionLayout } from './DiscussionLayout';
 
 const HydratedLayout = ({ children }: { children: React.ReactNode }) => {
-	useEffect(() => {
-		doStorybookHydration();
-	});
+	useOnce(doStorybookHydration, []);
 	return <>{children}</>;
 };
 
@@ -20,6 +18,10 @@ export default {
 	},
 };
 export const Basic = () => {
+	// Aiming to stop flakiness in Chromatic visual diffs by explicitly
+	// setting the desired comments sorting order in local storage
+	storage.local.set('gu.prefs.discussion.order', 'newest');
+
 	return (
 		<HydratedLayout>
 			<DiscussionLayout
@@ -28,7 +30,7 @@ export const Basic = () => {
 				format={{
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				discussionD2Uid="zHoBy6HNKsk"
 				discussionApiClientHeader="nextgen"

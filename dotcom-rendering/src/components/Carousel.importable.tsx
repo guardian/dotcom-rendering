@@ -17,13 +17,13 @@ import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
 import type { Branding } from '../types/branding';
-import type { DCRContainerPalette } from '../types/front';
+import type { DCRContainerPalette, DCRContainerType } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
-import { FetchCommentCounts } from './FetchCommentCounts.importable';
+import type { Loading } from './CardPicture';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
 
@@ -34,6 +34,7 @@ type Props = {
 	url?: string;
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
+	discussionApiUrl: string;
 };
 
 type ArticleProps = Props & {
@@ -42,7 +43,7 @@ type ArticleProps = Props & {
 
 type FrontProps = Props & {
 	palette: DCRContainerPalette;
-	collectionType?: string;
+	containerType?: DCRContainerType;
 	hasPageSkin?: boolean;
 };
 
@@ -93,8 +94,11 @@ const wrapperStyle = (length: number) => css`
 `;
 
 // For desktop and above, are we at the last card. Is one less than the dots style equivalent
-const isLastCardShowing = (index: number, totalStories: number) =>
-	index >= totalStories - 4;
+const isLastCardShowing = (
+	index: number,
+	totalStories: number,
+	totalCardsShowing: number,
+) => index >= totalStories - totalCardsShowing;
 
 const containerMargins = css`
 	margin-top: 6px;
@@ -111,6 +115,11 @@ const containerMargins = css`
 	}
 `;
 
+const videoContainerMargins = css`
+	margin-bottom: 0;
+	min-height: 0;
+`;
+
 const containerMarginsFromLeftCol = css`
 	${from.leftCol} {
 		margin-left: -1px;
@@ -124,6 +133,10 @@ const containerStyles = css`
 	flex-direction: column;
 	position: relative;
 	overflow: hidden; /* Needed for scrolling to work */
+`;
+
+const videoContainerHeight = css`
+	min-height: 0;
 `;
 
 const carouselStyle = css`
@@ -182,20 +195,31 @@ const activeDotStyles = (activeDotColour: string) => css`
 	}
 `;
 
-const adjustNumberOfDotsStyle = (index: number, totalStories: number) => {
-	return css`
-		${from.phablet} {
-			display: ${index >= totalStories - 1 ? 'none' : 'auto'};
-		}
+const adjustNumberOfDotsStyle = (
+	index: number,
+	totalStories: number,
+	containerType?: DCRContainerType,
+) => {
+	switch (containerType) {
+		case 'fixed/video':
+			return css`
+				display: ${index >= totalStories ? 'none' : 'auto'};
+			`;
+		default:
+			return css`
+				${from.phablet} {
+					display: ${index >= totalStories - 1 ? 'none' : 'auto'};
+				}
 
-		${from.tablet} {
-			display: ${index >= totalStories - 2 ? 'none' : 'auto'};
-		}
+				${from.tablet} {
+					display: ${index >= totalStories - 2 ? 'none' : 'auto'};
+				}
 
-		${from.desktop} {
-			display: ${index >= totalStories - 3 ? 'none' : 'auto'};
-		}
-	`;
+				${from.desktop} {
+					display: ${index >= totalStories - 3 ? 'none' : 'auto'};
+				}
+			`;
+	}
 };
 
 // Not used for buttons above carousel
@@ -312,20 +336,31 @@ const prevButtonStyle = (
 const nextButtonStyle = (
 	index: number,
 	totalStories: number,
+	totalCardsShowing: number,
 	arrowColour?: string,
 	arrowBackgroundColour?: string,
 	arrowBackgroundHoverColour?: string,
 ) => css`
 	padding-left: 5px; /* Fix centering of SVG*/
 	margin-left: 10px;
-	background-color: ${!isLastCardShowing(index, totalStories)
+	background-color: ${!isLastCardShowing(
+		index,
+		totalStories,
+		totalCardsShowing,
+	)
 		? arrowBackgroundColour ?? neutral[0]
 		: neutral[46]};
-	cursor: ${!isLastCardShowing(index, totalStories) ? 'pointer' : 'default'};
+	cursor: ${!isLastCardShowing(index, totalStories, totalCardsShowing)
+		? 'pointer'
+		: 'default'};
 
 	&:hover,
 	&:focus {
-		background-color: ${!isLastCardShowing(index, totalStories)
+		background-color: ${!isLastCardShowing(
+			index,
+			totalStories,
+			totalCardsShowing,
+		)
 			? arrowBackgroundHoverColour ?? brandAlt[400]
 			: neutral[46]};
 
@@ -379,17 +414,23 @@ const Title = ({
 	titleColour,
 	titleHighlightColour,
 	isCuratedContent,
+	url,
 }: {
 	title: string;
 	titleColour: string;
 	titleHighlightColour: string;
 	isCuratedContent?: boolean;
+	url?: string;
 }) =>
-	title === 'Videos' ? (
+	url ? (
 		<a
 			css={[linkStyles]}
-			href="https://www.theguardian.com/video"
-			data-link-name="video-container-title Videos"
+			href={url}
+			data-link-name={
+				title === 'Videos'
+					? 'video-container-title Videos'
+					: 'section heading'
+			}
 		>
 			<h2 css={headerStyles}>
 				<span
@@ -420,22 +461,24 @@ const Title = ({
 			</span>
 		</h2>
 	);
-
 type CarouselCardProps = {
 	isFirst: boolean;
 	format: ArticleFormat;
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
+	imageLoading: Loading;
 	kickerText?: string;
 	imageUrl?: string;
 	dataLinkName?: string;
+	discussionApiUrl: string;
 	discussionId?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
 	mainMedia?: MainMedia;
 	verticalDividerColour?: string;
 	onwardsSource?: string;
+	containerType?: DCRContainerType;
 };
 
 const CarouselCard = ({
@@ -452,38 +495,48 @@ const CarouselCard = ({
 	mainMedia,
 	verticalDividerColour,
 	onwardsSource,
-}: CarouselCardProps) => (
-	<LI
-		percentage="25%"
-		showDivider={!isFirst}
-		padSides={true}
-		padSidesOnMobile={true}
-		snapAlignStart={true}
-		verticalDividerColour={verticalDividerColour}
-	>
-		<Card
-			linkTo={linkTo}
-			format={format}
-			headlineText={headlineText}
-			webPublicationDate={webPublicationDate}
-			kickerText={kickerText}
-			imageUrl={imageUrl}
-			imageSize={'small'}
-			showClock={true}
-			showAge={true}
-			imagePositionOnMobile="top"
-			minWidthInPixels={220}
-			showQuotedHeadline={format.design === ArticleDesign.Comment}
-			dataLinkName={dataLinkName}
-			discussionId={discussionId}
-			branding={branding}
-			isExternalLink={false}
-			mainMedia={mainMedia}
-			videoSize="too small to play: 479px or less"
-			onwardsSource={onwardsSource}
-		/>
-	</LI>
-);
+	containerType,
+	imageLoading,
+	discussionApiUrl,
+}: CarouselCardProps) => {
+	const isVideoContainer = containerType === 'fixed/video';
+	return (
+		<LI
+			percentage="25%"
+			showDivider={!isFirst && !isVideoContainer}
+			padSides={true}
+			padSidesOnMobile={true}
+			snapAlignStart={true}
+			verticalDividerColour={verticalDividerColour}
+		>
+			<Card
+				linkTo={linkTo}
+				format={format}
+				headlineText={headlineText}
+				webPublicationDate={webPublicationDate}
+				kickerText={kickerText}
+				imageUrl={imageUrl}
+				imageSize={'small'}
+				showClock={true}
+				showAge={true}
+				imagePositionOnMobile="top"
+				pauseOffscreenVideo={isVideoContainer}
+				showQuotedHeadline={format.design === ArticleDesign.Comment}
+				dataLinkName={dataLinkName}
+				discussionId={discussionId}
+				branding={branding}
+				isExternalLink={false}
+				mainMedia={mainMedia}
+				minWidthInPixels={220}
+				isPlayableMediaCard={isVideoContainer}
+				onwardsSource={onwardsSource}
+				containerType={containerType}
+				imageLoading={imageLoading}
+				discussionApiUrl={discussionApiUrl}
+			/>
+		</LI>
+	);
+};
 
 type HeaderAndNavProps = {
 	heading: string;
@@ -494,6 +547,8 @@ type HeaderAndNavProps = {
 	index: number;
 	goToIndex: (newIndex: number) => void;
 	isCuratedContent?: boolean;
+	containerType?: DCRContainerType;
+	url?: string;
 };
 
 const HeaderAndNav = ({
@@ -505,34 +560,43 @@ const HeaderAndNav = ({
 	index,
 	goToIndex,
 	isCuratedContent,
-}: HeaderAndNavProps) => (
-	<div>
-		<Title
-			title={heading}
-			titleColour={titleColour}
-			titleHighlightColour={titleHighlightColour}
-			isCuratedContent={isCuratedContent}
-		/>
-		<div css={dotsStyle}>
-			{trails.map((_, i) => (
-				<span
-					onClick={() => goToIndex(i)}
-					// This button is not particularly useful for keyboard users as the stories
-					// are tabb-able themselves so we hide them with aria and make them
-					// not available to keyboard
-					aria-hidden="true"
-					key={`dot-${i}`}
-					css={[
-						dotStyle,
-						i === index && activeDotStyles(activeDotColour),
-						adjustNumberOfDotsStyle(i, trails.length),
-					]}
-					data-link-name={`carousel-small-nav-dot-${i}`}
-				/>
-			))}
+	containerType,
+	url,
+}: HeaderAndNavProps) => {
+	return (
+		<div>
+			<Title
+				title={heading}
+				titleColour={titleColour}
+				titleHighlightColour={titleHighlightColour}
+				isCuratedContent={isCuratedContent}
+				url={url}
+			/>
+			<div css={dotsStyle}>
+				{trails.map((_, i) => (
+					<span
+						onClick={() => goToIndex(i)}
+						// This button is not particularly useful for keyboard users as the stories
+						// are tabb-able themselves so we hide them with aria and make them
+						// not available to keyboard
+						aria-hidden="true"
+						key={`dot-${i}`}
+						css={[
+							dotStyle,
+							i === index && activeDotStyles(activeDotColour),
+							adjustNumberOfDotsStyle(
+								i,
+								trails.length,
+								containerType,
+							),
+						]}
+						data-link-name={`carousel-small-nav-dot-${i}`}
+					/>
+				))}
+			</div>
 		</div>
-	</div>
-);
+	);
+};
 
 const Header = ({
 	heading,
@@ -544,8 +608,9 @@ const Header = ({
 	next,
 	arrowName,
 	isCuratedContent,
-	isVideoContainer,
+	containerType,
 	hasPageSkin,
+	url,
 }: {
 	heading: string;
 	trails: TrailType[];
@@ -556,9 +621,11 @@ const Header = ({
 	next: () => void;
 	arrowName: string;
 	isCuratedContent: boolean;
-	isVideoContainer: boolean;
+	containerType?: DCRContainerType;
 	hasPageSkin: boolean;
+	url?: string;
 }) => {
+	const isVideoContainer = containerType === 'fixed/video';
 	const header = (
 		<div css={headerRowStyles}>
 			<HeaderAndNav
@@ -570,6 +637,8 @@ const Header = ({
 				index={index}
 				isCuratedContent={isCuratedContent}
 				goToIndex={goToIndex}
+				containerType={containerType}
+				url={url}
 			/>
 			<Hide when="below" breakpoint="desktop">
 				<button
@@ -610,6 +679,7 @@ const Header = ({
 						nextButtonStyle(
 							index,
 							trails.length,
+							isVideoContainer ? 1 : 4,
 							carouselColours.arrowColour,
 							carouselColours.arrowBackgroundColour,
 							carouselColours.arrowBackgroundHoverColour,
@@ -715,6 +785,7 @@ const InlineChevrons = ({
 					nextButtonStyle(
 						index,
 						trails.length,
+						isVideoContainer ? 1 : 4,
 						carouselColours.arrowColour,
 						carouselColours.arrowBackgroundColour,
 						carouselColours.arrowBackgroundHoverColour,
@@ -772,8 +843,6 @@ const decideCarouselColours = (
 };
 
 /**
- * # Carousel
- *
  * A carousel of cards, mainly used in onward journeys,
  * at the bottom of articles
  *
@@ -790,6 +859,7 @@ export const Carousel = ({
 	trails,
 	onwardsSource,
 	leftColSize,
+	discussionApiUrl,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselColours = decideCarouselColours(props);
@@ -802,9 +872,10 @@ export const Carousel = ({
 	const arrowName = 'carousel-small-arrow';
 
 	const isCuratedContent = onwardsSource === 'curated-content';
+	const containerType =
+		'containerType' in props ? props.containerType : undefined;
 
-	const isVideoContainer =
-		'collectionType' in props && props.collectionType === 'fixed/video';
+	const isVideoContainer = containerType === 'fixed/video';
 
 	const hasPageSkin = 'hasPageSkin' in props && (props.hasPageSkin ?? false);
 
@@ -911,7 +982,6 @@ export const Carousel = ({
 			data-link-name={formatAttrString(heading)}
 			data-component={isVideoContainer ? 'video-playlist' : undefined}
 		>
-			<FetchCommentCounts />
 			<LeftColumn
 				borderType="partial"
 				size={leftColSize}
@@ -927,6 +997,7 @@ export const Carousel = ({
 					index={index}
 					isCuratedContent={isCuratedContent}
 					goToIndex={goToIndex}
+					url={props.url}
 				/>
 			</LeftColumn>
 			<InlineChevrons
@@ -945,6 +1016,7 @@ export const Carousel = ({
 					containerStyles,
 					containerMargins,
 					!hasPageSkin && containerMarginsFromLeftCol,
+					isVideoContainer && videoContainerMargins,
 				]}
 				data-component={onwardsSource}
 				data-link={formatAttrString(heading)}
@@ -959,11 +1031,15 @@ export const Carousel = ({
 					next={next}
 					arrowName={arrowName}
 					isCuratedContent={isCuratedContent}
-					isVideoContainer={isVideoContainer}
+					containerType={containerType}
 					hasPageSkin={hasPageSkin}
+					url={props.url}
 				/>
 				<ul
-					css={carouselStyle}
+					css={[
+						carouselStyle,
+						isVideoContainer && videoContainerHeight,
+					]}
 					ref={carouselRef}
 					data-component={`carousel-small | maxIndex-${maxIndex}`}
 				>
@@ -985,6 +1061,8 @@ export const Carousel = ({
 						if (!webPublicationDate) return null;
 
 						const imageUrl = image && getSourceImageUrl(image);
+
+						const imageLoading = i > 3 ? 'lazy' : 'eager';
 
 						return (
 							<CarouselCard
@@ -1008,6 +1086,9 @@ export const Carousel = ({
 									carouselColours.borderColour
 								}
 								onwardsSource={onwardsSource}
+								containerType={containerType}
+								imageLoading={imageLoading}
+								discussionApiUrl={discussionApiUrl}
 							/>
 						);
 					})}

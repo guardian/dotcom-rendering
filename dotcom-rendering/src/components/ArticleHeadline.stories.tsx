@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { news } from '@guardian/source-foundations';
 import { ArticleContainer } from './ArticleContainer';
@@ -24,7 +24,7 @@ export const ArticleStory = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -50,7 +50,7 @@ export const Feature = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Feature,
-		theme: ArticlePillar.Lifestyle,
+		theme: Pillar.Lifestyle,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -76,7 +76,7 @@ export const ShowcaseInterview = () => {
 	const format = {
 		display: ArticleDisplay.Showcase,
 		design: ArticleDesign.Interview,
-		theme: ArticlePillar.Culture,
+		theme: Pillar.Culture,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -120,7 +120,7 @@ export const ShowcaseInterviewNobyline = () => {
 	const format = {
 		display: ArticleDisplay.Showcase,
 		design: ArticleDesign.Interview,
-		theme: ArticlePillar.Culture,
+		theme: Pillar.Culture,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -164,7 +164,7 @@ export const Interview = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Interview,
-		theme: ArticlePillar.Culture,
+		theme: Pillar.Culture,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -249,7 +249,7 @@ export const InterviewNoByline = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Interview,
-		theme: ArticlePillar.Culture,
+		theme: Pillar.Culture,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -291,7 +291,7 @@ export const Comment = () => {
 	const format = {
 		display: ArticleDisplay.Showcase,
 		design: ArticleDesign.Comment,
-		theme: ArticlePillar.Opinion,
+		theme: Pillar.Opinion,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -315,11 +315,11 @@ Comment.storyName = 'Comment';
 
 export const Analysis = () => {
 	const themes: [string, ArticleTheme][] = [
-		['News', ArticlePillar.News],
-		['Opinion', ArticlePillar.Opinion],
-		['Sport', ArticlePillar.Sport],
-		['Culture', ArticlePillar.Culture],
-		['Lifestyle', ArticlePillar.Lifestyle],
+		['News', Pillar.News],
+		['Opinion', Pillar.Opinion],
+		['Sport', Pillar.Sport],
+		['Culture', Pillar.Culture],
+		['Lifestyle', Pillar.Lifestyle],
 	];
 	const format = (theme: ArticleTheme): ArticleFormat => ({
 		display: ArticleDisplay.Standard,
@@ -358,7 +358,7 @@ export const Gallery = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Gallery,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -384,7 +384,7 @@ export const Review = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Review,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -410,7 +410,7 @@ export const PhotoEssay = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.PhotoEssay,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -436,7 +436,7 @@ export const Explainer = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Explainer,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -462,7 +462,7 @@ export const Quiz = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Quiz,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -488,7 +488,7 @@ export const Recipe = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Recipe,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -514,7 +514,7 @@ export const Immersive = () => {
 	const format = {
 		display: ArticleDisplay.Immersive,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -540,7 +540,7 @@ export const ImmersiveNoMainMedia = () => {
 	const format = {
 		display: ArticleDisplay.Immersive,
 		design: ArticleDesign.PrintShop,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -566,7 +566,7 @@ export const ImmersiveComment = () => {
 	const format = {
 		display: ArticleDisplay.Immersive,
 		design: ArticleDesign.Comment,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section
@@ -597,7 +597,7 @@ export const Editorial = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Editorial,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -623,7 +623,7 @@ export const MatchReport = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.MatchReport,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -701,7 +701,7 @@ export const LiveBlog = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.LiveBlog,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -740,7 +740,7 @@ export const DeadBlog = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.DeadBlog,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -766,7 +766,7 @@ export const ReviewWithoutStars = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Review,
-		theme: ArticlePillar.Culture,
+		theme: Pillar.Culture,
 	};
 	return (
 		<Section fullWidth={true}>
@@ -807,7 +807,7 @@ export const AgeWarning = () => {
 	const format = (design: ArticleDesign): ArticleFormat => ({
 		display: ArticleDisplay.Standard,
 		design,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	});
 
 	return (

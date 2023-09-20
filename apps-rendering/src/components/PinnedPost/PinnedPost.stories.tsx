@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 import { css } from '@emotion/react';
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat, Pillar } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import { pinnedBlock } from 'fixtures/item';
@@ -10,7 +10,7 @@ import PinnedPost from './';
 
 // ----- Functions ----- //
 
-const getFormat = (pillar: ArticlePillar): ArticleFormat => {
+const getFormat = (pillar: Pillar): ArticleFormat => {
 	return {
 		design: ArticleDesign.LiveBlog,
 		display: ArticleDisplay.Standard,
@@ -38,7 +38,7 @@ const Wrapper: FC<{ children: React.ReactNode }> = ({
 
 // ----- Stories ----- //
 
-const Default: FC<{ pillar: ArticlePillar }> = ({
+const Default: FC<{ pillar: Pillar }> = ({
 	pillar = ArticlePillar.News,
 }) => (
 	<Wrapper>

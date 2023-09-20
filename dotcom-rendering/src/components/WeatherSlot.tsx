@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, keyframes } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
+import { isString } from '@guardian/libs';
 import {
 	from,
 	palette,
@@ -8,9 +8,9 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { isNull } from 'lodash';
 import { lazy, Suspense } from 'react';
-import type { WeatherData } from './WeatherData.importable';
+import { type EditionId, getEditionFromId } from '../lib/edition';
+import type { WeatherData } from './WeatherWrapper.importable';
 
 interface IconProps {
 	size?: number;
@@ -19,15 +19,16 @@ interface IconProps {
 const formatTemperature = (value: number, unit: string) =>
 	`${value}°${unit.toLocaleUpperCase()}`;
 
-const formatTime = (dateTime: string, isUS: boolean) =>
-	isUS
-		? new Date(dateTime).toLocaleTimeString('en-US', {
-				hour: 'numeric',
-		  })
-		: new Date(dateTime).toLocaleTimeString(undefined, {
-				hour: '2-digit',
-				minute: '2-digit',
-		  });
+const formatTime = (dateTime: string, edition: EditionId) =>
+	new Date(dateTime).toLocaleTimeString(getEditionFromId(edition).locale, {
+		hour: 'numeric',
+		// US and AU dates include AM/PM markers that cause the timestamp to
+		// wrap onto the next line, which we don't want for the design.
+		// Given that the times are always on the hour, i.e. the minutes are
+		// always "00", we can choose to show the hour only without losing
+		// information. This shortens the timestamp and keeps it on one line.
+		minute: edition === 'US' || edition === 'AU' ? undefined : 'numeric',
+	});
 
 const visuallyHiddenCSS = css`
 	${visuallyHidden}
@@ -133,9 +134,8 @@ const LoadingIcon = () => (
 );
 
 export type WeatherSlotProps = WeatherData & {
-	isUS: boolean;
+	edition: EditionId;
 	css?: SerializedStyles;
-	dateTime?: string;
 };
 
 export const WeatherSlot = ({
@@ -143,10 +143,10 @@ export const WeatherSlot = ({
 	temperature,
 	dateTime,
 	description,
-	isUS,
+	edition,
 	...props
 }: WeatherSlotProps) => {
-	const isNow = isUndefined(dateTime) || isNull(dateTime);
+	const isNow = !isString(dateTime);
 
 	const Icon = lazy(() =>
 		import(`../static/icons/weather/weather-${icon}.svg`).then(
@@ -183,10 +183,10 @@ export const WeatherSlot = ({
 						<span css={visuallyHiddenCSS}>is</span>
 						<span css={tempCSS(isNow)} className="temp">
 							{formatTemperature(
-								isUS
+								edition === 'US'
 									? temperature.imperial
 									: temperature.metric,
-								isUS ? 'F' : 'C',
+								edition === 'US' ? 'F' : 'C',
 							)}
 						</span>
 						<span css={visuallyHiddenCSS}>
@@ -198,15 +198,15 @@ export const WeatherSlot = ({
 				<div css={flexRowBelowLeftCol}>
 					<div css={flexColumnBelowLeftCol}>
 						<time css={timeCSS} dateTime={dateTime}>
-							{formatTime(dateTime, isUS)}
+							{formatTime(dateTime, edition)}
 						</time>
 						<span css={visuallyHiddenCSS}>is</span>
 						<span css={tempCSS(isNow)} className="temp">
 							{formatTemperature(
-								isUS
+								edition === 'US'
 									? temperature.imperial
 									: temperature.metric,
-								isUS ? 'F' : 'C',
+								edition === 'US' ? 'F' : 'C',
 							)}
 						</span>
 						<span css={visuallyHiddenCSS}>

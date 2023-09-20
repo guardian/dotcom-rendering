@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticlePillar } from '@guardian/libs';
+import type { Pillar } from '@guardian/libs';
+import { isNonNullable } from '@guardian/libs';
 import {
 	between,
 	brand,
@@ -24,6 +25,7 @@ import type { FooterType } from '../types/footer';
 import { BackToTop } from './BackToTop';
 import { Island } from './Island';
 import { Pillars } from './Pillars';
+import { PrivacySettingsLink } from './PrivacySettingsLink.importable';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 // CSS vars
@@ -239,18 +241,29 @@ const FooterLinks = ({
 	contributionsServiceUrl: string;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
-		const linkList = linkGroup.map(
-			({ url, extraClasses, dataLinkName, text }) => (
-				<li key={`${url}`}>
-					<a
-						css={[footerLink, extraClasses]}
-						href={url}
-						data-link-name={dataLinkName}
-					>
-						{text}
-					</a>
-				</li>
-			),
+		const linkList = linkGroup.flatMap(
+			({ url, extraClasses, dataLinkName, text }) =>
+				[
+					dataLinkName === 'privacy' ? (
+						<li key="privacy-settings-link">
+							<Island>
+								<PrivacySettingsLink
+									extraClasses={extraClasses}
+								/>
+							</Island>
+						</li>
+					) : null,
+					<li key={url}>
+						<a
+							className={extraClasses}
+							css={footerLink}
+							href={url}
+							data-link-name={dataLinkName}
+						>
+							{text}
+						</a>
+					</li>,
+				].filter(isNonNullable),
 		);
 		const key = linkGroup.reduce((acc, { text }) => `${acc}-${text}`, '');
 		return <ul key={key}>{linkList}</ul>;
@@ -318,7 +331,7 @@ export const Footer = ({
 	contributionsServiceUrl,
 }: {
 	pillars: PillarLinkType[];
-	selectedPillar?: ArticlePillar;
+	selectedPillar?: Pillar;
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
 	editionId: EditionId;

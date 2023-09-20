@@ -16,6 +16,7 @@ export const editionList = [
 		longTitle: 'UK edition',
 		title: 'UK edition',
 		locale: 'en-gb',
+		timeZone: 'Europe/London',
 	},
 	{
 		url: '/preference/edition/us',
@@ -23,6 +24,7 @@ export const editionList = [
 		longTitle: 'US edition',
 		title: 'US edition',
 		locale: 'en-us',
+		timeZone: 'America/New_York',
 	},
 	{
 		url: '/preference/edition/au',
@@ -30,6 +32,7 @@ export const editionList = [
 		longTitle: 'Australia edition',
 		title: 'AU edition',
 		locale: 'en-au',
+		timeZone: 'Australia/Sydney',
 	},
 	{
 		url: '/preference/edition/int',
@@ -37,6 +40,7 @@ export const editionList = [
 		longTitle: 'International edition',
 		title: 'International edition',
 		locale: 'en-gb',
+		timeZone: 'Europe/London',
 	},
 	{
 		url: '/preference/edition/eur',
@@ -44,6 +48,7 @@ export const editionList = [
 		longTitle: 'Europe edition',
 		title: 'Europe edition',
 		locale: 'en-gb',
+		timeZone: 'Europe/Paris',
 	},
 ] as const;
 

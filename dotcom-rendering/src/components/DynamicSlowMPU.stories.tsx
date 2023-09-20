@@ -1,4 +1,5 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { DynamicSlowMPU } from './DynamicSlowMPU';
 import { FrontSection } from './FrontSection';
@@ -21,7 +22,7 @@ const bigs = trails.slice(0, 3);
 const standards = trails.slice(3);
 
 export const NoBigs = () => (
-	<FrontSection title="Dynamic Slow MPU">
+	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -33,13 +34,14 @@ export const NoBigs = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
 NoBigs.storyName = 'with no big cards, only standard';
 
 export const OneBig = () => (
-	<FrontSection title="Dynamic Slow MPU">
+	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -51,13 +53,14 @@ export const OneBig = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
 OneBig.storyName = 'with just one big';
 
 export const TwoBigs = () => (
-	<FrontSection title="Dynamic Slow MPU">
+	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -69,13 +72,14 @@ export const TwoBigs = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
 TwoBigs.storyName = 'with two bigs';
 
 export const FirstBigBoosted = () => (
-	<FrontSection title="Dynamic Slow MPU">
+	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -91,13 +95,14 @@ export const FirstBigBoosted = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
 FirstBigBoosted.storyName = 'with the first of two bigs boosted';
 
 export const SecondBigBoosted = () => (
-	<FrontSection title="Dynamic Slow MPU">
+	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -113,13 +118,14 @@ export const SecondBigBoosted = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
 SecondBigBoosted.storyName = 'with the second of two bigs boosted';
 
 export const ThreeBigs = () => (
-	<FrontSection title="Dynamic Slow MPU">
+	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -131,13 +137,14 @@ export const ThreeBigs = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
 ThreeBigs.storyName = 'with three bigs';
 
 export const AllBigs = () => (
-	<FrontSection title="Dynamic Slow MPU">
+	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -149,13 +156,14 @@ export const AllBigs = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
 AllBigs.storyName = 'with lots of bigs and no standards';
 
 export const AllBigsNoMPU = () => (
-	<FrontSection title="DynamicSlowMPU">
+	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -167,13 +175,14 @@ export const AllBigsNoMPU = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={false}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
 AllBigsNoMPU.storyName = 'Ad-free with lots of bigs';
 
 export const TwoBigsThreeStandardsNoMPU = () => (
-	<FrontSection title="DynamicSlowMPU">
+	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -185,13 +194,14 @@ export const TwoBigsThreeStandardsNoMPU = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={false}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
 TwoBigsThreeStandardsNoMPU.storyName = 'Ad-free with 2 bigs & 3 standards';
 
 export const NoBigsTwoStandardsNoMPU = () => (
-	<FrontSection title="DynamicSlowMPU">
+	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -203,13 +213,14 @@ export const NoBigsTwoStandardsNoMPU = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={false}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
 NoBigsTwoStandardsNoMPU.storyName = 'Ad-free with 0 bigs & 2 standards';
 
 export const NoBigsFiveStandardsNoMPU = () => (
-	<FrontSection title="DynamicSlowMPU">
+	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -221,6 +232,7 @@ export const NoBigsFiveStandardsNoMPU = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={false}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );

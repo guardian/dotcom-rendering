@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { MatchTabs } from './MatchTabs';
 
 export default {
@@ -14,7 +14,7 @@ export const BothURLs = () => {
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
-				theme: ArticlePillar.Sport,
+				theme: Pillar.Sport,
 			}}
 		/>
 	);
@@ -29,7 +29,7 @@ export const OnReportPage = () => {
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
-				theme: ArticlePillar.Sport,
+				theme: Pillar.Sport,
 			}}
 		/>
 	);
@@ -44,7 +44,7 @@ export const OnBlogPage = () => {
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
-				theme: ArticlePillar.Sport,
+				theme: Pillar.Sport,
 			}}
 		/>
 	);

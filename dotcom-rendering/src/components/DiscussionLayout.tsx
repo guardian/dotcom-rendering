@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
-import { AdSlot, labelStyles } from './AdSlot';
+import { AdSlot, labelStyles } from './AdSlot.web';
 import { DiscussionContainer } from './DiscussionContainer.importable';
 import { DiscussionMeta } from './DiscussionMeta.importable';
 import { Flex } from './Flex';

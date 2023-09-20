@@ -22,7 +22,7 @@ import {
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
 import { Footer } from '../components/Footer';
@@ -196,7 +196,8 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	} = article;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
+		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
@@ -515,6 +516,9 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
 							/>
 						</Island>
 					</Section>
@@ -540,6 +544,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						pillar={format.theme}
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
+						discussionApiUrl={article.config.discussionApiUrl}
 					/>
 				</Island>
 			</main>

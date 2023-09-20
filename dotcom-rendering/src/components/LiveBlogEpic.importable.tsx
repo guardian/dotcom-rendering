@@ -233,6 +233,14 @@ function insertAfter(referenceNode: HTMLElement, newNode: Element) {
  * 2. Fetch - POST the payload to the contributions endpoint
  * 3. Render - Take the url, props and name data we got in response to our fetch and dynamically import
  *    and render the Epic component using it
+ *
+ * ## Why does this need to be an Island?
+ *
+ * All behaviour is client-side.
+ *
+ * ---
+ *
+ * (No visual story exist)
  */
 export const LiveBlogEpic = ({
 	sectionId,

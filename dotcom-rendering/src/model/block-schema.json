@@ -97,6 +97,9 @@
                     "$ref": "#/definitions/CalloutBlockElementV2"
                 },
                 {
+                    "$ref": "#/definitions/CartoonBlockElement"
+                },
+                {
                     "$ref": "#/definitions/ChartAtomBlockElement"
                 },
                 {
@@ -164,6 +167,9 @@
                 },
                 {
                     "$ref": "#/definitions/NewsletterSignupBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/AdPlaceholderBlockElement"
                 },
                 {
                     "$ref": "#/definitions/NumberedTitleBlockElement"
@@ -844,6 +850,108 @@
                 "value"
             ]
         },
+        "CartoonBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.CartoonBlockElement"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
+                "variants": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "viewportSize": {
+                                "enum": [
+                                    "large",
+                                    "small"
+                                ],
+                                "type": "string"
+                            },
+                            "images": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/Image"
+                                }
+                            }
+                        },
+                        "required": [
+                            "images",
+                            "viewportSize"
+                        ]
+                    }
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "displayCredit": {
+                    "type": "boolean"
+                },
+                "alt": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "role",
+                "variants"
+            ]
+        },
+        "Image": {
+            "type": "object",
+            "properties": {
+                "index": {
+                    "type": "number"
+                },
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "height": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "string"
+                        },
+                        "isMaster": {
+                            "type": "string"
+                        },
+                        "source": {
+                            "type": "string"
+                        },
+                        "caption": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
+                },
+                "mediaType": {
+                    "type": "string"
+                },
+                "mimeType": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "fields",
+                "index",
+                "mediaType",
+                "mimeType",
+                "url"
+            ]
+        },
         "ChartAtomBlockElement": {
             "type": "object",
             "properties": {
@@ -1197,10 +1305,7 @@
             "required": [
                 "_type",
                 "elementId",
-                "embedUrl",
-                "height",
-                "isThirdPartyTracking",
-                "width"
+                "isThirdPartyTracking"
             ]
         },
         "EmbedBlockElement": {
@@ -1452,54 +1557,6 @@
                 }
             },
             "required": [
-                "mimeType",
-                "url"
-            ]
-        },
-        "Image": {
-            "type": "object",
-            "properties": {
-                "index": {
-                    "type": "number"
-                },
-                "fields": {
-                    "type": "object",
-                    "properties": {
-                        "height": {
-                            "type": "string"
-                        },
-                        "width": {
-                            "type": "string"
-                        },
-                        "isMaster": {
-                            "type": "string"
-                        },
-                        "source": {
-                            "type": "string"
-                        },
-                        "caption": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "height",
-                        "width"
-                    ]
-                },
-                "mediaType": {
-                    "type": "string"
-                },
-                "mimeType": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "fields",
-                "index",
-                "mediaType",
                 "mimeType",
                 "url"
             ]
@@ -1984,6 +2041,22 @@
                 "newsletter"
             ]
         },
+        "AdPlaceholderBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
+                },
+                "isSquare": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "_type",
+                "isSquare"
+            ]
+        },
         "NumberedTitleBlockElement": {
             "type": "object",
             "properties": {
@@ -2048,6 +2121,7 @@
                 "NewsletterSignupDesign",
                 "ObituaryDesign",
                 "PhotoEssayDesign",
+                "PictureDesign",
                 "PrintShopDesign",
                 "ProfileDesign",
                 "QuizDesign",

@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
-const fs = require('fs/promises');
-const { resolve } = require('path');
+const fs = require('node:fs/promises');
+const { resolve } = require('node:path');
 const execa = require('execa');
 const fetch = require('node-fetch');
 const { config } = require('../../fixtures/config');
@@ -118,6 +116,10 @@ const articles = [
 	{
 		name: 'Explainer',
 		url: 'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+	},
+	{
+		name: 'Picture',
+		url: 'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 	},
 ];
 
@@ -303,7 +305,7 @@ Promise.allSettled(requests)
 		if (successful.length > 0) {
 			console.log(
 				`\n✅ Successfully created ${successful.length} / ${requests.length} fixtures:\n`,
-				...successful.map(({ value }) => `${value}\n`),
+				...successful.map(({ value }) => `${String(value)}\n`),
 			);
 		}
 

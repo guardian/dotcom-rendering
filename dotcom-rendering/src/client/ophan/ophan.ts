@@ -13,6 +13,47 @@ export type OphanRecordFunction = (
 	callback?: () => void,
 ) => void;
 
+/**
+ * Loads Ophan (if it hasn't already been loaded) and returns a promise of Ophan's methods.
+ */
+export const getOphan = async (): Promise<
+	NonNullable<typeof window.guardian.ophan>
+> => {
+	// @ts-expect-error -- side effect only
+	await import(/* webpackMode: "eager" */ 'ophan-tracker-js');
+
+	const { ophan } = window.guardian;
+
+	if (!ophan) {
+		throw new Error('window.guardian.ophan is not available');
+	}
+
+	const record: OphanRecordFunction = (event, callback) => {
+		ophan.record(event, callback);
+		log('dotcom', '🧿 Ophan event recorded:', event);
+	};
+
+	const trackComponentAttention: typeof ophan.trackComponentAttention = (
+		name,
+		el,
+		visibilityThreshold,
+	) => {
+		ophan.trackComponentAttention(name, el, visibilityThreshold);
+		log('dotcom', '🧿 Ophan tracking component attention:', name, {
+			el,
+			visibilityThreshold,
+		});
+	};
+
+	// this is the future of `getOphan`'s API, but we need to move to a
+	// dynamic import of the Ophan library to get there, so just returning a
+	// meaningless promise for now, for future-proofing
+	return Promise.resolve({ ...ophan, record, trackComponentAttention });
+};
+
+/**
+ * @deprecated use `getOphan` instead
+ */
 export const getOphanRecordFunction = (): OphanRecordFunction => {
 	const record = window.guardian.ophan?.record;
 
@@ -25,6 +66,9 @@ export const getOphanRecordFunction = (): OphanRecordFunction => {
 	};
 };
 
+/**
+ * @deprecated use `getOphan` instead
+ */
 export const record: OphanRecordFunction = (event) => {
 	if (window.guardian.ophan?.record) {
 		window.guardian.ophan.record(event, () =>
@@ -80,12 +124,12 @@ export const sendOphanComponentEvent = (
 
 export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
 	const records: { [key: string]: OphanABEvent } = {};
-	Object.entries(tests).forEach(([testName, variantName]) => {
+	for (const [testName, variantName] of Object.entries(tests)) {
 		records[`ab${testName}`] = {
 			variantName,
 			complete: false,
 		};
-	});
+	}
 
 	return { abTestRegister: records };
 };

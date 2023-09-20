@@ -1,27 +1,31 @@
+import { startPerformanceMeasure } from '@guardian/libs';
 import React, { Suspense } from 'react';
-import { initPerf } from '../../../client/initPerf';
 import { Lazy } from '../../Lazy';
 import { canShowSignInGate } from '../displayRule';
 import type { SignInGateComponent } from '../types';
 
 const SignInGateMain = React.lazy(() => {
-	const { start, end } = initPerf('SignInGateMain');
-	start();
+	const { endPerformanceMeasure } = startPerformanceMeasure(
+		'identity',
+		'SignInGateMain',
+	);
 	return import(
 		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateMain'
 	).then((module) => {
-		end();
+		endPerformanceMeasure();
 		return { default: module.SignInGateMain };
 	});
 });
 
 const SignInGateMainCheckoutComplete = React.lazy(() => {
-	const { start, end } = initPerf('SignInGateMainCheckoutComplete');
-	start();
+	const { endPerformanceMeasure } = startPerformanceMeasure(
+		'identity',
+		'SignInGateMainCheckoutComplete',
+	);
 	return import(
 		/* webpackChunkName: "SignInGateMainCheckoutComplete" */ '../gateDesigns/SignInGateMainCheckoutComplete'
 	).then((module) => {
-		end();
+		endPerformanceMeasure();
 		return { default: module.SignInGateMainCheckoutComplete };
 	});
 });
@@ -44,6 +48,7 @@ export const signInGateComponent: SignInGateComponent = {
 		dismissGate,
 		guUrl,
 		signInUrl,
+		registerUrl,
 		abTest,
 		checkoutCompleteCookieData,
 		personaliseSignInGateAfterCheckoutSwitch,
@@ -58,6 +63,7 @@ export const signInGateComponent: SignInGateComponent = {
 							dismissGate={dismissGate}
 							guUrl={guUrl}
 							signInUrl={signInUrl}
+							registerUrl={registerUrl}
 							abTest={abTest}
 							checkoutCompleteCookieData={
 								checkoutCompleteCookieData
@@ -69,6 +75,7 @@ export const signInGateComponent: SignInGateComponent = {
 							dismissGate={dismissGate}
 							guUrl={guUrl}
 							signInUrl={signInUrl}
+							registerUrl={registerUrl}
 							abTest={abTest}
 						/>
 					)}

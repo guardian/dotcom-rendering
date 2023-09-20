@@ -100,7 +100,7 @@ export const Ad = ({
 
 	return (
 		<amp-ad
-			data-block-on-consent=""
+			data-block-on-consent="_till_accepted"
 			// Primary ad size width and height
 			width={width}
 			height={height}
@@ -119,6 +119,7 @@ export const Ad = ({
 				adJson([
 					...commercialProperties[editionId].adTargeting,
 					...mapAdTargeting(adTargeting),
+					{ name: 'slot', value: id },
 				]),
 			)}
 			data-slot={ampData(section, contentType)}

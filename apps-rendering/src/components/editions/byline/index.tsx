@@ -202,7 +202,8 @@ const getBylineStyles = (
 	if (
 		format.design === ArticleDesign.Gallery ||
 		format.design === ArticleDesign.Audio ||
-		format.design === ArticleDesign.Video
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Picture
 	) {
 		return css(styles(iconColor, hasAvatar, shareIcon), galleryStyles);
 	}
@@ -253,12 +254,14 @@ const hasAvatar = (format: Item): boolean => {
 const ignoreIconColour = (format: ArticleFormat): boolean =>
 	format.design === ArticleDesign.Gallery ||
 	format.design === ArticleDesign.Audio ||
-	format.design === ArticleDesign.Video;
+	format.design === ArticleDesign.Video ||
+	format.design === ArticleDesign.Picture;
 
 const ignoreTextColour = (format: ArticleFormat): boolean =>
 	format.design === ArticleDesign.Gallery ||
 	format.design === ArticleDesign.Audio ||
 	format.design === ArticleDesign.Video ||
+	format.design === ArticleDesign.Picture ||
 	format.display === ArticleDisplay.Immersive;
 
 const Byline: FC<Props> = ({ item, shareIcon = true }) => {

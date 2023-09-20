@@ -89,7 +89,7 @@ describe('E2E Page rendering', function () {
 
 			cy.get('gu-island[name=MostViewedFooterData]', { timeout: 30000 })
 				.scrollIntoView({ duration: 100 })
-				.should('have.attr', 'data-gu-ready', 'true');
+				.should('have.attr', 'data-island-status', 'rendered');
 
 			cy.get('[data-cy-ab-user-in-variant=ab-test-variant]').should(
 				'be.visible',
@@ -115,7 +115,7 @@ describe('E2E Page rendering', function () {
 
 			cy.get('gu-island[name=MostViewedFooterData]', { timeout: 30000 })
 				.scrollIntoView({ duration: 100 })
-				.should('have.attr', 'data-gu-ready', 'true');
+				.should('have.attr', 'data-island-status', 'rendered');
 
 			cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
 				'be.visible',
@@ -136,6 +136,13 @@ describe('E2E Page rendering', function () {
 				`/AMPArticle/https://amp.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
 			);
 			cy.contains('Opinion');
+
+			// In this AMP Article we'd expect three advert slots to be inserted
+			// (note each of these slots will itself contain a regional slot, that will only appear in certain geos)
+			// And each to have the follow IDs
+			cy.get('#ad-1').should('exist');
+			cy.get('#ad-2').should('exist');
+			cy.get('#ad-3').should('exist');
 		});
 	});
 });

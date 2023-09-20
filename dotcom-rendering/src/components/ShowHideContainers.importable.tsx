@@ -45,18 +45,18 @@ export const ShowHideContainers = () => {
 			storage.local.set(`gu.prefs.container-states`, containerStates);
 		};
 
-		window.document
-			.querySelectorAll<HTMLElement>('[data-show-hide-button]')
-			.forEach((e) => {
-				const sectionId = e.getAttribute('data-show-hide-button');
-				if (!sectionId) return;
+		for (const e of window.document.querySelectorAll<HTMLElement>(
+			'[data-show-hide-button]',
+		)) {
+			const sectionId = e.getAttribute('data-show-hide-button');
+			if (!sectionId) continue;
 
-				e.onclick = () => toggleContainer(sectionId, e);
+			e.onclick = () => toggleContainer(sectionId, e);
 
-				if (containerStates[sectionId] === 'closed') {
-					toggleContainer(sectionId, e);
-				}
-			});
+			if (containerStates[sectionId] === 'closed') {
+				toggleContainer(sectionId, e);
+			}
+		}
 	}, []);
 
 	return <></>;

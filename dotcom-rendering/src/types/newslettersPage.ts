@@ -41,6 +41,7 @@ type FENewslettersConfigType = {
 	// isLiveBlog?: boolean;
 	// isLive?: boolean;
 	// isPreview?: boolean;
+	googleRecaptchaSiteKey?: string;
 };
 
 export interface FENewslettersPageType {

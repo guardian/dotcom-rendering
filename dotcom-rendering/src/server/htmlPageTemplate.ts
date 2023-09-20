@@ -1,18 +1,17 @@
 import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
-import { fcp } from '../bork/fcp';
-import { fid } from '../bork/fid';
-import { remap } from '../bork/remap';
 import { islandNoscriptStyles } from '../components/Island';
 import { ASSET_ORIGIN } from '../lib/assets';
+import { escapeData } from '../lib/escapeData';
 import { getFontsCss } from '../lib/fonts-css';
 import { getHttp3Url } from '../lib/getHttp3Url';
+import type { Guardian } from '../model/guardian';
 import type { RenderingTarget } from '../types/renderingTarget';
 
 type BaseProps = {
 	css: string;
 	html: string;
-	windowGuardian: string;
+	guardian: Guardian;
 	scriptTags: string[];
 	title?: string;
 	description?: string;
@@ -21,10 +20,7 @@ type BaseProps = {
 	openGraphData?: { [key: string]: string };
 	twitterData?: { [key: string]: string };
 	initTwitter?: string;
-	recipeMarkup?: string;
 	canonicalUrl?: string;
-	borkFCP: boolean;
-	borkFID: boolean;
 	renderingTarget: RenderingTarget;
 	offerHttp3: boolean;
 	hasPageSkin?: boolean;
@@ -60,7 +56,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	const {
 		css,
 		html,
-		windowGuardian,
+		guardian,
 		scriptTags,
 		title = 'The Guardian',
 		description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
@@ -69,15 +65,18 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		openGraphData,
 		twitterData,
 		initTwitter,
-		recipeMarkup,
 		canonicalUrl,
 		renderingTarget,
 		offerHttp3,
 		hasPageSkin = false,
-		borkFCP,
-		borkFID,
 		weAreHiring,
 	} = props;
+
+	/**
+	 * We escape windowGuardian here to prevent errors when the data
+	 * is placed in a script tag on the page
+	 */
+	const windowGuardian = escapeData(JSON.stringify(guardian));
 
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -208,7 +207,17 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <meta charset="utf-8">
 
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                <meta name="theme-color" content="${brandBackground.primary}" />
+                ${
+					renderingTarget === 'Web'
+						? `<meta name="theme-color" content="${brandBackground.primary}" />`
+						: ``
+				}
+				<link rel="manifest" href="${ASSET_ORIGIN}static/frontend/manifest.json" />
+				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon.svg" sizes="any">
+				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon-512.png" sizes="512x512">
+				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon-360.png" sizes="360x360">
+				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon-240.png" sizes="240x240">
+				<link rel="apple-touch-icon" href="${ASSET_ORIGIN}static/frontend/icons/homescreen/apple-touch-icon-120.png" sizes="120x120">
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 
                 ${preconnectTags.join('\n')}
@@ -331,48 +340,6 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
-				${
-					borkFID || borkFCP
-						? `
-				<script>
-				try {
-					function getCookieValue(name) {
-						var nameEq = name + "=",
-							cookies = document.cookie.split(';'),
-							value = null;
-						cookies.forEach(function (cookie) {
-							while (cookie.charAt(0) === ' ') {
-								cookie = cookie.substring(1, cookie.length);
-							}
-							if (cookie.indexOf(nameEq) === 0) {
-								value = cookie.substring(nameEq.length, cookie.length);
-							}
-						});
-						return value;
-					}
-
-					// sorry
-					${
-						borkFID
-							? `var fidDelay = (${remap.toString()})(getCookieValue('GU_mvt_id'), 10000, 1000);
-							(${fid.toString()})(fidDelay);`
-							: ''
-					}
-					${
-						borkFCP
-							? `var fcpDelay = (${remap.toString()})(getCookieValue('GU_mvt_id'), 10000, 4000);
-							(${fcp.toString()})(fcpDelay);`
-							: ''
-					}
-				} catch (e) {
-					// do nothing (not sorry)
-				}
-				</script>
-				`
-						: '<!-- no borking -->'
-				}
-
-
 				${initTwitter ?? ''}
 
 				${
@@ -400,36 +367,11 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
-				${
-					borkFCP
-						? `
-				<style>
-					@keyframes bork-fcp-paint {
-						to {
-							opacity: 1;
-						}
-					}
-  					html.bork-fcp body {
-						opacity: 0.001;
-						animation-duration: var(--bork-fcp-amount);
-						animation-name: bork-fcp-paint;
-						animation-timing-function: steps(1);
-						animation-iteration-count: 1;
-						animation-fill-mode: forwards;
-					}
-				</style>`
-						: ''
-				}
 
 			</head>
 
 			<body class="${hasPageSkin ? 'has-page-skin' : ''}">
                 ${html}
-				${
-					recipeMarkup !== undefined
-						? `<script type="application/ld+json">${recipeMarkup}</script>`
-						: '<!-- no recipe markup -->'
-				}
             </body>
         </html>`;
 };

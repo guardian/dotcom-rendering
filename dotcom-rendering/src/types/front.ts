@@ -1,4 +1,4 @@
-import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { ArticleSpecial, Pillar } from '@guardian/libs';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from './badge';
@@ -147,7 +147,7 @@ interface MediaAsset {
 }
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L158-L169 */
-export interface FEMediaAtoms {
+export interface FEMediaAtom {
 	id: string;
 	// defaultHtml: string; // currently unused
 	assets: MediaAsset[];
@@ -206,7 +206,8 @@ export type FEFrontCard = {
 			};
 			elements: {
 				mainVideo?: unknown;
-				mediaAtoms: FEMediaAtoms[];
+				mediaAtoms: FEMediaAtom[];
+				mainMediaAtom?: FEMediaAtom;
 			};
 			tags: { tags: FETagType[] };
 		};
@@ -308,6 +309,7 @@ export type DCRFrontCard = {
 	isCrossword?: boolean;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
+	discussionApiUrl: string;
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
@@ -398,7 +400,9 @@ export type DCRCollectionType = {
 	 * will always be `false`.
 	 **/
 	canShowMore?: boolean;
-	badge?: DCRBadgeType;
+	editorialBadge?: DCRBadgeType;
+	paidContentBadge?: DCRBadgeType;
+	sponsoredContentBranding?: Branding;
 	targetedTerritory?: Territory;
 };
 
@@ -535,8 +539,9 @@ type FEFrontPropertiesType = {
 export type FESupportingContent = {
 	properties: {
 		href?: string;
+		webUrl?: string;
 	};
-	header?: {
+	header: {
 		kicker?: {
 			item?: {
 				properties: {
@@ -559,7 +564,7 @@ export type DCRSupportingContent = {
 
 export type TreatType = {
 	links: { text: string; title?: string; linkTo: string }[];
-	theme?: ArticlePillar | ArticleSpecial;
+	theme?: Pillar | ArticleSpecial;
 	editionId?: EditionId;
 	imageUrl?: string;
 	altText?: string;

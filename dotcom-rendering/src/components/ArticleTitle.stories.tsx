@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { ArticleTitle } from './ArticleTitle';
@@ -64,7 +64,7 @@ export const defaultStory = () => {
 				{...FEBrexit}
 				format={{
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					design: ArticleDesign.Standard,
 				}}
 			/>
@@ -80,7 +80,7 @@ export const beyondTheBlade = () => {
 				{...FEBeyondTheBlade}
 				format={{
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 				}}
 			/>
@@ -101,7 +101,7 @@ export const immersiveComment = () => {
 				{...FEBrexit}
 				format={{
 					display: ArticleDisplay.Immersive,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					design: ArticleDesign.Comment,
 				}}
 			/>
@@ -122,7 +122,7 @@ export const immersiveCommentTag = () => {
 				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Immersive,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					design: ArticleDesign.Comment,
 				}}
 				tags={[
@@ -145,7 +145,7 @@ export const ImmersiveSeriesTag = () => {
 				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Immersive,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					design: ArticleDesign.Review,
 				}}
 				tags={[
@@ -168,7 +168,7 @@ export const ArticleBlogTag = () => {
 				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					design: ArticleDesign.Standard,
 				}}
 				tags={[
@@ -197,7 +197,7 @@ export const LiveblogTitle = () => {
 					{...FEArticle}
 					format={{
 						display: ArticleDisplay.Standard,
-						theme: ArticlePillar.Sport,
+						theme: Pillar.Sport,
 						design: ArticleDesign.LiveBlog,
 					}}
 					tags={[
@@ -219,7 +219,7 @@ export const LiveblogTitle = () => {
 					{...FEArticle}
 					format={{
 						display: ArticleDisplay.Standard,
-						theme: ArticlePillar.Sport,
+						theme: Pillar.Sport,
 						design: ArticleDesign.LiveBlog,
 					}}
 					tags={[
@@ -244,7 +244,7 @@ export const ArticleOpinionTag = () => {
 				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					design: ArticleDesign.Standard,
 				}}
 				tags={[
@@ -267,7 +267,7 @@ export const ArticleSeriesTag = () => {
 				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					design: ArticleDesign.Standard,
 				}}
 				tags={[
@@ -336,7 +336,7 @@ export const ArticleNoTags = () => {
 				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 					design: ArticleDesign.Standard,
 				}}
 			/>
@@ -375,7 +375,7 @@ export const LongStory = () => {
 				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 				}}
 				tags={[
@@ -398,7 +398,7 @@ export const LongWord = () => {
 				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 				}}
 				tags={[

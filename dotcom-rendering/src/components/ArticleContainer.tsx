@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
-import { adSizes } from '@guardian/commercial';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
-import { carrotAdStyles, labelHeight, labelStyles } from './AdSlot';
+import { carrotAdStyles, labelStyles } from './AdSlot.web';
 
 type Props = {
 	format: ArticleFormat;
@@ -11,8 +10,11 @@ type Props = {
 
 const articleWidth = (format: ArticleFormat) => {
 	switch (format.design) {
+		case ArticleDesign.Picture:
+			//This enables the straight lines and submeta in picture content to correctly "stretch" in the container.
+			return null;
 		case ArticleDesign.Interactive: {
-			/* These articles use a special template which manages it's own width */
+			/* These articles use a special template which manages its own width */
 			return null;
 		}
 		case ArticleDesign.LiveBlog:
@@ -117,18 +119,6 @@ const adStyles = css`
 				/* must be behind as the actual ad is on top of the iframe */
 				z-index: -1;
 			}
-		}
-
-		/* liveblogs ads have different background colours due the darker page background */
-		.ad-slot--liveblog-inline {
-			/* outstreamMobile is the ad with the smallest height that we serve for mobile
-			   liveblog-inline slots. For desktop, this is an mpu */
-			min-height: ${adSizes.outstreamMobile.height + labelHeight}px;
-			${from.desktop} {
-				min-height: ${adSizes.mpu.height + labelHeight}px;
-			}
-
-			background-color: ${neutral[93]};
 		}
 	}
 

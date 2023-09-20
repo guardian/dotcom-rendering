@@ -29,6 +29,7 @@ export const groupCards = (
 	curated: FEFrontCard[],
 	backfill: FEFrontCard[],
 	editionId: EditionId,
+	discussionApiUrl: string,
 	containerPalette?: DCRContainerPalette,
 ): DCRGroupedTrails => {
 	switch (container) {
@@ -43,6 +44,7 @@ export const groupCards = (
 					cardInTagFront: false,
 					editionId,
 					containerPalette,
+					discussionApiUrl,
 				}),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
@@ -54,6 +56,7 @@ export const groupCards = (
 						offset: big.length,
 						editionId,
 						containerPalette,
+						discussionApiUrl,
 					},
 				),
 			};
@@ -70,18 +73,21 @@ export const groupCards = (
 					cardInTagFront: false,
 					editionId,
 					containerPalette,
+					discussionApiUrl,
 				}),
 				veryBig: enhanceCards(veryBig, {
 					cardInTagFront: false,
 					offset: huge.length,
 					editionId,
 					containerPalette,
+					discussionApiUrl,
 				}),
 				big: enhanceCards(big, {
 					cardInTagFront: false,
 					offset: huge.length + veryBig.length,
 					editionId,
 					containerPalette,
+					discussionApiUrl,
 				}),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
@@ -93,6 +99,7 @@ export const groupCards = (
 						offset: huge.length + veryBig.length + big.length,
 						editionId,
 						containerPalette,
+						discussionApiUrl,
 					},
 				),
 			};
@@ -108,6 +115,7 @@ export const groupCards = (
 					cardInTagFront: false,
 					editionId,
 					containerPalette,
+					discussionApiUrl,
 				}),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
@@ -119,6 +127,7 @@ export const groupCards = (
 						offset: snap.length,
 						editionId,
 						containerPalette,
+						discussionApiUrl,
 					},
 				),
 			};

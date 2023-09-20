@@ -1,10 +1,11 @@
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Section } from './Section';
@@ -46,7 +47,7 @@ const trails: TrailType[] = [
 		image: 'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
 		format: {
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.LiveBlog,
 		},
 		webPublicationDate: new Date(Date.now() - 60 * 60 * 1000).toString(),
@@ -65,7 +66,7 @@ const trails: TrailType[] = [
 		image: 'https://media.guim.co.uk/56d554a7c453dc1040f70453a01fefcb227f2055/0_0_3060_1836/master/3060.jpg',
 		format: {
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 		},
 		webPublicationDate: new Date(Date.now() - 60 * 60 * 1000).toString(),
@@ -84,7 +85,7 @@ const trails: TrailType[] = [
 		image: 'https://media.guim.co.uk/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg',
 		format: {
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 		},
 		webPublicationDate: '2021-02-17T11:11:43.000Z',
@@ -103,7 +104,7 @@ const trails: TrailType[] = [
 		image: 'https://media.guim.co.uk/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg',
 		format: {
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 		},
 		webPublicationDate: '2021-02-16T16:00:55.000Z',
@@ -122,7 +123,7 @@ const trails: TrailType[] = [
 		image: 'https://media.guim.co.uk/046002abfc13c8cf7f0c40454349eb0e95d842b2/0_147_3884_2331/master/3884.jpg',
 		format: {
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 		},
 		webPublicationDate: '2021-02-16T18:22:53.000Z',
@@ -141,7 +142,7 @@ const trails: TrailType[] = [
 		image: 'https://media.guim.co.uk/9e47ac13c7ffc63ee56235e8ef64301d6ed96d03/0_90_3520_2111/master/3520.jpg',
 		format: {
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 		},
 		webPublicationDate: '2021-02-16T16:35:45.000Z',
@@ -160,7 +161,7 @@ const trails: TrailType[] = [
 		image: 'https://media.guim.co.uk/c01ad5ee63034e0f478959fc7a705c93debf8ba7/0_220_4104_2462/master/4104.jpg',
 		format: {
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.LiveBlog,
 		},
 		webPublicationDate: '2021-02-16T17:00:15.000Z',
@@ -179,7 +180,7 @@ const trails: TrailType[] = [
 		image: 'https://media.guim.co.uk/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg',
 		format: {
 			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Analysis,
 		},
 		webPublicationDate: '2021-02-16T18:42:44.000Z',
@@ -201,11 +202,12 @@ export const Headlines = () => (
 				trails={trails}
 				onwardsSource="more-on-this-story"
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -214,11 +216,12 @@ export const Headlines = () => (
 				trails={trails}
 				onwardsSource="curated-content"
 				format={{
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 	</>
@@ -234,11 +237,12 @@ export const SingleItemCarousel = () => (
 				trails={trails.slice(1, 2)}
 				onwardsSource="more-on-this-story"
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 	</>
@@ -254,11 +258,12 @@ export const Immersive = () => (
 				trails={immersiveTrails}
 				onwardsSource="more-on-this-story"
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Immersive,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -267,11 +272,12 @@ export const Immersive = () => (
 				trails={immersiveTrails}
 				onwardsSource="curated-content"
 				format={{
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Immersive,
 				}}
 				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
 	</>
@@ -282,14 +288,12 @@ Immersive.storyName = 'Immersive carousel';
 export const SpecialReportAlt = () => {
 	const specialReportTrails = [...trails];
 
-	specialReportTrails.forEach(
-		(trail) =>
-			(trail.format = {
-				theme: ArticleSpecial.SpecialReportAlt,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}),
-	);
+	for (const trail of specialReportTrails)
+		trail.format = {
+			theme: ArticleSpecial.SpecialReportAlt,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		};
 
 	return (
 		<>
@@ -304,6 +308,7 @@ export const SpecialReportAlt = () => {
 						display: ArticleDisplay.Standard,
 					}}
 					leftColSize={'compact'}
+					discussionApiUrl={discussionApiUrl}
 				/>
 			</Section>
 		</>

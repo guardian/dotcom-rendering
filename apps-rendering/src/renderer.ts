@@ -573,7 +573,8 @@ const renderEditions =
 			case ElementKind.Image:
 				return format.design === ArticleDesign.Gallery ||
 					format.design === ArticleDesign.Audio ||
-					format.design === ArticleDesign.Video
+					format.design === ArticleDesign.Video ||
+					format.design === ArticleDesign.Picture
 					? h(GalleryImage, { format, image: element })
 					: imageRenderer(format, element, key);
 

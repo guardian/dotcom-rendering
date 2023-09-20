@@ -60,6 +60,9 @@ export type Palette = {
 		designTag: Colour;
 		dateLine: Colour;
 		tableOfContents: Colour;
+		expandableAtom: Colour;
+		expandableAtomHover: Colour;
+		subNavLink: Colour;
 	};
 	background: {
 		article: Colour;
@@ -98,6 +101,9 @@ export type Palette = {
 		pullQuote: Colour;
 		lightboxDivider: Colour;
 		messageForm: Colour;
+		discussionPillarButton: Colour;
+		subMeta: Colour;
+		dynamoSublink: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -149,6 +155,7 @@ export type Palette = {
 		summaryEventBullet: Colour;
 		pagination: Colour;
 	};
+	discussionGeneric: Colour;
 };
 
 export type ContainerOverrides = {
@@ -183,6 +190,7 @@ export type ContainerOverrides = {
 		carouselDot: Colour;
 		carouselArrow: Colour;
 		carouselArrowHover: Colour;
+		dynamoSublink: Colour;
 	};
 	topBar?: {
 		card?: Colour;

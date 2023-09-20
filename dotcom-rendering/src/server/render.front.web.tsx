@@ -1,18 +1,20 @@
-import { ArticlePillar, isString } from '@guardian/libs';
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles';
+import { isString, Pillar } from '@guardian/libs';
+import { ConfigProvider } from '../components/ConfigContext';
 import { FrontPage } from '../components/FrontPage';
 import { TagFrontPage } from '../components/TagFrontPage';
-import { generateScriptTags, getPathFromManifest } from '../lib/assets';
+import {
+	generateScriptTags,
+	getModulesBuild,
+	getPathFromManifest,
+} from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
+import { polyfillIO } from '../lib/polyfill.io';
 import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';
 import { extractNAV } from '../model/extract-nav';
-import { makeWindowGuardian } from '../model/window-guardian';
+import { createGuardian } from '../model/guardian';
+import type { Config } from '../types/configContext';
 import type { DCRFrontType } from '../types/front';
 import type { DCRTagFrontType } from '../types/tagFront';
 import { htmlPageTemplate } from './htmlPageTemplate';
@@ -31,15 +33,15 @@ const extractFrontNav = (front: DCRFrontType): NavType => {
 			// The pillar name is "arts" in CAPI, but "culture" everywhere else
 			case 'Arts':
 			case 'Culture':
-				return ArticlePillar.Culture;
+				return Pillar.Culture;
 			case 'Opinion':
-				return ArticlePillar.Opinion;
+				return Pillar.Opinion;
 			case 'News':
-				return ArticlePillar.News;
+				return Pillar.News;
 			case 'Sport':
-				return ArticlePillar.Sport;
+				return Pillar.Sport;
 			case 'Lifestyle':
-				return ArticlePillar.Lifestyle;
+				return Pillar.Lifestyle;
 			default:
 				return undefined;
 		}
@@ -50,10 +52,7 @@ const extractFrontNav = (front: DCRFrontType): NavType => {
 		// Annoyingly "Football" appears in "News" and "Sport" pillars, so we exclude this case in "News"
 		// As "Football" is always "Sport". You can see the corresponding `frontend` code here:
 		// https://github.com/guardian/frontend/blob/main/common/app/navigation/Navigation.scala#L141-L143
-		if (
-			pillar.pillar === ArticlePillar.News &&
-			currentNavLink === 'Football'
-		) {
+		if (pillar.pillar === Pillar.News && currentNavLink === 'Football') {
 			return false;
 		}
 
@@ -72,27 +71,29 @@ const extractFrontNav = (front: DCRFrontType): NavType => {
 	};
 };
 
-export const renderFront = ({ front }: Props): string => {
+export const renderFront = ({
+	front,
+}: Props): { html: string; prefetchScripts: string[] } => {
 	const title = front.webTitle;
 	const NAV = extractFrontNav(front);
 
+	// Fronts are not supported in Apps
+	const config: Config = { renderingTarget: 'Web' };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<FrontPage front={front} NAV={NAV} />,
+		<ConfigProvider value={config}>
+			<FrontPage front={front} NAV={NAV} />,
+		</ConfigProvider>,
 	);
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = front.config.switches;
 
-	const polyfillIO =
-		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
-
-	const shouldServeVariantBundle: boolean = [
-		BUILD_VARIANT,
-		front.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
-	].every(Boolean);
-
-	const build = shouldServeVariantBundle ? 'variant' : 'modern';
+	const build = getModulesBuild({
+		switches: front.config.switches,
+		tests: front.config.abTests,
+	});
 
 	/**
 	 * The highest priority scripts.
@@ -101,92 +102,92 @@ export const renderFront = ({ front }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const scriptTags = generateScriptTags(
-		[
-			polyfillIO,
-			getPathFromManifest(build, 'frameworks.js'),
-			getPathFromManifest(build, 'index.js'),
-			getPathFromManifest('legacy', 'frameworks.js'),
-			getPathFromManifest('legacy', 'index.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				front.config.commercialBundleUrl,
-		]
-			.filter(isString)
-			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
+	const prefetchScripts = [
+		polyfillIO,
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
+		process.env.COMMERCIAL_BUNDLE_URL ?? front.config.commercialBundleUrl,
+	]
+		.filter(isString)
+		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
 
-	/**
-	 * We escape windowGuardian here to prevent errors when the data
-	 * is placed in a script tag on the page
-	 */
-	const windowGuardian = escapeData(
-		JSON.stringify(
-			makeWindowGuardian({
-				editionId: front.editionId,
-				stage: front.config.stage,
-				frontendAssetsFullURL: front.config.frontendAssetsFullURL,
-				revisionNumber: front.config.revisionNumber,
-				sentryPublicApiKey: front.config.sentryPublicApiKey,
-				sentryHost: front.config.sentryHost,
-				keywordIds: front.config.keywordIds,
-				dfpAccountId: front.config.dfpAccountId,
-				adUnit: front.config.adUnit,
-				ajaxUrl: front.config.ajaxUrl,
-				googletagUrl: front.config.googletagUrl,
-				switches: front.config.switches,
-				abTests: front.config.abTests,
-				brazeApiKey: front.config.brazeApiKey,
-				// Until we understand exactly what config we need to make available client-side,
-				// add everything we haven't explicitly typed as unknown config
-				unknownConfig: front.config,
-			}),
-		),
-	);
+	const legacyScripts = [
+		getPathFromManifest('web.legacy', 'frameworks.js'),
+		getPathFromManifest('web.legacy', 'index.js'),
+	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	const scriptTags = generateScriptTags([
+		...prefetchScripts,
+		...legacyScripts,
+	]);
+
+	const guardian = createGuardian({
+		editionId: front.editionId,
+		stage: front.config.stage,
+		frontendAssetsFullURL: front.config.frontendAssetsFullURL,
+		revisionNumber: front.config.revisionNumber,
+		sentryPublicApiKey: front.config.sentryPublicApiKey,
+		sentryHost: front.config.sentryHost,
+		keywordIds: front.config.keywordIds,
+		dfpAccountId: front.config.dfpAccountId,
+		adUnit: front.config.adUnit,
+		ajaxUrl: front.config.ajaxUrl,
+		googletagUrl: front.config.googletagUrl,
+		switches: front.config.switches,
+		abTests: front.config.abTests,
+		brazeApiKey: front.config.brazeApiKey,
+		googleRecaptchaSiteKey: front.config.googleRecaptchaSiteKey,
+		// Until we understand exactly what config we need to make available client-side,
+		// add everything we haven't explicitly typed as unknown config
+		unknownConfig: front.config,
+	});
 
 	const keywords = front.config.keywords;
 
-	return htmlPageTemplate({
+	const pageHtml = htmlPageTemplate({
 		scriptTags,
 		css: extractedCss,
 		html,
 		title,
 		description: front.pressedPage.seoData.description,
-		windowGuardian,
+		guardian,
 		keywords,
 		offerHttp3,
 		renderingTarget: 'Web',
 		hasPageSkin: front.config.hasPageSkin,
-		borkFCP: front.config.abTests.borkFcpVariant === 'variant',
-		borkFID: front.config.abTests.borkFidVariant === 'variant',
 		weAreHiring: !!front.config.switches.weAreHiring,
 	});
+
+	return {
+		html: pageHtml,
+		prefetchScripts,
+	};
 };
 
 export const renderTagFront = ({
 	tagFront,
 }: {
 	tagFront: DCRTagFrontType;
-}): string => {
+}): { html: string; prefetchScripts: string[] } => {
 	const title = tagFront.webTitle;
 	const NAV = extractNAV(tagFront.nav);
 
+	// Fronts are not supported in Apps
+	const config: Config = { renderingTarget: 'Web' };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<TagFrontPage tagFront={tagFront} NAV={NAV} />,
+		<ConfigProvider value={config}>
+			<TagFrontPage tagFront={tagFront} NAV={NAV} />,
+		</ConfigProvider>,
 	);
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = tagFront.config.switches;
 
-	const polyfillIO =
-		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
-
-	const shouldServeVariantBundle: boolean = [
-		BUILD_VARIANT,
-		tagFront.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
-	].every(Boolean);
-
-	const build = shouldServeVariantBundle ? 'variant' : 'modern';
+	const build = getModulesBuild({
+		switches: tagFront.config.switches,
+		tests: tagFront.config.abTests,
+	});
 
 	/**
 	 * The highest priority scripts.
@@ -195,62 +196,62 @@ export const renderTagFront = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const scriptTags = generateScriptTags(
-		[
-			polyfillIO,
-			getPathFromManifest(build, 'frameworks.js'),
-			getPathFromManifest(build, 'index.js'),
-			getPathFromManifest('legacy', 'frameworks.js'),
-			getPathFromManifest('legacy', 'index.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				tagFront.config.commercialBundleUrl,
-		]
-			.filter(isString)
-			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
+	const prefetchScripts = [
+		polyfillIO,
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
+		process.env.COMMERCIAL_BUNDLE_URL ??
+			tagFront.config.commercialBundleUrl,
+	]
+		.filter(isString)
+		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
 
-	/**
-	 * We escape windowGuardian here to prevent errors when the data
-	 * is placed in a script tag on the page
-	 */
-	const windowGuardian = escapeData(
-		JSON.stringify(
-			makeWindowGuardian({
-				editionId: tagFront.editionId,
-				stage: tagFront.config.stage,
-				frontendAssetsFullURL: tagFront.config.frontendAssetsFullURL,
-				revisionNumber: tagFront.config.revisionNumber,
-				sentryPublicApiKey: tagFront.config.sentryPublicApiKey,
-				sentryHost: tagFront.config.sentryHost,
-				keywordIds: tagFront.config.keywordIds,
-				dfpAccountId: tagFront.config.dfpAccountId,
-				adUnit: tagFront.config.adUnit,
-				ajaxUrl: tagFront.config.ajaxUrl,
-				googletagUrl: tagFront.config.googletagUrl,
-				switches: tagFront.config.switches,
-				abTests: tagFront.config.abTests,
-				brazeApiKey: tagFront.config.brazeApiKey,
-				// Until we understand exactly what config we need to make available client-side,
-				// add everything we haven't explicitly typed as unknown config
-				unknownConfig: tagFront.config,
-			}),
-		),
-	);
+	const legacyScripts = [
+		getPathFromManifest('web.legacy', 'frameworks.js'),
+		getPathFromManifest('web.legacy', 'index.js'),
+	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	const scriptTags = generateScriptTags([
+		...prefetchScripts,
+		...legacyScripts,
+	]);
+
+	const guardian = createGuardian({
+		editionId: tagFront.editionId,
+		stage: tagFront.config.stage,
+		frontendAssetsFullURL: tagFront.config.frontendAssetsFullURL,
+		revisionNumber: tagFront.config.revisionNumber,
+		sentryPublicApiKey: tagFront.config.sentryPublicApiKey,
+		sentryHost: tagFront.config.sentryHost,
+		keywordIds: tagFront.config.keywordIds,
+		dfpAccountId: tagFront.config.dfpAccountId,
+		adUnit: tagFront.config.adUnit,
+		ajaxUrl: tagFront.config.ajaxUrl,
+		googletagUrl: tagFront.config.googletagUrl,
+		switches: tagFront.config.switches,
+		abTests: tagFront.config.abTests,
+		brazeApiKey: tagFront.config.brazeApiKey,
+		googleRecaptchaSiteKey: tagFront.config.googleRecaptchaSiteKey,
+		// Until we understand exactly what config we need to make available client-side,
+		// add everything we haven't explicitly typed as unknown config
+		unknownConfig: tagFront.config,
+	});
 
 	const keywords = tagFront.config.keywords;
 
-	return htmlPageTemplate({
+	const pageHtml = htmlPageTemplate({
 		scriptTags,
 		css: extractedCss,
 		html,
 		title,
 		description: tagFront.header.description,
-		windowGuardian,
+		guardian,
 		keywords,
 		offerHttp3,
 		renderingTarget: 'Web',
-		borkFCP: tagFront.config.abTests.borkFcpVariant === 'variant',
-		borkFID: tagFront.config.abTests.borkFidVariant === 'variant',
 		weAreHiring: !!tagFront.config.switches.weAreHiring,
 	});
+	return {
+		html: pageHtml,
+		prefetchScripts,
+	};
 };

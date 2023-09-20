@@ -20,9 +20,11 @@ import type {
 } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import type { Loading } from './CardPicture';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -31,8 +33,10 @@ const ColumnOfCards50_Card50 = ({
 	cards,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -53,6 +57,7 @@ const ColumnOfCards50_Card50 = ({
 						trail={card}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				</LI>
 			))}
@@ -69,6 +74,7 @@ const ColumnOfCards50_Card50 = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
+									imageLoading={imageLoading}
 								/>
 							</LI>
 						);
@@ -83,8 +89,10 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 	cards,
 	showAge,
 	containerPalette,
+	imageLoading,
 }: {
 	cards: DCRFrontCard[];
+	imageLoading: Loading;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -109,6 +117,7 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							imageLoading={imageLoading}
 						/>
 					</LI>
 				);
@@ -126,6 +135,7 @@ export const DynamicSlow = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
+	imageLoading,
 }: Props) => {
 	let firstSliceLayout:
 		| undefined // If there are no very bigs or huges, there is no first slice
@@ -209,6 +219,7 @@ export const DynamicSlow = ({
 						cards={firstSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'oneVeryBig':
@@ -217,6 +228,7 @@ export const DynamicSlow = ({
 						cards={firstSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'TwoVeryBigsFirstBoosted':
@@ -225,6 +237,7 @@ export const DynamicSlow = ({
 						cards={firstSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'TwoVeryBigsSecondBoosted':
@@ -233,6 +246,7 @@ export const DynamicSlow = ({
 						cards={firstSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'twoVeryBigs':
@@ -241,6 +255,7 @@ export const DynamicSlow = ({
 						cards={firstSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			default:
@@ -256,6 +271,7 @@ export const DynamicSlow = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'oneBig':
@@ -264,6 +280,7 @@ export const DynamicSlow = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 			case 'twoBigs':
@@ -272,6 +289,7 @@ export const DynamicSlow = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
+						imageLoading={imageLoading}
 					/>
 				);
 		}

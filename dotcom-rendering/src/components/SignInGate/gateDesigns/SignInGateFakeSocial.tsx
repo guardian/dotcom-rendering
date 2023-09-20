@@ -283,6 +283,7 @@ const appleIcon = (
 
 export const SignInGateFakeSocial = ({
 	signInUrl,
+	registerUrl,
 	guUrl,
 	dismissGate,
 	abTest,
@@ -328,7 +329,7 @@ export const SignInGateFakeSocial = ({
 					css={registerButton}
 					priority="primary"
 					size="small"
-					href={signInUrl}
+					href={registerUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'register-link', abTest);
 					}}

@@ -1,15 +1,20 @@
 import { css } from '@emotion/react';
 import { from, headline, palette, space } from '@guardian/source-foundations';
-import {
-	LinkButton,
-	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+import { Link, SvgChevronRightSingle } from '@guardian/source-react-components';
 import { Section } from './Section';
 
 export interface NewslettersListProps {
 	mmaUrl?: string;
 	newsletterCount: number;
 }
+
+// To align the heading content with the carousel below
+// from desktop
+const contentWrapperStyle = css`
+	${from.leftCol} {
+		padding-left: 10px;
+	}
+`;
 
 const headlineStyle = css`
 	display: inline-flex;
@@ -39,10 +44,6 @@ const manageLinkContainer = css`
 	}
 `;
 
-const linkStyle = css`
-	color: ${palette.brand[500]};
-`;
-
 export const NewslettersPageHeading = ({
 	mmaUrl,
 	newsletterCount,
@@ -50,33 +51,33 @@ export const NewslettersPageHeading = ({
 	return (
 		<Section
 			element="header"
-			padSides={false}
+			padSides={true}
 			stretchRight={true}
 			verticalMargins={false}
+			leftColSize="wide"
+			padContent={false}
 		>
-			<div>
+			<div css={contentWrapperStyle}>
 				<h1 css={headlineStyle}>
 					<span>Newsletters</span>
 				</h1>
-			</div>
-			<p css={subtitleStyle}>
-				Choose from {newsletterCount} available newsletters
-			</p>
+				<p css={subtitleStyle}>
+					Choose from {newsletterCount} available newsletters. The
+					best Guardian journalism, free to your inbox
+				</p>
 
-			{!!mmaUrl && (
-				<div css={manageLinkContainer}>
-					<LinkButton
-						href={`${mmaUrl}/email-prefs`}
-						size={'xsmall'}
-						priority="subdued"
-						icon={<SvgChevronRightSingle size="small" />}
-						iconSide="right"
-						cssOverrides={linkStyle}
-					>
-						Manage my newsletters
-					</LinkButton>
-				</div>
-			)}
+				{!!mmaUrl && (
+					<div css={manageLinkContainer}>
+						<Link
+							href={`${mmaUrl}/email-prefs`}
+							icon={<SvgChevronRightSingle size="small" />}
+							iconSide="right"
+						>
+							Manage my newsletters
+						</Link>
+					</div>
+				)}
+			</div>
 		</Section>
 	);
 };

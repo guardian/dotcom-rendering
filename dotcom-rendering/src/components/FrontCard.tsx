@@ -5,7 +5,8 @@ import { Card } from './Card/Card';
 
 type Props = {
 	trail: DCRFrontCard;
-} & Partial<CardProps>;
+} & Partial<CardProps> &
+	Pick<CardProps, 'imageLoading'>;
 
 /**
  * A wrapper around the normal Card component providing sensible defaults for Cards on front containers.
@@ -25,7 +26,7 @@ type Props = {
  */
 export const FrontCard = (props: Props) => {
 	const { trail, ...cardProps } = props;
-	const defaultProps: CardProps = {
+	const defaultProps: Omit<CardProps, 'imageLoading'> = {
 		linkTo: trail.url,
 		format: trail.format,
 		headlineText: trail.headline,
@@ -39,10 +40,11 @@ export const FrontCard = (props: Props) => {
 		imageUrl: trail.image,
 		imageAltText: trail.imageAltText,
 		isCrossword: trail.isCrossword,
-		videoSize: 'large enough to play: at least 480px',
+		isPlayableMediaCard: true,
 		starRating: trail.starRating,
 		dataLinkName: trail.dataLinkName,
 		snapData: trail.snapData,
+		discussionApiUrl: trail.discussionApiUrl,
 		discussionId: trail.discussionId,
 		avatarUrl: trail.avatarUrl,
 		mainMedia: trail.mainMedia,

@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import {
 	from,
-	headline,
+	neutral,
 	space,
 	textSans,
 	until,
@@ -19,6 +19,7 @@ const labelStyles = (palette: Palette) => css`
 	${textSans.xxsmall()};
 	display: block;
 	color: ${palette.text.subMetaLabel};
+	margin-bottom: 8px;
 `;
 
 const badgeWrapper = css`
@@ -52,7 +53,7 @@ const setMetaWidth = (palette: Palette) => css`
 	}
 `;
 
-const listStyleNone = css`
+const listStyleNone = (palette: Palette) => css`
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
@@ -62,6 +63,27 @@ const listStyleNone = css`
 		height: 0;
 		width: 0;
 	}
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem 0.25rem;
+	background-image: repeating-linear-gradient(
+			to bottom,
+			${palette.background.subMeta} 0px,
+			${palette.background.subMeta} 36px,
+			transparent 36px,
+			transparent 37px,
+			${palette.background.subMeta} 37px,
+			${palette.background.subMeta} 46px
+		),
+		repeating-linear-gradient(
+			to right,
+			${neutral[86]} 0px,
+			${neutral[86]} 3px,
+			transparent 3px,
+			transparent 5px
+		);
+	background-position: top;
+	background-repeat: no-repeat;
 `;
 
 const listWrapper = (palette: Palette) => css`
@@ -71,22 +93,16 @@ const listWrapper = (palette: Palette) => css`
 `;
 
 const listItemStyles = (palette: Palette) => css`
-	margin-right: 5px;
-	display: inline-block;
+	${textSans.xsmall()};
+	border: 1px solid ${palette.text.subMeta};
+	border-radius: 12px;
+	padding: 2px 9px;
 	a {
 		position: relative;
 		display: block;
-		padding-right: 5px;
 		text-decoration: none;
 	}
-	a::after {
-		content: '/';
-		position: absolute;
-		pointer-events: none;
-		top: 0;
-		right: -3px;
-		color: ${palette.text.subMetaLink};
-	}
+
 	a:hover {
 		text-decoration: underline;
 	}
@@ -98,28 +114,6 @@ const linkStyles = (palette: Palette) => css`
 		text-decoration: underline;
 	}
 	color: ${palette.text.subMeta};
-`;
-
-const sectionStyles = (format: ArticleFormat) => {
-	if (format.theme === ArticleSpecial.Labs) {
-		return css`
-			${textSans.medium()}
-			line-height: 19px;
-		`;
-	}
-	return css`
-		${headline.xxxsmall()};
-	`;
-};
-
-const keywordStyles = css`
-	${textSans.small()};
-`;
-
-const hideSlash = css`
-	a::after {
-		content: '';
-	}
 `;
 
 type Props = {
@@ -152,8 +146,16 @@ export const SubMeta = ({
 	badge,
 }: Props) => {
 	const palette = decidePalette(format);
-	const hasSectionLinks = subMetaSectionLinks.length > 0;
-	const hasKeywordLinks = subMetaKeywordLinks.length > 0;
+	const createLinks = () => {
+		const links: BaseLinkType[] = [];
+		if (subMetaSectionLinks.length > 0) links.push(...subMetaSectionLinks);
+		if (subMetaKeywordLinks.length > 0) links.push(...subMetaKeywordLinks);
+		return {
+			links,
+			hasLinks: links.length > 0,
+		};
+	};
+	const { links, hasLinks } = createLinks();
 	return (
 		<div
 			data-print-layout="hide"
@@ -168,56 +170,27 @@ export const SubMeta = ({
 					<Badge imageSrc={badge.imageSrc} href={badge.href} />
 				</div>
 			)}
-			{(hasSectionLinks || hasKeywordLinks) && (
+			{hasLinks && (
 				<>
-					<span css={labelStyles(palette)}>Topics</span>
+					<span css={labelStyles(palette)}>
+						Explore more on these topics
+					</span>
 					<div css={listWrapper(palette)}>
-						{hasSectionLinks && (
-							<ul css={listStyleNone}>
-								{subMetaSectionLinks.map((link, i) => (
-									<li
-										css={[
-											listItemStyles(palette),
-											sectionStyles(format),
-											i ===
-												subMetaSectionLinks.length -
-													1 && hideSlash,
-										]}
-										key={link.url}
+						<ul css={listStyleNone(palette)}>
+							{links.map((link) => (
+								<li
+									css={listItemStyles(palette)}
+									key={link.url}
+								>
+									<a
+										css={linkStyles(palette)}
+										href={link.url}
 									>
-										<a
-											css={linkStyles(palette)}
-											href={link.url}
-										>
-											{link.title}
-										</a>
-									</li>
-								))}
-							</ul>
-						)}
-						{hasKeywordLinks && (
-							<ul css={listStyleNone}>
-								{subMetaKeywordLinks.map((link, i) => (
-									<li
-										css={[
-											listItemStyles(palette),
-											keywordStyles,
-											i ===
-												subMetaKeywordLinks.length -
-													1 && hideSlash,
-										]}
-										key={link.url}
-									>
-										<a
-											css={linkStyles(palette)}
-											href={link.url}
-										>
-											{link.title}
-										</a>
-									</li>
-								))}
-							</ul>
-						)}
+										{link.title}
+									</a>
+								</li>
+							))}
+						</ul>
 					</div>
 				</>
 			)}

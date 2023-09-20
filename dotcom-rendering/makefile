@@ -24,13 +24,6 @@ riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
 	@node ./scripts/deploy/build-riffraff-bundle.mjs
 
-riffraff-publish: riffraff-bundle
-	$(call log, "publishing riff-raff bundle")
-	@./scripts/deploy/publish-assets.sh
-
-deploy:
-	@env ./scripts/deploy/build-riffraff-artifact.sh
-
 # prod #########################################
 
 build: clean-dist install
@@ -62,7 +55,7 @@ start: install
 start-prod:
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	NODE_ENV=production /usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/server.js
+	NODE_ENV=production /usr/local/node/pm2 start dist/server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 
@@ -109,7 +102,7 @@ storybook-dev: clear clean-dist install
 
 cypress: clear clean-dist install build
 	$(call log, "starting PROD server for Cypress")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
+	@NODE_ENV=production NODE_OPTIONS="--max-old-space-size=8192" DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 cypress-open: clear clean-dist install build
 	$(call log, "starting PROD server and opening Cypress")
