@@ -4,6 +4,7 @@ import {
 } from '../lib/liveblogAdSlots';
 import type { Switches } from '../types/config';
 import { AdSlot } from './AdSlot.web';
+import { useConfig } from './ConfigContext';
 import { LiveBlock } from './LiveBlock';
 
 type Props = {
@@ -35,6 +36,9 @@ export const LiveBlogBlocksAndAdverts = ({
 	isLiveUpdate,
 	isInLiveblogAdSlotTest = false,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+	const isWeb = renderingTarget === 'Web';
+
 	if (!isInLiveblogAdSlotTest) {
 		return (
 			<>
@@ -121,18 +125,22 @@ export const LiveBlogBlocksAndAdverts = ({
 							isPinnedPost={false}
 							pinnedPostId={pinnedPost?.id}
 						/>
-						{willInsertAdMobile && (
-							<AdSlot
-								position="liveblog-inline-mobile"
-								index={mobileAdCounter}
-							/>
-						)}
 						{willInsertAdDesktop && (
 							<AdSlot
 								position="liveblog-inline"
 								index={desktopAdCounter}
 							/>
 						)}
+
+						{willInsertAdMobile &&
+							(isWeb ? (
+								<AdSlot
+									position="liveblog-inline-mobile"
+									index={mobileAdCounter}
+								/>
+							) : (
+								<div className="ad-portal-placeholder" />
+							))}
 					</>
 				);
 			})}
