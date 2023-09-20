@@ -38,6 +38,7 @@ export const LiveBlogBlocksAndAdverts = ({
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 
 	if (!isInLiveblogAdSlotTest) {
 		return (
@@ -108,6 +109,9 @@ export const LiveBlogBlocksAndAdverts = ({
 					pxSinceAdDesktop = 0;
 				}
 
+				const willInsertAdMobileWeb = isWeb && willInsertAdMobile;
+				const willInsertAdMobileApps = isApps && willInsertAdMobile;
+
 				return (
 					<>
 						<LiveBlock
@@ -131,16 +135,15 @@ export const LiveBlogBlocksAndAdverts = ({
 								index={desktopAdCounter}
 							/>
 						)}
-
-						{willInsertAdMobile &&
-							(isWeb ? (
-								<AdSlot
-									position="liveblog-inline-mobile"
-									index={mobileAdCounter}
-								/>
-							) : (
-								<div className="ad-portal-placeholder" />
-							))}
+						{willInsertAdMobileWeb && (
+							<AdSlot
+								position="liveblog-inline-mobile"
+								index={mobileAdCounter}
+							/>
+						)}
+						{willInsertAdMobileApps && (
+							<div className="ad-portal-placeholder" />
+						)}
 					</>
 				);
 			})}
