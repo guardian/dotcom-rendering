@@ -345,30 +345,35 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							label="Europe edition"
 							value="EUR"
 							onChange={() => setSelectedEdition('EUR')}
+							checked={selectedEdition === 'EUR'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'UK'}
 							label="UK edition"
 							value="UK"
 							onChange={() => setSelectedEdition('UK')}
+							checked={selectedEdition === 'UK'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'US'}
 							label="US edition"
 							value="US"
 							onChange={() => setSelectedEdition('US')}
+							checked={selectedEdition === 'US'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'AU'}
 							label="Australia edition"
 							value="AU"
 							onChange={() => setSelectedEdition('AU')}
+							checked={selectedEdition === 'AU'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'INT'}
 							label="International edition"
 							value="INT"
 							onChange={() => setSelectedEdition('INT')}
+							checked={selectedEdition === 'INT'}
 						/>
 					</RadioGroup>
 					<Button
