@@ -684,16 +684,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									)}
 
 								{isApps && (
-									<Island
-										// deferUntil="idle"
-										clientOnly={true}
-										// placeholderHeight={800}
-									>
+									<Island clientOnly={true}>
 										<AppsEpic />
 									</Island>
 								)}
 
-								{showBodyEndSlot && (
+								{isWeb && showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
 											contentType={article.contentType}
