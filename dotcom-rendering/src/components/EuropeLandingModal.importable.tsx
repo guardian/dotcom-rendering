@@ -160,6 +160,7 @@ export const getModalType = (): ModalType => {
 	if (!geoCountryCookie) {
 		return 'NoModal';
 	}
+
 	if (
 		!editionCookie &&
 		!coe.includes(geoCountryCookie) &&
@@ -167,10 +168,12 @@ export const getModalType = (): ModalType => {
 	) {
 		return 'ModalDoYouWantToSwitch';
 	}
+
 	// If selected INT and not in COE show do u want to switch
 	if (editionCookie === 'INT' && !coe.includes(geoCountryCookie)) {
 		return 'ModalDoYouWantToSwitch';
 	}
+
 	// If in COE
 	if (coe.includes(geoCountryCookie)) {
 		if (
@@ -185,6 +188,7 @@ export const getModalType = (): ModalType => {
 			return 'ModalDoYouWantToSwitch';
 		}
 	}
+
 	return 'NoModal';
 };
 
@@ -202,6 +206,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 	const initialize = useCallback(() => {
 		const europeModal = document.getElementById('europe-modal-dialog');
 		const modalShown = getCookie({ name: modalShownCookie });
+
 		if (
 			europeModal instanceof HTMLDialogElement &&
 			modalType !== 'NoModal' &&
@@ -213,11 +218,14 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 				value: 'true',
 				daysToLive: 90,
 			});
-			europeModal.showModal();
-			europeModal.click();
 			europeModal.addEventListener('close', () => {
-				hideModal();
+				dismissModal();
 			});
+			europeModal.showModal();
+
+			// Dirty way of recording that the EU modal has been opened by creating
+			// a synthetic click which gets Ophan to record a "eu-modal : open" click event.
+			document.getElementById('eu-modal-synthetic-click')?.click();
 
 			document.documentElement.style.overflow = 'hidden';
 			if (modalType === 'ModalSwitched') {
@@ -241,23 +249,16 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 	}, [initialize]);
 
 	const confirmNewEdition = (editionId: EditionId) => {
-		setCookie({
-			name: 'GU_EDITION',
-			value: editionId,
-			isCrossSubdomain: true,
-		});
-		if (editionId === edition) {
-			hideModal();
+		// Always send EUR users to the Edition preference endpoint.
+		// We want them to be redirected to the /europe front.
+		if (editionId === edition && editionId !== 'EUR') {
+			dismissModal();
 		} else {
 			window.location.replace(getEditionFromId(editionId).url);
 		}
 	};
 
 	const dismissModal = () => {
-		hideModal();
-	};
-
-	const hideModal = () => {
 		const europeModal = document.getElementById('europe-modal-dialog');
 		if (europeModal instanceof HTMLDialogElement) {
 			europeModal.close();
@@ -269,9 +270,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		<dialog
 			css={dialogStyles}
 			id={'europe-modal-dialog'}
-			data-link-name={nestedOphanComponents('eu-modal', 'open')}
 			data-component={'eu-modal'}
 		>
+			<div
+				id="eu-modal-synthetic-click"
+				hidden={true}
+				data-link-name={nestedOphanComponents('eu-modal', 'open')}
+			/>
 			{!switchEdition ? (
 				<>
 					<div css={textStyles}>
@@ -297,8 +302,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 									)}
 									size={'small'}
 									onClick={() => {
-										dismissModal();
-										window.location.reload();
+										confirmNewEdition('EUR');
 									}}
 									cssOverrides={OKButtonStyles}
 								>
@@ -337,7 +341,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							</Button>
 						</div>
 					</div>
-					<div css={imageStyles}>
+					<div css={imageStyles} aria-hidden="true">
 						<SvgFlagsInCircle />
 					</div>
 				</>
@@ -349,30 +353,35 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							label="Europe edition"
 							value="EUR"
 							onChange={() => setSelectedEdition('EUR')}
+							checked={selectedEdition === 'EUR'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'UK'}
 							label="UK edition"
 							value="UK"
 							onChange={() => setSelectedEdition('UK')}
+							checked={selectedEdition === 'UK'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'US'}
 							label="US edition"
 							value="US"
 							onChange={() => setSelectedEdition('US')}
+							checked={selectedEdition === 'US'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'AU'}
 							label="Australia edition"
 							value="AU"
 							onChange={() => setSelectedEdition('AU')}
+							checked={selectedEdition === 'AU'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'INT'}
 							label="International edition"
 							value="INT"
 							onChange={() => setSelectedEdition('INT')}
+							checked={selectedEdition === 'INT'}
 						/>
 					</RadioGroup>
 					<Button
