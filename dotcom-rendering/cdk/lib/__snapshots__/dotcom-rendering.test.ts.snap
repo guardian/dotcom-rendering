@@ -924,6 +924,25 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
+    "ec2RoleArn8128314D": {
+      "Properties": {
+        "Name": "/frontend/TEST/rendering.loadBalancerDnsName",
+        "Tags": {
+          "Stack": "frontend",
+          "Stage": "TEST",
+          "gu:cdk:version": "TEST",
+          "gu:repo": "guardian/dotcom-rendering",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "InternalLoadBalancer",
+            "DNSName",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
     "frontendTESTrenderingF3FD9600": {
       "Properties": {
         "LaunchTemplateData": {
