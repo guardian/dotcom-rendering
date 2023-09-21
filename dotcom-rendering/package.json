@@ -62,7 +62,7 @@
 		"@emotion/server": "11.11.0",
 		"@guardian/ab-core": "5.0.0",
 		"@guardian/atoms-rendering": "33.0.0",
-		"@guardian/braze-components": "14.1.1",
+		"@guardian/braze-components": "15.0.1",
 		"@guardian/bridget": "2.3.0",
 		"@guardian/browserslist-config": "5.0.0",
 		"@guardian/cdk": "50.10.6",
