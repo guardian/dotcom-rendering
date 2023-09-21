@@ -3,7 +3,7 @@ import { getCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useState } from 'react';
 import type { DCRFrontType } from '../types/front';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
 import { eitherInOktaTestOrElse } from './useAuthStatus';
@@ -270,7 +270,7 @@ export const lazyFetchEmailWithTimeout =
 	};
 
 export const getContributionsServiceUrl = (
-	config: FEArticleType | DCRFrontType,
+	config: DCRArticle | DCRFrontType,
 ): string => process.env.SDC_URL ?? config.contributionsServiceUrl;
 
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];

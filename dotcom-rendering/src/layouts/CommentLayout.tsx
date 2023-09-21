@@ -47,7 +47,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const StandardGrid = ({
@@ -259,7 +259,7 @@ const mainMediaWrapper = css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
 }

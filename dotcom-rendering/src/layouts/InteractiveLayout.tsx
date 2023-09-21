@@ -48,7 +48,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import {
 	interactiveGlobalStyles,
 	interactiveLegacyClasses,
@@ -201,7 +201,7 @@ const starWrapper = css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
 }
