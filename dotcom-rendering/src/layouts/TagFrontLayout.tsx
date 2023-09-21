@@ -63,9 +63,6 @@ const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
 };
 
 export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
-	const isInEuropeTest =
-		tagFront.config.switches['europeNetworkFrontSwitch'] === true;
-
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
@@ -128,7 +125,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
-							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
 								!!tagFront.config.switches
 									.headerTopBarSearchCapi
@@ -155,7 +151,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							headerTopBarSwitch={
 								!!tagFront.config.switches.headerTopNav
 							}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{NAV.subNavSections && (

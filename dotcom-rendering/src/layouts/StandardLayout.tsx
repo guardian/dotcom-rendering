@@ -307,9 +307,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		config: { isPaidContent, host },
 	} = article;
 
-	const isInEuropeTest =
-		article.config.switches['europeNetworkFrontSwitch'] === true;
-
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
 		article.config.switches.slotBodyEnd;
@@ -383,7 +380,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -416,7 +412,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							headerTopBarSwitch={
 								!!article.config.switches.headerTopNav
 							}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{props.NAV.subNavSections && !isLabs && (

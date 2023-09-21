@@ -195,9 +195,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 		config: { host },
 	} = article;
 
-	const isInEuropeTest =
-		article.config.switches['europeNetworkFrontSwitch'] === true;
-
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const palette = decidePalette(format);
@@ -254,7 +251,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						remoteHeader={!!article.config.switches.remoteHeader}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={article.config.idApiUrl}
-						isInEuropeTest={isInEuropeTest}
 						headerTopBarSearchCapiSwitch={
 							!!article.config.switches.headerTopBarSearchCapi
 						}
@@ -286,7 +282,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 

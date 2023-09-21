@@ -40,8 +40,6 @@ export const AllEditorialNewslettersPageLayout = ({
 
 	const renderAds = !isAdFreeUser;
 
-	const isInEuropeTest = config.switches['europeNetworkFrontSwitch'] === true;
-
 	const contributionsServiceUrl =
 		process.env.SDC_URL ?? pageContributionsServiceUrl;
 
@@ -90,7 +88,6 @@ export const AllEditorialNewslettersPageLayout = ({
 							}
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={config.idApiUrl}
-							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
 								!!newslettersPage.config.switches
 									.headerTopBarSearchCapi
@@ -110,7 +107,6 @@ export const AllEditorialNewslettersPageLayout = ({
 							nav={NAV}
 							subscribeUrl={subscribeUrl}
 							editionId={editionId}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{NAV.subNavSections && (
