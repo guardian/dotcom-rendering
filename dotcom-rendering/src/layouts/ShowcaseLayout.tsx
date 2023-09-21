@@ -288,7 +288,6 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 	} = article;
 
 	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
 		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const showBodyEndSlot =
