@@ -22,6 +22,34 @@ type Props = {
 	isInLiveblogAdSlotTest?: boolean;
 };
 
+const handleAdInsertion = (
+	block: Block,
+	isMobileView: boolean,
+	adCounter: number,
+	pxSinceAd: number,
+	isAdFreeUser: boolean,
+	totalBlocks: number,
+	currentIndex: number,
+) => {
+	const updatedPxSinceAd =
+		pxSinceAd +
+		calculateApproximateBlockHeight(block.elements, isMobileView);
+	const willInsertAd =
+		!isAdFreeUser &&
+		shouldDisplayAd(
+			currentIndex + 1,
+			totalBlocks,
+			adCounter,
+			updatedPxSinceAd,
+			isMobileView,
+		);
+	return {
+		adCounter: willInsertAd ? adCounter + 1 : adCounter,
+		pxSinceAd: willInsertAd ? 0 : updatedPxSinceAd,
+		willInsertAd,
+	};
+};
+
 export const LiveBlogBlocksAndAdverts = ({
 	format,
 	blocks,
@@ -64,53 +92,46 @@ export const LiveBlogBlocksAndAdverts = ({
 		);
 	}
 
-	let pxSinceAdMobile = 0;
-	let mobileAdCounter = 0;
+	let pxSinceAdMobileView = 0;
+	let mobileViewAdCounter = 0;
 
-	let pxSinceAdDesktop = 0;
-	let desktopAdCounter = 0;
+	let pxSinceAdDesktopView = 0;
+	let desktopViewAdCounter = 0;
 
 	return (
 		<>
 			{blocks.map((block, i) => {
-				pxSinceAdMobile += calculateApproximateBlockHeight(
-					block.elements,
+				// Mobile viewport case
+				const mobileResult = handleAdInsertion(
+					block,
 					true,
+					mobileViewAdCounter,
+					pxSinceAdMobileView,
+					isAdFreeUser,
+					blocks.length,
+					i,
 				);
-				const willInsertAdMobile =
-					!isAdFreeUser &&
-					shouldDisplayAd(
-						i + 1,
-						blocks.length,
-						mobileAdCounter,
-						pxSinceAdMobile,
-						true,
-					);
-				if (willInsertAdMobile) {
-					mobileAdCounter++;
-					pxSinceAdMobile = 0;
-				}
+				mobileViewAdCounter = mobileResult.adCounter;
+				pxSinceAdMobileView = mobileResult.pxSinceAd;
 
-				pxSinceAdDesktop += calculateApproximateBlockHeight(
-					block.elements,
+				// Desktop viewport case
+				const desktopResult = handleAdInsertion(
+					block,
 					false,
+					desktopViewAdCounter,
+					pxSinceAdDesktopView,
+					isAdFreeUser,
+					blocks.length,
+					i,
 				);
-				const willInsertAdDesktop =
-					!isAdFreeUser &&
-					shouldDisplayAd(
-						i + 1,
-						blocks.length,
-						desktopAdCounter,
-						pxSinceAdDesktop,
-						false,
-					);
-				if (willInsertAdDesktop) {
-					desktopAdCounter++;
-					pxSinceAdDesktop = 0;
-				}
+				desktopViewAdCounter = desktopResult.adCounter;
+				pxSinceAdDesktopView = desktopResult.pxSinceAd;
 
-				const willInsertAdMobileWeb = isWeb && willInsertAdMobile;
-				const willInsertAdMobileApps = isApps && willInsertAdMobile;
+				const shouldInsertMobileWebAd =
+					isWeb && mobileResult.willInsertAd;
+				const shouldInsertDesktopWebAd =
+					isWeb && desktopResult.willInsertAd;
+				const shouldInsertAppAd = isApps && mobileResult.willInsertAd;
 
 				return (
 					<>
@@ -129,19 +150,21 @@ export const LiveBlogBlocksAndAdverts = ({
 							isPinnedPost={false}
 							pinnedPostId={pinnedPost?.id}
 						/>
-						{willInsertAdDesktop && (
+
+						{shouldInsertDesktopWebAd && (
 							<AdSlot
 								position="liveblog-inline"
-								index={desktopAdCounter}
+								index={desktopViewAdCounter}
 							/>
 						)}
-						{willInsertAdMobileWeb && (
+						{shouldInsertMobileWebAd && (
 							<AdSlot
 								position="liveblog-inline-mobile"
-								index={mobileAdCounter}
+								index={mobileViewAdCounter}
 							/>
 						)}
-						{willInsertAdMobileApps && (
+
+						{shouldInsertAppAd && (
 							<div className="ad-portal-placeholder" />
 						)}
 					</>
