@@ -82,7 +82,7 @@
 		"@guardian/source-react-components-development-kitchen": "14.0.0",
 		"@guardian/support-dotcom-components": "1.0.7",
 		"@guardian/tsconfig": "0.2.0",
-		"@sentry/browser": "7.37.2",
+		"@sentry/browser": "7.70.0",
 		"@sentry/integrations": "7.37.2",
 		"@storybook/addon-essentials": "7.2.0",
 		"@storybook/addons": "7.2.0",
