@@ -61,15 +61,15 @@ jobs:
           buildNumberOffset: 27000 # This is the last build number from TeamCity
           contentDirectories: |
             mobile-apps-rendering-cfn:
-              - cdk/cdk.out/MobileAppsRendering-CODE.template.json
-              - cdk/cdk.out/MobileAppsRendering-PROD.template.json
+              - apps-rendering/cdk/cdk.out/MobileAppsRendering-CODE.template.json
+              - apps-rendering/cdk/cdk.out/MobileAppsRendering-PROD.template.json
             mobile-apps-rendering-preview-cfn:
-              - cdk/cdk.out/MobileAppsRenderingPreview-CODE.template.json
-              - cdk/cdk.out/MobileAppsRenderingPreview-PROD.template.json
+              - apps-rendering/cdk/cdk.out/MobileAppsRenderingPreview-CODE.template.json
+              - apps-rendering/cdk/cdk.out/MobileAppsRenderingPreview-PROD.template.json
             mobile-apps-rendering:
-              - dist/server/mobile-apps-rendering.zip
+              - apps-rendering/dist/server/mobile-apps-rendering.zip
             mobile-assets:
-              - dist/assets/manifest.json
-              - dist/assets/fonts
-              - dist/assets/
+              - apps-rendering/dist/assets/manifest.json
+              - apps-rendering/dist/assets/fonts
+              - apps-rendering/dist/assets/
 
