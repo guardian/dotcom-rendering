@@ -2,6 +2,8 @@ name: "AR CI"
 
 on:
   push:
+    paths-ignore:
+      - "dotcom-rendering/**"
 
   workflow_dispatch:
 
@@ -56,7 +58,7 @@ jobs:
         with:
           configPath: apps-rendering/riff-raff.yaml
           projectName: Mobile::mobile-apps-rendering
-          buildNumberOffset: 22000 # This is the last build number from TeamCity
+          buildNumberOffset: 27000 # This is the last build number from TeamCity
           contentDirectories: |
             mobile-apps-rendering-cfn:
               - cdk/cdk.out/MobileAppsRendering-CODE.template.json
