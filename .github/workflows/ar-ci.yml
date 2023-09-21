@@ -1,0 +1,73 @@
+name: "AR CI"
+
+on:
+  push:
+
+  workflow_dispatch:
+
+# Allow queued workflows to interrupt previous runs
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+# Allow GitHub to request an OIDC JWT ID token, to use with aws-actions/configure-aws-credentials
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Checkout the repository
+    steps:
+      - uses: actions/checkout@v4
+
+      # Get the desired version of Node installed
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install dependencies
+        run: |
+          npm i -g yarn@1.x
+          yarn --silent --frozen-lockfile
+
+      # Execute some tasks from the `apps-rendering/package.json` file, using `yarn`
+      - name: Build and package
+        working-directory: apps-rendering
+        run: |
+          yarn test
+          yarn build:client:prod
+          yarn build:server:prod
+          yarn copy-manifest
+          yarn copy-fonts
+          yarn synth
+          zip -r dist/server/mobile-apps-rendering.zip dist/server
+
+      - name: AWS Auth
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+          aws-region: eu-west-1
+
+      - name: Upload to riff-raff
+        uses: guardian/actions-riff-raff@v2.2.2
+        with:
+          configPath: apps-rendering/riff-raff.yaml
+          projectName: Mobile::mobile-apps-rendering
+          buildNumberOffset: 22000 # This is the last build number from TeamCity
+          contentDirectories: |
+            mobile-apps-rendering-cfn:
+              - cdk/cdk.out/MobileAppsRendering-CODE.template.json
+              - cdk/cdk.out/MobileAppsRendering-PROD.template.json
+            mobile-apps-rendering-preview-cfn:
+              - cdk/cdk.out/MobileAppsRenderingPreview-CODE.template.json
+              - cdk/cdk.out/MobileAppsRenderingPreview-PROD.template.json
+            mobile-apps-rendering:
+              - dist/server/mobile-apps-rendering.zip
+            mobile-assets:
+              - dist/assets/manifest.json
+              - dist/assets/fonts
+              - dist/assets/
+
