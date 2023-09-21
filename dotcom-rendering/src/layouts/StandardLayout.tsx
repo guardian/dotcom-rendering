@@ -14,6 +14,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
@@ -55,7 +56,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -286,7 +287,7 @@ const starWrapper = css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -336,6 +337,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+
 	const renderAds = isWeb && canRenderAds(article);
 
 	return (
@@ -477,6 +480,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			)}
 
 			<main data-layout="StandardLayout">
+				{isApps && (
+					<Island clientOnly={true}>
+						<AdPortals />
+					</Island>
+				)}
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"

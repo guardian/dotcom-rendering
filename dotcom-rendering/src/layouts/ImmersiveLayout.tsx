@@ -52,7 +52,7 @@ import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { FEElement } from '../types/content';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { Palette } from '../types/palette';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -181,7 +181,7 @@ const stretchLines = css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
 }

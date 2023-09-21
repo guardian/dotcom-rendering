@@ -10,7 +10,7 @@ import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import type { FEArticleBadgeType } from '../types/badge';
-import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
+import type { DCRArticle, FEBlocksRequest } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { makePrefetchHeader } from './lib/header';
 import {
@@ -41,7 +41,7 @@ const enhanceBadge = (badge?: FEArticleBadgeType) =>
 export const enhanceArticleType = (
 	body: unknown,
 	renderingTarget: RenderingTarget,
-): FEArticleType => {
+): DCRArticle => {
 	const validated = validateAsArticleType(body);
 	// addImageIDs needs to take account of both main media elements
 	// and block elements, so it needs to be executed here

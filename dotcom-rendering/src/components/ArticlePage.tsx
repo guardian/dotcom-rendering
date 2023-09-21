@@ -6,7 +6,7 @@ import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
@@ -23,7 +23,7 @@ import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
 
 interface BaseProps {
-	article: FEArticleType;
+	article: DCRArticle;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }

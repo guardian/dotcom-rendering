@@ -32,12 +32,12 @@ import { renderElement } from '../lib/renderElement';
 import type { NavType } from '../model/extract-nav';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
 }
