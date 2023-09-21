@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { IGetEpics__Result } from '@guardian/bridget/Acquisitions';
+import type { IEpic } from '@guardian/bridget/Epic';
 import {
 	body as bodySizes,
 	from,
@@ -11,12 +11,13 @@ import {
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { getAcquisitionsClient, getUserClient } from '../lib/bridgetApi';
+import { useOnlineStatus } from '../lib/useOnlineStatus';
 import { EpicContent } from './EpicContent.apps';
 
 export const AppsEpic = () => {
-	const [isPremium, setIsPremium] = useState<boolean | undefined>(undefined);
-	const [maybeEpic, setMaybeEpic] =
-		useState<IGetEpics__Result['success']>(undefined);
+	const [isPremium, setIsPremium] = useState<boolean>(true); // Default to true, so we initially don't show the epic
+	const isOnline = useOnlineStatus();
+	const [epic, setEpic] = useState<IEpic | undefined>(undefined);
 
 	useEffect(() => {
 		void getUserClient()
@@ -28,29 +29,27 @@ export const AppsEpic = () => {
 	useEffect(() => {
 		void getAcquisitionsClient()
 			.getEpics()
-			.then((me) => {
-				setMaybeEpic(me);
+			.then((maybeEpic) => {
+				setEpic(maybeEpic?.epic);
 			})
 			.catch(() => undefined);
 	}, []);
 
-	if (navigator.onLine) {
-		if (!isPremium && maybeEpic?.epic) {
-			const { title, body, firstButton, secondButton } = maybeEpic.epic;
-			const epicProps = {
-				title,
-				body,
-				firstButton,
-				secondButton,
-			};
-			return (
-				<div css={epicStyles}>
-					<EpicContent {...epicProps} />
-				</div>
-			);
-		}
+	if (isOnline && !isPremium && epic) {
+		const { title, body, firstButton, secondButton } = epic;
+		const epicProps = {
+			title,
+			body,
+			firstButton,
+			secondButton,
+		};
+		return (
+			<div css={epicStyles}>
+				<EpicContent {...epicProps} />
+			</div>
+		);
 	}
-	return <></>;
+	return null;
 };
 
 const epicStyles: SerializedStyles = css`

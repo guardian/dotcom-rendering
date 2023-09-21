@@ -5,9 +5,9 @@ import {
 	buttonThemeReaderRevenue,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
-import libDebounce from 'lodash.debounce';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAcquisitionsClient } from '../lib/bridgetApi';
+import { useIsInView } from '../lib/useIsInView';
 
 interface EpicProps {
 	title: string;
@@ -16,50 +16,31 @@ interface EpicProps {
 	secondButton?: string;
 }
 
-const isElementPartiallyInViewport = (
-	el: React.MutableRefObject<HTMLDivElement>,
-): boolean => {
-	const rect = el.current.getBoundingClientRect();
-	const windowHeight =
-		window.innerHeight || document.documentElement.clientHeight;
-	const windowWidth =
-		window.innerWidth || document.documentElement.clientWidth;
-	const vertInView = rect.top <= windowHeight && rect.top + rect.height >= 0;
-	const horInView = rect.left <= windowWidth && rect.left + rect.width >= 0;
-	return vertInView && horInView;
-};
-
 export function EpicContent({
 	title,
 	body,
 	firstButton,
 	secondButton,
 }: EpicProps): React.ReactElement | null {
-	const [impressionSeen, setImpressionSeen] = useState(false);
-	const epicContainer = useRef() as React.MutableRefObject<HTMLDivElement>;
+	const [impressionSeen, setImpressionSeenRef] = useIsInView({
+		debounce: true,
+	});
+	const [reportedImpressionSeen, setReportedImpressionSeen] = useState(false);
 
 	useEffect(() => {
-		const handleSeenEpic = libDebounce(() => {
-			if (
-				!impressionSeen &&
-				isElementPartiallyInViewport(epicContainer)
-			) {
-				void getAcquisitionsClient().epicSeen();
-				setImpressionSeen(true);
-			}
-		}, 100);
-		window.addEventListener('scroll', handleSeenEpic);
-		return (): void => {
-			window.removeEventListener('scroll', handleSeenEpic);
-		};
-	}, [impressionSeen]);
+		if (impressionSeen && !reportedImpressionSeen) {
+			void getAcquisitionsClient().epicSeen();
+			setReportedImpressionSeen(true);
+		}
+	}, [impressionSeen, reportedImpressionSeen, setReportedImpressionSeen]);
 
-	const epicButton = (
-		text: string,
-		action: () => Promise<void>,
-	): JSX.Element => (
+	const EpicButton = ({ text }: { text: string }) => (
 		<Button
-			onClick={action}
+			onClick={() =>
+				void getAcquisitionsClient().launchPurchaseScreen(
+					PurchaseScreenReason.epic,
+				)
+			}
 			iconSide="right"
 			icon={<SvgArrowRightStraight />}
 		>
@@ -68,23 +49,13 @@ export function EpicContent({
 	);
 
 	return (
-		<div ref={epicContainer}>
+		<div ref={setImpressionSeenRef}>
 			<h1 dangerouslySetInnerHTML={{ __html: title }}></h1>
 			<div dangerouslySetInnerHTML={{ __html: body }}></div>
 			<div className="button-container">
 				<ThemeProvider theme={buttonThemeReaderRevenue}>
-					{epicButton(firstButton, () =>
-						getAcquisitionsClient().launchPurchaseScreen(
-							PurchaseScreenReason.epic,
-						),
-					)}
-					{secondButton
-						? epicButton(secondButton, () =>
-								getAcquisitionsClient().launchPurchaseScreen(
-									PurchaseScreenReason.epic,
-								),
-						  )
-						: null}
+					<EpicButton text={firstButton} />
+					{!!secondButton && <EpicButton text={secondButton} />}
 				</ThemeProvider>
 			</div>
 		</div>
