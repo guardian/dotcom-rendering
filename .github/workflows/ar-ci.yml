@@ -69,7 +69,5 @@ jobs:
             mobile-apps-rendering:
               - apps-rendering/dist/server/mobile-apps-rendering.zip
             mobile-assets:
-              - apps-rendering/dist/assets/manifest.json
-              - apps-rendering/dist/assets/fonts
               - apps-rendering/dist/assets/
 
