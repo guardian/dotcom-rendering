@@ -167,7 +167,7 @@ export const AdPortals = () => {
 				createPortal(
 					<AdSlot
 						key={ad.id}
-						isSquare={index === 0}
+						isFirstAdSlot={index === 0}
 						onClickSupportButton={handleClickSupportButton}
 						ref={(node) => {
 							if (node !== null) {

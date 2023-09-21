@@ -9,6 +9,9 @@ export default {
 		chromatic: {
 			viewports: [breakpoints.mobile, breakpoints.tablet],
 		},
+		viewport: {
+			defaultViewport: 'mobile',
+		},
 	},
 };
 
@@ -18,9 +21,9 @@ export const AdSlotSquare = (args: Args) => {
 	const ref = useRef(null);
 	return <AdSlot ref={ref} {...args} />;
 };
-AdSlotSquare.storyName = 'with isSquare = true (first ad slot only)';
+AdSlotSquare.storyName = 'with isFirstAdSlot = true';
 AdSlotSquare.args = {
-	isSquare: true,
+	isFirstAdSlot: true,
 	onClickSupportButton: { action: 'clicked' },
 };
 
@@ -28,8 +31,8 @@ export const AdSlotNotSquare = (args: Args) => {
 	const ref = useRef(null);
 	return <AdSlot ref={ref} {...args} />;
 };
-AdSlotNotSquare.storyName = 'with isSquare = false (all other slots)';
+AdSlotNotSquare.storyName = 'with isFirstAdSlot = false';
 AdSlotNotSquare.args = {
-	isSquare: false,
+	isFirstAdSlot: false,
 	onClickSupportButton: { action: 'clicked' },
 };

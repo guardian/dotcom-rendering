@@ -11,12 +11,38 @@ import { forwardRef } from 'react';
 
 // Exported for Storybook use
 export interface Props {
-	isSquare: boolean;
+	isFirstAdSlot: boolean;
 	onClickSupportButton: () => void;
 }
 
-const adHeight = '258px';
-const wideContentWidth = 620;
+const adHeightPx = 258;
+const wideContentWidthPx = 620;
+
+const styles = css`
+	clear: both;
+	margin: ${remSpace[4]} 0;
+	color: ${palette.neutral[20]};
+	background: ${palette.neutral[97]};
+
+	${from.desktop} {
+		position: absolute;
+		margin-left: calc(${wideContentWidthPx}px + ${remSpace[4]});
+		min-width: 300px;
+		margin-bottom: ${remSpace[6]};
+	}
+
+	${until.phablet} {
+		margin: 1em -${remSpace[3]};
+	}
+`;
+
+const firstAdSlotStyles = css`
+	/** This is mainly for iPad users, so that the ad sits directly
+	 * under the "Most viewed" onwards section on the right */
+	${from.desktop} {
+		top: 0;
+	}
+`;
 
 const adLabelsStyles = css`
 	${textSans.xsmall()}
@@ -37,8 +63,7 @@ const adLabelsStyles = css`
 
 const adSlotStyles = css`
 	clear: both;
-	padding-bottom: ${adHeight};
-	background-color: 'red';
+	padding-bottom: ${adHeightPx}px;
 `;
 
 const adSlotSquareStyles = css`
@@ -51,7 +76,7 @@ const adSlotSquareStyles = css`
 `;
 
 const supportBannerStyles = css`
-	padding: ${remSpace[2]};
+	padding: ${remSpace[3]};
 	background-color: ${palette.neutral[93]};
 
 	p {
@@ -63,31 +88,6 @@ const supportBannerStyles = css`
 
 	button {
 		margin-top: ${remSpace[2]};
-	}
-`;
-
-const styles = css`
-	clear: both;
-	margin: ${remSpace[4]} 0;
-	color: ${palette.neutral[20]};
-	background: ${palette.neutral[97]};
-
-	${from.desktop} {
-		position: absolute;
-		margin-left: calc(${wideContentWidth}px + ${remSpace[4]});
-		min-width: 300px;
-		margin-bottom: ${remSpace[6]};
-	}
-
-	${until.phablet} {
-		margin: 1em -${remSpace[3]};
-	}
-
-	/* This class is applied if the article has fewer than 15 paragraphs */
-	&.short:nth-of-type(1) {
-		${from.desktop} {
-			top: 0;
-		}
 	}
 `;
 
@@ -109,23 +109,23 @@ const SupportBanner = ({
 );
 
 /**
- * AdSlot component **for apps only**
+ * AdSlot component for in-article ads **on apps only**
  *
  * Is set up with a forward ref due to the way ads are handled natively.
  * These slots are dynamically inserted into articles using React portals.
  * The ref is important so that we can provide the location of the slot to
- * the native layer, for it to "paint" an advert over the top of it on the screen.
+ * the native layer, for it to "paint" an advert over the top of it.
  *
  * @todo Style for dark mode
  */
 export const AdSlot = forwardRef<HTMLDivElement, Props>(
-	({ isSquare, onClickSupportButton }, ref) => (
-		<aside css={[styles]}>
+	({ isFirstAdSlot, onClickSupportButton }, ref) => (
+		<aside css={[styles, isFirstAdSlot && firstAdSlotStyles]}>
 			<div css={adLabelsStyles}>
 				<p>Advertisement</p>
 			</div>
 			<div
-				css={isSquare ? adSlotSquareStyles : adSlotStyles}
+				css={isFirstAdSlot ? adSlotSquareStyles : adSlotStyles}
 				ref={ref}
 			></div>
 			<SupportBanner onClickSupportButton={onClickSupportButton} />
