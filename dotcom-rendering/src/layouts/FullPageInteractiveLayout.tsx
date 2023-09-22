@@ -140,9 +140,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	 */
 	const renderAds = canRenderAds(article);
 
-	const isInEuropeTest =
-		article.config.switches['europeNetworkFrontSwitch'] === true;
-
 	if (isSlimNav) {
 		return (
 			<div
@@ -176,7 +173,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 			</div>
@@ -232,7 +228,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 								article.contributionsServiceUrl
 							}
 							idApiUrl={article.config.idApiUrl}
-							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
 								!!article.config.switches.headerTopBarSearchCapi
 							}
@@ -262,7 +257,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					}
 					editionId={article.editionId}
 					headerTopBarSwitch={!!article.config.switches.headerTopNav}
-					isInEuropeTest={isInEuropeTest}
 				/>
 			</Section>
 

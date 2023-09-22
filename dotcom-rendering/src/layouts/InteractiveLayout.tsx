@@ -211,9 +211,6 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 		config: { isPaidContent, host },
 	} = article;
 
-	const isInEuropeTest =
-		article.config.switches['europeNetworkFrontSwitch'] === true;
-
 	const showComments = article.isCommentable;
 
 	const { branding } = article.commercialProperties[article.editionId];
@@ -278,7 +275,6 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -313,7 +309,6 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 
