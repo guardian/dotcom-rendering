@@ -1,8 +1,5 @@
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
-import {
-	GuStack,
-	GuStringParameter,
-} from '@guardian/cdk/lib/constructs/core';
+import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
 import {
 	GuSecurityGroup,
 	GuVpc,
@@ -23,8 +20,8 @@ import {
 import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
-import type { DCRAlarmConfig, DCRProps } from './types';
-import { getUserData } from './userData';
+import type { DCRAlarmConfig, DCRProps } from './types.cts';
+import { getUserData } from './userData.cts';
 
 /**
  * DCR infrastructure provisioning via CDK

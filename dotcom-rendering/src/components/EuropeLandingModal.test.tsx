@@ -1,13 +1,13 @@
-import { getCookie } from '@guardian/libs';
-import { getModalType } from './EuropeLandingModal.importable';
+import { setCookie } from '@guardian/libs';
+import { jest } from '@jest/globals';
 
-// Mocking the getCookie function
-jest.mock('@guardian/libs', () => ({
-	// Replace with the actual path to getCookie file
-	getCookie: jest.fn(),
+const mockGetCookie = jest.fn<typeof import('@guardian/libs').getCookie>();
+jest.unstable_mockModule('@guardian/libs', () => ({
+	setCookie,
+	getCookie: mockGetCookie,
 }));
 
-const mockGetCookie = getCookie as jest.MockedFunction<typeof getCookie>;
+const { getModalType } = await import('./EuropeLandingModal.importable');
 
 describe('getModalType', () => {
 	beforeEach(() => {

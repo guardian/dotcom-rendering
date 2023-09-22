@@ -106,8 +106,7 @@ Promise.all([
 	copyDistServer(),
 	copyScripts(),
 	copyRiffRaff(),
-])
-	.catch((err) => {
-		warn(err.stack);
-		process.exit(1);
-	});
+]).catch((err) => {
+	warn(err.stack);
+	process.exit(1);
+});

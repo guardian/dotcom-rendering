@@ -1,6 +1,13 @@
-import { readFileSync } from 'node:fs';
+import { jest } from '@jest/globals';
 import { BUILD_VARIANT } from '../../scripts/webpack/bundles';
-import {
+
+const readFileSync = jest.fn();
+
+jest.unstable_mockModule('node:fs', () => ({
+	readFileSync,
+}));
+
+const {
 	APPS_SCRIPT,
 	decideAssetOrigin,
 	getModulesBuild,
@@ -9,10 +16,7 @@ import {
 	WEB_LEGACY_SCRIPT,
 	WEB_SCHEDULED_SCRIPT,
 	WEB_VARIANT_SCRIPT,
-} from './assets';
-
-jest.mock('node:fs');
-jest.mock('node:path');
+} = await import('./assets');
 
 describe('decideAssetOrigin for stage', () => {
 	it('PROD', () => {
@@ -92,7 +96,7 @@ describe('getPathFromManifest', () => {
 			"7305.web.js": "7305.web.8cdc05567d98ebd9f67e.js",
 			"356.web.js": "356.web.0a1bbdf8c7a5e5826b7c.js"
 		}`;
-		(readFileSync as jest.Mock).mockReturnValue(assetHash);
+		readFileSync.mockReturnValue(assetHash);
 	});
 
 	afterEach(() => {

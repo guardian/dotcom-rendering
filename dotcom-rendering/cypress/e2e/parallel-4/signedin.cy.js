@@ -2,7 +2,7 @@
 /* eslint-disable func-names */
 import { disableCMP } from '../../lib/disableCMP.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-import { Standard } from '../../../fixtures/generated/articles/Standard';
+import { Standard } from '../../../fixtures/generated/articles/Standard.ts';
 
 const articleUrl =
 	'https://www.theguardian.com/commentisfree/2020/dec/11/brexit-conservative-rule-breaking-eu';

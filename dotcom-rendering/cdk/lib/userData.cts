@@ -1,4 +1,4 @@
-import type { UserDataProps } from './types';
+import type { UserDataProps } from './types.cts';
 
 /**
  * Returns user data configuration for instances in the rendering app

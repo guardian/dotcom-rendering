@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { isObject, isString } from '@guardian/libs';
 import {
 	adaptive,
@@ -9,6 +10,8 @@ import {
 } from '../../scripts/webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
 import { makeMemoizedFunction } from './memoize';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 interface AssetHash {
 	[key: string]: string;
