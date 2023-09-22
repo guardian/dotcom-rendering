@@ -45,7 +45,7 @@ jobs:
           yarn copy-manifest
           yarn copy-fonts
           yarn synth
-          zip -r dist/server/mobile-apps-rendering.zip dist/server
+          zip -j dist/server/mobile-apps-rendering.zip dist/server/*
 
       - name: AWS Auth
         uses: aws-actions/configure-aws-credentials@v2
