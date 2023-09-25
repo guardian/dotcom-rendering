@@ -28,11 +28,11 @@ jobs:
       # Get the desired version of Node installed
       - uses: actions/setup-node@v3
         with:
+          cache: yarn
           node-version-file: .nvmrc
 
       - name: Install dependencies
         run: |
-          npm i -g yarn@1.x
           yarn --silent --frozen-lockfile
 
       # Execute some tasks from the `apps-rendering/package.json` file, using `yarn`
