@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { updateIframeHeight } from '../client/updateIframeHeight';
+import { registerListeners } from '../client/updateIframeHeight';
 import type { RoleType } from '../types/content';
 import { ClickToView } from './ClickToView';
 
@@ -40,7 +40,7 @@ export const UnsafeEmbedBlockComponent = ({
 			source={source}
 			sourceDomain={sourceDomain}
 			onAccept={() =>
-				updateIframeHeight(`iframe[name="unsafe-embed-${uniqueIndex}"]`)
+				registerListeners(`iframe[name="unsafe-embed-${uniqueIndex}"]`)
 			}
 		>
 			<iframe

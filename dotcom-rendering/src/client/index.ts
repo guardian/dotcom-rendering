@@ -1,38 +1,120 @@
 import './webpackPublicPath';
+import { schedule } from '../lib/scheduler';
 
-// these modules are bundled in the initial (i.e. this) chunk, so that they run ASAP
-import { bootCmp } from './bootCmp';
-import { dynamicImport } from './dynamicImport';
-import { ga } from './ga';
-import { islands } from './islands';
-import { recordInitialPageEvents } from './ophan/recordInitialPageEvents';
-import { performanceMonitoring } from './performanceMonitoring';
-import { sentryLoader } from './sentryLoader';
-import { startup } from './startup';
+const isPolyfilled = new Promise<void>((resolve) => {
+	if (window.guardian.mustardCut || window.guardian.polyfilled) {
+		resolve();
+	}
+	window.guardian.queue.push(() => {
+		resolve();
+	});
+});
 
-startup('bootCmp', bootCmp);
-startup('recordInitialPageEvents', recordInitialPageEvents);
-startup('ga', ga);
-startup('sentryLoader', sentryLoader);
-startup('dynamicImport', dynamicImport);
-startup('islands', islands);
-startup('performanceMonitoring', performanceMonitoring);
+/*************************************************************
+ *
+ * The following modules are bundled in the entry chunk,
+ * so they can be run immediately, but we still want to report
+ * on the duration of loading and evaluating them.
+ *
+ *************************************************************/
 
-// these modules are loaded as separate chunks, so that they can be lazy-loaded
-void import(/* webpackChunkName: 'atomIframe' */ './atomIframe').then(
-	({ atomIframe }) => startup('atomIframe', atomIframe),
+void import(/* webpackMode: "eager" */ './bootCmp').then(
+	async ({ bootCmp }) => {
+		await isPolyfilled;
+		void schedule('bootCmp', bootCmp, { priority: 'critical' });
+	},
 );
-void import(/* webpackChunkName: 'embedIframe' */ './embedIframe').then(
-	({ embedIframe }) => startup('embedIframe', embedIframe),
+void import(/* webpackMode: "eager" */ './ophan/recordInitialPageEvents').then(
+	async ({ recordInitialPageEvents }) => {
+		await isPolyfilled;
+		schedule('recordInitialPageEvents', recordInitialPageEvents, {
+			priority: 'critical',
+		});
+	},
 );
+void import(/* webpackMode: "eager" */ './ga').then(async ({ ga }) => {
+	await isPolyfilled;
+	void schedule('ga', ga, {
+		priority: 'critical',
+	});
+});
+void import(/* webpackMode: "eager" */ './sentryLoader').then(
+	async ({ sentryLoader }) => {
+		await isPolyfilled;
+		schedule('sentryLoader', sentryLoader, {
+			priority: 'critical',
+		});
+	},
+);
+void import(/* webpackMode: "eager" */ './dynamicImport').then(
+	async ({ dynamicImport }) => {
+		await isPolyfilled;
+		schedule('dynamicImport', dynamicImport, {
+			priority: 'critical',
+		});
+	},
+);
+void import(/* webpackMode: "eager" */ './islands').then(
+	async ({ islands }) => {
+		await isPolyfilled;
+		void schedule('islands', islands, {
+			priority: 'critical',
+		});
+	},
+);
+void import(/* webpackMode: "eager" */ './performanceMonitoring').then(
+	async ({ performanceMonitoring }) => {
+		await isPolyfilled;
+		void schedule('performanceMonitoring', performanceMonitoring, {
+			priority: 'critical',
+		});
+	},
+);
+
+/*************************************************************
+ *
+ * The following modules are lazy loaded,
+ * because they are lower priority and do not want to block
+ * the modules above on loading these.
+ *
+ * We are not assigning chunk name to allow Webpack
+ * to optimise chunking based on its algorithm.
+ *
+ *************************************************************/
+
 void import(
-	/* webpackChunkName: 'newsletterEmbedIframe' */ './newsletterEmbedIframe'
-).then(({ newsletterEmbedIframe }) =>
-	startup('newsletterEmbedIframe', newsletterEmbedIframe),
-);
-void import(/* webpackChunkName: 'relativeTime' */ './relativeTime').then(
-	({ relativeTime }) => startup('relativeTime', relativeTime),
-);
-void import(/* webpackChunkName: 'discussion' */ './discussion').then(
-	({ discussion }) => startup('initDiscussion', discussion),
-);
+	/* webpackMode: 'lazy' */
+	'./updateIframeHeight'
+).then(async ({ updateIframeHeight }) => {
+	await isPolyfilled;
+	void schedule('updateIframeHeight', updateIframeHeight, {
+		priority: 'feature',
+	});
+});
+void import(
+	/* webpackMode: 'lazy' */
+	'./newsletterEmbedIframe'
+).then(async ({ newsletterEmbedIframe }) => {
+	await isPolyfilled;
+	void schedule('newsletterEmbedIframe', newsletterEmbedIframe, {
+		priority: 'feature',
+	});
+});
+void import(
+	/* webpackMode: 'lazy' */
+	'./relativeTime'
+).then(async ({ relativeTime }) => {
+	await isPolyfilled;
+	void schedule('relativeTime', relativeTime, {
+		priority: 'feature',
+	});
+});
+void import(
+	/* webpackMode: 'lazy' */
+	'./discussion'
+).then(async ({ discussion }) => {
+	await isPolyfilled;
+	void schedule('initDiscussion', discussion, {
+		priority: 'feature',
+	});
+});

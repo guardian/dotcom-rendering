@@ -5,14 +5,10 @@ type Message = {
 	value: string;
 };
 
-export const updateIframeHeight = (
-	queryString: `iframe${string}`,
-): Promise<void> => {
-	const iframes = [
-		...document.querySelectorAll<HTMLIFrameElement>(queryString),
-	];
+export const registerListeners = (selector: `iframe${string}`): void => {
+	const iframes = [...document.querySelectorAll<HTMLIFrameElement>(selector)];
 
-	if (iframes.length === 0) return Promise.resolve();
+	if (iframes.length === 0) return;
 
 	window.addEventListener('message', (event) => {
 		const iframe = iframes.find((i) => {
@@ -44,6 +40,12 @@ export const updateIframeHeight = (
 			.replace(/<\/gu-script>/g, '<' + '/script>');
 		iframe.setAttribute('srcdoc', src);
 	}
-
-	return Promise.resolve();
 };
+
+export const updateIframeHeight = (): Promise<void> =>
+	Promise.allSettled([
+		registerListeners('iframe.js-embed__iframe'),
+		registerListeners('iframe.atom__iframe'),
+	]).then(() => {
+		/* do nothing */
+	});
