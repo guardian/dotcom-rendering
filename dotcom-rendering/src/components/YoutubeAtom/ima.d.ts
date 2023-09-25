@@ -1295,15 +1295,5 @@ export namespace google {
 			 */
 			Normal = 'normal',
 		}
-
-		/**
-		 * A string containing the full version of the SDK.
-		 */
-		const Version: string;
-
-		/**
-		 * Settings for the Google IMA SDK.
-		 */
-		const Settings: ImaSdkSettings;
 	}
 }
