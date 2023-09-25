@@ -13,6 +13,9 @@ export default {
 			defaultViewport: 'mobile',
 		},
 	},
+	argTypes: {
+		onClickSupportButton: { action: 'clicked' },
+	},
 };
 
 type Args = Omit<Props, 'ref'>;
@@ -24,7 +27,6 @@ export const AdSlotSquare = (args: Args) => {
 AdSlotSquare.storyName = 'with isFirstAdSlot = true';
 AdSlotSquare.args = {
 	isFirstAdSlot: true,
-	onClickSupportButton: { action: 'clicked' },
 };
 
 export const AdSlotNotSquare = (args: Args) => {
@@ -34,5 +36,4 @@ export const AdSlotNotSquare = (args: Args) => {
 AdSlotNotSquare.storyName = 'with isFirstAdSlot = false';
 AdSlotNotSquare.args = {
 	isFirstAdSlot: false,
-	onClickSupportButton: { action: 'clicked' },
 };
