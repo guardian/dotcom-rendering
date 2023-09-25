@@ -3,8 +3,7 @@ import {
 	focusHalo,
 	from,
 	headline,
-	neutral,
-	news,
+	palette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
@@ -74,7 +73,7 @@ const svgStyles = css`
 	padding-left: ${space[2]}px;
 	svg {
 		transform-origin: center;
-		fill: ${neutral[100]};
+		fill: ${palette.neutral[100]};
 		height: 60px;
 		transform: scale(1.15);
 		transition-duration: 300ms;
@@ -104,7 +103,7 @@ const pillStyles = css`
 	right: ${space[2]}px;
 	${textSans.xxsmall({ fontWeight: 'bold' })};
 	background-color: rgba(0, 0, 0, 0.7);
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	border-radius: ${space[3]}px;
 	padding: 0 6px;
 	display: inline-flex;
@@ -128,7 +127,7 @@ const liveStyles = css`
 		width: 9px;
 		height: 9px;
 		border-radius: 50%;
-		background-color: ${news[500]};
+		background-color: ${palette.news[500]};
 		display: inline-block;
 		position: relative;
 		margin-right: 0.1875rem;
@@ -144,7 +143,7 @@ const textOverlayStyles = css`
 	);
 	width: 100%;
 	bottom: 0;
-	color: #ffffff;
+	color: ${palette.neutral[100]};
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -153,8 +152,8 @@ const textOverlayStyles = css`
 	padding-top: ${space[9]}px;
 `;
 
-const kickerStyles = (palette: Palette) => css`
-	color: ${palette.text.youtubeOverlayKicker};
+const kickerStyles = (dcrPalette: Palette) => css`
+	color: ${dcrPalette.text.youtubeOverlayKicker};
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	${from.tablet} {
 		${headline.xxsmall({ fontWeight: 'bold' })};
@@ -190,7 +189,7 @@ export const YoutubeAtomOverlay = ({
 	const hasDuration = duration !== undefined && duration > 0;
 	const showPill = !!videoCategory || hasDuration;
 	const isLive = videoCategory === 'live';
-	const palette = decidePalette(format);
+	const dcrPalette = decidePalette(format);
 
 	return (
 		<button
@@ -234,7 +233,7 @@ export const YoutubeAtomOverlay = ({
 
 			{showTextOverlay && (
 				<div css={textOverlayStyles}>
-					<div css={kickerStyles(palette)}>{kicker}</div>
+					<div css={kickerStyles(dcrPalette)}>{kicker}</div>
 					<div css={titleStyles}>{title}</div>
 				</div>
 			)}
