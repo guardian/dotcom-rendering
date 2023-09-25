@@ -267,128 +267,117 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 
 	return (
 		<>
-			<>
-				<div>
-					{renderAds && (
-						<Stuck>
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								shouldCenter={false}
-							>
-								<HeaderAdSlot />
-							</Section>
-						</Stuck>
-					)}
-					<SendToBack>
+			<div>
+				{renderAds && (
+					<Stuck>
 						<Section
 							fullWidth={true}
-							shouldCenter={false}
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
-							backgroundColour={brandBackground.primary}
-							element="header"
+							shouldCenter={false}
 						>
-							<Header
-								editionId={article.editionId}
-								idUrl={article.config.idUrl}
-								mmaUrl={article.config.mmaUrl}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								urls={article.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!article.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
-								headerTopBarSearchCapiSwitch={
-									!!article.config.switches
-										.headerTopBarSearchCapi
-								}
-							/>
+							<HeaderAdSlot />
 						</Section>
-						<Section
-							fullWidth={true}
-							borderColour={brandLine.primary}
-							showTopBorder={false}
-							padSides={false}
-							backgroundColour={brandBackground.primary}
-							element="nav"
-							format={format}
-						>
-							<Nav
-								nav={NAV}
-								isImmersive={
-									format.display === ArticleDisplay.Immersive
-								}
-								displayRoundel={
-									format.display ===
-										ArticleDisplay.Immersive ||
-									format.theme === ArticleSpecial.Labs
-								}
-								selectedPillar={NAV.selectedPillar}
-								subscribeUrl={
-									article.nav.readerRevenueLinks.header
-										.subscribe
-								}
-								editionId={article.editionId}
-								headerTopBarSwitch={
-									!!article.config.switches.headerTopNav
-								}
-								isInEuropeTest={isInEuropeTest}
-							/>
-						</Section>
+					</Stuck>
+				)}
+				<SendToBack>
+					<Section
+						fullWidth={true}
+						shouldCenter={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						padSides={false}
+						backgroundColour={brandBackground.primary}
+						element="header"
+					>
+						<Header
+							editionId={article.editionId}
+							idUrl={article.config.idUrl}
+							mmaUrl={article.config.mmaUrl}
+							discussionApiUrl={article.config.discussionApiUrl}
+							urls={article.nav.readerRevenueLinks.header}
+							remoteHeader={
+								!!article.config.switches.remoteHeader
+							}
+							contributionsServiceUrl={contributionsServiceUrl}
+							idApiUrl={article.config.idApiUrl}
+							isInEuropeTest={isInEuropeTest}
+							headerTopBarSearchCapiSwitch={
+								!!article.config.switches.headerTopBarSearchCapi
+							}
+						/>
+					</Section>
+					<Section
+						fullWidth={true}
+						borderColour={brandLine.primary}
+						showTopBorder={false}
+						padSides={false}
+						backgroundColour={brandBackground.primary}
+						element="nav"
+						format={format}
+					>
+						<Nav
+							nav={NAV}
+							isImmersive={
+								format.display === ArticleDisplay.Immersive
+							}
+							displayRoundel={
+								format.display === ArticleDisplay.Immersive ||
+								format.theme === ArticleSpecial.Labs
+							}
+							selectedPillar={NAV.selectedPillar}
+							subscribeUrl={
+								article.nav.readerRevenueLinks.header.subscribe
+							}
+							editionId={article.editionId}
+							headerTopBarSwitch={
+								!!article.config.switches.headerTopNav
+							}
+							isInEuropeTest={isInEuropeTest}
+						/>
+					</Section>
 
-						{NAV.subNavSections && (
-							<Section
-								fullWidth={true}
-								backgroundColour={palette.background.article}
-								padSides={false}
-								element="aside"
-								format={format}
-								showTopBorder={showSubNavTopBorder}
-							>
-								<Island deferUntil="idle">
-									<SubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
-										linkHoverColour={
-											palette.text.articleLinkHover
-										}
-										borderColour={palette.border.subNav}
-										subNavLinkColour={
-											palette.text.subNavLink
-										}
-									/>
-								</Island>
-							</Section>
-						)}
-
+					{NAV.subNavSections && (
 						<Section
 							fullWidth={true}
 							backgroundColour={palette.background.article}
 							padSides={false}
-							showTopBorder={false}
-							borderColour={palette.border.secondary}
+							element="aside"
+							format={format}
+							showTopBorder={showSubNavTopBorder}
 						>
-							<StraightLines
-								count={4}
-								color={palette.border.secondary}
-								cssOverrides={css`
-									display: block;
-								`}
-							/>
+							<Island deferUntil="idle">
+								<SubNav
+									subNavSections={NAV.subNavSections}
+									currentNavLink={NAV.currentNavLink}
+									linkHoverColour={
+										palette.text.articleLinkHover
+									}
+									borderColour={palette.border.subNav}
+									subNavLinkColour={palette.text.subNavLink}
+								/>
+							</Island>
 						</Section>
-					</SendToBack>
-				</div>
-			</>
+					)}
+
+					<Section
+						fullWidth={true}
+						backgroundColour={palette.background.article}
+						padSides={false}
+						showTopBorder={false}
+						borderColour={palette.border.secondary}
+					>
+						<StraightLines
+							count={4}
+							color={palette.border.secondary}
+							cssOverrides={css`
+								display: block;
+							`}
+						/>
+					</Section>
+				</SendToBack>
+			</div>
 
 			<main
 				data-layout="PictureLayout"
