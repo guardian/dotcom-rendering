@@ -1,4 +1,5 @@
 import type { ABTest } from '@guardian/ab-core';
+// Sign in Gate A/B Tests
 import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant';
 // Sign in Gate Types
