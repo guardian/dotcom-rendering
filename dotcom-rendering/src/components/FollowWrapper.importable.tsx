@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { useEffect, useState } from 'react';
-import { getNotificationsClient } from '../lib/bridgetApi';
-import { FollowButton } from './FollowButton';
+import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
+import { FollowNotificationsButton, FollowTagButton } from './FollowButtons';
 
 type Props = {
 	id: string;
@@ -11,7 +11,10 @@ type Props = {
 };
 
 export const FollowWrapper = ({ id, displayName, format }: Props) => {
-	const [isFollowing, setIsFollowing] = useState<boolean | undefined>(
+	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
+		boolean | undefined
+	>(undefined);
+	const [isFollowingTag, setIsFollowingTag] = useState<boolean | undefined>(
 		undefined,
 	);
 	useEffect(() => {
@@ -23,38 +26,72 @@ export const FollowWrapper = ({ id, displayName, format }: Props) => {
 
 		void getNotificationsClient()
 			.isFollowing(topic)
-			.then(setIsFollowing)
+			.then(setIsFollowingNotifications)
+			.catch((e) => console.error(e));
+
+		void getTagClient()
+			.isFollowing(topic)
+			.then(setIsFollowingTag)
 			.catch((e) => console.error(e));
 	}, [id, displayName]);
 
-	const handler = () => {
+	const tagHandler = () => {
 		const topic = new Topic({
 			id,
 			displayName,
 			type: 'tag-contributor',
 		});
 
-		isFollowing
+		isFollowingTag
+			? void getTagClient()
+					.unfollow(topic)
+					.then(() => setIsFollowingTag(false))
+					.catch((e) => console.error(e))
+			: void getTagClient()
+					.follow(topic)
+					.then(() => setIsFollowingTag(true))
+					.catch((e) => console.error(e));
+	};
+
+	const notificationsHandler = () => {
+		const topic = new Topic({
+			id,
+			displayName,
+			type: 'tag-contributor',
+		});
+
+		isFollowingNotifications
 			? void getNotificationsClient()
 					.unfollow(topic)
-					.then(() => setIsFollowing(false))
+					.then(() => setIsFollowingNotifications(false))
 					.catch((e) => console.error(e))
 			: void getNotificationsClient()
 					.follow(topic)
-					.then(() => setIsFollowing(true))
+					.then(() => setIsFollowingNotifications(true))
 					.catch((e) => console.error(e));
 	};
+
 	return (
 		<div
 			css={css`
 				min-height: 24px;
 			`}
 		>
-			<FollowButton
-				isFollowing={isFollowing ?? false}
+			<FollowTagButton
+				isFollowing={isFollowingTag ?? false}
 				displayName={displayName}
 				onClickHandler={
-					isFollowing !== undefined ? handler : () => undefined
+					isFollowingTag !== undefined ? tagHandler : () => undefined
+				}
+				format={format}
+			/>
+			<FollowNotificationsButton
+				isFollowing={isFollowingNotifications ?? false}
+				displayName={displayName}
+				onClickHandler={
+					isFollowingNotifications !== undefined
+						? notificationsHandler
+						: () => undefined
 				}
 				format={format}
 			/>
