@@ -33,6 +33,19 @@ const generateName = (build) => {
  * @param {Build} build
  * @returns {string}
  */
+const getEntryIndex = (build) => {
+	switch (build) {
+		case 'apps':
+			return './src/client/index.apps.ts';
+		default:
+			return './src/client/index.ts';
+	}
+};
+
+/**
+ * @param {Build} build
+ * @returns {string}
+ */
 const getLoaders = (build) => {
 	switch (build) {
 		case 'web.legacy':
@@ -78,7 +91,7 @@ const getLoaders = (build) => {
  */
 module.exports = ({ build, sessionId }) => ({
 	entry: {
-		index: './src/client/index.ts',
+		index: getEntryIndex(build),
 		debug: './src/client/debug/index.ts',
 	},
 	resolve: {
