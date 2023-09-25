@@ -1,8 +1,5 @@
 import { render } from '@testing-library/react';
-
-// This file is globally mocked in "/dotcom-rendering/scripts/jest/setup.ts"
-// so we need to explicitly override this in order to test its functionality
-const { useConfig, ConfigProvider } = jest.requireActual('./ConfigContext.tsx');
+import { ConfigProvider, useConfig } from './ConfigContext';
 
 const testId = 'testId';
 const TestComponent = () => {
@@ -22,7 +19,7 @@ describe('ConfigContext', () => {
 	});
 
 	describe('with ConfigProvider', () => {
-		it.each(['Web', 'Apps'])(
+		it.each(['Web', 'Apps'] as const)(
 			'provides correct context through useConfig hook with renderingTarget: "%s"',
 			(renderingTarget) => {
 				const config = { renderingTarget };

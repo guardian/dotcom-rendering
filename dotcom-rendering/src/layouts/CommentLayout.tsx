@@ -269,9 +269,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 		config: { isPaidContent, host },
 	} = article;
 
-	const isInEuropeTest =
-		article.config.switches['europeNetworkFrontSwitch'] === true;
-
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
 		article.config.switches.slotBodyEnd;
@@ -340,7 +337,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -374,7 +370,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 							headerTopBarSwitch={
 								!!article.config.switches.headerTopNav
 							}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 

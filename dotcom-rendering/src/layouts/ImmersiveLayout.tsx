@@ -269,9 +269,6 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const isInEuropeTest =
-		article.config.switches['europeNetworkFrontSwitch'] === true;
-
 	const { renderingTarget } = useConfig();
 
 	/**
@@ -354,7 +351,6 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 			</div>
