@@ -1,4 +1,4 @@
-import { writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import {
 	calculateApproximateBlockHeight,
 	calculateApproximateElementHeight,
@@ -88,6 +88,11 @@ export const LiveBlogBlocksAndAdverts = ({
 	const IS_MOBILE = false;
 
 	const pageElementData: PageElementData[] = [];
+
+	const resultsDir = 'results';
+	if (!existsSync(resultsDir)) {
+		mkdirSync(resultsDir);
+	}
 
 	return (
 		<>
