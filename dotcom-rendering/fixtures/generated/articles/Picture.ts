@@ -442,11 +442,6 @@ export const Picture: FEArticleType = {
 						url: '/football',
 						children: [
 							{
-								title: "Women's World Cup",
-								url: '/football/womens-world-cup-2023',
-								longTitle: 'football/womens-world-cup-2023',
-							},
-							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -642,11 +637,6 @@ export const Picture: FEArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: "Women's World Cup",
-								url: '/football/womens-world-cup-2023',
-								longTitle: 'football/womens-world-cup-2023',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -1109,9 +1099,9 @@ export const Picture: FEArticleType = {
 	designType: 'Comment',
 	editionId: 'UK',
 	format: {
-		design: 'CommentDesign',
+		design: 'PictureDesign',
 		theme: 'OpinionPillar',
-		display: 'StandardDisplay',
+		display: 'ShowcaseDisplay',
 	},
 	openGraphData: {
 		'og:url':
@@ -1662,7 +1652,7 @@ export const Picture: FEArticleType = {
 					],
 				},
 			],
-			elementId: '3ef72f59-e961-42a4-b484-baaa0a49f25c',
+			elementId: 'f00cc98e-4717-441f-9c17-55a915d8ba5e',
 		},
 	],
 	canonicalUrl:
@@ -1777,7 +1767,6 @@ export const Picture: FEArticleType = {
 			mobileStickyPrebid: true,
 			breakingNews: true,
 			externalVideoEmbeds: true,
-			simpleReach: true,
 			carrotTrafficDriver: true,
 			geoMostPopular: true,
 			weAreHiring: true,

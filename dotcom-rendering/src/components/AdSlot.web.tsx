@@ -12,14 +12,13 @@ import {
 } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
-import { AD_CONTAINER_HEIGHT } from '../lib/liveblog-right-ad-constants';
 import { TopRightAdSlot } from './TopRightAdSlot';
 
 type InlinePosition =
 	| 'fronts-banner'
 	| 'inline'
 	| 'liveblog-inline'
-	| 'liveblog-right'
+	| 'liveblog-inline-mobile'
 	| 'mobile-front';
 
 type DefaultProps = {
@@ -204,6 +203,7 @@ const merchandisingAdStyles = css`
 
 const inlineAdStyles = css`
 	position: relative;
+
 	${until.tablet} {
 		display: none;
 	}
@@ -211,6 +211,22 @@ const inlineAdStyles = css`
 
 const liveblogInlineAdStyles = css`
 	position: relative;
+	min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
+	background-color: ${palette.neutral[93]};
+
+	${until.tablet} {
+		display: none;
+	}
+`;
+
+const liveblogInlineMobileAdStyles = css`
+	position: relative;
+	min-height: ${adSizes.outstreamMobile.height + constants.AD_LABEL_HEIGHT}px;
+	background-color: ${palette.neutral[93]};
+
+	${from.tablet} {
+		display: none;
+	}
 `;
 
 const mobileFrontAdStyles = css`
@@ -274,16 +290,33 @@ const articleEndAdStyles = css`
 const mostPopAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
-	min-width: 300px;
-	width: 300px;
+	min-width: ${adSizes.mpu.width}px;
+	max-width: ${adSizes.mpu.width}px;
 	margin: 12px auto;
 	text-align: center;
+	${from.tablet} {
+		max-width: 700px;
+	}
 	${from.desktop} {
-		margin: 0;
 		width: auto;
+		max-width: ${adSizes.mpu.width}px;
 	}
 	${from.wide} {
 		margin-top: 25px;
+	}
+`;
+
+const mostPopContainerStyles = css`
+	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-width: ${adSizes.mpu.width}px;
+	width: fit-content;
+	max-width: ${adSizes.mpu.width}px;
+	margin: 0 auto;
+	${from.tablet} {
+		max-width: 700px;
+	}
+	${from.desktop} {
+		max-width: ${adSizes.mpu.width}px;
 	}
 `;
 
@@ -414,40 +447,6 @@ export const AdSlot = ({
 				default:
 					return null;
 			}
-		case 'liveblog-right': {
-			const advertId = `liveblog-right-${index}`;
-			return (
-				<div
-					className="ad-slot-container"
-					css={[
-						adContainerStyles,
-						css`
-							height: ${AD_CONTAINER_HEIGHT}px;
-						`,
-					]}
-				>
-					<div
-						id={`dfp-ad--${advertId}`}
-						className={[
-							'js-ad-slot',
-							'ad-slot',
-							`ad-slot--${advertId}`,
-							'ad-slot--liveblog-right',
-							'ad-slot--rendered',
-						].join(' ')}
-						css={[
-							css`
-								position: sticky;
-								top: 0;
-							`,
-						]}
-						data-link-name={`ad slot ${advertId}`}
-						data-name={advertId}
-						aria-hidden="true"
-					/>
-				</div>
-			);
-		}
 		case 'comments': {
 			return (
 				<div className="ad-slot-container" css={[adContainerStyles]}>
@@ -492,7 +491,10 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div
+					className="ad-slot-container"
+					css={[adContainerStyles, mostPopContainerStyles]}
+				>
 					<div
 						id="dfp-ad--mostpop"
 						className={[
@@ -502,7 +504,11 @@ export const AdSlot = ({
 							'ad-slot--mpu-banner-ad',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[mostPopAdStyles]}
+						css={[
+							fluidAdStyles,
+							fluidFullWidthAdStyles,
+							mostPopAdStyles,
+						]}
 						data-link-name="ad slot mostpop"
 						data-name="mostpop"
 						aria-hidden="true"
@@ -654,6 +660,27 @@ export const AdSlot = ({
 							'ad-slot--rendered',
 						].join(' ')}
 						css={[liveblogInlineAdStyles]}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
+		case 'liveblog-inline-mobile': {
+			const advertId = `inline${index}`;
+			return (
+				<div className="ad-slot-container" css={[adContainerStyles]}>
+					<div
+						id={`dfp-ad--${advertId}--mobile`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							`ad-slot--liveblog-inline--mobile`,
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[liveblogInlineMobileAdStyles]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						aria-hidden="true"

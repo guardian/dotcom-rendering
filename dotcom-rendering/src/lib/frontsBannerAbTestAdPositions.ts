@@ -58,9 +58,18 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		'Video',
 		'Other sports',
 	],
+	'us/sport': [
+		// multiline array
+		'Around the world',
+		'The big picture',
+	],
+	'au/sport': [
+		// multiline array
+		'Features',
+	],
 	football: [
 		// multiline array
-		'In depth',
+		'News and features',
 		'Regulars',
 		'Next generation',
 	],
@@ -69,12 +78,34 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		'News',
 		'You may have missed',
 	],
+	'us/culture': [
+		// multiline array
+		'Talking points',
+		'Reviews',
+	],
+	'au/culture': [
+		// multiline array
+		'Australia this month',
+		'Reviews',
+		'News',
+	],
 	'uk/lifeandstyle': [
 		// multiline array
 		'Fashion',
 		'Health & wellbeing',
 		'Money',
 		'The big picture',
+	],
+	'us/lifeandstyle': [
+		// multiline array
+		'Fashion',
+		'Food & drink',
+		'Advice',
+	],
+	'au/lifeandstyle': [
+		// multiline array
+		'Relationships',
+		'Health & fitness',
 	],
 	'uk/commentisfree': [
 		'The Heat or Eat Diaries',
@@ -83,6 +114,14 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		'You may have missed',
 		'Cartoons',
 		'Letters',
+	],
+	'us/commentisfree': [
+		// It's a short front and there's a thrasher right in the middle at the moment
+	],
+	'au/commentisfree': [
+		// multiline array
+		'Columnists',
+		'Indigenous Australia',
 	],
 	'uk-news': [
 		// multiline array
@@ -101,13 +140,23 @@ export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		// multiline array
 		'Opinion',
 		'US politics',
-		'Video',
 	],
 	'uk/business': [
 		// multiline array
 		'Opinion & analysis',
 		'Multimedia',
 	],
+	'us/business': [
+		// multiline array
+		'In depth',
+		'Featured Topics',
+	],
+	'au/business': [
+		// multiline array
+		'Greg Jericho',
+		'Global view',
+	],
+
 	'australia-news': [
 		// multiline array
 		'Australian politics',

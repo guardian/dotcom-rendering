@@ -10,6 +10,9 @@ type NewsletterSubscribeCallback = (id: string) => Promise<void>;
 const subscribeToNewsletter: NewsletterSubscribeCallback = (id: string) =>
 	Promise.resolve();
 
+const fetchEmail: () => Promise<string | null> = () =>
+	Promise.resolve('name@example.com');
+
 export default {
 	component: 'BrazeBanners',
 	title: 'Components/StickyBottomBanner/BrazeBanners',
@@ -63,6 +66,7 @@ export const BrazeBannerComponent = (
 				}}
 				brazeMessageProps={brazeMessageProps}
 				subscribeToNewsletter={subscribeToNewsletter}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}
@@ -131,6 +135,7 @@ export const BrazeAppBannerComponent = (
 				}}
 				brazeMessageProps={brazeMessageProps}
 				subscribeToNewsletter={subscribeToNewsletter}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}
@@ -198,6 +203,7 @@ export const BrazeNewsletterBannerComponent = (
 				}}
 				brazeMessageProps={brazeMessageProps}
 				subscribeToNewsletter={subscribeToNewsletter}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}
@@ -283,6 +289,7 @@ export const BrazeStyleableBannerComponent = (
 				}}
 				brazeMessageProps={brazeMessageProps}
 				subscribeToNewsletter={subscribeToNewsletter}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}

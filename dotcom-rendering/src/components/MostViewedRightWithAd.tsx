@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { AdSlot } from './AdSlot';
+import { AdSlot } from './AdSlot.web';
 import { Island } from './Island';
 import { MostViewedRightWrapper } from './MostViewedRightWrapper.importable';
 
@@ -7,7 +7,6 @@ type Props = {
 	display: ArticleDisplay;
 	isPaidContent: boolean;
 	renderAds: boolean;
-	shouldHideReaderRevenue: boolean;
 };
 
 /**

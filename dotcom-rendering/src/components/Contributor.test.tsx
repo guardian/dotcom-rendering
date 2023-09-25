@@ -1,6 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { ConfigProvider } from './ConfigContext';
 import { Contributor } from './Contributor';
 
 jest.mock('../lib/bridgetApi', () => jest.fn());
@@ -14,18 +15,19 @@ describe('Contributor', () => {
 		};
 
 		const { container } = render(
-			<Contributor
-				format={format}
-				byline="Observer writers"
-				tags={[
-					{
-						id: 'lifeandstyle/series/observer-design',
-						type: 'Series',
-						title: 'Observer Design',
-					},
-				]}
-				renderingTarget="Web"
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<Contributor
+					format={format}
+					byline="Observer writers"
+					tags={[
+						{
+							id: 'lifeandstyle/series/observer-design',
+							type: 'Series',
+							title: 'Observer Design',
+						},
+					]}
+				/>
+			</ConfigProvider>,
 		);
 
 		expect(
@@ -41,18 +43,19 @@ describe('Contributor', () => {
 		};
 
 		const { container } = render(
-			<Contributor
-				format={format}
-				byline="Observer writers"
-				tags={[
-					{
-						id: 'lifeandstyle/series/observer-design',
-						type: 'Series',
-						title: 'Observer Design',
-					},
-				]}
-				renderingTarget="Web"
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<Contributor
+					format={format}
+					byline="Observer writers"
+					tags={[
+						{
+							id: 'lifeandstyle/series/observer-design',
+							type: 'Series',
+							title: 'Observer Design',
+						},
+					]}
+				/>
+			</ConfigProvider>,
 		);
 
 		expect(

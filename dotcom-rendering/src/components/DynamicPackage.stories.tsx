@@ -448,3 +448,22 @@ export const SpecialReportWithoutPalette = () => (
 	</FrontSection>
 );
 One.storyName = 'With one standard card';
+
+export const VideoSublinks = () => (
+	<FrontSection
+		title="Dynamic Package"
+		showTopBorder={true}
+		discussionApiUrl={discussionApiUrl}
+	>
+		<DynamicPackage
+			groupedTrails={{
+				...defaultGroupedTrails,
+				snap: [],
+				standard: trails.slice(-1),
+			}}
+			containerPalette="LongRunningPalette"
+			imageLoading="eager"
+		/>
+	</FrontSection>
+);
+VideoSublinks.storyName = 'With one video card, and supporting content';

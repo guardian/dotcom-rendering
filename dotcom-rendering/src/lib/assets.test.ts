@@ -1,13 +1,18 @@
+import { readFileSync } from 'node:fs';
 import { BUILD_VARIANT } from '../../scripts/webpack/bundles';
 import {
 	APPS_SCRIPT,
 	decideAssetOrigin,
 	getModulesBuild,
+	getPathFromManifest,
 	WEB,
 	WEB_LEGACY_SCRIPT,
 	WEB_SCHEDULED_SCRIPT,
 	WEB_VARIANT_SCRIPT,
 } from './assets';
+
+jest.mock('node:fs');
+jest.mock('node:path');
 
 describe('decideAssetOrigin for stage', () => {
 	it('PROD', () => {
@@ -81,6 +86,38 @@ describe('regular expression to match files', () => {
 	});
 });
 
+describe('getPathFromManifest', () => {
+	beforeEach(() => {
+		const assetHash = `{
+			"7305.web.js": "7305.web.8cdc05567d98ebd9f67e.js",
+			"356.web.js": "356.web.0a1bbdf8c7a5e5826b7c.js"
+		}`;
+		(readFileSync as jest.Mock).mockReturnValue(assetHash);
+	});
+
+	afterEach(() => {
+		jest.resetAllMocks();
+	});
+
+	it('returns correct hashed asset (1)', () => {
+		expect(getPathFromManifest('web', '7305.web.js')).toBe(
+			'/assets/7305.web.8cdc05567d98ebd9f67e.js',
+		);
+	});
+
+	it('returns correct hashed asset (2)', () => {
+		expect(getPathFromManifest('web', '356.web.js')).toBe(
+			'/assets/356.web.0a1bbdf8c7a5e5826b7c.js',
+		);
+	});
+
+	it('throws an error when the hashed asset cant be found', () => {
+		expect(() => getPathFromManifest('web', 'foo.bar.js')).toThrow(
+			'Missing manifest for foo.bar.js',
+		);
+	});
+});
+
 describe('getModulesBuild', () => {
 	it('should default to web', () => {
 		const build = getModulesBuild({ tests: {}, switches: {} });
@@ -94,6 +131,14 @@ describe('getModulesBuild', () => {
 		});
 		const expected = BUILD_VARIANT ? 'web.variant' : 'web';
 		expect(build).toBe(expected);
+	});
+
+	it('should support Ophan ESM build when in test', () => {
+		const build = getModulesBuild({
+			tests: { ophanEsmVariant: 'variant' },
+			switches: {},
+		});
+		expect(build).toBe('web.ophan-esm');
 	});
 
 	it('should serve the scheduled build when in adaptive test', () => {

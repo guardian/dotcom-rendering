@@ -361,6 +361,10 @@ export interface NewsletterSignupBlockElement {
 	elementId?: string;
 }
 
+export interface AdPlaceholderBlockElement {
+	_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
+}
+
 interface NumberedTitleBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement';
 	elementId: string;
@@ -631,6 +635,7 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataText;
 }
 export type FEElement =
+	| AdPlaceholderBlockElement
 	| AudioAtomBlockElement
 	| AudioBlockElement
 	| BlockquoteBlockElement

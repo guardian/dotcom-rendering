@@ -346,7 +346,7 @@ export const Card = ({
 								min-height: 10px;
 							`}
 						>
-							<Island clientOnly={true} deferUntil="visible">
+							<Island deferUntil="visible">
 								<CardCommentCount
 									format={format}
 									discussionApiUrl={discussionApiUrl}
@@ -542,11 +542,6 @@ export const Card = ({
 									containerPalette={containerPalette}
 									format={format}
 									mediaType={mainMedia.type}
-									mediaDuration={
-										mainMedia.type === 'Audio'
-											? mainMedia.duration
-											: undefined
-									}
 									hasKicker={!!kickerText}
 								/>
 							)}
@@ -584,7 +579,7 @@ export const Card = ({
 								hasSublinks={hasSublinks}
 								renderFooter={renderFooter}
 							/>
-							{hasSublinks && sublinkPosition === 'inner' ? (
+							{hasSublinks && sublinkPosition === 'inner' && (
 								<SupportingContent
 									supportingContent={supportingContent}
 									alignment="vertical"
@@ -592,15 +587,13 @@ export const Card = ({
 									isDynamo={isDynamo}
 									parentFormat={format}
 								/>
-							) : (
-								<></>
 							)}
 						</div>
 					</ContentWrapper>
 				)}
 			</CardLayout>
 
-			{hasSublinks && sublinkPosition === 'outer' ? (
+			{hasSublinks && sublinkPosition === 'outer' && (
 				<SupportingContent
 					supportingContent={supportingContent}
 					parentFormat={format}
@@ -608,8 +601,6 @@ export const Card = ({
 					isDynamo={isDynamo}
 					alignment={supportingContentAlignment}
 				/>
-			) : (
-				<></>
 			)}
 			{isOpinion && !isDynamo && (
 				<CommentFooter

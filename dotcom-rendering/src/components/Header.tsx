@@ -38,7 +38,6 @@ type Props = {
 	remoteHeader: boolean;
 	contributionsServiceUrl: string;
 	idApiUrl: string;
-	isInEuropeTest: boolean;
 	headerTopBarSearchCapiSwitch: boolean;
 	hasPageSkin?: boolean;
 };
@@ -53,7 +52,6 @@ export const Header = ({
 	contributionsServiceUrl,
 	idApiUrl,
 	headerTopBarSearchCapiSwitch,
-	isInEuropeTest,
 	hasPageSkin = false,
 }: Props) => (
 	<div css={headerStyles} data-component="nav3">
@@ -70,7 +68,6 @@ export const Header = ({
 				discussionApiUrl={discussionApiUrl}
 				idApiUrl={idApiUrl}
 				headerTopBarSearchCapiSwitch={headerTopBarSearchCapiSwitch}
-				isInEuropeTest={isInEuropeTest}
 				hasPageSkin={hasPageSkin}
 			/>
 		</Island>

@@ -210,7 +210,6 @@ type Props = {
 	isImmersive?: boolean;
 	nav: NavType;
 	headerTopBarSwitch: boolean;
-	isInEuropeTest: boolean;
 };
 
 export const Columns = ({
@@ -218,13 +217,9 @@ export const Columns = ({
 	nav,
 	editionId,
 	headerTopBarSwitch,
-	isInEuropeTest,
 }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
-	const remainingEditions = getRemainingEditions(
-		activeEdition.editionId,
-		isInEuropeTest,
-	);
+	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (
 		<ul
 			css={columnsStyle(isImmersive)}

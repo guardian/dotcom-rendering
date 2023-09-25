@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
-import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandAltBackground,
@@ -14,7 +14,7 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import React from 'react';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -22,6 +22,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -47,8 +48,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
+import type { DCRArticle } from '../types/frontend';
 import {
 	interactiveGlobalStyles,
 	interactiveLegacyClasses,
@@ -201,24 +201,15 @@ const starWrapper = css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 }
 
-export const InteractiveLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
-
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const showComments = article.isCommentable;
 
@@ -232,6 +223,8 @@ export const InteractiveLayout = ({
 	 * This property currently only applies to the header and merchandising slots
 	 */
 	const renderAds = canRenderAds(article);
+
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
@@ -282,7 +275,6 @@ export const InteractiveLayout = ({
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -317,7 +309,6 @@ export const InteractiveLayout = ({
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 
@@ -439,7 +430,6 @@ export const InteractiveLayout = ({
 											typeof article.starRating ===
 											'number'
 										}
-										renderingTarget={renderingTarget}
 									/>
 								</div>
 								{article.starRating !== undefined ? (
@@ -492,7 +482,6 @@ export const InteractiveLayout = ({
 											!!article.config.switches
 												.serverShareCounts
 										}
-										renderingTarget={renderingTarget}
 									/>
 								</div>
 							</GridItem>
@@ -531,7 +520,6 @@ export const InteractiveLayout = ({
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
-										renderingTarget={renderingTarget}
 									/>
 								</ArticleContainer>
 							</GridItem>
@@ -605,7 +593,8 @@ export const InteractiveLayout = ({
 						webUrl={article.webURL}
 						webTitle={article.webTitle}
 						showBottomSocialButtons={
-							article.showBottomSocialButtons
+							article.showBottomSocialButtons &&
+							renderingTarget === 'Web'
 						}
 						badge={article.badge?.enhanced}
 					/>

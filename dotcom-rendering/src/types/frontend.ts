@@ -112,13 +112,20 @@ export interface FEArticleType {
 	messageUs?: MessageUs;
 
 	promotedNewsletter?: Newsletter;
-	tableOfContents?: TableOfContentsItem[];
 	canonicalUrl: string;
-	imagesForLightbox?: ImageForLightbox[];
 	showTableOfContents: boolean;
 	lang?: string;
 	isRightToLeftLang?: boolean;
 }
+
+/**
+ * The `DCRArticle` type models the `FEArticleType` in addition to any enhancements DCR makes after
+ * receiving the data from Frontend.
+ */
+export type DCRArticle = FEArticleType & {
+	imagesForLightbox?: ImageForLightbox[];
+	tableOfContents?: TableOfContentsItem[];
+};
 
 export interface TableOfContents {
 	items: TableOfContentsItem[];

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { removeCookie, setCookie } from '@guardian/libs';
+import { isString, removeCookie, setCookie } from '@guardian/libs';
 import { space, textSans } from '@guardian/source-foundations';
 import {
 	Button,
@@ -8,7 +8,6 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
-import { isString } from 'lodash';
 import { useState } from 'react';
 import type { AustralianTerritory } from '../types/territory';
 

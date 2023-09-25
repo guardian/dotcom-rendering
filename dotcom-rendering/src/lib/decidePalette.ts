@@ -2201,6 +2201,51 @@ const backgroundDiscussionPillarButton = (format: ArticleFormat) => {
 	}
 };
 
+const backgroundSubmeta = (format: ArticleFormat) => {
+	// specialreport blogs should have specialreport background
+	if (
+		(format.design === ArticleDesign.LiveBlog ||
+			format.design === ArticleDesign.DeadBlog) &&
+		format.theme !== ArticleSpecial.SpecialReport
+	)
+		return neutral[97];
+
+	// Order matters. We want comment special report pieces to have the opinion background
+	if (format.design === ArticleDesign.Letter) return opinion[800];
+
+	if (format.design === ArticleDesign.Comment) {
+		if (format.theme === ArticleSpecial.SpecialReportAlt)
+			return palette.specialReportAlt[800];
+
+		return opinion[800];
+	}
+	if (format.design === ArticleDesign.Editorial) return opinion[800];
+
+	if (format.design === ArticleDesign.Analysis) {
+		if (format.theme === ArticleSpecial.SpecialReportAlt)
+			return palette.specialReportAlt[800];
+		else return news[800];
+	}
+
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return specialReport[800]; // Note, check theme rather than design here
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[800];
+
+	if (
+		format.theme === ArticleSpecial.Labs &&
+		format.display !== ArticleDisplay.Immersive
+	)
+		return neutral[97];
+	if (format.design === ArticleDesign.Picture) return BLACK;
+
+	return neutral[100];
+};
+
+const backgroundDynamoSublink = (_format: ArticleFormat): string =>
+	palette.neutral[97];
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -2313,6 +2358,10 @@ export const decidePalette = (
 			pullQuote: backgroundPullQuote(format),
 			messageForm: backgroundMessageForm(format),
 			discussionPillarButton: backgroundDiscussionPillarButton(format),
+			subMeta: backgroundSubmeta(format),
+			dynamoSublink:
+				overrides?.background.dynamoSublink ??
+				backgroundDynamoSublink(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

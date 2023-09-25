@@ -169,6 +169,9 @@
                     "$ref": "#/definitions/NewsletterSignupBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/AdPlaceholderBlockElement"
+                },
+                {
                     "$ref": "#/definitions/NumberedTitleBlockElement"
                 },
                 {
@@ -2036,6 +2039,18 @@
             "required": [
                 "_type",
                 "newsletter"
+            ]
+        },
+        "AdPlaceholderBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
+                }
+            },
+            "required": [
+                "_type"
             ]
         },
         "NumberedTitleBlockElement": {

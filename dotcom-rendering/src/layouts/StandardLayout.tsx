@@ -14,7 +14,8 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdPortals } from '../components/AdPortals.importable';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -55,7 +56,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -286,7 +287,7 @@ const starWrapper = css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -305,9 +306,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
-
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
@@ -336,11 +334,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+
 	const renderAds = isWeb && canRenderAds(article);
 
 	return (
 		<>
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<div data-print-layout="hide" id="bannerandheader">
 					{renderAds && (
 						<Stuck>
@@ -380,7 +380,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -413,7 +412,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							headerTopBarSwitch={
 								!!article.config.switches.headerTopNav
 							}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{props.NAV.subNavSections && !isLabs && (
@@ -477,6 +475,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			)}
 
 			<main data-layout="StandardLayout">
+				{isApps && (
+					<Island clientOnly={true}>
+						<AdPortals />
+					</Island>
+				)}
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
@@ -502,7 +505,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
-											renderingTarget={renderingTarget}
 										/>
 									</Island>
 								)}
@@ -569,7 +571,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									hasStarRating={
 										typeof article.starRating === 'number'
 									}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
@@ -628,7 +629,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										!!article.config.switches
 											.serverShareCounts
 									}
-									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>
@@ -667,7 +667,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									renderingTarget={renderingTarget}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
@@ -732,7 +731,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons
+										article.showBottomSocialButtons &&
+										renderingTarget === 'Web'
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -762,9 +762,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
 									/>
 								</RightColumn>
 							</div>

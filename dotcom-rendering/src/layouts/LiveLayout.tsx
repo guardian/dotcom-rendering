@@ -14,7 +14,7 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Accordion } from '../components/Accordion';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -35,7 +35,6 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
-import { LiveblogRightAdSlots } from '../components/LiveblogRightAdSlots';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -60,7 +59,8 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
@@ -242,8 +242,9 @@ const paddingBody = css`
 `;
 
 interface BaseProps {
-	article: FEArticleType;
+	article: DCRArticle;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
 interface AppsProps extends BaseProps {
@@ -251,8 +252,8 @@ interface AppsProps extends BaseProps {
 }
 
 interface WebProps extends BaseProps {
-	renderingTarget: 'Web';
 	NAV: NavType;
+	renderingTarget: 'Web';
 }
 
 export const LiveLayout = (props: WebProps | AppsProps) => {
@@ -260,9 +261,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
-
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -342,7 +340,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -369,7 +366,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								headerTopBarSwitch={
 									!!article.config.switches.headerTopNav
 								}
-								isInEuropeTest={isInEuropeTest}
 							/>
 						</Section>
 
@@ -461,7 +457,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								webPublicationDateDeprecated={
 									article.webPublicationDateDeprecated
 								}
-								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -498,7 +493,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												typeof article.starRating ===
 												'number'
 											}
-											renderingTarget={renderingTarget}
 										/>
 									)}
 								</div>
@@ -585,7 +579,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												.serverShareCounts
 										}
 										messageUs={article.messageUs}
-										renderingTarget={renderingTarget}
 									/>
 								</div>
 							</Hide>
@@ -750,7 +743,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													.serverShareCounts
 											}
 											messageUs={article.messageUs}
-											renderingTarget={renderingTarget}
 										/>
 									</div>
 								</Hide>
@@ -904,9 +896,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 															.serverSideLiveblogInlineAdsVariant ===
 														'variant'
 													}
-													renderingTarget={
-														renderingTarget
-													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -946,7 +935,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													webUrl={article.webURL}
 													webTitle={article.webTitle}
 													showBottomSocialButtons={
-														article.showBottomSocialButtons
+														article.showBottomSocialButtons &&
+														renderingTarget ===
+															'Web'
 													}
 													badge={
 														article.badge?.enhanced
@@ -1058,9 +1049,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													isRightToLeftLang={
 														article.isRightToLeftLang
 													}
-													renderingTarget={
-														renderingTarget
-													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1100,7 +1088,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													webUrl={article.webURL}
 													webTitle={article.webTitle}
 													showBottomSocialButtons={
-														article.showBottomSocialButtons
+														article.showBottomSocialButtons &&
+														renderingTarget ===
+															'Web'
 													}
 													badge={
 														article.badge?.enhanced
@@ -1133,7 +1123,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								>
 									<RightColumn>
 										{renderAds && (
-											<LiveblogRightAdSlots
+											<AdSlot
+												position="right"
 												display={format.display}
 												isPaidContent={isPaidContent}
 											/>

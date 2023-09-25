@@ -5,8 +5,10 @@ import {
 	adaptive,
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
+	ophanEsm,
 } from '../../scripts/webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
+import { makeMemoizedFunction } from './memoize';
 
 interface AssetHash {
 	[key: string]: string;
@@ -49,13 +51,14 @@ const isAssetHash = (manifest: unknown): manifest is AssetHash =>
 		([key, value]) => isString(key) && isString(value),
 	);
 
-const getManifest = (path: string): AssetHash => {
+const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	try {
 		const assetHash: unknown = JSON.parse(
 			readFileSync(resolve(__dirname, path), { encoding: 'utf-8' }),
 		);
-		if (!isAssetHash(assetHash))
+		if (!isAssetHash(assetHash)) {
 			throw new Error('Not a valid AssetHash type');
+		}
 
 		return assetHash;
 	} catch (e) {
@@ -63,12 +66,13 @@ const getManifest = (path: string): AssetHash => {
 		console.error('Some filename lookups will fail');
 		return {};
 	}
-};
+});
 
 export type Build =
 	| 'apps'
 	| 'web'
 	| 'web.variant'
+	| 'web.ophan-esm'
 	| 'web.scheduled'
 	| 'web.legacy';
 
@@ -142,9 +146,12 @@ export const getModulesBuild = ({
 }: {
 	tests: ServerSideTests;
 	switches: Switches;
-}): Extract<Build, 'web' | 'web.variant' | 'web.scheduled'> => {
+}): Exclude<Extract<Build, `web${string}`>, 'web.legacy'> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
 		return 'web.variant';
+	}
+	if (tests[ophanEsm('Variant')] === 'variant') {
+		return 'web.ophan-esm';
 	}
 	if (switches.scheduler || tests[adaptive('Variant')] === 'variant') {
 		return 'web.scheduled';

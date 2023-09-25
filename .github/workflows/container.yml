@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v4
@@ -28,8 +28,8 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
-      - name: Generate production build
-        run: make build
+      - name: Generate production bundle
+        run: make riffraff-bundle
         working-directory: dotcom-rendering
 
       - name: Build Container Image

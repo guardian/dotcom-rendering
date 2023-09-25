@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
-import { getEditionFromId, getEditions } from '../lib/edition';
+import { editionList, getEditionFromId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { EditionLinkType } from '../model/extract-nav';
@@ -12,7 +12,6 @@ import { dropDownOverrides } from './HeaderTopBarMyAccount';
 interface HeaderTopBarEditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
-	isInEuropeTest: boolean;
 }
 
 const editionDropdownStyles = css`
@@ -29,7 +28,6 @@ const editionDropdownStyles = css`
 export const HeaderTopBarEditionDropdown = ({
 	editionId,
 	dataLinkName,
-	isInEuropeTest,
 }: HeaderTopBarEditionDropdownProps) => {
 	const editionToDropdownLink = (edition: EditionLinkType) => ({
 		id: edition.editionId,
@@ -47,7 +45,7 @@ export const HeaderTopBarEditionDropdown = ({
 		getEditionFromId(editionId),
 	);
 
-	const dropdownItems: DropdownLinkType[] = getEditions(isInEuropeTest).map(
+	const dropdownItems: DropdownLinkType[] = editionList.map(
 		editionToDropdownLink,
 	);
 

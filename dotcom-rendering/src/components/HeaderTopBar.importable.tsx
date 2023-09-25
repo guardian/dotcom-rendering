@@ -20,7 +20,6 @@ interface HeaderTopBarProps {
 	discussionApiUrl: string;
 	idApiUrl: string;
 	headerTopBarSearchCapiSwitch: boolean;
-	isInEuropeTest: boolean;
 	hasPageSkin?: boolean;
 }
 
@@ -70,7 +69,6 @@ export const HeaderTopBar = ({
 	discussionApiUrl,
 	idApiUrl,
 	headerTopBarSearchCapiSwitch,
-	isInEuropeTest,
 	hasPageSkin = false,
 }: HeaderTopBarProps) => {
 	const authStatus = useAuthStatus();
@@ -109,7 +107,6 @@ export const HeaderTopBar = ({
 					<HeaderTopBarEditionDropdown
 						editionId={editionId}
 						dataLinkName={dataLinkName}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</Hide>
 			</div>

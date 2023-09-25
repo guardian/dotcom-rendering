@@ -7,6 +7,7 @@ import {
 	BylineLink,
 	SPECIAL_REGEX_CHARACTERS,
 } from './BylineLink';
+import { ConfigProvider } from './ConfigContext';
 
 jest.mock('../lib/bridgetApi', jest.fn());
 
@@ -103,16 +104,17 @@ describe('BylineLink', () => {
 		];
 
 		const { container } = render(
-			<BylineLink
-				byline={byline}
-				tags={tags}
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
-				renderingTarget="Web"
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<BylineLink
+					byline={byline}
+					tags={tags}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+				/>
+			</ConfigProvider>,
 		);
 
 		const links = container.querySelectorAll('a');
@@ -137,16 +139,17 @@ describe('BylineLink', () => {
 			},
 		];
 		const { container } = render(
-			<BylineLink
-				byline={byline}
-				tags={tags}
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
-				renderingTarget="Web"
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<BylineLink
+					byline={byline}
+					tags={tags}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+				/>
+			</ConfigProvider>,
 		);
 
 		const links = container.querySelectorAll('a');
@@ -173,16 +176,17 @@ describe('BylineLink', () => {
 		];
 
 		const { container } = render(
-			<BylineLink
-				byline={byline}
-				tags={tags}
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
-				renderingTarget="Web"
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<BylineLink
+					byline={byline}
+					tags={tags}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+				/>
+			</ConfigProvider>,
 		);
 
 		const links = container.querySelectorAll('a');

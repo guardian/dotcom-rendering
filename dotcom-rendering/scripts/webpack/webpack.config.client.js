@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
 const { getBrowserTargets } = require('./browser-targets');
-const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -68,6 +67,7 @@ const getLoaders = (build) => {
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'web.variant':
 		case 'web.scheduled':
+		case 'web.ophan-esm':
 		case 'web':
 			return swcLoader(getBrowserTargets());
 	}
@@ -84,6 +84,14 @@ module.exports = ({ build, sessionId }) => ({
 				? './src/client/index.scheduled.ts'
 				: './src/client/index.ts',
 		debug: './src/client/debug/index.ts',
+	},
+	resolve: {
+		alias: {
+			'ophan-tracker-js':
+				build === 'web.ophan-esm'
+					? 'ophan-tracker-js-esm'
+					: 'ophan-tracker-js',
+		},
 	},
 	optimization:
 		// We don't need chunk optimization for apps as we use the 'LimitChunkCountPlugin' to produce just 1 chunk
@@ -135,16 +143,6 @@ module.exports = ({ build, sessionId }) => ({
 					}),
 					new webpack.ProvidePlugin({
 						Buffer: ['buffer', 'Buffer'],
-					}),
-			  ]
-			: []),
-		...(DEV
-			? [
-					new GuStatsReportPlugin({
-						buildName: `${build}-client`,
-						project: 'dotcom-rendering',
-						team: 'dotcom',
-						sessionId,
 					}),
 			  ]
 			: []),

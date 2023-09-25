@@ -52,10 +52,9 @@ export async function eitherInOktaTestOrElse<A, B>(
 	inOktaTestFunction: (authState: OktaAuthState) => A,
 	notInOktaTestFunction: () => B,
 ): Promise<A | B> {
-	const isInOktaExperiment =
-		window.guardian.config.tests.oktaVariant === 'variant';
+	const useOkta = !!window.guardian.config.switches.okta;
 
-	if (isInOktaExperiment) {
+	if (useOkta) {
 		const authState = await getAuthState();
 		return inOktaTestFunction(authState);
 	} else {

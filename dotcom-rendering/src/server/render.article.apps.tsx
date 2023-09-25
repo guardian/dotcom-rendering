@@ -1,26 +1,33 @@
 import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
+import { ConfigProvider } from '../components/ConfigContext';
 import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { createGuardian } from '../model/guardian';
-import type { FEArticleType } from '../types/frontend';
+import type { Config } from '../types/configContext';
+import type { DCRArticle } from '../types/frontend';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 export const renderArticle = (
-	article: FEArticleType,
+	article: DCRArticle,
 ): {
-	clientScripts: string[];
+	prefetchScripts: string[];
 	html: string;
 } => {
 	const format: ArticleFormat = decideFormat(article.format);
 
+	const renderingTarget = 'Apps';
+	const config: Config = { renderingTarget };
+
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<ArticlePage
-			format={format}
-			article={article}
-			renderingTarget="Apps"
-		/>,
+		<ConfigProvider value={config}>
+			<ArticlePage
+				format={format}
+				article={article}
+				renderingTarget={renderingTarget}
+			/>
+		</ConfigProvider>,
 	);
 
 	const clientScripts = [getPathFromManifest('apps', 'index.js')];
@@ -58,7 +65,7 @@ export const renderArticle = (
 	});
 
 	return {
-		clientScripts,
+		prefetchScripts: clientScripts,
 		html: renderedPage,
 	};
 };

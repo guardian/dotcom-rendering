@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, neutral, until } from '@guardian/source-foundations';
+import { from, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { transparentColour } from '../lib/transparentColour';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
@@ -46,13 +46,12 @@ const dynamoStyles = css`
 	flex-direction: column;
 	column-gap: 5px;
 	width: 100%;
-	margin: 0;
+	padding: 0;
 
 	${from.tablet} {
-		padding: 0 5px 5px;
+		margin-top: 5px;
 		flex-direction: row;
-		position: absolute;
-		bottom: 0;
+		position: relative;
 	}
 `;
 
@@ -74,8 +73,14 @@ const liStyles = css`
 	}
 `;
 
-const dynamoLiStyles = css`
-	background-color: ${transparentColour(neutral[97], 0.875)};
+const dynamoLiStyles = (
+	format: ArticleFormat,
+	containerPalette?: DCRContainerPalette,
+) => css`
+	background-color: ${transparentColour(
+		decidePalette(format, containerPalette).background.dynamoSublink,
+		0.875,
+	)};
 	/* Creates a containing block which allows Ophan heatmap to place bubbles correctly. */
 	position: relative;
 	border-top: 1px solid;
@@ -126,7 +131,10 @@ export const SupportingContent = ({
 						css={[
 							isDynamo
 								? [
-										dynamoLiStyles,
+										dynamoLiStyles(
+											parentFormat,
+											containerPalette,
+										),
 										css`
 											border-color: ${decidePalette(
 												parentFormat,
