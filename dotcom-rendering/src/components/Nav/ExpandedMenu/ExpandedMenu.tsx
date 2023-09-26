@@ -108,7 +108,6 @@ type Props = {
 	isImmersive?: boolean;
 	nav: NavType;
 	headerTopBarSwitch: boolean;
-	isInEuropeTest: boolean;
 };
 
 export const ExpandedMenu = ({
@@ -116,7 +115,6 @@ export const ExpandedMenu = ({
 	nav,
 	editionId,
 	headerTopBarSwitch,
-	isInEuropeTest,
 }: Props) => {
 	return (
 		<div id="expanded-menu-root">
@@ -133,7 +131,6 @@ export const ExpandedMenu = ({
 						isImmersive={isImmersive}
 						nav={nav}
 						headerTopBarSwitch={headerTopBarSwitch}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</div>
 			</div>
