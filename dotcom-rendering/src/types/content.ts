@@ -373,9 +373,8 @@ export interface NewsletterSignupBlockElement {
 	elementId?: string;
 }
 
-export interface AdPlaceholderSlot {
-	_type: 'model.dotcomrendering.pageElements.AdPlaceholderSlot';
-	isSquare: boolean;
+export interface AdPlaceholderBlockElement {
+	_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 }
 
 interface NumberedTitleBlockElement {
@@ -648,7 +647,7 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataText;
 }
 export type FEElement =
-	| AdPlaceholderSlot
+	| AdPlaceholderBlockElement
 	| AudioAtomBlockElement
 	| AudioBlockElement
 	| BlockquoteBlockElement

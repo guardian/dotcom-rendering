@@ -1,4 +1,4 @@
-import type { AdPlaceholderSlot, FEElement } from '../types/content';
+import type { AdPlaceholderBlockElement, FEElement } from '../types/content';
 
 /**
  * Positioning rules:
@@ -36,14 +36,9 @@ const isSuitablePosition = (
 const isParagraph = (element: FEElement) =>
 	element._type === 'model.dotcomrendering.pageElements.TextBlockElement';
 
-const insertPlaceholder = (
-	elements: FEElement[],
-	numberOfAdsInserted: number,
-): FEElement[] => {
-	const placeholder: AdPlaceholderSlot = {
-		_type: 'model.dotcomrendering.pageElements.AdPlaceholderSlot',
-		// We only insert square ads for the first ad in the article
-		isSquare: numberOfAdsInserted === 0,
+const insertPlaceholder = (elements: FEElement[]): FEElement[] => {
+	const placeholder: AdPlaceholderBlockElement = {
+		_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 	};
 	return [...elements, placeholder];
 };
@@ -78,10 +73,7 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 
 			return {
 				elements: shouldInsertAd
-					? insertPlaceholder(
-							currentElements,
-							prev.numberOfAdsInserted,
-					  )
+					? insertPlaceholder(currentElements)
 					: currentElements,
 				paragraphCounter,
 				numberOfAdsInserted: shouldInsertAd

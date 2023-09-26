@@ -169,7 +169,7 @@
                     "$ref": "#/definitions/NewsletterSignupBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/AdPlaceholderSlot"
+                    "$ref": "#/definitions/AdPlaceholderBlockElement"
                 },
                 {
                     "$ref": "#/definitions/NumberedTitleBlockElement"
@@ -2060,20 +2060,16 @@
                 "newsletter"
             ]
         },
-        "AdPlaceholderSlot": {
+        "AdPlaceholderBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.AdPlaceholderSlot"
-                },
-                "isSquare": {
-                    "type": "boolean"
+                    "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
                 }
             },
             "required": [
-                "_type",
-                "isSquare"
+                "_type"
             ]
         },
         "NumberedTitleBlockElement": {

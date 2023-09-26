@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout - On Pull Request
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         if: ${{ github.event_name == 'pull_request'}}
         with:
           fetch-depth: 0
@@ -21,7 +21,7 @@ jobs:
           # Hopefully by checking out the HEAD commit of a PR instead of the merge commit we can avoid some of those issues.
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Checkout - On Push Event
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         if: ${{ github.event_name == 'push'}}
         with:
           fetch-depth: 0

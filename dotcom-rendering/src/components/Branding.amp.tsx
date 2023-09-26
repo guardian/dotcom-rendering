@@ -3,7 +3,7 @@ import { textSans } from '@guardian/source-foundations';
 import React from 'react';
 import { isEditionId } from '../lib/edition';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
-import { regionClasses } from '../lib/region-classes.amp';
+import { editionRegionClasses } from '../lib/region-classes.amp';
 import type { Branding as BrandingType } from '../types/branding';
 import type { CommercialProperties } from '../types/commercial';
 
@@ -82,7 +82,7 @@ export const BrandingRegionContainer = ({
 			.map((editionId) => {
 				const { branding } = commercialProperties[editionId];
 				return branding !== undefined ? (
-					<div key={editionId} css={regionClasses[editionId]}>
+					<div key={editionId} css={editionRegionClasses[editionId]}>
 						{children(branding)}
 					</div>
 				) : null;

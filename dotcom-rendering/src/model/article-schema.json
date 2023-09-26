@@ -418,69 +418,8 @@
                 "theme"
             ]
         },
-        "tableOfContents": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/TableOfContentsItem"
-            }
-        },
         "canonicalUrl": {
             "type": "string"
-        },
-        "imagesForLightbox": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "masterUrl": {
-                        "type": "string"
-                    },
-                    "elementId": {
-                        "type": "string"
-                    },
-                    "width": {
-                        "type": "number"
-                    },
-                    "height": {
-                        "type": "number"
-                    },
-                    "position": {
-                        "type": "number"
-                    },
-                    "alt": {
-                        "type": "string"
-                    },
-                    "credit": {
-                        "type": "string"
-                    },
-                    "caption": {
-                        "type": "string"
-                    },
-                    "displayCredit": {
-                        "type": "boolean"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "starRating": {
-                        "type": "number"
-                    },
-                    "blockId": {
-                        "description": "Used for liveblog images to generate a link back to the\noriginal post where the image was used",
-                        "type": "string"
-                    },
-                    "firstPublished": {
-                        "description": "Used to show when a liveblog image was posted",
-                        "type": "number"
-                    }
-                },
-                "required": [
-                    "elementId",
-                    "height",
-                    "masterUrl",
-                    "width"
-                ]
-            }
         },
         "showTableOfContents": {
             "type": "boolean"
@@ -638,7 +577,7 @@
                     "$ref": "#/definitions/NewsletterSignupBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/AdPlaceholderSlot"
+                    "$ref": "#/definitions/AdPlaceholderBlockElement"
                 },
                 {
                     "$ref": "#/definitions/NumberedTitleBlockElement"
@@ -2529,20 +2468,16 @@
                 "newsletter"
             ]
         },
-        "AdPlaceholderSlot": {
+        "AdPlaceholderBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.AdPlaceholderSlot"
-                },
-                "isSquare": {
-                    "type": "boolean"
+                    "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
                 }
             },
             "required": [
-                "_type",
-                "isSquare"
+                "_type"
             ]
         },
         "NumberedTitleBlockElement": {
@@ -4879,21 +4814,6 @@
                 {
                     "$ref": "#/definitions/CampaignFieldTextArea"
                 }
-            ]
-        },
-        "TableOfContentsItem": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id",
-                "title"
             ]
         }
     },
