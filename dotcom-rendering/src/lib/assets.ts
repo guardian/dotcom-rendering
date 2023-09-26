@@ -8,6 +8,7 @@ import {
 	ophanEsm,
 } from '../../scripts/webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
+import { makeMemoizedFunction } from './memoize';
 
 interface AssetHash {
 	[key: string]: string;
@@ -50,13 +51,14 @@ const isAssetHash = (manifest: unknown): manifest is AssetHash =>
 		([key, value]) => isString(key) && isString(value),
 	);
 
-const getManifest = (path: string): AssetHash => {
+const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	try {
 		const assetHash: unknown = JSON.parse(
 			readFileSync(resolve(__dirname, path), { encoding: 'utf-8' }),
 		);
-		if (!isAssetHash(assetHash))
+		if (!isAssetHash(assetHash)) {
 			throw new Error('Not a valid AssetHash type');
+		}
 
 		return assetHash;
 	} catch (e) {
@@ -64,7 +66,7 @@ const getManifest = (path: string): AssetHash => {
 		console.error('Some filename lookups will fail');
 		return {};
 	}
-};
+});
 
 export type Build =
 	| 'apps'

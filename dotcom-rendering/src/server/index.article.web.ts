@@ -11,6 +11,7 @@ import { validateAsArticleType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import type { FEArticleBadgeType } from '../types/badge';
 import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { makePrefetchHeader } from './lib/header';
 import {
 	renderBlocks,
@@ -18,8 +19,12 @@ import {
 	renderKeyEvents,
 } from './render.article.web';
 
-const enhancePinnedPost = (format: FEFormat, block?: Block) => {
-	return block ? enhanceBlocks([block], format)[0] : block;
+const enhancePinnedPost = (
+	format: FEFormat,
+	renderingTarget: RenderingTarget,
+	block?: Block,
+) => {
+	return block ? enhanceBlocks([block], format, renderingTarget)[0] : block;
 };
 
 const enhanceBadge = (badge?: FEArticleBadgeType) =>
@@ -33,7 +38,10 @@ const enhanceBadge = (badge?: FEArticleBadgeType) =>
 		  }
 		: undefined;
 
-export const enhanceArticleType = (body: unknown): FEArticleType => {
+export const enhanceArticleType = (
+	body: unknown,
+	renderingTarget: RenderingTarget,
+): FEArticleType => {
 	const validated = validateAsArticleType(body);
 	// addImageIDs needs to take account of both main media elements
 	// and block elements, so it needs to be executed here
@@ -44,15 +52,24 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 		blocks,
 	};
 
-	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
-		promotedNewsletter: data.promotedNewsletter,
-	});
+	const enhancedBlocks = enhanceBlocks(
+		data.blocks,
+		data.format,
+		renderingTarget,
+		{
+			promotedNewsletter: data.promotedNewsletter,
+		},
+	);
 	const enhancedMainMedia = addLightboxData(data.mainMediaElements);
 	return {
 		...data,
 		mainMediaElements: enhancedMainMedia,
 		blocks: enhancedBlocks,
-		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
+		pinnedPost: enhancePinnedPost(
+			data.format,
+			renderingTarget,
+			data.pinnedPost,
+		),
 		standfirst: enhanceStandfirst(data.standfirst),
 		commercialProperties: enhanceCommercialProperties(
 			data.commercialProperties,
@@ -75,7 +92,7 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
-	const article = enhanceArticleType(body);
+	const article = enhanceArticleType(body, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,
 	});
@@ -85,7 +102,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'json');
-	const article = enhanceArticleType(body);
+	const article = enhanceArticleType(body, 'Web');
 	const resp = {
 		data: {
 			// TODO: We should rename this to 'article' or 'FEArticle', but first we need to investigate
@@ -104,7 +121,7 @@ export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
 
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'web');
-	const article = enhanceArticleType(body);
+	const article = enhanceArticleType(body, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,
 	});
@@ -134,7 +151,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		// The content if body is not checked
 		body as FEBlocksRequest;
 
-	const enhancedBlocks = enhanceBlocks(blocks, format);
+	const enhancedBlocks = enhanceBlocks(blocks, format, 'Web');
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
 		format,

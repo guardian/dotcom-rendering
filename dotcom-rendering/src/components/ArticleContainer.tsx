@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { adSizes, constants } from '@guardian/commercial';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
 import { carrotAdStyles, labelStyles } from './AdSlot';
@@ -120,19 +119,6 @@ const adStyles = css`
 				/* must be behind as the actual ad is on top of the iframe */
 				z-index: -1;
 			}
-		}
-
-		/* liveblogs ads have different background colours due the darker page background */
-		.ad-slot--liveblog-inline {
-			/* outstreamMobile is the ad with the smallest height that we serve for mobile
-			   liveblog-inline slots. For desktop, this is an mpu */
-			min-height: ${adSizes.outstreamMobile.height +
-			constants.AD_LABEL_HEIGHT}px;
-			${from.desktop} {
-				min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
-			}
-
-			background-color: ${neutral[93]};
 		}
 	}
 
