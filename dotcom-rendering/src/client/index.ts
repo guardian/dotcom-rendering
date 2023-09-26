@@ -9,44 +9,78 @@ import { startup } from './startup';
  *
  *************************************************************/
 
-void startup('bootCmp', () =>
-	import(/* webpackMode: "eager" */ './bootCmp').then(({ bootCmp }) =>
-		bootCmp(),
-	),
+void startup(
+	'bootCmp',
+	() =>
+		import(/* webpackMode: "eager" */ './bootCmp').then(({ bootCmp }) =>
+			bootCmp(),
+		),
+	{
+		priority: 'critical',
+	},
 );
 
-void startup('recordInitialPageEvents', () =>
-	import(/* webpackMode: "eager" */ './ophan/recordInitialPageEvents').then(
-		({ recordInitialPageEvents }) => recordInitialPageEvents(),
-	),
+void startup(
+	'recordInitialPageEvents',
+	() =>
+		import(
+			/* webpackMode: "eager" */ './ophan/recordInitialPageEvents'
+		).then(({ recordInitialPageEvents }) => recordInitialPageEvents()),
+	{
+		priority: 'critical',
+	},
 );
 
-void startup('ga', () =>
-	import(/* webpackMode: "eager" */ './ga').then(({ ga }) => ga()),
+void startup(
+	'ga',
+	() => import(/* webpackMode: "eager" */ './ga').then(({ ga }) => ga()),
+	{
+		priority: 'critical',
+	},
 );
 
-void startup('sentryLoader', () =>
-	import(/* webpackMode: "eager" */ './sentryLoader').then(
-		({ sentryLoader }) => sentryLoader(),
-	),
+void startup(
+	'sentryLoader',
+	() =>
+		import(/* webpackMode: "eager" */ './sentryLoader').then(
+			({ sentryLoader }) => sentryLoader(),
+		),
+	{
+		priority: 'critical',
+	},
 );
 
-void startup('dynamicImport', () =>
-	import(/* webpackMode: "eager" */ './dynamicImport').then(
-		({ dynamicImport }) => dynamicImport(),
-	),
+void startup(
+	'dynamicImport',
+	() =>
+		import(/* webpackMode: "eager" */ './dynamicImport').then(
+			({ dynamicImport }) => dynamicImport(),
+		),
+	{
+		priority: 'critical',
+	},
 );
 
-void startup('islands', () =>
-	import(/* webpackMode: "eager" */ './islands').then(({ islands }) =>
-		islands(),
-	),
+void startup(
+	'islands',
+	() =>
+		import(/* webpackMode: "eager" */ './islands').then(({ islands }) =>
+			islands(),
+		),
+	{
+		priority: 'critical',
+	},
 );
 
-void startup('performanceMonitoring', () =>
-	import(/* webpackMode: "eager" */ './performanceMonitoring').then(
-		({ performanceMonitoring }) => performanceMonitoring(),
-	),
+void startup(
+	'performanceMonitoring',
+	() =>
+		import(/* webpackMode: "eager" */ './performanceMonitoring').then(
+			({ performanceMonitoring }) => performanceMonitoring(),
+		),
+	{
+		priority: 'critical',
+	},
 );
 
 /*************************************************************

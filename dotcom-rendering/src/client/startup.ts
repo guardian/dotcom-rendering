@@ -12,9 +12,7 @@ const isPolyfilled = new Promise<void>((resolve) => {
 export const startup = async (
 	name: string,
 	task: () => Promise<unknown>,
-	options: ScheduleOptions = {
-		priority: 'critical',
-	},
+	options: ScheduleOptions,
 ): Promise<void> => {
 	await isPolyfilled;
 	log('dotcom', `🎬 booting ${name}`);
