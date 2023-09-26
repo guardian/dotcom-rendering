@@ -1,26 +1,47 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
 	palette,
 	remSpace,
 	textSans,
 	until,
-	visuallyHidden,
 } from '@guardian/source-foundations';
+import { Button } from '@guardian/source-react-components';
 import { forwardRef } from 'react';
 
-interface Props {
-	isHidden: boolean;
-	isSquare: boolean;
-	index: number;
+// Exported for Storybook use
+export interface Props {
+	isFirstAdSlot: boolean;
+	onClickSupportButton: () => void;
 }
 
-const adHeight = '258px';
-const wideContentWidth = 620;
+const adHeightPx = 258;
+const wideContentWidthPx = 620;
 
-const hiddenStyles = css`
-	${visuallyHidden}
+const styles = css`
+	clear: both;
+	margin: ${remSpace[4]} 0;
+	color: ${palette.neutral[20]};
+	background: ${palette.neutral[97]};
+
+	${from.desktop} {
+		position: absolute;
+		margin-left: calc(${wideContentWidthPx}px + ${remSpace[4]});
+		min-width: 300px;
+		margin-bottom: ${remSpace[6]};
+	}
+
+	${until.phablet} {
+		margin: 1em -${remSpace[3]};
+	}
+`;
+
+const firstAdSlotStyles = css`
+	/** This is mainly for iPad users, so that the ad sits directly
+	 * under the "Most viewed" onwards section on the right */
+	${from.desktop} {
+		top: 0;
+	}
 `;
 
 const adLabelsStyles = css`
@@ -42,7 +63,7 @@ const adLabelsStyles = css`
 
 const adSlotStyles = css`
 	clear: both;
-	padding-bottom: ${adHeight};
+	padding-bottom: ${adHeightPx}px;
 `;
 
 const adSlotSquareStyles = css`
@@ -56,51 +77,58 @@ const adSlotSquareStyles = css`
 
 const supportBannerStyles = css`
 	padding: ${remSpace[3]};
-	background-color: ${palette.brandAlt[400]};
+	background-color: ${palette.neutral[93]};
 
 	p {
-		${headline.xxxsmall()};
+		${textSans.small()};
+		color: ${palette.brand[400]};
+		font-weight: bold;
 		margin-top: 0;
 	}
 
 	button {
-		margin-top: ${remSpace[3]};
+		margin-top: ${remSpace[2]};
 	}
 `;
 
-const styles = css`
-	clear: both;
-	margin: ${remSpace[4]} 0;
-	color: ${palette.neutral[20]};
-	background: ${palette.neutral[97]};
+/**
+ * Support banner component, used at the bottom of the ad slot
+ *
+ * @todo Allow this to be used with web ad slots
+ * @todo Style for dark mode in apps
+ */
+const SupportBanner = ({
+	onClickSupportButton,
+}: Pick<Props, 'onClickSupportButton'>) => (
+	<div css={supportBannerStyles}>
+		<p>Enjoy the Guardian ad-free</p>
+		<Button size="xsmall" priority="primary" onClick={onClickSupportButton}>
+			Support the Guardian
+		</Button>
+	</div>
+);
 
-	${from.desktop} {
-		position: absolute;
-		margin-left: calc(${wideContentWidth}px + ${remSpace[4]});
-		min-width: 300px;
-		margin-bottom: ${remSpace[6]};
-	}
-
-	${until.phablet} {
-		margin: 1em -${remSpace[3]};
-	}
-`;
-
+/**
+ * AdSlot component for in-article ads **on apps only**
+ *
+ * Is set up with a forward ref due to the way ads are handled natively.
+ * These slots are dynamically inserted into articles using React portals.
+ * The ref is important so that we can provide the location of the slot to
+ * the native layer, for it to "paint" an advert over the top of it.
+ *
+ * @todo Style for dark mode
+ */
 export const AdSlot = forwardRef<HTMLDivElement, Props>(
-	({ isHidden, isSquare, index }, ref) => (
-		<aside css={[styles, isHidden && hiddenStyles]}>
+	({ isFirstAdSlot, onClickSupportButton }, ref) => (
+		<aside css={[styles, isFirstAdSlot && firstAdSlotStyles]}>
 			<div css={adLabelsStyles}>
 				<p>Advertisement</p>
 			</div>
 			<div
-				css={isSquare ? adSlotSquareStyles : adSlotStyles}
+				css={isFirstAdSlot ? adSlotSquareStyles : adSlotStyles}
 				ref={ref}
-				id={`placeholder-${index}`}
 			></div>
-			<div css={supportBannerStyles}>
-				<p>Support the Guardian and enjoy the app ad-free.</p>
-				<button>Support the Guardian</button>
-			</div>
+			<SupportBanner onClickSupportButton={onClickSupportButton} />
 		</aside>
 	),
 );

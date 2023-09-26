@@ -16,6 +16,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AppsEpic } from '../components/AppsEpic.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -307,9 +308,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		config: { isPaidContent, host },
 	} = article;
 
-	const isInEuropeTest =
-		article.config.switches['europeNetworkFrontSwitch'] === true;
-
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
 		article.config.switches.slotBodyEnd;
@@ -383,7 +381,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -416,7 +413,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							headerTopBarSwitch={
 								!!article.config.switches.headerTopNav
 							}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{props.NAV.subNavSections && !isLabs && (
@@ -687,7 +683,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										</Island>
 									)}
 
-								{showBodyEndSlot && (
+								{isApps && (
+									<Island clientOnly={true}>
+										<AppsEpic />
+									</Island>
+								)}
+
+								{isWeb && showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
 											contentType={article.contentType}
@@ -991,7 +993,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				</>
 			)}
 
-			{!isWeb && (
+			{isApps && (
 				<>
 					<Section
 						fullWidth={true}

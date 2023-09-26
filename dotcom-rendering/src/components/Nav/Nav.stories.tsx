@@ -25,7 +25,6 @@ export const StandardStory = () => {
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={false}
-				isInEuropeTest={true}
 			/>
 		</Section>
 	);
@@ -47,7 +46,6 @@ export const StandardStoryTopBarHeader = () => {
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={true}
-				isInEuropeTest={true}
 			/>
 		</Section>
 	);
@@ -69,7 +67,6 @@ export const OpinionStory = () => {
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={false}
-				isInEuropeTest={true}
 			/>
 		</Section>
 	);
@@ -94,7 +91,6 @@ export const ImmersiveStory = () => {
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={false}
-				isInEuropeTest={true}
 			/>
 		</Section>
 	);
@@ -119,7 +115,6 @@ export const ExpandedMenuStory = () => {
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={false}
-				isInEuropeTest={true}
 			/>
 		</Section>
 	);
