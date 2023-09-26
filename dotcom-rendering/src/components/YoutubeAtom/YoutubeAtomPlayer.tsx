@@ -52,7 +52,7 @@ type Props = {
 	kicker?: string;
 };
 
-type CustomPlayEventDetail = { videoId: string };
+type CustomPlayEventDetail = { uniqueId: string };
 const customPlayEventName = 'video:play';
 
 type ProgressEvents = {
@@ -483,8 +483,9 @@ export const YoutubeAtomPlayer = ({
 					event: CustomEventInit<CustomPlayEventDetail>,
 				) => {
 					if (event.detail) {
-						const playedVideoId = event.detail.videoId;
+						const playedVideoId = event.detail.uniqueId;
 						const thisVideoId = uniqueId;
+
 						if (playedVideoId !== thisVideoId) {
 							const playerStatePromise =
 								player.current?.getPlayerState();
