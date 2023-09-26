@@ -1,4 +1,4 @@
-name: "AR CI"
+name: AR CI
 
 on:
   push:
@@ -19,6 +19,7 @@ permissions:
 
 jobs:
   build:
+    name: AR CI
     runs-on: ubuntu-latest
 
     # Checkout the repository
