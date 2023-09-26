@@ -26,24 +26,24 @@ const isLightboxable = (
 		case 'landscape':
 			if (
 				element._type ===
-				'model.dotcomrendering.pageElements.ImageBlockElement'
+				'model.dotcomrendering.pageElements.CartoonBlockElement'
 			) {
-				return element.media.allImages.some(isWideEnough);
-			} else {
 				return element.variants.some((v) =>
 					v.images.some(isWideEnough),
 				);
+			} else {
+				return element.media.allImages.some(isWideEnough);
 			}
 		case 'portrait':
 			if (
 				element._type ===
-				'model.dotcomrendering.pageElements.ImageBlockElement'
+				'model.dotcomrendering.pageElements.CartoonBlockElement'
 			) {
-				return element.media.allImages.some(isHighEnough);
-			} else {
 				return element.variants.some((v) =>
 					v.images.some(isHighEnough),
 				);
+			} else {
+				return element.media.allImages.some(isHighEnough);
 			}
 	}
 };
@@ -86,9 +86,8 @@ const buildLightboxImage = (
 		element._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 			? element.media.allImages
 			: [];
-	const masterImage =
-		getMaster(images.concat(cartoons)) ??
-		getLargest(images.concat(cartoons));
+	const allImages = images.concat(cartoons);
+	const masterImage = getMaster(allImages) ?? getLargest(allImages);
 
 	// Rare, but legacy content might not have a url that we can use with Fastly
 	// so we can't include them in lightbox
