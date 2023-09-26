@@ -258,13 +258,18 @@ const frontsBannerAdTopContainerStyles = css`
 
 const frontsBannerAdContainerStyles = css`
 	/* Native templates require a width (or min-width) to be explicitly set */
-	width: ${breakpoints['wide']}px;
+	width: fit-content;
 	display: flex;
 	justify-content: center;
 
 	/* This stops the visual effect where the advert renders at the
 	   top of the ad slot, then is pushed down 24px when the label renders */
 	align-items: flex-end;
+
+	// This is applied using messenger, shared with certain ad partners
+	&.ad-slot-container--fullwidth {
+		width: 100%;
+	}
 `;
 
 const frontsBannerCollapseStyles = css`
@@ -276,6 +281,11 @@ const frontsBannerAdStyles = css`
 	max-width: ${breakpoints['wide']}px;
 	overflow: hidden;
 	padding-bottom: ${frontsBannerPaddingHeight}px;
+
+	// This is applied using messenger, shared with certain ad partners
+	.ad-slot-container--fullwidth & {
+		max-width: 100%;
+	}
 `;
 
 const articleEndAdStyles = css`
