@@ -1,15 +1,5 @@
 import './webpackPublicPath';
-import { log } from '@guardian/libs';
-import { schedule } from '../lib/scheduler';
-
-const isPolyfilled = new Promise<void>((resolve) => {
-	if (window.guardian.mustardCut || window.guardian.polyfilled) {
-		resolve();
-	}
-	window.guardian.onPolyfilledCallbacks.push(() => {
-		resolve();
-	});
-});
+import { startup } from './startup';
 
 /*************************************************************
  *
@@ -19,77 +9,44 @@ const isPolyfilled = new Promise<void>((resolve) => {
  *
  *************************************************************/
 
-log('dotcom', '🎬 booting CMP');
-void import(/* webpackMode: "eager" */ './bootCmp').then(
-	async ({ bootCmp }) => {
-		await isPolyfilled;
-		await schedule('bootCmp', bootCmp, { priority: 'critical' });
-		log('dotcom', '🥾 booted CMP');
-	},
+void startup('bootCmp', () =>
+	import(/* webpackMode: "eager" */ './bootCmp').then(({ bootCmp }) =>
+		bootCmp(),
+	),
 );
 
-log('dotcom', '🎬 booting Ophan');
-void import(/* webpackMode: "eager" */ './ophan/recordInitialPageEvents').then(
-	async ({ recordInitialPageEvents }) => {
-		await isPolyfilled;
-		await schedule('recordInitialPageEvents', recordInitialPageEvents, {
-			priority: 'critical',
-		});
-		log('dotcom', '🥾 booted Ophan');
-	},
+void startup('recordInitialPageEvents', () =>
+	import(/* webpackMode: "eager" */ './ophan/recordInitialPageEvents').then(
+		({ recordInitialPageEvents }) => recordInitialPageEvents(),
+	),
 );
 
-log('dotcom', '🎬 booting GA');
-void import(/* webpackMode: "eager" */ './ga').then(async ({ ga }) => {
-	await isPolyfilled;
-	await schedule('ga', ga, {
-		priority: 'critical',
-	});
-	log('dotcom', '🥾 booted GA');
-});
-
-log('dotcom', '🎬 booting Sentry');
-void import(/* webpackMode: "eager" */ './sentryLoader').then(
-	async ({ sentryLoader }) => {
-		await isPolyfilled;
-		await schedule('sentryLoader', sentryLoader, {
-			priority: 'critical',
-		});
-		log('dotcom', '🥾 booted Sentry');
-	},
+void startup('ga', () =>
+	import(/* webpackMode: "eager" */ './ga').then(({ ga }) => ga()),
 );
 
-log('dotcom', '🎬 booting dynamic import polyfill');
-void import(/* webpackMode: "eager" */ './dynamicImport').then(
-	async ({ dynamicImport }) => {
-		await isPolyfilled;
-		await schedule('dynamicImport', dynamicImport, {
-			priority: 'critical',
-		});
-		log('dotcom', '🥾 booted dynamic import polyfill');
-	},
+void startup('sentryLoader', () =>
+	import(/* webpackMode: "eager" */ './sentryLoader').then(
+		({ sentryLoader }) => sentryLoader(),
+	),
 );
 
-log('dotcom', '🎬 booting Islands');
-void import(/* webpackMode: "eager" */ './islands').then(
-	async ({ islands }) => {
-		await isPolyfilled;
-		await schedule('islands', islands, {
-			priority: 'critical',
-		});
-		log('dotcom', '🥾 booted Islands');
-	},
+void startup('dynamicImport', () =>
+	import(/* webpackMode: "eager" */ './dynamicImport').then(
+		({ dynamicImport }) => dynamicImport(),
+	),
 );
 
-log('dotcom', '🎬 booting perf monitoring');
-void import(/* webpackMode: "eager" */ './performanceMonitoring').then(
-	async ({ performanceMonitoring }) => {
-		await isPolyfilled;
-		await schedule('performanceMonitoring', performanceMonitoring, {
-			priority: 'critical',
-		});
-		log('dotcom', '🥾 booted perf monitoring');
-	},
+void startup('islands', () =>
+	import(/* webpackMode: "eager" */ './islands').then(({ islands }) =>
+		islands(),
+	),
+);
+
+void startup('performanceMonitoring', () =>
+	import(/* webpackMode: "eager" */ './performanceMonitoring').then(
+		({ performanceMonitoring }) => performanceMonitoring(),
+	),
 );
 
 /*************************************************************
@@ -103,62 +60,52 @@ void import(/* webpackMode: "eager" */ './performanceMonitoring').then(
  *
  *************************************************************/
 
-log('dotcom', '🎬 booting atomIframe');
-void import(
-	/* webpackMode: 'lazy' */
-	'./atomIframe'
-).then(async ({ atomIframe }) => {
-	await isPolyfilled;
-	await schedule('atomIframe', atomIframe, {
-		priority: 'feature',
-	});
-	log('dotcom', '🥾 booted atomIframe');
-});
+void startup(
+	'atomIframe',
+	() =>
+		import(
+			/* webpackMode: 'lazy' */
+			'./atomIframe'
+		).then(({ atomIframe }) => atomIframe()),
+	{ priority: 'feature' },
+);
 
-log('dotcom', '🎬 booting embedIframe');
-void import(
-	/* webpackMode: 'lazy' */
-	'./embedIframe'
-).then(async ({ embedIframe }) => {
-	await isPolyfilled;
-	await schedule('embedIframe', embedIframe, {
-		priority: 'feature',
-	});
-	log('dotcom', '🥾 booted embedIframe');
-});
+void startup(
+	'embedIframe',
+	() =>
+		import(
+			/* webpackMode: 'lazy' */
+			'./embedIframe'
+		).then(({ embedIframe }) => embedIframe()),
+	{ priority: 'feature' },
+);
 
-log('dotcom', '🎬 booting newsletterEmbedIframe');
-void import(
-	/* webpackMode: 'lazy' */
-	'./newsletterEmbedIframe'
-).then(async ({ newsletterEmbedIframe }) => {
-	await isPolyfilled;
-	await schedule('newsletterEmbedIframe', newsletterEmbedIframe, {
-		priority: 'feature',
-	});
-	log('dotcom', '🥾 booted newsletterEmbedIframe');
-});
+void startup(
+	'newsletterEmbedIframe',
+	() =>
+		import(
+			/* webpackMode: 'lazy' */
+			'./newsletterEmbedIframe'
+		).then(({ newsletterEmbedIframe }) => newsletterEmbedIframe()),
+	{ priority: 'feature' },
+);
 
-log('dotcom', '🎬 booting relative time');
-void import(
-	/* webpackMode: 'lazy' */
-	'./relativeTime'
-).then(async ({ relativeTime }) => {
-	await isPolyfilled;
-	await schedule('relativeTime', relativeTime, {
-		priority: 'feature',
-	});
-	log('dotcom', '🥾 booted relative time');
-});
+void startup(
+	'relativeTime',
+	() =>
+		import(
+			/* webpackMode: 'lazy' */
+			'./relativeTime'
+		).then(({ relativeTime }) => relativeTime()),
+	{ priority: 'feature' },
+);
 
-log('dotcom', '🎬 booting discussion');
-void import(
-	/* webpackMode: 'lazy' */
-	'./discussion'
-).then(async ({ discussion }) => {
-	await isPolyfilled;
-	await schedule('initDiscussion', discussion, {
-		priority: 'feature',
-	});
-	log('dotcom', '🥾 booted discussion');
-});
+void startup(
+	'initDiscussion',
+	() =>
+		import(
+			/* webpackMode: 'lazy' */
+			'./discussion'
+		).then(({ discussion }) => discussion()),
+	{ priority: 'feature' },
+);
