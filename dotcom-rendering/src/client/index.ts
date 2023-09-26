@@ -1,4 +1,5 @@
 import './webpackPublicPath';
+import { log } from '@guardian/libs';
 import { schedule } from '../lib/scheduler';
 
 const isPolyfilled = new Promise<void>((resolve) => {
@@ -18,56 +19,76 @@ const isPolyfilled = new Promise<void>((resolve) => {
  *
  *************************************************************/
 
+log('dotcom', '🎬 booting CMP');
 void import(/* webpackMode: "eager" */ './bootCmp').then(
 	async ({ bootCmp }) => {
 		await isPolyfilled;
-		void schedule('bootCmp', bootCmp, { priority: 'critical' });
+		await schedule('bootCmp', bootCmp, { priority: 'critical' });
+		log('dotcom', '🥾 booted CMP');
 	},
 );
+
+log('dotcom', '🎬 booting Ophan');
 void import(/* webpackMode: "eager" */ './ophan/recordInitialPageEvents').then(
 	async ({ recordInitialPageEvents }) => {
 		await isPolyfilled;
-		schedule('recordInitialPageEvents', recordInitialPageEvents, {
+		await schedule('recordInitialPageEvents', recordInitialPageEvents, {
 			priority: 'critical',
 		});
+		log('dotcom', '🥾 booted Ophan');
 	},
 );
+
+log('dotcom', '🎬 booting GA');
 void import(/* webpackMode: "eager" */ './ga').then(async ({ ga }) => {
 	await isPolyfilled;
-	void schedule('ga', ga, {
+	await schedule('ga', ga, {
 		priority: 'critical',
 	});
+	log('dotcom', '🥾 booted GA');
 });
+
+log('dotcom', '🎬 booting Sentry');
 void import(/* webpackMode: "eager" */ './sentryLoader').then(
 	async ({ sentryLoader }) => {
 		await isPolyfilled;
-		schedule('sentryLoader', sentryLoader, {
+		await schedule('sentryLoader', sentryLoader, {
 			priority: 'critical',
 		});
+		log('dotcom', '🥾 booted Sentry');
 	},
 );
+
+log('dotcom', '🎬 booting dynamic import polyfill');
 void import(/* webpackMode: "eager" */ './dynamicImport').then(
 	async ({ dynamicImport }) => {
 		await isPolyfilled;
-		schedule('dynamicImport', dynamicImport, {
+		await schedule('dynamicImport', dynamicImport, {
 			priority: 'critical',
 		});
+		log('dotcom', '🥾 booted dynamic import polyfill');
 	},
 );
+
+log('dotcom', '🎬 booting Islands');
 void import(/* webpackMode: "eager" */ './islands').then(
 	async ({ islands }) => {
 		await isPolyfilled;
-		void schedule('islands', islands, {
+		await schedule('islands', islands, {
 			priority: 'critical',
 		});
+		log('dotcom', '🥾 booted Islands');
 	},
 );
+
+log('dotcom', '🎬 booting perf monitoring');
 void import(/* webpackMode: "eager" */ './performanceMonitoring').then(
 	async ({ performanceMonitoring }) => {
 		await isPolyfilled;
-		void schedule('performanceMonitoring', performanceMonitoring, {
+		await schedule('performanceMonitoring', performanceMonitoring, {
 			priority: 'critical',
 		});
+		log('dotcom', '🥾 booted perf monitoring');
 	},
 );
 
@@ -82,39 +103,50 @@ void import(/* webpackMode: "eager" */ './performanceMonitoring').then(
  *
  *************************************************************/
 
+log('dotcom', '🎬 booting updateIframeHeight');
 void import(
 	/* webpackMode: 'lazy' */
 	'./updateIframeHeight'
 ).then(async ({ updateIframeHeight }) => {
 	await isPolyfilled;
-	void schedule('updateIframeHeight', updateIframeHeight, {
+	await schedule('updateIframeHeight', updateIframeHeight, {
 		priority: 'feature',
 	});
+	log('dotcom', '🥾 booted updateIframeHeight');
 });
+
+log('dotcom', '🎬 booting newsletterEmbedIframe');
 void import(
 	/* webpackMode: 'lazy' */
 	'./newsletterEmbedIframe'
 ).then(async ({ newsletterEmbedIframe }) => {
 	await isPolyfilled;
-	void schedule('newsletterEmbedIframe', newsletterEmbedIframe, {
+	await schedule('newsletterEmbedIframe', newsletterEmbedIframe, {
 		priority: 'feature',
 	});
+	log('dotcom', '🥾 booted newsletterEmbedIframe');
 });
+
+log('dotcom', '🎬 booting relative time');
 void import(
 	/* webpackMode: 'lazy' */
 	'./relativeTime'
 ).then(async ({ relativeTime }) => {
 	await isPolyfilled;
-	void schedule('relativeTime', relativeTime, {
+	await schedule('relativeTime', relativeTime, {
 		priority: 'feature',
 	});
+	log('dotcom', '🥾 booted relative time');
 });
+
+log('dotcom', '🎬 booting discussion');
 void import(
 	/* webpackMode: 'lazy' */
 	'./discussion'
 ).then(async ({ discussion }) => {
 	await isPolyfilled;
-	void schedule('initDiscussion', discussion, {
+	await schedule('initDiscussion', discussion, {
 		priority: 'feature',
 	});
+	log('dotcom', '🥾 booted discussion');
 });
