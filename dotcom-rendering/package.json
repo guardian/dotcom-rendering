@@ -87,7 +87,7 @@
 		"@storybook/addon-essentials": "7.2.0",
 		"@storybook/addons": "7.2.0",
 		"@storybook/api": "7.2.0",
-		"@storybook/components": "7.2.0",
+		"@storybook/components": "7.4.5",
 		"@storybook/core-events": "7.2.0",
 		"@storybook/react": "7.2.0",
 		"@storybook/react-webpack5": "7.2.0",
