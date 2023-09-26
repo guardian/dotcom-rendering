@@ -1,7 +1,7 @@
+import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { consentStateCanTarget } from '../../../fixtures/manual/consentStateCanTarget';
+import { fireEvent, render } from '@testing-library/react';
 import type { ImageSource } from '../../types/content';
 import { YoutubeAtom } from './YoutubeAtom';
 
@@ -16,6 +16,19 @@ const overlayImage: ImageSource[] = [
 		],
 	},
 ];
+
+const consentStateCanTarget: ConsentState = {
+	tcfv2: {
+		vendorConsents: { abc: false },
+		addtlConsent: 'xyz',
+		gdprApplies: true,
+		tcString: 'YAAA',
+		consents: { '1': true, '2': true },
+		eventStatus: 'useractioncomplete',
+	},
+	canTarget: true,
+	framework: 'tcfv2',
+};
 
 describe('YoutubeAtom', () => {
 	it('Player initialises when no overlay and has consent state', () => {

@@ -1,6 +1,6 @@
+import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
-import { consentStateCanTarget } from '../../../fixtures/manual/consentStateCanTarget';
 import { YoutubeAtom } from './YoutubeAtom';
 
 export default {
@@ -31,6 +31,19 @@ const OverlayAutoplayExplainer = () => (
 
 const adTargeting: AdTargeting = {
 	disableAds: true,
+};
+
+const consentStateCanTarget: ConsentState = {
+	tcfv2: {
+		vendorConsents: { abc: false },
+		addtlConsent: 'xyz',
+		gdprApplies: true,
+		tcString: 'YAAA',
+		consents: { '1': true, '2': true },
+		eventStatus: 'useractioncomplete',
+	},
+	canTarget: true,
+	framework: 'tcfv2',
 };
 
 export const NoConsent = (): JSX.Element => {
