@@ -170,7 +170,7 @@ const requests = articles.map((article) => {
 			// Write the new fixture data
 			const contents = `${HEADER}
 
-			import type { DCRArticle } from '../../../src/types/article';
+			import type { DCRArticle } from '../../../src/types/frontend';
 
 			export const ${article.name}: DCRArticle = ${JSON.stringify(
 				enhancedArticle,

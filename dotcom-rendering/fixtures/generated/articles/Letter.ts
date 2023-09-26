@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { DCRArticle } from '../../../src/types/frontend';
 
-export const Letter: FEArticleType = {
+export const Letter: DCRArticle = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0"> <img src="https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg" alt="Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975." width="1000" height="797" class="gu-image" /> <figcaption> <span class="element-image__caption">Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.</span> <span class="element-image__credit">Photograph: taken from picture library</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
@@ -23,6 +23,42 @@ export const Letter: FEArticleType = {
 		},
 	],
 	commercialProperties: {
+		UK: {
+			adTargeting: [
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: ['women', 'family', 'gender'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/hx6ty',
+				},
+				{
+					name: 'tn',
+					value: ['letters'],
+				},
+			],
+		},
 		US: {
 			adTargeting: [
 				{
@@ -64,42 +100,6 @@ export const Letter: FEArticleType = {
 				{
 					name: 'edition',
 					value: 'au',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
-				},
-				{
-					name: 'tn',
-					value: ['letters'],
-				},
-			],
-		},
-		UK: {
-			adTargeting: [
-				{
-					name: 'edition',
-					value: 'uk',
 				},
 				{
 					name: 'ct',
@@ -1581,7 +1581,13 @@ export const Letter: FEArticleType = {
 					],
 				},
 			],
-			elementId: 'e68403b9-62a6-428d-bc6c-f341b8a37d88',
+			elementId: '9c9fdcca-6362-48d4-aa2a-7528a59a12be',
+			position: 1,
+			lightbox: {
+				caption:
+					'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
+				credit: 'Photograph: taken from picture library',
+			},
 		},
 	],
 	canonicalUrl:
@@ -1593,17 +1599,17 @@ export const Letter: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
-					elementId: 'ea55e4c4-6779-4aed-8256-ecf92461e8e8',
+					elementId: '36f584d9-0cc2-487d-abc8-c54a26ba191c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>• In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
-					elementId: '32661bff-0a58-47eb-b42d-72127d6a6dd6',
+					html: '<p><span data-dcr-style="bullet"></span> In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
+					elementId: '2603aa7f-1d68-45cc-9cb7-b35092086ed1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>• Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p>',
-					elementId: '87514922-5fee-4fc5-b6c2-93a8fc0a2674',
+					html: '<footer><p><span data-dcr-style="bullet"></span> Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p></footer>',
+					elementId: '34ca410f-f931-44fd-afe7-7cebec291be2',
 				},
 			],
 			attributes: {
@@ -1854,4 +1860,19 @@ export const Letter: FEArticleType = {
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
 	},
+	imagesForLightbox: [
+		{
+			masterUrl:
+				'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
+			position: 1,
+			width: 1969,
+			height: 1569,
+			elementId: '9c9fdcca-6362-48d4-aa2a-7528a59a12be',
+			alt: 'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975.',
+			credit: 'Photograph: taken from picture library',
+			caption:
+				'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
+			displayCredit: true,
+		},
+	],
 };
