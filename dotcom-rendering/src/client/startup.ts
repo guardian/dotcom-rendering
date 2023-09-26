@@ -6,7 +6,7 @@ const isPolyfilled = new Promise<void>((resolve) => {
 	if (window.guardian.mustardCut || window.guardian.polyfilled) {
 		return resolve();
 	}
-	window.guardian.onPolyfilledCallbacks.push(resolve);
+	window.guardian.queue.push(resolve);
 });
 
 export const startup = async (
