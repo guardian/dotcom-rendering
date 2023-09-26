@@ -239,9 +239,6 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 		config: { isPaidContent, host },
 	} = article;
 
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -302,7 +299,6 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 							}
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={article.config.idApiUrl}
-							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
 								!!article.config.switches.headerTopBarSearchCapi
 							}
@@ -334,7 +330,6 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 							headerTopBarSwitch={
 								!!article.config.switches.headerTopNav
 							}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 
