@@ -66,7 +66,6 @@ const getLoaders = (build) => {
 		case 'apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'web.variant':
-		case 'web.scheduled':
 		case 'web.ophan-esm':
 		case 'web':
 			return swcLoader(getBrowserTargets());
