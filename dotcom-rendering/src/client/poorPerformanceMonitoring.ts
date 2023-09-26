@@ -44,22 +44,12 @@ const getTimeToFirstByte = async () =>
 	}));
 
 /** Whether or not the current page is running more slowly than acceptable */
-const isPerformingPoorly = Promise.all([
+export const isPerformingPoorly = Promise.all([
 	getFirstContentfulPaint(),
 	getTimeToFirstByte(),
 ])
 	.then(([fcp, ttfb]) => ttfb > TTFB_THRESHOLD && fcp > FCP_THRESHOLD)
 	.catch(() => true);
-
-/** Whether we should adapt the current page to address poor performance issues */
-export const shouldAdapt = new Promise<boolean>((resolve) => {
-	if (window.location.hash === '#adapt') return resolve(true);
-	if (window.guardian.config.tests.adaptiveSiteVariant !== 'variant') {
-		return resolve(false);
-	}
-
-	return void isPerformingPoorly.then(resolve);
-});
 
 /** If the current page is performing poorly, record it in Ophan */
 export const recordPoorPerformance = async (): Promise<void> => {

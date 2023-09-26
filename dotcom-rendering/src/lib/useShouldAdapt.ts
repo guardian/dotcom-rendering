@@ -1,6 +1,5 @@
-import { log } from '@guardian/libs';
-import { useEffect, useState } from 'react';
-import { shouldAdapt as shouldAdaptPromise } from '../client/poorPerformanceMonitoring';
+import { useState } from 'react';
+import { shouldAdapt as shouldAdaptPromise } from '../client/adaptiveSite';
 import { useOnce } from './useOnce';
 
 /**
@@ -13,10 +12,6 @@ export const useShouldAdapt = (): boolean => {
 	useOnce(() => {
 		void shouldAdaptPromise.then(setShouldAdapt);
 	}, []);
-
-	useEffect(() => {
-		if (shouldAdapt) log('openJournalism', '🎛️ Adapting');
-	}, [shouldAdapt]);
 
 	return shouldAdapt;
 };
