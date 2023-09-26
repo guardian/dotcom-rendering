@@ -79,10 +79,7 @@ const getLoaders = (build) => {
  */
 module.exports = ({ build, sessionId }) => ({
 	entry: {
-		index:
-			build === 'web.scheduled'
-				? './src/client/index.scheduled.ts'
-				: './src/client/index.ts',
+		index: './src/client/index.ts',
 		debug: './src/client/debug/index.ts',
 	},
 	resolve: {
