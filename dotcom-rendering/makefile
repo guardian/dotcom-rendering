@@ -211,8 +211,8 @@ gen-stories:
 	@git add stories/generated
 
 gen-fixtures:
-	$(call log, "Generating new article fixture data")
-	@node scripts/test-data/gen-fixtures.js
+	$(call log, "Generating new fixture data")
+	@npx ts-node --project tsconfig.json --files scripts/test-data/gen-fixtures.js
 
 perf-test:
 	@node scripts/perf/perf-test.js
