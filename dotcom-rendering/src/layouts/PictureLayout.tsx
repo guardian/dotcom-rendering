@@ -180,6 +180,7 @@ const avatarHeadlineWrapper = css`
 	justify-content: space-between;
 `;
 
+// This styling taken from the similar approach in CommentLayout.tsx
 // If in mobile increase the margin top and margin right deficit
 const avatarPositionStyles = css`
 	display: flex;
