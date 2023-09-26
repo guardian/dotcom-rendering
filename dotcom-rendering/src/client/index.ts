@@ -103,16 +103,28 @@ void import(/* webpackMode: "eager" */ './performanceMonitoring').then(
  *
  *************************************************************/
 
-log('dotcom', '🎬 booting updateIframeHeight');
+log('dotcom', '🎬 booting atomIframe');
 void import(
 	/* webpackMode: 'lazy' */
-	'./updateIframeHeight'
-).then(async ({ updateIframeHeight }) => {
+	'./atomIframe'
+).then(async ({ atomIframe }) => {
 	await isPolyfilled;
-	await schedule('updateIframeHeight', updateIframeHeight, {
+	await schedule('atomIframe', atomIframe, {
 		priority: 'feature',
 	});
-	log('dotcom', '🥾 booted updateIframeHeight');
+	log('dotcom', '🥾 booted atomIframe');
+});
+
+log('dotcom', '🎬 booting embedIframe');
+void import(
+	/* webpackMode: 'lazy' */
+	'./embedIframe'
+).then(async ({ embedIframe }) => {
+	await isPolyfilled;
+	await schedule('embedIframe', embedIframe, {
+		priority: 'feature',
+	});
+	log('dotcom', '🥾 booted embedIframe');
 });
 
 log('dotcom', '🎬 booting newsletterEmbedIframe');

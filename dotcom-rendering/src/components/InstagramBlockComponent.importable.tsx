@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { registerListeners } from '../client/updateIframeHeight';
+import { updateIframeHeight } from '../client/updateIframeHeight';
 import type { InstagramBlockElement } from '../types/content';
 import { ClickToView } from './ClickToView';
 
@@ -30,7 +30,7 @@ export const InstagramBlockComponent = ({
 			source={element.source}
 			sourceDomain={element.sourceDomain}
 			onAccept={() =>
-				registerListeners(`iframe[name="instagram-embed-${index}"]`)
+				updateIframeHeight(`iframe[name="instagram-embed-${index}"]`)
 			}
 		>
 			<iframe

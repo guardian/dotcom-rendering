@@ -22,8 +22,8 @@ import { Review } from '../../fixtures/generated/articles/Review';
 import { SpecialReport } from '../../fixtures/generated/articles/SpecialReport';
 import { Standard } from '../../fixtures/generated/articles/Standard';
 import { Video } from '../../fixtures/generated/articles/Video';
+import { embedIframe } from '../client/embedIframe';
 import { doStorybookHydration } from '../client/islands/doStorybookHydration';
-import { updateIframeHeight } from '../client/updateIframeHeight';
 import { decideFormat } from '../lib/decideFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
@@ -74,7 +74,7 @@ const HydratedLayout = ({
 	};
 	const format: ArticleFormat = decideFormat(serverArticle.format);
 	useEffect(() => {
-		updateIframeHeight().catch((e) =>
+		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${String(e)}`),
 		);
 		doStorybookHydration();
