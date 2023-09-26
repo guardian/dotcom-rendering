@@ -258,7 +258,7 @@ const frontsBannerAdTopContainerStyles = css`
 
 const frontsBannerAdContainerStyles = css`
 	/* Native templates require a width (or min-width) to be explicitly set */
-	width: fit-content;
+	width: ${breakpoints['wide']}px;
 	display: flex;
 	justify-content: center;
 
@@ -266,7 +266,7 @@ const frontsBannerAdContainerStyles = css`
 	   top of the ad slot, then is pushed down 24px when the label renders */
 	align-items: flex-end;
 
-	// This is applied using messenger, shared with certain ad partners
+	/* This is applied using messenger, shared with certain ad partners */
 	&.ad-slot-container--fullwidth {
 		width: 100%;
 	}
@@ -282,7 +282,7 @@ const frontsBannerAdStyles = css`
 	overflow: hidden;
 	padding-bottom: ${frontsBannerPaddingHeight}px;
 
-	// This is applied using messenger, shared with certain ad partners
+	/* This is applied using messenger, shared with certain ad partners */
 	.ad-slot-container--fullwidth & {
 		max-width: 100%;
 	}
