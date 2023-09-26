@@ -43,20 +43,37 @@ const getTimeToFirstByte = async () =>
 		}
 	}));
 
-export const performanceMonitoring = async (): Promise<void> => {
-	try {
-		const [fcp, ttfb] = await Promise.all([
-			getFirstContentfulPaint(),
-			getTimeToFirstByte(),
-		]);
+/** Whether or not the current page is running more slowly than acceptable */
+const isPerformingPoorly = Promise.all([
+	getFirstContentfulPaint(),
+	getTimeToFirstByte(),
+])
+	.then(([fcp, ttfb]) => ttfb > TTFB_THRESHOLD && fcp > FCP_THRESHOLD)
+	.catch(() => true);
 
-		if (ttfb > TTFB_THRESHOLD && fcp > FCP_THRESHOLD) {
+/** Whether we should adapt the current page to address poor performance issues */
+export const shouldAdapt = new Promise<boolean>((resolve) => {
+	if (window.location.hash === '#adapt') return resolve(true);
+	if (window.guardian.config.tests.adaptiveSiteVariant !== 'variant') {
+		return resolve(false);
+	}
+
+	return void isPerformingPoorly.then(resolve);
+});
+
+/** If the current page is performing poorly, record it in Ophan */
+export const recordPoorPerformance = async (): Promise<void> => {
+	try {
+		if (await isPerformingPoorly) {
 			/** Not sure here if we should duplicate “dotcom-rendering” */
 			const experiences = [
 				'dotcom-rendering',
 				'poor-page-performance',
 			].join(',');
-			log('openJournalism', '🐌', { ttfb, fcp });
+			log(
+				'openJournalism',
+				`🐌 Poor page performance (TTFB>${TTFB_THRESHOLD} && FCP>${FCP_THRESHOLD})`,
+			);
 			const { record } = await getOphan();
 			record({ experiences });
 		}
