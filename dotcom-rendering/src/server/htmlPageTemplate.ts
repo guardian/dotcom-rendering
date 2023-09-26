@@ -256,7 +256,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 <script>
                     window.guardian = ${windowGuardian};
-                    window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
+                    window.guardian.onPolyfilledCallbacks = []; // Queue for functions to be fired by polyfill.io callback
                 </script>
 
                 <script type="module">
@@ -289,7 +289,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                     function guardianPolyfilled() {
                         window.guardian.polyfilled = true;
                         if (window.guardian.mustardCut === false) {
-                            window.guardian.queue.forEach(function(startup) { startup() })
+                            window.guardian.onPolyfilledCallbacks.forEach(function(callback) { callback() })
                         }
                     }
 
