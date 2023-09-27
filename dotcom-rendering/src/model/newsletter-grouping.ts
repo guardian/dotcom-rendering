@@ -72,6 +72,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'In brief',
 			newsletters: [
 				'today-uk',
+				'headlines-europe',
 				'today-us',
 				'today-au',
 				'best-of-opinion',
@@ -99,6 +100,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'us-morning-newsletter',
 				'today-us',
+				'headlines-europe',
 				'green-light',
 				'best-of-opinion-us',
 				'patriarchy',
@@ -259,6 +261,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'best-of-opinion-au',
 				'today-uk',
 				'today-us',
+				'headlines-europe',
 				'best-of-opinion',
 				'best-of-opinion-us',
 			],
