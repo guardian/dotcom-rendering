@@ -2,9 +2,6 @@ name: AR CI
 
 on:
   push:
-    paths-ignore:
-      - "dotcom-rendering/**"
-
   workflow_dispatch:
 
 # Allow queued workflows to interrupt previous runs
@@ -71,4 +68,3 @@ jobs:
               - apps-rendering/dist/server/mobile-apps-rendering.zip
             mobile-assets:
               - apps-rendering/dist/assets/
-
