@@ -63,6 +63,7 @@ export const SingleComment = () => (
 		comments={[commentWithShortBody]}
 		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
+		isClosedForComments={false}
 	/>
 );
 SingleComment.storyName = 'Single Comment';
@@ -81,6 +82,7 @@ export const MulitColumn = () => (
 		]}
 		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
+		isClosedForComments={false}
 	/>
 );
 MulitColumn.storyName = 'Mulitple Columns Comments';
@@ -99,6 +101,7 @@ export const SingleColumn = () => (
 		]}
 		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
+		isClosedForComments={false}
 	/>
 );
 SingleColumn.storyName = 'Single Column Comments';

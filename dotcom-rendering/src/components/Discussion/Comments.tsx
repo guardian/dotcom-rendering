@@ -385,6 +385,7 @@ export const Comments = ({
 							authStatus={user?.authStatus}
 							onPermalinkClick={onPermalinkClick}
 							onRecommend={onRecommend}
+							isClosedForComments={isClosedForComments}
 						/>
 					</div>
 				) : (
@@ -463,6 +464,7 @@ export const Comments = ({
 					authStatus={user?.authStatus}
 					onPermalinkClick={onPermalinkClick}
 					onRecommend={onRecommend}
+					isClosedForComments={isClosedForComments}
 				/>
 			)}
 			<Filters
