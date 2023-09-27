@@ -1,7 +1,7 @@
 import { AdSlot as BridgetAdSlot } from '@guardian/bridget/AdSlot';
-import { until, from } from '@guardian/source-foundations';
 import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
 import type { IRect as BridgetRect } from '@guardian/bridget/Rect';
+import { breakpoints } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -11,18 +11,6 @@ import {
 	getUserClient,
 } from '../lib/bridgetApi';
 import { AdSlot } from './AdSlot.apps';
-import { css } from '@emotion/react';
-
-const inlineAdStyles = css`
-	${from.desktop} {
-		position: none;
-	}
-`;
-const rightAdStyles = css`
-	${until.desktop} {
-		position: none;
-	}
-`;
 
 const calculateAdPosition = (element: Element): BridgetRect => {
 	const elementRect = element.getBoundingClientRect();
@@ -180,56 +168,42 @@ export const AdPortals = () => {
 		);
 	};
 
-	console.log('*** rightAdPlaceholder', rightAdPlaceholder);
-	console.log('*** adPlaceholders', adPlaceholders);
+	const renderAdSlot = (id: string, index: number) => (
+		<AdSlot
+			key={id}
+			isFirstAdSlot={index === 0}
+			onClickSupportButton={handleClickSupportButton}
+			ref={(node) => {
+				if (node !== null) {
+					adSlots.current = [...adSlots.current, node];
+				}
+			}}
+		/>
+	);
+
+	// We need to do this in js, rather than in css
+	// because we want to conditionally create the portals
+	const isDesktop = window.innerWidth >= breakpoints.desktop;
+
+	if (isDesktop && rightAdPlaceholder) {
+		return (
+			<>
+				{createPortal(
+					<>
+						{adPlaceholders.map((ad, index) =>
+							renderAdSlot(ad.id, index),
+						)}
+					</>,
+					rightAdPlaceholder,
+				)}
+			</>
+		);
+	}
 
 	return (
 		<>
-			<div css={inlineAdStyles}>
-				{adPlaceholders.map((ad, index) =>
-					createPortal(
-						<AdSlot
-							key={ad.id}
-							isFirstAdSlot={index === 0}
-							onClickSupportButton={handleClickSupportButton}
-							ref={(node) => {
-								if (node !== null) {
-									adSlots.current = [
-										...adSlots.current,
-										node,
-									];
-								}
-							}}
-						/>,
-						ad,
-					),
-				)}
-			</div>
-			{rightAdPlaceholder && (
-				<div css={rightAdStyles}>
-					{createPortal(
-						<>
-							{adPlaceholders.map((ad, index) => (
-								<AdSlot
-									key={ad.id}
-									isFirstAdSlot={index === 0}
-									onClickSupportButton={
-										handleClickSupportButton
-									}
-									ref={(node) => {
-										if (node !== null) {
-											adSlots.current = [
-												...adSlots.current,
-												node,
-											];
-										}
-									}}
-								/>
-							))}
-						</>,
-						rightAdPlaceholder,
-					)}
-				</div>
+			{adPlaceholders.map((ad, index) =>
+				createPortal(renderAdSlot(ad.id, index), ad),
 			)}
 		</>
 	);
