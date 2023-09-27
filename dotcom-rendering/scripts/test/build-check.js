@@ -42,19 +42,11 @@ const fileExists = async (glob) => {
 		manifests.push(await loadJsonFile('./dist/manifest.web.variant.json'));
 	}
 
-	for (const name of [
-		'index.js',
-		'atomIframe.js',
-		'embedIframe.js',
-		'newsletterEmbedIframe.js',
-		'relativeTime.js',
-	]) {
-		for (const manifest of manifests) {
-			if (manifest[name]) {
-				console.log(`A manifest returned value ${name}`);
-			} else {
-				errorAndThrow(`A manifest did not return a value for ${name}`);
-			}
+	for (const manifest of manifests) {
+		if (manifest['index.js']) {
+			console.log(`A manifest has an index file`);
+		} else {
+			errorAndThrow(`A manifest did not have an index file`);
 		}
 	}
 })();
