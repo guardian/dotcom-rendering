@@ -25,10 +25,10 @@ const styles = css`
 	background: ${palette.neutral[97]};
 
 	${from.desktop} {
-		position: absolute;
+		/* position: absolute;
 		margin-left: calc(${wideContentWidthPx}px + ${remSpace[4]});
 		min-width: 300px;
-		margin-bottom: ${remSpace[6]};
+		margin-bottom: ${remSpace[6]}; */
 	}
 
 	${until.phablet} {

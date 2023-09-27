@@ -769,7 +769,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
+										isApps={isApps}
 									/>
+
+									{/* adplaceholders - need to count ad placeholder elements */}
+									{/* {isApps && (
+											<div className="right-ad-portal-placeholder" style={{flex: "3", display: "flex"}}></div>
+									)} */}
 								</RightColumn>
 							</div>
 						</GridItem>

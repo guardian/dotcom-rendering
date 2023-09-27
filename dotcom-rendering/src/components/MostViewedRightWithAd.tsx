@@ -7,6 +7,7 @@ type Props = {
 	display: ArticleDisplay;
 	isPaidContent: boolean;
 	renderAds: boolean;
+	isApps?: boolean;
 };
 
 /**
@@ -19,6 +20,7 @@ export const MostViewedRightWithAd = ({
 	display,
 	isPaidContent,
 	renderAds,
+	isApps = false,
 }: Props) => {
 	const componentDataAttribute = 'most-viewed-right-container';
 	return (
@@ -29,9 +31,11 @@ export const MostViewedRightWithAd = ({
 			css={css`
 				/* The height can be smaller than the maximum height
 				   For example if the article is very short */
-				height: min(100%, ${MAX_HEIGHT_PX}px);
+				/* height: min(100%, ${MAX_HEIGHT_PX}px); */
+				height: 100%;
 				display: flex;
 				flex-direction: column;
+				/* flex: 1; */
 			`}
 		>
 			{renderAds ? (
@@ -58,6 +62,18 @@ export const MostViewedRightWithAd = ({
 					/>
 				</Island>
 			) : null}
+
+			{isApps && (
+				<div
+					className="right-ad-portal-placeholder"
+					style={{
+						flex: '3',
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'space-around',
+					}}
+				></div>
+			)}
 		</div>
 	);
 };
