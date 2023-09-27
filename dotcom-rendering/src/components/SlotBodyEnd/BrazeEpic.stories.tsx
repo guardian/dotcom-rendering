@@ -11,6 +11,9 @@ export default {
 	title: 'Components/SlotBodyEnd/BrazeEpics',
 };
 
+const fetchEmail: () => Promise<string | null> = () =>
+	Promise.resolve('name@example.com');
+
 // Braze Epic - Default
 // ---------------------------------------
 export const BrazeEpic_Default_Component = (
@@ -61,6 +64,7 @@ export const BrazeEpic_Default_Component = (
 					);
 				}}
 				brazeMessageProps={brazeMessageProps}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}
@@ -140,6 +144,7 @@ export const BrazeEpic_DefaultWithReminder_Component = (
 					);
 				}}
 				brazeMessageProps={brazeMessageProps}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}
@@ -223,6 +228,7 @@ export const BrazeEpic_SpecialHeader_Component = (
 					);
 				}}
 				brazeMessageProps={brazeMessageProps}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}
@@ -302,6 +308,7 @@ export const BrazeNewsletterEpic_UK_MorningBriefing_Component = (
 					);
 				}}
 				brazeMessageProps={brazeMessageProps}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}
@@ -368,6 +375,7 @@ export const BrazeEpicNewsletter_US_FirstThing_Component = (
 					);
 				}}
 				brazeMessageProps={brazeMessageProps}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}
@@ -434,6 +442,7 @@ export const BrazeEpicNewsletter_AUS_MorningMail_Component = (
 					);
 				}}
 				brazeMessageProps={brazeMessageProps}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}
@@ -500,6 +509,7 @@ export const BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component = (
 					);
 				}}
 				brazeMessageProps={brazeMessageProps}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}
@@ -566,6 +576,7 @@ export const BrazeEpicNewsletter_DownToEarth_Component = (
 					);
 				}}
 				brazeMessageProps={brazeMessageProps}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}
@@ -632,6 +643,7 @@ export const BrazeEpicNewsletter_TheGuide_Component = (
 					);
 				}}
 				brazeMessageProps={brazeMessageProps}
+				fetchEmail={fetchEmail}
 			/>
 		);
 	}

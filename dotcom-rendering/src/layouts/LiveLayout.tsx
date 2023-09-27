@@ -14,6 +14,7 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Accordion } from '../components/Accordion';
+import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -59,7 +60,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
@@ -242,7 +243,7 @@ const paddingBody = css`
 `;
 
 interface BaseProps {
-	article: FEArticleType;
+	article: DCRArticle;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -261,10 +262,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
-
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
-		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -300,6 +297,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const renderAds = canRenderAds(article, renderingTarget);
 
 	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 
 	return (
 		<>
@@ -344,7 +342,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -371,7 +368,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								headerTopBarSwitch={
 									!!article.config.switches.headerTopNav
 								}
-								isInEuropeTest={isInEuropeTest}
 							/>
 						</Section>
 
@@ -418,6 +414,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				</div>
 			)}
 			<main data-layout="LiveLayout">
+				{isApps && (
+					<Island clientOnly={true}>
+						<AdPortals />
+					</Island>
+				)}
 				{footballMatchUrl ? (
 					<Section
 						showTopBorder={false}

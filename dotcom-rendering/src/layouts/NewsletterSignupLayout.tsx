@@ -47,11 +47,11 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -182,7 +182,7 @@ const regionalFocusDivStyle = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-const getMainMediaCaptions = (article: FEArticleType): (string | undefined)[] =>
+const getMainMediaCaptions = (article: DCRArticle): (string | undefined)[] =>
 	article.mainMediaElements.map((el) =>
 		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 			? el.data.caption
@@ -194,10 +194,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 		promotedNewsletter,
 		config: { host },
 	} = article;
-
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
-		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
@@ -255,7 +251,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						remoteHeader={!!article.config.switches.remoteHeader}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={article.config.idApiUrl}
-						isInEuropeTest={isInEuropeTest}
 						headerTopBarSearchCapiSwitch={
 							!!article.config.switches.headerTopBarSearchCapi
 						}
@@ -287,7 +282,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 

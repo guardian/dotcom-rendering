@@ -3091,10 +3091,10 @@
   dependencies:
     is-mobile "3.1.1"
 
-"@guardian/braze-components@14.1.1":
-  version "14.1.1"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-14.1.1.tgz#12672e3992ad3eab3bade848861ca01631a0edf5"
-  integrity sha512-wHuJwdOC2hsTBie+zWJYFyasP4fOJXOPcKXpN2Cp+GlljPah3YtS2Fbgn8pcxxt8d5JKO9ra7sHKvX8FNxkAyg==
+"@guardian/braze-components@15.0.1":
+  version "15.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-15.0.1.tgz#2c936c43e654f5ae28db254329eae1b4b5861641"
+  integrity sha512-XNqYE9X/4aM5vZqiZInedvEZ9niPfdqwL7SjzNF0wnVbR+YObOC6QC68M521gTPcyca6r190qtnayv4GNO0peg==
 
 "@guardian/bridget@2.3.0":
   version "2.3.0"
@@ -17040,9 +17040,9 @@ synckit@^0.8.5:
     tslib "^2.5.0"
 
 systeminformation@^5.7:
-  version "5.18.6"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.18.6.tgz#5f223eb8d1d4ad14418aa2a5cc2e7ea6c2ba8849"
-  integrity sha512-pLXv6kjJZ1xUcVs9SrCqbQ9y0x1rgRWxBUc8/KxpOp9IRxFGFfzVK5efsxBn/KdYog4C9rPcKk+kHNIL2SB/8Q==
+  version "5.21.8"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.21.8.tgz#18395187e5983698619ed07ca8640ae48ec232b2"
+  integrity sha512-Xf1KDMUTQHLOT9Z7MjpSpsbaICOHcm4OZ9c9qqpkCoXuxq5MoyDrgu5GIQYpoiralXNPrqxDz3ND8MdllpXeQA==
 
 table@^6.8.1:
   version "6.8.1"
