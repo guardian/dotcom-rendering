@@ -29,6 +29,15 @@ export const addImageIDs = (
 					...thisElement,
 					position,
 				};
+			} else if (
+				thisElement._type ===
+				'model.dotcomrendering.pageElements.CartoonBlockElement'
+			) {
+				position += 1;
+				return {
+					...thisElement,
+					position,
+				};
 			} else {
 				return thisElement;
 			}
