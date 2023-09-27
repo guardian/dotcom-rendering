@@ -9,7 +9,6 @@ import { ArticleDesign } from '@guardian/libs';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
-import { from } from '@guardian/source-foundations';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { CartoonComponent } from '../components/CartoonComponent';
@@ -69,7 +68,6 @@ import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
 import { decidePalette } from './decidePalette';
-import { css } from '@emotion/react';
 
 type Props = {
 	format: ArticleFormat;
@@ -89,12 +87,6 @@ type Props = {
 	abTests?: ServerSideTests;
 	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
-
-const inlineAdPlaceholderStyle = css`
-	${from.desktop} {
-		display: none;
-	}
-`;
 
 // updateRole modifies the role of an element in a way appropriate for most
 // article types.
@@ -484,12 +476,7 @@ export const renderElement = ({
 
 			return <EmailSignUpSwitcher {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
-			return (
-				<div
-					css={inlineAdPlaceholderStyle}
-					className="ad-portal-placeholder"
-				></div>
-			);
+			return <div className="ad-portal-placeholder"></div>;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent

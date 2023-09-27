@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
+import { until } from '@guardian/source-foundations';
 import { AdSlot } from './AdSlot.web';
+import { useConfig } from './ConfigContext';
 import { Island } from './Island';
 import { MostViewedRightWrapper } from './MostViewedRightWrapper.importable';
 
@@ -7,8 +9,18 @@ type Props = {
 	display: ArticleDisplay;
 	isPaidContent: boolean;
 	renderAds: boolean;
-	isApps?: boolean;
 };
+
+const rightAdStyles = css`
+	flex: 3;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+
+	${until.desktop} {
+		display: none;
+	}
+`;
 
 /**
  * The maximum height of the container that may contain
@@ -20,22 +32,20 @@ export const MostViewedRightWithAd = ({
 	display,
 	isPaidContent,
 	renderAds,
-	isApps = false,
 }: Props) => {
 	const componentDataAttribute = 'most-viewed-right-container';
+	const { renderingTarget } = useConfig();
+	const isApps = renderingTarget === 'Apps';
+
 	return (
 		<div
 			// This attribute is necessary so that most viewed wrapper
 			// can measure the height of this component
 			data-container={componentDataAttribute}
 			css={css`
-				/* The height can be smaller than the maximum height
-				   For example if the article is very short */
-				/* height: min(100%, ${MAX_HEIGHT_PX}px); */
 				height: 100%;
 				display: flex;
 				flex-direction: column;
-				/* flex: 1; */
 			`}
 		>
 			{renderAds ? (
@@ -66,12 +76,7 @@ export const MostViewedRightWithAd = ({
 			{isApps && (
 				<div
 					className="right-ad-portal-placeholder"
-					style={{
-						flex: '3',
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'space-around',
-					}}
+					css={rightAdStyles}
 				></div>
 			)}
 		</div>
