@@ -18,6 +18,7 @@ import {
 	signInHeader,
 	signInLink,
 } from './shared';
+import { SocialButtons } from '../../SocialButtons';
 
 export const SignInGateRealSocial = ({
 	signInUrl,
@@ -55,6 +56,7 @@ export const SignInGateRealSocial = ({
 				.
 			</p>
 			<div css={actionButtons}>
+				<SocialButtons marginTop={true} />
 				<LinkButton
 					data-cy="sign-in-gate-main_register"
 					data-ignore="global-link-styling"
