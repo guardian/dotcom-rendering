@@ -54,7 +54,12 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		},
 		{
 			title: 'The world explained',
-			newsletters: ['global-dispatch', 'documentaries', 'her-stage'],
+			newsletters: [
+				'trump-on-trial',
+				'global-dispatch',
+				'documentaries',
+				'her-stage',
+			],
 		},
 		{
 			title: 'Sport',
@@ -102,6 +107,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'today-us',
 				'headlines-europe',
 				'green-light',
+				'trump-on-trial',
 				'best-of-opinion-us',
 				'patriarchy',
 				'bookmarks',
@@ -169,6 +175,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'today-uk',
 				'today-au',
+				'headlines-europe',
 				'best-of-opinion',
 				'best-of-opinion-au',
 			],
@@ -233,6 +240,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'The world explained',
 			newsletters: [
+				'trump-on-trial',
 				'global-dispatch',
 				'cotton-capital',
 				'documentaries',
