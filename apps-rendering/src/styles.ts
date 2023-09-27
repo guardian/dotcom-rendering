@@ -273,6 +273,132 @@ export const pageFonts = `
 
 `;
 
+export const editionsDevFonts = `
+    ${fontFace(
+		'Guardian Text Egyptian Web',
+		some(400),
+		none,
+		'/assets/fonts/GuardianTextEgyptian-Reg.ttf',
+	)}
+    ${fontFace(
+		'Guardian Text Egyptian Web',
+		some(400),
+		some('italic'),
+		'/assets/fonts/GuardianTextEgyptian-RegItalic.ttf',
+	)}
+    ${fontFace(
+		'Guardian Text Egyptian Web',
+		some(700),
+		none,
+		'/assets/fonts/GuardianTextEgyptian-Bold.ttf',
+	)}
+    ${fontFace(
+		'Guardian Text Egyptian Web',
+		some(700),
+		some('italic'),
+		'/assets/fonts/GuardianTextEgyptian-BoldItalic.ttf',
+	)}
+    ${fontFace(
+		'Guardian Text Egyptian Web',
+		some('bold'),
+		none,
+		'/assets/fonts/GuardianTextEgyptian-Bold.ttf',
+	)}
+    ${fontFace(
+		'Guardian Text Egyptian Web',
+		some('bold'),
+		some('italic'),
+		'/assets/fonts/GuardianTextEgyptian-BoldItalic.ttf',
+	)}
+
+    ${fontFace(
+		'Guardian Text Sans Web',
+		some(400),
+		none,
+		'/assets/fonts/GuardianTextSans-Regular.ttf',
+	)}
+    ${fontFace(
+		'Guardian Text Sans Web',
+		some(400),
+		some('italic'),
+		'/assets/fonts/GuardianTextSans-RegularItalic.ttf',
+	)}
+    ${fontFace(
+		'Guardian Text Sans Web',
+		some(700),
+		none,
+		'/assets/fonts/GuardianTextSans-Bold.ttf',
+	)}
+    ${fontFace(
+		'Guardian Text Sans Web',
+		some(700),
+		some('italic'),
+		'/assets/fonts/GuardianTextSans-BoldItalic.ttf',
+	)}
+
+    ${fontFace(
+		'GH Guardian Headline',
+		some(300),
+		none,
+		'/assets/fonts/GHGuardianHeadline-Light.ttf',
+	)}
+    ${fontFace(
+		'GH Guardian Headline',
+		some(300),
+		some('italic'),
+		'/assets/fonts/GHGuardianHeadline-LightItalic.ttf',
+	)}
+    ${fontFace(
+		'GH Guardian Headline',
+		some(400),
+		none,
+		'/assets/fonts/GHGuardianHeadline-Regular.ttf',
+	)}
+    ${fontFace(
+		'GH Guardian Headline',
+		some(400),
+		some('italic'),
+		'/assets/fonts/GHGuardianHeadline-RegularItalic.ttf',
+	)}
+    ${fontFace(
+		'GH Guardian Headline',
+		some(500),
+		none,
+		'/assets/fonts/GHGuardianHeadline-Medium.ttf',
+	)}
+    ${fontFace(
+		'GH Guardian Headline',
+		some(500),
+		some('italic'),
+		'/assets/fonts/GHGuardianHeadline-MediumItalic.ttf',
+	)}
+    ${fontFace(
+		'GH Guardian Headline',
+		some(600),
+		none,
+		'/assets/fonts/GHGuardianHeadline-Semibold.ttf',
+	)}
+    ${fontFace(
+		'GH Guardian Headline',
+		some(600),
+		some('italic'),
+		'/assets/fonts/GHGuardianHeadline-SemiboldItalic.ttf',
+	)}
+    ${fontFace(
+		'GH Guardian Headline',
+		some(700),
+		none,
+		'/assets/fonts/GHGuardianHeadline-Bold.ttf',
+	)}
+    ${fontFace(
+		'GH Guardian Headline',
+		some(700),
+		some('italic'),
+		'/assets/fonts/GHGuardianHeadline-BoldItalic.ttf',
+	)}
+
+`;
+
 export const editionsPageFonts = `
     ${fontFace(
 		'Guardian Text Egyptian Web',
