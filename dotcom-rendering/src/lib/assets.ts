@@ -6,7 +6,7 @@ import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 	ophanEsm,
-} from '../../scripts/webpack/bundles';
+} from '../../scripts/webpack/bundles.mjs';
 import type { ServerSideTests, Switches } from '../types/config';
 import { makeMemoizedFunction } from './memoize';
 

@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { BUILD_VARIANT } from '../../scripts/webpack/bundles';
+import { BUILD_VARIANT } from '../../scripts/webpack/bundles.mjs';
 import {
 	APPS_SCRIPT,
 	decideAssetOrigin,

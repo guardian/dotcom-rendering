@@ -1,11 +1,11 @@
 // @ts-check
-const nodeExternals = require('webpack-node-externals');
-const swcConfig = require('./.swcrc.json');
+import nodeExternals from 'webpack-node-externals';
+import swcConfig from './.swcrc.json' assert { type: 'json' };
 
 const DEV = process.env.NODE_ENV === 'development';
 const nodeVersion = process.versions.node;
 
-const swcLoader = [
+export const swcLoader = [
 	{
 		loader: 'swc-loader',
 		options: {
@@ -21,13 +21,14 @@ const swcLoader = [
 ];
 
 /** @type {(options: { sessionId: string } ) => import('webpack').Configuration} */
-module.exports = ({ sessionId }) => ({
+// eslint-disable-next-line import/no-default-export -- this is what Webpack wants
+export default ({ sessionId }) => ({
 	entry: {
 		server: './src/server/index.ts',
 	},
 	output: {
-		filename: `[name].js`,
-		chunkFilename: `[name].js`,
+		filename: `[name].cjs`,
+		chunkFilename: `[name].cjs`,
 		libraryTarget: 'commonjs2',
 		pathinfo: true,
 	},
