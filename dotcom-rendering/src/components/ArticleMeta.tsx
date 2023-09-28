@@ -20,7 +20,6 @@ import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
 import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
-import { Counts } from './Counts';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
 import { SendAMessage } from './SendAMessage.importable';
@@ -441,7 +440,13 @@ export const ArticleMeta = ({
 								),
 						]}
 					>
-						<Counts format={format}>
+						<div
+							css={css`
+								display: flex;
+								flex-direction: row;
+								align-items: flex-start;
+							`}
+						>
 							<div>
 								{isCommentable && (
 									<Island clientOnly={true} deferUntil="idle">
@@ -453,7 +458,7 @@ export const ArticleMeta = ({
 									</Island>
 								)}
 							</div>
-						</Counts>
+						</div>
 					</div>
 				</div>
 			</div>
