@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { makeMemoizedFunction } from './memoize';
 
 describe('memoize', () => {
@@ -28,10 +29,10 @@ describe('memoize', () => {
 	});
 
 	it('has separate caches for each memoized function', () => {
-		const f = jest.fn().mockImplementation((key: string) => ({
+		const f = jest.fn((key: string) => ({
 			f: key,
 		}));
-		const g = jest.fn().mockImplementation((key: string) => ({
+		const g = jest.fn((key: string) => ({
 			g: key,
 		}));
 

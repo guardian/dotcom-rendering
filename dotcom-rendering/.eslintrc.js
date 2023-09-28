@@ -208,6 +208,13 @@ module.exports = {
 			},
 		},
 		{
+			files: ['**/*.test.ts', '**/*.test.tsx'],
+			rules: {
+				// we can get better mocked types with type annotations in tests
+				'@typescript-eslint/consistent-type-imports': 'off',
+			},
+		},
+		{
 			files: ['**/**.tsx'],
 			rules: {
 				'@typescript-eslint/ban-types': [

@@ -1,12 +1,5 @@
 import { setCookie } from '@guardian/libs';
-import {
-	getLastOneOffContributionTimestamp,
-	isRecentOneOffContributor,
-	lazyFetchEmailWithTimeout,
-	ONE_OFF_CONTRIBUTION_DATE_COOKIE,
-	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-} from './contributions';
-import { getIdApiUserData } from './getIdapiUserData';
+import { jest } from '@jest/globals';
 
 const clearAllCookies = () => {
 	const cookies = document.cookie.split(';');
@@ -24,13 +17,20 @@ const userResponse = {
 	},
 };
 
-jest.mock('./getIdapiUserData', () => {
-	const originalModule = jest.requireActual('./getIdapiUserData');
+jest.unstable_mockModule('../../src/lib/getIdapiUserData', async () => {
 	return {
-		...originalModule,
 		getIdApiUserData: jest.fn(() => Promise.resolve(userResponse)),
 	};
 });
+
+const { getIdApiUserData } = await import('./getIdapiUserData');
+const {
+	getLastOneOffContributionTimestamp,
+	isRecentOneOffContributor,
+	lazyFetchEmailWithTimeout,
+	ONE_OFF_CONTRIBUTION_DATE_COOKIE,
+	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
+} = await import('./contributions');
 
 describe('getLastOneOffContributionDate', () => {
 	beforeEach(clearAllCookies);
@@ -144,11 +144,11 @@ describe('lazyFetchEmailWithTimeout', () => {
 describe('getPurchaseInfo', () => {
 	let getPurchaseInfo: () => any;
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		clearAllCookies();
 		// Reset modules to avoid memoized cookies affecting tests
 		jest.resetModules();
-		({ getPurchaseInfo } = jest.requireActual('./contributions'));
+		({ getPurchaseInfo } = await import('../../src/lib/contributions'));
 	});
 
 	it('returns decoded cookie data', () => {

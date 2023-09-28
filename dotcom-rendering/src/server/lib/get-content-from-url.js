@@ -1,5 +1,3 @@
-const { URLSearchParams } = require('url');
-
 // @ts-check
 const fetch = require('node-fetch').default;
 

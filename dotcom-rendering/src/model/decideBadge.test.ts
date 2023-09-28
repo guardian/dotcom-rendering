@@ -1,6 +1,33 @@
+import { jest } from '@jest/globals';
+import type { BadgeType, SpecialBadgeType } from '../types/badge';
 import { decideEditorialBadge, decidePaidContentBadge } from './decideBadge';
 
-jest.mock('./badges');
+jest.unstable_mockModule('../../src/model/badges', () => ({
+	/** Mocked version of BADGES for testing */
+	BADGES: [
+		{
+			seriesTag: 'world/series/the-new-arrivals',
+			imageSrc: 'badges/new-arrivals.png',
+		},
+		{
+			seriesTag: 'uk-news/series/the-brexit-gamble',
+			imageSrc: 'badges/EUReferendumBadge.svg',
+		},
+	] satisfies BadgeType[],
+	/** Mocked version of SPECIAL_BADGES for testing */
+	SPECIAL_BADGES: [
+		{
+			salt: 'bgxx248cpdecau4434hd',
+			hashedTag: '618e8af611c0f8430ffb330a1f3c344f',
+			imageSrc: 'badges/newsletter-badge.svg',
+		},
+		{
+			salt: 'p9s52e6pkjp7q4h5x89g',
+			hashedTag: 'eded82359738a7be7f4ab693d339a74c',
+			imageSrc: 'badges/this-is-europe.svg',
+		},
+	] satisfies SpecialBadgeType[],
+}));
 
 const brandingAmazon = {
 	brandingType: {

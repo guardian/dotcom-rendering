@@ -1,10 +1,6 @@
 import { ArticleSpecial, Pillar } from '@guardian/libs';
 import { findPillar } from './find-pillar';
 
-jest.mock('../lib/pillars', () => ({
-	pillarNames: ['news', 'opinion', 'sport', 'culture', 'lifestyle', 'labs'],
-}));
-
 describe('findPillar', () => {
 	it('returns pillar if valid', () => {
 		expect(findPillar('News')).toBe(Pillar.News);

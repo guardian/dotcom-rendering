@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { join } from 'node:path';
+import { cwd } from 'node:process';
 import { isObject, isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
@@ -50,10 +51,15 @@ const isAssetHash = (manifest: unknown): manifest is AssetHash =>
 		([key, value]) => isString(key) && isString(value),
 	);
 
-const getManifest = makeMemoizedFunction((path: string): AssetHash => {
+const getManifest = makeMemoizedFunction((build: Build): AssetHash => {
 	try {
+		// `cwd()` gets the current working directory,
+		// which should be the parent of the `dist` folder.
+		// this is inherently brittle, but so was the use of __dirname
+		// a purely functional approach would pass the manifest as arguments to starting the server
+		const path = join(cwd(), 'dist', `manifest.${build}.json`);
 		const assetHash: unknown = JSON.parse(
-			readFileSync(resolve(__dirname, path), { encoding: 'utf-8' }),
+			readFileSync(path, { encoding: 'utf-8' }),
 		);
 		if (!isAssetHash(assetHash)) {
 			throw new Error('Not a valid AssetHash type');
@@ -61,9 +67,9 @@ const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 
 		return assetHash;
 	} catch (e) {
-		console.error('Could not load manifest in: ', path);
+		console.error('Could not load manifest for', build);
 		console.error('Some filename lookups will fail');
-		return {};
+		throw e;
 	}
 });
 
@@ -73,11 +79,6 @@ export type Build =
 	| 'web.variant'
 	| 'web.ophan-esm'
 	| 'web.legacy';
-
-type ManifestPath = `./manifest.${Build}.json`;
-
-const getManifestPath = (build: Build): ManifestPath =>
-	`./manifest.${build}.json`;
 
 export const getPathFromManifest = (
 	build: Build,
@@ -93,7 +94,7 @@ export const getPathFromManifest = (
 		)}`;
 	}
 
-	const manifest = getManifest(getManifestPath(build));
+	const manifest = getManifest(build);
 	const filenameFromManifest = manifest[filename];
 
 	if (!filenameFromManifest) {

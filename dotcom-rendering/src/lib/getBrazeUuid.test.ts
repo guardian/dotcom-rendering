@@ -1,5 +1,4 @@
-import { getBrazeUuid } from './getBrazeUuid';
-import { getIdapiUserIdentifiers } from './getIdapiUserData';
+import { jest } from '@jest/globals';
 
 const userIdentifiers = {
 	id: 'idValue',
@@ -8,9 +7,12 @@ const userIdentifiers = {
 	googleTagId: 'googleTagIdValue',
 };
 
-jest.mock('./getIdapiUserData', () => ({
+jest.unstable_mockModule('../../src/lib/getIdapiUserData', () => ({
 	getIdapiUserIdentifiers: jest.fn(() => Promise.resolve(userIdentifiers)),
 }));
+
+const { getBrazeUuid } = await import('./getBrazeUuid');
+const { getIdapiUserIdentifiers } = await import('./getIdapiUserData');
 
 describe('getBrazeUuid', () => {
 	it('gets the braze uuid using Identity user identifiers api', async () => {

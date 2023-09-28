@@ -1,15 +1,17 @@
+import { jest } from '@jest/globals';
 import { renderHook, waitFor } from '@testing-library/react';
-import { useIsBridgetCompatible } from './useIsBridgetCompatible';
 
 const mockRequiredVersion = '2.1.1';
 
-jest.mock('./bridgetApi', () => ({
+jest.unstable_mockModule('../../src/lib/bridgetApi', () => ({
 	getEnvironmentClient: () => ({
 		nativeThriftPackageVersion: async () => {
 			return mockRequiredVersion;
 		},
 	}),
 }));
+
+const { useIsBridgetCompatible } = await import('./useIsBridgetCompatible');
 
 describe('useIsBridgetCompatible', () => {
 	test.each([
