@@ -11,19 +11,21 @@ import { injectMpuIntoGroupedTrails } from '../model/injectMpuIntoGroupedTrails'
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
 import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
+import type { Branding } from '../types/branding';
 import type { DCRFrontType, FEFrontType } from '../types/front';
 import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront';
 import { makePrefetchHeader } from './lib/header';
 import { renderFront, renderTagFront } from './render.front.web';
 
+const getFrontBranding = (data: FEFrontType): Branding | undefined =>
+	data.pressedPage.frontProperties.commercial.editionBrandings.find(
+		(editionBranding) =>
+			editionBranding.edition.id === data.editionId &&
+			!!editionBranding.branding,
+	)?.branding;
+
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
-	const editionHasBranding = () =>
-		!!data.pressedPage.frontProperties.commercial.editionBrandings.find(
-			(editionBranding) =>
-				editionBranding.edition.id === data.editionId &&
-				!!editionBranding.branding,
-		);
 
 	return {
 		...data,
@@ -40,7 +42,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 					data.pressedPage.frontProperties.onPageDescription,
 				isPaidContent: data.config.isPaidContent,
 				discussionApiUrl: data.config.discussionApiUrl,
-				editionHasBranding: editionHasBranding(),
+				frontBranding: getFrontBranding(data),
 			}),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),

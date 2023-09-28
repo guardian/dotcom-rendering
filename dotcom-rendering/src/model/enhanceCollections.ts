@@ -50,7 +50,7 @@ export const enhanceCollections = ({
 	editionId,
 	pageId,
 	discussionApiUrl,
-	editionHasBranding,
+	frontBranding,
 	onPageDescription,
 	isPaidContent,
 }: {
@@ -58,7 +58,7 @@ export const enhanceCollections = ({
 	editionId: EditionId;
 	pageId: string;
 	discussionApiUrl: string;
-	editionHasBranding: boolean;
+	frontBranding: Branding | undefined;
 	onPageDescription?: string;
 	isPaidContent?: boolean;
 }): DCRCollectionType[] => {
@@ -106,7 +106,8 @@ export const enhanceCollections = ({
 			sponsoredContentBranding: decideSponsoredContentBranding(
 				allCards.length,
 				allBranding,
-				editionHasBranding,
+				// TODO Use front branding directly
+				!!frontBranding,
 				collectionType,
 			),
 			grouped: groupCards(
