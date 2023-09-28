@@ -3,11 +3,12 @@ import { getLargest, getMaster } from '../components/ImageComponent';
 import type { Orientation } from '../components/Picture';
 import { isHighEnough, isWideEnough } from '../lib/lightbox';
 import type {
+	CartoonBlockElement,
 	FEElement,
 	ImageBlockElement,
 	ImageForLightbox,
 } from '../types/content';
-import { isImage } from './enhance-images';
+import { isCartoon, isImage } from './enhance-images';
 
 /**
  * Only allow the lightbox to show images that have a source with a width greater
@@ -18,14 +19,32 @@ import { isImage } from './enhance-images';
  *
  */
 const isLightboxable = (
-	element: ImageBlockElement,
+	element: ImageBlockElement | CartoonBlockElement,
 	orientation: Orientation,
 ): boolean => {
 	switch (orientation) {
 		case 'landscape':
-			return element.media.allImages.some(isWideEnough);
+			if (
+				element._type ===
+				'model.dotcomrendering.pageElements.CartoonBlockElement'
+			) {
+				return element.variants.some((v) =>
+					v.images.some(isWideEnough),
+				);
+			} else {
+				return element.media.allImages.some(isWideEnough);
+			}
 		case 'portrait':
-			return element.media.allImages.some(isHighEnough);
+			if (
+				element._type ===
+				'model.dotcomrendering.pageElements.CartoonBlockElement'
+			) {
+				return element.variants.some((v) =>
+					v.images.some(isHighEnough),
+				);
+			} else {
+				return element.media.allImages.some(isHighEnough);
+			}
 	}
 };
 
@@ -56,11 +75,19 @@ const decideImageId = (image: ImageForLightbox): string | undefined => {
 };
 
 const buildLightboxImage = (
-	element: ImageBlockElement,
+	element: ImageBlockElement | CartoonBlockElement,
 ): ImageForLightbox | undefined => {
-	const masterImage =
-		getMaster(element.media.allImages) ??
-		getLargest(element.media.allImages);
+	const cartoons =
+		element._type ===
+		'model.dotcomrendering.pageElements.CartoonBlockElement'
+			? element.variants.flatMap((v) => v.images)
+			: [];
+	const images =
+		element._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
+			? element.media.allImages
+			: [];
+	const allImages = images.concat(cartoons);
+	const masterImage = getMaster(allImages) ?? getLargest(allImages);
 
 	// Rare, but legacy content might not have a url that we can use with Fastly
 	// so we can't include them in lightbox
@@ -78,21 +105,37 @@ const buildLightboxImage = (
 		width,
 		height,
 		elementId: element.elementId,
-		alt: element.data.alt,
-		credit: element.lightbox?.credit ?? element.data.credit,
-		caption: element.lightbox?.caption ?? element.data.caption,
+		alt:
+			element._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+				? element.data.alt
+				: element.alt,
+		credit: element.lightbox?.credit,
+		caption: element.lightbox?.caption,
 		displayCredit: element.displayCredit,
-		title: element.title,
-		starRating: element.starRating,
+		title:
+			element._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+				? element.title
+				: undefined,
+		starRating:
+			element._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+				? element.starRating
+				: undefined,
 	};
 };
 
 const isBlog = (design: FEFormat['design']) =>
 	design === 'LiveBlogDesign' || design === 'DeadBlogDesign';
 
-const getImages = (element: FEElement): ImageBlockElement[] => {
+const getImages = (
+	element: FEElement,
+): (ImageBlockElement | CartoonBlockElement)[] => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
+			return [element];
+		case 'model.dotcomrendering.pageElements.CartoonBlockElement':
 			return [element];
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
 			return element.images;
@@ -122,7 +165,8 @@ export const buildLightboxImages = (
 ): ImageForLightbox[] => {
 	const lightboxImages = mainMediaElements
 		.flatMap<ImageForLightbox>((element) => {
-			if (isImage(element)) return buildLightboxImage(element) ?? [];
+			if (isImage(element) || isCartoon(element))
+				return buildLightboxImage(element) ?? [];
 			return [];
 		})
 		.concat(
