@@ -1,31 +1,10 @@
 import { useConfig } from './ConfigContext';
-import { Placeholder } from './Placeholder';
 
 /**
  * An island can be server-side rendered and then hydrated on the client,
- * or simply rendered on the client (with the server optionally rendering a
- * placeholder of a specified height).
- *
- * This specifies the  of possible props when specifying how the
- * island should be rendered
+ * or simply rendered on the client (with the server rendering nothing).
  */
-type ClientOnlyProps =
-	| {
-			clientOnly: true;
-			/**
-			 * Islands that are rendered on the client can optionally specify
-			 * a placeholder height that is server side rendered
-			 */
-			placeholderHeight?: number;
-	  }
-	| {
-			clientOnly?: false;
-			/**
-			 * Islands that are rendered on the server can never specify a
-			 * placeholder height
-			 */
-			placeholderHeight?: never;
-	  };
+type ClientOnlyProps = { clientOnly?: true };
 
 type DefaultProps = ClientOnlyProps & {
 	deferUntil?: never;
@@ -63,7 +42,6 @@ type IdleProps = ClientOnlyProps & {
 type InteractionProps = {
 	deferUntil: 'interaction';
 	clientOnly?: never;
-	placeholderHeight?: never;
 	rootMargin?: never;
 	children: JSX.Element;
 };
@@ -75,7 +53,6 @@ type InteractionProps = {
 type HashProps = {
 	deferUntil: 'hash';
 	clientOnly: true;
-	placeholderHeight?: never;
 	rootMargin?: never;
 	children: JSX.Element;
 };
@@ -86,7 +63,6 @@ type HashProps = {
  * We use a union type here to support conditional typing.
  *
  * This means you can only supply:
- * - `placeholderHeight` if `clientOnly` is `true`
  * - `rootMargin` if `deferUntil` is `visible`
  */
 type Props =
@@ -95,23 +71,6 @@ type Props =
 	| IdleProps
 	| InteractionProps
 	| HashProps;
-
-const decideChildren = (
-	children: JSX.Element,
-	clientOnly?: boolean,
-	placeholderHeight?: number,
-) => {
-	if (!clientOnly) return children; // Server side rendering
-	if (placeholderHeight !== undefined && placeholderHeight > 0)
-		return (
-			<Placeholder
-				height={placeholderHeight}
-				shouldShimmer={false}
-				backgroundColor="transparent"
-			/>
-		); // Portal using placeholder
-	return null; // Portal not using placeholder (this also includes placeholderHeight === 0 - this is intentional)
-};
 
 /**
  * Adds interactivity to the client by either hydrating or inserting content
@@ -125,13 +84,11 @@ const decideChildren = (
  * 		- visible - Execute when component appears in viewport
  *      - interaction - Execute when component is clicked on in the viewport
  * @param {boolean} props.clientOnly - Should the component be server side rendered
- * @param {number} props.placeholderHeight - The height for the placeholder element
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
  */
 export const Island = ({
 	deferUntil,
 	clientOnly,
-	placeholderHeight,
 	rootMargin,
 	children,
 }: Props) => {
@@ -153,7 +110,7 @@ export const Island = ({
 			rootMargin={rootMargin}
 			config={JSON.stringify(config)}
 		>
-			{decideChildren(children, clientOnly, placeholderHeight)}
+			{clientOnly ? null : children}
 		</gu-island>
 	);
 };

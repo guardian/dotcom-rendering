@@ -720,11 +720,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
+				<Island clientOnly={true} deferUntil="visible">
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}
@@ -840,7 +836,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper>
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island clientOnly={true} deferUntil="idle">
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

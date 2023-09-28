@@ -20,6 +20,7 @@ import {
 	submitComponentEvent,
 } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
+import { Placeholder } from './Placeholder';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
@@ -208,6 +209,8 @@ export const SecureSignupIframe = ({
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
+
+	if (isServer) return <Placeholder height={65} />;
 
 	const hasResponse = typeof responseOk === 'boolean';
 

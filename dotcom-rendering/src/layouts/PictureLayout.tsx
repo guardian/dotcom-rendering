@@ -75,7 +75,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					Vertical grey border
 					Main content
 					Right Column
-					
+
 				*/
 				${from.wide} {
 					grid-template-columns: 219px 1px 1fr;
@@ -591,11 +591,7 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
+				<Island deferUntil="visible">
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}

@@ -1,7 +1,9 @@
+import { isServer } from '../lib/isServer';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
 import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
+import { Placeholder } from './Placeholder';
 
 /**
  * A wrapper component that decides if the user is signed in or not.
@@ -29,6 +31,9 @@ import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
 
 export const DiscussionContainer = (props: DiscussionProps) => {
 	const authStatus = useAuthStatus();
+
+	if (isServer) return <Placeholder height={324} />;
+
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||
 		authStatus.kind === 'SignedInWithCookies';
