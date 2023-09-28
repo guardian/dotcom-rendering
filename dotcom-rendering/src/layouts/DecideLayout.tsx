@@ -9,6 +9,7 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
+import { PictureLayout } from './PictureLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
@@ -109,6 +110,14 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
+							article={article}
+							NAV={NAV}
+							format={format}
+						/>
+					);
+				case ArticleDesign.Picture:
+					return (
+						<PictureLayout
 							article={article}
 							NAV={NAV}
 							format={format}

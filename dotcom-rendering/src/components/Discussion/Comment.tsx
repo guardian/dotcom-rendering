@@ -538,6 +538,7 @@ export const Comment = ({
 									user.profile.userId ===
 										comment.userProfile.userId
 								}
+								isClosedForComments={isClosedForComments}
 							/>
 						)}
 					</header>
