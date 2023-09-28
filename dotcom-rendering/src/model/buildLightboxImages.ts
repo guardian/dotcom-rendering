@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
-import { getLargest, getMaster } from '../components/ImageComponent';
 import type { Orientation } from '../components/Picture';
+import { getLargest, getMaster } from '../lib/image';
 import { isHighEnough, isWideEnough } from '../lib/lightbox';
 import type {
 	CartoonBlockElement,

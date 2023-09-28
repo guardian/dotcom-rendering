@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { DCRArticle } from '../../../src/types/frontend';
 
-export const Quiz: FEArticleType = {
+export const Quiz: DCRArticle = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image element--showcase" data-media-id="0584dd0a4813e6002e11ff67c28aff9b32da7abf"> \n <img src="https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg" alt="Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s." width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.</span> <span class="element-image__credit">Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
@@ -27,6 +27,54 @@ export const Quiz: FEArticleType = {
 		},
 	],
 	commercialProperties: {
+		UK: {
+			adTargeting: [
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'bl',
+					value: ['that-1980s-sports-blog'],
+				},
+				{
+					name: 'tn',
+					value: ['quizzes'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'k',
+					value: ['sport', 'football'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-sport-network'],
+				},
+				{
+					name: 'co',
+					value: ['steven-pye'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'url',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+			],
+		},
 		US: {
 			adTargeting: [
 				{
@@ -120,54 +168,6 @@ export const Quiz: FEArticleType = {
 				{
 					name: 'p',
 					value: 'ng',
-				},
-			],
-		},
-		UK: {
-			adTargeting: [
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/e3fga',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'bl',
-					value: ['that-1980s-sports-blog'],
-				},
-				{
-					name: 'tn',
-					value: ['quizzes'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'k',
-					value: ['sport', 'football'],
-				},
-				{
-					name: 'se',
-					value: ['guardian-sport-network'],
-				},
-				{
-					name: 'co',
-					value: ['steven-pye'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 			],
 		},
@@ -1638,7 +1638,13 @@ export const Quiz: FEArticleType = {
 					],
 				},
 			],
-			elementId: '58b26b89-6268-46a7-ae37-4b7bef6c8182',
+			elementId: '5035262a-a850-41f9-ae8e-c326f1aecb0f',
+			position: 1,
+			lightbox: {
+				caption:
+					'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
+				credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
+			},
 		},
 	],
 	canonicalUrl:
@@ -2254,7 +2260,7 @@ export const Quiz: FEArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '8964ec4d-8c1c-4659-b61c-0d99868df605',
+					elementId: 'a1095967-2f2a-4d10-bca1-7ce21f7da503',
 				},
 			],
 			attributes: {
@@ -2506,4 +2512,19 @@ export const Quiz: FEArticleType = {
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
 	},
+	imagesForLightbox: [
+		{
+			masterUrl:
+				'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
+			position: 1,
+			width: 3020,
+			height: 1814,
+			elementId: '5035262a-a850-41f9-ae8e-c326f1aecb0f',
+			alt: 'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
+			credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
+			caption:
+				'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
+			displayCredit: true,
+		},
+	],
 };

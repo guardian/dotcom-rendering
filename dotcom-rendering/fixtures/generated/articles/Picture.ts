@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { DCRArticle } from '../../../src/types/frontend';
 
-export const Picture: FEArticleType = {
+export const Picture: DCRArticle = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="332083af16a1d51a7d6d70e0ad266f19ab57fd96"> <img src="https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/1000.jpg" alt="Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with \'Sleaze\' paint" width="1000" height="600" class="gu-image" /> </figure>',
 	subMetaSectionLinks: [
@@ -27,6 +27,60 @@ export const Picture: FEArticleType = {
 		},
 	],
 	commercialProperties: {
+		UK: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'ct',
+					value: 'picture',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/h7t8f',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'url',
+					value: '/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'k',
+					value: [
+						'dominic-cummings',
+						'politics',
+						'conservatives',
+						'uk/uk',
+						'boris-johnson',
+					],
+				},
+				{
+					name: 'tn',
+					value: ['comment', 'cartoons'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-comment-cartoon'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'co',
+					value: ['nicola-jennings'],
+				},
+			],
+		},
 		US: {
 			adTargeting: [
 				{
@@ -106,60 +160,6 @@ export const Picture: FEArticleType = {
 				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'k',
-					value: [
-						'dominic-cummings',
-						'politics',
-						'conservatives',
-						'uk/uk',
-						'boris-johnson',
-					],
-				},
-				{
-					name: 'tn',
-					value: ['comment', 'cartoons'],
-				},
-				{
-					name: 'se',
-					value: ['guardian-comment-cartoon'],
-				},
-				{
-					name: 'bl',
-					value: ['commentisfree'],
-				},
-				{
-					name: 'co',
-					value: ['nicola-jennings'],
-				},
-			],
-		},
-		UK: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'ct',
-					value: 'picture',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/h7t8f',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'url',
-					value: '/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
-				},
-				{
-					name: 'edition',
-					value: 'uk',
 				},
 				{
 					name: 'k',
@@ -1652,7 +1652,11 @@ export const Picture: FEArticleType = {
 					],
 				},
 			],
-			elementId: 'f00cc98e-4717-441f-9c17-55a915d8ba5e',
+			elementId: 'acbac12f-b4d4-4d23-9b66-18b7700dc97c',
+			position: 1,
+			lightbox: {
+				credit: 'Illustration: Nicola Jennings/The Guardian',
+			},
 		},
 	],
 	canonicalUrl:
@@ -1890,4 +1894,17 @@ export const Picture: FEArticleType = {
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
 	},
+	imagesForLightbox: [
+		{
+			masterUrl:
+				'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg',
+			position: 1,
+			width: 3031,
+			height: 1819,
+			elementId: 'acbac12f-b4d4-4d23-9b66-18b7700dc97c',
+			alt: "Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with 'Sleaze' paint",
+			credit: 'Illustration: Nicola Jennings/The Guardian',
+			displayCredit: true,
+		},
+	],
 };
