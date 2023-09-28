@@ -82,7 +82,7 @@ export const renderFront = ({
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<FrontPage front={front} NAV={NAV} />,
+			<FrontPage front={front} NAV={NAV} />
 		</ConfigProvider>,
 	);
 
