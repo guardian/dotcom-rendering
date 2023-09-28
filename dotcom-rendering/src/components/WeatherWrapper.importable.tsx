@@ -1,4 +1,5 @@
 import type { EditionId } from '../lib/edition';
+import type { Tuple } from '../lib/tuple';
 import { useApi } from '../lib/useApi';
 import { Weather, WeatherPlaceholder } from './Weather';
 
@@ -7,30 +8,8 @@ import { Weather, WeatherPlaceholder } from './Weather';
  * Each forecast is 1 hour offset from the previous forecast, and the first forecast is 1 hour offset from Now.
  */
 export type WeatherForecast = [
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
-	WeatherData,
+	...Tuple<WeatherData, 12>,
+	...Tuple<WeatherData, 12>,
 ];
 
 export type WeatherData = {

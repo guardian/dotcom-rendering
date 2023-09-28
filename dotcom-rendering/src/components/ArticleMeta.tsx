@@ -18,6 +18,7 @@ import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
+import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
 import { Counts } from './Counts';
 import { Dateline } from './Dateline';
@@ -107,19 +108,19 @@ const borderColourWhenBackgroundDark = css`
 	}
 `;
 
-const metaExtras = (palette: Palette) => css`
+const metaExtras = (palette: Palette, isPictureContent: boolean) => css`
 	border-top: 1px solid ${palette.border.article};
 	flex-grow: 1;
 	padding-top: 6px;
 
-	${until.phablet} {
+	${!isPictureContent && until.phablet} {
 		margin-left: -20px;
 		margin-right: -20px;
 		padding-left: 20px;
 		padding-right: 20px;
 	}
 
-	${until.mobileLandscape} {
+	${!isPictureContent && until.phablet} {
 		margin-left: -10px;
 		margin-right: -10px;
 		padding-left: 10px;
@@ -131,7 +132,7 @@ const metaExtras = (palette: Palette) => css`
 	}
 `;
 
-const metaNumbers = (palette: Palette) => css`
+const metaNumbers = (palette: Palette, isPictureContent: boolean) => css`
 	border-top: 1px solid ${palette.border.article};
 	display: flex;
 	flex-grow: 1;
@@ -141,14 +142,14 @@ const metaNumbers = (palette: Palette) => css`
 		justify-content: flex-start;
 	}
 
-	${until.phablet} {
+	${!isPictureContent && until.phablet} {
 		margin-left: -20px;
 		margin-right: -20px;
 		padding-left: 20px;
 		padding-right: 20px;
 	}
 
-	${until.mobileLandscape} {
+	${!isPictureContent && until.phablet} {
 		margin-left: -10px;
 		margin-right: -10px;
 		padding-left: 10px;
@@ -324,6 +325,10 @@ export const ArticleMeta = ({
 
 	const palette = decidePalette(format);
 
+	const isPictureContent = format.design === ArticleDesign.Picture;
+
+	const { renderingTarget } = useConfig();
+
 	return (
 		<div
 			className={
@@ -396,31 +401,34 @@ export const ArticleMeta = ({
 						</div>
 					</>
 				</RowBelowLeftCol>
+
 				<div data-print-layout="hide" css={metaFlex}>
-					<div
-						className={
-							isInteractive
-								? interactiveLegacyClasses.shareIcons
-								: ''
-						}
-						css={[
-							metaExtras(palette),
-							format.design === ArticleDesign.LiveBlog &&
-								css(
-									borderColourWhenBackgroundDark,
-									metaExtrasLiveBlog,
-								),
-						]}
-					>
-						<ShareIcons
-							pageId={pageId}
-							webTitle={webTitle}
-							format={format}
-							displayIcons={['facebook', 'twitter', 'email']}
-							size="medium"
-							context="ArticleMeta"
-						/>
-					</div>
+					{renderingTarget === 'Web' && (
+						<div
+							className={
+								isInteractive
+									? interactiveLegacyClasses.shareIcons
+									: ''
+							}
+							css={[
+								metaExtras(palette, isPictureContent),
+								format.design === ArticleDesign.LiveBlog &&
+									css(
+										borderColourWhenBackgroundDark,
+										metaExtrasLiveBlog,
+									),
+							]}
+						>
+							<ShareIcons
+								pageId={pageId}
+								webTitle={webTitle}
+								format={format}
+								displayIcons={['facebook', 'twitter', 'email']}
+								size="medium"
+								context="ArticleMeta"
+							/>
+						</div>
+					)}
 					<div
 						className={
 							isInteractive
@@ -428,7 +436,7 @@ export const ArticleMeta = ({
 								: ''
 						}
 						css={[
-							metaNumbers(palette),
+							metaNumbers(palette, isPictureContent),
 							format.design === ArticleDesign.LiveBlog &&
 								css(
 									borderColourWhenBackgroundDark,
@@ -439,15 +447,19 @@ export const ArticleMeta = ({
 						<Counts format={format}>
 							{/* The meta-number css is needed by Counts.tsx */}
 							<div className="meta-number">
-								{showShareCount && (
-									<Island clientOnly={true} deferUntil="idle">
-										<ShareCount
-											ajaxUrl={ajaxUrl}
-											pageId={pageId}
-											format={format}
-										/>
-									</Island>
-								)}
+								{showShareCount &&
+									renderingTarget === 'Web' && (
+										<Island
+											clientOnly={true}
+											deferUntil="idle"
+										>
+											<ShareCount
+												ajaxUrl={ajaxUrl}
+												pageId={pageId}
+												format={format}
+											/>
+										</Island>
+									)}
 							</div>
 							<div className="meta-number">
 								{isCommentable && (

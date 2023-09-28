@@ -1,5 +1,5 @@
 import type { FEElement } from '../types/content';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 
 /**
  * This function adds the position property to each image
@@ -13,29 +13,35 @@ import type { FEArticleType } from '../types/frontend';
  *
  */
 export const addImageIDs = (
-	data: FEArticleType,
+	data: DCRArticle,
 ): { mainMediaElements: FEElement[]; blocks: Block[] } => {
 	// position needs to be defined outside the addPosition function otherwise
 	// it will get reset to 1 each time
-	let position = 1;
-	const addPosition = (elements: FEElement[]): FEElement[] => {
-		const withPosition: FEElement[] = [];
-		elements.forEach((thisElement) => {
+	let position = 0;
+	const addPosition = (elements: FEElement[]): FEElement[] =>
+		elements.map<FEElement>((thisElement) => {
 			if (
 				thisElement._type ===
 				'model.dotcomrendering.pageElements.ImageBlockElement'
 			) {
-				withPosition.push({
+				position += 1;
+				return {
 					...thisElement,
 					position,
-				});
+				};
+			} else if (
+				thisElement._type ===
+				'model.dotcomrendering.pageElements.CartoonBlockElement'
+			) {
 				position += 1;
+				return {
+					...thisElement,
+					position,
+				};
 			} else {
-				withPosition.push(thisElement);
+				return thisElement;
 			}
 		});
-		return withPosition;
-	};
 
 	return {
 		mainMediaElements: addPosition(data.mainMediaElements),

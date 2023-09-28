@@ -2,9 +2,11 @@ import { Card25Media25, CardDefault } from '../lib/cardWrappers';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import type { Loading } from './CardPicture';
 
 type Props = {
 	trails: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -13,6 +15,7 @@ export const FixedMediumFastXII = ({
 	trails,
 	containerPalette,
 	showAge,
+	imageLoading,
 }: Props) => {
 	const firstSlice25 = trails.slice(0, 4);
 	const remaining = trails.slice(4, 12);
@@ -32,6 +35,7 @@ export const FixedMediumFastXII = ({
 								trail={trail}
 								containerPalette={containerPalette}
 								showAge={showAge}
+								imageLoading={imageLoading}
 							/>
 						</LI>
 					);

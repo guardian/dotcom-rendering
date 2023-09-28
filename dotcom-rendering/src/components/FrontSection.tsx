@@ -16,6 +16,7 @@ import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
 import type { DCRBadgeType } from '../types/badge';
+import type { Branding } from '../types/branding';
 import type {
 	DCRContainerPalette,
 	DCRFrontType,
@@ -94,8 +95,9 @@ type Props = {
 	 *   the page skin background showing through the containers
 	 */
 	hasPageSkin?: boolean;
-
-	editionBranding?: DCRFrontType['pressedPage']['frontProperties']['commercial']['editionBrandings'][number];
+	discussionApiUrl: string;
+	frontBranding?: DCRFrontType['pressedPage']['frontProperties']['commercial']['editionBrandings'][number];
+	containerBranding?: Branding;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -387,6 +389,25 @@ const aboutThisLinkStyles = css`
 	text-decoration: none;
 `;
 
+const SponsoredBranding = ({
+	branding,
+}: {
+	branding: Branding | undefined;
+}) => {
+	if (!branding) {
+		return null;
+	}
+	const { logo, aboutThisLink } = branding;
+	return (
+		<>
+			<p css={labelStyles}>{logo.label}</p>
+			<Badge imageSrc={logo.src} href={logo.link} />
+			<a href={aboutThisLink} css={aboutThisLinkStyles}>
+				About this content
+			</a>
+		</>
+	);
+};
 /**
  * # Front Container
  *
@@ -495,7 +516,9 @@ export const FrontSection = ({
 	index,
 	targetedTerritory,
 	hasPageSkin = false,
-	editionBranding,
+	frontBranding,
+	discussionApiUrl,
+	containerBranding,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -508,6 +531,21 @@ export const FrontSection = ({
 		!!collectionId &&
 		!!pageId &&
 		!!ajaxUrl;
+
+	const frontHasEditorialOrDesignBadge = !!badge;
+
+	// Only show the badge with a "Paid for by" label on the FIRST card of a paid front, aka as Labs front.
+	const isTheFirstContainerOnAPaidFront =
+		isOnPaidContentFront && index === 0 && !!frontBranding;
+
+	const isTheFirstContainerOnASponsoredFront =
+		!isOnPaidContentFront && index === 0 && !!frontBranding;
+
+	const showSponsoredBranding =
+		(isTheFirstContainerOnASponsoredFront && frontBranding.branding) ||
+		containerBranding;
+
+	const sponsoredBranding = frontBranding?.branding ?? containerBranding;
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -556,8 +594,7 @@ export const FrontSection = ({
 						sectionHeadlineHeight,
 				]}
 			>
-				{/* Only show the badge with a "Paid for by" label on the FIRST card of a paid front */}
-				{isOnPaidContentFront && index === 0 ? (
+				{isTheFirstContainerOnAPaidFront ? (
 					<div css={titleStyle}>
 						<ContainerTitle
 							title={title}
@@ -570,7 +607,7 @@ export const FrontSection = ({
 							showDateHeader={showDateHeader}
 							editionId={editionId}
 						/>
-						{badge && (
+						{!!frontBranding.branding?.logo.src && (
 							<div
 								css={css`
 									display: inline-block;
@@ -587,33 +624,29 @@ export const FrontSection = ({
 							>
 								Paid for by
 								<Badge
-									imageSrc={badge.imageSrc}
-									href={badge.href}
+									imageSrc={frontBranding.branding.logo.src}
+									href={frontBranding.branding.logo.link}
 								/>
 							</div>
 						)}
 					</div>
 				) : (
 					<>
-						{!isOnPaidContentFront && (
+						{frontHasEditorialOrDesignBadge && (
 							<Hide until="leftCol">
-								{badge && (
+								<Badge
+									imageSrc={badge.imageSrc}
+									href={badge.href}
+								/>
+							</Hide>
+						)}
+						<div css={titleStyle}>
+							{frontHasEditorialOrDesignBadge && (
+								<Hide from="leftCol">
 									<Badge
 										imageSrc={badge.imageSrc}
 										href={badge.href}
 									/>
-								)}
-							</Hide>
-						)}
-						<div css={titleStyle}>
-							{!isOnPaidContentFront && (
-								<Hide from="leftCol">
-									{badge && (
-										<Badge
-											imageSrc={badge.imageSrc}
-											href={badge.href}
-										/>
-									)}
 								</Hide>
 							)}
 							<ContainerTitle
@@ -625,38 +658,11 @@ export const FrontSection = ({
 								showDateHeader={showDateHeader}
 								editionId={editionId}
 							/>
-							{!isOnPaidContentFront &&
-								!!editionBranding &&
-								editionBranding.branding &&
-								index === 0 && (
-									<>
-										<p css={labelStyles}>
-											{
-												editionBranding.branding.logo
-													.label
-											}
-										</p>
-										<Badge
-											imageSrc={
-												editionBranding.branding.logo
-													.src
-											}
-											href={
-												editionBranding.branding.logo
-													.link
-											}
-										/>
-										<a
-											href={
-												editionBranding.branding
-													.aboutThisLink
-											}
-											css={aboutThisLinkStyles}
-										>
-											About this content
-										</a>
-									</>
-								)}
+							{showSponsoredBranding && (
+								<SponsoredBranding
+									branding={sponsoredBranding}
+								/>
+							)}
 						</div>
 					</>
 				)}
@@ -711,6 +717,7 @@ export const FrontSection = ({
 							editionId={editionId}
 							containerPalette={containerPalette}
 							showAge={!hideAge.includes(title)}
+							discussionApiUrl={discussionApiUrl}
 						/>
 					</Island>
 				) : null}

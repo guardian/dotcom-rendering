@@ -16,5 +16,17 @@
 		},
 		"preserveConstEnums": true
 	},
-	"exclude": ["cypress", "./cypress.config.js", "storybook-static", "target"]
+	"ts-node": {
+		"compilerOptions": {
+			"module": "CommonJS",
+		}
+	},
+	"exclude": [
+		"cypress",
+		"./cypress.config.js",
+		"storybook-static",
+		"target",
+		"dist",
+		"node_modules"
+	]
 }

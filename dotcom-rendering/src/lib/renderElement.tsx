@@ -11,20 +11,20 @@ import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
+import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import { EmailSignup } from '../components/EmailSignup';
+import { EmailSignUpSwitcher } from '../components/EmailSignUpSwitcher';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
-import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
@@ -206,6 +206,14 @@ export const renderElement = ({
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={element.shouldLimitWidth}
 					isOverlaid={element.isOverlaid}
+				/>
+			);
+		case 'model.dotcomrendering.pageElements.CartoonBlockElement':
+			return (
+				<CartoonComponent
+					format={format}
+					element={element}
+					switches={switches}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
@@ -451,23 +459,19 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
-			return (
-				<InlineSkipToWrapper
-					id={`EmailSignup-skip-link-${index}`}
-					blockDescription="newsletter promotion"
-				>
-					<EmailSignup
-						identityName={element.newsletter.identityName}
-						description={element.newsletter.description}
-						name={element.newsletter.name}
-						frequency={element.newsletter.frequency}
-						successDescription={
-							element.newsletter.successDescription
-						}
-						theme={element.newsletter.theme}
-					/>
-				</InlineSkipToWrapper>
-			);
+			const emailSignUpProps = {
+				index,
+				identityName: element.newsletter.identityName,
+				description: element.newsletter.description,
+				name: element.newsletter.name,
+				frequency: element.newsletter.frequency,
+				successDescription: element.newsletter.successDescription,
+				theme: element.newsletter.theme,
+			};
+
+			return <EmailSignUpSwitcher {...emailSignUpProps} />;
+		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
+			return <div className="ad-portal-placeholder"></div>;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent

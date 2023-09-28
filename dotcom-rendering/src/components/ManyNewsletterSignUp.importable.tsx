@@ -8,7 +8,10 @@ import {
 import { Button, SvgCross } from '@guardian/source-react-components';
 import type { ChangeEventHandler, ReactEventHandler } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ReCAPTCHA } from 'react-google-recaptcha';
+// Note - the package also exports a component as a named export "ReCAPTCHA",
+// that version will compile and render but is non-functional.
+// Use the default export instead.
+import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { isServer } from '../lib/isServer';
 import {
 	getCaptchaSiteKey,
@@ -20,7 +23,8 @@ import { ManyNewslettersForm } from './ManyNewslettersForm';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard';
 import { Section } from './Section';
 
-type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed';
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed' | 'InvalidEmail';
 
 // To align the heading content with the carousel below
 // from desktop
@@ -31,8 +35,10 @@ const contentWrapperStyle = css`
 `;
 
 const sectionWrapperStyle = (hide: boolean) => css`
-	display: ${hide ? 'none' : 'unset'};
+	display: ${hide ? 'none' : 'block'};
 	position: fixed;
+	/* stylelint-disable-next-line value-no-vendor-prefix -- required safari before v13 https://developer.mozilla.org/en-US/docs/Web/CSS/position */
+	position: -webkit-sticky;
 	position: sticky;
 	bottom: 0;
 	left: 0;
@@ -107,115 +113,167 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 	);
 };
 
+const attributeToNumber = (
+	element: Element,
+	attributeName: string,
+): number | undefined => {
+	const value = element.getAttribute(attributeName);
+	if (!value) return undefined;
+	const numericValue = Number(value);
+	if (isNaN(numericValue)) return undefined;
+	return numericValue;
+};
+
 export const ManyNewsletterSignUp = () => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
-		string[]
+		{
+			/** unique identifier for the newsletter in kebab-case format */
+			identityName: string;
+			/** unique id number for the newsletter */
+			listId: number;
+		}[]
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
-	const reCaptchaRef = useRef<ReCAPTCHA>(null);
+	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const useReCaptcha = isServer
 		? false
 		: !!window.guardian.config.switches['emailSignupRecaptcha'];
 	const captchaSiteKey = useReCaptcha ? getCaptchaSiteKey() : undefined;
 
+	const userCanInteract = status !== 'Success' && status !== 'Loading';
+
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
-			if (status !== 'NotSent') {
+			if (!userCanInteract) {
 				return;
 			}
 			const { target: button } = event;
 			if (!(button instanceof HTMLElement)) {
 				return;
 			}
-			const id = button.getAttribute('data-newsletter-id');
-			if (!id) {
+			const { identityName } = button.dataset;
+			const listId = attributeToNumber(button, 'data-list-id');
+			if (!identityName || typeof listId === 'undefined') {
 				return;
 			}
-			const index = newslettersToSignUpFor.indexOf(id);
+			const index = newslettersToSignUpFor.findIndex(
+				(newsletter) => newsletter.identityName === identityName,
+			);
 			if (index === -1) {
-				setNewslettersToSignUpFor([...newslettersToSignUpFor, id]);
+				setNewslettersToSignUpFor([
+					...newslettersToSignUpFor,
+					{ identityName, listId },
+				]);
 				button.classList.add(BUTTON_SELECTED_CLASS);
-				const ariaLabelText =
-					button.getAttribute('data-aria-label-when-checked') ??
-					'remove from list';
-				button.setAttribute('aria-label', ariaLabelText);
+				button.setAttribute(
+					'aria-label',
+					button.dataset.ariaLabelWhenChecked ?? 'remove from list',
+				);
 			} else {
 				setNewslettersToSignUpFor([
 					...newslettersToSignUpFor.slice(0, index),
 					...newslettersToSignUpFor.slice(index + 1),
 				]);
 				button.classList.remove(BUTTON_SELECTED_CLASS);
-				const ariaLabelText =
-					button.getAttribute('data-aria-label-when-unchecked') ??
-					'add to list';
-				button.setAttribute('aria-label', ariaLabelText);
+
+				button.setAttribute(
+					'aria-label',
+					button.dataset.ariaLabelWhenUnchecked ?? 'add to list',
+				);
 			}
 		},
-		[newslettersToSignUpFor, status],
+		[newslettersToSignUpFor, userCanInteract],
 	);
 
 	const removeAll = useCallback(() => {
-		if (status !== 'NotSent') {
+		if (!userCanInteract) {
 			return;
 		}
 		const signUpButtons = [
 			...document.querySelectorAll(`[data-role=${BUTTON_ROLE}]`),
 		];
-		signUpButtons.forEach((button) => {
+		for (const button of signUpButtons) {
 			button.classList.remove(BUTTON_SELECTED_CLASS);
 			const ariaLabelText =
-				button.getAttribute('data-aria-label-when-unchecked') ??
-				'add to list';
+				button instanceof HTMLElement
+					? button.dataset.ariaLabelWhenUnchecked ?? 'add to list'
+					: 'add to list';
+
 			button.setAttribute('aria-label', ariaLabelText);
-		});
+		}
 
 		setNewslettersToSignUpFor([]);
-	}, [status]);
+	}, [userCanInteract]);
 
 	useEffect(() => {
 		const signUpButtons = [
 			...document.querySelectorAll(`[data-role=${BUTTON_ROLE}]`),
 		];
-		signUpButtons.forEach((button) => {
+		for (const button of signUpButtons) {
 			button.addEventListener('click', toggleNewsletter);
-		});
+		}
 		return () => {
-			signUpButtons.forEach((button) => {
+			for (const button of signUpButtons) {
 				button.removeEventListener('click', toggleNewsletter);
-			});
+			}
 		};
 	}, [toggleNewsletter, newslettersToSignUpFor]);
 
 	const sendRequest = async (reCaptchaToken: string): Promise<void> => {
-		reportTrackingEvent('ManyNewsletterSignUp', 'form-submit', {
-			newsletterIds: newslettersToSignUpFor,
+		const identityNames = newslettersToSignUpFor.map(
+			(newsletter) => newsletter.identityName,
+		);
+		const listIds = newslettersToSignUpFor.map(
+			(newsletter) => newsletter.listId,
+		);
+
+		void reportTrackingEvent('ManyNewsletterSignUp', 'form-submit', {
+			listIds,
 		});
 
 		const response = await requestMultipleSignUps(
 			email,
-			newslettersToSignUpFor,
+			identityNames,
 			reCaptchaToken,
-		);
+		).catch(() => {
+			return undefined;
+		});
 
-		if (!response.ok) {
-			const responseText = await response.text();
-			reportTrackingEvent('ManyNewsletterSignUp', 'failure-response', {
-				newsletterIds: newslettersToSignUpFor,
-				responseText,
-			});
+		if (!response?.ok) {
+			const responseText = response
+				? await response.text()
+				: '[fetch failure - no response]';
+			void reportTrackingEvent(
+				'ManyNewsletterSignUp',
+				'failure-response',
+				{
+					listIds,
+					// If the backend handles the failure and responds with an informative
+					// error message (E.G. "Service unavailable", "Invalid email" etc) this
+					// should be included in the event data.
+					// If not, the response text will be the HTML for the default error page
+					// which would not be helpful to include it in the tracking data.
+					responseText: responseText.substring(0, 100),
+				},
+			);
 
 			return setStatus('Failed');
 		}
 
-		reportTrackingEvent('ManyNewsletterSignUp', 'success-response', {
-			newsletterIds: newslettersToSignUpFor,
+		void reportTrackingEvent('ManyNewsletterSignUp', 'success-response', {
+			listIds,
 		});
 		setStatus('Success');
 	};
 
 	const handleSubmitButton = async () => {
-		if (status !== 'NotSent') {
+		if (!userCanInteract) {
+			return;
+		}
+
+		if (!emailRegex.test(email)) {
+			setStatus('InvalidEmail');
 			return;
 		}
 
@@ -226,7 +284,7 @@ export const ManyNewsletterSignUp = () => {
 		}
 
 		if (!reCaptchaRef.current) {
-			reportTrackingEvent(
+			void reportTrackingEvent(
 				'ManyNewsletterSignUp',
 				'captcha-not-loaded-when-needed',
 			);
@@ -235,21 +293,21 @@ export const ManyNewsletterSignUp = () => {
 		setStatus('Loading');
 		// successful execution triggers a call to sendRequest
 		// with the onChange prop on the captcha Component
-		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-execute');
+		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-execute');
 		const result = await reCaptchaRef.current.executeAsync();
 
 		if (typeof result !== 'string') {
-			reportTrackingEvent('ManyNewsletterSignUp', 'captcha-failure');
+			void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-failure');
 			setStatus('Failed');
 			return;
 		}
 
-		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-success');
+		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-success');
 		return sendRequest(result);
 	};
 
 	const handleCaptchaError: ReactEventHandler<HTMLDivElement> = (event) => {
-		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-error', {
+		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-error', {
 			eventType: event.type,
 			status,
 		});
@@ -257,8 +315,11 @@ export const ManyNewsletterSignUp = () => {
 	};
 
 	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {
-		if (status !== 'NotSent') {
+		if (!userCanInteract) {
 			return;
+		}
+		if (status === 'InvalidEmail' && emailRegex.test(email)) {
+			setStatus('NotSent');
 		}
 		setEmail(ev.target.value);
 	};
@@ -300,13 +361,17 @@ export const ManyNewsletterSignUp = () => {
 
 						{useReCaptcha && !!captchaSiteKey && (
 							<div
+								// The Google documentation specifies that if the 'recaptcha-badge' is hidden,
+								// their T+C's must be displayed instead. While this component hides the
+								// badge, the T+C's are inluded in the ManyNewslettersForm component.
+								// https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 								css={css`
 									.grecaptcha-badge {
 										visibility: hidden;
 									}
 								`}
 							>
-								<ReCAPTCHA
+								<ReactGoogleRecaptcha
 									sitekey={captchaSiteKey}
 									ref={reCaptchaRef}
 									onError={handleCaptchaError}

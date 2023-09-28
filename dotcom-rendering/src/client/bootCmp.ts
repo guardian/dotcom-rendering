@@ -1,41 +1,36 @@
-import { cmp, onConsentChange } from '@guardian/consent-management-platform';
+import { cmp, onConsent } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import type { OphanAction, OphanComponentType } from '@guardian/libs';
+import type {
+	OphanAction,
+	OphanComponentEvent,
+	OphanComponentType,
+} from '@guardian/libs';
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
-import { injectPrivacySettingsLinkWhenReady } from '../lib/injectPrivacySettingsLink';
 import { submitComponentEvent } from './ophan/ophan';
 
-export const bootCmp = async (): Promise<void> => {
-	/**
-	 * Keep this file in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
-	 * mark: CONSENT_TIMING
-	 */
-	if (!window.guardian.config.switches.consentManagement) return; // CMP turned off!
-	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
-	const { pageViewId } = window.guardian.config.ophan;
-
-	onConsentChange((consentState: ConsentState) => {
+const submitConsentEventsToOphan = () =>
+	onConsent().then((consentState: ConsentState) => {
 		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Review if this check is needed
 		if (!consentState) return;
 		// Register changes in consent state with Ophan
 
 		/*
-			(Date: February 2022. Author: Pascal. This is a work in progress...)
+		(Date: February 2022. Author: Pascal. This is a work in progress...)
 
-			### General Context
+		### General Context
 
-			We are sending consent data from the client side to the datalake through Ophan, using Ophan Component Events.
+		We are sending consent data from the client side to the datalake through Ophan, using Ophan Component Events.
 
-			We are using Ophan Component Events because consent events do not have a first class type in the Ophan pipeline
-			(this may change in the future)
+		We are using Ophan Component Events because consent events do not have a first class type in the Ophan pipeline
+		(this may change in the future)
 
-			At the moment we are using MANAGE_CONSENT as the default action while we develop this code.
+		At the moment we are using MANAGE_CONSENT as the default action while we develop this code.
 
-			### Encoding Conventions
+		### Encoding Conventions
 
-			https://github.com/guardian/transparency-consent-docs/blob/main/docs/capturing-consent-from-client-side.md#era-2-encoding-conventions
-		*/
+		https://github.com/guardian/transparency-consent-docs/blob/main/docs/capturing-consent-from-client-side.md#era-2-encoding-conventions
+	*/
 
 		const decideConsentCarrierLabels = () => {
 			if (consentState.tcfv2) {
@@ -70,9 +65,9 @@ export const bootCmp = async (): Promise<void> => {
 			return [];
 		};
 
-		const componentType: OphanComponentType = 'CONSENT';
+		const componentType = 'CONSENT' satisfies OphanComponentType;
 
-		const action: OphanAction = 'MANAGE_CONSENT';
+		const action = 'MANAGE_CONSENT' satisfies OphanAction;
 		const event = {
 			component: {
 				componentType,
@@ -80,24 +75,48 @@ export const bootCmp = async (): Promise<void> => {
 				labels: decideConsentCarrierLabels(),
 			},
 			action,
-		};
+		} satisfies OphanComponentEvent;
 
 		submitComponentEvent(event);
 	});
 
-	// Manually updates the footer DOM because it's not hydrated
-	void injectPrivacySettingsLinkWhenReady();
+const initialiseCmp = () =>
+	getLocaleCode().then((code) => {
+		const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
+		const { pageViewId } = window.guardian.config.ophan;
 
-	cmp.init({
-		pubData: {
-			platform: 'next-gen',
-			// If `undefined`, the resulting consent signal cannot be joined to a page view.
-			browserId: browserId ?? undefined,
-			pageViewId,
-		},
-		country: (await getLocaleCode()) ?? undefined,
+		const country = code ?? undefined;
+		cmp.init({
+			pubData: {
+				platform: 'next-gen',
+				// If `undefined`, the resulting consent signal cannot be joined to a page view.
+				browserId: browserId ?? undefined,
+				pageViewId,
+			},
+			country,
+		});
+		log('dotcom', 'CMP initialised');
 	});
-	log('dotcom', 'CMP initialised');
 
-	return Promise.resolve();
+/**
+ * Hydrating this island is so critical that it should not be imported
+ * as a separate chunk. @see {PrivacySettingsLink.importable.tsx}
+ */
+const eagerlyImportPrivacySettingsLinkIsland = () =>
+	import(
+		/* webpackMode: 'eager' */ '../components/PrivacySettingsLink.importable'
+	);
+
+/**
+ * Keep this file in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
+ * mark: CONSENT_TIMING
+ */
+export const bootCmp = async (): Promise<void> => {
+	if (!window.guardian.config.switches.consentManagement) return; // CMP turned off!
+
+	await Promise.all([
+		initialiseCmp(),
+		eagerlyImportPrivacySettingsLinkIsland(),
+		submitConsentEventsToOphan(),
+	]);
 };

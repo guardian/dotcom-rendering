@@ -24,7 +24,6 @@ import type {
 } from './SignInGate/types';
 
 type Props = {
-	format: ArticleFormat;
 	contentType: string;
 	sectionId?: string;
 	tags: TagType[];
@@ -41,7 +40,6 @@ interface ShowSignInGateProps {
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	abTest: CurrentSignInGateABTest;
 	componentId: string;
-	format: ArticleFormat;
 	signInUrl: string;
 	registerUrl: string;
 	gateVariant: SignInGateComponent;
@@ -148,7 +146,6 @@ const ShowSignInGate = ({
 // component with conditional logic which determines if a sign in gate
 // should be shown on the current page
 export const SignInGateSelector = ({
-	format,
 	contentType,
 	sectionId = '',
 	tags,
@@ -277,7 +274,6 @@ export const SignInGateSelector = ({
 			{/* Sign In Gate Display Logic */}
 			{!isGateDismissed && canShowGate && !!componentId && (
 				<ShowSignInGate
-					format={format}
 					abTest={currentTest}
 					componentId={componentId}
 					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review

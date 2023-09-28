@@ -9,7 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
-import { AdSlot } from '../components/AdSlot';
+import { AdSlot } from '../components/AdSlot.web';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { Footer } from '../components/Footer';
 import { FrontSection } from '../components/FrontSection';
@@ -63,9 +63,6 @@ const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
 };
 
 export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
-	const isInEuropeTest =
-		tagFront.config.abTests.europeNetworkFrontVariant === 'variant';
-
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
@@ -128,7 +125,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
-							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
 								!!tagFront.config.switches
 									.headerTopBarSearchCapi
@@ -155,7 +151,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							headerTopBarSwitch={
 								!!tagFront.config.switches.headerTopNav
 							}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{NAV.subNavSections && (
@@ -213,6 +208,12 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 						groupedTrails.day !== undefined,
 					);
 
+					const imageLoading =
+						tagFront.config.abTests.lazyLoadImagesVariant ===
+							'variant' && index > 0
+							? 'lazy'
+							: 'eager';
+
 					const ContainerComponent = () => {
 						if (
 							'injected' in groupedTrails &&
@@ -223,6 +224,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 									<TagFrontFastMpu
 										{...groupedTrails}
 										adIndex={1} // There is only ever 1 inline ad in a tag front
+										imageLoading={imageLoading}
 									/>
 								);
 							} else {
@@ -230,6 +232,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 									<TagFrontSlowMpu
 										{...groupedTrails}
 										adIndex={1} // There is only ever 1 inline ad in a tag front
+										imageLoading={imageLoading}
 									/>
 								);
 							}
@@ -238,6 +241,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							<DecideContainerByTrails
 								trails={groupedTrails.trails}
 								speed={tagFront.speed}
+								imageLoading={imageLoading}
 							/>
 						);
 					};
@@ -283,13 +287,15 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 										? tagFront.pagination
 										: undefined
 								}
+								discussionApiUrl={
+									tagFront.config.discussionApiUrl
+								}
 							>
 								<ContainerComponent />
 							</FrontSection>
 							{decideAdSlot(
 								renderAds,
 								index,
-								false,
 								tagFront.groupedTrails.length,
 								tagFront.config.isPaidContent,
 								mobileAdPositions,

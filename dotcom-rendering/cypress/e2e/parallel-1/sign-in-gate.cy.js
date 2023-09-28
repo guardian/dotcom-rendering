@@ -1,6 +1,7 @@
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
+import { Labs } from '../../../fixtures/generated/articles/Labs';
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
@@ -38,22 +39,22 @@ describe('Sign In Gate Tests', function () {
 			),
 		);
 	};
+
+	const GATE_HEADER = 'Register: it’s quick and easy';
+	const GATE_HEADER_ALT = 'Take a moment to register';
 	// helper method over the cypress visit method to avoid having to repeat the same url by setting a default
 	// can override the parameter if required
-	const visitArticle = (
-		url = 'https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-	) => {
-		cy.visit(`/Article/${url}`);
-	};
 
-	const postArticle = ({ switchOverride } = {}) => {
+	const postArticle = ({ fixture, switchOverride }) => {
 		const articleJson = {
-			...Standard,
+			...fixture,
 			config: {
-				...Standard.config,
+				...fixture.config,
 				switches: {
-					...Standard.switches,
+					...fixture.switches,
 					...switchOverride,
+					okta: false,
+					idCookieRefresh: false,
 				},
 			},
 		};
@@ -75,18 +76,18 @@ describe('Sign In Gate Tests', function () {
 	// we call visit and scroll for most test, so this wrapper combines the two
 	// while preserving the ability to set the parameters if required
 	const visitArticleAndScrollToGateForLazyLoad = ({
-		url,
+		fixture = Standard,
 		roughPosition,
 	} = {}) => {
-		visitArticle(url);
+		postArticle({ fixture });
 		scrollToGateForLazyLoading(roughPosition);
 	};
 
 	const postArticleAndScrollToGateForLazyLoad = ({
 		roughPosition,
-		switchOverride,
+		switchOverride = {},
 	} = {}) => {
-		postArticle({ switchOverride });
+		postArticle({ fixture: Standard, switchOverride });
 		scrollToGateForLazyLoading(roughPosition);
 	};
 
@@ -104,6 +105,15 @@ describe('Sign In Gate Tests', function () {
 			visitArticleAndScrollToGateForLazyLoad();
 
 			cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+			cy.get('[data-cy=sign-in-gate-main]').contains(GATE_HEADER);
+		});
+
+		it('should load alternative text based on MVT cookie', function () {
+			setMvtCookie('500001');
+			visitArticleAndScrollToGateForLazyLoad();
+
+			cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+			cy.get('[data-cy=sign-in-gate-main]').contains(GATE_HEADER_ALT);
 		});
 
 		it('should not load the sign in gate if the user has not read at least 3 article in a day', function () {
@@ -132,8 +142,8 @@ describe('Sign In Gate Tests', function () {
 				'gu.prefs.sign-in-gate',
 				`{
                     "value": {
-                        "SignInGateMain-main-variant-4": "2020-07-22T08:25:05.567Z",
-                        "gate-dismissed-count-SignInGateMain-main-variant-4": 6
+                        "SignInGateCopyTestRepeatSept2023-quick-and-easy": "2020-07-22T08:25:05.567Z",
+                        "gate-dismissed-count-SignInGateCopyTestRepeatSept2023-quick-and-easy": 6
                     }
                 }`,
 			);
@@ -145,16 +155,27 @@ describe('Sign In Gate Tests', function () {
 
 		it('should not load the sign in gate if the article is not a valid section (membership)', function () {
 			visitArticleAndScrollToGateForLazyLoad({
-				url: 'https://www.theguardian.com/membership/2018/nov/15/support-guardian-readers-future-journalism',
+				fixture: {
+					...Standard,
+					config: {
+						...Standard.config,
+						section: 'membership',
+					},
+				},
 			});
 
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
 		});
 
 		it('should not load the sign in gate if the article is a paid article', function () {
-			visitArticleAndScrollToGateForLazyLoad({
-				url: 'https://www.theguardian.com/defining-moment/2016/jun/29/challenges-opportunities-life-coach-goals-empower-proactive',
+			cy.on('uncaught:exception', (err) => {
+				if (err.message.includes('window.require')) {
+					// This error is unrelated to the test in question so return  false to prevent
+					// this error from failing this test
+					return false;
+				}
 			});
+			visitArticleAndScrollToGateForLazyLoad({ fixture: Labs });
 
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
 		});
@@ -225,9 +246,7 @@ describe('Sign In Gate Tests', function () {
 				});
 
 				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-				cy.get('[data-cy=sign-in-gate-main]').contains(
-					'You need to register to keep reading',
-				);
+				cy.get('[data-cy=sign-in-gate-main]').contains(GATE_HEADER);
 				cy.get('[data-cy=sign-in-gate-main]').contains(
 					'It’s still free to read – this is not a paywall',
 				);
@@ -249,13 +268,11 @@ describe('Sign In Gate Tests', function () {
 				});
 
 				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-				cy.get('[data-cy=sign-in-gate-main]').contains(
-					'You need to register to keep reading',
-				);
+				cy.get('[data-cy=sign-in-gate-main]').contains(GATE_HEADER);
 				cy.get('[data-cy=sign-in-gate-main_register]')
 					.should('have.attr', 'href')
 					.and('contains', '/register?returnUrl=')
-					.and('match', /componentId%3Dmain_variant_\d/)
+					.and('contains', 'sign_in_gate_copy_test_repeat_sept2023')
 					.and('not.contains', 'personalised_new_SupporterPlus');
 			});
 
@@ -309,10 +326,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]')
 						.should('have.attr', 'href')
 						.and('contains', '/register?returnUrl=')
-						.and(
-							'match',
-							/componentId%3Dmain_variant_\d_personalised_new_SupporterPlus/,
-						);
+						.and('contains', 'personalised_new_SupporterPlus');
 				});
 
 				it('user is new and has a paper subscription', function () {
@@ -340,10 +354,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]')
 						.should('have.attr', 'href')
 						.and('contains', '/register?returnUrl=')
-						.and(
-							'match',
-							/componentId%3Dmain_variant_\d_personalised_guest_Paper/,
-						);
+						.and('contains', 'personalised_guest_Paper');
 				});
 
 				it('user is new and is a contributor', function () {
@@ -372,10 +383,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]')
 						.should('have.attr', 'href')
 						.and('contains', '/register?returnUrl=')
-						.and(
-							'match',
-							/componentId%3Dmain_variant_\d_personalised_new_Contribution/,
-						);
+						.and('contains', 'personalised_new_Contribution');
 				});
 
 				it('user is existing and has a digital subscription', function () {
@@ -403,10 +411,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]')
 						.should('have.attr', 'href')
 						.and('contains', '/signin?returnUrl=')
-						.and(
-							'match',
-							/componentId%3Dmain_variant_\d_personalised_current_SupporterPlus/,
-						);
+						.and('contains', 'personalised_current_SupporterPlus');
 				});
 
 				it('user is existing and has a paper subscription', function () {
@@ -434,10 +439,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]')
 						.should('have.attr', 'href')
 						.and('contains', '/signin?returnUrl=')
-						.and(
-							'match',
-							/componentId%3Dmain_variant_\d_personalised_current_Paper/,
-						);
+						.and('contains', 'personalised_current_Paper');
 				});
 
 				it('user is existing and is a contributor', function () {
@@ -466,10 +468,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]')
 						.should('have.attr', 'href')
 						.and('contains', '/signin?returnUrl=')
-						.and(
-							'match',
-							/componentId%3Dmain_variant_\d_personalised_current_Contribution/,
-						);
+						.and('contains', 'personalised_current_Contribution');
 				});
 			});
 
@@ -484,16 +483,11 @@ describe('Sign In Gate Tests', function () {
 					});
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You need to register to keep reading',
-					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(GATE_HEADER);
 					cy.get('[data-cy=sign-in-gate-main_register]')
 						.should('have.attr', 'href')
 						.and('contains', '/register?returnUrl=')
-						.and(
-							'not.match',
-							/componentId%3Dmain_variant_\d_personalised/,
-						);
+						.and('not.contains', 'personalised');
 				});
 			});
 		});

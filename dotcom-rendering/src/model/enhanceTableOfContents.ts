@@ -43,16 +43,16 @@ export const enhanceTableOfContents = (
 
 	const tocItems: TableOfContentsItem[] = [];
 
-	blocks.forEach((block) => {
-		block.elements.forEach((element) => {
+	for (const block of blocks) {
+		for (const element of block.elements) {
 			if (isH2(element)) {
 				tocItems.push({
 					id: extractID(element),
 					title: extractText(element),
 				});
 			}
-		});
-	});
+		}
+	}
 
 	return tocItems.length >= 3 ? tocItems : undefined;
 };

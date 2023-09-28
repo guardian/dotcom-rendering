@@ -41,10 +41,7 @@ module.exports = defineConfig({
 
 			// Adding this here so that we can import the fixture in the sign-in-gate.cy.js file
 			rules.push({
-				test: path.resolve(
-					__dirname,
-					`./fixtures/generated/articles/Standard.ts`,
-				),
+				test: path.resolve(__dirname, `./fixtures/generated/articles`),
 				exclude: ['/node_modules/'],
 				loader: 'ts-loader',
 				options: {

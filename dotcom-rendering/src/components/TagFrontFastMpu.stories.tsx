@@ -1,4 +1,5 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FrontSection } from './FrontSection';
 import { TagFrontFastMpu } from './TagFrontFastMpu';
@@ -19,7 +20,11 @@ export default {
 
 export const WithTwoCards = () => {
 	return (
-		<FrontSection title="Fast MPU" description="With two cards">
+		<FrontSection
+			title="Fast MPU"
+			description="With two cards"
+			discussionApiUrl={discussionApiUrl}
+		>
 			<TagFrontFastMpu
 				speed="fast"
 				injected={true}
@@ -28,6 +33,7 @@ export const WithTwoCards = () => {
 				year={2023}
 				trails={[trails[0], trails[1]]}
 				adIndex={1}
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -36,7 +42,11 @@ WithTwoCards.storyName = 'With two cards';
 
 export const WithFourCards = () => {
 	return (
-		<FrontSection title="Fast MPU" description="With four cards">
+		<FrontSection
+			title="Fast MPU"
+			description="With four cards"
+			discussionApiUrl={discussionApiUrl}
+		>
 			<TagFrontFastMpu
 				speed="fast"
 				injected={true}
@@ -45,6 +55,7 @@ export const WithFourCards = () => {
 				year={2023}
 				trails={[trails[0], trails[1], trails[2], trails[3]]}
 				adIndex={1}
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -53,7 +64,11 @@ WithFourCards.storyName = 'With four cards';
 
 export const WithSixCards = () => {
 	return (
-		<FrontSection title="Fast MPU" description="With six cards">
+		<FrontSection
+			title="Fast MPU"
+			description="With six cards"
+			discussionApiUrl={discussionApiUrl}
+		>
 			<TagFrontFastMpu
 				speed="fast"
 				injected={true}
@@ -69,6 +84,7 @@ export const WithSixCards = () => {
 					trails[5],
 				]}
 				adIndex={1}
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -77,7 +93,11 @@ WithSixCards.storyName = 'With six cards';
 
 export const WithNineCards = () => {
 	return (
-		<FrontSection title="Fast MPU" description="With nine cards">
+		<FrontSection
+			title="Fast MPU"
+			description="With nine cards"
+			discussionApiUrl={discussionApiUrl}
+		>
 			<TagFrontFastMpu
 				speed="fast"
 				injected={true}
@@ -96,6 +116,7 @@ export const WithNineCards = () => {
 					trails[8],
 				]}
 				adIndex={1}
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);

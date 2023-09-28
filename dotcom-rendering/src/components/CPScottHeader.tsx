@@ -16,6 +16,9 @@ const scottAvatarStyles = css`
 	overflow: hidden;
 	background-color: ${opinion[800]};
 	flex-shrink: 0;
+	display: inline-flex;
+	/* Align at end to prevent cut off (see https://github.com/guardian/dotcom-rendering/issues/8510) */
+	align-items: flex-end;
 	${until.mobileLandscape} {
 		margin-top: -30px;
 	}

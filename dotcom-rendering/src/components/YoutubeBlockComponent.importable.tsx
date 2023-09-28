@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { YoutubeAtom } from '@guardian/atoms-rendering';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { body, neutral, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
@@ -10,6 +9,7 @@ import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { RoleType } from '../types/content';
 import { Caption } from './Caption';
+import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 
 type Props = {
 	id: string;
@@ -197,6 +197,7 @@ export const YoutubeBlockComponent = ({
 					overrideImage
 						? [
 								{
+									weighting: 'supporting',
 									srcSet: [
 										{
 											src: overrideImage,
@@ -211,6 +212,7 @@ export const YoutubeBlockComponent = ({
 					posterImage.length > 0
 						? [
 								{
+									weighting: 'supporting',
 									srcSet: posterImage.map((img) => ({
 										src: img.url,
 										width: img.width,
@@ -228,7 +230,7 @@ export const YoutubeBlockComponent = ({
 				title={mediaTitle}
 				duration={duration}
 				eventEmitters={[ophanTracking, gaTracking]}
-				pillar={format.theme}
+				format={format}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}

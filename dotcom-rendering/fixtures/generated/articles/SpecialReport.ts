@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { DCRArticle } from '../../../src/types/frontend';
 
-export const SpecialReport: FEArticleType = {
+export const SpecialReport: DCRArticle = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="d302a26f2229a71ab1dfa231208cefc9ae72e3e8"> \n <img src="https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/1000.jpg" alt="Lindsey oil refinery in north Lincolnshire." width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">Lindsey oil refinery in north Lincolnshire.</span> <span class="element-image__credit">Photograph: Christopher Furlong/Getty Images</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
@@ -27,6 +27,69 @@ export const SpecialReport: FEArticleType = {
 		},
 	],
 	commercialProperties: {
+		UK: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'co',
+					value: [
+						'patrick-greenfield',
+						'jonathanwatts',
+						'damiancarrington',
+						'fiona-harvey',
+					],
+				},
+				{
+					name: 'k',
+					value: [
+						'climate-crisis',
+						'business',
+						'fossil-fuels',
+						'oilandgascompanies',
+						'energy',
+						'energy-industry',
+						'carbon-capture-and-storage',
+						'carbon-tax',
+						'coal',
+						'environment',
+						'renewableenergy',
+						'carbon-emissions',
+						'fossil-fuel-divestment',
+					],
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'tn',
+					value: ['analysis'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/cekky',
+				},
+			],
+		},
 		US: {
 			adTargeting: [
 				{
@@ -150,69 +213,6 @@ export const SpecialReport: FEArticleType = {
 				{
 					name: 'edition',
 					value: 'au',
-				},
-			],
-		},
-		UK: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'co',
-					value: [
-						'patrick-greenfield',
-						'jonathanwatts',
-						'damiancarrington',
-						'fiona-harvey',
-					],
-				},
-				{
-					name: 'k',
-					value: [
-						'climate-crisis',
-						'business',
-						'fossil-fuels',
-						'oilandgascompanies',
-						'energy',
-						'energy-industry',
-						'carbon-capture-and-storage',
-						'carbon-tax',
-						'coal',
-						'environment',
-						'renewableenergy',
-						'carbon-emissions',
-						'fossil-fuel-divestment',
-					],
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'tn',
-					value: ['analysis'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'url',
-					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
-				},
-				{
-					name: 'se',
-					value: ['the-polluters'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/cekky',
 				},
 			],
 		},
@@ -537,11 +537,6 @@ export const SpecialReport: FEArticleType = {
 								longTitle: 'football/teams',
 							},
 						],
-					},
-					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
 					},
 					{
 						title: 'Business',
@@ -1235,11 +1230,6 @@ export const SpecialReport: FEArticleType = {
 					],
 				},
 				{
-					title: 'Coronavirus',
-					url: '/world/coronavirus-outbreak',
-					longTitle: 'Coronavirus',
-				},
-				{
 					title: 'Business',
 					url: '/business',
 					children: [
@@ -1588,6 +1578,11 @@ export const SpecialReport: FEArticleType = {
 		seriesTag: 'environment/series/the-polluters',
 		imageUrl:
 			'https://assets.guim.co.uk/images/badges/b36f98674bc4fdb9631360f7d66b2531/the-polluters.svg',
+		enhanced: {
+			href: '/environment/series/the-polluters',
+			imageSrc:
+				'https://assets.guim.co.uk/images/badges/b36f98674bc4fdb9631360f7d66b2531/the-polluters.svg',
+		},
 	},
 	pillar: 'news',
 	webURL: 'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
@@ -1669,7 +1664,7 @@ export const SpecialReport: FEArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
+					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -2040,7 +2035,12 @@ export const SpecialReport: FEArticleType = {
 					],
 				},
 			],
-			elementId: '814830fc-1140-40dd-973c-211cdb5ff78f',
+			elementId: 'a4e245f0-4905-43c3-ade0-fb188e9dda53',
+			position: 1,
+			lightbox: {
+				caption: 'Lindsey oil refinery in north Lincolnshire.',
+				credit: 'Photograph: Christopher Furlong/Getty Images',
+			},
 		},
 	],
 	canonicalUrl:
@@ -2051,23 +2051,23 @@ export const SpecialReport: FEArticleType = {
 			elements: [
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>Put climate on the ballot paper</strong></h2>',
-					elementId: '14c8812e-f9a4-48e3-9789-ca63288bcc15',
+					html: "<h2 id='put-climate-on-the-ballot-paper'><strong>Put climate on the ballot paper</strong></h2>",
+					elementId: '917646bb-2551-4168-8cbb-955776bc6245',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Individual actions, such as flying less or buying electric cars, are helpful, but they will be futile without collective political action to slash emissions on a corporate, national and global scale. Politicians need to feel this is a priority for the electorate. That means keeping the subject high on the agenda for MPs with questions, protests, emails, social media posts, lobbying by NGOs and most of all through voting choices. Politicians need to know the public is behind them if they are to take on the petrochemical industry.</p>',
-					elementId: 'c6452171-79f5-4a27-9faf-ca72246371d5',
+					elementId: '747a2939-7cde-4ca4-a7dc-958ad4f2acad',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>End</strong><strong> fossil fuel subsidies</strong></h2>',
-					elementId: '213d7039-9886-4800-be15-488e2fe30ad4',
+					html: "<h2 id='end-fossil-fuel-subsidies'><strong>End</strong><strong> fossil fuel subsidies</strong></h2>",
+					elementId: '2a3d22c8-5231-4490-94d7-ef5d43c09667',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The coal, oil and gas industries benefit from <a href="https://www.imf.org/en/Publications/WP/Issues/2019/05/02/Global-Fossil-Fuel-Subsidies-Remain-Large-An-Update-Based-on-Country-Level-Estimates-46509">$5tn dollars a year</a> – $10m a minute – according to the International Monetary Fund, which described its own estimate as “shocking”. Even <a href="https://www.iea.org/newsroom/news/2019/june/fossil-fuel-consumption-subsidies-bounced-back-strongly-in-2018.html">direct consumption subsidies for fossil fuels</a> are double those for renewables, which the International Energy Agency says “greatly complicates the task” of tackling the climate crisis. The biggest subsidisers, the G20 nations, pledged in 2009 to end the handouts, but progress has been very limited. The UN secretary general, António Guterres, <a href="https://uk.reuters.com/article/global-climatechange-energy/fossil-fuel-subsidies-are-wrecking-the-world-says-u-n-chief-idUKL8N2345F6">attacked</a> the incentives in May, saying: “What we are doing is using taxpayers’ money … to destroy the world.” Any change has to include provisions for social justice. Cuts in fuel subsidies should not be used as an austerity measure that hurts the poor most.</p>',
-					elementId: 'bccae5e5-bac4-40b0-b894-43f638a9691a',
+					elementId: '73c76e74-3854-44f9-b60e-f01adc6c9e7b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
@@ -2075,62 +2075,62 @@ export const SpecialReport: FEArticleType = {
 					title: 'What is the polluters project?',
 					html: '<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
 					credit: '',
-					elementId: 'ce51a8c9-82b0-4e81-9f2b-e3aab1512cdc',
+					elementId: '2035b6ef-4690-4944-91ae-b6765e4395a3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>Put a price on carbon</strong></h2>',
-					elementId: 'dd9b376b-1247-4c91-8294-70621a14c0b9',
+					html: "<h2 id='put-a-price-on-carbon'><strong>Put a price on carbon</strong></h2>",
+					elementId: '2eded273-fb2c-4f23-9e89-75d0402ec008',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The idea of putting a price on carbon has been around since the early 1990s and a cap-and-trade system was incorporated into the 1997 Kyoto protocol. Under cap-and-trade, a limit is set on emissions and businesses issued with permits to emit carbon. Those cutting their emissions fastest can sell spare permits to laggards, while the cap is ratcheted down over time. But success depends on a strict cap and a scarcity of permits, and <a href="https://www.carbonbrief.org/qa-will-reformed-eu-emissions-trading-system-raise-carbon-prices">the EU’s scheme</a> has been widely criticised. An alternative is a tax, which forces companies to factor the damage caused by climate change into their business decisions, and should encourage them to cut waste, cut emissions and use clean technology. The danger is of carbon leakage: that the extra cost in one country might encourage businesses to look elsewhere to site their factories. This can be dealt with by a border adjustment tax, as the <a href="https://uk.reuters.com/article/uk-eu-commission-timmermans-border-tax/incoming-top-eu-climate-official-pledges-to-tax-polluting-imports-idUKKBN1WN23F">EU’s new commissioner pledged</a> this week. Carbon taxes don’t have to create economic losers, either – <a href="https://www.theguardian.com/world/2018/dec/04/how-to-make-a-carbon-tax-popular-give-the-profits-to-the-people">revenue neutral taxes</a> redistribute the money to the people and are advocated by many.<strong>Scale back demand for fossil fuels</strong></p>',
-					elementId: '74dd4d58-9995-4f05-8df4-eb0fad306086',
+					elementId: '634a3b3d-12ec-4cd4-ac4e-cdb6e2913a6b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Oil companies will sell oil for as long as there are buyers. Public shaming and social and political pressure can work to force companies to own up to their activities but most oil and gas around the world is produced by <a href="https://www.theguardian.com/environment/2019/oct/09/secretive-national-oil-companies-climate">national oil companies</a>, and they need no social licence to operate beyond that granted by their governments, which are often autocratic or unresponsive to public opinion. All companies are responsive to economic pressure, however. The only way to cut emissions from oil in the long term is to stop using oil. Reducing demand is driven by government regulation and by technological development (also driven by regulation), such as cheaper solar panels, offshore windfarms, electric cars and improved public transport.</p>',
-					elementId: 'e001e1bc-0c29-499b-b19a-57ce6e7026ff',
+					elementId: '8bda46a7-2888-4f8b-9f54-9241310d9bdd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>Stop flaring</strong></h2>',
-					elementId: '83e8ecef-edf8-497a-b6c5-5d89cc0554d9',
+					html: "<h2 id='stop-flaring'><strong>Stop flaring</strong></h2>",
+					elementId: 'f28f4f55-1278-4682-9a60-87c263b53e4e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If oil and gas are to be extracted, the least oil companies can do is extract efficiently. The <a href="https://www.worldbank.org/en/programs/zero-routine-flaring-by-2030">World Bank has estimated</a> that the amount of gas wastefully flared globally each year, if used for power generation instead, could supply all of Africa’s electricity needs. <a href="https://www.ft.com/content/6f8f334e-0ebd-11e9-a3aa-118c761d2745">The FT</a> reported earlier this year that flaring in Texas was lighting up the night sky as producers let off the gas to get the oil to market quickly, to turn a faster buck regardless of the environmental consequences. The World Bank wants an end to routine flaring globally by 2030 – yet <a href="https://www.worldbank.org/en/programs/gasflaringreduction#7">in 2018 it increased</a>.</p>',
-					elementId: 'aada3239-e101-44f4-8a85-1884349bbef4',
+					elementId: '43751abf-df5c-4d01-aaee-36c6c1d654c4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>Roll out large scale carbon capture and storage</strong></h2>',
-					elementId: 'fcb032b5-234d-4c9e-98e7-52b9ece488ba',
+					html: "<h2 id='roll-out-large-scale-carbon-capture-and-storage'><strong>Roll out large scale carbon capture and storage</strong></h2>",
+					elementId: '92a4dcc5-eeef-4b63-a233-96305fad3d93',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Trapping and burying the CO2 from fossil fuel burning is possible but not yet deployed at scale. Without this, the Intergovernmental Panel on Climate Change says tackling the climate crisis will be much more expensive. Oil companies have the expertise to roll out CCS but say that without a price on carbon emissions there is no commercial incentive. CCS could be used to actually remove CO2 from the atmosphere by growing trees and plants, burning them for electricity, then sequestering the emissions. But the IPCC has warned that doing this at large scale could conflict with growing food.</p>',
-					elementId: 'd88dbeda-648c-4363-a1d6-8fc3be846902',
+					elementId: 'fdc92fb4-e3b4-4054-b381-01907233ec1d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>Halt investment in fossil fuels</strong></h2>',
-					elementId: '9eede060-7edb-43b8-abbb-2953e891853c',
+					html: "<h2 id='halt-investment-in-fossil-fuels'><strong>Halt investment in fossil fuels</strong></h2>",
+					elementId: 'ae915372-2257-4732-8849-e3c97c5eb26d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The energy transition poses many risks and opportunities for investors, but it cannot be that well-intentioned savers seeking to use their money to support renewable energy businesses and divest from fossil fuels are still inadvertently investing in oil, gas and coal companies. Green investing must be regulated to ensure it really is green.</p>',
-					elementId: '845857f8-2659-4fbf-85e7-7a12088d467c',
+					elementId: '88d16a5b-7202-4b34-8fe8-c2db11311477',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>Establish market metrics on climate change</strong></h2>',
-					elementId: '6ba67f36-4b68-4fb7-8c61-e9d819de7c5b',
+					html: "<h2 id='establish-market-metrics-on-climate-change'><strong>Establish market metrics on climate change</strong></h2>",
+					elementId: '5f1a61c4-c52e-467a-ad65-9c319c759616',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Nearly three years after the Paris agreement, world markets still have no mandatory, comparable data to measure the risks posed by the climate crisis at a company level. Regulators must act urgently – slow-moving voluntary schemes are not enough. Last week, <a href="https://www.theguardian.com/business/2019/oct/08/corporations-told-to-draw-up-climate-rules-or-have-them-imposed">the governor of the Bank of England warned</a> major corporations that they had two years to agree rules for reporting climate risks before global regulators devised their own and made them compulsory. If markets do not understand what climate change really means for car manufacturers, fossil fuel companies and energy firms, a climate-induced financial crisis is just a matter of time. Investment in fossil fuels must end. The <a href="https://gofossilfree.org/divestment/commitments/">fossil fuel divestment movement</a> now has $11.5tn of assets under management committed to divestment.</p>',
-					elementId: 'd582c66c-056c-4d31-810c-d8ca4589c340',
+					elementId: 'a67a5693-10e4-4b92-b729-b640fd20bb26',
 				},
 			],
 			attributes: {
@@ -2276,7 +2276,6 @@ export const SpecialReport: FEArticleType = {
 			mobileStickyPrebid: true,
 			breakingNews: true,
 			externalVideoEmbeds: true,
-			simpleReach: true,
 			carrotTrafficDriver: true,
 			geoMostPopular: true,
 			weAreHiring: true,
@@ -2400,4 +2399,18 @@ export const SpecialReport: FEArticleType = {
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
 	},
+	imagesForLightbox: [
+		{
+			masterUrl:
+				'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg',
+			position: 1,
+			width: 3000,
+			height: 1800,
+			elementId: 'a4e245f0-4905-43c3-ade0-fb188e9dda53',
+			alt: 'Lindsey oil refinery in north Lincolnshire.',
+			credit: 'Photograph: Christopher Furlong/Getty Images',
+			caption: 'Lindsey oil refinery in north Lincolnshire.',
+			displayCredit: true,
+		},
+	],
 };

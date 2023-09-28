@@ -53,8 +53,6 @@ const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
 };
 
 /**
- * # Rich Link Component
- *
  * Wrapper around `RichLink` which fetches the rich links’ images.
  *
  * ## Why does this need to be an Island?

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandBackground,
@@ -12,7 +12,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -20,6 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { useConfig } from '../components/ConfigContext';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -48,8 +49,7 @@ import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
+import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
@@ -82,6 +82,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					Vertical grey border
 					Main content
 					Right Column
+
 				*/
 				${from.wide} {
 					grid-template-columns: 219px 1px 1fr 300px;
@@ -172,7 +173,6 @@ const stretchLines = css`
 		margin-right: -10px;
 	}
 `;
-
 const mainMediaWrapper = css`
 	position: relative;
 `;
@@ -203,24 +203,15 @@ const PositionHeadline = ({
 };
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
-	renderingTarget: RenderingTarget;
 }
 
-export const ShowcaseLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
-
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
@@ -241,6 +232,8 @@ export const ShowcaseLayout = ({
 	const renderAds = canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
+
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
@@ -285,7 +278,6 @@ export const ShowcaseLayout = ({
 										contributionsServiceUrl
 									}
 									idApiUrl={article.config.idApiUrl}
-									isInEuropeTest={isInEuropeTest}
 									headerTopBarSearchCapiSwitch={
 										!!article.config.switches
 											.headerTopBarSearchCapi
@@ -299,6 +291,7 @@ export const ShowcaseLayout = ({
 								padSides={false}
 								backgroundColour={brandBackground.primary}
 								element="nav"
+								format={format}
 							>
 								<Nav
 									nav={NAV}
@@ -320,7 +313,6 @@ export const ShowcaseLayout = ({
 									headerTopBarSwitch={
 										!!article.config.switches.headerTopNav
 									}
-									isInEuropeTest={isInEuropeTest}
 								/>
 							</Section>
 
@@ -332,6 +324,7 @@ export const ShowcaseLayout = ({
 									}
 									padSides={false}
 									element="aside"
+									format={format}
 								>
 									<Island deferUntil="idle">
 										<SubNav
@@ -341,6 +334,9 @@ export const ShowcaseLayout = ({
 												palette.text.articleLinkHover
 											}
 											borderColour={palette.border.subNav}
+											subNavLinkColour={
+												palette.text.subNavLink
+											}
 										/>
 									</Island>
 								</Section>
@@ -351,9 +347,11 @@ export const ShowcaseLayout = ({
 								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
+								borderColour={palette.border.secondary}
 							>
 								<StraightLines
 									count={4}
+									color={palette.border.secondary}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -407,7 +405,6 @@ export const ShowcaseLayout = ({
 									headerTopBarSwitch={
 										!!article.config.switches.headerTopNav
 									}
-									isInEuropeTest={isInEuropeTest}
 								/>
 							</Section>
 						</Stuck>
@@ -437,6 +434,7 @@ export const ShowcaseLayout = ({
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
 					element="article"
+					borderColour={palette.border.secondary}
 				>
 					<ShowcaseGrid>
 						<GridItem area="media">
@@ -499,7 +497,10 @@ export const ShowcaseLayout = ({
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									<DecideLines format={format} />
+									<DecideLines
+										format={format}
+										color={palette.border.secondary}
+									/>
 								</div>
 							</div>
 						</GridItem>
@@ -565,7 +566,6 @@ export const ShowcaseLayout = ({
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									renderingTarget={renderingTarget}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -598,6 +598,7 @@ export const ShowcaseLayout = ({
 								)}
 								<StraightLines
 									count={4}
+									color={palette.border.secondary}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -614,7 +615,8 @@ export const ShowcaseLayout = ({
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons
+										article.showBottomSocialButtons &&
+										renderingTarget === 'Web'
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -644,9 +646,6 @@ export const ShowcaseLayout = ({
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
 									/>
 								</RightColumn>
 							</div>
@@ -681,6 +680,9 @@ export const ShowcaseLayout = ({
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
 							/>
 						</Island>
 					</Section>
@@ -706,6 +708,7 @@ export const ShowcaseLayout = ({
 						pillar={format.theme}
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
+						discussionApiUrl={article.config.discussionApiUrl}
 					/>
 				</Island>
 

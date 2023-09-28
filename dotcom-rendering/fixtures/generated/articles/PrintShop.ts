@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { DCRArticle } from '../../../src/types/frontend';
 
-export const PrintShop: FEArticleType = {
+export const PrintShop: DCRArticle = {
 	slotMachineFlags: '',
 	main: '',
 	subMetaSectionLinks: [
@@ -23,6 +23,53 @@ export const PrintShop: FEArticleType = {
 		},
 	],
 	commercialProperties: {
+		UK: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-print-shop'],
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'co',
+					value: ['guardian-sport'],
+				},
+				{
+					name: 'url',
+					value: '/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'k',
+					value: [
+						'photography',
+						'culture',
+						'sport',
+						'artanddesign',
+						'football',
+						'england',
+					],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fmxze',
+				},
+			],
+		},
 		US: {
 			adTargeting: [
 				{
@@ -83,53 +130,6 @@ export const PrintShop: FEArticleType = {
 				{
 					name: 'se',
 					value: ['guardian-print-shop'],
-				},
-				{
-					name: 'co',
-					value: ['guardian-sport'],
-				},
-				{
-					name: 'url',
-					value: '/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'k',
-					value: [
-						'photography',
-						'culture',
-						'sport',
-						'artanddesign',
-						'football',
-						'england',
-					],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/fmxze',
-				},
-			],
-		},
-		UK: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'se',
-					value: ['guardian-print-shop'],
-				},
-				{
-					name: 'edition',
-					value: 'uk',
 				},
 				{
 					name: 'co',
@@ -433,11 +433,6 @@ export const PrintShop: FEArticleType = {
 								longTitle: 'football/teams',
 							},
 						],
-					},
-					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
 					},
 					{
 						title: 'Business',
@@ -1243,7 +1238,7 @@ export const PrintShop: FEArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
+					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1676,47 +1671,51 @@ export const PrintShop: FEArticleType = {
 							],
 						},
 					],
-					elementId: '8e466e93-4dfb-4f01-9916-43ddb3b3e7b1',
+					elementId: '92c62f9d-6980-4e8a-946b-cd9af9be6d9b',
+					position: 1,
+					lightbox: {
+						credit: 'Photograph: Gerry Cranham/Offside',
+					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
-					elementId: '6f454ea8-8b83-4fdf-81a6-bcc2dbfac423',
+					elementId: 'd9538f21-344f-490d-b05d-2d6dd5c8c3de',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
-					elementId: '7885cba1-d0e4-40ad-ab88-aae2ee35a153',
+					elementId: '345ea514-7a32-4e0e-a195-3ed256ac5eb8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Words: Jonny Weeks</em></p>',
-					elementId: '2bcad599-5b68-4f49-9be9-338a082a15d4',
+					elementId: '73e53386-5a9d-4fed-89a4-f2addff9a7f6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
-					elementId: '678a41df-92b9-4c30-bda9-3066de8210b8',
+					elementId: '2f251e77-10e8-4a2c-9783-b9d504557ac2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
-					elementId: 'd75a45fe-018d-45bf-8bcc-c5d571fa9b99',
+					elementId: '86a31dbe-e09c-47d4-a0d3-7222c4d4bf2a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
-					elementId: '61158e01-9f0b-4788-97c2-2d56e64302c3',
+					elementId: '75a8f244-ad68-4456-9147-23e7d1d32681',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
-					elementId: 'a2a66205-bb05-4965-af60-c0b66a077039',
+					elementId: 'cdd7f328-6827-4e1d-ac5f-976a20979ee2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
-					elementId: '89ceb5be-2c49-4fc0-888c-71d79b2153ce',
+					elementId: 'e2b586ce-70ab-4f38-92fd-97d919788243',
 				},
 			],
 			attributes: {
@@ -1846,7 +1845,6 @@ export const PrintShop: FEArticleType = {
 			mobileStickyPrebid: true,
 			breakingNews: true,
 			externalVideoEmbeds: true,
-			simpleReach: true,
 			carrotTrafficDriver: true,
 			geoMostPopular: true,
 			weAreHiring: true,
@@ -1970,4 +1968,17 @@ export const PrintShop: FEArticleType = {
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
 	},
+	imagesForLightbox: [
+		{
+			masterUrl:
+				'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg',
+			position: 1,
+			width: 3855,
+			height: 2755,
+			elementId: '92c62f9d-6980-4e8a-946b-cd9af9be6d9b',
+			alt: 'Bobby Moore in 1973',
+			credit: 'Photograph: Gerry Cranham/Offside',
+			displayCredit: false,
+		},
+	],
 };

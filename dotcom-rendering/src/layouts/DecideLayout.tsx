@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { CommentLayout } from './CommentLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
@@ -9,11 +9,12 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
+import { PictureLayout } from './PictureLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
 interface BaseProps {
-	article: FEArticleType;
+	article: DCRArticle;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -23,31 +24,39 @@ interface AppProps extends BaseProps {
 }
 
 interface WebProps extends BaseProps {
-	renderingTarget: 'Web';
 	NAV: NavType;
+	renderingTarget: 'Web';
 }
 
-const DecideLayoutApps = ({
-	article,
-	format,
-}: {
-	article: FEArticleType;
-	format: ArticleFormat;
-}) => {
-	if (
-		format.display === ArticleDisplay.Standard &&
-		format.design === ArticleDesign.Standard
-	) {
-		return (
-			<StandardLayout
-				article={article}
-				format={format}
-				renderingTarget="Apps"
-			/>
-		);
+const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
+	const notSupported = <pre>Not supported</pre>;
+	switch (format.display) {
+		case ArticleDisplay.Standard: {
+			switch (format.design) {
+				case ArticleDesign.Standard:
+					return (
+						<StandardLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return (
+						<LiveLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				default:
+					return notSupported;
+			}
+		}
+		default:
+			return notSupported;
 	}
-
-	return <pre>Not supported</pre>;
 };
 
 const DecideLayoutWeb = ({
@@ -78,7 +87,6 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
 						/>
 					);
 				}
@@ -105,7 +113,14 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.Picture:
+					return (
+						<PictureLayout
+							article={article}
+							NAV={NAV}
+							format={format}
 						/>
 					);
 				default:
@@ -114,7 +129,6 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
 						/>
 					);
 			}
@@ -128,7 +142,6 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
@@ -158,7 +171,6 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
@@ -183,12 +195,18 @@ const DecideLayoutWeb = ({
 	}
 };
 
-export const DecideLayout = (props: AppProps | WebProps) => {
+export const DecideLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
 
 	switch (renderingTarget) {
 		case 'Apps':
-			return <DecideLayoutApps article={article} format={format} />;
+			return (
+				<DecideLayoutApps
+					article={article}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			);
 		case 'Web':
 			return (
 				<DecideLayoutWeb

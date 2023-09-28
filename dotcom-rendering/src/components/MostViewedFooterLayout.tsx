@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
 import { between, from, space } from '@guardian/source-foundations';
-import { AdSlot } from './AdSlot';
+import { AdSlot } from './AdSlot.web';
 
 type Props = {
 	children: React.ReactNode;
@@ -37,7 +37,10 @@ const fixedWidthsPageSkin = css`
 `;
 
 const mostPopMargin = css`
-	margin: 9px 0 0 10px;
+	margin-top: 9px;
+	${from.desktop} {
+		margin: 9px 0 0 10px;
+	}
 	${from.leftCol} {
 		margin: 6px 0 0 10px;
 	}

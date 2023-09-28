@@ -5,6 +5,9 @@ import {
 	isContributor,
 } from '../lib/byline';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
+import { FollowWrapper } from './FollowWrapper.importable';
+import { Island } from './Island';
 
 type Props = {
 	byline: string;
@@ -105,16 +108,19 @@ function removeComma(bylinePart: string) {
 
 export const BylineLink = ({ byline, tags, format }: Props) => {
 	const tokens = bylineAsTokens(byline, tags);
-	const hasSingleContributor = !!getSoleContributor(tags, byline);
+	const soleContributor = getSoleContributor(tags, byline);
+	const hasSoleContributor = !!soleContributor;
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
 
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
 		if (typeof bylineComponent === 'string') {
 			const displayString =
-				format.design === ArticleDesign.Analysis && hasSingleContributor
+				format.design === ArticleDesign.Analysis && hasSoleContributor
 					? removeComma(bylineComponent)
 					: bylineComponent;
-			return displayString ? <span>{displayString}</span> : null;
+			return displayString ? (
+				<span key={bylineComponent}>{displayString}</span>
+			) : null;
 		}
 		return (
 			<ContributorLink
@@ -125,5 +131,24 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 		);
 	});
 
-	return <>{renderedTokens}</>;
+	/**
+	 * Where is this coming from?
+	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
+	 */
+	const { renderingTarget } = useConfig();
+
+	return (
+		<>
+			{renderedTokens}
+			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
+				<Island>
+					<FollowWrapper
+						displayName={soleContributor.title}
+						id={soleContributor.id}
+						format={format}
+					/>
+				</Island>
+			) : null}
+		</>
+	);
 };

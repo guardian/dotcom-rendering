@@ -1,0 +1,45 @@
+// Recommended VS Code settings for this project.
+// Copy these to .vscode/settings.json to apply them to your editor – but don't commit it!
+// https://github.com/guardian/recommendations/blob/main/VSCode.md#do-not-commit-vscode
+{
+	"eslint.validate": ["typescript", "typescriptreact"],
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"eslint.workingDirectories": ["./dotcom-rendering"],
+	"files.watcherExclude": {
+		"**/target": true
+	},
+	"workbench.colorCustomizations": {
+		"titleBar.activeBackground": "#648FFF",
+		"titleBar.activeForeground": "#000000"
+	},
+	"jest.jestCommandLine": "yarn workspaces run test",
+	"gitlens.advanced.blame.customArguments": [
+		"--ignore-revs-file",
+		".git-blame-ignore-revs"
+	],
+	"javascript.preferences.importModuleSpecifier": "relative",
+	"yaml.customTags": [
+		"!Base64 scalar",
+		"!Cidr scalar",
+		"!And sequence",
+		"!Equals sequence",
+		"!If sequence",
+		"!Not sequence",
+		"!Or sequence",
+		"!Condition scalar",
+		"!FindInMap sequence",
+		"!GetAtt scalar",
+		"!GetAtt sequence",
+		"!GetAZs scalar",
+		"!ImportValue scalar",
+		"!Join sequence",
+		"!Select sequence",
+		"!Split sequence",
+		"!Sub scalar",
+		"!Transform mapping",
+		"!Ref scalar"
+	],
+	"cSpell.words": ["Queueable"]
+}

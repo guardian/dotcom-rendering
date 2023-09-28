@@ -41,7 +41,7 @@ const sendMetric = (m: any[]) => {
 
 const collectAndSendAWSMetrics = (...metrics: Metric[]): void => {
 	setInterval(() => {
-		metrics.forEach((m) => m.send());
+		for (const m of metrics) m.send();
 	}, METRICS_TIME_RESOLUTION);
 };
 

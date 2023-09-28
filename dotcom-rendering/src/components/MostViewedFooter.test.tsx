@@ -1,6 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
+import { ConfigProvider } from './ConfigContext';
 import { responseWithTwoTabs } from './MostViewed.mocks';
 import { MostViewedFooterData } from './MostViewedFooterData.importable';
 
@@ -19,19 +20,21 @@ describe('MostViewedFooterData', () => {
 	});
 
 	it('should call the api and render the response as expected', async () => {
-		useApi.mockReturnValue({ data: responseWithTwoTabs });
+		useApi.mockReturnValue({ data: responseWithTwoTabs, loading: false });
 
 		const { getByText, getAllByText, getByTestId } = render(
-			<MostViewedFooterData
-				sectionId="Section Name"
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				edition="UK"
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<MostViewedFooterData
+					sectionId="Section Name"
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					edition="UK"
+				/>
+			</ConfigProvider>,
 		);
 
 		// Calls api once only
@@ -56,19 +59,21 @@ describe('MostViewedFooterData', () => {
 	});
 
 	it('should change the items shown when the associated tab is clicked', async () => {
-		useApi.mockReturnValue({ data: responseWithTwoTabs });
+		useApi.mockReturnValue({ data: responseWithTwoTabs, loading: false });
 
 		const { getByTestId, getByText } = render(
-			<MostViewedFooterData
-				sectionId="Section Name"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				edition="UK"
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<MostViewedFooterData
+					sectionId="Section Name"
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					edition="UK"
+				/>
+			</ConfigProvider>,
 		);
 
 		const firstHeading = responseWithTwoTabs.tabs[0].heading;
@@ -113,19 +118,22 @@ describe('MostViewedFooterData', () => {
 					],
 				},
 			],
+			loading: false,
 		});
 
 		const { getByText } = render(
-			<MostViewedFooterData
-				sectionId="Section Name"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				edition="UK"
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<MostViewedFooterData
+					sectionId="Section Name"
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					edition="UK"
+				/>
+			</ConfigProvider>,
 		);
 
 		expect(getByText('Live')).toBeInTheDocument();
@@ -155,38 +163,43 @@ describe('MostViewedFooterData', () => {
 					],
 				},
 			],
+			loading: false,
 		});
 
 		const { queryByText } = render(
-			<MostViewedFooterData
-				sectionId="Section Name"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				edition="UK"
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<MostViewedFooterData
+					sectionId="Section Name"
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					edition="UK"
+				/>
+			</ConfigProvider>,
 		);
 
 		expect(queryByText('Live')).not.toBeInTheDocument();
 	});
 
 	it('should render the Ophan data link names as expected', async () => {
-		useApi.mockReturnValue({ data: responseWithTwoTabs });
+		useApi.mockReturnValue({ data: responseWithTwoTabs, loading: false });
 
 		const { asFragment } = render(
-			<MostViewedFooterData
-				sectionId="Section Name"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				edition="UK"
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<MostViewedFooterData
+					sectionId="Section Name"
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					edition="UK"
+				/>
+			</ConfigProvider>,
 		);
 
 		// Renders tab data link name

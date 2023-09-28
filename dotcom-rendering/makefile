@@ -24,13 +24,6 @@ riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
 	@node ./scripts/deploy/build-riffraff-bundle.mjs
 
-riffraff-publish: riffraff-bundle
-	$(call log, "publishing riff-raff bundle")
-	@./scripts/deploy/publish-assets.sh
-
-deploy:
-	@env ./scripts/deploy/build-riffraff-artifact.sh
-
 # prod #########################################
 
 build: clean-dist install
@@ -62,7 +55,7 @@ start: install
 start-prod:
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	NODE_ENV=production /usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/server.js
+	NODE_ENV=production /usr/local/node/pm2 start dist/server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 
@@ -218,8 +211,8 @@ gen-stories:
 	@git add stories/generated
 
 gen-fixtures:
-	$(call log, "Generating new article fixture data")
-	@node scripts/test-data/gen-fixtures.js
+	$(call log, "Generating new fixture data")
+	@npx ts-node --project tsconfig.json --files scripts/test-data/gen-fixtures.js
 
 perf-test:
 	@node scripts/perf/perf-test.js

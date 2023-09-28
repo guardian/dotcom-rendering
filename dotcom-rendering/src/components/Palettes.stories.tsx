@@ -1,4 +1,5 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { DynamicFast } from './DynamicFast';
 import { FrontSection } from './FrontSection';
@@ -29,11 +30,13 @@ export const EventPalette = () => (
 		containerPalette="EventPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="EventPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -55,11 +58,13 @@ export const EventAltPalette = () => (
 		containerPalette="EventAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="EventAltPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -70,11 +75,13 @@ export const SombrePalette = () => (
 		containerPalette="SombrePalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="SombrePalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -85,11 +92,13 @@ export const SombreAltPalette = () => (
 		containerPalette="SombreAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="SombreAltPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -100,11 +109,13 @@ export const BreakingPalette = () => (
 		containerPalette="BreakingPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="BreakingPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -115,11 +126,13 @@ export const LongRunningPalette = () => (
 		containerPalette="LongRunningPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="LongRunningPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -130,11 +143,13 @@ export const LongRunningAltPalette = () => (
 		containerPalette="LongRunningAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="LongRunningAltPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -145,11 +160,13 @@ export const InvestigationPalette = () => (
 		containerPalette="InvestigationPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="InvestigationPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -160,11 +177,13 @@ export const SpecialReportAltPalette = () => (
 		containerPalette="SpecialReportAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="SpecialReportAltPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -178,11 +197,13 @@ export const BrandedPalette = () => (
 		sectionId={'branded-palette'}
 		ophanComponentName={'branded-palette'}
 		ophanComponentLink={'branded-palette'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="Branded"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</LabsSection>
 );
@@ -193,11 +214,13 @@ export const MediaPalette = () => (
 		containerPalette="MediaPalette"
 		showDateHeader={true}
 		editionId={'UK'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="MediaPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -211,11 +234,13 @@ export const PodcastPalette = () => (
 		sectionId={'podcast-palette'}
 		ophanComponentName={'podcast-palette'}
 		ophanComponentLink={'podcast-palette'}
+		discussionApiUrl={discussionApiUrl}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="PodcastPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );

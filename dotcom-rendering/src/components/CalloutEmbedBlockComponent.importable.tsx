@@ -130,8 +130,6 @@ let hasFormBeenOpened = true;
 type FormDataType = { [key in string]: unknown };
 
 /**
- * # Callout Embed Block Component
- *
  * A callout to readers to share their stories.
  *
  * ## Why does this need to be an Island?

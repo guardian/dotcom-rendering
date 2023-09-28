@@ -3,9 +3,11 @@ import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import type { Loading } from './CardPicture';
 
 type Props = {
 	trails: DCRFrontCard[];
+	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -14,6 +16,7 @@ export const FixedSmallFastVIII = ({
 	trails,
 	containerPalette,
 	showAge,
+	imageLoading,
 }: Props) => {
 	if (!trails[0]) return null;
 	const firstSlice25 = trails.slice(0, 2);
@@ -33,6 +36,7 @@ export const FixedSmallFastVIII = ({
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							imageLoading={imageLoading}
 						/>
 					</LI>
 				);

@@ -1,10 +1,11 @@
 import type { Newsletter } from '../types/content';
+import type { RenderingTarget } from '../types/renderingTarget';
+import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
 import { enhanceH2s } from './enhance-H2s';
-import { enhanceH3s } from './enhance-H3s';
 import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
@@ -17,11 +18,19 @@ class BlockEnhancer {
 
 	format: FEFormat;
 
+	renderingTarget: RenderingTarget;
+
 	options: Options;
 
-	constructor(blocks: Block[], format: FEFormat, options: Options) {
+	constructor(
+		blocks: Block[],
+		format: FEFormat,
+		renderingTarget: RenderingTarget,
+		options: Options,
+	) {
 		this.blocks = blocks;
 		this.format = format;
+		this.renderingTarget = renderingTarget;
 		this.options = options;
 	}
 
@@ -32,6 +41,17 @@ class BlockEnhancer {
 				this.format,
 				this.options.promotedNewsletter,
 			);
+		}
+		return this;
+	}
+
+	enhanceAdPlaceholders() {
+		if (
+			this.renderingTarget === 'Apps' &&
+			!(this.format.design === 'LiveBlogDesign') &&
+			!(this.format.design === 'DeadBlogDesign')
+		) {
+			this.blocks = enhanceAdPlaceholders(this.blocks);
 		}
 		return this;
 	}
@@ -48,11 +68,6 @@ class BlockEnhancer {
 
 	enhanceH2s() {
 		this.blocks = enhanceH2s(this.blocks);
-		return this;
-	}
-
-	enhanceH3s() {
-		this.blocks = enhanceH3s(this.blocks, this.format);
 		return this;
 	}
 
@@ -97,14 +112,16 @@ type Options = {
 export const enhanceBlocks = (
 	blocks: Block[],
 	format: FEFormat,
+	renderingTarget: RenderingTarget,
 	options?: Options,
 ): Block[] => {
 	const { promotedNewsletter } = options ?? {};
 
-	blocks.forEach((block) => validateAsBlock(block));
-	return new BlockEnhancer(blocks, format, { promotedNewsletter })
+	for (const block of blocks) validateAsBlock(block);
+	return new BlockEnhancer(blocks, format, renderingTarget, {
+		promotedNewsletter,
+	})
 		.enhanceDividers()
-		.enhanceH3s()
 		.enhanceH2s()
 		.enhanceInteractiveContentsElements()
 		.enhanceBlockquotes()
@@ -113,5 +130,6 @@ export const enhanceBlocks = (
 		.enhanceNumberedLists()
 		.enhanceEmbeds()
 		.enhanceTweets()
-		.enhanceNewsletterSignup().blocks;
+		.enhanceNewsletterSignup()
+		.enhanceAdPlaceholders().blocks;
 };

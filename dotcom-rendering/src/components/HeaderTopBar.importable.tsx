@@ -20,7 +20,6 @@ interface HeaderTopBarProps {
 	discussionApiUrl: string;
 	idApiUrl: string;
 	headerTopBarSearchCapiSwitch: boolean;
-	isInEuropeTest: boolean;
 	hasPageSkin?: boolean;
 }
 
@@ -50,8 +49,6 @@ const topBarStylesFromLeftCol = css`
 `;
 
 /**
- * # Header Top Bar
- *
  * The slim dark blue top bar at the very top of Guardian pages
  *
  * ## Why does this need to be an Island?
@@ -72,7 +69,6 @@ export const HeaderTopBar = ({
 	discussionApiUrl,
 	idApiUrl,
 	headerTopBarSearchCapiSwitch,
-	isInEuropeTest,
 	hasPageSkin = false,
 }: HeaderTopBarProps) => {
 	const authStatus = useAuthStatus();
@@ -111,7 +107,6 @@ export const HeaderTopBar = ({
 					<HeaderTopBarEditionDropdown
 						editionId={editionId}
 						dataLinkName={dataLinkName}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</Hide>
 			</div>

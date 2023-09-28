@@ -410,6 +410,18 @@ const ReaderRevenueLinksNative = ({
 	);
 };
 
+/**
+ * Container for `ReaderRevenueLinksRemote` or `ReaderRevenueLinksRemote`
+ *
+ * ## Why does this need to be an Island?
+ *
+ * Reader revenue links are entirely client-side and specific to a unique
+ * page view. They also relying on getting a country code.
+ *
+ * ---
+ *
+ * (No visual story exists)
+ */
 export const SupportTheG = ({
 	editionId,
 	dataLinkNamePrefix,

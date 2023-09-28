@@ -1,5 +1,6 @@
 import type { DCRFrontType } from '../types/front';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { DCRTagFrontType } from '../types/tagFront';
 
 /**
@@ -7,8 +8,12 @@ import type { DCRTagFrontType } from '../types/tagFront';
  * prevent ads from being displayed.
  */
 export const canRenderAds = (
-	pageData: FEArticleType | DCRFrontType | DCRTagFrontType,
+	pageData: DCRArticle | DCRFrontType | DCRTagFrontType,
+	renderingTarget?: RenderingTarget,
 ): boolean => {
+	if (renderingTarget === 'Apps') {
+		return false;
+	}
 	if (pageData.isAdFreeUser) {
 		return false;
 	}

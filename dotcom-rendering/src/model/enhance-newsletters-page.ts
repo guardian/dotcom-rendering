@@ -42,7 +42,7 @@ const reduceToDefaultGrouping = (
 		groups: [],
 	};
 
-	newsletters.forEach((newsletter) => {
+	for (const newsletter of newsletters) {
 		const { group: groupName } = newsletter;
 		const exstingGroup = grouping.groups.find(
 			(group) => group.title === groupName,
@@ -55,7 +55,7 @@ const reduceToDefaultGrouping = (
 				newsletters: [newsletter],
 			});
 		}
-	});
+	}
 
 	return grouping;
 };
@@ -64,7 +64,7 @@ const getGroups = (
 	newsletterPageData: FENewslettersPageType,
 ): GroupedNewsletters => {
 	const { newsletters, editionId } = newsletterPageData;
-	const staticGroup = groups[editionId];
+	const staticGroup = groups[editionId] ?? groups['UK'];
 
 	return staticGroup
 		? mapStaticGroups(staticGroup, newsletters)

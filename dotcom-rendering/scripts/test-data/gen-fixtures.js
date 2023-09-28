@@ -7,6 +7,7 @@ const fetch = require('node-fetch');
 const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
+const { enhanceArticleType } = require('../../src/lib/article');
 
 const root = resolve(__dirname, '..', '..');
 
@@ -117,6 +118,10 @@ const articles = [
 		name: 'Explainer',
 		url: 'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 	},
+	{
+		name: 'Picture',
+		url: 'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
+	},
 ];
 
 const HEADER = `/**
@@ -160,12 +165,18 @@ const requests = articles.map((article) => {
 				json.format.design = 'LiveBlogDesign';
 			}
 
+			const enhancedArticle = enhanceArticleType(json);
+
 			// Write the new fixture data
 			const contents = `${HEADER}
 
-			import type { FEArticleType } from '../../../src/types/frontend';
+			import type { DCRArticle } from '../../../src/types/frontend';
 
-			export const ${article.name}: FEArticleType = ${JSON.stringify(json, null, 4)}`;
+			export const ${article.name}: DCRArticle = ${JSON.stringify(
+				enhancedArticle,
+				null,
+				4,
+			)}`;
 			return fs.writeFile(
 				`${root}/fixtures/generated/articles/${article.name}.ts`,
 				contents,

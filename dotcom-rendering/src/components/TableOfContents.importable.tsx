@@ -110,8 +110,6 @@ const verticalStyle = css`
 `;
 
 /**
- * # Table of Contents Component
- *
  * A table of contents, shown at the top of an article
  * to allow readers to quickly navigate though articles.
  *

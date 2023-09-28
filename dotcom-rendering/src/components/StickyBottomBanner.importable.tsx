@@ -209,6 +209,17 @@ const buildBrazeBanner = (
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });
 
+/**
+ * The reader revenue banner at the end of articles
+ *
+ * ## Why does this need to be an Island?
+ *
+ * The content of the banner is personalised to an individual page view.
+ *
+ * ---
+ *
+ * (No visual story exists)
+ */
 export const StickyBottomBanner = ({
 	contentType,
 	sectionId,
@@ -302,7 +313,7 @@ export const StickyBottomBanner = ({
 			shouldHideReaderRevenue,
 		);
 		const bannerConfig: SlotConfig = {
-			candidates: [CMP, puzzlesBanner, readerRevenue, brazeBanner],
+			candidates: [CMP, brazeBanner, puzzlesBanner, readerRevenue],
 			name: 'banner',
 		};
 

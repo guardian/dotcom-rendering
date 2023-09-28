@@ -757,6 +757,9 @@
                                                                     "items": {
                                                                         "$ref": "#/definitions/FEMediaAtom"
                                                                     }
+                                                                },
+                                                                "mainMediaAtom": {
+                                                                    "$ref": "#/definitions/FEMediaAtom"
                                                                 }
                                                             },
                                                             "required": [
@@ -1196,6 +1199,9 @@
                                                         "properties": {
                                                             "href": {
                                                                 "type": "string"
+                                                            },
+                                                            "webUrl": {
+                                                                "type": "string"
                                                             }
                                                         }
                                                     },
@@ -1259,6 +1265,7 @@
                                                     }
                                                 },
                                                 "required": [
+                                                    "header",
                                                     "properties"
                                                 ]
                                             }
@@ -1479,6 +1486,9 @@
                                                                     "items": {
                                                                         "$ref": "#/definitions/FEMediaAtom"
                                                                     }
+                                                                },
+                                                                "mainMediaAtom": {
+                                                                    "$ref": "#/definitions/FEMediaAtom"
                                                                 }
                                                             },
                                                             "required": [
@@ -1918,6 +1928,9 @@
                                                         "properties": {
                                                             "href": {
                                                                 "type": "string"
+                                                            },
+                                                            "webUrl": {
+                                                                "type": "string"
                                                             }
                                                         }
                                                     },
@@ -1981,6 +1994,7 @@
                                                     }
                                                 },
                                                 "required": [
+                                                    "header",
                                                     "properties"
                                                 ]
                                             }
@@ -2201,6 +2215,9 @@
                                                                     "items": {
                                                                         "$ref": "#/definitions/FEMediaAtom"
                                                                     }
+                                                                },
+                                                                "mainMediaAtom": {
+                                                                    "$ref": "#/definitions/FEMediaAtom"
                                                                 }
                                                             },
                                                             "required": [
@@ -2640,6 +2657,9 @@
                                                         "properties": {
                                                             "href": {
                                                                 "type": "string"
+                                                            },
+                                                            "webUrl": {
+                                                                "type": "string"
                                                             }
                                                         }
                                                     },
@@ -2703,6 +2723,7 @@
                                                     }
                                                 },
                                                 "required": [
+                                                    "header",
                                                     "properties"
                                                 ]
                                             }
@@ -2896,6 +2917,7 @@
                 "NewsletterSignupDesign",
                 "ObituaryDesign",
                 "PhotoEssayDesign",
+                "PictureDesign",
                 "PrintShopDesign",
                 "ProfileDesign",
                 "QuizDesign",
