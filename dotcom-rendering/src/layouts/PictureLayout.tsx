@@ -42,7 +42,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const PictureGrid = ({ children }: { children: React.ReactNode }) => (
@@ -75,7 +75,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					Vertical grey border
 					Main content
 					Right Column
-					
+
 				*/
 				${from.wide} {
 					grid-template-columns: 219px 1px 1fr;
@@ -230,7 +230,7 @@ const LeftColLines = (displayAvatarUrl: boolean) => css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -481,6 +481,9 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
+									imagesForAppsLightbox={
+										article.imagesForAppsLightbox
+									}
 								/>
 							</div>
 						</GridItem>

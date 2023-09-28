@@ -1,5 +1,5 @@
-import { appsLightboxImages } from 'src/model/appsLightboxImages';
 import { addImageIDs } from '../model/addImageIDs';
+import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
 import { addLightboxData } from '../model/enhance-images';
 import { enhanceBlocks } from '../model/enhanceBlocks';
