@@ -62,7 +62,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-ccpaCountries",
 							"vars": {
-								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:CCPA%22,%2204:\${clientId(ccpaUUID)%22,%2205:YYYY%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:CCPA%22,%2204:\${clientId(ccpaUUID)}%22,%2205:false%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
 							}
 						},
 						"trackPageviewAus": {
@@ -70,7 +70,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-ausCountries",
 							"vars": {
-								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:AUS%22,%2206:XXXX%22,%2207:YYYY%22,%2208:ZZZZ%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:AUS%22,%2206:\${clientId(ccpaUUID)}%22,%2207:\${clientId(consentStatus)}%22,%2208:false%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
 							}
 						}
 					},
