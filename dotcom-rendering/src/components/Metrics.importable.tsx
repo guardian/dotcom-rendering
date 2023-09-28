@@ -10,9 +10,11 @@ import {
 import { getCookie } from '@guardian/libs';
 import { billboardsInMerchHigh } from '../experiments/tests/billboards-in-merch-high';
 import { integrateIma } from '../experiments/tests/integrate-ima';
+import { isServer } from '../lib/isServer';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
+import { usePageViewId } from '../lib/usePageViewId';
 
 type Props = {
 	commercialMetricsEnabled: boolean;
@@ -29,21 +31,31 @@ const clientSideTestsToForceMetrics: ABTest[] = [
 	billboardsInMerchHigh,
 ];
 
+/**
+ * Send web vitals and commercial metrics to our data warehouse
+ *
+ * ## Why does this need to be an Island
+ *
+ * It cannot run on the server and needs to send data about the current page view
+ */
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 	const abTestApi = useAB()?.api;
 	const adBlockerInUse = useAdBlockInUse();
 
-	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
-	const { pageViewId } = window.guardian.config.ophan;
+	const browserId = isServer
+		? null
+		: getCookie({ name: 'bwid', shouldMemoize: true });
+	const pageViewId = usePageViewId();
 
-	const isDev =
-		!!window.guardian.config.page.isDev ||
-		window.location.hostname === 'm.code.dev-theguardian.com' ||
-		window.location.hostname === (process.env.HOSTNAME ?? 'localhost') ||
-		window.location.hostname === 'preview.gutools.co.uk';
+	const isDev = isServer
+		? undefined
+		: !!window.guardian.config.page.isDev ||
+		  window.location.hostname === 'm.code.dev-theguardian.com' ||
+		  window.location.hostname === (process.env.HOSTNAME ?? 'localhost') ||
+		  window.location.hostname === 'preview.gutools.co.uk';
 
 	const userInServerSideTest =
-		Object.keys(window.guardian.config.tests).length > 0;
+		!isServer && Object.keys(window.guardian.config.tests).length > 0;
 
 	const shouldBypassSampling = (api: ABTestAPI) =>
 		willRecordCoreWebVitals ||
@@ -63,6 +75,8 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 			 */
 			const nearZeroSampling = Number.MIN_VALUE;
 
+			if (isDev === undefined) return;
+
 			void initCoreWebVitals({
 				browserId,
 				pageViewId,
@@ -74,7 +88,7 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 			if (bypassSampling || isDev)
 				void bypassCoreWebVitalsSampling('commercial');
 		},
-		[abTestApi],
+		[abTestApi, isDev],
 	);
 
 	useOnce(
@@ -86,6 +100,8 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 			const bypassSampling = abTestApi
 				? shouldBypassSampling(abTestApi)
 				: false;
+
+			if (!pageViewId || isDev === undefined) return;
 
 			initCommercialMetrics({
 				pageViewId,
@@ -104,7 +120,7 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 					),
 				);
 		},
-		[abTestApi, adBlockerInUse, commercialMetricsEnabled],
+		[abTestApi, adBlockerInUse, commercialMetricsEnabled, isDev],
 	);
 
 	// We don’t render anything

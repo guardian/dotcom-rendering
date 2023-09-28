@@ -1,15 +1,14 @@
 import { log } from '@guardian/libs';
-import { isServer } from '../lib/isServer';
 import { setAdTargeting } from '../lib/useAdTargeting';
+import { useHydrated } from '../lib/useHydrated';
 
 type Props = {
 	adTargeting: AdTargeting;
 };
 
 export const SetAdTargeting = ({ adTargeting }: Props) => {
-	if (isServer) {
-		throw new Error('SetAdTargeting is client only');
-	}
+	const hydrated = useHydrated();
+	if (!hydrated) return null;
 
 	setAdTargeting(adTargeting);
 	log('commercial', '🎯 Ad targeting', adTargeting);

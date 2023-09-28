@@ -73,11 +73,11 @@ export const Header = ({
 		</Island>
 
 		<div css={[hasPageSkin ? pageSkinContainer : center, explicitHeight]}>
-			<Island deferUntil="hash" clientOnly={true}>
+			<Island deferUntil="hash">
 				<Snow />
 			</Island>
 			<Logo editionId={editionId} hasPageSkin={hasPageSkin} />
-			<Island deferUntil="idle" clientOnly={true}>
+			<Island deferUntil="idle">
 				<SupportTheG
 					urls={urls}
 					editionId={editionId}

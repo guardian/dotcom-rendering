@@ -1,9 +1,11 @@
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { isServer } from '../lib/isServer';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useOnce } from '../lib/useOnce';
+import { usePageViewId } from '../lib/usePageViewId';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
@@ -143,8 +145,14 @@ const ShowSignInGate = ({
 	return <></>;
 };
 
-// component with conditional logic which determines if a sign in gate
-// should be shown on the current page
+/**
+ * Component with conditional logic which determines if a sign in gate
+ * should be shown on the current page
+ *
+ * ## Why does this need to be an Island?
+ *
+ * The decision is specific to a page view.
+ */
 export const SignInGateSelector = ({
 	contentType,
 	sectionId = '',
@@ -172,14 +180,16 @@ export const SignInGateSelector = ({
 	const [canShowGate, setCanShowGate] = useState(false);
 
 	const gateSelector = useSignInGateSelector();
-	const { pageViewId } = window.guardian.config.ophan;
+	const pageViewId = usePageViewId();
 
 	// START: Checkout Complete Personalisation
 	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
-	const checkOutCompleteString = getCookie({
-		name: 'GU_CO_COMPLETE',
-		shouldMemoize: true,
-	});
+	const checkOutCompleteString = isServer
+		? null
+		: getCookie({
+				name: 'GU_CO_COMPLETE',
+				shouldMemoize: true,
+		  });
 	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
 		checkOutCompleteString !== null
 			? parseCheckoutCompleteCookieData(checkOutCompleteString)
@@ -259,6 +269,8 @@ export const SignInGateSelector = ({
 	const componentId = shouldPersonaliseComponentId()
 		? personaliseComponentId(signInGateComponentId)
 		: signInGateComponentId;
+
+	if (!pageViewId) return null;
 
 	const ctaUrlParams = {
 		pageId,

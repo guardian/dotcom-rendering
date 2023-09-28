@@ -518,7 +518,6 @@ declare namespace JSX {
 			name: string;
 			deferUntil?: 'idle' | 'visible' | 'interaction' | 'hash';
 			rootMargin?: string;
-			clientOnly?: boolean;
 			props: any;
 			children: React.ReactNode;
 			/**
