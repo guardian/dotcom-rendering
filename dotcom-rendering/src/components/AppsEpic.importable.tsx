@@ -11,12 +11,10 @@ import {
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { getAcquisitionsClient, getUserClient } from '../lib/bridgetApi';
-import { useOnlineStatus } from '../lib/useOnlineStatus';
 import { EpicContent } from './EpicContent.apps';
 
 export const AppsEpic = () => {
 	const [isPremium, setIsPremium] = useState<boolean>(true); // Default to true, so we initially don't show the epic
-	const isOnline = useOnlineStatus();
 	const [epic, setEpic] = useState<IEpic | undefined>(undefined);
 
 	useEffect(() => {
@@ -35,7 +33,7 @@ export const AppsEpic = () => {
 			.catch(() => undefined);
 	}, []);
 
-	if (isOnline && !isPremium && epic) {
+	if (!isPremium && epic) {
 		const { title, body, firstButton, secondButton } = epic;
 		const epicProps = {
 			title,
