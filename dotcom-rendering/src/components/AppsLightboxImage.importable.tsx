@@ -65,6 +65,7 @@ export const AppsLightboxImage = ({
 				border: none;
 				background: none;
 				padding: 0;
+				width: 100%;
 			`}
 		>
 			<Picture
