@@ -5,7 +5,7 @@ import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 	ophanEsm,
-} from '../../../scripts/webpack/bundles';
+} from '../../../scripts/webpack/bundles.mjs';
 
 const allowUrls: BrowserOptions['allowUrls'] = [
 	/webpack-internal/,

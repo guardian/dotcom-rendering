@@ -1,10 +1,12 @@
-const webpack = require('webpack');
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
-const swcConfig = require('./.swcrc.json');
-const { getBrowserTargets } = require('./browser-targets');
+// @ts-check
+import webpack from 'webpack';
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
+import swcConfig from './.swcrc.json' assert { type: 'json' };
+import browserTargets from './browser-targets.js';
 
 const DEV = process.env.NODE_ENV === 'development';
 
+/** @param {Record<string, string> | string[]} targets */
 const swcLoader = (targets) => [
 	{
 		loader: 'swc-loader',
@@ -44,7 +46,7 @@ const getEntryIndex = (build) => {
 
 /**
  * @param {Build} build
- * @returns {string}
+ * @returns {webpack.RuleSetUse}
  */
 const getLoaders = (build) => {
 	switch (build) {
@@ -81,7 +83,7 @@ const getLoaders = (build) => {
 		case 'web.variant':
 		case 'web.ophan-esm':
 		case 'web':
-			return swcLoader(getBrowserTargets());
+			return swcLoader(browserTargets.getBrowserTargets());
 	}
 };
 
@@ -89,7 +91,8 @@ const getLoaders = (build) => {
  * @param {{ build: Build, sessionId: string }} options
  * @returns {import('webpack').Configuration}
  */
-module.exports = ({ build, sessionId }) => ({
+// eslint-disable-next-line import/no-default-export -- this is what Webpack wants
+export default ({ build, sessionId }) => ({
 	entry: {
 		index: getEntryIndex(build),
 		debug: './src/client/debug/index.ts',
@@ -135,7 +138,7 @@ module.exports = ({ build, sessionId }) => ({
 	output: {
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets
-			if (data.chunk.name === 'debug') return `[name].js`;
+			if (data.chunk?.name === 'debug') return `[name].js`;
 			return generateName(build);
 		},
 		chunkFilename: generateName(build),
@@ -160,7 +163,7 @@ module.exports = ({ build, sessionId }) => ({
 		rules: [
 			{
 				test: /\.[jt]sx?|mjs$/,
-				exclude: module.exports.babelExclude,
+				exclude: babelExclude,
 				use: getLoaders(build),
 			},
 			{
@@ -175,7 +178,7 @@ module.exports = ({ build, sessionId }) => ({
 	},
 });
 
-module.exports.babelExclude = {
+export const babelExclude = {
 	and: [/node_modules/],
 	not: [
 		// Include all @guardian modules, except automat-modules
@@ -185,4 +188,4 @@ module.exports.babelExclude = {
 	],
 };
 
-module.exports.getLoaders = getLoaders;
+export { getLoaders };

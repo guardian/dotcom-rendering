@@ -1,14 +1,19 @@
 // @ts-check
-const path = require('node:path');
-const { v4: uuidv4 } = require('uuid');
-const webpack = require('webpack');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const { merge } = require('webpack-merge');
-const WebpackMessages = require('webpack-messages');
-const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } = require('./bundles');
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { v4 as uuidv4 } from 'uuid';
+import webpack from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
+import { merge } from 'webpack-merge';
+import WebpackMessages from 'webpack-messages';
+import { BUILD_VARIANT as BUILD_VARIANT_SWITCH } from './bundles.mjs';
+import webpackConfigClient from './webpack.config.client.mjs';
+import webpackConfigServer from './webpack.config.server.mjs';
 
-const dist = path.resolve(__dirname, '..', '..', 'dist');
+const dir = path.dirname(fileURLToPath(import.meta.url));
+
+const dist = path.resolve(dir, '..', '..', 'dist');
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -17,7 +22,7 @@ const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
 
 const sessionId = uuidv4();
 
-/** @typedef {import('../../src/lib/assets').Build} Build */
+/** @typedef {import('../../src/lib/assets.js').Build} Build */
 
 /**
  * @param {{ platform: 'server' | `client.${Build}`}} options
@@ -68,7 +73,6 @@ const commonConfigs = ({ platform }) => ({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
 		}),
-		// @ts-expect-error -- somehow the type declaration isn’t playing nice
 		new FilterWarningsPlugin({
 			exclude: /export .* was not found in/,
 		}),
@@ -77,10 +81,10 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
+		// @ts-expect-error -- somehow the type declaration isn’t playing nice
 		...(DEV
 			? // DEV plugins
 			  [
-					// @ts-expect-error -- somehow the type declaration isn’t playing nice
 					new WebpackMessages({
 						name: platform,
 					}),
@@ -126,23 +130,26 @@ const clientBuilds = [
 	'apps',
 ];
 
-module.exports = [
+const configs = [
 	merge(
 		commonConfigs({
 			platform: 'server',
 		}),
-		require(`./webpack.config.server`)({ sessionId }),
-		DEV ? require(`./webpack.config.dev-server`) : {},
+		webpackConfigServer({ sessionId }),
+		DEV ? (await import('./webpack.config.dev-server.mjs')).default : {},
 	),
 	...clientBuilds.map((build) =>
 		merge(
 			commonConfigs({
 				platform: `client.${build}`,
 			}),
-			require(`./webpack.config.client`)({
+			webpackConfigClient({
 				build,
 				sessionId,
 			}),
 		),
 	),
 ];
+
+// eslint-disable-next-line import/no-default-export -- this is what WebPack wants
+export default configs;

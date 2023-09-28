@@ -7,7 +7,7 @@
 
 const find = require('find');
 const loadJsonFile = require('load-json-file');
-const { BUILD_VARIANT } = require('../webpack/bundles');
+const { BUILD_VARIANT } = require('../webpack/bundles.mjs');
 
 const errorAndThrow = (error) => {
 	console.error(error);
