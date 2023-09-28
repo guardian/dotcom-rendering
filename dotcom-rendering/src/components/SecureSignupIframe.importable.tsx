@@ -20,6 +20,7 @@ import {
 	submitComponentEvent,
 } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
+import { useHydrated } from '../lib/useHydrated';
 import { Placeholder } from './Placeholder';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
@@ -210,7 +211,8 @@ export const SecureSignupIframe = ({
 		undefined,
 	);
 
-	if (isServer) return <Placeholder height={65} />;
+	const hydrated = useHydrated();
+	if (!hydrated) return <Placeholder height={65} />;
 
 	const hasResponse = typeof responseOk === 'boolean';
 

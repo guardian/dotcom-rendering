@@ -1,5 +1,5 @@
-import { isServer } from '../lib/isServer';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useHydrated } from '../lib/useHydrated';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
 import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
@@ -30,9 +30,10 @@ import { Placeholder } from './Placeholder';
  */
 
 export const DiscussionContainer = (props: DiscussionProps) => {
+	const hydrated = useHydrated();
 	const authStatus = useAuthStatus();
 
-	if (isServer) return <Placeholder height={324} />;
+	if (!hydrated) return <Placeholder height={324} />;
 
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||

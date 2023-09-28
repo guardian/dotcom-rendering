@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { joinUrl, Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
-import { isServer } from '../lib/isServer';
+import { useHydrated } from '../lib/useHydrated';
 import type { OnwardsSource } from '../types/onwards';
 import type { TagType } from '../types/tag';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
@@ -206,7 +206,8 @@ export const OnwardsUpper = ({
 	shortUrlId,
 	discussionApiUrl,
 }: Props) => {
-	if (isServer) return <Placeholder height={600} />;
+	const hydrated = useHydrated();
+	if (!hydrated) return <Placeholder height={600} />;
 
 	// Related content can be a collection of articles based on
 	// two things, 1: A popular tag, or 2: A generic text match

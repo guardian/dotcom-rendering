@@ -62,7 +62,7 @@ describe('Interactivity', function () {
 			cy.get('gu-island[name=DiscussionContainer]').should(
 				'have.attr',
 				'data-island-status',
-				'rendered',
+				'hydrated',
 			);
 			cy.get('[id=comment-154433663]').should('be.visible');
 		});

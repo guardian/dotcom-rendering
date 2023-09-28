@@ -109,7 +109,7 @@ describe('Paid content tests', function () {
 		cy.get('gu-island[name=OnwardsUpper]', { timeout: 30000 }).should(
 			'have.attr',
 			'data-island-status',
-			'rendered',
+			'hydrated',
 		);
 
 		cy.get('[data-cy=card-branding-logo]').should('be.visible');
