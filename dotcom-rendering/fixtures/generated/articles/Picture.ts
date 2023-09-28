@@ -1652,7 +1652,7 @@ export const Picture: FEArticleType = {
 					],
 				},
 			],
-			elementId: 'f00cc98e-4717-441f-9c17-55a915d8ba5e',
+			elementId: 'c34d0c4c-98a8-4209-bb48-9450cd114a55',
 		},
 	],
 	canonicalUrl:
@@ -1801,7 +1801,6 @@ export const Picture: FEArticleType = {
 			hostedVideoAutoplay: true,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
-			serverShareCounts: true,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,

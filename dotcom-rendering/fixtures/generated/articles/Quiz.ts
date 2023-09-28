@@ -1638,7 +1638,7 @@ export const Quiz: FEArticleType = {
 					],
 				},
 			],
-			elementId: '58b26b89-6268-46a7-ae37-4b7bef6c8182',
+			elementId: '5bfbb424-9ea0-42b3-961e-f0fde474d16a',
 		},
 	],
 	canonicalUrl:
@@ -2254,7 +2254,7 @@ export const Quiz: FEArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '8964ec4d-8c1c-4659-b61c-0d99868df605',
+					elementId: 'cbd29fb5-3458-438b-9673-6187d2200f5b',
 				},
 			],
 			attributes: {
@@ -2417,7 +2417,6 @@ export const Quiz: FEArticleType = {
 			hostedVideoAutoplay: true,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
-			serverShareCounts: true,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,

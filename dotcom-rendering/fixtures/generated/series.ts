@@ -19,17 +19,17 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/06/justified-city-primeval-review-a-triumphant-return-for-the-inexcusably-overlooked-drama',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/27/moulin-rouge-yes-we-can-can-review-theres-zero-glamour-in-this-high-kicking-tale',
 			linkText:
-				'Justified: City Primeval review – a triumphant return for the inexcusably overlooked crime drama ',
+				'Moulin Rouge: Yes We Can-Can! review – there’s zero glamour in this high-kicking tale',
 			showByline: false,
-			byline: 'Emma John',
+			byline: 'Lucy Mangan',
 			masterImage:
-				'https://media.guim.co.uk/b389b9f32121293b18d55485cf860c1100eec5d8/102_9_2210_1327/master/2210.jpg',
-			image: 'https://i.guim.co.uk/img/media/b389b9f32121293b18d55485cf860c1100eec5d8/102_9_2210_1327/master/2210.jpg?width=300&quality=85&auto=format&fit=max&s=2bfb190c6bb9cbb36c00319835f36b49',
+				'https://media.guim.co.uk/49dbc03da25c9e5b80560bcfbba1ebb7e727913e/0_76_4280_2568/master/4280.jpg',
+			image: 'https://i.guim.co.uk/img/media/49dbc03da25c9e5b80560bcfbba1ebb7e727913e/0_76_4280_2568/master/4280.jpg?width=300&quality=85&auto=format&fit=max&s=c3d77368e1157df0d76735e692600cb9',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/b389b9f32121293b18d55485cf860c1100eec5d8/102_9_2210_1327/master/2210.jpg?width=300&quality=85&auto=format&fit=max&s=2bfb190c6bb9cbb36c00319835f36b49',
-				'460': 'https://i.guim.co.uk/img/media/b389b9f32121293b18d55485cf860c1100eec5d8/102_9_2210_1327/master/2210.jpg?width=460&quality=85&auto=format&fit=max&s=fe35346cbe540fc7bb3deba09ea01994',
+				'300': 'https://i.guim.co.uk/img/media/49dbc03da25c9e5b80560bcfbba1ebb7e727913e/0_76_4280_2568/master/4280.jpg?width=300&quality=85&auto=format&fit=max&s=c3d77368e1157df0d76735e692600cb9',
+				'460': 'https://i.guim.co.uk/img/media/49dbc03da25c9e5b80560bcfbba1ebb7e727913e/0_76_4280_2568/master/4280.jpg?width=460&quality=85&auto=format&fit=max&s=389e0ee6a02e474d6b73a4bae7e576ce',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -39,29 +39,29 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2023-09-06T15:11:53.000Z',
+			webPublicationDate: '2023-09-27T21:30:09.000Z',
 			headline:
-				'Justified: City Primeval review – a triumphant return for the inexcusably overlooked crime drama ',
-			shortUrl: 'https://www.theguardian.com/p/zzbx8',
-			starRating: 4,
+				'Moulin Rouge: Yes We Can-Can! review – there’s zero glamour in this high-kicking tale',
+			shortUrl: 'https://www.theguardian.com/p/pxkbm',
+			starRating: 2,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/zzbx8',
+				discussionId: '/p/pxkbm',
 			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/06/sri-lankas-easter-bombings-review-startling-and-deeply-disturbing-viewing',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/27/itv-grand-slammers-review-england-rugby-legends-world-cup',
 			linkText:
-				'Sri Lanka’s Easter Bombings review – startling and deeply disturbing viewing',
+				'Grand Slammers review – can prisoners help turn things round for dejected England rugby legends?',
 			showByline: false,
 			byline: 'Jack Seale',
 			masterImage:
-				'https://media.guim.co.uk/79fcd20c6694cd0ec23fbe61b44b3ff16fe0f74c/0_104_3800_2280/master/3800.jpg',
-			image: 'https://i.guim.co.uk/img/media/79fcd20c6694cd0ec23fbe61b44b3ff16fe0f74c/0_104_3800_2280/master/3800.jpg?width=300&quality=85&auto=format&fit=max&s=3e04f5975825109459ff2798a9685a8a',
+				'https://media.guim.co.uk/4aea539eaa687847960bb123b5a0e79aa9e3a877/0_550_8256_4954/master/8256.jpg',
+			image: 'https://i.guim.co.uk/img/media/4aea539eaa687847960bb123b5a0e79aa9e3a877/0_550_8256_4954/master/8256.jpg?width=300&quality=85&auto=format&fit=max&s=57dc7eaff0fb434afa388d457e3413b0',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/79fcd20c6694cd0ec23fbe61b44b3ff16fe0f74c/0_104_3800_2280/master/3800.jpg?width=300&quality=85&auto=format&fit=max&s=3e04f5975825109459ff2798a9685a8a',
-				'460': 'https://i.guim.co.uk/img/media/79fcd20c6694cd0ec23fbe61b44b3ff16fe0f74c/0_104_3800_2280/master/3800.jpg?width=460&quality=85&auto=format&fit=max&s=b1c982d285d4ac8674ac72276cbc2d39',
+				'300': 'https://i.guim.co.uk/img/media/4aea539eaa687847960bb123b5a0e79aa9e3a877/0_550_8256_4954/master/8256.jpg?width=300&quality=85&auto=format&fit=max&s=57dc7eaff0fb434afa388d457e3413b0',
+				'460': 'https://i.guim.co.uk/img/media/4aea539eaa687847960bb123b5a0e79aa9e3a877/0_550_8256_4954/master/8256.jpg?width=460&quality=85&auto=format&fit=max&s=7506dd79b2c91720e5b758965eb46cab',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -71,221 +71,29 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2023-09-05T23:00:40.000Z',
+			webPublicationDate: '2023-09-27T21:30:09.000Z',
 			headline:
-				'Sri Lanka’s Easter Bombings review – startling and deeply disturbing viewing',
-			shortUrl: 'https://www.theguardian.com/p/zzffp',
-			starRating: 4,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/zzffp',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/04/ukraine-holocaust-ground-zero-review-it-is-the-unfathomable-suffering-that-stays-with-you',
-			linkText:
-				'Ukraine: Holocaust Ground Zero review – it is the unfathomable suffering that stays with you',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/f9118407489af8d45edc503206bec9c00c9c8836/99_636_3756_2254/master/3756.jpg',
-			image: 'https://i.guim.co.uk/img/media/f9118407489af8d45edc503206bec9c00c9c8836/99_636_3756_2254/master/3756.jpg?width=300&quality=85&auto=format&fit=max&s=40aa1d99cbce451519b3f9a2f8eb0953',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/f9118407489af8d45edc503206bec9c00c9c8836/99_636_3756_2254/master/3756.jpg?width=300&quality=85&auto=format&fit=max&s=40aa1d99cbce451519b3f9a2f8eb0953',
-				'460': 'https://i.guim.co.uk/img/media/f9118407489af8d45edc503206bec9c00c9c8836/99_636_3756_2254/master/3756.jpg?width=460&quality=85&auto=format&fit=max&s=b6815b057a0290b9a88970f63d6e532a',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-09-04T21:55:13.000Z',
-			headline:
-				'Ukraine: Holocaust Ground Zero review – it is the unfathomable suffering that stays with you',
-			shortUrl: 'https://www.theguardian.com/p/zzafq',
-			starRating: 4,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/zzafq',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/03/is-she-the-wolf-review-this-instantly-addictive-dating-series-is-unbelievably-relaxing',
-			linkText:
-				'Is She the Wolf? review – this instantly addictive dating series is unbelievably relaxing',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/215fcf0b306549d6c09487d4f0cecfd4c5d5502e/0_0_1800_1080/master/1800.jpg',
-			image: 'https://i.guim.co.uk/img/media/215fcf0b306549d6c09487d4f0cecfd4c5d5502e/0_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=29ae3170f8599915053a44090ca5ed97',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/215fcf0b306549d6c09487d4f0cecfd4c5d5502e/0_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=29ae3170f8599915053a44090ca5ed97',
-				'460': 'https://i.guim.co.uk/img/media/215fcf0b306549d6c09487d4f0cecfd4c5d5502e/0_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=eecc5526e35c16727cdbdd17c541828b',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-09-03T04:00:02.000Z',
-			headline:
-				'Is She the Wolf? review – this instantly addictive dating series is unbelievably relaxing',
-			shortUrl: 'https://www.theguardian.com/p/zny87',
+				'Grand Slammers review – can prisoners help turn things round for dejected England rugby legends?',
+			shortUrl: 'https://www.theguardian.com/p/pxk85',
 			starRating: 3,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/zny87',
+				discussionId: '/p/pxk85',
 			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/aug/31/secrets-of-the-female-orgasm-review-a-total-tv-turn-on',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/26/the-great-british-bake-off-2023-review',
 			linkText:
-				'Secrets of the Female Orgasm review – a total TV turn-on ',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/4b8c75ef207aff013b146f9c056184c831fcc144/0_671_3000_1800/master/3000.jpg',
-			image: 'https://i.guim.co.uk/img/media/4b8c75ef207aff013b146f9c056184c831fcc144/0_671_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=e4b073d153931e6e61b31bad69a254f2',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/4b8c75ef207aff013b146f9c056184c831fcc144/0_671_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=e4b073d153931e6e61b31bad69a254f2',
-				'460': 'https://i.guim.co.uk/img/media/4b8c75ef207aff013b146f9c056184c831fcc144/0_671_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=185974994912fb4ecc0ef09902cee1b5',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-08-31T22:05:17.000Z',
-			headline:
-				'Secrets of the Female Orgasm review – a total TV turn-on ',
-			shortUrl: 'https://www.theguardian.com/p/znfgt',
-			starRating: 4,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/znfgt',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/aug/31/bbc-andrew-tate-the-man-who-groomed-the-world-review-the-revelations-in-this-excellent-expose-are-a-total-coup',
-			linkText:
-				'Andrew Tate: The Man Who Groomed the World? review – the revelations in this excellent exposé are a major  coup',
-			showByline: false,
-			byline: 'Rachel Aroesti',
-			masterImage:
-				'https://media.guim.co.uk/cffe55802cc18d103c8d0d57344125b259d422d2/0_169_4293_2576/master/4293.jpg',
-			image: 'https://i.guim.co.uk/img/media/cffe55802cc18d103c8d0d57344125b259d422d2/0_169_4293_2576/master/4293.jpg?width=300&quality=85&auto=format&fit=max&s=ea513d174eff8c44fe74073114d5855a',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/cffe55802cc18d103c8d0d57344125b259d422d2/0_169_4293_2576/master/4293.jpg?width=300&quality=85&auto=format&fit=max&s=ea513d174eff8c44fe74073114d5855a',
-				'460': 'https://i.guim.co.uk/img/media/cffe55802cc18d103c8d0d57344125b259d422d2/0_169_4293_2576/master/4293.jpg?width=460&quality=85&auto=format&fit=max&s=bfb4cc49826b50e9c946236a4fd828b4',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-08-31T21:05:16.000Z',
-			headline:
-				'Andrew Tate: The Man Who Groomed the World? review – the revelations in this excellent exposé are a major  coup',
-			shortUrl: 'https://www.theguardian.com/p/zn4fe',
-			starRating: 4,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/zn4fe',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/aug/31/one-piece-review-netflix-japanese-saga',
-			linkText:
-				'One Piece review – beloved Japanese saga lands on Netflix with a whimper',
-			showByline: false,
-			byline: 'Jesse Hassenger',
-			masterImage:
-				'https://media.guim.co.uk/7a9f653e122c97265762c9acc8403f5acaff4a44/465_0_3000_1800/master/3000.jpg',
-			image: 'https://i.guim.co.uk/img/media/7a9f653e122c97265762c9acc8403f5acaff4a44/465_0_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=56f80b90d9d2ae1004acea28d87a4735',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/7a9f653e122c97265762c9acc8403f5acaff4a44/465_0_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=56f80b90d9d2ae1004acea28d87a4735',
-				'460': 'https://i.guim.co.uk/img/media/7a9f653e122c97265762c9acc8403f5acaff4a44/465_0_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=0b2fa439acddfd60afa303514ff54987',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-08-31T13:31:54.000Z',
-			headline:
-				'One Piece review – beloved Japanese saga lands on Netflix with a whimper',
-			shortUrl: 'https://www.theguardian.com/p/zngtj',
-			starRating: 3,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/zngtj',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/aug/30/heart-of-invictus-review-meghan-and-harrys-new-netflix-show-just-about-avoids-personal-vendettas',
-			linkText:
-				'Heart of Invictus review – Meghan and Harry’s new Netflix show (just about) avoids personal vendettas',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/fd260e4693a525af85c5ffa30e31485695447efb/0_30_3500_2101/master/3500.jpg',
-			image: 'https://i.guim.co.uk/img/media/fd260e4693a525af85c5ffa30e31485695447efb/0_30_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=703c2b88deada8037babed7056eb3e69',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/fd260e4693a525af85c5ffa30e31485695447efb/0_30_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=703c2b88deada8037babed7056eb3e69',
-				'460': 'https://i.guim.co.uk/img/media/fd260e4693a525af85c5ffa30e31485695447efb/0_30_3500_2101/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=f2b3588e20389ca679730e5ada6056fe',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-08-30T12:30:53.000Z',
-			headline:
-				'Heart of Invictus review – Meghan and Harry’s new Netflix show (just about) avoids personal vendettas',
-			shortUrl: 'https://www.theguardian.com/p/znagj',
-			starRating: 4,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/znagj',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/aug/29/the-following-events-are-based-on-a-pack-of-lies-review-bbc-scammer-drama',
-			linkText:
-				'The Following Events Are Based on a Pack of Lies review – a joyfully fun takedown of a scammer ex-husband',
+				'The Great British Bake Off review – Alison Hammond’s sheer joy has reinvigorated this show',
 			showByline: false,
 			byline: 'Leila Latif',
 			masterImage:
-				'https://media.guim.co.uk/412287ef73a46ed97ee60fe6d21741d7d521f863/0_150_4500_2700/master/4500.jpg',
-			image: 'https://i.guim.co.uk/img/media/412287ef73a46ed97ee60fe6d21741d7d521f863/0_150_4500_2700/master/4500.jpg?width=300&quality=85&auto=format&fit=max&s=32b483284feecce408d10a9c693af1ca',
+				'https://media.guim.co.uk/2fc504b8916093c4a2bcf5975c9caec5e604a017/0_0_3500_2102/master/3500.jpg',
+			image: 'https://i.guim.co.uk/img/media/2fc504b8916093c4a2bcf5975c9caec5e604a017/0_0_3500_2102/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5d148c359874621734b30ec0a7689c3f',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/412287ef73a46ed97ee60fe6d21741d7d521f863/0_150_4500_2700/master/4500.jpg?width=300&quality=85&auto=format&fit=max&s=32b483284feecce408d10a9c693af1ca',
-				'460': 'https://i.guim.co.uk/img/media/412287ef73a46ed97ee60fe6d21741d7d521f863/0_150_4500_2700/master/4500.jpg?width=460&quality=85&auto=format&fit=max&s=020159e32e07f274ad6bf6545fb96162',
+				'300': 'https://i.guim.co.uk/img/media/2fc504b8916093c4a2bcf5975c9caec5e604a017/0_0_3500_2102/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5d148c359874621734b30ec0a7689c3f',
+				'460': 'https://i.guim.co.uk/img/media/2fc504b8916093c4a2bcf5975c9caec5e604a017/0_0_3500_2102/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=2bcf530bf7336af354c9a01df038a311',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -295,29 +103,29 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2023-08-29T21:00:18.000Z',
+			webPublicationDate: '2023-09-26T20:30:38.000Z',
 			headline:
-				'The Following Events Are Based on a Pack of Lies review – a joyfully fun takedown of a scammer ex-husband',
-			shortUrl: 'https://www.theguardian.com/p/zmqmt',
+				'The Great British Bake Off review – Alison Hammond’s sheer joy has reinvigorated this show',
+			shortUrl: 'https://www.theguardian.com/p/pxfny',
 			starRating: 4,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/zmqmt',
+				discussionId: '/p/pxfny',
 			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/aug/28/a-very-british-space-launch-review-as-flimsy-as-richard-bransons-rockets',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/26/the-fake-sheikh-review-how-did-so-many-celebrities-fall-for-a-man-with-one-costume-change',
 			linkText:
-				'A Very British Space Launch review – as flimsy as Richard Branson’s rockets',
+				'The Fake Sheikh review – how did so many celebrities fall for a man with one costume change?',
 			showByline: false,
-			byline: 'Rebecca Nicholson',
+			byline: 'Stuart Jeffries',
 			masterImage:
-				'https://media.guim.co.uk/e9d15fa8358ed024723fae9593e96abae6c50cd5/0_197_3050_1830/master/3050.jpg',
-			image: 'https://i.guim.co.uk/img/media/e9d15fa8358ed024723fae9593e96abae6c50cd5/0_197_3050_1830/master/3050.jpg?width=300&quality=85&auto=format&fit=max&s=bbe0d4c71560a91ce451d7e18cdbe807',
+				'https://media.guim.co.uk/b0ee5ab9b0624a2083e8189d1d3402f95b2776ef/0_0_2679_1607/master/2679.jpg',
+			image: 'https://i.guim.co.uk/img/media/b0ee5ab9b0624a2083e8189d1d3402f95b2776ef/0_0_2679_1607/master/2679.jpg?width=300&quality=85&auto=format&fit=max&s=94d30bb42e26a21785b5b7f4dbbdba53',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/e9d15fa8358ed024723fae9593e96abae6c50cd5/0_197_3050_1830/master/3050.jpg?width=300&quality=85&auto=format&fit=max&s=bbe0d4c71560a91ce451d7e18cdbe807',
-				'460': 'https://i.guim.co.uk/img/media/e9d15fa8358ed024723fae9593e96abae6c50cd5/0_197_3050_1830/master/3050.jpg?width=460&quality=85&auto=format&fit=max&s=8c0d3b427e8cff8d89eed8b3f4abc481',
+				'300': 'https://i.guim.co.uk/img/media/b0ee5ab9b0624a2083e8189d1d3402f95b2776ef/0_0_2679_1607/master/2679.jpg?width=300&quality=85&auto=format&fit=max&s=94d30bb42e26a21785b5b7f4dbbdba53',
+				'460': 'https://i.guim.co.uk/img/media/b0ee5ab9b0624a2083e8189d1d3402f95b2776ef/0_0_2679_1607/master/2679.jpg?width=460&quality=85&auto=format&fit=max&s=25f81492397e4fee6749f2fb1004e409',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -327,15 +135,207 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2023-08-28T22:05:01.000Z',
+			webPublicationDate: '2023-09-26T13:04:18.000Z',
 			headline:
-				'A Very British Space Launch review – as flimsy as Richard Branson’s rockets',
-			shortUrl: 'https://www.theguardian.com/p/zmxah',
+				'The Fake Sheikh review – how did so many celebrities fall for a man with one costume change?',
+			shortUrl: 'https://www.theguardian.com/p/pxjnv',
 			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/pxjnv',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/26/netflix-who-killed-jill-dando-review-only-one-person-in-this-show-seems-to-know',
+			linkText:
+				'Who Killed Jill Dando? review – only one person in this show seems to know',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/9473a12fd16d62f385f72ea24d07f3c3c75ade17/161_0_3598_2160/master/3598.jpg',
+			image: 'https://i.guim.co.uk/img/media/9473a12fd16d62f385f72ea24d07f3c3c75ade17/161_0_3598_2160/master/3598.jpg?width=300&quality=85&auto=format&fit=max&s=df31674ebd8573eb17d544adc96237e9',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/9473a12fd16d62f385f72ea24d07f3c3c75ade17/161_0_3598_2160/master/3598.jpg?width=300&quality=85&auto=format&fit=max&s=df31674ebd8573eb17d544adc96237e9',
+				'460': 'https://i.guim.co.uk/img/media/9473a12fd16d62f385f72ea24d07f3c3c75ade17/161_0_3598_2160/master/3598.jpg?width=460&quality=85&auto=format&fit=max&s=90cd98a590ae8cbc5ac0e853fe163117',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-09-26T09:00:15.000Z',
+			headline:
+				'Who Killed Jill Dando? review – only one person in this show seems to know',
+			shortUrl: 'https://www.theguardian.com/p/pxfvp',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/pxfvp',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/25/pete-doherty-who-killed-my-son-review-a-shocking-look-at-a-terribly-bungled-case',
+			linkText:
+				'Pete Doherty, Who Killed My Son? review – a shocking look at a terribly bungled case ',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			masterImage:
+				'https://media.guim.co.uk/a36c8aaeb28623e421ac0f7e8440c920004f5c3b/0_80_1433_860/master/1433.jpg',
+			image: 'https://i.guim.co.uk/img/media/a36c8aaeb28623e421ac0f7e8440c920004f5c3b/0_80_1433_860/master/1433.jpg?width=300&quality=85&auto=format&fit=max&s=99525739172d24a0575f9ce5afe8839b',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/a36c8aaeb28623e421ac0f7e8440c920004f5c3b/0_80_1433_860/master/1433.jpg?width=300&quality=85&auto=format&fit=max&s=99525739172d24a0575f9ce5afe8839b',
+				'460': 'https://i.guim.co.uk/img/media/a36c8aaeb28623e421ac0f7e8440c920004f5c3b/0_80_1433_860/master/1433.jpg?width=460&quality=85&auto=format&fit=max&s=e6fddf04ee34ae5d524b331154c230d3',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-09-25T22:05:17.000Z',
+			headline:
+				'Pete Doherty, Who Killed My Son? review – a shocking look at a terribly bungled case ',
+			shortUrl: 'https://www.theguardian.com/p/pxcxd',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/pxcxd',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/25/the-long-shadow-review-a-shattering-serial-killer-drama-that-breaks-all-the-rules',
+			linkText:
+				'The Long Shadow review – a shattering serial killer drama that breaks all the rules',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/520e6d66da451a99ea1746a9599995c87a0018b7/0_334_5544_3326/master/5544.jpg',
+			image: 'https://i.guim.co.uk/img/media/520e6d66da451a99ea1746a9599995c87a0018b7/0_334_5544_3326/master/5544.jpg?width=300&quality=85&auto=format&fit=max&s=14062691ea7fcedc5cfcc12708dd1dc7',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/520e6d66da451a99ea1746a9599995c87a0018b7/0_334_5544_3326/master/5544.jpg?width=300&quality=85&auto=format&fit=max&s=14062691ea7fcedc5cfcc12708dd1dc7',
+				'460': 'https://i.guim.co.uk/img/media/520e6d66da451a99ea1746a9599995c87a0018b7/0_334_5544_3326/master/5544.jpg?width=460&quality=85&auto=format&fit=max&s=95fb3698b478b34235ca952f42b1eeb1',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-09-25T21:00:16.000Z',
+			headline:
+				'The Long Shadow review – a shattering serial killer drama that breaks all the rules',
+			shortUrl: 'https://www.theguardian.com/p/pxenx',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/pxenx',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/24/hamza-strictly-birds-of-prey-review-a-solid-hour-of-utter-loveliness-from-the-strictly-winner',
+			linkText:
+				'Hamza: Strictly Birds of Prey review – a solid hour of utter loveliness from the Strictly winner',
+			showByline: false,
+			byline: 'Jack Seale',
+			masterImage:
+				'https://media.guim.co.uk/0a40ac3b4c70e4295f91be13188d07cf604dd9fc/0_281_4240_2545/master/4240.jpg',
+			image: 'https://i.guim.co.uk/img/media/0a40ac3b4c70e4295f91be13188d07cf604dd9fc/0_281_4240_2545/master/4240.jpg?width=300&quality=85&auto=format&fit=max&s=e87052834aec3e01438ea4480e533780',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/0a40ac3b4c70e4295f91be13188d07cf604dd9fc/0_281_4240_2545/master/4240.jpg?width=300&quality=85&auto=format&fit=max&s=e87052834aec3e01438ea4480e533780',
+				'460': 'https://i.guim.co.uk/img/media/0a40ac3b4c70e4295f91be13188d07cf604dd9fc/0_281_4240_2545/master/4240.jpg?width=460&quality=85&auto=format&fit=max&s=47d0c3cac75041b424bf5d34d6f5ad43',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-09-24T19:00:05.000Z',
+			headline:
+				'Hamza: Strictly Birds of Prey review – a solid hour of utter loveliness from the Strictly winner',
+			shortUrl: 'https://www.theguardian.com/p/pvyyq',
+			starRating: 5,
 			discussion: {
 				isCommentable: true,
 				isClosedForComments: true,
-				discussionId: '/p/zmxah',
+				discussionId: '/p/pvyyq',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/23/otto-baxter-not-a-fing-horror-story-review-sky-documentaries',
+			linkText:
+				'Otto Baxter: Not a F***ing Horror Story review – a fun, clever show about a director with a difference',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			masterImage:
+				'https://media.guim.co.uk/6169a00dd6f0a019e1f2b686e7698cfc802d585b/0_275_8256_4954/master/8256.jpg',
+			image: 'https://i.guim.co.uk/img/media/6169a00dd6f0a019e1f2b686e7698cfc802d585b/0_275_8256_4954/master/8256.jpg?width=300&quality=85&auto=format&fit=max&s=66262a747fa3c7e614fd8bfe24ddd926',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/6169a00dd6f0a019e1f2b686e7698cfc802d585b/0_275_8256_4954/master/8256.jpg?width=300&quality=85&auto=format&fit=max&s=66262a747fa3c7e614fd8bfe24ddd926',
+				'460': 'https://i.guim.co.uk/img/media/6169a00dd6f0a019e1f2b686e7698cfc802d585b/0_275_8256_4954/master/8256.jpg?width=460&quality=85&auto=format&fit=max&s=94dad93562c3c88c249d85adab589414',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-09-23T21:45:05.000Z',
+			headline:
+				'Otto Baxter: Not a F***ing Horror Story review – a fun, clever show about a director with a difference',
+			shortUrl: 'https://www.theguardian.com/p/pvyka',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/pvyka',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/22/minx-season-two-review-this-feminist-porn-comedy-is-an-absolute-treat-of-a-show',
+			linkText:
+				'Minx season two review – this feminist porn comedy is an absolute treat of a show',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			masterImage:
+				'https://media.guim.co.uk/4488baa126d21e7ab29d1d06c1b2c9b6ec5ad479/0_54_1800_1080/master/1800.jpg',
+			image: 'https://i.guim.co.uk/img/media/4488baa126d21e7ab29d1d06c1b2c9b6ec5ad479/0_54_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=dec2ab6c2537f7a86fb9bd553bc2666e',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/4488baa126d21e7ab29d1d06c1b2c9b6ec5ad479/0_54_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=dec2ab6c2537f7a86fb9bd553bc2666e',
+				'460': 'https://i.guim.co.uk/img/media/4488baa126d21e7ab29d1d06c1b2c9b6ec5ad479/0_54_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=c7c84a17c36c57a3311a8402785c8bd8',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-09-22T14:00:01.000Z',
+			headline:
+				'Minx season two review – this feminist porn comedy is an absolute treat of a show',
+			shortUrl: 'https://www.theguardian.com/p/pvpkq',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/pvpkq',
 			},
 		},
 	],
