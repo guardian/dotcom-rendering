@@ -32,7 +32,7 @@ export const AppsLightboxImage = ({
 	isLazy = true,
 }: Props) => {
 	const onClick = () => {
-		// TODO explain why
+		// Handle the case the device is rotated
 		const imageWidth = Math.max(window.innerHeight, window.innerWidth);
 		const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
 		void getGalleryClient()
