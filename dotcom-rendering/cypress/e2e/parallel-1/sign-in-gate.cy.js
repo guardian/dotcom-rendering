@@ -1,6 +1,7 @@
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
+import { Labs } from '../../../fixtures/generated/articles/Labs';
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
@@ -43,20 +44,17 @@ describe('Sign In Gate Tests', function () {
 	const GATE_HEADER_ALT = 'Take a moment to register';
 	// helper method over the cypress visit method to avoid having to repeat the same url by setting a default
 	// can override the parameter if required
-	const visitArticle = (
-		url = 'https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-	) => {
-		cy.visit(`/Article/${url}`);
-	};
 
-	const postArticle = ({ switchOverride } = {}) => {
+	const postArticle = ({ fixture, switchOverride }) => {
 		const articleJson = {
-			...Standard,
+			...fixture,
 			config: {
-				...Standard.config,
+				...fixture.config,
 				switches: {
-					...Standard.switches,
+					...fixture.switches,
 					...switchOverride,
+					okta: false,
+					idCookieRefresh: false,
 				},
 			},
 		};
@@ -78,18 +76,18 @@ describe('Sign In Gate Tests', function () {
 	// we call visit and scroll for most test, so this wrapper combines the two
 	// while preserving the ability to set the parameters if required
 	const visitArticleAndScrollToGateForLazyLoad = ({
-		url,
+		fixture = Standard,
 		roughPosition,
 	} = {}) => {
-		visitArticle(url);
+		postArticle({ fixture });
 		scrollToGateForLazyLoading(roughPosition);
 	};
 
 	const postArticleAndScrollToGateForLazyLoad = ({
 		roughPosition,
-		switchOverride,
+		switchOverride = {},
 	} = {}) => {
-		postArticle({ switchOverride });
+		postArticle({ fixture: Standard, switchOverride });
 		scrollToGateForLazyLoading(roughPosition);
 	};
 
@@ -157,16 +155,27 @@ describe('Sign In Gate Tests', function () {
 
 		it('should not load the sign in gate if the article is not a valid section (membership)', function () {
 			visitArticleAndScrollToGateForLazyLoad({
-				url: 'https://www.theguardian.com/membership/2018/nov/15/support-guardian-readers-future-journalism',
+				fixture: {
+					...Standard,
+					config: {
+						...Standard.config,
+						section: 'membership',
+					},
+				},
 			});
 
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
 		});
 
 		it('should not load the sign in gate if the article is a paid article', function () {
-			visitArticleAndScrollToGateForLazyLoad({
-				url: 'https://www.theguardian.com/defining-moment/2016/jun/29/challenges-opportunities-life-coach-goals-empower-proactive',
+			cy.on('uncaught:exception', (err) => {
+				if (err.message.includes('window.require')) {
+					// This error is unrelated to the test in question so return  false to prevent
+					// this error from failing this test
+					return false;
+				}
 			});
+			visitArticleAndScrollToGateForLazyLoad({ fixture: Labs });
 
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
 		});

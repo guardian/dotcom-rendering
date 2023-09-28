@@ -1,5 +1,6 @@
 import { JSDOM } from 'jsdom';
 import type {
+	CartoonBlockElement,
 	FEElement,
 	ImageBlockElement,
 	MultiImageBlockElement,
@@ -36,6 +37,16 @@ export const isImage = (element?: FEElement): element is ImageBlockElement => {
 	if (!element) return false;
 	return (
 		element._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
+	);
+};
+
+export const isCartoon = (
+	element?: FEElement,
+): element is CartoonBlockElement => {
+	if (!element) return false;
+	return (
+		element._type ===
+		'model.dotcomrendering.pageElements.CartoonBlockElement'
 	);
 };
 
@@ -129,6 +140,15 @@ export const addLightboxData = (elements: FEElement[]): FEElement[] =>
 					lightbox: {
 						caption: thisElement.data.caption,
 						credit: thisElement.data.credit,
+					},
+			  }
+			: isCartoon(thisElement)
+			? {
+					...thisElement,
+					// Copy caption and credit
+					lightbox: {
+						caption: thisElement.caption,
+						credit: thisElement.credit,
 					},
 			  }
 			: thisElement,

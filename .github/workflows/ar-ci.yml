@@ -1,10 +1,7 @@
-name: "AR CI"
+name: AR CI
 
 on:
   push:
-    paths-ignore:
-      - "dotcom-rendering/**"
-
   workflow_dispatch:
 
 # Allow queued workflows to interrupt previous runs
@@ -19,6 +16,7 @@ permissions:
 
 jobs:
   build:
+    name: AR CI
     runs-on: ubuntu-latest
 
     # Checkout the repository
@@ -70,4 +68,3 @@ jobs:
               - apps-rendering/dist/server/mobile-apps-rendering.zip
             mobile-assets:
               - apps-rendering/dist/assets/
-
