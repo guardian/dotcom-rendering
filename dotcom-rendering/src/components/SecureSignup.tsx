@@ -68,7 +68,7 @@ export const SecureSignup = ({
 
 	return (
 		<>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island deferUntil="idle">
 				<SecureSignupIframe
 					name={name}
 					html={html}
