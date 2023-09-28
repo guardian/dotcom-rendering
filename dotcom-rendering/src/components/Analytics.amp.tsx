@@ -29,15 +29,16 @@ export const Analytics = ({
 }: Props) => {
 	const scripts: string[] = [
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-		`<amp-geo>
+		`<amp-geo layout="nodisplay">
 		 	<script type="application/json">
-		  	{
+			  {
+				"AmpBind": true,
 				"ISOCountryGroups": {
-			  		"restrictedCountries": {
-					"countries": ["US", "CA"]  // Add the ISO country codes of the restricted regions
-			  		}
+				  "ccpaCountries": [ "us" ],
+				  "tcfv2Countries": [ "ca", "gb", "preset-eea" ],
+				  "ausCountries": [ "au" ]
 				}
-		  	}
+			  }
 			</script>
 	 	 </amp-geo>`,
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-block-on-consent data-credentials="include">
@@ -48,15 +49,31 @@ export const Analytics = ({
 						"pageViewWithConsent": "\${additionalBase}&componentEvent=\${componentEvent}"
 					},
 					"triggers": {
-						"trackPageview": {
+						"trackPageviewTcf": {
 							"on": "visible",
-							"request": "pageViewWithConsent",
+							"request": "pageViewWithConsentTest",
+							"selector": ".amp-geo-group-tcfv2Countries",
 							"vars": {
-								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%22%5B'01:TCF.v2','03:\${consentString}','08:\${consentState}'%5D%22%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:TCF.v2%22,%2202:\${clientId(consentUUID)}%22,%2203:\${consentString}%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+							}
+						},
+						"trackPageviewCcpa": {
+							"on": "visible",
+							"request": "pageViewWithConsentTest",
+							"selector": ".amp-geo-group-ccpaCountries",
+							"vars": {
+								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:CCPA%22,%2204:\${clientId(ccpaUUID)%22,%2205:YYYY%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+							}
+						},
+						"trackPageviewAus": {
+							"on": "visible",
+							"request": "pageViewWithConsentTest",
+							"selector": ".amp-geo-group-ausCountries",
+							"vars": {
+								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:AUS%22,%2206:XXXX%22,%2207:YYYY%22,%2208:ZZZZ%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
 							}
 						}
 					},
-					"selector": "amp-geo[match=restrictedCountries]",
 					"transport": {
 						"beacon": false,
 						"xhrpost": false,
