@@ -176,7 +176,7 @@ export const renderTagFront = ({
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<TagFrontPage tagFront={tagFront} NAV={NAV} />,
+			<TagFrontPage tagFront={tagFront} NAV={NAV} />
 		</ConfigProvider>,
 	);
 
