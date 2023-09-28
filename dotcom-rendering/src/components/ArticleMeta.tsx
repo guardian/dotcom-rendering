@@ -442,8 +442,7 @@ export const ArticleMeta = ({
 						]}
 					>
 						<Counts format={format}>
-							{/* The meta-number css is needed by Counts.tsx */}
-							<div className="meta-number">
+							<div>
 								{isCommentable && (
 									<Island clientOnly={true} deferUntil="idle">
 										<CommentCount
