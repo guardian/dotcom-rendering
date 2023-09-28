@@ -29,19 +29,7 @@ export const Analytics = ({
 }: Props) => {
 	const scripts: string[] = [
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-		`<amp-geo layout="nodisplay">
-		 	<script type="application/json">
-			  {
-				"AmpBind": true,
-				"ISOCountryGroups": {
-				  "ccpaCountries": [ "us" ],
-				  "tcfv2Countries": [ "ca", "gb", "preset-eea" ],
-				  "ausCountries": [ "au" ]
-				}
-			  }
-			</script>
-	 	 </amp-geo>`,
-		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-block-on-consent data-credentials="include">
+		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include">
 			<script type="application/json">
 				{
 					"requests": {
@@ -52,7 +40,7 @@ export const Analytics = ({
 						"trackPageviewTcf": {
 							"on": "visible",
 							"request": "pageViewWithConsentTest",
-							"selector": ".amp-geo-group-tcfv2Countries",
+							"selector": ".amp-geo-group-tcfv2",
 							"vars": {
 								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:TCF.v2%22,%2202:\${clientId(consentUUID)}%22,%2203:\${consentString}%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
 							}
@@ -60,17 +48,17 @@ export const Analytics = ({
 						"trackPageviewCcpa": {
 							"on": "visible",
 							"request": "pageViewWithConsentTest",
-							"selector": ".amp-geo-group-ccpaCountries",
+							"selector": ".amp-geo-group-ccpa",
 							"vars": {
-								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:CCPA%22,%2204:\${clientId(ccpaUUID)}%22,%2205:false%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:CCPA%22,%2204:\${clientId(ccpaUUID)}%22,%2205:true%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
 							}
 						},
 						"trackPageviewAus": {
 							"on": "visible",
 							"request": "pageViewWithConsentTest",
-							"selector": ".amp-geo-group-ausCountries",
+							"selector": ".amp-geo-group-aus",
 							"vars": {
-								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:AUS%22,%2206:\${clientId(ccpaUUID)}%22,%2207:\${clientId(consentStatus)}%22,%2208:false%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:AUS%22,%2206:\${clientId(ccpaUUID)}%22,%2207:\${clientId(consentStatus)}%22,%2208:true%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
 							}
 						}
 					},
