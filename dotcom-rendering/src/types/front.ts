@@ -512,22 +512,7 @@ type FEFrontPropertiesType = {
 			edition: {
 				id: string;
 			};
-			branding?: {
-				brandingType: {
-					name: string;
-				};
-				sponsorName: string;
-				logo: {
-					src: string;
-					dimensions: {
-						width: number;
-						height: number;
-					};
-					link: string;
-					label: string;
-				};
-				aboutThisLink: string;
-			};
+			branding?: Branding;
 		}>;
 		editionAdTargetings: unknown;
 		prebidIndexSites?: unknown;
