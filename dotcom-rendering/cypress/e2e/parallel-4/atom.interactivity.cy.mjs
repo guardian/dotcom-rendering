@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
-import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-import { disableCMP } from '../../lib/disableCMP.js';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.mjs';
+import { disableCMP } from '../../lib/disableCMP.mjs';
 
 const qandaUrl =
 	'https://www.theguardian.com/technology/2018/sep/19/time-to-regulate-bitcoin-says-treasury-committee-report';

@@ -1,5 +1,5 @@
 import { disableCMP } from '../../lib/disableCMP';
-import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.mjs';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Labs } from '../../../fixtures/generated/articles/Labs';
 /* eslint-disable no-undef */

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 import { disableCMP } from '../../lib/disableCMP';
-import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.mjs';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 
 const articleUrl =

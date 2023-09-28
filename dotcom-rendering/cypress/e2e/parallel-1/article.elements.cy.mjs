@@ -1,5 +1,5 @@
-import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-import { disableCMP } from '../../lib/disableCMP.js';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.mjs';
+import { disableCMP } from '../../lib/disableCMP.mjs';
 
 describe('Elements', function () {
 	beforeEach(function () {

@@ -2,7 +2,7 @@
 /* eslint-disable func-names */
 import { mockApi } from '../../lib/mocks';
 import { disableCMP } from '../../lib/disableCMP';
-import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.mjs';
 
 const READER_REVENUE_TITLE_TEXT = 'Support the';
 const articleUrl =

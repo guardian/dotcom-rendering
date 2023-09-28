@@ -1,4 +1,4 @@
-import { disableCMP } from '../../lib/disableCMP.js';
+import { disableCMP } from '../../lib/disableCMP.mjs';
 
 const optOutOfArticleCountConsent = () => {
 	cy.setCookie('gu_article_count_opt_out', 'true');

@@ -1,5 +1,5 @@
 import { storage } from '@guardian/libs';
-import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.mjs';
 import { Standard } from '../../fixtures/manual/standard-article.js';
 
 const idapiIdentifiersResponse = `{ "id": "000000000", "brazeUuid": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", "puzzleUuid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "googleTagId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }`;

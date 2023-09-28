@@ -18,7 +18,9 @@
 	},
 	"exclude": [
 		"cypress",
-		"./cypress.config.js",
+		//Required to prevent polluting Jest global types
+		// https://github.com/cypress-io/cypress/issues/22059#issuecomment-1148921141
+		"./cypress.config.mjs",
 		"storybook-static",
 		"target",
 		"dist",

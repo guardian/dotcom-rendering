@@ -1,6 +1,6 @@
-import { cmpIframe } from '../../lib/cmpIframe.js';
-import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
-import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { cmpIframe } from '../../lib/cmpIframe.mjs';
+import { privacySettingsIframe } from '../../lib/privacySettingsIframe.mjs';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.mjs';
 import { storage } from '@guardian/libs';
 
 describe('Commercial E2E tests', function () {

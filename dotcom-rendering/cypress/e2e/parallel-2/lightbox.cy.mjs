@@ -2,7 +2,7 @@
 /* eslint-disable func-names */
 import { mockApi } from '../../lib/mocks';
 import { disableCMP } from '../../lib/disableCMP';
-import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.mjs';
 
 const articleUrl =
 	'https://www.theguardian.com/artanddesign/2022/dec/26/a-lighter-side-of-life-picture-essay';

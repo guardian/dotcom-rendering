@@ -1,5 +1,5 @@
-import { disableCMP } from '../../lib/disableCMP.js';
-import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { disableCMP } from '../../lib/disableCMP.mjs';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.mjs';
 
 describe('The web document renders with the correct meta and analytics elements and attributes', function () {
 	beforeEach(function () {
