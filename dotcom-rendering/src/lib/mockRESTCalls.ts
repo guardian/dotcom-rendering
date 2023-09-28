@@ -240,19 +240,6 @@ export const mockRESTCalls = (): typeof fetchMock => {
 				},
 				{ overwriteRoutes: false },
 			)
-			// Article share count
-			.get(
-				/.*api.nextgen.guardianapps.co.uk\/sharecount.*/,
-				{
-					status: 200,
-					body: {
-						path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
-						share_count: 273,
-						refreshStatus: true,
-					},
-				},
-				{ overwriteRoutes: false },
-			)
 			// Get 'short' discussion - top comments
 			.get(
 				/.*discussion.theguardian.com\/discussion-api\/discussion\/p\/4v8kk\/topcomments/,
