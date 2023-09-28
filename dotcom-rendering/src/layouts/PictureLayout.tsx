@@ -1,26 +1,23 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
-	border,
 	brandBackground,
 	brandBorder,
 	brandLine,
 	from,
-	labs,
 	neutral,
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
-import { useConfig } from '../components/ConfigContext';
+import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -28,31 +25,27 @@ import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
-import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
-import type { DCRArticle } from '../types/frontend';
+import type { FEArticleType } from '../types/frontend';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
-const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
+const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			/* IE Fallback */
@@ -82,17 +75,17 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					Vertical grey border
 					Main content
 					Right Column
-
+					
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 219px 1px 1fr;
 					grid-template-areas:
-						'title  border  headline    headline'
-						'lines  border  media       media'
-						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'.      border  body        right-column'
-						'.      border  .           right-column';
+						'title  border  headline'
+						'lines  border  media'
+						'meta   border  media'
+						'meta   border  standfirst'
+						'.      border  submeta'
+						'.      border  .';
 				}
 
 				${until.wide} {
@@ -101,9 +94,9 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title  border  headline    headline'
 						'lines  border  media       media'
 						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'.      border  body        right-column'
-						'.      border  .           right-column';
+						'meta   border  standfirst  standfirst'
+						'.      border  submeta     submeta'
+						'.      border  .           . ';
 				}
 
 				/*
@@ -113,16 +106,17 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
+					grid-column-gap: 0px;
+					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
-						'title      right-column'
-						'headline   right-column'
-						'standfirst right-column'
-						'media      right-column'
-						'lines      right-column'
-						'meta       right-column'
-						'body       right-column'
-						'.          right-column';
+						'title     '
+						'headline  '
+						'lines     '
+						'meta      '
+						'media     '
+						'standfirst'
+						'submeta   '
+						'.         ';
 				}
 
 				${until.desktop} {
@@ -131,24 +125,24 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title'
 						'headline'
-						'standfirst'
-						'media'
 						'lines'
 						'meta'
-						'body';
+						'media'
+						'standfirst'
+						'submeta';
 				}
 
 				${until.tablet} {
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
-						'media'
 						'title'
 						'headline'
-						'standfirst'
 						'lines'
 						'meta'
-						'body';
+						'media'
+						'standfirst'
+						'submeta';
 				}
 			}
 		`}
@@ -163,59 +157,88 @@ const maxWidth = css`
 	}
 `;
 
-const stretchLines = css`
+const mainMediaWrapper = (displayAvatarUrl: boolean) => css`
+	position: relative;
 	${until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
+		margin-left: 20px;
+		margin-right: 20px;
 	}
 	${until.mobileLandscape} {
-		margin-left: -10px;
-		margin-right: -10px;
+		margin-left: 10px;
+		margin-right: 10px;
 	}
-`;
-const mainMediaWrapper = css`
-	position: relative;
+	${displayAvatarUrl
+		? css`
+				margin-top: 8px;
+		  `
+		: ``}
 `;
 
-const PositionHeadline = ({
-	design,
-	children,
-}: {
-	design: ArticleDesign;
-	children: React.ReactNode;
-}) => {
-	switch (design) {
-		case ArticleDesign.Interview:
-			return (
-				<div
-					css={css`
-						${from.leftCol} {
-							margin-bottom: -100px;
-						}
-					`}
-				>
-					<div css={maxWidth}>{children}</div>
-				</div>
-			);
-		default:
-			return <div css={maxWidth}>{children}</div>;
+const avatarHeadlineWrapper = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
+
+// This styling taken from the similar approach in CommentLayout.tsx
+// If in mobile increase the margin top and margin right deficit
+const avatarPositionStyles = css`
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+	margin-bottom: -29px;
+	margin-top: -50px;
+	pointer-events: none;
+	${until.tablet} {
+		overflow: hidden;
 	}
-};
+
+	/*  Why target img element?
+
+        Because only in this context, where we have overflow: hidden
+        and the margin-bottom and margin-top of avatarPositionStyles
+        do we also want to apply our margin-right. These styles
+        are tightly coupled in this context, and so it does not
+        make sense to move them to the avatar component.
+
+        It's imperfect from the perspective of DCR, the alternative is to bust
+        the combined elements into a separate component (with the
+        relevant stories) and couple them that way, which might be what
+        you want to do if you find yourself adding more styles
+        to this section. For now, this works without making me 🤢.
+    */
+
+	${from.mobile} {
+		img {
+			margin-right: -1.85rem;
+		}
+	}
+	${from.mobileLandscape} {
+		img {
+			margin-right: -1.25rem;
+		}
+	}
+`;
+
+const LeftColLines = (displayAvatarUrl: boolean) => css`
+	margin-bottom: 4px;
+	${displayAvatarUrl
+		? css`
+				margin-top: -29px;
+		  `
+		: ''}
+`;
 
 interface Props {
-	article: DCRArticle;
+	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
 
-export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
+export const PictureLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
-
-	const showBodyEndSlot =
-		parse(article.slotMachineFlags ?? '').showBodyEnd ||
-		article.config.switches.slotBodyEnd;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -231,200 +254,129 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 
 	const renderAds = canRenderAds(article);
 
-	const isLabs = format.theme === ArticleSpecial.Labs;
+	const showSubNavTopBorder = false;
 
-	const { renderingTarget } = useConfig();
+	const avatarUrl = getSoleContributor(
+		article.tags,
+		article.byline,
+	)?.bylineLargeImageUrl;
+
+	const displayAvatarUrl = avatarUrl ? true : false;
 
 	return (
 		<>
-			{!isLabs ? (
-				<>
-					<div>
-						{renderAds && (
-							<Stuck>
-								<Section
-									fullWidth={true}
-									showTopBorder={false}
-									showSideBorders={false}
-									padSides={false}
-									shouldCenter={false}
-								>
-									<HeaderAdSlot />
-								</Section>
-							</Stuck>
-						)}
-						<SendToBack>
-							<Section
-								fullWidth={true}
-								shouldCenter={false}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								backgroundColour={brandBackground.primary}
-								element="header"
-							>
-								<Header
-									editionId={article.editionId}
-									idUrl={article.config.idUrl}
-									mmaUrl={article.config.mmaUrl}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									urls={article.nav.readerRevenueLinks.header}
-									remoteHeader={
-										!!article.config.switches.remoteHeader
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									idApiUrl={article.config.idApiUrl}
-									headerTopBarSearchCapiSwitch={
-										!!article.config.switches
-											.headerTopBarSearchCapi
-									}
-								/>
-							</Section>
-							<Section
-								fullWidth={true}
-								borderColour={brandLine.primary}
-								showTopBorder={false}
-								padSides={false}
-								backgroundColour={brandBackground.primary}
-								element="nav"
-								format={format}
-							>
-								<Nav
-									nav={NAV}
-									isImmersive={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
-									displayRoundel={
-										format.display ===
-											ArticleDisplay.Immersive ||
-										format.theme === ArticleSpecial.Labs
-									}
-									selectedPillar={NAV.selectedPillar}
-									subscribeUrl={
-										article.nav.readerRevenueLinks.header
-											.subscribe
-									}
-									editionId={article.editionId}
-									headerTopBarSwitch={
-										!!article.config.switches.headerTopNav
-									}
-								/>
-							</Section>
-
-							{NAV.subNavSections && (
-								<Section
-									fullWidth={true}
-									backgroundColour={
-										palette.background.article
-									}
-									padSides={false}
-									element="aside"
-									format={format}
-								>
-									<Island deferUntil="idle">
-										<SubNav
-											subNavSections={NAV.subNavSections}
-											currentNavLink={NAV.currentNavLink}
-											linkHoverColour={
-												palette.text.articleLinkHover
-											}
-											borderColour={palette.border.subNav}
-											subNavLinkColour={
-												palette.text.subNavLink
-											}
-										/>
-									</Island>
-								</Section>
-							)}
-
-							<Section
-								fullWidth={true}
-								backgroundColour={palette.background.article}
-								padSides={false}
-								showTopBorder={false}
-								borderColour={palette.border.secondary}
-							>
-								<StraightLines
-									count={4}
-									color={palette.border.secondary}
-									cssOverrides={css`
-										display: block;
-									`}
-								/>
-							</Section>
-						</SendToBack>
-					</div>
-				</>
-			) : (
-				// Else, this is a labs article so just show Nav and the Labs header
-				<>
-					<div>
-						{renderAds && (
-							<Stuck zIndex="stickyAdWrapper">
-								<Section
-									fullWidth={true}
-									showTopBorder={false}
-									showSideBorders={false}
-									padSides={false}
-								>
-									<HeaderAdSlot />
-								</Section>
-							</Stuck>
-						)}
-						<Stuck zIndex="stickyAdWrapperNav">
-							<Section
-								fullWidth={true}
-								borderColour={brandLine.primary}
-								showTopBorder={false}
-								padSides={false}
-								backgroundColour={brandBackground.primary}
-								element="nav"
-							>
-								<Nav
-									nav={NAV}
-									isImmersive={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
-									displayRoundel={
-										format.display ===
-											ArticleDisplay.Immersive ||
-										format.theme === ArticleSpecial.Labs
-									}
-									selectedPillar={NAV.selectedPillar}
-									subscribeUrl={
-										article.nav.readerRevenueLinks.header
-											.subscribe
-									}
-									editionId={article.editionId}
-									headerTopBarSwitch={
-										!!article.config.switches.headerTopNav
-									}
-								/>
-							</Section>
-						</Stuck>
-					</div>
-					<Stuck zIndex="stickyAdWrapperLabsHeader">
+			<div>
+				{renderAds && (
+					<Stuck>
 						<Section
 							fullWidth={true}
 							showTopBorder={false}
-							backgroundColour={labs[400]}
-							borderColour={border.primary}
-							sectionId="labs-header"
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
 						>
-							<LabsHeader />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
-				</>
-			)}
+				)}
+				<SendToBack>
+					<Section
+						fullWidth={true}
+						shouldCenter={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						padSides={false}
+						backgroundColour={brandBackground.primary}
+						element="header"
+					>
+						<Header
+							editionId={article.editionId}
+							idUrl={article.config.idUrl}
+							mmaUrl={article.config.mmaUrl}
+							discussionApiUrl={article.config.discussionApiUrl}
+							urls={article.nav.readerRevenueLinks.header}
+							remoteHeader={
+								!!article.config.switches.remoteHeader
+							}
+							contributionsServiceUrl={contributionsServiceUrl}
+							idApiUrl={article.config.idApiUrl}
+							headerTopBarSearchCapiSwitch={
+								!!article.config.switches.headerTopBarSearchCapi
+							}
+						/>
+					</Section>
+					<Section
+						fullWidth={true}
+						borderColour={brandLine.primary}
+						showTopBorder={false}
+						padSides={false}
+						backgroundColour={brandBackground.primary}
+						element="nav"
+						format={format}
+					>
+						<Nav
+							nav={NAV}
+							isImmersive={
+								format.display === ArticleDisplay.Immersive
+							}
+							displayRoundel={
+								format.display === ArticleDisplay.Immersive ||
+								format.theme === ArticleSpecial.Labs
+							}
+							selectedPillar={NAV.selectedPillar}
+							subscribeUrl={
+								article.nav.readerRevenueLinks.header.subscribe
+							}
+							editionId={article.editionId}
+							headerTopBarSwitch={
+								!!article.config.switches.headerTopNav
+							}
+						/>
+					</Section>
+
+					{NAV.subNavSections && (
+						<Section
+							fullWidth={true}
+							backgroundColour={palette.background.article}
+							padSides={false}
+							element="aside"
+							format={format}
+							showTopBorder={showSubNavTopBorder}
+						>
+							<Island deferUntil="idle">
+								<SubNav
+									subNavSections={NAV.subNavSections}
+									currentNavLink={NAV.currentNavLink}
+									linkHoverColour={
+										palette.text.articleLinkHover
+									}
+									borderColour={palette.border.subNav}
+									subNavLinkColour={palette.text.subNavLink}
+								/>
+							</Island>
+						</Section>
+					)}
+
+					<Section
+						fullWidth={true}
+						backgroundColour={palette.background.article}
+						padSides={false}
+						showTopBorder={false}
+						borderColour={palette.border.secondary}
+					>
+						<StraightLines
+							count={4}
+							color={palette.border.secondary}
+							cssOverrides={css`
+								display: block;
+							`}
+						/>
+					</Section>
+				</SendToBack>
+			</div>
 
 			<main
-				data-layout="ShowcaseLayout"
+				data-layout="PictureLayout"
 				id="maincontent"
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
@@ -436,9 +388,82 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 					element="article"
 					borderColour={palette.border.secondary}
 				>
-					<ShowcaseGrid>
+					<PictureGrid>
+						<GridItem area="title" element="aside">
+							<ArticleTitle
+								format={format}
+								tags={article.tags}
+								sectionLabel={article.sectionLabel}
+								sectionUrl={article.sectionUrl}
+								guardianBaseURL={article.guardianBaseURL}
+								badge={article.badge?.enhanced}
+							/>
+						</GridItem>
+						<GridItem area="border">
+							<Border format={format} />
+						</GridItem>
+
+						{displayAvatarUrl ? (
+							<GridItem area="headline">
+								<div css={[avatarHeadlineWrapper, avatarUrl]}>
+									<div css={maxWidth}>
+										<ArticleHeadline
+											format={format}
+											headlineString={article.headline}
+											tags={article.tags}
+											byline={article.byline}
+											webPublicationDateDeprecated={
+												article.webPublicationDateDeprecated
+											}
+											hasStarRating={
+												typeof article.starRating ===
+												'number'
+											}
+											hasAvatar={displayAvatarUrl}
+										/>
+									</div>
+
+									<div>
+										{!!avatarUrl && (
+											<div css={avatarPositionStyles}>
+												<ContributorAvatar
+													imageSrc={avatarUrl}
+													imageAlt={
+														article.byline ?? ''
+													}
+												/>
+											</div>
+										)}
+										<StraightLines
+											count={8}
+											cssOverrides={css`
+												display: block;
+											`}
+											color={palette.border.secondary}
+										/>
+									</div>
+								</div>
+							</GridItem>
+						) : (
+							<GridItem area="headline">
+								<div css={maxWidth}>
+									<ArticleHeadline
+										format={format}
+										headlineString={article.headline}
+										tags={article.tags}
+										byline={article.byline}
+										webPublicationDateDeprecated={
+											article.webPublicationDateDeprecated
+										}
+										hasStarRating={
+											article.starRating !== undefined
+										}
+									/>
+								</div>
+							</GridItem>
+						)}
 						<GridItem area="media">
-							<div css={mainMediaWrapper}>
+							<div css={mainMediaWrapper(displayAvatarUrl)}>
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
@@ -459,35 +484,6 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 								/>
 							</div>
 						</GridItem>
-						<GridItem area="title" element="aside">
-							<ArticleTitle
-								format={format}
-								tags={article.tags}
-								sectionLabel={article.sectionLabel}
-								sectionUrl={article.sectionUrl}
-								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge?.enhanced}
-							/>
-						</GridItem>
-						<GridItem area="border">
-							<Border format={format} />
-						</GridItem>
-						<GridItem area="headline">
-							<PositionHeadline design={format.design}>
-								<ArticleHeadline
-									format={format}
-									headlineString={article.headline}
-									tags={article.tags}
-									byline={article.byline}
-									webPublicationDateDeprecated={
-										article.webPublicationDateDeprecated
-									}
-									hasStarRating={
-										article.starRating !== undefined
-									}
-								/>
-							</PositionHeadline>
-						</GridItem>
 						<GridItem area="standfirst">
 							<Standfirst
 								format={format}
@@ -495,17 +491,18 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 							/>
 						</GridItem>
 						<GridItem area="lines">
-							<div css={maxWidth}>
-								<div css={stretchLines}>
-									<DecideLines
-										format={format}
-										color={palette.border.secondary}
-									/>
-								</div>
+							<div css={LeftColLines(displayAvatarUrl)}>
+								<StraightLines
+									count={displayAvatarUrl ? 8 : 4}
+									cssOverrides={css`
+										display: block;
+									`}
+									color={palette.border.secondary}
+								/>
 							</div>
 						</GridItem>
 						<GridItem area="meta" element="aside">
-							<div css={maxWidth}>
+							<div>
 								<ArticleMeta
 									branding={branding}
 									format={format}
@@ -532,76 +529,11 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 								/>
 							</div>
 						</GridItem>
-						<GridItem area="body">
+						<GridItem area="submeta">
 							<ArticleContainer format={format}>
-								<ArticleBody
-									format={format}
-									blocks={article.blocks}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									switches={article.config.switches}
-									isSensitive={article.config.isSensitive}
-									isAdFreeUser={article.isAdFreeUser}
-									sectionId={article.config.section}
-									shouldHideReaderRevenue={
-										article.shouldHideReaderRevenue
-									}
-									tags={article.tags}
-									isPaidContent={
-										!!article.config.isPaidContent
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									contentType={article.contentType}
-									isPreview={article.config.isPreview}
-									idUrl={article.config.idUrl ?? ''}
-									isDev={!!article.config.isDev}
-									keywordIds={article.config.keywordIds}
-									abTests={article.config.abTests}
-									tableOfContents={article.tableOfContents}
-									lang={article.lang}
-									isRightToLeftLang={
-										article.isRightToLeftLang
-									}
-								/>
-								{showBodyEndSlot && (
-									<Island clientOnly={true}>
-										<SlotBodyEnd
-											contentType={article.contentType}
-											contributionsServiceUrl={
-												contributionsServiceUrl
-											}
-											idApiUrl={article.config.idApiUrl}
-											isMinuteArticle={
-												article.pageType.isMinuteArticle
-											}
-											isPaidContent={
-												article.pageType.isPaidContent
-											}
-											keywordIds={
-												article.config.keywordIds
-											}
-											pageId={article.pageId}
-											sectionId={article.config.section}
-											shouldHideReaderRevenue={
-												article.shouldHideReaderRevenue
-											}
-											stage={article.config.stage}
-											tags={article.tags}
-											renderAds={renderAds}
-											isLabs={isLabs}
-										/>
-									</Island>
-								)}
-								<StraightLines
-									count={4}
+								<DecideLines
 									color={palette.border.secondary}
-									cssOverrides={css`
-										display: block;
-									`}
+									format={format}
 								/>
 								<SubMeta
 									format={format}
@@ -615,45 +547,16 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons &&
-										renderingTarget === 'Web'
+										article.showBottomSocialButtons
 									}
 									badge={article.badge?.enhanced}
 								/>
 							</ArticleContainer>
 						</GridItem>
-						<GridItem area="right-column">
-							<div
-								css={css`
-									padding-top: 6px;
-									height: 100%;
-									${from.desktop} {
-										/* above 980 */
-										margin-left: 20px;
-										margin-right: -20px;
-									}
-									${from.leftCol} {
-										/* above 1140 */
-										margin-left: 0px;
-										margin-right: 0px;
-									}
-								`}
-							>
-								<RightColumn>
-									<MostViewedRightWithAd
-										display={format.display}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-										renderAds={renderAds}
-									/>
-								</RightColumn>
-							</div>
-						</GridItem>
-					</ShowcaseGrid>
+					</PictureGrid>
 				</Section>
 
-				{renderAds && !isLabs && (
+				{renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -759,7 +662,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				{renderAds && !isLabs && (
+				{renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}
