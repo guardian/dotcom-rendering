@@ -31,6 +31,7 @@ export const AppsLightboxImage = ({
 	isMainMedia = false,
 	isLazy = true,
 }: Props) => {
+	const hasLightbox = currentIndex !== -1;
 	const onClick = () => {
 		// Handle the case the device is rotated
 		const imageWidth = Math.max(window.innerHeight, window.innerWidth);
@@ -57,7 +58,19 @@ export const AppsLightboxImage = ({
 			// we don't need to handle this error
 			.catch(() => undefined);
 	};
-	return (
+	const picture = (
+		<Picture
+			role={role}
+			format={format}
+			master={master}
+			alt={alt}
+			width={width}
+			height={height}
+			isLazy={isLazy}
+			isMainMedia={isMainMedia}
+		/>
+	);
+	return hasLightbox ? (
 		<button
 			onClick={onClick}
 			type="button"
@@ -68,16 +81,9 @@ export const AppsLightboxImage = ({
 				width: 100%;
 			`}
 		>
-			<Picture
-				role={role}
-				format={format}
-				master={master}
-				alt={alt}
-				width={width}
-				height={height}
-				isLazy={isLazy}
-				isMainMedia={isMainMedia}
-			/>
+			{picture}
 		</button>
+	) : (
+		picture
 	);
 };
