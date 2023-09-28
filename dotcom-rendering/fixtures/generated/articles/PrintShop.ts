@@ -1671,7 +1671,7 @@ export const PrintShop: DCRArticle = {
 							],
 						},
 					],
-					elementId: '92c62f9d-6980-4e8a-946b-cd9af9be6d9b',
+					elementId: 'e93115b3-a54b-4806-9b85-91dd06ec7faf',
 					position: 1,
 					lightbox: {
 						credit: 'Photograph: Gerry Cranham/Offside',
@@ -1680,42 +1680,42 @@ export const PrintShop: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
-					elementId: 'd9538f21-344f-490d-b05d-2d6dd5c8c3de',
+					elementId: '76506b98-26c6-40a2-b11a-d0f217e3e8fd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
-					elementId: '345ea514-7a32-4e0e-a195-3ed256ac5eb8',
+					elementId: '81f95bfd-54fa-4b6b-ac62-12601d3c5259',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Words: Jonny Weeks</em></p>',
-					elementId: '73e53386-5a9d-4fed-89a4-f2addff9a7f6',
+					elementId: '623b27f7-9312-4d28-a648-4fb721cb54fa',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
-					elementId: '2f251e77-10e8-4a2c-9783-b9d504557ac2',
+					elementId: 'd9e395b9-f566-4642-b577-0997a67a84e2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
-					elementId: '86a31dbe-e09c-47d4-a0d3-7222c4d4bf2a',
+					elementId: '892f4138-d51b-4856-bfa2-c40667ff7fad',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
-					elementId: '75a8f244-ad68-4456-9147-23e7d1d32681',
+					elementId: '4f9c7533-cd11-441c-9ce9-a6f286c3283e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
-					elementId: 'cdd7f328-6827-4e1d-ac5f-976a20979ee2',
+					elementId: '99048de4-2943-4173-9897-4fb21c7eb596',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
-					elementId: 'e2b586ce-70ab-4f38-92fd-97d919788243',
+					elementId: '44940819-955b-4e5e-8293-91a12c5f490c',
 				},
 			],
 			attributes: {
@@ -1975,10 +1975,20 @@ export const PrintShop: DCRArticle = {
 			position: 1,
 			width: 3855,
 			height: 2755,
-			elementId: '92c62f9d-6980-4e8a-946b-cd9af9be6d9b',
+			elementId: 'e93115b3-a54b-4806-9b85-91dd06ec7faf',
 			alt: 'Bobby Moore in 1973',
 			credit: 'Photograph: Gerry Cranham/Offside',
 			displayCredit: false,
+		},
+	],
+	imagesForAppsLightbox: [
+		{
+			width: 3855,
+			height: 2755,
+			credit: 'Photograph: Gerry Cranham/Offside',
+			masterUrl:
+				'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg',
+			elementId: 'e93115b3-a54b-4806-9b85-91dd06ec7faf',
 		},
 	],
 };
