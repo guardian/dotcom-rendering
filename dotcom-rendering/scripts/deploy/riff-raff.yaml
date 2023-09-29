@@ -22,7 +22,14 @@ deployments:
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
       amiParameter: AMIRendering
-  render-front:
+  rendering:
+    type: autoscaling
+    parameters:
+      bucketSsmKey: /account/services/dotcom-artifact.bucket
+    dependencies:
+      - frontend-static
+      - frontend-cfn
+  render-front-cfn:
     template: cloudformation
     parameters:
       templateStagePaths:
@@ -30,7 +37,7 @@ deployments:
       cloudFormationStackByTags: false
       cloudFormationStackName: render-front
       amiParameter: AMIRenderfront
-  rendering:
+  render-front:
     type: autoscaling
     parameters:
       bucketSsmKey: /account/services/dotcom-artifact.bucket
