@@ -626,10 +626,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									}
 									shortUrlId={article.config.shortUrlId}
 									ajaxUrl={article.config.ajaxUrl}
-									showShareCount={
-										!!article.config.switches
-											.serverShareCounts
-									}
 								/>
 							</div>
 						</GridItem>

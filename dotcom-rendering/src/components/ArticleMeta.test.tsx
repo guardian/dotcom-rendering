@@ -34,7 +34,6 @@ describe('ArticleMeta', () => {
 					discussionApiUrl=""
 					shortUrlId=""
 					ajaxUrl=""
-					showShareCount={true}
 				/>
 			</ConfigProvider>,
 		);
@@ -76,7 +75,6 @@ describe('ArticleMeta', () => {
 					discussionApiUrl=""
 					shortUrlId=""
 					ajaxUrl=""
-					showShareCount={true}
 				/>
 			</ConfigProvider>,
 		);

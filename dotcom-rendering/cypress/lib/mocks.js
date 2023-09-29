@@ -2,10 +2,6 @@ import { mostRead } from '../fixtures/manual/most-read';
 import { mostReadGeo } from '../fixtures/manual/most-read-geo';
 
 export const mockApi = () => {
-	// Mock share count
-	cy.intercept('GET', '/sharecount/**', { fixture: 'shareCount.json' }).as(
-		'getShareCount',
-	);
 	// Mock most-read
 	cy.intercept('GET', '**/most-read/**', mostRead).as('getMostRead');
 	// Mock most-read

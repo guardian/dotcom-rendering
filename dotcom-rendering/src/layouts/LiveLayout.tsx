@@ -581,10 +581,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										}
 										shortUrlId={article.config.shortUrlId}
 										ajaxUrl={article.config.ajaxUrl}
-										showShareCount={
-											!!article.config.switches
-												.serverShareCounts
-										}
 										messageUs={article.messageUs}
 									/>
 								</div>
@@ -745,10 +741,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												article.config.shortUrlId
 											}
 											ajaxUrl={article.config.ajaxUrl}
-											showShareCount={
-												!!article.config.switches
-													.serverShareCounts
-											}
 											messageUs={article.messageUs}
 										/>
 									</div>
