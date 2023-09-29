@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { CommentLayout } from './CommentLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
@@ -9,11 +9,12 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
+import { PictureLayout } from './PictureLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
 interface BaseProps {
-	article: FEArticleType;
+	article: DCRArticle;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -109,6 +110,14 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
+							article={article}
+							NAV={NAV}
+							format={format}
+						/>
+					);
+				case ArticleDesign.Picture:
+					return (
+						<PictureLayout
 							article={article}
 							NAV={NAV}
 							format={format}

@@ -12,7 +12,6 @@ import {
 } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
-import { AD_CONTAINER_HEIGHT } from '../lib/liveblog-right-ad-constants';
 import { TopRightAdSlot } from './TopRightAdSlot';
 
 type InlinePosition =
@@ -20,7 +19,6 @@ type InlinePosition =
 	| 'inline'
 	| 'liveblog-inline'
 	| 'liveblog-inline-mobile'
-	| 'liveblog-right'
 	| 'mobile-front';
 
 type DefaultProps = {
@@ -260,7 +258,7 @@ const frontsBannerAdTopContainerStyles = css`
 
 const frontsBannerAdContainerStyles = css`
 	/* Native templates require a width (or min-width) to be explicitly set */
-	width: ${breakpoints['wide']}px;
+	width: 100%;
 	display: flex;
 	justify-content: center;
 
@@ -278,6 +276,11 @@ const frontsBannerAdStyles = css`
 	max-width: ${breakpoints['wide']}px;
 	overflow: hidden;
 	padding-bottom: ${frontsBannerPaddingHeight}px;
+
+	/* This is similar to fluid ads, except this class is applied using messenger */
+	&.ad-slot--full-width {
+		max-width: 100%;
+	}
 `;
 
 const articleEndAdStyles = css`
@@ -449,40 +452,6 @@ export const AdSlot = ({
 				default:
 					return null;
 			}
-		case 'liveblog-right': {
-			const advertId = `liveblog-right-${index}`;
-			return (
-				<div
-					className="ad-slot-container"
-					css={[
-						adContainerStyles,
-						css`
-							height: ${AD_CONTAINER_HEIGHT}px;
-						`,
-					]}
-				>
-					<div
-						id={`dfp-ad--${advertId}`}
-						className={[
-							'js-ad-slot',
-							'ad-slot',
-							`ad-slot--${advertId}`,
-							'ad-slot--liveblog-right',
-							'ad-slot--rendered',
-						].join(' ')}
-						css={[
-							css`
-								position: sticky;
-								top: 0;
-							`,
-						]}
-						data-link-name={`ad slot ${advertId}`}
-						data-name={advertId}
-						aria-hidden="true"
-					/>
-				</div>
-			);
-		}
 		case 'comments': {
 			return (
 				<div className="ad-slot-container" css={[adContainerStyles]}>

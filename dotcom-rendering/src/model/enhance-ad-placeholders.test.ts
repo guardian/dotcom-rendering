@@ -1,5 +1,5 @@
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import type { AdPlaceholderSlot, FEElement } from '../types/content';
+import type { AdPlaceholderBlockElement, FEElement } from '../types/content';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 
 // Test helper functions
@@ -10,11 +10,12 @@ const getTestElements = (length: number): FEElement[] => {
 		elementId: 'mockId',
 		html: '<p>I am a paragraph</p>',
 	};
-	return Array(length).fill(textElement) as FEElement[];
+	return Array<FEElement>(length).fill(textElement);
 };
 
 const elementIsAdPlaceholder = (element: FEElement): boolean =>
-	element._type === 'model.dotcomrendering.pageElements.AdPlaceholderSlot';
+	element._type ===
+	'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 
 const getElementsFromBlocks = (blocks: Block[]): FEElement[] =>
 	blocks.map((o) => o.elements).flat();
@@ -46,28 +47,13 @@ describe('Enhancing ad placeholders', () => {
 			const outputElements = getElementsFromBlocks(output);
 			const outputPlaceholders = outputElements.filter(
 				elementIsAdPlaceholder,
-			) as AdPlaceholderSlot[];
+			) as AdPlaceholderBlockElement[];
 
 			it(`should insert ${expectedPlaceholders} ad placeholder(s)`, () => {
 				expect(outputPlaceholders.length).toEqual(expectedPlaceholders);
 			});
 
 			if (expectedPlaceholders > 0) {
-				it('should insert a square placeholder in the first ad placeholder position', () => {
-					const [firstPlaceholder, ...otherPlaceholders] =
-						outputPlaceholders;
-
-					// First ad placeholder should be square
-					expect(firstPlaceholder?.isSquare).toBeTruthy();
-
-					if (otherPlaceholders.length) {
-						// All other ad placeholders should not be square
-						expect(
-							otherPlaceholders.every((p) => !p.isSquare),
-						).toBeTruthy();
-					}
-				});
-
 				it(`should insert ad placeholder(s) in the expected positions (${JSON.stringify(
 					expectedPositions,
 				)})`, () => {

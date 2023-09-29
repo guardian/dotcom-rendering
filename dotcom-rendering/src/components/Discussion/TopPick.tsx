@@ -27,6 +27,7 @@ type Props = {
 	userMadeComment: boolean;
 	onPermalinkClick: (commentId: number) => void;
 	onRecommend?: (commentId: number) => Promise<boolean>;
+	isClosedForComments: boolean;
 };
 
 const pickStyles = css`
@@ -169,6 +170,7 @@ export const TopPick = ({
 	userMadeComment,
 	onPermalinkClick,
 	onRecommend,
+	isClosedForComments,
 }: Props) => {
 	const showStaffBadge = comment.userProfile.badge.some(
 		(obj) => obj['name'] === 'Staff',
@@ -246,6 +248,7 @@ export const TopPick = ({
 					authStatus={authStatus}
 					userMadeComment={userMadeComment}
 					onRecommend={onRecommend}
+					isClosedForComments={isClosedForComments}
 				/>
 			</PickMeta>
 		</div>

@@ -18,7 +18,6 @@ type Props = {
 	displayRoundel?: boolean;
 	isImmersive?: boolean;
 	selectedPillar?: Pillar;
-	isInEuropeTest: boolean;
 	headerTopBarSwitch: boolean;
 };
 
@@ -62,7 +61,6 @@ export const Nav = ({
 	isImmersive,
 	selectedPillar,
 	headerTopBarSwitch,
-	isInEuropeTest,
 }: Props) => {
 	return (
 		<div css={rowStyles}>
@@ -214,7 +212,6 @@ export const Nav = ({
 					nav={nav}
 					isImmersive={isImmersive}
 					headerTopBarSwitch={headerTopBarSwitch}
-					isInEuropeTest={isInEuropeTest}
 				/>
 			</div>
 			{displayRoundel && (

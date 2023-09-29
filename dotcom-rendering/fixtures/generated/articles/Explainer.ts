@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { DCRArticle } from '../../../src/types/frontend';
 
-export const Explainer: FEArticleType = {
+export const Explainer: DCRArticle = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62"> \n <img src="https://media.guim.co.uk/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/1000.jpg" alt="Mick Goodna, Dr Jackie Huggins, Craig Crawford MP, and Queensland premier Annastacia Palaszczuk sign path to treaty documents in Brisbane, Tuesday, 16 August, 2022. " width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">Queensland premier Annastacia Palaszczuk co-signs path to treaty documents in Brisbane, 16 August, 2022. A federally negotiated treaty seems a long way off.</span> <span class="element-image__credit">Photograph: Jono Searle/AAP</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
@@ -23,6 +23,52 @@ export const Explainer: FEArticleType = {
 		},
 	],
 	commercialProperties: {
+		UK: {
+			adTargeting: [
+				{
+					name: 'k',
+					value: [
+						'indigenous-peoples',
+						'uluru-statement-from-the-heart',
+						'indigenous-voice-to-parliament',
+						'australia-news',
+						'indigenous-australians',
+					],
+				},
+				{
+					name: 'tn',
+					value: ['explainers'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/m493v',
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'co',
+					value: ['lorena-allam'],
+				},
+				{
+					name: 'url',
+					value: '/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+				},
+			],
+		},
 		US: {
 			adTargeting: [
 				{
@@ -96,52 +142,6 @@ export const Explainer: FEArticleType = {
 				{
 					name: 'edition',
 					value: 'au',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'co',
-					value: ['lorena-allam'],
-				},
-				{
-					name: 'url',
-					value: '/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
-				},
-			],
-		},
-		UK: {
-			adTargeting: [
-				{
-					name: 'k',
-					value: [
-						'indigenous-peoples',
-						'uluru-statement-from-the-heart',
-						'indigenous-voice-to-parliament',
-						'australia-news',
-						'indigenous-australians',
-					],
-				},
-				{
-					name: 'tn',
-					value: ['explainers'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/m493v',
-				},
-				{
-					name: 'edition',
-					value: 'uk',
 				},
 				{
 					name: 'ct',
@@ -1763,7 +1763,13 @@ export const Explainer: FEArticleType = {
 					],
 				},
 			],
-			elementId: '57fe14fe-66d0-4592-9481-18ff847f16eb',
+			elementId: '905cd507-2659-40a4-b342-b3eba4db6b97',
+			position: 1,
+			lightbox: {
+				caption:
+					'Queensland premier Annastacia Palaszczuk co-signs path to treaty documents in Brisbane, 16 August, 2022. A federally negotiated treaty seems a long way off.',
+				credit: 'Photograph: Jono Searle/AAP',
+			},
 		},
 	],
 	canonicalUrl:
@@ -1775,17 +1781,17 @@ export const Explainer: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In 2017, the Uluru Statement from the Heart called for three things: voice, treaty and truth. Or, a voice to parliament enshrined in the constitution and a Makarrata<em><strong> </strong></em>commission to oversee a process of treaty-making and truth-telling.</p>',
-					elementId: 'f9f19aec-33b0-4d1e-943c-8fb71ae28894',
+					elementId: '7985d474-f3a9-41fc-ac66-1b0b07b6b33e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Successive prime ministers rejected those calls. In 2017, Malcolm Turnbull dismissed the voice as a “third chamber” – a position he has since changed, <a href="https://www.theguardian.com/australia-news/commentisfree/2022/aug/15/i-will-be-voting-yes-to-establish-an-indigenous-voice-to-parliament">publicly declaring on Monday</a> he would vote yes in a referendum. In 2020, Scott Morrison <a href="https://www.smh.com.au/politics/federal/why-would-i-morrison-rules-out-referendum-on-indigenous-voice-if-re-elected-20220502-p5ahue.html">simply ruled it out</a>.</p>',
-					elementId: 'b0a722ce-1b57-4e60-a98a-bb1ffcb157c5',
+					elementId: '96d16043-5a48-457d-bb0b-3e58642e74ce',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In May, Labor was elected on a promise to implement the Uluru statement in full. But in the intervening five years, state and territory governments went ahead with treaty-making and truth-telling processes, and a couple of big milestones were reached this week.</p>',
-					elementId: 'd0935e93-0201-4d29-ba68-3f5f198d3dce',
+					elementId: '7629290b-e585-4fc4-8e3d-342a9300c960',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
@@ -1794,22 +1800,22 @@ export const Explainer: FEArticleType = {
 					html: '<div class="interactive-wrapper">\n\t\n\t<div id="toc"></div>\n\n</div>',
 					css: '@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Light.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Light.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Light.ttf) format("truetype");font-weight:300;font-style:normal}@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-LightItalic.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-LightItalic.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-LightItalic.ttf) format("truetype");font-weight:300;font-style:italic}@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Regular.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Regular.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-RegularItalic.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-RegularItalic.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-RegularItalic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Medium.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Medium.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Medium.ttf) format("truetype");font-weight:500;font-style:normal}@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-MediumItalic.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-MediumItalic.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-MediumItalic.ttf) format("truetype");font-weight:500;font-style:italic}@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Semibold.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Semibold.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Semibold.ttf) format("truetype");font-weight:600;font-style:normal}@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-SemiboldItalic.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-SemiboldItalic.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-SemiboldItalic.ttf) format("truetype");font-weight:600;font-style:italic}@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Bold.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Bold.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-BoldItalic.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-BoldItalic.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-BoldItalic.ttf) format("truetype");font-weight:700;font-style:italic}@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Black.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Black.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-Black.ttf) format("truetype");font-weight:900;font-style:normal}@font-face{font-family:"Guardian Headline Full";src:url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-BlackItalic.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-BlackItalic.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GHGuardianHeadline-BlackItalic.ttf) format("truetype");font-weight:900;font-style:italic}@font-face{font-family:"Guardian Titlepiece";src:url(https://interactive.guim.co.uk/fonts/garnett/GTGuardianTitlepiece-Bold.woff2) format("woff2"),url(https://interactive.guim.co.uk/fonts/garnett/GTGuardianTitlepiece-Bold.woff) format("woff"),url(https://interactive.guim.co.uk/fonts/garnett/GTGuardianTitlepiece-Bold.ttf) format("truetype");font-weight:700;font-style:normal}.interactive-atom{margin:0;padding:0}.interactive-wrapper,body{background-color:#fff}iframe.interactive-atom-fence{width:100%;display:inline-block}#toc{width:100%;display:none;position:relative;text-align:left}#toc .table_of_contents_container{width:100%;margin-bottom:10px;margin-top:10px;background-color:#ececec;color:#000;box-sizing:border-box;padding:10px;font-family:\'Guardian Text Sans Web\';font-size:13px;display:block}#toc td{padding-bottom:7px;padding-top:7px}#toc th{font-weight:700}#toc .table_of_contents{width:100%}#toc .table_of_contents td{cursor:pointer}#toc .table_of_contents td:hover{color:#a9a9a9}#toc .table_of_contents tr{padding:30px}#toc .table_of_contents tr:last-child{border-bottom:none;padding-bottom:0}#toc .back_to_table_of_contents{cursor:pointer;width:1rem;height:1rem;border-radius:50%;background-color:#005689;float:left}',
 					js: '!function(n){var o={};function r(e){if(o[e])return o[e].exports;var t=o[e]={i:e,l:!1,exports:{}};return n[e].call(t.exports,t,t.exports,r),t.l=!0,t.exports}r.m=n,r.c=o,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(t,e){if(1&e&&(t=r(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)r.d(n,o,function(e){return t[e]}.bind(null,o));return n},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="",r(r.s=108)}({108:function(e,t,n){e.exports=n(109)},109:function(e,t){var n,o,r,i,u=document.createElement("script");u.src="https://interactive.guim.co.uk/atoms/2020/04/tableizer/default/v/1629349235321/app.js",document.body.appendChild(u),setTimeout(function(){var e,t;window.resize&&(e=document.querySelector("html"),t=document.querySelector("body"),e.style.overflow="hidden",e.style.margin="0px",e.style.padding="0px",t.style.overflow="hidden",t.style.margin="0px",t.style.padding="0px",window.resize())},100),window.frameElement&&(console.log("We are inside an iframe universe."),n=document.body,o=function(){window.frameElement.height=document.body.offsetHeight+150},i=n.clientHeight,function e(){r=n.clientHeight,i!=r&&o(),i=r,n.onElementHeightChangeTimer&&clearTimeout(n.onElementHeightChangeTimer),n.onElementHeightChangeTimer=setTimeout(e,250)}())}});',
-					elementId: 'b03de898-6aa9-41fc-9573-d289ce350d11',
+					elementId: 'ca1936ab-b0e5-41d8-b43a-f4b683b33c8d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>So what is a treaty and how do they work?</h2>',
-					elementId: '52a7986a-db74-4e39-949f-9f5ab7a7bbab',
+					html: "<h2 id='so-what-is-a-treaty-and-how-do-they-work'>So what is a treaty and how do they work?</h2>",
+					elementId: '9ede0c6f-11e2-4f58-9947-e5dfa400248f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>A treaty is a binding agreement between two or more parties. A treaty sets out the terms of engagement and obligations of all sides to maintain the agreement.</p>',
-					elementId: '3424967b-a637-4545-89f9-1c0b5b47f001',
+					elementId: 'e566e3a8-18e2-4853-ae2b-93bd320633c0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>New Zealand (Aotearoa), Canada, Norway, Sweden, Finland, Japan, Greenland and the US have all negotiated treaties with <a href="https://www.theguardian.com/world/indigenous-peoples" data-component="auto-linked-tag">Indigenous peoples</a>.</p>',
-					elementId: 'b7f9d5b8-a428-44a0-ae31-e26d2e3e0147',
+					elementId: '90208f3d-32e0-47d1-a573-f0bacb9fb39b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -1817,17 +1823,17 @@ export const Explainer: FEArticleType = {
 					text: 'Victoria passes landmark legislation to create First Nations treaty authority',
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '417cd2a9-1328-4ac7-8580-e51ec1ade458',
+					elementId: '0b757a67-93ce-46c6-b794-2d176fa6a487',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Canada<strong> </strong>has made about 70<a href="https://www.rcaanc-cirnac.gc.ca/eng/1100100028574/1529354437231"> recognised treaties</a> with First Nations peoples since 1701. In some cases, such as Nunavut in northern Canada, they have led to self-government. But not all treaties are <a href="https://indigenousstudies.utoronto.ca/news/treaty-myths/">easily understood</a>, workable or extant.</p>',
-					elementId: '53673591-69a6-45d2-bf66-2f2bfc6108c3',
+					elementId: 'b849c993-0a8c-4caa-bc5a-16a343579026',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The United States government ratified more than 364 treaties between 1778 and 1868. Treaties were largely used by the US to put an end to conflict, and later used to <a href="http://recordsofrights.org/themes/4/rights-of-native-americans#the-end-of-treaty-making">force Native Americans off their </a>lands. The vast majority of treaties were<a href="https://theintercept.com/2020/07/17/mcgirt-v-oklahoma-indian-native-treaties/"> broken or never honoured</a> by the US government.</p>',
-					elementId: 'b227ecd6-a42a-4493-83f8-18f28905ecf7',
+					elementId: 'e1dc3ef7-2d32-4857-b50f-8ea5a63d867e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2136,77 +2142,99 @@ export const Explainer: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'c1e243ec-81a5-48de-bade-66fc14775e39',
+					elementId: '789e1e91-5a7d-4252-ae15-b59f85109119',
+					position: 2,
+					lightbox: {
+						caption:
+							'Co-chair of the First Peoples Assembly of Victoria Marcus Stewart address the Victorian parliament in Melbourne, 22 June, 2022.',
+						credit: 'Photograph: Joel Carrett/AAP',
+					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In New Zealand (Aotearoa), Māori and the British signed the treaty of Waitangi in 1840. It is still being grappled with. There were two versions – one in English and one in Māori - and they were not exact translations, so there were major differences in interpretation, especially around Māori sovereignty. In 1975, the <a href="https://waitangitribunal.govt.nz/treaty-of-waitangi/meaning-of-the-treaty/">Waitangi tribunal</a> was set up to determine the issues raised by these different meanings. In 2014 it decided the Māori leaders who signed did not cede sovereignty, a big step forward.</p>',
-					elementId: 'd0b92619-3188-4a59-be4c-b63ddb9cd4fd',
+					elementId: '14533941-094d-412f-bc47-77a21d017ef3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>How long has treaty-making been on the agenda in Australia?</h2>',
-					elementId: '5826f5db-f0b5-42fb-ae06-8a15f2f9ec71',
+					html: "<h2 id='how-long-has-treaty-making-been-on-the-agenda-in-australia'>How long has treaty-making been on the agenda in Australia?</h2>",
+					elementId: '8b925162-0b32-491c-b7cd-18ffe36b34c9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In Australia, there has never been a treaty negotiated between Aboriginal and Islander nations and the commonwealth.</p>',
-					elementId: 'f5aba4d3-3a07-4dfe-b72d-7b40657235ea',
+					elementId: '5d83d1d5-30bb-4051-99c5-626d35ff5de6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Calls for treaty<strong>-</strong>making go back decades. A line is often traced from the 1963 Yirrkala bark petition – in which Yolngu (the Indigenous people of north-east Arnhem Land) asserted their sovereignty over lands where the federal government had allowed a bauxite mine – through the 1966 <a href="https://www.nma.gov.au/defining-moments/resources/wave-hill-walk-off">Gurindji walk-off</a> at Wave Hill station, and the NT Aboriginal Land Rights Act in 1976, all the way to 1988, when the Treaty 88 campaign took off amid <a href="https://www.youtube.com/watch?v=5nlCxz650Yo&amp;ab_channel=DreamscapePublishing">huge Aboriginal protests </a>against the bicentennial.</p>',
-					elementId: '1b73199b-b090-497b-a2c2-791138002a73',
+					elementId: '65d82b9f-49e0-446d-8247-45c9a702b6a1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In June that year, traditional owners presented <a href="https://aiatsis.gov.au/explore/barunga-statement">the Barunga statement</a> to Bob Hawke, who promised there’d be a treaty by the end of 1990. As Yothu Yindi sang in Treaty, a 1991 song about the events that day, “promises can disappear, just like writing in the sand”.</p>',
-					elementId: '0b092bdc-1231-4fb0-b667-4663d9640531',
+					elementId: 'c550a25f-038e-40d1-b37b-b66fc0ea2747',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In 2007, in perhaps an attempt to derail further treaty calls, the Howard government developed a plan for symbolic constitutional recognition. Successive governments have committed to some form of recognition.</p>',
-					elementId: '5502fd11-31c4-492f-8637-307f55a79cc8',
+					elementId: '6edd448e-bb1d-469d-a231-22ab241cdad3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>What are the states doing on treaty-making?</h2>',
-					elementId: '2226554d-017f-40da-9b00-32cddb83c2b0',
+					html: "<h2 id='what-are-the-states-doing-on-treaty-making'>What are the states doing on treaty-making?</h2>",
+					elementId: 'a0e752bf-2fbe-4a5b-b898-7293c5b14434',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>At least three states have formally embarked on treaty processes, and some are also exploring truth-telling.</p>',
-					elementId: '00f73786-855e-4c8f-aa13-77af7c7058b9',
+					elementId: '140925f8-afc2-4399-ab44-11c3c23c29cb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The Queensland government <a href="https://www.theguardian.com/australia-news/2022/aug/16/queensland-to-unveil-indigenous-truth-telling-inquiry-as-part-of-path-to-treaty">announced on Monday</a> it would set up an independent treaty institute to design a framework for agreement making with the government and it will support a three-year long truth-telling inquiry.</p>',
-					elementId: '8172cf17-d3d1-4e72-9ab3-ab38f917547d',
+					elementId: '6fc0ecfb-8a29-465e-afc0-539b24080baf',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>On Tuesday, Victoria became the first state to pass legislation to set up an independent <a href="https://www.theguardian.com/australia-news/2022/jun/07/decolonisation-in-action-victorian-treaty-negotiations-to-be-overseen-by-independent-authority">Indigenous treaty authority</a>, to “umpire” treaty negotiations and resolve disputes between traditional owner groups and the state government.</p>',
-					elementId: 'd1f6d279-4df8-4a29-92b7-8ace418d46f4',
+					elementId: '15ce1712-2e4f-467a-9e4d-4fc4a537e929',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Victoria has also embarked on truth-telling, which is proving challenging for many reasons. The Yoorrook justice commission handed down its first report in July, outlining elders’ experiences of colonisation and the stolen generations. It is seeking a two-year extension on its final report to 2026, to ensure the truth-telling process does not “<a href="https://www.theguardian.com/australia-news/2022/jul/09/yoorrook-the-fight-for-victorias-truth-telling-commission-to-achieve-its-groundbreaking-goals">replicate colonial injustices</a>” and re-traumatise Aboriginal people.</p>',
-					elementId: '1f48d122-c0c1-47b0-afc1-f0045c89a947',
+					elementId: '29c5466a-4099-47e4-9015-5e33af340618',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The Northern Territory treaty commission handed its final report to the government in March, after four years of consultation with communities. It said the firm focus of any treaties must be to <a href="https://www.theguardian.com/australia-news/2022/jun/29/nt-treaties-must-achieve-highest-levels-of-self-determination-for-first-nations-commissioner-says">enable First Nations self-government</a>. The NT should establish a First Nations forum and develop a territory-wide agreement that would set the minimum standards for all subsequent treaties. Importantly, treaty-making could be between Indigenous nations as well as with governments.</p>',
-					elementId: '9f5f8fc1-3b6e-41bc-a655-56652ed2611e',
+					elementId: '5b485abf-1a5f-49b2-b510-756ab3b7fd98',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The government said it would provide a comprehensive response by the end of 2022.</p>',
-					elementId: '5c2c6eed-4b69-45a4-ab5a-76629716c4b5',
+					elementId: '6aa72056-a6ca-4876-a582-c3f675422dae',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In March, Tasmania’s<strong> </strong>then<strong> </strong>premier, Peter Gutwein, said there was<strong> “</strong>broad support to take further steps” on truth-telling and treaty. There are plans for an advisory body, Gutwein said, and all registered Aboriginal community organisations were invited to be involved.</p>',
-					elementId: 'd7f2a82d-02fd-4504-b00d-01d5dcd36167',
+					elementId: '84f16298-8c5b-4825-a0f0-d26487154039',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
+					newsletter: {
+						identityName: 'morning-mail',
+						name: 'Morning Mail',
+						theme: 'news',
+						description:
+							'Our Australian morning briefing breaks down the key stories of the day, telling you what’s happening and why it matters',
+						frequency: 'Every weekday',
+						listId: 4148,
+						group: 'News in depth',
+						successDescription:
+							"We'll send you Guardian Australia's Morning Mail every weekday",
+						regionFocus: 'AU',
+					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -2214,37 +2242,37 @@ export const Explainer: FEArticleType = {
 					text: 'Queensland to unveil Indigenous truth-telling inquiry as part of path to treaty',
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '550da94f-dafa-4681-b18c-3d9ab645e61c',
+					elementId: 'b42e1467-567a-4ea6-a86a-68a432b71189',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In Western Australia, the landmark <a href="https://www.wa.gov.au/organisation/department-of-the-premier-and-cabinet/south-west-native-title-settlement">south-west native title settlement </a>is often cited as Australia’s first treaty. It is the most comprehensive native title agreement negotiated in history, a $1.3bn settlement of Noongar peoples’ native title over 200,000 square kilometres of their traditional lands including Perth.</p>',
-					elementId: '7be17b2f-4113-432c-9541-24bc921547a1',
+					elementId: 'a2c7a6a0-366f-48c6-8435-03b372f7a786',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>South Australia’s<strong> </strong>process had<strong> </strong>stalled under the previous government, but the new Labor attorney general, Kyam Maher, has said he is determined to reignite the process.</p>',
-					elementId: '8a5f212f-23d7-42c4-af7d-53c710b97b19',
+					elementId: 'f83157f5-6ab1-4789-8fd4-bf4b84fc9c38',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>New South Wales is the outlier. There has been no commitment to a treaty, but a broad commitment to the principles of the Uluru statement.</p>',
-					elementId: '21be490d-a5f6-4851-8ee0-c9f7837d27cf',
+					elementId: '91cbd3c5-a4e3-4657-86de-0ccf0bcb67d7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>What about a national treaty?</h2>',
-					elementId: 'c7061131-a462-4221-8f00-e5884297f83a',
+					html: "<h2 id='what-about-a-national-treaty'>What about a national treaty?</h2>",
+					elementId: 'cabb098e-fe7c-45b5-86c4-ef4c10e36990',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In 2017 at Uluru, the <a href="https://www.referendumcouncil.org.au/">Referendum Council</a> convened the First Nations constitutional convention, where the Uluru Statement from the Heart called for sequential reforms: a voice, treaty and truth.</p>',
-					elementId: '89e2157d-4938-420e-a0ce-5a13f868d095',
+					elementId: '5decead6-e9af-4897-b0c3-65491ad7aaf8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In July this year the prime minister, Anthony Albanese, released <a href="https://www.theguardian.com/australia-news/2022/jul/29/anthony-albanese-reveals-simple-and-clear-wording-of-referendum-question-on-indigenous-voice">a preferred form of words</a> he wants to put to the Australian people in a referendum, to amend the constitution to enable a voice to parliament to be established.</p>',
-					elementId: 'e59dc0ac-d9ec-4ef0-87c1-39f5d5e8400b',
+					elementId: '3ca3957b-a33f-4240-805d-2696681f597c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2553,72 +2581,78 @@ export const Explainer: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'e0f2724b-0b7b-4238-ae99-70586ba63f16',
+					elementId: '4677e7a6-8539-4f14-b495-4f5f0e29ae32',
+					position: 3,
+					lightbox: {
+						caption:
+							'Minister for Indigenous Australians Linda Burney and prime minister of Australia Anthony Albanese at Garma festival 2022.',
+						credit: 'Photograph: Carly Earl/The Guardian',
+					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If successful, it will give parliament the enabling power to settle on the details of the voice after a referendum. The Balnaves chair for constitutional law at the University of New South Wales, Prof Megan Davis, said in early August it was a “<a href="https://www.theguardian.com/australia-news/2022/aug/06/a-civil-mature-conversation-architects-of-the-uluru-statement-make-plea-for-consensus-on-referendum">common constitutional technique” to defer detail </a>to the parliament at a later date.</p>',
-					elementId: 'f9a38f52-7882-4abe-9c29-ea8f42d634d5',
+					elementId: '95dc9c16-8744-442a-a0e0-d7e020c5bc86',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“That’s how, for example, the high court was set up,” Davis said. “The enabling provision has passed, and the institution’s been set up later.”</p>',
-					elementId: '1acdd098-fae1-4c21-a4dd-557727058c1b',
+					elementId: '8802ce19-2f82-42f8-9aed-effb383661e1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>On Friday, the minister for <a href="https://www.theguardian.com/australia-news/indigenous-australians" data-component="auto-linked-tag">Indigenous Australians</a>, Linda Burney, said the government’s “priority” is to conduct the referendum.</p>',
-					elementId: '8310a7df-8f24-4fd4-acdf-4a03f6a37ce4',
+					elementId: 'e1d3f442-9efb-4556-8d2a-2bf0a0788848',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“I’m not sure people appreciate just how complex and how involving that is,” Burney told the ABC.</p>',
-					elementId: '3227b761-eb67-4662-85f8-8daca45e8d5b',
+					elementId: 'da7ea6a6-74ef-4a1b-9b73-458ce8433482',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>So, to follow the sequence, any federally negotiated treaties are still a long way off.</p>',
-					elementId: '89a65460-a7f1-40e2-8377-0920edb31afe',
+					elementId: '3387bd76-2f09-4b04-97a2-35e310aae6ae',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>Why do First Nations want to negotiate a treaty or treaties?</h2>',
-					elementId: '3c0de982-0f25-476b-954b-17efad324746',
+					html: "<h2 id='why-do-first-nations-want-to-negotiate-a-treaty-or-treaties'>Why do First Nations want to negotiate a treaty or treaties?</h2>",
+					elementId: '9cf59ede-ac13-4a5a-b2fa-6a39e140b1a3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“So that we can overcome those huge injustices that still, unfortunately, persist in our society,” the Queensland treaty advancement committee co-chair Dr Jackie Huggins said this week.</p>',
-					elementId: '31594e4d-b99f-4726-8ebc-86b55174d574',
+					elementId: 'dd386f19-6fc1-4508-b55f-4d02b33e6034',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“The path to treaty is about how we mend the very fabric of our society.”</p>',
-					elementId: '07ea686e-005d-4694-a87f-971e9d0228ff',
+					elementId: '1237d9bd-3818-4e72-92fb-cf9bcbf0ad00',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>And what about the view that treaties are only symbolic; they don’t achieve practical change?</h2>',
-					elementId: 'c07a49df-e2bd-4345-aefa-0f4cbae98575',
+					html: "<h2 id='and-what-about-the-view-that-treaties-are-only-symbolic-they-dont-achieve-practical-change'>And what about the view that treaties are only symbolic; they don’t achieve practical change?</h2>",
+					elementId: '25efb97c-8f31-4687-855f-96746a53a090',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If done right, treaties allow Aboriginal people to run their own affairs, the NT acting treaty commissioner, Tony McAvoy, <a href="https://www.abc.net.au/news/2022-06-29/nt-treaty-report-released-by-commissioner/101192202">told the ABC</a> in March.</p>',
-					elementId: '708541d2-e143-49d8-b2d5-629eee52d60f',
+					elementId: '6110c51d-f9d9-4257-a705-3eb41b018599',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“When Aboriginal communities [and] Aboriginal organisations design and deliver the services for Aboriginal people, those services are the most effective at that time. We would see a significant change in the levels of disadvantage if we’re able to ensure those governments are supported and properly resourced to do the work,” McAvoy said.</p>',
-					elementId: '4541e58a-d055-43d8-9363-1e8b67bd697a',
+					elementId: '1c558b75-2f7f-4d6e-94b4-a4ce857b3976',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Pat Anderson, one of the key campaigners for the Uluru statement, said these reforms <a href="https://www.theguardian.com/australia-news/2022/aug/06/a-civil-mature-conversation-architects-of-the-uluru-statement-make-plea-for-consensus-on-referendum">allow for Aboriginal people to directly tell governments</a> what they want and need.</p>',
-					elementId: 'c91dc2b2-433f-4a37-ae80-e6b87164b394',
+					elementId: '0cb0202d-827b-484a-a79d-56852816dc5f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We won’t have to beg anymore, we won’t have to justify ourselves. We will set the agenda by sitting at that table, with what our priorities are,” Anderson said.<br></p>',
-					elementId: '3e4704d2-fdf5-49a7-a029-2891b51216dc',
+					elementId: 'c7e84c76-8524-4b63-938e-41c6f3218c64',
 				},
 			],
 			attributes: {
@@ -2749,7 +2783,6 @@ export const Explainer: FEArticleType = {
 			mobileStickyPrebid: true,
 			breakingNews: true,
 			externalVideoEmbeds: true,
-			simpleReach: true,
 			carrotTrafficDriver: true,
 			geoMostPopular: true,
 			weAreHiring: true,
@@ -2873,4 +2906,45 @@ export const Explainer: FEArticleType = {
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
 	},
+	imagesForLightbox: [
+		{
+			masterUrl:
+				'https://media.guim.co.uk/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg',
+			position: 1,
+			width: 4330,
+			height: 2598,
+			elementId: '905cd507-2659-40a4-b342-b3eba4db6b97',
+			alt: 'Mick Goodna, Dr Jackie Huggins, Craig Crawford MP, and Queensland premier Annastacia Palaszczuk sign path to treaty documents in Brisbane, Tuesday, 16 August, 2022. ',
+			credit: 'Photograph: Jono Searle/AAP',
+			caption:
+				'Queensland premier Annastacia Palaszczuk co-signs path to treaty documents in Brisbane, 16 August, 2022. A federally negotiated treaty seems a long way off.',
+			displayCredit: true,
+		},
+		{
+			masterUrl:
+				'https://media.guim.co.uk/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg',
+			position: 2,
+			width: 7926,
+			height: 4756,
+			elementId: '789e1e91-5a7d-4252-ae15-b59f85109119',
+			alt: 'Co-chair of the First Peoples Assembly of Victoria Marcus Stewart address the Victorian parliament in Melbourne, 22 June, 2022.',
+			credit: 'Photograph: Joel Carrett/AAP',
+			caption:
+				'Co-chair of the First Peoples Assembly of Victoria Marcus Stewart address the Victorian parliament in Melbourne, 22 June, 2022.',
+			displayCredit: true,
+		},
+		{
+			masterUrl:
+				'https://media.guim.co.uk/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg',
+			position: 3,
+			width: 8192,
+			height: 4918,
+			elementId: '4677e7a6-8539-4f14-b495-4f5f0e29ae32',
+			alt: 'Minister for Indigenous Australians Linda Burney and prime minister of Australia Anthony Albanese at Garma festival 2022.',
+			credit: 'Photograph: Carly Earl/The Guardian',
+			caption:
+				'Minister for Indigenous Australians Linda Burney and prime minister of Australia Anthony Albanese at Garma festival 2022.',
+			displayCredit: true,
+		},
+	],
 };

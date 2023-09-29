@@ -12,7 +12,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -52,7 +52,7 @@ import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { FEElement } from '../types/content';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { Palette } from '../types/palette';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -181,7 +181,7 @@ const stretchLines = css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -269,10 +269,6 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
-		article.config.switches['europeNetworkFrontSwitch'] === true;
-
 	const { renderingTarget } = useConfig();
 
 	/**
@@ -355,7 +351,6 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 			</div>

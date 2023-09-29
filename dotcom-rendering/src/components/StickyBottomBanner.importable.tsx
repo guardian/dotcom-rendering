@@ -313,7 +313,7 @@ export const StickyBottomBanner = ({
 			shouldHideReaderRevenue,
 		);
 		const bannerConfig: SlotConfig = {
-			candidates: [CMP, puzzlesBanner, readerRevenue, brazeBanner],
+			candidates: [CMP, brazeBanner, puzzlesBanner, readerRevenue],
 			name: 'banner',
 		};
 

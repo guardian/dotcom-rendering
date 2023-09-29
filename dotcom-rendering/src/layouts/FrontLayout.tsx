@@ -13,7 +13,7 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment, useRef } from 'react';
-import { AdSlot } from '../components/AdSlot';
+import { AdSlot } from '../components/AdSlot.web';
 import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
@@ -147,6 +147,7 @@ export const decideFrontsBannerAdSlot = (
 ) => {
 	if (
 		!renderAds ||
+		hasPageSkin ||
 		!targetedCollections?.includes(collectionName) ||
 		isFirstContainer
 	) {
@@ -214,9 +215,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		},
 	} = front;
 
-	const isInEuropeTest =
-		abTests.europeNetworkFrontVariant === 'variant' ||
-		switches['europeNetworkFrontSwitch'] === true;
+	const renderAds = canRenderAds(front);
+
+	const hasPageSkin = hasPageSkinConfig && renderAds;
 
 	const isInNetworkFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
@@ -224,7 +225,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		Object.keys(networkFrontsBannerAdCollections).includes(
 			front.config.pageId,
 		);
-
 	const isInSectionFrontsBannerTest =
 		!!switches.sectionFrontsBannerAds &&
 		abTests.sectionFrontsBannerAdsVariant === 'variant' &&
@@ -242,10 +242,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
 	);
-
-	const renderAds = canRenderAds(front);
-
-	const hasPageSkin = hasPageSkinConfig && renderAds;
 
 	const mobileAdPositions = renderAds
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
@@ -322,7 +318,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={front.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!front.config.switches
 										.headerTopBarSearchCapi
@@ -351,7 +346,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							headerTopBarSwitch={
 								!!front.config.switches.headerTopNav
 							}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{NAV.subNavSections && (
@@ -400,11 +394,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-			{isInEuropeTest && (
-				<Island clientOnly={true}>
-					<EuropeLandingModal edition={front.editionId} />
-				</Island>
-			)}
+			<Island clientOnly={true}>
+				<EuropeLandingModal edition={front.editionId} />
+			</Island>
 			<main
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}

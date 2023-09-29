@@ -6,11 +6,11 @@ import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 export const renderArticle = (
-	article: FEArticleType,
+	article: DCRArticle,
 ): {
 	prefetchScripts: string[];
 	html: string;

@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { cmp } from '@guardian/consent-management-platform';
 import { getCookie, setCookie } from '@guardian/libs';
 import {
 	body,
@@ -13,14 +14,14 @@ import {
 	RadioGroup,
 	SvgCross,
 } from '@guardian/source-react-components';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 import { guard } from '../lib/guard';
-import { useOnce } from '../lib/useOnce';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
-const modalShownKey = 'gu.euModalShown';
+const modalShownCookie = 'GU_EU_MODAL_SHOWN';
 
 // Have not used margin as it will change the backdrop
 const dialogStyles = css`
@@ -31,6 +32,7 @@ const dialogStyles = css`
 	&[open] {
 		display: flex;
 	}
+	display: none;
 	max-width: calc(100vw - 20px);
 	padding: 0;
 	width: 620px;
@@ -52,10 +54,12 @@ const textStyles = css`
 	padding: 6px 0 15px 10px;
 	flex: 3;
 `;
+
 const imageStyles = css`
 	flex: 2;
 	overflow: hidden;
 `;
+
 const editionSectionDivStyles = css`
 	padding: ${space[3]}px 0 ${space[4]}px ${space[3]}px;
 `;
@@ -66,10 +70,12 @@ const headlineStyles = css`
 		${headline.small({ fontWeight: 'bold' })};
 	}
 `;
+
 const bodyStyles = css`
 	${body.medium()};
 	margin-top: ${space[3]}px;
 `;
+
 const buttonDivStyles = css`
 	display: flex;
 	margin-top: 33px;
@@ -77,9 +83,18 @@ const buttonDivStyles = css`
 		margin-top: 77px;
 	}
 `;
+
 const OKButtonStyles = css`
 	margin-right: ${space[2]}px;
+
+	/* override built in source focus styles */
+	html:not(.src-focus-disabled) &:focus {
+		outline: 2px solid ${palette.focus[400]};
+		outline-offset: 0px;
+		box-shadow: none;
+	}
 `;
+
 const closeButtonStyles = css`
 	fill: white;
 	margin: 10px;
@@ -146,6 +161,7 @@ export const getModalType = (): ModalType => {
 	if (!geoCountryCookie) {
 		return 'NoModal';
 	}
+
 	if (
 		!editionCookie &&
 		!coe.includes(geoCountryCookie) &&
@@ -153,10 +169,12 @@ export const getModalType = (): ModalType => {
 	) {
 		return 'ModalDoYouWantToSwitch';
 	}
+
 	// If selected INT and not in COE show do u want to switch
 	if (editionCookie === 'INT' && !coe.includes(geoCountryCookie)) {
 		return 'ModalDoYouWantToSwitch';
 	}
+
 	// If in COE
 	if (coe.includes(geoCountryCookie)) {
 		if (
@@ -171,6 +189,7 @@ export const getModalType = (): ModalType => {
 			return 'ModalDoYouWantToSwitch';
 		}
 	}
+
 	return 'NoModal';
 };
 
@@ -185,20 +204,30 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		isValidEdition(editionCookie) ? editionCookie : edition,
 	);
 
-	useOnce(() => {
+	const initialize = useCallback(() => {
 		const europeModal = document.getElementById('europe-modal-dialog');
-		const modalShown = localStorage.getItem(modalShownKey);
+		const modalShown = getCookie({ name: modalShownCookie });
+
 		if (
 			europeModal instanceof HTMLDialogElement &&
 			modalType !== 'NoModal' &&
 			!modalShown &&
 			editionCookie !== 'EUR'
 		) {
-			localStorage.setItem(modalShownKey, 'true');
-			europeModal.showModal();
-			europeModal.addEventListener('close', () => {
-				hideModal();
+			setCookie({
+				name: modalShownCookie,
+				value: 'true',
+				daysToLive: 90,
 			});
+			europeModal.addEventListener('close', () => {
+				dismissModal();
+			});
+			europeModal.showModal();
+
+			// Dirty way of recording that the EU modal has been opened by creating
+			// a synthetic click which gets Ophan to record a "eu-modal : open" click event.
+			document.getElementById('eu-modal-synthetic-click')?.click();
+
 			document.documentElement.style.overflow = 'hidden';
 			if (modalType === 'ModalSwitched') {
 				setCookie({
@@ -208,26 +237,29 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 				});
 			}
 		}
-	}, []);
+	}, [editionCookie, modalType]);
+
+	useEffect(() => {
+		void cmp.willShowPrivacyMessage().then((willShowCmp) => {
+			// Don't show the EU modal if its the users first time visiting the site and they haven't
+			// seen the CMP banner yet.
+			if (!willShowCmp) {
+				initialize();
+			}
+		});
+	}, [initialize]);
 
 	const confirmNewEdition = (editionId: EditionId) => {
-		setCookie({
-			name: 'GU_EDITION',
-			value: editionId,
-			isCrossSubdomain: true,
-		});
-		if (editionId === edition) {
-			hideModal();
-		} else {
+		dismissModal();
+
+		// Always send EUR users to the Edition preference endpoint.
+		// We want them to be redirected to the /europe front.
+		if (editionId !== edition || editionId === 'EUR') {
 			window.location.replace(getEditionFromId(editionId).url);
 		}
 	};
 
 	const dismissModal = () => {
-		hideModal();
-	};
-
-	const hideModal = () => {
 		const europeModal = document.getElementById('europe-modal-dialog');
 		if (europeModal instanceof HTMLDialogElement) {
 			europeModal.close();
@@ -236,7 +268,16 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 	};
 
 	return (
-		<dialog css={dialogStyles} id={'europe-modal-dialog'}>
+		<dialog
+			css={dialogStyles}
+			id={'europe-modal-dialog'}
+			data-component={'eu-modal'}
+		>
+			<div
+				id="eu-modal-synthetic-click"
+				hidden={true}
+				data-link-name={nestedOphanComponents('eu-modal', 'open')}
+			/>
 			{!switchEdition ? (
 				<>
 					<div css={textStyles}>
@@ -255,9 +296,14 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 						<div css={buttonDivStyles}>
 							{modalType === 'ModalSwitched' && (
 								<Button
+									data-link-name={nestedOphanComponents(
+										'eu-modal',
+										'switched',
+										'ok-thanks',
+									)}
 									size={'small'}
 									onClick={() => {
-										dismissModal();
+										confirmNewEdition('EUR');
 									}}
 									cssOverrides={OKButtonStyles}
 								>
@@ -266,6 +312,11 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							)}
 							{modalType === 'ModalDoYouWantToSwitch' && (
 								<Button
+									data-link-name={nestedOphanComponents(
+										'eu-modal',
+										'not-switched',
+										'no-thanks',
+									)}
 									size={'small'}
 									onClick={() => dismissModal()}
 									cssOverrides={OKButtonStyles}
@@ -275,6 +326,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 								</Button>
 							)}
 							<Button
+								data-link-name={nestedOphanComponents(
+									'eu-modal',
+									modalType === 'ModalSwitched'
+										? 'switched'
+										: 'not-switched',
+									'switch-edition',
+								)}
 								size={'small'}
 								priority={'subdued'}
 								onClick={() => setSwitchEdition(true)}
@@ -284,7 +342,7 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							</Button>
 						</div>
 					</div>
-					<div css={imageStyles}>
+					<div css={imageStyles} aria-hidden="true">
 						<SvgFlagsInCircle />
 					</div>
 				</>
@@ -296,33 +354,43 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 							label="Europe edition"
 							value="EUR"
 							onChange={() => setSelectedEdition('EUR')}
+							checked={selectedEdition === 'EUR'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'UK'}
 							label="UK edition"
 							value="UK"
 							onChange={() => setSelectedEdition('UK')}
+							checked={selectedEdition === 'UK'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'US'}
 							label="US edition"
 							value="US"
 							onChange={() => setSelectedEdition('US')}
+							checked={selectedEdition === 'US'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'AU'}
 							label="Australia edition"
 							value="AU"
 							onChange={() => setSelectedEdition('AU')}
+							checked={selectedEdition === 'AU'}
 						/>
 						<Radio
 							defaultChecked={selectedEdition === 'INT'}
 							label="International edition"
 							value="INT"
 							onChange={() => setSelectedEdition('INT')}
+							checked={selectedEdition === 'INT'}
 						/>
 					</RadioGroup>
 					<Button
+						data-link-name={nestedOphanComponents(
+							'eu-modal',
+							'switch-edition',
+							'confirm-' + selectedEdition,
+						)}
 						size={'small'}
 						onClick={() => confirmNewEdition(selectedEdition)}
 					>
@@ -332,6 +400,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 			)}
 			{switchEdition && (
 				<Button
+					data-link-name={nestedOphanComponents(
+						'eu-modal',
+						modalType === 'ModalSwitched'
+							? 'switched'
+							: 'not-switched',
+						'close',
+					)}
 					aria-label={'close modal'}
 					size={'small'}
 					cssOverrides={closeButtonStyles}

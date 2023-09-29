@@ -63,6 +63,7 @@ export type Palette = {
 		expandableAtom: Colour;
 		expandableAtomHover: Colour;
 		subNavLink: Colour;
+		youtubeOverlayKicker: Colour;
 	};
 	background: {
 		article: Colour;

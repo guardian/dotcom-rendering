@@ -28,7 +28,7 @@ import { decideFormat } from '../lib/decideFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle, FEArticleType } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { DecideLayout } from './DecideLayout';
 
@@ -65,7 +65,7 @@ const HydratedLayout = ({
 	serverArticle,
 	renderingTarget,
 }: {
-	serverArticle: FEArticleType;
+	serverArticle: DCRArticle;
 	renderingTarget: RenderingTarget;
 }) => {
 	const NAV = {

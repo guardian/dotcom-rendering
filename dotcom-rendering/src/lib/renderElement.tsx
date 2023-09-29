@@ -209,7 +209,13 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.CartoonBlockElement':
-			return <CartoonComponent format={format} element={element} />;
+			return (
+				<CartoonComponent
+					format={format}
+					element={element}
+					switches={switches}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
 				<Island deferUntil="visible">
@@ -464,10 +470,8 @@ export const renderElement = ({
 			};
 
 			return <EmailSignUpSwitcher {...emailSignUpProps} />;
-		case 'model.dotcomrendering.pageElements.AdPlaceholderSlot':
-			// TODO - include ad placeholder slot component
-			// @see https://github.com/guardian/dotcom-rendering/pull/8808
-			return <></>;
+		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
+			return <div className="ad-portal-placeholder"></div>;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent

@@ -14,7 +14,9 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { AdPortals } from '../components/AdPortals.importable';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AppsEpic } from '../components/AppsEpic.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -55,7 +57,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -286,7 +288,7 @@ const starWrapper = css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -305,10 +307,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
-
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
-		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
@@ -337,6 +335,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+
 	const renderAds = isWeb && canRenderAds(article);
 
 	return (
@@ -381,7 +381,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -414,7 +413,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							headerTopBarSwitch={
 								!!article.config.switches.headerTopNav
 							}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{props.NAV.subNavSections && !isLabs && (
@@ -478,6 +476,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			)}
 
 			<main data-layout="StandardLayout">
+				{isApps && (
+					<Island clientOnly={true}>
+						<AdPortals />
+					</Island>
+				)}
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
@@ -680,7 +683,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										</Island>
 									)}
 
-								{showBodyEndSlot && (
+								{isApps && (
+									<Island clientOnly={true}>
+										<AppsEpic />
+									</Island>
+								)}
+
+								{isWeb && showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
 											contentType={article.contentType}
@@ -984,7 +993,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				</>
 			)}
 
-			{!isWeb && (
+			{isApps && (
 				<>
 					<Section
 						fullWidth={true}

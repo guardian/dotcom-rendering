@@ -9,9 +9,10 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import { getLargest, getMaster } from '../lib/image';
 import { isWideEnough } from '../lib/lightbox';
 import type { Switches } from '../types/config';
-import type { Image, ImageBlockElement, RoleType } from '../types/content';
+import type { ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
@@ -217,23 +218,11 @@ const CaptionToggle = () => (
 	</>
 );
 
-const descendingByWidthComparator = (a: Image, b: Image) => {
-	return parseInt(b.fields.width, 10) - parseInt(a.fields.width, 10);
-};
-
 const isSupported = (imageUrl: string): boolean => {
 	const supportedImages = ['jpg', 'jpeg', 'png'];
 	return supportedImages.some((extension) =>
 		imageUrl.endsWith(`.${extension}`),
 	);
-};
-
-export const getMaster = (images: Image[]) => {
-	return images.find((image) => image.fields.isMaster);
-};
-
-export const getLargest = (images: Image[]) => {
-	return images.slice().sort(descendingByWidthComparator)[0];
 };
 
 export const ImageComponent = ({

@@ -389,6 +389,25 @@ const aboutThisLinkStyles = css`
 	text-decoration: none;
 `;
 
+const SponsoredBranding = ({
+	branding,
+}: {
+	branding: Branding | undefined;
+}) => {
+	if (!branding) {
+		return null;
+	}
+	const { logo, aboutThisLink } = branding;
+	return (
+		<>
+			<p css={labelStyles}>{logo.label}</p>
+			<Badge imageSrc={logo.src} href={logo.link} />
+			<a href={aboutThisLink} css={aboutThisLinkStyles}>
+				About this content
+			</a>
+		</>
+	);
+};
 /**
  * # Front Container
  *
@@ -522,6 +541,12 @@ export const FrontSection = ({
 	const isTheFirstContainerOnASponsoredFront =
 		!isOnPaidContentFront && index === 0 && !!frontBranding;
 
+	const showSponsoredBranding =
+		(isTheFirstContainerOnASponsoredFront && frontBranding.branding) ||
+		containerBranding;
+
+	const sponsoredBranding = frontBranding?.branding ?? containerBranding;
+
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
 	 * this id pre-existed showMore so is probably also being used for something else.
@@ -582,7 +607,7 @@ export const FrontSection = ({
 							showDateHeader={showDateHeader}
 							editionId={editionId}
 						/>
-						{!!frontBranding?.branding?.logo.src && (
+						{!!frontBranding.branding?.logo.src && (
 							<div
 								css={css`
 									display: inline-block;
@@ -599,8 +624,8 @@ export const FrontSection = ({
 							>
 								Paid for by
 								<Badge
-									imageSrc={frontBranding?.branding?.logo.src}
-									href={frontBranding?.branding?.logo.link}
+									imageSrc={frontBranding.branding.logo.src}
+									href={frontBranding.branding.logo.link}
 								/>
 							</div>
 						)}
@@ -633,48 +658,10 @@ export const FrontSection = ({
 								showDateHeader={showDateHeader}
 								editionId={editionId}
 							/>
-							{isTheFirstContainerOnASponsoredFront &&
-								frontBranding?.branding && (
-									<>
-										<p css={labelStyles}>
-											{frontBranding.branding.logo.label}
-										</p>
-										<Badge
-											imageSrc={
-												frontBranding.branding.logo.src
-											}
-											href={
-												frontBranding.branding.logo.link
-											}
-										/>
-										<a
-											href={
-												frontBranding.branding
-													.aboutThisLink
-											}
-											css={aboutThisLinkStyles}
-										>
-											About this content
-										</a>
-									</>
-								)}
-
-							{containerBranding && (
-								<>
-									<p css={labelStyles}>
-										{containerBranding.logo.label}
-									</p>
-									<Badge
-										imageSrc={containerBranding.logo.src}
-										href={containerBranding.logo.link}
-									/>
-									<a
-										href={containerBranding.aboutThisLink}
-										css={aboutThisLinkStyles}
-									>
-										About this content
-									</a>
-								</>
+							{showSponsoredBranding && (
+								<SponsoredBranding
+									branding={sponsoredBranding}
+								/>
 							)}
 						</div>
 					</>
