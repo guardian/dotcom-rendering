@@ -274,6 +274,8 @@ const frontsBannerCollapseStyles = css`
 const frontsBannerAdStyles = css`
 	position: relative;
 	max-width: ${breakpoints['wide']}px;
+	/* No banner should be taller than 600px */
+	max-height: ${600 + labelHeight}px;
 	overflow: hidden;
 	padding-bottom: ${frontsBannerPaddingHeight}px;
 
