@@ -16,9 +16,16 @@ const target = path.resolve(dirname, '../..', 'target');
 // ├── riff-raff.yaml
 // ├── frontend-cfn
 // │   ├── DotcomRendering-CODE.template.json
-// │   ├── DotcomRendering-PROD.template.json
-// ├── render-front
+// │   └── DotcomRendering-PROD.template.json
+// ├── rendering
+// |   └── dist
+// |       └── rendering.zip
+// ├── render-front-cfn
 // │   ├── DotcomRendering-front-CODE.template.json
+// │   └── DotcomRendering-front-PROD.template.json
+// ├── render-front
+// |   └── dist
+// |       └── render-front.zip
 // ├── frontend-static
 // │   ├── assets
 // │   │   └── **
@@ -28,9 +35,6 @@ const target = path.resolve(dirname, '../..', 'target');
 // │       │   └── **
 // │       │       └── *
 // │       └── etc
-// └── rendering
-//     └── dist
-//         └── rendering.zip
 
 const copyCfn = () => {
 	log(' - copying cloudformation config');
