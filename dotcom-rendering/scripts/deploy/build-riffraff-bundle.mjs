@@ -14,100 +14,124 @@ const target = path.resolve(dirname, '../..', 'target');
 // target
 // ├── build.json
 // ├── riff-raff.yaml
-// ├── frontend-cfn
-// │   ├── DotcomRendering-CODE.template.json
-// │   └── DotcomRendering-PROD.template.json
-// ├── rendering
-// |   └── dist
-// |       └── rendering.zip
-// ├── render-front-cfn
-// │   ├── DotcomRendering-front-CODE.template.json
-// │   └── DotcomRendering-front-PROD.template.json
-// ├── render-front
-// |   └── dist
-// |       └── render-front.zip
-// ├── frontend-static
-// │   ├── assets
-// │   │   └── **
-// │   │       └── *
-// │   └── static
-// │       ├── frontend
-// │       │   └── **
-// │       │       └── *
-// │       └── etc
+// ├── ${copyFrontendStatic()}
+// ├── ${copyApp('rendering')}
+// └── ${copyApp('renderi-front')}
 
-const copyCfn = () => {
-	log(' - copying cloudformation config');
-	return cpy(
-		[
-			'cdk.out/DotcomRendering-CODE.template.json',
-			'cdk.out/DotcomRendering-PROD.template.json',
-		],
-		path.resolve(target, 'frontend-cfn'),
+
+
+/**
+ * This comprises of the CloudFormation files and app artifacts that
+ * are needed to run an app.
+ *
+ * It generates a folder like this:
+ * ├── ${appName}-cfn
+ * │   ├── DotcomRendering-${appName}-CODE.template.json
+ * │   └── DotcomRendering-${appName}-PROD.template.json
+ * └── ${appName}
+ *     └── dist
+ *         └── ${appName}.zip
+ *
+ * Except for the instance where appName === 'rendering' due to backwards compatibility
+ *
+ * @param appName {string}
+ **/
+const copyApp = (appName) => {
+	// This is a little hack to be backwards compatible with the naming for when this was a single stack app
+	const cfnTemplateName = appName === 'rendering' ? '' : `-${appName}`;
+	const cfnFolder = appName === 'rendering' ? 'frontend-cfn' : `${appName}-cfn`;
+
+	log(` - copying stack ${appName}`);
+	const jobs = [];
+
+	log(` - ${appName}: copying cloudformation config`);
+	jobs.push(
+		cpy(
+			[
+				`cdk.out/DotcomRendering${cfnTemplateName}-CODE.template.json`,
+				`cdk.out/DotcomRendering${cfnTemplateName}-PROD.template.json`,
+			],
+			path.resolve(target, cfnFolder),
+		),
 	);
+
+	log(` - ${appName}: copying makefile`);
+	jobs.push(cpy(['makefile'], path.resolve(target, appName)));
+
+	log(` - ${appName}: copying server dist`);
+	jobs.push(
+		cpy(
+			path.resolve(dirname, '../../dist/**'),
+			path.resolve(target, appName, 'dist'),
+			{
+				nodir: true,
+			},
+		),
+	);
+
+	log(`' - ${appName}: copying scripts`);
+	jobs.push(
+		cpy(
+			path.resolve(dirname, '../../scripts/**'),
+			path.resolve(target, appName, 'scripts'),
+			{
+				nodir: true,
+			},
+		),
+	);
+
+	return jobs;
 };
 
-const copyRenderingFrontCfn = () => {
-	log(' - copying cloudformation config');
-	return cpy(
-		[
-			'cdk.out/DotcomRendering-front-CODE.template.json',
-		],
-		path.resolve(target, 'render-front'),
-	);
-};
+/**
+ * This method copies the static files over the frontend-static folder, which is then deployed to S3.
+ *
+ * It generates a folder like this:
+ * ├── frontend-static
+ *     ├── assets
+ *     │   └── **
+ *     │       └── *
+ *     └── static
+ *         ├── frontend
+ *         │   └── **
+ *         │       └── *
+ *         └── etc
+ */
+const copyFrontendStatic = () => {
+	const jobs = [];
 
-const copyStatic = () => {
 	log(' - copying static');
-	return cpy(
-		path.resolve(dirname, '../../src/static/**'),
-		path.resolve(target, 'frontend-static', 'static', 'frontend'),
-		{
-			nodir: true,
-		},
+	jobs.push(
+		cpy(
+			path.resolve(dirname, '../../src/static/**'),
+			path.resolve(target, 'frontend-static', 'static', 'frontend'),
+			{
+				nodir: true,
+			},
+		),
 	);
-};
 
-const copyDist = () => {
-	log(' - copying dist');
+
 	const source = path.resolve(dirname, '../../dist');
 	const dest = path.resolve(target, 'frontend-static', 'assets');
-	return Promise.all([
+
+	log(' - copying dist => assets');
+	jobs.push(
 		cpy(path.resolve(source, '**/*.!(html|json)'), dest, {
 			nodir: true,
 		}),
+	);
+
+	log(' - copying stats => assets');
+	jobs.push(
 		cpy(path.resolve(source, 'stats'), path.resolve(dest, 'stats'), {
 			nodir: true,
 		}),
-	]);
-};
-
-const copyScripts = () => {
-	log(' - copying scripts');
-	return cpy(
-		path.resolve(dirname, '../../scripts/**'),
-		path.resolve(target, 'rendering', 'scripts'),
-		{
-			nodir: true,
-		},
 	);
+
+	return jobs;
 };
 
-const copyDistServer = () => {
-	log(' - copying server dist');
-	return cpy(
-		path.resolve(dirname, '../../dist/**'),
-		path.resolve(target, 'rendering', 'dist'),
-		{
-			nodir: true,
-		},
-	);
-};
-
-const copyMakefile = () => {
-	log(' - copying makefile');
-	return cpy(['makefile'], path.resolve(target, 'rendering'));
-};
 
 const copyRiffRaff = () => {
 	log(' - copying riffraff yaml');
@@ -115,16 +139,11 @@ const copyRiffRaff = () => {
 };
 
 Promise.all([
-	copyCfn(),
-	copyRenderingFrontCfn(),
-	copyMakefile(),
-	copyStatic(),
-	copyDist(),
-	copyDistServer(),
-	copyScripts(),
+	...copyApp('rendering'),
+	...copyApp('render-front'),
+	...copyFrontendStatic(),
 	copyRiffRaff(),
-])
-	.catch((err) => {
-		warn(err.stack);
-		process.exit(1);
-	});
+]).catch((err) => {
+	warn(err.stack);
+	process.exit(1);
+});
