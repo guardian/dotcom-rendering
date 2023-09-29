@@ -1,26 +1,21 @@
-import { log, startPerformanceMeasure } from '@guardian/libs';
+import { log } from '@guardian/libs';
+import type { ScheduleOptions } from '../lib/scheduler';
+import { schedule } from '../lib/scheduler';
 
-const measure = (name: string, task: () => Promise<void>): void => {
-	const { endPerformanceMeasure } = startPerformanceMeasure('dotcom', name);
-
-	task()
-		.then(() => {
-			const duration = endPerformanceMeasure();
-			log('dotcom', `🥾 Booted ${name} in ${duration}ms`);
-		})
-		.catch(() => {
-			const duration = endPerformanceMeasure();
-			log('dotcom', `🤒 Failed to boot ${name} in ${duration}ms`);
-		});
-};
-
-export const startup = (name: string, task: () => Promise<void>): void => {
-	const measureMe = () => {
-		measure(name, task);
-	};
+const isPolyfilled = new Promise<void>((resolve) => {
 	if (window.guardian.mustardCut || window.guardian.polyfilled) {
-		measureMe();
-	} else {
-		window.guardian.queue.push(measureMe);
+		return resolve();
 	}
+	window.guardian.queue.push(resolve);
+});
+
+export const startup = async (
+	name: string,
+	task: () => Promise<unknown>,
+	options: ScheduleOptions,
+): Promise<void> => {
+	await isPolyfilled;
+	log('dotcom', `🎬 booting ${name}`);
+	await schedule(name, task, options);
+	log('dotcom', `🥾 booted ${name}`);
 };

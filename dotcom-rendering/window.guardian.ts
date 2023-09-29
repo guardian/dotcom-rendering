@@ -21,6 +21,15 @@ declare global {
 		guardian: Guardian & {
 			mustardCut: boolean;
 			onPolyfilled: () => void;
+			/**
+			 * **Do not edit this property**
+			 *
+			 * While there is no contract in place,
+			 * it’s being used all over the shop
+			 * and without documentation or communication
+			 *
+			 * e.g. https://github.com/search?q=org%3Aguardian+window.guardian.queue&type=code
+			 */
 			queue: Array<() => void>;
 			// Olly N 10/01/2022:
 			// The 'emotionCache' property would better live as a singleton package/chunk, but we're currently limited
