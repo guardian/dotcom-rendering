@@ -1617,7 +1617,7 @@ export const PhotoEssay: DCRArticle = {
 					],
 				},
 			],
-			elementId: 'efff8009-9c41-419d-adfb-7f25cef1d531',
+			elementId: '0973830c-fd18-4619-898f-aa162e628538',
 			position: 1,
 			lightbox: {
 				caption:
@@ -1635,17 +1635,17 @@ export const PhotoEssay: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The last embers of my fire flicker orange and red in the dark. It has warmed me after my evening swim shared with a grey seal, a curious female at the water’s edge, under the soft pink hues of the setting sun.</p>',
-					elementId: '43a085a6-c114-4428-af2f-2867a76276a1',
+					elementId: 'e049e7b1-f200-4ddd-859d-b83ab2ec7ef2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The nights are beginning to draw in and the temperature is dropping. Tonight’s home is a magical one: a hidden spot somewhere on the Roseland Heritage coast.</p>',
-					elementId: 'a506a6bf-a214-4af0-b48e-69cb85e1e4be',
+					elementId: '9607591a-8eea-4509-bf2b-b0e4227ee1c3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I am curled up in my tiny space with only a canvas shell between me and the elements. Tonight is calm: a beautiful moon path marks the ocean and is my view through the open back of my family’s Land Rover. I drift off to sleep to the sound of waves lapping the shore and the call of tawny owls across the night sky.</p>',
-					elementId: '51038768-d314-4486-a589-e6f23339dfc5',
+					elementId: 'd5b0581a-ea87-4b8a-866d-d46c91cfb69f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1962,7 +1962,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: '31128fbf-fa70-4bf7-8cfc-6941d9b559fc',
+					elementId: 'eec79626-5633-44ba-8c64-542c8945f904',
 					position: 2,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton/The Guardian',
@@ -1971,22 +1971,22 @@ export const PhotoEssay: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the last few years I’ve not called one place home. Instead, I’ve roamed across the globe – from the High Himalaya to the Arctic Circle, the Gobi Desert to the Andaman Sea<strong> </strong>– weaving my life and work as a photographer, more in tune with a wilder spirit and those who still live connected to nature.</p>',
-					elementId: '99da9316-dba5-4c63-b52b-4d80d1958048',
+					elementId: 'd5a38d3e-484a-40ff-933f-c9074d676ff5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As the world locked down in March, not only my work but my entire way of life ground to a quiet halt, forcing me to look inward and to grapple with the meaning<em> </em>of “home”.</p>',
-					elementId: 'e7138cd0-c825-434d-a692-041a5702c000',
+					elementId: 'e8cbdd14-8b31-471c-ba63-70c2378009cf',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>My pull was to the ocean of the south-west of England. Thanks to my friend Louise Middleton, for those three months of lockdown I watched over a wild pocket of the north Cornish coast – an old slate quarry that overlooks the sea at Trebarwith Strand. It is a beautifully curated space, totally off-grid, that Louise has named <a href="https://kudhva.com/">Kudhva</a> (meaning hideout in Cornish). Kudhva is a visionary architectural hideout that draws creative people who thrive on a life connected to the outdoors.</p>',
-					elementId: '4cd3048c-bf75-4b7b-b815-6c19e46650fb',
+					elementId: '149d0ccc-4fe0-40f0-8c76-a4453f0521b4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I became part of a community at Kudhva and my days were spent in fascinating conversation, working on the land with the locals. This is what I do on my projects – immerse myself in a way of life, documenting people who are connected to their land and community around the world. I fell into a way of doing the same on home shores.</p>',
-					elementId: 'f42df5b7-f9eb-4909-b290-adad1624c000',
+					elementId: 'de94dff5-4c28-47b7-993f-98d644221883',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2302,7 +2302,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: '5ce0766e-fc14-4f1c-b037-0d014dffa9d7',
+					elementId: '569bc940-5069-4bb0-bd10-b980226f3278',
 					position: 3,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton/The Guardian',
@@ -2623,7 +2623,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: '35da1556-bf72-45fc-942c-0b87704d478c',
+					elementId: '9d5de783-1dae-4c9d-b2ca-99829358b7fc',
 					position: 4,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton/The Guardian',
@@ -2632,11 +2632,11 @@ export const PhotoEssay: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Sidetracked, an adventure journal which has shared my stories from the remotest corners of the world, joined us as lockdown lifted for some backyard adventures – climbing, biking, cold-water swimming and surfing – with the people who know this land best.</p>',
-					elementId: 'c343dfeb-c501-4604-8813-b5f139fb383b',
+					elementId: '76ef3031-1eb1-45ca-a328-b1762579bf30',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
-					elementId: 'fefc6d39-8ea7-4b0b-a79d-75328a0f4556',
+					elementId: 'e4f534a1-269c-43d2-b073-0f04b286c182',
 					images: [
 						{
 							_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2952,7 +2952,7 @@ export const PhotoEssay: DCRArticle = {
 									],
 								},
 							],
-							elementId: 'fefc6d39-8ea7-4b0b-a79d-75328a0f4556',
+							elementId: 'e4f534a1-269c-43d2-b073-0f04b286c182',
 							position: 5,
 							lightbox: {
 								credit: 'Photograph: Cat Vinton',
@@ -3272,7 +3272,7 @@ export const PhotoEssay: DCRArticle = {
 									],
 								},
 							],
-							elementId: '5fa87e9e-71e6-4863-8e49-b6d697a18e14',
+							elementId: '0cecee1b-366e-43c8-ae14-71138bb24252',
 							position: 6,
 							lightbox: {
 								credit: 'Photograph: Cat Vinton/The Guardian',
@@ -3282,7 +3282,7 @@ export const PhotoEssay: DCRArticle = {
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
-					elementId: 'bd18d421-75be-44e8-bc75-38d1c06dd1a4',
+					elementId: '187fc457-f4ed-41d1-8171-adef9bb9c7f4',
 					images: [
 						{
 							_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3598,7 +3598,7 @@ export const PhotoEssay: DCRArticle = {
 									],
 								},
 							],
-							elementId: 'bd18d421-75be-44e8-bc75-38d1c06dd1a4',
+							elementId: '187fc457-f4ed-41d1-8171-adef9bb9c7f4',
 							position: 7,
 							lightbox: {
 								credit: 'Photograph: Cat Vinton/The Guardian',
@@ -3918,7 +3918,7 @@ export const PhotoEssay: DCRArticle = {
 									],
 								},
 							],
-							elementId: 'ea91e321-fc8c-48cb-b52a-d4defc3276b7',
+							elementId: 'd612d51e-803f-46fd-8cfb-fce1e52d4f12',
 							position: 8,
 							lightbox: {
 								credit: 'Photograph: Cat Vinton/The Guardian',
@@ -4232,7 +4232,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: '0f1dab42-9fd9-4e89-983c-345fcff6c2c0',
+					elementId: 'f999ae85-0fa1-4a51-bd89-2c963b97940e',
 					position: 9,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton/The Guardian',
@@ -4241,24 +4241,24 @@ export const PhotoEssay: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Then, as the country began to open up again, and Kudhva began to welcome back guests, it was time to move on. I decided this was a gift of time I may never get again. Usually, I’m moving with my work. I had my cameras and a Land Rover that could take me off the beaten track – the perfect companion to explore the Cornish coast and its way of life, and to see if I could still find pockets of solitude, as the tourist floodgates opened.</p>',
-					elementId: 'd2b75d8e-2cce-4dac-b311-259dbf43b908',
+					elementId: '906128e5-00d6-4748-9128-47a9f73739dc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
 					html: 'It’s a simple set-up – I’m free, independent and I am happy',
 					role: 'supporting',
 					isThirdPartyTracking: false,
-					elementId: 'ca6296c3-e071-49fa-9d01-7db33d9d3116',
+					elementId: '9d239f52-34fd-48e4-bbb3-a8f917bfa242',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>A small pile of books is stacked between the seats of the Land Rover; a head torch, tide tables, bikini and my knife are at hand. Everything else I need is packed neatly in the open back, covered with a piece of wood that doubles as a table and my bed. It’s simple – I’m free, independent and happy. With no real plan, I set off west along the north coast.</p>',
-					elementId: '3c5d53bd-67a6-438b-a983-7e241a9ac088',
+					elementId: 'e4b02a6e-2417-4fcc-ac07-06677259d0e8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Cornwall has always felt like a haven to me, but even more so now with its gift of space, fresh air, ocean and local produce far from the hustle of city life. Slate and granite cliffs, small rocky coves and headlands, sand dunes, reefs, sandy beaches, green pathways and water shape Cornwall’s 400 miles of coastline.</p>',
-					elementId: '4d0d9510-9ca2-4b2a-b39e-83a49fb4d160',
+					elementId: '83445603-fca2-44a3-8528-e7412be1fccc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4574,7 +4574,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: 'c510807e-634d-473b-b6de-d30e5d027501',
+					elementId: '6170dd76-3722-4c83-8277-8a3dc6fce337',
 					position: 10,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton/The Guardian',
@@ -4582,7 +4582,7 @@ export const PhotoEssay: DCRArticle = {
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
-					elementId: '99f90cb6-fe66-4e69-ba7c-503d897cc9f5',
+					elementId: '2fea943e-f28d-4f85-beeb-a5eb5ca8e153',
 					images: [
 						{
 							_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4898,7 +4898,7 @@ export const PhotoEssay: DCRArticle = {
 									],
 								},
 							],
-							elementId: '99f90cb6-fe66-4e69-ba7c-503d897cc9f5',
+							elementId: '2fea943e-f28d-4f85-beeb-a5eb5ca8e153',
 							position: 11,
 							lightbox: {
 								credit: 'Photograph: Cat Vinton/The Guardian',
@@ -5218,7 +5218,7 @@ export const PhotoEssay: DCRArticle = {
 									],
 								},
 							],
-							elementId: '7dbf7046-7af3-4a2d-95e6-128cffbf86cb',
+							elementId: 'a352ca77-aba7-43fa-8ffe-486bfe8db4fd',
 							position: 12,
 							lightbox: {
 								credit: 'Photograph: Cat Vinton/The Guardian',
@@ -5231,7 +5231,7 @@ export const PhotoEssay: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As my days slowed, I noticed every detail in the shifting light, the sounds, smells and colours, and tuned into the tidal rhythm, mesmerised by the waves that roll in perfect lines.</p>',
-					elementId: 'd7d3483d-1938-4671-98f3-b6408d958a7d',
+					elementId: 'fd14c376-2061-429d-965f-606a6ed43fc2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5547,7 +5547,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: '1ea71f58-6844-449f-acfe-817a629bcfed',
+					elementId: 'a9951b25-70d2-4c9b-a953-d027694b652d',
 					position: 13,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton',
@@ -5556,12 +5556,12 @@ export const PhotoEssay: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I weaved my way along the north coast from Trebarwith Strand to the lighthouse on Pendeen Point, almost 100 miles of coast flanked by the Atlantic Ocean. This part of the coast is punctuated with derelict buildings and still-noble chimneys of tin and copper mines that once thrived in a harsh industrial past. Climbers are drawn to the granite cliffs and crags of the Penwith peninsula, and I spent some epic days here, with friends, climbing and exploring the Penwith heritage coast.</p>',
-					elementId: 'e0f4cca6-d2c2-48ee-9bbc-87609a8c3332',
+					elementId: '94c20f8c-cb5e-40a2-956e-9a0992c4513c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The weather had been mostly kind until late August, but the rumblings of thunder carried a wild energy that stirred up the ocean and I lay awake as lightning lit up the night sky, and wind and driving rain whipped the canvas covering of the Land Rover. For 10 days storms Ellen and Francis raged across the ocean, swirled around the end of land and made me appreciate everything – especially how privileged I am to be able to make the choice to live like this. It’s not the easiest way to live and not what most people would choose – but it’s stripped back, simple and connected. Being immersed in the elements is where I find my energy and my balance, giving me a sense of purpose.</p>',
-					elementId: '10342cbe-5730-49d7-bce7-4f66a41e0368',
+					elementId: '33b3112a-56ce-4179-884d-f71b5c9796a3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5878,7 +5878,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: '46a8e6be-9d92-4195-84a1-82404481bc25',
+					elementId: '94d23d94-07cc-40ba-9f81-7246e365baaa',
 					position: 14,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton/The Guardian',
@@ -5887,14 +5887,14 @@ export const PhotoEssay: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Every day is different as I move slowly along this stunning coast. I’ve seen pilot whales, dolphins, seals, barn owls, kestrels, peregrines and choughs, met old Cornish fishermen and made new local friends. I have, of course, also seen the hordes of people who’ve flocked here – but I’ve also found so many empty pockets of Kernow magic. The sea mist comes and goes, as do the sun and the clouds. The sea changes every day, every hour, every minute, as do we – our emotions, our energy and our perspectives. It feels like a lesson – a constant reminder that we are part of nature, not separated from it.</p>',
-					elementId: '3c694a57-d4ba-4e99-a767-54561a39e4a7',
+					elementId: '3df3955b-a775-4983-ab56-6bd9bbe7ea8c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
 					html: 'I’ve seen pilot whales, dolphins, seals, met old Cornish fishermen and made new local friends',
 					role: 'supporting',
 					isThirdPartyTracking: false,
-					elementId: '866d315d-8955-4057-8e2b-75abe84d894b',
+					elementId: 'cbfd7c7d-5bf8-4152-b6cc-cf38896709e2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6210,7 +6210,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: 'ebb7b0df-adac-4a36-a9b4-ae112c98c239',
+					elementId: '9cd99bb7-ea4d-41ec-bc80-c03798274299',
 					position: 15,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton/The Guardian',
@@ -6218,7 +6218,7 @@ export const PhotoEssay: DCRArticle = {
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
-					elementId: '86554b5c-f628-458d-add1-e429417e5690',
+					elementId: 'a7675ca4-dfa4-4b13-bc09-c6957234bf39',
 					images: [
 						{
 							_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6534,7 +6534,7 @@ export const PhotoEssay: DCRArticle = {
 									],
 								},
 							],
-							elementId: '86554b5c-f628-458d-add1-e429417e5690',
+							elementId: 'a7675ca4-dfa4-4b13-bc09-c6957234bf39',
 							position: 16,
 							lightbox: {
 								credit: 'Photograph: Cat Vinton',
@@ -6854,7 +6854,7 @@ export const PhotoEssay: DCRArticle = {
 									],
 								},
 							],
-							elementId: 'd575c2d4-6abc-4445-8fc6-79a801b2276c',
+							elementId: 'a49e4b9a-982c-43f1-b944-87eac767355f',
 							position: 17,
 							lightbox: {
 								caption: 'Logan Rock, Cornwall',
@@ -6868,12 +6868,12 @@ export const PhotoEssay: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Friends have joined me, I’ve swum every day, I’ve climbed, explored and watched the days turn to night by a fire on the beach most evenings. I’ve witnessed the change in the coastal palette of the native wildflowers and fallen into the pace of life here. I navigated the coast around the Lizard, up to Falmouth and on to the Roseland Heritage coast; the south coast is gentler, with sheltered beaches, woodland valleys, tree-lined estuaries, tiny winding roads, and picturesque fishing villages scattered along its shores.</p>',
-					elementId: '782ab8f7-6405-4c61-b67b-726d72a66d5e',
+					elementId: 'd89fedd0-6a22-4017-9b98-ead633dc4b25',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I’ve been drawn to like-minded people, who share the same values, who’ve made a home on this coast and who are passionately driven to protect the ocean and the land. Conversations, ideas and projects are the beginnings of collaborations, now and in the future.</p>',
-					elementId: '74f9a131-c5f1-4a5a-b379-3bd1ec63037d',
+					elementId: 'cfcf3325-01f9-421d-b407-f1350576ef36',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -7190,7 +7190,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: '30436c3a-84a0-4b11-9900-32cda1e39404',
+					elementId: '431bf93e-c208-434a-99e4-5fff0fb924ba',
 					position: 18,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton/The Guardian',
@@ -7199,7 +7199,7 @@ export const PhotoEssay: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I made it to Mevagissey on the south coast by the beginning of October, with warnings of another storm. I had a commitment to be on Cornwall’s highest point, Brown Willy on Bodmin Moor, by 3 October to photograph an amazing man, explorer <a href="https://www.theguardian.com/travel/2020/oct/14/nature-has-healing-power-britains-covid-heroes-share-their-favourite-outdoor-spaces">Robin Hanbury-Tenison</a> and his family. His story is one of a remarkable recovery from Covid-19, having spent five weeks in an induced coma with little chance of survival. The key moment in his recovery was when he was wheeled into the healing garden of Derriford hospital. Now raising funds for healing gardens across Cornwall, Robin braved the 60mph winds of Storm Alex to reach the summit and fly the Cornish flag of Saint Piran. Another story of the power of nature.</p>',
-					elementId: 'cd48397f-2186-4b43-b95f-39f9f3617176',
+					elementId: '74f2dfcc-f62b-4d6c-a471-98e15bb3b418',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -7515,7 +7515,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: 'eea0bb66-7212-4b32-b14e-bbd2b4f53e67',
+					elementId: 'eab2223c-7cd8-486a-8f87-4bf070c426dd',
 					position: 19,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton/The Guardian',
@@ -7836,7 +7836,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: 'd49d6929-333d-4cd0-962f-3151f3ef5164',
+					elementId: '4a6cc81e-f2f4-4533-bea5-d2f1c33c4f37',
 					position: 20,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton/The Guardian',
@@ -7845,28 +7845,28 @@ export const PhotoEssay: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I’ve been in Cornwall for eight months now. That’s the longest I’ve been in one place for a long time. Cornwall has had my heart for many years, but to have lived through the seasons, entirely off-grid, has connected me more deeply.</p>',
-					elementId: '93698abd-fb10-47a7-90b4-4fc1133fbf22',
+					elementId: '959772c7-2cc6-496b-acac-4ef3cd7e0067',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
 					html: 'There is something incredibly powerful about living so close to nature, in the elements',
 					role: 'supporting',
 					isThirdPartyTracking: false,
-					elementId: '76074cd2-5b69-49d7-b16b-a9244d6326d2',
+					elementId: 'de69a5f8-958e-4365-84dc-52b2f3df4370',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>There is something incredibly powerful about living so close to nature, in the elements. I think it’s something we miss living inside closed walls – we are disconnected.</p>',
-					elementId: '82670a01-7453-4ad2-9bfc-1b4994b95cf8',
+					elementId: 'ed0ee089-5eae-4e97-8cb4-50044552619f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As the world of free movent has new rules and the future is unknown and precarious, I think it has forced many of us to rethink our pace of life, our relationship to nature, what we really need to be happy and fulfilled, and how we will live our lives on the other side of this.</p>',
-					elementId: '6df682d4-5e97-4930-b47c-5d5129c9004d',
+					elementId: 'ab8d1537-ed97-40a9-976a-5981851dacbe',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
-					elementId: 'e6515149-e9a3-499d-80b6-bf777f92601a',
+					elementId: '279687ec-21f7-4654-8bb8-966be4c307d3',
 					images: [
 						{
 							_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -8182,7 +8182,7 @@ export const PhotoEssay: DCRArticle = {
 									],
 								},
 							],
-							elementId: 'e6515149-e9a3-499d-80b6-bf777f92601a',
+							elementId: '279687ec-21f7-4654-8bb8-966be4c307d3',
 							position: 21,
 							lightbox: {
 								credit: 'Photograph: Cat Vinton',
@@ -8502,7 +8502,7 @@ export const PhotoEssay: DCRArticle = {
 									],
 								},
 							],
-							elementId: '2e444373-0b74-448b-ac1e-b51d9a349acc',
+							elementId: '98f3dd76-4161-4a91-a7c8-454c31d495c8',
 							position: 22,
 							lightbox: {
 								credit: 'Photograph: Cat Vinton',
@@ -8825,7 +8825,7 @@ export const PhotoEssay: DCRArticle = {
 							],
 						},
 					],
-					elementId: 'e7b036ac-4c88-4062-9c9b-ca2576c86b4d',
+					elementId: '8c19c9d7-c565-4306-b1d1-ccc6e50f1950',
 					position: 23,
 					lightbox: {
 						credit: 'Photograph: Cat Vinton/The Guardian',
@@ -8834,7 +8834,7 @@ export const PhotoEssay: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I have learned so much about the importance and the purpose of life – a moral and ethical code – from the nomadic people of the world’s most remote corners. About the fragile connection between people and nature, and that wealth and success are not measured in belongings and status, but in the strength of our human spirit. I feel, more than ever, that we have so much to learn from these people who have never lost those visceral connections.</p>',
-					elementId: 'f47a1878-a56d-468e-8d87-10ab441cc61b',
+					elementId: '93b3f580-dfaf-4000-aee7-7331a8443a37',
 				},
 			],
 			attributes: {
@@ -9092,7 +9092,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 1,
 			width: 2719,
 			height: 1632,
-			elementId: 'efff8009-9c41-419d-adfb-7f25cef1d531',
+			elementId: '0973830c-fd18-4619-898f-aa162e628538',
 			alt: 'Joe Bracegirdle Lanterdan Quarry above Vean Hole Beach, North Coast Shot for Sidetracked Equipped',
 			credit: 'Photograph: The Guardian',
 			caption:
@@ -9105,7 +9105,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 2,
 			width: 3110,
 			height: 2074,
-			elementId: '31128fbf-fa70-4bf7-8cfc-6941d9b559fc',
+			elementId: 'eec79626-5633-44ba-8c64-542c8945f904',
 			alt: 'Land Rover parked somewhere on the Roseland Heritage Coast, Cornwall. Image taken at dusk.',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9116,7 +9116,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 3,
 			width: 3110,
 			height: 2074,
-			elementId: '5ce0766e-fc14-4f1c-b037-0d014dffa9d7',
+			elementId: '569bc940-5069-4bb0-bd10-b980226f3278',
 			alt: 'Kudhva, architectural hideouts on the north Cornish coast',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9127,7 +9127,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 4,
 			width: 3110,
 			height: 2074,
-			elementId: '35da1556-bf72-45fc-942c-0b87704d478c',
+			elementId: '9d5de783-1dae-4c9d-b2ca-99829358b7fc',
 			alt: 'The engine House at Kudhva, built in 1871, at sunset over Gull Rock',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9138,7 +9138,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 5,
 			width: 3110,
 			height: 2074,
-			elementId: 'fefc6d39-8ea7-4b0b-a79d-75328a0f4556',
+			elementId: 'e4f534a1-269c-43d2-b073-0f04b286c182',
 			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Sophie Hellyer',
 			credit: 'Photograph: Cat Vinton',
 			displayCredit: false,
@@ -9149,7 +9149,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 6,
 			width: 3110,
 			height: 2074,
-			elementId: '5fa87e9e-71e6-4863-8e49-b6d697a18e14',
+			elementId: '0cecee1b-366e-43c8-ae14-71138bb24252',
 			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Jack Stocker',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9160,7 +9160,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 7,
 			width: 3110,
 			height: 2074,
-			elementId: 'bd18d421-75be-44e8-bc75-38d1c06dd1a4',
+			elementId: '187fc457-f4ed-41d1-8171-adef9bb9c7f4',
 			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Sophie Hellyer',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9171,7 +9171,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 8,
 			width: 3110,
 			height: 2074,
-			elementId: 'ea91e321-fc8c-48cb-b52a-d4defc3276b7',
+			elementId: 'd612d51e-803f-46fd-8cfb-fce1e52d4f12',
 			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Marcus Rowe',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: true,
@@ -9182,7 +9182,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 9,
 			width: 2074,
 			height: 2592,
-			elementId: '0f1dab42-9fd9-4e89-983c-345fcff6c2c0',
+			elementId: 'f999ae85-0fa1-4a51-bd89-2c963b97940e',
 			alt: 'Home. My rig Series 3 Land-Rover',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9193,7 +9193,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 10,
 			width: 3110,
 			height: 2074,
-			elementId: 'c510807e-634d-473b-b6de-d30e5d027501',
+			elementId: '6170dd76-3722-4c83-8277-8a3dc6fce337',
 			alt: 'Commando Ridge, Penwith Peninsular. A climber’s paradise',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9204,7 +9204,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 11,
 			width: 3110,
 			height: 2074,
-			elementId: '99f90cb6-fe66-4e69-ba7c-503d897cc9f5',
+			elementId: '2fea943e-f28d-4f85-beeb-a5eb5ca8e153',
 			alt: 'Green pathways, rocky pools and turquoise waters that shape Cornwall’s 400 miles of coastline',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9215,7 +9215,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 12,
 			width: 3110,
 			height: 2074,
-			elementId: '7dbf7046-7af3-4a2d-95e6-128cffbf86cb',
+			elementId: 'a352ca77-aba7-43fa-8ffe-486bfe8db4fd',
 			alt: 'Green pathways, rocky pools and turquoise waters that shape Cornwall’s 400 miles of coastline',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9226,7 +9226,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 13,
 			width: 3110,
 			height: 2074,
-			elementId: '1ea71f58-6844-449f-acfe-817a629bcfed',
+			elementId: 'a9951b25-70d2-4c9b-a953-d027694b652d',
 			alt: '10.The Atlantic Ocean North coast of Cornwall',
 			credit: 'Photograph: Cat Vinton',
 			displayCredit: true,
@@ -9237,7 +9237,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 14,
 			width: 3110,
 			height: 2074,
-			elementId: '46a8e6be-9d92-4195-84a1-82404481bc25',
+			elementId: '94d23d94-07cc-40ba-9f81-7246e365baaa',
 			alt: 'Storm Francis raging across the ocean, 24.08.20, Cornwall, UK.',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9248,7 +9248,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 15,
 			width: 3110,
 			height: 2074,
-			elementId: 'ebb7b0df-adac-4a36-a9b4-ae112c98c239',
+			elementId: '9cd99bb7-ea4d-41ec-bc80-c03798274299',
 			alt: 'White horses carried on the on-shore wind, Dollar Cove, on the Lizard',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9259,7 +9259,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 16,
 			width: 3110,
 			height: 2074,
-			elementId: '86554b5c-f628-458d-add1-e429417e5690',
+			elementId: 'a7675ca4-dfa4-4b13-bc09-c6957234bf39',
 			alt: 'Logan Rock, Cornwall',
 			credit: 'Photograph: Cat Vinton',
 			displayCredit: false,
@@ -9270,7 +9270,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 17,
 			width: 3110,
 			height: 2074,
-			elementId: 'd575c2d4-6abc-4445-8fc6-79a801b2276c',
+			elementId: 'a49e4b9a-982c-43f1-b944-87eac767355f',
 			alt: 'Logan Rock, Cornwall',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			caption: 'Logan Rock, Cornwall',
@@ -9282,7 +9282,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 18,
 			width: 3110,
 			height: 2074,
-			elementId: '30436c3a-84a0-4b11-9900-32cda1e39404',
+			elementId: '431bf93e-c208-434a-99e4-5fff0fb924ba',
 			alt: 'Joya Burrow, The Right to Roam Films Shot for Finisterre, at Kudhva and Trebarwith Strand',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9293,7 +9293,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 19,
 			width: 3110,
 			height: 2074,
-			elementId: 'eea0bb66-7212-4b32-b14e-bbd2b4f53e67',
+			elementId: 'eab2223c-7cd8-486a-8f87-4bf070c426dd',
 			alt: 'Robin Hanbury-Tenison, Brown Willy, Bodmin Moor',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9304,7 +9304,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 20,
 			width: 3110,
 			height: 2074,
-			elementId: 'd49d6929-333d-4cd0-962f-3151f3ef5164',
+			elementId: '4a6cc81e-f2f4-4533-bea5-d2f1c33c4f37',
 			alt: 'Robin Hanbury-Tenison, Brown Willy, Bodmin Moor',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
@@ -9315,7 +9315,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 21,
 			width: 3110,
 			height: 2074,
-			elementId: 'e6515149-e9a3-499d-80b6-bf777f92601a',
+			elementId: '279687ec-21f7-4654-8bb8-966be4c307d3',
 			alt: 'Sunrise at Towan Beach',
 			credit: 'Photograph: Cat Vinton',
 			displayCredit: false,
@@ -9326,7 +9326,7 @@ export const PhotoEssay: DCRArticle = {
 			position: 22,
 			width: 3110,
 			height: 2074,
-			elementId: '2e444373-0b74-448b-ac1e-b51d9a349acc',
+			elementId: '98f3dd76-4161-4a91-a7c8-454c31d495c8',
 			alt: 'The full Corn moon, Penwith Heritage coast',
 			credit: 'Photograph: Cat Vinton',
 			displayCredit: false,
@@ -9337,10 +9337,199 @@ export const PhotoEssay: DCRArticle = {
 			position: 23,
 			width: 3110,
 			height: 2074,
-			elementId: 'e7b036ac-4c88-4062-9c9b-ca2576c86b4d',
+			elementId: '8c19c9d7-c565-4306-b1d1-ccc6e50f1950',
 			alt: 'Home. My rig Series 3 Land-Rover',
 			credit: 'Photograph: Cat Vinton/The Guardian',
 			displayCredit: false,
+		},
+	],
+	imagesForAppsLightbox: [
+		{
+			width: 2719,
+			height: 1632,
+			credit: 'Photograph: The Guardian',
+			caption:
+				'Joe Bracegirdle at Lanterdan Quarry, above Vean Hole beach, north Cornwall. All photographs: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/master/2719.jpg',
+			elementId: '0973830c-fd18-4619-898f-aa162e628538',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/master/3110.jpg',
+			elementId: 'eec79626-5633-44ba-8c64-542c8945f904',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/master/3110.jpg',
+			elementId: '569bc940-5069-4bb0-bd10-b980226f3278',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/master/3110.jpg',
+			elementId: '9d5de783-1dae-4c9d-b2ca-99829358b7fc',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton',
+			masterUrl:
+				'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/master/3110.jpg',
+			elementId: 'e4f534a1-269c-43d2-b073-0f04b286c182',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/master/3110.jpg',
+			elementId: '0cecee1b-366e-43c8-ae14-71138bb24252',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/master/3110.jpg',
+			elementId: '187fc457-f4ed-41d1-8171-adef9bb9c7f4',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/master/3110.jpg',
+			elementId: 'd612d51e-803f-46fd-8cfb-fce1e52d4f12',
+		},
+		{
+			width: 2074,
+			height: 2592,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/af3f6794965117292e4d54e1388d44daee6519aa/0_499_2074_2592/master/2074.jpg',
+			elementId: 'f999ae85-0fa1-4a51-bd89-2c963b97940e',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/master/3110.jpg',
+			elementId: '6170dd76-3722-4c83-8277-8a3dc6fce337',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/master/3110.jpg',
+			elementId: '2fea943e-f28d-4f85-beeb-a5eb5ca8e153',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/master/3110.jpg',
+			elementId: 'a352ca77-aba7-43fa-8ffe-486bfe8db4fd',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton',
+			masterUrl:
+				'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/master/3110.jpg',
+			elementId: 'a9951b25-70d2-4c9b-a953-d027694b652d',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/master/3110.jpg',
+			elementId: '94d23d94-07cc-40ba-9f81-7246e365baaa',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/master/3110.jpg',
+			elementId: '9cd99bb7-ea4d-41ec-bc80-c03798274299',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton',
+			masterUrl:
+				'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/master/3110.jpg',
+			elementId: 'a7675ca4-dfa4-4b13-bc09-c6957234bf39',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			caption: 'Logan Rock, Cornwall',
+			masterUrl:
+				'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/master/3110.jpg',
+			elementId: 'a49e4b9a-982c-43f1-b944-87eac767355f',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/master/3110.jpg',
+			elementId: '431bf93e-c208-434a-99e4-5fff0fb924ba',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/master/3110.jpg',
+			elementId: 'eab2223c-7cd8-486a-8f87-4bf070c426dd',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/master/3110.jpg',
+			elementId: '4a6cc81e-f2f4-4533-bea5-d2f1c33c4f37',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton',
+			masterUrl:
+				'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/master/3110.jpg',
+			elementId: '279687ec-21f7-4654-8bb8-966be4c307d3',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton',
+			masterUrl:
+				'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/master/3110.jpg',
+			elementId: '98f3dd76-4161-4a91-a7c8-454c31d495c8',
+		},
+		{
+			width: 3110,
+			height: 2074,
+			credit: 'Photograph: Cat Vinton/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/master/3110.jpg',
+			elementId: '8c19c9d7-c565-4306-b1d1-ccc6e50f1950',
 		},
 	],
 };

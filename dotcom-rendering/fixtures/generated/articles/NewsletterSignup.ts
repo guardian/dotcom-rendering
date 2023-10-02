@@ -1640,7 +1640,7 @@ export const NewsletterSignup: DCRArticle = {
 					],
 				},
 			],
-			elementId: '8c32551c-c600-4e69-8806-54cf077d6e30',
+			elementId: '795c5329-609b-4907-8508-36d4637f58d5',
 			position: 1,
 			lightbox: {
 				caption:
@@ -1658,7 +1658,7 @@ export const NewsletterSignup: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Join us as we delve deeper into the wonderful world of women’s football in our weekly newsletter. It is informative, entertaining, global, critical – when needed – and, above all, passionate. Written mainly by <a href="https://www.theguardian.com/profile/julia-belas-trindade">Júlia Belas Trindade</a> and <a href="https://www.theguardian.com/profile/sophie-downey">Sophie Downey</a>, expect guest appearances from stars such as Anita Asante, Ada Hegerberg and many more.</p>',
-					elementId: '25d7aaf5-c40d-4b9f-9101-0eae6ed80462',
+					elementId: '08160b15-9bb2-41a1-8529-3efa80e61b9f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -1669,12 +1669,12 @@ export const NewsletterSignup: DCRArticle = {
 					isThirdPartyTracking: false,
 					source: 'The Guardian',
 					sourceDomain: 'theguardian.com',
-					elementId: 'd508e081-2e59-4f89-9130-28d2e9e16d44',
+					elementId: 'c87e6d6c-7a13-4732-b080-f7229f67ec23',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li>\n <li><p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li>\n</ul>',
-					elementId: 'aa3807f4-692a-44db-adb0-52f60e514c4e',
+					elementId: 'd02c2a6e-c162-432e-9a5b-e3d56f787546',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
@@ -1682,7 +1682,7 @@ export const NewsletterSignup: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
-					elementId: '30b9e056-f3cd-4743-a1cf-0980598279d2',
+					elementId: '23eaa8c7-1433-409b-a3cc-f1cb93252b26',
 					dropCap: true,
 				},
 			],
@@ -1944,12 +1944,24 @@ export const NewsletterSignup: DCRArticle = {
 			position: 1,
 			width: 1508,
 			height: 905,
-			elementId: '8c32551c-c600-4e69-8806-54cf077d6e30',
+			elementId: '795c5329-609b-4907-8508-36d4637f58d5',
 			alt: 'Our new women’s football newsletter will arrive in your inbox every Wednesday.',
 			credit: 'Illustration: Guardian Design',
 			caption:
 				'Our new women’s football newsletter will arrive in your inbox every Wednesday.',
 			displayCredit: false,
+		},
+	],
+	imagesForAppsLightbox: [
+		{
+			width: 1508,
+			height: 905,
+			credit: 'Illustration: Guardian Design',
+			caption:
+				'Our new women’s football newsletter will arrive in your inbox every Wednesday.',
+			masterUrl:
+				'https://media.guim.co.uk/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png',
+			elementId: '795c5329-609b-4907-8508-36d4637f58d5',
 		},
 	],
 };

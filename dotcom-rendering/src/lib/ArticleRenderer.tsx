@@ -4,6 +4,7 @@ import { ArticleDesign } from '@guardian/libs';
 import { adContainerStyles } from '../components/AdSlot.web';
 import { useConfig } from '../components/ConfigContext';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
@@ -42,6 +43,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	abTests?: ServerSideTests;
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 export const ArticleRenderer = ({
@@ -62,6 +64,7 @@ export const ArticleRenderer = ({
 	isSensitive,
 	isDev,
 	abTests,
+	imagesForAppsLightbox,
 }: Props) => {
 	const renderedElements = elements.map((element, index) => {
 		return (
@@ -80,6 +83,7 @@ export const ArticleRenderer = ({
 				isSensitive={isSensitive}
 				switches={switches}
 				abTests={abTests}
+				imagesForAppsLightbox={imagesForAppsLightbox}
 			/>
 		);
 	});

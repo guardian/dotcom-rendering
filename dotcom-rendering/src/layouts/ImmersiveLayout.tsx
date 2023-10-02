@@ -400,6 +400,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
+						imagesForAppsLightbox={[]}
 					/>
 				</div>
 				{mainMedia && (
@@ -631,6 +632,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									imagesForAppsLightbox={[]}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>

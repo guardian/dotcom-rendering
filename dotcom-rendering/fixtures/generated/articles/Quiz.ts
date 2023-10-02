@@ -1638,7 +1638,7 @@ export const Quiz: DCRArticle = {
 					],
 				},
 			],
-			elementId: '5035262a-a850-41f9-ae8e-c326f1aecb0f',
+			elementId: '5b0d790d-ed4f-484b-b043-7698d2d9ff44',
 			position: 1,
 			lightbox: {
 				caption:
@@ -2260,7 +2260,7 @@ export const Quiz: DCRArticle = {
 							minScore: 2,
 						},
 					],
-					elementId: 'a1095967-2f2a-4d10-bca1-7ce21f7da503',
+					elementId: 'e79fc641-e195-4db7-9c5d-5cb69a9c87d1',
 				},
 			],
 			attributes: {
@@ -2519,12 +2519,24 @@ export const Quiz: DCRArticle = {
 			position: 1,
 			width: 3020,
 			height: 1814,
-			elementId: '5035262a-a850-41f9-ae8e-c326f1aecb0f',
+			elementId: '5b0d790d-ed4f-484b-b043-7698d2d9ff44',
 			alt: 'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
 			credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
 			caption:
 				'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
 			displayCredit: true,
+		},
+	],
+	imagesForAppsLightbox: [
+		{
+			width: 3020,
+			height: 1814,
+			credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
+			caption:
+				'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
+			masterUrl:
+				'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
+			elementId: '5b0d790d-ed4f-484b-b043-7698d2d9ff44',
 		},
 	],
 };

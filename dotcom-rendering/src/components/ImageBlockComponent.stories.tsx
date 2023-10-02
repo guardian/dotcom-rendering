@@ -67,6 +67,7 @@ export const StandardArticle = () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 		</Wrapper>
@@ -93,6 +94,7 @@ export const Immersive = () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 		</Wrapper>
@@ -119,6 +121,7 @@ export const Showcase = () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 		</Wrapper>
@@ -145,6 +148,7 @@ export const Thumbnail = () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 		</Wrapper>
@@ -171,6 +175,7 @@ export const Supporting = () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 		</Wrapper>
@@ -198,6 +203,7 @@ export const HideCaption = () => {
 						theme: Pillar.News,
 					}}
 					hideCaption={true}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 		</Wrapper>
@@ -226,6 +232,7 @@ export const InlineTitle = () => {
 					}}
 					title="This is the title text"
 					hideCaption={true}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 		</Wrapper>
@@ -260,6 +267,7 @@ export const InlineTitleMobile = () => {
 					}}
 					title="This is the title text"
 					hideCaption={true}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 		</Wrapper>
@@ -294,6 +302,7 @@ export const ImmersiveTitle = () => {
 					}}
 					title="This is the title text"
 					hideCaption={true}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 		</Wrapper>
@@ -322,6 +331,7 @@ export const ShowcaseTitle = () => {
 					}}
 					title="This is the title text"
 					hideCaption={true}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 		</Wrapper>
@@ -374,6 +384,7 @@ export const HalfWidth = () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 			<p>
@@ -442,6 +453,7 @@ export const HalfWidthMobile = () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 			<p>
@@ -510,6 +522,7 @@ export const HalfWidthWide = () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					imagesForAppsLightbox={[]}
 				/>
 			</Figure>
 			<p>

@@ -1,4 +1,5 @@
 import { addImageIDs } from '../model/addImageIDs';
+import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
 import { addLightboxData } from '../model/enhance-images';
 import { enhanceBlocks } from '../model/enhanceBlocks';
@@ -51,6 +52,11 @@ export const enhanceArticleType = (
 		},
 	);
 	const enhancedMainMedia = addLightboxData(data.mainMediaElements);
+	const imagesForLightbox = buildLightboxImages(
+		data.format,
+		enhancedBlocks,
+		enhancedMainMedia,
+	);
 	return {
 		...data,
 		mainMediaElements: enhancedMainMedia,
@@ -71,11 +77,8 @@ export const enhanceArticleType = (
 		 * This function needs to run at a higher level to most other enhancers
 		 * because it needs both mainMediaElements and blocks in scope
 		 */
-		imagesForLightbox: buildLightboxImages(
-			data.format,
-			enhancedBlocks,
-			enhancedMainMedia,
-		),
+		imagesForLightbox,
+		imagesForAppsLightbox: appsLightboxImages(imagesForLightbox),
 		badge: enhanceBadge(data.badge),
 	};
 };
