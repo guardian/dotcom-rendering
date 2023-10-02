@@ -45,13 +45,13 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { decideMainMediaCaption } from '../lib/decide-caption';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
-import type { FEElement } from '../types/content';
 import type { DCRArticle } from '../types/frontend';
 import type { Palette } from '../types/palette';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -186,31 +186,6 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const decideCaption = (mainMedia: FEElement | undefined): string => {
-	const caption: string[] = [];
-
-	switch (mainMedia?._type) {
-		case 'model.dotcomrendering.pageElements.ImageBlockElement':
-			if (mainMedia.data.caption) {
-				caption.push(mainMedia.data.caption);
-			}
-
-			if (mainMedia.displayCredit && mainMedia.data.credit) {
-				caption.push(mainMedia.data.credit);
-			}
-			return caption.join(' ');
-
-		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-			if (mainMedia.caption) {
-				caption.push(mainMedia.caption);
-			}
-			return caption.join(' ');
-
-		default:
-			return caption.join(' ');
-	}
-};
-
 const Box = ({
 	palette,
 	children,
@@ -265,7 +240,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 
 	const mainMedia = article.mainMediaElements[0];
 
-	const captionText = decideCaption(mainMedia);
+	const captionText = decideMainMediaCaption(mainMedia);
 	const HEADLINE_OFFSET = mainMedia ? 120 : 0;
 	const { branding } = article.commercialProperties[article.editionId];
 
