@@ -108,14 +108,6 @@ describe('Sign In Gate Tests', function () {
 			cy.get('[data-cy=sign-in-gate-main]').contains(GATE_HEADER);
 		});
 
-		it('should load alternative text based on MVT cookie', function () {
-			setMvtCookie('500001');
-			visitArticleAndScrollToGateForLazyLoad();
-
-			cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-			cy.get('[data-cy=sign-in-gate-main]').contains(GATE_HEADER_ALT);
-		});
-
 		it('should not load the sign in gate if the user has not read at least 3 article in a day', function () {
 			setArticleCount(1);
 
@@ -142,8 +134,8 @@ describe('Sign In Gate Tests', function () {
 				'gu.prefs.sign-in-gate',
 				`{
                     "value": {
-                        "SignInGateCopyTestRepeatSept2023-quick-and-easy": "2020-07-22T08:25:05.567Z",
-                        "gate-dismissed-count-SignInGateCopyTestRepeatSept2023-quick-and-easy": 6
+                        "SignInGateMain-main-variant-5": "2020-07-22T08:25:05.567Z",
+                        "gate-dismissed-count-SignInGateMain-main-variant-5": 6
                     }
                 }`,
 			);
@@ -272,7 +264,7 @@ describe('Sign In Gate Tests', function () {
 				cy.get('[data-cy=sign-in-gate-main_register]')
 					.should('have.attr', 'href')
 					.and('contains', '/register?returnUrl=')
-					.and('contains', 'sign_in_gate_copy_test_repeat_sept2023')
+					.and('contains', 'main_variant_')
 					.and('not.contains', 'personalised_new_SupporterPlus');
 			});
 
