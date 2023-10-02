@@ -88,6 +88,8 @@ const enableLog4j = {
 		development: { appenders: ['console'], level: 'info' },
 	},
 	pm2: true,
+	// tell log4js not to cluster logs and write to seperate files
+	disableClustering: true,
 };
 
 if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
