@@ -16,7 +16,6 @@ type Props = {
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
 	userMadeComment: boolean;
 	onRecommend?: (commentId: number) => Promise<boolean>;
-	isClosedForComments: boolean;
 };
 
 const countStyles = css`
@@ -53,7 +52,6 @@ export const RecommendationCount = ({
 	authStatus,
 	userMadeComment,
 	onRecommend,
-	isClosedForComments,
 }: Props) => {
 	const [count, setCount] = useState(initialCount);
 	const [recommended, setRecommended] = useState(alreadyRecommended);
@@ -84,12 +82,7 @@ export const RecommendationCount = ({
 			<button
 				css={buttonStyles(recommended, isSignedIn)}
 				onClick={tryToRecommend}
-				disabled={
-					isClosedForComments ||
-					recommended ||
-					!isSignedIn ||
-					userMadeComment
-				}
+				disabled={recommended || !isSignedIn || userMadeComment}
 				data-link-name="Recommend comment"
 				aria-label="Recommend comment"
 				type="button"
