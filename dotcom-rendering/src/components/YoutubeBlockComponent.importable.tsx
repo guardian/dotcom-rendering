@@ -33,7 +33,7 @@ type Props = {
 	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
 	showTextOverlay?: boolean;
-	showMainVideo: boolean;
+	showMainVideo?: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage?: string) =>

@@ -43,7 +43,7 @@ type Props = {
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
 	showTextOverlay?: boolean;
-	showMainVideo: boolean;
+	showMainVideo?: boolean;
 };
 
 export const YoutubeAtom = ({
@@ -69,7 +69,7 @@ export const YoutubeAtom = ({
 	format,
 	shouldPauseOutOfView = false,
 	showTextOverlay = false,
-	showMainVideo,
+	showMainVideo = true,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);

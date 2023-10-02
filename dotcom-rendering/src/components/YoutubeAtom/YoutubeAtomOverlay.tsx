@@ -29,7 +29,7 @@ type Props = {
 	kicker?: string;
 	format: ArticleFormat;
 	showTextOverlay?: boolean;
-	showMainVideo: boolean;
+	showMainVideo?: boolean;
 };
 
 const overlayStyles = css`

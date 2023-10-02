@@ -320,7 +320,7 @@ export type DCRFrontCard = {
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable: boolean;
-	showMainVideo: boolean;
+	showMainVideo?: boolean;
 };
 
 export type DCRSlideshowImage = {
