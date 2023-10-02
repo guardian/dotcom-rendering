@@ -23,6 +23,17 @@ type Props = {
 	isInLiveblogAdSlotTest?: boolean;
 };
 
+const appsFirstAdIndex = 1;
+
+/**
+ * On apps, add an {@linkcode AdPlaceholder} after the 2nd block, and then
+ * after every 5th block from then on.
+ */
+const shouldInsertAppAd = (isApps: boolean, blockIndex: number): boolean =>
+	isApps &&
+	(blockIndex === appsFirstAdIndex ||
+		(blockIndex - appsFirstAdIndex) % 5 === 0);
+
 const handleAdInsertion = (
 	block: Block,
 	isMobileView: boolean,
@@ -72,22 +83,25 @@ export const LiveBlogBlocksAndAdverts = ({
 	if (!isInLiveblogAdSlotTest) {
 		return (
 			<>
-				{blocks.map((block) => (
-					<LiveBlock
-						key={block.id}
-						format={format}
-						block={block}
-						pageId={pageId}
-						webTitle={webTitle}
-						host={host}
-						ajaxUrl={ajaxUrl}
-						isLiveUpdate={isLiveUpdate}
-						switches={switches}
-						isAdFreeUser={isAdFreeUser}
-						isSensitive={isSensitive}
-						isPinnedPost={false}
-						pinnedPostId={pinnedPost?.id}
-					/>
+				{blocks.map((block, index) => (
+					<>
+						<LiveBlock
+							key={block.id}
+							format={format}
+							block={block}
+							pageId={pageId}
+							webTitle={webTitle}
+							host={host}
+							ajaxUrl={ajaxUrl}
+							isLiveUpdate={isLiveUpdate}
+							switches={switches}
+							isAdFreeUser={isAdFreeUser}
+							isSensitive={isSensitive}
+							isPinnedPost={false}
+							pinnedPostId={pinnedPost?.id}
+						/>
+						{shouldInsertAppAd(isApps, index) && <AdPlaceholder />}
+					</>
 				))}
 			</>
 		);
@@ -132,7 +146,6 @@ export const LiveBlogBlocksAndAdverts = ({
 					isWeb && mobileResult.willInsertAd;
 				const shouldInsertDesktopWebAd =
 					isWeb && desktopResult.willInsertAd;
-				const shouldInsertAppAd = isApps && mobileResult.willInsertAd;
 
 				return (
 					<>
@@ -165,7 +178,7 @@ export const LiveBlogBlocksAndAdverts = ({
 							/>
 						)}
 
-						{shouldInsertAppAd && <AdPlaceholder />}
+						{shouldInsertAppAd(isApps, i) && <AdPlaceholder />}
 					</>
 				);
 			})}
