@@ -11,7 +11,7 @@ import {
 } from 'components/FollowStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
-import { text } from 'palette';
+import { background, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -21,6 +21,17 @@ interface Props {
 	contributors: Contributor[];
 	format: ArticleFormat;
 }
+
+const followButtonStyles: SerializedStyles = css`
+	height: 24px;
+	width: 24px;
+	border-radius: 100%;
+`;
+const followIconStyles: SerializedStyles = css`
+	height: 18px;
+	width: 18px;
+	margin-top: 2px;
+`;
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.small()}
@@ -36,6 +47,31 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	${darkModeCss`
 		color: ${text.followDark(format)};
 	`}
+
+	.notifications-on, .tag-following {
+		${followButtonStyles}
+		padding-top: 0.15ch;
+		background-color: currentColor;
+
+		svg {
+			fill: ${background.articleContent(format)};
+			${followIconStyles}
+			${darkModeCss`
+				fill: ${background.articleContentDark(format)};
+			`}
+		}
+	}
+	.notifications-off,
+	.tag-not-following {
+		${followButtonStyles}
+		border: 1px solid currentColor;
+		background-color: none;
+
+		svg {
+			fill: currentColor;
+			${followIconStyles}
+		}
+	}
 `;
 
 const followStatusStyles = (): SerializedStyles => css`
