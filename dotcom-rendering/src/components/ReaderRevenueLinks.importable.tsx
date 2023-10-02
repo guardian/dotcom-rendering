@@ -410,28 +410,26 @@ export const ReaderRevenueLinks = ({
 	const pageViewId = usePageViewId();
 	const ophanRecord = getOphanRecordFunction();
 
-	if (countryCode && pageViewId) {
-		if (inHeader && remoteHeader) {
-			return (
-				<ReaderRevenueLinksRemote
-					countryCode={countryCode}
-					pageViewId={pageViewId}
-					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophanRecord}
-				/>
-			);
-		}
+	if (!countryCode || !pageViewId) return null;
+
+	if (inHeader && remoteHeader) {
 		return (
-			<ReaderRevenueLinksNative
-				editionId={editionId}
-				dataLinkNamePrefix={dataLinkNamePrefix}
-				inHeader={inHeader}
-				urls={urls}
-				ophanRecord={ophanRecord}
+			<ReaderRevenueLinksRemote
+				countryCode={countryCode}
 				pageViewId={pageViewId}
+				contributionsServiceUrl={contributionsServiceUrl}
+				ophanRecord={ophanRecord}
 			/>
 		);
 	}
-
-	return null;
+	return (
+		<ReaderRevenueLinksNative
+			editionId={editionId}
+			dataLinkNamePrefix={dataLinkNamePrefix}
+			inHeader={inHeader}
+			urls={urls}
+			ophanRecord={ophanRecord}
+			pageViewId={pageViewId}
+		/>
+	);
 };

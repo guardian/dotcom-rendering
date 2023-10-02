@@ -455,8 +455,6 @@ type RichLinkCardType =
 // 3rd party type declarations //
 // ------------------------------
 
-declare module 'chromatic/isChromatic';
-
 declare module 'dynamic-import-polyfill' {
 	export const initialize: ({
 		modulePath,

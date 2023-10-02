@@ -74,7 +74,8 @@ const generateFlake = () => {
  * A winter version of an easter egg…
  */
 export const Snow = () => {
-	const hydrated = useHydrated();
+	const hydrated = useHydrated(false);
+
 	const [flakes, setFlakes] = useState<Snowflakes>(() => {
 		const initial: Snowflakes = {};
 		if (!hydrated) return initial;
