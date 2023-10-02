@@ -64,6 +64,21 @@ import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
+// TODO: Extract this - after sub branch merged in
+const RightAdPlaceholder = () => (
+	<div
+		className="right-ad-portal-placeholder"
+		css={css`
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			height: 100%;
+			${until.desktop} {
+				display: none;
+			}
+		`}
+	></div>
+);
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -298,6 +313,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
+
+	const isInLiveblogAdSlotTest =
+		article.config.abTests.serverSideLiveblogInlineAdsVariant === 'variant';
 
 	return (
 		<>
@@ -880,9 +898,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 															.keywordIds
 													}
 													isInLiveblogAdSlotTest={
-														article.config.abTests
-															.serverSideLiveblogInlineAdsVariant ===
-														'variant'
+														isInLiveblogAdSlotTest
 													}
 													imagesForAppsLightbox={
 														article.imagesForAppsLightbox
@@ -1032,9 +1048,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 															.keywordIds
 													}
 													isInLiveblogAdSlotTest={
-														article.config.abTests
-															.serverSideLiveblogInlineAdsVariant ===
-														'variant'
+														isInLiveblogAdSlotTest
 													}
 													lang={article.lang}
 													isRightToLeftLang={
@@ -1120,6 +1134,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												display={format.display}
 												isPaidContent={isPaidContent}
 											/>
+										)}
+
+										{isApps && isInLiveblogAdSlotTest && (
+											<RightAdPlaceholder />
 										)}
 									</RightColumn>
 								</div>
