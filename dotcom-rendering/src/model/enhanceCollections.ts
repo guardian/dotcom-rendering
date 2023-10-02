@@ -1,6 +1,6 @@
 import { isNonNullable } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
-import type { Branding } from '../types/branding';
+import { type Branding, pickBrandingForEdition } from '../types/branding';
 import type {
 	DCRCollectionType,
 	FECollectionType,
@@ -35,12 +35,8 @@ function getBrandingFromCards(
 	editionId: EditionId,
 ): Branding[] {
 	return allCards
-		.map(
-			(card) =>
-				card.properties.editionBrandings.find(
-					(editionBranding) =>
-						editionBranding.edition.id === editionId,
-				)?.branding,
+		.map((card) =>
+			pickBrandingForEdition(card.properties.editionBrandings, editionId),
 		)
 		.filter(isNonNullable);
 }

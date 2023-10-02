@@ -11,18 +11,11 @@ import { injectMpuIntoGroupedTrails } from '../model/injectMpuIntoGroupedTrails'
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
 import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
-import type { Branding } from '../types/branding';
+import { pickBrandingForEdition } from '../types/branding';
 import type { DCRFrontType, FEFrontType } from '../types/front';
 import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront';
 import { makePrefetchHeader } from './lib/header';
 import { renderFront, renderTagFront } from './render.front.web';
-
-const getFrontBranding = (data: FEFrontType): Branding | undefined =>
-	data.pressedPage.frontProperties.commercial.editionBrandings.find(
-		(editionBranding) =>
-			editionBranding.edition.id === data.editionId &&
-			!!editionBranding.branding,
-	)?.branding;
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
@@ -42,7 +35,11 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 					data.pressedPage.frontProperties.onPageDescription,
 				isPaidContent: data.config.isPaidContent,
 				discussionApiUrl: data.config.discussionApiUrl,
-				frontBranding: getFrontBranding(data),
+				frontBranding: pickBrandingForEdition(
+					data.pressedPage.frontProperties.commercial
+						.editionBrandings,
+					data.editionId,
+				),
 			}),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
