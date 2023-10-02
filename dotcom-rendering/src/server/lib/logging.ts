@@ -5,7 +5,8 @@ import { loggingStore } from './logging-store';
 
 // write separate log files for each app instance
 // required when running multiple processes
-// aws-kinesis-agent is configured to look for a file pattern to pick all log files up
+// NODE_APP_INSTANCE is set by pm2
+// aws-kinesis-agent is configured to look for a file pattern
 const appInstance = process.env.NODE_APP_INSTANCE ?? '0';
 const logName = `dotcom-rendering-${appInstance}.log`;
 
@@ -14,8 +15,6 @@ const logLocation =
 	!process.env.DISABLE_LOGGING_AND_METRICS
 		? `/var/log/dotcom-rendering/${logName}`
 		: `${path.resolve('logs')}/${logName}`;
-
-console.log(`!!! ${logLocation}`);
 
 const logFields = (logEvent: LoggingEvent): unknown => {
 	const { request } = loggingStore.getStore() ?? {
