@@ -10,6 +10,7 @@ import {
 	getCommercialClient,
 	getUserClient,
 } from '../lib/bridgetApi';
+import { useMatchMedia } from '../lib/useMatchMedia';
 import { AdSlot } from './AdSlot.apps';
 
 const calculateAdPosition = (element: Element): BridgetRect => {
@@ -74,10 +75,13 @@ export const AdPortals = () => {
 	const [rightAdPlaceholder, setRightAdPlaceholder] = useState<Element>();
 	// References to client-side rendered ad slots.
 	const adSlots = useRef<HTMLDivElement[]>([]);
+	// Reset list of ad slot references, they're re-populated during rendering
+	adSlots.current = [];
 	// Positions of client-side rendered ad slots.
 	const adPositions = useRef<BridgetAdSlot[]>([]);
 	// The height of the body element.
 	const bodyHeight = useRef(0);
+	const isDesktop = useMatchMedia(`(min-width: ${breakpoints.desktop}px)`);
 
 	/**
 	 * Setup Ads
@@ -180,11 +184,6 @@ export const AdPortals = () => {
 			}}
 		/>
 	);
-
-	// We need to do this in js, rather than in css
-	// because we want to conditionally create the portals
-	const isDesktop = window.innerWidth >= breakpoints.desktop;
-
 	if (isDesktop && rightAdPlaceholder) {
 		return (
 			<>
