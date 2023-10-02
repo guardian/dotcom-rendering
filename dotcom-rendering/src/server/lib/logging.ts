@@ -3,16 +3,22 @@ import type { LoggingEvent } from 'log4js';
 import { addLayout, configure, getLogger, shutdown } from 'log4js';
 import { loggingStore } from './logging-store';
 
+// write separate log files for each app instance
+// required when running multiple processes
+// aws-kinesis-agent is configured to look for a file pattern to pick all log files up
+const logNamePostfix = process.env.NODE_APP_INSTANCE
+	? `-${process.env.NODE_APP_INSTANCE}`
+	: '';
+
+const logName = `dotcom-rendering${logNamePostfix}.log`;
+
 const logLocation =
 	process.env.NODE_ENV === 'production' &&
 	!process.env.DISABLE_LOGGING_AND_METRICS
-		? '/var/log/dotcom-rendering/dotcom-rendering.log'
-		: `${path.resolve('logs')}/dotcom-rendering.log`;
+		? `/var/log/dotcom-rendering/${logName}`
+		: `${path.resolve('logs')}/${logName}`;
 
-const stage =
-	typeof process.env.GU_STAGE === 'string'
-		? process.env.GU_STAGE.toUpperCase()
-		: 'DEV';
+console.log(`!!! ${logLocation}`);
 
 const logFields = (logEvent: LoggingEvent): unknown => {
 	const { request } = loggingStore.getStore() ?? {
@@ -22,7 +28,10 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 	const coreFields = {
 		stack: 'frontend',
 		app: 'dotcom-rendering',
-		stage,
+		stage:
+			typeof process.env.GU_STAGE === 'string'
+				? process.env.GU_STAGE.toUpperCase()
+				: 'DEV',
 		'@timestamp': logEvent.startTime,
 		'@version': 1,
 		level: logEvent.level.levelStr,
