@@ -6,11 +6,8 @@ import { loggingStore } from './logging-store';
 // write separate log files for each app instance
 // required when running multiple processes
 // aws-kinesis-agent is configured to look for a file pattern to pick all log files up
-const logNamePostfix = process.env.NODE_APP_INSTANCE
-	? `-${process.env.NODE_APP_INSTANCE}`
-	: '';
-
-const logName = `dotcom-rendering${logNamePostfix}.log`;
+const appInstance = process.env.NODE_APP_INSTANCE ?? '0';
+const logName = `dotcom-rendering-${appInstance}.log`;
 
 const logLocation =
 	process.env.NODE_ENV === 'production' &&
@@ -37,6 +34,7 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 		level: logEvent.level.levelStr,
 		level_value: logEvent.level.level,
 		request,
+		thread_name: appInstance,
 	};
 	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
