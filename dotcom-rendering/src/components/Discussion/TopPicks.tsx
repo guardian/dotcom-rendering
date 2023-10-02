@@ -14,7 +14,6 @@ type Props = {
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
 	onPermalinkClick: (commentId: number) => void;
 	onRecommend?: (commentId: number) => Promise<boolean>;
-	isClosedForComments: boolean;
 };
 
 const columWrapperStyles = css`
@@ -57,7 +56,6 @@ export const TopPicks = ({
 	authStatus,
 	onPermalinkClick,
 	onRecommend,
-	isClosedForComments,
 }: Props) => {
 	const leftColComments: CommentType[] = [];
 	const rightColComments: CommentType[] = [];
@@ -81,7 +79,6 @@ export const TopPicks = ({
 							}
 							onPermalinkClick={onPermalinkClick}
 							onRecommend={onRecommend}
-							isClosedForComments={isClosedForComments}
 						/>
 					))}
 				</div>
@@ -98,7 +95,6 @@ export const TopPicks = ({
 							}
 							onPermalinkClick={onPermalinkClick}
 							onRecommend={onRecommend}
-							isClosedForComments={isClosedForComments}
 						/>
 					))}
 				</div>
@@ -115,7 +111,6 @@ export const TopPicks = ({
 						}
 						onPermalinkClick={onPermalinkClick}
 						onRecommend={onRecommend}
-						isClosedForComments={isClosedForComments}
 					/>
 				))}
 			</div>

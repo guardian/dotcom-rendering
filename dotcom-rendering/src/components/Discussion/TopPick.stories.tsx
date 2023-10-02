@@ -91,7 +91,6 @@ export const LongPick = () => (
 			comment={comment}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
-			isClosedForComments={false}
 		/>
 	</div>
 );
@@ -113,7 +112,6 @@ export const ShortPick = () => (
 			authStatus={signedInStatus}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
-			isClosedForComments={false}
 		/>
 	</div>
 );
@@ -131,7 +129,6 @@ export const LongPickContributor = () => (
 			comment={commentContributor}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
-			isClosedForComments={false}
 		/>
 	</div>
 );
@@ -153,7 +150,6 @@ export const ShortPickContributor = () => (
 			authStatus={signedInStatus}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
-			isClosedForComments={false}
 		/>
 	</div>
 );
