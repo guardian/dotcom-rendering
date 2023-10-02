@@ -379,7 +379,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								borderColour={palette.border.article}
 								element="aside"
 							>
-								<Island deferUntil="idle">
+								<Island defer={{ until: 'idle' }}>
 									<SubNav
 										subNavSections={
 											props.NAV.subNavSections
@@ -451,7 +451,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Hide>
 
-						<Island deferUntil="visible">
+						<Island defer={{ until: 'visible' }}>
 							<GetMatchNav
 								matchUrl={footballMatchUrl}
 								format={format}
@@ -635,7 +635,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									justify-content: center;
 								`}
 							/>
-							<Island clientOnly={true} deferUntil="idle">
+							<Island clientOnly={true} defer={{ until: 'idle' }}>
 								<Liveness
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -763,7 +763,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 								{/* Match stats */}
 								{!!footballMatchUrl && (
-									<Island deferUntil="visible">
+									<Island defer={{ until: 'visible' }}>
 										<GetMatchStats
 											matchUrl={footballMatchUrl}
 											format={format}
@@ -775,7 +775,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								<div id="maincontent" css={bodyWrapper}>
 									{showKeyEventsToggle ? (
 										<Hide below="desktop">
-											<Island deferUntil="visible">
+											<Island
+												defer={{ until: 'visible' }}
+											>
 												<FilterKeyEventsToggle
 													filterKeyEvents={
 														article.filterKeyEvents
@@ -1147,7 +1149,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 					{article.storyPackage && (
 						<Section fullWidth={true}>
-							<Island deferUntil="visible">
+							<Island defer={{ until: 'visible' }}>
 								<Carousel
 									heading={article.storyPackage.heading}
 									trails={article.storyPackage.trails.map(
@@ -1164,7 +1166,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					)}
 
-					<Island deferUntil="visible">
+					<Island defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
 							hasRelated={article.hasRelated}
@@ -1227,7 +1229,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							leftColSize="wide"
 						>
 							<MostViewedFooterLayout renderAds={renderAds}>
-								<Island clientOnly={true} deferUntil="visible">
+								<Island
+									clientOnly={true}
+									defer={{ until: 'visible' }}
+								>
 									<MostViewedFooterData
 										sectionId={article.config.section}
 										format={format}
@@ -1267,7 +1272,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							element="aside"
 						>
-							<Island deferUntil="visible">
+							<Island defer={{ until: 'visible' }}>
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
@@ -1302,7 +1307,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper data-print-layout="hide">
-						<Island deferUntil="idle" clientOnly={true}>
+						<Island defer={{ until: 'idle' }} clientOnly={true}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={

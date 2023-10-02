@@ -13,7 +13,7 @@ export const GroupedNewslettersList = ({ groupedNewsletters }: Props) => {
 		<>
 			{groupedNewsletters.groups.map((group, index) => (
 				<Section fullWidth={true} key={group.title}>
-					<Island deferUntil="idle">
+					<Island defer={{ until: 'idle' }}>
 						<CarouselForNewsletters
 							heading={group.title}
 							onwardsSource="newsletters-page"

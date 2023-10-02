@@ -31,7 +31,7 @@ Frontend's lightbox was added to the Guardian's website in 2014. [The PR to add 
 
 ## How it gets hydrated
 
-On the server, we only insert a small amount of html and zero javascript. This html can be found in LightboxLayout. On the client hydration is trigged when the page url contains a hash that martches an expected pattern, namely, `img-[n]`. Using the `deferUntil='hash'` feature of Islands, we only execute the Lightbox javascript at the point the url changes and lightbox is requested.
+On the server, we only insert a small amount of html and zero javascript. This html can be found in LightboxLayout. On the client hydration is trigged when the page url contains a hash that martches an expected pattern, namely, `img-[n]`. Using the `defer={{ until: 'hash' }}` feature of Islands, we only execute the Lightbox javascript at the point the url changes and lightbox is requested.
 
 ## How it works
 
@@ -45,7 +45,7 @@ You open and close the lightbox by changing the url. When a reader clicks the 'c
 
 This file is used on the server to co er each article image with an <a> tag. No javascript is used here, only platform features and css.
 
-If the image is clicked the a tag captured this and mutates the url to add a hash in the form `img-[n]`. This triggers hydration based on the `deferUntil='hash'` island.
+If the image is clicked the a tag captured this and mutates the url to add a hash in the form `img-[n]`. This triggers hydration based on the `defer={{ until: 'hash' }}` island.
 
 ### `LightboxLayout`
 

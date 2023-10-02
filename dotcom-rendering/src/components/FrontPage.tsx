@@ -57,13 +57,13 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island clientOnly={true} deferUntil="idle">
+			<Island clientOnly={true} defer={{ until: 'idle' }}>
 				<AlreadyVisited />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island clientOnly={true} defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island clientOnly={true} defer={{ until: 'idle' }}>
 				<Metrics
 					commercialMetricsEnabled={
 						!!front.config.switches.commercialMetrics
@@ -83,10 +83,10 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island clientOnly={true}>
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island clientOnly={true} defer={{ until: 'idle' }}>
 				<BrazeMessaging idApiUrl={front.config.idApiUrl} />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island clientOnly={true} defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />

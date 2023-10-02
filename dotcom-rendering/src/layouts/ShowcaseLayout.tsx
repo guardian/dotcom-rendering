@@ -326,7 +326,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									element="aside"
 									format={format}
 								>
-									<Island deferUntil="idle">
+									<Island defer={{ until: 'idle' }}>
 										<SubNav
 											subNavSections={NAV.subNavSections}
 											currentNavLink={NAV.currentNavLink}
@@ -669,7 +669,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 
 				{article.storyPackage && (
 					<Section fullWidth={true}>
-						<Island deferUntil="visible">
+						<Island defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
 								trails={article.storyPackage.trails.map(
@@ -686,7 +686,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island deferUntil="visible">
+				<Island defer={{ until: 'visible' }}>
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}
@@ -741,7 +741,10 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 						data-component="most-popular"
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
-							<Island clientOnly={true} deferUntil="visible">
+							<Island
+								clientOnly={true}
+								defer={{ until: 'visible' }}
+							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
 									format={format}
@@ -772,7 +775,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 
 			{NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
-					<Island deferUntil="visible">
+					<Island defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -802,7 +805,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper>
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island defer={{ until: 'idle' }} clientOnly={true}>
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

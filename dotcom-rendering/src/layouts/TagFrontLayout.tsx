@@ -162,7 +162,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								padSides={false}
 								element="aside"
 							>
-								<Island deferUntil="idle">
+								<Island defer={{ until: 'idle' }}>
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
@@ -332,7 +332,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 					padSides={false}
 					element="aside"
 				>
-					<Island deferUntil="visible">
+					<Island defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}

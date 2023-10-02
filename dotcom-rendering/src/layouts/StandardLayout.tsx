@@ -423,7 +423,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								element="aside"
 							>
-								<Island deferUntil="idle">
+								<Island defer={{ until: 'idle' }}>
 									<SubNav
 										subNavSections={
 											props.NAV.subNavSections
@@ -493,7 +493,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
 								{isMatchReport && (
-									<Island deferUntil="visible">
+									<Island defer={{ until: 'visible' }}>
 										<GetMatchNav
 											matchUrl={footballMatchUrl}
 											format={format}
@@ -666,7 +666,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
-										<Island deferUntil="visible">
+										<Island defer={{ until: 'visible' }}>
 											<GetMatchStats
 												matchUrl={footballMatchUrl}
 												format={format}
@@ -787,7 +787,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 				{article.storyPackage && (
 					<Section fullWidth={true}>
-						<Island deferUntil="visible">
+						<Island defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
 								trails={article.storyPackage.trails.map(
@@ -806,7 +806,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 				{isWeb && (
 					<>
-						<Island deferUntil="visible">
+						<Island defer={{ until: 'visible' }}>
 							<OnwardsUpper
 								ajaxUrl={article.config.ajaxUrl}
 								hasRelated={article.hasRelated}
@@ -873,7 +873,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<MostViewedFooterLayout renderAds={renderAds}>
 									<Island
 										clientOnly={true}
-										deferUntil="visible"
+										defer={{ until: 'visible' }}
 									>
 										<MostViewedFooterData
 											sectionId={article.config.section}
@@ -914,7 +914,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							padSides={false}
 							element="aside"
 						>
-							<Island deferUntil="visible">
+							<Island defer={{ until: 'visible' }}>
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
@@ -947,7 +947,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						/>
 					</Section>
 					<BannerWrapper data-print-layout="hide">
-						<Island deferUntil="idle" clientOnly={true}>
+						<Island defer={{ until: 'idle' }} clientOnly={true}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={

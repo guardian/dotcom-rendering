@@ -54,13 +54,13 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island clientOnly={true} deferUntil="idle">
+			<Island clientOnly={true} defer={{ until: 'idle' }}>
 				<AlreadyVisited />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island clientOnly={true} defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island clientOnly={true} defer={{ until: 'idle' }}>
 				<Metrics
 					commercialMetricsEnabled={
 						!!tagFront.config.switches.commercialMetrics

@@ -117,7 +117,7 @@ export const AllEditorialNewslettersPageLayout = ({
 								padSides={false}
 								element="aside"
 							>
-								<Island deferUntil="idle">
+								<Island defer={{ until: 'idle' }}>
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
@@ -156,7 +156,7 @@ export const AllEditorialNewslettersPageLayout = ({
 					groupedNewsletters={newslettersPage.groupedNewsletters}
 				/>
 
-				<Island deferUntil="idle">
+				<Island defer={{ until: 'idle' }}>
 					<ManyNewsletterSignUp />
 				</Island>
 			</main>
