@@ -192,7 +192,7 @@ const decideLeftContent = (
 		!hasPageSkin
 	) {
 		return (
-			<Island deferUntil={'idle'}>
+			<Island deferUntil="idle">
 				<WeatherWrapper
 					ajaxUrl={front.config.ajaxUrl}
 					edition={front.editionId}
@@ -679,7 +679,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									hasPageSkin={hasPageSkin}
 								>
-									<Island deferUntil={'visible'}>
+									<Island deferUntil="visible">
 										<Carousel
 											heading={collection.displayName}
 											trails={trails}

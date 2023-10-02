@@ -451,11 +451,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Hide>
 
-						<Island
-							deferUntil="visible"
-							clientOnly={true}
-							placeholderHeight={230}
-						>
+						<Island deferUntil="visible">
 							<GetMatchNav
 								matchUrl={footballMatchUrl}
 								format={format}
@@ -674,10 +670,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							<GridItem area="media">
 								<div css={maxWidth}>
 									{!!footballMatchUrl && (
-										<Island
-											clientOnly={true}
-											placeholderHeight={40}
-										>
+										<Island>
 											<GetMatchTabs
 												matchUrl={footballMatchUrl}
 												format={format}
@@ -685,10 +678,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										</Island>
 									)}
 									{!!cricketMatchUrl && (
-										<Island
-											clientOnly={true}
-											placeholderHeight={172}
-										>
+										<Island>
 											<GetCricketScoreboard
 												matchUrl={cricketMatchUrl}
 												format={format}
@@ -773,11 +763,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 								{/* Match stats */}
 								{!!footballMatchUrl && (
-									<Island
-										deferUntil="visible"
-										clientOnly={true}
-										placeholderHeight={800}
-									>
+									<Island deferUntil="visible">
 										<GetMatchStats
 											matchUrl={footballMatchUrl}
 											format={format}
@@ -1178,11 +1164,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					)}
 
-					<Island
-						clientOnly={true}
-						deferUntil="visible"
-						placeholderHeight={600}
-					>
+					<Island deferUntil="visible">
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
 							hasRelated={article.hasRelated}

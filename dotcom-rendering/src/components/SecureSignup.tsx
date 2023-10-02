@@ -68,11 +68,7 @@ export const SecureSignup = ({
 
 	return (
 		<>
-			<Island
-				clientOnly={true}
-				deferUntil={'idle'}
-				placeholderHeight={65}
-			>
+			<Island deferUntil="idle">
 				<SecureSignupIframe
 					name={name}
 					html={html}
