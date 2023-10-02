@@ -291,7 +291,7 @@ export const Card = ({
 	showLivePlayable = false,
 	onwardsSource,
 	pauseOffscreenVideo = false,
-	showMainVideo,
+	showMainVideo = true,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 

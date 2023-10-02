@@ -182,7 +182,7 @@ export const YoutubeAtomOverlay = ({
 	kicker,
 	format,
 	showTextOverlay,
-	showMainVideo,
+	showMainVideo = true,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = duration !== undefined && duration > 0;

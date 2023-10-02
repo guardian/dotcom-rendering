@@ -107,7 +107,7 @@ export const YoutubeBlockComponent = ({
 	kickerText,
 	pauseOffscreenVideo = false,
 	showTextOverlay,
-	showMainVideo,
+	showMainVideo = true,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
