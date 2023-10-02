@@ -187,22 +187,28 @@ interface Props {
 }
 
 const decideCaption = (mainMedia: FEElement | undefined): string => {
-	const caption = [];
+	const caption: string[] = [];
 
-	if (
-		mainMedia?._type ===
-		'model.dotcomrendering.pageElements.ImageBlockElement'
-	) {
-		if (mainMedia.data.caption) {
-			caption.push(mainMedia.data.caption);
-		}
+	switch (mainMedia?._type) {
+		case 'model.dotcomrendering.pageElements.ImageBlockElement':
+			if (mainMedia.data.caption) {
+				caption.push(mainMedia.data.caption);
+			}
 
-		if (mainMedia.displayCredit && mainMedia.data.credit) {
-			caption.push(mainMedia.data.credit);
-		}
+			if (mainMedia.displayCredit && mainMedia.data.credit) {
+				caption.push(mainMedia.data.credit);
+			}
+			return caption.join(' ');
+
+		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
+			if (mainMedia.caption) {
+				caption.push(mainMedia.caption);
+			}
+			return caption.join(' ');
+
+		default:
+			return caption.join(' ');
 	}
-
-	return caption.join(' ');
 };
 
 const Box = ({
