@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { DCRArticle } from '../../../src/types/frontend';
 
-export const Editorial: FEArticleType = {
+export const Editorial: DCRArticle = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="c8200f3ea53cda44927b11af11e8fc731afc3f34"> <img src="https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/1000.jpg" alt="‘Ministers have said further border measures are required, but cannot say when they will be applied.’ A man waiting at the Heathrow international arrivals hall on 29 January." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">‘Ministers have said further border measures are required, but cannot say when they will be applied.’</span> <span class="element-image__credit">Photograph: May James/ZUMA Wire/REX/Shutterstock</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
@@ -27,6 +27,60 @@ export const Editorial: FEArticleType = {
 		},
 	],
 	commercialProperties: {
+		UK: {
+			adTargeting: [
+				{
+					name: 'k',
+					value: [
+						'health',
+						'society',
+						'infectiousdiseases',
+						'coronavirus-outbreak',
+						'politics',
+						'conservatives',
+						'vaccines',
+						'uk/uk',
+						'boris-johnson',
+					],
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'tn',
+					value: ['editorials', 'comment'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/gaj9m',
+				},
+				{
+					name: 'co',
+					value: ['editorial'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'url',
+					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+				},
+			],
+		},
 		US: {
 			adTargeting: [
 				{
@@ -100,60 +154,6 @@ export const Editorial: FEArticleType = {
 				{
 					name: 'edition',
 					value: 'au',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['editorials', 'comment'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/gaj9m',
-				},
-				{
-					name: 'co',
-					value: ['editorial'],
-				},
-				{
-					name: 'bl',
-					value: ['commentisfree'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'url',
-					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
-				},
-			],
-		},
-		UK: {
-			adTargeting: [
-				{
-					name: 'k',
-					value: [
-						'health',
-						'society',
-						'infectiousdiseases',
-						'coronavirus-outbreak',
-						'politics',
-						'conservatives',
-						'vaccines',
-						'uk/uk',
-						'boris-johnson',
-					],
-				},
-				{
-					name: 'edition',
-					value: 'uk',
 				},
 				{
 					name: 'ct',
@@ -1702,7 +1702,13 @@ export const Editorial: FEArticleType = {
 					],
 				},
 			],
-			elementId: 'e5efe7fb-6b68-42be-aa4a-9814eb68a7a7',
+			elementId: '04e72991-4b3a-4ceb-899c-cab08b7156d6',
+			position: 1,
+			lightbox: {
+				caption:
+					'‘Ministers have said further border measures are required, but cannot say when they will be applied.’',
+				credit: 'Photograph: May James/ZUMA Wire/REX/Shutterstock',
+			},
 		},
 	],
 	canonicalUrl:
@@ -1714,32 +1720,32 @@ export const Editorial: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The greatest advances in the battle against the coronavirus have been made by modern science, but before there were vaccines, countries had to rely on older techniques: stopping people mingling; preventing new cases of the disease arriving from overseas. Britain’s record with lockdowns is not great (late to implement, premature in lifting), but with quarantine at the border there is barely even a record to defend. For much of last year there was a notional obligation on travellers from various countries to self-isolate on arrival in the UK, but with a shifting roster of places that qualified for “safe” travel corridors.</p>',
-					elementId: 'f928c65e-ec7c-4ded-a492-9a4457360bb0',
+					elementId: '01e89609-74f4-4a23-b270-3ea0314fd9d0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>There were many categories of exemption. The regulations were unclear and poorly implemented. <a href="https://www.theguardian.com/world/commentisfree/2021/jan/28/uk-covid-travel-quarantine-hotel" title="">Efforts at enforcement have been patchy</a>. Essentially, self-isolation has been self-policed. Only towards the end of last year, as it became clear that mutant strains of the virus were spreading – and that Britain’s approach was persistently failing – did the government start focusing on <a href="https://www.theguardian.com/world/2021/jan/27/how-quarantine-rules-work-and-what-uk-government-is-planning" title="">quarantine as part of the anti-virus arsenal</a>. More travellers are now required to show proof of a negative Covid test and there are tighter restrictions on arrivals from certain “hotspot” countries. That approach is still flawed. People, and the virus they might carry, do not always travel straight from the heart of an outbreak to the UK. Mutations are dispersed along multiple paths.</p>',
-					elementId: '00d70cf6-779f-4169-8ada-b66e32485c86',
+					elementId: '263df5f5-f03a-41d1-bf77-5bf23aad9818',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Ministers have said further border measures are required, but cannot say when they will be applied. The new regime is expected to involve diverting large numbers of arrivals to government-approved hotels for up to 10 days, with an option of getting out sooner with a negative test. The Department for Transport and the Treasury <a href="https://www.theguardian.com/world/2021/feb/03/grant-shapps-resists-blanket-border-controls-to-stem-covid-in-britain" title="">have been squeamish</a> about the cost of such a regime. Passengers would get a bill, but the whole system would still be expensive and inflict another wound on an already injured aviation sector.</p>',
-					elementId: '64ca36ef-6647-4233-8705-70680fae07e7',
+					elementId: '62ba2443-1c48-4890-862c-c56ab097a467',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But, as has been demonstrated many times in the pandemic, resisting tighter restrictions to avoid an immediate financial burden is a false economy. Delay allows the disease to spread. The onerous measures are still required and have to be in place for longer. That remains true even as the vaccination programme is rolled out. Not enough is yet known about vaccine resilience in the face of recently discovered coronavirus variants, let alone any future mutations. <a href="https://www.theguardian.com/world/2021/jan/22/covid-vaccines-what-are-the-implications-of-new-variants-of-virus" title="">The risk is not negligible.</a></p>',
-					elementId: '5c42a7aa-b245-4961-a8fa-d9b1019cbef1',
+					elementId: '700dac94-9c95-4ab7-bcfd-15de422546aa',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Countries with the strongest records against disease have applied the full range of containment measures quickly and thoroughly, including efficient testing, contact tracing, and a presumption that all new arrivals face quarantine (with some flexibility for humanitarian exceptions, naturally). That principle should be the basis for the UK’s regime. A speedy vaccination roll-out has given Boris Johnson <a href="https://www.theguardian.com/society/2021/jan/31/daily-record-as-600000-people-in-the-uk-receive-covid-jabs-on-saturday" title="">cause to celebrate</a> his government’s accomplishments relative to other countries. Ministerial relief at having something to cheer is palpable, but it must not lead to neglect of other fronts in the battle or feed the culture of impatience and denial that causes many Conservative MPs to demand unwarranted easing of restrictions.</p>',
-					elementId: 'ff997469-8352-4fce-b90e-181bb67c4500',
+					elementId: '428e3fd1-172a-4fc9-88d1-b8ee2885d96e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>No one should belittle the social, economic and psychological cost of anti-Covid restrictions. Quarantine, like lockdown, is a harsh instrument to be used only as an emergency resort. But we are now a year into such an emergency. The government’s haphazard approach, justified by a pursuit of short-term economic relief, has only prolonged the ordeal. The vaccine programme illuminates a way out. It would be a tragic squandering of that success if overreliance on new technology were to breed complacency regarding older but no less vital methods of protecting the public.</p>',
-					elementId: '1eae978d-2d77-4875-b688-de742b2369b6',
+					elementId: '5c532d2c-3753-4227-8250-05546c91cf56',
 				},
 			],
 			attributes: {
@@ -1990,4 +1996,31 @@ export const Editorial: FEArticleType = {
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
 	},
+	imagesForLightbox: [
+		{
+			masterUrl:
+				'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg',
+			position: 1,
+			width: 5322,
+			height: 3193,
+			elementId: '04e72991-4b3a-4ceb-899c-cab08b7156d6',
+			alt: '‘Ministers have said further border measures are required, but cannot say when they will be applied.’ A man waiting at the Heathrow international arrivals hall on 29 January.',
+			credit: 'Photograph: May James/ZUMA Wire/REX/Shutterstock',
+			caption:
+				'‘Ministers have said further border measures are required, but cannot say when they will be applied.’',
+			displayCredit: true,
+		},
+	],
+	imagesForAppsLightbox: [
+		{
+			width: 5322,
+			height: 3193,
+			credit: 'Photograph: May James/ZUMA Wire/REX/Shutterstock',
+			caption:
+				'‘Ministers have said further border measures are required, but cannot say when they will be applied.’',
+			masterUrl:
+				'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg',
+			elementId: '04e72991-4b3a-4ceb-899c-cab08b7156d6',
+		},
+	],
 };

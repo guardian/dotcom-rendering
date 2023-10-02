@@ -1,3 +1,4 @@
+import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { Switches } from '../types/config';
 import type { ImageBlockElement } from '../types/content';
 import { ImageComponent } from './ImageComponent';
@@ -11,6 +12,7 @@ type Props = {
 	starRating?: number;
 	isAvatar?: boolean;
 	switches?: Switches;
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 export const ImageBlockComponent = ({
@@ -22,6 +24,7 @@ export const ImageBlockComponent = ({
 	starRating,
 	isAvatar,
 	switches,
+	imagesForAppsLightbox,
 }: Props) => {
 	const { role } = element;
 	return (
@@ -35,6 +38,7 @@ export const ImageBlockComponent = ({
 			title={title}
 			isAvatar={isAvatar}
 			switches={switches}
+			imagesForAppsLightbox={imagesForAppsLightbox}
 		/>
 	);
 };

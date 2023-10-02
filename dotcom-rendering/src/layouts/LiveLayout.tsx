@@ -581,10 +581,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										}
 										shortUrlId={article.config.shortUrlId}
 										ajaxUrl={article.config.ajaxUrl}
-										showShareCount={
-											!!article.config.switches
-												.serverShareCounts
-										}
 										messageUs={article.messageUs}
 									/>
 								</div>
@@ -709,6 +705,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										switches={article.config.switches}
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
+										imagesForAppsLightbox={
+											article.imagesForAppsLightbox
+										}
 									/>
 								</div>
 							</GridItem>
@@ -745,10 +744,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												article.config.shortUrlId
 											}
 											ajaxUrl={article.config.ajaxUrl}
-											showShareCount={
-												!!article.config.switches
-													.serverShareCounts
-											}
 											messageUs={article.messageUs}
 										/>
 									</div>
@@ -903,6 +898,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 															.serverSideLiveblogInlineAdsVariant ===
 														'variant'
 													}
+													imagesForAppsLightbox={
+														article.imagesForAppsLightbox
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1056,6 +1054,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													isRightToLeftLang={
 														article.isRightToLeftLang
 													}
+													imagesForAppsLightbox={[]}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination

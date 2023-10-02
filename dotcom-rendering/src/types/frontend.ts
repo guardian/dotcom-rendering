@@ -1,5 +1,6 @@
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
+import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { FEArticleBadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
@@ -124,6 +125,7 @@ export interface FEArticleType {
  */
 export type DCRArticle = FEArticleType & {
 	imagesForLightbox?: ImageForLightbox[];
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 	tableOfContents?: TableOfContentsItem[];
 };
 

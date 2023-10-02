@@ -28,7 +28,6 @@ const fileExists = async (glob) => {
 (async () => {
 	// Check that the manifest files exist
 	await fileExists('manifest.web.json');
-	await fileExists('manifest.web.scheduled.json');
 	await fileExists('manifest.web.ophan-esm.json');
 	await fileExists('manifest.web.legacy.json');
 	if (BUILD_VARIANT) await fileExists('manifest.web.variant.json');
@@ -36,7 +35,6 @@ const fileExists = async (glob) => {
 	// Check that the manifest files return values for all the chunks
 	const manifests = [
 		await loadJsonFile('./dist/manifest.web.json'),
-		await loadJsonFile('./dist/manifest.web.scheduled.json'),
 		await loadJsonFile('./dist/manifest.web.ophan-esm.json'),
 		await loadJsonFile('./dist/manifest.web.legacy.json'),
 	];
@@ -44,19 +42,11 @@ const fileExists = async (glob) => {
 		manifests.push(await loadJsonFile('./dist/manifest.web.variant.json'));
 	}
 
-	for (const name of [
-		'index.js',
-		'atomIframe.js',
-		'embedIframe.js',
-		'newsletterEmbedIframe.js',
-		'relativeTime.js',
-	]) {
-		for (const manifest of manifests) {
-			if (manifest[name]) {
-				console.log(`A manifest returned value ${name}`);
-			} else {
-				errorAndThrow(`A manifest did not return a value for ${name}`);
-			}
+	for (const manifest of manifests) {
+		if (manifest['index.js']) {
+			console.log(`A manifest has an index file`);
+		} else {
+			errorAndThrow(`A manifest did not have an index file`);
 		}
 	}
 })();

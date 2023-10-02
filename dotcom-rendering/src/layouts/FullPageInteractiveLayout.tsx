@@ -84,6 +84,7 @@ const Renderer = ({
 			isAdFreeUser,
 			isSensitive,
 			switches,
+			imagesForAppsLightbox: [],
 		});
 
 		switch (element._type) {

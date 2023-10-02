@@ -1468,7 +1468,6 @@ export const Standard = {
 			weather: true,
 			disableAmpTest: true,
 			prebidPubmatic: true,
-			serverShareCounts: false,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,

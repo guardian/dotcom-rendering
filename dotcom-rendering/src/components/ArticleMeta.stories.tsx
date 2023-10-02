@@ -84,7 +84,6 @@ export const ArticleStory = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -109,7 +108,6 @@ export const ArticleAppsStory = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -153,7 +151,6 @@ export const BrandingStory = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -180,7 +177,6 @@ export const FeatureStory = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -206,7 +202,6 @@ export const FeatureWithMismatchedContributor = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -233,7 +228,6 @@ export const FeatureStoryWithSmallBylineImage = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -259,7 +253,6 @@ export const SpecialReportStory = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -285,7 +278,6 @@ export const SpecialReportAlt = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -311,7 +303,6 @@ export const CommentStory = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -337,7 +328,6 @@ export const InterviewStory = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -363,7 +353,6 @@ export const ImmersiveStory = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -389,7 +378,6 @@ export const TwoContributorsStory = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);
@@ -417,7 +405,6 @@ export const DeadBlogStory = () => {
 						discussionApiUrl=""
 						shortUrlId=""
 						ajaxUrl=""
-						showShareCount={true}
 					/>
 				</Wrapper>
 			))}
@@ -445,7 +432,6 @@ export const Dateline = () => {
 				discussionApiUrl=""
 				shortUrlId=""
 				ajaxUrl=""
-				showShareCount={true}
 			/>
 		</Wrapper>
 	);

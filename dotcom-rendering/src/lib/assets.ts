@@ -2,7 +2,6 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
 import {
-	adaptive,
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 	ophanEsm,
@@ -73,7 +72,6 @@ export type Build =
 	| 'web'
 	| 'web.variant'
 	| 'web.ophan-esm'
-	| 'web.scheduled'
 	| 'web.legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
@@ -118,7 +116,6 @@ const getScriptRegex = (build: Build) =>
 export const WEB = getScriptRegex('web');
 export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');
 export const WEB_LEGACY_SCRIPT = getScriptRegex('web.legacy');
-export const WEB_SCHEDULED_SCRIPT = getScriptRegex('web.scheduled');
 export const APPS_SCRIPT = getScriptRegex('apps');
 
 export const generateScriptTags = (scripts: string[]): string[] =>
@@ -142,7 +139,6 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 
 export const getModulesBuild = ({
 	tests,
-	switches,
 }: {
 	tests: ServerSideTests;
 	switches: Switches;
@@ -152,9 +148,6 @@ export const getModulesBuild = ({
 	}
 	if (tests[ophanEsm('Variant')] === 'variant') {
 		return 'web.ophan-esm';
-	}
-	if (switches.scheduler || tests[adaptive('Variant')] === 'variant') {
-		return 'web.scheduled';
 	}
 	return 'web';
 };
