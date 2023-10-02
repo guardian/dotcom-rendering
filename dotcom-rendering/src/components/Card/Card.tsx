@@ -99,6 +99,7 @@ export type Props = {
 	showLivePlayable?: boolean;
 	onwardsSource?: string;
 	pauseOffscreenVideo?: boolean;
+	showMainVideo: boolean;
 };
 
 const StarRatingComponent = ({
@@ -210,7 +211,7 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	isPlayableMediaCard?: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && !!isPlayableMediaCard) {
+	if (mainMedia && mainMedia.type === 'Video' && isPlayableMediaCard) {
 		return {
 			type: 'video',
 			mainMedia,
@@ -290,6 +291,7 @@ export const Card = ({
 	showLivePlayable = false,
 	onwardsSource,
 	pauseOffscreenVideo = false,
+	showMainVideo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -475,6 +477,7 @@ export const Card = ({
 										showTextOverlay={
 											containerType === 'fixed/video'
 										}
+										showMainVideo={showMainVideo}
 									/>
 								</Island>
 							</div>

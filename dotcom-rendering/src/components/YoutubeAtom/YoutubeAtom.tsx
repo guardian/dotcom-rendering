@@ -43,6 +43,7 @@ type Props = {
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
 	showTextOverlay?: boolean;
+	showMainVideo: boolean;
 };
 
 export const YoutubeAtom = ({
@@ -68,6 +69,7 @@ export const YoutubeAtom = ({
 	format,
 	shouldPauseOutOfView = false,
 	showTextOverlay = false,
+	showMainVideo,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -164,7 +166,7 @@ export const YoutubeAtom = ({
 			shouldPauseOutOfView={shouldPauseOutOfView}
 		>
 			<MaintainAspectRatio height={height} width={width}>
-				{loadPlayer && consentState && adTargeting && (
+				{loadPlayer && consentState && adTargeting && showMainVideo && (
 					<YoutubeAtomPlayer
 						videoId={videoId}
 						uniqueId={uniqueId}
@@ -204,6 +206,7 @@ export const YoutubeAtom = ({
 						kicker={kicker}
 						format={format}
 						showTextOverlay={showTextOverlay}
+						showMainVideo={showMainVideo}
 					/>
 				)}
 				{showPlaceholder && (
