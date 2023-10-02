@@ -7,7 +7,7 @@ import * as Metrics from '@guardian/bridget/Metrics';
 import * as Navigation from '@guardian/bridget/Navigation';
 import * as Newsletters from '@guardian/bridget/Newsletters';
 import * as Notifications from '@guardian/bridget/Notifications';
-// import * as Tag from '@guardian/bridget/Notifications'; // TODO update to TAG
+import * as Tag from '@guardian/bridget/Notifications'; // TODO update to TAG
 import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
 import { createAppClient } from './thrift/nativeConnection';
@@ -60,12 +60,11 @@ export const getNotificationsClient = (): Notifications.Client<void> => {
 	return notificationsClient;
 };
 
-// TODO use TagService once bridget is updated
-let tagClient: Notifications.Client<void> | undefined = undefined;
-export const getTagClient = (): Notifications.Client<void> => {
+let tagClient: Tag.Client<void> | undefined = undefined;
+export const getTagClient = (): Tag.Client<void> => {
 	if (!tagClient) {
-		tagClient = createAppClient<Notifications.Client<void>>(
-			Notifications.Client,
+		tagClient = createAppClient<Tag.Client<void>>(
+			Tag.Client,
 			'buffered',
 			'compact',
 		);
