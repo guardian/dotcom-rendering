@@ -111,7 +111,7 @@ describe('Signed in readers', function () {
 		cy.get('gu-island[name=DiscussionContainer]').should(
 			'have.attr',
 			'data-island-status',
-			'rendered',
+			'hydrated',
 		);
 		// Check that the page is showing the reader as signed out
 		cy.contains('Sign in or create');
