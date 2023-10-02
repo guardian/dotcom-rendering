@@ -46,6 +46,12 @@ function resolve(
 		alias: {
 			logger: path.resolve(__dirname, `src/logger/${loggerName}`),
 		},
+		// Webpack 5 removed a lot of the nodejs polyfills including Buffer
+		// We rely on Buffer for our bridget thrift client  - need for bridget thrift client
+		fallback: {
+			url: require.resolve('url/'),
+			buffer: require.resolve('buffer/'),
+		},
 	};
 
 	// Webpack 5 removed a lot of the nodejs polyfills including Buffer

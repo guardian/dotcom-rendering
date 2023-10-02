@@ -30,7 +30,7 @@ import {
 	userClient,
 } from 'native/nativeApi';
 import type { Client as NotificationsClient } from '@guardian/bridget/Notifications';
-// import type { Client as TagClient } from '@guardian/bridget/Tag';
+import type { Client as TagClient } from '@guardian/bridget/Tag';
 import type { FC, ReactElement } from 'react';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
@@ -73,7 +73,7 @@ function followToggle(
 		isFollowing: boolean;
 		contributorName: string;
 	}>,
-	bridgetClient: NotificationsClient<void>, //| TagClient<void>,
+	bridgetClient: NotificationsClient<void> | TagClient<void>,
 ): void {
 	const followStatus = document.querySelector(querySelector);
 	if (!followStatus) return;
