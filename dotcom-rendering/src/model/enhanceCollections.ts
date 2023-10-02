@@ -1,6 +1,7 @@
 import { isNonNullable } from '@guardian/libs';
+import { pickBrandingForEdition } from '../lib/branding';
 import type { EditionId } from '../lib/edition';
-import { type Branding, pickBrandingForEdition } from '../types/branding';
+import type { Branding } from '../types/branding';
 import type {
 	DCRCollectionType,
 	FECollectionType,
@@ -102,7 +103,7 @@ export const enhanceCollections = ({
 			sponsoredContentBranding: decideSponsoredContentBranding(
 				allCards.length,
 				allBranding,
-				// TODO Use front branding directly
+				// TODO(@chrislomaxjones) Read the full front branding value
 				!!frontBranding,
 				collectionType,
 			),

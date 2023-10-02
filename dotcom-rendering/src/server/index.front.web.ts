@@ -1,4 +1,5 @@
 import type { RequestHandler } from 'express';
+import { pickBrandingForEdition } from '../lib/branding';
 import { decideTrail } from '../lib/decideTrail';
 import { enhanceCards } from '../model/enhanceCards';
 import { enhanceCollections } from '../model/enhanceCollections';
@@ -11,7 +12,6 @@ import { injectMpuIntoGroupedTrails } from '../model/injectMpuIntoGroupedTrails'
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
 import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
-import { pickBrandingForEdition } from '../types/branding';
 import type { DCRFrontType, FEFrontType } from '../types/front';
 import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront';
 import { makePrefetchHeader } from './lib/header';

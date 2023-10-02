@@ -1,5 +1,3 @@
-import type { EditionId } from '../lib/edition';
-
 type BrandingLogo = {
 	src: string;
 	link: string;
@@ -17,15 +15,7 @@ export interface Branding {
 
 export interface EditionBranding {
 	edition: {
-		id: string; // Check not EditionId?
+		id: string;
 	};
 	branding?: Branding;
 }
-
-export const pickBrandingForEdition = (
-	editionBrandings: EditionBranding[],
-	editionId: EditionId,
-): Branding | undefined =>
-	editionBrandings.find(
-		({ edition, branding }) => edition.id === editionId && branding,
-	)?.branding;
