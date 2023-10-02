@@ -14,11 +14,20 @@ export type OphanRecordFunction = (
 ) => void;
 
 /**
+ * Store a reference to Ophan so that we don't need to load/enhance it more than once.
+ */
+let cachedOphan: typeof window.guardian.ophan;
+
+/**
  * Loads Ophan (if it hasn't already been loaded) and returns a promise of Ophan's methods.
  */
 export const getOphan = async (): Promise<
 	NonNullable<typeof window.guardian.ophan>
 > => {
+	if (cachedOphan) {
+		return cachedOphan;
+	}
+
 	// @ts-expect-error -- side effect only
 	await import(/* webpackMode: "eager" */ 'ophan-tracker-js');
 
@@ -45,10 +54,8 @@ export const getOphan = async (): Promise<
 		});
 	};
 
-	// this is the future of `getOphan`'s API, but we need to move to a
-	// dynamic import of the Ophan library to get there, so just returning a
-	// meaningless promise for now, for future-proofing
-	return Promise.resolve({ ...ophan, record, trackComponentAttention });
+	cachedOphan = { ...ophan, record, trackComponentAttention };
+	return cachedOphan;
 };
 
 export const submitComponentEvent = async (
