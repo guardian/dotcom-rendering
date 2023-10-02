@@ -112,7 +112,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	const epicRef = useRef(null);
 
 	useOnce(() => {
-		submitComponentEvent({
+		void submitComponentEvent({
 			component: {
 				componentType: COMPONENT_TYPE,
 				id: meta.dataFromBraze.ophanComponentId,
@@ -126,7 +126,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 			meta.logImpressionWithBraze();
 
 			// Log VIEW event with Ophan
-			submitComponentEvent({
+			void submitComponentEvent({
 				component: {
 					componentType: COMPONENT_TYPE,
 					id: meta.dataFromBraze.ophanComponentId,
