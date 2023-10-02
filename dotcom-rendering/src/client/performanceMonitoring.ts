@@ -48,7 +48,7 @@ export const performanceMonitoring = async (): Promise<void> => {
 		const [fcp, ttfb] = await Promise.all([
 			getFirstContentfulPaint(),
 			getTimeToFirstByte(),
-		]);
+		]).catch(() => [FCP_THRESHOLD + 1, TTFB_THRESHOLD + 1]);
 
 		if (ttfb > TTFB_THRESHOLD && fcp > FCP_THRESHOLD) {
 			/** Not sure here if we should duplicate “dotcom-rendering” */
