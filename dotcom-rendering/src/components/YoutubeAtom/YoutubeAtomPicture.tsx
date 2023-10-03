@@ -12,10 +12,11 @@ type Props = {
 
 export const YoutubeAtomPicture = ({ image, alt, height, width }: Props) => {
 	const sources = generateSources(getSourceImageUrl(image), [
-		{
-			breakpoint: breakpoints.phablet,
-			width: 620,
-		},
+		{ breakpoint: breakpoints.mobile, width: 465 },
+		{ breakpoint: breakpoints.mobileLandscape, width: 645 },
+		{ breakpoint: breakpoints.phablet, width: 620 },
+		{ breakpoint: breakpoints.tablet, width: 700 },
+		{ breakpoint: breakpoints.desktop, width: 620 },
 	]);
 	const fallbackSource = getFallbackSource(sources);
 
