@@ -7,7 +7,7 @@ import { trackVideoInteraction } from '../client/ga/ga';
 import { record } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
-import type { RoleType } from '../types/content';
+import type { ImageSource, RoleType, SrcSetItem } from '../types/content';
 import { Caption } from './Caption';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 
@@ -73,6 +73,13 @@ const expiredSVGWrapperStyles = css`
 		fill: ${neutral[100]};
 	}
 `;
+
+const getLargestImageSize = (
+	images: {
+		url: string;
+		width: number;
+	}[],
+) => [...images].sort((a, b) => a.width - b.width).pop();
 
 export const YoutubeBlockComponent = ({
 	id,
@@ -193,34 +200,8 @@ export const YoutubeBlockComponent = ({
 			<YoutubeAtom
 				elementId={elementId}
 				videoId={assetId}
-				overrideImage={
-					overrideImage
-						? [
-								{
-									weighting: 'supporting',
-									srcSet: [
-										{
-											src: overrideImage,
-											width: 500, // we do not have width for overlayImage so set a random number
-										},
-									],
-								},
-						  ]
-						: undefined
-				}
-				posterImage={
-					posterImage.length > 0
-						? [
-								{
-									weighting: 'supporting',
-									srcSet: posterImage.map((img) => ({
-										src: img.url,
-										width: img.width,
-									})),
-								},
-						  ]
-						: undefined
-				}
+				overrideImage={overrideImage}
+				posterImage={getLargestImageSize(posterImage)?.url}
 				role={role}
 				alt={altText ?? mediaTitle ?? ''}
 				adTargeting={adTargeting}

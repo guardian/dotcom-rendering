@@ -24,8 +24,8 @@ export type VideoEventKey =
 type Props = {
 	elementId: string;
 	videoId: string;
-	overrideImage?: ImageSource[];
-	posterImage?: ImageSource[];
+	overrideImage?: string | undefined;
+	posterImage?: string | undefined;
 	adTargeting?: AdTargeting;
 	consentState?: ConsentState;
 	height?: number;

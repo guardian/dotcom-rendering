@@ -18,8 +18,8 @@ export type VideoCategory = 'live' | 'documentary' | 'explainer';
 
 type Props = {
 	uniqueId: string;
-	overrideImage?: ImageSource[];
-	posterImage?: ImageSource[];
+	overrideImage?: string;
+	posterImage?: string;
 	height: number;
 	width: number;
 	alt: string;
@@ -190,6 +190,7 @@ export const YoutubeAtomOverlay = ({
 	const showPill = !!videoCategory || hasDuration;
 	const isLive = videoCategory === 'live';
 	const dcrPalette = decidePalette(format);
+	const image = overrideImage ?? posterImage;
 
 	return (
 		<button
@@ -200,13 +201,15 @@ export const YoutubeAtomOverlay = ({
 			aria-label={title ? `Play video: ${title}` : `Play video`}
 			type="button"
 		>
-			<Picture
-				imageSources={overrideImage ?? posterImage ?? []}
-				role={role}
-				alt={alt}
-				height={height}
-				width={width}
-			/>
+			{!!image && (
+				<Picture
+					image={image}
+					role={role}
+					alt={alt}
+					height={height}
+					width={width}
+				/>
+			)}
 			{showPill && (
 				<div css={pillStyles}>
 					{!!videoCategory && (

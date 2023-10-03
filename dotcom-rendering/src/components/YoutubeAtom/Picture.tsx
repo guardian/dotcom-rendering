@@ -3,7 +3,7 @@ import { breakpoints } from '@guardian/source-foundations';
 import type { ImageSource, RoleType, SrcSetItem } from '../../types/content';
 
 type Props = {
-	imageSources: ImageSource[];
+	image: string;
 	role: RoleType;
 	alt: string;
 	height: number;
@@ -28,10 +28,10 @@ const getClosestSetForWidth = (
 };
 
 const getSourcesForRoleAndResolution = (
-	imageSources: ImageSource[],
+	image: ImageSource[],
 	resolution: ResolutionType,
 ) => {
-	const srcSetItems = imageSources[0]?.srcSet ?? [];
+	const srcSetItems = image[0]?.srcSet ?? [];
 
 	return resolution === 'hdpi'
 		? srcSetItems.filter((set) => set.src.includes('dpr=2'))
@@ -40,30 +40,17 @@ const getSourcesForRoleAndResolution = (
 
 const getFallback = (
 	resolution: ResolutionType,
-	imageSources: ImageSource[],
+	image: ImageSource[],
 ): string | undefined => {
 	// Get the sources for this role and resolution
 	const sources: SrcSetItem[] = getSourcesForRoleAndResolution(
-		imageSources,
+		image,
 		resolution,
 	);
 	if (sources.length === 0) return undefined;
 	// The assumption here is readers on devices that do not support srcset are likely to be on poor
 	// network connections so we're going to fallback to a small image
 	return getClosestSetForWidth(300, sources).src;
-};
-
-const getSources = (
-	resolution: ResolutionType,
-	imageSources: ImageSource[],
-): string => {
-	// Get the sources for this role and resolution
-	const sources: SrcSetItem[] = getSourcesForRoleAndResolution(
-		imageSources,
-		resolution,
-	);
-
-	return sources.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
 };
 
 /**
@@ -108,31 +95,20 @@ const getSizes = (role: RoleType, isMainMedia: boolean): string => {
 };
 
 export const Picture = ({
-	imageSources,
+	image,
 	role,
 	alt,
 	height,
 	width,
 	isMainMedia = false,
 }: Props): JSX.Element => {
-	const hdpiSources = getSources('hdpi', imageSources);
-	const mdpiSources = getSources('mdpi', imageSources);
-	const fallbackSrc = getFallback('hdpi', imageSources);
 	const sizes = getSizes(role, isMainMedia);
 
 	return (
 		<picture itemProp="contentUrl">
-			{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
-			<source
-				srcSet={hdpiSources}
-				sizes={sizes}
-				media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-			/>
-			{/* MDPI Source (DPR1) - images in this srcset have `quality=85` in the url */}
-			<source srcSet={mdpiSources} sizes={sizes} />
 			<img
 				alt={alt}
-				src={fallbackSrc}
+				src={image}
 				height={height}
 				width={width}
 				// https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
