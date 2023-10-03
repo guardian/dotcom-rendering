@@ -380,7 +380,10 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 							padSides={false}
 							element="aside"
 						>
-							<Island defer={{ until: 'idle' }}>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'idle' }}
+							>
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
@@ -589,7 +592,10 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 										imagesForAppsLightbox={[]}
 									/>
 									{showBodyEndSlot && (
-										<Island clientOnly={true}>
+										<Island
+											priority="critical"
+											clientOnly={true}
+										>
 											<SlotBodyEnd
 												contentType={
 													article.contentType
@@ -701,7 +707,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 
 				{article.storyPackage && (
 					<Section fullWidth={true}>
-						<Island defer={{ until: 'visible' }}>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
 								trails={article.storyPackage.trails.map(
@@ -718,7 +724,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island defer={{ until: 'visible' }}>
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}
@@ -774,6 +780,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
+								priority="feature"
 								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
@@ -807,7 +814,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 
 			{NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -837,7 +844,11 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper>
-				<Island defer={{ until: 'idle' }} clientOnly={true}>
+				<Island
+					priority="feature"
+					defer={{ until: 'idle' }}
+					clientOnly={true}
+				>
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

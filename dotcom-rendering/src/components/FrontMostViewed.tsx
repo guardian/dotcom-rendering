@@ -72,7 +72,7 @@ export const FrontMostViewed = ({
 		>
 			{/* We only need hydration if there are multiple tabs */}
 			{showMostViewedTab ? (
-				<Island defer={{ until: 'visible' }}>
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<MostViewedFooter
 						tabs={tabs}
 						sectionId="Most viewed"

@@ -379,7 +379,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								borderColour={palette.border.article}
 								element="aside"
 							>
-								<Island defer={{ until: 'idle' }}>
+								<Island
+									priority="enhancement"
+									defer={{ until: 'idle' }}
+								>
 									<SubNav
 										subNavSections={
 											props.NAV.subNavSections
@@ -415,7 +418,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main data-layout="LiveLayout">
 				{isApps && (
-					<Island clientOnly={true}>
+					<Island priority="critical" clientOnly={true}>
 						<AdPortals />
 					</Island>
 				)}
@@ -451,7 +454,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Hide>
 
-						<Island defer={{ until: 'visible' }}>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<GetMatchNav
 								matchUrl={footballMatchUrl}
 								format={format}
@@ -594,7 +597,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						borderColour={palette.border.article}
 					>
 						<Hide until={'desktop'}>
-							<Island>
+							<Island priority="critical">
 								<KeyEventsCarousel
 									keyEvents={article.keyEvents}
 									filterKeyEvents={article.filterKeyEvents}
@@ -635,7 +638,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									justify-content: center;
 								`}
 							/>
-							<Island clientOnly={true} defer={{ until: 'idle' }}>
+							<Island
+								clientOnly={true}
+								priority="feature"
+								defer={{ until: 'idle' }}
+							>
 								<Liveness
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -670,7 +677,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							<GridItem area="media">
 								<div css={maxWidth}>
 									{!!footballMatchUrl && (
-										<Island>
+										<Island priority="critical">
 											<GetMatchTabs
 												matchUrl={footballMatchUrl}
 												format={format}
@@ -678,7 +685,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										</Island>
 									)}
 									{!!cricketMatchUrl && (
-										<Island>
+										<Island priority="critical">
 											<GetCricketScoreboard
 												matchUrl={cricketMatchUrl}
 												format={format}
@@ -763,7 +770,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 								{/* Match stats */}
 								{!!footballMatchUrl && (
-									<Island defer={{ until: 'visible' }}>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
 										<GetMatchStats
 											matchUrl={footballMatchUrl}
 											format={format}
@@ -776,6 +786,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									{showKeyEventsToggle ? (
 										<Hide below="desktop">
 											<Island
+												priority="feature"
 												defer={{ until: 'visible' }}
 											>
 												<FilterKeyEventsToggle
@@ -1149,7 +1160,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 					{article.storyPackage && (
 						<Section fullWidth={true}>
-							<Island defer={{ until: 'visible' }}>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
 								<Carousel
 									heading={article.storyPackage.heading}
 									trails={article.storyPackage.trails.map(
@@ -1166,7 +1180,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					)}
 
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
 							hasRelated={article.hasRelated}
@@ -1230,6 +1244,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						>
 							<MostViewedFooterLayout renderAds={renderAds}>
 								<Island
+									priority="feature"
 									clientOnly={true}
 									defer={{ until: 'visible' }}
 								>
@@ -1272,7 +1287,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							element="aside"
 						>
-							<Island defer={{ until: 'visible' }}>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
@@ -1307,7 +1325,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper data-print-layout="hide">
-						<Island defer={{ until: 'idle' }} clientOnly={true}>
+						<Island
+							priority="feature"
+							defer={{ until: 'idle' }}
+							clientOnly={true}
+						>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={

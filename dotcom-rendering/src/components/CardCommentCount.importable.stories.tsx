@@ -27,7 +27,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 export const CommentCountStory = () => {
 	return (
 		<Wrapper>
-			<Island>
+			<Island priority="critical">
 				<CardCommentCount
 					format={{
 						design: ArticleDesign.Standard,
@@ -46,7 +46,7 @@ CommentCountStory.storyName = 'default';
 export const GalleryStory = () => {
 	return (
 		<Wrapper>
-			<Island>
+			<Island priority="critical">
 				<CardCommentCount
 					format={{
 						design: ArticleDesign.Gallery,

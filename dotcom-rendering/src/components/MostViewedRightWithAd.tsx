@@ -44,6 +44,7 @@ export const MostViewedRightWithAd = ({
 
 			{!isPaidContent ? (
 				<Island
+					priority="feature"
 					clientOnly={true}
 					defer={{
 						until: 'visible',

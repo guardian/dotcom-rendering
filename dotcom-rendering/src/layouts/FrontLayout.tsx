@@ -192,7 +192,7 @@ const decideLeftContent = (
 		!hasPageSkin
 	) {
 		return (
-			<Island defer={{ until: 'idle' }}>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<WeatherWrapper
 					ajaxUrl={front.config.ajaxUrl}
 					edition={front.editionId}
@@ -356,7 +356,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								element="aside"
 								hasPageSkin={hasPageSkin}
 							>
-								<Island defer={{ until: 'idle' }}>
+								<Island
+									priority="enhancement"
+									defer={{ until: 'idle' }}
+								>
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
@@ -394,7 +397,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-			<Island clientOnly={true}>
+			<Island priority="critical" clientOnly={true}>
 				<EuropeLandingModal edition={front.editionId} />
 			</Island>
 			<main
@@ -679,7 +682,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									hasPageSkin={hasPageSkin}
 								>
-									<Island defer={{ until: 'visible' }}>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
 										<Carousel
 											heading={collection.displayName}
 											trails={trails}
@@ -832,7 +838,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						hasPageSkin ? background.primary : undefined
 					}
 				>
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="critical" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -864,7 +870,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			</Section>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island defer={{ until: 'idle' }} clientOnly={true}>
+				<Island
+					priority="feature"
+					defer={{ until: 'idle' }}
+					clientOnly={true}
+				>
 					<StickyBottomBanner
 						contentType={front.config.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}
