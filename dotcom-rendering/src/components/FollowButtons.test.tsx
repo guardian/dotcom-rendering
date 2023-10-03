@@ -2,7 +2,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render, waitFor } from '@testing-library/react';
 import { FollowNotificationsButton, FollowTagButton } from './FollowButtons';
 
-it('should show a follow tag button for a single contributor when rendering for apps', () => {
+it('should show a follow tag button not following for a single contributor when rendering for apps', () => {
 	const { getByText } = render(
 		<FollowTagButton
 			isFollowing={false}
@@ -18,7 +18,7 @@ it('should show a follow tag button for a single contributor when rendering for 
 	expect(getByText('Follow Gwyn Topham')).toBeInTheDocument();
 });
 
-it('should show a follow tag button for a single contributor when rendering for apps', async () => {
+it('should show a follow tag button following for a single contributor when rendering for apps', async () => {
 	const { getByText } = render(
 		<FollowTagButton
 			onClickHandler={() => undefined}
@@ -31,11 +31,12 @@ it('should show a follow tag button for a single contributor when rendering for 
 			}}
 		/>,
 	);
+
 	await waitFor(() =>
-		expect(getByText('Unfollow Gwyn Topham')).toBeInTheDocument(),
+		expect(getByText('Following Gwyn Topham')).toBeInTheDocument(),
 	);
 });
-it('should show a follow notifications button for a single contributor when rendering for apps', () => {
+it('should show a follow notifications button "off" for a single contributor when rendering for apps', () => {
 	const { getByText } = render(
 		<FollowNotificationsButton
 			isFollowing={false}
@@ -51,7 +52,7 @@ it('should show a follow notifications button for a single contributor when rend
 	expect(getByText('Notifications off')).toBeInTheDocument();
 });
 
-it('should show a follow notifications button for a single contributor when rendering for apps', async () => {
+it('should show a follow notifications button "on" for a single contributor when rendering for apps', async () => {
 	const { getByText } = render(
 		<FollowNotificationsButton
 			onClickHandler={() => undefined}

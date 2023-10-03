@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { remSpace, textSans } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
 import {
 	SvgCheckmark,
 	SvgNotificationsOff,
 	SvgNotificationsOn,
 	SvgPlus,
 } from '@guardian/source-react-components';
-import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
+import { decidePalette } from '../lib/decidePalette';
 
 type IconProps = {
 	isFollowing: boolean;
