@@ -25,11 +25,11 @@ const useMatchMedia = (query: string): boolean => {
 	}
 
 	return useSyncExternalStore(
-		(changed) => {
-			mediaQuery.addEventListener('change', changed);
+		(callback) => {
+			mediaQuery.addEventListener('change', callback);
 
 			return () => {
-				mediaQuery.removeEventListener('change', changed);
+				mediaQuery.removeEventListener('change', callback);
 			};
 		},
 		() => mediaQuery.matches,
