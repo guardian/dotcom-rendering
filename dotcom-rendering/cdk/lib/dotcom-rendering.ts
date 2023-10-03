@@ -93,7 +93,7 @@ export class DotcomRendering extends GuStack {
 		 * GOTCHA: The load balancer name appends `-ELB` when the `app = "rendering"` for backwards compatibility
 		 * We removed this to avoid the `LoadBalancerName.length > 32`. This will be fixable once we migrate to ALBs.
 		 */
-		const loadBalancerName = app === 'rendering' ? `${stack}-${stage}-${app}` : `${stack}-${stage}-${app}-ELB`;
+		const loadBalancerName = app === 'rendering' ? `${stack}-${stage}-${app}-ELB` : `${stack}-${stage}-${app}`;
 		const loadBalancer = new GuClassicLoadBalancer(
 			this,
 			'InternalLoadBalancer',

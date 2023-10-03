@@ -621,7 +621,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Protocol": "http",
           },
         ],
-        "LoadBalancerName": "frontend-TEST-rendering-ELB",
+        "LoadBalancerName": "frontend-TEST-rendering",
         "Scheme": "internal",
         "SecurityGroups": [
           {
