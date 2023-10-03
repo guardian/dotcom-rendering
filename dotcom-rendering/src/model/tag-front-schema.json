@@ -359,26 +359,7 @@
                             "editionBrandings": {
                                 "type": "array",
                                 "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "edition": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "$ref": "#/definitions/EditionId"
-                                                }
-                                            },
-                                            "required": [
-                                                "id"
-                                            ]
-                                        },
-                                        "branding": {
-                                            "$ref": "#/definitions/Branding"
-                                        }
-                                    },
-                                    "required": [
-                                        "edition"
-                                    ]
+                                    "$ref": "#/definitions/EditionBranding"
                                 }
                             },
                             "href": {
@@ -1369,15 +1350,27 @@
                 "url"
             ]
         },
-        "EditionId": {
-            "enum": [
-                "AU",
-                "EUR",
-                "INT",
-                "UK",
-                "US"
-            ],
-            "type": "string"
+        "EditionBranding": {
+            "type": "object",
+            "properties": {
+                "edition": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "id"
+                    ]
+                },
+                "branding": {
+                    "$ref": "#/definitions/Branding"
+                }
+            },
+            "required": [
+                "edition"
+            ]
         },
         "Branding": {
             "type": "object",
@@ -1658,6 +1651,16 @@
                 "support",
                 "supporter"
             ]
+        },
+        "EditionId": {
+            "enum": [
+                "AU",
+                "EUR",
+                "INT",
+                "UK",
+                "US"
+            ],
+            "type": "string"
         },
         "Switches": {
             "type": "object",
