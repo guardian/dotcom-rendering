@@ -487,14 +487,7 @@ export const Card = ({
 							</div>
 						)}
 						{media.type === 'video' && !showMainVideo && (
-							<div
-								css={css`
-									img {
-										width: 100%;
-										height: 100%;
-									}
-								`}
-							>
+							<div>
 								<Picture
 									imageSources={
 										extractImageSourcesFromPosterImage(
