@@ -72,6 +72,13 @@ const expiredSVGWrapperStyles = css`
 	}
 `;
 
+/**
+ * We do our own image optimization in DCR and only need 1 image. Pick the largest image available to
+ * us to avoid up-scaling later.
+ *
+ * @param images an array of the same image at different resolutions
+ * @returns largest image from images
+ */
 const getLargestImageSize = (
 	images: {
 		url: string;
