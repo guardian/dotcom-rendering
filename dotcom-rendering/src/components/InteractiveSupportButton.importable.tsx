@@ -7,7 +7,6 @@ import {
 } from '@guardian/source-react-components';
 import { shouldHideSupportMessaging } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
-import { isServer } from '../lib/isServer';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { Hide } from './Hide';
 
@@ -31,8 +30,6 @@ export const InteractiveSupportButton = ({
 	editionId,
 	subscribeUrl,
 }: InteractiveSupportButtonProps) => {
-	if (isServer) return null;
-
 	const hideSupportMessaging = shouldHideSupportMessaging();
 
 	if (!hideSupportMessaging) {

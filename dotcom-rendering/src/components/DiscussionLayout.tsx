@@ -44,7 +44,7 @@ export const DiscussionLayout = ({
 				// If we're not hiding an advert stretch to the right
 				stretchRight={!hideAd}
 				leftContent={
-					<Island deferUntil="visible">
+					<Island clientOnly={true} deferUntil="visible">
 						<DiscussionMeta
 							format={format}
 							discussionApiUrl={discussionApiUrl}

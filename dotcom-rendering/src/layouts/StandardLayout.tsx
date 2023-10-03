@@ -477,7 +477,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<main data-layout="StandardLayout">
 				{isApps && (
-					<Island>
+					<Island clientOnly={true}>
 						<AdPortals />
 					</Island>
 				)}
@@ -675,13 +675,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									)}
 
 								{isApps && (
-									<Island>
+									<Island clientOnly={true}>
 										<AppsEpic />
 									</Island>
 								)}
 
 								{isWeb && showBodyEndSlot && (
-									<Island>
+									<Island clientOnly={true}>
 										<SlotBodyEnd
 											contentType={article.contentType}
 											contributionsServiceUrl={
@@ -871,7 +871,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								data-component="most-popular"
 							>
 								<MostViewedFooterLayout renderAds={renderAds}>
-									<Island deferUntil="visible">
+									<Island
+										clientOnly={true}
+										deferUntil="visible"
+									>
 										<MostViewedFooterData
 											sectionId={article.config.section}
 											format={format}
@@ -944,7 +947,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						/>
 					</Section>
 					<BannerWrapper data-print-layout="hide">
-						<Island deferUntil="idle">
+						<Island deferUntil="idle" clientOnly={true}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={

@@ -15,7 +15,6 @@ import {
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
 import { getLocaleCode } from '../lib/getCountryCode';
-import { isServer } from '../lib/isServer';
 import { setAutomat } from '../lib/setAutomat';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
@@ -104,11 +103,9 @@ const usePayload = ({
 	const articleCounts = useArticleCounts(pageId, keywordIds);
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
 	const countryCode = useCountryCode();
-	const authStatus = useAuthStatus();
-	if (isServer) return;
-
 	const mvtId =
 		Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })) || 0;
+	const authStatus = useAuthStatus();
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||
 		authStatus.kind === 'SignedInWithCookies';

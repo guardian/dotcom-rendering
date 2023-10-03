@@ -537,7 +537,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 							max-width: 620px;
 						`}
 					>
-						<Island>
+						<Island clientOnly={true}>
 							<SlotBodyEnd
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -690,7 +690,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						data-component="most-popular"
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
-							<Island deferUntil="visible">
+							<Island clientOnly={true} deferUntil="visible">
 								<MostViewedFooterData
 									sectionId={article.config.section}
 									format={format}
@@ -758,7 +758,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island deferUntil="idle">
+				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

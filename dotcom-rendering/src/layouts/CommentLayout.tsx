@@ -589,7 +589,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 										imagesForAppsLightbox={[]}
 									/>
 									{showBodyEndSlot && (
-										<Island>
+										<Island clientOnly={true}>
 											<SlotBodyEnd
 												contentType={
 													article.contentType
@@ -773,7 +773,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 						data-component="most-popular"
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
-							<Island deferUntil="visible">
+							<Island clientOnly={true} deferUntil="visible">
 								<MostViewedFooterData
 									sectionId={article.config.section}
 									format={format}
@@ -834,7 +834,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper>
-				<Island deferUntil="idle">
+				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

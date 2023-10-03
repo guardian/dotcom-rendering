@@ -6,7 +6,7 @@ import { getCookie } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
-import { isServer } from '../lib/isServer';
+import { getLocaleCode } from '../lib/getCountryCode';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -15,7 +15,6 @@ import type {
 import { pickMessage } from '../lib/messagePicker';
 import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
-import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
 import { AdSlot } from './AdSlot.web';
@@ -106,13 +105,6 @@ function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
 	}
 }
 
-/**
- * Conditionally show an “epic” at the end of a article.
- *
- * ## Why does this need to be an Island?
- *
- * The decision is specific to a page view.
- */
 export const SlotBodyEnd = ({
 	contentType,
 	sectionId,
@@ -129,11 +121,9 @@ export const SlotBodyEnd = ({
 	isLabs,
 }: Props) => {
 	const { brazeMessages } = useBraze(idApiUrl);
-	const countryCode = useCountryCode();
+	const [countryCode, setCountryCode] = useState<string>();
 	const isSignedIn = getIsSignedIn(useAuthStatus());
-	const browserId = isServer
-		? null
-		: getCookie({ name: 'bwid', shouldMemoize: true });
+	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<React.ElementType | null>(
 		null,
 	);
@@ -142,11 +132,23 @@ export const SlotBodyEnd = ({
 
 	// Show the article end slot if the epic is not shown, currently only used in the US for Public Good
 	const showArticleEndSlot =
-		!isServer &&
 		renderAds &&
 		!isLabs &&
 		countryCode === 'US' &&
 		window.guardian.config.switches.articleEndSlot;
+
+	useEffect(() => {
+		const callFetch = () => {
+			getLocaleCode()
+				.then((cc) => {
+					setCountryCode(cc ?? '');
+				})
+				.catch((e) =>
+					console.error(`countryCodePromise - error: ${String(e)}`),
+				);
+		};
+		callFetch();
+	}, []);
 
 	useEffect(() => {
 		setAsyncArticleCount(

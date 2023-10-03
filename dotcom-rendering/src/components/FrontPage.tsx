@@ -57,36 +57,36 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island deferUntil="idle">
+			<Island clientOnly={true} deferUntil="idle">
 				<AlreadyVisited />
 			</Island>
-			<Island deferUntil="idle">
+			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
 			</Island>
-			<Island deferUntil="idle">
+			<Island clientOnly={true} deferUntil="idle">
 				<Metrics
 					commercialMetricsEnabled={
 						!!front.config.switches.commercialMetrics
 					}
 				/>
 			</Island>
-			<Island>
+			<Island clientOnly={true}>
 				<ShowHideContainers />
 			</Island>
-			<Island>
+			<Island clientOnly={true}>
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(front.config.switches)}
 					pageIsSensitive={front.config.isSensitive}
 					isDev={!!front.config.isDev}
 				/>
 			</Island>
-			<Island>
+			<Island clientOnly={true}>
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
-			<Island deferUntil="idle">
+			<Island clientOnly={true} deferUntil="idle">
 				<BrazeMessaging idApiUrl={front.config.idApiUrl} />
 			</Island>
-			<Island deferUntil="idle">
+			<Island clientOnly={true} deferUntil="idle">
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />

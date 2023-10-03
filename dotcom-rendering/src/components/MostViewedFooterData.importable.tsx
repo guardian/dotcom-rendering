@@ -67,11 +67,9 @@ export const MostViewedFooterData = ({
 	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
 	const url = buildSectionUrl(ajaxUrl, edition, sectionId);
-	const { data, error, loading } = useApi<
+	const { data, error } = useApi<
 		MostViewedFooterPayloadType | FETrailTabType[]
 	>(url);
-
-	if (loading) return null;
 
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');

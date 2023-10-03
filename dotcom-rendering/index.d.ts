@@ -455,6 +455,8 @@ type RichLinkCardType =
 // 3rd party type declarations //
 // ------------------------------
 
+declare module 'chromatic/isChromatic';
+
 declare module 'dynamic-import-polyfill' {
 	export const initialize: ({
 		modulePath,
@@ -516,6 +518,7 @@ declare namespace JSX {
 			name: string;
 			deferUntil?: 'idle' | 'visible' | 'interaction' | 'hash';
 			rootMargin?: string;
+			clientOnly?: boolean;
 			props: any;
 			children: React.ReactNode;
 			/**

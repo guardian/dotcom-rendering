@@ -5,7 +5,6 @@ import { initHydration } from '../client/islands/initHydration';
 import { updateTimeElement } from '../client/relativeTime/updateTimeElements';
 import { isServer } from '../lib/isServer';
 import { useApi } from '../lib/useApi';
-import { useHydrated } from '../lib/useHydrated';
 import { Toast } from './Toast';
 
 type Props = {
@@ -168,7 +167,6 @@ export const Liveness = ({
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
-	const hydrated = useHydrated();
 
 	/**
 	 * This function runs (once) after every successful useApi call. This is useful because it
@@ -222,7 +220,7 @@ export const Liveness = ({
 	 * updates with whatever html and properties it wants
 	 *
 	 */
-	!isServer && (window.mockLiveUpdate = onSuccess);
+	window.mockLiveUpdate = onSuccess;
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(
@@ -314,7 +312,7 @@ export const Liveness = ({
 		}
 	}, [hasPinnedPost, onFirstPage, webURL]);
 
-	if (toastRoot && showToast && hydrated) {
+	if (toastRoot && showToast) {
 		/**
 		 * Why `createPortal`?
 		 *

@@ -45,13 +45,13 @@ export const AllEditorialNewslettersPage = ({
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island deferUntil="idle">
+			<Island clientOnly={true} deferUntil="idle">
 				<AlreadyVisited />
 			</Island>
-			<Island deferUntil="idle">
+			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
 			</Island>
-			<Island deferUntil="idle">
+			<Island clientOnly={true} deferUntil="idle">
 				<Metrics
 					commercialMetricsEnabled={
 						!!newslettersPage.config.switches.commercialMetrics
