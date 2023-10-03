@@ -27,18 +27,18 @@ new DotcomRendering(app, 'DotcomRendering-CODE', {
 	instanceType: 't4g.micro',
 });
 
-new DotcomRendering(app, 'DotcomRendering-render-front-CODE', {
+new DotcomRendering(app, 'DotcomRendering-front-web-CODE', {
 	...sharedProps,
-	app: 'render-front',
+	app: 'front-web',
 	stage: 'CODE',
 	minCapacity: 1,
 	maxCapacity: 4,
 	instanceType: 't4g.micro',
 });
 
-new DotcomRendering(app, 'DotcomRendering-render-front-PROD', {
+new DotcomRendering(app, 'DotcomRendering-front-web-PROD', {
 	...sharedProps,
-	app: 'render-front',
+	app: 'front-web',
 	stage: 'PROD',
 	// TODO: up this once we have code working
 	minCapacity: 1,

@@ -29,16 +29,16 @@ deployments:
     dependencies:
       - frontend-static
       - frontend-cfn
-  render-front-cfn:
+  front-web-cfn:
     template: cloudformation
     parameters:
       templateStagePaths:
-        CODE: DotcomRendering-render-front-CODE.template.json
-        PROD: DotcomRendering-render-front-PROD.template.json
+        CODE: DotcomRendering-front-web-CODE.template.json
+        PROD: DotcomRendering-front-web-PROD.template.json
       cloudFormationStackByTags: false
-      cloudFormationStackName: render-front
+      cloudFormationStackName: front-web
       amiParameter: AMIRenderfront
-  render-front:
+  front-web:
     type: autoscaling
     parameters:
       bucketSsmKey: /account/services/dotcom-artifact.bucket

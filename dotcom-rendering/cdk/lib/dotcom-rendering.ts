@@ -89,7 +89,11 @@ export class DotcomRendering extends GuStack {
 		/**
 		 * TODO - migrate this ELB (classic load balancer) to an ALB (application load balancer)
 		 * @see https://github.com/guardian/cdk/blob/512536bd590b26d9fcac5d39329e8217103d7859/src/constructs/loadbalancing/elb.ts#L24-L46
+		 *
+		 * GOTCHA: The load balancer name appends `-ELB` when the `app = "rendering"` for backwards compatibility
+		 * We removed this to avoid the `LoadBalancerName.length > 32`. This will be fixable once we migrate to ALBs.
 		 */
+		const loadBalancerName = app === 'rendering' ? `${stack}-${stage}-${app}` : `${stack}-${stage}-${app}-ELB`;
 		const loadBalancer = new GuClassicLoadBalancer(
 			this,
 			'InternalLoadBalancer',
@@ -130,7 +134,7 @@ export class DotcomRendering extends GuStack {
 				],
 				subnetSelection: { subnets: publicSubnets },
 				propertiesToOverride: {
-					LoadBalancerName: `${stack}-${stage}-${app}-ELB`,
+					LoadBalancerName: loadBalancerName,
 					// Note: this does not prevent the GuClassicLoadBalancer
 					// from creating a default security group, though it does
 					// override which one is used/associated with the load balancer

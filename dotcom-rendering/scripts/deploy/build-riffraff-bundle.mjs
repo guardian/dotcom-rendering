@@ -36,7 +36,7 @@ const target = path.resolve(dirname, '../..', 'target');
  * @param appName {string}
  **/
 const copyApp = (appName) => {
-	// This is a little hack to be backwards compatible with the naming for when this was a single stack app
+	// GOTCHA: This is a little hack to be backwards compatible with the naming for when this was a single stack app
 	const cfnTemplateName = appName === 'rendering' ? '' : `-${appName}`;
 	const cfnFolder =
 		appName === 'rendering' ? 'frontend-cfn' : `${appName}-cfn`;
@@ -131,7 +131,7 @@ const copyRiffRaff = () => {
 
 Promise.all([
 	...copyApp('rendering'),
-	...copyApp('render-front'),
+	...copyApp('front-web'),
 	...copyFrontendStatic(),
 	copyRiffRaff(),
 ]).catch((err) => {
