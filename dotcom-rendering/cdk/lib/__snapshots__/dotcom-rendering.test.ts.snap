@@ -1081,7 +1081,7 @@ sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make 
       },
       "Type": "AWS::IAM::InstanceProfile",
     },
-    "loadBalancerDnsNameturnedoff45D85D9D": {
+    "loadBalancerDnsName0B1DEBAD": {
       "Properties": {
         "Name": "/frontend/TEST/rendering.loadBalancerDnsName",
         "Tags": {

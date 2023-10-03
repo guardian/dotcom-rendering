@@ -147,7 +147,7 @@ export class DotcomRendering extends GuStack {
 			value: loadBalancer.loadBalancerDnsName,
 		});
 
-		new StringParameter(this, 'loadBalancerDnsNameturned off', {
+		new StringParameter(this, 'loadBalancerDnsName', {
 			// Annoyingly this doesn't follow the same pattern as the other SSM parameters
 			parameterName: `/${stack}/${stage}/${app}.loadBalancerDnsName`,
 			stringValue: loadBalancer.loadBalancerDnsName,
