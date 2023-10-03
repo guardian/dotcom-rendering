@@ -5,13 +5,13 @@ import { DotcomRendering } from '../lib/dotcom-rendering';
 const app = new App();
 
 const sharedProps = {
-	app: 'rendering',
 	stack: 'frontend',
 	region: 'eu-west-1',
 };
 
 new DotcomRendering(app, 'DotcomRendering-PROD', {
 	...sharedProps,
+	app: 'rendering',
 	stage: 'PROD',
 	minCapacity: 30,
 	maxCapacity: 120,
@@ -20,6 +20,7 @@ new DotcomRendering(app, 'DotcomRendering-PROD', {
 
 new DotcomRendering(app, 'DotcomRendering-CODE', {
 	...sharedProps,
+	app: 'rendering',
 	stage: 'CODE',
 	minCapacity: 1,
 	maxCapacity: 4,
