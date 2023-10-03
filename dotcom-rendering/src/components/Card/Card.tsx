@@ -32,11 +32,7 @@ import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
-import { Picture } from '../YoutubeAtom/Picture';
-import {
-	extractImageSourcesFromPosterImage,
-	YoutubeBlockComponent,
-} from '../YoutubeBlockComponent.importable';
+import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
@@ -488,16 +484,18 @@ export const Card = ({
 						)}
 						{media.type === 'video' && !showMainVideo && (
 							<div>
-								<Picture
-									imageSources={
-										extractImageSourcesFromPosterImage(
-											media.mainMedia.images,
-										) ?? []
+								<CardPicture
+									master={
+										media.mainMedia.images.reduce(
+											(prev, current) =>
+												prev.width > current.width
+													? prev
+													: current,
+										).url
 									}
-									role="inline"
+									imageSize={imageSize}
 									alt={headlineText}
-									width={media.mainMedia.width}
-									height={media.mainMedia.height}
+									loading={imageLoading}
 								/>
 							</div>
 						)}
