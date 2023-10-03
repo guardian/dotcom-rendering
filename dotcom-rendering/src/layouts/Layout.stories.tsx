@@ -28,11 +28,11 @@ import { decideFormat } from '../lib/decideFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
-import type { DCRArticle, FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { DecideLayout } from './DecideLayout';
 
-const Fixtures: { [key: string]: FEArticleType } = {
+const Fixtures: { [key: string]: DCRArticle } = {
 	Standard,
 	Gallery,
 	Audio,

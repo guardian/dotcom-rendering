@@ -487,6 +487,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
 									hideCaption={true}
+									imagesForAppsLightbox={[]}
 								/>
 							</div>
 						</Column>
@@ -518,11 +519,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
+				<Island deferUntil="visible">
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}

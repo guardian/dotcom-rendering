@@ -565,6 +565,10 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 				return pillarPalette[format.theme].dark;
 		}
 	}
+
+	if (format.design === ArticleDesign.Picture)
+		return pillarPalette[format.theme].bright;
+
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[400];
 
@@ -1230,22 +1234,6 @@ const fillShareIcon = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReportAlt:
 			return news[400];
 	}
-};
-
-const fillShareCountIcon = (format: ArticleFormat): string => {
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.DeadBlog &&
-		format.design !== ArticleDesign.LiveBlog
-	)
-		return palette.specialReportAlt[100];
-
-	return neutral[46];
-};
-
-const fillShareCountIconUntilDesktop = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) return WHITE;
-	return fillShareCountIcon(format);
 };
 
 const fillShareIconGrayBackground = (format: ArticleFormat): string => {
@@ -1920,29 +1908,6 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
-const textShareCount = (format: ArticleFormat): string => {
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.DeadBlog &&
-		format.design !== ArticleDesign.LiveBlog
-	)
-		return palette.specialReportAlt[100];
-
-	return text.supporting;
-};
-
-const textShareCountUntilDesktop = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) return WHITE;
-
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.DeadBlog
-	)
-		return palette.specialReportAlt[100];
-
-	return text.supporting;
-};
-
 const backgroundMatchStats = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -2243,6 +2208,27 @@ const backgroundSubmeta = (format: ArticleFormat) => {
 	return neutral[100];
 };
 
+const textYoutubeOverlayKicker = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return news[400];
+		case Pillar.Opinion:
+			return news[400];
+		case Pillar.Sport:
+			return sport[400];
+		case Pillar.Culture:
+			return culture[400];
+		case Pillar.Lifestyle:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
 const backgroundDynamoSublink = (_format: ArticleFormat): string =>
 	palette.neutral[97];
 
@@ -2303,8 +2289,6 @@ export const decidePalette = (
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			overlaidCaption: textOverlaid(),
-			shareCount: textShareCount(format),
-			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			keyEvent: textKeyEvent(format),
 			keyEventFromDesktop: textKeyEventFromDesktop(format),
@@ -2319,6 +2303,7 @@ export const decidePalette = (
 			expandableAtom: textExpandableAtom(format),
 			expandableAtomHover: textExpandableAtomHover(format),
 			subNavLink: textSubNavLink(format),
+			youtubeOverlayKicker: textYoutubeOverlayKicker(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -2367,8 +2352,6 @@ export const decidePalette = (
 			commentCount: fillCommentCount(format),
 			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
 			shareIcon: fillShareIcon(format),
-			shareCountIcon: fillShareCountIcon(format),
-			shareCountIconUntilDesktop: fillShareCountIconUntilDesktop(format),
 			shareIconGrayBackground: fillShareIconGrayBackground(format),
 			cameraCaptionIcon: fillCaptionCamera(format),
 			richLink: fillRichLink(format),

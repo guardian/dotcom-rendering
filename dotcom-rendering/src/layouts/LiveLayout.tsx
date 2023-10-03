@@ -451,11 +451,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Hide>
 
-						<Island
-							deferUntil="visible"
-							clientOnly={true}
-							placeholderHeight={230}
-						>
+						<Island deferUntil="visible">
 							<GetMatchNav
 								matchUrl={footballMatchUrl}
 								format={format}
@@ -581,10 +577,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										}
 										shortUrlId={article.config.shortUrlId}
 										ajaxUrl={article.config.ajaxUrl}
-										showShareCount={
-											!!article.config.switches
-												.serverShareCounts
-										}
 										messageUs={article.messageUs}
 									/>
 								</div>
@@ -678,10 +670,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							<GridItem area="media">
 								<div css={maxWidth}>
 									{!!footballMatchUrl && (
-										<Island
-											clientOnly={true}
-											placeholderHeight={40}
-										>
+										<Island>
 											<GetMatchTabs
 												matchUrl={footballMatchUrl}
 												format={format}
@@ -689,10 +678,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										</Island>
 									)}
 									{!!cricketMatchUrl && (
-										<Island
-											clientOnly={true}
-											placeholderHeight={172}
-										>
+										<Island>
 											<GetCricketScoreboard
 												matchUrl={cricketMatchUrl}
 												format={format}
@@ -709,6 +695,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										switches={article.config.switches}
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
+										imagesForAppsLightbox={
+											article.imagesForAppsLightbox
+										}
 									/>
 								</div>
 							</GridItem>
@@ -745,10 +734,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												article.config.shortUrlId
 											}
 											ajaxUrl={article.config.ajaxUrl}
-											showShareCount={
-												!!article.config.switches
-													.serverShareCounts
-											}
 											messageUs={article.messageUs}
 										/>
 									</div>
@@ -778,11 +763,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 								{/* Match stats */}
 								{!!footballMatchUrl && (
-									<Island
-										deferUntil="visible"
-										clientOnly={true}
-										placeholderHeight={800}
-									>
+									<Island deferUntil="visible">
 										<GetMatchStats
 											matchUrl={footballMatchUrl}
 											format={format}
@@ -902,6 +883,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 														article.config.abTests
 															.serverSideLiveblogInlineAdsVariant ===
 														'variant'
+													}
+													imagesForAppsLightbox={
+														article.imagesForAppsLightbox
 													}
 												/>
 												{pagination.totalPages > 1 && (
@@ -1056,6 +1040,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													isRightToLeftLang={
 														article.isRightToLeftLang
 													}
+													imagesForAppsLightbox={[]}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1179,11 +1164,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					)}
 
-					<Island
-						clientOnly={true}
-						deferUntil="visible"
-						placeholderHeight={600}
-					>
+					<Island deferUntil="visible">
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
 							hasRelated={article.hasRelated}

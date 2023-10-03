@@ -7,6 +7,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
+import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TableOfContentsItem } from '../types/frontend';
 import type { Palette } from '../types/palette';
@@ -46,6 +47,7 @@ type Props = {
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
 	isRightToLeftLang?: boolean;
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -137,6 +139,7 @@ export const ArticleBody = ({
 	tableOfContents,
 	lang,
 	isRightToLeftLang = false,
+	imagesForAppsLightbox,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -237,6 +240,7 @@ export const ArticleBody = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					abTests={abTests}
+					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			</div>
 		</>

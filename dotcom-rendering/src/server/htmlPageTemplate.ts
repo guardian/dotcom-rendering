@@ -289,7 +289,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                     function guardianPolyfilled() {
                         window.guardian.polyfilled = true;
                         if (window.guardian.mustardCut === false) {
-                            window.guardian.queue.forEach(function(startup) { startup() })
+                            window.guardian.queue.forEach(function(callback) { callback() })
                         }
                     }
 

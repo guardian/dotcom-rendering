@@ -16,6 +16,11 @@
 		},
 		"preserveConstEnums": true
 	},
+	"ts-node": {
+		"compilerOptions": {
+			"module": "CommonJS",
+		}
+	},
 	"exclude": [
 		"cypress",
 		"./cypress.config.js",

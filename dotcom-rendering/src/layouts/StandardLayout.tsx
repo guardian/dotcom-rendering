@@ -493,11 +493,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
 								{isMatchReport && (
-									<Island
-										deferUntil="visible"
-										clientOnly={true}
-										placeholderHeight={230}
-									>
+									<Island deferUntil="visible">
 										<GetMatchNav
 											matchUrl={footballMatchUrl}
 											format={format}
@@ -514,10 +510,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
 								{isMatchReport && (
-									<Island
-										clientOnly={true}
-										placeholderHeight={40}
-									>
+									<Island>
 										<GetMatchTabs
 											matchUrl={footballMatchUrl}
 											format={format}
@@ -538,6 +531,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
+									imagesForAppsLightbox={
+										article.imagesForAppsLightbox
+									}
 								/>
 							</div>
 						</GridItem>
@@ -626,10 +622,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									}
 									shortUrlId={article.config.shortUrlId}
 									ajaxUrl={article.config.ajaxUrl}
-									showShareCount={
-										!!article.config.switches
-											.serverShareCounts
-									}
 								/>
 							</div>
 						</GridItem>
@@ -668,14 +660,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									imagesForAppsLightbox={
+										article.imagesForAppsLightbox
+									}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
-										<Island
-											deferUntil="visible"
-											clientOnly={true}
-											placeholderHeight={800}
-										>
+										<Island deferUntil="visible">
 											<GetMatchStats
 												matchUrl={footballMatchUrl}
 												format={format}
@@ -815,11 +806,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 				{isWeb && (
 					<>
-						<Island
-							clientOnly={true}
-							deferUntil="visible"
-							placeholderHeight={600}
-						>
+						<Island deferUntil="visible">
 							<OnwardsUpper
 								ajaxUrl={article.config.ajaxUrl}
 								hasRelated={article.hasRelated}

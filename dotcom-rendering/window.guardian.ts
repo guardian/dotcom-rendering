@@ -7,6 +7,8 @@ import type {
 } from '@guardian/consent-management-platform/dist/types';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type { OphanRecordFunction } from './src/client/ophan/ophan';
+import type { google } from './src/components/YoutubeAtom/ima';
+import type { ImaManager } from './src/components/YoutubeAtom/YoutubeAtomPlayer';
 import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
 import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
 import type { Guardian } from './src/model/guardian';
@@ -19,6 +21,15 @@ declare global {
 		guardian: Guardian & {
 			mustardCut: boolean;
 			onPolyfilled: () => void;
+			/**
+			 * **Do not edit this property**
+			 *
+			 * While there is no contract in place,
+			 * it’s being used all over the shop
+			 * and without documentation or communication
+			 *
+			 * e.g. https://github.com/search?q=org%3Aguardian+window.guardian.queue&type=code
+			 */
 			queue: Array<() => void>;
 			// Olly N 10/01/2022:
 			// The 'emotionCache' property would better live as a singleton package/chunk, but we're currently limited
@@ -69,6 +80,11 @@ declare global {
 			) => boolean;
 		};
 		mockLiveUpdate: (data: LiveUpdateType) => void;
+		google?: typeof google;
+		YT?: {
+			ImaManager: typeof ImaManager;
+		};
+		onYouTubeIframeAPIReady?: () => void
 	}
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

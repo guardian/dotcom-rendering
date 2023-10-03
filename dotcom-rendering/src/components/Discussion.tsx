@@ -6,6 +6,7 @@ import { EditorialButton } from '@guardian/source-react-components-development-k
 import { useEffect, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { getCommentContext } from '../lib/getCommentContext';
+import { isServer } from '../lib/isServer';
 import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
 import type { SignedInUser } from '../types/discussion';
@@ -87,11 +88,10 @@ export const Discussion = ({
 
 	const palette = decidePalette(format);
 
-	const hasCommentsHash =
-		typeof window !== 'undefined' && window.location.hash === '#comments';
+	const hasCommentsHash = !isServer && window.location.hash === '#comments';
 
 	const handlePermalink = (commentId: number) => {
-		if (typeof window === 'undefined') return false;
+		if (isServer) return false;
 		window.location.hash = `#comment-${commentId}`;
 		// Put this comment id into the hashCommentId state which will
 		// trigger an api call to get the comment context and then expand
@@ -101,6 +101,7 @@ export const Discussion = ({
 	};
 
 	const dispatchCommentsExpandedEvent = () => {
+		if (isServer) return;
 		const event = new CustomEvent('comments-expanded');
 		document.dispatchEvent(event);
 	};
@@ -130,6 +131,7 @@ export const Discussion = ({
 	}, [hasCommentsHash]);
 
 	useEffect(() => {
+		if (isServer) return;
 		const pendingElements = document.querySelectorAll<HTMLElement>(
 			'.discussion > .pending',
 		);

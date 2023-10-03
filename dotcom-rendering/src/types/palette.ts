@@ -47,8 +47,6 @@ export type Palette = {
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		overlaidCaption: Colour;
-		shareCount: Colour;
-		shareCountUntilDesktop: Colour;
 		cricketScoreboardLink: Colour;
 		keyEvent: Colour;
 		keyEventFromDesktop: Colour;
@@ -63,6 +61,7 @@ export type Palette = {
 		expandableAtom: Colour;
 		expandableAtomHover: Colour;
 		subNavLink: Colour;
+		youtubeOverlayKicker: Colour;
 	};
 	background: {
 		article: Colour;
@@ -108,8 +107,6 @@ export type Palette = {
 	fill: {
 		commentCount: Colour;
 		commentCountUntilDesktop: Colour;
-		shareCountIcon: Colour;
-		shareCountIconUntilDesktop: Colour;
 		shareIcon: Colour;
 		shareIconGrayBackground: Colour;
 		cameraCaptionIcon: Colour;

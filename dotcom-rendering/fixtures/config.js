@@ -77,7 +77,6 @@ module.exports = {
 			hostedVideoAutoplay: true,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
-			serverShareCounts: true,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,

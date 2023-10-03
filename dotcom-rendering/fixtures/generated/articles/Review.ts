@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { DCRArticle } from '../../../src/types/frontend';
 
-export const Review: FEArticleType = {
+export const Review: DCRArticle = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image element--showcase" data-media-id="39892d930be2203c5ea452d130772c0279f7dc0c"> <img src="https://media.guim.co.uk/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/1000.jpg" alt="Sex Education." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">So brilliant you can only boggle ... Ncuti Gatwa as Eric in Sex Education.</span> <span class="element-image__credit">Photograph: Sam Taylor/Netflix</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
@@ -27,6 +27,61 @@ export const Review: FEArticleType = {
 		},
 	],
 	commercialProperties: {
+		UK: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'tn',
+					value: ['reviews'],
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'k',
+					value: [
+						'tv-and-radio',
+						'asa-butterfield',
+						'sex',
+						'youngpeople',
+						'sex-education',
+						'comedy',
+						'gillian-anderson',
+						'netflix',
+						'culture',
+						'television',
+					],
+				},
+				{
+					name: 'url',
+					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d4zdy',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'se',
+					value: ['tv-review'],
+				},
+				{
+					name: 'co',
+					value: ['lucymangan'],
+				},
+			],
+		},
 		US: {
 			adTargeting: [
 				{
@@ -134,61 +189,6 @@ export const Review: FEArticleType = {
 				{
 					name: 'edition',
 					value: 'au',
-				},
-			],
-		},
-		UK: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'tn',
-					value: ['reviews'],
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'k',
-					value: [
-						'tv-and-radio',
-						'asa-butterfield',
-						'sex',
-						'youngpeople',
-						'sex-education',
-						'comedy',
-						'gillian-anderson',
-						'netflix',
-						'culture',
-						'television',
-					],
-				},
-				{
-					name: 'url',
-					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d4zdy',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'se',
-					value: ['tv-review'],
-				},
-				{
-					name: 'co',
-					value: ['lucymangan'],
 				},
 			],
 		},
@@ -1727,7 +1727,13 @@ export const Review: FEArticleType = {
 					],
 				},
 			],
-			elementId: '2b3f525c-4e1d-42da-81f1-8e754982d696',
+			elementId: 'f77f01b4-6517-4372-80f3-a9cc972384e9',
+			position: 1,
+			lightbox: {
+				caption:
+					'So brilliant you can only boggle ... Ncuti Gatwa as Eric in Sex Education.',
+				credit: 'Photograph: Sam Taylor/Netflix',
+			},
 		},
 	],
 	canonicalUrl:
@@ -1739,12 +1745,12 @@ export const Review: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The new season of <a href="https://www.theguardian.com/tv-and-radio/2019/jan/17/sex-education-asa-butterfield-gillian-anderson-netflix">Sex Education</a> (Netflix) opens with a bravura sequence that swiftly takes its place in the pantheon of peen-based comedy greats. Suffice to say that since we left Otis at the end of the <a href="https://www.theguardian.com/tv-and-radio/2019/jan/11/sex-education-review-netflix-asa-butterfield-gillian-anderson">glorious inaugural run</a> having successfully masturbated for the first time, he has taken gleefully to his new hobby and – I don’t know if you know the French expression to encourage reluctant diners, “the appetite comes with eating”? – but we need to come up with the carnal equivalent for his joyful daily pursuits of the big O.</p>',
-					elementId: 'cb275572-0a88-4bff-b161-857bad8e7b44',
+					elementId: '02e1500d-400e-4f6f-942c-e80cb0b283c0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The scene establishes the tone of the new season – furiously fast, furiously funny, and not for the faint of heart any more than the first series was. And, just like the first series, it underpins the comedy arising from the sixth form students’ sexual escapades, experiments and baffled queries (“My cum tastes like kimchi! Why do I have a fermented dick?”) with deeper explorations of the main characters and the emotional pressures engendered by bigger problems.</p>',
-					elementId: '59151d81-da26-4415-9887-1fbac12e5525',
+					elementId: 'eaba02b6-698b-4189-8a29-a22e6ccc479c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
@@ -1759,12 +1765,12 @@ export const Review: FEArticleType = {
 					isThirdPartyTracking: false,
 					source: 'YouTube',
 					sourceDomain: 'youtube-nocookie.com',
-					elementId: '85ce7251-1959-4cd4-b452-7c88c86059cf',
+					elementId: '6fbad1d6-b4e9-47dc-b776-48de225b2f9b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>With the help of Miss Sands, Maeve (Emma Mackey) finagles her way back into school and the special ability programme. All she has to do thereafter is wrestle with her unwelcoming and far more privileged peers and the return of her errant mother Erin (Anne-Marie Duff), allegedly clean for a year and with a three-year-old half-sister in tow. Otis (<a href="https://www.theguardian.com/tv-and-radio/2019/dec/28/sex-education-asa-butterfield-feel-more-confident-talking-about-sex">Asa Butterfield</a>) must negotiate his new relationship with Ola (Patricia Allison) while his mother Jean (Gillian Anderson, given a whole heap more to do this time round and rightly relishing every moment) throws more spanners in to his sexual works by dating Ola’s dad. Adam – poor beleaguered Adam (Connor Swindells) – is unjustly expelled from military school and sent back home to a dead-end job and his ever more hateful father. Swindells gives an extraordinary performance with what amounts to barely a hundred lines in the entire eight episodes, and if your heart doesn’t break at at least three points for him then I have no use for you. I don’t want to spoil Eric’s storyline because it doesn’t get going until a few episodes in, but <a href="https://www.theguardian.com/culture/2020/jan/05/ncuti-gatwa-i-will-say-yes-to-anything-sex-education">Ncuti Gatwa</a> remains the find of the age and handles everything thrown at him with such deftness and authenticity that you can only boggle at the fact that Laurie Nunn’s creation is his first major role.</p>',
-					elementId: 'b7cf1316-e16f-4777-b077-a231354343d3',
+					elementId: '11bfa953-5b1a-4570-a486-08765837f031',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2073,17 +2079,23 @@ export const Review: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'c03124a3-59ce-4424-a770-9257cae45a8f',
+					elementId: '236239df-9665-4dce-943f-89b1d4faabb5',
+					position: 2,
+					lightbox: {
+						caption:
+							'Relishing every moment … Gillian Anderson as Jean.',
+						credit: 'Photograph: Netflix',
+					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Every performer is wonderful, not least because the script is wonderful, playing the sex for laughs and the search for intimacy as something serious, good and noble. Not a single character is a cipher – even the smallest parts have a sketched backstory and some good gags. It’s all of a piece with the charm and generosity of spirit that suffuses the whole thing. <a href="https://www.theguardian.com/tv-and-radio/sex-education" data-component="auto-linked-tag">Sex Education</a> sets so many conventions cheerily but firmly aside that you feel like an entire forest of received wisdom is being clear-cut. Light floods in, new growth springs up. Such a sense of revelry and optimism abounds that you can feel it doing your heart and soul good as you watch. And all without missing a comic or emotional beat or deviating from its moral core, which urges us all to connect.</p>',
-					elementId: '3d04ebe5-accf-4fad-b1a7-bc615f429703',
+					elementId: 'e282025f-623a-4ba7-88bf-98d1b5f88831',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>So welcome once more, Otis (and your newly excitable penis), Maeve with her troubles to seek, Jackson (Kedar Williams-Stirling) whose mental health plummets to new lows as his swimming career reaches new heights, Aimee through whose experience on a local bus the issue of sexual assault is channelled, and all the magnificent rest of you. Nobody does it better. In fact, nobody does anything quite like it at all.</p>',
-					elementId: '0bd9c203-9c1d-4e15-a06d-8824e908dc0e',
+					elementId: 'a7eeaa58-2913-4ab9-98be-ed94904371c7',
 				},
 			],
 			attributes: {
@@ -2337,4 +2349,52 @@ export const Review: FEArticleType = {
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
 	},
+	imagesForLightbox: [
+		{
+			masterUrl:
+				'https://media.guim.co.uk/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg',
+			position: 1,
+			width: 6000,
+			height: 3600,
+			elementId: 'f77f01b4-6517-4372-80f3-a9cc972384e9',
+			alt: 'Sex Education.',
+			credit: 'Photograph: Sam Taylor/Netflix',
+			caption:
+				'So brilliant you can only boggle ... Ncuti Gatwa as Eric in Sex Education.',
+			displayCredit: true,
+		},
+		{
+			masterUrl:
+				'https://media.guim.co.uk/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg',
+			position: 2,
+			width: 6000,
+			height: 4000,
+			elementId: '236239df-9665-4dce-943f-89b1d4faabb5',
+			alt: 'Gillian Anderson as Jean.',
+			credit: 'Photograph: Netflix',
+			caption: 'Relishing every moment … Gillian Anderson as Jean.',
+			displayCredit: true,
+		},
+	],
+	imagesForAppsLightbox: [
+		{
+			width: 6000,
+			height: 3600,
+			credit: 'Photograph: Sam Taylor/Netflix',
+			caption:
+				'So brilliant you can only boggle ... Ncuti Gatwa as Eric in Sex Education.',
+			masterUrl:
+				'https://media.guim.co.uk/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg',
+			elementId: 'f77f01b4-6517-4372-80f3-a9cc972384e9',
+		},
+		{
+			width: 6000,
+			height: 4000,
+			credit: 'Photograph: Netflix',
+			caption: 'Relishing every moment … Gillian Anderson as Jean.',
+			masterUrl:
+				'https://media.guim.co.uk/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg',
+			elementId: '236239df-9665-4dce-943f-89b1d4faabb5',
+		},
+	],
 };
