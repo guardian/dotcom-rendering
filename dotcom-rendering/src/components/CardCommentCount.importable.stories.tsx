@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { useEffect } from 'react';
+import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { Island } from './Island';
 
@@ -9,6 +11,8 @@ export default {
 };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
+	useEffect(doStorybookHydration);
+
 	return (
 		<div
 			css={css`

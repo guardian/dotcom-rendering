@@ -248,8 +248,6 @@ export const RecipeMultiplier = () => {
 		}
 	}, [multiplier]);
 
-	if (isServer) return null;
-
 	const handleChange: ChangeEventHandler<HTMLInputElement> = ({
 		target: { value },
 	}) => {

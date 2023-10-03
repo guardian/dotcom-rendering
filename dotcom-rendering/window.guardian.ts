@@ -18,9 +18,6 @@ declare global {
 	 *~ existing declarations in the global namespace
 	 */
 	interface Window {
-		/** Used to de determine whether to hydrate specific islands */
-		IS_STORYBOOK?: boolean;
-
 		guardian: Guardian & {
 			mustardCut: boolean;
 			onPolyfilled: () => void;
@@ -87,7 +84,7 @@ declare global {
 		YT?: {
 			ImaManager: typeof ImaManager;
 		};
-		onYouTubeIframeAPIReady?: () => void;
+		onYouTubeIframeAPIReady?: () => void
 	}
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

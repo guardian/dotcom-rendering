@@ -72,7 +72,7 @@ export const LiveBlogRenderer = ({
 		<>
 			{pinnedPost && onFirstPage && !filtered && (
 				<>
-					<Island deferUntil="idle">
+					<Island clientOnly={true} deferUntil="idle">
 						<EnhancePinnedPost />
 					</Island>
 					<PinnedPost pinnedPost={pinnedPost} format={format}>
@@ -144,7 +144,7 @@ export const LiveBlogRenderer = ({
 				isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 			/>
 			{blocks.length > 4 && (
-				<Island>
+				<Island clientOnly={true}>
 					<LiveBlogEpic
 						sectionId={sectionId}
 						shouldHideReaderRevenue={shouldHideReaderRevenue}

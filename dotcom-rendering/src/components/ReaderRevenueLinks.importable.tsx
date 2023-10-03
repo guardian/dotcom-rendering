@@ -32,12 +32,11 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
+import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useAuthStatus } from '../lib/useAuthStatus';
-import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
-import { usePageViewId } from '../lib/usePageViewId';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
 type Props = {
@@ -406,30 +405,45 @@ export const ReaderRevenueLinks = ({
 	urls,
 	contributionsServiceUrl,
 }: Props) => {
-	const countryCode = useCountryCode();
-	const pageViewId = usePageViewId();
+	const [countryCode, setCountryCode] = useState<string>();
+	const pageViewId = window.guardian.config.ophan.pageViewId;
 	const ophanRecord = getOphanRecordFunction();
 
-	if (!countryCode || !pageViewId) return null;
+	useEffect(() => {
+		const callFetch = () => {
+			getLocaleCode()
+				.then((cc) => {
+					setCountryCode(cc ?? '');
+				})
+				.catch((e) =>
+					console.error(`countryCodePromise - error: ${String(e)}`),
+				);
+		};
+		callFetch();
+	}, []);
 
-	if (inHeader && remoteHeader) {
+	if (countryCode) {
+		if (inHeader && remoteHeader) {
+			return (
+				<ReaderRevenueLinksRemote
+					countryCode={countryCode}
+					pageViewId={pageViewId}
+					contributionsServiceUrl={contributionsServiceUrl}
+					ophanRecord={ophanRecord}
+				/>
+			);
+		}
 		return (
-			<ReaderRevenueLinksRemote
-				countryCode={countryCode}
-				pageViewId={pageViewId}
-				contributionsServiceUrl={contributionsServiceUrl}
+			<ReaderRevenueLinksNative
+				editionId={editionId}
+				dataLinkNamePrefix={dataLinkNamePrefix}
+				inHeader={inHeader}
+				urls={urls}
 				ophanRecord={ophanRecord}
+				pageViewId={pageViewId}
 			/>
 		);
 	}
-	return (
-		<ReaderRevenueLinksNative
-			editionId={editionId}
-			dataLinkNamePrefix={dataLinkNamePrefix}
-			inHeader={inHeader}
-			urls={urls}
-			ophanRecord={ophanRecord}
-			pageViewId={pageViewId}
-		/>
-	);
+
+	return null;
 };

@@ -81,9 +81,6 @@ const handleClickTracking = () => {
 	}
 };
 
-/**
- * Track how long the pinned post is in view.
- */
 export const EnhancePinnedPost = () => {
 	const [hasBeenSeen, setHasBeenSeen] = useState(false);
 	const [isInView] = useIsInView({
@@ -161,6 +158,5 @@ export const EnhancePinnedPost = () => {
 			}
 		}
 	}, [isInView, hasBeenSeen]);
-
 	return null;
 };

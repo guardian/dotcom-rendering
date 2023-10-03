@@ -394,7 +394,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-			<Island>
+			<Island clientOnly={true}>
 				<EuropeLandingModal edition={front.editionId} />
 			</Island>
 			<main
@@ -864,7 +864,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			</Section>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island deferUntil="idle">
+				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={front.config.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

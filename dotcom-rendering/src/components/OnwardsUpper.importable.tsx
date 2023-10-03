@@ -181,7 +181,8 @@ type Props = {
  *
  * ## Why does this need to be an Island?
  *
- * The data is not fixed for a given page, and must be fetched on the client.
+ * It is a client-side only component, which cannot be rendered on the server,
+ * as none of the relevant information comes from the CAPI response.
  *
  * ---
  *

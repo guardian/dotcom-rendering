@@ -23,8 +23,6 @@ if (isChromatic()) {
 	MockDate.set('Sat Jan 1 2022 12:00:00 GMT+0000 (Greenwich Mean Time)');
 }
 
-window.IS_STORYBOOK = true;
-
 mockRESTCalls();
 
 setABTests(

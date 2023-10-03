@@ -75,10 +75,10 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<LightboxLayout
 						imageCount={article.imagesForLightbox.length}
 					/>
-					<Island>
+					<Island clientOnly={true}>
 						<LightboxHash />
 					</Island>
-					<Island deferUntil="hash">
+					<Island clientOnly={true} deferUntil="hash">
 						<LightboxJavascript
 							format={format}
 							images={article.imagesForLightbox}
@@ -86,7 +86,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					</Island>
 				</>
 			)}
-			<Island deferUntil="idle">
+			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
 			</Island>
 			{(format.design === ArticleDesign.LiveBlog ||
@@ -96,27 +96,27 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			{renderingTarget === 'Web' && (
 				<>
 					<SkipTo id="navigation" label="Skip to navigation" />
-					<Island deferUntil="idle">
+					<Island clientOnly={true} deferUntil="idle">
 						<AlreadyVisited />
 					</Island>
-					<Island deferUntil="idle">
+					<Island clientOnly={true} deferUntil="idle">
 						<Metrics
 							commercialMetricsEnabled={
 								!!article.config.switches.commercialMetrics
 							}
 						/>
 					</Island>
-					<Island deferUntil="idle">
+					<Island clientOnly={true} deferUntil="idle">
 						<BrazeMessaging idApiUrl={article.config.idApiUrl} />
 					</Island>
-					<Island deferUntil="idle">
+					<Island clientOnly={true} deferUntil="idle">
 						<ReaderRevenueDev
 							shouldHideReaderRevenue={
 								article.shouldHideReaderRevenue
 							}
 						/>
 					</Island>
-					<Island>
+					<Island clientOnly={true}>
 						<SetABTests
 							abTestSwitches={filterABTestSwitches(
 								article.config.switches,
@@ -128,11 +128,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				</>
 			)}
 			{renderingTarget === 'Web' ? (
-				<Island>
+				<Island clientOnly={true}>
 					<SetAdTargeting adTargeting={adTargeting} />
 				</Island>
 			) : (
-				<Island>
+				<Island clientOnly={true}>
 					<SendTargetingParams
 						editionCommercialProperties={
 							article.commercialProperties[article.editionId]

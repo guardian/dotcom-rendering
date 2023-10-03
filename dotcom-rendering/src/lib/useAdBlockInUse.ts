@@ -9,7 +9,8 @@ import { useEffect, useState } from 'react';
 export const useAdBlockInUse = (): boolean | undefined => {
 	const [isInUse, setIsInUse] = useState<boolean | undefined>();
 	useEffect(() => {
-		void isAdBlockInUse().then((blockerDetected) => {
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		isAdBlockInUse().then((blockerDetected) => {
 			setIsInUse(blockerDetected);
 		});
 	}, []);
