@@ -148,129 +148,105 @@ export const fontFace = (
 `;
 
 export const pageFonts = `
-    ${fontFace(
-		'Guardian Text Egyptian Web',
-		some(400),
-		none,
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.ttf',
-	)}
-    ${fontFace(
-		'Guardian Text Egyptian Web',
-		some(400),
-		some('italic'),
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.ttf',
-	)}
-    ${fontFace(
-		'Guardian Text Egyptian Web',
-		some(700),
-		none,
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.ttf',
-	)}
-    ${fontFace(
-		'Guardian Text Egyptian Web',
-		some(700),
-		some('italic'),
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.ttf',
-	)}
-    ${fontFace(
-		'Guardian Text Egyptian Web',
-		some('bold'),
-		none,
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.ttf',
-	)}
-    ${fontFace(
-		'Guardian Text Egyptian Web',
-		some('bold'),
-		some('italic'),
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.ttf',
-	)}
-
-    ${fontFace(
-		'Guardian Text Sans Web',
-		some(400),
-		none,
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.ttf',
-	)}
-    ${fontFace(
-		'Guardian Text Sans Web',
-		some(400),
-		some('italic'),
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.ttf',
-	)}
-    ${fontFace(
-		'Guardian Text Sans Web',
-		some(700),
-		none,
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.ttf',
-	)}
-    ${fontFace(
-		'Guardian Text Sans Web',
-		some(700),
-		some('italic'),
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.ttf',
-	)}
-
-    ${fontFace(
-		'GH Guardian Headline',
-		some(300),
-		none,
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.ttf',
-	)}
-    ${fontFace(
-		'GH Guardian Headline',
-		some(300),
-		some('italic'),
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.ttf',
-	)}
-    ${fontFace(
-		'GH Guardian Headline',
-		some(400),
-		none,
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Regular.ttf',
-	)}
-    ${fontFace(
-		'GH Guardian Headline',
-		some(400),
-		some('italic'),
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-RegularItalic.ttf',
-	)}
-    ${fontFace(
-		'GH Guardian Headline',
-		some(500),
-		none,
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.ttf',
-	)}
-    ${fontFace(
-		'GH Guardian Headline',
-		some(500),
-		some('italic'),
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.ttf',
-	)}
-    ${fontFace(
-		'GH Guardian Headline',
-		some(600),
-		none,
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Semibold.ttf',
-	)}
-    ${fontFace(
-		'GH Guardian Headline',
-		some(600),
-		some('italic'),
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-SemiboldItalic.ttf',
-	)}
-    ${fontFace(
-		'GH Guardian Headline',
-		some(700),
-		none,
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.ttf',
-	)}
-    ${fontFace(
-		'GH Guardian Headline',
-		some(700),
-		some('italic'),
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.ttf',
-	)}
-
+@font-face {
+  font-family: Guardian Text Egyptian Web;
+  font-weight: 400;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.ttf"), url("/assets/fonts/GuardianTextEgyptian-Reg.ttf");
+}
+@font-face {
+  font-family: Guardian Text Egyptian Web;
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.ttf"), url("/assets/fonts/GuardianTextEgyptian-RegItalic.ttf");
+}
+@font-face {
+  font-family: Guardian Text Egyptian Web;
+  font-weight: 700;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.ttf"), url("/assets/fonts/GuardianTextEgyptian-Bold.ttf");
+}
+@font-face {
+  font-family: Guardian Text Egyptian Web;
+  font-style: italic;
+  font-weight: 700;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.ttf"), url("/assets/fonts/GuardianTextEgyptian-BoldItalic.ttf");
+}
+@font-face {
+  font-family: Guardian Text Sans Web;
+  font-weight: 400;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.ttf"), url("/assets/fonts/GuardianTextSans-Regular.ttf");
+}
+@font-face {
+  font-family: Guardian Text Sans Web;
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.ttf"), url("/assets/fonts/GuardianTextSans-RegularItalic.ttf");
+}
+@font-face {
+  font-family: Guardian Text Sans Web;
+  font-weight: 700;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.ttf"), url("/assets/fonts/GuardianTextSans-Bold.ttf");
+}
+@font-face {
+  font-family: Guardian Text Sans Web;
+  font-style: italic;
+  font-weight: 700;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.ttf"), url("/assets/fonts/GuardianTextSans-BoldItalic.ttf");
+}
+@font-face {
+  font-family: GH Guardian Headline;
+  font-weight: 300;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.ttf"), url("/assets/fonts/GHGuardianHeadline-Light.ttf");
+}
+@font-face {
+  font-family: GH Guardian Headline;
+  font-style: italic;
+  font-weight: 300;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.ttf"), url("/assets/fonts/GHGuardianHeadline-LightItalic.ttf");
+}
+@font-face {
+  font-family: GH Guardian Headline;
+  font-weight: 400;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Regular.ttf"), url("/assets/fonts/GHGuardianHeadline-Regular.ttf");
+}
+@font-face {
+  font-family: GH Guardian Headline;
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-RegularItalic.ttf"), url("/assets/fonts/GHGuardianHeadline-RegularItalic.ttf");
+}
+@font-face {
+  font-family: GH Guardian Headline;
+  font-weight: 500;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.ttf"), url("/assets/fonts/GHGuardianHeadline-Medium.ttf");
+}
+@font-face {
+  font-family: GH Guardian Headline;
+  font-style: italic;
+  font-weight: 500;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.ttf"), url("/assets/fonts/GHGuardianHeadline-MediumItalic.ttf");
+}
+@font-face {
+  font-family: GH Guardian Headline;
+  font-weight: 600;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Semibold.ttf"), url("/assets/fonts/GHGuardianHeadline-Semibold.ttf");
+}
+@font-face {
+  font-family: GH Guardian Headline;
+  font-style: italic;
+  font-weight: 600;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-SemiboldItalic.ttf"), url("/assets/fonts/GHGuardianHeadline-SemiboldItalic.ttf");
+}
+@font-face {
+  font-family: GH Guardian Headline;
+  font-weight: 700;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.ttf"), url("/assets/fonts/GHGuardianHeadline-Bold.ttf");
+}
+@font-face {
+  font-family: GH Guardian Headline;
+  font-style: italic;
+  font-weight: 700;
+  src: url("https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.ttf"), url("/assets/fonts/GHGuardianHeadline-BoldItalic.ttf");
+}
 `;
 
 export const editionsDevFonts = `
