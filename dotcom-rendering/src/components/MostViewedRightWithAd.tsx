@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { until } from '@guardian/source-foundations';
+import { RightAdsPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
 import { Island } from './Island';
@@ -10,17 +10,6 @@ type Props = {
 	isPaidContent: boolean;
 	renderAds: boolean;
 };
-
-const rightAdStyles = css`
-	flex: 3;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-
-	${until.desktop} {
-		display: none;
-	}
-`;
 
 /**
  * The maximum height of the container that may contain
@@ -73,12 +62,7 @@ export const MostViewedRightWithAd = ({
 				</Island>
 			) : null}
 
-			{isApps && (
-				<div
-					className="right-ad-portal-placeholder"
-					css={rightAdStyles}
-				></div>
-			)}
+			{isApps && <RightAdsPlaceholder />}
 		</div>
 	);
 };

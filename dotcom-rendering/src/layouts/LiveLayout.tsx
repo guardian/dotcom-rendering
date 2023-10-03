@@ -14,6 +14,7 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Accordion } from '../components/Accordion';
+import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
@@ -64,21 +65,6 @@ import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
-// TODO: Extract this - after sub branch merged in
-const RightAdPlaceholder = () => (
-	<div
-		className="right-ad-portal-placeholder"
-		css={css`
-			display: flex;
-			flex-direction: column;
-			justify-content: space-around;
-			height: 100%;
-			${until.desktop} {
-				display: none;
-			}
-		`}
-	></div>
-);
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -1137,7 +1123,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										)}
 
 										{isApps && isInLiveblogAdSlotTest && (
-											<RightAdPlaceholder />
+											<RightAdsPlaceholder />
 										)}
 									</RightColumn>
 								</div>
