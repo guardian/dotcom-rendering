@@ -1,6 +1,9 @@
 import { isServer } from '../lib/isServer';
 
-/** Whether we should adapt the current page to address poor performance issues */
+/**
+ * Whether we should adapt the current page to address poor performance issues.
+ * Initially this will only happen as part of a @guardian/open-journalism test.
+ */
 export const shouldAdapt = new Promise<boolean>((resolve) => {
 	if (isServer) return resolve(false);
 	if (window.location.hash === '#adapt') return resolve(true);
