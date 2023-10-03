@@ -459,7 +459,6 @@ export const Card = ({
 										format={format}
 										isMainMedia={true}
 										hideCaption={true}
-										role="inline"
 										stickyVideos={false}
 										kickerText={kickerText}
 										pauseOffscreenVideo={

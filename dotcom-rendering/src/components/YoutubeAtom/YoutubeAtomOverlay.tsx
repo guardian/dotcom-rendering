@@ -10,7 +10,6 @@ import {
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 import { formatTime } from '../../lib/formatTime';
-import type { RoleType } from '../../types/content';
 import type { Palette } from '../../types/palette';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
@@ -23,7 +22,6 @@ type Props = {
 	height: number;
 	width: number;
 	alt: string;
-	role: RoleType;
 	duration?: number; // in seconds
 	title?: string;
 	onClick: () => void;
@@ -176,7 +174,6 @@ export const YoutubeAtomOverlay = ({
 	height,
 	width,
 	alt,
-	role,
 	duration,
 	title,
 	onClick,
@@ -204,7 +201,6 @@ export const YoutubeAtomOverlay = ({
 			{!!image && (
 				<YoutubeAtomPicture
 					image={image}
-					role={role}
 					alt={alt}
 					height={height}
 					width={width}

@@ -58,7 +58,6 @@ export const NoConsent = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -87,7 +86,6 @@ export const NoOverlay = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -123,7 +121,6 @@ export const WithOverrideImage = (): JSX.Element => {
 				elementId="xyz"
 				videoId="3jpXAMwRSu4"
 				alt="Microscopic image of COVID"
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -156,7 +153,6 @@ export const WithPosterImage = (): JSX.Element => {
 				elementId="xyz"
 				videoId="N9Cgy-ke5-s"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -192,7 +188,6 @@ export const WithOverlayAndPosterImage = (): JSX.Element => {
 				elementId="xyz"
 				videoId="N9Cgy-ke5-s"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -232,7 +227,6 @@ export const GiveConsent = (): JSX.Element => {
 					elementId="xyz"
 					videoId="3jpXAMwRSu4"
 					alt="Microscopic image of COVID"
-					role="inline"
 					eventEmitters={[
 						(e) => console.log(`analytics event ${e} called`),
 					]}
@@ -267,7 +261,6 @@ export const Sticky = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -302,7 +295,6 @@ export const StickyMainMedia = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -339,7 +331,6 @@ export const DuplicateVideos = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -362,7 +353,6 @@ export const DuplicateVideos = (): JSX.Element => {
 				elementId="xyz2"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -401,7 +391,6 @@ export const MultipleStickyVideos = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -425,7 +414,6 @@ export const MultipleStickyVideos = (): JSX.Element => {
 				elementId="xyz-2"
 				videoId="pcMiS6PW8aQ"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -449,7 +437,6 @@ export const MultipleStickyVideos = (): JSX.Element => {
 				elementId="xyu"
 				videoId="3jpXAMwRSu4"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -485,7 +472,6 @@ export const PausesOffscreen = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -523,7 +509,6 @@ export const NoConsentWithIma = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -552,7 +537,6 @@ export const AdFreeWithIma = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -582,7 +566,6 @@ export const NoOverlayWithIma = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -613,7 +596,6 @@ export const WithOverrideImageWithIma = (): JSX.Element => {
 				elementId="xyz"
 				videoId="3jpXAMwRSu4"
 				alt="Microscopic image of COVID"
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -643,7 +625,6 @@ export const WithPosterImageWithIma = (): JSX.Element => {
 				elementId="xyz"
 				videoId="N9Cgy-ke5-s"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -675,7 +656,6 @@ export const WithOverlayAndPosterImageWithIma = (): JSX.Element => {
 				elementId="xyz"
 				videoId="N9Cgy-ke5-s"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -711,7 +691,6 @@ export const GiveConsentWithIma = (): JSX.Element => {
 					elementId="xyz"
 					videoId="3jpXAMwRSu4"
 					alt="Microscopic image of COVID"
-					role="inline"
 					eventEmitters={[
 						(e) => console.log(`analytics event ${e} called`),
 					]}
@@ -746,7 +725,6 @@ export const StickyWithIma = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -780,7 +758,6 @@ export const StickyMainMediaWithIma = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -812,7 +789,6 @@ export const DuplicateVideosWithIma = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -835,7 +811,6 @@ export const DuplicateVideosWithIma = (): JSX.Element => {
 				elementId="xyz2"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -868,7 +843,6 @@ export const MultipleStickyVideosWithIma = (): JSX.Element => {
 				elementId="xyz"
 				videoId="-ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -892,7 +866,6 @@ export const MultipleStickyVideosWithIma = (): JSX.Element => {
 				elementId="xyz-2"
 				videoId="pcMiS6PW8aQ"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}
@@ -916,7 +889,6 @@ export const MultipleStickyVideosWithIma = (): JSX.Element => {
 				elementId="xyu"
 				videoId="3jpXAMwRSu4"
 				alt=""
-				role="inline"
 				eventEmitters={[
 					(e) => console.log(`analytics event ${e} called`),
 				]}

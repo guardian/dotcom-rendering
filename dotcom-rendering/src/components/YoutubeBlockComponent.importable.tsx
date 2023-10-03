@@ -7,7 +7,6 @@ import { trackVideoInteraction } from '../client/ga/ga';
 import { record } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
-import type { RoleType } from '../types/content';
 import { Caption } from './Caption';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 
@@ -19,7 +18,6 @@ type Props = {
 	assetId: string;
 	expired: boolean;
 	format: ArticleFormat;
-	role: RoleType;
 	hideCaption?: boolean;
 	overrideImage?: string;
 	posterImage?: {
@@ -92,7 +90,6 @@ export const YoutubeBlockComponent = ({
 	overrideImage,
 	posterImage = [],
 	expired,
-	role,
 	isMainMedia,
 	height = 259,
 	width = 460,
@@ -133,10 +130,6 @@ export const YoutubeBlockComponent = ({
 		});
 	}, []);
 
-	const shouldLimitWidth =
-		!isMainMedia &&
-		(role === 'showcase' || role === 'supporting' || role === 'immersive');
-
 	if (expired) {
 		return (
 			<figure
@@ -168,7 +161,6 @@ export const YoutubeBlockComponent = ({
 						captionText={mediaTitle ?? ''}
 						format={format}
 						displayCredit={false}
-						shouldLimitWidth={shouldLimitWidth}
 						mediaType="Video"
 						isMainMedia={isMainMedia}
 					/>
@@ -202,7 +194,6 @@ export const YoutubeBlockComponent = ({
 				videoId={assetId}
 				overrideImage={overrideImage}
 				posterImage={getLargestImageSize(posterImage)?.url}
-				role={role}
 				alt={altText ?? mediaTitle ?? ''}
 				adTargeting={adTargeting}
 				consentState={consentState}
@@ -226,7 +217,6 @@ export const YoutubeBlockComponent = ({
 					captionText={mediaTitle ?? ''}
 					format={format}
 					displayCredit={false}
-					shouldLimitWidth={shouldLimitWidth}
 					mediaType="Video"
 					isMainMedia={isMainMedia}
 				/>
