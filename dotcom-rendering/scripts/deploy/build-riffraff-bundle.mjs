@@ -41,7 +41,7 @@ const copyApp = (appName) => {
 	const cfnTemplateName = appName === 'rendering' ? '' : `-${appName}`;
 	const cfnFolder = appName === 'rendering' ? 'frontend-cfn' : `${appName}-cfn`;
 
-	log(` - copying stack ${appName}`);
+	log(` - copying app: ${appName}`);
 	const jobs = [];
 
 	log(` - ${appName}: copying cloudformation config`);
