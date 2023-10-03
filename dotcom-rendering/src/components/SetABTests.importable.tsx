@@ -7,6 +7,7 @@ import { getCypressSwitches } from '../experiments/cypress-switches';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 import { setABTests } from '../lib/useAB';
+import { useHydrated } from '../lib/useHydrated';
 import type { ABTestSwitches } from '../model/enhance-switches';
 
 type Props = {
@@ -33,6 +34,9 @@ export const SetABTests = ({
 	abTestSwitches,
 	forcedTestVariants,
 }: Props) => {
+	const hydrated = useHydrated();
+	if (!hydrated) return null;
+
 	const mvtId = Number(
 		(isDev &&
 			getCookie({ name: 'GU_mvt_id_local', shouldMemoize: true })) || // Simplify localhost testing by creating a different mvt id

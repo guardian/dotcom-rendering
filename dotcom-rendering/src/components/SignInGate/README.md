@@ -288,7 +288,7 @@ The disadvantage of this method is that it's a bit tricky to work out exactly wh
 **B)** Add the `forcedTestVariant` prop to the `SetABTests` Island:
 
 ```tsx
-<Island clientOnly={true}>
+<Island >
     <SetABTests
         abTestSwitches={CAPIArticle.config.switches}
         pageIsSensitive={CAPIArticle.config.isSensitive}

@@ -18,6 +18,7 @@ import { useCallback, useEffect, useState } from 'react';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 import { guard } from '../lib/guard';
+import { isServer } from '../lib/isServer';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { SvgFlagsInCircle } from './SvgFlagsInCircle';
 
@@ -196,7 +197,7 @@ export const getModalType = (): ModalType => {
 interface Props {
 	edition: EditionId;
 }
-export const EuropeLandingModal = ({ edition }: Props) => {
+const ClientOnlyEuropeLandingModal = ({ edition }: Props) => {
 	const editionCookie = getCookie({ name: 'GU_EDITION' });
 	const modalType = getModalType();
 	const [switchEdition, setSwitchEdition] = useState(false);
@@ -418,3 +419,13 @@ export const EuropeLandingModal = ({ edition }: Props) => {
 		</dialog>
 	);
 };
+
+/**
+ * This is a weird way of handling this client-only island,
+ * but as this component is temporary, it was deemed
+ * a more pragmatic approach over having to rewrite it entirely.
+ *
+ * (October 2023)
+ */
+export const EuropeLandingModal = (props: Props) =>
+	isServer ? null : <ClientOnlyEuropeLandingModal {...props} />;

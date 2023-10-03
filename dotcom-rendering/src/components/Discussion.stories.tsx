@@ -1,12 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar, storage } from '@guardian/libs';
-import { doStorybookHydration } from '../client/islands/doStorybookHydration';
-import { useOnce } from '../lib/useOnce';
 import { DiscussionLayout } from './DiscussionLayout';
-
-const HydratedLayout = ({ children }: { children: React.ReactNode }) => {
-	useOnce(doStorybookHydration, []);
-	return <>{children}</>;
-};
 
 export default {
 	component: DiscussionLayout,
@@ -23,23 +16,21 @@ export const Basic = () => {
 	storage.local.set('gu.prefs.discussion.order', 'newest');
 
 	return (
-		<HydratedLayout>
-			<DiscussionLayout
-				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
-				shortUrlId="/p/4v8kk"
-				format={{
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Culture,
-				}}
-				discussionD2Uid="zHoBy6HNKsk"
-				discussionApiClientHeader="nextgen"
-				enableDiscussionSwitch={true}
-				isAdFreeUser={false}
-				shouldHideAds={false}
-				idApiUrl="https://idapi.theguardian.com"
-			/>
-		</HydratedLayout>
+		<DiscussionLayout
+			discussionApiUrl="https://discussion.theguardian.com/discussion-api"
+			shortUrlId="/p/4v8kk"
+			format={{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Culture,
+			}}
+			discussionD2Uid="zHoBy6HNKsk"
+			discussionApiClientHeader="nextgen"
+			enableDiscussionSwitch={true}
+			isAdFreeUser={false}
+			shouldHideAds={false}
+			idApiUrl="https://idapi.theguardian.com"
+		/>
 	);
 };
 

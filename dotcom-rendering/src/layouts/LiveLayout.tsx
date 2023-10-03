@@ -415,7 +415,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main data-layout="LiveLayout">
 				{isApps && (
-					<Island clientOnly={true}>
+					<Island>
 						<AdPortals />
 					</Island>
 				)}
@@ -635,7 +635,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									justify-content: center;
 								`}
 							/>
-							<Island clientOnly={true} deferUntil="idle">
+							<Island deferUntil="idle">
 								<Liveness
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -1227,7 +1227,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							leftColSize="wide"
 						>
 							<MostViewedFooterLayout renderAds={renderAds}>
-								<Island clientOnly={true} deferUntil="visible">
+								<Island deferUntil="visible">
 									<MostViewedFooterData
 										sectionId={article.config.section}
 										format={format}
@@ -1302,7 +1302,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper data-print-layout="hide">
-						<Island deferUntil="idle" clientOnly={true}>
+						<Island deferUntil="idle">
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={

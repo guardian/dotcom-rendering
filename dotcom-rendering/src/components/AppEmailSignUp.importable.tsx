@@ -1,3 +1,4 @@
+import { isServer } from '../lib/isServer';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
@@ -19,7 +20,7 @@ export const AppEmailSignUp = ({
 }: AppEmailSignupProps) => {
 	const isCompatible = useIsBridgetCompatible();
 
-	if (!isCompatible) {
+	if (!isCompatible || isServer) {
 		return null;
 	}
 

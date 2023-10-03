@@ -32,13 +32,14 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
-import { getLocaleCode } from '../lib/getCountryCode';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { setAutomat } from '../lib/setAutomat';
 import type { AuthStatus } from '../lib/useAuthStatus';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
+import { usePageViewId } from '../lib/usePageViewId';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
 type Props = {
@@ -431,46 +432,31 @@ export const SupportTheG = ({
 	contributionsServiceUrl,
 	hasPageSkin = false,
 }: Props) => {
-	const [countryCode, setCountryCode] = useState<string>();
-	const pageViewId = window.guardian.config.ophan.pageViewId;
+	const countryCode = useCountryCode();
+	const pageViewId = usePageViewId();
 	const ophanRecord = getOphanRecordFunction();
 
-	useEffect(() => {
-		const callFetch = () => {
-			getLocaleCode()
-				.then((cc) => {
-					setCountryCode(cc ?? '');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${String(e)}`),
-				);
-		};
-		callFetch();
-	}, []);
+	if (!countryCode || !pageViewId) return null;
 
-	if (countryCode) {
-		if (inHeader && remoteHeader) {
-			return (
-				<ReaderRevenueLinksRemote
-					countryCode={countryCode}
-					pageViewId={pageViewId}
-					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophanRecord}
-				/>
-			);
-		}
+	if (inHeader && remoteHeader) {
 		return (
-			<ReaderRevenueLinksNative
-				editionId={editionId}
-				dataLinkNamePrefix={dataLinkNamePrefix}
-				inHeader={inHeader}
-				urls={urls}
-				ophanRecord={ophanRecord}
+			<ReaderRevenueLinksRemote
+				countryCode={countryCode}
 				pageViewId={pageViewId}
-				hasPageSkin={hasPageSkin}
+				contributionsServiceUrl={contributionsServiceUrl}
+				ophanRecord={ophanRecord}
 			/>
 		);
 	}
-
-	return null;
+	return (
+		<ReaderRevenueLinksNative
+			editionId={editionId}
+			dataLinkNamePrefix={dataLinkNamePrefix}
+			inHeader={inHeader}
+			urls={urls}
+			ophanRecord={ophanRecord}
+			pageViewId={pageViewId}
+			hasPageSkin={hasPageSkin}
+		/>
+	);
 };

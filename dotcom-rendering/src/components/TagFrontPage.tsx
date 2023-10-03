@@ -54,20 +54,20 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island clientOnly={true} deferUntil="idle">
+			<Island deferUntil="idle">
 				<AlreadyVisited />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island deferUntil="idle">
 				<FocusStyles />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island deferUntil="idle">
 				<Metrics
 					commercialMetricsEnabled={
 						!!tagFront.config.switches.commercialMetrics
 					}
 				/>
 			</Island>
-			<Island clientOnly={true}>
+			<Island>
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(
 						tagFront.config.switches,
@@ -76,7 +76,7 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 					isDev={!!tagFront.config.isDev}
 				/>
 			</Island>
-			<Island clientOnly={true}>
+			<Island>
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
 			<TagFrontLayout tagFront={tagFront} NAV={NAV} />
