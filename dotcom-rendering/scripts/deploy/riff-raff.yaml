@@ -34,6 +34,7 @@ deployments:
     parameters:
       templateStagePaths:
         CODE: DotcomRendering-front-CODE.template.json
+		PROD: DotcomRendering-front-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: render-front
       amiParameter: AMIRenderfront
