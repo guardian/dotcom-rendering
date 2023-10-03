@@ -267,7 +267,7 @@ export const MultipleOnAPaidFront = () => {
 			aboutThisLink:
 				'https://www.theguardian.com/info/2016/jan/25/content-funding',
 		},
-	};
+	} as const;
 
 	return (
 		<>

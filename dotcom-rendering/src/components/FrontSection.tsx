@@ -16,12 +16,8 @@ import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
 import type { DCRBadgeType } from '../types/badge';
-import type { Branding } from '../types/branding';
-import type {
-	DCRContainerPalette,
-	DCRFrontType,
-	TreatType,
-} from '../types/front';
+import type { Branding, EditionBranding } from '../types/branding';
+import type { DCRContainerPalette, TreatType } from '../types/front';
 import type { DCRFrontPagination } from '../types/tagFront';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
@@ -96,7 +92,7 @@ type Props = {
 	 */
 	hasPageSkin?: boolean;
 	discussionApiUrl: string;
-	frontBranding?: DCRFrontType['pressedPage']['frontProperties']['commercial']['editionBrandings'][number];
+	frontBranding?: EditionBranding;
 	containerBranding?: Branding;
 };
 
