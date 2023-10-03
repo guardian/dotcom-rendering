@@ -2768,7 +2768,7 @@
                     "type": "object",
                     "properties": {
                         "id": {
-                            "type": "string"
+                            "$ref": "#/definitions/EditionId"
                         }
                     },
                     "required": [
@@ -2782,6 +2782,16 @@
             "required": [
                 "edition"
             ]
+        },
+        "EditionId": {
+            "enum": [
+                "AU",
+                "EUR",
+                "INT",
+                "UK",
+                "US"
+            ],
+            "type": "string"
         },
         "Branding": {
             "type": "object",
@@ -3296,16 +3306,6 @@
                 "support",
                 "supporter"
             ]
-        },
-        "EditionId": {
-            "enum": [
-                "AU",
-                "EUR",
-                "INT",
-                "UK",
-                "US"
-            ],
-            "type": "string"
         },
         "Switches": {
             "type": "object",

@@ -1,3 +1,5 @@
+import type { EditionId } from '../lib/edition';
+
 type BrandingLogo = {
 	src: string;
 	link: string;
@@ -15,7 +17,7 @@ export interface Branding {
 
 export interface EditionBranding {
 	edition: {
-		id: string;
+		id: EditionId;
 	};
 	branding?: Branding;
 }
