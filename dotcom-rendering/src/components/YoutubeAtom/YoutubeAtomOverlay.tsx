@@ -10,7 +10,7 @@ import {
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 import { formatTime } from '../../lib/formatTime';
-import type { ImageSource, RoleType } from '../../types/content';
+import type { RoleType } from '../../types/content';
 import type { Palette } from '../../types/palette';
 import { Picture } from './Picture';
 

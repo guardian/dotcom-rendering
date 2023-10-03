@@ -46,6 +46,11 @@ const consentStateCanTarget: ConsentState = {
 	framework: 'tcfv2',
 };
 
+const overrideImage =
+	'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg';
+const posterImage =
+	'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg';
+
 export const NoConsent = (): JSX.Element => {
 	return (
 		<div style={containerStyle}>
@@ -129,17 +134,9 @@ export const WithOverrideImage = (): JSX.Element => {
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
-				overrideImage={[
-					{
-						weighting: 'inline',
-						srcSet: [
-							{
-								width: 500,
-								src: 'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
-							},
-						],
-					},
-				]}
+				overrideImage={
+					'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac'
+				}
 				shouldStick={false}
 				isMainMedia={false}
 				title="How to stop the spread of coronavirus"
@@ -170,29 +167,9 @@ export const WithPosterImage = (): JSX.Element => {
 				}}
 				duration={252}
 				consentState={consentStateCanTarget}
-				posterImage={[
-					{
-						weighting: 'inline',
-						srcSet: [
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1000.jpg',
-								width: 1000,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/500.jpg',
-								width: 500,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/140.jpg',
-								width: 140,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg',
-								width: 1920,
-							},
-						],
-					},
-				]}
+				posterImage={
+					'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg'
+				}
 				height={450}
 				width={800}
 				shouldStick={false}
@@ -226,41 +203,9 @@ export const WithOverlayAndPosterImage = (): JSX.Element => {
 					display: ArticleDisplay.Standard,
 				}}
 				videoCategory="live"
-				overrideImage={[
-					{
-						weighting: 'inline',
-						srcSet: [
-							{
-								src: 'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
-								width: 1000,
-							},
-						],
-					},
-				]}
+				overrideImage={overrideImage}
 				consentState={consentStateCanTarget}
-				posterImage={[
-					{
-						weighting: 'inline',
-						srcSet: [
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1000.jpg',
-								width: 1000,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/500.jpg',
-								width: 500,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/140.jpg',
-								width: 140,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg',
-								width: 1920,
-							},
-						],
-					},
-				]}
+				posterImage={posterImage}
 				height={450}
 				width={800}
 				shouldStick={false}
@@ -298,17 +243,7 @@ export const GiveConsent = (): JSX.Element => {
 						design: ArticleDesign.Standard,
 						display: ArticleDisplay.Standard,
 					}}
-					overrideImage={[
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									width: 500,
-									src: 'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
-								},
-							],
-						},
-					]}
+					overrideImage={overrideImage}
 					height={450}
 					width={800}
 					shouldStick={false}
@@ -690,17 +625,7 @@ export const WithOverrideImageWithIma = (): JSX.Element => {
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
-				overrideImage={[
-					{
-						weighting: 'inline',
-						srcSet: [
-							{
-								width: 500,
-								src: 'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
-							},
-						],
-					},
-				]}
+				overrideImage={overrideImage}
 				shouldStick={false}
 				isMainMedia={false}
 				title="How to stop the spread of coronavirus"
@@ -730,29 +655,7 @@ export const WithPosterImageWithIma = (): JSX.Element => {
 				duration={252}
 				adTargeting={adTargeting}
 				consentState={consentStateCanTarget}
-				posterImage={[
-					{
-						weighting: 'inline',
-						srcSet: [
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1000.jpg',
-								width: 1000,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/500.jpg',
-								width: 500,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/140.jpg',
-								width: 140,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg',
-								width: 1920,
-							},
-						],
-					},
-				]}
+				posterImage={posterImage}
 				height={450}
 				width={800}
 				shouldStick={false}
@@ -782,42 +685,10 @@ export const WithOverlayAndPosterImageWithIma = (): JSX.Element => {
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
-				overrideImage={[
-					{
-						weighting: 'inline',
-						srcSet: [
-							{
-								src: 'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
-								width: 1000,
-							},
-						],
-					},
-				]}
+				overrideImage={overrideImage}
 				adTargeting={adTargeting}
 				consentState={consentStateCanTarget}
-				posterImage={[
-					{
-						weighting: 'inline',
-						srcSet: [
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1000.jpg',
-								width: 1000,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/500.jpg',
-								width: 500,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/140.jpg',
-								width: 140,
-							},
-							{
-								src: 'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg',
-								width: 1920,
-							},
-						],
-					},
-				]}
+				posterImage={posterImage}
 				height={450}
 				width={800}
 				shouldStick={false}
@@ -852,17 +723,7 @@ export const GiveConsentWithIma = (): JSX.Element => {
 						design: ArticleDesign.Standard,
 						display: ArticleDisplay.Standard,
 					}}
-					overrideImage={[
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									width: 500,
-									src: 'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
-								},
-							],
-						},
-					]}
+					overrideImage={overrideImage}
 					height={450}
 					width={800}
 					shouldStick={false}

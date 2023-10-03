@@ -7,7 +7,7 @@ import { trackVideoInteraction } from '../client/ga/ga';
 import { record } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
-import type { ImageSource, RoleType, SrcSetItem } from '../types/content';
+import type { RoleType } from '../types/content';
 import { Caption } from './Caption';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 

@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
-import type { ImageSource, RoleType, SrcSetItem } from '../../types/content';
+import { getSourceImageUrl } from '../../lib/getSourceImageUrl_temp_fix';
+import type { RoleType } from '../../types/content';
+import type { ImageWidthType } from '../Picture';
+import { generateSources, getFallbackSource, Sources } from '../Picture';
 
 type Props = {
 	image: string;
@@ -11,67 +14,33 @@ type Props = {
 	isMainMedia?: boolean;
 };
 
-type ResolutionType = 'hdpi' | 'mdpi';
-
-const getClosestSetForWidth = (
-	desiredWidth: number,
-	inlineSrcSets: SrcSetItem[],
-): SrcSetItem => {
-	// For a desired width, find the SrcSetItem which is the closest match
-	const sorted = inlineSrcSets.sort((a, b) => b.width - a.width);
-	return sorted.reduce((best, current) => {
-		if (current.width < best.width && current.width >= desiredWidth) {
-			return current;
-		}
-		return best;
-	});
-};
-
-const getSourcesForRoleAndResolution = (
-	image: ImageSource[],
-	resolution: ResolutionType,
-) => {
-	const srcSetItems = image[0]?.srcSet ?? [];
-
-	return resolution === 'hdpi'
-		? srcSetItems.filter((set) => set.src.includes('dpr=2'))
-		: srcSetItems.filter((set) => !set.src.includes('dpr=2'));
-};
-
-const getFallback = (
-	resolution: ResolutionType,
-	image: ImageSource[],
-): string | undefined => {
-	// Get the sources for this role and resolution
-	const sources: SrcSetItem[] = getSourcesForRoleAndResolution(
-		image,
-		resolution,
-	);
-	if (sources.length === 0) return undefined;
-	// The assumption here is readers on devices that do not support srcset are likely to be on poor
-	// network connections so we're going to fallback to a small image
-	return getClosestSetForWidth(300, sources).src;
-};
-
-/**
- *       mobile: 320
- *       mobileMedium: 375
- *       mobileLandscape: 480
- *       phablet: 660
- *       tablet: 740
- *       desktop: 980
- *       leftCol: 1140
- *       wide: 1300
- */
-
-const getSizes = (role: RoleType, isMainMedia: boolean): string => {
+const decideImageWidths = (
+	role: RoleType,
+	isMainMedia: boolean,
+): [ImageWidthType, ...ImageWidthType[]] => {
 	switch (role) {
 		case 'inline':
-			return `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
+			return [
+				{
+					breakpoint: breakpoints.phablet,
+					width: 620,
+				},
+			];
 		case 'halfWidth':
-			return `(min-width: ${breakpoints.phablet}px) 300px, 50vw`;
+			return [
+				{
+					breakpoint: breakpoints.phablet,
+					width: 300,
+				},
+			];
 		case 'thumbnail':
-			return '140px';
+			// TODO: This should always be 140px regardless of display size
+			return [
+				{
+					breakpoint: breakpoints.mobile,
+					width: 140,
+				},
+			];
 		case 'immersive':
 			// Immersive MainMedia elements fill the height of the viewport, meaning
 			// on mobile devices even though the viewport width is small, we'll need
@@ -83,14 +52,39 @@ const getSizes = (role: RoleType, isMainMedia: boolean): string => {
 			// Immersive body images stretch the full viewport width below wide,
 			// but do not stretch beyond 1300px after that.
 			return isMainMedia
-				? `(orientation: portrait) 167vh, 100vw`
-				: `(min-width: ${breakpoints.wide}px) 1300px, 100vw`;
+				? [
+						// TODO: Above logic. Not easy with generateSources, may need to refactor how <Sources /> works
+						{
+							breakpoint: breakpoints.wide,
+							width: 1300,
+						},
+				  ]
+				: [
+						{
+							breakpoint: breakpoints.wide,
+							width: 1300,
+						},
+				  ];
 		case 'supporting':
-			return `(min-width: ${breakpoints.wide}px) 380px, 300px`;
+			return [
+				{
+					breakpoint: breakpoints.wide,
+					width: 380,
+				},
+			];
 		case 'showcase':
 			return isMainMedia
-				? `(min-width: ${breakpoints.wide}px) 1020px, (min-width: ${breakpoints.leftCol}px) 940px, (min-width: ${breakpoints.tablet}px) 700px, (min-width: ${breakpoints.phablet}px) 660px, 100vw`
-				: `(min-width: ${breakpoints.wide}px) 860px, (min-width: ${breakpoints.leftCol}px) 780px, (min-width: ${breakpoints.phablet}px) 620px, 100vw`;
+				? [
+						{ breakpoint: breakpoints.wide, width: 1020 },
+						{ breakpoint: breakpoints.leftCol, width: 940 },
+						{ breakpoint: breakpoints.tablet, width: 700 },
+						{ breakpoint: breakpoints.phablet, width: 660 },
+				  ]
+				: [
+						{ breakpoint: breakpoints.wide, width: 860 },
+						{ breakpoint: breakpoints.leftCol, width: 780 },
+						{ breakpoint: breakpoints.tablet, width: 620 },
+				  ];
 	}
 };
 
@@ -101,14 +95,20 @@ export const Picture = ({
 	height,
 	width,
 	isMainMedia = false,
-}: Props): JSX.Element => {
-	const sizes = getSizes(role, isMainMedia);
+}: Props) => {
+	const sources = generateSources(
+		getSourceImageUrl(image),
+		decideImageWidths(role, isMainMedia),
+	);
+	const fallbackSource = getFallbackSource(sources);
 
 	return (
 		<picture itemProp="contentUrl">
+			<Sources sources={sources} />
+
 			<img
 				alt={alt}
-				src={image}
+				src={fallbackSource.lowResUrl}
 				height={height}
 				width={width}
 				// https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
