@@ -88,7 +88,7 @@ const decideImageWidths = (
 	}
 };
 
-export const Picture = ({
+export const YoutubeAtomPicture = ({
 	image,
 	role,
 	alt,

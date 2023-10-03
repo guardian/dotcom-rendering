@@ -12,7 +12,7 @@ import { decidePalette } from '../../lib/decidePalette';
 import { formatTime } from '../../lib/formatTime';
 import type { RoleType } from '../../types/content';
 import type { Palette } from '../../types/palette';
-import { Picture } from './Picture';
+import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 export type VideoCategory = 'live' | 'documentary' | 'explainer';
 
@@ -202,7 +202,7 @@ export const YoutubeAtomOverlay = ({
 			type="button"
 		>
 			{!!image && (
-				<Picture
+				<YoutubeAtomPicture
 					image={image}
 					role={role}
 					alt={alt}
