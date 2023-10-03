@@ -7,6 +7,7 @@ import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import type { Branding } from '../../types/branding';
+import type { ImageSource } from '../../types/content';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
@@ -32,6 +33,7 @@ import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
+import { Picture } from '../YoutubeAtom/Picture';
 import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
@@ -397,6 +399,19 @@ export const Card = ({
 		isPlayableMediaCard,
 	});
 
+	const posterImages: ImageSource[] | undefined =
+		media && media.type === 'video' && media.mainMedia.images.length > 0
+			? [
+					{
+						weighting: 'supporting',
+						srcSet: media.mainMedia.images.map((img) => ({
+							src: img.url,
+							width: img.width,
+						})),
+					},
+			  ]
+			: undefined;
+
 	return (
 		<CardWrapper
 			format={format}
@@ -444,7 +459,7 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{media.type === 'video' && (
+						{media.type === 'video' && showMainVideo && (
 							<div
 								data-chromatic="ignore"
 								data-component="youtube-atom"
@@ -478,10 +493,18 @@ export const Card = ({
 										showTextOverlay={
 											containerType === 'fixed/video'
 										}
-										showMainVideo={showMainVideo}
 									/>
 								</Island>
 							</div>
+						)}
+						{media.type === 'video' && !showMainVideo && (
+							<Picture
+								imageSources={posterImages ?? []}
+								role="inline"
+								alt={headlineText}
+								width={media.mainMedia.width}
+								height={media.mainMedia.height}
+							/>
 						)}
 						{media.type === 'picture' && (
 							<>

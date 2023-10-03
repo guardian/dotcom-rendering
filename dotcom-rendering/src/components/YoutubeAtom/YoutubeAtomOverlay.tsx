@@ -29,7 +29,6 @@ type Props = {
 	kicker?: string;
 	format: ArticleFormat;
 	showTextOverlay?: boolean;
-	showMainVideo?: boolean;
 };
 
 const overlayStyles = css`
@@ -182,7 +181,6 @@ export const YoutubeAtomOverlay = ({
 	kicker,
 	format,
 	showTextOverlay,
-	showMainVideo = true,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = duration !== undefined && duration > 0;
@@ -191,7 +189,7 @@ export const YoutubeAtomOverlay = ({
 	const dcrPalette = decidePalette(format);
 	const image = overrideImage ?? posterImage;
 
-	return showMainVideo ? (
+	return (
 		<button
 			data-cy={id}
 			data-testid={id}
@@ -239,32 +237,5 @@ export const YoutubeAtomOverlay = ({
 				</div>
 			)}
 		</button>
-	) : (
-		<div css={overlayStyles}>
-			<Picture
-				imageSources={overrideImage ?? posterImage ?? []}
-				role={role}
-				alt={alt}
-				height={height}
-				width={width}
-			/>
-			{showPill && (
-				<div css={pillStyles}>
-					{!!videoCategory && (
-						<div css={pillItemStyles}>
-							<div css={[pillTextStyles, isLive && liveStyles]}>
-								{capitalise(videoCategory)}
-							</div>
-						</div>
-					)}
-				</div>
-			)}
-			{showTextOverlay && (
-				<div css={textOverlayStyles}>
-					<div css={kickerStyles(dcrPalette)}>{kicker}</div>
-					<div css={titleStyles}>{title}</div>
-				</div>
-			)}
-		</div>
 	);
 };
