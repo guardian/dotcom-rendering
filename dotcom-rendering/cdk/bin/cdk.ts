@@ -26,7 +26,7 @@ new DotcomRendering(app, 'DotcomRendering-CODE', {
 	instanceType: 't4g.micro',
 });
 
-new DotcomRendering(app, 'DotcomRendering-front-CODE', {
+new DotcomRendering(app, 'DotcomRendering-render-front-CODE', {
 	...sharedProps,
 	app: 'render-front',
 	stage: 'CODE',
