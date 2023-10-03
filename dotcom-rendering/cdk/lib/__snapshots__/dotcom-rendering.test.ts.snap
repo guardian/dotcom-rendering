@@ -924,25 +924,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "ec2RoleArn8128314D": {
-      "Properties": {
-        "Name": "/frontend/TEST/rendering.loadBalancerDnsName",
-        "Tags": {
-          "Stack": "frontend",
-          "Stage": "TEST",
-          "gu:cdk:version": "TEST",
-          "gu:repo": "guardian/dotcom-rendering",
-        },
-        "Type": "String",
-        "Value": {
-          "Fn::GetAtt": [
-            "InternalLoadBalancer",
-            "DNSName",
-          ],
-        },
-      },
-      "Type": "AWS::SSM::Parameter",
-    },
     "frontendTESTrenderingF3FD9600": {
       "Properties": {
         "LaunchTemplateData": {
@@ -1099,6 +1080,25 @@ sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make 
         ],
       },
       "Type": "AWS::IAM::InstanceProfile",
+    },
+    "loadBalancerDnsNameturnedoff45D85D9D": {
+      "Properties": {
+        "Name": "/frontend/TEST/rendering.loadBalancerDnsName",
+        "Tags": {
+          "Stack": "frontend",
+          "Stage": "TEST",
+          "gu:cdk:version": "TEST",
+          "gu:repo": "guardian/dotcom-rendering",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "InternalLoadBalancer",
+            "DNSName",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
     },
   },
 }
