@@ -8,21 +8,20 @@ import { log, warn } from '../env/log.js';
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const target = path.resolve(dirname, '../..', 'target');
 
-// This task generates the riff-raff bundle. It creates the following
-// directory layout under target/
-//
-// target
-// ├── build.json
-// ├── riff-raff.yaml
-// ├── ${copyFrontendStatic()}
-// ├── ${copyApp('rendering')}
-// └── ${copyApp('renderi-front')}
-
-
+/** This task generates the riff-raff bundle. It creates the following
+ * directory layout under target/
+ * target
+ * ├── build.json
+ * ├── riff-raff.yaml
+ * ├── ${copyFrontendStatic()}
+ * ├── ${copyApp('rendering')}
+ * └── ${copyApp('renderi-front')}
+ */
 
 /**
- * This comprises of the CloudFormation files and app artifacts that
- * are needed to run an app.
+ * This method creates a bundle needed to run an app including:
+ * - CloudFormation files
+ * - .zip artefact comprised of the JS app
  *
  * It generates a folder like this:
  * ├── ${appName}-cfn
@@ -39,48 +38,42 @@ const target = path.resolve(dirname, '../..', 'target');
 const copyApp = (appName) => {
 	// This is a little hack to be backwards compatible with the naming for when this was a single stack app
 	const cfnTemplateName = appName === 'rendering' ? '' : `-${appName}`;
-	const cfnFolder = appName === 'rendering' ? 'frontend-cfn' : `${appName}-cfn`;
+	const cfnFolder =
+		appName === 'rendering' ? 'frontend-cfn' : `${appName}-cfn`;
 
 	log(` - copying app: ${appName}`);
-	const jobs = [];
 
 	log(` - ${appName}: copying cloudformation config`);
-	jobs.push(
-		cpy(
-			[
-				`cdk.out/DotcomRendering${cfnTemplateName}-CODE.template.json`,
-				`cdk.out/DotcomRendering${cfnTemplateName}-PROD.template.json`,
-			],
-			path.resolve(target, cfnFolder),
-		),
+	const cfnJob = cpy(
+		[
+			`cdk.out/DotcomRendering${cfnTemplateName}-CODE.template.json`,
+			`cdk.out/DotcomRendering${cfnTemplateName}-PROD.template.json`,
+		],
+		path.resolve(target, cfnFolder),
 	);
 
 	log(` - ${appName}: copying makefile`);
-	jobs.push(cpy(['makefile'], path.resolve(target, appName)));
+	const makefileJob = cpy(['makefile'], path.resolve(target, appName));
 
 	log(` - ${appName}: copying server dist`);
-	jobs.push(
-		cpy(
-			path.resolve(dirname, '../../dist/**'),
-			path.resolve(target, appName, 'dist'),
-			{
-				nodir: true,
-			},
-		),
+	const serverDistJob = cpy(
+		path.resolve(dirname, '../../dist/**'),
+		path.resolve(target, appName, 'dist'),
+		{
+			nodir: true,
+		},
 	);
 
 	log(`' - ${appName}: copying scripts`);
-	jobs.push(
-		cpy(
-			path.resolve(dirname, '../../scripts/**'),
-			path.resolve(target, appName, 'scripts'),
-			{
-				nodir: true,
-			},
-		),
+	const scriptsJob = cpy(
+		path.resolve(dirname, '../../scripts/**'),
+		path.resolve(target, appName, 'scripts'),
+		{
+			nodir: true,
+		},
 	);
 
-	return jobs;
+	return [cfnJob, makefileJob, serverDistJob, scriptsJob];
 };
 
 /**
@@ -98,40 +91,38 @@ const copyApp = (appName) => {
  *         └── etc
  */
 const copyFrontendStatic = () => {
-	const jobs = [];
-
 	log(' - copying static');
-	jobs.push(
-		cpy(
-			path.resolve(dirname, '../../src/static/**'),
-			path.resolve(target, 'frontend-static', 'static', 'frontend'),
-			{
-				nodir: true,
-			},
-		),
+	const staticJob = cpy(
+		path.resolve(dirname, '../../src/static/**'),
+		path.resolve(target, 'frontend-static', 'static', 'frontend'),
+		{
+			nodir: true,
+		},
 	);
-
 
 	const source = path.resolve(dirname, '../../dist');
 	const dest = path.resolve(target, 'frontend-static', 'assets');
 
 	log(' - copying dist => assets');
-	jobs.push(
-		cpy(path.resolve(source, '**/*.!(html|json)'), dest, {
+	const distToAssetsJob = cpy(
+		path.resolve(source, '**/*.!(html|json)'),
+		dest,
+		{
 			nodir: true,
-		}),
+		},
 	);
 
 	log(' - copying stats => assets');
-	jobs.push(
-		cpy(path.resolve(source, 'stats'), path.resolve(dest, 'stats'), {
+	const statsToAssetsJob = cpy(
+		path.resolve(source, 'stats'),
+		path.resolve(dest, 'stats'),
+		{
 			nodir: true,
-		}),
+		},
 	);
 
-	return jobs;
+	return [staticJob, distToAssetsJob, statsToAssetsJob];
 };
-
 
 const copyRiffRaff = () => {
 	log(' - copying riffraff yaml');
