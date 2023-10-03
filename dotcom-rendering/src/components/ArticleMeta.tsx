@@ -449,7 +449,7 @@ export const ArticleMeta = ({
 						>
 							<div>
 								{isCommentable && (
-									<Island clientOnly={true} deferUntil="idle">
+									<Island deferUntil="idle">
 										<CommentCount
 											discussionApiUrl={discussionApiUrl}
 											shortUrlId={shortUrlId}

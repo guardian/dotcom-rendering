@@ -8,6 +8,7 @@ import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
 import { getLocaleCode } from '../lib/getCountryCode';
+import { isServer } from '../lib/isServer';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -242,7 +243,7 @@ export const StickyBottomBanner = ({
 }) => {
 	const { brazeMessages } = useBraze(idApiUrl);
 
-	const asyncCountryCode = getLocaleCode();
+	const asyncCountryCode = isServer ? Promise.resolve(null) : getLocaleCode();
 	const authStatus = useAuthStatus();
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||

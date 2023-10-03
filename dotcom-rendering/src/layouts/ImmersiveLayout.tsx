@@ -616,7 +616,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 									imagesForAppsLightbox={[]}
 								/>
 								{showBodyEndSlot && (
-									<Island clientOnly={true}>
+									<Island>
 										<SlotBodyEnd
 											contentType={article.contentType}
 											contributionsServiceUrl={
@@ -801,7 +801,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						data-component="most-popular"
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
-							<Island clientOnly={true} deferUntil="visible">
+							<Island deferUntil="visible">
 								<MostViewedFooterData
 									sectionId={article.config.section}
 									format={format}
@@ -861,7 +861,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper>
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island deferUntil="idle">
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

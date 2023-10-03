@@ -6,6 +6,7 @@ import type {
 	OphanComponentEvent,
 } from '@guardian/libs';
 import { log } from '@guardian/libs';
+import { isServer } from '../../lib/isServer';
 import type { ServerSideTests } from '../../types/config';
 
 export type OphanRecordFunction = (
@@ -55,15 +56,15 @@ export const getOphan = async (): Promise<
  * @deprecated use `getOphan` instead
  */
 export const getOphanRecordFunction = (): OphanRecordFunction => {
-	const record = window.guardian.ophan?.record;
+	if (isServer || window.guardian.ophan === undefined) {
+		// eslint-disable-next-line no-console -- worth informing all users
+		console.warn('window.guardian.ophan.record is not available');
+		return () => {
+			/* do nothing */
+		};
+	}
 
-	if (record) return record;
-
-	// eslint-disable-next-line no-console -- worth informing all users
-	console.warn('window.guardian.ophan.record is not available');
-	return () => {
-		/* do nothing */
-	};
+	return window.guardian.ophan.record;
 };
 
 /**

@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { body, neutral } from '@guardian/source-foundations';
 import { Link, SvgChevronDownSingle } from '@guardian/source-react-components';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useHydrated } from '../lib/useHydrated';
 
 type Flake = {
 	x: number;
@@ -69,9 +70,15 @@ const generateFlake = () => {
 	);
 };
 
+/**
+ * A winter version of an easter egg…
+ */
 export const Snow = () => {
+	const hydrated = useHydrated(false);
+
 	const [flakes, setFlakes] = useState<Snowflakes>(() => {
 		const initial: Snowflakes = {};
+		if (!hydrated) return initial;
 		for (let i = 0; i < 10; i++) {
 			const generatedFlake = generateFlake();
 			initial[generatedFlake.name] = generatedFlake;
@@ -162,6 +169,8 @@ export const Snow = () => {
 			/>
 		));
 	}, [flakes]);
+
+	if (!hydrated) return null;
 
 	return (
 		<div

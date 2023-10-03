@@ -44,7 +44,6 @@ export const MostViewedRightWithAd = ({
 
 			{!isPaidContent ? (
 				<Island
-					clientOnly={true}
 					deferUntil="visible"
 					// Provide a much higher value for the top margin for the intersection observer
 					// This is because the most viewed would otherwise only be lazy loaded when the

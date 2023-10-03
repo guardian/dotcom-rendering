@@ -19,7 +19,7 @@ export const EmailSignUpSwitcher = ({
 	const { renderingTarget } = useConfig();
 
 	return renderingTarget === 'Apps' ? (
-		<Island clientOnly={true} deferUntil="idle">
+		<Island deferUntil="idle">
 			<AppEmailSignUp skipToIndex={index} {...emailSignUpProps} />
 		</Island>
 	) : (

@@ -75,10 +75,10 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<LightboxLayout
 						imageCount={article.imagesForLightbox.length}
 					/>
-					<Island clientOnly={true}>
+					<Island>
 						<LightboxHash />
 					</Island>
-					<Island clientOnly={true} deferUntil="hash">
+					<Island deferUntil="hash">
 						<LightboxJavascript
 							format={format}
 							images={article.imagesForLightbox}
@@ -86,7 +86,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					</Island>
 				</>
 			)}
-			<Island clientOnly={true} deferUntil="idle">
+			<Island deferUntil="idle">
 				<FocusStyles />
 			</Island>
 			{(format.design === ArticleDesign.LiveBlog ||
@@ -96,27 +96,27 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			{renderingTarget === 'Web' && (
 				<>
 					<SkipTo id="navigation" label="Skip to navigation" />
-					<Island clientOnly={true} deferUntil="idle">
+					<Island deferUntil="idle">
 						<AlreadyVisited />
 					</Island>
-					<Island clientOnly={true} deferUntil="idle">
+					<Island deferUntil="idle">
 						<Metrics
 							commercialMetricsEnabled={
 								!!article.config.switches.commercialMetrics
 							}
 						/>
 					</Island>
-					<Island clientOnly={true} deferUntil="idle">
+					<Island deferUntil="idle">
 						<BrazeMessaging idApiUrl={article.config.idApiUrl} />
 					</Island>
-					<Island clientOnly={true} deferUntil="idle">
+					<Island deferUntil="idle">
 						<ReaderRevenueDev
 							shouldHideReaderRevenue={
 								article.shouldHideReaderRevenue
 							}
 						/>
 					</Island>
-					<Island clientOnly={true}>
+					<Island>
 						<SetABTests
 							abTestSwitches={filterABTestSwitches(
 								article.config.switches,
@@ -128,11 +128,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				</>
 			)}
 			{renderingTarget === 'Web' ? (
-				<Island clientOnly={true}>
+				<Island>
 					<SetAdTargeting adTargeting={adTargeting} />
 				</Island>
 			) : (
-				<Island clientOnly={true}>
+				<Island>
 					<SendTargetingParams
 						editionCommercialProperties={
 							article.commercialProperties[article.editionId]

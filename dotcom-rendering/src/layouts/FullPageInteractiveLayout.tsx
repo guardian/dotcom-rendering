@@ -384,7 +384,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper>
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island deferUntil="idle">
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={
