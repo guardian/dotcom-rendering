@@ -25,8 +25,8 @@ const FollowIcon = ({
 	<div
 		css={css`
 			background-color: ${isFollowing
-				? decidePalette(format).text.articleLink
-				: decidePalette(format).background.article};
+				? decidePalette(format).fill.shareIcon
+				: 'white'};
 			height: 24px;
 			width: 24px;
 			margin: 0 0.3ch 0 0.5ch;
@@ -40,8 +40,8 @@ const FollowIcon = ({
 
 			svg {
 				fill: ${isFollowing
-					? decidePalette(format).background.article
-					: decidePalette(format).text.articleLink};
+					? 'white'
+					: decidePalette(format).fill.shareIcon};
 				height: 18px;
 			}
 		`}
