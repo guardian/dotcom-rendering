@@ -221,7 +221,7 @@ export const Liveness = ({
 	 * updates with whatever html and properties it wants
 	 *
 	 */
-	window.mockLiveUpdate = onSuccess;
+	!isServer && (window.mockLiveUpdate = onSuccess);
 
 	/**
 	 * We do not want to fetch a key on the server
