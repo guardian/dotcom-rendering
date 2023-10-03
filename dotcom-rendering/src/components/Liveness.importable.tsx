@@ -112,6 +112,7 @@ function getKey(
 	filterKeyEvents: boolean,
 	selectedTopics?: Topic[],
 ): string | undefined {
+	if (isServer) return undefined;
 	try {
 		// Construct the url to poll
 		const url = new URL(`${pageId}.json`, ajaxUrl);
@@ -222,15 +223,26 @@ export const Liveness = ({
 	 */
 	window.mockLiveUpdate = onSuccess;
 
+	/**
+	 * We do not want to fetch a key on the server
+	 * @see https://swr.vercel.app/docs/conditional-fetching#conditional
+	 */
+	const key = isServer
+		? undefined
+		: getKey(
+				pageId,
+				ajaxUrl,
+				latestBlockId,
+				filterKeyEvents,
+				selectedTopics,
+		  );
+
 	// useApi returns { data, loading, error } but we're not using them here
-	useApi(
-		getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents, selectedTopics),
-		{
-			refreshInterval: 10_000,
-			refreshWhenHidden: true,
-			onSuccess,
-		},
-	);
+	useApi(key, {
+		refreshInterval: 10_000,
+		refreshWhenHidden: true,
+		onSuccess,
+	});
 
 	useEffect(() => {
 		document.title =
