@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { shouldAdapt as shouldAdaptPromise } from '../client/adaptiveSite';
+import { shouldAdapt as checkShouldAdapt } from '../client/adaptiveSite';
 import { useOnce } from './useOnce';
 
 /**
@@ -10,7 +10,7 @@ export const useShouldAdapt = (): boolean => {
 	const [shouldAdapt, setShouldAdapt] = useState(false);
 
 	useOnce(() => {
-		void shouldAdaptPromise.then(setShouldAdapt);
+		void checkShouldAdapt.then(setShouldAdapt);
 	}, []);
 
 	return shouldAdapt;
