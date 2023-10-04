@@ -1122,7 +1122,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											/>
 										)}
 
-										{isApps && isInLiveblogAdSlotTest && (
+										{isApps && (
 											<RightAdsPlaceholder />
 										)}
 									</RightColumn>
