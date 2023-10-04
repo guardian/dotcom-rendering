@@ -385,7 +385,7 @@ export const Card = ({
 	// If the card isn't playable, we need to show a play icon.
 	// Otherwise, this is handled by the YoutubeAtom
 	const showPlayIcon =
-		mainMedia?.type === 'Video' && !isPlayableMediaCard && !!showMainVideo;
+		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
 
 	const media = getMedia({
 		imageUrl,
