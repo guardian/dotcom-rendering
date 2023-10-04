@@ -230,11 +230,11 @@ type ImageSource = {
 /**
  * Generate image sources for an image.
  *
- * @param master source image URL
+ * @param mainImage source image URL
  * @param imageWidths list of image widths
  */
 export const generateSources = (
-	master: string,
+	mainImage: string,
 	imageWidths: readonly [ImageWidthType, ...ImageWidthType[]],
 ): ImageSource[] =>
 	imageWidths
@@ -245,12 +245,12 @@ export const generateSources = (
 				breakpoint,
 				width: imageWidth,
 				hiResUrl: generateImageURL({
-					master,
+					mainImage,
 					imageWidth,
 					resolution: 'high',
 				}),
 				lowResUrl: generateImageURL({
-					master,
+					mainImage,
 					imageWidth,
 					resolution: 'low',
 				}),
