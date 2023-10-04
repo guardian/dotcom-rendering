@@ -73,10 +73,10 @@ void startup(
 );
 
 void startup(
-	'performanceMonitoring',
+	'poorPerformanceMonitoring',
 	() =>
-		import(/* webpackMode: "eager" */ './performanceMonitoring').then(
-			({ performanceMonitoring }) => performanceMonitoring(),
+		import(/* webpackMode: "eager" */ './poorPerformanceMonitoring').then(
+			({ recordPoorPerformance }) => recordPoorPerformance(),
 		),
 	{
 		priority: 'critical',
