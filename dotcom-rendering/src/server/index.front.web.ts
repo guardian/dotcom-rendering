@@ -33,7 +33,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 				pageId: data.pageId,
 				onPageDescription:
 					data.pressedPage.frontProperties.onPageDescription,
-				isPaidContent: data.config.isPaidContent,
+				isOnPaidContentFront: data.config.isPaidContent,
 				discussionApiUrl: data.config.discussionApiUrl,
 				frontBranding: pickBrandingForEdition(
 					data.pressedPage.frontProperties.commercial

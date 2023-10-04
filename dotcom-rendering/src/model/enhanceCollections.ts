@@ -1,15 +1,8 @@
-import { isNonNullable } from '@guardian/libs';
-import { pickBrandingForEdition } from '../lib/branding';
+import { decideCollectionBranding } from '../lib/branding';
 import type { EditionId } from '../lib/edition';
 import type { Branding } from '../types/branding';
-import type {
-	DCRCollectionType,
-	FECollectionType,
-	FEFrontCard,
-} from '../types/front';
-import { decideEditorialBadge, decidePaidContentBadge } from './decideBadge';
+import type { DCRCollectionType, FECollectionType } from '../types/front';
 import { decideContainerPalette } from './decideContainerPalette';
-import { decideSponsoredContentBranding } from './decideSponsoredContentBranding';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
@@ -31,17 +24,6 @@ const isSupported = (collection: FECollectionType): boolean =>
 		)
 	);
 
-function getBrandingFromCards(
-	allCards: FEFrontCard[],
-	editionId: EditionId,
-): Branding[] {
-	return allCards
-		.map((card) =>
-			pickBrandingForEdition(card.properties.editionBrandings, editionId),
-		)
-		.filter(isNonNullable);
-}
-
 export const enhanceCollections = ({
 	collections,
 	editionId,
@@ -49,7 +31,7 @@ export const enhanceCollections = ({
 	discussionApiUrl,
 	frontBranding,
 	onPageDescription,
-	isPaidContent,
+	isOnPaidContentFront,
 }: {
 	collections: FECollectionType[];
 	editionId: EditionId;
@@ -57,17 +39,19 @@ export const enhanceCollections = ({
 	discussionApiUrl: string;
 	frontBranding: Branding | undefined;
 	onPageDescription?: string;
-	isPaidContent?: boolean;
+	isOnPaidContentFront?: boolean;
 }): DCRCollectionType[] => {
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
 		const allCards = [...collection.curated, ...collection.backfill];
-		const allBranding = getBrandingFromCards(allCards, editionId);
-		const allCardsHaveBranding = allCards.length === allBranding.length;
-		const isCollectionPaidContent = allBranding.every(
-			({ brandingType }) => brandingType?.name === 'paid-content',
-		);
+		const collectionBranding = decideCollectionBranding({
+			frontBranding,
+			index,
+			seriesTag: collection.config.href,
+			cards: allCards,
+			editionId,
+		});
 
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
@@ -77,9 +61,8 @@ export const enhanceCollections = ({
 			 */
 			{
 				canBeBranded:
-					!isPaidContent &&
-					allCardsHaveBranding &&
-					isCollectionPaidContent,
+					!isOnPaidContentFront &&
+					collectionBranding?.kind === 'paid-content',
 			},
 		);
 
@@ -93,20 +76,7 @@ export const enhanceCollections = ({
 			collectionType,
 			href,
 			containerPalette,
-			editorialBadge: decideEditorialBadge(collection.config.href),
-			paidContentBadge: decidePaidContentBadge(
-				// We only try to use a branded badge for paid content
-				isCollectionPaidContent && allCardsHaveBranding
-					? allBranding
-					: undefined,
-			),
-			sponsoredContentBranding: decideSponsoredContentBranding(
-				allCards.length,
-				allBranding,
-				// TODO(@chrislomaxjones) Read the full front branding value
-				!!frontBranding,
-				collectionType,
-			),
+			collectionBranding,
 			grouped: groupCards(
 				collectionType,
 				collection.curated,

@@ -1,4 +1,5 @@
 import type { EditionId } from '../lib/edition';
+import type { DCRBadgeType } from './badge';
 
 type BrandingLogo = {
 	src: string;
@@ -29,3 +30,21 @@ export interface EditionBranding {
 	};
 	branding?: Branding;
 }
+
+export type BrandingKind = 'paid-content' | 'foundation' | 'sponsored';
+
+export type SponsorshipBranding = {
+	kind: BrandingKind;
+	isFrontBranding: boolean;
+	branding: Branding;
+};
+
+export type EditorialBranding = {
+	kind: 'editorial';
+	badge: DCRBadgeType;
+};
+
+/**
+ * The type of branding that can be applied to any given collection
+ */
+export type CollectionBranding = SponsorshipBranding | EditorialBranding;
