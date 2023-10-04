@@ -11,6 +11,10 @@ import {
 	getUserClient,
 } from '../lib/bridgetApi';
 import { useMatchMedia } from '../lib/useMatchMedia';
+import {
+	adPlaceholderClass,
+	rightAdsPlaceholderClass,
+} from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.apps';
 
 const calculateAdPosition = (element: Element): BridgetRect => {
@@ -69,9 +73,34 @@ const updateAds = (positions: BridgetAdSlot[]) =>
 
 const debounceUpdateAds = libDebounce(updateAds, 100, { leading: true });
 
+/* ********* AD PORTALS ********* \
+ * Until desktop (ad positions in main body)
+ * We create individual portals for each inline advert
+ * .________________.
+ * |________________|
+ * |################|
+ * |________________|
+ * |________________|
+ * |################|
+ * .________________.
+ *
+ *
+ * From desktop (ad positions in right column)
+ * We create a single portal for the right aligned adverts
+ * And space them out using flexbox
+ * .________._________________.________.
+ * |        |_________________|        |
+ * |        |_________________|########|
+ * |        |_________________|        |
+ * |        |_________________|        |
+ * |        |_________________|########|
+ * |________|_________________|________|
+ */
+
 export const AdPortals = () => {
-	// Server-rendered placeholder elements for ad slots to be inserted into.
+	// Server-rendered placeholder elements for inline ad slots to be inserted into (below desktop breakpoint)
 	const [adPlaceholders, setAdPlaceholders] = useState<Element[]>([]);
+	// Server-rendered placeholder elements for right aligned ad slots to be inserted into (above desktop breakpoint)
 	const [rightAdPlaceholder, setRightAdPlaceholder] = useState<Element>();
 	// References to client-side rendered ad slots.
 	const adSlots = useRef<HTMLDivElement[]>([]);
@@ -98,14 +127,12 @@ export const AdPortals = () => {
 				if (!isPremium) {
 					setAdPlaceholders(
 						Array.from(
-							document.getElementsByClassName(
-								'ad-portal-placeholder',
-							),
+							document.getElementsByClassName(adPlaceholderClass),
 						),
 					);
 					setRightAdPlaceholder(
 						document.getElementsByClassName(
-							'right-ad-portal-placeholder',
+							rightAdsPlaceholderClass,
 						)[0],
 					);
 				}
@@ -184,18 +211,13 @@ export const AdPortals = () => {
 			}}
 		/>
 	);
+
 	if (isDesktop && rightAdPlaceholder) {
-		return (
+		return createPortal(
 			<>
-				{createPortal(
-					<>
-						{adPlaceholders.map((ad, index) =>
-							renderAdSlot(ad.id, index),
-						)}
-					</>,
-					rightAdPlaceholder,
-				)}
-			</>
+				{adPlaceholders.map((ad, index) => renderAdSlot(ad.id, index))}
+			</>,
+			rightAdPlaceholder,
 		);
 	}
 
