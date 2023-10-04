@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import './liveblog';
-
+import type { Client as NotificationsClient } from '@guardian/bridget/Notifications';
+import type { Client as TagClient } from '@guardian/bridget/Tag';
 import { Topic } from '@guardian/bridget/Topic';
 import {
 	ads,
@@ -15,6 +15,7 @@ import setup from 'client/setup';
 import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
 import EpicContent from 'components/EpicContent';
 
+import { compare } from 'compare-versions';
 import {
 	FollowNotificationStatus,
 	FollowTagStatus,
@@ -24,18 +25,20 @@ import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
 	commercialClient,
+	environmentClient,
 	navigationClient,
 	notificationsClient,
 	tagClient,
 	userClient,
 } from 'native/nativeApi';
-import type { Client as NotificationsClient } from '@guardian/bridget/Notifications';
-import type { Client as TagClient } from '@guardian/bridget/Tag';
+import { Optional } from 'optional';
 import type { FC, ReactElement } from 'react';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { logger } from '../logger';
+import { getBridgetVersion } from './bridgetVersion';
 import { callouts } from './callouts';
+import './liveblog';
 import { initSignupForms } from './newsletterSignupForm';
 
 // ----- Run ----- //
@@ -128,6 +131,42 @@ function tagFollowClick(e: Event): void {
 	}
 }
 
+function conditionallyRenderFollowTagComponent(
+	topic: Topic,
+	followTagStatus: Element | null,
+): void {
+	const checkBridgetCompatibilty = (
+		bridgetVersion: Optional<string>,
+	): boolean =>
+		bridgetVersion
+			.map((versionString) => compare(versionString, '2.0.1', '>='))
+			.withDefault(false);
+
+	const isBridgetCompatible = getBridgetVersion().then((version) => {
+		return checkBridgetCompatibilty(version);
+	});
+
+	const isMyGuardianEnabled = environmentClient
+		.isMyGuardianEnabled()
+		.then((_) => _);
+
+	void Promise.all([isBridgetCompatible, isMyGuardianEnabled])
+		.then(([isBridgetCompatible, isMyGuardianEnabled]) => {
+			isBridgetCompatible &&
+				isMyGuardianEnabled &&
+				ReactDOM.render(
+					h(FollowTagStatus, {
+						isFollowing: false,
+						contributorName: topic.displayName,
+					}),
+					followTagStatus,
+				);
+		})
+		.catch((error) => {
+			logger.error(error);
+		});
+}
+
 function topics(): void {
 	const followNotifications = document.querySelector(
 		'.js-follow-notifications',
@@ -144,9 +183,6 @@ function topics(): void {
 			'click',
 			notificationsFollowClick,
 		);
-
-		followTag?.addEventListener('click', tagFollowClick);
-
 		void notificationsClient.isFollowing(topic).then((following) => {
 			if (following && followNotificationsStatus) {
 				ReactDOM.render(
@@ -158,6 +194,12 @@ function topics(): void {
 				);
 			}
 		});
+	}
+
+	if (topic) {
+		conditionallyRenderFollowTagComponent(topic, followTagStatus);
+		followTag?.addEventListener('click', tagFollowClick);
+
 		void tagClient.isFollowing(topic).then((following) => {
 			if (following && followTagStatus) {
 				ReactDOM.render(

@@ -2,17 +2,14 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleSpecial } from '@guardian/libs';
 import { remSpace, textSans } from '@guardian/source-foundations';
-import {
-	FollowNotificationStatus,
-	FollowTagStatus,
-} from 'components/FollowStatus';
+import { FollowNotificationStatus } from 'components/FollowStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
 import { background, text } from 'palette';
-import type { FC } from 'react';
+import { type FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -42,7 +39,6 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	background: none;
 	margin-left: 0;
 	margin-top: ${remSpace[1]};
-	min-height: ${remSpace[6]};
 
 	${darkModeCss`
 		color: ${text.followDark(format)};
@@ -100,12 +96,10 @@ const Follow: FC<Props> = ({ contributors, format }) => {
 						className="js-follow-tag-status"
 						css={followStatusStyles}
 					>
-						<FollowTagStatus
-							isFollowing={false}
-							contributorName={contributor.name}
-						/>
+						{/* The FollowTagStatus component will be rendered here after code in article.ts checks if bridget version is compatible and client env has MyGuardian enabled */}
 					</span>
 				</button>
+
 				<button
 					className="js-follow-notifications"
 					css={styles(format)}
