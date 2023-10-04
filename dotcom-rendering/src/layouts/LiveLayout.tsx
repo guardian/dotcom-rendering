@@ -14,6 +14,7 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Accordion } from '../components/Accordion';
+import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
@@ -298,6 +299,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
+
+	const isInLiveblogAdSlotTest =
+		article.config.abTests.serverSideLiveblogInlineAdsVariant === 'variant';
 
 	return (
 		<>
@@ -880,9 +884,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 															.keywordIds
 													}
 													isInLiveblogAdSlotTest={
-														article.config.abTests
-															.serverSideLiveblogInlineAdsVariant ===
-														'variant'
+														isInLiveblogAdSlotTest
 													}
 													imagesForAppsLightbox={
 														article.imagesForAppsLightbox
@@ -1032,9 +1034,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 															.keywordIds
 													}
 													isInLiveblogAdSlotTest={
-														article.config.abTests
-															.serverSideLiveblogInlineAdsVariant ===
-														'variant'
+														isInLiveblogAdSlotTest
 													}
 													lang={article.lang}
 													isRightToLeftLang={
@@ -1120,6 +1120,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												display={format.display}
 												isPaidContent={isPaidContent}
 											/>
+										)}
+
+										{isApps && isInLiveblogAdSlotTest && (
+											<RightAdsPlaceholder />
 										)}
 									</RightColumn>
 								</div>
