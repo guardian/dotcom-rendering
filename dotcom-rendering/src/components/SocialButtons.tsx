@@ -15,7 +15,6 @@ type SocialButtonProps = {
 	label: string;
 	icon: React.ReactElement;
 	socialProvider: string;
-	showGap: boolean;
 };
 
 const containerStyles = (marginTop = false) => css`
@@ -50,24 +49,10 @@ const iconOverrides = css`
 	}
 `;
 
-const Gap = () => (
-	<span
-		css={css`
-			width: 0;
-			height: ${space[3]}px;
-			${from.tablet} {
-				width: ${space[3]}px;
-				height: 0;
-			}
-		`}
-	></span>
-);
-
-const SocialButton = ({
+export const SocialButton = ({
 	label,
 	icon,
 	socialProvider,
-	showGap,
 }: SocialButtonProps) => {
 	return (
 		<>
@@ -87,7 +72,6 @@ const SocialButton = ({
 			>
 				{socialButtonLabel(label)}
 			</LinkButton>
-			{showGap && <Gap />}
 		</>
 	);
 };
@@ -97,7 +81,9 @@ const socialButtonLabel = (label: string) => {
 	return capitalisedLabel;
 };
 
-const socialButtonIcon = (socialProvider: string): React.ReactElement => {
+export const socialButtonIcon = (
+	socialProvider: string,
+): React.ReactElement => {
 	switch (socialProvider) {
 		case 'google':
 			return <SvgGoogleBrand />;
@@ -120,7 +106,6 @@ export const SocialButtons = ({ marginTop }: SocialButtonsProps) => {
 					label={socialProvider}
 					icon={socialButtonIcon(socialProvider)}
 					socialProvider={socialProvider}
-					showGap={index < 1}
 				/>
 			))}
 		</div>

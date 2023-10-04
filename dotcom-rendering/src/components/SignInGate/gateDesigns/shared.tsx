@@ -55,19 +55,17 @@ export const signInHeader = css`
 
 export const actionButtons = css`
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: flex-start;
 	margin-bottom: 42px;
+	gap: 1rem;
+
+	${from.mobileMedium} {
+		flex-direction: row;
+	}
 
 	> a {
-		/* stylelint-disable-next-line declaration-no-important */
-		margin-right: ${space[4]}px !important;
-
-		${from.mobileMedium} {
-			/* stylelint-disable-next-line declaration-no-important */
-			margin-right: ${space[9]}px !important;
-		}
-
+		justify-content: center;
 		/* stylelint-disable-next-line declaration-no-important */
 		text-decoration: none !important;
 	}

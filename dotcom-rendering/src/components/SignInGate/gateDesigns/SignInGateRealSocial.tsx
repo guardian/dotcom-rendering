@@ -13,12 +13,11 @@ import {
 	hideElementsCss,
 	laterButton,
 	privacyLink,
-	registerButton,
 	signInGateContainer,
 	signInHeader,
 	signInLink,
 } from './shared';
-import { SocialButtons } from '../../SocialButtons';
+import { SocialButton, socialButtonIcon } from '../../SocialButtons';
 
 export const SignInGateRealSocial = ({
 	signInUrl,
@@ -56,19 +55,24 @@ export const SignInGateRealSocial = ({
 				.
 			</p>
 			<div css={actionButtons}>
-				<SocialButtons marginTop={true} />
+				{['google', 'apple'].map((socialProvider, index) => (
+					<SocialButton
+						key={socialProvider}
+						label={socialProvider}
+						icon={socialButtonIcon(socialProvider)}
+						socialProvider={socialProvider}
+					/>
+				))}
 				<LinkButton
 					data-cy="sign-in-gate-main_register"
 					data-ignore="global-link-styling"
-					css={registerButton}
-					priority="primary"
-					size="small"
+					priority="tertiary"
 					href={registerUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'register-link', abTest);
 					}}
 				>
-					Register for free
+					Email and password
 				</LinkButton>
 				{!isMandatory && (
 					<Button
