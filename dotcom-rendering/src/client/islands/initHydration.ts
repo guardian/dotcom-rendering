@@ -1,4 +1,5 @@
 import type { EmotionCache } from '@emotion/cache';
+import { schedule } from '../../lib/scheduler';
 import { doHydration } from './doHydration';
 import { getConfig } from './getConfig';
 import { getName } from './getName';
@@ -45,7 +46,12 @@ export const initHydration = async (
 	switch (deferUntil) {
 		case 'idle': {
 			whenIdle(() => {
-				void doHydration(name, props, element, emotionCache, config);
+				void schedule(
+					name,
+					() =>
+						doHydration(name, props, element, emotionCache, config),
+					{ priority: 'feature' },
+				);
 			});
 			return;
 		}
@@ -54,12 +60,17 @@ export const initHydration = async (
 			whenVisible(
 				element,
 				() => {
-					void doHydration(
+					void schedule(
 						name,
-						props,
-						element,
-						emotionCache,
-						config,
+						() =>
+							doHydration(
+								name,
+								props,
+								element,
+								emotionCache,
+								config,
+							),
+						{ priority: 'feature' },
 					);
 				},
 				{ rootMargin },
@@ -68,12 +79,11 @@ export const initHydration = async (
 		}
 		case 'interaction': {
 			onInteraction(element, (targetElement) => {
-				void doHydration(
+				void schedule(
 					name,
-					props,
-					element,
-					emotionCache,
-					config,
+					() =>
+						doHydration(name, props, element, emotionCache, config),
+					{ priority: 'feature' },
 				).then(() => {
 					targetElement.dispatchEvent(new MouseEvent('click'));
 				});
@@ -82,7 +92,12 @@ export const initHydration = async (
 		}
 		case 'hash': {
 			if (window.location.hash.includes(name) || hasLightboxHash(name)) {
-				void doHydration(name, props, element, emotionCache, config);
+				void schedule(
+					name,
+					() =>
+						doHydration(name, props, element, emotionCache, config),
+					{ priority: 'feature' },
+				);
 			} else {
 				// If we didn't find a matching hash on page load, set a
 				// listener so that we check again each time the reader
@@ -92,12 +107,17 @@ export const initHydration = async (
 						window.location.hash.includes(name) ||
 						hasLightboxHash(name)
 					) {
-						void doHydration(
+						void schedule(
 							name,
-							props,
-							element,
-							emotionCache,
-							config,
+							() =>
+								doHydration(
+									name,
+									props,
+									element,
+									emotionCache,
+									config,
+								),
+							{ priority: 'feature' },
 						);
 					}
 				});
