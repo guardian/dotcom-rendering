@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
+import { lazyFetchEmailWithTimeout } from '../../lib/contributions';
 import type { CanShowResult } from '../../lib/messagePicker';
 import {
 	getOptionsHeadersWithOkta,
@@ -156,6 +157,9 @@ const BrazeEpicWithSatisfiedDependencies = ({
 		}
 	};
 
+	const fetchEmail: () => Promise<string | null> =
+		lazyFetchEmailWithTimeout(idApiUrl);
+
 	return (
 		<div ref={setNode} css={wrapperMargins}>
 			<div ref={epicRef}>
@@ -166,6 +170,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 					countryCode={countryCode}
 					logButtonClickWithBraze={meta.logButtonClickWithBraze}
 					submitComponentEvent={submitComponentEvent}
+					fetchEmail={fetchEmail}
 				/>
 			</div>
 		</div>

@@ -192,7 +192,7 @@ const decideLeftContent = (
 		!hasPageSkin
 	) {
 		return (
-			<Island deferUntil={'idle'}>
+			<Island deferUntil="idle">
 				<WeatherWrapper
 					ajaxUrl={front.config.ajaxUrl}
 					edition={front.editionId}
@@ -214,10 +214,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			hasPageSkin: hasPageSkinConfig,
 		},
 	} = front;
-
-	const isInEuropeTest =
-		abTests.europeNetworkFrontVariant === 'variant' ||
-		switches['europeNetworkFrontSwitch'] === true;
 
 	const renderAds = canRenderAds(front);
 
@@ -322,7 +318,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={front.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!front.config.switches
 										.headerTopBarSearchCapi
@@ -351,7 +346,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							headerTopBarSwitch={
 								!!front.config.switches.headerTopNav
 							}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{NAV.subNavSections && (
@@ -400,11 +394,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-			{isInEuropeTest && (
-				<Island clientOnly={true}>
-					<EuropeLandingModal edition={front.editionId} />
-				</Island>
-			)}
+			<Island clientOnly={true}>
+				<EuropeLandingModal edition={front.editionId} />
+			</Island>
 			<main
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
@@ -687,7 +679,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									hasPageSkin={hasPageSkin}
 								>
-									<Island deferUntil={'visible'}>
+									<Island deferUntil="visible">
 										<Carousel
 											heading={collection.displayName}
 											trails={trails}

@@ -166,6 +166,12 @@ export function setSchedulerConcurrency(
 	CONCURRENCY_COUNT = concurrency;
 }
 
+/**
+ * Set the number of milliseconds since the scheduler was initialised
+ * after which tasks of a given priority will no longer be started.
+ *
+ * Defaults to `Infinity` for all priorities.
+ */
 export function setSchedulerPriorityLastStartTime(
 	priority: TaskPriority,
 	lastStartTime: number,

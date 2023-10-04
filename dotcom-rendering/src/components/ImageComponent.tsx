@@ -9,12 +9,17 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import { getLargest, getMaster } from '../lib/image';
 import { isWideEnough } from '../lib/lightbox';
+import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { Switches } from '../types/config';
-import type { Image, ImageBlockElement, RoleType } from '../types/content';
+import type { ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
+import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
+import { useConfig } from './ConfigContext';
 import { Hide } from './Hide';
+import { Island } from './Island';
 import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
 import { StarRating } from './StarRating/StarRating';
@@ -29,6 +34,7 @@ type Props = {
 	title?: string;
 	isAvatar?: boolean;
 	switches?: Switches;
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 const starsWrapper = css`
@@ -217,23 +223,11 @@ const CaptionToggle = () => (
 	</>
 );
 
-const descendingByWidthComparator = (a: Image, b: Image) => {
-	return parseInt(b.fields.width, 10) - parseInt(a.fields.width, 10);
-};
-
 const isSupported = (imageUrl: string): boolean => {
 	const supportedImages = ['jpg', 'jpeg', 'png'];
 	return supportedImages.some((extension) =>
 		imageUrl.endsWith(`.${extension}`),
 	);
-};
-
-export const getMaster = (images: Image[]) => {
-	return images.find((image) => image.fields.isMaster);
-};
-
-export const getLargest = (images: Image[]) => {
-	return images.slice().sort(descendingByWidthComparator)[0];
 };
 
 export const ImageComponent = ({
@@ -246,7 +240,9 @@ export const ImageComponent = ({
 	title,
 	isAvatar,
 	switches,
+	imagesForAppsLightbox,
 }: Props) => {
+	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
 	// if so, don't try to render
 	if (element.media.allImages.length === 0) {
@@ -321,16 +317,36 @@ export const ImageComponent = ({
 					position: relative;
 				`}
 			>
-				<Picture
-					role={role}
-					format={format}
-					master={image.url}
-					alt={element.data.alt ?? ''}
-					width={imageWidth}
-					height={imageHeight}
-					isLazy={!isMainMedia}
-					isMainMedia={isMainMedia}
-				/>
+				{renderingTarget === 'Apps' ? (
+					<Island>
+						<AppsLightboxImage
+							images={imagesForAppsLightbox}
+							currentIndex={imagesForAppsLightbox.findIndex(
+								(img) => img.elementId === element.elementId,
+							)}
+							role={role}
+							format={format}
+							master={image.url}
+							alt={element.data.alt ?? ''}
+							width={imageWidth}
+							height={imageHeight}
+							isLazy={!isMainMedia}
+							isMainMedia={isMainMedia}
+						/>
+					</Island>
+				) : (
+					<Picture
+						role={role}
+						format={format}
+						master={image.url}
+						alt={element.data.alt ?? ''}
+						width={imageWidth}
+						height={imageHeight}
+						isLazy={!isMainMedia}
+						isMainMedia={isMainMedia}
+					/>
+				)}
+
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
@@ -368,16 +384,36 @@ export const ImageComponent = ({
 					}
 				`}
 			>
-				<Picture
-					role={role}
-					format={format}
-					master={image.url}
-					alt={element.data.alt ?? ''}
-					width={imageWidth}
-					height={imageHeight}
-					isLazy={!isMainMedia}
-					isMainMedia={isMainMedia}
-				/>
+				{renderingTarget === 'Apps' ? (
+					<Island>
+						<AppsLightboxImage
+							images={imagesForAppsLightbox}
+							currentIndex={imagesForAppsLightbox.findIndex(
+								(img) => img.elementId === element.elementId,
+							)}
+							role={role}
+							format={format}
+							master={image.url}
+							alt={element.data.alt ?? ''}
+							width={imageWidth}
+							height={imageHeight}
+							isLazy={!isMainMedia}
+							isMainMedia={isMainMedia}
+						/>
+					</Island>
+				) : (
+					<Picture
+						role={role}
+						format={format}
+						master={image.url}
+						alt={element.data.alt ?? ''}
+						width={imageWidth}
+						height={imageHeight}
+						isLazy={!isMainMedia}
+						isMainMedia={isMainMedia}
+					/>
+				)}
+
 				{typeof starRating === 'number' && (
 					<PositionStarRating rating={starRating} />
 				)}
@@ -418,16 +454,36 @@ export const ImageComponent = ({
 					}
 				`}
 			>
-				<Picture
-					role={role}
-					format={format}
-					master={image.url}
-					alt={element.data.alt ?? ''}
-					width={imageWidth}
-					height={imageHeight}
-					isLazy={!isMainMedia}
-					isMainMedia={isMainMedia}
-				/>
+				{renderingTarget === 'Apps' ? (
+					<Island>
+						<AppsLightboxImage
+							images={imagesForAppsLightbox}
+							currentIndex={imagesForAppsLightbox.findIndex(
+								(img) => img.elementId === element.elementId,
+							)}
+							role={role}
+							format={format}
+							master={image.url}
+							alt={element.data.alt ?? ''}
+							width={imageWidth}
+							height={imageHeight}
+							isLazy={!isMainMedia}
+							isMainMedia={isMainMedia}
+						/>
+					</Island>
+				) : (
+					<Picture
+						role={role}
+						format={format}
+						master={image.url}
+						alt={element.data.alt ?? ''}
+						width={imageWidth}
+						height={imageHeight}
+						isLazy={!isMainMedia}
+						isMainMedia={isMainMedia}
+					/>
+				)}
+
 				{isMainMedia && (
 					// Below tablet, main media images show an info toggle at the bottom right of
 					// the image which, when clicked, toggles the caption as an overlay

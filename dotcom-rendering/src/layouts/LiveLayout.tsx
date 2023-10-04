@@ -14,6 +14,7 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Accordion } from '../components/Accordion';
+import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -59,7 +60,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
@@ -242,7 +243,7 @@ const paddingBody = css`
 `;
 
 interface BaseProps {
-	article: FEArticleType;
+	article: DCRArticle;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -261,10 +262,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
-
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
-		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -300,6 +297,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const renderAds = canRenderAds(article, renderingTarget);
 
 	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 
 	return (
 		<>
@@ -344,7 +342,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -371,7 +368,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								headerTopBarSwitch={
 									!!article.config.switches.headerTopNav
 								}
-								isInEuropeTest={isInEuropeTest}
 							/>
 						</Section>
 
@@ -418,6 +414,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				</div>
 			)}
 			<main data-layout="LiveLayout">
+				{isApps && (
+					<Island clientOnly={true}>
+						<AdPortals />
+					</Island>
+				)}
 				{footballMatchUrl ? (
 					<Section
 						showTopBorder={false}
@@ -450,11 +451,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Hide>
 
-						<Island
-							deferUntil="visible"
-							clientOnly={true}
-							placeholderHeight={230}
-						>
+						<Island deferUntil="visible">
 							<GetMatchNav
 								matchUrl={footballMatchUrl}
 								format={format}
@@ -580,10 +577,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										}
 										shortUrlId={article.config.shortUrlId}
 										ajaxUrl={article.config.ajaxUrl}
-										showShareCount={
-											!!article.config.switches
-												.serverShareCounts
-										}
 										messageUs={article.messageUs}
 									/>
 								</div>
@@ -677,10 +670,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							<GridItem area="media">
 								<div css={maxWidth}>
 									{!!footballMatchUrl && (
-										<Island
-											clientOnly={true}
-											placeholderHeight={40}
-										>
+										<Island>
 											<GetMatchTabs
 												matchUrl={footballMatchUrl}
 												format={format}
@@ -688,10 +678,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										</Island>
 									)}
 									{!!cricketMatchUrl && (
-										<Island
-											clientOnly={true}
-											placeholderHeight={172}
-										>
+										<Island>
 											<GetCricketScoreboard
 												matchUrl={cricketMatchUrl}
 												format={format}
@@ -708,6 +695,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										switches={article.config.switches}
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
+										imagesForAppsLightbox={
+											article.imagesForAppsLightbox
+										}
 									/>
 								</div>
 							</GridItem>
@@ -744,10 +734,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												article.config.shortUrlId
 											}
 											ajaxUrl={article.config.ajaxUrl}
-											showShareCount={
-												!!article.config.switches
-													.serverShareCounts
-											}
 											messageUs={article.messageUs}
 										/>
 									</div>
@@ -777,11 +763,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 								{/* Match stats */}
 								{!!footballMatchUrl && (
-									<Island
-										deferUntil="visible"
-										clientOnly={true}
-										placeholderHeight={800}
-									>
+									<Island deferUntil="visible">
 										<GetMatchStats
 											matchUrl={footballMatchUrl}
 											format={format}
@@ -901,6 +883,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 														article.config.abTests
 															.serverSideLiveblogInlineAdsVariant ===
 														'variant'
+													}
+													imagesForAppsLightbox={
+														article.imagesForAppsLightbox
 													}
 												/>
 												{pagination.totalPages > 1 && (
@@ -1055,6 +1040,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													isRightToLeftLang={
 														article.isRightToLeftLang
 													}
+													imagesForAppsLightbox={[]}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1178,11 +1164,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					)}
 
-					<Island
-						clientOnly={true}
-						deferUntil="visible"
-						placeholderHeight={600}
-					>
+					<Island deferUntil="visible">
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
 							hasRelated={article.hasRelated}

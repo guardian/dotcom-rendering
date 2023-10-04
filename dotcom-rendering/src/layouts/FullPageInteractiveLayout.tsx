@@ -32,12 +32,12 @@ import { renderElement } from '../lib/renderElement';
 import type { NavType } from '../model/extract-nav';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -84,6 +84,7 @@ const Renderer = ({
 			isAdFreeUser,
 			isSensitive,
 			switches,
+			imagesForAppsLightbox: [],
 		});
 
 		switch (element._type) {
@@ -140,10 +141,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	 */
 	const renderAds = canRenderAds(article);
 
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
-		article.config.switches['europeNetworkFrontSwitch'] === true;
-
 	if (isSlimNav) {
 		return (
 			<div
@@ -177,7 +174,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 			</div>
@@ -233,7 +229,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 								article.contributionsServiceUrl
 							}
 							idApiUrl={article.config.idApiUrl}
-							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
 								!!article.config.switches.headerTopBarSearchCapi
 							}
@@ -263,7 +258,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					}
 					editionId={article.editionId}
 					headerTopBarSwitch={!!article.config.switches.headerTopNav}
-					isInEuropeTest={isInEuropeTest}
 				/>
 			</Section>
 

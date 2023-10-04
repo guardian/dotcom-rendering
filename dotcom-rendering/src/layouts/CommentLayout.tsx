@@ -47,7 +47,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const StandardGrid = ({
@@ -259,7 +259,7 @@ const mainMediaWrapper = css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -268,10 +268,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
-
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
-		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
@@ -341,7 +337,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -375,7 +370,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 							headerTopBarSwitch={
 								!!article.config.switches.headerTopNav
 							}
-							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 
@@ -449,6 +443,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
+									imagesForAppsLightbox={[]}
 								/>
 							</div>
 						</GridItem>
@@ -551,10 +546,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 									}
 									shortUrlId={article.config.shortUrlId}
 									ajaxUrl={article.config.ajaxUrl}
-									showShareCount={
-										!!article.config.switches
-											.serverShareCounts
-									}
 								/>
 							</div>
 						</GridItem>
@@ -595,6 +586,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
+										imagesForAppsLightbox={[]}
 									/>
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>
@@ -726,11 +718,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
+				<Island deferUntil="visible">
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}

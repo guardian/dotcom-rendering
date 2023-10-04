@@ -33,6 +33,19 @@ const generateName = (build) => {
  * @param {Build} build
  * @returns {string}
  */
+const getEntryIndex = (build) => {
+	switch (build) {
+		case 'apps':
+			return './src/client/index.apps.ts';
+		default:
+			return './src/client/index.ts';
+	}
+};
+
+/**
+ * @param {Build} build
+ * @returns {string}
+ */
 const getLoaders = (build) => {
 	switch (build) {
 		case 'web.legacy':
@@ -66,7 +79,6 @@ const getLoaders = (build) => {
 		case 'apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'web.variant':
-		case 'web.scheduled':
 		case 'web.ophan-esm':
 		case 'web':
 			return swcLoader(getBrowserTargets());
@@ -79,10 +91,7 @@ const getLoaders = (build) => {
  */
 module.exports = ({ build, sessionId }) => ({
 	entry: {
-		index:
-			build === 'web.scheduled'
-				? './src/client/index.scheduled.ts'
-				: './src/client/index.ts',
+		index: getEntryIndex(build),
 		debug: './src/client/debug/index.ts',
 	},
 	resolve: {

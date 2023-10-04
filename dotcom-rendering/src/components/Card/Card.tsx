@@ -211,7 +211,11 @@ const getMedia = ({
 	isPlayableMediaCard?: boolean;
 }) => {
 	if (mainMedia && mainMedia.type === 'Video' && !!isPlayableMediaCard) {
-		return { type: 'video', mainMedia } as const;
+		return {
+			type: 'video',
+			mainMedia,
+			...(imageUrl && { imageUrl }),
+		} as const;
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
@@ -451,6 +455,7 @@ export const Card = ({
 										assetId={media.mainMedia.videoId}
 										duration={media.mainMedia.duration}
 										posterImage={media.mainMedia.images}
+										overrideImage={media.imageUrl}
 										width={media.mainMedia.width}
 										height={media.mainMedia.height}
 										origin={media.mainMedia.origin}
@@ -475,7 +480,7 @@ export const Card = ({
 						{media.type === 'picture' && (
 							<>
 								<CardPicture
-									master={media.imageUrl}
+									mainImage={media.imageUrl}
 									imageSize={imageSize}
 									alt={media.imageAltText}
 									loading={imageLoading}

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
+import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { Switches } from '../types/config';
 import type { ImageBlockElement } from '../types/content';
 import { Caption } from './Caption';
@@ -11,6 +12,7 @@ type Props = {
 	format: ArticleFormat;
 	caption?: string;
 	switches?: Switches;
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 const ieFallback = css`
@@ -105,11 +107,13 @@ const OneImage = ({
 	format,
 	caption,
 	switches,
+	imagesForAppsLightbox,
 }: {
 	images: [ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
 	switches?: Switches;
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 }) => (
 	<div css={wrapper}>
 		<ImageComponent
@@ -118,6 +122,7 @@ const OneImage = ({
 			hideCaption={true}
 			role={images[0].role}
 			switches={switches}
+			imagesForAppsLightbox={imagesForAppsLightbox}
 		/>
 		{!!caption && (
 			<Caption
@@ -134,11 +139,13 @@ const TwoImage = ({
 	format,
 	caption,
 	switches,
+	imagesForAppsLightbox,
 }: {
 	images: [ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
 	switches?: Switches;
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 }) => (
 	<div css={wrapper}>
 		<SideBySideGrid>
@@ -149,6 +156,7 @@ const TwoImage = ({
 					hideCaption={true}
 					role={images[0].role}
 					switches={switches}
+					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -158,6 +166,7 @@ const TwoImage = ({
 					hideCaption={true}
 					role={images[1].role}
 					switches={switches}
+					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			</GridItem>
 		</SideBySideGrid>
@@ -176,11 +185,13 @@ const ThreeImage = ({
 	format,
 	caption,
 	switches,
+	imagesForAppsLightbox,
 }: {
 	images: [ImageBlockElement, ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
 	switches?: Switches;
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 }) => (
 	<div css={wrapper}>
 		<OneAboveTwoGrid>
@@ -191,6 +202,7 @@ const ThreeImage = ({
 					hideCaption={true}
 					role={images[0].role}
 					switches={switches}
+					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -200,6 +212,7 @@ const ThreeImage = ({
 					hideCaption={true}
 					role={images[1].role}
 					switches={switches}
+					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			</GridItem>
 			<GridItem area="third">
@@ -209,6 +222,7 @@ const ThreeImage = ({
 					hideCaption={true}
 					role={images[2].role}
 					switches={switches}
+					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			</GridItem>
 		</OneAboveTwoGrid>
@@ -227,6 +241,7 @@ const FourImage = ({
 	format,
 	caption,
 	switches,
+	imagesForAppsLightbox,
 }: {
 	images: [
 		ImageBlockElement,
@@ -237,6 +252,7 @@ const FourImage = ({
 	format: ArticleFormat;
 	caption?: string;
 	switches?: Switches;
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 }) => (
 	<div css={wrapper}>
 		<GridOfFour>
@@ -247,6 +263,7 @@ const FourImage = ({
 					hideCaption={true}
 					role={images[0].role}
 					switches={switches}
+					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -256,6 +273,7 @@ const FourImage = ({
 					hideCaption={true}
 					role={images[1].role}
 					switches={switches}
+					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			</GridItem>
 			<GridItem area="third">
@@ -265,6 +283,7 @@ const FourImage = ({
 					hideCaption={true}
 					role={images[2].role}
 					switches={switches}
+					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			</GridItem>
 			<GridItem area="forth">
@@ -274,6 +293,7 @@ const FourImage = ({
 					hideCaption={true}
 					role={images[3].role}
 					switches={switches}
+					imagesForAppsLightbox={[]}
 				/>
 			</GridItem>
 		</GridOfFour>
@@ -292,6 +312,7 @@ export const MultiImageBlockComponent = ({
 	format,
 	caption,
 	switches,
+	imagesForAppsLightbox,
 }: Props) => {
 	const [one, two, three, four] = images;
 
@@ -302,6 +323,7 @@ export const MultiImageBlockComponent = ({
 				format={format}
 				caption={caption}
 				switches={switches}
+				imagesForAppsLightbox={imagesForAppsLightbox}
 			/>
 		);
 	}
@@ -313,6 +335,7 @@ export const MultiImageBlockComponent = ({
 				format={format}
 				caption={caption}
 				switches={switches}
+				imagesForAppsLightbox={imagesForAppsLightbox}
 			/>
 		);
 	}
@@ -324,6 +347,7 @@ export const MultiImageBlockComponent = ({
 				format={format}
 				caption={caption}
 				switches={switches}
+				imagesForAppsLightbox={imagesForAppsLightbox}
 			/>
 		);
 	}
@@ -335,6 +359,7 @@ export const MultiImageBlockComponent = ({
 				format={format}
 				caption={caption}
 				switches={switches}
+				imagesForAppsLightbox={imagesForAppsLightbox}
 			/>
 		);
 	}

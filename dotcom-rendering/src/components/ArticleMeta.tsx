@@ -20,11 +20,9 @@ import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
 import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
-import { Counts } from './Counts';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
 import { SendAMessage } from './SendAMessage.importable';
-import { ShareCount } from './ShareCount.importable';
 import { ShareIcons } from './ShareIcons';
 
 type Props = {
@@ -40,7 +38,6 @@ type Props = {
 	shortUrlId: string;
 	isCommentable: boolean;
 	ajaxUrl: string;
-	showShareCount: boolean;
 	messageUs?: MessageUs;
 };
 
@@ -312,7 +309,6 @@ export const ArticleMeta = ({
 	shortUrlId,
 	isCommentable,
 	ajaxUrl,
-	showShareCount,
 	messageUs,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
@@ -444,24 +440,14 @@ export const ArticleMeta = ({
 								),
 						]}
 					>
-						<Counts format={format}>
-							{/* The meta-number css is needed by Counts.tsx */}
-							<div className="meta-number">
-								{showShareCount &&
-									renderingTarget === 'Web' && (
-										<Island
-											clientOnly={true}
-											deferUntil="idle"
-										>
-											<ShareCount
-												ajaxUrl={ajaxUrl}
-												pageId={pageId}
-												format={format}
-											/>
-										</Island>
-									)}
-							</div>
-							<div className="meta-number">
+						<div
+							css={css`
+								display: flex;
+								flex-direction: row;
+								align-items: flex-start;
+							`}
+						>
+							<div>
 								{isCommentable && (
 									<Island clientOnly={true} deferUntil="idle">
 										<CommentCount
@@ -472,7 +458,7 @@ export const ArticleMeta = ({
 									</Island>
 								)}
 							</div>
-						</Counts>
+						</div>
 					</div>
 				</div>
 			</div>

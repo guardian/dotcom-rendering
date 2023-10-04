@@ -48,7 +48,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import {
 	interactiveGlobalStyles,
 	interactiveLegacyClasses,
@@ -201,7 +201,7 @@ const starWrapper = css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -210,10 +210,6 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
-
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant' ||
-		article.config.switches['europeNetworkFrontSwitch'] === true;
 
 	const showComments = article.isCommentable;
 
@@ -279,7 +275,6 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!article.config.switches
 										.headerTopBarSearchCapi
@@ -314,7 +309,6 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
-						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 
@@ -396,6 +390,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 										switches={article.config.switches}
 										isAdFreeUser={article.isAdFreeUser}
 										isSensitive={article.config.isSensitive}
+										imagesForAppsLightbox={[]}
 									/>
 								</div>
 							</GridItem>
@@ -484,10 +479,6 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 										}
 										shortUrlId={article.config.shortUrlId}
 										ajaxUrl={article.config.ajaxUrl}
-										showShareCount={
-											!!article.config.switches
-												.serverShareCounts
-										}
 									/>
 								</div>
 							</GridItem>
@@ -526,6 +517,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
+										imagesForAppsLightbox={[]}
 									/>
 								</ArticleContainer>
 							</GridItem>
@@ -642,11 +634,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
+				<Island deferUntil="visible">
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}

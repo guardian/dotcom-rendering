@@ -359,26 +359,7 @@
                             "editionBrandings": {
                                 "type": "array",
                                 "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "edition": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "$ref": "#/definitions/EditionId"
-                                                }
-                                            },
-                                            "required": [
-                                                "id"
-                                            ]
-                                        },
-                                        "branding": {
-                                            "$ref": "#/definitions/Branding"
-                                        }
-                                    },
-                                    "required": [
-                                        "edition"
-                                    ]
+                                    "$ref": "#/definitions/EditionBranding"
                                 }
                             },
                             "href": {
@@ -1367,6 +1348,28 @@
                 "mediaType",
                 "mimeType",
                 "url"
+            ]
+        },
+        "EditionBranding": {
+            "type": "object",
+            "properties": {
+                "edition": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "$ref": "#/definitions/EditionId"
+                        }
+                    },
+                    "required": [
+                        "id"
+                    ]
+                },
+                "branding": {
+                    "$ref": "#/definitions/Branding"
+                }
+            },
+            "required": [
+                "edition"
             ]
         },
         "EditionId": {

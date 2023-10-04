@@ -21,15 +21,15 @@ import { extractNAV } from '../model/extract-nav';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
-import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
+import type { DCRArticle, FEBlocksRequest } from '../types/frontend';
 import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticle;
 }
 
-const decideTitle = (article: FEArticleType): string => {
+const decideTitle = (article: DCRArticle): string => {
 	if (decideTheme(article.format) === Pillar.Opinion && article.byline) {
 		return `${article.headline} | ${article.byline} | The Guardian`;
 	}

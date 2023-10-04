@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
+import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { CommentLayout } from './CommentLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
@@ -9,11 +9,12 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
+import { PictureLayout } from './PictureLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
 interface BaseProps {
-	article: FEArticleType;
+	article: DCRArticle;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -30,16 +31,21 @@ interface WebProps extends BaseProps {
 const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 	const notSupported = <pre>Not supported</pre>;
 	switch (format.display) {
-		case ArticleDisplay.Standard: {
+		case ArticleDisplay.Immersive: {
 			switch (format.design) {
-				case ArticleDesign.Standard:
-					return (
-						<StandardLayout
-							article={article}
-							format={format}
-							renderingTarget={renderingTarget}
-						/>
-					);
+				case ArticleDesign.Interactive: {
+					// Should be InteractiveLayout once implemented for apps
+					return notSupported;
+				}
+				default: {
+					// Should be FullPageInteractiveLayout once implemented for apps
+					return notSupported;
+				}
+			}
+		}
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Showcase: {
+			switch (format.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
@@ -49,12 +55,55 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 							renderingTarget={renderingTarget}
 						/>
 					);
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+					// Should be CommentLayout once implemented for apps
+					return notSupported;
+				case ArticleDesign.Picture:
+					// Should be PictureLayout once implemented for apps
+					return notSupported;
 				default:
+					// Should be ShowcaseLayout once implemented for apps
 					return notSupported;
 			}
 		}
-		default:
-			return notSupported;
+		case ArticleDisplay.Standard:
+		default: {
+			switch (format.design) {
+				case ArticleDesign.Interactive:
+					// Should be InteractiveLayout once implemented for apps
+					return notSupported;
+				case ArticleDesign.FullPageInteractive: {
+					// Should be FullPageInteractiveLayout once implemented for apps
+					return notSupported;
+				}
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return (
+						<LiveLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+					// Should be CommentLayout once implemented for apps
+					return notSupported;
+				case ArticleDesign.NewsletterSignup:
+					return notSupported;
+				default:
+					return (
+						<StandardLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+			}
+		}
 	}
 };
 
@@ -109,6 +158,14 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
+							article={article}
+							NAV={NAV}
+							format={format}
+						/>
+					);
+				case ArticleDesign.Picture:
+					return (
+						<PictureLayout
 							article={article}
 							NAV={NAV}
 							format={format}

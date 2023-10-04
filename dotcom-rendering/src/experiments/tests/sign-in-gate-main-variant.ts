@@ -19,7 +19,7 @@ export const signInGateMainVariant: ABTest = {
 	canRun: () => true,
 	variants: [
 		{
-			id: 'main-variant-4',
+			id: 'main-variant-5',
 			test: (): void => {},
 		},
 	],
