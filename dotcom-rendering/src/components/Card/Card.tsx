@@ -444,60 +444,77 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{media.type === 'video' && showMainVideo && (
-							<div
-								data-chromatic="ignore"
-								data-component="youtube-atom"
-								css={css`
-									display: block;
-									position: relative;
-									${getZIndex('card-nested-link')}
-								`}
-							>
+						{media.type === 'video' && (
+							<>
+								{showMainVideo ? (
+									<div
+										data-chromatic="ignore"
+										data-component="youtube-atom"
+										css={css`
+											display: block;
+											position: relative;
+											${getZIndex('card-nested-link')}
+										`}
+									>
 								<Island priority="critical">
-									<YoutubeBlockComponent
-										id={media.mainMedia.elementId}
-										elementId={media.mainMedia.elementId}
-										assetId={media.mainMedia.videoId}
-										duration={media.mainMedia.duration}
-										posterImage={media.mainMedia.images}
-										overrideImage={media.imageUrl}
-										width={media.mainMedia.width}
-										height={media.mainMedia.height}
-										origin={media.mainMedia.origin}
-										mediaTitle={headlineText}
-										expired={media.mainMedia.expired}
-										format={format}
-										isMainMedia={true}
-										hideCaption={true}
-										stickyVideos={false}
-										kickerText={kickerText}
-										pauseOffscreenVideo={
-											pauseOffscreenVideo
-										}
-										showTextOverlay={
-											containerType === 'fixed/video'
-										}
-									/>
-								</Island>
-							</div>
-						)}
-						{media.type === 'video' && !showMainVideo && (
-							<div>
-								<CardPicture
-									master={
-										media.mainMedia.images.reduce(
-											(prev, current) =>
-												prev.width > current.width
-													? prev
-													: current,
-										).url
-									}
-									imageSize={imageSize}
-									alt={headlineText}
-									loading={imageLoading}
-								/>
-							</div>
+											<YoutubeBlockComponent
+												id={media.mainMedia.elementId}
+												elementId={
+													media.mainMedia.elementId
+												}
+												assetId={
+													media.mainMedia.videoId
+												}
+												duration={
+													media.mainMedia.duration
+												}
+												posterImage={
+													media.mainMedia.images
+												}
+												overrideImage={media.imageUrl}
+												width={media.mainMedia.width}
+												height={media.mainMedia.height}
+												origin={media.mainMedia.origin}
+												mediaTitle={headlineText}
+												expired={
+													media.mainMedia.expired
+												}
+												format={format}
+												isMainMedia={true}
+												hideCaption={true}
+												stickyVideos={false}
+												kickerText={kickerText}
+												pauseOffscreenVideo={
+													pauseOffscreenVideo
+												}
+												showTextOverlay={
+													containerType ===
+													'fixed/video'
+												}
+											/>
+										</Island>
+									</div>
+								) : (
+									<div>
+										<CardPicture
+											mainImage={
+												media.imageUrl
+													? media.imageUrl
+													: media.mainMedia.images.reduce(
+															(prev, current) =>
+																prev.width >
+																current.width
+																	? prev
+																	: current,
+													  ).url
+											}
+											imageSize={imageSize}
+											alt={headlineText}
+											loading={imageLoading}
+										/>
+									</div>
+								)}
+							</>
 						)}
 						{media.type === 'picture' && (
 							<>
