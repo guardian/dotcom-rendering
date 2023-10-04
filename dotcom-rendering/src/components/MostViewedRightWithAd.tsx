@@ -32,7 +32,11 @@ export const MostViewedRightWithAd = ({
 			// can measure the height of this component
 			data-container={componentDataAttribute}
 			css={css`
-				height: 100%;
+				/* On Apps - we don't restrict the height, so the ads can be spaced along the entire article height
+				 * On Web - we restrict the height to the maximum height, so that the top right ad can be sticky until the
+				 *          most viewed component is in view at MAX_HEIGHT_PX, or 100% of the article height if it is a short article
+				*/
+				height: ${isApps ? '100%' : `min(100%, ${MAX_HEIGHT_PX}px)`};
 				display: flex;
 				flex-direction: column;
 			`}
