@@ -64,8 +64,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 					// Should be PictureLayout once implemented for apps
 					return notSupported;
 				default:
-					// Should be ShowcaseLayout once implemented for apps
-					return notSupported;
+					return (
+						<ShowcaseLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 			}
 		}
 		case ArticleDisplay.Standard:
@@ -177,6 +182,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 			}
