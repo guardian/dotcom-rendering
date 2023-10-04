@@ -13,6 +13,7 @@ import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
+import { eagerPrebid } from '../experiments/tests/eager-prebid';
 
 type Props = {
 	commercialMetricsEnabled: boolean;
@@ -27,6 +28,7 @@ const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 	integrateIma,
 	billboardsInMerchHigh,
+	eagerPrebid,
 ];
 
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {
