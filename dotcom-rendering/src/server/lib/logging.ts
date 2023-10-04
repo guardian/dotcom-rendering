@@ -3,12 +3,7 @@ import type { LoggingEvent } from 'log4js';
 import { addLayout, configure, getLogger, shutdown } from 'log4js';
 import { loggingStore } from './logging-store';
 
-// write separate log files for each app instance
-// required when running multiple processes
-// NODE_APP_INSTANCE is set by pm2
-// aws-kinesis-agent is configured to look for a file pattern
-const appInstance = process.env.NODE_APP_INSTANCE ?? '0';
-const logName = `dotcom-rendering-${appInstance}.log`;
+const logName = `dotcom-rendering.log`;
 
 const logLocation =
 	process.env.NODE_ENV === 'production' &&
@@ -33,7 +28,8 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 		level: logEvent.level.levelStr,
 		level_value: logEvent.level.level,
 		request,
-		thread_name: appInstance,
+		// NODE_APP_INSTANCE is set by pm2
+		thread_name: process.env.NODE_APP_INSTANCE ?? '0',
 	};
 	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
@@ -85,7 +81,9 @@ const enableLog4j = {
 		development: { appenders: ['console'], level: 'info' },
 	},
 	pm2: true,
-	// tell log4js not to cluster logs and write to seperate files
+	// log4js cluster mode handling does not work as it prevents
+	// logs from processes other than the main process from
+	// writing to the log.
 	disableClustering: true,
 };
 
