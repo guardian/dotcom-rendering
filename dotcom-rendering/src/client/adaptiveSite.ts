@@ -1,8 +1,12 @@
+import { log } from '@guardian/libs';
 import { isServer } from '../lib/isServer';
+import { setSchedulerPriorityLastStartTime } from '../lib/scheduler';
 
 /**
  * Whether we should adapt the current page to address poor performance issues.
- * Initially this will only happen as part of a @guardian/open-journalism test.
+ *
+ * It will resolve immediately if `false`, but needs to wait for perf check to
+ * complete if you're in the adaptive site test variant.
  */
 export const shouldAdapt = async (): Promise<boolean> => {
 	if (isServer) return false;
@@ -17,4 +21,20 @@ export const shouldAdapt = async (): Promise<boolean> => {
 	);
 
 	return isPerformingPoorly();
+};
+
+/**  Hide all placeholders of non-critical islands */
+const hideAdaptedIslands = () => {
+	const style = document.createElement('style');
+	style.innerHTML = `gu-island:not([priority=critical]) [data-name=placeholder] { display: none; }`;
+	document.head.appendChild(style);
+};
+
+export const adaptSite = (): void => {
+	log('openJournalism', '🎛️ Adapting');
+
+	// disable all tasks except critical ones
+	setSchedulerPriorityLastStartTime('feature', 0);
+	setSchedulerPriorityLastStartTime('enhancement', 0);
+	hideAdaptedIslands();
 };
