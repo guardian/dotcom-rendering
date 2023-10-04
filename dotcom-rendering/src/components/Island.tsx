@@ -1,4 +1,4 @@
-import type { ScheduleOptions } from '../lib/scheduler';
+import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
 import { useConfig } from './ConfigContext';
 
 type DeferredProps = {
@@ -22,16 +22,16 @@ type DeferredProps = {
 
 type PriorityProps = {
 	critical: {
-		priority: 'critical';
+		priority: SchedulePriority['critical'];
 		// a critical island should never defer until idle
 		defer?: DeferredProps[Exclude<keyof DeferredProps, 'idle'>];
 	};
 	feature: {
-		priority: 'feature';
+		priority: SchedulePriority['feature'];
 		defer: DeferredProps[keyof DeferredProps];
 	};
 	enhancement: {
-		priority: 'enhancement';
+		priority: SchedulePriority['enhancement'];
 		defer: DeferredProps[keyof DeferredProps];
 	};
 };
@@ -43,7 +43,7 @@ type IslandProps = {
 
 type ClientOnlyPriorityProps = {
 	critical: {
-		priority: 'critical';
+		priority: SchedulePriority['critical'];
 		// a critical island should never defer until idle
 		// a ClientOnly island should never defer until interaction
 		defer?: DeferredProps[Exclude<
@@ -52,11 +52,11 @@ type ClientOnlyPriorityProps = {
 		>];
 	};
 	feature: {
-		priority: 'feature';
+		priority: SchedulePriority['feature'];
 		defer: DeferredProps[Exclude<keyof DeferredProps, 'interaction'>];
 	};
 	enhancement: {
-		priority: 'enhancement';
+		priority: SchedulePriority['enhancement'];
 		defer: DeferredProps[Exclude<keyof DeferredProps, 'interaction'>];
 	};
 };
