@@ -10,8 +10,8 @@ import type { FEFrontCard } from '../types/front';
 import { assertUnreachable } from './assert-unreachable';
 import type { EditionId } from './edition';
 import { guard } from './guard';
-import type { NonEmpty } from './non-empty';
-import { isNonEmpty } from './non-empty';
+import type { NonEmptyArray } from './non-empty-array';
+import { isNonEmptyArray } from './non-empty-array';
 
 export const pickBrandingForEdition = (
 	editionBrandings: EditionBranding[],
@@ -24,7 +24,7 @@ export const pickBrandingForEdition = (
 const getBrandingFromCards = (
 	cards: FEFrontCard[],
 	editionId: EditionId,
-): NonEmpty<Branding> | undefined => {
+): NonEmptyArray<Branding> | undefined => {
 	const brandings: Branding[] = [];
 	for (const card of cards) {
 		const branding = pickBrandingForEdition(
@@ -37,7 +37,7 @@ const getBrandingFromCards = (
 		}
 		brandings.push(branding);
 	}
-	if (!isNonEmpty(brandings)) {
+	if (!isNonEmptyArray(brandings)) {
 		return undefined;
 	}
 	return brandings;
@@ -49,9 +49,10 @@ const isCollectionBrandingKind = guard([
 	'foundation',
 ] as const);
 
-const getBrandingType = ([firstBranding, ...restBranding]: NonEmpty<Branding>):
-	| BrandingKind
-	| undefined => {
+const getBrandingType = ([
+	firstBranding,
+	...restBranding
+]: NonEmptyArray<Branding>): BrandingKind | undefined => {
 	const name = firstBranding.brandingType?.name;
 
 	if (!isCollectionBrandingKind(name)) {
@@ -72,7 +73,7 @@ const getBrandingType = ([firstBranding, ...restBranding]: NonEmpty<Branding>):
 const everyCardHasSameSponsor = ([
 	firstBranding,
 	...restBranding
-]: NonEmpty<Branding>): boolean =>
+]: NonEmptyArray<Branding>): boolean =>
 	restBranding.every(
 		(branding) => branding.sponsorName === firstBranding.sponsorName,
 	);
