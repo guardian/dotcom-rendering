@@ -2,7 +2,6 @@ import { getCookie, isObject, removeCookie, setCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import {
 	adFreeDataIsPresent,
-	cookieIsExpiredOrMissing,
 	dateDiffDays,
 	fetchJson,
 	getAdFreeCookie,

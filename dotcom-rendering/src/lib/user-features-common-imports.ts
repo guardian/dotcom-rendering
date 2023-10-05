@@ -6,8 +6,8 @@ import type {
 import { getCookie, setCookie } from '@guardian/libs';
 // API IMPORTS
 //Transient deps
-import EventEmitter from 'wolfy87-eventemitter'; //  add to Package.json	"wolfy87-eventemitter": "^5.2.9"
-import { getAuthStatus } from './useAuthStatus';
+import EventEmitter from 'wolfy87-eventemitter';
+import { getAuthStatus } from './identity';
 
 type CustomClaimValue = string | boolean | number;
 type CustomClaims = Record<string, CustomClaimValue | CustomClaimValue[]>;
