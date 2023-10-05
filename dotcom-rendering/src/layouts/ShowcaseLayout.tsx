@@ -474,7 +474,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
 				{renderingTarget === 'Apps' && (
-					<Island clientOnly={true}>
+					<Island priority="critical" clientOnly={true}>
 						<AdPortals />
 					</Island>
 				)}
@@ -916,7 +916,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					showSideBorders={false}
 					element="footer"
 				>
-					<Island>
+					<Island priority="critical">
 						<AppsFooter />
 					</Island>
 				</Section>
