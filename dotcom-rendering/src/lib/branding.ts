@@ -6,12 +6,17 @@ import type {
 	CollectionBranding,
 	EditionBranding,
 } from '../types/branding';
-import type { FEFrontCard } from '../types/front';
 import { assertUnreachable } from './assert-unreachable';
 import type { EditionId } from './edition';
 import { guard } from './guard';
 import type { NonEmptyArray } from './non-empty-array';
 import { isNonEmptyArray } from './non-empty-array';
+
+/**
+ * For the sake of determine branding on a collection, these are the only
+ * properties we care about for any given card
+ */
+type CardWithBranding = { properties: { editionBrandings: EditionBranding[] } };
 
 export const pickBrandingForEdition = (
 	editionBrandings: EditionBranding[],
@@ -22,7 +27,7 @@ export const pickBrandingForEdition = (
 	)?.branding;
 
 const getBrandingFromCards = (
-	cards: FEFrontCard[],
+	cards: CardWithBranding[],
 	editionId: EditionId,
 ): NonEmptyArray<Branding> | undefined => {
 	const brandings: Branding[] = [];
@@ -120,7 +125,7 @@ export const decideCollectionBranding = ({
 	frontBranding: Branding | undefined;
 	index: number;
 	seriesTag: string | undefined;
-	cards: FEFrontCard[];
+	cards: CardWithBranding[];
 	editionId: EditionId;
 }): CollectionBranding | undefined => {
 	// TODO it might not be enough to first check the first index
