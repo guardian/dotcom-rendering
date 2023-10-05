@@ -10,7 +10,7 @@ export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 
 type Props = {
 	imageSize: ImageSizeType;
-	master: string;
+	mainImage: string;
 	loading: Loading;
 	alt?: string;
 };
@@ -94,8 +94,8 @@ const aspectRatio = css`
 	}
 `;
 
-export const CardPicture = ({ master, alt, imageSize, loading }: Props) => {
-	const sources = generateSources(master, decideImageWidths(imageSize));
+export const CardPicture = ({ mainImage, alt, imageSize, loading }: Props) => {
+	const sources = generateSources(mainImage, decideImageWidths(imageSize));
 
 	const fallbackSource = getFallbackSource(sources);
 

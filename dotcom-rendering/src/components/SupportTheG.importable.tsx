@@ -18,9 +18,7 @@ import type {
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import type { OphanRecordFunction } from '../client/ophan/ophan';
 import {
-	getOphanRecordFunction,
 	sendOphanComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
@@ -164,7 +162,6 @@ type ReaderRevenueLinksRemoteProps = {
 	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
-	ophanRecord: OphanRecordFunction;
 };
 
 function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
@@ -184,7 +181,6 @@ const ReaderRevenueLinksRemote = ({
 	countryCode,
 	pageViewId,
 	contributionsServiceUrl,
-	ophanRecord,
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData | null>(null);
@@ -253,7 +249,7 @@ const ReaderRevenueLinksRemote = ({
 				<SupportHeader
 					submitComponentEvent={(
 						componentEvent: OphanComponentEvent,
-					) => submitComponentEvent(componentEvent, ophanRecord)}
+					) => void submitComponentEvent(componentEvent)}
 					{...supportHeaderResponse.props}
 				/>
 			</div>
@@ -272,7 +268,6 @@ type ReaderRevenueLinksNativeProps = {
 		support: string;
 		contribute: string;
 	};
-	ophanRecord: OphanRecordFunction;
 	pageViewId: string;
 	hasPageSkin: boolean;
 };
@@ -282,7 +277,6 @@ const ReaderRevenueLinksNative = ({
 	dataLinkNamePrefix,
 	inHeader,
 	urls,
-	ophanRecord,
 	pageViewId,
 	hasPageSkin,
 }: ReaderRevenueLinksNativeProps) => {
@@ -305,14 +299,14 @@ const ReaderRevenueLinksNative = ({
 
 	useEffect(() => {
 		if (!hideSupportMessaging && inHeader) {
-			sendOphanComponentEvent('INSERT', tracking, ophanRecord);
+			void sendOphanComponentEvent('INSERT', tracking);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		if (hasBeenSeen && inHeader) {
-			sendOphanComponentEvent('VIEW', tracking, ophanRecord);
+			void sendOphanComponentEvent('VIEW', tracking);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hasBeenSeen]);
@@ -433,7 +427,6 @@ export const SupportTheG = ({
 }: Props) => {
 	const [countryCode, setCountryCode] = useState<string>();
 	const pageViewId = window.guardian.config.ophan.pageViewId;
-	const ophanRecord = getOphanRecordFunction();
 
 	useEffect(() => {
 		const callFetch = () => {
@@ -455,7 +448,6 @@ export const SupportTheG = ({
 					countryCode={countryCode}
 					pageViewId={pageViewId}
 					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophanRecord}
 				/>
 			);
 		}
@@ -465,7 +457,6 @@ export const SupportTheG = ({
 				dataLinkNamePrefix={dataLinkNamePrefix}
 				inHeader={inHeader}
 				urls={urls}
-				ophanRecord={ophanRecord}
 				pageViewId={pageViewId}
 				hasPageSkin={hasPageSkin}
 			/>

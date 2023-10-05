@@ -3,6 +3,7 @@ import {
 	shouldDisplayAd,
 } from '../lib/liveblogAdSlots';
 import type { Switches } from '../types/config';
+import { AdPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
 import { LiveBlock } from './LiveBlock';
@@ -164,9 +165,7 @@ export const LiveBlogBlocksAndAdverts = ({
 							/>
 						)}
 
-						{shouldInsertAppAd && (
-							<div className="ad-portal-placeholder" />
-						)}
+						{shouldInsertAppAd && <AdPlaceholder />}
 					</>
 				);
 			})}

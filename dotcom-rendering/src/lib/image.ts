@@ -34,15 +34,15 @@ const getServiceFromUrl = (url: URL): string => {
  *
  */
 export const generateImageURL = ({
-	master,
+	mainImage,
 	imageWidth,
 	resolution,
 }: {
-	master: string;
+	mainImage: string;
 	imageWidth: number;
 	resolution: 'low' | 'high';
 }): string => {
-	const url = new URL(master);
+	const url = new URL(mainImage);
 
 	// In CODE, we do not generate optimised replacement images
 	if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;

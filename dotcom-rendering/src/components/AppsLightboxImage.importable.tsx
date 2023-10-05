@@ -44,7 +44,7 @@ export const AppsLightboxImage = ({
 							width: image.width,
 							height: image.height,
 							url: generateImageURL({
-								master: image.masterUrl,
+								mainImage: image.masterUrl,
 								imageWidth,
 								resolution,
 							}),

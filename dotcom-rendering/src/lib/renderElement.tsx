@@ -6,6 +6,7 @@ import {
 } from '@guardian/atoms-rendering';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
+import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -476,7 +477,7 @@ export const renderElement = ({
 
 			return <EmailSignUpSwitcher {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
-			return <div className="ad-portal-placeholder"></div>;
+			return <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<NumberedTitleBlockComponent
@@ -744,7 +745,6 @@ export const renderElement = ({
 						format={format}
 						key={index}
 						hideCaption={hideCaption}
-						role="inline"
 						isMainMedia={isMainMedia}
 						id={element.id}
 						elementId={element.elementId}
