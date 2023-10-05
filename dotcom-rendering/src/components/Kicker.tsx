@@ -33,7 +33,7 @@ export const Kicker = ({
 			]}
 		>
 			{showPulsingDot && (
-				<Island deferUntil="visible">
+				<Island defer={{ until: 'visible' }}>
 					<PulsingDot colour={color} />
 				</Island>
 			)}

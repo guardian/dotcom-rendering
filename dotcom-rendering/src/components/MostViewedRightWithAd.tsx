@@ -52,11 +52,13 @@ export const MostViewedRightWithAd = ({
 			{!isPaidContent ? (
 				<Island
 					clientOnly={true}
-					deferUntil="visible"
-					// Provide a much higher value for the top margin for the intersection observer
-					// This is because the most viewed would otherwise only be lazy loaded when the
-					// bottom of the container intersects with the viewport
-					rootMargin="700px 100px"
+					defer={{
+						until: 'visible',
+						// Provide a much higher value for the top margin for the intersection observer
+						// This is because the most viewed would otherwise only be lazy loaded when the
+						// bottom of the container intersects with the viewport
+						rootMargin: '700px 100px',
+					}}
 				>
 					<MostViewedRightWrapper
 						maxHeightPx={MAX_HEIGHT_PX}

@@ -192,7 +192,7 @@ const decideLeftContent = (
 		!hasPageSkin
 	) {
 		return (
-			<Island deferUntil="idle">
+			<Island defer={{ until: 'idle' }}>
 				<WeatherWrapper
 					ajaxUrl={front.config.ajaxUrl}
 					edition={front.editionId}
@@ -356,7 +356,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								element="aside"
 								hasPageSkin={hasPageSkin}
 							>
-								<Island deferUntil="idle">
+								<Island defer={{ until: 'idle' }}>
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
@@ -679,7 +679,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									hasPageSkin={hasPageSkin}
 								>
-									<Island deferUntil="visible">
+									<Island defer={{ until: 'visible' }}>
 										<Carousel
 											heading={collection.displayName}
 											trails={trails}
@@ -832,7 +832,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						hasPageSkin ? background.primary : undefined
 					}
 				>
-					<Island deferUntil="visible">
+					<Island defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -864,7 +864,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			</Section>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island defer={{ until: 'idle' }} clientOnly={true}>
 					<StickyBottomBanner
 						contentType={front.config.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

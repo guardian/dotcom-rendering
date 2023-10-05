@@ -350,7 +350,7 @@ export const Card = ({
 								min-height: 10px;
 							`}
 						>
-							<Island deferUntil="visible">
+							<Island defer={{ until: 'visible' }}>
 								<CardCommentCount
 									format={format}
 									discussionApiUrl={discussionApiUrl}

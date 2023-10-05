@@ -78,7 +78,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<Island clientOnly={true}>
 						<LightboxHash />
 					</Island>
-					<Island clientOnly={true} deferUntil="hash">
+					<Island clientOnly={true} defer={{ until: 'hash' }}>
 						<LightboxJavascript
 							format={format}
 							images={article.imagesForLightbox}
@@ -86,7 +86,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					</Island>
 				</>
 			)}
-			<Island clientOnly={true} deferUntil="idle">
+			<Island clientOnly={true} defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
 			{(format.design === ArticleDesign.LiveBlog ||
@@ -96,20 +96,20 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			{renderingTarget === 'Web' && (
 				<>
 					<SkipTo id="navigation" label="Skip to navigation" />
-					<Island clientOnly={true} deferUntil="idle">
+					<Island clientOnly={true} defer={{ until: 'idle' }}>
 						<AlreadyVisited />
 					</Island>
-					<Island clientOnly={true} deferUntil="idle">
+					<Island clientOnly={true} defer={{ until: 'idle' }}>
 						<Metrics
 							commercialMetricsEnabled={
 								!!article.config.switches.commercialMetrics
 							}
 						/>
 					</Island>
-					<Island clientOnly={true} deferUntil="idle">
+					<Island clientOnly={true} defer={{ until: 'idle' }}>
 						<BrazeMessaging idApiUrl={article.config.idApiUrl} />
 					</Island>
-					<Island clientOnly={true} deferUntil="idle">
+					<Island clientOnly={true} defer={{ until: 'idle' }}>
 						<ReaderRevenueDev
 							shouldHideReaderRevenue={
 								article.shouldHideReaderRevenue

@@ -1,76 +1,36 @@
 import { useConfig } from './ConfigContext';
 
-/**
- * An island can be server-side rendered and then hydrated on the client,
- * or simply rendered on the client (with the server rendering nothing).
- */
-type ClientOnlyProps = { clientOnly?: true };
-
-type DefaultProps = ClientOnlyProps & {
-	deferUntil?: never;
-	rootMargin?: never;
-	children: JSX.Element;
-};
-
-/**
- * The possible props for an island that should be hydrated/rendered when it
- * becomes visible
- */
-type VisibleProps = ClientOnlyProps & {
-	deferUntil: 'visible';
+type VisibleProps = {
+	until: 'visible';
 	/**
 	 * @see https://developer.mozilla.org/en-us/docs/web/api/intersectionobserver/rootmargin
 	 */
 	rootMargin?: string;
-	children: JSX.Element;
 };
 
-/**
- * The possible props for an island that should be hydrated/rendered when the
- * browser is idle
- */
-type IdleProps = ClientOnlyProps & {
-	deferUntil: 'idle';
-	rootMargin?: never;
-	children: JSX.Element;
+type IdleProps = {
+	until: 'idle';
 };
 
-/**
- * The possible props for an island that should be hydrated when a user
- * interacts with the island
- */
 type InteractionProps = {
-	deferUntil: 'interaction';
-	clientOnly?: never;
-	rootMargin?: never;
-	children: JSX.Element;
+	until: 'interaction';
 };
 
-/**
- * The possible props for an island that should be rendered when a user adds a
- * hash fragment to the page URL
- */
 type HashProps = {
-	deferUntil: 'hash';
-	clientOnly: true;
-	rootMargin?: never;
-	children: JSX.Element;
+	until: 'hash';
 };
 
-/**
- * Props
- *
- * We use a union type here to support conditional typing.
- *
- * This means you can only supply:
- * - `rootMargin` if `deferUntil` is `visible`
- */
-type Props =
-	| DefaultProps
-	| VisibleProps
-	| IdleProps
-	| InteractionProps
-	| HashProps;
+type IslandProps = {
+	children: JSX.Element;
+	clientOnly?: never;
+	defer?: VisibleProps | IdleProps | InteractionProps | HashProps;
+};
+
+type ClientOnlyIslandProps = {
+	children: JSX.Element;
+	clientOnly: true;
+	defer?: VisibleProps | IdleProps | HashProps;
+};
 
 /**
  * Adds interactivity to the client by either hydrating or inserting content
@@ -78,20 +38,14 @@ type Props =
  * Note. The component passed as children must follow the [MyComponent].importable.tsx
  * namimg convention
  *
- * @param {HydrateProps | ClientOnlyProps} props - JSX Props
- * @param {JSX.IntrinsicElements["gu-island"]} props.deferUntil - Delay when client code should execute
- * 		- idle - Execute when browser idle
- * 		- visible - Execute when component appears in viewport
- *      - interaction - Execute when component is clicked on in the viewport
- * @param {boolean} props.clientOnly - Should the component be server side rendered
+ * @param {IslandProps | ClientOnlyIslandProps} props - JSX Props
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
  */
 export const Island = ({
-	deferUntil,
 	clientOnly,
-	rootMargin,
+	defer,
 	children,
-}: Props) => {
+}: IslandProps | ClientOnlyIslandProps) => {
 	/**
 	 * Where is this coming from?
 	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
@@ -100,11 +54,14 @@ export const Island = ({
 	 */
 	const config = useConfig();
 
+	const rootMargin =
+		defer?.until === 'visible' ? defer.rootMargin : undefined;
+
 	return (
 		<gu-island
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
 			name={children.type.name}
-			deferUntil={deferUntil}
+			deferUntil={defer?.until}
 			props={JSON.stringify(children.props)}
 			clientOnly={clientOnly}
 			rootMargin={rootMargin}
@@ -123,3 +80,21 @@ export const islandNoscriptStyles = `
 	gu-island[clientOnly] { display: none; }
 </style>
 `;
+
+/**
+ * Used for JSX custom element declaration
+ * {@link ../../index.d.ts}
+ */
+export type GuIsland = {
+	name: string;
+	deferUntil?: NonNullable<IslandProps['defer']>['until'];
+	rootMargin?: string;
+	clientOnly?: boolean;
+	props: string;
+	children: React.ReactNode;
+	/**
+	 * This should be a stringified JSON of `ConfigContext`
+	 * @see /dotcom-rendering/src/types/configContext.ts
+	 */
+	config: string;
+};
