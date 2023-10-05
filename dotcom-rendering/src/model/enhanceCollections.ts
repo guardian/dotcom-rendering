@@ -24,6 +24,21 @@ const isSupported = (collection: FECollectionType): boolean =>
 		)
 	);
 
+const findCollectionSuitableForFrontBranding = (
+	collections: FECollectionType[],
+) => {
+	// Find the lowest indexed front that COULD display branding
+	const index = collections.findIndex(
+		({ collectionType }) => collectionType !== 'fixed/thrasher',
+	);
+	// `findIndex` returns -1 when no element is found
+	// Treat that instead as undefined
+	if (index === -1) {
+		return undefined;
+	}
+	return index;
+};
+
 export const enhanceCollections = ({
 	collections,
 	editionId,
@@ -41,13 +56,15 @@ export const enhanceCollections = ({
 	onPageDescription?: string;
 	isOnPaidContentFront?: boolean;
 }): DCRCollectionType[] => {
+	const indexToShowFrontBranding =
+		findCollectionSuitableForFrontBranding(collections);
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
 		const allCards = [...collection.curated, ...collection.backfill];
 		const collectionBranding = decideCollectionBranding({
 			frontBranding,
-			index,
+			couldDisplayFrontBranding: index === indexToShowFrontBranding,
 			seriesTag: collection.config.href,
 			cards: allCards,
 			editionId,

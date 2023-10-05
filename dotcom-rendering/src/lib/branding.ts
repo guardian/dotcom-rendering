@@ -88,8 +88,8 @@ const everyCardHasSameSponsor = ([
  */
 const brandingEqual = (b1: Branding, b2: Branding) => {
 	return (
-		b1.sponsorName === b2.sponsorName &&
-		b1.brandingType?.name === b2.brandingType?.name
+		b1.brandingType?.name === b2.brandingType?.name &&
+		b1.sponsorName === b2.sponsorName
 	);
 };
 
@@ -117,20 +117,18 @@ export const badgeFromBranding = (
 
 export const decideCollectionBranding = ({
 	frontBranding,
-	index,
+	couldDisplayFrontBranding,
 	seriesTag,
 	cards,
 	editionId,
 }: {
 	frontBranding: Branding | undefined;
-	index: number;
+	couldDisplayFrontBranding: boolean;
 	seriesTag: string | undefined;
 	cards: CardWithBranding[];
 	editionId: EditionId;
 }): CollectionBranding | undefined => {
-	// TODO it might not be enough to first check the first index
-	// For example, what if the first container is a thrasher?
-	if (index === 0 && frontBranding !== undefined) {
+	if (couldDisplayFrontBranding && frontBranding !== undefined) {
 		const kind = getBrandingType([frontBranding]);
 		if (!kind) {
 			return undefined;

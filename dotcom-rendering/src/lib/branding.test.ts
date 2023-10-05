@@ -14,7 +14,7 @@ describe('decideCollectionBranding', () => {
 		};
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
-			index: 3,
+			couldDisplayFrontBranding: false,
 			seriesTag: 'politics/series/road-to-the-vote',
 			cards: [
 				{
@@ -88,7 +88,7 @@ describe('decideCollectionBranding', () => {
 		];
 		const ukBranding = decideCollectionBranding({
 			frontBranding: undefined,
-			index: 3,
+			couldDisplayFrontBranding: false,
 			seriesTag: undefined,
 			cards,
 			editionId: 'UK',
@@ -105,7 +105,7 @@ describe('decideCollectionBranding', () => {
 		});
 		const usBranding = decideCollectionBranding({
 			frontBranding: undefined,
-			index: 3,
+			couldDisplayFrontBranding: false,
 			seriesTag: undefined,
 			cards,
 			editionId: 'US',
@@ -131,7 +131,7 @@ describe('decideCollectionBranding', () => {
 		};
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
-			index: 3,
+			couldDisplayFrontBranding: false,
 			seriesTag: undefined,
 			cards: [
 				{
@@ -177,7 +177,7 @@ describe('decideCollectionBranding', () => {
 	it('cards have different branding types', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
-			index: 3,
+			couldDisplayFrontBranding: false,
 			seriesTag: undefined,
 			cards: [
 				{
@@ -240,7 +240,7 @@ describe('decideCollectionBranding', () => {
 		};
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
-			index: 3,
+			couldDisplayFrontBranding: false,
 			seriesTag: undefined,
 			cards: [
 				{
@@ -287,7 +287,7 @@ describe('decideCollectionBranding', () => {
 		// The branding we'll apply to each card in this test
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
-			index: 3,
+			couldDisplayFrontBranding: false,
 			seriesTag: undefined,
 			cards: [
 				{
@@ -345,7 +345,7 @@ describe('decideCollectionBranding', () => {
 		// The branding we'll apply to each card in this test
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
-			index: 3,
+			couldDisplayFrontBranding: false,
 			seriesTag: undefined,
 			cards: [
 				{
@@ -381,6 +381,157 @@ describe('decideCollectionBranding', () => {
 				{
 					properties: {
 						editionBrandings: [],
+					},
+				},
+			],
+			editionId: 'UK',
+		});
+		expect(collectionBranding).toBeUndefined();
+	});
+
+	it('show front branding when present and possible to display', () => {
+		const collectionBranding = decideCollectionBranding({
+			frontBranding: {
+				brandingType: { name: 'paid-content' },
+				sponsorName: 'bar',
+				aboutThisLink: '',
+				logo,
+			},
+			couldDisplayFrontBranding: true,
+			seriesTag: undefined,
+			cards: [],
+			editionId: 'UK',
+		});
+		expect(collectionBranding).toStrictEqual({
+			kind: 'paid-content',
+			isFrontBranding: true,
+			branding: {
+				brandingType: { name: 'paid-content' },
+				sponsorName: 'bar',
+				aboutThisLink: '',
+				logo,
+			},
+		});
+	});
+
+	it('undefined when there is front branding but not eligible for display on this collection', () => {
+		const collectionBranding = decideCollectionBranding({
+			frontBranding: {
+				brandingType: { name: 'paid-content' },
+				sponsorName: 'bar',
+				aboutThisLink: '',
+				logo,
+			},
+			couldDisplayFrontBranding: false,
+			seriesTag: undefined,
+			cards: [],
+			editionId: 'UK',
+		});
+		expect(collectionBranding).toBeUndefined();
+	});
+
+	it('when cards are present', () => {
+		const cardBranding = {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'foo',
+			aboutThisLink: '',
+			logo,
+		};
+		const collectionBranding = decideCollectionBranding({
+			frontBranding: {
+				brandingType: { name: 'sponsored' },
+				sponsorName: 'bar',
+				aboutThisLink: '',
+				logo,
+			},
+			couldDisplayFrontBranding: false,
+			seriesTag: undefined,
+			cards: [
+				{
+					properties: {
+						editionBrandings: [
+							{
+								edition: { id: 'UK' },
+								branding: cardBranding,
+							},
+						],
+					},
+				},
+				{
+					properties: {
+						editionBrandings: [
+							{
+								edition: { id: 'UK' },
+								branding: cardBranding,
+							},
+						],
+					},
+				},
+				{
+					properties: {
+						editionBrandings: [
+							{
+								edition: { id: 'UK' },
+								branding: cardBranding,
+							},
+						],
+					},
+				},
+			],
+			editionId: 'UK',
+		});
+		expect(collectionBranding).toStrictEqual({
+			kind: 'paid-content',
+			isFrontBranding: false,
+			branding: cardBranding,
+		});
+	});
+
+	it('do not show branding when front branding matches, but we are not displaying front branding', () => {
+		const cardBranding = {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'foo',
+			aboutThisLink: '',
+			logo,
+		};
+		const collectionBranding = decideCollectionBranding({
+			frontBranding: {
+				brandingType: { name: 'paid-content' },
+				sponsorName: 'foo',
+				aboutThisLink: '',
+				logo,
+			},
+			couldDisplayFrontBranding: false,
+			seriesTag: undefined,
+			cards: [
+				{
+					properties: {
+						editionBrandings: [
+							{
+								edition: { id: 'UK' },
+								branding: cardBranding,
+							},
+						],
+					},
+				},
+				{
+					properties: {
+						editionBrandings: [
+							{
+								edition: { id: 'UK' },
+								branding: cardBranding,
+							},
+						],
+					},
+				},
+				{
+					properties: {
+						editionBrandings: [
+							{
+								edition: { id: 'UK' },
+								branding: cardBranding,
+							},
+						],
 					},
 				},
 			],
