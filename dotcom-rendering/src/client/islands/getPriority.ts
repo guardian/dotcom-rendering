@@ -16,7 +16,10 @@ export const getPriority = (marker: HTMLElement): Priority | undefined => {
 		return priority;
 	}
 
-	console.error('Unable to find priority attribute on gu-island', marker);
+	console.error(
+		'Unable to find valid priority attribute on gu-island',
+		marker,
+	);
 
 	return;
 };
