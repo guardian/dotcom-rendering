@@ -14368,15 +14368,15 @@ opener@^1.5.2:
   resolved "https://registry.yarnpkg.com/opener/-/opener-1.5.2.tgz#5d37e1f35077b9dcac4301372271afdeb2a13598"
   integrity sha512-ur5UIdyw5Y7yEj9wLzhqXiy6GZ3Mwx0yGI+5sMn2r0N0v3cKJvUmFH5yPP+WXh9e0xfyzyJX95D8l088DNFj7A==
 
-"ophan-tracker-js-esm@npm:ophan-tracker-js@2.0.0-beta-5":
-  version "2.0.0-beta-5"
-  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-2.0.0-beta-5.tgz#548720300b64bfaf224d8b42241c697dc522063d"
-  integrity sha512-4Kw3EnSJr9/P179AbS+93v7XI3MU+hQv5MtLgByG6sQbkE9MOAlDuGR+bQKH2GPKJjcqVdBiHx6mohoFb3BHHw==
+ophan-tracker-js@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-2.0.1.tgz#568c9a8c127f511d4dc19e9d3421cc88e04ea910"
+  integrity sha512-HXH0rjZlLeV9ri4V9Q0t0AaD5Q3ue4o+YMCuBsov6cWLPWcWBiARHtSRlpY6fJD+/iUIEiSPsrlfPIJUz7inYA==
 
-ophan-tracker-js@1.4.0, ophan-tracker-js@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-1.4.0.tgz#6c0e8f56157f2bd1473beaa6b79b54b99f5a7b1d"
-  integrity sha512-X5JoLOYxvfvNRI0Vo8xBT0UgJdiU9snPYOGgQUTk5ZnPYgX3xGW/yt7xdePeg9yM0eCuP5SeYQTLfF4bp0GFuw==
+ophan-tracker-js@^1.4.0:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-1.4.3.tgz#97366a58635a984b8b159080e8dc201e9e0d3304"
+  integrity sha512-rlF9rNazjUx6kr67j1cCYAejo71TXy6VLe88UdhipdOm6UVQamiWvc91/FZ9xxWIqPk/sQ4FVAJYgDF2x5j0og==
 
 optionator@^0.9.3:
   version "0.9.3"
