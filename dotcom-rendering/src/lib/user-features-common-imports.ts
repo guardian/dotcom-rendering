@@ -1,20 +1,11 @@
-import type {
-	AccessToken,
-	AccessTokenClaims,
-	IDToken,
-} from '@guardian/identity-auth';
 import { getCookie, setCookie } from '@guardian/libs';
-// API IMPORTS
-//Transient deps
 import EventEmitter from 'wolfy87-eventemitter';
+import type {
+	AuthStatus,
+	SignedInWithCookies,
+	SignedInWithOkta,
+} from './identity';
 import { getAuthStatus } from './identity';
-
-type CustomClaimValue = string | boolean | number;
-type CustomClaims = Record<string, CustomClaimValue | CustomClaimValue[]>;
-type CustomIdTokenClaims = CustomClaims & {
-	email: string;
-	google_tag_id: string;
-};
 
 const mediator = new EventEmitter();
 
@@ -81,7 +72,7 @@ const fetchJson = async (
 
 	let path = resource;
 	if (isPathAbsoluteURL(path)) {
-		path = (window.guardian.config.page.ajaxUrl ?? '') + resource;
+		path = window.guardian.config.page.ajaxUrl + resource;
 		init.mode = 'cors';
 	}
 
@@ -200,24 +191,7 @@ type IdentityUserFromCache = {
 	rawResponse: string;
 } | null;
 
-type SignedOutWithCookies = { kind: 'SignedOutWithCookies' };
-type SignedInWithCookies = { kind: 'SignedInWithCookies' };
-type SignedOutWithOkta = { kind: 'SignedOutWithOkta' };
-type SignedInWithOkta = {
-	kind: 'SignedInWithOkta';
-	accessToken: AccessToken<AccessTokenClaims>;
-	idToken: IDToken<CustomIdTokenClaims>;
-};
-
-type AuthStatus =
-	| SignedOutWithCookies
-	| SignedInWithCookies
-	| SignedOutWithOkta
-	| SignedInWithOkta;
-
 let userFromCookieCache: IdentityUserFromCache = null;
-
-const useOkta = !!window.guardian.config.switches.okta;
 
 const cookieName = 'GU_U';
 
