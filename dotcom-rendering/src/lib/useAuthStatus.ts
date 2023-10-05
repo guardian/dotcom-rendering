@@ -103,3 +103,14 @@ export const useAuthStatus = (): AuthStatus => {
 
 	return authStatus;
 };
+
+export const getAuthStatus = async (): Promise<AuthStatus> => {
+	const useOkta = !!window.guardian.config.switches.okta;
+
+	if (useOkta) {
+		const authState = await getAuthState();
+		return getSignedInStatusWithOkta(authState);
+	} else {
+		return getSignedInStatusWithCookies();
+	}
+};

@@ -7,6 +7,7 @@ import { getCookie, setCookie } from '@guardian/libs';
 // API IMPORTS
 //Transient deps
 import EventEmitter from 'wolfy87-eventemitter'; //  add to Package.json	"wolfy87-eventemitter": "^5.2.9"
+import { getAuthStatus } from './useAuthStatus';
 
 type CustomClaimValue = string | boolean | number;
 type CustomClaims = Record<string, CustomClaimValue | CustomClaimValue[]>;
@@ -294,38 +295,6 @@ const fetchGoogleTagIdFromApi = (): Promise<string | null> =>
 
 const isUserLoggedIn = (): boolean => getUserFromCookie() !== null;
 
-const getAuthStatus = async (): Promise<AuthStatus> => {
-	if (useOkta) {
-		try {
-			const { isSignedInWithOktaAuthState } = await import(
-				'./identity/okta'
-			);
-			const authState = await isSignedInWithOktaAuthState();
-			if (authState.isAuthenticated) {
-				return {
-					kind: 'SignedInWithOkta',
-					accessToken: authState.accessToken,
-					idToken: authState.idToken,
-				};
-			}
-		} catch (e) {
-			console.error(e);
-		}
-
-		return {
-			kind: 'SignedOutWithOkta',
-		};
-	}
-	if (isUserLoggedIn()) {
-		return {
-			kind: 'SignedInWithCookies',
-		};
-	}
-	return {
-		kind: 'SignedOutWithCookies',
-	};
-};
-
 const isUserLoggedInOktaRefactor = (): Promise<boolean> =>
 	getAuthStatus().then((authStatus) =>
 		authStatus.kind === 'SignedInWithCookies' ||
@@ -403,9 +372,7 @@ export type UserFeaturesResponse = {
 	guardianWeeklyExpiryDate?: LocalDate;
 	liveAppSubscriptionExpiryDate?: LocalDate;
 	alertAvailableFor?: string;
-
 	showSupportMessaging: boolean;
-
 	contentAccess: {
 		member: boolean;
 		paidMember: boolean;
