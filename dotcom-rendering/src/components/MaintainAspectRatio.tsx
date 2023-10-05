@@ -34,6 +34,7 @@ export const MaintainAspectRatio = ({ height, width, children }: Props) => (
 			[data-atom-type='ima-ad-container'] {
 				width: 100%;
 				height: 100%;
+				/* stylelint-disable-next-line declaration-no-important -- we need this to override inline styles added by youtube */
 				position: absolute !important;
 				top: 0;
 				left: 0;
