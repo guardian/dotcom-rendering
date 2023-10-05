@@ -206,7 +206,7 @@ export const NewsletterCard = ({
 					<CardPicture
 						imageSize="carousel"
 						alt=""
-						master={newsletter.illustrationCard}
+						mainImage={newsletter.illustrationCard}
 						loading="lazy"
 					/>
 				</div>

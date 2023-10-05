@@ -117,7 +117,6 @@ const commonConfigs = ({ platform }) => ({
 /** @type {readonly Build[]} */
 const clientBuilds = [
 	'web',
-	'web.ophan-esm',
 	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
 		? /** @type {const} */ (['web.variant'])
 		: []),

@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
+import { RightAdsPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
+import { useConfig } from './ConfigContext';
 import { Island } from './Island';
 import { MostViewedRightWrapper } from './MostViewedRightWrapper.importable';
 
@@ -21,15 +23,20 @@ export const MostViewedRightWithAd = ({
 	renderAds,
 }: Props) => {
 	const componentDataAttribute = 'most-viewed-right-container';
+	const { renderingTarget } = useConfig();
+	const isApps = renderingTarget === 'Apps';
+
 	return (
 		<div
 			// This attribute is necessary so that most viewed wrapper
 			// can measure the height of this component
 			data-container={componentDataAttribute}
 			css={css`
-				/* The height can be smaller than the maximum height
-				   For example if the article is very short */
-				height: min(100%, ${MAX_HEIGHT_PX}px);
+				/* On Apps - we don't restrict the height, so the ads can be spaced along the entire article height
+				 * On Web - we restrict the height to the maximum height, so that the top right ad can be sticky until the
+				 *          most viewed component is in view at MAX_HEIGHT_PX, or 100% of the article height if it is a short article
+				*/
+				height: ${isApps ? '100%' : `min(100%, ${MAX_HEIGHT_PX}px)`};
 				display: flex;
 				flex-direction: column;
 			`}
@@ -60,6 +67,8 @@ export const MostViewedRightWithAd = ({
 					/>
 				</Island>
 			) : null}
+
+			{isApps && <RightAdsPlaceholder />}
 		</div>
 	);
 };
