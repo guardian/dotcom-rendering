@@ -69,15 +69,15 @@ export const WebShowcasePictureOpinionPillar = () => {
 WebShowcasePictureOpinionPillar.storyName = 'Web: Display: Showcase, Design: Picture, Theme: OpinionPillar';
 WebShowcasePictureOpinionPillar.args = { config: { renderingTarget: 'Web' } };
 
-export const AppsCommentStandardNewsPillar = () => {
+export const AppsStandardCommentNewsPillar = () => {
 	return (
 		<HydratedLayoutWrapper
-			displayName="Comment"
-			designName="Standard"
+			displayName="Standard"
+			designName="Comment"
 			theme="NewsPillar"
 			renderingTarget="Apps"
 		/>
 	);
 };
-AppsCommentStandardNewsPillar.storyName = 'Apps: Display: Comment, Design: Standard, Theme: NewsPillar';
-AppsCommentStandardNewsPillar.args = { config: { renderingTarget: 'Apps' } };
+AppsStandardCommentNewsPillar.storyName = 'Apps: Display: Standard, Design: Comment, Theme: NewsPillar';
+AppsStandardCommentNewsPillar.args = { config: { renderingTarget: 'Apps' } };

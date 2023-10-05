@@ -166,8 +166,8 @@ const testLayoutFormats = [
 		renderingTarget: 'Web',
 	},
 	{
-		display: 'Comment',
-		design: 'Standard',
+		display: 'Standard',
+		design: 'Comment',
 		theme: 'NewsPillar',
 		renderingTarget: 'Apps',
 	},
