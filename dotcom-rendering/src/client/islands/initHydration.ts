@@ -49,7 +49,7 @@ export const initHydration = async (
 	const scheduleHydration = () =>
 		schedule(
 			name,
-			doHydration.bind(null, name, props, element, emotionCache, config),
+			() => doHydration(name, props, element, emotionCache, config),
 			{ priority },
 		);
 
