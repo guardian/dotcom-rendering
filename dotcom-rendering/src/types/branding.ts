@@ -33,18 +33,23 @@ export interface EditionBranding {
 
 export type BrandingKind = 'paid-content' | 'foundation' | 'sponsored';
 
-export type SponsorshipBranding = {
-	kind: BrandingKind;
-	isFrontBranding: boolean;
-	branding: Branding;
-};
-
-export type EditorialBranding = {
-	kind: 'editorial';
-	badge: DCRBadgeType;
-};
-
 /**
- * The type of branding that can be applied to any given collection
+ * Branding that can be applied to an entire collection on a front
  */
-export type CollectionBranding = SponsorshipBranding | EditorialBranding;
+export type CollectionBranding =
+	| {
+			kind: BrandingKind;
+			/**
+			 * In certain circumstances a collection might display the branding on behalf of an entire front
+			 * In that case this property is true
+			 */
+			isFrontBranding: boolean;
+			branding: Branding;
+	  }
+	| {
+			/**
+			 * Collections from certain series can have an 'editorial' badge selected set hardcoded in DCR
+			 */
+			kind: 'editorial';
+			badge: DCRBadgeType;
+	  };
