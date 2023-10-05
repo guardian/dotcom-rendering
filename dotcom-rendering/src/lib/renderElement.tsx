@@ -745,7 +745,6 @@ export const renderElement = ({
 						format={format}
 						key={index}
 						hideCaption={hideCaption}
-						role="inline"
 						isMainMedia={isMainMedia}
 						id={element.id}
 						elementId={element.elementId}
