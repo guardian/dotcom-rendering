@@ -1,8 +1,10 @@
 import type { EmotionCache } from '@emotion/cache';
+import { isUndefined } from '@guardian/libs';
 import { schedule } from '../../lib/scheduler';
 import { doHydration } from './doHydration';
 import { getConfig } from './getConfig';
 import { getName } from './getName';
+import { getPriority } from './getPriority';
 import { getProps } from './getProps';
 import { onInteraction } from './onInteraction';
 import { onNavigation } from './onNavigation';
@@ -39,65 +41,39 @@ export const initHydration = async (
 	const name = getName(element);
 	const props = getProps(element);
 	const config = getConfig(element);
+	const priority = getPriority(element);
 
 	if (!name) return;
+	if (isUndefined(priority)) return;
+
+	const scheduleHydration = () =>
+		schedule(
+			name,
+			doHydration.bind(null, name, props, element, emotionCache, config),
+			{ priority },
+		);
 
 	const deferUntil = element.getAttribute('deferuntil');
 	switch (deferUntil) {
 		case 'idle': {
-			whenIdle(() => {
-				void schedule(
-					name,
-					() =>
-						doHydration(name, props, element, emotionCache, config),
-					{ priority: 'feature' },
-				);
-			});
+			whenIdle(scheduleHydration);
 			return;
 		}
 		case 'visible': {
 			const rootMargin = element.getAttribute('rootmargin') ?? undefined;
-			whenVisible(
-				element,
-				() => {
-					void schedule(
-						name,
-						() =>
-							doHydration(
-								name,
-								props,
-								element,
-								emotionCache,
-								config,
-							),
-						{ priority: 'feature' },
-					);
-				},
-				{ rootMargin },
-			);
+			whenVisible(element, scheduleHydration, { rootMargin });
 			return;
 		}
 		case 'interaction': {
-			onInteraction(element, (targetElement) => {
-				void schedule(
-					name,
-					() =>
-						doHydration(name, props, element, emotionCache, config),
-					{ priority: 'feature' },
-				).then(() => {
-					targetElement.dispatchEvent(new MouseEvent('click'));
-				});
+			onInteraction(element, async (targetElement) => {
+				await scheduleHydration();
+				targetElement.dispatchEvent(new MouseEvent('click'));
 			});
 			return;
 		}
 		case 'hash': {
 			if (window.location.hash.includes(name) || hasLightboxHash(name)) {
-				void schedule(
-					name,
-					() =>
-						doHydration(name, props, element, emotionCache, config),
-					{ priority: 'feature' },
-				);
+				return scheduleHydration();
 			} else {
 				// If we didn't find a matching hash on page load, set a
 				// listener so that we check again each time the reader
@@ -107,25 +83,14 @@ export const initHydration = async (
 						window.location.hash.includes(name) ||
 						hasLightboxHash(name)
 					) {
-						void schedule(
-							name,
-							() =>
-								doHydration(
-									name,
-									props,
-									element,
-									emotionCache,
-									config,
-								),
-							{ priority: 'feature' },
-						);
+						void scheduleHydration();
 					}
 				});
 			}
 			return;
 		}
 		default: {
-			return doHydration(name, props, element, emotionCache, config);
+			return scheduleHydration();
 		}
 	}
 };

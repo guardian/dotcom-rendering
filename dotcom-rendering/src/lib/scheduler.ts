@@ -1,4 +1,6 @@
 import { startPerformanceMeasure } from '@guardian/libs';
+import type { Guard } from './guard';
+import { guard } from './guard';
 
 const START = Date.now();
 
@@ -22,8 +24,10 @@ let CONCURRENCY_COUNT = Infinity;
  * priorities, and the scheduler will prefer the priority with the lowest index.
  **/
 const PRIORITIES = ['critical', 'feature', 'enhancement'] as const;
-type Priority = (typeof PRIORITIES)[number];
+export type Priority = Guard<typeof PRIORITIES>;
 export type SchedulePriority = { [K in Priority]: K };
+
+export const isValidSchedulerPriority = guard(PRIORITIES);
 
 /**
  * A thing that a consumer want to do. Should be a function that returns a promise.
