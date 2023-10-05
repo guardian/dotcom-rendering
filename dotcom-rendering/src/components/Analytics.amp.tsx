@@ -29,11 +29,11 @@ export const Analytics = ({
 }: Props) => {
 	const scripts: string[] = [
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include">
+		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-block-on-consent="_till_responded" data-credentials="include">
 			<script type="application/json">
 				{
 					"requests": {
-						"pageViewWithConsentTest": "http://localhost:8000/receive?componentEvent=\${componentEvent}",
+						"pageViewWithConsentTest": "http://localhost:8001/receive?componentEvent=\${componentEvent}",
 						"pageViewWithConsent": "\${additionalBase}&componentEvent=\${componentEvent}"
 					},
 					"triggers": {
@@ -50,7 +50,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-ccpa",
 							"vars": {
-								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:CCPA%22,%2204:\${clientId(ccpaUUID)}%22,%2205:true%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:CCPA%22,%2204:\${clientId(ccpaUUID)}%22,%2205:\$EQUALS(\${consentState}, insufficient)\%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
 							}
 						},
 						"trackPageviewAus": {
@@ -58,7 +58,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-aus",
 							"vars": {
-								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:AUS%22,%2206:\${clientId(ccpaUUID)}%22,%2207:\${clientId(consentStatus)}%22,%2208:true%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:AUS%22,%2206:\${clientId(ccpaUUID)}%22,%2207:\${consentState}%22,%2208:\$EQUALS(\${consentState}, sufficient)%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
 							}
 						}
 					},
