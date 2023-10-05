@@ -1122,9 +1122,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											/>
 										)}
 
-										{isApps && (
-											<RightAdsPlaceholder />
-										)}
+										{isApps && <RightAdsPlaceholder />}
 									</RightColumn>
 								</div>
 							</GridItem>
