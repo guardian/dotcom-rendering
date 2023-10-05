@@ -75,10 +75,14 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<LightboxLayout
 						imageCount={article.imagesForLightbox.length}
 					/>
-					<Island clientOnly={true}>
+					<Island clientOnly={true} priority="critical">
 						<LightboxHash />
 					</Island>
-					<Island clientOnly={true} defer={{ until: 'hash' }}>
+					<Island
+						priority="feature"
+						clientOnly={true}
+						defer={{ until: 'hash' }}
+					>
 						<LightboxJavascript
 							format={format}
 							images={article.imagesForLightbox}
@@ -86,7 +90,12 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					</Island>
 				</>
 			)}
-			<Island clientOnly={true} defer={{ until: 'idle' }}>
+
+			<Island
+				priority="enhancement"
+				clientOnly={true}
+				defer={{ until: 'idle' }}
+			>
 				<FocusStyles />
 			</Island>
 			{(format.design === ArticleDesign.LiveBlog ||
@@ -96,27 +105,44 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			{renderingTarget === 'Web' && (
 				<>
 					<SkipTo id="navigation" label="Skip to navigation" />
-					<Island clientOnly={true} defer={{ until: 'idle' }}>
+					<Island
+						priority="feature"
+						clientOnly={true}
+						defer={{ until: 'idle' }}
+					>
 						<AlreadyVisited />
 					</Island>
-					<Island clientOnly={true} defer={{ until: 'idle' }}>
+					<Island
+						priority="feature"
+						clientOnly={true}
+						defer={{ until: 'idle' }}
+					>
 						<Metrics
 							commercialMetricsEnabled={
 								!!article.config.switches.commercialMetrics
 							}
 						/>
 					</Island>
-					<Island clientOnly={true} defer={{ until: 'idle' }}>
+					<Island
+						priority="feature"
+						clientOnly={true}
+						defer={{ until: 'idle' }}
+					>
 						<BrazeMessaging idApiUrl={article.config.idApiUrl} />
 					</Island>
-					<Island clientOnly={true} defer={{ until: 'idle' }}>
+
+					<Island
+						priority="feature"
+						clientOnly={true}
+						defer={{ until: 'idle' }}
+					>
 						<ReaderRevenueDev
 							shouldHideReaderRevenue={
 								article.shouldHideReaderRevenue
 							}
 						/>
 					</Island>
-					<Island clientOnly={true}>
+					<Island clientOnly={true} priority="critical">
 						<SetABTests
 							abTestSwitches={filterABTestSwitches(
 								article.config.switches,
@@ -128,11 +154,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				</>
 			)}
 			{renderingTarget === 'Web' ? (
-				<Island clientOnly={true}>
+				<Island clientOnly={true} priority="critical">
 					<SetAdTargeting adTargeting={adTargeting} />
 				</Island>
 			) : (
-				<Island clientOnly={true}>
+				<Island clientOnly={true} priority="critical">
 					<SendTargetingParams
 						editionCommercialProperties={
 							article.commercialProperties[article.editionId]

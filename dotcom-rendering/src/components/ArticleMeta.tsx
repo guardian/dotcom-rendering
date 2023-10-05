@@ -334,7 +334,7 @@ export const ArticleMeta = ({
 		>
 			<div css={meta(format)}>
 				{branding && (
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<Branding
 							branding={branding}
 							palette={palette}
@@ -380,7 +380,10 @@ export const ArticleMeta = ({
 							)}
 							{messageUs &&
 								format.design === ArticleDesign.LiveBlog && (
-									<Island defer={{ until: 'visible' }}>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
 										<SendAMessage
 											formFields={messageUs.formFields}
 											formId={messageUs.formId}
@@ -450,6 +453,7 @@ export const ArticleMeta = ({
 							<div>
 								{isCommentable && (
 									<Island
+										priority="feature"
 										clientOnly={true}
 										defer={{ until: 'idle' }}
 									>

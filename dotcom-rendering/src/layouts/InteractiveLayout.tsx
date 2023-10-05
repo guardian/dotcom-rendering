@@ -319,7 +319,10 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						padSides={false}
 						element="aside"
 					>
-						<Island defer={{ until: 'idle' }}>
+						<Island
+							priority="enhancement"
+							defer={{ until: 'idle' }}
+						>
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
@@ -537,7 +540,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 							max-width: 620px;
 						`}
 					>
-						<Island clientOnly={true}>
+						<Island priority="critical" clientOnly={true}>
 							<SlotBodyEnd
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -617,7 +620,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 
 				{article.storyPackage && (
 					<Section fullWidth={true} showTopBorder={false}>
-						<Island defer={{ until: 'visible' }}>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
 								trails={article.storyPackage.trails.map(
@@ -634,7 +637,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island defer={{ until: 'visible' }}>
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}
@@ -691,6 +694,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
+								priority="feature"
 								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
@@ -730,7 +734,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 					padSides={false}
 					element="aside"
 				>
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -761,7 +765,11 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island defer={{ until: 'idle' }} clientOnly={true}>
+				<Island
+					priority="feature"
+					defer={{ until: 'idle' }}
+					clientOnly={true}
+				>
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

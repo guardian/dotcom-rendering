@@ -15,21 +15,54 @@ import { Island } from './Island';
 const Mock = () => <>🏝️</>;
 
 () => (
-	<Island>
+	<Island priority="critical">
 		<Mock />
 	</Island>
 );
 
 () => (
-	<Island defer={{ until: 'interaction' }}>
+	<Island priority="critical" defer={{ until: 'visible' }}>
 		<Mock />
 	</Island>
 );
 
 () => (
-	// @ts-expect-error -- until interaction must have
-	// server-rendered fallback
-	<Island defer={{ until: 'interaction' }} clientOnly={true}>
+	// @ts-expect-error -- critical island be deferred until idle
+	<Island priority="critical" defer={{ until: 'idle' }}>
+		<Mock />
+	</Island>
+);
+
+() => (
+	<Island priority="feature" defer={{ until: 'interaction' }}>
+		<Mock />
+	</Island>
+);
+
+() => (
+	// @ts-expect-error -- non-critical island must be deferred
+	<Island priority="feature">
+		<Mock />
+	</Island>
+);
+
+() => (
+	<Island
+		priority="enhancement"
+		defer={{ until: 'visible' }}
+		clientOnly={true}
+	>
+		<Mock />
+	</Island>
+);
+
+() => (
+	// @ts-expect-error -- until interaction must have server-rendered fallback
+	<Island
+		priority="enhancement"
+		defer={{ until: 'interaction' }}
+		clientOnly={true}
+	>
 		<Mock />
 	</Island>
 );
