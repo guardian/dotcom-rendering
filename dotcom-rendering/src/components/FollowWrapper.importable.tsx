@@ -2,6 +2,8 @@ import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
+import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
+import { useIsMyGuardianEnabled } from '../lib/useIsMyGuardianEnabled';
 import { FollowNotificationsButton, FollowTagButton } from './FollowButtons';
 
 type Props = {
@@ -17,6 +19,11 @@ export const FollowWrapper = ({ id, displayName, format }: Props) => {
 	const [isFollowingTag, setIsFollowingTag] = useState<boolean | undefined>(
 		undefined,
 	);
+
+	const isMyGuardianEnabled = useIsMyGuardianEnabled();
+	const isBridgetCompatible = useIsBridgetCompatible('2.5.0');
+	const showFollowTagButton = isBridgetCompatible && isMyGuardianEnabled;
+
 	useEffect(() => {
 		const topic = new Topic({
 			id,
@@ -77,14 +84,18 @@ export const FollowWrapper = ({ id, displayName, format }: Props) => {
 				min-height: 24px;
 			`}
 		>
-			<FollowTagButton
-				isFollowing={isFollowingTag ?? false}
-				displayName={displayName}
-				onClickHandler={
-					isFollowingTag !== undefined ? tagHandler : () => undefined
-				}
-				format={format}
-			/>
+			{showFollowTagButton && (
+				<FollowTagButton
+					isFollowing={isFollowingTag ?? false}
+					displayName={displayName}
+					onClickHandler={
+						isFollowingTag !== undefined
+							? tagHandler
+							: () => undefined
+					}
+					format={format}
+				/>
+			)}
 			<FollowNotificationsButton
 				isFollowing={isFollowingNotifications ?? false}
 				displayName={displayName}

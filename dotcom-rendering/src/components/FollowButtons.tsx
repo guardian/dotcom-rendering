@@ -26,7 +26,8 @@ const FollowIcon = ({
 		css={css`
 			background-color: ${isFollowing
 				? decidePalette(format).fill.shareIcon
-				: 'white'};
+				: // TODO use decidePalette
+				  'white'};
 			height: 24px;
 			width: 24px;
 			margin: 0 0.3ch 0 0.5ch;
@@ -40,7 +41,7 @@ const FollowIcon = ({
 
 			svg {
 				fill: ${isFollowing
-					? 'white'
+					? 'white' // TODO use decidePalette
 					: decidePalette(format).fill.shareIcon};
 				height: 18px;
 			}

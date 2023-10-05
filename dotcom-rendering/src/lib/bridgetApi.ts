@@ -7,7 +7,7 @@ import * as Metrics from '@guardian/bridget/Metrics';
 import * as Navigation from '@guardian/bridget/Navigation';
 import * as Newsletters from '@guardian/bridget/Newsletters';
 import * as Notifications from '@guardian/bridget/Notifications';
-import * as Tag from '@guardian/bridget/Notifications'; // TODO update to TAG
+import * as Tag from '@guardian/bridget/Tag';
 import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
 import { createAppClient } from './thrift/nativeConnection';
