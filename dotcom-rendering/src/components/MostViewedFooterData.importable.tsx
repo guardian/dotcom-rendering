@@ -26,7 +26,9 @@ function buildSectionUrl(
 ) {
 	const sectionsWithoutPopular = ['info', 'global'];
 	const hasSection =
-		sectionId !== undefined && !sectionsWithoutPopular.includes(sectionId);
+		sectionId !== undefined &&
+		sectionId.length !== 0 &&
+		!sectionsWithoutPopular.includes(sectionId);
 	const endpoint = `/most-read${
 		hasSection ? `/${sectionId}` : ''
 	}.json?_edition=${edition}`;
