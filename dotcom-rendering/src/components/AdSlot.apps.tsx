@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	from,
 	palette,
 	remSpace,
 	textSans,
@@ -16,7 +15,6 @@ export interface Props {
 }
 
 const adHeightPx = 258;
-const wideContentWidthPx = 620;
 
 const styles = css`
 	clear: both;
@@ -24,23 +22,8 @@ const styles = css`
 	color: ${palette.neutral[20]};
 	background: ${palette.neutral[97]};
 
-	${from.desktop} {
-		position: absolute;
-		margin-left: calc(${wideContentWidthPx}px + ${remSpace[4]});
-		min-width: 300px;
-		margin-bottom: ${remSpace[6]};
-	}
-
 	${until.phablet} {
 		margin: 1em -${remSpace[3]};
-	}
-`;
-
-const firstAdSlotStyles = css`
-	/** This is mainly for iPad users, so that the ad sits directly
-	 * under the "Most viewed" onwards section on the right */
-	${from.desktop} {
-		top: 0;
 	}
 `;
 
@@ -120,7 +103,7 @@ const SupportBanner = ({
  */
 export const AdSlot = forwardRef<HTMLDivElement, Props>(
 	({ isFirstAdSlot, onClickSupportButton }, ref) => (
-		<aside css={[styles, isFirstAdSlot && firstAdSlotStyles]}>
+		<aside css={styles}>
 			<div css={adLabelsStyles}>
 				<p>Advertisement</p>
 			</div>

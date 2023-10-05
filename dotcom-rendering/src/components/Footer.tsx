@@ -23,6 +23,7 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { PillarLinkType } from '../model/extract-nav';
 import type { FooterType } from '../types/footer';
 import { BackToTop } from './BackToTop';
+import { FooterLabel } from './FooterLabel.importable';
 import { Island } from './Island';
 import { Pillars } from './Pillars';
 import { PrivacySettingsLink } from './PrivacySettingsLink.importable';
@@ -395,7 +396,10 @@ export const Footer = ({
 		</div>
 		<div css={copyright}>
 			© {year} Guardian News & Media Limited or its affiliated companies.
-			All rights reserved. (modern)
+			All rights reserved.{' '}
+			<Island>
+				<FooterLabel />
+			</Island>
 		</div>
 	</div>
 );

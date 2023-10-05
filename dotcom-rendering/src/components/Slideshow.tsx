@@ -179,7 +179,7 @@ export const Slideshow = ({
 					css={styles}
 				>
 					<CardPicture
-						master={slideshowImage.imageSrc}
+						mainImage={slideshowImage.imageSrc}
 						imageSize={imageSize}
 						alt={slideshowImage.imageCaption}
 						loading={loading}
