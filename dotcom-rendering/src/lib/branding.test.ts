@@ -65,7 +65,7 @@ describe('decideCollectionBranding', () => {
 				properties: {
 					editionBrandings: [
 						{
-							edition: { id: <const>'UK' },
+							edition: { id: 'UK' as const },
 							branding: {
 								brandingType: { name: 'paid-content' },
 								sponsorName: 'foo',
@@ -74,7 +74,7 @@ describe('decideCollectionBranding', () => {
 							},
 						},
 						{
-							edition: { id: <const>'US' },
+							edition: { id: 'US' as const },
 							branding: {
 								brandingType: { name: 'sponsored' },
 								sponsorName: 'bar',
