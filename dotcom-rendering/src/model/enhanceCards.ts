@@ -379,5 +379,6 @@ export const enhanceCards = (
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding,
 			slideshowImages: decideSlideshowImages(faciaCard),
+			showMainVideo: faciaCard.properties.showMainVideo,
 		};
 	});
