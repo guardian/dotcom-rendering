@@ -1,6 +1,7 @@
 import { ArticleDesign } from '@guardian/libs';
 import type { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
+import { useHydrated } from '../lib/useHydrated';
 import { MatchStats } from './MatchStats';
 import { Placeholder } from './Placeholder';
 
@@ -60,6 +61,7 @@ export const cleanTeamData = (team: TeamType): TeamType => ({
  * [`MatchStats` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-matchstats)
  */
 export const GetMatchStats = ({ matchUrl, format }: Props) => {
+	const hydrated = useHydrated();
 	const options: SWRConfiguration = {};
 	// If this blog is live then poll for new stats
 	if (format.design === ArticleDesign.LiveBlog) {
@@ -71,7 +73,7 @@ export const GetMatchStats = ({ matchUrl, format }: Props) => {
 		awayTeam: TeamType;
 	}>(matchUrl, options);
 
-	if (loading) return <Loading />;
+	if (loading || !hydrated) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
 		window.guardian.modules.sentry.reportError(error, 'match=stats');

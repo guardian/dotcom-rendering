@@ -57,36 +57,57 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island clientOnly={true} deferUntil="idle">
+			<Island
+				priority="feature"
+				clientOnly={true}
+				defer={{ until: 'idle' }}
+			>
 				<AlreadyVisited />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island
+				priority="enhancement"
+				clientOnly={true}
+				defer={{ until: 'idle' }}
+			>
 				<FocusStyles />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island
+				priority="feature"
+				clientOnly={true}
+				defer={{ until: 'idle' }}
+			>
 				<Metrics
 					commercialMetricsEnabled={
 						!!front.config.switches.commercialMetrics
 					}
 				/>
 			</Island>
-			<Island clientOnly={true}>
+			<Island priority="critical" clientOnly={true}>
 				<ShowHideContainers />
 			</Island>
-			<Island clientOnly={true}>
+			<Island priority="critical" clientOnly={true}>
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(front.config.switches)}
 					pageIsSensitive={front.config.isSensitive}
 					isDev={!!front.config.isDev}
 				/>
 			</Island>
-			<Island clientOnly={true}>
+
+			<Island priority="critical" clientOnly={true}>
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island
+				priority="feature"
+				clientOnly={true}
+				defer={{ until: 'idle' }}
+			>
 				<BrazeMessaging idApiUrl={front.config.idApiUrl} />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island
+				priority="feature"
+				clientOnly={true}
+				defer={{ until: 'idle' }}
+			>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />

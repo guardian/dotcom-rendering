@@ -393,7 +393,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								padSides={false}
 								element="aside"
 							>
-								<Island deferUntil="idle">
+								<Island
+								priority="enhancement"
+								defer={{ until: 'idle' }}
+							>
 									<SubNav
 										subNavSections={
 											props.NAV.subNavSections
@@ -416,6 +419,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							showTopBorder={false}
 						>
+
 							<StraightLines
 								count={4}
 								cssOverrides={css`
@@ -423,6 +427,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								`}
 								color={palette.border.secondary}
 							/>
+
 						</Section>
 					</SendToBack>
 				</div>
@@ -616,7 +621,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										}
 									/>
 									{showBodyEndSlot && (
-										<Island clientOnly={true}>
+										<Island
+											priority="critical"
+											clientOnly={true}
+										>
 											<SlotBodyEnd
 												contentType={
 													article.contentType
@@ -728,7 +736,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 				{article.storyPackage && (
 					<Section fullWidth={true}>
-						<Island deferUntil="visible">
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
 								trails={article.storyPackage.trails.map(
@@ -746,7 +754,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 				)}
 
 				{renderingTarget === 'Web' && (
-					<Island deferUntil="visible">
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
 							hasRelated={article.hasRelated}
@@ -804,7 +812,11 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						data-component="most-popular"
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
-							<Island clientOnly={true} deferUntil="visible">
+							<Island
+								priority="feature"
+								clientOnly={true}
+								defer={{ until: 'visible' }}
+							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
 									format={format}
@@ -835,7 +847,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 			{renderingTarget === 'Web' && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
-					<Island deferUntil="visible">
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
@@ -868,7 +880,11 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper>
-						<Island deferUntil="idle" clientOnly={true}>
+						<Island
+					priority="feature"
+					defer={{ until: 'idle' }}
+					clientOnly={true}
+				>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={

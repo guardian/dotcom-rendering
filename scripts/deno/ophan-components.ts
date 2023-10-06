@@ -52,7 +52,7 @@ const known_errors = new Set([
 	// In frontend there is <input> and <label>. In DCR it's a <button>
 	'nav3 : topbar : edition-picker: toggle',
 
-	// It's an island with deferUntil="visible"
+	// It's an island with defer={{ until: 'visible'}}
 	'footer : contribute-cta'
 
 ]);

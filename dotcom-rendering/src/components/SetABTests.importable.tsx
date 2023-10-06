@@ -1,7 +1,6 @@
 import { AB } from '@guardian/ab-core';
 import type { CoreAPIConfig } from '@guardian/ab-core';
 import { getCookie, log } from '@guardian/libs';
-import { getOphanRecordFunction } from '../client/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
 import { getCypressSwitches } from '../experiments/cypress-switches';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
@@ -43,8 +42,6 @@ export const SetABTests = ({
 		console.log('There is no MVT ID set, see SetABTests.importable.tsx');
 	}
 
-	const ophanRecord = getOphanRecordFunction();
-
 	// Get the forced switches to use for when running within cypress
 	// Is empty object if not in cypress
 	const cypressAbSwitches = getCypressSwitches();
@@ -62,7 +59,6 @@ export const SetABTests = ({
 			...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
 		},
 		arrayOfTestObjects: tests,
-		ophanRecord,
 		forcedTestVariants: allForcedTestVariants,
 	});
 	const allRunnableTests = ab.allRunnableTests(tests);

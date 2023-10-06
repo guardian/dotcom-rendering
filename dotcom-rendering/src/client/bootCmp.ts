@@ -77,7 +77,7 @@ const submitConsentEventsToOphan = () =>
 			action,
 		} satisfies OphanComponentEvent;
 
-		submitComponentEvent(event);
+		return submitComponentEvent(event);
 	});
 
 const initialiseCmp = () =>

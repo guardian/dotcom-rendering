@@ -160,7 +160,7 @@ export const WorldCupFinal2023 = () => {
 				background-color: ${overrides.background.container};
 			`}
 		>
-			<Island>
+			<Island priority="critical">
 				<LatestLinks
 					id="/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live"
 					format={format}
@@ -187,7 +187,7 @@ export const LondonPride2022 = () => {
 				background-color: ${palette.news[300]};
 			`}
 		>
-			<Island>
+			<Island priority="critical">
 				<LatestLinks
 					id="/world/live/2022/jul/02/pride-in-london-2022-huge-turnout-expected-at-first-march-since-pandemic-live-updates"
 					format={format}

@@ -350,7 +350,10 @@ export const Card = ({
 								min-height: 10px;
 							`}
 						>
-							<Island deferUntil="visible">
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
 								<CardCommentCount
 									format={format}
 									discussionApiUrl={discussionApiUrl}
@@ -448,7 +451,7 @@ export const Card = ({
 									${getZIndex('card-nested-link')}
 								`}
 							>
-								<Island>
+								<Island priority="critical">
 									<YoutubeBlockComponent
 										id={media.mainMedia.elementId}
 										elementId={media.mainMedia.elementId}
@@ -464,7 +467,6 @@ export const Card = ({
 										format={format}
 										isMainMedia={true}
 										hideCaption={true}
-										role="inline"
 										stickyVideos={false}
 										kickerText={kickerText}
 										pauseOffscreenVideo={
@@ -569,7 +571,7 @@ export const Card = ({
 								</TrailTextWrapper>
 							)}
 							{showLivePlayable && (
-								<Island>
+								<Island priority="critical">
 									<LatestLinks
 										id={linkTo}
 										format={format}

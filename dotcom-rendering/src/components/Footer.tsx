@@ -247,7 +247,7 @@ const FooterLinks = ({
 				[
 					dataLinkName === 'privacy' ? (
 						<li key="privacy-settings-link">
-							<Island>
+							<Island priority="critical">
 								<PrivacySettingsLink
 									extraClasses={extraClasses}
 								/>
@@ -272,7 +272,11 @@ const FooterLinks = ({
 
 	const rrLinks = (
 		<div css={readerRevenueLinks}>
-			<Island deferUntil="visible" clientOnly={true}>
+			<Island
+				priority="feature"
+				defer={{ until: 'visible' }}
+				clientOnly={true}
+			>
 				<ReaderRevenueLinks
 					urls={urls}
 					editionId={editionId}
@@ -397,7 +401,7 @@ export const Footer = ({
 		<div css={copyright}>
 			© {year} Guardian News & Media Limited or its affiliated companies.
 			All rights reserved.{' '}
-			<Island>
+			<Island priority="critical">
 				<FooterLabel />
 			</Island>
 		</div>
