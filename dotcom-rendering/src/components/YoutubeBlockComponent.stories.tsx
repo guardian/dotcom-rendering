@@ -334,7 +334,6 @@ export const WithShowMainVideoFlagOff = () => {
 						width: 4255,
 					},
 				]}
-				role="inline"
 				height={259}
 				width={460}
 				stickyVideos={false}

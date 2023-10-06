@@ -456,7 +456,7 @@ export const Card = ({
 											${getZIndex('card-nested-link')}
 										`}
 									>
-								<Island priority="critical">
+										<Island priority="critical">
 											<YoutubeBlockComponent
 												id={media.mainMedia.elementId}
 												elementId={
