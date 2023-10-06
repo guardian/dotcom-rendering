@@ -394,9 +394,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								element="aside"
 							>
 								<Island
-								priority="enhancement"
-								defer={{ until: 'idle' }}
-							>
+									priority="enhancement"
+									defer={{ until: 'idle' }}
+								>
 									<SubNav
 										subNavSections={
 											props.NAV.subNavSections
@@ -419,7 +419,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							showTopBorder={false}
 						>
-
 							<StraightLines
 								count={4}
 								cssOverrides={css`
@@ -427,7 +426,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								`}
 								color={palette.border.secondary}
 							/>
-
 						</Section>
 					</SendToBack>
 				</div>
@@ -435,7 +433,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 			<main data-layout="CommentLayout">
 				{renderingTarget === 'Apps' && (
-					<Island clientOnly={true}>
+					<Island priority="critical" clientOnly={true}>
 						<AdPortals />
 					</Island>
 				)}
@@ -881,10 +879,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 					<BannerWrapper>
 						<Island
-					priority="feature"
-					defer={{ until: 'idle' }}
-					clientOnly={true}
-				>
+							priority="feature"
+							defer={{ until: 'idle' }}
+							clientOnly={true}
+						>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -925,7 +923,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					showSideBorders={false}
 					element="footer"
 				>
-					<Island>
+					<Island priority="critical">
 						<AppsFooter />
 					</Island>
 				</Section>
