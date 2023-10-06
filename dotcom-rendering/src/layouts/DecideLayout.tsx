@@ -59,7 +59,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 					// Should be CommentLayout once implemented for apps
-					return notSupported;
+					return (
+						<CommentLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				case ArticleDesign.Picture:
 					// Should be PictureLayout once implemented for apps
 					return notSupported;
@@ -96,7 +102,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 					// Should be CommentLayout once implemented for apps
-					return notSupported;
+					return (
+						<CommentLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				case ArticleDesign.NewsletterSignup:
 					return notSupported;
 				default:
@@ -166,6 +178,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.Picture:
@@ -225,6 +238,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
