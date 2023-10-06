@@ -17,10 +17,7 @@ import { useRef, useState } from 'react';
 // that version will compile and render but is non-functional.
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
-import {
-	getOphanRecordFunction,
-	submitComponentEvent,
-} from '../client/ophan/ophan';
+import { submitComponentEvent } from '../client/ophan/ophan';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
@@ -156,8 +153,6 @@ const sendTracking = (
 	newsletterId: string,
 	eventDescription: EventDescription,
 ): void => {
-	const ophanRecord = getOphanRecordFunction();
-
 	let action: OphanAction = 'CLICK';
 
 	switch (eventDescription) {
@@ -193,18 +188,15 @@ const sendTracking = (
 		timestamp: Date.now(),
 	});
 
-	submitComponentEvent(
-		{
-			action,
-			value,
-			//check if this can be used or needs to be added
-			component: {
-				componentType: 'NEWSLETTER_SUBSCRIPTION',
-				id: `AR SecureSignup ${newsletterId}`,
-			},
+	void submitComponentEvent({
+		action,
+		value,
+		//check if this can be used or needs to be added
+		component: {
+			componentType: 'NEWSLETTER_SUBSCRIPTION',
+			id: `AR SecureSignup ${newsletterId}`,
 		},
-		ophanRecord,
-	);
+	});
 };
 
 /**

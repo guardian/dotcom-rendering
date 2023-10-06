@@ -1,6 +1,5 @@
 import type { CustomClaims, IdentityAuthState } from '@guardian/identity-auth';
 import { getIdentityAuth } from '@guardian/identity-auth-frontend';
-import { reportError } from '../client/sentryLoader/sentry';
 
 export type CustomIdTokenClaims = CustomClaims & {
 	email: string;
@@ -13,9 +12,8 @@ export async function isSignedInWithOktaAuthState(): Promise<
 	return getIdentityAuth()
 		.isSignedInWithAuthState()
 		.catch((e) => {
-			if (e instanceof Error) {
-				reportError(e, 'okta');
-			}
+			// eslint-disable-next-line no-console -- we want to log the error to console, not Sentry
+			console.error(e);
 
 			return {
 				isAuthenticated: false,

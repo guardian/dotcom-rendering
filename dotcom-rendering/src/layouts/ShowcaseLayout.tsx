@@ -12,7 +12,9 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -20,7 +22,6 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
-import { useConfig } from '../components/ConfigContext';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -50,6 +51,7 @@ import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { DCRArticle } from '../types/frontend';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
@@ -202,13 +204,23 @@ const PositionHeadline = ({
 	}
 };
 
-interface Props {
+interface CommonProps {
 	article: DCRArticle;
-	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
-export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
+interface WebProps extends CommonProps {
+	NAV: NavType;
+	renderingTarget: 'Web';
+}
+
+interface AppsProps extends CommonProps {
+	renderingTarget: 'Apps';
+}
+
+export const ShowcaseLayout = (props: WebProps | AppsProps) => {
+	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -229,200 +241,229 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const renderAds = canRenderAds(article);
+	const renderAds = renderingTarget === 'Web' && canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const { renderingTarget } = useConfig();
-
 	return (
 		<>
-			{!isLabs ? (
+			{renderingTarget === 'Web' && (
 				<>
-					<div>
-						{renderAds && (
-							<Stuck>
-								<Section
-									fullWidth={true}
-									showTopBorder={false}
-									showSideBorders={false}
-									padSides={false}
-									shouldCenter={false}
-								>
-									<HeaderAdSlot />
-								</Section>
-							</Stuck>
-						)}
-						<SendToBack>
-							<Section
-								fullWidth={true}
-								shouldCenter={false}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								backgroundColour={brandBackground.primary}
-								element="header"
-							>
-								<Header
-									editionId={article.editionId}
-									idUrl={article.config.idUrl}
-									mmaUrl={article.config.mmaUrl}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									urls={article.nav.readerRevenueLinks.header}
-									remoteHeader={
-										!!article.config.switches.remoteHeader
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									idApiUrl={article.config.idApiUrl}
-									headerTopBarSearchCapiSwitch={
-										!!article.config.switches
-											.headerTopBarSearchCapi
-									}
-								/>
-							</Section>
-							<Section
-								fullWidth={true}
-								borderColour={brandLine.primary}
-								showTopBorder={false}
-								padSides={false}
-								backgroundColour={brandBackground.primary}
-								element="nav"
-								format={format}
-							>
-								<Nav
-									nav={NAV}
-									isImmersive={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
-									displayRoundel={
-										format.display ===
-											ArticleDisplay.Immersive ||
-										format.theme === ArticleSpecial.Labs
-									}
-									selectedPillar={NAV.selectedPillar}
-									subscribeUrl={
-										article.nav.readerRevenueLinks.header
-											.subscribe
-									}
-									editionId={article.editionId}
-									headerTopBarSwitch={
-										!!article.config.switches.headerTopNav
-									}
-								/>
-							</Section>
-
-							{NAV.subNavSections && (
-								<Section
-									fullWidth={true}
-									backgroundColour={
-										palette.background.article
-									}
-									padSides={false}
-									element="aside"
-									format={format}
-								>
-									<Island
-										priority="enhancement"
-										defer={{ until: 'idle' }}
+					{!isLabs ? (
+						<>
+							<div>
+								{renderAds && (
+									<Stuck>
+										<Section
+											fullWidth={true}
+											showTopBorder={false}
+											showSideBorders={false}
+											padSides={false}
+											shouldCenter={false}
+										>
+											<HeaderAdSlot />
+										</Section>
+									</Stuck>
+								)}
+								<SendToBack>
+									<Section
+										fullWidth={true}
+										shouldCenter={false}
+										showTopBorder={false}
+										showSideBorders={false}
+										padSides={false}
+										backgroundColour={
+											brandBackground.primary
+										}
+										element="header"
 									>
-										<SubNav
-											subNavSections={NAV.subNavSections}
-											currentNavLink={NAV.currentNavLink}
-											linkHoverColour={
-												palette.text.articleLinkHover
+										<Header
+											editionId={article.editionId}
+											idUrl={article.config.idUrl}
+											mmaUrl={article.config.mmaUrl}
+											discussionApiUrl={
+												article.config.discussionApiUrl
 											}
-											borderColour={palette.border.subNav}
-											subNavLinkColour={
-												palette.text.subNavLink
+											urls={
+												article.nav.readerRevenueLinks
+													.header
+											}
+											remoteHeader={
+												!!article.config.switches
+													.remoteHeader
+											}
+											contributionsServiceUrl={
+												contributionsServiceUrl
+											}
+											idApiUrl={article.config.idApiUrl}
+											headerTopBarSearchCapiSwitch={
+												!!article.config.switches
+													.headerTopBarSearchCapi
 											}
 										/>
-									</Island>
-								</Section>
-							)}
+									</Section>
+									<Section
+										fullWidth={true}
+										borderColour={brandLine.primary}
+										showTopBorder={false}
+										padSides={false}
+										backgroundColour={
+											brandBackground.primary
+										}
+										element="nav"
+										format={format}
+									>
+										<Nav
+											nav={props.NAV}
+											isImmersive={
+												format.display ===
+												ArticleDisplay.Immersive
+											}
+											displayRoundel={
+												format.display ===
+													ArticleDisplay.Immersive ||
+												format.theme ===
+													ArticleSpecial.Labs
+											}
+											selectedPillar={
+												props.NAV.selectedPillar
+											}
+											subscribeUrl={
+												article.nav.readerRevenueLinks
+													.header.subscribe
+											}
+											editionId={article.editionId}
+											headerTopBarSwitch={
+												!!article.config.switches
+													.headerTopNav
+											}
+										/>
+									</Section>
 
-							<Section
-								fullWidth={true}
-								backgroundColour={palette.background.article}
-								padSides={false}
-								showTopBorder={false}
-								borderColour={palette.border.secondary}
-							>
-								<StraightLines
-									count={4}
-									color={palette.border.secondary}
-									cssOverrides={css`
-										display: block;
-									`}
-								/>
-							</Section>
-						</SendToBack>
-					</div>
-				</>
-			) : (
-				// Else, this is a labs article so just show Nav and the Labs header
-				<>
-					<div>
-						{renderAds && (
-							<Stuck zIndex="stickyAdWrapper">
+									{props.NAV.subNavSections && (
+										<Section
+											fullWidth={true}
+											backgroundColour={
+												palette.background.article
+											}
+											padSides={false}
+											element="aside"
+											format={format}
+										>
+											<Island
+												priority="enhancement"
+												defer={{ until: 'idle' }}
+											>
+												<SubNav
+													subNavSections={
+														props.NAV.subNavSections
+													}
+													currentNavLink={
+														props.NAV.currentNavLink
+													}
+													linkHoverColour={
+														palette.text
+															.articleLinkHover
+													}
+													borderColour={
+														palette.border.subNav
+													}
+													subNavLinkColour={
+														palette.text.subNavLink
+													}
+												/>
+											</Island>
+										</Section>
+									)}
+
+									<Section
+										fullWidth={true}
+										backgroundColour={
+											palette.background.article
+										}
+										padSides={false}
+										showTopBorder={false}
+										borderColour={palette.border.secondary}
+									>
+										<StraightLines
+											count={4}
+											color={palette.border.secondary}
+											cssOverrides={css`
+												display: block;
+											`}
+										/>
+									</Section>
+								</SendToBack>
+							</div>
+						</>
+					) : (
+						// Else, this is a labs article so just show Nav and the Labs header
+						<>
+							<div>
+								{renderAds && (
+									<Stuck zIndex="stickyAdWrapper">
+										<Section
+											fullWidth={true}
+											showTopBorder={false}
+											showSideBorders={false}
+											padSides={false}
+										>
+											<HeaderAdSlot />
+										</Section>
+									</Stuck>
+								)}
+								<Stuck zIndex="stickyAdWrapperNav">
+									<Section
+										fullWidth={true}
+										borderColour={brandLine.primary}
+										showTopBorder={false}
+										padSides={false}
+										backgroundColour={
+											brandBackground.primary
+										}
+										element="nav"
+									>
+										<Nav
+											nav={props.NAV}
+											isImmersive={
+												format.display ===
+												ArticleDisplay.Immersive
+											}
+											displayRoundel={
+												format.display ===
+													ArticleDisplay.Immersive ||
+												format.theme ===
+													ArticleSpecial.Labs
+											}
+											selectedPillar={
+												props.NAV.selectedPillar
+											}
+											subscribeUrl={
+												article.nav.readerRevenueLinks
+													.header.subscribe
+											}
+											editionId={article.editionId}
+											headerTopBarSwitch={
+												!!article.config.switches
+													.headerTopNav
+											}
+										/>
+									</Section>
+								</Stuck>
+							</div>
+							<Stuck zIndex="stickyAdWrapperLabsHeader">
 								<Section
 									fullWidth={true}
 									showTopBorder={false}
-									showSideBorders={false}
-									padSides={false}
+									backgroundColour={labs[400]}
+									borderColour={border.primary}
+									sectionId="labs-header"
 								>
-									<HeaderAdSlot />
+									<LabsHeader />
 								</Section>
 							</Stuck>
-						)}
-						<Stuck zIndex="stickyAdWrapperNav">
-							<Section
-								fullWidth={true}
-								borderColour={brandLine.primary}
-								showTopBorder={false}
-								padSides={false}
-								backgroundColour={brandBackground.primary}
-								element="nav"
-							>
-								<Nav
-									nav={NAV}
-									isImmersive={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
-									displayRoundel={
-										format.display ===
-											ArticleDisplay.Immersive ||
-										format.theme === ArticleSpecial.Labs
-									}
-									selectedPillar={NAV.selectedPillar}
-									subscribeUrl={
-										article.nav.readerRevenueLinks.header
-											.subscribe
-									}
-									editionId={article.editionId}
-									headerTopBarSwitch={
-										!!article.config.switches.headerTopNav
-									}
-								/>
-							</Section>
-						</Stuck>
-					</div>
-					<Stuck zIndex="stickyAdWrapperLabsHeader">
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							backgroundColour={labs[400]}
-							borderColour={border.primary}
-							sectionId="labs-header"
-						>
-							<LabsHeader />
-						</Section>
-					</Stuck>
+						</>
+					)}
 				</>
 			)}
 
@@ -432,6 +473,11 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
+				{renderingTarget === 'Apps' && (
+					<Island priority="critical" clientOnly={true}>
+						<AdPortals />
+					</Island>
+				)}
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -459,7 +505,9 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
-									imagesForAppsLightbox={[]}
+									imagesForAppsLightbox={
+										article.imagesForAppsLightbox
+									}
 								/>
 							</div>
 						</GridItem>
@@ -566,7 +614,9 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									imagesForAppsLightbox={[]}
+									imagesForAppsLightbox={
+										article.imagesForAppsLightbox
+									}
 								/>
 								{showBodyEndSlot && (
 									<Island
@@ -692,25 +742,29 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<OnwardsUpper
-						ajaxUrl={article.config.ajaxUrl}
-						hasRelated={article.hasRelated}
-						hasStoryPackage={article.hasStoryPackage}
-						isAdFreeUser={article.isAdFreeUser}
-						pageId={article.pageId}
-						isPaidContent={!!article.config.isPaidContent}
-						showRelatedContent={article.config.showRelatedContent}
-						keywordIds={article.config.keywordIds}
-						contentType={article.contentType}
-						tags={article.tags}
-						format={format}
-						pillar={format.theme}
-						editionId={article.editionId}
-						shortUrlId={article.config.shortUrlId}
-						discussionApiUrl={article.config.discussionApiUrl}
-					/>
-				</Island>
+				{renderingTarget === 'Web' && (
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<OnwardsUpper
+							ajaxUrl={article.config.ajaxUrl}
+							hasRelated={article.hasRelated}
+							hasStoryPackage={article.hasStoryPackage}
+							isAdFreeUser={article.isAdFreeUser}
+							pageId={article.pageId}
+							isPaidContent={!!article.config.isPaidContent}
+							showRelatedContent={
+								article.config.showRelatedContent
+							}
+							keywordIds={article.config.keywordIds}
+							contentType={article.contentType}
+							tags={article.tags}
+							format={format}
+							pillar={format.theme}
+							editionId={article.editionId}
+							shortUrlId={article.config.shortUrlId}
+							discussionApiUrl={article.config.discussionApiUrl}
+						/>
+					</Island>
+				)}
 
 				{!isPaidContent && showComments && (
 					<Section
@@ -736,7 +790,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				{!isPaidContent && (
+				{renderingTarget === 'Web' && !isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}
@@ -780,12 +834,12 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 				)}
 			</main>
 
-			{NAV.subNavSections && (
+			{renderingTarget === 'Web' && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
+							subNavSections={props.NAV.subNavSections}
+							currentNavLink={props.NAV.currentNavLink}
 							linkHoverColour={palette.text.articleLinkHover}
 							borderColour={palette.border.subNav}
 						/>
@@ -793,55 +847,80 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 				</Section>
 			)}
 
-			<Section
-				fullWidth={true}
-				padSides={false}
-				backgroundColour={brandBackground.primary}
-				borderColour={brandBorder.primary}
-				showSideBorders={false}
-				element="footer"
-			>
-				<Footer
-					pageFooter={article.pageFooter}
-					selectedPillar={NAV.selectedPillar}
-					pillars={NAV.pillars}
-					urls={article.nav.readerRevenueLinks.header}
-					editionId={article.editionId}
-					contributionsServiceUrl={article.contributionsServiceUrl}
-				/>
-			</Section>
+			{renderingTarget === 'Web' && (
+				<>
+					<Section
+						fullWidth={true}
+						padSides={false}
+						backgroundColour={brandBackground.primary}
+						borderColour={brandBorder.primary}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Footer
+							pageFooter={article.pageFooter}
+							selectedPillar={props.NAV.selectedPillar}
+							pillars={props.NAV.pillars}
+							urls={article.nav.readerRevenueLinks.header}
+							editionId={article.editionId}
+							contributionsServiceUrl={
+								article.contributionsServiceUrl
+							}
+						/>
+					</Section>
 
-			<BannerWrapper>
-				<Island
-					priority="feature"
-					defer={{ until: 'idle' }}
-					clientOnly={true}
+					<BannerWrapper>
+						<Island
+							priority="feature"
+							defer={{ until: 'idle' }}
+							clientOnly={true}
+						>
+							<StickyBottomBanner
+								contentType={article.contentType}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								isMinuteArticle={
+									article.pageType.isMinuteArticle
+								}
+								isPaidContent={article.pageType.isPaidContent}
+								isPreview={!!article.config.isPreview}
+								isSensitive={article.config.isSensitive}
+								keywordIds={article.config.keywordIds}
+								pageId={article.pageId}
+								sectionId={article.config.section}
+								shouldHideReaderRevenue={
+									article.shouldHideReaderRevenue
+								}
+								remoteBannerSwitch={
+									!!article.config.switches.remoteBanner
+								}
+								puzzleBannerSwitch={
+									!!article.config.switches.puzzlesBanner
+								}
+								tags={article.tags}
+							/>
+						</Island>
+					</BannerWrapper>
+					<MobileStickyContainer />
+				</>
+			)}
+
+			{renderingTarget === 'Apps' && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					backgroundColour={neutral[97]}
+					padSides={false}
+					showSideBorders={false}
+					element="footer"
 				>
-					<StickyBottomBanner
-						contentType={article.contentType}
-						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={article.config.idApiUrl}
-						isMinuteArticle={article.pageType.isMinuteArticle}
-						isPaidContent={article.pageType.isPaidContent}
-						isPreview={!!article.config.isPreview}
-						isSensitive={article.config.isSensitive}
-						keywordIds={article.config.keywordIds}
-						pageId={article.pageId}
-						sectionId={article.config.section}
-						shouldHideReaderRevenue={
-							article.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!article.config.switches.remoteBanner
-						}
-						puzzleBannerSwitch={
-							!!article.config.switches.puzzlesBanner
-						}
-						tags={article.tags}
-					/>
-				</Island>
-			</BannerWrapper>
-			<MobileStickyContainer />
+					<Island priority="critical">
+						<AppsFooter />
+					</Island>
+				</Section>
+			)}
 		</>
 	);
 };
