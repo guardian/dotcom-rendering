@@ -540,7 +540,11 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 							max-width: 620px;
 						`}
 					>
-						<Island priority="critical" clientOnly={true}>
+						<Island
+							priority="feature"
+							defer={{ until: 'visible' }}
+							clientOnly={true}
+						>
 							<SlotBodyEnd
 								contentType={article.contentType}
 								contributionsServiceUrl={

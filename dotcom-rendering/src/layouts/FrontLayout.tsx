@@ -397,7 +397,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-			<Island priority="critical" clientOnly={true}>
+			<Island
+				priority="feature"
+				defer={{ until: 'visible' }}
+				clientOnly={true}
+			>
 				<EuropeLandingModal edition={front.editionId} />
 			</Island>
 			<main
@@ -838,7 +842,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						hasPageSkin ? background.primary : undefined
 					}
 				>
-					<Island priority="critical" defer={{ until: 'visible' }}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}

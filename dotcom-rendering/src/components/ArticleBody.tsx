@@ -197,7 +197,7 @@ export const ArticleBody = ({
 	return (
 		<>
 			{tableOfContents && tableOfContents.length > 0 && (
-				<Island priority="critical">
+				<Island priority="critical" defer={{ until: 'visible' }}>
 					<TableOfContents
 						tableOfContents={tableOfContents}
 						format={format}

@@ -247,7 +247,10 @@ const FooterLinks = ({
 				[
 					dataLinkName === 'privacy' ? (
 						<li key="privacy-settings-link">
-							<Island priority="critical">
+							<Island
+								priority="critical"
+								defer={{ until: 'visible' }}
+							>
 								<PrivacySettingsLink
 									extraClasses={extraClasses}
 								/>
@@ -401,7 +404,7 @@ export const Footer = ({
 		<div css={copyright}>
 			© {year} Guardian News & Media Limited or its affiliated companies.
 			All rights reserved.{' '}
-			<Island priority="critical">
+			<Island priority="critical" defer={{ until: 'visible' }}>
 				<FooterLabel />
 			</Island>
 		</div>

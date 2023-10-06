@@ -620,7 +620,8 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 									/>
 									{showBodyEndSlot && (
 										<Island
-											priority="critical"
+											priority="feature"
+											defer={{ until: 'visible' }}
 											clientOnly={true}
 										>
 											<SlotBodyEnd

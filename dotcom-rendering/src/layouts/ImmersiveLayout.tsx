@@ -617,7 +617,8 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 								/>
 								{showBodyEndSlot && (
 									<Island
-										priority="critical"
+										priority="feature"
+										defer={{ until: 'visible' }}
 										clientOnly={true}
 									>
 										<SlotBodyEnd
