@@ -42,8 +42,6 @@ const isFirstContentfulPaintAboveThreshold = async (threshold = 2400) => {
  */
 const isTimeToFirstByteAboveThreshold = (threshold = 1200) => {
 	try {
-		// Time to first byte is a widely supported performance marker
-		// which is the second-best indicator of core web vitals label
 		const [nav] = window.performance.getEntriesByType('navigation');
 		if (!nav) return true;
 
