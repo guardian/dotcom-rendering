@@ -10,7 +10,7 @@ on:
 name: Delete Old Packages
 
 env:
-  NUM_OF_VERSIONS_TO_KEEP: 5
+  NUM_OF_VERSIONS_TO_KEEP: 25
 
 jobs:
   delete-old-packages:
