@@ -12,8 +12,8 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Get started',
 			newsletters: [
 				'morning-briefing', // First Edition
+				'word-of-mouth', // Feast
 				'this-is-europe',
-				'green-light', // Down to Earth
 				'the-guide-staying-in',
 				'the-long-read',
 			],
@@ -21,9 +21,9 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'In depth',
 			newsletters: [
+				'green-light', // Down to Earth
 				'whats-on',
 				'tech-scape',
-				'word-of-mouth', // Feast
 				'fashion-statement',
 				'pushing-buttons',
 				'cotton-capital',
