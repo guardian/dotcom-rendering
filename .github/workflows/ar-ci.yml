@@ -2,6 +2,8 @@ name: AR CI
 
 on:
   push:
+    paths-ignore:
+      - 'dotcom-rendering/**'
   workflow_dispatch:
 
 # Allow queued workflows to interrupt previous runs
