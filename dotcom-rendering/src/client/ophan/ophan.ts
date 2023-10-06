@@ -14,11 +14,20 @@ export type OphanRecordFunction = (
 ) => void;
 
 /**
+ * Store a reference to Ophan so that we don't need to load/enhance it more than once.
+ */
+let cachedOphan: typeof window.guardian.ophan;
+
+/**
  * Loads Ophan (if it hasn't already been loaded) and returns a promise of Ophan's methods.
  */
 export const getOphan = async (): Promise<
 	NonNullable<typeof window.guardian.ophan>
 > => {
+	if (cachedOphan) {
+		return cachedOphan;
+	}
+
 	// @ts-expect-error -- side effect only
 	await import(/* webpackMode: "eager" */ 'ophan-tracker-js');
 
@@ -45,56 +54,25 @@ export const getOphan = async (): Promise<
 		});
 	};
 
-	// this is the future of `getOphan`'s API, but we need to move to a
-	// dynamic import of the Ophan library to get there, so just returning a
-	// meaningless promise for now, for future-proofing
-	return Promise.resolve({ ...ophan, record, trackComponentAttention });
+	cachedOphan = { ...ophan, record, trackComponentAttention };
+	return cachedOphan;
 };
 
-/**
- * @deprecated use `getOphan` instead
- */
-export const getOphanRecordFunction = (): OphanRecordFunction => {
-	const record = window.guardian.ophan?.record;
-
-	if (record) return record;
-
-	// eslint-disable-next-line no-console -- worth informing all users
-	console.warn('window.guardian.ophan.record is not available');
-	return () => {
-		/* do nothing */
-	};
-};
-
-/**
- * @deprecated use `getOphan` instead
- */
-export const record: OphanRecordFunction = (event) => {
-	if (window.guardian.ophan?.record) {
-		window.guardian.ophan.record(event, () =>
-			log('dotcom', '🧿 Ophan event recorded:', event),
-		);
-	} else {
-		throw new Error("window.guardian.ophan.record doesn't exist");
-	}
-};
-
-export const submitComponentEvent = (
+export const submitComponentEvent = async (
 	componentEvent: OphanComponentEvent,
-	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
-): void => {
-	ophanRecord({ componentEvent });
+): Promise<void> => {
+	const ophan = await getOphan();
+	ophan.record({ componentEvent });
 };
 
 interface SdcTestMeta extends OphanABTestMeta {
 	labels?: string[];
 }
 
-export const sendOphanComponentEvent = (
+export const sendOphanComponentEvent = async (
 	action: OphanAction,
 	testMeta: SdcTestMeta,
-	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
-): void => {
+): Promise<void> => {
 	const {
 		abTestName,
 		abTestVariant,
@@ -119,7 +97,7 @@ export const sendOphanComponentEvent = (
 		action,
 	};
 
-	submitComponentEvent(componentEvent, ophanRecord);
+	await submitComponentEvent(componentEvent);
 };
 
 export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
@@ -134,7 +112,7 @@ export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
 	return { abTestRegister: records };
 };
 
-export const recordPerformance = (): void => {
+export const recordPerformance = async (): Promise<void> => {
 	const { performance: performanceAPI } = window;
 	const supportsPerformanceProperties =
 		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Safety on browsers
@@ -160,7 +138,8 @@ export const recordPerformance = (): void => {
 		redirectCount: performanceAPI.navigation.redirectCount,
 	};
 
-	record({
+	const ophan = await getOphan();
+	ophan.record({
 		performance,
 	});
 };

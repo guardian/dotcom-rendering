@@ -2,7 +2,7 @@ import type { ArticleSpecial, Pillar } from '@guardian/libs';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from './badge';
-import type { Branding } from './branding';
+import type { Branding, EditionBranding } from './branding';
 import type { ServerSideTests, Switches } from './config';
 import type { Image } from './content';
 import type { FooterType } from './footer';
@@ -228,7 +228,7 @@ export type FEFrontCard = {
 		webTitle: string;
 		linkText?: string;
 		webUrl?: string;
-		editionBrandings: { edition: { id: EditionId }; branding?: Branding }[];
+		editionBrandings: EditionBranding[];
 		href?: string;
 		embedUri?: string;
 	};
@@ -508,27 +508,7 @@ type FESeoDataType = {
 type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
 	commercial: {
-		editionBrandings: Array<{
-			edition: {
-				id: string;
-			};
-			branding?: {
-				brandingType: {
-					name: string;
-				};
-				sponsorName: string;
-				logo: {
-					src: string;
-					dimensions: {
-						width: number;
-						height: number;
-					};
-					link: string;
-					label: string;
-				};
-				aboutThisLink: string;
-			};
-		}>;
+		editionBrandings: EditionBranding[];
 		editionAdTargetings: unknown;
 		prebidIndexSites?: unknown;
 	};

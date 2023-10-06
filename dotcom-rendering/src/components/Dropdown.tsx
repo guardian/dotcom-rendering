@@ -306,7 +306,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				notification.logImpression?.();
 			}
 
-			submitComponentEvent({
+			void submitComponentEvent({
 				component: ophanComponent,
 				action: 'VIEW',
 			});
@@ -321,7 +321,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 
 	useOnce(() => {
 		if (ophanComponent) {
-			submitComponentEvent({
+			void submitComponentEvent({
 				component: ophanComponent,
 				action: 'INSERT',
 			});
@@ -347,7 +347,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				data-link-name={link.dataLinkName}
 				onClick={() => {
 					if (ophanComponent) {
-						submitComponentEvent({
+						void submitComponentEvent({
 							component: ophanComponent,
 							action: 'CLICK',
 						});

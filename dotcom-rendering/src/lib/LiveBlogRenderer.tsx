@@ -72,7 +72,11 @@ export const LiveBlogRenderer = ({
 		<>
 			{pinnedPost && onFirstPage && !filtered && (
 				<>
-					<Island clientOnly={true} deferUntil="idle">
+					<Island
+						clientOnly={true}
+						defer={{ until: 'idle' }}
+						priority="feature"
+					>
 						<EnhancePinnedPost />
 					</Island>
 					<PinnedPost pinnedPost={pinnedPost} format={format}>
@@ -94,7 +98,7 @@ export const LiveBlogRenderer = ({
 			)}
 			{keyEvents !== undefined && keyEvents.length > 0 ? (
 				<Hide from="desktop">
-					<Island deferUntil="visible">
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<KeyEventsCarousel
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
@@ -103,7 +107,7 @@ export const LiveBlogRenderer = ({
 						/>
 					</Island>
 					{(!switches.automaticFilters || !availableTopics) && (
-						<Island deferUntil="visible">
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<FilterKeyEventsToggle
 								filterKeyEvents={filterKeyEvents}
 								id="filter-toggle-mobile"
@@ -144,7 +148,7 @@ export const LiveBlogRenderer = ({
 				isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 			/>
 			{blocks.length > 4 && (
-				<Island clientOnly={true}>
+				<Island priority="critical" clientOnly={true}>
 					<LiveBlogEpic
 						sectionId={sectionId}
 						shouldHideReaderRevenue={shouldHideReaderRevenue}

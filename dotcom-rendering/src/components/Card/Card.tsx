@@ -211,7 +211,11 @@ const getMedia = ({
 	isPlayableMediaCard?: boolean;
 }) => {
 	if (mainMedia && mainMedia.type === 'Video' && !!isPlayableMediaCard) {
-		return { type: 'video', mainMedia } as const;
+		return {
+			type: 'video',
+			mainMedia,
+			...(imageUrl && { imageUrl }),
+		} as const;
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
@@ -346,7 +350,10 @@ export const Card = ({
 								min-height: 10px;
 							`}
 						>
-							<Island deferUntil="visible">
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
 								<CardCommentCount
 									format={format}
 									discussionApiUrl={discussionApiUrl}
@@ -444,13 +451,14 @@ export const Card = ({
 									${getZIndex('card-nested-link')}
 								`}
 							>
-								<Island>
+								<Island priority="critical">
 									<YoutubeBlockComponent
 										id={media.mainMedia.elementId}
 										elementId={media.mainMedia.elementId}
 										assetId={media.mainMedia.videoId}
 										duration={media.mainMedia.duration}
 										posterImage={media.mainMedia.images}
+										overrideImage={media.imageUrl}
 										width={media.mainMedia.width}
 										height={media.mainMedia.height}
 										origin={media.mainMedia.origin}
@@ -459,7 +467,6 @@ export const Card = ({
 										format={format}
 										isMainMedia={true}
 										hideCaption={true}
-										role="inline"
 										stickyVideos={false}
 										kickerText={kickerText}
 										pauseOffscreenVideo={
@@ -475,7 +482,7 @@ export const Card = ({
 						{media.type === 'picture' && (
 							<>
 								<CardPicture
-									master={media.imageUrl}
+									mainImage={media.imageUrl}
 									imageSize={imageSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
@@ -564,7 +571,7 @@ export const Card = ({
 								</TrailTextWrapper>
 							)}
 							{showLivePlayable && (
-								<Island>
+								<Island priority="critical">
 									<LatestLinks
 										id={linkTo}
 										format={format}

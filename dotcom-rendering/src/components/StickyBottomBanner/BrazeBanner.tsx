@@ -116,7 +116,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 		meta.logImpressionWithBraze();
 
 		// Log VIEW event with Ophan
-		submitComponentEvent({
+		void submitComponentEvent({
 			component: {
 				componentType: 'RETENTION_ENGAGEMENT_BANNER',
 				id:

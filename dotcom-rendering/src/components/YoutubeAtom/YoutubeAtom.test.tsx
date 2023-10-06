@@ -2,20 +2,10 @@ import type { ConsentState } from '@guardian/consent-management-platform/dist/ty
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render } from '@testing-library/react';
-import type { ImageSource } from '../../types/content';
 import { YoutubeAtom } from './YoutubeAtom';
 
-const overlayImage: ImageSource[] = [
-	{
-		weighting: 'inline',
-		srcSet: [
-			{
-				width: 500,
-				src: 'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
-			},
-		],
-	},
-];
+const overlayImage =
+	'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac';
 
 const consentStateCanTarget: ConsentState = {
 	tcfv2: {
@@ -38,7 +28,6 @@ describe('YoutubeAtom', () => {
 				title="My Youtube video!"
 				videoId="ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				adTargeting={{ disableAds: true }}
 				eventEmitters={[]}
 				format={{
@@ -65,7 +54,6 @@ describe('YoutubeAtom', () => {
 				title="My Youtube video!"
 				videoId="ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				adTargeting={{ disableAds: true }}
 				eventEmitters={[]}
 				format={{
@@ -101,7 +89,6 @@ describe('YoutubeAtom', () => {
 				title="My Youtube video!"
 				videoId="ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				adTargeting={{ disableAds: true }}
 				eventEmitters={[]}
 				format={{
@@ -129,7 +116,6 @@ describe('YoutubeAtom', () => {
 				title="My Youtube video!"
 				videoId="ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				adTargeting={{ disableAds: true }}
 				eventEmitters={[]}
 				format={{
@@ -159,7 +145,6 @@ describe('YoutubeAtom', () => {
 				title="My Youtube video!"
 				videoId="ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				adTargeting={{ disableAds: true }}
 				eventEmitters={[]}
 				format={{
@@ -185,7 +170,6 @@ describe('YoutubeAtom', () => {
 				title="My Youtube video!"
 				videoId="ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				adTargeting={{ disableAds: true }}
 				eventEmitters={[]}
 				format={{
@@ -212,7 +196,6 @@ describe('YoutubeAtom', () => {
 				title="My Youtube video!"
 				videoId="ZCvZmYlQD8"
 				alt=""
-				role="inline"
 				adTargeting={{ disableAds: true }}
 				eventEmitters={[]}
 				format={{
@@ -243,7 +226,6 @@ describe('YoutubeAtom', () => {
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
-					role="inline"
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
 					format={{
@@ -262,7 +244,6 @@ describe('YoutubeAtom', () => {
 					title="My Youtube video 2!"
 					videoId="ZCvZmYlQD8_2"
 					alt=""
-					role="inline"
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
 					format={{

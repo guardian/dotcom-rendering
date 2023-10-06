@@ -55,7 +55,7 @@ export const Header = ({
 	hasPageSkin = false,
 }: Props) => (
 	<div css={headerStyles} data-component="nav3">
-		<Island>
+		<Island priority="critical">
 			<HeaderTopBar
 				editionId={editionId}
 				dataLinkName={nestedOphanComponents(
@@ -73,11 +73,19 @@ export const Header = ({
 		</Island>
 
 		<div css={[hasPageSkin ? pageSkinContainer : center, explicitHeight]}>
-			<Island deferUntil="hash" clientOnly={true}>
+			<Island
+				priority="enhancement"
+				defer={{ until: 'hash' }}
+				clientOnly={true}
+			>
 				<Snow />
 			</Island>
 			<Logo editionId={editionId} hasPageSkin={hasPageSkin} />
-			<Island deferUntil="idle" clientOnly={true}>
+			<Island
+				priority="feature"
+				defer={{ until: 'idle' }}
+				clientOnly={true}
+			>
 				<SupportTheG
 					urls={urls}
 					editionId={editionId}

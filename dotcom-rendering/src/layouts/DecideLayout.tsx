@@ -31,16 +31,21 @@ interface WebProps extends BaseProps {
 const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 	const notSupported = <pre>Not supported</pre>;
 	switch (format.display) {
-		case ArticleDisplay.Standard: {
+		case ArticleDisplay.Immersive: {
 			switch (format.design) {
-				case ArticleDesign.Standard:
-					return (
-						<StandardLayout
-							article={article}
-							format={format}
-							renderingTarget={renderingTarget}
-						/>
-					);
+				case ArticleDesign.Interactive: {
+					// Should be InteractiveLayout once implemented for apps
+					return notSupported;
+				}
+				default: {
+					// Should be FullPageInteractiveLayout once implemented for apps
+					return notSupported;
+				}
+			}
+		}
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Showcase: {
+			switch (format.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
@@ -50,12 +55,60 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 							renderingTarget={renderingTarget}
 						/>
 					);
-				default:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+					// Should be CommentLayout once implemented for apps
 					return notSupported;
+				case ArticleDesign.Picture:
+					// Should be PictureLayout once implemented for apps
+					return notSupported;
+				default:
+					return (
+						<ShowcaseLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 			}
 		}
-		default:
-			return notSupported;
+		case ArticleDisplay.Standard:
+		default: {
+			switch (format.design) {
+				case ArticleDesign.Interactive:
+					// Should be InteractiveLayout once implemented for apps
+					return notSupported;
+				case ArticleDesign.FullPageInteractive: {
+					// Should be FullPageInteractiveLayout once implemented for apps
+					return notSupported;
+				}
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return (
+						<LiveLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+					// Should be CommentLayout once implemented for apps
+					return notSupported;
+				case ArticleDesign.NewsletterSignup:
+					return notSupported;
+				default:
+					return (
+						<StandardLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+			}
+		}
 	}
 };
 
@@ -129,6 +182,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 			}

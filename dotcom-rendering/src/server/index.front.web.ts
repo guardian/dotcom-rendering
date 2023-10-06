@@ -1,4 +1,5 @@
 import type { RequestHandler } from 'express';
+import { pickBrandingForEdition } from '../lib/branding';
 import { decideTrail } from '../lib/decideTrail';
 import { enhanceCards } from '../model/enhanceCards';
 import { enhanceCollections } from '../model/enhanceCollections';
@@ -18,12 +19,6 @@ import { renderFront, renderTagFront } from './render.front.web';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
-	const editionHasBranding = () =>
-		!!data.pressedPage.frontProperties.commercial.editionBrandings.find(
-			(editionBranding) =>
-				editionBranding.edition.id === data.editionId &&
-				!!editionBranding.branding,
-		);
 
 	return {
 		...data,
@@ -40,7 +35,11 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 					data.pressedPage.frontProperties.onPageDescription,
 				isPaidContent: data.config.isPaidContent,
 				discussionApiUrl: data.config.discussionApiUrl,
-				editionHasBranding: editionHasBranding(),
+				frontBranding: pickBrandingForEdition(
+					data.pressedPage.frontProperties.commercial
+						.editionBrandings,
+					data.editionId,
+				),
 			}),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
