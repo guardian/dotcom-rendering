@@ -211,7 +211,7 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	isPlayableMediaCard?: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && isPlayableMediaCard) {
+	if (mainMedia && mainMedia.type === 'Video' && !!isPlayableMediaCard) {
 		return {
 			type: 'video',
 			mainMedia,
