@@ -13,7 +13,7 @@ type WhenVisibleOptions = {
  */
 export const whenVisible = (
 	element: HTMLElement,
-	callback: () => Promise<void>,
+	callback: () => void,
 	{ rootMargin }: WhenVisibleOptions = { rootMargin: '100px' },
 ): void => {
 	if ('IntersectionObserver' in window) {
@@ -22,7 +22,7 @@ export const whenVisible = (
 				if (!entry?.isIntersecting) return;
 				// Disconnect this IntersectionObserver once seen
 				io.disconnect();
-				void callback();
+				callback();
 			},
 			{ rootMargin },
 		);

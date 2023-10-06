@@ -7,7 +7,7 @@
  */
 export const onInteraction = (
 	element: HTMLElement,
-	callback: (e: HTMLElement) => Promise<void>,
+	callback: (e: HTMLElement) => Promise<void> | void,
 ): void => {
 	element.addEventListener(
 		'click',

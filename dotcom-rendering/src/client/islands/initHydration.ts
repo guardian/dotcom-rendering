@@ -56,12 +56,14 @@ export const initHydration = async (
 	const deferUntil = element.getAttribute('deferuntil');
 	switch (deferUntil) {
 		case 'idle': {
-			whenIdle(scheduleHydration);
+			whenIdle(() => void scheduleHydration());
 			return;
 		}
 		case 'visible': {
 			const rootMargin = element.getAttribute('rootmargin') ?? undefined;
-			whenVisible(element, scheduleHydration, { rootMargin });
+			whenVisible(element, () => void scheduleHydration(), {
+				rootMargin,
+			});
 			return;
 		}
 		case 'interaction': {
