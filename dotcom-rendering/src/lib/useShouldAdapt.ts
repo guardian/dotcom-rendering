@@ -10,7 +10,7 @@ export const useShouldAdapt = (): boolean => {
 	const [shouldAdapt, setShouldAdapt] = useState(false);
 
 	useOnce(() => {
-		void checkShouldAdapt.then(setShouldAdapt);
+		void checkShouldAdapt().then(setShouldAdapt);
 	}, []);
 
 	return shouldAdapt;
