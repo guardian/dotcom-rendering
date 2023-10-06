@@ -43,6 +43,19 @@ export const AppsStandardStandardNewsPillar = () => {
 AppsStandardStandardNewsPillar.storyName = 'Apps: Display: Standard, Design: Standard, Theme: NewsPillar';
 AppsStandardStandardNewsPillar.args = { config: { renderingTarget: 'Apps' } };
 
+export const AppsShowcaseStandardNewsPillar = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Standard"
+			theme="NewsPillar"
+			renderingTarget="Apps"
+		/>
+	);
+};
+AppsShowcaseStandardNewsPillar.storyName = 'Apps: Display: Showcase, Design: Standard, Theme: NewsPillar';
+AppsShowcaseStandardNewsPillar.args = { config: { renderingTarget: 'Apps' } };
+
 export const WebShowcasePictureOpinionPillar = () => {
 	return (
 		<HydratedLayoutWrapper

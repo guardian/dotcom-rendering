@@ -173,7 +173,11 @@ export const Nav = ({
 				data-component="nav2"
 			>
 				{isImmersive && (
-					<Island deferUntil="visible" clientOnly={true}>
+					<Island
+						priority="feature"
+						defer={{ until: 'visible' }}
+						clientOnly={true}
+					>
 						<InteractiveSupportButton
 							editionId={editionId}
 							subscribeUrl={subscribeUrl}

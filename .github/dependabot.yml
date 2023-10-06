@@ -18,6 +18,13 @@ updates:
         - dependency-name: 'aws-cdk-lib'
         - dependency-name: 'constructs'
       open-pull-requests-limit: 10
+      groups:
+        # Most storybook dependencies are released with synchronised versions
+        # and therefore should be updated together.
+        storybook:
+          patterns:
+            - "@storybook/*"
+            - "storybook"
     - package-ecosystem: 'npm'
       directory: '/apps-rendering'
       schedule:
@@ -36,6 +43,13 @@ updates:
             - "version-update:semver-major"
             - "version-update:semver-minor"
       open-pull-requests-limit: 7
+      groups:
+        # Most storybook dependencies are released with synchronised versions
+        # and therefore should be updated together.
+        storybook:
+          patterns:
+            - "@storybook/*"
+            - "storybook"
     - package-ecosystem: 'github-actions'
       directory: '/'
       schedule:

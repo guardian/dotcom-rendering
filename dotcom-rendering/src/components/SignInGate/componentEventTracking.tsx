@@ -1,4 +1,5 @@
 import type { OphanComponent, OphanComponentEvent } from '@guardian/libs';
+import { getOphan } from '../../client/ophan/ophan';
 import { isServer } from '../../lib/isServer';
 import type { CurrentSignInGateABTest } from './types';
 
@@ -11,17 +12,20 @@ export type ComponentEventParams = {
 	browserId?: string;
 };
 
-const ophan = isServer ? undefined : window.guardian.ophan;
-
 // ophan helper methods
-const submitComponentEventTracking = (componentEvent: OphanComponentEvent) => {
-	ophan?.record({ componentEvent });
+const submitComponentEventTracking = async (
+	componentEvent: OphanComponentEvent,
+) => {
+	if (isServer) return;
+
+	const ophan = await getOphan();
+	ophan.record({ componentEvent });
 };
 
 export const submitViewEventTracking = (
 	componentEvent: Omit<OphanComponentEvent, 'action'>,
 ) =>
-	submitComponentEventTracking({
+	void submitComponentEventTracking({
 		...componentEvent,
 		action: 'VIEW',
 	});
@@ -29,7 +33,7 @@ export const submitViewEventTracking = (
 const submitClickEventTracking = (
 	componentEvent: Omit<OphanComponentEvent, 'action'>,
 ) =>
-	submitComponentEventTracking({
+	void submitComponentEventTracking({
 		...componentEvent,
 		action: 'CLICK',
 	});

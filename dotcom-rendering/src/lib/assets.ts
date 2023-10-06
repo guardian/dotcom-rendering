@@ -4,7 +4,6 @@ import { isObject, isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
-	ophanEsm,
 } from '../../scripts/webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
 import { makeMemoizedFunction } from './memoize';
@@ -67,12 +66,7 @@ const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	}
 });
 
-export type Build =
-	| 'apps'
-	| 'web'
-	| 'web.variant'
-	| 'web.ophan-esm'
-	| 'web.legacy';
+export type Build = 'apps' | 'web' | 'web.variant' | 'web.legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
@@ -145,9 +139,6 @@ export const getModulesBuild = ({
 }): Exclude<Extract<Build, `web${string}`>, 'web.legacy'> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
 		return 'web.variant';
-	}
-	if (tests[ophanEsm('Variant')] === 'variant') {
-		return 'web.ophan-esm';
 	}
 	return 'web';
 };

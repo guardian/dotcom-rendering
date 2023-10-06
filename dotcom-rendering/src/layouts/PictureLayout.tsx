@@ -343,7 +343,10 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 							format={format}
 							showTopBorder={showSubNavTopBorder}
 						>
-							<Island deferUntil="idle">
+							<Island
+								priority="enhancement"
+								defer={{ until: 'idle' }}
+							>
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
@@ -573,7 +576,7 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 
 				{article.storyPackage && (
 					<Section fullWidth={true}>
-						<Island deferUntil="visible">
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
 								trails={article.storyPackage.trails.map(
@@ -590,7 +593,7 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island deferUntil="visible">
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}
@@ -645,7 +648,11 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 						data-component="most-popular"
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
-							<Island clientOnly={true} deferUntil="visible">
+							<Island
+								priority="feature"
+								clientOnly={true}
+								defer={{ until: 'visible' }}
+							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
 									format={format}
@@ -676,7 +683,7 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 
 			{NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
-					<Island deferUntil="visible">
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -706,7 +713,11 @@ export const PictureLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper>
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island
+					priority="feature"
+					defer={{ until: 'idle' }}
+					clientOnly={true}
+				>
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

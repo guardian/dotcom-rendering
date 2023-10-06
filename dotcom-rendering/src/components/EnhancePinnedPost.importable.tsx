@@ -59,7 +59,7 @@ function scrollOnCollapse() {
 const handleClickTracking = () => {
 	if (pinnedPostCheckBox instanceof HTMLInputElement) {
 		if (pinnedPostCheckBox.checked) {
-			submitComponentEvent({
+			void submitComponentEvent({
 				component: {
 					componentType: 'LIVE_BLOG_PINNED_POST',
 					id: pinnedPost?.id,
@@ -68,7 +68,7 @@ const handleClickTracking = () => {
 				value: 'show-more',
 			});
 		} else {
-			submitComponentEvent({
+			void submitComponentEvent({
 				component: {
 					componentType: 'LIVE_BLOG_PINNED_POST',
 					id: pinnedPost?.id,
@@ -147,7 +147,7 @@ export const EnhancePinnedPost = () => {
 			const timeTaken = pinnedPostTiming.current?.endPerformanceMeasure();
 			if (timeTaken !== undefined) {
 				const timeTakenInSeconds = timeTaken / 1000;
-				submitComponentEvent({
+				void submitComponentEvent({
 					component: {
 						componentType: 'LIVE_BLOG_PINNED_POST',
 						id: pinnedPost.id,
