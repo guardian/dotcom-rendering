@@ -152,7 +152,7 @@ export const renderElement = ({
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return (
-				<Island priority="critical">
+				<Island priority="critical" defer={{ until: 'visible' }}>
 					<AudioAtomWrapper
 						id={element.id}
 						trackUrl={element.trackUrl}
@@ -527,7 +527,10 @@ export const renderElement = ({
 			return (
 				<>
 					{element.quizType === 'personality' && (
-						<Island priority="critical">
+						<Island
+							priority="critical"
+							defer={{ until: 'visible' }}
+						>
 							<PersonalityQuizAtomWrapper
 								id={element.id}
 								questions={element.questions}
@@ -538,7 +541,10 @@ export const renderElement = ({
 						</Island>
 					)}
 					{element.quizType === 'knowledge' && (
-						<Island priority="critical">
+						<Island
+							priority="critical"
+							defer={{ until: 'visible' }}
+						>
 							<KnowledgeQuizAtomWrapper
 								id={element.id}
 								questions={element.questions}
@@ -740,7 +746,7 @@ export const renderElement = ({
 		}
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return (
-				<Island priority="critical">
+				<Island priority="critical" defer={{ until: 'visible' }}>
 					<YoutubeBlockComponent
 						format={format}
 						key={index}

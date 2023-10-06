@@ -456,7 +456,10 @@ export const Card = ({
 											${getZIndex('card-nested-link')}
 										`}
 									>
-										<Island priority="critical">
+										<Island
+											priority="critical"
+											defer={{ until: 'visible' }}
+										>
 											<YoutubeBlockComponent
 												id={media.mainMedia.elementId}
 												elementId={
@@ -608,7 +611,10 @@ export const Card = ({
 								</TrailTextWrapper>
 							)}
 							{showLivePlayable && (
-								<Island priority="critical">
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
 									<LatestLinks
 										id={linkTo}
 										format={format}

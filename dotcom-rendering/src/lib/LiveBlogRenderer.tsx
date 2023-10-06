@@ -148,7 +148,11 @@ export const LiveBlogRenderer = ({
 				isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 			/>
 			{blocks.length > 4 && (
-				<Island priority="critical" clientOnly={true}>
+				<Island
+					priority="feature"
+					defer={{ until: 'visible' }}
+					clientOnly={true}
+				>
 					<LiveBlogEpic
 						sectionId={sectionId}
 						shouldHideReaderRevenue={shouldHideReaderRevenue}
