@@ -13,7 +13,7 @@ import { CalloutBlockComponent } from '../components/CalloutBlockComponent.impor
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { CartoonComponent } from '../components/CartoonComponent';
-import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
+import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
@@ -223,7 +223,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ChartAtomWrapper id={element.id} html={element.html} />
+					<ChartAtom id={element.id} html={element.html} />
 				</Island>
 			);
 
