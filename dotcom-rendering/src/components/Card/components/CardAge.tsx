@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, timeAgo } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 import ClockIcon from '../../../static/icons/clock.svg';
 import type { DCRContainerPalette } from '../../../types/front';
 import type { Palette } from '../../../types/palette';
+import { Island } from '../../Island';
+import { RelativeTime } from '../../RelativeTime.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -62,20 +64,18 @@ export const CardAge = ({
 	showClock,
 	isDynamo,
 }: Props) => {
-	const displayString = timeAgo(new Date(webPublicationDate).getTime());
 	const palette = decidePalette(format, containerPalette);
-
-	if (displayString === false) {
-		return null;
-	}
 
 	return (
 		<span css={ageStyles(format, palette, isDynamo)}>
 			<span>
 				{showClock && <ClockIcon />}
-				<time dateTime={webPublicationDate} data-relativeformat="med">
-					{displayString}
-				</time>
+				<Island priority="enhancement" defer={{ until: 'visible' }}>
+					<RelativeTime
+						epoch={new Date(webPublicationDate).getTime()}
+						format="short"
+					/>
+				</Island>
 			</span>
 		</span>
 	);

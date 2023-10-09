@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, timeAgo } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
+import { RelativeTime } from './RelativeTime.importable';
 
 const lastUpdatedStyles = (palette: Palette) => css`
 	${textSans.small()}
@@ -25,8 +26,6 @@ type Props = {
 
 export const ArticleLastUpdated = ({ format, lastUpdated }: Props) => {
 	const palette = decidePalette(format);
-	const displayString = timeAgo(lastUpdated);
-	const date = new Date(lastUpdated);
 
 	return (
 		<div css={lastUpdatedStyles(palette)}>
@@ -39,13 +38,9 @@ export const ArticleLastUpdated = ({ format, lastUpdated }: Props) => {
 				</span>
 			)}
 			&nbsp;Updated&nbsp;
-			<time
-				dateTime={date.toString()}
-				data-relativeformat="med"
-				data-gu-marker="liveblog-last-updated"
-			>
-				{displayString}
-			</time>
+			<Island priority="enhancement" defer={{ until: 'visible' }}>
+				<RelativeTime epoch={lastUpdated} format="short" />
+			</Island>
 		</div>
 	);
 };

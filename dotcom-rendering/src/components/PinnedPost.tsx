@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { timeAgo } from '@guardian/libs';
 import {
 	focusHalo,
 	from,
@@ -17,6 +16,8 @@ import {
 } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
+import { Island } from './Island';
+import { RelativeTime } from './RelativeTime.importable';
 
 const pinnedPostContainer = (palette: Palette) => css`
 	border: 3px solid ${palette.border.pinnedPost};
@@ -164,9 +165,18 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 			<div css={rowStyles(palette)}>
 				<SvgPinned />
 				{pinnedPost.blockFirstPublished !== undefined && (
-					<time data-relativeformat="med" css={timeAgoStyles}>
-						From {timeAgo(pinnedPost.blockFirstPublished)}
-					</time>
+					<div css={timeAgoStyles}>
+						From{' '}
+						<Island
+							priority="enhancement"
+							defer={{ until: 'visible' }}
+						>
+							<RelativeTime
+								epoch={pinnedPost.blockFirstPublished}
+								format="short"
+							/>
+						</Island>
+					</div>
 				)}
 			</div>
 			<div id="collapsible-body" css={collapsibleBody}>

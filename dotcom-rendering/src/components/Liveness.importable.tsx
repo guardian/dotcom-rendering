@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
-import { updateTimeElement } from '../client/relativeTime/updateTimeElements';
 import { isServer } from '../lib/isServer';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
@@ -23,10 +22,6 @@ type Props = {
 
 const topOfBlog: Element | null = !isServer
 	? window.document.getElementById('top-of-blog')
-	: null;
-
-const lastUpdated: Element | null = !isServer
-	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
 	: null;
 
 const toastRoot: Element | null = !isServer
@@ -183,11 +178,6 @@ export const Liveness = ({
 					} catch (e) {
 						console.log('>> failed >>', e);
 					}
-				}
-
-				if (lastUpdated) {
-					lastUpdated.setAttribute('dateTime', new Date().toString());
-					updateTimeElement(lastUpdated);
 				}
 
 				if (

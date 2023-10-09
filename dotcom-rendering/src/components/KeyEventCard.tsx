@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
-import { timeAgo } from '@guardian/libs';
 import { from, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
+import { Island } from './Island';
+import { RelativeTime } from './RelativeTime.importable';
 
 interface Props {
 	id: string;
@@ -117,7 +118,6 @@ export const KeyEventCard = ({
 	const url = `?filterKeyEvents=${String(
 		filterKeyEvents,
 	)}&page=with:block-${id}#block-${id}`;
-	const date = new Date(blockFirstPublished);
 	return (
 		<li css={listItemStyles(palette)}>
 			<Link
@@ -126,22 +126,14 @@ export const KeyEventCard = ({
 				href={url}
 				data-link-name={`key event card | ${cardPosition}`}
 			>
-				<time
-					dateTime={date.toISOString()}
-					data-relativeformat="med"
-					title={`${date.toLocaleDateString('en-GB', {
-						hour: '2-digit',
-						minute: '2-digit',
-						weekday: 'long',
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric',
-						timeZoneName: 'long',
-					})}`}
-					css={timeStyles(palette)}
-				>
-					{timeAgo(date.getTime())}
-				</time>
+				<div css={timeStyles(palette)}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
+						<RelativeTime
+							epoch={blockFirstPublished}
+							format="short"
+						/>
+					</Island>
+				</div>
 				<div css={textStyles(palette)}>{title}</div>
 			</Link>
 		</li>
