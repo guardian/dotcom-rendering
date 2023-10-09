@@ -16,6 +16,12 @@ const ulStyles = (direction: Direction) => css`
 		flex-direction: column;
 		width: 100%;
 	}
+
+	@supports not (row-gap: 12px) {
+		& > li {
+			margin-bottom: 12px;
+		}
+	}
 `;
 
 const wrapStyles = css`
