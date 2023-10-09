@@ -42,15 +42,22 @@ const isFirstContentfulPaintAboveThreshold = async (threshold = 2400) => {
  */
 const isTimeToFirstByteAboveThreshold = (threshold = 1200) => {
 	try {
-		const [nav] = window.performance.getEntriesByType('navigation');
-		if (!nav) return true;
+		const nav =
+			window.performance.getEntriesByType('navigation')[0] ??
+			window.performance.timing;
 
 		logPerformanceInfo('navigation', {
 			domContentLoadedEventEnd: nav.domContentLoadedEventEnd,
-			type: nav.type,
+			type: 'type' in nav ? nav.type : undefined,
 			responseEnd: nav.responseEnd,
 		});
-		return nav.responseStart - nav.startTime > threshold;
+
+		const ttfb =
+			'type' in nav
+				? nav.responseStart - nav.startTime
+				: nav.responseStart - nav.connectEnd;
+
+		return ttfb > threshold;
 	} catch (error) {
 		return true;
 	}
