@@ -15,8 +15,8 @@ const liStyles = css`
 	/* This position relative is needed to contain the vertical divider */
 	position: relative;
 
-	display: flex;
-	row-gap: ${GAP_SIZE};
+	display: grid;
+	border-color: inherit;
 `;
 
 const sidePaddingStylesMobile = css`
@@ -40,9 +40,8 @@ const snapAlignStartStyles = css`
 `;
 
 const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
-	let sizeStyle;
 	if (percentage) {
-		sizeStyle = css`
+		return css`
 			flex-basis: ${percentage};
 			${stretch &&
 			css`
@@ -50,15 +49,14 @@ const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
 			`}
 		`;
 	} else if (stretch) {
-		sizeStyle = css`
+		return css`
 			flex-grow: 1;
 		`;
 	} else {
-		sizeStyle = css`
+		return css`
 			flex: 1;
 		`;
 	}
-	return sizeStyle;
 };
 
 const decideDivider = (
@@ -75,7 +73,7 @@ const decideDivider = (
 
 	return offsetBottomPaddingOnDivider
 		? verticalDividerWithBottomOffset(paddingSize, borderColour)
-		: verticalDivider(borderColour);
+		: verticalDivider;
 };
 
 type Props = {
@@ -131,6 +129,7 @@ export const LI = ({
 				padSidesOnMobile && sidePaddingStylesMobile,
 				snapAlignStart && snapAlignStartStyles,
 			]}
+			style={{ borderColor: verticalDividerColour }}
 		>
 			{children}
 		</li>

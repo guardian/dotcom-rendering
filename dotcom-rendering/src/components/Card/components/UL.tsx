@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, neutral, space, until } from '@guardian/source-foundations';
+import { from, palette, space, until } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import type { DCRContainerPalette } from '../../../types/front';
@@ -30,10 +30,6 @@ const wrapStyles = css`
 	}
 `;
 
-const marginBottomStyles = css`
-	margin-bottom: ${space[3]}px;
-`;
-
 type Props = {
 	children: React.ReactNode;
 	/** Passed to flex-direction */
@@ -55,19 +51,20 @@ export const UL = ({
 	wrapCards = false,
 	containerPalette,
 }: Props) => {
-	const borderColour =
-		(containerPalette &&
-			decideContainerOverrides(containerPalette).border.container) ??
-		neutral[86];
+	const borderColor = containerPalette
+		? decideContainerOverrides(containerPalette).border.container
+		: palette.neutral[86];
+
+	const marginBottom = padBottom ? `${space[3]}px` : undefined;
 
 	return (
 		<ul
 			css={[
 				ulStyles(direction),
-				showDivider && verticalDivider(borderColour),
-				padBottom && marginBottomStyles,
+				showDivider && verticalDivider,
 				wrapCards && wrapStyles,
 			]}
+			style={{ marginBottom, borderColor }}
 		>
 			{children}
 		</ul>
