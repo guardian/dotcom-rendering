@@ -167,6 +167,7 @@ export const WorldCupFinal2023 = () => {
 					direction="horizontal"
 					containerPalette={containerPalette}
 					isDynamo={true}
+					now={Date.now()}
 				/>
 			</Island>
 		</Wrapper>
@@ -192,6 +193,7 @@ export const LondonPride2022 = () => {
 					id="/world/live/2022/jul/02/pride-in-london-2022-huge-turnout-expected-at-first-march-since-pandemic-live-updates"
 					format={format}
 					direction="horizontal"
+					now={Date.now()}
 				/>
 			</Island>
 		</Wrapper>

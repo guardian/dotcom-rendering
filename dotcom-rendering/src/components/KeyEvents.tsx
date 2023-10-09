@@ -120,8 +120,8 @@ const ListItem = ({ keyEvent, format }: ListItemProps) => (
 				<div css={timeStyles}>
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<RelativeTime
-							epoch={keyEvent.date.getTime()}
-							format="short"
+							now={Date.now()}
+							then={keyEvent.date.getTime()}
 						></RelativeTime>
 					</Island>
 				</div>

@@ -1,53 +1,83 @@
-import { isString, timeAgo as timeAgoHasAWeirdInterface } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { useIsInView } from '../lib/useIsInView';
 
 type Props = {
-	epoch: number;
-	format: 'short' | 'long';
+	/** the time to compare with in milliseconds since epoch */
+	then: number;
+	/** required to ensure that there is no mismatch between server and client */
+	now: number;
 };
 
-/** if a date is recent, keep it up to date more frequently */
-const getUpdateFrequency = (epoch: number) => {
-	const secondsAgo = (Date.now() - epoch) / 1_000;
-	// less than a minute ago
-	if (secondsAgo < 60) return 1 * 1000; // 1 second
-	// less than an hour ago
-	if (secondsAgo < 60 * 60) return 20 * 1000; // 20 seconds
-	// less than an day ago
-	if (secondsAgo < 60 * 60 * 24) return 5 * 60 * 1000; // 5 minutes
-	// over a day ago
-	return Infinity;
+const units = {
+	second: 1_000,
+	minute: 60_000,
+	hour: 3_600_000,
+	day: 86_400_000,
+} as const satisfies Record<string, number>;
+
+const duration = ({
+	then,
+	now,
+}: Props): { length: number; unit: keyof typeof units } => {
+	const difference = now - then;
+	if (difference < units.minute) {
+		return { length: difference / units.second, unit: 'second' };
+	}
+	if (difference < units.hour) {
+		return { length: difference / units.minute, unit: 'minute' };
+	}
+	if (difference < units.day) {
+		return { length: difference / units.hour, unit: 'hour' };
+	}
+	return { length: difference / units.day, unit: 'day' };
 };
 
-const timeAgo = (epoch: number, format: Props['format']) => {
-	const value = timeAgoHasAWeirdInterface(epoch, {
-		verbose: format === 'long',
-	});
-
-	if (!isString(value)) return;
-	return value;
+const timeAgo = ({
+	length,
+	unit,
+	date,
+}: {
+	date: Date;
+	length: number;
+	unit: keyof typeof units;
+}) => {
+	if (unit === 'day' && length > 7) {
+		return date.toLocaleDateString('en-GB', {
+			day: 'numeric',
+			month: 'short',
+			year: 'numeric',
+		});
+	}
+	return `${Math.floor(length)}${unit.charAt(0)} ago`;
 };
 
-export const RelativeTime = ({ epoch, format }: Props) => {
-	const date = new Date(epoch);
-	const frequency = getUpdateFrequency(epoch);
+export const RelativeTime = ({ now, then }: Props) => {
+	const { length, unit } = duration({ then, now });
+
+	/** if a date is recent, keep it up to date more frequently */
+	const [frequency, setFrequency] = useState(units[unit] / 3);
 	const [inView, ref] = useIsInView({ repeat: true });
 
-	const [display, setDisplay] = useState(timeAgo(epoch, format) ?? null);
+	const [display, setDisplay] = useState(
+		timeAgo({ length, unit, date: new Date(then) }),
+	);
 
 	const updateTime = useCallback(() => {
 		if (!inView) return;
-		const relativeTime = timeAgo(epoch, format);
-		if (isString(relativeTime)) setDisplay(relativeTime);
-	}, [epoch, format, inView]);
-
-	useEffect(updateTime);
+		const live = duration({
+			then,
+			now: Date.now(),
+		});
+		setDisplay(timeAgo({ ...live, date: new Date(then) }));
+		setFrequency(units[live.unit] / 2);
+	}, [inView, then]);
 
 	useEffect(() => {
 		const interval = setInterval(updateTime, frequency);
 		return () => clearInterval(interval);
 	}, [frequency, updateTime]);
+
+	const date = new Date(then);
 
 	return (
 		<time

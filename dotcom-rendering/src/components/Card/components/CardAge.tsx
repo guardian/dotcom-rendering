@@ -72,8 +72,8 @@ export const CardAge = ({
 				{showClock && <ClockIcon />}
 				<Island priority="enhancement" defer={{ until: 'visible' }}>
 					<RelativeTime
-						epoch={new Date(webPublicationDate).getTime()}
-						format="short"
+						now={Date.now()}
+						then={new Date(webPublicationDate).getTime()}
 					/>
 				</Island>
 			</span>

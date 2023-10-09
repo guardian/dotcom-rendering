@@ -39,7 +39,7 @@ export const ArticleLastUpdated = ({ format, lastUpdated }: Props) => {
 			)}
 			&nbsp;Updated&nbsp;
 			<Island priority="enhancement" defer={{ until: 'visible' }}>
-				<RelativeTime epoch={lastUpdated} format="short" />
+				<RelativeTime now={Date.now()} then={lastUpdated} />
 			</Island>
 		</div>
 	);

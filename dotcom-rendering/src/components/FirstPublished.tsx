@@ -71,8 +71,8 @@ const FirstPublished = ({
 							defer={{ until: 'visible' }}
 						>
 							<RelativeTime
-								epoch={firstPublished}
-								format="short"
+								now={Date.now()}
+								then={firstPublished}
 							></RelativeTime>
 						</Island>
 					</span>
