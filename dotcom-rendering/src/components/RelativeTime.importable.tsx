@@ -1,9 +1,23 @@
 import { isString, timeAgo as timeAgoHasAWeirdInterface } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
+import { useIsInView } from '../lib/useIsInView';
 
 type Props = {
 	epoch: number;
 	format: 'short' | 'long';
+};
+
+/** if a date is recent, keep it up to date more frequently */
+const getUpdateFrequency = (epoch: number) => {
+	const secondsAgo = (Date.now() - epoch) / 1_000;
+	// less than a minute ago
+	if (secondsAgo < 60) return 1 * 1000; // 1 second
+	// less than an hour ago
+	if (secondsAgo < 60 * 60) return 20 * 1000; // 20 seconds
+	// less than an day ago
+	if (secondsAgo < 60 * 60 * 24) return 5 * 60 * 1000; // 5 minutes
+	// over a day ago
+	return Infinity;
 };
 
 const timeAgo = (epoch: number, format: Props['format']) => {
@@ -17,23 +31,28 @@ const timeAgo = (epoch: number, format: Props['format']) => {
 
 export const RelativeTime = ({ epoch, format }: Props) => {
 	const date = new Date(epoch);
+	const frequency = getUpdateFrequency(epoch);
+	const [inView, ref] = useIsInView({ repeat: true });
 
 	const [display, setDisplay] = useState(timeAgo(epoch, format) ?? null);
 
 	const updateTime = useCallback(() => {
+		if (!inView) return;
 		const relativeTime = timeAgo(epoch, format);
 		if (isString(relativeTime)) setDisplay(relativeTime);
-	}, [epoch, format]);
+	}, [epoch, format, inView]);
 
 	useEffect(updateTime);
 
 	useEffect(() => {
-		const interval = setInterval(updateTime, 15_000);
+		const interval = setInterval(updateTime, frequency);
 		return () => clearInterval(interval);
-	}, [updateTime]);
+	}, [frequency, updateTime]);
 
 	return (
 		<time
+			ref={ref}
+			data-update-frequency={frequency}
 			dateTime={date.toISOString()}
 			title={date.toLocaleDateString('en-GB', {
 				hour: '2-digit',
