@@ -290,22 +290,6 @@ const isUserLoggedInOktaRefactor = (): Promise<boolean> =>
  * - set the `Authorization` header with a Bearer Access Token
  * - set the `X-GU-IS-OAUTH` header to `true`
  */
-const getOptionsHeadersWithOkta = (
-	authStatus: SignedInWithCookies | SignedInWithOkta,
-): RequestInit => {
-	if (authStatus.kind === 'SignedInWithCookies') {
-		return {
-			credentials: 'include',
-		};
-	}
-
-	return {
-		headers: {
-			Authorization: `Bearer ${authStatus.accessToken.accessToken}`,
-			'X-GU-IS-OAUTH': 'true',
-		},
-	};
-};
 
 /**
  * Get the user's Google Tag ID
@@ -318,6 +302,7 @@ const getOptionsHeadersWithOkta = (
  *   IDAPI was successful
  * - null, if the user is signed out or the fetch to IDAPI failed
  */
+
 const getGoogleTagId = (): Promise<string | null> =>
 	getAuthStatus().then((authStatus) => {
 		switch (authStatus.kind) {
@@ -360,7 +345,6 @@ export type UserFeaturesResponse = {
 export {
 	isUserLoggedIn,
 	getAuthStatus,
-	getOptionsHeadersWithOkta,
 	isUserLoggedInOktaRefactor,
 	getGoogleTagId,
 };

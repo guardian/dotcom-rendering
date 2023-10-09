@@ -1,5 +1,6 @@
 import { getCookie, isObject, removeCookie, setCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import { getOptionsHeadersWithOkta } from './identity';
 import {
 	adFreeDataIsPresent,
 	dateDiffDays,
@@ -7,7 +8,6 @@ import {
 	getAdFreeCookie,
 	getAuthStatus,
 	getLocalDate,
-	getOptionsHeadersWithOkta,
 	isUserLoggedInOktaRefactor,
 	noop,
 	setAdFreeCookie,
@@ -17,7 +17,6 @@ import type {
 	LocalDate,
 	UserFeaturesResponse,
 } from './user-features-common-imports.ts';
-
 // Persistence keys
 const PAYING_MEMBER_COOKIE = 'gu_paying_member';
 const ACTION_REQUIRED_FOR_COOKIE = 'gu_action_required_for';
