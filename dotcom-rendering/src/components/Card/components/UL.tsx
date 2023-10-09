@@ -11,16 +11,21 @@ const ulStyles = (direction: Direction) => css`
 	position: relative;
 	display: flex;
 	flex-direction: ${direction};
-	row-gap: 12px;
 	${until.tablet} {
 		flex-direction: column;
 		width: 100%;
 	}
 
-	@supports not (row-gap: 12px) {
+	& > li {
+		margin-bottom: ${space[3]}px;
+	}
+
+	@supports (row-gap: 1em) {
 		& > li {
-			margin-bottom: 12px;
+			margin-bottom: 0;
 		}
+		/* Supported in flex layout is lacking: https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap#browser_compatibility */
+		row-gap: ${space[3]}px;
 	}
 `;
 
