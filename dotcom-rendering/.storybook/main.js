@@ -22,6 +22,7 @@ module.exports = {
 	staticDirs: ['../src/static'],
 	addons: [
 		'@storybook/addon-essentials',
+		'@storybook/addon-controls',
 		'storybook-addon-turbo-build',
 		{
 			name: 'storybook-addon-turbo-build',

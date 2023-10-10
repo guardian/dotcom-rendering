@@ -4,55 +4,53 @@ import { FollowNotificationsButton, FollowTagButton } from './FollowButtons';
 export default {
 	component: [FollowNotificationsButton, FollowTagButton],
 	title: 'Components/FollowStatusButtons',
+	argTypes: {
+		theme: {
+			description: 'Pillar theme',
+			options: [0, 1, 2, 3, 4],
+			mapping: [
+				Pillar.News,
+				Pillar.Opinion,
+				Pillar.Sport,
+				Pillar.Culture,
+				Pillar.Lifestyle,
+			],
+			control: {
+				type: 'inline-radio',
+				labels: Object.values(Pillar),
+			},
+		},
+	},
+	args: {
+		isFollowing: false,
+		theme: Pillar.News,
+	},
 };
 
-export const NotFollowing = () => {
+export const FollowStatusButtons = (args: {
+	isFollowing: boolean;
+	theme: Pillar;
+}) => {
 	return (
 		<>
 			<FollowTagButton
 				displayName="Contributor"
-				isFollowing={false}
+				isFollowing={args.isFollowing}
 				onClickHandler={() => undefined}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: Pillar.News,
+					theme: args.theme,
 				}}
 			/>
 			<FollowNotificationsButton
 				displayName="Contributor"
-				isFollowing={false}
+				isFollowing={args.isFollowing}
 				onClickHandler={() => undefined}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
-			/>
-		</>
-	);
-};
-export const Following = () => {
-	return (
-		<>
-			<FollowTagButton
-				displayName="Contributor"
-				isFollowing={true}
-				onClickHandler={() => undefined}
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
-			/>
-			<FollowNotificationsButton
-				displayName="Contributor"
-				isFollowing={true}
-				onClickHandler={() => undefined}
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
+					theme: args.theme,
 				}}
 			/>
 		</>
