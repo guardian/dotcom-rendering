@@ -96,7 +96,9 @@ const Follow: FC<Props> = ({ contributors, format }) => {
 						className="js-follow-tag-status"
 						css={followStatusStyles}
 					>
-						{/* The FollowTagStatus component will be rendered here after code in article.ts checks if bridget version is compatible and client env has MyGuardian enabled */}
+						{/* The FollowTagStatus component will be rendered here after
+						code in article.ts checks if bridget version is compatible
+						and client env has MyGuardian enabled */}
 					</span>
 				</button>
 

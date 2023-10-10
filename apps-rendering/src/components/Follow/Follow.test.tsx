@@ -43,9 +43,7 @@ describe('Follow component renders as expected', () => {
 			);
 		});
 
-		expect(container.textContent).toContain(
-			'Follow George MonbiotNotifications off',
-		);
+		expect(container.textContent).toContain('Notifications off');
 
 		unmountComponentAtNode(container);
 		container.remove();

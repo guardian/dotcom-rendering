@@ -31,7 +31,7 @@ import {
 	tagClient,
 	userClient,
 } from 'native/nativeApi';
-import { Optional } from 'optional';
+import type { Optional } from 'optional';
 import type { FC, ReactElement } from 'react';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
@@ -139,7 +139,7 @@ function conditionallyRenderFollowTagComponent(
 		bridgetVersion: Optional<string>,
 	): boolean =>
 		bridgetVersion
-			.map((versionString) => compare(versionString, '2.0.1', '>='))
+			.map((versionString) => compare(versionString, '2.5.0', '>='))
 			.withDefault(false);
 
 	const isBridgetCompatible = getBridgetVersion().then((version) => {

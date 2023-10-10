@@ -2609,10 +2609,10 @@
     node-int64 "^0.4.0"
     thrift "^0.15.0"
 
-"@guardian/bridget@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.0.0.tgz#9be79e1f8c0c4a9ee3829390b9bcb828d78cb4d7"
-  integrity sha512-bCNIQuPe74AwR0eZWHgN/at3vumPOB0NxozciTujGUblhun23f+Fagtkkf1zyIqQ2VjaYmSVy5zVug+E5v9auw==
+"@guardian/bridget@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.5.0.tgz#1a5b1adeea08398b678f38e15cb8c598a5e73b19"
+  integrity sha512-H60m0zTPGgwJJm4SG/a7XO6Cxmn2PPJQhGULjueX+z5ZkEfhc78dsc6a578GZbJWFSTw10clgnXM7ruXON2vUw==
 
 "@guardian/cdk@^50.10.10":
   version "50.10.10"
