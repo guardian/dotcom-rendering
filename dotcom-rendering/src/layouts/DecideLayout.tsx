@@ -96,8 +96,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 					);
 
 				case ArticleDesign.FullPageInteractive: {
-					// Should be FullPageInteractiveLayout once implemented for apps
-					return notSupported;
+					return (
+						<FullPageInteractiveLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				}
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
@@ -153,6 +158,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				}
@@ -229,6 +235,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget="Web"
 						/>
 					);
 				}

@@ -35,11 +35,21 @@ import type { FEElement } from '../types/content';
 import type { DCRArticle } from '../types/frontend';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { RenderingTarget } from 'src/types/renderingTarget';
 
-interface Props {
+interface CommonProps {
 	article: DCRArticle;
-	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
+}
+
+interface WebProps extends CommonProps {
+	NAV: NavType;
+	renderingTarget: 'Web';
+}
+
+interface AppsProps extends CommonProps {
+	renderingTarget: 'Apps';
 }
 
 type RendererProps = {
@@ -127,7 +137,7 @@ const Renderer = ({
 	return <div css={adStyles}>{output}</div>;
 };
 
-const NavHeader = ({ article, NAV, format }: Props) => {
+const NavHeader = ({ article, NAV, format }: WebProps) => {
 	// Typically immersives use the slim nav, but this switch is used to force
 	// the full nav - typically during special events such as Project 200, or
 	// the Euros. The motivation is to better onboard new visitors; interactives
@@ -282,40 +292,51 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	);
 };
 
-export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
+export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
+	const { article, format, renderingTarget } = props;
 	const {
 		config: { host },
 	} = article;
 
 	const palette = decidePalette(format);
+	const isWeb = renderingTarget === 'Web';
 
 	return (
 		<>
-			{article.isLegacyInteractive && (
-				<Global styles={interactiveGlobalStyles} />
-			)}
-			<header
-				css={css`
-					background-color: ${palette.background.article};
-				`}
-			>
-				<NavHeader article={article} NAV={NAV} format={format} />
+			{isWeb && (
+				<>
+					{article.isLegacyInteractive && (
+						<Global styles={interactiveGlobalStyles} />
+					)}
+					<header
+						css={css`
+							background-color: ${palette.background.article};
+						`}
+					>
+						<NavHeader
+							article={article}
+							NAV={props.NAV}
+							format={format}
+							renderingTarget="Web"
+						/>
 
-				{format.theme === ArticleSpecial.Labs && (
-					<Stuck>
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							padSides={true}
-							backgroundColour={labs[400]}
-							borderColour={border.primary}
-							sectionId="labs-header"
-						>
-							<LabsHeader />
-						</Section>
-					</Stuck>
-				)}
-			</header>
+						{format.theme === ArticleSpecial.Labs && (
+							<Stuck>
+								<Section
+									fullWidth={true}
+									showTopBorder={false}
+									padSides={true}
+									backgroundColour={labs[400]}
+									borderColour={border.primary}
+									sectionId="labs-header"
+								>
+									<LabsHeader />
+								</Section>
+							</Stuck>
+						)}
+					</header>
+				</>
+			)}
 
 			<Section
 				fullWidth={true}
@@ -347,7 +368,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				</article>
 			</Section>
 
-			{NAV.subNavSections && (
+			{isWeb && props.NAV.subNavSections && (
 				<Section
 					fullWidth={true}
 					padSides={false}
@@ -356,66 +377,73 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				>
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
+							subNavSections={props.NAV.subNavSections}
+							currentNavLink={props.NAV.currentNavLink}
 							linkHoverColour={palette.text.articleLinkHover}
 							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>
 			)}
+			{isWeb && (
+				<>
+					<Section
+						fullWidth={true}
+						padSides={false}
+						backgroundColour={brandBackground.primary}
+						borderColour={brandBorder.primary}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Footer
+							pageFooter={article.pageFooter}
+							selectedPillar={props.NAV.selectedPillar}
+							pillars={props.NAV.pillars}
+							urls={article.nav.readerRevenueLinks.header}
+							editionId={article.editionId}
+							contributionsServiceUrl={
+								article.contributionsServiceUrl
+							}
+						/>
+					</Section>
 
-			<Section
-				fullWidth={true}
-				padSides={false}
-				backgroundColour={brandBackground.primary}
-				borderColour={brandBorder.primary}
-				showSideBorders={false}
-				element="footer"
-			>
-				<Footer
-					pageFooter={article.pageFooter}
-					selectedPillar={NAV.selectedPillar}
-					pillars={NAV.pillars}
-					urls={article.nav.readerRevenueLinks.header}
-					editionId={article.editionId}
-					contributionsServiceUrl={article.contributionsServiceUrl}
-				/>
-			</Section>
-
-			<BannerWrapper>
-				<Island
-					priority="feature"
-					defer={{ until: 'idle' }}
-					clientOnly={true}
-				>
-					<StickyBottomBanner
-						contentType={article.contentType}
-						contributionsServiceUrl={
-							article.contributionsServiceUrl
-						}
-						idApiUrl={article.config.idApiUrl}
-						isMinuteArticle={article.pageType.isMinuteArticle}
-						isPaidContent={article.pageType.isPaidContent}
-						isPreview={!!article.config.isPreview}
-						isSensitive={article.config.isSensitive}
-						keywordIds={article.config.keywordIds}
-						pageId={article.pageId}
-						sectionId={article.config.section}
-						shouldHideReaderRevenue={
-							article.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!article.config.switches.remoteBanner
-						}
-						puzzleBannerSwitch={
-							!!article.config.switches.puzzlesBanner
-						}
-						tags={article.tags}
-					/>
-				</Island>
-			</BannerWrapper>
-			<MobileStickyContainer />
+					<BannerWrapper>
+						<Island
+							priority="feature"
+							defer={{ until: 'idle' }}
+							clientOnly={true}
+						>
+							<StickyBottomBanner
+								contentType={article.contentType}
+								contributionsServiceUrl={
+									article.contributionsServiceUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								isMinuteArticle={
+									article.pageType.isMinuteArticle
+								}
+								isPaidContent={article.pageType.isPaidContent}
+								isPreview={!!article.config.isPreview}
+								isSensitive={article.config.isSensitive}
+								keywordIds={article.config.keywordIds}
+								pageId={article.pageId}
+								sectionId={article.config.section}
+								shouldHideReaderRevenue={
+									article.shouldHideReaderRevenue
+								}
+								remoteBannerSwitch={
+									!!article.config.switches.remoteBanner
+								}
+								puzzleBannerSwitch={
+									!!article.config.switches.puzzlesBanner
+								}
+								tags={article.tags}
+							/>
+						</Island>
+					</BannerWrapper>
+					<MobileStickyContainer />
+				</>
+			)}
 		</>
 	);
 };
