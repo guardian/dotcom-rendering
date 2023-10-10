@@ -1,5 +1,5 @@
 import { startPerformanceMeasure } from '@guardian/libs';
-import { record } from '../client/ophan/ophan';
+import { getOphan } from '../client/ophan/ophan';
 
 export type MaybeFC = React.FC | null;
 type ShowMessage<T> = (meta: T) => MaybeFC;
@@ -34,11 +34,16 @@ export type SlotConfig = {
 	name: string;
 };
 
-const recordMessageTimeoutInOphan = (candidateId: string, slotName: string) =>
-	record({
+const recordMessageTimeoutInOphan = async (
+	candidateId: string,
+	slotName: string,
+) => {
+	const ophan = await getOphan();
+	ophan.record({
 		component: `${slotName}-picker-timeout-dcr`,
 		value: candidateId,
 	});
+};
 
 const timeoutify = <T>(
 	candidateConfig: CandidateConfig<T>,
@@ -56,7 +61,7 @@ const timeoutify = <T>(
 
 			if (candidateConfig.timeoutMillis !== null) {
 				timer = window.setTimeout(() => {
-					recordMessageTimeoutInOphan(
+					void recordMessageTimeoutInOphan(
 						candidateConfig.candidate.id,
 						slotName,
 					);
@@ -72,9 +77,11 @@ const timeoutify = <T>(
 					const canShowTimeTaken = endPerformanceMeasure();
 
 					if (candidateConfig.reportTiming) {
-						record({
-							component: perfName,
-							value: canShowTimeTaken,
+						void getOphan().then((ophan) => {
+							ophan.record({
+								component: perfName,
+								value: canShowTimeTaken,
+							});
 						});
 					}
 				})

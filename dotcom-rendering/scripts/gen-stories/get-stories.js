@@ -155,9 +155,27 @@ const testLayoutFormats = [
 	},
 	{
 		display: 'Showcase',
+		design: 'Standard',
+		theme: 'NewsPillar',
+		renderingTarget: 'Apps',
+	},
+	{
+		display: 'Showcase',
 		design: 'Picture',
 		theme: 'OpinionPillar',
 		renderingTarget: 'Web',
+	},
+	{
+		display: 'Standard',
+		design: 'Comment',
+		theme: 'NewsPillar',
+		renderingTarget: 'Apps',
+	},
+	{
+		display: 'Standard',
+		design: 'Interactive',
+		theme: 'NewsPillar',
+		renderingTarget: 'Apps',
 	},
 ];
 

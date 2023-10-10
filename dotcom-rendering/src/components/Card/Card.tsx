@@ -99,6 +99,7 @@ export type Props = {
 	showLivePlayable?: boolean;
 	onwardsSource?: string;
 	pauseOffscreenVideo?: boolean;
+	showMainVideo?: boolean;
 };
 
 const StarRatingComponent = ({
@@ -211,7 +212,11 @@ const getMedia = ({
 	isPlayableMediaCard?: boolean;
 }) => {
 	if (mainMedia && mainMedia.type === 'Video' && !!isPlayableMediaCard) {
-		return { type: 'video', mainMedia } as const;
+		return {
+			type: 'video',
+			mainMedia,
+			...(imageUrl && { imageUrl }),
+		} as const;
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
@@ -286,6 +291,7 @@ export const Card = ({
 	showLivePlayable = false,
 	onwardsSource,
 	pauseOffscreenVideo = false,
+	showMainVideo = true,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -346,7 +352,10 @@ export const Card = ({
 								min-height: 10px;
 							`}
 						>
-							<Island deferUntil="visible">
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
 								<CardCommentCount
 									format={format}
 									discussionApiUrl={discussionApiUrl}
@@ -375,7 +384,8 @@ export const Card = ({
 
 	// If the card isn't playable, we need to show a play icon.
 	// Otherwise, this is handled by the YoutubeAtom
-	const showPlayIcon = mainMedia?.type === 'Video' && !isPlayableMediaCard;
+	const showPlayIcon =
+		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
 
 	const media = getMedia({
 		imageUrl,
@@ -435,47 +445,84 @@ export const Card = ({
 							</AvatarContainer>
 						)}
 						{media.type === 'video' && (
-							<div
-								data-chromatic="ignore"
-								data-component="youtube-atom"
-								css={css`
-									display: block;
-									position: relative;
-									${getZIndex('card-nested-link')}
-								`}
-							>
-								<Island>
-									<YoutubeBlockComponent
-										id={media.mainMedia.elementId}
-										elementId={media.mainMedia.elementId}
-										assetId={media.mainMedia.videoId}
-										duration={media.mainMedia.duration}
-										posterImage={media.mainMedia.images}
-										width={media.mainMedia.width}
-										height={media.mainMedia.height}
-										origin={media.mainMedia.origin}
-										mediaTitle={headlineText}
-										expired={media.mainMedia.expired}
-										format={format}
-										isMainMedia={true}
-										hideCaption={true}
-										role="inline"
-										stickyVideos={false}
-										kickerText={kickerText}
-										pauseOffscreenVideo={
-											pauseOffscreenVideo
-										}
-										showTextOverlay={
-											containerType === 'fixed/video'
-										}
-									/>
-								</Island>
-							</div>
+							<>
+								{showMainVideo ? (
+									<div
+										data-chromatic="ignore"
+										data-component="youtube-atom"
+										css={css`
+											display: block;
+											position: relative;
+											${getZIndex('card-nested-link')}
+										`}
+									>
+										<Island
+											priority="critical"
+											defer={{ until: 'visible' }}
+										>
+											<YoutubeBlockComponent
+												id={media.mainMedia.elementId}
+												elementId={
+													media.mainMedia.elementId
+												}
+												assetId={
+													media.mainMedia.videoId
+												}
+												duration={
+													media.mainMedia.duration
+												}
+												posterImage={
+													media.mainMedia.images
+												}
+												overrideImage={media.imageUrl}
+												width={media.mainMedia.width}
+												height={media.mainMedia.height}
+												origin={media.mainMedia.origin}
+												mediaTitle={headlineText}
+												expired={
+													media.mainMedia.expired
+												}
+												format={format}
+												isMainMedia={true}
+												hideCaption={true}
+												stickyVideos={false}
+												kickerText={kickerText}
+												pauseOffscreenVideo={
+													pauseOffscreenVideo
+												}
+												showTextOverlay={
+													containerType ===
+													'fixed/video'
+												}
+											/>
+										</Island>
+									</div>
+								) : (
+									<div>
+										<CardPicture
+											mainImage={
+												media.imageUrl
+													? media.imageUrl
+													: media.mainMedia.images.reduce(
+															(prev, current) =>
+																prev.width >
+																current.width
+																	? prev
+																	: current,
+													  ).url
+											}
+											imageSize={imageSize}
+											alt={headlineText}
+											loading={imageLoading}
+										/>
+									</div>
+								)}
+							</>
 						)}
 						{media.type === 'picture' && (
 							<>
 								<CardPicture
-									master={media.imageUrl}
+									mainImage={media.imageUrl}
 									imageSize={imageSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
@@ -564,7 +611,10 @@ export const Card = ({
 								</TrailTextWrapper>
 							)}
 							{showLivePlayable && (
-								<Island>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
 									<LatestLinks
 										id={linkTo}
 										format={format}

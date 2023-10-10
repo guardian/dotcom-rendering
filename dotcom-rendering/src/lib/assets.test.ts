@@ -128,12 +128,4 @@ describe('getModulesBuild', () => {
 		const expected = BUILD_VARIANT ? 'web.variant' : 'web';
 		expect(build).toBe(expected);
 	});
-
-	it('should support Ophan ESM build when in test', () => {
-		const build = getModulesBuild({
-			tests: { ophanEsmVariant: 'variant' },
-			switches: {},
-		});
-		expect(build).toBe('web.ophan-esm');
-	});
 });

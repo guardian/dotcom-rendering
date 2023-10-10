@@ -61,17 +61,6 @@ void startup(
 	},
 );
 
-void startup(
-	'performanceMonitoring',
-	() =>
-		import(/* webpackMode: "eager" */ './performanceMonitoring').then(
-			({ performanceMonitoring }) => performanceMonitoring(),
-		),
-	{
-		priority: 'critical',
-	},
-);
-
 /*************************************************************
  *
  * The following modules are lazy loaded,

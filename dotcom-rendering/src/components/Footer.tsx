@@ -23,6 +23,7 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { PillarLinkType } from '../model/extract-nav';
 import type { FooterType } from '../types/footer';
 import { BackToTop } from './BackToTop';
+import { FooterLabel } from './FooterLabel.importable';
 import { Island } from './Island';
 import { Pillars } from './Pillars';
 import { PrivacySettingsLink } from './PrivacySettingsLink.importable';
@@ -246,7 +247,10 @@ const FooterLinks = ({
 				[
 					dataLinkName === 'privacy' ? (
 						<li key="privacy-settings-link">
-							<Island>
+							<Island
+								priority="critical"
+								defer={{ until: 'visible' }}
+							>
 								<PrivacySettingsLink
 									extraClasses={extraClasses}
 								/>
@@ -271,7 +275,11 @@ const FooterLinks = ({
 
 	const rrLinks = (
 		<div css={readerRevenueLinks}>
-			<Island deferUntil="visible" clientOnly={true}>
+			<Island
+				priority="feature"
+				defer={{ until: 'visible' }}
+				clientOnly={true}
+			>
 				<ReaderRevenueLinks
 					urls={urls}
 					editionId={editionId}
@@ -395,7 +403,10 @@ export const Footer = ({
 		</div>
 		<div css={copyright}>
 			© {year} Guardian News & Media Limited or its affiliated companies.
-			All rights reserved. (modern)
+			All rights reserved.{' '}
+			<Island priority="critical" defer={{ until: 'visible' }}>
+				<FooterLabel />
+			</Island>
 		</div>
 	</div>
 );

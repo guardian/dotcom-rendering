@@ -318,7 +318,7 @@ export const ImageComponent = ({
 				`}
 			>
 				{renderingTarget === 'Apps' ? (
-					<Island>
+					<Island priority="critical">
 						<AppsLightboxImage
 							images={imagesForAppsLightbox}
 							currentIndex={imagesForAppsLightbox.findIndex(
@@ -385,7 +385,7 @@ export const ImageComponent = ({
 				`}
 			>
 				{renderingTarget === 'Apps' ? (
-					<Island>
+					<Island priority="critical">
 						<AppsLightboxImage
 							images={imagesForAppsLightbox}
 							currentIndex={imagesForAppsLightbox.findIndex(
@@ -455,7 +455,7 @@ export const ImageComponent = ({
 				`}
 			>
 				{renderingTarget === 'Apps' ? (
-					<Island>
+					<Island priority="critical">
 						<AppsLightboxImage
 							images={imagesForAppsLightbox}
 							currentIndex={imagesForAppsLightbox.findIndex(
