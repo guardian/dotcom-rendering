@@ -23,7 +23,7 @@ const updateTimeElement = (element: Element): void => {
 		}
 		const oldTime = element.innerText;
 		if (newTime !== false && newTime !== oldTime)
-			element.innerHTML = newTime;
+			element.innerText = newTime;
 	}
 };
 

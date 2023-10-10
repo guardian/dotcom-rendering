@@ -22,7 +22,9 @@ import { makePrefetchHeader } from './lib/header';
 
 export const HydrationLayout = ({
 	manipulation,
+	count,
 }: {
+	count: number;
 	manipulation: 'preact' | 'dom';
 }) => {
 	const urls = {
@@ -79,11 +81,13 @@ export const HydrationLayout = ({
 						& > li {
 							background-color: ${palette.neutral[93]};
 							text-align: center;
-							line-height: 2rem;
+							height: 2rem;
+							width: 6rem;
+							overflow: hidden;
 						}
 					`}
 				>
-					{Array.from({ length: 10_000 }, (_, i) =>
+					{Array.from({ length: count }, (_, i) =>
 						(i + 1).toLocaleString(),
 					).map((key, index) => {
 						const now = Date.now();
@@ -140,10 +144,11 @@ const renderHydration = (
 	query: QueryString.ParsedQs,
 ): { html: string; prefetchScripts: string[] } => {
 	const manipulation = query.manipulation === 'dom' ? 'dom' : 'preact';
+	const count = isString(query.count) ? parseInt(query.count, 10) : 10_000;
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={{ renderingTarget: 'Web' }}>
-			<HydrationLayout manipulation={manipulation} />
+			<HydrationLayout manipulation={manipulation} count={count} />
 		</ConfigProvider>,
 	);
 
