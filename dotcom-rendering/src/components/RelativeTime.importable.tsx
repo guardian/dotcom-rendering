@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useIsInView } from '../lib/useIsInView';
 
 type Props = {
@@ -54,35 +54,36 @@ const timeAgo = ({
 export const RelativeTime = ({ now, then }: Props) => {
 	const { length, unit } = duration({ then, now });
 
-	/** if a date is recent, keep it up to date more frequently */
-	const [frequency, setFrequency] = useState(units[unit] / 3);
 	const [inView, ref] = useIsInView({ repeat: true });
+	const [time, setTime] = useState(now);
 
 	const [display, setDisplay] = useState(
 		timeAgo({ length, unit, date: new Date(then) }),
 	);
 
-	const updateTime = useCallback(() => {
-		if (!inView) return;
-		const live = duration({
-			then,
-			now: Date.now(),
-		});
-		setDisplay(timeAgo({ ...live, date: new Date(then) }));
-		setFrequency(units[live.unit] / 2);
-	}, [inView, then]);
-
 	useEffect(() => {
-		const interval = setInterval(updateTime, frequency);
-		return () => clearInterval(interval);
-	}, [frequency, updateTime]);
+		if (!inView) return;
+
+		const newTime = duration({
+			then,
+			now: time,
+		});
+
+		setDisplay(timeAgo({ ...newTime, date: new Date(then) }));
+
+		/** more recent events may need to update more frequently */
+		const delay = units[newTime.unit] / 3;
+		const timeout = setTimeout(() => {
+			setTime(Date.now());
+		}, delay);
+		return () => clearTimeout(timeout);
+	}, [inView, then, time]);
 
 	const date = new Date(then);
 
 	return (
 		<time
 			ref={ref}
-			data-update-frequency={frequency}
 			dateTime={date.toISOString()}
 			title={date.toLocaleDateString('en-GB', {
 				hour: '2-digit',
