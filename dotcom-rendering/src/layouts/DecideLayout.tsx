@@ -83,8 +83,14 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 		default: {
 			switch (format.design) {
 				case ArticleDesign.Interactive:
-					// Should be InteractiveLayout once implemented for apps
-					return notSupported;
+					return (
+						<InteractiveLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+
 				case ArticleDesign.FullPageInteractive: {
 					// Should be FullPageInteractiveLayout once implemented for apps
 					return notSupported;
@@ -209,6 +215,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
