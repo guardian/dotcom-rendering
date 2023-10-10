@@ -39,7 +39,7 @@ const copyApp = (appName) => {
 	// GOTCHA: This is a little hack to be backwards compatible with the naming for when this was a single stack app
 	const cfnTemplateName = appName === 'rendering' ? '' : `-${appName}`;
 	const cfnFolder =
-		appName === 'rendering' ? 'frontend-cfn' : `-${appName}-cfn`;
+		appName === 'rendering' ? 'frontend-cfn' : `${appName}-cfn`;
 
 	log(` - copying app: ${appName}`);
 
