@@ -1,5 +1,4 @@
 import {
-	ExplainerAtom,
 	InteractiveAtom,
 	InteractiveLayoutAtom,
 	VideoAtom,
@@ -21,6 +20,7 @@ import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpSwitcher } from '../components/EmailSignUpSwitcher';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
+import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
