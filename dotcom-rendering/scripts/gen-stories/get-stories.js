@@ -171,6 +171,12 @@ const testLayoutFormats = [
 		theme: 'NewsPillar',
 		renderingTarget: 'Apps',
 	},
+	{
+		display: 'Standard',
+		design: 'Interactive',
+		theme: 'NewsPillar',
+		renderingTarget: 'Apps',
+	},
 ];
 
 const generateLayoutStories = () => {
