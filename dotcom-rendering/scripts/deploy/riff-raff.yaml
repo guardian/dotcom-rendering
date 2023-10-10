@@ -37,7 +37,7 @@ deployments:
         PROD: DotcomRendering-front-web-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: front-web
-      amiParameter: AMIRenderfront
+      amiParameter: AMIFrontweb
   front-web:
     type: autoscaling
     parameters:
