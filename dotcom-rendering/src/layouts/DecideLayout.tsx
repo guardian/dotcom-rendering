@@ -29,11 +29,13 @@ interface WebProps extends BaseProps {
 }
 
 const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
+	console.log(format);
 	const notSupported = <pre>Not supported</pre>;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
 				case ArticleDesign.Interactive: {
+					console.log('APPS immersive interactive');
 					// Should be InteractiveLayout once implemented for apps
 					return notSupported;
 				}
@@ -83,9 +85,19 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 		default: {
 			switch (format.design) {
 				case ArticleDesign.Interactive:
-					// Should be InteractiveLayout once implemented for apps
-					return notSupported;
+					console.log('APPS standard interactive');
+
+					return (
+						<InteractiveLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+
 				case ArticleDesign.FullPageInteractive: {
+					console.log('APPS fullpage interactive');
+
 					// Should be FullPageInteractiveLayout once implemented for apps
 					return notSupported;
 				}
@@ -134,6 +146,8 @@ const DecideLayoutWeb = ({
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
 				case ArticleDesign.Interactive: {
+					console.log('immersive interactive layout');
+
 					// Render all 'immersive interactives' until switchover date as 'FullPageInteractive'
 					// TBD: After 'immersive interactive' changes to CAPI are merged, add logic here to either use
 					// 'InteractiveImmersiveLayout' if published after switchover date, or 'FullPageInteractiveLayout'
@@ -204,14 +218,19 @@ const DecideLayoutWeb = ({
 		default: {
 			switch (format.design) {
 				case ArticleDesign.Interactive:
+					console.log('standard interactive layout');
+
 					return (
 						<InteractiveLayout
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
+					console.log('standard full page interactive layout');
+
 					return (
 						<FullPageInteractiveLayout
 							article={article}
