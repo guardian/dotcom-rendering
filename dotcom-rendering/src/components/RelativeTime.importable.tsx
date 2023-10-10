@@ -41,14 +41,30 @@ const timeAgo = ({
 	length: number;
 	unit: keyof typeof units;
 }) => {
-	if (unit === 'day' && length > 7) {
-		return date.toLocaleDateString('en-GB', {
-			day: 'numeric',
-			month: 'short',
-			year: 'numeric',
-		});
+	switch (unit) {
+		case 'second': {
+			if (length > 55) return '1m ago';
+			if (length < 15) return 'now';
+			return `${Math.round(length)}s ago`;
+		}
+		case 'minute': {
+			if (length > 55) return '1h ago';
+			return `${Math.round(length)}m ago`;
+		}
+		case 'hour': {
+			return `${Math.round(length)}h ago`;
+		}
+		case 'day': {
+			if (length >= 7)
+				return date.toLocaleDateString('en-GB', {
+					day: 'numeric',
+					month: 'short',
+					year: 'numeric',
+				});
+
+			return `${Math.round(length)}d ago`;
+		}
 	}
-	return `${Math.floor(length)}${unit.charAt(0)} ago`;
 };
 
 export const RelativeTime = ({ now, then }: Props) => {
