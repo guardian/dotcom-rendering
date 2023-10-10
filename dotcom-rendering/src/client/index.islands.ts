@@ -12,13 +12,14 @@ void startup(
 	},
 );
 
-void startup(
-	'islands',
-	() =>
-		import(/* webpackMode: "lazy" */ './relativeTime').then(
-			({ relativeTime }) => relativeTime(),
-		),
-	{
-		priority: 'feature',
-	},
-);
+window.location.search.startsWith('?manipulation=dom') &&
+	void startup(
+		'islands',
+		() =>
+			import(/* webpackMode: "lazy" */ './relativeTime').then(
+				({ relativeTime }) => relativeTime(),
+			),
+		{
+			priority: 'feature',
+		},
+	);
