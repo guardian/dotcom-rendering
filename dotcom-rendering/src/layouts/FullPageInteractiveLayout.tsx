@@ -33,9 +33,9 @@ import type { NavType } from '../model/extract-nav';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { DCRArticle } from '../types/frontend';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { RenderingTarget } from 'src/types/renderingTarget';
 
 interface CommonProps {
 	article: DCRArticle;
@@ -317,7 +317,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 							article={article}
 							NAV={props.NAV}
 							format={format}
-							renderingTarget="Web"
+							renderingTarget={renderingTarget}
 						/>
 
 						{format.theme === ArticleSpecial.Labs && (
