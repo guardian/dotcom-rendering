@@ -117,6 +117,7 @@ const commonConfigs = ({ platform }) => ({
 /** @type {readonly Build[]} */
 const clientBuilds = [
 	'web',
+	'web.islands',
 	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
 		? /** @type {const} */ (['web.variant'])
 		: []),

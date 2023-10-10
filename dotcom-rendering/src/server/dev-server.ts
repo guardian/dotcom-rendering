@@ -15,6 +15,7 @@ import {
 	handleTagFront,
 	handleTagFrontJson,
 } from '../server/index.front.web';
+import { handleHydrationTest } from './hydration';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
@@ -64,6 +65,8 @@ export const devServer = (): Handler => {
 				return handleAllEditorialNewslettersPage(req, res, next);
 			case 'AppsArticle':
 				return handleAppsArticle(req, res, next);
+			case 'Hydration':
+				return handleHydrationTest(req, res, next);
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();

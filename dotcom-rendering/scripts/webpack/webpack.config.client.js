@@ -35,6 +35,8 @@ const generateName = (build) => {
  */
 const getEntryIndex = (build) => {
 	switch (build) {
+		case 'web.islands':
+			return './src/client/index.islands.ts';
 		case 'apps':
 			return './src/client/index.apps.ts';
 		default:
@@ -78,6 +80,7 @@ const getLoaders = (build) => {
 			];
 		case 'apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
+		case 'web.islands':
 		case 'web.variant':
 		case 'web':
 			return swcLoader(getBrowserTargets());

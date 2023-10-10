@@ -66,7 +66,12 @@ const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	}
 });
 
-export type Build = 'apps' | 'web' | 'web.variant' | 'web.legacy';
+export type Build =
+	| 'apps'
+	| 'web.islands'
+	| 'web'
+	| 'web.variant'
+	| 'web.legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
