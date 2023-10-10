@@ -10,20 +10,18 @@ import {
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 import { formatTime } from '../../lib/formatTime';
-import type { ImageSource, RoleType } from '../../types/content';
 import type { Palette } from '../../types/palette';
-import { Picture } from './Picture';
+import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 export type VideoCategory = 'live' | 'documentary' | 'explainer';
 
 type Props = {
 	uniqueId: string;
-	overrideImage?: ImageSource[];
-	posterImage?: ImageSource[];
+	overrideImage?: string;
+	posterImage?: string;
 	height: number;
 	width: number;
 	alt: string;
-	role: RoleType;
 	duration?: number; // in seconds
 	title?: string;
 	onClick: () => void;
@@ -176,7 +174,6 @@ export const YoutubeAtomOverlay = ({
 	height,
 	width,
 	alt,
-	role,
 	duration,
 	title,
 	onClick,
@@ -190,6 +187,7 @@ export const YoutubeAtomOverlay = ({
 	const showPill = !!videoCategory || hasDuration;
 	const isLive = videoCategory === 'live';
 	const dcrPalette = decidePalette(format);
+	const image = overrideImage ?? posterImage;
 
 	return (
 		<button
@@ -200,13 +198,14 @@ export const YoutubeAtomOverlay = ({
 			aria-label={title ? `Play video: ${title}` : `Play video`}
 			type="button"
 		>
-			<Picture
-				imageSources={overrideImage ?? posterImage ?? []}
-				role={role}
-				alt={alt}
-				height={height}
-				width={width}
-			/>
+			{!!image && (
+				<YoutubeAtomPicture
+					image={image}
+					alt={alt}
+					height={height}
+					width={width}
+				/>
+			)}
 			{showPill && (
 				<div css={pillStyles}>
 					{!!videoCategory && (

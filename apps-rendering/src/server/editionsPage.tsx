@@ -24,7 +24,7 @@ import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import {
-	pageFonts as devFonts,
+	editionsDevFonts as devFonts,
 	editionsPreviewFonts as previewFonts,
 	editionsPageFonts as prodFonts,
 } from 'styles';

@@ -7,9 +7,17 @@ const shouldHideSupportMessaging: {
 	[key: string]: any;
 } = shouldHideSupportMessaging_;
 
+// @swc/jest does not seem to handle dynamic import of ophan.ng.js
+// We get a “define is not defined” in Jest, but it seems to work in browsers
+jest.mock('../client/ophan/ophan', () => ({
+	getOphan: () => Promise.resolve({ record: () => jest.fn() }),
+	sendOphanComponentEvent: jest.fn(),
+}));
+
 jest.mock('../lib/contributions', () => ({
 	shouldHideSupportMessaging: jest.fn(() => true),
 }));
+
 jest.mock('@guardian/libs', () => ({
 	getLocale: async () => {
 		return 'GB';

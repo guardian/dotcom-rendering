@@ -436,7 +436,10 @@ export const LabsSection = ({
 				>
 					{children}
 					{canShowMore && (
-						<Island deferUntil="interaction">
+						<Island
+							priority="feature"
+							defer={{ until: 'interaction' }}
+						>
 							<ShowMore
 								title={title}
 								sectionId={sectionId}

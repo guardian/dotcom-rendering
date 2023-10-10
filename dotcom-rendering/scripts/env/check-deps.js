@@ -15,7 +15,6 @@ const { object: json } = lockfile.parse(
 
 const knownNonSemver = /** @type {const} */ ([
 	'https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0',
-	'npm:ophan-tracker-js@2.0.0-beta-5',
 ]);
 
 const mismatches = Object.entries(pkg.dependencies)

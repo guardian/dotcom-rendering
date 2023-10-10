@@ -1,4 +1,5 @@
 import { isNonNullable } from '@guardian/libs';
+import { pickBrandingForEdition } from '../lib/branding';
 import type { EditionId } from '../lib/edition';
 import type { Branding } from '../types/branding';
 import type {
@@ -35,12 +36,8 @@ function getBrandingFromCards(
 	editionId: EditionId,
 ): Branding[] {
 	return allCards
-		.map(
-			(card) =>
-				card.properties.editionBrandings.find(
-					(editionBranding) =>
-						editionBranding.edition.id === editionId,
-				)?.branding,
+		.map((card) =>
+			pickBrandingForEdition(card.properties.editionBrandings, editionId),
 		)
 		.filter(isNonNullable);
 }
@@ -50,7 +47,7 @@ export const enhanceCollections = ({
 	editionId,
 	pageId,
 	discussionApiUrl,
-	editionHasBranding,
+	frontBranding,
 	onPageDescription,
 	isPaidContent,
 }: {
@@ -58,7 +55,7 @@ export const enhanceCollections = ({
 	editionId: EditionId;
 	pageId: string;
 	discussionApiUrl: string;
-	editionHasBranding: boolean;
+	frontBranding: Branding | undefined;
 	onPageDescription?: string;
 	isPaidContent?: boolean;
 }): DCRCollectionType[] => {
@@ -106,7 +103,8 @@ export const enhanceCollections = ({
 			sponsoredContentBranding: decideSponsoredContentBranding(
 				allCards.length,
 				allBranding,
-				editionHasBranding,
+				// TODO(@chrislomaxjones) Read the full front branding value
+				!!frontBranding,
 				collectionType,
 			),
 			grouped: groupCards(

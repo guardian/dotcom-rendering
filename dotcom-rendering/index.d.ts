@@ -514,19 +514,7 @@ declare namespace JSX {
 		'amp-youtube': any;
 
 		/** Island {@link ./src/components/Island.tsx} */
-		'gu-island': {
-			name: string;
-			deferUntil?: 'idle' | 'visible' | 'interaction' | 'hash';
-			rootMargin?: string;
-			clientOnly?: boolean;
-			props: any;
-			children: React.ReactNode;
-			/**
-			 * This should be a stringified JSON of `ConfigContext`
-			 * @see /dotcom-rendering/src/types/configContext.ts
-			 */
-			config: string;
-		};
+		'gu-island': import('./src/components/Island.tsx').GuIsland;
 	}
 
 	interface IntrinsicAttributes {

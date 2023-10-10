@@ -15,10 +15,7 @@ import { useRef, useState } from 'react';
 // that version will compile and render but is non-functional.
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
-import {
-	getOphanRecordFunction,
-	submitComponentEvent,
-} from '../client/ophan/ophan';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
 import { useHydrated } from '../lib/useHydrated';
 import { Placeholder } from './Placeholder';
@@ -129,8 +126,6 @@ const sendTracking = (
 	newsletterId: string,
 	eventDescription: EventDescription,
 ): void => {
-	const ophanRecord = getOphanRecordFunction();
-
 	let action: OphanAction = 'CLICK';
 
 	switch (eventDescription) {
@@ -166,17 +161,14 @@ const sendTracking = (
 		timestamp: Date.now(),
 	});
 
-	submitComponentEvent(
-		{
-			action,
-			value,
-			component: {
-				componentType: 'NEWSLETTER_SUBSCRIPTION',
-				id: `DCR SecureSignupIframe ${newsletterId}`,
-			},
+	void submitComponentEvent({
+		action,
+		value,
+		component: {
+			componentType: 'NEWSLETTER_SUBSCRIPTION',
+			id: `DCR SecureSignupIframe ${newsletterId}`,
 		},
-		ophanRecord,
-	);
+	});
 };
 
 /**

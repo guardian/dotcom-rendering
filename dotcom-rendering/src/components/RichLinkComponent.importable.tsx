@@ -44,12 +44,17 @@ interface ImageAssetFields {
 	width: string;
 }
 
-const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
-	element,
-	ajaxUrl,
-) => {
-	const path = new URL(element.url).pathname;
-	return `${ajaxUrl}/embed/card${path}.json?dcr=true`;
+const buildUrl = (
+	element: RichLinkBlockElement,
+	ajaxUrl: string,
+): string | undefined => {
+	try {
+		const path = new URL(element.url).pathname;
+		return `${ajaxUrl}/embed/card${path}.json?dcr=true`;
+	} catch (error) {
+		console.error(`Failed to build a url with "${element.url}"`);
+		return undefined;
+	}
 };
 
 /**

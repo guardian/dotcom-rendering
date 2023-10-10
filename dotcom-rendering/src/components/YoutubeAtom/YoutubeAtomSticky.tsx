@@ -167,7 +167,7 @@ export const YoutubeAtomSticky = ({
 		});
 
 		// submit a 'close' event to Ophan
-		submitComponentEvent({
+		void submitComponentEvent({
 			component: {
 				componentType: 'STICKY_VIDEO',
 				id: videoId,
@@ -231,7 +231,7 @@ export const YoutubeAtomSticky = ({
 				msg: 'Stick',
 			});
 
-			submitComponentEvent({
+			void submitComponentEvent({
 				component: {
 					componentType: 'STICKY_VIDEO',
 					id: videoId,

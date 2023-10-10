@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import type { Participations } from '@guardian/ab-core';
 import type { AdsConfig } from '@guardian/commercial';
 import {
@@ -80,6 +81,27 @@ type PlayerListeners = Array<PlayerListener<PlayerListenerName>>;
  * return its event type (e.g. OnStateChangeEvent)
  */
 type ExtractEventType<T> = T extends YT.PlayerEventHandler<infer X> ? X : never;
+
+const imaAdContainerStyles = css`
+	/*
+		The IMA script gives the following styles to the ad container element:
+			width: [pixel value equal to the youtube iframe's width]
+			height: [pixel value equal to the youtube iframe's height]
+			position: relative;
+			display: block;
+		We need to override these styles to make sure that the ad container overlays
+		the youtube player exactly and to avoid a player-sized white space underneath the ad.
+	*/
+	/* stylelint-disable-next-line declaration-no-important -- we need this to override inline styles added by youtube */
+	width: 100% !important;
+	/* stylelint-disable-next-line declaration-no-important -- we need this to override inline styles added by youtube */
+	height: 100% !important;
+	/* stylelint-disable-next-line declaration-no-important -- we need this to override inline styles added by youtube */
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	display: none;
+`;
 
 const dispatchCustomPlayEvent = (uniqueId: string) => {
 	document.dispatchEvent(
@@ -630,6 +652,7 @@ export const YoutubeAtomPlayer = ({
 				<div
 					id={imaAdContainerId}
 					data-atom-type="ima-ad-container"
+					css={imaAdContainerStyles}
 				></div>
 			)}
 		</>
