@@ -10,12 +10,12 @@ import type { DocParser } from 'parserContext';
 import { Result } from 'result';
 
 interface TimelineEvent {
-    title: string;
-    date: string;
-    unixDate: number;
-    body?: string;
-    toDate?: string;
-    toUnixDate?: number;
+	title: string;
+	date: string;
+	unixDate: number;
+	body?: string;
+	toDate?: string;
+	toUnixDate?: number;
 }
 
 function formatOptionalDate(date: Int64 | undefined): string | undefined {
@@ -74,7 +74,7 @@ function parseAtom(
 			const { title } = atom;
 			const image = atom.data.guide.guideImage?.master?.file;
 			const credit = atom.data.guide.guideImage?.master?.credit;
-			const { body } = atom.data.guide.items[0];
+			const { body } = atom.data.guide.items?.[0];
 
 			if (!title || !body) {
 				return Result.err(`No title or body for atom: ${id}`);
