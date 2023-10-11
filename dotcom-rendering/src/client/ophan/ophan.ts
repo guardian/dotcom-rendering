@@ -9,7 +9,13 @@ import { log } from '@guardian/libs';
 import type { ServerSideTests } from '../../types/config';
 
 export type OphanRecordFunction = (
-	event: { [key: string]: unknown },
+	event: { [key: string]: unknown } & {
+		/**
+		 * the experiences key will override previously set values.
+		 * Use `recordExperiences` instead.
+		 */
+		experiences?: never;
+	},
 	callback?: () => void,
 ) => void;
 
@@ -152,5 +158,8 @@ export const recordExperiences = async (
 		experiencesSet.add(experience);
 	}
 	const { record } = await getOphan();
-	record({ experiences: [...experiencesSet].join(',') });
+
+	// this is the only allowed usage of sending experiences!
+	// otherwise, race conditions might lead to different results
+	record({ ['experiences' as string]: [...experiencesSet].sort().join(',') });
 };
