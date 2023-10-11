@@ -6,7 +6,6 @@ import type {
 	CollectionBranding,
 	EditionBranding,
 } from '../types/branding';
-import { assertUnreachable } from './assert-unreachable';
 import type { EditionId } from './edition';
 import { guard } from './guard';
 import type { NonEmptyArray } from './non-empty-array';
@@ -166,29 +165,13 @@ export const decideCollectionBranding = ({
 		return undefined;
 	}
 
-	switch (kind) {
-		case 'foundation':
-		case 'paid-content': {
-			return {
-				kind,
-				isFrontBranding: false,
-				branding,
-			};
-		}
-		case 'sponsored': {
-			// We do an additional check on sponsored branding
-			// Ensuring that each has the same sponsor name
-			if (!everyCardHasSameSponsor(brandingForCards)) {
-				return undefined;
-			}
-			return {
-				kind,
-				isFrontBranding: false,
-				branding,
-			};
-		}
-		default: {
-			return assertUnreachable(kind);
-		}
+	if (!everyCardHasSameSponsor(brandingForCards)) {
+		return undefined;
 	}
+
+	return {
+		kind,
+		isFrontBranding: false,
+		branding,
+	};
 };

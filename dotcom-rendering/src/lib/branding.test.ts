@@ -59,7 +59,7 @@ describe('decideCollectionBranding', () => {
 		});
 	});
 
-	it('correctly picks branding from a card by their edition', () => {
+	it('picks branding from a card by their edition', () => {
 		const cards = [
 			{
 				properties: {
@@ -122,7 +122,7 @@ describe('decideCollectionBranding', () => {
 		});
 	});
 
-	it('paid content derived from multiple cards', () => {
+	it('is paid content derived from multiple cards', () => {
 		const cardBranding = {
 			brandingType: { name: 'paid-content' },
 			sponsorName: 'foo',
@@ -174,7 +174,55 @@ describe('decideCollectionBranding', () => {
 		});
 	});
 
-	it('cards have different branding types', () => {
+	it('undefined when not all cards have branding', () => {
+		// The branding we'll apply to each card in this test
+		const collectionBranding = decideCollectionBranding({
+			frontBranding: undefined,
+			couldDisplayFrontBranding: false,
+			seriesTag: undefined,
+			cards: [
+				{
+					properties: {
+						editionBrandings: [
+							{
+								edition: { id: 'UK' },
+								branding: {
+									brandingType: { name: 'paid-content' },
+									sponsorName: 'foo',
+									aboutThisLink: '',
+									logo,
+								},
+							},
+						],
+					},
+				},
+				{
+					properties: {
+						editionBrandings: [
+							{
+								edition: { id: 'UK' },
+								branding: {
+									brandingType: { name: 'paid-content' },
+									sponsorName: 'bar',
+									aboutThisLink: '',
+									logo,
+								},
+							},
+						],
+					},
+				},
+				{
+					properties: {
+						editionBrandings: [],
+					},
+				},
+			],
+			editionId: 'UK',
+		});
+		expect(collectionBranding).toBeUndefined();
+	});
+
+	it('is undefined when cards have different branding types', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
@@ -231,7 +279,7 @@ describe('decideCollectionBranding', () => {
 		expect(collectionBranding).toBeUndefined();
 	});
 
-	it('sponsored branding when all of the branding types are sponsored and the names match', () => {
+	it('is sponsored branding when all of the branding types are sponsored and the names match', () => {
 		const cardBranding = {
 			brandingType: { name: 'sponsored' },
 			sponsorName: 'foo',
@@ -283,7 +331,7 @@ describe('decideCollectionBranding', () => {
 		});
 	});
 
-	it('sponsored card branding with different sponsor names returns undefined', () => {
+	it('is undefined when branding cards are sponsored and have different sponsor names', () => {
 		// The branding we'll apply to each card in this test
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
@@ -341,8 +389,58 @@ describe('decideCollectionBranding', () => {
 		expect(collectionBranding).toBeUndefined();
 	});
 
-	it('returns undefined when not all cards have branding', () => {
-		// The branding we'll apply to each card in this test
+	it('is paid content branding when all of the branding types are paid-content and the names match', () => {
+		const collectionBranding = decideCollectionBranding({
+			frontBranding: undefined,
+			couldDisplayFrontBranding: false,
+			seriesTag: undefined,
+			cards: [
+				{
+					properties: {
+						editionBrandings: [
+							{
+								edition: { id: 'UK' },
+								branding: {
+									brandingType: { name: 'paid-content' },
+									sponsorName: 'foo',
+									aboutThisLink: '',
+									logo,
+								},
+							},
+						],
+					},
+				},
+				{
+					properties: {
+						editionBrandings: [
+							{
+								edition: { id: 'UK' },
+								branding: {
+									brandingType: { name: 'paid-content' },
+									sponsorName: 'foo',
+									aboutThisLink: '',
+									logo,
+								},
+							},
+						],
+					},
+				},
+			],
+			editionId: 'UK',
+		});
+		expect(collectionBranding).toStrictEqual({
+			kind: 'paid-content',
+			isFrontBranding: false,
+			branding: {
+				brandingType: { name: 'paid-content' },
+				sponsorName: 'foo',
+				aboutThisLink: '',
+				logo,
+			},
+		});
+	});
+
+	it('is undefined when branding cards are paid-content and have different sponsor names', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
@@ -378,18 +476,13 @@ describe('decideCollectionBranding', () => {
 						],
 					},
 				},
-				{
-					properties: {
-						editionBrandings: [],
-					},
-				},
 			],
 			editionId: 'UK',
 		});
 		expect(collectionBranding).toBeUndefined();
 	});
 
-	it('show front branding when present and possible to display', () => {
+	it('is front branding when present and possible to display', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: {
 				brandingType: { name: 'paid-content' },
@@ -414,7 +507,7 @@ describe('decideCollectionBranding', () => {
 		});
 	});
 
-	it('undefined when there is front branding but not eligible for display on this collection', () => {
+	it('is undefined when there is front branding (and no card branding) that is not eligible for display on this collection', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: {
 				brandingType: { name: 'paid-content' },
@@ -487,7 +580,7 @@ describe('decideCollectionBranding', () => {
 		});
 	});
 
-	it('do not show branding when front branding matches, but we are not displaying front branding', () => {
+	it('is undefined when front branding matches card branding, but we are not displaying front branding', () => {
 		const cardBranding = {
 			brandingType: { name: 'paid-content' },
 			sponsorName: 'foo',
