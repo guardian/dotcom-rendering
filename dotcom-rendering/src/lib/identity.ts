@@ -187,14 +187,14 @@ export const getAuthStatus = async (): Promise<AuthStatus> => {
 };
 
 // not being used currently in DCR but possible uselful for other purposes
-export const getGoogleTagId = (): Promise<string | null> =>
-	getAuthStatus().then((authStatus) => {
-		switch (authStatus.kind) {
-			case 'SignedInWithCookies':
-				return fetchGoogleTagIdFromApi();
-			case 'SignedInWithOkta':
-				return authStatus.idToken.claims.google_tag_id;
-			default:
-				return null;
-		}
-	});
+// export const getGoogleTagId = (): Promise<string | null> =>
+// 	getAuthStatus().then((authStatus) => {
+// 		switch (authStatus.kind) {
+// 			case 'SignedInWithCookies':
+// 				return fetchGoogleTagIdFromApi();
+// 			case 'SignedInWithOkta':
+// 				return authStatus.idToken.claims.google_tag_id;
+// 			default:
+// 				return null;
+// 		}
+// 	});

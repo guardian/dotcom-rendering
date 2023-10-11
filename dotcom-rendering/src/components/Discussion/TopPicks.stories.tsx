@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import type { SignedInWithCookies } from '../../lib/useAuthStatus';
+import type { SignedInWithCookies } from '../../lib/identity';
 import type { CommentType } from '../../types/discussion';
 import { TopPicks } from './TopPicks';
 

@@ -7,13 +7,14 @@ import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/d
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
 import { getLocaleCode } from '../lib/getCountryCode';
+import type { AuthStatus } from '../lib/identity';
 import type {
 	CandidateConfig,
 	MaybeFC,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';

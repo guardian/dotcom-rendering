@@ -1,9 +1,6 @@
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/source-foundations';
-import type {
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../../lib/useAuthStatus';
+import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
 import type { CommentType, UserProfile } from '../../types/discussion';
 import { TopPick } from './TopPick';
 
