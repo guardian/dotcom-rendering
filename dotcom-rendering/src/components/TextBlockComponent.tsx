@@ -259,7 +259,7 @@ const buildElementTree =
 					if (
 						dropCappedSentence &&
 						node.textContent.startsWith(
-							stripHtmlFromString(html).slice(0, 10),
+							stripHtmlFromString(html).slice(0, 5),
 						) &&
 						// The node is at the root of the document avoiding nodes like <a>
 						// tags embedded in <p> tags dropping their cap
