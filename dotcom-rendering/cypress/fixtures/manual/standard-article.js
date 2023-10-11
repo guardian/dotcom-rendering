@@ -1478,7 +1478,6 @@ export const Standard = {
 			serverSideLiveblogInlineAds: true,
 			discussionPageSize: true,
 			smartAppBanner: false,
-			sectionFrontsBannerAds: true,
 			abPrebidKargo: true,
 			boostGaUserTimingFidelity: false,
 			historyTags: true,

@@ -37,10 +37,7 @@ import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import {
-	networkFrontsBannerAdCollections,
-	sectionFrontsBannerAdCollections,
-} from '../lib/frontsBannerAbTestAdPositions';
+import { frontsBannerAdCollections } from '../lib/frontsBannerAbTestAdPositions';
 import {
 	getDesktopAdPositions,
 	getMerchHighPosition,
@@ -89,8 +86,7 @@ export const decideAdSlot = (
 	isPaidContent: boolean | undefined,
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
-	isInNetworkFrontsBannerTest?: boolean,
-	isInSectionFrontsBannerTest?: boolean,
+	isInFrontsBannerTest?: boolean,
 ) => {
 	if (!renderAds) return null;
 
@@ -99,7 +95,7 @@ export const decideAdSlot = (
 		collectionCount > minContainers &&
 		index === getMerchHighPosition(collectionCount)
 	) {
-		if (isInNetworkFrontsBannerTest || isInSectionFrontsBannerTest) {
+		if (isInFrontsBannerTest) {
 			return (
 				<Hide from="desktop">
 					<AdSlot
@@ -219,24 +215,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = hasPageSkinConfig && renderAds;
 
-	const isInNetworkFrontsBannerTest =
+	const isInFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
 		abTests.frontsBannerAdsDcrVariant === 'variant' &&
-		Object.keys(networkFrontsBannerAdCollections).includes(
-			front.config.pageId,
-		);
-	const isInSectionFrontsBannerTest =
-		!!switches.sectionFrontsBannerAds &&
-		abTests.sectionFrontsBannerAdsVariant === 'variant' &&
-		Object.keys(sectionFrontsBannerAdCollections).includes(
-			front.config.pageId,
-		);
+		Object.keys(frontsBannerAdCollections).includes(front.config.pageId);
 
-	// This will be the targeted collections, if the current page is in the fronts banner AB test.
-	const frontsBannerTargetedCollections = isInNetworkFrontsBannerTest
-		? networkFrontsBannerAdCollections[front.config.pageId]
-		: isInSectionFrontsBannerTest
-		? sectionFrontsBannerAdCollections[front.config.pageId]
+	// This will be the targeted collections if the current page is in the fronts banner AB test.
+	const frontsBannerTargetedCollections = isInFrontsBannerTest
+		? frontsBannerAdCollections[front.config.pageId]
 		: [];
 
 	const merchHighPosition = getMerchHighPosition(
@@ -253,10 +239,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const numBannerAdsInserted = useRef(0);
 
-	const renderMpuAds =
-		renderAds &&
-		!isInNetworkFrontsBannerTest &&
-		!isInSectionFrontsBannerTest;
+	const renderMpuAds = renderAds && !isInFrontsBannerTest;
 
 	const showMostPopular =
 		front.config.switches.deeplyRead &&
@@ -497,8 +480,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											.isPaidContent,
 										mobileAdPositions,
 										hasPageSkin,
-										isInNetworkFrontsBannerTest,
-										isInSectionFrontsBannerTest,
+										isInFrontsBannerTest,
 									)}
 								</div>
 							</Fragment>
@@ -577,8 +559,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInNetworkFrontsBannerTest,
-									isInSectionFrontsBannerTest,
+									isInFrontsBannerTest,
 								)}
 							</>
 						);
@@ -632,8 +613,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInNetworkFrontsBannerTest,
-									isInSectionFrontsBannerTest,
+									isInFrontsBannerTest,
 								)}
 							</Fragment>
 						);
@@ -715,8 +695,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInNetworkFrontsBannerTest,
-									isInSectionFrontsBannerTest,
+									isInFrontsBannerTest,
 								)}
 							</Fragment>
 						);
@@ -800,8 +779,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.pressedPage.frontProperties.isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
-								isInNetworkFrontsBannerTest,
-								isInSectionFrontsBannerTest,
+								isInFrontsBannerTest,
 							)}
 						</Fragment>
 					);

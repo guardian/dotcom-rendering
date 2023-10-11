@@ -13,7 +13,7 @@ type FrontsBannerAdCollections = {
 	[key: string]: string[];
 };
 
-export const networkFrontsBannerAdCollections: FrontsBannerAdCollections = {
+export const frontsBannerAdCollections: FrontsBannerAdCollections = {
 	uk: [
 		'Spotlight',
 		'Opinion',
@@ -49,9 +49,6 @@ export const networkFrontsBannerAdCollections: FrontsBannerAdCollections = {
 		'Around the world',
 		'Take part',
 	],
-};
-
-export const sectionFrontsBannerAdCollections: FrontsBannerAdCollections = {
 	'uk/sport': [
 		'News and features',
 		// 'football', has football weekly thrasher above atm
