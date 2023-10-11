@@ -9,8 +9,8 @@ import type {
 	ThreadsType,
 	UserNameResponse,
 } from '../types/discussion';
-import type { SignedInWithCookies, SignedInWithOkta } from './useAuthStatus';
-import { getOptionsHeadersWithOkta } from './useAuthStatus';
+import type { SignedInWithCookies, SignedInWithOkta } from './identity';
+import { getOptionsHeadersWithOkta } from './identity';
 
 const options = {
 	// Defaults

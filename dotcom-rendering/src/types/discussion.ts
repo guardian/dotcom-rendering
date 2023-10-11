@@ -1,9 +1,6 @@
 import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
-import type {
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../lib/useAuthStatus';
+import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
 
 export type CAPIPillar =
 	| 'news'

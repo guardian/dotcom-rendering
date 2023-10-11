@@ -3,10 +3,7 @@ import { brand, neutral, textSans } from '@guardian/source-foundations';
 import { SvgArrowUpStraight } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { recommend as recommendDefault } from '../../lib/discussionApi';
-import type {
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../../lib/useAuthStatus';
+import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
 import { Row } from './Row';
 
 type Props = {
