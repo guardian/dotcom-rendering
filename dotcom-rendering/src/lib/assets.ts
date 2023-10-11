@@ -1,10 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
 import { makeMemoizedFunction } from './memoize';
 
@@ -66,12 +62,7 @@ const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	}
 });
 
-export type Build =
-	| 'apps'
-	| 'web.islands'
-	| 'web'
-	| 'web.variant'
-	| 'web.legacy';
+export type Build = 'web.hydrate' | 'web.dom';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
@@ -112,21 +103,15 @@ export const getPathFromManifest = (
 const getScriptRegex = (build: Build) =>
 	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
-export const WEB = getScriptRegex('web');
-export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');
-export const WEB_LEGACY_SCRIPT = getScriptRegex('web.legacy');
-export const APPS_SCRIPT = getScriptRegex('apps');
+export const WEB_HYDRATE = getScriptRegex('web.hydrate');
+export const WEB_DOM = getScriptRegex('web.dom');
+// export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');
+// export const WEB_LEGACY_SCRIPT = getScriptRegex('web.legacy');
+// export const APPS_SCRIPT = getScriptRegex('apps');
 
 export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {
-		if (script.match(WEB_LEGACY_SCRIPT)) {
-			return `<script defer nomodule src="${script}"></script>`;
-		}
-		if (
-			script.match(WEB) ||
-			script.match(WEB_VARIANT_SCRIPT) ||
-			script.match(APPS_SCRIPT)
-		) {
+		if (script.match(WEB_HYDRATE) || script.match(WEB_DOM)) {
 			return `<script type="module" src="${script}"></script>`;
 		}
 
@@ -142,8 +127,6 @@ export const getModulesBuild = ({
 	tests: ServerSideTests;
 	switches: Switches;
 }): Exclude<Extract<Build, `web${string}`>, 'web.legacy'> => {
-	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
-		return 'web.variant';
-	}
-	return 'web';
+	tests;
+	return 'web.dom';
 };

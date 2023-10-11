@@ -8,7 +8,7 @@ import { HeaderTopBar } from './HeaderTopBar.importable';
 import { Island } from './Island';
 import { Logo } from './Logo';
 import { Snow } from './Snow.importable';
-import { SupportTheG } from './SupportTheG.importable';
+// import { SupportTheG } from './SupportTheG.importable';
 
 /** Ensures we do not cause CLS from lazy loaded component height */
 const explicitHeight = css`
@@ -81,7 +81,7 @@ export const Header = ({
 				<Snow />
 			</Island>
 			<Logo editionId={editionId} hasPageSkin={hasPageSkin} />
-			<Island
+			{/* <Island
 				priority="feature"
 				defer={{ until: 'idle' }}
 				clientOnly={true}
@@ -95,7 +95,7 @@ export const Header = ({
 					contributionsServiceUrl={contributionsServiceUrl}
 					hasPageSkin={hasPageSkin}
 				/>
-			</Island>
+			</Island> */}
 		</div>
 	</div>
 );

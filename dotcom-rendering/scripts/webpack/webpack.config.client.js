@@ -35,12 +35,10 @@ const generateName = (build) => {
  */
 const getEntryIndex = (build) => {
 	switch (build) {
-		case 'web.islands':
-			return './src/client/index.islands.ts';
-		case 'apps':
-			return './src/client/index.apps.ts';
-		default:
-			return './src/client/index.ts';
+		case 'web.dom':
+			return './src/client/index.dom.ts';
+		case 'web.hydrate':
+			return './src/client/index.hydrate.ts';
 	}
 };
 
@@ -50,39 +48,8 @@ const getEntryIndex = (build) => {
  */
 const getLoaders = (build) => {
 	switch (build) {
-		case 'web.legacy':
-			return [
-				{
-					loader: 'babel-loader',
-					options: {
-						presets: [
-							'@babel/preset-react',
-							[
-								'@babel/preset-env',
-								{
-									targets: {
-										ie: '11',
-									},
-									modules: false,
-								},
-							],
-						],
-						compact: true,
-					},
-				},
-				{
-					loader: 'ts-loader',
-					options: {
-						configFile: 'tsconfig.build.json',
-						transpileOnly: true,
-					},
-				},
-			];
-		case 'apps':
-			return swcLoader(['android >= 5', 'ios >= 12']);
-		case 'web.islands':
-		case 'web.variant':
-		case 'web':
+		case 'web.hydrate':
+		case 'web.dom':
 			return swcLoader(getBrowserTargets());
 	}
 };

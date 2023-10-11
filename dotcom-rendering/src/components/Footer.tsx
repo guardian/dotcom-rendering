@@ -27,7 +27,7 @@ import { FooterLabel } from './FooterLabel.importable';
 import { Island } from './Island';
 import { Pillars } from './Pillars';
 import { PrivacySettingsLink } from './PrivacySettingsLink.importable';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
+// import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 // CSS vars
 const footerBorders = `1px solid ${brand[600]}`;
@@ -147,19 +147,6 @@ const footerList = css`
 	}
 `;
 
-const readerRevenueLinks = css`
-	border-left: ${footerBorders};
-	flex: 1;
-	padding: ${space[3]}px 0 0 10px;
-	margin: 0 10px ${space[9]}px 0;
-	width: calc(50% - 10px);
-
-	${until.tablet} {
-		width: 50%;
-		border-top: ${footerBorders};
-	}
-`;
-
 const acknowledgments = css`
 	grid-area: acknowledgment;
 	align-self: end;
@@ -273,29 +260,29 @@ const FooterLinks = ({
 		return <ul key={key}>{linkList}</ul>;
 	});
 
-	const rrLinks = (
-		<div css={readerRevenueLinks}>
-			<Island
-				priority="feature"
-				defer={{ until: 'visible' }}
-				clientOnly={true}
-			>
-				<ReaderRevenueLinks
-					urls={urls}
-					editionId={editionId}
-					dataLinkNamePrefix="footer : "
-					inHeader={false}
-					remoteHeader={false}
-					contributionsServiceUrl={contributionsServiceUrl}
-				/>
-			</Island>
-		</div>
-	);
+	// const rrLinks = (
+	// 	<div css={readerRevenueLinks}>
+	// 		<Island
+	// 			priority="feature"
+	// 			defer={{ until: 'visible' }}
+	// 			clientOnly={true}
+	// 		>
+	// 			<ReaderRevenueLinks
+	// 				urls={urls}
+	// 				editionId={editionId}
+	// 				dataLinkNamePrefix="footer : "
+	// 				inHeader={false}
+	// 				remoteHeader={false}
+	// 				contributionsServiceUrl={contributionsServiceUrl}
+	// 			/>
+	// 		</Island>
+	// 	</div>
+	// );
 
 	return (
 		<div css={footerList}>
 			{linkGroups}
-			{rrLinks}
+			{/* {rrLinks} */}
 		</div>
 	);
 };

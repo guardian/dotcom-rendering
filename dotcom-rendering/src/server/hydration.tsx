@@ -3,6 +3,8 @@ import { isString, Pillar, timeAgo } from '@guardian/libs';
 import {
 	brandBackground,
 	brandBorder,
+	fonts,
+	fontWeights,
 	palette,
 } from '@guardian/source-foundations';
 import type { RequestHandler } from 'express';
@@ -20,12 +22,12 @@ import { createGuardian } from '../model/guardian';
 import { htmlPageTemplate } from './htmlPageTemplate';
 import { makePrefetchHeader } from './lib/header';
 
-export const HydrationLayout = ({
+export const ComparisonLayout = ({
 	manipulation,
 	count,
 }: {
 	count: number;
-	manipulation: 'preact' | 'dom';
+	manipulation: 'hydrate' | 'dom';
 }) => {
 	const urls = {
 		contribute: '',
@@ -67,21 +69,52 @@ export const HydrationLayout = ({
 				</>
 			</div>
 			<main data-layout="HydrationLayout" id="maincontent">
-				<h3>Current manipulation mode “{manipulation}”</h3>
-				<p>
-					Change to <a href="?manipulation=dom">DOM</a> or{' '}
-					<a href="?manipulation=preact">Preact</a>
-				</p>
+				<h3
+					css={css`
+						font-family: ${fonts.headline};
+						font-weight: ${fontWeights.regular};
+					`}
+				>
+					Current manipulation mode “{manipulation}” with{' '}
+					{count.toLocaleString()} elements
+				</h3>
+				<ul
+					css={css`
+						display: flex;
+						padding: 1rem;
+						margin: 0 0 24rem;
+						list-style-type: none;
+						gap: 1rem;
+					`}
+				>
+					<li>
+						10 <a href="?manipulation=dom&count=10">DOM</a>/
+						<a href="?manipulation=hydrate&count=10">Hydrate</a>
+					</li>
+					<li>
+						100 <a href="?manipulation=dom&count=100">DOM</a>/
+						<a href="?manipulation=hydrate&count=100">Hydrate</a>
+					</li>
+					<li>
+						1000 <a href="?manipulation=dom&count=1000">DOM</a>/
+						<a href="?manipulation=hydrate&count=1000">Hydrate</a>
+					</li>
+					<li>
+						10000 <a href="?manipulation=dom&count=10000">DOM</a>/
+						<a href="?manipulation=hydrate&count=10000">Hydrate</a>
+					</li>
+				</ul>
 				<ul
 					css={css`
 						display: grid;
-						grid-template-columns: repeat(6, 1fr);
-						gap: 2rem;
+						grid-template-columns: repeat(3, 1fr);
+						gap: 4rem;
+						margin: auto;
 
 						& > li {
 							background-color: ${palette.neutral[93]};
 							text-align: center;
-							height: 2rem;
+							height: 3rem;
 							width: 6rem;
 							overflow: hidden;
 						}
@@ -143,16 +176,16 @@ export const HydrationLayout = ({
 const renderHydration = (
 	query: QueryString.ParsedQs,
 ): { html: string; prefetchScripts: string[] } => {
-	const manipulation = query.manipulation === 'dom' ? 'dom' : 'preact';
+	const manipulation = query.manipulation === 'dom' ? 'dom' : 'hydrate';
 	const count = isString(query.count) ? parseInt(query.count, 10) : 10_000;
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={{ renderingTarget: 'Web' }}>
-			<HydrationLayout manipulation={manipulation} count={count} />
+			<ComparisonLayout manipulation={manipulation} count={count} />
 		</ConfigProvider>,
 	);
 
-	const build = 'web.islands';
+	const build = `web.${manipulation}` as const;
 
 	/**
 	 * The highest priority scripts.

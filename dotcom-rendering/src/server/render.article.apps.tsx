@@ -30,7 +30,7 @@ export const renderArticle = (
 		</ConfigProvider>,
 	);
 
-	const clientScripts = [getPathFromManifest('apps', 'index.js')];
+	const clientScripts = [getPathFromManifest('web.dom', 'index.js')];
 	const scriptTags = generateScriptTags([...clientScripts].filter(isString));
 
 	const guardian = createGuardian({

@@ -111,8 +111,8 @@ export const renderHtml = ({
 		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
 
 	const legacyScripts = [
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
+		// getPathFromManifest('web.legacy', 'frameworks.js'),
+		// getPathFromManifest('web.legacy', 'index.js'),
 	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
 
 	const scriptTags = generateScriptTags([
