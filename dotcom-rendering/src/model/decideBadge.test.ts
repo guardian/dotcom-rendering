@@ -18,7 +18,7 @@ const brandingAmazon = {
 	},
 	aboutThisLink:
 		'https://www.theguardian.com/info/2016/jan/25/content-funding',
-};
+} as const;
 
 const brandingGuardianOrg = {
 	brandingType: {
@@ -45,7 +45,7 @@ const brandingGuardianOrg = {
 	},
 	aboutThisLink:
 		'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
-};
+} as const;
 
 describe('Decide badge', () => {
 	describe('getBadgeFromSeriesTag', () => {
