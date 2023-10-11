@@ -74,7 +74,8 @@ function parseAtom(
 			const { title } = atom;
 			const image = atom.data.guide.guideImage?.master?.file;
 			const credit = atom.data.guide.guideImage?.master?.credit;
-			const { body } = atom.data.guide.items?.[0];
+			const { items } = atom.data.guide;
+			const { body } = items && items[0];
 
 			if (!title || !body) {
 				return Result.err(`No title or body for atom: ${id}`);
