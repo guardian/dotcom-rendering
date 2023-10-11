@@ -6,13 +6,14 @@ import type {
 	CollectionBranding,
 	EditionBranding,
 } from '../types/branding';
+import { assertUnreachable } from './assert-unreachable';
 import type { EditionId } from './edition';
 import { guard } from './guard';
 import type { NonEmptyArray } from './non-empty-array';
 import { isNonEmptyArray } from './non-empty-array';
 
 /**
- * For the sake of determine branding on a collection, these are the only
+ * For the sake of determining branding on a collection, these are the only
  * properties we care about for any given card
  */
 type CardWithBranding = { properties: { editionBrandings: EditionBranding[] } };
@@ -25,6 +26,12 @@ export const pickBrandingForEdition = (
 		({ edition, branding }) => edition.id === editionId && branding,
 	)?.branding;
 
+/**
+ * Retrieve the branding object from each of the cards in an array of cards, for a given edition
+ *
+ * @returns `undefined` if AT LEAST ONE of the cards is missing branding,
+ * otherwise returns a non-empty array of branding
+ */
 const getBrandingFromCards = (
 	cards: CardWithBranding[],
 	editionId: EditionId,
@@ -74,6 +81,9 @@ const getBrandingType = ([
 	return name;
 };
 
+/**
+ * Check each branding has the same sponsor name
+ */
 const everyCardHasSameSponsor = ([
 	firstBranding,
 	...restBranding
@@ -111,6 +121,9 @@ export const badgeFromBranding = (
 		case undefined: {
 			return undefined;
 		}
+		default: {
+			return assertUnreachable(collectionBranding);
+		}
 	}
 };
 
@@ -127,6 +140,8 @@ export const decideCollectionBranding = ({
 	cards: CardWithBranding[];
 	editionId: EditionId;
 }): CollectionBranding | undefined => {
+	// If this collection is eligible to display front branding
+	// AND there is front branding defined, we should display it
 	if (couldDisplayFrontBranding && frontBranding !== undefined) {
 		const kind = getBrandingType([frontBranding]);
 		if (!kind) {
@@ -139,6 +154,7 @@ export const decideCollectionBranding = ({
 		};
 	}
 
+	// If the series tag of this collection matches an editorial badge, we should use that
 	const editorialBadge = decideEditorialBadge(seriesTag);
 	if (editorialBadge) {
 		return {
@@ -147,23 +163,31 @@ export const decideCollectionBranding = ({
 		};
 	}
 
+	// Retrieve an array of branding from the cards that belong to the collection
+	// If this is valid (aka not undefined), then we can use it to derive the
+	// branding of the collection
 	const brandingForCards = getBrandingFromCards(cards, editionId);
-
 	if (!brandingForCards) {
 		return undefined;
 	}
 
 	const kind = getBrandingType(brandingForCards);
-
 	if (!kind) {
 		return undefined;
 	}
 
 	const [branding] = brandingForCards;
 
-	if (frontBranding && brandingEqual(frontBranding, branding)) {
+	// If this collection belongs to a front that has branding, and the branding
+	// derived from the cards is the same, then don't display this branding.
+	// This takes care of the case when another card is displaying the branding
+	// on behalf of the whole front and this collection is further down the
+	// front, with its branding hidden
+	if (frontBranding !== undefined && brandingEqual(frontBranding, branding)) {
 		return undefined;
 	}
+
+	// Ensure each of the card's branding has the same sponsor
 
 	if (!everyCardHasSameSponsor(brandingForCards)) {
 		return undefined;
