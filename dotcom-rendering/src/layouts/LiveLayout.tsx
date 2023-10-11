@@ -601,7 +601,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						borderColour={palette.border.article}
 					>
 						<Hide until={'desktop'}>
-							<Island priority="critical">
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
 								<KeyEventsCarousel
 									keyEvents={article.keyEvents}
 									filterKeyEvents={article.filterKeyEvents}
@@ -681,7 +684,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							<GridItem area="media">
 								<div css={maxWidth}>
 									{!!footballMatchUrl && (
-										<Island priority="critical">
+										<Island
+											priority="critical"
+											defer={{ until: 'visible' }}
+										>
 											<GetMatchTabs
 												matchUrl={footballMatchUrl}
 												format={format}
@@ -689,7 +695,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										</Island>
 									)}
 									{!!cricketMatchUrl && (
-										<Island priority="critical">
+										<Island
+											priority="critical"
+											defer={{ until: 'visible' }}
+										>
 											<GetCricketScoreboard
 												matchUrl={cricketMatchUrl}
 												format={format}

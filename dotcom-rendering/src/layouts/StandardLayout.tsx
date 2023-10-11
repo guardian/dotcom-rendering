@@ -516,7 +516,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
 								{isMatchReport && (
-									<Island priority="critical">
+									<Island
+										priority="critical"
+										defer={{ until: 'visible' }}
+									>
 										<GetMatchTabs
 											matchUrl={footballMatchUrl}
 											format={format}
@@ -694,7 +697,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 								{isWeb && showBodyEndSlot && (
 									<Island
-										priority="critical"
+										priority="feature"
+										defer={{ until: 'visible' }}
 										clientOnly={true}
 									>
 										<SlotBodyEnd

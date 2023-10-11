@@ -148,7 +148,14 @@ export const LiveBlogRenderer = ({
 				isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 			/>
 			{blocks.length > 4 && (
-				<Island priority="critical" clientOnly={true}>
+				<Island
+					priority="feature"
+					// this should really be deferred until visible,
+					// but this island manipulate the DOM via portals,
+					// its actual position has no bearing on its effect
+					defer={{ until: 'idle' }}
+					clientOnly={true}
+				>
 					<LiveBlogEpic
 						sectionId={sectionId}
 						shouldHideReaderRevenue={shouldHideReaderRevenue}

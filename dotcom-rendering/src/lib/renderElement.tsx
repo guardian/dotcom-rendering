@@ -1,5 +1,4 @@
 import {
-	ExplainerAtom,
 	InteractiveAtom,
 	InteractiveLayoutAtom,
 	VideoAtom,
@@ -13,7 +12,7 @@ import { CalloutBlockComponent } from '../components/CalloutBlockComponent.impor
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { CartoonComponent } from '../components/CartoonComponent';
-import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
+import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
@@ -21,6 +20,7 @@ import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpSwitcher } from '../components/EmailSignUpSwitcher';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
+import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
@@ -152,7 +152,7 @@ export const renderElement = ({
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return (
-				<Island priority="critical">
+				<Island priority="critical" defer={{ until: 'visible' }}>
 					<AudioAtomWrapper
 						id={element.id}
 						trackUrl={element.trackUrl}
@@ -223,7 +223,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ChartAtomWrapper id={element.id} html={element.html} />
+					<ChartAtom id={element.id} html={element.html} />
 				</Island>
 			);
 
@@ -527,7 +527,10 @@ export const renderElement = ({
 			return (
 				<>
 					{element.quizType === 'personality' && (
-						<Island priority="critical">
+						<Island
+							priority="critical"
+							defer={{ until: 'visible' }}
+						>
 							<PersonalityQuizAtomWrapper
 								id={element.id}
 								questions={element.questions}
@@ -538,7 +541,10 @@ export const renderElement = ({
 						</Island>
 					)}
 					{element.quizType === 'knowledge' && (
-						<Island priority="critical">
+						<Island
+							priority="critical"
+							defer={{ until: 'visible' }}
+						>
 							<KnowledgeQuizAtomWrapper
 								id={element.id}
 								questions={element.questions}
@@ -740,7 +746,7 @@ export const renderElement = ({
 		}
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return (
-				<Island priority="critical">
+				<Island priority="critical" defer={{ until: 'visible' }}>
 					<YoutubeBlockComponent
 						format={format}
 						key={index}
