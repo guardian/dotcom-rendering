@@ -30,14 +30,19 @@ interface WebProps extends BaseProps {
 
 const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 	const notSupported = <pre>Not supported</pre>;
+	console.log('::: format is', format);
+
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
 				case ArticleDesign.Interactive: {
+					console.log('::: APPS IMMERSIVE INTERACTIVE');
 					// Should be InteractiveLayout once implemented for apps
 					return notSupported;
 				}
 				default: {
+					console.log('::: APPS IMMERSIVE');
+
 					// Should be FullPageInteractiveLayout once implemented for apps
 					return notSupported;
 				}
@@ -87,6 +92,8 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 		default: {
 			switch (format.design) {
 				case ArticleDesign.Interactive:
+					console.log('::: APPS STANDARD INTERACTIVE');
+
 					return (
 						<InteractiveLayout
 							article={article}
@@ -96,6 +103,8 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 					);
 
 				case ArticleDesign.FullPageInteractive: {
+					console.log('::: APPS STANDARD FULL PAGE INTERACTIVE');
+
 					return (
 						<FullPageInteractiveLayout
 							article={article}
