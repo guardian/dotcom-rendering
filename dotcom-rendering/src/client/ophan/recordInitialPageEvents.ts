@@ -1,9 +1,14 @@
-import { abTestPayload, getOphan, recordPerformance } from './ophan';
+import {
+	abTestPayload,
+	getOphan,
+	recordExperiences,
+	recordPerformance,
+} from './ophan';
 
 export const recordInitialPageEvents = async (): Promise<void> => {
 	const { record } = await getOphan();
 
-	record({ experiences: 'dotcom-rendering' });
+	void recordExperiences('dotcom-rendering');
 	record({ edition: window.guardian.config.page.edition });
 
 	// Record server-side AB test variants (i.e. control or variant)
