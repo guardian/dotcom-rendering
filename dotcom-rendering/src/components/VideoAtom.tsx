@@ -21,8 +21,9 @@ export const VideoAtom = ({
 	if (assets.length === 0) return null; // Handle empty assets array
 	return (
 		<MaintainAspectRatio height={height} width={width}>
+			{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
 			<video
-				controls
+				controls={true}
 				preload="metadata"
 				width={width}
 				height={height}

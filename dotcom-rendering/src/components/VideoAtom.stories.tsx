@@ -11,7 +11,7 @@ export default {
 	},
 };
 
-export const DefaultStory = (): JSX.Element => {
+export const DefaultStory = () => {
 	return (
 		<div
 			css={css`
@@ -32,7 +32,7 @@ export const DefaultStory = (): JSX.Element => {
 	);
 };
 
-export const LargeStory = (): JSX.Element => {
+export const LargeStory = () => {
 	return (
 		<div
 			css={css`
@@ -55,7 +55,7 @@ export const LargeStory = (): JSX.Element => {
 	);
 };
 
-export const NoPosterStory = (): JSX.Element => {
+export const NoPosterStory = () => {
 	return (
 		<div
 			css={css`
