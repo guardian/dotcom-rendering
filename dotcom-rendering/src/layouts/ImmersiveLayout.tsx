@@ -252,11 +252,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const mainMedia = article.mainMediaElements[0];
 
 	const captionText = decideMainMediaCaption(mainMedia);
-	const HEADLINE_OFFSET = mainMedia
-		? renderingTarget === 'Web'
-			? 120
-			: 420
-		: 0;
+
+	const HEADLINE_OFFSET = mainMedia ? 120 : 0;
+
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
