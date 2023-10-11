@@ -54,7 +54,11 @@ export const getOphan = async (): Promise<
 		});
 	};
 
-	cachedOphan = { ...ophan, record, trackComponentAttention };
+	cachedOphan = {
+		...ophan,
+		record,
+		trackComponentAttention,
+	};
 	return cachedOphan;
 };
 
@@ -142,4 +146,15 @@ export const recordPerformance = async (): Promise<void> => {
 	ophan.record({
 		performance,
 	});
+};
+
+const experiencesSet = new Set(['dotcom-rendering']);
+export const recordExperiences = async (
+	...experiences: string[]
+): Promise<void> => {
+	for (const experience of experiences) {
+		experiencesSet.add(experience);
+	}
+	const { record } = await getOphan();
+	record({ experiences: [...experiencesSet].join(',') });
 };
