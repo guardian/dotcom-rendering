@@ -35,6 +35,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { canRenderAds } from '../lib/canRenderAds';
+import { MAX_FRONTS_BANNER_ADS } from '../lib/commercial-constants';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { frontsBannerAdCollections } from '../lib/frontsBannerAbTestAdPositions';
@@ -86,34 +87,31 @@ export const decideAdSlot = (
 	isPaidContent: boolean | undefined,
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
-	isInFrontsBannerTest?: boolean,
+	showBannerAds?: boolean,
 ) => {
 	if (!renderAds) return null;
 
 	const minContainers = isPaidContent ? 1 : 2;
-	if (
+	const shouldInsertMerchHighSlot =
 		collectionCount > minContainers &&
-		index === getMerchHighPosition(collectionCount)
-	) {
-		if (isInFrontsBannerTest) {
-			return (
-				<Hide from="desktop">
-					<AdSlot
-						data-print-layout="hide"
-						position="merchandising-high"
-						hasPageskin={hasPageSkin}
-					/>
-				</Hide>
-			);
-		} else {
-			return (
+		index === getMerchHighPosition(collectionCount);
+
+	if (shouldInsertMerchHighSlot) {
+		return showBannerAds ? (
+			<Hide from="desktop">
 				<AdSlot
 					data-print-layout="hide"
 					position="merchandising-high"
 					hasPageskin={hasPageSkin}
 				/>
-			);
-		}
+			</Hide>
+		) : (
+			<AdSlot
+				data-print-layout="hide"
+				position="merchandising-high"
+				hasPageskin={hasPageSkin}
+			/>
+		);
 	} else if (mobileAdPositions.includes(index)) {
 		return (
 			<Hide from="tablet">
@@ -136,30 +134,54 @@ export const decideAdSlot = (
 export const decideFrontsBannerAdSlot = (
 	renderAds: boolean,
 	hasPageSkin: boolean,
+	isInFrontsBannerTest: boolean,
 	targetedCollections: string[] | undefined,
 	collectionName: string,
 	numBannerAdsInserted: React.MutableRefObject<number>,
 	isFirstContainer: boolean,
+	showBannerAds: boolean,
+	index: number,
 ) => {
-	if (
-		!renderAds ||
-		hasPageSkin ||
-		!targetedCollections?.includes(collectionName) ||
-		isFirstContainer
-	) {
+	if (!renderAds || hasPageSkin || isFirstContainer) {
 		return null;
 	}
 
-	numBannerAdsInserted.current = numBannerAdsInserted.current + 1;
+	// The fronts banner 0% AB test has concluded. However, it still exists so that
+	// the commercial team can opt in and test ad campaigns against the live site.
+	// In this test, fronts-banner ads are inserted above specific collections and pages.
+	if (isInFrontsBannerTest && targetedCollections?.includes(collectionName)) {
+		numBannerAdsInserted.current = numBannerAdsInserted.current + 1;
 
-	return (
-		<AdSlot
-			data-print-layout="hide"
-			position="fronts-banner"
-			index={numBannerAdsInserted.current}
-			hasPageskin={hasPageSkin}
-		/>
-	);
+		return (
+			<AdSlot
+				data-print-layout="hide"
+				position="fronts-banner"
+				index={numBannerAdsInserted.current}
+				hasPageskin={hasPageSkin}
+			/>
+		);
+	}
+
+	// Insert an ad after every third collection. Warning: may skip an ad if a collection isn't rendered.
+	// e.g. if the 15th collection doesn't render, an ad is shown above the 12th and the 18th
+	if (
+		showBannerAds &&
+		numBannerAdsInserted.current < MAX_FRONTS_BANNER_ADS &&
+		index % 3 === 0
+	) {
+		numBannerAdsInserted.current = numBannerAdsInserted.current + 1;
+
+		return (
+			<AdSlot
+				data-print-layout="hide"
+				position="fronts-banner"
+				index={numBannerAdsInserted.current}
+				hasPageskin={hasPageSkin}
+			/>
+		);
+	}
+
+	return null;
 };
 
 const decideLeftContent = (
@@ -214,6 +236,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const renderAds = canRenderAds(front);
 
 	const hasPageSkin = hasPageSkinConfig && renderAds;
+
+	const showBannerAds = !!switches.frontsBannerAds;
 
 	const isInFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
@@ -436,10 +460,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									{decideFrontsBannerAdSlot(
 										renderAds,
 										hasPageSkin,
+										isInFrontsBannerTest,
 										frontsBannerTargetedCollections,
 										collection.displayName,
 										numBannerAdsInserted,
 										isFirstContainer,
+										showBannerAds,
+										index,
 									)}
 									{!!trail.embedUri && (
 										<SnapCssSandbox
@@ -476,7 +503,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											.isPaidContent,
 										mobileAdPositions,
 										hasPageSkin,
-										isInFrontsBannerTest,
+										showBannerAds,
 									)}
 								</div>
 							</Fragment>
@@ -496,10 +523,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
+									isInFrontsBannerTest,
 									frontsBannerTargetedCollections,
 									collection.displayName,
 									numBannerAdsInserted,
 									isFirstContainer,
+									showBannerAds,
+									index,
 								)}
 								<FrontSection
 									toggleable={true}
@@ -555,7 +585,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInFrontsBannerTest,
+									showBannerAds,
 								)}
 							</>
 						);
@@ -567,6 +597,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					) {
 						return (
 							<Fragment key={ophanName}>
+								{decideFrontsBannerAdSlot(
+									renderAds,
+									hasPageSkin,
+									isInFrontsBannerTest,
+									frontsBannerTargetedCollections,
+									collection.displayName,
+									numBannerAdsInserted,
+									isFirstContainer,
+									showBannerAds,
+									index,
+								)}
 								<LabsSection
 									title={collection.displayName}
 									collectionId={collection.id}
@@ -609,7 +650,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInFrontsBannerTest,
+									showBannerAds,
 								)}
 							</Fragment>
 						);
@@ -628,10 +669,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
+									isInFrontsBannerTest,
 									frontsBannerTargetedCollections,
 									collection.displayName,
 									numBannerAdsInserted,
 									isFirstContainer,
+									showBannerAds,
+									index,
 								)}
 								<Section
 									title={collection.displayName}
@@ -691,7 +735,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInFrontsBannerTest,
+									showBannerAds,
 								)}
 							</Fragment>
 						);
@@ -702,10 +746,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
+								isInFrontsBannerTest,
 								frontsBannerTargetedCollections,
 								collection.displayName,
 								numBannerAdsInserted,
 								isFirstContainer,
+								showBannerAds,
+								index,
 							)}
 							<FrontSection
 								title={collection.displayName}
@@ -775,7 +822,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.pressedPage.frontProperties.isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
-								isInFrontsBannerTest,
+								showBannerAds,
 							)}
 						</Fragment>
 					);

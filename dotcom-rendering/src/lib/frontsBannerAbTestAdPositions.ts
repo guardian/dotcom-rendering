@@ -1,3 +1,4 @@
+import type { FrontsBannerAdCollections } from '../types/commercial';
 /**
  * This file is temporary.
  *
@@ -8,10 +9,6 @@
  * the fronts config tool which will decide whether a section has an ad
  * inserted above it. At the time of this AB test, the setting does not yet exist.
  */
-
-type FrontsBannerAdCollections = {
-	[key: string]: string[];
-};
 
 export const frontsBannerAdCollections: FrontsBannerAdCollections = {
 	uk: [
