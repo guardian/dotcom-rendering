@@ -1,3 +1,4 @@
+import { isString, timeAgo } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
@@ -24,9 +25,23 @@ const topOfBlog: Element | null = !isServer
 	? window.document.getElementById('top-of-blog')
 	: null;
 
+const lastUpdated: Element | null = !isServer
+	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
+	: null;
+
 const toastRoot: Element | null = !isServer
 	? window.document.getElementById('toast-root')
 	: null;
+
+let timer: NodeJS.Timer | number | undefined;
+const updateTimeElement = (time: HTMLTimeElement) => {
+	clearTimeout(timer);
+	const then = new Date(time.dateTime).getTime();
+	const newText = timeAgo(then);
+	if (!isString(newText) || newText === time.innerText) return;
+	time.innerText = newText;
+	timer = setTimeout(() => updateTimeElement(time), 15_000);
+};
 
 /**
  * insert
@@ -178,6 +193,11 @@ export const Liveness = ({
 					} catch (e) {
 						console.log('>> failed >>', e);
 					}
+				}
+
+				if (lastUpdated instanceof HTMLTimeElement) {
+					lastUpdated.dateTime = new Date().toString();
+					updateTimeElement(lastUpdated);
 				}
 
 				if (
