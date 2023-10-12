@@ -172,7 +172,6 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 							defer={{ until: 'visible' }}
 						>
 							<RelativeTime
-								now={Date.now()}
 								then={pinnedPost.blockFirstPublished}
 							/>
 						</Island>

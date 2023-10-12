@@ -161,7 +161,6 @@ export const LatestLinks = ({
 							>
 								<div css={bold} style={{ color: kickerColour }}>
 									<RelativeTime
-										now={now}
 										then={block.publishedDateTime}
 									/>
 								</div>

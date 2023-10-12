@@ -142,7 +142,7 @@ export const ComparisonLayout = ({
 									priority="enhancement"
 									defer={{ until: 'visible' }}
 								>
-									<RelativeTime then={then} now={now} />
+									<RelativeTime then={then} />
 								</Island>
 							</li>
 						);
