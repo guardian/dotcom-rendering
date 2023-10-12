@@ -70,10 +70,7 @@ const FirstPublished = ({
 							priority="enhancement"
 							defer={{ until: 'visible' }}
 						>
-							<RelativeTime
-								now={Date.now()}
-								then={firstPublished}
-							></RelativeTime>
+							<RelativeTime then={firstPublished}></RelativeTime>
 						</Island>
 					</span>
 				)}

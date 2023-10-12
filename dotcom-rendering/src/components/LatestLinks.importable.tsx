@@ -20,7 +20,6 @@ type Props = {
 	direction: 'horizontal' | 'vertical';
 	isDynamo?: true;
 	containerPalette?: DCRContainerPalette;
-	now: number;
 };
 
 const style = css`
@@ -100,7 +99,6 @@ export const LatestLinks = ({
 	direction,
 	isDynamo,
 	containerPalette,
-	now,
 }: Props) => {
 	const { data } = useApi<{
 		blocks: Array<{
@@ -161,7 +159,6 @@ export const LatestLinks = ({
 							>
 								<div css={bold} style={{ color: kickerColour }}>
 									<RelativeTime
-										now={now}
 										then={block.publishedDateTime}
 									/>
 								</div>

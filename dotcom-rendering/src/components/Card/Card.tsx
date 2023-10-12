@@ -621,7 +621,6 @@ export const Card = ({
 										isDynamo={isDynamo}
 										direction={supportingContentAlignment}
 										containerPalette={containerPalette}
-										now={Date.now()}
 									></LatestLinks>
 								</Island>
 							)}

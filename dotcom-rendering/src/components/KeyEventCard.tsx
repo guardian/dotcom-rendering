@@ -128,10 +128,7 @@ export const KeyEventCard = ({
 			>
 				<div css={timeStyles(palette)}>
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
-						<RelativeTime
-							now={Date.now()}
-							then={blockFirstPublished}
-						/>
+						<RelativeTime then={blockFirstPublished} />
 					</Island>
 				</div>
 				<div css={textStyles(palette)}>{title}</div>

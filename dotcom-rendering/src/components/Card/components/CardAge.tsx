@@ -70,10 +70,7 @@ export const CardAge = ({
 		<span css={ageStyles(format, palette, isDynamo)}>
 			{showClock && <ClockIcon />}
 			<Island priority="enhancement" defer={{ until: 'visible' }}>
-				<RelativeTime
-					now={Date.now()}
-					then={new Date(webPublicationDate).getTime()}
-				/>
+				<RelativeTime then={new Date(webPublicationDate).getTime()} />
 			</Island>
 		</span>
 	);
