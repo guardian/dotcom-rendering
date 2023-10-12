@@ -7,6 +7,13 @@ type Props = {
 	then: number;
 };
 
+/**
+ * Shows a recent time as relative, such as “3h ago”
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We update the relative time on the browser on an interval.
+ */
 export const RelativeTime = ({ then }: Props) => {
 	const [inView, ref] = useIsInView({ repeat: true });
 
