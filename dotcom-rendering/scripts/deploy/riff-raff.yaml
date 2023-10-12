@@ -44,7 +44,7 @@ deployments:
       bucketSsmKey: /account/services/dotcom-artifact.bucket
     dependencies:
       - frontend-static
-      - frontend-cfn
+      - front-web-cfn
   frontend-static:
     type: aws-s3
     parameters:
