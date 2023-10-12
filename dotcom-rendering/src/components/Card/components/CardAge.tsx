@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, timeAgo } from '@guardian/libs';
 import { textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 import ClockIcon from '../../../static/icons/clock.svg';
@@ -65,6 +65,10 @@ export const CardAge = ({
 	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
+
+	if (timeAgo(new Date(webPublicationDate).getTime()) === false) {
+		return null;
+	}
 
 	return (
 		<span css={ageStyles(format, palette, isDynamo)}>
