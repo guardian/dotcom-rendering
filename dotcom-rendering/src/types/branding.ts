@@ -31,7 +31,7 @@ export interface EditionBranding {
 	branding?: Branding;
 }
 
-export type BrandingKind = 'paid-content' | 'foundation' | 'sponsored';
+export type BrandingKind = BrandingType['name'];
 
 /**
  * Branding that can be applied to an entire collection on a front

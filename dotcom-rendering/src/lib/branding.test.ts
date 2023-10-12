@@ -7,7 +7,7 @@ const logo = {} as Branding['logo'];
 describe('decideCollectionBranding', () => {
 	it('use editorial badge (even with valid branding on cards) if series is defined', () => {
 		const cardBranding = {
-			brandingType: { name: 'paid-content' },
+			brandingType: { name: 'paid-content' as const },
 			sponsorName: 'foo',
 			aboutThisLink: '',
 			logo,
@@ -67,7 +67,7 @@ describe('decideCollectionBranding', () => {
 						{
 							edition: { id: 'UK' as const },
 							branding: {
-								brandingType: { name: 'paid-content' },
+								brandingType: { name: 'paid-content' as const },
 								sponsorName: 'foo',
 								aboutThisLink: '',
 								logo,
@@ -76,7 +76,7 @@ describe('decideCollectionBranding', () => {
 						{
 							edition: { id: 'US' as const },
 							branding: {
-								brandingType: { name: 'sponsored' },
+								brandingType: { name: 'sponsored' as const },
 								sponsorName: 'bar',
 								aboutThisLink: '',
 								logo,
@@ -124,7 +124,7 @@ describe('decideCollectionBranding', () => {
 
 	it('is paid content derived from multiple cards', () => {
 		const cardBranding = {
-			brandingType: { name: 'paid-content' },
+			brandingType: { name: 'paid-content' as const },
 			sponsorName: 'foo',
 			aboutThisLink: '',
 			logo,
@@ -281,7 +281,7 @@ describe('decideCollectionBranding', () => {
 
 	it('is sponsored branding when all of the branding types are sponsored and the names match', () => {
 		const cardBranding = {
-			brandingType: { name: 'sponsored' },
+			brandingType: { name: 'sponsored' as const },
 			sponsorName: 'foo',
 			aboutThisLink: '',
 			logo,
@@ -525,7 +525,7 @@ describe('decideCollectionBranding', () => {
 
 	it('when cards are present', () => {
 		const cardBranding = {
-			brandingType: { name: 'paid-content' },
+			brandingType: { name: 'paid-content' as const },
 			sponsorName: 'foo',
 			aboutThisLink: '',
 			logo,
@@ -582,7 +582,7 @@ describe('decideCollectionBranding', () => {
 
 	it('is undefined when front branding matches card branding, but we are not displaying front branding', () => {
 		const cardBranding = {
-			brandingType: { name: 'paid-content' },
+			brandingType: { name: 'paid-content' as const },
 			sponsorName: 'foo',
 			aboutThisLink: '',
 			logo,

@@ -8,7 +8,6 @@ import type {
 } from '../types/branding';
 import { assertUnreachable } from './assert-unreachable';
 import type { EditionId } from './edition';
-import { guard } from './guard';
 import type { NonEmptyArray } from './non-empty-array';
 import { isNonEmptyArray } from './non-empty-array';
 
@@ -54,19 +53,13 @@ const getBrandingFromCards = (
 	return brandings;
 };
 
-const isCollectionBrandingKind = guard([
-	'paid-content',
-	'sponsored',
-	'foundation',
-] as const);
-
 const getBrandingType = ([
 	firstBranding,
 	...restBranding
 ]: NonEmptyArray<Branding>): BrandingKind | undefined => {
 	const name = firstBranding.brandingType?.name;
 
-	if (!isCollectionBrandingKind(name)) {
+	if (!name) {
 		return undefined;
 	}
 
