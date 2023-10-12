@@ -3,9 +3,18 @@ regions: [eu-west-1]
 allowedStages:
   - CODE
   - PROD
+templates:
+  cloudformation:
+    type: cloud-formation
+    parameters:
+      amiEncrypted: true
+      amiTags:
+        # Keep the Node version in sync with `.nvmrc`
+        Recipe: dotcom-rendering-ARM-jammy-node-18.17.0
+        AmigoStage: PROD
 deployments:
   frontend-cfn:
-    type: cloud-formation
+    template: cloudformation
     parameters:
       templateStagePaths:
         CODE: DotcomRendering-CODE.template.json
@@ -13,12 +22,23 @@ deployments:
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
       amiParameter: AMIRendering
-      amiEncrypted: true
-      amiTags:
-        # Keep the Node version in sync with `.nvmrc`
-        Recipe: dotcom-rendering-ARM-jammy-node-18.17.0
-        AmigoStage: PROD
   rendering:
+    type: autoscaling
+    parameters:
+      bucketSsmKey: /account/services/dotcom-artifact.bucket
+    dependencies:
+      - frontend-static
+      - frontend-cfn
+  front-web-cfn:
+    template: cloudformation
+    parameters:
+      templateStagePaths:
+        CODE: DotcomRendering-front-web-CODE.template.json
+        PROD: DotcomRendering-front-web-PROD.template.json
+      cloudFormationStackByTags: false
+      cloudFormationStackName: front-web
+      amiParameter: AMIFrontweb
+  front-web:
     type: autoscaling
     parameters:
       bucketSsmKey: /account/services/dotcom-artifact.bucket
