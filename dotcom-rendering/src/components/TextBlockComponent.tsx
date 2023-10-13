@@ -266,9 +266,6 @@ const buildElementTree =
 						node.parentNode?.parentNode?.nodeName ===
 							'#document-fragment'
 					) {
-						console.log('node.textContent >>>', node.textContent);
-						console.log({ html, node });
-
 						const { dropCap, restOfSentence } = dropCappedSentence;
 						return (
 							<>
