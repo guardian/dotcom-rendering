@@ -22,6 +22,25 @@ const startingWithLink =
 	'<p><a href="https://www.pmi.com/">Philip Morris International</a> (PMI), the tobacco and vaping company behind Marlboro cigarettes, is waging a big lobbying campaign to prevent countries from cracking down on vapes and similar products as part of a global treaty, a leaked email reveals.</p>';
 const autoLinkTag =
 	'<p>That <a href="/culture/kerry-washington" data-link-name="in body link" data-component="auto-linked-tag">Kerry Washington</a> comes from a seemingly perfect family is something to which I thought I could attest. Four years ago, on an icily grey day in New York City, I met the actor after watching her gut-wrenching performance on Broadway in the play American Son. I sat on a sofa on the vacated stage, in deep conversation with Washington’s parents, Earl and Valerie: she a professor, he a businessman, who had raised their daughter in a hard-working, predominantly black neighbourhood in the Bronx. I remember thinking how good-looking, charming and erudite they seemed. And Washington – gracious and gorgeous in real life – made so much sense as their offspring.</p>';
+const nestedParagraphs =
+	'<p>This little piggy went to market<p>' +
+	'<p>This little piggy stayed home<p>' +
+	'<p>This little piggy had roast beef<p>' +
+	'<p>And this little piggy had none<p>' +
+	'<p>And this little piggy cried wee wee wee all the way home<p>' +
+	'<p>Wee wee wee cried this little piggy<p>' +
+	'<p>Wee wee wee cried this little piggy<p>' +
+	'<p>Wee wee wee cried this little piggy<p>' +
+	'<p>All the way home<p>' +
+	'<p>This little piggy went to market<p>' +
+	'<p>This little piggy stayed home<p>' +
+	'<p>This little piggy had roast beef<p>' +
+	'<p>And this little piggy had none<p>' +
+	'<p>And this little piggy cried wee wee wee all the way home<p>' +
+	'<p>Wee wee wee cried this little piggy<p>' +
+	'<p>Wee wee wee cried this little piggy<p>' +
+	'<p>Wee wee wee cried this little piggy<p>' +
+	'<p>All the way home<p>';
 
 const containerStyles = css`
 	max-width: 620px;
@@ -261,3 +280,20 @@ export const autoLinkStory = () => {
 	);
 };
 autoLinkStory.storyName = 'Automatic hyperlink near the start';
+
+export const nestedParagraphsStory = () => {
+	return (
+		<div css={containerStyles}>
+			<TextBlockComponent
+				html={nestedParagraphs}
+				format={{
+					theme: Pillar.Culture,
+					design: ArticleDesign.Feature,
+					display: ArticleDisplay.Immersive,
+				}}
+				isFirstParagraph={true}
+			/>
+		</div>
+	);
+};
+nestedParagraphsStory.storyName = 'Nested paragraphs';
