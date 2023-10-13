@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { joinUrl, timeAgo } from '@guardian/libs';
+import { joinUrl } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { SvgPinned } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
+import { Island } from './Island';
+import { RelativeTime } from './RelativeTime.importable';
 
 const fallbackDate = (date: Date) =>
 	[date.getHours(), date.getMinutes()]
@@ -57,17 +59,20 @@ const FirstPublished = ({
 				`}
 			>
 				{!isPinnedPost && (
-					<time
-						dateTime={publishedDate.toISOString()}
-						data-relativeformat="med"
+					<span
 						css={css`
 							color: ${neutral[46]};
 							font-weight: bold;
 							margin-right: ${space[2]}px;
 						`}
 					>
-						{timeAgo(firstPublished)}
-					</time>
+						<Island
+							priority="enhancement"
+							defer={{ until: 'visible' }}
+						>
+							<RelativeTime then={firstPublished}></RelativeTime>
+						</Island>
+					</span>
 				)}
 				<span
 					css={css`

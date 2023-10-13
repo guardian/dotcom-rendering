@@ -131,16 +131,6 @@ void (async () => {
 	);
 
 	void startup(
-		'relativeTime',
-		() =>
-			import(
-				/* webpackMode: 'lazy' */
-				'./relativeTime'
-			).then(({ relativeTime }) => relativeTime()),
-		{ priority: 'feature' },
-	);
-
-	void startup(
 		'initDiscussion',
 		() =>
 			import(
