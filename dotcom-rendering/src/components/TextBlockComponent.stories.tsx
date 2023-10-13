@@ -18,6 +18,10 @@ const htmlWithDot =
 	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit.<br><span data-dcr-style="bullet"></span> Etiam porta mauris nec sagittis luctus.</p>';
 const longWords =
 	'<p>Test In Mobile Modes</p><br><p>This is to test whether extremely long edge case words are wrapped when in mobile portrait. Word one: Pneumonoultramicroscopicsilicovolcanoconiosis. Word two: Hippopotomonstrosesquippedaliophobia. Word three: Pseudopseudohypoparathyroidism. Link test: https://www.theguardian.com/commentisfree/2021/mar/24/trust-britain-covid-vaccine-compromise?dcr</p>';
+const startingWithLink =
+	'<p><a href="https://www.pmi.com/">Philip Morris International</a> (PMI), the tobacco and vaping company behind Marlboro cigarettes, is waging a big lobbying campaign to prevent countries from cracking down on vapes and similar products as part of a global treaty, a leaked email reveals.</p>';
+const autoLinkTag =
+	'<p>That <a href="/culture/kerry-washington" data-link-name="in body link" data-component="auto-linked-tag">Kerry Washington</a> comes from a seemingly perfect family is something to which I thought I could attest. Four years ago, on an icily grey day in New York City, I met the actor after watching her gut-wrenching performance on Broadway in the play American Son. I sat on a sofa on the vacated stage, in deep conversation with Washington’s parents, Earl and Valerie: she a professor, he a businessman, who had raised their daughter in a hard-working, predominantly black neighbourhood in the Bronx. I remember thinking how good-looking, charming and erudite they seemed. And Washington – gracious and gorgeous in real life – made so much sense as their offspring.</p>';
 
 const containerStyles = css`
 	max-width: 620px;
@@ -223,3 +227,37 @@ export const longWordStory = () => {
 	);
 };
 longWordStory.storyName = 'Long Words';
+
+export const startingWithLinkStory = () => {
+	return (
+		<div css={containerStyles}>
+			<TextBlockComponent
+				html={startingWithLink}
+				format={{
+					theme: Pillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+				}}
+				isFirstParagraph={false}
+			/>
+		</div>
+	);
+};
+startingWithLinkStory.storyName = 'Starting With Link';
+
+export const autoLinkStory = () => {
+	return (
+		<div css={containerStyles}>
+			<TextBlockComponent
+				html={autoLinkTag}
+				format={{
+					theme: Pillar.Culture,
+					design: ArticleDesign.Feature,
+					display: ArticleDisplay.Immersive,
+				}}
+				isFirstParagraph={true}
+			/>
+		</div>
+	);
+};
+autoLinkStory.storyName = 'Automatic hyperlink near the start';
