@@ -1,7 +1,6 @@
 import {
 	InteractiveAtom,
 	InteractiveLayoutAtom,
-	VideoAtom,
 } from '@guardian/atoms-rendering';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
@@ -50,6 +49,7 @@ import { TextBlockComponent } from '../components/TextBlockComponent';
 import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
 import { TweetBlockComponent } from '../components/TweetBlockComponent.importable';
 import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
+import { VideoAtom } from '../components/VideoAtom';
 import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockComponent.importable';
 import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
@@ -495,7 +495,7 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						pillar={format.theme}
+						format={format}
 					/>
 				</Island>
 			);
