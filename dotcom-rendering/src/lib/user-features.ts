@@ -1,4 +1,10 @@
-import { getCookie, isObject, removeCookie, setCookie } from '@guardian/libs';
+import {
+	getCookie,
+	isObject,
+	isUndefined,
+	removeCookie,
+	setCookie,
+} from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import {
 	getAuthStatus,
@@ -13,12 +19,11 @@ import {
 	getLocalDate,
 	noop,
 	setAdFreeCookie,
-	timeInDaysFromNow,
-} from './user-features-common-imports.js';
+} from './user-features-common-imports';
 import type {
 	LocalDate,
 	UserFeaturesResponse,
-} from './user-features-common-imports.ts';
+} from './user-features-common-imports';
 // Persistence keys
 const PAYING_MEMBER_COOKIE = 'gu_paying_member';
 const ACTION_REQUIRED_FOR_COOKIE = 'gu_action_required_for';
@@ -87,7 +92,6 @@ const validateResponse = (
 
 	return true;
 };
-console.log('timeInDaysFromNow(1):', timeInDaysFromNow(1));
 const persistResponse = (JsonResponse: UserFeaturesResponse) => {
 	setCookie({
 		name: PAYING_MEMBER_COOKIE,
@@ -259,21 +263,22 @@ const getLastRecurringContributionDate = (): number | null => {
 	const annualCookie = getCookie({
 		name: SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE,
 	});
-	const monthlyTime = monthlyCookie ? parseInt(monthlyCookie, 10) : null;
-	const annualTime = annualCookie ? parseInt(annualCookie, 10) : null;
-	const monthlyMS =
-		monthlyTime && Number.isInteger(monthlyTime) ? monthlyTime : null;
-	const annualMS =
-		annualTime && Number.isInteger(annualTime) ? annualTime : null;
+	const monthlyTime = monthlyCookie ? parseInt(monthlyCookie, 10) : undefined;
+	const annualTime = annualCookie ? parseInt(annualCookie, 10) : undefined;
+	const monthlyMS = Number.isInteger(monthlyTime) ? monthlyTime : undefined;
+	const annualMS = Number.isInteger(annualTime) ? annualTime : undefined;
 
-	if (!monthlyMS && !annualMS) {
+	// Both values are undefined
+	if (isUndefined(monthlyMS) && isUndefined(annualMS)) {
 		return null;
 	}
 
-	if (monthlyMS && annualMS) {
+	// Both values are defined and return the MAX
+	if (!isUndefined(monthlyMS) && !isUndefined(annualMS)) {
 		return Math.max(monthlyMS, annualMS);
 	}
 
+	// One value is defined, return that value
 	return monthlyMS ?? annualMS ?? null;
 };
 
@@ -389,6 +394,9 @@ const getPurchaseInfo = (): PurchaseInfo => {
 	return purchaseInfo;
 };
 
+const userFeatures = async (): Promise<void> => {
+	await refresh(); // come to Promise structure
+};
 export {
 	accountDataUpdateWarning,
 	isAdFreeUser,
@@ -412,4 +420,5 @@ export {
 	CONTRIBUTIONS_REMINDER_SIGNED_UP,
 	canShowContributionsReminderFeature,
 	shouldHideSupportMessaging,
+	userFeatures,
 };
