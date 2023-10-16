@@ -58,7 +58,6 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
-					// Should be CommentLayout once implemented for apps
 					return (
 						<CommentLayout
 							article={article}
