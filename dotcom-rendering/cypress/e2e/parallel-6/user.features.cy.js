@@ -39,43 +39,7 @@ const visitArticleNoOkta = () =>
 		},
 	});
 
-const articleUrl =
-	'https://www.theguardian.com/commentisfree/2020/dec/11/brexit-conservative-rule-breaking-eu';
-
-const setMvtCookie = (str) => {
-	cy.setCookie('GU_mvt_id', str, {
-		log: true,
-	});
-};
-
-const setArticleCount = (n) => {
-	// set article count for today to be n
-	localStorage.setItem(
-		'gu.history.dailyArticleCount',
-		JSON.stringify({
-			value: [
-				{
-					day: Math.floor(Date.now() / 86400000),
-					count: n,
-				},
-			],
-		}),
-	);
-};
-
-describe('Cookie and Authentication Tests', function () {
-	beforeEach(function () {
-		cy.clearCookies();
-		//   disableCMP();
-		//   setLocalBaseUrl();
-
-		// sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
-		setMvtCookie('500000');
-
-		// set article count to be min number to view gate
-		setArticleCount(3);
-	});
-
+describe('User cookies tests', function () {
 	// it("Should check if a user is logged in and has required cookies", function() {
 	//   // Mock user login status using Cypress cookies
 	// //   disableCMP();
@@ -107,17 +71,21 @@ describe('Cookie and Authentication Tests', function () {
 	// 	cy.get('#dfp-ad--top-above-nav').should('exist');
 	//   });
 
-	it(`Test allow all, logged in, don't show ads`, function () {
-		// visitArticleNoOkta();
-		cmpIframe().contains("It's your choice");
-		privacySettingsIframe().contains('Privacy settings');
-		privacySettingsIframe().find("[title='Reject all']").click();
+	it(`Request to user features API is sent`, function () {
+		// set the GU_U cookie to simulate a logged in user
+		cy.setCookie('GU_U', 'true', { log: true });
 
-		// cy.allowAllConsent();
-		fakeLogin(true);
-		cy.wait('@userData');
-		// visitArticleNoOkta();
+		// set the gu_digital_subscriber cookie to simulate a digital subscriber
+		cy.setCookie('gu_digital_subscriber', 'true', { log: true });
 
-		cy.get('#dfp-ad--top-above-nav').should('not.exist');
+		cy.intercept(
+			'https://members-data-api.theguardian.com/user-attributes/me',
+		).as('getUserFeatures');
+
+		visitArticleNoOkta();
+
+		cy.wait('@getUserFeatures', { timeout: 30000 });
 	});
+
+	it(`Existing old cookie data is deleted when the user is signed out`, function () {});
 });

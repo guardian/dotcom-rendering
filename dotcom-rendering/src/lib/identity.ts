@@ -106,7 +106,6 @@ const getUserFromCookie = (): IdentityUserFromCache => {
 };
 
 export const isUserLoggedIn = (): boolean => getUserFromCookie() !== null;
-console.log('WORKING WELL>>>>>>>>>', isUserLoggedIn);
 
 export const getOptionsHeadersWithOkta = (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
@@ -185,16 +184,3 @@ export const getAuthStatus = async (): Promise<AuthStatus> => {
 		return getSignedInStatusWithCookies();
 	}
 };
-
-// not being used currently in DCR but possible uselful for other purposes
-// export const getGoogleTagId = (): Promise<string | null> =>
-// 	getAuthStatus().then((authStatus) => {
-// 		switch (authStatus.kind) {
-// 			case 'SignedInWithCookies':
-// 				return fetchGoogleTagIdFromApi();
-// 			case 'SignedInWithOkta':
-// 				return authStatus.idToken.claims.google_tag_id;
-// 			default:
-// 				return null;
-// 		}
-// 	});
