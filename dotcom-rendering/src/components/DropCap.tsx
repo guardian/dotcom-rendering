@@ -1,56 +1,47 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { headline, space } from '@guardian/source-foundations';
+import { fonts, space } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
 
 type Props = {
 	letter: string;
 	format: ArticleFormat;
 };
 
-const outerStyles = (palette: Palette) => css`
-	${headline.large({
-		fontWeight: 'light',
-	})}
+const dropCap = css`
+	/* stylelint-disable-next-line property-disallowed-list -- we’re setting custom line height and font weight */
+	font-family: ${fonts.headline};
 	float: left;
+	font-size: 111px;
+	line-height: 92px;
 	text-transform: uppercase;
 	box-sizing: border-box;
-	margin-right: ${space[1]}px;
-	color: ${palette.text.dropCap};
+	margin-right: ${space[2]}px;
+	vertical-align: text-top;
 `;
 
-const innerStyles = (format: ArticleFormat) => {
-	const baseStyles = css`
-		${headline.large({ fontWeight: 'bold' })}
-		font-size: 111px;
-		line-height: 92px;
-		vertical-align: text-top;
-		pointer-events: none;
-		margin-right: ${space[1]}px;
-	`;
-
+const fontWeight = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
-			return css`
-				${baseStyles};
-				font-weight: 200;
-			`;
+			return 200;
 		default:
-			return css`
-				${baseStyles};
-				font-weight: 700;
-			`;
+			return 700;
 	}
 };
 
 export const DropCap = ({ letter, format }: Props) => {
 	const palette = decidePalette(format);
 	return (
-		<span css={outerStyles(palette)}>
-			<span css={innerStyles(format)}>{letter}</span>
+		<span
+			css={dropCap}
+			style={{
+				color: palette.text.dropCap,
+				fontWeight: fontWeight(format),
+			}}
+		>
+			{letter}
 		</span>
 	);
 };
