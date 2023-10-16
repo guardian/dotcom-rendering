@@ -84,7 +84,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island
 				priority="enhancement"
-				defer={{ until: 'visible' }}
+				defer={{ until: 'idle' }}
 				clientOnly={true}
 			>
 				<ShowHideContainers />
