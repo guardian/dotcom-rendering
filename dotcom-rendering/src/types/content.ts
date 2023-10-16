@@ -131,12 +131,7 @@ interface QuizAtomBlockElement {
 	id: string;
 	questions: QuestionType[];
 	resultBuckets: ResultsBucketType[];
-	resultGroups: {
-		id: string;
-		title: string;
-		shareText: string;
-		minScore: number;
-	}[];
+	resultGroups: ResultGroupsType[];
 }
 
 interface CodeBlockElement {
