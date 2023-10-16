@@ -8,7 +8,6 @@ import {
 	adFreeDataIsPresent,
 	fetchJson,
 	getAdFreeCookie,
-	noop,
 	setAdFreeCookie,
 } from './user-features-common-imports';
 import type { UserFeaturesResponse } from './user-features-common-imports';
@@ -128,7 +127,10 @@ const requestNewData = () => {
 					return response;
 				})
 				.then(persistResponse)
-				.catch(noop);
+				.catch(() => {
+					// eslint-disable-next-line no-console -- error logging
+					console.error('Error fetching user data');
+				});
 		});
 };
 
