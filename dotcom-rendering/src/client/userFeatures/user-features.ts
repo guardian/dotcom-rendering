@@ -9,8 +9,8 @@ import {
 	fetchJson,
 	getAdFreeCookie,
 	setAdFreeCookie,
-} from './user-features-common-imports';
-import type { UserFeaturesResponse } from './user-features-common-imports';
+} from './user-features-lib';
+import type { UserFeaturesResponse } from './user-features-lib';
 
 const PAYING_MEMBER_COOKIE = 'gu_paying_member';
 const ACTION_REQUIRED_FOR_COOKIE = 'gu_action_required_for';
