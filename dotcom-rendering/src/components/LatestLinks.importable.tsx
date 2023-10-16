@@ -1,9 +1,5 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	type ArticleFormat,
-	timeAgo as timeAgoHasAWeirdInterface,
-} from '@guardian/libs';
+import { type ArticleFormat } from '@guardian/libs';
 import {
 	lineHeights,
 	palette,
@@ -16,6 +12,7 @@ import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
 import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
+import { RelativeTime } from './RelativeTime.importable';
 
 type Props = {
 	id: string;
@@ -23,13 +20,6 @@ type Props = {
 	direction: 'horizontal' | 'vertical';
 	isDynamo?: true;
 	containerPalette?: DCRContainerPalette;
-};
-
-const timeAgo = (epoch: number) => {
-	const value = timeAgoHasAWeirdInterface(epoch);
-
-	if (typeof value === 'string' && value !== '') return value;
-	else return undefined;
 };
 
 const style = css`
@@ -74,25 +64,6 @@ const bold = css`
 const transparent = css`
 	color: transparent;
 `;
-
-const Time = ({
-	epoch,
-	colour,
-}: {
-	epoch: number;
-	colour: SerializedStyles;
-}) => (
-	<>
-		<time
-			dateTime={new Date(epoch).toISOString()}
-			data-relativeformat="med"
-			css={[bold, colour]}
-		>
-			{timeAgo(epoch)}
-		</time>
-		<br />
-	</>
-);
 
 const THREE_LINES_AS_CHARACTERS = 75;
 
@@ -144,10 +115,6 @@ export const LatestLinks = ({
 	const { text } = decidePalette(format, containerPalette);
 	const kickerColour = isDynamo ? text.dynamoKicker : text.cardKicker;
 
-	const colour = css`
-		color: ${kickerColour};
-	`;
-
 	const dividerColour = css`
 		color: ${containerPalette
 			? decideContainerOverrides(containerPalette).border.container
@@ -190,10 +157,11 @@ export const LatestLinks = ({
 								linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
 								isDynamo={isDynamo}
 							>
-								<Time
-									epoch={block.publishedDateTime}
-									colour={colour}
-								/>
+								<div css={bold} style={{ color: kickerColour }}>
+									<RelativeTime
+										then={block.publishedDateTime}
+									/>
+								</div>
 								<span className="show-underline">
 									{extractAboutThreeLines(block.body)}
 								</span>
