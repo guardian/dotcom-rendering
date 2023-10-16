@@ -382,7 +382,10 @@ export const SeriesSectionLink = ({
 										`,
 									]}
 								>
-									<Island defer={{ until: 'visible' }}>
+									<Island
+										priority="enhancement"
+										defer={{ until: 'visible' }}
+									>
 										<PulsingDot />
 									</Island>
 								</span>
@@ -449,7 +452,10 @@ export const SeriesSectionLink = ({
 									`,
 								]}
 							>
-								<Island defer={{ until: 'visible' }}>
+								<Island
+									priority="enhancement"
+									defer={{ until: 'visible' }}
+								>
 									<PulsingDot />
 								</Island>
 							</span>

@@ -350,7 +350,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											element="aside"
 											format={format}
 										>
-											<Island defer={{ until: 'idle' }}>
+											<Island
+												priority="enhancement"
+												defer={{ until: 'idle' }}
+											>
 												<SubNav
 													subNavSections={
 														props.NAV.subNavSections
@@ -471,7 +474,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
 				{renderingTarget === 'Apps' && (
-					<Island clientOnly={true}>
+					<Island priority="critical" clientOnly={true}>
 						<AdPortals />
 					</Island>
 				)}
@@ -616,7 +619,11 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									}
 								/>
 								{showBodyEndSlot && (
-									<Island clientOnly={true}>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+										clientOnly={true}
+									>
 										<SlotBodyEnd
 											contentType={article.contentType}
 											contributionsServiceUrl={
@@ -719,7 +726,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 				{article.storyPackage && (
 					<Section fullWidth={true}>
-						<Island defer={{ until: 'visible' }}>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
 								trails={article.storyPackage.trails.map(
@@ -737,7 +744,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				)}
 
 				{renderingTarget === 'Web' && (
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
 							hasRelated={article.hasRelated}
@@ -796,6 +803,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
+								priority="feature"
 								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
@@ -829,7 +837,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 			{renderingTarget === 'Web' && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
@@ -863,7 +871,11 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper>
-						<Island defer={{ until: 'idle' }} clientOnly={true}>
+						<Island
+							priority="feature"
+							defer={{ until: 'idle' }}
+							clientOnly={true}
+						>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -905,7 +917,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					showSideBorders={false}
 					element="footer"
 				>
-					<Island>
+					<Island priority="critical">
 						<AppsFooter />
 					</Island>
 				</Section>

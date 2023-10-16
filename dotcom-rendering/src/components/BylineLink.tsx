@@ -141,7 +141,7 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 		<>
 			{renderedTokens}
 			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
-				<Island>
+				<Island priority="critical">
 					<FollowWrapper
 						displayName={soleContributor.title}
 						id={soleContributor.id}

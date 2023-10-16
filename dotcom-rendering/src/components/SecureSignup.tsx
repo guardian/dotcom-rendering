@@ -68,7 +68,7 @@ export const SecureSignup = ({
 
 	return (
 		<>
-			<Island defer={{ until: 'idle' }}>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<SecureSignupIframe
 					name={name}
 					html={html}

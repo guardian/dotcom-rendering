@@ -197,7 +197,7 @@ export const ArticleBody = ({
 	return (
 		<>
 			{tableOfContents && tableOfContents.length > 0 && (
-				<Island>
+				<Island priority="critical" defer={{ until: 'visible' }}>
 					<TableOfContents
 						tableOfContents={tableOfContents}
 						format={format}
@@ -218,7 +218,11 @@ export const ArticleBody = ({
 				dir={languageDirection}
 			>
 				{isRecipe(tags) && (
-					<Island defer={{ until: 'hash' }} clientOnly={true}>
+					<Island
+						priority="feature"
+						defer={{ until: 'hash' }}
+						clientOnly={true}
+					>
 						<RecipeMultiplier />
 					</Island>
 				)}

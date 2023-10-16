@@ -37,10 +37,7 @@ import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import {
-	networkFrontsBannerAdCollections,
-	sectionFrontsBannerAdCollections,
-} from '../lib/frontsBannerAbTestAdPositions';
+import { frontsBannerAdCollections } from '../lib/frontsBannerAbTestAdPositions';
 import {
 	getDesktopAdPositions,
 	getMerchHighPosition,
@@ -89,8 +86,7 @@ export const decideAdSlot = (
 	isPaidContent: boolean | undefined,
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
-	isInNetworkFrontsBannerTest?: boolean,
-	isInSectionFrontsBannerTest?: boolean,
+	isInFrontsBannerTest?: boolean,
 ) => {
 	if (!renderAds) return null;
 
@@ -99,7 +95,7 @@ export const decideAdSlot = (
 		collectionCount > minContainers &&
 		index === getMerchHighPosition(collectionCount)
 	) {
-		if (isInNetworkFrontsBannerTest || isInSectionFrontsBannerTest) {
+		if (isInFrontsBannerTest) {
 			return (
 				<Hide from="desktop">
 					<AdSlot
@@ -192,7 +188,7 @@ const decideLeftContent = (
 		!hasPageSkin
 	) {
 		return (
-			<Island defer={{ until: 'idle' }}>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<WeatherWrapper
 					ajaxUrl={front.config.ajaxUrl}
 					edition={front.editionId}
@@ -219,24 +215,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = hasPageSkinConfig && renderAds;
 
-	const isInNetworkFrontsBannerTest =
+	const isInFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
 		abTests.frontsBannerAdsDcrVariant === 'variant' &&
-		Object.keys(networkFrontsBannerAdCollections).includes(
-			front.config.pageId,
-		);
-	const isInSectionFrontsBannerTest =
-		!!switches.sectionFrontsBannerAds &&
-		abTests.sectionFrontsBannerAdsVariant === 'variant' &&
-		Object.keys(sectionFrontsBannerAdCollections).includes(
-			front.config.pageId,
-		);
+		Object.keys(frontsBannerAdCollections).includes(front.config.pageId);
 
-	// This will be the targeted collections, if the current page is in the fronts banner AB test.
-	const frontsBannerTargetedCollections = isInNetworkFrontsBannerTest
-		? networkFrontsBannerAdCollections[front.config.pageId]
-		: isInSectionFrontsBannerTest
-		? sectionFrontsBannerAdCollections[front.config.pageId]
+	// This will be the targeted collections if the current page is in the fronts banner AB test.
+	const frontsBannerTargetedCollections = isInFrontsBannerTest
+		? frontsBannerAdCollections[front.config.pageId]
 		: [];
 
 	const merchHighPosition = getMerchHighPosition(
@@ -253,10 +239,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const numBannerAdsInserted = useRef(0);
 
-	const renderMpuAds =
-		renderAds &&
-		!isInNetworkFrontsBannerTest &&
-		!isInSectionFrontsBannerTest;
+	const renderMpuAds = renderAds && !isInFrontsBannerTest;
 
 	const showMostPopular =
 		front.config.switches.deeplyRead &&
@@ -356,7 +339,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								element="aside"
 								hasPageSkin={hasPageSkin}
 							>
-								<Island defer={{ until: 'idle' }}>
+								<Island
+									priority="enhancement"
+									defer={{ until: 'idle' }}
+								>
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
@@ -394,7 +380,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-			<Island clientOnly={true}>
+			<Island
+				priority="feature"
+				defer={{ until: 'visible' }}
+				clientOnly={true}
+			>
 				<EuropeLandingModal edition={front.editionId} />
 			</Island>
 			<main
@@ -413,11 +403,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					// There are some containers that have zero trails. We don't want to render these
 					if (!trail) return null;
 
-					const imageLoading =
-						front.config.abTests.lazyLoadImagesVariant ===
-							'variant' && index > 0
-							? 'lazy'
-							: 'eager';
+					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${
@@ -490,8 +476,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											.isPaidContent,
 										mobileAdPositions,
 										hasPageSkin,
-										isInNetworkFrontsBannerTest,
-										isInSectionFrontsBannerTest,
+										isInFrontsBannerTest,
 									)}
 								</div>
 							</Fragment>
@@ -570,8 +555,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInNetworkFrontsBannerTest,
-									isInSectionFrontsBannerTest,
+									isInFrontsBannerTest,
 								)}
 							</>
 						);
@@ -625,8 +609,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInNetworkFrontsBannerTest,
-									isInSectionFrontsBannerTest,
+									isInFrontsBannerTest,
 								)}
 							</Fragment>
 						);
@@ -679,7 +662,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									hasPageSkin={hasPageSkin}
 								>
-									<Island defer={{ until: 'visible' }}>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
 										<Carousel
 											heading={collection.displayName}
 											trails={trails}
@@ -705,8 +691,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									isInNetworkFrontsBannerTest,
-									isInSectionFrontsBannerTest,
+									isInFrontsBannerTest,
 								)}
 							</Fragment>
 						);
@@ -790,8 +775,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.pressedPage.frontProperties.isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
-								isInNetworkFrontsBannerTest,
-								isInSectionFrontsBannerTest,
+								isInFrontsBannerTest,
 							)}
 						</Fragment>
 					);
@@ -832,7 +816,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						hasPageSkin ? background.primary : undefined
 					}
 				>
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -864,7 +848,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			</Section>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island defer={{ until: 'idle' }} clientOnly={true}>
+				<Island
+					priority="feature"
+					defer={{ until: 'idle' }}
+					clientOnly={true}
+				>
 					<StickyBottomBanner
 						contentType={front.config.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

@@ -1,4 +1,6 @@
 import { startPerformanceMeasure } from '@guardian/libs';
+import type { Guard } from './guard';
+import { guard } from './guard';
 
 const START = Date.now();
 
@@ -22,7 +24,10 @@ let CONCURRENCY_COUNT = Infinity;
  * priorities, and the scheduler will prefer the priority with the lowest index.
  **/
 const PRIORITIES = ['critical', 'feature', 'enhancement'] as const;
-export type TaskPriority = (typeof PRIORITIES)[number];
+export type Priority = Guard<typeof PRIORITIES>;
+export type SchedulePriority = { [K in Priority]: K };
+
+export const isValidSchedulerPriority = guard(PRIORITIES);
 
 /**
  * A thing that a consumer want to do. Should be a function that returns a promise.
@@ -49,7 +54,7 @@ type QueueableTask<T = unknown> = {
  * Stores scheduled tasks in a queue, grouped by priority.
  */
 const queue: Record<
-	TaskPriority,
+	Priority,
 	{
 		/**
 		 * The number of milliseconds after which tasks of a this priority
@@ -126,7 +131,7 @@ function run() {
 }
 
 export type ScheduleOptions = {
-	priority: TaskPriority;
+	priority: Priority;
 	canRun?: CanRun;
 };
 
@@ -138,7 +143,7 @@ export type ScheduleOptions = {
  * `Promise.resolve()` to keep the compiler happy, then the scheduler will
  * think the task instantly completed and start the next one too soon.
  * @param options Options for scheduling a task.
- * @param {TaskPriority} options.priority Priority of the task. Tasks with
+ * @param {Priority} options.priority Priority of the task. Tasks with
  * higher priority will be run first. Defaults to `'standard'`.
  * @returns A promise that resolves when the task completes.
  */
@@ -173,7 +178,7 @@ export function setSchedulerConcurrency(
  * Defaults to `Infinity` for all priorities.
  */
 export function setSchedulerPriorityLastStartTime(
-	priority: TaskPriority,
+	priority: Priority,
 	lastStartTime: number,
 ): void {
 	queue[priority].lastStartTime = lastStartTime;

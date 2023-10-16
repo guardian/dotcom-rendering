@@ -7,8 +7,16 @@ type BrandingLogo = {
 	dimensions: { width: number; height: number };
 };
 
+/**
+ * @see https://github.com/guardian/commercial-shared/blob/35cdf4e1/src/main/scala/com/gu/commercial/branding/BrandingType.scala
+ */
+export type BrandingType =
+	| { name: 'paid-content' }
+	| { name: 'foundation' }
+	| { name: 'sponsored' };
+
 export interface Branding {
-	brandingType?: { name: string };
+	brandingType?: BrandingType;
 	sponsorName: string;
 	logo: BrandingLogo;
 	aboutThisLink: string;

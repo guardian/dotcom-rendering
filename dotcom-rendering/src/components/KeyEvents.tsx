@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { timeAgo } from '@guardian/libs';
 import { from, neutral, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 import { Accordion } from './Accordion';
+import { Island } from './Island';
+import { RelativeTime } from './RelativeTime.importable';
 
 export type KeyEvent = {
 	date: Date;
@@ -116,22 +117,14 @@ const ListItem = ({ keyEvent, format }: ListItemProps) => (
 	<li css={listItemStyles}>
 		<Link priority="secondary" css={linkStyles} href={keyEvent.url}>
 			<div css={timeTextWrapperStyles}>
-				<time
-					dateTime={keyEvent.date.toISOString()}
-					data-relativeformat="med"
-					title={`${keyEvent.date.toLocaleDateString('en-GB', {
-						hour: '2-digit',
-						minute: '2-digit',
-						weekday: 'long',
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric',
-						timeZoneName: 'long',
-					})}`}
-					css={timeStyles}
-				>
-					{timeAgo(keyEvent.date.getTime())}
-				</time>
+				<div css={timeStyles}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
+						<RelativeTime
+							then={keyEvent.date.getTime()}
+						></RelativeTime>
+					</Island>
+				</div>
+
 				<span css={textStyles(format)}>{keyEvent.text}</span>
 			</div>
 		</Link>

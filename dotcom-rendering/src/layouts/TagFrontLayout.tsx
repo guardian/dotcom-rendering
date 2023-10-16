@@ -162,7 +162,10 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								padSides={false}
 								element="aside"
 							>
-								<Island defer={{ until: 'idle' }}>
+								<Island
+									priority="enhancement"
+									defer={{ until: 'idle' }}
+								>
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
@@ -208,11 +211,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 						groupedTrails.day !== undefined,
 					);
 
-					const imageLoading =
-						tagFront.config.abTests.lazyLoadImagesVariant ===
-							'variant' && index > 0
-							? 'lazy'
-							: 'eager';
+					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
 					const ContainerComponent = () => {
 						if (
@@ -332,7 +331,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 					padSides={false}
 					element="aside"
 				>
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}

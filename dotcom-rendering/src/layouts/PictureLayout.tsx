@@ -364,7 +364,8 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								format={format}
 								showTopBorder={showSubNavTopBorder}
 							>
-								<Island defer={{ until: 'idle' }}>
+								<Island priority="enhancement"
+								defer={{ until: 'idle' }}>
 									<SubNav
 										subNavSections={
 											props.NAV.subNavSections
@@ -607,7 +608,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 				{article.storyPackage && (
 					<Section fullWidth={true}>
-						<Island defer={{ until: 'visible' }}>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
 								trails={article.storyPackage.trails.map(
@@ -625,7 +626,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 				)}
 
 				{renderingTarget === 'Web' && (
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
 							hasRelated={article.hasRelated}
@@ -647,7 +648,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Island>
 				)}
-
 				{!isPaidContent && showComments && (
 					<Section
 						fullWidth={true}
@@ -684,6 +684,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
+								priority="feature"
 								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
@@ -717,7 +718,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 			{renderingTarget === 'Web' && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
@@ -751,7 +752,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper>
-						<Island defer={{ until: 'idle' }} clientOnly={true}>
+						<Island priority="feature"
+					defer={{ until: 'idle' }}
+					clientOnly={true}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={

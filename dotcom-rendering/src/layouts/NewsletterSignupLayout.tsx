@@ -294,7 +294,10 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 							showTopBorder={false}
 							element="aside"
 						>
-							<Island defer={{ until: 'idle' }}>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'idle' }}
+							>
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
@@ -502,7 +505,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 
 				{article.storyPackage && (
 					<Section fullWidth={true}>
-						<Island defer={{ until: 'visible' }}>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
 								trails={article.storyPackage.trails.map(
@@ -519,7 +522,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island defer={{ until: 'visible' }}>
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}

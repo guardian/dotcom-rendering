@@ -1,39 +1,73 @@
+import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
 import { useConfig } from './ConfigContext';
 
-type VisibleProps = {
-	until: 'visible';
-	/**
-	 * @see https://developer.mozilla.org/en-us/docs/web/api/intersectionobserver/rootmargin
-	 */
-	rootMargin?: string;
+type DeferredProps = {
+	visible: {
+		until: 'visible';
+		/**
+		 * @see https://developer.mozilla.org/en-us/docs/web/api/intersectionobserver/rootmargin
+		 */
+		rootMargin?: string;
+	};
+	idle: {
+		until: 'idle';
+	};
+	interaction: {
+		until: 'interaction';
+	};
+	hash: {
+		until: 'hash';
+	};
 };
 
-type IdleProps = {
-	until: 'idle';
-};
-
-type InteractionProps = {
-	until: 'interaction';
-};
-
-type HashProps = {
-	until: 'hash';
+type PriorityProps = {
+	critical: {
+		priority: SchedulePriority['critical'];
+		// a critical island should never defer until idle
+		defer?: DeferredProps[Exclude<keyof DeferredProps, 'idle'>];
+	};
+	feature: {
+		priority: SchedulePriority['feature'];
+		defer: DeferredProps[keyof DeferredProps];
+	};
+	enhancement: {
+		priority: SchedulePriority['enhancement'];
+		defer: DeferredProps[keyof DeferredProps];
+	};
 };
 
 type IslandProps = {
 	children: JSX.Element;
 	clientOnly?: never;
-	defer?: VisibleProps | IdleProps | InteractionProps | HashProps;
+} & PriorityProps[keyof PriorityProps];
+
+type ClientOnlyPriorityProps = {
+	critical: {
+		priority: SchedulePriority['critical'];
+		// a critical island should never defer until idle
+		// a ClientOnly island should never defer until interaction
+		defer?: DeferredProps[Exclude<
+			keyof DeferredProps,
+			'idle' | 'interaction'
+		>];
+	};
+	feature: {
+		priority: SchedulePriority['feature'];
+		defer: DeferredProps[Exclude<keyof DeferredProps, 'interaction'>];
+	};
+	enhancement: {
+		priority: SchedulePriority['enhancement'];
+		defer: DeferredProps[Exclude<keyof DeferredProps, 'interaction'>];
+	};
 };
 
 type ClientOnlyIslandProps = {
 	children: JSX.Element;
 	clientOnly: true;
-	defer?: VisibleProps | IdleProps | HashProps;
-};
+} & ClientOnlyPriorityProps[keyof ClientOnlyPriorityProps];
 
 /**
- * Adds interactivity to the client by either hydrating or inserting content
+ * Adds interactivity to the client by either hydrating or inserting content.
  *
  * Note. The component passed as children must follow the [MyComponent].importable.tsx
  * namimg convention
@@ -42,6 +76,7 @@ type ClientOnlyIslandProps = {
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
  */
 export const Island = ({
+	priority,
 	clientOnly,
 	defer,
 	children,
@@ -61,6 +96,7 @@ export const Island = ({
 		<gu-island
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
 			name={children.type.name}
+			priority={priority}
 			deferUntil={defer?.until}
 			props={JSON.stringify(children.props)}
 			clientOnly={clientOnly}
@@ -87,6 +123,7 @@ export const islandNoscriptStyles = `
  */
 export type GuIsland = {
 	name: string;
+	priority: ScheduleOptions['priority'];
 	deferUntil?: NonNullable<IslandProps['defer']>['until'];
 	rootMargin?: string;
 	clientOnly?: boolean;

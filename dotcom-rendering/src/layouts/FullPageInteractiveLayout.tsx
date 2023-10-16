@@ -268,7 +268,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					padSides={false}
 					element="aside"
 				>
-					<Island defer={{ until: 'idle' }}>
+					<Island priority="enhancement" defer={{ until: 'idle' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -354,7 +354,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 					backgroundColour={neutral[100]}
 					element="aside"
 				>
-					<Island defer={{ until: 'visible' }}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -384,7 +384,11 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper>
-				<Island defer={{ until: 'idle' }} clientOnly={true}>
+				<Island
+					priority="feature"
+					defer={{ until: 'idle' }}
+					clientOnly={true}
+				>
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={
