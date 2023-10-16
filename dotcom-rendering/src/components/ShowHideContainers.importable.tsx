@@ -1,5 +1,5 @@
 import { isObject, isString, storage } from '@guardian/libs';
-import { useOnce } from '../lib/useOnce';
+import { useEffect } from 'react';
 
 type ContainerStates = { [id: string]: string };
 
@@ -19,7 +19,7 @@ const getContainerStates = (): ContainerStates => {
 };
 
 export const ShowHideContainers = () => {
-	useOnce(() => {
+	useEffect(() => {
 		const containerStates = getContainerStates();
 
 		const toggleContainer = (sectionId: string, element: HTMLElement) => {

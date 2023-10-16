@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import { useOnce } from './useOnce';
+import { useEffect, useState } from 'react';
 
 export const useHydrated = (): boolean => {
 	const [hydrated, setHydrated] = useState(false);
-	useOnce(() => {
+	useEffect(() => {
 		setHydrated(true);
 	}, []);
 
