@@ -11,6 +11,7 @@ import {
 	SvgWhatsApp,
 } from '@guardian/source-react-components';
 import type { IconProps } from '@guardian/source-react-components';
+import type { SharePlatformType } from '../types/content';
 
 const shareIconList = css`
 	display: flex;
@@ -29,22 +30,6 @@ const mobileOnlyShareIconsListItem = css`
 		display: none;
 	}
 `;
-
-export type SharePlatformType =
-	| 'facebook'
-	| 'twitter'
-	| 'email'
-	| 'linkedIn'
-	| 'pinterest'
-	| 'whatsApp'
-	| 'messenger';
-
-export type SharingUrlsType = {
-	[K in SharePlatformType]?: {
-		url: string;
-		userMessage: string;
-	};
-};
 
 export interface ShareListItemType {
 	id: SharePlatformType;

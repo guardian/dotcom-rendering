@@ -11,39 +11,15 @@ import {
 import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
 import type { KeyboardEvent, MouseEvent } from 'react';
 import { memo, useEffect, useState } from 'react';
+import type {
+	AnswerType,
+	PersonalityQuizAtomType,
+	QuestionType,
+	ResultsBucketType,
+	SharingUrlsType,
+} from '../types/content';
 import { radioButtonWrapperStyles } from './Answers';
 import { SharingIcons } from './SharingIcons';
-import type { SharingUrlsType } from './SharingIcons';
-
-type ResultsBucket = {
-	id: string;
-	title: string;
-	description: string;
-};
-
-type AnswerType = {
-	id: string;
-	text: string;
-	revealText?: string;
-	isCorrect: boolean;
-	answerBuckets: string[];
-};
-
-type QuestionType = {
-	id: string;
-	text: string;
-	answers: AnswerType[];
-	imageUrl?: string;
-	imageAlt?: string;
-};
-
-type QuizAtomType = {
-	id: string;
-	questions: QuestionType[];
-	resultBuckets: ResultsBucket[];
-	sharingUrls: SharingUrlsType;
-	theme: ArticleTheme;
-};
 
 const answersWrapperStyle = (theme: ArticleTheme) => css`
 	margin-bottom: 12px;
@@ -116,7 +92,7 @@ export const PersonalityQuizAtom = ({
 	resultBuckets,
 	sharingUrls,
 	theme,
-}: QuizAtomType) => {
+}: PersonalityQuizAtomType) => {
 	const [selectedGlobalAnswers, setSelectedGlobalAnswers] = useState<
 		Record<string, string>
 	>({});
@@ -126,7 +102,7 @@ export const PersonalityQuizAtom = ({
 	const [hasMissingAnswers, setHasMissingAnswers] = useState<boolean>(false);
 
 	const [topSelectedResult, setTopSelectedResult] =
-		useState<ResultsBucket | null>();
+		useState<ResultsBucketType | null>();
 
 	const onSubmit = (e: MouseEvent | KeyboardEvent) => {
 		e.preventDefault();
@@ -427,7 +403,7 @@ export const Result = ({
 	resultBuckets,
 	sharingUrls,
 }: {
-	resultBuckets: ResultsBucket;
+	resultBuckets: ResultsBucketType;
 	sharingUrls: SharingUrlsType;
 }) => (
 	<div css={resultWrapperStyles}>

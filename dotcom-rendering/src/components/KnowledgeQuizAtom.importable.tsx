@@ -10,6 +10,14 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
 import { Fragment, useEffect, useState } from 'react';
+import type {
+	AnswerType,
+	KnowledgeQuizAtomType,
+	QuestionType,
+	QuizSelectionType,
+	ResultGroupsType,
+	SharingUrlsType,
+} from '../types/content';
 import {
 	CorrectSelectedAnswer,
 	IncorrectAnswer,
@@ -18,40 +26,6 @@ import {
 	UnselectedAnswer,
 } from './Answers';
 import { SharingIcons } from './SharingIcons';
-import type { SharingUrlsType } from './SharingIcons';
-
-type AnswerType = {
-	id: string;
-	text: string;
-	revealText?: string;
-	isCorrect: boolean;
-	answerBuckets: string[];
-};
-
-type QuestionType = {
-	id: string;
-	text: string;
-	answers: AnswerType[];
-	imageUrl?: string;
-	imageAlt?: string;
-};
-
-type ResultGroupsType = {
-	title: string;
-	shareText: string;
-	minScore: number;
-	id: string;
-};
-
-export type QuizAtomType = {
-	id: string;
-	questions: QuestionType[];
-	resultGroups: ResultGroupsType[];
-	sharingUrls: SharingUrlsType;
-	theme: ArticleTheme;
-};
-
-type QuizSelectionType = Record<string, AnswerType>;
 
 const fieldsetStyle = css`
 	margin-bottom: 12px;
@@ -69,7 +43,7 @@ export const KnowledgeQuizAtom = ({
 	resultGroups,
 	sharingUrls,
 	theme,
-}: QuizAtomType) => {
+}: KnowledgeQuizAtomType) => {
 	const [quizSelection, setQuizSelection] = useState<QuizSelectionType>({});
 
 	const haveAllQuestionsBeenAnswered =
