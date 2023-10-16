@@ -1,8 +1,8 @@
+import { isString, timeAgo } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
-import { updateTimeElement } from '../client/relativeTime/updateTimeElements';
 import { isServer } from '../lib/isServer';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
@@ -32,6 +32,16 @@ const lastUpdated: Element | null = !isServer
 const toastRoot: Element | null = !isServer
 	? window.document.getElementById('toast-root')
 	: null;
+
+let timer: NodeJS.Timer | number | undefined;
+const updateTimeElement = (time: HTMLTimeElement) => {
+	clearTimeout(timer);
+	const then = new Date(time.dateTime).getTime();
+	const newText = timeAgo(then);
+	if (!isString(newText) || newText === time.innerText) return;
+	time.innerText = newText;
+	timer = setTimeout(() => updateTimeElement(time), 15_000);
+};
 
 /**
  * insert
@@ -185,8 +195,8 @@ export const Liveness = ({
 					}
 				}
 
-				if (lastUpdated) {
-					lastUpdated.setAttribute('dateTime', new Date().toString());
+				if (lastUpdated instanceof HTMLTimeElement) {
+					lastUpdated.dateTime = new Date().toString();
 					updateTimeElement(lastUpdated);
 				}
 

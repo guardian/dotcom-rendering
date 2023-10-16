@@ -423,7 +423,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			<main data-layout="LiveLayout">
 				{isApps && (
 					<Island priority="critical" clientOnly={true}>
-						<AdPortals />
+						<AdPortals rightAlignFrom="wide" />
 					</Island>
 				)}
 				{footballMatchUrl ? (
@@ -1135,7 +1135,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										}
 									`}
 								>
-									<RightColumn>
+									<RightColumn showFrom="wide">
 										{renderAds && (
 											<AdSlot
 												position="right"

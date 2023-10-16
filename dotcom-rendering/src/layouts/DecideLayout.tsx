@@ -58,7 +58,6 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
-					// Should be CommentLayout once implemented for apps
 					return (
 						<CommentLayout
 							article={article}
@@ -67,8 +66,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 						/>
 					);
 				case ArticleDesign.Picture:
-					// Should be PictureLayout once implemented for apps
-					return notSupported;
+					return (
+						<PictureLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				default:
 					return (
 						<ShowcaseLayout
@@ -193,6 +197,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
