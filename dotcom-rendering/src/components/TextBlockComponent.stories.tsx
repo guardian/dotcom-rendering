@@ -253,11 +253,11 @@ export const startingWithLinkStory = () => {
 			<TextBlockComponent
 				html={startingWithLink}
 				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
+					theme: Pillar.Culture,
+					design: ArticleDesign.Feature,
+					display: ArticleDisplay.Immersive,
 				}}
-				isFirstParagraph={false}
+				isFirstParagraph={true}
 			/>
 		</div>
 	);
