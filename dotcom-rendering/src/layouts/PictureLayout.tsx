@@ -364,8 +364,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								format={format}
 								showTopBorder={showSubNavTopBorder}
 							>
-								<Island priority="enhancement"
-								defer={{ until: 'idle' }}>
+								<Island
+									priority="enhancement"
+									defer={{ until: 'idle' }}
+								>
 									<SubNav
 										subNavSections={
 											props.NAV.subNavSections
@@ -752,9 +754,11 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper>
-						<Island priority="feature"
-					defer={{ until: 'idle' }}
-					clientOnly={true}>
+						<Island
+							priority="feature"
+							defer={{ until: 'idle' }}
+							clientOnly={true}
+						>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={

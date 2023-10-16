@@ -166,12 +166,12 @@ const testLayoutFormats = [
 		renderingTarget: 'Web',
 	},
 	{
-    picturelayout-apps
 		display: 'Showcase',
 		design: 'Picture',
 		theme: 'OpinionPillar',
-    renderingTarget: 'Apps',
-  },
+		renderingTarget: 'Apps',
+	},
+	{
 		display: 'Standard',
 		design: 'Comment',
 		theme: 'NewsPillar',
