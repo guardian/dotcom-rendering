@@ -34,7 +34,7 @@
 	"license": "ISC",
 	"prettier": "@guardian/prettier",
 	"dependencies": {
-		"@babel/core": "^7.18.13",
+		"@babel/core": "7.23.2",
 		"@babel/preset-env": "^7.20.2",
 		"@creditkarma/thrift-server-core": "^1.0.4",
 		"@emotion/cache": "^11.4.0",
