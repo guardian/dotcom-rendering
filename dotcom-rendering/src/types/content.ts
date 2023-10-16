@@ -1,7 +1,7 @@
 // -------------------------------------
 // Elements
 
-import type { PersonalityQuizAtom } from '@guardian/atoms-rendering';
+import type { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
 
 export type QuizAtomType = Parameters<typeof PersonalityQuizAtom>[0];
 
