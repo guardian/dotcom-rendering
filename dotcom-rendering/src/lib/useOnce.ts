@@ -8,6 +8,11 @@ import { useEffect, useState } from 'react';
 export const useOnce = (task: () => void, waitFor: unknown[]): void => {
 	const [alreadyRun, setAlreadyRun] = useState(false);
 	const isReady = waitFor.every((dep) => dep !== undefined);
+	if (waitFor.length === 0) {
+		throw new Error(
+			'useOnce must be passed at least one variable to wait for',
+		);
+	}
 	useEffect(() => {
 		if (!alreadyRun && isReady) {
 			task();
