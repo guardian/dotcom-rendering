@@ -71,12 +71,12 @@ describe('User cookies tests', function () {
 	// 	cy.get('#dfp-ad--top-above-nav').should('exist');
 	//   });
 
-	it(`Request to user features API is sent`, function () {
+	it(`Request to user features API is sent when no user features expiry cookie`, function () {
 		// set the GU_U cookie to simulate a logged in user
 		cy.setCookie('GU_U', 'true', { log: true });
 
 		// set the gu_digital_subscriber cookie to simulate a digital subscriber
-		cy.setCookie('gu_digital_subscriber', 'true', { log: true });
+		// cy.setCookie('gu_digital_subscriber', 'true', { log: true });
 
 		cy.intercept(
 			'https://members-data-api.theguardian.com/user-attributes/me',
@@ -86,6 +86,8 @@ describe('User cookies tests', function () {
 
 		cy.wait('@getUserFeatures', { timeout: 30000 });
 	});
+
+	it(`Request to user features API is sent when user features cookie has expired`, function () {});
 
 	it(`Existing old cookie data is deleted when the user is signed out`, function () {});
 });
