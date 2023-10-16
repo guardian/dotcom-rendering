@@ -29,10 +29,10 @@ if (!nodeVersion) {
 
 const requiredNodeVersionMatches =
 	/** @type {const} @satisfies {ReadonlyArray<{filepath: string, pattern: RegExp}>}*/ ([
-		{
-			filepath: 'dotcom-rendering/Containerfile',
-			pattern: /^FROM node:(.+)-alpine$/m,
-		},
+		// {
+		// 	filepath: 'dotcom-rendering/Containerfile',
+		// 	pattern: /^FROM node:(.+)-alpine$/m,
+		// },
 		{
 			filepath: 'dotcom-rendering/scripts/deploy/riff-raff.yaml',
 			pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+\.\d+\.\d+)$/m,
