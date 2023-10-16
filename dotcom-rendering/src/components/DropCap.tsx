@@ -16,7 +16,7 @@ const dropCap = css`
 	line-height: 92px;
 	text-transform: uppercase;
 	box-sizing: border-box;
-	margin-right: ${space[1]}px;
+	margin-right: ${space[2]}px;
 	vertical-align: text-top;
 `;
 
