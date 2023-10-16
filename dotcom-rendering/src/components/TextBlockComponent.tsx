@@ -258,9 +258,10 @@ const buildElementTree =
 						: undefined;
 					if (
 						dropCappedSentence &&
-						// Is the drop cap at the start of this text block component
-						node.parentNode ===
-							node.parentNode?.parentNode?.firstChild &&
+						// The node is the first in this text block
+						node.parentNode?.parentNode?.firstChild?.contains(
+							node,
+						) &&
 						// The node is at the root of the document avoiding nodes like <a>
 						// tags embedded in <p> tags dropping their cap
 						node.parentNode?.parentNode?.nodeName ===
