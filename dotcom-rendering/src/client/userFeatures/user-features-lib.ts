@@ -1,5 +1,21 @@
 import { getCookie, setCookie } from '@guardian/libs';
 
+// from cookies
+
+const timeInDaysFromNow = (daysFromNow: number): string => {
+	const tmpDate = new Date();
+	tmpDate.setDate(tmpDate.getDate() + daysFromNow);
+	return tmpDate.getTime().toString();
+};
+
+const cookieIsExpiredOrMissing = (cookieName: string): boolean => {
+	const expiryDateFromCookie = getCookie({ name: cookieName });
+	if (!expiryDateFromCookie) return true;
+	const expiryTime = parseInt(expiryDateFromCookie, 10);
+	const timeNow = new Date().getTime();
+	return timeNow >= expiryTime;
+};
+
 // from manage-ad-free-cookies
 
 const AD_FREE_USER_COOKIE = 'GU_AF1';
@@ -153,4 +169,11 @@ type UserFeaturesResponse = {
 
 export type { UserFeaturesResponse };
 
-export { adFreeDataIsPresent, fetchJson, getAdFreeCookie, setAdFreeCookie };
+export {
+	adFreeDataIsPresent,
+	cookieIsExpiredOrMissing,
+	fetchJson,
+	getAdFreeCookie,
+	setAdFreeCookie,
+	timeInDaysFromNow,
+};

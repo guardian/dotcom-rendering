@@ -6,17 +6,21 @@ import {
 } from '../../lib/identity';
 import {
 	adFreeDataIsPresent,
+	cookieIsExpiredOrMissing,
 	fetchJson,
 	getAdFreeCookie,
 	setAdFreeCookie,
+	timeInDaysFromNow,
 } from './user-features-lib';
 import type { UserFeaturesResponse } from './user-features-lib';
 
+const USER_FEATURES_EXPIRY_COOKIE = 'gu_user_features_expiry';
 const PAYING_MEMBER_COOKIE = 'gu_paying_member';
 const ACTION_REQUIRED_FOR_COOKIE = 'gu_action_required_for';
 const DIGITAL_SUBSCRIBER_COOKIE = 'gu_digital_subscriber';
 const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 const AD_FREE_USER_COOKIE = 'GU_AF1';
+
 const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
 const ONE_OFF_CONTRIBUTION_DATE_COOKIE = 'gu_one_off_contribution_date';
 
@@ -26,6 +30,7 @@ const userHasData = () => {
 	const cookie =
 		getAdFreeCookie() ??
 		getCookie({ name: ACTION_REQUIRED_FOR_COOKIE }) ??
+		getCookie({ name: USER_FEATURES_EXPIRY_COOKIE }) ??
 		getCookie({ name: PAYING_MEMBER_COOKIE }) ??
 		getCookie({ name: RECURRING_CONTRIBUTOR_COOKIE }) ??
 		getCookie({ name: ONE_OFF_CONTRIBUTION_DATE_COOKIE }) ??
@@ -53,6 +58,10 @@ const validateResponse = (
 };
 
 const persistResponse = (JsonResponse: UserFeaturesResponse) => {
+	setCookie({
+		name: USER_FEATURES_EXPIRY_COOKIE,
+		value: timeInDaysFromNow(1),
+	});
 	setCookie({
 		name: PAYING_MEMBER_COOKIE,
 		value: String(JsonResponse.contentAccess.paidMember),
@@ -93,6 +102,7 @@ const persistResponse = (JsonResponse: UserFeaturesResponse) => {
 
 const deleteOldData = (): void => {
 	removeCookie({ name: AD_FREE_USER_COOKIE });
+	removeCookie({ name: USER_FEATURES_EXPIRY_COOKIE });
 	removeCookie({ name: PAYING_MEMBER_COOKIE });
 	removeCookie({ name: RECURRING_CONTRIBUTOR_COOKIE });
 	removeCookie({ name: ACTION_REQUIRED_FOR_COOKIE });
@@ -134,11 +144,14 @@ const requestNewData = () => {
 		});
 };
 
+const featuresDataIsOld = () =>
+	cookieIsExpiredOrMissing(USER_FEATURES_EXPIRY_COOKIE);
+
 const isDigitalSubscriber = (): boolean =>
 	getCookie({ name: DIGITAL_SUBSCRIBER_COOKIE }) === 'true';
 
 const userNeedsNewFeatureData = (): boolean =>
-	isDigitalSubscriber() && !adFreeDataIsPresent();
+	featuresDataIsOld() || (isDigitalSubscriber() && !adFreeDataIsPresent());
 
 const userHasDataAfterSignout = async (): Promise<boolean> =>
 	!(await isUserLoggedInOktaRefactor()) && userHasData();
