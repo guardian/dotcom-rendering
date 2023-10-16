@@ -157,9 +157,12 @@ export const recordExperiences = async (
 	for (const experience of experiences) {
 		experiencesSet.add(experience);
 	}
+
 	const { record } = await getOphan();
 
 	// this is the only allowed usage of sending experiences!
 	// otherwise, race conditions might lead to different results
-	record({ ['experiences' as string]: [...experiencesSet].sort().join(',') });
+	record({
+		['experiences' as string]: [...experiencesSet].sort().join(','),
+	});
 };
