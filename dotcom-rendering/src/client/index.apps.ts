@@ -21,14 +21,6 @@ void startup(
 );
 
 void startup(
-	'ga',
-	() => import(/* webpackMode: "eager" */ './ga').then(({ ga }) => ga()),
-	{
-		priority: 'critical',
-	},
-);
-
-void startup(
 	'sentryLoader',
 	() =>
 		import(/* webpackMode: "eager" */ './sentryLoader').then(
