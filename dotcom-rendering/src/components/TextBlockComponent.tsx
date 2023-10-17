@@ -266,7 +266,7 @@ const buildElementTree =
 						) &&
 						// The node is at the root of the document avoiding nodes like <a>
 						// tags embedded in <p> tags dropping their cap
-						node.parentNode?.parentNode?.nodeName ===
+						node.parentNode.parentNode.nodeName ===
 							'#document-fragment'
 					) {
 						const { dropCap, restOfSentence } = dropCappedSentence;
