@@ -48,7 +48,7 @@ export type CollectionBranding =
 	  }
 	| {
 			/**
-			 * Collections from certain series can have an 'editorial' badge selected set hardcoded in DCR
+			 * Collections from certain series can have an 'editorial' badge selected from a hardcoded set
 			 */
 			kind: 'editorial';
 			badge: DCRBadgeType;
