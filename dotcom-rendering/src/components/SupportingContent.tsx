@@ -85,7 +85,7 @@ const dynamoLiStyles = (
 	position: relative;
 	border-top: 1px solid;
 	/* 20% is arbitrary, but the cards should expand thanks for flex-grow */
-	flex: 1 0 25%;
+	flex: 1 0 20%;
 	margin: 0;
 `;
 
