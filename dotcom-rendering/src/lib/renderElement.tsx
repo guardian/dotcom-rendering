@@ -46,7 +46,7 @@ import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent
 import { SubheadingBlockComponent } from '../components/SubheadingBlockComponent';
 import { TableBlockComponent } from '../components/TableBlockComponent';
 import { TextBlockComponent } from '../components/TextBlockComponent';
-import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
+import { TimelineAtom } from '../components/TimelineAtom.importable';
 import { TweetBlockComponent } from '../components/TweetBlockComponent.importable';
 import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
 import { VideoAtom } from '../components/VideoAtom';
@@ -614,10 +614,10 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<TimelineAtomWrapper
+					<TimelineAtom
 						id={element.id}
 						title={element.title}
-						pillar={format.theme}
+						format={format}
 						events={element.events}
 						description={element.description}
 					/>
