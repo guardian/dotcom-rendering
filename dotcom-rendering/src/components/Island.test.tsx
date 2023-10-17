@@ -7,6 +7,7 @@ import { renderToString } from 'react-dom/server';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { Island } from './Island';
+import { Liveness } from './Liveness.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { Snow } from './Snow.importable';
 
@@ -119,6 +120,29 @@ describe('Island: server-side rendering', () => {
 					editionId="UK"
 					shortUrlId=""
 					discussionApiUrl=""
+				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('Liveness', () => {
+		expect(() =>
+			renderToString(
+				<Liveness
+					webTitle=""
+					ajaxUrl=""
+					pageId=""
+					filterKeyEvents={false}
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+					enhanceTweetsSwitch={false}
+					onFirstPage={true}
+					webURL=""
+					mostRecentBlockId=""
+					hasPinnedPost={false}
 				/>,
 			),
 		).not.toThrow();
