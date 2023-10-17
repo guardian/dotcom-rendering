@@ -1,5 +1,6 @@
 import { ArticleDesign } from '@guardian/libs';
 import type { SWRConfiguration } from 'swr';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import { useApi } from '../lib/useApi';
 import { useHydrated } from '../lib/useHydrated';
 import { MatchStats } from './MatchStats';
@@ -76,7 +77,7 @@ export const GetMatchStats = ({ matchUrl, format }: Props) => {
 	if (loading || !hydrated) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
-		window.guardian.modules.sentry.reportError(error, 'match=stats');
+		reportErrorToSentry(error, 'match=stats');
 
 		return null;
 	}

@@ -9,6 +9,7 @@ import {
 import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
+import { reportErrorToSentry } from '../../lib/reportErrorToSentry';
 import type { CampaignFieldType } from '../../types/content';
 import { CalloutTermsAndConditions } from './CalloutComponents';
 import { FormField } from './FormField';
@@ -174,10 +175,7 @@ export const Form = ({
 				}
 			})
 			.catch((respError) => {
-				window.guardian.modules.sentry.reportError(
-					respError,
-					'callout-embed-submission',
-				);
+				reportErrorToSentry(respError, 'callout-embed-submission');
 
 				setNetworkError(
 					'Sorry, there was a problem submitting your form. Please try again later.',

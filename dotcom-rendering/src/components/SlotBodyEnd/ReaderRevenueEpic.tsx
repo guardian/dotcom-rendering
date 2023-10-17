@@ -11,6 +11,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
+import { reportErrorToSentry } from '../../lib/reportErrorToSentry';
 import {
 	getLastOneOffContributionTimestamp,
 	hasCmpConsentForArticleCount,
@@ -184,10 +185,7 @@ export const ReaderRevenueEpic = ({
 						: 'Unknown error';
 
 				console.log(msg);
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'rr-epic',
-				);
+				reportErrorToSentry(new Error(msg), 'rr-epic');
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

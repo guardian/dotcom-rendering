@@ -16,6 +16,7 @@ import {
 	hasCurrentBrazeUser,
 	setHasCurrentBrazeUser,
 } from '../hasCurrentBrazeUser';
+import { reportErrorToSentry } from '../reportErrorToSentry';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import { getInitialisedAppboy } from './initialiseAppboy';
 
@@ -39,7 +40,7 @@ const maybeWipeUserData = async (
 			LocalMessageCache.clear();
 			clearHasCurrentBrazeUser();
 		} catch (error) {
-			window.guardian.modules.sentry.reportError(
+			reportErrorToSentry(
 				// @ts-expect-error
 				error,
 				'braze-maybeWipeUserData',
@@ -110,7 +111,7 @@ export const buildBrazeMessaging = async (
 		});
 
 		const errorHandler = (error: Error, desc: string) => {
-			window.guardian.modules.sentry.reportError(error, desc);
+			reportError(error, desc);
 		};
 
 		setHasCurrentBrazeUser();

@@ -5,6 +5,7 @@ import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import { useOnce } from '../lib/useOnce';
 import type { RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
@@ -139,7 +140,7 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 			try {
 				message = JSON.parse(event.data);
 			} catch (e) {
-				window.guardian.modules.sentry.reportError(
+				reportErrorToSentry(
 					// @ts-expect-error
 					e,
 					'Json parse Failed on in interactiveBlockComponent',

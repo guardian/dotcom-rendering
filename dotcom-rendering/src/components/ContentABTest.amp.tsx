@@ -1,6 +1,7 @@
 import sha256 from 'crypto-js/sha256';
 import React from 'react';
 import { guard } from '../lib/guard';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import type { Switches } from '../types/config';
 
 const AB_TEST_GROUPS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] as const;
@@ -40,7 +41,7 @@ export const getGroup = (pageId: string): ContentABTestGroup => {
 	// This should be unreachable
 	// Report and throw an error if it isn't
 	const error = new Error('Failed to put AMP content into group');
-	window.guardian.modules.sentry.reportError(error, 'commercial');
+	reportErrorToSentry(error, 'commercial');
 	throw error;
 };
 

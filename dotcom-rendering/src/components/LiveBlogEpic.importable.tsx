@@ -7,6 +7,7 @@ import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotco
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import { useArticleCounts } from '../lib/articleCount';
 import {
 	getLastOneOffContributionTimestamp,
@@ -40,10 +41,7 @@ const useCountryCode = () => {
 			})
 			.catch((e) => {
 				const msg = `Error fetching country code: ${String(e)}`;
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'liveblog-epic',
-				);
+				reportErrorToSentry(new Error(msg), 'liveblog-epic');
 			});
 	}, []);
 
@@ -66,10 +64,7 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 			})
 			.catch((err) => {
 				const msg = `Error importing LiveBlog epic: ${String(err)}`;
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'liveblog-epic',
-				);
+				reportErrorToSentry(new Error(msg), 'liveblog-epic');
 			});
 	}, [url, name]);
 

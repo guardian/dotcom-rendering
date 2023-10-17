@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
 import { isServer } from '../lib/isServer';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
 
@@ -139,7 +140,7 @@ function getKey(
 
 		return url.href;
 	} catch {
-		window.guardian.modules.sentry.reportError(
+		reportErrorToSentry(
 			new Error(
 				`An error was thrown trying to construct a URL using pageId: ${pageId} and ajaxUrl: ${ajaxUrl}`,
 			),

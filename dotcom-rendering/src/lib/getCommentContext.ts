@@ -1,4 +1,5 @@
 import { joinUrl } from '@guardian/libs';
+import { reportErrorToSentry } from './reportErrorToSentry';
 
 // GET http://discussion.guardianapis.com/discussion-api/comment/3519111/context
 // {
@@ -106,9 +107,6 @@ export const getCommentContext = async (
 		})
 		.then((response) => response.json())
 		.catch((error) => {
-			window.guardian.modules.sentry.reportError(
-				error,
-				'get-comment-page',
-			);
+			reportErrorToSentry(error, 'get-comment-page');
 		});
 };

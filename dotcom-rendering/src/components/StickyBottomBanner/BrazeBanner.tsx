@@ -6,6 +6,7 @@ import type {
 } from '@guardian/braze-components/logic';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
+import { reportErrorToSentry } from '../../lib/reportErrorToSentry';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import { lazyFetchEmailWithTimeout } from '../../lib/contributions';
@@ -177,12 +178,7 @@ export const BrazeBanner = ({ meta, idApiUrl }: Props) => {
 			.then((module) => {
 				setBrazeComponent(() => module.BrazeBannerComponent);
 			})
-			.catch((error) =>
-				window.guardian.modules.sentry.reportError(
-					error,
-					'braze-banner',
-				),
-			);
+			.catch((error) => reportErrorToSentry(error, 'braze-banner'));
 	}, []);
 
 	return (

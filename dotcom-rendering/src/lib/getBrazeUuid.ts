@@ -1,5 +1,6 @@
 import type { IdApiUserIdentifiers } from './getIdapiUserData';
 import { getIdapiUserIdentifiers } from './getIdapiUserData';
+import { reportErrorToSentry } from './reportErrorToSentry';
 import { eitherInOktaTestOrElse } from './useAuthStatus';
 
 export const getBrazeUuid = async (ajaxUrl: string): Promise<string | void> =>
@@ -10,9 +11,6 @@ export const getBrazeUuid = async (ajaxUrl: string): Promise<string | void> =>
 			getIdapiUserIdentifiers(ajaxUrl)
 				.then((data: IdApiUserIdentifiers) => data.brazeUuid)
 				.catch((error) => {
-					window.guardian.modules.sentry.reportError(
-						error,
-						'getBrazeUuid',
-					);
+					reportErrorToSentry(error, 'getBrazeUuid');
 				}),
 	);

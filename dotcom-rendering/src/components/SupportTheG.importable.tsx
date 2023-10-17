@@ -22,6 +22,7 @@ import {
 	sendOphanComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import {
 	getLastOneOffContributionDate,
@@ -235,10 +236,7 @@ const ReaderRevenueLinksRemote = ({
 				const msg = `Error importing RR header links: ${String(error)}`;
 
 				console.log(msg);
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'rr-header-links',
-				);
+				reportErrorToSentry(new Error(msg), 'rr-header-links');
 			});
 	}, [countryCode, isSignedIn]);
 

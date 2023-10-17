@@ -5,6 +5,7 @@ import {
 } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { loadScript, log } from '@guardian/libs';
+import { reportErrorToSentry } from '../../lib/reportErrorToSentry';
 import { init, sendPageView } from './ga';
 
 /** Memoize loading to prevent loading twice */
@@ -27,7 +28,7 @@ const loadGoogleAnalytics = async () => {
 		// We don't need to log script loading errors (these will mostly be adblock, etc),
 		if (!String(error).includes('Error loading script')) {
 			// This is primarily for logging errors with our GA code.
-			window.guardian.modules.sentry.reportError(
+			reportErrorToSentry(
 				error instanceof Error ? error : new Error(String(error)),
 				'ga',
 			);

@@ -10,6 +10,7 @@ import type {
 	EpicPayload,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import useSWRImmutable from 'swr';
+import { reportErrorToSentry } from './reportErrorToSentry';
 
 const useSDC = <T>(
 	key: string,
@@ -17,7 +18,7 @@ const useSDC = <T>(
 ): ModuleDataResponse | undefined => {
 	const { data, error } = useSWRImmutable(key, fetcher);
 	if (error) {
-		window.guardian.modules.sentry.reportError(error, 'rr-epic');
+		reportErrorToSentry(error, 'rr-epic');
 	}
 	return data;
 };

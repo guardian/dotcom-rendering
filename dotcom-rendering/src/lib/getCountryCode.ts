@@ -1,5 +1,6 @@
 import { getLocale } from '@guardian/libs';
 import type { CountryCode } from '@guardian/libs';
+import { reportErrorToSentry } from './reportErrorToSentry';
 
 /**
  * Generally we see SecurityErrors when a users browser has restrictive privacy settings that prevent access to local storage.
@@ -19,7 +20,7 @@ export const getLocaleCode = async (): Promise<CountryCode | null> => {
 		if (isSecurityError(error)) return null;
 
 		console.log(`Error getting location from libs/getLocale`);
-		window.guardian.modules.sentry.reportError(error, 'get-country-code');
+		reportErrorToSentry(error, 'get-country-code');
 		return null;
 	});
 };

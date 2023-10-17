@@ -6,6 +6,7 @@ import type {
 } from '@guardian/braze-components/logic';
 import { useEffect, useRef, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
+import { reportErrorToSentry } from '../../lib/reportErrorToSentry';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import { lazyFetchEmailWithTimeout } from '../../lib/contributions';
@@ -188,9 +189,7 @@ export const MaybeBrazeEpic = ({ meta, countryCode, idApiUrl }: EpicConfig) => {
 			.then((module) => {
 				setBrazeComponent(() => module.BrazeEndOfArticleComponent);
 			})
-			.catch((error) =>
-				window.guardian.modules.sentry.reportError(error, 'braze-epic'),
-			);
+			.catch((error) => reportErrorToSentry(error, 'braze-epic'));
 	}, []);
 
 	return (

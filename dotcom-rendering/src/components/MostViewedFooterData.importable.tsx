@@ -3,6 +3,7 @@ import { abTestTest } from '../experiments/tests/ab-test-test';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
 import type {
@@ -81,7 +82,7 @@ export const MostViewedFooterData = ({
 	>(url);
 
 	if (error) {
-		window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
+		reportErrorToSentry(error, 'most-viewed-footer');
 		return null;
 	}
 

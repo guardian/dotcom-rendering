@@ -36,6 +36,7 @@ import { useAuthStatus } from '../lib/useAuthStatus';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 
 type Props = {
 	editionId: EditionId;
@@ -227,10 +228,7 @@ const ReaderRevenueLinksRemote = ({
 				const msg = `Error importing RR header links: ${String(error)}`;
 
 				console.log(msg);
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'rr-header-links',
-				);
+				reportErrorToSentry(new Error(msg), 'rr-header-links');
 			});
 	}, [countryCode]);
 

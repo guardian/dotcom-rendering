@@ -1,5 +1,6 @@
 import { ArticleDesign } from '@guardian/libs';
 import type { SWRConfiguration } from 'swr';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import { useApi } from '../lib/useApi';
 import { CricketScoreboard } from './CricketScoreboard';
 import { Placeholder } from './Placeholder';
@@ -28,7 +29,7 @@ export const GetCricketScoreboard = ({ matchUrl, format }: Props) => {
 	if (loading) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
-		window.guardian.modules.sentry.reportError(error, 'cricket-scoreboard');
+		reportErrorToSentry(error, 'cricket-scoreboard');
 
 		return null;
 	}

@@ -6,6 +6,7 @@ import type { DCRFrontType } from '../types/front';
 import type { DCRArticle } from '../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
+import { reportErrorToSentry } from './reportErrorToSentry';
 import { eitherInOktaTestOrElse } from './useAuthStatus';
 import { useOnce } from './useOnce';
 
@@ -245,10 +246,7 @@ const getEmail = async (ajaxUrl: string): Promise<string | undefined> =>
 			getIdApiUserData(ajaxUrl)
 				.then((data: IdApiUserData) => data.user?.primaryEmailAddress)
 				.catch((error) => {
-					window.guardian.modules.sentry.reportError(
-						error,
-						'getEmail',
-					);
+					reportErrorToSentry(error, 'getEmail');
 					return undefined;
 				}),
 	);

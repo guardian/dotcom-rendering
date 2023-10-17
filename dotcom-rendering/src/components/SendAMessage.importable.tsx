@@ -20,6 +20,7 @@ import {
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import type { MessageUsFieldType } from '../types/content';
 import { FormField } from './Callout/FormField';
 
@@ -231,10 +232,7 @@ const Form = ({
 				}
 			})
 			.catch((respError) => {
-				window.guardian.modules.sentry.reportError(
-					respError,
-					'message-us-submission',
-				);
+				reportErrorToSentry(respError, 'message-us-submission');
 
 				setNetworkError(
 					'Sorry, there was a problem submitting your message. Please try again later.',

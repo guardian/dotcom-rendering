@@ -1,4 +1,5 @@
 import type { EditionId } from '../lib/edition';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import type { Tuple } from '../lib/tuple';
 import { useApi } from '../lib/useApi';
 import { Weather, WeatherPlaceholder } from './Weather';
@@ -42,7 +43,7 @@ export const WeatherWrapper = ({ ajaxUrl, edition }: Props) => {
 	const { data, error } = useApi<WeatherApiData>(`${ajaxUrl}/weather.json`);
 
 	if (error) {
-		window.guardian.modules.sentry.reportError(error, 'weather');
+		reportErrorToSentry(error, 'weather');
 	}
 
 	return !data ? (

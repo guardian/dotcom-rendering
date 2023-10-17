@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { decideFormat } from '../lib/decideFormat';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import { useApi } from '../lib/useApi';
 import type { RichLinkBlockElement } from '../types/content';
 import type { TagType } from '../types/tag';
@@ -84,7 +85,7 @@ export const RichLinkComponent = ({
 
 	if (error) {
 		// Send the error to Sentry
-		window.guardian.modules.sentry.reportError(error, 'rich-link');
+		reportErrorToSentry(error, 'rich-link');
 	}
 
 	if (data?.imageAsset) {

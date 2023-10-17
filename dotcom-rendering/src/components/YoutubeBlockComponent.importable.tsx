@@ -5,6 +5,7 @@ import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { trackVideoInteraction } from '../client/ga/ga';
 import { getOphan } from '../client/ophan/ophan';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import { Caption } from './Caption';
@@ -130,7 +131,7 @@ export const YoutubeBlockComponent = ({
 		};
 
 		defineConsentState().catch((error) => {
-			window.guardian.modules.sentry.reportError(
+			reportErrorToSentry(
 				error instanceof Error ? error : new Error(`Error: unknown`),
 				'youtube-consent',
 			);

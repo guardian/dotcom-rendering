@@ -3,6 +3,7 @@ import { brand, neutral, textSans } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import MinusIcon from '../static/icons/minus.svg';
 import PlusIcon from '../static/icons/plus.svg';
 import type {
@@ -199,10 +200,7 @@ export const CalloutEmbedBlockComponent = ({
 				}
 			})
 			.catch((respError) => {
-				window.guardian.modules.sentry.reportError(
-					respError,
-					'callout-embed-submission',
-				);
+				reportErrorToSentry(respError, 'callout-embed-submission');
 				setError(
 					'Sorry, there was a problem submitting your form. Please try again later.',
 				);

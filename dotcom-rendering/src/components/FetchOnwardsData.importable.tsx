@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, isNonNullable } from '@guardian/libs';
 import { useEffect } from 'react';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import { decideTrail } from '../lib/decideTrail';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
@@ -59,7 +60,7 @@ export const FetchOnwardsData = ({
 
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
-		window.guardian.modules.sentry.reportError(error, 'onwards-lower');
+		reportErrorToSentry(error, 'onwards-lower');
 		return null;
 	}
 

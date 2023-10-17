@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import type { SWRConfiguration } from 'swr';
+import { reportErrorToSentry } from '../lib/reportErrorToSentry';
 import { useApi } from '../lib/useApi';
 import type { TagType } from '../types/tag';
 import { ArticleHeadline } from './ArticleHeadline';
@@ -54,7 +55,7 @@ export const GetMatchNav = ({
 	if (loading) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then render the headline in its place as a fallback
-		window.guardian.modules.sentry.reportError(error, 'match-nav');
+		reportErrorToSentry(error, 'match-nav');
 
 		if (
 			format.design === ArticleDesign.LiveBlog ||

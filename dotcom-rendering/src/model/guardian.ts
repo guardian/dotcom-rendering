@@ -47,6 +47,7 @@ export interface Guardian {
 	};
 	modules: {
 		sentry: {
+			/** @deprecated use {@linkcode reportErrorToSentry} instead */
 			reportError: (error: Error, feature: string) => void;
 		};
 	};
