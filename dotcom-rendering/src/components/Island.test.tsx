@@ -9,6 +9,7 @@ import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { Island } from './Island';
 import { Liveness } from './Liveness.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
+import { SetABTests } from './SetABTests.importable';
 import { Snow } from './Snow.importable';
 
 // Type tests
@@ -143,6 +144,18 @@ describe('Island: server-side rendering', () => {
 					webURL=""
 					mostRecentBlockId=""
 					hasPinnedPost={false}
+				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('SetABTests', () => {
+		expect(() =>
+			renderToString(
+				<SetABTests
+					isDev={false}
+					pageIsSensitive={false}
+					abTestSwitches={{}}
 				/>,
 			),
 		).not.toThrow();
