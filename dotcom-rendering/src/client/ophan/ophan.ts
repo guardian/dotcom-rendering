@@ -34,6 +34,7 @@ export const getOphan = async (): Promise<
 		return cachedOphan;
 	}
 
+	// We've taken 'ophan-tracker-js' out of the apps client bundle (made it external in webpack) because we don't ever expect this method to be called. Tracking in apps is done natively.
 	// @ts-expect-error -- side effect only
 	await import(/* webpackMode: "eager" */ 'ophan-tracker-js');
 
