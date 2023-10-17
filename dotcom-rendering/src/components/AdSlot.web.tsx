@@ -607,7 +607,6 @@ export const AdSlot = ({
 							]}
 							data-link-name={`ad slot ${advertId}`}
 							data-name={`${advertId}`}
-							data-refresh="false"
 							aria-hidden="true"
 						/>
 					</div>
