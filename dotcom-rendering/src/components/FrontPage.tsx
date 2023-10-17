@@ -71,11 +71,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			>
 				<FocusStyles />
 			</Island>
-			<Island
-				priority="feature"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="critical" clientOnly={true}>
 				<Metrics
 					commercialMetricsEnabled={
 						!!front.config.switches.commercialMetrics

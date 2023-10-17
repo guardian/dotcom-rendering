@@ -30,12 +30,12 @@ import { InteractiveBlockComponent } from '../components/InteractiveBlockCompone
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
 import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
-import { KnowledgeQuizAtomWrapper } from '../components/KnowledgeQuizAtomWrapper.importable';
+import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
-import { PersonalityQuizAtomWrapper } from '../components/PersonalityQuizAtomWrapper.importable';
+import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
@@ -531,7 +531,7 @@ export const renderElement = ({
 							priority="critical"
 							defer={{ until: 'visible' }}
 						>
-							<PersonalityQuizAtomWrapper
+							<PersonalityQuizAtom
 								id={element.id}
 								questions={element.questions}
 								resultBuckets={element.resultBuckets}
@@ -545,7 +545,7 @@ export const renderElement = ({
 							priority="critical"
 							defer={{ until: 'visible' }}
 						>
-							<KnowledgeQuizAtomWrapper
+							<KnowledgeQuizAtom
 								id={element.id}
 								questions={element.questions}
 								resultGroups={element.resultGroups}
