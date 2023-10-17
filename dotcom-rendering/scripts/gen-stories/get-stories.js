@@ -183,6 +183,13 @@ const testLayoutFormats = [
 		theme: 'NewsPillar',
 		renderingTarget: 'Apps',
 	},
+
+	{
+		display: 'Immersive',
+		design: 'Standard',
+		theme: 'NewsPillar',
+		renderingTarget: 'Apps',
+	},
 ];
 
 const generateLayoutStories = () => {

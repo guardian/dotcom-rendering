@@ -107,3 +107,16 @@ export const AppsStandardInteractiveNewsPillar = () => {
 };
 AppsStandardInteractiveNewsPillar.storyName = 'Apps: Display: Standard, Design: Interactive, Theme: NewsPillar';
 AppsStandardInteractiveNewsPillar.args = { config: { renderingTarget: 'Apps' } };
+
+export const AppsImmersiveStandardNewsPillar = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Standard"
+			theme="NewsPillar"
+			renderingTarget="Apps"
+		/>
+	);
+};
+AppsImmersiveStandardNewsPillar.storyName = 'Apps: Display: Immersive, Design: Standard, Theme: NewsPillar';
+AppsImmersiveStandardNewsPillar.args = { config: { renderingTarget: 'Apps' } };
