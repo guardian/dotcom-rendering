@@ -1,14 +1,13 @@
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/source-foundations';
+import type { Breakpoint } from '@guardian/source-foundations';
 
-const hideBelowDesktop = css`
-	${until.desktop} {
-		/* below 980 */
+const hideBelow = (showFrom: Breakpoint) => css`
+	${until[showFrom]} {
 		display: none;
 	}
 
-	${from.desktop} {
-		/* above 980 */
+	${from[showFrom]} {
 		height: 100%;
 		display: block;
 		flex-basis: 300px;
@@ -19,8 +18,9 @@ const hideBelowDesktop = css`
 
 type Props = {
 	children: React.ReactNode;
+	showFrom?: Breakpoint;
 };
 
-export const RightColumn = ({ children }: Props) => {
-	return <section css={hideBelowDesktop}>{children}</section>;
+export const RightColumn = ({ children, showFrom = 'desktop' }: Props) => {
+	return <section css={hideBelow(showFrom)}>{children}</section>;
 };

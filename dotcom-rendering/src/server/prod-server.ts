@@ -8,7 +8,10 @@ import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
 } from '../server/index.article.amp';
-import { handleAppsArticle } from '../server/index.article.apps';
+import {
+	handleAppsArticle,
+	handleAppsInteractive,
+} from '../server/index.article.apps';
 import {
 	handleArticle,
 	handleArticleJson,
@@ -75,6 +78,7 @@ export const prodServer = (): void => {
 		handleAllEditorialNewslettersPage,
 	);
 	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
+	app.post('/AppsInteractive', logRenderTime, handleAppsInteractive);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
@@ -130,6 +134,13 @@ export const prodServer = (): void => {
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAppsArticle,
+	);
+
+	app.get(
+		'/AppsInteractive/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleAppsInteractive,
 	);
 
 	app.use('/ArticlePerfTest/*', handleArticlePerfTest);

@@ -1,5 +1,5 @@
 import { log } from '@guardian/libs';
-import { getOphan } from './ophan/ophan';
+import { recordExperiences } from './ophan/ophan';
 
 const logPerformanceInfo = (name: string, data?: unknown) =>
 	log('openJournalism', '⏱', name, data);
@@ -74,14 +74,8 @@ export const isPerformingPoorly = async (): Promise<boolean> =>
 export const recordPoorPerformance = async (): Promise<void> => {
 	try {
 		if (await isPerformingPoorly()) {
-			/** Not sure here if we should duplicate “dotcom-rendering” */
-			const experiences = [
-				'dotcom-rendering',
-				'poor-page-performance',
-			].join(',');
 			log('openJournalism', `🐌 Poor page performance`);
-			const { record } = await getOphan();
-			record({ experiences });
+			return recordExperiences('poor-page-performance');
 		}
 	} catch (error) {
 		// do nothing if the performance API is not available

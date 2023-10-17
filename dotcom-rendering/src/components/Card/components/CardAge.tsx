@@ -5,6 +5,8 @@ import { decidePalette } from '../../../lib/decidePalette';
 import ClockIcon from '../../../static/icons/clock.svg';
 import type { DCRContainerPalette } from '../../../types/front';
 import type { Palette } from '../../../types/palette';
+import { Island } from '../../Island';
+import { RelativeTime } from '../../RelativeTime.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -62,21 +64,18 @@ export const CardAge = ({
 	showClock,
 	isDynamo,
 }: Props) => {
-	const displayString = timeAgo(new Date(webPublicationDate).getTime());
 	const palette = decidePalette(format, containerPalette);
 
-	if (displayString === false) {
+	if (timeAgo(new Date(webPublicationDate).getTime()) === false) {
 		return null;
 	}
 
 	return (
 		<span css={ageStyles(format, palette, isDynamo)}>
-			<span>
-				{showClock && <ClockIcon />}
-				<time dateTime={webPublicationDate} data-relativeformat="med">
-					{displayString}
-				</time>
-			</span>
+			{showClock && <ClockIcon />}
+			<Island priority="enhancement" defer={{ until: 'visible' }}>
+				<RelativeTime then={new Date(webPublicationDate).getTime()} />
+			</Island>
 		</span>
 	);
 };

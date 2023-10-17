@@ -71,11 +71,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			>
 				<FocusStyles />
 			</Island>
-			<Island
-				priority="feature"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="critical" clientOnly={true}>
 				<Metrics
 					commercialMetricsEnabled={
 						!!front.config.switches.commercialMetrics
@@ -84,7 +80,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island
 				priority="enhancement"
-				defer={{ until: 'visible' }}
+				defer={{ until: 'idle' }}
 				clientOnly={true}
 			>
 				<ShowHideContainers />
