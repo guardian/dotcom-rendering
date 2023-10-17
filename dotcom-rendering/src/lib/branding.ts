@@ -181,7 +181,6 @@ export const decideCollectionBranding = ({
 	}
 
 	// Ensure each of the card's branding has the same sponsor
-
 	if (!everyCardHasSameSponsor(brandingForCards)) {
 		return undefined;
 	}
