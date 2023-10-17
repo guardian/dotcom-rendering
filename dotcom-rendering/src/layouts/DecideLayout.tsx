@@ -32,21 +32,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 	const notSupported = <pre>Not supported</pre>;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
-			switch (format.design) {
-				case ArticleDesign.Interactive: {
-					// Should be InteractiveLayout once implemented for apps
-					return notSupported;
-				}
-				default: {
-					return (
-						<ImmersiveLayout
-							article={article}
-							format={format}
-							renderingTarget={renderingTarget}
-						/>
-					);
-				}
-			}
+			return (
+				<ImmersiveLayout
+					article={article}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			);
 		}
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Showcase: {
