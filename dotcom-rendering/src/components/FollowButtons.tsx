@@ -8,41 +8,39 @@ import {
 	SvgPlus,
 } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
+import type { Palette } from '../types/palette';
 
 type IconProps = {
 	isFollowing: boolean;
-	format: ArticleFormat;
+	palette: Palette;
 	iconIsFollowing: EmotionJSX.Element;
 	iconIsNotFollowing: EmotionJSX.Element;
 };
 
 const FollowIcon = ({
 	isFollowing,
-	format,
+	palette,
 	iconIsFollowing,
 	iconIsNotFollowing,
 }: IconProps): EmotionJSX.Element => (
 	<div
 		css={css`
 			background-color: ${isFollowing
-				? decidePalette(format).fill.shareIcon
-				: // TODO use decidePalette
-				  'white'};
+				? palette.background.unfollowIcon
+				: palette.background.followIcon};
 			height: 24px;
 			width: 24px;
-			margin: 0 0.3ch 0 0.5ch;
+			margin: 0 0.15rem 0 0;
 			${isFollowing
-				? 'padding: 0.35ch 0 0 0.3ch;'
-				: 'padding: 0.25ch 0 0  0.2ch;'}
+				? 'padding: 0.175rem 0 0  0.175rem;'
+				: 'padding: 0.135rem 0 0  0.125rem;'}
 			border-radius: 100%;
-			${!isFollowing && 'border: 1px solid;'}
-			border-color: ${!isFollowing &&
-			decidePalette(format).text.articleLink};
+			${!isFollowing && `border: 1px solid ${palette.fill.followIcon};`}
 
 			svg {
 				fill: ${isFollowing
-					? 'white' // TODO use decidePalette
-					: decidePalette(format).fill.shareIcon};
+					? palette.fill.unfollowIcon
+					: palette.fill.followIcon};
 				height: 18px;
 			}
 		`}
@@ -51,9 +49,9 @@ const FollowIcon = ({
 	</div>
 );
 
-const buttonStyles = (format: ArticleFormat) => css`
+const buttonStyles = (palette: Palette) => css`
 	${textSans.small()}
-	color: ${decidePalette(format).text.articleLink};
+	color: ${palette.text.articleLink};
 	background: none;
 	border: none;
 	display: block;
@@ -106,16 +104,17 @@ const generateFollowButton = ({
 	iconIsNotFollowing: EmotionJSX.Element;
 	textSpan: EmotionJSX.Element;
 }): EmotionJSX.Element => {
+	const palette = decidePalette(format);
 	return (
 		<>
 			<button
 				onClick={onClickHandler}
 				type="button"
-				css={buttonStyles(format)}
+				css={buttonStyles(palette)}
 			>
 				<span css={containerStyles}>
 					<FollowIcon
-						format={format}
+						palette={palette}
 						isFollowing={isFollowing}
 						iconIsFollowing={iconIsFollowing}
 						iconIsNotFollowing={iconIsNotFollowing}

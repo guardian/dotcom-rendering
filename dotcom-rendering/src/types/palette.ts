@@ -76,6 +76,8 @@ export type Palette = {
 		headlineByline: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
+		followIcon: Colour;
+		unfollowIcon: Colour;
 		header: Colour;
 		standfirst: Colour;
 		richLink: Colour;
@@ -109,6 +111,8 @@ export type Palette = {
 		commentCountUntilDesktop: Colour;
 		shareIcon: Colour;
 		shareIconGrayBackground: Colour;
+		followIcon: Colour;
+		unfollowIcon: Colour;
 		cameraCaptionIcon: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
