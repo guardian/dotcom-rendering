@@ -1,16 +1,18 @@
 /**
- * @file
- * Test that impossible prop combinations are caught by TypeScript.
- *
- * What we're really testing is that this file compiles.
- *
- * The tests themselves are not really testing anything, but because it's a
- * *.test.tsx, Jest will run it.
- *
- * The test are just there to stop Jest blowing up when it gets the compiled version.
+ * @jest-environment node
  */
 
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { renderToString } from 'react-dom/server';
+import { CardCommentCount } from './CardCommentCount.importable';
+import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { Island } from './Island';
+import { OnwardsUpper } from './OnwardsUpper.importable';
+import { Snow } from './Snow.importable';
+
+// Type tests
+// Test that impossible prop combinations are caught by TypeScript.
+// What we're really testing is that this file compiles.
 
 const Mock = () => <>🏝️</>;
 
@@ -67,6 +69,58 @@ const Mock = () => <>🏝️</>;
 	</Island>
 );
 
-// this is just to stop Jest complaining about no tests
-test('this is not a real test, ignore it, it tells you nothing useful 💃', () =>
-	undefined);
+// Jest tests
+
+describe('Island: server-side rendering', () => {
+	test('CardCommentCount', () => {
+		expect(() =>
+			renderToString(
+				<CardCommentCount
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+					discussionApiUrl=""
+					discussionId=""
+				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('EnhancePinnedPost', () => {
+		expect(() => renderToString(<EnhancePinnedPost />)).not.toThrow();
+	});
+
+	test('Snow', () => {
+		expect(() => renderToString(<Snow />)).not.toThrow();
+	});
+
+	test('OnwardsUpper', () => {
+		expect(() =>
+			renderToString(
+				<OnwardsUpper
+					contentType=""
+					tags={[]}
+					isPaidContent={false}
+					pageId=""
+					keywordIds=""
+					ajaxUrl=""
+					hasRelated={true}
+					hasStoryPackage={true}
+					isAdFreeUser={false}
+					showRelatedContent={true}
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+					pillar={Pillar.News}
+					editionId="UK"
+					shortUrlId=""
+					discussionApiUrl=""
+				/>,
+			),
+		).not.toThrow();
+	});
+});
