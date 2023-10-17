@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	body,
-	brandAlt,
-	neutral,
-	remSpace,
-	space,
-} from '@guardian/source-foundations';
+import { body, palette, remSpace, space } from '@guardian/source-foundations';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { TimelineAtomType, TimelineEvent } from '../types/content';
 import { Body } from './ExpandableAtom/Body';
@@ -14,7 +8,7 @@ import { Footer } from './ExpandableAtom/Footer';
 
 const Snippet = css`
 	:not(:last-child) {
-		border-left: 0.0625rem solid ${neutral[60]};
+		border-left: 0.0625rem solid ${palette.neutral[60]};
 		padding-bottom: ${remSpace[4]};
 	}
 	padding-left: ${space[4]}px;
@@ -36,7 +30,7 @@ const EventDateBullet = css`
 	float: left;
 	position: relative;
 	left: -24px;
-	background-color: #121212;
+	background-color: ${palette.neutral[7]};
 `;
 
 const EventDate = css`
@@ -44,7 +38,7 @@ const EventDate = css`
 		${EventDateBullet}
 	}
 	margin-left: -16px;
-	background: ${brandAlt[400]};
+	background: ${palette.brandAlt[400]};
 	${body.medium({
 		lineHeight: 'tight',
 		fontWeight: 'bold',
@@ -52,7 +46,7 @@ const EventDate = css`
 `;
 
 const EventToDate = css`
-	background: ${brandAlt[400]};
+	background: ${palette.brandAlt[400]};
 	${body.medium({
 		lineHeight: 'tight',
 		fontWeight: 'bold',
