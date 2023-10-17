@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { imageStory } from '../../fixtures/manual/qandaAtom';
 import { QandaAtom } from './QandaAtom.importable';
-import { imageStory } from './QandaAtom.stories';
 
 describe('QandaAtom', () => {
 	it('should render & expand works', () => {
