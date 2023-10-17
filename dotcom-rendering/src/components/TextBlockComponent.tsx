@@ -258,6 +258,8 @@ const buildElementTree =
 						: undefined;
 					if (
 						dropCappedSentence &&
+						// This node is the first node
+						node.previousSibling === null &&
 						// The node is the first in this text block
 						node.parentNode?.parentNode?.firstChild?.contains(
 							node,
