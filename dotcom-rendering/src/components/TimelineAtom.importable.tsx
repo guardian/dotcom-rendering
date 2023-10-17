@@ -59,7 +59,7 @@ const TimelineContents = ({
 }: {
 	events: TimelineEvent[];
 	format: ArticleFormat;
-}): JSX.Element => {
+}) => {
 	return (
 		<div>
 			{events.map((event, index) => {
@@ -107,7 +107,7 @@ export const TimelineAtom = ({
 	likeHandler,
 	dislikeHandler,
 	expandCallback,
-}: TimelineAtomType): JSX.Element => {
+}: TimelineAtomType) => {
 	return (
 		<Container
 			atomType="timeline"
