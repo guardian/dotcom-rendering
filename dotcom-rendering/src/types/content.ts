@@ -752,7 +752,7 @@ interface VideoAssets {
 	};
 }
 
-interface TimelineEvent {
+export interface TimelineEvent {
 	title: string;
 	date: string;
 	unixDate: number;
@@ -760,6 +760,18 @@ interface TimelineEvent {
 	toDate?: string;
 	toUnixDate?: number;
 }
+
+export type TimelineAtomType = {
+	id: string;
+	events?: TimelineEvent[];
+	title: string;
+	format: ArticleFormat;
+	description?: string;
+	expandForStorybook?: boolean;
+	likeHandler?: () => void;
+	dislikeHandler?: () => void;
+	expandCallback?: () => void;
+};
 
 export type RatingSizeType = 'large' | 'medium' | 'small';
 
