@@ -116,11 +116,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					>
 						<AlreadyVisited />
 					</Island>
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="critical" clientOnly={true}>
 						<Metrics
 							commercialMetricsEnabled={
 								!!article.config.switches.commercialMetrics
