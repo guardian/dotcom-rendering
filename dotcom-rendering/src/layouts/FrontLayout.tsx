@@ -143,10 +143,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		abTests.frontsBannerAdsDcrVariant === 'variant' &&
 		Object.keys(frontsBannerAdCollections).includes(pageId);
 
-	// This will be the targeted collections if the current page is in the fronts banner AB test.
-	const frontsBannerTargetedCollections = isInFrontsBannerTest
-		? frontsBannerAdCollections[pageId]
-		: [];
+	const frontsBannerTargetedCollections =
+		isInFrontsBannerTest || showBannerAds
+			? frontsBannerAdCollections[pageId]
+			: [];
 
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
@@ -322,8 +322,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						collection.backfill,
 					);
 					const [trail] = trails;
-
-					console.log('collection.name', collection.displayName);
 
 					// There are some containers that have zero trails. We don't want to render these
 					if (!trail) return null;
