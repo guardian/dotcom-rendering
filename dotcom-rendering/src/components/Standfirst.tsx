@@ -191,7 +191,7 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 								color: ${palette.text.standfirst};
 
 								${from.tablet} {
-									${headline.xsmall({
+									${headline.xxsmall({
 										fontWeight: 'medium',
 									})};
 									max-width: 80%;
