@@ -196,8 +196,7 @@ export const SignInGateSelector = ({
 	const shouldPersonaliseComponentId = (): boolean => {
 		return personaliseSwitch && !!checkoutCompleteCookieData;
 	};
-	const personaliseSignInGateAfterCheckout =
-		switches.personaliseSignInGateAfterCheckout;
+	const { personaliseSignInGateAfterCheckout } = switches;
 	// END: Checkout Complete Personalisation
 
 	useOnce(() => {
