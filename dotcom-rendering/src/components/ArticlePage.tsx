@@ -61,7 +61,8 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					:root {
 						${paletteDeclarations(format, 'light')}
 
-						${renderingTarget === 'Apps'
+						${article.config.switches.darkModeInApps &&
+						renderingTarget === 'Apps'
 							? css`
 									@media (prefers-color-scheme: dark) {
 										${paletteDeclarations(format, 'dark')}
