@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-
-type ArrayOfAtLeastOne<T> = [T, ...T[]];
+import type { NonEmptyArray } from './tuple';
 
 /**
  * Ensures that the given task is only run once and only after all items in waitFor are defined
@@ -9,7 +8,7 @@ type ArrayOfAtLeastOne<T> = [T, ...T[]];
  * */
 export const useOnce = (
 	task: () => void,
-	waitFor: ArrayOfAtLeastOne<unknown>,
+	waitFor: NonEmptyArray<unknown>,
 ): void => {
 	const [alreadyRun, setAlreadyRun] = useState(false);
 	const isReady = waitFor.every((dep) => dep !== undefined);
