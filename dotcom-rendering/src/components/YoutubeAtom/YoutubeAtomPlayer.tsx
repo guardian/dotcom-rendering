@@ -15,7 +15,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { useAuthStatus } from 'src/lib/useAuthStatus';
+import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { google } from './ima';
 import type { VideoEventKey } from './YoutubeAtom';
 import type { PlayerListenerName } from './YoutubePlayer';

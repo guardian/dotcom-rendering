@@ -759,6 +759,7 @@ export const AdSlot = ({
 						]}
 						data-link-name="ad slot article-end"
 						data-name="article-end"
+						data-dynamic-slot="true"
 						aria-hidden="true"
 					/>
 				</div>
