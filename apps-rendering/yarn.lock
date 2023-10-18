@@ -2757,6 +2757,13 @@
     node-int64 "^0.4.0"
     thrift "^0.15.0"
 
+"@guardian/atoms-rendering@34.0.1":
+  version "34.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-34.0.1.tgz#3bb98788ef05fca60ff97033413be55bd5c0d41b"
+  integrity sha512-JFxHwsZvLJBgthQZlcEPg1JtzAaPnDAd8NgPEEoOdO4Q3NnuEV2dKM6CSzf/V6S3m8zgkA+Leyx+EZKHf7hQzw==
+  dependencies:
+    is-mobile "3.1.1"
+
 "@guardian/bridget@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.0.0.tgz#9be79e1f8c0c4a9ee3829390b9bcb828d78cb4d7"
@@ -2887,15 +2894,15 @@
   dependencies:
     mini-svg-data-uri "1.4.4"
 
-"@guardian/source-react-components-development-kitchen@^14.0.0":
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-14.0.0.tgz#9678ae07aa745f62df6b44d2d56f4a502c8f569e"
-  integrity sha512-hl295B88dKpkv7NJl7vzx0wT+luUSSXcZes64B0F1lW0y6NtiRGkEsLQ6gnSTPfXM04FDd2jeZR4nFMsMypieQ==
+"@guardian/source-react-components-development-kitchen@14.0.2":
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-14.0.2.tgz#c8bab2cf21717b5c857dad075bca8a12112c0b13"
+  integrity sha512-F5nDwRuekC9ZUSEy+FdXMnke/q/rYi4Mple2t1rv6d61oHsOnnGxReQtfPYyVnYv5zGYo8phlOtLGstSQg3DRQ==
 
-"@guardian/source-react-components@^16.0.0":
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-16.0.0.tgz#2d04a3cd2443ed46de2533351f89082eaccc2365"
-  integrity sha512-oSRa1TjRvbnfYIEa+qMz23aCM6V73pIvP2ca64dP9dNopNR1PgooNlf7PihjXDEkyBo4ks9udMRzzAd3nfst6A==
+"@guardian/source-react-components@16.0.1":
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-16.0.1.tgz#24d4c4081e6a293a101b3217b598fccf151b04bd"
+  integrity sha512-M/zrs+G5NqykicECNf803B9815tVkPfazwmYsGfrDdKGptBmLhcofGlpC/MGdKiJ9lTlOQBieUyZ2y6i2mBJyQ==
 
 "@guardian/story-packages-model@^2.2.0":
   version "2.2.0"
@@ -9176,6 +9183,11 @@ is-map@^2.0.1, is-map@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/is-map/-/is-map-2.0.2.tgz#00922db8c9bf73e81b7a335827bc2a43f2b91127"
   integrity sha512-cOZFQQozTha1f4MxLFzlgKYPTyj26picdZTx82hbc/Xf4K/tZOOXSCkMvU4pKioRXGDLJRn0GM7Upe7kR721yg==
+
+is-mobile@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/is-mobile/-/is-mobile-3.1.1.tgz#3b9e48f40068e4ea2da411f5009779844ce8d6aa"
+  integrity sha512-RRoXXR2HNFxNkUnxtaBdGBXtFlUMFa06S0NUKf/LCF+MuGLu13gi9iBCkoEmc6+rpXuwi5Mso5V8Zf7mNynMBQ==
 
 is-nan@^1.2.1:
   version "1.3.2"
