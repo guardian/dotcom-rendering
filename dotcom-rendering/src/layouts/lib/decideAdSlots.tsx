@@ -91,10 +91,10 @@ export const decideFrontsBannerAdSlot = (
 			);
 		}
 
-		// If the show banner ads switch is on and the page was included for the AB test, then show
-		// banner ads above the collections that were chosed for the AB test. This is because on /uk
-		// we avoid placing an ad above the "Ukraine invasion", which means we don't get a banner ad
-		// until the 6th collection.
+		// If the showBannerAds feature switch is on and the page was included in the AB test, then
+		// show ads above the collections as specified in that AB test. One reason is that on /uk
+		// the "Ukraine invasion" collection is third and we don't want to place an ad above this
+		// container, which means we don't get a banner ad until the 6th collection.
 	} else if (
 		showBannerAds &&
 		collectionName &&
@@ -115,7 +115,7 @@ export const decideFrontsBannerAdSlot = (
 	}
 
 	// Insert an ad after every third collection. Warning: may skip an ad if a collection isn't rendered.
-	// e.g. if the 15th collection doesn't render, an ad is shown above the 12th and the 18th
+	// e.g. if the 15th collection doesn't render, an ad is shown above the 12th and the 18th, skipping the 15th.
 	else if (
 		showBannerAds &&
 		numBannerAdsInserted.current < MAX_FRONTS_BANNER_ADS &&
