@@ -13,6 +13,7 @@ export default {
 		chromatic: {
 			diffThreshold: 0.2,
 			pauseAnimationAtEnd: true,
+			delay: 1200, // ensure that OnwardsUpper shows relevant data
 		},
 	},
 };
