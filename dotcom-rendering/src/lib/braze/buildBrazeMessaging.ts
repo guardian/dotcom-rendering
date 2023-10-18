@@ -103,7 +103,6 @@ export const buildBrazeMessaging = async (
 		);
 
 		const sdkLoadTimeTaken = endPerformanceMeasure();
-
 		const ophan = await getOphan();
 		ophan.record({
 			component: 'braze-sdk-load-timing',

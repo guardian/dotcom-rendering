@@ -226,8 +226,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	} = article;
 
 	const showBodyEndSlot =
-		parse(article.slotMachineFlags ?? '').showBodyEnd ||
-		article.config.switches.slotBodyEnd;
+		renderingTarget === 'Web' &&
+		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
+			article.config.switches.slotBodyEnd);
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -618,48 +619,39 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										article.imagesForAppsLightbox
 									}
 								/>
-								{renderingTarget === 'Web' &&
-									showBodyEndSlot && (
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-											clientOnly={true}
-										>
-											<SlotBodyEnd
-												contentType={
-													article.contentType
-												}
-												contributionsServiceUrl={
-													contributionsServiceUrl
-												}
-												idApiUrl={
-													article.config.idApiUrl
-												}
-												isMinuteArticle={
-													article.pageType
-														.isMinuteArticle
-												}
-												isPaidContent={
-													article.pageType
-														.isPaidContent
-												}
-												keywordIds={
-													article.config.keywordIds
-												}
-												pageId={article.pageId}
-												sectionId={
-													article.config.section
-												}
-												shouldHideReaderRevenue={
-													article.shouldHideReaderRevenue
-												}
-												stage={article.config.stage}
-												tags={article.tags}
-												renderAds={renderAds}
-												isLabs={isLabs}
-											/>
-										</Island>
-									)}
+								{showBodyEndSlot && (
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+										clientOnly={true}
+									>
+										<SlotBodyEnd
+											contentType={article.contentType}
+											contributionsServiceUrl={
+												contributionsServiceUrl
+											}
+											idApiUrl={article.config.idApiUrl}
+											isMinuteArticle={
+												article.pageType.isMinuteArticle
+											}
+											isPaidContent={
+												article.pageType.isPaidContent
+											}
+											keywordIds={
+												article.config.keywordIds
+											}
+											pageId={article.pageId}
+											sectionId={article.config.section}
+											shouldHideReaderRevenue={
+												article.shouldHideReaderRevenue
+											}
+											stage={article.config.stage}
+											tags={article.tags}
+											renderAds={renderAds}
+											isLabs={isLabs}
+										/>
+									</Island>
+								)}
 								<StraightLines
 									count={4}
 									color={palette.border.secondary}

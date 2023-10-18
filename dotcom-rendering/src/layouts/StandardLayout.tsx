@@ -308,9 +308,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		config: { isPaidContent, host },
 	} = article;
 
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+
 	const showBodyEndSlot =
-		parse(article.slotMachineFlags ?? '').showBodyEnd ||
-		article.config.switches.slotBodyEnd;
+		isWeb &&
+		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
+			article.config.switches.slotBodyEnd);
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -333,9 +337,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
-
-	const isWeb = renderingTarget === 'Web';
-	const isApps = renderingTarget === 'Apps';
 
 	const renderAds = isWeb && canRenderAds(article);
 
@@ -695,7 +696,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									</Island>
 								)}
 
-								{isWeb && showBodyEndSlot && (
+								{showBodyEndSlot && (
 									<Island
 										priority="feature"
 										defer={{ until: 'visible' }}
