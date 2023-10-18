@@ -1,6 +1,7 @@
 import { Hide } from '@guardian/source-react-components';
 import { AdSlot } from '../../components/AdSlot.web';
 import { MAX_FRONTS_BANNER_ADS } from '../../lib/commercial-constants';
+import { frontsBannerExcludedCollections } from '../../lib/frontsBannerExclusions';
 import { getMerchHighPosition } from '../../lib/getAdPositions';
 
 export const decideMerchHighAndMobileAdSlots = (
@@ -60,9 +61,10 @@ export const decideFrontsBannerAdSlot = (
 	numBannerAdsInserted: React.MutableRefObject<number>,
 	showBannerAds: boolean,
 	index: number,
+	pageId: string,
+	collectionName: string | null,
 	isInFrontsBannerTest?: boolean,
 	targetedCollections?: string[],
-	collectionName?: string,
 ) => {
 	const isFirstContainer = index === 0;
 	if (!renderAds || hasPageSkin || isFirstContainer) {
@@ -90,7 +92,8 @@ export const decideFrontsBannerAdSlot = (
 	} else if (
 		showBannerAds &&
 		numBannerAdsInserted.current < MAX_FRONTS_BANNER_ADS &&
-		index % 3 === 0
+		index % 3 === 2 && // Insert above the 3rd, 6th, ..., container
+		!isCollectionExclusionPresent(pageId, collectionName)
 	) {
 		numBannerAdsInserted.current = numBannerAdsInserted.current + 1;
 
@@ -105,4 +108,18 @@ export const decideFrontsBannerAdSlot = (
 	}
 
 	return null;
+};
+
+const isCollectionExclusionPresent = (
+	pageId: string,
+	collectionName: string | null,
+): boolean => {
+	// Tag Fronts collections don't have names, so no exclusions can be present.
+	if (!collectionName) {
+		return false;
+	}
+
+	return Boolean(
+		frontsBannerExcludedCollections[pageId]?.includes(collectionName),
+	);
 };

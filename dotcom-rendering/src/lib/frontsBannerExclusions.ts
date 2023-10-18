@@ -17,5 +17,5 @@ import type { FrontsBannerAdCollections } from '../types/commercial';
  */
 
 export const frontsBannerExcludedCollections: FrontsBannerAdCollections = {
-	uk: ['Ukraine Invasion'],
+	uk: ['Ukraine invasion'],
 };

@@ -128,6 +128,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			abTests,
 			isPaidContent,
 			hasPageSkin: hasPageSkinConfig,
+			pageId,
 		},
 	} = front;
 
@@ -140,11 +141,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const isInFrontsBannerTest =
 		!!switches.frontsBannerAdsDcr &&
 		abTests.frontsBannerAdsDcrVariant === 'variant' &&
-		Object.keys(frontsBannerAdCollections).includes(front.config.pageId);
+		Object.keys(frontsBannerAdCollections).includes(pageId);
 
 	// This will be the targeted collections if the current page is in the fronts banner AB test.
 	const frontsBannerTargetedCollections = isInFrontsBannerTest
-		? frontsBannerAdCollections[front.config.pageId]
+		? frontsBannerAdCollections[pageId]
 		: [];
 
 	const merchHighPosition = getMerchHighPosition(
@@ -322,6 +323,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					);
 					const [trail] = trails;
 
+					console.log('collection.name', collection.displayName);
+
 					// There are some containers that have zero trails. We don't want to render these
 					if (!trail) return null;
 
@@ -359,9 +362,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										numBannerAdsInserted,
 										showBannerAds,
 										index,
+										pageId,
+										collection.displayName,
 										isInFrontsBannerTest,
 										frontsBannerTargetedCollections,
-										collection.displayName,
 									)}
 									{!!trail.embedUri && (
 										<SnapCssSandbox
@@ -413,6 +417,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						const deeplyReadData = showMostPopular
 							? front.deeplyRead
 							: undefined;
+
 						return (
 							<>
 								{decideFrontsBannerAdSlot(
@@ -421,9 +426,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									numBannerAdsInserted,
 									showBannerAds,
 									index,
+									pageId,
+									collection.displayName,
 									isInFrontsBannerTest,
 									frontsBannerTargetedCollections,
-									collection.displayName,
 								)}
 								<FrontSection
 									toggleable={true}
@@ -497,9 +503,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									numBannerAdsInserted,
 									showBannerAds,
 									index,
+									pageId,
+									collection.displayName,
 									isInFrontsBannerTest,
 									frontsBannerTargetedCollections,
-									collection.displayName,
 								)}
 								<LabsSection
 									title={collection.displayName}
@@ -565,9 +572,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									numBannerAdsInserted,
 									showBannerAds,
 									index,
+									pageId,
+									collection.displayName,
 									isInFrontsBannerTest,
 									frontsBannerTargetedCollections,
-									collection.displayName,
 								)}
 								<Section
 									title={collection.displayName}
@@ -641,9 +649,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								numBannerAdsInserted,
 								showBannerAds,
 								index,
+								pageId,
+								collection.displayName,
 								isInFrontsBannerTest,
 								frontsBannerTargetedCollections,
-								collection.displayName,
 							)}
 							<FrontSection
 								title={collection.displayName}

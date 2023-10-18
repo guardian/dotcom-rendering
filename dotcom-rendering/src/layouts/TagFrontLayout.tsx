@@ -271,6 +271,8 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								numBannerAdsInserted,
 								showBannerAds,
 								index,
+								tagFront.pageId,
+								null,
 							)}
 							<FrontSection
 								title={date.toLocaleDateString('en-GB', {
