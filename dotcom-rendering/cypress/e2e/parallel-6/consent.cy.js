@@ -29,12 +29,9 @@ describe('Consent tests', function () {
 	});
 
 	it('should not add GA tracking scripts onto the window object after the reader rejects consent', function () {
-		// TODO: handle unhandled promise rejection
 		cy.on('uncaught:exception', (err, runnable, promise) => {
-			// return false to prevent the error from failing this test
-			if (promise) {
-				return false;
-			}
+			// return false to prevent error from consentless advertising failing this test
+			return false;
 		});
 		cy.visit(`/Article/${firstPage}`);
 		cy.window().its('ga').should('not.exist');
