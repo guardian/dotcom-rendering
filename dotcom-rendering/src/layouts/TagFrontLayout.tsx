@@ -8,7 +8,7 @@ import {
 	news,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { Footer } from '../components/Footer';
@@ -32,7 +32,10 @@ import {
 } from '../lib/getAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagFrontType } from '../types/tagFront';
-import { decideAdSlot } from './FrontLayout';
+import {
+	decideFrontsBannerAdSlot,
+	decideMerchHighAndMobileAdSlots,
+} from './lib/decideAdSlots';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -75,9 +78,12 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 		tagFront.groupedTrails.length,
 	);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
+	const numBannerAdsInserted = useRef(0);
+
+	const {
+		config: { switches, hasPageSkin, isPaidContent },
+	} = tagFront;
+
 	const renderAds = canRenderAds(tagFront);
 
 	const mobileAdPositions = renderAds
@@ -86,6 +92,8 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 				merchHighPosition,
 		  )
 		: [];
+
+	const showBannerAds = !!switches.frontsBannerAds;
 
 	return (
 		<>
@@ -120,14 +128,11 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							mmaUrl={tagFront.config.mmaUrl}
 							discussionApiUrl={tagFront.config.discussionApiUrl}
 							urls={tagFront.nav.readerRevenueLinks.header}
-							remoteHeader={
-								!!tagFront.config.switches.remoteHeader
-							}
+							remoteHeader={!!switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 							headerTopBarSearchCapiSwitch={
-								!!tagFront.config.switches
-									.headerTopBarSearchCapi
+								!!switches.headerTopBarSearchCapi
 							}
 						/>
 					</Section>
@@ -148,9 +153,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								tagFront.nav.readerRevenueLinks.header.subscribe
 							}
 							editionId={tagFront.editionId}
-							headerTopBarSwitch={
-								!!tagFront.config.switches.headerTopNav
-							}
+							headerTopBarSwitch={!!switches.headerTopNav}
 						/>
 					</Section>
 					{NAV.subNavSections && (
@@ -262,6 +265,13 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 					return (
 						<Fragment key={containedId}>
+							{decideFrontsBannerAdSlot(
+								renderAds,
+								hasPageSkin,
+								numBannerAdsInserted,
+								showBannerAds,
+								index,
+							)}
 							<FrontSection
 								title={date.toLocaleDateString('en-GB', {
 									day:
@@ -292,13 +302,14 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							>
 								<ContainerComponent />
 							</FrontSection>
-							{decideAdSlot(
+							{decideMerchHighAndMobileAdSlots(
 								renderAds,
 								index,
 								tagFront.groupedTrails.length,
-								tagFront.config.isPaidContent,
+								isPaidContent,
 								mobileAdPositions,
-								tagFront.config.hasPageSkin,
+								hasPageSkin,
+								showBannerAds,
 							)}
 						</Fragment>
 					);
