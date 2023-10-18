@@ -1,5 +1,5 @@
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { NavType } from '../model/extract-nav';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -32,16 +32,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 	const notSupported = <pre>Not supported</pre>;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
-			switch (format.design) {
-				case ArticleDesign.Interactive: {
-					// Should be InteractiveLayout once implemented for apps
-					return notSupported;
-				}
-				default: {
-					// Should be FullPageInteractiveLayout once implemented for apps
-					return notSupported;
-				}
-			}
+			return (
+				<ImmersiveLayout
+					article={article}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			);
 		}
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Showcase: {
@@ -160,8 +157,9 @@ const DecideLayoutWeb = ({
 					return (
 						<ImmersiveLayout
 							article={article}
-							NAV={NAV}
 							format={format}
+							NAV={NAV}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				}

@@ -258,12 +258,15 @@ const buildElementTree =
 						: undefined;
 					if (
 						dropCappedSentence &&
-						node.textContent.startsWith(
-							stripHtmlFromString(html).slice(0, 10),
+						// This node is the first node
+						node.previousSibling === null &&
+						// The node is the first in this text block
+						node.parentNode?.parentNode?.firstChild?.contains(
+							node,
 						) &&
 						// The node is at the root of the document avoiding nodes like <a>
 						// tags embedded in <p> tags dropping their cap
-						node.parentNode?.parentNode?.nodeName ===
+						node.parentNode.parentNode.nodeName ===
 							'#document-fragment'
 					) {
 						const { dropCap, restOfSentence } = dropCappedSentence;

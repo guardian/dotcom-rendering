@@ -73,7 +73,7 @@ const listStyleNone = (palette: Palette) => css`
 			transparent 36px,
 			transparent 37px,
 			${palette.background.subMeta} 37px,
-			${palette.background.subMeta} 46px
+			${palette.background.subMeta} 48px
 		),
 		repeating-linear-gradient(
 			to right,

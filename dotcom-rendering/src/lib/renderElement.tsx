@@ -1,7 +1,3 @@
-import {
-	InteractiveAtom,
-	InteractiveLayoutAtom,
-} from '@guardian/atoms-rendering';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
@@ -26,16 +22,18 @@ import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
+import { InteractiveAtom } from '../components/InteractiveAtom';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
+import { InteractiveLayoutAtom } from '../components/InteractiveLayoutAtom';
 import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
-import { KnowledgeQuizAtomWrapper } from '../components/KnowledgeQuizAtomWrapper.importable';
+import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
-import { PersonalityQuizAtomWrapper } from '../components/PersonalityQuizAtomWrapper.importable';
+import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
@@ -46,7 +44,7 @@ import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent
 import { SubheadingBlockComponent } from '../components/SubheadingBlockComponent';
 import { TableBlockComponent } from '../components/TableBlockComponent';
 import { TextBlockComponent } from '../components/TextBlockComponent';
-import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
+import { TimelineAtom } from '../components/TimelineAtom.importable';
 import { TweetBlockComponent } from '../components/TweetBlockComponent.importable';
 import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
 import { VideoAtom } from '../components/VideoAtom';
@@ -531,7 +529,7 @@ export const renderElement = ({
 							priority="critical"
 							defer={{ until: 'visible' }}
 						>
-							<PersonalityQuizAtomWrapper
+							<PersonalityQuizAtom
 								id={element.id}
 								questions={element.questions}
 								resultBuckets={element.resultBuckets}
@@ -545,7 +543,7 @@ export const renderElement = ({
 							priority="critical"
 							defer={{ until: 'visible' }}
 						>
-							<KnowledgeQuizAtomWrapper
+							<KnowledgeQuizAtom
 								id={element.id}
 								questions={element.questions}
 								resultGroups={element.resultGroups}
@@ -614,10 +612,10 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<TimelineAtomWrapper
+					<TimelineAtom
 						id={element.id}
 						title={element.title}
-						pillar={format.theme}
+						format={format}
 						events={element.events}
 						description={element.description}
 					/>
