@@ -4,7 +4,7 @@ import { body, neutral, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { trackVideoInteraction } from '../client/ga/ga';
-import { getOphan } from '../client/ophan/ophan';
+import { maybeRecord } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import { Caption } from './Caption';
@@ -178,8 +178,7 @@ export const YoutubeBlockComponent = ({
 
 	const ophanTracking = async (trackingEvent: string): Promise<void> => {
 		if (!id) return;
-		const ophan = await getOphan();
-		ophan.record({
+		void maybeRecord({
 			video: {
 				id: `gu-video-youtube-${id}`,
 				eventType: `video:content:${trackingEvent}`,

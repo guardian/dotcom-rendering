@@ -26,8 +26,9 @@ let cachedOphan: typeof window.guardian.ophan;
 
 /**
  * Loads Ophan (if it hasn't already been loaded) and returns a promise of Ophan's methods.
+ * Do not export me please!
  */
-export const getOphan = async (): Promise<
+const getOphan = async (): Promise<
 	NonNullable<typeof window.guardian.ophan>
 > => {
 	if (cachedOphan) {
@@ -64,12 +65,28 @@ export const getOphan = async (): Promise<
 	return cachedOphan;
 };
 
-export const submitComponentEvent = async (
-	componentEvent: OphanComponentEvent,
+type T = Parameters<OphanRecordFunction>[1];
+
+/**
+ * Records an event to Ophan if DCR is rendering an article for Web.
+ * Does nothing if DCR is rendering an article for Apps,
+ * because Apps communicate with Ophan natively.
+ */
+export const maybeRecord = (
+	event: Parameters<OphanRecordFunction>[0],
+	callback?: Parameters<OphanRecordFunction>[1],
 ): Promise<void> => {
-	const ophan = await getOphan();
-	ophan.record({ componentEvent });
+	const renderingTarget = 'Web';
+
+	if (renderingTarget === 'Web') {
+		return getOphan().then(({ record }) => record(event, callback));
+	}
+	return Promise.resolve();
 };
+
+export const submitComponentEvent = (
+	componentEvent: OphanComponentEvent,
+): Promise<void> => maybeRecord({ componentEvent });
 
 interface SdcTestMeta extends OphanABTestMeta {
 	labels?: string[];
@@ -143,11 +160,7 @@ export const recordPerformance = async (): Promise<void> => {
 		navType: performanceAPI.navigation.type,
 		redirectCount: performanceAPI.navigation.redirectCount,
 	};
-
-	const ophan = await getOphan();
-	ophan.record({
-		performance,
-	});
+	void maybeRecord({ performance });
 };
 
 const experiencesSet = new Set(['dotcom-rendering']);
@@ -157,9 +170,9 @@ export const recordExperiences = async (
 	for (const experience of experiences) {
 		experiencesSet.add(experience);
 	}
-	const { record } = await getOphan();
-
 	// this is the only allowed usage of sending experiences!
 	// otherwise, race conditions might lead to different results
-	record({ ['experiences' as string]: [...experiencesSet].sort().join(',') });
+	void maybeRecord({
+		['experiences' as string]: [...experiencesSet].sort().join(','),
+	});
 };

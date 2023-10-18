@@ -1,5 +1,5 @@
 import type { OphanComponent, OphanComponentEvent } from '@guardian/libs';
-import { getOphan } from '../../client/ophan/ophan';
+import { maybeRecord } from '../../client/ophan/ophan';
 import { isServer } from '../../lib/isServer';
 import type { CurrentSignInGateABTest } from './types';
 
@@ -18,8 +18,7 @@ const submitComponentEventTracking = async (
 ) => {
 	if (isServer) return;
 
-	const ophan = await getOphan();
-	ophan.record({ componentEvent });
+	void maybeRecord({ componentEvent });
 };
 
 export const submitViewEventTracking = (

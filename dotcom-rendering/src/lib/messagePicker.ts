@@ -1,5 +1,5 @@
 import { startPerformanceMeasure } from '@guardian/libs';
-import { getOphan } from '../client/ophan/ophan';
+import { maybeRecord } from '../client/ophan/ophan';
 
 export type MaybeFC = React.FC | null;
 type ShowMessage<T> = (meta: T) => MaybeFC;
@@ -38,8 +38,7 @@ const recordMessageTimeoutInOphan = async (
 	candidateId: string,
 	slotName: string,
 ) => {
-	const ophan = await getOphan();
-	ophan.record({
+	void maybeRecord({
 		component: `${slotName}-picker-timeout-dcr`,
 		value: candidateId,
 	});
@@ -77,11 +76,9 @@ const timeoutify = <T>(
 					const canShowTimeTaken = endPerformanceMeasure();
 
 					if (candidateConfig.reportTiming) {
-						void getOphan().then((ophan) => {
-							ophan.record({
-								component: perfName,
-								value: canShowTimeTaken,
-							});
+						void maybeRecord({
+							component: perfName,
+							value: canShowTimeTaken,
 						});
 					}
 				})
