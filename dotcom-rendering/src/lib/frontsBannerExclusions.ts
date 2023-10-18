@@ -16,4 +16,6 @@ import type { FrontsBannerAdCollections } from '../types/commercial';
  * Contact Dominik Lander or the commercial dev team for more information.
  */
 
-export const frontsBannerAdCollections: FrontsBannerAdCollections = {};
+export const frontsBannerExcludedCollections: FrontsBannerAdCollections = {
+	uk: ['Ukraine Invasion'],
+};
