@@ -84,7 +84,10 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 		config: { switches, hasPageSkin, isPaidContent },
 	} = tagFront;
 
+	const showBannerAds = !!switches.frontsBannerAds;
+
 	const renderAds = canRenderAds(tagFront);
+	const renderMpuAds = renderAds && !showBannerAds;
 
 	const mobileAdPositions = renderAds
 		? getTagFrontMobileAdPositions(
@@ -92,8 +95,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 				merchHighPosition,
 		  )
 		: [];
-
-	const showBannerAds = !!switches.frontsBannerAds;
 
 	return (
 		<>
@@ -227,6 +228,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 										{...groupedTrails}
 										adIndex={1} // There is only ever 1 inline ad in a tag front
 										imageLoading={imageLoading}
+										renderAds={renderMpuAds}
 									/>
 								);
 							} else {
@@ -235,6 +237,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 										{...groupedTrails}
 										adIndex={1} // There is only ever 1 inline ad in a tag front
 										imageLoading={imageLoading}
+										renderAds={renderMpuAds}
 									/>
 								);
 							}

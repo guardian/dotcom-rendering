@@ -34,6 +34,7 @@ export const WithTwoCards = () => {
 				trails={[trails[0], trails[1]]}
 				adIndex={1}
 				imageLoading="eager"
+				renderAds={false}
 			/>
 		</FrontSection>
 	);
@@ -56,6 +57,7 @@ export const WithFourCards = () => {
 				trails={[trails[0], trails[1], trails[2], trails[3]]}
 				adIndex={1}
 				imageLoading="eager"
+				renderAds={false}
 			/>
 		</FrontSection>
 	);
@@ -78,6 +80,7 @@ export const WithFiveCards = () => {
 				trails={[trails[0], trails[1], trails[2], trails[3], trails[4]]}
 				adIndex={1}
 				imageLoading="eager"
+				renderAds={false}
 			/>
 		</FrontSection>
 	);
@@ -108,6 +111,7 @@ export const WithSevenCards = () => {
 				]}
 				adIndex={1}
 				imageLoading="eager"
+				renderAds={false}
 			/>
 		</FrontSection>
 	);

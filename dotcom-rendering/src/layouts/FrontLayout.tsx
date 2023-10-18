@@ -162,7 +162,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const numBannerAdsInserted = useRef(0);
 
-	const renderMpuAds = renderAds && !isInFrontsBannerTest;
+	const renderMpuAds = renderAds && !isInFrontsBannerTest && !showBannerAds;
 
 	const showMostPopular =
 		front.config.switches.deeplyRead &&
