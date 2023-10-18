@@ -34,6 +34,7 @@ export const getOphan = async (): Promise<
 		return cachedOphan;
 	}
 
+	// We've taken 'ophan-tracker-js' out of the apps client bundle (made it external in webpack) because we don't ever expect this method to be called. Tracking in apps is done natively.
 	// @ts-expect-error -- side effect only
 	await import(/* webpackMode: "eager" */ 'ophan-tracker-js');
 
@@ -157,9 +158,12 @@ export const recordExperiences = async (
 	for (const experience of experiences) {
 		experiencesSet.add(experience);
 	}
+
 	const { record } = await getOphan();
 
 	// this is the only allowed usage of sending experiences!
 	// otherwise, race conditions might lead to different results
-	record({ ['experiences' as string]: [...experiencesSet].sort().join(',') });
+	record({
+		['experiences' as string]: [...experiencesSet].sort().join(','),
+	});
 };

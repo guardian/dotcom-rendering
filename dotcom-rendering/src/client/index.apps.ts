@@ -10,17 +10,6 @@ import { startup } from './startup';
  *************************************************************/
 
 void startup(
-	'recordInitialPageEvents',
-	() =>
-		import(
-			/* webpackMode: "eager" */ './ophan/recordInitialPageEvents'
-		).then(({ recordInitialPageEvents }) => recordInitialPageEvents()),
-	{
-		priority: 'critical',
-	},
-);
-
-void startup(
 	'sentryLoader',
 	() =>
 		import(/* webpackMode: "eager" */ './sentryLoader').then(
