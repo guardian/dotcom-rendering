@@ -36,7 +36,7 @@ import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockCom
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
-import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
+import { QandaAtom } from '../components/QandaAtom.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
@@ -511,13 +511,13 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.QABlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<QandaAtomWrapper
+					<QandaAtom
 						id={element.id}
 						title={element.title}
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						pillar={format.theme}
+						format={format}
 					/>
 				</Island>
 			);

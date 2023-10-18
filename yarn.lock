@@ -3158,13 +3158,6 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-5.0.0.tgz#cce32ff4cdfb6b24c013723bf352dcd61135d34d"
   integrity sha512-Td5gtK2sARl+fXj1Qe6RuFqf/zxuZjW1q2Jck09zXPIfMgU+sJoTi549zbNeC1cldCBhPWy/qPQ0r+8klfF7jg==
 
-"@guardian/atoms-rendering@34.0.1":
-  version "34.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-34.0.1.tgz#3bb98788ef05fca60ff97033413be55bd5c0d41b"
-  integrity sha512-JFxHwsZvLJBgthQZlcEPg1JtzAaPnDAd8NgPEEoOdO4Q3NnuEV2dKM6CSzf/V6S3m8zgkA+Leyx+EZKHf7hQzw==
-  dependencies:
-    is-mobile "3.1.1"
-
 "@guardian/braze-components@15.0.1":
   version "15.0.1"
   resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-15.0.1.tgz#2c936c43e654f5ae28db254329eae1b4b5861641"
