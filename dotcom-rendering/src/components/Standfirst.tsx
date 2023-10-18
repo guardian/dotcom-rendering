@@ -183,12 +183,19 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						default:
 							return css`
 								${headline.xxxsmall({
-									fontWeight: 'bold',
+									fontWeight: 'medium',
 								})};
 								line-height: 20px;
 								margin-bottom: ${space[3]}px;
-								max-width: 540px;
+								max-width: 90%;
 								color: ${palette.text.standfirst};
+
+								${from.tablet} {
+									${headline.xsmall({
+										fontWeight: 'medium',
+									})};
+									max-width: 80%;
+								}
 							`;
 					}
 			}
