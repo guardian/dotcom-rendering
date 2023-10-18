@@ -41,6 +41,8 @@ const nestedParagraphs =
 	'<p>Wee wee wee cried this little piggy</p>' +
 	'<p>Wee wee wee cried this little piggy</p>' +
 	'<p>All the way home</p></p>';
+const wigglyStrong =
+	'<p>The YouTube clip I return to most often is David Bowie being interviewed by Jeremy Paxman on Newsnight in 1999. Bowie is talking about what the internet might do: “I don’t think we’ve even seen the tip of the iceberg. I<strong> </strong>think that the potential of what the internet is going to do to society, both good and bad, is unimaginable. I think we’re on the cusp of something exhilarating and terrifying.”</p>';
 
 const containerStyles = css`
 	max-width: 620px;
@@ -297,3 +299,20 @@ export const nestedParagraphsStory = () => {
 	);
 };
 nestedParagraphsStory.storyName = 'Nested paragraphs';
+
+export const InvisibleStrong = () => {
+	return (
+		<div css={containerStyles}>
+			<TextBlockComponent
+				html={wigglyStrong}
+				format={{
+					theme: Pillar.Culture,
+					design: ArticleDesign.Feature,
+					display: ArticleDisplay.Immersive,
+				}}
+				isFirstParagraph={true}
+			/>
+		</div>
+	);
+};
+InvisibleStrong.storyName = 'Invisible Strong';
