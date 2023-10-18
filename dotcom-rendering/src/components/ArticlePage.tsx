@@ -6,6 +6,7 @@ import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
+import { paletteDeclarations } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
@@ -57,6 +58,17 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		<StrictMode>
 			<Global
 				styles={css`
+					:root {
+						${paletteDeclarations(format, 'light')}
+
+						${renderingTarget === 'Apps'
+							? css`
+									@media (prefers-color-scheme: dark) {
+										${paletteDeclarations(format, 'dark')}
+									}
+							  `
+							: ''}
+					}
 					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
 					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
 					*:focus {

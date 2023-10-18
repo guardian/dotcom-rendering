@@ -2,9 +2,9 @@
 
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { Meta, StoryObj, Decorator } from '@storybook/react';
-import { HeadlineExample } from './HeadlineExample';
+import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { paletteDeclarations } from '../palette';
+import { HeadlineExample } from './HeadlineExample';
 
 // ----- Meta ----- //
 
@@ -21,7 +21,7 @@ export default meta;
  * Creates storybook decorator used to wrap components in an element
  * containing the light or dark mode palette colours.
  *
- * @param colourScheme Choose whether to use the light or dark palette.
+ * @param colourScheme Choose whether to use the light or darPerformanceNavigation.type palette.
  * @returns A decorator that wraps the component in a `div` containing the
  * palette colours as CSS custom properties.
  */
