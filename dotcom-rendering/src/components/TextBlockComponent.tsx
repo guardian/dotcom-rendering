@@ -46,18 +46,32 @@ const stripHtmlFromString = (html: string): string => {
 };
 
 const getDropCappedSentence = (
-	html: string,
+	node: Node,
 ): { dropCap: string; restOfSentence: string } | undefined => {
-	const first = html.substring(0, 1);
+	// The node is at the root of the document avoiding nodes like <a>
+	// tags embedded in <p> tags dropping their cap
+	if (node.parentNode?.parentNode?.nodeName !== '#document-fragment') return;
+
+	// The node has to be the first grand-child
+	if (node.previousSibling !== null) return;
+
+	// The node’s parent has to be the first child
+	if (node.parentNode.previousSibling !== null) return;
+
+	const text = node.textContent;
+
+	if (!text) return;
+
+	const first = text.substring(0, 1);
 
 	// If it starts with a quote and a letter, drop "“A"
 	if (isOpenQuote(first)) {
-		const second = html.substring(1, 2);
+		const second = text.substring(1, 2);
 
 		if (isLetter(second)) {
 			return {
 				dropCap: `${first}${second}`,
-				restOfSentence: html.substring(2),
+				restOfSentence: text.substring(2),
 			};
 		}
 	}
@@ -66,7 +80,7 @@ const getDropCappedSentence = (
 	if (isLetter(first)) {
 		return {
 			dropCap: first,
-			restOfSentence: html.substring(1),
+			restOfSentence: text.substring(1),
 		};
 	}
 
@@ -254,21 +268,9 @@ const buildElementTree =
 			case '#text': {
 				if (node.textContent !== null) {
 					const dropCappedSentence = showDropCaps
-						? getDropCappedSentence(node.textContent)
+						? getDropCappedSentence(node)
 						: undefined;
-					if (
-						dropCappedSentence &&
-						// This node is the first node
-						node.previousSibling === null &&
-						// The node is the first in this text block
-						node.parentNode?.parentNode?.firstChild?.contains(
-							node,
-						) &&
-						// The node is at the root of the document avoiding nodes like <a>
-						// tags embedded in <p> tags dropping their cap
-						node.parentNode.parentNode.nodeName ===
-							'#document-fragment'
-					) {
+					if (dropCappedSentence) {
 						const { dropCap, restOfSentence } = dropCappedSentence;
 						return (
 							<>
