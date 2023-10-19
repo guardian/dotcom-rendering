@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
-import { palette } from '../palette';
+import { palette } from '../palette/palette';
 
 // ----- Component ----- //
 
