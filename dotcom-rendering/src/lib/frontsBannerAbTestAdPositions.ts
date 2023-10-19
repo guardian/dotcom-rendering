@@ -46,6 +46,14 @@ export const frontsBannerAdCollections: FrontsBannerAdCollections = {
 		'Around the world',
 		'Take part',
 	],
+	europe: [
+		'Spotlight',
+		'Opinion',
+		'Sport',
+		'Culture',
+		'Lifestyle',
+		'From our global editions',
+	],
 	'uk/sport': [
 		'News and features',
 		// 'football', has football weekly thrasher above atm
