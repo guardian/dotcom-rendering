@@ -59,10 +59,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			<Global
 				styles={css`
 					:root {
+						/* Light palette is default on all platforms */
 						${paletteDeclarations(format, 'light')}
 
-						${article.config.switches.darkModeInApps &&
-						renderingTarget === 'Apps'
+						/* Dark palette only for apps and only if switch turned on */
+						${article.config.switches.darkModeInApps && renderingTarget === 'Apps'
 							? css`
 									@media (prefers-color-scheme: dark) {
 										${paletteDeclarations(format, 'dark')}
