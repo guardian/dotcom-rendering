@@ -1413,7 +1413,6 @@ export const Standard = {
 			twitterUwt: true,
 			prebidAppnexusInvcode: true,
 			ampPrebidPubmatic: true,
-			frontsBannerAdsDcr: true,
 			a9HeaderBidding: true,
 			prebidAppnexus: true,
 			enableDiscussionSwitch: true,
