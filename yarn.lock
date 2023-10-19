@@ -3192,17 +3192,17 @@
     read-pkg-up "7.0.1"
     yargs "^17.6.2"
 
-"@guardian/commercial@11.16.2":
-  version "11.16.2"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-11.16.2.tgz#2e093cea45e452d162d568665ff958c44b8aa435"
-  integrity sha512-gCxW6PoQm0+Bot9j/ALitj+mugIp6W6oS6/ntAQE0gkSUD2QGtuW1NcEF8qci7Qtr0FRTf93pfx6kLJ1f8pvWw==
+"@guardian/commercial@11.17.1":
+  version "11.17.1"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-11.17.1.tgz#20d1995af590acf1ff5cb0422d77d50319daf241"
+  integrity sha512-XNkuPbpKgxYozjELlyloi0OgxCrPuwBVM+KS0VaeDypbn7SWCFt5Wt2maDGB3ss3NiwJ4YKq5/On7j5Z43yBrQ==
   dependencies:
     "@changesets/cli" "^2.26.2"
     "@octokit/core" "^4.0.5"
     fastdom "^1.0.11"
     lodash-es "^4.17.21"
     ophan-tracker-js "^2.0.1"
-    prebid.js guardian/prebid.js#ddf4251
+    prebid.js "github:guardian/prebid.js#ddf4251"
     process "^0.11.10"
     raven-js "^3.27.2"
     tslib "^2.5.3"
@@ -15083,8 +15083,9 @@ preact@10.15.1:
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.15.1.tgz#a1de60c9fc0c79a522d969c65dcaddc5d994eede"
   integrity sha512-qs2ansoQEwzNiV5eAcRT1p1EC/dmEzaATVDJNiB3g2sRDWdA7b7MurXdJjB2+/WQktGWZwxvDrnuRFbWuIr64g==
 
-prebid.js@guardian/prebid.js#ddf4251:
+"prebid.js@github:guardian/prebid.js#ddf4251":
   version "7.54.5"
+  uid ddf4251b19c95878af00f640211c0c31ac3e7ac2
   resolved "https://codeload.github.com/guardian/prebid.js/tar.gz/ddf4251b19c95878af00f640211c0c31ac3e7ac2"
   dependencies:
     "@babel/core" "^7.23.2"
