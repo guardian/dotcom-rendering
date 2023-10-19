@@ -152,10 +152,8 @@ const adSlotCollapseStyles = css`
  * For CSS in Frontend, see mark: 9473ae05-a901-4a8d-a51d-1b9c894d6e1f
  */
 const fluidAdStyles = css`
-	&.ad-slot--fluid:not([class*='ad-slot--fronts-banner']) {
-		min-height: 250px;
-	}
 	&.ad-slot--fluid {
+		min-height: 250px;
 		line-height: 10px;
 		padding: 0;
 		margin: 0;
@@ -263,10 +261,6 @@ const frontsBannerAdContainerStyles = css`
 	width: 100%;
 	display: flex;
 	justify-content: center;
-
-	/* This stops the visual effect where the advert renders at the
-	   top of the ad slot, then is pushed down 24px when the label renders */
-	align-items: flex-end;
 `;
 
 const frontsBannerCollapseStyles = css`
