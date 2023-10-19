@@ -15,6 +15,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
+import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { google } from './ima';
 import type { VideoEventKey } from './YoutubeAtom';
 import type { PlayerListenerName } from './YoutubePlayer';
@@ -311,6 +312,7 @@ const createInstantiateImaManager =
 		abTestParticipations: Participations,
 		imaManager: React.MutableRefObject<ImaManager | undefined>,
 		adsManager: React.MutableRefObject<google.ima.AdsManager | undefined>,
+		isSignedIn: boolean,
 	) =>
 	(player: YT.Player) => {
 		const adTargetingEnabled = adTargeting && !adTargeting.disableAds;
@@ -327,6 +329,7 @@ const createInstantiateImaManager =
 				customParams,
 				consentState,
 				clientSideParticipations: abTestParticipations,
+				isSignedIn,
 			});
 			if (window.google) {
 				adsRenderingSettings.uiElements = [
@@ -422,6 +425,12 @@ export const YoutubeAtomPlayer = ({
 	const id = `youtube-video-${uniqueId}`;
 	const imaAdContainerId = `ima-ad-container-${uniqueId}`;
 
+	const authStatus = useAuthStatus();
+
+	const isSignedIn =
+		authStatus.kind === 'SignedInWithOkta' ||
+		authStatus.kind === 'SignedInWithCookies';
+
 	/**
 	 * Initialise player useEffect
 	 */
@@ -442,6 +451,7 @@ export const YoutubeAtomPlayer = ({
 								consentState,
 								customParams: adTargeting.customParams,
 								isAdFreeUser: false,
+								isSignedIn,
 						  });
 
 				const embedConfig = {
@@ -464,6 +474,7 @@ export const YoutubeAtomPlayer = ({
 							abTestParticipations,
 							imaManager,
 							adsManager,
+							isSignedIn,
 					  )
 					: undefined;
 
@@ -564,6 +575,7 @@ export const YoutubeAtomPlayer = ({
 			imaAdContainerId,
 			playerReadyCallback,
 			deactivateVideo,
+			isSignedIn,
 		],
 	);
 
