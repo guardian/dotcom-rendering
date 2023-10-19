@@ -152,8 +152,10 @@ const adSlotCollapseStyles = css`
  * For CSS in Frontend, see mark: 9473ae05-a901-4a8d-a51d-1b9c894d6e1f
  */
 const fluidAdStyles = css`
-	&.ad-slot--fluid {
+	&.ad-slot--fluid:not([class*='ad-slot--fronts-banner']) {
 		min-height: 250px;
+	}
+	&.ad-slot--fluid {
 		line-height: 10px;
 		padding: 0;
 		margin: 0;
