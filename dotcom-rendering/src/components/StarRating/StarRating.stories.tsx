@@ -1,5 +1,4 @@
 // ----- Imports ----- //
-
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta } from '@storybook/react';
 import {
