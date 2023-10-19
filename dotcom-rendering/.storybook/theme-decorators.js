@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { paletteDeclarations } from '../src/palette/palette';
+import { paletteDeclarations } from '../src/palette';
 import { palette as sourcePalette } from '@guardian/source-foundations';
 
 const darkStoryCss = css`
