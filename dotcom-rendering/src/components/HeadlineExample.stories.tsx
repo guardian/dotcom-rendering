@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
-import { paletteDeclarations } from '../palette/palette';
+import { paletteDeclarations } from '../palette';
 import { HeadlineExample } from './HeadlineExample';
 
 // ----- Meta ----- //
