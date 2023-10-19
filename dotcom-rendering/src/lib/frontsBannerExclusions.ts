@@ -1,7 +1,7 @@
 import type { FrontsBannerAdCollections } from '../types/commercial';
 
 /**
- * This file is temporary.
+ * This constant is temporary.
  *
  * When inserting advert slots into fronts pages, there are some containers in which
  * we do not want to insert slots above, to ensure good page aesthetics. An example is
@@ -15,7 +15,10 @@ import type { FrontsBannerAdCollections } from '../types/commercial';
  *
  * Contact Dominik Lander or the commercial dev team for more information.
  */
-
 export const frontsBannerExcludedCollections: FrontsBannerAdCollections = {
 	uk: ['Ukraine invasion'],
 };
+
+export const frontsBannerExcludedPages: string[] = [
+	'news/series/cotton-capital',
+];

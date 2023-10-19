@@ -1,5 +1,8 @@
 import type { MutableRefObject } from 'react';
-import { frontsBannerExcludedCollections } from '../../lib/frontsBannerExclusions';
+import {
+	frontsBannerExcludedCollections,
+	frontsBannerExcludedPages,
+} from '../../lib/frontsBannerExclusions';
 import {
 	decideFrontsBannerAdSlot,
 	decideMerchHighAndMobileAdSlots,
@@ -197,6 +200,42 @@ describe('decideFrontsBannerAdSlot', () => {
 			);
 
 			expect(result).toBeNull();
+		});
+
+		it('should return null if there is an exclusion for the page', () => {
+			frontsBannerExcludedPages.push('Excluded page');
+
+			const result = decideFrontsBannerAdSlot(
+				renderAds,
+				hasPageSkin,
+				numBannerAdsInserted,
+				showBannerAds,
+				index,
+				'Excluded page',
+				collectionName,
+				isInFrontsBannerTest,
+				[],
+			);
+
+			expect(result).toBeNull();
+		});
+
+		it('should NOT return null if there is not an exclusion for the page', () => {
+			frontsBannerExcludedPages.push('Excluded page');
+
+			const result = decideFrontsBannerAdSlot(
+				renderAds,
+				hasPageSkin,
+				numBannerAdsInserted,
+				showBannerAds,
+				index,
+				'Included page',
+				collectionName,
+				isInFrontsBannerTest,
+				[],
+			);
+
+			expect(result).not.toBeNull();
 		});
 
 		it('should return null if the maximum number of ads have been inserted', () => {

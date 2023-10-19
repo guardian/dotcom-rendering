@@ -2,8 +2,41 @@ import { Hide } from '@guardian/source-react-components';
 import { AdSlot } from '../../components/AdSlot.web';
 import { MAX_FRONTS_BANNER_ADS } from '../../lib/commercial-constants';
 import { frontsBannerAdCollections } from '../../lib/frontsBannerAbTestAdPositions';
-import { frontsBannerExcludedCollections } from '../../lib/frontsBannerExclusions';
+import {
+	frontsBannerExcludedCollections,
+	frontsBannerExcludedPages,
+} from '../../lib/frontsBannerExclusions';
 import { getMerchHighPosition } from '../../lib/getAdPositions';
+
+const isCollectionExclusionPresent = (
+	pageId: string,
+	collectionName: string | null,
+): boolean => {
+	// Tag Fronts collections don't have names, so no exclusions can be present.
+	if (!collectionName) {
+		return false;
+	}
+
+	return Boolean(
+		frontsBannerExcludedCollections[pageId]?.includes(collectionName),
+	);
+};
+
+/**
+ * There are some pages (e.g. /news/series/cotton-capital) and some
+ * collections (e.g.: "Ukraine invasion") that we don't want to show ads above.
+ * This is usually because we don't want to take the focus away from important content.
+ */
+const isExclusionPresent = (
+	pageId: string,
+	collectionName: string | null,
+): boolean => {
+	if (frontsBannerExcludedPages.includes(pageId)) {
+		return true;
+	}
+
+	return isCollectionExclusionPresent(pageId, collectionName);
+};
 
 export const decideMerchHighAndMobileAdSlots = (
 	renderAds: boolean,
@@ -120,7 +153,7 @@ export const decideFrontsBannerAdSlot = (
 		showBannerAds &&
 		numBannerAdsInserted.current < MAX_FRONTS_BANNER_ADS &&
 		index % 3 === 2 && // Insert above the 3rd, 6th, ..., container
-		!isCollectionExclusionPresent(pageId, collectionName)
+		!isExclusionPresent(pageId, collectionName)
 	) {
 		numBannerAdsInserted.current = numBannerAdsInserted.current + 1;
 
@@ -135,18 +168,4 @@ export const decideFrontsBannerAdSlot = (
 	}
 
 	return null;
-};
-
-const isCollectionExclusionPresent = (
-	pageId: string,
-	collectionName: string | null,
-): boolean => {
-	// Tag Fronts collections don't have names, so no exclusions can be present.
-	if (!collectionName) {
-		return false;
-	}
-
-	return Boolean(
-		frontsBannerExcludedCollections[pageId]?.includes(collectionName),
-	);
 };

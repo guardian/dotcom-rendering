@@ -79,7 +79,9 @@ const isToggleable = (
 			collection.displayName.toLowerCase() != 'headlines' &&
 			!isNavList(collection)
 		);
-	} else return index != 0 && !isNavList(collection);
+	}
+
+	return index != 0 && !isNavList(collection);
 };
 
 const decideLeftContent = (
