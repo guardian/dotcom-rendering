@@ -578,13 +578,16 @@ export const AdSlot = ({
 		case 'fronts-banner': {
 			const advertId = `fronts-banner-${index}`;
 			return (
-				<div css={frontsBannerAdTopContainerStyles}>
+				<div
+					className="top-fronts-banner-ad-container"
+					css={frontsBannerAdTopContainerStyles}
+				>
 					<div
 						className="ad-slot-container"
 						css={[
-							adContainerStyles,
 							frontsBannerAdContainerStyles,
 							hasPageskin && frontsBannerCollapseStyles,
+							adContainerStyles,
 						]}
 					>
 						<div
