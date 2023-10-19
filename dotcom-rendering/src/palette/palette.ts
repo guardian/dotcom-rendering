@@ -2,6 +2,7 @@
 
 import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
+import type { PaletteColours } from './types';
 
 // ----- Palette Functions ----- //
 
@@ -45,28 +46,6 @@ const StarRatingLight = (): string => sourcePalette.neutral[7];
 const StarRatingDark = (): string => sourcePalette.neutral[97];
 
 // ----- Palette ----- //
-
-/**
- * A template literal type used to make sure the keys of the palette use the
- * correct CSS custom property syntax.
- */
-type CSSCustomProperty = `--${string}`;
-/**
- * Ensures that all palette functions provide the same API, deriving a palette
- * colour from an {@linkcode ArticleFormat}.
- */
-type PaletteFunction = (f: ArticleFormat) => string;
-/**
- * Used to validate that the palette object always has the correct shape,
- * without changing its type.
- */
-type PaletteColours = Record<
-	CSSCustomProperty,
-	{
-		light: PaletteFunction;
-		dark: PaletteFunction;
-	}
->;
 
 /**
  * Maps palette colour names (which are also CSS custom property names) to
