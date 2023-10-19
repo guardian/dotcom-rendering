@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 import { css } from '@emotion/react';
-import { paletteDeclarations } from '../src/palette/palette';
+import { paletteDeclarations } from '../src/palette';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
 
 const headerCss = css`

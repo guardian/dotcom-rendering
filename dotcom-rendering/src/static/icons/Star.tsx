@@ -1,4 +1,4 @@
-import { palette } from '../../palette/palette';
+import { palette } from '../../palette';
 
 export const Star = ({
 	starId,

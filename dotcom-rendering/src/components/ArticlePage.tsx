@@ -6,7 +6,7 @@ import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
-import { paletteDeclarations } from '../palette/palette';
+import { paletteDeclarations } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
