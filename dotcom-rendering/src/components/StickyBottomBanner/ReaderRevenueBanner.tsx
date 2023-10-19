@@ -9,12 +9,8 @@ import type {
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-<<<<<<< HEAD
 import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
 import { useEffect, useState } from 'react';
-=======
-import { useEffect, useState } from 'react';
->>>>>>> f02ae776a (Correct useOnce usage when no dependencies provided)
 import { trackNonClickInteraction } from '../../client/ga/ga';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
@@ -325,10 +321,6 @@ const RemoteBanner = ({
 	});
 
 	useEffect(() => {
-		if (meta === undefined) {
-			return;
-		}
-
 		setAutomat();
 
 		window
@@ -343,7 +335,7 @@ const RemoteBanner = ({
 					'rr-banner',
 				);
 			});
-	}, [meta, module]);
+	}, [module]);
 
 	useOnce(() => {
 		const { componentType } = meta;
