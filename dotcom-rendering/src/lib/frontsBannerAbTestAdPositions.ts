@@ -1,3 +1,4 @@
+import type { FrontsBannerAdCollections } from '../types/commercial';
 /**
  * This file is temporary.
  *
@@ -9,15 +10,10 @@
  * inserted above it. At the time of this AB test, the setting does not yet exist.
  */
 
-type FrontsBannerAdCollections = {
-	[key: string]: string[];
-};
-
 export const frontsBannerAdCollections: FrontsBannerAdCollections = {
 	uk: [
 		'Spotlight',
 		'Opinion',
-		"Women's World Cup 2023",
 		'Sport',
 		'Around the world',
 		'Take part',
@@ -34,7 +30,6 @@ export const frontsBannerAdCollections: FrontsBannerAdCollections = {
 		'In pictures',
 	],
 	au: [
-		'Women’s World Cup 2023', // Apostrophe is intentionally U+2019 "’" instead of the more common ASCII character U+0060 "`",
 		'Spotlight',
 		'Opinion',
 		'Culture',
@@ -48,6 +43,14 @@ export const frontsBannerAdCollections: FrontsBannerAdCollections = {
 		'Culture',
 		'Around the world',
 		'Take part',
+	],
+	europe: [
+		'Spotlight',
+		'Opinion',
+		'Sport',
+		'Culture',
+		'Lifestyle',
+		'From our global editions',
 	],
 	'uk/sport': [
 		'News and features',
