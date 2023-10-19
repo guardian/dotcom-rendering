@@ -47,7 +47,6 @@ describe('decideFrontsBannerAdSlot', () => {
 	const targetedCollections = [
 		'Spotlight',
 		'Opinion',
-		"Women's World Cup 2023",
 		'Sport',
 		'Around the world',
 		'Take part',

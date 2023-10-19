@@ -14,7 +14,6 @@ export const frontsBannerAdCollections: FrontsBannerAdCollections = {
 	uk: [
 		'Spotlight',
 		'Opinion',
-		"Women's World Cup 2023",
 		'Sport',
 		'Around the world',
 		'Take part',
@@ -31,7 +30,6 @@ export const frontsBannerAdCollections: FrontsBannerAdCollections = {
 		'In pictures',
 	],
 	au: [
-		'Women’s World Cup 2023', // Apostrophe is intentionally U+2019 "’" instead of the more common ASCII character U+0060 "`",
 		'Spotlight',
 		'Opinion',
 		'Culture',
