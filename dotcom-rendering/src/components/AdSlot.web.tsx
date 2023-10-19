@@ -261,10 +261,6 @@ const frontsBannerAdContainerStyles = css`
 	width: 100%;
 	display: flex;
 	justify-content: center;
-
-	/* This stops the visual effect where the advert renders at the
-	   top of the ad slot, then is pushed down 24px when the label renders */
-	align-items: flex-end;
 `;
 
 const frontsBannerCollapseStyles = css`
