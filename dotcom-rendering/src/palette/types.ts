@@ -20,4 +20,4 @@ type PaletteColours = Record<
 	}
 >;
 
-export { PaletteColours };
+export type { PaletteColours };
