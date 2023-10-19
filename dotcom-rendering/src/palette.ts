@@ -41,6 +41,9 @@ const headlineBackgroundColourDark = ({ design }: ArticleFormat): string => {
 	}
 };
 
+const starRatingFillColourLight = (): string => sourcePalette.neutral[7];
+const starRatingFillColourDark = (): string => sourcePalette.neutral[97];
+
 // ----- Palette ----- //
 
 /**
@@ -81,6 +84,10 @@ const paletteColours = {
 	'--headline-background-colour': {
 		light: headlineBackgroundColourLight,
 		dark: headlineBackgroundColourDark,
+	},
+	'--star-rating': {
+		light: starRatingFillColourLight,
+		dark: starRatingFillColourDark,
 	},
 } satisfies PaletteColours;
 
