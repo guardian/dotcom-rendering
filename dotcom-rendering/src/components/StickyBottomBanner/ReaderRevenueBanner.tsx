@@ -9,6 +9,7 @@ import type {
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
 import { useState } from 'react';
 import { trackNonClickInteraction } from '../../client/ga/ga';
 import { submitComponentEvent } from '../../client/ophan/ophan';
@@ -294,7 +295,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 };
 
 export type BannerProps = {
-	meta: any;
+	meta: TestTracking;
 	module: ModuleData;
 	// eslint-disable-next-line react/no-unused-prop-types -- ESLint is wrong: it is used in ReaderRevenueBanner
 	fetchEmail?: () => Promise<string | null>;
@@ -320,10 +321,6 @@ const RemoteBanner = ({
 	});
 
 	useOnce(() => {
-		if (module === undefined || meta === undefined) {
-			return;
-		}
-
 		setAutomat();
 
 		window
