@@ -43,7 +43,6 @@ describe('decideFrontsBannerAdSlot', () => {
 	const index = 2;
 	const pageId = 'uk';
 	const collectionName = 'Sport';
-	const isInFrontsBannerTest = false;
 	const targetedCollections = [
 		'Spotlight',
 		'Opinion',
@@ -63,7 +62,6 @@ describe('decideFrontsBannerAdSlot', () => {
 			index,
 			pageId,
 			collectionName,
-			isInFrontsBannerTest,
 			targetedCollections,
 		);
 
@@ -79,7 +77,6 @@ describe('decideFrontsBannerAdSlot', () => {
 			index,
 			pageId,
 			collectionName,
-			isInFrontsBannerTest,
 			targetedCollections,
 		);
 
@@ -95,7 +92,6 @@ describe('decideFrontsBannerAdSlot', () => {
 			index,
 			pageId,
 			collectionName,
-			isInFrontsBannerTest,
 			targetedCollections,
 		);
 
@@ -111,7 +107,6 @@ describe('decideFrontsBannerAdSlot', () => {
 			index,
 			pageId,
 			collectionName,
-			isInFrontsBannerTest,
 			targetedCollections,
 		);
 
@@ -128,7 +123,6 @@ describe('decideFrontsBannerAdSlot', () => {
 				index,
 				pageId,
 				'Sport',
-				isInFrontsBannerTest,
 				targetedCollections,
 			);
 
@@ -144,7 +138,6 @@ describe('decideFrontsBannerAdSlot', () => {
 				index,
 				pageId,
 				'Not a collection',
-				isInFrontsBannerTest,
 				targetedCollections,
 			);
 
@@ -169,7 +162,6 @@ describe('decideFrontsBannerAdSlot', () => {
 					i,
 					'society',
 					collectionName,
-					isInFrontsBannerTest,
 					targetedCollections,
 				);
 
@@ -192,7 +184,6 @@ describe('decideFrontsBannerAdSlot', () => {
 				index,
 				'myPage',
 				'Excluded collection',
-				isInFrontsBannerTest,
 				[],
 			);
 
@@ -208,7 +199,6 @@ describe('decideFrontsBannerAdSlot', () => {
 				index,
 				'society',
 				collectionName,
-				isInFrontsBannerTest,
 				targetedCollections,
 			);
 
@@ -224,7 +214,6 @@ describe('decideFrontsBannerAdSlot', () => {
 				index,
 				'society',
 				collectionName,
-				isInFrontsBannerTest,
 				targetedCollections,
 			);
 
