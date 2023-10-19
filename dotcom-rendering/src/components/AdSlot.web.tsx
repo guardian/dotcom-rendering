@@ -257,10 +257,18 @@ const frontsBannerAdTopContainerStyles = css`
 `;
 
 const frontsBannerAdContainerStyles = css`
-	/* Native templates require a width (or min-width) to be explicitly set */
-	width: 100%;
 	display: flex;
 	justify-content: center;
+
+	/* Native templates require a width (or min-width) to be explicitly set */
+	width: ${breakpoints['wide']}px;
+	/* This is similar to fluid ads, except this class is applied using messenger */
+	&.ad-slot--full-width {
+		width: 100%;
+		.ad-slot {
+			max-width: 100%;
+		}
+	}
 `;
 
 const frontsBannerCollapseStyles = css`
@@ -270,16 +278,11 @@ const frontsBannerCollapseStyles = css`
 const frontsBannerAdStyles = css`
 	position: relative;
 	min-height: ${frontsBannerMinHeight}px;
-	max-width: ${breakpoints['wide']}px;
 	/* No banner should be taller than 600px */
 	max-height: ${600 + labelHeight}px;
+	max-width: ${breakpoints['wide']}px;
 	overflow: hidden;
 	padding-bottom: ${frontsBannerPaddingHeight}px;
-
-	/* This is similar to fluid ads, except this class is applied using messenger */
-	&.ad-slot--full-width {
-		max-width: 100%;
-	}
 `;
 
 const articleEndAdStyles = css`
