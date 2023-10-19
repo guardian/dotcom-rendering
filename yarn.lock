@@ -3192,10 +3192,10 @@
     read-pkg-up "7.0.1"
     yargs "^17.6.2"
 
-"@guardian/commercial@0.0.0-beta-20231018123527":
-  version "0.0.0-beta-20231018123527"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-0.0.0-beta-20231018123527.tgz#9b6ca40d169f961814f3413883598bfe7579206f"
-  integrity sha512-adFgYwMbbj5Ipb+Fx0E/KRjULLOThjTC9mgE6uhaqsUtqEF2KRYquQUpLZQj6F/pYOWNPNR9Y6lV4lYPfIGZPw==
+"@guardian/commercial@11.17.0":
+  version "11.17.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-11.17.0.tgz#833eab487be5d864157d3f124b48dcf3acfb12ad"
+  integrity sha512-6aSGaYWyav9wDRyUERkCl69n2LDsFsHntqthftGzZHPESjTLGa48owWULjsYfyNeq3i+ALSVAOq8a5UMYF0obA==
   dependencies:
     "@changesets/cli" "^2.26.2"
     "@octokit/core" "^4.0.5"
@@ -15083,11 +15083,11 @@ preact@10.15.1:
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.15.1.tgz#a1de60c9fc0c79a522d969c65dcaddc5d994eede"
   integrity sha512-qs2ansoQEwzNiV5eAcRT1p1EC/dmEzaATVDJNiB3g2sRDWdA7b7MurXdJjB2+/WQktGWZwxvDrnuRFbWuIr64g==
 
-"prebid.js@github:guardian/prebid.js#ddf4251":
+prebid.js@guardian/prebid.js#ddf4251:
   version "7.54.5"
   resolved "https://codeload.github.com/guardian/prebid.js/tar.gz/ddf4251b19c95878af00f640211c0c31ac3e7ac2"
   dependencies:
-    "@babel/core" "^7.23.2"
+    "@babel/core" "^7.16.7"
     "@babel/plugin-transform-runtime" "^7.18.9"
     "@babel/preset-env" "^7.16.8"
     "@babel/runtime" "^7.18.9"
