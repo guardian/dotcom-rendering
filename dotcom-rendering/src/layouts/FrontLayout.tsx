@@ -125,7 +125,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: {
 			switches,
-			abTests,
 			isPaidContent,
 			hasPageSkin: hasPageSkinConfig,
 			pageId,
@@ -138,15 +137,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const showBannerAds = !!switches.frontsBannerAds;
 
-	const isInFrontsBannerTest =
-		!!switches.frontsBannerAdsDcr &&
-		abTests.frontsBannerAdsDcrVariant === 'variant' &&
-		Object.keys(frontsBannerAdCollections).includes(pageId);
-
-	const frontsBannerTargetedCollections =
-		isInFrontsBannerTest || showBannerAds
-			? frontsBannerAdCollections[pageId]
-			: [];
+	const frontsBannerTargetedCollections = showBannerAds
+		? frontsBannerAdCollections[pageId]
+		: [];
 
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
@@ -162,7 +155,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const numBannerAdsInserted = useRef(0);
 
-	const renderMpuAds = renderAds && !isInFrontsBannerTest && !showBannerAds;
+	const renderMpuAds = renderAds && !showBannerAds;
 
 	const showMostPopular =
 		front.config.switches.deeplyRead &&
@@ -362,7 +355,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										index,
 										pageId,
 										collection.displayName,
-										isInFrontsBannerTest,
 										frontsBannerTargetedCollections,
 									)}
 									{!!trail.embedUri && (
@@ -426,7 +418,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 									pageId,
 									collection.displayName,
-									isInFrontsBannerTest,
 									frontsBannerTargetedCollections,
 								)}
 								<FrontSection
@@ -503,7 +494,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 									pageId,
 									collection.displayName,
-									isInFrontsBannerTest,
 									frontsBannerTargetedCollections,
 								)}
 								<LabsSection
@@ -572,7 +562,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 									pageId,
 									collection.displayName,
-									isInFrontsBannerTest,
 									frontsBannerTargetedCollections,
 								)}
 								<Section
@@ -649,7 +638,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								index,
 								pageId,
 								collection.displayName,
-								isInFrontsBannerTest,
 								frontsBannerTargetedCollections,
 							)}
 							<FrontSection

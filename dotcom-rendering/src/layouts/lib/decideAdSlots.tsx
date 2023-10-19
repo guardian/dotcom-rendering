@@ -1,9 +1,13 @@
 import { Hide } from '@guardian/source-react-components';
 import { AdSlot } from '../../components/AdSlot.web';
-import { MAX_FRONTS_BANNER_ADS } from '../../lib/commercial-constants';
 import { frontsBannerAdCollections } from '../../lib/frontsBannerAbTestAdPositions';
 import { frontsBannerExcludedCollections } from '../../lib/frontsBannerExclusions';
 import { getMerchHighPosition } from '../../lib/getAdPositions';
+
+/**
+ * The maximum number of fronts-banner ads that can be inserted on any front.
+ */
+export const MAX_FRONTS_BANNER_ADS = 6;
 
 export const decideMerchHighAndMobileAdSlots = (
 	renderAds: boolean,
@@ -12,7 +16,7 @@ export const decideMerchHighAndMobileAdSlots = (
 	isPaidContent: boolean | undefined,
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
-	showBannerAds?: boolean,
+	showBannerAds: boolean,
 ) => {
 	if (!renderAds) return null;
 
@@ -64,39 +68,18 @@ export const decideFrontsBannerAdSlot = (
 	index: number,
 	pageId: string,
 	collectionName: string | null,
-	isInFrontsBannerTest?: boolean,
 	targetedCollections?: string[],
 ) => {
 	const isFirstContainer = index === 0;
-	if (!renderAds || hasPageSkin || isFirstContainer) {
+	if (!renderAds || hasPageSkin || isFirstContainer || !showBannerAds) {
 		return null;
 	}
 
-	// The fronts banner 0% AB test has concluded. However, it still exists so that
-	// the commercial team can opt in and test ad campaigns against the live site.
-	// In this test, fronts-banner ads are inserted above specific collections and pages.
-	//
-	// This code block can be deleted when fronts banner ads are live and the FrontsBannerTest is removed.
-	if (isInFrontsBannerTest && collectionName) {
-		if (targetedCollections?.includes(collectionName)) {
-			numBannerAdsInserted.current = numBannerAdsInserted.current + 1;
-
-			return (
-				<AdSlot
-					data-print-layout="hide"
-					position="fronts-banner"
-					index={numBannerAdsInserted.current}
-					hasPageskin={hasPageSkin}
-				/>
-			);
-		}
-
-		// If the showBannerAds feature switch is on and the page was included in the AB test, then
-		// show ads above the collections as specified in that AB test. One reason is that on /uk
-		// the "Ukraine invasion" collection is third and we don't want to place an ad above this
-		// container, which means we don't get a banner ad until the 6th collection.
-	} else if (
-		showBannerAds &&
+	// If the showBannerAds feature switch is on and the page was included in the AB test, then
+	// show ads above the collections as specified in that AB test. One reason is that on /uk
+	// the "Ukraine invasion" collection is third and we don't want to place an ad above this
+	// container, which means we don't get a banner ad until the 6th collection.
+	if (
 		collectionName &&
 		Object.keys(frontsBannerAdCollections).includes(pageId)
 	) {
@@ -117,9 +100,8 @@ export const decideFrontsBannerAdSlot = (
 	// Insert an ad after every third collection. Warning: may skip an ad if a collection isn't rendered.
 	// e.g. if the 15th collection doesn't render, an ad is shown above the 12th and the 18th, skipping the 15th.
 	else if (
-		showBannerAds &&
 		numBannerAdsInserted.current < MAX_FRONTS_BANNER_ADS &&
-		index % 3 === 2 && // Insert above the 3rd, 6th, ..., container
+		(index + 1) % 3 === 0 && // Insert ad above the 3rd, 6th, ..., container. Index starts at zero.
 		!isCollectionExclusionPresent(pageId, collectionName)
 	) {
 		numBannerAdsInserted.current = numBannerAdsInserted.current + 1;
