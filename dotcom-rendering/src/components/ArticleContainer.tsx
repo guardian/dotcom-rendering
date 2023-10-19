@@ -126,12 +126,16 @@ const adStyles = css`
 		${from.desktop} {
 			float: right;
 			max-width: 300px;
-			margin-right: -318px;
+			margin-right: -330px;
 			background-color: transparent;
 		}
 
+		${from.leftCol} {
+			margin-right: -310px;
+		}
+
 		${from.wide} {
-			margin-right: -398px;
+			margin-right: -380px;
 		}
 	}
 

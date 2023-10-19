@@ -22,12 +22,6 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 };
 
-const style = css`
-	display: flex;
-	gap: 5px;
-	padding-bottom: ${space[2]}px;
-`;
-
 const horizontal = css`
 	flex-direction: row;
 `;
@@ -121,21 +115,22 @@ export const LatestLinks = ({
 			: palette.neutral[86]};
 	`;
 
-	const li = [
-		linkStyles,
-		isDynamo
-			? css`
-					max-height: calc(5px + 4 * ${lineHeights.regular}em);
-			  `
-			: css`
-					max-height: calc(4 * ${lineHeights.regular}em);
-			  `,
-	];
+	const height = isDynamo
+		? `calc(5px + 4 * ${lineHeights.regular}em)`
+		: `calc(4 * ${lineHeights.regular}em)`;
+
+	const ulStyle = css`
+		display: flex;
+		gap: 5px;
+		padding-bottom: ${space[2]}px;
+		box-sizing: border-box;
+		height: ${height};
+	`;
 
 	return (
 		<ul
 			css={[
-				style,
+				ulStyle,
 				revealStyles,
 				isDynamo || direction === 'horizontal' ? horizontal : vertical,
 				css`
@@ -152,7 +147,11 @@ export const LatestLinks = ({
 								css={[dividerStyles, dividerColour]}
 							></li>
 						)}
-						<li key={block.id} css={li} className={'reveal'}>
+						<li
+							key={block.id}
+							css={linkStyles}
+							className={'reveal'}
+						>
 							<WithLink
 								linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
 								isDynamo={isDynamo}
@@ -171,11 +170,11 @@ export const LatestLinks = ({
 				))
 			) : (
 				<>
-					<li css={li} />
+					<li css={linkStyles} />
 					<li css={[dividerStyles, transparent]} />
-					<li css={li} />
+					<li css={linkStyles} />
 					<li css={[dividerStyles, transparent]} />
-					<li css={li} />
+					<li css={linkStyles} />
 				</>
 			)}
 		</ul>

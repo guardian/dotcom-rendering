@@ -147,6 +147,7 @@ module.exports = ({ build, sessionId }) => ({
 			  ]
 			: []),
 	],
+	externals: getExternalModules(build),
 	module: {
 		rules: [
 			{
@@ -177,3 +178,7 @@ module.exports.babelExclude = {
 };
 
 module.exports.getLoaders = getLoaders;
+
+// We are making "ophan-tracker-js" external to the apps bundle because we never expect to use it in apps pages. Tracking is done natively.
+const getExternalModules = (build) =>
+	build === 'apps' ? { 'ophan-tracker-js': 'ophan-tracker-js' } : {};
