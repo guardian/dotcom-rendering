@@ -73,10 +73,9 @@ export const DarkModeMessage = () => (
 				grid-column: centre-column;
 			`}
 		>
-			As part of this beta release, we are currently lacking support for
-			“dark mode.” We hope to make it available in the coming weeks. In
-			the meantime, you can use the main app or see articles in “light
-			mode.”
+			As part of this beta release, some articles are currently lacking
+			support for dark mode. We are working to fix this in the next beta
+			release.
 		</p>
 	</aside>
 );
