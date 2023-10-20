@@ -8,6 +8,7 @@ import { CardCommentCount } from './CardCommentCount.importable';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
+import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { SetABTests } from './SetABTests.importable';
@@ -153,6 +154,22 @@ describe('Island: server-side rendering', () => {
 					webURL=""
 					mostRecentBlockId=""
 					hasPinnedPost={false}
+				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('LiveBlogEpic', () => {
+		expect(() =>
+			renderToString(
+				<LiveBlogEpic
+					sectionId={''}
+					shouldHideReaderRevenue={false}
+					isPaidContent={false}
+					tags={[]}
+					contributionsServiceUrl={''}
+					pageId={''}
+					keywordIds={''}
 				/>,
 			),
 		).not.toThrow();
