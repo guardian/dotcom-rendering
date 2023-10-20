@@ -11,5 +11,5 @@ import { useShouldAdapt } from '../lib/useShouldAdapt';
 export const FooterLabel = () => {
 	const adapted = useShouldAdapt();
 
-	return adapted ? <>(modern, adapted)</> : <>(modern)</>;
+	return adapted ? <>(dcr, adapted)</> : <>(dcr)</>;
 };
