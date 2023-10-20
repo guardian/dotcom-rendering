@@ -1,8 +1,8 @@
 import { render, waitFor } from '@testing-library/react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 import { ConfigProvider } from './ConfigContext';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 const shouldHideSupportMessaging: {
 	[key: string]: any;

@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
-import { ProfileAtom } from './ProfileAtom.importable';
 import { ConfigProvider } from './ConfigContext';
+import { ProfileAtom } from './ProfileAtom.importable';
 
 const format: ArticleFormat = {
 	theme: Pillar.News,

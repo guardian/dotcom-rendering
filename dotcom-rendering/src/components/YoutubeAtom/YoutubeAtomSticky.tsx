@@ -6,8 +6,8 @@ import detectMobile from 'is-mobile';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import { useIsInView } from '../../lib/useIsInView';
-import type { VideoEventKey } from './YoutubeAtom';
 import { useConfig } from '../ConfigContext';
+import type { VideoEventKey } from './YoutubeAtom';
 
 const buttonStyles = css`
 	position: absolute;
@@ -168,8 +168,6 @@ export const YoutubeAtomSticky = ({
 			msg: 'Close',
 		});
 
-		const { renderingTarget } = useConfig();
-
 		// submit a 'close' event to Ophan
 		void submitComponentEvent(
 			{
@@ -249,7 +247,7 @@ export const YoutubeAtomSticky = ({
 				renderingTarget,
 			);
 		}
-	}, [isSticky, stickEventSent, videoId, eventEmitters]);
+	}, [isSticky, stickEventSent, videoId, eventEmitters, renderingTarget]);
 
 	/**
 	 * useEffect for mobile only sticky overlay

@@ -1,6 +1,6 @@
 import { startPerformanceMeasure } from '@guardian/libs';
 import { getOphan } from '../client/ophan/ophan';
-import { RenderingTarget } from '../types/renderingTarget';
+import type { RenderingTarget } from '../types/renderingTarget';
 
 export type MaybeFC = React.FC | null;
 type ShowMessage<T> = (meta: T) => MaybeFC;

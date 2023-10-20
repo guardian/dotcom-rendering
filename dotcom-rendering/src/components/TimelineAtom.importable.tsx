@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import { body, palette, remSpace, space } from '@guardian/source-foundations';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { TimelineAtomType, TimelineEvent } from '../types/content';
+import { useConfig } from './ConfigContext';
 import { Body } from './ExpandableAtom/Body';
 import { Container } from './ExpandableAtom/Container';
 import { Footer } from './ExpandableAtom/Footer';
-import { useConfig } from './ConfigContext';
 
 const Snippet = css`
 	:not(:last-child) {

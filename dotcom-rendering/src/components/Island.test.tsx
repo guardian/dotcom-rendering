@@ -5,6 +5,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { CardCommentCount } from './CardCommentCount.importable';
+import { ConfigProvider } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
@@ -12,7 +13,6 @@ import { Liveness } from './Liveness.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { SetABTests } from './SetABTests.importable';
 import { Snow } from './Snow.importable';
-import { ConfigProvider } from './ConfigContext';
 
 // Type tests
 // Test that impossible prop combinations are caught by TypeScript.

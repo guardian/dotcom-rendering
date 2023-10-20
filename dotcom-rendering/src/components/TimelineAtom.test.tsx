@@ -1,8 +1,8 @@
 import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { noTimelineEventsStory } from '../../fixtures/manual/timelineAtom';
-import { TimelineAtom } from './TimelineAtom.importable';
 import { ConfigProvider } from './ConfigContext';
+import { TimelineAtom } from './TimelineAtom.importable';
 
 describe('TimelineAtom', () => {
 	it('should render', () => {

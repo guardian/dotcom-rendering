@@ -1,5 +1,6 @@
 import { cmp } from '@guardian/consent-management-platform';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
+import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
 import type { SignInGateProps } from '../types';
 import {
@@ -18,7 +19,6 @@ import {
 	signInHeader,
 	signInLink,
 } from './shared';
-import { useConfig } from '../../ConfigContext';
 
 export const SignInGateMain = ({
 	signInUrl,

@@ -19,6 +19,7 @@ import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 import {
 	BrazeBanner,
 	canShowBrazeBanner,
@@ -33,7 +34,6 @@ import type {
 	BannerProps,
 	CanShowFunctionType,
 } from './StickyBottomBanner/ReaderRevenueBanner';
-import { useConfig } from './ConfigContext';
 
 type Props = {
 	contentType: string;

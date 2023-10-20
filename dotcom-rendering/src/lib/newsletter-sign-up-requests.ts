@@ -1,6 +1,6 @@
 import type { OphanAction } from '@guardian/libs';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { RenderingTarget } from '../types/renderingTarget';
+import type { RenderingTarget } from '../types/renderingTarget';
 
 const isServer = typeof window === 'undefined';
 

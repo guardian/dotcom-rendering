@@ -8,6 +8,7 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
+import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
 import type { Product, SignInGateProps, UserType } from '../types';
 import {
@@ -17,7 +18,6 @@ import {
 	signInGateContainer,
 } from './shared';
 import { SignInGateMain } from './SignInGateMain';
-import { useConfig } from '../../ConfigContext';
 
 const personalisedHeadingStyles = css`
 	${headline.small({ fontWeight: 'bold' })};
@@ -175,6 +175,8 @@ export const SignInGateMainCheckoutComplete = ({
 	isMandatory = false,
 	checkoutCompleteCookieData,
 }: SignInGateProps) => {
+	const { renderingTarget } = useConfig();
+
 	// There is a type check above which means this shouldn't be
 	// possible to be undefined here, so this is just handling
 	// the fact that the type is optional.
@@ -194,8 +196,6 @@ export const SignInGateMainCheckoutComplete = ({
 		);
 	}
 	const { userType, product } = checkoutCompleteCookieData;
-
-	const { renderingTarget } = useConfig();
 
 	// send new/guest userType to the /register page instead of /signin
 	const personaliseSignInURl = (url: string): string => {

@@ -323,6 +323,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 		link.notifications,
 		hasSentViewEvent,
 		link.id,
+		renderingTarget,
 	]);
 
 	useOnce(() => {

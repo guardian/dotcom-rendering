@@ -1,8 +1,8 @@
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { useConfig } from './ConfigContext';
 import { Body } from './ExpandableAtom/Body';
 import { Container } from './ExpandableAtom/Container';
 import { Footer } from './ExpandableAtom/Footer';
-import { useConfig } from './ConfigContext';
 
 export type QandaAtomProps = {
 	id: string;

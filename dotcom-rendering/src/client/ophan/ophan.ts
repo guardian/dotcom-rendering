@@ -7,7 +7,7 @@ import type {
 } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import type { ServerSideTests } from '../../types/config';
-import { RenderingTarget } from '../../types/renderingTarget';
+import type { RenderingTarget } from '../../types/renderingTarget';
 
 export type OphanRecordFunction = (
 	event: { [key: string]: unknown } & {

@@ -18,9 +18,9 @@ import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
 import { useHydrated } from '../lib/useHydrated';
-import { Placeholder } from './Placeholder';
-import { RenderingTarget } from '../types/renderingTarget';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
+import { Placeholder } from './Placeholder';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the

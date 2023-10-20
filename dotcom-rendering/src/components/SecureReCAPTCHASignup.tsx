@@ -18,7 +18,7 @@ import { useRef, useState } from 'react';
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { RenderingTarget } from '../types/renderingTarget';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,

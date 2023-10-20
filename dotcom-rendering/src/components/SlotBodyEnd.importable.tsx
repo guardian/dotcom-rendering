@@ -18,6 +18,7 @@ import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
 import { AdSlot } from './AdSlot.web';
+import { useConfig } from './ConfigContext';
 import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 import {
 	canShowReaderRevenueEpic,
@@ -27,7 +28,6 @@ import type {
 	CanShowData as RRCanShowData,
 	EpicConfig as RREpicConfig,
 } from './SlotBodyEnd/ReaderRevenueEpic';
-import { useConfig } from './ConfigContext';
 
 type Props = {
 	contentType: string;

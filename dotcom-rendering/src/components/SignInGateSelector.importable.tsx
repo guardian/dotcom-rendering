@@ -7,6 +7,7 @@ import { useOnce } from '../lib/useOnce';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import {
 	submitViewEventTracking,
@@ -22,7 +23,6 @@ import type {
 	CurrentSignInGateABTest,
 	SignInGateComponent,
 } from './SignInGate/types';
-import { useConfig } from './ConfigContext';
 
 type Props = {
 	contentType: string;
@@ -125,7 +125,7 @@ const ShowSignInGate = ({
 			},
 			renderingTarget,
 		);
-	}, [abTest, componentId]);
+	}, [abTest, componentId, renderingTarget]);
 
 	// some sign in gate ab test variants may not need to show a gate
 	// therefore the gate is optional

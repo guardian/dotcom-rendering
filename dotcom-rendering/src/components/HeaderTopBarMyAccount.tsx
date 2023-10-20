@@ -18,10 +18,10 @@ import type {
 } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import ProfileIcon from '../static/icons/profile.svg';
+import type { RenderingTarget } from '../types/renderingTarget';
+import { useConfig } from './ConfigContext';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
-import { RenderingTarget } from '../types/renderingTarget';
-import { useConfig } from './ConfigContext';
 
 interface MyAccountProps {
 	mmaUrl: string;

@@ -1,10 +1,10 @@
+import type { RenderingTarget } from '../../types/renderingTarget';
 import {
 	abTestPayload,
 	getOphan,
 	recordExperiences,
 	recordPerformance,
 } from './ophan';
-import { RenderingTarget } from '../../types/renderingTarget';
 
 export const recordInitialPageEvents = async (
 	renderingTarget: RenderingTarget,

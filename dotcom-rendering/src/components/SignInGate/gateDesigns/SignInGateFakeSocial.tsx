@@ -9,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
+import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
 import type { SignInGateProps } from '../types';
 import {
@@ -25,7 +26,6 @@ import {
 	signInGateContainer,
 	signInLink,
 } from './shared';
-import { useConfig } from '../../ConfigContext';
 
 const heading = css`
 	${headline.small({ fontWeight: 'bold' })};

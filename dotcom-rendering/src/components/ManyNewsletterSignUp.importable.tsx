@@ -18,11 +18,11 @@ import {
 	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
+import { useConfig } from './ConfigContext';
 import { Flex } from './Flex';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard';
 import { Section } from './Section';
-import { useConfig } from './ConfigContext';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed' | 'InvalidEmail';

@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
 import { useIsInView } from '../lib/useIsInView';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
-import { RenderingTarget } from '../types/renderingTarget';
 
 const pinnedPost: HTMLElement | null = !isServer
 	? window.document.querySelector('[data-gu-marker=pinned-post]')
@@ -141,7 +141,7 @@ export const EnhancePinnedPost = () => {
 				handleClickTracking(renderingTarget),
 			);
 		};
-	}, []);
+	}, [renderingTarget]);
 
 	// calculate duration when user is viewing pinned post
 	// and emit ophan events when the pinned post goes out of view
@@ -171,6 +171,6 @@ export const EnhancePinnedPost = () => {
 				);
 			}
 		}
-	}, [isInView, hasBeenSeen]);
+	}, [isInView, hasBeenSeen, renderingTarget]);
 	return null;
 };

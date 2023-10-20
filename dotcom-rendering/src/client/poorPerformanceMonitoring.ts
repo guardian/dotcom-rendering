@@ -1,6 +1,6 @@
 import { log } from '@guardian/libs';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { recordExperiences } from './ophan/ophan';
-import { RenderingTarget } from '../types/renderingTarget';
 
 const logPerformanceInfo = (name: string, data?: unknown) =>
 	log('openJournalism', '⏱', name, data);

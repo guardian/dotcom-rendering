@@ -15,8 +15,8 @@ import { submitComponentEvent } from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
 import { CardPicture } from './CardPicture';
-import { NewsletterDetail } from './NewsletterDetail';
 import { useConfig } from './ConfigContext';
+import { NewsletterDetail } from './NewsletterDetail';
 
 interface Props {
 	newsletter: Newsletter;
@@ -178,7 +178,13 @@ export const NewsletterCard = ({
 			},
 			renderingTarget,
 		);
-	}, [cardPosition, carouselPosition, groupTitle, newsletter.identityName]);
+	}, [
+		cardPosition,
+		carouselPosition,
+		groupTitle,
+		newsletter.identityName,
+		renderingTarget,
+	]);
 
 	useEffect(() => {
 		if (hasBeenSeen && !haveReportedBeingSeen) {

@@ -1,8 +1,8 @@
 import { log } from '@guardian/libs';
 import { isServer } from '../lib/isServer';
 import { setSchedulerPriorityLastStartTime } from '../lib/scheduler';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { recordExperiences } from './ophan/ophan';
-import { RenderingTarget } from '../types/renderingTarget';
 
 /**
  * Whether we should adapt the current page to address poor performance issues.

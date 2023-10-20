@@ -11,6 +11,7 @@ import {
 } from '@guardian/braze-components/logic';
 import { log, startPerformanceMeasure, storage } from '@guardian/libs';
 import { getOphan } from '../../client/ophan/ophan';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import {
 	clearHasCurrentBrazeUser,
 	hasCurrentBrazeUser,
@@ -18,7 +19,6 @@ import {
 } from '../hasCurrentBrazeUser';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import { getInitialisedAppboy } from './initialiseAppboy';
-import { RenderingTarget } from '../../types/renderingTarget';
 
 const maybeWipeUserData = async (
 	apiKey?: string,

@@ -143,7 +143,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 				renderingTarget,
 			);
 		}
-	}, [hasBeenSeen, meta]);
+	}, [hasBeenSeen, meta, renderingTarget]);
 
 	const componentName = meta.dataFromBraze.componentName;
 	if (!componentName) return null;
