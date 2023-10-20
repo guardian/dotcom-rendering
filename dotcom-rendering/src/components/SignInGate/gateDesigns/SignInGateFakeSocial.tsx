@@ -25,6 +25,7 @@ import {
 	signInGateContainer,
 	signInLink,
 } from './shared';
+import { useConfig } from '../../ConfigContext';
 
 const heading = css`
 	${headline.small({ fontWeight: 'bold' })};
@@ -292,6 +293,8 @@ export const SignInGateFakeSocial = ({
 	const verticalButtonStack =
 		abTest?.variant === 'fake-social-variant-vertical';
 
+	const { renderingTarget } = useConfig();
+
 	return (
 		<div css={signInGateContainer} data-cy="sign-in-gate-fake-social">
 			<style>{hideElementsCss}</style>
@@ -315,7 +318,12 @@ export const SignInGateFakeSocial = ({
 					css={privacyLink}
 					onClick={() => {
 						cmp.showPrivacyManager();
-						trackLink(ophanComponentId, 'privacy', abTest);
+						trackLink(
+							ophanComponentId,
+							'privacy',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					privacy settings
@@ -331,7 +339,12 @@ export const SignInGateFakeSocial = ({
 					size="small"
 					href={registerUrl}
 					onClick={() => {
-						trackLink(ophanComponentId, 'register-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'register-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Register for free
@@ -345,7 +358,12 @@ export const SignInGateFakeSocial = ({
 					size="small"
 					onClick={() => {
 						dismissGate();
-						trackLink(ophanComponentId, 'not-now', abTest);
+						trackLink(
+							ophanComponentId,
+							'not-now',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					I’ll do it later
@@ -360,7 +378,12 @@ export const SignInGateFakeSocial = ({
 					css={[signInLink, inlineLink, fakeSocialSignInLink]}
 					href={signInUrl}
 					onClick={() => {
-						trackLink(ophanComponentId, 'sign-in-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'sign-in-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Sign In
@@ -386,7 +409,12 @@ export const SignInGateFakeSocial = ({
 					css={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
-						trackLink(ophanComponentId, 'facebook-button', abTest);
+						trackLink(
+							ophanComponentId,
+							'facebook-button',
+							renderingTarget,
+							abTest,
+						);
 					}}
 					iconSide="left"
 					icon={facebookIcon}
@@ -401,7 +429,12 @@ export const SignInGateFakeSocial = ({
 					css={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
-						trackLink(ophanComponentId, 'google-button', abTest);
+						trackLink(
+							ophanComponentId,
+							'google-button',
+							renderingTarget,
+							abTest,
+						);
 					}}
 					iconSide="left"
 					icon={googleIcon}
@@ -416,7 +449,12 @@ export const SignInGateFakeSocial = ({
 					css={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
-						trackLink(ophanComponentId, 'apple-button', abTest);
+						trackLink(
+							ophanComponentId,
+							'apple-button',
+							renderingTarget,
+							abTest,
+						);
 					}}
 					iconSide="left"
 					icon={appleIcon}
@@ -430,7 +468,12 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'how-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'how-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Why register & how does it help?
@@ -440,7 +483,12 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'why-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'why-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					How will my information & data be used?
@@ -450,7 +498,12 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/help/identity-faq`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'help-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'help-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Get help with registering or signing in.

@@ -22,6 +22,7 @@ import type {
 	CurrentSignInGateABTest,
 	SignInGateComponent,
 } from './SignInGate/types';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	contentType: string;
@@ -113,12 +114,17 @@ const ShowSignInGate = ({
 	checkoutCompleteCookieData,
 	personaliseSignInGateAfterCheckoutSwitch,
 }: ShowSignInGateProps) => {
+	const { renderingTarget } = useConfig();
+
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
-		submitViewEventTracking({
-			component: withComponentId(componentId),
-			abTest,
-		});
+		submitViewEventTracking(
+			{
+				component: withComponentId(componentId),
+				abTest,
+			},
+			renderingTarget,
+		);
 	}, [abTest, componentId]);
 
 	// some sign in gate ab test variants may not need to show a gate

@@ -1,5 +1,6 @@
 import type { OphanAction } from '@guardian/libs';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { RenderingTarget } from '../types/renderingTarget';
 
 const isServer = typeof window === 'undefined';
 
@@ -129,6 +130,7 @@ const trackingEventDescriptionToOphanAction = (
 export const reportTrackingEvent = (
 	componentName: string,
 	eventDescription: TrackingEventDescription,
+	renderingTarget: RenderingTarget,
 	extraDetails?: Partial<
 		Record<string, string | string[] | number | number[]>
 	>,
@@ -138,12 +140,15 @@ export const reportTrackingEvent = (
 		message: eventDescription,
 		timestamp: Date.now(),
 	};
-	void submitComponentEvent({
-		component: {
-			componentType: 'NEWSLETTER_SUBSCRIPTION',
-			id: componentName,
+	void submitComponentEvent(
+		{
+			component: {
+				componentType: 'NEWSLETTER_SUBSCRIPTION',
+				id: componentName,
+			},
+			action: trackingEventDescriptionToOphanAction(eventDescription),
+			value: JSON.stringify(payload),
 		},
-		action: trackingEventDescriptionToOphanAction(eventDescription),
-		value: JSON.stringify(payload),
-	});
+		renderingTarget,
+	);
 };

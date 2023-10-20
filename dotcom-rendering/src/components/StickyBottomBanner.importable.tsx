@@ -33,6 +33,7 @@ import type {
 	BannerProps,
 	CanShowFunctionType,
 } from './StickyBottomBanner/ReaderRevenueBanner';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	contentType: string;
@@ -240,7 +241,8 @@ export const StickyBottomBanner = ({
 	puzzleBannerSwitch: boolean;
 	isSensitive: boolean;
 }) => {
-	const { brazeMessages } = useBraze(idApiUrl);
+	const { renderingTarget } = useConfig();
+	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
 
 	const asyncCountryCode = getLocaleCode();
 	const authStatus = useAuthStatus();
@@ -317,7 +319,7 @@ export const StickyBottomBanner = ({
 			name: 'banner',
 		};
 
-		pickMessage(bannerConfig)
+		pickMessage(bannerConfig, renderingTarget)
 			.then((PickedBanner: () => MaybeFC) =>
 				setSelectedBanner(PickedBanner),
 			)

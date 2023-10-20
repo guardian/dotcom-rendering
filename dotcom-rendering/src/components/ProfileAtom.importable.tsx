@@ -3,6 +3,7 @@ import { submitComponentEvent } from '../client/ophan/ophan';
 import { Body } from './ExpandableAtom/Body';
 import { Container } from './ExpandableAtom/Container';
 import { Footer } from './ExpandableAtom/Footer';
+import { useConfig } from './ConfigContext';
 
 export interface ProfileAtomProps {
 	id: string;
@@ -28,6 +29,8 @@ export const ProfileAtom = ({
 	dislikeHandler,
 	expandCallback,
 }: ProfileAtomProps) => {
+	const { renderingTarget } = useConfig();
+
 	return (
 		<Container
 			id={id}
@@ -39,15 +42,18 @@ export const ProfileAtom = ({
 			expandCallback={
 				expandCallback ??
 				(() =>
-					submitComponentEvent({
-						component: {
-							componentType: 'PROFILE_ATOM',
-							id,
-							products: [],
-							labels: [],
+					submitComponentEvent(
+						{
+							component: {
+								componentType: 'PROFILE_ATOM',
+								id,
+								products: [],
+								labels: [],
+							},
+							action: 'EXPAND',
 						},
-						action: 'EXPAND',
-					}))
+						renderingTarget,
+					))
 			}
 		>
 			<Body html={html} image={image} credit={credit} format={format} />
@@ -56,28 +62,34 @@ export const ProfileAtom = ({
 				dislikeHandler={
 					dislikeHandler ??
 					(() =>
-						submitComponentEvent({
-							component: {
-								componentType: 'PROFILE_ATOM',
-								id,
-								products: [],
-								labels: [],
+						submitComponentEvent(
+							{
+								component: {
+									componentType: 'PROFILE_ATOM',
+									id,
+									products: [],
+									labels: [],
+								},
+								action: 'DISLIKE',
 							},
-							action: 'DISLIKE',
-						}))
+							renderingTarget,
+						))
 				}
 				likeHandler={
 					likeHandler ??
 					(() =>
-						submitComponentEvent({
-							component: {
-								componentType: 'PROFILE_ATOM',
-								id,
-								products: [],
-								labels: [],
+						submitComponentEvent(
+							{
+								component: {
+									componentType: 'PROFILE_ATOM',
+									id,
+									products: [],
+									labels: [],
+								},
+								action: 'LIKE',
 							},
-							action: 'LIKE',
-						}))
+							renderingTarget,
+						))
 				}
 			></Footer>
 		</Container>

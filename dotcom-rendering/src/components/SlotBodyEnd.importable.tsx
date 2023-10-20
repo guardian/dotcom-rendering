@@ -27,6 +27,7 @@ import type {
 	CanShowData as RRCanShowData,
 	EpicConfig as RREpicConfig,
 } from './SlotBodyEnd/ReaderRevenueEpic';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	contentType: string;
@@ -120,7 +121,8 @@ export const SlotBodyEnd = ({
 	renderAds,
 	isLabs,
 }: Props) => {
-	const { brazeMessages } = useBraze(idApiUrl);
+	const { renderingTarget } = useConfig();
+	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
 	const [countryCode, setCountryCode] = useState<string>();
 	const isSignedIn = getIsSignedIn(useAuthStatus());
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
@@ -193,7 +195,7 @@ export const SlotBodyEnd = ({
 			name: 'slotBodyEnd',
 		};
 
-		pickMessage(epicConfig)
+		pickMessage(epicConfig, renderingTarget)
 			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),

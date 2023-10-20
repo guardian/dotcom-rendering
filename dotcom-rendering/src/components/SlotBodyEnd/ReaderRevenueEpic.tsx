@@ -199,7 +199,7 @@ export const ReaderRevenueEpic = ({
 				<Epic
 					{...module.props}
 					fetchEmail={fetchEmail}
-					submitComponentEvent={submitComponentEvent}
+					submitComponentEvent={() => submitComponentEvent}
 					openCmp={openCmp}
 					hasConsentForArticleCount={hasConsentForArticleCount}
 					stage={stage}

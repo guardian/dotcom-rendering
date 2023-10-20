@@ -2,6 +2,7 @@ import { log } from '@guardian/libs';
 import { isServer } from '../lib/isServer';
 import { setSchedulerPriorityLastStartTime } from '../lib/scheduler';
 import { recordExperiences } from './ophan/ophan';
+import { RenderingTarget } from '../types/renderingTarget';
 
 /**
  * Whether we should adapt the current page to address poor performance issues.
@@ -31,9 +32,10 @@ const hideAdaptedIslands = () => {
 	document.head.appendChild(style);
 };
 
-const recordAdaptedSite = () => recordExperiences('adapted');
+const recordAdaptedSite = (renderingTarget: RenderingTarget) =>
+	recordExperiences(renderingTarget, 'adapted');
 
-export const adaptSite = (): void => {
+export const adaptSite = (renderingTarget: RenderingTarget): void => {
 	log('openJournalism', '🎛️ Adapting');
 
 	// disable all tasks except critical ones
@@ -41,5 +43,5 @@ export const adaptSite = (): void => {
 	setSchedulerPriorityLastStartTime('enhancement', 0);
 	hideAdaptedIslands();
 
-	void recordAdaptedSite();
+	void recordAdaptedSite(renderingTarget);
 };

@@ -5,6 +5,7 @@ import type { TimelineAtomType, TimelineEvent } from '../types/content';
 import { Body } from './ExpandableAtom/Body';
 import { Container } from './ExpandableAtom/Container';
 import { Footer } from './ExpandableAtom/Footer';
+import { useConfig } from './ConfigContext';
 
 const Snippet = css`
 	:not(:last-child) {
@@ -108,6 +109,8 @@ export const TimelineAtom = ({
 	dislikeHandler,
 	expandCallback,
 }: TimelineAtomType) => {
+	const { renderingTarget } = useConfig();
+
 	return (
 		<Container
 			atomType="timeline"
@@ -119,15 +122,18 @@ export const TimelineAtom = ({
 			expandCallback={
 				expandCallback ??
 				(() =>
-					submitComponentEvent({
-						component: {
-							componentType: 'TIMELINE_ATOM',
-							id,
-							products: [],
-							labels: [],
+					submitComponentEvent(
+						{
+							component: {
+								componentType: 'TIMELINE_ATOM',
+								id,
+								products: [],
+								labels: [],
+							},
+							action: 'EXPAND',
 						},
-						action: 'EXPAND',
-					}))
+						renderingTarget,
+					))
 			}
 		>
 			{!!description && <Body html={description} format={format} />}
@@ -137,28 +143,34 @@ export const TimelineAtom = ({
 				dislikeHandler={
 					dislikeHandler ??
 					(() =>
-						submitComponentEvent({
-							component: {
-								componentType: 'TIMELINE_ATOM',
-								id,
-								products: [],
-								labels: [],
+						submitComponentEvent(
+							{
+								component: {
+									componentType: 'TIMELINE_ATOM',
+									id,
+									products: [],
+									labels: [],
+								},
+								action: 'DISLIKE',
 							},
-							action: 'DISLIKE',
-						}))
+							renderingTarget,
+						))
 				}
 				likeHandler={
 					likeHandler ??
 					(() =>
-						submitComponentEvent({
-							component: {
-								componentType: 'TIMELINE_ATOM',
-								id,
-								products: [],
-								labels: [],
+						submitComponentEvent(
+							{
+								component: {
+									componentType: 'TIMELINE_ATOM',
+									id,
+									products: [],
+									labels: [],
+								},
+								action: 'LIKE',
 							},
-							action: 'LIKE',
-						}))
+							renderingTarget,
+						))
 				}
 			/>
 		</Container>

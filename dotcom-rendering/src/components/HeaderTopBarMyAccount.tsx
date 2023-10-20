@@ -20,6 +20,8 @@ import { useBraze } from '../lib/useBraze';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
+import { RenderingTarget } from '../types/renderingTarget';
+import { useConfig } from './ConfigContext';
 
 interface MyAccountProps {
 	mmaUrl: string;
@@ -32,6 +34,7 @@ interface MyAccountProps {
 //when SignedIn, authStatus can only be one of the two SignedIn states
 type SignedInProps = MyAccountProps & {
 	authStatus: SignedInWithCookies | SignedInWithOkta;
+	renderingTarget: RenderingTarget;
 };
 
 const myAccountStyles = css`
@@ -254,8 +257,13 @@ const SignedInWithNotifications = ({
 	);
 };
 
-const SignedIn = ({ idApiUrl, authStatus, ...props }: SignedInProps) => {
-	const { brazeCards } = useBraze(idApiUrl);
+const SignedIn = ({
+	idApiUrl,
+	authStatus,
+	renderingTarget,
+	...props
+}: SignedInProps) => {
+	const { brazeCards } = useBraze(idApiUrl, renderingTarget);
 	const [brazeNotifications, setBrazeNotifications] = useState<
 		Notification[]
 	>([]);
@@ -285,19 +293,24 @@ export const MyAccount = ({
 	discussionApiUrl,
 	idApiUrl,
 	authStatus,
-}: MyAccountProps) => (
-	<div css={myAccountStyles}>
-		{authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies' ? (
-			<SignedIn
-				mmaUrl={mmaUrl}
-				idUrl={idUrl}
-				discussionApiUrl={discussionApiUrl}
-				idApiUrl={idApiUrl}
-				authStatus={authStatus}
-			/>
-		) : (
-			<SignIn idUrl={idUrl} />
-		)}
-	</div>
-);
+}: MyAccountProps) => {
+	const { renderingTarget } = useConfig();
+
+	return (
+		<div css={myAccountStyles}>
+			{authStatus.kind === 'SignedInWithOkta' ||
+			authStatus.kind === 'SignedInWithCookies' ? (
+				<SignedIn
+					mmaUrl={mmaUrl}
+					idUrl={idUrl}
+					discussionApiUrl={discussionApiUrl}
+					idApiUrl={idApiUrl}
+					authStatus={authStatus}
+					renderingTarget={renderingTarget}
+				/>
+			) : (
+				<SignIn idUrl={idUrl} />
+			)}
+		</div>
+	);
+};

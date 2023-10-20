@@ -16,6 +16,7 @@ import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
 import { CardPicture } from './CardPicture';
 import { NewsletterDetail } from './NewsletterDetail';
+import { useConfig } from './ConfigContext';
 
 interface Props {
 	newsletter: Newsletter;
@@ -154,6 +155,7 @@ export const NewsletterCard = ({
 }: Props) => {
 	const [hasBeenSeen, setIsInViewRef] = useIsInView({ threshold: 0.9 });
 	const [haveReportedBeingSeen, setHaveReportedBeingSeen] = useState(false);
+	const { renderingTarget } = useConfig();
 
 	const reportSeen = useCallback(() => {
 		const valueData = {
@@ -165,14 +167,17 @@ export const NewsletterCard = ({
 			timestamp: Date.now(),
 		};
 
-		void submitComponentEvent({
-			component: {
-				componentType: 'CARD',
-				id: `DCR NewsletterCard ${newsletter.identityName}`,
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'CARD',
+					id: `DCR NewsletterCard ${newsletter.identityName}`,
+				},
+				action: 'VIEW',
+				value: JSON.stringify(valueData),
 			},
-			action: 'VIEW',
-			value: JSON.stringify(valueData),
-		});
+			renderingTarget,
+		);
 	}, [cardPosition, carouselPosition, groupTitle, newsletter.identityName]);
 
 	useEffect(() => {

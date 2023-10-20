@@ -18,6 +18,7 @@ import {
 	signInHeader,
 	signInLink,
 } from './shared';
+import { useConfig } from '../../ConfigContext';
 
 export const SignInGateMain = ({
 	signInUrl,
@@ -28,6 +29,8 @@ export const SignInGateMain = ({
 	ophanComponentId,
 	isMandatory = false,
 }: SignInGateProps) => {
+	const { renderingTarget } = useConfig();
+
 	return (
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
@@ -47,7 +50,12 @@ export const SignInGateMain = ({
 					css={privacyLink}
 					onClick={() => {
 						cmp.showPrivacyManager();
-						trackLink(ophanComponentId, 'privacy', abTest);
+						trackLink(
+							ophanComponentId,
+							'privacy',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					privacy settings
@@ -63,7 +71,12 @@ export const SignInGateMain = ({
 					size="small"
 					href={registerUrl}
 					onClick={() => {
-						trackLink(ophanComponentId, 'register-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'register-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Register for free
@@ -77,7 +90,12 @@ export const SignInGateMain = ({
 						size="small"
 						onClick={() => {
 							dismissGate();
-							trackLink(ophanComponentId, 'not-now', abTest);
+							trackLink(
+								ophanComponentId,
+								'not-now',
+								renderingTarget,
+								abTest,
+							);
 						}}
 					>
 						I’ll do it later
@@ -95,7 +113,12 @@ export const SignInGateMain = ({
 				css={signInLink}
 				href={signInUrl}
 				onClick={() => {
-					trackLink(ophanComponentId, 'sign-in-link', abTest);
+					trackLink(
+						ophanComponentId,
+						'sign-in-link',
+						renderingTarget,
+						abTest,
+					);
 				}}
 			>
 				Sign In
@@ -106,7 +129,12 @@ export const SignInGateMain = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'how-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'how-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Why register & how does it help?
@@ -116,7 +144,12 @@ export const SignInGateMain = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'why-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'why-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					How will my information & data be used?
@@ -126,7 +159,12 @@ export const SignInGateMain = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/help/identity-faq`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'help-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'help-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Get help with registering or signing in

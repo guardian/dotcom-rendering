@@ -17,6 +17,7 @@ import {
 	signInGateContainer,
 } from './shared';
 import { SignInGateMain } from './SignInGateMain';
+import { useConfig } from '../../ConfigContext';
 
 const personalisedHeadingStyles = css`
 	${headline.small({ fontWeight: 'bold' })};
@@ -194,6 +195,8 @@ export const SignInGateMainCheckoutComplete = ({
 	}
 	const { userType, product } = checkoutCompleteCookieData;
 
+	const { renderingTarget } = useConfig();
+
 	// send new/guest userType to the /register page instead of /signin
 	const personaliseSignInURl = (url: string): string => {
 		if (userType === 'new' || userType == 'guest') {
@@ -231,7 +234,12 @@ export const SignInGateMainCheckoutComplete = ({
 					size="small"
 					href={personaliseSignInURl(signInUrl)}
 					onClick={() => {
-						trackLink(ophanComponentId, 'register-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'register-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					{getButtonText(userType)}
@@ -245,7 +253,12 @@ export const SignInGateMainCheckoutComplete = ({
 						size="small"
 						onClick={() => {
 							dismissGate();
-							trackLink(ophanComponentId, 'not-now', abTest);
+							trackLink(
+								ophanComponentId,
+								'not-now',
+								renderingTarget,
+								abTest,
+							);
 						}}
 					>
 						Not now
@@ -258,7 +271,12 @@ export const SignInGateMainCheckoutComplete = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'why-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'why-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					How will my information & data be used?
@@ -268,7 +286,12 @@ export const SignInGateMainCheckoutComplete = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/help/identity-faq`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'help-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'help-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Get help with registering or signing in

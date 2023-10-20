@@ -9,6 +9,7 @@ import {
 import useSWRImmutable from 'swr/immutable';
 import { buildBrazeMessaging } from './braze/buildBrazeMessaging';
 import { useAuthStatus } from './useAuthStatus';
+import { RenderingTarget } from '../types/renderingTarget';
 
 /**
  * Returns brazeMessaging as BrazeMessagesInterface and BrazeCardsInterface
@@ -21,6 +22,7 @@ import { useAuthStatus } from './useAuthStatus';
  */
 export const useBraze = (
 	idApiUrl: string,
+	renderingTarget: RenderingTarget,
 ): {
 	brazeMessages: BrazeMessagesInterface | undefined;
 	brazeCards: BrazeCardsInterface | undefined;
@@ -32,7 +34,7 @@ export const useBraze = (
 
 	const { data, error } = useSWRImmutable(
 		authStatus.kind !== 'Pending' ? 'braze-message' : null,
-		() => buildBrazeMessaging(idApiUrl, isSignedIn),
+		() => buildBrazeMessaging(idApiUrl, isSignedIn, renderingTarget),
 	);
 
 	if (error) {

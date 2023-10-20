@@ -18,6 +18,7 @@ import {
 } from '../hasCurrentBrazeUser';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import { getInitialisedAppboy } from './initialiseAppboy';
+import { RenderingTarget } from '../../types/renderingTarget';
 
 const maybeWipeUserData = async (
 	apiKey?: string,
@@ -51,6 +52,7 @@ const maybeWipeUserData = async (
 export const buildBrazeMessaging = async (
 	idApiUrl: string,
 	isSignedIn: boolean,
+	renderingTarget: RenderingTarget,
 ): Promise<{
 	brazeMessages: BrazeMessagesInterface;
 	brazeCards: BrazeCardsInterface;
@@ -103,7 +105,7 @@ export const buildBrazeMessaging = async (
 		);
 
 		const sdkLoadTimeTaken = endPerformanceMeasure();
-		const ophan = await getOphan();
+		const ophan = await getOphan(renderingTarget);
 		ophan.record({
 			component: 'braze-sdk-load-timing',
 			value: sdkLoadTimeTaken,

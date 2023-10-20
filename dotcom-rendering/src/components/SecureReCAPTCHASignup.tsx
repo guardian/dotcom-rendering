@@ -18,6 +18,8 @@ import { useRef, useState } from 'react';
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { RenderingTarget } from '../types/renderingTarget';
+import { useConfig } from './ConfigContext';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
@@ -152,6 +154,7 @@ type EventDescription =
 const sendTracking = (
 	newsletterId: string,
 	eventDescription: EventDescription,
+	renderingTarget: RenderingTarget,
 ): void => {
 	let action: OphanAction = 'CLICK';
 
@@ -188,15 +191,18 @@ const sendTracking = (
 		timestamp: Date.now(),
 	});
 
-	void submitComponentEvent({
-		action,
-		value,
-		//check if this can be used or needs to be added
-		component: {
-			componentType: 'NEWSLETTER_SUBSCRIPTION',
-			id: `AR SecureSignup ${newsletterId}`,
+	void submitComponentEvent(
+		{
+			action,
+			value,
+			//check if this can be used or needs to be added
+			component: {
+				componentType: 'NEWSLETTER_SUBSCRIPTION',
+				id: `AR SecureSignup ${newsletterId}`,
+			},
 		},
-	});
+		renderingTarget,
+	);
 };
 
 /**
@@ -223,6 +229,8 @@ export const SecureReCAPTCHASignup = ({
 		undefined,
 	);
 
+	const { renderingTarget } = useConfig();
+
 	const hasResponse = typeof responseOk === 'boolean';
 
 	const submitForm = async (token: string): Promise<void> => {
@@ -230,7 +238,7 @@ export const SecureReCAPTCHASignup = ({
 			document.querySelector('input[type="email"]') ?? null;
 		const emailAddress: string = input?.value ?? '';
 
-		sendTracking(newsletterId, 'form-submission');
+		sendTracking(newsletterId, 'form-submission', renderingTarget);
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
 			buildFormData(emailAddress, newsletterId, token),
@@ -246,6 +254,7 @@ export const SecureReCAPTCHASignup = ({
 		sendTracking(
 			newsletterId,
 			response.ok ? 'submission-confirmed' : 'submission-failed',
+			renderingTarget,
 		);
 	};
 
@@ -256,29 +265,29 @@ export const SecureReCAPTCHASignup = ({
 	};
 
 	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = () => {
-		sendTracking(newsletterId, 'captcha-load-error');
+		sendTracking(newsletterId, 'captcha-load-error', renderingTarget);
 		setErrorMessage(`Sorry, the reCAPTCHA failed to load.`);
 		recaptchaRef.current?.reset();
 	};
 
 	const handleCaptchaComplete = (token: string | null) => {
 		if (!token) {
-			sendTracking(newsletterId, 'captcha-not-passed');
+			sendTracking(newsletterId, 'captcha-not-passed', renderingTarget);
 			return;
 		}
-		sendTracking(newsletterId, 'captcha-passed');
+		sendTracking(newsletterId, 'captcha-passed', renderingTarget);
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
 			// eslint-disable-next-line no-console -- unexpected error
 			console.error(error);
-			sendTracking(newsletterId, 'form-submit-error');
+			sendTracking(newsletterId, 'form-submit-error', renderingTarget);
 			setErrorMessage(`Sorry, there was an error signing you up.`);
 			setIsWaitingForResponse(false);
 		});
 	};
 
 	const handleClick = (): void => {
-		sendTracking(newsletterId, 'click-button');
+		sendTracking(newsletterId, 'click-button', renderingTarget);
 	};
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -287,7 +296,7 @@ export const SecureReCAPTCHASignup = ({
 			return;
 		}
 		setErrorMessage(undefined);
-		sendTracking(newsletterId, 'open-captcha');
+		sendTracking(newsletterId, 'open-captcha', renderingTarget);
 		recaptchaRef.current?.execute();
 	};
 
