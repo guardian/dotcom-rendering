@@ -1,5 +1,5 @@
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { NavType } from '../model/extract-nav';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -32,16 +32,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 	const notSupported = <pre>Not supported</pre>;
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
-			switch (format.design) {
-				case ArticleDesign.Interactive: {
-					// Should be InteractiveLayout once implemented for apps
-					return notSupported;
-				}
-				default: {
-					// Should be FullPageInteractiveLayout once implemented for apps
-					return notSupported;
-				}
-			}
+			return (
+				<ImmersiveLayout
+					article={article}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			);
 		}
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Showcase: {
@@ -58,22 +55,43 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
-					// Should be CommentLayout once implemented for apps
-					return notSupported;
+					return (
+						<CommentLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				case ArticleDesign.Picture:
-					// Should be PictureLayout once implemented for apps
-					return notSupported;
+					return (
+						<PictureLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				default:
-					// Should be ShowcaseLayout once implemented for apps
-					return notSupported;
+					return (
+						<ShowcaseLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 			}
 		}
 		case ArticleDisplay.Standard:
 		default: {
 			switch (format.design) {
 				case ArticleDesign.Interactive:
-					// Should be InteractiveLayout once implemented for apps
-					return notSupported;
+					return (
+						<InteractiveLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+
 				case ArticleDesign.FullPageInteractive: {
 					// Should be FullPageInteractiveLayout once implemented for apps
 					return notSupported;
@@ -91,7 +109,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 					// Should be CommentLayout once implemented for apps
-					return notSupported;
+					return (
+						<CommentLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				case ArticleDesign.NewsletterSignup:
 					return notSupported;
 				default:
@@ -133,8 +157,9 @@ const DecideLayoutWeb = ({
 					return (
 						<ImmersiveLayout
 							article={article}
-							NAV={NAV}
 							format={format}
+							NAV={NAV}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				}
@@ -161,6 +186,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.Picture:
@@ -169,6 +195,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
@@ -177,6 +204,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 			}
@@ -190,6 +218,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
@@ -219,6 +248,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:

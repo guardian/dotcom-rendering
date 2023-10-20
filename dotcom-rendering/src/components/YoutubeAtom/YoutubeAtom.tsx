@@ -2,7 +2,6 @@ import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import type { ArticleFormat } from '@guardian/libs';
 import { useCallback, useState } from 'react';
-import type { ImageSource, RoleType } from '../../types/content';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
 import type { VideoCategory } from './YoutubeAtomOverlay';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
@@ -24,15 +23,14 @@ export type VideoEventKey =
 type Props = {
 	elementId: string;
 	videoId: string;
-	overrideImage?: ImageSource[];
-	posterImage?: ImageSource[];
+	overrideImage?: string | undefined;
+	posterImage?: string | undefined;
 	adTargeting?: AdTargeting;
 	consentState?: ConsentState;
 	height?: number;
 	width?: number;
 	title?: string;
 	alt: string;
-	role: RoleType;
 	duration?: number; // in seconds
 	origin?: string;
 	eventEmitters: Array<(event: VideoEventKey) => void>;
@@ -57,7 +55,6 @@ export const YoutubeAtom = ({
 	height = 259,
 	width = 460,
 	alt,
-	role,
 	title,
 	duration,
 	origin,
@@ -200,7 +197,6 @@ export const YoutubeAtom = ({
 						height={height}
 						width={width}
 						alt={alt}
-						role={role}
 						duration={duration}
 						title={title}
 						onClick={() => setOverlayClicked(true)}

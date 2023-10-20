@@ -79,7 +79,6 @@ const getLoaders = (build) => {
 		case 'apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'web.variant':
-		case 'web.ophan-esm':
 		case 'web':
 			return swcLoader(getBrowserTargets());
 	}
@@ -93,14 +92,6 @@ module.exports = ({ build, sessionId }) => ({
 	entry: {
 		index: getEntryIndex(build),
 		debug: './src/client/debug/index.ts',
-	},
-	resolve: {
-		alias: {
-			'ophan-tracker-js':
-				build === 'web.ophan-esm'
-					? 'ophan-tracker-js-esm'
-					: 'ophan-tracker-js',
-		},
 	},
 	optimization:
 		// We don't need chunk optimization for apps as we use the 'LimitChunkCountPlugin' to produce just 1 chunk
@@ -156,6 +147,7 @@ module.exports = ({ build, sessionId }) => ({
 			  ]
 			: []),
 	],
+	externals: getExternalModules(build),
 	module: {
 		rules: [
 			{
@@ -186,3 +178,7 @@ module.exports.babelExclude = {
 };
 
 module.exports.getLoaders = getLoaders;
+
+// We are making "ophan-tracker-js" external to the apps bundle because we never expect to use it in apps pages. Tracking is done natively.
+const getExternalModules = (build) =>
+	build === 'apps' ? { 'ophan-tracker-js': 'ophan-tracker-js' } : {};

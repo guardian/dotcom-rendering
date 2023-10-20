@@ -4,11 +4,11 @@ import { body, neutral, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { trackVideoInteraction } from '../client/ga/ga';
-import { record } from '../client/ophan/ophan';
+import { getOphan } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
-import type { RoleType } from '../types/content';
 import { Caption } from './Caption';
+import { useConfig } from './ConfigContext';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 
 type Props = {
@@ -19,7 +19,6 @@ type Props = {
 	assetId: string;
 	expired: boolean;
 	format: ArticleFormat;
-	role: RoleType;
 	hideCaption?: boolean;
 	overrideImage?: string;
 	posterImage?: {
@@ -74,6 +73,20 @@ const expiredSVGWrapperStyles = css`
 	}
 `;
 
+/**
+ * We do our own image optimization in DCR and only need 1 image. Pick the largest image available to
+ * us to avoid up-scaling later.
+ *
+ * @param images an array of the same image at different resolutions
+ * @returns largest image from images
+ */
+const getLargestImageSize = (
+	images: {
+		url: string;
+		width: number;
+	}[],
+) => [...images].sort((a, b) => a.width - b.width).pop();
+
 export const YoutubeBlockComponent = ({
 	id,
 	elementId,
@@ -85,7 +98,6 @@ export const YoutubeBlockComponent = ({
 	overrideImage,
 	posterImage = [],
 	expired,
-	role,
 	isMainMedia,
 	height = 259,
 	width = 460,
@@ -101,6 +113,7 @@ export const YoutubeBlockComponent = ({
 	);
 
 	const adTargeting = useAdTargeting(duration);
+	const { renderingTarget } = useConfig();
 
 	const abTests = useAB();
 	const abTestsApi = abTests?.api;
@@ -125,10 +138,6 @@ export const YoutubeBlockComponent = ({
 			);
 		});
 	}, []);
-
-	const shouldLimitWidth =
-		!isMainMedia &&
-		(role === 'showcase' || role === 'supporting' || role === 'immersive');
 
 	if (expired) {
 		return (
@@ -161,7 +170,6 @@ export const YoutubeBlockComponent = ({
 						captionText={mediaTitle ?? ''}
 						format={format}
 						displayCredit={false}
-						shouldLimitWidth={shouldLimitWidth}
 						mediaType="Video"
 						isMainMedia={isMainMedia}
 					/>
@@ -170,9 +178,10 @@ export const YoutubeBlockComponent = ({
 		);
 	}
 
-	const ophanTracking = (trackingEvent: string) => {
+	const ophanTracking = async (trackingEvent: string): Promise<void> => {
 		if (!id) return;
-		record({
+		const ophan = await getOphan();
+		ophan.record({
 			video: {
 				id: `gu-video-youtube-${id}`,
 				eventType: `video:content:${trackingEvent}`,
@@ -193,35 +202,8 @@ export const YoutubeBlockComponent = ({
 			<YoutubeAtom
 				elementId={elementId}
 				videoId={assetId}
-				overrideImage={
-					overrideImage
-						? [
-								{
-									weighting: 'supporting',
-									srcSet: [
-										{
-											src: overrideImage,
-											width: 500, // we do not have width for overlayImage so set a random number
-										},
-									],
-								},
-						  ]
-						: undefined
-				}
-				posterImage={
-					posterImage.length > 0
-						? [
-								{
-									weighting: 'supporting',
-									srcSet: posterImage.map((img) => ({
-										src: img.url,
-										width: img.width,
-									})),
-								},
-						  ]
-						: undefined
-				}
-				role={role}
+				overrideImage={overrideImage}
+				posterImage={getLargestImageSize(posterImage)?.url}
 				alt={altText ?? mediaTitle ?? ''}
 				adTargeting={adTargeting}
 				consentState={consentState}
@@ -229,7 +211,11 @@ export const YoutubeBlockComponent = ({
 				width={width}
 				title={mediaTitle}
 				duration={duration}
-				eventEmitters={[ophanTracking, gaTracking]}
+				eventEmitters={
+					renderingTarget === 'Web'
+						? [ophanTracking, gaTracking]
+						: [gaTracking]
+				}
 				format={format}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={stickyVideos}
@@ -245,7 +231,6 @@ export const YoutubeBlockComponent = ({
 					captionText={mediaTitle ?? ''}
 					format={format}
 					displayCredit={false}
-					shouldLimitWidth={shouldLimitWidth}
 					mediaType="Video"
 					isMainMedia={isMainMedia}
 				/>

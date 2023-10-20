@@ -257,14 +257,18 @@ const frontsBannerAdTopContainerStyles = css`
 `;
 
 const frontsBannerAdContainerStyles = css`
-	/* Native templates require a width (or min-width) to be explicitly set */
-	width: 100%;
 	display: flex;
 	justify-content: center;
 
-	/* This stops the visual effect where the advert renders at the
-	   top of the ad slot, then is pushed down 24px when the label renders */
-	align-items: flex-end;
+	/* Native templates require a width (or min-width) to be explicitly set */
+	width: ${breakpoints['wide']}px;
+	/* This is similar to fluid ads, except this class is applied using messenger */
+	&.ad-slot--full-width {
+		width: 100%;
+		.ad-slot {
+			max-width: 100%;
+		}
+	}
 `;
 
 const frontsBannerCollapseStyles = css`
@@ -274,16 +278,11 @@ const frontsBannerCollapseStyles = css`
 const frontsBannerAdStyles = css`
 	position: relative;
 	min-height: ${frontsBannerMinHeight}px;
-	max-width: ${breakpoints['wide']}px;
 	/* No banner should be taller than 600px */
 	max-height: ${600 + labelHeight}px;
+	max-width: ${breakpoints['wide']}px;
 	overflow: hidden;
 	padding-bottom: ${frontsBannerPaddingHeight}px;
-
-	/* This is similar to fluid ads, except this class is applied using messenger */
-	&.ad-slot--full-width {
-		max-width: 100%;
-	}
 `;
 
 const articleEndAdStyles = css`
@@ -582,13 +581,16 @@ export const AdSlot = ({
 		case 'fronts-banner': {
 			const advertId = `fronts-banner-${index}`;
 			return (
-				<div css={frontsBannerAdTopContainerStyles}>
+				<div
+					className="top-fronts-banner-ad-container"
+					css={frontsBannerAdTopContainerStyles}
+				>
 					<div
 						className="ad-slot-container"
 						css={[
-							adContainerStyles,
 							frontsBannerAdContainerStyles,
 							hasPageskin && frontsBannerCollapseStyles,
+							adContainerStyles,
 						]}
 					>
 						<div
@@ -607,7 +609,6 @@ export const AdSlot = ({
 							]}
 							data-link-name={`ad slot ${advertId}`}
 							data-name={`${advertId}`}
-							data-refresh="false"
 							aria-hidden="true"
 						/>
 					</div>

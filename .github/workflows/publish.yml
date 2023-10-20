@@ -30,12 +30,15 @@ jobs:
       # so we create our tarball outside the rendering/ folder, then delete the contents of rendering/
       # and finally move the tarball into rendering
       - name: Compress DCR server files
-        run: tar -zcf rendering.tar.gz rendering
-      - name: Remove uncompressed DCR server files from rendering/
-        run: rm -r rendering/*
-      - name: Move compressed DCR server files to rendering/
-        run: mv rendering.tar.gz rendering/
-
+        run: |
+          tar -zcf rendering.tar.gz rendering
+          rm -r rendering/*
+          mv rendering.tar.gz rendering/
+      - name: Compress DCR front-web server files
+        run: |
+          tar -zcf front-web.tar.gz front-web
+          rm -r front-web/*
+          mv front-web.tar.gz front-web/
       - uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-region: eu-west-1
@@ -51,6 +54,10 @@ jobs:
               - frontend-cfn
             rendering:
               - rendering
+            front-web-cfn:
+              - front-web-cfn
+            front-web:
+              - front-web
             frontend-static:
               - frontend-static
 

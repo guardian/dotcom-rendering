@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions -- TODO: Imported with minor changes from `@guardian/atoms-rendering` */
-/* eslint-disable jsx-a11y/click-events-have-key-events -- TODO: Imported with minor changes from `@guardian/atoms-rendering` */
 import { css } from '@emotion/react';
 import {
 	body,
@@ -85,6 +83,7 @@ export const Summary = ({
 	const [hasBeenExpanded, setHasBeenExpanded] = useState(false);
 	const [expandEventSent, setExpandEventFired] = useState(false);
 	return (
+		//eslint-disable-next-line -- expected from atoms rendering
 		<summary
 			onClick={() => {
 				if (!expandEventSent) {

@@ -1,7 +1,10 @@
 import type { Handler } from 'express';
 import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
 import { handleAMPArticle } from '../server/index.article.amp';
-import { handleAppsArticle } from '../server/index.article.apps';
+import {
+	handleAppsArticle,
+	handleAppsInteractive,
+} from '../server/index.article.apps';
 import {
 	handleArticle,
 	handleArticleJson,
@@ -64,6 +67,8 @@ export const devServer = (): Handler => {
 				return handleAllEditorialNewslettersPage(req, res, next);
 			case 'AppsArticle':
 				return handleAppsArticle(req, res, next);
+			case 'AppsInteractive':
+				return handleAppsInteractive(req, res, next);
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();

@@ -1,9 +1,3 @@
-import {
-	ExplainerAtom,
-	InteractiveAtom,
-	InteractiveLayoutAtom,
-	VideoAtom,
-} from '@guardian/atoms-rendering';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
@@ -13,7 +7,7 @@ import { CalloutBlockComponent } from '../components/CalloutBlockComponent.impor
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { CartoonComponent } from '../components/CartoonComponent';
-import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
+import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
@@ -21,25 +15,28 @@ import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpSwitcher } from '../components/EmailSignUpSwitcher';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
+import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
+import { InteractiveAtom } from '../components/InteractiveAtom';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
+import { InteractiveLayoutAtom } from '../components/InteractiveLayoutAtom';
 import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
-import { KnowledgeQuizAtomWrapper } from '../components/KnowledgeQuizAtomWrapper.importable';
+import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
-import { PersonalityQuizAtomWrapper } from '../components/PersonalityQuizAtomWrapper.importable';
+import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
-import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
+import { QandaAtom } from '../components/QandaAtom.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
@@ -47,9 +44,10 @@ import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent
 import { SubheadingBlockComponent } from '../components/SubheadingBlockComponent';
 import { TableBlockComponent } from '../components/TableBlockComponent';
 import { TextBlockComponent } from '../components/TextBlockComponent';
-import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
+import { TimelineAtom } from '../components/TimelineAtom.importable';
 import { TweetBlockComponent } from '../components/TweetBlockComponent.importable';
 import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
+import { VideoAtom } from '../components/VideoAtom';
 import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockComponent.importable';
 import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
@@ -152,7 +150,7 @@ export const renderElement = ({
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return (
-				<Island>
+				<Island priority="critical" defer={{ until: 'visible' }}>
 					<AudioAtomWrapper
 						id={element.id}
 						trackUrl={element.trackUrl}
@@ -178,7 +176,7 @@ export const renderElement = ({
 
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
 			return (
-				<Island deferUntil="visible">
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<CalloutEmbedBlockComponent
 						callout={element}
 						format={format}
@@ -188,7 +186,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
 			if (switches.callouts) {
 				return (
-					<Island deferUntil="visible">
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<CalloutBlockComponent
 							callout={element}
 							pageId={pageId}
@@ -222,8 +220,8 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
-				<Island deferUntil="visible">
-					<ChartAtomWrapper id={element.id} html={element.html} />
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<ChartAtom id={element.id} html={element.html} />
 				</Island>
 			);
 
@@ -256,7 +254,7 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 			return (
-				<Island deferUntil="visible">
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<DocumentBlockComponent
 						embedUrl={element.embedUrl}
 						height={element.height}
@@ -282,7 +280,7 @@ export const renderElement = ({
 				}
 
 				return (
-					<Island deferUntil="visible">
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<UnsafeEmbedBlockComponent
 							key={index}
 							html={element.html}
@@ -299,7 +297,7 @@ export const renderElement = ({
 				);
 			}
 			return (
-				<Island deferUntil="visible">
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<EmbedBlockComponent
 						key={index}
 						html={element.html}
@@ -323,7 +321,7 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 			return (
-				<Island deferUntil="visible">
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<GuideAtomWrapper
 						id={element.id}
 						title={element.title}
@@ -363,7 +361,7 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
 			return (
-				<Island deferUntil="visible">
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<InstagramBlockComponent
 						key={index}
 						element={element}
@@ -400,7 +398,7 @@ export const renderElement = ({
 			return (
 				// Deferring interactives until CPU idle achieves the lowest Cumulative Layout Shift (CLS)
 				// For more information on the experiment we ran see: https://github.com/guardian/dotcom-rendering/pull/4942
-				<Island deferUntil="idle">
+				<Island priority="critical" defer={{ until: 'visible' }}>
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
@@ -419,7 +417,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InteractiveContentsBlockElement':
 			return (
 				<div id={element.elementId}>
-					<Island deferUntil="visible">
+					<Island priority="critical" defer={{ until: 'visible' }}>
 						<InteractiveContentsBlockComponent
 							subheadingLinks={element.subheadingLinks}
 							endDocumentElementId={element.endDocumentElementId}
@@ -429,7 +427,7 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return (
-				<Island deferUntil="visible">
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<MapEmbedBlockComponent
 						format={format}
 						embedUrl={element.embedUrl}
@@ -488,14 +486,14 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
 			return (
-				<Island deferUntil="visible">
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<ProfileAtomWrapper
 						id={element.id}
 						title={element.title}
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						pillar={format.theme}
+						format={format}
 					/>
 				</Island>
 			);
@@ -512,14 +510,14 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.QABlockElement':
 			return (
-				<Island deferUntil="visible">
-					<QandaAtomWrapper
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<QandaAtom
 						id={element.id}
 						title={element.title}
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						pillar={format.theme}
+						format={format}
 					/>
 				</Island>
 			);
@@ -527,8 +525,11 @@ export const renderElement = ({
 			return (
 				<>
 					{element.quizType === 'personality' && (
-						<Island>
-							<PersonalityQuizAtomWrapper
+						<Island
+							priority="critical"
+							defer={{ until: 'visible' }}
+						>
+							<PersonalityQuizAtom
 								id={element.id}
 								questions={element.questions}
 								resultBuckets={element.resultBuckets}
@@ -538,8 +539,11 @@ export const renderElement = ({
 						</Island>
 					)}
 					{element.quizType === 'knowledge' && (
-						<Island>
-							<KnowledgeQuizAtomWrapper
+						<Island
+							priority="critical"
+							defer={{ until: 'visible' }}
+						>
+							<KnowledgeQuizAtom
 								id={element.id}
 								questions={element.questions}
 								resultGroups={element.resultGroups}
@@ -552,7 +556,7 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
 			return (
-				<Island deferUntil="idle">
+				<Island priority="feature" defer={{ until: 'idle' }}>
 					<RichLinkComponent
 						richLinkIndex={index}
 						element={element}
@@ -565,7 +569,7 @@ export const renderElement = ({
 			return <SoundcloudBlockComponent element={element} />;
 		case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
 			return (
-				<Island deferUntil="visible">
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<SpotifyBlockComponent
 						embedUrl={element.embedUrl}
 						height={element.height}
@@ -607,11 +611,11 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return (
-				<Island deferUntil="visible">
-					<TimelineAtomWrapper
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<TimelineAtom
 						id={element.id}
 						title={element.title}
-						pillar={format.theme}
+						format={format}
 						events={element.events}
 						description={element.description}
 					/>
@@ -620,7 +624,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			if (switches.enhanceTweets) {
 				return (
-					<Island deferUntil="visible">
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<TweetBlockComponent element={element} />
 					</Island>
 				);
@@ -628,7 +632,7 @@ export const renderElement = ({
 			return <TweetBlockComponent element={element} />;
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 			return (
-				<Island deferUntil="visible">
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<VideoFacebookBlockComponent
 						role={element.role}
 						isTracking={element.isThirdPartyTracking}
@@ -673,7 +677,7 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
 			return (
-				<Island deferUntil="visible">
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<VineBlockComponent
 						element={element}
 						// No role given by CAPI
@@ -740,12 +744,11 @@ export const renderElement = ({
 		}
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return (
-				<Island>
+				<Island priority="critical" defer={{ until: 'visible' }}>
 					<YoutubeBlockComponent
 						format={format}
 						key={index}
 						hideCaption={hideCaption}
-						role="inline"
 						isMainMedia={isMainMedia}
 						id={element.id}
 						elementId={element.elementId}

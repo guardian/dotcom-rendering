@@ -697,13 +697,13 @@ export const FrontSection = ({
 			>
 				{isString(targetedTerritory) &&
 				isAustralianTerritory(targetedTerritory) ? (
-					<Island deferUntil="visible">
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<AustralianTerritorySwitcher
 							targetedTerritory={targetedTerritory}
 						/>
 					</Island>
 				) : showMore ? (
-					<Island deferUntil="interaction">
+					<Island priority="feature" defer={{ until: 'interaction' }}>
 						<ShowMore
 							title={title}
 							sectionId={sectionId}

@@ -308,9 +308,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		config: { isPaidContent, host },
 	} = article;
 
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+
 	const showBodyEndSlot =
-		parse(article.slotMachineFlags ?? '').showBodyEnd ||
-		article.config.switches.slotBodyEnd;
+		isWeb &&
+		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
+			article.config.switches.slotBodyEnd);
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -333,9 +337,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
-
-	const isWeb = renderingTarget === 'Web';
-	const isApps = renderingTarget === 'Apps';
 
 	const renderAds = isWeb && canRenderAds(article);
 
@@ -423,7 +424,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								element="aside"
 							>
-								<Island deferUntil="idle">
+								<Island
+									priority="enhancement"
+									defer={{ until: 'idle' }}
+								>
 									<SubNav
 										subNavSections={
 											props.NAV.subNavSections
@@ -477,7 +481,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<main data-layout="StandardLayout">
 				{isApps && (
-					<Island clientOnly={true}>
+					<Island priority="critical" clientOnly={true}>
 						<AdPortals />
 					</Island>
 				)}
@@ -493,7 +497,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
 								{isMatchReport && (
-									<Island deferUntil="visible">
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
 										<GetMatchNav
 											matchUrl={footballMatchUrl}
 											format={format}
@@ -510,7 +517,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
 								{isMatchReport && (
-									<Island>
+									<Island
+										priority="critical"
+										defer={{ until: 'visible' }}
+									>
 										<GetMatchTabs
 											matchUrl={footballMatchUrl}
 											format={format}
@@ -666,7 +676,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
-										<Island deferUntil="visible">
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
 											<GetMatchStats
 												matchUrl={footballMatchUrl}
 												format={format}
@@ -675,13 +688,20 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									)}
 
 								{isApps && (
-									<Island clientOnly={true}>
+									<Island
+										priority="critical"
+										clientOnly={true}
+									>
 										<AppsEpic />
 									</Island>
 								)}
 
-								{isWeb && showBodyEndSlot && (
-									<Island clientOnly={true}>
+								{showBodyEndSlot && (
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+										clientOnly={true}
+									>
 										<SlotBodyEnd
 											contentType={article.contentType}
 											contributionsServiceUrl={
@@ -787,7 +807,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 				{article.storyPackage && (
 					<Section fullWidth={true}>
-						<Island deferUntil="visible">
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
 								trails={article.storyPackage.trails.map(
@@ -806,7 +826,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 				{isWeb && (
 					<>
-						<Island deferUntil="visible">
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<OnwardsUpper
 								ajaxUrl={article.config.ajaxUrl}
 								hasRelated={article.hasRelated}
@@ -872,8 +892,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							>
 								<MostViewedFooterLayout renderAds={renderAds}>
 									<Island
+										priority="feature"
 										clientOnly={true}
-										deferUntil="visible"
+										defer={{ until: 'visible' }}
 									>
 										<MostViewedFooterData
 											sectionId={article.config.section}
@@ -914,7 +935,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							padSides={false}
 							element="aside"
 						>
-							<Island deferUntil="visible">
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
@@ -947,7 +971,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						/>
 					</Section>
 					<BannerWrapper data-print-layout="hide">
-						<Island deferUntil="idle" clientOnly={true}>
+						<Island
+							priority="feature"
+							defer={{ until: 'idle' }}
+							clientOnly={true}
+						>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -990,7 +1018,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						showSideBorders={false}
 						element="footer"
 					>
-						<Island>
+						<Island priority="critical">
 							<AppsFooter />
 						</Island>
 					</Section>
