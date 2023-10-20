@@ -44,7 +44,7 @@ const FooterContent: FC<Props> = ({ isCcpa }) => {
 	return (
 		<div id="js-footer">
 			&#169; {currentYear} Guardian News and Media Limited or its
-			affiliated companies. All rights reserved. (modern)
+			affiliated companies. All rights reserved. (ar)
 			<br />
 			<PrivacySettings isCcpa={isCcpa} />
 			<a
