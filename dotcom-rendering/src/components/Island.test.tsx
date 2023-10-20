@@ -12,6 +12,7 @@ import { Liveness } from './Liveness.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { SetABTests } from './SetABTests.importable';
 import { Snow } from './Snow.importable';
+import { ConfigProvider } from './ConfigContext';
 
 // Type tests
 // Test that impossible prop combinations are caught by TypeScript.
@@ -92,7 +93,13 @@ describe('Island: server-side rendering', () => {
 	});
 
 	test('EnhancePinnedPost', () => {
-		expect(() => renderToString(<EnhancePinnedPost />)).not.toThrow();
+		expect(() =>
+			renderToString(
+				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+					<EnhancePinnedPost />
+				</ConfigProvider>,
+			),
+		).not.toThrow();
 	});
 
 	test('InteractiveSupportButton', () => {
