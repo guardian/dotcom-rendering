@@ -11,6 +11,7 @@ import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
+import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
@@ -180,6 +181,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					/>
 				</Island>
 			)}
+			{renderingTarget === 'Apps' && <DarkModeMessage />}
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout
 					article={article}
