@@ -5,7 +5,6 @@ import { Button, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
 import { useEffect, useState } from 'react';
 import { isServer } from '../lib/isServer';
-import { useOnce } from '../lib/useOnce';
 
 const colours = `
 gu-recipe {
@@ -132,7 +131,7 @@ export const RecipeMultiplier = () => {
 	const [servings, setServings] = useState<number>(serves);
 	const [multiplier, setMultiplier] = useState(1);
 
-	useOnce(() => {
+	useEffect(() => {
 		log('dotcom', 'Injecting multiplier');
 		const style = document.createElement('style');
 		style.innerHTML = colours;

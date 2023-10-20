@@ -196,6 +196,7 @@ export const SignInGateSelector = ({
 	const shouldPersonaliseComponentId = (): boolean => {
 		return personaliseSwitch && !!checkoutCompleteCookieData;
 	};
+	const { personaliseSignInGateAfterCheckout } = switches;
 	// END: Checkout Complete Personalisation
 
 	useOnce(() => {
@@ -220,11 +221,11 @@ export const SignInGateSelector = ({
 		}
 	}, [gateSelector]);
 
-	useOnce(() => {
-		if (switches.personaliseSignInGateAfterCheckout) {
-			setPersonaliseSwitch(switches.personaliseSignInGateAfterCheckout);
+	useEffect(() => {
+		if (personaliseSignInGateAfterCheckout) {
+			setPersonaliseSwitch(personaliseSignInGateAfterCheckout);
 		} else setPersonaliseSwitch(false);
-	}, []);
+	}, [personaliseSignInGateAfterCheckout]);
 
 	useEffect(() => {
 		if (gateVariant && currentTest) {

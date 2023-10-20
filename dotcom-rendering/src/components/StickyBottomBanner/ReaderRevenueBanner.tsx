@@ -10,7 +10,7 @@ import type {
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { trackNonClickInteraction } from '../../client/ga/ga';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
@@ -320,7 +320,7 @@ const RemoteBanner = ({
 		debounce: true,
 	});
 
-	useOnce(() => {
+	useEffect(() => {
 		setAutomat();
 
 		window
@@ -330,14 +330,12 @@ const RemoteBanner = ({
 			})
 			.catch((error) => {
 				const msg = `Error importing RR banner: ${String(error)}`;
-
-				console.log(msg);
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
 					'rr-banner',
 				);
 			});
-	}, []);
+	}, [module]);
 
 	useOnce(() => {
 		const { componentType } = meta;
