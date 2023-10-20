@@ -178,7 +178,9 @@ const BrazeEpicWithSatisfiedDependencies = ({
 					subscribeToNewsletter={subscribeToNewsletter}
 					countryCode={countryCode}
 					logButtonClickWithBraze={meta.logButtonClickWithBraze}
-					submitComponentEvent={() => submitComponentEvent}
+					submitComponentEvent={(event) =>
+						void submitComponentEvent(event, renderingTarget)
+					}
 					fetchEmail={fetchEmail}
 				/>
 			</div>
