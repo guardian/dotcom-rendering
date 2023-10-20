@@ -87,7 +87,7 @@ export const AppsFooter = () => {
 	return (
 		<div css={footerStyles}>
 			&#169; {year} Guardian News and Media Limited or its affiliated
-			companies. All rights reserved. (modern)
+			companies. All rights reserved. (dcar)
 			<br />
 			<PrivacySettings
 				isCcpa={isCcpa}
