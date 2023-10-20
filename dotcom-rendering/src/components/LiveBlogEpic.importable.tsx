@@ -76,6 +76,22 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 	return { Epic };
 };
 
+const useMvtId = (isDev = false): number => {
+	const [mvtId, setMvtId] = useState<number>(0);
+
+	useEffect(() => {
+		const cookie = getCookie({ name: 'GU_mvt_id', shouldMemoize: true });
+
+		if (cookie === null) return;
+
+		const id = Number(cookie) || 0;
+
+		setMvtId(id);
+	}, [isDev]);
+
+	return mvtId;
+};
+
 /**
  * usePayload
  *
@@ -103,8 +119,7 @@ const usePayload = ({
 	const articleCounts = useArticleCounts(pageId, keywordIds);
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
 	const countryCode = useCountryCode();
-	const mvtId =
-		Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })) || 0;
+	const mvtId = useMvtId();
 	const authStatus = useAuthStatus();
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||
