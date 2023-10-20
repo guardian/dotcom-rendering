@@ -6,6 +6,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
+import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
 import { Liveness } from './Liveness.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
@@ -92,6 +93,14 @@ describe('Island: server-side rendering', () => {
 
 	test('EnhancePinnedPost', () => {
 		expect(() => renderToString(<EnhancePinnedPost />)).not.toThrow();
+	});
+
+	test('InteractiveSupportButton', () => {
+		expect(() =>
+			renderToString(
+				<InteractiveSupportButton editionId="UK" subscribeUrl="" />,
+			),
+		).not.toThrow();
 	});
 
 	test('Snow', () => {
