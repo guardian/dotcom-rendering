@@ -36,6 +36,7 @@ import { useAuthStatus } from '../lib/useAuthStatus';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	editionId: EditionId;
@@ -180,6 +181,8 @@ const ReaderRevenueLinksRemote = ({
 		authStatus.kind === 'SignedInWithOkta' ||
 		authStatus.kind === 'SignedInWithCookies';
 
+	const { renderingTarget } = useConfig();
+
 	useOnce((): void => {
 		setAutomat();
 
@@ -241,7 +244,12 @@ const ReaderRevenueLinksRemote = ({
 				<SupportHeader
 					submitComponentEvent={(
 						componentEvent: OphanComponentEvent,
-					) => void submitComponentEvent(componentEvent)}
+					) =>
+						void submitComponentEvent(
+							componentEvent,
+							renderingTarget,
+						)
+					}
 					{...supportHeaderResponse.props}
 				/>
 			</div>
@@ -287,16 +295,18 @@ const ReaderRevenueLinksNative = ({
 		debounce: true,
 	});
 
+	const { renderingTarget } = useConfig();
+
 	useEffect(() => {
 		if (!hideSupportMessaging && inHeader) {
-			void sendOphanComponentEvent('INSERT', tracking);
+			void sendOphanComponentEvent('INSERT', tracking, renderingTarget);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		if (hasBeenSeen && inHeader) {
-			void sendOphanComponentEvent('VIEW', tracking);
+			void sendOphanComponentEvent('VIEW', tracking, renderingTarget);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hasBeenSeen]);

@@ -11,6 +11,7 @@ import {
 } from '@guardian/braze-components/logic';
 import { log, startPerformanceMeasure, storage } from '@guardian/libs';
 import { getOphan } from '../../client/ophan/ophan';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import {
 	clearHasCurrentBrazeUser,
 	hasCurrentBrazeUser,
@@ -51,6 +52,7 @@ const maybeWipeUserData = async (
 export const buildBrazeMessaging = async (
 	idApiUrl: string,
 	isSignedIn: boolean,
+	renderingTarget: RenderingTarget,
 ): Promise<{
 	brazeMessages: BrazeMessagesInterface;
 	brazeCards: BrazeCardsInterface;
@@ -103,7 +105,7 @@ export const buildBrazeMessaging = async (
 		);
 
 		const sdkLoadTimeTaken = endPerformanceMeasure();
-		const ophan = await getOphan();
+		const ophan = await getOphan(renderingTarget);
 		ophan.record({
 			component: 'braze-sdk-load-timing',
 			value: sdkLoadTimeTaken,

@@ -1,12 +1,15 @@
 import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { defaultStory } from '../../../fixtures/manual/guideAtom';
+import { ConfigProvider } from '../ConfigContext';
 import { GuideAtom } from './GuideAtom';
 
 describe('GuideAtom', () => {
 	it('should render', () => {
 		const { getByText, queryByText } = render(
-			<GuideAtom {...defaultStory} />,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<GuideAtom {...defaultStory} />
+			</ConfigProvider>,
 		);
 
 		expect(getByText('Quick Guide')).toBeInTheDocument();
@@ -23,7 +26,9 @@ describe('GuideAtom', () => {
 
 	it('Show feedback on like', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<GuideAtom {...defaultStory} />,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<GuideAtom {...defaultStory} />
+			</ConfigProvider>,
 		);
 
 		// Expand Guide
@@ -41,7 +46,9 @@ describe('GuideAtom', () => {
 
 	it('Show feedback on dislike', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<GuideAtom {...defaultStory} />,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<GuideAtom {...defaultStory} />
+			</ConfigProvider>,
 		);
 
 		// Expand Guide

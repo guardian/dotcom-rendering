@@ -7,6 +7,7 @@ import { useOnce } from '../lib/useOnce';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import {
 	submitViewEventTracking,
@@ -113,13 +114,18 @@ const ShowSignInGate = ({
 	checkoutCompleteCookieData,
 	personaliseSignInGateAfterCheckoutSwitch,
 }: ShowSignInGateProps) => {
+	const { renderingTarget } = useConfig();
+
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
-		submitViewEventTracking({
-			component: withComponentId(componentId),
-			abTest,
-		});
-	}, [abTest, componentId]);
+		submitViewEventTracking(
+			{
+				component: withComponentId(componentId),
+				abTest,
+			},
+			renderingTarget,
+		);
+	}, [abTest, componentId, renderingTarget]);
 
 	// some sign in gate ab test variants may not need to show a gate
 	// therefore the gate is optional

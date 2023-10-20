@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
+import { ConfigProvider } from './ConfigContext';
 import { ProfileAtom } from './ProfileAtom.importable';
 
 const format: ArticleFormat = {
@@ -10,22 +11,24 @@ const format: ArticleFormat = {
 describe('ProfileAtom', () => {
 	it('should render', () => {
 		const { getByText, queryByText } = render(
-			<ProfileAtom
-				id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
-				title="Who is Jon Lansman?"
-				html="<p>A 62-year-old Labour veteran who joined the party in 1974 and worked for Labour icon Tony Benn during his deputy leadership campaign in the 1980s. Lansman served as director of operations for Corbyn’s leadership campaign. After Corbyn was elected as the leader of the Labour party in 2015, Lansman founded Momentum, a pro-Corbyn campaign group.<br></p>"
-				credit=""
-				format={format}
-				likeHandler={() => {
-					return null;
-				}}
-				dislikeHandler={() => {
-					return null;
-				}}
-				expandCallback={() => {
-					return null;
-				}}
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<ProfileAtom
+					id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
+					title="Who is Jon Lansman?"
+					html="<p>A 62-year-old Labour veteran who joined the party in 1974 and worked for Labour icon Tony Benn during his deputy leadership campaign in the 1980s. Lansman served as director of operations for Corbyn’s leadership campaign. After Corbyn was elected as the leader of the Labour party in 2015, Lansman founded Momentum, a pro-Corbyn campaign group.<br></p>"
+					credit=""
+					format={format}
+					likeHandler={() => {
+						return null;
+					}}
+					dislikeHandler={() => {
+						return null;
+					}}
+					expandCallback={() => {
+						return null;
+					}}
+				/>
+			</ConfigProvider>,
 		);
 
 		expect(getByText('Profile')).toBeInTheDocument();
@@ -42,22 +45,24 @@ describe('ProfileAtom', () => {
 
 	it('Show feedback on like', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<ProfileAtom
-				id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
-				format={format}
-				title="Who is Jon Lansman?"
-				html="<p>A 62-year-old Labour veteran who joined the party in 1974 and worked for Labour icon Tony Benn during his deputy leadership campaign in the 1980s. Lansman served as director of operations for Corbyn’s leadership campaign. After Corbyn was elected as the leader of the Labour party in 2015, Lansman founded Momentum, a pro-Corbyn campaign group.<br></p>"
-				credit=""
-				likeHandler={() => {
-					return null;
-				}}
-				dislikeHandler={() => {
-					return null;
-				}}
-				expandCallback={() => {
-					return null;
-				}}
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<ProfileAtom
+					id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
+					format={format}
+					title="Who is Jon Lansman?"
+					html="<p>A 62-year-old Labour veteran who joined the party in 1974 and worked for Labour icon Tony Benn during his deputy leadership campaign in the 1980s. Lansman served as director of operations for Corbyn’s leadership campaign. After Corbyn was elected as the leader of the Labour party in 2015, Lansman founded Momentum, a pro-Corbyn campaign group.<br></p>"
+					credit=""
+					likeHandler={() => {
+						return null;
+					}}
+					dislikeHandler={() => {
+						return null;
+					}}
+					expandCallback={() => {
+						return null;
+					}}
+				/>
+			</ConfigProvider>,
 		);
 
 		// Expand Profile
@@ -75,22 +80,24 @@ describe('ProfileAtom', () => {
 
 	it('Show feedback on dislike', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<ProfileAtom
-				id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
-				format={format}
-				title="Who is Jon Lansman?"
-				html="<p>A 62-year-old Labour veteran who joined the party in 1974 and worked for Labour icon Tony Benn during his deputy leadership campaign in the 1980s. Lansman served as director of operations for Corbyn’s leadership campaign. After Corbyn was elected as the leader of the Labour party in 2015, Lansman founded Momentum, a pro-Corbyn campaign group.<br></p>"
-				credit=""
-				likeHandler={() => {
-					return null;
-				}}
-				dislikeHandler={() => {
-					return null;
-				}}
-				expandCallback={() => {
-					return null;
-				}}
-			/>,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<ProfileAtom
+					id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
+					format={format}
+					title="Who is Jon Lansman?"
+					html="<p>A 62-year-old Labour veteran who joined the party in 1974 and worked for Labour icon Tony Benn during his deputy leadership campaign in the 1980s. Lansman served as director of operations for Corbyn’s leadership campaign. After Corbyn was elected as the leader of the Labour party in 2015, Lansman founded Momentum, a pro-Corbyn campaign group.<br></p>"
+					credit=""
+					likeHandler={() => {
+						return null;
+					}}
+					dislikeHandler={() => {
+						return null;
+					}}
+					expandCallback={() => {
+						return null;
+					}}
+				/>
+			</ConfigProvider>,
 		);
 
 		// Expand Profile

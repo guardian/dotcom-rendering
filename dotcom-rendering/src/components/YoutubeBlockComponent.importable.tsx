@@ -180,7 +180,7 @@ export const YoutubeBlockComponent = ({
 
 	const ophanTracking = async (trackingEvent: string): Promise<void> => {
 		if (!id) return;
-		const ophan = await getOphan();
+		const ophan = await getOphan(renderingTarget);
 		ophan.record({
 			video: {
 				id: `gu-video-youtube-${id}`,

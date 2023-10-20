@@ -1,12 +1,15 @@
 import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { imageStory } from '../../fixtures/manual/qandaAtom';
+import { ConfigProvider } from './ConfigContext';
 import { QandaAtom } from './QandaAtom.importable';
 
 describe('QandaAtom', () => {
 	it('should render & expand works', () => {
 		const { getByText, queryByText } = render(
-			<QandaAtom {...imageStory} />,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<QandaAtom {...imageStory} />
+			</ConfigProvider>,
 		);
 
 		expect(getByText('Q&A')).toBeInTheDocument();
@@ -23,7 +26,9 @@ describe('QandaAtom', () => {
 
 	it('Show feedback on like', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<QandaAtom {...imageStory} />,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<QandaAtom {...imageStory} />
+			</ConfigProvider>,
 		);
 
 		// Expand Q&A
@@ -41,7 +46,9 @@ describe('QandaAtom', () => {
 
 	it('Show feedback on dislike', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<QandaAtom {...imageStory} />,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<QandaAtom {...imageStory} />
+			</ConfigProvider>,
 		);
 
 		// Expand Q&A

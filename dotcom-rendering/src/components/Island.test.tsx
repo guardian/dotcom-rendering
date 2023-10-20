@@ -5,6 +5,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { CardCommentCount } from './CardCommentCount.importable';
+import { ConfigProvider } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
@@ -92,7 +93,13 @@ describe('Island: server-side rendering', () => {
 	});
 
 	test('EnhancePinnedPost', () => {
-		expect(() => renderToString(<EnhancePinnedPost />)).not.toThrow();
+		expect(() =>
+			renderToString(
+				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+					<EnhancePinnedPost />
+				</ConfigProvider>,
+			),
+		).not.toThrow();
 	});
 
 	test('InteractiveSupportButton', () => {

@@ -1,12 +1,15 @@
 import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { noTimelineEventsStory } from '../../fixtures/manual/timelineAtom';
+import { ConfigProvider } from './ConfigContext';
 import { TimelineAtom } from './TimelineAtom.importable';
 
 describe('TimelineAtom', () => {
 	it('should render', () => {
 		const { getByText, queryByText } = render(
-			<TimelineAtom {...noTimelineEventsStory} />,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<TimelineAtom {...noTimelineEventsStory} />
+			</ConfigProvider>,
 		);
 
 		expect(getByText('Timeline')).toBeInTheDocument();
@@ -23,7 +26,9 @@ describe('TimelineAtom', () => {
 
 	it('Show feedback on like', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<TimelineAtom {...noTimelineEventsStory} />,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<TimelineAtom {...noTimelineEventsStory} />
+			</ConfigProvider>,
 		);
 
 		// Expand Timeline
@@ -41,7 +46,9 @@ describe('TimelineAtom', () => {
 
 	it('Show feedback on dislike', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<TimelineAtom {...noTimelineEventsStory} />,
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<TimelineAtom {...noTimelineEventsStory} />
+			</ConfigProvider>,
 		);
 
 		// Timeline Guide

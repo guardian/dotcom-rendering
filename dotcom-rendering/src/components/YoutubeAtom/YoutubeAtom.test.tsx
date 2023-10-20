@@ -2,6 +2,7 @@ import type { ConsentState } from '@guardian/consent-management-platform/dist/ty
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render } from '@testing-library/react';
+import { ConfigProvider } from '../ConfigContext';
 import { YoutubeAtom } from './YoutubeAtom';
 
 const overlayImage =
@@ -23,24 +24,26 @@ const consentStateCanTarget: ConsentState = {
 describe('YoutubeAtom', () => {
 	it('Player initialises when no overlay and has consent state', () => {
 		const atom = (
-			<YoutubeAtom
-				elementId="xyz"
-				title="My Youtube video!"
-				videoId="ZCvZmYlQD8"
-				alt=""
-				adTargeting={{ disableAds: true }}
-				eventEmitters={[]}
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				consentState={consentStateCanTarget}
-				shouldStick={false}
-				isMainMedia={false}
-				imaEnabled={false}
-				abTestParticipations={{}}
-			/>
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<YoutubeAtom
+					elementId="xyz"
+					title="My Youtube video!"
+					videoId="ZCvZmYlQD8"
+					alt=""
+					adTargeting={{ disableAds: true }}
+					eventEmitters={[]}
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+					consentState={consentStateCanTarget}
+					shouldStick={false}
+					isMainMedia={false}
+					imaEnabled={false}
+					abTestParticipations={{}}
+				/>
+			</ConfigProvider>
 		);
 		const { getByTestId } = render(atom);
 		const playerDiv = getByTestId('youtube-video-ZCvZmYlQD8-xyz');
@@ -49,25 +52,27 @@ describe('YoutubeAtom', () => {
 
 	it('Player initialises when overlay clicked and has consent state', () => {
 		const atom = (
-			<YoutubeAtom
-				elementId="xyz"
-				title="My Youtube video!"
-				videoId="ZCvZmYlQD8"
-				alt=""
-				adTargeting={{ disableAds: true }}
-				eventEmitters={[]}
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				consentState={consentStateCanTarget}
-				overrideImage={overlayImage}
-				shouldStick={false}
-				isMainMedia={false}
-				imaEnabled={false}
-				abTestParticipations={{}}
-			/>
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<YoutubeAtom
+					elementId="xyz"
+					title="My Youtube video!"
+					videoId="ZCvZmYlQD8"
+					alt=""
+					adTargeting={{ disableAds: true }}
+					eventEmitters={[]}
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+					consentState={consentStateCanTarget}
+					overrideImage={overlayImage}
+					shouldStick={false}
+					isMainMedia={false}
+					imaEnabled={false}
+					abTestParticipations={{}}
+				/>
+			</ConfigProvider>
 		);
 		const { getByTestId } = render(atom);
 		const overlay = getByTestId('youtube-overlay-ZCvZmYlQD8-xyz');
@@ -84,24 +89,26 @@ describe('YoutubeAtom', () => {
 		const title = 'My Youtube video!';
 
 		const atom = (
-			<YoutubeAtom
-				elementId="xyz"
-				title="My Youtube video!"
-				videoId="ZCvZmYlQD8"
-				alt=""
-				adTargeting={{ disableAds: true }}
-				eventEmitters={[]}
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				consentState={consentStateCanTarget}
-				shouldStick={false}
-				isMainMedia={false}
-				imaEnabled={false}
-				abTestParticipations={{}}
-			/>
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<YoutubeAtom
+					elementId="xyz"
+					title="My Youtube video!"
+					videoId="ZCvZmYlQD8"
+					alt=""
+					adTargeting={{ disableAds: true }}
+					eventEmitters={[]}
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+					consentState={consentStateCanTarget}
+					shouldStick={false}
+					isMainMedia={false}
+					imaEnabled={false}
+					abTestParticipations={{}}
+				/>
+			</ConfigProvider>
 		);
 		const { getByTestId } = render(atom);
 		const playerDiv = getByTestId('youtube-video-ZCvZmYlQD8-xyz');
@@ -111,25 +118,27 @@ describe('YoutubeAtom', () => {
 	it('overlay has correct aria-label', () => {
 		const title = 'My Youtube video!';
 		const atom = (
-			<YoutubeAtom
-				elementId="xyz"
-				title="My Youtube video!"
-				videoId="ZCvZmYlQD8"
-				alt=""
-				adTargeting={{ disableAds: true }}
-				eventEmitters={[]}
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				consentState={consentStateCanTarget}
-				overrideImage={overlayImage}
-				shouldStick={false}
-				isMainMedia={false}
-				imaEnabled={false}
-				abTestParticipations={{}}
-			/>
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<YoutubeAtom
+					elementId="xyz"
+					title="My Youtube video!"
+					videoId="ZCvZmYlQD8"
+					alt=""
+					adTargeting={{ disableAds: true }}
+					eventEmitters={[]}
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+					consentState={consentStateCanTarget}
+					overrideImage={overlayImage}
+					shouldStick={false}
+					isMainMedia={false}
+					imaEnabled={false}
+					abTestParticipations={{}}
+				/>
+			</ConfigProvider>
 		);
 		const { getByTestId } = render(atom);
 		const overlay = getByTestId('youtube-overlay-ZCvZmYlQD8-xyz');
@@ -140,23 +149,25 @@ describe('YoutubeAtom', () => {
 
 	it('shows a placeholder if overlay is missing', () => {
 		const atom = (
-			<YoutubeAtom
-				elementId="xyz"
-				title="My Youtube video!"
-				videoId="ZCvZmYlQD8"
-				alt=""
-				adTargeting={{ disableAds: true }}
-				eventEmitters={[]}
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				shouldStick={false}
-				isMainMedia={false}
-				imaEnabled={false}
-				abTestParticipations={{}}
-			/>
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<YoutubeAtom
+					elementId="xyz"
+					title="My Youtube video!"
+					videoId="ZCvZmYlQD8"
+					alt=""
+					adTargeting={{ disableAds: true }}
+					eventEmitters={[]}
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+					shouldStick={false}
+					isMainMedia={false}
+					imaEnabled={false}
+					abTestParticipations={{}}
+				/>
+			</ConfigProvider>
 		);
 		const { getByTestId } = render(atom);
 		const placeholder = getByTestId('youtube-placeholder-ZCvZmYlQD8-xyz');
@@ -165,62 +176,7 @@ describe('YoutubeAtom', () => {
 
 	it('shows an overlay if present', () => {
 		const atom = (
-			<YoutubeAtom
-				elementId="xyz"
-				title="My Youtube video!"
-				videoId="ZCvZmYlQD8"
-				alt=""
-				adTargeting={{ disableAds: true }}
-				eventEmitters={[]}
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				overrideImage={overlayImage}
-				shouldStick={false}
-				isMainMedia={false}
-				imaEnabled={false}
-				abTestParticipations={{}}
-			/>
-		);
-		const { getByTestId } = render(atom);
-		const overlay = getByTestId('youtube-overlay-ZCvZmYlQD8-xyz');
-		expect(overlay).toBeInTheDocument();
-	});
-
-	it('hides an overlay once it is clicked', () => {
-		const atom = (
-			<YoutubeAtom
-				elementId="xyz"
-				title="My Youtube video!"
-				videoId="ZCvZmYlQD8"
-				alt=""
-				adTargeting={{ disableAds: true }}
-				eventEmitters={[]}
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				overrideImage={overlayImage}
-				shouldStick={false}
-				isMainMedia={false}
-				imaEnabled={false}
-				abTestParticipations={{}}
-			/>
-		);
-		const { getByTestId } = render(atom);
-		const overlay = getByTestId('youtube-overlay-ZCvZmYlQD8-xyz');
-		expect(overlay).toBeInTheDocument();
-
-		fireEvent.click(getByTestId('youtube-overlay-ZCvZmYlQD8-xyz'));
-		expect(overlay).not.toBeInTheDocument();
-	});
-
-	it('when two Atoms - hides the overlay of the correct player if clicked', () => {
-		const atom = (
-			<>
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
 				<YoutubeAtom
 					elementId="xyz"
 					title="My Youtube video!"
@@ -239,10 +195,20 @@ describe('YoutubeAtom', () => {
 					imaEnabled={false}
 					abTestParticipations={{}}
 				/>
+			</ConfigProvider>
+		);
+		const { getByTestId } = render(atom);
+		const overlay = getByTestId('youtube-overlay-ZCvZmYlQD8-xyz');
+		expect(overlay).toBeInTheDocument();
+	});
+
+	it('hides an overlay once it is clicked', () => {
+		const atom = (
+			<ConfigProvider value={{ renderingTarget: 'Web' }}>
 				<YoutubeAtom
 					elementId="xyz"
-					title="My Youtube video 2!"
-					videoId="ZCvZmYlQD8_2"
+					title="My Youtube video!"
+					videoId="ZCvZmYlQD8"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -257,6 +223,57 @@ describe('YoutubeAtom', () => {
 					imaEnabled={false}
 					abTestParticipations={{}}
 				/>
+			</ConfigProvider>
+		);
+		const { getByTestId } = render(atom);
+		const overlay = getByTestId('youtube-overlay-ZCvZmYlQD8-xyz');
+		expect(overlay).toBeInTheDocument();
+
+		fireEvent.click(getByTestId('youtube-overlay-ZCvZmYlQD8-xyz'));
+		expect(overlay).not.toBeInTheDocument();
+	});
+
+	it('when two Atoms - hides the overlay of the correct player if clicked', () => {
+		const atom = (
+			<>
+				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+					<YoutubeAtom
+						elementId="xyz"
+						title="My Youtube video!"
+						videoId="ZCvZmYlQD8"
+						alt=""
+						adTargeting={{ disableAds: true }}
+						eventEmitters={[]}
+						format={{
+							theme: Pillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
+						}}
+						overrideImage={overlayImage}
+						shouldStick={false}
+						isMainMedia={false}
+						imaEnabled={false}
+						abTestParticipations={{}}
+					/>
+					<YoutubeAtom
+						elementId="xyz"
+						title="My Youtube video 2!"
+						videoId="ZCvZmYlQD8_2"
+						alt=""
+						adTargeting={{ disableAds: true }}
+						eventEmitters={[]}
+						format={{
+							theme: Pillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
+						}}
+						overrideImage={overlayImage}
+						shouldStick={false}
+						isMainMedia={false}
+						imaEnabled={false}
+						abTestParticipations={{}}
+					/>
+				</ConfigProvider>
 			</>
 		);
 		const { getByTestId } = render(atom);
