@@ -9,7 +9,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
-import { palette as themePalette } from '../palette';
+import { paletteDeclarations, palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
@@ -160,7 +160,7 @@ const byline = css`
 	}
 `;
 
-const contributorImageWrapper = css`
+const contributorImageWrapper = (format: ArticleFormat) => css`
 	width: 5rem;
 	height: 5rem;
 	margin-left: auto;
@@ -169,6 +169,9 @@ const contributorImageWrapper = css`
 		width: 8.5rem;
 		height: 8.5rem;
 	}
+
+	${paletteDeclarations(format, 'light').join('')}
+	/* TODO – address dark mode once darkModeInApps is on */
 
 	/* TODO remove the default img styling in ArticleBody.tsx - do we need direct element styling? */
 	img {
@@ -312,7 +315,7 @@ export const RichLink = ({
 							)}
 						</div>
 						{!!(isOpinion && contributorImage) && (
-							<div css={contributorImageWrapper}>
+							<div css={contributorImageWrapper(format)}>
 								<Avatar
 									src={contributorImage}
 									alt={mainContributor}
