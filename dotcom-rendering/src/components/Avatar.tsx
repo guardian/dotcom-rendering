@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
 import { Fragment } from 'react';
-import { decidePalette } from '../lib/decidePalette';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
-import type { DCRContainerPalette } from '../types/front';
-import type { Palette } from '../types/palette';
+import { palette } from '../palette';
 import { generateSources, getFallbackSource } from './Picture';
 
 const picture = css`
@@ -11,6 +9,7 @@ const picture = css`
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
+	background-color: ${palette('--background-avatar')};
 `;
 
 const img = css`
@@ -29,20 +28,12 @@ const block = css`
 	display: block;
 `;
 
-const backgroundStyles = (palette: Palette) =>
-	css`
-		background-color: ${palette.background.avatar};
-	`;
-
 type Props = {
 	src: string;
 	alt: string;
-	format: ArticleFormat;
-	containerPalette?: DCRContainerPalette;
 };
 
-export const Avatar = ({ src, alt, format, containerPalette }: Props) => {
-	const palette = decidePalette(format, containerPalette);
+export const Avatar = ({ src, alt }: Props) => {
 	const sources = generateSources(getSourceImageUrl(src), [
 		{ breakpoint: 320, width: 75 },
 		{ breakpoint: 740, width: 140 },
@@ -61,7 +52,7 @@ export const Avatar = ({ src, alt, format, containerPalette }: Props) => {
 	return (
 		<picture
 			// data-size={imageSize}
-			css={[block, picture, backgroundStyles(palette)]}
+			css={[block, picture]}
 		>
 			{sources.map((source) => {
 				return (

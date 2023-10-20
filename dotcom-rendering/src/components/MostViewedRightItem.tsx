@@ -84,11 +84,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 				<div css={lineWrapperStyles}>
 					{!!trail.image && (
 						<div css={imageWrapperStyles}>
-							<Avatar
-								src={trail.image}
-								alt=""
-								format={trail.format}
-							/>
+							<Avatar src={trail.image} alt="" />
 						</div>
 					)}
 					<div css={headlineWrapperStyles}>

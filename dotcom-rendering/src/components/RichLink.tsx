@@ -316,7 +316,6 @@ export const RichLink = ({
 								<Avatar
 									src={contributorImage}
 									alt={mainContributor}
-									format={format}
 								/>
 							</div>
 						)}
