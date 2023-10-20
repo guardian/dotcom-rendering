@@ -175,6 +175,7 @@ const sublinkStyles = css`
 		color: inherit;
 		text-decoration: none;
 		.show-underline {
+			text-underline-offset: -5%;
 			text-decoration: underline;
 		}
 	}
