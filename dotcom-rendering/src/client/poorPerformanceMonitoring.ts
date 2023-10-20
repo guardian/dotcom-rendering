@@ -78,7 +78,9 @@ export const recordPoorPerformance = async (
 	try {
 		if (await isPerformingPoorly()) {
 			log('openJournalism', `🐌 Poor page performance`);
-			return recordExperiences(renderingTarget, 'poor-page-performance');
+			return recordExperiences(renderingTarget, [
+				'poor-page-performance',
+			]);
 		}
 	} catch (error) {
 		// do nothing if the performance API is not available

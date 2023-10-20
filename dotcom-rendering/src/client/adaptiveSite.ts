@@ -33,7 +33,7 @@ const hideAdaptedIslands = () => {
 };
 
 const recordAdaptedSite = (renderingTarget: RenderingTarget) =>
-	recordExperiences(renderingTarget, 'adapted');
+	recordExperiences(renderingTarget, ['adapted']);
 
 export const adaptSite = (renderingTarget: RenderingTarget): void => {
 	log('openJournalism', '🎛️ Adapting');

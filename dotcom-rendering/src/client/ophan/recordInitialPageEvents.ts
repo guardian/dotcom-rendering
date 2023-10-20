@@ -11,7 +11,7 @@ export const recordInitialPageEvents = async (
 ): Promise<void> => {
 	const { record } = await getOphan(renderingTarget);
 
-	void recordExperiences(renderingTarget, 'dotcom-rendering');
+	void recordExperiences(renderingTarget, ['dotcom-rendering']);
 	record({ edition: window.guardian.config.page.edition });
 
 	// Record server-side AB test variants (i.e. control or variant)

@@ -39,12 +39,14 @@ export const getOphan = async (
 		cachedOphan = {
 			setEventEmitter: () => undefined, // We don't currently have a custom eventEmitter on DCR - like 'mediator' in Frontend.
 			trackComponentAttention: () => undefined,
-			record: (event) =>
-				log(
-					'dotcom',
-					"🧿 We're not recording this event because we are in DCAR",
-					event,
-				),
+			record: (e) => {
+				if (e instanceof Error) {
+					window.guardian.modules.sentry.reportError(
+						e,
+						"We are in DCAR but Ophan record method got called. This shouldn't have happened. Please investigate why",
+					);
+				}
+			},
 			viewId: 'Apps',
 			pageViewId: 'Apps',
 		};
@@ -176,7 +178,7 @@ export const recordPerformance = async (
 const experiencesSet = new Set(['dotcom-rendering']);
 export const recordExperiences = async (
 	renderingTarget: RenderingTarget,
-	...experiences: string[]
+	experiences: string[],
 ): Promise<void> => {
 	for (const experience of experiences) {
 		experiencesSet.add(experience);
