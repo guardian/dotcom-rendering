@@ -45,7 +45,7 @@ const headlineBackgroundColourDark = ({ design }: ArticleFormat): string => {
 	}
 };
 
-const backgroundAvatarLight = ({ design, theme }: ArticleFormat): string => {
+const avatarLight = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -100,7 +100,7 @@ const backgroundAvatarLight = ({ design, theme }: ArticleFormat): string => {
 	}
 };
 
-const backgroundAvatarDark = ({ design, theme }: ArticleFormat): string => {
+const avatarDark = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -123,6 +123,75 @@ const backgroundAvatarDark = ({ design, theme }: ArticleFormat): string => {
 			}
 		default:
 			return sourcePalette.neutral[20];
+	}
+};
+
+const backgroundArticleLight = ({ design, theme }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.news[800];
+			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[7];
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.opinion[800];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.neutral[100];
+			}
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
+
+const backgroundArticleDark = ({ design, theme }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[7];
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[0];
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[10];
+			}
+		default:
+			return sourcePalette.neutral[10];
 	}
 };
 
@@ -377,9 +446,13 @@ const paletteColours = {
 		light: clickToViewButtonHoverLight,
 		dark: clickToViewButtonHoverDark,
 	},
-	'--background-avatar': {
-		light: backgroundAvatarLight,
-		dark: backgroundAvatarDark,
+	'--avatar-background': {
+		light: avatarLight,
+		dark: avatarDark,
+	},
+	'--background-article': {
+		light: backgroundArticleLight,
+		dark: backgroundArticleDark,
 	},
 } satisfies PaletteColours;
 

@@ -6,7 +6,7 @@ import {
 } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
-import { darkMode, lightMode } from '../lib/decorators';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Avatar } from './Avatar';
 
 const meta: Meta<typeof Avatar> = {
@@ -35,7 +35,7 @@ export const defaultStory: Story = () => (
 );
 defaultStory.storyName = 'Medium, Opinion (Rich Links)';
 defaultStory.decorators = [
-	lightMode({
+	splitTheme({
 		...format,
 		theme: Pillar.Opinion,
 	}),
@@ -48,20 +48,7 @@ export const largeStory: Story = () => (
 );
 largeStory.storyName = 'Large, Lifestyle (Byline image - Desktop)';
 largeStory.decorators = [
-	lightMode({
-		...format,
-		theme: Pillar.Lifestyle,
-	}),
-];
-
-export const largeStoryDark: Story = () => (
-	<div style={{ width: '140px', height: '140px' }}>
-		<Avatar src={leahHarper} alt="The alt of the image" />
-	</div>
-);
-largeStoryDark.storyName = 'Large, Lifestyle (Byline image - Desktop - Dark)';
-largeStoryDark.decorators = [
-	darkMode({
+	splitTheme({
 		...format,
 		theme: Pillar.Lifestyle,
 	}),
@@ -73,7 +60,7 @@ export const largeStoryNews: Story = () => (
 	</div>
 );
 largeStoryNews.storyName = 'Large, News (Byline image - Desktop)';
-largeStoryNews.decorators = [lightMode(format)];
+largeStoryNews.decorators = [splitTheme(format)];
 
 export const largeStoryCulture: Story = () => (
 	<div style={{ width: '140px', height: '140px' }}>
@@ -82,7 +69,7 @@ export const largeStoryCulture: Story = () => (
 );
 largeStoryCulture.storyName = 'Large, Culture (Byline image - Desktop)';
 largeStoryCulture.decorators = [
-	lightMode({
+	splitTheme({
 		...format,
 		theme: Pillar.Culture,
 	}),
@@ -95,22 +82,22 @@ export const SpecialReport: Story = () => (
 );
 SpecialReport.storyName = 'Large SpecialReport';
 SpecialReport.decorators = [
-	lightMode({
+	splitTheme({
 		...format,
 		theme: ArticleSpecial.SpecialReport,
 	}),
 ];
 
-export const SpecialReportDark: Story = () => (
+export const SpecialReportAlt: Story = () => (
 	<div style={{ width: '140px', height: '140px' }}>
 		<Avatar src={leahHarper} alt="The alt of the image" />
 	</div>
 );
-SpecialReportDark.storyName = 'Large SpecialReport (Dark)';
-SpecialReportDark.decorators = [
-	darkMode({
+SpecialReportAlt.storyName = 'Large SpecialReportAlt';
+SpecialReportAlt.decorators = [
+	splitTheme({
 		...format,
-		theme: ArticleSpecial.SpecialReport,
+		theme: ArticleSpecial.SpecialReportAlt,
 	}),
 ];
 
@@ -121,20 +108,7 @@ export const smallStory: Story = () => (
 );
 smallStory.storyName = 'Small, Sport (Byline image - Mobile)';
 smallStory.decorators = [
-	lightMode({
-		...format,
-		theme: Pillar.Sport,
-	}),
-];
-
-export const smallStoryDark: Story = () => (
-	<div style={{ width: '60px', height: '60px' }}>
-		<Avatar src={sideLowe} alt="The alt of the image" />
-	</div>
-);
-smallStoryDark.storyName = 'Small, Sport (Byline image - Mobile - Dark)';
-smallStoryDark.decorators = [
-	darkMode({
+	splitTheme({
 		...format,
 		theme: Pillar.Sport,
 	}),

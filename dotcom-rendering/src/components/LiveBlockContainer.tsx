@@ -96,7 +96,7 @@ const BlockByline = ({
 							width: 100%;
 							height: 100%;
 							object-fit: cover;
-							background-color: ${palette('--background-avatar')};
+							background-color: ${palette('--avatar-background')};
 						`}
 					/>
 				</div>

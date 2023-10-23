@@ -9,7 +9,7 @@ const picture = css`
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
-	background-color: ${palette('--background-avatar')};
+	background-color: ${palette('--avatar-background')};
 `;
 
 const img = css`
