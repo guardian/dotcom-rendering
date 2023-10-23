@@ -1121,7 +1121,8 @@ export const Picture: DCRArticle = {
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
 	},
-	standfirst: '',
+	standfirst:
+		'<p>Former adviser Dominic Cummings has alleged that Boris Johnson hatched a ‘possibly illegal’ plan for donors to pay to renovate his flat</p>\n<ul>\n <li><a href="https://www.theguardian.com/politics/2022/feb/09/what-we-know-boris-johnson-downing-street-flat-renovation">What do we know about Boris Johnson’s Downing Street flat renovation?</a></li>\n</ul>',
 	sectionUrl: 'politics/boris-johnson',
 	pageId: 'commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 	version: 3,
