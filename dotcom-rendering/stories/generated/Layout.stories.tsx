@@ -13,6 +13,7 @@ export default {
 		chromatic: {
 			diffThreshold: 0.2,
 			pauseAnimationAtEnd: true,
+			delay: 1200, // ensure that OnwardsUpper shows relevant data
 		},
 	},
 };
@@ -69,6 +70,19 @@ export const WebShowcasePictureOpinionPillar = () => {
 WebShowcasePictureOpinionPillar.storyName = 'Web: Display: Showcase, Design: Picture, Theme: OpinionPillar';
 WebShowcasePictureOpinionPillar.args = { config: { renderingTarget: 'Web' } };
 
+export const AppsShowcasePictureOpinionPillar = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Picture"
+			theme="OpinionPillar"
+			renderingTarget="Apps"
+		/>
+	);
+};
+AppsShowcasePictureOpinionPillar.storyName = 'Apps: Display: Showcase, Design: Picture, Theme: OpinionPillar';
+AppsShowcasePictureOpinionPillar.args = { config: { renderingTarget: 'Apps' } };
+
 export const AppsStandardCommentNewsPillar = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -81,3 +95,29 @@ export const AppsStandardCommentNewsPillar = () => {
 };
 AppsStandardCommentNewsPillar.storyName = 'Apps: Display: Standard, Design: Comment, Theme: NewsPillar';
 AppsStandardCommentNewsPillar.args = { config: { renderingTarget: 'Apps' } };
+
+export const AppsStandardInteractiveNewsPillar = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Interactive"
+			theme="NewsPillar"
+			renderingTarget="Apps"
+		/>
+	);
+};
+AppsStandardInteractiveNewsPillar.storyName = 'Apps: Display: Standard, Design: Interactive, Theme: NewsPillar';
+AppsStandardInteractiveNewsPillar.args = { config: { renderingTarget: 'Apps' } };
+
+export const AppsImmersiveStandardNewsPillar = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Standard"
+			theme="NewsPillar"
+			renderingTarget="Apps"
+		/>
+	);
+};
+AppsImmersiveStandardNewsPillar.storyName = 'Apps: Display: Immersive, Design: Standard, Theme: NewsPillar';
+AppsImmersiveStandardNewsPillar.args = { config: { renderingTarget: 'Apps' } };

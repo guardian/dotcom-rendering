@@ -1,6 +1,6 @@
-import { ProfileAtom } from '@guardian/atoms-rendering';
-import type { ProfileAtomType } from '@guardian/atoms-rendering';
+import type { ProfileAtomProps } from './ProfileAtom.importable';
+import { ProfileAtom } from './ProfileAtom.importable';
 
-export const ProfileAtomWrapper = (props: ProfileAtomType) => {
+export const ProfileAtomWrapper = (props: ProfileAtomProps) => {
 	return <ProfileAtom {...props} />;
 };

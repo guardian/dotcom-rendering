@@ -127,7 +127,7 @@ questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSdwFc05qejwW_Gtl3pyW4N22
 You can force DCR on or off explicitly with
 [`?dcr=true` or `?dcr=false`](https://github.com/guardian/frontend/pull/21753).
 
-One way to verify whether the article you're looking at is being rendered by DCR or not is to look for `(modern)` in the footer after the copyright notice.
+One way to verify whether the article you're looking at is being rendered by DCR or not is to look for `(dcr)` in the footer after the copyright notice.
 
 ## Code Quality
 

@@ -1,10 +1,10 @@
 import { ArticleDesign, ArticleDisplay, Pillar, storage } from '@guardian/libs';
+import { useEffect } from 'react';
 import { doStorybookHydration } from '../client/islands/doStorybookHydration';
-import { useOnce } from '../lib/useOnce';
 import { DiscussionLayout } from './DiscussionLayout';
 
 const HydratedLayout = ({ children }: { children: React.ReactNode }) => {
-	useOnce(doStorybookHydration, []);
+	useEffect(doStorybookHydration, []);
 	return <>{children}</>;
 };
 

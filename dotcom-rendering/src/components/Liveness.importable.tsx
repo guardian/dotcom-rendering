@@ -1,8 +1,8 @@
+import { isString, timeAgo } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
-import { updateTimeElement } from '../client/relativeTime/updateTimeElements';
 import { isServer } from '../lib/isServer';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
@@ -32,6 +32,16 @@ const lastUpdated: Element | null = !isServer
 const toastRoot: Element | null = !isServer
 	? window.document.getElementById('toast-root')
 	: null;
+
+let timer: NodeJS.Timer | number | undefined;
+const updateTimeElement = (time: HTMLTimeElement) => {
+	clearTimeout(timer);
+	const then = new Date(time.dateTime).getTime();
+	const newText = timeAgo(then);
+	if (!isString(newText) || newText === time.innerText) return;
+	time.innerText = newText;
+	timer = setTimeout(() => updateTimeElement(time), 15_000);
+};
 
 /**
  * insert
@@ -167,6 +177,7 @@ export const Liveness = ({
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
+	const [key, setKey] = useState<string>();
 
 	/**
 	 * This function runs (once) after every successful useApi call. This is useful because it
@@ -185,8 +196,8 @@ export const Liveness = ({
 					}
 				}
 
-				if (lastUpdated) {
-					lastUpdated.setAttribute('dateTime', new Date().toString());
+				if (lastUpdated instanceof HTMLTimeElement) {
+					lastUpdated.dateTime = new Date().toString();
 					updateTimeElement(lastUpdated);
 				}
 
@@ -212,25 +223,36 @@ export const Liveness = ({
 		[onFirstPage, topOfBlogVisible, numHiddenBlocks, enhanceTweetsSwitch],
 	);
 
-	/**
-	 * This is a utility used by our Cypress end to end tests
-	 *
-	 * Rather than expect these scripts to depend on polling, we
-	 * expose this function to allow Cypress to manually trigger
-	 * updates with whatever html and properties it wants
-	 *
-	 */
-	window.mockLiveUpdate = onSuccess;
+	useEffect(() => {
+		/**
+		 * This is a utility used by our Cypress end to end tests
+		 *
+		 * Rather than expect these scripts to depend on polling, we
+		 * expose this function to allow Cypress to manually trigger
+		 * updates with whatever html and properties it wants
+		 *
+		 */
+		window.mockLiveUpdate = onSuccess;
+	}, [onSuccess]);
+
+	useEffect(() => {
+		setKey(
+			getKey(
+				pageId,
+				ajaxUrl,
+				latestBlockId,
+				filterKeyEvents,
+				selectedTopics,
+			),
+		);
+	}, [pageId, ajaxUrl, latestBlockId, filterKeyEvents, selectedTopics]);
 
 	// useApi returns { data, loading, error } but we're not using them here
-	useApi(
-		getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents, selectedTopics),
-		{
-			refreshInterval: 10_000,
-			refreshWhenHidden: true,
-			onSuccess,
-		},
-	);
+	useApi(key, {
+		refreshInterval: 10_000,
+		refreshWhenHidden: true,
+		onSuccess,
+	});
 
 	useEffect(() => {
 		document.title =

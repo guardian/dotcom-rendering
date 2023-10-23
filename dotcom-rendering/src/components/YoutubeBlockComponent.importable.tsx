@@ -8,6 +8,7 @@ import { getOphan } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import { Caption } from './Caption';
+import { useConfig } from './ConfigContext';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 
 type Props = {
@@ -112,6 +113,7 @@ export const YoutubeBlockComponent = ({
 	);
 
 	const adTargeting = useAdTargeting(duration);
+	const { renderingTarget } = useConfig();
 
 	const abTests = useAB();
 	const abTestsApi = abTests?.api;
@@ -178,7 +180,7 @@ export const YoutubeBlockComponent = ({
 
 	const ophanTracking = async (trackingEvent: string): Promise<void> => {
 		if (!id) return;
-		const ophan = await getOphan();
+		const ophan = await getOphan(renderingTarget);
 		ophan.record({
 			video: {
 				id: `gu-video-youtube-${id}`,
@@ -209,7 +211,11 @@ export const YoutubeBlockComponent = ({
 				width={width}
 				title={mediaTitle}
 				duration={duration}
-				eventEmitters={[ophanTracking, gaTracking]}
+				eventEmitters={
+					renderingTarget === 'Web'
+						? [ophanTracking, gaTracking]
+						: [gaTracking]
+				}
 				format={format}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={stickyVideos}

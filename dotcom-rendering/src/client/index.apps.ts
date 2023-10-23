@@ -10,25 +10,6 @@ import { startup } from './startup';
  *************************************************************/
 
 void startup(
-	'recordInitialPageEvents',
-	() =>
-		import(
-			/* webpackMode: "eager" */ './ophan/recordInitialPageEvents'
-		).then(({ recordInitialPageEvents }) => recordInitialPageEvents()),
-	{
-		priority: 'critical',
-	},
-);
-
-void startup(
-	'ga',
-	() => import(/* webpackMode: "eager" */ './ga').then(({ ga }) => ga()),
-	{
-		priority: 'critical',
-	},
-);
-
-void startup(
 	'sentryLoader',
 	() =>
 		import(/* webpackMode: "eager" */ './sentryLoader').then(
@@ -99,16 +80,6 @@ void startup(
 			/* webpackMode: 'lazy' */
 			'./newsletterEmbedIframe'
 		).then(({ newsletterEmbedIframe }) => newsletterEmbedIframe()),
-	{ priority: 'feature' },
-);
-
-void startup(
-	'relativeTime',
-	() =>
-		import(
-			/* webpackMode: 'lazy' */
-			'./relativeTime'
-		).then(({ relativeTime }) => relativeTime()),
 	{ priority: 'feature' },
 );
 

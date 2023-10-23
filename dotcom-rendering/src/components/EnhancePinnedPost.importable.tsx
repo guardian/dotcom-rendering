@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
 import { useIsInView } from '../lib/useIsInView';
+import type { RenderingTarget } from '../types/renderingTarget';
+import { useConfig } from './ConfigContext';
 
 const pinnedPost: HTMLElement | null = !isServer
 	? window.document.querySelector('[data-gu-marker=pinned-post]')
@@ -56,26 +58,32 @@ function scrollOnCollapse() {
 	}
 }
 
-const handleClickTracking = () => {
+const handleClickTracking = (renderingTarget: RenderingTarget) => {
 	if (pinnedPostCheckBox instanceof HTMLInputElement) {
 		if (pinnedPostCheckBox.checked) {
-			void submitComponentEvent({
-				component: {
-					componentType: 'LIVE_BLOG_PINNED_POST',
-					id: pinnedPost?.id,
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'LIVE_BLOG_PINNED_POST',
+						id: pinnedPost?.id,
+					},
+					action: 'CLICK',
+					value: 'show-more',
 				},
-				action: 'CLICK',
-				value: 'show-more',
-			});
+				renderingTarget,
+			);
 		} else {
-			void submitComponentEvent({
-				component: {
-					componentType: 'LIVE_BLOG_PINNED_POST',
-					id: pinnedPost?.id,
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'LIVE_BLOG_PINNED_POST',
+						id: pinnedPost?.id,
+					},
+					action: 'CLICK',
+					value: 'show-less',
 				},
-				action: 'CLICK',
-				value: 'show-less',
-			});
+				renderingTarget,
+			);
 			scrollOnCollapse();
 		}
 	}
@@ -88,6 +96,8 @@ export const EnhancePinnedPost = () => {
 		repeat: true,
 		node: pinnedPost ?? undefined,
 	});
+
+	const { renderingTarget } = useConfig();
 
 	const pinnedPostTiming =
 		useRef<ReturnType<typeof startPerformanceMeasure>>();
@@ -122,15 +132,16 @@ export const EnhancePinnedPost = () => {
 	}, []);
 
 	useEffect(() => {
-		pinnedPostCheckBox?.addEventListener('change', handleClickTracking);
+		pinnedPostCheckBox?.addEventListener('change', () =>
+			handleClickTracking(renderingTarget),
+		);
 
 		return () => {
-			pinnedPostCheckBox?.removeEventListener(
-				'change',
-				handleClickTracking,
+			pinnedPostCheckBox?.removeEventListener('change', () =>
+				handleClickTracking(renderingTarget),
 			);
 		};
-	}, []);
+	}, [renderingTarget]);
 
 	// calculate duration when user is viewing pinned post
 	// and emit ophan events when the pinned post goes out of view
@@ -147,16 +158,19 @@ export const EnhancePinnedPost = () => {
 			const timeTaken = pinnedPostTiming.current?.endPerformanceMeasure();
 			if (timeTaken !== undefined) {
 				const timeTakenInSeconds = timeTaken / 1000;
-				void submitComponentEvent({
-					component: {
-						componentType: 'LIVE_BLOG_PINNED_POST',
-						id: pinnedPost.id,
+				void submitComponentEvent(
+					{
+						component: {
+							componentType: 'LIVE_BLOG_PINNED_POST',
+							id: pinnedPost.id,
+						},
+						action: 'VIEW',
+						value: timeTakenInSeconds.toString(),
 					},
-					action: 'VIEW',
-					value: timeTakenInSeconds.toString(),
-				});
+					renderingTarget,
+				);
 			}
 		}
-	}, [isInView, hasBeenSeen]);
+	}, [isInView, hasBeenSeen, renderingTarget]);
 	return null;
 };

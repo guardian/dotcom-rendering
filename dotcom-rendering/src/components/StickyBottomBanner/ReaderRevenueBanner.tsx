@@ -9,7 +9,8 @@ import type {
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useState } from 'react';
+import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
+import { useEffect, useState } from 'react';
 import { trackNonClickInteraction } from '../../client/ga/ga';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
@@ -294,7 +295,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 };
 
 export type BannerProps = {
-	meta: any;
+	meta: TestTracking;
 	module: ModuleData;
 	// eslint-disable-next-line react/no-unused-prop-types -- ESLint is wrong: it is used in ReaderRevenueBanner
 	fetchEmail?: () => Promise<string | null>;
@@ -319,11 +320,7 @@ const RemoteBanner = ({
 		debounce: true,
 	});
 
-	useOnce(() => {
-		if (module === undefined || meta === undefined) {
-			return;
-		}
-
+	useEffect(() => {
 		setAutomat();
 
 		window
@@ -333,14 +330,12 @@ const RemoteBanner = ({
 			})
 			.catch((error) => {
 				const msg = `Error importing RR banner: ${String(error)}`;
-
-				console.log(msg);
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
 					'rr-banner',
 				);
 			});
-	}, []);
+	}, [module]);
 
 	useOnce(() => {
 		const { componentType } = meta;

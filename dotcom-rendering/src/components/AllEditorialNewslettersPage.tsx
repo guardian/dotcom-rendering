@@ -59,11 +59,7 @@ export const AllEditorialNewslettersPage = ({
 			>
 				<FocusStyles />
 			</Island>
-			<Island
-				priority="feature"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="critical" clientOnly={true}>
 				<Metrics
 					commercialMetricsEnabled={
 						!!newslettersPage.config.switches.commercialMetrics

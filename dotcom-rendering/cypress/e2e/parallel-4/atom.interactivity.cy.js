@@ -103,7 +103,7 @@ describe('Why do wombats do square poos?', function () {
 	it('when I get the answer wrong, it should display the right answer when I click Reveal', function () {
 		cy.visit(`/Article/${quizAtomUrl}`);
 		// Wait for hydration
-		cy.get('gu-island[name=KnowledgeQuizAtomWrapper]')
+		cy.get('gu-island[name=KnowledgeQuizAtom]')
 			.first()
 			.scrollIntoView()
 			.should('have.attr', 'data-island-status', 'hydrated');
@@ -131,7 +131,7 @@ describe('Why do wombats do square poos?', function () {
 	it('when I get the answer right, it should commend my skills when I click Reveal', function () {
 		cy.visit(`/Article/${quizAtomUrl}`);
 		// Wait for hydration
-		cy.get('gu-island[name=KnowledgeQuizAtomWrapper]')
+		cy.get('gu-island[name=KnowledgeQuizAtom]')
 			.first()
 			.scrollIntoView()
 			.should('have.attr', 'data-island-status', 'hydrated');

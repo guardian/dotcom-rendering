@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { shouldAdapt as checkShouldAdapt } from '../client/adaptiveSite';
-import { useOnce } from './useOnce';
 
 /**
  * A hook that reports whether we should adapt the current page
@@ -9,7 +8,7 @@ import { useOnce } from './useOnce';
 export const useShouldAdapt = (): boolean => {
 	const [shouldAdapt, setShouldAdapt] = useState(false);
 
-	useOnce(() => {
+	useEffect(() => {
 		void checkShouldAdapt().then(setShouldAdapt);
 	}, []);
 

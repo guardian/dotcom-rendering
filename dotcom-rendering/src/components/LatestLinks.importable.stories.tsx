@@ -22,6 +22,8 @@ export default {
 				breakpoints.phablet,
 				breakpoints.desktop,
 			],
+			pauseAnimationAtEnd: true,
+			delay: 1200, // ensure “reveal” has finished before taking screenshot
 		},
 	},
 };

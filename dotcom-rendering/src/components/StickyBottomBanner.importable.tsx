@@ -19,6 +19,7 @@ import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 import {
 	BrazeBanner,
 	canShowBrazeBanner,
@@ -240,7 +241,8 @@ export const StickyBottomBanner = ({
 	puzzleBannerSwitch: boolean;
 	isSensitive: boolean;
 }) => {
-	const { brazeMessages } = useBraze(idApiUrl);
+	const { renderingTarget } = useConfig();
+	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
 
 	const asyncCountryCode = getLocaleCode();
 	const authStatus = useAuthStatus();
@@ -317,7 +319,7 @@ export const StickyBottomBanner = ({
 			name: 'banner',
 		};
 
-		pickMessage(bannerConfig)
+		pickMessage(bannerConfig, renderingTarget)
 			.then((PickedBanner: () => MaybeFC) =>
 				setSelectedBanner(PickedBanner),
 			)
