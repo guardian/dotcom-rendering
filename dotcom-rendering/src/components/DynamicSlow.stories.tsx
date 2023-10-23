@@ -2,6 +2,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
+import { lightMode } from '../lib/decorators';
 import type { DCRGroupedTrails } from '../types/front';
 import { DynamicSlow } from './DynamicSlow';
 import { FrontSection } from './FrontSection';
@@ -65,6 +66,7 @@ export const Avatar = () => {
 	);
 };
 Avatar.storyName = 'With avatars';
+Avatar.decorators = [lightMode(articleFormat)];
 
 /* First Slice Variants */
 export const OneHugeTwoBigsFourStandards = () => (
