@@ -1,9 +1,9 @@
-import { palette } from '../../palette';
+import { palette } from '@guardian/source-foundations';
 
 export const Star = ({
 	starId,
 	isEmpty,
-	fill = palette('--star-rating-fill'),
+	fill = palette.neutral[7],
 }: {
 	starId: string;
 	isEmpty: boolean;
