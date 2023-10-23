@@ -25,6 +25,9 @@ export const unifyPageContent = ({
 				{!!elementHtml && (
 					<div dangerouslySetInnerHTML={{ __html: elementHtml }} />
 				)}
+				{/* Interactive atoms on standard articles are not meant to access
+				the main page; this is what interactive articles are for. */}
+				<script>window.parent = window;</script>
 			</body>
 			{/* JS need to load on body render */}
 			{!!elementJs && (
