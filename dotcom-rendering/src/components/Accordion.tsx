@@ -12,6 +12,7 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
+import { palette } from '../palette';
 
 interface Props {
 	children: React.ReactNode;
@@ -34,14 +35,14 @@ const titleRowStyles = css`
 	position: relative;
 	display: block;
 	align-items: center;
-	border-top: ${neutral[86]} 1px solid;
-	background-color: ${neutral[100]};
+	border-top: ${palette('--accordion-title-row-styles-border-top')} 1px solid;
+	background-color: ${palette('--accordion-title-row-styles-background')};
 	padding: ${space[2]}px ${space[2]}px ${space[2]}px ${space[3]}px;
 	&:focus {
 		${focusHalo};
 	}
 	path {
-		fill: ${neutral[46]};
+		fill: ${palette('--accordion-title-row-styles-fill')};
 	}
 	svg {
 		height: 2rem;
@@ -57,7 +58,7 @@ const titleRowStyles = css`
 
 const titleStyle = css`
 	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
-	color: ${neutral[7]};
+	color: ${palette('--accordion-title-style-colour')};
 `;
 
 const arrowPosition: SerializedStyles = css`
@@ -75,14 +76,16 @@ const backgroundColour = (
 ): SerializedStyles => {
 	if (context === 'keyEvents') {
 		return css`
-			background-color: ${background.primary};
+			background-color: ${palette(
+				'--accordion-key-events-background-colour',
+			)};
 			${from.desktop} {
 				background-color: transparent;
 			}
 		`;
 	}
 	return css`
-		background-color: ${neutral[97]};
+		background-color: ${palette('--accordion-live-feed-background-colour')};
 		${from.desktop} {
 			background-color: transparent;
 		}

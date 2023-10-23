@@ -48,6 +48,26 @@ const starRatingBackgroundColourLight = (): string =>
 const starRatingBackgroundColourDark = (): string =>
 	sourcePalette.brandAlt[200];
 
+const accordionTitleRowStylesFillColourLight = (): string =>
+	sourcePalette.neutral[46];
+const accordionTitleRowStylesFillColourDark = (): string =>
+	sourcePalette.neutral[60];
+const accordionTitleRowStylesBackgroundColourLight = (): string =>
+	sourcePalette.neutral[100];
+const accordionTitleRowStylesBackgroundColourDark = (): string =>
+	sourcePalette.neutral[10];
+const accordionTitleRowStylesBorderColourTopLight = (): string =>
+	sourcePalette.neutral[86];
+const accordionTitleRowStylesBorderColourTopDark = (): string =>
+	sourcePalette.neutral[20];
+const accordionTitleStylesColourLight = (): string => sourcePalette.neutral[7];
+const accordionTitleStylesColourDark = (): string => sourcePalette.neutral[86];
+const accordionKeyEventsBackgroundColourLight = (): string =>
+	sourcePalette.neutral[100];
+const accordionBackgroundColourDark = (): string => sourcePalette.neutral[10];
+const accordionLiveFeedBackgroundColourLight = (): string =>
+	sourcePalette.neutral[97];
+
 // ----- Palette ----- //
 
 /**
@@ -96,6 +116,30 @@ const paletteColours = {
 	'--star-rating-background': {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
+	},
+	'--accordion-title-row-styles-fill': {
+		light: accordionTitleRowStylesFillColourLight,
+		dark: accordionTitleRowStylesFillColourDark,
+	},
+	'--accordion-title-row-styles-background': {
+		light: accordionTitleRowStylesBackgroundColourLight,
+		dark: accordionTitleRowStylesBackgroundColourDark,
+	},
+	'--accordion-title-row-styles-border-top': {
+		light: accordionTitleRowStylesBorderColourTopLight,
+		dark: accordionTitleRowStylesBorderColourTopDark,
+	},
+	'--accordion-title-style-colour': {
+		light: accordionTitleStylesColourLight,
+		dark: accordionTitleStylesColourDark,
+	},
+	'--accordion-key-events-background-colour': {
+		light: accordionKeyEventsBackgroundColourLight,
+		dark: accordionBackgroundColourDark,
+	},
+	'--accordion-live-feed-background-colour': {
+		light: accordionLiveFeedBackgroundColourLight,
+		dark: accordionBackgroundColourDark,
 	},
 } satisfies PaletteColours;
 
