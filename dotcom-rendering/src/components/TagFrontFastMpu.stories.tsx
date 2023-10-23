@@ -1,16 +1,8 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { lightDecorator } from '../../.storybook/theme-decorators';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FrontSection } from './FrontSection';
 import { TagFrontFastMpu } from './TagFrontFastMpu';
-
-const articleFormat: ArticleFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
-};
 
 export default {
 	component: TagFrontFastMpu,
@@ -130,4 +122,3 @@ export const WithNineCards = () => {
 	);
 };
 WithNineCards.storyName = 'With nine cards';
-WithNineCards.decorators = [lightDecorator(articleFormat)];

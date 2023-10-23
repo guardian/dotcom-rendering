@@ -1,6 +1,4 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { lightDecorator } from '../../.storybook/theme-decorators';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
@@ -33,10 +31,3 @@ export const Default = () => (
 	</FrontSection>
 );
 Default.storyName = 'FixedLargeSlowXIV';
-Default.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Comment,
-		theme: Pillar.Opinion,
-	}),
-];

@@ -1,22 +1,10 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { lightDecorator } from '../../.storybook/theme-decorators';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
 import { DynamicPackage } from './DynamicPackage';
 import { FrontSection } from './FrontSection';
-
-const articleFormat: ArticleFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
-};
 
 const defaultGroupedTrails: DCRGroupedTrails = {
 	huge: [],
@@ -160,7 +148,6 @@ export const Seven = () => (
 	</FrontSection>
 );
 Seven.storyName = 'With seven standard cards';
-Seven.decorators = [lightDecorator(articleFormat)];
 
 export const Eight = () => (
 	<FrontSection
@@ -180,7 +167,6 @@ export const Eight = () => (
 	</FrontSection>
 );
 Eight.storyName = 'With eight standard cards';
-Eight.decorators = [lightDecorator(articleFormat)];
 
 export const Nine = () => (
 	<FrontSection
@@ -200,7 +186,6 @@ export const Nine = () => (
 	</FrontSection>
 );
 Nine.storyName = 'With nine standard cards';
-Nine.decorators = [lightDecorator(articleFormat)];
 
 export const Boosted1 = () => {
 	const primary = trails[0];
@@ -347,7 +332,6 @@ export const Boosted8 = () => {
 	);
 };
 Boosted8.storyName = 'With eight standard cards - boosted';
-Boosted8.decorators = [lightDecorator(articleFormat)];
 
 export const Boosted9 = () => {
 	const primary = trails[0];
@@ -373,7 +357,6 @@ export const Boosted9 = () => {
 	);
 };
 Boosted9.storyName = 'With nine standard cards - boosted';
-Boosted9.decorators = [lightDecorator(articleFormat)];
 
 export const OneSnapThreeStandard = () => (
 	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
