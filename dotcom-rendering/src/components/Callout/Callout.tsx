@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, headline, neutral, space } from '@guardian/source-foundations';
+import type { TabProps } from '@guardian/source-react-components-development-kitchen';
 import { Tabs } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type {
@@ -66,41 +67,44 @@ export const CalloutBlock = ({
 	pageId,
 	format,
 }: CalloutBlockProps) => {
-	const [selectedTab, setSelectedTab] = useState('form');
 	const shouldShowContacts = contacts && contacts.length > 0;
 	const shouldShowHeading = !!heading && !isNonCollapsible;
-	const tabsContent = [
-		{
-			id: 'form',
-			text: <div>Tell us here</div>,
-			content: (
-				<Form
-					formFields={formFields}
-					submissionURL={submissionURL}
-					formID={formId}
-					pageId={pageId}
-				/>
-			),
-		},
-	];
+	const form = {
+		id: 'form',
+		text: <div>Tell us here</div>,
+		content: (
+			<Form
+				formFields={formFields}
+				submissionURL={submissionURL}
+				formID={formId}
+				pageId={pageId}
+			/>
+		),
+	} satisfies TabProps;
 
-	if (shouldShowContacts) {
-		const tabsText = (
-			<div css={tabTitle}>
-				<div>Message us</div>
-				<div css={tabIcons}>
-					{contacts.map((c) =>
-						conditionallyRenderContactIcon(c.name),
-					)}
-				</div>
-			</div>
-		);
-		tabsContent.push({
-			id: 'contact',
-			text: tabsText,
-			content: <MessageUs contacts={contacts} />,
-		});
-	}
+	const tabs = (
+		shouldShowContacts
+			? [
+					form,
+					{
+						id: 'contact',
+						text: (
+							<div css={tabTitle}>
+								<div>Message us</div>
+								<div css={tabIcons}>
+									{contacts.map((c) =>
+										conditionallyRenderContactIcon(c.name),
+									)}
+								</div>
+							</div>
+						),
+						content: <MessageUs contacts={contacts} />,
+					},
+			  ]
+			: [form]
+	) satisfies TabProps[];
+
+	const [selectedTab, setSelectedTab] = useState(form.id);
 
 	return (
 		<div id={formId}>
@@ -127,11 +131,9 @@ export const CalloutBlock = ({
 			<Tabs
 				tabsLabel="Tell us via online form or message us using your phone"
 				tabElement="button"
-				tabs={tabsContent}
+				tabs={tabs}
 				selectedTab={selectedTab}
-				onTabChange={(tabName: string): void => {
-					setSelectedTab(tabName);
-				}}
+				onTabChange={setSelectedTab}
 			/>
 		</div>
 	);
