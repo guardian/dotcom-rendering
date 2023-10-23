@@ -19,7 +19,7 @@ import { Picture } from '../src/components/Picture';
 import { mockRESTCalls } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
-import { lightDecorator } from './decorators/themeDecorator';
+import { lightDecorator } from './decorators/themeDecorators';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
