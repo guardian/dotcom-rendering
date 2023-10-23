@@ -1,26 +1,23 @@
-/* eslint-disable -- k6 script */
+// @ts-check
 import { check } from 'k6';
 import { SharedArray } from 'k6/data';
 import http from 'k6/http';
 
 const PORT = 9000;
 
-/**
- * https://k6.io/docs/javascript-api/k6-data/sharedarray/
- */
+/** @type {import('k6/data').SharedArray} */
 const jsonPayload = new SharedArray('jsonPayload', function () {
 	const f = JSON.parse(open('./article-nier-automata.json'));
 	return [f];
 });
 
-/**
- * https://k6.io/docs/using-k6/options/
- */
+/** @type {import('k6/options').Options} */
 export const options = {
 	vus: 10,
 	duration: '60s',
 };
 
+// eslint-disable-next-line import/no-default-export -- k6 requires a default export
 export default function () {
 	const response = http.post(
 		`http://localhost:${PORT}/Article`,
