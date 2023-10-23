@@ -126,75 +126,6 @@ const avatarDark = ({ design, theme }: ArticleFormat): string => {
 	}
 };
 
-const backgroundArticleLight = ({ design, theme }: ArticleFormat) => {
-	switch (design) {
-		case ArticleDesign.Analysis:
-			switch (theme) {
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[800];
-				default:
-					return sourcePalette.news[800];
-			}
-		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[7];
-		case ArticleDesign.Comment:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Editorial:
-			switch (theme) {
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[800];
-				default:
-					return sourcePalette.opinion[800];
-			}
-		case ArticleDesign.Standard:
-		case ArticleDesign.Review:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Feature:
-		case ArticleDesign.Interview:
-		case ArticleDesign.Interactive:
-		case ArticleDesign.PhotoEssay:
-		case ArticleDesign.FullPageInteractive:
-		case ArticleDesign.NewsletterSignup:
-			switch (theme) {
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[800];
-				default:
-					return sourcePalette.neutral[100];
-			}
-		default:
-			return sourcePalette.neutral[100];
-	}
-};
-
-const backgroundArticleDark = ({ design, theme }: ArticleFormat) => {
-	switch (design) {
-		case ArticleDesign.DeadBlog:
-			return sourcePalette.neutral[7];
-		case ArticleDesign.LiveBlog:
-			return sourcePalette.neutral[0];
-		case ArticleDesign.Standard:
-		case ArticleDesign.Review:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Feature:
-		case ArticleDesign.Interview:
-		case ArticleDesign.Interactive:
-		case ArticleDesign.PhotoEssay:
-		case ArticleDesign.FullPageInteractive:
-		case ArticleDesign.NewsletterSignup:
-		case ArticleDesign.Comment:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Editorial:
-			switch (theme) {
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[100];
-				default:
-					return sourcePalette.neutral[10];
-			}
-		default:
-			return sourcePalette.neutral[10];
-	}
-};
-
 const starRatingFillColourLight = (): string => sourcePalette.neutral[7];
 const starRatingFillColourDark = (): string => sourcePalette.neutral[0];
 const starRatingBackgroundColourLight = (): string =>
@@ -449,10 +380,6 @@ const paletteColours = {
 	'--avatar-background': {
 		light: avatarLight,
 		dark: avatarDark,
-	},
-	'--background-article': {
-		light: backgroundArticleLight,
-		dark: backgroundArticleDark,
 	},
 } satisfies PaletteColours;
 
