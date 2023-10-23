@@ -15,6 +15,12 @@ export default {
 	title: 'Components/Caption',
 };
 
+const articleFormat: ArticleFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
+
 /**
     display: Display;
     design: Design;
@@ -31,11 +37,7 @@ export const Article = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Article caption looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={articleFormat}
 		/>
 	</Section>
 );
@@ -118,11 +120,7 @@ export const WidthLimited = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a caption looks with width limited"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={articleFormat}
 			shouldLimitWidth={true}
 		/>
 	</Section>
@@ -133,11 +131,7 @@ export const Padded = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a caption looks when padded"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={articleFormat}
 			padCaption={true}
 		/>
 	</Section>
@@ -225,11 +219,7 @@ export const VideoCaption = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Article caption looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={articleFormat}
 			mediaType="Video"
 		/>
 	</Section>
