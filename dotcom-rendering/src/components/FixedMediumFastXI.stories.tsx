@@ -1,8 +1,16 @@
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { lightDecorator } from '../../.storybook/theme-decorators';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
 import { FrontSection } from './FrontSection';
+
+const articleFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Comment,
+	theme: Pillar.Opinion,
+};
 
 export default {
 	component: FixedMediumFastXI,
@@ -87,6 +95,7 @@ export const SevenTrails = () => (
 	</FrontSection>
 );
 SevenTrails.storyName = 'with seven trails';
+SevenTrails.decorators = [lightDecorator(articleFormat)];
 
 export const EightTrails = () => (
 	<FrontSection
@@ -97,6 +106,7 @@ export const EightTrails = () => (
 	</FrontSection>
 );
 EightTrails.storyName = 'with eight trails';
+EightTrails.decorators = [lightDecorator(articleFormat)];
 
 export const NineTrails = () => (
 	<FrontSection
@@ -107,6 +117,7 @@ export const NineTrails = () => (
 	</FrontSection>
 );
 NineTrails.storyName = 'with nine trails';
+NineTrails.decorators = [lightDecorator(articleFormat)];
 
 export const TenTrails = () => (
 	<FrontSection
@@ -117,6 +128,7 @@ export const TenTrails = () => (
 	</FrontSection>
 );
 TenTrails.storyName = 'with ten trails';
+TenTrails.decorators = [lightDecorator(articleFormat)];
 
 export const ElevenTrails = () => (
 	<FrontSection
@@ -127,3 +139,4 @@ export const ElevenTrails = () => (
 	</FrontSection>
 );
 ElevenTrails.storyName = 'with eleven trails';
+ElevenTrails.decorators = [lightDecorator(articleFormat)];
