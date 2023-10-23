@@ -6,6 +6,7 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { lightDecorator } from '../../.storybook/theme-decorators';
 import { Caption } from './Caption';
 import { Section } from './Section';
 import { StarRating } from './StarRating/StarRating';
@@ -214,6 +215,7 @@ export const OverlaidWithStars = () => (
 	</Section>
 );
 OverlaidWithStars.storyName = 'when overlaid on stars';
+OverlaidWithStars.decorators = [lightDecorator(articleFormat)];
 
 export const VideoCaption = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
