@@ -96,7 +96,7 @@ describe('Sign In Gate Tests', function () {
 		beforeEach(function () {
 			disableCMP();
 			// sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
-			setMvtCookie('500000');
+			setMvtCookie('400000');
 
 			// set article count to be min number to view gate
 			setArticleCount(3);
@@ -127,7 +127,6 @@ describe('Sign In Gate Tests', function () {
 			});
 
 			it('should load the gate on every article view if user is reading in the morning', function () {
-				setMvtCookie('500001');
 				setArticleCount(1);
 
 				cy.visit(
@@ -145,6 +144,23 @@ describe('Sign In Gate Tests', function () {
 				cy.get('[data-cy=sign-in-gate-main_register]')
 					.should('have.attr', 'href')
 					.and('contains', 'abTestName%3DSignInGateTimesOfDay');
+			});
+
+			it('should not load the gate on every article view if user is reading in the afternoon', function () {
+				setArticleCount(1);
+
+				cy.visit(
+					'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+					{
+						onBeforeLoad: (win) => {
+							win.Date = AfternoonDate;
+						},
+					},
+				);
+
+				scrollToGateForLazyLoading();
+
+				cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
 			});
 
 			it('should load the gate on every third article view if user is reading at a time other than morning', function () {
