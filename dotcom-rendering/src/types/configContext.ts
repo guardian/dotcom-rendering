@@ -8,4 +8,5 @@ import type { RenderingTarget } from './renderingTarget';
  */
 export interface Config {
 	renderingTarget: RenderingTarget;
+	darkModeAvailable?: true;
 }

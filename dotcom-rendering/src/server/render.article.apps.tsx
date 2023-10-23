@@ -18,7 +18,12 @@ export const renderArticle = (
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const renderingTarget = 'Apps';
-	const config: Config = { renderingTarget };
+	const config: Config = {
+		renderingTarget,
+		darkModeAvailable: article.config.switches.darkModeInApps
+			? true
+			: undefined,
+	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
