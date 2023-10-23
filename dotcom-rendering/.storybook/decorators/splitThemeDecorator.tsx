@@ -2,6 +2,8 @@
 import { css } from '@emotion/react';
 import { paletteDeclarations } from '../../src/palette';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
+import { Decorator } from '@storybook/react';
+import { ArticleFormat } from '@guardian/libs';
 
 const headerCss = css`
 	font-size: 18px;
@@ -34,32 +36,32 @@ const lightStoryCss = css`
  * Once in light mode, once in dark mode
  * Using a split screen
  */
-const splitThemeDecorator = () => (format) => (Story) =>
-	(
-		<>
-			<div
-				className="left-lightTheme"
-				css={[
-					splitCss,
-					lightStoryCss,
-					css(paletteDeclarations(format, 'light')),
-				]}
-			>
-				<div css={headerCss}>Light Theme ☀️</div>
-				<Story />
-			</div>
-			<div
-				className="left-darkTheme"
-				css={[
-					splitCss,
-					darkStoryCss,
-					css(paletteDeclarations(format, 'dark')),
-				]}
-			>
-				<div css={headerCss}>Dark Theme 🌙</div>
-				<Story />
-			</div>
-		</>
-	);
-
-export const splitTheme = splitThemeDecorator();
+export const splitTheme =
+	(format: ArticleFormat): Decorator =>
+	(Story) =>
+		(
+			<>
+				<div
+					className="left-lightTheme"
+					css={[
+						splitCss,
+						lightStoryCss,
+						css(paletteDeclarations(format, 'light')),
+					]}
+				>
+					<div css={headerCss}>Light Theme ☀️</div>
+					<Story />
+				</div>
+				<div
+					className="right-darkTheme"
+					css={[
+						splitCss,
+						darkStoryCss,
+						css(paletteDeclarations(format, 'dark')),
+					]}
+				>
+					<div css={headerCss}>Dark Theme 🌙</div>
+					<Story />
+				</div>
+			</>
+		);
