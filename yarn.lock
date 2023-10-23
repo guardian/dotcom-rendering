@@ -822,7 +822,7 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.22.9.tgz#71cdb00a1ce3a329ce4cbec3a44f9fef35669730"
   integrity sha512-5UamI7xkUcJ3i9qVDS+KFDEK8/7oJ55/sJMB1Ge7IEapr7KfdfV/HErR+koZwOfd+SgtFKOKRhRakdg++DcJpQ==
 
-"@babel/core@7.23.2", "@babel/core@^7.16.7":
+"@babel/core@7.23.2", "@babel/core@^7.23.2":
   version "7.23.2"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.23.2.tgz#ed10df0d580fff67c5f3ee70fd22e2e4c90a9f94"
   integrity sha512-n7s51eWdaWZ3vGT2tD4T7J6eJs3QoBXydv7vkUM06Bf1cbVD2Kc2UrkzhiQwobfV7NwOnQXYL7UBJ5VPU+RGoQ==
@@ -3192,10 +3192,10 @@
     read-pkg-up "7.0.1"
     yargs "^17.6.2"
 
-"@guardian/commercial@11.17.0":
-  version "11.17.0"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-11.17.0.tgz#833eab487be5d864157d3f124b48dcf3acfb12ad"
-  integrity sha512-6aSGaYWyav9wDRyUERkCl69n2LDsFsHntqthftGzZHPESjTLGa48owWULjsYfyNeq3i+ALSVAOq8a5UMYF0obA==
+"@guardian/commercial@11.17.1":
+  version "11.17.1"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-11.17.1.tgz#20d1995af590acf1ff5cb0422d77d50319daf241"
+  integrity sha512-XNkuPbpKgxYozjELlyloi0OgxCrPuwBVM+KS0VaeDypbn7SWCFt5Wt2maDGB3ss3NiwJ4YKq5/On7j5Z43yBrQ==
   dependencies:
     "@changesets/cli" "^2.26.2"
     "@octokit/core" "^4.0.5"
@@ -3209,10 +3209,10 @@
     web-vitals "^3.3.2"
     wolfy87-eventemitter "^5.2.9"
 
-"@guardian/consent-management-platform@13.6.1":
-  version "13.6.1"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-13.6.1.tgz#528ed9193b1bd96e9f84964a5a1a080de43e29c1"
-  integrity sha512-5KQ4dZrqIBKuJCSJ/TTWXZ4F0WXY9ecpMnfOfvNIU9tXF1LAeT+LNv7hfV8eC5qMJskj2yvZZUi7hlwWD+Nq/A==
+"@guardian/consent-management-platform@13.7.1":
+  version "13.7.1"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-13.7.1.tgz#ba38f32de023775e615e79cfa97a3425f144eb89"
+  integrity sha512-BtUNkuCqd++A0Wkk9CA4kI95yVZJk1YMjPdppEnmq3cG/ros4ElXN4cNG7pWifeTR5cUtJflAiRRO4L5ewASpQ==
 
 "@guardian/core-web-vitals@5.1.0":
   version "5.1.0"
@@ -15096,11 +15096,11 @@ preact@10.15.1:
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.15.1.tgz#a1de60c9fc0c79a522d969c65dcaddc5d994eede"
   integrity sha512-qs2ansoQEwzNiV5eAcRT1p1EC/dmEzaATVDJNiB3g2sRDWdA7b7MurXdJjB2+/WQktGWZwxvDrnuRFbWuIr64g==
 
-prebid.js@guardian/prebid.js#ddf4251:
+"prebid.js@github:guardian/prebid.js#ddf4251":
   version "7.54.5"
   resolved "https://codeload.github.com/guardian/prebid.js/tar.gz/ddf4251b19c95878af00f640211c0c31ac3e7ac2"
   dependencies:
-    "@babel/core" "^7.16.7"
+    "@babel/core" "^7.23.2"
     "@babel/plugin-transform-runtime" "^7.18.9"
     "@babel/preset-env" "^7.16.8"
     "@babel/runtime" "^7.18.9"
