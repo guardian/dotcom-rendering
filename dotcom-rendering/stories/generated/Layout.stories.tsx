@@ -70,6 +70,7 @@ export const WebShowcasePictureOpinionPillar = () => {
 WebShowcasePictureOpinionPillar.storyName = 'Web: Display: Showcase, Design: Picture, Theme: OpinionPillar';
 WebShowcasePictureOpinionPillar.args = { config: { renderingTarget: 'Web' } };
 
+
 export const AppsShowcasePictureOpinionPillar = () => {
 	return (
 		<HydratedLayoutWrapper

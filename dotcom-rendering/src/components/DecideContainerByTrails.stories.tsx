@@ -1,8 +1,16 @@
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { lightDecorator } from '../../.storybook/theme-decorators';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { DecideContainerByTrails } from './DecideContainerByTrails';
 import { FrontSection } from './FrontSection';
+
+const articleFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
 
 export default {
 	component: DecideContainerByTrails,
@@ -129,6 +137,7 @@ export const SevenCardFast = () => {
 	);
 };
 SevenCardFast.storyName = 'Fast - Seven cards';
+SevenCardFast.decorators = [lightDecorator(articleFormat)];
 
 export const EightCardFast = () => {
 	return (
@@ -146,6 +155,7 @@ export const EightCardFast = () => {
 };
 
 EightCardFast.storyName = 'Fast - Eight cards';
+EightCardFast.decorators = [lightDecorator(articleFormat)];
 
 export const TwelveCardFast = () => {
 	return (
@@ -162,6 +172,7 @@ export const TwelveCardFast = () => {
 	);
 };
 TwelveCardFast.storyName = 'Fast - Twelve cards';
+TwelveCardFast.decorators = [lightDecorator(articleFormat)];
 
 export const OneCardSlow = () => {
 	return (
@@ -274,6 +285,7 @@ export const SevenCardSlow = () => {
 	);
 };
 SevenCardSlow.storyName = 'Slow - Seven cards';
+SevenCardSlow.decorators = [lightDecorator(articleFormat)];
 
 export const EightCardSlow = () => {
 	return (
@@ -291,6 +303,7 @@ export const EightCardSlow = () => {
 };
 
 EightCardSlow.storyName = 'Slow - Eight cards';
+EightCardSlow.decorators = [lightDecorator(articleFormat)];
 
 export const TwelveCardSlow = () => {
 	return (
@@ -307,3 +320,4 @@ export const TwelveCardSlow = () => {
 	);
 };
 TwelveCardSlow.storyName = 'Slow - Twelve cards';
+TwelveCardSlow.decorators = [lightDecorator(articleFormat)];

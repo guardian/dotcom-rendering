@@ -1,8 +1,16 @@
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { lightDecorator } from '../../.storybook/theme-decorators';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { DynamicSlowMPU } from './DynamicSlowMPU';
 import { FrontSection } from './FrontSection';
+
+const articleFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Comment,
+	theme: Pillar.Opinion,
+};
 
 export default {
 	component: DynamicSlowMPU,
@@ -39,6 +47,7 @@ export const NoBigs = () => (
 	</FrontSection>
 );
 NoBigs.storyName = 'with no big cards, only standard';
+NoBigs.decorators = [lightDecorator(articleFormat)];
 
 export const OneBig = () => (
 	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
@@ -58,6 +67,7 @@ export const OneBig = () => (
 	</FrontSection>
 );
 OneBig.storyName = 'with just one big';
+OneBig.decorators = [lightDecorator(articleFormat)];
 
 export const TwoBigs = () => (
 	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
@@ -161,6 +171,7 @@ export const AllBigs = () => (
 	</FrontSection>
 );
 AllBigs.storyName = 'with lots of bigs and no standards';
+AllBigs.decorators = [lightDecorator(articleFormat)];
 
 export const AllBigsNoMPU = () => (
 	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
@@ -180,6 +191,7 @@ export const AllBigsNoMPU = () => (
 	</FrontSection>
 );
 AllBigsNoMPU.storyName = 'Ad-free with lots of bigs';
+AllBigsNoMPU.decorators = [lightDecorator(articleFormat)];
 
 export const TwoBigsThreeStandardsNoMPU = () => (
 	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
@@ -218,6 +230,7 @@ export const NoBigsTwoStandardsNoMPU = () => (
 	</FrontSection>
 );
 NoBigsTwoStandardsNoMPU.storyName = 'Ad-free with 0 bigs & 2 standards';
+NoBigsTwoStandardsNoMPU.decorators = [lightDecorator(articleFormat)];
 
 export const NoBigsFiveStandardsNoMPU = () => (
 	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
@@ -237,3 +250,4 @@ export const NoBigsFiveStandardsNoMPU = () => (
 	</FrontSection>
 );
 NoBigsFiveStandardsNoMPU.storyName = 'Ad-free with 0 bigs & 5 standards';
+NoBigsFiveStandardsNoMPU.decorators = [lightDecorator(articleFormat)];

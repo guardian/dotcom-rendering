@@ -1,9 +1,16 @@
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { lightDecorator } from '../../.storybook/theme-decorators';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FrontSection } from './FrontSection';
 import { TagFrontSlowMpu } from './TagFrontSlowMpu';
 
+const articleFormat: ArticleFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
 export default {
 	component: TagFrontSlowMpu,
 	title: 'Components/TagFrontSlowMpu',
@@ -113,3 +120,4 @@ export const WithSevenCards = () => {
 	);
 };
 WithSevenCards.storyName = 'With seven cards';
+WithSevenCards.decorators = [lightDecorator(articleFormat)];

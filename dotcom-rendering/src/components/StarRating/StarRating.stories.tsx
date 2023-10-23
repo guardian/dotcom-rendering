@@ -125,6 +125,7 @@ export const LargeStory = () => (
 	</>
 );
 LargeStory.storyName = 'Large stars';
+LargeStory.decorators = [lightDecorator(articleFormat)];
 
 export const DarkLarge = () => LargeStory();
 DarkLarge.storyName = 'Large Stars - Dark theme ';
