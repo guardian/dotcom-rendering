@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
-import { palette } from '@guardian/source-foundations';
 import { Star } from '../../static/icons/Star';
 import type { RatingSizeType } from '../../types/content';
 
@@ -45,49 +44,38 @@ type Props = {
 	rating: number;
 	size: RatingSizeType;
 	breakpoint?: Breakpoint;
-	fill?: string;
 };
 
-export const StarRating = ({
-	rating,
-	size,
-	breakpoint,
-	fill = palette.neutral[7],
-}: Props) => (
+export const StarRating = ({ rating, size, breakpoint }: Props) => (
 	<div css={determineSize(size)}>
 		<div css={starWrapper}>
 			<Star
 				starId={`${size}1-${determineBreakpoint(breakpoint)}`}
 				isEmpty={rating < 1}
-				fill={fill}
 			/>
 		</div>
 		<div css={starWrapper}>
 			<Star
 				starId={`${size}2-${determineBreakpoint(breakpoint)}`}
 				isEmpty={rating < 2}
-				fill={fill}
 			/>
 		</div>
 		<div css={starWrapper}>
 			<Star
 				starId={`${size}3-${determineBreakpoint(breakpoint)}`}
 				isEmpty={rating < 3}
-				fill={fill}
 			/>
 		</div>
 		<div css={starWrapper}>
 			<Star
 				starId={`${size}4-${determineBreakpoint(breakpoint)}`}
 				isEmpty={rating < 4}
-				fill={fill}
 			/>
 		</div>
 		<div css={starWrapper}>
 			<Star
 				starId={`${size}5-${determineBreakpoint(breakpoint)}`}
 				isEmpty={rating < 5}
-				fill={fill}
 			/>
 		</div>
 	</div>

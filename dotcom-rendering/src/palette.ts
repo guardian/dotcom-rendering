@@ -41,8 +41,8 @@ const headlineBackgroundColourDark = ({ design }: ArticleFormat): string => {
 	}
 };
 
-const starRatingFillColourLight = (): string => sourcePalette.neutral[7];
-const starRatingFillColourDark = (): string => sourcePalette.neutral[97];
+const starRatingFillColourLight = (): string => sourcePalette.neutral[0];
+const starRatingFillColourDark = (): string => sourcePalette.neutral[7];
 const starRatingBackgroundColourLight = (): string =>
 	sourcePalette.brandAlt[400];
 const starRatingBackgroundColourDark = (): string =>

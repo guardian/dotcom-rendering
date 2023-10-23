@@ -3,7 +3,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
-	brandAltBackground,
 	brandBackground,
 	brandBorder,
 	brandLine,
@@ -37,6 +36,7 @@ import { MostViewedFooterData } from '../components/MostViewedFooterData.importa
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { palette as themePalette } from '../palette';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
@@ -186,7 +186,8 @@ const stretchLines = css`
 const starWrapper = css`
 	margin-bottom: 18px;
 	margin-top: 6px;
-	background-color: ${brandAltBackground.primary};
+	background-color: ${themePalette('--star-rating-background')};
+	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
 
 	${until.phablet} {
