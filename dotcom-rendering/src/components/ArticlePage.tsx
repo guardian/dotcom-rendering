@@ -181,7 +181,8 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					/>
 				</Island>
 			)}
-			{renderingTarget === 'Apps' && <DarkModeMessage />}
+			{renderingTarget === 'Apps' &&
+				!article.config.switches.darkModeInApps && <DarkModeMessage />}
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout
 					article={article}
