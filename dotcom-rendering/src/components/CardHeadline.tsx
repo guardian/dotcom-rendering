@@ -310,7 +310,6 @@ export const CardHeadline = ({
 				<Byline
 					text={byline}
 					format={format}
-					containerPalette={containerPalette}
 					size={size}
 					isCard={true}
 				/>

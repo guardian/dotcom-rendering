@@ -1,14 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
 import { headline, textSans, until } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import type { DCRContainerPalette } from '../types/front';
-import type { Palette } from '../types/palette';
 
 type Props = {
 	text: string;
 	format: ArticleFormat;
-	containerPalette?: DCRContainerPalette;
 	size: SmallHeadlineSize;
 	isCard?: boolean;
 };
@@ -100,22 +96,15 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 	}
 };
 
-const colourStyles = (palette: Palette, isCard: Props['isCard']) => {
+const colourStyles = (isCard: Props['isCard']) => {
 	return css`
-		color: ${isCard ? palette.text.cardByline : palette.text.byline};
+		color: ${isCard ? 'var(--byline-card-colour)' : 'var(--byline-colour)'};
 	`;
 };
 
-export const Byline = ({
-	text,
-	format,
-	containerPalette,
-	size,
-	isCard,
-}: Props) => {
-	const palette = decidePalette(format, containerPalette);
+export const Byline = ({ text, format, size, isCard }: Props) => {
 	return (
-		<span css={[bylineStyles(size, format), colourStyles(palette, isCard)]}>
+		<span css={[bylineStyles(size, format), colourStyles(isCard)]}>
 			{text}
 		</span>
 	);

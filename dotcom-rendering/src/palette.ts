@@ -1,7 +1,51 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
+
+// ----- Constants and helpers ----- //
+
+const WHITE = sourcePalette.neutral[100];
+const BLACK = sourcePalette.neutral[7];
+
+const colourMapping = {
+	dark: 300,
+	main: 400,
+	bright: 500,
+	pastel: 600,
+	faded: 800,
+} as const;
+
+type ColourMapping = typeof colourMapping;
+type ColourVariation = keyof ColourMapping | ColourMapping[keyof ColourMapping];
+
+/** Curried function to fetch pillar colours */
+const getPillarColour =
+	(colour: ColourVariation) =>
+	(theme: ArticleTheme): string => {
+		const c = typeof colour === 'string' ? colourMapping[colour] : colour;
+
+		switch (theme) {
+			case Pillar.News:
+				return sourcePalette.news[c];
+			case Pillar.Opinion:
+				return sourcePalette.opinion[c];
+			case Pillar.Sport:
+				return sourcePalette.sport[c];
+			case Pillar.Culture:
+				return sourcePalette.culture[c];
+			case Pillar.Lifestyle:
+				return sourcePalette.lifestyle[c];
+			default:
+				return sourcePalette.news[c];
+		}
+	};
 
 // ----- Palette Functions ----- //
 
@@ -47,6 +91,89 @@ const starRatingBackgroundColourLight = (): string =>
 	sourcePalette.brandAlt[400];
 const starRatingBackgroundColourDark = (): string =>
 	sourcePalette.brandAlt[200];
+
+const blogsGrayBackgroundPalette = (theme: ArticleTheme): string => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return getPillarColour(300)(theme);
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+	}
+};
+
+const bylineTextLight = (format: ArticleFormat): string => {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	)
+		return blogsGrayBackgroundPalette(format.theme);
+
+	if (format.theme === ArticleSpecial.Labs) return BLACK;
+
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return sourcePalette.specialReport[300];
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return sourcePalette.specialReportAlt[100];
+
+	switch (format.display) {
+		case ArticleDisplay.Immersive:
+			return WHITE;
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard:
+			switch (format.design) {
+				case ArticleDesign.Analysis: {
+					switch (format.theme) {
+						case Pillar.News:
+							return sourcePalette.news[300];
+						default:
+							return getPillarColour('main')(format.theme);
+					}
+				}
+				case ArticleDesign.Gallery: {
+					switch (format.theme) {
+						case Pillar.Culture:
+							return getPillarColour('bright')(format.theme);
+						default:
+							return getPillarColour('main')(format.theme);
+					}
+				}
+				case ArticleDesign.Interview:
+					return BLACK;
+				case ArticleDesign.Picture:
+					return sourcePalette.neutral[86];
+				default:
+					return getPillarColour('main')(format.theme);
+			}
+		default:
+			return getPillarColour('main')(format.theme);
+	}
+};
+
+const bylineTextDark = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.Labs) return sourcePalette.labs[400];
+
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[93];
+		case ArticleDesign.DeadBlog:
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
+// const bylineCardTextLight = (format: ArticleFormat): string => {};
+// const bylineCardTextDark = (format: ArticleFormat): string => {};
 
 // ----- Palette ----- //
 
@@ -96,6 +223,14 @@ const paletteColours = {
 	'--star-rating-background': {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
+	},
+	'--byline-colour': {
+		light: bylineTextLight,
+		dark: bylineTextDark,
+	},
+	'--byline-card-colour': {
+		light: bylineCardTextLight,
+		dark: bylineCardTextDark,
 	},
 } satisfies PaletteColours;
 
