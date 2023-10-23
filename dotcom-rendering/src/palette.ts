@@ -64,7 +64,7 @@ const avatarLight = ({ design, theme }: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[800];
 				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[200];
+					return sourcePalette.specialReportAlt[300];
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[400];
 				case Pillar.Opinion:
