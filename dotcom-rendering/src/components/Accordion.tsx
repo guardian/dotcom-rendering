@@ -1,13 +1,6 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import {
-	background,
-	focusHalo,
-	from,
-	headline,
-	neutral,
-	space,
-} from '@guardian/source-foundations';
+import { focusHalo, from, headline, space } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
