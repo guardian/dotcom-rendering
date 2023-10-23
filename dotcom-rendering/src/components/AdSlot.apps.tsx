@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 import {
-	palette,
+	palette as sourcePalette,
 	remSpace,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import { palette } from '../palette';
 import { Button } from '@guardian/source-react-components';
 import { forwardRef } from 'react';
 
@@ -19,8 +20,8 @@ const adHeightPx = 258;
 const styles = css`
 	clear: both;
 	margin: ${remSpace[4]} 0;
-	color: ${palette.neutral[20]};
-	background: ${palette.neutral[97]};
+	color: ${sourcePalette.neutral[20]};
+	background: ${sourcePalette.neutral[97]};
 
 	${until.phablet} {
 		margin: 1em -${remSpace[3]};
@@ -29,7 +30,7 @@ const styles = css`
 
 const adLabelsStyles = css`
 	${textSans.xsmall()}
-	color: ${palette.neutral[46]};
+	color: ${palette('--ad-labels-styles-background-colour')};
 	padding: ${remSpace[3]};
 	float: left;
 
@@ -60,11 +61,11 @@ const adSlotSquareStyles = css`
 
 const supportBannerStyles = css`
 	padding: ${remSpace[3]};
-	background-color: ${palette.neutral[93]};
+	background-color: ${palette('--support-banner-styles-background-colour')};
 
 	p {
 		${textSans.small()};
-		color: ${palette.brand[400]};
+		color: ${sourcePalette.brand[400]};
 		font-weight: bold;
 		margin-top: 0;
 	}

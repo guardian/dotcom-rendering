@@ -41,6 +41,30 @@ const headlineBackgroundColourDark = ({ design }: ArticleFormat): string => {
 	}
 };
 
+const adLabelsStylesBackgroundColourLight = (): string => {
+	return sourcePalette.neutral[20];
+};
+
+const adLabelsStylesBackgroundColourDark = (): string => {
+	return sourcePalette.neutral[60];
+};
+
+const supportBannerStylesBackgroundColourLight = (): string => {
+	return sourcePalette.brandAlt[400];
+};
+
+const supportBannerStylesBackgroundColourDark = (): string => {
+	return sourcePalette.brandAlt[200];
+};
+
+const adStylesBackgroundColourLight = (): string => {
+	return sourcePalette.brandAlt[400];
+};
+
+const adStylesBackgroundColourDark = (): string => {
+	return sourcePalette.neutral[20];
+};
+
 // ----- Palette ----- //
 
 /**
@@ -81,6 +105,18 @@ const paletteColours = {
 	'--headline-background-colour': {
 		light: headlineBackgroundColourLight,
 		dark: headlineBackgroundColourDark,
+	},
+	'--ad-labels-styles-background-colour': {
+		light: adLabelsStylesBackgroundColourLight,
+		dark: adLabelsStylesBackgroundColourDark,
+	},
+	'--support-banner-styles-background-colour': {
+		light: supportBannerStylesBackgroundColourLight,
+		dark: supportBannerStylesBackgroundColourDark,
+	},
+	'--ad-styles-background-colour': {
+		light: adStylesBackgroundColourLight,
+		dark: adStylesBackgroundColourDark,
 	},
 } satisfies PaletteColours;
 
