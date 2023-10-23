@@ -3,6 +3,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
 import { images } from '../../fixtures/generated/images';
 import { liveBlock } from '../../fixtures/manual/liveBlock';
+import { lightMode } from '../lib/decorators';
 import { LiveBlock } from './LiveBlock';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
@@ -531,3 +532,10 @@ export const TitleAndContributor = () => {
 	);
 };
 TitleAndContributor.storyName = 'with a contributor and a title';
+TitleAndContributor.decorators = [
+	lightMode({
+		theme: Pillar.Sport,
+		design: ArticleDesign.LiveBlog,
+		display: ArticleDisplay.Standard,
+	}),
+];
