@@ -1,11 +1,9 @@
 export const Star = ({
 	starId,
 	isEmpty,
-}: // colour,
-{
+}: {
 	starId: string;
 	isEmpty: boolean;
-	// colour: string;
 }) => {
 	if (isEmpty)
 		return (
