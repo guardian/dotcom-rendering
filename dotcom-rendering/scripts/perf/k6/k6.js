@@ -5,11 +5,17 @@ import http from 'k6/http';
 
 const PORT = 9000;
 
+/**
+ * https://k6.io/docs/javascript-api/k6-data/sharedarray/
+ */
 const jsonPayload = new SharedArray('jsonPayload', function () {
 	const f = JSON.parse(open('./article-nier-automata.json'));
 	return [f];
 });
 
+/**
+ * https://k6.io/docs/using-k6/options/
+ */
 export const options = {
 	vus: 10,
 	duration: '60s',
