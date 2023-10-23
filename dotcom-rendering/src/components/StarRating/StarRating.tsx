@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
+import { palette } from '@guardian/source-foundations';
 import { Star } from '../../static/icons/Star';
 import type { RatingSizeType } from '../../types/content';
 
@@ -47,7 +48,12 @@ type Props = {
 	fill?: string;
 };
 
-export const StarRating = ({ rating, size, breakpoint, fill }: Props) => (
+export const StarRating = ({
+	rating,
+	size,
+	breakpoint,
+	fill = palette.neutral[7],
+}: Props) => (
 	<div css={determineSize(size)}>
 		<div css={starWrapper}>
 			<Star
