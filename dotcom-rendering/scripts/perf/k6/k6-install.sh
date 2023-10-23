@@ -18,11 +18,11 @@ if [[ $OS == "Linux" ]]; then
 	download $LINUX_FILE
 	tar -xvf $LINUX_FILE
 	rm $LINUX_FILE
-	printf "\nto run a test:\n./k6-$VERSION-linux-arm64/k6 run k6.js\n"
+	printf "\nto run a test:\n./k6-$VERSION-linux-arm64/k6 run k6.mjs\n"
 elif [[ $OS == "Mac" ]]; then
 	MAC_FILE=k6-$VERSION-macos-arm64.zip
 	download $MAC_FILE
 	unzip $MAC_FILE
 	rm $MAC_FILE
-	printf "\nto run a test:\n./k6-$VERSION-macos-arm64/k6 run k6.js\n"
+	printf "\nto run a test:\n./k6-$VERSION-macos-arm64/k6 run k6.mjs\n"
 fi
