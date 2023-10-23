@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints, palette } from '@guardian/source-foundations';
 import { Caption } from './Caption';
 import { Section } from './Section';
 import { StarRating } from './StarRating/StarRating';
@@ -205,7 +205,8 @@ export const OverlaidWithStars = () => (
 				css={css`
 					position: absolute;
 					bottom: 0;
-					background-color: yellow;
+					background-color: ${palette.brandAlt[400]};
+					color: ${palette.neutral[7]};
 				`}
 			>
 				<StarRating rating={3} size="large" />

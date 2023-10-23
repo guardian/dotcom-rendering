@@ -11,7 +11,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { getLargest, getMaster } from '../lib/image';
 import { isWideEnough } from '../lib/lightbox';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
-import { palette } from '../palette';
+import { palette as themePalette } from '../palette';
 import type { Switches } from '../types/config';
 import type { ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
@@ -38,8 +38,8 @@ type Props = {
 };
 
 const starsWrapper = css`
-	background-color: ${palette('--star-rating-background')};
-	color: ${palette('--star-rating-fill')};
+	background-color: ${themePalette('--star-rating-background')};
+	color: ${themePalette('--star-rating-fill')};
 
 	position: absolute;
 	${until.tablet} {

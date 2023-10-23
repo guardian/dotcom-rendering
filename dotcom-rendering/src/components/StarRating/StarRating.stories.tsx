@@ -35,6 +35,11 @@ export const AllSizeStars = () => (
 		<h1>Large</h1>
 		<br />
 		<StarRating rating={3} size="large" />
+		<br />
+		<div style={{ color: '#EF3E36', paddingTop: '8px' }}>
+			<p>Stars take the colour of the parent by default</p>
+			<StarRating rating={3} size="large" />
+		</div>
 	</>
 );
 AllSizeStars.storyName = 'All Sizes';

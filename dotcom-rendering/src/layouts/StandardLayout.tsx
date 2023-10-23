@@ -3,7 +3,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
-	brandAltBackground,
 	brandBackground,
 	brandBorder,
 	brandLine,
