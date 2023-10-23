@@ -2,7 +2,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import {
 	darkDecorator,
 	lightDecorator,
-} from '../../.storybook/theme-decorators';
+} from '../../.storybook/decorators/themeDecorator';
 import { StarRatingBlockComponent } from './StarRatingBlockComponent';
 
 const articleFormat: ArticleFormat = {

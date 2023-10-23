@@ -1,17 +1,9 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { lightDecorator } from '../../.storybook/theme-decorators';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { DynamicFast } from './DynamicFast';
 import { FrontSection } from './FrontSection';
 import { LabsSection } from './LabsSection';
-
-const articleFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Comment,
-	theme: Pillar.Opinion,
-};
 
 export default {
 	title: 'Layouts/Palettes',
@@ -59,7 +51,6 @@ EventPalette.story = {
 		},
 	},
 };
-EventPalette.decorators = [lightDecorator(articleFormat)];
 
 export const EventAltPalette = () => (
 	<FrontSection
@@ -77,7 +68,6 @@ export const EventAltPalette = () => (
 		/>
 	</FrontSection>
 );
-EventAltPalette.decorators = [lightDecorator(articleFormat)];
 
 export const SombrePalette = () => (
 	<FrontSection
@@ -95,7 +85,6 @@ export const SombrePalette = () => (
 		/>
 	</FrontSection>
 );
-SombrePalette.decorators = [lightDecorator(articleFormat)];
 
 export const SombreAltPalette = () => (
 	<FrontSection
@@ -113,7 +102,6 @@ export const SombreAltPalette = () => (
 		/>
 	</FrontSection>
 );
-SombreAltPalette.decorators = [lightDecorator(articleFormat)];
 
 export const BreakingPalette = () => (
 	<FrontSection
@@ -131,7 +119,6 @@ export const BreakingPalette = () => (
 		/>
 	</FrontSection>
 );
-BreakingPalette.decorators = [lightDecorator(articleFormat)];
 
 export const LongRunningPalette = () => (
 	<FrontSection
@@ -149,7 +136,6 @@ export const LongRunningPalette = () => (
 		/>
 	</FrontSection>
 );
-LongRunningPalette.decorators = [lightDecorator(articleFormat)];
 
 export const LongRunningAltPalette = () => (
 	<FrontSection
@@ -167,7 +153,6 @@ export const LongRunningAltPalette = () => (
 		/>
 	</FrontSection>
 );
-LongRunningAltPalette.decorators = [lightDecorator(articleFormat)];
 
 export const InvestigationPalette = () => (
 	<FrontSection
@@ -185,7 +170,6 @@ export const InvestigationPalette = () => (
 		/>
 	</FrontSection>
 );
-InvestigationPalette.decorators = [lightDecorator(articleFormat)];
 
 export const SpecialReportAltPalette = () => (
 	<FrontSection
@@ -203,7 +187,6 @@ export const SpecialReportAltPalette = () => (
 		/>
 	</FrontSection>
 );
-SpecialReportAltPalette.decorators = [lightDecorator(articleFormat)];
 
 export const BrandedPalette = () => (
 	<LabsSection
@@ -224,7 +207,6 @@ export const BrandedPalette = () => (
 		/>
 	</LabsSection>
 );
-BrandedPalette.decorators = [lightDecorator(articleFormat)];
 
 export const MediaPalette = () => (
 	<FrontSection
@@ -242,7 +224,6 @@ export const MediaPalette = () => (
 		/>
 	</FrontSection>
 );
-MediaPalette.decorators = [lightDecorator(articleFormat)];
 
 export const PodcastPalette = () => (
 	<FrontSection
@@ -263,4 +244,3 @@ export const PodcastPalette = () => (
 		/>
 	</FrontSection>
 );
-PodcastPalette.decorators = [lightDecorator(articleFormat)];

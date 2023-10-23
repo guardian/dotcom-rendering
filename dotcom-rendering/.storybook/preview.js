@@ -1,4 +1,10 @@
-import { setCookie, storage } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	Pillar,
+	setCookie,
+	storage,
+} from '@guardian/libs';
 import { AB } from '@guardian/ab-core';
 
 import isChromatic from 'chromatic/isChromatic';
@@ -13,6 +19,7 @@ import { Picture } from '../src/components/Picture';
 import { mockRESTCalls } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
+import { lightDecorator } from './decorators/themeDecorator';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -137,10 +144,17 @@ const guardianViewports = {
 	},
 };
 
+const defaultFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
+
 /** @type {import('@storybook/react').Preview} */
 export default {
 	decorators: [
 		ConfigContextDecorator,
+		lightDecorator(defaultFormat),
 		(Story) => {
 			storage.local.clear();
 			return Story();

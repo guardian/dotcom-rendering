@@ -4,7 +4,7 @@ import type { Meta } from '@storybook/react';
 import {
 	darkDecorator,
 	lightDecorator,
-} from '../../../.storybook/theme-decorators';
+} from '../../../.storybook/decorators/themeDecorator';
 import { StarRating } from './StarRating';
 
 // ----- Meta ----- //

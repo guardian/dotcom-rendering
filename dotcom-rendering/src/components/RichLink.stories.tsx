@@ -5,16 +5,9 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { lightDecorator } from '../../.storybook/theme-decorators';
 import { Figure } from './Figure';
 import { RichLink } from './RichLink';
 import { Section } from './Section';
-
-const articleFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Comment,
-	theme: Pillar.Opinion,
-};
 
 const someContributor =
 	'https://uploads.guim.co.uk/2017/10/09/Oliver-Wainwright,-L.png';
@@ -30,7 +23,6 @@ const someImageData = {
 export default {
 	component: RichLink,
 	title: 'Components/RichLink',
-	decorators: [lightDecorator(articleFormat)],
 };
 
 const mockFormatNews = {

@@ -1,17 +1,9 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { lightDecorator } from '../../.storybook/theme-decorators';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
 import { DynamicFast } from './DynamicFast';
 import { FrontSection } from './FrontSection';
-
-const articleFormat: ArticleFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
-};
 
 export default {
 	component: DynamicFast,
@@ -56,7 +48,6 @@ export const OneHugeTwoBigsSixStandards = () => (
 	</FrontSection>
 );
 OneHugeTwoBigsSixStandards.storyName = 'With 1 huge card, 2 bigs, 6 standards';
-OneHugeTwoBigsSixStandards.decorators = [lightDecorator(articleFormat)];
 
 export const OneVeryBigTwoBigsSixStandards = () => (
 	<FrontSection
@@ -78,7 +69,6 @@ export const OneVeryBigTwoBigsSixStandards = () => (
 );
 OneVeryBigTwoBigsSixStandards.storyName =
 	'with 1 very big card, 2 bigs, 6 standards';
-OneVeryBigTwoBigsSixStandards.decorators = [lightDecorator(articleFormat)];
 
 export const TwoVeryBigsTwoBigsSixStandards = () => (
 	<FrontSection
@@ -100,7 +90,6 @@ export const TwoVeryBigsTwoBigsSixStandards = () => (
 );
 TwoVeryBigsTwoBigsSixStandards.storyName =
 	'with 2 very big cards, 2 bigs, 6 standards';
-TwoVeryBigsTwoBigsSixStandards.decorators = [lightDecorator(articleFormat)];
 
 export const TwoVeryBigs1stBoostedTwoBigsSixStandards = () => (
 	<FrontSection
@@ -122,9 +111,6 @@ export const TwoVeryBigs1stBoostedTwoBigsSixStandards = () => (
 );
 TwoVeryBigs1stBoostedTwoBigsSixStandards.storyName =
 	'with 2 very big cards (1st boosted), 2 bigs, 6 standards';
-TwoVeryBigs1stBoostedTwoBigsSixStandards.decorators = [
-	lightDecorator(articleFormat),
-];
 
 export const TwoVeryBigs2ndBoostedTwoBigsSixStandards = () => (
 	<FrontSection
@@ -146,9 +132,6 @@ export const TwoVeryBigs2ndBoostedTwoBigsSixStandards = () => (
 );
 TwoVeryBigs2ndBoostedTwoBigsSixStandards.storyName =
 	'with 2 very big cards (2nd boosted), 2 bigs, 6 standards';
-TwoVeryBigs2ndBoostedTwoBigsSixStandards.decorators = [
-	lightDecorator(articleFormat),
-];
 
 /* Second Slice variants */
 
@@ -171,7 +154,6 @@ export const TwoVeryBigsTwelveStandards = () => (
 );
 
 TwoVeryBigsTwelveStandards.storyName = 'with 2 very big cards, 12 standards';
-TwoVeryBigsTwelveStandards.decorators = [lightDecorator(articleFormat)];
 
 export const TwoVeryBigsOneBigEightStandards = () => (
 	<FrontSection
@@ -194,7 +176,6 @@ export const TwoVeryBigsOneBigEightStandards = () => (
 
 TwoVeryBigsOneBigEightStandards.storyName =
 	'with 2 very big cards, 1 big, 8 standards';
-TwoVeryBigsOneBigEightStandards.decorators = [lightDecorator(articleFormat)];
 
 export const TwoVeryBigsOneBigBoostedSixStandards = () => (
 	<FrontSection
@@ -217,9 +198,6 @@ export const TwoVeryBigsOneBigBoostedSixStandards = () => (
 
 TwoVeryBigsOneBigBoostedSixStandards.storyName =
 	'with 2 very big cards, 1 big (boosted), 6 standards';
-TwoVeryBigsOneBigBoostedSixStandards.decorators = [
-	lightDecorator(articleFormat),
-];
 
 export const TwoVeryBigsTwoBigsFiveStandards = () => (
 	<FrontSection
@@ -242,7 +220,6 @@ export const TwoVeryBigsTwoBigsFiveStandards = () => (
 
 TwoVeryBigsTwoBigsFiveStandards.storyName =
 	'with 2 very big cards, 2 bigs, 5 standards';
-TwoVeryBigsTwoBigsFiveStandards.decorators = [lightDecorator(articleFormat)];
 
 export const TwoVeryBigsTwoBigsFirstBoostedEightStandards = () => (
 	<FrontSection
@@ -265,9 +242,6 @@ export const TwoVeryBigsTwoBigsFirstBoostedEightStandards = () => (
 
 TwoVeryBigsTwoBigsFirstBoostedEightStandards.storyName =
 	'with 2 very big cards, 2 bigs (first boosted), 8 standards';
-TwoVeryBigsTwoBigsFirstBoostedEightStandards.decorators = [
-	lightDecorator(articleFormat),
-];
 
 export const TwoVeryBigsThreeBigsThreeStandards = () => (
 	<FrontSection
@@ -290,7 +264,6 @@ export const TwoVeryBigsThreeBigsThreeStandards = () => (
 
 TwoVeryBigsThreeBigsThreeStandards.storyName =
 	'with 2 very big cards, 3 bigs, 3 standards';
-TwoVeryBigsThreeBigsThreeStandards.decorators = [lightDecorator(articleFormat)];
 
 export const TwoVeryBigsFourBigs = () => (
 	<FrontSection
@@ -311,7 +284,6 @@ export const TwoVeryBigsFourBigs = () => (
 );
 
 TwoVeryBigsFourBigs.storyName = 'with 2 very big cards, 4 bigs';
-TwoVeryBigsFourBigs.decorators = [lightDecorator(articleFormat)];
 
 /* Edge cases */
 
@@ -358,7 +330,6 @@ export const ThreeVeryBigsFourBigs = () => (
 );
 
 OneHugeOneVeryBig7Standards.storyName = 'with 1 huge, 1 very big, 7 standards';
-OneHugeOneVeryBig7Standards.decorators = [lightDecorator(articleFormat)];
 
 // No first slice is provided
 export const TwoBigsFourStandards = () => (
@@ -445,6 +416,3 @@ export const TwoVeryBigsFourBigsFirstBoostedThreeStandards = () => (
 
 TwoVeryBigsFourBigsFirstBoostedThreeStandards.storyName =
 	'with 2 very big cards, 4 bigs (first boosted), 3 standards';
-TwoVeryBigsFourBigsFirstBoostedThreeStandards.decorators = [
-	lightDecorator(articleFormat),
-];

@@ -1,16 +1,8 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { lightDecorator } from '../../.storybook/theme-decorators';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
 import { FrontSection } from './FrontSection';
-
-const articleFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Comment,
-	theme: Pillar.Opinion,
-};
 
 export default {
 	component: FixedMediumSlowXIIMPU,
@@ -137,7 +129,6 @@ export const SevenTrails = () => (
 	</FrontSection>
 );
 SevenTrails.storyName = 'with seven trails';
-SevenTrails.decorators = [lightDecorator(articleFormat)];
 
 export const EightTrails = () => (
 	<FrontSection
@@ -154,7 +145,6 @@ export const EightTrails = () => (
 	</FrontSection>
 );
 EightTrails.storyName = 'with eight trails';
-EightTrails.decorators = [lightDecorator(articleFormat)];
 
 export const NineTrails = () => (
 	<FrontSection
@@ -171,7 +161,6 @@ export const NineTrails = () => (
 	</FrontSection>
 );
 NineTrails.storyName = 'with nine trails';
-NineTrails.decorators = [lightDecorator(articleFormat)];
 
 export const EightTrailsNoAds = () => (
 	<FrontSection
@@ -188,4 +177,3 @@ export const EightTrailsNoAds = () => (
 	</FrontSection>
 );
 EightTrailsNoAds.storyName = 'with eight trails and no ad slot';
-EightTrailsNoAds.decorators = [lightDecorator(articleFormat)];
