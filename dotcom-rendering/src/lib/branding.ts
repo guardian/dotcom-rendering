@@ -8,8 +8,8 @@ import type {
 } from '../types/branding';
 import { assertUnreachable } from './assert-unreachable';
 import type { EditionId } from './edition';
-import type { NonEmptyArray } from './non-empty-array';
-import { isNonEmptyArray } from './non-empty-array';
+import type { NonEmptyArray } from './tuple';
+import { isNonEmptyArray } from './tuple';
 
 /**
  * For the sake of determining branding on a collection, these are the only
