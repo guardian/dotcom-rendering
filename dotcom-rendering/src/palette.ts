@@ -2,6 +2,7 @@
 
 import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
+import { decidePalette } from './lib/decidePalette';
 
 // ----- Palette Functions ----- //
 
@@ -47,6 +48,36 @@ const starRatingBackgroundColourLight = (): string =>
 	sourcePalette.brandAlt[400];
 const starRatingBackgroundColourDark = (): string =>
 	sourcePalette.brandAlt[200];
+
+const blockQuoteFillLight = ({
+	design,
+	display,
+	theme,
+}: ArticleFormat): string => {
+	return decidePalette({ design, display, theme }).fill.blockquoteIcon;
+};
+const blockQuoteFillDark = ({
+	design,
+	display,
+	theme,
+}: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[60];
+		default:
+			return decidePalette({ design, display, theme }).fill
+				.blockquoteIcon;
+	}
+};
+const quotedBlockquoteStylesLight = ({
+	design,
+	display,
+	theme,
+}: ArticleFormat): string => {
+	return decidePalette({ design, display, theme }).text.blockquote;
+};
+const quotedBlockquoteStylesDark = (): string => sourcePalette.neutral[100];
 
 // ----- Palette ----- //
 
@@ -96,6 +127,14 @@ const paletteColours = {
 	'--star-rating-background': {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
+	},
+	'--block-quote-fill': {
+		light: blockQuoteFillLight,
+		dark: blockQuoteFillDark,
+	},
+	'--quoted-block-quote-styles': {
+		light: quotedBlockquoteStylesLight,
+		dark: quotedBlockquoteStylesDark,
 	},
 } satisfies PaletteColours;
 

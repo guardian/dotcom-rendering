@@ -3,6 +3,7 @@ import { body } from '@guardian/source-foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
+import { palette as paletteDeclarations } from '../palette';
 import { logger } from '../server/lib/logging';
 import type { Palette } from '../types/palette';
 import { QuoteIcon } from './QuoteIcon';
@@ -20,6 +21,9 @@ const baseBlockquoteStyles = css`
 	p {
 		margin-bottom: 8px;
 	}
+	a {
+		color: ${paletteDeclarations('--quoted-block-quote-styles')};
+	}
 `;
 
 const simpleBlockquoteStyles = css`
@@ -32,7 +36,7 @@ const simpleBlockquoteStyles = css`
 
 const quotedBlockquoteStyles = (palette: Palette) => css`
 	${baseBlockquoteStyles}
-	color: ${palette.text.blockquote};
+	color: ${paletteDeclarations('--quoted-block-quote-styles')};
 `;
 
 /**
@@ -63,7 +67,11 @@ const textElement =
 				) {
 					return (
 						<p>
-							<QuoteIcon colour={palette.fill.blockquoteIcon} />
+							<QuoteIcon
+								colour={paletteDeclarations(
+									'--block-quote-fill',
+								)}
+							/>
 							{children}
 						</p>
 					);

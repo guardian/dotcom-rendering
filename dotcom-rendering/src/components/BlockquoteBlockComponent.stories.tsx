@@ -5,6 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { decidePalette } from '../lib/decidePalette';
 import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
 
@@ -13,9 +14,16 @@ const shortQuoteHtml =
 const blockquoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence that under <a href="https://www.theguardian.com/politics/boris-johnson">Boris Johnson</a> the NHS is on the table and will be up for sale. He tried to cover it up in a secret agenda but today it’s been exposed.</p> \n<p>A second paragraph</p> \n</blockquote>';
 
+const articleFormat: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
+
 export default {
 	component: BlockquoteBlockComponent,
 	title: 'Components/BlockquoteComponent',
+	decorators: [splitTheme(articleFormat)],
 };
 
 const containerStyles = css`
