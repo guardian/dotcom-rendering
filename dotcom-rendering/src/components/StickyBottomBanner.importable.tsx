@@ -213,7 +213,7 @@ const buildBrazeBanner = (
 
 const useCountryCode = (): CountryCode | undefined => {
 	const [localeCode, setLocaleCode] = useState<CountryCode | null>(null);
-	useOnce(() => {
+	useEffect(() => {
 		getLocaleCode()
 			.then((code) => {
 				setLocaleCode(code);

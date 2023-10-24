@@ -198,22 +198,24 @@ describe('Island: server-side rendering', () => {
 	test('StickyBottomBanner', () => {
 		expect(() =>
 			renderToString(
-				<StickyBottomBanner
-					contentType=""
-					tags={[]}
-					sectionId=""
-					isPaidContent={false}
-					isPreview={false}
-					shouldHideReaderRevenue={false}
-					isMinuteArticle={false}
-					contributionsServiceUrl=""
-					idApiUrl=""
-					pageId=""
-					keywordIds=""
-					remoteBannerSwitch={true}
-					puzzleBannerSwitch={false}
-					isSensitive={false}
-				/>,
+				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+					<StickyBottomBanner
+						contentType=""
+						tags={[]}
+						sectionId=""
+						isPaidContent={false}
+						isPreview={false}
+						shouldHideReaderRevenue={false}
+						isMinuteArticle={false}
+						contributionsServiceUrl=""
+						idApiUrl=""
+						pageId=""
+						keywordIds=""
+						remoteBannerSwitch={true}
+						puzzleBannerSwitch={false}
+						isSensitive={false}
+					/>
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});
