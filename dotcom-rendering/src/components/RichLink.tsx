@@ -160,7 +160,7 @@ const byline = css`
 	}
 `;
 
-const contributorImageWrapper = (format: ArticleFormat) => css`
+const contributorImageWrapper = css`
 	width: 5rem;
 	height: 5rem;
 	margin-left: auto;
@@ -169,9 +169,6 @@ const contributorImageWrapper = (format: ArticleFormat) => css`
 		width: 8.5rem;
 		height: 8.5rem;
 	}
-
-	${paletteDeclarations(format, 'light').join('')}
-	/* TODO – address dark mode once darkModeInApps is on */
 
 	/* TODO remove the default img styling in ArticleBody.tsx - do we need direct element styling? */
 	img {
@@ -315,7 +312,8 @@ export const RichLink = ({
 							)}
 						</div>
 						{!!(isOpinion && contributorImage) && (
-							<div css={contributorImageWrapper(format)}>
+							<div css={contributorImageWrapper}>
+								{/* TODO: handle different formats #9112 */}
 								<Avatar
 									src={contributorImage}
 									alt={mainContributor}
