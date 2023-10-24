@@ -140,6 +140,7 @@ const paletteColours = {
 	'--accordion-live-feed-background': {
 		light: accordionLiveFeedBackgroundLight,
 		dark: accordionBackgroundDark,
+	},
 	'--table-of-contents': {
 		light: tableOfContentsLight,
 		dark: tableOfContentsDark,
