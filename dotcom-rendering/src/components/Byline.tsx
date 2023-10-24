@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
 import { headline, textSans, until } from '@guardian/source-foundations';
+import { palette } from '../palette';
 
 type Props = {
 	text: string;
@@ -98,7 +99,9 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 
 const colourStyles = (isCard: Props['isCard']) => {
 	return css`
-		color: ${isCard ? 'var(--byline-card-colour)' : 'var(--byline-colour)'};
+		color: ${isCard
+			? palette('--byline-card-colour')
+			: palette('--byline-colour')};
 	`;
 };
 

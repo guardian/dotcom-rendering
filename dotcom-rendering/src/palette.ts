@@ -47,6 +47,25 @@ const getPillarColour =
 		}
 	};
 
+/** Used in Live Blogs and Dead Blogs */
+const blogsGrayBackgroundPalette = (theme: ArticleTheme): string => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return getPillarColour(300)(theme);
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+	}
+};
+
 // ----- Palette Functions ----- //
 
 const headlineColourLight = ({ design }: ArticleFormat): string => {
@@ -92,76 +111,69 @@ const starRatingBackgroundColourLight = (): string =>
 const starRatingBackgroundColourDark = (): string =>
 	sourcePalette.brandAlt[200];
 
-const blogsGrayBackgroundPalette = (theme: ArticleTheme): string => {
-	switch (theme) {
-		case Pillar.News:
-			return sourcePalette.news[400];
-		case Pillar.Opinion:
-		case Pillar.Sport:
-		case Pillar.Culture:
-		case Pillar.Lifestyle:
-			return getPillarColour(300)(theme);
-		case ArticleSpecial.SpecialReport:
-			return sourcePalette.specialReport[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.news[400];
-		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
-	}
-};
+const bylineTextLight = ({ theme, design, display }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return blogsGrayBackgroundPalette(theme);
 
-const bylineTextLight = (format: ArticleFormat): string => {
-	if (
-		format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.DeadBlog
-	)
-		return blogsGrayBackgroundPalette(format.theme);
-
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return sourcePalette.specialReport[300];
-
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return sourcePalette.specialReportAlt[100];
-
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			return WHITE;
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-			switch (format.design) {
-				case ArticleDesign.Analysis: {
-					switch (format.theme) {
-						case Pillar.News:
-							return sourcePalette.news[300];
-						default:
-							return getPillarColour('main')(format.theme);
-					}
-				}
-				case ArticleDesign.Gallery: {
-					switch (format.theme) {
-						case Pillar.Culture:
-							return getPillarColour('bright')(format.theme);
-						default:
-							return getPillarColour('main')(format.theme);
-					}
-				}
-				case ArticleDesign.Interview:
-					return BLACK;
-				case ArticleDesign.Picture:
-					return sourcePalette.neutral[86];
-				default:
-					return getPillarColour('main')(format.theme);
-			}
 		default:
-			return getPillarColour('main')(format.theme);
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return BLACK;
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+
+				default:
+					switch (display) {
+						case ArticleDisplay.Immersive:
+							return WHITE;
+						case ArticleDisplay.Showcase:
+						case ArticleDisplay.NumberedList:
+						case ArticleDisplay.Standard:
+							switch (design) {
+								case ArticleDesign.Analysis: {
+									switch (theme) {
+										case Pillar.News:
+											return sourcePalette.news[300];
+										default:
+											return getPillarColour('main')(
+												theme,
+											);
+									}
+								}
+								case ArticleDesign.Gallery: {
+									switch (theme) {
+										case Pillar.Culture:
+											return getPillarColour('bright')(
+												theme,
+											);
+										default:
+											return getPillarColour('main')(
+												theme,
+											);
+									}
+								}
+								case ArticleDesign.Interview:
+									return BLACK;
+								case ArticleDesign.Picture:
+									return sourcePalette.neutral[86];
+								default:
+									return getPillarColour('main')(theme);
+							}
+						default:
+							return getPillarColour('main')(theme);
+					}
+			}
 	}
 };
 
 const bylineTextDark = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return sourcePalette.labs[400];
+	if (format.theme === ArticleSpecial.Labs) {
+		return sourcePalette.labs[400];
+	}
 
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -172,8 +184,13 @@ const bylineTextDark = (format: ArticleFormat): string => {
 	}
 };
 
-// const bylineCardTextLight = (format: ArticleFormat): string => {};
-// const bylineCardTextDark = (format: ArticleFormat): string => {};
+// TODO
+const bylineCardTextLight = (format: ArticleFormat): string => {
+	return BLACK;
+};
+const bylineCardTextDark = (format: ArticleFormat): string => {
+	return BLACK;
+};
 
 // ----- Palette ----- //
 
