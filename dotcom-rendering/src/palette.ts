@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,

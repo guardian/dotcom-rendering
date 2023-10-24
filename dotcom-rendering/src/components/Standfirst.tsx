@@ -189,13 +189,11 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 	}
 };
 
-const hoverStyles = () => {
-	return css`
-		a:hover {
-			border-bottom: solid 1px ${palette('--standfirst-link-border')};
-		}
-	`;
-};
+const hoverStyles = css`
+	a:hover {
+		border-bottom: solid 1px ${palette('--standfirst-link-border')};
+	}
+`;
 
 export const Standfirst = ({ format, standfirst }: Props) => {
 	return (
@@ -204,7 +202,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 				css={[
 					nestedStyles(format),
 					standfirstStyles(format),
-					hoverStyles(),
+					hoverStyles,
 				]}
 				className={
 					format.design === ArticleDesign.Interactive
