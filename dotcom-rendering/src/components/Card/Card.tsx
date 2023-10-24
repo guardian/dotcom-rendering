@@ -441,7 +441,6 @@ export const Card = ({
 								imageSize={imageSize}
 								imagePosition={imagePosition}
 							>
-								{/* TODO: handle different formats #9112 */}
 								<Avatar
 									src={media.avatarUrl}
 									alt={byline ?? ''}
