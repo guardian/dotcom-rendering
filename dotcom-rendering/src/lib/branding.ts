@@ -2,7 +2,7 @@ import { decideEditorialBadge } from '../model/decideEditorialBadge';
 import type { DCRBadgeType } from '../types/badge';
 import type {
 	Branding,
-	BrandingKind,
+	BrandingType,
 	CollectionBranding,
 	EditionBranding,
 } from '../types/branding';
@@ -56,7 +56,7 @@ const getBrandingFromCards = (
 const getBrandingType = ([
 	firstBranding,
 	...restBranding
-]: NonEmptyArray<Branding>): BrandingKind | undefined => {
+]: NonEmptyArray<Branding>): BrandingType['name'] | undefined => {
 	const name = firstBranding.brandingType?.name;
 
 	if (!name) {

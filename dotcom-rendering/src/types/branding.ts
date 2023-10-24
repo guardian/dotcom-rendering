@@ -31,14 +31,20 @@ export interface EditionBranding {
 	branding?: Branding;
 }
 
-export type BrandingKind = BrandingType['name'];
-
 /**
  * Branding that can be applied to an entire collection on a front
+ *
+ * The `kind` property here is used to disambiguate the kind of branding
+ * a collection can have:
+ * - Those funded by a third party
+ * - Those that have an editorial badge from a hardcoded set
  */
 export type CollectionBranding =
 	| {
-			kind: BrandingKind;
+			/**
+			 * A collection can have branding that is funded by a third party
+			 */
+			kind: BrandingType['name'];
 			/**
 			 * In certain circumstances a collection might display the branding on behalf of an entire front
 			 * In that case this property is true
