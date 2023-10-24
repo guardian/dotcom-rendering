@@ -75,7 +75,7 @@ export const DarkModeMessage = () => (
 		>
 			We hope you are enjoying the updates we are implementing on
 			articles. Unfortunately, some are still missing a dark mode view.
-			But rest assured this will be fixed in a forthcoming beta release.
+			Rest assured this will be fixed in a forthcoming beta release.
 		</p>
 	</aside>
 );
