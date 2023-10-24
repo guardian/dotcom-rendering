@@ -27,7 +27,7 @@ const isSupported = (collection: FECollectionType): boolean =>
 const findCollectionSuitableForFrontBranding = (
 	collections: FECollectionType[],
 ) => {
-	// Find the lowest indexed front that COULD display branding
+	// Find the lowest indexed collection that COULD display branding
 	const index = collections.findIndex(
 		({ collectionType }) => collectionType !== 'fixed/thrasher',
 	);
