@@ -12,21 +12,22 @@ It should be run whenever any of the Display, Design, or Theme `format` properti
 
 */
 
-const { writeFileSync, readFileSync, mkdirSync } = require('node:fs');
-const path = require('node:path');
-const { log, success, warn } = require('../env/log');
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { log, success, warn } from '../env/log.js';
 
-const STORIES_PATH = path.resolve(
-	__dirname,
+const STORIES_PATH = resolve(
+	dirname(fileURLToPath(new URL(import.meta.url))),
 	'..',
 	'..',
 	'stories',
 	'generated',
 );
-const LAYOUT_STORIES_FILE = path.resolve(STORIES_PATH, 'Layout.stories.tsx');
-const CARD_STORIES_FILE = path.resolve(STORIES_PATH, 'Card.stories.tsx');
+const LAYOUT_STORIES_FILE = resolve(STORIES_PATH, 'Layout.stories.tsx');
+const CARD_STORIES_FILE = resolve(STORIES_PATH, 'Card.stories.tsx');
 const README_FILE = (componentName) =>
-	path.resolve(STORIES_PATH, `${componentName}Readme.stories.jsx`);
+	resolve(STORIES_PATH, `${componentName}Readme.stories.jsx`);
 
 const CARD_TEMPLATE_HEADER = `
 /*
@@ -287,7 +288,4 @@ const checkStories = () => {
 	);
 };
 
-module.exports = {
-	saveStories,
-	checkStories,
-};
+export { saveStories, checkStories };

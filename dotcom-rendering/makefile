@@ -202,11 +202,11 @@ gen-schema:
 
 check-stories:
 	$(call log, "Checking Storybook stories")
-	@node scripts/gen-stories/check-stories.js
+	@node scripts/gen-stories/check-stories.mjs
 
 gen-stories:
 	$(call log, "Generating new Storybook stories")
-	@node scripts/gen-stories/gen-stories.js
+	@node scripts/gen-stories/gen-stories.mjs
 	@git add stories/generated
 
 gen-fixtures:

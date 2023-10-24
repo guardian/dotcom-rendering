@@ -1,8 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import {
-	darkDecorator,
-	lightDecorator,
-} from '../../.storybook/decorators/themeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { StarRatingBlockComponent } from './StarRatingBlockComponent';
 
 const articleFormat: ArticleFormat = {
@@ -34,8 +31,4 @@ export const AllSizes = () => (
 	</>
 );
 AllSizes.storyName = 'All stars sizes';
-AllSizes.decorators = [lightDecorator(articleFormat)];
-
-export const DarkAllSizes = () => AllSizes();
-DarkAllSizes.storyName = 'All stars sizes - Dark theme ';
-DarkAllSizes.decorators = [darkDecorator(articleFormat)];
+AllSizes.decorators = [splitTheme(articleFormat)];

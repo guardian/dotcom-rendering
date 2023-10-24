@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
-	brandAltBackground,
 	from,
 	headline,
 	neutral,
@@ -10,6 +9,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
@@ -184,7 +184,8 @@ const paidForBranding = css`
 `;
 
 const starWrapper = css`
-	background-color: ${brandAltBackground.primary};
+	background-color: ${themePalette('--star-rating-background')};
+	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
 `;
 

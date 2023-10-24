@@ -1,10 +1,7 @@
 // ----- Imports ----- //
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta } from '@storybook/react';
-import {
-	darkDecorator,
-	lightDecorator,
-} from '../../../.storybook/decorators/themeDecorator';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { StarRating } from './StarRating';
 
 // ----- Meta ----- //
@@ -41,11 +38,7 @@ export const AllSizeStars = () => (
 	</>
 );
 AllSizeStars.storyName = 'All Sizes';
-AllSizeStars.decorators = [lightDecorator(articleFormat)];
-
-export const DarkAllSizes = () => AllSizeStars();
-DarkAllSizes.storyName = 'All Sizes - Dark theme';
-DarkAllSizes.decorators = [darkDecorator(articleFormat)];
+AllSizeStars.decorators = [splitTheme(articleFormat)];
 
 export const SmallStory = () => (
 	<>
@@ -69,11 +62,7 @@ export const SmallStory = () => (
 	</>
 );
 SmallStory.storyName = 'Small Stars';
-SmallStory.decorators = [lightDecorator(articleFormat)];
-
-export const DarkSmall = () => SmallStory();
-DarkSmall.storyName = 'Small Stars - Dark theme ';
-DarkSmall.decorators = [darkDecorator(articleFormat)];
+SmallStory.decorators = [splitTheme(articleFormat)];
 
 export const MediumStory = () => (
 	<>
@@ -97,11 +86,7 @@ export const MediumStory = () => (
 	</>
 );
 MediumStory.storyName = 'Medium stars';
-MediumStory.decorators = [lightDecorator(articleFormat)];
-
-export const DarkMedium = () => MediumStory();
-DarkMedium.storyName = 'Medium Stars - Dark theme ';
-DarkMedium.decorators = [darkDecorator(articleFormat)];
+MediumStory.decorators = [splitTheme(articleFormat)];
 
 export const LargeStory = () => (
 	<>
@@ -125,8 +110,31 @@ export const LargeStory = () => (
 	</>
 );
 LargeStory.storyName = 'Large stars';
-LargeStory.decorators = [lightDecorator(articleFormat)];
+LargeStory.decorators = [splitTheme(articleFormat)];
 
-export const DarkLarge = () => LargeStory();
-DarkLarge.storyName = 'Large Stars - Dark theme ';
-DarkLarge.decorators = [darkDecorator(articleFormat)];
+export const StarColours = () => (
+	<>
+		<div style={{ backgroundColor: '#f6dde1' }}>
+			<p>Stars take the colour of the parent by default</p>
+			<div style={{ color: 'red' }}>
+				<StarRating rating={0} size="large" />
+			</div>
+			<div style={{ color: 'orange' }}>
+				<StarRating rating={1} size="large" />
+			</div>
+			<div style={{ color: 'yellow' }}>
+				<StarRating rating={2} size="large" />
+			</div>
+			<div style={{ color: 'green' }}>
+				<StarRating rating={3} size="large" />
+			</div>
+			<div style={{ color: 'blue' }}>
+				<StarRating rating={4} size="large" />
+			</div>
+			<div style={{ color: 'purple' }}>
+				<StarRating rating={5} size="large" />
+			</div>
+		</div>
+	</>
+);
+StarColours.storyName = 'Star colours';
