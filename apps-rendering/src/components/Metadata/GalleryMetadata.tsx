@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { Option } from '@guardian/types';
 import CommentCount from 'components/CommentCount';
 import Dateline from 'components/Dateline';
@@ -17,15 +18,20 @@ import type { FC } from 'react';
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	display: flex;
+	flex-direction: column;
 	color: ${text.gallery(format)};
 	${grid.column.centre}
 	grid-row: 9/10;
 	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
-	border: 1px solid green;
 `;
 
 const textStyles = css`
 	flex-grow: 1;
+`;
+const flexRowStyles = css`
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
 `;
 
 type Props = {
@@ -46,15 +52,19 @@ const GalleryMetadata: FC<Props> = ({
 	edition,
 }) => (
 	<div css={styles(format)}>
-		<div css={textStyles}>
-			<Follow format={format} contributors={contributors} />
-			<Dateline date={publishDate} format={format} edition={edition} />
+		<StraightLines count={1} />
+		<div css={flexRowStyles}>
+			<div css={textStyles}>
+				<Follow format={format} contributors={contributors} />
+			</div>
+			<CommentCount
+				count={commentCount}
+				{...format}
+				commentable={commentable}
+			/>
 		</div>
-		<CommentCount
-			count={commentCount}
-			{...format}
-			commentable={commentable}
-		/>
+		<StraightLines count={1} />
+		<Dateline date={publishDate} format={format} edition={edition} />
 	</div>
 );
 

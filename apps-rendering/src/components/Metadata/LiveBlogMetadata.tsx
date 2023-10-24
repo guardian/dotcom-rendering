@@ -28,7 +28,6 @@ import { defaultStyles } from './Metadata.defaults';
 const wrapperStyles = css`
 	display: flex;
 	margin-bottom: ${remSpace[5]};
-	border: 1px solid lilac;
 `;
 
 const blogStyles = (format: ArticleFormat): SerializedStyles => css`

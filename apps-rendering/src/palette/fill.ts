@@ -40,9 +40,15 @@ const editionsCameraIcon = (format: ArticleFormat): Colour => {
 	}
 };
 
-const commentCount = (_format: ArticleFormat): Colour => {
-	return neutral[46];
+const commentCount = ({ design }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return neutral[86];
+		default:
+			return neutral[46];
+	}
 };
+
 const commentCountDark = (format: ArticleFormat): Colour => {
 	if (
 		format.design === ArticleDesign.LiveBlog ||

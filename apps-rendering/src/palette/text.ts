@@ -73,8 +73,13 @@ const brandingDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
-const byline = ({ design, theme }: ArticleFormat): Colour => {
-	return neutral[7];
+const byline = ({ design }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return neutral[100];
+		default:
+			return neutral[7];
+	}
 };
 
 const bylineAnchor = ({ design, theme }: ArticleFormat): Colour => {
@@ -257,8 +262,13 @@ const bylineAnchorDark = ({ design, theme }: ArticleFormat): Colour => {
 	}
 };
 
-const commentCount = (_format: ArticleFormat): Colour => {
-	return neutral[46];
+const commentCount = ({ design }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return neutral[86];
+		default:
+			return neutral[46];
+	}
 };
 
 const commentCountDark = (format: ArticleFormat): Colour => {

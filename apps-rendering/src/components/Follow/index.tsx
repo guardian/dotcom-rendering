@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { remSpace, textSans } from '@guardian/source-foundations';
 // import { DottedLines } from '@guardian/source-react-components-development-kitchen';
 import {
@@ -54,7 +54,11 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 		span:nth-child(2) {
 			text-align: left;
-			color: ${text.byline(format)};
+			color: ${
+				format.design === ArticleDesign.Gallery
+					? text.followDark(format)
+					: text.byline(format)
+			}};
 		}
 	}
 
