@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints, palette } from '@guardian/source-foundations';
 import { Caption } from './Caption';
 import { Section } from './Section';
 import { StarRating } from './StarRating/StarRating';
@@ -13,6 +13,12 @@ import { StarRating } from './StarRating/StarRating';
 export default {
 	component: Caption,
 	title: 'Components/Caption',
+};
+
+const articleFormat: ArticleFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
 };
 
 /**
@@ -31,11 +37,7 @@ export const Article = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Article caption looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={articleFormat}
 		/>
 	</Section>
 );
@@ -118,11 +120,7 @@ export const WidthLimited = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a caption looks with width limited"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={articleFormat}
 			shouldLimitWidth={true}
 		/>
 	</Section>
@@ -133,11 +131,7 @@ export const Padded = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a caption looks when padded"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={articleFormat}
 			padCaption={true}
 		/>
 	</Section>
@@ -211,7 +205,8 @@ export const OverlaidWithStars = () => (
 				css={css`
 					position: absolute;
 					bottom: 0;
-					background-color: yellow;
+					background-color: ${palette.brandAlt[400]};
+					color: ${palette.neutral[7]};
 				`}
 			>
 				<StarRating rating={3} size="large" />
@@ -225,11 +220,7 @@ export const VideoCaption = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Article caption looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={articleFormat}
 			mediaType="Video"
 		/>
 	</Section>

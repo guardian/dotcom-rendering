@@ -14,6 +14,7 @@ import { Liveness } from './Liveness.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { SetABTests } from './SetABTests.importable';
 import { Snow } from './Snow.importable';
+import { StickyBottomBanner } from './StickyBottomBanner.importable';
 
 // Type tests
 // Test that impossible prop combinations are caught by TypeScript.
@@ -190,6 +191,31 @@ describe('Island: server-side rendering', () => {
 					pageIsSensitive={false}
 					abTestSwitches={{}}
 				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('StickyBottomBanner', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+					<StickyBottomBanner
+						contentType=""
+						tags={[]}
+						sectionId=""
+						isPaidContent={false}
+						isPreview={false}
+						shouldHideReaderRevenue={false}
+						isMinuteArticle={false}
+						contributionsServiceUrl=""
+						idApiUrl=""
+						pageId=""
+						keywordIds=""
+						remoteBannerSwitch={true}
+						puzzleBannerSwitch={false}
+						isSensitive={false}
+					/>
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});

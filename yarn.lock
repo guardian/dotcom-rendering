@@ -5821,6 +5821,11 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
+"@types/k6@0.47.1":
+  version "0.47.1"
+  resolved "https://registry.yarnpkg.com/@types/k6/-/k6-0.47.1.tgz#01e355d9f28f3be247c27c010cd71c5794f7f8f5"
+  integrity sha512-dQCSM3WT4f5MWCyyxmY/fO+BSYS217nvlvOhDvqg4lZGfzbAuS6pOG+UuwoH+3mLTChccEds+0Q0q7YWBbtgMQ==
+
 "@types/keyv@^3.1.4":
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/@types/keyv/-/keyv-3.1.4.tgz#3ccdb1c6751b0c7e52300bcdacd5bcbf8faa75b6"

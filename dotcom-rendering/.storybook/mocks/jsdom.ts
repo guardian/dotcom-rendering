@@ -1,5 +1,5 @@
 /**
- * Mock JSDOM with native document/window implmentation
+ * Mock JSDOM with native document/window implementation
  *
  * This file mocks JSDOM (which relies on Node.js built-in libs like 'fs'), and returns the native window element and DocumentFragment.
  * This solution allows us to use enhancers (see /src/model/enhance-*) in storybook.

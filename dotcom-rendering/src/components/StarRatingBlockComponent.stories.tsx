@@ -1,4 +1,12 @@
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { StarRatingBlockComponent } from './StarRatingBlockComponent';
+
+const articleFormat: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
 
 export default {
 	component: StarRatingBlockComponent,
@@ -23,3 +31,4 @@ export const AllSizes = () => (
 	</>
 );
 AllSizes.storyName = 'All stars sizes';
+AllSizes.decorators = [splitTheme(articleFormat)];
