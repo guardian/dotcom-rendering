@@ -7,7 +7,7 @@ import {
 } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import React from 'react';
-import { lightMode } from '../../lib/decorators';
+import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import type { MainMedia } from '../../types/mainMedia';
 import { Section } from '../Section';
 import type { Props as CardProps } from './Card';
@@ -517,7 +517,7 @@ export const WithAnAvatar = () => {
 	);
 };
 WithAnAvatar.decorators = [
-	lightMode({
+	lightDecorator({
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Comment,
 		theme: Pillar.Opinion,

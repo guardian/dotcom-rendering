@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { lightMode } from '../lib/decorators';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { ArticleMeta } from './ArticleMeta';
 
@@ -184,7 +184,7 @@ export const FeatureStory = () => {
 };
 FeatureStory.storyName = 'Feature';
 FeatureStory.decorators = [
-	lightMode({
+	lightDecorator({
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Feature,
 		theme: Pillar.Culture,
@@ -267,7 +267,7 @@ export const SpecialReportStory = () => {
 };
 SpecialReportStory.storyName = 'SpecialReport';
 SpecialReportStory.decorators = [
-	lightMode({
+	lightDecorator({
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Feature,
 		theme: ArticleSpecial.SpecialReport,
@@ -299,7 +299,7 @@ export const SpecialReportAlt = () => {
 };
 SpecialReportAlt.storyName = 'SpecialReportAlt';
 SpecialReportAlt.decorators = [
-	lightMode({
+	lightDecorator({
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Feature,
 		theme: ArticleSpecial.SpecialReportAlt,
@@ -356,7 +356,7 @@ export const InterviewStory = () => {
 };
 InterviewStory.storyName = 'Interview';
 InterviewStory.decorators = [
-	lightMode({
+	lightDecorator({
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Interview,
 		theme: Pillar.Lifestyle,
@@ -413,7 +413,7 @@ export const TwoContributorsStory = () => {
 };
 TwoContributorsStory.storyName = 'Feature, with two contributors';
 TwoContributorsStory.decorators = [
-	lightMode({
+	lightDecorator({
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Feature,
 		theme: Pillar.Sport,
