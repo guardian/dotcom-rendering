@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
+import { ConfigProvider } from './ConfigContext';
 import { mockTab1 } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 
@@ -17,7 +18,13 @@ describe('MostViewedList', () => {
 	it('should call the api and render the response as expected', () => {
 		useApi.mockReturnValue(response);
 
-		const { asFragment, getAllByText } = render(<MostViewedRight />);
+		const { asFragment, getAllByText } = render(
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<MostViewedRight />
+			</ConfigProvider>,
+		);
 
 		// Calls api once only
 		expect(useApi).toHaveBeenCalledTimes(1);
@@ -56,7 +63,13 @@ describe('MostViewedList', () => {
 	it('should implement a limit on the number of items', () => {
 		useApi.mockReturnValue(response);
 
-		const { getAllByText } = render(<MostViewedRight limitItems={3} />);
+		const { getAllByText } = render(
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<MostViewedRight limitItems={3} />
+			</ConfigProvider>,
+		);
 
 		// Calls api once only
 		expect(useApi).toHaveBeenCalledTimes(1);
@@ -74,7 +87,13 @@ describe('MostViewedList', () => {
 	it('should show a byline when this property is set to true', async () => {
 		useApi.mockReturnValue(response);
 
-		const { getByText } = render(<MostViewedRight />);
+		const { getByText } = render(
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<MostViewedRight />
+			</ConfigProvider>,
+		);
 
 		expect(
 			getByText('Jennifer Rankin and Daniel Boffey'),
