@@ -34,7 +34,6 @@ import {
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	background: ${background.articleContent(format)};
-	border: 1px solid red;
 
 	${darkModeCss`
 		background: ${background.articleContentDark(format)};
@@ -49,8 +48,6 @@ const BorderStyles = css`
 `;
 
 const topBorder = css`
-	border-top: solid 1px ${neutral[86]};
-
 	${darkModeCss`
         border-top: solid 1px ${neutral[20]};
     `}

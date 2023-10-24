@@ -33,7 +33,6 @@ import {
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	background: ${background.articleContent(format)};
-	border: 1px solid yellow;
 
 	${darkModeCss`
 		background: ${background.articleContentDark(format)};
