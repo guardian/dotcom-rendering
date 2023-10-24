@@ -9,7 +9,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
-import { paletteDeclarations, palette as themePalette } from '../palette';
+import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
