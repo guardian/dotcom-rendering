@@ -222,6 +222,33 @@ describe('decideCollectionBranding', () => {
 		expect(collectionBranding).toBeUndefined();
 	});
 
+	it('is undefined when no cards have branding', () => {
+		const collectionBranding = decideCollectionBranding({
+			frontBranding: undefined,
+			couldDisplayFrontBranding: false,
+			seriesTag: undefined,
+			cards: [
+				{
+					properties: {
+						editionBrandings: [],
+					},
+				},
+				{
+					properties: {
+						editionBrandings: [],
+					},
+				},
+				{
+					properties: {
+						editionBrandings: [],
+					},
+				},
+			],
+			editionId: 'UK',
+		});
+		expect(collectionBranding).toBeUndefined();
+	});
+
 	it('is undefined when cards have different branding types', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
