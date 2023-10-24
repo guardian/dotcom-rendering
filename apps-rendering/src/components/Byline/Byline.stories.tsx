@@ -91,4 +91,4 @@ export default {
 	title: 'AR/Byline',
 };
 
-export { Default, Comment, Labs, Deadblog, Analysis };
+export { Analysis, Comment, Deadblog, Default, Labs };

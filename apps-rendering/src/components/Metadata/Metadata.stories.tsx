@@ -2,7 +2,14 @@
 
 import { css } from '@emotion/react';
 import { from, neutral } from '@guardian/source-foundations';
-import { comment } from 'fixtures/item';
+import {
+	article,
+	articleNoComments,
+	articleNoJobTitle,
+	comment,
+	gallery,
+	standardImmersive,
+} from 'fixtures/item';
 import { deadBlog, live } from 'fixtures/live';
 import type { FC } from 'react';
 import Metadata from './';
@@ -37,9 +44,39 @@ const DeadBlogMetadata: FC = () => (
 	</div>
 );
 
+const GalleryMetadata: FC = () => (
+	<div css={deadContainerStyles}>
+		<Metadata item={{ ...gallery }} />
+	</div>
+);
+
+const ImmersiveMetadata: FC = () => (
+	<div css={deadContainerStyles}>
+		<Metadata item={{ ...standardImmersive }} />
+	</div>
+);
+
 const ShortMetadata: FC = () => (
 	<div css={deadContainerStyles}>
 		<Metadata item={{ ...comment }} />
+	</div>
+);
+
+const ExtendedMetadata: FC = () => (
+	<div css={deadContainerStyles}>
+		<Metadata item={{ ...article }} />
+	</div>
+);
+
+const ExtendedMetadataNoJobTitle: FC = () => (
+	<div css={deadContainerStyles}>
+		<Metadata item={{ ...articleNoJobTitle }} />
+	</div>
+);
+
+const ExtendedMetadataNoComments: FC = () => (
+	<div css={deadContainerStyles}>
+		<Metadata item={{ ...articleNoComments }} />
 	</div>
 );
 
@@ -50,4 +87,13 @@ export default {
 	title: 'AR/Metadata',
 };
 
-export { LiveblogMetadata, DeadBlogMetadata, ShortMetadata };
+export {
+	DeadBlogMetadata,
+	ExtendedMetadata,
+	ExtendedMetadataNoComments,
+	ExtendedMetadataNoJobTitle,
+	GalleryMetadata,
+	ImmersiveMetadata,
+	LiveblogMetadata,
+	ShortMetadata,
+};

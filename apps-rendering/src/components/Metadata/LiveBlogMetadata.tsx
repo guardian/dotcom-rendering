@@ -17,17 +17,18 @@ import Dateline from 'components/Dateline';
 import Follow from 'components/Follow';
 import LiveblogMetadataLines from 'components/LiveblogMetadataLines';
 import Logo from 'components/Logo';
-import { getFormat } from 'item';
 import type { Item } from 'item';
+import { getFormat } from 'item';
 import { background } from 'palette';
-import { useState } from 'react';
 import type { FC } from 'react';
+import { useState } from 'react';
 import { darkModeCss } from 'styles';
 import { defaultStyles } from './Metadata.defaults';
 
 const wrapperStyles = css`
 	display: flex;
 	margin-bottom: ${remSpace[5]};
+	border: 1px solid lilac;
 `;
 
 const blogStyles = (format: ArticleFormat): SerializedStyles => css`

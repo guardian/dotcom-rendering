@@ -8,6 +8,8 @@ import { formatToString } from 'articleFormat';
 import {
 	analysis,
 	article,
+	articleNoComments,
+	articleNoJobTitle,
 	comment,
 	commentImmersive,
 	editorial,
@@ -108,7 +110,9 @@ const newsletterSignUpFallbackLayoutStory = (
 			<NewsletterSignUpLayout item={fixture} />
 		</>
 	);
-	story.storyName = `${formatToString(fixture)} (form component not supported)`;
+	story.storyName = `${formatToString(
+		fixture,
+	)} (form component not supported)`;
 
 	return story;
 };
@@ -123,6 +127,12 @@ is the `Display` and `News` is the `Theme`.
 */
 
 export const StandardStandardNews = standardLayoutStory(article);
+export const StandardStandardNewsNoComments =
+	standardLayoutStory(articleNoComments);
+
+export const StandardStandardNewsNoLocationOrJobTitle =
+	standardLayoutStory(articleNoJobTitle);
+
 export const StandardStandardSpecialReportAlt =
 	standardLayoutStoryWithSpecialReportAlt(article);
 export const StandardImmersiveNews = immersiveLayoutStory(standardImmersive);
@@ -165,6 +175,8 @@ export const RecipeStandardSpecialReportAlt =
 	standardLayoutStoryWithSpecialReportAlt(recipe);
 
 export const CommentStandardNews = commentLayoutStory(comment);
+export const CommentStandardNewsWithComments = commentLayoutStory(comment);
+
 export const CommentStandardSpecialReportAlt = pipe(
 	comment,
 	setSpecialReportAlt,

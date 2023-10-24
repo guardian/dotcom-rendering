@@ -1,9 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
-import { withDefault } from '@guardian/types';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import { headline, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
+import { withDefault } from '@guardian/types';
 import { maybeRender } from 'lib';
 import { text } from 'palette';
 import type { ReactNode } from 'react';
@@ -12,6 +12,8 @@ import { darkModeCss } from 'styles';
 
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxxsmall({ fontStyle: 'italic' })}
+	margin-top: ${remSpace[2]};
+	margin-block-end: 1rem;
 	color: ${text.byline(format)};
 
 	${darkModeCss`
@@ -31,6 +33,18 @@ export const defaultAnchorStyles = (
         color: ${text.bylineAnchorDark(format)};
     `}
 `;
+
+const titleOrLocationStyle = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.byline(format)};
+	${darkModeCss`
+        color: ${text.bylineDark(format)};
+    `}
+`;
+
+export const hasLocationOrTitleInfo = (bylineHtml: Option<DocumentFragment>) =>
+	bylineHtml.kind === 0 && bylineHtml.value.lastChild?.nodeName === '#text'
+		? true
+		: false;
 
 export const toReact = (
 	format: ArticleFormat,
@@ -53,7 +67,16 @@ export const toReact = (
 					toReact(format, anchorStyles),
 				);
 			case '#text':
-				return node.textContent;
+				return format.design === ArticleDesign.DeadBlog ||
+					format.design === ArticleDesign.LiveBlog ? (
+					<span css={titleOrLocationStyle(format)}>
+						{node.textContent}
+					</span>
+				) : (
+					<div css={titleOrLocationStyle(format)}>
+						{node.textContent ?? ''}
+					</div>
+				);
 		}
 	};
 };
@@ -63,9 +86,9 @@ export const renderText = (
 	byline: DocumentFragment,
 	anchorStyles: SerializedStyles,
 ): ReactNode =>
-	Array.from(byline.childNodes).map((node, i) =>
-		toReact(format, anchorStyles)(node, i),
-	);
+	Array.from(byline.childNodes).map((node, i) => {
+		return toReact(format, anchorStyles)(node, i);
+	});
 
 interface DefaultProps {
 	bylineHtml: Option<DocumentFragment>;
@@ -73,15 +96,17 @@ interface DefaultProps {
 	styles: SerializedStyles;
 	anchorStyles: SerializedStyles;
 }
-
 export const DefaultByline: React.FC<DefaultProps> = ({
 	bylineHtml,
 	styles,
 	anchorStyles,
 	format,
-}) =>
-	maybeRender(bylineHtml, (byline) => (
-		<address css={styles}>
-			{renderText(format, byline, anchorStyles)}
-		</address>
+}) => {
+	return maybeRender(bylineHtml, (byline) => (
+		<>
+			<address css={styles}>
+				{renderText(format, byline, anchorStyles)}
+			</address>
+		</>
 	));
+};

@@ -3,11 +3,16 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
-import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, neutral, textSans } from '@guardian/source-foundations';
-import { map, withDefault } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
+import {
+	from,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import { datetimeFormat } from 'datetime';
 import { pipe } from 'lib';
 import { text } from 'palette';
@@ -23,12 +28,12 @@ interface Props {
 }
 
 const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall()}
+	${textSans.xxsmall()}
+	line-height: ${remSpace[9]};
 	color: ${text.dateline(format)};
-
 	${darkModeCss`
 		color: ${text.datelineDark(format)};
-	`}
+	`};
 `;
 
 const getStyles = (
@@ -37,7 +42,7 @@ const getStyles = (
 ): SerializedStyles => css`
 	color: ${colour};
 	display: block;
-	${textSans.xxsmall({ lineHeight: 'tight' })}
+	${textSans.xxsmall()}
 
 	${from.desktop} {
 		color: ${desktopColour};
@@ -64,16 +69,19 @@ const getDatelineStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const Dateline: FC<Props> = ({ date, format, edition }) =>
-	pipe(
-		date,
-		map((d) => (
-			<time css={getDatelineStyles(format)}>
-				{datetimeFormat(edition)(d)}
-			</time>
-		)),
-		withDefault<ReactElement | null>(null),
-	);
+const Dateline: FC<Props> = ({ date, format, edition }) => (
+	<>
+		{pipe(
+			date,
+			map((d) => (
+				<time css={getDatelineStyles(format)}>
+					{datetimeFormat(edition)(d)}
+				</time>
+			)),
+			withDefault<ReactElement | null>(null),
+		)}
+	</>
+);
 
 // ----- Exports ----- //
 

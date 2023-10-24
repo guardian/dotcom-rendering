@@ -6,6 +6,7 @@ import DefaultMetadata, { defaultStyles } from './Metadata.defaults';
 
 const wrapperStyles = css`
 	display: flex;
+	flex-direction: column;
 	margin-bottom: ${remSpace[5]};
 `;
 

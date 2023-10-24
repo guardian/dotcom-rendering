@@ -5,10 +5,14 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
 import { remSpace, textSans } from '@guardian/source-foundations';
-import { FollowNotificationStatus } from 'components/FollowStatus';
+// import { DottedLines } from '@guardian/source-react-components-development-kitchen';
+import {
+	FollowNotificationStatus,
+	FollowTagStatus,
+} from 'components/FollowStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
-import { background, text } from 'palette';
+import { background, fill, text } from 'palette';
 import { type FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -31,22 +35,33 @@ const followIconStyles: SerializedStyles = css`
 `;
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.small()}
-	color: ${text.follow(format)};
-	display: block;
-	padding: 0;
-	border: none;
-	background: none;
-	margin-left: 0;
 	margin-top: ${remSpace[1]};
+	margin-bottom: 10px;
 
-	${darkModeCss`
+	button {
+		${textSans.small()}
+		color: ${text.follow(format)};
+		display: block;
+		padding: 0;
+		border: none;
+		background: none;
+		margin-left: 0;
+		margin-bottom: 0;
+
+		${darkModeCss`
 		color: ${text.followDark(format)};
 	`}
 
-	.notifications-on, .tag-following {
+		span:nth-child(2) {
+			text-align: left;
+			color: ${text.byline(format)};
+		}
+	}
+
+	.notifications-on,
+	.tag-following {
 		${followButtonStyles}
-		padding-top: 0.15ch;
+		padding-top: 0.3rem;
 		background-color: currentColor;
 
 		svg {
@@ -73,7 +88,16 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 const followStatusStyles = (): SerializedStyles => css`
 	display: flex;
 	align-items: center;
-	column-gap: 0.2em;
+	column-gap: 0.2rem;
+`;
+
+export const dashedLineStyles = (
+	format: ArticleFormat,
+): SerializedStyles => css`
+	border-color: ${fill.lines(format)};
+	${darkModeCss`
+		border-color: ${fill.linesDark(format)};
+	`}
 `;
 
 const Follow: FC<Props> = ({ contributors, format }) => {
@@ -86,38 +110,45 @@ const Follow: FC<Props> = ({ contributors, format }) => {
 	) {
 		return (
 			<>
-				<button
-					className="js-follow-tag"
-					css={styles(format)}
-					data-id={contributor.id}
-					data-display-name={contributor.name}
-				>
-					<span
-						className="js-follow-tag-status"
-						css={followStatusStyles}
+				<div css={styles(format)}>
+					<button
+						className="js-follow-tag"
+						css={styles(format)}
+						data-id={contributor.id}
+						data-display-name={contributor.name}
 					>
-						{/* The FollowTagStatus component will be rendered here after
+						<span
+							className="js-follow-tag-status"
+							css={followStatusStyles}
+						>
+							{/* The FollowTagStatus component will be rendered here after
 						code in article.ts checks if bridget version is compatible
 						and client env has MyGuardian enabled */}
-					</span>
-				</button>
+							{/* todo DELETE TAG STATUS */}
+							<FollowTagStatus
+								isFollowing={false}
+								contributorName={contributor.name}
+							/>
+						</span>
+					</button>
 
-				<button
-					className="js-follow-notifications"
-					css={styles(format)}
-					data-id={contributor.id}
-					data-display-name={contributor.name}
-				>
-					<span
-						className="js-follow-notifications-status"
-						css={followStatusStyles}
+					<button
+						className="js-follow-notifications"
+						css={styles(format)}
+						data-id={contributor.id}
+						data-display-name={contributor.name}
 					>
-						<FollowNotificationStatus
-							isFollowing={false}
-							contributorName={contributor.name}
-						/>
-					</span>
-				</button>
+						<span
+							className="js-follow-notifications-status"
+							css={followStatusStyles}
+						>
+							<FollowNotificationStatus
+								isFollowing={false}
+								contributorName={contributor.name}
+							/>
+						</span>
+					</button>
+				</div>
 			</>
 		);
 	}

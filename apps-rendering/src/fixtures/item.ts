@@ -11,8 +11,8 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { none, OptionKind, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import { OptionKind, none, some } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import { parse } from 'client/parser';
@@ -41,8 +41,8 @@ import type {
 	Standard,
 } from 'item';
 import type { LiveBlock } from 'liveBlock';
-import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
+import { MainMediaKind } from 'mainMedia';
 import { Optional } from 'optional';
 import { fromBodyElements } from 'outline';
 import { galleryBody } from './galleryBody';
@@ -91,6 +91,14 @@ const standfirstWithLink = parseHtml(
 const bylineHtml = parseHtml(
 	'<a href="https://theguardian.com">Jane Smith</a> Editor of things',
 ).toOption();
+
+const bylineHtmlNoJobTitle = parseHtml(
+	'<a href="https://theguardian.com">Jane Smith</a>',
+).toOption();
+
+// const bylineMultipleAuthorsHtml = parseHtml(
+// 	'<a href="https://theguardian.com">Tom Ambrose</a> (now); <a href="https://theguardian.com">Tom Ambrose</a> and <a href="https://theguardian.com">Tom Ambrose</a> (earlier)',
+// ).toOption();
 
 const captionDocFragment = parseHtml(
 	'<em>Jane Smith</em> Editor of things',
@@ -418,7 +426,6 @@ const fields = {
 			"<p>A weekly series answering readers' questions&nbsp;about how the coronavirus outbreak is impacting on their travel plans and holidays</p>",
 		internalName: 'Coronavirus travel Q&A',
 	}),
-	commentable: false,
 	tags: tags,
 	shouldHideReaderRevenue: false,
 	branding: some({
@@ -432,7 +439,8 @@ const fields = {
 		sponsorName: 'Judith Nielson Institute',
 		sponsorUri: 'https://jninstitute.org/',
 	}),
-	commentCount: none,
+	commentable: true,
+	commentCount: some(123),
 	relatedContent: relatedContent,
 	footballContent: none,
 	logo: none,
@@ -443,9 +451,26 @@ const fields = {
 	outline: [],
 };
 
+const noCommentFields = {
+	commentable: false,
+	commentCount: none,
+};
+
 const article: Standard = {
 	design: ArticleDesign.Standard,
 	...fields,
+};
+
+const articleNoComments: Standard = {
+	design: ArticleDesign.Standard,
+	...fields,
+	...noCommentFields,
+};
+
+const articleNoJobTitle: Standard = {
+	design: ArticleDesign.Standard,
+	...fields,
+	...{ bylineHtml: bylineHtmlNoJobTitle },
 };
 
 const articleWithStandfirstLink: Item = {
@@ -479,6 +504,12 @@ const labs: Item = {
 };
 
 const comment: Comment = {
+	design: ArticleDesign.Comment,
+	...fields,
+	theme: ArticlePillar.Opinion,
+	outline: fromBodyElements(fields.body),
+};
+const commentWithCommentCount: Comment = {
 	design: ArticleDesign.Comment,
 	...fields,
 	theme: ArticlePillar.Opinion,
@@ -589,32 +620,35 @@ const gallery: Gallery = {
 // ----- Exports ----- //
 
 export {
-	article,
-	articleWithStandfirstLink,
 	analysis,
-	feature,
-	review,
-	labs,
+	article,
+	articleNoComments,
+	articleNoJobTitle,
+	articleWithStandfirstLink,
+	cartoon,
 	comment,
-	interview,
-	media,
+	commentImmersive,
+	commentWithCommentCount,
+	correction,
 	editorial,
+	explainer,
+	feature,
+	gallery,
+	interview,
+	labs,
 	letter,
 	matchReport,
-	cartoon,
-	correction,
-	printShop,
-	photoEssay,
-	recipe,
-	quiz,
-	pinnedBlock,
-	explainer,
+	media,
 	newsletterSignUp,
-	standardImmersive,
-	commentImmersive,
-	gallery,
-	parseHtml,
-	setTheme,
-	setEdition,
 	obituary,
+	parseHtml,
+	photoEssay,
+	pinnedBlock,
+	printShop,
+	quiz,
+	recipe,
+	review,
+	setEdition,
+	setTheme,
+	standardImmersive,
 };

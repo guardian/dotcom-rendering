@@ -43,9 +43,9 @@ const Metadata: FC<Props> = ({ item }: Props) => {
 			/>
 		);
 	} else if (
+		design === ArticleDesign.Editorial ||
 		design === ArticleDesign.Comment ||
 		design === ArticleDesign.Letter ||
-		design === ArticleDesign.Editorial ||
 		design === ArticleDesign.Analysis
 	) {
 		return <ShortMetadata item={item} />;

@@ -1,12 +1,12 @@
 // ----- Imports ----- //
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import type { FC } from 'react';
 import AnalysisByline from './AnalysisByline';
 import {
-	defaultAnchorStyles,
 	DefaultByline,
+	defaultAnchorStyles,
 	defaultStyles,
 } from './Byline.defaults';
 import CommentByline from './CommentByline';
@@ -40,6 +40,15 @@ const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
 			return <AnalysisByline bylineHtml={bylineHtml} format={format} />;
 		case ArticleDesign.Gallery:
 			return <GalleryByline bylineHtml={bylineHtml} format={format} />;
+		case ArticleDesign.Letter:
+			return (
+				<DefaultByline
+					bylineHtml={bylineHtml}
+					styles={defaultStyles(format)}
+					anchorStyles={defaultAnchorStyles(format)}
+					format={format}
+				/>
+			);
 		default:
 			return (
 				<DefaultByline

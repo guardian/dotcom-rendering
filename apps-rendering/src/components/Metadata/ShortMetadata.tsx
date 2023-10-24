@@ -20,7 +20,12 @@ type Props = {
 
 const ShortMetadata: FC<Props> = ({ item }) => (
 	<div css={wrapperStyles}>
-		<DefaultMetadata css={styles} item={item} withByline={false} />
+		<DefaultMetadata
+			css={styles}
+			item={item}
+			withByline={false}
+			withBylineDottedLine={false}
+		/>
 	</div>
 );
 

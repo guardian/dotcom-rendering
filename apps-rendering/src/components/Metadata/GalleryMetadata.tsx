@@ -21,6 +21,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.centre}
 	grid-row: 9/10;
 	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
+	border: 1px solid green;
 `;
 
 const textStyles = css`
@@ -46,8 +47,8 @@ const GalleryMetadata: FC<Props> = ({
 }) => (
 	<div css={styles(format)}>
 		<div css={textStyles}>
-			<Dateline date={publishDate} format={format} edition={edition} />
 			<Follow format={format} contributors={contributors} />
+			<Dateline date={publishDate} format={format} edition={edition} />
 		</div>
 		<CommentCount
 			count={commentCount}

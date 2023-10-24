@@ -18,8 +18,8 @@ import Standfirst from 'components/Standfirst';
 import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
 import { WithAgeWarning } from 'components/WithAgeWarning';
-import { getFormat } from 'item';
 import type { Analysis } from 'item';
+import { getFormat } from 'item';
 import { background } from 'palette';
 import type { FC } from 'react';
 import {
@@ -73,7 +73,7 @@ const AnalysisLayout: FC<Props> = ({ item }) => {
 							<Byline {...item} />
 							<Standfirst item={item} />
 							<StraightLines
-								cssOverrides={lineStyles(format)}
+								cssOverrides={[lineStyles(format)]}
 								count={4}
 							/>
 							<Metadata item={item} />

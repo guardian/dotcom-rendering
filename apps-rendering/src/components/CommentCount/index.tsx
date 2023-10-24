@@ -23,16 +23,22 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.medium({ fontWeight: 'bold' })}
 	border: none;
 	background: none;
-	border-left: 1px solid ${border.commentCount(format)};
-	margin-top: ${remSpace[4]};
+	border-left: 1px solid ${fill.lines(format)};
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: auto;
 	padding-top: ${remSpace[3]};
-	margin-bottom: 0;
+	padding-left: ${remSpace[3]};
+	padding-right: 0;
+	gap: ${remSpace[1]};
+
 	color: ${text.commentCount(format)};
 	${darkModeCss`
 		color: ${text.commentCountDark(format)};
-	    border-left: 1px solid ${border.commentCountDark(format)};
+	    border-left: 1px solid ${fill.linesDark(format)};
 		${from.desktop} {
-        	border-left: 1px solid ${border.commentCountWideDark(format)};
+        	border-left: 1px solid ${fill.linesDark(format)};
 		}
     `}
 `;
@@ -40,7 +46,6 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 const bubbleStyles = (format: ArticleFormat): SerializedStyles => css`
 	width: 1rem;
 	display: block;
-	margin-left: auto;
 	fill: ${fill.commentCount(format)};
 	${darkModeCss`
 		fill: ${fill.commentCountDark(format)};

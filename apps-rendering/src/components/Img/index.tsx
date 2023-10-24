@@ -7,8 +7,8 @@ import { ArticleDesign, ArticleElementRole } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import { withDefault } from '@guardian/types';
 import type { Image } from 'image';
-import { createElement as h } from 'react';
 import type { FC } from 'react';
+import { createElement as h } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -50,8 +50,12 @@ const styles = (
 		  `;
 };
 
+const pictureContainerStyles = css`
+	height: fit-content;
+`;
+
 const Img: FC<Props> = ({ image, sizes, className, format }) =>
-	h('picture', null, [
+	styledH('picture', { css: pictureContainerStyles }, [
 		h('source', {
 			key: `${image.src}-dpr2Srcset`,
 			sizes,

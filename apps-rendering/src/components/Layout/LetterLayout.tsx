@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
+import { breakpoints, from, neutral } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
@@ -18,8 +18,8 @@ import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import { WithAgeWarning } from 'components/WithAgeWarning';
-import { getFormat } from 'item';
 import type { Letter as LetterItem } from 'item';
+import { getFormat } from 'item';
 import { background } from 'palette';
 import type { FC } from 'react';
 import {
@@ -33,6 +33,7 @@ import {
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	background: ${background.articleContent(format)};
+	border: 1px solid yellow;
 
 	${darkModeCss`
 		background: ${background.articleContentDark(format)};
@@ -48,6 +49,14 @@ const BorderStyles = css`
 
 const linePosition = css`
 	margin-top: 83px;
+`;
+
+const topBorder = css`
+	border-top: solid 1px ${neutral[86]};
+
+	${darkModeCss`
+        border-top: solid 1px ${neutral[20]};
+    `}
 `;
 
 interface Props {
@@ -81,6 +90,8 @@ const LetterLayout: FC<Props> = ({ item }) => {
 					<div css={articleWidthStyles}>
 						<Standfirst item={item} />
 						<Byline {...item} />
+					</div>
+					<div css={[articleWidthStyles, topBorder]}>
 						<Metadata item={item} />
 					</div>
 					<MainMedia

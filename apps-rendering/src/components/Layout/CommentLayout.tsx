@@ -3,12 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	breakpoints,
-	from,
-	neutral,
-	remSpace,
-} from '@guardian/source-foundations';
+import { breakpoints, from, neutral } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
@@ -24,8 +19,8 @@ import Standfirst from 'components/Standfirst';
 import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
 import { WithAgeWarning } from 'components/WithAgeWarning';
-import { getFormat } from 'item';
 import type { Comment as CommentItem, Editorial } from 'item';
+import { getFormat } from 'item';
 import { background } from 'palette';
 import type { FC } from 'react';
 import {
@@ -39,6 +34,7 @@ import {
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	background: ${background.articleContent(format)};
+	border: 1px solid red;
 
 	${darkModeCss`
 		background: ${background.articleContentDark(format)};
@@ -54,11 +50,6 @@ const BorderStyles = css`
 
 const topBorder = css`
 	border-top: solid 1px ${neutral[86]};
-	margin-top: ${remSpace[3]};
-
-	${from.wide} {
-		margin-top: ${remSpace[3]};
-	}
 
 	${darkModeCss`
         border-top: solid 1px ${neutral[20]};
@@ -106,7 +97,11 @@ const CommentLayout: FC<Props> = ({ item }) => {
 					<div css={articleWidthStyles}>
 						<Standfirst item={item} />
 					</div>
-
+					{/* todo can this be 3 lines? */}
+					<StraightLines
+						cssOverrides={[lineStyles(format)]}
+						count={4}
+					/>
 					<section css={[articleWidthStyles, topBorder]}>
 						<Metadata item={item} />
 					</section>

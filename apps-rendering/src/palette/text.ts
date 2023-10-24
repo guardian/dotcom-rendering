@@ -74,77 +74,7 @@ const brandingDark = (_format: ArticleFormat): Colour => {
 };
 
 const byline = ({ design, theme }: ArticleFormat): Colour => {
-	switch (design) {
-		case ArticleDesign.Analysis:
-			return neutral[46];
-		case ArticleDesign.Comment:
-		case ArticleDesign.Editorial:
-			switch (theme) {
-				case ArticlePillar.News:
-					return news[400];
-				case ArticlePillar.Lifestyle:
-					return lifestyle[400];
-				case ArticlePillar.Sport:
-					return sport[400];
-				case ArticlePillar.Culture:
-					return culture[400];
-				case ArticlePillar.Opinion:
-					return opinion[300];
-				case ArticleSpecial.Labs:
-					return labs[400];
-				case ArticleSpecial.SpecialReport:
-					return specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return neutral[46];
-			}
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Feature:
-		case ArticleDesign.FullPageInteractive:
-		case ArticleDesign.Interactive:
-		case ArticleDesign.Interview:
-		case ArticleDesign.NewsletterSignup:
-		case ArticleDesign.PhotoEssay:
-		case ArticleDesign.Review:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Standard:
-			switch (theme) {
-				case ArticlePillar.News:
-					return news[400];
-				case ArticlePillar.Lifestyle:
-					return lifestyle[400];
-				case ArticlePillar.Sport:
-					return sport[400];
-				case ArticlePillar.Culture:
-					return culture[400];
-				case ArticlePillar.Opinion:
-					return opinion[300];
-				case ArticleSpecial.Labs:
-					return labs[400];
-				case ArticleSpecial.SpecialReport:
-					return specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return palette.specialReportAlt[100];
-			}
-		default:
-			switch (theme) {
-				case ArticlePillar.News:
-					return news[400];
-				case ArticlePillar.Lifestyle:
-					return lifestyle[400];
-				case ArticlePillar.Sport:
-					return sport[400];
-				case ArticlePillar.Culture:
-					return culture[400];
-				case ArticlePillar.Opinion:
-					return opinion[300];
-				case ArticleSpecial.Labs:
-					return labs[400];
-				case ArticleSpecial.SpecialReport:
-					return specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return news[400];
-			}
-	}
+	return neutral[7];
 };
 
 const bylineAnchor = ({ design, theme }: ArticleFormat): Colour => {
@@ -327,33 +257,8 @@ const bylineAnchorDark = ({ design, theme }: ArticleFormat): Colour => {
 	}
 };
 
-const commentCount = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog) {
-		return neutral[93];
-	}
-
-	if (format.design === ArticleDesign.DeadBlog) {
-		return neutral[46];
-	}
-
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[300];
-		case ArticlePillar.Sport:
-			return sport[300];
-		case ArticlePillar.Culture:
-			return culture[300];
-		case ArticlePillar.Opinion:
-			return opinion[200];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
+const commentCount = (_format: ArticleFormat): Colour => {
+	return neutral[46];
 };
 
 const commentCountDark = (format: ArticleFormat): Colour => {
@@ -1925,8 +1830,7 @@ const datelineDark = ({ design, theme }: ArticleFormat): string => {
 	}
 };
 
-const specialReportAltButton = (_format: ArticleFormat): Colour =>
-	neutral[100];
+const specialReportAltButton = (_format: ArticleFormat): Colour => neutral[100];
 
 const specialReportAltButtonDark = (_format: ArticleFormat): Colour =>
 	neutral[86];

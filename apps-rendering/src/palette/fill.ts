@@ -40,33 +40,8 @@ const editionsCameraIcon = (format: ArticleFormat): Colour => {
 	}
 };
 
-const commentCount = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog) {
-		return neutral[86];
-	}
-
-	if (format.design === ArticleDesign.DeadBlog) {
-		return neutral[46];
-	}
-
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[300];
-		case ArticlePillar.Sport:
-			return sport[300];
-		case ArticlePillar.Culture:
-			return culture[300];
-		case ArticlePillar.Opinion:
-			return opinion[200];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
+const commentCount = (_format: ArticleFormat): Colour => {
+	return neutral[46];
 };
 const commentCountDark = (format: ArticleFormat): Colour => {
 	if (

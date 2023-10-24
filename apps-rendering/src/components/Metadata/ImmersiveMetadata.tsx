@@ -18,6 +18,7 @@ const styles = css`
 	display: flex;
 	${grid.column.centre}
 	padding-bottom: ${remSpace[5]};
+	border: 1px solid indigo;
 
 	${from.leftCol} {
 		${grid.column.left}
@@ -47,8 +48,8 @@ const ImmersiveMetadata: FC<Props> = ({
 }) => (
 	<div css={styles}>
 		<div css={textStyles}>
-			<Dateline date={publishDate} format={format} edition={edition} />
 			<Follow format={format} contributors={contributors} />
+			<Dateline date={publishDate} format={format} edition={edition} />
 		</div>
 		<CommentCount
 			count={commentCount}
