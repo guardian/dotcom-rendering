@@ -20,10 +20,10 @@ const knownNonSemver = /** @type {const} */ ([
 const mismatches = Object.entries(pkg.dependencies)
 	.filter(([name, version]) => {
 		const pinned = json[name + '@' + version]?.version;
-		const isYalc = version.startsWith('file:.yalc');
-		return version !== pinned && !isYalc;
+		return version !== pinned;
 	})
-	.filter(([, version]) => !knownNonSemver.includes(version));
+	.filter(([, version]) => !knownNonSemver.includes(version))
+	.filter(([, version]) => !version.startsWith('file:.yalc'));
 
 if (mismatches.length) warn('All dependencies should be pinned');
 for (const [name, version] of mismatches) {
