@@ -11,6 +11,7 @@ import { InteractiveSupportButton } from './InteractiveSupportButton.importable'
 import { Island } from './Island';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
+import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { SetABTests } from './SetABTests.importable';
 import { Snow } from './Snow.importable';
@@ -179,6 +180,16 @@ describe('Island: server-side rendering', () => {
 					pageId={''}
 					keywordIds={''}
 				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('Metrics', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+					<Metrics commercialMetricsEnabled={true} tests={{}} />
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});

@@ -136,6 +136,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							commercialMetricsEnabled={
 								!!article.config.switches.commercialMetrics
 							}
+							tests={article.config.abTests}
 						/>
 					</Island>
 					<Island
