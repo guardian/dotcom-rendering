@@ -163,7 +163,7 @@
 		"compression": "1.7.4",
 		"constructs": "10.2.69",
 		"cpy": "10.1.0",
-		"crypto-js": "4.1.1",
+		"crypto-js": "4.2.0",
 		"css-loader": "6.7.3",
 		"csstype": "3.1.1",
 		"curlyquotes": "1.5.5",
