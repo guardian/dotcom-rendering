@@ -23,12 +23,13 @@ export const FormatBoundary = ({ format, children }: Props) => {
 			css={[
 				css`
 					${css(paletteDeclarations(format, 'light'))}
-					@media (prefers-color-scheme: dark) {
-						${darkModeAvailable
-							? css(paletteDeclarations(format, 'dark'))
-							: '/* dark mode unavailable */'}
-					}
 				`,
+				darkModeAvailable &&
+					css`
+						@media (prefers-color-scheme: dark) {
+							${css(paletteDeclarations(format, 'dark'))}
+						}
+					`,
 			]}
 		>
 			{children}
