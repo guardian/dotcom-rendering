@@ -85,6 +85,11 @@ const accordionKeyEventsBackgroundLight = (): string =>
 const accordionBackgroundDark = (): string => sourcePalette.neutral[10];
 const accordionLiveFeedBackgroundLight = (): string =>
 	sourcePalette.neutral[97];
+const tableOfContentsLight = (): string => sourcePalette.neutral[7];
+const tableOfContentsDark = (): string => sourcePalette.neutral[86];
+
+const tableOfContentsBorderLight = (): string => sourcePalette.neutral[86];
+const tableOfContentsBorderDark = (): string => sourcePalette.neutral[20];
 
 // ----- Palette ----- //
 
@@ -167,6 +172,14 @@ const paletteColours = {
 	'--accordion-live-feed-background': {
 		light: accordionLiveFeedBackgroundLight,
 		dark: accordionBackgroundDark,
+	},
+	'--table-of-contents': {
+		light: tableOfContentsLight,
+		dark: tableOfContentsDark,
+	},
+	'--table-of-contents-border': {
+		light: tableOfContentsBorderLight,
+		dark: tableOfContentsBorderDark,
 	},
 } satisfies PaletteColours;
 
