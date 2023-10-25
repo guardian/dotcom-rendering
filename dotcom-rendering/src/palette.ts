@@ -91,6 +91,58 @@ const tableOfContentsDark = (): string => sourcePalette.neutral[86];
 const tableOfContentsBorderLight = (): string => sourcePalette.neutral[86];
 const tableOfContentsBorderDark = (): string => sourcePalette.neutral[20];
 
+const adLabelsBackgroundLight = (): string => {
+	return sourcePalette.neutral[20];
+};
+
+const adLabelsBackgroundDark = (): string => {
+	return sourcePalette.neutral[60];
+};
+const adLabelsTextLight = (): string => {
+	return sourcePalette.neutral[20];
+};
+
+const adLabelsTextDark = (): string => {
+	return sourcePalette.neutral[100];
+};
+
+const adBackgroundLight = (): string => {
+	return sourcePalette.neutral[97];
+};
+
+const adBackgroundDark = (): string => {
+	return sourcePalette.neutral[20];
+};
+
+const supportBannerBackgroundLight = (): string => {
+	return sourcePalette.neutral[93];
+};
+
+const supportBannerBackgroundDark = (): string => {
+	return sourcePalette.neutral[46];
+};
+const supportBannerButtonBackgroundLight = (): string => {
+	return sourcePalette.brand[400];
+};
+
+const supportBannerButtonBackgroundDark = (): string => {
+	return sourcePalette.neutral[100];
+};
+const supportBannerButtonTextLight = (): string => {
+	return sourcePalette.neutral[100];
+};
+
+const supportBannerButtonTextDark = (): string => {
+	return sourcePalette.neutral[0];
+};
+const supportBannerTextLight = (): string => {
+	return sourcePalette.brand[400];
+};
+
+const supportBannerTextDark = (): string => {
+	return sourcePalette.neutral[100];
+};
+
 // ----- Palette ----- //
 
 /**
@@ -180,6 +232,34 @@ const paletteColours = {
 	'--table-of-contents-border': {
 		light: tableOfContentsBorderLight,
 		dark: tableOfContentsBorderDark,
+	},
+	'--ad-labels-background': {
+		light: adLabelsBackgroundLight,
+		dark: adLabelsBackgroundDark,
+	},
+	'--support-banner-background': {
+		light: supportBannerBackgroundLight,
+		dark: supportBannerBackgroundDark,
+	},
+	'--ad-background': {
+		light: adBackgroundLight,
+		dark: adBackgroundDark,
+	},
+	'--support-banner-button-background': {
+		light: supportBannerButtonBackgroundLight,
+		dark: supportBannerButtonBackgroundDark,
+	},
+	'--support-banner-button-text': {
+		light: supportBannerButtonTextLight,
+		dark: supportBannerButtonTextDark,
+	},
+	'--support-banner-text': {
+		light: supportBannerTextLight,
+		dark: supportBannerTextDark,
+	},
+	'--ad-labels-text': {
+		light: adLabelsTextLight,
+		dark: adLabelsTextDark,
 	},
 } satisfies PaletteColours;
 
