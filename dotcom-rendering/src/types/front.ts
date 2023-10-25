@@ -1,8 +1,7 @@
 import type { ArticleSpecial, Pillar } from '@guardian/libs';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
-import type { DCRBadgeType } from './badge';
-import type { Branding, EditionBranding } from './branding';
+import type { Branding, CollectionBranding, EditionBranding } from './branding';
 import type { ServerSideTests, Switches } from './config';
 import type { Image } from './content';
 import type { FooterType } from './footer';
@@ -401,9 +400,7 @@ export type DCRCollectionType = {
 	 * will always be `false`.
 	 **/
 	canShowMore?: boolean;
-	editorialBadge?: DCRBadgeType;
-	paidContentBadge?: DCRBadgeType;
-	sponsoredContentBranding?: Branding;
+	collectionBranding?: CollectionBranding;
 	targetedTerritory?: Territory;
 };
 

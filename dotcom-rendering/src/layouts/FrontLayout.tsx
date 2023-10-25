@@ -32,6 +32,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { WeatherWrapper } from '../components/WeatherWrapper.importable';
+import { badgeFromBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -319,21 +320,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
-					const trailsWithoutBranding = collection.paidContentBadge
-						? trails.map((labTrail) => {
-								return {
-									...labTrail,
-									branding: undefined,
-								};
-						  })
-						: trails;
-
-					const frontEditionBranding =
-						front.pressedPage.frontProperties.commercial.editionBrandings.find(
-							(eB) =>
-								eB.edition.id === front.editionId &&
-								!!eB.branding,
-						);
+					// Remove the branding from each of the cards in a paid content collection
+					const trailsWithoutBranding =
+						collection.collectionBranding?.kind === 'paid-content'
+							? trails.map((labTrail) => {
+									return {
+										...labTrail,
+										branding: undefined,
+									};
+							  })
+							: trails;
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
@@ -499,7 +495,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerName={collection.collectionType}
 									canShowMore={collection.canShowMore}
 									url={collection.href}
-									badge={collection.paidContentBadge}
+									badge={badgeFromBranding(
+										collection.collectionBranding,
+									)}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
 									discussionApiUrl={
@@ -655,7 +653,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection,
 									hasPageSkin,
 								)}
-								badge={collection.editorialBadge}
 								sectionId={ophanName}
 								collectionId={collection.id}
 								pageId={front.pressedPage.id}
@@ -667,13 +664,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								canShowMore={collection.canShowMore}
 								ajaxUrl={front.config.ajaxUrl}
 								isOnPaidContentFront={isPaidContent}
-								index={index}
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
-								frontBranding={frontEditionBranding}
 								discussionApiUrl={front.config.discussionApiUrl}
-								containerBranding={
-									collection.sponsoredContentBranding
+								collectionBranding={
+									collection.collectionBranding
 								}
 							>
 								<DecideContainer
