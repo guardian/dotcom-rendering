@@ -1,4 +1,4 @@
-import type { Page } from '@playwright/test';
+import type { BrowserContext, Page } from '@playwright/test';
 import { waitForIsland } from './util';
 
 const SP_LAYER1_IFRAME = '[id*="sp_message_iframe"]';
@@ -41,4 +41,15 @@ const cmpReconsent = async (page: Page): Promise<void> => {
 	await new Promise((r) => setTimeout(r, 2000));
 };
 
-export { cmpAcceptAll, cmpReconsent, cmpRejectAll };
+const disableCMP = async (context: BrowserContext): Promise<void> => {
+	await context.addCookies([
+		{
+			name: 'gu-cmp-disabled',
+			value: 'true',
+			domain: 'localhost',
+			path: '/',
+		},
+	]);
+};
+
+export { cmpAcceptAll, cmpReconsent, cmpRejectAll, disableCMP };
