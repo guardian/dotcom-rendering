@@ -61,7 +61,7 @@ const adSlotSquareStyles = css`
 `;
 
 const supportBannerStyles = css`
-	padding: ${remSpace[3]};
+	padding: ${remSpace[2]};
 	background-color: ${palette('--support-banner-background')};
 
 	p {
