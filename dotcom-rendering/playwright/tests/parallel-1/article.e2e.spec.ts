@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { disableCMP } from '../../lib/cmp';
 import { loadPage } from '../../lib/load-page';
-import { setUrlFragment } from '../../lib/util';
+import { waitForIsland } from '../../lib/util';
 
 test.describe('E2E Page rendering', () => {
 	test.describe('for WEB', () => {
@@ -9,17 +9,16 @@ test.describe('E2E Page rendering', () => {
 			context,
 			page,
 		}) => {
-			const url = setUrlFragment(
-				'https://www.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness',
-				{
-					'ab-CuratedContainerTest2': 'control',
-				},
-			);
 			await disableCMP(context);
-			await loadPage(page, `/Article/${url.toString()}`);
-			const roughLoadPositionOfMostView = 1400;
-			// cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
-			// await expect(page.locator('header')).toContainText('Lifestyle');
+			await loadPage(
+				page,
+				`/Article/https://www.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
+			);
+
+			// await waitForIsland(page, 'MostViewedFooterData');
+			await expect(page.locator('header').first()).toContainText(
+				'Opinion',
+			);
 
 			// cy.intercept('GET', '**/most-read-geo**', (req) => {
 			// 	req.reply((res) => {
