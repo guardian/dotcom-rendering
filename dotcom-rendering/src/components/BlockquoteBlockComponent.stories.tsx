@@ -6,7 +6,6 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { decidePalette } from '../lib/decidePalette';
 import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
 
 const shortQuoteHtml =
