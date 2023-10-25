@@ -73,9 +73,9 @@ export const DarkModeMessage = () => (
 				grid-column: centre-column;
 			`}
 		>
-			As part of this beta release, some articles are currently lacking
-			support for dark mode. We are working to fix this in the next beta
-			release.
+			We hope you are enjoying the updates we are implementing on
+			articles. Unfortunately, some are still missing a dark mode view.
+			Rest assured this will be fixed in a forthcoming beta release.
 		</p>
 	</aside>
 );

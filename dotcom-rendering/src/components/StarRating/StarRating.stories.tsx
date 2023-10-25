@@ -111,3 +111,30 @@ export const LargeStory = () => (
 );
 LargeStory.storyName = 'Large stars';
 LargeStory.decorators = [splitTheme(articleFormat)];
+
+export const StarColours = () => (
+	<>
+		<div style={{ backgroundColor: '#f6dde1' }}>
+			<p>Stars take the colour of the parent by default</p>
+			<div style={{ color: 'red' }}>
+				<StarRating rating={0} size="large" />
+			</div>
+			<div style={{ color: 'orange' }}>
+				<StarRating rating={1} size="large" />
+			</div>
+			<div style={{ color: 'yellow' }}>
+				<StarRating rating={2} size="large" />
+			</div>
+			<div style={{ color: 'green' }}>
+				<StarRating rating={3} size="large" />
+			</div>
+			<div style={{ color: 'blue' }}>
+				<StarRating rating={4} size="large" />
+			</div>
+			<div style={{ color: 'purple' }}>
+				<StarRating rating={5} size="large" />
+			</div>
+		</div>
+	</>
+);
+StarColours.storyName = 'Star colours';

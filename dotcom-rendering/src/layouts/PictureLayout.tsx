@@ -84,9 +84,9 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 219px 1px 1fr;
 					grid-template-areas:
 						'title  border  headline'
-						'lines  border  media'
+						'lines  border  standfirst'
 						'meta   border  media'
-						'meta   border  standfirst'
+						'meta   border  media'
 						'.      border  submeta'
 						'.      border  .';
 				}
@@ -95,9 +95,9 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 140px 1px 1fr 300px;
 					grid-template-areas:
 						'title  border  headline    headline'
-						'lines  border  media       media'
+						'lines  border  standfirst  standfirst'
 						'meta   border  media       media'
-						'meta   border  standfirst  standfirst'
+						'meta   border  media       media'
 						'.      border  submeta     submeta'
 						'.      border  .           . ';
 				}
@@ -116,8 +116,8 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 						'headline  '
 						'lines     '
 						'meta      '
-						'media     '
 						'standfirst'
+						'media     '
 						'submeta   '
 						'.         ';
 				}
@@ -130,8 +130,8 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 						'headline'
 						'lines'
 						'meta'
-						'media'
 						'standfirst'
+						'media'
 						'submeta';
 				}
 
@@ -143,8 +143,8 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 						'headline'
 						'lines'
 						'meta'
-						'media'
 						'standfirst'
+						'media'
 						'submeta';
 				}
 			}
@@ -498,6 +498,12 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								</div>
 							</GridItem>
 						)}
+						<GridItem area="standfirst">
+							<Standfirst
+								format={format}
+								standfirst={article.standfirst}
+							/>
+						</GridItem>
 						<GridItem area="media">
 							<div css={mainMediaWrapper(displayAvatarUrl)}>
 								<MainMedia
@@ -522,12 +528,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									}
 								/>
 							</div>
-						</GridItem>
-						<GridItem area="standfirst">
-							<Standfirst
-								format={format}
-								standfirst={article.standfirst}
-							/>
 						</GridItem>
 						<GridItem area="lines">
 							<div css={LeftColLines(displayAvatarUrl)}>

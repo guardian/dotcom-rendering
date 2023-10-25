@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
-import { brandAlt } from '@guardian/source-foundations';
+import { palette } from '../palette';
 import { Star } from '../static/icons/Star';
 
 const ratingsWrapper = css`
-	background-color: ${brandAlt[400]};
+	background-color: ${palette('--star-rating-background')};
+	color: ${palette('--star-rating-fill')};
 	display: inline-block;
 `;
 
