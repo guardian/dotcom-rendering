@@ -4320,15 +4320,15 @@
     "@sentry/types" "7.75.0"
     "@sentry/utils" "7.75.0"
 
-"@sentry/integrations@7.37.2":
-  version "7.37.2"
-  resolved "https://registry.yarnpkg.com/@sentry/integrations/-/integrations-7.37.2.tgz#2ea6b228c8df24f201802eea1306035b0fc7e571"
-  integrity sha512-kqfXo2hRLo3y0vM9ZcjbrB3grOYfPuKpSHN8MZVx3MHTbAUkjHVwjPf5dfi5a0nMvMYAjg2v/Olt8OGayBgjmg==
+"@sentry/integrations@7.75.0":
+  version "7.75.0"
+  resolved "https://registry.yarnpkg.com/@sentry/integrations/-/integrations-7.75.0.tgz#0dcee498b34b4075856d67698d317f8e3c0b96f0"
+  integrity sha512-dnKZvPJBj+KiOIteYJEVuZcB3Hcd6NYdQ3xJhGk5FD4+gGOHTF+8kMdBC6q+Rnkyc63IB0vPRMhhs/T5XbWByg==
   dependencies:
-    "@sentry/types" "7.37.2"
-    "@sentry/utils" "7.37.2"
+    "@sentry/core" "7.75.0"
+    "@sentry/types" "7.75.0"
+    "@sentry/utils" "7.75.0"
     localforage "^1.8.1"
-    tslib "^1.9.3"
 
 "@sentry/node@^7.36.0":
   version "7.57.0"
@@ -4354,11 +4354,6 @@
     "@sentry/types" "7.75.0"
     "@sentry/utils" "7.75.0"
 
-"@sentry/types@7.37.2":
-  version "7.37.2"
-  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-7.37.2.tgz#99fd76230d7c1d3c6901ed4c0bea35be7d6fe26d"
-  integrity sha512-SxKQOCX94ZaQM4C2ysNjHdJsjYapu/NYZCz1cnPyCdDvYfhwiVge1uq6ZHiQ/ARfxAAOmc3R4Mh3VvEz7WUOdw==
-
 "@sentry/types@7.57.0":
   version "7.57.0"
   resolved "https://registry.yarnpkg.com/@sentry/types/-/types-7.57.0.tgz#4fdb80cbd49ba034dd8d9be0c0005a016d5db3ce"
@@ -4368,14 +4363,6 @@
   version "7.75.0"
   resolved "https://registry.yarnpkg.com/@sentry/types/-/types-7.75.0.tgz#e171f1680785a155cb828942af890ad4ee657ca3"
   integrity sha512-xG8OLADxG7HpGhMxrF4v4tKq/v/gqmLsTZ858R51pz0xCWM8SK6ZSWOKudkAGBIpRjI6RUHMnkBtRAN2aKDOkQ==
-
-"@sentry/utils@7.37.2":
-  version "7.37.2"
-  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-7.37.2.tgz#14dea644454e3df247fb113fc834f509c1f0e48c"
-  integrity sha512-5irN1nN/mtdOoWwsJiwBK0gPgNMkciUubEMbCaaXqJaGyGz8+yfDvXj7L+xGYiU57z+7+QkkSKxKEZ/IcBpjVQ==
-  dependencies:
-    "@sentry/types" "7.37.2"
-    tslib "^1.9.3"
 
 "@sentry/utils@7.57.0":
   version "7.57.0"
@@ -15126,7 +15113,7 @@ prebid.js@guardian/prebid.js#ddf4251:
   version "7.54.5"
   resolved "https://codeload.github.com/guardian/prebid.js/tar.gz/ddf4251b19c95878af00f640211c0c31ac3e7ac2"
   dependencies:
-    "@babel/core" "^7.16.7"
+    "@babel/core" "^7.23.2"
     "@babel/plugin-transform-runtime" "^7.18.9"
     "@babel/preset-env" "^7.16.8"
     "@babel/runtime" "^7.18.9"
@@ -17485,7 +17472,7 @@ tslib@2.5.3:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.3.tgz#24944ba2d990940e6e982c4bea147aba80209913"
   integrity sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==
 
-tslib@^1.11.1, tslib@^1.13.0, tslib@^1.8.1, tslib@^1.9.3:
+tslib@^1.11.1, tslib@^1.13.0, tslib@^1.8.1:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==

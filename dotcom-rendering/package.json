@@ -82,7 +82,7 @@
 		"@guardian/support-dotcom-components": "1.0.7",
 		"@guardian/tsconfig": "0.2.0",
 		"@sentry/browser": "7.75.0",
-		"@sentry/integrations": "7.37.2",
+		"@sentry/integrations": "7.75.0",
 		"@storybook/addon-essentials": "7.4.6",
 		"@storybook/addons": "7.4.6",
 		"@storybook/api": "7.4.6",
