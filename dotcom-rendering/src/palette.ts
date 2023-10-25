@@ -3556,7 +3556,7 @@ const paletteColours = {
 	'--pullquote-background': {
 		light: pullQuoteBackgroundColourLight,
 		dark: pullQuoteBackgroundColourDark,
-	}
+	},
 } satisfies PaletteColours;
 
 /**

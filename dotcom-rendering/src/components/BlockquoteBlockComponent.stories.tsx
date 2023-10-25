@@ -5,6 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import { breakpoints } from '@guardian/source-foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorators';
 import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
 
@@ -16,6 +17,9 @@ const blockquoteHtml =
 export default {
 	component: BlockquoteBlockComponent,
 	title: 'Components/BlockquoteComponent',
+	chromatic: {
+		viewports: [breakpoints.mobile, breakpoints.tablet],
+	},
 };
 
 const containerStyles = css`
