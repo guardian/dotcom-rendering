@@ -49,12 +49,8 @@ const starRatingBackgroundColourLight = (): string =>
 const starRatingBackgroundColourDark = (): string =>
 	sourcePalette.brandAlt[200];
 
-const blockQuoteFillLight = ({
-	design,
-	display,
-	theme,
-}: ArticleFormat): string => {
-	return decidePalette({ design, display, theme }).fill.blockquoteIcon;
+const blockQuoteFillLight = (format: ArticleFormat): string => {
+	return decidePalette(format).fill.blockquoteIcon;
 };
 const blockQuoteFillDark = ({
 	design,
@@ -70,12 +66,8 @@ const blockQuoteFillDark = ({
 				.blockquoteIcon;
 	}
 };
-const quotedBlockquoteStylesLight = ({
-	design,
-	display,
-	theme,
-}: ArticleFormat): string => {
-	return decidePalette({ design, display, theme }).text.blockquote;
+const quotedBlockquoteStylesLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.blockquote;
 };
 const quotedBlockquoteStylesDark = (): string => sourcePalette.neutral[100];
 
