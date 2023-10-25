@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { body, breakpoints, from, space } from '@guardian/source-foundations';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorators';
 import { Accordion } from './Accordion';
 
 const textStyle = css`
