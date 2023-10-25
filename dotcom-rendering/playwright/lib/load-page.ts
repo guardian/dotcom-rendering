@@ -6,6 +6,7 @@ const BASE_URL = `http://localhost:${PORT}`;
 const loadPage = async (
 	page: Page,
 	path: string,
+	waitUntil: 'load' | 'domcontentloaded' = 'load',
 	region = 'GB',
 ): Promise<void> => {
 	await page.addInitScript((regionProvided) => {
@@ -28,7 +29,7 @@ const loadPage = async (
 	//
 	// Instead of aborting ophan change the waituntil to 'domcontentloaded'
 	// rather than 'load'. Monitor this to see if it works for our use cases.
-	await page.goto(`${BASE_URL}path`, { waitUntil: 'domcontentloaded' });
+	await page.goto(`${BASE_URL}${path}`, { waitUntil });
 };
 
 export { loadPage };
