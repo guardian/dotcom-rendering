@@ -13,12 +13,6 @@ const shortQuoteHtml =
 const blockquoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence that under <a href="https://www.theguardian.com/politics/boris-johnson">Boris Johnson</a> the NHS is on the table and will be up for sale. He tried to cover it up in a secret agenda but today it’s been exposed.</p> \n<p>A second paragraph</p> \n</blockquote>';
 
-const articleFormat: ArticleFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.News,
-};
-
 export default {
 	component: BlockquoteBlockComponent,
 	title: 'Components/BlockquoteComponent',
@@ -40,13 +34,13 @@ export const Unquoted = () => {
 	);
 };
 Unquoted.storyName = 'Unquoted';
-Unquoted.decorators = [splitTheme(articleFormat)];
-
-const NewsFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.News,
-};
+Unquoted.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.News,
+	}),
+];
 
 export const News = () => {
 	return (
@@ -58,13 +52,13 @@ export const News = () => {
 };
 
 News.storyName = 'News';
-News.decorators = [splitTheme(NewsFormat)];
-
-const SportFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.Sport,
-};
+News.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.News,
+	}),
+];
 
 export const Sport = () => {
 	return (
@@ -76,13 +70,13 @@ export const Sport = () => {
 };
 
 Sport.storyName = 'Sport';
-Sport.decorators = [splitTheme(SportFormat)];
-
-const CultureFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.Culture,
-};
+Sport.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Sport,
+	}),
+];
 
 export const Culture = () => {
 	return (
@@ -94,13 +88,13 @@ export const Culture = () => {
 };
 
 Culture.storyName = 'Culture';
-Culture.decorators = [splitTheme(CultureFormat)];
-
-const LifestyleFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.Lifestyle,
-};
+Culture.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Culture,
+	}),
+];
 
 export const Lifestyle = () => {
 	return (
@@ -112,13 +106,13 @@ export const Lifestyle = () => {
 };
 
 Lifestyle.storyName = 'Lifestyle';
-Lifestyle.decorators = [splitTheme(LifestyleFormat)];
-
-const OpinionFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.Opinion,
-};
+Lifestyle.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Lifestyle,
+	}),
+];
 
 export const Opinion = () => {
 	return (
@@ -130,13 +124,13 @@ export const Opinion = () => {
 };
 
 Opinion.storyName = 'Opinion';
-Opinion.decorators = [splitTheme(OpinionFormat)];
-
-const SpecialReportFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: ArticleSpecial.SpecialReport,
-};
+Opinion.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Opinion,
+	}),
+];
 
 export const SpecialReport = () => {
 	return (
@@ -148,13 +142,13 @@ export const SpecialReport = () => {
 };
 
 SpecialReport.storyName = 'SpecialReport';
-SpecialReport.decorators = [splitTheme(SpecialReportFormat)];
-
-const LabsFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: ArticleSpecial.Labs,
-};
+SpecialReport.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: ArticleSpecial.SpecialReport,
+	}),
+];
 
 export const Labs = () => {
 	return (
@@ -166,13 +160,13 @@ export const Labs = () => {
 };
 
 Labs.storyName = 'Labs';
-Labs.decorators = [splitTheme(LabsFormat)];
-
-const LiveBlogNewsFormat = {
-	design: ArticleDesign.LiveBlog,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.News,
-};
+Labs.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: ArticleSpecial.Labs,
+	}),
+];
 
 export const LiveBlogNews = () => {
 	return (
@@ -184,13 +178,13 @@ export const LiveBlogNews = () => {
 };
 
 LiveBlogNews.storyName = 'LiveBlogNews';
-LiveBlogNews.decorators = [splitTheme(LiveBlogNewsFormat)];
-
-const DeadBlogNewsFormat = {
-	design: ArticleDesign.DeadBlog,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.News,
-};
+LiveBlogNews.decorators = [
+	splitTheme({
+		design: ArticleDesign.LiveBlog,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.News,
+	}),
+];
 
 export const DeadBlogNews = () => {
 	return (
@@ -202,15 +196,15 @@ export const DeadBlogNews = () => {
 };
 
 DeadBlogNews.storyName = 'DeadBlogNews';
-DeadBlogNews.decorators = [splitTheme(DeadBlogNewsFormat)];
+DeadBlogNews.decorators = [
+	splitTheme({
+		design: ArticleDesign.DeadBlog,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.News,
+	}),
+];
 
-const LiveBlogNewsSportFormat = {
-	design: ArticleDesign.LiveBlog,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.Sport,
-};
-
-export const LiveBlogNewsSport = () => {
+export const LiveBlogSport = () => {
 	return (
 		<div>
 			<h1>LiveBlog News</h1>
@@ -219,14 +213,15 @@ export const LiveBlogNewsSport = () => {
 	);
 };
 
-LiveBlogNewsSport.storyName = 'LiveBlogNewsSport';
-LiveBlogNewsSport.decorators = [splitTheme(LiveBlogNewsSportFormat)];
+LiveBlogSport.storyName = 'LiveBlogSport';
+LiveBlogSport.decorators = [
+	splitTheme({
+		design: ArticleDesign.LiveBlog,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Sport,
+	}),
+];
 
-const DeadBlogSportFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.Sport,
-};
 export const DeadBlogSport = () => {
 	return (
 		<div css={containerStyles}>
@@ -236,13 +231,14 @@ export const DeadBlogSport = () => {
 	);
 };
 DeadBlogSport.storyName = 'DeadBlogSport';
-DeadBlogSport.decorators = [splitTheme(DeadBlogSportFormat)];
+DeadBlogSport.decorators = [
+	splitTheme({
+		design: ArticleDesign.DeadBlog,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Sport,
+	}),
+];
 
-const SpecialReportAltStandardFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: ArticleSpecial.SpecialReportAlt,
-};
 export const SpecialReportAltStandard = () => {
 	return (
 		<div css={containerStyles}>
@@ -253,14 +249,13 @@ export const SpecialReportAltStandard = () => {
 };
 SpecialReportAltStandard.storyName = 'SpecialReportAltStandard';
 SpecialReportAltStandard.decorators = [
-	splitTheme(SpecialReportAltStandardFormat),
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: ArticleSpecial.SpecialReportAlt,
+	}),
 ];
 
-const SpecialReportAltCommentFormat = {
-	design: ArticleDesign.Comment,
-	display: ArticleDisplay.Standard,
-	theme: ArticleSpecial.SpecialReportAlt,
-};
 export const SpecialReportAltComment = () => {
 	return (
 		<div css={containerStyles}>
@@ -271,5 +266,9 @@ export const SpecialReportAltComment = () => {
 };
 SpecialReportAltComment.storyName = 'SpecialReportAltComment';
 SpecialReportAltComment.decorators = [
-	splitTheme(SpecialReportAltCommentFormat),
+	splitTheme({
+		design: ArticleDesign.Comment,
+		display: ArticleDisplay.Standard,
+		theme: ArticleSpecial.SpecialReportAlt,
+	}),
 ];
