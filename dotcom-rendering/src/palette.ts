@@ -393,6 +393,8 @@ const clickToViewButtonTextDark = (): string => sourcePalette.neutral[7];
 const clickToViewButtonHoverLight = (): string =>
 	buttonThemeDefault.button.backgroundPrimaryHover;
 const clickToViewButtonHoverDark = (): string => sourcePalette.neutral[86];
+const guardianLogoText = (): string => sourcePalette.neutral[100];
+const guardianLogoAccentText = (): string => sourcePalette.brandAlt[400];
 
 const standfirstBulletDark = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
@@ -1170,6 +1172,14 @@ const paletteColours = {
 	'--summary-event-bullet-hover': {
 		light: summaryEventBulletHoverLight,
 		dark: summaryEventBulletHoverDark,
+	},
+	'--guardian-logo': {
+		light: guardianLogoText,
+		dark: guardianLogoText,
+	},
+	'--guardian-logo-accent': {
+		light: guardianLogoAccentText,
+		dark: guardianLogoAccentText,
 	},
 } satisfies PaletteColours;
 
