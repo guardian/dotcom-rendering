@@ -34,15 +34,9 @@ export const Unquoted = () => {
 	return (
 		<div css={containerStyles}>
 			<h1>Long</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(articleFormat)}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} />
 			<h1>Short</h1>
-			<BlockquoteBlockComponent
-				html={shortQuoteHtml}
-				palette={decidePalette(articleFormat)}
-			/>
+			<BlockquoteBlockComponent html={shortQuoteHtml} />
 		</div>
 	);
 };
@@ -59,11 +53,7 @@ export const News = () => {
 	return (
 		<div>
 			<h1>News</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(NewsFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -81,11 +71,7 @@ export const Sport = () => {
 	return (
 		<div>
 			<h1>Sport</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(SportFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -103,11 +89,7 @@ export const Culture = () => {
 	return (
 		<div>
 			<h1>Culture</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(CultureFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -125,11 +107,7 @@ export const Lifestyle = () => {
 	return (
 		<div>
 			<h1>Lifestyle</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(LifestyleFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -147,11 +125,7 @@ export const Opinion = () => {
 	return (
 		<div>
 			<h1>Opinion</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(OpinionFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -169,11 +143,7 @@ export const SpecialReport = () => {
 	return (
 		<div>
 			<h1>SpecialReport</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(SpecialReportFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -191,11 +161,7 @@ export const Labs = () => {
 	return (
 		<div>
 			<h1>Labs</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(LabsFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -213,11 +179,7 @@ export const LiveBlogNews = () => {
 	return (
 		<div>
 			<h1>LiveBlog News</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(LiveBlogNewsFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -235,11 +197,7 @@ export const DeadBlogNews = () => {
 	return (
 		<div>
 			<h1>DeadBlog News</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(DeadBlogNewsFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -257,11 +215,7 @@ export const LiveBlogNewsSport = () => {
 	return (
 		<div>
 			<h1>LiveBlog News</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(LiveBlogNewsSportFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -278,11 +232,7 @@ export const DeadBlogSport = () => {
 	return (
 		<div css={containerStyles}>
 			<h1>DeadBlog Sport</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(DeadBlogSportFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -298,11 +248,7 @@ export const SpecialReportAltStandard = () => {
 	return (
 		<div css={containerStyles}>
 			<h1>SpecialReportAlt Standard</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(SpecialReportAltStandardFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
@@ -320,11 +266,7 @@ export const SpecialReportAltComment = () => {
 	return (
 		<div css={containerStyles}>
 			<h1>SpecialReportAlt Comment</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette(SpecialReportAltCommentFormat)}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
