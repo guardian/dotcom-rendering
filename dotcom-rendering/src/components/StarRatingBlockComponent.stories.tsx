@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorators';
 import { StarRatingBlockComponent } from './StarRatingBlockComponent';
 
 const articleFormat: ArticleFormat = {

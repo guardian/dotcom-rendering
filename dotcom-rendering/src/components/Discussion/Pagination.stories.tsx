@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
-import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorators';
 import type { FilterOptions } from '../../types/discussion';
 import { Pagination } from './Pagination';
 
