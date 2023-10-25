@@ -2,15 +2,14 @@
 
 import type { ChildProcess } from 'child_process';
 import { fork } from 'child_process';
-import { createHash } from 'crypto';
-import path from 'path';
 import CleanCSS from 'clean-css';
+import { createHash } from 'crypto';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
 import type { Compiler, Configuration, ResolveOptions } from 'webpack';
-import webpack from 'webpack';
+import webpack, { WebpackPluginInstance } from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import { renderedItemsAssetsCss } from './config/rendered-items-assets-styles';
-import { WebpackPluginInstance } from 'webpack';
 // Needed for TS to bring in the webpack-dev-server types, so it can merge
 // the 'devServer` field into the main webpack Configuration type
 import type {} from 'webpack-dev-server';
@@ -48,10 +47,10 @@ function resolve(
 		},
 		// Webpack 5 removed a lot of the nodejs polyfills including Buffer
 		// We rely on Buffer for our bridget thrift client  - need for bridget thrift client
-		fallback: {
-			url: require.resolve('url/'),
-			buffer: require.resolve('buffer/'),
-		},
+		// fallback: {
+		// 	url: require.resolve('url/'),
+		// 	buffer: require.resolve('buffer/'),
+		// },
 	};
 
 	// Webpack 5 removed a lot of the nodejs polyfills including Buffer
