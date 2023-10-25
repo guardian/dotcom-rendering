@@ -1,9 +1,5 @@
-import {
-	ArticleDesign,
-	ArticleSpecial,
-	isString,
-	Pillar,
-} from '@guardian/libs';
+import type { ArticleDesign } from '@guardian/libs';
+import { ArticleSpecial, isString, Pillar } from '@guardian/libs';
 
 export const getThemeNameAsString = (format: ArticleFormat): string => {
 	const themeName = Pillar[format.theme] ?? ArticleSpecial[format.theme];
@@ -18,9 +14,6 @@ export const getThemeNameAsString = (format: ArticleFormat): string => {
 const isTheme = (theme: string | ArticleTheme): theme is ArticleTheme =>
 	!isString(theme);
 
-const isDesign = (design: string | ArticleDesign): design is ArticleDesign =>
-	!isString(design);
-
 export const getAllThemes = ({
 	display,
 	design,
@@ -31,21 +24,6 @@ export const getAllThemes = ({
 	Object.values({ ...Pillar, ...ArticleSpecial })
 		.filter(isTheme)
 		.map((theme) => ({
-			theme,
-			display,
-			design,
-		}));
-
-export const getAllDesigns = ({
-	theme,
-	display,
-}: {
-	theme: ArticleTheme;
-	display: ArticleDisplay;
-}): Array<ArticleFormat> =>
-	Object.values(ArticleDesign)
-		.filter(isDesign)
-		.map((design) => ({
 			theme,
 			display,
 			design,

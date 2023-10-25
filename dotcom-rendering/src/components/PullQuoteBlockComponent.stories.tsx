@@ -2,7 +2,6 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitThemeMultipleFormats } from '../../.storybook/decorators/splitThemeDecorators';
 import type { Config } from '../../src/types/configContext';
 import { decidePalette } from '../lib/decidePalette';
-import { getAllDesigns } from '../lib/format';
 import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
 import { Section } from './Section';
 
@@ -32,20 +31,24 @@ const pullQuoteStoryVariations = [
 	ArticleDesign.Comment,
 	ArticleDesign.Editorial,
 ];
-const allSportsVariations = getAllDesigns({
+
+const allSportsVariations = pullQuoteStoryVariations.map((design) => ({
+	design,
 	display: ArticleDisplay.Standard,
 	theme: Pillar.Sport,
-}).filter((format) => pullQuoteStoryVariations.includes(format.design));
+}));
 
-const allNewsVariations = getAllDesigns({
+const allNewsVariations = pullQuoteStoryVariations.map((design) => ({
+	design,
 	display: ArticleDisplay.Standard,
 	theme: Pillar.News,
-}).filter((format) => pullQuoteStoryVariations.includes(format.design));
+}));
 
-const allLifestyleVariations = getAllDesigns({
+const allLifestyleVariations = pullQuoteStoryVariations.map((design) => ({
+	design,
 	display: ArticleDisplay.Standard,
 	theme: Pillar.Lifestyle,
-}).filter((format) => pullQuoteStoryVariations.includes(format.design));
+}));
 
 export const Inline = (_: Config, { format }: { format: ArticleFormat }) => (
 	<Section
@@ -56,9 +59,7 @@ export const Inline = (_: Config, { format }: { format: ArticleFormat }) => (
 		title={' '}
 		description={ArticleDesign[format.design]}
 	>
-		<>
-			<PullQuoteBlockComponent format={format} role="inline" {...quote} />
-		</>
+		<PullQuoteBlockComponent format={format} role="inline" {...quote} />
 	</Section>
 );
 
@@ -75,13 +76,7 @@ export const Showcase = (_: Config, { format }: { format: ArticleFormat }) => (
 		title={' '}
 		description={ArticleDesign[format.design]}
 	>
-		<>
-			<PullQuoteBlockComponent
-				format={format}
-				role="showcase"
-				{...quote}
-			/>
-		</>
+		<PullQuoteBlockComponent format={format} role="showcase" {...quote} />
 	</Section>
 );
 
@@ -102,13 +97,7 @@ export const Supporting = (
 		title={' '}
 		description={ArticleDesign[format.design]}
 	>
-		<>
-			<PullQuoteBlockComponent
-				format={format}
-				role="supporting"
-				{...quote}
-			/>
-		</>
+		<PullQuoteBlockComponent format={format} role="supporting" {...quote} />
 	</Section>
 );
 Supporting.storyName = 'Supporting - Culture variations';
