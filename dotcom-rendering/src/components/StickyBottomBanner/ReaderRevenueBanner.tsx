@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { CountryCode } from '@guardian/libs';
 import { getCookie } from '@guardian/libs';
 import {
 	getBanner,
@@ -56,7 +57,7 @@ type BuildPayloadProps = BaseProps & {
 };
 
 type CanShowProps = BaseProps & {
-	asyncCountryCode: Promise<string>;
+	countryCode: CountryCode;
 	remoteBannerConfig: boolean;
 	isPreview: boolean;
 	idApiUrl: string;
@@ -146,7 +147,7 @@ const buildPayload = async ({
 export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	remoteBannerConfig,
 	isSignedIn,
-	asyncCountryCode,
+	countryCode,
 	contentType,
 	sectionId,
 	shouldHideReaderRevenue,
@@ -192,7 +193,6 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		return { show: false };
 	}
 
-	const countryCode = await asyncCountryCode;
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = await buildPayload({
 		isSignedIn,
@@ -236,7 +236,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	remoteBannerConfig,
 	isSignedIn,
-	asyncCountryCode,
+	countryCode,
 	contentType,
 	sectionId,
 	shouldHideReaderRevenue,
@@ -260,7 +260,6 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	}
 
 	if (isPuzzlesPage && remoteBannerConfig) {
-		const countryCode = await asyncCountryCode;
 		const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 		const bannerPayload = await buildPayload({
 			isSignedIn,
