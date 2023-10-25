@@ -2,6 +2,7 @@
 
 import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
+import { buttonThemeDefault } from '@guardian/source-react-components';
 import { decidePalette } from './lib/decidePalette';
 
 // ----- Palette Functions ----- //
@@ -102,6 +103,18 @@ const appsFooterLinksBackgroundDark = (format: ArticleFormat): string => {
 			return sourcePalette.neutral[0];
 	}
 };
+const clickToViewBackgroundLight = (): string => sourcePalette.neutral[97];
+const clickToViewBackgroundDark = (): string => sourcePalette.neutral[20];
+const clickToViewBorderLight = (): string => sourcePalette.neutral[97];
+const clickToViewBorderDark = (): string => sourcePalette.neutral[46];
+const clickToViewButtonLight = (): string => sourcePalette.brand[400];
+const clickToViewButtonDark = (): string => sourcePalette.neutral[97];
+const clickToViewButtonTextLight = (): string =>
+	buttonThemeDefault.button.textPrimary;
+const clickToViewButtonTextDark = (): string => sourcePalette.neutral[7];
+const clickToViewButtonHoverLight = (): string =>
+	buttonThemeDefault.button.backgroundPrimaryHover;
+const clickToViewButtonHoverDark = (): string => sourcePalette.neutral[86];
 
 // ----- Palette ----- //
 
@@ -200,6 +213,26 @@ const paletteColours = {
 	'--apps-footer-links-background': {
 		light: appsFooterLinksBackgroundLight,
 		dark: appsFooterLinksBackgroundDark,
+	},
+	'--click-to-view-background': {
+		light: clickToViewBackgroundLight,
+		dark: clickToViewBackgroundDark,
+	},
+	'--click-to-view-border': {
+		light: clickToViewBorderLight,
+		dark: clickToViewBorderDark,
+	},
+	'--click-to-view-button': {
+		light: clickToViewButtonLight,
+		dark: clickToViewButtonDark,
+	},
+	'--click-to-view-button-text': {
+		light: clickToViewButtonTextLight,
+		dark: clickToViewButtonTextDark,
+	},
+	'--click-to-view-button-hover': {
+		light: clickToViewButtonHoverLight,
+		dark: clickToViewButtonHoverDark,
 	},
 } satisfies PaletteColours;
 
