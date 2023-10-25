@@ -7,7 +7,7 @@ import {
 	bypassCoreWebVitalsSampling,
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
-import { getCookie, isUndefined } from '@guardian/libs';
+import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import { billboardsInMerchHigh } from '../experiments/tests/billboards-in-merch-high';
@@ -42,7 +42,9 @@ const useBrowserId = () => {
 	useEffect(() => {
 		const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
 
-		if (cookie) setBrowserId(cookie);
+		const id = isString(cookie) ? cookie : 'no-browser-id-available';
+
+		setBrowserId(id);
 	}, []);
 
 	return browserId;
@@ -57,7 +59,7 @@ const usePageViewId = (renderingTarget: RenderingTarget) => {
 				setId(pageViewId);
 			})
 			.catch(() => {
-				/* do nothing */
+				setId('no-page-view-id-available');
 			});
 	}, [renderingTarget]);
 
@@ -105,7 +107,9 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 	useEffect(
 		function coreWebVitals() {
 			if (isUndefined(abTestApi)) return;
+			if (isUndefined(browserId)) return;
 			if (isUndefined(isDev)) return;
+			if (isUndefined(pageViewId)) return;
 
 			const bypassSampling = shouldBypassSampling(abTestApi);
 
@@ -134,15 +138,17 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 			// Only send metrics if the switch is enabled
 			if (!commercialMetricsEnabled) return;
 
-			if (isUndefined(pageViewId)) return;
 			if (isUndefined(abTestApi)) return;
+			if (isUndefined(adBlockerInUse)) return;
+			if (isUndefined(browserId)) return;
 			if (isUndefined(isDev)) return;
+			if (isUndefined(pageViewId)) return;
 
 			const bypassSampling = shouldBypassSampling(abTestApi);
 
 			initCommercialMetrics({
 				pageViewId,
-				browserId: browserId ?? undefined,
+				browserId,
 				isDev,
 				adBlockerInUse,
 			})
