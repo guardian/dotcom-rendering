@@ -20,7 +20,8 @@ const knownNonSemver = /** @type {const} */ ([
 const mismatches = Object.entries(pkg.dependencies)
 	.filter(([name, version]) => {
 		const pinned = json[name + '@' + version]?.version;
-		return version !== pinned;
+		const isYalc = version.startsWith('file:.yalc');
+		return version !== pinned && !isYalc;
 	})
 	.filter(([, version]) => !knownNonSemver.includes(version));
 
