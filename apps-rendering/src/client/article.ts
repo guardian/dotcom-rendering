@@ -146,9 +146,7 @@ function conditionallyRenderFollowTagComponent(
 		return checkBridgetCompatibilty(version);
 	});
 
-	const isMyGuardianEnabled = environmentClient
-		.isMyGuardianEnabled()
-		.then((_) => _);
+	const isMyGuardianEnabled = environmentClient.isMyGuardianEnabled();
 
 	void Promise.all([isBridgetCompatible, isMyGuardianEnabled])
 		.then(([isBridgetCompatible, isMyGuardianEnabled]) => {

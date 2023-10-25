@@ -14,10 +14,7 @@ interface Props {
 	contributorName: string;
 }
 
-export const FollowNotificationStatus: FC<Props> = ({
-	isFollowing,
-	contributorName,
-}) => {
+export const FollowNotificationStatus: FC<Props> = ({ isFollowing }) => {
 	return (
 		<>
 			{isFollowing ? (
