@@ -38,7 +38,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { frontsBannerAdCollections } from '../lib/frontsBannerAbTestAdPositions';
 import {
-	getDesktopAdPositions,
+	getDesktopMpuAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
@@ -149,8 +149,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
 		: [];
 
-	const desktopAdPositions = renderAds
-		? getDesktopAdPositions(front.pressedPage.collections)
+	const desktopMpuAdPositions = renderAds
+		? getDesktopMpuAdPositions(front.pressedPage.collections)
 		: [];
 
 	const numBannerAdsInserted = useRef(0);
@@ -514,7 +514,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.containerPalette
 										}
 										imageLoading={imageLoading}
-										adIndex={desktopAdPositions.indexOf(
+										adIndex={desktopMpuAdPositions.indexOf(
 											index,
 										)}
 										renderAds={renderMpuAds}
@@ -684,7 +684,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)
 									}
 									imageLoading={imageLoading}
-									adIndex={desktopAdPositions.indexOf(index)}
+									adIndex={desktopMpuAdPositions.indexOf(
+										index,
+									)}
 									renderAds={renderMpuAds}
 								/>
 							</FrontSection>

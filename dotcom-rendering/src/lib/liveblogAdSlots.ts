@@ -18,11 +18,17 @@ const MAX_INLINE_ADS = 8;
 
 /**
  * Minimum amount of space in pixels between any pair of inline ads.
+ *
+ * Note: This is an approximation based on estimated heights of content blocks.
+ * This is not accuarately measuring the number of pixels.
  */
 const MIN_SPACE_BETWEEN_ADS = 1_500;
 
 /**
  * Minimum amount of space in pixels between any pair of inline ads on mobile viewports.
+ *
+ * Note: This is an approximation based on estimated heights of content blocks.
+ * This is not accuarately measuring the number of pixels.
  */
 const MIN_SPACE_BETWEEN_ADS_MOBILE = 1_200;
 

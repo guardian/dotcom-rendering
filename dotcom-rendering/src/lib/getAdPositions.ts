@@ -105,7 +105,9 @@ const hasDesktopAd = (collection: AdCandidate) => {
 	);
 };
 
-export const getDesktopAdPositions = (collections: AdCandidate[]): number[] =>
+export const getDesktopMpuAdPositions = (
+	collections: AdCandidate[],
+): number[] =>
 	collections
 		.filter(hasDesktopAd)
 		.map((collection) => collections.indexOf(collection));

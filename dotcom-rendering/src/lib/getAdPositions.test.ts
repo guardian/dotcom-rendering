@@ -1,6 +1,6 @@
 import type { DCRCollectionType } from '../types/front';
 import {
-	getDesktopAdPositions,
+	getDesktopMpuAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from './getAdPositions';
@@ -274,7 +274,7 @@ describe('Desktop Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const desktopAdPositions = getDesktopAdPositions(testCollections);
+		const desktopAdPositions = getDesktopMpuAdPositions(testCollections);
 
 		expect(desktopAdPositions).toEqual([3, 6, 9, 11]);
 	});
