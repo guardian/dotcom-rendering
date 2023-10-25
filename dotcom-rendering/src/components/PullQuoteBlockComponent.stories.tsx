@@ -1,443 +1,122 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitThemeMultipleFormats } from '../../.storybook/decorators/splitThemeDecorators';
+import type { Config } from '../../src/types/configContext';
 import { decidePalette } from '../lib/decidePalette';
-import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
+import { getAllDesigns } from '../lib/format';
+import { PullQuoteBlockComponent } from './PullQuoteBlockComponent-NEW';
 import { Section } from './Section';
+
+const quote = {
+	html: 'Comment is free, but facts are sacred.',
+	attribution: 'C.P. Scott',
+};
 
 export default {
 	component: PullQuoteBlockComponent,
 	title: 'Components/PullQuoteBlockComponent',
 };
 
-const defaultFormat = {
+const pullQuoteStoryVariations = [
+	ArticleDesign.Standard,
+	ArticleDesign.Profile,
+	ArticleDesign.Explainer,
+	ArticleDesign.Timeline,
+	ArticleDesign.LiveBlog,
+	ArticleDesign.DeadBlog,
+	ArticleDesign.Analysis,
+	ArticleDesign.Feature,
+	ArticleDesign.Interview,
+	ArticleDesign.Recipe,
+	ArticleDesign.Review,
+	ArticleDesign.Obituary,
+	ArticleDesign.Comment,
+	ArticleDesign.Editorial,
+];
+const allSportsVariations = getAllDesigns({
 	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
-};
+	theme: Pillar.Sport,
+}).filter((format) => pullQuoteStoryVariations.includes(format.design));
 
-const photoEssayNews = {
+const allNewsVariations = getAllDesigns({
 	display: ArticleDisplay.Standard,
-	design: ArticleDesign.PhotoEssay,
 	theme: Pillar.News,
-};
+}).filter((format) => pullQuoteStoryVariations.includes(format.design));
 
-// Inline
-export const SportInline = () => {
-	const format = {
-		...defaultFormat,
-		theme: Pillar.Sport,
-	};
+const allLifestyleVariations = getAllDesigns({
+	display: ArticleDisplay.Standard,
+	theme: Pillar.Lifestyle,
+}).filter((format) => pullQuoteStoryVariations.includes(format.design));
 
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+export const Inline = (_: Config, { format }: { format: ArticleFormat }) => (
+	<Section
+		showTopBorder={false}
+		centralBorder="full"
+		showSideBorders={false}
+		// Description is less intrusive, but isn't rendered if title prop not provided
+		title={' '}
+		description={ArticleDesign[format.design]}
+	>
+		<>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="inline"
-				attribution="Julie-Lou Dubreuilh"
+				{...quote}
 			/>
-		</Section>
-	);
-};
-SportInline.storyName = 'Sport, inline, Article';
+		</>
+	</Section>
+);
 
-export const LabsInline = () => {
-	const format = {
-		...defaultFormat,
-		theme: ArticleSpecial.Labs,
-	};
+Inline.storyName = 'Inline - Sports variations';
+Inline.decorators = [splitThemeMultipleFormats(allSportsVariations)];
 
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+export const Showcase = (_: Config, { format }: { format: ArticleFormat }) => (
+	<Section
+		showTopBorder={false}
+		centralBorder="full"
+		showSideBorders={false}
+		key={format.theme}
+		// Description is less intrusive, but isn't rendered if title prop not provided
+		title={' '}
+		description={ArticleDesign[format.design]}
+	>
+		<>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="inline"
-				attribution="Julie-Lou Dubreuilh"
+				role="showcase"
+				{...quote}
 			/>
-		</Section>
-	);
-};
-LabsInline.storyName = 'Labs, inline, Article';
+		</>
+	</Section>
+);
 
-export const LifestyleInline = () => {
-	const format = {
-		...defaultFormat,
-		theme: Pillar.Lifestyle,
-	};
+Showcase.storyName = 'Showcase - News variations';
+Showcase.decorators = [splitThemeMultipleFormats(allNewsVariations)];
 
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+export const Supporting = (
+	_: Config,
+	{ format }: { format: ArticleFormat },
+) => (
+	<Section
+		showTopBorder={false}
+		centralBorder="full"
+		showSideBorders={false}
+		key={format.theme}
+		backgroundColour={decidePalette(format).background.article}
+		// Description is less intrusive, but isn't rendered if title prop not provided
+		title={' '}
+		description={ArticleDesign[format.design]}
+	>
+		<>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="inline"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-LifestyleInline.storyName = 'Lifestyle, inline, Article';
-
-export const CultureInline = () => {
-	const format = {
-		...defaultFormat,
-		theme: Pillar.Culture,
-	};
-
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="inline"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-CultureInline.storyName = 'Culture, inline, Article';
-
-export const NewsInline = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={defaultFormat}
-				palette={decidePalette(defaultFormat)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="inline"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-NewsInline.storyName = 'News, inline, Article';
-
-export const OpinionInline = () => {
-	const format = {
-		...defaultFormat,
-		design: ArticleDesign.Comment,
-		theme: Pillar.Opinion,
-	};
-
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="inline"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-OpinionInline.storyName = 'Opinion, inline, Comment';
-
-export const SpecialReportInline = () => {
-	const format = {
-		...defaultFormat,
-		theme: ArticleSpecial.SpecialReport,
-	};
-
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="inline"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-SpecialReportInline.storyName = 'SpecialReport, inline, Article';
-
-// Supporting
-export const SportSupporting = () => {
-	const format = {
-		...defaultFormat,
-		theme: Pillar.Sport,
-	};
-
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="supporting"
-				attribution="Julie-Lou Dubreuilh"
+				{...quote}
 			/>
-		</Section>
-	);
-};
-SportSupporting.storyName = 'Sport, supporting, Article';
-
-export const LabsSupporting = () => {
-	const format = {
-		...defaultFormat,
-		theme: ArticleSpecial.Labs,
-	};
-
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="supporting"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-LabsSupporting.storyName = 'Labs, supporting, Article';
-
-export const LifestyleSupporting = () => {
-	const format = {
-		...defaultFormat,
-		theme: Pillar.Lifestyle,
-	};
-
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="supporting"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-LifestyleSupporting.storyName = 'Lifestyle, supporting, Article';
-
-export const CultureSupporting = () => {
-	const format = {
-		...defaultFormat,
-		theme: Pillar.Culture,
-	};
-
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="supporting"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-CultureSupporting.storyName = 'Culture, supporting, Article';
-
-export const NewsSupporting = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={defaultFormat}
-				palette={decidePalette(defaultFormat)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="supporting"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-NewsSupporting.storyName = 'News, supporting, Article';
-
-export const OpinionSupporting = () => {
-	const format = {
-		...defaultFormat,
-		design: ArticleDesign.Comment,
-		theme: Pillar.Opinion,
-	};
-
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="supporting"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-OpinionSupporting.storyName = 'Opinion, supporting, Comment';
-
-export const SpecialReportSupporting = () => {
-	const format = {
-		...defaultFormat,
-		theme: ArticleSpecial.SpecialReport,
-	};
-
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="supporting"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-SpecialReportSupporting.storyName = 'SpecialReport, supporting, Article';
-
-export const SpecialReportAltInline = () => {
-	const format = {
-		...defaultFormat,
-		theme: ArticleSpecial.SpecialReportAlt,
-	};
-
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="inline"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-SpecialReportAltInline.storyName = 'SpecialReportAlt, inline, Article';
-
-export const SpecialReportAltSupporting = () => {
-	const format = {
-		...defaultFormat,
-		theme: ArticleSpecial.SpecialReportAlt,
-	};
-
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="supporting"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-SpecialReportAltSupporting.storyName = 'SpecialReportAlt, supporting, Article';
-
-// PhotoEssay
-export const PhotoEssayInline = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={photoEssayNews}
-				palette={decidePalette(photoEssayNews)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="inline"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-PhotoEssayInline.storyName = 'News, inline, PhotoEssay';
-
-export const PhotoEssaySupporting = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<PullQuoteBlockComponent
-				format={photoEssayNews}
-				palette={decidePalette(photoEssayNews)}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				role="supporting"
-				attribution="Julie-Lou Dubreuilh"
-			/>
-		</Section>
-	);
-};
-PhotoEssaySupporting.storyName = 'News, supporting, PhotoEssay';
+		</>
+	</Section>
+);
+Supporting.storyName = 'Supporting - Culture variations';
+Supporting.decorators = [splitThemeMultipleFormats(allLifestyleVariations)];

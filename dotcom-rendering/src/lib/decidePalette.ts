@@ -22,6 +22,7 @@ import {
 } from '@guardian/source-foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
+import { palette as paletteVars } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
 import { decideContainerOverrides } from './decideContainerOverrides';
@@ -293,6 +294,7 @@ const textWitnessTitle = (format: ArticleFormat): string =>
 const textWitnessAuthor = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].main;
 
+// TODO: Delete
 const textPullQuote = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
@@ -1339,20 +1341,10 @@ const backgroundAnalysisContrastColour = (): string => '#F2E8E6';
 const backgroundAnalysisContrastHoverColour = (): string => '#e9d9d5';
 
 const backgroundPullQuote = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return palette.specialReportAlt[800];
-
-	switch (format.design) {
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			return '#fbe6d5';
-		case ArticleDesign.Analysis:
-			return backgroundAnalysisContrastColour();
-
-		default:
-			return neutral[97];
-	}
+	const backgroundColour = backgroundArticle(format);
+	return backgroundColour === 'transparent'
+		? paletteVars('--pullquote-background')
+		: backgroundColour;
 };
 
 const backgroundMessageForm = (format: ArticleFormat): string => {

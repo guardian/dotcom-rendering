@@ -1071,134 +1071,25 @@ const starRatingBackgroundColourLight: PaletteFunction = () =>
 const starRatingBackgroundColourDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
 
-const blockQuoteFillLight: PaletteFunction = ({ design, theme }) => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog: {
-			switch (theme) {
-				case Pillar.News:
-					return sourcePalette.news[400];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[400];
-				case Pillar.Sport:
-					return sourcePalette.sport[400];
-				case Pillar.Culture:
-					return sourcePalette.culture[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.news[400];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-			}
-		}
-		case ArticleDesign.Analysis: {
-			switch (theme) {
-				case Pillar.News:
-					return sourcePalette.news[300];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[300];
-				case Pillar.Sport:
-					return sourcePalette.sport[400];
-				case Pillar.Culture:
-					return sourcePalette.culture[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[200];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-			}
-		}
-		default: {
-			switch (theme) {
-				case Pillar.News:
-					return sourcePalette.news[400];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[300];
-				case Pillar.Sport:
-					return sourcePalette.sport[400];
-				case Pillar.Culture:
-					return sourcePalette.culture[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[200];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-			}
-		}
-	}
+const blockQuoteFillLight = (format: ArticleFormat): string => {
+	return decidePalette(format).fill.blockquoteIcon;
 };
-const blockQuoteFillDark: PaletteFunction = ({ design, theme }) => {
+const blockQuoteFillDark = ({
+	design,
+	display,
+	theme,
+}: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[60];
 		default:
-			switch (design) {
-				case ArticleDesign.Analysis: {
-					switch (theme) {
-						case Pillar.News:
-							return sourcePalette.news[300];
-						case Pillar.Opinion:
-							return sourcePalette.opinion[300];
-						case Pillar.Sport:
-							return sourcePalette.sport[400];
-						case Pillar.Culture:
-							return sourcePalette.culture[400];
-						case Pillar.Lifestyle:
-							return sourcePalette.lifestyle[400];
-						case ArticleSpecial.SpecialReport:
-							return sourcePalette.specialReport[400];
-						case ArticleSpecial.SpecialReportAlt:
-							return sourcePalette.specialReportAlt[200];
-						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
-					}
-				}
-				default: {
-					switch (theme) {
-						case Pillar.News:
-							return sourcePalette.news[400];
-						case Pillar.Opinion:
-							return sourcePalette.opinion[300];
-						case Pillar.Sport:
-							return sourcePalette.sport[400];
-						case Pillar.Culture:
-							return sourcePalette.culture[400];
-						case Pillar.Lifestyle:
-							return sourcePalette.lifestyle[400];
-						case ArticleSpecial.SpecialReport:
-							return sourcePalette.specialReport[400];
-						case ArticleSpecial.SpecialReportAlt:
-							return sourcePalette.specialReportAlt[200];
-						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
-					}
-				}
-			}
+			return decidePalette({ design, display, theme }).fill
+				.blockquoteIcon;
 	}
 };
-const quotedBlockquoteStylesLight: PaletteFunction = (format): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return sourcePalette.neutral[7];
-
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return sourcePalette.neutral[7];
-		case ArticleDesign.Analysis:
-			return sourcePalette.neutral[7];
-		default:
-			return sourcePalette.neutral[46];
-	}
+const quotedBlockquoteStylesLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.blockquote;
 };
 const quotedBlockquoteStylesDark: PaletteFunction = () =>
 	sourcePalette.neutral[100];
@@ -2632,6 +2523,76 @@ const subNavLink = (format: ArticleFormat) => {
 	}
 };
 
+const pullQuoteTextColourLight = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[200];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[200];
+				case Pillar.Sport:
+					return sourcePalette.sport[200];
+				case Pillar.Culture:
+					return sourcePalette.culture[200];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[200];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[200];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[200];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+			}
+		default:
+			return 'currentColor';
+	}
+};
+const pullQuoteTextColourDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[500];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+			}
+		default:
+			return 'currentColor';
+	}
+};
+
+const pullQuoteBackgroundColourLight = (): string => sourcePalette.neutral[100];
+const pullQuoteBackgroundColourDark = (): string => sourcePalette.neutral[0];
+
 const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
@@ -3588,6 +3549,14 @@ const paletteColours = {
 		light: mostViewedFooterHoverLight,
 		dark: mostViewedFooterHoverDark,
 	},
+	'--pullquote-text': {
+		light: pullQuoteTextColourLight,
+		dark: pullQuoteTextColourDark,
+	},
+	'--pullquote-background': {
+		light: pullQuoteBackgroundColourLight,
+		dark: pullQuoteBackgroundColourDark,
+	}
 } satisfies PaletteColours;
 
 /**
