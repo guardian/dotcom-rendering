@@ -79,6 +79,19 @@ const decideImageWidths = ({
 				];
 		}
 	}
+	if (format.design === ArticleDesign.Picture) {
+		// the order is important here. Picture content type images come through as main media, so needs to appear
+		// above `isMainMedia`, so the images do not appear low quality.
+		return [
+			{ breakpoint: breakpoints.mobile, width: 480 },
+			{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+			{ breakpoint: breakpoints.phablet, width: 740 },
+			{ breakpoint: breakpoints.tablet, width: 980 },
+			{ breakpoint: breakpoints.desktop, width: 1140 },
+			{ breakpoint: breakpoints.leftCol, width: 1300 },
+			{ breakpoint: breakpoints.wide, width: 1900 },
+		];
+	}
 	if (isMainMedia) {
 		switch (format.display) {
 			case ArticleDisplay.Immersive: {
