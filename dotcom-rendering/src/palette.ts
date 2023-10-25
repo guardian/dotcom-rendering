@@ -48,6 +48,21 @@ const starRatingBackgroundColourLight = (): string =>
 const starRatingBackgroundColourDark = (): string =>
 	sourcePalette.brandAlt[200];
 
+const accordionTitleRowFillLight = (): string => sourcePalette.neutral[46];
+const accordionTitleRowFillDark = (): string => sourcePalette.neutral[60];
+const accordionTitleRowBackgroundLight = (): string =>
+	sourcePalette.neutral[100];
+const accordionTitleRowBackgroundDark = (): string => sourcePalette.neutral[10];
+const accordionTitleRowBorderTopLight = (): string => sourcePalette.neutral[86];
+const accordionTitleRowBorderTopDark = (): string => sourcePalette.neutral[20];
+const accordionTitleLight = (): string => sourcePalette.neutral[7];
+const accordionTitleDark = (): string => sourcePalette.neutral[86];
+const accordionKeyEventsBackgroundLight = (): string =>
+	sourcePalette.neutral[100];
+const accordionBackgroundDark = (): string => sourcePalette.neutral[10];
+const accordionLiveFeedBackgroundLight = (): string =>
+	sourcePalette.neutral[97];
+
 // ----- Palette ----- //
 
 /**
@@ -96,6 +111,30 @@ const paletteColours = {
 	'--star-rating-background': {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
+	},
+	'--accordion-title-row-fill': {
+		light: accordionTitleRowFillLight,
+		dark: accordionTitleRowFillDark,
+	},
+	'--accordion-title-row-background': {
+		light: accordionTitleRowBackgroundLight,
+		dark: accordionTitleRowBackgroundDark,
+	},
+	'--accordion-title-row-border-top': {
+		light: accordionTitleRowBorderTopLight,
+		dark: accordionTitleRowBorderTopDark,
+	},
+	'--accordion-title': {
+		light: accordionTitleLight,
+		dark: accordionTitleDark,
+	},
+	'--accordion-key-events-background': {
+		light: accordionKeyEventsBackgroundLight,
+		dark: accordionBackgroundDark,
+	},
+	'--accordion-live-feed-background': {
+		light: accordionLiveFeedBackgroundLight,
+		dark: accordionBackgroundDark,
 	},
 } satisfies PaletteColours;
 
