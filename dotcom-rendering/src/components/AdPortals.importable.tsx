@@ -2,6 +2,7 @@ import { AdSlot as BridgetAdSlot } from '@guardian/bridget/AdSlot';
 import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
 import type { IRect as BridgetRect } from '@guardian/bridget/Rect';
 import { breakpoints } from '@guardian/source-foundations';
+import type { Breakpoint } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -74,20 +75,11 @@ const updateAds = (positions: BridgetAdSlot[]) =>
 const debounceUpdateAds = libDebounce(updateAds, 100, { leading: true });
 
 /* ********* AD PORTALS ********* \
- * Until desktop (ad positions in main body)
- * We create individual portals for each inline advert
- * .________________.
- * |________________|
- * |################|
- * |________________|
- * |________________|
- * |################|
- * .________________.
- *
- *
- * From desktop (ad positions in right column)
- * We create a single portal for the right aligned adverts
- * And space them out using flexbox
+ * AD POSITIONS IN RIGHT COLUMN
+ * If we're on a screen bigger than the `rightAlignFrom` prop (defaults to desktop)
+ * We attempt to find the right aligned ad placeholder
+ * If we find it, we create a single portal for the right aligned adverts
+ * And include the individual adverts inside it (spaced out using flexbox)
  * .________._________________.________.
  * |        |_________________|        |
  * |        |_________________|########|
@@ -95,9 +87,30 @@ const debounceUpdateAds = libDebounce(updateAds, 100, { leading: true });
  * |        |_________________|        |
  * |        |_________________|########|
  * |________|_________________|________|
+ *
+ *
+ * INLINE ADVERTS
+ * If we're on a screen smaller than the `rightAlignFrom` prop (defaults to desktop)
+ * Or we are unable to find the right aligned ad placeholder
+ * We fall back to the inline ad placeholders
+ * And we create individual portals for each inline advert
+ * .________________.
+ * |________________|
+ * |################|
+ * |________________|
+ * |________________|
+ * |################|
+ * .________________.
+ *
  */
 
-export const AdPortals = () => {
+export const AdPortals = ({
+	rightAlignFrom = 'desktop',
+}: {
+	// In most cases, we want to try to display ads in the right column from desktop upwards.
+	// For blogs, we want right aligned from wide upwards.
+	rightAlignFrom?: Breakpoint;
+}) => {
 	// Server-rendered placeholder elements for inline ad slots to be inserted into (below desktop breakpoint)
 	const [adPlaceholders, setAdPlaceholders] = useState<Element[]>([]);
 	// Server-rendered placeholder elements for right aligned ad slots to be inserted into (above desktop breakpoint)
@@ -110,7 +123,9 @@ export const AdPortals = () => {
 	const adPositions = useRef<BridgetAdSlot[]>([]);
 	// The height of the body element.
 	const bodyHeight = useRef(0);
-	const isDesktop = useMatchMedia(`(min-width: ${breakpoints.desktop}px)`);
+	const tryRightAligned = useMatchMedia(
+		`(min-width: ${breakpoints[rightAlignFrom]}px)`,
+	);
 
 	/**
 	 * Setup Ads
@@ -212,7 +227,7 @@ export const AdPortals = () => {
 		/>
 	);
 
-	if (isDesktop && rightAdPlaceholder) {
+	if (tryRightAligned && rightAdPlaceholder) {
 		return createPortal(
 			<>
 				{adPlaceholders.map((ad, index) => renderAdSlot(ad.id, index))}

@@ -282,8 +282,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 	} = article;
 
 	const showBodyEndSlot =
-		parse(article.slotMachineFlags ?? '').showBodyEnd ||
-		article.config.switches.slotBodyEnd;
+		renderingTarget === 'Web' &&
+		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
+			article.config.switches.slotBodyEnd);
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render

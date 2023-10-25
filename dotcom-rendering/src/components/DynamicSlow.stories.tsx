@@ -6,6 +6,12 @@ import type { DCRGroupedTrails } from '../types/front';
 import { DynamicSlow } from './DynamicSlow';
 import { FrontSection } from './FrontSection';
 
+const articleFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Comment,
+	theme: Pillar.Opinion,
+};
+
 const defaultGroupedTrails: DCRGroupedTrails = {
 	huge: [],
 	veryBig: [],
@@ -36,11 +42,7 @@ export const Avatar = () => {
 			trailText: 'This is the trail text',
 			avatarUrl:
 				'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
-			format: {
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: Pillar.Opinion,
-			},
+			format: articleFormat,
 		};
 	});
 	return (

@@ -3,7 +3,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
-	brandAltBackground,
 	brandBackground,
 	brandBorder,
 	brandLine,
@@ -57,6 +56,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -274,7 +274,8 @@ const stretchLines = css`
 
 const starWrapper = css`
 	margin-top: ${space[4]}px;
-	background-color: ${brandAltBackground.primary};
+	background-color: ${themePalette('--star-rating-background')};
+	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
 
 	${until.phablet} {
@@ -308,9 +309,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		config: { isPaidContent, host },
 	} = article;
 
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+
 	const showBodyEndSlot =
-		parse(article.slotMachineFlags ?? '').showBodyEnd ||
-		article.config.switches.slotBodyEnd;
+		isWeb &&
+		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
+			article.config.switches.slotBodyEnd);
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -333,9 +338,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
-
-	const isWeb = renderingTarget === 'Web';
-	const isApps = renderingTarget === 'Apps';
 
 	const renderAds = isWeb && canRenderAds(article);
 
@@ -695,7 +697,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									</Island>
 								)}
 
-								{isWeb && showBodyEndSlot && (
+								{showBodyEndSlot && (
 									<Island
 										priority="feature"
 										defer={{ until: 'visible' }}

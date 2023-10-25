@@ -1,5 +1,6 @@
 import { log } from '@guardian/libs';
-import { getOphan } from './ophan/ophan';
+import type { RenderingTarget } from '../types/renderingTarget';
+import { recordExperiences } from './ophan/ophan';
 
 const logPerformanceInfo = (name: string, data?: unknown) =>
 	log('openJournalism', '⏱', name, data);
@@ -71,17 +72,15 @@ export const isPerformingPoorly = async (): Promise<boolean> =>
 		(await isFirstContentfulPaintAboveThreshold()));
 
 /** If the current page is performing poorly, record it in Ophan */
-export const recordPoorPerformance = async (): Promise<void> => {
+export const recordPoorPerformance = async (
+	renderingTarget: RenderingTarget,
+): Promise<void> => {
 	try {
 		if (await isPerformingPoorly()) {
-			/** Not sure here if we should duplicate “dotcom-rendering” */
-			const experiences = [
-				'dotcom-rendering',
-				'poor-page-performance',
-			].join(',');
 			log('openJournalism', `🐌 Poor page performance`);
-			const { record } = await getOphan();
-			record({ experiences });
+			return recordExperiences(renderingTarget, [
+				'poor-page-performance',
+			]);
 		}
 	} catch (error) {
 		// do nothing if the performance API is not available

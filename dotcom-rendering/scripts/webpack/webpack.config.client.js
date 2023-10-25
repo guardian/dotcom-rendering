@@ -5,6 +5,7 @@ const { getBrowserTargets } = require('./browser-targets');
 
 const DEV = process.env.NODE_ENV === 'development';
 
+/** @param {Record<string, string> | string[]} targets */
 const swcLoader = (targets) => [
 	{
 		loader: 'swc-loader',
@@ -44,7 +45,7 @@ const getEntryIndex = (build) => {
 
 /**
  * @param {Build} build
- * @returns {string}
+ * @returns {{ loader: string, options: Record<string, unknown>}}
  */
 const getLoaders = (build) => {
 	switch (build) {
@@ -147,6 +148,7 @@ module.exports = ({ build, sessionId }) => ({
 			  ]
 			: []),
 	],
+	externals: getExternalModules(build),
 	module: {
 		rules: [
 			{
@@ -177,3 +179,13 @@ module.exports.babelExclude = {
 };
 
 module.exports.getLoaders = getLoaders;
+
+/**
+ * We are making "ophan-tracker-js" external to the apps bundle
+ * because we never expect to use it in apps pages.
+ *
+ * Tracking is done natively.
+ *
+ * @param {Build} build */
+const getExternalModules = (build) =>
+	build === 'apps' ? { 'ophan-tracker-js': 'ophan-tracker-js' } : {};

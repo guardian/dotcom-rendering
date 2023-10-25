@@ -5,6 +5,7 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
+import { useEffect, useState } from 'react';
 import { shouldHideSupportMessaging } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
@@ -30,7 +31,11 @@ export const InteractiveSupportButton = ({
 	editionId,
 	subscribeUrl,
 }: InteractiveSupportButtonProps) => {
-	const hideSupportMessaging = shouldHideSupportMessaging();
+	const [hideSupportMessaging, setHideSupportMessaging] = useState(true);
+
+	useEffect(() => {
+		setHideSupportMessaging(shouldHideSupportMessaging());
+	}, []);
 
 	if (!hideSupportMessaging) {
 		return (

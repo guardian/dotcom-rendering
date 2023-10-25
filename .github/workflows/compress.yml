@@ -37,4 +37,4 @@ jobs:
 
           # reporting on “legacy” and “variant” bundles muddies the water
           # https://github.com/preactjs/compressed-size-action#customizing-the-list-of-files
-          pattern: "dotcom-rendering/dist/*.modern.*.js"
+          pattern: "dotcom-rendering/dist/*.web.*.js"

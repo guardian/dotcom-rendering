@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { CountryCode } from '@guardian/libs';
 import { getCookie } from '@guardian/libs';
 import {
 	getBanner,
@@ -9,7 +10,8 @@ import type {
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useState } from 'react';
+import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
+import { useEffect, useState } from 'react';
 import { trackNonClickInteraction } from '../../client/ga/ga';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
@@ -55,7 +57,7 @@ type BuildPayloadProps = BaseProps & {
 };
 
 type CanShowProps = BaseProps & {
-	asyncCountryCode: Promise<string>;
+	countryCode: CountryCode;
 	remoteBannerConfig: boolean;
 	isPreview: boolean;
 	idApiUrl: string;
@@ -145,7 +147,7 @@ const buildPayload = async ({
 export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	remoteBannerConfig,
 	isSignedIn,
-	asyncCountryCode,
+	countryCode,
 	contentType,
 	sectionId,
 	shouldHideReaderRevenue,
@@ -191,7 +193,6 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		return { show: false };
 	}
 
-	const countryCode = await asyncCountryCode;
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = await buildPayload({
 		isSignedIn,
@@ -235,7 +236,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	remoteBannerConfig,
 	isSignedIn,
-	asyncCountryCode,
+	countryCode,
 	contentType,
 	sectionId,
 	shouldHideReaderRevenue,
@@ -259,7 +260,6 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	}
 
 	if (isPuzzlesPage && remoteBannerConfig) {
-		const countryCode = await asyncCountryCode;
 		const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 		const bannerPayload = await buildPayload({
 			isSignedIn,
@@ -294,7 +294,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 };
 
 export type BannerProps = {
-	meta: any;
+	meta: TestTracking;
 	module: ModuleData;
 	// eslint-disable-next-line react/no-unused-prop-types -- ESLint is wrong: it is used in ReaderRevenueBanner
 	fetchEmail?: () => Promise<string | null>;
@@ -319,11 +319,7 @@ const RemoteBanner = ({
 		debounce: true,
 	});
 
-	useOnce(() => {
-		if (module === undefined || meta === undefined) {
-			return;
-		}
-
+	useEffect(() => {
 		setAutomat();
 
 		window
@@ -333,14 +329,12 @@ const RemoteBanner = ({
 			})
 			.catch((error) => {
 				const msg = `Error importing RR banner: ${String(error)}`;
-
-				console.log(msg);
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
 					'rr-banner',
 				);
 			});
-	}, []);
+	}, [module]);
 
 	useOnce(() => {
 		const { componentType } = meta;

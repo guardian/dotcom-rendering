@@ -18,6 +18,7 @@ import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
 import { AdSlot } from './AdSlot.web';
+import { useConfig } from './ConfigContext';
 import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 import {
 	canShowReaderRevenueEpic,
@@ -120,13 +121,14 @@ export const SlotBodyEnd = ({
 	renderAds,
 	isLabs,
 }: Props) => {
-	const { brazeMessages } = useBraze(idApiUrl);
+	const { renderingTarget } = useConfig();
+	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
 	const [countryCode, setCountryCode] = useState<string>();
 	const isSignedIn = getIsSignedIn(useAuthStatus());
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
-	const [SelectedEpic, setSelectedEpic] = useState<React.ElementType | null>(
-		null,
-	);
+	const [SelectedEpic, setSelectedEpic] = useState<
+		React.ElementType | null | undefined
+	>();
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
@@ -193,20 +195,30 @@ export const SlotBodyEnd = ({
 			name: 'slotBodyEnd',
 		};
 
-		pickMessage(epicConfig)
+		pickMessage(epicConfig, renderingTarget)
 			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);
 	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
 
-	if (SelectedEpic !== null) {
+	useEffect(() => {
+		if (SelectedEpic === null && showArticleEndSlot) {
+			document.dispatchEvent(
+				new CustomEvent('gu.commercial.slot.fill', {
+					detail: { slotId: 'dfp-ad--article-end' },
+				}),
+			);
+		}
+	}, [SelectedEpic, showArticleEndSlot]);
+
+	if (SelectedEpic !== null && SelectedEpic !== undefined) {
 		return (
 			<div id="slot-body-end">
 				<SelectedEpic />
 			</div>
 		);
-	} else if (showArticleEndSlot) {
+	} else if (SelectedEpic === null && showArticleEndSlot) {
 		return (
 			<div id="slot-body-end">
 				<AdSlot data-print-layout="hide" position="article-end" />

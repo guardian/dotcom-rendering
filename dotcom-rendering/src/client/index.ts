@@ -4,7 +4,7 @@ import { startup } from './startup';
 
 void (async () => {
 	if (await shouldAdapt()) {
-		adaptSite();
+		adaptSite('Web');
 	}
 
 	/*************************************************************
@@ -19,7 +19,7 @@ void (async () => {
 		'bootCmp',
 		() =>
 			import(/* webpackMode: "eager" */ './bootCmp').then(({ bootCmp }) =>
-				bootCmp(),
+				bootCmp('Web'),
 			),
 		{
 			priority: 'critical',
@@ -31,7 +31,9 @@ void (async () => {
 		() =>
 			import(
 				/* webpackMode: "eager" */ './ophan/recordInitialPageEvents'
-			).then(({ recordInitialPageEvents }) => recordInitialPageEvents()),
+			).then(({ recordInitialPageEvents }) =>
+				recordInitialPageEvents('Web'),
+			),
 		{
 			priority: 'critical',
 		},
@@ -83,7 +85,7 @@ void (async () => {
 		() =>
 			import(
 				/* webpackMode: "eager" */ './poorPerformanceMonitoring'
-			).then(({ recordPoorPerformance }) => recordPoorPerformance()),
+			).then(({ recordPoorPerformance }) => recordPoorPerformance('Web')),
 		{
 			priority: 'critical',
 		},
@@ -127,16 +129,6 @@ void (async () => {
 				/* webpackMode: 'lazy' */
 				'./newsletterEmbedIframe'
 			).then(({ newsletterEmbedIframe }) => newsletterEmbedIframe()),
-		{ priority: 'feature' },
-	);
-
-	void startup(
-		'relativeTime',
-		() =>
-			import(
-				/* webpackMode: 'lazy' */
-				'./relativeTime'
-			).then(({ relativeTime }) => relativeTime()),
 		{ priority: 'feature' },
 	);
 
