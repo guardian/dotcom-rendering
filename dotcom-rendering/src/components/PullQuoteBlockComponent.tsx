@@ -3,7 +3,6 @@ import { ArticleDesign } from '@guardian/libs';
 import { from, headline } from '@guardian/source-foundations';
 import { unescapeData } from '../lib/escapeData';
 import { palette } from '../palette';
-import type { Palette } from '../types/palette';
 import { QuoteIcon } from './QuoteIcon';
 
 const quoteColour = palette('--pullquote-text');
@@ -141,10 +140,10 @@ const inlineQuoteCss = css`
 	}
 `;
 
-const supportingQuoteCss = (decidedPalette: Palette) => css`
+const supportingQuoteCss = css`
 	position: relative;
 	width: 40%;
-	background-color: ${decidedPalette.background.pullQuote};
+	background-color: ${palette('--pullquote-background')};
 	margin: 10px;
 	clear: left;
 	float: left;
@@ -166,7 +165,6 @@ const blockquoteCss = css`
 
 type Props = {
 	html?: string;
-	palette: Palette;
 	format: ArticleFormat;
 	role: string;
 	attribution?: string;
@@ -174,7 +172,6 @@ type Props = {
 
 export const PullQuoteBlockComponent = ({
 	html,
-	palette: decidedPalette,
 	format,
 	attribution,
 	role,
@@ -186,9 +183,7 @@ export const PullQuoteBlockComponent = ({
 			css={[
 				pullQuoteCss,
 				fontCss(role, format),
-				role === 'supporting'
-					? supportingQuoteCss(decidedPalette)
-					: inlineQuoteCss,
+				role === 'supporting' ? supportingQuoteCss : inlineQuoteCss,
 			]}
 		>
 			<QuoteIcon colour={quoteColour} />

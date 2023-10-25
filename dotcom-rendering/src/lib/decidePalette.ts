@@ -22,7 +22,6 @@ import {
 } from '@guardian/source-foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
-import { palette as paletteVars } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
 import { decideContainerOverrides } from './decideContainerOverrides';
@@ -293,11 +292,6 @@ const textWitnessTitle = (format: ArticleFormat): string =>
 
 const textWitnessAuthor = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].main;
-
-// TODO: Delete
-const textPullQuote = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme].dark;
-};
 
 const textStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
@@ -1340,13 +1334,6 @@ const fillQuoteIcon = (format: ArticleFormat): string => {
 const backgroundAnalysisContrastColour = (): string => '#F2E8E6';
 const backgroundAnalysisContrastHoverColour = (): string => '#e9d9d5';
 
-const backgroundPullQuote = (format: ArticleFormat): string => {
-	const backgroundColour = backgroundArticle(format);
-	return backgroundColour === 'transparent'
-		? paletteVars('--pullquote-background')
-		: backgroundColour;
-};
-
 const backgroundMessageForm = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -1367,9 +1354,6 @@ const backgroundMessageForm = (format: ArticleFormat): string => {
 			return news[100];
 	}
 };
-
-const textPullQuoteAttribution = (format: ArticleFormat): string =>
-	fillQuoteIcon(format);
 
 const textSignInLink = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
@@ -1734,8 +1718,6 @@ export const decidePalette = (
 			signInLink: textSignInLink(format),
 			richLink: textRichLink(format),
 			pagination: textPagination(format),
-			pullQuote: textPullQuote(format),
-			pullQuoteAttribution: textPullQuoteAttribution(format),
 			witnessIcon: textWitnessIcon(format),
 			witnessAuthor: textWitnessAuthor(format),
 			witnessTitle: textWitnessTitle(format),
@@ -1784,7 +1766,6 @@ export const decidePalette = (
 			filterButtonActive: backgroundFilterButtonActive(format),
 			treat: backgroundTreat(format),
 			designTag: backgroundDesignTag(format),
-			pullQuote: backgroundPullQuote(format),
 			messageForm: backgroundMessageForm(format),
 			discussionPillarButton: backgroundDiscussionPillarButton(format),
 			dynamoSublink:

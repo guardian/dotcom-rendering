@@ -57,12 +57,7 @@ export const Inline = (_: Config, { format }: { format: ArticleFormat }) => (
 		description={ArticleDesign[format.design]}
 	>
 		<>
-			<PullQuoteBlockComponent
-				format={format}
-				palette={decidePalette(format)}
-				role="inline"
-				{...quote}
-			/>
+			<PullQuoteBlockComponent format={format} role="inline" {...quote} />
 		</>
 	</Section>
 );
@@ -83,7 +78,6 @@ export const Showcase = (_: Config, { format }: { format: ArticleFormat }) => (
 		<>
 			<PullQuoteBlockComponent
 				format={format}
-				palette={decidePalette(format)}
 				role="showcase"
 				{...quote}
 			/>
@@ -111,7 +105,6 @@ export const Supporting = (
 		<>
 			<PullQuoteBlockComponent
 				format={format}
-				palette={decidePalette(format)}
 				role="supporting"
 				{...quote}
 			/>

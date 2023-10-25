@@ -1074,6 +1074,7 @@ const starRatingBackgroundColourDark: PaletteFunction = () =>
 const blockQuoteFillLight = (format: ArticleFormat): string => {
 	return decidePalette(format).fill.blockquoteIcon;
 };
+
 const blockQuoteFillDark = ({
 	design,
 	display,
@@ -2590,8 +2591,17 @@ const pullQuoteTextColourDark = ({ design, theme }: ArticleFormat): string => {
 	}
 };
 
-const pullQuoteBackgroundColourLight = (): string => sourcePalette.neutral[100];
-const pullQuoteBackgroundColourDark = (): string => sourcePalette.neutral[0];
+const pullQuoteBackgroundColourLight = (format: ArticleFormat): string => {
+	const articleBackground = decidePalette(format).background.article;
+	if (articleBackground === 'transparent') return sourcePalette.neutral[100];
+	return articleBackground;
+};
+
+const pullQuoteBackgroundColourDark = (format: ArticleFormat): string => {
+	const articleBackground = decidePalette(format).background.article;
+	if (articleBackground === 'transparent') return sourcePalette.neutral[0];
+	return articleBackground;
+};
 
 const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {

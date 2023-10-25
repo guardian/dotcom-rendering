@@ -26,9 +26,7 @@ export type Palette = {
 		witnessAuthor: Colour;
 		witnessTitle: Colour;
 		carouselTitle: Colour;
-		pullQuote: Colour;
 		pagination: Colour;
-		pullQuoteAttribution: Colour;
 		dropCap: Colour;
 		blockquote: Colour;
 		numberedTitle: Colour;
@@ -72,7 +70,6 @@ export type Palette = {
 		filterButtonActive: Colour;
 		treat: Colour;
 		designTag: Colour;
-		pullQuote: Colour;
 		lightboxDivider: Colour;
 		messageForm: Colour;
 		discussionPillarButton: Colour;
