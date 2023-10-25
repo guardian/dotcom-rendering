@@ -2553,7 +2553,7 @@ const pullQuoteTextColourLight = ({ design, theme }: ArticleFormat): string => {
 					return sourcePalette.specialReportAlt[200];
 			}
 		default:
-			return 'currentColor';
+			return sourcePalette.neutral[7];
 	}
 };
 const pullQuoteTextColourDark = ({ design, theme }: ArticleFormat): string => {
@@ -2586,7 +2586,7 @@ const pullQuoteTextColourDark = ({ design, theme }: ArticleFormat): string => {
 					return sourcePalette.specialReportAlt[700];
 			}
 		default:
-			return 'currentColor';
+			return sourcePalette.neutral[97];
 	}
 };
 

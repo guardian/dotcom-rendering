@@ -3,7 +3,7 @@ import { splitThemeMultipleFormats } from '../../.storybook/decorators/splitThem
 import type { Config } from '../../src/types/configContext';
 import { decidePalette } from '../lib/decidePalette';
 import { getAllDesigns } from '../lib/format';
-import { PullQuoteBlockComponent } from './PullQuoteBlockComponent-NEW';
+import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
 import { Section } from './Section';
 
 const quote = {
