@@ -7,7 +7,7 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial, Pillar } from '@guardian
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { HydratedLayoutWrapper } from '../../src/layouts/Layout.stories';
 
-// eslint-disable-next-line import/no-default-export -- we need a default here
+ 
 export default {
 	title: 'Components/Layout/Format Variations',
 	component: HydratedLayoutWrapper,
@@ -31,7 +31,7 @@ export const WebStandardStandardNewsPillar = () => {
 	);
 };
 WebStandardStandardNewsPillar.storyName = 'Web: Display: Standard, Design: Standard, Theme: NewsPillar';
-WebStandardStandardNewsPillar.args = { config: { renderingTarget: 'Web' } };
+WebStandardStandardNewsPillar.args = { config: { renderingTarget: 'Web', darkModeAvailable: false } };
 WebStandardStandardNewsPillar.decorators = [lightDecorator({
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
@@ -85,7 +85,7 @@ export const WebShowcasePictureOpinionPillar = () => {
 	);
 };
 WebShowcasePictureOpinionPillar.storyName = 'Web: Display: Showcase, Design: Picture, Theme: OpinionPillar';
-WebShowcasePictureOpinionPillar.args = { config: { renderingTarget: 'Web' } };
+WebShowcasePictureOpinionPillar.args = { config: { renderingTarget: 'Web', darkModeAvailable: false } };
 WebShowcasePictureOpinionPillar.decorators = [lightDecorator({
 	display: ArticleDisplay.Showcase,
 	design: ArticleDesign.Picture,

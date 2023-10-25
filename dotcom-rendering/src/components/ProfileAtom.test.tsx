@@ -11,7 +11,9 @@ const format: ArticleFormat = {
 describe('ProfileAtom', () => {
 	it('should render', () => {
 		const { getByText, queryByText } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<ProfileAtom
 					id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
 					title="Who is Jon Lansman?"
@@ -45,7 +47,9 @@ describe('ProfileAtom', () => {
 
 	it('Show feedback on like', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<ProfileAtom
 					id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
 					format={format}
@@ -80,7 +84,9 @@ describe('ProfileAtom', () => {
 
 	it('Show feedback on dislike', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<ProfileAtom
 					id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
 					format={format}

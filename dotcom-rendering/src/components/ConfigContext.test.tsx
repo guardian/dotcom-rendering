@@ -21,7 +21,7 @@ describe('ConfigContext', () => {
 
 	describe('with ConfigProvider', () => {
 		it.each([
-			{ renderingTarget: 'Web' },
+			{ renderingTarget: 'Web', darkModeAvailable: false },
 			{ renderingTarget: 'Apps', darkModeAvailable: true },
 			{ renderingTarget: 'Apps', darkModeAvailable: false },
 		] as const satisfies ReadonlyArray<Config>)(

@@ -15,7 +15,9 @@ describe('ArticleMeta', () => {
 		};
 
 		const { container } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<ArticleMeta
 					format={format}
 					pageId="1234"
@@ -56,7 +58,9 @@ describe('ArticleMeta', () => {
 		};
 
 		const { container } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<ArticleMeta
 					format={format}
 					pageId="1234"

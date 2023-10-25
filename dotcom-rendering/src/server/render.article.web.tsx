@@ -50,7 +50,7 @@ export const renderHtml = ({
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const renderingTarget = 'Web';
-	const config: Config = { renderingTarget };
+	const config: Config = { renderingTarget, darkModeAvailable: false };
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -256,7 +256,7 @@ export const renderBlocks = ({
 	const format: ArticleFormat = decideFormat(FEFormat);
 
 	// Only currently supported for Web
-	const config: Config = { renderingTarget: 'Web' };
+	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -296,7 +296,7 @@ export const renderKeyEvents = ({
 	format: FEFormat,
 	filterKeyEvents,
 }: FEKeyEventsRequest): string => {
-	const config: Config = { renderingTarget: 'Web' };
+	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
