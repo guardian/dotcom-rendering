@@ -6,7 +6,7 @@ const BASE_URL = `http://localhost:${PORT}`;
 const loadPage = async (
 	page: Page,
 	path: string,
-	waitUntil: 'load' | 'domcontentloaded' = 'load',
+	waitUntil: 'load' | 'domcontentloaded' = 'domcontentloaded',
 	region = 'GB',
 ): Promise<void> => {
 	await page.addInitScript((regionProvided) => {
@@ -23,9 +23,9 @@ const loadPage = async (
 	}, region);
 	// Abort all ophan requests as it stops the page from firing the 'load' event
 	//
-	// await page.route(/ophan.theguardian.com/, (route) => {
-	// 	route.abort();
-	// });
+	await page.route(/ophan.theguardian.com/, async (route) => {
+		await route.abort();
+	});
 	//
 	// Instead of aborting ophan change the waituntil to 'domcontentloaded'
 	// rather than 'load'. Monitor this to see if it works for our use cases.
