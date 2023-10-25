@@ -28,14 +28,14 @@ const titleRowStyles = css`
 	position: relative;
 	display: block;
 	align-items: center;
-	border-top: ${palette('--accordion-title-row-styles-border-top')} 1px solid;
-	background-color: ${palette('--accordion-title-row-styles-background')};
+	border-top: ${palette('--accordion-title-row-border-top')} 1px solid;
+	background-color: ${palette('--accordion-title-row-background')};
 	padding: ${space[2]}px ${space[2]}px ${space[2]}px ${space[3]}px;
 	&:focus {
 		${focusHalo};
 	}
 	path {
-		fill: ${palette('--accordion-title-row-styles-fill')};
+		fill: ${palette('--accordion-title-row-fill')};
 	}
 	svg {
 		height: 2rem;
@@ -51,7 +51,7 @@ const titleRowStyles = css`
 
 const titleStyle = css`
 	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
-	color: ${palette('--accordion-title-style-colour')};
+	color: ${palette('--accordion-title')};
 `;
 
 const arrowPosition: SerializedStyles = css`
@@ -69,16 +69,14 @@ const backgroundColour = (
 ): SerializedStyles => {
 	if (context === 'keyEvents') {
 		return css`
-			background-color: ${palette(
-				'--accordion-key-events-background-colour',
-			)};
+			background-color: ${palette('--accordion-key-events-background')};
 			${from.desktop} {
 				background-color: transparent;
 			}
 		`;
 	}
 	return css`
-		background-color: ${palette('--accordion-live-feed-background-colour')};
+		background-color: ${palette('--accordion-live-feed-background')};
 		${from.desktop} {
 			background-color: transparent;
 		}
