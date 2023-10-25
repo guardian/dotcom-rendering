@@ -527,7 +527,7 @@ export const FrontSection = ({
 							fontColour={overrides?.text.container}
 							description={description}
 							// On paid fronts the title is not treated as a link
-							url={isOnPaidContentFront ? url : undefined}
+							url={!isOnPaidContentFront ? url : undefined}
 							containerPalette={containerPalette}
 							showDateHeader={showDateHeader}
 							editionId={editionId}
