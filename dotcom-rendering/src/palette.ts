@@ -49,7 +49,6 @@ const starRatingBackgroundColourLight = (): string =>
 const starRatingBackgroundColourDark = (): string =>
 	sourcePalette.brandAlt[200];
 
-
 const blockQuoteFillLight = (format: ArticleFormat): string => {
 	return decidePalette(format).fill.blockquoteIcon;
 };
@@ -144,7 +143,7 @@ const paletteColours = {
 	'--quoted-block-quote-styles': {
 		light: quotedBlockquoteStylesLight,
 		dark: quotedBlockquoteStylesDark,
-
+	},
 	'--accordion-title-row-fill': {
 		light: accordionTitleRowFillLight,
 		dark: accordionTitleRowFillDark,
