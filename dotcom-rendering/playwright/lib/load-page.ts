@@ -1,5 +1,8 @@
 import { type Page } from '@playwright/test';
 
+const PORT = 9000;
+const BASE_URL = `http://localhost:${PORT}`;
+
 const loadPage = async (
 	page: Page,
 	path: string,
@@ -25,7 +28,7 @@ const loadPage = async (
 	//
 	// Instead of aborting ophan change the waituntil to 'domcontentloaded'
 	// rather than 'load'. Monitor this to see if it works for our use cases.
-	await page.goto(path, { waitUntil: 'domcontentloaded' });
+	await page.goto(`${BASE_URL}path`, { waitUntil: 'domcontentloaded' });
 };
 
 export { loadPage };
