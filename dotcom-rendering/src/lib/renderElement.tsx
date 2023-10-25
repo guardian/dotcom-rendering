@@ -169,7 +169,6 @@ export const renderElement = ({
 				<BlockquoteBlockComponent
 					key={index}
 					html={element.html}
-					palette={palette}
 					quoted={element.quoted}
 				/>
 			);
