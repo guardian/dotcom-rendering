@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	remSpace,
-	palette as sourcePalette,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { remSpace, textSans, until } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { forwardRef } from 'react';
 import { palette } from '../palette';
@@ -20,7 +15,6 @@ const adHeightPx = 258;
 const styles = css`
 	clear: both;
 	margin: ${remSpace[4]} 0;
-	color: ${sourcePalette.neutral[20]};
 	background: ${palette('--ad-background')};
 
 	${until.phablet} {
@@ -30,7 +24,6 @@ const styles = css`
 
 const adLabelsStyles = css`
 	${textSans.xsmall()}
-	color: ${palette('--ad-labels-background')};
 	padding: ${remSpace[3]};
 	float: left;
 
@@ -62,19 +55,19 @@ const adSlotSquareStyles = css`
 
 const supportBannerStyles = css`
 	padding: ${remSpace[2]};
-	background-color: ${palette('--support-banner-background')};
+	background-color: ${palette('--ad-support-banner-background')};
 
 	p {
 		${textSans.small()};
-		color: ${palette('--support-banner-text')};
+		color: ${palette('--ad-support-banner-text')};
 		font-weight: bold;
 		margin-top: 0;
 	}
 
 	button {
 		margin-top: ${remSpace[2]};
-		color: ${palette('--support-banner-button-text')};
-		background-color: ${palette('--support-banner-button-background')};
+		color: ${palette('--ad-support-banner-button-text')};
+		background-color: ${palette('--ad-support-banner-button-background')};
 	}
 `;
 

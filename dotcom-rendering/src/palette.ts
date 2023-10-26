@@ -14,7 +14,6 @@ const headlineColourLight = ({ design }: ArticleFormat): string => {
 			return sourcePalette.neutral[10];
 	}
 };
-
 const headlineColourDark = ({ design }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Feature:
@@ -23,7 +22,6 @@ const headlineColourDark = ({ design }: ArticleFormat): string => {
 			return sourcePalette.neutral[97];
 	}
 };
-
 const headlineBackgroundColourLight = ({ design }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
@@ -32,7 +30,6 @@ const headlineBackgroundColourLight = ({ design }: ArticleFormat): string => {
 			return sourcePalette.neutral[100];
 	}
 };
-
 const headlineBackgroundColourDark = ({ design }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
@@ -85,61 +82,46 @@ const accordionKeyEventsBackgroundLight = (): string =>
 const accordionBackgroundDark = (): string => sourcePalette.neutral[10];
 const accordionLiveFeedBackgroundLight = (): string =>
 	sourcePalette.neutral[97];
+
 const tableOfContentsLight = (): string => sourcePalette.neutral[7];
 const tableOfContentsDark = (): string => sourcePalette.neutral[86];
-
 const tableOfContentsBorderLight = (): string => sourcePalette.neutral[86];
 const tableOfContentsBorderDark = (): string => sourcePalette.neutral[20];
 
-const adLabelsBackgroundLight = (): string => {
-	return sourcePalette.neutral[20];
-};
-
-const adLabelsBackgroundDark = (): string => {
-	return sourcePalette.neutral[60];
-};
 const adLabelsTextLight = (): string => {
 	return sourcePalette.neutral[20];
 };
-
 const adLabelsTextDark = (): string => {
 	return sourcePalette.neutral[100];
 };
-
 const adBackgroundLight = (): string => {
 	return sourcePalette.neutral[97];
 };
-
 const adBackgroundDark = (): string => {
 	return sourcePalette.neutral[20];
 };
-
-const supportBannerBackgroundLight = (): string => {
+const adSupportBannerBackgroundLight = (): string => {
 	return sourcePalette.neutral[93];
 };
-
-const supportBannerBackgroundDark = (): string => {
+const adSupportBannerBackgroundDark = (): string => {
 	return sourcePalette.neutral[46];
 };
-const supportBannerButtonBackgroundLight = (): string => {
+const adSupportBannerButtonBackgroundLight = (): string => {
 	return sourcePalette.brand[400];
 };
-
-const supportBannerButtonBackgroundDark = (): string => {
+const adSupportBannerButtonBackgroundDark = (): string => {
 	return sourcePalette.neutral[100];
 };
-const supportBannerButtonTextLight = (): string => {
+const adSupportBannerButtonTextLight = (): string => {
 	return sourcePalette.neutral[100];
 };
-
-const supportBannerButtonTextDark = (): string => {
+const adSupportBannerButtonTextDark = (): string => {
 	return sourcePalette.neutral[0];
 };
-const supportBannerTextLight = (): string => {
+const adSupportBannerTextLight = (): string => {
 	return sourcePalette.brand[400];
 };
-
-const supportBannerTextDark = (): string => {
+const adSupportBannerTextDark = (): string => {
 	return sourcePalette.neutral[100];
 };
 
@@ -192,7 +174,6 @@ const paletteColours = {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
 	},
-
 	'--block-quote-fill': {
 		light: blockQuoteFillLight,
 		dark: blockQuoteFillDark,
@@ -233,33 +214,29 @@ const paletteColours = {
 		light: tableOfContentsBorderLight,
 		dark: tableOfContentsBorderDark,
 	},
-	'--ad-labels-background': {
-		light: adLabelsBackgroundLight,
-		dark: adLabelsBackgroundDark,
-	},
-	'--support-banner-background': {
-		light: supportBannerBackgroundLight,
-		dark: supportBannerBackgroundDark,
-	},
 	'--ad-background': {
 		light: adBackgroundLight,
 		dark: adBackgroundDark,
 	},
-	'--support-banner-button-background': {
-		light: supportBannerButtonBackgroundLight,
-		dark: supportBannerButtonBackgroundDark,
-	},
-	'--support-banner-button-text': {
-		light: supportBannerButtonTextLight,
-		dark: supportBannerButtonTextDark,
-	},
-	'--support-banner-text': {
-		light: supportBannerTextLight,
-		dark: supportBannerTextDark,
-	},
 	'--ad-labels-text': {
 		light: adLabelsTextLight,
 		dark: adLabelsTextDark,
+	},
+	'--ad-support-banner-button-background': {
+		light: adSupportBannerButtonBackgroundLight,
+		dark: adSupportBannerButtonBackgroundDark,
+	},
+	'--ad-support-banner-background': {
+		light: adSupportBannerBackgroundLight,
+		dark: adSupportBannerBackgroundDark,
+	},
+	'--ad-support-banner-button-text': {
+		light: adSupportBannerButtonTextLight,
+		dark: adSupportBannerButtonTextDark,
+	},
+	'--ad-support-banner-text': {
+		light: adSupportBannerTextLight,
+		dark: adSupportBannerTextDark,
 	},
 } satisfies PaletteColours;
 
