@@ -165,4 +165,4 @@ const refresh = async (): Promise<void> => {
 	return Promise.resolve();
 };
 
-export { refresh };
+export { refresh, isDigitalSubscriber };
