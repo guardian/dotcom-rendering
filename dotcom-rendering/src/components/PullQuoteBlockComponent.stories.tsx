@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { breakpoints } from '@guardian/source-foundations';
 import { splitThemeMultipleFormats } from '../../.storybook/decorators/splitThemeDecorators';
 import type { Config } from '../../src/types/configContext';
 import { decidePalette } from '../lib/decidePalette';
@@ -13,6 +14,9 @@ const quote = {
 export default {
 	component: PullQuoteBlockComponent,
 	title: 'Components/PullQuoteBlockComponent',
+	chromatic: {
+		viewports: [breakpoints.mobile, breakpoints.desktop],
+	},
 };
 
 const pullQuoteStoryVariations = [
@@ -30,7 +34,7 @@ const pullQuoteStoryVariations = [
 	ArticleDesign.Obituary,
 	ArticleDesign.Comment,
 	ArticleDesign.Editorial,
-];
+] as const satisfies ReadonlyArray<ArticleDesign>;
 
 const allSportsVariations = pullQuoteStoryVariations.map((design) => ({
 	design,
