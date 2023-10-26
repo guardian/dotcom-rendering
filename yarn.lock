@@ -3202,7 +3202,7 @@
     fastdom "^1.0.11"
     lodash-es "^4.17.21"
     ophan-tracker-js "^2.0.1"
-    prebid.js "github:guardian/prebid.js#ddf4251"
+    prebid.js guardian/prebid.js#ddf4251
     process "^0.11.10"
     raven-js "^3.27.2"
     tslib "^2.5.3"
@@ -14449,7 +14449,12 @@ opener@^1.5.2:
   resolved "https://registry.yarnpkg.com/opener/-/opener-1.5.2.tgz#5d37e1f35077b9dcac4301372271afdeb2a13598"
   integrity sha512-ur5UIdyw5Y7yEj9wLzhqXiy6GZ3Mwx0yGI+5sMn2r0N0v3cKJvUmFH5yPP+WXh9e0xfyzyJX95D8l088DNFj7A==
 
-ophan-tracker-js@2.0.1, ophan-tracker-js@^2.0.1:
+ophan-tracker-js@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-2.0.2.tgz#c67c19a646340d9afebb4104b1b2d209a449767b"
+  integrity sha512-cAVIFZbMAUmAhRYSma2Q833DmbWsfH0hySh6BeuKrK2rcvkS8dB8v3AHudHQrASMIzrgHXjbsHB0A9AusFIg2Q==
+
+ophan-tracker-js@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-2.0.1.tgz#568c9a8c127f511d4dc19e9d3421cc88e04ea910"
   integrity sha512-HXH0rjZlLeV9ri4V9Q0t0AaD5Q3ue4o+YMCuBsov6cWLPWcWBiARHtSRlpY6fJD+/iUIEiSPsrlfPIJUz7inYA==
@@ -15109,9 +15114,8 @@ preact@10.15.1:
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.15.1.tgz#a1de60c9fc0c79a522d969c65dcaddc5d994eede"
   integrity sha512-qs2ansoQEwzNiV5eAcRT1p1EC/dmEzaATVDJNiB3g2sRDWdA7b7MurXdJjB2+/WQktGWZwxvDrnuRFbWuIr64g==
 
-"prebid.js@github:guardian/prebid.js#ddf4251":
+prebid.js@guardian/prebid.js#ddf4251:
   version "7.54.5"
-  uid ddf4251b19c95878af00f640211c0c31ac3e7ac2
   resolved "https://codeload.github.com/guardian/prebid.js/tar.gz/ddf4251b19c95878af00f640211c0c31ac3e7ac2"
   dependencies:
     "@babel/core" "^7.23.2"
