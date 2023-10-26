@@ -17,7 +17,7 @@
 		]
 	},
 	"scripts": {
-		"postinstall": "cd apps-rendering && if [ \"$CI\" = true ]; then yarn --frozen-lockfile ; else yarn ; fi",
+		"postinstall": "./scripts/postinstall.sh",
 		"storybook": "npm-run-all --parallel storybook:*",
 		"storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook --no-open --quiet",
 		"storybook:ar": "cd apps-rendering && yarn storybook --no-open --quiet",
