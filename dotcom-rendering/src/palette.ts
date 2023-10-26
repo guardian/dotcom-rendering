@@ -91,6 +91,18 @@ const tableOfContentsDark = (): string => sourcePalette.neutral[86];
 const tableOfContentsBorderLight = (): string => sourcePalette.neutral[86];
 const tableOfContentsBorderDark = (): string => sourcePalette.neutral[20];
 
+const appsFooterLinksTextLight = (): string => sourcePalette.neutral[7];
+const appsFooterLinksTextDark = (): string => sourcePalette.neutral[60];
+const appsFooterLinksBackgroundLight = (): string => sourcePalette.neutral[97];
+const appsFooterLinksBackgroundDark = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[10];
+		default:
+			return sourcePalette.neutral[0];
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -180,6 +192,14 @@ const paletteColours = {
 	'--table-of-contents-border': {
 		light: tableOfContentsBorderLight,
 		dark: tableOfContentsBorderDark,
+	},
+	'--apps-footer-links-text': {
+		light: appsFooterLinksTextLight,
+		dark: appsFooterLinksTextDark,
+	},
+	'--apps-footer-links-background': {
+		light: appsFooterLinksBackgroundLight,
+		dark: appsFooterLinksBackgroundDark,
 	},
 } satisfies PaletteColours;
 
