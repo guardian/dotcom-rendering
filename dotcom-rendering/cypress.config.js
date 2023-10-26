@@ -8,7 +8,6 @@ import { babelExclude } from './scripts/webpack/webpack.config.client.js';
 module.exports = defineConfig({
 	viewportWidth: 1500,
 	viewportHeight: 860,
-	video: false,
 	chromeWebSecurity: false,
 	numTestsKeptInMemory: 5,
 	blockHosts: [
