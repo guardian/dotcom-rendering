@@ -17,14 +17,10 @@ export const injectMpuIntoGroupedTrails = (
 	speed: 'slow' | 'fast',
 ): Array<GroupedTrails | GroupedTrailsFastMpu | GroupedTrailsSlowMpu> => {
 	let injected = false;
-	const result: Array<
-		GroupedTrails | GroupedTrailsFastMpu | GroupedTrailsSlowMpu
-	> = [];
 
-	for (const grouped of groupedTrails) {
+	return groupedTrails.map((grouped) => {
 		if (injected) {
-			result.push(grouped);
-			continue;
+			return grouped;
 		}
 
 		if (speed === 'fast') {
@@ -39,18 +35,16 @@ export const injectMpuIntoGroupedTrails = (
 				case 6:
 				case 9:
 					injected = true;
-					result.push({
+					return {
 						day: grouped.day,
 						month: grouped.month,
 						year: grouped.year,
 						trails: fastTrails,
 						injected: true,
 						speed: 'fast',
-					});
-					break;
+					};
 				default:
-					result.push(grouped);
-					break;
+					return grouped;
 			}
 		} else {
 			// By taking the first 12, we get the benefit of being able to use
@@ -63,21 +57,17 @@ export const injectMpuIntoGroupedTrails = (
 				case 5:
 				case 7:
 					injected = true;
-					result.push({
+					return {
 						day: grouped.day,
 						month: grouped.month,
 						year: grouped.year,
 						trails: slowTrails,
 						injected: true,
 						speed: 'slow',
-					});
-					break;
+					};
 				default:
-					result.push(grouped);
-					break;
+					return grouped;
 			}
 		}
-	}
-
-	return result;
+	});
 };
