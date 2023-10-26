@@ -13,7 +13,7 @@ type Props = {
  * to that of the :root element
  */
 export const FormatBoundary = ({ format, children }: Props) => {
-	const { darkModeAvailable } = useConfig();
+	const { darkModeAvailable = false } = useConfig();
 
 	return (
 		<div

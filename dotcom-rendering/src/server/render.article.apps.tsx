@@ -20,9 +20,7 @@ export const renderArticle = (
 	const renderingTarget = 'Apps';
 	const config: Config = {
 		renderingTarget,
-		darkModeAvailable: article.config.switches.darkModeInApps
-			? true
-			: undefined,
+		darkModeAvailable: !!article.config.switches.darkModeInApps,
 	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
