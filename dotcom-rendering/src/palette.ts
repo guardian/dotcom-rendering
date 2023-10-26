@@ -123,6 +123,17 @@ const adSupportBannerTextLight = (): string => {
 };
 const adSupportBannerTextDark = (): string => {
 	return sourcePalette.neutral[100];
+
+const appsFooterLinksTextLight = (): string => sourcePalette.neutral[7];
+const appsFooterLinksTextDark = (): string => sourcePalette.neutral[60];
+const appsFooterLinksBackgroundLight = (): string => sourcePalette.neutral[97];
+const appsFooterLinksBackgroundDark = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[10];
+		default:
+			return sourcePalette.neutral[0];
+	}
 };
 
 // ----- Palette ----- //
@@ -237,6 +248,13 @@ const paletteColours = {
 	'--ad-support-banner-text': {
 		light: adSupportBannerTextLight,
 		dark: adSupportBannerTextDark,
+	'--apps-footer-links-text': {
+		light: appsFooterLinksTextLight,
+		dark: appsFooterLinksTextDark,
+	},
+	'--apps-footer-links-background': {
+		light: appsFooterLinksBackgroundLight,
+		dark: appsFooterLinksBackgroundDark,
 	},
 } satisfies PaletteColours;
 
