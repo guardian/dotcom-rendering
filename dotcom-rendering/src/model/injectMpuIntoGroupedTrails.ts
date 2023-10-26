@@ -49,6 +49,7 @@ export const injectMpuIntoGroupedTrails = (
 					});
 					break;
 				default:
+					result.push(grouped);
 					break;
 			}
 		} else {
@@ -72,6 +73,7 @@ export const injectMpuIntoGroupedTrails = (
 					});
 					break;
 				default:
+					result.push(grouped);
 					break;
 			}
 		}
