@@ -9,10 +9,10 @@ export default {
 	title: 'Components/AdSlot.apps',
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.tablet],
+			viewports: [breakpoints.phablet, breakpoints.tablet],
 		},
 		viewport: {
-			defaultViewport: 'mobile',
+			defaultViewport: 'phablet',
 		},
 	},
 	argTypes: {

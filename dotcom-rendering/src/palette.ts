@@ -123,6 +123,7 @@ const adSupportBannerTextLight = (): string => {
 };
 const adSupportBannerTextDark = (): string => {
 	return sourcePalette.neutral[100];
+};
 
 const appsFooterLinksTextLight = (): string => sourcePalette.neutral[7];
 const appsFooterLinksTextDark = (): string => sourcePalette.neutral[60];
@@ -248,6 +249,7 @@ const paletteColours = {
 	'--ad-support-banner-text': {
 		light: adSupportBannerTextLight,
 		dark: adSupportBannerTextDark,
+	},
 	'--apps-footer-links-text': {
 		light: appsFooterLinksTextLight,
 		dark: appsFooterLinksTextDark,
