@@ -6,6 +6,12 @@ import type { RenderingTarget } from './renderingTarget';
  * This should not contain any properties which are likely to change between re-renders
  * @see /dotcom-rendering/docs/architecture/proposed-adrs/react-context-api.md
  */
-export interface Config {
-	renderingTarget: RenderingTarget;
-}
+export type Config =
+	| {
+			renderingTarget: Extract<RenderingTarget, 'Web'>;
+			darkModeAvailable?: never;
+	  }
+	| {
+			renderingTarget: Extract<RenderingTarget, 'Apps'>;
+			darkModeAvailable: boolean;
+	  };
