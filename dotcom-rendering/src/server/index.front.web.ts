@@ -91,7 +91,7 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 		header: {
 			title: data.webTitle,
 			description:
-				data.tags.tags[0]?.properties.bio ||
+				data.tags.tags[0]?.properties.bio ??
 				data.tags.tags[0]?.properties.description,
 			image: data.tags.tags[0]?.properties.bylineImageUrl,
 		},
