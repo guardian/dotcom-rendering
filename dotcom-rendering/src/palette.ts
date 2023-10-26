@@ -105,7 +105,7 @@ const appsFooterLinksBackgroundDark = (format: ArticleFormat): string => {
 };
 const clickToViewBackgroundLight = (): string => sourcePalette.neutral[97];
 const clickToViewBackgroundDark = (): string => sourcePalette.neutral[20];
-const clickToViewBorderLight = (): string => sourcePalette.neutral[97];
+const clickToViewBorderLight = (): string => sourcePalette.neutral[86];
 const clickToViewBorderDark = (): string => sourcePalette.neutral[46];
 const clickToViewButtonLight = (): string => sourcePalette.brand[400];
 const clickToViewButtonDark = (): string => sourcePalette.neutral[97];
