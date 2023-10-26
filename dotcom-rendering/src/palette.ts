@@ -15,7 +15,6 @@ const headlineColourLight = ({ design }: ArticleFormat): string => {
 			return sourcePalette.neutral[10];
 	}
 };
-
 const headlineColourDark = ({ design }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Feature:
@@ -24,7 +23,6 @@ const headlineColourDark = ({ design }: ArticleFormat): string => {
 			return sourcePalette.neutral[97];
 	}
 };
-
 const headlineBackgroundColourLight = ({ design }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
@@ -33,7 +31,6 @@ const headlineBackgroundColourLight = ({ design }: ArticleFormat): string => {
 			return sourcePalette.neutral[100];
 	}
 };
-
 const headlineBackgroundColourDark = ({ design }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
@@ -86,11 +83,48 @@ const accordionKeyEventsBackgroundLight = (): string =>
 const accordionBackgroundDark = (): string => sourcePalette.neutral[10];
 const accordionLiveFeedBackgroundLight = (): string =>
 	sourcePalette.neutral[97];
+
 const tableOfContentsLight = (): string => sourcePalette.neutral[7];
 const tableOfContentsDark = (): string => sourcePalette.neutral[86];
-
 const tableOfContentsBorderLight = (): string => sourcePalette.neutral[86];
 const tableOfContentsBorderDark = (): string => sourcePalette.neutral[20];
+
+const adLabelsTextLight = (): string => {
+	return sourcePalette.neutral[20];
+};
+const adLabelsTextDark = (): string => {
+	return sourcePalette.neutral[100];
+};
+const adBackgroundLight = (): string => {
+	return sourcePalette.neutral[97];
+};
+const adBackgroundDark = (): string => {
+	return sourcePalette.neutral[20];
+};
+const adSupportBannerBackgroundLight = (): string => {
+	return sourcePalette.neutral[93];
+};
+const adSupportBannerBackgroundDark = (): string => {
+	return sourcePalette.neutral[46];
+};
+const adSupportBannerButtonBackgroundLight = (): string => {
+	return sourcePalette.brand[400];
+};
+const adSupportBannerButtonBackgroundDark = (): string => {
+	return sourcePalette.neutral[100];
+};
+const adSupportBannerButtonTextLight = (): string => {
+	return sourcePalette.neutral[100];
+};
+const adSupportBannerButtonTextDark = (): string => {
+	return sourcePalette.neutral[0];
+};
+const adSupportBannerTextLight = (): string => {
+	return sourcePalette.brand[400];
+};
+const adSupportBannerTextDark = (): string => {
+	return sourcePalette.neutral[100];
+};
 
 const appsFooterLinksTextLight = (): string => sourcePalette.neutral[7];
 const appsFooterLinksTextDark = (): string => sourcePalette.neutral[60];
@@ -165,7 +199,6 @@ const paletteColours = {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
 	},
-
 	'--block-quote-fill': {
 		light: blockQuoteFillLight,
 		dark: blockQuoteFillDark,
@@ -205,6 +238,30 @@ const paletteColours = {
 	'--table-of-contents-border': {
 		light: tableOfContentsBorderLight,
 		dark: tableOfContentsBorderDark,
+	},
+	'--ad-background': {
+		light: adBackgroundLight,
+		dark: adBackgroundDark,
+	},
+	'--ad-labels-text': {
+		light: adLabelsTextLight,
+		dark: adLabelsTextDark,
+	},
+	'--ad-support-banner-button-background': {
+		light: adSupportBannerButtonBackgroundLight,
+		dark: adSupportBannerButtonBackgroundDark,
+	},
+	'--ad-support-banner-background': {
+		light: adSupportBannerBackgroundLight,
+		dark: adSupportBannerBackgroundDark,
+	},
+	'--ad-support-banner-button-text': {
+		light: adSupportBannerButtonTextLight,
+		dark: adSupportBannerButtonTextDark,
+	},
+	'--ad-support-banner-text': {
+		light: adSupportBannerTextLight,
+		dark: adSupportBannerTextDark,
 	},
 	'--apps-footer-links-text': {
 		light: appsFooterLinksTextLight,
