@@ -1,4 +1,4 @@
-import { takeFirst } from './tuple';
+import { isNonEmptyArray, takeFirst } from './tuple';
 
 describe('takeFirst', () => {
 	it('Always returns the correct array length when the array is one less, the same as, or one more than n', () => {
@@ -80,4 +80,10 @@ describe('takeFirst', () => {
 		expect(results[34].length).toEqual(12);
 		expect(results[35].length).toEqual(11);
 	});
+});
+
+it('isNonEmptyArray', () => {
+	expect(isNonEmptyArray([])).toBe(false);
+	expect(isNonEmptyArray([1])).toBe(true);
+	expect(isNonEmptyArray([1, 2, 3])).toBe(true);
 });

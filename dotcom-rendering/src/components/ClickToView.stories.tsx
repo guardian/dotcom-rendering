@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type {
 	DocumentBlockElement,
 	EmbedBlockElement,
@@ -30,6 +31,12 @@ import { VineBlockComponent } from './VineBlockComponent.importable';
 export default {
 	component: ClickToView,
 	title: 'Components/ClickToView',
+};
+
+const defaultFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
 };
 
 const paragraphStyle = css`
@@ -69,15 +76,7 @@ const RoleStory = ({
 					level. Truffaut street art edison bulb, banh mi cliche
 					post-ironic mixtape
 				</p>
-				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
-					isMainMedia={false}
-					role={role}
-				>
+				<Figure format={defaultFormat} isMainMedia={false} role={role}>
 					<ClickToView
 						role={role}
 						isTracking={true}
@@ -135,6 +134,7 @@ export const InlineStory = () => {
 	);
 };
 InlineStory.storyName = "Click to view in 'inline' role";
+InlineStory.decorators = [splitTheme(defaultFormat)];
 
 export const SupportingStory = () => {
 	return (
@@ -149,6 +149,7 @@ export const SupportingStory = () => {
 	);
 };
 SupportingStory.storyName = "Click to view in 'supporting' role";
+SupportingStory.decorators = [splitTheme(defaultFormat)];
 
 export const ShowcaseStory = () => {
 	return (
@@ -163,6 +164,7 @@ export const ShowcaseStory = () => {
 	);
 };
 ShowcaseStory.storyName = "Click to view in 'showcase' role";
+ShowcaseStory.decorators = [splitTheme(defaultFormat)];
 
 export const HalfWidthStory = () => {
 	return (
@@ -177,6 +179,7 @@ export const HalfWidthStory = () => {
 	);
 };
 HalfWidthStory.storyName = "Click to view in 'halfWidth' role";
+HalfWidthStory.decorators = [splitTheme(defaultFormat)];
 
 export const ThumbnailStory = () => {
 	return (
@@ -191,6 +194,7 @@ export const ThumbnailStory = () => {
 	);
 };
 ThumbnailStory.storyName = "Click to view in 'thumbnail' role";
+ThumbnailStory.decorators = [splitTheme(defaultFormat)];
 
 const Inline: RoleType = 'inline';
 
@@ -498,11 +502,7 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -524,11 +524,7 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -550,11 +546,7 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -576,11 +568,7 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -602,11 +590,7 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -628,11 +612,7 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -654,11 +634,7 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -672,13 +648,14 @@ export const EmbedBlockComponentStory = () => {
 						role="inline"
 					/>
 				</Figure>
-				<p css={paragraphStyle}>The end.</p>,
+				<p css={paragraphStyle}>The end.</p>
 			</div>
 		</Section>
 	);
 };
 EmbedBlockComponentStory.storyName =
 	'Click to view wrapping EmbedBlockComponent';
+EmbedBlockComponentStory.decorators = [splitTheme(defaultFormat)];
 
 export const UnsafeEmbedBlockComponentStory = () => {
 	return (
@@ -703,11 +680,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -729,11 +702,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -756,11 +725,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -783,11 +748,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -810,11 +771,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -829,13 +786,14 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						role="inline"
 					/>
 				</Figure>
-				<p css={paragraphStyle}>The end.</p>,
+				<p css={paragraphStyle}>The end.</p>
 			</div>
 		</Section>
 	);
 };
 UnsafeEmbedBlockComponentStory.storyName =
 	'Click to view wrapping UnsafeEmbedBlockComponent';
+UnsafeEmbedBlockComponentStory.decorators = [splitTheme(defaultFormat)];
 
 export const VimeoBlockComponentStory = () => {
 	return (
@@ -861,11 +819,7 @@ export const VimeoBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -876,11 +830,7 @@ export const VimeoBlockComponentStory = () => {
 						role="inline"
 					>
 						<VimeoBlockComponent
-							format={{
-								theme: Pillar.News,
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Standard,
-							}}
+							format={defaultFormat}
 							embedUrl={vimeoVideoEmbed.embedUrl}
 							height={vimeoVideoEmbed.height}
 							width={vimeoVideoEmbed.width}
@@ -891,13 +841,14 @@ export const VimeoBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p css={paragraphStyle}>The end.</p>,
+				<p css={paragraphStyle}>The end.</p>
 			</div>
 		</Section>
 	);
 };
 VimeoBlockComponentStory.storyName =
 	'Click to view wrapping VimeoBlockComponent';
+VimeoBlockComponentStory.decorators = [splitTheme(defaultFormat)];
 
 export const DocumentBlockComponentStory = () => {
 	return (
@@ -923,11 +874,7 @@ export const DocumentBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -954,6 +901,7 @@ export const DocumentBlockComponentStory = () => {
 };
 DocumentBlockComponentStory.storyName =
 	'Click to view wrapping DocumentBlockComponentStory';
+DocumentBlockComponentStory.decorators = [splitTheme(defaultFormat)];
 
 export const SoundCloudBlockComponentStory = () => {
 	return (
@@ -979,11 +927,7 @@ export const SoundCloudBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -1006,11 +950,7 @@ export const SoundCloudBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -1025,13 +965,14 @@ export const SoundCloudBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p css={paragraphStyle}>The end.</p>,
+				<p css={paragraphStyle}>The end.</p>
 			</div>
 		</Section>
 	);
 };
 SoundCloudBlockComponentStory.storyName =
 	'Click to view wrapping SoundCloudBlockComponent';
+SoundCloudBlockComponentStory.decorators = [splitTheme(defaultFormat)];
 
 export const SpotifyBlockComponentStory = () => {
 	return (
@@ -1057,11 +998,7 @@ export const SpotifyBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -1077,11 +1014,7 @@ export const SpotifyBlockComponentStory = () => {
 							width={spotifyAudioEmbed.width}
 							title={spotifyAudioEmbed.title}
 							caption={spotifyAudioEmbed.caption}
-							format={{
-								theme: Pillar.News,
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Standard,
-							}}
+							format={defaultFormat}
 							credit="Spotify"
 							role="inline"
 							isTracking={false}
@@ -1089,7 +1022,7 @@ export const SpotifyBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p css={paragraphStyle}>The end.</p>,
+				<p css={paragraphStyle}>The end.</p>
 			</div>
 		</Section>
 	);
@@ -1097,6 +1030,7 @@ export const SpotifyBlockComponentStory = () => {
 
 SpotifyBlockComponentStory.storyName =
 	'Click to view wrapping SpotifyBlockComponent';
+SpotifyBlockComponentStory.decorators = [splitTheme(defaultFormat)];
 
 export const TweetBlockComponentStory = () => {
 	return (
@@ -1122,11 +1056,7 @@ export const TweetBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -1139,13 +1069,15 @@ export const TweetBlockComponentStory = () => {
 						<TweetBlockComponent element={twitterTweetEmbed} />
 					</ClickToView>
 				</Figure>
-				<p css={paragraphStyle}>The end.</p>,
+				<p css={paragraphStyle}>The end.</p>
 			</div>
 		</Section>
 	);
 };
 TweetBlockComponentStory.storyName =
 	'Click to view wrapping TweetBlockComponent';
+TweetBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+
 export const InstagramBlockComponentStory = () => {
 	return (
 		<Section
@@ -1170,11 +1102,7 @@ export const InstagramBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -1185,13 +1113,15 @@ export const InstagramBlockComponentStory = () => {
 						isMainMedia={false}
 					/>
 				</Figure>
-				<p css={paragraphStyle}>The end.</p>,
+				<p css={paragraphStyle}>The end.</p>
 			</div>
 		</Section>
 	);
 };
 InstagramBlockComponentStory.storyName =
 	'Click to view wrapping InstagramBlockComponent';
+InstagramBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+
 export const MapBlockComponentStory = () => {
 	return (
 		<Section
@@ -1215,11 +1145,7 @@ export const MapBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -1235,11 +1161,7 @@ export const MapBlockComponentStory = () => {
 							width={mapEmbedEmbed.width}
 							title={mapEmbedEmbed.title}
 							caption={mapEmbedEmbed.caption}
-							format={{
-								theme: Pillar.News,
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Standard,
-							}}
+							format={defaultFormat}
 							credit="Google Maps"
 							role="inline"
 							isTracking={false}
@@ -1254,6 +1176,8 @@ export const MapBlockComponentStory = () => {
 };
 MapBlockComponentStory.storyName =
 	'Click to view wrapping MapEmbedBlockComponent';
+MapBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+
 export const VineBlockComponentStory = () => {
 	return (
 		<Section
@@ -1277,11 +1201,7 @@ export const VineBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
+					format={defaultFormat}
 					isMainMedia={false}
 					role="inline"
 				>
@@ -1304,3 +1224,4 @@ export const VineBlockComponentStory = () => {
 	);
 };
 VineBlockComponentStory.storyName = 'Click to view wrapping VineBlockComponent';
+VineBlockComponentStory.decorators = [splitTheme(defaultFormat)];

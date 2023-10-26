@@ -2,6 +2,8 @@
 
 import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
+import { buttonThemeDefault } from '@guardian/source-react-components';
+import { decidePalette } from './lib/decidePalette';
 
 // ----- Palette Functions ----- //
 
@@ -13,7 +15,6 @@ const headlineColourLight = ({ design }: ArticleFormat): string => {
 			return sourcePalette.neutral[10];
 	}
 };
-
 const headlineColourDark = ({ design }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Feature:
@@ -22,7 +23,6 @@ const headlineColourDark = ({ design }: ArticleFormat): string => {
 			return sourcePalette.neutral[97];
 	}
 };
-
 const headlineBackgroundColourLight = ({ design }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
@@ -31,7 +31,6 @@ const headlineBackgroundColourLight = ({ design }: ArticleFormat): string => {
 			return sourcePalette.neutral[100];
 	}
 };
-
 const headlineBackgroundColourDark = ({ design }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
@@ -47,6 +46,109 @@ const starRatingBackgroundColourLight = (): string =>
 	sourcePalette.brandAlt[400];
 const starRatingBackgroundColourDark = (): string =>
 	sourcePalette.brandAlt[200];
+
+const blockQuoteFillLight = (format: ArticleFormat): string => {
+	return decidePalette(format).fill.blockquoteIcon;
+};
+const blockQuoteFillDark = ({
+	design,
+	display,
+	theme,
+}: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[60];
+		default:
+			return decidePalette({ design, display, theme }).fill
+				.blockquoteIcon;
+	}
+};
+const quotedBlockquoteStylesLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.blockquote;
+};
+const quotedBlockquoteStylesDark = (): string => sourcePalette.neutral[100];
+
+const accordionTitleRowFillLight = (): string => sourcePalette.neutral[46];
+const accordionTitleRowFillDark = (): string => sourcePalette.neutral[60];
+const accordionTitleRowBackgroundLight = (): string =>
+	sourcePalette.neutral[100];
+const accordionTitleRowBackgroundDark = (): string => sourcePalette.neutral[10];
+const accordionTitleRowBorderTopLight = (): string => sourcePalette.neutral[86];
+const accordionTitleRowBorderTopDark = (): string => sourcePalette.neutral[20];
+const accordionTitleLight = (): string => sourcePalette.neutral[7];
+const accordionTitleDark = (): string => sourcePalette.neutral[86];
+const accordionKeyEventsBackgroundLight = (): string =>
+	sourcePalette.neutral[100];
+const accordionBackgroundDark = (): string => sourcePalette.neutral[10];
+const accordionLiveFeedBackgroundLight = (): string =>
+	sourcePalette.neutral[97];
+
+const tableOfContentsLight = (): string => sourcePalette.neutral[7];
+const tableOfContentsDark = (): string => sourcePalette.neutral[86];
+const tableOfContentsBorderLight = (): string => sourcePalette.neutral[86];
+const tableOfContentsBorderDark = (): string => sourcePalette.neutral[20];
+
+const adLabelsTextLight = (): string => {
+	return sourcePalette.neutral[20];
+};
+const adLabelsTextDark = (): string => {
+	return sourcePalette.neutral[100];
+};
+const adBackgroundLight = (): string => {
+	return sourcePalette.neutral[97];
+};
+const adBackgroundDark = (): string => {
+	return sourcePalette.neutral[20];
+};
+const adSupportBannerBackgroundLight = (): string => {
+	return sourcePalette.neutral[93];
+};
+const adSupportBannerBackgroundDark = (): string => {
+	return sourcePalette.neutral[46];
+};
+const adSupportBannerButtonBackgroundLight = (): string => {
+	return sourcePalette.brand[400];
+};
+const adSupportBannerButtonBackgroundDark = (): string => {
+	return sourcePalette.neutral[100];
+};
+const adSupportBannerButtonTextLight = (): string => {
+	return sourcePalette.neutral[100];
+};
+const adSupportBannerButtonTextDark = (): string => {
+	return sourcePalette.neutral[0];
+};
+const adSupportBannerTextLight = (): string => {
+	return sourcePalette.brand[400];
+};
+const adSupportBannerTextDark = (): string => {
+	return sourcePalette.neutral[100];
+};
+
+const appsFooterLinksTextLight = (): string => sourcePalette.neutral[7];
+const appsFooterLinksTextDark = (): string => sourcePalette.neutral[60];
+const appsFooterLinksBackgroundLight = (): string => sourcePalette.neutral[97];
+const appsFooterLinksBackgroundDark = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[10];
+		default:
+			return sourcePalette.neutral[0];
+	}
+};
+const clickToViewBackgroundLight = (): string => sourcePalette.neutral[97];
+const clickToViewBackgroundDark = (): string => sourcePalette.neutral[20];
+const clickToViewBorderLight = (): string => sourcePalette.neutral[86];
+const clickToViewBorderDark = (): string => sourcePalette.neutral[46];
+const clickToViewButtonLight = (): string => sourcePalette.brand[400];
+const clickToViewButtonDark = (): string => sourcePalette.neutral[97];
+const clickToViewButtonTextLight = (): string =>
+	buttonThemeDefault.button.textPrimary;
+const clickToViewButtonTextDark = (): string => sourcePalette.neutral[7];
+const clickToViewButtonHoverLight = (): string =>
+	buttonThemeDefault.button.backgroundPrimaryHover;
+const clickToViewButtonHoverDark = (): string => sourcePalette.neutral[86];
 
 // ----- Palette ----- //
 
@@ -96,6 +198,98 @@ const paletteColours = {
 	'--star-rating-background': {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
+	},
+	'--block-quote-fill': {
+		light: blockQuoteFillLight,
+		dark: blockQuoteFillDark,
+	},
+	'--quoted-block-quote-styles': {
+		light: quotedBlockquoteStylesLight,
+		dark: quotedBlockquoteStylesDark,
+	},
+	'--accordion-title-row-fill': {
+		light: accordionTitleRowFillLight,
+		dark: accordionTitleRowFillDark,
+	},
+	'--accordion-title-row-background': {
+		light: accordionTitleRowBackgroundLight,
+		dark: accordionTitleRowBackgroundDark,
+	},
+	'--accordion-title-row-border-top': {
+		light: accordionTitleRowBorderTopLight,
+		dark: accordionTitleRowBorderTopDark,
+	},
+	'--accordion-title': {
+		light: accordionTitleLight,
+		dark: accordionTitleDark,
+	},
+	'--accordion-key-events-background': {
+		light: accordionKeyEventsBackgroundLight,
+		dark: accordionBackgroundDark,
+	},
+	'--accordion-live-feed-background': {
+		light: accordionLiveFeedBackgroundLight,
+		dark: accordionBackgroundDark,
+	},
+	'--table-of-contents': {
+		light: tableOfContentsLight,
+		dark: tableOfContentsDark,
+	},
+	'--table-of-contents-border': {
+		light: tableOfContentsBorderLight,
+		dark: tableOfContentsBorderDark,
+	},
+	'--ad-background': {
+		light: adBackgroundLight,
+		dark: adBackgroundDark,
+	},
+	'--ad-labels-text': {
+		light: adLabelsTextLight,
+		dark: adLabelsTextDark,
+	},
+	'--ad-support-banner-button-background': {
+		light: adSupportBannerButtonBackgroundLight,
+		dark: adSupportBannerButtonBackgroundDark,
+	},
+	'--ad-support-banner-background': {
+		light: adSupportBannerBackgroundLight,
+		dark: adSupportBannerBackgroundDark,
+	},
+	'--ad-support-banner-button-text': {
+		light: adSupportBannerButtonTextLight,
+		dark: adSupportBannerButtonTextDark,
+	},
+	'--ad-support-banner-text': {
+		light: adSupportBannerTextLight,
+		dark: adSupportBannerTextDark,
+	},
+	'--apps-footer-links-text': {
+		light: appsFooterLinksTextLight,
+		dark: appsFooterLinksTextDark,
+	},
+	'--apps-footer-links-background': {
+		light: appsFooterLinksBackgroundLight,
+		dark: appsFooterLinksBackgroundDark,
+	},
+	'--click-to-view-background': {
+		light: clickToViewBackgroundLight,
+		dark: clickToViewBackgroundDark,
+	},
+	'--click-to-view-border': {
+		light: clickToViewBorderLight,
+		dark: clickToViewBorderDark,
+	},
+	'--click-to-view-button': {
+		light: clickToViewButtonLight,
+		dark: clickToViewButtonDark,
+	},
+	'--click-to-view-button-text': {
+		light: clickToViewButtonTextLight,
+		dark: clickToViewButtonTextDark,
+	},
+	'--click-to-view-button-hover': {
+		light: clickToViewButtonHoverLight,
+		dark: clickToViewButtonHoverDark,
 	},
 } satisfies PaletteColours;
 

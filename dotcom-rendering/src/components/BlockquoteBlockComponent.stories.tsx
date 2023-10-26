@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
 
 const shortQuoteHtml =
@@ -27,163 +27,248 @@ export const Unquoted = () => {
 	return (
 		<div css={containerStyles}>
 			<h1>Long</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.News,
-				})}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} />
 			<h1>Short</h1>
-			<BlockquoteBlockComponent
-				html={shortQuoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.News,
-				})}
-			/>
+			<BlockquoteBlockComponent html={shortQuoteHtml} />
 		</div>
 	);
 };
 Unquoted.storyName = 'Unquoted';
+Unquoted.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.News,
+	}),
+];
 
-export const Quoted = () => {
+export const News = () => {
 	return (
-		<div css={containerStyles}>
+		<div>
 			<h1>News</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.News,
-				})}
-				quoted={true}
-			/>
-			<h1>Sport</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-				})}
-				quoted={true}
-			/>
-			<h1>Culture</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Culture,
-				})}
-				quoted={true}
-			/>
-			<h1>Lifestyle</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Lifestyle,
-				})}
-				quoted={true}
-			/>
-			<h1>Opinion</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Opinion,
-				})}
-				quoted={true}
-			/>
-			<h1>SpecialReport</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: ArticleSpecial.SpecialReport,
-				})}
-				quoted={true}
-			/>
-			<h1>Labs</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: ArticleSpecial.Labs,
-				})}
-				quoted={true}
-			/>
-			<h1>LiveBlog News</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.LiveBlog,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.News,
-				})}
-				quoted={true}
-			/>
-			<h1>DeadBlog News</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.DeadBlog,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.News,
-				})}
-				quoted={true}
-			/>
-			<h1>LiveBlog News</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.LiveBlog,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-				})}
-				quoted={true}
-			/>
-			<h1>DeadBlog Sport</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.DeadBlog,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-				})}
-				quoted={true}
-			/>
-			<h1>SpecialReportAlt Standard</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: ArticleSpecial.SpecialReportAlt,
-				})}
-				quoted={true}
-			/>
-
-			<h1>SpecialReportAlt Comment</h1>
-			<BlockquoteBlockComponent
-				html={blockquoteHtml}
-				palette={decidePalette({
-					design: ArticleDesign.Comment,
-					display: ArticleDisplay.Standard,
-					theme: ArticleSpecial.SpecialReportAlt,
-				})}
-				quoted={true}
-			/>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
-Quoted.storyName = 'Quoted';
+
+News.storyName = 'News';
+News.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.News,
+	}),
+];
+
+export const Sport = () => {
+	return (
+		<div>
+			<h1>Sport</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+Sport.storyName = 'Sport';
+Sport.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Sport,
+	}),
+];
+
+export const Culture = () => {
+	return (
+		<div>
+			<h1>Culture</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+Culture.storyName = 'Culture';
+Culture.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Culture,
+	}),
+];
+
+export const Lifestyle = () => {
+	return (
+		<div>
+			<h1>Lifestyle</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+Lifestyle.storyName = 'Lifestyle';
+Lifestyle.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Lifestyle,
+	}),
+];
+
+export const Opinion = () => {
+	return (
+		<div>
+			<h1>Opinion</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+Opinion.storyName = 'Opinion';
+Opinion.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Opinion,
+	}),
+];
+
+export const SpecialReport = () => {
+	return (
+		<div>
+			<h1>SpecialReport</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+SpecialReport.storyName = 'SpecialReport';
+SpecialReport.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: ArticleSpecial.SpecialReport,
+	}),
+];
+
+export const Labs = () => {
+	return (
+		<div>
+			<h1>Labs</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+Labs.storyName = 'Labs';
+Labs.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: ArticleSpecial.Labs,
+	}),
+];
+
+export const LiveBlogNews = () => {
+	return (
+		<div>
+			<h1>LiveBlog News</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+LiveBlogNews.storyName = 'LiveBlogNews';
+LiveBlogNews.decorators = [
+	splitTheme({
+		design: ArticleDesign.LiveBlog,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.News,
+	}),
+];
+
+export const DeadBlogNews = () => {
+	return (
+		<div>
+			<h1>DeadBlog News</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+DeadBlogNews.storyName = 'DeadBlogNews';
+DeadBlogNews.decorators = [
+	splitTheme({
+		design: ArticleDesign.DeadBlog,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.News,
+	}),
+];
+
+export const LiveBlogSport = () => {
+	return (
+		<div>
+			<h1>LiveBlog News</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+LiveBlogSport.storyName = 'LiveBlogSport';
+LiveBlogSport.decorators = [
+	splitTheme({
+		design: ArticleDesign.LiveBlog,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Sport,
+	}),
+];
+
+export const DeadBlogSport = () => {
+	return (
+		<div css={containerStyles}>
+			<h1>DeadBlog Sport</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+DeadBlogSport.storyName = 'DeadBlogSport';
+DeadBlogSport.decorators = [
+	splitTheme({
+		design: ArticleDesign.DeadBlog,
+		display: ArticleDisplay.Standard,
+		theme: Pillar.Sport,
+	}),
+];
+
+export const SpecialReportAltStandard = () => {
+	return (
+		<div css={containerStyles}>
+			<h1>SpecialReportAlt Standard</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+SpecialReportAltStandard.storyName = 'SpecialReportAltStandard';
+SpecialReportAltStandard.decorators = [
+	splitTheme({
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: ArticleSpecial.SpecialReportAlt,
+	}),
+];
+
+export const SpecialReportAltComment = () => {
+	return (
+		<div css={containerStyles}>
+			<h1>SpecialReportAlt Comment</h1>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+SpecialReportAltComment.storyName = 'SpecialReportAltComment';
+SpecialReportAltComment.decorators = [
+	splitTheme({
+		design: ArticleDesign.Comment,
+		display: ArticleDisplay.Standard,
+		theme: ArticleSpecial.SpecialReportAlt,
+	}),
+];

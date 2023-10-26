@@ -33,7 +33,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 				pageId: data.pageId,
 				onPageDescription:
 					data.pressedPage.frontProperties.onPageDescription,
-				isPaidContent: data.config.isPaidContent,
+				isOnPaidContentFront: data.config.isPaidContent,
 				discussionApiUrl: data.config.discussionApiUrl,
 				frontBranding: pickBrandingForEdition(
 					data.pressedPage.frontProperties.commercial
@@ -90,7 +90,9 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 		trendingTopics: extractTrendingTopics(data.contents, data.pageId),
 		header: {
 			title: data.webTitle,
-			description: data.tags.tags[0]?.properties.bio,
+			description:
+				data.tags.tags[0]?.properties.bio ??
+				data.tags.tags[0]?.properties.description,
 			image: data.tags.tags[0]?.properties.bylineImageUrl,
 		},
 	};

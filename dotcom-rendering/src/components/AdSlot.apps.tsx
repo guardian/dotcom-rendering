@@ -1,12 +1,8 @@
 import { css } from '@emotion/react';
-import {
-	palette,
-	remSpace,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { remSpace, textSans, until } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { forwardRef } from 'react';
+import { palette } from '../palette';
 
 // Exported for Storybook use
 export interface Props {
@@ -19,8 +15,7 @@ const adHeightPx = 258;
 const styles = css`
 	clear: both;
 	margin: ${remSpace[4]} 0;
-	color: ${palette.neutral[20]};
-	background: ${palette.neutral[97]};
+	background: ${palette('--ad-background')};
 
 	${until.phablet} {
 		margin: 1em -${remSpace[3]};
@@ -29,7 +24,6 @@ const styles = css`
 
 const adLabelsStyles = css`
 	${textSans.xsmall()}
-	color: ${palette.neutral[46]};
 	padding: ${remSpace[3]};
 	float: left;
 
@@ -41,6 +35,7 @@ const adLabelsStyles = css`
 		float: left;
 		font-size: 16px;
 		font-weight: 400;
+		color: ${palette('--ad-labels-text')};
 	}
 `;
 
@@ -59,18 +54,20 @@ const adSlotSquareStyles = css`
 `;
 
 const supportBannerStyles = css`
-	padding: ${remSpace[3]};
-	background-color: ${palette.neutral[93]};
+	padding: ${remSpace[2]};
+	background-color: ${palette('--ad-support-banner-background')};
 
 	p {
 		${textSans.small()};
-		color: ${palette.brand[400]};
+		color: ${palette('--ad-support-banner-text')};
 		font-weight: bold;
 		margin-top: 0;
 	}
 
 	button {
 		margin-top: ${remSpace[2]};
+		color: ${palette('--ad-support-banner-button-text')};
+		background-color: ${palette('--ad-support-banner-button-background')};
 	}
 `;
 
