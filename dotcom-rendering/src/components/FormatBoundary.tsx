@@ -21,13 +21,11 @@ export const FormatBoundary = ({ format, children }: Props) => {
 			data-format-design={format.design}
 			data-format-display={format.display}
 			css={[
-				css`
-					${css(paletteDeclarations(format, 'light'))}
-				`,
+				paletteDeclarations(format, 'light'),
 				darkModeAvailable &&
 					css`
 						@media (prefers-color-scheme: dark) {
-							${css(paletteDeclarations(format, 'dark'))}
+							${paletteDeclarations(format, 'dark')}
 						}
 					`,
 			]}
