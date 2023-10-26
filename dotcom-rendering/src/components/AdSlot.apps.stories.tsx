@@ -1,5 +1,7 @@
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { useRef } from 'react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { AdSlot, type Props } from './AdSlot.apps';
 
 export default {
@@ -7,15 +9,22 @@ export default {
 	title: 'Components/AdSlot.apps',
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.tablet],
+			viewports: [breakpoints.phablet, breakpoints.tablet],
 		},
 		viewport: {
-			defaultViewport: 'mobile',
+			defaultViewport: 'phablet',
 		},
 	},
 	argTypes: {
 		onClickSupportButton: { action: 'clicked' },
 	},
+	decorators: [
+		splitTheme({
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		}),
+	],
 };
 
 type Args = Omit<Props, 'ref'>;
