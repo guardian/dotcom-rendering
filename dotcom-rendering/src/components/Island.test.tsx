@@ -97,7 +97,9 @@ describe('Island: server-side rendering', () => {
 	test('EnhancePinnedPost', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
 					<EnhancePinnedPost />
 				</ConfigProvider>,
 			),
@@ -198,7 +200,9 @@ describe('Island: server-side rendering', () => {
 	test('StickyBottomBanner', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
 					<StickyBottomBanner
 						contentType=""
 						tags={[]}
