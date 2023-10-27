@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
-import { getLocaleCode } from '../lib/getCountryCode';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -17,6 +16,7 @@ import type {
 import { pickMessage } from '../lib/messagePicker';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { TagType } from '../types/tag';
@@ -211,25 +211,6 @@ const buildBrazeBanner = (
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });
 
-const useCountryCode = (): CountryCode | undefined => {
-	const [localeCode, setLocaleCode] = useState<CountryCode | null>(null);
-	useEffect(() => {
-		getLocaleCode()
-			.then((code) => {
-				setLocaleCode(code);
-			})
-			.catch((e) => {
-				const msg = `Error fetching country code: ${String(e)}`;
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'liveblog-epic',
-				);
-			});
-	}, []);
-
-	return localeCode ?? undefined;
-};
-
 /**
  * The reader revenue banner at the end of articles
  *
@@ -264,7 +245,7 @@ export const StickyBottomBanner = ({
 	const { renderingTarget } = useConfig();
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
 
-	const countryCode = useCountryCode();
+	const countryCode = useCountryCode('sticky-bottom-banner');
 	const authStatus = useAuthStatus();
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||

@@ -6,7 +6,6 @@ import { getCookie } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
-import { getLocaleCode } from '../lib/getCountryCode';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -15,6 +14,7 @@ import type {
 import { pickMessage } from '../lib/messagePicker';
 import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
 import { AdSlot } from './AdSlot.web';
@@ -123,7 +123,7 @@ export const SlotBodyEnd = ({
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
-	const [countryCode, setCountryCode] = useState<string>();
+	const countryCode = useCountryCode('slot-body-end');
 	const isSignedIn = getIsSignedIn(useAuthStatus());
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<
@@ -138,19 +138,6 @@ export const SlotBodyEnd = ({
 		!isLabs &&
 		countryCode === 'US' &&
 		window.guardian.config.switches.articleEndSlot;
-
-	useEffect(() => {
-		const callFetch = () => {
-			getLocaleCode()
-				.then((cc) => {
-					setCountryCode(cc ?? '');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${String(e)}`),
-				);
-		};
-		callFetch();
-	}, []);
 
 	useEffect(() => {
 		setAsyncArticleCount(
