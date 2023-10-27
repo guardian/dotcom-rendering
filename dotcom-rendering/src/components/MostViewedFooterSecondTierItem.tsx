@@ -125,11 +125,7 @@ export const MostViewedFooterSecondTierItem = ({
 						{!!avatarToShow && (
 							<div css={avatarContainerStyles}>
 								<div css={avatarSizeStyles}>
-									<Avatar
-										src={avatarToShow}
-										alt=""
-										format={format}
-									/>
+									<Avatar src={avatarToShow} alt="" />
 								</div>
 							</div>
 						)}

@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands -- We don't have types here */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment -- We don't have types here */
-/* eslint-disable @typescript-eslint/restrict-template-expressions -- We don't have types here */
-/*
+// @ts-check
 
-Use: node dotcom-rendering/scripts/gen-stories/gen-stories.js
-
-This script was created as a replacement for storiesOf to generate all of the possible variants
-of our Card and Layout components.
-
-It should be run whenever any of the Display, Design, or Theme `format` properties change
-
-*/
+/** @fileoverview
+ *
+ * Use: node dotcom-rendering/scripts/gen-stories/gen-stories.js
+ *
+ * This script was created as a replacement for storiesOf to generate all of the possible variants
+ * of our Card and Layout components.
+ *
+ * It should be run whenever any of the Display, Design, or Theme `format` properties change
+ *
+ */
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -26,6 +25,7 @@ const STORIES_PATH = resolve(
 );
 const LAYOUT_STORIES_FILE = resolve(STORIES_PATH, 'Layout.stories.tsx');
 const CARD_STORIES_FILE = resolve(STORIES_PATH, 'Card.stories.tsx');
+/** @param {string} componentName */
 const README_FILE = (componentName) =>
 	resolve(STORIES_PATH, `${componentName}Readme.stories.jsx`);
 
@@ -72,6 +72,7 @@ export default {
 };
 `;
 
+/** @param {string} componentName */
 const README_TEMPLATE = (componentName) => `
 import { css } from '@emotion/react';
 
@@ -102,12 +103,16 @@ export default {
 export const Readme = () => <ReadMe />;
 `;
 
-const generateLayoutStory = (
-	displayName,
-	designName,
-	theme,
-	renderingTarget,
-) => {
+/**
+ * @param {string} displayName
+ * @param {string} designName
+ * @param {string} theme
+ * @param {import('../../src/types/configContext.js').Config} config
+ *
+ */
+const generateLayoutStory = (displayName, designName, theme, config) => {
+	const { renderingTarget } = config;
+
 	const storyVariableName =
 		renderingTarget + displayName + designName + theme;
 
@@ -123,7 +128,7 @@ export const ${storyVariableName} = () => {
 	);
 };
 ${storyVariableName}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}';
-${storyVariableName}.args = { config: { renderingTarget: '${renderingTarget}' } };
+${storyVariableName}.args = { config: ${JSON.stringify(config)} };
 ${storyVariableName}.decorators = [lightDecorator({
 	display: ArticleDisplay.${displayName},
 	design: ArticleDesign.${designName},
@@ -132,6 +137,10 @@ ${storyVariableName}.decorators = [lightDecorator({
 `;
 };
 
+/**
+ * @param {string} displayName
+ * @param {string} designName
+ */
 const generateCardStory = (displayName, designName) => {
 	const storyName = displayName + designName;
 
@@ -149,75 +158,68 @@ ${storyName}.storyName = '${displayName}Display ${designName}Design';
 `;
 };
 
-const testLayoutFormats = [
-	{
-		display: 'Standard',
-		design: 'Standard',
-		theme: 'NewsPillar',
-		renderingTarget: 'Web',
-	},
-	{
-		display: 'Standard',
-		design: 'Standard',
-		theme: 'NewsPillar',
-		renderingTarget: 'Apps',
-	},
-	{
-		display: 'Showcase',
-		design: 'Standard',
-		theme: 'NewsPillar',
-		renderingTarget: 'Apps',
-	},
-	{
-		display: 'Showcase',
-		design: 'Picture',
-		theme: 'OpinionPillar',
-		renderingTarget: 'Web',
-	},
-	{
-		display: 'Showcase',
-		design: 'Picture',
-		theme: 'OpinionPillar',
-		renderingTarget: 'Apps',
-	},
-	{
-		display: 'Standard',
-		design: 'Comment',
-		theme: 'NewsPillar',
-		renderingTarget: 'Apps',
-	},
-	{
-		display: 'Standard',
-		design: 'Interactive',
-		theme: 'NewsPillar',
-		renderingTarget: 'Apps',
-	},
+/** @typedef {{display: string, design: string, theme: string, config: import('../../src/types/configContext.js').Config}} TestFormat */
 
-	{
-		display: 'Immersive',
-		design: 'Standard',
-		theme: 'NewsPillar',
-		renderingTarget: 'Apps',
-	},
-];
+const testLayoutFormats =
+	/** @type {const} @satisfies {ReadonlyArray<TestFormat>} */ ([
+		{
+			display: 'Standard',
+			design: 'Standard',
+			theme: 'NewsPillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'Standard',
+			theme: 'NewsPillar',
+			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+		},
+		{
+			display: 'Showcase',
+			design: 'Standard',
+			theme: 'NewsPillar',
+			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+		},
+		{
+			display: 'Showcase',
+			design: 'Picture',
+			theme: 'OpinionPillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Showcase',
+			design: 'Picture',
+			theme: 'OpinionPillar',
+			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'Comment',
+			theme: 'NewsPillar',
+			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'Interactive',
+			theme: 'NewsPillar',
+			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+		},
+
+		{
+			display: 'Immersive',
+			design: 'Standard',
+			theme: 'NewsPillar',
+			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+		},
+	]);
 
 const generateLayoutStories = () => {
 	log('[scripts/gen-stories] Generating layout stories.');
 	let stories = 0;
 	let template = LAYOUT_TEMPLATE_HEADER;
 
-	for (const {
-		display,
-		design,
-		theme,
-		renderingTarget,
-	} of testLayoutFormats) {
-		template += generateLayoutStory(
-			display,
-			design,
-			theme,
-			renderingTarget,
-		);
+	for (const { display, design, theme, config } of testLayoutFormats) {
+		template += generateLayoutStory(display, design, theme, config);
 		stories++;
 	}
 

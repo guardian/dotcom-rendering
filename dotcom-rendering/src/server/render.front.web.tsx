@@ -78,7 +78,7 @@ export const renderFront = ({
 	const NAV = extractFrontNav(front);
 
 	// Fronts are not supported in Apps
-	const config: Config = { renderingTarget: 'Web' };
+	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -172,7 +172,7 @@ export const renderTagFront = ({
 	const NAV = extractNAV(tagFront.nav);
 
 	// Fronts are not supported in Apps
-	const config: Config = { renderingTarget: 'Web' };
+	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>

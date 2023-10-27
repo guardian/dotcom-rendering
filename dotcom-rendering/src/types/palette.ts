@@ -69,7 +69,6 @@ export type Palette = {
 		audioAtom: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
-		avatar: Colour;
 		card: Colour;
 		headline: Colour;
 		headlineByline: Colour;

@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
+import { ConfigProvider } from './ConfigContext';
 import { RichLinkComponent } from './RichLinkComponent.importable';
 
 describe('RichLinkComponent', () => {
@@ -11,18 +12,22 @@ describe('RichLinkComponent', () => {
 		};
 		expect(() =>
 			renderToString(
-				<RichLinkComponent
-					element={{
-						_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-						elementId: '',
-						url: '',
-						text: '',
-						prefix: '',
-					}}
-					ajaxUrl={''}
-					richLinkIndex={0}
-					format={format}
-				/>,
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<RichLinkComponent
+						element={{
+							_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
+							elementId: '',
+							url: '',
+							text: '',
+							prefix: '',
+						}}
+						ajaxUrl={''}
+						richLinkIndex={0}
+						format={format}
+					/>
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});

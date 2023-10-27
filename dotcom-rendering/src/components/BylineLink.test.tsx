@@ -104,7 +104,9 @@ describe('BylineLink', () => {
 		];
 
 		const { container } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<BylineLink
 					byline={byline}
 					tags={tags}
@@ -139,7 +141,9 @@ describe('BylineLink', () => {
 			},
 		];
 		const { container } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<BylineLink
 					byline={byline}
 					tags={tags}
@@ -176,7 +180,9 @@ describe('BylineLink', () => {
 		];
 
 		const { container } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<BylineLink
 					byline={byline}
 					tags={tags}
