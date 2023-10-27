@@ -16,6 +16,7 @@ export interface Guardian {
 		stage: StageType;
 		frontendAssetsFullURL: string;
 		page: {
+			idApiUrl?: string;
 			dcrCouldRender: boolean;
 			contentType: string;
 			edition: EditionId;

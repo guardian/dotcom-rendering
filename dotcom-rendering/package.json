@@ -277,6 +277,7 @@
 		"webpack-messages": "2.0.4",
 		"webpack-node-externals": "3.0.0",
 		"webpack-sources": "3.2.3",
+		"wolfy87-eventemitter": "^5.2.9",
 		"zod": "3.22.3"
 	}
 }
