@@ -47,6 +47,67 @@ export type AuthStatus =
 	| SignedOutWithOkta
 	| SignedInWithOkta;
 
+// relates to getUserFromCookie() below but not used in user-features - however may be useful for other purposes
+type IdentityUserFromCache = {
+	dates: { accountCreatedDate: string };
+	publicFields: {
+		displayName: string;
+	};
+	statusFields: {
+		userEmailValidated: boolean;
+	};
+	id: number;
+	rawResponse: string;
+} | null;
+
+let userFromCookieCache: IdentityUserFromCache = null;
+const cookieName = 'GU_U';
+const getUserCookie = (): string | null => getCookie({ name: cookieName });
+const decodeBase64 = (str: string): string =>
+	decodeURIComponent(
+		escape(
+			window.atob(
+				str.replace(/-/g, '+').replace(/_/g, '/').replace(/,/g, '='),
+			),
+		),
+	);
+
+const getUserFromCookie = (): IdentityUserFromCache => {
+	if (userFromCookieCache === null) {
+		const cookieData = getUserCookie();
+
+		if (cookieData) {
+			const userData = JSON.parse(
+				decodeBase64(cookieData.split('.')[0] ?? ''),
+			) as string[];
+
+			const id = parseInt(userData[0] ?? '', 10);
+			const displayName = decodeURIComponent(userData[2] ?? '');
+			const accountCreatedDate = userData[6];
+			const userEmailValidated = Boolean(userData[7]);
+
+			if (id && accountCreatedDate) {
+				userFromCookieCache = {
+					id,
+					publicFields: {
+						displayName,
+					},
+					dates: { accountCreatedDate },
+					statusFields: {
+						userEmailValidated,
+					},
+					rawResponse: cookieData,
+				};
+			}
+		}
+	}
+
+	return userFromCookieCache;
+};
+
+export const isUserLoggedIn = (): boolean => getUserFromCookie() !== null;
+console.log('WORKING WELL>>>>>>>>>', isUserLoggedIn);
+
 export const getOptionsHeadersWithOkta = (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 ): RequestInit => {
@@ -97,6 +158,14 @@ export function getSignedInStatusWithOkta(
 	return { kind: 'SignedOutWithOkta' };
 }
 
+export const isUserLoggedInOktaRefactor = (): Promise<boolean> =>
+	getAuthStatus().then((authStatus) =>
+		authStatus.kind === 'SignedInWithCookies' ||
+		authStatus.kind === 'SignedInWithOkta'
+			? true
+			: false,
+	);
+
 export function getSignedInStatusWithCookies():
 	| SignedOutWithCookies
 	| SignedInWithCookies {
@@ -116,3 +185,16 @@ export const getAuthStatus = async (): Promise<AuthStatus> => {
 		return getSignedInStatusWithCookies();
 	}
 };
+
+// not being used currently in DCR but possible uselful for other purposes
+export const getGoogleTagId = (): Promise<string | null> =>
+	getAuthStatus().then((authStatus) => {
+		switch (authStatus.kind) {
+			case 'SignedInWithCookies':
+				return fetchGoogleTagIdFromApi();
+			case 'SignedInWithOkta':
+				return authStatus.idToken.claims.google_tag_id;
+			default:
+				return null;
+		}
+	});

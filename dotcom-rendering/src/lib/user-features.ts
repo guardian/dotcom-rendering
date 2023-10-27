@@ -1,14 +1,16 @@
 import { getCookie, isObject, removeCookie, setCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { getOptionsHeadersWithOkta } from './identity';
+import {
+	getAuthStatus,
+	getOptionsHeadersWithOkta,
+	isUserLoggedInOktaRefactor,
+} from './identity';
 import {
 	adFreeDataIsPresent,
 	dateDiffDays,
 	fetchJson,
 	getAdFreeCookie,
-	getAuthStatus,
 	getLocalDate,
-	isUserLoggedInOktaRefactor,
 	noop,
 	setAdFreeCookie,
 	timeInDaysFromNow,

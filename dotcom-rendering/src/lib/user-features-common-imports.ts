@@ -1,11 +1,5 @@
 import { getCookie, setCookie } from '@guardian/libs';
 import EventEmitter from 'wolfy87-eventemitter';
-import type {
-	AuthStatus,
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from './identity';
-import { getAuthStatus } from './identity';
 
 const mediator = new EventEmitter();
 
@@ -179,70 +173,10 @@ const getLocalDate = (year: number, month: number, date: number): LocalDate => {
 
 // Types info coming from https://github.com/guardian/discussion-rendering/blob/fc14c26db73bfec8a04ff7a503ed9f90f1a1a8ad/src/types.ts
 
-type IdentityUserFromCache = {
-	dates: { accountCreatedDate: string };
-	publicFields: {
-		displayName: string;
-	};
-	statusFields: {
-		userEmailValidated: boolean;
-	};
-	id: number;
-	rawResponse: string;
-} | null;
-
-let userFromCookieCache: IdentityUserFromCache = null;
-
-const cookieName = 'GU_U';
-
 const idApiRoot =
 	window.guardian.config.page.idApiUrl ?? '/ID_API_ROOT_URL_NOT_FOUND';
 
 mediator.emit('module:identity:api:loaded');
-
-const decodeBase64 = (str: string): string =>
-	decodeURIComponent(
-		escape(
-			window.atob(
-				str.replace(/-/g, '+').replace(/_/g, '/').replace(/,/g, '='),
-			),
-		),
-	);
-
-const getUserCookie = (): string | null => getCookie({ name: cookieName });
-
-const getUserFromCookie = (): IdentityUserFromCache => {
-	if (userFromCookieCache === null) {
-		const cookieData = getUserCookie();
-
-		if (cookieData) {
-			const userData = JSON.parse(
-				decodeBase64(cookieData.split('.')[0] ?? ''),
-			) as string[];
-
-			const id = parseInt(userData[0] ?? '', 10);
-			const displayName = decodeURIComponent(userData[2] ?? '');
-			const accountCreatedDate = userData[6];
-			const userEmailValidated = Boolean(userData[7]);
-
-			if (id && accountCreatedDate) {
-				userFromCookieCache = {
-					id,
-					publicFields: {
-						displayName,
-					},
-					dates: { accountCreatedDate },
-					statusFields: {
-						userEmailValidated,
-					},
-					rawResponse: cookieData,
-				};
-			}
-		}
-	}
-
-	return userFromCookieCache;
-};
 
 /**
  * Fetch the logged in user's Google Tag ID from IDAPI
@@ -266,16 +200,6 @@ const fetchGoogleTagIdFromApi = (): Promise<string | null> =>
 			console.log('failed to get Identity user identifiers', e);
 			return null;
 		});
-
-const isUserLoggedIn = (): boolean => getUserFromCookie() !== null;
-
-const isUserLoggedInOktaRefactor = (): Promise<boolean> =>
-	getAuthStatus().then((authStatus) =>
-		authStatus.kind === 'SignedInWithCookies' ||
-		authStatus.kind === 'SignedInWithOkta'
-			? true
-			: false,
-	);
 
 /**
  * Decide request options based on an {@link AuthStatus}. Requests to authenticated APIs require different options depending on whether
@@ -302,18 +226,6 @@ const isUserLoggedInOktaRefactor = (): Promise<boolean> =>
  *   IDAPI was successful
  * - null, if the user is signed out or the fetch to IDAPI failed
  */
-
-const getGoogleTagId = (): Promise<string | null> =>
-	getAuthStatus().then((authStatus) => {
-		switch (authStatus.kind) {
-			case 'SignedInWithCookies':
-				return fetchGoogleTagIdFromApi();
-			case 'SignedInWithOkta':
-				return authStatus.idToken.claims.google_tag_id;
-			default:
-				return null;
-		}
-	});
 
 // from membership.ts - from types/membership';
 /**
@@ -342,24 +254,19 @@ export type UserFeaturesResponse = {
 	};
 };
 
-export {
-	isUserLoggedIn,
-	getAuthStatus,
-	isUserLoggedInOktaRefactor,
-	getGoogleTagId,
-};
-export type { AuthStatus };
-
 export type { LocalDate };
 
-export { getLocalDate };
+export {};
 
-export { dateDiffDays, isExpired };
-
-export { noop };
-
-export { fetchJson };
-
-export { setAdFreeCookie, getAdFreeCookie, adFreeDataIsPresent };
-
-export { timeInDaysFromNow, cookieIsExpiredOrMissing };
+export {
+	dateDiffDays,
+	isExpired,
+	getLocalDate,
+	noop,
+	fetchJson,
+	setAdFreeCookie,
+	getAdFreeCookie,
+	adFreeDataIsPresent,
+	timeInDaysFromNow,
+	cookieIsExpiredOrMissing,
+};

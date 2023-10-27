@@ -1,6 +1,6 @@
 import type { IdApiUserIdentifiers } from './getIdapiUserData';
 import { getIdapiUserIdentifiers } from './getIdapiUserData';
-import { eitherInOktaTestOrElse } from './useAuthStatus';
+import { eitherInOktaTestOrElse } from './identity';
 
 export const getBrazeUuid = async (ajaxUrl: string): Promise<string | void> =>
 	// TODO Okta: Remove either when at 100% in oktaVariant test, and just use idToken
