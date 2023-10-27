@@ -113,9 +113,9 @@ const buildCsp = (
 			? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com'
 			: ''
 	};
-    font-src 'self' https://assets.guim.co.uk https://interactive.guim.co.uk https://multimedia.guardianapis.com;
+    font-src 'self' https://assets.guim.co.uk https://interactive.guim.co.uk;
     connect-src 'self' https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/;
-    media-src 'self' https://audio.guim.co.uk/ https://multimedia.guardianapis.com
+    media-src 'self' https://audio.guim.co.uk/ https://multimedia.guardianapis.com https://cdn.theguardian.tv;
 `.trim();
 
 function buildCspEditions(
