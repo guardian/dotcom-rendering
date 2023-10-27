@@ -40,7 +40,9 @@ describe('ReaderRevenueLinks', () => {
 		shouldHideSupportMessaging.mockReturnValue(true);
 
 		const { getByText } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<ReaderRevenueLinks
 					urls={urls}
 					editionId="US"
@@ -59,7 +61,9 @@ describe('ReaderRevenueLinks', () => {
 		shouldHideSupportMessaging.mockReturnValue(false);
 
 		const { getByText } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<ReaderRevenueLinks
 					urls={urls}
 					editionId={edition}

@@ -11,6 +11,7 @@ import { InteractiveSupportButton } from './InteractiveSupportButton.importable'
 import { Island } from './Island';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
+import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { SetABTests } from './SetABTests.importable';
 import { Snow } from './Snow.importable';
@@ -97,7 +98,9 @@ describe('Island: server-side rendering', () => {
 	test('EnhancePinnedPost', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
 					<EnhancePinnedPost />
 				</ConfigProvider>,
 			),
@@ -183,6 +186,18 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
+	test('Metrics', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<Metrics commercialMetricsEnabled={true} tests={{}} />
+				</ConfigProvider>,
+			),
+		).not.toThrow();
+	});
+
 	test('SetABTests', () => {
 		expect(() =>
 			renderToString(
@@ -198,7 +213,9 @@ describe('Island: server-side rendering', () => {
 	test('StickyBottomBanner', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
 					<StickyBottomBanner
 						contentType=""
 						tags={[]}

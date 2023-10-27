@@ -14,7 +14,9 @@ const baseProperties = {
 describe('KeyEventsContainer', () => {
 	it('It should render KeyEventsContainer as expected', () => {
 		const { container } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<KeyEventsContainer
 					format={{
 						display: ArticleDisplay.Standard,
@@ -37,7 +39,9 @@ describe('KeyEventsContainer', () => {
 
 	it('It should not render events without a blockFirstPublished property', () => {
 		const { container } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<KeyEventsContainer
 					format={{
 						display: ArticleDisplay.Standard,
@@ -62,7 +66,9 @@ describe('KeyEventsContainer', () => {
 
 	it('It should not render events without a title property', () => {
 		const { container } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<KeyEventsContainer
 					format={{
 						display: ArticleDisplay.Standard,

@@ -7,16 +7,21 @@ import {
 	bypassCoreWebVitalsSampling,
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
-import { getCookie } from '@guardian/libs';
+import { getCookie, isString, isUndefined } from '@guardian/libs';
+import { useCallback, useEffect, useState } from 'react';
+import { getOphan } from '../client/ophan/ophan';
 import { billboardsInMerchHigh } from '../experiments/tests/billboards-in-merch-high';
 import { eagerPrebid } from '../experiments/tests/eager-prebid';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
-import { useOnce } from '../lib/useOnce';
+import type { ServerSideTests } from '../types/config';
+import type { RenderingTarget } from '../types/renderingTarget';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	commercialMetricsEnabled: boolean;
+	tests: ServerSideTests;
 };
 
 const sampling = 1 / 100;
@@ -31,33 +36,82 @@ const clientSideTestsToForceMetrics: ABTest[] = [
 	eagerPrebid,
 ];
 
-export const Metrics = ({ commercialMetricsEnabled }: Props) => {
+const useBrowserId = () => {
+	const [browserId, setBrowserId] = useState<string>();
+
+	useEffect(() => {
+		const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
+
+		const id = isString(cookie) ? cookie : 'no-browser-id-available';
+
+		setBrowserId(id);
+	}, []);
+
+	return browserId;
+};
+
+const usePageViewId = (renderingTarget: RenderingTarget) => {
+	const [id, setId] = useState<string>();
+
+	useEffect(() => {
+		getOphan(renderingTarget)
+			.then(({ pageViewId }) => {
+				setId(pageViewId);
+			})
+			.catch(() => {
+				setId('no-page-view-id-available');
+			});
+	}, [renderingTarget]);
+
+	return id;
+};
+
+const useDev = () => {
+	const [isDev, setIsDev] = useState<boolean>();
+
+	useEffect(() => {
+		setIsDev(
+			!!window.guardian.config.page.isDev ||
+				window.location.hostname === 'm.code.dev-theguardian.com' ||
+				window.location.hostname ===
+					(process.env.HOSTNAME ?? 'localhost') ||
+				window.location.hostname === 'preview.gutools.co.uk',
+		);
+	}, []);
+
+	return isDev;
+};
+
+export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 	const abTestApi = useAB()?.api;
 	const adBlockerInUse = useAdBlockInUse();
 
-	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
-	const { pageViewId } = window.guardian.config.ophan;
+	const { renderingTarget } = useConfig();
+	const browserId = useBrowserId();
+	const pageViewId = usePageViewId(renderingTarget);
 
-	const isDev =
-		!!window.guardian.config.page.isDev ||
-		window.location.hostname === 'm.code.dev-theguardian.com' ||
-		window.location.hostname === (process.env.HOSTNAME ?? 'localhost') ||
-		window.location.hostname === 'preview.gutools.co.uk';
+	const isDev = useDev();
 
-	const userInServerSideTest =
-		Object.keys(window.guardian.config.tests).length > 0;
+	const userInServerSideTest = Object.keys(tests).length > 0;
 
-	const shouldBypassSampling = (api: ABTestAPI) =>
-		willRecordCoreWebVitals ||
-		userInServerSideTest ||
-		clientSideTestsToForceMetrics.some((test) => api.runnableTest(test));
+	const shouldBypassSampling = useCallback(
+		(api: ABTestAPI) =>
+			willRecordCoreWebVitals ||
+			userInServerSideTest ||
+			clientSideTestsToForceMetrics.some((test) =>
+				api.runnableTest(test),
+			),
+		[userInServerSideTest],
+	);
 
-	useOnce(
+	useEffect(
 		function coreWebVitals() {
-			// abTestApi should be defined inside useOnce
-			const bypassSampling = abTestApi
-				? shouldBypassSampling(abTestApi)
-				: false;
+			if (isUndefined(abTestApi)) return;
+			if (isUndefined(browserId)) return;
+			if (isUndefined(isDev)) return;
+			if (isUndefined(pageViewId)) return;
+
+			const bypassSampling = shouldBypassSampling(abTestApi);
 
 			/**
 			 * We rely on `bypassSampling` rather than the built-in sampling,
@@ -76,22 +130,25 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 			if (bypassSampling || isDev)
 				void bypassCoreWebVitalsSampling('commercial');
 		},
-		[abTestApi],
+		[abTestApi, browserId, isDev, pageViewId, shouldBypassSampling],
 	);
 
-	useOnce(
+	useEffect(
 		function commercialMetrics() {
 			// Only send metrics if the switch is enabled
 			if (!commercialMetricsEnabled) return;
 
-			// abTestApi should be defined inside useOnce
-			const bypassSampling = abTestApi
-				? shouldBypassSampling(abTestApi)
-				: false;
+			if (isUndefined(abTestApi)) return;
+			if (isUndefined(adBlockerInUse)) return;
+			if (isUndefined(browserId)) return;
+			if (isUndefined(isDev)) return;
+			if (isUndefined(pageViewId)) return;
+
+			const bypassSampling = shouldBypassSampling(abTestApi);
 
 			initCommercialMetrics({
 				pageViewId,
-				browserId: browserId ?? undefined,
+				browserId,
 				isDev,
 				adBlockerInUse,
 			})
@@ -106,7 +163,15 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 					),
 				);
 		},
-		[abTestApi, adBlockerInUse, commercialMetricsEnabled],
+		[
+			abTestApi,
+			adBlockerInUse,
+			browserId,
+			commercialMetricsEnabled,
+			isDev,
+			pageViewId,
+			shouldBypassSampling,
+		],
 	);
 
 	// We don’t render anything
