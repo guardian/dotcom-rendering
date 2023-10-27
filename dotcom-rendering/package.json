@@ -106,7 +106,7 @@
 		"@types/connect": "3.4.35",
 		"@types/crypto-js": "4.1.1",
 		"@types/dompurify": "3.0.2",
-		"@types/express": "4.17.17",
+		"@types/express": "4.17.20",
 		"@types/express-serve-static-core": "4.17.33",
 		"@types/gapi.analytics": "0.0.4",
 		"@types/google.analytics": "0.0.42",
