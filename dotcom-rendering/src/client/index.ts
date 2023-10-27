@@ -110,17 +110,6 @@ void (async () => {
 	 *
 	 *************************************************************/
 
-	/*************************************************************
-	 *
-	 * The following modules are lazy loaded,
-	 * because they are lower priority and do not want to block
-	 * the modules above on loading these.
-	 *
-	 * We are not assigning chunk name to allow Webpack
-	 * to optimise chunking based on its algorithm.
-	 *
-	 *************************************************************/
-
 	void startup(
 		'atomIframe',
 		() =>

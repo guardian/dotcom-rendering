@@ -1,7 +1,5 @@
 import { getCookie, setCookie } from '@guardian/libs';
 
-// from cookies
-
 const timeInDaysFromNow = (daysFromNow: number): string => {
 	const tmpDate = new Date();
 	tmpDate.setDate(tmpDate.getDate() + daysFromNow);
@@ -15,8 +13,6 @@ const cookieIsExpiredOrMissing = (cookieName: string): boolean => {
 	const timeNow = new Date().getTime();
 	return timeNow >= expiryTime;
 };
-
-// from manage-ad-free-cookies
 
 const AD_FREE_USER_COOKIE = 'GU_AF1';
 
@@ -43,8 +39,6 @@ const setAdFreeCookie = (daysToLive = 1): void => {
 		daysToLive,
 	});
 };
-
-// from lib/utils/fetch-json
 
 /**
  * Check that path is a path-absolute-URL string as described in https://url.spec.whatwg.org/#path-absolute-url-string
@@ -85,8 +79,6 @@ const fetchJson = async (
 	}
 	throw new Error(`Fetch error while requesting ${path}: ${resp.statusText}`);
 };
-
-// from types/dates
 
 const dates = {
 	1: '01',
