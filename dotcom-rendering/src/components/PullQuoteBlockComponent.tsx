@@ -153,7 +153,6 @@ const supportingQuoteCss = css`
 		position: relative;
 		border: 1px solid ${palette('--pullquote-border')};
 		padding: 10px;
-		margin-left: 10px;
 		/* Partially left */
 		width: 240px;
 		margin-left: -100px;
