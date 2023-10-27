@@ -90,6 +90,25 @@ void (async () => {
 			priority: 'critical',
 		},
 	);
+	void startup(
+		'userFeatures',
+		() =>
+			import(/* webpackMode: 'eager' */ './userFeatures').then(
+				({ userFeatures }) => userFeatures(),
+			),
+		{ priority: 'critical' },
+	);
+
+	/*************************************************************
+	 *
+	 * The following modules are lazy loaded,
+	 * because they are lower priority and do not want to block
+	 * the modules above on loading these.
+	 *
+	 * We are not assigning chunk name to allow Webpack
+	 * to optimise chunking based on its algorithm.
+	 *
+	 *************************************************************/
 
 	/*************************************************************
 	 *

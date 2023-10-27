@@ -173,8 +173,8 @@ const getLocalDate = (year: number, month: number, date: number): LocalDate => {
 
 // Types info coming from https://github.com/guardian/discussion-rendering/blob/fc14c26db73bfec8a04ff7a503ed9f90f1a1a8ad/src/types.ts
 
-const idApiRoot =
-	window.guardian.config.page.idApiUrl ?? '/ID_API_ROOT_URL_NOT_FOUND';
+// const idApiRoot =
+// 	window.guardian.config.page.idApiUrl ?? '/ID_API_ROOT_URL_NOT_FOUND';
 
 mediator.emit('module:identity:api:loaded');
 
@@ -184,22 +184,22 @@ mediator.emit('module:identity:api:loaded');
  * - string - the user's Google Tag ID
  * - null - if the request failed
  */
-const fetchGoogleTagIdFromApi = (): Promise<string | null> =>
-	fetch(`${idApiRoot}/user/me/identifiers`, {
-		mode: 'cors',
-		credentials: 'include',
-	})
-		.then((resp) => {
-			if (resp.status === 200) {
-				return resp.json() as Promise<{ googleTagId: string }>;
-			}
-			throw resp.status;
-		})
-		.then((json) => json.googleTagId)
-		.catch((e) => {
-			console.log('failed to get Identity user identifiers', e);
-			return null;
-		});
+// const fetchGoogleTagIdFromApi = (): Promise<string | null> =>
+// 	fetch(`${idApiRoot}/user/me/identifiers`, {
+// 		mode: 'cors',
+// 		credentials: 'include',
+// 	})
+// 		.then((resp) => {
+// 			if (resp.status === 200) {
+// 				return resp.json() as Promise<{ googleTagId: string }>;
+// 			}
+// 			throw resp.status;
+// 		})
+// 		.then((json) => json.googleTagId)
+// 		.catch((e) => {
+// 			console.log('failed to get Identity user identifiers', e);
+// 			return null;
+// 		});
 
 /**
  * Decide request options based on an {@link AuthStatus}. Requests to authenticated APIs require different options depending on whether
