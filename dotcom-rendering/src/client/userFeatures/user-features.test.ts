@@ -1,21 +1,25 @@
 import { getCookie, removeCookie, setCookie } from '@guardian/libs';
-import { fetchJSON as fetchJson } from '../../../../scripts/deno/json';
 import type { AuthStatus } from '../../lib/identity';
 import {
 	getAuthStatus as getAuthStatus_,
 	isUserLoggedInOktaRefactor as isUserLoggedInOktaRefactor_,
 } from '../../lib/identity';
 import { isDigitalSubscriber, refresh } from './user-features';
+import { fetchJson } from './user-features-lib';
 
-// jest.mock('lib/identity');
+jest.mock('./user-features-lib', () => {
+	// Only mock the fetchJson function, rather than the whole module
+	const original = jest.requireActual('./user-features-lib');
+	return {
+		...original,
+		fetchJson: jest.fn(() => Promise.resolve()),
+	};
+});
+
 jest.mock('../../lib/identity', () => ({
 	isUserLoggedInOktaRefactor: jest.fn(),
 	getAuthStatus: jest.fn(),
 	getOptionsHeadersWithOkta: jest.fn(),
-}));
-
-jest.mock('../../../../scripts/deno/json', () => ({
-	fetchJson: jest.fn(() => Promise.resolve()),
 }));
 
 const fetchJsonSpy = fetchJson as jest.MockedFunction<typeof fetchJson>;
