@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
-import { Standard } from '../../lib/articles';
+import { Standard } from '../../fixtures/manual/standard-article';
 
 const visitArticleNoOkta = () =>
 	cy.visit('http://localhost:9000/Article/', {
