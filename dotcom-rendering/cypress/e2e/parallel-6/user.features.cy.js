@@ -3,7 +3,7 @@
 import { Standard } from '../../lib/articles';
 
 const visitArticleNoOkta = () =>
-	cy.visit('http://localhost:3030/Article/', {
+	cy.visit('http://localhost:9000/Article/', {
 		method: 'POST',
 		body: JSON.stringify({
 			...Standard,
