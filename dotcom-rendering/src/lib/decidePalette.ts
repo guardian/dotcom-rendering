@@ -878,24 +878,6 @@ const backgroundSectionTitle = (format: ArticleFormat): string => {
 	}
 };
 
-const backgroundAvatar = (format: ArticleFormat): string => {
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.LiveBlog &&
-		format.design !== ArticleDesign.DeadBlog
-	)
-		return palette.specialReportAlt[300];
-
-	switch (format.theme) {
-		case ArticleSpecial.SpecialReport:
-			return specialReport[800];
-		case Pillar.Opinion:
-			return pillarPalette[Pillar.Opinion].main;
-		default:
-			return pillarPalette[format.theme].bright;
-	}
-};
-
 const backgroundCard = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[700];
@@ -2307,7 +2289,6 @@ export const decidePalette = (
 			audioAtom: backgroundAudioAtom(format),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
-			avatar: backgroundAvatar(format),
 			card: overrides?.background.card ?? backgroundCard(format),
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),

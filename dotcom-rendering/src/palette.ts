@@ -1,6 +1,11 @@
 // ----- Imports ----- //
 
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
 import { buttonThemeDefault } from '@guardian/source-react-components';
 import { decidePalette } from './lib/decidePalette';
@@ -37,6 +42,87 @@ const headlineBackgroundColourDark = ({ design }: ArticleFormat): string => {
 			return sourcePalette.news[200];
 		default:
 			return sourcePalette.neutral[7];
+	}
+};
+
+const avatarLight = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[800];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.News:
+					return sourcePalette.news[500];
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[800];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.News:
+					return sourcePalette.news[500];
+			}
+	}
+};
+
+const avatarDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.neutral[20];
+			}
+		default:
+			return sourcePalette.neutral[20];
 	}
 };
 
@@ -290,6 +376,10 @@ const paletteColours = {
 	'--click-to-view-button-hover': {
 		light: clickToViewButtonHoverLight,
 		dark: clickToViewButtonHoverDark,
+	},
+	'--avatar-background': {
+		light: avatarLight,
+		dark: avatarDark,
 	},
 } satisfies PaletteColours;
 
