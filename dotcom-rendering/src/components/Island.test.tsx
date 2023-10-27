@@ -189,7 +189,9 @@ describe('Island: server-side rendering', () => {
 	test('Metrics', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
 					<Metrics commercialMetricsEnabled={true} tests={{}} />
 				</ConfigProvider>,
 			),
