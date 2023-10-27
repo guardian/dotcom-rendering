@@ -2524,7 +2524,7 @@ const subNavLink = (format: ArticleFormat) => {
 	}
 };
 
-const pullQuoteTextColourLight = ({ design, theme }: ArticleFormat): string => {
+const pullQuoteTextLight = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -2557,7 +2557,8 @@ const pullQuoteTextColourLight = ({ design, theme }: ArticleFormat): string => {
 			return sourcePalette.neutral[7];
 	}
 };
-const pullQuoteTextColourDark = ({ design, theme }: ArticleFormat): string => {
+
+const pullQuoteTextDark = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -2591,16 +2592,28 @@ const pullQuoteTextColourDark = ({ design, theme }: ArticleFormat): string => {
 	}
 };
 
-const pullQuoteBackgroundColourLight = (format: ArticleFormat): string => {
+const pullQuoteBackgroundLight = (format: ArticleFormat): string => {
 	const articleBackground = decidePalette(format).background.article;
 	if (articleBackground === 'transparent') return sourcePalette.neutral[100];
 	return articleBackground;
 };
 
-const pullQuoteBackgroundColourDark = (format: ArticleFormat): string => {
+const pullQuoteBackgroundDark = (format: ArticleFormat): string => {
 	const articleBackground = decidePalette(format).background.article;
 	if (articleBackground === 'transparent') return sourcePalette.neutral[0];
 	return articleBackground;
+};
+
+const pullQuoteBorderLight = (): string => sourcePalette.neutral[86];
+const pullQuoteBorderDark = (): string => sourcePalette.neutral[60];
+
+const pullQuoteIconLight = (format: ArticleFormat): string => {
+	const text = pullQuoteTextLight(format);
+	return text === sourcePalette.neutral[7] ? pullQuoteBorderDark() : text;
+};
+const pullQuoteIconDark = (format: ArticleFormat): string => {
+	const text = pullQuoteTextDark(format);
+	return text === sourcePalette.neutral[97] ? pullQuoteBorderLight() : text;
 };
 
 const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
@@ -3560,12 +3573,20 @@ const paletteColours = {
 		dark: mostViewedFooterHoverDark,
 	},
 	'--pullquote-text': {
-		light: pullQuoteTextColourLight,
-		dark: pullQuoteTextColourDark,
+		light: pullQuoteTextLight,
+		dark: pullQuoteTextDark,
 	},
 	'--pullquote-background': {
-		light: pullQuoteBackgroundColourLight,
-		dark: pullQuoteBackgroundColourDark,
+		light: pullQuoteBackgroundLight,
+		dark: pullQuoteBackgroundDark,
+	},
+	'--pullquote-border': {
+		light: pullQuoteBorderLight,
+		dark: pullQuoteBorderDark,
+	},
+	'--pullquote-icon': {
+		light: pullQuoteIconLight,
+		dark: pullQuoteIconDark,
 	},
 } satisfies PaletteColours;
 

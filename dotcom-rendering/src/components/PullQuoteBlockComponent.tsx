@@ -5,9 +5,8 @@ import { unescapeData } from '../lib/escapeData';
 import { palette } from '../palette';
 import { QuoteIcon } from './QuoteIcon';
 
-const quoteColour = palette('--pullquote-text');
 const pullQuoteCss = css`
-	color: ${quoteColour};
+	color: ${palette('--pullquote-text')};
 `;
 
 const fontCss = (role: string, format: ArticleFormat) => {
@@ -144,14 +143,17 @@ const supportingQuoteCss = css`
 	position: relative;
 	width: 40%;
 	background-color: ${palette('--pullquote-background')};
-	margin: 10px;
+	margin-top: 2px;
+	margin-right: 10px;
+	margin-bottom: 14px;
 	clear: left;
 	float: left;
 
 	${from.leftCol} {
 		position: relative;
-		border: 1px solid currentColor;
+		border: 1px solid ${palette('--pullquote-border')};
 		padding: 10px;
+		margin-left: 10px;
 		/* Partially left */
 		width: 240px;
 		margin-left: -100px;
@@ -159,8 +161,8 @@ const supportingQuoteCss = css`
 `;
 
 const blockquoteCss = css`
-	margin-left: 1px;
 	display: inline;
+	font-style: italic;
 `;
 
 type Props = {
@@ -186,7 +188,7 @@ export const PullQuoteBlockComponent = ({
 				role === 'supporting' ? supportingQuoteCss : inlineQuoteCss,
 			]}
 		>
-			<QuoteIcon colour={quoteColour} />
+			<QuoteIcon colour={palette('--pullquote-icon')} />
 			<blockquote
 				css={blockquoteCss}
 				dangerouslySetInnerHTML={{
