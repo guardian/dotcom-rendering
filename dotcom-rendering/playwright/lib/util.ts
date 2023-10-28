@@ -38,9 +38,12 @@ const waitForIsland = async (page: Page, island: string): Promise<void> => {
 	// scroll to it
 	await islandLocator.scrollIntoViewIfNeeded();
 	// wait for it to be hydrated
-	const hyrdatedIslandSelector = `gu-island[name="${island}"][data-island-status="hydrated"]`;
+	const hyrdatedIslandSelector = `gu-island[name="${island}"][data-island-status="rendered"]`;
 	const hyrdatedIslandLocator = page.locator(hyrdatedIslandSelector);
-	await hyrdatedIslandLocator.waitFor({ state: 'visible', timeout: 120000 });
+	await hyrdatedIslandLocator.waitFor({
+		state: 'visible',
+		timeout: 120000,
+	});
 };
 
 export { clearCookie, waitForIsland, setUrlFragment };

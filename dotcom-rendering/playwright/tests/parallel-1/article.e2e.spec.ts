@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { disableCMP } from '../../lib/cmp';
+import { cmpAcceptAll, disableCMP } from '../../lib/cmp';
 import { loadPage } from '../../lib/load-page';
 import { waitForIsland } from '../../lib/util';
 
@@ -15,8 +15,8 @@ test.describe('E2E Page rendering', () => {
 				`/Article/https://www.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
 			);
 
-			// await waitForIsland(page, 'MostViewedFooterData');
-			await expect(page.locator('header').first()).toContainText(
+			await waitForIsland(page, 'MostViewedFooterData');
+			await expect(page.locator('[data-gu-name="title"]')).toContainText(
 				'Opinion',
 			);
 

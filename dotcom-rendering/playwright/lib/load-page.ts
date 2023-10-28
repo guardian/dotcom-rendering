@@ -1,4 +1,4 @@
-import { type Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
 
 const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
