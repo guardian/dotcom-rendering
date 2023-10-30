@@ -1,6 +1,8 @@
 import 'source-map-support/register';
 import { App } from 'aws-cdk-lib';
+import { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { DotcomRendering } from '../lib/dotcom-rendering';
+import { DotcomRenderingHalloween } from '../lib/dotcom-rendering-halloween';
 
 const app = new App();
 
@@ -44,4 +46,13 @@ new DotcomRendering(app, 'DotcomRendering-front-web-PROD', {
 	minCapacity: 1,
 	maxCapacity: 4,
 	instanceType: 't4g.micro',
+});
+
+// TODO: understand what the implications of this would be
+new DotcomRenderingHalloween(app, 'DotcomRendering-Halloween-CODE', {
+	stack: 'frontend',
+	app: 'rendering-halloween',
+	stage: 'CODE',
+	instanceSize: InstanceSize.MICRO,
+	scaling: { minimumInstances: 1, maximumInstances: 2 },
 });

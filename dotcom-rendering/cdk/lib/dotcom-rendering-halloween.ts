@@ -5,15 +5,12 @@ import type { NoMonitoring } from '@guardian/cdk/lib/constructs/cloudwatch';
 import { GuStack, type GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import type { App } from 'aws-cdk-lib';
-import { Monitoring } from 'aws-cdk-lib/aws-autoscaling';
 import {
 	InstanceClass,
 	type InstanceSize,
 	InstanceType,
-	IpAddresses,
 	Peer,
 } from 'aws-cdk-lib/aws-ec2';
-import { satisfies } from 'compare-versions';
 import { getUserData } from './userData';
 
 interface DCRHalloweenProps extends GuStackProps {
@@ -52,7 +49,7 @@ export class DotcomRenderingHalloween extends GuStack {
 			stage === 'PROD'
 				? ({
 						snsTopicName: `Frontend-${stage}-CriticalAlerts`,
-						// TODO - how does this overlap with the DevX debug dashboard?
+						// TODO – how does this overlap with the DevX debug dashboard?
 						http5xxAlarm: {
 							tolerated5xxPercentage: 10,
 							numberOfMinutesAboveThresholdBeforeAlarm: 1,
@@ -65,12 +62,13 @@ export class DotcomRenderingHalloween extends GuStack {
 			// access: '',
 			app,
 			access: {
-				// TODO - ask DevX about Peer & CIDR ranges (and VPCs)
+				// TODO – ask DevX about Peer & CIDR ranges (and VPCs)
 				// … and what would be the meaning of an empty array?
 				// Should it be [IPeer, …IPeer[]]
 				cidrRanges: [Peer.ipv4(vpcCidrBlock)],
 				scope: AccessScope.INTERNAL,
 			},
+			// TODO – is this true? Should every GuNodeApp need to be public facing?
 			certificateProps: { domainName: 'www.theguardian.com' },
 			instanceType: InstanceType.of(InstanceClass.T4G, instanceSize),
 			monitoringConfiguration,
