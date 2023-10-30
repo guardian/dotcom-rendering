@@ -37,4 +37,5 @@ jobs:
 
           # report exclusively on the “web” bundle – no “apps”, “variant” or other
           # https://github.com/preactjs/compressed-size-action#customizing-the-list-of-files
+          # The default hash digest is set to 20 chars in Webpack
           pattern: 'dotcom-rendering/dist/*.web.????????????????????.js'
