@@ -94,6 +94,15 @@ void (async () => {
 		},
 	);
 
+	void startup(
+		'userFeatures',
+		() =>
+			import(/* webpackMode: 'eager' */ './userFeatures').then(
+				({ userFeatures }) => userFeatures(),
+			),
+		{ priority: 'critical' },
+	);
+
 	/*************************************************************
 	 *
 	 * The following modules are lazy loaded,
