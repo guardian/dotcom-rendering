@@ -2,11 +2,11 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { getCookie } from '@guardian/libs';
+import type { CountryCode } from '@guardian/libs';
+import { getCookie, isString, isUndefined } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
-import { getLocaleCode } from '../lib/getCountryCode';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -15,6 +15,7 @@ import type {
 import { pickMessage } from '../lib/messagePicker';
 import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
 import { AdSlot } from './AdSlot.web';
@@ -62,7 +63,7 @@ const buildReaderRevenueEpicConfig = (
 
 const buildBrazeEpicConfig = (
 	brazeMessages: BrazeMessagesInterface,
-	countryCode: string,
+	countryCode: CountryCode,
 	idApiUrl: string,
 	contentType: string,
 	brazeArticleContext: BrazeArticleContext,
@@ -106,6 +107,20 @@ function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
 	}
 }
 
+const useBrowserId = () => {
+	const [browserId, setBrowserId] = useState<string>();
+
+	useEffect(() => {
+		const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
+
+		const id = isString(cookie) ? cookie : 'no-browser-id-available';
+
+		setBrowserId(id);
+	}, []);
+
+	return browserId;
+};
+
 export const SlotBodyEnd = ({
 	contentType,
 	sectionId,
@@ -123,9 +138,9 @@ export const SlotBodyEnd = ({
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
-	const [countryCode, setCountryCode] = useState<string>();
+	const countryCode = useCountryCode('slot-body-end');
 	const isSignedIn = getIsSignedIn(useAuthStatus());
-	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
+	const browserId = useBrowserId();
 	const [SelectedEpic, setSelectedEpic] = useState<
 		React.ElementType | null | undefined
 	>();
@@ -140,19 +155,6 @@ export const SlotBodyEnd = ({
 		window.guardian.config.switches.articleEndSlot;
 
 	useEffect(() => {
-		const callFetch = () => {
-			getLocaleCode()
-				.then((cc) => {
-					setCountryCode(cc ?? '');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${String(e)}`),
-				);
-		};
-		callFetch();
-	}, []);
-
-	useEffect(() => {
 		setAsyncArticleCount(
 			getArticleCounts(pageId, keywordIds).then(
 				(counts) => counts?.weeklyArticleHistory,
@@ -161,6 +163,8 @@ export const SlotBodyEnd = ({
 	}, [pageId, keywordIds]);
 
 	useOnce(() => {
+		if (isUndefined(countryCode)) return;
+
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
 			isSignedIn,
 			countryCode,
@@ -176,14 +180,14 @@ export const SlotBodyEnd = ({
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
 			>,
-			browserId: browserId ?? undefined,
+			browserId,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
 		};
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as BrazeMessagesInterface,
-			countryCode as string,
+			countryCode,
 			idApiUrl,
 			contentType,
 			brazeArticleContext,
@@ -200,7 +204,7 @@ export const SlotBodyEnd = ({
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);
-	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
+	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount, browserId]);
 
 	useEffect(() => {
 		if (SelectedEpic === null && showArticleEndSlot) {

@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { CountryCode } from '@guardian/libs';
 import { getCookie, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
@@ -14,9 +13,9 @@ import {
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
-import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
 import type { TagType } from '../types/tag';
 
@@ -28,26 +27,6 @@ type Props = {
 	contributionsServiceUrl: string;
 	pageId: string;
 	keywordIds: string;
-};
-
-const useCountryCode = () => {
-	const [countryCode, setCountryCode] = useState<CountryCode | null>();
-
-	useEffect(() => {
-		getLocaleCode()
-			.then((cc) => {
-				setCountryCode(cc);
-			})
-			.catch((e) => {
-				const msg = `Error fetching country code: ${String(e)}`;
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'liveblog-epic',
-				);
-			});
-	}, []);
-
-	return countryCode;
 };
 
 const useEpic = ({ url, name }: { url: string; name: string }) => {
@@ -118,7 +97,7 @@ const usePayload = ({
 }): EpicPayload | undefined => {
 	const articleCounts = useArticleCounts(pageId, keywordIds);
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
-	const countryCode = useCountryCode();
+	const countryCode = useCountryCode('liveblog-epic');
 	const mvtId = useMvtId();
 	const authStatus = useAuthStatus();
 	const isSignedIn =

@@ -9,21 +9,24 @@ export default {
 	title: 'Components/AdSlot.apps',
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.phablet, breakpoints.tablet],
+			viewports: [breakpoints.mobile, breakpoints.tablet],
 		},
 		viewport: {
-			defaultViewport: 'phablet',
+			defaultViewport: 'mobile',
 		},
 	},
 	argTypes: {
 		onClickSupportButton: { action: 'clicked' },
 	},
 	decorators: [
-		splitTheme({
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		}),
+		splitTheme(
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+			{ orientation: 'vertical' },
+		),
 	],
 };
 

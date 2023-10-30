@@ -5,6 +5,10 @@ import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { Decorator } from '@storybook/react';
 import { ArticleFormat } from '@guardian/libs';
 
+interface Orientation {
+	orientation?: 'horizontal' | 'vertical';
+}
+
 const headerCss = css`
 	font-size: 18px;
 	width: 100%;
@@ -14,19 +18,24 @@ const headerCss = css`
 `;
 
 const splitCss = css`
-	width: 50%;
 	padding: ${space[4]}px;
 `;
 
 const darkStoryCss = css`
-	float: right;
 	background-color: ${sourcePalette.neutral[0]};
 	color: ${sourcePalette.neutral[100]};
 `;
 const lightStoryCss = css`
-	float: left;
 	background-color: ${sourcePalette.neutral[100]};
 	color: ${sourcePalette.neutral[0]};
+`;
+const rowCss = css`
+	display: flex;
+	flex-direction: row;
+`;
+const columnCss = css`
+	display: flex;
+	flex-direction: column;
 `;
 
 // ----- Decorators ----- //
@@ -37,31 +46,36 @@ const lightStoryCss = css`
  * Using a split screen
  */
 export const splitTheme =
-	(format: ArticleFormat): Decorator =>
+	(
+		format: ArticleFormat,
+		{ orientation = 'horizontal' }: Orientation = {},
+	): Decorator =>
 	(Story) =>
 		(
 			<>
-				<div
-					className="left-lightTheme"
-					css={[
-						splitCss,
-						lightStoryCss,
-						css(paletteDeclarations(format, 'light')),
-					]}
-				>
-					<div css={headerCss}>Light Theme ☀️</div>
-					<Story />
-				</div>
-				<div
-					className="right-darkTheme"
-					css={[
-						splitCss,
-						darkStoryCss,
-						css(paletteDeclarations(format, 'dark')),
-					]}
-				>
-					<div css={headerCss}>Dark Theme 🌙</div>
-					<Story />
+				<div css={[orientation === 'horizontal' ? rowCss : columnCss]}>
+					<div
+						className="left-lightTheme"
+						css={[
+							splitCss,
+							lightStoryCss,
+							css(paletteDeclarations(format, 'light')),
+						]}
+					>
+						<div css={headerCss}>Light Theme ☀️</div>
+						<Story />
+					</div>
+					<div
+						className="right-darkTheme"
+						css={[
+							splitCss,
+							darkStoryCss,
+							css(paletteDeclarations(format, 'dark')),
+						]}
+					>
+						<div css={headerCss}>Dark Theme 🌙</div>
+						<Story />
+					</div>
 				</div>
 			</>
 		);
