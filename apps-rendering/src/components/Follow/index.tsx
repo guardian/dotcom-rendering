@@ -8,7 +8,7 @@ import { remSpace, textSans } from '@guardian/source-foundations';
 import { FollowNotificationStatus } from 'components/FollowStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
-import { background, text } from 'palette';
+import { background, fill, text } from 'palette';
 import { type FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -32,7 +32,7 @@ const followIconStyles: SerializedStyles = css`
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.small()}
-	color: ${text.follow(format)};
+	color:  ${text.follow(format)};
 	display: block;
 	padding: 0;
 	border: none;
@@ -41,13 +41,16 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	margin-top: ${remSpace[1]};
 
 	${darkModeCss`
-		color: ${text.followDark(format)};
+		color:  ${text.followDark(format)};
 	`}
 
 	.notifications-on, .tag-following {
 		${followButtonStyles}
 		padding-top: 0.15ch;
-		background-color: currentColor;
+		background-color: ${fill.icon(format)};
+		${darkModeCss`
+			background-color: ${fill.iconDark(format)};
+		`}
 
 		svg {
 			fill: ${background.articleContent(format)};
@@ -60,12 +63,18 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	.notifications-off,
 	.tag-not-following {
 		${followButtonStyles}
-		border: 1px solid currentColor;
 		background-color: none;
+		border: 1px solid ${fill.icon(format)};
+		${darkModeCss`
+				border: 1px solid ${fill.iconDark(format)};
+		`}
 
 		svg {
-			fill: currentColor;
+			fill: ${fill.icon(format)};
 			${followIconStyles}
+			${darkModeCss`
+				fill: ${fill.iconDark(format)};
+			`}
 		}
 	}
 `;
