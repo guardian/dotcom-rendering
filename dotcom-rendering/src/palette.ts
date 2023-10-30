@@ -2,6 +2,7 @@
 
 import {
 	ArticleDesign,
+	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
@@ -9,6 +10,7 @@ import {
 import { palette as sourcePalette } from '@guardian/source-foundations';
 import { buttonThemeDefault } from '@guardian/source-react-components';
 import { decidePalette } from './lib/decidePalette';
+import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
 
@@ -236,6 +238,313 @@ const clickToViewButtonHoverLight = (): string =>
 	buttonThemeDefault.button.backgroundPrimaryHover;
 const clickToViewButtonHoverDark = (): string => sourcePalette.neutral[86];
 
+const standfirstBulletDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[46];
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.Opinion:
+					return sourcePalette.opinion[550];
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.News:
+					return sourcePalette.news[550];
+				default:
+					return sourcePalette.neutral[46];
+			}
+		default:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				default:
+					return sourcePalette.neutral[46];
+			}
+	}
+};
+
+const standfirstBulletLight = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+			return sourcePalette.neutral[60];
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[600];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[600];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.news[600];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[700];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[600];
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[86];
+			}
+	}
+};
+
+const standfirstLinkBorderLight = ({
+	design,
+	theme,
+}: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[600];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[600];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.news[600];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[450];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[600];
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return transparentColour(sourcePalette.neutral[60], 0.3);
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[60];
+				default:
+					return sourcePalette.neutral[86];
+			}
+	}
+};
+const standfirstLinkBorderDark = (): string => {
+	return sourcePalette.neutral[46];
+};
+
+const standfirstLinkTextLight = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[100];
+		case ArticleDesign.DeadBlog:
+			switch (theme) {
+				case Pillar.Opinion:
+					return sourcePalette.opinion[200];
+				case Pillar.News:
+					return sourcePalette.news[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[300];
+				case Pillar.Sport:
+					return sourcePalette.sport[300];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+			}
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case Pillar.Opinion:
+					return sourcePalette.opinion[200];
+				case Pillar.Culture:
+				case Pillar.News:
+					return sourcePalette.news[300];
+				case Pillar.Sport:
+					return sourcePalette.sport[300];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+			}
+
+		case ArticleDesign.Picture:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[500];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[300];
+				case Pillar.News:
+					return sourcePalette.news[400];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+			}
+	}
+};
+const standfirstLinkTextDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[100];
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[500];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+				default:
+					return sourcePalette.neutral[60];
+			}
+		default: {
+			return sourcePalette.neutral[60];
+		}
+	}
+};
+
+const standfirstTextLight = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[100];
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
+		default:
+			if (
+				format.theme === ArticleSpecial.SpecialReportAlt &&
+				format.design !== ArticleDesign.DeadBlog
+			) {
+				return sourcePalette.specialReportAlt[100];
+			}
+			return sourcePalette.neutral[0];
+	}
+};
+
+const standfirstTextDark = ({
+	design,
+	display,
+	theme,
+}: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[93];
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			if (display === ArticleDisplay.Immersive) {
+				switch (theme) {
+					case ArticleSpecial.SpecialReportAlt:
+						return sourcePalette.neutral[93];
+					default:
+						return sourcePalette.neutral[60];
+				}
+			}
+
+			return sourcePalette.neutral[60];
+		default:
+			return sourcePalette.neutral[60];
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -380,6 +689,22 @@ const paletteColours = {
 	'--avatar-background': {
 		light: avatarLight,
 		dark: avatarDark,
+	},
+	'--standfirst-text': {
+		light: standfirstTextLight,
+		dark: standfirstTextDark,
+	},
+	'--standfirst-bullet': {
+		light: standfirstBulletLight,
+		dark: standfirstBulletDark,
+	},
+	'--standfirst-link-text': {
+		light: standfirstLinkTextLight,
+		dark: standfirstLinkTextDark,
+	},
+	'--standfirst-link-border': {
+		light: standfirstLinkBorderLight,
+		dark: standfirstLinkBorderDark,
 	},
 } satisfies PaletteColours;
 
