@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 
 const quoteStyles = (colour: string) => css`
-	height: 1em;
+	height: 0.95em;
 	width: 1.5em;
-	margin-right: 3px;
 	vertical-align: baseline;
 	fill: ${colour};
 `;

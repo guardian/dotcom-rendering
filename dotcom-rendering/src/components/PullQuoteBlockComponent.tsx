@@ -152,10 +152,11 @@ const supportingQuoteCss = css`
 	${from.leftCol} {
 		position: relative;
 		border: 1px solid ${palette('--pullquote-border')};
-		padding: 10px;
+		padding: 2px 10px 16px 10px;
 		/* Partially left */
 		width: 240px;
 		margin-left: -100px;
+		margin-top: 5px;
 	}
 `;
 
