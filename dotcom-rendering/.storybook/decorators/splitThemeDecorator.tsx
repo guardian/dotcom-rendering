@@ -6,7 +6,7 @@ import { Decorator } from '@storybook/react';
 import { ArticleFormat } from '@guardian/libs';
 
 interface Orientation {
-	orientation?: 'row' | 'column';
+	orientation?: 'horizontal' | 'vertical';
 }
 
 const headerCss = css`
@@ -48,12 +48,12 @@ const columnCss = css`
 export const splitTheme =
 	(
 		format: ArticleFormat,
-		{ orientation = 'row' }: Orientation = {},
+		{ orientation = 'horizontal' }: Orientation = {},
 	): Decorator =>
 	(Story) =>
 		(
 			<>
-				<div css={[orientation === 'row' ? rowCss : columnCss]}>
+				<div css={[orientation === 'horizontal' ? rowCss : columnCss]}>
 					<div
 						className="left-lightTheme"
 						css={[

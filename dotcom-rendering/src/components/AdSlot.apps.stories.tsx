@@ -25,7 +25,7 @@ export default {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.News,
 			},
-			{ orientation: 'column' },
+			{ orientation: 'vertical' },
 		),
 	],
 };
