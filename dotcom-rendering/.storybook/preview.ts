@@ -153,7 +153,7 @@ const defaultFormat = {
 
 export default {
 	args: {
-		config: { renderingTarget: 'Web' },
+		config: { renderingTarget: 'Web', darkModeAvailable: false },
 	},
 	decorators: [
 		// @ts-expect-error -- this global decorator takes an option parameter

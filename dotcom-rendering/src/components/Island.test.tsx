@@ -11,8 +11,10 @@ import { InteractiveSupportButton } from './InteractiveSupportButton.importable'
 import { Island } from './Island';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
+import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { SetABTests } from './SetABTests.importable';
+import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { Snow } from './Snow.importable';
 import { StickyBottomBanner } from './StickyBottomBanner.importable';
 
@@ -97,7 +99,9 @@ describe('Island: server-side rendering', () => {
 	test('EnhancePinnedPost', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
 					<EnhancePinnedPost />
 				</ConfigProvider>,
 			),
@@ -183,6 +187,18 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
+	test('Metrics', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<Metrics commercialMetricsEnabled={true} tests={{}} />
+				</ConfigProvider>,
+			),
+		).not.toThrow();
+	});
+
 	test('SetABTests', () => {
 		expect(() =>
 			renderToString(
@@ -195,10 +211,38 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
+	test('SlotBodyEnd', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<SlotBodyEnd
+						contentType={''}
+						sectionId={''}
+						shouldHideReaderRevenue={false}
+						isMinuteArticle={false}
+						isPaidContent={false}
+						tags={[]}
+						contributionsServiceUrl={''}
+						idApiUrl={''}
+						stage={''}
+						pageId={''}
+						keywordIds={''}
+						renderAds={false}
+						isLabs={false}
+					/>
+				</ConfigProvider>,
+			),
+		).not.toThrow();
+	});
+
 	test('StickyBottomBanner', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
 					<StickyBottomBanner
 						contentType=""
 						tags={[]}

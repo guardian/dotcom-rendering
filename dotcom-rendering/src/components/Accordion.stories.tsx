@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { body, breakpoints, from, space } from '@guardian/source-foundations';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Accordion } from './Accordion';
 
 const textStyle = css`
@@ -25,6 +27,12 @@ const adviceColourAboveTablet: SerializedStyles = css`
 		margin-top: ${space[12]}px;
 	}
 `;
+
+const articleFormat: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
 
 const accordionContent = (
 	<>
@@ -59,6 +67,7 @@ export default {
 			viewports: [breakpoints.mobile, breakpoints.tablet],
 		},
 	},
+	decorators: [splitTheme(articleFormat)],
 };
 
 export const Default = () => (

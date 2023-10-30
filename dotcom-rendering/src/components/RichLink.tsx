@@ -14,6 +14,7 @@ import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
+import { FormatBoundary } from './FormatBoundary';
 import { Hide } from './Hide';
 import { QuoteIcon } from './QuoteIcon';
 import { StarRating } from './StarRating/StarRating';
@@ -256,10 +257,13 @@ export const RichLink = ({
 			data-print-layout="hide"
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
-			css={pillarBackground(palette)}
+			css={[
+				pillarBackground(palette),
+				neutralBackground(format, palette),
+			]}
 			data-name={isPlaceholder ? 'placeholder' : ''}
 		>
-			<div css={neutralBackground(format, palette)}>
+			<FormatBoundary format={format}>
 				<a css={richLinkLink} href={url}>
 					<div css={richLinkTopBorder(palette)} />
 					{showImage && (
@@ -316,7 +320,6 @@ export const RichLink = ({
 								<Avatar
 									src={contributorImage}
 									alt={mainContributor}
-									format={format}
 								/>
 							</div>
 						)}
@@ -334,7 +337,7 @@ export const RichLink = ({
 						</div>
 					</div>
 				</a>
-			</div>
+			</FormatBoundary>
 		</div>
 	);
 };

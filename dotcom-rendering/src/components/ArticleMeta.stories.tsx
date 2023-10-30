@@ -5,6 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { ArticleMeta } from './ArticleMeta';
 
@@ -182,6 +183,13 @@ export const FeatureStory = () => {
 	);
 };
 FeatureStory.storyName = 'Feature';
+FeatureStory.decorators = [
+	lightDecorator({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Feature,
+		theme: Pillar.Culture,
+	}),
+];
 
 export const FeatureWithMismatchedContributor = () => {
 	return (
@@ -258,6 +266,13 @@ export const SpecialReportStory = () => {
 	);
 };
 SpecialReportStory.storyName = 'SpecialReport';
+SpecialReportStory.decorators = [
+	lightDecorator({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Feature,
+		theme: ArticleSpecial.SpecialReport,
+	}),
+];
 
 export const SpecialReportAlt = () => {
 	return (
@@ -283,6 +298,13 @@ export const SpecialReportAlt = () => {
 	);
 };
 SpecialReportAlt.storyName = 'SpecialReportAlt';
+SpecialReportAlt.decorators = [
+	lightDecorator({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Feature,
+		theme: ArticleSpecial.SpecialReportAlt,
+	}),
+];
 
 export const CommentStory = () => {
 	return (
@@ -333,6 +355,13 @@ export const InterviewStory = () => {
 	);
 };
 InterviewStory.storyName = 'Interview';
+InterviewStory.decorators = [
+	lightDecorator({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Interview,
+		theme: Pillar.Lifestyle,
+	}),
+];
 
 export const ImmersiveStory = () => {
 	return (
@@ -383,6 +412,13 @@ export const TwoContributorsStory = () => {
 	);
 };
 TwoContributorsStory.storyName = 'Feature, with two contributors';
+TwoContributorsStory.decorators = [
+	lightDecorator({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Feature,
+		theme: Pillar.Sport,
+	}),
+];
 
 export const DeadBlogStory = () => {
 	return (

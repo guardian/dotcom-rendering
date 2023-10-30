@@ -24,7 +24,9 @@ const consentStateCanTarget: ConsentState = {
 describe('YoutubeAtom', () => {
 	it('Player initialises when no overlay and has consent state', () => {
 		const atom = (
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<YoutubeAtom
 					elementId="xyz"
 					title="My Youtube video!"
@@ -52,7 +54,9 @@ describe('YoutubeAtom', () => {
 
 	it('Player initialises when overlay clicked and has consent state', () => {
 		const atom = (
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<YoutubeAtom
 					elementId="xyz"
 					title="My Youtube video!"
@@ -89,7 +93,9 @@ describe('YoutubeAtom', () => {
 		const title = 'My Youtube video!';
 
 		const atom = (
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<YoutubeAtom
 					elementId="xyz"
 					title="My Youtube video!"
@@ -118,7 +124,9 @@ describe('YoutubeAtom', () => {
 	it('overlay has correct aria-label', () => {
 		const title = 'My Youtube video!';
 		const atom = (
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<YoutubeAtom
 					elementId="xyz"
 					title="My Youtube video!"
@@ -149,7 +157,9 @@ describe('YoutubeAtom', () => {
 
 	it('shows a placeholder if overlay is missing', () => {
 		const atom = (
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<YoutubeAtom
 					elementId="xyz"
 					title="My Youtube video!"
@@ -176,7 +186,9 @@ describe('YoutubeAtom', () => {
 
 	it('shows an overlay if present', () => {
 		const atom = (
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<YoutubeAtom
 					elementId="xyz"
 					title="My Youtube video!"
@@ -204,7 +216,9 @@ describe('YoutubeAtom', () => {
 
 	it('hides an overlay once it is clicked', () => {
 		const atom = (
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<YoutubeAtom
 					elementId="xyz"
 					title="My Youtube video!"
@@ -236,7 +250,9 @@ describe('YoutubeAtom', () => {
 	it('when two Atoms - hides the overlay of the correct player if clicked', () => {
 		const atom = (
 			<>
-				<ConfigProvider value={{ renderingTarget: 'Web' }}>
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
 					<YoutubeAtom
 						elementId="xyz"
 						title="My Youtube video!"

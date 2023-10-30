@@ -7,7 +7,9 @@ import { TimelineAtom } from './TimelineAtom.importable';
 describe('TimelineAtom', () => {
 	it('should render', () => {
 		const { getByText, queryByText } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<TimelineAtom {...noTimelineEventsStory} />
 			</ConfigProvider>,
 		);
@@ -26,7 +28,9 @@ describe('TimelineAtom', () => {
 
 	it('Show feedback on like', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<TimelineAtom {...noTimelineEventsStory} />
 			</ConfigProvider>,
 		);
@@ -46,7 +50,9 @@ describe('TimelineAtom', () => {
 
 	it('Show feedback on dislike', () => {
 		const { getByText, queryByText, queryByTestId } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<TimelineAtom {...noTimelineEventsStory} />
 			</ConfigProvider>,
 		);

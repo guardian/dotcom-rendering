@@ -1,5 +1,7 @@
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { useRef } from 'react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { AdSlot, type Props } from './AdSlot.apps';
 
 export default {
@@ -16,6 +18,16 @@ export default {
 	argTypes: {
 		onClickSupportButton: { action: 'clicked' },
 	},
+	decorators: [
+		splitTheme(
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+			{ orientation: 'vertical' },
+		),
+	],
 };
 
 type Args = Omit<Props, 'ref'>;

@@ -40,7 +40,7 @@ export const renderArticle = ({
 	const { extractCritical } = createEmotionServer(cache);
 
 	// We are currently considering AMP to be a renderingTarget of Web
-	const config: Config = { renderingTarget: 'Web' };
+	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
 
 	const { html, css }: RenderToStringResult = extractCritical(
 		renderToStaticMarkup(

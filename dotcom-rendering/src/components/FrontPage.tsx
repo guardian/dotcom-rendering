@@ -76,6 +76,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 					commercialMetricsEnabled={
 						!!front.config.switches.commercialMetrics
 					}
+					tests={front.config.abTests}
 				/>
 			</Island>
 			<Island

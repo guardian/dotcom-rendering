@@ -711,6 +711,9 @@
                                                                                     "bio": {
                                                                                         "type": "string"
                                                                                     },
+                                                                                    "description": {
+                                                                                        "type": "string"
+                                                                                    },
                                                                                     "bylineImageUrl": {
                                                                                         "type": "string"
                                                                                     },
@@ -1421,6 +1424,9 @@
                                                                                     "bio": {
                                                                                         "type": "string"
                                                                                     },
+                                                                                    "description": {
+                                                                                        "type": "string"
+                                                                                    },
                                                                                     "bylineImageUrl": {
                                                                                         "type": "string"
                                                                                     },
@@ -2129,6 +2135,9 @@
                                                                                         "type": "string"
                                                                                     },
                                                                                     "bio": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "description": {
                                                                                         "type": "string"
                                                                                     },
                                                                                     "bylineImageUrl": {

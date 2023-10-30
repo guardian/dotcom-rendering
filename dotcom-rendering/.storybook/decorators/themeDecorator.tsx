@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { css, jsx } from '@emotion/react';
+import { css } from '@emotion/react';
 import { paletteDeclarations } from '../../src/palette';
 import { palette as sourcePalette } from '@guardian/source-foundations';
 import { Decorator } from '@storybook/react';

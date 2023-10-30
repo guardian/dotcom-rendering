@@ -73,6 +73,7 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 					commercialMetricsEnabled={
 						!!tagFront.config.switches.commercialMetrics
 					}
+					tests={tagFront.config.abTests}
 				/>
 			</Island>
 			<Island priority="critical" clientOnly={true}>

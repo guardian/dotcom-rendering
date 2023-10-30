@@ -444,8 +444,6 @@ export const Card = ({
 								<Avatar
 									src={media.avatarUrl}
 									alt={byline ?? ''}
-									containerPalette={containerPalette}
-									format={format}
 								/>
 							</AvatarContainer>
 						)}

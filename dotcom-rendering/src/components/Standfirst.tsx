@@ -1,23 +1,16 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import {
-	from,
-	headline,
-	neutral,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, headline, space, textSans } from '@guardian/source-foundations';
 import sanitise from 'sanitize-html';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { palette } from '../palette';
 
 type Props = {
 	format: ArticleFormat;
 	standfirst: string;
 };
 
-const nestedStyles = (format: ArticleFormat, palette: Palette) => {
+const nestedStyles = (format: ArticleFormat) => {
 	const offset = format.display === ArticleDisplay.Immersive ? space[6] : 19;
 	return css`
 		li {
@@ -36,7 +29,7 @@ const nestedStyles = (format: ArticleFormat, palette: Palette) => {
 			height: 0.7em;
 			width: 0.7em;
 			margin-right: 7px;
-			background-color: ${palette.background.bulletStandfirst};
+			background-color: ${palette('--standfirst-bullet')};
 			margin-left: -${offset}px;
 		}
 
@@ -55,31 +48,31 @@ const nestedStyles = (format: ArticleFormat, palette: Palette) => {
 			height: 13px;
 			width: 13px;
 			margin-right: 2px;
-			background-color: ${palette.background.bulletStandfirst};
+			background-color: ${palette('--standfirst-bullet')};
 		}
 
 		a {
-			color: ${palette.text.standfirstLink};
+			color: ${palette('--standfirst-link-text')};
 			text-decoration: none;
-			border-bottom: 1px solid ${palette.border.standfirstLink};
+			border-bottom: 1px solid ${palette('--standfirst-link-border')};
 			transition: border-color 0.15s ease-out;
 		}
 	`;
 };
 
-const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
-	switch (format.display) {
+const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
+	switch (display) {
 		case ArticleDisplay.Immersive:
-			switch (format.design) {
+			switch (design) {
 				case ArticleDesign.PhotoEssay:
-					if (format.theme === ArticleSpecial.Labs) {
+					if (theme === ArticleSpecial.Labs) {
 						return css`
 							${textSans.large({})};
 							margin-top: ${space[2]}px;
 							margin-bottom: ${space[3]}px;
 							line-height: 22px;
 							max-width: 540px;
-							color: ${palette.text.standfirst};
+							color: ${palette('--standfirst-text')};
 						`;
 					}
 					return css`
@@ -88,11 +81,11 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						margin-bottom: ${space[3]}px;
 						line-height: 22px;
 						max-width: 540px;
-						color: ${palette.text.standfirst};
+						color: ${palette('--standfirst-text')};
 					`;
 				default:
 					return css`
-						${format.theme === ArticleSpecial.Labs
+						${theme === ArticleSpecial.Labs
 							? textSans.medium()
 							: headline.xsmall({
 									fontWeight: 'light',
@@ -103,8 +96,7 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						${from.tablet} {
 							max-width: 460px;
 						}
-						color: ${palette.text.standfirst};
-
+						color: ${palette('--standfirst-text')};
 						li:before {
 							height: 17px;
 							width: 17px;
@@ -119,13 +111,13 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 				})};
 				margin-bottom: ${space[3]}px;
 				max-width: 540px;
-				color: ${palette.text.standfirst};
+				color: ${palette('--standfirst-text')};
 			`;
 
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.Standard:
 		default: {
-			switch (format.design) {
+			switch (design) {
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 				case ArticleDesign.Comment:
@@ -142,7 +134,7 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						})};
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
-						color: ${palette.text.standfirst};
+						color: ${palette('--standfirst-text')};
 						li:before {
 							height: 15px;
 							width: 15px;
@@ -158,26 +150,27 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						margin-top: ${space[1]}px;
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
-						color: ${palette.text.standfirst};
+						color: ${palette('--standfirst-text')};
 					`;
 				case ArticleDesign.Analysis:
 					return css`
 						${headline.xxxsmall()};
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
-						color: ${palette.text.standfirst};
+						color: ${palette('--standfirst-text')};
 					`;
 				default:
-					switch (format.theme) {
+					switch (theme) {
 						case ArticleSpecial.Labs:
 							return css`
 								${textSans.medium()}
 								margin-bottom: ${space[3]}px;
 								max-width: 540px;
-								color: ${palette.text.standfirst};
+								color: ${palette('--standfirst-text')};
 								a {
-									color: ${neutral[7]};
-									border-bottom: 1px solid ${neutral[60]};
+									color: ${palette('--standfirst-link-text')};
+									border-bottom: 1px solid
+										${palette('--standfirst-link-border')};
 								}
 							`;
 						default:
@@ -188,7 +181,7 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 								line-height: 20px;
 								margin-bottom: ${space[3]}px;
 								max-width: 540px;
-								color: ${palette.text.standfirst};
+								color: ${palette('--standfirst-text')};
 							`;
 					}
 			}
@@ -196,24 +189,20 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 	}
 };
 
-const hoverStyles = (palette: Palette) => {
-	return css`
-		a:hover {
-			border-bottom: solid 1px ${palette.hover.standfirstLink};
-		}
-	`;
-};
+const hoverStyles = css`
+	a:hover {
+		border-bottom: solid 1px ${palette('--standfirst-link-border')};
+	}
+`;
 
 export const Standfirst = ({ format, standfirst }: Props) => {
-	const palette = decidePalette(format);
-
 	return (
 		<>
 			<div
 				css={[
-					nestedStyles(format, palette),
-					standfirstStyles(format, palette),
-					hoverStyles(palette),
+					nestedStyles(format),
+					standfirstStyles(format),
+					hoverStyles,
 				]}
 				className={
 					format.design === ArticleDesign.Interactive

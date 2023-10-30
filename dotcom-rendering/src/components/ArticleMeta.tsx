@@ -362,11 +362,7 @@ export const ArticleMeta = ({
 					<>
 						{!!avatarUrl && (
 							<MetaAvatarContainer>
-								<Avatar
-									src={avatarUrl}
-									alt={authorName}
-									format={format}
-								/>
+								<Avatar src={avatarUrl} alt={authorName} />
 							</MetaAvatarContainer>
 						)}
 
