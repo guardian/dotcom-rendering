@@ -14,6 +14,7 @@ import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { SetABTests } from './SetABTests.importable';
+import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { Snow } from './Snow.importable';
 import { StickyBottomBanner } from './StickyBottomBanner.importable';
@@ -207,6 +208,25 @@ describe('Island: server-side rendering', () => {
 					pageIsSensitive={false}
 					abTestSwitches={{}}
 				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('SignInGateSelector', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<SignInGateSelector
+						contentType={''}
+						tags={[]}
+						isPaidContent={false}
+						isPreview={false}
+						pageId={''}
+						switches={{}}
+					/>
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});
