@@ -10,6 +10,7 @@ import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
+import { LightboxJavascript } from './LightboxJavascript.importable';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
@@ -153,6 +154,20 @@ describe('Island: server-side rendering', () => {
 		expect(() => renderToString(<LightboxHash />)).not.toThrow();
 	});
 
+	test('LightboxJavascript', () => {
+		expect(() =>
+			renderToString(
+				<LightboxJavascript
+					format={{
+						theme: Pillar.Culture,
+						design: ArticleDesign.PhotoEssay,
+						display: ArticleDisplay.Showcase,
+					}}
+					images={[]}
+				/>,
+			),
+		).not.toThrow();
+	});
 	test('Liveness', () => {
 		expect(() =>
 			renderToString(
