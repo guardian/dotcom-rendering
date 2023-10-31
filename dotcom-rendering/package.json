@@ -241,7 +241,6 @@
 		"simple-progress-webpack-plugin": "2.0.0",
 		"snyk": "1.1103.0",
 		"source-map": "0.7.4",
-		"source-map-support": "0.5.21",
 		"start-server-and-test": "1.15.5",
 		"storybook": "7.5.1",
 		"storybook-addon-turbo-build": "2.0.1",
