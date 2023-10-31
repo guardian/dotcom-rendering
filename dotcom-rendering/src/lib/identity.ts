@@ -76,27 +76,32 @@ const getUserFromCookie = (): IdentityUserFromCache => {
 		const cookieData = getCookie({ name: 'GU_U', shouldMemoize: true });
 
 		if (cookieData) {
-			const userData = JSON.parse(
-				decodeBase64(cookieData.split('.')[0] ?? ''),
-			) as string[];
+			try {
+				const userData = JSON.parse(
+					decodeBase64(cookieData.split('.')[0] ?? ''),
+				) as string[];
 
-			const id = parseInt(userData[0] ?? '', 10);
-			const displayName = decodeURIComponent(userData[2] ?? '');
-			const accountCreatedDate = userData[6];
-			const userEmailValidated = Boolean(userData[7]);
+				const id = parseInt(userData[0] ?? '', 10);
+				const displayName = decodeURIComponent(userData[2] ?? '');
+				const accountCreatedDate = userData[6];
+				const userEmailValidated = Boolean(userData[7]);
 
-			if (id && accountCreatedDate) {
-				userFromCookieCache = {
-					id,
-					publicFields: {
-						displayName,
-					},
-					dates: { accountCreatedDate },
-					statusFields: {
-						userEmailValidated,
-					},
-					rawResponse: cookieData,
-				};
+				if (id && accountCreatedDate) {
+					userFromCookieCache = {
+						id,
+						publicFields: {
+							displayName,
+						},
+						dates: { accountCreatedDate },
+						statusFields: {
+							userEmailValidated,
+						},
+						rawResponse: cookieData,
+					};
+				}
+			} catch (e) {
+				// eslint-disable-next-line no-console -- we want to log the error to console, not Sentry
+				console.error('Error parsing GU_U cookie', e);
 			}
 		}
 	}
