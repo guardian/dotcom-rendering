@@ -1,7 +1,27 @@
+import type { Response } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { cmpAcceptAll, disableCMP } from '../../lib/cmp';
+import { disableCMP } from '../../lib/cmp';
 import { loadPage } from '../../lib/load-page';
 import { waitForIsland } from '../../lib/util';
+
+const assertOnJsonResponseProperty = async (
+	response: Response,
+	url: string | RegExp,
+	expectedProperty: string,
+): Promise<boolean> => {
+	const isURL = response.request().url().match(url);
+	console.log('isURL', isURL);
+	if (!isURL) return false;
+	const status = response.status();
+	console.log('status', status);
+	if (status !== 200) return false;
+	const json = await response.json();
+	console.log('json', json);
+	const prop = json[expectedProperty];
+	if (!prop) return false;
+	console.log('prop', prop);
+	return true;
+};
 
 test.describe('E2E Page rendering', () => {
 	test.describe('for WEB', () => {
@@ -10,16 +30,51 @@ test.describe('E2E Page rendering', () => {
 			page,
 		}) => {
 			await disableCMP(context);
+
 			await loadPage(
 				page,
 				`/Article/https://www.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
 			);
 
-			await waitForIsland(page, 'MostViewedFooterData');
 			await expect(page.locator('[data-gu-name="title"]')).toContainText(
 				'Opinion',
 			);
 
+			// rich link
+			// api.nextgen.guardianapps.co.uk/embed/card/lifeandstyle/2013/nov/09/impostor-syndrome-oliver-burkeman.json?dcr=true
+			const richLinkResponsePromise = page.waitForResponse((response) =>
+				assertOnJsonResponseProperty(response, /embed\/card/, 'tags'),
+			);
+			await waitForIsland(page, 'RichLinkComponent', 'hydrated', 1);
+			await richLinkResponsePromise;
+
+			// most-read-geo aka most viewed in right hand column
+			// https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true
+			const mostReadRightResponsePromise = page.waitForResponse(
+				(response) =>
+					assertOnJsonResponseProperty(
+						response,
+						/most-read-geo\.json/,
+						'heading',
+					),
+			);
+			await waitForIsland(page, 'MostViewedRightWrapper');
+			await mostReadRightResponsePromise;
+
+			// most-read/commentisfree.json aka most viewed in footer
+			// https://api.nextgen.guardianapps.co.uk/most-read/commentisfree.json?_edition=UK&dcr=true
+			const mostReadFooterResponsePromise = page.waitForResponse(
+				(response) =>
+					assertOnJsonResponseProperty(
+						response,
+						/most-read\/commentisfree\.json/,
+						'tabs',
+					),
+			);
+			await waitForIsland(page, 'MostViewedFooterData');
+			await mostReadFooterResponsePromise;
+
+			// await waitForIsland(page, 'MostViewedFooterData');
 			// cy.intercept('GET', '**/most-read-geo**', (req) => {
 			// 	req.reply((res) => {
 			// 		expect(res.body).to.have.property('heading');
