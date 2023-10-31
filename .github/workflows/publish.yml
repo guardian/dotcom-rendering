@@ -60,4 +60,7 @@ jobs:
               - front-web
             frontend-static:
               - frontend-static
-
+            article-rendering-cfn:
+              - article-rendering-cfn
+            article-rendering:
+              - article-rendering

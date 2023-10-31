@@ -10,6 +10,7 @@ import { RenderingApp } from './rendering-app';
 describe('The RenderingApp stack', () => {
 	it('matches the snapshot', () => {
 		const app = new App();
+
 		const stack = new RenderingApp(app, 'ArticleRendering-TEST', {
 			stack: 'frontend',
 			stage: 'TEST',
@@ -17,6 +18,7 @@ describe('The RenderingApp stack', () => {
 			instanceSize: InstanceSize.MICRO,
 			scaling: { minimumInstances: 1, maximumInstances: 4 },
 		});
+
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();
 	});

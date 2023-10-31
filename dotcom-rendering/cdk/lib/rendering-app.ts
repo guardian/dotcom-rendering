@@ -72,10 +72,11 @@ export class RenderingApp extends GuStack {
 			 * @see https://github.com/guardian/cdk/blob/713c8eb6ef971307050492293a11aa89aaa173c1/src/patterns/ec2-app/base.ts#L64C1-L75C4
 			 */
 			userData: getUserData({ app, region, stage, elkStreamId }),
-			accessLogging: {
-				enabled: true,
-				prefix: `ELBLogs/${stack}/${app}/${stage}`,
-			},
+			// TODO - figure out why region required but not available here
+			// accessLogging: {
+			// 	enabled: true,
+			// 	prefix: `ELBLogs/${stack}/${app}/${stage}`,
+			// },
 			// TODO - check changes to healthcheck
 			// TODO - check load balancer DNS output compatibility with frontend
 		});
