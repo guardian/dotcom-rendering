@@ -134,6 +134,7 @@ function tagFollowClick(e: Event): void {
 function conditionallyRenderFollowTagComponent(
 	topic: Topic,
 	followTagStatus: Element | null,
+	followTag: Element | null,
 ): void {
 	const checkBridgetCompatibilty = (
 		bridgetVersion: Optional<string>,
@@ -159,6 +160,19 @@ function conditionallyRenderFollowTagComponent(
 					}),
 					followTagStatus,
 				);
+
+			followTag?.addEventListener('click', tagFollowClick);
+			void tagClient.isFollowing(topic).then((following) => {
+				if (following && followTagStatus) {
+					ReactDOM.render(
+						h(FollowTagStatus, {
+							isFollowing: true,
+							contributorName: topic.displayName,
+						}),
+						followTagStatus,
+					);
+				}
+			});
 		})
 		.catch((error) => {
 			logger.error(error);
@@ -195,20 +209,11 @@ function topics(): void {
 	}
 
 	if (topic) {
-		conditionallyRenderFollowTagComponent(topic, followTagStatus);
-		followTag?.addEventListener('click', tagFollowClick);
-
-		void tagClient.isFollowing(topic).then((following) => {
-			if (following && followTagStatus) {
-				ReactDOM.render(
-					h(FollowTagStatus, {
-						isFollowing: true,
-						contributorName: topic.displayName,
-					}),
-					followTagStatus,
-				);
-			}
-		});
+		conditionallyRenderFollowTagComponent(
+			topic,
+			followTagStatus,
+			followTag,
+		);
 	}
 }
 
