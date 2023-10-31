@@ -147,15 +147,12 @@ const canStillInsertAds = (
 	adPositions: number[],
 	collectionsLength: number,
 	index: number,
-) => {
-	return (
-		adPositions.length < MAX_FRONTS_BANNER_ADS &&
-		// Don't insert ad below the second-last collection (above the last collection)
-		// We serve a merchandising slot below the last collection and we don't want
-		// to sandwich the last collection between two full-width ads.
-		index < collectionsLength - 2
-	);
-};
+) =>
+	adPositions.length < MAX_FRONTS_BANNER_ADS &&
+	// Don't insert ad below the second-last collection (above the last collection)
+	// We serve a merchandising slot below the last collection and we don't want
+	// to sandwich the last collection between two full-width ads.
+	index < collectionsLength - 2;
 
 /**
  * Decides where ads should be inserted on standard fronts pages.
@@ -204,21 +201,23 @@ const getFrontsBannerAdPositions = (
  * Decides where ads should be inserted on tagged fronts.
  *
  * On tagged fronts, an ad in inserted above every third collection.
- * Doesn't insert an ad above the last collection, because it would
- * be sandwiched between a fronts-banner ad and the merchandising ad
- * which is inserted below the main content of the page.
+ *
+ * Note: An ad can't be inserted above the last collection, because it would
+ * be sandwiched between a fronts-banner ad and the merchandising ad which
+ * is inserted below the main content of the page.
  */
 const getTaggedFrontsBannerAdPositions = (numCollections: number): number[] => {
-	if (numCollections < 3) {
+	if (numCollections <= 3) {
+		// There are no suitable positions to insert an ad.
 		return [];
 	}
 
-	const numAds = Math.min(
-		Math.floor((numCollections - 1) / 3),
-		MAX_FRONTS_BANNER_ADS,
-	);
+	const numAdsThatFit = Math.floor((numCollections - 1) / 3);
 
-	return [...Array(numAds).keys()].map((_) => _ * 3 + 2);
+	// Ensure we do not insert more than the maximum allowed number of ads.
+	const numAdsToInsert = Math.min(numAdsThatFit, MAX_FRONTS_BANNER_ADS);
+
+	return [...Array(numAdsToInsert).keys()].map((_) => _ * 3 + 2);
 };
 
 export { getFrontsBannerAdPositions, getTaggedFrontsBannerAdPositions };
