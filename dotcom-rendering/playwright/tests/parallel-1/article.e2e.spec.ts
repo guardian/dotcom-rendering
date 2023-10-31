@@ -31,22 +31,11 @@ test.describe('E2E Page rendering', () => {
 		}) => {
 			await disableCMP(context);
 
-			await loadPage(
-				page,
-				`/Article/https://www.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
-			);
-
-			await expect(page.locator('[data-gu-name="title"]')).toContainText(
-				'Opinion',
-			);
-
 			// rich link
 			// api.nextgen.guardianapps.co.uk/embed/card/lifeandstyle/2013/nov/09/impostor-syndrome-oliver-burkeman.json?dcr=true
 			const richLinkResponsePromise = page.waitForResponse((response) =>
 				assertOnJsonResponseProperty(response, /embed\/card/, 'tags'),
 			);
-			await waitForIsland(page, 'RichLinkComponent', 'hydrated', 1);
-			await richLinkResponsePromise;
 
 			// most-read-geo aka most viewed in right hand column
 			// https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true
@@ -58,8 +47,6 @@ test.describe('E2E Page rendering', () => {
 						'heading',
 					),
 			);
-			await waitForIsland(page, 'MostViewedRightWrapper');
-			await mostReadRightResponsePromise;
 
 			// most-read/commentisfree.json aka most viewed in footer
 			// https://api.nextgen.guardianapps.co.uk/most-read/commentisfree.json?_edition=UK&dcr=true
@@ -71,6 +58,22 @@ test.describe('E2E Page rendering', () => {
 						'tabs',
 					),
 			);
+
+			await loadPage(
+				page,
+				`/Article/https://www.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
+			);
+
+			await expect(page.locator('[data-gu-name="title"]')).toContainText(
+				'Opinion',
+			);
+
+			await waitForIsland(page, 'RichLinkComponent', 'hydrated', 1);
+			await richLinkResponsePromise;
+
+			await waitForIsland(page, 'MostViewedRightWrapper');
+			await mostReadRightResponsePromise;
+
 			await waitForIsland(page, 'MostViewedFooterData');
 			await mostReadFooterResponsePromise;
 
