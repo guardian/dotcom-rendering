@@ -106,33 +106,21 @@ const getCollectionHeight = (
 	}
 };
 
-const canAdGoBelowCollection = (
+const canAdGoAboveCollection = (
 	heightSinceAd: number,
-	containerPalette: DCRCollectionType['containerPalette'],
+	pageId: string,
+	collection: Pick<DCRCollectionType, 'displayName' | 'containerPalette'>,
+	previousCollection: Pick<DCRCollectionType, 'containerPalette'>,
 ) => {
-	if (containerPalette === 'Branded') {
+	if (
+		collection.containerPalette === 'Branded' ||
+		previousCollection.containerPalette === 'Branded'
+	) {
 		return false;
 	}
 
-	return heightSinceAd >= 3;
-};
-
-const canAdGoAboveNextCollection = (
-	heightSinceAd: number,
-	pageId: string,
-	collection: Pick<
-		DCRCollectionType,
-		'displayName' | 'collectionType' | 'containerPalette'
-	>,
-) => {
-	const excludedCollection = frontsBannerExcludedCollections[pageId] ?? [];
-
-	// There isn't a "next collection" if this is the last collection.
-	// Don't insert an ad below this collection if the next collection prohibits ads above it.
-	if (
-		excludedCollection.includes(collection.displayName) ||
-		collection.containerPalette === 'Branded'
-	) {
+	const excludedCollections = frontsBannerExcludedCollections[pageId] ?? [];
+	if (excludedCollections.includes(collection.displayName)) {
 		return false;
 	}
 
@@ -140,10 +128,13 @@ const canAdGoAboveNextCollection = (
 };
 
 /**
- * Decides where ads should be inserted on standard fronts pages.
+ * Decides where ads should be inserted on standard (not tagged) fronts pages.
  *
- * Iterates through the collections and decides where fronts-banner
- * ad slots should be inserted based on the collection properties.
+ * Iterates through the collections and decides where fronts-banner ad slots should be
+ * inserted based on the collection properties.
+ *
+ * Doesn't insert an ad above the final collection. We serve a merchandising slot below the
+ * last collection and we don't want to sandwich the last collection between two full-width ads.
  */
 const getFrontsBannerAdPositions = (
 	collections: Pick<
@@ -151,39 +142,46 @@ const getFrontsBannerAdPositions = (
 		'displayName' | 'collectionType' | 'containerPalette' | 'grouped'
 	>[],
 	pageId: string,
-): number[] => {
-	let heightSinceAd = 0;
+): number[] =>
+	collections.reduce<{ heightSinceAd: number; adPositions: number[] }>(
+		(accumulator, collection, index) => {
+			const heightSinceAd =
+				accumulator.heightSinceAd + getCollectionHeight(collection);
 
-	return collections.reduce<number[]>((adPositions, collection, index) => {
-		if (adPositions.length >= MAX_FRONTS_BANNER_ADS) {
-			return adPositions;
-		}
+			const prevCollection = collections[index - 1];
+			const isFirstCollection = prevCollection === undefined;
+			const isFinalCollection = index === collections.length - 1;
+			const isMaxAdsReached =
+				accumulator.adPositions.length >= MAX_FRONTS_BANNER_ADS;
 
-		// Don't insert an ad below the second-last collection (above the last collection)
-		// We serve a merchandising slot below the last collection and we don't want
-		// to sandwich the last collection between two full-width ads.
-		const nextCollection = collections[index + 1];
-		const nextCollectionPlusOne = collections[index + 2];
-		if (!nextCollection || !nextCollectionPlusOne) {
-			return adPositions;
-		}
+			if (isFirstCollection || isFinalCollection || isMaxAdsReached) {
+				return {
+					...accumulator,
+					heightSinceAd,
+				};
+			}
 
-		heightSinceAd += getCollectionHeight(collection);
+			if (
+				canAdGoAboveCollection(
+					heightSinceAd,
+					pageId,
+					collection,
+					prevCollection,
+				)
+			) {
+				return {
+					heightSinceAd: 0,
+					adPositions: [...accumulator.adPositions, index],
+				};
+			}
 
-		if (
-			canAdGoBelowCollection(
+			return {
+				...accumulator,
 				heightSinceAd,
-				collection.containerPalette,
-			) &&
-			canAdGoAboveNextCollection(heightSinceAd, pageId, nextCollection)
-		) {
-			heightSinceAd = 0;
-			return [...adPositions, index + 1];
-		}
-
-		return adPositions;
-	}, []);
-};
+			};
+		},
+		{ heightSinceAd: 0, adPositions: [] },
+	).adPositions;
 
 /**
  * Decides where ads should be inserted on tagged fronts.

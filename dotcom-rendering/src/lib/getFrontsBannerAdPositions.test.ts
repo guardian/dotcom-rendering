@@ -31,6 +31,12 @@ describe('Standard fronts fronts-banner ad slots', () => {
 			grouped: defaultGrouped,
 		},
 		{
+			collectionType: 'fixed/small/slow-IV',
+			containerPalette: 'LongRunningAltPalette',
+			displayName: 'Ukraine invasion',
+			grouped: defaultGrouped,
+		},
+		{
 			collectionType: 'fixed/small/slow-V-mpu',
 			containerPalette: undefined,
 			displayName: 'News extra',
@@ -149,7 +155,7 @@ describe('Standard fronts fronts-banner ad slots', () => {
 	it('calculates ad positions correctly', () => {
 		const adPositions = getFrontsBannerAdPositions(testCollections, 'uk');
 
-		expect(adPositions).toEqual([3, 6, 9, 12, 15, 19]);
+		expect(adPositions).toEqual([3, 6, 9, 12, 15, 17]);
 	});
 
 	it('does NOT insert ads above or below branded content', () => {
