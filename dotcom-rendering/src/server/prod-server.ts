@@ -51,9 +51,11 @@ export const prodServer = (): void => {
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
 
-	app.get('/_healthcheck', (req: Request, res: Response) => {
+	const healthcheck = (req: Request, res: Response) => {
 		res.status(200).send('OKAY');
-	});
+	};
+	app.get('/_healthcheck', healthcheck);
+	app.get('/healthcheck', healthcheck);
 
 	// if running prod server locally, serve local assets
 	if (!process.env.GU_PUBLIC) {
