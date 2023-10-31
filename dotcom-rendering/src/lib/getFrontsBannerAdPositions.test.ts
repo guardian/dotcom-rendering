@@ -1,212 +1,27 @@
-import type { DCRCollectionType } from '../types/front';
+import {
+	brandedTestCollections,
+	testCollectionsUk,
+	testCollectionsUs,
+} from '../../fixtures/manual/frontCollections';
 import {
 	getFrontsBannerAdPositions,
 	getTaggedFrontsBannerAdPositions,
 } from './getFrontsBannerAdPositions';
 
-const defaultGrouped = {
-	snap: [],
-	huge: [],
-	veryBig: [],
-	big: [],
-	standard: [],
-};
-
 describe('Standard fronts fronts-banner ad slots', () => {
-	// We used https://www.theguardian.com/uk as a blueprint
-	const testCollections: Pick<
-		DCRCollectionType,
-		'collectionType' | 'containerPalette' | 'displayName' | 'grouped'
-	>[] = [
-		{
-			collectionType: 'dynamic/package',
-			containerPalette: 'EventPalette',
-			displayName: 'Israel-Hamas war',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'dynamic/fast',
-			containerPalette: undefined,
-			displayName: 'Headlines',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/small/slow-IV',
-			containerPalette: 'LongRunningAltPalette',
-			displayName: 'Ukraine invasion',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/small/slow-V-mpu',
-			containerPalette: undefined,
-			displayName: 'News extra',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'dynamic/slow',
-			containerPalette: undefined,
-			displayName: 'Spotlight',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/thrasher',
-			containerPalette: undefined,
-			displayName: 'Morning Mail newsletter (web only)',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'dynamic/slow',
-			containerPalette: undefined,
-			displayName: 'Sport',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'dynamic/slow',
-			containerPalette: undefined,
-			displayName: 'Opinion',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/thrasher',
-			containerPalette: undefined,
-			displayName: 'Wordiply Thrasher',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/medium/slow-VI',
-			containerPalette: undefined,
-			displayName: 'Lifestyle',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/medium/slow-VII',
-			containerPalette: undefined,
-			displayName: 'Culture',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/thrasher',
-			containerPalette: undefined,
-			displayName: 'Guardian Labs',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'dynamic/fast',
-			containerPalette: undefined,
-			displayName: 'Across the country',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/small/slow-IV',
-			containerPalette: undefined,
-			displayName: 'The rural network',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'dynamic/fast',
-			containerPalette: undefined,
-			displayName: 'Around the world',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/thrasher',
-			containerPalette: undefined,
-			displayName: 'Contact the Guardian',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/video',
-			containerPalette: undefined,
-			displayName: 'Videos',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/medium/slow-VI',
-			containerPalette: undefined,
-			displayName: 'Multimedia',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/small/slow-IV',
-			containerPalette: 'Branded',
-			displayName: 'Guardian Labs',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/medium/slow-XII-mpu',
-			containerPalette: undefined,
-			displayName: 'Explore',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'fixed/small/slow-I',
-			containerPalette: undefined,
-			displayName: 'The big picture',
-			grouped: defaultGrouped,
-		},
-		{
-			collectionType: 'news/most-popular',
-			containerPalette: undefined,
-			displayName: 'Most viewed',
-			grouped: defaultGrouped,
-		},
-	];
+	it('calculates ad positions correctly for an example of the UK network front', () => {
+		const adPositions = getFrontsBannerAdPositions(testCollectionsUk, 'uk');
 
-	it('calculates ad positions correctly', () => {
-		const adPositions = getFrontsBannerAdPositions(testCollections, 'uk');
+		expect(adPositions).toEqual([3, 6, 8, 11, 14, 17]);
+	});
 
-		expect(adPositions).toEqual([3, 6, 9, 12, 15, 17]);
+	it('calculates ad positions correctly for an example of the US network front', () => {
+		const adPositions = getFrontsBannerAdPositions(testCollectionsUs, 'us');
+
+		expect(adPositions).toEqual([3, 6, 8, 11, 13, 18]);
 	});
 
 	it('does NOT insert ads above or below branded content', () => {
-		const brandedTestCollections: Pick<
-			DCRCollectionType,
-			'collectionType' | 'containerPalette' | 'displayName' | 'grouped'
-		>[] = [
-			{
-				collectionType: 'dynamic/fast',
-				containerPalette: undefined,
-				displayName: 'Headlines',
-				grouped: defaultGrouped,
-			},
-			{
-				collectionType: 'fixed/small/slow-IV',
-				containerPalette: 'Branded',
-				displayName: 'Guardian Labs',
-				grouped: defaultGrouped,
-			},
-			{
-				collectionType: 'dynamic/fast',
-				containerPalette: undefined,
-				displayName: 'Headlines',
-				grouped: defaultGrouped,
-			},
-			{
-				collectionType: 'fixed/small/slow-IV',
-				containerPalette: 'Branded',
-				displayName: 'Guardian Labs',
-				grouped: defaultGrouped,
-			},
-			{
-				collectionType: 'dynamic/fast',
-				containerPalette: undefined,
-				displayName: 'Headlines',
-				grouped: defaultGrouped,
-			},
-			{
-				collectionType: 'fixed/small/slow-IV',
-				containerPalette: 'Branded',
-				displayName: 'Guardian Labs',
-				grouped: defaultGrouped,
-			},
-			{
-				collectionType: 'dynamic/fast',
-				containerPalette: undefined,
-				displayName: 'Headlines',
-				grouped: defaultGrouped,
-			},
-		];
-
 		const adPositions = getFrontsBannerAdPositions(
 			brandedTestCollections,
 			'uk',
