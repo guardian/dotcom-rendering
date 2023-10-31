@@ -145,32 +145,37 @@ const getFrontsBannerAdPositions = (
 ): number[] =>
 	collections.reduce<{ heightSinceAd: number; adPositions: number[] }>(
 		(accumulator, collection, index) => {
-			accumulator.heightSinceAd += getCollectionHeight(collection);
+			const { heightSinceAd, adPositions } = accumulator;
 
+			const isFinalCollection = index === collections.length - 1;
+			const isMaxAdsReached = adPositions.length >= MAX_FRONTS_BANNER_ADS;
+			if (isFinalCollection || isMaxAdsReached) {
+				return accumulator;
+			}
+
+			const collectionHeight = getCollectionHeight(collection);
 			const prevCollection = collections[index - 1];
 			const isFirstCollection = prevCollection === undefined;
-			const isFinalCollection = index === collections.length - 1;
-			const isMaxAdsReached =
-				accumulator.adPositions.length >= MAX_FRONTS_BANNER_ADS;
-
-			if (isFirstCollection || isFinalCollection || isMaxAdsReached) {
+			if (isFirstCollection) {
+				accumulator.heightSinceAd += collectionHeight;
 				return accumulator;
 			}
 
 			if (
 				canAdGoAboveCollection(
-					accumulator.heightSinceAd,
+					heightSinceAd,
 					pageId,
 					collection,
 					prevCollection,
 				)
 			) {
 				return {
-					heightSinceAd: 0,
-					adPositions: [...accumulator.adPositions, index],
+					heightSinceAd: collectionHeight,
+					adPositions: [...adPositions, index],
 				};
 			}
 
+			accumulator.heightSinceAd += collectionHeight;
 			return accumulator;
 		},
 		{ heightSinceAd: 0, adPositions: [] },
