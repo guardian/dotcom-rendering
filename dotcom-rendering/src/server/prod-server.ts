@@ -1,5 +1,5 @@
 import compression from 'compression';
-import type { ErrorRequestHandler, Request, Response } from 'express';
+import type { ErrorRequestHandler, Handler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
@@ -51,7 +51,7 @@ export const prodServer = (): void => {
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
 
-	const healthcheck = (req: Request, res: Response) => {
+	const healthcheck: Handler = (req: Request, res: Response) => {
 		res.status(200).send('OKAY');
 	};
 	app.get('/_healthcheck', healthcheck);
