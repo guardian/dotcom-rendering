@@ -61,6 +61,9 @@ type IdentityUserFromCache = {
 } | null;
 
 let userFromCookieCache: IdentityUserFromCache = null;
+const cookieName = 'GU_U';
+const getUserCookie = (): string | null =>
+	getCookie({ name: cookieName, shouldMemoize: true });
 
 const decodeBase64 = (str: string): string =>
 	decodeURIComponent(
@@ -73,7 +76,7 @@ const decodeBase64 = (str: string): string =>
 
 const getUserFromCookie = (): IdentityUserFromCache => {
 	if (userFromCookieCache === null) {
-		const cookieData = getCookie({ name: 'GU_U', shouldMemoize: true });
+		const cookieData = getUserCookie();
 
 		if (cookieData) {
 			try {
@@ -101,7 +104,7 @@ const getUserFromCookie = (): IdentityUserFromCache => {
 				}
 			} catch (e) {
 				// eslint-disable-next-line no-console -- we want to log the error to console, not Sentry
-				console.error('Error parsing GU_U cookie', e);
+				console.error('Cookie value is malformed', e);
 			}
 		}
 	}
@@ -172,7 +175,7 @@ export const isUserLoggedInOktaRefactor = (): Promise<boolean> =>
 export function getSignedInStatusWithCookies():
 	| SignedOutWithCookies
 	| SignedInWithCookies {
-	const GU_UCookie = getCookie({ name: 'GU_U', shouldMemoize: true });
+	const GU_UCookie = getUserCookie();
 	return GU_UCookie === null || GU_UCookie === ''
 		? { kind: 'SignedOutWithCookies' }
 		: { kind: 'SignedInWithCookies' };
