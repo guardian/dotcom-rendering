@@ -1,6 +1,7 @@
 import type { Alarms } from '@guardian/cdk';
 import { GuNodeApp } from '@guardian/cdk';
 import { AccessScope } from '@guardian/cdk/lib/constants';
+import { GuUserData } from '@guardian/cdk/lib/constructs/autoscaling';
 import type { NoMonitoring } from '@guardian/cdk/lib/constructs/cloudwatch';
 import { GuStack, type GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
@@ -11,8 +12,6 @@ import {
 	InstanceType,
 	Peer,
 } from 'aws-cdk-lib/aws-ec2';
-import { getUserData } from './userData';
-import { GuUserData } from '@guardian/cdk/lib/constructs/autoscaling';
 
 interface DCRHalloweenProps extends GuStackProps {
 	app: string;
@@ -28,14 +27,6 @@ export class DotcomRenderingHalloween extends GuStack {
 		const { region } = this;
 		const { app, stage, instanceSize, scaling } = props;
 
-		// const userData = getUserData({
-		// 	app,
-		// 	elkStreamId: 'fake-value-for-now-please-change-me',
-		// 	region,
-		// 	stage,
-		// });
-
-
 		const userData = new GuUserData(this, {
 			app,
 			distributable: {
@@ -43,13 +34,9 @@ export class DotcomRenderingHalloween extends GuStack {
 				executionStatement: [`tar -zxf ${app}.tar.gz ${app}`,
 				 `cd ${app}`,
 				`sudo NODE_ENV=production GU_STAGE=${stage} make start-prod`].join(' && '),
-			}})
+			}}).userData;
 
 			userData.addCommands(`/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${region} 'fake-value-for-now-please-change-me' /var/log/dotcom-rendering/dotcom-rendering.log`)
-
-
-
-		console.log(userData.userData.render())
 
 		const vpcCidrBlock = '10.248.136.0/22';
 
