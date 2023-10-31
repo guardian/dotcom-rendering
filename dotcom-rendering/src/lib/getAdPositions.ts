@@ -3,7 +3,9 @@ import type { GroupedTrailsBase } from '../types/tagFront';
 
 type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
 
-export const getMerchHighPosition = (collectionCount: number): number => {
+const MAX_MOBILE_ADS = 10;
+
+const getMerchHighPosition = (collectionCount: number): number => {
 	if (collectionCount >= 4) {
 		return 2;
 	} else {
@@ -57,7 +59,7 @@ const isEvenIndex = (_collection: unknown, index: number) => index % 2 === 0;
  * After we've filtered out the containers next to which we can insert an ad,
  * we take every other container, up to a maximum of 10, for targeting MPU insertion.
  */
-export const getMobileAdPositions = (
+const getMobileAdPositions = (
 	collections: AdCandidate[],
 	merchHighPosition: number,
 ): number[] =>
@@ -65,8 +67,7 @@ export const getMobileAdPositions = (
 		.filter(shouldInsertAd(merchHighPosition))
 		.filter(isEvenIndex)
 		.map((collection: AdCandidate) => collections.indexOf(collection))
-		// Should insert no more than 10 ads
-		.slice(0, 10);
+		.slice(0, MAX_MOBILE_ADS);
 
 /**
  * Uses a very similar approach to pressed fronts, except we
@@ -76,7 +77,7 @@ export const getMobileAdPositions = (
  * The types are also slightly different, as we no longer have
  * specific container IDs, so we use the date which is unique
  */
-export const getTagFrontMobileAdPositions = (
+const getTagFrontMobileAdPositions = (
 	collections: Array<GroupedTrailsBase>,
 	merchHighPosition: number,
 ): number[] =>
@@ -97,7 +98,7 @@ export const getTagFrontMobileAdPositions = (
 		// Should insert no more than 10 ads
 		.slice(0, 10);
 
-const hasDesktopAd = (collection: AdCandidate) => {
+const hasDesktopMpuAd = (collection: AdCandidate) => {
 	return (
 		collection.collectionType == 'dynamic/slow-mpu' ||
 		collection.collectionType == 'fixed/small/slow-V-mpu' ||
@@ -105,9 +106,14 @@ const hasDesktopAd = (collection: AdCandidate) => {
 	);
 };
 
-export const getDesktopMpuAdPositions = (
-	collections: AdCandidate[],
-): number[] =>
+const getDesktopMpuAdPositions = (collections: AdCandidate[]): number[] =>
 	collections
-		.filter(hasDesktopAd)
+		.filter(hasDesktopMpuAd)
 		.map((collection) => collections.indexOf(collection));
+
+export {
+	getMerchHighPosition,
+	getMobileAdPositions,
+	getTagFrontMobileAdPositions,
+	getDesktopMpuAdPositions,
+};

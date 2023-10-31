@@ -255,7 +255,7 @@ describe('Mobile Ads', () => {
 	});
 });
 
-describe('Desktop Ads', () => {
+describe('Desktop MPU Ads', () => {
 	it('should return a list of the MPU ads/containers in correct positions', () => {
 		const testCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 			{ collectionType: 'fixed/small/slow-IV' },

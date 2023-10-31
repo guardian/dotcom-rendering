@@ -18,4 +18,8 @@ import type { FrontsBannerAdCollections } from '../types/commercial';
 
 export const frontsBannerExcludedCollections: FrontsBannerAdCollections = {
 	uk: ['Headlines', 'Ukraine invasion'],
+	us: ['Headlines', 'Ukraine invasion'],
+	au: ['Headlines', 'Ukraine invasion'],
+	international: ['Headlines', 'Ukraine invasion'],
+	europe: ['Headlines', 'Ukraine invasion'],
 };

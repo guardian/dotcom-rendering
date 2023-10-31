@@ -11,7 +11,7 @@ import {
 	news,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { Fragment, useRef } from 'react';
+import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
@@ -36,12 +36,12 @@ import { badgeFromBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { frontsBannerAdCollections } from '../lib/frontsBannerAbTestAdPositions';
 import {
 	getDesktopMpuAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
+import { getFrontsBannerAdPositions } from '../lib/getFrontsBannerAdPositions';
 import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
@@ -79,7 +79,9 @@ const isToggleable = (
 			collection.displayName.toLowerCase() != 'headlines' &&
 			!isNavList(collection)
 		);
-	} else return index != 0 && !isNavList(collection);
+	}
+
+	return index != 0 && !isNavList(collection);
 };
 
 const decideLeftContent = (
@@ -137,10 +139,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const showBannerAds = !!switches.frontsBannerAds;
 
-	const frontsBannerTargetedCollections = showBannerAds
-		? frontsBannerAdCollections[pageId]
-		: [];
-
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
 	);
@@ -149,11 +147,21 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
 		: [];
 
+	const desktopAdPositions = getFrontsBannerAdPositions(
+		front.pressedPage.collections.map(
+			({ collectionType, containerPalette, displayName, grouped }) => ({
+				collectionType,
+				containerPalette,
+				displayName,
+				grouped,
+			}),
+		),
+		pageId,
+	);
+
 	const desktopMpuAdPositions = renderAds
 		? getDesktopMpuAdPositions(front.pressedPage.collections)
 		: [];
-
-	const numBannerAdsInserted = useRef(0);
 
 	const renderMpuAds = renderAds && !showBannerAds;
 
@@ -338,12 +346,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									{decideFrontsBannerAdSlot(
 										renderAds,
 										hasPageSkin,
-										numBannerAdsInserted,
 										showBannerAds,
 										index,
-										pageId,
-										collection.displayName,
-										frontsBannerTargetedCollections,
+										desktopAdPositions,
 									)}
 									{!!trail.embedUri && (
 										<SnapCssSandbox
@@ -401,12 +406,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
-									numBannerAdsInserted,
 									showBannerAds,
 									index,
-									pageId,
-									collection.displayName,
-									frontsBannerTargetedCollections,
+									desktopAdPositions,
 								)}
 								<FrontSection
 									toggleable={true}
@@ -474,16 +476,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					) {
 						return (
 							<Fragment key={ophanName}>
-								{decideFrontsBannerAdSlot(
-									renderAds,
-									hasPageSkin,
-									numBannerAdsInserted,
-									showBannerAds,
-									index,
-									pageId,
-									collection.displayName,
-									frontsBannerTargetedCollections,
-								)}
 								<LabsSection
 									title={collection.displayName}
 									collectionId={collection.id}
@@ -547,12 +539,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
-									numBannerAdsInserted,
 									showBannerAds,
 									index,
-									pageId,
-									collection.displayName,
-									frontsBannerTargetedCollections,
+									desktopAdPositions,
 								)}
 								<Section
 									title={collection.displayName}
@@ -623,12 +612,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
-								numBannerAdsInserted,
 								showBannerAds,
 								index,
-								pageId,
-								collection.displayName,
-								frontsBannerTargetedCollections,
+								desktopAdPositions,
 							)}
 							<FrontSection
 								title={collection.displayName}
