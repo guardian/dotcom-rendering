@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { remSpace, textSans } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { palette } from '../palette';
 
 type IconProps = {
 	isFollowing: boolean;
@@ -30,9 +30,9 @@ const FollowIcon = ({ isFollowing }: IconProps) => {
 	);
 };
 
-const buttonStyles = (format: ArticleFormat) => css`
+const buttonStyles = css`
 	${textSans.small()}
-	color: ${decidePalette(format).text.articleLink};
+	color: ${palette('--follow')};
 	background: none;
 	border: none;
 	display: block;
@@ -58,30 +58,22 @@ const containerStyles = css`
 type Props = {
 	displayName: string;
 	isFollowing: boolean;
-	format: ArticleFormat;
 	onClickHandler: () => void;
 };
 
 export const FollowButton = ({
 	displayName,
 	isFollowing,
-	format,
 	onClickHandler,
 }: Props) => {
 	return (
-		<>
-			<button
-				onClick={onClickHandler}
-				type="button"
-				css={buttonStyles(format)}
-			>
-				<span css={containerStyles}>
-					<FollowIcon isFollowing={isFollowing} />
-					<span>
-						{isFollowing ? 'Unfollow' : 'Follow'} {displayName}
-					</span>
+		<button onClick={onClickHandler} type="button" css={buttonStyles}>
+			<span css={containerStyles}>
+				<FollowIcon isFollowing={isFollowing} />
+				<span>
+					{isFollowing ? 'Unfollow' : 'Follow'} {displayName}
 				</span>
-			</button>
-		</>
+			</span>
+		</button>
 	);
 };
