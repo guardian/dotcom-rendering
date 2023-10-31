@@ -28,6 +28,18 @@ const HEADLINES_US_TREAT: TreatType = {
 	altText: 'The White House',
 };
 
+const WELLNESS_US_TREAT: TreatType = {
+	links: [
+		{
+			linkTo: '/us/wellness',
+			text: 'Read more on living a good life in a complex world.',
+		},
+	],
+	theme: Pillar.Lifestyle,
+	imageUrl: 'https://uploads.guim.co.uk/2023/10/30/Wellness_Treat.png',
+	altText: 'Well Actually logo',
+};
+
 /**
  * PLATFORM_TREATS
  *
@@ -71,6 +83,11 @@ const PLATFORM_TREATS: TreatType[] = [
 		...SOCCER_TREAT,
 		pageId: 'us',
 		containerTitle: 'Sports',
+	},
+	{
+		...WELLNESS_US_TREAT,
+		pageId: 'us',
+		containerTitle: 'Wellness',
 	},
 ];
 
