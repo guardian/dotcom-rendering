@@ -9,6 +9,7 @@ import { ConfigProvider } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
+import { LightboxHash } from './LightboxHash.importable';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
@@ -146,6 +147,10 @@ describe('Island: server-side rendering', () => {
 				/>,
 			),
 		).not.toThrow();
+	});
+
+	test('LightboxHash', () => {
+		expect(() => renderToString(<LightboxHash />)).not.toThrow();
 	});
 
 	test('Liveness', () => {
