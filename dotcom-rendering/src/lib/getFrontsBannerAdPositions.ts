@@ -145,8 +145,7 @@ const getFrontsBannerAdPositions = (
 ): number[] =>
 	collections.reduce<{ heightSinceAd: number; adPositions: number[] }>(
 		(accumulator, collection, index) => {
-			const heightSinceAd =
-				accumulator.heightSinceAd + getCollectionHeight(collection);
+			accumulator.heightSinceAd += getCollectionHeight(collection);
 
 			const prevCollection = collections[index - 1];
 			const isFirstCollection = prevCollection === undefined;
@@ -155,15 +154,12 @@ const getFrontsBannerAdPositions = (
 				accumulator.adPositions.length >= MAX_FRONTS_BANNER_ADS;
 
 			if (isFirstCollection || isFinalCollection || isMaxAdsReached) {
-				return {
-					...accumulator,
-					heightSinceAd,
-				};
+				return accumulator;
 			}
 
 			if (
 				canAdGoAboveCollection(
-					heightSinceAd,
+					accumulator.heightSinceAd,
 					pageId,
 					collection,
 					prevCollection,
@@ -175,10 +171,7 @@ const getFrontsBannerAdPositions = (
 				};
 			}
 
-			return {
-				...accumulator,
-				heightSinceAd,
-			};
+			return accumulator;
 		},
 		{ heightSinceAd: 0, adPositions: [] },
 	).adPositions;
@@ -188,9 +181,8 @@ const getFrontsBannerAdPositions = (
  *
  * On tagged fronts, an ad in inserted above every third collection.
  *
- * Note: An ad can't be inserted above the last collection, because it would
- * be sandwiched between a fronts-banner ad and the merchandising ad which
- * is inserted below the main content of the page.
+ * Doesn't insert an ad above the final collection. We serve a merchandising slot below the
+ * last collection and we don't want to sandwich the last collection between two full-width ads.
  */
 const getTaggedFrontsBannerAdPositions = (numCollections: number): number[] => {
 	if (numCollections <= 3) {
