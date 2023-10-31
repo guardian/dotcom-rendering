@@ -7,13 +7,14 @@ import { getCookie, isString, isUndefined } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
+import type { AuthStatus } from '../lib/identity';
 import type {
 	CandidateConfig,
 	MaybeFC,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';

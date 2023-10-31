@@ -8,10 +8,7 @@ import {
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
-import type {
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../../lib/useAuthStatus';
+import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
 import type { CommentType } from '../../types/discussion';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianStaff } from './Badges';
