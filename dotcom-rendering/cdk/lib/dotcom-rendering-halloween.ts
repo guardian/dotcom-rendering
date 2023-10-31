@@ -12,6 +12,7 @@ import {
 	Peer,
 } from 'aws-cdk-lib/aws-ec2';
 import { getUserData } from './userData';
+import { GuUserData } from '@guardian/cdk/lib/constructs/autoscaling';
 
 interface DCRHalloweenProps extends GuStackProps {
 	app: string;
@@ -27,23 +28,31 @@ export class DotcomRenderingHalloween extends GuStack {
 		const { region } = this;
 		const { app, stage, instanceSize, scaling } = props;
 
-		const userData = getUserData({
+		// const userData = getUserData({
+		// 	app,
+		// 	elkStreamId: 'fake-value-for-now-please-change-me',
+		// 	region,
+		// 	stage,
+		// });
+
+
+		const userData = new GuUserData(this, {
 			app,
-			elkStreamId: 'fake-value-for-now-please-change-me',
-			region,
-			stage,
-		});
+			distributable: {
+				fileName: `${app}.tar.gz`,
+				executionStatement: [`tar -zxf ${app}.tar.gz ${app}`,
+				 `cd ${app}`,
+				`sudo NODE_ENV=production GU_STAGE=${stage} make start-prod`].join(' && '),
+			}})
+
+			userData.addCommands(`/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${region} 'fake-value-for-now-please-change-me' /var/log/dotcom-rendering/dotcom-rendering.log`)
+
+
+
+		console.log(userData.userData.render())
 
 		const vpcCidrBlock = '10.248.136.0/22';
-		// const vpc = GuVpc.fromIdParameter(this, 'vpc', { vpcCidrBlock });
-		// const publicSubnets = GuVpc.subnetsFromParameter(this, {
-		// 	type: SubnetType.PUBLIC,
-		// });
-		// const privateSubnets = GuVpc.subnetsFromParameter(this, {
-		// 	type: SubnetType.PRIVATE,
-		// });
 
-		// const criticalAlertsTopicArn = `arn:aws:sns:${region}:${this.account}:Frontend-${stage}-CriticalAlerts`;
 
 		const monitoringConfiguration =
 			stage === 'PROD'
