@@ -91,7 +91,7 @@ describe('decideFrontsBannerAdSlot', () => {
 		[[2, 5], 0],
 		[[], 1],
 	])(
-		'should return null if desktopAdPositions does NOT contain index',
+		'should return null if desktopAdPositions %p does NOT contain index %i',
 		(adPositions, i) => {
 			const result = decideFrontsBannerAdSlot(
 				renderAds,
@@ -110,7 +110,7 @@ describe('decideFrontsBannerAdSlot', () => {
 		[[2, 5], 5],
 		[[1], 1],
 	])(
-		'should NOT return null if desktopAdPositions contains index',
+		'should NOT return null if desktopAdPositions %p contains index %i',
 		(adPositions, i) => {
 			const result = decideFrontsBannerAdSlot(
 				renderAds,
