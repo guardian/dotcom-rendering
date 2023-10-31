@@ -31,9 +31,9 @@ import {
 } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
+import type { AuthStatus } from '../lib/identity';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { setAutomat } from '../lib/setAutomat';
-import type { AuthStatus } from '../lib/useAuthStatus';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';

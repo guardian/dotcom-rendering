@@ -5,10 +5,7 @@ import { Button, SvgCross } from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
 import { reportAbuse } from '../../lib/discussionApi';
-import type {
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../../lib/useAuthStatus';
+import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
 
 type FormData = {
 	categoryId: number;
