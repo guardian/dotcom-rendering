@@ -1,9 +1,12 @@
 import type { Alarms } from '@guardian/cdk';
-import { GuNodeApp } from '@guardian/cdk';
+import { GuEc2App } from '@guardian/cdk';
 import { AccessScope } from '@guardian/cdk/lib/constants';
-import { GuUserData } from '@guardian/cdk/lib/constructs/autoscaling';
 import type { NoMonitoring } from '@guardian/cdk/lib/constructs/cloudwatch';
-import { GuStack, type GuStackProps } from '@guardian/cdk/lib/constructs/core';
+import {
+	GuStack,
+	type GuStackProps,
+	GuStringParameter,
+} from '@guardian/cdk/lib/constructs/core';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import type { App } from 'aws-cdk-lib';
 import {
@@ -12,34 +15,29 @@ import {
 	InstanceType,
 	Peer,
 } from 'aws-cdk-lib/aws-ec2';
+import { getUserData } from './userData';
 
-interface DCRHalloweenProps extends GuStackProps {
+interface RenderingAppProps extends GuStackProps {
 	app: string;
 	instanceSize: InstanceSize;
 	scaling: GuAsgCapacity;
 }
 
-export class DotcomRenderingHalloween extends GuStack {
-	// This should be coming from the base class, no?
-	constructor(scope: App, id: string, props: DCRHalloweenProps) {
+export class RenderingApp extends GuStack {
+	constructor(scope: App, id: string, props: RenderingAppProps) {
 		super(scope, id, props);
 
-		const { region } = this;
+		const { region, stack } = this;
 		const { app, stage, instanceSize, scaling } = props;
 
-		const userData = new GuUserData(this, {
-			app,
-			distributable: {
-				fileName: `${app}.tar.gz`,
-				executionStatement: [`tar -zxf ${app}.tar.gz ${app}`,
-				 `cd ${app}`,
-				`sudo NODE_ENV=production GU_STAGE=${stage} make start-prod`].join(' && '),
-			}}).userData;
-
-			userData.addCommands(`/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${region} 'fake-value-for-now-please-change-me' /var/log/dotcom-rendering/dotcom-rendering.log`)
+		const ssmPrefix = `/${stage}/${stack}/${app}`;
 
 		const vpcCidrBlock = '10.248.136.0/22';
 
+		const elkStreamId = new GuStringParameter(this, 'ELKStreamId', {
+			fromSSM: true,
+			default: `${ssmPrefix}/logging.stream.name`,
+		}).valueAsString;
 
 		const monitoringConfiguration =
 			stage === 'PROD'
@@ -54,9 +52,10 @@ export class DotcomRenderingHalloween extends GuStack {
 				  } satisfies Alarms)
 				: ({ noMonitoring: true } satisfies NoMonitoring);
 
-		const nodeApp = new GuNodeApp(this, {
-			// access: '',
+		new GuEc2App(this, {
 			app,
+			// TODO - should we change to 3000?
+			applicationPort: 9000,
 			access: {
 				// TODO – ask DevX about Peer & CIDR ranges (and VPCs)
 				// … and what would be the meaning of an empty array?
@@ -65,14 +64,20 @@ export class DotcomRenderingHalloween extends GuStack {
 				scope: AccessScope.INTERNAL,
 			},
 			// TODO – is this true? Should every GuNodeApp need to be public facing?
-			certificateProps: { domainName: 'www.theguardian.com' },
 			instanceType: InstanceType.of(InstanceClass.T4G, instanceSize),
 			monitoringConfiguration,
-			// { minimumInstances: props.minCapacity, maximumInstances: props.maxCapacity}
 			scaling,
-			userData,
+			/** TODO - talk to DevX about using the GuUserData construct
+			 * We are limited by not using systemd because of automatic log shipping
+			 * @see https://github.com/guardian/cdk/blob/713c8eb6ef971307050492293a11aa89aaa173c1/src/patterns/ec2-app/base.ts#L64C1-L75C4
+			 */
+			userData: getUserData({ app, region, stage, elkStreamId }),
+			accessLogging: {
+				enabled: true,
+				prefix: `ELBLogs/${stack}/${app}/${stage}`,
+			},
+			// TODO - check changes to healthcheck
+			// TODO - check load balancer DNS output compatibility with frontend
 		});
-
-		console.log(nodeApp);
 	}
 }
