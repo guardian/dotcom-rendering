@@ -140,21 +140,6 @@ const canAdGoAboveNextCollection = (
 };
 
 /**
- * Checks if we have reached a condition that indicates that we no longer
- * want to insert any more fronts-banner ads into the page.
- */
-const canStillInsertAds = (
-	adPositions: number[],
-	collectionsLength: number,
-	index: number,
-) =>
-	adPositions.length < MAX_FRONTS_BANNER_ADS &&
-	// Don't insert ad below the second-last collection (above the last collection)
-	// We serve a merchandising slot below the last collection and we don't want
-	// to sandwich the last collection between two full-width ads.
-	index < collectionsLength - 2;
-
-/**
  * Decides where ads should be inserted on standard fronts pages.
  *
  * Iterates through the collections and decides where fronts-banner
@@ -168,16 +153,19 @@ const getFrontsBannerAdPositions = (
 	pageId: string,
 ): number[] => {
 	let heightSinceAd = 0;
-	const adPositions = [];
 
-	for (const [index, collection] of collections.entries()) {
-		if (!canStillInsertAds(adPositions, collections.length, index)) {
-			break;
+	return collections.reduce<number[]>((adPositions, collection, index) => {
+		if (adPositions.length >= MAX_FRONTS_BANNER_ADS) {
+			return adPositions;
 		}
 
+		// Don't insert an ad below the second-last collection (above the last collection)
+		// We serve a merchandising slot below the last collection and we don't want
+		// to sandwich the last collection between two full-width ads.
 		const nextCollection = collections[index + 1];
-		if (!nextCollection) {
-			break;
+		const nextCollectionPlusOne = collections[index + 2];
+		if (!nextCollection || !nextCollectionPlusOne) {
+			return adPositions;
 		}
 
 		heightSinceAd += getCollectionHeight(collection);
@@ -189,12 +177,12 @@ const getFrontsBannerAdPositions = (
 			) &&
 			canAdGoAboveNextCollection(heightSinceAd, pageId, nextCollection)
 		) {
-			adPositions.push(index + 1);
 			heightSinceAd = 0;
+			return [...adPositions, index + 1];
 		}
-	}
 
-	return adPositions;
+		return adPositions;
+	}, []);
 };
 
 /**
