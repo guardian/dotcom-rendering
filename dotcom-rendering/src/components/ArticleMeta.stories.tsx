@@ -90,15 +90,16 @@ export const ArticleStory = () => {
 	);
 };
 
+const appsFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
 export const ArticleAppsStory = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={appsFormat}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -115,6 +116,7 @@ export const ArticleAppsStory = () => {
 };
 /** @see /dotcom-rendering/docs/development/storybook.md */
 ArticleAppsStory.args = { config: { renderingTarget: 'Apps' } };
+ArticleAppsStory.decorators = [lightDecorator(appsFormat)];
 
 export const BrandingStory = () => {
 	return (

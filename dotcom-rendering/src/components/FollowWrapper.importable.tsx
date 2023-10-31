@@ -56,7 +56,6 @@ export const FollowWrapper = ({ id, displayName, format }: Props) => {
 				onClickHandler={
 					isFollowing !== undefined ? handler : () => undefined
 				}
-				format={format}
 			/>
 		</div>
 	);
