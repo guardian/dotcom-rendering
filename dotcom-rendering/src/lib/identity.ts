@@ -61,8 +61,7 @@ type IdentityUserFromCache = {
 } | null;
 
 let userFromCookieCache: IdentityUserFromCache = null;
-const cookieName = 'GU_U';
-const getUserCookie = (): string | null => getCookie({ name: cookieName });
+
 const decodeBase64 = (str: string): string =>
 	decodeURIComponent(
 		escape(
@@ -74,7 +73,7 @@ const decodeBase64 = (str: string): string =>
 
 const getUserFromCookie = (): IdentityUserFromCache => {
 	if (userFromCookieCache === null) {
-		const cookieData = getUserCookie();
+		const cookieData = getCookie({ name: 'GU_U', shouldMemoize: true });
 
 		if (cookieData) {
 			const userData = JSON.parse(
