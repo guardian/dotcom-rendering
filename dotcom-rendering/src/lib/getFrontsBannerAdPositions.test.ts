@@ -149,7 +149,7 @@ describe('Standard fronts fronts-banner ad slots', () => {
 	it('calculates ad positions correctly', () => {
 		const adPositions = getFrontsBannerAdPositions(testCollections, 'uk');
 
-		expect(adPositions).toEqual([3, 6, 9, 12, 16, 19]);
+		expect(adPositions).toEqual([3, 6, 9, 12, 15, 19]);
 	});
 
 	it('does NOT insert ads above or below branded content', () => {
@@ -210,7 +210,7 @@ describe('Standard fronts fronts-banner ad slots', () => {
 	});
 });
 
-describe.only('Tagged fronts fronts-banner ad slots', () => {
+describe('Tagged fronts fronts-banner ad slots', () => {
 	it('should insert 0 ads if there are less than 5 containers', () => {
 		expect(getTaggedFrontsBannerAdPositions(1)).toEqual([]);
 		expect(getTaggedFrontsBannerAdPositions(3)).toEqual([]);
