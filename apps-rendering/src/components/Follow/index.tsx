@@ -47,13 +47,13 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	.notifications-on, .tag-following {
 		${followButtonStyles}
 		padding-top: 0.15ch;
-		background-color: ${fill.icon(format)};
+		background-color: ${fill.followIcon(format)};
 		${darkModeCss`
-			background-color: ${fill.iconDark(format)};
+			background-color: ${fill.followIconDark(format)};
 		`}
 
 		svg {
-			fill: ${background.articleContent(format)};
+			fill: ${background.articleContentFollowIcon(format)};
 			${followIconStyles}
 			${darkModeCss`
 				fill: ${background.articleContentDark(format)};
@@ -64,16 +64,16 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	.tag-not-following {
 		${followButtonStyles}
 		background-color: none;
-		border: 1px solid ${fill.icon(format)};
+		border: 1px solid ${fill.followIcon(format)};
 		${darkModeCss`
-				border: 1px solid ${fill.iconDark(format)};
+				border: 1px solid ${fill.followIconDark(format)};
 		`}
 
 		svg {
-			fill: ${fill.icon(format)};
+			fill: ${fill.followIcon(format)};
 			${followIconStyles}
 			${darkModeCss`
-				fill: ${fill.iconDark(format)};
+				fill: ${fill.followIconDark(format)};
 			`}
 		}
 	}
