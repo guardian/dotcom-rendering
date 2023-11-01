@@ -234,6 +234,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						backgroundColour={brandBackground.primary}
 						element="nav"
 						hasPageSkin={hasPageSkin}
+						hasPageSkinContentSelfConstrain={true}
 					>
 						<Nav
 							nav={NAV}
