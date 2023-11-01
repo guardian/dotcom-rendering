@@ -56,12 +56,6 @@ const WELLNESS_US_TREAT: TreatType = {
 const PLATFORM_TREATS: TreatType[] = [
 	{
 		...HEADLINES_US_TREAT,
-		pageId: 'us',
-		containerTitle: 'Spotlight',
-		editionId: 'US',
-	},
-	{
-		...HEADLINES_US_TREAT,
 		pageId: 'us-news',
 		containerTitle: 'US headlines',
 	},
