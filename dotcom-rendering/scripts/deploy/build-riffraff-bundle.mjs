@@ -14,6 +14,7 @@ const target = path.resolve(dirname, '../..', 'target');
  * ├── ${copyFrontendStatic()}
  * ├── ${copyApp('rendering')}
  * ├── ${copyApp('front-web')}
+ * └── ${copyApp('article-rendering')}
  */
 
 /**
@@ -34,20 +35,45 @@ const target = path.resolve(dirname, '../..', 'target');
  * @param appName {string}
  **/
 const copyApp = (appName) => {
-	// GOTCHA: This is a little hack to be backwards compatible with the naming for when this was a single stack app
-	const cfnTemplateName = appName === 'rendering' ? '' : `-${appName}`;
-	const cfnFolder =
-		appName === 'rendering' ? 'frontend-cfn' : `${appName}-cfn`;
+	/**
+	 * GOTCHA: This is a little hack to be backwards compatible with the naming for when this was a single stack app
+	 * @param { 'rendering' | 'front-web' | 'article-rendering' } app
+	 * @param { 'CODE' | 'PROD' } stage
+	 */
+	const getCfnTemplateName = (app, stage) => {
+		switch (app) {
+			case 'rendering':
+				return `DotcomRendering-${stage}.template.json`;
+			case 'front-web':
+				return `DotcomRendering-front-web-${stage}.template.json`;
+			case 'article-rendering':
+				return `ArticleRendering-${stage}.template.json`;
+		}
+	};
+
+	/**
+	 * @param { 'rendering' | 'front-web' | 'article-rendering' } app
+	 */
+	const getCfnFolder = (app) => {
+		switch (app) {
+			case 'rendering':
+				return 'frontend-cfn';
+			case 'front-web':
+				return 'front-web-cfn';
+			case 'article-rendering':
+				return 'article-rendering-cfn';
+		}
+	};
 
 	log(` - copying app: ${appName}`);
 
 	log(` - ${appName}: copying cloudformation config`);
 	const cfnJob = cpy(
 		[
-			`cdk.out/DotcomRendering${cfnTemplateName}-CODE.template.json`,
-			`cdk.out/DotcomRendering${cfnTemplateName}-PROD.template.json`,
+			`cdk.out/${getCfnTemplateName(appName, 'CODE')}`,
+			`cdk.out/${getCfnTemplateName(appName, 'PROD')}`,
 		],
-		path.resolve(target, cfnFolder),
+		path.resolve(target, getCfnFolder(appName)),
 	);
 
 	log(` - ${appName}: copying makefile`);
@@ -130,6 +156,7 @@ const copyRiffRaff = () => {
 Promise.all([
 	...copyApp('rendering'),
 	...copyApp('front-web'),
+	...copyApp('article-rendering'),
 	...copyFrontendStatic(),
 	copyRiffRaff(),
 ]).catch((err) => {
