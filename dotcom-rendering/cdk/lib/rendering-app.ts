@@ -51,7 +51,7 @@ export class RenderingApp extends GuStack {
 						unhealthyInstancesAlarm: true,
 				  } satisfies Alarms)
 				: ({ noMonitoring: true } satisfies NoMonitoring);
-
+		// TODO – We wanted to use GUNodeApp but it required a certificate ?
 		new GuEc2App(this, {
 			app,
 			// TODO - should we change to 3000?
@@ -63,7 +63,6 @@ export class RenderingApp extends GuStack {
 				cidrRanges: [Peer.ipv4(vpcCidrBlock)],
 				scope: AccessScope.INTERNAL,
 			},
-			// TODO – is this true? Should every GuNodeApp need to be public facing?
 			instanceType: InstanceType.of(InstanceClass.T4G, instanceSize),
 			monitoringConfiguration,
 			scaling,
