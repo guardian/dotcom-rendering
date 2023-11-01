@@ -61,6 +61,4 @@ jobs:
             frontend-static:
               - frontend-static
             article-rendering-cfn:
-              -dotcom-rendering/cdk.out/ArticleRendering-CODE.template.json
-            article-rendering:
-              - article-rendering
+              - dotcom-rendering/cdk.out/ArticleRendering-CODE.template.json
