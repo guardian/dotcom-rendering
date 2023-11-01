@@ -37,10 +37,10 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import {
+	getFrontsBannerAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
-} from '../lib/getAdPositions';
-import { getFrontsBannerAdPositions } from '../lib/getFrontsBannerAdPositions';
+} from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';

@@ -1,6 +1,13 @@
 import type { DCRCollectionType } from '../types/front';
 import { frontsBannerExcludedCollections } from './frontsBannerExclusions';
 
+/**
+ * The maximum number of fronts-banner ads that can be inserted on any front.
+ */
+const MAX_FRONTS_BANNER_ADS = 6;
+
+const MAX_MOBILE_ADS = 10;
+
 type GroupedCounts = {
 	snap: number;
 	huge: number;
@@ -9,10 +16,71 @@ type GroupedCounts = {
 	standard: number;
 };
 
+type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
+
+const getMerchHighPosition = (collectionCount: number): number => {
+	if (collectionCount >= 4) {
+		return 2;
+	} else {
+		return 0;
+	}
+};
+
+// This happens on the recipes front, where the first container is a thrasher see: https://github.com/guardian/frontend/pull/20617
+const hasFirstContainerThrasher = (collectionType: string, index: number) =>
+	index === 0 && collectionType === 'fixed/thrasher';
+
+const hasAdjacentCommercialContainer = (
+	collectionIndex: number,
+	merchHighPosition: number,
+) => collectionIndex === merchHighPosition;
+
+const hasAdjacentThrasher = (index: number, collections: AdCandidate[]) =>
+	collections[index + 1]?.collectionType === 'fixed/thrasher';
+
+const isMostViewedContainer = (collection: AdCandidate) =>
+	collection.collectionType === 'news/most-popular';
+
+const shouldInsertAd =
+	(merchHighPosition: number) =>
+	(
+		collection: AdCandidate,
+		collectionIndex: number,
+		collections: AdCandidate[],
+	) =>
+		!(
+			hasFirstContainerThrasher(
+				collection.collectionType,
+				collectionIndex,
+			) ||
+			hasAdjacentCommercialContainer(
+				collectionIndex,
+				merchHighPosition,
+			) ||
+			hasAdjacentThrasher(collectionIndex, collections) ||
+			isMostViewedContainer(collection)
+		);
+
+const isEvenIndex = (_collection: unknown, index: number) => index % 2 === 0;
+
 /**
- * The maximum number of fronts-banner ads that can be inserted on any front.
+ * We do not insert mobile ads:
+ * a. after the first container if it is a thrasher
+ * b. after a commercial container (e.g. merchandising-high)
+ * c. between a regular container and a thrasher
+ * d. after the Most Viewed container.
+ * After we've filtered out the containers next to which we can insert an ad,
+ * we take every other container, up to a maximum of 10, for targeting MPU insertion.
  */
-const MAX_FRONTS_BANNER_ADS = 6;
+const getMobileAdPositions = (
+	collections: AdCandidate[],
+	merchHighPosition: number,
+): number[] =>
+	collections
+		.filter(shouldInsertAd(merchHighPosition))
+		.filter(isEvenIndex)
+		.map((collection: AdCandidate) => collections.indexOf(collection))
+		.slice(0, MAX_MOBILE_ADS);
 
 /**
  * Estimates the height of a collection.
@@ -181,26 +249,8 @@ const getFrontsBannerAdPositions = (
 		{ heightSinceAd: 0, adPositions: [] },
 	).adPositions;
 
-/**
- * Decides where ads should be inserted on tagged fronts.
- *
- * On tagged fronts, an ad in inserted above every third collection.
- *
- * Doesn't insert an ad above the final collection. We serve a merchandising slot below the
- * last collection and we don't want to sandwich the last collection between two full-width ads.
- */
-const getTaggedFrontsBannerAdPositions = (numCollections: number): number[] => {
-	if (numCollections <= 3) {
-		// There are no suitable positions to insert an ad.
-		return [];
-	}
-
-	const numAdsThatFit = Math.floor((numCollections - 1) / 3);
-
-	// Ensure we do not insert more than the maximum allowed number of ads.
-	const numAdsToInsert = Math.min(numAdsThatFit, MAX_FRONTS_BANNER_ADS);
-
-	return Array.from({ length: numAdsToInsert }, (_, i) => i * 3 + 2);
+export {
+	getMerchHighPosition,
+	getMobileAdPositions,
+	getFrontsBannerAdPositions,
 };
-
-export { getFrontsBannerAdPositions, getTaggedFrontsBannerAdPositions };

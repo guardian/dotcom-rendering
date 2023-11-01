@@ -1,5 +1,14 @@
+import {
+	brandedTestCollections,
+	testCollectionsUk,
+	testCollectionsUs,
+} from '../../fixtures/manual/frontCollections';
 import type { DCRCollectionType } from '../types/front';
-import { getMerchHighPosition, getMobileAdPositions } from './getAdPositions';
+import {
+	getFrontsBannerAdPositions,
+	getMerchHighPosition,
+	getMobileAdPositions,
+} from './getFrontsAdPositions';
 
 const defaultTestCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 	...Array<number>(12),
@@ -248,5 +257,28 @@ describe('Mobile Ads', () => {
 		);
 
 		expect(mobileAdPositions).toEqual([1, 4, 6, 8, 10, 12]);
+	});
+});
+
+describe('Standard fronts fronts-banner ad slots', () => {
+	it('calculates ad positions correctly for an example of the UK network front', () => {
+		const adPositions = getFrontsBannerAdPositions(testCollectionsUk, 'uk');
+
+		expect(adPositions).toEqual([3, 6, 8, 11, 14, 17]);
+	});
+
+	it('calculates ad positions correctly for an example of the US network front', () => {
+		const adPositions = getFrontsBannerAdPositions(testCollectionsUs, 'us');
+
+		expect(adPositions).toEqual([3, 6, 8, 11, 13, 18]);
+	});
+
+	it('does NOT insert ads above or below branded content', () => {
+		const adPositions = getFrontsBannerAdPositions(
+			brandedTestCollections,
+			'uk',
+		);
+
+		expect(adPositions).toEqual([]);
 	});
 });

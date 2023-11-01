@@ -1,6 +1,6 @@
 import { Hide } from '@guardian/source-react-components';
 import { AdSlot } from '../../components/AdSlot.web';
-import { getMerchHighPosition } from '../../lib/getAdPositions';
+import { getMerchHighPosition } from '../../lib/getFrontsAdPositions';
 
 export const decideMerchHighAndMobileAdSlots = (
 	renderAds: boolean,

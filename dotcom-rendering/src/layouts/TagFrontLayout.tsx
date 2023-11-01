@@ -24,11 +24,11 @@ import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
+import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
 import {
-	getMerchHighPosition,
 	getTagFrontMobileAdPositions,
-} from '../lib/getAdPositions';
-import { getTaggedFrontsBannerAdPositions } from '../lib/getFrontsBannerAdPositions';
+	getTagFrontsBannerAdPositions,
+} from '../lib/getTagFrontsAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagFrontType } from '../types/tagFront';
 import {
@@ -84,7 +84,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 	const renderAds = canRenderAds(tagFront);
 
 	const desktopAdPositions = renderAds
-		? getTaggedFrontsBannerAdPositions(tagFront.groupedTrails.length)
+		? getTagFrontsBannerAdPositions(tagFront.groupedTrails.length)
 		: [];
 
 	const mobileAdPositions = renderAds
