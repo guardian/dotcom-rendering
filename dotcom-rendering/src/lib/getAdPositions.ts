@@ -98,22 +98,8 @@ const getTagFrontMobileAdPositions = (
 		// Should insert no more than 10 ads
 		.slice(0, 10);
 
-const hasDesktopMpuAd = (collection: AdCandidate) => {
-	return (
-		collection.collectionType == 'dynamic/slow-mpu' ||
-		collection.collectionType == 'fixed/small/slow-V-mpu' ||
-		collection.collectionType == 'fixed/medium/slow-XII-mpu'
-	);
-};
-
-const getDesktopMpuAdPositions = (collections: AdCandidate[]): number[] =>
-	collections
-		.filter(hasDesktopMpuAd)
-		.map((collection) => collections.indexOf(collection));
-
 export {
 	getMerchHighPosition,
 	getMobileAdPositions,
 	getTagFrontMobileAdPositions,
-	getDesktopMpuAdPositions,
 };

@@ -1,9 +1,4 @@
-import { Hide } from '@guardian/source-react-components';
-import {
-	Card33Media33,
-	CardDefault,
-	CardDefaultMediaMobile,
-} from '../lib/cardWrappers';
+import { CardDefault } from '../lib/cardWrappers';
 import {
 	Card25_Card25_Card25_Card25,
 	Card25_Card75,
@@ -18,7 +13,6 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { AdSlot } from './AdSlot.web';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
@@ -27,69 +21,7 @@ type Props = {
 	groupedTrails: DCRGroupedTrails;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	adIndex: number;
-	renderAds: boolean;
 	imageLoading: Loading;
-};
-
-/* .___________.___________.___________.
- * |###########|___________|           |
- * |           |___________|    MPU    |
- * |___________|___________|___________|
- */
-const Card33_ColumnOfThree33_Ad33 = ({
-	cards,
-	containerPalette,
-	showAge,
-	adIndex,
-	imageLoading,
-}: {
-	cards: DCRFrontCard[];
-	imageLoading: Loading;
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	adIndex: number;
-}) => {
-	const card33 = cards.slice(0, 1);
-	const cards33 = cards.slice(1, 4);
-
-	return (
-		<UL direction="row">
-			{card33.map((card) => (
-				<LI percentage="33.333%" padSides={true} key={card.url}>
-					<Card33Media33
-						trail={card}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imageLoading={imageLoading}
-					/>
-				</LI>
-			))}
-
-			<LI
-				percentage="33.333%"
-				showDivider={true}
-				containerPalette={containerPalette}
-			>
-				<UL direction="column">
-					{cards33.map((card) => (
-						<LI padSides={true} key={card.url}>
-							<CardDefault
-								trail={card}
-								containerPalette={containerPalette}
-								showAge={showAge}
-							/>
-						</LI>
-					))}
-				</UL>
-			</LI>
-			<LI percentage="33.333%" padSides={true} showDivider={true}>
-				<Hide until="tablet">
-					<AdSlot position="inline" index={adIndex} />
-				</Hide>
-			</LI>
-		</UL>
-	);
 };
 
 /* .___________.___________.___________.
@@ -119,53 +51,8 @@ const Card33_Card33_Card33 = ({
 	);
 };
 
-/* ._________________._________________.
- * |_###_____________|                 |
- * |_###_____________|       MPU       |
- * |_###_____________|_________________|
- */
-const ColumnOfThree50_Ad50 = ({
-	cards,
-	containerPalette,
-	showAge,
-	adIndex,
-	imageLoading,
-}: {
-	cards: DCRFrontCard[];
-	imageLoading: Loading;
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	adIndex: number;
-}) => {
-	const cards50 = cards.slice(0, 3);
-
-	return (
-		<UL direction="row">
-			<LI percentage="50%">
-				<UL direction="column">
-					{cards50.map((card) => (
-						<LI padSides={true} key={card.url}>
-							<CardDefaultMediaMobile
-								trail={card}
-								containerPalette={containerPalette}
-								showAge={showAge}
-								imageLoading={imageLoading}
-							/>
-						</LI>
-					))}
-				</UL>
-			</LI>
-			<LI percentage="50%" padSides={true} showDivider={true}>
-				<Hide until="tablet">
-					<AdSlot position="inline" index={adIndex} />
-				</Hide>
-			</LI>
-		</UL>
-	);
-};
-
 /**
- * DynamicSlowMPU
+ * DynamicSlow
  *
  * This container only allows big and standard cards (from groupedTrails)
  *
@@ -182,8 +69,6 @@ export const DynamicSlowMPU = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
-	adIndex,
-	renderAds,
 	imageLoading,
 }: Props) => {
 	let firstSliceLayout:
@@ -222,11 +107,9 @@ export const DynamicSlowMPU = ({
 
 	let secondSliceLayout:
 		| 'noFirstSlice'
+		| 'noFirstSliceThreeOrMore'
 		| 'standard'
-		| 'noFirstSliceNoMPU'
-		| 'noFirstSliceNoMPUThreeOrMore'
-		| 'standardNoMPU'
-		| 'standardNoMPUFourOrMore';
+		| 'standardFourOrMore';
 
 	let secondSliceCards: DCRFrontCard[] = [];
 	const standards = [
@@ -236,30 +119,20 @@ export const DynamicSlowMPU = ({
 	];
 
 	if (firstSliceCards.length === 0) {
-		if (renderAds) {
-			secondSliceCards = standards;
-			secondSliceLayout = 'noFirstSlice';
+		if (standards.length > 2) {
+			secondSliceCards = standards.slice(0, 4);
+			secondSliceLayout = 'noFirstSliceThreeOrMore';
 		} else {
-			if (standards.length > 2) {
-				secondSliceCards = standards.slice(0, 4);
-				secondSliceLayout = 'noFirstSliceNoMPUThreeOrMore';
-			} else {
-				secondSliceCards = standards.slice(0, 2);
-				secondSliceLayout = 'noFirstSliceNoMPU';
-			}
+			secondSliceCards = standards.slice(0, 2);
+			secondSliceLayout = 'noFirstSlice';
 		}
 	} else {
-		if (renderAds) {
-			secondSliceCards = standards;
-			secondSliceLayout = 'standard';
+		if (standards.length > 3) {
+			secondSliceCards = standards.slice(0, 5);
+			secondSliceLayout = 'standardFourOrMore';
 		} else {
-			if (standards.length > 3) {
-				secondSliceCards = standards.slice(0, 5);
-				secondSliceLayout = 'standardNoMPUFourOrMore';
-			} else {
-				secondSliceCards = standards.slice(0, 3);
-				secondSliceLayout = 'standardNoMPU';
-			}
+			secondSliceCards = standards.slice(0, 3);
+			secondSliceLayout = 'standard';
 		}
 	}
 
@@ -308,29 +181,7 @@ export const DynamicSlowMPU = ({
 
 	const SecondSlice = () => {
 		switch (secondSliceLayout) {
-			// With MPU
 			case 'standard':
-				return (
-					<ColumnOfThree50_Ad50
-						cards={secondSliceCards}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						adIndex={adIndex}
-						imageLoading={imageLoading}
-					/>
-				);
-			case 'noFirstSlice':
-				return (
-					<Card33_ColumnOfThree33_Ad33
-						cards={secondSliceCards}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						adIndex={adIndex}
-						imageLoading={imageLoading}
-					/>
-				);
-			// Without MPU
-			case 'standardNoMPU':
 				return (
 					<Card33_Card33_Card33
 						cards={secondSliceCards}
@@ -339,7 +190,7 @@ export const DynamicSlowMPU = ({
 					/>
 				);
 
-			case 'standardNoMPUFourOrMore':
+			case 'standardFourOrMore':
 				return (
 					<ColumnOfCards50_Card25_Card25
 						cards={secondSliceCards}
@@ -349,7 +200,7 @@ export const DynamicSlowMPU = ({
 					/>
 				);
 
-			case 'noFirstSliceNoMPU':
+			case 'noFirstSlice':
 				return (
 					<Card50_Card50
 						cards={secondSliceCards}
@@ -358,7 +209,7 @@ export const DynamicSlowMPU = ({
 						imageLoading={imageLoading}
 					/>
 				);
-			case 'noFirstSliceNoMPUThreeOrMore':
+			case 'noFirstSliceThreeOrMore':
 				return (
 					<Card25_Card25_Card25_Card25
 						cards={secondSliceCards}
