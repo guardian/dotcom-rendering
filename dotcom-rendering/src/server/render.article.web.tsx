@@ -3,6 +3,7 @@ import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
+import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -14,7 +15,6 @@ import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { getCurrentPillar } from '../lib/layoutHelpers';
-import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractGA } from '../model/extract-ga';
 import { extractNAV } from '../model/extract-nav';

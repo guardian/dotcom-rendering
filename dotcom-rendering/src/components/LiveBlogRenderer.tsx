@@ -1,18 +1,15 @@
 import { Hide } from '@guardian/source-react-components';
-import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
-import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
-import { Island } from '../components/Island';
-import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
-import { LiveBlock } from '../components/LiveBlock';
-import { LiveBlogBlocksAndAdverts } from '../components/LiveBlogBlocksAndAdverts';
-import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
-import { PinnedPost } from '../components/PinnedPost';
-import {
-	hasRelevantTopics,
-	TopicFilterBank,
-} from '../components/TopicFilterBank';
 import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
+import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
+import { FilterKeyEventsToggle } from './FilterKeyEventsToggle.importable';
+import { Island } from './Island';
+import { KeyEventsCarousel } from './KeyEventsCarousel.importable';
+import { LiveBlock } from './LiveBlock';
+import { LiveBlogBlocksAndAdverts } from './LiveBlogBlocksAndAdverts';
+import { LiveBlogEpic } from './LiveBlogEpic.importable';
+import { PinnedPost } from './PinnedPost';
+import { hasRelevantTopics, TopicFilterBank } from './TopicFilterBank';
 
 type Props = {
 	format: ArticleFormat;
