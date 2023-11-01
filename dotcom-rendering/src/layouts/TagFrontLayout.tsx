@@ -24,7 +24,6 @@ import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
-import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
 import {
 	getTagFrontMobileAdPositions,
 	getTagFrontsBannerAdPositions,
@@ -73,10 +72,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 	const palette = decidePalette(format);
 
-	const merchHighPosition = getMerchHighPosition(
-		tagFront.groupedTrails.length,
-	);
-
 	const {
 		config: { switches, hasPageSkin, isPaidContent },
 	} = tagFront;
@@ -88,10 +83,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 		: [];
 
 	const mobileAdPositions = renderAds
-		? getTagFrontMobileAdPositions(
-				tagFront.groupedTrails,
-				merchHighPosition,
-		  )
+		? getTagFrontMobileAdPositions(tagFront.groupedTrails)
 		: [];
 
 	return (

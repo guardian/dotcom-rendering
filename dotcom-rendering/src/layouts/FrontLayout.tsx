@@ -38,7 +38,6 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import {
 	getFrontsBannerAdPositions,
-	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
@@ -131,12 +130,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
-	const merchHighPosition = getMerchHighPosition(
-		front.pressedPage.collections.length,
-	);
-
 	const mobileAdPositions = renderAds
-		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
+		? getMobileAdPositions(front.pressedPage.collections)
 		: [];
 
 	const desktopAdPositions = renderAds

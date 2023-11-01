@@ -6,7 +6,6 @@ import {
 import type { DCRCollectionType } from '../types/front';
 import {
 	getFrontsBannerAdPositions,
-	getMerchHighPosition,
 	getMobileAdPositions,
 } from './getFrontsAdPositions';
 
@@ -18,45 +17,36 @@ const defaultTestCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 
 describe('Mobile Ads', () => {
 	it(`Should not insert ad after container if it's the first one and it's a thrasher`, () => {
-		const merchHighPosition = 2;
 		const testCollections = [...defaultTestCollections];
 		testCollections.unshift({ collectionType: 'fixed/thrasher' });
 
-		const mobileAdPositions = getMobileAdPositions(
-			testCollections,
-			merchHighPosition,
-		);
+		const mobileAdPositions = getMobileAdPositions(testCollections);
 
 		expect(mobileAdPositions).not.toContain(0);
 	});
 
 	// MerchandiseHigh is in position:
 	// 2: when it's a network front and collections are equal or more than 4
-	// 1: when collections are equal or more than 4 and is not a network front
 	// 0: when collections are less than 4
-	it.each([2, 1, 0])(
-		`should not insert ad when merchandise high is in position %i`,
-		(merchHighPosition) => {
+	it.each([
+		[4, 2],
+		[3, 0],
+	])(
+		`should not insert ad when there are %i collections and merchandising-high is in position %i`,
+		(numCollections, merchHighPosition) => {
 			const mobileAdPositions = getMobileAdPositions(
-				defaultTestCollections,
-				merchHighPosition,
+				defaultTestCollections.slice(0, numCollections),
 			);
 			expect(mobileAdPositions).not.toContain(merchHighPosition);
 		},
 	);
 
 	it('Should not insert ad after a thrasher container', () => {
-		const merchHighPosition = getMerchHighPosition(
-			defaultTestCollections.length,
-		);
 		const testCollections = [...defaultTestCollections];
 		testCollections.splice(6, 0, { collectionType: 'fixed/thrasher' });
 		testCollections.splice(9, 0, { collectionType: 'fixed/thrasher' });
 
-		const mobileAdPositions = getMobileAdPositions(
-			testCollections,
-			merchHighPosition,
-		);
+		const mobileAdPositions = getMobileAdPositions(testCollections);
 
 		expect(mobileAdPositions).not.toContain(7);
 		expect(mobileAdPositions).not.toContain(10);
@@ -80,12 +70,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(testCollections.length);
-
-		const mobileAdPositions = getMobileAdPositions(
-			testCollections,
-			merchHighPosition,
-		);
+		const mobileAdPositions = getMobileAdPositions(testCollections);
 
 		expect(mobileAdPositions).toEqual([0, 3, 5, 7, 9, 11]);
 	});
@@ -119,19 +104,13 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(testCollections.length);
-
-		const mobileAdPositions = getMobileAdPositions(
-			testCollections,
-			merchHighPosition,
-		);
+		const mobileAdPositions = getMobileAdPositions(testCollections);
 
 		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 12, 16, 18, 20, 22]);
 	});
 
 	// We used https://www.theguardian.com/international as a blueprint
 	it('International Network Front, with more than 4 collections, with thrashers at various places', () => {
-		const merchHighPosition = 3;
 		const testCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 			{ collectionType: 'dynamic/fast' },
 			{ collectionType: 'fixed/small/slow-IV' },
@@ -155,12 +134,9 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const mobileAdPositions = getMobileAdPositions(
-			testCollections,
-			merchHighPosition,
-		);
+		const mobileAdPositions = getMobileAdPositions(testCollections);
 
-		expect(mobileAdPositions).toEqual([0, 2, 6, 9, 13, 15, 17]);
+		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 13, 15, 17]);
 	});
 
 	// We used https://www.theguardian.com/us as a blueprint
@@ -189,12 +165,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(testCollections.length);
-
-		const mobileAdPositions = getMobileAdPositions(
-			testCollections,
-			merchHighPosition,
-		);
+		const mobileAdPositions = getMobileAdPositions(testCollections);
 
 		expect(mobileAdPositions).toEqual([0, 4, 7, 10, 13, 15, 17]);
 	});
@@ -220,12 +191,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(testCollections.length);
-
-		const mobileAdPositions = getMobileAdPositions(
-			testCollections,
-			merchHighPosition,
-		);
+		const mobileAdPositions = getMobileAdPositions(testCollections);
 
 		expect(mobileAdPositions).toEqual([0, 4, 8, 10, 13]);
 	});
@@ -249,12 +215,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(testCollections.length);
-
-		const mobileAdPositions = getMobileAdPositions(
-			testCollections,
-			merchHighPosition,
-		);
+		const mobileAdPositions = getMobileAdPositions(testCollections);
 
 		expect(mobileAdPositions).toEqual([1, 4, 6, 8, 10, 12]);
 	});

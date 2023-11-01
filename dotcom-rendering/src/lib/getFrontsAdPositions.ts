@@ -18,13 +18,8 @@ type GroupedCounts = {
 
 type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
 
-const getMerchHighPosition = (collectionCount: number): number => {
-	if (collectionCount >= 4) {
-		return 2;
-	} else {
-		return 0;
-	}
-};
+const getMerchHighPosition = (collectionCount: number): number =>
+	collectionCount >= 4 ? 2 : 0;
 
 // This happens on the recipes front, where the first container is a thrasher see: https://github.com/guardian/frontend/pull/20617
 const hasFirstContainerThrasher = (collectionType: string, index: number) =>
@@ -72,15 +67,15 @@ const isEvenIndex = (_collection: unknown, index: number) => index % 2 === 0;
  * After we've filtered out the containers next to which we can insert an ad,
  * we take every other container, up to a maximum of 10, for targeting MPU insertion.
  */
-const getMobileAdPositions = (
-	collections: AdCandidate[],
-	merchHighPosition: number,
-): number[] =>
-	collections
+const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
+	const merchHighPosition = getMerchHighPosition(collections.length);
+
+	return collections
 		.filter(shouldInsertAd(merchHighPosition))
 		.filter(isEvenIndex)
 		.map((collection: AdCandidate) => collections.indexOf(collection))
 		.slice(0, MAX_MOBILE_ADS);
+};
 
 /**
  * Estimates the height of a collection.
