@@ -39,6 +39,11 @@ jobs:
           tar -zcf front-web.tar.gz front-web
           rm -r front-web/*
           mv front-web.tar.gz front-web/
+      - name: Compress DCR article-rendering server files
+        run: |
+          tar -zcf article-rendering.tar.gz article-rendering
+          rm -r article-rendering/*
+          mv article-rendering.tar.gz article-rendering/
       - uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-region: eu-west-1
