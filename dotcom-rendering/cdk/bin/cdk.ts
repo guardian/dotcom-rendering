@@ -1,4 +1,3 @@
-import 'source-map-support/register';
 import { App } from 'aws-cdk-lib';
 import { DotcomRendering } from '../lib/dotcom-rendering';
 
@@ -13,7 +12,7 @@ new DotcomRendering(app, 'DotcomRendering-PROD', {
 	...sharedProps,
 	app: 'rendering',
 	stage: 'PROD',
-	minCapacity: 30,
+	minCapacity: 27,
 	maxCapacity: 120,
 	instanceType: 't4g.small',
 });

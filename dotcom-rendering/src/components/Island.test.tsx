@@ -9,11 +9,14 @@ import { ConfigProvider } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
+import { LightboxHash } from './LightboxHash.importable';
+import { LightboxJavascript } from './LightboxJavascript.importable';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { SetABTests } from './SetABTests.importable';
+import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { Snow } from './Snow.importable';
 import { StickyBottomBanner } from './StickyBottomBanner.importable';
@@ -148,6 +151,24 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
+	test('LightboxHash', () => {
+		expect(() => renderToString(<LightboxHash />)).not.toThrow();
+	});
+
+	test('LightboxJavascript', () => {
+		expect(() =>
+			renderToString(
+				<LightboxJavascript
+					format={{
+						theme: Pillar.Culture,
+						design: ArticleDesign.PhotoEssay,
+						display: ArticleDisplay.Showcase,
+					}}
+					images={[]}
+				/>,
+			),
+		).not.toThrow();
+	});
 	test('Liveness', () => {
 		expect(() =>
 			renderToString(
@@ -207,6 +228,25 @@ describe('Island: server-side rendering', () => {
 					pageIsSensitive={false}
 					abTestSwitches={{}}
 				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('SignInGateSelector', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<SignInGateSelector
+						contentType={''}
+						tags={[]}
+						isPaidContent={false}
+						isPreview={false}
+						pageId={''}
+						switches={{}}
+					/>
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});

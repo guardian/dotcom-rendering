@@ -498,6 +498,7 @@ export const DynamicPackage = ({
 	let secondSlice: DCRFrontCard[] = [];
 	let thirdSlice: DCRFrontCard[] = [];
 	let fourthSlice: DCRFrontCard[] = [];
+
 	switch (cards.length) {
 		case 9: {
 			layout = 'nineStandards';

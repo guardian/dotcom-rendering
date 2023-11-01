@@ -1,7 +1,8 @@
 import { joinUrl } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
+import { getOptionsHeadersWithOkta } from '../lib/identity';
 import { useApi } from '../lib/useApi';
-import { getOptionsHeadersWithOkta, useAuthStatus } from '../lib/useAuthStatus';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useDiscussion } from '../lib/useDiscussion';
 import { SignedInAs } from './SignedInAs';
 
