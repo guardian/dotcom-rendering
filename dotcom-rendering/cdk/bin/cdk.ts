@@ -55,3 +55,12 @@ new RenderingApp(app, 'ArticleRendering-CODE', {
 	instanceSize: InstanceSize.MICRO,
 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 });
+
+// Rendering App for Articles in PROD env
+new RenderingApp(app, 'ArticleRendering-PROD', {
+	stack: 'frontend',
+	app: 'article-rendering',
+	stage: 'PROD',
+	instanceSize: InstanceSize.MICRO,
+	scaling: { minimumInstances: 1, maximumInstances: 2 },
+});
