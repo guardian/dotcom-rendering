@@ -17,7 +17,7 @@ import {
 import { getUserData } from './userData';
 
 interface RenderingAppProps extends GuStackProps {
-	app: string;
+	app: `${string}-rendering`;
 	instanceSize: InstanceSize;
 	scaling: GuAsgCapacity;
 }
