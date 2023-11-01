@@ -1,5 +1,4 @@
-import type { Alarms } from '@guardian/cdk';
-import { GuEc2App } from '@guardian/cdk';
+import { type Alarms, GuEc2App } from '@guardian/cdk';
 import { AccessScope } from '@guardian/cdk/lib/constants';
 import type { NoMonitoring } from '@guardian/cdk/lib/constructs/cloudwatch';
 import {
