@@ -13,7 +13,7 @@ new DotcomRendering(app, 'DotcomRendering-PROD', {
 	...sharedProps,
 	app: 'rendering',
 	stage: 'PROD',
-	minCapacity: 25,
+	minCapacity: 27,
 	maxCapacity: 120,
 	instanceType: 't4g.small',
 });
