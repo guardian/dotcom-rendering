@@ -11,6 +11,10 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
+import {
+	decideFrontsBannerAdSlot,
+	decideMerchHighAndMobileAdSlots,
+} from '../components/DecideFrontsAdSlots';
 import { Footer } from '../components/Footer';
 import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
@@ -30,10 +34,6 @@ import {
 } from '../lib/getTagFrontsAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagFrontType } from '../types/tagFront';
-import {
-	decideFrontsBannerAdSlot,
-	decideMerchHighAndMobileAdSlots,
-} from './lib/decideAdSlots';
 import { Stuck } from './lib/stickiness';
 
 interface Props {

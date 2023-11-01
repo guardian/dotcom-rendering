@@ -1,7 +1,7 @@
 import {
 	decideFrontsBannerAdSlot,
 	decideMerchHighAndMobileAdSlots,
-} from './decideAdSlots';
+} from './DecideFrontsAdSlots';
 
 describe('decideMerchHighAndMobileAdSlots', () => {
 	// default parameters

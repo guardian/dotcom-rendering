@@ -52,7 +52,7 @@ const Card33_Card33_Card33 = ({
 };
 
 /**
- * DynamicSlow
+ * DynamicSlowMPU
  *
  * This container only allows big and standard cards (from groupedTrails)
  *
