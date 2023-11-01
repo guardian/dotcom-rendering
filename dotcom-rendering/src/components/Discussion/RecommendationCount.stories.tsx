@@ -1,4 +1,4 @@
-import type { SignedInWithCookies } from '../../lib/useAuthStatus';
+import type { SignedInWithCookies } from '../../lib/identity';
 import { RecommendationCount } from './RecommendationCount';
 
 export default { title: 'Discussion/RecommendationCount' };

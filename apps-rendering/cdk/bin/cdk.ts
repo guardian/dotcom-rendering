@@ -1,4 +1,3 @@
-import 'source-map-support/register';
 import { App } from 'aws-cdk-lib';
 import { MobileAppsRendering } from '../lib/mobile-apps-rendering';
 import { InstanceSize } from 'aws-cdk-lib/aws-ec2';
