@@ -51,7 +51,7 @@ export const prodServer = (): void => {
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
 
-	const healthcheck: Handler = (req: Request, res: Response) => {
+	const healthcheck: Handler = (req, res) => {
 		res.status(200).send('OKAY');
 	};
 	app.get('/_healthcheck', healthcheck);
