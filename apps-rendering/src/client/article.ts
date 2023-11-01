@@ -149,31 +149,33 @@ function conditionallyRenderFollowTagComponent(
 
 	const isMyGuardianEnabled = environmentClient.isMyGuardianEnabled();
 
-	void Promise.all([isBridgetCompatible, isMyGuardianEnabled])
-		.then(([isBridgetCompatible, isMyGuardianEnabled]) => {
-			isBridgetCompatible &&
-				isMyGuardianEnabled &&
-				ReactDOM.render(
-					h(FollowTagStatus, {
-						isFollowing: false,
-						contributorName: topic.displayName,
-					}),
-					followTagStatus,
-				);
+	const tagIsFollowingState = tagClient.isFollowing(topic);
 
-			followTag?.addEventListener('click', tagFollowClick);
-			void tagClient.isFollowing(topic).then((following) => {
-				if (following && followTagStatus) {
+	void Promise.all([
+		isBridgetCompatible,
+		isMyGuardianEnabled,
+		tagIsFollowingState,
+	])
+		.then(
+			([
+				isBridgetCompatible,
+				isMyGuardianEnabled,
+				tagIsFollowingState,
+			]) => {
+				isBridgetCompatible &&
+					isMyGuardianEnabled &&
+					followTagStatus &&
 					ReactDOM.render(
 						h(FollowTagStatus, {
-							isFollowing: true,
+							isFollowing: tagIsFollowingState,
 							contributorName: topic.displayName,
 						}),
 						followTagStatus,
 					);
-				}
-			});
-		})
+
+				followTag?.addEventListener('click', tagFollowClick);
+			},
+		)
 		.catch((error) => {
 			logger.error(error);
 		});
@@ -190,6 +192,7 @@ function topics(): void {
 	const followTagStatus = document.querySelector('.js-follow-tag-status');
 
 	const topic = getTopic(followNotifications) ?? getTopic(followTag);
+
 	if (topic) {
 		followNotifications?.addEventListener(
 			'click',
@@ -206,9 +209,7 @@ function topics(): void {
 				);
 			}
 		});
-	}
 
-	if (topic) {
 		conditionallyRenderFollowTagComponent(
 			topic,
 			followTagStatus,
