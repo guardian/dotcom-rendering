@@ -211,7 +211,7 @@ const columnStyleWithPageSkin = css`
 	}
 `;
 
-const checkIfPageHasPageSkin = (hasPageSkin: boolean) =>
+const columnStyleBasedOnHasPageSkin = (hasPageSkin: boolean) =>
 	hasPageSkin ? columnStyleWithPageSkin : columnStyle;
 
 export const Column = ({
@@ -234,7 +234,7 @@ export const Column = ({
 
 	return (
 		<li
-			css={[checkIfPageHasPageSkin(hasPageSkin), pillarDivider]}
+			css={[columnStyleBasedOnHasPageSkin(hasPageSkin), pillarDivider]}
 			role="none"
 		>
 			{/*

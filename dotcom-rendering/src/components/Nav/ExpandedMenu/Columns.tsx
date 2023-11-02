@@ -44,10 +44,7 @@ const columnsStyle = (isImmersive: boolean) => css`
 	}
 `;
 
-const columnsStyleWithPageSkin = (
-	hasPageSkin: boolean,
-	isImmersive: boolean,
-) => css`
+const columnsStyleWithPageSkin = (isImmersive: boolean) => css`
 	${columnsStyle(isImmersive)}
 	${from.leftCol}, ${from.wide} {
 		max-width: 980px;
@@ -92,7 +89,7 @@ const brandExtensionList = css`
 	}
 `;
 
-const brandExtenstionListWithPageSkin = (hasPageSkin: boolean) => css`
+const brandExtenstionListWithPageSkin = css`
 	${brandExtensionList};
 	${from.leftCol}, ${from.wide} {
 		width: 131px;
@@ -138,7 +135,7 @@ const brandExtensionLink = css`
 	}
 `;
 
-const brandExtensionLinkWithPageSkin = (hasPageSkin: boolean) => css`
+const brandExtensionLinkWithPageSkin = css`
 	${brandExtensionLink};
 	${from.wide} {
 		font-size: 1.25rem;
@@ -229,20 +226,19 @@ const editionsSwitch = css`
 	}
 `;
 
-const checkIfPageHasPageSkin = (hasPageSkin: boolean, isImmersive: boolean) =>
+const columnsStyleBasedOnHasPageSkin = (
+	hasPageSkin: boolean,
+	isImmersive: boolean,
+) =>
 	hasPageSkin
-		? columnsStyleWithPageSkin(hasPageSkin)
+		? columnsStyleWithPageSkin(isImmersive)
 		: columnsStyle(isImmersive);
 
-const checkIfPageHasPageSkinForBrandExtension = (hasPageSkin: boolean) =>
-	hasPageSkin
-		? brandExtenstionListWithPageSkin(hasPageSkin)
-		: brandExtensionList;
+const brandExtensionListBasedOnHasPageSkin = (hasPageSkin: boolean) =>
+	hasPageSkin ? brandExtenstionListWithPageSkin : brandExtensionList;
 
-const checkIfPageHasPageSkinForBrandExtensionLink = (hasPageSkin: boolean) =>
-	hasPageSkin
-		? brandExtensionLinkWithPageSkin(hasPageSkin)
-		: brandExtensionLink;
+const brandExtensionLinkBasedOnHasPageSkin = (hasPageSkin: boolean) =>
+	hasPageSkin ? brandExtensionLinkWithPageSkin : brandExtensionLink;
 
 type Props = {
 	editionId: EditionId;
@@ -263,7 +259,7 @@ export const Columns = ({
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (
 		<ul
-			css={checkIfPageHasPageSkin(hasPageSkin, isImmersive)}
+			css={columnsStyleBasedOnHasPageSkin(hasPageSkin, isImmersive)}
 			role="menubar"
 			data-cy="nav-menu-columns"
 		>
@@ -362,7 +358,7 @@ export const Columns = ({
 			/>
 			<li css={desktopBrandExtensionColumn} role="none">
 				<ul
-					css={checkIfPageHasPageSkinForBrandExtension(hasPageSkin)}
+					css={brandExtensionListBasedOnHasPageSkin(hasPageSkin)}
 					role="menu"
 				>
 					{nav.brandExtensions.map((brandExtension) => (
@@ -372,7 +368,7 @@ export const Columns = ({
 						>
 							<a
 								className="selectableMenuItem"
-								css={checkIfPageHasPageSkinForBrandExtensionLink(
+								css={brandExtensionLinkBasedOnHasPageSkin(
 									hasPageSkin,
 								)}
 								href={brandExtension.url}

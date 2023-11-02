@@ -243,6 +243,15 @@ const linkStyle = (isImmersive: boolean) => css`
 		transform: translateY(4px);
 	}
 `;
+
+const linkStyleWithPageSkin = (isImmersive: boolean) => css`
+	${linkStyle(isImmersive)};
+	${from.wide} {
+		padding-top: ${isImmersive ? '9px' : '5px'};
+		font-size: 22px;
+	}
+`;
+
 const pillarUnderline = (palette: Palette) => css`
 	:after {
 		border-top: 4px solid ${palette.border.navPillar};
@@ -274,13 +283,19 @@ const forceUnderline = css`
 const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 	i !== noOfPillars - 1;
 
-const checkIfPageHasPageSkinForPillars = (
+const pillarsStylesBasedOnPageSkin = (
 	hasPageSkin: boolean,
 	isImmersive: boolean,
 ) => (hasPageSkin ? pillarsStylesWithPageSkin : pillarsStyles(isImmersive));
 
-const checkIfPageHasPageSkinForPillar = (hasPageSkin: boolean) =>
+const pillarStyleBasedOnPageSkin = (hasPageSkin: boolean) =>
 	hasPageSkin ? pillarStyleWithPageSkin : pillarStyle;
+
+const linkStyleBasedOnHasPageSkin = (
+	hasPageSkin: boolean,
+	isImmersive: boolean,
+) =>
+	hasPageSkin ? linkStyleWithPageSkin(isImmersive) : linkStyle(isImmersive);
 
 type Props = {
 	isImmersive?: boolean;
@@ -303,20 +318,20 @@ export const Pillars = ({
 }: Props) => (
 	<ul
 		data-testid="pillar-list"
-		css={checkIfPageHasPageSkinForPillars(hasPageSkin, isImmersive)}
+		css={pillarsStylesBasedOnPageSkin(hasPageSkin, isImmersive)}
 	>
 		{pillars.map((p, i) => {
 			const isSelected = p.pillar === selectedPillar;
 			const showDivider =
 				showLastPillarDivider || isNotLastPillar(i, pillars.length);
 			return (
-				<li
-					key={p.title}
-					css={checkIfPageHasPageSkinForPillar(hasPageSkin)}
-				>
+				<li key={p.title} css={pillarStyleBasedOnPageSkin(hasPageSkin)}>
 					<a
 						css={[
-							linkStyle(isImmersive),
+							linkStyleBasedOnHasPageSkin(
+								hasPageSkin,
+								isImmersive,
+							),
 							pillarUnderline(
 								decidePalette({
 									display: ArticleDisplay.Standard,

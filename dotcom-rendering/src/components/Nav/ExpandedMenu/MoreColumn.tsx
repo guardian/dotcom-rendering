@@ -55,7 +55,7 @@ const columnStyle = css`
 	}
 `;
 
-const columnStyleWithPageSkin = (hasPageSkin: boolean) => css`
+const columnStyleWithPageSkin = css`
 	${columnStyle};
 	${from.leftCol} {
 		width: 140px;
@@ -184,8 +184,8 @@ const shareIconStyles = css`
 	width: 28px;
 `;
 
-const checkIfPageHasPageSkin = (hasPageSkin: boolean) =>
-	hasPageSkin ? columnStyleWithPageSkin(hasPageSkin) : columnStyle;
+const columnStyleBasedOnHasPageSkin = (hasPageSkin: boolean) =>
+	hasPageSkin ? columnStyleWithPageSkin : columnStyle;
 
 type Props = {
 	otherLinks: LinkType[];
@@ -212,7 +212,7 @@ export const MoreColumn = ({
 		<>
 			<li
 				css={[
-					checkIfPageHasPageSkin(hasPageSkin),
+					columnStyleBasedOnHasPageSkin(hasPageSkin),
 					pillarDivider,
 					pillarDividerExtended,
 				]}
@@ -249,7 +249,10 @@ export const MoreColumn = ({
 			</li>
 			{/** Social buttons hidden from menus from desktop */}
 			<Hide from="desktop">
-				<li css={checkIfPageHasPageSkin(hasPageSkin)} role="none">
+				<li
+					css={columnStyleBasedOnHasPageSkin(hasPageSkin)}
+					role="none"
+				>
 					<ul css={[columnLinks]} role="menu">
 						<li
 							key="facebook"
