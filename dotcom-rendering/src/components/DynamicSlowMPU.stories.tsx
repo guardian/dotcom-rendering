@@ -132,23 +132,6 @@ export const ThreeBigs = () => (
 ThreeBigs.storyName = 'with three bigs';
 
 export const AllBigs = () => (
-	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
-		<DynamicSlowMPU
-			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
-				big: standards,
-				standard: [],
-			}}
-			showAge={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
-AllBigs.storyName = 'with lots of bigs and no standards';
-
-export const AllBigsNoMPU = () => (
 	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
@@ -163,7 +146,7 @@ export const AllBigsNoMPU = () => (
 		/>
 	</FrontSection>
 );
-AllBigsNoMPU.storyName = 'Ad-free with lots of bigs';
+AllBigs.storyName = 'Ad-free with lots of bigs';
 
 export const TwoBigsThreeStandardsNoMPU = () => (
 	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>

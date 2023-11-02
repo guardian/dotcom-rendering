@@ -143,18 +143,3 @@ export const NineTrails = () => (
 	</FrontSection>
 );
 NineTrails.storyName = 'with nine trails';
-
-export const EightTrailsNoAds = () => (
-	<FrontSection
-		title="Fixed Medium Slow XII MPU"
-		discussionApiUrl={discussionApiUrl}
-	>
-		<FixedMediumSlowXIIMPU
-			trails={trails.slice(0, 8)}
-			showAge={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
-
-EightTrailsNoAds.storyName = 'with eight trails and no ad slot';

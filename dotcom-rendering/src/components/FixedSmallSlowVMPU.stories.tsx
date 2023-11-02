@@ -77,18 +77,3 @@ export const OneCard = () => (
 );
 
 OneCard.storyName = 'With 1 card';
-
-export const AdfreeFixedSmallSlowVMPU = () => (
-	<FrontSection
-		title="Fixed Small Slow V MPU"
-		discussionApiUrl={discussionApiUrl}
-	>
-		<FixedSmallSlowVMPU
-			trails={trails.slice(0, 4)}
-			showAge={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
-
-AdfreeFixedSmallSlowVMPU.storyName = 'Ad-free Fixed Small Slow V MPU';
