@@ -18,6 +18,7 @@ import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
+import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
@@ -239,6 +240,14 @@ describe('Island: server-side rendering', () => {
 				>
 					<Metrics commercialMetricsEnabled={true} tests={{}} />
 				</ConfigProvider>,
+			),
+		).not.toThrow();
+	});
+
+	test('ReaderRevenueDev', () => {
+		expect(() =>
+			renderToString(
+				<ReaderRevenueDev shouldHideReaderRevenue={false} />,
 			),
 		).not.toThrow();
 	});
