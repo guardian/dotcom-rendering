@@ -9,6 +9,7 @@ import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { ConfigProvider } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
+import { FocusStyles } from './FocusStyles.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
@@ -127,6 +128,10 @@ describe('Island: server-side rendering', () => {
 				</ConfigProvider>,
 			),
 		).not.toThrow();
+	});
+
+	test('FocusStyles', () => {
+		expect(() => renderToString(<FocusStyles />)).not.toThrow();
 	});
 
 	test('InteractiveSupportButton', () => {
