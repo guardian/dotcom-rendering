@@ -219,6 +219,7 @@ export const Nav = ({
 					nav={nav}
 					isImmersive={isImmersive}
 					headerTopBarSwitch={headerTopBarSwitch}
+					hasPageSkin={hasPageSkin}
 				/>
 			</div>
 			{displayRoundel && (

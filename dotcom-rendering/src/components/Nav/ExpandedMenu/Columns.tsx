@@ -44,6 +44,16 @@ const columnsStyle = (isImmersive: boolean) => css`
 	}
 `;
 
+const columnsStyleWithPageSkin = (
+	hasPageSkin: boolean,
+	isImmersive: boolean,
+) => css`
+	${columnsStyle(isImmersive)}
+	${from.leftCol}, ${from.wide} {
+		max-width: 980px;
+	}
+`;
+
 const desktopBrandExtensionColumn = css`
 	${from.desktop} {
 		display: block;
@@ -205,6 +215,11 @@ const editionsSwitch = css`
 	}
 `;
 
+const checkIfPageHasPageSkin = (hasPageSkin: boolean, isImmersive: boolean) =>
+	hasPageSkin
+		? columnsStyleWithPageSkin(hasPageSkin)
+		: columnsStyle(isImmersive);
+
 type Props = {
 	editionId: EditionId;
 	isImmersive?: boolean;
@@ -224,7 +239,7 @@ export const Columns = ({
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (
 		<ul
-			css={columnsStyle(isImmersive)}
+			css={checkIfPageHasPageSkin(hasPageSkin, isImmersive)}
 			role="menubar"
 			data-cy="nav-menu-columns"
 		>

@@ -200,28 +200,19 @@ const columnStyle = css`
 	}
 `;
 
-// const columnStyleWithPageSkin = css`
-// 	${columnStyle};
-// 	${from.desktop} {
-// 		width: 134px;
-// 		float: left;
-// 		position: relative;
-// 		border-left: 1px solid ${brand[600]};
+const columnStyleWithPageSkin = css`
+	${columnStyle};
+	${from.leftCol}, ${from.wide} {
+		width: 134px;
 
-// 		:after {
-// 			height: 100%;
-// 			left: 0;
-// 			width: 1px;
-// 		}
+		:first-of-type {
+			width: 123px;
+		}
+	}
+`;
 
-// 		:first-of-type {
-// 			border-left: none;
-// 			width: 123px;
-// 		}
-// 	}
-// `;
-
-// const checkIfPageHasPageSkin = (hasPageSkin: boolean) => hasPageSkin ? columnStyleWithPageSkin : columnStyle;
+const checkIfPageHasPageSkin = (hasPageSkin: boolean) =>
+	hasPageSkin ? columnStyleWithPageSkin : columnStyle;
 
 export const Column = ({
 	column,
@@ -242,7 +233,10 @@ export const Column = ({
 	const ariaControls = `${columnId.toLowerCase()}Links`;
 
 	return (
-		<li css={[columnStyle, pillarDivider]} role="none">
+		<li
+			css={[checkIfPageHasPageSkin(hasPageSkin), pillarDivider]}
+			role="none"
+		>
 			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
 
