@@ -24,14 +24,13 @@ interface RenderingAppProps extends GuStackProps {
 
 export class RenderingApp extends GuStack {
 	constructor(scope: App, id: string, props: RenderingAppProps) {
-		super(scope, id, props);
+		// Any version of this app should run in the eu-west-1 region
+		super(scope, id, { ...props, env: { region: 'eu-west-1' } });
 
 		const { region, stack } = this;
 		const { app, stage, instanceSize, scaling } = props;
 
 		const ssmPrefix = `/${stage}/${stack}/${app}`;
-
-		const vpcCidrBlock = '10.248.136.0/22';
 
 		const elkStreamId = new GuStringParameter(this, 'ELKStreamId', {
 			fromSSM: true,
@@ -50,31 +49,24 @@ export class RenderingApp extends GuStack {
 						unhealthyInstancesAlarm: true,
 				  } satisfies Alarms)
 				: ({ noMonitoring: true } satisfies NoMonitoring);
-		// TODO – We wanted to use GUNodeApp but it required a certificate ?
+
 		new GuEc2App(this, {
 			app,
 			// TODO - should we change to 3000?
 			applicationPort: 9000,
 			access: {
-				// TODO – ask DevX about Peer & CIDR ranges (and VPCs)
-				// … and what would be the meaning of an empty array?
-				// Should it be [IPeer, …IPeer[]]
-				cidrRanges: [Peer.ipv4(vpcCidrBlock)],
+				// Restrict access to this range within the VPC
+				cidrRanges: [Peer.ipv4('10.0.0.0/8')],
 				scope: AccessScope.INTERNAL,
+			},
+			accessLogging: {
+				enabled: true,
+				prefix: `ELBLogs/${stack}/${app}/${stage}`,
 			},
 			instanceType: InstanceType.of(InstanceClass.T4G, instanceSize),
 			monitoringConfiguration,
 			scaling,
-			/** TODO - talk to DevX about using the GuUserData construct
-			 * We are limited by not using systemd because of automatic log shipping
-			 * @see https://github.com/guardian/cdk/blob/713c8eb6ef971307050492293a11aa89aaa173c1/src/patterns/ec2-app/base.ts#L64C1-L75C4
-			 */
 			userData: getUserData({ app, region, stage, elkStreamId }),
-			// TODO - figure out why region required but not available here
-			// accessLogging: {
-			// 	enabled: true,
-			// 	prefix: `ELBLogs/${stack}/${app}/${stage}`,
-			// },
 			// TODO - check changes to healthcheck
 			// TODO - check load balancer DNS output compatibility with frontend
 		});

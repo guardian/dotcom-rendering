@@ -21,6 +21,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
       "GuWazuhAccess",
       "GuAutoScalingGroup",
       "GuApplicationLoadBalancer",
+      "GuStringParameter",
       "GuApplicationTargetGroup",
       "GuHttpsApplicationListener",
       "GuSecurityGroup",
@@ -42,6 +43,11 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
     "AMIArticlerendering": {
       "Description": "Amazon Machine Image ID for the app article-rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
       "Type": "AWS::EC2::Image::Id",
+    },
+    "AccessLoggingBucket": {
+      "Default": "/account/services/access-logging/bucket",
+      "Description": "S3 bucket to store your access logs",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "DistributionBucketName": {
       "Default": "/account/services/artifact.bucket",
@@ -290,11 +296,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:kinesis:",
-                    {
-                      "Ref": "AWS::Region",
-                    },
-                    ":",
+                    "arn:aws:kinesis:eu-west-1:",
                     {
                       "Ref": "AWS::AccountId",
                     },
@@ -377,8 +379,8 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
         "GroupDescription": "Allow restricted ingress from CIDR ranges",
         "SecurityGroupIngress": [
           {
-            "CidrIp": "10.248.136.0/22",
-            "Description": "Allow access on port 443 from 10.248.136.0/22",
+            "CidrIp": "10.0.0.0/8",
+            "Description": "Allow access on port 443 from 10.0.0.0/8",
             "FromPort": 443,
             "IpProtocol": "tcp",
             "ToPort": 443,
@@ -478,6 +480,20 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
           {
             "Key": "deletion_protection.enabled",
             "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.bucket",
+            "Value": {
+              "Ref": "AccessLoggingBucket",
+            },
+          },
+          {
+            "Key": "access_logs.s3.prefix",
+            "Value": "ELBLogs/frontend/article-rendering/TEST",
           },
         ],
         "Scheme": "internal",
@@ -608,11 +624,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:ssm:",
-                    {
-                      "Ref": "AWS::Region",
-                    },
-                    ":",
+                    "arn:aws:ssm:eu-west-1:",
                     {
                       "Ref": "AWS::AccountId",
                     },
@@ -631,11 +643,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:ssm:",
-                    {
-                      "Ref": "AWS::Region",
-                    },
-                    ":",
+                    "arn:aws:ssm:eu-west-1:",
                     {
                       "Ref": "AWS::AccountId",
                     },
@@ -894,11 +902,7 @@ export GU_STAGE=TEST
 mkdir /var/log/dotcom-rendering
 chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
 sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make start-prod
-/opt/aws-kinesis-agent/configure-aws-kinesis-agent ",
-                  {
-                    "Ref": "AWS::Region",
-                  },
-                  " ",
+/opt/aws-kinesis-agent/configure-aws-kinesis-agent eu-west-1 ",
                   {
                     "Ref": "ELKStreamId",
                   },
