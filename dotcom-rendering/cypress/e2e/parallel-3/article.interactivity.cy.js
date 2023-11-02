@@ -159,7 +159,8 @@ describe('Interactivity', function () {
 			it('should transfer focus to the sub nav when tabbing from the veggie burger without opening the menu', function () {
 				cy.viewport('iphone-x');
 				cy.visit(`/Article/${articleUrl}`);
-				cy.get('[data-cy=veggie-burger]').focus().tab();
+				cy.get('[data-cy=veggie-burger]').focus();
+				cy.get('[data-cy=veggie-burger]').tab();
 				cy.get('[data-cy=sub-nav] a').first().should('have.focus');
 			});
 
@@ -174,7 +175,8 @@ describe('Interactivity', function () {
 				cy.viewport('iphone-x');
 				cy.visit(`/Article/${articleUrl}`);
 				cy.get('[data-cy=veggie-burger]').click();
-				cy.focused().type('{enter}').tab();
+				cy.focused().type('{enter}');
+				cy.focused().tab();
 				// get the first column (news column)
 				cy.get('[data-cy="nav-menu-columns"] li')
 					.first()
@@ -189,14 +191,16 @@ describe('Interactivity', function () {
 				cy.visit(`/Article/${articleUrl}`);
 				cy.get('[data-cy=veggie-burger]').type('{enter}');
 				// Close the news menu
-				cy.focused().type('{enter}').tab();
+				cy.focused().type('{enter}');
+				cy.focused().tab();
 				cy.focused().should(
 					'have.attr',
 					'data-cy',
 					'column-collapse-Opinion',
 				);
 				// Open the opinion menu
-				cy.focused().type('{enter}').tab();
+				cy.focused().type('{enter}');
+				cy.focused().tab();
 				cy.focused().should(
 					'have.attr',
 					'data-cy',
