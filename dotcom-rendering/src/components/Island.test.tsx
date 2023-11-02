@@ -19,6 +19,7 @@ import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
+import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
@@ -250,6 +251,10 @@ describe('Island: server-side rendering', () => {
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />,
 			),
 		).not.toThrow();
+	});
+
+	test('RecipeMultiplier', () => {
+		expect(() => renderToString(<RecipeMultiplier />)).not.toThrow();
 	});
 
 	test('SetABTests', () => {
