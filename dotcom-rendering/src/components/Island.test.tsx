@@ -4,6 +4,7 @@
 
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
+import { AlreadyVisited } from './AlreadyVisited.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { ConfigProvider } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
@@ -83,6 +84,10 @@ const Mock = () => <>🏝️</>;
 // Jest tests
 
 describe('Island: server-side rendering', () => {
+	test('AlreadyVisited', () => {
+		expect(() => renderToString(<AlreadyVisited />)).not.toThrow();
+	});
+
 	test('CardCommentCount', () => {
 		expect(() =>
 			renderToString(
