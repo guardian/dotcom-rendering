@@ -346,6 +346,7 @@ export const Columns = ({
 					}}
 					index={10}
 					showLineBelow={false}
+					hasPageSkin={hasPageSkin}
 				/>
 				<div css={lineStyle}></div>
 			</section>

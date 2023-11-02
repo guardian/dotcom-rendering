@@ -304,7 +304,7 @@ type Props = {
 	selectedPillar?: Pillar;
 	showLastPillarDivider?: boolean;
 	dataLinkName: string;
-	hasPageSkin?: boolean;
+	hasPageSkin: boolean;
 };
 
 export const Pillars = ({
