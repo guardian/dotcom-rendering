@@ -223,7 +223,7 @@ export const Column = ({
 	column: PillarLinkType | EditionLinkType;
 	index: number;
 	showLineBelow: boolean;
-	hasPageSkin?: boolean;
+	hasPageSkin: boolean;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
 	//Replace whitespace with hyphen https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with/3795147#3795147

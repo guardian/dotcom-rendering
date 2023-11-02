@@ -19,7 +19,7 @@ type Props = {
 	isImmersive?: boolean;
 	selectedPillar?: Pillar;
 	headerTopBarSwitch: boolean;
-	hasPageSkin?: boolean;
+	hasPageSkin: boolean;
 };
 
 const clearFixStyle = css`
