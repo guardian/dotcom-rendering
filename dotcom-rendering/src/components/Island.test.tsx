@@ -4,9 +4,12 @@
 
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
+import { AlreadyVisited } from './AlreadyVisited.importable';
+import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { ConfigProvider } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
+import { FocusStyles } from './FocusStyles.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
@@ -15,6 +18,8 @@ import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
+import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
+import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
@@ -83,6 +88,22 @@ const Mock = () => <>🏝️</>;
 // Jest tests
 
 describe('Island: server-side rendering', () => {
+	test('AlreadyVisited', () => {
+		expect(() => renderToString(<AlreadyVisited />)).not.toThrow();
+	});
+
+	test('BrazeMessaging', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<BrazeMessaging idApiUrl={''} />
+				</ConfigProvider>,
+			),
+		).not.toThrow();
+	});
+
 	test('CardCommentCount', () => {
 		expect(() =>
 			renderToString(
@@ -109,6 +130,10 @@ describe('Island: server-side rendering', () => {
 				</ConfigProvider>,
 			),
 		).not.toThrow();
+	});
+
+	test('FocusStyles', () => {
+		expect(() => renderToString(<FocusStyles />)).not.toThrow();
 	});
 
 	test('InteractiveSupportButton', () => {
@@ -218,6 +243,18 @@ describe('Island: server-side rendering', () => {
 				</ConfigProvider>,
 			),
 		).not.toThrow();
+	});
+
+	test('ReaderRevenueDev', () => {
+		expect(() =>
+			renderToString(
+				<ReaderRevenueDev shouldHideReaderRevenue={false} />,
+			),
+		).not.toThrow();
+	});
+
+	test('RecipeMultiplier', () => {
+		expect(() => renderToString(<RecipeMultiplier />)).not.toThrow();
 	});
 
 	test('SetABTests', () => {
