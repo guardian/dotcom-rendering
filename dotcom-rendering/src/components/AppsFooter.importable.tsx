@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
-import { neutral, remSpace, textSans } from '@guardian/source-foundations';
+import { remSpace, textSans } from '@guardian/source-foundations';
 import { ButtonLink } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { getNavigationClient, getUserClient } from '../lib/bridgetApi';
+import { palette } from '../palette';
 
 const year = new Date().getFullYear();
 
@@ -13,7 +14,8 @@ const footerStyles = css`
 
 const linkStyles = css`
 	${textSans.small({ lineHeight: 'regular' })};
-	color: ${neutral[7]};
+	color: ${palette('--apps-footer-links-text')};
+	background-color: ${palette('--apps-footer-links-background')};
 `;
 
 type PrivacySettingsProps = {
@@ -87,7 +89,7 @@ export const AppsFooter = () => {
 	return (
 		<div css={footerStyles}>
 			&#169; {year} Guardian News and Media Limited or its affiliated
-			companies. All rights reserved. (modern)
+			companies. All rights reserved. (dcar)
 			<br />
 			<PrivacySettings
 				isCcpa={isCcpa}

@@ -25,7 +25,7 @@ export const renderEditorialNewslettersPage = ({
 	const NAV = extractNAV(newslettersPage.nav);
 
 	// The newsletters page is currently only supported on Web
-	const config: Config = { renderingTarget: 'Web' };
+	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>

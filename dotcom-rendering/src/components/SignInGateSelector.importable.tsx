@@ -1,12 +1,15 @@
-import { getCookie } from '@guardian/libs';
+import { getCookie, isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { getOphan } from '../client/ophan/ophan';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { Switches } from '../types/config';
+import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import {
 	submitViewEventTracking,
@@ -113,13 +116,18 @@ const ShowSignInGate = ({
 	checkoutCompleteCookieData,
 	personaliseSignInGateAfterCheckoutSwitch,
 }: ShowSignInGateProps) => {
+	const { renderingTarget } = useConfig();
+
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
-		submitViewEventTracking({
-			component: withComponentId(componentId),
-			abTest,
-		});
-	}, [abTest, componentId]);
+		submitViewEventTracking(
+			{
+				component: withComponentId(componentId),
+				abTest,
+			},
+			renderingTarget,
+		);
+	}, [abTest, componentId, renderingTarget]);
 
 	// some sign in gate ab test variants may not need to show a gate
 	// therefore the gate is optional
@@ -141,6 +149,41 @@ const ShowSignInGate = ({
 	}
 	// return nothing if no gate needs to be shown
 	return <></>;
+};
+
+const usePageViewId = (renderingTarget: RenderingTarget) => {
+	const [id, setId] = useState<string>();
+
+	useEffect(() => {
+		getOphan(renderingTarget)
+			.then(({ pageViewId }) => {
+				setId(pageViewId);
+			})
+			.catch(() => {
+				setId('no-page-view-id-available');
+			});
+	}, [renderingTarget]);
+
+	return id;
+};
+
+const useCheckoutCompleteCookieData = () => {
+	const [data, setData] = useState<CheckoutCompleteCookieData>();
+
+	useEffect(() => {
+		const rawCookie = getCookie({
+			name: 'GU_CO_COMPLETE',
+			shouldMemoize: true,
+		});
+
+		if (rawCookie === null) return;
+
+		const parsedCookieData = parseCheckoutCompleteCookieData(rawCookie);
+
+		if (parsedCookieData) setData(parsedCookieData);
+	}, []);
+
+	return data;
 };
 
 // component with conditional logic which determines if a sign in gate
@@ -171,19 +214,13 @@ export const SignInGateSelector = ({
 	>(undefined);
 	const [canShowGate, setCanShowGate] = useState(false);
 
+	const { renderingTarget } = useConfig();
 	const gateSelector = useSignInGateSelector();
-	const { pageViewId } = window.guardian.config.ophan;
+	const pageViewId = usePageViewId(renderingTarget);
 
 	// START: Checkout Complete Personalisation
 	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
-	const checkOutCompleteString = getCookie({
-		name: 'GU_CO_COMPLETE',
-		shouldMemoize: true,
-	});
-	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
-		checkOutCompleteString !== null
-			? parseCheckoutCompleteCookieData(checkOutCompleteString)
-			: undefined;
+	const checkoutCompleteCookieData = useCheckoutCompleteCookieData();
 
 	const personaliseComponentId = (
 		currentComponentId: string | undefined,
@@ -252,7 +289,7 @@ export const SignInGateSelector = ({
 		isPreview,
 	]);
 
-	if (!currentTest || !gateVariant) {
+	if (!currentTest || !gateVariant || isUndefined(pageViewId)) {
 		return null;
 	}
 	const signInGateComponentId = signInGateTestIdToComponentId[currentTest.id];
@@ -268,7 +305,7 @@ export const SignInGateSelector = ({
 		idUrl,
 		currentTest,
 		componentId,
-	};
+	} satisfies Parameters<typeof generateGatewayUrl>[1];
 
 	return (
 		<>

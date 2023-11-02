@@ -9,6 +9,7 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import { palette } from '../palette';
 import { FirstPublished } from './FirstPublished';
 
 type BlockContributor = {
@@ -66,14 +67,11 @@ const BlockTitle = ({ title }: { title: string }) => {
 
 const BlockByline = ({
 	name,
-	format,
 	imageUrl,
 }: {
 	name: string;
-	format: ArticleFormat;
 	imageUrl?: string;
 }) => {
-	const palette = decidePalette(format);
 	return (
 		<div
 			css={css`
@@ -98,7 +96,7 @@ const BlockByline = ({
 							width: 100%;
 							height: 100%;
 							object-fit: cover;
-							background-color: ${palette.background.avatar};
+							background-color: ${palette('--avatar-background')};
 						`}
 					/>
 				</div>
@@ -132,7 +130,6 @@ export const LiveBlockContainer = ({
 	host,
 	pageId,
 }: Props) => {
-	const palette = decidePalette(format);
 	return (
 		<article
 			/**
@@ -157,7 +154,9 @@ export const LiveBlockContainer = ({
 				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
 				${!isPinnedPost &&
-				`border-top: 1px solid ${palette.border.liveBlock};
+				`border-top: 1px solid ${
+					decidePalette(format).border.liveBlock
+				};
 				border-bottom: 1px solid ${neutral[86]};`}
 				${from.tablet} {
 					padding: ${space[2]}px ${SIDE_MARGIN}px;
@@ -188,7 +187,6 @@ export const LiveBlockContainer = ({
 								? contributor.largeImageUrl
 								: contributor.imageUrl
 						}
-						format={format}
 					/>
 				))}
 			</Header>

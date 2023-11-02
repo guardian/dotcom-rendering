@@ -7,9 +7,10 @@ import type {
 } from '@guardian/libs';
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { submitComponentEvent } from './ophan/ophan';
 
-const submitConsentEventsToOphan = () =>
+const submitConsentEventsToOphan = (renderingTarget: RenderingTarget) =>
 	onConsent().then((consentState: ConsentState) => {
 		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Review if this check is needed
 		if (!consentState) return;
@@ -77,7 +78,7 @@ const submitConsentEventsToOphan = () =>
 			action,
 		} satisfies OphanComponentEvent;
 
-		return submitComponentEvent(event);
+		return submitComponentEvent(event, renderingTarget);
 	});
 
 const initialiseCmp = () =>
@@ -111,12 +112,14 @@ const eagerlyImportPrivacySettingsLinkIsland = () =>
  * Keep this file in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
  * mark: CONSENT_TIMING
  */
-export const bootCmp = async (): Promise<void> => {
+export const bootCmp = async (
+	renderingTarget: RenderingTarget,
+): Promise<void> => {
 	if (!window.guardian.config.switches.consentManagement) return; // CMP turned off!
 
 	await Promise.all([
 		initialiseCmp(),
 		eagerlyImportPrivacySettingsLinkIsland(),
-		submitConsentEventsToOphan(),
+		submitConsentEventsToOphan(renderingTarget),
 	]);
 };

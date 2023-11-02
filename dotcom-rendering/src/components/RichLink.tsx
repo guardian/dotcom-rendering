@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
-	brandAltBackground,
 	from,
 	headline,
 	neutral,
@@ -10,10 +9,12 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
+import { FormatBoundary } from './FormatBoundary';
 import { Hide } from './Hide';
 import { QuoteIcon } from './QuoteIcon';
 import { StarRating } from './StarRating/StarRating';
@@ -184,7 +185,8 @@ const paidForBranding = css`
 `;
 
 const starWrapper = css`
-	background-color: ${brandAltBackground.primary};
+	background-color: ${themePalette('--star-rating-background')};
+	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
 `;
 
@@ -255,10 +257,13 @@ export const RichLink = ({
 			data-print-layout="hide"
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
-			css={pillarBackground(palette)}
+			css={[
+				pillarBackground(palette),
+				neutralBackground(format, palette),
+			]}
 			data-name={isPlaceholder ? 'placeholder' : ''}
 		>
-			<div css={neutralBackground(format, palette)}>
+			<FormatBoundary format={format}>
 				<a css={richLinkLink} href={url}>
 					<div css={richLinkTopBorder(palette)} />
 					{showImage && (
@@ -315,7 +320,6 @@ export const RichLink = ({
 								<Avatar
 									src={contributorImage}
 									alt={mainContributor}
-									format={format}
 								/>
 							</div>
 						)}
@@ -333,7 +337,7 @@ export const RichLink = ({
 						</div>
 					</div>
 				</a>
-			</div>
+			</FormatBoundary>
 		</div>
 	);
 };

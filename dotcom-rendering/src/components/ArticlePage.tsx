@@ -11,6 +11,7 @@ import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
+import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
@@ -135,6 +136,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							commercialMetricsEnabled={
 								!!article.config.switches.commercialMetrics
 							}
+							tests={article.config.abTests}
 						/>
 					</Island>
 					<Island
@@ -180,6 +182,8 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					/>
 				</Island>
 			)}
+			{renderingTarget === 'Apps' &&
+				!article.config.switches.darkModeInApps && <DarkModeMessage />}
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout
 					article={article}

@@ -3,11 +3,11 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { cmp } from '@guardian/consent-management-platform';
+import type { CountryCode } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
-import { getLocaleCode } from '../lib/getCountryCode';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -16,9 +16,11 @@ import type {
 import { pickMessage } from '../lib/messagePicker';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 import {
 	BrazeBanner,
 	canShowBrazeBanner,
@@ -95,7 +97,7 @@ const buildRRBannerConfigWith = ({
 }: RRBannerConfig) => {
 	return ({
 		isSignedIn,
-		asyncCountryCode,
+		countryCode,
 		isPreview,
 		asyncArticleCounts,
 		signInGateWillShow = false,
@@ -110,7 +112,7 @@ const buildRRBannerConfigWith = ({
 		idApiUrl,
 	}: {
 		isSignedIn: boolean;
-		asyncCountryCode: Promise<string>;
+		countryCode: CountryCode;
 		isPreview: boolean;
 		asyncArticleCounts: Promise<ArticleCounts | undefined>;
 		signInGateWillShow?: boolean;
@@ -131,7 +133,7 @@ const buildRRBannerConfigWith = ({
 					canShowFn({
 						remoteBannerConfig: isEnabled,
 						isSignedIn,
-						asyncCountryCode,
+						countryCode,
 						contentType,
 						sectionId,
 						shouldHideReaderRevenue,
@@ -240,9 +242,10 @@ export const StickyBottomBanner = ({
 	puzzleBannerSwitch: boolean;
 	isSensitive: boolean;
 }) => {
-	const { brazeMessages } = useBraze(idApiUrl);
+	const { renderingTarget } = useConfig();
+	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
 
-	const asyncCountryCode = getLocaleCode();
+	const countryCode = useCountryCode('sticky-bottom-banner');
 	const authStatus = useAuthStatus();
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||
@@ -264,10 +267,11 @@ export const StickyBottomBanner = ({
 	}, [pageId, keywordIds]);
 
 	useOnce(() => {
+		if (!countryCode) return;
 		const CMP = buildCmpBannerConfig();
 		const puzzlesBanner = buildPuzzlesBannerConfig(puzzleBannerSwitch)({
 			isSignedIn,
-			asyncCountryCode: asyncCountryCode as Promise<string>,
+			countryCode,
 			isPreview,
 			asyncArticleCounts: asyncArticleCounts as Promise<
 				ArticleCounts | undefined
@@ -286,7 +290,7 @@ export const StickyBottomBanner = ({
 			remoteBannerSwitch,
 		)({
 			isSignedIn,
-			asyncCountryCode: asyncCountryCode as Promise<string>,
+			countryCode,
 			isPreview,
 			asyncArticleCounts: asyncArticleCounts as Promise<
 				ArticleCounts | undefined
@@ -317,7 +321,7 @@ export const StickyBottomBanner = ({
 			name: 'banner',
 		};
 
-		pickMessage(bannerConfig)
+		pickMessage(bannerConfig, renderingTarget)
 			.then((PickedBanner: () => MaybeFC) =>
 				setSelectedBanner(PickedBanner),
 			)
@@ -326,7 +330,7 @@ export const StickyBottomBanner = ({
 					`StickyBottomBanner pickMessage - error: ${String(e)}`,
 				),
 			);
-	}, [isSignedIn, asyncCountryCode, brazeMessages, asyncArticleCounts]);
+	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCounts]);
 
 	if (SelectedBanner) {
 		return <SelectedBanner />;

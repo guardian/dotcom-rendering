@@ -8,7 +8,6 @@ import {
 	extractTrendingTopicsFomFront,
 } from '../model/extractTrendingTopics';
 import { groupTrailsByDates } from '../model/groupTrailsByDates';
-import { injectMpuIntoGroupedTrails } from '../model/injectMpuIntoGroupedTrails';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
 import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
@@ -33,7 +32,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 				pageId: data.pageId,
 				onPageDescription:
 					data.pressedPage.frontProperties.onPageDescription,
-				isPaidContent: data.config.isPaidContent,
+				isOnPaidContentFront: data.config.isPaidContent,
 				discussionApiUrl: data.config.discussionApiUrl,
 				frontBranding: pickBrandingForEdition(
 					data.pressedPage.frontProperties.commercial
@@ -73,9 +72,7 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 	return {
 		...data,
 		tags: data.tags.tags,
-		groupedTrails: data.isAdFreeUser
-			? groupedTrails
-			: injectMpuIntoGroupedTrails(groupedTrails, speed),
+		groupedTrails,
 		speed,
 		// Pagination information comes from the first tag
 		pagination:
@@ -90,7 +87,9 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 		trendingTopics: extractTrendingTopics(data.contents, data.pageId),
 		header: {
 			title: data.webTitle,
-			description: data.tags.tags[0]?.properties.bio,
+			description:
+				data.tags.tags[0]?.properties.bio ??
+				data.tags.tags[0]?.properties.description,
 			image: data.tags.tags[0]?.properties.bylineImageUrl,
 		},
 	};

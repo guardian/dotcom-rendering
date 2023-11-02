@@ -1,11 +1,26 @@
+// ----- Imports ----- //
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { Meta } from '@storybook/react';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { StarRating } from './StarRating';
 
-export default {
+// ----- Meta ----- //
+
+const meta: Meta<typeof StarRating> = {
+	title: 'components/StarRating',
 	component: StarRating,
-	title: 'Components/StarRating',
 };
 
-export const AllSizes = () => (
+export default meta;
+
+const articleFormat: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
+// ----- Stories ----- //
+
+export const AllSizeStars = () => (
 	<>
 		<h1>Small</h1>
 		<br />
@@ -22,7 +37,8 @@ export const AllSizes = () => (
 		<StarRating rating={3} size="large" />
 	</>
 );
-AllSizes.storyName = 'All stars sizes';
+AllSizeStars.storyName = 'All Sizes';
+AllSizeStars.decorators = [splitTheme(articleFormat)];
 
 export const SmallStory = () => (
 	<>
@@ -45,7 +61,8 @@ export const SmallStory = () => (
 		<StarRating rating={5} size="small" />
 	</>
 );
-SmallStory.storyName = 'Small stars';
+SmallStory.storyName = 'Small Stars';
+SmallStory.decorators = [splitTheme(articleFormat)];
 
 export const MediumStory = () => (
 	<>
@@ -69,6 +86,7 @@ export const MediumStory = () => (
 	</>
 );
 MediumStory.storyName = 'Medium stars';
+MediumStory.decorators = [splitTheme(articleFormat)];
 
 export const LargeStory = () => (
 	<>
@@ -92,3 +110,31 @@ export const LargeStory = () => (
 	</>
 );
 LargeStory.storyName = 'Large stars';
+LargeStory.decorators = [splitTheme(articleFormat)];
+
+export const StarColours = () => (
+	<>
+		<div style={{ backgroundColor: '#f6dde1' }}>
+			<p>Stars take the colour of the parent by default</p>
+			<div style={{ color: 'red' }}>
+				<StarRating rating={0} size="large" />
+			</div>
+			<div style={{ color: 'orange' }}>
+				<StarRating rating={1} size="large" />
+			</div>
+			<div style={{ color: 'yellow' }}>
+				<StarRating rating={2} size="large" />
+			</div>
+			<div style={{ color: 'green' }}>
+				<StarRating rating={3} size="large" />
+			</div>
+			<div style={{ color: 'blue' }}>
+				<StarRating rating={4} size="large" />
+			</div>
+			<div style={{ color: 'purple' }}>
+				<StarRating rating={5} size="large" />
+			</div>
+		</div>
+	</>
+);
+StarColours.storyName = 'Star colours';

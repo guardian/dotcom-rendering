@@ -1,15 +1,16 @@
-const path = require('path');
-const webpack = require('webpack');
-const {
+import path from 'node:path';
+import webpack from 'webpack';
+import {
 	babelExclude,
 	getLoaders,
-} = require('../scripts/webpack/webpack.config.client');
+} from '../scripts/webpack/webpack.config.client';
+import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
+import type { StorybookConfig } from '@storybook/react-webpack5';
 
 // Generate dynamic Card and Layout stories
-require('../scripts/gen-stories/gen-stories');
+saveStories();
 
-/** @type {import("@storybook/react-webpack5").StorybookConfig} */
-module.exports = {
+const config: StorybookConfig = {
 	features: {
 		// used in composition
 		buildStoriesJson: true,
@@ -48,11 +49,12 @@ module.exports = {
 		config = webpackConfig(config);
 
 		// Global options for webpack
-		config.resolve.extensions.push('.ts', '.tsx');
+		config.resolve?.extensions?.push('.ts', '.tsx');
 
 		// Required as otherwise 'process' will not be defined when included on its own (without .env)
 		// e.g process?.env?.SOME_VAR
-		config.plugins.push(
+		config.plugins?.push(
+			// @ts-expect-error -- we’ve got plugin mismatch
 			new webpack.DefinePlugin({
 				process: '{}',
 			}),
@@ -77,17 +79,23 @@ module.exports = {
 		autodocs: true,
 	},
 };
-const webpackConfig = (config) => {
-	const rules = config.module.rules;
+
+/** the webpack.Configuration type from Storybook */
+type Configuration = Parameters<
+	NonNullable<StorybookConfig['webpackFinal']>
+>[0];
+
+const webpackConfig = (config: Configuration) => {
+	const rules = config.module?.rules ?? [];
 
 	// Mock JSDOM for storybook - it relies on native node.js packages
 	// Allows us to use enhancers in stories for better testing of components & full articles
-	config.resolve.alias.jsdom$ = path.resolve(__dirname, './mocks/jsdom.js');
+	config.resolve.alias.jsdom$ = path.resolve(__dirname, './mocks/jsdom.ts');
 
 	// log4js tries to call "fs" in storybook -- we can ignore it
 	config.resolve.alias[
 		path.resolve(__dirname, '../src/server/lib/logging.ts')
-	] = path.resolve(__dirname, './mocks/log4js.js');
+	] = path.resolve(__dirname, './mocks/log4js.ts');
 
 	// SecureSignup uses @emotion/cache and @emotion/server - can't be used in storybook
 	config.resolve.alias[
@@ -111,7 +119,10 @@ const webpackConfig = (config) => {
 	// modify storybook's file-loader rule to avoid conflicts with our svg
 	// https://stackoverflow.com/questions/54292667/react-storybook-svg-failed-to-execute-createelement-on-document
 	const fileLoaderRule = rules.find((rule) => rule.test.test('.svg'));
-	fileLoaderRule.exclude = /\.svg$/;
+	fileLoaderRule &&
+		typeof fileLoaderRule !== 'string' &&
+		(fileLoaderRule.exclude = /\.svg$/);
+
 	rules.push({
 		test: /\.svg$/,
 		use: ['desvg-loader/react', 'svg-loader'],
@@ -125,3 +136,5 @@ const webpackConfig = (config) => {
 	};
 	return config;
 };
+
+export default config;

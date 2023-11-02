@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAltBackground, from, space } from '@guardian/source-foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decidePalette } from '../../lib/decidePalette';
@@ -102,6 +106,17 @@ export type Props = {
 	showMainVideo?: boolean;
 };
 
+const starWrapper = (cardHasImage: boolean) => css`
+	background-color: ${sourcePalette.brandAlt[400]};
+	color: ${sourcePalette.neutral[0]};
+	margin-top: ${cardHasImage ? '2' : space[1]}px;
+	display: inline-block;
+
+	${from.tablet} {
+		margin-top: ${space[1]}px;
+	}
+`;
+
 const StarRatingComponent = ({
 	rating,
 	cardHasImage,
@@ -109,17 +124,7 @@ const StarRatingComponent = ({
 	rating: number;
 	cardHasImage: boolean;
 }) => (
-	<div
-		css={css`
-			background-color: ${brandAltBackground.primary};
-			margin-top: ${cardHasImage ? '2' : space[1]}px;
-			display: inline-block;
-
-			${from.tablet} {
-				margin-top: ${space[1]}px;
-			}
-		`}
-	>
+	<div css={starWrapper(cardHasImage)}>
 		<Hide when="above" breakpoint="desktop">
 			<StarRating rating={rating} size="small" breakpoint="mobile" />
 		</Hide>
@@ -439,8 +444,6 @@ export const Card = ({
 								<Avatar
 									src={media.avatarUrl}
 									alt={byline ?? ''}
-									containerPalette={containerPalette}
-									format={format}
 								/>
 							</AvatarContainer>
 						)}

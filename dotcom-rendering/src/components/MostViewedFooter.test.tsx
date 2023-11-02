@@ -23,7 +23,9 @@ describe('MostViewedFooterData', () => {
 		useApi.mockReturnValue({ data: responseWithTwoTabs, loading: false });
 
 		const { getByText, getAllByText, getByTestId } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<MostViewedFooterData
 					sectionId="Section Name"
 					format={{
@@ -62,7 +64,9 @@ describe('MostViewedFooterData', () => {
 		useApi.mockReturnValue({ data: responseWithTwoTabs, loading: false });
 
 		const { getByTestId, getByText } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<MostViewedFooterData
 					sectionId="Section Name"
 					format={{
@@ -122,7 +126,9 @@ describe('MostViewedFooterData', () => {
 		});
 
 		const { getByText } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<MostViewedFooterData
 					sectionId="Section Name"
 					format={{
@@ -167,7 +173,9 @@ describe('MostViewedFooterData', () => {
 		});
 
 		const { queryByText } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<MostViewedFooterData
 					sectionId="Section Name"
 					format={{
@@ -188,7 +196,9 @@ describe('MostViewedFooterData', () => {
 		useApi.mockReturnValue({ data: responseWithTwoTabs, loading: false });
 
 		const { asFragment } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<MostViewedFooterData
 					sectionId="Section Name"
 					format={{

@@ -6,6 +6,7 @@ import detectMobile from 'is-mobile';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import { useIsInView } from '../../lib/useIsInView';
+import { useConfig } from '../ConfigContext';
 import type { VideoEventKey } from './YoutubeAtom';
 
 const buttonStyles = css`
@@ -139,6 +140,7 @@ export const YoutubeAtomSticky = ({
 	const [isSticky, setIsSticky] = useState<boolean>(false);
 	const [stickEventSent, setStickEventSent] = useState<boolean>(false);
 	const [showOverlay, setShowOverlay] = useState<boolean>(isMobile);
+	const { renderingTarget } = useConfig();
 
 	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.5,
@@ -167,13 +169,16 @@ export const YoutubeAtomSticky = ({
 		});
 
 		// submit a 'close' event to Ophan
-		void submitComponentEvent({
-			component: {
-				componentType: 'STICKY_VIDEO',
-				id: videoId,
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'STICKY_VIDEO',
+					id: videoId,
+				},
+				action: 'CLOSE',
 			},
-			action: 'CLOSE',
-		});
+			renderingTarget,
+		);
 	};
 
 	/**
@@ -231,15 +236,18 @@ export const YoutubeAtomSticky = ({
 				msg: 'Stick',
 			});
 
-			void submitComponentEvent({
-				component: {
-					componentType: 'STICKY_VIDEO',
-					id: videoId,
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'STICKY_VIDEO',
+						id: videoId,
+					},
+					action: 'STICK',
 				},
-				action: 'STICK',
-			});
+				renderingTarget,
+			);
 		}
-	}, [isSticky, stickEventSent, videoId, eventEmitters]);
+	}, [isSticky, stickEventSent, videoId, eventEmitters, renderingTarget]);
 
 	/**
 	 * useEffect for mobile only sticky overlay

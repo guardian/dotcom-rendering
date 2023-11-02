@@ -31,13 +31,14 @@ import {
 } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
+import type { AuthStatus } from '../lib/identity';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { setAutomat } from '../lib/setAutomat';
-import type { AuthStatus } from '../lib/useAuthStatus';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	editionId: EditionId;
@@ -188,6 +189,8 @@ const ReaderRevenueLinksRemote = ({
 		useState<React.ElementType | null>(null);
 	const isSignedIn = getIsSignedIn(useAuthStatus());
 
+	const { renderingTarget } = useConfig();
+
 	useOnce((): void => {
 		setAutomat();
 
@@ -249,7 +252,12 @@ const ReaderRevenueLinksRemote = ({
 				<SupportHeader
 					submitComponentEvent={(
 						componentEvent: OphanComponentEvent,
-					) => void submitComponentEvent(componentEvent)}
+					) =>
+						void submitComponentEvent(
+							componentEvent,
+							renderingTarget,
+						)
+					}
 					{...supportHeaderResponse.props}
 				/>
 			</div>
@@ -292,6 +300,8 @@ const ReaderRevenueLinksNative = ({
 		campaignCode,
 	};
 
+	const { renderingTarget } = useConfig();
+
 	const [hasBeenSeen, setNode] = useIsInView({
 		threshold: 0,
 		debounce: true,
@@ -299,14 +309,14 @@ const ReaderRevenueLinksNative = ({
 
 	useEffect(() => {
 		if (!hideSupportMessaging && inHeader) {
-			void sendOphanComponentEvent('INSERT', tracking);
+			void sendOphanComponentEvent('INSERT', tracking, renderingTarget);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		if (hasBeenSeen && inHeader) {
-			void sendOphanComponentEvent('VIEW', tracking);
+			void sendOphanComponentEvent('VIEW', tracking, renderingTarget);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hasBeenSeen]);

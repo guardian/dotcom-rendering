@@ -5,6 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { ArticleMeta } from './ArticleMeta';
 
@@ -89,15 +90,16 @@ export const ArticleStory = () => {
 	);
 };
 
+const appsFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
 export const ArticleAppsStory = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={appsFormat}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -114,6 +116,7 @@ export const ArticleAppsStory = () => {
 };
 /** @see /dotcom-rendering/docs/development/storybook.md */
 ArticleAppsStory.args = { config: { renderingTarget: 'Apps' } };
+ArticleAppsStory.decorators = [lightDecorator(appsFormat)];
 
 export const BrandingStory = () => {
 	return (
@@ -182,6 +185,13 @@ export const FeatureStory = () => {
 	);
 };
 FeatureStory.storyName = 'Feature';
+FeatureStory.decorators = [
+	lightDecorator({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Feature,
+		theme: Pillar.Culture,
+	}),
+];
 
 export const FeatureWithMismatchedContributor = () => {
 	return (
@@ -258,6 +268,13 @@ export const SpecialReportStory = () => {
 	);
 };
 SpecialReportStory.storyName = 'SpecialReport';
+SpecialReportStory.decorators = [
+	lightDecorator({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Feature,
+		theme: ArticleSpecial.SpecialReport,
+	}),
+];
 
 export const SpecialReportAlt = () => {
 	return (
@@ -283,6 +300,13 @@ export const SpecialReportAlt = () => {
 	);
 };
 SpecialReportAlt.storyName = 'SpecialReportAlt';
+SpecialReportAlt.decorators = [
+	lightDecorator({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Feature,
+		theme: ArticleSpecial.SpecialReportAlt,
+	}),
+];
 
 export const CommentStory = () => {
 	return (
@@ -333,6 +357,13 @@ export const InterviewStory = () => {
 	);
 };
 InterviewStory.storyName = 'Interview';
+InterviewStory.decorators = [
+	lightDecorator({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Interview,
+		theme: Pillar.Lifestyle,
+	}),
+];
 
 export const ImmersiveStory = () => {
 	return (
@@ -383,6 +414,13 @@ export const TwoContributorsStory = () => {
 	);
 };
 TwoContributorsStory.storyName = 'Feature, with two contributors';
+TwoContributorsStory.decorators = [
+	lightDecorator({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Feature,
+		theme: Pillar.Sport,
+	}),
+];
 
 export const DeadBlogStory = () => {
 	return (

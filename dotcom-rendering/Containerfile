@@ -1,6 +1,6 @@
 # This container is used in our CICD pipelines for running E2E and regression tests.
 # Keep the Node version in sync with `.nvmrc`
-FROM node:18.17.0-alpine
+FROM node:18.18.2-alpine
 
 WORKDIR /opt/app/dotcom-rendering/dotcom-rendering
 

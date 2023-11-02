@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	between,
-	brandAltBackground,
 	from,
 	headline,
 	neutral,
@@ -12,6 +11,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { getLargest, getMaster } from '../lib/image';
 import { isWideEnough } from '../lib/lightbox';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
+import { palette as themePalette } from '../palette';
 import type { Switches } from '../types/config';
 import type { ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
@@ -38,7 +38,8 @@ type Props = {
 };
 
 const starsWrapper = css`
-	background-color: ${brandAltBackground.primary};
+	background-color: ${themePalette('--star-rating-background')};
+	color: ${themePalette('--star-rating-fill')};
 
 	position: absolute;
 	${until.tablet} {
@@ -224,7 +225,7 @@ const CaptionToggle = () => (
 );
 
 const isSupported = (imageUrl: string): boolean => {
-	const supportedImages = ['jpg', 'jpeg', 'png'];
+	const supportedImages = ['jpg', 'jpeg', 'png', 'gif'];
 	return supportedImages.some((extension) =>
 		imageUrl.endsWith(`.${extension}`),
 	);

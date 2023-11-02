@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { TableOfContentsItem } from '../types/frontend';
 import { TableOfContents } from './TableOfContents.importable';
 
@@ -10,9 +10,6 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 			css={css`
 				padding: 20px;
 				max-width: 700px;
-				${from.tablet} {
-					width: 700px;
-				}
 			`}
 		>
 			{children}
@@ -67,6 +64,7 @@ export const defaultStory = () => {
 };
 
 defaultStory.storyName = 'default';
+defaultStory.decorators = [splitTheme(format)];
 
 export const immersive = () => {
 	return (
@@ -80,6 +78,7 @@ export const immersive = () => {
 };
 
 immersive.storyName = 'immersive';
+immersive.decorators = [splitTheme(immersiveDisplayFormat)];
 
 export const numberedList = () => {
 	return (
@@ -93,3 +92,4 @@ export const numberedList = () => {
 };
 
 numberedList.storyName = 'numberedList';
+numberedList.decorators = [splitTheme(numberedListDisplayFormat)];

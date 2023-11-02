@@ -57,7 +57,6 @@ export type Palette = {
 		betaLabel: Colour;
 		designTag: Colour;
 		dateLine: Colour;
-		tableOfContents: Colour;
 		expandableAtom: Colour;
 		expandableAtomHover: Colour;
 		subNavLink: Colour;
@@ -70,7 +69,6 @@ export type Palette = {
 		audioAtom: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
-		avatar: Colour;
 		card: Colour;
 		headline: Colour;
 		headlineByline: Colour;

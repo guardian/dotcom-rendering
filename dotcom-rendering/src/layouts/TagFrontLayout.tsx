@@ -8,7 +8,7 @@ import {
 	news,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { Fragment, useRef } from 'react';
+import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { Footer } from '../components/Footer';
@@ -19,9 +19,7 @@ import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
-import { TagFrontFastMpu } from '../components/TagFrontFastMpu';
 import { TagFrontHeader } from '../components/TagFrontHeader';
-import { TagFrontSlowMpu } from '../components/TagFrontSlowMpu';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
@@ -30,6 +28,7 @@ import {
 	getMerchHighPosition,
 	getTagFrontMobileAdPositions,
 } from '../lib/getAdPositions';
+import { getTaggedFrontsBannerAdPositions } from '../lib/getFrontsBannerAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagFrontType } from '../types/tagFront';
 import {
@@ -78,8 +77,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 		tagFront.groupedTrails.length,
 	);
 
-	const numBannerAdsInserted = useRef(0);
-
 	const {
 		config: { switches, hasPageSkin, isPaidContent },
 	} = tagFront;
@@ -87,6 +84,10 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 	const showBannerAds = !!switches.frontsBannerAds;
 
 	const renderAds = canRenderAds(tagFront);
+
+	const desktopAdPositions = getTaggedFrontsBannerAdPositions(
+		tagFront.groupedTrails.length,
+	);
 
 	const mobileAdPositions = renderAds
 		? getTagFrontMobileAdPositions(
@@ -216,38 +217,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
-					const ContainerComponent = () => {
-						if (
-							'injected' in groupedTrails &&
-							'speed' in groupedTrails
-						) {
-							if (groupedTrails.speed === 'fast') {
-								return (
-									<TagFrontFastMpu
-										{...groupedTrails}
-										adIndex={1} // There is only ever 1 inline ad in a tag front
-										imageLoading={imageLoading}
-									/>
-								);
-							} else {
-								return (
-									<TagFrontSlowMpu
-										{...groupedTrails}
-										adIndex={1} // There is only ever 1 inline ad in a tag front
-										imageLoading={imageLoading}
-									/>
-								);
-							}
-						}
-						return (
-							<DecideContainerByTrails
-								trails={groupedTrails.trails}
-								speed={tagFront.speed}
-								imageLoading={imageLoading}
-							/>
-						);
-					};
-
 					const url =
 						groupedTrails.day !== undefined
 							? `/${tagFront.pageId}/${groupedTrails.year}/${date
@@ -268,11 +237,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
-								numBannerAdsInserted,
 								showBannerAds,
 								index,
-								tagFront.pageId,
-								null,
+								desktopAdPositions,
 							)}
 							<FrontSection
 								title={date.toLocaleDateString('en-GB', {
@@ -302,7 +269,11 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 									tagFront.config.discussionApiUrl
 								}
 							>
-								<ContainerComponent />
+								<DecideContainerByTrails
+									trails={groupedTrails.trails}
+									speed={tagFront.speed}
+									imageLoading={imageLoading}
+								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(
 								renderAds,

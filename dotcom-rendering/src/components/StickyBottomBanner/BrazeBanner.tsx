@@ -10,12 +10,11 @@ import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import { lazyFetchEmailWithTimeout } from '../../lib/contributions';
 import { getZIndex } from '../../lib/getZIndex';
+import { getOptionsHeadersWithOkta } from '../../lib/identity';
 import type { CanShowResult } from '../../lib/messagePicker';
-import {
-	getOptionsHeadersWithOkta,
-	useAuthStatus,
-} from '../../lib/useAuthStatus';
+import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
+import { useConfig } from '../ConfigContext';
 
 type Meta = {
 	dataFromBraze: { [key: string]: string };
@@ -110,21 +109,25 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	idApiUrl,
 }: InnerProps) => {
 	const authStatus = useAuthStatus();
+	const { renderingTarget } = useConfig();
 
 	useEffect(() => {
 		// Log the impression with Braze
 		meta.logImpressionWithBraze();
 
 		// Log VIEW event with Ophan
-		void submitComponentEvent({
-			component: {
-				componentType: 'RETENTION_ENGAGEMENT_BANNER',
-				id:
-					meta.dataFromBraze.ophanComponentId ??
-					meta.dataFromBraze.componentName,
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'RETENTION_ENGAGEMENT_BANNER',
+					id:
+						meta.dataFromBraze.ophanComponentId ??
+						meta.dataFromBraze.componentName,
+				},
+				action: 'VIEW',
 			},
-			action: 'VIEW',
-		});
+			renderingTarget,
+		);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -156,7 +159,9 @@ const BrazeBannerWithSatisfiedDependencies = ({
 		<div css={containerStyles}>
 			<BrazeComponent
 				logButtonClickWithBraze={meta.logButtonClickWithBraze}
-				submitComponentEvent={submitComponentEvent}
+				submitComponentEvent={(event) =>
+					void submitComponentEvent(event, renderingTarget)
+				}
 				componentName={componentName}
 				brazeMessageProps={meta.dataFromBraze}
 				subscribeToNewsletter={subscribeToNewsletter}

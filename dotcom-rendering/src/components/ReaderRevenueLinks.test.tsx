@@ -1,6 +1,7 @@
 import { render, waitFor } from '@testing-library/react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
+import { ConfigProvider } from './ConfigContext';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 const shouldHideSupportMessaging: {
@@ -39,14 +40,18 @@ describe('ReaderRevenueLinks', () => {
 		shouldHideSupportMessaging.mockReturnValue(true);
 
 		const { getByText } = render(
-			<ReaderRevenueLinks
-				urls={urls}
-				editionId="US"
-				dataLinkNamePrefix="nav2 : "
-				inHeader={true}
-				remoteHeader={false}
-				contributionsServiceUrl={contributionsServiceUrl}
-			/>,
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<ReaderRevenueLinks
+					urls={urls}
+					editionId="US"
+					dataLinkNamePrefix="nav2 : "
+					inHeader={true}
+					remoteHeader={false}
+					contributionsServiceUrl={contributionsServiceUrl}
+				/>
+			</ConfigProvider>,
 		);
 
 		await waitFor(() => expect(getByText('Thank you')).toBeInTheDocument());
@@ -56,14 +61,18 @@ describe('ReaderRevenueLinks', () => {
 		shouldHideSupportMessaging.mockReturnValue(false);
 
 		const { getByText } = render(
-			<ReaderRevenueLinks
-				urls={urls}
-				editionId={edition}
-				dataLinkNamePrefix="nav2 : "
-				inHeader={true}
-				remoteHeader={false}
-				contributionsServiceUrl={contributionsServiceUrl}
-			/>,
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<ReaderRevenueLinks
+					urls={urls}
+					editionId={edition}
+					dataLinkNamePrefix="nav2 : "
+					inHeader={true}
+					remoteHeader={false}
+					contributionsServiceUrl={contributionsServiceUrl}
+				/>
+			</ConfigProvider>,
 		);
 
 		await waitFor(() =>
