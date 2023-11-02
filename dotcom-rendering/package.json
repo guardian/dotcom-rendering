@@ -170,7 +170,7 @@
 		"cypress": "13.4.0",
 		"cypress-plugin-tab": "1.0.5",
 		"cypress-real-events": "1.10.3",
-		"cypress-wait-until": "1.7.2",
+		"cypress-wait-until": "2.0.1",
 		"desvg-loader": "0.1.0",
 		"doctoc": "2.2.1",
 		"dompurify": "3.0.3",
