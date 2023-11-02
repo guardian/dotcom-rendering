@@ -18,6 +18,8 @@ import {
 	signInLink,
 } from './shared';
 import { SocialButton, socialButtonIcon } from '../../SocialButtons';
+import { css } from '@emotion/react';
+import { space } from '@guardian/source-foundations';
 
 export const SignInGateRealSocial = ({
 	signInUrl,
@@ -74,24 +76,33 @@ export const SignInGateRealSocial = ({
 				>
 					Email and password
 				</LinkButton>
-				{!isMandatory && (
-					<Button
-						data-cy="sign-in-gate-main_dismiss"
-						data-ignore="global-link-styling"
-						css={laterButton}
-						priority="subdued"
-						size="small"
-						onClick={() => {
-							dismissGate();
-							trackLink(ophanComponentId, 'not-now', abTest);
-						}}
-					>
-						I’ll do it later
-					</Button>
-				)}
 			</div>
+			{!isMandatory && (
+				<Button
+					data-cy="sign-in-gate-main_dismiss"
+					data-ignore="global-link-styling"
+					css={laterButton}
+					priority="subdued"
+					size="small"
+					onClick={() => {
+						dismissGate();
+						trackLink(ophanComponentId, 'not-now', abTest);
+					}}
+				>
+					I’ll do it later
+				</Button>
+			)}
 
-			<p css={[bodySeparator, bodyBold, signInHeader]}>
+			<p
+				css={[
+					bodySeparator,
+					bodyBold,
+					signInHeader,
+					css`
+						margin-top: ${space[4]}px;
+					`,
+				]}
+			>
 				Have a subscription? Made a contribution? Already registered?
 			</p>
 

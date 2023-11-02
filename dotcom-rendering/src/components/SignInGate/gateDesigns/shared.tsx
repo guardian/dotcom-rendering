@@ -57,7 +57,7 @@ export const actionButtons = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	margin-bottom: 42px;
+	margin-bottom: ${space[4]}px;
 	gap: 1rem;
 
 	${from.mobileMedium} {
