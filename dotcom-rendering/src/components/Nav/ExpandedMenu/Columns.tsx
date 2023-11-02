@@ -92,6 +92,13 @@ const brandExtensionList = css`
 	}
 `;
 
+const brandExtenstionListWithPageSkin = (hasPageSkin: boolean) => css`
+	${brandExtensionList};
+	${from.leftCol}, ${from.wide} {
+		width: 131px;
+	}
+`;
+
 const brandExtensionListItem = css`
 	margin-right: 0;
 	margin-top: -6px;
@@ -128,6 +135,13 @@ const brandExtensionLink = css`
 	}
 	> * {
 		pointer-events: none;
+	}
+`;
+
+const brandExtensionLinkWithPageSkin = (hasPageSkin: boolean) => css`
+	${brandExtensionLink};
+	${from.wide} {
+		font-size: 1.25rem;
 	}
 `;
 
@@ -219,6 +233,16 @@ const checkIfPageHasPageSkin = (hasPageSkin: boolean, isImmersive: boolean) =>
 	hasPageSkin
 		? columnsStyleWithPageSkin(hasPageSkin)
 		: columnsStyle(isImmersive);
+
+const checkIfPageHasPageSkinForBrandExtension = (hasPageSkin: boolean) =>
+	hasPageSkin
+		? brandExtenstionListWithPageSkin(hasPageSkin)
+		: brandExtensionList;
+
+const checkIfPageHasPageSkinForBrandExtensionLink = (hasPageSkin: boolean) =>
+	hasPageSkin
+		? brandExtensionLinkWithPageSkin(hasPageSkin)
+		: brandExtensionLink;
 
 type Props = {
 	editionId: EditionId;
@@ -334,9 +358,13 @@ export const Columns = ({
 				otherLinks={nav.otherLinks}
 				brandExtensions={nav.brandExtensions}
 				key="more"
+				hasPageSkin={hasPageSkin}
 			/>
 			<li css={desktopBrandExtensionColumn} role="none">
-				<ul css={brandExtensionList} role="menu">
+				<ul
+					css={checkIfPageHasPageSkinForBrandExtension(hasPageSkin)}
+					role="menu"
+				>
 					{nav.brandExtensions.map((brandExtension) => (
 						<li
 							css={brandExtensionListItem}
@@ -344,7 +372,9 @@ export const Columns = ({
 						>
 							<a
 								className="selectableMenuItem"
-								css={brandExtensionLink}
+								css={checkIfPageHasPageSkinForBrandExtensionLink(
+									hasPageSkin,
+								)}
 								href={brandExtension.url}
 								key={brandExtension.title}
 								role="menuitem"
