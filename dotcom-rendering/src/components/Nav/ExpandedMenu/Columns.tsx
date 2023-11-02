@@ -210,6 +210,7 @@ type Props = {
 	isImmersive?: boolean;
 	nav: NavType;
 	headerTopBarSwitch: boolean;
+	hasPageSkin: boolean;
 };
 
 export const Columns = ({
@@ -217,6 +218,7 @@ export const Columns = ({
 	nav,
 	editionId,
 	headerTopBarSwitch,
+	hasPageSkin,
 }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
@@ -241,6 +243,7 @@ export const Columns = ({
 							key={column.title.toLowerCase()}
 							index={i}
 							showLineBelow={i !== nav.pillars.length - 1}
+							hasPageSkin={hasPageSkin}
 						/>
 					)
 				),

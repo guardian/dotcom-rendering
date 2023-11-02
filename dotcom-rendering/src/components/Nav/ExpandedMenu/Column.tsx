@@ -200,14 +200,39 @@ const columnStyle = css`
 	}
 `;
 
+// const columnStyleWithPageSkin = css`
+// 	${columnStyle};
+// 	${from.desktop} {
+// 		width: 134px;
+// 		float: left;
+// 		position: relative;
+// 		border-left: 1px solid ${brand[600]};
+
+// 		:after {
+// 			height: 100%;
+// 			left: 0;
+// 			width: 1px;
+// 		}
+
+// 		:first-of-type {
+// 			border-left: none;
+// 			width: 123px;
+// 		}
+// 	}
+// `;
+
+// const checkIfPageHasPageSkin = (hasPageSkin: boolean) => hasPageSkin ? columnStyleWithPageSkin : columnStyle;
+
 export const Column = ({
 	column,
 	index,
 	showLineBelow,
+	hasPageSkin,
 }: {
 	column: PillarLinkType | EditionLinkType;
 	index: number;
 	showLineBelow: boolean;
+	hasPageSkin: boolean;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
 	//Replace whitespace with hyphen https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with/3795147#3795147
