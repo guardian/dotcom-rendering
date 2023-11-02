@@ -11,10 +11,9 @@ describe('The RenderingApp stack', () => {
 	it('matches the snapshot', () => {
 		const app = new App();
 
-		const stack = new RenderingApp(app, 'ArticleRendering-TEST', {
-			stack: 'frontend',
+		const stack = new RenderingApp(app, 'ArticleRenderingWeb-TEST', {
 			stage: 'TEST',
-			app: 'article-rendering',
+			app: 'article-web',
 			instanceSize: InstanceSize.MICRO,
 			scaling: { minimumInstances: 1, maximumInstances: 4 },
 		});

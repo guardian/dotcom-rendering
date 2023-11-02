@@ -14,7 +14,7 @@ const target = path.resolve(dirname, '../..', 'target');
  * ├── ${copyFrontendStatic()}
  * ├── ${copyApp('rendering')}
  * ├── ${copyApp('front-web')}
- * └── ${copyApp('article-rendering')}
+ * └── ${copyApp('article-web')}
  */
 
 /**
@@ -24,8 +24,8 @@ const target = path.resolve(dirname, '../..', 'target');
  *
  * It generates a folder like this:
  * ├── ${appName}-cfn
- * │   ├── DotcomRendering-${appName}-CODE.template.json
- * │   └── DotcomRendering-${appName}-PROD.template.json
+ * │   ├── ${partialStackId}-CODE.template.json
+ * │   └── ${partialStackId}-PROD.template.json
  * └── ${appName}
  *     └── dist
  *         └── ${appName}.zip
@@ -37,7 +37,7 @@ const target = path.resolve(dirname, '../..', 'target');
 const copyApp = (appName) => {
 	/**
 	 * GOTCHA: This is a little hack to be backwards compatible with the naming for when this was a single stack app
-	 * @param { 'rendering' | 'front-web' | 'article-rendering' } app
+	 * @param { 'rendering' | 'front-web' | 'article-web' } app
 	 * @param { 'CODE' | 'PROD' } stage
 	 */
 	const getCfnTemplateName = (app, stage) => {
@@ -46,13 +46,13 @@ const copyApp = (appName) => {
 				return `DotcomRendering-${stage}.template.json`;
 			case 'front-web':
 				return `DotcomRendering-front-web-${stage}.template.json`;
-			case 'article-rendering':
-				return `ArticleRendering-${stage}.template.json`;
+			case 'article-web':
+				return `ArticleRenderingWeb-${stage}.template.json`;
 		}
 	};
 
 	/**
-	 * @param { 'rendering' | 'front-web' | 'article-rendering' } app
+	 * @param { 'rendering' | 'front-web' | 'article-web' } app
 	 */
 	const getCfnFolder = (app) => {
 		switch (app) {
@@ -60,8 +60,8 @@ const copyApp = (appName) => {
 				return 'frontend-cfn';
 			case 'front-web':
 				return 'front-web-cfn';
-			case 'article-rendering':
-				return 'article-rendering-cfn';
+			case 'article-web':
+				return 'article-web-cfn';
 		}
 	};
 
@@ -156,7 +156,7 @@ const copyRiffRaff = () => {
 Promise.all([
 	...copyApp('rendering'),
 	...copyApp('front-web'),
-	...copyApp('article-rendering'),
+	...copyApp('article-web'),
 	...copyFrontendStatic(),
 	copyRiffRaff(),
 ]).catch((err) => {

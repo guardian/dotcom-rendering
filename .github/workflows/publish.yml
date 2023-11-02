@@ -39,11 +39,11 @@ jobs:
           tar -zcf front-web.tar.gz front-web
           rm -r front-web/*
           mv front-web.tar.gz front-web/
-      - name: Compress DCR article-rendering server files
+      - name: Compress DCR article-web server files
         run: |
-          tar -zcf article-rendering.tar.gz article-rendering
-          rm -r article-rendering/*
-          mv article-rendering.tar.gz article-rendering/
+          tar -zcf article-web.tar.gz article-web
+          rm -r article-web/*
+          mv article-web.tar.gz article-web/
       - uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-region: eu-west-1
@@ -51,7 +51,7 @@ jobs:
 
       - uses: guardian/actions-riff-raff@v2
         with:
-          projectName: dotcom:rendering
+          projectName: dotcom:rendering-all
           configPath: riff-raff.yaml
           buildNumberOffset: 38860
           contentDirectories: |
@@ -65,7 +65,7 @@ jobs:
               - front-web
             frontend-static:
               - frontend-static
-            article-rendering-cfn:
-              - article-rendering-cfn
-            article-rendering:
-              - article-rendering
+            article-web-cfn:
+              - article-web-cfn
+            article-web:
+              - article-web

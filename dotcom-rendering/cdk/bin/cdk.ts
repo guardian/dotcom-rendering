@@ -47,19 +47,15 @@ new DotcomRendering(app, 'DotcomRendering-front-web-PROD', {
 	instanceType: 't4g.micro',
 });
 
-// Rendering App for Articles in CODE env
-new RenderingApp(app, 'ArticleRendering-CODE', {
-	stack: 'frontend',
-	app: 'article-rendering',
+new RenderingApp(app, 'ArticleRenderingWeb-CODE', {
+	app: 'article-web',
 	stage: 'CODE',
 	instanceSize: InstanceSize.MICRO,
 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 });
 
-// Rendering App for Articles in PROD env
-new RenderingApp(app, 'ArticleRendering-PROD', {
-	stack: 'frontend',
-	app: 'article-rendering',
+new RenderingApp(app, 'ArticleRenderingWeb-PROD', {
+	app: 'article-web',
 	stage: 'PROD',
 	instanceSize: InstanceSize.MICRO,
 	scaling: { minimumInstances: 1, maximumInstances: 2 },

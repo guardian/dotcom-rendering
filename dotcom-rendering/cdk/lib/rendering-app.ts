@@ -16,16 +16,21 @@ import {
 } from 'aws-cdk-lib/aws-ec2';
 import { getUserData } from './userData';
 
-interface RenderingAppProps extends GuStackProps {
-	app: `${string}-rendering`;
+type RenderingAppProps = Omit<GuStackProps, 'stack'> & {
+	/** The name of the application (TBC on name for "applications"...) */
+	app: `${'article' | 'front' | 'applications'}-${'apps' | 'web'}`;
 	instanceSize: InstanceSize;
 	scaling: GuAsgCapacity;
-}
+};
 
 export class RenderingApp extends GuStack {
 	constructor(scope: App, id: string, props: RenderingAppProps) {
 		// Any version of this app should run in the eu-west-1 region
-		super(scope, id, { ...props, env: { region: 'eu-west-1' } });
+		super(scope, id, {
+			...props,
+			env: { region: 'eu-west-1' },
+			stack: 'dotcom-rendering',
+		});
 
 		const { region, stack } = this;
 		const { app, stage, instanceSize, scaling } = props;

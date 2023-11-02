@@ -59,20 +59,20 @@ deployments:
       prefixStack: false
       publicReadAcl: false
   # This is the new stack for trialling the gu ec2 app pattern
-  # Named article-rendering since we will aim for front-rendering, article-rendering, application-rendering apps
-  article-rendering-cfn:
+  # Named article-web since we will aim for front, article, application apps for web and apps
+  article-web-cfn:
     template: cloudformation
     parameters:
       templateStagePaths:
-        CODE: ArticleRendering-CODE.template.json
-        PROD: ArticleRendering-PROD.template.json
+        CODE: ArticleRenderingWeb-CODE.template.json
+        PROD: ArticleRenderingWeb-PROD.template.json
       cloudFormationStackByTags: false
-      cloudFormationStackName: article-rendering
-      amiParameter: AMIArticlerendering
-  article-rendering:
+      cloudFormationStackName: rendering
+      amiParameter: AMIArticleweb
+  article-web:
     type: autoscaling
     parameters:
       bucketSsmKey: /account/services/dotcom-artifact.bucket
     dependencies:
       - frontend-static
-      - article-rendering-cfn
+      - article-web-cfn
