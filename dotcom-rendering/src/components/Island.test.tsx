@@ -5,6 +5,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { ConfigProvider } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
@@ -86,6 +87,18 @@ const Mock = () => <>🏝️</>;
 describe('Island: server-side rendering', () => {
 	test('AlreadyVisited', () => {
 		expect(() => renderToString(<AlreadyVisited />)).not.toThrow();
+	});
+
+	test('BrazeMessaging', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<BrazeMessaging idApiUrl={''} />
+				</ConfigProvider>,
+			),
+		).not.toThrow();
 	});
 
 	test('CardCommentCount', () => {
