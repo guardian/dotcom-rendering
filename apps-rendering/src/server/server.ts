@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-import 'source-map-support/register'; // activating the source map support
 import path from 'path';
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';

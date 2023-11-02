@@ -176,9 +176,9 @@ describe('YouTube Atom', function () {
 			.click();
 
 		// Wait for hydration
+		cy.get('[data-component=youtube-atom]').parent().scrollIntoView();
 		cy.get('[data-component=youtube-atom]')
 			.parent()
-			.scrollIntoView()
 			.should('have.attr', 'data-island-status', 'hydrated');
 
 		// Make sure overlay is displayed
@@ -227,9 +227,9 @@ describe('YouTube Atom', function () {
 		cy.get('[data-component=youtube-atom]')
 			.should('have.length', 3)
 			.each((item) => {
+				cy.wrap(item).parent().scrollIntoView();
 				cy.wrap(item)
 					.parent()
-					.scrollIntoView()
 					.should('have.attr', 'data-island-status', 'hydrated');
 			});
 
@@ -238,17 +238,11 @@ describe('YouTube Atom', function () {
 		const bodyDiv = 'div[data-gu-name="body"]';
 		const overlaySelectorforMultipleVideos = `[data-cy^="youtube-overlay-qkC9z-dSAOE"]`;
 
-		cy.get(mediaDiv)
-			.within(() => {
-				cy.get(overlaySelectorforMultipleVideos);
-			})
+		cy.get(`${mediaDiv} ${overlaySelectorforMultipleVideos}`)
 			.should('have.length', 1)
 			.and('be.visible');
 
-		cy.get(bodyDiv)
-			.within(() => {
-				cy.get(overlaySelectorforMultipleVideos);
-			})
+		cy.get(`${bodyDiv} ${overlaySelectorforMultipleVideos}`)
 			.should('have.length', 1)
 			.and('be.visible');
 
@@ -344,9 +338,9 @@ describe('YouTube Atom', function () {
 			.click();
 
 		// Wait for hydration
+		cy.get('[data-component=youtube-atom]').parent().scrollIntoView();
 		cy.get('[data-component=youtube-atom]')
 			.parent()
-			.scrollIntoView()
 			.should('have.attr', 'data-island-status', 'hydrated');
 
 		// Make sure overlay is displayed
@@ -395,9 +389,9 @@ describe('YouTube Atom', function () {
 		cy.get('[data-component=youtube-atom]')
 			.should('have.length', 3)
 			.each((item) => {
+				cy.wrap(item).parent().scrollIntoView();
 				cy.wrap(item)
 					.parent()
-					.scrollIntoView()
 					.should('have.attr', 'data-island-status', 'hydrated');
 			});
 

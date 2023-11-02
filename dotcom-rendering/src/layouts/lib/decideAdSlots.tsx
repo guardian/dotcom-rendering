@@ -1,13 +1,6 @@
 import { Hide } from '@guardian/source-react-components';
 import { AdSlot } from '../../components/AdSlot.web';
-import { frontsBannerAdCollections } from '../../lib/frontsBannerAbTestAdPositions';
-import { frontsBannerExcludedCollections } from '../../lib/frontsBannerExclusions';
 import { getMerchHighPosition } from '../../lib/getAdPositions';
-
-/**
- * The maximum number of fronts-banner ads that can be inserted on any front.
- */
-export const MAX_FRONTS_BANNER_ADS = 6;
 
 export const decideMerchHighAndMobileAdSlots = (
 	renderAds: boolean,
@@ -63,72 +56,27 @@ export const decideMerchHighAndMobileAdSlots = (
 export const decideFrontsBannerAdSlot = (
 	renderAds: boolean,
 	hasPageSkin: boolean,
-	numBannerAdsInserted: React.MutableRefObject<number>,
 	showBannerAds: boolean,
 	index: number,
-	pageId: string,
-	collectionName: string | null,
-	targetedCollections?: string[],
+	desktopAdPositions: number[],
 ) => {
-	const isFirstContainer = index === 0;
-	if (!renderAds || hasPageSkin || isFirstContainer || !showBannerAds) {
+	if (!renderAds || hasPageSkin || !showBannerAds) {
 		return null;
 	}
 
-	// If the showBannerAds feature switch is on and the page was included in the AB test, then
-	// show ads above the collections as specified in that AB test. One reason is that on /uk
-	// the "Ukraine invasion" collection is third and we don't want to place an ad above this
-	// container, which means we don't get a banner ad until the 6th collection.
-	if (
-		collectionName &&
-		Object.keys(frontsBannerAdCollections).includes(pageId)
-	) {
-		if (targetedCollections?.includes(collectionName)) {
-			numBannerAdsInserted.current = numBannerAdsInserted.current + 1;
-
-			return (
-				<AdSlot
-					data-print-layout="hide"
-					position="fronts-banner"
-					index={numBannerAdsInserted.current}
-					hasPageskin={hasPageSkin}
-				/>
-			);
-		}
-	}
-
-	// Insert an ad after every third collection. Warning: may skip an ad if a collection isn't rendered.
-	// e.g. if the 15th collection doesn't render, an ad is shown above the 12th and the 18th, skipping the 15th.
-	else if (
-		numBannerAdsInserted.current < MAX_FRONTS_BANNER_ADS &&
-		(index + 1) % 3 === 0 && // Insert ad above the 3rd, 6th, ..., container. Index starts at zero.
-		!isCollectionExclusionPresent(pageId, collectionName)
-	) {
-		numBannerAdsInserted.current = numBannerAdsInserted.current + 1;
+	if (desktopAdPositions.includes(index)) {
+		const adIndex = desktopAdPositions.findIndex((_) => _ === index);
+		if (adIndex === -1) return null;
 
 		return (
 			<AdSlot
 				data-print-layout="hide"
 				position="fronts-banner"
-				index={numBannerAdsInserted.current}
+				index={adIndex + 1}
 				hasPageskin={hasPageSkin}
 			/>
 		);
 	}
 
 	return null;
-};
-
-const isCollectionExclusionPresent = (
-	pageId: string,
-	collectionName: string | null,
-): boolean => {
-	// Tag Fronts collections don't have names, so no exclusions can be present.
-	if (!collectionName) {
-		return false;
-	}
-
-	return Boolean(
-		frontsBannerExcludedCollections[pageId]?.includes(collectionName),
-	);
 };
