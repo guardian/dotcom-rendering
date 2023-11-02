@@ -169,7 +169,7 @@
 		"curlyquotes": "1.5.5",
 		"cypress": "13.4.0",
 		"cypress-plugin-tab": "1.0.5",
-		"cypress-real-events": "1.7.6",
+		"cypress-real-events": "1.10.3",
 		"cypress-wait-until": "1.7.2",
 		"desvg-loader": "0.1.0",
 		"doctoc": "2.2.1",
