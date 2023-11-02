@@ -227,17 +227,17 @@ const editionsSwitch = css`
 `;
 
 const columnsStyleBasedOnHasPageSkin = (
-	hasPageSkin: boolean,
 	isImmersive: boolean,
+	hasPageSkin?: boolean,
 ) =>
 	hasPageSkin
 		? columnsStyleWithPageSkin(isImmersive)
 		: columnsStyle(isImmersive);
 
-const brandExtensionListBasedOnHasPageSkin = (hasPageSkin: boolean) =>
+const brandExtensionListBasedOnHasPageSkin = (hasPageSkin?: boolean) =>
 	hasPageSkin ? brandExtenstionListWithPageSkin : brandExtensionList;
 
-const brandExtensionLinkBasedOnHasPageSkin = (hasPageSkin: boolean) =>
+const brandExtensionLinkBasedOnHasPageSkin = (hasPageSkin?: boolean) =>
 	hasPageSkin ? brandExtensionLinkWithPageSkin : brandExtensionLink;
 
 type Props = {
@@ -245,7 +245,7 @@ type Props = {
 	isImmersive?: boolean;
 	nav: NavType;
 	headerTopBarSwitch: boolean;
-	hasPageSkin: boolean;
+	hasPageSkin?: boolean;
 };
 
 export const Columns = ({
@@ -259,7 +259,7 @@ export const Columns = ({
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (
 		<ul
-			css={columnsStyleBasedOnHasPageSkin(hasPageSkin, isImmersive)}
+			css={columnsStyleBasedOnHasPageSkin(isImmersive, hasPageSkin)}
 			role="menubar"
 			data-cy="nav-menu-columns"
 		>

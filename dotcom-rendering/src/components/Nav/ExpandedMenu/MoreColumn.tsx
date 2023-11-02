@@ -184,13 +184,13 @@ const shareIconStyles = css`
 	width: 28px;
 `;
 
-const columnStyleBasedOnHasPageSkin = (hasPageSkin: boolean) =>
+const columnStyleBasedOnHasPageSkin = (hasPageSkin?: boolean) =>
 	hasPageSkin ? columnStyleWithPageSkin : columnStyle;
 
 type Props = {
 	otherLinks: LinkType[];
 	brandExtensions: LinkType[];
-	hasPageSkin: boolean;
+	hasPageSkin?: boolean;
 };
 
 export const MoreColumn = ({

@@ -284,16 +284,16 @@ const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 	i !== noOfPillars - 1;
 
 const pillarsStylesBasedOnPageSkin = (
-	hasPageSkin: boolean,
 	isImmersive: boolean,
+	hasPageSkin?: boolean,
 ) => (hasPageSkin ? pillarsStylesWithPageSkin : pillarsStyles(isImmersive));
 
-const pillarStyleBasedOnPageSkin = (hasPageSkin: boolean) =>
+const pillarStyleBasedOnPageSkin = (hasPageSkin?: boolean) =>
 	hasPageSkin ? pillarStyleWithPageSkin : pillarStyle;
 
 const linkStyleBasedOnHasPageSkin = (
-	hasPageSkin: boolean,
 	isImmersive: boolean,
+	hasPageSkin?: boolean,
 ) =>
 	hasPageSkin ? linkStyleWithPageSkin(isImmersive) : linkStyle(isImmersive);
 
@@ -304,7 +304,7 @@ type Props = {
 	selectedPillar?: Pillar;
 	showLastPillarDivider?: boolean;
 	dataLinkName: string;
-	hasPageSkin: boolean;
+	hasPageSkin?: boolean;
 };
 
 export const Pillars = ({
@@ -318,7 +318,7 @@ export const Pillars = ({
 }: Props) => (
 	<ul
 		data-testid="pillar-list"
-		css={pillarsStylesBasedOnPageSkin(hasPageSkin, isImmersive)}
+		css={pillarsStylesBasedOnPageSkin(isImmersive, hasPageSkin)}
 	>
 		{pillars.map((p, i) => {
 			const isSelected = p.pillar === selectedPillar;
@@ -329,8 +329,8 @@ export const Pillars = ({
 					<a
 						css={[
 							linkStyleBasedOnHasPageSkin(
-								hasPageSkin,
 								isImmersive,
+								hasPageSkin,
 							),
 							pillarUnderline(
 								decidePalette({

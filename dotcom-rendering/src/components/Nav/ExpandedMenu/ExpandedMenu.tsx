@@ -108,7 +108,7 @@ type Props = {
 	isImmersive?: boolean;
 	nav: NavType;
 	headerTopBarSwitch: boolean;
-	hasPageSkin: boolean;
+	hasPageSkin?: boolean;
 };
 
 export const ExpandedMenu = ({
