@@ -228,6 +228,24 @@ const iconDark = ({ design, theme }: ArticleFormat): Colour => {
 
 const followIcon = ({ design, theme }: ArticleFormat): Colour => {
 	switch (design) {
+		case ArticleDesign.Gallery:
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[300];
+				case ArticlePillar.News:
+				default:
+					return news[500];
+			}
 		case ArticleDesign.LiveBlog:
 			switch (theme) {
 				case ArticlePillar.Opinion:
@@ -244,7 +262,27 @@ const followIcon = ({ design, theme }: ArticleFormat): Colour => {
 				default:
 					return news[600];
 			}
-		case ArticleDesign.Standard:
+		case ArticleDesign.Standard: {
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+				case ArticlePillar.News:
+				default:
+					return news[400];
+			}
+		}
 		case ArticleDesign.Review:
 		case ArticleDesign.Explainer:
 		case ArticleDesign.Feature:
@@ -266,10 +304,12 @@ const followIcon = ({ design, theme }: ArticleFormat): Colour => {
 					return culture[400];
 				case ArticlePillar.Lifestyle:
 					return lifestyle[400];
+				case ArticleSpecial.Labs:
+					return labs[300];
 				case ArticleSpecial.SpecialReport:
-					return specialReport[500];
+					return specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
-					return palette.specialReportAlt[200];
+					return palette.specialReportAlt[100];
 				case ArticlePillar.News:
 				default:
 					return news[400];
@@ -285,7 +325,9 @@ const followIcon = ({ design, theme }: ArticleFormat): Colour => {
 				case ArticlePillar.Lifestyle:
 					return lifestyle[400];
 				case ArticleSpecial.SpecialReport:
-					return specialReport[500];
+					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
 				case ArticlePillar.News:
 				default:
 					return news[400];
@@ -320,9 +362,9 @@ const followIconDark = ({ design, theme }: ArticleFormat): Colour => {
 				case ArticlePillar.Lifestyle:
 					return lifestyle[500];
 				case ArticleSpecial.SpecialReport:
-					return specialReport[500];
+					return specialReport[700];
 				case ArticleSpecial.SpecialReportAlt:
-					return palette.specialReportAlt[300];
+					return palette.specialReportAlt[700];
 				case ArticlePillar.News:
 				default:
 					return news[500];
@@ -338,7 +380,9 @@ const followIconDark = ({ design, theme }: ArticleFormat): Colour => {
 				case ArticlePillar.Lifestyle:
 					return lifestyle[500];
 				case ArticleSpecial.SpecialReport:
-					return specialReport[500];
+					return specialReport[700];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[700];
 				case ArticlePillar.News:
 				default:
 					return news[500];
