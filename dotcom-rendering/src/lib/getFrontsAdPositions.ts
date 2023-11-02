@@ -1,12 +1,9 @@
 import type { DCRCollectionType } from '../types/front';
+import {
+	MAX_FRONTS_BANNER_ADS,
+	MAX_FRONTS_MOBILE_ADS,
+} from './commercial-constants';
 import { frontsBannerExcludedCollections } from './frontsBannerExclusions';
-
-/**
- * The maximum number of fronts-banner ads that can be inserted on any front.
- */
-const MAX_FRONTS_BANNER_ADS = 6;
-
-const MAX_MOBILE_ADS = 10;
 
 type GroupedCounts = {
 	snap: number;
@@ -74,7 +71,7 @@ const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
 		.filter(shouldInsertAd(merchHighPosition))
 		.filter(isEvenIndex)
 		.map((collection: AdCandidate) => collections.indexOf(collection))
-		.slice(0, MAX_MOBILE_ADS);
+		.slice(0, MAX_FRONTS_MOBILE_ADS);
 };
 
 /**
@@ -245,6 +242,8 @@ const getFrontsBannerAdPositions = (
 	).adPositions;
 
 export {
+	MAX_FRONTS_MOBILE_ADS,
+	MAX_FRONTS_BANNER_ADS,
 	getMerchHighPosition,
 	getMobileAdPositions,
 	getFrontsBannerAdPositions,

@@ -1,10 +1,9 @@
 import type { GroupedTrailsBase } from '../types/tagFront';
-import { getMerchHighPosition } from './getFrontsAdPositions';
-
-/**
- * The maximum number of fronts-banner ads that can be inserted on any front.
- */
-const MAX_FRONTS_BANNER_ADS = 6;
+import {
+	getMerchHighPosition,
+	MAX_FRONTS_BANNER_ADS,
+	MAX_FRONTS_MOBILE_ADS,
+} from './getFrontsAdPositions';
 
 const hasAdjacentCommercialContainer = (
 	collectionIndex: number,
@@ -26,24 +25,22 @@ const getTagFrontMobileAdPositions = (
 ): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections.length);
 
-	return (
-		collections
-			.filter(
-				(_, index) =>
-					!hasAdjacentCommercialContainer(index, merchHighPosition),
-			)
-			.filter(isEvenIndex)
-			.map((collection) =>
-				collections.findIndex(
-					({ day, month, year }) =>
-						day === collection.day &&
-						month === collection.month &&
-						year === collection.year,
-				),
-			)
-			// Should insert no more than 10 ads
-			.slice(0, 10)
-	);
+	return collections
+		.filter(
+			(_, index) =>
+				!hasAdjacentCommercialContainer(index, merchHighPosition),
+		)
+		.filter(isEvenIndex)
+		.map((collection) =>
+			collections.findIndex(
+				({ day, month, year }) =>
+					day === collection.day &&
+					month === collection.month &&
+					year === collection.year,
+			),
+		)
+		.filter((adPosition: number) => adPosition !== 1)
+		.slice(0, MAX_FRONTS_MOBILE_ADS);
 };
 
 /**
