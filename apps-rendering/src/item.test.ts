@@ -12,7 +12,7 @@ import { none } from '@guardian/types';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';
-import { articleContentWith } from 'helperTest';
+import { articleContentWith, articleMainContentWith } from 'helperTest';
 import { EmbedKind, Spotify, YouTube } from 'embed';
 import { Optional } from 'optional';
 
@@ -769,6 +769,18 @@ describe('interactive atom elements', () => {
 		) as Standard;
 		const element = getFirstBody(item);
 		expect(element.kind).toBe(ElementKind.InteractiveAtom);
+	});
+});
+
+describe('cartoon main media', () => {
+	test('filters out cartoon main media elements', () => {
+		const cartoonElement = {
+			type: ElementType.CARTOON,
+			assets: [],
+			cartoonTypeData: {},
+		};
+		const item = f(articleMainContentWith(cartoonElement))
+		expect(item.mainMedia).toBe(none)
 	});
 });
 

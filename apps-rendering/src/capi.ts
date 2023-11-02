@@ -84,19 +84,29 @@ const articleMainMedia = (
 	content: Content,
 	context: Context,
 ): Optional<MainMedia> => {
-	return (content.blocks?.main?.elements.filter(isImage) ?? [])[0]
-		? articleMainImage(content)
+	const elementType: ElementType | undefined = (content.blocks?.main?.elements ?? [])[0]?.type;
+
+	switch (elementType) {
+		case ElementType.IMAGE:
+			return articleMainImage(content)
 				.flatMap(parseImage(context))
 				.map<MainMedia>((image) => ({
 					kind: MainMediaKind.Image,
 					image,
-				}))
-		: articleMainVideo(content)
+				}));
+		case ElementType.VIDEO:
+			return articleMainVideo(content)
 				.flatMap(parseVideo(content.atoms))
 				.map<MainMedia>((video) => ({
 					kind: MainMediaKind.Video,
 					video,
 				}));
+		case ElementType.CARTOON:
+			// TODO: only allow cartoon elements in Editions app
+			return Optional.none();
+		default:
+			return Optional.none();
+	}
 };
 
 type ThirdPartyEmbeds = {
