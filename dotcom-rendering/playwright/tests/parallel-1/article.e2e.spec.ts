@@ -4,55 +4,51 @@ import { disableCMP } from '../../lib/cmp';
 import { loadPage } from '../../lib/load-page';
 import { waitForIsland } from '../../lib/util';
 
-const assertOnJsonResponseProperty = async (
+const responseHasJsonProperty = async (
 	response: Response,
 	url: string | RegExp,
 	expectedProperty: string,
 ): Promise<boolean> => {
 	const isURL = response.request().url().match(url);
-	console.log('isURL', isURL);
 	if (!isURL) return false;
 	const status = response.status();
-	console.log('status', status);
 	if (status !== 200) return false;
-	const json = await response.json();
-	console.log('json', json);
+	const json = (await response.json()) as Record<string, string>;
 	const prop = json[expectedProperty];
 	if (!prop) return false;
-	console.log('prop', prop);
 	return true;
 };
 
 test.describe('E2E Page rendering', () => {
 	test.describe('for WEB', () => {
-		test('It should load an article and make the expected ajax calls', async ({
+		test('It should load an article and make the expected network requests for dynamic content', async ({
 			context,
 			page,
 		}) => {
 			await disableCMP(context);
 
 			// rich link
-			// api.nextgen.guardianapps.co.uk/embed/card/lifeandstyle/2013/nov/09/impostor-syndrome-oliver-burkeman.json?dcr=true
+			// https://api.nextgen.guardianapps.co.uk/embed/card/lifeandstyle/2013/nov/09/impostor-syndrome-oliver-burkeman.json?dcr=true
 			const richLinkResponsePromise = page.waitForResponse((response) =>
-				assertOnJsonResponseProperty(response, /embed\/card/, 'tags'),
+				responseHasJsonProperty(response, /embed\/card/, 'tags'),
 			);
 
-			// most-read-geo aka most viewed in right hand column
+			// most-read-geo.json aka most viewed right hand column
 			// https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true
 			const mostReadRightResponsePromise = page.waitForResponse(
 				(response) =>
-					assertOnJsonResponseProperty(
+					responseHasJsonProperty(
 						response,
 						/most-read-geo\.json/,
 						'heading',
 					),
 			);
 
-			// most-read/commentisfree.json aka most viewed in footer
+			// most-read/commentisfree.json aka most viewed footer
 			// https://api.nextgen.guardianapps.co.uk/most-read/commentisfree.json?_edition=UK&dcr=true
 			const mostReadFooterResponsePromise = page.waitForResponse(
 				(response) =>
-					assertOnJsonResponseProperty(
+					responseHasJsonProperty(
 						response,
 						/most-read\/commentisfree\.json/,
 						'tabs',
@@ -70,47 +66,30 @@ test.describe('E2E Page rendering', () => {
 
 			await waitForIsland(page, 'RichLinkComponent', 'hydrated', 1);
 			await richLinkResponsePromise;
+			await expect(
+				page
+					.locator(`gu-island[name="RichLinkComponent"]`)
+					.filter({ hasText: 'Read more' })
+					.first(),
+			).toBeVisible();
 
 			await waitForIsland(page, 'MostViewedRightWrapper');
 			await mostReadRightResponsePromise;
+			await expect(
+				page
+					.locator(`gu-island[name="MostViewedRightWrapper"]`)
+					.filter({ hasText: 'Most Viewed' }),
+			).toBeVisible();
 
 			await waitForIsland(page, 'MostViewedFooterData');
 			await mostReadFooterResponsePromise;
-
-			// await waitForIsland(page, 'MostViewedFooterData');
-			// cy.intercept('GET', '**/most-read-geo**', (req) => {
-			// 	req.reply((res) => {
-			// 		expect(res.body).to.have.property('heading');
-			// 		expect(res.statusCode).to.be.equal(200);
-			// 	});
-			// });
-			// cy.contains('Most viewed');
-
-			// cy.scrollTo('bottom', { duration: 500 });
-
-			// cy.intercept('GET', '/embed/card/**', (req) => {
-			// 	req.reply((res) => {
-			// 		expect(res.statusCode).to.be.equal(200);
-			// 	});
-			// });
-			// cy.contains('Read more');
-
-			// // We scroll again here because not all the content at the bottom of the page loads
-			// // when you first touch bottom, you sometimes need to scroll once more to trigger
-			// // lazy loading Most Popular
-			// cy.scrollTo('bottom', { duration: 500 });
-
-			// cy.intercept('GET', '/most-read/**', (req) => {
-			// 	req.reply((res) => {
-			// 		expect(res.body).to.have.property('tabs');
-			// 		expect(res.statusCode).to.be.equal(200);
-			// 	});
-			// });
-			// cy.contains('Most commented');
+			await expect(
+				page
+					.locator(`gu-island[name="MostViewedFooterData"]`)
+					.filter({ hasText: 'Across The Guardian' }),
+			).toBeVisible();
 		});
 	});
-
-	// TODO e2e add skipped tests from article.e2e.cy.js
 
 	test.describe('for AMP', function () {
 		test(`It should load render an AMP page`, async ({ context, page }) => {
@@ -131,4 +110,6 @@ test.describe('E2E Page rendering', () => {
 			await expect(page.locator('#ad-3')).toBeAttached();
 		});
 	});
+
+	// TODO e2e add skipped tests from article.e2e.cy.js
 });
