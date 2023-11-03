@@ -1,4 +1,4 @@
-import { isSentryEnabled } from '.';
+import { isSentryEnabled } from './sentryLoader';
 
 // Stubbed to prevent parsing of __webpack_public_path__
 jest.mock('./loadSentry', () => ({ loadSentry: jest.fn() }));

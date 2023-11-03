@@ -8,7 +8,7 @@ An 'enhancement' could also be termed a 'transformation' and in other places sim
 
 ## Why?
 
-Ideally, these transformations would not be required. A better solution would be to construct the array at source, in Composer or CAPI, with the ideal structure. But for - probably very good - reasons the decision was taken to use [cleaners in frontend](https://github.com/guardian/frontend/blob/aa0013a6f9c247be36d29b9716e0ccc80cc8b218/common/app/views/support/HtmlCleaner.scala) to solve design problems. So now, in order to support the same designs, we need to replicate these cleaners in DCR. The enhancements are applied in the [server/index.ts](/dotcom-rendering/src/web/server/index.ts).
+Ideally, these transformations would not be required. A better solution would be to construct the array at source, in Composer or CAPI, with the ideal structure. But for - probably very good - reasons the decision was taken to use [cleaners in frontend](https://github.com/guardian/frontend/blob/aa0013a6f9c247be36d29b9716e0ccc80cc8b218/common/app/views/support/HtmlCleaner.scala) to solve design problems. So now, in order to support the same designs, we need to replicate these cleaners in DCR. The enhancements are applied in the [server/server.ts](/dotcom-rendering/src/web/server/server.ts).
 
 ## Examples
 
