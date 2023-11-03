@@ -8,13 +8,15 @@ import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind } from 'bodyElement';
-import { none } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { articleContentWith, articleMainContentWith } from 'helperTest';
 import { EmbedKind, Spotify, YouTube } from 'embed';
 import { Optional } from 'optional';
+import { Context } from "./parserContext";
+import { MainMediaKind } from "./mainMedia";
 
 const articleContent = {
 	id: '',
@@ -182,8 +184,8 @@ const articleContentWithImageWithoutFile = articleContentWith({
 	},
 });
 
-const f = (content: Content) =>
-	fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' })(
+const f = (content: Content, context?: Context) =>
+	fromCapi(context ?? { docParser: JSDOM.fragment, salt: 'mockSalt' })(
 		{ content },
 		none,
 	);
@@ -773,15 +775,29 @@ describe('interactive atom elements', () => {
 });
 
 describe('cartoon main media', () => {
+	const cartoonElement = {
+		type: ElementType.CARTOON,
+		assets: [],
+		cartoonTypeData: {},
+	};
+
 	test('filters out cartoon main media elements', () => {
-		const cartoonElement = {
-			type: ElementType.CARTOON,
-			assets: [],
-			cartoonTypeData: {},
-		};
 		const item = f(articleMainContentWith(cartoonElement))
 		expect(item.mainMedia).toBe(none)
 	});
+
+	test('parses cartoon elements in the context of the Editions app', () => {
+		const context: Context = { docParser: JSDOM.fragment, salt: 'mockSalt', app: "Editions" }
+		const item = f(articleMainContentWith(cartoonElement), context)
+		expect(item.mainMedia).toEqual(some({
+			kind: MainMediaKind.Cartoon,
+			cartoon: {
+				images: [],
+				caption: none,
+				credit: none,
+			}
+		}));
+	})
 });
 
 describe('format', () => {

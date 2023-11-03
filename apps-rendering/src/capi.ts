@@ -21,6 +21,7 @@ import type { MainMedia } from 'mainMedia';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
+import { parseCartoon } from "./cartoon";
 
 // ----- Lookups ----- //
 
@@ -70,6 +71,9 @@ const isVideo = (elem: BlockElement): boolean =>
 	elem.type === ElementType.CONTENTATOM &&
 	elem.contentAtomTypeData?.atomType === 'media';
 
+const isCartoon = (elem: BlockElement): boolean =>
+	elem.type === ElementType.CARTOON;
+
 const articleMainImage = (content: Content): Optional<BlockElement> =>
 	Optional.fromNullable(
 		(content.blocks?.main?.elements.filter(isImage) ?? [])[0],
@@ -78,6 +82,11 @@ const articleMainImage = (content: Content): Optional<BlockElement> =>
 const articleMainVideo = (content: Content): Optional<BlockElement> =>
 	Optional.fromNullable(
 		(content.blocks?.main?.elements.filter(isVideo) ?? [])[0],
+	);
+
+const articleMainCartoon = (content: Content): Optional<BlockElement> =>
+	Optional.fromNullable(
+		(content.blocks?.main?.elements.filter(isCartoon) ?? [])[0],
 	);
 
 const articleMainMedia = (
@@ -102,8 +111,16 @@ const articleMainMedia = (
 					video,
 				}));
 		case ElementType.CARTOON:
-			// TODO: only allow cartoon elements in Editions app
-			return Optional.none();
+			if (context.app === "Editions") {
+				return articleMainCartoon(content)
+					.flatMap(parseCartoon(context))
+					.map<MainMedia>((cartoon) => ({
+						kind: MainMediaKind.Cartoon,
+						cartoon
+					}));
+			} else {
+				return Optional.none();
+			}
 		default:
 			return Optional.none();
 	}
