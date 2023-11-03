@@ -1,10 +1,12 @@
 import { ContributionsEpic } from './ContributionsEpic';
 import { EpicVariant } from './types/abTests/epic';
 import { SecondaryCtaType, Tracking } from './types/props/shared';
-import { ArticleCounts, EpicProps } from './types/props/epic';
+import { ArticleCounts } from './types/props/epic';
 import { TestTracking } from './types/abTests/shared';
 import { PageTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/targeting';
 import { breakpoints } from '@guardian/source-foundations';
+import type { Meta, StoryObj } from '@storybook/react';
+import lzstring from 'lz-string';
 
 const variant: EpicVariant = {
 	name: 'control',
@@ -61,25 +63,56 @@ const tracking: Tracking = {
 
 const openCmp = (): void => console.log('open cmp');
 
-export default {
+// export default {
+// 	component: ContributionsEpic,
+// 	title: 'Components/marketing/ContributionsEpic',
+// 	parameters: {
+// 		backgrounds: {
+// 			default: 'grey',
+// 			values: [{ name: 'grey', value: 'lightgrey' }],
+// 		},
+// 		chromatic: {
+// 			viewports: [breakpoints.mobile, breakpoints.tablet],
+// 		},
+// 	},
+//
+// };
+//
+// export const Default = (args: EpicProps) => <ContributionsEpic {...args} />;
+//
+// Default.args = {
+// 	variant,
+// 	articleCounts,
+// 	tracking,
+// 	countryCode: 'GB',
+// };
+
+type WithJsonProps<T> = T & { json?: string };
+type Props = WithJsonProps<React.ComponentProps<typeof ContributionsEpic>>;
+const meta: Meta<Props> = {
 	component: ContributionsEpic,
 	title: 'Components/marketing/ContributionsEpic',
-	parameters: {
-		backgrounds: {
-			default: 'grey',
-			values: [{ name: 'grey', value: 'lightgrey' }],
-		},
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.tablet],
-		},
+	args: {
+		variant,
+		articleCounts,
+		tracking,
+		countryCode: 'GB',
+		json: '',
+	},
+	render: ({ json, ...args }) => {
+		// TODO: validation against props
+		console.log('in story');
+		console.log(json);
+		const jsonProps = json
+			? JSON.parse(lzstring.decompressFromEncodedURIComponent(json))
+			: {};
+		console.log(jsonProps);
+
+		// return <ContributionsEpic {...args} {...jsonProps} />;
+		return <ContributionsEpic {...jsonProps} />;
 	},
 };
+export default meta;
 
-export const Default = (args: EpicProps) => <ContributionsEpic {...args} />;
-
-Default.args = {
-	variant,
-	articleCounts,
-	tracking,
-	countryCode: 'GB',
-};
+type Story = StoryObj<Props>;
+export const Default: Story = {};

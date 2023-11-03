@@ -208,6 +208,7 @@
 		"lodash.debounce": "4.0.8",
 		"lodash.get": "4.4.2",
 		"log4js": "6.5.1",
+		"lz-string": "1.5.0",
 		"minimatch": "5.1.6",
 		"mockdate": "3.0.5",
 		"node-fetch": "2.6.7",
