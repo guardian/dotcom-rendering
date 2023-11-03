@@ -3,8 +3,8 @@ name: DCR CICD
 on:
   push:
     paths-ignore:
-      - "apps-rendering/**"
-      - "dotcom-rendering/docs/**"
+      - 'apps-rendering/**'
+      - 'dotcom-rendering/docs/**'
 
 jobs:
   container:
@@ -22,6 +22,7 @@ jobs:
     uses: ./.github/workflows/lint.yml
 
   cypress:
+    if: github.ref == 'refs/heads/main'
     needs: [container]
     uses: ./.github/workflows/cypress.yml
     with:
