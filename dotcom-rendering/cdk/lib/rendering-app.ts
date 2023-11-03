@@ -68,6 +68,12 @@ export class RenderingApp extends GuStack {
 				enabled: true,
 				prefix: `ELBLogs/${stack}/${app}/${stage}`,
 			},
+			// TODO, this is horrible
+			certificateProps: {
+				domainName: `${app}-${stack}.${
+					stage === 'PROD' ? '' : 'code.dev-'
+				}gutools.co.uk`,
+			},
 			instanceType: InstanceType.of(InstanceClass.T4G, instanceSize),
 			monitoringConfiguration,
 			scaling,

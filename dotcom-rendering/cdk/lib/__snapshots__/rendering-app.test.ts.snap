@@ -9,6 +9,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
       "GuSubnetListParameter",
       "GuSubnetListParameter",
       "GuEc2App",
+      "GuCertificate",
       "GuInstanceRole",
       "GuDescribeEC2Policy",
       "GuLoggingStreamNameParameter",
@@ -141,6 +142,41 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
         },
       },
       "Type": "AWS::AutoScaling::AutoScalingGroup",
+    },
+    "CertificateArticleweb56578C77": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "DomainName": "article-web-dotcom-rendering.code.dev-gutools.co.uk",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-web",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Name",
+            "Value": "ArticleRenderingWeb-TEST/CertificateArticleweb",
+          },
+          {
+            "Key": "Stack",
+            "Value": "dotcom-rendering",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "ValidationMethod": "DNS",
+      },
+      "Type": "AWS::CertificateManager::Certificate",
+      "UpdateReplacePolicy": "Retain",
     },
     "DescribeEC2PolicyFF5F9295": {
       "Properties": {
@@ -458,6 +494,13 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
     },
     "ListenerArticleweb55AD86F6": {
       "Properties": {
+        "Certificates": [
+          {
+            "CertificateArn": {
+              "Ref": "CertificateArticleweb56578C77",
+            },
+          },
+        ],
         "DefaultActions": [
           {
             "TargetGroupArn": {
@@ -469,8 +512,8 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
         "LoadBalancerArn": {
           "Ref": "LoadBalancerArticleweb0813113D",
         },
-        "Port": 8080,
-        "Protocol": "HTTP",
+        "Port": 443,
+        "Protocol": "HTTPS",
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
     },
