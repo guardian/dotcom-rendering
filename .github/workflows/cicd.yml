@@ -33,11 +33,24 @@ jobs:
     with:
       container-image: ${{ needs.container.outputs.container-image }}
 
-  publish:
+  publish-branch:
+    if: ${{ ! github.ref == 'refs/heads/main' }}
     permissions:
       id-token: write
       contents: read
     needs: [container, prettier, jest, lint]
+    uses: ./.github/workflows/publish.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
+    secrets:
+      GU_RIFF_RAFF_ROLE_ARN: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+
+  publish-main:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    permissions:
+      id-token: write
+      contents: read
+    needs: [container, prettier, jest, lint, cypress, amp]
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
