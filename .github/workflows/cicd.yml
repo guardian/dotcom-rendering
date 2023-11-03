@@ -1,10 +1,12 @@
 name: DCR CICD
 
 on:
-  push:
+  pull_request:
+    types:
+      - synchronize
     paths-ignore:
-      - "apps-rendering/**"
-      - "dotcom-rendering/docs/**"
+      - 'apps-rendering/**'
+      - 'dotcom-rendering/docs/**'
 
 jobs:
   container:
@@ -22,6 +24,8 @@ jobs:
     uses: ./.github/workflows/lint.yml
 
   cypress:
+    # Only run cypress for non-draft PRs
+    if: '! github.event.pull_request.draft'
     needs: [container]
     uses: ./.github/workflows/cypress.yml
     with:
@@ -37,7 +41,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    needs: [container, prettier, jest, lint, cypress, amp]
+    needs: [container, prettier, jest, lint, amp]
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
