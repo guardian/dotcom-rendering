@@ -1,6 +1,12 @@
 name: DCR CICD
 
 on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'apps-rendering/**'
+      - 'dotcom-rendering/docs/**'
   pull_request:
     types:
       - synchronize
@@ -25,7 +31,7 @@ jobs:
 
   cypress:
     # Only run cypress for non-draft PRs
-    if: '! github.event.pull_request.draft'
+    if: ${{ ! github.event.pull_request.draft || github.ref == 'refs/heads/cemms1/remove-cypress-cicd-for-draft-prs' }}
     needs: [container]
     uses: ./.github/workflows/cypress.yml
     with:
