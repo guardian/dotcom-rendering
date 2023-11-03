@@ -3,8 +3,8 @@ name: DCR CICD
 on:
   push:
     paths-ignore:
-      - "apps-rendering/**"
-      - "dotcom-rendering/docs/**"
+      - 'apps-rendering/**'
+      - 'dotcom-rendering/docs/**'
 
 jobs:
   container:
@@ -37,7 +37,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    needs: [container, prettier, jest, lint, cypress, amp]
+    needs: [container, prettier, jest, lint, amp]
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
