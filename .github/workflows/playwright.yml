@@ -7,7 +7,7 @@ on:
         type: string
 
 jobs:
-  cypress:
+  playwright:
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
@@ -29,12 +29,13 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
+      - name: Run Playwright
+        run: yarn playwright test parallel-${{ matrix.group }}
+        working-directory: ./dotcom-rendering
+
+      - uses: actions/upload-artifact@v3
+        if: always()
         with:
-          working-directory: dotcom-rendering
-          wait-on: 'http://127.0.0.1:9000'
-          wait-on-timeout: 30
-          browser: chrome
-          spec: cypress/e2e/parallel-${{ matrix.group }}/*.js
-          install: false
+          name: playwright-report-${{ matrix.group }}
+          path: ./dotcom-rendering/playwright-report
+          retention-days: 5
