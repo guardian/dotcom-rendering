@@ -124,14 +124,13 @@ describe('Elements', function () {
 
 		it('should render the interactive using a boot.js', function () {
 			const getIframeBody = () => {
+				cy.get(
+					'[data-cypress="interactive-element-LA%20Rams%20dead%20cap%20numbers"]',
+				).scrollIntoView({
+					duration: 300,
+					offset: { top: -100, left: 0 },
+				});
 				return cy
-					.get(
-						'[data-cypress="interactive-element-LA%20Rams%20dead%20cap%20numbers"]',
-					)
-					.scrollIntoView({
-						duration: 300,
-						offset: { top: -100, left: 0 },
-					})
 					.get(
 						'[data-cypress="interactive-element-LA%20Rams%20dead%20cap%20numbers"] > iframe',
 					)
@@ -157,14 +156,13 @@ describe('Elements', function () {
 			});
 
 			const getIframeBody = () => {
+				cy.get(
+					'[data-cypress="interactive-element-pa%20county%20by%20county"]',
+				).scrollIntoView({
+					duration: 300,
+					offset: { top: -100, left: 0 },
+				});
 				return cy
-					.get(
-						'[data-cypress="interactive-element-pa%20county%20by%20county"]',
-					)
-					.scrollIntoView({
-						duration: 300,
-						offset: { top: -100, left: 0 },
-					})
 					.get(
 						'[data-cypress="interactive-element-pa%20county%20by%20county"] > iframe',
 					)
