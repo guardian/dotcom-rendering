@@ -11,8 +11,8 @@ import { extractScripts } from '../lib/scripts.amp';
 import { findBySubsection } from '../model/article-sections';
 import { extractNAV } from '../model/extract-nav';
 import { validateAsArticleType } from '../model/validate';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import { getAmpExperimentCache } from './AMPExperimentCache.amp';
+import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderArticle } from './render.article.amp';
 
 export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {

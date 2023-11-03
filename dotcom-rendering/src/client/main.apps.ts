@@ -12,7 +12,7 @@ import { startup } from './startup';
 void startup(
 	'sentryLoader',
 	() =>
-		import(/* webpackMode: "eager" */ './sentryLoader').then(
+		import(/* webpackMode: "eager" */ './sentryLoader/sentryLoader').then(
 			({ sentryLoader }) => sentryLoader(),
 		),
 	{
@@ -34,8 +34,8 @@ void startup(
 void startup(
 	'islands',
 	() =>
-		import(/* webpackMode: "eager" */ './islands').then(({ islands }) =>
-			islands(),
+		import(/* webpackMode: "eager" */ './islands/islands').then(
+			({ islands }) => islands(),
 		),
 	{
 		priority: 'critical',

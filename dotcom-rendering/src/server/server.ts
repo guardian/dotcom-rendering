@@ -1,5 +1,5 @@
-import { devServer } from './dev-server';
-import { prodServer } from './prod-server';
+import { devServer } from './server.dev';
+import { prodServer } from './server.prod';
 
 // this export is expected by webpack-hot-server-middleware
 // not used in prod

@@ -3,15 +3,15 @@ import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
-import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
+import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
-} from '../server/index.article.amp';
+} from './handler.article.amp';
 import {
 	handleAppsArticle,
 	handleAppsInteractive,
-} from '../server/index.article.apps';
+} from './handler.article.apps';
 import {
 	handleArticle,
 	handleArticleJson,
@@ -19,13 +19,13 @@ import {
 	handleBlocks,
 	handleInteractive,
 	handleKeyEvents,
-} from '../server/index.article.web';
+} from './handler.article.web';
 import {
 	handleFront,
 	handleFrontJson,
 	handleTagFront,
 	handleTagFrontJson,
-} from '../server/index.front.web';
+} from './handler.front.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
