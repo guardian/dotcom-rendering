@@ -64,10 +64,10 @@ deployments:
     template: cloudformation
     parameters:
       templateStagePaths:
-        CODE: ArticleRenderingWeb-CODE.template.json
-        PROD: ArticleRenderingWeb-PROD.template.json
+        CODE: ArticleWeb-CODE.template.json
+        PROD: ArticleWeb-PROD.template.json
       cloudFormationStackByTags: false
-      cloudFormationStackName: rendering
+      cloudFormationStackName: article-web
       amiParameter: AMIArticleweb
   article-web:
     type: autoscaling

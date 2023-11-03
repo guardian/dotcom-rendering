@@ -47,7 +47,7 @@ const copyApp = (appName) => {
 			case 'front-web':
 				return `DotcomRendering-front-web-${stage}.template.json`;
 			case 'article-web':
-				return `ArticleRenderingWeb-${stage}.template.json`;
+				return `ArticleWeb-${stage}.template.json`;
 		}
 	};
 

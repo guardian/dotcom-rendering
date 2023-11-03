@@ -162,7 +162,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
           },
           {
             "Key": "Name",
-            "Value": "ArticleRenderingWeb-TEST/CertificateArticleweb",
+            "Value": "ArticleWeb-TEST/CertificateArticleweb",
           },
           {
             "Key": "Stack",
@@ -276,7 +276,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "GuHttpsEgressSecurityGroupArticlewebfromArticleRenderingWebTESTInternalIngressSecurityGroupArticlewebF870502590003DC73A31": {
+    "GuHttpsEgressSecurityGroupArticlewebfromArticleWebTESTInternalIngressSecurityGroupArticleweb305E04D29000575FC56B": {
       "Properties": {
         "Description": "Load balancer to target",
         "FromPort": 9000,
@@ -297,7 +297,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "GuHttpsEgressSecurityGroupArticlewebfromArticleRenderingWebTESTLoadBalancerArticlewebSecurityGroup8A1E86FC9000E46495E7": {
+    "GuHttpsEgressSecurityGroupArticlewebfromArticleWebTESTLoadBalancerArticlewebSecurityGroup87301EC290007524C709": {
       "Properties": {
         "Description": "Load balancer to target",
         "FromPort": 9000,
@@ -450,7 +450,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupArticlewebtoArticleRenderingWebTESTGuHttpsEgressSecurityGroupArticleweb405F825C90009AA072D6": {
+    "InternalIngressSecurityGroupArticlewebtoArticleWebTESTGuHttpsEgressSecurityGroupArticleweb1F6ED3A090003D009FD6": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
@@ -471,7 +471,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "InternalIngressSecurityGroupArticlewebtoArticleRenderingWebTESTWazuhSecurityGroupDCB8CB3A9000682952D5": {
+    "InternalIngressSecurityGroupArticlewebtoArticleWebTESTWazuhSecurityGroup21E40722900028C55D32": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
@@ -585,7 +585,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
     },
     "LoadBalancerArticlewebSecurityGroup3BEB8DBB": {
       "Properties": {
-        "GroupDescription": "Automatically created Security Group for ELB ArticleRenderingWebTESTLoadBalancerArticlewebE6E37438",
+        "GroupDescription": "Automatically created Security Group for ELB ArticleWebTESTLoadBalancerArticleweb0312690A",
         "Tags": [
           {
             "Key": "App",
@@ -614,7 +614,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "LoadBalancerArticlewebSecurityGrouptoArticleRenderingWebTESTGuHttpsEgressSecurityGroupArticleweb405F825C9000F7EDBF88": {
+    "LoadBalancerArticlewebSecurityGrouptoArticleWebTESTGuHttpsEgressSecurityGroupArticleweb1F6ED3A0900091574DFE": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
@@ -635,7 +635,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "LoadBalancerArticlewebSecurityGrouptoArticleRenderingWebTESTWazuhSecurityGroupDCB8CB3A9000ED43DFFE": {
+    "LoadBalancerArticlewebSecurityGrouptoArticleWebTESTWazuhSecurityGroup21E407229000B3BF5E4D": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
@@ -799,7 +799,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "WazuhSecurityGroupfromArticleRenderingWebTESTInternalIngressSecurityGroupArticlewebF87050259000BBEA93F2": {
+    "WazuhSecurityGroupfromArticleWebTESTInternalIngressSecurityGroupArticleweb305E04D29000C5593B2A": {
       "Properties": {
         "Description": "Load balancer to target",
         "FromPort": 9000,
@@ -820,7 +820,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "WazuhSecurityGroupfromArticleRenderingWebTESTLoadBalancerArticlewebSecurityGroup8A1E86FC90001F8D9158": {
+    "WazuhSecurityGroupfromArticleWebTESTLoadBalancerArticlewebSecurityGroup87301EC29000C27D14DE": {
       "Properties": {
         "Description": "Load balancer to target",
         "FromPort": 9000,
@@ -887,7 +887,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "ArticleRenderingWeb-TEST/dotcom-rendering-TEST-article-web",
+                  "Value": "ArticleWeb-TEST/dotcom-rendering-TEST-article-web",
                 },
                 {
                   "Key": "Stack",
@@ -912,7 +912,7 @@ exports[`The RenderingApp stack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "ArticleRenderingWeb-TEST/dotcom-rendering-TEST-article-web",
+                  "Value": "ArticleWeb-TEST/dotcom-rendering-TEST-article-web",
                 },
                 {
                   "Key": "Stack",
@@ -969,7 +969,7 @@ sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make 
               },
               {
                 "Key": "Name",
-                "Value": "ArticleRenderingWeb-TEST/dotcom-rendering-TEST-article-web",
+                "Value": "ArticleWeb-TEST/dotcom-rendering-TEST-article-web",
               },
               {
                 "Key": "Stack",

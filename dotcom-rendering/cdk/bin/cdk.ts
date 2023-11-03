@@ -47,14 +47,14 @@ new DotcomRendering(app, 'DotcomRendering-front-web-PROD', {
 	instanceType: 't4g.micro',
 });
 
-new RenderingApp(app, 'ArticleRenderingWeb-CODE', {
+new RenderingApp(app, 'ArticleWeb-CODE', {
 	app: 'article-web',
 	stage: 'CODE',
 	instanceSize: InstanceSize.MICRO,
 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 });
 
-new RenderingApp(app, 'ArticleRenderingWeb-PROD', {
+new RenderingApp(app, 'ArticleWeb-PROD', {
 	app: 'article-web',
 	stage: 'PROD',
 	instanceSize: InstanceSize.MICRO,

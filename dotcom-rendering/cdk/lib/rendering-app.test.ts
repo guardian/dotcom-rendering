@@ -11,7 +11,7 @@ describe('The RenderingApp stack', () => {
 	it('matches the snapshot', () => {
 		const app = new App();
 
-		const stack = new RenderingApp(app, 'ArticleRenderingWeb-TEST', {
+		const stack = new RenderingApp(app, 'ArticleWeb-TEST', {
 			stage: 'TEST',
 			app: 'article-web',
 			instanceSize: InstanceSize.MICRO,
