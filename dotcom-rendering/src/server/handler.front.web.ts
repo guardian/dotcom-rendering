@@ -10,10 +10,10 @@ import {
 import { groupTrailsByDates } from '../model/groupTrailsByDates';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
 import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../types/front';
 import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront';
 import { makePrefetchHeader } from './lib/header';
+import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFront, renderTagFront } from './render.front.web';
 
 const enhanceFront = (body: unknown): DCRFrontType => {

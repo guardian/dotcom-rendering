@@ -2,9 +2,9 @@ import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { enhanceArticleType } from '../lib/article';
 import { enhanceBlocks } from '../model/enhanceBlocks';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
+import { recordTypeAndPlatform } from './lib/logging-store';
 import {
 	renderBlocks,
 	renderHtml,
