@@ -97,9 +97,9 @@ void (async () => {
 	void startup(
 		'userFeatures',
 		() =>
-			import(/* webpackMode: 'eager' */ './userFeatures').then(
-				({ userFeatures }) => userFeatures(),
-			),
+			import(
+				/* webpackMode: 'eager' */ './userFeatures/user-features'
+			).then(({ refresh }) => refresh()),
 		{ priority: 'critical' },
 	);
 
