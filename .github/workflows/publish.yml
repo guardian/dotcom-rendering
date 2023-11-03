@@ -51,7 +51,7 @@ jobs:
 
       - uses: guardian/actions-riff-raff@v2
         with:
-          projectName: dotcom:rendering-all
+          projectName: dotcom:rendering
           configPath: riff-raff.yaml
           buildNumberOffset: 38860
           contentDirectories: |
@@ -63,6 +63,15 @@ jobs:
               - front-web-cfn
             front-web:
               - front-web
+            frontend-static:
+              - frontend-static
+
+      - uses: guardian/actions-riff-raff@v2
+        with:
+          projectName: dotcom:rendering-all
+          configPath: riff-raff.yaml
+          buildNumberOffset: 38860
+          contentDirectories: |
             frontend-static:
               - frontend-static
             article-web-cfn:
