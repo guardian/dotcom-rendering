@@ -35,6 +35,7 @@ const paginationItemContainerCss = css`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	gap: 2px;
 `;
 
 const paginationItemCss = css`
@@ -44,7 +45,6 @@ const paginationItemCss = css`
 
 	min-width: 25px;
 	padding: 3px ${space[1]}px;
-	margin: ${space[1]}px;
 
 	${textSans.xxsmall({ fontWeight: 'bold' })}
 	text-decoration: none;
@@ -71,7 +71,7 @@ const activePaginationItemCss = css`
 const paginationDotsCss = css`
 	${textSans.xxsmall({ fontWeight: 'bold' })}
 	color: ${palette.neutral[46]};
-	padding: ${space[1]}px;
+	text-align: center;
 `;
 
 const paginationArrowsCss = css`
@@ -80,7 +80,6 @@ const paginationArrowsCss = css`
 	border: 1px solid ${palette.neutral[86]};
 
 	border-radius: 20px;
-
 	padding: 2px;
 
 	svg {
@@ -167,7 +166,16 @@ export const FrontPagination = ({
 								</a>
 							)}
 							{shouldSuffixDots && (
-								<span css={paginationDotsCss}>...</span>
+								<span
+									css={[
+										paginationDotsCss,
+										css`
+											margin-right: ${space[1]}px;
+										`,
+									]}
+								>
+									...
+								</span>
 							)}
 						</Fragment>
 					);
