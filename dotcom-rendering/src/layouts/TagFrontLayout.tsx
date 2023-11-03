@@ -1,11 +1,13 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import {
+	body,
 	brandBackground,
 	brandBorder,
 	brandLine,
 	neutral,
 	news,
+	space,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment, useRef } from 'react';
@@ -61,6 +63,48 @@ const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
 			year: 'numeric',
 		})}`;
 	}
+};
+
+const titleStyle = css`
+	${body.medium({ fontWeight: 'regular' })};
+	color: ${neutral[7]};
+	padding-bottom: ${space[1]}px;
+	padding-top: ${space[1]}px;
+	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
+`;
+
+const linkStyle = css`
+	text-decoration: none;
+	color: ${neutral[7]};
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
+const SectionLeftContent = ({
+	url,
+	title,
+	dateString,
+}: {
+	title: string;
+	dateString: string;
+	url?: string;
+}) => {
+	if (url !== undefined) {
+		return (
+			<header css={titleStyle}>
+				<a href={url} css={linkStyle}>
+					<time dateTime={dateString}>{title}</time>
+				</a>
+			</header>
+		);
+	}
+	return (
+		<header css={titleStyle}>
+			<time dateTime={dateString}>{title}</time>
+		</header>
+	);
 };
 
 export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
@@ -241,15 +285,30 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								null,
 							)}
 							<FrontSection
-								title={date.toLocaleDateString('en-GB', {
-									day:
-										groupedTrails.day !== undefined
-											? 'numeric'
-											: undefined,
-									month: 'long',
-									year: 'numeric',
-								})}
-								url={url}
+								leftContent={
+									<SectionLeftContent
+										url={url}
+										title={date.toLocaleDateString(
+											'en-GB',
+											{
+												day:
+													groupedTrails.day !==
+													undefined
+														? 'numeric'
+														: undefined,
+												month: 'long',
+												year: 'numeric',
+											},
+										)}
+										dateString={`${groupedTrails.year}-${
+											groupedTrails.month
+										}${
+											groupedTrails.day !== undefined
+												? `-${groupedTrails.day}`
+												: ''
+										}`}
+									/>
+								}
 								showTopBorder={true}
 								ophanComponentLink={`container-${index} | ${containedId}`}
 								ophanComponentName={containedId}
