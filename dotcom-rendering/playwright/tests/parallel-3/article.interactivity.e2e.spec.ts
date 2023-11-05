@@ -1,5 +1,5 @@
 import type { Page } from '@playwright/test';
-import { expect, test } from '@playwright/test';
+import { devices, expect, test } from '@playwright/test';
 import { disableCMP } from '../../lib/cmp';
 import { loadPage } from '../../lib/load-page';
 import { mockApis } from '../../lib/mocks'; // TODO is this required?
@@ -44,7 +44,7 @@ test.describe('Interactivity', () => {
 
 			await expectToNotBeVisible(page, '[data-cy=dropdown-options]');
 
-			await waitForIsland(page, 'EditionDropdown', 'hydrated');
+			await waitForIsland(page, 'HeaderTopBar', 'hydrated');
 			// Open it
 			await page.locator('[data-cy=dropdown-button]').click();
 			await expectToBeVisible(page, '[data-cy=dropdown-options]');
@@ -189,125 +189,170 @@ test.describe('Interactivity', () => {
 		});
 	});
 
-	// describe('Navigating the pillar menu', function () {
-	// 	it('should expand and close the desktop pillar menu when More is clicked', function () {
-	// 		cy.visit(`/Article/${articleUrl}`);
-	// 		cy.get('[data-cy=nav-show-more-button]').click();
-	// 		cy.get('[data-cy=expanded-menu]').within(() => {
-	// 			cy.contains('Columnists').should('be.visible');
-	// 		});
-	// 		// Assert first item is highlighted
-	// 		cy.get('[data-cy="newsLinks"] > li')
-	// 			.eq(1)
-	// 			.within(() => {
-	// 				cy.get('a').should('have.focus');
-	// 			});
-	// 		// check focus is on menu button on close
-	// 		cy.focused().type('{esc}');
-	// 		cy.focused().should('have.attr', 'data-cy', 'nav-show-more-button');
+	test.describe('Navigating the pillar menu', () => {
+		test('should expand and close the desktop pillar menu when More is clicked', async ({
+			context,
+			page,
+		}) => {
+			await disableCMP(context);
+			await loadPage(page, `/Article/${articleUrl}`);
 
-	// 		// TODO: should also include assertion to select menu item when AD z-index fixed
-	// 		// See: https://trello.com/c/y8CyFKJm/1524-top-nav-ad-and-nav-z-index-issue
-	// 	});
+			// Open pillar menu
+			await page.locator('[data-cy=nav-show-more-button]').click();
+			await expect(
+				page
+					.locator('[data-cy=expanded-menu]')
+					.filter({ hasText: 'Columnists' }),
+			).toBeVisible();
 
-	// 	describe('On mobile', function () {
-	// 		it('should expand the mobile pillar menu when the VeggieBurger is clicked', function () {
-	// 			cy.viewport('iphone-x');
-	// 			cy.visit(`/Article/${articleUrl}`);
-	// 			cy.get('[data-cy=veggie-burger]').click();
-	// 			cy.contains('Crosswords');
-	// 			cy.get('[data-cy=column-collapse-Opinion]').click();
-	// 			cy.contains('Columnists').should('be.visible');
-	// 			// this input element is not visible and typing into it will cause Cypress to fail to type - so force override
-	// 			// https://docs.cypress.io/guides/references/error-messages#cy-failed-because-the-element-cannot-be-interacted-with
-	// 			cy.focused().type('{esc}', { force: true });
-	// 			// check focus is on veggie burger menu button on close
-	// 			cy.focused().should('have.attr', 'data-cy', 'veggie-burger');
-	// 		});
+			// Assert newslinks second item (first visible) is focused
+			// TODO e2e find a better way to filter on visible list items :visible doesn't work
+			await expect(
+				page.locator('[data-cy="newsLinks"] > li:nth-child(2) a'),
+			).toBeFocused();
 
-	// 		it('should transfer focus to the sub nav when tabbing from the veggie burger without opening the menu', function () {
-	// 			cy.viewport('iphone-x');
-	// 			cy.visit(`/Article/${articleUrl}`);
-	// 			cy.get('[data-cy=veggie-burger]').focus();
-	// 			cy.get('[data-cy=veggie-burger]').tab();
-	// 			cy.get('[data-cy=sub-nav] a').first().should('have.focus');
-	// 		});
+			// Press escape and assert show more is focused
+			await page.locator('body').press('Escape');
+			await expect(
+				page.locator('[data-cy=nav-show-more-button]'),
+			).toBeFocused();
+		});
 
-	// 		it('should immediately focus on the News menu item when the menu first opens', function () {
-	// 			cy.viewport('iphone-x');
-	// 			cy.visit(`/Article/${articleUrl}`);
-	// 			cy.get('[data-cy=veggie-burger]').click();
-	// 			cy.get('[data-cy=column-collapse-News]').should('have.focus');
-	// 		});
+		test.describe('On mobile', () => {
+			test('should expand the mobile pillar menu when the VeggieBurger is clicked', async ({
+				context,
+				page,
+			}) => {
+				await page.setViewportSize(devices['iPhone X'].viewport);
+				await disableCMP(context);
+				await loadPage(page, `/Article/${articleUrl}`);
 
-	// 		it('should transfer focus to sub menu items when tabbing from section header', function () {
-	// 			cy.viewport('iphone-x');
-	// 			cy.visit(`/Article/${articleUrl}`);
-	// 			cy.get('[data-cy=veggie-burger]').click();
-	// 			cy.focused().type('{enter}');
-	// 			cy.focused().tab();
-	// 			// get the first column (news column)
-	// 			cy.get('[data-cy="nav-menu-columns"] li')
-	// 				.first()
-	// 				.within(() => {
-	// 					// get the first element in that column
-	// 					cy.get('ul > li > a').first().should('have.focus');
-	// 				});
-	// 		});
+				await page.locator('[data-cy=veggie-burger]').click();
+				await expect(
+					page
+						.locator('nav')
+						.first()
+						.filter({ hasText: 'Crosswords' }),
+				).toBeVisible();
 
-	// 		it('should let reader traverse section titles using keyboard', function () {
-	// 			cy.viewport('iphone-x');
-	// 			cy.visit(`/Article/${articleUrl}`);
-	// 			cy.get('[data-cy=veggie-burger]').type('{enter}');
-	// 			// Close the news menu
-	// 			cy.focused().type('{enter}');
-	// 			cy.focused().tab();
-	// 			cy.focused().should(
-	// 				'have.attr',
-	// 				'data-cy',
-	// 				'column-collapse-Opinion',
-	// 			);
-	// 			// Open the opinion menu
-	// 			cy.focused().type('{enter}');
-	// 			cy.focused().tab();
-	// 			cy.focused().should(
-	// 				'have.attr',
-	// 				'data-cy',
-	// 				'column-collapse-sublink-Opinion',
-	// 			);
-	// 		});
+				await page.locator('[data-cy=column-collapse-Opinion]').click();
+				await expect(
+					page
+						.locator('nav')
+						.first()
+						.filter({ hasText: 'Columnists' }),
+				).toBeVisible();
 
-	// 		it('should expand the subnav when "More" is clicked', function () {
-	// 			cy.viewport('iphone-x');
-	// 			cy.visit(`/Article/${articleUrl}`);
-	// 			// Wait for hydration
-	// 			cy.get('gu-island[name=SubNav]')
-	// 				.first()
-	// 				.should('have.attr', 'data-island-status', 'hydrated');
-	// 			// Both subnav buttons show 'More'
-	// 			cy.get('[data-cy=subnav-toggle]').first().contains('More');
-	// 			cy.get('[data-cy=subnav-toggle]').last().contains('More');
-	// 			// Click Show more in the first sub nav
-	// 			cy.get('[data-cy=subnav-toggle]').first().click();
-	// 			// The first button now shows 'Less'
-	// 			cy.get('[data-cy=subnav-toggle]').first().contains('Less');
-	// 			// Scroll to bottom to trigger hydration
-	// 			cy.scrollTo('bottom', { duration: 300 });
-	// 			// We need this second call to fix flakiness where content loads in pushing the page
-	// 			// down and preventing the scroll request to actually reach the bottom. We will fix
-	// 			// this later when we've defined fixed heights for these containers, preventing CLS
-	// 			cy.scrollTo('bottom', { duration: 300 });
-	// 			// Wait for hydration
-	// 			cy.get('gu-island[name=SubNav]')
-	// 				.last()
-	// 				.should('have.attr', 'data-island-status', 'hydrated');
-	// 			// The other subnav still shows 'More'
-	// 			cy.get('[data-cy=subnav-toggle]').last().contains('More');
-	// 			// Click Show more on the last sub nav
-	// 			cy.get('[data-cy=subnav-toggle]').last().click();
-	// 			// Both subnav buttons show 'Less'
-	// 			cy.get('[data-cy=subnav-toggle]').first().contains('Less');
-	// 			cy.get('[data-cy=subnav-toggle]').last().contains('Less');
-	// 		});
-	// 	});
+				await page.locator('body').press('Escape');
+				await expect(
+					page.locator('[data-cy=veggie-burger]'),
+				).toBeFocused();
+			});
+
+			test('should transfer focus to the sub nav when tabbing from the veggie burger without opening the menu', async ({
+				context,
+				page,
+			}) => {
+				await page.setViewportSize(devices['iPhone X'].viewport);
+				await disableCMP(context);
+				await loadPage(page, `/Article/${articleUrl}`);
+
+				await page.locator('[data-cy=veggie-burger]').focus();
+				await page.locator('[data-cy=veggie-burger]').press('Tab');
+				await expect(
+					page.locator('[data-cy=sub-nav] a').first(),
+				).toBeFocused();
+			});
+
+			test('should immediately focus on the News menu item when the menu first opens', async ({
+				context,
+				page,
+			}) => {
+				await page.setViewportSize(devices['iPhone X'].viewport);
+				await disableCMP(context);
+				await loadPage(page, `/Article/${articleUrl}`);
+
+				await page.locator('[data-cy=veggie-burger]').click();
+				await expect(
+					page.locator('[data-cy=column-collapse-News]'),
+				).toBeFocused();
+			});
+
+			test('should transfer focus to sub menu items when tabbing from section header', async ({
+				context,
+				page,
+			}) => {
+				await page.setViewportSize(devices['iPhone X'].viewport);
+				await disableCMP(context);
+				await loadPage(page, `/Article/${articleUrl}`);
+
+				// tab to the first sub menu item
+				await page.locator('[data-cy=veggie-burger]').click();
+				await page.keyboard.press('Enter');
+				await page.keyboard.press('Tab');
+
+				// Assert first item of first sub menu is focused
+				await expect(
+					page.locator(
+						'[data-cy="nav-menu-columns"] > li:nth-child(1) > ul > li:nth-child(1) > a',
+					),
+				).toBeFocused();
+			});
+
+			// 		it('should let reader traverse section titles using keyboard', function () {
+			// 			cy.viewport('iphone-x');
+			// 			cy.visit(`/Article/${articleUrl}`);
+			// 			cy.get('[data-cy=veggie-burger]').type('{enter}');
+			// 			// Close the news menu
+			// 			cy.focused().type('{enter}');
+			// 			cy.focused().tab();
+			// 			cy.focused().should(
+			// 				'have.attr',
+			// 				'data-cy',
+			// 				'column-collapse-Opinion',
+			// 			);
+			// 			// Open the opinion menu
+			// 			cy.focused().type('{enter}');
+			// 			cy.focused().tab();
+			// 			cy.focused().should(
+			// 				'have.attr',
+			// 				'data-cy',
+			// 				'column-collapse-sublink-Opinion',
+			// 			);
+			// 		});
+
+			// 		it('should expand the subnav when "More" is clicked', function () {
+			// 			cy.viewport('iphone-x');
+			// 			cy.visit(`/Article/${articleUrl}`);
+			// 			// Wait for hydration
+			// 			cy.get('gu-island[name=SubNav]')
+			// 				.first()
+			// 				.should('have.attr', 'data-island-status', 'hydrated');
+			// 			// Both subnav buttons show 'More'
+			// 			cy.get('[data-cy=subnav-toggle]').first().contains('More');
+			// 			cy.get('[data-cy=subnav-toggle]').last().contains('More');
+			// 			// Click Show more in the first sub nav
+			// 			cy.get('[data-cy=subnav-toggle]').first().click();
+			// 			// The first button now shows 'Less'
+			// 			cy.get('[data-cy=subnav-toggle]').first().contains('Less');
+			// 			// Scroll to bottom to trigger hydration
+			// 			cy.scrollTo('bottom', { duration: 300 });
+			// 			// We need this second call to fix flakiness where content loads in pushing the page
+			// 			// down and preventing the scroll request to actually reach the bottom. We will fix
+			// 			// this later when we've defined fixed heights for these containers, preventing CLS
+			// 			cy.scrollTo('bottom', { duration: 300 });
+			// 			// Wait for hydration
+			// 			cy.get('gu-island[name=SubNav]')
+			// 				.last()
+			// 				.should('have.attr', 'data-island-status', 'hydrated');
+			// 			// The other subnav still shows 'More'
+			// 			cy.get('[data-cy=subnav-toggle]').last().contains('More');
+			// 			// Click Show more on the last sub nav
+			// 			cy.get('[data-cy=subnav-toggle]').last().click();
+			// 			// Both subnav buttons show 'Less'
+			// 			cy.get('[data-cy=subnav-toggle]').first().contains('Less');
+			// 			cy.get('[data-cy=subnav-toggle]').last().contains('Less');
+			// 		});
+		});
+	});
 });
