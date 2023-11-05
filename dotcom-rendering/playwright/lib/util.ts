@@ -14,21 +14,6 @@ const clearCookie = async (
 	await context.addCookies(filteredCookies);
 };
 
-const setUrlFragment = (
-	urlString: string,
-	fragments: Record<string, string>,
-): URL => {
-	const url = new URL(urlString);
-
-	const newFragments = Object.entries(fragments)
-		.map(([key, value]) => `${key}=${value}`)
-		.join('&');
-
-	url.hash = (url.hash ? `${url.hash}&` : '') + newFragments;
-
-	return url;
-};
-
 const waitForIsland = async (
 	page: Page,
 	island: string,
@@ -51,4 +36,4 @@ const waitForIsland = async (
 	});
 };
 
-export { clearCookie, waitForIsland, setUrlFragment };
+export { clearCookie, waitForIsland };
