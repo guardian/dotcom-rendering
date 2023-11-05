@@ -20,17 +20,12 @@ const expectToNotBeVisible = async (page: Page, selector: string, nth = 0) => {
 	});
 };
 
-// TODO e2e add a more precise test to check if the element exists in the DOM using count
-const expectToBeAttached = async (page: Page, selector: string, nth = 0) => {
-	await expect(page.locator(selector).nth(nth)).toBeAttached({
-		timeout: 10000,
-	});
+const expectToExist = async (page: Page, selector: string, count = 1) => {
+	await expect(page.locator(selector)).toHaveCount(count, { timeout: 10000 });
 };
 
-const expectToNotBeAttached = async (page: Page, selector: string, nth = 0) => {
-	await expect(page.locator(selector).nth(nth)).not.toBeAttached({
-		timeout: 10000,
-	});
+const expectToNotExist = async (page: Page, selector: string) => {
+	await expect(page.locator(selector)).toHaveCount(0, { timeout: 10000 });
 };
 
 test.describe('Interactivity', () => {
@@ -75,7 +70,7 @@ test.describe('Interactivity', () => {
 			// Click the comment count
 			await page.locator('[data-cy=comment-counts]').click();
 			await waitForIsland(page, 'DiscussionContainer', 'hydrated');
-			await expectToBeAttached(page, '[data-cy=discussion]');
+			await expectToExist(page, '[data-cy=discussion]');
 		});
 
 		test('loads the discussion immediately when you use a url ending in #comments', async ({
@@ -87,7 +82,7 @@ test.describe('Interactivity', () => {
 				page,
 				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
 			);
-			await expectToBeAttached(page, '[data-cy=discussion]');
+			await expectToExist(page, '[data-cy=discussion]');
 		});
 
 		test('loads the discussion immediately when you use a permalink', async ({
@@ -110,12 +105,9 @@ test.describe('Interactivity', () => {
 		}) => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
-			await expectToNotBeAttached(
-				page,
-				'[data-component=geo-most-popular]',
-			);
+			await expectToNotExist(page, '[data-component=geo-most-popular]');
 			await waitForIsland(page, 'MostViewedRightWrapper');
-			await expectToBeAttached(page, '[data-component=geo-most-popular]');
+			await expectToExist(page, '[data-component=geo-most-popular]');
 		});
 
 		test('should display and hydrate all the rich links for an article', async ({
