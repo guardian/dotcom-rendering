@@ -2,7 +2,7 @@ import type { Page } from '@playwright/test';
 import { devices, expect, test } from '@playwright/test';
 import { disableCMP } from '../../lib/cmp';
 import { loadPage } from '../../lib/load-page';
-import { mockApis } from '../../lib/mocks'; // TODO is this required?
+import { mockApis } from '../../lib/mocks'; // TODO e2e is this required?
 import { waitForIsland } from '../../lib/util';
 
 const articleUrl =
@@ -299,60 +299,72 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
-			// 		it('should let reader traverse section titles using keyboard', function () {
-			// 			cy.viewport('iphone-x');
-			// 			cy.visit(`/Article/${articleUrl}`);
-			// 			cy.get('[data-cy=veggie-burger]').type('{enter}');
-			// 			// Close the news menu
-			// 			cy.focused().type('{enter}');
-			// 			cy.focused().tab();
-			// 			cy.focused().should(
-			// 				'have.attr',
-			// 				'data-cy',
-			// 				'column-collapse-Opinion',
-			// 			);
-			// 			// Open the opinion menu
-			// 			cy.focused().type('{enter}');
-			// 			cy.focused().tab();
-			// 			cy.focused().should(
-			// 				'have.attr',
-			// 				'data-cy',
-			// 				'column-collapse-sublink-Opinion',
-			// 			);
-			// 		});
+			test('should let reader traverse section titles using keyboard', async ({
+				context,
+				page,
+			}) => {
+				await page.setViewportSize(devices['iPhone X'].viewport);
+				await disableCMP(context);
+				await loadPage(page, `/Article/${articleUrl}`);
 
-			// 		it('should expand the subnav when "More" is clicked', function () {
-			// 			cy.viewport('iphone-x');
-			// 			cy.visit(`/Article/${articleUrl}`);
-			// 			// Wait for hydration
-			// 			cy.get('gu-island[name=SubNav]')
-			// 				.first()
-			// 				.should('have.attr', 'data-island-status', 'hydrated');
-			// 			// Both subnav buttons show 'More'
-			// 			cy.get('[data-cy=subnav-toggle]').first().contains('More');
-			// 			cy.get('[data-cy=subnav-toggle]').last().contains('More');
-			// 			// Click Show more in the first sub nav
-			// 			cy.get('[data-cy=subnav-toggle]').first().click();
-			// 			// The first button now shows 'Less'
-			// 			cy.get('[data-cy=subnav-toggle]').first().contains('Less');
-			// 			// Scroll to bottom to trigger hydration
-			// 			cy.scrollTo('bottom', { duration: 300 });
-			// 			// We need this second call to fix flakiness where content loads in pushing the page
-			// 			// down and preventing the scroll request to actually reach the bottom. We will fix
-			// 			// this later when we've defined fixed heights for these containers, preventing CLS
-			// 			cy.scrollTo('bottom', { duration: 300 });
-			// 			// Wait for hydration
-			// 			cy.get('gu-island[name=SubNav]')
-			// 				.last()
-			// 				.should('have.attr', 'data-island-status', 'hydrated');
-			// 			// The other subnav still shows 'More'
-			// 			cy.get('[data-cy=subnav-toggle]').last().contains('More');
-			// 			// Click Show more on the last sub nav
-			// 			cy.get('[data-cy=subnav-toggle]').last().click();
-			// 			// Both subnav buttons show 'Less'
-			// 			cy.get('[data-cy=subnav-toggle]').first().contains('Less');
-			// 			cy.get('[data-cy=subnav-toggle]').last().contains('Less');
-			// 		});
+				await page.locator('[data-cy=veggie-burger]').press('Enter');
+
+				// Close the news menu
+				await page.locator('*:focus').press('Tab');
+				await expect(
+					page.locator('[data-cy=column-collapse-Opinion]'),
+				).toBeFocused();
+
+				// Open the opinion menu
+				await page.locator('*:focus').press('Enter');
+				await page.locator('*:focus').press('Tab');
+				await expect(
+					page.locator('[data-cy=column-collapse-sublink-Opinion]'),
+				).toBeFocused();
+			});
+
+			test('should expand the subnav when "More" is clicked', async ({
+				context,
+				page,
+			}) => {
+				await page.setViewportSize(devices['iPhone X'].viewport);
+				await disableCMP(context);
+				await loadPage(page, `/Article/${articleUrl}`);
+
+				// Wait for hydration of both navs
+				await waitForIsland(page, 'SubNav', 'hydrated', 0);
+				await waitForIsland(page, 'SubNav', 'hydrated', 1);
+
+				// Both subnav buttons show 'More'
+				await expect(
+					page.locator('[data-cy=subnav-toggle]').first(),
+				).toHaveText('More');
+				await expect(
+					page.locator('[data-cy=subnav-toggle]').last(),
+				).toHaveText('More');
+
+				// Click Show more in the first sub nav
+				await page.locator('[data-cy=subnav-toggle]').first().click();
+				// The first button now shows 'Less'
+				await expect(
+					page.locator('[data-cy=subnav-toggle]').first(),
+				).toHaveText('Less');
+
+				// The last subnav still shows 'More'
+				await expect(
+					page.locator('[data-cy=subnav-toggle]').last(),
+				).toHaveText('More');
+
+				// Click Show more on the last sub nav
+				await page.locator('[data-cy=subnav-toggle]').last().click();
+				// Both subnav buttons show 'Less'
+				await expect(
+					page.locator('[data-cy=subnav-toggle]').first(),
+				).toHaveText('Less');
+				await expect(
+					page.locator('[data-cy=subnav-toggle]').last(),
+				).toHaveText('Less');
+			});
 		});
 	});
 });
