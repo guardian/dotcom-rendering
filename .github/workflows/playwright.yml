@@ -29,6 +29,10 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
+      - name: Install Playwright Browsers
+        run: yarn playwright install --with-deps
+        working-directory: ./dotcom-rendering
+
       - name: Run Playwright
         run: yarn playwright test parallel-${{ matrix.group }}
         working-directory: ./dotcom-rendering
