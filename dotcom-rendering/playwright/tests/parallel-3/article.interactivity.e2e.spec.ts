@@ -1,5 +1,10 @@
-import type { Page } from '@playwright/test';
 import { devices, expect, test } from '@playwright/test';
+import {
+	expectToBeVisible,
+	expectToExist,
+	expectToNotBeVisible,
+	expectToNotExist,
+} from 'playwright/lib/locators';
 import { disableCMP } from '../../lib/cmp';
 import { waitForIsland } from '../../lib/islands';
 import { loadPage } from '../../lib/load-page';
@@ -7,26 +12,6 @@ import { mockApis } from '../../lib/mocks'; // TODO e2e is this required?
 
 const articleUrl =
 	'https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit';
-
-const expectToBeVisible = async (page: Page, selector: string, nth = 0) => {
-	await expect(page.locator(selector).nth(nth)).toBeVisible({
-		timeout: 10000,
-	});
-};
-
-const expectToNotBeVisible = async (page: Page, selector: string, nth = 0) => {
-	await expect(page.locator(selector).nth(nth)).not.toBeVisible({
-		timeout: 10000,
-	});
-};
-
-const expectToExist = async (page: Page, selector: string, count = 1) => {
-	await expect(page.locator(selector)).toHaveCount(count, { timeout: 10000 });
-};
-
-const expectToNotExist = async (page: Page, selector: string) => {
-	await expect(page.locator(selector)).toHaveCount(0, { timeout: 10000 });
-};
 
 test.describe('Interactivity', () => {
 	test.describe('Verify elements have been hydrated', () => {
