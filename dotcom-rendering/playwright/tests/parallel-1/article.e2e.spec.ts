@@ -1,8 +1,8 @@
 import type { Response } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 import { disableCMP } from '../../lib/cmp';
+import { waitForIsland } from '../../lib/islands';
 import { loadPage } from '../../lib/load-page';
-import { waitForIsland } from '../../lib/util';
 
 const responseHasJsonProperty = async (
 	response: Response,

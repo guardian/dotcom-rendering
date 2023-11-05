@@ -1,5 +1,5 @@
 import type { BrowserContext, Page } from '@playwright/test';
-import { waitForIsland } from './util';
+import { waitForIsland } from './islands';
 
 const SP_LAYER1_IFRAME = '[id*="sp_message_iframe"]';
 const SP_LAYER1_ACCEPT_ALL_BUTTON = 'button.sp_choice_type_11';

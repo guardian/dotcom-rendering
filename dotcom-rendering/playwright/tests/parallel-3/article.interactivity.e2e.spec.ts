@@ -1,9 +1,9 @@
 import type { Page } from '@playwright/test';
 import { devices, expect, test } from '@playwright/test';
 import { disableCMP } from '../../lib/cmp';
+import { waitForIsland } from '../../lib/islands';
 import { loadPage } from '../../lib/load-page';
 import { mockApis } from '../../lib/mocks'; // TODO e2e is this required?
-import { waitForIsland } from '../../lib/util';
 
 const articleUrl =
 	'https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit';
