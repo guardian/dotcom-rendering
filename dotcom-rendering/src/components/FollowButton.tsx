@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { remSpace, textSans } from '@guardian/source-foundations';
+import { remSpace, space, textSans } from '@guardian/source-foundations';
 import {
 	SvgNotificationsOff,
 	SvgNotificationsOn,
@@ -13,27 +13,31 @@ type IconProps = {
 const FollowIcon = ({ isFollowing }: IconProps) => (
 	<div
 		css={css`
-			${isFollowing &&
-			`background-color: ${palette('--follow-icon-fill')};`}
-			height: 24px;
-			width: 24px;
-			margin: 0 0.15rem 0 0;
-			${isFollowing
-				? 'padding: 0.175rem 0 0  0.175rem;'
-				: 'padding: 0.135rem 0 0  0.125rem;'}
+			display: flex;
+			margin: 0;
+			margin-right: ${space[1]}px;
+
 			border-radius: 100%;
-			${!isFollowing &&
-			`border: 1px solid ${palette('--follow-icon-fill')};`}
+			border: 1px solid ${palette('--follow-icon-fill')};
 
 			svg {
-				fill: ${isFollowing
-					? `${palette('--follow-icon-background')}`
-					: `${palette('--follow-icon-fill')}`};
-				height: 18px;
+				margin: 1px;
 			}
 		`}
+		style={{
+			backgroundColor: isFollowing
+				? palette('--follow-icon-fill')
+				: undefined,
+			fill: isFollowing
+				? palette('--follow-icon-background')
+				: palette('--follow-icon-fill'),
+		}}
 	>
-		{isFollowing ? <SvgNotificationsOn /> : <SvgNotificationsOff />}
+		{isFollowing ? (
+			<SvgNotificationsOn size="xsmall" />
+		) : (
+			<SvgNotificationsOff size="xsmall" />
+		)}
 	</div>
 );
 
