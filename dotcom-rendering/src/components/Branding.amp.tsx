@@ -20,6 +20,7 @@ const LinkStyle = (pillar: ArticleTheme) => css`
 
 const brandingStyle = (pillar: ArticleTheme) => css`
 	padding: 10px 0;
+	width: 160px;
 	${LinkStyle(pillar)}
 
 	a, a:hover {
@@ -57,8 +58,9 @@ export const Branding = ({ branding, pillar }: BrandingProps) => {
 			>
 				<amp-img
 					src={logo.src}
-					width={logo.dimensions.width}
-					height={logo.dimensions.height}
+					width="1.33"
+					height="1"
+					layout="responsive"
 					alt={sponsorName}
 				/>
 			</a>
