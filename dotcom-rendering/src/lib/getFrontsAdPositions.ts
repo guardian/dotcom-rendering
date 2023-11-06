@@ -18,16 +18,19 @@ type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
 const getMerchHighPosition = (collectionCount: number): number =>
 	collectionCount >= 4 ? 2 : 0;
 
-// This happens on the recipes front, where the first container is a thrasher see: https://github.com/guardian/frontend/pull/20617
-const hasFirstContainerThrasher = (collectionType: string, index: number) =>
+/**
+ * This happens on the recipes front, where the first container is a thrasher
+ * @see https://github.com/guardian/frontend/pull/20617
+ */
+const isFirstContainerAndThrasher = (collectionType: string, index: number) =>
 	index === 0 && collectionType === 'fixed/thrasher';
 
-const hasAdjacentCommercialContainer = (
+const isMerchHighPosition = (
 	collectionIndex: number,
 	merchHighPosition: number,
-) => collectionIndex === merchHighPosition;
+): boolean => collectionIndex === merchHighPosition;
 
-const hasAdjacentThrasher = (index: number, collections: AdCandidate[]) =>
+const isBeforeThrasher = (index: number, collections: AdCandidate[]) =>
 	collections[index + 1]?.collectionType === 'fixed/thrasher';
 
 const isMostViewedContainer = (collection: AdCandidate) =>
@@ -35,31 +38,22 @@ const isMostViewedContainer = (collection: AdCandidate) =>
 
 const shouldInsertAd =
 	(merchHighPosition: number) =>
-	(
-		collection: AdCandidate,
-		collectionIndex: number,
-		collections: AdCandidate[],
-	) =>
+	(collection: AdCandidate, index: number, collections: AdCandidate[]) =>
 		!(
-			hasFirstContainerThrasher(
-				collection.collectionType,
-				collectionIndex,
-			) ||
-			hasAdjacentCommercialContainer(
-				collectionIndex,
-				merchHighPosition,
-			) ||
-			hasAdjacentThrasher(collectionIndex, collections) ||
+			isFirstContainerAndThrasher(collection.collectionType, index) ||
+			isMerchHighPosition(index, merchHighPosition) ||
+			isBeforeThrasher(index, collections) ||
 			isMostViewedContainer(collection)
 		);
 
-const isEvenIndex = (_collection: unknown, index: number) => index % 2 === 0;
+const isEvenIndex = (_collection: unknown, index: number): boolean =>
+	index % 2 === 0;
 
 /**
  * We do not insert mobile ads:
  * a. after the first container if it is a thrasher
- * b. after a commercial container (e.g. merchandising-high)
- * c. between a regular container and a thrasher
+ * b. next to the merchandising-high ad slot
+ * c. before a thrasher
  * d. after the Most Viewed container.
  * After we've filtered out the containers next to which we can insert an ad,
  * we take every other container, up to a maximum of 10, for targeting MPU insertion.
@@ -71,6 +65,7 @@ const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
 		.filter(shouldInsertAd(merchHighPosition))
 		.filter(isEvenIndex)
 		.map((collection: AdCandidate) => collections.indexOf(collection))
+		.filter((adPosition: number) => adPosition !== -1)
 		.slice(0, MAX_FRONTS_MOBILE_ADS);
 };
 
@@ -242,6 +237,8 @@ const getFrontsBannerAdPositions = (
 	).adPositions;
 
 export {
+	isEvenIndex,
+	isMerchHighPosition,
 	getMerchHighPosition,
 	getMobileAdPositions,
 	getFrontsBannerAdPositions,

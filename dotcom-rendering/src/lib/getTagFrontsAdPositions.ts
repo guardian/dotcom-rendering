@@ -3,14 +3,11 @@ import {
 	MAX_FRONTS_BANNER_ADS,
 	MAX_FRONTS_MOBILE_ADS,
 } from './commercial-constants';
-import { getMerchHighPosition } from './getFrontsAdPositions';
-
-const hasAdjacentCommercialContainer = (
-	collectionIndex: number,
-	merchHighPosition: number,
-) => collectionIndex === merchHighPosition;
-
-const isEvenIndex = (_collection: unknown, index: number) => index % 2 === 0;
+import {
+	getMerchHighPosition,
+	isEvenIndex,
+	isMerchHighPosition,
+} from './getFrontsAdPositions';
 
 /**
  * Uses a very similar approach to pressed fronts, except we
@@ -26,10 +23,7 @@ const getTagFrontMobileAdPositions = (
 	const merchHighPosition = getMerchHighPosition(collections.length);
 
 	return collections
-		.filter(
-			(_, index) =>
-				!hasAdjacentCommercialContainer(index, merchHighPosition),
-		)
+		.filter((_, index) => !isMerchHighPosition(index, merchHighPosition))
 		.filter(isEvenIndex)
 		.map((collection) =>
 			collections.findIndex(
@@ -39,7 +33,7 @@ const getTagFrontMobileAdPositions = (
 					year === collection.year,
 			),
 		)
-		.filter((adPosition: number) => adPosition !== 1)
+		.filter((adPosition: number) => adPosition !== -1)
 		.slice(0, MAX_FRONTS_MOBILE_ADS);
 };
 
