@@ -98,6 +98,8 @@ export const Ad = ({
 		adType,
 	);
 
+	// we don't want teads ads to refresh, as this seems to reduce their visibility
+	// teads ads only target the ad-1 and ad-2 slots, so we prevent these from refreshing
 	const refreshValue = id === 'ad-1' || id === 'ad-2' ? 'false' : '30';
 
 	return (
