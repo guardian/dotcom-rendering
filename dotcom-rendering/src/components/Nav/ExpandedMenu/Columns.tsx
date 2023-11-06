@@ -44,9 +44,8 @@ const columnsStyle = (isImmersive: boolean) => css`
 	}
 `;
 
-const columnsStyleWithPageSkin = (isImmersive: boolean) => css`
-	${columnsStyle(isImmersive)}
-	${from.leftCol}, ${from.wide} {
+const columnsStyleWithPageSkin = css`
+	${from.leftCol} {
 		max-width: 980px;
 	}
 `;
@@ -90,8 +89,7 @@ const brandExtensionList = css`
 `;
 
 const brandExtenstionListWithPageSkin = css`
-	${brandExtensionList};
-	${from.leftCol}, ${from.wide} {
+	${from.leftCol} {
 		width: 131px;
 	}
 `;
@@ -136,7 +134,6 @@ const brandExtensionLink = css`
 `;
 
 const brandExtensionLinkWithPageSkin = css`
-	${brandExtensionLink};
 	${from.wide} {
 		font-size: 1.25rem;
 	}
@@ -226,20 +223,6 @@ const editionsSwitch = css`
 	}
 `;
 
-const columnsStyleBasedOnHasPageSkin = (
-	isImmersive: boolean,
-	hasPageSkin?: boolean,
-) =>
-	hasPageSkin
-		? columnsStyleWithPageSkin(isImmersive)
-		: columnsStyle(isImmersive);
-
-const brandExtensionListBasedOnHasPageSkin = (hasPageSkin?: boolean) =>
-	hasPageSkin ? brandExtenstionListWithPageSkin : brandExtensionList;
-
-const brandExtensionLinkBasedOnHasPageSkin = (hasPageSkin?: boolean) =>
-	hasPageSkin ? brandExtensionLinkWithPageSkin : brandExtensionLink;
-
 type Props = {
 	editionId: EditionId;
 	isImmersive?: boolean;
@@ -259,7 +242,10 @@ export const Columns = ({
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (
 		<ul
-			css={columnsStyleBasedOnHasPageSkin(isImmersive, hasPageSkin)}
+			css={[
+				columnsStyle(isImmersive),
+				hasPageSkin && columnsStyleWithPageSkin,
+			]}
 			role="menubar"
 			data-cy="nav-menu-columns"
 		>
@@ -359,7 +345,10 @@ export const Columns = ({
 			/>
 			<li css={desktopBrandExtensionColumn} role="none">
 				<ul
-					css={brandExtensionListBasedOnHasPageSkin(hasPageSkin)}
+					css={[
+						brandExtensionList,
+						hasPageSkin && brandExtenstionListWithPageSkin,
+					]}
 					role="menu"
 				>
 					{nav.brandExtensions.map((brandExtension) => (
@@ -369,9 +358,11 @@ export const Columns = ({
 						>
 							<a
 								className="selectableMenuItem"
-								css={brandExtensionLinkBasedOnHasPageSkin(
-									hasPageSkin,
-								)}
+								css={[
+									brandExtensionLink,
+									hasPageSkin &&
+										brandExtensionLinkWithPageSkin,
+								]}
 								href={brandExtension.url}
 								key={brandExtension.title}
 								role="menuitem"

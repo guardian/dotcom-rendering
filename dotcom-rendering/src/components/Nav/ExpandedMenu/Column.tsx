@@ -201,8 +201,7 @@ const columnStyle = css`
 `;
 
 const columnStyleWithPageSkin = css`
-	${columnStyle};
-	${from.leftCol}, ${from.wide} {
+	${from.leftCol} {
 		width: 134px;
 
 		:first-of-type {
@@ -210,9 +209,6 @@ const columnStyleWithPageSkin = css`
 		}
 	}
 `;
-
-const columnStyleBasedOnHasPageSkin = (hasPageSkin?: boolean) =>
-	hasPageSkin ? columnStyleWithPageSkin : columnStyle;
 
 export const Column = ({
 	column,
@@ -234,7 +230,11 @@ export const Column = ({
 
 	return (
 		<li
-			css={[columnStyleBasedOnHasPageSkin(hasPageSkin), pillarDivider]}
+			css={[
+				columnStyle,
+				hasPageSkin && columnStyleWithPageSkin,
+				pillarDivider,
+			]}
 			role="none"
 		>
 			{/*

@@ -76,7 +76,6 @@ const pillarsStyles = (isImmersive: boolean) => css`
 `;
 
 const pillarsStylesWithPageSkin = css`
-	${pillarsStyles(false)};
 	li {
 		float: left;
 		display: block;
@@ -148,7 +147,6 @@ const pillarStyle = css`
 `;
 
 const pillarStyleWithPageSkin = css`
-	${pillarStyle};
 	:first-of-type {
 		margin-left: -20px;
 		width: ${preDesktopPillarWidth};
@@ -245,7 +243,6 @@ const linkStyle = (isImmersive: boolean) => css`
 `;
 
 const linkStyleWithPageSkin = (isImmersive: boolean) => css`
-	${linkStyle(isImmersive)};
 	${from.wide} {
 		padding-top: ${isImmersive ? '9px' : '5px'};
 		font-size: 22px;
@@ -283,20 +280,6 @@ const forceUnderline = css`
 const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 	i !== noOfPillars - 1;
 
-const pillarsStylesBasedOnPageSkin = (
-	isImmersive: boolean,
-	hasPageSkin?: boolean,
-) => (hasPageSkin ? pillarsStylesWithPageSkin : pillarsStyles(isImmersive));
-
-const pillarStyleBasedOnPageSkin = (hasPageSkin?: boolean) =>
-	hasPageSkin ? pillarStyleWithPageSkin : pillarStyle;
-
-const linkStyleBasedOnHasPageSkin = (
-	isImmersive: boolean,
-	hasPageSkin?: boolean,
-) =>
-	hasPageSkin ? linkStyleWithPageSkin(isImmersive) : linkStyle(isImmersive);
-
 type Props = {
 	isImmersive?: boolean;
 	isTopNav?: boolean;
@@ -318,20 +301,24 @@ export const Pillars = ({
 }: Props) => (
 	<ul
 		data-testid="pillar-list"
-		css={pillarsStylesBasedOnPageSkin(isImmersive, hasPageSkin)}
+		css={[
+			pillarsStyles(isImmersive),
+			hasPageSkin && pillarsStylesWithPageSkin,
+		]}
 	>
 		{pillars.map((p, i) => {
 			const isSelected = p.pillar === selectedPillar;
 			const showDivider =
 				showLastPillarDivider || isNotLastPillar(i, pillars.length);
 			return (
-				<li key={p.title} css={pillarStyleBasedOnPageSkin(hasPageSkin)}>
+				<li
+					key={p.title}
+					css={[pillarStyle, hasPageSkin && pillarStyleWithPageSkin]}
+				>
 					<a
 						css={[
-							linkStyleBasedOnHasPageSkin(
-								isImmersive,
-								hasPageSkin,
-							),
+							linkStyle(isImmersive),
+							hasPageSkin && linkStyleWithPageSkin(isImmersive),
 							pillarUnderline(
 								decidePalette({
 									display: ArticleDisplay.Standard,

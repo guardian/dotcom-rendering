@@ -56,7 +56,6 @@ const columnStyle = css`
 `;
 
 const columnStyleWithPageSkin = css`
-	${columnStyle};
 	${from.leftCol} {
 		width: 140px;
 	}
@@ -184,9 +183,6 @@ const shareIconStyles = css`
 	width: 28px;
 `;
 
-const columnStyleBasedOnHasPageSkin = (hasPageSkin?: boolean) =>
-	hasPageSkin ? columnStyleWithPageSkin : columnStyle;
-
 type Props = {
 	otherLinks: LinkType[];
 	brandExtensions: LinkType[];
@@ -212,7 +208,8 @@ export const MoreColumn = ({
 		<>
 			<li
 				css={[
-					columnStyleBasedOnHasPageSkin(hasPageSkin),
+					columnStyle,
+					hasPageSkin && columnStyleWithPageSkin,
 					pillarDivider,
 					pillarDividerExtended,
 				]}
@@ -250,7 +247,7 @@ export const MoreColumn = ({
 			{/** Social buttons hidden from menus from desktop */}
 			<Hide from="desktop">
 				<li
-					css={columnStyleBasedOnHasPageSkin(hasPageSkin)}
+					css={[columnStyle, hasPageSkin && columnStyleWithPageSkin]}
 					role="none"
 				>
 					<ul css={[columnLinks]} role="menu">
