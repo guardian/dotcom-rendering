@@ -94,7 +94,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 				/>
 			</Island>
 
-			<Island priority="critical" clientOnly={true}>
+			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
 			<Island

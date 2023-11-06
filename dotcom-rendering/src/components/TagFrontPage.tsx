@@ -85,7 +85,7 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 					isDev={!!tagFront.config.isDev}
 				/>
 			</Island>
-			<Island priority="critical" clientOnly={true}>
+			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
 			<TagFrontLayout tagFront={tagFront} NAV={NAV} />
