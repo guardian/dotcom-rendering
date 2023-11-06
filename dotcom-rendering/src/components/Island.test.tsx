@@ -20,7 +20,9 @@ import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
+import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
+import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { Snow } from './Snow.importable';
@@ -257,6 +259,16 @@ describe('Island: server-side rendering', () => {
 		expect(() => renderToString(<RecipeMultiplier />)).not.toThrow();
 	});
 
+	test('SendTargetingParams', () => {
+		expect(() =>
+			renderToString(
+				<SendTargetingParams
+					editionCommercialProperties={{ adTargeting: [] }}
+				/>,
+			),
+		).not.toThrow();
+	});
+
 	test('SetABTests', () => {
 		expect(() =>
 			renderToString(
@@ -264,6 +276,18 @@ describe('Island: server-side rendering', () => {
 					isDev={false}
 					pageIsSensitive={false}
 					abTestSwitches={{}}
+				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('SetAdTargeting', () => {
+		expect(() =>
+			renderToString(
+				<SetAdTargeting
+					adTargeting={{
+						disableAds: true,
+					}}
 				/>,
 			),
 		).not.toThrow();

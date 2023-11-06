@@ -170,11 +170,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				</>
 			)}
 			{renderingTarget === 'Web' ? (
-				<Island clientOnly={true} priority="critical">
+				<Island priority="critical">
 					<SetAdTargeting adTargeting={adTargeting} />
 				</Island>
 			) : (
-				<Island clientOnly={true} priority="critical">
+				<Island priority="critical">
 					<SendTargetingParams
 						editionCommercialProperties={
 							article.commercialProperties[article.editionId]
