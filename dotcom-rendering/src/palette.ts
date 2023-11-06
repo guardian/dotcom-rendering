@@ -133,6 +133,7 @@ const followTextLight = ({ design }: ArticleFormat): string => {
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.LiveBlog:
+		case ArticleDesign.Picture:
 			return sourcePalette.neutral[97];
 		default:
 			return sourcePalette.neutral[7];
