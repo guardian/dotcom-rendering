@@ -701,6 +701,51 @@ const standfirstTextDark = ({
 	}
 };
 
+const cardBorderTopLight = (format: ArticleFormat): string => {
+	return decidePalette(format).topBar.card;
+};
+const cardBorderTopDark = (): string => {
+	return sourcePalette.neutral[20];
+};
+const cardAgeTextLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.cardFooter;
+};
+const cardAgeTextDark = (): string => {
+	return sourcePalette.neutral[60];
+};
+const cardBackgroundLight = (format: ArticleFormat): string => {
+	return decidePalette(format).background.card;
+};
+const cardBackgroundDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[100];
+				case Pillar.Sport:
+					return sourcePalette.sport[100];
+				case Pillar.Culture:
+					return sourcePalette.culture[100];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[100];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[200];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[100];
+				case Pillar.News:
+				default:
+					return sourcePalette.news[100];
+			}
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[10];
+	}
+
+	return sourcePalette.neutral[0];
+};
+
 // ----- Palette ----- //
 
 /**
@@ -865,6 +910,18 @@ const paletteColours = {
 	'--follow': {
 		light: followLight,
 		dark: followDark,
+	},
+	'--card-border-top': {
+		light: cardBorderTopLight,
+		dark: cardBorderTopDark,
+	},
+	'--card-age-text': {
+		light: cardAgeTextLight,
+		dark: cardAgeTextDark,
+	},
+	'--card-background': {
+		light: cardBackgroundLight,
+		dark: cardBackgroundDark,
 	},
 } satisfies PaletteColours;
 

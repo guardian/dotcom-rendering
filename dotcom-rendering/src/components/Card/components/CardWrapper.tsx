@@ -2,9 +2,10 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { from, neutral } from '@guardian/source-foundations';
-import { decidePalette } from '../../../lib/decidePalette';
 import type { DCRContainerPalette } from '../../../types/front';
 import type { Palette } from '../../../types/palette';
+import { palette as darkLightPalette } from '../../../palette';
+import { decidePalette } from '../../../lib/decidePalette';
 import { FormatBoundary } from '../../FormatBoundary';
 
 type Props = {
@@ -54,7 +55,9 @@ const cardStyles = (
 		/* a tag specific styles */
 		color: inherit;
 		text-decoration: none;
-		background-color: ${isDynamo ? 'transparent' : palette.background.card};
+		background-color: ${isDynamo
+			? 'transparent'
+			: darkLightPalette('--card-background')};
 	`;
 
 	const decidePaletteBrightness = (thePalette: DCRContainerPalette) => {
@@ -149,7 +152,7 @@ const topBarStyles = ({
 	const baseStyles = css`
 		background-color: ${isDynamo
 			? palette.text.dynamoKicker
-			: palette.topBar.card};
+			: darkLightPalette('--card-border-top')};
 		content: '';
 		height: 1px;
 		z-index: 2;

@@ -7,6 +7,7 @@ import type { DCRContainerPalette } from '../../../types/front';
 import type { Palette } from '../../../types/palette';
 import { Island } from '../../Island';
 import { RelativeTime } from '../../RelativeTime.importable';
+import { palette as darkLightPalette } from '../../../palette';
 
 type Props = {
 	format: ArticleFormat;
@@ -26,7 +27,7 @@ const ageStyles = (
 		margin-top: -4px;
 		color: ${isDynamo
 			? palette.text.dynamoHeadline
-			: palette.text.cardFooter};
+			: darkLightPalette('--card-age-text')};
 
 		/* Provide side padding for positioning and also to keep spacing
     between any sibings (like Lines) */
@@ -37,7 +38,7 @@ const ageStyles = (
 		}
 
 		svg {
-			fill: ${palette.text.cardFooter};
+			fill: ${darkLightPalette('--card-age-text')};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;
