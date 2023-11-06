@@ -134,7 +134,7 @@ export const InlineStory = () => {
 	);
 };
 InlineStory.storyName = "Click to view in 'inline' role";
-InlineStory.decorators = [splitTheme(defaultFormat)];
+InlineStory.decorators = [splitTheme([defaultFormat])];
 
 export const SupportingStory = () => {
 	return (
@@ -149,7 +149,7 @@ export const SupportingStory = () => {
 	);
 };
 SupportingStory.storyName = "Click to view in 'supporting' role";
-SupportingStory.decorators = [splitTheme(defaultFormat)];
+SupportingStory.decorators = [splitTheme([defaultFormat])];
 
 export const ShowcaseStory = () => {
 	return (
@@ -164,7 +164,7 @@ export const ShowcaseStory = () => {
 	);
 };
 ShowcaseStory.storyName = "Click to view in 'showcase' role";
-ShowcaseStory.decorators = [splitTheme(defaultFormat)];
+ShowcaseStory.decorators = [splitTheme([defaultFormat])];
 
 export const HalfWidthStory = () => {
 	return (
@@ -179,7 +179,7 @@ export const HalfWidthStory = () => {
 	);
 };
 HalfWidthStory.storyName = "Click to view in 'halfWidth' role";
-HalfWidthStory.decorators = [splitTheme(defaultFormat)];
+HalfWidthStory.decorators = [splitTheme([defaultFormat])];
 
 export const ThumbnailStory = () => {
 	return (
@@ -194,7 +194,7 @@ export const ThumbnailStory = () => {
 	);
 };
 ThumbnailStory.storyName = "Click to view in 'thumbnail' role";
-ThumbnailStory.decorators = [splitTheme(defaultFormat)];
+ThumbnailStory.decorators = [splitTheme([defaultFormat])];
 
 const Inline: RoleType = 'inline';
 
@@ -655,7 +655,7 @@ export const EmbedBlockComponentStory = () => {
 };
 EmbedBlockComponentStory.storyName =
 	'Click to view wrapping EmbedBlockComponent';
-EmbedBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+EmbedBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
 export const UnsafeEmbedBlockComponentStory = () => {
 	return (
@@ -793,7 +793,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 };
 UnsafeEmbedBlockComponentStory.storyName =
 	'Click to view wrapping UnsafeEmbedBlockComponent';
-UnsafeEmbedBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+UnsafeEmbedBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
 export const VimeoBlockComponentStory = () => {
 	return (
@@ -848,7 +848,7 @@ export const VimeoBlockComponentStory = () => {
 };
 VimeoBlockComponentStory.storyName =
 	'Click to view wrapping VimeoBlockComponent';
-VimeoBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+VimeoBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
 export const DocumentBlockComponentStory = () => {
 	return (
@@ -901,7 +901,7 @@ export const DocumentBlockComponentStory = () => {
 };
 DocumentBlockComponentStory.storyName =
 	'Click to view wrapping DocumentBlockComponentStory';
-DocumentBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+DocumentBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
 export const SoundCloudBlockComponentStory = () => {
 	return (
@@ -972,7 +972,7 @@ export const SoundCloudBlockComponentStory = () => {
 };
 SoundCloudBlockComponentStory.storyName =
 	'Click to view wrapping SoundCloudBlockComponent';
-SoundCloudBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+SoundCloudBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
 export const SpotifyBlockComponentStory = () => {
 	return (
@@ -1030,7 +1030,7 @@ export const SpotifyBlockComponentStory = () => {
 
 SpotifyBlockComponentStory.storyName =
 	'Click to view wrapping SpotifyBlockComponent';
-SpotifyBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+SpotifyBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
 export const TweetBlockComponentStory = () => {
 	return (
@@ -1076,7 +1076,7 @@ export const TweetBlockComponentStory = () => {
 };
 TweetBlockComponentStory.storyName =
 	'Click to view wrapping TweetBlockComponent';
-TweetBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+TweetBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
 export const InstagramBlockComponentStory = () => {
 	return (
@@ -1120,7 +1120,7 @@ export const InstagramBlockComponentStory = () => {
 };
 InstagramBlockComponentStory.storyName =
 	'Click to view wrapping InstagramBlockComponent';
-InstagramBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+InstagramBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
 export const MapBlockComponentStory = () => {
 	return (
@@ -1176,7 +1176,7 @@ export const MapBlockComponentStory = () => {
 };
 MapBlockComponentStory.storyName =
 	'Click to view wrapping MapEmbedBlockComponent';
-MapBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+MapBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
 export const VineBlockComponentStory = () => {
 	return (
@@ -1224,4 +1224,4 @@ export const VineBlockComponentStory = () => {
 	);
 };
 VineBlockComponentStory.storyName = 'Click to view wrapping VineBlockComponent';
-VineBlockComponentStory.decorators = [splitTheme(defaultFormat)];
+VineBlockComponentStory.decorators = [splitTheme([defaultFormat])];

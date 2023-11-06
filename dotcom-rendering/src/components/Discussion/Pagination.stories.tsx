@@ -59,7 +59,7 @@ export const WithBackground = () => {
 	);
 };
 WithBackground.storyName = 'with a dark background';
-WithBackground.decorators = [splitTheme(articleFormat)];
+WithBackground.decorators = [splitTheme([articleFormat])];
 
 export const ThreePages = () => {
 	const [page, setCurrentPage] = useState(1);

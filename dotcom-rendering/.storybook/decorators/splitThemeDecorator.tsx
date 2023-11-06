@@ -1,44 +1,128 @@
 // ----- Imports ----- //
 import { css } from '@emotion/react';
-import { paletteDeclarations } from '../../src/palette';
-import { palette as sourcePalette, space } from '@guardian/source-foundations';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
+import {
+	palette as sourcePalette,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import { Decorator } from '@storybook/react';
-import { ArticleFormat } from '@guardian/libs';
+import { paletteDeclarations } from '../../src/palette';
 
 interface Orientation {
 	orientation?: 'horizontal' | 'vertical';
 }
 
 const headerCss = css`
-	font-size: 18px;
-	width: 100%;
+	${textSans.large({ fontWeight: 'bold' })}
 	text-align: center;
-	font-weight: bold;
-	padding-bottom: ${space[5]}px;
+	padding: ${space[2]}px;
 `;
 
-const splitCss = css`
-	padding: ${space[4]}px;
+const styles = css`
+	display: grid;
+	max-width: 100%;
 `;
 
-const darkStoryCss = css`
-	background-color: ${sourcePalette.neutral[0]};
-	color: ${sourcePalette.neutral[100]};
-`;
-const lightStoryCss = css`
-	background-color: ${sourcePalette.neutral[100]};
-	color: ${sourcePalette.neutral[0]};
-`;
-const rowCss = css`
-	display: flex;
-	flex-direction: row;
-`;
-const columnCss = css`
-	display: flex;
-	flex-direction: column;
-`;
-
+const FormatHeading = ({ format }: { format: ArticleFormat }) => (
+	<h3
+		css={css`
+			${textSans.medium()}
+			text-align: center;
+			padding: ${space[1]}px;
+			opacity: 0.75;
+		`}
+	>
+		{[
+			`Display: ${ArticleDisplay[format.display]}`,
+			`Design: ${ArticleDesign[format.design]}`,
+			`Theme: ${Pillar[format.theme] || ArticleSpecial[format.theme]}`,
+		]
+			.map((line) => line.replaceAll(' ', ' ')) // non-breaking spaces
+			.join(', ')}
+	</h3>
+);
 // ----- Decorators ----- //
+
+/** A list of the most typical formats */
+const defaultFormats = [
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.News,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.Sport,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.Opinion,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.Culture,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.Lifestyle,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticleSpecial.Labs,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticleSpecial.SpecialReport,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticleSpecial.SpecialReportAlt,
+	},
+	{
+		display: ArticleDisplay.Immersive,
+		design: ArticleDesign.Standard,
+		theme: Pillar.News,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Gallery,
+		theme: Pillar.News,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.LiveBlog,
+		theme: Pillar.News,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.LiveBlog,
+		theme: Pillar.Sport,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.DeadBlog,
+		theme: Pillar.News,
+	},
+	{
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.DeadBlog,
+		theme: Pillar.Sport,
+	},
+] as const satisfies readonly ArticleFormat[];
 
 /**
  * Creates storybook decorator used to render a component twice
@@ -47,35 +131,53 @@ const columnCss = css`
  */
 export const splitTheme =
 	(
-		format: ArticleFormat,
+		formats: readonly [ArticleFormat, ...ArticleFormat[]] = defaultFormats,
 		{ orientation = 'horizontal' }: Orientation = {},
 	): Decorator =>
 	(Story) =>
 		(
-			<>
-				<div css={[orientation === 'horizontal' ? rowCss : columnCss]}>
-					<div
-						className="left-lightTheme"
-						css={[
-							splitCss,
-							lightStoryCss,
-							css(paletteDeclarations(format, 'light')),
-						]}
-					>
-						<div css={headerCss}>Light Theme ☀️</div>
-						<Story />
-					</div>
-					<div
-						className="right-darkTheme"
-						css={[
-							splitCss,
-							darkStoryCss,
-							css(paletteDeclarations(format, 'dark')),
-						]}
-					>
-						<div css={headerCss}>Dark Theme 🌙</div>
-						<Story />
-					</div>
+			<div
+				css={styles}
+				style={{
+					gridTemplateColumns:
+						orientation === 'horizontal' ? '1fr 1fr' : '1fr',
+				}}
+			>
+				<div
+					className="light"
+					css={[
+						css`
+							background-color: ${sourcePalette.neutral[100]};
+							color: ${sourcePalette.neutral[0]};
+						`,
+						css(paletteDeclarations(defaultFormats[0], 'light')),
+					]}
+				>
+					<h2 css={headerCss}>Light Theme ☀️</h2>
+					{formats.map((format) => (
+						<div css={css(paletteDeclarations(format, 'light'))}>
+							<FormatHeading format={format} />
+							<Story format={format} />
+						</div>
+					))}
 				</div>
-			</>
+				<div
+					className="dark"
+					css={[
+						css`
+							background-color: ${sourcePalette.neutral[0]};
+							color: ${sourcePalette.neutral[100]};
+						`,
+						css(paletteDeclarations(defaultFormats[0], 'dark')),
+					]}
+				>
+					<h2 css={headerCss}>Dark Theme 🌙</h2>
+					{formats.map((format) => (
+						<div css={css(paletteDeclarations(format, 'dark'))}>
+							<FormatHeading format={format} />
+							<Story format={format} />
+						</div>
+					))}
+				</div>
+			</div>
 		);

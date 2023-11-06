@@ -17,11 +17,13 @@ export const NotFollowing = () => {
 	);
 };
 NotFollowing.decorators = [
-	splitTheme({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	}),
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+	]),
 ];
 
 export const Following = () => {
@@ -34,9 +36,11 @@ export const Following = () => {
 	);
 };
 Following.decorators = [
-	splitTheme({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.Opinion,
-	}),
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Opinion,
+		},
+	]),
 ];

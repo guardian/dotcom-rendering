@@ -20,11 +20,13 @@ export default {
 	},
 	decorators: [
 		splitTheme(
-			{
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.News,
-			},
+			[
+				{
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: Pillar.News,
+				},
+			],
 			{ orientation: 'vertical' },
 		),
 	],

@@ -64,7 +64,7 @@ export const defaultStory = () => {
 };
 
 defaultStory.storyName = 'default';
-defaultStory.decorators = [splitTheme(format)];
+defaultStory.decorators = [splitTheme([format])];
 
 export const immersive = () => {
 	return (
@@ -78,7 +78,7 @@ export const immersive = () => {
 };
 
 immersive.storyName = 'immersive';
-immersive.decorators = [splitTheme(immersiveDisplayFormat)];
+immersive.decorators = [splitTheme([immersiveDisplayFormat])];
 
 export const numberedList = () => {
 	return (
@@ -92,4 +92,4 @@ export const numberedList = () => {
 };
 
 numberedList.storyName = 'numberedList';
-numberedList.decorators = [splitTheme(numberedListDisplayFormat)];
+numberedList.decorators = [splitTheme([numberedListDisplayFormat])];
