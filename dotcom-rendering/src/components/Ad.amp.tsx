@@ -111,7 +111,7 @@ export const Ad = ({
 			// corresponding primary size.
 			data-multi-size-validation="false"
 			data-npa-on-unknown-consent={true}
-			data-loading-strategy="0.5"
+			data-loading-strategy="prefer-viewability-over-views"
 			data-enable-refresh="30"
 			layout="fixed"
 			type="doubleclick"

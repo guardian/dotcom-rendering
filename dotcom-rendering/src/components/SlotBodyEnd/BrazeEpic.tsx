@@ -9,11 +9,9 @@ import { submitComponentEvent } from '../../client/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import { lazyFetchEmailWithTimeout } from '../../lib/contributions';
+import { getOptionsHeadersWithOkta } from '../../lib/identity';
 import type { CanShowResult } from '../../lib/messagePicker';
-import {
-	getOptionsHeadersWithOkta,
-	useAuthStatus,
-} from '../../lib/useAuthStatus';
+import { useAuthStatus } from '../../lib/useAuthStatus';
 import { useIsInView } from '../../lib/useIsInView';
 import { useOnce } from '../../lib/useOnce';
 import type { TagType } from '../../types/tag';

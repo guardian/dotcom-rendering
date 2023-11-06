@@ -103,10 +103,12 @@ describe('Why do wombats do square poos?', function () {
 	it('when I get the answer wrong, it should display the right answer when I click Reveal', function () {
 		cy.visit(`/Article/${quizAtomUrl}`);
 		// Wait for hydration
-		cy.get('gu-island[name=KnowledgeQuizAtom]')
-			.first()
-			.scrollIntoView()
-			.should('have.attr', 'data-island-status', 'hydrated');
+		cy.get('gu-island[name=KnowledgeQuizAtom]').first().scrollIntoView();
+		cy.get('gu-island[name=KnowledgeQuizAtom]').should(
+			'have.attr',
+			'data-island-status',
+			'hydrated',
+		);
 		// Establish that the elements showing the results are not present
 		cy.get('[data-atom-type=knowledgequiz] fieldset')
 			.first()
@@ -131,10 +133,12 @@ describe('Why do wombats do square poos?', function () {
 	it('when I get the answer right, it should commend my skills when I click Reveal', function () {
 		cy.visit(`/Article/${quizAtomUrl}`);
 		// Wait for hydration
-		cy.get('gu-island[name=KnowledgeQuizAtom]')
-			.first()
-			.scrollIntoView()
-			.should('have.attr', 'data-island-status', 'hydrated');
+		cy.get('gu-island[name=KnowledgeQuizAtom]').first().scrollIntoView();
+		cy.get('gu-island[name=KnowledgeQuizAtom]').should(
+			'have.attr',
+			'data-island-status',
+			'hydrated',
+		);
 		// Establish that the elements showing the results are not present
 		cy.get('[data-atom-type=knowledgequiz] fieldset')
 			.first()

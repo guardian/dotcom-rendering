@@ -10,7 +10,7 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { Fragment, useRef } from 'react';
+import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { Footer } from '../components/Footer';
@@ -30,6 +30,7 @@ import {
 	getMerchHighPosition,
 	getTagFrontMobileAdPositions,
 } from '../lib/getAdPositions';
+import { getTaggedFrontsBannerAdPositions } from '../lib/getFrontsBannerAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagFrontType } from '../types/tagFront';
 import {
@@ -120,8 +121,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 		tagFront.groupedTrails.length,
 	);
 
-	const numBannerAdsInserted = useRef(0);
-
 	const {
 		config: { switches, hasPageSkin, isPaidContent },
 	} = tagFront;
@@ -129,6 +128,10 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 	const showBannerAds = !!switches.frontsBannerAds;
 
 	const renderAds = canRenderAds(tagFront);
+
+	const desktopAdPositions = getTaggedFrontsBannerAdPositions(
+		tagFront.groupedTrails.length,
+	);
 
 	const mobileAdPositions = renderAds
 		? getTagFrontMobileAdPositions(
@@ -287,11 +290,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
-								numBannerAdsInserted,
 								showBannerAds,
 								index,
-								tagFront.pageId,
-								null,
+								desktopAdPositions,
 							)}
 							<FrontSection
 								leftContent={

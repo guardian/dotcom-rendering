@@ -1,4 +1,4 @@
-import type { AuthStatus } from '../lib/useAuthStatus';
+import type { AuthStatus } from '../lib/identity';
 import { MyAccount } from './HeaderTopBarMyAccount';
 
 export default {

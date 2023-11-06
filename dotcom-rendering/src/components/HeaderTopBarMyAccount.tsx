@@ -3,6 +3,11 @@ import { joinUrl } from '@guardian/libs';
 import { brand, from, neutral, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
+import type {
+	AuthStatus,
+	SignedInWithCookies,
+	SignedInWithOkta,
+} from '../lib/identity';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 import {
 	addNotificationsToDropdownLinks,
@@ -11,11 +16,6 @@ import {
 import type { Notification } from '../lib/notification';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useApi } from '../lib/useApi';
-import type {
-	AuthStatus,
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { RenderingTarget } from '../types/renderingTarget';

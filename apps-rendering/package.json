@@ -108,7 +108,6 @@
 		"react-dom": "^18.2.0",
 		"react-test-renderer": "^18.2.0",
 		"require-from-string": "^2.0.2",
-		"source-map-support": "^0.5.21",
 		"storybook": "^7.2.0",
 		"thrift": "^0.16.0",
 		"ts-jest": "^28.0.7",

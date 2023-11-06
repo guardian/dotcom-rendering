@@ -4,16 +4,26 @@
 
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
+import { AlreadyVisited } from './AlreadyVisited.importable';
+import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { ConfigProvider } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
+import { FocusStyles } from './FocusStyles.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
+import { LightboxHash } from './LightboxHash.importable';
+import { LightboxJavascript } from './LightboxJavascript.importable';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
+import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
+import { RecipeMultiplier } from './RecipeMultiplier.importable';
+import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
+import { SetAdTargeting } from './SetAdTargeting.importable';
+import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { Snow } from './Snow.importable';
 import { StickyBottomBanner } from './StickyBottomBanner.importable';
@@ -80,6 +90,22 @@ const Mock = () => <>🏝️</>;
 // Jest tests
 
 describe('Island: server-side rendering', () => {
+	test('AlreadyVisited', () => {
+		expect(() => renderToString(<AlreadyVisited />)).not.toThrow();
+	});
+
+	test('BrazeMessaging', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<BrazeMessaging idApiUrl={''} />
+				</ConfigProvider>,
+			),
+		).not.toThrow();
+	});
+
 	test('CardCommentCount', () => {
 		expect(() =>
 			renderToString(
@@ -106,6 +132,10 @@ describe('Island: server-side rendering', () => {
 				</ConfigProvider>,
 			),
 		).not.toThrow();
+	});
+
+	test('FocusStyles', () => {
+		expect(() => renderToString(<FocusStyles />)).not.toThrow();
 	});
 
 	test('InteractiveSupportButton', () => {
@@ -148,6 +178,24 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
+	test('LightboxHash', () => {
+		expect(() => renderToString(<LightboxHash />)).not.toThrow();
+	});
+
+	test('LightboxJavascript', () => {
+		expect(() =>
+			renderToString(
+				<LightboxJavascript
+					format={{
+						theme: Pillar.Culture,
+						design: ArticleDesign.PhotoEssay,
+						display: ArticleDisplay.Showcase,
+					}}
+					images={[]}
+				/>,
+			),
+		).not.toThrow();
+	});
 	test('Liveness', () => {
 		expect(() =>
 			renderToString(
@@ -199,6 +247,28 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
+	test('ReaderRevenueDev', () => {
+		expect(() =>
+			renderToString(
+				<ReaderRevenueDev shouldHideReaderRevenue={false} />,
+			),
+		).not.toThrow();
+	});
+
+	test('RecipeMultiplier', () => {
+		expect(() => renderToString(<RecipeMultiplier />)).not.toThrow();
+	});
+
+	test('SendTargetingParams', () => {
+		expect(() =>
+			renderToString(
+				<SendTargetingParams
+					editionCommercialProperties={{ adTargeting: [] }}
+				/>,
+			),
+		).not.toThrow();
+	});
+
 	test('SetABTests', () => {
 		expect(() =>
 			renderToString(
@@ -207,6 +277,37 @@ describe('Island: server-side rendering', () => {
 					pageIsSensitive={false}
 					abTestSwitches={{}}
 				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('SetAdTargeting', () => {
+		expect(() =>
+			renderToString(
+				<SetAdTargeting
+					adTargeting={{
+						disableAds: true,
+					}}
+				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('SignInGateSelector', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<SignInGateSelector
+						contentType={''}
+						tags={[]}
+						isPaidContent={false}
+						isPreview={false}
+						pageId={''}
+						switches={{}}
+					/>
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});

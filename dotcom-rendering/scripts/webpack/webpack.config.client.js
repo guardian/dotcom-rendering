@@ -37,9 +37,9 @@ const generateName = (build) => {
 const getEntryIndex = (build) => {
 	switch (build) {
 		case 'apps':
-			return './src/client/index.apps.ts';
+			return './src/client/main.apps.ts';
 		default:
-			return './src/client/index.ts';
+			return './src/client/main.web.ts';
 	}
 };
 
@@ -92,7 +92,7 @@ const getLoaders = (build) => {
 module.exports = ({ build, sessionId }) => ({
 	entry: {
 		index: getEntryIndex(build),
-		debug: './src/client/debug/index.ts',
+		debug: './src/client/debug/debug.ts',
 	},
 	optimization:
 		// We don't need chunk optimization for apps as we use the 'LimitChunkCountPlugin' to produce just 1 chunk
