@@ -1,12 +1,11 @@
-import { Option, OptionKind, some } from "@guardian/types";
+import type { Option} from "@guardian/types";
+import { OptionKind } from "@guardian/types";
 import { ArticleElementRole } from "@guardian/libs";
 import { Optional } from "../optional";
 import { ImageSubtype } from "../image/image";
-import { parse } from "../client/parser";
-import { Cartoon } from "../cartoon";
-import { MainMedia, MainMediaKind } from "../mainMedia";
-
-const parser = new DOMParser();
+import type { Cartoon } from "../cartoon";
+import type { MainMedia} from "../mainMedia";
+import { MainMediaKind } from "../mainMedia";
 
 const cartoonData: Cartoon = {
 	images: [
@@ -50,12 +49,6 @@ const cartoonData: Cartoon = {
 			imageSubtype: Optional.some(ImageSubtype.Jpeg)
 		},
 	],
-	caption: parse(parser)('Unregulated AI meets a trampoline without a net').toOption(),
-	nativeCaption: some('Illustration: Edith Pritchett/The Guardian'),
-	credit: {
-		kind: OptionKind.Some,
-		value: 'Illustration: Edith Pritchett/The Guardian'
-	},
 }
 
 const cartoonMainMedia: Option<MainMedia> = {

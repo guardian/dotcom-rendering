@@ -793,8 +793,6 @@ describe('cartoon main media', () => {
 			kind: MainMediaKind.Cartoon,
 			cartoon: {
 				images: [],
-				caption: none,
-				credit: none,
 			}
 		}));
 	})
