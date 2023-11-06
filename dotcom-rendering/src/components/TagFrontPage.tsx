@@ -54,18 +54,10 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island
-				priority="feature"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<AlreadyVisited />
 			</Island>
-			<Island
-				priority="feature"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
 			<Island priority="critical" clientOnly={true}>
