@@ -167,12 +167,8 @@ export const FrontPagination = ({
 							)}
 							{shouldSuffixDots && (
 								<span
-									css={[
-										paginationDotsCss,
-										css`
-											margin-right: ${space[1]}px;
-										`,
-									]}
+									css={paginationDotsCss}
+									style={{ marginRight: `${space[1]}px` }}
 								>
 									...
 								</span>
