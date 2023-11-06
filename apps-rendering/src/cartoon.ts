@@ -1,6 +1,6 @@
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import type { Image as ImageData } from 'image/image';
-import { Option, fromNullable } from '@guardian/types';
+import { Option, fromNullable, map } from '@guardian/types';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { CartoonImage } from "@guardian/content-api-models/v1/cartoonImage";
@@ -14,8 +14,9 @@ const DEFAULT_VARIANT_SIZE: VariantSize = "small"
 
 interface Cartoon {
 	images: ImageData[];
-	caption: Option<string>;
-	credit: Option<string>
+	caption: Option<DocumentFragment>;
+	nativeCaption: Option<string>;
+	credit: Option<string>;
 }
 
 const parseCartoonImageSubtype = (cartoonImage: CartoonImage): Optional<ImageSubtype> => {
@@ -36,8 +37,8 @@ const parseCartoonImage = (cartoonImage: CartoonImage, salt: string, alt?: strin
 		src: src(
 			salt,
 			cartoonImage.file,
-			500, // TODO: check this is a sensible width
-			Dpr.One, // TODO: check this is a sensible dpr
+			900,
+			Dpr.One,
 		),
 		...srcsets(cartoonImage.file, salt),
 		alt: fromNullable(alt),
@@ -49,17 +50,19 @@ const parseCartoonImage = (cartoonImage: CartoonImage, salt: string, alt?: strin
 }
 
 const parseCartoon =
-	({ salt }: Context) =>
+	({ docParser, salt }: Context) =>
 		(element: BlockElement): Optional<Cartoon> => {
 			const data: CartoonElementFields | undefined = element.cartoonTypeData
 			const images = (data?.variants ?? [])
 				.find(v => v.viewportSize === DEFAULT_VARIANT_SIZE)
 				?.images
 				.map(img => parseCartoonImage(img, salt, data?.alt))
+			const credit = data?.displayCredit ? data?.credit : undefined;
 
 			return Optional.some({
-				credit: fromNullable(data?.credit),
-				caption: fromNullable(data?.caption),
+				credit: fromNullable(credit),
+				caption: map(docParser)(fromNullable(data?.caption)),
+				nativeCaption: fromNullable(data?.caption),
 				images: images ?? []
 			});
 		};

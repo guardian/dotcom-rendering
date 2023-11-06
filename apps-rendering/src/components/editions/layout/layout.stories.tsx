@@ -20,12 +20,14 @@ import {
 	letter,
 	matchReport,
 	media,
+	parseHtml,
 	review,
 } from 'fixtures/item';
 import type { Image } from 'image';
 import { Optional } from 'optional';
 import type { ReactElement } from 'react';
 import Layout from '.';
+import { cartoonMainMedia } from "../../../fixtures/cartoon";
 
 // ----- Setup ------ //
 
@@ -198,6 +200,22 @@ const Cartoon = (): ReactElement => (
 	/>
 );
 
+const MultipanelCartoon = (): ReactElement => (
+	<Layout
+		item={{
+			...cartoon,
+			headline: 'Unregulated AI meets a trampoline without a net: Edith Pritchett\'s week in Venn diagrams – cartoon',
+			standfirst: Optional.none(),
+			webUrl: 'https://www.theguardian.com',
+			tags: [getTag('type/picture', 'cartoon')],
+			mainMedia: cartoonMainMedia,
+			bylineHtml: parseHtml(
+				'<a href="https://theguardian.com">Edith Pritchett</a>',
+			).toOption()
+		}}
+	/>
+);
+
 const Gallery = (): ReactElement => (
 	<Layout
 		item={{
@@ -243,4 +261,5 @@ export {
 	Correction,
 	MatchReport,
 	Cartoon,
+	MultipanelCartoon,
 };

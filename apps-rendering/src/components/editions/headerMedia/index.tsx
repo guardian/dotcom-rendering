@@ -24,6 +24,7 @@ import type { FC } from 'react';
 import FootballScores from '../footballScores';
 import { wideImageWidth } from '../styles';
 import Video from '../video';
+import Cartoon from "../cartoon";
 
 // ----- Styles ----- //
 
@@ -248,8 +249,10 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				);
 			}
 			case MainMediaKind.Cartoon: {
-				// TODO implement cartoon render for Editions app
-				return null;
+				const { cartoon } = media;
+				return (
+					<Cartoon cartoon={cartoon} format={format}></Cartoon>
+				);
 			}
 		}
 	});
