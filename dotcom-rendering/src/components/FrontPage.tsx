@@ -60,11 +60,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<AlreadyVisited />
 			</Island>
-			<Island
-				priority="enhancement"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
 			<Island priority="critical" clientOnly={true}>

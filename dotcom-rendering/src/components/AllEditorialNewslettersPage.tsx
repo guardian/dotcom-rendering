@@ -48,11 +48,7 @@ export const AllEditorialNewslettersPage = ({
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<AlreadyVisited />
 			</Island>
-			<Island
-				priority="feature"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
 			<Island priority="critical" clientOnly={true}>

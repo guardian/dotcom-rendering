@@ -110,11 +110,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				</>
 			)}
 
-			<Island
-				priority="enhancement"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
 			{(format.design === ArticleDesign.LiveBlog ||
