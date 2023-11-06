@@ -98,6 +98,8 @@ export const Ad = ({
 		adType,
 	);
 
+	let refreshValue = id === 'ad-1' || id === 'ad-2' ? 'false' : '30';
+
 	return (
 		<amp-ad
 			data-block-on-consent="_till_accepted"
@@ -112,7 +114,7 @@ export const Ad = ({
 			data-multi-size-validation="false"
 			data-npa-on-unknown-consent={true}
 			data-loading-strategy="prefer-viewability-over-views"
-			data-enable-refresh="30"
+			data-enable-refresh={refreshValue}
 			layout="fixed"
 			type="doubleclick"
 			json={stringify(
