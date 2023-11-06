@@ -135,11 +135,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							tests={article.config.abTests}
 						/>
 					</Island>
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<BrazeMessaging idApiUrl={article.config.idApiUrl} />
 					</Island>
 
