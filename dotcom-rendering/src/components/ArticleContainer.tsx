@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { adSizes, constants } from '@guardian/commercial';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
 import { carrotAdStyles, labelStyles } from './AdSlot.web';
@@ -136,6 +137,26 @@ const adStyles = css`
 
 		${from.wide} {
 			margin-right: -380px;
+		}
+	}
+
+	/* Give ad slots inserted on the client side a placeholder height.
+	   Let the ad slot take control of its height once rendered. */
+	.ad-slot--inline:not(.ad-slot--rendered) {
+		min-height: ${adSizes.outstreamMobile.height +
+		constants.AD_LABEL_HEIGHT}px;
+
+		${from.desktop} {
+			min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
+		}
+	}
+
+	/* This refers to the inline top-above-nav slot used on mobile pages, NOT the
+	   top-above-nav that is inserted above the navigation. */
+	.ad-slot--top-above-nav:not(.ad-slot--rendered) {
+		${until.tablet} {
+			min-height: ${adSizes.outstreamMobile.height +
+			constants.AD_LABEL_HEIGHT}px;
 		}
 	}
 
