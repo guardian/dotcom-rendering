@@ -20,6 +20,7 @@ import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
+import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
@@ -255,6 +256,16 @@ describe('Island: server-side rendering', () => {
 
 	test('RecipeMultiplier', () => {
 		expect(() => renderToString(<RecipeMultiplier />)).not.toThrow();
+	});
+
+	test('SendTargetingParams', () => {
+		expect(() =>
+			renderToString(
+				<SendTargetingParams
+					editionCommercialProperties={{ adTargeting: [] }}
+				/>,
+			),
+		).not.toThrow();
 	});
 
 	test('SetABTests', () => {
