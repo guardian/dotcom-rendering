@@ -98,7 +98,7 @@ export const Ad = ({
 		adType,
 	);
 
-	let refreshValue = id === 'ad-1' || id === 'ad-2' ? 'false' : '30';
+	const refreshValue = id === 'ad-1' || id === 'ad-2' ? 'false' : '30';
 
 	return (
 		<amp-ad
