@@ -129,9 +129,7 @@ test.describe('Why do wombats do square poos?', () => {
 		await disableCMP(context);
 		await loadPage(page, `/Article/${quizAtomUrl}`);
 
-		await waitForIsland(page, 'KnowledgeQuizAtom', {
-			status: 'hydrated',
-		});
+		await waitForIsland(page, 'KnowledgeQuizAtom');
 
 		// Establish that the elements showing the results are not present
 		await expectLocatorToNotExist(
@@ -182,9 +180,7 @@ test.describe('Why do wombats do square poos?', () => {
 		await disableCMP(context);
 		await loadPage(page, `/Article/${quizAtomUrl}`);
 
-		await waitForIsland(page, 'KnowledgeQuizAtom', {
-			status: 'hydrated',
-		});
+		await waitForIsland(page, 'KnowledgeQuizAtom');
 
 		// Establish that the elements showing the results are not present
 		await expectLocatorToNotExist(

@@ -66,7 +66,6 @@ test.describe('E2E Page rendering', () => {
 
 			// expect rich link island to be loaded, its data response and its text to be visible
 			await waitForIsland(page, 'RichLinkComponent', {
-				status: 'hydrated',
 				nth: 1,
 			});
 			await richLinkResponsePromise;
@@ -78,9 +77,7 @@ test.describe('E2E Page rendering', () => {
 			).toBeVisible();
 
 			// expect most read right to be loaded, its data response and its text to be visible
-			await waitForIsland(page, 'MostViewedRightWrapper', {
-				status: 'hydrated',
-			});
+			await waitForIsland(page, 'MostViewedRightWrapper', {});
 			await mostReadRightResponsePromise;
 			await expect(
 				page
@@ -89,9 +86,7 @@ test.describe('E2E Page rendering', () => {
 			).toBeVisible();
 
 			// expect most read footer to be loaded, its data response and its text to be visible
-			await waitForIsland(page, 'MostViewedFooterData', {
-				status: 'hydrated',
-			});
+			await waitForIsland(page, 'MostViewedFooterData', {});
 			await mostReadFooterResponsePromise;
 			await expect(
 				page

@@ -1,6 +1,5 @@
 import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
-import { islandNoscriptStyles } from '../components/Island';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
 import { getFontsCss } from '../lib/fonts-css';
@@ -361,8 +360,6 @@ https://workforus.theguardian.com/careers/product-engineering/
 							comscorekw: props.keywords,
 						},
 					).toString()}" />
-
-					${islandNoscriptStyles}
                 </noscript>
 				`
 						: ''
