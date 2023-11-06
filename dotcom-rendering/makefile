@@ -184,6 +184,7 @@ check-env: # private
 	@node scripts/env/check-node.js
 	@node scripts/env/check-yarn.js
 	@node scripts/env/check-deps.js
+	@node scripts/env/check-files.js
 
 clear: # private
 	@clear

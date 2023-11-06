@@ -110,11 +110,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				</>
 			)}
 
-			<Island
-				priority="enhancement"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
 			{(format.design === ArticleDesign.LiveBlog ||
@@ -124,11 +120,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			{renderingTarget === 'Web' && (
 				<>
 					<SkipTo id="navigation" label="Skip to navigation" />
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<AlreadyVisited />
 					</Island>
 					<Island priority="critical" clientOnly={true}>
@@ -139,19 +131,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							tests={article.config.abTests}
 						/>
 					</Island>
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<BrazeMessaging idApiUrl={article.config.idApiUrl} />
 					</Island>
 
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<ReaderRevenueDev
 							shouldHideReaderRevenue={
 								article.shouldHideReaderRevenue
@@ -170,11 +154,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				</>
 			)}
 			{renderingTarget === 'Web' ? (
-				<Island clientOnly={true} priority="critical">
+				<Island priority="critical">
 					<SetAdTargeting adTargeting={adTargeting} />
 				</Island>
 			) : (
-				<Island clientOnly={true} priority="critical">
+				<Island priority="critical">
 					<SendTargetingParams
 						editionCommercialProperties={
 							article.commercialProperties[article.editionId]

@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
 import { enhanceArticleType } from '../lib/article';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import { makePrefetchHeader } from './lib/header';
+import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderArticle } from './render.article.apps';
 
 export const handleAppsArticle: RequestHandler = ({ body }, res) => {
