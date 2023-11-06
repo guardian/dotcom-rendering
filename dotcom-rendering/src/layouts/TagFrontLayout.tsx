@@ -258,6 +258,15 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
+					const title = date.toLocaleDateString('en-GB', {
+						day:
+							groupedTrails.day !== undefined
+								? 'numeric'
+								: undefined,
+						month: 'long',
+						year: 'numeric',
+					});
+
 					const url =
 						groupedTrails.day !== undefined
 							? `/${tagFront.pageId}/${groupedTrails.year}/${date
@@ -288,18 +297,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								leftContent={
 									<SectionLeftContent
 										url={url}
-										title={date.toLocaleDateString(
-											'en-GB',
-											{
-												day:
-													groupedTrails.day !==
-													undefined
-														? 'numeric'
-														: undefined,
-												month: 'long',
-												year: 'numeric',
-											},
-										)}
+										title={title}
 										dateString={`${groupedTrails.year}-${
 											groupedTrails.month
 										}${
