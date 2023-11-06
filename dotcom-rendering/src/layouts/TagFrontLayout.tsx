@@ -81,13 +81,11 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 		config: { switches, hasPageSkin, isPaidContent },
 	} = tagFront;
 
-	const showBannerAds = !!switches.frontsBannerAds;
-
 	const renderAds = canRenderAds(tagFront);
 
-	const desktopAdPositions = getTaggedFrontsBannerAdPositions(
-		tagFront.groupedTrails.length,
-	);
+	const desktopAdPositions = renderAds
+		? getTaggedFrontsBannerAdPositions(tagFront.groupedTrails.length)
+		: [];
 
 	const mobileAdPositions = renderAds
 		? getTagFrontMobileAdPositions(
@@ -237,7 +235,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
-								showBannerAds,
 								index,
 								desktopAdPositions,
 							)}
@@ -282,7 +279,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
-								showBannerAds,
 							)}
 						</Fragment>
 					);

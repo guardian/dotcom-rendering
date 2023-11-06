@@ -32,8 +32,6 @@ export const NoBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			adIndex={1}
-			renderAds={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -51,8 +49,6 @@ export const OneBig = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			adIndex={1}
-			renderAds={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -70,8 +66,6 @@ export const TwoBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			adIndex={1}
-			renderAds={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -93,8 +87,6 @@ export const FirstBigBoosted = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			adIndex={1}
-			renderAds={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -116,8 +108,6 @@ export const SecondBigBoosted = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			adIndex={1}
-			renderAds={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -135,8 +125,6 @@ export const ThreeBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			adIndex={1}
-			renderAds={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -144,25 +132,6 @@ export const ThreeBigs = () => (
 ThreeBigs.storyName = 'with three bigs';
 
 export const AllBigs = () => (
-	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
-		<DynamicSlowMPU
-			groupedTrails={{
-				snap: [],
-				huge: [],
-				veryBig: [],
-				big: standards,
-				standard: [],
-			}}
-			showAge={true}
-			adIndex={1}
-			renderAds={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
-AllBigs.storyName = 'with lots of bigs and no standards';
-
-export const AllBigsNoMPU = () => (
 	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
 		<DynamicSlowMPU
 			groupedTrails={{
@@ -173,13 +142,11 @@ export const AllBigsNoMPU = () => (
 				standard: [],
 			}}
 			showAge={true}
-			adIndex={1}
-			renderAds={false}
 			imageLoading="eager"
 		/>
 	</FrontSection>
 );
-AllBigsNoMPU.storyName = 'Ad-free with lots of bigs';
+AllBigs.storyName = 'Ad-free with lots of bigs';
 
 export const TwoBigsThreeStandardsNoMPU = () => (
 	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
@@ -192,8 +159,6 @@ export const TwoBigsThreeStandardsNoMPU = () => (
 				standard: standards.slice(0, 3),
 			}}
 			showAge={true}
-			adIndex={1}
-			renderAds={false}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -211,8 +176,6 @@ export const NoBigsTwoStandardsNoMPU = () => (
 				standard: standards.slice(0, 2),
 			}}
 			showAge={true}
-			adIndex={1}
-			renderAds={false}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -230,8 +193,6 @@ export const NoBigsFiveStandardsNoMPU = () => (
 				standard: standards.slice(0, 5),
 			}}
 			showAge={true}
-			adIndex={1}
-			renderAds={false}
 			imageLoading="eager"
 		/>
 	</FrontSection>

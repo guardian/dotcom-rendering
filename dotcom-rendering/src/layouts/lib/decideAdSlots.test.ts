@@ -14,7 +14,6 @@ describe('decideMerchHighAndMobileAdSlots', () => {
 	const isPaidContent = false;
 	const mobileAdPositions: number[] = [];
 	const hasPageSkin = false;
-	const showBannerAds = true;
 
 	it("should return null if we shouldn't render ads", () => {
 		const result = decideMerchHighAndMobileAdSlots(
@@ -24,7 +23,6 @@ describe('decideMerchHighAndMobileAdSlots', () => {
 			isPaidContent,
 			mobileAdPositions,
 			hasPageSkin,
-			showBannerAds,
 		);
 
 		expect(result).toBeNull();
@@ -32,9 +30,9 @@ describe('decideMerchHighAndMobileAdSlots', () => {
 });
 
 describe('decideFrontsBannerAdSlot', () => {
+	// default parameters
 	const renderAds = true;
 	const hasPageSkin = false;
-	const showBannerAds = true;
 	const index = 2;
 	const desktopAdPositions = [2, 5];
 
@@ -42,7 +40,6 @@ describe('decideFrontsBannerAdSlot', () => {
 		const result = decideFrontsBannerAdSlot(
 			false,
 			hasPageSkin,
-			showBannerAds,
 			index,
 			desktopAdPositions,
 		);
@@ -54,36 +51,11 @@ describe('decideFrontsBannerAdSlot', () => {
 		const result = decideFrontsBannerAdSlot(
 			renderAds,
 			true,
-			showBannerAds,
 			index,
 			desktopAdPositions,
 		);
 
 		expect(result).toBeNull();
-	});
-
-	it('should return null if the frontsBannerDcr feature switch is OFF', () => {
-		const result = decideFrontsBannerAdSlot(
-			renderAds,
-			hasPageSkin,
-			false,
-			index,
-			desktopAdPositions,
-		);
-
-		expect(result).toBeNull();
-	});
-
-	it('should NOT return null if the frontsBannerDcr feature switch is ON', () => {
-		const result = decideFrontsBannerAdSlot(
-			renderAds,
-			hasPageSkin,
-			true,
-			index,
-			desktopAdPositions,
-		);
-
-		expect(result).not.toBeNull();
 	});
 
 	test.each([
@@ -96,7 +68,6 @@ describe('decideFrontsBannerAdSlot', () => {
 			const result = decideFrontsBannerAdSlot(
 				renderAds,
 				hasPageSkin,
-				showBannerAds,
 				i,
 				adPositions,
 			);
@@ -115,7 +86,6 @@ describe('decideFrontsBannerAdSlot', () => {
 			const result = decideFrontsBannerAdSlot(
 				renderAds,
 				hasPageSkin,
-				showBannerAds,
 				i,
 				adPositions,
 			);

@@ -25,7 +25,7 @@ const getCollectionHeight = (
 		DCRCollectionType,
 		'collectionType' | 'containerPalette' | 'grouped'
 	>,
-): number => {
+): 0.5 | 1 | 1.5 | 2 | 2.5 | 3 => {
 	const { collectionType, containerPalette, grouped } = collction;
 
 	if (containerPalette === 'PodcastPalette') {
@@ -200,7 +200,7 @@ const getTaggedFrontsBannerAdPositions = (numCollections: number): number[] => {
 	// Ensure we do not insert more than the maximum allowed number of ads.
 	const numAdsToInsert = Math.min(numAdsThatFit, MAX_FRONTS_BANNER_ADS);
 
-	return [...Array(numAdsToInsert).keys()].map((_) => _ * 3 + 2);
+	return Array.from({ length: numAdsToInsert }, (_, i) => i * 3 + 2);
 };
 
 export { getFrontsBannerAdPositions, getTaggedFrontsBannerAdPositions };
