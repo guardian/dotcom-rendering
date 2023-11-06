@@ -7,10 +7,9 @@ import { FollowButton } from './FollowButton';
 type Props = {
 	id: string;
 	displayName: string;
-	format: ArticleFormat;
 };
 
-export const FollowWrapper = ({ id, displayName, format }: Props) => {
+export const FollowWrapper = ({ id, displayName }: Props) => {
 	const [isFollowing, setIsFollowing] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -52,7 +51,12 @@ export const FollowWrapper = ({ id, displayName, format }: Props) => {
 		>
 			<FollowButton
 				isFollowing={isFollowing ?? false}
-				displayName={displayName}
+				onClickHandler={
+					isFollowing !== undefined ? handler : () => undefined
+				}
+			/>
+			<FollowButton
+				isFollowing={isFollowing ?? true}
 				onClickHandler={
 					isFollowing !== undefined ? handler : () => undefined
 				}
