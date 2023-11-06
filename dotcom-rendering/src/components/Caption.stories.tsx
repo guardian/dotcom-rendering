@@ -6,6 +6,7 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints, palette } from '@guardian/source-foundations';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Caption } from './Caption';
 import { Section } from './Section';
 import { StarRating } from './StarRating/StarRating';
@@ -42,6 +43,7 @@ export const Article = () => (
 	</Section>
 );
 Article.storyName = 'Article';
+Article.decorators = [splitTheme(articleFormat)];
 
 export const Analysis = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -56,6 +58,13 @@ export const Analysis = () => (
 	</Section>
 );
 Analysis.storyName = 'Analysis';
+Analysis.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Analysis,
+		theme: Pillar.News,
+	}),
+];
 
 export const PhotoEssay = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -70,6 +79,13 @@ export const PhotoEssay = () => (
 	</Section>
 );
 PhotoEssay.storyName = 'PhotoEssay';
+PhotoEssay.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Immersive,
+		design: ArticleDesign.PhotoEssay,
+		theme: Pillar.News,
+	}),
+];
 
 export const SpecialReport = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -84,6 +100,13 @@ export const SpecialReport = () => (
 	</Section>
 );
 SpecialReport.storyName = 'SpecialReport';
+SpecialReport.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticleSpecial.SpecialReport,
+	}),
+];
 
 export const PhotoEssayLimitedWidth = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -99,6 +122,13 @@ export const PhotoEssayLimitedWidth = () => (
 	</Section>
 );
 PhotoEssayLimitedWidth.storyName = 'PhotoEssay with width limited';
+PhotoEssayLimitedWidth.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Immersive,
+		design: ArticleDesign.PhotoEssay,
+		theme: Pillar.News,
+	}),
+];
 
 export const Credit = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -115,6 +145,13 @@ export const Credit = () => (
 	</Section>
 );
 Credit.storyName = 'with credit';
+Credit.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Feature,
+		theme: Pillar.News,
+	}),
+];
 
 export const WidthLimited = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -126,6 +163,7 @@ export const WidthLimited = () => (
 	</Section>
 );
 WidthLimited.storyName = 'with width limited';
+WidthLimited.decorators = [splitTheme(articleFormat)];
 
 export const Padded = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -137,6 +175,7 @@ export const Padded = () => (
 	</Section>
 );
 Padded.storyName = 'when padded';
+Padded.decorators = [splitTheme(articleFormat)];
 
 export const Overlaid = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -160,17 +199,14 @@ export const Overlaid = () => (
 			<Caption
 				isOverlaid={true}
 				captionText="This is how a caption looks when it's overlaid"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={articleFormat}
 				padCaption={true}
 			/>
 		</div>
 	</Section>
 );
 Overlaid.storyName = 'when overlaid';
+Overlaid.decorators = [splitTheme(articleFormat)];
 
 export const OverlaidWithStars = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -215,6 +251,13 @@ export const OverlaidWithStars = () => (
 	</Section>
 );
 OverlaidWithStars.storyName = 'when overlaid on stars';
+OverlaidWithStars.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Showcase,
+		design: ArticleDesign.Review,
+		theme: Pillar.News,
+	}),
+];
 
 export const VideoCaption = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -237,3 +280,4 @@ VideoCaption.story = {
 		},
 	},
 };
+VideoCaption.decorators = [splitTheme(articleFormat)];

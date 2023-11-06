@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { CaptionBlockComponent } from './CaptionBlockComponent';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
@@ -62,6 +63,13 @@ export const StandardArticle = () => {
 	);
 };
 StandardArticle.storyName = 'with defaults';
+StandardArticle.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.News,
+	}),
+];
 
 export const PhotoEssay = () => {
 	return (
@@ -83,6 +91,13 @@ export const PhotoEssay = () => {
 	);
 };
 PhotoEssay.storyName = 'PhotoEssay';
+PhotoEssay.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Immersive,
+		design: ArticleDesign.PhotoEssay,
+		theme: Pillar.Lifestyle,
+	}),
+];
 
 export const PhotoEssayHTML = () => {
 	return (
@@ -104,6 +119,13 @@ export const PhotoEssayHTML = () => {
 	);
 };
 PhotoEssayHTML.storyName = 'PhotoEssay using html';
+PhotoEssayHTML.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Immersive,
+		design: ArticleDesign.PhotoEssay,
+		theme: Pillar.Sport,
+	}),
+];
 
 export const Padded = () => {
 	return (
@@ -125,6 +147,13 @@ export const Padded = () => {
 	);
 };
 Padded.storyName = 'when padded';
+Padded.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Analysis,
+		theme: Pillar.Culture,
+	}),
+];
 
 export const WidthLimited = () => {
 	return (
@@ -146,7 +175,13 @@ export const WidthLimited = () => {
 	);
 };
 WidthLimited.storyName = 'with width limited';
-
+WidthLimited.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Review,
+		theme: Pillar.Culture,
+	}),
+];
 export const Credited = () => {
 	return (
 		<Wrapper>
@@ -167,7 +202,13 @@ export const Credited = () => {
 	);
 };
 Credited.storyName = 'with credit';
-
+Credited.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.MatchReport,
+		theme: Pillar.Culture,
+	}),
+];
 export const Overlaid = () => {
 	return (
 		<Wrapper>
@@ -188,3 +229,10 @@ export const Overlaid = () => {
 	);
 };
 Overlaid.storyName = 'when overlaid';
+Overlaid.decorators = [
+	splitTheme({
+		display: ArticleDisplay.Showcase,
+		design: ArticleDesign.Comment,
+		theme: Pillar.Sport,
+	}),
+];
