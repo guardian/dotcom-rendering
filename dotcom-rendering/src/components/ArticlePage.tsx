@@ -124,11 +124,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			{renderingTarget === 'Web' && (
 				<>
 					<SkipTo id="navigation" label="Skip to navigation" />
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<AlreadyVisited />
 					</Island>
 					<Island priority="critical" clientOnly={true}>
