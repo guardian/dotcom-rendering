@@ -92,11 +92,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<BrazeMessaging idApiUrl={front.config.idApiUrl} />
 			</Island>
-			<Island
-				priority="feature"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />
