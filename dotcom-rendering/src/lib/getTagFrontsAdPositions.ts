@@ -1,9 +1,9 @@
 import type { GroupedTrailsBase } from '../types/tagFront';
 import {
-	getMerchHighPosition,
 	MAX_FRONTS_BANNER_ADS,
 	MAX_FRONTS_MOBILE_ADS,
-} from './getFrontsAdPositions';
+} from './commercial-constants';
+import { getMerchHighPosition } from './getFrontsAdPositions';
 
 const hasAdjacentCommercialContainer = (
 	collectionIndex: number,

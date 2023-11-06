@@ -30,9 +30,13 @@ describe('Mobile Ads', () => {
 	// 0: when collections are less than 4
 	it.each([
 		[4, 2],
+		[5, 2],
+		[99, 2],
 		[3, 0],
+		[2, 0],
+		[0, 0],
 	])(
-		`should not insert ad when there are %i collections and merchandising-high is in position %i`,
+		`should not insert an ad in the merchandising-high position when there are %i collections and merchandising-high is in position %i`,
 		(numCollections, merchHighPosition) => {
 			const mobileAdPositions = getMobileAdPositions(
 				defaultTestCollections.slice(0, numCollections),

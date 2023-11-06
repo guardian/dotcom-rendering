@@ -242,8 +242,6 @@ const getFrontsBannerAdPositions = (
 	).adPositions;
 
 export {
-	MAX_FRONTS_MOBILE_ADS,
-	MAX_FRONTS_BANNER_ADS,
 	getMerchHighPosition,
 	getMobileAdPositions,
 	getFrontsBannerAdPositions,
