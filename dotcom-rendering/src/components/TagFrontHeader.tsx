@@ -1,5 +1,6 @@
 import { css, jsx } from '@emotion/react';
 import {
+	brand,
 	breakpoints,
 	from,
 	headline,
@@ -202,11 +203,18 @@ const titleStyle = css`
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
 `;
 
+const linkStyles = css`
+	color: ${brand[500]};
+	text-decoration: none;
+	border-bottom: 1px solid ${brand[500]};
+`;
+
 const buildElementTree = (node: Node): ReactNode => {
 	if (isElement(node)) {
 		switch (node.nodeName) {
 			case 'A':
 				return jsx('a', {
+					css: linkStyles,
 					href: node.attributes.getNamedItem('href')?.value,
 					target: node.attributes.getNamedItem('target')?.value,
 					children: Array.from(node.childNodes).map(buildElementTree),
