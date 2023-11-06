@@ -44,13 +44,14 @@ const paginationItemCss = css`
 	justify-content: center;
 
 	min-width: 25px;
+	height: 25px;
 	padding: 3px ${space[1]}px;
 
 	${textSans.xxsmall({ fontWeight: 'bold' })}
 	text-decoration: none;
 
 	color: ${palette.neutral[46]};
-	border-radius: 12px;
+	border-radius: 12.5px;
 
 	border: 1px solid transparent;
 
