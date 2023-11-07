@@ -25,7 +25,6 @@ export type Palette = {
 		linkKicker: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
-		headlineByline: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
 		lastUpdated: Colour;
@@ -64,7 +63,6 @@ export type Palette = {
 		sectionTitle: Colour;
 		card: Colour;
 		headline: Colour;
-		headlineByline: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
 		header: Colour;

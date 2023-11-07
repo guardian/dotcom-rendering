@@ -228,49 +228,6 @@ const textByline = (format: ArticleFormat): string => {
 	}
 };
 
-const textHeadlineByline = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			case Pillar.Sport:
-				return sport[400];
-			case Pillar.Opinion:
-				return opinion[400];
-			case Pillar.Culture:
-				return culture[400];
-			case Pillar.Lifestyle:
-				return lifestyle[400];
-			case ArticleSpecial.Labs:
-				return labs[400];
-			case ArticleSpecial.SpecialReport:
-				return specialReport[400];
-			case ArticleSpecial.SpecialReportAlt:
-				return palette.specialReportAlt[100];
-		}
-	}
-
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Opinion:
-			return opinion[400];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Culture:
-			return culture[400];
-		case Pillar.Lifestyle:
-			return lifestyle[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return palette.specialReportAlt[100];
-	}
-};
-
 const textStandfirst = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
 	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
@@ -842,13 +799,6 @@ const backgroundAgeWarning = (format: ArticleFormat): string => {
 		default:
 			return backgroundHeadline(format);
 	}
-};
-
-const backgroundHeadlineByline = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) return 'transparent';
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return brandAltBackground.primary;
-	return 'transparent';
 };
 
 const backgroundBullet = (format: ArticleFormat): string => {
@@ -2105,7 +2055,6 @@ export const decidePalette = (
 				overrides?.text.cardStandfirst ?? textCardStandfirst(format),
 			cardFooter: overrides?.text.cardFooter ?? textCardFooter(format),
 			dynamoMeta: overrides?.text.dynamoMeta ?? textCardFooter(format),
-			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
 			lastUpdated: textLastUpdated(format),
@@ -2144,7 +2093,6 @@ export const decidePalette = (
 			sectionTitle: backgroundSectionTitle(format),
 			card: overrides?.background.card ?? backgroundCard(format),
 			headline: backgroundHeadline(format),
-			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
 			header: backgroundHeader(format),
