@@ -45,4 +45,5 @@ module.exports = {
 	warn,
 	prompt,
 	success,
+	colourise,
 };

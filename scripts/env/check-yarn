@@ -12,14 +12,14 @@
 // no external deps can be used here, because this runs before deps are installed
 const { execSync } = require('child_process');
 const { stdout } = require('process');
-const { log, warn } = require('../log');
+const { colourise, log, warn } = require('../log');
 
 const reset = '\x1b[0m';
 const blue = '\u001b[34m';
 
 try {
 	const yarnVersion = execSync('yarn -v', { encoding: 'utf-8' });
-	log(`Using yarn ${reset}${blue}${yarnVersion.trim()}`);
+	log(`Using yarn ${colourise(reset, colourise(blue, yarnVersion.trim()))}`);
 } catch (e) {
 	warn(`Could not find yarn. Please run 'corepack enable'.`);
 	process.exit(1);
