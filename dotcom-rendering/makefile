@@ -8,11 +8,11 @@ export SHELL := /usr/bin/env bash
 # messaging #########################################
 
 define log
-    @node scripts/env/log $(1)
+    @node ../scripts/log $(1)
 endef
 
 define warn
-    @node scripts/env/log $(1) warn
+    @node ../scripts/log $(1) warn
 endef
 
 # deployment #########################################

@@ -15,7 +15,7 @@ const ensure = require('./ensure');
 		).trim();
 
 		if (!semver.satisfies(nodeVersion, nvmrcVersion)) {
-			const { warn, prompt, log } = require('./log');
+			const { warn, prompt, log } = require('../../../scripts/log');
 			warn(
 				`dotcom-rendering requires Node v${nvmrcVersion}`,
 				`You are using v${nodeVersion ?? '(unknown)'}`,

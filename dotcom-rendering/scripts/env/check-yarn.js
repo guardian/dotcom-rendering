@@ -15,7 +15,7 @@ const YARN_MIN_VERSION = '1.x';
 		const [semver] = await ensure('semver');
 
 		if (!semver.satisfies(version, YARN_MIN_VERSION)) {
-			const { warn, prompt, log } = require('./log');
+			const { warn, prompt, log } = require('../../../scripts/log');
 			warn(
 				`dotcom-rendering requires Yarn >=${YARN_MIN_VERSION}`,
 				`You are using v${version}`,
@@ -26,7 +26,7 @@ const YARN_MIN_VERSION = '1.x';
 			process.exit(1);
 		}
 	} catch (e) {
-		require('./log').log(`Installing yarn`);
+		require('../../../scripts/log').log(`Installing yarn`);
 		await exec('npm', ['i', '-g', `yarn@${YARN_MIN_VERSION}`]);
 	}
 })();
