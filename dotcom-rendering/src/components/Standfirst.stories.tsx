@@ -30,7 +30,7 @@ export const Article = () => {
 	);
 };
 Article.storyName = 'Article';
-Article.decorators = [splitTheme(articleFormat)];
+Article.decorators = [splitTheme([articleFormat])];
 
 const commentFormat = {
 	display: ArticleDisplay.Standard,
@@ -48,7 +48,7 @@ export const Comment = () => {
 	);
 };
 Comment.storyName = 'Comment';
-Comment.decorators = [splitTheme(commentFormat)];
+Comment.decorators = [splitTheme([commentFormat])];
 
 const letterFormat = {
 	display: ArticleDisplay.Standard,
@@ -66,7 +66,7 @@ export const Letter = () => {
 	);
 };
 Letter.storyName = 'Letter';
-Letter.decorators = [splitTheme(letterFormat)];
+Letter.decorators = [splitTheme([letterFormat])];
 
 const featureFormat = {
 	display: ArticleDisplay.Standard,
@@ -84,7 +84,7 @@ export const Feature = () => {
 	);
 };
 Feature.storyName = 'Feature';
-Feature.decorators = [splitTheme(featureFormat)];
+Feature.decorators = [splitTheme([featureFormat])];
 
 const immersiveFormat = {
 	display: ArticleDisplay.Immersive,
@@ -102,7 +102,7 @@ export const Immersive = () => {
 	);
 };
 Immersive.storyName = 'Immersive';
-Immersive.decorators = [splitTheme(immersiveFormat)];
+Immersive.decorators = [splitTheme([immersiveFormat])];
 
 const reviewFormat = {
 	display: ArticleDisplay.Standard,
@@ -120,7 +120,7 @@ export const Review = () => {
 	);
 };
 Review.storyName = 'Review';
-Review.decorators = [splitTheme(reviewFormat)];
+Review.decorators = [splitTheme([reviewFormat])];
 
 const liveblogFormat = {
 	display: ArticleDisplay.Standard,
@@ -151,7 +151,7 @@ LiveBlog.story = {
 		},
 	},
 };
-LiveBlog.decorators = [splitTheme(liveblogFormat)];
+LiveBlog.decorators = [splitTheme([liveblogFormat])];
 
 const deadblogFormat = {
 	display: ArticleDisplay.Standard,
@@ -169,7 +169,7 @@ export const DeadBlog = () => {
 	);
 };
 DeadBlog.storyName = 'DeadBlog';
-DeadBlog.decorators = [splitTheme(deadblogFormat)];
+DeadBlog.decorators = [splitTheme([deadblogFormat])];
 
 const interviewFormat = {
 	display: ArticleDisplay.Standard,
@@ -187,7 +187,7 @@ export const Interview = () => {
 	);
 };
 Interview.storyName = 'Interview';
-Interview.decorators = [splitTheme(interviewFormat)];
+Interview.decorators = [splitTheme([interviewFormat])];
 
 const analysisFormat = {
 	display: ArticleDisplay.Standard,
@@ -205,7 +205,7 @@ export const Analysis = () => {
 	);
 };
 Analysis.storyName = 'Analysis';
-Analysis.decorators = [splitTheme(analysisFormat)];
+Analysis.decorators = [splitTheme([analysisFormat])];
 
 const ExplainerFormat = {
 	display: ArticleDisplay.Standard,
@@ -223,7 +223,7 @@ export const Explainer = () => {
 	);
 };
 Explainer.storyName = 'Explainer';
-Explainer.decorators = [splitTheme(ExplainerFormat)];
+Explainer.decorators = [splitTheme([ExplainerFormat])];
 
 const GalleryFormat = {
 	display: ArticleDisplay.Standard,
@@ -241,7 +241,7 @@ export const Gallery = () => {
 	);
 };
 Gallery.storyName = 'Gallery';
-Gallery.decorators = [splitTheme(GalleryFormat)];
+Gallery.decorators = [splitTheme([GalleryFormat])];
 
 const audioFormat = {
 	display: ArticleDisplay.Standard,
@@ -259,7 +259,7 @@ export const Audio = () => {
 	);
 };
 Audio.storyName = 'Audio';
-Audio.decorators = [splitTheme(audioFormat)];
+Audio.decorators = [splitTheme([audioFormat])];
 
 const videoFormat = {
 	display: ArticleDisplay.Standard,
@@ -277,7 +277,7 @@ export const Video = () => {
 	);
 };
 Video.storyName = 'Video';
-Video.decorators = [splitTheme(videoFormat)];
+Video.decorators = [splitTheme([videoFormat])];
 
 const recipeFormat = {
 	display: ArticleDisplay.Standard,
@@ -295,7 +295,7 @@ export const Recipe = () => {
 	);
 };
 Recipe.storyName = 'Recipe';
-Recipe.decorators = [splitTheme(recipeFormat)];
+Recipe.decorators = [splitTheme([recipeFormat])];
 
 const matchReportFormat = {
 	display: ArticleDisplay.Standard,
@@ -313,7 +313,7 @@ export const MatchReport = () => {
 	);
 };
 MatchReport.storyName = 'MatchReport';
-MatchReport.decorators = [splitTheme(matchReportFormat)];
+MatchReport.decorators = [splitTheme([matchReportFormat])];
 
 const quizFormat = {
 	display: ArticleDisplay.Standard,
@@ -331,7 +331,7 @@ export const Quiz = () => {
 	);
 };
 Quiz.storyName = 'Quiz';
-Quiz.decorators = [splitTheme(quizFormat)];
+Quiz.decorators = [splitTheme([quizFormat])];
 
 const specialReport = {
 	display: ArticleDisplay.Standard,
@@ -349,7 +349,7 @@ export const SpecialReport = () => {
 	);
 };
 SpecialReport.storyName = 'SpecialReport';
-SpecialReport.decorators = [splitTheme(specialReport)];
+SpecialReport.decorators = [splitTheme([specialReport])];
 
 const SpecialReportAltFormat = {
 	display: ArticleDisplay.Standard,
@@ -367,7 +367,7 @@ export const SpecialReportAlt = () => {
 	);
 };
 SpecialReportAlt.storyName = 'SpecialReportAlt';
-SpecialReportAlt.decorators = [splitTheme(SpecialReportAltFormat)];
+SpecialReportAlt.decorators = [splitTheme([SpecialReportAltFormat])];
 
 const editorialFormat = {
 	display: ArticleDisplay.Standard,
@@ -385,7 +385,7 @@ export const Editorial = () => {
 	);
 };
 Editorial.storyName = 'Editorial';
-Editorial.decorators = [splitTheme(editorialFormat)];
+Editorial.decorators = [splitTheme([editorialFormat])];
 
 const photoFormat = {
 	display: ArticleDisplay.Standard,
@@ -403,7 +403,7 @@ export const PhotoEssay = () => {
 	);
 };
 PhotoEssay.storyName = 'PhotoEssay';
-PhotoEssay.decorators = [splitTheme(photoFormat)];
+PhotoEssay.decorators = [splitTheme([photoFormat])];
 
 const labsWithLinkFormat = {
 	display: ArticleDisplay.Standard,
@@ -421,4 +421,4 @@ export const LabsWithLink = () => {
 	);
 };
 LabsWithLink.storyName = 'LabsWithLink';
-LabsWithLink.decorators = [splitTheme(labsWithLinkFormat)];
+LabsWithLink.decorators = [splitTheme([labsWithLinkFormat])];
