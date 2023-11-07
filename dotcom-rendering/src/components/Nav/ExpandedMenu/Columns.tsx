@@ -36,17 +36,14 @@ const columnsStyle = (isImmersive: boolean) => css`
 		border-left: ${isImmersive ? 'none' : `1px solid ${brand[600]}`};
 		border-right: ${isImmersive ? 'none' : `1px solid ${brand[600]}`};
 	}
+`;
+
+const columnsStyleFromLeftCol = css`
 	${from.leftCol} {
 		max-width: 1140px;
 	}
 	${from.wide} {
 		max-width: 1300px;
-	}
-`;
-
-const columnsStyleWithPageSkin = css`
-	${from.leftCol} {
-		max-width: 980px;
 	}
 `;
 
@@ -80,17 +77,14 @@ const brandExtensionList = css`
 	display: flex;
 	flex-direction: column;
 	padding-bottom: 0;
+`;
+
+const brandExtensionListFromLeftCol = css`
 	${from.leftCol} {
 		width: 140px;
 	}
 	${from.wide} {
 		width: 300px;
-	}
-`;
-
-const brandExtenstionListWithPageSkin = css`
-	${from.leftCol} {
-		width: 131px;
 	}
 `;
 
@@ -121,9 +115,6 @@ const brandExtensionLink = css`
 	${from.desktop} {
 		padding: 6px 0;
 	}
-	${from.wide} {
-		font-size: 24px;
-	}
 	:hover,
 	:focus {
 		color: ${brandAlt[400]};
@@ -133,9 +124,9 @@ const brandExtensionLink = css`
 	}
 `;
 
-const brandExtensionLinkWithPageSkin = css`
+const brandExtensionLinkFromLeftCol = css`
 	${from.wide} {
-		font-size: 1.25rem;
+		font-size: 24px;
 	}
 `;
 
@@ -244,7 +235,7 @@ export const Columns = ({
 		<ul
 			css={[
 				columnsStyle(isImmersive),
-				hasPageSkin && columnsStyleWithPageSkin,
+				!hasPageSkin && columnsStyleFromLeftCol,
 			]}
 			role="menubar"
 			data-cy="nav-menu-columns"
@@ -347,7 +338,7 @@ export const Columns = ({
 				<ul
 					css={[
 						brandExtensionList,
-						hasPageSkin && brandExtenstionListWithPageSkin,
+						!hasPageSkin && brandExtensionListFromLeftCol,
 					]}
 					role="menu"
 				>
@@ -360,8 +351,8 @@ export const Columns = ({
 								className="selectableMenuItem"
 								css={[
 									brandExtensionLink,
-									hasPageSkin &&
-										brandExtensionLinkWithPageSkin,
+									!hasPageSkin &&
+										brandExtensionLinkFromLeftCol,
 								]}
 								href={brandExtension.url}
 								key={brandExtension.title}
