@@ -2,7 +2,7 @@
 
 /** @fileoverview
  *
- * Use: node dotcom-rendering/scripts/gen-stories/gen-stories.js
+ * Use: node dotcom-rendering/scripts/gen-stories/gen-stories.mjs
  *
  * This script was created as a replacement for storiesOf to generate all of the possible variants
  * of our Card and Layout components.
