@@ -247,6 +247,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							headerTopBarSwitch={
 								!!front.config.switches.headerTopNav
 							}
+							hasPageSkin={hasPageSkin}
 						/>
 					</Section>
 					{NAV.subNavSections && (

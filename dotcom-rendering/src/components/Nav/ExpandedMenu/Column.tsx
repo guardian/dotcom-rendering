@@ -200,14 +200,26 @@ const columnStyle = css`
 	}
 `;
 
+const columnStyleWithPageSkin = css`
+	${from.leftCol} {
+		width: 134px;
+
+		:first-of-type {
+			width: 123px;
+		}
+	}
+`;
+
 export const Column = ({
 	column,
 	index,
 	showLineBelow,
+	hasPageSkin,
 }: {
 	column: PillarLinkType | EditionLinkType;
 	index: number;
 	showLineBelow: boolean;
+	hasPageSkin?: boolean;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
 	//Replace whitespace with hyphen https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with/3795147#3795147
@@ -217,7 +229,14 @@ export const Column = ({
 	const ariaControls = `${columnId.toLowerCase()}Links`;
 
 	return (
-		<li css={[columnStyle, pillarDivider]} role="none">
+		<li
+			css={[
+				columnStyle,
+				hasPageSkin && columnStyleWithPageSkin,
+				pillarDivider,
+			]}
+			role="none"
+		>
 			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
 
