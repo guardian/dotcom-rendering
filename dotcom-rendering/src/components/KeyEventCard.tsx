@@ -96,7 +96,7 @@ const textStyles = css`
 
 const timeStyles = css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
-	color: ${palette('--key-event-time')};
+	color: ${palette('--key-event-title')};
 	display: block;
 `;
 

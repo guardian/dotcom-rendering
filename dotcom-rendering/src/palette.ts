@@ -807,8 +807,8 @@ const keyEventBulletDark = (): string => sourcePalette.neutral[60];
 const keyEventBulletHoverLight = (): string => sourcePalette.neutral[0];
 const keyEventBulletHoverDark = (): string => sourcePalette.neutral[86];
 
-const keyEventTimeLight = (): string => sourcePalette.neutral[7];
-const keyEventTimeDark = (): string => sourcePalette.neutral[86];
+const keyEventTitleLight = (): string => sourcePalette.neutral[7];
+const keyEventTitleDark = (): string => sourcePalette.neutral[86];
 
 const keyEventTextLight = ({ theme }: ArticleFormat): string => {
 	switch (theme) {
@@ -852,12 +852,19 @@ const keyEventTextDark = ({ theme }: ArticleFormat): string => {
 };
 
 const keyEventBackgroundLight = (): string => sourcePalette.neutral[97];
-const keyEventBackgroundDark = (): string => sourcePalette.neutral[7];
+const keyEventBackgroundDark = (): string => sourcePalette.neutral[10];
 
 const keyEventBackgroundDesktopLight = (): string => sourcePalette.neutral[93];
+const keyEventBackgroundDesktopDark = (): string => sourcePalette.neutral[7];
 
 const keyEventBorderLight = (): string => sourcePalette.neutral[46];
 const keyEventBorderDark = (): string => sourcePalette.neutral[60];
+const keyEventButtonLight = (): string => sourcePalette.neutral[7];
+const keyEventButtonDark = (): string => sourcePalette.neutral[86];
+const keyEventButtonHoverLight = (): string => sourcePalette.brandAlt[300];
+const keyEventButtonHoverDark = (): string => sourcePalette.neutral[60];
+const keyEventButtonFillLight = (): string => sourcePalette.neutral[100];
+const keyEventButtonFillDark = (): string => sourcePalette.neutral[7];
 
 const summaryEventBulletLight = ({ theme }: ArticleFormat): string => {
 	switch (theme) {
@@ -1124,9 +1131,9 @@ const paletteColours = {
 		light: keyEventBulletHoverLight,
 		dark: keyEventBulletHoverDark,
 	},
-	'--key-event-time': {
-		light: keyEventTimeLight,
-		dark: keyEventTimeDark,
+	'--key-event-title': {
+		light: keyEventTitleLight,
+		dark: keyEventTitleDark,
 	},
 	'--key-event-text': {
 		light: keyEventTextLight,
@@ -1138,11 +1145,23 @@ const paletteColours = {
 	},
 	'--key-event-background-desktop': {
 		light: keyEventBackgroundDesktopLight,
-		dark: keyEventBackgroundDark,
+		dark: keyEventBackgroundDesktopDark,
 	},
 	'--key-event-border': {
 		light: keyEventBorderLight,
 		dark: keyEventBorderDark,
+	},
+	'--key-event-button': {
+		light: keyEventButtonLight,
+		dark: keyEventButtonDark,
+	},
+	'--key-event-button-hover': {
+		light: keyEventButtonHoverLight,
+		dark: keyEventButtonHoverDark,
+	},
+	'--key-event-button-fill': {
+		light: keyEventButtonFillLight,
+		dark: keyEventButtonFillDark,
 	},
 	'--summary-event-bullet': {
 		light: summaryEventBulletLight,
