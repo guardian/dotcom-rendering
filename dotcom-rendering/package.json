@@ -21,6 +21,8 @@
 		"test:ci": "jest --runInBand",
 		"createtoc": "doctoc $npm_package_tocList --github --update-only --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
 		"addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true",
+		"playwright:open": "playwright test --ui",
+		"playwright:run": "playwright test",
 		"cypress:open": "cypress open",
 		"cypress:run": "cypress run",
 		"cypress:open:e2e": "cypress open --e2e --browser electron",
