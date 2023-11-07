@@ -21,14 +21,12 @@ const loadPage = async (
 			`{"value":"${new Date().toISOString()}"}`,
 		);
 	}, region);
-	// Abort all ophan requests as it stops the page from firing the 'load' event
-	//
+	// Abort all ophan requests as they hang and stop the page from firing the 'load' event
 	await page.route(/ophan.theguardian.com/, async (route) => {
 		await route.abort();
 	});
-	//
-	// Instead of aborting ophan change the waituntil to 'domcontentloaded'
-	// rather than 'load'. Monitor this to see if it works for our use cases.
+	// Use default waitUntil: 'domcontentloaded' rather than 'load' to speed up tests
+	// If this causes any issues use 'load' instead
 	await page.goto(`${BASE_URL}${path}`, { waitUntil });
 };
 
