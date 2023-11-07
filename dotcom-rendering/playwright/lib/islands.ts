@@ -28,7 +28,7 @@ const waitForIsland = async (
 	const hyrdatedIslandLocator = page.locator(hyrdatedIslandSelector).nth(nth);
 	await hyrdatedIslandLocator.waitFor({
 		state: 'visible',
-		timeout: 120000,
+		timeout: 30_000,
 	});
 };
 
