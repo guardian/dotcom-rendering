@@ -13,6 +13,10 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
+import {
+	decideFrontsBannerAdSlot,
+	decideMerchHighAndMobileAdSlots,
+} from '../components/DecideFrontsAdSlots';
 import { Footer } from '../components/Footer';
 import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
@@ -27,16 +31,11 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
 import {
-	getMerchHighPosition,
 	getTagFrontMobileAdPositions,
-} from '../lib/getAdPositions';
-import { getTaggedFrontsBannerAdPositions } from '../lib/getFrontsBannerAdPositions';
+	getTagFrontsBannerAdPositions,
+} from '../lib/getTagFrontsAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagFrontType } from '../types/tagFront';
-import {
-	decideFrontsBannerAdSlot,
-	decideMerchHighAndMobileAdSlots,
-} from './lib/decideAdSlots';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -117,10 +116,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 	const palette = decidePalette(format);
 
-	const merchHighPosition = getMerchHighPosition(
-		tagFront.groupedTrails.length,
-	);
-
 	const {
 		config: { switches, hasPageSkin, isPaidContent },
 	} = tagFront;
@@ -128,14 +123,11 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 	const renderAds = canRenderAds(tagFront);
 
 	const desktopAdPositions = renderAds
-		? getTaggedFrontsBannerAdPositions(tagFront.groupedTrails.length)
+		? getTagFrontsBannerAdPositions(tagFront.groupedTrails.length)
 		: [];
 
 	const mobileAdPositions = renderAds
-		? getTagFrontMobileAdPositions(
-				tagFront.groupedTrails,
-				merchHighPosition,
-		  )
+		? getTagFrontMobileAdPositions(tagFront.groupedTrails)
 		: [];
 
 	return (

@@ -1,11 +1,7 @@
 import {
 	decideFrontsBannerAdSlot,
 	decideMerchHighAndMobileAdSlots,
-} from './decideAdSlots';
-
-jest.mock('../../lib/getAdPositions', () => ({
-	getMerchHighPosition: jest.fn(() => 4),
-}));
+} from './DecideFrontsAdSlots';
 
 describe('decideMerchHighAndMobileAdSlots', () => {
 	// default parameters
