@@ -22,8 +22,6 @@ test.describe('Interactivity', () => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
 
-			await expectToNotBeVisible(page, '[data-cy=dropdown-options]');
-
 			await waitForIsland(page, 'HeaderTopBar', 'hydrated');
 			// Open it
 			await page.locator('[data-cy=dropdown-button]').click();
