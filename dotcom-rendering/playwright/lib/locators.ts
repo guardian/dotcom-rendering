@@ -1,4 +1,4 @@
-import type { Page } from '@playwright/test';
+import type { Locator, Page } from '@playwright/test';
 import { expect } from '@playwright/test';
 
 const expectToBeVisible = async (
@@ -26,7 +26,9 @@ const expectToExist = async (
 	selector: string,
 	count = 1,
 ): Promise<void> => {
-	await expect(page.locator(selector)).toHaveCount(count, { timeout: 10000 });
+	await expect(page.locator(selector)).toHaveCount(count, {
+		timeout: 10000,
+	});
 };
 
 const expectToNotExist = async (
@@ -36,9 +38,26 @@ const expectToNotExist = async (
 	await expect(page.locator(selector)).toHaveCount(0, { timeout: 10000 });
 };
 
+const expectLocatorToExist = async (
+	page: Page,
+	locator: Locator,
+	count = 1,
+): Promise<void> => {
+	await expect(locator).toHaveCount(count, { timeout: 10000 });
+};
+
+const expectLocatorToNotExist = async (
+	page: Page,
+	locator: Locator,
+): Promise<void> => {
+	await expect(locator).toHaveCount(0, { timeout: 10000 });
+};
+
 export {
 	expectToBeVisible,
 	expectToNotBeVisible,
 	expectToExist,
 	expectToNotExist,
+	expectLocatorToExist,
+	expectLocatorToNotExist,
 };
