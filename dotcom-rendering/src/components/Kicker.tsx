@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { palette } from '../palette';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
 
@@ -10,8 +11,8 @@ type Props = {
 	hideLineBreak?: boolean;
 };
 
-const kickerStyles = (colour: string) => css`
-	color: ${colour};
+const kickerStyles = css`
+	color: ${palette('--kicker')};
 	font-weight: 700;
 	margin-right: 4px;
 `;
@@ -24,13 +25,8 @@ export const Kicker = ({
 }: Props) => {
 	return (
 		<div
-			css={[
-				kickerStyles(color),
-				hideLineBreak &&
-					css`
-						display: inline-block;
-					`,
-			]}
+			css={kickerStyles}
+			style={{ display: hideLineBreak ? 'inline-block' : undefined }}
 		>
 			{showPulsingDot && (
 				<Island priority="enhancement" defer={{ until: 'visible' }}>

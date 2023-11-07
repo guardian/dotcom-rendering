@@ -143,6 +143,81 @@ const bylineDark = ({ design, theme }: ArticleFormat): string => {
 	}
 };
 
+const kickerLight = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Analysis:
+			return sourcePalette.neutral[46];
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[46];
+			}
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.Interview:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.Review:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Standard:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+			}
+		default:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[400];
+			}
+	}
+};
+const kickerDark = (format: ArticleFormat): string => kickerLight(format);
+
 const avatarLight = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Standard:
@@ -1086,6 +1161,10 @@ const paletteColours = {
 	'--headline-background-colour': {
 		light: headlineBackgroundColourLight,
 		dark: headlineBackgroundColourDark,
+	},
+	'--kicker': {
+		light: kickerLight,
+		dark: kickerDark,
 	},
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
