@@ -6,7 +6,6 @@ import { PulsingDot } from './PulsingDot.importable';
 // Defines a prefix to be used with a headline (e.g. 'Live /')
 type Props = {
 	text: string;
-	color: string;
 	showPulsingDot?: boolean;
 	hideLineBreak?: boolean;
 };
@@ -17,12 +16,7 @@ const kickerStyles = css`
 	margin-right: 4px;
 `;
 
-export const Kicker = ({
-	text,
-	color,
-	showPulsingDot,
-	hideLineBreak,
-}: Props) => {
+export const Kicker = ({ text, showPulsingDot, hideLineBreak }: Props) => {
 	return (
 		<div
 			css={kickerStyles}
@@ -30,7 +24,7 @@ export const Kicker = ({
 		>
 			{showPulsingDot && (
 				<Island priority="enhancement" defer={{ until: 'visible' }}>
-					<PulsingDot colour={color} />
+					<PulsingDot />
 				</Island>
 			)}
 			{text}

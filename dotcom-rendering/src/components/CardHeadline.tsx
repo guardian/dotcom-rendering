@@ -12,6 +12,7 @@ import {
 } from '@guardian/source-foundations';
 import { Link, SvgExternal } from '@guardian/source-react-components';
 import React from 'react';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { palette as schemedPalette } from '../palette';
@@ -249,6 +250,13 @@ export const CardHeadline = ({
 	isDynamo,
 	isExternalLink,
 }: Props) => {
+	const overrides = containerPalette
+		? decideContainerOverrides(containerPalette)
+		: undefined;
+	const kicker = isDynamo
+		? overrides?.text.dynamoKicker
+		: overrides?.text.cardKicker;
+
 	const palette = decidePalette(format, containerPalette);
 	const kickerColour = isDynamo
 		? palette.text.dynamoKicker
@@ -273,19 +281,23 @@ export const CardHeadline = ({
 						}),
 					showLine && !isDynamo && lineStyles(palette),
 				]}
+				style={{
+					['--kicker']: kicker,
+				}}
 			>
 				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
 					{!!kickerText && (
 						<>
 							<Kicker
 								text={kickerText}
-								color={kickerColour}
 								showPulsingDot={showPulsingDot}
 								hideLineBreak={hideLineBreak}
 							/>
 						</>
 					)}
-					{showQuotes && <QuoteIcon colour={kickerColour} />}
+					{showQuotes && (
+						<QuoteIcon colour={schemedPalette('--kicker')} />
+					)}
 					<span
 						css={css`
 							color: ${schemedPalette('--headline-colour')};

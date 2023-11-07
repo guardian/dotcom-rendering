@@ -144,74 +144,68 @@ const bylineDark = ({ design, theme }: ArticleFormat): string => {
 };
 
 const kickerLight = ({ design, theme }: ArticleFormat): string => {
+	if (
+		theme === ArticleSpecial.SpecialReport &&
+		(design === ArticleDesign.Comment || design === ArticleDesign.Letter)
+	) {
+		return sourcePalette.opinion[550];
+	}
+	if (theme === ArticleSpecial.SpecialReport) {
+		return sourcePalette.brandAlt[400];
+	}
+
 	switch (design) {
-		case ArticleDesign.Analysis:
-			return sourcePalette.neutral[46];
-		case ArticleDesign.Comment:
-		case ArticleDesign.Editorial:
+		case ArticleDesign.LiveBlog:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
+					return sourcePalette.news[600];
 				case Pillar.Sport:
-					return sourcePalette.sport[400];
-				case Pillar.Culture:
-					return sourcePalette.culture[400];
+					return sourcePalette.sport[600];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[300];
+					return sourcePalette.neutral[100];
+				case Pillar.Culture:
+					return sourcePalette.culture[600];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.neutral[0];
 			}
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Feature:
-		case ArticleDesign.FullPageInteractive:
-		case ArticleDesign.Interactive:
-		case ArticleDesign.Interview:
-		case ArticleDesign.NewsletterSignup:
-		case ArticleDesign.PhotoEssay:
-		case ArticleDesign.Review:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Standard:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
+					return sourcePalette.news[600];
 				case Pillar.Sport:
-					return sourcePalette.sport[400];
-				case Pillar.Culture:
-					return sourcePalette.culture[400];
+					return sourcePalette.sport[600];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[300];
+					return sourcePalette.opinion[550];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.news[600];
 			}
 		default:
 			switch (theme) {
 				case Pillar.News:
 					return sourcePalette.news[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
 				case Pillar.Sport:
 					return sourcePalette.sport[400];
-				case Pillar.Culture:
-					return sourcePalette.culture[400];
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
+				default:
 					return sourcePalette.news[400];
 			}
 	}

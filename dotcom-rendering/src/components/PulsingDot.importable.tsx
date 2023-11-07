@@ -2,8 +2,7 @@ import { css, keyframes } from '@emotion/react';
 import { storage } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 
-const dotStyles = (colour?: string) => css`
-	color: ${colour && colour};
+const dotStyles = css`
 	:before {
 		border-radius: 62.5rem;
 		display: inline-block;
@@ -30,10 +29,6 @@ const animate = css`
 	}
 `;
 
-interface Props {
-	colour?: string;
-}
-
 /**
  * Used for indicating an article is updating live
  *
@@ -41,7 +36,7 @@ interface Props {
  *
  * We want to respect user’s flashing elements preferences
  */
-export const PulsingDot = ({ colour }: Props) => {
+export const PulsingDot = () => {
 	const [shouldFlash, setShouldFlash] = useState(false);
 
 	useEffect(() => {
@@ -55,5 +50,5 @@ export const PulsingDot = ({ colour }: Props) => {
 		setShouldFlash(flashingPreferences !== false);
 	}, []);
 
-	return <span css={[dotStyles(colour), shouldFlash && animate]} />;
+	return <span css={[dotStyles, shouldFlash && animate]} />;
 };
