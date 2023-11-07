@@ -134,7 +134,7 @@ lint: clean-dist install
 	$(call log, "checking for lint errors")
 	@yarn lint
 
-lint-project:
+lint-project: check-env
 	$(call log, "linting project")
 	@node scripts/check-node-versions.mjs
 	@node scripts/env/check-deps.js
