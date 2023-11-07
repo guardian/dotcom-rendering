@@ -1,8 +1,10 @@
 import { css, jsx } from '@emotion/react';
 import {
+	brand,
 	breakpoints,
 	from,
 	headline,
+	neutral,
 	palette,
 	space,
 	until,
@@ -12,7 +14,6 @@ import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { isElement, parseHtml } from '../lib/domUtils';
 import { logger } from '../server/lib/logging';
 import type { DCRContainerPalette } from '../types/front';
-import { ContainerTitle } from './ContainerTitle';
 import { generateSources, Sources } from './Picture';
 
 type Props = {
@@ -141,20 +142,6 @@ const sectionHeadline = css`
 
 	display: flex;
 	flex-direction: column;
-
-	${from.leftCol} {
-		position: relative;
-		::after {
-			content: '';
-			display: block;
-			width: 1px;
-			top: 0;
-			height: 1.875rem;
-			right: -10px;
-			position: absolute;
-			background-color: ${palette.neutral[86]};
-		}
-	}
 `;
 
 const paddings = css`
@@ -198,7 +185,7 @@ const sideBorders = css`
 	}
 `;
 
-const titleStyle = css`
+const titleContainerStyle = css`
 	${until.leftCol} {
 		max-width: 74%;
 	}
@@ -209,11 +196,25 @@ const paragraphStyle = css`
 	color: ${palette.neutral[46]};
 `;
 
+const titleStyle = css`
+	${headline.xxsmall({ fontWeight: 'bold' })};
+	color: ${neutral[7]};
+	padding-bottom: ${space[1]}px;
+	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
+`;
+
+const linkStyles = css`
+	color: ${brand[500]};
+	text-decoration: none;
+	border-bottom: 1px solid ${brand[500]};
+`;
+
 const buildElementTree = (node: Node): ReactNode => {
 	if (isElement(node)) {
 		switch (node.nodeName) {
 			case 'A':
 				return jsx('a', {
+					css: linkStyles,
 					href: node.attributes.getNamedItem('href')?.value,
 					target: node.attributes.getNamedItem('target')?.value,
 					children: Array.from(node.childNodes).map(buildElementTree),
@@ -280,28 +281,20 @@ export const TagFrontHeader = ({
 		? parseHtml(description)
 		: undefined;
 
-	/**
-	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
-	 * this id pre-existed showMore so is probably also being used for something else.
-	 */
 	return (
 		<section
 			css={[
 				fallbackStyles,
 				containerStyles,
 				css`
-					background-color: ${overrides?.background?.container};
+					background-color: ${overrides?.background.container};
 				`,
 			]}
 		>
 			<div css={[decoration, sideBorders]} />
 
-			<div css={[sectionHeadline, titleStyle, paddings]}>
-				<ContainerTitle
-					title={title}
-					fontColour={overrides?.text?.container}
-					containerPalette={containerPalette}
-				/>
+			<div css={[sectionHeadline, titleContainerStyle, paddings]}>
+				<h2 css={titleStyle}>{title}</h2>
 			</div>
 
 			{image !== undefined && (

@@ -31,4 +31,4 @@ export const AllSizes = () => (
 	</>
 );
 AllSizes.storyName = 'All stars sizes';
-AllSizes.decorators = [splitTheme(articleFormat)];
+AllSizes.decorators = [splitTheme([articleFormat])];

@@ -337,6 +337,7 @@ export const Footer = ({
 	urls,
 	editionId,
 	contributionsServiceUrl,
+	hasPageSkin,
 }: {
 	pillars: PillarLinkType[];
 	selectedPillar?: Pillar;
@@ -344,6 +345,7 @@ export const Footer = ({
 	urls: ReaderRevenueCategories;
 	editionId: EditionId;
 	contributionsServiceUrl: string;
+	hasPageSkin?: boolean;
 }) => (
 	<div
 		data-print-layout="hide"
@@ -357,6 +359,7 @@ export const Footer = ({
 				selectedPillar={selectedPillar}
 				showLastPillarDivider={false}
 				dataLinkName="footer"
+				hasPageSkin={hasPageSkin}
 			/>
 		</div>
 		<div css={footerGrid}>

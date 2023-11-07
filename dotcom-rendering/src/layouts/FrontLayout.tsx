@@ -37,7 +37,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import {
-	getDesktopMpuAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
@@ -125,19 +124,12 @@ const decideLeftContent = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: {
-			switches,
-			isPaidContent,
-			hasPageSkin: hasPageSkinConfig,
-			pageId,
-		},
+		config: { isPaidContent, hasPageSkin: hasPageSkinConfig, pageId },
 	} = front;
 
 	const renderAds = canRenderAds(front);
 
-	const hasPageSkin = hasPageSkinConfig && renderAds;
-
-	const showBannerAds = !!switches.frontsBannerAds;
+	const hasPageSkin = renderAds && hasPageSkinConfig;
 
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
@@ -147,23 +139,24 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
 		: [];
 
-	const desktopAdPositions = getFrontsBannerAdPositions(
-		front.pressedPage.collections.map(
-			({ collectionType, containerPalette, displayName, grouped }) => ({
-				collectionType,
-				containerPalette,
-				displayName,
-				grouped,
-			}),
-		),
-		pageId,
-	);
-
-	const desktopMpuAdPositions = renderAds
-		? getDesktopMpuAdPositions(front.pressedPage.collections)
+	const desktopAdPositions = renderAds
+		? getFrontsBannerAdPositions(
+				front.pressedPage.collections.map(
+					({
+						collectionType,
+						containerPalette,
+						displayName,
+						grouped,
+					}) => ({
+						collectionType,
+						containerPalette,
+						displayName,
+						grouped,
+					}),
+				),
+				pageId,
+		  )
 		: [];
-
-	const renderMpuAds = renderAds && !showBannerAds;
 
 	const showMostPopular =
 		front.config.switches.deeplyRead &&
@@ -254,6 +247,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							headerTopBarSwitch={
 								!!front.config.switches.headerTopNav
 							}
+							hasPageSkin={hasPageSkin}
 						/>
 					</Section>
 					{NAV.subNavSections && (
@@ -347,7 +341,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									{decideFrontsBannerAdSlot(
 										renderAds,
 										hasPageSkin,
-										showBannerAds,
 										index,
 										desktopAdPositions,
 									)}
@@ -386,7 +379,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											.isPaidContent,
 										mobileAdPositions,
 										hasPageSkin,
-										showBannerAds,
 									)}
 								</div>
 							</Fragment>
@@ -407,7 +399,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
-									showBannerAds,
 									index,
 									desktopAdPositions,
 								)}
@@ -465,7 +456,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									showBannerAds,
 								)}
 							</>
 						);
@@ -507,10 +497,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.containerPalette
 										}
 										imageLoading={imageLoading}
-										adIndex={desktopMpuAdPositions.indexOf(
-											index,
-										)}
-										renderAds={renderMpuAds}
 									/>
 								</LabsSection>
 								{decideMerchHighAndMobileAdSlots(
@@ -521,7 +507,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									showBannerAds,
 								)}
 							</Fragment>
 						);
@@ -540,7 +525,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
-									showBannerAds,
 									index,
 									desktopAdPositions,
 								)}
@@ -602,7 +586,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
-									showBannerAds,
 								)}
 							</Fragment>
 						);
@@ -613,7 +596,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
-								showBannerAds,
 								index,
 								desktopAdPositions,
 							)}
@@ -671,10 +653,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)
 									}
 									imageLoading={imageLoading}
-									adIndex={desktopMpuAdPositions.indexOf(
-										index,
-									)}
-									renderAds={renderMpuAds}
 								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(
@@ -684,7 +662,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.pressedPage.frontProperties.isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
-								showBannerAds,
 							)}
 						</Fragment>
 					);

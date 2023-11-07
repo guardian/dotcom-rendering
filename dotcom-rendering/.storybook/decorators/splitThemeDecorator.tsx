@@ -7,7 +7,11 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { palette as sourcePalette, space } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import { Decorator } from '@storybook/react';
 import { paletteDeclarations } from '../../src/palette';
 
@@ -16,91 +20,38 @@ interface Orientation {
 }
 
 const headerCss = css`
-	font-size: 18px;
-	width: 100%;
+	${textSans.large({ fontWeight: 'bold' })}
 	text-align: center;
-	font-weight: bold;
-	padding-bottom: ${space[5]}px;
+	padding: ${space[2]}px;
 `;
 
-const formatHeaderCss = css`
-	h3 {
-		font-size: 16px;
-		width: 100%;
-		padding-bottom: ${space[2]}px;
-		padding-top: ${space[5]}px;
-	}
+const styles = css`
+	display: grid;
+	max-width: 100%;
 `;
 
-const splitCss = () => css`
-	padding: ${space[4]}px;
-	width: var(--column-width);
-`;
-
-const darkStoryCss = () => css`
-	background-color: ${sourcePalette.neutral[0]};
-	color: ${sourcePalette.neutral[100]};
-	float: var(--dark-mode-float);
-`;
-
-const lightStoryCss = () => css`
-	background-color: ${sourcePalette.neutral[100]};
-	color: ${sourcePalette.neutral[0]};
-	float: var(--light-mode-float);
-`;
-
-const rowCss = css`
-	display: flex;
-	flex-direction: row;
-`;
-const columnCss = css`
-	display: flex;
-	flex-direction: column;
-`;
-
+const FormatHeading = ({ format }: { format: ArticleFormat }) => (
+	<h3
+		css={css`
+			${textSans.medium()}
+			text-align: center;
+			padding: ${space[1]}px;
+			opacity: 0.75;
+		`}
+	>
+		{[
+			`Display: ${ArticleDisplay[format.display]}`,
+			`Design: ${ArticleDesign[format.design]}`,
+			`Theme: ${Pillar[format.theme] || ArticleSpecial[format.theme]}`,
+		]
+			.map((line) => line.replaceAll(' ', ' ')) // non-breaking spaces
+			.join(', ')}
+	</h3>
+);
 // ----- Decorators ----- //
 
-/**
- * Creates storybook decorator used to render a component twice
- * Once in light mode, once in dark mode
- * Using a split screen
- */
-export const splitTheme =
-	(
-		format: ArticleFormat,
-		{ orientation = 'horizontal' }: Orientation = {},
-	): Decorator =>
-	(Story) =>
-		(
-			<>
-				<div css={[orientation === 'horizontal' ? rowCss : columnCss]}>
-					<div
-						className="left-lightTheme"
-						css={[
-							splitCss,
-							lightStoryCss,
-							css(paletteDeclarations(format, 'light')),
-						]}
-					>
-						<div css={headerCss}>Light Theme ☀️</div>
-						<Story />
-					</div>
-					<div
-						className="right-darkTheme"
-						css={[
-							splitCss,
-							darkStoryCss,
-							css(paletteDeclarations(format, 'dark')),
-						]}
-					>
-						<div css={headerCss}>Dark Theme 🌙</div>
-						<Story />
-					</div>
-				</div>
-			</>
-		);
-
-const defaultFormats: ArticleFormat[] = [
+/** A list of the most typical formats */
+const defaultFormats = [
 	{
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
@@ -171,82 +122,62 @@ const defaultFormats: ArticleFormat[] = [
 		design: ArticleDesign.DeadBlog,
 		theme: Pillar.Sport,
 	},
-];
+] as const satisfies readonly ArticleFormat[];
 
-export const splitThemeMultipleFormats =
-	(formats: ArticleFormat[] = defaultFormats): Decorator =>
+/**
+ * Creates storybook decorator used to render a component twice
+ * Once in light mode, once in dark mode
+ * Using a split screen
+ */
+export const splitTheme =
+	(
+		formats: readonly [ArticleFormat, ...ArticleFormat[]] = defaultFormats,
+		{ orientation = 'horizontal' }: Orientation = {},
+	): Decorator =>
 	(Story) =>
 		(
-			<>
+			<div
+				css={styles}
+				style={{
+					gridTemplateColumns:
+						orientation === 'horizontal' ? '1fr 1fr' : '1fr',
+				}}
+			>
 				<div
-					css={[headerCss, splitCss(), lightStoryCss()]}
-					style={{
-						['--column-width' as any]: '50%',
-						['--light-mode-float' as any]: 'left',
-					}}
+					className="light"
+					css={[
+						css`
+							background-color: ${sourcePalette.neutral[100]};
+							color: ${sourcePalette.neutral[0]};
+						`,
+						css(paletteDeclarations(defaultFormats[0], 'light')),
+					]}
 				>
-					Light Theme ☀️
+					<h2 css={headerCss}>Light Theme ☀️</h2>
+					{formats.map((format) => (
+						<div css={css(paletteDeclarations(format, 'light'))}>
+							<FormatHeading format={format} />
+							<Story format={format} />
+						</div>
+					))}
 				</div>
 				<div
-					css={[headerCss, splitCss(), darkStoryCss()]}
-					style={{
-						['--column-width' as any]: '50%',
-						['--dark-mode-float' as any]: 'right',
-					}}
+					className="dark"
+					css={[
+						css`
+							background-color: ${sourcePalette.neutral[0]};
+							color: ${sourcePalette.neutral[100]};
+						`,
+						css(paletteDeclarations(defaultFormats[0], 'dark')),
+					]}
 				>
-					Dark Theme 🌙
+					<h2 css={headerCss}>Dark Theme 🌙</h2>
+					{formats.map((format) => (
+						<div css={css(paletteDeclarations(format, 'dark'))}>
+							<FormatHeading format={format} />
+							<Story format={format} />
+						</div>
+					))}
 				</div>
-				{formats.map((format) => {
-					return (
-						<>
-							<div
-								css={[
-									css`
-										width: 50%;
-									`,
-									lightStoryCss(),
-									css(paletteDeclarations(format, 'light')),
-									formatHeaderCss,
-								]}
-								style={{
-									['--light-mode-float' as any]: 'left',
-								}}
-							>
-								<h3>{`Display: ${
-									ArticleDisplay[format.display]
-								}, Design: ${
-									ArticleDesign[format.design]
-								}, Theme: ${
-									Pillar[format.theme] ||
-									ArticleSpecial[format.theme]
-								}`}</h3>
-								<Story format={format} />
-							</div>
-							<div
-								css={[
-									css`
-										width: 50%;
-									`,
-									darkStoryCss(),
-									css(paletteDeclarations(format, 'dark')),
-									formatHeaderCss,
-								]}
-								style={{
-									['--dark-mode-float' as any]: 'right',
-								}}
-							>
-								<h3>{`Display: ${
-									ArticleDisplay[format.display]
-								}, Design: ${
-									ArticleDesign[format.design]
-								}, Theme: ${
-									Pillar[format.theme] ||
-									ArticleSpecial[format.theme]
-								}`}</h3>
-								<Story format={format} />
-							</div>
-						</>
-					);
-				})}
-			</>
+			</div>
 		);

@@ -44,6 +44,12 @@ const columnsStyle = (isImmersive: boolean) => css`
 	}
 `;
 
+const columnsStyleWithPageSkin = css`
+	${from.leftCol} {
+		max-width: 980px;
+	}
+`;
+
 const desktopBrandExtensionColumn = css`
 	${from.desktop} {
 		display: block;
@@ -79,6 +85,12 @@ const brandExtensionList = css`
 	}
 	${from.wide} {
 		width: 300px;
+	}
+`;
+
+const brandExtenstionListWithPageSkin = css`
+	${from.leftCol} {
+		width: 131px;
 	}
 `;
 
@@ -118,6 +130,12 @@ const brandExtensionLink = css`
 	}
 	> * {
 		pointer-events: none;
+	}
+`;
+
+const brandExtensionLinkWithPageSkin = css`
+	${from.wide} {
+		font-size: 1.25rem;
 	}
 `;
 
@@ -210,6 +228,7 @@ type Props = {
 	isImmersive?: boolean;
 	nav: NavType;
 	headerTopBarSwitch: boolean;
+	hasPageSkin?: boolean;
 };
 
 export const Columns = ({
@@ -217,12 +236,16 @@ export const Columns = ({
 	nav,
 	editionId,
 	headerTopBarSwitch,
+	hasPageSkin,
 }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (
 		<ul
-			css={columnsStyle(isImmersive)}
+			css={[
+				columnsStyle(isImmersive),
+				hasPageSkin && columnsStyleWithPageSkin,
+			]}
 			role="menubar"
 			data-cy="nav-menu-columns"
 		>
@@ -241,6 +264,7 @@ export const Columns = ({
 							key={column.title.toLowerCase()}
 							index={i}
 							showLineBelow={i !== nav.pillars.length - 1}
+							hasPageSkin={hasPageSkin}
 						/>
 					)
 				),
@@ -308,6 +332,7 @@ export const Columns = ({
 					}}
 					index={10}
 					showLineBelow={false}
+					hasPageSkin={hasPageSkin}
 				/>
 				<div css={lineStyle}></div>
 			</section>
@@ -316,9 +341,16 @@ export const Columns = ({
 				otherLinks={nav.otherLinks}
 				brandExtensions={nav.brandExtensions}
 				key="more"
+				hasPageSkin={hasPageSkin}
 			/>
 			<li css={desktopBrandExtensionColumn} role="none">
-				<ul css={brandExtensionList} role="menu">
+				<ul
+					css={[
+						brandExtensionList,
+						hasPageSkin && brandExtenstionListWithPageSkin,
+					]}
+					role="menu"
+				>
 					{nav.brandExtensions.map((brandExtension) => (
 						<li
 							css={brandExtensionListItem}
@@ -326,7 +358,11 @@ export const Columns = ({
 						>
 							<a
 								className="selectableMenuItem"
-								css={brandExtensionLink}
+								css={[
+									brandExtensionLink,
+									hasPageSkin &&
+										brandExtensionLinkWithPageSkin,
+								]}
 								href={brandExtension.url}
 								key={brandExtension.title}
 								role="menuitem"

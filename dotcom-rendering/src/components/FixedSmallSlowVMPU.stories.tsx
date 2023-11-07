@@ -26,8 +26,6 @@ export const FourCards = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
-			adIndex={1}
-			renderAds={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -43,8 +41,6 @@ export const ThreeCards = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 3)}
 			showAge={true}
-			adIndex={1}
-			renderAds={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -60,8 +56,6 @@ export const TwoCards = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 2)}
 			showAge={true}
-			adIndex={1}
-			renderAds={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -77,28 +71,9 @@ export const OneCard = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 1)}
 			showAge={true}
-			adIndex={1}
-			renderAds={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
 );
 
 OneCard.storyName = 'With 1 card';
-
-export const AdfreeFixedSmallSlowVMPU = () => (
-	<FrontSection
-		title="Fixed Small Slow V MPU"
-		discussionApiUrl={discussionApiUrl}
-	>
-		<FixedSmallSlowVMPU
-			trails={trails.slice(0, 4)}
-			showAge={true}
-			adIndex={1}
-			renderAds={false}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
-
-AdfreeFixedSmallSlowVMPU.storyName = 'Ad-free Fixed Small Slow V MPU';

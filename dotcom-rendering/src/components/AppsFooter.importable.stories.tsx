@@ -6,11 +6,13 @@ export default {
 	component: AppsFooter,
 	title: 'AppsFooter',
 	decorators: [
-		splitTheme({
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		}),
+		splitTheme([
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+		]),
 	],
 };
 

@@ -38,7 +38,7 @@ export const AllSizeStars = () => (
 	</>
 );
 AllSizeStars.storyName = 'All Sizes';
-AllSizeStars.decorators = [splitTheme(articleFormat)];
+AllSizeStars.decorators = [splitTheme([articleFormat])];
 
 export const SmallStory = () => (
 	<>
@@ -62,7 +62,7 @@ export const SmallStory = () => (
 	</>
 );
 SmallStory.storyName = 'Small Stars';
-SmallStory.decorators = [splitTheme(articleFormat)];
+SmallStory.decorators = [splitTheme([articleFormat])];
 
 export const MediumStory = () => (
 	<>
@@ -86,7 +86,7 @@ export const MediumStory = () => (
 	</>
 );
 MediumStory.storyName = 'Medium stars';
-MediumStory.decorators = [splitTheme(articleFormat)];
+MediumStory.decorators = [splitTheme([articleFormat])];
 
 export const LargeStory = () => (
 	<>
@@ -110,7 +110,7 @@ export const LargeStory = () => (
 	</>
 );
 LargeStory.storyName = 'Large stars';
-LargeStory.decorators = [splitTheme(articleFormat)];
+LargeStory.decorators = [splitTheme([articleFormat])];
 
 export const StarColours = () => (
 	<>

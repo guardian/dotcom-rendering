@@ -1,4 +1,4 @@
-import { splitThemeMultipleFormats } from '../../.storybook/decorators/splitThemeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { FollowButton } from './FollowButton';
 
 export default {
@@ -17,4 +17,4 @@ export const FollowBothStates = () => {
 		</>
 	);
 };
-FollowBothStates.decorators = [splitThemeMultipleFormats()];
+FollowBothStates.decorators = [splitTheme()];

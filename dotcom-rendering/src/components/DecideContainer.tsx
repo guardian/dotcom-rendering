@@ -26,23 +26,19 @@ import { NavList } from './NavList';
 
 type Props = {
 	trails: DCRFrontCard[];
-	adIndex: number;
 	groupedTrails: DCRGroupedTrails;
 	imageLoading: NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	renderAds: boolean;
 };
 
 export const DecideContainer = ({
 	trails,
-	adIndex,
 	groupedTrails,
 	containerType,
 	containerPalette,
 	showAge,
-	renderAds,
 	imageLoading,
 }: Props) => {
 	// If you add a new container type which contains an MPU, you must also add it to
@@ -71,8 +67,6 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					adIndex={adIndex}
-					renderAds={renderAds}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -109,8 +103,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					adIndex={adIndex}
-					renderAds={renderAds}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -174,8 +166,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					renderAds={renderAds}
-					adIndex={adIndex}
 					imageLoading={imageLoading}
 				/>
 			);

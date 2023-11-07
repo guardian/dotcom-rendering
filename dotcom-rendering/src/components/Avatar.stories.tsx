@@ -35,10 +35,12 @@ export const defaultStory: Story = () => (
 );
 defaultStory.storyName = 'Medium, Opinion (Rich Links)';
 defaultStory.decorators = [
-	splitTheme({
-		...format,
-		theme: Pillar.Opinion,
-	}),
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Opinion,
+		},
+	]),
 ];
 
 export const largeStory: Story = () => (
@@ -48,10 +50,12 @@ export const largeStory: Story = () => (
 );
 largeStory.storyName = 'Large, Lifestyle (Byline image - Desktop)';
 largeStory.decorators = [
-	splitTheme({
-		...format,
-		theme: Pillar.Lifestyle,
-	}),
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Lifestyle,
+		},
+	]),
 ];
 
 export const largeStoryNews: Story = () => (
@@ -60,7 +64,7 @@ export const largeStoryNews: Story = () => (
 	</div>
 );
 largeStoryNews.storyName = 'Large, News (Byline image - Desktop)';
-largeStoryNews.decorators = [splitTheme(format)];
+largeStoryNews.decorators = [splitTheme([format])];
 
 export const largeStoryCulture: Story = () => (
 	<div style={{ width: '140px', height: '140px' }}>
@@ -69,10 +73,12 @@ export const largeStoryCulture: Story = () => (
 );
 largeStoryCulture.storyName = 'Large, Culture (Byline image - Desktop)';
 largeStoryCulture.decorators = [
-	splitTheme({
-		...format,
-		theme: Pillar.Culture,
-	}),
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Culture,
+		},
+	]),
 ];
 
 export const SpecialReport: Story = () => (
@@ -82,10 +88,12 @@ export const SpecialReport: Story = () => (
 );
 SpecialReport.storyName = 'Large SpecialReport';
 SpecialReport.decorators = [
-	splitTheme({
-		...format,
-		theme: ArticleSpecial.SpecialReport,
-	}),
+	splitTheme([
+		{
+			...format,
+			theme: ArticleSpecial.SpecialReport,
+		},
+	]),
 ];
 
 export const SpecialReportAlt: Story = () => (
@@ -95,10 +103,12 @@ export const SpecialReportAlt: Story = () => (
 );
 SpecialReportAlt.storyName = 'Large SpecialReportAlt';
 SpecialReportAlt.decorators = [
-	splitTheme({
-		...format,
-		theme: ArticleSpecial.SpecialReportAlt,
-	}),
+	splitTheme([
+		{
+			...format,
+			theme: ArticleSpecial.SpecialReportAlt,
+		},
+	]),
 ];
 
 export const smallStory: Story = () => (
@@ -108,8 +118,10 @@ export const smallStory: Story = () => (
 );
 smallStory.storyName = 'Small, Sport (Byline image - Mobile)';
 smallStory.decorators = [
-	splitTheme({
-		...format,
-		theme: Pillar.Sport,
-	}),
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Sport,
+		},
+	]),
 ];
