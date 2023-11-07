@@ -11,8 +11,11 @@ const green = '\u001b[32m';
 const dim = '\x1b[2m';
 const reset = '\x1b[0m';
 
+const colourise = (colour, str) =>
+	process.stdout.isTTY ? `${colour}${str}${reset}` : str;
+
 const logIt = (messages = [], color = dim) => {
-	console.log(`${color}%s${reset}`, capitalize(messages.join('\n')));
+	console.log(colourise(color, capitalize(messages.join('\n'))));
 };
 
 const log = (...messages) => logIt(messages);
