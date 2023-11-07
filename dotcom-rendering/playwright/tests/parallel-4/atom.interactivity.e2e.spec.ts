@@ -51,7 +51,6 @@ for (const { type, url } of expandableTests) {
 			).toBeVisible();
 
 			// Click Show to expand
-			// await page.locator(`[data-snippet-type=${type}]`).click();
 			await page
 				.locator(`[data-snippet-type=${type}]`)
 				.getByText('Show', { exact: true })
@@ -70,7 +69,6 @@ for (const { type, url } of expandableTests) {
 			).toBeVisible();
 
 			// Click Hide to contract
-			// await page.locator(`[data-snippet-type=${type}]`).click();
 			await page
 				.locator(`[data-snippet-type=${type}]`)
 				.getByText('Hide', { exact: true })

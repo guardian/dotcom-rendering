@@ -33,7 +33,7 @@ test.describe('Interactivity', () => {
 			await page.locator('[data-cy=dropdown-button]').click();
 			await expectToBeVisible(page, '[data-cy=dropdown-options]');
 			// Clicking elsewhere in the document hides it
-			await page.locator('h1').first().press('Escape');
+			await page.locator('h1').first().click();
 			await expectToNotBeVisible(page, '[data-cy=dropdown-options]');
 		});
 
@@ -82,7 +82,7 @@ test.describe('Interactivity', () => {
 			await expectToBeVisible(page, '[id=comment-154433663]');
 		});
 
-		test('loads the most viwed list only after starting to scroll the page', async ({
+		test('loads the most viewed list only after starting to scroll the page', async ({
 			context,
 			page,
 		}) => {
