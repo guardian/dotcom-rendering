@@ -323,43 +323,6 @@ const textTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
 	return textTwitterHandle(format);
 };
 
-const textCaption = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[100];
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.LiveBlog &&
-		format.design !== ArticleDesign.DeadBlog
-	)
-		return neutral[7];
-
-	if (format.theme === ArticleSpecial.Labs) return neutral[20];
-
-	switch (format.design) {
-		case ArticleDesign.PhotoEssay:
-			return pillarPalette[format.theme].dark;
-		case ArticleDesign.Picture:
-			return palette.neutral[86];
-		default:
-			return text.supporting;
-	}
-};
-
-const textCaptionLink = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-	if (format.design === ArticleDesign.NewsletterSignup) return BLACK;
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
 const textSubMeta = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
@@ -1228,9 +1191,6 @@ const fillShareIconGrayBackground = (format: ArticleFormat): string => {
 	}
 };
 
-const fillCaptionCamera = (format: ArticleFormat): string =>
-	textCaption(format);
-
 const fillBlockquoteIcon = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
@@ -1844,10 +1804,6 @@ const textNumberedPosition = (): string => {
 	return text.supporting;
 };
 
-const textOverlaid = (): string => {
-	return WHITE;
-};
-
 const textKeyEventTime = (): string => neutral[7];
 
 const textFilterButton = (): string => neutral[7];
@@ -2226,8 +2182,6 @@ export const decidePalette = (
 			byline: textByline(format),
 			twitterHandle: textTwitterHandle(format),
 			twitterHandleBelowDesktop: textTwitterHandleBelowDesktop(format),
-			caption: textCaption(format),
-			captionLink: textCaptionLink(format),
 			subMeta: textSubMeta(format),
 			subMetaLabel: textSubMetaLabel(format),
 			subMetaLink: textSubMetaLink(format),
@@ -2266,7 +2220,6 @@ export const decidePalette = (
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
-			overlaidCaption: textOverlaid(),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			keyEvent: textKeyEvent(format),
 			keyEventFromDesktop: textKeyEventFromDesktop(format),
@@ -2329,7 +2282,6 @@ export const decidePalette = (
 			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
 			shareIcon: fillShareIcon(format),
 			shareIconGrayBackground: fillShareIconGrayBackground(format),
-			cameraCaptionIcon: fillCaptionCamera(format),
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),
