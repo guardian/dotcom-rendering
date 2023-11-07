@@ -1,5 +1,15 @@
 import type { Page } from '@playwright/test';
 
+/**
+ * Wait for an island to hydrate
+ *
+ * Scrolls to the island and waits for its status to be hydrated or rendered and the element to be visible
+ *
+ * @param page
+ * @param island
+ * @param status
+ * @param nth 0 indexed
+ */
 const waitForIsland = async (
 	page: Page,
 	island: string,

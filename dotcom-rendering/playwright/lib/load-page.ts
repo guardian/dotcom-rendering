@@ -3,6 +3,18 @@ import type { Page } from '@playwright/test';
 const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
 
+/**
+ * Loads a page and centralises setup:
+ * - default the base url and port
+ * - default the geo region to GB
+ * - prevent the support banner from showing
+ * - abort all ophan requests
+ * - use default waitUntil: 'domcontentloaded' rather than 'load' to speed up tests
+ * @param page
+ * @param path
+ * @param waitUntil
+ * @param region
+ */
 const loadPage = async (
 	page: Page,
 	path: string,
