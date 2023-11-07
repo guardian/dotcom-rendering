@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { splitThemeMultipleFormats } from '../../.storybook/decorators/splitThemeDecorators';
+import { splitThemeMultipleFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import type { Config } from '../../src/types/configContext';
 import { decidePalette } from '../lib/decidePalette';
 import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';

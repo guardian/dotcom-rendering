@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorators';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
 
 const shortQuoteHtml =

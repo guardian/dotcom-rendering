@@ -6,7 +6,7 @@ import {
 } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorators';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Avatar } from './Avatar';
 
 const meta: Meta<typeof Avatar> = {

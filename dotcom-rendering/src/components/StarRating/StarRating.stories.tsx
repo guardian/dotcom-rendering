@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta } from '@storybook/react';
-import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorators';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { StarRating } from './StarRating';
 
 // ----- Meta ----- //
