@@ -14,8 +14,10 @@ const { execSync } = require('child_process');
 const { stdout } = require('process');
 const { colourise, log, warn } = require('../log');
 
+// we can't use chalk, because this runs before deps are installed
+// https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 const reset = '\x1b[0m';
-const blue = '\u001b[34m';
+const blue = '\x1b[34m';
 
 try {
 	const yarnVersion = execSync('yarn -v', { encoding: 'utf-8' });
