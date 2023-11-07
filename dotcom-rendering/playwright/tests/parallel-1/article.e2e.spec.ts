@@ -27,13 +27,13 @@ test.describe('E2E Page rendering', () => {
 		}) => {
 			await disableCMP(context);
 
-			// rich link
+			// rich link response promise
 			// https://api.nextgen.guardianapps.co.uk/embed/card/lifeandstyle/2013/nov/09/impostor-syndrome-oliver-burkeman.json?dcr=true
 			const richLinkResponsePromise = page.waitForResponse((response) =>
 				responseHasJsonProperty(response, /embed\/card/, 'tags'),
 			);
 
-			// most-read-geo.json aka most viewed right hand column
+			// most viewed right hand column, response promise
 			// https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true
 			const mostReadRightResponsePromise = page.waitForResponse(
 				(response) =>
@@ -44,7 +44,7 @@ test.describe('E2E Page rendering', () => {
 					),
 			);
 
-			// most-read/commentisfree.json aka most viewed footer
+			// most viewed footer response promise
 			// https://api.nextgen.guardianapps.co.uk/most-read/commentisfree.json?_edition=UK&dcr=true
 			const mostReadFooterResponsePromise = page.waitForResponse(
 				(response) =>
@@ -64,35 +64,41 @@ test.describe('E2E Page rendering', () => {
 				'Opinion',
 			);
 
-			await waitForIsland(page, 'RichLinkComponent', 'hydrated', 1);
+			// expect rich link island to be loaded, its data response and its text to be visible
+			await waitForIsland(page, 'RichLinkComponent', {
+				status: 'hydrated',
+				nth: 1,
+			});
 			await richLinkResponsePromise;
 			await expect(
 				page
 					.locator(`gu-island[name="RichLinkComponent"]`)
-					.filter({ hasText: 'Read more' })
-					.first(),
+					.first()
+					.getByText('Read more'),
 			).toBeVisible();
 
+			// expect most read right to be loaded, its data response and its text to be visible
 			await waitForIsland(page, 'MostViewedRightWrapper');
 			await mostReadRightResponsePromise;
 			await expect(
 				page
 					.locator(`gu-island[name="MostViewedRightWrapper"]`)
-					.filter({ hasText: 'Most Viewed' }),
+					.getByText('Most Viewed'),
 			).toBeVisible();
 
+			// expect most read footer to be loaded, its data response and its text to be visible
 			await waitForIsland(page, 'MostViewedFooterData');
 			await mostReadFooterResponsePromise;
 			await expect(
 				page
 					.locator(`gu-island[name="MostViewedFooterData"]`)
-					.filter({ hasText: 'Across The Guardian' }),
+					.getByText('Across The Guardian'),
 			).toBeVisible();
 		});
 	});
 
 	test.describe('for AMP', function () {
-		test(`It should load render an AMP page`, async ({ context, page }) => {
+		test(`It should load render an AMP page`, async ({ page }) => {
 			await loadPage(
 				page,
 				`/AMPArticle/https://amp.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,

@@ -1,5 +1,11 @@
 import type { Page } from '@playwright/test';
 
+type IslandStatus = 'rendered' | 'hydrated';
+type WaitForIslandOptions = {
+	status?: IslandStatus;
+	nth?: number;
+};
+
 /**
  * Wait for an island to hydrate
  *
@@ -13,9 +19,9 @@ import type { Page } from '@playwright/test';
 const waitForIsland = async (
 	page: Page,
 	island: string,
-	status: 'rendered' | 'hydrated' = 'rendered',
-	nth = 0,
+	options?: WaitForIslandOptions,
 ): Promise<void> => {
+	const { status = 'rendered', nth = 0 } = options ?? {};
 	const islandSelector = `gu-island[name="${island}"]`;
 	// create a locator for the island
 	const islandLocator = page.locator(islandSelector).nth(nth);

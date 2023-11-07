@@ -22,7 +22,7 @@ test.describe('Interactivity', () => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
 
-			await waitForIsland(page, 'HeaderTopBar', 'hydrated');
+			await waitForIsland(page, 'HeaderTopBar', { status: 'hydrated' });
 			// Open it
 			await page.locator('[data-cy=dropdown-button]').click();
 			await expectToBeVisible(page, '[data-cy=dropdown-options]');
@@ -52,7 +52,9 @@ test.describe('Interactivity', () => {
 			await expectToNotBeVisible(page, '[data-cy=discussion]');
 			// Click the comment count
 			await page.locator('[data-cy=comment-counts]').click();
-			await waitForIsland(page, 'DiscussionContainer', 'hydrated');
+			await waitForIsland(page, 'DiscussionContainer', {
+				status: 'hydrated',
+			});
 			await expectToExist(page, '[data-cy=discussion]');
 		});
 
@@ -78,7 +80,9 @@ test.describe('Interactivity', () => {
 				page,
 				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
 			);
-			await waitForIsland(page, 'DiscussionContainer', 'hydrated');
+			await waitForIsland(page, 'DiscussionContainer', {
+				status: 'hydrated',
+			});
 			await expectToBeVisible(page, '[id=comment-154433663]');
 		});
 
@@ -103,9 +107,15 @@ test.describe('Interactivity', () => {
 			await expect(
 				page.locator('[data-component=rich-link]'),
 			).toHaveCount(2);
-			// Verify hydration
-			await waitForIsland(page, 'RichLinkComponent', 'hydrated', 0);
-			await waitForIsland(page, 'RichLinkComponent', 'hydrated', 1);
+			// Verify hydration of both rich links
+			await waitForIsland(page, 'RichLinkComponent', {
+				status: 'hydrated',
+				nth: 0,
+			});
+			await waitForIsland(page, 'RichLinkComponent', {
+				status: 'hydrated',
+				nth: 1,
+			});
 			await expectToBeVisible(
 				page,
 				'img[alt="Michael Barnier and the EU flag"]',
@@ -118,7 +128,7 @@ test.describe('Interactivity', () => {
 		}) => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
-			await waitForIsland(page, 'SupportTheG', 'rendered');
+			await waitForIsland(page, 'SupportTheG');
 			await expect(
 				page
 					.locator('header')
@@ -307,8 +317,14 @@ test.describe('Interactivity', () => {
 				await loadPage(page, `/Article/${articleUrl}`);
 
 				// Wait for hydration of both navs
-				await waitForIsland(page, 'SubNav', 'hydrated', 0);
-				await waitForIsland(page, 'SubNav', 'hydrated', 1);
+				await waitForIsland(page, 'SubNav', {
+					status: 'hydrated',
+					nth: 0,
+				});
+				await waitForIsland(page, 'SubNav', {
+					status: 'hydrated',
+					nth: 1,
+				});
 
 				// Both subnav buttons show 'More'
 				await expect(
