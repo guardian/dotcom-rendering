@@ -32,6 +32,7 @@ export const ContainerOverrides = ({
 		'--headline-colour': isDynamo
 			? text?.dynamoHeadline
 			: text?.cardHeadline,
+		'--byline': text?.cardByline,
 	} satisfies Partial<Record<ColourName, string>>;
 
 	return (
