@@ -3163,10 +3163,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-15.0.1.tgz#2c936c43e654f5ae28db254329eae1b4b5861641"
   integrity sha512-XNqYE9X/4aM5vZqiZInedvEZ9niPfdqwL7SjzNF0wnVbR+YObOC6QC68M521gTPcyca6r190qtnayv4GNO0peg==
 
-"@guardian/bridget@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.3.0.tgz#9e567e60161ca412191e91ebb2b8f8127a37dc59"
-  integrity sha512-L1RsmQifJrjBzIvinf/A5q8FNfLa3pSQkSIrlIk13hoAYSaDTOp1Hw+ZmVWiaMCxSoocJLxLjyHMlTGyQ/FFAw==
+"@guardian/bridget@2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.5.0.tgz#1a5b1adeea08398b678f38e15cb8c598a5e73b19"
+  integrity sha512-H60m0zTPGgwJJm4SG/a7XO6Cxmn2PPJQhGULjueX+z5ZkEfhc78dsc6a578GZbJWFSTw10clgnXM7ruXON2vUw==
 
 "@guardian/browserslist-config@5.0.0":
   version "5.0.0"
@@ -15114,7 +15114,7 @@ prebid.js@guardian/prebid.js#0b4cccd:
   version "7.54.5"
   resolved "https://codeload.github.com/guardian/prebid.js/tar.gz/0b4cccd55ab4e170b36bb944e9bdd2807a9da1c5"
   dependencies:
-    "@babel/core" "^7.16.7"
+    "@babel/core" "^7.23.2"
     "@babel/plugin-transform-runtime" "^7.18.9"
     "@babel/preset-env" "^7.16.8"
     "@babel/runtime" "^7.18.9"
@@ -15122,7 +15122,7 @@ prebid.js@guardian/prebid.js#0b4cccd:
     core-js "^3.13.0"
     core-js-pure "^3.13.0"
     criteo-direct-rsa-validate "^1.1.0"
-    crypto-js "^4.2.0"
+    crypto-js "^3.3.0"
     dlv "1.1.3"
     dset "3.1.2"
     express "^4.15.4"
