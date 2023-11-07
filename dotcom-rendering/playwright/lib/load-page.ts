@@ -1,3 +1,4 @@
+import { storage } from '@guardian/libs';
 import type { Page } from '@playwright/test';
 
 const PORT = 9000;
@@ -23,14 +24,11 @@ const loadPage = async (
 ): Promise<void> => {
 	await page.addInitScript((regionProvided) => {
 		// force geo region
-		window.localStorage.setItem(
-			'gu.geo.override',
-			JSON.stringify({ value: regionProvided }),
-		);
+		storage.local.set('gu.geo.override', regionProvided);
 		// prevent support banner
-		window.localStorage.setItem(
+		storage.local.set(
 			'gu.prefs.engagementBannerLastClosedAt',
-			`{"value":"${new Date().toISOString()}"}`,
+			new Date().toISOString(),
 		);
 	}, region);
 	// Abort all ophan requests as they hang and stop the page from firing the 'load' event
