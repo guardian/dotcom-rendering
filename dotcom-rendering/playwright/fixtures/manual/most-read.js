@@ -1,3 +1,7 @@
+/**
+ * most-read/[pillar].json aka most viewed footer
+ * e.g. https://api.nextgen.guardianapps.co.uk/most-read/commentisfree.json?_edition=UK&dcr=true
+ */
 export const mostRead = {
 	tabs: [
 		{

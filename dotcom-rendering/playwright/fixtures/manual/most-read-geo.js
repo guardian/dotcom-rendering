@@ -1,3 +1,7 @@
+/**
+ * most-read-geo.json aka most viewed right hand column
+ * e.g. https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true
+ */
 export const mostReadGeo = {
 	heading: 'Across The&nbsp;Guardian',
 	trails: [
