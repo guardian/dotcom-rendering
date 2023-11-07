@@ -136,7 +136,7 @@ lint: clean-dist install
 
 lint-project:
 	$(call log, "linting project")
-	@node ../scripts/check-node-versions.mjs
+	@node ./scripts/check-node-versions.mjs
 
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
