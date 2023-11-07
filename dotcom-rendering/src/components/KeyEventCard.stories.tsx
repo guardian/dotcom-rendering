@@ -44,7 +44,6 @@ const SummaryCard = ({ theme }: { theme: ArticleTheme }) => (
 			id={events[0].id}
 			blockFirstPublished={events[0].blockFirstPublished}
 			title={events[0].title}
-			format={getFormat(theme)}
 			filterKeyEvents={false}
 			isSummary={true}
 		/>
@@ -67,7 +66,6 @@ const StandardCard = ({
 				title={event.title}
 				isSummary={event.isSummary}
 				filterKeyEvents={false}
-				format={getFormat(theme)}
 			/>
 		))}
 	</ul>

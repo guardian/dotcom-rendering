@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import { from, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
 import { Island } from './Island';
 import { RelativeTime } from './RelativeTime.importable';
+import { palette } from '../palette';
 
 interface Props {
 	id: string;
@@ -12,11 +11,10 @@ interface Props {
 	title: string;
 	isSummary: boolean;
 	filterKeyEvents: boolean;
-	format: ArticleFormat;
 	cardPosition?: string;
 }
 
-const linkStyles = (palette: Palette) => css`
+const linkStyles = css`
 	text-decoration: none;
 
 	&::before {
@@ -26,7 +24,7 @@ const linkStyles = (palette: Palette) => css`
 		height: 13px;
 		width: 13px;
 		border-radius: 50%;
-		background-color: ${palette.background.keyEventBullet};
+		background-color: ${palette('--key-event-bullet')};
 		margin-bottom: ${space[1]}px;
 		z-index: 2;
 
@@ -37,36 +35,33 @@ const linkStyles = (palette: Palette) => css`
 	}
 
 	&:hover::before {
-		background-color: ${palette.hover.keyEventBullet};
+		background-color: ${palette('--key-event-bullet-hover')};
 	}
 
 	&:hover {
-		span {
-			border-bottom: 1px solid ${palette.hover.keyEventLink};
-		}
 		div {
-			text-decoration: underline ${palette.text.keyEvent};
+			text-decoration: underline ${palette('--key-event-text')};
 			text-underline-offset: 1px;
 		}
 	}
 `;
 
-const summaryStyles = (palette: Palette) => css`
+const summaryStyles = css`
 	&::before {
-		background-color: ${palette.background.summaryEventBullet};
+		background-color: ${palette('--summary-event-bullet')};
 	}
 
 	&:hover::before {
-		background-color: ${palette.hover.summaryEventBullet};
+		background-color: ${palette('--summary-event-bullet-hover')};
 	}
 `;
 
-const listItemStyles = (palette: Palette) => css`
+const listItemStyles = css`
 	position: relative;
 	padding-bottom: ${space[3]}px;
 	padding-top: ${space[3]}px;
 	padding-right: ${space[3]}px;
-	background-color: ${palette.background.keyEvent};
+	background-color: ${palette('--key-event-background')};
 	list-style: none;
 	display: block;
 	width: 162px;
@@ -74,7 +69,7 @@ const listItemStyles = (palette: Palette) => css`
 
 	${from.desktop} {
 		padding-bottom: ${space[3]}px;
-		background-color: ${palette.background.keyEventFromDesktop};
+		background-color: ${palette('--key-event-background-desktop')};
 		width: 200px;
 		padding-right: ${space[5]}px;
 	}
@@ -83,7 +78,7 @@ const listItemStyles = (palette: Palette) => css`
 		content: '';
 		display: block;
 		position: absolute;
-		border-top: 1px dotted ${palette.border.keyEvent};
+		border-top: 1px dotted ${palette('--key-event-border')};
 		left: 0;
 		right: 0;
 		top: 19px;
@@ -94,14 +89,14 @@ const listItemStyles = (palette: Palette) => css`
 	}
 `;
 
-const textStyles = (palette: Palette) => css`
+const textStyles = css`
 	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
-	color: ${palette.text.keyEvent};
+	color: ${palette('--key-event-text')};
 `;
 
-const timeStyles = (palette: Palette) => css`
+const timeStyles = css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
-	color: ${palette.text.keyEventTime};
+	color: ${palette('--key-event-time')};
 	display: block;
 `;
 
@@ -111,27 +106,25 @@ export const KeyEventCard = ({
 	isSummary,
 	title,
 	filterKeyEvents,
-	format,
 	cardPosition = 'unknown position',
 }: Props) => {
-	const palette = decidePalette(format);
 	const url = `?filterKeyEvents=${String(
 		filterKeyEvents,
 	)}&page=with:block-${id}#block-${id}`;
 	return (
-		<li css={listItemStyles(palette)}>
+		<li css={listItemStyles}>
 			<Link
 				priority="secondary"
-				css={[linkStyles(palette), isSummary && summaryStyles(palette)]}
+				css={[linkStyles, isSummary && summaryStyles]}
 				href={url}
 				data-link-name={`key event card | ${cardPosition}`}
 			>
-				<div css={timeStyles(palette)}>
+				<div css={timeStyles}>
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<RelativeTime then={blockFirstPublished} />
 					</Island>
 				</div>
-				<div css={textStyles(palette)}>{title}</div>
+				<div css={textStyles}>{title}</div>
 			</Link>
 		</li>
 	);

@@ -134,7 +134,6 @@ export const KeyEventsCarousel = ({
 						return (
 							<KeyEventCard
 								key={keyEvent.id}
-								format={format}
 								filterKeyEvents={filterKeyEvents}
 								id={keyEvent.id}
 								blockFirstPublished={
