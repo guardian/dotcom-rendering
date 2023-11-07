@@ -1,0 +1,7 @@
+dist
+.yarn
+deno
+
+# generated files
+dotcom-rendering/src/model/*-schema.json
+dotcom-rendering/stories/generated
