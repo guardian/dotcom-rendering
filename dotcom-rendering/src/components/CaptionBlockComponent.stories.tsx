@@ -48,39 +48,35 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	</Section>
 );
 
+const standardFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
 export const StandardArticle = () => {
 	return (
 		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption text"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={standardFormat}
 			/>
 		</Wrapper>
 	);
 };
 StandardArticle.storyName = 'with defaults';
-StandardArticle.decorators = [
-	splitTheme({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	}),
-];
+StandardArticle.decorators = [splitTheme([standardFormat])];
 
+const photoEssayFormat = {
+	display: ArticleDisplay.Immersive,
+	design: ArticleDesign.PhotoEssay,
+	theme: Pillar.Lifestyle,
+};
 export const PhotoEssay = () => {
 	return (
 		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption text"
-				format={{
-					display: ArticleDisplay.Immersive,
-					design: ArticleDesign.PhotoEssay,
-					theme: Pillar.Lifestyle,
-				}}
+				format={photoEssayFormat}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -91,24 +87,14 @@ export const PhotoEssay = () => {
 	);
 };
 PhotoEssay.storyName = 'PhotoEssay';
-PhotoEssay.decorators = [
-	splitTheme({
-		display: ArticleDisplay.Immersive,
-		design: ArticleDesign.PhotoEssay,
-		theme: Pillar.Lifestyle,
-	}),
-];
+PhotoEssay.decorators = [splitTheme([photoEssayFormat])];
 
 export const PhotoEssayHTML = () => {
 	return (
 		<Wrapper>
 			<CaptionBlockComponent
 				captionText="<ul><li>Line 1 text</li><li>Line 2 text</li><li>Line 3 text</li></ul>"
-				format={{
-					display: ArticleDisplay.Immersive,
-					design: ArticleDesign.PhotoEssay,
-					theme: Pillar.Sport,
-				}}
+				format={photoEssayFormat}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -119,24 +105,14 @@ export const PhotoEssayHTML = () => {
 	);
 };
 PhotoEssayHTML.storyName = 'PhotoEssay using html';
-PhotoEssayHTML.decorators = [
-	splitTheme({
-		display: ArticleDisplay.Immersive,
-		design: ArticleDesign.PhotoEssay,
-		theme: Pillar.Sport,
-	}),
-];
+PhotoEssayHTML.decorators = [splitTheme([photoEssayFormat])];
 
 export const Padded = () => {
 	return (
 		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption text"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Analysis,
-					theme: Pillar.Culture,
-				}}
+				format={standardFormat}
 				padCaption={true}
 				credit="Credit text"
 				displayCredit={false}
@@ -147,24 +123,14 @@ export const Padded = () => {
 	);
 };
 Padded.storyName = 'when padded';
-Padded.decorators = [
-	splitTheme({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Analysis,
-		theme: Pillar.Culture,
-	}),
-];
+Padded.decorators = [splitTheme([standardFormat])];
 
 export const WidthLimited = () => {
 	return (
 		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Review,
-					theme: Pillar.Culture,
-				}}
+				format={standardFormat}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -175,23 +141,14 @@ export const WidthLimited = () => {
 	);
 };
 WidthLimited.storyName = 'with width limited';
-WidthLimited.decorators = [
-	splitTheme({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Review,
-		theme: Pillar.Culture,
-	}),
-];
+WidthLimited.decorators = [splitTheme([standardFormat])];
+
 export const Credited = () => {
 	return (
 		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.MatchReport,
-					theme: Pillar.Culture,
-				}}
+				format={standardFormat}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={true}
@@ -202,23 +159,19 @@ export const Credited = () => {
 	);
 };
 Credited.storyName = 'with credit';
-Credited.decorators = [
-	splitTheme({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.MatchReport,
-		theme: Pillar.Culture,
-	}),
-];
+Credited.decorators = [splitTheme([standardFormat])];
+
+const showcaseFormat = {
+	display: ArticleDisplay.Showcase,
+	design: ArticleDesign.Comment,
+	theme: Pillar.Sport,
+};
 export const Overlaid = () => {
 	return (
 		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
-				format={{
-					display: ArticleDisplay.Showcase,
-					design: ArticleDesign.Comment,
-					theme: Pillar.Sport,
-				}}
+				format={showcaseFormat}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -229,10 +182,4 @@ export const Overlaid = () => {
 	);
 };
 Overlaid.storyName = 'when overlaid';
-Overlaid.decorators = [
-	splitTheme({
-		display: ArticleDisplay.Showcase,
-		design: ArticleDesign.Comment,
-		theme: Pillar.Sport,
-	}),
-];
+Overlaid.decorators = [splitTheme([showcaseFormat])];
