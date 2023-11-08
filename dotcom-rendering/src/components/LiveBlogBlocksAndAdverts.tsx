@@ -20,7 +20,6 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	isLiveUpdate?: boolean;
-	isInLiveblogAdSlotTest?: boolean;
 };
 
 const appsFirstAdIndex = 1;
@@ -74,38 +73,10 @@ export const LiveBlogBlocksAndAdverts = ({
 	isAdFreeUser,
 	isSensitive,
 	isLiveUpdate,
-	isInLiveblogAdSlotTest = false,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
-
-	if (!isInLiveblogAdSlotTest) {
-		return (
-			<>
-				{blocks.map((block, index) => (
-					<>
-						<LiveBlock
-							key={block.id}
-							format={format}
-							block={block}
-							pageId={pageId}
-							webTitle={webTitle}
-							host={host}
-							ajaxUrl={ajaxUrl}
-							isLiveUpdate={isLiveUpdate}
-							switches={switches}
-							isAdFreeUser={isAdFreeUser}
-							isSensitive={isSensitive}
-							isPinnedPost={false}
-							pinnedPostId={pinnedPost?.id}
-						/>
-						{shouldInsertAppAd(isApps, index) && <AdPlaceholder />}
-					</>
-				))}
-			</>
-		);
-	}
 
 	let pxSinceAdMobileView = 0;
 	let mobileViewAdCounter = 0;

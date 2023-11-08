@@ -40,7 +40,6 @@ type Props = {
 	filterKeyEvents?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
-	isInLiveblogAdSlotTest?: boolean;
 	abTests?: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
@@ -130,7 +129,6 @@ export const ArticleBody = ({
 	availableTopics,
 	selectedTopics,
 	keywordIds,
-	isInLiveblogAdSlotTest = false,
 	abTests,
 	tableOfContents,
 	lang,
@@ -184,7 +182,6 @@ export const ArticleBody = ({
 					availableTopics={availableTopics}
 					selectedTopics={selectedTopics}
 					keywordIds={keywordIds}
-					isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 				/>
 			</div>
 		);

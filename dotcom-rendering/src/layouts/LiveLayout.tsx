@@ -299,9 +299,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
 	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
-	const isInLiveblogAdSlotTest =
-		article.config.abTests.serverSideLiveblogInlineAdsVariant === 'variant';
-
 	return (
 		<>
 			{isWeb && (
@@ -910,9 +907,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 														article.config
 															.keywordIds
 													}
-													isInLiveblogAdSlotTest={
-														isInLiveblogAdSlotTest
-													}
 													imagesForAppsLightbox={
 														article.imagesForAppsLightbox
 													}
@@ -1059,9 +1053,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													keywordIds={
 														article.config
 															.keywordIds
-													}
-													isInLiveblogAdSlotTest={
-														isInLiveblogAdSlotTest
 													}
 													lang={article.lang}
 													isRightToLeftLang={
