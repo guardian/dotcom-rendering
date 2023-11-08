@@ -3,7 +3,7 @@ import path from 'node:path';
 import * as url from 'node:url';
 import cpy from 'cpy';
 import execa from 'execa';
-import { log, warn } from '../../../scripts/log.js';
+import { log, warn } from '../env/log.js';
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const target = path.resolve(dirname, '../..', 'target');
