@@ -7,7 +7,7 @@ import {
 import { palette } from '../palette';
 
 type IconProps = {
-	isFollowing?: boolean;
+	isFollowing: boolean;
 };
 
 const FollowIcon = ({ isFollowing }: IconProps) => (
@@ -67,15 +67,13 @@ type Props = {
 
 export const FollowButton = ({ isFollowing, onClickHandler }: Props) => {
 	return (
-		<>
-			<button onClick={onClickHandler} type="button" css={buttonStyles}>
-				<span css={containerStyles}>
-					<FollowIcon isFollowing={isFollowing} />
-					<span>
-						{isFollowing ? 'Notifications on' : 'Notifications off'}
-					</span>
+		<button onClick={onClickHandler} type="button" css={buttonStyles}>
+			<span css={containerStyles}>
+				<FollowIcon isFollowing={isFollowing} />
+				<span>
+					{isFollowing ? 'Notifications on' : 'Notifications off'}
 				</span>
-			</button>
-		</>
+			</span>
+		</button>
 	);
 };
