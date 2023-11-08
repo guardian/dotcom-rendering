@@ -64,6 +64,7 @@ import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { palette as darkModePalette } from '../../src/palette';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -596,9 +597,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={
-							palette.background.keyEventFromDesktop
-						}
+						backgroundColour={darkModePalette(
+							'--key-event-background-desktop',
+						)}
 						borderColour={palette.border.article}
 					>
 						<Hide until={'desktop'}>
@@ -609,7 +610,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								<KeyEventsCarousel
 									keyEvents={article.keyEvents}
 									filterKeyEvents={article.filterKeyEvents}
-									format={format}
 									id={'key-events-carousel-desktop'}
 								/>
 							</Island>
