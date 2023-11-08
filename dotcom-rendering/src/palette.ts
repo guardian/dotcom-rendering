@@ -1298,11 +1298,11 @@ const paletteColours = {
 		light: guardianLogoAccentText,
 		dark: guardianLogoAccentText,
 	},
-	'--branding-label': {
+	'--branding-label-text': {
 		light: brandingLabelLight,
 		dark: brandingLabelDark,
 	},
-	'--branding-link': {
+	'--branding-link-text': {
 		light: brandingLinkLight,
 		dark: brandingLinkDark,
 	},

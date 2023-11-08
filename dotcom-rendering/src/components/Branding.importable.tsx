@@ -24,14 +24,14 @@ function brandingLabelStyle(format: ArticleFormat) {
 			return [
 				invariantStyles,
 				css`
-					color: ${palette('--branding-label')};
+					color: ${palette('--branding-label-text')};
 
 					${until.desktop} {
 						color: ${palette('--standfirst-text')};
 					}
 
 					a {
-						color: ${palette('--branding-label')};
+						color: ${palette('--branding-label-text')};
 
 						${until.desktop} {
 							color: ${palette('--standfirst-text')};
@@ -44,10 +44,10 @@ function brandingLabelStyle(format: ArticleFormat) {
 			return [
 				invariantStyles,
 				css`
-					color: ${palette('--branding-label')};
+					color: ${palette('--branding-label-text')};
 
 					a {
-						color: ${palette('--branding-label')};
+						color: ${palette('--branding-label-text')};
 					}
 				`,
 			];
@@ -84,12 +84,12 @@ const brandingAboutLink = (format: ArticleFormat) => {
 			return [
 				invariantStyles,
 				css`
-					color: ${palette('--branding-link')};
+					color: ${palette('--branding-link-text')};
 					${until.desktop} {
 						color: ${palette('--standfirst-text')};
 					}
 					a {
-						color: ${palette('--branding-link')};
+						color: ${palette('--branding-link-text')};
 						${until.desktop} {
 							color: ${palette('--standfirst-text')};
 						}
@@ -101,9 +101,9 @@ const brandingAboutLink = (format: ArticleFormat) => {
 			return [
 				invariantStyles,
 				css`
-					color: ${palette('--branding-link')};
+					color: ${palette('--branding-link-text')};
 					a {
-						color: ${palette('--branding-link')};
+						color: ${palette('--branding-link-text')};
 					}
 				`,
 			];
