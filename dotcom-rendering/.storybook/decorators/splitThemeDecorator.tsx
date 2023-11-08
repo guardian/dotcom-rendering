@@ -134,7 +134,7 @@ export const splitTheme =
 		formats: readonly [ArticleFormat, ...ArticleFormat[]] = defaultFormats,
 		{ orientation = 'horizontal' }: Orientation = {},
 	): Decorator =>
-	(Story) =>
+	(Story, context) =>
 		(
 			<div
 				css={styles}
@@ -157,7 +157,7 @@ export const splitTheme =
 					{formats.map((format) => (
 						<div css={css(paletteDeclarations(format, 'light'))}>
 							<FormatHeading format={format} />
-							<Story format={format} />
+							<Story args={{ ...context.args, format }} />
 						</div>
 					))}
 				</div>
@@ -175,7 +175,7 @@ export const splitTheme =
 					{formats.map((format) => (
 						<div css={css(paletteDeclarations(format, 'dark'))}>
 							<FormatHeading format={format} />
-							<Story format={format} />
+							<Story args={{ ...context.args, format }} />
 						</div>
 					))}
 				</div>
