@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { body, until } from '@guardian/source-foundations';
-import { decidePalette } from '../../../lib/decidePalette';
 import type { DCRContainerPalette } from '../../../types/front';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 import { palette } from '../../../palette';
