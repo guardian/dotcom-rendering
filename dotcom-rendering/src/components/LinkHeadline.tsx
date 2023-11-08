@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { palette } from '../palette';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
@@ -76,19 +76,18 @@ export const LinkHeadline = ({
 	link,
 	byline,
 }: Props) => {
-	const palette = decidePalette(format);
+	// const palette = decidePalette(format);
 
 	return (
 		<h4 css={fontStyles(size)}>
 			{!!kickerText && (
 				<Kicker
 					text={kickerText}
-					color={palette.text.linkKicker}
 					showPulsingDot={showPulsingDot}
 					hideLineBreak={hideLineBreak}
 				/>
 			)}
-			{showQuotes && <QuoteIcon colour={palette.text.linkKicker} />}
+			{showQuotes && <QuoteIcon colour={palette('--kicker')} />}
 			{link ? (
 				// We were passed a link object so headline should be a link, with link styling
 				<>

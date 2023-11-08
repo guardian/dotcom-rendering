@@ -183,7 +183,7 @@ const sublinkStyles = css`
 	}
 `;
 
-const lineStyles = (palette: Palette) => css`
+const lineStyles = (colourPalette: Palette) => css`
 	padding-top: 1px;
 	:before {
 		display: block;
@@ -191,7 +191,7 @@ const lineStyles = (palette: Palette) => css`
 		top: 0;
 		left: 0;
 		content: '';
-		border-top: 1px solid ${palette.border.cardSupporting};
+		border-top: 1px solid ${colourPalette.border.cardSupporting};
 
 		width: 120px;
 		${between.tablet.and.desktop} {
@@ -253,14 +253,13 @@ export const CardHeadline = ({
 	const overrides = containerPalette
 		? decideContainerOverrides(containerPalette)
 		: undefined;
-	const kicker = isDynamo
+
+	const kickerOverride = isDynamo
 		? overrides?.text.dynamoKicker
 		: overrides?.text.cardKicker;
 
 	const palette = decidePalette(format, containerPalette);
-	const kickerColour = isDynamo
-		? palette.text.dynamoKicker
-		: palette.text.cardKicker;
+
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
@@ -282,7 +281,7 @@ export const CardHeadline = ({
 					showLine && !isDynamo && lineStyles(palette),
 				]}
 				style={{
-					['--kicker']: kicker,
+					['--kicker']: kickerOverride,
 				}}
 			>
 				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
