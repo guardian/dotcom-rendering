@@ -52,11 +52,11 @@ start: install
 # Used in cloudformation.yml which specifically:
 # - Launches pm2 from /usr/local/node rather than /node_modules
 start-prod:
-	$(call log, "starting PROD server...")
+	@echo 'starting PROD server...'
 	@echo '' # just a spacer
 	NODE_ENV=production /usr/local/node/pm2 start dist/server.js
 	@echo '' # just a spacer
-	$(call log, "PROD server is running")
+	@echo 'PROD server is running'
 
 stop:
 	@pm2 kill
