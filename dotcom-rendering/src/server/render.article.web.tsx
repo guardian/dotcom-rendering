@@ -2,7 +2,7 @@ import { ArticleDesign, isString, Pillar } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
-import { KeyEventsContainer } from '../components/KeyEventsContainer';
+import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -14,7 +14,6 @@ import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { getCurrentPillar } from '../lib/layoutHelpers';
-import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractGA } from '../model/extract-ga';
 import { extractNAV } from '../model/extract-nav';
@@ -278,32 +277,6 @@ export const renderBlocks = ({
 				isPaidContent={false}
 				contributionsServiceUrl=""
 				keywordIds={keywordIds}
-			/>
-		</ConfigProvider>,
-	);
-
-	return `${extractedCss}${html}`;
-};
-
-/**
- * keyEventsToHtml is used by the /KeyEvents endpoint as part of keeping liveblogs live
- * It takes an array of json key-event blocks and returns the resulting html string
- *
- * @returns string (the html)
- */
-export const renderKeyEvents = ({
-	keyEvents,
-	format: FEFormat,
-	filterKeyEvents,
-}: FEKeyEventsRequest): string => {
-	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
-
-	const { html, extractedCss } = renderToStringWithEmotion(
-		<ConfigProvider value={config}>
-			<KeyEventsContainer
-				keyEvents={keyEvents}
-				format={decideFormat(FEFormat)}
-				filterKeyEvents={filterKeyEvents}
 			/>
 		</ConfigProvider>,
 	);

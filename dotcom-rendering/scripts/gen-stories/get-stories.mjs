@@ -2,7 +2,7 @@
 
 /** @fileoverview
  *
- * Use: node dotcom-rendering/scripts/gen-stories/gen-stories.js
+ * Run: `make gen-stories` in the dotcom-rendering sub-directory
  *
  * This script was created as a replacement for storiesOf to generate all of the possible variants
  * of our Card and Layout components.

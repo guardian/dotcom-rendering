@@ -49,7 +49,9 @@ const columnStyle = css`
 			content: none;
 		}
 	}
+`;
 
+const columnStyleFromLeftCol = css`
 	${from.leftCol} {
 		width: 160px;
 	}
@@ -146,7 +148,6 @@ const columnLinkTitle = css`
 		font-size: 16px;
 		padding: 6px 0;
 	}
-
 	:hover,
 	:focus {
 		color: ${brandAlt[400]};
@@ -180,9 +181,14 @@ const shareIconStyles = css`
 type Props = {
 	otherLinks: LinkType[];
 	brandExtensions: LinkType[];
+	hasPageSkin?: boolean;
 };
 
-export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
+export const MoreColumn = ({
+	otherLinks,
+	brandExtensions,
+	hasPageSkin,
+}: Props) => {
 	const subNavId = 'moreLinks';
 
 	const links = [
@@ -196,7 +202,12 @@ export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
 	return (
 		<>
 			<li
-				css={[columnStyle, pillarDivider, pillarDividerExtended]}
+				css={[
+					columnStyle,
+					!hasPageSkin && columnStyleFromLeftCol,
+					pillarDivider,
+					pillarDividerExtended,
+				]}
 				role="none"
 			>
 				<ul css={[columnLinks]} role="menu" id={subNavId}>
@@ -230,7 +241,10 @@ export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
 			</li>
 			{/** Social buttons hidden from menus from desktop */}
 			<Hide from="desktop">
-				<li css={columnStyle} role="none">
+				<li
+					css={[columnStyle, !hasPageSkin && columnStyleFromLeftCol]}
+					role="none"
+				>
 					<ul css={[columnLinks]} role="menu">
 						<li
 							key="facebook"

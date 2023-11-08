@@ -11,7 +11,6 @@
 		"lint:src": "eslint . --ext .ts,.tsx --quiet",
 		"lint:scripts": "eslint scripts --quiet",
 		"lint:cypress": "eslint ./cypress",
-		"lint-staged": "lint-staged",
 		"prettier:check": "prettier . --check --cache",
 		"prettier:fix": "prettier . --write --cache",
 		"lintstats": "yarn lint --format node_modules/eslint-stats/byError.js",
@@ -32,9 +31,6 @@
 		"cdk:build": "tsc -p ./tsconfig.cdk.json",
 		"cdk:synth": "cdk synth --path-metadata false --version-reporting false",
 		"cdk:diff": "cdk diff --path-metadata false --version-reporting false"
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx,cjs,mjs,cts,mts,json,css,html,md,mdx}": "prettier --write"
 	},
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "3.350.0",
@@ -205,7 +201,6 @@
 		"jest-environment-jsdom": "29.5.0",
 		"jest-teamcity-reporter": "0.9.0",
 		"jsdom": "22.1.0",
-		"lint-staged": "13.2.1",
 		"load-json-file": "6.2.0",
 		"lodash.debounce": "4.0.8",
 		"lodash.get": "4.4.2",

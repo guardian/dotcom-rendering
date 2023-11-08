@@ -1,4 +1,8 @@
 import type { DCRCollectionType } from '../types/front';
+import {
+	MAX_FRONTS_BANNER_ADS,
+	MAX_FRONTS_MOBILE_ADS,
+} from './commercial-constants';
 import { frontsBannerExcludedCollections } from './frontsBannerExclusions';
 
 type GroupedCounts = {
@@ -9,10 +13,61 @@ type GroupedCounts = {
 	standard: number;
 };
 
+type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
+
+const getMerchHighPosition = (collectionCount: number): number =>
+	collectionCount >= 4 ? 2 : 0;
+
 /**
- * The maximum number of fronts-banner ads that can be inserted on any front.
+ * This happens on the recipes front, where the first container is a thrasher
+ * @see https://github.com/guardian/frontend/pull/20617
  */
-const MAX_FRONTS_BANNER_ADS = 6;
+const isFirstContainerAndThrasher = (collectionType: string, index: number) =>
+	index === 0 && collectionType === 'fixed/thrasher';
+
+const isMerchHighPosition = (
+	collectionIndex: number,
+	merchHighPosition: number,
+): boolean => collectionIndex === merchHighPosition;
+
+const isBeforeThrasher = (index: number, collections: AdCandidate[]) =>
+	collections[index + 1]?.collectionType === 'fixed/thrasher';
+
+const isMostViewedContainer = (collection: AdCandidate) =>
+	collection.collectionType === 'news/most-popular';
+
+const shouldInsertAd =
+	(merchHighPosition: number) =>
+	(collection: AdCandidate, index: number, collections: AdCandidate[]) =>
+		!(
+			isFirstContainerAndThrasher(collection.collectionType, index) ||
+			isMerchHighPosition(index, merchHighPosition) ||
+			isBeforeThrasher(index, collections) ||
+			isMostViewedContainer(collection)
+		);
+
+const isEvenIndex = (_collection: unknown, index: number): boolean =>
+	index % 2 === 0;
+
+/**
+ * We do not insert mobile ads:
+ * a. after the first container if it is a thrasher
+ * b. next to the merchandising-high ad slot
+ * c. before a thrasher
+ * d. after the Most Viewed container.
+ * After we've filtered out the containers next to which we can insert an ad,
+ * we take every other container, up to a maximum of 10, for targeting MPU insertion.
+ */
+const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
+	const merchHighPosition = getMerchHighPosition(collections.length);
+
+	return collections
+		.filter(shouldInsertAd(merchHighPosition))
+		.filter(isEvenIndex)
+		.map((collection: AdCandidate) => collections.indexOf(collection))
+		.filter((adPosition: number) => adPosition !== -1)
+		.slice(0, MAX_FRONTS_MOBILE_ADS);
+};
 
 /**
  * Estimates the height of a collection.
@@ -25,7 +80,7 @@ const getCollectionHeight = (
 		DCRCollectionType,
 		'collectionType' | 'containerPalette' | 'grouped'
 	>,
-): number => {
+): 0.5 | 1 | 1.5 | 2 | 2.5 | 3 => {
 	const { collectionType, containerPalette, grouped } = collction;
 
 	if (containerPalette === 'PodcastPalette') {
@@ -181,26 +236,10 @@ const getFrontsBannerAdPositions = (
 		{ heightSinceAd: 0, adPositions: [] },
 	).adPositions;
 
-/**
- * Decides where ads should be inserted on tagged fronts.
- *
- * On tagged fronts, an ad in inserted above every third collection.
- *
- * Doesn't insert an ad above the final collection. We serve a merchandising slot below the
- * last collection and we don't want to sandwich the last collection between two full-width ads.
- */
-const getTaggedFrontsBannerAdPositions = (numCollections: number): number[] => {
-	if (numCollections <= 3) {
-		// There are no suitable positions to insert an ad.
-		return [];
-	}
-
-	const numAdsThatFit = Math.floor((numCollections - 1) / 3);
-
-	// Ensure we do not insert more than the maximum allowed number of ads.
-	const numAdsToInsert = Math.min(numAdsThatFit, MAX_FRONTS_BANNER_ADS);
-
-	return [...Array(numAdsToInsert).keys()].map((_) => _ * 3 + 2);
+export {
+	isEvenIndex,
+	isMerchHighPosition,
+	getMerchHighPosition,
+	getMobileAdPositions,
+	getFrontsBannerAdPositions,
 };
-
-export { getFrontsBannerAdPositions, getTaggedFrontsBannerAdPositions };

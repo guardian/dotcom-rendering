@@ -559,7 +559,7 @@ const standfirstLinkTextLight = ({ design, theme }: ArticleFormat): string => {
 				case Pillar.Opinion:
 					return sourcePalette.opinion[500];
 				case Pillar.Sport:
-					return sourcePalette.sport[400];
+					return sourcePalette.sport[500];
 				case Pillar.Culture:
 					return sourcePalette.culture[500];
 				case Pillar.Lifestyle:
@@ -746,6 +746,106 @@ const cardBackgroundDark = ({ design, theme }: ArticleFormat): string => {
 	return sourcePalette.neutral[0];
 };
 
+const captionTextLight = ({ design, theme }: ArticleFormat): string => {
+	switch (theme) {
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[100];
+		case ArticleSpecial.SpecialReportAlt:
+			switch (design) {
+				case ArticleDesign.PhotoEssay:
+					return sourcePalette.news[100];
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.neutral[7];
+			}
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[20];
+		default:
+			switch (design) {
+				case ArticleDesign.PhotoEssay:
+					switch (theme as ArticleTheme) {
+						case Pillar.News:
+							return sourcePalette.news[300];
+						case Pillar.Opinion:
+							return sourcePalette.opinion[300];
+						case Pillar.Sport:
+							return sourcePalette.sport[300];
+						case Pillar.Culture:
+							return sourcePalette.culture[300];
+						case Pillar.Lifestyle:
+							return sourcePalette.lifestyle[300];
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[300];
+						case ArticleSpecial.SpecialReport:
+							return sourcePalette.specialReport[300];
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.news[100];
+					}
+
+				case ArticleDesign.Picture:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[46];
+			}
+	}
+};
+
+const captionTextDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+				default:
+					return sourcePalette.neutral[60];
+			}
+		default:
+			return sourcePalette.neutral[60];
+	}
+};
+
+const captionLink = ({ design, theme }: ArticleFormat): string => {
+	if (design === ArticleDesign.NewsletterSignup)
+		return sourcePalette.neutral[0];
+	if (design === ArticleDesign.Analysis && theme === Pillar.News)
+		return sourcePalette.news[300];
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[400];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const captionOverlayText = (): string => {
+	return sourcePalette.neutral[100];
+};
+
 // ----- Palette ----- //
 
 /**
@@ -922,6 +1022,18 @@ const paletteColours = {
 	'--card-background': {
 		light: cardBackgroundLight,
 		dark: cardBackgroundDark,
+
+	'--caption-text': {
+		light: captionTextLight,
+		dark: captionTextDark,
+	},
+	'--caption-link': {
+		light: captionLink,
+		dark: captionLink,
+	},
+	'--caption-overlay-text': {
+		light: captionOverlayText,
+		dark: captionOverlayText,
 	},
 } satisfies PaletteColours;
 
