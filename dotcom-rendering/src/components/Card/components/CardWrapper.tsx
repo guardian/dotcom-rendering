@@ -5,6 +5,7 @@ import { from, neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 import type { DCRContainerPalette } from '../../../types/front';
 import type { Palette } from '../../../types/palette';
+import { ContainerOverrides } from '../../ContainerOverrides';
 import { FormatBoundary } from '../../FormatBoundary';
 
 type Props = {
@@ -182,14 +183,20 @@ export const CardWrapper = ({
 	const palette = decidePalette(format, containerPalette);
 	return (
 		<FormatBoundary format={format}>
-			<div
-				css={[
-					cardStyles(format, palette, isDynamo, containerPalette),
-					topBarStyles({ isDynamo, palette }),
-				]}
+			<ContainerOverrides
+				format={format}
+				containerPalette={containerPalette}
+				isDynamo={!!isDynamo}
 			>
-				{children}
-			</div>
+				<div
+					css={[
+						cardStyles(format, palette, isDynamo, containerPalette),
+						topBarStyles({ isDynamo, palette }),
+					]}
+				>
+					{children}
+				</div>
+			</ContainerOverrides>
 		</FormatBoundary>
 	);
 };

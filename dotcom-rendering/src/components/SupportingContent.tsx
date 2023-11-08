@@ -4,6 +4,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { transparentColour } from '../lib/transparentColour';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
 import { CardHeadline } from './CardHeadline';
+import { ContainerOverrides } from './ContainerOverrides';
 
 export type Alignment = 'vertical' | 'horizontal';
 
@@ -148,17 +149,22 @@ export const SupportingContent = ({
 						]}
 						data-link-name={`sublinks | ${index + 1}`}
 					>
-						<CardHeadline
+						<ContainerOverrides
 							format={subLink.format}
-							size="tiny"
-							hideLineBreak={true}
-							showLine={true}
-							linkTo={subLink.url}
-							containerPalette={containerPalette}
-							isDynamo={isDynamo}
-							headlineText={subLink.headline}
-							kickerText={subLink.kickerText}
-						/>
+							isDynamo={!!isDynamo}
+						>
+							<CardHeadline
+								format={subLink.format}
+								size="tiny"
+								hideLineBreak={true}
+								showLine={true}
+								linkTo={subLink.url}
+								containerPalette={containerPalette}
+								isDynamo={isDynamo}
+								headlineText={subLink.headline}
+								kickerText={subLink.kickerText}
+							/>
+						</ContainerOverrides>
 					</li>
 				);
 			})}
