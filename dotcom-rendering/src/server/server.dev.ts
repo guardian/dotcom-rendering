@@ -10,6 +10,7 @@ import {
 	handleArticleJson,
 	handleBlocks,
 	handleInteractive,
+	handleKeyEvents,
 } from './handler.article.web';
 import {
 	handleFront,
@@ -52,6 +53,8 @@ export const devServer = (): Handler => {
 				return handleAMPArticle(req, res, next);
 			case 'Blocks':
 				return handleBlocks(req, res, next);
+			case 'KeyEvents':
+				return handleKeyEvents(req, res, next);
 			case 'Front':
 				return handleFront(req, res, next);
 			case 'FrontJSON':
