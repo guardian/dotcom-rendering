@@ -191,21 +191,14 @@ const columnStyle = css`
 			width: 123px;
 		}
 	}
+`;
+
+const columnStyleFromLeftCol = css`
 	${from.leftCol} {
 		width: 160px;
 
 		:first-of-type {
 			width: 150px;
-		}
-	}
-`;
-
-const columnStyleWithPageSkin = css`
-	${from.leftCol} {
-		width: 134px;
-
-		:first-of-type {
-			width: 123px;
 		}
 	}
 `;
@@ -232,7 +225,7 @@ export const Column = ({
 		<li
 			css={[
 				columnStyle,
-				hasPageSkin && columnStyleWithPageSkin,
+				!hasPageSkin && columnStyleFromLeftCol,
 				pillarDivider,
 			]}
 			role="none"

@@ -5,14 +5,18 @@ const capitalize = (str) =>
 
 // we could use chalk, but this saves needing to pre-install it
 // if this is a first run
+// https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 const red = '\x1b[31m';
 const yellow = '\x1b[33m';
-const green = '\u001b[32m';
+const green = '\x1b[32m';
 const dim = '\x1b[2m';
 const reset = '\x1b[0m';
 
+const colourise = (colour, str) =>
+	process.stdout.isTTY ? `${colour}${str}${reset}` : str;
+
 const logIt = (messages = [], color = dim) => {
-	console.log(`${color}%s${reset}`, capitalize(messages.join('\n')));
+	console.log(colourise(color, capitalize(messages.join('\n'))));
 };
 
 const log = (...messages) => logIt(messages);
@@ -42,4 +46,5 @@ module.exports = {
 	warn,
 	prompt,
 	success,
+	colourise,
 };
