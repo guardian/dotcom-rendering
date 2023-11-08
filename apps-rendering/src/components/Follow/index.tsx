@@ -36,7 +36,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	display: block;
 	margin-top: ${remSpace[1]};
 	margin-left: 0;
-	min-height: ${remSpace[6]};
+
 	padding: 0;
 	text-align: left;
 
