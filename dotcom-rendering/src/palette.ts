@@ -559,7 +559,7 @@ const standfirstLinkTextLight = ({ design, theme }: ArticleFormat): string => {
 				case Pillar.Opinion:
 					return sourcePalette.opinion[500];
 				case Pillar.Sport:
-					return sourcePalette.sport[400];
+					return sourcePalette.sport[500];
 				case Pillar.Culture:
 					return sourcePalette.culture[500];
 				case Pillar.Lifestyle:
