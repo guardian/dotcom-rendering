@@ -19,9 +19,9 @@ type WaitForIslandOptions = {
 const waitForIsland = async (
 	page: Page,
 	island: string,
-	options?: WaitForIslandOptions,
+	options: WaitForIslandOptions = {},
 ): Promise<void> => {
-	const { status = 'rendered', nth = 0 } = options ?? {};
+	const { status = 'rendered', nth = 0 } = options;
 	const islandSelector = `gu-island[name="${island}"]`;
 	// create a locator for the island
 	const islandLocator = page.locator(islandSelector).nth(nth);
