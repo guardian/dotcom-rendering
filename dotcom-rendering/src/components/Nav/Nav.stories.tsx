@@ -132,3 +132,39 @@ ExpandedMenuStory.play = async ({
 	await userEvent.click(canvas.getByLabelText(/More/));
 };
 ExpandedMenuStory.storyName = 'ExpandedMenu';
+
+export const ExpandedMenuWithPageSkinStory = () => {
+	return (
+		<Section
+			fullWidth={true}
+			showSideBorders={true}
+			borderColour={brandBorder.primary}
+			showTopBorder={false}
+			padSides={false}
+			backgroundColour={brandBackground.primary}
+			hasPageSkin={true}
+			hasPageSkinContentSelfConstrain={true}
+		>
+			<Nav
+				selectedPillar={Pillar.News}
+				displayRoundel={false}
+				isImmersive={false}
+				nav={nav}
+				subscribeUrl=""
+				editionId="UK"
+				headerTopBarSwitch={false}
+				hasPageSkin={true}
+			/>
+		</Section>
+	);
+};
+
+ExpandedMenuWithPageSkinStory.play = async ({
+	canvasElement,
+}: {
+	canvasElement: HTMLElement;
+}) => {
+	const canvas = within(canvasElement);
+	await userEvent.click(canvas.getByLabelText(/More/));
+};
+ExpandedMenuWithPageSkinStory.storyName = 'ExpandedMenu With PageSkin';
