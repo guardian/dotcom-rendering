@@ -5,6 +5,9 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints, specialReport } from '@guardian/source-foundations';
+import type { StoryObj } from '@storybook/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import type { DCRContainerPalette } from '../types/front';
 import { CardHeadline } from './CardHeadline';
 import { Section } from './Section';
 
@@ -438,3 +441,47 @@ export const Byline = () => (
 	</>
 );
 Byline.storyName = 'With byline';
+
+const containerPalettes = [
+	'EventPalette',
+	'SombreAltPalette',
+	'EventAltPalette',
+	'InvestigationPalette',
+	'LongRunningAltPalette',
+	'LongRunningPalette',
+	'SombrePalette',
+	'BreakingPalette',
+	'SpecialReportAltPalette',
+	'Branded',
+	'MediaPalette',
+	'PodcastPalette',
+] as const satisfies readonly DCRContainerPalette[];
+export const WithContainerOverrides: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => (
+	<>
+		{containerPalettes.map((containerPalette) => (
+			<Section
+				key={containerPalette}
+				fullWidth={true}
+				showSideBorders={false}
+				containerPalette={containerPalette}
+			>
+				<CardHeadline
+					headlineText={`This is a ${
+						Pillar[format.theme] ??
+						ArticleSpecial[format.theme] ??
+						'Unknown'
+					} headline`}
+					containerPalette={containerPalette}
+					format={format}
+					byline={`inside a ${containerPalette} container`}
+					showByline={true}
+				/>
+			</Section>
+		))}
+	</>
+);
+WithContainerOverrides.decorators = [splitTheme()];
