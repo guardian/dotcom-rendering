@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { neutral, textSans, until } from '@guardian/source-foundations';
+import { textSans, until } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../client/ga/ga';
+import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
-import type { Palette } from '../types/palette';
 import { Hide } from './Hide';
 
 const brandingStyle = css`
@@ -14,7 +14,7 @@ const brandingStyle = css`
  * for liveblog smaller breakpoints article meta is located in the same
  * container as standfirst and needs the same styling as standfirst
  **/
-function brandingLabelStyle(palette: Palette, format: ArticleFormat) {
+function brandingLabelStyle(format: ArticleFormat) {
 	const invariantStyles = css`
 		${textSans.xxsmall()}
 	`;
@@ -24,17 +24,17 @@ function brandingLabelStyle(palette: Palette, format: ArticleFormat) {
 			return [
 				invariantStyles,
 				css`
-					color: ${neutral[20]};
+					color: ${palette('--branding-label')};
 
 					${until.desktop} {
-						color: ${palette.text.standfirst};
+						color: ${palette('--standfirst-text')};
 					}
 
 					a {
-						color: ${neutral[20]};
+						color: ${palette('--branding-label')};
 
 						${until.desktop} {
-							color: ${palette.text.standfirst};
+							color: ${palette('--standfirst-text')};
 						}
 					}
 				`,
@@ -44,10 +44,10 @@ function brandingLabelStyle(palette: Palette, format: ArticleFormat) {
 			return [
 				invariantStyles,
 				css`
-					color: ${neutral[20]};
+					color: ${palette('--branding-label')};
 
 					a {
-						color: ${neutral[20]};
+						color: ${palette('--branding-label')};
 					}
 				`,
 			];
@@ -69,7 +69,7 @@ const brandingLogoStyle = css`
  * for liveblog smaller breakpoints article meta is located in the same
  * container as standfirst and needs the same styling as standfirst
  **/
-const brandingAboutLink = (palette: Palette, format: ArticleFormat) => {
+const brandingAboutLink = (format: ArticleFormat) => {
 	const invariantStyles = css`
 		${textSans.xxsmall()}
 		display: block;
@@ -84,14 +84,14 @@ const brandingAboutLink = (palette: Palette, format: ArticleFormat) => {
 			return [
 				invariantStyles,
 				css`
-					color: ${palette.text.branding};
+					color: ${palette('--branding-link')};
 					${until.desktop} {
-						color: ${palette.text.standfirst};
+						color: ${palette('--standfirst-text')};
 					}
 					a {
-						color: ${palette.text.branding};
+						color: ${palette('--branding-link')};
 						${until.desktop} {
-							color: ${palette.text.standfirst};
+							color: ${palette('--standfirst-text')};
 						}
 					}
 				`,
@@ -101,9 +101,9 @@ const brandingAboutLink = (palette: Palette, format: ArticleFormat) => {
 			return [
 				invariantStyles,
 				css`
-					color: ${palette.text.branding};
+					color: ${palette('--branding-link')};
 					a {
-						color: ${palette.text.branding};
+						color: ${palette('--branding-link')};
 					}
 				`,
 			];
@@ -158,7 +158,6 @@ function decideLogo(branding: BrandingType, format: ArticleFormat) {
 
 type Props = {
 	branding: BrandingType;
-	palette: Palette;
 	format: ArticleFormat;
 };
 
@@ -173,14 +172,12 @@ type Props = {
  *
  * (No visual story exists)
  */
-export const Branding = ({ branding, palette, format }: Props) => {
+export const Branding = ({ branding, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
 
 	return (
 		<div css={brandingStyle}>
-			<div css={brandingLabelStyle(palette, format)}>
-				{branding.logo.label}
-			</div>
+			<div css={brandingLabelStyle(format)}>{branding.logo.label}</div>
 			<div css={brandingLogoStyle}>
 				<a
 					href={branding.logo.link}
@@ -194,10 +191,7 @@ export const Branding = ({ branding, palette, format }: Props) => {
 				</a>
 			</div>
 
-			<a
-				href={branding.aboutThisLink}
-				css={brandingAboutLink(palette, format)}
-			>
+			<a href={branding.aboutThisLink} css={brandingAboutLink(format)}>
 				About this content
 			</a>
 		</div>

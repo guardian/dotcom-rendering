@@ -393,8 +393,125 @@ const clickToViewButtonTextDark = (): string => sourcePalette.neutral[7];
 const clickToViewButtonHoverLight = (): string =>
 	buttonThemeDefault.button.backgroundPrimaryHover;
 const clickToViewButtonHoverDark = (): string => sourcePalette.neutral[86];
+
 const guardianLogoText = (): string => sourcePalette.neutral[100];
 const guardianLogoAccentText = (): string => sourcePalette.brandAlt[400];
+const brandingLabelLight = ({ design }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
+		default:
+			return sourcePalette.neutral[20];
+	}
+};
+
+const pillarPalette = (
+	theme: ArticleTheme,
+	variant: 300 | 400 | 500,
+): string => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[variant];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[variant];
+		case Pillar.Sport:
+			return sourcePalette.sport[variant];
+		case Pillar.Culture:
+			return sourcePalette.culture[variant];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[variant];
+		case ArticleSpecial.Labs:
+			return sourcePalette.specialReport[variant];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[variant];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[variant];
+		default:
+			return sourcePalette.news[variant];
+	}
+};
+
+const brandingLabelDark = (): string => sourcePalette.neutral[86];
+const brandingLinkLight = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return pillarPalette(theme, 400);
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Letter:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.Review:
+		case ArticleDesign.Standard:
+			return pillarPalette(theme, 400);
+		default:
+			return pillarPalette(theme, 300);
+	}
+};
+const brandingLinkDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+			}
+		default:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[500];
+			}
+	}
+};
 
 const standfirstBulletDark = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
@@ -1180,6 +1297,14 @@ const paletteColours = {
 	'--guardian-logo-accent': {
 		light: guardianLogoAccentText,
 		dark: guardianLogoAccentText,
+	},
+	'--branding-label': {
+		light: brandingLabelLight,
+		dark: brandingLabelDark,
+	},
+	'--branding-link': {
+		light: brandingLinkLight,
+		dark: brandingLinkDark,
 	},
 } satisfies PaletteColours;
 
