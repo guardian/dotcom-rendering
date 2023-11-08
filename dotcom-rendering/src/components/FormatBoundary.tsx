@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
+import { useEffect, useState } from 'react';
 import { paletteDeclarations } from '../palette';
 import { useConfig } from './ConfigContext';
 
@@ -20,6 +21,12 @@ const displayContents = css`
 export const FormatBoundary = ({ format, children }: Props) => {
 	const { darkModeAvailable = false } = useConfig();
 
+	const [isStorybook, setIsStorybook] = useState(false);
+	useEffect(() => {
+		if (!('__STORYBOOK_CLIENT_API__' in window)) return;
+		setIsStorybook(true);
+	}, []);
+
 	return (
 		<div
 			data-format-theme={format.theme}
@@ -31,6 +38,16 @@ export const FormatBoundary = ({ format, children }: Props) => {
 				darkModeAvailable &&
 					css`
 						@media (prefers-color-scheme: dark) {
+							${paletteDeclarations(format, 'dark')}
+						}
+					`,
+				isStorybook &&
+					css`
+						.light & {
+							${paletteDeclarations(format, 'light')}
+						}
+
+						.dark & {
 							${paletteDeclarations(format, 'dark')}
 						}
 					`,
