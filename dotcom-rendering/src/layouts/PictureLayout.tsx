@@ -84,22 +84,20 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 219px 1px 1fr;
 					grid-template-areas:
 						'title  border  headline'
-						'lines  border  standfirst'
+						'.      border  standfirst'
+						'lines  border  media'
 						'meta   border  media'
-						'meta   border  media'
-						'.      border  submeta'
-						'.      border  .';
+						'meta   border  submeta';
 				}
 
 				${until.wide} {
 					grid-template-columns: 140px 1px 1fr 300px;
 					grid-template-areas:
 						'title  border  headline    headline'
-						'lines  border  standfirst  standfirst'
+						'.      border  standfirst  standfirst'
+						'lines  border  media       media'
 						'meta   border  media       media'
-						'meta   border  media       media'
-						'.      border  submeta     submeta'
-						'.      border  .           . ';
+						'meta   border  submeta     submeta';
 				}
 
 				/*
