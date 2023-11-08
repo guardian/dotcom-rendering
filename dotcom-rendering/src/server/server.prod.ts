@@ -18,7 +18,6 @@ import {
 	handleArticlePerfTest,
 	handleBlocks,
 	handleInteractive,
-	handleKeyEvents,
 } from './handler.article.web';
 import {
 	handleFront,
@@ -67,7 +66,6 @@ export const prodServer = (): void => {
 	app.post('/Interactive', logRenderTime, handleInteractive);
 	app.post('/AMPInteractive', logRenderTime, handleAMPArticle);
 	app.post('/Blocks', logRenderTime, handleBlocks);
-	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
 	app.post('/TagFront', logRenderTime, handleTagFront);
