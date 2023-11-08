@@ -3,6 +3,7 @@ import { body, until } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 import type { DCRContainerPalette } from '../../../types/front';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
+import { palette } from '../../../palette';
 
 type Props = {
 	children: string | React.ReactNode;
@@ -38,19 +39,17 @@ const showTrailText = (
 export const TrailTextWrapper = ({
 	children,
 	format,
-	containerPalette,
 	imagePosition,
 	imageSize,
 	imageType,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
 	return (
 		<div
 			css={[
 				css`
 					display: flex;
 					flex-direction: column;
-					color: ${palette.text.cardStandfirst};
+					color: ${palette('--card-trail-text')};
 					${body.small({ lineHeight: 'regular' })};
 					font-size: 14px;
 					padding-left: 5px;

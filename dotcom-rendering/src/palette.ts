@@ -745,6 +745,108 @@ const cardBackgroundDark = ({ design, theme }: ArticleFormat): string => {
 
 	return sourcePalette.neutral[0];
 };
+const cardTrailTextLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.cardStandfirst;
+};
+const cardTextDark = (): string => {
+	return sourcePalette.neutral[86];
+};
+const cardBylineTextLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.cardByline;
+};
+const cardBylineTextDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+				case Pillar.News:
+				default:
+					return sourcePalette.news[500];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Letter:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+			}
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+			}
+		default:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[500];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Sport:
+					return sourcePalette.sport[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[500];
+			}
+	}
+};
+const cardKickerTextLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.cardKicker;
+};
+const cardHeadlineTextLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.cardHeadline;
+};
 
 const captionTextLight = ({ design, theme }: ArticleFormat): string => {
 	switch (theme) {
@@ -1022,6 +1124,22 @@ const paletteColours = {
 	'--card-background': {
 		light: cardBackgroundLight,
 		dark: cardBackgroundDark,
+	},
+	'--card-trail-text': {
+		light: cardTrailTextLight,
+		dark: cardTextDark,
+	},
+	'--card-kicker-text': {
+		light: cardKickerTextLight,
+		dark: cardTextDark,
+	},
+	'--card-byline-text': {
+		light: cardBylineTextLight,
+		dark: cardBylineTextDark,
+	},
+	'--card-headline-text': {
+		light: cardHeadlineTextLight,
+		dark: cardTextDark,
 	},
 	'--caption-text': {
 		light: captionTextLight,

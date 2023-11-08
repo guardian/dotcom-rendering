@@ -19,6 +19,7 @@ import type { Palette } from '../types/palette';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
+import { palette as darkLightPalette } from '../palette';
 
 type Props = {
 	headlineText: string; // The text shown
@@ -251,7 +252,7 @@ export const CardHeadline = ({
 	const palette = decidePalette(format, containerPalette);
 	const kickerColour = isDynamo
 		? palette.text.dynamoKicker
-		: palette.text.cardKicker;
+		: darkLightPalette('--card-kicker-text');
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
@@ -289,7 +290,7 @@ export const CardHeadline = ({
 						css={css`
 							color: ${isDynamo
 								? palette.text.dynamoHeadline
-								: palette.text.cardHeadline};
+								: darkLightPalette('--card-headline-text')};
 						`}
 						className="show-underline"
 					>

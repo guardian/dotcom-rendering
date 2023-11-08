@@ -3,7 +3,7 @@ import { ArticleSpecial } from '@guardian/libs';
 import { headline, textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import type { DCRContainerPalette } from '../types/front';
-import type { Palette } from '../types/palette';
+import { palette } from '../palette';
 
 type Props = {
 	text: string;
@@ -100,22 +100,17 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 	}
 };
 
-const colourStyles = (palette: Palette, isCard: Props['isCard']) => {
+const colourStyles = (format: ArticleFormat, isCard: Props['isCard']) => {
 	return css`
-		color: ${isCard ? palette.text.cardByline : palette.text.byline};
+		color: ${isCard
+			? palette('--card-byline-text')
+			: decidePalette(format).text.byline};
 	`;
 };
 
-export const Byline = ({
-	text,
-	format,
-	containerPalette,
-	size,
-	isCard,
-}: Props) => {
-	const palette = decidePalette(format, containerPalette);
+export const Byline = ({ text, format, size, isCard }: Props) => {
 	return (
-		<span css={[bylineStyles(size, format), colourStyles(palette, isCard)]}>
+		<span css={[bylineStyles(size, format), colourStyles(format, isCard)]}>
 			{text}
 		</span>
 	);
