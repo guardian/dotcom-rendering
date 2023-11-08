@@ -198,7 +198,7 @@ export default {
 	component: CardGroup,
 	// Export used by dotcom-rendering/stories/Card.stories.tsx
 	excludeStories: ['CardsWithDifferentThemes'],
-	decorators: [splitTheme(basicCardProps.format)],
+	decorators: [splitTheme([basicCardProps.format])],
 };
 
 export const WithDifferentHeadlineSizes = () => {

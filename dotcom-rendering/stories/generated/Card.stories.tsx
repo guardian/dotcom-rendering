@@ -28,8 +28,8 @@ export const StandardStandard = () => {
 	);
 };
 StandardStandard.storyName = 'StandardDisplay StandardDesign';
-StandardStandard.decorators = [splitTheme({
+StandardStandard.decorators = [splitTheme([{
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
 	theme: {...ArticleSpecial, ...Pillar}.News,
-})]
+},])]

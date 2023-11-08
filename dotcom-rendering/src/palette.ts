@@ -1022,7 +1022,7 @@ const paletteColours = {
 	'--card-background': {
 		light: cardBackgroundLight,
 		dark: cardBackgroundDark,
-
+	},
 	'--caption-text': {
 		light: captionTextLight,
 		dark: captionTextDark,

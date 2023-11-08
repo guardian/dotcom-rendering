@@ -133,7 +133,7 @@ ${storyVariableName}.args = { config: ${JSON.stringify(config)} };
 ${storyVariableName}.decorators = [lightDecorator({
 	display: ArticleDisplay.${displayName},
 	design: ArticleDesign.${designName},
-	theme: {...ArticleSpecial, ...Pillar}.${theme.replace("Pillar", "")},
+	theme: {...ArticleSpecial, ...Pillar}.${theme.replace('Pillar', '')},
 })];
 `;
 };
@@ -157,11 +157,11 @@ export const ${storyName} = () => {
 	);
 };
 ${storyName}.storyName = '${displayName}Display ${designName}Design';
-${storyName}.decorators = [splitTheme({
+${storyName}.decorators = [splitTheme([{
 	display: ArticleDisplay.${displayName},
 	design: ArticleDesign.${designName},
-	theme: {...ArticleSpecial, ...Pillar}.${theme.replace("Pillar", "")},
-})]
+	theme: {...ArticleSpecial, ...Pillar}.${theme.replace('Pillar', '')},
+},])]
 `;
 };
 
