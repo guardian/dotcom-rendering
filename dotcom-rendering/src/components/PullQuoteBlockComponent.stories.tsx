@@ -1,8 +1,8 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { splitThemeMultipleFormats } from '../../.storybook/decorators/splitThemeDecorator';
-import type { Config } from '../../src/types/configContext';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { decidePalette } from '../lib/decidePalette';
+import type { Config } from '../types/configContext';
 import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
 import { Section } from './Section';
 
@@ -68,7 +68,7 @@ export const Inline = (_: Config, { format }: { format: ArticleFormat }) => (
 );
 
 Inline.storyName = 'Inline - Sports variations';
-Inline.decorators = [splitThemeMultipleFormats(allSportsVariations)];
+Inline.decorators = [splitTheme(allSportsVariations)];
 
 export const Showcase = (_: Config, { format }: { format: ArticleFormat }) => (
 	<Section
@@ -85,7 +85,7 @@ export const Showcase = (_: Config, { format }: { format: ArticleFormat }) => (
 );
 
 Showcase.storyName = 'Showcase - News variations';
-Showcase.decorators = [splitThemeMultipleFormats(allNewsVariations)];
+Showcase.decorators = [splitTheme(allNewsVariations)];
 
 export const Supporting = (
 	_: Config,
@@ -105,4 +105,4 @@ export const Supporting = (
 	</Section>
 );
 Supporting.storyName = 'Supporting - Culture variations';
-Supporting.decorators = [splitThemeMultipleFormats(allLifestyleVariations)];
+Supporting.decorators = [splitTheme(allLifestyleVariations)];
