@@ -57,18 +57,10 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island
-				priority="feature"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<AlreadyVisited />
 			</Island>
-			<Island
-				priority="enhancement"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
 			<Island priority="critical" clientOnly={true}>
@@ -94,21 +86,13 @@ export const FrontPage = ({ front, NAV }: Props) => {
 				/>
 			</Island>
 
-			<Island priority="critical" clientOnly={true}>
+			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
-			<Island
-				priority="feature"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<BrazeMessaging idApiUrl={front.config.idApiUrl} />
 			</Island>
-			<Island
-				priority="feature"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />

@@ -59,7 +59,9 @@ export const Branding = ({ branding, pillar }: BrandingProps) => {
 					src={logo.src}
 					width={logo.dimensions.width}
 					height={logo.dimensions.height}
+					layout="responsive"
 					alt={sponsorName}
+					style={{ width: '140px' }}
 				/>
 			</a>
 			<a href={branding.aboutThisLink}>About this content</a>

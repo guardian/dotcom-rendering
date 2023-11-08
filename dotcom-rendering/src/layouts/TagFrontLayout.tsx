@@ -1,16 +1,22 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import {
+	body,
 	brandBackground,
 	brandBorder,
 	brandLine,
 	neutral,
 	news,
+	space,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
+import {
+	decideFrontsBannerAdSlot,
+	decideMerchHighAndMobileAdSlots,
+} from '../components/DecideFrontsAdSlots';
 import { Footer } from '../components/Footer';
 import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
@@ -25,16 +31,11 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
 import {
-	getMerchHighPosition,
 	getTagFrontMobileAdPositions,
-} from '../lib/getAdPositions';
-import { getTaggedFrontsBannerAdPositions } from '../lib/getFrontsBannerAdPositions';
+	getTagFrontsBannerAdPositions,
+} from '../lib/getTagFrontsAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagFrontType } from '../types/tagFront';
-import {
-	decideFrontsBannerAdSlot,
-	decideMerchHighAndMobileAdSlots,
-} from './lib/decideAdSlots';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -64,6 +65,48 @@ const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
 	}
 };
 
+const titleStyle = css`
+	${body.medium({ fontWeight: 'regular' })};
+	color: ${neutral[7]};
+	padding-bottom: ${space[1]}px;
+	padding-top: ${space[1]}px;
+	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
+`;
+
+const linkStyle = css`
+	text-decoration: none;
+	color: ${neutral[7]};
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
+const SectionLeftContent = ({
+	url,
+	title,
+	dateString,
+}: {
+	title: string;
+	dateString: string;
+	url?: string;
+}) => {
+	if (url !== undefined) {
+		return (
+			<header css={titleStyle}>
+				<a href={url} css={linkStyle}>
+					<time dateTime={dateString}>{title}</time>
+				</a>
+			</header>
+		);
+	}
+	return (
+		<header css={titleStyle}>
+			<time dateTime={dateString}>{title}</time>
+		</header>
+	);
+};
+
 export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 	const format = {
 		display: ArticleDisplay.Standard,
@@ -73,27 +116,18 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 	const palette = decidePalette(format);
 
-	const merchHighPosition = getMerchHighPosition(
-		tagFront.groupedTrails.length,
-	);
-
 	const {
 		config: { switches, hasPageSkin, isPaidContent },
 	} = tagFront;
 
-	const showBannerAds = !!switches.frontsBannerAds;
-
 	const renderAds = canRenderAds(tagFront);
 
-	const desktopAdPositions = getTaggedFrontsBannerAdPositions(
-		tagFront.groupedTrails.length,
-	);
+	const desktopAdPositions = renderAds
+		? getTagFrontsBannerAdPositions(tagFront.groupedTrails.length)
+		: [];
 
 	const mobileAdPositions = renderAds
-		? getTagFrontMobileAdPositions(
-				tagFront.groupedTrails,
-				merchHighPosition,
-		  )
+		? getTagFrontMobileAdPositions(tagFront.groupedTrails)
 		: [];
 
 	return (
@@ -217,6 +251,15 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
+					const title = date.toLocaleDateString('en-GB', {
+						day:
+							groupedTrails.day !== undefined
+								? 'numeric'
+								: undefined,
+						month: 'long',
+						year: 'numeric',
+					});
+
 					const url =
 						groupedTrails.day !== undefined
 							? `/${tagFront.pageId}/${groupedTrails.year}/${date
@@ -237,20 +280,23 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
-								showBannerAds,
 								index,
 								desktopAdPositions,
 							)}
 							<FrontSection
-								title={date.toLocaleDateString('en-GB', {
-									day:
-										groupedTrails.day !== undefined
-											? 'numeric'
-											: undefined,
-									month: 'long',
-									year: 'numeric',
-								})}
-								url={url}
+								leftContent={
+									<SectionLeftContent
+										url={url}
+										title={title}
+										dateString={`${groupedTrails.year}-${
+											groupedTrails.month
+										}${
+											groupedTrails.day !== undefined
+												? `-${groupedTrails.day}`
+												: ''
+										}`}
+									/>
+								}
 								showTopBorder={true}
 								ophanComponentLink={`container-${index} | ${containedId}`}
 								ophanComponentName={containedId}
@@ -282,7 +328,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
-								showBannerAds,
 							)}
 						</Fragment>
 					);

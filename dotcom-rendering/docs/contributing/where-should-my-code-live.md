@@ -71,7 +71,7 @@ Externally hosted third party scripts should always be loaded asynchronously. If
 
 When adding 3rd party that need to be on every page, you can do so by adding to the `generateScriptTags` call made in each `render.<type>.<target>.tsx` file.
 
-If you need to add first party code, this can be done by setting up a new dynamically loaded entry in `src/client/index.ts`. This will then be loaded on every page.
+If you need to add first party code, this can be done by setting up a new dynamically loaded entry in `src/client/main.web.ts`. This will then be loaded on every page.
 
 ## Data Sources & Extraction
 

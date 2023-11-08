@@ -1,23 +1,22 @@
 import type { Handler } from 'express';
-import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
-import { handleAMPArticle } from '../server/index.article.amp';
+import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
+import { handleAMPArticle } from './handler.article.amp';
 import {
 	handleAppsArticle,
 	handleAppsInteractive,
-} from '../server/index.article.apps';
+} from './handler.article.apps';
 import {
 	handleArticle,
 	handleArticleJson,
 	handleBlocks,
 	handleInteractive,
-	handleKeyEvents,
-} from '../server/index.article.web';
+} from './handler.article.web';
 import {
 	handleFront,
 	handleFrontJson,
 	handleTagFront,
 	handleTagFrontJson,
-} from '../server/index.front.web';
+} from './handler.front.web';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
@@ -53,8 +52,6 @@ export const devServer = (): Handler => {
 				return handleAMPArticle(req, res, next);
 			case 'Blocks':
 				return handleBlocks(req, res, next);
-			case 'KeyEvents':
-				return handleKeyEvents(req, res, next);
 			case 'Front':
 				return handleFront(req, res, next);
 			case 'FrontJSON':

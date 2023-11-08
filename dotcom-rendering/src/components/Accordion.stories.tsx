@@ -67,7 +67,7 @@ export default {
 			viewports: [breakpoints.mobile, breakpoints.tablet],
 		},
 	},
-	decorators: [splitTheme(articleFormat)],
+	decorators: [splitTheme([articleFormat])],
 };
 
 export const Default = () => (

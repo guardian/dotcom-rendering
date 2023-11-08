@@ -5,7 +5,6 @@ import { between, body, headline, space } from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
-import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { ServerSideTests, Switches } from '../types/config';
@@ -13,6 +12,7 @@ import type { TableOfContentsItem } from '../types/frontend';
 import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';
+import { LiveBlogRenderer } from './LiveBlogRenderer';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { TableOfContents } from './TableOfContents.importable';
 

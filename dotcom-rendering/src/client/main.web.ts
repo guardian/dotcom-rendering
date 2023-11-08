@@ -41,7 +41,10 @@ void (async () => {
 
 	void startup(
 		'ga',
-		() => import(/* webpackMode: "eager" */ './ga').then(({ ga }) => ga()),
+		() =>
+			import(/* webpackMode: "eager" */ './ga/ga-with-consent').then(
+				({ ga }) => ga(),
+			),
 		{
 			priority: 'critical',
 		},
@@ -50,9 +53,9 @@ void (async () => {
 	void startup(
 		'sentryLoader',
 		() =>
-			import(/* webpackMode: "eager" */ './sentryLoader').then(
-				({ sentryLoader }) => sentryLoader(),
-			),
+			import(
+				/* webpackMode: "eager" */ './sentryLoader/sentryLoader'
+			).then(({ sentryLoader }) => sentryLoader()),
 		{
 			priority: 'critical',
 		},
@@ -72,8 +75,8 @@ void (async () => {
 	void startup(
 		'islands',
 		() =>
-			import(/* webpackMode: "eager" */ './islands').then(({ islands }) =>
-				islands(),
+			import(/* webpackMode: "eager" */ './islands/islands').then(
+				({ islands }) => islands(),
 			),
 		{
 			priority: 'critical',

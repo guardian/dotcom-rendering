@@ -2,14 +2,10 @@ import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { enhanceArticleType } from '../lib/article';
 import { enhanceBlocks } from '../model/enhanceBlocks';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
-import {
-	renderBlocks,
-	renderHtml,
-	renderKeyEvents,
-} from './render.article.web';
+import { recordTypeAndPlatform } from './lib/logging-store';
+import { renderBlocks, renderHtml } from './render.article.web';
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
@@ -89,23 +85,6 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		adUnit,
 		switches,
 		keywordIds,
-	});
-
-	res.status(200).send(html);
-};
-
-export const handleKeyEvents: RequestHandler = ({ body }, res) => {
-	// TODO: This endpoint is unused - we should consider removing it, talk to Olly 24/05/2023
-
-	recordTypeAndPlatform('keyEvents');
-	const { keyEvents, format, filterKeyEvents } =
-		// The content if body is not checked
-		body as FEKeyEventsRequest;
-
-	const html = renderKeyEvents({
-		keyEvents,
-		format,
-		filterKeyEvents,
 	});
 
 	res.status(200).send(html);

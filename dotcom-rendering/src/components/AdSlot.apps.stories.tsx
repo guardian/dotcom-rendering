@@ -1,8 +1,22 @@
+import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints, space } from '@guardian/source-foundations';
+import type { Decorator } from '@storybook/react';
 import { useRef } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { AdSlot, type Props } from './AdSlot.apps';
+
+const Wrapper: Decorator = (Story) => (
+	<div
+		css={css`
+			/* this matches the negative margin in AdSlot.apps */
+			padding: ${space[3]}px;
+			width: 100%;
+		`}
+	>
+		<Story />
+	</div>
+);
 
 export default {
 	component: AdSlot,
@@ -19,12 +33,15 @@ export default {
 		onClickSupportButton: { action: 'clicked' },
 	},
 	decorators: [
+		Wrapper,
 		splitTheme(
-			{
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.News,
-			},
+			[
+				{
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: Pillar.News,
+				},
+			],
 			{ orientation: 'vertical' },
 		),
 	],

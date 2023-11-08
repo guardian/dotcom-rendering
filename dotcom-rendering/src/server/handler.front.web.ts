@@ -10,10 +10,10 @@ import {
 import { groupTrailsByDates } from '../model/groupTrailsByDates';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
 import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../types/front';
 import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront';
 import { makePrefetchHeader } from './lib/header';
+import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFront, renderTagFront } from './render.front.web';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
@@ -54,6 +54,15 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 	};
 };
 
+const tagFrontWebTitle = (tagFront: FETagFrontType) => {
+	const pagination = tagFront.tags.tags[0]?.pagination;
+	if (pagination !== undefined && pagination.currentPage > 1) {
+		return `${tagFront.webTitle} | Page ${pagination.currentPage} of ${pagination.lastPage} | The Guardian`;
+	} else {
+		return `${tagFront.webTitle} | The Guardian`;
+	}
+};
+
 const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 	const data: FETagFrontType = validateAsTagFrontType(body);
 
@@ -71,6 +80,7 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 
 	return {
 		...data,
+		webTitle: tagFrontWebTitle(data),
 		tags: data.tags.tags,
 		groupedTrails,
 		speed,

@@ -81,7 +81,7 @@ const PLATFORM_TREATS: TreatType[] = [
 	{
 		...WELLNESS_US_TREAT,
 		pageId: 'us',
-		containerTitle: 'Wellness',
+		containerTitle: 'Spotlight',
 	},
 ];
 

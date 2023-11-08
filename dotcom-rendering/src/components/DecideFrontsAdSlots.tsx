@@ -1,6 +1,6 @@
 import { Hide } from '@guardian/source-react-components';
-import { AdSlot } from '../../components/AdSlot.web';
-import { getMerchHighPosition } from '../../lib/getAdPositions';
+import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
+import { AdSlot } from './AdSlot.web';
 
 export const decideMerchHighAndMobileAdSlots = (
 	renderAds: boolean,
@@ -9,7 +9,6 @@ export const decideMerchHighAndMobileAdSlots = (
 	isPaidContent: boolean | undefined,
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
-	showBannerAds: boolean,
 ) => {
 	if (!renderAds) return null;
 
@@ -19,7 +18,7 @@ export const decideMerchHighAndMobileAdSlots = (
 		index === getMerchHighPosition(collectionCount);
 
 	if (shouldInsertMerchHighSlot) {
-		return showBannerAds ? (
+		return (
 			<Hide from="desktop">
 				<AdSlot
 					data-print-layout="hide"
@@ -27,14 +26,10 @@ export const decideMerchHighAndMobileAdSlots = (
 					hasPageskin={hasPageSkin}
 				/>
 			</Hide>
-		) : (
-			<AdSlot
-				data-print-layout="hide"
-				position="merchandising-high"
-				hasPageskin={hasPageSkin}
-			/>
 		);
-	} else if (mobileAdPositions.includes(index)) {
+	}
+
+	if (mobileAdPositions.includes(index)) {
 		return (
 			<Hide from="tablet">
 				<AdSlot
@@ -56,11 +51,10 @@ export const decideMerchHighAndMobileAdSlots = (
 export const decideFrontsBannerAdSlot = (
 	renderAds: boolean,
 	hasPageSkin: boolean,
-	showBannerAds: boolean,
 	index: number,
 	desktopAdPositions: number[],
 ) => {
-	if (!renderAds || hasPageSkin || !showBannerAds) {
+	if (!renderAds || hasPageSkin) {
 		return null;
 	}
 

@@ -98,6 +98,10 @@ export const Ad = ({
 		adType,
 	);
 
+	// we don't want teads ads to refresh, as this seems to reduce their visibility
+	// teads ads only target the ad-1 and ad-2 slots, so we prevent these from refreshing
+	const refreshValue = id === 'ad-1' || id === 'ad-2' ? 'false' : '30';
+
 	return (
 		<amp-ad
 			data-block-on-consent="_till_accepted"
@@ -111,9 +115,8 @@ export const Ad = ({
 			// corresponding primary size.
 			data-multi-size-validation="false"
 			data-npa-on-unknown-consent={true}
-			data-lazy-fetch="true"
-			data-loading-strategy="0.5"
-			data-enable-refresh="30"
+			data-loading-strategy="prefer-viewability-over-views"
+			data-enable-refresh={refreshValue}
 			layout="fixed"
 			type="doubleclick"
 			json={stringify(

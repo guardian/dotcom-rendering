@@ -10,8 +10,6 @@ export type Palette = {
 		byline: Colour;
 		twitterHandle: Colour;
 		twitterHandleBelowDesktop: Colour;
-		caption: Colour;
-		captionLink: Colour;
 		subMeta: Colour;
 		subMetaLabel: Colour;
 		subMetaLink: Colour;
@@ -46,7 +44,6 @@ export type Palette = {
 		blockquote: Colour;
 		numberedTitle: Colour;
 		numberedPosition: Colour;
-		overlaidCaption: Colour;
 		cricketScoreboardLink: Colour;
 		keyEvent: Colour;
 		keyEventFromDesktop: Colour;
@@ -107,7 +104,6 @@ export type Palette = {
 		commentCountUntilDesktop: Colour;
 		shareIcon: Colour;
 		shareIconGrayBackground: Colour;
-		cameraCaptionIcon: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;

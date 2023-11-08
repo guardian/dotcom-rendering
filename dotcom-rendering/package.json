@@ -11,7 +11,6 @@
 		"lint:src": "eslint . --ext .ts,.tsx --quiet",
 		"lint:scripts": "eslint scripts --quiet",
 		"lint:cypress": "eslint ./cypress",
-		"lint-staged": "lint-staged",
 		"prettier:check": "prettier . --check --cache",
 		"prettier:fix": "prettier . --write --cache",
 		"lintstats": "yarn lint --format node_modules/eslint-stats/byError.js",
@@ -32,9 +31,6 @@
 		"cdk:build": "tsc -p ./tsconfig.cdk.json",
 		"cdk:synth": "cdk synth --path-metadata false --version-reporting false",
 		"cdk:diff": "cdk diff --path-metadata false --version-reporting false"
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx,cjs,mjs,cts,mts,json,css,html,md,mdx}": "prettier --write"
 	},
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "3.350.0",
@@ -167,10 +163,10 @@
 		"css-loader": "6.7.3",
 		"csstype": "3.1.1",
 		"curlyquotes": "1.5.5",
-		"cypress": "12.17.3",
+		"cypress": "13.4.0",
 		"cypress-plugin-tab": "1.0.5",
-		"cypress-real-events": "1.7.6",
-		"cypress-wait-until": "1.7.2",
+		"cypress-real-events": "1.10.3",
+		"cypress-wait-until": "2.0.1",
 		"desvg-loader": "0.1.0",
 		"doctoc": "2.2.1",
 		"dompurify": "3.0.3",
@@ -181,7 +177,7 @@
 		"eslint-config-prettier": "8.6.0",
 		"eslint-import-resolver-typescript": "3.5.5",
 		"eslint-plugin-custom-elements": "0.0.8",
-		"eslint-plugin-cypress": "2.12.1",
+		"eslint-plugin-cypress": "2.15.1",
 		"eslint-plugin-import": "2.26.0",
 		"eslint-plugin-jsx-a11y": "6.7.1",
 		"eslint-plugin-jsx-expressions": "1.3.1",
@@ -205,7 +201,6 @@
 		"jest-environment-jsdom": "29.5.0",
 		"jest-teamcity-reporter": "0.9.0",
 		"jsdom": "22.1.0",
-		"lint-staged": "13.2.1",
 		"load-json-file": "6.2.0",
 		"lodash.debounce": "4.0.8",
 		"lodash.get": "4.4.2",
