@@ -5,6 +5,7 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
+import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Section } from './Section';
 import { Standfirst } from './Standfirst';
@@ -19,11 +20,11 @@ const articleFormat = {
 	design: ArticleDesign.Standard,
 	theme: Pillar.News,
 };
-export const Article = () => {
+export const Article: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={articleFormat}
+				format={format}
 				standfirst="This is how Article standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
@@ -32,106 +33,116 @@ export const Article = () => {
 Article.storyName = 'Article';
 Article.decorators = [splitTheme([articleFormat])];
 
-const commentFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Comment,
-	theme: Pillar.News,
-};
-export const Comment = () => {
+export const Comment: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={commentFormat}
+				format={format}
 				standfirst="This is how Comment standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Comment.storyName = 'Comment';
-Comment.decorators = [splitTheme([commentFormat])];
+Comment.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const letterFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Letter,
-	theme: Pillar.News,
-};
-export const Letter = () => {
+export const Letter: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={letterFormat}
+				format={format}
 				standfirst="This is how Letter standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Letter.storyName = 'Letter';
-Letter.decorators = [splitTheme([letterFormat])];
+Letter.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Letter,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const featureFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Feature,
-	theme: Pillar.News,
-};
-export const Feature = () => {
+export const Feature: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={featureFormat}
+				format={format}
 				standfirst="This is how Feature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Feature.storyName = 'Feature';
-Feature.decorators = [splitTheme([featureFormat])];
+Feature.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const immersiveFormat = {
-	display: ArticleDisplay.Immersive,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
-};
-export const Immersive = () => {
+export const Immersive: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={immersiveFormat}
+				format={format}
 				standfirst="This is how Immersive standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Immersive.storyName = 'Immersive';
-Immersive.decorators = [splitTheme([immersiveFormat])];
+Immersive.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const reviewFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Review,
-	theme: Pillar.News,
-};
-export const Review = () => {
+export const Review: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={reviewFormat}
+				format={format}
 				standfirst="This is how Review standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Review.storyName = 'Review';
-Review.decorators = [splitTheme([reviewFormat])];
+Review.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Review,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const liveblogFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.LiveBlog,
-	theme: Pillar.News,
-};
-export const LiveBlog = () => {
+export const LiveBlog: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={liveblogFormat}
+				format={format}
 				standfirst="<p>This is how a Liveblog with bullets looks. Aut explicabo officia delectus omnis repellendus voluptas</p> <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
@@ -151,274 +162,343 @@ LiveBlog.story = {
 		},
 	},
 };
-LiveBlog.decorators = [splitTheme([liveblogFormat])];
+LiveBlog.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.LiveBlog,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const deadblogFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.DeadBlog,
-	theme: Pillar.News,
-};
-export const DeadBlog = () => {
+export const DeadBlog: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={deadblogFormat}
+				format={format}
 				standfirst="<p>This is how a Deadblog with bullets looks. Aut explicabo officia delectus omnis repellendus voluptas</p> <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 DeadBlog.storyName = 'DeadBlog';
-DeadBlog.decorators = [splitTheme([deadblogFormat])];
+DeadBlog.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.DeadBlog,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const interviewFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Interview,
-	theme: Pillar.News,
-};
-export const Interview = () => {
+export const Interview: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={interviewFormat}
+				format={format}
 				standfirst="This is how Interview standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Interview.storyName = 'Interview';
-Interview.decorators = [splitTheme([interviewFormat])];
+Interview.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Interview,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const analysisFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Analysis,
-	theme: Pillar.News,
-};
-export const Analysis = () => {
+export const Analysis: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={analysisFormat}
+				format={format}
 				standfirst="This is how Analysis standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Analysis.storyName = 'Analysis';
-Analysis.decorators = [splitTheme([analysisFormat])];
+Analysis.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const ExplainerFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Explainer,
-	theme: Pillar.News,
-};
-export const Explainer = () => {
+export const Explainer: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={ExplainerFormat}
+				format={format}
 				standfirst="This is how Explainer standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Explainer.storyName = 'Explainer';
-Explainer.decorators = [splitTheme([ExplainerFormat])];
+Explainer.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Explainer,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const GalleryFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Gallery,
-	theme: Pillar.Culture,
-};
-export const Gallery = () => {
+export const Gallery: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={GalleryFormat}
+				format={format}
 				standfirst="This is how Gallery standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Gallery.storyName = 'Gallery';
-Gallery.decorators = [splitTheme([GalleryFormat])];
+Gallery.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Gallery,
+			theme: Pillar.Culture,
+		},
+	]),
+];
 
-const audioFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Audio,
-	theme: Pillar.Culture,
-};
-export const Audio = () => {
+export const Audio: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={audioFormat}
+				format={format}
 				standfirst="This is how Audio standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Audio.storyName = 'Audio';
-Audio.decorators = [splitTheme([audioFormat])];
+Audio.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Audio,
+			theme: Pillar.Culture,
+		},
+	]),
+];
 
-const videoFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Video,
-	theme: Pillar.Culture,
-};
-export const Video = () => {
+export const Video: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={videoFormat}
+				format={format}
 				standfirst="This is how Video standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Video.storyName = 'Video';
-Video.decorators = [splitTheme([videoFormat])];
+Video.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Video,
+			theme: Pillar.Culture,
+		},
+	]),
+];
 
-const recipeFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Recipe,
-	theme: Pillar.Lifestyle,
-};
-export const Recipe = () => {
+export const Recipe: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={recipeFormat}
+				format={format}
 				standfirst="This is how Recipe standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Recipe.storyName = 'Recipe';
-Recipe.decorators = [splitTheme([recipeFormat])];
+Recipe.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Recipe,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
-const matchReportFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.MatchReport,
-	theme: Pillar.Sport,
-};
-export const MatchReport = () => {
+export const MatchReport: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={matchReportFormat}
+				format={format}
 				standfirst="This is how MatchReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 MatchReport.storyName = 'MatchReport';
-MatchReport.decorators = [splitTheme([matchReportFormat])];
+MatchReport.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.MatchReport,
+			theme: Pillar.Sport,
+		},
+	]),
+];
 
-const quizFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Quiz,
-	theme: Pillar.Lifestyle,
-};
-export const Quiz = () => {
+export const Quiz: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={quizFormat}
+				format={format}
 				standfirst="This is how Quiz standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Quiz.storyName = 'Quiz';
-Quiz.decorators = [splitTheme([quizFormat])];
+Quiz.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Quiz,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
-const specialReport = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: ArticleSpecial.SpecialReport,
-};
-export const SpecialReport = () => {
+export const SpecialReport: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={specialReport}
+				format={format}
 				standfirst="This is how SpecialReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 SpecialReport.storyName = 'SpecialReport';
-SpecialReport.decorators = [splitTheme([specialReport])];
+SpecialReport.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.SpecialReport,
+		},
+	]),
+];
 
-const SpecialReportAltFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: ArticleSpecial.SpecialReportAlt,
-};
-export const SpecialReportAlt = () => {
+export const SpecialReportAlt: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={SpecialReportAltFormat}
+				format={format}
 				standfirst="This is how SpecialReportAlt standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 SpecialReportAlt.storyName = 'SpecialReportAlt';
-SpecialReportAlt.decorators = [splitTheme([SpecialReportAltFormat])];
+SpecialReportAlt.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.SpecialReportAlt,
+		},
+	]),
+];
 
-const editorialFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Editorial,
-	theme: Pillar.Opinion,
-};
-export const Editorial = () => {
+export const Editorial: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={editorialFormat}
+				format={format}
 				standfirst="This is how Editorial standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 Editorial.storyName = 'Editorial';
-Editorial.decorators = [splitTheme([editorialFormat])];
+Editorial.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Editorial,
+			theme: Pillar.Opinion,
+		},
+	]),
+];
 
-const photoFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.PhotoEssay,
-	theme: Pillar.News,
-};
-export const PhotoEssay = () => {
+export const PhotoEssay: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={photoFormat}
+				format={format}
 				standfirst="This is how PhotoEssay standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</Section>
 	);
 };
 PhotoEssay.storyName = 'PhotoEssay';
-PhotoEssay.decorators = [splitTheme([photoFormat])];
+PhotoEssay.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.PhotoEssay,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const labsWithLinkFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: ArticleSpecial.Labs,
-};
-export const LabsWithLink = () => {
+export const LabsWithLink: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section fullWidth={true}>
 			<Standfirst
-				format={labsWithLinkFormat}
+				format={format}
 				standfirst='<p>Whether your holiday priorities are sampling gastronomic delights, visiting cultural landmarks, adventuring in the great outdoors or just having an easy time with the kids, this quiz will help you plan your itinerary for Brittany, Normandy and the Atlantic Loire Valley</p> <ul> <li>National restrictions may apply, please consult <a href="https://www.gov.uk/guidance/travel-advice-novel-coronavirus" rel="nofollow">government advice</a> before planning travel</li> </ul>'
 			/>
 		</Section>
 	);
 };
 LabsWithLink.storyName = 'LabsWithLink';
-LabsWithLink.decorators = [splitTheme([labsWithLinkFormat])];
+LabsWithLink.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.Labs,
+		},
+	]),
+];
