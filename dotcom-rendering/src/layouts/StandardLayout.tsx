@@ -421,7 +421,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								element="aside"
 							>
@@ -445,7 +447,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</Section>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								showTopBorder={false}
 							>
@@ -490,7 +494,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					fullWidth={true}
 					data-print-layout="hide"
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={themePalette('--article-background')}
 					borderColour={palette.border.article}
 					element="article"
 				>

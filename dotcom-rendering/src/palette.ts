@@ -1039,6 +1039,86 @@ const summaryEventBulletHoverDark = ({ theme }: ArticleFormat): string => {
 			return sourcePalette.news[600];
 	}
 };
+
+const articleBackgroundLight = ({ design, display, theme }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[800];
+				default:
+					return sourcePalette.neutral[97];
+			}
+		// Order matters. We want comment special report pieces to have the opinion background
+		case ArticleDesign.Letter:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Comment:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.opinion[800];
+			}
+		case ArticleDesign.Editorial:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.news[800];
+			}
+		case ArticleDesign.Picture: {
+			return sourcePalette.neutral[0];
+		}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[800];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				case ArticleSpecial.Labs:
+					switch (display) {
+						case ArticleDisplay.Immersive:
+							return 'transparent';
+						default:
+							return sourcePalette.neutral[97];
+					}
+				default:
+					return 'transparent';
+			}
+	}
+};
+
+const articleBackgroundDark = ({ design, theme }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[7];
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[0];
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[10];
+			}
+		default:
+			return sourcePalette.neutral[10];
+	}
+};
 // ----- Palette ----- //
 
 /**
@@ -1271,6 +1351,10 @@ const paletteColours = {
 	'--branding-link-text': {
 		light: brandingLinkLight,
 		dark: brandingLinkDark,
+	},
+	'--article-background': {
+		light: articleBackgroundLight,
+		dark: articleBackgroundDark,
 	},
 } satisfies PaletteColours;
 

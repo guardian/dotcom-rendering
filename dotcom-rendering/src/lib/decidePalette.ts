@@ -715,6 +715,7 @@ const textCricketScoreboardLink = (): string => {
 	return sport[300];
 };
 
+//could we remove?
 const backgroundArticle = (format: ArticleFormat): string => {
 	// specialreport blogs should have specialreport background
 	if (
