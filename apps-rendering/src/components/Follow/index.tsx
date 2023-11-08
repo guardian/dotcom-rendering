@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import { remSpace, textSans } from '@guardian/source-foundations';
+import { remSpace, space, textSans } from '@guardian/source-foundations';
 import { FollowNotificationStatus } from 'components/FollowStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
@@ -20,25 +20,25 @@ interface Props {
 }
 
 const followButtonStyles: SerializedStyles = css`
+	display: flex;
+	margin: 0;
 	height: 24px;
 	width: 24px;
+	margin-right: ${space[1]}px;
 	border-radius: 100%;
-`;
-const followIconStyles: SerializedStyles = css`
-	height: 18px;
-	width: 18px;
-	margin-top: 2px;
 `;
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.small()}
 	color:  ${text.follow(format)};
-	display: block;
-	padding: 0;
-	border: none;
 	background: none;
-	margin-left: 0;
+	border: none;
+	display: block;
 	margin-top: ${remSpace[1]};
+	margin-left: 0;
+	min-height: ${remSpace[6]};
+	padding: 0;
+	text-align: left;
 
 	${darkModeCss`
 		color:  ${text.followDark(format)};
@@ -46,7 +46,6 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 	.notifications-on, .tag-following {
 		${followButtonStyles}
-		padding-top: 0.15ch;
 		background-color: ${fill.followIcon(format)};
 		${darkModeCss`
 			background-color: ${fill.followIconDark(format)};
@@ -54,7 +53,9 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 		svg {
 			fill: ${background.articleContentFollowIcon(format)};
-			${followIconStyles}
+
+			margin: 1px;
+			margin-left: 2px;
 			${darkModeCss`
 				fill: ${background.articleContentDark(format)};
 			`}
@@ -71,7 +72,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 		svg {
 			fill: ${fill.followIcon(format)};
-			${followIconStyles}
+			margin: 1px;
 			${darkModeCss`
 				fill: ${fill.followIconDark(format)};
 			`}
