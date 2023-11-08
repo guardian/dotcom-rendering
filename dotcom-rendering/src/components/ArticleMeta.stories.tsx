@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { ArticleMeta } from './ArticleMeta';
 
@@ -89,6 +89,7 @@ export const ArticleStory = () => {
 		</Wrapper>
 	);
 };
+ArticleStory.storyName = 'Article';
 
 const appsFormat = {
 	display: ArticleDisplay.Standard,
@@ -116,34 +117,36 @@ export const ArticleAppsStory = () => {
 };
 /** @see /dotcom-rendering/docs/development/storybook.md */
 ArticleAppsStory.args = { config: { renderingTarget: 'Apps' } };
-ArticleAppsStory.decorators = [lightDecorator(appsFormat)];
+ArticleAppsStory.decorators = [splitTheme([appsFormat])];
 
+const branding = {
+	sponsorName: 'Humanity United',
+	logo: {
+		src: 'https://static.theguardian.com/commercial/sponsor/14/May/2018/533d381b-ac99-4e10-83be-8b64a1da9710-hu.png',
+		dimensions: { width: 140, height: 90 },
+		link: 'http://www.humanityunited.org/ ',
+		label: 'Supported by',
+	},
+	logoForDarkBackground: {
+		src: 'https://static.theguardian.com/commercial/sponsor/14/May/2018/4192d462-d794-4f07-a43c-6b546f4dcd93-hu-white.png',
+		dimensions: { width: 140, height: 39 },
+		link: 'http://www.humanityunited.org/ ',
+		label: 'Supported by',
+	},
+	aboutThisLink:
+		'https://www.theguardian.com/info/2016/jan/25/content-funding',
+};
+const brandingFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.LiveBlog,
+	theme: Pillar.News,
+};
 export const BrandingStory = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				branding={{
-					sponsorName: 'Humanity United',
-					logo: {
-						src: 'https://static.theguardian.com/commercial/sponsor/14/May/2018/533d381b-ac99-4e10-83be-8b64a1da9710-hu.png',
-						dimensions: { width: 140, height: 90 },
-						link: 'http://www.humanityunited.org/ ',
-						label: 'Supported by',
-					},
-					logoForDarkBackground: {
-						src: 'https://static.theguardian.com/commercial/sponsor/14/May/2018/4192d462-d794-4f07-a43c-6b546f4dcd93-hu-white.png',
-						dimensions: { width: 140, height: 39 },
-						link: 'http://www.humanityunited.org/ ',
-						label: 'Supported by',
-					},
-					aboutThisLink:
-						'https://www.theguardian.com/info/2016/jan/25/content-funding',
-				}}
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				branding={branding}
+				format={brandingFormat}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -158,8 +161,8 @@ export const BrandingStory = () => {
 		</Wrapper>
 	);
 };
-
-ArticleStory.storyName = 'Article';
+BrandingStory.storyName = 'Branding';
+BrandingStory.decorators = [splitTheme([brandingFormat])];
 
 export const FeatureStory = () => {
 	return (
@@ -186,11 +189,13 @@ export const FeatureStory = () => {
 };
 FeatureStory.storyName = 'Feature';
 FeatureStory.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Feature,
-		theme: Pillar.Culture,
-	}),
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.Culture,
+		},
+	]),
 ];
 
 export const FeatureWithMismatchedContributor = () => {
@@ -269,11 +274,13 @@ export const SpecialReportStory = () => {
 };
 SpecialReportStory.storyName = 'SpecialReport';
 SpecialReportStory.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Feature,
-		theme: ArticleSpecial.SpecialReport,
-	}),
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: ArticleSpecial.SpecialReport,
+		},
+	]),
 ];
 
 export const SpecialReportAlt = () => {
@@ -301,11 +308,13 @@ export const SpecialReportAlt = () => {
 };
 SpecialReportAlt.storyName = 'SpecialReportAlt';
 SpecialReportAlt.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Feature,
-		theme: ArticleSpecial.SpecialReportAlt,
-	}),
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: ArticleSpecial.SpecialReportAlt,
+		},
+	]),
 ];
 
 export const CommentStory = () => {
@@ -358,11 +367,13 @@ export const InterviewStory = () => {
 };
 InterviewStory.storyName = 'Interview';
 InterviewStory.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Interview,
-		theme: Pillar.Lifestyle,
-	}),
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Interview,
+			theme: Pillar.Lifestyle,
+		},
+	]),
 ];
 
 export const ImmersiveStory = () => {
@@ -415,11 +426,13 @@ export const TwoContributorsStory = () => {
 };
 TwoContributorsStory.storyName = 'Feature, with two contributors';
 TwoContributorsStory.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Feature,
-		theme: Pillar.Sport,
-	}),
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.Sport,
+		},
+	]),
 ];
 
 export const DeadBlogStory = () => {
