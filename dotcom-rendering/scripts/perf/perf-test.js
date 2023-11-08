@@ -1,5 +1,5 @@
 const execa = require('execa');
-const { warn, log } = require('../env/log');
+const { warn, log } = require('../../../scripts/log');
 
 const run = async () => {
 	try {

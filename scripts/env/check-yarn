@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+/**
+ * Check that yarn is available. If not, ask the user to run `corepack enable`
+ * which will provide it.
+ *
+ * Note that any yarn@>1 will do, since it will defer to
+ * the copy in that lives in .yarn/releases (which is the version we want to
+ * use).
+ */
+
+// no external deps can be used here, because this runs before deps are installed
+const { execSync } = require('child_process');
+const { stdout } = require('process');
+const { colourise, log, warn } = require('../log');
+
+// we can't use chalk, because this runs before deps are installed
+// https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+const reset = '\x1b[0m';
+const blue = '\x1b[34m';
+
+try {
+	const yarnVersion = execSync('yarn -v', { encoding: 'utf-8' });
+	log(`Using yarn ${colourise(reset, colourise(blue, yarnVersion.trim()))}`);
+} catch (e) {
+	warn(`Could not find yarn. Please run 'corepack enable'.`);
+	process.exit(1);
+}

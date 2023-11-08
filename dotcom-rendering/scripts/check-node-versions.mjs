@@ -3,13 +3,13 @@
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { log, warn } from '../dotcom-rendering/scripts/env/log.js';
+import { log, warn } from '../../scripts/log.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 process.chdir(resolve(__dirname, '..'));
 
-const nvmrc = (await readFile('.nvmrc', 'utf-8'))
+const nvmrc = (await readFile('../.nvmrc', 'utf-8'))
 	// We don’t care about leading or trailing whitespace
 	.trim();
 
@@ -30,15 +30,15 @@ if (!nodeVersion) {
 const requiredNodeVersionMatches =
 	/** @type {const} @satisfies {ReadonlyArray<{filepath: string, pattern: RegExp}>}*/ ([
 		{
-			filepath: 'dotcom-rendering/Containerfile',
+			filepath: 'Containerfile',
 			pattern: /^FROM node:(.+)-alpine$/m,
 		},
 		{
-			filepath: 'dotcom-rendering/scripts/deploy/riff-raff.yaml',
+			filepath: 'scripts/deploy/riff-raff.yaml',
 			pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+\.\d+\.\d+)$/m,
 		},
 		{
-			filepath: 'apps-rendering/riff-raff.yaml',
+			filepath: '../apps-rendering/riff-raff.yaml',
 			pattern: /^ +Recipe: .+-mobile-node(\d+\.\d+\.\d+).*$/m,
 		},
 	]);
