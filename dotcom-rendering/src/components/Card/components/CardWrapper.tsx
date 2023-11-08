@@ -18,7 +18,6 @@ type Props = {
 
 const cardStyles = (
 	format: ArticleFormat,
-	palette: Palette,
 	isDynamo?: true,
 	containerPalette?: DCRContainerPalette,
 ) => {
@@ -187,7 +186,7 @@ export const CardWrapper = ({
 		<FormatBoundary format={format}>
 			<div
 				css={[
-					cardStyles(format, palette, isDynamo, containerPalette),
+					cardStyles(format, isDynamo, containerPalette),
 					topBarStyles({ isDynamo, palette }),
 				]}
 			>
