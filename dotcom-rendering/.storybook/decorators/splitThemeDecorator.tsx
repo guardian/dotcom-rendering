@@ -131,7 +131,10 @@ const defaultFormats = [
  */
 export const splitTheme =
 	(
-		formats: readonly [ArticleFormat, ...ArticleFormat[]] = defaultFormats,
+		formats: [ArticleFormat, ...ArticleFormat[]] = [
+			defaultFormats[0],
+			...defaultFormats.slice(1),
+		],
 		{ orientation = 'horizontal' }: Orientation = {},
 	): Decorator =>
 	(Story, context) =>
