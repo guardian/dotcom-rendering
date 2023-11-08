@@ -8,11 +8,11 @@ export SHELL := /usr/bin/env bash
 # messaging #########################################
 
 define log
-    @node scripts/env/log $(1)
+    @node ../scripts/log $(1)
 endef
 
 define warn
-    @node scripts/env/log $(1) warn
+    @node ../scripts/log $(1) warn
 endef
 
 # deployment #########################################
@@ -134,9 +134,11 @@ lint: clean-dist install
 	$(call log, "checking for lint errors")
 	@yarn lint
 
-lint-project:
+lint-project: check-env
 	$(call log, "linting project")
-	@node ../scripts/check-node-versions.mjs
+	@node scripts/check-node-versions.mjs
+	@node scripts/env/check-deps.js
+	@node scripts/env/check-files.js
 
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
@@ -181,10 +183,8 @@ validate-build: # private
 
 check-env: # private
 	$(call log, "checking environment")
-	@node scripts/env/check-node.js
-	@node scripts/env/check-yarn.js
-	@node scripts/env/check-deps.js
-	@node scripts/env/check-files.js
+	@cd .. && scripts/env/check-node
+	@cd .. && scripts/env/check-yarn
 
 clear: # private
 	@clear
