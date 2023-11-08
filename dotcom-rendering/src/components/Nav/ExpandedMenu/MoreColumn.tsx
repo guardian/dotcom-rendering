@@ -49,15 +49,11 @@ const columnStyle = css`
 			content: none;
 		}
 	}
-
-	${from.leftCol} {
-		width: 160px;
-	}
 `;
 
-const columnStyleWithPageSkin = css`
+const columnStyleFromLeftCol = css`
 	${from.leftCol} {
-		width: 140px;
+		width: 160px;
 	}
 `;
 
@@ -152,7 +148,6 @@ const columnLinkTitle = css`
 		font-size: 16px;
 		padding: 6px 0;
 	}
-
 	:hover,
 	:focus {
 		color: ${brandAlt[400]};
@@ -209,7 +204,7 @@ export const MoreColumn = ({
 			<li
 				css={[
 					columnStyle,
-					hasPageSkin && columnStyleWithPageSkin,
+					!hasPageSkin && columnStyleFromLeftCol,
 					pillarDivider,
 					pillarDividerExtended,
 				]}
@@ -247,7 +242,7 @@ export const MoreColumn = ({
 			{/** Social buttons hidden from menus from desktop */}
 			<Hide from="desktop">
 				<li
-					css={[columnStyle, hasPageSkin && columnStyleWithPageSkin]}
+					css={[columnStyle, !hasPageSkin && columnStyleFromLeftCol]}
 					role="none"
 				>
 					<ul css={[columnLinks]} role="menu">
