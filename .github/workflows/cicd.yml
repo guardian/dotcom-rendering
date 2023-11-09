@@ -27,6 +27,12 @@ jobs:
     with:
       container-image: ${{ needs.container.outputs.container-image }}
 
+  playwright:
+    needs: [container]
+    uses: ./.github/workflows/playwright.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
+
   amp:
     needs: [container]
     uses: ./.github/workflows/amp.yml
@@ -37,7 +43,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    needs: [container, prettier, jest, lint, cypress, amp]
+    needs: [container, prettier, jest, lint, cypress, playwright, amp]
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}

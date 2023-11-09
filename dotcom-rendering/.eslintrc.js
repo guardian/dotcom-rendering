@@ -251,5 +251,11 @@ module.exports = {
 				'import/no-default-export': 'off',
 			},
 		},
+		{
+			files: ['**/**.config.ts'],
+			rules: {
+				'import/no-default-export': 'off',
+			},
+		},
 	],
 };
