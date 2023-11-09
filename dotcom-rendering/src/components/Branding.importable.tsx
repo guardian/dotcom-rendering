@@ -55,13 +55,19 @@ function brandingLabelStyle(format: ArticleFormat) {
 	}
 }
 
-const brandingLogoStyle = css`
+const brandingLogoStyle = (lightLogo: string, darkLogo?: string) => css`
 	padding: 10px 0;
 
 	display: block;
 
 	& img {
 		display: block;
+
+		// TODO - dark mode logo
+		/* content: url('${lightLogo}');
+		@media (prefers-color-scheme: dark) {
+			content: url('${darkLogo}');
+		} */
 	}
 `;
 
@@ -178,7 +184,12 @@ export const Branding = ({ branding, format }: Props) => {
 	return (
 		<div css={brandingStyle}>
 			<div css={brandingLabelStyle(format)}>{branding.logo.label}</div>
-			<div css={brandingLogoStyle}>
+			<div
+				css={brandingLogoStyle(
+					branding.logo.src,
+					branding.logoForDarkBackground?.src,
+				)}
+			>
 				<a
 					href={branding.logo.link}
 					data-sponsor={branding.sponsorName.toLowerCase()}
