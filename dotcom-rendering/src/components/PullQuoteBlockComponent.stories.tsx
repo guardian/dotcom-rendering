@@ -2,7 +2,6 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { decidePalette } from '../lib/decidePalette';
-import type { Config } from '../types/configContext';
 import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
 import { Section } from './Section';
 
@@ -54,7 +53,7 @@ const allLifestyleVariations = pullQuoteStoryVariations.map((design) => ({
 	theme: Pillar.Lifestyle,
 }));
 
-export const Inline = (_: Config, { format }: { format: ArticleFormat }) => (
+export const Inline = ({ format }: { format: ArticleFormat }) => (
 	<Section
 		showTopBorder={false}
 		centralBorder="full"
@@ -70,7 +69,7 @@ export const Inline = (_: Config, { format }: { format: ArticleFormat }) => (
 Inline.storyName = 'Inline - Sports variations';
 Inline.decorators = [splitTheme(allSportsVariations)];
 
-export const Showcase = (_: Config, { format }: { format: ArticleFormat }) => (
+export const Showcase = ({ format }: { format: ArticleFormat }) => (
 	<Section
 		showTopBorder={false}
 		centralBorder="full"
@@ -87,10 +86,7 @@ export const Showcase = (_: Config, { format }: { format: ArticleFormat }) => (
 Showcase.storyName = 'Showcase - News variations';
 Showcase.decorators = [splitTheme(allNewsVariations)];
 
-export const Supporting = (
-	_: Config,
-	{ format }: { format: ArticleFormat },
-) => (
+export const Supporting = ({ format }: { format: ArticleFormat }) => (
 	<Section
 		showTopBorder={false}
 		centralBorder="full"
