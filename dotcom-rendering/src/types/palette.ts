@@ -45,9 +45,6 @@ export type Palette = {
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
-		keyEvent: Colour;
-		keyEventFromDesktop: Colour;
-		keyEventTime: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -83,10 +80,6 @@ export type Palette = {
 		analysisUnderline: Colour;
 		matchStats: Colour;
 		ageWarning: Colour;
-		keyEventBullet: Colour;
-		summaryEventBullet: Colour;
-		keyEvent: Colour;
-		keyEventFromDesktop: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -130,7 +123,6 @@ export type Palette = {
 		cricketScoreboardTop: Colour;
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
-		keyEvent: Colour;
 		filterButton: Colour;
 		secondary: Colour;
 		pagination: Colour;
@@ -141,9 +133,6 @@ export type Palette = {
 	hover: {
 		headlineByline: Colour;
 		standfirstLink: Colour;
-		keyEventLink: Colour;
-		keyEventBullet: Colour;
-		summaryEventBullet: Colour;
 		pagination: Colour;
 	};
 	discussionGeneric: Colour;
