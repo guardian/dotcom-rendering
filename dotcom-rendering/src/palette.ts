@@ -13,6 +13,36 @@ import { decidePalette } from './lib/decidePalette';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
+/**
+ * Pillar palette picks the same level, or variant, of colour for a theme
+ * @param theme
+ * @param variant
+ */
+const pillarPalette = (
+	theme: ArticleTheme,
+	variant: 300 | 400 | 500,
+): string => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[variant];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[variant];
+		case Pillar.Sport:
+			return sourcePalette.sport[variant];
+		case Pillar.Culture:
+			return sourcePalette.culture[variant];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[variant];
+		case ArticleSpecial.Labs:
+			return sourcePalette.specialReport[variant];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[variant];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[variant];
+		default:
+			return sourcePalette.news[variant];
+	}
+};
 
 const headlineColourLight = ({ design }: ArticleFormat): string => {
 	switch (design) {
@@ -396,66 +426,23 @@ const clickToViewButtonHoverDark = (): string => sourcePalette.neutral[86];
 
 const guardianLogoText = (): string => sourcePalette.neutral[100];
 const guardianLogoAccentText = (): string => sourcePalette.brandAlt[400];
-const brandingLabelLight = ({ design }: ArticleFormat): string => {
-	switch (design) {
-		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[86];
-		default:
-			return sourcePalette.neutral[20];
-	}
-};
 
-const pillarPalette = (
-	theme: ArticleTheme,
-	variant: 300 | 400 | 500,
-): string => {
-	switch (theme) {
-		case Pillar.News:
-			return sourcePalette.news[variant];
-		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[variant];
-		case Pillar.Sport:
-			return sourcePalette.sport[variant];
-		case Pillar.Culture:
-			return sourcePalette.culture[variant];
-		case Pillar.Opinion:
-			return sourcePalette.opinion[variant];
-		case ArticleSpecial.Labs:
-			return sourcePalette.specialReport[variant];
-		case ArticleSpecial.SpecialReport:
-			return sourcePalette.specialReport[variant];
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.news[variant];
-		default:
-			return sourcePalette.news[variant];
-	}
-};
-
+const brandingLabelLight = (): string => sourcePalette.neutral[20];
 const brandingLabelDark = (): string => sourcePalette.neutral[86];
 const brandingLinkLight = ({ design, theme }: ArticleFormat): string => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return pillarPalette(theme, 400);
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Picture:
-			return sourcePalette.neutral[86];
-		case ArticleDesign.Analysis:
-		case ArticleDesign.Comment:
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Feature:
-		case ArticleDesign.FullPageInteractive:
-		case ArticleDesign.Interactive:
-		case ArticleDesign.Interview:
-		case ArticleDesign.Letter:
-		case ArticleDesign.NewsletterSignup:
-		case ArticleDesign.PhotoEssay:
-		case ArticleDesign.Review:
-		case ArticleDesign.Standard:
-			return pillarPalette(theme, 400);
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[7];
+		case Pillar.News:
+			switch (design) {
+				case ArticleDesign.Analysis:
+					return sourcePalette.news[300];
+				default:
+					return pillarPalette(theme, 400);
+			}
+
 		default:
-			return pillarPalette(theme, 300);
+			return pillarPalette(theme, 400);
 	}
 };
 const brandingLinkDark = ({ design, theme }: ArticleFormat): string => {

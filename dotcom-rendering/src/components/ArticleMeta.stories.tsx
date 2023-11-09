@@ -66,15 +66,21 @@ export default {
 	title: 'Components/ArticleMeta',
 };
 
-export const ArticleStory = () => {
+const defaultFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
+
+export const ArticleStory = ({
+	format = defaultFormat,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -91,16 +97,15 @@ export const ArticleStory = () => {
 };
 ArticleStory.storyName = 'Article';
 
-const appsFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
-};
-export const ArticleAppsStory = () => {
+export const ArticleAppsStory = ({
+	format = defaultFormat,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={appsFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -117,7 +122,7 @@ export const ArticleAppsStory = () => {
 };
 /** @see /dotcom-rendering/docs/development/storybook.md */
 ArticleAppsStory.args = { config: { renderingTarget: 'Apps' } };
-ArticleAppsStory.decorators = [splitTheme([appsFormat])];
+ArticleAppsStory.decorators = [splitTheme([defaultFormat])];
 
 const branding = {
 	sponsorName: 'Humanity United',
@@ -136,17 +141,13 @@ const branding = {
 	aboutThisLink:
 		'https://www.theguardian.com/info/2016/jan/25/content-funding',
 };
-const brandingFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.LiveBlog,
-	theme: Pillar.News,
-};
-export const BrandingStory = () => {
+
+export const BrandingStory = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
 				branding={branding}
-				format={brandingFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -162,17 +163,27 @@ export const BrandingStory = () => {
 	);
 };
 BrandingStory.storyName = 'Branding';
-BrandingStory.decorators = [splitTheme([brandingFormat])];
+BrandingStory.decorators = [
+	splitTheme([
+		{ ...defaultFormat },
+		{
+			...defaultFormat,
+			theme: Pillar.Sport,
+			design: ArticleDesign.LiveBlog,
+		},
+		{
+			...defaultFormat,
+			theme: Pillar.Culture,
+			design: ArticleDesign.Gallery,
+		},
+	]),
+];
 
-export const FeatureStory = () => {
+export const FeatureStory = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: Pillar.Culture,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -249,15 +260,11 @@ export const FeatureStoryWithSmallBylineImage = () => {
 };
 FeatureStoryWithSmallBylineImage.storyName = 'Feature with Small Byline Image';
 
-export const SpecialReportStory = () => {
+export const SpecialReportStory = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticleSpecial.SpecialReport,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -283,15 +290,11 @@ SpecialReportStory.decorators = [
 	]),
 ];
 
-export const SpecialReportAlt = () => {
+export const SpecialReportAlt = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticleSpecial.SpecialReportAlt,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -342,15 +345,11 @@ export const CommentStory = () => {
 };
 CommentStory.storyName = 'Comment';
 
-export const InterviewStory = () => {
+export const InterviewStory = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Interview,
-					theme: Pillar.Lifestyle,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -401,15 +400,11 @@ export const ImmersiveStory = () => {
 };
 ImmersiveStory.storyName = 'Immersive';
 
-export const TwoContributorsStory = () => {
+export const TwoContributorsStory = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: Pillar.Sport,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
