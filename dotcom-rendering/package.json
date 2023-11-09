@@ -140,7 +140,6 @@
 		"@typescript-eslint/eslint-plugin": "5.61.0",
 		"@typescript-eslint/eslint-plugin-tslint": "5.61.0",
 		"@typescript-eslint/parser": "5.61.0",
-		"@yarnpkg/lockfile": "1.1.0",
 		"ajv": "8.12.0",
 		"ajv-formats": "2.1.1",
 		"amphtml-validator": "1.0.35",
