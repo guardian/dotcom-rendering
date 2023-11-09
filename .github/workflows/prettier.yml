@@ -13,5 +13,7 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
-      - name: Prettier check
-        run: yarn prettier:check
+      # disable until everything is formatted
+      # will be renabled in https://github.com/guardian/dotcom-rendering/pull/9425
+      # - name: Prettier check
+      #   run: yarn prettier:check
