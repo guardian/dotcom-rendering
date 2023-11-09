@@ -328,7 +328,6 @@ export const Card = ({
 						isWithinTwelveHours(webPublicationDate)) ? (
 						<CardAge
 							format={format}
-							containerPalette={containerPalette}
 							webPublicationDate={webPublicationDate}
 							showClock={showClock}
 							isDynamo={isDynamo}
@@ -600,7 +599,6 @@ export const Card = ({
 						<div>
 							{!!trailText && (
 								<TrailTextWrapper
-									format={format}
 									imagePosition={imagePosition}
 									imageSize={imageSize}
 									imageType={media?.type}
