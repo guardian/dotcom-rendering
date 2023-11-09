@@ -2,10 +2,9 @@ import { css } from '@emotion/react';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
 import { textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
-import { palette as darkLightPalette } from '../../../palette';
+import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';
 import type { DCRContainerPalette } from '../../../types/front';
-import type { Palette } from '../../../types/palette';
 import { Island } from '../../Island';
 import { RelativeTime } from '../../RelativeTime.importable';
 
@@ -17,17 +16,13 @@ type Props = {
 	isDynamo?: true;
 };
 
-const ageStyles = (
-	format: ArticleFormat,
-	palette: Palette,
-	isDynamo?: true,
-) => {
+const ageStyles = (format: ArticleFormat, isDynamo?: true) => {
 	return css`
 		${textSans.xxsmall({ lineHeight: 'tight' })};
 		margin-top: -4px;
 		color: ${isDynamo
-			? palette.text.dynamoHeadline
-			: darkLightPalette('--card-age-text')};
+			? decidePalette(format).text.dynamoHeadline
+			: palette('--card-age-text')};
 
 		/* Provide side padding for positioning and also to keep spacing
     between any sibings (like Lines) */
@@ -38,7 +33,7 @@ const ageStyles = (
 		}
 
 		svg {
-			fill: ${darkLightPalette('--card-age-text')};
+			fill: ${palette('--card-age-text')};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;
@@ -60,19 +55,16 @@ const ageStyles = (
 
 export const CardAge = ({
 	format,
-	containerPalette,
 	webPublicationDate,
 	showClock,
 	isDynamo,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
-
 	if (timeAgo(new Date(webPublicationDate).getTime()) === false) {
 		return null;
 	}
 
 	return (
-		<span css={ageStyles(format, palette, isDynamo)}>
+		<span css={ageStyles(format, isDynamo)}>
 			{showClock && <ClockIcon />}
 			<Island priority="enhancement" defer={{ until: 'visible' }}>
 				<RelativeTime then={new Date(webPublicationDate).getTime()} />
