@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { from, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
+import { palette } from '../palette';
 import { Island } from './Island';
 import { RelativeTime } from './RelativeTime.importable';
-import { palette } from '../palette';
 
 interface Props {
 	id: string;

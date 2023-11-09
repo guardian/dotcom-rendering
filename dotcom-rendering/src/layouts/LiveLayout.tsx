@@ -1,17 +1,18 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import {
 	brandBackground,
 	brandBorder,
 	brandLine,
 	from,
-	neutral,
+	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { palette as darkModePalette } from '../../src/palette';
 import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -64,7 +65,6 @@ import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
-import { palette as darkModePalette } from '../../src/palette';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -1159,7 +1159,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							showTopBorder={false}
 							showSideBorders={false}
-							backgroundColour={neutral[93]}
+							backgroundColour={sourcePalette.neutral[93]}
 							element="aside"
 						>
 							<AdSlot
@@ -1278,7 +1278,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							showTopBorder={false}
 							showSideBorders={false}
-							backgroundColour={neutral[93]}
+							backgroundColour={sourcePalette.neutral[93]}
 							element="aside"
 						>
 							<AdSlot

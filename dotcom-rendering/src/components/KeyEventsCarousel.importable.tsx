@@ -7,8 +7,8 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
 import { useRef } from 'react';
-import { KeyEventCard } from './KeyEventCard';
 import { palette } from '../palette';
+import { KeyEventCard } from './KeyEventCard';
 
 interface Props {
 	keyEvents: Block[];
