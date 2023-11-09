@@ -66,8 +66,11 @@ export const interactiveGlobalStyles = css`
 			margin-bottom: 1rem;
 
 			/* stylelint-disable */
-			font-family: GuardianTextEgyptian, Guardian Text Egyptian Web,
-				Georgia, serif;
+			font-family:
+				GuardianTextEgyptian,
+				Guardian Text Egyptian Web,
+				Georgia,
+				serif;
 			/* stylelint-enable */
 
 			font-size: 1.0625rem;
@@ -108,7 +111,9 @@ export const interactiveGlobalStyles = css`
 			.inline-icon {
 				background-color: transparent;
 				border: 1px solid #dcdcdc; /* stylelint-disable-line */
-				transition: fill 0.3s ease, background-color 0.3s ease;
+				transition:
+					fill 0.3s ease,
+					background-color 0.3s ease;
 			}
 
 			.social-icon {

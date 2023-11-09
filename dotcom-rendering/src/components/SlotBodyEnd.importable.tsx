@@ -82,14 +82,13 @@ const buildBrazeEpicConfig = (
 					tags,
 					shouldHideReaderRevenue,
 				),
-			show: (meta: any) => () =>
-				(
-					<MaybeBrazeEpic
-						meta={meta}
-						countryCode={countryCode}
-						idApiUrl={idApiUrl}
-					/>
-				),
+			show: (meta: any) => () => (
+				<MaybeBrazeEpic
+					meta={meta}
+					countryCode={countryCode}
+					idApiUrl={idApiUrl}
+				/>
+			),
 		},
 		timeoutMillis: 2000,
 	};

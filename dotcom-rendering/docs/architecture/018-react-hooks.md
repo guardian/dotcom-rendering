@@ -6,11 +6,11 @@ We've avoided using React hooks for some time in order to ensure un-desired comp
 
 ## Decision
 
-- Prefer non-stateful components if possible
-- Prefer React's official hooks to custom hooks
-- Avoid abstractions that could lead to hooks within hooks within hooks. 
-- Prefer hooks to classes with component lifecycle methods
-- Try to build hooks that are generic and reusable
+-   Prefer non-stateful components if possible
+-   Prefer React's official hooks to custom hooks
+-   Avoid abstractions that could lead to hooks within hooks within hooks.
+-   Prefer hooks to classes with component lifecycle methods
+-   Try to build hooks that are generic and reusable
 
 ## Status
 

@@ -1925,8 +1925,7 @@ const datelineDark = ({ design, theme }: ArticleFormat): string => {
 	}
 };
 
-const specialReportAltButton = (_format: ArticleFormat): Colour =>
-	neutral[100];
+const specialReportAltButton = (_format: ArticleFormat): Colour => neutral[100];
 
 const specialReportAltButtonDark = (_format: ArticleFormat): Colour =>
 	neutral[86];

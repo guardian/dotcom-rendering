@@ -536,13 +536,15 @@ const map7 =
 				),
 		);
 
+/* eslint-disable max-len -- this is a lot of nesting, can it be refactored? */
+
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
  * more details and examples.
  */
 const map9 =
 	<A, B, C, D, E, F, G, H, I, J>(
-		f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i:I) => J,
+		f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J,
 	) =>
 	(
 		pa: Parser<A>,
@@ -579,25 +581,33 @@ const map9 =
 																.flatMap(
 																	(resG) =>
 																		ph
-																			.run(a)
+																			.run(
+																				a,
+																			)
 																			.flatMap(
-																				(resH) =>
+																				(
+																					resH,
+																				) =>
 																					pi
-																						.run(a)
+																						.run(
+																							a,
+																						)
 																						.map(
-																					(resI) =>
-
-																					f(
-																						resA,
-																						resB,
-																						resC,
-																						resD,
-																						resE,
-																						resF,
-																						resG,
-																						resH,
-																						resI,
-																					),
+																							(
+																								resI,
+																							) =>
+																								f(
+																									resA,
+																									resB,
+																									resC,
+																									resD,
+																									resE,
+																									resF,
+																									resG,
+																									resH,
+																									resI,
+																								),
+																						),
 																			),
 																),
 														),
@@ -606,8 +616,9 @@ const map9 =
 								),
 						),
 				),
-		),
-	);
+		);
+/* eslint-enable max-len */
+
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
  * more details and examples.

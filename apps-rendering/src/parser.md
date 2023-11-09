@@ -11,18 +11,17 @@ It's inspired by the [Elm JSON module](https://package.elm-lang.org/packages/elm
 Attempting to parse an object of type `Person` from a blob of unknown JSON.
 
 ```ts
-type Person = { name: string, age: number };
+type Person = { name: string; age: number };
 
 const makePerson = (name: string, age: number): Person => ({
-    name,
-    age,
+	name,
+	age,
 });
 
-const personParser: Parser<Person> =
-  map2(makePerson)(
-    parseField('name', parseString),
-    parseField('age', parseNumber),
-  );
+const personParser: Parser<Person> = map2(makePerson)(
+	parseField('name', parseString),
+	parseField('age', parseNumber),
+);
 
 // The JSON is valid
 const jsonA: unknown = JSON.parse('{ "name": "CP Scott", "age": 85 }');

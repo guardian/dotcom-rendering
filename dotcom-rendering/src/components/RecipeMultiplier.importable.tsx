@@ -142,9 +142,8 @@ export const RecipeMultiplier = () => {
 		style.innerHTML = colours;
 		document.body.appendChild(style);
 
-		const root = document.querySelector(
-			'gu-island[name=RecipeMultiplier]',
-		)?.nextSibling;
+		const root = document.querySelector('gu-island[name=RecipeMultiplier]')
+			?.nextSibling;
 
 		if (root instanceof HTMLElement) {
 			const walker = document.createTreeWalker(
