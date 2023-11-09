@@ -1,0 +1,37 @@
+# The DCR repo has a required status check on the Chromatic UI Tests
+# To save £££, we only run the Chromatic tests once the `run_chromatic`
+# label is applied. This workflow reminds people to add the label
+# because it isn't always obvious.
+
+name: Chromatic Label Helper
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  write_comment:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const labels = await github.rest.issues.listLabelsOnIssue({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            }).then(({ data }) => data)
+
+            const hasChromaticLabel = labels.some(label => label.name === 'run-chromatic');
+
+            if (!hasChromaticLabel) {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: 'Hello :wave:! When you\'re ready to run Chromatic, please apply the `run_chromatic` label to this PR.'
+              })
+            }
