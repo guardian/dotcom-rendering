@@ -5,7 +5,10 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { palette as sourcePalette } from '@guardian/source-foundations';
+import {
+	breakpoints,
+	palette as sourcePalette,
+} from '@guardian/source-foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
@@ -207,6 +210,7 @@ BrandingLiveBlog.parameters = {
 	viewport: {
 		defaultViewport: 'tablet',
 	},
+	chromatic: { viewports: [breakpoints.tablet] },
 };
 BrandingLiveBlog.decorators = [
 	splitTheme([
@@ -315,11 +319,16 @@ export const SpecialReportStory = () => {
 SpecialReportStory.storyName = 'SpecialReport';
 SpecialReportStory.decorators = [lightDecorator(specialReportFormat)];
 
+const specialReportAltFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Feature,
+	theme: ArticleSpecial.SpecialReportAlt,
+};
 export const SpecialReportAlt = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={specialReportFormat}
+				format={specialReportAltFormat}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -335,7 +344,7 @@ export const SpecialReportAlt = () => {
 	);
 };
 SpecialReportAlt.storyName = 'SpecialReportAlt';
-SpecialReportAlt.decorators = [lightDecorator(specialReportFormat)];
+SpecialReportAlt.decorators = [lightDecorator(specialReportAltFormat)];
 
 const commentFormat = {
 	display: ArticleDisplay.Standard,
