@@ -30,7 +30,7 @@ Editions (via Frontend) |First party| |[youtube-player.ts](https://github.com/gu
 <sup>3</sup> Frontend's `youtube-player.ts` will default to the domain `youtube-nocookie.com` and no `adsConfig` object if an 'ad-free' setting is detected or if consent is not given.
 
 <sup>4</sup> To view the CAPI output for an article:
-- install [Teleporter](https://sites.google.com/a/guardian.co.uk/composer-blog/section-three/introducing-gustaf)
+- [install Teleporter](https://s3-eu-west-1.amazonaws.com/gustaf-dist/composer/index.html)
 - when viewing an article open Teleporter and click the 'content-api live' link.
 
 # Composer and YouTube Embeds

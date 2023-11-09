@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { TableOfContentsItem } from '../types/frontend';
 import { TableOfContents } from './TableOfContents.importable';
@@ -35,27 +36,13 @@ const headline3: TableOfContentsItem = {
 	title: 'Third h2 text',
 };
 
-const format: ArticleFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.News,
-};
-
-const immersiveDisplayFormat: ArticleFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Immersive,
-	theme: Pillar.News,
-};
-
-const numberedListDisplayFormat: ArticleFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.NumberedList,
-	theme: Pillar.News,
-};
-
 const tableItems = [headline1, headline2, headline3];
 
-export const defaultStory = () => {
+export const defaultStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Wrapper>
 			<TableOfContents tableOfContents={tableItems} format={format} />
@@ -64,32 +51,54 @@ export const defaultStory = () => {
 };
 
 defaultStory.storyName = 'default';
-defaultStory.decorators = [splitTheme([format])];
+defaultStory.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const immersive = () => {
+export const immersive: StoryObj = ({ format }: { format: ArticleFormat }) => {
 	return (
 		<Wrapper>
-			<TableOfContents
-				tableOfContents={tableItems}
-				format={immersiveDisplayFormat}
-			/>
+			<TableOfContents tableOfContents={tableItems} format={format} />
 		</Wrapper>
 	);
 };
 
 immersive.storyName = 'immersive';
-immersive.decorators = [splitTheme([immersiveDisplayFormat])];
+immersive.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Immersive,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const numberedList = () => {
+export const numberedList: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Wrapper>
-			<TableOfContents
-				tableOfContents={tableItems}
-				format={numberedListDisplayFormat}
-			/>
+			<TableOfContents tableOfContents={tableItems} format={format} />
 		</Wrapper>
 	);
 };
 
 numberedList.storyName = 'numberedList';
-numberedList.decorators = [splitTheme([numberedListDisplayFormat])];
+numberedList.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.NumberedList,
+			theme: Pillar.News,
+		},
+	]),
+];

@@ -14,7 +14,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { log, success, warn } from '../env/log.js';
+import { log, success, warn } from '../../../scripts/log.js';
 
 const STORIES_PATH = resolve(
 	dirname(fileURLToPath(new URL(import.meta.url))),
