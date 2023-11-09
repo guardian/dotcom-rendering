@@ -35,7 +35,6 @@ const showTrailText = (
 
 export const TrailTextWrapper = ({
 	children,
-	format,
 	imagePosition,
 	imageSize,
 	imageType,
