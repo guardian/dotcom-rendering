@@ -5,9 +5,11 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import { palette as sourcePalette } from '@guardian/source-foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
+import type { Branding as BrandingType } from '../types/branding';
 import { ArticleMeta } from './ArticleMeta';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
@@ -117,22 +119,29 @@ export const ArticleAppsStory = () => {
 ArticleAppsStory.args = { config: { renderingTarget: 'Apps' } };
 ArticleAppsStory.decorators = [lightDecorator(defaultFormat)];
 
-const branding = {
-	sponsorName: 'Humanity United',
+const branding: BrandingType = {
+	brandingType: { name: 'sponsored' },
+	sponsorName: 'theguardian.org',
 	logo: {
-		src: 'https://static.theguardian.com/commercial/sponsor/14/May/2018/533d381b-ac99-4e10-83be-8b64a1da9710-hu.png',
-		dimensions: { width: 140, height: 90 },
-		link: 'http://www.humanityunited.org/ ',
+		src: 'https://static.theguardian.com/commercial/sponsor/19/Dec/2022/57ba1d00-b2bd-4f6d-ba35-15a82b8d9507-0094b90a-bdb8-4e97-b866-dcf49179b29d-theguardian.org.png',
+		dimensions: {
+			width: 280,
+			height: 180,
+		},
+		link: 'https://theguardian.org/',
 		label: 'Supported by',
 	},
 	logoForDarkBackground: {
-		src: 'https://static.theguardian.com/commercial/sponsor/14/May/2018/4192d462-d794-4f07-a43c-6b546f4dcd93-hu-white.png',
-		dimensions: { width: 140, height: 39 },
-		link: 'http://www.humanityunited.org/ ',
+		src: 'https://static.theguardian.com/commercial/sponsor/19/Dec/2022/58a1e08d-cd4a-47a5-966a-4846b0461642-46629471-cb0b-4c59-9a06-1ef23778b41f-theguardian.org2.png',
+		dimensions: {
+			width: 280,
+			height: 180,
+		},
+		link: 'https://theguardian.org/',
 		label: 'Supported by',
 	},
 	aboutThisLink:
-		'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
 };
 
 export const BrandingStory = ({ format }: { format: ArticleFormat }) => {
@@ -161,13 +170,50 @@ BrandingStory.decorators = [
 		{ ...defaultFormat },
 		{
 			...defaultFormat,
-			theme: Pillar.Sport,
-			design: ArticleDesign.LiveBlog,
-		},
-		{
-			...defaultFormat,
 			theme: Pillar.Culture,
 			design: ArticleDesign.Gallery,
+		},
+	]),
+];
+
+export const BrandingLiveBlog = ({ format }: { format: ArticleFormat }) => {
+	return (
+		<div
+			css={css`
+				background-color: ${sourcePalette.sport[100]};
+			`}
+		>
+			<Wrapper>
+				<ArticleMeta
+					branding={branding}
+					format={format}
+					pageId=""
+					webTitle=""
+					byline="Lanre Bakare"
+					tags={tagsWithLargeBylineImage}
+					primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+					secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+					isCommentable={false}
+					discussionApiUrl=""
+					shortUrlId=""
+					ajaxUrl=""
+				/>
+			</Wrapper>
+		</div>
+	);
+};
+BrandingLiveBlog.storyName = 'Branding - LiveBlog';
+BrandingLiveBlog.parameters = {
+	viewport: {
+		defaultViewport: 'tablet',
+	},
+};
+BrandingLiveBlog.decorators = [
+	splitTheme([
+		{
+			...defaultFormat,
+			theme: Pillar.Sport,
+			design: ArticleDesign.LiveBlog,
 		},
 	]),
 ];
