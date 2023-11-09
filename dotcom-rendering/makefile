@@ -107,6 +107,14 @@ cypress-open: clear clean-dist install build
 	$(call log, "starting PROD server and opening Cypress")
 	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress open --e2e --browser electron'
 
+playwright: clear clean-dist install build
+	$(call log, "starting PROD server for Playwright")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'playwright test'
+
+playwright-open: clear clean-dist install build
+	$(call log, "starting PROD server and opening Playwright")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'playwright test --ui'
+
 ampValidation: clean-dist install
 	$(call log, "starting AMP Validation test")
 	@node scripts/test/amp-validation.js
