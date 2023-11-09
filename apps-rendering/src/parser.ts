@@ -536,6 +536,8 @@ const map7 =
 				),
 		);
 
+/* eslint-disable max-len -- this is a lot of nesting, can it be refactored? */
+
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
  * more details and examples.
@@ -615,6 +617,8 @@ const map9 =
 						),
 				),
 		);
+/* eslint-enable max-len */
+
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
  * more details and examples.
