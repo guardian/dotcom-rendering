@@ -2,9 +2,11 @@ import { css } from '@emotion/react';
 import { body, until } from '@guardian/source-foundations';
 import { palette } from '../../../palette';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
+import { DCRContainerPalette } from '../../../types/front';
 
 type Props = {
 	children: string | React.ReactNode;
+	containerPalette?: DCRContainerPalette;
 	imagePosition?: ImagePositionType;
 	imageSize?: ImageSizeType;
 	imageType?: CardImageType | undefined;
@@ -34,6 +36,7 @@ const showTrailText = (
 
 export const TrailTextWrapper = ({
 	children,
+	containerPalette,
 	imagePosition,
 	imageSize,
 	imageType,

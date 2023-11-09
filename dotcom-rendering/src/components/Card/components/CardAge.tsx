@@ -6,21 +6,27 @@ import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';
 import { Island } from '../../Island';
 import { RelativeTime } from '../../RelativeTime.importable';
+import { DCRContainerPalette } from '../../../types/front';
 
 type Props = {
 	format: ArticleFormat;
+	containerPalette?: DCRContainerPalette;
 	webPublicationDate: string;
 	showClock?: boolean;
 	isDynamo?: true;
 };
 
-const ageStyles = (format: ArticleFormat, isDynamo?: true) => {
+const ageStyles = (
+	format: ArticleFormat,
+	containerPalette?: DCRContainerPalette,
+	isDynamo?: true,
+) => {
 	return css`
 		${textSans.xxsmall({ lineHeight: 'tight' })};
 		margin-top: -4px;
 		color: ${isDynamo
-			? decidePalette(format).text.dynamoHeadline
-			: palette('--card-age-text')};
+			? decidePalette(format, containerPalette).text.dynamoHeadline
+			: palette('--card-age-text')}; //implement containerPalette
 
 		/* Provide side padding for positioning and also to keep spacing
     between any sibings (like Lines) */
@@ -31,7 +37,7 @@ const ageStyles = (format: ArticleFormat, isDynamo?: true) => {
 		}
 
 		svg {
-			fill: ${palette('--card-age-text')};
+			fill: ${palette('--card-age-text')}; //implement containerPalette
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;
@@ -53,6 +59,7 @@ const ageStyles = (format: ArticleFormat, isDynamo?: true) => {
 
 export const CardAge = ({
 	format,
+	containerPalette,
 	webPublicationDate,
 	showClock,
 	isDynamo,
@@ -62,7 +69,7 @@ export const CardAge = ({
 	}
 
 	return (
-		<span css={ageStyles(format, isDynamo)}>
+		<span css={ageStyles(format, containerPalette, isDynamo)}>
 			{showClock && <ClockIcon />}
 			<Island priority="enhancement" defer={{ until: 'visible' }}>
 				<RelativeTime then={new Date(webPublicationDate).getTime()} />

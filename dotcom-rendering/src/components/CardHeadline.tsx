@@ -181,7 +181,10 @@ const sublinkStyles = css`
 	}
 `;
 
-const lineStyles = (format: ArticleFormat) => css`
+const lineStyles = (
+	format: ArticleFormat,
+	containerPalette?: DCRContainerPalette,
+) => css`
 	padding-top: 1px;
 	:before {
 		display: block;
@@ -189,7 +192,8 @@ const lineStyles = (format: ArticleFormat) => css`
 		top: 0;
 		left: 0;
 		content: '';
-		border-top: 1px solid ${decidePalette(format).border.cardSupporting};
+		border-top: 1px solid
+			${decidePalette(format, containerPalette).border.cardSupporting};
 
 		width: 120px;
 		${between.tablet.and.desktop} {
@@ -249,8 +253,8 @@ export const CardHeadline = ({
 	isExternalLink,
 }: Props) => {
 	const kickerColour = isDynamo
-		? decidePalette(format).text.dynamoKicker
-		: palette('--card-kicker-text');
+		? decidePalette(format, containerPalette).text.dynamoKicker
+		: palette('--card-kicker-text'); //implement containerPalette
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
@@ -269,7 +273,9 @@ export const CardHeadline = ({
 							size: sizeOnMobile ?? size,
 							fontWeight: 'medium',
 						}),
-					showLine && !isDynamo && lineStyles(format),
+					showLine &&
+						!isDynamo &&
+						lineStyles(format, containerPalette),
 				]}
 			>
 				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
@@ -287,8 +293,11 @@ export const CardHeadline = ({
 					<span
 						css={css`
 							color: ${isDynamo
-								? decidePalette(format).text.dynamoHeadline
-								: palette('--card-headline-text')};
+								? decidePalette(format, containerPalette).text
+										.dynamoHeadline
+								: palette(
+										'--card-headline-text',
+								  )}; //implement containerPalette
 						`}
 						className="show-underline"
 					>
@@ -309,6 +318,7 @@ export const CardHeadline = ({
 				<Byline
 					text={byline}
 					format={format}
+					containerPalette={containerPalette}
 					size={size}
 					isCard={true}
 				/>
