@@ -2,10 +2,9 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { from, neutral } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from '../../../types/front';
-import type { Palette } from '../../../types/palette';
-import { palette as darkLightPalette } from '../../../palette';
 import { decidePalette } from '../../../lib/decidePalette';
+import { palette } from '../../../palette';
+import type { DCRContainerPalette } from '../../../types/front';
 import { FormatBoundary } from '../../FormatBoundary';
 
 type Props = {
@@ -56,7 +55,7 @@ const cardStyles = (
 		text-decoration: none;
 		background-color: ${isDynamo
 			? 'transparent'
-			: darkLightPalette('--card-background')};
+			: palette('--card-background')};
 	`;
 
 	const decidePaletteBrightness = (thePalette: DCRContainerPalette) => {
@@ -113,11 +112,9 @@ const cardStyles = (
 			return css`
 				${baseCardStyles};
 				:hover {
-					/* TODO: This colour is hard coded here because it does not yet
-                           exist in source-foundations. Once it's been added, please
-                           remove this. @siadcock is aware. */
-					/* stylelint-disable-next-line color-no-hex */
-					background-color: #fdf0e8;
+					background-color: ${palette(
+						'--card-background-hover-opinion',
+					)};
 				}
 			`;
 		case ArticleDesign.Gallery:
@@ -134,7 +131,9 @@ const cardStyles = (
 			return css`
 				${baseCardStyles};
 				:hover {
-					background-color: ${neutral[93]};
+					background-color: ${palette(
+						'--card-background-hover-default',
+					)};
 				}
 			`;
 	}
@@ -142,16 +141,16 @@ const cardStyles = (
 
 const topBarStyles = ({
 	isDynamo,
-	palette,
+	format,
 }: {
 	isDynamo?: true;
-	palette: Palette;
+	format: ArticleFormat;
 }) => {
 	/* Styling for top bar */
 	const baseStyles = css`
 		background-color: ${isDynamo
-			? palette.text.dynamoKicker
-			: darkLightPalette('--card-border-top')};
+			? decidePalette(format).text.dynamoKicker
+			: palette('--card-border-top')};
 		content: '';
 		height: 1px;
 		z-index: 2;
@@ -181,13 +180,12 @@ export const CardWrapper = ({
 	containerPalette,
 	isDynamo,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
 	return (
 		<FormatBoundary format={format}>
 			<div
 				css={[
 					cardStyles(format, isDynamo, containerPalette),
-					topBarStyles({ isDynamo, palette }),
+					topBarStyles({ isDynamo, format }),
 				]}
 			>
 				{children}

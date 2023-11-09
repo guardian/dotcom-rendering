@@ -14,12 +14,12 @@ import { Link, SvgExternal } from '@guardian/source-react-components';
 import React from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import { palette as darkLightPalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
-import { palette as darkLightPalette } from '../palette';
 
 type Props = {
 	headlineText: string; // The text shown

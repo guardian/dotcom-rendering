@@ -5,8 +5,8 @@
  */
 
 import { ArticleDesign, ArticleDisplay, ArticleSpecial, Pillar } from '@guardian/libs';
-import { CardsWithDifferentThemes } from '../../src/components/Card/Card.stories';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { CardsWithDifferentThemes } from '../../src/components/Card/Card.stories';
 
 // eslint-disable-next-line import/no-default-export -- we need a default here
 export default {

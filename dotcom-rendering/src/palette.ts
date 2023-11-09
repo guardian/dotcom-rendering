@@ -741,9 +741,9 @@ const cardBackgroundDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[10];
+		default:
+			return sourcePalette.neutral[0];
 	}
-
-	return sourcePalette.neutral[0];
 };
 const cardTrailTextLight = (format: ArticleFormat): string => {
 	return decidePalette(format).text.cardStandfirst;
@@ -754,7 +754,7 @@ const cardTextDark = (): string => {
 const cardBylineTextLight = (format: ArticleFormat): string => {
 	return decidePalette(format).text.cardByline;
 };
-const cardBylineTextDark = ({ design, theme }: ArticleFormat): string => {
+const cardBylineKickerTextDark = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Analysis:
 			switch (theme) {
@@ -846,6 +846,16 @@ const cardKickerTextLight = (format: ArticleFormat): string => {
 };
 const cardHeadlineTextLight = (format: ArticleFormat): string => {
 	return decidePalette(format).text.cardHeadline;
+};
+const cardBackgroundHoverDefaultLight = (): string => {
+	return sourcePalette.neutral[93];
+};
+const cardBackgroundHoverOpinionLight = (): string => {
+	/* TODO: This colour is hard coded here because it does not yet
+                           exist in source-foundations. Once it's been added, please
+                           remove this. @siadcock is aware. */
+	/* stylelint-disable-next-line color-no-hex */
+	return '#fdf0e8';
 };
 
 const captionTextLight = ({ design, theme }: ArticleFormat): string => {
@@ -1131,15 +1141,23 @@ const paletteColours = {
 	},
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
-		dark: cardTextDark,
+		dark: cardBylineKickerTextDark,
 	},
 	'--card-byline-text': {
 		light: cardBylineTextLight,
-		dark: cardBylineTextDark,
+		dark: cardBylineKickerTextDark,
 	},
 	'--card-headline-text': {
 		light: cardHeadlineTextLight,
 		dark: cardTextDark,
+	},
+	'--card-background-hover-default': {
+		light: cardBackgroundHoverDefaultLight,
+		dark: cardBackgroundDark,
+	},
+	'--card-background-hover-opinion': {
+		light: cardBackgroundHoverOpinionLight,
+		dark: cardBackgroundDark,
 	},
 	'--caption-text': {
 		light: captionTextLight,

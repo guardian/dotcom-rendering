@@ -7,6 +7,7 @@ import {
 } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import React from 'react';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import type { MainMedia } from '../../types/mainMedia';
 import { Section } from '../Section';
@@ -14,7 +15,6 @@ import type { Props as CardProps } from './Card';
 import { Card } from './Card';
 import { LI } from './components/LI';
 import { UL } from './components/UL';
-import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 
 const basicCardProps: CardProps = {
 	linkTo: '',

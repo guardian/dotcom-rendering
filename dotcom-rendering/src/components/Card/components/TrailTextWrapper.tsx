@@ -1,13 +1,11 @@
 import { css } from '@emotion/react';
 import { body, until } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from '../../../types/front';
-import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 import { palette } from '../../../palette';
+import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 type Props = {
 	children: string | React.ReactNode;
 	format: ArticleFormat;
-	containerPalette?: DCRContainerPalette;
 	imagePosition?: ImagePositionType;
 	imageSize?: ImageSizeType;
 	imageType?: CardImageType | undefined;
