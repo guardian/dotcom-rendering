@@ -5,7 +5,6 @@ import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 type Props = {
 	children: string | React.ReactNode;
-	format: ArticleFormat;
 	imagePosition?: ImagePositionType;
 	imageSize?: ImageSizeType;
 	imageType?: CardImageType | undefined;
