@@ -14,7 +14,7 @@ import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
 /**
- * Pillar palette picks the same level, or variant, of colour for a theme
+ * Picks a variant of colour for a palette corresponding to the theme
  * @param theme
  * @param variant
  */
@@ -423,9 +423,6 @@ const clickToViewButtonTextDark = (): string => sourcePalette.neutral[7];
 const clickToViewButtonHoverLight = (): string =>
 	buttonThemeDefault.button.backgroundPrimaryHover;
 const clickToViewButtonHoverDark = (): string => sourcePalette.neutral[86];
-
-const guardianLogoText = (): string => sourcePalette.neutral[100];
-const guardianLogoAccentText = (): string => sourcePalette.brandAlt[400];
 
 const brandingLabelLight = (): string => sourcePalette.neutral[20];
 const brandingLabelDark = (): string => sourcePalette.neutral[86];
@@ -1276,14 +1273,6 @@ const paletteColours = {
 	'--summary-event-bullet-hover': {
 		light: summaryEventBulletHoverLight,
 		dark: summaryEventBulletHoverDark,
-	},
-	'--guardian-logo': {
-		light: guardianLogoText,
-		dark: guardianLogoText,
-	},
-	'--guardian-logo-accent': {
-		light: guardianLogoAccentText,
-		dark: guardianLogoAccentText,
 	},
 	'--branding-label-text': {
 		light: brandingLabelLight,

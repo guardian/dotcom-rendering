@@ -1,10 +1,14 @@
 import { css } from '@emotion/react';
-import { from, space, visuallyHidden } from '@guardian/source-foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 import { SvgGuardianLogo } from '@guardian/source-react-components';
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { palette } from '../palette';
 import { SvgGuardianAustraliaLogo } from './SvgGuardianAustraliaLogo';
 import { SvgGuardianBestNewspaperLogo } from './SvgGuardianBestNewspaperLogo';
 
@@ -105,7 +109,7 @@ export const Logo = ({ editionId, hasPageSkin = false }: Props) => {
 					>
 						The Guardian - Back to home
 					</span>
-					<SvgGuardianLogo textColor={palette('--guardian-logo')} />
+					<SvgGuardianLogo textColor={sourcePalette.neutral[100]} />
 				</a>
 			);
 	}
