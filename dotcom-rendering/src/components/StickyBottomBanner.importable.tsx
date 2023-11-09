@@ -159,14 +159,13 @@ const buildRRBannerConfigWith = ({
 					}),
 				show:
 					({ meta, module, fetchEmail }: BannerProps) =>
-					() =>
-						(
-							<BannerComponent
-								meta={meta}
-								module={module}
-								fetchEmail={fetchEmail}
-							/>
-						),
+					() => (
+						<BannerComponent
+							meta={meta}
+							module={module}
+							fetchEmail={fetchEmail}
+						/>
+					),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};
@@ -205,8 +204,9 @@ const buildBrazeBanner = (
 				tags,
 				shouldHideReaderRevenue,
 			),
-		show: (meta: any) => () =>
-			<BrazeBanner meta={meta} idApiUrl={idApiUrl} />,
+		show: (meta: any) => () => (
+			<BrazeBanner meta={meta} idApiUrl={idApiUrl} />
+		),
 	},
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });

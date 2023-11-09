@@ -10,17 +10,15 @@ import TwitterIcon from '../static/icons/twitter.svg';
 import { ShareIcons } from './ShareIcons.amp';
 
 const pillarColours = pillarMap(
-	(pillar) =>
-		css`
-			color: ${pillarPalette_DO_NOT_USE[pillar].main};
-		`,
+	(pillar) => css`
+		color: ${pillarPalette_DO_NOT_USE[pillar].main};
+	`,
 );
 
 const pillarFill = pillarMap(
-	(pillar) =>
-		css`
-			fill: ${pillarPalette_DO_NOT_USE[pillar].main};
-		`,
+	(pillar) => css`
+		fill: ${pillarPalette_DO_NOT_USE[pillar].main};
+	`,
 );
 
 const ageWarningCss = css`

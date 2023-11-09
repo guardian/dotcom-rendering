@@ -5,53 +5,53 @@
 
 version: 2
 updates:
-    - package-ecosystem: 'npm'
-      directory: '/'
-      schedule:
-          interval: 'daily'
-      # Set to minimise the number of chromatic runs.
-      rebase-strategy: "disabled"
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Set to minimise the number of chromatic runs.
+    rebase-strategy: 'disabled'
 
-      ignore:
-        # The version of the aws-cdk[-lib] & constructs dependencies should match exactly the version specified by @guardian/cdk
-        - dependency-name: 'aws-cdk'
-        - dependency-name: 'aws-cdk-lib'
-        - dependency-name: 'constructs'
-      open-pull-requests-limit: 10
-      groups:
-        # Most storybook dependencies are released with synchronised versions
-        # and therefore should be updated together.
-        storybook:
-          patterns:
-            - "@storybook/*"
-            - "storybook"
-    - package-ecosystem: 'npm'
-      directory: '/apps-rendering'
-      schedule:
-          interval: 'daily'
-      labels:
-        - "AR Dependency"
-      rebase-strategy: "disabled"
-      ignore:
-        # The version of the aws-cdk[-lib] & constructs dependencies should match exactly the version specified by @guardian/cdk
-        - dependency-name: 'aws-cdk'
-        - dependency-name: 'aws-cdk-lib'
-        - dependency-name: 'constructs'
-        # Types should match major and minor versions of the package being used.
-        - dependency-name: "@types/node"
-          update-types:
-            - "version-update:semver-major"
-            - "version-update:semver-minor"
-      open-pull-requests-limit: 7
-      groups:
-        # Most storybook dependencies are released with synchronised versions
-        # and therefore should be updated together.
-        storybook:
-          patterns:
-            - "@storybook/*"
-            - "storybook"
-    - package-ecosystem: 'github-actions'
-      directory: '/'
-      schedule:
-          interval: 'daily'
-      rebase-strategy: "disabled"
+    ignore:
+      # The version of the aws-cdk[-lib] & constructs dependencies should match exactly the version specified by @guardian/cdk
+      - dependency-name: 'aws-cdk'
+      - dependency-name: 'aws-cdk-lib'
+      - dependency-name: 'constructs'
+    open-pull-requests-limit: 10
+    groups:
+      # Most storybook dependencies are released with synchronised versions
+      # and therefore should be updated together.
+      storybook:
+        patterns:
+          - '@storybook/*'
+          - 'storybook'
+  - package-ecosystem: 'npm'
+    directory: '/apps-rendering'
+    schedule:
+      interval: 'daily'
+    labels:
+      - 'AR Dependency'
+    rebase-strategy: 'disabled'
+    ignore:
+      # The version of the aws-cdk[-lib] & constructs dependencies should match exactly the version specified by @guardian/cdk
+      - dependency-name: 'aws-cdk'
+      - dependency-name: 'aws-cdk-lib'
+      - dependency-name: 'constructs'
+      # Types should match major and minor versions of the package being used.
+      - dependency-name: '@types/node'
+        update-types:
+          - 'version-update:semver-major'
+          - 'version-update:semver-minor'
+    open-pull-requests-limit: 7
+    groups:
+      # Most storybook dependencies are released with synchronised versions
+      # and therefore should be updated together.
+      storybook:
+        patterns:
+          - '@storybook/*'
+          - 'storybook'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    rebase-strategy: 'disabled'

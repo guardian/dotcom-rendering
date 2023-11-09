@@ -33,7 +33,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           working-directory: dotcom-rendering
-          wait-on: "http://127.0.0.1:9000"
+          wait-on: 'http://127.0.0.1:9000'
           wait-on-timeout: 30
           browser: chrome
           spec: cypress/e2e/parallel-${{ matrix.group }}/*.js

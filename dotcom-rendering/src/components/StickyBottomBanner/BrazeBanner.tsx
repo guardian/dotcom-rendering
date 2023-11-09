@@ -68,9 +68,8 @@ export const canShowBrazeBanner = async (
 	}
 
 	try {
-		const message = await brazeMessages.getMessageForBanner(
-			brazeArticleContext,
-		);
+		const message =
+			await brazeMessages.getMessageForBanner(brazeArticleContext);
 
 		const logButtonClickWithBraze = (internalButtonId: number) => {
 			message.logButtonClick(internalButtonId);

@@ -1,10 +1,9 @@
 ---
 name: DCR Request for comments
 about: Tell us about a feature that you're planning to implement in dotcom rendering
-title: "[RFC]"
+title: '[RFC]'
 labels: RFC, dotcom-rendering
 assignees: ''
-
 ---
 
 The Dotcom team would like to help you with your proposed change. Please provide us with a brief and concise explanation for what you're looking to do we will try to make the process easier with early feedback or advice.

@@ -1,7 +1,7 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-        "preserveSymlinks": true,              /* Do not resolve the real path of symlinks. */
-        "target": "ES2018" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */,
-    }
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"preserveSymlinks": true /* Do not resolve the real path of symlinks. */,
+		"target": "ES2018" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
+	}
 }

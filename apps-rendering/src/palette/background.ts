@@ -1117,7 +1117,10 @@ const editionsCameraIcon = (format: ArticleFormat): Colour => {
 const specialReportAltButton = (_format: ArticleFormat): Colour =>
 	palette.specialReportAlt[200];
 
-const specialReportAltButtonDark = ({ design, theme }: ArticleFormat): Colour => {
+const specialReportAltButtonDark = ({
+	design,
+	theme,
+}: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -1140,7 +1143,7 @@ const specialReportAltButtonDark = ({ design, theme }: ArticleFormat): Colour =>
 		default:
 			return neutral[10];
 	}
-}
+};
 
 // ----- API ----- //
 
