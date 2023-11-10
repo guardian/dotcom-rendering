@@ -5,15 +5,9 @@ import { Result } from 'result';
 
 // ----- Types ----- //
 
-interface Parser<A> {
-	run: (a: unknown) => Result<string, A>;
-}
+type Parser<A> = (a: unknown) => Result<string, A>;
 
 // ----- Core Functions ----- //
-
-const parser = <A>(f: (a: unknown) => Result<string, A>): Parser<A> => ({
-	run: f,
-});
 
 /**
  * Ignores whatever the input is and instead provides a successful parsing
@@ -26,7 +20,10 @@ const parser = <A>(f: (a: unknown) => Result<string, A>): Parser<A> => ({
  *
  * const result = parse(fooParser)(42); // Ok<string>, with value 'foo'
  */
-const succeed = <A>(a: A): Parser<A> => parser((_) => Result.ok(a));
+const succeed =
+	<A>(a: A): Parser<A> =>
+	(_) =>
+		Result.ok(a);
 
 /**
  * Ignores whatever the input is and instead provides a failed parsing
@@ -39,7 +36,10 @@ const succeed = <A>(a: A): Parser<A> => parser((_) => Result.ok(a));
  *
  * const result = parse(fooParser)(42); // Err<string>, with value 'Uh oh!'
  */
-const fail = <A>(e: string): Parser<A> => parser((_) => Result.err(e));
+const fail =
+	<A>(e: string): Parser<A> =>
+	(_) =>
+		Result.err(e);
 
 const isObject = (a: unknown): a is Record<string, unknown> =>
 	typeof a === 'object' && a !== null;
@@ -65,41 +65,38 @@ const isObject = (a: unknown): a is Record<string, unknown> =>
 const parse =
 	<A>(pa: Parser<A>) =>
 	(a: unknown): Result<string, A> =>
-		pa.run(a);
+		pa(a);
 
 // ----- Basic Parsers ----- //
 
 /**
  * Parses a value into a `string`.
  */
-const stringParser: Parser<string> = parser((a) =>
+const stringParser: Parser<string> = (a) =>
 	typeof a === 'string'
 		? Result.ok(a)
-		: Result.err(`Unable to parse ${String(a)} as a string`),
-);
+		: Result.err(`Unable to parse ${String(a)} as a string`);
 
 /**
  * Parses a value into a `number`.
  */
-const numberParser: Parser<number> = parser((a) =>
+const numberParser: Parser<number> = (a) =>
 	typeof a === 'number' && !isNaN(a)
 		? Result.ok(a)
-		: Result.err(`Unable to parse ${String(a)} as a number`),
-);
+		: Result.err(`Unable to parse ${String(a)} as a number`);
 
 /**
  * Parses a value into a `boolean`.
  */
-const booleanParser: Parser<boolean> = parser((a) =>
+const booleanParser: Parser<boolean> = (a) =>
 	typeof a === 'boolean'
 		? Result.ok(a)
-		: Result.err(`Unable to parse ${String(a)} as a boolean`),
-);
+		: Result.err(`Unable to parse ${String(a)} as a boolean`);
 
 /**
  * Parses a value into a `Date`.
  */
-const dateParser: Parser<Date> = parser((a) => {
+const dateParser: Parser<Date> = (a) => {
 	if (typeof a === 'string' || typeof a === 'number' || a instanceof Date) {
 		const d = new Date(a);
 
@@ -111,12 +108,12 @@ const dateParser: Parser<Date> = parser((a) => {
 	}
 
 	return Result.err(`Can't transform ${String(a)} into a date`);
-});
+};
 
 /**
  * Parses a string to a Document Fragment.
  */
-const documentFragmentParser: Parser<DocumentFragment> = parser((a) => {
+const documentFragmentParser: Parser<DocumentFragment> = (a) => {
 	if (typeof a === 'string') {
 		const domParser = new DOMParser();
 		try {
@@ -134,7 +131,7 @@ const documentFragmentParser: Parser<DocumentFragment> = parser((a) => {
 		}
 	}
 	return Result.err(`Can't transform ${String(a)} into a DocumentFragment`);
-});
+};
 
 /**
  * Makes the value handled by the given parser optional. **Note:** This
@@ -152,8 +149,10 @@ const documentFragmentParser: Parser<DocumentFragment> = parser((a) => {
  * const parserB = fieldParser('bar', maybe(numberParser)); // Parser<Option<number>>
  * const resultB = parse(parserB)(json); // Err<string>, with 'missing field' err
  */
-const maybe = <A>(pa: Parser<A>): Parser<Option<A>> =>
-	parser((a) => Result.ok(pa.run(a).toOption()));
+const maybe =
+	<A>(pa: Parser<A>): Parser<Option<A>> =>
+	(a) =>
+		Result.ok(pa(a).toOption());
 
 // ----- Data Structure Parsers ----- //
 
@@ -173,8 +172,9 @@ const maybe = <A>(pa: Parser<A>): Parser<Option<A>> =>
  * const parserB = fieldParser('bar', numberParser); // Parser<number>
  * const resultB = parse(parserB)(json); // Err<string>, with 'missing field' err
  */
-const fieldParser = <A>(field: string, pa: Parser<A>): Parser<A> =>
-	parser((a) => {
+const fieldParser =
+	<A>(field: string, pa: Parser<A>): Parser<A> =>
+	(a) => {
 		if (!isObject(a)) {
 			return Result.err(
 				`Can't lookup field '${field}' on something that isn't an object`,
@@ -185,8 +185,8 @@ const fieldParser = <A>(field: string, pa: Parser<A>): Parser<A> =>
 			return Result.err(`Field ${field} doesn't exist in ${String(a)}`);
 		}
 
-		return pa.run(a[field]);
-	});
+		return pa(a[field]);
+	};
 
 /**
  * Runs the parser `pa` over the value found at a given index in an array.
@@ -204,8 +204,9 @@ const fieldParser = <A>(field: string, pa: Parser<A>): Parser<A> =>
  * const parserB = indexParser(7, numberParser); // Parser<number>
  * const resultB = parse(parserB)(json); // Err<string>, with 'missing index' err
  */
-const indexParser = <A>(index: number, pa: Parser<A>): Parser<A> =>
-	parser((a) => {
+const indexParser =
+	<A>(index: number, pa: Parser<A>): Parser<A> =>
+	(a) => {
 		if (!Array.isArray(a)) {
 			return Result.err(
 				`Can't lookup index ${index} on something that isn't an Array`,
@@ -218,8 +219,8 @@ const indexParser = <A>(index: number, pa: Parser<A>): Parser<A> =>
 			return Result.err(`Nothing found at index ${index}`);
 		}
 
-		return pa.run(value);
-	});
+		return pa(value);
+	};
 
 /**
  * A convenience for parsing values in nested objects. Takes a list of fields
@@ -256,15 +257,16 @@ const locationParser = <A>(location: string[], pa: Parser<A>): Parser<A> => {
  * const parser = arrayParser(numberParser); // Parser<number[]>
  * const result = parse(parser)(json); // Ok<number[]>, with value [41, 42, 43]
  */
-const arrayParser = <A>(pa: Parser<A>): Parser<A[]> =>
-	parser((a) => {
+const arrayParser =
+	<A>(pa: Parser<A>): Parser<A[]> =>
+	(a) => {
 		const f = (acc: A[], remainder: unknown[]): Result<string, A[]> => {
 			if (remainder.length === 0) {
 				return Result.ok(acc);
 			}
 
 			const [item, ...tail] = remainder;
-			const parsed = pa.run(item);
+			const parsed = pa(item);
 
 			return parsed.either(
 				(err) =>
@@ -282,7 +284,7 @@ const arrayParser = <A>(pa: Parser<A>): Parser<A[]> =>
 		}
 
 		return Result.err(`Could not parse ${String(a)} as an array`);
-	});
+	};
 
 // ----- Combinator Functions ----- //
 
@@ -306,7 +308,8 @@ const arrayParser = <A>(pa: Parser<A>): Parser<A[]> =>
 const map =
 	<A, B>(f: (a: A) => B) =>
 	(pa: Parser<A>): Parser<B> =>
-		parser((a) => pa.run(a).map(f));
+	(a) =>
+		pa(a).map(f);
 
 /**
  * Similar to `map`. Will apply the given function `f` to the results of two
@@ -337,9 +340,8 @@ const map =
 const map2 =
 	<A, B, C>(f: (a: A, b: B) => C) =>
 	(pa: Parser<A>, pb: Parser<B>): Parser<C> =>
-		parser((a) =>
-			pa.run(a).flatMap((resA) => pb.run(a).map((resB) => f(resA, resB))),
-		);
+	(a) =>
+		pa(a).flatMap((resA) => pb(a).map((resB) => f(resA, resB)));
 
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
@@ -348,16 +350,9 @@ const map2 =
 const map3 =
 	<A, B, C, D>(f: (a: A, b: B, c: C) => D) =>
 	(pa: Parser<A>, pb: Parser<B>, pc: Parser<C>): Parser<D> =>
-		parser((a) =>
-			pa
-				.run(a)
-				.flatMap((resA) =>
-					pb
-						.run(a)
-						.flatMap((resB) =>
-							pc.run(a).map((resC) => f(resA, resB, resC)),
-						),
-				),
+	(a) =>
+		pa(a).flatMap((resA) =>
+			pb(a).flatMap((resB) => pc(a).map((resC) => f(resA, resB, resC))),
 		);
 
 /**
@@ -367,24 +362,13 @@ const map3 =
 const map4 =
 	<A, B, C, D, E>(f: (a: A, b: B, c: C, d: D) => E) =>
 	(pa: Parser<A>, pb: Parser<B>, pc: Parser<C>, pd: Parser<D>): Parser<E> =>
-		parser((a) =>
-			pa
-				.run(a)
-				.flatMap((resA) =>
-					pb
-						.run(a)
-						.flatMap((resB) =>
-							pc
-								.run(a)
-								.flatMap((resC) =>
-									pd
-										.run(a)
-										.map((resD) =>
-											f(resA, resB, resC, resD),
-										),
-								),
-						),
+	(a) =>
+		pa(a).flatMap((resA) =>
+			pb(a).flatMap((resB) =>
+				pc(a).flatMap((resC) =>
+					pd(a).map((resD) => f(resA, resB, resC, resD)),
 				),
+			),
 		);
 
 /**
@@ -400,34 +384,15 @@ const map5 =
 		pd: Parser<D>,
 		pe: Parser<E>,
 	): Parser<F> =>
-		parser((a) =>
-			pa
-				.run(a)
-				.flatMap((resA) =>
-					pb
-						.run(a)
-						.flatMap((resB) =>
-							pc
-								.run(a)
-								.flatMap((resC) =>
-									pd
-										.run(a)
-										.flatMap((resD) =>
-											pe
-												.run(a)
-												.map((resE) =>
-													f(
-														resA,
-														resB,
-														resC,
-														resD,
-														resE,
-													),
-												),
-										),
-								),
-						),
+	(a) =>
+		pa(a).flatMap((resA) =>
+			pb(a).flatMap((resB) =>
+				pc(a).flatMap((resC) =>
+					pd(a).flatMap((resD) =>
+						pe(a).map((resE) => f(resA, resB, resC, resD, resE)),
+					),
 				),
+			),
 		);
 
 /**
@@ -444,39 +409,19 @@ const map6 =
 		pe: Parser<E>,
 		pf: Parser<F>,
 	): Parser<G> =>
-		parser((a) =>
-			pa
-				.run(a)
-				.flatMap((resA) =>
-					pb
-						.run(a)
-						.flatMap((resB) =>
-							pc
-								.run(a)
-								.flatMap((resC) =>
-									pd
-										.run(a)
-										.flatMap((resD) =>
-											pe
-												.run(a)
-												.flatMap((resE) =>
-													pf
-														.run(a)
-														.map((resF) =>
-															f(
-																resA,
-																resB,
-																resC,
-																resD,
-																resE,
-																resF,
-															),
-														),
-												),
-										),
-								),
+	(a) =>
+		pa(a).flatMap((resA) =>
+			pb(a).flatMap((resB) =>
+				pc(a).flatMap((resC) =>
+					pd(a).flatMap((resD) =>
+						pe(a).flatMap((resE) =>
+							pf(a).map((resF) =>
+								f(resA, resB, resC, resD, resE, resF),
+							),
 						),
+					),
 				),
+			),
 		);
 
 /**
@@ -496,47 +441,22 @@ const map7 =
 		pf: Parser<F>,
 		pg: Parser<G>,
 	): Parser<H> =>
-		parser((a) =>
-			pa
-				.run(a)
-				.flatMap((resA) =>
-					pb
-						.run(a)
-						.flatMap((resB) =>
-							pc
-								.run(a)
-								.flatMap((resC) =>
-									pd
-										.run(a)
-										.flatMap((resD) =>
-											pe
-												.run(a)
-												.flatMap((resE) =>
-													pf
-														.run(a)
-														.flatMap((resF) =>
-															pg
-																.run(a)
-																.map((resG) =>
-																	f(
-																		resA,
-																		resB,
-																		resC,
-																		resD,
-																		resE,
-																		resF,
-																		resG,
-																	),
-																),
-														),
-												),
-										),
+	(a) =>
+		pa(a).flatMap((resA) =>
+			pb(a).flatMap((resB) =>
+				pc(a).flatMap((resC) =>
+					pd(a).flatMap((resD) =>
+						pe(a).flatMap((resE) =>
+							pf(a).flatMap((resF) =>
+								pg(a).map((resG) =>
+									f(resA, resB, resC, resD, resE, resF, resG),
 								),
+							),
 						),
+					),
 				),
+			),
 		);
-
-/* eslint-disable max-len -- this is a lot of nesting, can it be refactored? */
 
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
@@ -557,67 +477,36 @@ const map9 =
 		ph: Parser<H>,
 		pi: Parser<I>,
 	): Parser<J> =>
-		parser((a) =>
-			pa
-				.run(a)
-				.flatMap((resA) =>
-					pb
-						.run(a)
-						.flatMap((resB) =>
-							pc
-								.run(a)
-								.flatMap((resC) =>
-									pd
-										.run(a)
-										.flatMap((resD) =>
-											pe
-												.run(a)
-												.flatMap((resE) =>
-													pf
-														.run(a)
-														.flatMap((resF) =>
-															pg
-																.run(a)
-																.flatMap(
-																	(resG) =>
-																		ph
-																			.run(
-																				a,
-																			)
-																			.flatMap(
-																				(
-																					resH,
-																				) =>
-																					pi
-																						.run(
-																							a,
-																						)
-																						.map(
-																							(
-																								resI,
-																							) =>
-																								f(
-																									resA,
-																									resB,
-																									resC,
-																									resD,
-																									resE,
-																									resF,
-																									resG,
-																									resH,
-																									resI,
-																								),
-																						),
-																			),
-																),
-														),
-												),
+	(a) =>
+		pa(a).flatMap((resA) =>
+			pb(a).flatMap((resB) =>
+				pc(a).flatMap((resC) =>
+					pd(a).flatMap((resD) =>
+						pe(a).flatMap((resE) =>
+							pf(a).flatMap((resF) =>
+								pg(a).flatMap((resG) =>
+									ph(a).flatMap((resH) =>
+										pi(a).map((resI) =>
+											f(
+												resA,
+												resB,
+												resC,
+												resD,
+												resE,
+												resF,
+												resG,
+												resH,
+												resI,
+											),
 										),
+									),
 								),
+							),
 						),
+					),
 				),
+			),
 		);
-/* eslint-enable max-len */
 
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
@@ -637,55 +526,32 @@ const map8 =
 		pg: Parser<G>,
 		ph: Parser<H>,
 	): Parser<I> =>
-		parser((a) =>
-			pa
-				.run(a)
-				.flatMap((resA) =>
-					pb
-						.run(a)
-						.flatMap((resB) =>
-							pc
-								.run(a)
-								.flatMap((resC) =>
-									pd
-										.run(a)
-										.flatMap((resD) =>
-											pe
-												.run(a)
-												.flatMap((resE) =>
-													pf
-														.run(a)
-														.flatMap((resF) =>
-															pg
-																.run(a)
-																.flatMap(
-																	(resG) =>
-																		ph
-																			.run(
-																				a,
-																			)
-																			.map(
-																				(
-																					resH,
-																				) =>
-																					f(
-																						resA,
-																						resB,
-																						resC,
-																						resD,
-																						resE,
-																						resF,
-																						resG,
-																						resH,
-																					),
-																			),
-																),
-														),
-												),
+	(a) =>
+		pa(a).flatMap((resA) =>
+			pb(a).flatMap((resB) =>
+				pc(a).flatMap((resC) =>
+					pd(a).flatMap((resD) =>
+						pe(a).flatMap((resE) =>
+							pf(a).flatMap((resF) =>
+								pg(a).flatMap((resG) =>
+									ph(a).map((resH) =>
+										f(
+											resA,
+											resB,
+											resC,
+											resD,
+											resE,
+											resF,
+											resG,
+											resH,
 										),
+									),
 								),
+							),
 						),
+					),
 				),
+			),
 		);
 
 /**
@@ -723,7 +589,8 @@ const map8 =
 const andThen =
 	<A, B>(f: (a: A) => Parser<B>) =>
 	(pa: Parser<A>): Parser<B> =>
-		parser((a) => pa.run(a).flatMap((x) => f(x).run(a)));
+	(a) =>
+		pa(a).flatMap((x) => f(x)(a));
 
 /**
  * Handles situations where there are multiple valid ways that the input data
@@ -757,8 +624,9 @@ const andThen =
  * // Err<string>, "'foo' is not a valid number. NaN is not a valid number"
  * const resultD = parse(parser)(jsonD);
  */
-const oneOf = <A>(parsers: Array<Parser<A>>): Parser<A> =>
-	parser((a) => {
+const oneOf =
+	<A>(parsers: Array<Parser<A>>): Parser<A> =>
+	(a) => {
 		const f = (
 			remainingParsers: Array<Parser<A>>,
 			errs: string[],
@@ -768,7 +636,7 @@ const oneOf = <A>(parsers: Array<Parser<A>>): Parser<A> =>
 			}
 
 			const [head, ...tail] = remainingParsers;
-			const result = head.run(a);
+			const result = head(a);
 
 			if (result.isErr()) {
 				return f(tail, [...errs, result.error]);
@@ -784,7 +652,7 @@ const oneOf = <A>(parsers: Array<Parser<A>>): Parser<A> =>
 		}
 
 		return f(parsers, []);
-	});
+	};
 
 // ----- Exports ----- //
 
