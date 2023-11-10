@@ -32,24 +32,16 @@ build: clean-dist install
 	$(call log, "generating Islands report card")
 	@node ./scripts/islands/island-descriptions.mjs
 
-build-ci: clean-dist install
-	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
-
-start-ci: install
-	$(call log, "starting PROD server...")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.js
-
 start-prod:
-	@echo 'starting PROD server...'
+	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
 	NODE_ENV=production node dist/server.js
 	@echo '' # just a spacer
-	@echo 'PROD server is running'
+	$(call log, "PROD server is running")
 
-run: stop build start
-
-run-ci: stop build-ci start-ci
+start-prod-no-logs: install
+	$(call log, "starting PROD server...")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.js
 
 # dev #########################################
 
