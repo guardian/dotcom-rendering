@@ -7,11 +7,12 @@ import {
 	articlePaddingStyles,
 	desktopArticleMargin,
 	tabletArticleMargin,
-	tabletContentWidth, wideArticleMargin,
-	wideContentWidth
+	tabletContentWidth,
+	wideArticleMargin,
+	wideContentWidth,
 } from '../styles';
-import { none } from "@guardian/types";
-import Img from "../../ImgAlt";
+import { none } from '@guardian/types';
+import Img from '../../ImgAlt';
 
 const cartoonId = 'multi-panel-cartoon-figure';
 
@@ -37,28 +38,27 @@ const layoutStyles = css`
 const imageSizes = {
 	mediaQueries: [],
 	default: '100%',
-}
+};
 
-const Cartoon: FC<Props> = ({
-	cartoon: { images },
-	format,
-}) => {
+const Cartoon: FC<Props> = ({ cartoon: { images }, format }) => {
 	return (
 		<div css={[articlePaddingStyles, layoutStyles]}>
 			<figure aria-labelledby={cartoonId}>
-				{ images.map((image, key) => {
-					return (<Img
-						image={image}
-						sizes={imageSizes}
-						format={format}
-						className={none}
-						lightbox={none}
-						key={key}
-					/>)
+				{images.map((image, key) => {
+					return (
+						<Img
+							image={image}
+							sizes={imageSizes}
+							format={format}
+							className={none}
+							lightbox={none}
+							key={key}
+						/>
+					);
 				})}
 			</figure>
 		</div>
 	);
-}
+};
 
 export default Cartoon;

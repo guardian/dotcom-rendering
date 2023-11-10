@@ -9,7 +9,7 @@ import type { Cartoon as CartoonData } from 'cartoon';
 export const enum MainMediaKind {
 	Image,
 	Video,
-	Cartoon
+	Cartoon,
 }
 
 export type MainMedia =

@@ -15,8 +15,8 @@ import { Content } from '@guardian/content-api-models/v1/content';
 import { articleContentWith, articleMainContentWith } from 'helperTest';
 import { EmbedKind, Spotify, YouTube } from 'embed';
 import { Optional } from 'optional';
-import { Context } from "./parserContext";
-import { MainMediaKind } from "./mainMedia";
+import { Context } from './parserContext';
+import { MainMediaKind } from './mainMedia';
 
 const articleContent = {
 	id: '',
@@ -782,20 +782,26 @@ describe('cartoon main media', () => {
 	};
 
 	test('filters out cartoon main media elements', () => {
-		const item = f(articleMainContentWith(cartoonElement))
-		expect(item.mainMedia).toBe(none)
+		const item = f(articleMainContentWith(cartoonElement));
+		expect(item.mainMedia).toBe(none);
 	});
 
 	test('parses cartoon elements in the context of the Editions app', () => {
-		const context: Context = { docParser: JSDOM.fragment, salt: 'mockSalt', app: "Editions" }
-		const item = f(articleMainContentWith(cartoonElement), context)
-		expect(item.mainMedia).toEqual(some({
-			kind: MainMediaKind.Cartoon,
-			cartoon: {
-				images: [],
-			}
-		}));
-	})
+		const context: Context = {
+			docParser: JSDOM.fragment,
+			salt: 'mockSalt',
+			app: 'Editions',
+		};
+		const item = f(articleMainContentWith(cartoonElement), context);
+		expect(item.mainMedia).toEqual(
+			some({
+				kind: MainMediaKind.Cartoon,
+				cartoon: {
+					images: [],
+				},
+			}),
+		);
+	});
 });
 
 describe('format', () => {

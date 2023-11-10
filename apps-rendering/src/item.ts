@@ -51,8 +51,8 @@ import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { Result } from 'result';
-import { MainMediaKind } from "mainMedia";
-import { OptionKind } from "@guardian/types/src/option";
+import { MainMediaKind } from 'mainMedia';
+import { OptionKind } from '@guardian/types/src/option';
 
 // ----- Item Type ----- //
 
@@ -410,8 +410,10 @@ const hasTag =
 
 const hasMainElement =
 	(mainMediaKind: MainMediaKind) =>
-		(mainMedia: Option<MainMedia>): boolean =>
-			mainMedia.kind === OptionKind.Some ? mainMedia.value.kind === mainMediaKind : false;
+	(mainMedia: Option<MainMedia>): boolean =>
+		mainMedia.kind === OptionKind.Some
+			? mainMedia.value.kind === mainMediaKind
+			: false;
 
 const isAudio = hasTag('type/audio');
 

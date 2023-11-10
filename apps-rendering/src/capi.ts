@@ -21,7 +21,7 @@ import type { MainMedia } from 'mainMedia';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
-import { parseCartoon } from "./cartoon";
+import { parseCartoon } from './cartoon';
 
 // ----- Lookups ----- //
 
@@ -93,7 +93,8 @@ const articleMainMedia = (
 	content: Content,
 	context: Context,
 ): Optional<MainMedia> => {
-	const elementType: ElementType | undefined = (content.blocks?.main?.elements ?? [])[0]?.type;
+	const elementType: ElementType | undefined = (content.blocks?.main
+		?.elements ?? [])[0]?.type;
 
 	switch (elementType) {
 		case ElementType.IMAGE:
@@ -111,12 +112,12 @@ const articleMainMedia = (
 					video,
 				}));
 		case ElementType.CARTOON:
-			if (context.app === "Editions") {
+			if (context.app === 'Editions') {
 				return articleMainCartoon(content)
 					.flatMap(parseCartoon(context))
 					.map<MainMedia>((cartoon) => ({
 						kind: MainMediaKind.Cartoon,
-						cartoon
+						cartoon,
 					}));
 			} else {
 				return Optional.none();

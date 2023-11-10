@@ -205,9 +205,9 @@ const Layout: FC<Props> = ({ item }) => {
 						css={[
 							bodyWrapperStyles,
 							articleStyles,
-							(
-								isPicture(item.tags) && !hasCartoon(item.mainMedia)
-							) && extendedBodyStyles,
+							isPicture(item.tags) &&
+								!hasCartoon(item.mainMedia) &&
+								extendedBodyStyles,
 							item.design === ArticleDesign.Gallery ||
 							item.design === ArticleDesign.Picture
 								? galleryWrapperStyles

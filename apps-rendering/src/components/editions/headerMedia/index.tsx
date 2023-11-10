@@ -24,7 +24,7 @@ import type { FC } from 'react';
 import FootballScores from '../footballScores';
 import { wideImageWidth } from '../styles';
 import Video from '../video';
-import Cartoon from "../cartoon";
+import Cartoon from '../cartoon';
 
 // ----- Styles ----- //
 
@@ -250,9 +250,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 			}
 			case MainMediaKind.Cartoon: {
 				const { cartoon } = media;
-				return (
-					<Cartoon cartoon={cartoon} format={format}></Cartoon>
-				);
+				return <Cartoon cartoon={cartoon} format={format}></Cartoon>;
 			}
 		}
 	});

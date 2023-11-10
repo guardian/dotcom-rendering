@@ -1,14 +1,10 @@
 // ----- Imports ----- //
 
-import {
-	ArticleDisplay,
-	ArticlePillar,
-	Pillar
-} from '@guardian/libs';
+import { ArticleDisplay, ArticlePillar, Pillar } from '@guardian/libs';
 import { article, cartoon, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import HeaderMedia from './index';
-import { cartoonMainMedia } from "../../../fixtures/cartoon";
+import { cartoonMainMedia } from '../../../fixtures/cartoon';
 
 // ----- Setup ------ //
 
