@@ -12,7 +12,7 @@ import {
 	remSpace,
 } from '@guardian/source-foundations';
 import type { Item } from 'item';
-import { isPicture } from 'item';
+import { hasCartoon, isPicture } from 'item';
 import type { FC } from 'react';
 import { renderEditionsElements } from 'renderer';
 import Header from '../header';
@@ -205,7 +205,9 @@ const Layout: FC<Props> = ({ item }) => {
 						css={[
 							bodyWrapperStyles,
 							articleStyles,
-							isPicture(item.tags) && extendedBodyStyles,
+							(
+								isPicture(item.tags) && !hasCartoon(item.mainMedia)
+							) && extendedBodyStyles,
 							item.design === ArticleDesign.Gallery ||
 							item.design === ArticleDesign.Picture
 								? galleryWrapperStyles
