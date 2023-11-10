@@ -9,6 +9,7 @@ import {
 import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
+import { logger } from '../../server/lib/logging';
 import type { CampaignFieldType } from '../../types/content';
 import { CalloutTermsAndConditions } from './CalloutComponents';
 import { FormField } from './FormField';
@@ -166,8 +167,14 @@ export const Form = ({
 		})
 			.then((resp) => {
 				if (resp.status === 201) {
+					logger.info('Submission of callout form succeeded');
 					setSubmissionSuccess(true);
 				} else {
+					logger.error(
+						`Submission of callout form failed: ${JSON.stringify(
+							resp.body,
+						)}`,
+					);
 					setNetworkError(
 						'Sorry, there was a problem submitting your form. Please try again later.',
 					);
