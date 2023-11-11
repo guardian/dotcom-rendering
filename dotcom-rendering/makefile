@@ -1,4 +1,4 @@
-.PHONY: install dev dev-legacy build clean-dist start stop monitor clear
+.PHONY: install dev dev-legacy build clean-dist clear
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
