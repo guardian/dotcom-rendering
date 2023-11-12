@@ -36,12 +36,9 @@ start-prod:
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
 	NODE_ENV=production node dist/server.js
-	@echo '' # just a spacer
-	$(call log, "PROD server is running")
 
-start-prod-no-logs: install
-	$(call log, "starting PROD server...")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.js
+start-prod-no-logs: export DISABLE_LOGGING_AND_METRICS = true
+start-prod-no-logs: start-prod
 
 # dev #########################################
 
