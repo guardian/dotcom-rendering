@@ -64,11 +64,11 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 		>
 			{smallVariant ? (
 				<>
+					<Hide from="desktop">
+						{smallVariant.images.map(render)}
+					</Hide>
 					<Hide until="desktop">
 						{largeVariant?.images.map(render)}
-					</Hide>
-					<Hide from="desktop">
-						{smallVariant?.images.map(render)}
 					</Hide>
 				</>
 			) : (
