@@ -11,7 +11,10 @@ import {
 } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
+import {
+	lightDecorator,
+	myThemeDecorator,
+} from '../../.storybook/decorators/themeDecorator';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import type { Branding as BrandingType } from '../types/branding';
 import { ArticleMeta } from './ArticleMeta';
@@ -176,22 +179,18 @@ export const BrandingStory: StoryObj = ({ format }: StoryArgs) => {
 };
 BrandingStory.storyName = 'Branding';
 BrandingStory.args = { format: defaultFormat };
-BrandingStory.decorators = [
-	splitTheme([
-		defaultFormat,
-		{
-			...defaultFormat,
-			theme: Pillar.Culture,
-			design: ArticleDesign.Gallery,
-		},
-	]),
-];
+BrandingStory.decorators = [myThemeDecorator(defaultFormat)];
 
 export const BrandingLiveBlog: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<div
+			// Demonstrates niche requirement of liveblog article meta
+			// on screens below desktop size
 			css={css`
 				background-color: ${sourcePalette.sport[100]};
+				@media (min-width: ${breakpoints.desktop}px) {
+					background-color: inherit;
+				}
 			`}
 		>
 			<Wrapper>
