@@ -62,7 +62,7 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 				}
 			`}
 		>
-			{smallVariant ? (
+			{smallVariant && smallVariant.images.length > 0 ? (
 				<>
 					<Hide from="desktop">
 						{smallVariant.images.map(render)}
