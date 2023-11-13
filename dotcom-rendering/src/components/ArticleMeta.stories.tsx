@@ -170,7 +170,7 @@ export const BrandingStory = ({ format }: { format: ArticleFormat }) => {
 // BrandingStory.storyName = 'Branding';
 BrandingStory.decorators = [
 	splitTheme([
-		{ ...defaultFormat },
+		defaultFormat,
 		{
 			...defaultFormat,
 			theme: Pillar.Culture,
