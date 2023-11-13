@@ -14,33 +14,28 @@ import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
 /**
- * Picks a variant of colour for a palette corresponding to the theme
- * @param theme
- * @param variant
+ * Picks a lightness of colour for a palette corresponding to the given pillar
+ * N.b. it does not handle non-pillar themes
+ * @param pillar
+ * @param lightness
  */
 const pillarPalette = (
-	theme: ArticleTheme,
-	variant: 300 | 400 | 500,
+	pillar: Pillar,
+	lightness: 100 | 200 | 300 | 400 | 500 | 600 | 800,
 ): string => {
-	switch (theme) {
+	switch (pillar) {
 		case Pillar.News:
-			return sourcePalette.news[variant];
+			return sourcePalette.news[lightness];
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[variant];
+			return sourcePalette.lifestyle[lightness];
 		case Pillar.Sport:
-			return sourcePalette.sport[variant];
+			return sourcePalette.sport[lightness];
 		case Pillar.Culture:
-			return sourcePalette.culture[variant];
+			return sourcePalette.culture[lightness];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[variant];
-		case ArticleSpecial.Labs:
-			return sourcePalette.specialReport[variant];
-		case ArticleSpecial.SpecialReport:
-			return sourcePalette.specialReport[variant];
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.news[variant];
+			return sourcePalette.opinion[lightness];
 		default:
-			return sourcePalette.news[variant];
+			return sourcePalette.news[lightness];
 	}
 };
 
@@ -430,14 +425,17 @@ const brandingLinkLight = ({ design, theme }: ArticleFormat): string => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
 			return sourcePalette.neutral[7];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
 		case Pillar.News:
 			switch (design) {
 				case ArticleDesign.Analysis:
 					return sourcePalette.news[300];
 				default:
-					return pillarPalette(theme, 400);
+					return sourcePalette.news[400];
 			}
-
 		default:
 			return pillarPalette(theme, 400);
 	}
@@ -458,20 +456,34 @@ const brandingLinkDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[700];
 				case Pillar.News:
-				case Pillar.Lifestyle:
+				case Pillar.Opinion:
 				case Pillar.Sport:
 				case Pillar.Culture:
-				case Pillar.Opinion:
-				case ArticleSpecial.Labs:
-				case ArticleSpecial.SpecialReport:
-				default:
+				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
 			}
 		default:
-			return pillarPalette(theme, 500);
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[500];
+			}
 	}
 };
 
