@@ -11,7 +11,7 @@ import {
 	wideArticleMargin,
 	wideContentWidth,
 } from '../styles';
-import { none } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import Img from '../../ImgAlt';
 
 const cartoonId = 'multi-panel-cartoon-figure';
@@ -51,7 +51,11 @@ const Cartoon: FC<Props> = ({ cartoon: { images }, format }) => {
 							sizes={imageSizes}
 							format={format}
 							className={none}
-							lightbox={none}
+							lightbox={some({
+								className: 'js-launch-slideshow js-main-image',
+								caption: none,
+								credit: none,
+							})}
 							key={key}
 						/>
 					);
