@@ -6,7 +6,6 @@ import type { Context } from 'parserContext';
 import type { CartoonImage } from '@guardian/content-api-models/v1/cartoonImage';
 import { ArticleElementRole } from '@guardian/libs';
 import { ImageSubtype } from 'image/image';
-import type { CartoonElementFields } from '@guardian/content-api-models/v1/cartoonElementFields';
 import { Dpr, src, srcsets } from './image/srcsets';
 
 type VariantSize = 'small' | 'large';
@@ -31,33 +30,38 @@ const parseCartoonImageSubtype = (
 	}
 };
 
-const parseCartoonImage = (
-	cartoonImage: CartoonImage,
-	salt: string,
-	alt?: string,
-): ImageData => {
-	return {
-		src: src(salt, cartoonImage.file, 900, Dpr.One),
-		...srcsets(cartoonImage.file, salt),
-		alt: fromNullable(alt),
-		width: cartoonImage.width ?? 0,
-		height: cartoonImage.height ?? 0,
-		imageSubtype: parseCartoonImageSubtype(cartoonImage),
-		role: ArticleElementRole.Standard,
+const parseCartoonImage =
+	(salt: string, alt?: string) =>
+	(cartoonImage: CartoonImage): ImageData => {
+		return {
+			src: src(salt, cartoonImage.file, 900, Dpr.One),
+			...srcsets(cartoonImage.file, salt),
+			alt: fromNullable(alt),
+			width: cartoonImage.width ?? 0,
+			height: cartoonImage.height ?? 0,
+			imageSubtype: parseCartoonImageSubtype(cartoonImage),
+			role: ArticleElementRole.Standard,
+		};
 	};
-};
 
 const parseCartoon =
 	({ salt }: Context) =>
 	(element: BlockElement): Optional<Cartoon> => {
-		const data: CartoonElementFields | undefined = element.cartoonTypeData;
-		const images = (data?.variants ?? [])
-			.find((v) => v.viewportSize === DEFAULT_VARIANT_SIZE)
-			?.images.map((img) => parseCartoonImage(img, salt, data?.alt));
-
-		return Optional.some({
-			images: images ?? [],
-		});
+		const data = element.cartoonTypeData;
+		if (data?.variants) {
+			const cartoonVariant =
+				data.variants.find(
+					(v) => v.viewportSize === DEFAULT_VARIANT_SIZE,
+				) ?? data.variants.find((v) => v.viewportSize === 'large');
+			if (cartoonVariant) {
+				return Optional.some({
+					images: cartoonVariant.images.map(
+						parseCartoonImage(salt, data.alt),
+					),
+				});
+			}
+		}
+		return Optional.none();
 	};
 
 export { Cartoon, parseCartoon };

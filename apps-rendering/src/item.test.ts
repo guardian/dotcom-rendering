@@ -778,7 +778,14 @@ describe('cartoon main media', () => {
 	const cartoonElement = {
 		type: ElementType.CARTOON,
 		assets: [],
-		cartoonTypeData: {},
+		cartoonTypeData: {
+			variants: [
+				{
+					viewportSize: 'small',
+					images: [],
+				},
+			],
+		},
 	};
 
 	test('filters out cartoon main media elements', () => {
