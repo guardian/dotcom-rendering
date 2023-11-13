@@ -1388,7 +1388,7 @@ export const Standard = {
 			verticalVideo: false,
 			abPublicGoodTest: false,
 			registerWithPhone: false,
-			abBillboardsInMerchHigh: true,
+			abAdsInMerch: true,
 			keyEventsCarousel: true,
 			targeting: true,
 			remoteHeader: true,
