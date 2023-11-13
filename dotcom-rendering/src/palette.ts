@@ -458,42 +458,20 @@ const brandingLinkDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case Pillar.News:
-					return sourcePalette.news[500];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case Pillar.Sport:
-					return sourcePalette.sport[500];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.specialReport[500];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[700];
+				case Pillar.News:
+				case Pillar.Lifestyle:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Opinion:
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReport:
+				default:
+					return pillarPalette(theme, 500);
 			}
 		default:
-			switch (theme) {
-				case Pillar.News:
-					return sourcePalette.news[500];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case Pillar.Sport:
-					return sourcePalette.sport[500];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.specialReport[500];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[500];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.news[500];
-			}
+			return pillarPalette(theme, 500);
 	}
 };
 
