@@ -33,7 +33,7 @@ build: clean-dist install
 	@node ./scripts/islands/island-descriptions.mjs
 
 start-prod:
-	$(call log, "starting PROD server...")
+	@echo 'starting PROD server...'
 	@echo '' # just a spacer
 	NODE_ENV=production node dist/server.js
 
