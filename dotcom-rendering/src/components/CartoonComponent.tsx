@@ -28,11 +28,7 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 				<Picture
 					master={image.url}
 					role={element.role}
-					format={{
-						display: format.display,
-						design: format.design,
-						theme: format.theme,
-					}}
+					format={format}
 					alt={`${element.alt ? `${element.alt}, ` : ''}panel ${
 						image.index + 1
 					}`}
