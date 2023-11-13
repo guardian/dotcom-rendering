@@ -28,11 +28,12 @@ export default meta;
 const colourSchemeDecorator =
 	(colourScheme: 'light' | 'dark') =>
 	(format: ArticleFormat): Decorator =>
-	(Story) => (
-		<div css={css(paletteDeclarations(format, colourScheme))}>
-			<Story />
-		</div>
-	);
+	(Story) =>
+		(
+			<div css={css(paletteDeclarations(format, colourScheme))}>
+				<Story />
+			</div>
+		);
 
 const lightMode = colourSchemeDecorator('light');
 const darkMode = colourSchemeDecorator('dark');

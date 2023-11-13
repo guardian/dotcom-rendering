@@ -1,98 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Guardian Islands</title>
-	</head>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Guardian Islands</title>
+</head>
+<style>
+	:root {
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		font-variant-numeric: tabular-nums;
+
+		color-scheme: light dark;
+	}
+
+	ul#components {
+		display: grid;
+		padding: 0;
+		width: 100%;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 3rem;
+	}
+
+	#components>li {
+		list-style-type: none;
+		border: 4px solid ButtonFace;
+		display: flex;
+		flex-direction: column;
+		height: min-content;
+	}
+
+	#components>li>* {
+		padding: 0.25rem;
+	}
+
+	#components>li>header {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	#components>li header,
+	#components>li footer {
+		background-color: ButtonFace;
+		color: ButtonText;
+	}
+
+	#components>li h1 {
+		margin-top: 0;
+	}
+
+	#components>li h1 a {
+		color: inherit;
+	}
+
+	#components>li h4 {
+		margin: 0;
+	}
+
+	#components>li p {
+		margin: 0;
+		padding: 0.5rem 0;
+	}
+
+	#components hr {
+		border: 1px solid ButtonFace;
+		margin: 0 -0.25rem;
+	}
+</style>
+
+<body>
 	<style>
-		:root {
-			font-family:
-				system-ui,
-				-apple-system,
-				BlinkMacSystemFont,
-				'Segoe UI',
-				Roboto,
-				Oxygen,
-				Ubuntu,
-				Cantarell,
-				'Open Sans',
-				'Helvetica Neue',
-				sans-serif;
-			font-variant-numeric: tabular-nums;
-
-			color-scheme: light dark;
-		}
-
-		ul#components {
-			display: grid;
-			padding: 0;
-			width: 100%;
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			gap: 3rem;
-		}
-
-		#components > li {
-			list-style-type: none;
-			border: 4px solid ButtonFace;
-			display: flex;
-			flex-direction: column;
-			height: min-content;
-		}
-
-		#components > li > * {
-			padding: 0.25rem;
-		}
-
-		#components > li > header {
-			display: flex;
-			justify-content: space-between;
-		}
-
-		#components > li header,
-		#components > li footer {
-			background-color: ButtonFace;
-			color: ButtonText;
-		}
-
-		#components > li h1 {
-			margin-top: 0;
-		}
-
-		#components > li h1 a {
-			color: inherit;
-		}
-
-		#components > li h4 {
-			margin: 0;
-		}
-
-		#components > li p {
-			margin: 0;
-			padding: 0.5rem 0;
-		}
-
-		#components hr {
-			border: 1px solid ButtonFace;
-			margin: 0 -0.25rem;
-		}
 	</style>
+	<h1>Guardian Islands</h1>
+	<h2>Automatically <a
+			href="https://github.com/guardian/dotcom-rendering/blob/66f2501ff3b8be3d8395448b3c3e029ee8bd6b2b/dotcom-rendering/scripts/islands/descriptions.mjs">generated
+			from source</a> on <!--TIMESTAMP-->
+	</h2>
+	<ul id="components"><!--ISLANDS--></ul>
 
-	<body>
-		<style></style>
-		<h1>Guardian Islands</h1>
-		<h2>
-			Automatically
-			<a
-				href="https://github.com/guardian/dotcom-rendering/blob/66f2501ff3b8be3d8395448b3c3e029ee8bd6b2b/dotcom-rendering/scripts/islands/descriptions.mjs"
-				>generated from source</a
-			>
-			on
-			<!--TIMESTAMP-->
-		</h2>
-		<ul id="components">
-			<!--ISLANDS-->
-		</ul>
-	</body>
+</body>
+
 </html>

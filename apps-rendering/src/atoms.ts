@@ -10,12 +10,12 @@ import type { DocParser } from 'parserContext';
 import { Result } from 'result';
 
 interface TimelineEvent {
-	title: string;
-	date: string;
-	unixDate: number;
-	body?: string;
-	toDate?: string;
-	toUnixDate?: number;
+    title: string;
+    date: string;
+    unixDate: number;
+    body?: string;
+    toDate?: string;
+    toUnixDate?: number;
 }
 
 function formatOptionalDate(date: Int64 | undefined): string | undefined {

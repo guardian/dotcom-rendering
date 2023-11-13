@@ -5,11 +5,10 @@
 The [editorial newsletters page](https://www.theguardian.com/email-newsletters) is a dedicated page for displaying the editorial newsletters that readers can subscribe to a presenting a UI to enter their email addresses and sign up.
 
 It is served using a dedicated route handler (dotcom-rendering/src/server/index.allEditorialNewslettersPage.web.ts) and layout, but follows broadly the same pattern as the article and fronts pages, IE:
-
--   frontend posts a JSON body to the route for the page (https://www.theguardian.com/email-newsletters.json will output the page model)
--   the JSON is validated against the schema for the page model
--   the page model is "enhanced" (se dotcom-rendering/src/model/enhance-newsletters-page.ts)
--   the enhanced page model is passed to a render function to produece the HTML to return to frontend
+ - frontend posts a JSON body to the route for the page (https://www.theguardian.com/email-newsletters.json will output the page model)
+ - the JSON is validated against the schema for the page model
+ - the page model is "enhanced" (se dotcom-rendering/src/model/enhance-newsletters-page.ts)
+ - the enhanced page model is passed to a render function to produece the HTML to return to frontend
 
 ## Arranging the Newsletters
 

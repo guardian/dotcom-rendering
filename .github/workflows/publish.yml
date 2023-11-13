@@ -60,3 +60,4 @@ jobs:
               - front-web
             frontend-static:
               - frontend-static
+

@@ -1,39 +1,39 @@
 name: AR PR Deployment
 
 on:
-  pull_request:
-    types: [labeled]
-    paths-ignore:
-      - 'dotcom-rendering/**'
+    pull_request:
+        types: [labeled]
+        paths-ignore:
+            - "dotcom-rendering/**"
 
 jobs:
-  pr_deployment:
-    name: AR PR deployment
-    # We only want to run the app if the PR Deployment label has been added
-    if: ${{ github.event.label.id == 2500798832 }}
+    pr_deployment:
+        name: AR PR deployment
+        # We only want to run the app if the PR Deployment label has been added
+        if: ${{ github.event.label.id == 2500798832 }}
 
-    runs-on: ubuntu-latest
+        runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v3
+              with:
+                node-version-file: '.nvmrc'
+                cache: 'yarn'
 
-      - name: install
-        run: yarn --frozen-lockfile
-        working-directory: apps-rendering
-      - name: run
-        working-directory: apps-rendering
-        run: |
-          npm install -g ngrok
-          npm run watch &
-          timeout 1h ngrok http 3030 -log=stdout -host-header=rewrite | \
-            grep --line-buffered -o 'https://.*' | \
-            xargs -L1 -I{} -t \
-              curl -X POST -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.event.pull_request.head.sha }} -d "{\"state\":\"success\", \"target_url\":\"{}\", \"context\":\"PR deployment\", \"description\":\"This PR is now live until `date -d "+1 hour" "+%a %H:%M"`. Click details to access it ->\"}"
-        env:
-          APIS_IMG_SALT: ${{ secrets.APIS_IMG_SALT }}
-          CAPI_KEY: ${{ secrets.CAPI_KEY }}
-          TZ: '/usr/share/zoneinfo/Europe/London'
+            - name: install
+              run: yarn --frozen-lockfile
+              working-directory: apps-rendering
+            - name: run
+              working-directory: apps-rendering
+              run: |
+                  npm install -g ngrok
+                  npm run watch &
+                  timeout 1h ngrok http 3030 -log=stdout -host-header=rewrite | \
+                    grep --line-buffered -o 'https://.*' | \
+                    xargs -L1 -I{} -t \
+                      curl -X POST -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.event.pull_request.head.sha }} -d "{\"state\":\"success\", \"target_url\":\"{}\", \"context\":\"PR deployment\", \"description\":\"This PR is now live until `date -d "+1 hour" "+%a %H:%M"`. Click details to access it ->\"}"
+              env:
+                  APIS_IMG_SALT: ${{ secrets.APIS_IMG_SALT }}
+                  CAPI_KEY: ${{ secrets.CAPI_KEY }}
+                  TZ: "/usr/share/zoneinfo/Europe/London"

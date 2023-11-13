@@ -39,49 +39,46 @@ describe('tagToContributor', () => {
 	};
 	test('returns a contributor given a tag', () => {
 		const expectedResult = {
-			apiUrl: 'someApiUrl',
-			id: 'someId',
-			image: {
-				kind: 1,
+			"apiUrl": "someApiUrl",
+			"id": "someId",
+			"image": {
+				"kind": 1,
 			},
-			name: 'someTitle',
+			"name": "someTitle",
 		};
 		expect(tagToContributor('someSalt')(tag)).toEqual(expectedResult);
 
 		tag.bylineLargeImageUrl = 'someBylineUrl';
 
 		const expectedResultWithImage = {
-			apiUrl: 'someApiUrl',
-			id: 'someId',
-			image: {
-				kind: 0,
-				value: {
-					alt: {
-						kind: 1,
-					},
-					caption: {
-						kind: 1,
-					},
-					credit: {
-						kind: 1,
-					},
-					dpr2Srcset:
-						'someBylineUrl 32w, someBylineUrl 64w, someBylineUrl 128w, someBylineUrl 192w, someBylineUrl 256w, someBylineUrl 400w, someBylineUrl 600w',
-					height: 192,
-					nativeCaption: {
-						kind: 1,
-					},
-					role: 0,
-					src: 'someBylineUrl',
-					srcset: 'someBylineUrl 32w, someBylineUrl 64w, someBylineUrl 128w, someBylineUrl 192w, someBylineUrl 256w, someBylineUrl 400w, someBylineUrl 600w',
-					width: 192,
-					imageSubtype: Optional.none(),
+			"apiUrl": "someApiUrl",
+			"id": "someId",
+			"image": {
+			  "kind": 0,
+			  "value": {
+				"alt":  {
+				  "kind": 1,
 				},
+				"caption":  {
+				  "kind": 1,
+				},
+				"credit":  {
+				  "kind": 1,
+				},
+				"dpr2Srcset": "someBylineUrl 32w, someBylineUrl 64w, someBylineUrl 128w, someBylineUrl 192w, someBylineUrl 256w, someBylineUrl 400w, someBylineUrl 600w",
+				"height": 192,
+				"nativeCaption":  {
+				  "kind": 1,
+				},
+				"role": 0,
+				"src": "someBylineUrl",
+				"srcset": "someBylineUrl 32w, someBylineUrl 64w, someBylineUrl 128w, someBylineUrl 192w, someBylineUrl 256w, someBylineUrl 400w, someBylineUrl 600w",
+				"width": 192,
+				imageSubtype: Optional.none(),
+			  },
 			},
-			name: 'someTitle',
-		};
-		expect(tagToContributor('someSalt')(tag)).toEqual(
-			expectedResultWithImage,
-		);
+			"name": "someTitle",
+		}
+		expect(tagToContributor('someSalt')(tag)).toEqual(expectedResultWithImage);
 	});
 });

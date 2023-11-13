@@ -72,22 +72,22 @@ Lets look at a simplified example (with only 1 source per breakpoint):
 
 ```html
 <picture>
-	<source
-		media="min-width: 980px"
-		srcset="https://xxx.png?width=620px 620w"
-	/>
-	<source
-		media="min-width: 660px"
-		srcset="https://xxx.png?width=620px 620w"
-	/>
-	<source
-		media="min-width: 480px"
-		srcset="https://xxx.png?width=480px 480w"
-	/>
-	<source
-		media="min-width: 375px"
-		srcset="https://xxx.png?width=420px 420w"
-	/>
+    <source
+        media="min-width: 980px"
+        srcset="https://xxx.png?width=620px 620w"
+    />
+    <source
+        media="min-width: 660px"
+        srcset="https://xxx.png?width=620px 620w"
+    />
+    <source
+        media="min-width: 480px"
+        srcset="https://xxx.png?width=480px 480w"
+    />
+    <source
+        media="min-width: 375px"
+        srcset="https://xxx.png?width=420px 420w"
+    />
 </picture>
 ```
 

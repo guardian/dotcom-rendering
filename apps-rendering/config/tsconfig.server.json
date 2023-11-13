@@ -1,7 +1,9 @@
 {
-	"extends": "../tsconfig",
-	"compilerOptions": {
-		"target": "es2019"
-	},
-	"files": ["../src/server/server.ts"]
+    "extends": "../tsconfig",
+    "compilerOptions": {
+        "target": "es2019",
+    },
+    "files": [
+        "../src/server/server.ts"
+    ],
 }

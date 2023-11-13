@@ -1,32 +1,17 @@
 {
-	"processors": ["stylelint-processor-styled-components"],
-	"extends": [
-		"stylelint-config-recommended",
-		"stylelint-config-styled-components"
-	],
-	"rules": {
-		"declaration-no-important": true,
-		"no-duplicate-selectors": null,
-		"no-descending-specificity": null,
-		"property-disallowed-list": [
-			["font-family"],
-			{
-				"message": "Please use the typography functions from source-foundations"
-			}
-		],
-		"color-no-hex": [
-			true,
-			{
-				"message": "Please use the source-foundations palette variables instead of hex values"
-			}
-		],
-		"declaration-property-value-disallowed-list": [
-			{
-				"color": ["/^rgba/"]
-			},
-			{
-				"message": "Please use the source-foundations palette variables instead of rgba values"
-			}
-		]
-	}
+  "processors": ["stylelint-processor-styled-components"],
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-styled-components"
+  ],
+  "rules": {
+    "declaration-no-important": true,
+    "no-duplicate-selectors": null,
+    "no-descending-specificity": null,
+    "property-disallowed-list": [["font-family"], { "message": "Please use the typography functions from source-foundations"}],
+    "color-no-hex": [true, { "message": "Please use the source-foundations palette variables instead of hex values"}],
+    "declaration-property-value-disallowed-list": [{
+        "color": ["/^rgba/"]
+    }, { "message": "Please use the source-foundations palette variables instead of rgba values"}]
+  }
 }

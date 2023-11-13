@@ -142,7 +142,7 @@ type Callout = {
 
 type SpecialReportAltAtom = {
 	kind: ElementKind.SpecialReportAltAtom;
-};
+}
 
 type BodyElement =
 	| Text
@@ -369,24 +369,15 @@ const parse =
 					);
 				}
 
+
 				return getCallout(campaignId, campaigns)
 					.map(({ callout, name, activeUntil }) =>
 						Result.ok<string, Callout>({
 							kind: ElementKind.Callout,
 							isNonCollapsible,
-							prompt:
-								overridePrompt === undefined
-									? 'Share your experience'
-									: overridePrompt,
-							heading:
-								overrideTitle === undefined
-									? callout.callout
-									: overrideTitle,
-							description: context.docParser(
-								overrideDescription === undefined
-									? callout.description ?? ''
-									: overrideDescription,
-							),
+							prompt: overridePrompt === undefined ? "Share your experience" : overridePrompt,
+							heading: overrideTitle === undefined ? callout.callout : overrideTitle,
+							description: context.docParser(overrideDescription === undefined ? callout.description ?? '' : overrideDescription),
 							formFields: callout.formFields,
 							formId: callout.formId,
 							name: name,

@@ -1,8 +1,10 @@
 {
-	"extends": "../tsconfig",
-	"compilerOptions": {
-		// Output latest features; allow babel to handle browser targeting
-		"target": "es2020"
-	},
-	"include": ["../src/client/*"]
+    "extends": "../tsconfig",
+    "compilerOptions": {
+        // Output latest features; allow babel to handle browser targeting
+        "target": "es2020",
+    },
+    "include": [
+        "../src/client/*"
+    ],
 }

@@ -48,8 +48,8 @@ describe('isValidDate', () => {
 	});
 
 	test(`returns false if the argument is not a Date object`, () => {
-		const fakeDate = undefined as unknown as Date;
-		const fakeDate2 = 'some string' as unknown as Date;
+		const fakeDate = (undefined as unknown) as Date;
+		const fakeDate2 = ('some string' as unknown) as Date;
 		expect(isValidDate(fakeDate)).toBe(false);
 		expect(isValidDate(fakeDate2)).toBe(false);
 	});
@@ -63,7 +63,7 @@ describe('fromString', () => {
 	});
 
 	test('returns none given a non valid date string', () => {
-		expect(fromString(undefined as unknown as string)).toEqual(none);
+		expect(fromString((undefined as unknown) as string)).toEqual(none);
 		expect(fromString('random')).toEqual(none);
 	});
 });
@@ -76,9 +76,9 @@ describe('formatLocalTimeDateTz', () => {
 	});
 
 	test('returns Europe/London local time for non UTC time', () => {
-		expect(
-			formatLocalTimeDateTz(new Date('2012/02/10 10:10:30 +0180')),
-		).toBe('07.50am 10 Feb 2012 GMT');
+		expect(formatLocalTimeDateTz(new Date('2012/02/10 10:10:30 +0180'))).toBe(
+			'07.50am 10 Feb 2012 GMT',
+		);
 	});
 });
 
@@ -113,7 +113,7 @@ describe('makeRelativeDate', () => {
 	});
 
 	test('returns null given a non valid date', () => {
-		expect(makeRelativeDate('12/2019' as unknown as Date)).toEqual(null);
+		expect(makeRelativeDate(('12/2019' as unknown) as Date)).toEqual(null);
 	});
 
 	test('returns null given a date that is after now', () => {

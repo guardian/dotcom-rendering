@@ -13,11 +13,9 @@ The convention of lightweight architectural decisions [is set out by think relev
 For all architectural decisions in this project, an architectural decision record will be created with a filename of `XXX-decision-title.md` where XXX is the monotonically increasing number described in the linked document.
 
 ## Deprecated ADRs
-
 When ADRs no longer apply, please move them to the `historic ADRs` folder, add `Status: Deprecated` at the top of the document and remove the numbering from the title of the ADR file.
 
 ## ADR proposals
-
 When ADRs are proposals, please move them to the `ADR proposals` folder until they are approved.
 
 ## Status

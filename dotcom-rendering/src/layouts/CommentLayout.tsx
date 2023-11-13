@@ -292,8 +292,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable;
 
-	const avatarUrl = getSoleContributor(article.tags, article.byline)
-		?.bylineLargeImageUrl;
+	const avatarUrl = getSoleContributor(
+		article.tags,
+		article.byline,
+	)?.bylineLargeImageUrl;
 
 	const { branding } = article.commercialProperties[article.editionId];
 

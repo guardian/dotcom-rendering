@@ -18,7 +18,7 @@ CSS Blocks allows developers to define their CSS in `*.css` files and import the
 
 ### CSS in `*.css` files imported with custom Webpack CSS loader
 
-It is possible to write a Webpack loader that will load the contents of `*.css` files and manipulate the content to make it usable with CSS-in-JS libraries. This would lock us in to Webpack and may become considerably complex over time.
+It is possible to write a Webpack loader that will load the contents of `*.css` files and manipulate the content to make it usable with CSS-in-JS libraries. This would lock us in to Webpack and may become considerably complex over time. 
 
 ### [Stylable](https://stylable.io/)
 

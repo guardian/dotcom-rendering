@@ -20,7 +20,7 @@ jobs:
   advisor:
     runs-on: ubuntu-latest
     steps:
-      - uses: GitHubSecurityLab/actions-permissions/advisor@v1
-        with:
-          name: ${{ inputs.name }}
-          count: ${{ inputs.count }}
+    - uses: GitHubSecurityLab/actions-permissions/advisor@v1
+      with:
+        name: ${{ inputs.name }}
+        count: ${{ inputs.count }}

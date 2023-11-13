@@ -63,8 +63,9 @@ export const canShowBrazeEpic = async (
 	}
 
 	try {
-		const message =
-			await brazeMessages.getMessageForEndOfArticle(brazeArticleContext);
+		const message = await brazeMessages.getMessageForEndOfArticle(
+			brazeArticleContext,
+		);
 
 		if (message.extras) {
 			return {

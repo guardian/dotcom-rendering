@@ -1,10 +1,11 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from "@guardian/libs";
 
-const format: ArticleFormat = {
+const format:ArticleFormat = {
 	design: ArticleDesign.Quiz,
 	display: ArticleDisplay.Standard,
-	theme: Pillar.News,
-};
+	theme: Pillar.News
+
+}
 
 // Non-expanded version for Cypress tests
 export const imageStory = {
@@ -12,7 +13,8 @@ export const imageStory = {
 	title: 'What is bitcoin?',
 	html: "<p>Bitcoin is the first, and the biggest, 'cryptocurrency' – a decentralised tradeable digital asset. The lack of any central authority oversight is one of the attraction.&nbsp;</p><p>Cryptocurrencies can be used to send transactions between two parties via the use of private and public keys. These transfers can be done with minimal processing cost, allowing users to avoid the fees charged by traditional financial institutions - as well as the oversight and regulation that entails.</p><p>This means it has attracted a range of backers, from libertarian monetarists who enjoy the idea of a currency with no inflation and no central bank, to drug dealers who like the fact that it is hard (but not impossible) to trace a bitcoin transaction back to a physical person.</p><p>The exchange rate has been volatile, making it a risky investment. Whether it is a bad investment is yet to be seen. In practice it has been far more important for the dark economy than it has for most legitimate uses, but with Facebook's announcement that it is launching a new digital currency - <a href='https://www.theguardian.com/technology/2019/jun/18/what-is-libra-facebook-new-cryptocurrency'>Libra</a> - mainstream interest in bitcoin has surged.<br></p>",
 	format,
-	image: 'https://i.guim.co.uk/img/media/5f74d365b0a3072c2edcd764cf08d6fa4fcd873b/0_59_5190_3114/5190.jpg?width=620&quality=85&auto=format&fit=max&s=ed95a62cd07881336635129287b406a1',
+	image:
+		'https://i.guim.co.uk/img/media/5f74d365b0a3072c2edcd764cf08d6fa4fcd873b/0_59_5190_3114/5190.jpg?width=620&quality=85&auto=format&fit=max&s=ed95a62cd07881336635129287b406a1',
 	expandForStorybook: false,
 	likeHandler: (): null => null,
 	dislikeHandler: (): null => null,
@@ -24,7 +26,8 @@ export const imageStoryExpanded = {
 	title: 'What is bitcoin?',
 	html: "<p>Bitcoin is the first, and the biggest, 'cryptocurrency' – a decentralised tradeable digital asset. The lack of any central authority oversight is one of the attraction.&nbsp;</p><p>Cryptocurrencies can be used to send transactions between two parties via the use of private and public keys. These transfers can be done with minimal processing cost, allowing users to avoid the fees charged by traditional financial institutions - as well as the oversight and regulation that entails.</p><p>This means it has attracted a range of backers, from libertarian monetarists who enjoy the idea of a currency with no inflation and no central bank, to drug dealers who like the fact that it is hard (but not impossible) to trace a bitcoin transaction back to a physical person.</p><p>The exchange rate has been volatile, making it a risky investment. Whether it is a bad investment is yet to be seen. In practice it has been far more important for the dark economy than it has for most legitimate uses, but with Facebook's announcement that it is launching a new digital currency - <a href='https://www.theguardian.com/technology/2019/jun/18/what-is-libra-facebook-new-cryptocurrency'>Libra</a> - mainstream interest in bitcoin has surged.<br></p>",
 	format,
-	image: 'https://i.guim.co.uk/img/media/5f74d365b0a3072c2edcd764cf08d6fa4fcd873b/0_59_5190_3114/5190.jpg?width=620&quality=85&auto=format&fit=max&s=ed95a62cd07881336635129287b406a1',
+	image:
+		'https://i.guim.co.uk/img/media/5f74d365b0a3072c2edcd764cf08d6fa4fcd873b/0_59_5190_3114/5190.jpg?width=620&quality=85&auto=format&fit=max&s=ed95a62cd07881336635129287b406a1',
 	expandForStorybook: true,
 	likeHandler: (): null => null,
 	dislikeHandler: (): null => null,
@@ -53,7 +56,8 @@ export const imageStoryWithCreditExpanded = {
     <p>The US ban on travellers from overseas came too late, and though most states had lockdowns of some form in spring, they varied in length and strictness. Some places that were among the earliest to lift them are now battling fast-rising outbreaks, and the country has the highest number of confirmed cases and deaths. Opposition to lockdowns and mask-wearing remains widespread.</p>
     <p>Source: Johns Hopkins CSSE, 9 July</p>`,
 	format,
-	image: 'https://i.guim.co.uk/img/media/1cd3cc5864d9e6fc0b74134eaff7ab329cb89678/914_0_1757_1757/1757.jpg?width=620&quality=85&auto=format&fit=max&s=c1aadf54045c6a8c11e9c077324e238f',
+	image:
+		'https://i.guim.co.uk/img/media/1cd3cc5864d9e6fc0b74134eaff7ab329cb89678/914_0_1757_1757/1757.jpg?width=620&quality=85&auto=format&fit=max&s=c1aadf54045c6a8c11e9c077324e238f',
 	credit: 'Photograph: Mark R Cristino/EPA',
 	expandForStorybook: true,
 	likeHandler: (): null => null,

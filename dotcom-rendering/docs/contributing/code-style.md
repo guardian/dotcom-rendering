@@ -4,17 +4,17 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
--   [TypeScript](#typescript)
-    -   [Always used named exports](#always-used-named-exports)
-    -   [Never name a file `index.ts` or `index.tsx`](#never-name-a-file-indexts-or-indextsx)
--   [Components](#components)
-    -   [Use Emotion's `css` function to build a class name from styles](#use-emotions-css-function-to-build-a-class-name-from-styles)
-    -   [Extract CSS into a variable rather than defining it inline in a component](#extract-css-into-a-variable-rather-than-defining-it-inline-in-a-component)
-    -   [Extract dynamic styles into a function that takes `props`](#extract-dynamic-styles-into-a-function-that-takes-props)
-    -   [Define CSS using template literals rather than objects](#define-css-using-template-literals-rather-than-objects)
-    -   [Never define styles with more than one level of nesting](#never-define-styles-with-more-than-one-level-of-nesting)
-    -   [Prefer `cx` for style composition](#prefer-cx-for-style-composition)
-    -   [Do not use React.FC or equivalent](#do-not-use-reactfc-or-equivalent)
+- [TypeScript](#typescript)
+  - [Always used named exports](#always-used-named-exports)
+  - [Never name a file `index.ts` or `index.tsx`](#never-name-a-file-indexts-or-indextsx)
+- [Components](#components)
+  - [Use Emotion's `css` function to build a class name from styles](#use-emotions-css-function-to-build-a-class-name-from-styles)
+  - [Extract CSS into a variable rather than defining it inline in a component](#extract-css-into-a-variable-rather-than-defining-it-inline-in-a-component)
+  - [Extract dynamic styles into a function that takes `props`](#extract-dynamic-styles-into-a-function-that-takes-props)
+  - [Define CSS using template literals rather than objects](#define-css-using-template-literals-rather-than-objects)
+  - [Never define styles with more than one level of nesting](#never-define-styles-with-more-than-one-level-of-nesting)
+  - [Prefer `cx` for style composition](#prefer-cx-for-style-composition)
+  - [Do not use React.FC or equivalent](#do-not-use-reactfc-or-equivalent)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -76,22 +76,22 @@ We use [React](https://reactjs.org/) for our components, and [Emotion](https://e
 ```js
 // bad
 const MyComponent = styled('div')`
-	color: red;
+    color: red;
 `;
 render(<MyComponent />);
 
 // bad
 render(
-	<div
-		css={`
-			color: red;
-		`}
-	/>,
+    <div
+        css={`
+            color: red;
+        `}
+    />,
 );
 
 // good
 const myComponent = css`
-	color: red;
+    color: red;
 `;
 render(<div className={myComponent} />);
 ```
@@ -103,16 +103,16 @@ render(<div className={myComponent} />);
 ```js
 // bad
 render(
-	<div
-		className={css`
-			color: red;
-		`}
-	/>,
+    <div
+        className={css`
+            color: red;
+        `}
+    />,
 );
 
 // good
 const myComponent = css`
-	color: red;
+    color: red;
 `;
 render(<div className={myComponent} />);
 ```
@@ -124,19 +124,19 @@ render(<div className={myComponent} />);
 ```js
 // bad
 const MyComponent = ({ fontColor }) => (
-	<div
-		className={css`
-			color: ${fontColor};
-		`}
-	/>
+    <div
+        className={css`
+            color: ${fontColor};
+        `}
+    />
 );
 
 // good
-const myComponent = (fontColor) => css`
-	color: ${fontColor};
+const myComponent = fontColor => css`
+    color: ${fontColor};
 `;
 const MyComponent = ({ fontColor }) => (
-	<div className={myComponent(fontColor)} />
+    <div className={myComponent(fontColor)} />
 );
 ```
 
@@ -147,12 +147,12 @@ const MyComponent = ({ fontColor }) => (
 ```js
 // bad
 const myComponent = css({
-	backgroundColor: 'hotpink',
+    backgroundColor: 'hotpink',
 });
 
 // good
 const myComponent = css`
-	background-color: hotpink;
+    background-color: hotpink;
 `;
 ```
 
@@ -163,32 +163,32 @@ const myComponent = css`
 ```js
 // bad
 const myList = css`
-	li {
-		a {
-			color: fuchsia;
-		}
-	}
+    li {
+        a {
+            color: fuchsia;
+        }
+    }
 `;
 render(
-	<ul className={myList}>
-		<li>
-			<a href="#">Click me</a>
-		</li>
-	</ul>,
+    <ul className={myList}>
+        <li>
+            <a href="#">Click me</a>
+        </li>
+    </ul>,
 );
 
 // good
 const myLink = css`
-	color: fuchsia;
+    color: fuchsia;
 `;
 render(
-	<ul>
-		<li>
-			<a className={myLink} href="#">
-				Click me
-			</a>
-		</li>
-	</ul>,
+    <ul>
+        <li>
+            <a className={myLink} href="#">
+                Click me
+            </a>
+        </li>
+    </ul>,
 );
 ```
 
@@ -199,27 +199,27 @@ render(
 ```js
 // bad
 const link = css`
-	color: blue;
-	font-weight: 700;
+    color: blue;
+    font-weight: 700;
 `;
 const activeLink = css`
-	${link};
-	color: red;
+    ${link};
+    color: red;
 `;
 const MyLink = ({ isActive }) => (
-	<a className={isActive ? activeLink : link}>Click me</a>
+    <a className={isActive ? activeLink : link}>Click me</a>
 );
 
 // good
 const link = css`
-	color: blue;
-	font-weight: 700;
+    color: blue;
+    font-weight: 700;
 `;
 const activeLink = css`
-	color: red;
+    color: red;
 `;
 const MyLink = ({ isActive }) => (
-	<a className={cx({ [activeLink]: isActive }, link)}>Click Me</a>
+    <a className={cx({ [activeLink]: isActive }, link)}>Click Me</a>
 );
 ```
 

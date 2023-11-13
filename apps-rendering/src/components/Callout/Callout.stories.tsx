@@ -92,20 +92,19 @@ const minimalCallout = (): ReactElement => {
 			},
 		);
 	return (
-		<>
-			A callouts prompt, title and description are optional
-			<Callout
-				isNonCollapsible={true}
-				name={mockCampaign.name}
-				formId={mockCampaign.fields.formId}
-				formFields={mockCampaign.fields.formFields}
-				format={mockFormat}
-				activeUntil={futureDate.getTime()}
-				contacts={mockCampaign.fields.contacts}
-				prompt=""
-				heading=""
+		<>A callouts prompt, title and description are optional
+		<Callout
+			isNonCollapsible={true}
+			name={mockCampaign.name}
+			formId={mockCampaign.fields.formId}
+			formFields={mockCampaign.fields.formFields}
+			format={mockFormat}
+			activeUntil={futureDate.getTime()}
+			contacts={mockCampaign.fields.contacts}
+			prompt=""
+			heading=""
 			/>
-		</>
+			</>
 	);
 };
 

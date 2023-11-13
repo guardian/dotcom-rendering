@@ -7,13 +7,11 @@ import SpecialReportAltAtom from '.';
 // ----- Stories ----- //
 
 const Default: FC = () => (
-	<SpecialReportAltAtom
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: ArticleSpecial.SpecialReportAlt,
-		}}
-	/>
+    <SpecialReportAltAtom format={{
+        design: ArticleDesign.Standard,
+        display: ArticleDisplay.Standard,
+        theme: ArticleSpecial.SpecialReportAlt,
+    }} />
 );
 
 // ----- Exports ----- //

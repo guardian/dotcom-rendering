@@ -31,8 +31,7 @@ const yellowBoxStyles = (format: ArticleFormat) => css`
 		  })}
 	font-style: italic;
 	background-color: ${brandAltBackground.primary};
-	box-shadow:
-		4px 0 0 ${brandAltBackground.primary},
+	box-shadow: 4px 0 0 ${brandAltBackground.primary},
 		-6px 0 0 ${brandAltBackground.primary};
 	display: inline-block;
 	box-decoration-break: clone;

@@ -1,5 +1,8 @@
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
-import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
+import {
+	GuStack,
+	GuStringParameter,
+} from '@guardian/cdk/lib/constructs/core';
 import {
 	GuSecurityGroup,
 	GuVpc,
@@ -90,10 +93,7 @@ export class DotcomRendering extends GuStack {
 		 * GOTCHA: The load balancer name appends `-ELB` when the `app = "rendering"` for backwards compatibility
 		 * We removed this to avoid the `LoadBalancerName.length > 32`. This will be fixable once we migrate to ALBs.
 		 */
-		const loadBalancerName =
-			app === 'rendering'
-				? `${stack}-${stage}-${app}-ELB`
-				: `${stack}-${stage}-${app}`;
+		const loadBalancerName = app === 'rendering' ? `${stack}-${stage}-${app}-ELB` : `${stack}-${stage}-${app}`;
 		const loadBalancer = new GuClassicLoadBalancer(
 			this,
 			'InternalLoadBalancer',

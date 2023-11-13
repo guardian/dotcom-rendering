@@ -28,19 +28,21 @@ const articleContent = {
 };
 
 const contentWithTags = (tagIds: string[]) => {
-	const tags: Tag[] = tagIds.map((id) => ({
-		id,
-		type: TagType.TONE,
-		webTitle: '',
-		webUrl: '',
-		apiUrl: '',
-		references: [],
-	}));
+	const tags: Tag[] = tagIds.map(id =>
+		({
+			id,
+			type: TagType.TONE,
+			webTitle: '',
+			webUrl: '',
+			apiUrl: '',
+			references: [],
+		}),
+	);
 	return {
 		...articleContent,
 		tags,
 	};
-};
+}
 
 const contentWithTag = (tagId: string) => contentWithTags([tagId]);
 
@@ -189,11 +191,12 @@ const f = (content: Content) =>
 	);
 
 const getFirstBody = (item: Review | Standard) =>
-	Optional.fromNullable(item.body[0]).withDefault({
-		kind: ElementKind.Interactive,
-		url: '',
-		alt: none,
-	});
+	Optional.fromNullable(item.body[0])
+		.withDefault({
+			kind: ElementKind.Interactive,
+			url: '',
+			alt: none,
+		});
 
 describe('fromCapi returns correct Item', () => {
 	test('audio', () => {
@@ -365,11 +368,12 @@ describe('interactive elements', () => {
 			},
 		};
 		const item = f(articleContentWith(interactiveElement)) as Standard;
-		const element = Optional.fromNullable(item.body[0]).withDefault({
-			kind: ElementKind.RichLink,
-			url: '',
-			linkText: '',
-		});
+		const element = Optional.fromNullable(item.body[0])
+			.withDefault({
+				kind: ElementKind.RichLink,
+				url: '',
+				linkText: '',
+			});
 		expect(element.kind).toBe(ElementKind.Interactive);
 	});
 
@@ -382,11 +386,12 @@ describe('interactive elements', () => {
 			},
 		};
 		const item = f(articleContentWith(interactiveElement)) as Standard;
-		const element = Optional.fromNullable(item.body[0]).withDefault({
-			kind: ElementKind.RichLink,
-			url: '',
-			linkText: '',
-		});
+		const element = Optional.fromNullable(item.body[0])
+			.withDefault({
+				kind: ElementKind.RichLink,
+				url: '',
+				linkText: '',
+			});
 		expect(element.kind).toBe(ElementKind.RichLink);
 	});
 });
@@ -602,20 +607,18 @@ describe('audio elements', () => {
 			},
 		};
 		const item = f(articleContentWith(audioElement)) as Standard;
-		const embed = Optional.fromNullable(item.body[0]).flatMap<Spotify>(
-			(element) =>
+		const embed = Optional.fromNullable(item.body[0])
+			.flatMap<Spotify>((element) =>
 				element.kind === ElementKind.Embed &&
 				element.embed.kind === EmbedKind.Spotify
 					? Optional.some(element.embed)
 					: Optional.none(),
-		);
-
+			)
+		
 		expect(embed.isSome()).toBe(true);
-
+		
 		if (embed.isSome()) {
-			expect(embed.value.src).toContain(
-				'https://open.spotify.com/embed/track/',
-			);
+			expect(embed.value.src).toContain('https://open.spotify.com/embed/track/');
 			expect(embed.value.width).toBe(300);
 			expect(embed.value.height).not.toBe(380);
 		}
@@ -673,16 +676,16 @@ describe('video elements', () => {
 			},
 		};
 		const item = f(articleContentWith(videoElement)) as Standard;
-		const embed = Optional.fromNullable(item.body[0]).flatMap<YouTube>(
-			(element) =>
+		const embed = Optional.fromNullable(item.body[0])
+			.flatMap<YouTube>((element) =>
 				element.kind === ElementKind.Embed &&
 				element.embed.kind === EmbedKind.YouTube
 					? Optional.some(element.embed)
 					: Optional.none(),
-		);
-
+			);
+		
 		expect(embed.isSome()).toBe(true);
-
+		
 		if (embed.isSome()) {
 			expect(embed.value.id).toBe('mockVideoId');
 			expect(embed.value.width).toBe(460);

@@ -1,16 +1,16 @@
 {
-	"recommendations": [
-		"esbenp.prettier-vscode",
-		"wix.vscode-import-cost",
-		"orta.vscode-jest",
-		"editorconfig.editorconfig",
-		"dbaeumer.vscode-eslint",
-		"stkb.rewrap",
-		"styled-components.vscode-styled-components",
-		"stylelint.vscode-stylelint",
-		"eamodio.gitlens",
-		"streetsidesoftware.code-spell-checker",
-		"denoland.vscode-deno",
+    "recommendations": [
+        "esbenp.prettier-vscode",
+        "wix.vscode-import-cost",
+        "orta.vscode-jest",
+        "editorconfig.editorconfig",
+        "dbaeumer.vscode-eslint",
+        "stkb.rewrap",
+        "styled-components.vscode-styled-components",
+        "stylelint.vscode-stylelint",
+        "eamodio.gitlens",
+        "streetsidesoftware.code-spell-checker",
+        "denoland.vscode-deno",
 		"redhat.vscode-yaml"
-	]
+    ]
 }

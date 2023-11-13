@@ -12,8 +12,7 @@ const tagStyles = (palette: Palette) => css`
 	padding: 2px 0 4px 0;
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	line-height: 115%;
-	box-shadow:
-		6px 0 0 ${palette.background.headlineTag},
+	box-shadow: 6px 0 0 ${palette.background.headlineTag},
 		-6px 0 0 ${palette.background.headlineTag};
 	box-decoration-break: clone;
 	${until.tablet} {

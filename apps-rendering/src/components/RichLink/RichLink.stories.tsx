@@ -11,8 +11,7 @@ const overrideStyle = css`
 `;
 
 const url = 'https://theguardian.com';
-const linkText =
-	'Axolotls in crisis: the fight to save the water monster of Mexico City.';
+const linkText = 'Axolotls in crisis: the fight to save the water monster of Mexico City.';
 
 const Default: FC = () => (
 	<section css={overrideStyle}>

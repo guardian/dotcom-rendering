@@ -5,7 +5,7 @@
 -   Date: 17/08/2020
 -   Author: Mariot Chauvin
 -   Platform concerned: AMP & Web (AMP only for proof of concept)
--   Current status 01/03/2021: Removed from AMP following proof of concept, next steps TBD)
+-	Current status 01/03/2021: Removed from AMP following proof of concept, next steps TBD)
 
 ## Context
 

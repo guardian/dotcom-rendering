@@ -12,11 +12,11 @@ According to a Google Data analysis from March 2016, 53% of page views are aband
 
 Google's Data analysis suggests that ensuring the page is interactive within 5 seconds provides significant improvement for a variety of websites in terms of:
 
--   bounce rates
--   page view per session
--   session length
--   viewability
--   ad revenue
+- bounce rates
+- page view per session
+- session length
+- viewability
+- ad revenue
 
 We aim to ensure our pages are consistently interactive within 5 seconds of the initial request.
 
@@ -27,7 +27,6 @@ Alex Russell conducted analysis of real world JavaScript in 2017<sup>[[2]](#refs
 ## References:
 
 <a name="refs--google"></a>
-
--   [1](#refs--google) - [The need for mobile speed](http://g.co/mobilespeed)
-    <a name="refs--alex-russell"></a>
--   [2](#refs--alex-russell) - [Can You Afford It?: Real-world Web Performance Budgets](https://infrequently.org/2017/10/can-you-afford-it-real-world-web-performance-budgets/)
+- [1](#refs--google) - [The need for mobile speed](http://g.co/mobilespeed)
+<a name="refs--alex-russell"></a>
+- [2](#refs--alex-russell) - [Can You Afford It?: Real-world Web Performance Budgets](https://infrequently.org/2017/10/can-you-afford-it-real-world-web-performance-budgets/)

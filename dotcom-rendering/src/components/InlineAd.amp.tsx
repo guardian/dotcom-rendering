@@ -28,9 +28,11 @@ export const InlineAd = ({
 			<ClassNames key={adRegion}>
 				{({ css, cx }) => (
 					<div
-						className={cx(css`
-							${advertisingRegionClasses[adRegion].styles}
-						`)}
+						className={cx(
+							css`
+								${advertisingRegionClasses[adRegion].styles}
+							`,
+						)}
 					>
 						<Ad
 							id={id}

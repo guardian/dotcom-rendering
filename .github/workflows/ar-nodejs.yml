@@ -1,43 +1,43 @@
 name: AR Validate
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - 'dotcom-rendering/**'
-  pull_request:
-    branches:
-      - main
-    paths-ignore:
-      - 'dotcom-rendering/**'
+    push:
+        branches:
+            - main
+        paths-ignore:
+            - "dotcom-rendering/**"
+    pull_request:
+        branches:
+            - main
+        paths-ignore:
+            - "dotcom-rendering/**"
 
 jobs:
-  validate:
-    name: AR Validate
-    runs-on: ubuntu-latest
+    validate:
+        name: AR Validate
+        runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v3
+              with:
+                node-version-file: '.nvmrc'
+                cache: 'yarn'
 
-      - run: yarn --frozen-lockfile
+            - run: yarn --frozen-lockfile
 
-      - name: lint
-        run: yarn lint
-        working-directory: apps-rendering
+            - name: lint
+              run: yarn lint
+              working-directory: apps-rendering
 
-      - name: test
-        run: yarn test
-        working-directory: apps-rendering
+            - name: test
+              run: yarn test
+              working-directory: apps-rendering
 
-      - name: compile client
-        run: yarn build:client:prod
-        working-directory: apps-rendering
+            - name: compile client
+              run: yarn build:client:prod
+              working-directory: apps-rendering
 
-      - name: compile server
-        run: yarn build:server:prod
-        working-directory: apps-rendering
+            - name: compile server
+              run: yarn build:server:prod
+              working-directory: apps-rendering

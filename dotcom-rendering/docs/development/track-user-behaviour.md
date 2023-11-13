@@ -1,12 +1,12 @@
 # Track user behaviour
 
-_Note, the key library here - `tracker-js` is not well-documented at the time of
-writing, but the hope is that this will improve soon._
+*Note, the key library here - `tracker-js` is not well-documented at the time of
+writing, but the hope is that this will improve soon.*
 
 ## Track clicks:
 
--   add a data-link-name attribute to your component and the `ophan-tracking.js`
-    script will automatically send click data to Ophan.
+* add a data-link-name attribute to your component and the `ophan-tracking.js`
+  script will automatically send click data to Ophan.
 
 The code that does this is
 [here](https://github.com/guardian/ophan/blob/75b86abcce07369c8998521399327d436246c016/tracker-js/assets/coffee/ophan/click-path-capture.coffee)

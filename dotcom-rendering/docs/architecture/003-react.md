@@ -12,7 +12,7 @@ The React team is working on a number of new features (async rendering, time sli
 
 ## Decision
 
-We will build the dotcom rendering layer in React.
+We will build the dotcom rendering layer in React. 
 
 ## Status
 

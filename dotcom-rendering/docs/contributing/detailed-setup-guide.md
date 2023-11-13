@@ -4,18 +4,18 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
--   [High level diagram](#high-level-diagram)
--   [Developing](#developing)
-    -   [Setup](#setup)
-        -   [Node.js](#nodejs)
-        -   [Yarn](#yarn)
-    -   [Start](#start)
-    -   [Previewing article on local](#previewing-article-on-local)
-    -   [Previewing AMP on local](#previewing-amp-on-local)
-    -   [Note on rebasing vs merging](#note-on-rebasing-vs-merging)
-    -   [Debugging tools](#debugging-tools)
-    -   [Running alongside identity](#running-alongside-identity)
--   [Production](#production)
+- [High level diagram](#high-level-diagram)
+- [Developing](#developing)
+  - [Setup](#setup)
+    - [Node.js](#nodejs)
+    - [Yarn](#yarn)
+  - [Start](#start)
+  - [Previewing article on local](#previewing-article-on-local)
+  - [Previewing AMP on local](#previewing-amp-on-local)
+  - [Note on rebasing vs merging](#note-on-rebasing-vs-merging)
+  - [Debugging tools](#debugging-tools)
+  - [Running alongside identity](#running-alongside-identity)
+- [Production](#production)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

@@ -30,8 +30,8 @@ export const Disclaimer: FC = () => (
 
 export const ContactText: FC = () => (
 	<div css={info}>
-		By submitting your response, you are agreeing to share your details with
-		us for this feature.
+		By submitting your response,
+		you are agreeing to share your details with us for this feature.
 	</div>
 );
 

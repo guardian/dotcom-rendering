@@ -1,36 +1,36 @@
 {
-	"projectName": "Mobile::mobile-apps-rendering",
-	"vcsURL": "https://github.com/guardian/dotcom-rendering",
-	"actions": [
-		{
-			"action": "mobile-apps-rendering",
-			"path": "dist/server",
-			"compress": "zip"
-		},
-		{
-			"action": "mobile-assets",
-			"path": "dist/assets",
-			"compress": false
-		},
-		{
-			"action": "mobile-apps-rendering-cfn",
-			"path": "cdk.out/MobileAppsRendering-CODE.template.json",
-			"compress": false
-		},
-		{
-			"action": "mobile-apps-rendering-cfn",
-			"path": "cdk.out/MobileAppsRendering-PROD.template.json",
-			"compress": false
-		},
-		{
-			"action": "mobile-apps-rendering-preview-cfn",
-			"path": "cdk.out/MobileAppsRenderingPreview-CODE.template.json",
-			"compress": false
-		},
-		{
-			"action": "mobile-apps-rendering-preview-cfn",
-			"path": "cdk.out/MobileAppsRenderingPreview-PROD.template.json",
-			"compress": false
-		}
-	]
+  "projectName": "Mobile::mobile-apps-rendering",
+  "vcsURL": "https://github.com/guardian/dotcom-rendering",
+  "actions": [
+    {
+      "action": "mobile-apps-rendering",
+      "path": "dist/server",
+      "compress": "zip"
+    },
+    {
+      "action": "mobile-assets",
+      "path": "dist/assets",
+      "compress": false
+    },
+    {
+      "action": "mobile-apps-rendering-cfn",
+      "path": "cdk.out/MobileAppsRendering-CODE.template.json",
+      "compress": false
+    },
+    {
+      "action": "mobile-apps-rendering-cfn",
+      "path": "cdk.out/MobileAppsRendering-PROD.template.json",
+      "compress": false
+    },
+	{
+	  "action": "mobile-apps-rendering-preview-cfn",
+	  "path": "cdk.out/MobileAppsRenderingPreview-CODE.template.json",
+	  "compress": false
+	},
+	{
+	  "action": "mobile-apps-rendering-preview-cfn",
+	  "path": "cdk.out/MobileAppsRenderingPreview-PROD.template.json",
+	  "compress": false
+	}
+  ]
 }

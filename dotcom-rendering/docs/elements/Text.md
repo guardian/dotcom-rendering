@@ -26,24 +26,26 @@ The [BlockNumberCleaner](https://github.com/guardian/frontend/blob/bb83dabb21aea
 
 ### Other Cleaners (todo)
 
--   TagLinker
-    -   Turns specific mentions of tags into links, needs validation that its useful.
--   BlockquoteCleaner
-    -   Does something to blockquotes, which might be part of a TextBlockElement.
--   PullquoteCleaner
-    -   Works on its own element type.
--   PhotoEssayBlockQuote
--   ImmersiveLinks
--   TimestampCleaner
-    -   Only related to the minute.
--   MinuteCleaner
-    -   Only used for the minute.
--   GarnettQuoteCleaner
-    -   Something else about quotes.
--   AffiliateLinksCleaner
-    -   Rewrites URLs on applicable links and adds a disclaimer.
--   AttributeCleaner("style")
-    -   Removes inline style on amp articles. Inline style could be in a text block, but it's unlikely.
+- TagLinker
+    - Turns specific mentions of tags into links, needs validation that its useful.
+- BlockquoteCleaner
+    - Does something to blockquotes, which might be part of a TextBlockElement.
+- PullquoteCleaner
+    - Works on its own element type.
+- PhotoEssayBlockQuote
+- ImmersiveLinks
+- TimestampCleaner
+    - Only related to the minute.
+- MinuteCleaner
+    - Only used for the minute.
+- GarnettQuoteCleaner
+    - Something else about quotes.
+- AffiliateLinksCleaner
+    - Rewrites URLs on applicable links and adds a disclaimer.
+- AttributeCleaner("style")
+    - Removes inline style on amp articles. Inline style could be in a text block, but it's unlikely.
+
+
 
 ## AMP Cleaned HTML
 

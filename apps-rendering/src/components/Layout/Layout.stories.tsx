@@ -108,9 +108,7 @@ const newsletterSignUpFallbackLayoutStory = (
 			<NewsletterSignUpLayout item={fixture} />
 		</>
 	);
-	story.storyName = `${formatToString(
-		fixture,
-	)} (form component not supported)`;
+	story.storyName = `${formatToString(fixture)} (form component not supported)`;
 
 	return story;
 };

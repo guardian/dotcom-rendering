@@ -29,7 +29,7 @@ const config = {
 	globals: {
 		'ts-jest': {
 			tsconfig: 'config/tsconfig.test.json',
-		},
+		}
 	},
 	coverageThreshold: {
 		global: {

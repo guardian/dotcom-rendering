@@ -27,14 +27,14 @@ View in a browser at http://localhost:3030.
 The Apps Rendering development server supports the following routes for testing
 articles in the browser:
 
--   `/path/to/content`
-    -   e.g [http://localhost:3030/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
--   `/(uk|us|au|international)/path/to/content`
-    -   e.g [http://localhost:3030/au/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/au/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
--   `/rendered-items/path/to/content`
-    -   e.g [http://localhost:3030/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
--   `/(uk|us|au|international)/rendered-items/path/to/content`
-    -   e.g [http://localhost:3030/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/path/to/content`
+  - e.g [http://localhost:3030/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/(uk|us|au|international)/path/to/content`
+  - e.g [http://localhost:3030/au/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/au/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/rendered-items/path/to/content`
+  - e.g [http://localhost:3030/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/(uk|us|au|international)/rendered-items/path/to/content`
+  - e.g [http://localhost:3030/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
 
 Additionally, each route above can take a `?editions` query parameter to render
 the article as for the Editions app.
@@ -43,8 +43,8 @@ We also recommend testing articles in the mobile device simulators.
 The development server also supports a specific route for testing with the
 device simulator:
 
--   `/AppsArticle/https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth`
-    -   e.g [http://localhost:3030/AppsArticle/https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/AppsArticle/https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/AppsArticle/https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth`
+  - e.g [http://localhost:3030/AppsArticle/https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/AppsArticle/https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
 
 This route matches the one implemented by DCR for rendering apps articles.
 

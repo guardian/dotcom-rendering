@@ -8,12 +8,12 @@ where code exists in both.
 
 Visual duplication:
 
--   (not listed here but includes key page structure including nav and footer, and
-    article body for some cases)
+* (not listed here but includes key page structure including nav and footer, and
+  article body for some cases)
 
 Logical duplication:
 
--   social share icon links
--   tracking consent cookie logic
--   pillars
--   Google Analytics pageview data
+* social share icon links
+* tracking consent cookie logic
+* pillars
+* Google Analytics pageview data

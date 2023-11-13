@@ -6,10 +6,10 @@ An element which contains an embed which doesn't have its own element type.
 
 This has an `ElementType` of [EMBED](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L55) with fields described by [EmbedElementFields](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L622) containing four fields:
 
--   html
--   safeEmbedCode
--   alt
--   isMandatory
+- html
+- safeEmbedCode
+- alt
+- isMandatory
 
 This also has an asset type [EMBED](https://github.com/guardian/content-api-models/blob/master/models/src/main/thrift/content/v1.thrift#L203).
 
@@ -31,10 +31,13 @@ If an embed uses `<figure>` tag, then the `ShowAllArticleEmbedsSwitch` can be us
 
 The html included in a potential embed may not be permitted by the AMP specification. For each embed that is renedered in an article we can:
 
--   Transform the embed into something which is valid amp.
--   Remove the embed.
--   Fail to render the article in AMP.
+- Transform the embed into something which is valid amp.
+- Remove the embed.
+- Fail to render the article in AMP.
 
 The field `isMandatory` should control whether an embed is removed or if the page is. Dotcom does not currently support this API, so currently a workaround is used by central production to force the page to fail amp validation.
 
+
+
 ## Salient Points
+
