@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
+import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type {
 	DocumentBlockElement,
@@ -49,9 +50,11 @@ const paragraphStyle = css`
 const RoleStory = ({
 	children,
 	role,
+	format,
 }: {
 	children: React.ReactNode;
 	role: RoleType;
+	format: ArticleFormat;
 }) => {
 	return (
 		<Section
@@ -76,7 +79,7 @@ const RoleStory = ({
 					level. Truffaut street art edison bulb, banh mi cliche
 					post-ironic mixtape
 				</p>
-				<Figure format={defaultFormat} isMainMedia={false} role={role}>
+				<Figure format={format} isMainMedia={false} role={role}>
 					<ClickToView
 						role={role}
 						isTracking={true}
@@ -121,9 +124,13 @@ const RoleStory = ({
 	);
 };
 
-export const InlineStory = () => {
+export const InlineStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
-		<RoleStory role="inline">
+		<RoleStory role="inline" format={format}>
 			<img
 				src="http://placekitten.com/g/620/400"
 				width="620"
@@ -136,9 +143,13 @@ export const InlineStory = () => {
 InlineStory.storyName = "Click to view in 'inline' role";
 InlineStory.decorators = [splitTheme([defaultFormat])];
 
-export const SupportingStory = () => {
+export const SupportingStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
-		<RoleStory role="supporting">
+		<RoleStory role="supporting" format={format}>
 			<img
 				src="http://placekitten.com/g/380/300"
 				width="380"
@@ -151,9 +162,13 @@ export const SupportingStory = () => {
 SupportingStory.storyName = "Click to view in 'supporting' role";
 SupportingStory.decorators = [splitTheme([defaultFormat])];
 
-export const ShowcaseStory = () => {
+export const ShowcaseStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
-		<RoleStory role="showcase">
+		<RoleStory role="showcase" format={format}>
 			<img
 				src="http://placekitten.com/g/860/560"
 				width="860"
@@ -166,9 +181,13 @@ export const ShowcaseStory = () => {
 ShowcaseStory.storyName = "Click to view in 'showcase' role";
 ShowcaseStory.decorators = [splitTheme([defaultFormat])];
 
-export const HalfWidthStory = () => {
+export const HalfWidthStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
-		<RoleStory role="halfWidth">
+		<RoleStory role="halfWidth" format={format}>
 			<img
 				src="http://placekitten.com/g/860/560"
 				width="310"
@@ -181,9 +200,13 @@ export const HalfWidthStory = () => {
 HalfWidthStory.storyName = "Click to view in 'halfWidth' role";
 HalfWidthStory.decorators = [splitTheme([defaultFormat])];
 
-export const ThumbnailStory = () => {
+export const ThumbnailStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
-		<RoleStory role="thumbnail">
+		<RoleStory role="thumbnail" format={format}>
 			<img
 				src="http://placekitten.com/g/140/105"
 				width="140"
@@ -479,7 +502,11 @@ const vineEmbedEmbed: VineBlockElement = {
 	isThirdPartyTracking: false,
 };
 
-export const EmbedBlockComponentStory = () => {
+export const EmbedBlockComponentStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section
 			showTopBorder={false}
@@ -501,11 +528,7 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<EmbedBlockComponent
 						key={1}
 						html={facebookEmbed.html}
@@ -523,11 +546,7 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<EmbedBlockComponent
 						key={1}
 						html={vimeoEmbedEmbed.html}
@@ -545,11 +564,7 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<EmbedBlockComponent
 						key={1}
 						html={youtubeEmbedEmbed.html}
@@ -567,11 +582,7 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<EmbedBlockComponent
 						key={1}
 						html={spotifyEmbedEmbed.html}
@@ -589,11 +600,7 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<EmbedBlockComponent
 						key={1}
 						html={bandcampEmbedEmbed.html}
@@ -611,11 +618,7 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<EmbedBlockComponent
 						key={1}
 						html={ourworldindataEmbedEmbed.html}
@@ -633,11 +636,7 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<EmbedBlockComponent
 						key={1}
 						html={bbcEmbedEmbed.html}
@@ -657,7 +656,11 @@ EmbedBlockComponentStory.storyName =
 	'Click to view wrapping EmbedBlockComponent';
 EmbedBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
-export const UnsafeEmbedBlockComponentStory = () => {
+export const UnsafeEmbedBlockComponentStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section
 			showTopBorder={false}
@@ -679,11 +682,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<UnsafeEmbedBlockComponent
 						key="1"
 						html={instagramEmbedEmbed.html}
@@ -701,11 +700,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<UnsafeEmbedBlockComponent
 						key="2"
 						html={formStackEmbed.html}
@@ -724,11 +719,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<UnsafeEmbedBlockComponent
 						key="3"
 						html={scribdEmbedEmbed.html}
@@ -747,11 +738,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<UnsafeEmbedBlockComponent
 						key="4"
 						html={tiktokEmbedEmbed.html}
@@ -770,11 +757,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<UnsafeEmbedBlockComponent
 						key="5"
 						html={twitterEmbedEmbed.html}
@@ -795,7 +778,11 @@ UnsafeEmbedBlockComponentStory.storyName =
 	'Click to view wrapping UnsafeEmbedBlockComponent';
 UnsafeEmbedBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
-export const VimeoBlockComponentStory = () => {
+export const VimeoBlockComponentStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section
 			showTopBorder={false}
@@ -818,11 +805,7 @@ export const VimeoBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={vimeoVideoEmbed.source}
@@ -830,7 +813,7 @@ export const VimeoBlockComponentStory = () => {
 						role="inline"
 					>
 						<VimeoBlockComponent
-							format={defaultFormat}
+							format={format}
 							embedUrl={vimeoVideoEmbed.embedUrl}
 							height={vimeoVideoEmbed.height}
 							width={vimeoVideoEmbed.width}
@@ -850,7 +833,11 @@ VimeoBlockComponentStory.storyName =
 	'Click to view wrapping VimeoBlockComponent';
 VimeoBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
-export const DocumentBlockComponentStory = () => {
+export const DocumentBlockComponentStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section
 			showTopBorder={false}
@@ -873,11 +860,7 @@ export const DocumentBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={scribdDocumentEmbed.source}
@@ -903,7 +886,11 @@ DocumentBlockComponentStory.storyName =
 	'Click to view wrapping DocumentBlockComponentStory';
 DocumentBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
-export const SoundCloudBlockComponentStory = () => {
+export const SoundCloudBlockComponentStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section
 			showTopBorder={false}
@@ -926,11 +913,7 @@ export const SoundCloudBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={soundcloudAudioEmbed.source}
@@ -949,11 +932,7 @@ export const SoundCloudBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={soundcloudEmbedEmbed.source}
@@ -974,7 +953,11 @@ SoundCloudBlockComponentStory.storyName =
 	'Click to view wrapping SoundCloudBlockComponent';
 SoundCloudBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
-export const SpotifyBlockComponentStory = () => {
+export const SpotifyBlockComponentStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section
 			showTopBorder={false}
@@ -997,11 +980,7 @@ export const SpotifyBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={spotifyAudioEmbed.source}
@@ -1014,7 +993,7 @@ export const SpotifyBlockComponentStory = () => {
 							width={spotifyAudioEmbed.width}
 							title={spotifyAudioEmbed.title}
 							caption={spotifyAudioEmbed.caption}
-							format={defaultFormat}
+							format={format}
 							credit="Spotify"
 							role="inline"
 							isTracking={false}
@@ -1032,7 +1011,11 @@ SpotifyBlockComponentStory.storyName =
 	'Click to view wrapping SpotifyBlockComponent';
 SpotifyBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
-export const TweetBlockComponentStory = () => {
+export const TweetBlockComponentStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section
 			showTopBorder={false}
@@ -1055,11 +1038,7 @@ export const TweetBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={twitterTweetEmbed.source}
@@ -1078,7 +1057,11 @@ TweetBlockComponentStory.storyName =
 	'Click to view wrapping TweetBlockComponent';
 TweetBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
-export const InstagramBlockComponentStory = () => {
+export const InstagramBlockComponentStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section
 			showTopBorder={false}
@@ -1101,11 +1084,7 @@ export const InstagramBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<InstagramBlockComponent
 						key={1}
 						element={instagramInstramEmbed}
@@ -1122,7 +1101,11 @@ InstagramBlockComponentStory.storyName =
 	'Click to view wrapping InstagramBlockComponent';
 InstagramBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
-export const MapBlockComponentStory = () => {
+export const MapBlockComponentStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section
 			showTopBorder={false}
@@ -1144,11 +1127,7 @@ export const MapBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={mapEmbedEmbed.source}
@@ -1161,7 +1140,7 @@ export const MapBlockComponentStory = () => {
 							width={mapEmbedEmbed.width}
 							title={mapEmbedEmbed.title}
 							caption={mapEmbedEmbed.caption}
-							format={defaultFormat}
+							format={format}
 							credit="Google Maps"
 							role="inline"
 							isTracking={false}
@@ -1178,7 +1157,11 @@ MapBlockComponentStory.storyName =
 	'Click to view wrapping MapEmbedBlockComponent';
 MapBlockComponentStory.decorators = [splitTheme([defaultFormat])];
 
-export const VineBlockComponentStory = () => {
+export const VineBlockComponentStory: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => {
 	return (
 		<Section
 			title="Embedded Content"
@@ -1200,11 +1183,7 @@ export const VineBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure
-					format={defaultFormat}
-					isMainMedia={false}
-					role="inline"
-				>
+				<Figure format={format} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={vineEmbedEmbed.source}

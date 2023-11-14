@@ -60,17 +60,21 @@ We will **not** be writing snaphot test Components for the following reasons:
 -   Developer time required to check snapshot test failures when simple non-breaking changes introduced, plus developer time required to review snapshot output in Pull Requests.
 
 ## Cypress Tests
+
 Cypress offers a solution for integration tests where tests are executed in a headless browser, using the actual browser apis. By executing at this level it provides an extremely realistic representation of a user interacting with the page.
 
 ### Types of Cypress tests
+
 We have two main types of Cypress tests. End to end and mocked. Both have pros and cons but by using a balance of both we aim to gain the most benefit at the least cost.
 
 #### End to end
+
 These tests use live data to load a page, populating components with real api response data. This tests are an absolute truth, if they work then the there is a very high level of confidence that the actual site will work.
 
 The down side to these types of tests is that they are slower and have a dependency on external endpoints. Too many such tests will slow down the suite and network transience can cause false negatives
 
 #### Mocked
+
 By using mocked data and endpoints, we increase the speed that tests execute at and have complete certainty in what to expect from our mocked endpoints. The risk though is that an api might have changed or break and we won't be aware of this.
 
 ### How to run locally

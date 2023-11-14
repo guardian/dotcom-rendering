@@ -56,7 +56,7 @@ describe('getCallout', () => {
 				formFields: [],
 			},
 			name: 'mockName',
-			activeUntil: 1730542820000
+			activeUntil: 1730542820000,
 		});
 	});
 

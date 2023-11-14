@@ -44,9 +44,6 @@ const pillarsStyles = (isImmersive: boolean) => css`
 		${from.desktop} {
 			width: ${preLeftColPillarWidth}px;
 		}
-		${from.leftCol} {
-			width: ${pillarWidth}px;
-		}
 		/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 		/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
 		&::before {
@@ -75,22 +72,10 @@ const pillarsStyles = (isImmersive: boolean) => css`
 	}
 `;
 
-const pillarsStylesWithPageSkin = css`
+const pillarsStylesFromLeftCol = css`
 	li {
-		float: left;
-		display: block;
-		position: relative;
-		width: ${preDesktopPillarWidth};
-		${from.desktop} {
-			width: ${preLeftColPillarWidth}px;
-		}
-		/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
-		/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
-		&::before {
-			content: '\\200B'; /* Zero width space */
-			display: block;
-			height: 0;
-			width: 0;
+		${from.leftCol} {
+			width: ${pillarWidth}px;
 		}
 	}
 `;
@@ -130,10 +115,6 @@ const pillarStyle = css`
 		${from.desktop} {
 			width: ${preLeftColFirstPillarWidth}px;
 		}
-
-		${from.leftCol} {
-			width: ${firstPillarWidth}px;
-		}
 		a {
 			padding-left: 20px;
 		}
@@ -146,17 +127,10 @@ const pillarStyle = css`
 	}
 `;
 
-const pillarStyleWithPageSkin = css`
+const pillarStyleFromLeftCol = css`
 	:first-of-type {
-		margin-left: -20px;
-		width: ${preDesktopPillarWidth};
-
-		${from.desktop} {
-			width: ${preLeftColFirstPillarWidth}px;
-		}
-
-		a {
-			padding-left: 20px;
+		${from.leftCol} {
+			width: ${firstPillarWidth}px;
 		}
 	}
 `;
@@ -226,11 +200,6 @@ const linkStyle = (isImmersive: boolean) => css`
 		height: ${isImmersive ? '48px' : '42px'};
 	}
 
-	${from.wide} {
-		padding-top: ${isImmersive ? '10px' : '7px'};
-		font-size: 24px;
-	}
-
 	:focus:after {
 		transform: translateY(4px);
 	}
@@ -242,10 +211,10 @@ const linkStyle = (isImmersive: boolean) => css`
 	}
 `;
 
-const linkStyleWithPageSkin = (isImmersive: boolean) => css`
+const linkStyleFromWide = (isImmersive: boolean) => css`
 	${from.wide} {
-		padding-top: ${isImmersive ? '9px' : '5px'};
-		font-size: 22px;
+		padding-top: ${isImmersive ? '10px' : '7px'};
+		font-size: 24px;
 	}
 `;
 
@@ -303,7 +272,7 @@ export const Pillars = ({
 		data-testid="pillar-list"
 		css={[
 			pillarsStyles(isImmersive),
-			hasPageSkin && pillarsStylesWithPageSkin,
+			!hasPageSkin && pillarsStylesFromLeftCol,
 		]}
 	>
 		{pillars.map((p, i) => {
@@ -313,12 +282,12 @@ export const Pillars = ({
 			return (
 				<li
 					key={p.title}
-					css={[pillarStyle, hasPageSkin && pillarStyleWithPageSkin]}
+					css={[pillarStyle, !hasPageSkin && pillarStyleFromLeftCol]}
 				>
 					<a
 						css={[
 							linkStyle(isImmersive),
-							hasPageSkin && linkStyleWithPageSkin(isImmersive),
+							!hasPageSkin && linkStyleFromWide(isImmersive),
 							pillarUnderline(
 								decidePalette({
 									display: ArticleDisplay.Standard,

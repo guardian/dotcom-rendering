@@ -800,6 +800,152 @@ const captionLink = ({ design, theme }: ArticleFormat): string => {
 const captionOverlayText = (): string => {
 	return sourcePalette.neutral[100];
 };
+
+const keyEventBulletLight = (): string => sourcePalette.neutral[46];
+const keyEventBulletDark = (): string => sourcePalette.neutral[60];
+
+const keyEventBulletHoverLight = (): string => sourcePalette.neutral[0];
+const keyEventBulletHoverDark = (): string => sourcePalette.neutral[86];
+
+const keyEventTitleLight = (): string => sourcePalette.neutral[7];
+const keyEventTitleDark = (): string => sourcePalette.neutral[86];
+
+const keyEventTextLight = ({ theme }: ArticleFormat): string => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[300];
+	}
+};
+const keyEventTextDark = ({ theme }: ArticleFormat): string => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[500];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[500];
+		case Pillar.Sport:
+			return sourcePalette.sport[500];
+		case Pillar.Culture:
+			return sourcePalette.culture[500];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
+
+const keyEventBackgroundLight = (): string => sourcePalette.neutral[97];
+const keyEventBackgroundDark = (): string => sourcePalette.neutral[10];
+
+const keyEventBackgroundDesktopLight = (): string => sourcePalette.neutral[93];
+const keyEventBackgroundDesktopDark = (): string => sourcePalette.neutral[7];
+
+const keyEventBorderLight = (): string => sourcePalette.neutral[46];
+const keyEventBorderDark = (): string => sourcePalette.neutral[60];
+const keyEventButtonLight = (): string => sourcePalette.neutral[7];
+const keyEventButtonDark = (): string => sourcePalette.neutral[86];
+const keyEventButtonHoverLight = (): string => sourcePalette.brandAlt[300];
+const keyEventButtonHoverDark = (): string => sourcePalette.neutral[60];
+const keyEventButtonFillLight = (): string => sourcePalette.neutral[100];
+const keyEventButtonFillDark = (): string => sourcePalette.neutral[7];
+
+const summaryEventBulletLight = ({ theme }: ArticleFormat): string => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+	}
+};
+const summaryEventBulletDark = ({ theme }: ArticleFormat): string => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[500];
+		case Pillar.Sport:
+			return sourcePalette.sport[500];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[500];
+		case Pillar.Culture:
+			return sourcePalette.culture[500];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[500];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[500];
+	}
+};
+const summaryEventBulletHoverLight = ({ theme }: ArticleFormat): string => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[200];
+		case Pillar.Sport:
+			return sourcePalette.sport[200];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[200];
+		case Pillar.Culture:
+			return sourcePalette.culture[200];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[200];
+	}
+};
+const summaryEventBulletHoverDark = ({ theme }: ArticleFormat): string => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[550];
+		case Pillar.Sport:
+			return sourcePalette.sport[600];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[600];
+		case Pillar.Culture:
+			return sourcePalette.culture[600];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[550];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[600];
+	}
+};
 // ----- Palette ----- //
 
 /**
@@ -976,6 +1122,54 @@ const paletteColours = {
 	'--caption-overlay-text': {
 		light: captionOverlayText,
 		dark: captionOverlayText,
+	},
+	'--key-event-bullet': {
+		light: keyEventBulletLight,
+		dark: keyEventBulletDark,
+	},
+	'--key-event-bullet-hover': {
+		light: keyEventBulletHoverLight,
+		dark: keyEventBulletHoverDark,
+	},
+	'--key-event-title': {
+		light: keyEventTitleLight,
+		dark: keyEventTitleDark,
+	},
+	'--key-event-text': {
+		light: keyEventTextLight,
+		dark: keyEventTextDark,
+	},
+	'--key-event-background': {
+		light: keyEventBackgroundLight,
+		dark: keyEventBackgroundDark,
+	},
+	'--key-event-background-desktop': {
+		light: keyEventBackgroundDesktopLight,
+		dark: keyEventBackgroundDesktopDark,
+	},
+	'--key-event-border': {
+		light: keyEventBorderLight,
+		dark: keyEventBorderDark,
+	},
+	'--key-event-button': {
+		light: keyEventButtonLight,
+		dark: keyEventButtonDark,
+	},
+	'--key-event-button-hover': {
+		light: keyEventButtonHoverLight,
+		dark: keyEventButtonHoverDark,
+	},
+	'--key-event-button-fill': {
+		light: keyEventButtonFillLight,
+		dark: keyEventButtonFillDark,
+	},
+	'--summary-event-bullet': {
+		light: summaryEventBulletLight,
+		dark: summaryEventBulletDark,
+	},
+	'--summary-event-bullet-hover': {
+		light: summaryEventBulletHoverLight,
+		dark: summaryEventBulletHoverDark,
 	},
 } satisfies PaletteColours;
 

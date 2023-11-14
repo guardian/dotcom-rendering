@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const lockfile = require('@yarnpkg/lockfile');
+const { warn, log } = require('../../../scripts/log');
 const pkg = require('../../package.json');
-const { warn, log } = require('./log');
 
 if (pkg.devDependencies) {
 	warn('Don’t use devDependencies');

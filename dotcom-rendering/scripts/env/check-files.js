@@ -1,5 +1,5 @@
 const execa = require('execa');
-const { warn } = require('./log');
+const { warn } = require('../../../scripts/log');
 
 execa('find', ['src', '-type', 'f', '-name', '*index*.ts*'])
 	.then(({ stdout }) => {

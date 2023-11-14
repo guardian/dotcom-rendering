@@ -8,7 +8,7 @@ To do this:
     $ make build
     $ node dist/server.js
 
-*Note, you will need AWS `frontend` credentials to run the service.*
+_Note, you will need AWS `frontend` credentials to run the service._
 
 You can then use the provided GET endpoints for testing:
 
@@ -20,6 +20,6 @@ the article used. E.g.
 
     GET /Article/https://www.theguardian.com/my-test-article.
 
-*Note, PROD Frontend doesn't use these endpoints. Instead, it `POSTs` data to
+_Note, PROD Frontend doesn't use these endpoints. Instead, it `POSTs` data to
 DCR and receives a JSON response. A tool like Postman can help if you want to
-replicate this exactly.*
+replicate this exactly._
