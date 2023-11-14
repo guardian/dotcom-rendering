@@ -13,9 +13,12 @@ type Props = {
 };
 
 const baseBlockquoteStyles = css`
-	margin-bottom: 16px;
-	${body.medium()};
-	font-style: italic;
+	margin-bottom: 14px;
+	${body.medium({
+		fontWeight: 'regular',
+		fontStyle: 'italic',
+		lineHeight: 'loose',
+	})};
 	p {
 		margin-bottom: 8px;
 	}
