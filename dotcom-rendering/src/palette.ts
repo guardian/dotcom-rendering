@@ -1119,6 +1119,144 @@ const articleBackgroundDark = ({ design, theme }: ArticleFormat) => {
 			return sourcePalette.neutral[10];
 	}
 };
+
+const articleSectionBackground = () => sourcePalette.brand[400];
+
+const articleLinkHover = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[350];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[100];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[400];
+			}
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[300];
+				case Pillar.Culture:
+					return sourcePalette.culture[350];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[100];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+			}
+		default:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[300];
+				case Pillar.Lifestyle:
+					return sourcePalette.sport[400];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[100];
+				case ArticleSpecial.SpecialReportAlt:
+					switch (design) {
+						case ArticleDesign.LiveBlog:
+							return sourcePalette.specialReportAlt[200];
+						default:
+							return sourcePalette.specialReportAlt[200];
+					}
+			}
+	}
+};
+
+const articleBorder = ({ design, theme }: ArticleFormat): string => {
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return transparentColour(sourcePalette.neutral[60], 0.3);
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[60];
+		default:
+			switch (design) {
+				case ArticleDesign.Picture:
+					return transparentColour(sourcePalette.neutral[60], 0.5);
+				default:
+					return sourcePalette.neutral[86];
+			}
+	}
+};
+
+//could we just use article border here? check labs
+const articleBorderSecondary = (format: ArticleFormat) => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return transparentColour(sourcePalette.neutral[60], 0.3);
+	if (format.design === ArticleDesign.Picture)
+		return transparentColour(sourcePalette.neutral[60], 0.5);
+	return sourcePalette.neutral[86];
+};
+
+const subNavBorder = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[300];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[400];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+			}
+		default:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[400];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[400];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+			}
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -1355,6 +1493,26 @@ const paletteColours = {
 	'--article-background': {
 		light: articleBackgroundLight,
 		dark: articleBackgroundDark,
+	},
+	'--article-section-background': {
+		light: articleSectionBackground,
+		dark: articleSectionBackground,
+	},
+	'--article-link-hover': {
+		light: articleLinkHover,
+		dark: articleLinkHover,
+	},
+	'--article-border': {
+		light: articleBorder,
+		dark: articleBorder,
+	},
+	'--article-border-secondary': {
+		light: articleBorderSecondary,
+		dark: articleBorderSecondary,
+	},
+	'--sub-nav-border': {
+		light: subNavBorder,
+		dark: subNavBorder,
 	},
 } satisfies PaletteColours;
 
