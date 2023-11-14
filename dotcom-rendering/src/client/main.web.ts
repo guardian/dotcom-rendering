@@ -94,14 +94,16 @@ void (async () => {
 		},
 	);
 
-	void startup(
-		'userFeatures',
-		() =>
-			import(
-				/* webpackMode: 'eager' */ './userFeatures/user-features'
-			).then(({ refresh }) => refresh()),
-		{ priority: 'critical' },
-	);
+	if (window.guardian.config.switches.userFeaturesDcr === true) {
+		void startup(
+			'userFeatures',
+			() =>
+				import(
+					/* webpackMode: 'eager' */ './userFeatures/user-features'
+				).then(({ refresh }) => refresh()),
+			{ priority: 'critical' },
+		);
+	}
 
 	/*************************************************************
 	 *
