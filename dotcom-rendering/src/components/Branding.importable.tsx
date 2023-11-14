@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { textSans, until } from '@guardian/source-foundations';
+import { from, textSans } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../client/ga/ga';
 import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
@@ -10,55 +10,25 @@ const brandingStyle = css`
 	padding-bottom: 10px;
 `;
 
-/**
- * for liveblog smaller breakpoints article meta is located in the same
- * container as standfirst and needs the same styling as standfirst
- **/
-function brandingLabelStyle(format: ArticleFormat) {
-	const invariantStyles = css`
-		${textSans.xxsmall()}
-	`;
+const labelStyle = css`
+	${textSans.xxsmall()}
+	color: ${palette('--branding-label-text')};
 
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			return [
-				invariantStyles,
-				css`
-					color: ${palette('--branding-label-text')};
-
-					${until.desktop} {
-						color: ${palette('--standfirst-text')};
-					}
-
-					a {
-						color: ${palette('--branding-label-text')};
-
-						${until.desktop} {
-							color: ${palette('--standfirst-text')};
-						}
-					}
-				`,
-			];
-		}
-		default: {
-			return [
-				invariantStyles,
-				css`
-					color: ${palette('--branding-label-text')};
-
-					a {
-						color: ${palette('--branding-label-text')};
-					}
-				`,
-			];
-		}
+	a {
+		color: inherit;
 	}
-}
+`;
 
-// TODO - handle dark mode images
-const brandingLogoStyle = () => css`
+const liveBlogLabelStyle = css`
+	color: ${palette('--standfirst-text')};
+
+	${from.desktop} {
+		color: ${palette('--branding-label-text')};
+	}
+`;
+
+const brandingLogoStyle = css`
 	padding: 10px 0;
-
 	display: block;
 
 	& img {
@@ -66,51 +36,32 @@ const brandingLogoStyle = () => css`
 	}
 `;
 
+const aboutLinkStyle = css`
+	${textSans.xxsmall()}
+	display: block;
+	text-decoration: none;
+
+	color: ${palette('--branding-link-text')};
+	a {
+		color: inherit;
+	}
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
 /**
  * for liveblog smaller breakpoints article meta is located in the same
  * container as standfirst and needs the same styling as standfirst
  **/
-const brandingAboutLink = (format: ArticleFormat) => {
-	const invariantStyles = css`
-		${textSans.xxsmall()}
-		display: block;
-		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
-	`;
+const liveBlogAboutLinkStyle = css`
+	color: ${palette('--standfirst-text')};
 
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			return [
-				invariantStyles,
-				css`
-					color: ${palette('--branding-link-text')};
-					${until.desktop} {
-						color: ${palette('--standfirst-text')};
-					}
-					a {
-						color: ${palette('--branding-link-text')};
-						${until.desktop} {
-							color: ${palette('--standfirst-text')};
-						}
-					}
-				`,
-			];
-		}
-		default: {
-			return [
-				invariantStyles,
-				css`
-					color: ${palette('--branding-link-text')};
-					a {
-						color: ${palette('--branding-link-text')};
-					}
-				`,
-			];
-		}
+	${from.desktop} {
+		color: ${palette('--branding-link-text')};
 	}
-};
+`;
 
 function decideLogo(branding: BrandingType, format: ArticleFormat) {
 	switch (format.design) {
@@ -175,11 +126,14 @@ type Props = {
  */
 export const Branding = ({ branding, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
+	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
 	return (
 		<div css={brandingStyle}>
-			<div css={brandingLabelStyle(format)}>{branding.logo.label}</div>
-			<div css={brandingLogoStyle()}>
+			<div css={[labelStyle, isLiveBlog && liveBlogLabelStyle]}>
+				{branding.logo.label}
+			</div>
+			<div css={brandingLogoStyle}>
 				<a
 					href={branding.logo.link}
 					data-sponsor={branding.sponsorName.toLowerCase()}
@@ -192,7 +146,10 @@ export const Branding = ({ branding, format }: Props) => {
 				</a>
 			</div>
 
-			<a href={branding.aboutThisLink} css={brandingAboutLink(format)}>
+			<a
+				href={branding.aboutThisLink}
+				css={[aboutLinkStyle, isLiveBlog && liveBlogAboutLinkStyle]}
+			>
 				About this content
 			</a>
 		</div>
