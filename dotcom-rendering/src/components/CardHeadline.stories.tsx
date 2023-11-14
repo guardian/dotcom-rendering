@@ -119,7 +119,7 @@ export const Analysis = () => (
 			showSideBorders={false}
 			backgroundColour={palette.specialReport[300]}
 		>
-			<ContainerOverrides format={specialReport} isDynamo={false}>
+			<ContainerOverrides isDynamo={false}>
 				<CardHeadline
 					headlineText="This is how an Special Report Analysis card headline looks"
 					format={specialReport}
@@ -321,7 +321,7 @@ export const SpecialReport: StoryObj = ({
 		showSideBorders={false}
 		backgroundColour="grey"
 	>
-		<ContainerOverrides format={format} isDynamo={false}>
+		<ContainerOverrides isDynamo={false}>
 			<CardHeadline
 				headlineText="This is how a Special Report card headline with kicker and quotes looks"
 				format={format}
@@ -366,7 +366,7 @@ export const Byline: StoryObj = ({ format }: { format: ArticleFormat }) => (
 				: undefined
 		}
 	>
-		<ContainerOverrides format={format} isDynamo={false}>
+		<ContainerOverrides isDynamo={false}>
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={format}
@@ -449,7 +449,6 @@ export const WithContainerOverrides: StoryObj = ({
 				containerPalette={containerPalette}
 			>
 				<ContainerOverrides
-					format={format}
 					containerPalette={containerPalette}
 					isDynamo={false}
 				>

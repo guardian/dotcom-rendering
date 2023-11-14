@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { decidePalette } from '../lib/decidePalette';
 import type { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 
 type Props = {
 	children: React.ReactNode;
-	format: ArticleFormat;
 	isDynamo: boolean;
 	containerPalette?: DCRContainerPalette;
 };
@@ -25,7 +23,6 @@ export const ContainerOverrides = ({
 	containerPalette,
 	isDynamo,
 	children,
-	format,
 }: Props) => {
 	const { text } = containerPalette
 		? decideContainerOverrides(containerPalette)
@@ -33,8 +30,8 @@ export const ContainerOverrides = ({
 
 	const paletteOverrides = {
 		'--headline-colour': isDynamo
-			? text?.dynamoHeadline ?? decidePalette(format).text.dynamoHeadline
-			: text?.cardHeadline ?? decidePalette(format).text.cardHeadline,
+			? text?.dynamoHeadline
+			: text?.cardHeadline,
 	} satisfies Partial<Record<ColourName, string>>;
 
 	return (

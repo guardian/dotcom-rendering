@@ -184,7 +184,6 @@ export const CardWrapper = ({
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides
-				format={format}
 				containerPalette={containerPalette}
 				isDynamo={!!isDynamo}
 			>

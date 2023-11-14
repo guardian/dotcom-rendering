@@ -290,6 +290,11 @@ export const CardHeadline = ({
 						css={css`
 							color: ${schemedPalette('--headline-colour')};
 						`}
+						style={{
+							['--headline-colour']: isDynamo
+								? palette.text.dynamoHeadline
+								: palette.text.cardHeadline,
+						}}
 						className="show-underline"
 					>
 						{cleanHeadLineText}
