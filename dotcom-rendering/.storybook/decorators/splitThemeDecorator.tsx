@@ -12,7 +12,7 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { Decorator } from '@storybook/react';
+import { Decorator, StoryObj } from '@storybook/react';
 import { paletteDeclarations } from '../../src/palette';
 
 interface Orientation {
@@ -180,3 +180,7 @@ export const splitTheme =
 			</div>
 		</div>
 	);
+
+export type SplitThemeStory = StoryObj<
+	(props: { format: ArticleFormat }) => React.ReactElement
+> & { render: {}; decorators: {} };
