@@ -44,6 +44,23 @@ Unquoted.decorators = [
 	]),
 ];
 
+const blockQuoteStoryVariations = [
+	ArticleDesign.Standard,
+	ArticleDesign.Profile,
+	ArticleDesign.Explainer,
+	ArticleDesign.Timeline,
+	ArticleDesign.LiveBlog,
+	ArticleDesign.DeadBlog,
+	ArticleDesign.Analysis,
+	ArticleDesign.Feature,
+	ArticleDesign.Interview,
+	ArticleDesign.Recipe,
+	ArticleDesign.Review,
+	ArticleDesign.Obituary,
+	ArticleDesign.Comment,
+	ArticleDesign.Editorial,
+] as const satisfies ReadonlyArray<ArticleDesign>;
+
 const themeVariations = [
 	Pillar.Sport,
 	Pillar.News,
@@ -61,6 +78,24 @@ const allThemeStandardVariations = themeVariations.map((theme) => ({
 	theme,
 }));
 
+const allNewsVariations = blockQuoteStoryVariations.map((design) => ({
+	design,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+}));
+
+const allCultureVariations = blockQuoteStoryVariations.map((design) => ({
+	design,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.Culture,
+}));
+
+const allSportVariations = blockQuoteStoryVariations.map((design) => ({
+	design,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.Sport,
+}));
+
 export const StandardDesign = () => {
 	return (
 		<div>
@@ -71,6 +106,39 @@ export const StandardDesign = () => {
 
 StandardDesign.storyName = 'Standard Design - All theme variations';
 StandardDesign.decorators = [splitTheme(allThemeStandardVariations)];
+
+export const DesignVariationsNews = () => {
+	return (
+		<div>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+DesignVariationsNews.storyName = 'News Pillar - Design variations';
+DesignVariationsNews.decorators = [splitTheme(allNewsVariations)];
+
+export const DesignVariationsCulture = () => {
+	return (
+		<div>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+DesignVariationsCulture.storyName = 'Culture Pillar - Design variations';
+DesignVariationsCulture.decorators = [splitTheme(allCultureVariations)];
+
+export const DesignVariationsSport = () => {
+	return (
+		<div>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+DesignVariationsSport.storyName = 'Sport Pillar - Design variations';
+DesignVariationsSport.decorators = [splitTheme(allSportVariations)];
 
 export const LiveBlogNews = () => {
 	return (

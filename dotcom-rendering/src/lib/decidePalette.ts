@@ -845,45 +845,38 @@ const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
 
 const fillBlockquoteIcon = (format: ArticleFormat): string => {
 	switch (format.design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+			return neutral[46];
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
 		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog: {
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review: {
 			switch (format.theme) {
 				case Pillar.News:
-					return news[400];
+					return news[200];
 				case Pillar.Opinion:
-					return opinion[400];
+					return opinion[200];
 				case Pillar.Sport:
-					return sport[400];
+					return sport[200];
 				case Pillar.Culture:
-					return culture[400];
+					return culture[200];
 				case Pillar.Lifestyle:
-					return lifestyle[400];
+					return lifestyle[200];
 				case ArticleSpecial.SpecialReport:
-					return specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return news[400];
-				case ArticleSpecial.Labs:
-					return labs[400];
-			}
-		}
-		case ArticleDesign.Analysis: {
-			switch (format.theme) {
-				case Pillar.News:
-					return news[300];
-				case Pillar.Opinion:
-					return opinion[300];
-				case Pillar.Sport:
-					return sport[400];
-				case Pillar.Culture:
-					return culture[400];
-				case Pillar.Lifestyle:
-					return lifestyle[400];
-				case ArticleSpecial.SpecialReport:
-					return specialReport[400];
+					return specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return palette.specialReportAlt[200];
 				case ArticleSpecial.Labs:
-					return labs[400];
+					return labs[200];
 			}
 		}
 		default: {
@@ -1416,16 +1409,29 @@ const textDateLine = (format: ArticleFormat): string => {
 };
 
 const textBlockquote = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
-
 	switch (format.design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
-			return BLACK;
 		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
 			return neutral[7];
 		default:
-			return neutral[46];
+			switch (format.theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return neutral[7];
+				default:
+					return neutral[46];
+			}
 	}
 };
 
