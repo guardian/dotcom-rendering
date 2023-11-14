@@ -1,9 +1,9 @@
-/* eslint-disable no-undef */
-/* eslint-disable func-names */
 import { Standard } from '../../fixtures/manual/standard-article';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
-const visitArticleNoOkta = () =>
-	cy.visit('http://localhost:9000/Article/', {
+const visitArticleNoOkta = () => {
+	setLocalBaseUrl();
+	cy.visit('/Article', {
 		method: 'POST',
 		body: JSON.stringify({
 			...Standard,
@@ -18,6 +18,7 @@ const visitArticleNoOkta = () =>
 					 */
 					okta: false,
 					idCookieRefresh: false,
+					userFeaturesDcr: true,
 				},
 			},
 		}),
@@ -25,6 +26,7 @@ const visitArticleNoOkta = () =>
 			'Content-Type': 'application/json',
 		},
 	});
+};
 
 describe('User cookies tests', function () {
 	it(`Request to user features API is sent when no user features expiry cookie`, function () {
