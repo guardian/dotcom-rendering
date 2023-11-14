@@ -1,14 +1,16 @@
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints, specialReport } from '@guardian/source-foundations';
+import { breakpoints, palette } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { DCRContainerPalette } from '../types/front';
 import { CardHeadline } from './CardHeadline';
+import { ContainerOverrides } from './ContainerOverrides';
 import { Section } from './Section';
 
 export default {
@@ -39,6 +41,11 @@ export const Article = () => (
 );
 Article.storyName = 'Article';
 
+const specialReport = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Analysis,
+	theme: ArticleSpecial.SpecialReport,
+} satisfies ArticleFormat;
 export const Analysis = () => (
 	<>
 		{smallHeadlineSizes.map((size) => (
@@ -110,16 +117,14 @@ export const Analysis = () => (
 			fullWidth={true}
 			showTopBorder={false}
 			showSideBorders={false}
-			backgroundColour={specialReport[300]}
+			backgroundColour={palette.specialReport[300]}
 		>
-			<CardHeadline
-				headlineText="This is how an Special Report Analysis card headline looks"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Analysis,
-					theme: ArticleSpecial.SpecialReport,
-				}}
-			/>
+			<ContainerOverrides isDynamo={false}>
+				<CardHeadline
+					headlineText="This is how an Special Report Analysis card headline looks"
+					format={specialReport}
+				/>
+			</ContainerOverrides>
 		</Section>
 	</>
 );
@@ -305,26 +310,35 @@ export const OpinionKicker = () => (
 );
 OpinionKicker.storyName = 'With an opinion kicker';
 
-export const SpecialReport = () => (
+export const SpecialReport: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => (
 	<Section
 		fullWidth={true}
 		showTopBorder={false}
 		showSideBorders={false}
 		backgroundColour="grey"
 	>
-		<CardHeadline
-			headlineText="This is how a Special Report card headline with kicker and quotes looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticleSpecial.SpecialReport,
-			}}
-			showQuotes={true}
-			kickerText="Special Report"
-		/>
+		<ContainerOverrides isDynamo={false}>
+			<CardHeadline
+				headlineText="This is how a Special Report card headline with kicker and quotes looks"
+				format={format}
+				showQuotes={true}
+				kickerText="Special Report"
+			/>
+		</ContainerOverrides>
 	</Section>
 );
 SpecialReport.storyName = 'With theme SpecialReport';
+SpecialReport.args = {
+	format: {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticleSpecial.SpecialReport,
+	},
+};
 
 export const Busy = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -342,105 +356,70 @@ export const Busy = () => (
 );
 Busy.storyName = 'Lifestyle opinion';
 
-export const Byline = () => (
-	<>
-		<Section fullWidth={true} showSideBorders={false}>
+export const Byline: StoryObj = ({ format }: { format: ArticleFormat }) => (
+	<Section
+		fullWidth={true}
+		showSideBorders={false}
+		backgroundColour={
+			format.theme === ArticleSpecial.SpecialReport
+				? palette.specialReport[300]
+				: undefined
+		}
+	>
+		<ContainerOverrides isDynamo={false}>
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticleSpecial.Labs,
-				}}
-				byline="Labs byline"
+				format={format}
+				byline={`${
+					Pillar[format.theme] ??
+					ArticleSpecial[format.theme] ??
+					'Unknown'
+				} byline`}
 				showByline={true}
 			/>
-		</Section>
-		<br />
-		<Section fullWidth={true} showSideBorders={false}>
-			<CardHeadline
-				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: Pillar.News,
-				}}
-				byline="News byline"
-				showByline={true}
-			/>
-		</Section>
-		<br />
-		<Section fullWidth={true} showSideBorders={false}>
-			<CardHeadline
-				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: Pillar.Sport,
-				}}
-				byline="Sport byline"
-				showByline={true}
-			/>
-		</Section>
-		<br />
-		<Section fullWidth={true} showSideBorders={false}>
-			<CardHeadline
-				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: Pillar.Culture,
-				}}
-				byline="Culture byline"
-				showByline={true}
-			/>
-		</Section>
-		<br />
-		<Section fullWidth={true} showSideBorders={false}>
-			<CardHeadline
-				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: Pillar.Lifestyle,
-				}}
-				byline="Lifestyle byline"
-				showByline={true}
-			/>
-		</Section>
-		<br />
-		<Section fullWidth={true} showSideBorders={false}>
-			<CardHeadline
-				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: Pillar.Opinion,
-				}}
-				byline="Opinion byline"
-				showByline={true}
-			/>
-		</Section>
-		<br />
-		<Section
-			fullWidth={true}
-			showSideBorders={false}
-			backgroundColour={specialReport[300]}
-		>
-			<CardHeadline
-				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticleSpecial.SpecialReport,
-				}}
-				byline="SpecialReport byline"
-				showByline={true}
-			/>
-		</Section>
-	</>
+		</ContainerOverrides>
+	</Section>
 );
 Byline.storyName = 'With byline';
+Byline.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: ArticleSpecial.Labs,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.News,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.Sport,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.Culture,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.Lifestyle,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.Opinion,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: ArticleSpecial.SpecialReport,
+		},
+	]),
+];
 
 const containerPalettes = [
 	'EventPalette',
@@ -469,17 +448,22 @@ export const WithContainerOverrides: StoryObj = ({
 				showSideBorders={false}
 				containerPalette={containerPalette}
 			>
-				<CardHeadline
-					headlineText={`This is a ${
-						Pillar[format.theme] ??
-						ArticleSpecial[format.theme] ??
-						'Unknown'
-					} headline`}
+				<ContainerOverrides
 					containerPalette={containerPalette}
-					format={format}
-					byline={`inside a ${containerPalette} container`}
-					showByline={true}
-				/>
+					isDynamo={false}
+				>
+					<CardHeadline
+						headlineText={`This is a ${
+							Pillar[format.theme] ??
+							ArticleSpecial[format.theme] ??
+							'Unknown'
+						} headline`}
+						containerPalette={containerPalette}
+						format={format}
+						byline={`inside a ${containerPalette} container`}
+						showByline={true}
+					/>
+				</ContainerOverrides>
 			</Section>
 		))}
 	</>
