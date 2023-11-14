@@ -1,3 +1,5 @@
+// This file was migrated from:
+// https://github.com/guardian/commercial/blob/1a429d6be05657f20df4ca909df7d01a5c3d7402/src/lib/user-features.ts
 import { getCookie, isObject, removeCookie, setCookie } from '@guardian/libs';
 import {
 	getAuthStatus,
