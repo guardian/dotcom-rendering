@@ -194,8 +194,9 @@ export const groupTrailsByDates = (
 		}
 	}
 
-	// Sort - in cases where card order is unexpected (e.g not date ordered), it is possible this array will be out of order.
-	groupedTrails.sort((a, b) => {
+	// Sort in descending order (e.g most recent date first)
+	// In cases where card order is unexpected (e.g not date ordered), it is possible this array will be out of order.
+	const sortedGroupedTrails = [...groupedTrails].sort((a, b) => {
 		// It is likely more performant to check year, then month, then day, than creating & destroying
 		// many date objects in order to sort. Though there are generally not enough cards per page that we'd
 		// ever see an impact.
@@ -208,5 +209,5 @@ export const groupTrailsByDates = (
 		return (b.day ?? 0) - (a.day ?? 0);
 	});
 
-	return groupedTrails;
+	return sortedGroupedTrails;
 };
