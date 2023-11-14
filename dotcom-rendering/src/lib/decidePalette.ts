@@ -715,7 +715,7 @@ const textCricketScoreboardLink = (): string => {
 	return sport[300];
 };
 
-//could we remove?
+//This has been moved to the theme palette
 const backgroundArticle = (format: ArticleFormat): string => {
 	// specialreport blogs should have specialreport background
 	if (
@@ -1240,6 +1240,7 @@ const borderSyndicationButton = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
+// this has been moved to the theme palette
 const borderSubNav = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
@@ -1552,6 +1553,7 @@ const borderRichLink: (format: ArticleFormat) => string = (format) => {
 const borderNavPillar: (format: ArticleFormat) => string = (format) =>
 	pillarPalette[format.theme].bright;
 
+// this has been moved to the theme palette
 const borderArticle: (format: ArticleFormat) => string = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
@@ -1606,6 +1608,7 @@ const borderCricketScoreboardDivider = (): string => {
 
 const borderFilterButton = (): string => neutral[60];
 
+// this has been moved to the theme palette
 const borderSecondary = (format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
