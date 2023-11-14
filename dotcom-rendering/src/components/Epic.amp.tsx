@@ -447,7 +447,7 @@ export const Epic = ({ webURL }: Props) => {
 										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.frequency == 'ONE_OFF' ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
 										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { frequency: 'ONE_OFF', amount: epicState.choiceCards.amounts['ONE_OFF'][1] } } } })"
 									>
-										<span>Single</span>
+										<span>One-time</span>
 									</button>
 									<button
 										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.frequency == 'MONTHLY' ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
