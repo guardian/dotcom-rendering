@@ -272,5 +272,8 @@
 		"webpack-node-externals": "3.0.0",
 		"webpack-sources": "3.2.3",
 		"zod": "3.22.3"
+	},
+	"resolutions": {
+		"**/crypto-js": "4.2.0"
 	}
 }
