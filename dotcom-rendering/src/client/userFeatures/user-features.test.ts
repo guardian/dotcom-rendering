@@ -260,6 +260,7 @@ describe('Storing new feature data', () => {
 	it('Puts the paying-member state and ad-free state in appropriate cookie', () => {
 		fetchJsonSpy.mockReturnValueOnce(
 			Promise.resolve({
+				showSupportMessaging: false,
 				contentAccess: {
 					paidMember: false,
 					recurringContributor: false,
@@ -289,6 +290,7 @@ describe('Storing new feature data', () => {
 	it('Puts the paying-member state and ad-free state in appropriate cookie', () => {
 		fetchJsonSpy.mockReturnValueOnce(
 			Promise.resolve({
+				showSupportMessaging: false,
 				contentAccess: {
 					paidMember: true,
 					recurringContributor: true,

@@ -56,7 +56,7 @@ const validateResponse = (
 		return true;
 	}
 
-	return true;
+	return false;
 };
 
 const persistResponse = (JsonResponse: UserFeaturesResponse) => {
