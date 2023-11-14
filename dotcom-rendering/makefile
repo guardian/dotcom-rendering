@@ -37,8 +37,8 @@ start-prod:
 	@echo '' # just a spacer
 	NODE_ENV=production node dist/server.js
 
-start-prod-no-logs: export DISABLE_LOGGING_AND_METRICS = true
-start-prod-no-logs: start-prod
+start-ci: export DISABLE_LOGGING_AND_METRICS = true
+start-ci: start-prod
 
 # dev #########################################
 
