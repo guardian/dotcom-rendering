@@ -129,10 +129,16 @@ tsc: clean-dist install
 	$(call log, "checking for type errors")
 	@tsc
 
-fix: clear clean-dist install
+lint-fix:
 	$(call log, "attempting to fix lint errors")
 	@yarn lint:fix
+
+prettier:
+	$(call log, "attempting to fix prettier errors")
 	@cd .. && yarn prettier:write
+
+fix: clear clean-dist install lint-fix prettier
+	$(call log, "everything fixed")
 
 snapshot: clear clean-dist install
 	$(call log, "taking snapshots")
