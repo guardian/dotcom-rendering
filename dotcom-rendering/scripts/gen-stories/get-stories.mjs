@@ -133,11 +133,11 @@ const generateLayoutStory = (displayName, designName, theme, config) => {
 			config,
 		)} };
 		${storyVariableName + 'Light'}.decorators = [lightDecorator(
-				{
+				[{
 					display:  ArticleDisplay.${displayName},
 					design: ArticleDesign.${designName},
 					theme: {...ArticleSpecial, ...Pillar}.${theme.replace('Pillar', '')},
-				}
+				}]
 			),
 		];
 
@@ -160,11 +160,11 @@ const generateLayoutStory = (displayName, designName, theme, config) => {
 			config,
 		)} };
 		${storyVariableName + `Dark`}.decorators = [darkDecorator(
-				{
+				[{
 					display:  ArticleDisplay.${displayName},
 					design: ArticleDesign.${designName},
 					theme: {...ArticleSpecial, ...Pillar}.${theme.replace('Pillar', '')},
-				}
+				}]
 			),
 		];`
 				: ''
