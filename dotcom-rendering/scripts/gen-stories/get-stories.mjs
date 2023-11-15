@@ -112,7 +112,8 @@ export const Readme = () => <ReadMe />;
  */
 const generateLayoutStory = (displayName, designName, theme, config) => {
 	const { darkModeAvailable, renderingTarget } = config;
-	const storyVariableName = renderingTarget + displayName + designName + theme;
+	const storyVariableName =
+		renderingTarget + displayName + designName + theme;
 
 	return `
 		export const ${storyVariableName + 'Light'} = () => {
@@ -125,8 +126,12 @@ const generateLayoutStory = (displayName, designName, theme, config) => {
 				/>
 			);
 		};
-		${storyVariableName + 'Light'}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}, Mode: Light';
-		${storyVariableName + 'Light'}.parameters = { config: ${JSON.stringify(config)} };
+		${
+			storyVariableName + 'Light'
+		}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}, Mode: Light';
+		${storyVariableName + 'Light'}.parameters = { config: ${JSON.stringify(
+			config,
+		)} };
 		${storyVariableName + 'Light'}.decorators = [lightDecorator(
 				{
 					display:  ArticleDisplay.${displayName},
@@ -136,8 +141,9 @@ const generateLayoutStory = (displayName, designName, theme, config) => {
 			),
 		];
 
-		${darkModeAvailable ?
-		`export const ${storyVariableName + 'Dark'} = () => {
+		${
+			darkModeAvailable
+				? `export const ${storyVariableName + 'Dark'} = () => {
 			return (
 				<HydratedLayoutWrapper
 					displayName="${displayName}"
@@ -147,8 +153,12 @@ const generateLayoutStory = (displayName, designName, theme, config) => {
 				/>
 			);
 		};
-		${storyVariableName + `Dark`}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}, Mode: Dark';
-		${storyVariableName + `Dark`}.parameters = { config: ${JSON.stringify(config)} };
+		${
+			storyVariableName + `Dark`
+		}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}, Mode: Dark';
+		${storyVariableName + `Dark`}.parameters = { config: ${JSON.stringify(
+			config,
+		)} };
 		${storyVariableName + `Dark`}.decorators = [darkDecorator(
 				{
 					display:  ArticleDisplay.${displayName},
@@ -156,7 +166,9 @@ const generateLayoutStory = (displayName, designName, theme, config) => {
 					theme: {...ArticleSpecial, ...Pillar}.${theme.replace('Pillar', '')},
 				}
 			),
-		];` : "" }
+		];`
+				: ''
+		}
 	`;
 };
 
