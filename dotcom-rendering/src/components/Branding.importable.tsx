@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, textSans } from '@guardian/source-foundations';
+import { breakpoints, from, textSans } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../client/ga/ga';
 import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
-import { Hide } from './Hide';
+import { useConfig } from './ConfigContext';
 
 const brandingStyle = css`
 	padding-bottom: 10px;
@@ -63,49 +63,48 @@ const liveBlogAboutLinkStyle = css`
 	}
 `;
 
-function decideLogo(branding: BrandingType, format: ArticleFormat) {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			/**
+function decideLogo(
+	branding: BrandingType,
+	format: ArticleFormat,
+	darkModeAvailable: boolean,
+) {
+	/** logoForDarkBackground is not required on branding,
+	 *  so fallback to standard logo if not present */
+	const maybeDarkLogo = branding.logoForDarkBackground ?? branding.logo;
+
+	return (
+		<picture>
+			{/**
 			 * For LiveBlogs, the background colour of the 'meta' section is light
-			 * on desktop but dark on mobile. If the logo has a version designed for
+			 * from desktop but dark below desktop. If the logo has a version designed for
 			 * dark backgrounds, it should be shown on breakpoints below desktop.
-			 */
-			return (
-				<>
-					<Hide when="above" breakpoint="desktop" el="span">
-						<img
-							width={branding.logo.dimensions.width}
-							height={branding.logo.dimensions.height}
-							src={
-								branding.logoForDarkBackground?.src ??
-								branding.logo.src
-							}
-							alt={branding.sponsorName}
-						/>
-					</Hide>
-					<Hide when="below" breakpoint="desktop" el="span">
-						<img
-							width={branding.logo.dimensions.width}
-							height={branding.logo.dimensions.height}
-							src={branding.logo.src}
-							alt={branding.sponsorName}
-						/>
-					</Hide>
-				</>
-			);
-		}
-		default: {
-			return (
-				<img
-					width={branding.logo.dimensions.width}
-					height={branding.logo.dimensions.height}
-					src={branding.logo.src}
-					alt={branding.sponsorName}
+			 */}
+			{format.design === ArticleDesign.LiveBlog && (
+				<source
+					width={maybeDarkLogo.dimensions.width}
+					height={maybeDarkLogo.dimensions.height}
+					srcSet={maybeDarkLogo.src}
+					media={`(max-width: ${breakpoints.desktop - 1}px)`}
 				/>
-			);
-		}
-	}
+			)}
+			{/** High contrast logo if dark mode available & dark mode logo exists for branding */}
+			{darkModeAvailable && branding.logoForDarkBackground && (
+				<source
+					width={branding.logoForDarkBackground.dimensions.width}
+					height={branding.logoForDarkBackground.dimensions.height}
+					srcSet={branding.logoForDarkBackground.src}
+					media={'(prefers-color-scheme: dark)'}
+				/>
+			)}
+			{/** Default to standard logo for light backgrounds */}
+			<img
+				width={branding.logo.dimensions.width}
+				height={branding.logo.dimensions.height}
+				src={branding.logo.src}
+				alt={branding.sponsorName}
+			/>
+		</picture>
+	);
 }
 
 type Props = {
@@ -128,6 +127,8 @@ export const Branding = ({ branding, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
+	const { darkModeAvailable } = useConfig();
+
 	return (
 		<div css={brandingStyle}>
 			<div css={[labelStyle, isLiveBlog && liveBlogLabelStyle]}>
@@ -142,7 +143,7 @@ export const Branding = ({ branding, format }: Props) => {
 					onClick={() => trackSponsorLogoLinkClick(sponsorId)}
 					data-cy="branding-logo"
 				>
-					{decideLogo(branding, format)}
+					{decideLogo(branding, format, darkModeAvailable)}
 				</a>
 			</div>
 
