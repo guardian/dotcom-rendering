@@ -1,3 +1,4 @@
+import React from 'react';
 import { ConfigProvider } from '../../src/components/ConfigContext';
 import type { Decorator } from '@storybook/react';
 import { Config } from '../../src/types/configContext';
@@ -9,11 +10,8 @@ const defaultConfig = {
 
 export const ConfigContextDecorator: Decorator<{
 	config: Config;
-}> = (Story, { args: { config } }) => {
+}> = (Story, { parameters: { config } }) => {
 	const context = { ...defaultConfig, ...config };
-
-	// For easy debugging
-	console.log('Storybook application config: \n', context);
 
 	return (
 		<ConfigProvider value={context}>

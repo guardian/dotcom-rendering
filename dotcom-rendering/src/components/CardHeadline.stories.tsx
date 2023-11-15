@@ -1,4 +1,3 @@
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -7,6 +6,7 @@ import {
 } from '@guardian/libs';
 import { breakpoints, palette } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
+import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { DCRContainerPalette } from '../types/front';
 import { CardHeadline } from './CardHeadline';
@@ -27,26 +27,26 @@ const smallHeadlineSizes: SmallHeadlineSize[] = [
 	'tiny',
 ];
 
-export const Article = () => (
+export const Article: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how an Article card headline looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 		/>
 	</Section>
 );
 Article.storyName = 'Article';
+Article.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-const specialReport = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Analysis,
-	theme: ArticleSpecial.SpecialReport,
-} satisfies ArticleFormat;
-export const Analysis = () => (
+export const Analysis: StoryObj = ({ format }: StoryProps) => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
@@ -56,95 +56,75 @@ export const Analysis = () => (
 					showSideBorders={false}
 				>
 					<CardHeadline
-						headlineText={`This is how a ${size} Analysis card headline looks`}
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Analysis,
-							theme: Pillar.News,
-						}}
+						headlineText={`This is how a ${size} ${
+							Pillar[format.theme] ??
+							ArticleSpecial[format.theme] ??
+							'Unknown'
+						} card headline looks`}
+						format={format}
 						size={size}
 					/>
 				</Section>
-				<br />
 			</div>
 		))}
-		<br />
-		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-			<CardHeadline
-				headlineText="This is how an Sport Analysis card headline looks"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Analysis,
-					theme: Pillar.Sport,
-				}}
-			/>
-		</Section>
-		<br />
-		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-			<CardHeadline
-				headlineText="This is how an Culture Analysis card headline looks"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Analysis,
-					theme: Pillar.Culture,
-				}}
-			/>
-		</Section>
-		<br />
-		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-			<CardHeadline
-				headlineText="This is how an Opinion Analysis card headline looks"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Analysis,
-					theme: Pillar.Opinion,
-				}}
-			/>
-		</Section>
-		<br />
-		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-			<CardHeadline
-				headlineText="This is how an Lifestyle Analysis card headline looks"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Analysis,
-					theme: Pillar.Lifestyle,
-				}}
-			/>
-		</Section>
-		<br />
-		<Section
-			fullWidth={true}
-			showTopBorder={false}
-			showSideBorders={false}
-			backgroundColour={palette.specialReport[300]}
-		>
-			<ContainerOverrides isDynamo={false}>
-				<CardHeadline
-					headlineText="This is how an Special Report Analysis card headline looks"
-					format={specialReport}
-				/>
-			</ContainerOverrides>
-		</Section>
 	</>
 );
 Analysis.storyName = 'Analysis';
+Analysis.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: Pillar.News,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: Pillar.Sport,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: Pillar.Culture,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: Pillar.Opinion,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: Pillar.Lifestyle,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: ArticleSpecial.SpecialReport,
+		},
+	]),
+];
 
-export const Feature = () => (
+export const Feature: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a Feature card headline looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Feature,
-				theme: Pillar.News,
-			}}
+			format={format}
 		/>
 	</Section>
 );
 Feature.storyName = 'Feature';
+Feature.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const Size = () => (
+export const Size: StoryObj = ({ format }: StoryProps) => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
@@ -155,11 +135,7 @@ export const Size = () => (
 				>
 					<CardHeadline
 						headlineText={`This is how a ${size} card headline looks`}
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Standard,
-							theme: Pillar.News,
-						}}
+						format={format}
 						size={size}
 					/>
 				</Section>
@@ -169,8 +145,17 @@ export const Size = () => (
 	</>
 );
 Size.storyName = 'Size';
+Size.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const MobileSize = () => (
+export const MobileSize: StoryObj = ({ format }: StoryProps) => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
@@ -181,11 +166,7 @@ export const MobileSize = () => (
 				>
 					<CardHeadline
 						headlineText={`This is how a mobile ${size} card headline looks`}
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Standard,
-							theme: Pillar.News,
-						}}
+						format={format}
 						size="medium"
 						sizeOnMobile={size}
 					/>
@@ -195,94 +176,125 @@ export const MobileSize = () => (
 		))}
 	</>
 );
-MobileSize.storyName = 'MobileSize';
-MobileSize.story = {
-	parameters: {
-		chromatic: {
-			viewports: [breakpoints.mobile],
+MobileSize.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
 		},
+	]),
+];
+MobileSize.parameters = {
+	chromatic: {
+		viewports: [breakpoints.mobile],
 	},
 };
 
-export const liveStory = () => (
+export const liveStory: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a card headline with a live kicker looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 			kickerText="Live"
 		/>
 	</Section>
 );
 liveStory.storyName = 'With Live kicker';
+liveStory.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const noLineBreak = () => (
+export const noLineBreak: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a card headline with no kicker linebreak looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 			kickerText="Live"
 			hideLineBreak={true}
 		/>
 	</Section>
 );
 noLineBreak.storyName = 'With Live kicker but no line break';
+noLineBreak.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const pulsingDot = () => (
+export const pulsingDot: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a card headline with a pulsing dot looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 			kickerText="Live"
 			showPulsingDot={true}
 		/>
 	</Section>
 );
 pulsingDot.storyName = 'With pulsing dot';
+pulsingDot.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const cultureVariant = () => (
+export const cultureVariant: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a Feature card headline with the culture pillar looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Feature,
-				theme: Pillar.Culture,
-			}}
+			format={format}
 			kickerText="Art and stuff"
 		/>
 	</Section>
 );
 cultureVariant.storyName = 'With a culture kicker';
+cultureVariant.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.Culture,
+		},
+	]),
+];
 
-export const Opinion = () => (
+export const Opinion: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how small card headline for opinion articles look"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: Pillar.Opinion,
-			}}
+			format={format}
 			showQuotes={true}
 			size="small"
 		/>
 	</Section>
 );
 Opinion.storyName = 'Opinion (Quotes)';
+Opinion.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.Opinion,
+		},
+	]),
+];
 
-export const OpinionKicker = () => (
+export const OpinionKicker: StoryObj = ({ format }: StoryProps) => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
@@ -293,11 +305,7 @@ export const OpinionKicker = () => (
 				>
 					<CardHeadline
 						headlineText={`This is how a ${size} opinion card headline with a kicker and quotes looks`}
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Standard,
-							theme: Pillar.Opinion,
-						}}
+						format={format}
 						showQuotes={true}
 						kickerText="George Monbiot"
 						size={size}
@@ -309,12 +317,17 @@ export const OpinionKicker = () => (
 	</>
 );
 OpinionKicker.storyName = 'With an opinion kicker';
+OpinionKicker.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Opinion,
+		},
+	]),
+];
 
-export const SpecialReport: StoryObj = ({
-	format,
-}: {
-	format: ArticleFormat;
-}) => (
+export const SpecialReport: StoryObj = ({ format }: StoryProps) => (
 	<Section
 		fullWidth={true}
 		showTopBorder={false}
@@ -332,31 +345,38 @@ export const SpecialReport: StoryObj = ({
 	</Section>
 );
 SpecialReport.storyName = 'With theme SpecialReport';
-SpecialReport.args = {
-	format: {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticleSpecial.SpecialReport,
-	},
-};
+SpecialReport.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.SpecialReport,
+		},
+	]),
+];
 
-export const Busy = () => (
+export const Busy: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="I look life a buffoon. I feel incredible. And then I vomit"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Feature,
-				theme: Pillar.Lifestyle,
-			}}
+			format={format}
 			showQuotes={true}
 			kickerText="Aerial Yoga"
 		/>
 	</Section>
 );
 Busy.storyName = 'Lifestyle opinion';
+Busy.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
-export const Byline: StoryObj = ({ format }: { format: ArticleFormat }) => (
+export const Byline: StoryObj = ({ format }: StoryProps) => (
 	<Section
 		fullWidth={true}
 		showSideBorders={false}
@@ -435,11 +455,7 @@ const containerPalettes = [
 	'MediaPalette',
 	'PodcastPalette',
 ] as const satisfies readonly DCRContainerPalette[];
-export const WithContainerOverrides: StoryObj = ({
-	format,
-}: {
-	format: ArticleFormat;
-}) => (
+export const WithContainerOverrides: StoryObj = ({ format }: StoryProps) => (
 	<>
 		{containerPalettes.map((containerPalette) => (
 			<Section

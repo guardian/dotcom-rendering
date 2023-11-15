@@ -119,11 +119,9 @@ You may want local identity cookies to be available in `dotcom-rendering`. To en
 ## Production
 
 -   `make build` creates production-ready bundles.
--   `make start` starts the production server.
+-   `make prod` starts the production server.
 
-You may need to run these with `sudo`
-
-Production environment uses `pm2`. More scripts can be found in the `makefile` [scripts](https://github.com/guardian/dotcom-rendering/blob/e2c020f7e0ed24751ea729eec93f1271d37e3b50/makefile#L31)
+More scripts can be found in the `makefile` prod section [scripts](https://github.com/guardian/dotcom-rendering/blob/main/makefile)
 
 The production port default is 9000 for deployment, but to run locally alongside frontend, you will need to manually override. To hit the server, add
 

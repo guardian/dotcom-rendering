@@ -180,3 +180,5 @@ export const splitTheme =
 			</div>
 		</div>
 	);
+
+export type StoryProps = { format: ArticleFormat };

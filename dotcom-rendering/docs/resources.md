@@ -33,8 +33,3 @@
 -   https://expressjs.com/en/guide/error-handling.html
 -   https://expressjs.com/en/guide/debugging.html
 -   https://expressjs.com/en/advanced/best-practice-performance.html
-
-## Pm2
-
--   https://pm2.io/doc/en/runtime/guide/process-management/
--   https://pm2.io/doc/en/runtime/guide/log-management/
