@@ -41,7 +41,7 @@ const colourSchemeDecorator =
 export const lightDecorator = colourSchemeDecorator('light');
 export const darkDecorator = colourSchemeDecorator('dark');
 
-export const myThemeDecorator =
+export const browserThemeDecorator =
 	(format: ArticleFormat): Decorator =>
 	(Story) => (
 		<>

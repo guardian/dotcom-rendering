@@ -12,8 +12,8 @@ import {
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
+	browserThemeDecorator,
 	lightDecorator,
-	myThemeDecorator,
 } from '../../.storybook/decorators/themeDecorator';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import type { Branding as BrandingType } from '../types/branding';
@@ -179,7 +179,7 @@ export const BrandingStory: StoryObj = ({ format }: StoryArgs) => {
 };
 BrandingStory.storyName = 'Branding';
 BrandingStory.args = { format: defaultFormat };
-BrandingStory.decorators = [myThemeDecorator(defaultFormat)];
+BrandingStory.decorators = [browserThemeDecorator(defaultFormat)];
 
 export const BrandingLiveBlog: StoryObj = ({ format }: StoryArgs) => {
 	return (

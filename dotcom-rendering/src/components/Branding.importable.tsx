@@ -4,6 +4,7 @@ import { breakpoints, from, textSans } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../client/ga/ga';
 import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
+import { useConfig } from './ConfigContext';
 
 const brandingStyle = css`
 	padding-bottom: 10px;
@@ -62,7 +63,11 @@ const liveBlogAboutLinkStyle = css`
 	}
 `;
 
-function decideLogo(branding: BrandingType, format: ArticleFormat) {
+function decideLogo(
+	branding: BrandingType,
+	format: ArticleFormat,
+	darkModeAvailable: boolean,
+) {
 	/** logoForDarkBackground is not required on branding,
 	 *  so fallback to standard logo if not present */
 	const maybeDarkLogo = branding.logoForDarkBackground ?? branding.logo;
@@ -83,12 +88,14 @@ function decideLogo(branding: BrandingType, format: ArticleFormat) {
 				/>
 			)}
 			{/** High contrast logo for dark backgrounds */}
-			<source
-				width={maybeDarkLogo.dimensions.width}
-				height={maybeDarkLogo.dimensions.height}
-				srcSet={maybeDarkLogo.src}
-				media={'(prefers-color-scheme: dark)'}
-			/>
+			{darkModeAvailable && (
+				<source
+					width={maybeDarkLogo.dimensions.width}
+					height={maybeDarkLogo.dimensions.height}
+					srcSet={maybeDarkLogo.src}
+					media={'(prefers-color-scheme: dark)'}
+				/>
+			)}
 			{/** Standard logo for light backgrounds */}
 			<source
 				width={branding.logo.dimensions.width}
@@ -127,6 +134,8 @@ export const Branding = ({ branding, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
+	const { darkModeAvailable } = useConfig();
+
 	return (
 		<div css={brandingStyle}>
 			<div css={[labelStyle, isLiveBlog && liveBlogLabelStyle]}>
@@ -141,7 +150,7 @@ export const Branding = ({ branding, format }: Props) => {
 					onClick={() => trackSponsorLogoLinkClick(sponsorId)}
 					data-cy="branding-logo"
 				>
-					{decideLogo(branding, format)}
+					{decideLogo(branding, format, darkModeAvailable)}
 				</a>
 			</div>
 
