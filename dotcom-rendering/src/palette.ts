@@ -75,6 +75,8 @@ const bylineLight = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Analysis:
 			return sourcePalette.neutral[46];
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 			switch (theme) {
