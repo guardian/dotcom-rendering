@@ -1,11 +1,8 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
-import { getAllThemes, getThemeNameAsString } from '../lib/format';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
+import { getAllThemes } from '../lib/format';
 import { SubMeta } from './SubMeta';
 
 export default {
@@ -58,15 +55,16 @@ const subMetaSectionLinks = [
 	},
 ];
 
-export const News = () => {
+const allStandardThemes = getAllThemes({
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+});
+
+export const StandardStory = ({ format }: StoryProps) => {
 	return (
-		<Wrapper>
+		<Wrapper key={JSON.stringify(format)}>
 			<SubMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={format}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
 				pageId=""
@@ -77,17 +75,19 @@ export const News = () => {
 		</Wrapper>
 	);
 };
-News.storyName = 'News';
+StandardStory.storyName = 'Standard - All pillars';
+StandardStory.decorators = [lightDecorator(allStandardThemes)];
 
-export const Sport = () => {
+const allDeadBlogThemes = getAllThemes({
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.DeadBlog,
+});
+
+export const DeadBlogStory = ({ format }: StoryProps) => {
 	return (
-		<Wrapper>
+		<Wrapper key={JSON.stringify(format)}>
 			<SubMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.Sport,
-				}}
+				format={format}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
 				pageId=""
@@ -96,136 +96,7 @@ export const Sport = () => {
 				showBottomSocialButtons={true}
 			/>
 		</Wrapper>
-	);
-};
-Sport.storyName = 'Sport';
-
-export const Culture = () => {
-	return (
-		<Wrapper>
-			<SubMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.Culture,
-				}}
-				subMetaKeywordLinks={subMetaKeywordLinks}
-				subMetaSectionLinks={subMetaSectionLinks}
-				pageId=""
-				webUrl=""
-				webTitle=""
-				showBottomSocialButtons={true}
-			/>
-		</Wrapper>
-	);
-};
-Culture.storyName = 'Culture';
-
-export const Lifestyle = () => {
-	return (
-		<Wrapper>
-			<SubMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.Lifestyle,
-				}}
-				subMetaKeywordLinks={subMetaKeywordLinks}
-				subMetaSectionLinks={subMetaSectionLinks}
-				pageId=""
-				webUrl=""
-				webTitle=""
-				showBottomSocialButtons={true}
-			/>
-		</Wrapper>
-	);
-};
-Lifestyle.storyName = 'Lifestyle';
-
-export const Opinion = () => {
-	return (
-		<Wrapper>
-			<SubMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.Opinion,
-				}}
-				subMetaKeywordLinks={subMetaKeywordLinks}
-				subMetaSectionLinks={subMetaSectionLinks}
-				pageId=""
-				webUrl=""
-				webTitle=""
-				showBottomSocialButtons={true}
-			/>
-		</Wrapper>
-	);
-};
-Opinion.storyName = 'Opinion';
-
-export const Labs = () => {
-	return (
-		<Wrapper>
-			<SubMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticleSpecial.Labs,
-				}}
-				subMetaKeywordLinks={subMetaKeywordLinks}
-				subMetaSectionLinks={subMetaSectionLinks}
-				pageId=""
-				webUrl=""
-				webTitle=""
-				showBottomSocialButtons={true}
-			/>
-		</Wrapper>
-	);
-};
-Labs.storyName = 'Labs';
-
-export const SpecialReport = () => {
-	return (
-		<Wrapper>
-			<SubMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticleSpecial.SpecialReport,
-				}}
-				subMetaKeywordLinks={subMetaKeywordLinks}
-				subMetaSectionLinks={subMetaSectionLinks}
-				pageId=""
-				webUrl=""
-				webTitle=""
-				showBottomSocialButtons={true}
-			/>
-		</Wrapper>
-	);
-};
-SpecialReport.storyName = 'SpecialReport';
-
-export const DeadBlogStory = () => {
-	return (
-		<>
-			{getAllThemes({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.DeadBlog,
-			}).map((format) => (
-				<Wrapper key={JSON.stringify(format)}>
-					<p>{getThemeNameAsString(format)}</p>
-					<SubMeta
-						format={format}
-						subMetaKeywordLinks={subMetaKeywordLinks}
-						subMetaSectionLinks={subMetaSectionLinks}
-						pageId=""
-						webUrl=""
-						webTitle=""
-						showBottomSocialButtons={true}
-					/>
-				</Wrapper>
-			))}
-		</>
 	);
 };
 DeadBlogStory.storyName = 'Deadblog - All pillars';
+DeadBlogStory.decorators = [lightDecorator(allDeadBlogThemes)];
