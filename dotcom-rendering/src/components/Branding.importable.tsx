@@ -1,63 +1,34 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { neutral, textSans, until } from '@guardian/source-foundations';
+import { from, textSans } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../client/ga/ga';
+import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
-import type { Palette } from '../types/palette';
 import { Hide } from './Hide';
 
 const brandingStyle = css`
 	padding-bottom: 10px;
 `;
 
-/**
- * for liveblog smaller breakpoints article meta is located in the same
- * container as standfirst and needs the same styling as standfirst
- **/
-function brandingLabelStyle(palette: Palette, format: ArticleFormat) {
-	const invariantStyles = css`
-		${textSans.xxsmall()}
-	`;
+const labelStyle = css`
+	${textSans.xxsmall()}
+	color: ${palette('--branding-label-text')};
 
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			return [
-				invariantStyles,
-				css`
-					color: ${neutral[20]};
-
-					${until.desktop} {
-						color: ${palette.text.standfirst};
-					}
-
-					a {
-						color: ${neutral[20]};
-
-						${until.desktop} {
-							color: ${palette.text.standfirst};
-						}
-					}
-				`,
-			];
-		}
-		default: {
-			return [
-				invariantStyles,
-				css`
-					color: ${neutral[20]};
-
-					a {
-						color: ${neutral[20]};
-					}
-				`,
-			];
-		}
+	a {
+		color: inherit;
 	}
-}
+`;
+
+const liveBlogLabelStyle = css`
+	color: ${palette('--standfirst-text')};
+
+	${from.desktop} {
+		color: ${palette('--branding-label-text')};
+	}
+`;
 
 const brandingLogoStyle = css`
 	padding: 10px 0;
-
 	display: block;
 
 	& img {
@@ -65,51 +36,32 @@ const brandingLogoStyle = css`
 	}
 `;
 
+const aboutLinkStyle = css`
+	${textSans.xxsmall()}
+	display: block;
+	text-decoration: none;
+
+	color: ${palette('--branding-link-text')};
+	a {
+		color: inherit;
+	}
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
 /**
  * for liveblog smaller breakpoints article meta is located in the same
  * container as standfirst and needs the same styling as standfirst
  **/
-const brandingAboutLink = (palette: Palette, format: ArticleFormat) => {
-	const invariantStyles = css`
-		${textSans.xxsmall()}
-		display: block;
-		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
-	`;
+const liveBlogAboutLinkStyle = css`
+	color: ${palette('--standfirst-text')};
 
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			return [
-				invariantStyles,
-				css`
-					color: ${palette.text.branding};
-					${until.desktop} {
-						color: ${palette.text.standfirst};
-					}
-					a {
-						color: ${palette.text.branding};
-						${until.desktop} {
-							color: ${palette.text.standfirst};
-						}
-					}
-				`,
-			];
-		}
-		default: {
-			return [
-				invariantStyles,
-				css`
-					color: ${palette.text.branding};
-					a {
-						color: ${palette.text.branding};
-					}
-				`,
-			];
-		}
+	${from.desktop} {
+		color: ${palette('--branding-link-text')};
 	}
-};
+`;
 
 function decideLogo(branding: BrandingType, format: ArticleFormat) {
 	switch (format.design) {
@@ -158,7 +110,6 @@ function decideLogo(branding: BrandingType, format: ArticleFormat) {
 
 type Props = {
 	branding: BrandingType;
-	palette: Palette;
 	format: ArticleFormat;
 };
 
@@ -173,12 +124,13 @@ type Props = {
  *
  * (No visual story exists)
  */
-export const Branding = ({ branding, palette, format }: Props) => {
+export const Branding = ({ branding, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
+	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
 	return (
 		<div css={brandingStyle}>
-			<div css={brandingLabelStyle(palette, format)}>
+			<div css={[labelStyle, isLiveBlog && liveBlogLabelStyle]}>
 				{branding.logo.label}
 			</div>
 			<div css={brandingLogoStyle}>
@@ -196,7 +148,7 @@ export const Branding = ({ branding, palette, format }: Props) => {
 
 			<a
 				href={branding.aboutThisLink}
-				css={brandingAboutLink(palette, format)}
+				css={[aboutLinkStyle, isLiveBlog && liveBlogAboutLinkStyle]}
 			>
 				About this content
 			</a>

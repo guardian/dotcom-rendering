@@ -13,6 +13,31 @@ import { decidePalette } from './lib/decidePalette';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
+/**
+ * Picks a lightness of colour for a palette corresponding to the given pillar
+ * N.b. it does not handle non-pillar themes
+ * @param pillar
+ * @param lightness
+ */
+const pillarPalette = (
+	pillar: Pillar,
+	lightness: 100 | 200 | 300 | 400 | 500 | 600 | 800,
+): string => {
+	switch (pillar) {
+		case Pillar.News:
+			return sourcePalette.news[lightness];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[lightness];
+		case Pillar.Sport:
+			return sourcePalette.sport[lightness];
+		case Pillar.Culture:
+			return sourcePalette.culture[lightness];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[lightness];
+		default:
+			return sourcePalette.news[lightness];
+	}
+};
 
 const headlineColourLight = ({ design }: ArticleFormat): string => {
 	switch (design) {
@@ -393,6 +418,74 @@ const clickToViewButtonTextDark = (): string => sourcePalette.neutral[7];
 const clickToViewButtonHoverLight = (): string =>
 	buttonThemeDefault.button.backgroundPrimaryHover;
 const clickToViewButtonHoverDark = (): string => sourcePalette.neutral[86];
+
+const brandingLabelLight = (): string => sourcePalette.neutral[20];
+const brandingLabelDark = (): string => sourcePalette.neutral[86];
+const brandingLinkLight = ({ design, theme }: ArticleFormat): string => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[7];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		case Pillar.News:
+			switch (design) {
+				case ArticleDesign.Analysis:
+					return sourcePalette.news[300];
+				default:
+					return sourcePalette.news[400];
+			}
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+const brandingLinkDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+			}
+		default:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[500];
+			}
+	}
+};
 
 const standfirstBulletDark = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
@@ -1170,6 +1263,14 @@ const paletteColours = {
 	'--summary-event-bullet-hover': {
 		light: summaryEventBulletHoverLight,
 		dark: summaryEventBulletHoverDark,
+	},
+	'--branding-label-text': {
+		light: brandingLabelLight,
+		dark: brandingLabelDark,
+	},
+	'--branding-link-text': {
+		light: brandingLinkLight,
+		dark: brandingLinkDark,
 	},
 } satisfies PaletteColours;
 
