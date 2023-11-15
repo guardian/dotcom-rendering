@@ -9,11 +9,14 @@ import {
 	breakpoints,
 	palette as sourcePalette,
 } from '@guardian/source-foundations';
+import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import type { Branding as BrandingType } from '../types/branding';
 import { ArticleMeta } from './ArticleMeta';
+
+type StoryArgs = { format: ArticleFormat };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -72,17 +75,17 @@ export default {
 	title: 'Components/ArticleMeta',
 };
 
-const defaultFormat = {
+const defaultFormat: ArticleFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
 	theme: Pillar.News,
 };
 
-export const ArticleStory = () => {
+export const ArticleStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={defaultFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -98,12 +101,13 @@ export const ArticleStory = () => {
 	);
 };
 ArticleStory.storyName = 'Article';
+ArticleStory.args = { format: defaultFormat };
 
-export const ArticleAppsStory = () => {
+export const ArticleAppsStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={defaultFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -119,7 +123,10 @@ export const ArticleAppsStory = () => {
 	);
 };
 /** @see /dotcom-rendering/docs/development/storybook.md */
-ArticleAppsStory.args = { config: { renderingTarget: 'Apps' } };
+ArticleAppsStory.args = {
+	config: { renderingTarget: 'Apps' },
+	format: defaultFormat,
+};
 ArticleAppsStory.decorators = [lightDecorator(defaultFormat)];
 
 const branding: BrandingType = {
@@ -147,7 +154,7 @@ const branding: BrandingType = {
 		'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
 };
 
-export const BrandingStory = ({ format }: { format: ArticleFormat }) => {
+export const BrandingStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
@@ -167,7 +174,8 @@ export const BrandingStory = ({ format }: { format: ArticleFormat }) => {
 		</Wrapper>
 	);
 };
-// BrandingStory.storyName = 'Branding';
+BrandingStory.storyName = 'Branding';
+BrandingStory.args = { format: defaultFormat };
 BrandingStory.decorators = [
 	splitTheme([
 		defaultFormat,
@@ -179,7 +187,7 @@ BrandingStory.decorators = [
 	]),
 ];
 
-export const BrandingLiveBlog = ({ format }: { format: ArticleFormat }) => {
+export const BrandingLiveBlog: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<div
 			css={css`
@@ -206,6 +214,7 @@ export const BrandingLiveBlog = ({ format }: { format: ArticleFormat }) => {
 	);
 };
 BrandingLiveBlog.storyName = 'Branding - LiveBlog';
+BrandingLiveBlog.args = { format: defaultFormat };
 BrandingLiveBlog.parameters = {
 	viewport: {
 		defaultViewport: 'tablet',
@@ -227,11 +236,11 @@ const featureFormat = {
 	design: ArticleDesign.Feature,
 	theme: Pillar.Culture,
 };
-export const FeatureStory = () => {
+export const FeatureStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={featureFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -248,12 +257,15 @@ export const FeatureStory = () => {
 };
 FeatureStory.storyName = 'Feature';
 FeatureStory.decorators = [lightDecorator(featureFormat)];
+FeatureStory.args = { format: featureFormat };
 
-export const FeatureWithMismatchedContributor = () => {
+export const FeatureWithMismatchedContributor: StoryObj = ({
+	format,
+}: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={featureFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Gabriel Smith"
@@ -270,12 +282,16 @@ export const FeatureWithMismatchedContributor = () => {
 };
 FeatureWithMismatchedContributor.storyName =
 	'Feature with a byline mismatching the contributor tag';
+FeatureWithMismatchedContributor.decorators = [lightDecorator(featureFormat)];
+FeatureWithMismatchedContributor.args = { format: featureFormat };
 
-export const FeatureStoryWithSmallBylineImage = () => {
+export const FeatureStoryWithSmallBylineImage: StoryObj = ({
+	format,
+}: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={featureFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Nicola Slawson"
@@ -291,17 +307,19 @@ export const FeatureStoryWithSmallBylineImage = () => {
 	);
 };
 FeatureStoryWithSmallBylineImage.storyName = 'Feature with Small Byline Image';
+FeatureStoryWithSmallBylineImage.decorators = [lightDecorator(featureFormat)];
+FeatureStoryWithSmallBylineImage.args = { format: featureFormat };
 
 const specialReportFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Feature,
 	theme: ArticleSpecial.SpecialReport,
 };
-export const SpecialReportStory = () => {
+export const SpecialReportStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={specialReportFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -318,17 +336,18 @@ export const SpecialReportStory = () => {
 };
 SpecialReportStory.storyName = 'SpecialReport';
 SpecialReportStory.decorators = [lightDecorator(specialReportFormat)];
+SpecialReportStory.args = { format: specialReportFormat };
 
 const specialReportAltFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Feature,
 	theme: ArticleSpecial.SpecialReportAlt,
 };
-export const SpecialReportAlt = () => {
+export const SpecialReportAlt: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={specialReportAltFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -345,17 +364,18 @@ export const SpecialReportAlt = () => {
 };
 SpecialReportAlt.storyName = 'SpecialReportAlt';
 SpecialReportAlt.decorators = [lightDecorator(specialReportAltFormat)];
+SpecialReportAlt.args = { format: specialReportAltFormat };
 
 const commentFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Comment,
 	theme: Pillar.Opinion,
 };
-export const CommentStory = () => {
+export const CommentStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={commentFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -371,17 +391,19 @@ export const CommentStory = () => {
 	);
 };
 CommentStory.storyName = 'Comment';
+CommentStory.decorators = [lightDecorator(commentFormat)];
+CommentStory.args = { format: commentFormat };
 
 const interviewFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Interview,
 	theme: Pillar.Lifestyle,
 };
-export const InterviewStory = () => {
+export const InterviewStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={interviewFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -398,17 +420,18 @@ export const InterviewStory = () => {
 };
 InterviewStory.storyName = 'Interview';
 InterviewStory.decorators = [lightDecorator(interviewFormat)];
+InterviewStory.args = { format: interviewFormat };
 
 const immersiveFormat = {
 	display: ArticleDisplay.Immersive,
 	design: ArticleDesign.Standard,
 	theme: Pillar.News,
 };
-export const ImmersiveStory = () => {
+export const ImmersiveStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={immersiveFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -424,17 +447,19 @@ export const ImmersiveStory = () => {
 	);
 };
 ImmersiveStory.storyName = 'Immersive';
+ImmersiveStory.decorators = [lightDecorator(immersiveFormat)];
+ImmersiveStory.args = { format: immersiveFormat };
 
 const sportFeatureFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Feature,
 	theme: Pillar.Sport,
 };
-export const TwoContributorsStory = () => {
+export const TwoContributorsStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={sportFeatureFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -451,8 +476,9 @@ export const TwoContributorsStory = () => {
 };
 TwoContributorsStory.storyName = 'Feature, with two contributors';
 TwoContributorsStory.decorators = [lightDecorator(sportFeatureFormat)];
+TwoContributorsStory.args = { format: sportFeatureFormat };
 
-export const DeadBlogStory = () => {
+export const DeadBlogStory: StoryObj = () => {
 	return (
 		<>
 			{getAllThemes({
@@ -481,11 +507,11 @@ export const DeadBlogStory = () => {
 };
 DeadBlogStory.storyName = 'Deadblog - All pillars';
 
-export const Dateline = () => {
+export const Dateline: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={defaultFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -501,3 +527,4 @@ export const Dateline = () => {
 	);
 };
 Dateline.storyName = 'With no secondary dateline';
+Dateline.args = { format: defaultFormat };
