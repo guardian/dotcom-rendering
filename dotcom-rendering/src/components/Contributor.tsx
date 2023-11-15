@@ -4,6 +4,7 @@ import { from, headline, textSans, until } from '@guardian/source-foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
 import { decidePalette } from '../lib/decidePalette';
+import { palette as schemedPalette } from '../palette';
 import TwitterIcon from '../static/icons/twitter.svg';
 import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
@@ -43,34 +44,23 @@ const twitterHandleStyles = css`
 	display: inline-block;
 `;
 
-// for liveblog smaller breakpoints article meta is located in the same
-// container as standfirst and needs the same styling as standfirst
-const bylineColorStyles = (palette: Palette, format: ArticleFormat) => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			return css`
-				color: ${palette.text.byline};
-				${until.desktop} {
-					color: ${palette.text.standfirst};
-				}
-				a {
-					color: ${palette.text.byline};
-					${until.desktop} {
-						color: ${palette.text.standfirst};
-					}
-				}
-			`;
-		}
-		default: {
-			return css`
-				color: ${palette.text.byline};
-				a {
-					color: ${palette.text.byline};
-				}
-			`;
-		}
+const bylineColorStyles = css`
+	color: ${schemedPalette('--byline')};
+
+	a {
+		color: inherit;
 	}
-};
+`;
+
+/**
+ * for liveblog smaller breakpoints article meta is located in the same
+ * container as standfirst and needs the same styling as standfirst
+ */
+const bylineLiveblogColour = css`
+	${until.desktop} {
+		color: ${schemedPalette('--standfirst-text')};
+	}
+`;
 
 const bylineStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs
@@ -117,7 +107,9 @@ export const Contributor = ({ byline, tags, format }: Props) => {
 					}
 					css={[
 						bylineStyles(format),
-						bylineColorStyles(palette, format),
+						bylineColorStyles,
+						format.design === ArticleDesign.LiveBlog &&
+							bylineLiveblogColour,
 					]}
 				>
 					<BylineLink byline={byline} tags={tags} format={format} />

@@ -7,7 +7,6 @@ export type Palette = {
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		seriesTitleWhenMatch: Colour;
-		byline: Colour;
 		twitterHandle: Colour;
 		twitterHandleBelowDesktop: Colour;
 		subMeta: Colour;
@@ -17,7 +16,6 @@ export type Palette = {
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		cardHeadline: Colour;
-		cardByline: Colour;
 		cardKicker: Colour;
 		dynamoHeadline: Colour;
 		dynamoKicker: Colour;
@@ -128,7 +126,6 @@ export type Palette = {
 		card: Colour;
 	};
 	hover: {
-		headlineByline: Colour;
 		standfirstLink: Colour;
 		pagination: Colour;
 	};

@@ -107,17 +107,14 @@ const bylineLight = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Standard:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[400];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
 				case Pillar.Sport:
-					return sourcePalette.sport[400];
 				case Pillar.Culture:
-					return sourcePalette.culture[400];
+					return pillarPalette(theme, 400);
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.neutral[7];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -126,17 +123,14 @@ const bylineLight = ({ design, theme }: ArticleFormat): string => {
 		default:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[400];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
 				case Pillar.Sport:
-					return sourcePalette.sport[400];
 				case Pillar.Culture:
-					return sourcePalette.culture[400];
+					return pillarPalette(theme, 400);
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.neutral[7];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
