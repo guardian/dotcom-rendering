@@ -177,6 +177,7 @@ export const BrandingStory: StoryObj = ({ format }: StoryArgs) => {
 };
 BrandingStory.storyName = 'Branding';
 BrandingStory.args = { format: defaultFormat };
+BrandingStory.parameters = { config: { darkModeAvailable: true } };
 BrandingStory.decorators = [browserThemeDecorator(defaultFormat)];
 
 export const BrandingLiveBlog: StoryObj = ({ format }: StoryArgs) => {
@@ -217,6 +218,7 @@ BrandingLiveBlog.parameters = {
 		defaultViewport: 'tablet',
 	},
 	chromatic: { viewports: [breakpoints.tablet] },
+	config: { darkModeAvailable: true },
 };
 BrandingLiveBlog.decorators = [
 	splitTheme([
