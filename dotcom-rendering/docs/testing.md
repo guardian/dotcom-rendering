@@ -79,7 +79,7 @@ By using mocked data and endpoints, we increase the speed that tests execute at 
 
 ### How to run locally
 
-Running Cypress locally requires having a DCR server running. To run the CI server locally, you can run `make run-ci`. The Cypress server should automatically re-load in response to changes in `.spec.` files, but the CI server will need to be re-built every time you want to update the DCR code itself, as opposed to the spec code. You can re-build DCR by re-running `make run-ci`.
+Running Cypress locally requires having a DCR server running. To run the CI server locally, you can run `make cypress`. The Cypress server should automatically re-load in response to changes in `.spec.` files, but the CI server will need to be re-built every time you want to update the DCR code itself, as opposed to the spec code. You can re-build DCR by re-running `make build`.
 
 To run Cypress in interactive mode (visually):
 

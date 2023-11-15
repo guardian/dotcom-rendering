@@ -1,4 +1,4 @@
-.PHONY: install dev dev-legacy build clean-dist start stop monitor clear
+.PHONY: install dev dev-legacy build clean-dist clear
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -32,45 +32,13 @@ build: clean-dist install
 	$(call log, "generating Islands report card")
 	@node ./scripts/islands/island-descriptions.mjs
 
-
-build-ci: clean-dist install
-	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
-
-start-ci: install
-	$(call log, "starting PROD server...")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.js
-
-start: install
-	$(call log, "starting PROD server...")
-	@echo '' # just a spacer
-	NODE_ENV=production pm2 start dist/server.js
-	@echo '' # just a spacer
-	$(call log, "PROD server is running")
-	@NODE_ENV=production pm2 logs
-
-# Used in cloudformation.yml which specifically:
-# - Launches pm2 from /usr/local/node rather than /node_modules
-start-prod:
+prod:
 	@echo 'starting PROD server...'
 	@echo '' # just a spacer
-	NODE_ENV=production /usr/local/node/pm2 start dist/server.js
-	@echo '' # just a spacer
-	@echo 'PROD server is running'
+	NODE_ENV=production node dist/server.js
 
-stop:
-	@pm2 kill
-
-monitor:
-	@pm2 monit
-
-logs:
-	@pm2 logs
-
-run: stop build start
-
-run-ci: stop build-ci start-ci
-
+ci: export DISABLE_LOGGING_AND_METRICS = true
+ci: prod
 
 # dev #########################################
 
