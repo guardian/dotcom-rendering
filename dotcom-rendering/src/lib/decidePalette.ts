@@ -1171,6 +1171,7 @@ const borderSubNav = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+/** @deprecated this has been moved to the theme palette */
 const borderLiveBlock = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
 		switch (format.theme) {

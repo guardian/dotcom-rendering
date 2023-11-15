@@ -1513,6 +1513,36 @@ const shareIconFillBlogLight = ({ design, theme }: ArticleFormat) => {
 };
 
 const shareIconFillBlogDark = () => sourcePalette.neutral[60];
+const liveBlockContainerBackgroundLight = () => sourcePalette.neutral[100];
+const liveBlockContainerBackgroundDark = () => sourcePalette.neutral[10];
+
+const liveBlockBorderTopLight = ({ design, theme }: ArticleFormat) => {
+	if (design === ArticleDesign.DeadBlog) {
+		switch (theme) {
+			case Pillar.Culture:
+				return sourcePalette.culture[350];
+			case Pillar.Opinion:
+				return sourcePalette.opinion[300];
+			default:
+				break;
+		}
+	}
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+
+const liveBlockBorderTopDark = () => sourcePalette.neutral[60];
+
+const liveBlockBorderBottomLight = () => sourcePalette.neutral[86];
+const liveBlockBorderBottomDark = () => sourcePalette.neutral[46];
 
 // ----- Palette ----- //
 
@@ -1790,6 +1820,18 @@ const paletteColours = {
 	'--share-icon-blog-fill': {
 		light: shareIconFillBlogLight,
 		dark: shareIconFillBlogDark,
+	},
+	'--live-block-container-background': {
+		light: liveBlockContainerBackgroundLight,
+		dark: liveBlockContainerBackgroundDark,
+	},
+	'--live-block-border-top': {
+		light: liveBlockBorderTopLight,
+		dark: liveBlockBorderTopDark,
+	},
+	'--live-block-border-bottom': {
+		light: liveBlockBorderBottomLight,
+		dark: liveBlockBorderBottomDark,
 	},
 } satisfies PaletteColours;
 
