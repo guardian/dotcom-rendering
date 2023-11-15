@@ -53,8 +53,6 @@ import {
 } from '../components/TopicFilterBank';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-// TODO: Can we get rid of this?
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
@@ -277,8 +275,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const { branding } = article.commercialProperties[article.editionId];
 
-	const palette = decidePalette(format);
-
 	const footballMatchUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchUrl
@@ -385,7 +381,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									'--article-background',
 								)}
 								padSides={false}
-								borderColour={palette.border.article}
+								borderColour={themePalette('--article-border')}
 								element="aside"
 							>
 								<Island
@@ -399,10 +395,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
-										linkHoverColour={
-											palette.text.articleLinkHover
-										}
-										borderColour={palette.border.subNav}
+										linkHoverColour={themePalette(
+											'--article-link-hover',
+										)}
+										borderColour={themePalette(
+											'--sub-nav-border',
+										)}
 									/>
 								</Island>
 							</Section>
@@ -415,7 +413,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							)}
 							padSides={false}
 							showTopBorder={false}
-							borderColour={palette.border.article}
+							borderColour={themePalette('--article-border')}
 						>
 							<StraightLines
 								count={4}
@@ -436,8 +434,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				{footballMatchUrl ? (
 					<Section
 						showTopBorder={false}
-						backgroundColour={palette.background.matchNav}
-						borderColour={palette.border.headline}
+						backgroundColour={themePalette(
+							'--match-nav-background',
+						)}
+						borderColour={themePalette('--headline-border')}
 						leftContent={
 							<ArticleTitle
 								format={format}
@@ -481,8 +481,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={palette.background.header}
-						borderColour={palette.border.headline}
+						backgroundColour={themePalette('--headline-background')}
+						borderColour={themePalette('--headline-border')}
 					>
 						<HeadlineGrid>
 							<GridItem area="title">
@@ -531,8 +531,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
-					backgroundColour={palette.background.standfirst}
-					borderColour={palette.border.standfirst}
+					backgroundColour={themePalette('--standfirst-background')}
+					borderColour={themePalette('--standfirst-border')}
 				>
 					<StandFirstGrid>
 						<GridItem area="standfirst">
@@ -605,7 +605,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						backgroundColour={themePalette(
 							'--key-event-background-desktop',
 						)}
-						borderColour={palette.border.article}
+						borderColour={themePalette('--article-border')}
 					>
 						<Hide until={'desktop'}>
 							<Island
@@ -624,7 +624,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
-					borderColour={palette.border.article}
+					borderColour={themePalette('--article-border')}
 					backgroundColour={themePalette('--article-background')}
 				>
 					<Hide until="desktop">
@@ -683,7 +683,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						fullWidth={true}
 						showTopBorder={false}
 						backgroundColour={themePalette('--article-background')}
-						borderColour={palette.border.article}
+						borderColour={themePalette('--article-border')}
 						padSides={false}
 					>
 						<LiveGrid>

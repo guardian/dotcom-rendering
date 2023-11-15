@@ -820,6 +820,7 @@ const backgroundCard = (format: ArticleFormat): string => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette (--headline-background) */
 const backgroundHeadline = (format: ArticleFormat): string => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
@@ -920,6 +921,7 @@ const backgroundHeader = (format: ArticleFormat): string => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette (--standfirst-background) */
 const backgroundStandfirst = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -1273,6 +1275,7 @@ const borderHeadline = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
+/** @deprecated this has been moved to the theme palette (--headline-border) */
 const borderStandfirst = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) {
 		return 'rgba(255,255,255, 0.2)';
@@ -1350,6 +1353,7 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette (--match-nav-background) */
 const backgroundMatchNav = (): string => {
 	return brandAlt[400];
 };
