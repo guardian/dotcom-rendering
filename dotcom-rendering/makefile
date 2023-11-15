@@ -32,13 +32,13 @@ build: clean-dist install
 	$(call log, "generating Islands report card")
 	@node ./scripts/islands/island-descriptions.mjs
 
-start-prod:
+prod:
 	@echo 'starting PROD server...'
 	@echo '' # just a spacer
 	NODE_ENV=production node dist/server.js
 
-start-ci: export DISABLE_LOGGING_AND_METRICS = true
-start-ci: start-prod
+ci: export DISABLE_LOGGING_AND_METRICS = true
+ci: prod
 
 # dev #########################################
 

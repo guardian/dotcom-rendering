@@ -119,7 +119,7 @@ You may want local identity cookies to be available in `dotcom-rendering`. To en
 ## Production
 
 -   `make build` creates production-ready bundles.
--   `make start-prod` starts the production server.
+-   `make prod` starts the production server.
 
 More scripts can be found in the `makefile` prod section [scripts](https://github.com/guardian/dotcom-rendering/blob/main/makefile)
 
