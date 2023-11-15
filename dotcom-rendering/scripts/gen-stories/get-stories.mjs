@@ -112,59 +112,52 @@ export const Readme = () => <ReadMe />;
  */
 const generateLayoutStory = (displayName, designName, theme, config) => {
 	const { darkModeAvailable, renderingTarget } = config;
-	const storyVariableName =
-		renderingTarget + displayName + designName + theme;
+	const storyVariableName = renderingTarget + displayName + designName + theme;
 
 	return `
-export const ${storyVariableName + 'Light'} = () => {
-	return (
-		<HydratedLayoutWrapper
-			displayName="${displayName}"
-			designName="${designName}"
-			theme="${theme}"
-			renderingTarget="${renderingTarget}"
-		/>
-	);
-};
-${
-	storyVariableName + 'Light'
-}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}, Mode: Light';
-${storyVariableName + 'Light'}.args = { config: ${JSON.stringify(config)} };
-${storyVariableName + 'Light'}.decorators = [lightDecorator(
-		{
-			display:  ArticleDisplay.${displayName},
-			design: ArticleDesign.${designName},
-			theme: {...ArticleSpecial, ...Pillar}.${theme.replace('Pillar', '')},
-		}
-	),
-];
+		export const ${storyVariableName + 'Light'} = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="${displayName}"
+					designName="${designName}"
+					theme="${theme}"
+					renderingTarget="${renderingTarget}"
+				/>
+			);
+		};
+		${storyVariableName + 'Light'}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}, Mode: Light';
+		${storyVariableName + 'Light'}.parameters = { config: ${JSON.stringify(config)} };
+		${storyVariableName + 'Light'}.decorators = [lightDecorator(
+				{
+					display:  ArticleDisplay.${displayName},
+					design: ArticleDesign.${designName},
+					theme: {...ArticleSpecial, ...Pillar}.${theme.replace('Pillar', '')},
+				}
+			),
+		];
 
-${
-	darkModeAvailable &&
-	`export const ${storyVariableName + `Dark`} = () => {
-	return (
-		<HydratedLayoutWrapper
-			displayName="${displayName}"
-			designName="${designName}"
-			theme="${theme}"
-			renderingTarget="${renderingTarget}"
-		/>
-	);
-};
-${
-	storyVariableName + `Dark`
-}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}, Mode: Dark';
-${storyVariableName + `Dark`}.args = { config: ${JSON.stringify(config)} };
-${storyVariableName + `Dark`}.decorators = [darkDecorator(
-		{
-			display:  ArticleDisplay.${displayName},
-			design: ArticleDesign.${designName},
-			theme: {...ArticleSpecial, ...Pillar}.${theme.replace('Pillar', '')},
-		}
-	),
-];`
-}
-`;
+		${darkModeAvailable ?
+		`export const ${storyVariableName + 'Dark'} = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="${displayName}"
+					designName="${designName}"
+					theme="${theme}"
+					renderingTarget="${renderingTarget}"
+				/>
+			);
+		};
+		${storyVariableName + `Dark`}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}, Mode: Dark';
+		${storyVariableName + `Dark`}.parameters = { config: ${JSON.stringify(config)} };
+		${storyVariableName + `Dark`}.decorators = [darkDecorator(
+				{
+					display:  ArticleDisplay.${displayName},
+					design: ArticleDesign.${designName},
+					theme: {...ArticleSpecial, ...Pillar}.${theme.replace('Pillar', '')},
+				}
+			),
+		];` : "" }
+	`;
 };
 
 /**
@@ -289,7 +282,7 @@ const saveStories = () => {
 	);
 
 	writeFileSync(README_FILE('Layout'), README_TEMPLATE('Layout'));
-	success(`[scripts/gen-stories] Saved Readme ${README_FILE('Card')}!`);
+	success(`[scripts/gen-stories] Saved Readme ${README_FILE('Layout')}!`);
 
 	const cardContents = generateCardStories();
 	writeFileSync(CARD_STORIES_FILE, cardContents);

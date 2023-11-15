@@ -123,10 +123,8 @@ export const ArticleAppsStory: StoryObj = ({ format }: StoryArgs) => {
 	);
 };
 /** @see /dotcom-rendering/docs/development/storybook.md */
-ArticleAppsStory.args = {
-	config: { renderingTarget: 'Apps' },
-	format: defaultFormat,
-};
+ArticleAppsStory.parameters = { config: { renderingTarget: 'Apps' } };
+ArticleAppsStory.args = { format: defaultFormat };
 ArticleAppsStory.decorators = [lightDecorator(defaultFormat)];
 
 const branding: BrandingType = {
