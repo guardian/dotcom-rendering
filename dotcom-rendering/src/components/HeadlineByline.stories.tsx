@@ -200,9 +200,24 @@ MultipleDuplicateStory.decorators = [
 	]),
 ];
 
-export const noBylineStory: StoryObj = ({ format }: StoryProps) => {
-	return <HeadlineByline format={format} byline="" tags={[]} />;
-};
+export const noBylineStory: StoryObj = ({ format }: StoryProps) => (
+	<div
+		css={css`
+			display: flex;
+			flex-direction: column;
+
+			p {
+				background-color: darkgreen;
+				color: aliceblue;
+				line-height: 2em;
+			}
+		`}
+	>
+		<p>👇 there should be no space between these boxes</p>
+		<HeadlineByline format={format} byline="" tags={[]} />
+		<p>👆 as and empty byline is transformed in a null</p>
+	</div>
+);
 noBylineStory.storyName = 'No byline';
 noBylineStory.decorators = [
 	splitTheme([
