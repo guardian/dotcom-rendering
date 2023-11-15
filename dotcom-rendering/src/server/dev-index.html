@@ -34,6 +34,17 @@
 	<body>
 		<h2>Default Endpoints</h2>
 
+		<form name="url-form">
+			<input
+				type="url"
+				name="url-input"
+				size="100"
+				required
+				placeholder="https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+			/>
+			<input type="submit" value="Add" />
+		</form>
+
 		<ul id="default-endpoints">
 			<li>
 				<a
@@ -386,52 +397,71 @@
 				else return 'Front';
 			};
 
+			/**
+			 * @typedef {'input' | 'clipboard'} Source
+			 * @param {Source} source
+			 * @return {string}
+			 */
+			const sourceIcon = (source) => {
+				switch (source) {
+					case 'input':
+						return '✍️';
+					case 'clipboard':
+						return '📋';
+				}
+			};
+
+			/**
+			 * @param {Source} source
+			 * @return {(text: string) => void}
+			 */
+			const addUrl = (source) => (text) => {
+				const guurl = [
+					'https://www.theguardian.com/',
+					'https://m.code.dev-theguardian.com/',
+					'http://localhost:9000/',
+				].find((base) => text.startsWith(base));
+				if (guurl) {
+					if (urls.has(text)) return;
+
+					urls.add(text);
+					const fragment = document.createDocumentFragment();
+					const li = document.createElement('li');
+					const a = document.createElement('a');
+					const slug = text.slice(guurl.length, 64);
+
+					const pageType = getPageType(text);
+					checkForClipboardAchievements(guurl, pageType);
+
+					a.setAttribute('href', `/${pageType}/${text}`);
+					a.innerText = `${sourceIcon(
+						source,
+					)} ${pageType} from ${source}: /${slug}…`;
+
+					li.appendChild(a);
+
+					if (pageType === 'Front') {
+						const aJSON = document.createElement('a');
+						aJSON.setAttribute('href', `/${pageType}JSON/${text}`);
+						aJSON.innerHTML = 'Enhanced JSON';
+						li.append(' (', aJSON, ')');
+					}
+
+					fragment.appendChild(li);
+
+					document
+						.querySelector('#default-endpoints')
+						?.appendChild(fragment);
+				}
+			};
+
 			const checkClipboard = (e) => {
 				if (document.visibilityState !== 'visible') return;
 				if (!navigator?.clipboard) return;
 				if (!document.hasFocus()) return;
 				if (typeof navigator.clipboard.readText !== 'function') return;
 
-				navigator.clipboard.readText().then((text) => {
-					const guurl = [
-						'https://www.theguardian.com/',
-						'https://m.code.dev-theguardian.com/',
-						'http://localhost:9000/',
-					].find((base) => text.startsWith(base));
-					if (guurl) {
-						if (urls.has(text)) return;
-
-						urls.add(text);
-						const fragment = document.createDocumentFragment();
-						const li = document.createElement('li');
-						const a = document.createElement('a');
-						const slug = text.slice(guurl.length, 64);
-
-						const pageType = getPageType(text);
-						checkForClipboardAchievements(guurl, pageType);
-
-						a.setAttribute('href', `/${pageType}/${text}`);
-						a.innerText = `📋 ${pageType} from clipboard: /${slug}…`;
-
-						li.appendChild(a);
-
-						if (pageType === 'Front') {
-							const aJSON = document.createElement('a');
-							aJSON.setAttribute(
-								'href',
-								`/${pageType}JSON/${text}`,
-							);
-							aJSON.innerHTML = 'Enhanced JSON';
-							li.append(' (', aJSON, ')');
-						}
-
-						fragment.appendChild(li);
-
-						document
-							.querySelector('#default-endpoints')
-							?.appendChild(fragment);
-					}
-				});
+				navigator.clipboard.readText().then(addUrl('clipboard'));
 			};
 
 			document.addEventListener('visibilitychange', checkClipboard);
@@ -612,6 +642,21 @@
 			};
 
 			pageViewAchievements();
+			document
+				.getElementsByName('url-form')[0]
+				?.addEventListener('submit', (event) => {
+					event.preventDefault();
+
+					if (event.target instanceof HTMLFormElement) {
+						const formData = new FormData(event.target);
+						const url = formData.get('url-input');
+
+						if (typeof url === 'string') {
+							addUrl('input')(url);
+							event.target.reset();
+						}
+					}
+				});
 		</script>
 		<style>
 			/* Olly N. (Nov. 2023)
