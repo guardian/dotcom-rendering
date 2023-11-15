@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
-import {
-	darkDecorator,
-	lightDecorator,
-} from '../../.storybook/decorators/themeDecorator';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { Analysis } from '../../fixtures/generated/articles/Analysis';
 import { Audio } from '../../fixtures/generated/articles/Audio';
 import { Comment } from '../../fixtures/generated/articles/Comment';
@@ -140,8 +137,8 @@ export default {
 	},
 };
 
-// TODO: Why is Liveblog here rather than in the get-stories generator?
-export const Liveblog = () => {
+// Additional stories for edge cases
+export const LiveblogWithNoKeyEvents = () => {
 	return (
 		<HydratedLayout
 			serverArticle={{
@@ -152,18 +149,6 @@ export const Liveblog = () => {
 		/>
 	);
 };
-Liveblog.decorators = [lightDecorator(decideFormat(Live.format))];
-
-export const LiveblogDark = () => {
-	return (
-		<HydratedLayout
-			serverArticle={{
-				...Live,
-				keyEvents: [],
-			}}
-			renderingTarget="Web"
-		/>
-	);
-};
-
-LiveblogDark.decorators = [darkDecorator(decideFormat(Live.format))];
+LiveblogWithNoKeyEvents.decorators = [
+	lightDecorator(decideFormat(Live.format)),
+];

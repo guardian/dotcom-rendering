@@ -239,7 +239,6 @@ const testLayoutFormats =
 			theme: 'NewsPillar',
 			config: { renderingTarget: 'Apps', darkModeAvailable: false },
 		},
-
 		{
 			display: 'Immersive',
 			design: 'Standard',
@@ -269,6 +268,19 @@ const testLayoutFormats =
 			design: 'Recipe',
 			theme: 'Labs',
 			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'LiveBlog',
+			theme: 'NewsPillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'LiveBlog',
+			theme: 'NewsPillar',
+			config: { renderingTarget: 'Apps', darkModeAvailable: true },
+
 		},
 	]);
 
