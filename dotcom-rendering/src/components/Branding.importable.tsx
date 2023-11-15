@@ -87,23 +87,16 @@ function decideLogo(
 					media={`(max-width: ${breakpoints.desktop - 1}px)`}
 				/>
 			)}
-			{/** High contrast logo for dark backgrounds */}
-			{darkModeAvailable && (
+			{/** High contrast logo if dark mode available & dark mode logo exists for branding */}
+			{darkModeAvailable && branding.logoForDarkBackground && (
 				<source
-					width={maybeDarkLogo.dimensions.width}
-					height={maybeDarkLogo.dimensions.height}
-					srcSet={maybeDarkLogo.src}
+					width={branding.logoForDarkBackground.dimensions.width}
+					height={branding.logoForDarkBackground.dimensions.height}
+					srcSet={branding.logoForDarkBackground.src}
 					media={'(prefers-color-scheme: dark)'}
 				/>
 			)}
-			{/** Standard logo for light backgrounds */}
-			<source
-				width={branding.logo.dimensions.width}
-				height={branding.logo.dimensions.height}
-				srcSet={branding.logo.src}
-				media={'(prefers-color-scheme: light)'}
-			/>
-			{/** Fallback to standard logo */}
+			{/** Default to standard logo for light backgrounds */}
 			<img
 				width={branding.logo.dimensions.width}
 				height={branding.logo.dimensions.height}
