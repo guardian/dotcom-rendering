@@ -92,10 +92,10 @@ function followToggle(
 				);
 			});
 		} else {
-			void bridgetClient.follow(topic).then((following) => {
+			void bridgetClient.follow(topic).then((isFollowing) => {
 				ReactDOM.render(
 					h(followStatusComponent, {
-						isFollowing: following,
+						isFollowing,
 						contributorName: topic.displayName,
 					}),
 					followStatus,
