@@ -843,6 +843,7 @@ const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
 	return fillCommentCount(format);
 };
 
+/** @deprecated this has been moved to the theme palette */
 const fillBlockquoteIcon = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
@@ -1408,6 +1409,7 @@ const textDateLine = (format: ArticleFormat): string => {
 	return neutral[46];
 };
 
+/** @deprecated this has been moved to the theme palette */
 const textBlockquote = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:

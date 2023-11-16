@@ -1072,7 +1072,62 @@ const starRatingBackgroundColourDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
 
 const blockQuoteFillLight = (format: ArticleFormat): string => {
-	return decidePalette(format).fill.blockquoteIcon;
+	switch (format.design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+			return sourcePalette.neutral[46];
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review: {
+			switch (format.theme) {
+				case Pillar.News:
+					return sourcePalette.news[200];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[200];
+				case Pillar.Sport:
+					return sourcePalette.sport[200];
+				case Pillar.Culture:
+					return sourcePalette.culture[200];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[200];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[200];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[200];
+			}
+		}
+		default: {
+			switch (format.theme) {
+				case Pillar.News:
+					return sourcePalette.news[400];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+			}
+		}
+	}
 };
 
 const blockQuoteFillDark = ({
@@ -1116,12 +1171,51 @@ const blockQuoteFillDark = ({
 			}
 		}
 		default:
-			return decidePalette({ design, display, theme }).fill
-				.blockquoteIcon;
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[400];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+			}
 	}
 };
 const quotedBlockquoteStylesLight = (format: ArticleFormat): string => {
-	return decidePalette(format).text.blockquote;
+	switch (format.design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+			return sourcePalette.neutral[7];
+		default:
+			switch (format.theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[46];
+			}
+	}
 };
 const quotedBlockquoteStylesDark = (format: ArticleFormat): string => {
 	switch (format.design) {
