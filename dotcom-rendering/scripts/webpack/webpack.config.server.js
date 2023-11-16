@@ -1,6 +1,7 @@
 // @ts-check
 const nodeExternals = require('webpack-node-externals');
 const swcConfig = require('./.swcrc.json');
+const { svgr } = require('./svg.cjs');
 
 const DEV = process.env.NODE_ENV === 'development';
 const nodeVersion = process.versions.node;
@@ -82,11 +83,7 @@ module.exports = ({ sessionId }) => ({
 				test: /(\.tsx|\.js|\.ts)$/,
 				use: swcLoader,
 			},
-			// TODO: find a way to remove
-			{
-				test: /\.svg$/,
-				use: ['desvg-loader/react', 'svg-loader'],
-			},
+			svgr,
 		],
 	},
 });
