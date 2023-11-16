@@ -150,5 +150,5 @@ export const LiveblogWithNoKeyEvents = () => {
 	);
 };
 LiveblogWithNoKeyEvents.decorators = [
-	lightDecorator(decideFormat(Live.format)),
+	lightDecorator([decideFormat(Live.format)]),
 ];
