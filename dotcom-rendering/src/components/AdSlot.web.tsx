@@ -130,6 +130,13 @@ const adContainerCollapseStyles = css`
 	}
 `;
 
+const adContainerCentredSlotStyles = css`
+	&.ad-slot-container--centred-slot {
+		width: fit-content;
+		margin: 0 auto;
+	}
+`;
+
 const adSlotCollapseStyles = css`
 	&.ad-slot.ad-slot--collapse {
 		display: none;
@@ -394,7 +401,11 @@ const mobileStickyAdStyles = css`
 	}
 `;
 
-export const adContainerStyles = [adContainerCollapseStyles, labelStyles];
+export const adContainerStyles = [
+	adContainerCollapseStyles,
+	labelStyles,
+	adContainerCentredSlotStyles,
+];
 
 export const AdSlot = ({
 	position,
