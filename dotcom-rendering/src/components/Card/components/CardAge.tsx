@@ -4,9 +4,9 @@ import { textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';
+import type { DCRContainerPalette } from '../../../types/front';
 import { Island } from '../../Island';
 import { RelativeTime } from '../../RelativeTime.importable';
-import { DCRContainerPalette } from '../../../types/front';
 
 type Props = {
 	format: ArticleFormat;

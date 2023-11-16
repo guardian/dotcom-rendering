@@ -267,10 +267,8 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const showSubNavTopBorder = false;
 
-	const avatarUrl = getSoleContributor(
-		article.tags,
-		article.byline,
-	)?.bylineLargeImageUrl;
+	const avatarUrl = getSoleContributor(article.tags, article.byline)
+		?.bylineLargeImageUrl;
 
 	const displayAvatarUrl = avatarUrl ? true : false;
 

@@ -131,8 +131,8 @@ const generateLayoutStory = (displayName, designName, theme, config) => {
 			storyVariableName + 'Light'
 		}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}, Mode: Light';
 		${storyVariableName + 'Light'}.parameters = { config: ${JSON.stringify(
-		config,
-	)} };
+			config,
+		)} };
 		${storyVariableName + 'Light'}.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.${displayName},
@@ -158,8 +158,8 @@ const generateLayoutStory = (displayName, designName, theme, config) => {
 			storyVariableName + `Dark`
 		}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}, Mode: Dark';
 		${storyVariableName + `Dark`}.parameters = { config: ${JSON.stringify(
-						config,
-				  )} };
+			config,
+		)} };
 		${storyVariableName + `Dark`}.decorators = [darkDecorator(
 				[{
 					display:  ArticleDisplay.${displayName},

@@ -9,8 +9,8 @@ import {
 } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
 import { buttonThemeDefault } from '@guardian/source-react-components';
-import { transparentColour } from './lib/transparentColour';
 import { decidePalette } from './lib/decidePalette';
+import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
 /**
