@@ -8,9 +8,6 @@ import { ArticleElementRole } from '@guardian/libs';
 import { ImageSubtype } from 'image/image';
 import { Dpr, src, srcsets } from './image/srcsets';
 
-type VariantSize = 'small' | 'large';
-const DEFAULT_VARIANT_SIZE: VariantSize = 'small';
-
 interface Cartoon {
 	images: ImageData[];
 }
@@ -49,13 +46,21 @@ const parseCartoon =
 	(element: BlockElement): Optional<Cartoon> => {
 		const data = element.cartoonTypeData;
 		if (data?.variants) {
-			const cartoonVariant =
-				data.variants.find(
-					(v) => v.viewportSize === DEFAULT_VARIANT_SIZE,
-				) ?? data.variants.find((v) => v.viewportSize === 'large');
-			if (cartoonVariant) {
+			const mobileVariants = data.variants.find(
+				(v) => v.viewportSize === 'small',
+			);
+			const desktopVariants = data.variants.find(
+				(v) => v.viewportSize === 'large',
+			);
+			if (mobileVariants && mobileVariants.images.length > 0) {
 				return Optional.some({
-					images: cartoonVariant.images.map(
+					images: mobileVariants.images.map(
+						parseCartoonImage(salt, data.alt),
+					),
+				});
+			} else if (desktopVariants && desktopVariants.images.length > 0) {
+				return Optional.some({
+					images: desktopVariants.images.map(
 						parseCartoonImage(salt, data.alt),
 					),
 				});

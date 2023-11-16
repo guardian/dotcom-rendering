@@ -8,6 +8,7 @@ import { Pillar } from '@guardian/libs';
 import { cartoonData } from '../../../fixtures/cartoon';
 
 // ----- Setup ------ //
+
 const format = {
 	design: ArticleDesign.Picture,
 	display: ArticleDisplay.Standard,
