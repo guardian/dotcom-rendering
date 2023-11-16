@@ -1,4 +1,4 @@
-import type { OphanComponentEvent } from '@guardian/support-dotcom-components/dist/shared/src/types/ophan';
+import type { OphanComponentEvent } from '@guardian/libs';
 
 const OPHAN_COMPONENT_ID_CTAS_VIEW = 'contributions-epic-ctas-view';
 const OPHAN_COMPONENT_ID_REMINDER_VIEW = 'contributions-epic-reminder-view';

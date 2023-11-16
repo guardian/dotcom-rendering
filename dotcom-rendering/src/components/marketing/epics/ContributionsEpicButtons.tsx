@@ -17,7 +17,6 @@ import {
 	isSupportUrl,
 } from '../lib/tracking';
 import { Button } from './Button';
-// import type { OphanComponentEvent } from '@guardian/support-dotcom-components/dist/shared/src/types/ophan';
 import {
 	getReminderViewEvent,
 	OPHAN_COMPONENT_EVENT_CTAS_VIEW,
