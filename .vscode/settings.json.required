@@ -7,5 +7,5 @@
 	"deno.unstable": false,
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"git.branchProtection": ["main"],
-	"eslint.workingDirectories": ["./dotcom-rendering"],
+	"eslint.workingDirectories": ["./dotcom-rendering"]
 }

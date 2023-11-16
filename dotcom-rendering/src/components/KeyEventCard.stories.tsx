@@ -5,27 +5,39 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { from, neutral } from '@guardian/source-foundations';
+import { from } from '@guardian/source-foundations';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { KeyEventCard as KeyEventCardType } from '../../fixtures/manual/key-events';
 import { events } from '../../fixtures/manual/key-events';
+import { palette } from '../palette';
 import { KeyEventCard } from './KeyEventCard';
 
-const getFormat = (theme: ArticleTheme) => {
-	return {
-		design: ArticleDesign.Standard,
-		display: ArticleDisplay.Standard,
-		theme,
-	};
+export default {
+	component: KeyEventCard,
+	title: 'Components/KeyEventCard',
 };
+const standardFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.LiveBlog,
+	theme: Pillar.News,
+};
+const liveBlogFormats: [ArticleFormat, ...ArticleFormat[]] = [
+	{ ...standardFormat, theme: Pillar.News },
+	{ ...standardFormat, theme: Pillar.Sport },
+	{ ...standardFormat, theme: Pillar.Opinion },
+	{ ...standardFormat, theme: Pillar.Culture },
+	{ ...standardFormat, theme: Pillar.Lifestyle },
+	{ ...standardFormat, theme: ArticleSpecial.Labs },
+];
 
 const wrapperStyles = css`
 	padding-left: 20px;
 	display: inline-flex;
-	background-color: ${neutral[97]};
+	background-color: ${palette('--key-event-background')};
 	margin: 10px 0;
 
 	${from.desktop} {
-		background-color: ${neutral[93]};
+		background-color: ${palette('--key-event-background-desktop')};
 	}
 
 	ul {
@@ -38,28 +50,38 @@ const wrapperStyles = css`
 	}
 `;
 
-const SummaryCard = ({ theme }: { theme: ArticleTheme }) => (
+export const SummaryCard = () => (
 	<ul css={wrapperStyles}>
 		<KeyEventCard
 			id={events[0].id}
 			blockFirstPublished={events[0].blockFirstPublished}
 			title={events[0].title}
-			format={getFormat(theme)}
 			filterKeyEvents={false}
 			isSummary={true}
 		/>
 	</ul>
 );
+SummaryCard.storyName = 'Summary Card';
+SummaryCard.decorators = [splitTheme(liveBlogFormats)];
 
-const StandardCard = ({
-	theme,
-	count,
-}: {
-	theme: ArticleTheme;
-	count: number;
-}) => (
+export const StandardCard = () => (
 	<ul css={wrapperStyles}>
-		{events.slice(0, count).map((event: KeyEventCardType) => (
+		<KeyEventCard
+			key={events[0].id}
+			id={events[0].id}
+			blockFirstPublished={events[0].blockFirstPublished}
+			title={events[0].title}
+			isSummary={events[0].isSummary}
+			filterKeyEvents={false}
+		/>
+	</ul>
+);
+StandardCard.storyName = 'Standard Card';
+StandardCard.decorators = [splitTheme(liveBlogFormats)];
+
+export const MultipleCards = () => (
+	<ul css={wrapperStyles}>
+		{events.slice(0, 7).map((event: KeyEventCardType) => (
 			<KeyEventCard
 				key={event.id}
 				id={event.id}
@@ -67,49 +89,9 @@ const StandardCard = ({
 				title={event.title}
 				isSummary={event.isSummary}
 				filterKeyEvents={false}
-				format={getFormat(theme)}
 			/>
 		))}
 	</ul>
 );
-
-const Summary = () => (
-	<>
-		<SummaryCard theme={Pillar.News} />
-		<SummaryCard theme={Pillar.Culture} />
-		<SummaryCard theme={Pillar.Lifestyle} />
-		<SummaryCard theme={Pillar.Sport} />
-		<SummaryCard theme={Pillar.Opinion} />
-		<SummaryCard theme={ArticleSpecial.SpecialReport} />
-	</>
-);
-
-const KeyEvent = () => (
-	<>
-		<StandardCard theme={Pillar.News} count={1} />
-		<StandardCard theme={Pillar.Culture} count={1} />
-		<StandardCard theme={Pillar.Lifestyle} count={1} />
-		<StandardCard theme={Pillar.Sport} count={1} />
-		<StandardCard theme={Pillar.Opinion} count={1} />
-		<StandardCard theme={ArticleSpecial.SpecialReport} count={1} />
-	</>
-);
-
-const Multiple = () => (
-	<>
-		<StandardCard theme={Pillar.News} count={7} />
-		<StandardCard theme={Pillar.Culture} count={7} />
-		<StandardCard theme={Pillar.Lifestyle} count={7} />
-		<StandardCard theme={Pillar.Sport} count={7} />
-		<StandardCard theme={Pillar.Culture} count={7} />
-		<StandardCard theme={Pillar.Opinion} count={7} />
-		<StandardCard theme={ArticleSpecial.SpecialReport} count={7} />
-	</>
-);
-
-export default {
-	component: KeyEventCard,
-	title: 'Components/KeyEventCard',
-};
-
-export { Summary, KeyEvent, Multiple };
+MultipleCards.storyName = 'Multiple Standard Cards';
+MultipleCards.decorators = [splitTheme(liveBlogFormats)];

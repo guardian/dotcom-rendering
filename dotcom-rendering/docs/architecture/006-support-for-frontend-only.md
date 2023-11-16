@@ -12,18 +12,18 @@ linting, type-checking, and artifact-building.
 
 There are advantages to sites:
 
-* helps others bootstrap their projects quicker due to easy set up
-  (i.e. all the webpack, linting, etc. is built-in)
-* helps promote common standards for the same reason as above
-* single repo makes sharing code easier (no need for publishing
-  packages)
+-   helps others bootstrap their projects quicker due to easy set up
+    (i.e. all the webpack, linting, etc. is built-in)
+-   helps promote common standards for the same reason as above
+-   single repo makes sharing code easier (no need for publishing
+    packages)
 
 However, there are also cons:
 
-* distracts from our mvp/core aim of serving the article page
-* adds a fair bit of complexity/overhead
-* confuses the separation of concerns and introduces significant
-  coupling
+-   distracts from our mvp/core aim of serving the article page
+-   adds a fair bit of complexity/overhead
+-   confuses the separation of concerns and introduces significant
+    coupling
 
 The question of whether to keep sites has been raised before but the
 cost has become more apparent since that discussion - as feature work

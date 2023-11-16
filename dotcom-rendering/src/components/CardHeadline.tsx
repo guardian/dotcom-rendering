@@ -292,13 +292,14 @@ export const CardHeadline = ({
 					{showQuotes && <QuoteIcon colour={kickerColour} />}
 					<span
 						css={css`
-							color: ${isDynamo
+							color: ${palette('--headline-colour')};
+						`}
+						style={{
+							['--headline-colour']: isDynamo
 								? decidePalette(format, containerPalette).text
 										.dynamoHeadline
-								: palette(
-										'--card-headline-text',
-								  )}; //implement containerPalette
-						`}
+								: palette('--card-headline-text'), //implement containerPalette
+						}}
 						className="show-underline"
 					>
 						{cleanHeadLineText}

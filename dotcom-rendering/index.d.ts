@@ -551,3 +551,10 @@ declare namespace JSX {
 		'data-link-name'?: string;
 	}
 }
+
+declare namespace React {
+	interface CSSProperties {
+		// Allow custom properties to be passed to the style prop
+		[key: `--${string}`]: string | undefined;
+	}
+}

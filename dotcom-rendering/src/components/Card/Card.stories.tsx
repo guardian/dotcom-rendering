@@ -519,11 +519,13 @@ export const WithAnAvatar = () => {
 	);
 };
 WithAnAvatar.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Comment,
-		theme: Pillar.Opinion,
-	}),
+	lightDecorator([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.Opinion,
+		},
+	]),
 ];
 
 export const WhenVerticalAndThemeOpinion = () => {

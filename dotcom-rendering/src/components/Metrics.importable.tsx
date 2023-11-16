@@ -10,7 +10,7 @@ import {
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { getOphan } from '../client/ophan/ophan';
-import { billboardsInMerchHigh } from '../experiments/tests/billboards-in-merch-high';
+import { adsInMerch } from '../experiments/tests/ads-in-merch-high';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
@@ -31,7 +31,7 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 	integrateIma,
-	billboardsInMerchHigh,
+	adsInMerch,
 ];
 
 const useBrowserId = () => {

@@ -52,8 +52,8 @@ module.exports = {
 	}),
 	framework: {
 		name: '@storybook/react-webpack5',
-		options: {}
-	}
+		options: {},
+	},
 };
 
 const webpackConfig = (config) => {

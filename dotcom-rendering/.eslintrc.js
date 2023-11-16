@@ -63,7 +63,8 @@ module.exports = {
 		'@guardian/eslint-config-typescript',
 		'plugin:@guardian/source-react-components/recommended',
 		'plugin:jsx-a11y/recommended',
-		// prettier needs to go last so it can override other configuration. See https://github.com/prettier/eslint-config-prettier#installation
+		// eslint-config-prettier disables formatting rules that conflict with prettier
+		// needs to go last so it can override other configuration. See https://github.com/prettier/eslint-config-prettier#installation
 		'prettier',
 	],
 	parser: '@typescript-eslint/parser',
@@ -246,6 +247,12 @@ module.exports = {
 		},
 		{
 			files: ['**/**.stories.tsx'],
+			rules: {
+				'import/no-default-export': 'off',
+			},
+		},
+		{
+			files: ['**/**.config.ts'],
 			rules: {
 				'import/no-default-export': 'off',
 			},

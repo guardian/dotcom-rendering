@@ -99,7 +99,6 @@ export const LiveBlogRenderer = ({
 						<KeyEventsCarousel
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
-							format={format}
 							id={'key-events-carousel-mobile'}
 						/>
 					</Island>
