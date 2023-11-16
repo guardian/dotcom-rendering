@@ -671,7 +671,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
-			{renderAds && (
+			{renderAds && !hasPageSkin && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
@@ -680,7 +680,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
 					element="aside"
-					hasPageSkin={hasPageSkin}
 				>
 					<AdSlot position="merchandising" />
 				</Section>
