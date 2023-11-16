@@ -19,6 +19,11 @@ interface Props {
 	format: ArticleFormat;
 }
 
+interface Temp {
+	contributorId: string;
+	contributorName: string;
+}
+
 const followButtonStyles: SerializedStyles = css`
 	display: flex;
 	margin: 0;
@@ -97,22 +102,6 @@ const Follow: FC<Props> = ({ contributors, format }) => {
 		return (
 			<>
 				<button
-					className="js-follow-tag"
-					css={styles(format)}
-					data-id={contributor.id}
-					data-display-name={contributor.name}
-				>
-					<span
-						className="js-follow-tag-status"
-						css={followStatusStyles}
-					>
-						{/* The FollowTagStatus component will be rendered here after
-						code in article.ts checks if bridget version is compatible
-						and client env has MyGuardian enabled */}
-					</span>
-				</button>
-
-				<button
 					className="js-follow-notifications"
 					css={styles(format)}
 					data-id={contributor.id}
@@ -135,6 +124,20 @@ const Follow: FC<Props> = ({ contributors, format }) => {
 	return null;
 };
 
+export const FollowTag: FC<Temp> = ({ contributorId, contributorName }) => {
+	return (
+		<button
+			className="js-follow-tag"
+			data-id={contributorId}
+			data-display-name={contributorName}
+		>
+			<span
+				className="js-follow-tag-status"
+				css={followStatusStyles}
+			></span>
+		</button>
+	);
+};
 // ----- Exports ----- //
 
 export default Follow;
