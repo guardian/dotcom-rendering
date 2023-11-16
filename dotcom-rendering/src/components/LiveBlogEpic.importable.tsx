@@ -38,7 +38,7 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 	useEffect(() => {
 		import(`./marketing/epics/ContributionsLiveblogEpic`)
 			.then((epicModule) => {
-				// @ts-expect-error -- Need to ignore TS to check test works for other element types
+				// @ts-expect-error -- currently the type of the props in the response is too general
 				setEpic(() => epicModule.ContributionsLiveblogEpic);
 			})
 			.catch((err) => {
