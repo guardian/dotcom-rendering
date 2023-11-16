@@ -170,7 +170,7 @@ const generateLayoutStory = (displayName, designName, theme, config) => {
 		];`
 				: ''
 		}
-	`;
+`;
 };
 
 /**
@@ -252,6 +252,30 @@ const testLayoutFormats =
 			design: 'Standard',
 			theme: 'NewsPillar',
 			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+		},
+		{
+			display: 'Immersive',
+			design: 'PhotoEssay',
+			theme: 'Labs',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'Standard',
+			theme: 'Labs',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'Feature',
+			theme: 'Labs',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'Recipe',
+			theme: 'Labs',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
 		},
 	]);
 

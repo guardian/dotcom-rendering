@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import { between, textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { formatCount } from '../lib/formatCount';
@@ -90,7 +91,7 @@ export const CommentCount = ({
 	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
 	// If the comment count is 0 we still want to display it
-	if (commentCount === undefined) return null;
+	if (isUndefined(commentCount)) return null;
 
 	const { short, long } = formatCount(commentCount);
 	const palette = decidePalette(format);
