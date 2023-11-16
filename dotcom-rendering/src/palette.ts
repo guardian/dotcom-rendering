@@ -1230,7 +1230,43 @@ const articleBackgroundDark = ({ design, theme }: ArticleFormat) => {
 
 const articleSectionBackground = () => sourcePalette.brand[400];
 
-const articleLinkHover = ({ design, theme }: ArticleFormat): string => {
+const articleLinkTextLight = ({ design, theme }: ArticleFormat): string => {
+	if (design === ArticleDesign.Analysis) return sourcePalette.news[300];
+	switch (theme) {
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[7];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+
+const articleLinkTextDark = (): string => sourcePalette.neutral[86];
+
+const articleLinkBorderLight = ({ design, theme }: ArticleFormat): string => {
+	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[60];
+
+	if (theme === ArticleSpecial.SpecialReport)
+		return sourcePalette.specialReport[300];
+
+	if (
+		theme === ArticleSpecial.SpecialReportAlt &&
+		design !== ArticleDesign.DeadBlog &&
+		design !== ArticleDesign.LiveBlog
+	)
+		return transparentColour(sourcePalette.neutral[60], 0.3);
+
+	return sourcePalette.neutral[86];
+};
+
+const articleLinkBorderDark = () => sourcePalette.neutral[46];
+
+const articleLinkHoverLight = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
@@ -1296,6 +1332,33 @@ const articleLinkHover = ({ design, theme }: ArticleFormat): string => {
 			}
 	}
 };
+
+const articleLinkHoverDark = () => articleLinkTextDark();
+
+const articleLinkBorderHoverLight = ({
+	design,
+	theme,
+}: ArticleFormat): string => {
+	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[7];
+	if (theme === ArticleSpecial.SpecialReport)
+		return sourcePalette.specialReport[100];
+
+	if (
+		theme === ArticleSpecial.SpecialReportAlt &&
+		design !== ArticleDesign.LiveBlog &&
+		design !== ArticleDesign.DeadBlog
+	)
+		return sourcePalette.specialReportAlt[200];
+
+	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
+		return sourcePalette.news[300];
+	}
+	if (theme === ArticleSpecial.SpecialReportAlt)
+		return sourcePalette.specialReportAlt[200];
+	return pillarPalette(theme, 400);
+};
+
+const articleLinkBorderHoverDark = () => articleLinkTextDark();
 
 const articleBorder = ({ design, theme }: ArticleFormat): string => {
 	switch (theme) {
@@ -1605,9 +1668,21 @@ const paletteColours = {
 		light: articleSectionBackground,
 		dark: articleSectionBackground,
 	},
-	'--article-link-hover': {
-		light: articleLinkHover,
-		dark: articleLinkHover,
+	'--article-link-text': {
+		light: articleLinkTextLight,
+		dark: articleLinkTextDark,
+	},
+	'--article-link-border': {
+		light: articleLinkBorderLight,
+		dark: articleLinkBorderDark,
+	},
+	'--article-link-text-hover': {
+		light: articleLinkHoverLight,
+		dark: articleLinkHoverDark,
+	},
+	'--article-link-border-hover': {
+		light: articleLinkBorderHoverLight,
+		dark: articleLinkBorderHoverDark,
 	},
 	'--article-border': {
 		light: articleBorder,
