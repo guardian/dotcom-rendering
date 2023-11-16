@@ -526,11 +526,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="ad-slot-container"
-					css={[
-						merchandisingAdContainerStyles,
-						hasPageskin && pageSkinContainer,
-						adContainerStyles,
-					]}
+					css={[merchandisingAdContainerStyles, adContainerStyles]}
 				>
 					<div
 						id="dfp-ad--merchandising-high"
