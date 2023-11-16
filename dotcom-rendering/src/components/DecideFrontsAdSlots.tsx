@@ -14,6 +14,7 @@ export const decideMerchHighAndMobileAdSlots = (
 
 	const minContainers = isPaidContent ? 1 : 2;
 	const shouldInsertMerchHighSlot =
+		!hasPageSkin &&
 		collectionCount > minContainers &&
 		index === getMerchHighPosition(collectionCount);
 
@@ -23,7 +24,6 @@ export const decideMerchHighAndMobileAdSlots = (
 				<AdSlot
 					data-print-layout="hide"
 					position="merchandising-high"
-					hasPageskin={hasPageSkin}
 				/>
 			</Hide>
 		);
