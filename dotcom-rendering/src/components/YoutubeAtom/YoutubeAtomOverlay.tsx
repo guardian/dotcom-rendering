@@ -192,7 +192,6 @@ export const YoutubeAtomOverlay = ({
 	return (
 		<button
 			data-testid={id}
-			data-testid={id}
 			onClick={onClick}
 			css={overlayStyles}
 			aria-label={title ? `Play video: ${title}` : `Play video`}
