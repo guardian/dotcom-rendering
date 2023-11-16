@@ -43,8 +43,11 @@ export const FrontMostViewed = ({
 			trails: trails
 				.filter(
 					(trail) =>
+						/* TODO: remove this once we have a better solution
+						for filtering undesired articles See issue:
+						https://github.com/guardian/dotcom-rendering/issues/9528 */
 						trail.url !== '/info/2023/nov/15/removed-document',
-				) // TODO: remove this once we have a better solution for filtering undesired articles see issue https://github.com/guardian/dotcom-rendering/issues/9528
+				)
 				.slice(0, 10),
 		},
 	];
