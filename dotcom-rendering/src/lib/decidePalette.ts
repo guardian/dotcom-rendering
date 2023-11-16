@@ -381,7 +381,6 @@ const textSyndicationButton = (format: ArticleFormat): string => {
 	return text.supporting;
 };
 
-/** @deprecated this has been moved to the theme palette (--article-link-text) */
 const textArticleLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
 		switch (format.theme) {
@@ -506,7 +505,7 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 	}
 };
 
-/** @deprecated this has been moved to the theme palette (--article-link-text-hover) */
+/** @deprecated this has been moved to the theme palette */
 const textArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
 		switch (format.theme) {
@@ -1301,7 +1300,6 @@ const borderPinnedPost = (format: ArticleFormat): string => {
 	}
 };
 
-/** @deprecated this has been moved to the theme palette ('--article-link-border) */
 const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 
@@ -1440,7 +1438,6 @@ const backgroundMatchNav = (): string => {
 const backgroundUnderline = (format: ArticleFormat): string =>
 	transparentColour(textCardKicker(format));
 
-/** @deprecated this has been moved to the theme palette (--article-link-border-hover) */
 const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)

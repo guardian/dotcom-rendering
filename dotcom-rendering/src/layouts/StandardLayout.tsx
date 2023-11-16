@@ -439,7 +439,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											props.NAV.currentNavLink
 										}
 										linkHoverColour={themePalette(
-											'--article-link-text-hover',
+											'--article-link-hover',
 										)}
 										borderColour={themePalette(
 											'--sub-nav-border',
@@ -954,7 +954,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
 									linkHoverColour={themePalette(
-										'--article-link-text-hover',
+										'--article-link-hover',
 									)}
 									borderColour={themePalette(
 										'--sub-nav-border',
