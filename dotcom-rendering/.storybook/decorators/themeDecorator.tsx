@@ -12,11 +12,11 @@ import { ArticleFormat } from '@guardian/libs';
 
 const darkStoryCss = css`
 	background-color: ${sourcePalette.neutral[0]};
-	color: ${sourcePalette.neutral[100]};
+	color: ${sourcePalette.neutral[97]};
 `;
 const lightStoryCss = css`
 	background-color: ${sourcePalette.neutral[100]};
-	color: ${sourcePalette.neutral[0]};
+	color: ${sourcePalette.neutral[7]};
 `;
 
 // ----- Decorators ----- //
