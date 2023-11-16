@@ -72,11 +72,14 @@ const headlineBackgroundDark = ({ design }: ArticleFormat): string => {
 };
 
 const headlineBorder = ({ design }: ArticleFormat): string => {
-	if (design === ArticleDesign.LiveBlog) {
-		return 'rgba(255,255,255, 0.2)';
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return 'rgba(255,255,255, 0.2)';
+		case ArticleDesign.DeadBlog:
+			return '#CDCDCD';
+		default:
+			return sourcePalette.neutral[86];
 	}
-	if (design === ArticleDesign.DeadBlog) return '#CDCDCD';
-	return sourcePalette.neutral[86];
 };
 
 const avatarLight = ({ design, theme }: ArticleFormat): string => {
@@ -751,9 +754,14 @@ const standfirstBackground = ({
 };
 
 const standfirstBorder = ({ design }: ArticleFormat): string => {
-	if (design === ArticleDesign.LiveBlog) return 'rgba(255,255,255, 0.2)';
-	if (design === ArticleDesign.DeadBlog) return '#BDBDBD';
-	return sourcePalette.neutral[86];
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return 'rgba(255,255,255, 0.2)';
+		case ArticleDesign.DeadBlog:
+			return '#BDBDBD';
+		default:
+			return sourcePalette.neutral[86];
+	}
 };
 
 const standfirstLinkTextLight = ({ design, theme }: ArticleFormat): string => {

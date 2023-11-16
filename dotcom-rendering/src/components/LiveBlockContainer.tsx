@@ -108,20 +108,20 @@ const BlockByline = ({
 	);
 };
 
-const liveBlockContainerStyles = (isPinnedPost: boolean) => css`
+const liveBlockContainerStyles = () => css`
 	padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 	box-sizing: border-box;
 	margin-bottom: ${space[3]}px;
 	background: ${palette('--live-block-container-background')};
-	${!isPinnedPost &&
-	`
-		border-top: 1px solid ${palette('--live-block-border-top')};
-		border-bottom: 1px solid ${palette('--live-block-border-bottom')};
-	`}
 	${from.tablet} {
 		padding: ${space[2]}px ${SIDE_MARGIN}px;
 		padding-left: ${LEFT_MARGIN_DESKTOP}px;
 	}
+`;
+
+const liveBlockBorderStyles = css`
+	border-top: 1px solid ${palette('--live-block-border-top')};
+	border-bottom: 1px solid ${palette('--live-block-border-bottom')};
 `;
 
 export const LiveBlockContainer = ({
@@ -157,7 +157,10 @@ export const LiveBlockContainer = ({
 			className={['block', isLiveUpdate && 'pending']
 				.filter(isString)
 				.join(' ')}
-			css={liveBlockContainerStyles(isPinnedPost)}
+			css={[
+				liveBlockContainerStyles,
+				!isPinnedPost && liveBlockBorderStyles,
+			]}
 		>
 			<Header>
 				{blockFirstPublished !== undefined && (

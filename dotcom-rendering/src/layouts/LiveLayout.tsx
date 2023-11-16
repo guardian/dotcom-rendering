@@ -396,7 +396,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											props.NAV.currentNavLink
 										}
 										linkHoverColour={themePalette(
-											'--article-link-hover',
+											'--article-link-text-hover',
 										)}
 										borderColour={themePalette(
 											'--sub-nav-border',
@@ -1312,7 +1312,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
 									linkHoverColour={themePalette(
-										'--article-link-hover',
+										'--article-link-text-hover',
 									)}
 									borderColour={themePalette(
 										'--sub-nav-border',

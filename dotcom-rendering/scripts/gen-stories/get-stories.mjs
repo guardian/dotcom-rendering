@@ -280,7 +280,6 @@ const testLayoutFormats =
 			design: 'LiveBlog',
 			theme: 'NewsPillar',
 			config: { renderingTarget: 'Apps', darkModeAvailable: true },
-
 		},
 	]);
 
