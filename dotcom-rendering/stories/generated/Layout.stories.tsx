@@ -33,11 +33,11 @@ export default {
 		WebStandardStandardNewsPillarLight.storyName = 'Web: Display: Standard, Design: Standard, Theme: NewsPillar, Mode: Light';
 		WebStandardStandardNewsPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
 		WebStandardStandardNewsPillarLight.decorators = [lightDecorator(
-				{
+				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: {...ArticleSpecial, ...Pillar}.News,
-				}
+				}]
 			),
 		];
 
@@ -56,11 +56,11 @@ export default {
 		AppsStandardStandardNewsPillarLight.storyName = 'Apps: Display: Standard, Design: Standard, Theme: NewsPillar, Mode: Light';
 		AppsStandardStandardNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
 		AppsStandardStandardNewsPillarLight.decorators = [lightDecorator(
-				{
+				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: {...ArticleSpecial, ...Pillar}.News,
-				}
+				}]
 			),
 		];
 
@@ -77,11 +77,11 @@ export default {
 		AppsStandardStandardNewsPillarDark.storyName = 'Apps: Display: Standard, Design: Standard, Theme: NewsPillar, Mode: Dark';
 		AppsStandardStandardNewsPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
 		AppsStandardStandardNewsPillarDark.decorators = [darkDecorator(
-				{
+				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: {...ArticleSpecial, ...Pillar}.News,
-				}
+				}]
 			),
 		];
 	
@@ -98,11 +98,11 @@ export default {
 		AppsShowcaseStandardNewsPillarLight.storyName = 'Apps: Display: Showcase, Design: Standard, Theme: NewsPillar, Mode: Light';
 		AppsShowcaseStandardNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
 		AppsShowcaseStandardNewsPillarLight.decorators = [lightDecorator(
-				{
+				[{
 					display:  ArticleDisplay.Showcase,
 					design: ArticleDesign.Standard,
 					theme: {...ArticleSpecial, ...Pillar}.News,
-				}
+				}]
 			),
 		];
 
@@ -121,11 +121,11 @@ export default {
 		WebShowcasePictureOpinionPillarLight.storyName = 'Web: Display: Showcase, Design: Picture, Theme: OpinionPillar, Mode: Light';
 		WebShowcasePictureOpinionPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
 		WebShowcasePictureOpinionPillarLight.decorators = [lightDecorator(
-				{
+				[{
 					display:  ArticleDisplay.Showcase,
 					design: ArticleDesign.Picture,
 					theme: {...ArticleSpecial, ...Pillar}.Opinion,
-				}
+				}]
 			),
 		];
 
@@ -144,11 +144,11 @@ export default {
 		AppsShowcasePictureOpinionPillarLight.storyName = 'Apps: Display: Showcase, Design: Picture, Theme: OpinionPillar, Mode: Light';
 		AppsShowcasePictureOpinionPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
 		AppsShowcasePictureOpinionPillarLight.decorators = [lightDecorator(
-				{
+				[{
 					display:  ArticleDisplay.Showcase,
 					design: ArticleDesign.Picture,
 					theme: {...ArticleSpecial, ...Pillar}.Opinion,
-				}
+				}]
 			),
 		];
 
@@ -167,11 +167,11 @@ export default {
 		AppsStandardCommentNewsPillarLight.storyName = 'Apps: Display: Standard, Design: Comment, Theme: NewsPillar, Mode: Light';
 		AppsStandardCommentNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
 		AppsStandardCommentNewsPillarLight.decorators = [lightDecorator(
-				{
+				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.Comment,
 					theme: {...ArticleSpecial, ...Pillar}.News,
-				}
+				}]
 			),
 		];
 
@@ -190,11 +190,11 @@ export default {
 		AppsStandardInteractiveNewsPillarLight.storyName = 'Apps: Display: Standard, Design: Interactive, Theme: NewsPillar, Mode: Light';
 		AppsStandardInteractiveNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
 		AppsStandardInteractiveNewsPillarLight.decorators = [lightDecorator(
-				{
+				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.Interactive,
 					theme: {...ArticleSpecial, ...Pillar}.News,
-				}
+				}]
 			),
 		];
 
@@ -213,11 +213,11 @@ export default {
 		AppsImmersiveStandardNewsPillarLight.storyName = 'Apps: Display: Immersive, Design: Standard, Theme: NewsPillar, Mode: Light';
 		AppsImmersiveStandardNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
 		AppsImmersiveStandardNewsPillarLight.decorators = [lightDecorator(
-				{
+				[{
 					display:  ArticleDisplay.Immersive,
 					design: ArticleDesign.Standard,
 					theme: {...ArticleSpecial, ...Pillar}.News,
-				}
+				}]
 			),
 		];
 

@@ -27,17 +27,22 @@ const lightStoryCss = css`
  */
 const colourSchemeDecorator =
 	(colourScheme: 'light' | 'dark') =>
-	(format: ArticleFormat): Decorator =>
-	(Story) => (
-		<div
-			css={[
-				css(paletteDeclarations(format, colourScheme)),
-				colourScheme === 'dark' ? darkStoryCss : lightStoryCss,
-			]}
-		>
-			<Story />
-		</div>
+	(formats: ArticleFormat[]): Decorator =>
+	(Story, context) => (
+		<>
+			{formats.map((format) => (
+				<div
+					css={[
+						css(paletteDeclarations(format, colourScheme)),
+						colourScheme === 'dark' ? darkStoryCss : lightStoryCss,
+					]}
+				>
+					<Story args={{ ...context.args, format }} />
+				</div>
+			))}
+		</>
 	);
+
 export const lightDecorator = colourSchemeDecorator('light');
 export const darkDecorator = colourSchemeDecorator('dark');
 
