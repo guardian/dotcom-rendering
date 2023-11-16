@@ -13,7 +13,6 @@ import {
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
-import { setAutomat } from '../lib/setAutomat';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
@@ -37,8 +36,6 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 		useState<ReactComponent<{ [key: string]: unknown }>>();
 
 	useEffect(() => {
-		setAutomat();
-		window;
 		import(`./marketing/epics/ContributionsLiveblogEpic`)
 			.then((epicModule) => {
 				// @ts-expect-error -- Need to ignore TS to check test works for other element types
