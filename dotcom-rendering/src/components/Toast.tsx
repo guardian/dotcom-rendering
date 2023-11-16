@@ -39,7 +39,7 @@ export const Toast = ({ count, onClick, format }: Props) => {
 				position: absolute;
 				top: ${space[2]}px;
 			`}
-			data-cy="toast"
+			data-testid="toast"
 		>
 			<Hide above="phablet">
 				<EditorialButton

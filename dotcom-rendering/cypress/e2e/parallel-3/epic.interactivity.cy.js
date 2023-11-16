@@ -33,7 +33,9 @@ describe('Epics', function () {
 		cy.get('gu-island[name=LiveBlogEpic]')
 			.first()
 			.should('have.attr', 'data-island-status', 'rendered');
-		cy.get('[data-cy=contributions-liveblog-epic]').scrollIntoView();
-		cy.get('[data-cy=contributions-liveblog-epic]').should('be.visible');
+		cy.get('[data-testid=contributions-liveblog-epic]').scrollIntoView();
+		cy.get('[data-testid=contributions-liveblog-epic]').should(
+			'be.visible',
+		);
 	});
 });

@@ -30,9 +30,12 @@ describe('Elements', function () {
 				'/AMPArticle/https://www.theguardian.com/world/2020/apr/24/new-mother-dies-of-coronavirus-six-days-after-giving-birth',
 			);
 
-			getAmpIframeBody('amp-iframe[data-cy="atom-embed-url"] > iframe', {
-				timeout: 30000,
-			}).contains('Daily cases');
+			getAmpIframeBody(
+				'amp-iframe[data-testid="atom-embed-url"] > iframe',
+				{
+					timeout: 30000,
+				},
+			).contains('Daily cases');
 		});
 
 		it('should render the counted interactive embed', function () {
@@ -96,7 +99,7 @@ describe('Elements', function () {
 		it('should render the click to view overlay revealing the embed when clicked', function () {
 			const getIframeBody = () => {
 				return cy
-					.get('div[data-cy="embed-block"] > div > iframe', {
+					.get('div[data-testid="embed-block"] > div > iframe', {
 						timeout: 30000,
 					})
 					.its('0.contentDocument.body')
@@ -117,7 +120,7 @@ describe('Elements', function () {
 
 			cy.contains('hosted on wnyc.org');
 
-			cy.get('button[data-cy="click-to-view-button"]').click();
+			cy.get('button[data-testid="click-to-view-button"]').click();
 
 			getIframeBody().contains('Radiolab');
 		});
@@ -125,14 +128,14 @@ describe('Elements', function () {
 		it('should render the interactive using a boot.js', function () {
 			const getIframeBody = () => {
 				cy.get(
-					'[data-cypress="interactive-element-LA%20Rams%20dead%20cap%20numbers"]',
+					'[data-testidpress="interactive-element-LA%20Rams%20dead%20cap%20numbers"]',
 				).scrollIntoView({
 					duration: 300,
 					offset: { top: -100, left: 0 },
 				});
 				return cy
 					.get(
-						'[data-cypress="interactive-element-LA%20Rams%20dead%20cap%20numbers"] > iframe',
+						'[data-testidpress="interactive-element-LA%20Rams%20dead%20cap%20numbers"] > iframe',
 					)
 					.its('0.contentDocument.body')
 					.should('not.be.empty')
@@ -157,14 +160,14 @@ describe('Elements', function () {
 
 			const getIframeBody = () => {
 				cy.get(
-					'[data-cypress="interactive-element-pa%20county%20by%20county"]',
+					'[data-testidpress="interactive-element-pa%20county%20by%20county"]',
 				).scrollIntoView({
 					duration: 300,
 					offset: { top: -100, left: 0 },
 				});
 				return cy
 					.get(
-						'[data-cypress="interactive-element-pa%20county%20by%20county"] > iframe',
+						'[data-testidpress="interactive-element-pa%20county%20by%20county"] > iframe',
 					)
 					.its('0.contentDocument.body')
 					.should('not.be.empty')
@@ -180,7 +183,7 @@ describe('Elements', function () {
 		it('should render the soundcloud embed', function () {
 			const getIframeBody = () => {
 				return cy
-					.get('div[data-cy="soundcloud-embed"] > iframe')
+					.get('div[data-testid="soundcloud-embed"] > iframe')
 					.its('0.contentDocument.body')
 					.should('not.be.empty')
 					.then(cy.wrap);
@@ -195,7 +198,7 @@ describe('Elements', function () {
 		it('should render the football embed', function () {
 			const getBody = () => {
 				return cy
-					.get('div[data-cy="football-table-embed"]')
+					.get('div[data-testid="football-table-embed"]')
 					.should('not.be.empty')
 					.then(cy.wrap);
 			};
@@ -209,7 +212,7 @@ describe('Elements', function () {
 		it('should render the affiliate disclaimer block', function () {
 			const getBody = () => {
 				return cy
-					.get('[data-cy="affiliate-disclaimer"]')
+					.get('[data-testid="affiliate-disclaimer"]')
 					.should('not.be.empty')
 					.then(cy.wrap);
 			};

@@ -126,7 +126,7 @@ export const ExpandedMenu = ({
 				<div
 					css={mainMenuStyles}
 					data-testid="expanded-menu"
-					data-cy="expanded-menu"
+					data-testid="expanded-menu"
 				>
 					<Columns
 						editionId={editionId}

@@ -191,7 +191,7 @@ export const YoutubeAtomOverlay = ({
 
 	return (
 		<button
-			data-cy={id}
+			data-testid={id}
 			data-testid={id}
 			onClick={onClick}
 			css={overlayStyles}
