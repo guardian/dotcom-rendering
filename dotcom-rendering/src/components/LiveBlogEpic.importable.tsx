@@ -3,7 +3,7 @@ import { getCookie, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useArticleCounts } from '../lib/articleCount';
@@ -18,6 +18,7 @@ import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
 import type { TagType } from '../types/tag';
+import type { ReactComponent } from './marketing/lib/ReactComponent';
 
 type Props = {
 	sectionId: string;
@@ -33,15 +34,15 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 	// Using state here to store the Epic component that gets imported allows
 	// us to render it with React (instead of inserting it into the dom manually)
 	const [Epic, setEpic] =
-		useState<React.ElementType<{ [key: string]: unknown }>>();
+		useState<ReactComponent<{ [key: string]: unknown }>>();
 
 	useEffect(() => {
 		setAutomat();
-		window
-			.guardianPolyfilledImport(url)
+		window;
+		import(`./marketing/epics/ContributionsLiveblogEpic`)
 			.then((epicModule) => {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- required for dynamic import
-				setEpic(() => epicModule[name]); // useState requires functions to be wrapped
+				// @ts-expect-error -- Need to ignore TS to check test works for other element types
+				setEpic(() => epicModule.ContributionsLiveblogEpic);
 			})
 			.catch((err) => {
 				const msg = `Error importing LiveBlog epic: ${String(err)}`;
