@@ -194,6 +194,11 @@ const topAboveNavStyles = css`
 const merchandisingAdContainerStyles = css`
 	display: flex;
 	justify-content: center;
+	margin: 0 auto 12px;
+
+	${from.desktop} {
+		margin: 0 auto 20px;
+	}
 `;
 
 const merchandisingAdStyles = css`
