@@ -87,7 +87,7 @@ export const getOphan = async (
 
 export const submitComponentEvent = async (
 	componentEvent: OphanComponentEvent,
-	renderingTarget: RenderingTarget,
+	renderingTarget: RenderingTarget = 'Web',
 ): Promise<void> => {
 	const ophan = await getOphan(renderingTarget);
 	ophan.record({ componentEvent });
