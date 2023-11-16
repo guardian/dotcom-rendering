@@ -254,7 +254,7 @@ export const CardHeadline = ({
 }: Props) => {
 	const kickerColour = isDynamo
 		? decidePalette(format, containerPalette).text.dynamoKicker
-		: palette('--card-kicker-text'); //implement containerPalette
+		: palette('--card-kicker-text');
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
@@ -286,19 +286,20 @@ export const CardHeadline = ({
 								color={kickerColour}
 								showPulsingDot={showPulsingDot}
 								hideLineBreak={hideLineBreak}
+								isDynamo={isDynamo}
 							/>
 						</>
 					)}
 					{showQuotes && <QuoteIcon colour={kickerColour} />}
 					<span
 						css={css`
-							color: ${palette('--headline-colour')};
+							color: ${palette('--card-headline-text')};
 						`}
 						style={{
-							['--headline-colour']: isDynamo
+							['--card-headline-text']: isDynamo
 								? decidePalette(format, containerPalette).text
 										.dynamoHeadline
-								: palette('--card-headline-text'), //implement containerPalette
+								: palette('--card-headline-text'),
 						}}
 						className="show-underline"
 					>
@@ -316,13 +317,7 @@ export const CardHeadline = ({
 				</WithLink>
 			</h3>
 			{!!byline && showByline && (
-				<Byline
-					text={byline}
-					format={format}
-					containerPalette={containerPalette}
-					size={size}
-					isCard={true}
-				/>
+				<Byline text={byline} format={format} size={size} />
 			)}
 		</>
 	);

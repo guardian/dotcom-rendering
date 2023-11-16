@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+// import type { palette } from '../palette';
 import type { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 
@@ -29,9 +30,11 @@ export const ContainerOverrides = ({
 		: { text: undefined };
 
 	const paletteOverrides = {
-		'--headline-colour': isDynamo
+		'--card-headline-text': isDynamo
 			? text?.dynamoHeadline
 			: text?.cardHeadline,
+		'--card-age-text': isDynamo ? text?.dynamoHeadline : text?.cardFooter,
+		'--card-kicker-text': isDynamo ? text?.dynamoKicker : text?.cardKicker,
 	} satisfies Partial<Record<ColourName, string>>;
 
 	return (

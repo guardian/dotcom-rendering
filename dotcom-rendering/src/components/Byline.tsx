@@ -1,30 +1,25 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
 import { headline, textSans, until } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
 import { palette } from '../palette';
-import type { DCRContainerPalette } from '../types/front';
 
 type Props = {
 	text: string;
 	format: ArticleFormat;
-	containerPalette?: DCRContainerPalette;
 	size: SmallHeadlineSize;
-	isCard?: boolean;
 };
 
-const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
-	const baseStyles = css`
-		display: block;
-		font-style: italic;
-	`;
+const baseStyles = css`
+	display: block;
+	font-style: italic;
+`;
 
+const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 	switch (size) {
 		case 'ginormous':
 		case 'huge':
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${baseStyles};
 					${textSans.xlarge()};
 					font-size: 24px;
 					line-height: 24px;
@@ -35,7 +30,6 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 				`;
 			}
 			return css`
-				${baseStyles};
 				${headline.small()};
 				${until.desktop} {
 					${headline.xsmall()};
@@ -44,7 +38,6 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 		case 'large': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${baseStyles};
 					${textSans.large()};
 					font-size: 24px;
 					line-height: 24px;
@@ -55,7 +48,6 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 				`;
 			}
 			return css`
-				${baseStyles};
 				${headline.xsmall()};
 				${until.desktop} {
 					${headline.xxsmall()};
@@ -65,7 +57,6 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 		case 'medium': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${baseStyles};
 					${textSans.large()};
 					line-height: 20px;
 					${until.desktop} {
@@ -75,7 +66,6 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 				`;
 			}
 			return css`
-				${baseStyles};
 				${headline.xxsmall()};
 				${until.desktop} {
 					${headline.xxxsmall()};
@@ -85,45 +75,28 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 		case 'small': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${baseStyles};
 					${textSans.medium()};
 					line-height: 18px;
 				`;
 			}
 			return css`
-				${baseStyles};
 				${headline.xxxsmall()};
 			`;
 		}
-		default:
-			return css``;
+		case 'tiny':
+			return undefined;
 	}
 };
 
-const colourStyles = (
-	format: ArticleFormat,
-	containerPalette: DCRContainerPalette | undefined,
-	isCard: Props['isCard'],
-) => {
-	return css`
-		color: ${isCard
-			? palette('--card-byline-text') //implement containerPalette
-			: decidePalette(format, containerPalette).text.byline};
-	`;
-};
-
-export const Byline = ({
-	text,
-	format,
-	containerPalette,
-	size,
-	isCard,
-}: Props) => {
+export const Byline = ({ text, format, size }: Props) => {
 	return (
 		<span
 			css={[
+				baseStyles,
 				bylineStyles(size, format),
-				colourStyles(format, containerPalette, isCard),
+				css`
+					color: ${palette('--card-byline-text')};
+				`,
 			]}
 		>
 			{text}
