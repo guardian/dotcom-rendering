@@ -41,7 +41,7 @@ import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail } from '../lib/decideTrail';
+import { decideTrail, filterTrails } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
 import type { DCRArticle } from '../types/frontend';
@@ -609,9 +609,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
-								)}
+								trails={filterTrails(
+									article.storyPackage.trails,
+								).map(decideTrail)}
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}

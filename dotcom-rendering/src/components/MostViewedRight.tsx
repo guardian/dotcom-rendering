@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { decideTrail } from '../lib/decideTrail';
+import { decideTrail, filterTrails } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import type { FETrailTabType, TrailType } from '../types/trails';
 import { MostViewedRightItem } from './MostViewedRightItem';
@@ -42,7 +42,7 @@ export const MostViewedRight = ({
 	}
 
 	if (data) {
-		const trails: TrailType[] = data.trails
+		const trails: TrailType[] = filterTrails(data.trails)
 			.slice(0, limitItems)
 			.map(decideTrail);
 
