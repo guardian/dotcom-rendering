@@ -1313,7 +1313,7 @@ const articleLinkHoverLight = ({ design, theme }: ArticleFormat): string => {
 				case Pillar.Culture:
 					return sourcePalette.culture[300];
 				case Pillar.Lifestyle:
-					return sourcePalette.sport[400];
+					return sourcePalette.lifestyle[400];
 				case Pillar.Sport:
 					return sourcePalette.sport[400];
 				case Pillar.Opinion:
