@@ -42,7 +42,7 @@ export default {
 		];
 
 		
-	
+
 		export const AppsStandardStandardNewsPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
@@ -84,7 +84,7 @@ export default {
 				}]
 			),
 		];
-	
+
 		export const AppsShowcaseStandardNewsPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
@@ -107,7 +107,7 @@ export default {
 		];
 
 		
-	
+
 		export const WebShowcasePictureOpinionPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
@@ -130,7 +130,7 @@ export default {
 		];
 
 		
-	
+
 		export const AppsShowcasePictureOpinionPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
@@ -153,7 +153,7 @@ export default {
 		];
 
 		
-	
+
 		export const AppsStandardCommentNewsPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
@@ -176,7 +176,7 @@ export default {
 		];
 
 		
-	
+
 		export const AppsStandardInteractiveNewsPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
@@ -199,7 +199,7 @@ export default {
 		];
 
 		
-	
+
 		export const AppsImmersiveStandardNewsPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
@@ -222,4 +222,95 @@ export default {
 		];
 
 		
-	
+
+		export const WebImmersivePhotoEssayLabsLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Immersive"
+					designName="PhotoEssay"
+					theme="Labs"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebImmersivePhotoEssayLabsLight.storyName = 'Web: Display: Immersive, Design: PhotoEssay, Theme: Labs, Mode: Light';
+		WebImmersivePhotoEssayLabsLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebImmersivePhotoEssayLabsLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Immersive,
+					design: ArticleDesign.PhotoEssay,
+					theme: {...ArticleSpecial, ...Pillar}.Labs,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardStandardLabsLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Standard"
+					theme="Labs"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardStandardLabsLight.storyName = 'Web: Display: Standard, Design: Standard, Theme: Labs, Mode: Light';
+		WebStandardStandardLabsLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardStandardLabsLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: {...ArticleSpecial, ...Pillar}.Labs,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardFeatureLabsLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Feature"
+					theme="Labs"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardFeatureLabsLight.storyName = 'Web: Display: Standard, Design: Feature, Theme: Labs, Mode: Light';
+		WebStandardFeatureLabsLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardFeatureLabsLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: {...ArticleSpecial, ...Pillar}.Labs,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardRecipeLabsLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Recipe"
+					theme="Labs"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardRecipeLabsLight.storyName = 'Web: Display: Standard, Design: Recipe, Theme: Labs, Mode: Light';
+		WebStandardRecipeLabsLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardRecipeLabsLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Recipe,
+					theme: {...ArticleSpecial, ...Pillar}.Labs,
+				}]
+			),
+		];
+
+		
