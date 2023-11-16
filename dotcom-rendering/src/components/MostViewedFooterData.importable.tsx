@@ -1,7 +1,7 @@
 import { joinUrl, log } from '@guardian/libs';
 import { abTestTest } from '../experiments/tests/ab-test-test';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail } from '../lib/decideTrail';
+import { decideTrail, filterTrails } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
@@ -45,7 +45,7 @@ function buildSectionUrl(
 function transformTabs(tabs: FETrailTabType[]): TrailTabType[] {
 	return tabs.map((tab) => ({
 		...tab,
-		trails: tab.trails.map((trail) => decideTrail(trail)),
+		trails: filterTrails(tab.trails).map((trail) => decideTrail(trail)),
 	}));
 }
 
