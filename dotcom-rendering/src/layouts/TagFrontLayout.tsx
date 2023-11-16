@@ -340,17 +340,19 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 			>
 				<TrendingTopics trendingTopics={tagFront.trendingTopics} />
 			</Section>
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				<AdSlot position="merchandising" display={format.display} />
-			</Section>
+			{renderAds && !hasPageSkin && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={neutral[93]}
+					element="aside"
+				>
+					<AdSlot position="merchandising" display={format.display} />
+				</Section>
+			)}
 
 			{NAV.subNavSections && (
 				<Section
