@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 const quoteStyles = (colour: string) => css`
-	height: 0.75em;
+	height: 0.7em;
 	width: auto;
 	vertical-align: baseline;
 	fill: ${colour};
