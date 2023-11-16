@@ -128,14 +128,14 @@ describe('Elements', function () {
 		it('should render the interactive using a boot.js', function () {
 			const getIframeBody = () => {
 				cy.get(
-					'[data-testidpress="interactive-element-LA%20Rams%20dead%20cap%20numbers"]',
+					'[data-testid="interactive-element-LA%20Rams%20dead%20cap%20numbers"]',
 				).scrollIntoView({
 					duration: 300,
 					offset: { top: -100, left: 0 },
 				});
 				return cy
 					.get(
-						'[data-testidpress="interactive-element-LA%20Rams%20dead%20cap%20numbers"] > iframe',
+						'[data-testid="interactive-element-LA%20Rams%20dead%20cap%20numbers"] > iframe',
 					)
 					.its('0.contentDocument.body')
 					.should('not.be.empty')
@@ -160,14 +160,14 @@ describe('Elements', function () {
 
 			const getIframeBody = () => {
 				cy.get(
-					'[data-testidpress="interactive-element-pa%20county%20by%20county"]',
+					'[data-testid="interactive-element-pa%20county%20by%20county"]',
 				).scrollIntoView({
 					duration: 300,
 					offset: { top: -100, left: 0 },
 				});
 				return cy
 					.get(
-						'[data-testidpress="interactive-element-pa%20county%20by%20county"] > iframe',
+						'[data-testid="interactive-element-pa%20county%20by%20county"] > iframe',
 					)
 					.its('0.contentDocument.body')
 					.should('not.be.empty')

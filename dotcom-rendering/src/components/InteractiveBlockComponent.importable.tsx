@@ -306,7 +306,7 @@ export const InteractiveBlockComponent = ({
 					role,
 				)}
 				data-alt={alt} // for compatibility with custom boot scripts
-				data-testidpress={`interactive-element-${encodeURI(alt ?? '')}`}
+				data-testid={`interactive-element-${encodeURI(alt ?? '')}`}
 				data-spacefinder-role={role}
 			>
 				{!loaded && (
