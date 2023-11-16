@@ -40,7 +40,12 @@ export const FrontMostViewed = ({
 	const tabs: TrailTabType[] = [
 		{
 			heading: localisedTitle(sectionName, editionId),
-			trails: trails.slice(0, 10),
+			trails: trails
+				.filter(
+					(trail) =>
+						trail.url !== '/info/2023/nov/15/removed-document',
+				)
+				.slice(0, 10),
 		},
 	];
 
