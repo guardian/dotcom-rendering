@@ -12,10 +12,10 @@ import {
 	SvgCheckmark,
 	SvgCross,
 } from '@guardian/source-react-components';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Hide } from '../../Hide';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { ensureHasPreposition, ReminderStatus } from '../lib/reminders';
-import { Lines } from './Lines';
 
 // --- Styles --- //
 
@@ -134,7 +134,7 @@ export const ContributionsEpicReminderSignedIn: ReactComponent<
 			</div>
 
 			<div css={lineWrapperStyles}>
-				<Lines />
+				<StraightLines />
 			</div>
 
 			{reminderStatus === ReminderStatus.Completed ? (

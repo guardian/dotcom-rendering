@@ -14,10 +14,10 @@ import {
 	SvgCross,
 	TextInput,
 } from '@guardian/source-react-components';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { useContributionsReminderEmailForm } from '../hooks/useContributionsReminderEmailForm';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { ensureHasPreposition, ReminderStatus } from '../lib/reminders';
-import { Lines } from './Lines';
 
 // --- Styles --- //
 
@@ -156,7 +156,7 @@ export const ContributionsEpicReminderSignedOut: ReactComponent<
 			</button>
 
 			<div css={lineWrapperStyles}>
-				<Lines />
+				<StraightLines />
 			</div>
 
 			<div css={containerStyles}>
