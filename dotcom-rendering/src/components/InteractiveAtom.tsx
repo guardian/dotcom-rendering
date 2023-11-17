@@ -46,6 +46,13 @@ export const InteractiveAtom = ({
 			title={id}
 			srcDoc={unifyPageContent({ elementJs, elementCss, elementHtml })}
 			frameBorder="0"
+			/**
+			 * Do NOT add `allow-same-origin` to this attribute if `allow-scripts` is present.
+			 * This undermines the sandbox when using `srcdoc` (which is used here), because a
+			 * `srcdoc` has the same origin as the embedding page:
+			 * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#sect6
+			 */
+			sandbox="allow-scripts"
 		/>
 	</div>
 );
