@@ -8,7 +8,7 @@ import type {
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { submitComponentEvent } from './ophan/ophan';
+import { submitComponentEvent, submitEvent } from './ophan/ophan';
 
 const submitConsentEventsToOphan = (renderingTarget: RenderingTarget) =>
 	onConsent().then((consentState: ConsentState) => {
@@ -81,6 +81,47 @@ const submitConsentEventsToOphan = (renderingTarget: RenderingTarget) =>
 		return submitComponentEvent(event, renderingTarget);
 	});
 
+const submitConsentToOphan = (renderingTarget: RenderingTarget) =>
+	onConsent().then((consentState: ConsentState) => {
+		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Review if this check is needed
+		if (!consentState) return;
+		// Register changes in consent state with Ophan
+
+		let consentJurisdiction = 'Other';
+		let consentUUID = '';
+		let consent = '';
+
+		if (consentState.tcfv2) {
+			consentJurisdiction = 'TCF';
+			consentUUID = getCookie({ name: 'consentUUID' }) ?? '';
+			consent = consentState.tcfv2.tcString;
+		}
+		if (consentState.ccpa) {
+			consentJurisdiction = 'CCPA';
+			consentUUID = getCookie({ name: 'ccpaUUID' }) ?? '';
+			consent = consentState.ccpa.doNotSell ? 'true' : 'false';
+		}
+		if (consentState.aus) {
+			consentJurisdiction = 'AUS';
+			consentUUID = getCookie({ name: 'ccpaUUID' }) ?? '';
+			/*consent =
+					getCookie({ name: 'consentStatus' }) ?? '';
+					*/
+			consent = consentState.aus.personalisedAdvertising
+				? 'true'
+				: 'false';
+		}
+
+		return submitEvent(
+			{
+				consentJurisdiction,
+				consentUUID,
+				consent,
+			},
+			renderingTarget,
+		);
+	});
+
 const initialiseCmp = () =>
 	getLocaleCode().then((code) => {
 		const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
@@ -121,5 +162,6 @@ export const bootCmp = async (
 		initialiseCmp(),
 		eagerlyImportPrivacySettingsLinkIsland(),
 		submitConsentEventsToOphan(renderingTarget),
+		submitConsentToOphan(renderingTarget),
 	]);
 };
