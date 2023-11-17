@@ -48,7 +48,7 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail, filterTrails } from '../lib/decideTrail';
+import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
@@ -765,9 +765,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={filterTrails(
-									article.storyPackage.trails,
-								).map(decideTrail)}
+								trails={article.storyPackage.trails.map(
+									decideTrail,
+								)}
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
