@@ -143,8 +143,6 @@ export const ContributionsEpicButtons = ({
 	amountsVariantName,
 	numArticles,
 }: ContributionsEpicButtonsProps): JSX.Element | null => {
-	// const [hasBeenSeen, setNode] = useHasBeenSeen({}, true);
-	// TODO - is this ok?
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 	});

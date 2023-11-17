@@ -1,5 +1,5 @@
-import type { ReminderFields } from '@guardian/support-dotcom-components/dist/shared/src/lib';
 import type { OphanComponentEvent } from '@guardian/libs';
+import type { ReminderFields } from '@guardian/support-dotcom-components/dist/shared/src/lib';
 import { useContributionsReminderSignup } from '../hooks/useContributionsReminderSignup';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { ContributionsEpicReminderSignedIn } from './ContributionsEpicReminderSignedIn';

@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source-foundations';
 import type { OphanComponentEvent, OphanComponentType } from '@guardian/libs';
+import { from, space } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import {
@@ -146,16 +146,10 @@ export const ArticleCountOptOutPopup: ReactComponent<
 > = ({ numArticles, nextWord, type, tracking }: ArticleCountOptOutProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [hasOptedOut, setHasOptedOut] = useState(false);
-	// const [hasBeenSeen, setNode] = useHasBeenSeen(
-	//     {
-	//         rootMargin: '-18px',
-	//         threshold: 0,
-	//     },
-	//     true,
-	// );
-	// TODO - is this ok?
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
+		rootMargin: '-18px',
+		threshold: 0,
 	});
 
 	useEffect(() => {

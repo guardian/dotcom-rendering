@@ -120,7 +120,6 @@ const LiveblogEpicBody: ReactComponent<LiveblogEpicBodyProps> = ({
 };
 
 export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
-	// export const ContributionsLiveblogEpic = ({
 	variant,
 	countryCode,
 	articleCounts,
@@ -129,8 +128,6 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	onReminderOpen,
 	fetchEmail,
 }: EpicProps): JSX.Element => {
-	// const [hasBeenSeen, setNode] = useHasBeenSeen({ threshold: 0 }, true) as HasBeenSeen;
-	// TODO - is this ok?
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 	});

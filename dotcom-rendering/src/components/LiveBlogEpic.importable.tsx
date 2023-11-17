@@ -3,7 +3,7 @@ import { getCookie, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useArticleCounts } from '../lib/articleCount';
@@ -17,7 +17,6 @@ import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
 import type { TagType } from '../types/tag';
-import type { ReactComponent } from './marketing/lib/ReactComponent';
 
 type Props = {
 	sectionId: string;
@@ -33,7 +32,7 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 	// Using state here to store the Epic component that gets imported allows
 	// us to render it with React (instead of inserting it into the dom manually)
 	const [Epic, setEpic] =
-		useState<ReactComponent<{ [key: string]: unknown }>>();
+		useState<React.ElementType<{ [key: string]: unknown }>>();
 
 	useEffect(() => {
 		import(`./marketing/epics/ContributionsLiveblogEpic`)
