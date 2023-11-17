@@ -3,7 +3,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
-	brandBackground,
 	brandBorder,
 	brandLine,
 	from,
@@ -52,8 +51,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decidePalette } from '../lib/decidePalette';
-import { decideTrail } from '../lib/decideTrail';
+import { decideTrail, filterTrails } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -333,8 +331,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const { branding } = article.commercialProperties[article.editionId];
 
-	const palette = decidePalette(format);
-
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
@@ -365,7 +361,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							showSideBorders={false}
 							padSides={false}
 							shouldCenter={false}
-							backgroundColour={brandBackground.primary}
+							backgroundColour={themePalette(
+								'--article-section-background',
+							)}
 							element="header"
 						>
 							<Header
@@ -395,7 +393,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						borderColour={brandLine.primary}
 						showTopBorder={false}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
 						element="nav"
 					>
 						<Nav
@@ -421,7 +421,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								element="aside"
 							>
@@ -436,16 +438,20 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
-										linkHoverColour={
-											palette.text.articleLinkHover
-										}
-										borderColour={palette.border.subNav}
+										linkHoverColour={themePalette(
+											'--article-link-text-hover',
+										)}
+										borderColour={themePalette(
+											'--sub-nav-border',
+										)}
 									/>
 								</Island>
 							</Section>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								showTopBorder={false}
 							>
@@ -454,7 +460,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={palette.border.secondary}
+									color={themePalette('--article-border')}
 								/>
 							</Section>
 						</>
@@ -490,8 +496,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					fullWidth={true}
 					data-print-layout="hide"
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
-					borderColour={palette.border.article}
+					backgroundColour={themePalette('--article-background')}
+					borderColour={themePalette('--article-border')}
 					element="article"
 				>
 					<StandardGrid isMatchReport={isMatchReport}>
@@ -606,7 +612,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									) : (
 										<DecideLines
 											format={format}
-											color={palette.border.article}
+											color={themePalette(
+												'--article-border',
+											)}
 										/>
 									)}
 								</div>
@@ -736,7 +744,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={palette.border.secondary}
+									color={themePalette(
+										'--article-border-secondary',
+									)}
 								/>
 								<SubMeta
 									format={format}
@@ -811,9 +821,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
-								)}
+								trails={filterTrails(
+									article.storyPackage.trails,
+								).map(decideTrail)}
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
@@ -943,10 +953,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
-									linkHoverColour={
-										palette.text.articleLinkHover
-									}
-									borderColour={palette.border.subNav}
+									linkHoverColour={themePalette(
+										'--article-link-text-hover',
+									)}
+									borderColour={themePalette(
+										'--sub-nav-border',
+									)}
 								/>
 							</Island>
 						</Section>
@@ -955,7 +967,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						fullWidth={true}
 						data-print-layout="hide"
 						padSides={false}
-						backgroundColour={brandBackground.primary}
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
 						borderColour={brandBorder.primary}
 						showSideBorders={false}
 						element="footer"

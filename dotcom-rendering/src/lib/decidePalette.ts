@@ -381,6 +381,7 @@ const textSyndicationButton = (format: ArticleFormat): string => {
 	return text.supporting;
 };
 
+/** @deprecated this has been moved to the theme palette (--article-link-text) */
 const textArticleLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
 		switch (format.theme) {
@@ -505,19 +506,7 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 	}
 };
 
-const textBranding = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
+/** @deprecated this has been moved to the theme palette (--article-link-text-hover) */
 const textArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
 		switch (format.theme) {
@@ -728,6 +717,7 @@ const textCricketScoreboardLink = (): string => {
 	return sport[300];
 };
 
+/** @deprecated this has been moved to the theme palette */
 const backgroundArticle = (format: ArticleFormat): string => {
 	// specialreport blogs should have specialreport background
 	if (
@@ -1150,40 +1140,69 @@ const fillShareIconGrayBackground = (format: ArticleFormat): string => {
 };
 
 const fillBlockquoteIcon = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog: {
+			switch (format.theme) {
+				case Pillar.News:
+					return news[400];
+				case Pillar.Opinion:
+					return opinion[400];
+				case Pillar.Sport:
+					return sport[400];
+				case Pillar.Culture:
+					return culture[400];
+				case Pillar.Lifestyle:
+					return lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
+				case ArticleSpecial.Labs:
+					return labs[400];
+			}
+		}
+		case ArticleDesign.Analysis: {
+			switch (format.theme) {
+				case Pillar.News:
+					return news[300];
+				case Pillar.Opinion:
+					return opinion[300];
+				case Pillar.Sport:
+					return sport[400];
+				case Pillar.Culture:
+					return culture[400];
+				case Pillar.Lifestyle:
+					return lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[200];
+				case ArticleSpecial.Labs:
+					return labs[400];
+			}
+		}
+		default: {
+			switch (format.theme) {
+				case Pillar.News:
+					return news[400];
+				case Pillar.Opinion:
+					return opinion[300];
+				case Pillar.Sport:
+					return sport[400];
+				case Pillar.Culture:
+					return culture[400];
+				case Pillar.Lifestyle:
+					return lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[200];
+				case ArticleSpecial.Labs:
+					return labs[400];
+			}
 		}
 	}
-
-	if (
-		format.design === ArticleDesign.DeadBlog ||
-		format.design === ArticleDesign.LiveBlog
-	) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[400];
-			case Pillar.Opinion:
-				return opinion[400];
-			case Pillar.Sport:
-				return sport[400];
-			case Pillar.Culture:
-				return culture[400];
-			case Pillar.Lifestyle:
-				return lifestyle[400];
-			case ArticleSpecial.SpecialReport:
-				return specialReport[400];
-			case ArticleSpecial.SpecialReportAlt:
-				return news[400];
-			case ArticleSpecial.Labs:
-				return labs[400];
-		}
-	}
-
-	return pillarPalette[format.theme].main;
 };
 
 const fillTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
@@ -1223,6 +1242,7 @@ const borderSyndicationButton = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
+/** @deprecated this has been moved to the theme palette */
 const borderSubNav = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
@@ -1281,6 +1301,7 @@ const borderPinnedPost = (format: ArticleFormat): string => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette ('--article-link-border) */
 const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 
@@ -1419,6 +1440,7 @@ const backgroundMatchNav = (): string => {
 const backgroundUnderline = (format: ArticleFormat): string =>
 	transparentColour(textCardKicker(format));
 
+/** @deprecated this has been moved to the theme palette (--article-link-border-hover) */
 const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -1535,6 +1557,7 @@ const borderRichLink: (format: ArticleFormat) => string = (format) => {
 const borderNavPillar: (format: ArticleFormat) => string = (format) =>
 	pillarPalette[format.theme].bright;
 
+/** @deprecated this has been moved to the theme palette */
 const borderArticle: (format: ArticleFormat) => string = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
@@ -1589,6 +1612,7 @@ const borderCricketScoreboardDivider = (): string => {
 
 const borderFilterButton = (): string => neutral[60];
 
+/** @deprecated this has been moved to the theme palette */
 const borderSecondary = (format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
@@ -2088,7 +2112,6 @@ export const decidePalette = (
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
 			lastUpdated: textLastUpdated(format),
-			branding: textBranding(format),
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),
 			richLink: textRichLink(format),

@@ -533,9 +533,11 @@ export const TitleAndContributor = () => {
 };
 TitleAndContributor.storyName = 'with a contributor and a title';
 TitleAndContributor.decorators = [
-	lightDecorator({
-		theme: Pillar.Sport,
-		design: ArticleDesign.LiveBlog,
-		display: ArticleDisplay.Standard,
-	}),
+	lightDecorator([
+		{
+			theme: Pillar.Sport,
+			design: ArticleDesign.LiveBlog,
+			display: ArticleDisplay.Standard,
+		},
+	]),
 ];

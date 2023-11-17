@@ -14,6 +14,7 @@ import { Link, SvgExternal } from '@guardian/source-react-components';
 import React from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import { palette as schemedPalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
 import { Byline } from './Byline';
@@ -287,10 +288,13 @@ export const CardHeadline = ({
 					{showQuotes && <QuoteIcon colour={kickerColour} />}
 					<span
 						css={css`
-							color: ${isDynamo
-								? palette.text.dynamoHeadline
-								: palette.text.cardHeadline};
+							color: ${schemedPalette('--headline-colour')};
 						`}
+						style={{
+							['--headline-colour']: isDynamo
+								? palette.text.dynamoHeadline
+								: palette.text.cardHeadline,
+						}}
 						className="show-underline"
 					>
 						{cleanHeadLineText}

@@ -35,21 +35,23 @@ const ABTestAPI = useAB()?.api;
 // We can check if a user is in a variant, returns a boolean
 // ABTestTest being an ab test that was passed in via the ab test array
 const abTestDataAttr =
-    (ABTestAPI?.isUserInVariant('AbTestTest', 'control') && 'ab-test-control') ||
-    (ABTestAPI?.isUserInVariant('AbTestTest', 'variant') && 'ab-test-variant') ||
-    'ab-test-not-in-test';
+	(ABTestAPI?.isUserInVariant('AbTestTest', 'control') &&
+		'ab-test-control') ||
+	(ABTestAPI?.isUserInVariant('AbTestTest', 'variant') &&
+		'ab-test-variant') ||
+	'ab-test-not-in-test';
 
 // We can get the variant straight from a check for
 // whether the test is runnable
 const runnableTest = ABTestAPI?.runnableTest(abTestTest);
 const variantFromRunnable =
-    (runnableTest && runnableTest.variantToRun.id) || 'not-runnable';
+	(runnableTest && runnableTest.variantToRun.id) || 'not-runnable';
 
 <div
-    data-ab-user-in-variant={abTestDataAttr}
-    data-ab-runnable-test={variantFromRunnable}
+	data-ab-user-in-variant={abTestDataAttr}
+	data-ab-runnable-test={variantFromRunnable}
 >
-    AB Test
+	AB Test
 </div>;
 ```
 

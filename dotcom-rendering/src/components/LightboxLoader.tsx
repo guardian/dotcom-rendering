@@ -46,7 +46,9 @@ export const LightboxLoader = ({ position }: { position: number }) => {
 					height: 12px;
 					border-radius: 50%;
 					background-color: ${neutral[100]};
-					box-shadow: 26px 0 ${neutral[100]}, -26px 0 ${neutral[100]};
+					box-shadow:
+						26px 0 ${neutral[100]},
+						-26px 0 ${neutral[100]};
 					position: relative;
 					animation: ${flash} 0.5s ease-out infinite alternate;
 					@media (prefers-reduced-motion) {

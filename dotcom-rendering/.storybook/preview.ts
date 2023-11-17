@@ -158,7 +158,7 @@ export default {
 	decorators: [
 		// @ts-expect-error -- this global decorator takes an option parameter
 		ConfigContextDecorator,
-		lightDecorator(defaultFormat),
+		lightDecorator([defaultFormat]),
 		(Story) => {
 			storage.local.clear();
 			return Story();

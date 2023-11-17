@@ -124,7 +124,9 @@ const CalloutWithHydrationProps: FC<CalloutProps> = ({
 			'data-hydrationprops': serverSideProps,
 			className: 'js-callout-props',
 			id: getCalloutId(
-				calloutProps.heading ? calloutProps.formId.toString() : calloutProps.heading
+				calloutProps.heading
+					? calloutProps.formId.toString()
+					: calloutProps.heading,
 			),
 		},
 		Callout({

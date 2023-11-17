@@ -6,23 +6,23 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Quick start](#quick-start)
-  - [Install Node.js](#install-nodejs)
-  - [Running instructions](#running-instructions)
-  - [Environment Variables](#environment-variables)
-  - [Detailed Setup](#detailed-setup)
-  - [Technologies](#technologies)
-  - [UI Design System](#ui-design-system)
-  - [Concepts](#concepts)
-  - [Visual Debugging](#visual-debugging)
-  - [Feedback](#feedback)
-- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
-- [Code Quality](#code-quality)
-  - [Snyk Code Scanning](#snyk-code-scanning)
-- [IDE setup](#ide-setup)
-  - [Extensions](#extensions)
-  - [Auto fix on save](#auto-fix-on-save)
-- [Thanks](#thanks)
+-   [Quick start](#quick-start)
+    -   [Install Node.js](#install-nodejs)
+    -   [Running instructions](#running-instructions)
+    -   [Environment Variables](#environment-variables)
+    -   [Detailed Setup](#detailed-setup)
+    -   [Technologies](#technologies)
+    -   [UI Design System](#ui-design-system)
+    -   [Concepts](#concepts)
+    -   [Visual Debugging](#visual-debugging)
+    -   [Feedback](#feedback)
+-   [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+-   [Code Quality](#code-quality)
+    -   [Snyk Code Scanning](#snyk-code-scanning)
+-   [IDE setup](#ide-setup)
+    -   [Extensions](#extensions)
+    -   [Auto fix on save](#auto-fix-on-save)
+-   [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -92,7 +92,7 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 | <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />                                                 | Chromatic is a visual regression testing tool that reviews our Storybook components at PR time.                                                                                                                                                                                                                                                   |
 | <img alt="Cypress" src="./docs/images/logo-cypress.png" width="350" />                                                     | Cypress is an integration testing tool that runs tests in the browser. You will find the Cypress tests in the [cypress folder](./cypress).                                                                                                                                                                                                        |
 | <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />                                                      | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                                        |
-| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                               | The [A/B Testing library](https://github.com/guardian/csnx/tree/main/libs/@guardian/ab-core) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                               |
+| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                               | The [A/B Testing library](https://github.com/guardian/csnx/tree/main/libs/@guardian/ab-core) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                    |
 | <img alt="Deno" title="Deno logo, MIT License: https://deno.land/artwork" src="./docs/images/logo-deno.svg" width="350" /> | [Deno](https://deno.land/) is a JavaScript runtime that we've started incorporating into some of our Github Actions workflows. You will only need to install it if you are planning to run the workflow scripts locally. Some installation and troubleshooting instructions can be found in the [Deno scripts folder](../scripts/deno/README.md). |
 
 ### UI Design System
@@ -172,9 +172,18 @@ VSCode should prompt you to install our recommended extensions when you open the
 
 You can also find these extensions by searching for `@recommended` in the extensions pane.
 
+### Commit hooks
+
+Staged changes are automatically prettified on commit. You can disable this by adding `--no-verify` to your commit command.
+
+To run the prettier check manually, run either of the following commands from the workspace root:
+
+-   `yarn prettier:check` &rarr; Checks for prettier issues
+-   `yarn prettier:write` &rarr; Checks and fixes prettier issues
+
 ### Auto fix on save
 
-We recommend you update your workspace settings to automatically fix formatting errors on save, this avoids code style validation failures. These instructions assume you have installed the `esbenp.prettier-vscode` VSCode plugin:
+We recommend you update your workspace settings to automatically fix formatting and linting errors on save, this avoids code style validation failures. These instructions assume you have installed the `esbenp.prettier-vscode` VSCode plugin:
 
 1. Open the Command Palette (`shift + cmd + P`) and type
 
@@ -184,12 +193,9 @@ We recommend you update your workspace settings to automatically fix formatting 
 
 2. Add the key value `"tslint.autoFixOnSave": true,`
 
-If you prefer not to use an editor like VSCode then you can use the following commands to manage formatting:
+If you prefer not to use an editor like VSCode then you can use the following commands to manage formatting and (try to fix) linting errors:
 
--   `yarn prettier:check` &rarr; Checks for prettier issues
--   `yarn prettier:fix` &rarr; Checks and fixes prettier issues
--   `yarn lint` &rarr; Checks for linting issues
--   `yarn lint --fix` &rarr; Checks and fixes linting issues
+-   `make fix` &rarr; Checks and fixes prettier and linting issues
 
 ## Thanks
 

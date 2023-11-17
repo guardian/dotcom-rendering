@@ -167,7 +167,8 @@ const immersiveTitleBadgeStyle = (palette: Palette) => css`
 	/* Offset parent container margins when Immersive */
 	margin-bottom: -10px;
 	background-color: ${palette.background.seriesTitle};
-	box-shadow: -6px 0 0 0 ${palette.background.seriesTitle},
+	box-shadow:
+		-6px 0 0 0 ${palette.background.seriesTitle},
 		6px 0 0 0 ${palette.background.seriesTitle};
 `;
 
@@ -234,7 +235,8 @@ export const SeriesSectionLink = ({
 											color: ${seriesTitleColour};
 											background-color: ${palette
 												.background.seriesTitle};
-											box-shadow: -6px 0 0 0
+											box-shadow:
+												-6px 0 0 0
 													${palette.background
 														.seriesTitle},
 												6px 0 0 0
@@ -261,7 +263,8 @@ export const SeriesSectionLink = ({
 													.sectionTitle};
 												background-color: ${palette
 													.background.sectionTitle};
-												box-shadow: -6px 0 0 0
+												box-shadow:
+													-6px 0 0 0
 														${palette.background
 															.seriesTitle},
 													6px 0 0 0
@@ -292,7 +295,8 @@ export const SeriesSectionLink = ({
 										color: ${sectionTitleColour};
 										background-color: ${palette.background
 											.sectionTitle};
-										box-shadow: -6px 0 0 0
+										box-shadow:
+											-6px 0 0 0
 												${palette.background
 													.seriesTitle},
 											6px 0 0 0
@@ -341,7 +345,8 @@ export const SeriesSectionLink = ({
 											color: ${seriesTitleColour};
 											background-color: ${palette
 												.background.seriesTitle};
-											box-shadow: -6px 0 0 0
+											box-shadow:
+												-6px 0 0 0
 													${palette.background
 														.seriesTitle},
 												6px 0 0 0
@@ -404,7 +409,8 @@ export const SeriesSectionLink = ({
 								fontStyles(format),
 								breakWord,
 								css`
-									box-shadow: -6px 0 0 0
+									box-shadow:
+										-6px 0 0 0
 											${palette.background.seriesTitle},
 										6px 0 0 0
 											${palette.background.seriesTitle};

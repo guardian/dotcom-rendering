@@ -21,6 +21,7 @@ import type { MainMedia } from 'mainMedia';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
+import { parseCartoon } from './cartoon';
 
 // ----- Lookups ----- //
 
@@ -70,6 +71,9 @@ const isVideo = (elem: BlockElement): boolean =>
 	elem.type === ElementType.CONTENTATOM &&
 	elem.contentAtomTypeData?.atomType === 'media';
 
+const isCartoon = (elem: BlockElement): boolean =>
+	elem.type === ElementType.CARTOON;
+
 const articleMainImage = (content: Content): Optional<BlockElement> =>
 	Optional.fromNullable(
 		(content.blocks?.main?.elements.filter(isImage) ?? [])[0],
@@ -80,23 +84,47 @@ const articleMainVideo = (content: Content): Optional<BlockElement> =>
 		(content.blocks?.main?.elements.filter(isVideo) ?? [])[0],
 	);
 
+const articleMainCartoon = (content: Content): Optional<BlockElement> =>
+	Optional.fromNullable(
+		(content.blocks?.main?.elements.filter(isCartoon) ?? [])[0],
+	);
+
 const articleMainMedia = (
 	content: Content,
 	context: Context,
 ): Optional<MainMedia> => {
-	return (content.blocks?.main?.elements.filter(isImage) ?? [])[0]
-		? articleMainImage(content)
+	const elementType: ElementType | undefined = (content.blocks?.main
+		?.elements ?? [])[0]?.type;
+
+	switch (elementType) {
+		case ElementType.IMAGE:
+			return articleMainImage(content)
 				.flatMap(parseImage(context))
 				.map<MainMedia>((image) => ({
 					kind: MainMediaKind.Image,
 					image,
-				}))
-		: articleMainVideo(content)
+				}));
+		case ElementType.VIDEO:
+			return articleMainVideo(content)
 				.flatMap(parseVideo(content.atoms))
 				.map<MainMedia>((video) => ({
 					kind: MainMediaKind.Video,
 					video,
 				}));
+		case ElementType.CARTOON:
+			if (context.app === 'Editions') {
+				return articleMainCartoon(content)
+					.flatMap(parseCartoon(context))
+					.map<MainMedia>((cartoon) => ({
+						kind: MainMediaKind.Cartoon,
+						cartoon,
+					}));
+			} else {
+				return Optional.none();
+			}
+		default:
+			return Optional.none();
+	}
 };
 
 type ThirdPartyEmbeds = {

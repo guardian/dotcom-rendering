@@ -7,6 +7,7 @@ import { renderToString } from 'react-dom/server';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
+import { CommentCount } from './CommentCount.importable';
 import { ConfigProvider } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { FocusStyles } from './FocusStyles.importable';
@@ -117,6 +118,22 @@ describe('Island: server-side rendering', () => {
 					}}
 					discussionApiUrl=""
 					discussionId=""
+				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('CommentCount', () => {
+		expect(() =>
+			renderToString(
+				<CommentCount
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+					discussionApiUrl=""
+					shortUrlId=""
 				/>,
 			),
 		).not.toThrow();
