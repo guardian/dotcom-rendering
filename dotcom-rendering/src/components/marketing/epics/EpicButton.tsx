@@ -47,15 +47,18 @@ type Props = {
 // Overrides for tertiary button
 // Unfortunatly they all need !important :(
 const tertiaryButtonOverrides = css`
+	/* stylelint-disable-next-line declaration-no-important */
 	border: 1px solid ${palette.neutral[7]} !important;
+	/* stylelint-disable-next-line declaration-no-important */
 	background-color: transparent !important;
 
 	:hover {
+		/* stylelint-disable-next-line declaration-no-important */
 		background-color: ${palette.neutral[86]} !important;
 	}
 `;
 
-export const Button: ReactComponent<Props> = (allProps: Props) => {
+export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 	const {
 		onClickAction,
 		children,

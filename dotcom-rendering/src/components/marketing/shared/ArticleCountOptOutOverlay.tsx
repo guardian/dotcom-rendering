@@ -209,7 +209,9 @@ const overlayNote = (type: ArticleCountOptOutType): SerializedStyles => css`
 	font-style: italic;
 
 	a {
+		/* stylelint-disable-next-line declaration-no-important */
 		color: ${NOTE_LINK_COLOURS[type]} !important;
+		/* stylelint-disable-next-line declaration-no-important */
 		text-decoration: underline !important;
 	}
 `;

@@ -88,12 +88,14 @@ const articleCountButton = css`
 	padding: 0;
 	cursor: pointer;
 	border-bottom: 1px solid;
+	/* stylelint-disable-next-line property-disallowed-list */
 	font-family: inherit;
 	font-size: inherit;
 	font-weight: inherit;
 	font-style: inherit;
 	color: inherit;
 	&:focus {
+		/* stylelint-disable-next-line declaration-no-important */
 		outline: none !important;
 	}
 `;

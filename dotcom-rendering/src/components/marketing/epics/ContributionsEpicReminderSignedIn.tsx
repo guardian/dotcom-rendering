@@ -56,6 +56,7 @@ const errorTextStyles = css`
 	${textSans.small({ fontWeight: 'bold' })};
 	color: ${palette.error[400]};
 	font-style: italic;
+	/* stylelint-disable-next-line declaration-no-important */
 	margin-top: ${space[2]}px !important;
 	margin-bottom: 0;
 `;
@@ -82,6 +83,7 @@ const bodyCopyStyles = css`
 const infoCopyStyles = css`
 	${textSans.small()};
 	font-style: italic;
+	/* stylelint-disable-next-line declaration-no-important */
 	margin-top: ${space[2]}px !important;
 `;
 

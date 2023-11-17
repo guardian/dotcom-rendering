@@ -16,7 +16,7 @@ import {
 	addRegionIdAndTrackingParamsToSupportUrl,
 	isSupportUrl,
 } from '../lib/tracking';
-import { Button } from './Button';
+import { EpicButton } from './EpicButton';
 import {
 	getReminderViewEvent,
 	OPHAN_COMPONENT_EVENT_CTAS_VIEW,
@@ -77,13 +77,13 @@ const PrimaryCtaButton = ({
 
 	return (
 		<div css={buttonMarginStyles}>
-			<Button
+			<EpicButton
 				onClickAction={urlWithRegionAndTracking}
 				showArrow={true}
 				data-ignore="global-link-styling"
 			>
 				{buttonText}
-			</Button>
+			</EpicButton>
 		</div>
 	);
 };
@@ -107,9 +107,13 @@ const SecondaryCtaButton = ({
 	);
 	return (
 		<div css={buttonMarginStyles}>
-			<Button onClickAction={url} showArrow={true} priority="secondary">
+			<EpicButton
+				onClickAction={url}
+				showArrow={true}
+				priority="secondary"
+			>
 				{cta.text}
-			</Button>
+			</EpicButton>
 		</div>
 	);
 };
@@ -213,12 +217,12 @@ export const ContributionsEpicButtons = ({
 						showReminderFields &&
 						!hasSetReminder() && (
 							<div css={buttonMarginStyles}>
-								<Button
+								<EpicButton
 									onClickAction={openReminder}
 									isTertiary={true}
 								>
 									{showReminderFields.reminderCta}
-								</Button>
+								</EpicButton>
 							</div>
 						)}
 

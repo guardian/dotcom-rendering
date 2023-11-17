@@ -110,8 +110,11 @@ const getCustomSubmitStyles = (
 		// the specificity war against the default Source styles.
 		return css`
 			pointer-events: none;
+			/* stylelint-disable-next-line declaration-no-important */
 			color: ${palette.neutral[60]} !important;
+			/* stylelint-disable-next-line declaration-no-important */
 			background-color: ${palette.neutral[93]} !important;
+			/* stylelint-disable-next-line declaration-no-important */
 			border: 1px solid ${palette.neutral[86]} !important;
 		`;
 	}
