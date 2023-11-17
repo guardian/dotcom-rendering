@@ -235,7 +235,7 @@
 		"simple-progress-webpack-plugin": "2.0.0",
 		"snyk": "1.1103.0",
 		"source-map": "0.7.4",
-		"start-server-and-test": "2.0.2",
+		"start-server-and-test": "2.0.3",
 		"storybook": "7.5.3",
 		"storybook-addon-turbo-build": "2.0.1",
 		"stylelint": "14.16.1",

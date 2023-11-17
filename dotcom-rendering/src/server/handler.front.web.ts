@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
 import { pickBrandingForEdition } from '../lib/branding';
-import { decideTrail } from '../lib/decideTrail';
+import { decideTrail, filterTrails } from '../lib/decideTrail';
 import { enhanceCards } from '../model/enhanceCards';
 import { enhanceCollections } from '../model/enhanceCollections';
 import {
@@ -41,7 +41,9 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 				),
 			}),
 		},
-		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
+		mostViewed: filterTrails(data.mostViewed).map((trail) =>
+			decideTrail(trail),
+		),
 		mostCommented: data.mostCommented
 			? decideTrail(data.mostCommented)
 			: undefined,
@@ -50,7 +52,9 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 			data.pressedPage.collections,
 			data.pageId,
 		),
-		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
+		deeplyRead: filterTrails(data.deeplyRead ?? []).map((trail) =>
+			decideTrail(trail),
+		),
 	};
 };
 
