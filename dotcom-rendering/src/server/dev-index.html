@@ -149,6 +149,7 @@
 			<li>VideoBlockElement</li>
 			<li>VideoFacebookBlockElement</li>
 		</ul>
+		<div id="achievements-root"></div>
 
 		<script>
 			var testContentTypes = [
@@ -406,6 +407,7 @@
 						const slug = text.slice(guurl.length, 64);
 
 						const pageType = getPageType(text);
+						checkForClipboardAchievements(guurl, pageType);
 
 						a.setAttribute('href', `/${pageType}/${text}`);
 						a.innerText = `📋 ${pageType} from clipboard: /${slug}…`;
@@ -460,6 +462,187 @@
 					'test-articles-by-atom-type',
 				).innerHTML += makeTestArticle(a);
 			});
+
+			/**
+			 * Olly N (Nov 2023)
+			 * Enjoy some achievements for using the DCR dev server!
+			 *
+			 * Are you a future traveler on your way out from the guardian, or just looking for some 10% fun?
+			 * Consider adding your own achievements! I've added a few basic ones already, but the fun of this
+			 * is that anyone can add to this - make using DCR a more exciting & exploratory experience!
+			 */
+			const activationDate = new Date('2023-11-18'); // Come across this code before this date? Shhh!
+			const isActivated = () => Date.now() > activationDate;
+
+			const achievementTrackerGet = (category) => {
+				try {
+					const raw = localStorage.getItem(
+						`gu.achievement.${category}`,
+					);
+					if (raw !== null) return new Set(JSON.parse(raw));
+					else return new Set();
+				} catch (err) {
+					console.error(err);
+					return new Set();
+				}
+			};
+
+			const achievementTrackerAdd = (category, value, override) => {
+				try {
+					const set = override ?? achievementTrackerGet(category);
+					set.add(value);
+					localStorage.setItem(
+						`gu.achievement.${category}`,
+						JSON.stringify(Array.from(set)),
+					);
+					return set;
+				} catch (err) {
+					console.error(err);
+					return new Set([value]); // Shh
+				}
+			};
+
+			const pageViewAchievements = () => {
+				if (!isActivated()) return; // Only start tracking after Olly N is gone
+				const set = achievementTrackerGet('indexpageview');
+				// this is a bit of a hack because I made the local storage use sets
+				const count = (set.values().next().value ?? 0) + 1;
+				achievementTrackerAdd('indexpageview', count, new Set());
+
+				const createAchievement = (userType, count) =>
+					achievement(
+						`${userType} user!`,
+						`Visited the dev server index page ${count} times`,
+					);
+
+				switch (count) {
+					case 100:
+						return createAchievement('Light', 100);
+					case 500:
+						return createAchievement('Confident', 500);
+					case 1000:
+						return createAchievement('Experienced', 1000);
+					case 5000:
+						return createAchievement('Expert', 5000);
+					case 10000:
+						return createAchievement('Pro', 10000);
+					case -1:
+						return achievement(
+							'Hacker',
+							'Hacked the dev server to get your page count to be -1!',
+						);
+				}
+			};
+
+			const checkForClipboardAchievements = (host, pageType) => {
+				if (!isActivated()) return; // Only start tracking after Olly N is gone
+				const hostsUsed = achievementTrackerAdd('clipboardhosts', host);
+				const pageTypesUsed = achievementTrackerAdd(
+					'clipboardpagetypes',
+					pageType,
+				);
+				if (pageTypesUsed.size === 3) {
+					achievement(
+						'Page type traveler!',
+						'Have had all 3 types of page in your clipboard',
+					);
+				}
+				if (hostsUsed.size === 3) {
+					achievement(
+						'Environment explorer!',
+						'Have had all 3 environments in your clipboard ',
+					);
+				}
+
+				const set = achievementTrackerGet('clipboarduse');
+				// this is a bit of a hack because I made the local storage use sets
+				const count = (set.values().next().value ?? 0) + 1;
+				achievementTrackerAdd('clipboarduse', count, new Set());
+
+				const createAchievement = (level, count) =>
+					achievement(
+						`Clipboard Level ${level}!`,
+						`Copied ${count} guardian pages for quick access on the dev-server`,
+					);
+
+				switch (count) {
+					case 25:
+						return createAchievement(1, 25);
+					case 100:
+						return createAchievement(2, 100);
+					case 500:
+						return createAchievement(3, 1000);
+					case 15000:
+						return createAchievement(4, 5000);
+					case 5000:
+						return createAchievement(5, 10000);
+					case -1:
+						return achievement(
+							'Clipboard Hacker!',
+							'Hacked the dev server to get your clipboard use to be -1!',
+						);
+				}
+			};
+
+			const achievement = (title, message) => {
+				if (achievementTrackerGet('shown').has(title)) return;
+				achievementTrackerAdd('shown', title);
+				const html = `
+					<div class="achievement">
+						<h2>${title}</h2>
+						<p>${message}</p>
+					</div>
+				`;
+				document.getElementById('achievements-root').innerHTML = html;
+			};
+
+			pageViewAchievements();
 		</script>
+		<style>
+			/* Olly N. (Nov. 2023)
+			   DCR Dev server achievements  */
+			@keyframes achievementAnimation {
+				0% {
+					opacity: 0%;
+					transform: translateY(-50px);
+				}
+				7% {
+					opacity: 100%;
+					transform: translateY(0);
+				}
+
+				93% {
+					opacity: 100%;
+					transform: translateY(0);
+				}
+				100% {
+					opacity: 0%;
+					transform: translateY(50px);
+				}
+			}
+
+			.achievement {
+				position: fixed;
+				top: 0;
+				right: 0;
+				margin: 24px;
+				background-color: #333;
+				border: 4px solid #555;
+				padding: 20px;
+				border-radius: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+				width: 300px;
+				opacity: 0%;
+				animation: achievementAnimation 10s 1;
+			}
+			.achievement h2 {
+				margin: 0;
+				color: #ffe500;
+			}
+			.achievement p {
+				margin: 0;
+				color: #ffffff;
+			}
+		</style>
 	</body>
 </html>
