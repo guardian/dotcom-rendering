@@ -25,7 +25,6 @@ const meta: Meta<Props> = {
 		const jsonProps = json
 			? JSON.parse(lzstring.decompressFromEncodedURIComponent(json))
 			: {};
-		console.log(jsonProps);
 
 		return <ContributionsLiveblogEpic {...args} {...jsonProps} />;
 	},
