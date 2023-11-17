@@ -46,7 +46,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail } from '../lib/decideTrail';
+import { decideTrail, filterTrails } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
@@ -730,9 +730,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
-								)}
+								trails={filterTrails(
+									article.storyPackage.trails,
+								).map(decideTrail)}
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}

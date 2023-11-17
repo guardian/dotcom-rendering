@@ -152,6 +152,7 @@
 		<div id="achievements-root"></div>
 
 		<script>
+			// @ts-check
 			var testContentTypes = [
 				{
 					name: 'Live Blog',
@@ -428,7 +429,7 @@
 
 						document
 							.querySelector('#default-endpoints')
-							.appendChild(fragment);
+							?.appendChild(fragment);
 					}
 				});
 			};
@@ -448,19 +449,33 @@
 			         `;
 
 			testContentTypes.forEach((a) => {
-				document.getElementById('test-articles-by-content').innerHTML +=
-					makeTestArticle(a);
+				const testArticles = document.getElementById(
+					'test-articles-by-content',
+				);
+
+				if (testArticles !== null) {
+					testArticles.innerHTML += makeTestArticle(a);
+				}
 			});
 
 			testArticles.forEach((a) => {
-				document.getElementById('test-articles-by-element').innerHTML +=
-					makeTestArticle(a);
+				const testArticles = document.getElementById(
+					'test-articles-by-element',
+				);
+
+				if (testArticles !== null) {
+					testArticles.innerHTML += makeTestArticle(a);
+				}
 			});
 
 			testContentAtomTypes.forEach((a) => {
-				document.getElementById(
+				const testArticles = document.getElementById(
 					'test-articles-by-atom-type',
-				).innerHTML += makeTestArticle(a);
+				);
+
+				if (testArticles !== null) {
+					testArticles.innerHTML += makeTestArticle(a);
+				}
 			});
 
 			/**

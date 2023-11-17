@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, isNonNullable } from '@guardian/libs';
 import { useEffect } from 'react';
-import { decideTrail } from '../lib/decideTrail';
+import { decideTrail, filterTrails } from '../lib/decideTrail';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
@@ -42,7 +42,7 @@ export const FetchOnwardsData = ({
 		trails: FETrailType[],
 		trailLimit: number,
 	): TrailType[] => {
-		return trails.slice(0, trailLimit).map(decideTrail);
+		return filterTrails(trails).slice(0, trailLimit).map(decideTrail);
 	};
 
 	useEffect(() => {
