@@ -1091,15 +1091,21 @@ const blockQuoteFillLight = (format: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
+					return sourcePalette.labs[400];
 			}
 		}
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
-			return sourcePalette.neutral[46];
+		case ArticleDesign.Timeline: {
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				default:
+					return sourcePalette.neutral[46];
+			}
+		}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
@@ -1123,7 +1129,7 @@ const blockQuoteFillLight = (format: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
+					return sourcePalette.labs[400];
 			}
 		}
 		default: {
@@ -1176,8 +1182,14 @@ const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
-			return sourcePalette.neutral[60];
+		case ArticleDesign.Timeline: {
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				default:
+					return sourcePalette.neutral[60];
+			}
+		}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
@@ -1241,7 +1253,12 @@ const blockquoteTextStylesLight = (format: ArticleFormat): string => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
-			return sourcePalette.neutral[7];
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.neutral[7];
+			}
 		default:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReportAlt:
@@ -1267,7 +1284,12 @@ const blockquoteTextStylesDark = (format: ArticleFormat): string => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
-			return sourcePalette.neutral[60];
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[100];
+				default:
+					return sourcePalette.neutral[60];
+			}
 		default:
 			return sourcePalette.neutral[100];
 	}
