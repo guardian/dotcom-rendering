@@ -94,8 +94,6 @@ export type Palette = {
 	fill: {
 		commentCount: Colour;
 		commentCountUntilDesktop: Colour;
-		shareIcon: Colour;
-		shareIconGrayBackground: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
