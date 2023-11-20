@@ -244,7 +244,7 @@ const testLayoutFormats =
 			display: 'Standard',
 			design: 'Interactive',
 			theme: 'NewsPillar',
-			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+			config: { renderingTarget: 'Apps', darkModeAvailable: true },
 		},
 		{
 			display: 'Immersive',
