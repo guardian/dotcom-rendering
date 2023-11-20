@@ -202,7 +202,7 @@ const merchandisingAdStyles = css`
 	margin: 12px auto;
 
 	${from.tablet} {
-		margin: 0
+		margin: 0;
 		padding-bottom: 20px;
 	}
 `;
