@@ -82,20 +82,20 @@ function followToggle(
 	if (!followStatus) return;
 	void bridgetClient.isFollowing(topic).then((following) => {
 		if (following) {
-			void bridgetClient.unfollow(topic).then((isFollowing) => {
+			void bridgetClient.unfollow(topic).then((_) => {
 				ReactDOM.render(
 					h(followStatusComponent, {
-						isFollowing,
+						isFollowing: false,
 						contributorName: topic.displayName,
 					}),
 					followStatus,
 				);
 			});
 		} else {
-			void bridgetClient.follow(topic).then((isFollowing) => {
+			void bridgetClient.follow(topic).then((_) => {
 				ReactDOM.render(
 					h(followStatusComponent, {
-						isFollowing,
+						isFollowing: true,
 						contributorName: topic.displayName,
 					}),
 					followStatus,
