@@ -323,9 +323,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
+							backgroundColour={sourcePalette.brand[400]}
 							element="header"
 						>
 							<Header
@@ -355,9 +353,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							borderColour={sourcePalette.brand[600]}
 							showTopBorder={false}
 							padSides={false}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
+							backgroundColour={sourcePalette.brand[400]}
 							element="nav"
 						>
 							<Nav
@@ -1326,9 +1322,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						fullWidth={true}
 						data-print-layout="hide"
 						padSides={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={sourcePalette.brand[400]}
 						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
