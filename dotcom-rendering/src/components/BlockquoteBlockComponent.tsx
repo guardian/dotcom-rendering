@@ -20,14 +20,21 @@ const baseBlockquoteStyles = css`
 		lineHeight: 'loose',
 	})};
 
-	color: ${palette('--text-block-quote-styles')};
+	color: ${palette('--block-quote-text-styles')};
 
 	p {
 		margin-bottom: 8px;
 	}
 
 	a {
-		color: ${palette('--text-block-quote-styles')};
+		color: ${palette('--article-link-text')};
+		text-decoration: none;
+		border-bottom: 1px solid ${palette('--article-link-border')};
+
+		:hover {
+			color: ${palette('--article-link-text-hover')};
+			border-bottom: 1px solid ${palette('--article-link-border-hover')};
+		}
 	}
 `;
 

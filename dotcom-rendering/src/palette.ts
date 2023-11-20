@@ -1225,7 +1225,7 @@ const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
 			}
 	}
 };
-const textBlockquoteStylesLight = (format: ArticleFormat): string => {
+const blockquoteTextStylesLight = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
@@ -1251,7 +1251,7 @@ const textBlockquoteStylesLight = (format: ArticleFormat): string => {
 			}
 	}
 };
-const textBlockquoteStylesDark = (format: ArticleFormat): string => {
+const blockquoteTextStylesDark = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
@@ -1270,6 +1270,48 @@ const textBlockquoteStylesDark = (format: ArticleFormat): string => {
 			return sourcePalette.neutral[60];
 		default:
 			return sourcePalette.neutral[100];
+	}
+};
+
+const blockQuoteLinkStylesLight = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+	}
+};
+
+const blockQuoteLinkStylesDark = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case Pillar.News:
+			return sourcePalette.news[500];
+		case Pillar.Sport:
+			return sourcePalette.sport[500];
+		case Pillar.Culture:
+			return sourcePalette.culture[500];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[500];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
 	}
 };
 
@@ -3406,9 +3448,13 @@ const paletteColours = {
 		light: blockQuoteFillLight,
 		dark: blockQuoteFillDark,
 	},
-	'--text-block-quote-styles': {
-		light: textBlockquoteStylesLight,
-		dark: textBlockquoteStylesDark,
+	'--block-quote-text-styles': {
+		light: blockquoteTextStylesLight,
+		dark: blockquoteTextStylesDark,
+	},
+	'--block-quote-link-styles': {
+		light: blockQuoteLinkStylesLight,
+		dark: blockQuoteLinkStylesDark,
 	},
 	'--accordion-title-row-fill': {
 		light: accordionTitleRowFillLight,
