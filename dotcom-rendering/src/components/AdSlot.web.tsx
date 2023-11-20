@@ -201,7 +201,7 @@ const merchandisingAdStyles = css`
 	min-height: ${adSizes.billboard.height}px;
 	margin: 12px auto;
 
-	${from.tablet} {
+	${from.desktop} {
 		margin: 0;
 		padding-bottom: 20px;
 	}
