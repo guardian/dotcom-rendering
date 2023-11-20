@@ -96,22 +96,21 @@ const listItemStyles = css`
 	border: 1px solid ${palette('--sub-meta-text')};
 	border-radius: 12px;
 	padding: 2px 9px;
+	:hover {
+		background-color: ${palette('--sub-meta-text')};
+		a {
+			color: ${palette('--sub-meta-text-hover')};
+		}
+	}
 	a {
 		position: relative;
 		display: block;
 		text-decoration: none;
 	}
-
-	a:hover {
-		text-decoration: underline;
-	}
 `;
 
 const linkStyles = css`
 	text-decoration: none;
-	:hover {
-		text-decoration: underline;
-	}
 	color: ${palette('--sub-meta-text')};
 `;
 
