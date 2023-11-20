@@ -174,6 +174,8 @@ function conditionallyRenderFollowTagComponent(
 					);
 
 				followTag?.addEventListener('click', followTagClick);
+				followTag?.setAttribute('aria-hidden', 'false');
+				followTag?.toggleAttribute('disabled', false);
 			},
 		)
 		.catch((error) => {

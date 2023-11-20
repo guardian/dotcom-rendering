@@ -101,6 +101,8 @@ const Follow: FC<Props> = ({ contributors, format }) => {
 					css={styles(format)}
 					data-id={contributor.id}
 					data-display-name={contributor.name}
+					aria-hidden="true"
+					disabled
 				>
 					<span
 						className="js-follow-tag-status"
