@@ -1599,6 +1599,211 @@ const liveBlockBorderTopDark = () => sourcePalette.neutral[60];
 const liveBlockBorderBottomLight = () => sourcePalette.neutral[86];
 const liveBlockBorderBottomDark = () => sourcePalette.neutral[46];
 
+const subMetaLabelTextLight = ({ theme, design }: ArticleFormat): string => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[7];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			switch (design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.specialReportAlt[100];
+			}
+		default:
+			switch (design) {
+				case ArticleDesign.Picture:
+					return sourcePalette.neutral[60];
+				default:
+					return sourcePalette.neutral[46];
+			}
+	}
+};
+const subMetaLabelTextDark = (): string => {
+	return sourcePalette.neutral[86];
+};
+const subMetaBackgroundLight = ({ design, theme, display }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			switch (theme) {
+				// specialreport blogs should have specialreport background
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.neutral[100];
+				default:
+					return sourcePalette.neutral[97];
+			}
+		case ArticleDesign.Letter:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Comment:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.opinion[800];
+			}
+		case ArticleDesign.Editorial:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.news[800];
+			}
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[7];
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[800];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				case ArticleSpecial.Labs:
+					switch (display) {
+						case ArticleDisplay.Immersive:
+							return sourcePalette.neutral[100];
+						default:
+							return sourcePalette.neutral[97];
+					}
+				default:
+					return sourcePalette.neutral[100];
+			}
+	}
+};
+
+const subMetaBackgroundDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[7];
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[0];
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[10];
+			}
+		default:
+			return sourcePalette.neutral[10];
+	}
+};
+
+const subMetaTextLight = ({ design, theme }: ArticleFormat): string => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[7];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[100];
+		default:
+			switch (design) {
+				case ArticleDesign.Picture:
+					return sourcePalette.neutral[86];
+				case ArticleDesign.DeadBlog:
+				case ArticleDesign.LiveBlog:
+					switch (theme) {
+						case Pillar.News:
+							return sourcePalette.news[400];
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.news[400];
+						default:
+							return pillarPalette(theme, 300);
+					}
+				case ArticleDesign.Analysis:
+					switch (theme) {
+						case Pillar.News:
+							return sourcePalette.news[300];
+						default:
+							switch (theme) {
+								case Pillar.Opinion:
+									return sourcePalette.opinion[300];
+								case ArticleSpecial.SpecialReportAlt:
+									return sourcePalette.specialReportAlt[200];
+								default:
+									return pillarPalette(theme, 400);
+							}
+					}
+				default:
+					switch (theme) {
+						case Pillar.Opinion:
+							return sourcePalette.opinion[300];
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[200];
+						default:
+							return pillarPalette(theme, 400);
+					}
+			}
+	}
+};
+
+const subMetaTextDark = ({ theme }: ArticleFormat): string => {
+	switch (theme) {
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[700];
+
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+		default:
+			return pillarPalette(theme, 500);
+	}
+};
+
+const subMetaTextHoverLight = () => sourcePalette.neutral[100];
+
+const syndicationButtonText = ({ design, theme }: ArticleFormat): string => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[7];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[100];
+		case ArticleSpecial.SpecialReportAlt:
+			switch (design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.specialReportAlt[100];
+			}
+		default:
+			return sourcePalette.neutral[46];
+	}
+};
+
+const syndicationButtonBorder = ({ design, theme }: ArticleFormat): string => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[60];
+		case ArticleSpecial.SpecialReportAlt:
+			switch (design) {
+				case ArticleDesign.DeadBlog:
+				case ArticleDesign.LiveBlog:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.specialReportAlt[100];
+			}
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -1903,6 +2108,30 @@ const paletteColours = {
 	'--live-block-border-bottom': {
 		light: liveBlockBorderBottomLight,
 		dark: liveBlockBorderBottomDark,
+	},
+	'--sub-meta-background': {
+		light: subMetaBackgroundLight,
+		dark: subMetaBackgroundDark,
+	},
+	'--sub-meta-label-text': {
+		light: subMetaLabelTextLight,
+		dark: subMetaLabelTextDark,
+	},
+	'--sub-meta-text': {
+		light: subMetaTextLight,
+		dark: subMetaTextDark,
+	},
+	'--sub-meta-text-hover': {
+		light: subMetaTextHoverLight,
+		dark: subMetaBackgroundDark,
+	},
+	'--syndication-button-text': {
+		light: syndicationButtonText,
+		dark: syndicationButtonText,
+	},
+	'--syndication-button-border': {
+		light: syndicationButtonBorder,
+		dark: syndicationButtonBorder,
 	},
 } satisfies PaletteColours;
 
