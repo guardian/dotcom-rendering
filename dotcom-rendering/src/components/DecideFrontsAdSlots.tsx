@@ -1,6 +1,9 @@
+import { neutral } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
+import type { ReactNode } from 'react';
 import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
 import { AdSlot } from './AdSlot.web';
+import { Section } from './Section';
 
 export const decideMerchHighAndMobileAdSlots = (
 	renderAds: boolean,
@@ -42,6 +45,42 @@ export const decideMerchHighAndMobileAdSlots = (
 	}
 
 	return null;
+};
+
+/**
+ * Hide the merchandising slot if there is a page skin and above desktop breakpoint
+ * Page skins are only active above desktop breakpoints
+ *
+ */
+export const decideMerchandisingSlot = (
+	renderAds: boolean,
+	hasPageSkin: boolean,
+) => {
+	if (!renderAds) return null;
+	const MerchandisingSection = ({ children }: { children: ReactNode }) => (
+		<Section
+			fullWidth={true}
+			data-print-layout="hide"
+			padSides={false}
+			showTopBorder={false}
+			showSideBorders={false}
+			backgroundColour={neutral[93]}
+			element="aside"
+		>
+			{children}
+		</Section>
+	);
+	return hasPageSkin ? (
+		<MerchandisingSection>
+			<Hide from="desktop">
+				<AdSlot data-print-layout="hide" position="merchandising" />
+			</Hide>
+		</MerchandisingSection>
+	) : (
+		<MerchandisingSection>
+			<AdSlot data-print-layout="hide" position="merchandising" />
+		</MerchandisingSection>
+	);
 };
 
 /**
