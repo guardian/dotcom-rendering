@@ -45,7 +45,7 @@ import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail, filterTrails } from '../lib/decideTrail';
+import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { DCRArticle } from '../types/frontend';
@@ -737,9 +737,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={filterTrails(
-									article.storyPackage.trails,
-								).map(decideTrail)}
+								trails={article.storyPackage.trails.map(
+									decideTrail,
+								)}
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}

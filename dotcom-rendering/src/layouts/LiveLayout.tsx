@@ -12,10 +12,7 @@ import {
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import {
-	palette as darkModePalette,
-	palette as themePalette,
-} from '../../src/palette';
+import { palette as darkModePalette } from '../../src/palette';
 import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -61,9 +58,10 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail, filterTrails } from '../lib/decideTrail';
+import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
@@ -1180,9 +1178,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							>
 								<Carousel
 									heading={article.storyPackage.heading}
-									trails={filterTrails(
-										article.storyPackage.trails,
-									).map(decideTrail)}
+									trails={article.storyPackage.trails.map(
+										decideTrail,
+									)}
 									onwardsSource="more-on-this-story"
 									format={format}
 									leftColSize={'wide'}
