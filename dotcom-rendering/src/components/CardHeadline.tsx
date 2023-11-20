@@ -17,7 +17,6 @@ import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { Byline } from './Byline';
-import { ContainerOverrides } from './ContainerOverrides';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
 
