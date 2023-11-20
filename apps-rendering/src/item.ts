@@ -51,6 +51,8 @@ import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { Result } from 'result';
+import { MainMediaKind } from 'mainMedia';
+import { OptionKind } from '@guardian/types/src/option';
 
 // ----- Item Type ----- //
 
@@ -406,6 +408,13 @@ const hasTag =
 	(tags: Tag[]): boolean =>
 		tags.some((tag) => tag.id === tagId);
 
+const hasMainElement =
+	(mainMediaKind: MainMediaKind) =>
+	(mainMedia: Option<MainMedia>): boolean =>
+		mainMedia.kind === OptionKind.Some
+			? mainMedia.value.kind === mainMediaKind
+			: false;
+
 const isAudio = hasTag('type/audio');
 
 const isVideo = hasTag('type/video');
@@ -453,6 +462,8 @@ const isProfile = hasTag('tone/profiles');
 const isCorrection = hasTag('theguardian/series/correctionsandclarifications');
 
 const isPicture = hasTag('type/picture');
+
+const hasCartoon = hasMainElement(MainMediaKind.Cartoon);
 
 const fromCapiLiveBlog =
 	(context: Context) =>
@@ -690,4 +701,5 @@ export {
 	isNews,
 	isTimeline,
 	isProfile,
+	hasCartoon,
 };
