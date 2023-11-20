@@ -870,7 +870,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
 							linkHoverColour={
-								decidePalette(format).text.articleLinkHover
+								themePalette('--article-link-text-hover')
 							}
 							borderColour={themePalette('--sub-nav-border')}
 						/>
