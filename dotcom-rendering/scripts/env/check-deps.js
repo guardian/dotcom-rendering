@@ -1,5 +1,4 @@
 const fs = require('node:fs');
-const lockfile = require('@yarnpkg/lockfile');
 const { warn, log } = require('../../../scripts/log');
 const pkg = require('../../package.json');
 
@@ -9,25 +8,30 @@ if (pkg.devDependencies) {
 	process.exit(1);
 }
 
-const { object: json } = lockfile.parse(
-	fs.readFileSync('../yarn.lock', 'utf8'),
-);
-
 const knownNonSemver = /** @type {const} */ ([
 	'https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0',
 ]);
 
 const mismatches = Object.entries(pkg.dependencies)
-	.filter(([name, version]) => {
-		const pinned = json[name + '@' + version]?.version;
-		return version !== pinned;
-	})
+	.filter(
+		([name, version]) =>
+			version.includes('*') ||
+			version.includes('x') ||
+			version.includes(' - ') ||
+			version.startsWith('^') ||
+			version.startsWith('~') ||
+			version.startsWith('>') ||
+			version.startsWith('<'),
+	)
 	.filter(([, version]) => !knownNonSemver.includes(version))
 	.filter(([, version]) => !version.startsWith('file:.yalc'));
 
-if (mismatches.length) warn('All dependencies should be pinned');
-for (const [name, version] of mismatches) {
-	warn(`You must fix: ${name}@${String(version)}`);
-}
+if (mismatches.length) {
+	warn('Dependencies should be pinned.');
 
-process.exit(mismatches.length === 0 ? 0 : 1);
+	for (const [name, version] of mismatches) {
+		warn(`You must fix: ${name}@${String(version)}`);
+	}
+
+	process.exit(1);
+}
