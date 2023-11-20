@@ -194,16 +194,17 @@ const topAboveNavStyles = css`
 const merchandisingAdContainerStyles = css`
 	display: flex;
 	justify-content: center;
-	margin: 0 auto 12px;
-
-	${from.desktop} {
-		margin: 0 auto 20px;
-	}
 `;
 
 const merchandisingAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.billboard.height}px;
+	margin: 12px auto;
+
+	${from.tablet} {
+		margin: 0
+		padding-bottom: 20px;
+	}
 `;
 
 const inlineAdStyles = css`
