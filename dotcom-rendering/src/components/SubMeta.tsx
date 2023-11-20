@@ -9,10 +9,10 @@ import {
 } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import type { BaseLinkType } from '../model/extract-nav';
+import { palette } from '../palette';
 import type { DCRBadgeType } from '../types/badge';
 import { Badge } from './Badge';
 import { ShareIcons } from './ShareIcons';
-import { palette } from '../palette';
 
 const labelStyles = css`
 	${textSans.xxsmall()};
