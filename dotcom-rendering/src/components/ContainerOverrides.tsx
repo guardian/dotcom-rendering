@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-// import type { palette } from '../palette';
 import type { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 
