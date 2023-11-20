@@ -41,7 +41,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	text-align: left;
 
 	${darkModeCss`
-		color:  ${text.followDark(format)};
+		color: ${text.followDark(format)};
 	`}
 
 	.notifications-on, .tag-following {

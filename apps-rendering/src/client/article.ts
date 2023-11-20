@@ -105,7 +105,7 @@ function followToggle(
 	});
 }
 
-function notificationsFollowClick(e: Event): void {
+function followNotificationsClick(e: Event): void {
 	const follow = document.querySelector('.js-follow-notifications');
 	const topic = getTopic(follow);
 	if (topic) {
@@ -118,7 +118,7 @@ function notificationsFollowClick(e: Event): void {
 	}
 }
 
-function tagFollowClick(e: Event): void {
+function followTagClick(e: Event): void {
 	const follow = document.querySelector('.js-follow-tag');
 	const topic = getTopic(follow);
 	if (topic) {
@@ -173,7 +173,7 @@ function conditionallyRenderFollowTagComponent(
 						followTagStatus,
 					);
 
-				followTag?.addEventListener('click', tagFollowClick);
+				followTag?.addEventListener('click', followTagClick);
 			},
 		)
 		.catch((error) => {
@@ -196,7 +196,7 @@ function topics(): void {
 	if (topic) {
 		followNotifications?.addEventListener(
 			'click',
-			notificationsFollowClick,
+			followNotificationsClick,
 		);
 		void notificationsClient.isFollowing(topic).then((following) => {
 			if (following && followNotificationsStatus) {

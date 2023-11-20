@@ -20,7 +20,7 @@ export const FollowNotificationStatus: FC<Props> = ({ isFollowing }) => {
 			{isFollowing ? (
 				<span className="notifications-on">
 					<svg>
-						<SvgNotificationsOn size="xsmall" />{' '}
+						<SvgNotificationsOn size="xsmall" />
 					</svg>
 				</span>
 			) : (
