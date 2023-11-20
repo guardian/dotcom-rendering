@@ -38,7 +38,6 @@ import ReactDOM from 'react-dom';
 import { logger } from '../logger';
 import { getBridgetVersion } from './bridgetVersion';
 import { callouts } from './callouts';
-import './liveblog';
 import { initSignupForms } from './newsletterSignupForm';
 
 // ----- Run ----- //
@@ -80,26 +79,30 @@ function followToggle(
 ): void {
 	const followStatus = document.querySelector(querySelector);
 	if (!followStatus) return;
-	void bridgetClient.isFollowing(topic).then((following) => {
-		if (following) {
-			void bridgetClient.unfollow(topic).then((_) => {
-				ReactDOM.render(
-					h(followStatusComponent, {
-						isFollowing: false,
-						contributorName: topic.displayName,
-					}),
-					followStatus,
-				);
+	void bridgetClient.isFollowing(topic).then((isFollowing) => {
+		if (isFollowing) {
+			void bridgetClient.unfollow(topic).then((unfollow) => {
+				// unfollow will be true if the update was successful
+				unfollow &&
+					ReactDOM.render(
+						h(followStatusComponent, {
+							isFollowing: false,
+							contributorName: topic.displayName,
+						}),
+						followStatus,
+					);
 			});
 		} else {
-			void bridgetClient.follow(topic).then((_) => {
-				ReactDOM.render(
-					h(followStatusComponent, {
-						isFollowing: true,
-						contributorName: topic.displayName,
-					}),
-					followStatus,
-				);
+			void bridgetClient.follow(topic).then((follow) => {
+				// follow will be true if the update was successful
+				follow &&
+					ReactDOM.render(
+						h(followStatusComponent, {
+							isFollowing: true,
+							contributorName: topic.displayName,
+						}),
+						followStatus,
+					);
 			});
 		}
 	});
