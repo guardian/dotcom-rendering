@@ -381,6 +381,7 @@ const textSyndicationButton = (format: ArticleFormat): string => {
 	return text.supporting;
 };
 
+/** @deprecated this has been moved to the theme palette (--article-link-text) */
 const textArticleLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
 		switch (format.theme) {
@@ -505,19 +506,7 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 	}
 };
 
-const textBranding = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
+/** @deprecated this has been moved to the theme palette (--article-link-text-hover) */
 const textArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
 		switch (format.theme) {
@@ -728,6 +717,7 @@ const textCricketScoreboardLink = (): string => {
 	return sport[300];
 };
 
+/** @deprecated this has been moved to the theme palette */
 const backgroundArticle = (format: ArticleFormat): string => {
 	// specialreport blogs should have specialreport background
 	if (
@@ -1065,90 +1055,6 @@ const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
 	return fillCommentCount(format);
 };
 
-const fillShareIcon = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.DeadBlog) {
-		switch (format.theme) {
-			case Pillar.Culture:
-				return culture[350];
-			case Pillar.News:
-				return news[400];
-			case Pillar.Lifestyle:
-				return lifestyle[400];
-			case Pillar.Sport:
-				return sport[400];
-			case Pillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
-			case ArticleSpecial.SpecialReportAlt:
-				return news[400];
-		}
-	}
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.Culture:
-				return culture[350];
-			case Pillar.News:
-				return news[300];
-			case Pillar.Lifestyle:
-				return lifestyle[400];
-			case Pillar.Sport:
-				return sport[400];
-			case Pillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
-			case ArticleSpecial.SpecialReportAlt:
-				return palette.specialReportAlt[100];
-		}
-	}
-	if (
-		format.design === ArticleDesign.NewsletterSignup &&
-		format.display === ArticleDisplay.Standard
-	)
-		return BLACK;
-
-	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.LiveBlog
-	)
-		return palette.specialReportAlt[100];
-
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Opinion:
-			return opinion[400];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Culture:
-			return culture[400];
-		case Pillar.Lifestyle:
-			return lifestyle[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
-const fillShareIconGrayBackground = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return blogsGrayBackgroundPalette(format);
-		default:
-			return pillarPalette[format.theme].dark;
-	}
-};
-
 const fillBlockquoteIcon = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -1252,6 +1158,7 @@ const borderSyndicationButton = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
+/** @deprecated this has been moved to the theme palette */
 const borderSubNav = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
@@ -1310,6 +1217,7 @@ const borderPinnedPost = (format: ArticleFormat): string => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette ('--article-link-border) */
 const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 
@@ -1448,6 +1356,7 @@ const backgroundMatchNav = (): string => {
 const backgroundUnderline = (format: ArticleFormat): string =>
 	transparentColour(textCardKicker(format));
 
+/** @deprecated this has been moved to the theme palette (--article-link-border-hover) */
 const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -1564,6 +1473,7 @@ const borderRichLink: (format: ArticleFormat) => string = (format) => {
 const borderNavPillar: (format: ArticleFormat) => string = (format) =>
 	pillarPalette[format.theme].bright;
 
+/** @deprecated this has been moved to the theme palette */
 const borderArticle: (format: ArticleFormat) => string = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
@@ -1618,6 +1528,7 @@ const borderCricketScoreboardDivider = (): string => {
 
 const borderFilterButton = (): string => neutral[60];
 
+/** @deprecated this has been moved to the theme palette */
 const borderSecondary = (format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
@@ -2117,7 +2028,6 @@ export const decidePalette = (
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
 			lastUpdated: textLastUpdated(format),
-			branding: textBranding(format),
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),
 			richLink: textRichLink(format),
@@ -2185,8 +2095,6 @@ export const decidePalette = (
 		fill: {
 			commentCount: fillCommentCount(format),
 			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
-			shareIcon: fillShareIcon(format),
-			shareIconGrayBackground: fillShareIconGrayBackground(format),
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),

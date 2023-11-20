@@ -29,7 +29,6 @@ export type Palette = {
 		standfirst: Colour;
 		standfirstLink: Colour;
 		lastUpdated: Colour;
-		branding: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
 		richLink: Colour;
@@ -95,8 +94,6 @@ export type Palette = {
 	fill: {
 		commentCount: Colour;
 		commentCountUntilDesktop: Colour;
-		shareIcon: Colour;
-		shareIconGrayBackground: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;

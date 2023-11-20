@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
 const { getBrowserTargets } = require('./browser-targets');
+const { svgr } = require('./svg.cjs');
 
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -160,10 +161,7 @@ module.exports = ({ build, sessionId }) => ({
 				test: /\.css$/,
 				use: ['to-string-loader', 'css-loader'],
 			},
-			{
-				test: /\.svg$/,
-				use: ['desvg-loader/react', 'svg-loader'],
-			},
+			svgr,
 		],
 	},
 });

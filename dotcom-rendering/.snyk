@@ -4,12 +4,4 @@ version: v1.1229.0
 # or ignored in the Snyk console.
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  'snyk:lic:npm:pm2:AGPL-3.0':
-    - pm2:
-        reason: We're happy that this license does not impose any restriction on our app
-        expires: '2024-01-051T10:00:00.000Z'
-  'snyk:lic:npm:pm2:agent:AGPL-3.0':
-    - pm2 > @pm2/agent:
-        reason: We're happy that this license does not impose any restriction on our app
-        expires: '2024-01-051T10:00:00.000Z'
 patch: {}

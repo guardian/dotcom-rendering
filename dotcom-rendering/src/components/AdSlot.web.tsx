@@ -94,22 +94,10 @@ export const labelStyles = css`
 		visibility: hidden;
 	}
 
-	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller):not(
-			.ad-slot--merchandising
-		):not(.ad-slot--merchandising-high)::before {
+	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
 		content: attr(ad-label-text);
 		display: block;
 		position: relative;
-		${individualLabelCSS}
-	}
-
-	.ad-slot--merchandising[data-label-show='true']::before,
-	.ad-slot--merchandising-high[data-label-show='true']::before {
-		content: attr(ad-label-text);
-		display: block;
-		position: relative;
-		max-width: 970px;
-		margin: auto;
 		${individualLabelCSS}
 	}
 
@@ -139,6 +127,13 @@ export const labelStyles = css`
 const adContainerCollapseStyles = css`
 	& .ad-slot.ad-slot--collapse {
 		display: none;
+	}
+`;
+
+const adContainerCentreSlotStyles = css`
+	&.ad-slot-container--centre-slot {
+		width: fit-content;
+		margin: 0 auto;
 	}
 `;
 
@@ -406,7 +401,11 @@ const mobileStickyAdStyles = css`
 	}
 `;
 
-export const adContainerStyles = [adContainerCollapseStyles, labelStyles];
+export const adContainerStyles = [
+	adContainerCollapseStyles,
+	labelStyles,
+	adContainerCentreSlotStyles,
+];
 
 export const AdSlot = ({
 	position,
