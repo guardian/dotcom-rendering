@@ -689,7 +689,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			{NAV.subNavSections && (
 				<Section
 					fullWidth={true}
-					showTopBorder={true}
+					showTopBorder={hasPageSkin}
 					data-print-layout="hide"
 					padSides={false}
 					element="aside"
