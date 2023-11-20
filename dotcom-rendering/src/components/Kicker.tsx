@@ -31,9 +31,6 @@ export const Kicker = ({
 						display: inline-block;
 					`,
 			]}
-			style={{
-				['--card-kicker-text']: color,
-			}}
 		>
 			{showPulsingDot && (
 				<Island priority="enhancement" defer={{ until: 'visible' }}>
