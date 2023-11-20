@@ -843,64 +843,16 @@ const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
 	return fillCommentCount(format);
 };
 
-/** @deprecated this has been moved to the theme palette */
-const fillBlockquoteIcon = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.Obituary:
-		case ArticleDesign.Standard:
-		case ArticleDesign.Profile:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
-			return neutral[46];
-		case ArticleDesign.Comment:
-		case ArticleDesign.Editorial:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-		case ArticleDesign.Analysis:
-		case ArticleDesign.Feature:
-		case ArticleDesign.Interview:
-		case ArticleDesign.Recipe:
-		case ArticleDesign.Review: {
-			switch (format.theme) {
-				case Pillar.News:
-					return news[200];
-				case Pillar.Opinion:
-					return opinion[200];
-				case Pillar.Sport:
-					return sport[200];
-				case Pillar.Culture:
-					return culture[200];
-				case Pillar.Lifestyle:
-					return lifestyle[200];
-				case ArticleSpecial.SpecialReport:
-					return specialReport[200];
-				case ArticleSpecial.SpecialReportAlt:
-					return palette.specialReportAlt[200];
-				case ArticleSpecial.Labs:
-					return labs[200];
-			}
-		}
-		default: {
-			switch (format.theme) {
-				case Pillar.News:
-					return news[400];
-				case Pillar.Opinion:
-					return opinion[300];
-				case Pillar.Sport:
-					return sport[400];
-				case Pillar.Culture:
-					return culture[400];
-				case Pillar.Lifestyle:
-					return lifestyle[400];
-				case ArticleSpecial.SpecialReport:
-					return specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return palette.specialReportAlt[200];
-				case ArticleSpecial.Labs:
-					return labs[400];
-			}
-		}
-	}
+const fillTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	if (
+		format.theme === ArticleSpecial.SpecialReportAlt &&
+		format.design !== ArticleDesign.DeadBlog
+	)
+		return palette.specialReportAlt[100];
+
+	return neutral[46];
 };
 
 const fillGuardianLogo = (format: ArticleFormat): string => {
@@ -1409,34 +1361,6 @@ const textDateLine = (format: ArticleFormat): string => {
 	return neutral[46];
 };
 
-/** @deprecated this has been moved to the theme palette */
-const textBlockquote = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.Obituary:
-		case ArticleDesign.Standard:
-		case ArticleDesign.Profile:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
-		case ArticleDesign.Comment:
-		case ArticleDesign.Editorial:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-		case ArticleDesign.Analysis:
-		case ArticleDesign.Feature:
-		case ArticleDesign.Interview:
-		case ArticleDesign.Recipe:
-		case ArticleDesign.Review:
-			return neutral[7];
-		default:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReportAlt:
-					return neutral[7];
-				default:
-					return neutral[46];
-			}
-	}
-};
-
 const textNumberedTitle = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
@@ -1731,7 +1655,6 @@ export const decidePalette = (
 			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
 			dropCap: textDropCap(format),
-			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			cricketScoreboardLink: textCricketScoreboardLink(),
@@ -1785,7 +1708,6 @@ export const decidePalette = (
 			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),
-			blockquoteIcon: fillBlockquoteIcon(format),
 			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {

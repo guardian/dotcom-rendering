@@ -28,7 +28,6 @@ export type Palette = {
 		carouselTitle: Colour;
 		pagination: Colour;
 		dropCap: Colour;
-		blockquote: Colour;
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
@@ -80,7 +79,6 @@ export type Palette = {
 		commentCountUntilDesktop: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
-		blockquoteIcon: Colour;
 		guardianLogo: Colour;
 	};
 	border: {
