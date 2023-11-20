@@ -1766,6 +1766,8 @@ const subMetaTextDark = ({ theme }: ArticleFormat): string => {
 	}
 };
 
+const subMetaTextHoverLight = () => sourcePalette.neutral[100];
+
 const syndicationButtonText = ({ design, theme }: ArticleFormat): string => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
@@ -2118,6 +2120,10 @@ const paletteColours = {
 	'--sub-meta-text': {
 		light: subMetaTextLight,
 		dark: subMetaTextDark,
+	},
+	'--sub-meta-text-hover': {
+		light: subMetaTextHoverLight,
+		dark: subMetaBackgroundDark,
 	},
 	'--syndication-button-text': {
 		light: syndicationButtonText,
