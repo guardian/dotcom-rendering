@@ -659,16 +659,19 @@ export const AdSlot = ({
 			);
 		}
 		case 'liveblog-inline': {
-			const advertId = `inline${index}`;
+			const advertId = `inline${index + 1}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div
+					className="ad-slot-container ad-slot-desktop"
+					css={[adContainerStyles]}
+				>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
 							'js-ad-slot',
 							'ad-slot',
-							`ad-slot--${advertId}`,
 							'ad-slot--liveblog-inline',
+							`ad-slot--${advertId}`,
 							'ad-slot--rendered',
 						].join(' ')}
 						css={[liveblogInlineAdStyles]}
@@ -680,9 +683,12 @@ export const AdSlot = ({
 			);
 		}
 		case 'liveblog-inline-mobile': {
-			const advertId = `inline${index}`;
+			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div
+					className="ad-slot-container ad-slot-mobile"
+					css={[adContainerStyles]}
+				>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
