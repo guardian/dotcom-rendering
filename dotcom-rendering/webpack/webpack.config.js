@@ -8,7 +8,7 @@ const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
 const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } = require('./bundles');
 
-const dist = path.resolve(__dirname, '..', '..', 'dist');
+const dist = path.resolve(__dirname, '..', 'dist');
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -17,7 +17,7 @@ const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
 
 const sessionId = uuidv4();
 
-/** @typedef {import('../../src/lib/assets').Build} Build */
+/** @typedef {import('../src/lib/assets').Build} Build */
 
 /**
  * @param {{ platform: 'server' | `client.${Build}`}} options
