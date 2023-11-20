@@ -37,6 +37,8 @@ jobs:
       - run: yarn install --frozen-lockfile
 
       - name: Chromatic - Apps Rendering
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'
         uses: chromaui/action@v1
 
         with:

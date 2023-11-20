@@ -28,7 +28,7 @@
 		"synth": "cdk synth --path-metadata false --version-reporting false",
 		"diff": "cdk diff --path-metadata false --version-reporting false",
 		"storybook": "storybook dev -p 4003",
-		"build-storybook": "node --max-old-space-size=4096 $(yarn bin)/storybook build"
+		"build-storybook": "storybook build"
 	},
 	"author": "",
 	"license": "ISC",
