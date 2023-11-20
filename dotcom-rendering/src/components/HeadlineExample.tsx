@@ -9,7 +9,7 @@ import { palette } from '../palette';
 export const HeadlineExample = ({ text }: { text: string }) => {
 	const styles = css`
 		color: ${palette('--headline-colour')};
-		background-color: ${palette('--headline-background-colour')};
+		background-color: ${palette('--headline-background')};
 		${headline.large()}
 	`;
 	return <h1 css={styles}>{text}</h1>;
