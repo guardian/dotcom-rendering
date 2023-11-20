@@ -42,7 +42,7 @@
 		"@emotion/server": "^11.4.0",
 		"@guardian/apps-rendering-api-models": "6.2.0",
 		"@guardian/bridget": "^2.0.0",
-		"@guardian/cdk": "^50.10.10",
+		"@guardian/cdk": "50.10.10",
 		"@guardian/content-api-models": "17.8.0",
 		"@guardian/content-atom-model": "^3.4.0",
 		"@guardian/eslint-config-typescript": "^7.0.0",

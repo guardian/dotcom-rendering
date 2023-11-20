@@ -2667,7 +2667,7 @@
   resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.0.0.tgz#9be79e1f8c0c4a9ee3829390b9bcb828d78cb4d7"
   integrity sha512-bCNIQuPe74AwR0eZWHgN/at3vumPOB0NxozciTujGUblhun23f+Fagtkkf1zyIqQ2VjaYmSVy5zVug+E5v9auw==
 
-"@guardian/cdk@^50.10.10":
+"@guardian/cdk@50.10.10":
   version "50.10.10"
   resolved "https://registry.yarnpkg.com/@guardian/cdk/-/cdk-50.10.10.tgz#121844a4f2c56caf79e7b5d3bd656f056144a37e"
   integrity sha512-TsrOKVLNcPL4bI4Cy1pgDRui5+hjkMwPHu0+eBlVUp/PxbNuXnVjYTXvW3d6/Gil/zB71fH3dUiGV0pwHXTg4A==
@@ -5882,9 +5882,9 @@ aws-sdk@^2.1231.0, aws-sdk@^2.946.0:
     xml2js "0.4.19"
 
 aws-sdk@^2.1438.0:
-  version "2.1443.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1443.0.tgz#aa63bceb8f0c711e1c15e40d043d1a6d6950a05b"
-  integrity sha512-QMHWzNuNc3OyYGStCgoB3e4ouuDVIn8FJC5hDrPGX5qUyi8WeUb5l3oI/93MH5jym/1qLIsq4cArJYwUF2blgg==
+  version "2.1499.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1499.0.tgz#d6af6d068c26f31687fa88f582ee6fa0be4e4323"
+  integrity sha512-kh89lcXx7lP83uVjzRPkOueRoM8gQlep86W9+l3qCTHSLiVJuc0MiPmqCLMPlOAZil+35roFkwWIP2FJ1WcdXg==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -6532,9 +6532,9 @@ co@^4.6.0:
   integrity sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==
 
 codemaker@^1.87.0:
-  version "1.87.0"
-  resolved "https://registry.yarnpkg.com/codemaker/-/codemaker-1.87.0.tgz#87af3e2e338a14fcaf192f9e60dce1d6ff61414d"
-  integrity sha512-PxEtigxOiIWWQV95OQK18xYMSPpqQDj/z1jSlouNp+4y2muygO+fTc19kf9Z950ryprHCoasnO62dmyhMZvluQ==
+  version "1.92.0"
+  resolved "https://registry.yarnpkg.com/codemaker/-/codemaker-1.92.0.tgz#21b1d503c28ef238e665f0c8155ac81e1ad4a122"
+  integrity sha512-h9LW/YFYMAXHvv4aHNxVfawza/8GHL0Nw0zFpqdURXsjRlsCtG+SzqRvYLOJoFqxzZ9+rkXJf8fODImC6WHa8g==
   dependencies:
     camelcase "^6.3.0"
     decamelize "^5.0.1"
