@@ -8,9 +8,9 @@
 	"scripts": {
 		"lint": "yarn lint:src && yarn lint:cypress",
 		"lint:fix": "yarn lint:src --fix && yarn lint:cypress --fix",
-		"lint:src": "eslint . --ext .ts,.tsx --quiet",
-		"lint:scripts": "eslint scripts --quiet",
-		"lint:cypress": "eslint ./cypress",
+		"lint:src": "eslint . --ext .ts,.tsx --quiet --cache",
+		"lint:scripts": "eslint scripts --quiet --cache",
+		"lint:cypress": "eslint ./cypress --cache",
 		"lintstats": "yarn lint --format node_modules/eslint-stats/byError.js",
 		"tsc": "tsc",
 		"test": "jest --maxWorkers=50%",
