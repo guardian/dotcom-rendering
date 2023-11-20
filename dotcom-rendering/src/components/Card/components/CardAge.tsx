@@ -75,7 +75,7 @@ export const CardAge = ({
 				['--card-age-text']: isDynamo
 					? decidePalette(format, containerPalette).text
 							.dynamoHeadline
-					: palette('--card-age-text'),
+					: decidePalette(format, containerPalette).text.cardFooter,
 			}}
 		>
 			{showClock && <ClockIcon />}

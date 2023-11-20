@@ -8,7 +8,6 @@ type Props = {
 	color: string;
 	showPulsingDot?: boolean;
 	hideLineBreak?: boolean;
-	isDynamo?: boolean;
 };
 
 const kickerStyles = (colour: string) => css`
@@ -22,7 +21,6 @@ export const Kicker = ({
 	color,
 	showPulsingDot,
 	hideLineBreak,
-	isDynamo,
 }: Props) => {
 	return (
 		<div
@@ -34,7 +32,7 @@ export const Kicker = ({
 					`,
 			]}
 			style={{
-				['--card-kicker-text']: isDynamo ? color : color,
+				['--card-kicker-text']: color,
 			}}
 		>
 			{showPulsingDot && (

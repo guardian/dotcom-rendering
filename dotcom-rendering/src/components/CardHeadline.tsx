@@ -17,6 +17,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { Byline } from './Byline';
+import { ContainerOverrides } from './ContainerOverrides';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
 
@@ -286,7 +287,6 @@ export const CardHeadline = ({
 								color={kickerColour}
 								showPulsingDot={showPulsingDot}
 								hideLineBreak={hideLineBreak}
-								isDynamo={isDynamo}
 							/>
 						</>
 					)}
@@ -295,12 +295,6 @@ export const CardHeadline = ({
 						css={css`
 							color: ${palette('--card-headline-text')};
 						`}
-						style={{
-							['--card-headline-text']: isDynamo
-								? decidePalette(format, containerPalette).text
-										.dynamoHeadline
-								: palette('--card-headline-text'),
-						}}
 						className="show-underline"
 					>
 						{cleanHeadLineText}
