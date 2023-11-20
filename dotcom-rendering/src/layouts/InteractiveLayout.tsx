@@ -2,13 +2,8 @@ import { css, Global } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	border,
-	brandBackground,
-	brandBorder,
-	brandLine,
 	from,
-	labs,
-	neutral,
+	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -271,7 +266,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									showTopBorder={false}
 									showSideBorders={false}
 									padSides={false}
-									backgroundColour={brandBackground.primary}
+									backgroundColour={sourcePalette.brand[400]}
 									element="header"
 								>
 									<Header
@@ -304,10 +299,10 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 
 						<Section
 							fullWidth={true}
-							borderColour={brandLine.primary}
+							borderColour={sourcePalette.brand[600]}
 							showTopBorder={false}
 							padSides={false}
-							backgroundColour={brandBackground.primary}
+							backgroundColour={sourcePalette.brand[400]}
 							element="nav"
 						>
 							<Nav
@@ -384,8 +379,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={labs[400]}
-								borderColour={border.primary}
+								backgroundColour={sourcePalette.labs[400]}
+								borderColour={sourcePalette.neutral[60]}
 								sectionId="labs-header"
 							>
 								<LabsHeader />
@@ -643,7 +638,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -751,7 +746,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -786,8 +781,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						fullWidth={true}
 						data-print-layout="hide"
 						padSides={false}
-						backgroundColour={brandBackground.primary}
-						borderColour={brandBorder.primary}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
 					>
