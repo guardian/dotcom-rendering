@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { InteractiveBlockComponent } from './InteractiveBlockComponent.importable';
 import { TextBlockComponent } from './TextBlockComponent';
 
@@ -33,7 +35,13 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export const Default = () => {
+const defaultFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
+
+export const Default = ({ format }: StoryProps) => {
 	return (
 		<Wrapper>
 			<SomeText />
@@ -43,11 +51,7 @@ export const Default = () => {
 				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
 				alt="map"
 				role="supporting"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={format}
 				isMainMedia={false}
 			/>
 			<SomeText />
@@ -57,8 +61,9 @@ export const Default = () => {
 	);
 };
 Default.storyName = 'default';
+Default.decorators = [splitTheme([defaultFormat])];
 
-export const InlineMap = () => {
+export const InlineMap = ({ format }: StoryProps) => {
 	return (
 		<Wrapper>
 			<SomeText />
@@ -68,11 +73,7 @@ export const InlineMap = () => {
 				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
 				alt="The agreement mediated by Russia in Nagorno-Karabakh"
 				role="inline"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={format}
 				isMainMedia={false}
 			/>
 			<SomeText />
@@ -81,8 +82,9 @@ export const InlineMap = () => {
 	);
 };
 InlineMap.storyName = 'Inline interactive Map';
+InlineMap.decorators = [splitTheme([defaultFormat])];
 
-export const Showcase = () => {
+export const Showcase = ({ format }: StoryProps) => {
 	return (
 		<Wrapper>
 			<SomeText />
@@ -92,11 +94,7 @@ export const Showcase = () => {
 				scriptUrl="https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js"
 				alt="Photo collage"
 				role="showcase"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={format}
 				isMainMedia={false}
 			/>
 			<SomeText />
@@ -106,8 +104,9 @@ export const Showcase = () => {
 	);
 };
 Showcase.storyName = 'Showcase interactive element';
+Showcase.decorators = [splitTheme([defaultFormat])];
 
-export const WithCaption = () => {
+export const WithCaption = ({ format }: StoryProps) => {
 	return (
 		<Wrapper>
 			<SomeText />
@@ -118,11 +117,7 @@ export const WithCaption = () => {
 				alt="The agreement mediated by Russia in Nagorno-Karabakh"
 				role="inline"
 				caption="There’s (normally) such a lovely atmosphere on this tee. A par start and you are happy. You don’t want to hit it right, with the bunker and worse out there. The ideal shot is a little fade off the left side with a driver. You have more chance with your second shot if missing it left. The second shot is a case of ‘don’t go long.’ It’s a common theme about not short-siding yourself at Augusta but it probably applies more at the 1st than elsewhere. Hit to the heart of the green and try to two putt. A couple of the back pins are OK but you can have swinging putts to the front ones."
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={format}
 				isMainMedia={false}
 			/>
 			<SomeText />
@@ -132,8 +127,9 @@ export const WithCaption = () => {
 	);
 };
 WithCaption.storyName = 'with caption';
+WithCaption.decorators = [splitTheme([defaultFormat])];
 
-export const NonBootJs = () => {
+export const NonBootJs = ({ format }: StoryProps) => {
 	return (
 		<Wrapper>
 			<SomeText />
@@ -143,11 +139,7 @@ export const NonBootJs = () => {
 				scriptUrl="https://gdn-cdn.s3.amazonaws.com/quiz-builder/c65f1acf-eefd-4985-913d-74ae12eb1f35/boot.js"
 				alt="Bird Quiz"
 				role="inline"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={format}
 				isMainMedia={false}
 			/>
 			<SomeText />
@@ -157,3 +149,4 @@ export const NonBootJs = () => {
 	);
 };
 NonBootJs.storyName = 'Non-boot.js interactive element';
+NonBootJs.decorators = [splitTheme([defaultFormat])];

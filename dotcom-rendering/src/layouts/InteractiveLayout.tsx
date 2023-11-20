@@ -40,7 +40,6 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -223,8 +222,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 
 	const { branding } = article.commercialProperties[article.editionId];
 
-	const palette = decidePalette(format);
-
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const isApps = renderingTarget === 'Apps';
@@ -331,9 +328,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							format.theme !== ArticleSpecial.Labs && (
 								<Section
 									fullWidth={true}
-									backgroundColour={
-										palette.background.article
-									}
+									backgroundColour={themePalette(
+										'--article-background',
+									)}
 									padSides={false}
 									element="aside"
 								>
@@ -348,10 +345,12 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 											currentNavLink={
 												props.NAV.currentNavLink
 											}
-											linkHoverColour={
-												palette.text.articleLinkHover
-											}
-											borderColour={palette.border.subNav}
+											linkHoverColour={themePalette(
+												'--article-link-text-hover',
+											)}
+											borderColour={themePalette(
+												'--sub-nav-border',
+											)}
 										/>
 									</Island>
 								</Section>
@@ -360,7 +359,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						{format.theme !== ArticleSpecial.Labs && (
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								showTopBorder={false}
 							>
@@ -403,8 +404,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					fullWidth={true}
 					data-print-layout="hide"
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
-					borderColour={palette.border.article}
+					backgroundColour={themePalette('--article-background')}
+					borderColour={themePalette('--article-border')}
 					element="article"
 					className={interactiveLegacyClasses.contentInteractive}
 				>
@@ -562,8 +563,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					stretchRight={false}
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
-					borderColour={palette.border.article}
+					backgroundColour={themePalette('--article-background')}
+					borderColour={themePalette('--article-border')}
 					padContent={false}
 				>
 					<div
@@ -601,7 +602,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					fullWidth={true}
 					showTopBorder={false}
 					padSides={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={themePalette('--article-background')}
 				>
 					<StraightLines
 						count={4}
@@ -615,7 +616,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={themePalette('--article-background')}
 				>
 					<SubMeta
 						format={format}
@@ -768,8 +769,10 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={palette.text.articleLinkHover}
-							borderColour={palette.border.subNav}
+							linkHoverColour={themePalette(
+								'--article-link-text-hover',
+							)}
+							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>

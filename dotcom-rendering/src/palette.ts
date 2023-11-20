@@ -2967,6 +2967,7 @@ const syndicationButtonBorder: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[86];
 	}
 };
+const interactiveBlockBackground = () => sourcePalette.neutral[100];
 
 const dropCapLight: PaletteFunction = (format) => {
 	switch (format.design) {
@@ -3490,6 +3491,10 @@ const paletteColours = {
 	'--apps-epic-border': {
 		light: appsEpicBorderLight,
 		dark: appsEpicBorderDark,
+	},
+	'--interactive-block-background': {
+		light: interactiveBlockBackground,
+		dark: interactiveBlockBackground,
 	},
 } satisfies PaletteColours;
 
