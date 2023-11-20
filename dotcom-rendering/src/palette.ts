@@ -54,7 +54,7 @@ const headlineColourDark = ({ design }: ArticleFormat): string => {
 			return sourcePalette.neutral[97];
 	}
 };
-const headlineBackgroundColourLight = ({ design }: ArticleFormat): string => {
+const headlineBackgroundLight = ({ design }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.news[400];
@@ -62,12 +62,23 @@ const headlineBackgroundColourLight = ({ design }: ArticleFormat): string => {
 			return sourcePalette.neutral[100];
 	}
 };
-const headlineBackgroundColourDark = ({ design }: ArticleFormat): string => {
+const headlineBackgroundDark = ({ design }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.news[200];
 		default:
 			return sourcePalette.neutral[7];
+	}
+};
+
+const headlineBorder = ({ design }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return 'rgba(255,255,255, 0.2)';
+		case ArticleDesign.DeadBlog:
+			return '#CDCDCD';
+		default:
+			return sourcePalette.neutral[86];
 	}
 };
 
@@ -709,6 +720,48 @@ const standfirstLinkBorderLight = ({
 };
 const standfirstLinkBorderDark = (): string => {
 	return sourcePalette.neutral[46];
+};
+
+const standfirstBackground = ({
+	design,
+	display,
+	theme,
+}: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.Sport:
+					return sourcePalette.sport[100];
+				case ArticleSpecial.Labs:
+					return sourcePalette.news[200];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[200];
+				default:
+					return pillarPalette(theme, 200);
+			}
+		case ArticleDesign.DeadBlog:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[700];
+				default:
+					return sourcePalette.neutral[93];
+			}
+		default:
+			return articleBackgroundLight({ design, display, theme });
+	}
+};
+
+const standfirstBorder = ({ design }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return 'rgba(255,255,255, 0.2)';
+		case ArticleDesign.DeadBlog:
+			return '#BDBDBD';
+		default:
+			return sourcePalette.neutral[86];
+	}
 };
 
 const standfirstLinkTextLight = ({ design, theme }: ArticleFormat): string => {
@@ -1513,6 +1566,38 @@ const shareIconFillBlogLight = ({ design, theme }: ArticleFormat) => {
 };
 
 const shareIconFillBlogDark = () => sourcePalette.neutral[60];
+const matchNavBackground = () => sourcePalette.brandAlt[400];
+
+const liveBlockContainerBackgroundLight = () => sourcePalette.neutral[100];
+const liveBlockContainerBackgroundDark = () => sourcePalette.neutral[10];
+
+const liveBlockBorderTopLight = ({ design, theme }: ArticleFormat) => {
+	if (design === ArticleDesign.DeadBlog) {
+		switch (theme) {
+			case Pillar.Culture:
+				return sourcePalette.culture[350];
+			case Pillar.Opinion:
+				return sourcePalette.opinion[300];
+			default:
+				break;
+		}
+	}
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+
+const liveBlockBorderTopDark = () => sourcePalette.neutral[60];
+
+const liveBlockBorderBottomLight = () => sourcePalette.neutral[86];
+const liveBlockBorderBottomDark = () => sourcePalette.neutral[46];
 
 // ----- Palette ----- //
 
@@ -1551,9 +1636,13 @@ const paletteColours = {
 		light: headlineColourLight,
 		dark: headlineColourDark,
 	},
-	'--headline-background-colour': {
-		light: headlineBackgroundColourLight,
-		dark: headlineBackgroundColourDark,
+	'--headline-background': {
+		light: headlineBackgroundLight,
+		dark: headlineBackgroundDark,
+	},
+	'--headline-border': {
+		light: headlineBorder,
+		dark: headlineBorder,
 	},
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
@@ -1675,6 +1764,14 @@ const paletteColours = {
 		light: standfirstLinkBorderLight,
 		dark: standfirstLinkBorderDark,
 	},
+	'--standfirst-border': {
+		light: standfirstBorder,
+		dark: standfirstBorder,
+	},
+	'--standfirst-background': {
+		light: standfirstBackground,
+		dark: standfirstBackground,
+	},
 	'--follow': {
 		light: followLight,
 		dark: followDark,
@@ -1790,6 +1887,22 @@ const paletteColours = {
 	'--share-icon-blog-fill': {
 		light: shareIconFillBlogLight,
 		dark: shareIconFillBlogDark,
+	},
+	'--match-nav-background': {
+		light: matchNavBackground,
+		dark: matchNavBackground,
+	},
+	'--live-block-container-background': {
+		light: liveBlockContainerBackgroundLight,
+		dark: liveBlockContainerBackgroundDark,
+	},
+	'--live-block-border-top': {
+		light: liveBlockBorderTopLight,
+		dark: liveBlockBorderTopDark,
+	},
+	'--live-block-border-bottom': {
+		light: liveBlockBorderBottomLight,
+		dark: liveBlockBorderBottomDark,
 	},
 } satisfies PaletteColours;
 
