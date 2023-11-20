@@ -1055,90 +1055,6 @@ const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
 	return fillCommentCount(format);
 };
 
-const fillShareIcon = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.DeadBlog) {
-		switch (format.theme) {
-			case Pillar.Culture:
-				return culture[350];
-			case Pillar.News:
-				return news[400];
-			case Pillar.Lifestyle:
-				return lifestyle[400];
-			case Pillar.Sport:
-				return sport[400];
-			case Pillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
-			case ArticleSpecial.SpecialReportAlt:
-				return news[400];
-		}
-	}
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.Culture:
-				return culture[350];
-			case Pillar.News:
-				return news[300];
-			case Pillar.Lifestyle:
-				return lifestyle[400];
-			case Pillar.Sport:
-				return sport[400];
-			case Pillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
-			case ArticleSpecial.SpecialReportAlt:
-				return palette.specialReportAlt[100];
-		}
-	}
-	if (
-		format.design === ArticleDesign.NewsletterSignup &&
-		format.display === ArticleDisplay.Standard
-	)
-		return BLACK;
-
-	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.LiveBlog
-	)
-		return palette.specialReportAlt[100];
-
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Opinion:
-			return opinion[400];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Culture:
-			return culture[400];
-		case Pillar.Lifestyle:
-			return lifestyle[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
-const fillShareIconGrayBackground = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return blogsGrayBackgroundPalette(format);
-		default:
-			return pillarPalette[format.theme].dark;
-	}
-};
-
 const fillBlockquoteIcon = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -2179,8 +2095,6 @@ export const decidePalette = (
 		fill: {
 			commentCount: fillCommentCount(format),
 			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
-			shareIcon: fillShareIcon(format),
-			shareIconGrayBackground: fillShareIconGrayBackground(format),
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),

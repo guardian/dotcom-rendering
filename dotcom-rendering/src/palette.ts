@@ -1427,6 +1427,93 @@ const subNavBorder = ({ design, theme }: ArticleFormat): string => {
 	}
 };
 
+const shareIconFillLight = ({ design, theme, display }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[400];
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				default:
+					return pillarPalette(theme, 400);
+			}
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.news[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return pillarPalette(theme, 400);
+			}
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
+		default:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				default:
+					if (
+						design === ArticleDesign.NewsletterSignup &&
+						display === ArticleDisplay.Standard
+					) {
+						return sourcePalette.neutral[7];
+					}
+					if (
+						theme === ArticleSpecial.SpecialReportAlt &&
+						design !== ArticleDesign.LiveBlog
+					) {
+						return sourcePalette.specialReportAlt[100];
+					}
+					if (theme === ArticleSpecial.SpecialReportAlt)
+						return sourcePalette.news[400];
+					return pillarPalette(theme, 400);
+			}
+	}
+};
+
+const shareIconFillDark = () => sourcePalette.neutral[60];
+
+const shareIconFillBlogLight = ({ design, theme }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			switch (theme) {
+				case Pillar.News:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				default:
+					return pillarPalette(theme, 300);
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+				default:
+					return pillarPalette(theme, 300);
+			}
+	}
+};
+
+const shareIconFillBlogDark = () => sourcePalette.neutral[60];
+
 // ----- Palette ----- //
 
 /**
@@ -1695,6 +1782,14 @@ const paletteColours = {
 	'--sub-nav-border': {
 		light: subNavBorder,
 		dark: subNavBorder,
+	},
+	'--share-icon-fill': {
+		light: shareIconFillLight,
+		dark: shareIconFillDark,
+	},
+	'--share-icon-blog-fill': {
+		light: shareIconFillBlogLight,
+		dark: shareIconFillBlogDark,
 	},
 } satisfies PaletteColours;
 
