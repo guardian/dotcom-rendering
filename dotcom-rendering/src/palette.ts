@@ -1225,7 +1225,7 @@ const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
 			}
 	}
 };
-const quotedBlockquoteStylesLight = (format: ArticleFormat): string => {
+const textBlockquoteStylesLight = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
@@ -1251,7 +1251,7 @@ const quotedBlockquoteStylesLight = (format: ArticleFormat): string => {
 			}
 	}
 };
-const quotedBlockquoteStylesDark = (format: ArticleFormat): string => {
+const textBlockquoteStylesDark = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
@@ -3406,9 +3406,9 @@ const paletteColours = {
 		light: blockQuoteFillLight,
 		dark: blockQuoteFillDark,
 	},
-	'--quoted-block-quote-styles': {
-		light: quotedBlockquoteStylesLight,
-		dark: quotedBlockquoteStylesDark,
+	'--text-block-quote-styles': {
+		light: textBlockquoteStylesLight,
+		dark: textBlockquoteStylesDark,
 	},
 	'--accordion-title-row-fill': {
 		light: accordionTitleRowFillLight,

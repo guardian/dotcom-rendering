@@ -19,11 +19,15 @@ const baseBlockquoteStyles = css`
 		fontStyle: 'italic',
 		lineHeight: 'loose',
 	})};
+
+	color: ${palette('--text-block-quote-styles')};
+
 	p {
 		margin-bottom: 8px;
 	}
+
 	a {
-		color: ${palette('--quoted-block-quote-styles')};
+		color: ${palette('--text-block-quote-styles')};
 	}
 `;
 
@@ -37,7 +41,6 @@ const simpleBlockquoteStyles = css`
 
 const quotedBlockquoteStyles = css`
 	${baseBlockquoteStyles}
-	color: ${palette('--quoted-block-quote-styles')};
 `;
 
 /**
