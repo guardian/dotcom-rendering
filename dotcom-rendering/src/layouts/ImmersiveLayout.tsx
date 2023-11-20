@@ -53,8 +53,8 @@ import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
-import type { Palette } from '../types/palette';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -195,13 +195,7 @@ interface AppProps extends CommonProps {
 	renderingTarget: 'Apps';
 }
 
-const Box = ({
-	palette,
-	children,
-}: {
-	palette: Palette;
-	children: React.ReactNode;
-}) => (
+const Box = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			/*
@@ -220,7 +214,7 @@ const Box = ({
 					position: absolute;
 					width: 50%;
 					right: 0;
-					background-color: ${palette.background.headline};
+					background-color: ${themePalette('--headline-background')};
 					${getZIndex('immersiveBlackBox')}
 					top: 0;
 					bottom: 0;
@@ -259,8 +253,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
-
-	const palette = decidePalette(format);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
@@ -370,7 +362,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 			<header
 				css={css`
-					background-color: ${palette.background.article};
+					background-color: ${themePalette('--article-background')};
 				`}
 			>
 				<div
@@ -433,7 +425,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									badge={article.badge?.enhanced}
 								/>
 							</Section>
-							<Box palette={palette}>
+							<Box>
 								<Section
 									verticalMargins={false}
 									padContent={false}
@@ -470,7 +462,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
-					backgroundColour={decidePalette(format).background.article}
+					backgroundColour={themePalette('--article-background')}
 					element="article"
 				>
 					<ImmersiveGrid>
@@ -877,8 +869,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={palette.text.articleLinkHover}
-							borderColour={palette.border.subNav}
+							linkHoverColour={
+								decidePalette(format).text.articleLinkHover
+							}
+							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>
