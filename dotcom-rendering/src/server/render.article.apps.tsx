@@ -65,6 +65,7 @@ export const renderArticle = (
 		renderingTarget: 'Apps',
 		offerHttp3: false,
 		weAreHiring: !!article.config.switches.weAreHiring,
+		canonicalUrl: article.canonicalUrl,
 	});
 
 	return {
