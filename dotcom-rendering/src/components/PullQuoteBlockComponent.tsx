@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
-import { from, headline } from '@guardian/source-foundations';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { from, headline, textSans } from '@guardian/source-foundations';
 import { unescapeData } from '../lib/escapeData';
 import { palette } from '../palette';
 import { QuoteIcon } from './QuoteIcon';
@@ -10,6 +10,12 @@ const pullQuoteCss = css`
 `;
 
 const fontCss = (role: string, format: ArticleFormat) => {
+	if (format.theme === ArticleSpecial.Labs) {
+		return css`
+			${textSans.xlarge({ fontWeight: 'medium' })}
+		`;
+	}
+
 	switch (role) {
 		case 'showcase':
 			switch (format.design) {

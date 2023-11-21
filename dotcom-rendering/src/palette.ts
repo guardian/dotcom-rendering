@@ -1072,6 +1072,10 @@ const starRatingBackgroundColourDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
 
 const blockQuoteFillLight = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.Labs) {
+		return sourcePalette.labs[300];
+	}
+
 	switch (format.design) {
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.LiveBlog: {
@@ -1090,8 +1094,6 @@ const blockQuoteFillLight = (format: ArticleFormat): string => {
 					return sourcePalette.specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 			}
 		}
 		case ArticleDesign.Obituary:
@@ -1099,12 +1101,7 @@ const blockQuoteFillLight = (format: ArticleFormat): string => {
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
 		case ArticleDesign.Timeline: {
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-				default:
-					return sourcePalette.neutral[46];
-			}
+			return sourcePalette.neutral[46];
 		}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -1128,8 +1125,6 @@ const blockQuoteFillLight = (format: ArticleFormat): string => {
 					return sourcePalette.specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 			}
 		}
 		default: {
@@ -1148,14 +1143,16 @@ const blockQuoteFillLight = (format: ArticleFormat): string => {
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 			}
 		}
 	}
 };
 
 const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
+	if (theme === ArticleSpecial.Labs) {
+		return sourcePalette.labs[400];
+	}
+
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.LiveBlog: {
@@ -1174,8 +1171,6 @@ const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 			}
 		}
 		case ArticleDesign.Obituary:
@@ -1183,12 +1178,7 @@ const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
 		case ArticleDesign.Timeline: {
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-				default:
-					return sourcePalette.neutral[60];
-			}
+			return sourcePalette.neutral[60];
 		}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -1212,8 +1202,6 @@ const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 			}
 		}
 		default:
@@ -1232,8 +1220,6 @@ const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 			}
 	}
 };
@@ -2850,10 +2836,18 @@ const pullQuoteBorderLight = (): string => sourcePalette.neutral[86];
 const pullQuoteBorderDark = (): string => sourcePalette.neutral[60];
 
 const pullQuoteIconLight = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.Labs) {
+		return sourcePalette.labs[300];
+	}
+
 	const text = pullQuoteTextLight(format);
 	return text === sourcePalette.neutral[7] ? pullQuoteBorderDark() : text;
 };
 const pullQuoteIconDark = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.Labs) {
+		return sourcePalette.labs[400];
+	}
+
 	const text = pullQuoteTextDark(format);
 	return text === sourcePalette.neutral[97] ? pullQuoteBorderLight() : text;
 };
