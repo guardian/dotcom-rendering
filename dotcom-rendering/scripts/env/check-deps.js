@@ -14,14 +14,8 @@ const knownNonSemver = /** @type {const} */ ([
 
 const mismatches = Object.entries(pkg.dependencies)
 	.filter(
-		([name, version]) =>
-			version.includes('*') ||
-			version.includes('x') ||
-			version.includes(' - ') ||
-			version.startsWith('^') ||
-			version.startsWith('~') ||
-			version.startsWith('>') ||
-			version.startsWith('<'),
+		([, version]) =>
+			!version.match(/^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$/),
 	)
 	.filter(([, version]) => !knownNonSemver.includes(version))
 	.filter(([, version]) => !version.startsWith('file:.yalc'));
