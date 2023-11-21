@@ -10,10 +10,6 @@ export type Palette = {
 		byline: Colour;
 		twitterHandle: Colour;
 		twitterHandleBelowDesktop: Colour;
-		subMeta: Colour;
-		subMetaLabel: Colour;
-		subMetaLink: Colour;
-		syndicationButton: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		cardHeadline: Colour;
@@ -29,7 +25,6 @@ export type Palette = {
 		standfirst: Colour;
 		standfirstLink: Colour;
 		lastUpdated: Colour;
-		branding: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
 		richLink: Colour;
@@ -45,9 +40,6 @@ export type Palette = {
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
-		keyEvent: Colour;
-		keyEventFromDesktop: Colour;
-		keyEventTime: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -83,10 +75,6 @@ export type Palette = {
 		analysisUnderline: Colour;
 		matchStats: Colour;
 		ageWarning: Colour;
-		keyEventBullet: Colour;
-		summaryEventBullet: Colour;
-		keyEvent: Colour;
-		keyEventFromDesktop: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -96,14 +84,11 @@ export type Palette = {
 		lightboxDivider: Colour;
 		messageForm: Colour;
 		discussionPillarButton: Colour;
-		subMeta: Colour;
 		dynamoSublink: Colour;
 	};
 	fill: {
 		commentCount: Colour;
 		commentCountUntilDesktop: Colour;
-		shareIcon: Colour;
-		shareIconGrayBackground: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
@@ -112,7 +97,6 @@ export type Palette = {
 		guardianLogo: Colour;
 	};
 	border: {
-		syndicationButton: Colour;
 		subNav: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
@@ -130,7 +114,6 @@ export type Palette = {
 		cricketScoreboardTop: Colour;
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
-		keyEvent: Colour;
 		filterButton: Colour;
 		secondary: Colour;
 		pagination: Colour;
@@ -141,9 +124,6 @@ export type Palette = {
 	hover: {
 		headlineByline: Colour;
 		standfirstLink: Colour;
-		keyEventLink: Colour;
-		keyEventBullet: Colour;
-		summaryEventBullet: Colour;
 		pagination: Colour;
 	};
 	discussionGeneric: Colour;

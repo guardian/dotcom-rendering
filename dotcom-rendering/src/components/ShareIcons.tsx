@@ -1,14 +1,13 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import EmailIcon from '../static/icons/email.svg';
 import FacebookIcon from '../static/icons/facebook.svg';
 import LinkedInIcon from '../static/icons/linked-in.svg';
 import MessengerIcon from '../static/icons/messenger.svg';
 import TwitterIconPadded from '../static/icons/twitter-padded.svg';
 import WhatsAppIcon from '../static/icons/whatsapp.svg';
-import type { Palette } from '../types/palette';
 import { Hide } from './Hide';
 
 type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
@@ -43,20 +42,19 @@ const topMarginStlyes = css`
 `;
 
 const decideIconColor = (format: ArticleFormat, context: Context) => {
-	const palette = decidePalette(format);
 	if (format.design === ArticleDesign.LiveBlog) {
 		if (context === 'ArticleMeta') {
 			return css`
-				fill: ${palette.fill.shareIconGrayBackground};
+				fill: ${themePalette('--share-icon-blog-fill')};
 				${until.desktop} {
-					fill: ${palette.text.standfirst};
+					fill: ${themePalette('--standfirst-text')};
 				}
 			`;
 		}
 
 		if (context === 'SubMeta') {
 			return css`
-				fill: ${palette.fill.shareIconGrayBackground};
+				fill: ${themePalette('--share-icon-blog-fill')};
 			`;
 		}
 	}
@@ -65,16 +63,15 @@ const decideIconColor = (format: ArticleFormat, context: Context) => {
 		(context === 'SubMeta' || context === 'ArticleMeta')
 	) {
 		return css`
-			fill: ${palette.fill.shareIconGrayBackground};
+			fill: ${themePalette('--share-icon-blog-fill')};
 		`;
 	}
 	return css`
-		fill: ${palette.fill.shareIcon};
+		fill: ${themePalette('--share-icon-fill')};
 	`;
 };
 
 const decideIconColorOnHover = (format: ArticleFormat, context: Context) => {
-	const palette = decidePalette(format);
 	if (
 		(format.design === ArticleDesign.LiveBlog ||
 			format.design === ArticleDesign.DeadBlog) &&
@@ -82,8 +79,8 @@ const decideIconColorOnHover = (format: ArticleFormat, context: Context) => {
 	) {
 		return css`
 			:hover {
-				background-color: ${palette.fill.shareIconGrayBackground};
-				border-color: ${palette.fill.shareIconGrayBackground};
+				background-color: ${themePalette('--share-icon-blog-fill')};
+				border-color: ${themePalette('--share-icon-blog-fill')};
 				fill: white;
 			}
 		`;
@@ -91,29 +88,23 @@ const decideIconColorOnHover = (format: ArticleFormat, context: Context) => {
 	if (format.design === ArticleDesign.Picture) {
 		return css`
 			:hover {
-				background-color: ${palette.fill.shareIcon};
-				border-color: ${palette.fill.shareIcon};
+				background-color: ${themePalette('--share-icon-fill')};
+				border-color: ${themePalette('--share-icon-fill')};
 				fill: black;
 			}
 		`;
 	}
 	return css`
 		:hover {
-			background-color: ${palette.fill.shareIcon};
-			border-color: ${palette.fill.shareIcon};
+			background-color: ${themePalette('--share-icon-fill')};
+			border-color: ${themePalette('--share-icon-fill')};
 			fill: white;
 		}
 	`;
 };
 
-const iconStyles = ({
-	palette,
-	size,
-}: {
-	palette: Palette;
-	size: ShareIconSize;
-}) => css`
-	border: 1px solid ${palette.border.article};
+const iconStyles = (size: ShareIconSize) => css`
+	border: 1px solid ${themePalette('--article-border')};
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -171,7 +162,6 @@ export const ShareIcons = ({
 	size,
 	context,
 }: Props) => {
-	const palette = decidePalette(format);
 	return (
 		<ul css={ulStyles}>
 			{displayIcons.includes('facebook') && (
@@ -195,7 +185,7 @@ export const ShareIcons = ({
 					>
 						<span
 							css={[
-								iconStyles({ palette, size }),
+								iconStyles(size),
 								decideIconColor(format, context),
 								decideIconColorOnHover(format, context),
 							]}
@@ -227,7 +217,7 @@ export const ShareIcons = ({
 					>
 						<span
 							css={[
-								iconStyles({ palette, size }),
+								iconStyles(size),
 								decideIconColor(format, context),
 								decideIconColorOnHover(format, context),
 							]}
@@ -259,7 +249,7 @@ export const ShareIcons = ({
 					>
 						<span
 							css={[
-								iconStyles({ palette, size }),
+								iconStyles(size),
 								decideIconColor(format, context),
 								decideIconColorOnHover(format, context),
 							]}
@@ -289,7 +279,7 @@ export const ShareIcons = ({
 					>
 						<span
 							css={[
-								iconStyles({ palette, size }),
+								iconStyles(size),
 								decideIconColor(format, context),
 								decideIconColorOnHover(format, context),
 							]}
@@ -322,7 +312,7 @@ export const ShareIcons = ({
 						>
 							<span
 								css={[
-									iconStyles({ palette, size }),
+									iconStyles(size),
 									decideIconColor(format, context),
 									decideIconColorOnHover(format, context),
 								]}
@@ -354,7 +344,7 @@ export const ShareIcons = ({
 						>
 							<span
 								css={[
-									iconStyles({ palette, size }),
+									iconStyles(size),
 									decideIconColor(format, context),
 									decideIconColorOnHover(format, context),
 								]}

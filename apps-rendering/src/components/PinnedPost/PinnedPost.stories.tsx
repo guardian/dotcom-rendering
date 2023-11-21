@@ -38,9 +38,7 @@ const Wrapper: FC<{ children: React.ReactNode }> = ({
 
 // ----- Stories ----- //
 
-const Default: FC<{ pillar: Pillar }> = ({
-	pillar = ArticlePillar.News,
-}) => (
+const Default: FC<{ pillar: Pillar }> = ({ pillar = ArticlePillar.News }) => (
 	<Wrapper>
 		<PinnedPost
 			pinnedPost={pinnedBlock}

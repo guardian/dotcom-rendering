@@ -8,8 +8,8 @@ Add the follow script string as the 'url' to your bookmark:
 
 ```js
 javascript: (() => {
-    document.body.appendChild(document.createElement('script')).src =
-        'https://assets.guim.co.uk/assets/debug.js';
+	document.body.appendChild(document.createElement('script')).src =
+		'https://assets.guim.co.uk/assets/debug.js';
 })();
 ```
 
@@ -19,8 +19,8 @@ If you need to run this locally, you can simply get it from the dev server:
 
 ```js
 javascript: (() => {
-    document.body.appendChild(document.createElement('script')).src =
-        'http://localhost:3030/assets/debug.js';
+	document.body.appendChild(document.createElement('script')).src =
+		'http://localhost:3030/assets/debug.js';
 })();
 ```
 

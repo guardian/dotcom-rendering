@@ -164,7 +164,10 @@ function render(
 	const path = res.req.path;
 	const isPreview = res.req.query.isPreview === 'true';
 	const environment = getEditionsEnv(isPreview, path);
-	const item = fromCapi({ docParser, salt: imageSalt })(request, none);
+	const item = fromCapi({ docParser, salt: imageSalt, app: 'Editions' })(
+		request,
+		none,
+	);
 
 	const newItem = {
 		...item,

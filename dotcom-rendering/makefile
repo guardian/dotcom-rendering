@@ -1,4 +1,4 @@
-.PHONY: install dev dev-legacy build clean-dist start stop monitor clear
+.PHONY: install dev dev-legacy build clean-dist clear
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -8,11 +8,11 @@ export SHELL := /usr/bin/env bash
 # messaging #########################################
 
 define log
-    @node scripts/env/log $(1)
+    @node ../scripts/log $(1)
 endef
 
 define warn
-    @node scripts/env/log $(1) warn
+    @node ../scripts/log $(1) warn
 endef
 
 # deployment #########################################
@@ -32,45 +32,13 @@ build: clean-dist install
 	$(call log, "generating Islands report card")
 	@node ./scripts/islands/island-descriptions.mjs
 
-
-build-ci: clean-dist install
-	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
-
-start-ci: install
-	$(call log, "starting PROD server...")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.js
-
-start: install
-	$(call log, "starting PROD server...")
+prod:
+	@echo 'starting PROD server...'
 	@echo '' # just a spacer
-	NODE_ENV=production pm2 start dist/server.js
-	@echo '' # just a spacer
-	$(call log, "PROD server is running")
-	@NODE_ENV=production pm2 logs
+	NODE_ENV=production node dist/server.js
 
-# Used in cloudformation.yml which specifically:
-# - Launches pm2 from /usr/local/node rather than /node_modules
-start-prod:
-	$(call log, "starting PROD server...")
-	@echo '' # just a spacer
-	NODE_ENV=production /usr/local/node/pm2 start dist/server.js
-	@echo '' # just a spacer
-	$(call log, "PROD server is running")
-
-stop:
-	@pm2 kill
-
-monitor:
-	@pm2 monit
-
-logs:
-	@pm2 logs
-
-run: stop build start
-
-run-ci: stop build-ci start-ci
-
+ci: export DISABLE_LOGGING_AND_METRICS = true
+ci: prod
 
 # dev #########################################
 
@@ -107,6 +75,14 @@ cypress-open: clear clean-dist install build
 	$(call log, "starting PROD server and opening Cypress")
 	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress open --e2e --browser electron'
 
+playwright: clear clean-dist install build
+	$(call log, "starting PROD server for Playwright")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'playwright test'
+
+playwright-open: clear clean-dist install build
+	$(call log, "starting PROD server and opening Playwright")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'playwright test --ui'
+
 ampValidation: clean-dist install
 	$(call log, "starting AMP Validation test")
 	@node scripts/test/amp-validation.js
@@ -121,10 +97,16 @@ tsc: clean-dist install
 	$(call log, "checking for type errors")
 	@tsc
 
-fix: clear clean-dist install
+lint-fix:
 	$(call log, "attempting to fix lint errors")
 	@yarn lint:fix
-	@yarn prettier:fix
+
+prettier:
+	$(call log, "attempting to fix prettier errors")
+	@cd .. && yarn prettier:write
+
+fix: clear clean-dist install lint-fix prettier
+	$(call log, "everything fixed")
 
 snapshot: clear clean-dist install
 	$(call log, "taking snapshots")
@@ -134,9 +116,11 @@ lint: clean-dist install
 	$(call log, "checking for lint errors")
 	@yarn lint
 
-lint-project:
+lint-project: check-env
 	$(call log, "linting project")
-	@node ../scripts/check-node-versions.mjs
+	@node scripts/check-node-versions.mjs
+	@node scripts/env/check-deps.js
+	@node scripts/env/check-files.js
 
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
@@ -181,10 +165,8 @@ validate-build: # private
 
 check-env: # private
 	$(call log, "checking environment")
-	@node scripts/env/check-node.js
-	@node scripts/env/check-yarn.js
-	@node scripts/env/check-deps.js
-	@node scripts/env/check-files.js
+	@cd .. && scripts/env/check-node
+	@cd .. && scripts/env/check-yarn
 
 clear: # private
 	@clear

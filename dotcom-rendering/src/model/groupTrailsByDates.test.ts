@@ -45,9 +45,9 @@ describe('groupTrailsByDates', () => {
 
 		const result = groupTrailsByDates(datesToTrails(dates));
 
-		expect(result[0]?.day).toEqual(23);
+		expect(result[0]?.day).toEqual(26);
 		expect(result[1]?.day).toEqual(25);
-		expect(result[2]?.day).toEqual(26);
+		expect(result[2]?.day).toEqual(23);
 
 		expect(result[3]?.day).toEqual(undefined);
 		expect(result[3]?.month).toEqual(4);
@@ -69,9 +69,9 @@ describe('groupTrailsByDates', () => {
 
 		const result = groupTrailsByDates(datesToTrails(dates), true);
 
-		expect(result[0]?.day).toEqual(2);
-		expect(result[1]?.day).toEqual(3);
-		expect(result[2]?.day).toEqual(4);
-		expect(result[3]?.day).toEqual(5);
+		expect(result[0]?.day).toEqual(5);
+		expect(result[1]?.day).toEqual(4);
+		expect(result[2]?.day).toEqual(3);
+		expect(result[3]?.day).toEqual(2);
 	});
 });

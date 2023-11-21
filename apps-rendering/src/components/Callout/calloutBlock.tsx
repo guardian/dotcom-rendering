@@ -46,7 +46,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	contacts,
 	isNonCollapsible,
 }): ReactElement => {
-	const id = getCalloutId(heading === "" ? formId.toString() : heading);
+	const id = getCalloutId(heading === '' ? formId.toString() : heading);
 	const [selectedTab, setSelectedTab] = useState('form');
 	const shouldShowContacts = contacts && contacts.length > 0;
 	const shouldShowHeading = !!heading && !isNonCollapsible;

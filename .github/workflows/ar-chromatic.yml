@@ -4,12 +4,14 @@ on:
   push:
     branches: [main]
   pull_request:
-    types: [opened, labeled, synchronize]
+    types: [opened, labeled, synchronize, ready_for_review]
 
 jobs:
   chromatic:
     name: Chromatic
     runs-on: ubuntu-latest
+    # Don't run Chromatic on draft PRs unless `run_chromatic` label has been applied.
+    if: (contains(github.event.pull_request.labels.*.name, 'run_chromatic') || github.event.pull_request.draft == false)
     steps:
       - name: Checkout - On Pull Request
         uses: actions/checkout@v4
@@ -36,9 +38,7 @@ jobs:
 
       - name: Chromatic - Apps Rendering
         uses: chromaui/action@v1
-        # Run Chromatic only if `run_chromatic` label has been applied or we're
-        # pushing to `main`.
-        if: (contains(github.event.pull_request.labels.*.name, 'run_chromatic') ||  github.ref == 'refs/heads/main')
+
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}

@@ -107,7 +107,8 @@ const interviewFontStyles = css`
 	white-space: pre-wrap;
 	padding-top: 0.0625rem;
 	padding-bottom: ${remSpace[1]};
-	box-shadow: -${remSpace[3]} 0 0 ${neutral[7]},
+	box-shadow:
+		-${remSpace[3]} 0 0 ${neutral[7]},
 		${remSpace[3]} 0 0 ${neutral[7]};
 	display: inline;
 `;

@@ -15,4 +15,3 @@ jobs:
 
       - name: Prettier check
         run: yarn prettier:check
-        working-directory: dotcom-rendering

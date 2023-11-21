@@ -28,7 +28,7 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 		level: logEvent.level.levelStr,
 		level_value: logEvent.level.level,
 		request,
-		// NODE_APP_INSTANCE is set by pm2
+		// NODE_APP_INSTANCE is set by cluster mode
 		thread_name: process.env.NODE_APP_INSTANCE ?? '0',
 	};
 	// log4js uses any[] to type data but we want to coerce it here
@@ -80,7 +80,6 @@ const enableLog4j = {
 		production: { appenders: ['fileAppender'], level: 'info' },
 		development: { appenders: ['console'], level: 'info' },
 	},
-	pm2: true,
 	// log4js cluster mode handling does not work as it prevents
 	// logs from processes other than the main process from
 	// writing to the log.

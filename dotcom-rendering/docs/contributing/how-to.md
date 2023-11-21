@@ -4,10 +4,10 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [How can I add to this document?](#how-can-i-add-to-this-document)
-- [How can I add client-side JavaScript?](#how-can-i-add-client-side-javascript)
-- [How can I create an 'island' in DCR?](#how-can-i-create-an-island-in-dcr)
-- [How can I make an AJAX request in DCR?](#how-can-i-make-an-ajax-request-in-dcr)
+-   [How can I add to this document?](#how-can-i-add-to-this-document)
+-   [How can I add client-side JavaScript?](#how-can-i-add-client-side-javascript)
+-   [How can I create an 'island' in DCR?](#how-can-i-create-an-island-in-dcr)
+-   [How can I make an AJAX request in DCR?](#how-can-i-make-an-ajax-request-in-dcr)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -49,7 +49,7 @@ To add an island:
 1. Wrap your component on the server with an `<Island>` component.
 2. Add `.importable` to the component filename. Eg: `[MyThing].importable.tsx`
 3. Specify what should trigger hydration (e.g. waiting until the component
-  scrolls into view). See `Island.tsx` props for options.
+   scrolls into view). See `Island.tsx` props for options.
 
 ## How to fetch external data on the client?
 

@@ -34,12 +34,12 @@ Example:
 
 ```js
 const secrets = [
-    // ...
-    {
-        key: 'YOUR_KEY',
-        missingMessage: 'What happens when the secret is missing',
-    },
-    // ...
+	// ...
+	{
+		key: 'YOUR_KEY',
+		missingMessage: 'What happens when the secret is missing',
+	},
+	// ...
 ];
 ```
 
@@ -50,18 +50,18 @@ e.g
 
 ```jsx
 return (
-    <Island>
-        {/* Bad :((( */}
-        <Image imageSalt={process.env.IMAGE_SALT} />
-    </Island>
+	<Island>
+		{/* Bad :((( */}
+		<Image imageSalt={process.env.IMAGE_SALT} />
+	</Island>
 );
 
 const url = getSaltedUrl(process.env.IMAGE_SALT);
 return (
-    <Island>
-        {/* Good :))) */}
-        <Image url={url} />
-    </Island>
+	<Island>
+		{/* Good :))) */}
+		<Image url={url} />
+	</Island>
 );
 ```
 

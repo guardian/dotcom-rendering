@@ -131,53 +131,54 @@ const defaultFormats = [
  */
 export const splitTheme =
 	(
-		formats: readonly [ArticleFormat, ...ArticleFormat[]] = defaultFormats,
+		formats: ArticleFormat[] = [...defaultFormats],
 		{ orientation = 'horizontal' }: Orientation = {},
 	): Decorator =>
-	(Story) =>
-		(
+	(Story, context) => (
+		<div
+			css={styles}
+			style={{
+				gridTemplateColumns:
+					orientation === 'horizontal' ? '1fr 1fr' : '1fr',
+			}}
+		>
 			<div
-				css={styles}
-				style={{
-					gridTemplateColumns:
-						orientation === 'horizontal' ? '1fr 1fr' : '1fr',
-				}}
+				className="light"
+				css={[
+					css`
+						background-color: ${sourcePalette.neutral[100]};
+						color: ${sourcePalette.neutral[0]};
+					`,
+					css(paletteDeclarations(defaultFormats[0], 'light')),
+				]}
 			>
-				<div
-					className="light"
-					css={[
-						css`
-							background-color: ${sourcePalette.neutral[100]};
-							color: ${sourcePalette.neutral[0]};
-						`,
-						css(paletteDeclarations(defaultFormats[0], 'light')),
-					]}
-				>
-					<h2 css={headerCss}>Light Theme ☀️</h2>
-					{formats.map((format) => (
-						<div css={css(paletteDeclarations(format, 'light'))}>
-							<FormatHeading format={format} />
-							<Story format={format} />
-						</div>
-					))}
-				</div>
-				<div
-					className="dark"
-					css={[
-						css`
-							background-color: ${sourcePalette.neutral[0]};
-							color: ${sourcePalette.neutral[100]};
-						`,
-						css(paletteDeclarations(defaultFormats[0], 'dark')),
-					]}
-				>
-					<h2 css={headerCss}>Dark Theme 🌙</h2>
-					{formats.map((format) => (
-						<div css={css(paletteDeclarations(format, 'dark'))}>
-							<FormatHeading format={format} />
-							<Story format={format} />
-						</div>
-					))}
-				</div>
+				<h2 css={headerCss}>Light Theme ☀️</h2>
+				{formats.map((format) => (
+					<div css={css(paletteDeclarations(format, 'light'))}>
+						<FormatHeading format={format} />
+						<Story args={{ ...context.args, format }} />
+					</div>
+				))}
 			</div>
-		);
+			<div
+				className="dark"
+				css={[
+					css`
+						background-color: ${sourcePalette.neutral[0]};
+						color: ${sourcePalette.neutral[100]};
+					`,
+					css(paletteDeclarations(defaultFormats[0], 'dark')),
+				]}
+			>
+				<h2 css={headerCss}>Dark Theme 🌙</h2>
+				{formats.map((format) => (
+					<div css={css(paletteDeclarations(format, 'dark'))}>
+						<FormatHeading format={format} />
+						<Story args={{ ...context.args, format }} />
+					</div>
+				))}
+			</div>
+		</div>
+	);
+
+export type StoryProps = { format: ArticleFormat };

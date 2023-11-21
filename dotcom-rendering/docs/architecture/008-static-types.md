@@ -2,15 +2,15 @@
 
 ## Context
 
-Adding static types to a JavaScript project can be incredibly useful to reduce the likelihood of introducing runtime type errors. 
+Adding static types to a JavaScript project can be incredibly useful to reduce the likelihood of introducing runtime type errors.
 
 We have considered two methods of adding static types to dotcom-rendering.
 
 ### Flow
 
-Flow makes it easy to retrofit a useful level of implicit type checking to a legacy project. 
+Flow makes it easy to retrofit a useful level of implicit type checking to a legacy project.
 
-However, it produces error messages that are difficult to understand. 
+However, it produces error messages that are difficult to understand.
 
 Flow requires developers to check in types for 3rd party libraries. These can be automatically generated based on the `package.json`, but developers must remember to keep these up to date.
 
@@ -24,9 +24,9 @@ The ecosystem is still immature.
 
 TypeScript produces more understandable error messages.
 
-It allows developers to install versioned types for third party libraries. 
+It allows developers to install versioned types for third party libraries.
 
-TypeScript is a language in its own right, and feels more natural. It can improve JavaScript language features to make them more type-friendly. Its configuration is more fine-grained. 
+TypeScript is a language in its own right, and feels more natural. It can improve JavaScript language features to make them more type-friendly. Its configuration is more fine-grained.
 
 Types are exact by default.
 
