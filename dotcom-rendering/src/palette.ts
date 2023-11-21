@@ -81,13 +81,10 @@ const bylineLight = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Editorial:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
 				case Pillar.Sport:
-					return sourcePalette.sport[400];
 				case Pillar.Culture:
-					return sourcePalette.culture[400];
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 400);
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
 				case ArticleSpecial.Labs:
@@ -109,9 +106,9 @@ const bylineLight = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Standard:
 			switch (theme) {
 				case Pillar.News:
-				case Pillar.Lifestyle:
 				case Pillar.Sport:
 				case Pillar.Culture:
+				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
@@ -125,9 +122,9 @@ const bylineLight = ({ design, theme }: ArticleFormat): string => {
 		default:
 			switch (theme) {
 				case Pillar.News:
-				case Pillar.Lifestyle:
 				case Pillar.Sport:
 				case Pillar.Culture:
+				case Pillar.Lifestyle:
 					return pillarPalette(theme, 400);
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
@@ -220,21 +217,19 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Analysis:
 			switch (theme) {
+				case Pillar.News:
+				case Pillar.Lifestyle:
 				case Pillar.Sport:
-					return sourcePalette.sport[300];
 				case Pillar.Culture:
-					return sourcePalette.culture[300];
+					return pillarPalette(theme, 300);
 				case Pillar.Opinion:
 					return sourcePalette.opinion[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[300];
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.brandAlt[300];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[100];
-				case Pillar.News:
 				default:
 					return sourcePalette.news[300];
 			}
@@ -242,15 +237,11 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Editorial:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
-				case Pillar.Sport:
-					return sourcePalette.sport[400];
-				case Pillar.Culture:
-					return sourcePalette.culture[400];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[400];
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
@@ -270,15 +261,11 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Standard:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
-				case Pillar.Sport:
-					return sourcePalette.sport[400];
-				case Pillar.Culture:
-					return sourcePalette.culture[400];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[400];
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
@@ -289,15 +276,11 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme }) => {
 		default:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
-				case Pillar.Sport:
-					return sourcePalette.sport[400];
-				case Pillar.Culture:
-					return sourcePalette.culture[400];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[400];
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 400);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
@@ -312,18 +295,16 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case Pillar.Sport:
-					return sourcePalette.sport[500];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
+				case Pillar.News:
 				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
+				case Pillar.Sport:
+				case Pillar.Culture:
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
+					return pillarPalette(theme, 500);
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[700];
-				case Pillar.News:
-				default:
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.Labs:
 					return sourcePalette.news[500];
 			}
 		case ArticleDesign.Standard:
@@ -338,15 +319,11 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Letter:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[500];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case Pillar.Sport:
-					return sourcePalette.sport[500];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
@@ -358,15 +335,11 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Editorial:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[500];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case Pillar.Sport:
-					return sourcePalette.sport[500];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
@@ -377,15 +350,11 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme }) => {
 		default:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[500];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case Pillar.Sport:
-					return sourcePalette.sport[500];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
@@ -400,37 +369,28 @@ const bylineHoverLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case Pillar.Sport:
-					return sourcePalette.sport[200];
-				case Pillar.Culture:
-					return sourcePalette.culture[200];
+				case Pillar.News:
 				case Pillar.Opinion:
-					return sourcePalette.opinion[200];
+				case Pillar.Sport:
+				case Pillar.Culture:
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[200];
+					return pillarPalette(theme, 200);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.brandAlt[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
-				case Pillar.News:
-				default:
-					return sourcePalette.news[200];
 			}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[300];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[300];
-				case Pillar.Sport:
-					return sourcePalette.sport[300];
-				case Pillar.Culture:
-					return sourcePalette.culture[300];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[300];
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 300);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
@@ -450,13 +410,10 @@ const bylineHoverLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Standard:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[300];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[300];
 				case Pillar.Sport:
-					return sourcePalette.sport[300];
 				case Pillar.Culture:
-					return sourcePalette.culture[300];
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 300);
 				case Pillar.Opinion:
 					return sourcePalette.opinion[200];
 				case ArticleSpecial.Labs:
@@ -469,13 +426,10 @@ const bylineHoverLight: PaletteFunction = ({ design, theme }) => {
 		default:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[300];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[300];
 				case Pillar.Sport:
-					return sourcePalette.sport[300];
 				case Pillar.Culture:
-					return sourcePalette.culture[300];
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 300);
 				case Pillar.Opinion:
 					return sourcePalette.opinion[200];
 				case ArticleSpecial.Labs:
@@ -492,19 +446,18 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Analysis:
 			switch (theme) {
-				case Pillar.Sport:
-					return sourcePalette.sport[600];
-				case Pillar.Culture:
-					return sourcePalette.culture[600];
+				case Pillar.News:
 				case Pillar.Opinion:
-					return sourcePalette.opinion[600];
+				case Pillar.Sport:
+				case Pillar.Culture:
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[600];
+					return pillarPalette(theme, 600);
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[800];
-				case Pillar.News:
-				default:
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.Labs: {
 					return sourcePalette.news[600];
+				}
 			}
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -518,15 +471,11 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Letter:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[600];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[600];
-				case Pillar.Sport:
-					return sourcePalette.sport[600];
-				case Pillar.Culture:
-					return sourcePalette.culture[600];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[600];
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 600);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
@@ -538,15 +487,11 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Editorial:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[600];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[600];
-				case Pillar.Sport:
-					return sourcePalette.sport[600];
-				case Pillar.Culture:
-					return sourcePalette.culture[600];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[600];
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 600);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
@@ -557,15 +502,11 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 		default:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[600];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[600];
-				case Pillar.Sport:
-					return sourcePalette.sport[600];
-				case Pillar.Culture:
-					return sourcePalette.culture[600];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[600];
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 600);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
