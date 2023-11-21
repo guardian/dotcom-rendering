@@ -1083,13 +1083,10 @@ const blockQuoteFillLight = (format: ArticleFormat): string => {
 				case Pillar.News:
 					return sourcePalette.neutral[46];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[200];
 				case Pillar.Sport:
-					return sourcePalette.sport[200];
 				case Pillar.Culture:
-					return sourcePalette.culture[200];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[200];
+					return pillarPalette(format.theme, 200);
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1112,15 +1109,11 @@ const blockQuoteFillLight = (format: ArticleFormat): string => {
 		case ArticleDesign.Review: {
 			switch (format.theme) {
 				case Pillar.News:
-					return sourcePalette.news[200];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[200];
 				case Pillar.Sport:
-					return sourcePalette.sport[200];
 				case Pillar.Culture:
-					return sourcePalette.culture[200];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[200];
+					return pillarPalette(format.theme, 200);
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1129,16 +1122,13 @@ const blockQuoteFillLight = (format: ArticleFormat): string => {
 		}
 		default: {
 			switch (format.theme) {
-				case Pillar.News:
-					return sourcePalette.news[400];
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
+				case Pillar.News:
 				case Pillar.Sport:
-					return sourcePalette.sport[400];
 				case Pillar.Culture:
-					return sourcePalette.culture[400];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
+					return pillarPalette(format.theme, 400);
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1160,13 +1150,10 @@ const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
 				case Pillar.News:
 					return sourcePalette.neutral[60];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
 				case Pillar.Sport:
-					return sourcePalette.sport[500];
 				case Pillar.Culture:
-					return sourcePalette.culture[500];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
+					return pillarPalette(theme, 500);
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1189,15 +1176,11 @@ const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Review: {
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[500];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
 				case Pillar.Sport:
-					return sourcePalette.sport[500];
 				case Pillar.Culture:
-					return sourcePalette.culture[500];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
+					return pillarPalette(theme, 500);
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1206,16 +1189,13 @@ const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
 		}
 		default:
 			switch (theme) {
-				case Pillar.News:
-					return sourcePalette.news[400];
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
+				case Pillar.News:
 				case Pillar.Sport:
-					return sourcePalette.sport[400];
 				case Pillar.Culture:
-					return sourcePalette.culture[400];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
+					return pillarPalette(theme, 400);
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
@@ -1284,15 +1264,11 @@ const blockquoteTextStylesDark = (format: ArticleFormat): string => {
 const blockQuoteLinkStylesLight = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case Pillar.News:
-			return sourcePalette.news[400];
 		case Pillar.Sport:
-			return sourcePalette.sport[400];
 		case Pillar.Culture:
-			return sourcePalette.culture[400];
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[400];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[400];
+			return pillarPalette(format.theme, 400);
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
@@ -1305,15 +1281,11 @@ const blockQuoteLinkStylesLight = (format: ArticleFormat): string => {
 const blockQuoteLinkStylesDark = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case Pillar.News:
-			return sourcePalette.news[500];
 		case Pillar.Sport:
-			return sourcePalette.sport[500];
 		case Pillar.Culture:
-			return sourcePalette.culture[500];
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[500];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[500];
+			return pillarPalette(format.theme, 500);
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
@@ -2765,15 +2737,11 @@ const pullQuoteTextLight = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Review:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[200];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[200];
 				case Pillar.Sport:
-					return sourcePalette.sport[200];
 				case Pillar.Culture:
-					return sourcePalette.culture[200];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[200];
+					return pillarPalette(theme, 200);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
@@ -2799,15 +2767,11 @@ const pullQuoteTextDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Review:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[500];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
 				case Pillar.Sport:
-					return sourcePalette.sport[500];
 				case Pillar.Culture:
-					return sourcePalette.culture[500];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
+					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
