@@ -35,7 +35,9 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 		useState<React.ElementType<{ [key: string]: unknown }>>();
 
 	useEffect(() => {
-		import(`./marketing/epics/ContributionsLiveblogEpic`)
+		import(
+			/* webpackChunkName: "contributions-liveblog-epic" */ `./marketing/epics/ContributionsLiveblogEpic`
+		)
 			.then((epicModule) => {
 				// @ts-expect-error -- currently the type of the props in the response is too general
 				setEpic(() => epicModule.ContributionsLiveblogEpic);
