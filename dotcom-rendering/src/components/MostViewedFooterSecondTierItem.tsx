@@ -10,6 +10,7 @@ import type { TrailType } from '../types/trails';
 import { AgeWarning } from './AgeWarning';
 import { Avatar } from './Avatar';
 import { Flex } from './Flex';
+import { FormatBoundary } from './FormatBoundary';
 import { LinkHeadline } from './LinkHeadline';
 
 const itemStyles = (showRightBorder?: boolean) => css`
@@ -106,30 +107,32 @@ export const MostViewedFooterSecondTierItem = ({
 				data-link-name={trail.dataLinkName}
 			>
 				<Flex>
-					<div css={headlineStyles}>
-						<div css={titleStyles}>{title}</div>
-						<LinkHeadline
-							headlineText={headlineText}
-							format={format}
-							size="small"
-							byline={showByline ? byline : undefined}
-						/>
+					<FormatBoundary format={format}>
+						<div css={headlineStyles}>
+							<div css={titleStyles}>{title}</div>
+							<LinkHeadline
+								headlineText={headlineText}
+								format={format}
+								size="small"
+								byline={showByline ? byline : undefined}
+							/>
 
-						{!!ageWarning && (
-							<div css={ageWarningStyles}>
-								<AgeWarning age={ageWarning} size="small" />
-							</div>
-						)}
-					</div>
-					<>
-						{!!avatarToShow && (
-							<div css={avatarContainerStyles}>
-								<div css={avatarSizeStyles}>
-									<Avatar src={avatarToShow} alt="" />
+							{!!ageWarning && (
+								<div css={ageWarningStyles}>
+									<AgeWarning age={ageWarning} size="small" />
 								</div>
-							</div>
-						)}
-					</>
+							)}
+						</div>
+						<>
+							{!!avatarToShow && (
+								<div css={avatarContainerStyles}>
+									<div css={avatarSizeStyles}>
+										<Avatar src={avatarToShow} alt="" />
+									</div>
+								</div>
+							)}
+						</>
+					</FormatBoundary>
 				</Flex>
 			</a>
 		</div>

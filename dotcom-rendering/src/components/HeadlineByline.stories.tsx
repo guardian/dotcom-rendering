@@ -5,6 +5,11 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import type { StoryObj } from '@storybook/react';
+import {
+	splitTheme,
+	type StoryProps,
+} from '../../.storybook/decorators/splitThemeDecorator';
 import { HeadlineByline } from './HeadlineByline';
 
 export default {
@@ -12,60 +17,37 @@ export default {
 	title: 'Components/HeadlineByline',
 };
 
-export const interviewStory = () => {
-	return (
-		<HeadlineByline
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Interview,
-				theme: Pillar.Culture,
-			}}
-			byline="Jane Smith"
-			tags={[]}
-		/>
-	);
+export const interviewStory: StoryObj = ({ format }: StoryProps) => {
+	return <HeadlineByline format={format} byline="Jane Smith" tags={[]} />;
 };
 interviewStory.storyName = 'Interview';
+interviewStory.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Interview,
+			theme: Pillar.Culture,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.Sport,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: ArticleSpecial.SpecialReport,
+		},
+	]),
+];
 
-export const commentStory = () => {
-	return (
-		<HeadlineByline
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: Pillar.Sport,
-			}}
-			byline="Jane Smith"
-			tags={[]}
-		/>
-	);
-};
-commentStory.storyName = 'Comment';
-
-export const specialStory = () => {
-	return (
-		<HeadlineByline
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: ArticleSpecial.SpecialReport,
-			}}
-			byline="Jane Smith"
-			tags={[]}
-		/>
-	);
-};
-specialStory.storyName = 'SpecialReport';
-
-export const commentWithBylineImageStory = () => {
+export const commentWithBylineImageStory: StoryObj = ({
+	format,
+}: StoryProps) => {
 	// Not visibly different in storybook but will apply a width
 	return (
 		<HeadlineByline
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: Pillar.Sport,
-			}}
+			format={format}
 			byline="Jane Smith"
 			tags={[
 				{
@@ -81,15 +63,20 @@ export const commentWithBylineImageStory = () => {
 	);
 };
 commentWithBylineImageStory.storyName = 'Comment with byline image';
+commentWithBylineImageStory.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.Sport,
+		},
+	]),
+];
 
-export const immersiveStory = () => {
+export const immersiveStory: StoryObj = ({ format }: StoryProps) => {
 	return (
 		<HeadlineByline
-			format={{
-				display: ArticleDisplay.Immersive,
-				design: ArticleDesign.Standard,
-				theme: Pillar.Lifestyle,
-			}}
+			format={format}
 			byline="Jane Smith"
 			tags={[
 				{
@@ -102,8 +89,17 @@ export const immersiveStory = () => {
 	);
 };
 immersiveStory.storyName = 'Immersive';
+immersiveStory.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
-export const ImmersiveComment = () => {
+export const ImmersiveComment: StoryObj = ({ format }: StoryProps) => {
 	return (
 		<div
 			css={css`
@@ -112,11 +108,7 @@ export const ImmersiveComment = () => {
 			`}
 		>
 			<HeadlineByline
-				format={{
-					display: ArticleDisplay.Immersive,
-					design: ArticleDesign.Comment,
-					theme: Pillar.Lifestyle,
-				}}
+				format={format}
 				byline="Jane Smith"
 				tags={[
 					{
@@ -130,15 +122,20 @@ export const ImmersiveComment = () => {
 	);
 };
 ImmersiveComment.storyName = 'Immersive Comment';
+ImmersiveComment.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Comment,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
-export const MultipleStory = () => {
+export const MultipleStory: StoryObj = ({ format }: StoryProps) => {
 	return (
 		<HeadlineByline
-			format={{
-				display: ArticleDisplay.Immersive,
-				design: ArticleDesign.Standard,
-				theme: Pillar.Lifestyle,
-			}}
+			format={format}
 			byline="Jane Smith, John Doe and Nae Bevan"
 			tags={[
 				{
@@ -161,15 +158,20 @@ export const MultipleStory = () => {
 	);
 };
 MultipleStory.storyName = 'Immersive with multiple contributors';
+MultipleStory.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
-export const MultipleDuplicateStory = () => {
+export const MultipleDuplicateStory: StoryObj = ({ format }: StoryProps) => {
 	return (
 		<HeadlineByline
-			format={{
-				display: ArticleDisplay.Immersive,
-				design: ArticleDesign.Standard,
-				theme: Pillar.Lifestyle,
-			}}
+			format={format}
 			byline="Duncan Campbell and Duncan Campbell"
 			tags={[
 				{
@@ -188,30 +190,49 @@ export const MultipleDuplicateStory = () => {
 };
 MultipleDuplicateStory.storyName =
 	'Immersive with multiple contributors with distinct tags but identical names';
+MultipleDuplicateStory.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
-export const noBylineStory = () => {
-	return (
-		<HeadlineByline
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Interview,
-				theme: Pillar.Culture,
-			}}
-			byline=""
-			tags={[]}
-		/>
-	);
-};
+export const noBylineStory: StoryObj = ({ format }: StoryProps) => (
+	<div
+		css={css`
+			display: flex;
+			flex-direction: column;
+
+			p {
+				background-color: darkgreen;
+				color: aliceblue;
+				line-height: 2em;
+			}
+		`}
+	>
+		<p>👇 there should be no space between these boxes</p>
+		<HeadlineByline format={format} byline="" tags={[]} />
+		<p>👆 as and empty byline is transformed in a null</p>
+	</div>
+);
 noBylineStory.storyName = 'No byline';
+noBylineStory.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Interview,
+			theme: Pillar.Culture,
+		},
+	]),
+];
 
-export const LabsImmersive = () => {
+export const Labs: StoryObj = ({ format }: StoryProps) => {
 	return (
 		<HeadlineByline
-			format={{
-				display: ArticleDisplay.Immersive,
-				design: ArticleDesign.Standard,
-				theme: ArticleSpecial.Labs,
-			}}
+			format={format}
 			byline="Jane Smith"
 			tags={[
 				{
@@ -223,46 +244,23 @@ export const LabsImmersive = () => {
 		/>
 	);
 };
-LabsImmersive.storyName = 'Labs Immersive';
-
-export const LabsComment = () => {
-	return (
-		<HeadlineByline
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: ArticleSpecial.Labs,
-			}}
-			byline="Jane Smith"
-			tags={[
-				{
-					id: '1',
-					type: 'Contributor',
-					title: 'Jane Smith',
-				},
-			]}
-		/>
-	);
-};
-LabsComment.storyName = 'Labs Comment';
-
-export const LabsInterview = () => {
-	return (
-		<HeadlineByline
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Interview,
-				theme: ArticleSpecial.Labs,
-			}}
-			byline="Jane Smith"
-			tags={[
-				{
-					id: '1',
-					type: 'Contributor',
-					title: 'Jane Smith',
-				},
-			]}
-		/>
-	);
-};
-LabsInterview.storyName = 'Labs Interview';
+Labs.storyName = 'Labs Immersive';
+Labs.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.Labs,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: ArticleSpecial.Labs,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Interview,
+			theme: ArticleSpecial.Labs,
+		},
+	]),
+];
