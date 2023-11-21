@@ -422,7 +422,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					element="article"
-					borderColour={themePalette('--article-border')}
+					borderColour={themePalette('--article-border-secondary')}
 				>
 					<PictureGrid>
 						<GridItem area="title" element="aside">
@@ -571,7 +571,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						<GridItem area="submeta">
 							<ArticleContainer format={format}>
 								<DecideLines
-									color={themePalette('--article-border')}
+									color={themePalette(
+										'--article-border-secondary',
+									)}
 									format={format}
 								/>
 								<SubMeta
