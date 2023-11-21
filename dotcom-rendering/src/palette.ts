@@ -923,18 +923,16 @@ const cardBackgroundDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.LiveBlog:
 			switch (theme) {
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[100];
 				case Pillar.Sport:
-					return sourcePalette.sport[100];
 				case Pillar.Culture:
-					return sourcePalette.culture[100];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[100];
+					return pillarPalette(theme, 100);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[100];
 				case Pillar.News:
+				case ArticleSpecial.SpecialReportAlt:
 				default:
 					return sourcePalette.news[100];
 			}
@@ -961,13 +959,10 @@ const cardBylineKickerTextDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.Sport:
-					return sourcePalette.sport[500];
 				case Pillar.Culture:
-					return sourcePalette.culture[500];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
+					return pillarPalette(theme, 500);
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[700];
 				case Pillar.News:
@@ -986,15 +981,11 @@ const cardBylineKickerTextDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Letter:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[500];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
 				case Pillar.Sport:
-					return sourcePalette.sport[500];
 				case Pillar.Culture:
-					return sourcePalette.culture[500];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
+					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
@@ -1006,15 +997,11 @@ const cardBylineKickerTextDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Editorial:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[500];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
 				case Pillar.Sport:
-					return sourcePalette.sport[500];
 				case Pillar.Culture:
-					return sourcePalette.culture[500];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
+					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
@@ -1025,15 +1012,11 @@ const cardBylineKickerTextDark = ({ design, theme }: ArticleFormat): string => {
 		default:
 			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[500];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
 				case Pillar.Sport:
-					return sourcePalette.sport[500];
 				case Pillar.Culture:
-					return sourcePalette.culture[500];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[500];
+					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
