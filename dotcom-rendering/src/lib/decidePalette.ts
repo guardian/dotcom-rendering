@@ -323,64 +323,6 @@ const textTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
 	return textTwitterHandle(format);
 };
 
-const textSubMeta = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[100];
-	if (
-		format.design === ArticleDesign.DeadBlog ||
-		format.design === ArticleDesign.LiveBlog
-	)
-		return blogsGrayBackgroundPalette(format);
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
-const textSubMetaLabel = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.LiveBlog &&
-		format.design != ArticleDesign.DeadBlog
-	)
-		return palette.specialReportAlt[100];
-	if (format.design === ArticleDesign.Picture) return palette.neutral[60];
-	return text.supporting;
-};
-
-const textSubMetaLink = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-	return text.supporting;
-};
-
-const textSyndicationButton = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[100];
-
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.LiveBlog &&
-		format.design !== ArticleDesign.DeadBlog
-	)
-		return palette.specialReportAlt[100];
-
-	return text.supporting;
-};
-
 /** @deprecated this has been moved to the theme palette (--article-link-text) */
 const textArticleLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -1146,18 +1088,6 @@ const fillTwitterHandle = (format: ArticleFormat): string => {
 		return palette.specialReportAlt[100];
 
 	return neutral[46];
-};
-
-const borderSyndicationButton = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return neutral[60];
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.DeadBlog &&
-		format.design !== ArticleDesign.LiveBlog
-	)
-		return palette.specialReportAlt[100];
-
-	return border.secondary;
 };
 
 /** @deprecated this has been moved to the theme palette */
@@ -1928,48 +1858,6 @@ const backgroundDiscussionPillarButton = (format: ArticleFormat) => {
 	}
 };
 
-const backgroundSubmeta = (format: ArticleFormat) => {
-	// specialreport blogs should have specialreport background
-	if (
-		(format.design === ArticleDesign.LiveBlog ||
-			format.design === ArticleDesign.DeadBlog) &&
-		format.theme !== ArticleSpecial.SpecialReport
-	)
-		return neutral[97];
-
-	// Order matters. We want comment special report pieces to have the opinion background
-	if (format.design === ArticleDesign.Letter) return opinion[800];
-
-	if (format.design === ArticleDesign.Comment) {
-		if (format.theme === ArticleSpecial.SpecialReportAlt)
-			return palette.specialReportAlt[800];
-
-		return opinion[800];
-	}
-	if (format.design === ArticleDesign.Editorial) return opinion[800];
-
-	if (format.design === ArticleDesign.Analysis) {
-		if (format.theme === ArticleSpecial.SpecialReportAlt)
-			return palette.specialReportAlt[800];
-		else return news[800];
-	}
-
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[800]; // Note, check theme rather than design here
-
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return palette.specialReportAlt[800];
-
-	if (
-		format.theme === ArticleSpecial.Labs &&
-		format.display !== ArticleDisplay.Immersive
-	)
-		return neutral[97];
-	if (format.design === ArticleDesign.Picture) return BLACK;
-
-	return neutral[100];
-};
-
 const textYoutubeOverlayKicker = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -2010,10 +1898,6 @@ export const decidePalette = (
 			byline: textByline(format),
 			twitterHandle: textTwitterHandle(format),
 			twitterHandleBelowDesktop: textTwitterHandleBelowDesktop(format),
-			subMeta: textSubMeta(format),
-			subMetaLabel: textSubMetaLabel(format),
-			subMetaLink: textSubMetaLink(format),
-			syndicationButton: textSyndicationButton(format),
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline:
@@ -2092,7 +1976,6 @@ export const decidePalette = (
 			pullQuote: backgroundPullQuote(format),
 			messageForm: backgroundMessageForm(format),
 			discussionPillarButton: backgroundDiscussionPillarButton(format),
-			subMeta: backgroundSubmeta(format),
 			dynamoSublink:
 				overrides?.background.dynamoSublink ??
 				backgroundDynamoSublink(format),
@@ -2108,7 +1991,6 @@ export const decidePalette = (
 			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {
-			syndicationButton: borderSyndicationButton(format),
 			subNav: borderSubNav(format),
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
