@@ -146,7 +146,6 @@
 		"amphtml-validator": "1.0.35",
 		"aws-cdk": "2.87.0",
 		"aws-cdk-lib": "2.87.0",
-		"babel-core": "7.0.0-bridge.0",
 		"babel-loader": "8.3.0",
 		"babel-plugin-polyfill-corejs3": "0.6.0",
 		"babel-plugin-px-to-rem": "https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0",
