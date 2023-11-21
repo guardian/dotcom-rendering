@@ -107,17 +107,6 @@ const cardStyles = (
 	}
 
 	switch (format.design) {
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			return css`
-				${baseCardStyles};
-				:hover {
-					background-color: ${palette(
-						'--card-background-hover-opinion',
-					)};
-				}
-			`;
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -132,9 +121,7 @@ const cardStyles = (
 			return css`
 				${baseCardStyles};
 				:hover {
-					background-color: ${palette(
-						'--card-background-hover-default',
-					)};
+					background-color: ${palette('--card-background-hover')};
 				}
 			`;
 	}

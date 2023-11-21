@@ -252,9 +252,7 @@ export const CardHeadline = ({
 	isDynamo,
 	isExternalLink,
 }: Props) => {
-	const kickerColour = isDynamo
-		? decidePalette(format, containerPalette).text.dynamoKicker
-		: palette('--card-kicker-text');
+	const kickerColour = palette('--card-kicker-text');
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;

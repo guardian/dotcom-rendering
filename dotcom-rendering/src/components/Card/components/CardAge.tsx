@@ -24,9 +24,7 @@ const ageStyles = (
 	return css`
 		${textSans.xxsmall({ lineHeight: 'tight' })};
 		margin-top: -4px;
-		color: ${isDynamo
-			? decidePalette(format, containerPalette).text.dynamoHeadline
-			: palette('--card-age-text')};
+		color: ${palette('--card-footer-text')};
 
 		/* Provide side padding for positioning and also to keep spacing
     between any sibings (like Lines) */
@@ -37,7 +35,7 @@ const ageStyles = (
 		}
 
 		svg {
-			fill: ${palette('--card-age-text')};
+			fill: ${palette('--card-footer-text')};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;
@@ -69,15 +67,7 @@ export const CardAge = ({
 	}
 
 	return (
-		<span
-			css={ageStyles(format, containerPalette, isDynamo)}
-			style={{
-				['--card-age-text']: isDynamo
-					? decidePalette(format, containerPalette).text
-							.dynamoHeadline
-					: decidePalette(format, containerPalette).text.cardFooter,
-			}}
-		>
+		<span css={ageStyles(format, containerPalette, isDynamo)}>
 			{showClock && <ClockIcon />}
 			<Island priority="enhancement" defer={{ until: 'visible' }}>
 				<RelativeTime then={new Date(webPublicationDate).getTime()} />

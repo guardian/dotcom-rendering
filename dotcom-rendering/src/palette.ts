@@ -1049,15 +1049,19 @@ const cardKickerTextLight = (format: ArticleFormat): string => {
 const cardHeadlineTextLight = (format: ArticleFormat): string => {
 	return decidePalette(format).text.cardHeadline;
 };
-const cardBackgroundHoverDefaultLight = (): string => {
-	return sourcePalette.neutral[93];
-};
-const cardBackgroundHoverOpinionLight = (): string => {
-	/* TODO: This colour is hard coded here because it does not yet
-                           exist in source-foundations. Once it's been added, please
-                           remove this. @siadcock is aware. */
-	/* stylelint-disable-next-line color-no-hex */
-	return '#fdf0e8';
+const cardBackgroundHoverLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
+			/* TODO: This colour is hard coded here because it does not yet
+		exist in source-foundations. Once it's been added, please
+		remove this. @siadcock is aware. */
+			/* stylelint-disable-next-line color-no-hex */
+			return '#fdf0e8';
+		default:
+			return sourcePalette.neutral[93];
+	}
 };
 
 const captionTextLight = ({ design, theme }: ArticleFormat): string => {
@@ -1754,7 +1758,7 @@ const paletteColours = {
 		light: cardBorderTopLight,
 		dark: cardBorderTopDark,
 	},
-	'--card-age-text': {
+	'--card-footer-text': {
 		light: cardAgeTextLight,
 		dark: cardAgeTextDark,
 	},
@@ -1778,12 +1782,8 @@ const paletteColours = {
 		light: cardHeadlineTextLight,
 		dark: cardTextDark,
 	},
-	'--card-background-hover-default': {
-		light: cardBackgroundHoverDefaultLight,
-		dark: cardBackgroundDark,
-	},
-	'--card-background-hover-opinion': {
-		light: cardBackgroundHoverOpinionLight,
+	'--card-background-hover': {
+		light: cardBackgroundHoverLight,
 		dark: cardBackgroundDark,
 	},
 	'--caption-text': {

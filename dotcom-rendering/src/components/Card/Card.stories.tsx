@@ -79,7 +79,6 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div
 			css={css`
-				max-height: 360px;
 				max-width: 600px;
 				flex-basis: 100%;
 				${from.tablet} {
@@ -198,7 +197,9 @@ export default {
 	component: CardGroup,
 	// Export used by dotcom-rendering/stories/Card.stories.tsx
 	excludeStories: ['CardsWithDifferentThemes'],
-	decorators: [splitTheme([basicCardProps.format])],
+	decorators: [
+		splitTheme([basicCardProps.format], { orientation: 'vertical' }),
+	],
 };
 
 export const WithDifferentHeadlineSizes = () => {
