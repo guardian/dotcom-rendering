@@ -19,15 +19,15 @@ export const FollowNotificationStatus: FC<Props> = ({ isFollowing }) => {
 		<>
 			{isFollowing ? (
 				<span className="notifications-on">
-					<svg>
+					<object>
 						<SvgNotificationsOn size="xsmall" />
-					</svg>
+					</object>
 				</span>
 			) : (
 				<span className="notifications-off">
-					<svg>
+					<object>
 						<SvgNotificationsOff size="xsmall" />
-					</svg>
+					</object>
 				</span>
 			)}
 
@@ -46,15 +46,15 @@ export const FollowTagStatus: FC<Props> = ({
 		<>
 			{isFollowing ? (
 				<span className="tag-following">
-					<svg>
+					<object>
 						<SvgCheckmark size="xsmall" />
-					</svg>
+					</object>
 				</span>
 			) : (
 				<span className="tag-not-following">
-					<svg>
+					<object>
 						<SvgPlus size="xsmall" />
-					</svg>
+					</object>
 				</span>
 			)}
 
