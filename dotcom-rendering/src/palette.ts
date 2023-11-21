@@ -1595,9 +1595,7 @@ const cardTrailTextLight = (format: ArticleFormat): string => {
 const cardTextDark = (): string => {
 	return sourcePalette.neutral[86];
 };
-const cardBylineTextLight = (format: ArticleFormat): string => {
-	return decidePalette(format).text.cardByline;
-};
+
 const cardBylineKickerTextDark = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Analysis:
@@ -2763,10 +2761,6 @@ const paletteColours = {
 	},
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
-		dark: cardBylineKickerTextDark,
-	},
-	'--card-byline-text': {
-		light: cardBylineTextLight,
 		dark: cardBylineKickerTextDark,
 	},
 	'--card-headline-text': {

@@ -12,7 +12,7 @@ type Props = {
 const baseStyles = css`
 	display: block;
 	font-style: italic;
-	color: ${palette('--card-byline-text')};
+	color: ${palette('--byline')};
 `;
 
 const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {

@@ -37,7 +37,7 @@ export const ContainerOverrides = ({
 			: text?.cardFooter,
 		'--card-kicker-text': isDynamo ? text?.dynamoKicker : text?.cardKicker,
 		'--card-background': isDynamo ? 'transparent' : background?.card,
-		'--card-byline-text': text?.cardByline,
+		'--byline': text?.cardByline,
 		'--card-border-top': isDynamo ? text?.dynamoKicker : topBar?.card,
 	} satisfies Partial<Record<ColourName, string>>;
 
