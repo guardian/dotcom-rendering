@@ -131,7 +131,7 @@ export const VeggieBurgerMenu = ({ isImmersive = false }: Props) => {
 			tabIndex={0}
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 			role="button"
-			data-cy="veggie-burger"
+			data-testid="veggie-burger"
 		>
 			<span css={screenReadable}>Show More</span>
 			<span css={veggieBurgerIconStyles} />

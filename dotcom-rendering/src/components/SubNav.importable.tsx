@@ -177,7 +177,7 @@ export const SubNav = ({
 		<div
 			data-print-layout="hide"
 			css={[collapseWrapper && wrapperCollapsedStyles, spaceBetween]}
-			data-cy="sub-nav"
+			data-testid="sub-nav"
 			data-component="sub-nav"
 		>
 			{/* eslint-disable jsx-a11y/no-redundant-roles -- A11y fix for Safari {@see https://github.com/guardian/dotcom-rendering/pull/5041} */}
@@ -248,7 +248,7 @@ export const SubNav = ({
 						'nav2',
 						'subnav-toggle',
 					)}
-					data-cy="subnav-toggle"
+					data-testid="subnav-toggle"
 				>
 					{isExpanded ? 'Less' : 'More'}
 				</button>

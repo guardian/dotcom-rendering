@@ -17,7 +17,7 @@ export const SoundcloudBlockComponent = ({ element }: Props) => {
 	return (
 		<div css={widthOverride}>
 			<div
-				data-cy="soundcloud-embed"
+				data-testid="soundcloud-embed"
 				dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}
 			/>
 		</div>
