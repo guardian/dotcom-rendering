@@ -2652,10 +2652,10 @@
     node-int64 "^0.4.0"
     thrift "^0.15.0"
 
-"@guardian/bridget@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.0.0.tgz#9be79e1f8c0c4a9ee3829390b9bcb828d78cb4d7"
-  integrity sha512-bCNIQuPe74AwR0eZWHgN/at3vumPOB0NxozciTujGUblhun23f+Fagtkkf1zyIqQ2VjaYmSVy5zVug+E5v9auw==
+"@guardian/bridget@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.5.0.tgz#1a5b1adeea08398b678f38e15cb8c598a5e73b19"
+  integrity sha512-H60m0zTPGgwJJm4SG/a7XO6Cxmn2PPJQhGULjueX+z5ZkEfhc78dsc6a578GZbJWFSTw10clgnXM7ruXON2vUw==
 
 "@guardian/cdk@^50.10.10":
   version "50.10.10"
@@ -6682,6 +6682,11 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==
+
+compare-versions@6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/compare-versions/-/compare-versions-6.1.0.tgz#3f2131e3ae93577df111dba133e6db876ffe127a"
+  integrity sha512-LNZQXhqUvqUTotpZ00qLSaify3b4VFD588aRr8MKFw4CMUr98ytzCW5wDH5qx/DEY5kCDXcbcRuCqL0szEf2tg==
 
 compress-commons@^2.1.1:
   version "2.1.1"
