@@ -220,7 +220,7 @@ const testLayoutFormats =
 			display: 'Showcase',
 			design: 'Standard',
 			theme: 'NewsPillar',
-			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+			config: { renderingTarget: 'Apps', darkModeAvailable: true },
 		},
 		{
 			display: 'Showcase',

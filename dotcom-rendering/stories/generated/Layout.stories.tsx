@@ -96,7 +96,7 @@ export default {
 			);
 		};
 		AppsShowcaseStandardNewsPillarLight.storyName = 'Apps: Display: Showcase, Design: Standard, Theme: NewsPillar, Mode: Light';
-		AppsShowcaseStandardNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
+		AppsShowcaseStandardNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
 		AppsShowcaseStandardNewsPillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Showcase,
@@ -106,7 +106,26 @@ export default {
 			),
 		];
 
-		
+		export const AppsShowcaseStandardNewsPillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Showcase"
+					designName="Standard"
+					theme="NewsPillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsShowcaseStandardNewsPillarDark.storyName = 'Apps: Display: Showcase, Design: Standard, Theme: NewsPillar, Mode: Dark';
+		AppsShowcaseStandardNewsPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsShowcaseStandardNewsPillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Showcase,
+					design: ArticleDesign.Standard,
+					theme: {...ArticleSpecial, ...Pillar}.News,
+				}]
+			),
+		];
 
 		export const WebShowcasePictureOpinionPillarLight = () => {
 			return (
