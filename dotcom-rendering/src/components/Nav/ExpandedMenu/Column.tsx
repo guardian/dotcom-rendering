@@ -289,7 +289,7 @@ export const Column = ({
 				]}
 				role="menu"
 				id={ariaControls}
-				data-cy={ariaControls}
+				data-testid={ariaControls}
 			>
 				{(column.children ?? []).map((link) => (
 					<li
@@ -310,7 +310,7 @@ export const Column = ({
 								'secondary',
 								link.longTitle,
 							)}
-							data-cy={`column-collapse-sublink-${link.title}`}
+							data-testid={`column-collapse-sublink-${link.title}`}
 							tabIndex={-1}
 						>
 							{link.longTitle}

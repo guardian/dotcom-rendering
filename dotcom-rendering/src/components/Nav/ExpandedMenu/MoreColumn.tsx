@@ -230,7 +230,7 @@ export const MoreColumn = ({
 									'secondary',
 									link.longTitle,
 								)}
-								data-cy={`column-collapse-sublink-${link.title}`}
+								data-testid={`column-collapse-sublink-${link.title}`}
 								tabIndex={-1}
 							>
 								{link.longTitle}

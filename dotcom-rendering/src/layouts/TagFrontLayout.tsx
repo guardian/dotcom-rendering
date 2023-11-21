@@ -11,10 +11,10 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
-import { AdSlot } from '../components/AdSlot.web';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import {
 	decideFrontsBannerAdSlot,
+	decideMerchandisingSlot,
 	decideMerchHighAndMobileAdSlots,
 } from '../components/DecideFrontsAdSlots';
 import { Footer } from '../components/Footer';
@@ -333,6 +333,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 					);
 				})}
 			</main>
+
 			<Section
 				fullWidth={true}
 				showTopBorder={false}
@@ -340,17 +341,8 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 			>
 				<TrendingTopics trendingTopics={tagFront.trendingTopics} />
 			</Section>
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				<AdSlot position="merchandising" display={format.display} />
-			</Section>
+
+			{decideMerchandisingSlot(renderAds, hasPageSkin)}
 
 			{NAV.subNavSections && (
 				<Section

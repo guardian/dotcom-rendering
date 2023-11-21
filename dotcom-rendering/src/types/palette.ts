@@ -10,10 +10,6 @@ export type Palette = {
 		byline: Colour;
 		twitterHandle: Colour;
 		twitterHandleBelowDesktop: Colour;
-		subMeta: Colour;
-		subMetaLabel: Colour;
-		subMetaLink: Colour;
-		syndicationButton: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		cardHeadline: Colour;
@@ -88,14 +84,11 @@ export type Palette = {
 		lightboxDivider: Colour;
 		messageForm: Colour;
 		discussionPillarButton: Colour;
-		subMeta: Colour;
 		dynamoSublink: Colour;
 	};
 	fill: {
 		commentCount: Colour;
 		commentCountUntilDesktop: Colour;
-		shareIcon: Colour;
-		shareIconGrayBackground: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
@@ -104,7 +97,6 @@ export type Palette = {
 		guardianLogo: Colour;
 	};
 	border: {
-		syndicationButton: Colour;
 		subNav: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;

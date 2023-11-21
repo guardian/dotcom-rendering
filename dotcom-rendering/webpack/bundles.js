@@ -19,7 +19,7 @@ const BUILD_VARIANT = false;
  *
  * @see https://github.com/guardian/frontend/blob/main/common/app/experiments/Experiments.scala
  *
- * @type {(variant: 'Variant' | 'Control') => import("../../src/types/config").ServerSideTestNames}
+ * @type {(variant: 'Variant' | 'Control') => import("../src/types/config").ServerSideTestNames}
  */
 const dcrJavascriptBundle = (variant) => `dcrJavascriptBundle${variant}`;
 
