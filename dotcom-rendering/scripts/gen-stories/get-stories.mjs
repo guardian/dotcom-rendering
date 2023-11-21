@@ -225,7 +225,7 @@ const testLayoutFormats =
 			display: 'Showcase',
 			design: 'Picture',
 			theme: 'OpinionPillar',
-			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+			config: { renderingTarget: 'Apps', darkModeAvailable: true },
 		},
 		{
 			display: 'Standard',

@@ -44,6 +44,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
@@ -251,6 +252,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 		config: { isPaidContent, host },
 	} = article;
 
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -263,7 +267,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const renderAds = renderingTarget === 'Web' && canRenderAds(article);
+	const renderAds = isWeb && canRenderAds(article);
 
 	const showSubNavTopBorder = false;
 
@@ -274,7 +278,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	return (
 		<>
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<div>
 					{renderAds && (
 						<Stuck>
@@ -408,7 +412,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
-				{renderingTarget === 'Apps' && (
+				{isApps && (
 					<Island priority="critical" clientOnly={true}>
 						<AdPortals />
 					</Island>
@@ -416,9 +420,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={themePalette('--article-background')}
 					element="article"
-					borderColour={palette.border.secondary}
+					borderColour={themePalette('--article-border')}
 				>
 					<PictureGrid>
 						<GridItem area="title" element="aside">
@@ -471,7 +475,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 											cssOverrides={css`
 												display: block;
 											`}
-											color={palette.border.secondary}
+											color={themePalette(
+												'--article-border-secondary',
+											)}
 										/>
 									</div>
 								</div>
@@ -532,7 +538,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={palette.border.secondary}
+									color={themePalette(
+										'--article-border-secondary',
+									)}
 								/>
 							</div>
 						</GridItem>
@@ -563,7 +571,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						<GridItem area="submeta">
 							<ArticleContainer format={format}>
 								<DecideLines
-									color={palette.border.secondary}
+									color={themePalette('--article-border')}
 									format={format}
 								/>
 								<SubMeta
@@ -578,8 +586,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons &&
-										renderingTarget === 'Web'
+										article.showBottomSocialButtons && isWeb
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -623,7 +630,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderingTarget === 'Web' && (
+				{isWeb && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
@@ -670,7 +677,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderingTarget === 'Web' && !isPaidContent && (
+				{isWeb && !isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}
@@ -714,7 +721,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 				)}
 			</main>
 
-			{renderingTarget === 'Web' && props.NAV.subNavSections && (
+			{isWeb && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
@@ -727,7 +734,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 				</Section>
 			)}
 
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<>
 					<Section
 						fullWidth={true}
@@ -786,7 +793,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					<MobileStickyContainer />
 				</>
 			)}
-			{renderingTarget === 'Apps' && (
+			{isApps && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
