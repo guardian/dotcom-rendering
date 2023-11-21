@@ -12,6 +12,7 @@ type Props = {
 const baseStyles = css`
 	display: block;
 	font-style: italic;
+	color: ${palette('--card-byline-text')};
 `;
 
 const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
@@ -89,17 +90,5 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 };
 
 export const Byline = ({ text, format, size }: Props) => {
-	return (
-		<span
-			css={[
-				baseStyles,
-				bylineStyles(size, format),
-				css`
-					color: ${palette('--card-byline-text')};
-				`,
-			]}
-		>
-			{text}
-		</span>
-	);
+	return <span css={[baseStyles, bylineStyles(size, format)]}>{text}</span>;
 };
