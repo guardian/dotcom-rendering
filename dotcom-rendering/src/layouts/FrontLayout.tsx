@@ -18,6 +18,7 @@ import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import {
 	decideFrontsBannerAdSlot,
+	decideMerchandisingSlot,
 	decideMerchHighAndMobileAdSlots,
 } from '../components/DecideFrontsAdSlots';
 import { Footer } from '../components/Footer';
@@ -662,6 +663,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					);
 				})}
 			</main>
+
 			<Section
 				fullWidth={true}
 				showTopBorder={false}
@@ -671,20 +673,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
-			{renderAds && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-					hasPageSkin={hasPageSkin}
-				>
-					<AdSlot position="merchandising" />
-				</Section>
-			)}
+
+			{decideMerchandisingSlot(renderAds, hasPageSkin)}
 
 			{NAV.subNavSections && (
 				<Section

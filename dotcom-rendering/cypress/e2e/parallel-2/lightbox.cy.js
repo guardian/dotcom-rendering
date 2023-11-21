@@ -25,7 +25,7 @@ describe('Lightbox', function () {
 		cy.get('#gu-lightbox').should('be.visible');
 		// We expect the second image to be showing because the first is the main media
 		// which doesn't have a button in this case because it's an immersive article.
-		cy.get('nav [data-cy="lightbox-selected"]').contains('2/22');
+		cy.get('nav [data-testid="lightbox-selected"]').contains('2/22');
 		cy.get('li[data-index="2"] img').should('be.visible');
 	});
 
@@ -36,7 +36,7 @@ describe('Lightbox', function () {
 		// Open lightbox using fifth image on the page
 		cy.get('article img').eq(3).realClick();
 		cy.get('#gu-lightbox').should('be.visible');
-		cy.get('nav [data-cy="lightbox-selected"]').contains('5/22');
+		cy.get('nav [data-testid="lightbox-selected"]').contains('5/22');
 		cy.get('li[data-index="5"] img').should('be.visible');
 	});
 
@@ -199,10 +199,10 @@ describe('Lightbox', function () {
 		cy.get('li[data-index="5"]').scrollIntoView();
 		cy.get('li[data-index="2"] img').should('not.be.visible');
 		cy.get('li[data-index="5"] img').should('be.visible');
-		cy.get('nav [data-cy="lightbox-selected"]').contains('5/22');
+		cy.get('nav [data-testid="lightbox-selected"]').contains('5/22');
 		cy.get('li[data-index="1"]').scrollIntoView();
 		cy.get('li[data-index="1"] img').should('be.visible');
-		cy.get('nav [data-cy="lightbox-selected"]').contains('1/22');
+		cy.get('nav [data-testid="lightbox-selected"]').contains('1/22');
 	});
 
 	// eslint-disable-next-line mocha/no-skipped-tests
@@ -224,7 +224,7 @@ describe('Lightbox', function () {
 	it.skip('should use the url to maintain lightbox position', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
-		cy.get('nav [data-cy="lightbox-selected"]').contains('2/22');
+		cy.get('nav [data-testid="lightbox-selected"]').contains('2/22');
 		cy.url().should('contain', '#img-2');
 		cy.realPress('ArrowRight');
 		cy.url().should('contain', '#img-3');
@@ -235,14 +235,14 @@ describe('Lightbox', function () {
 		// It should load the lightbox at page load if the url contains an img hash
 		cy.reload();
 		cy.get('#gu-lightbox').should('be.visible');
-		cy.get('nav [data-cy="lightbox-selected"]').contains('6/22');
+		cy.get('nav [data-testid="lightbox-selected"]').contains('6/22');
 	});
 
 	// eslint-disable-next-line mocha/no-skipped-tests
 	it.skip('should trigger the lightbox to close or open if the user navigates back and forward', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
-		cy.get('nav [data-cy="lightbox-selected"]').contains('2/22');
+		cy.get('nav [data-testid="lightbox-selected"]').contains('2/22');
 		cy.url().should('contain', '#img-2');
 		cy.go('back');
 		cy.get('#gu-lightbox').should('not.be.visible');

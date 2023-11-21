@@ -446,7 +446,6 @@ export const ArticleMeta = ({
 								{isCommentable && (
 									<Island
 										priority="feature"
-										clientOnly={true}
 										defer={{ until: 'idle' }}
 									>
 										<CommentCount

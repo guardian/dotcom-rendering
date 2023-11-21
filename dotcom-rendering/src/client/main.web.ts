@@ -94,6 +94,17 @@ void (async () => {
 		},
 	);
 
+	if (window.guardian.config.switches.userFeaturesDcr === true) {
+		void startup(
+			'userFeatures',
+			() =>
+				import(
+					/* webpackMode: 'eager' */ './userFeatures/user-features'
+				).then(({ refresh }) => refresh()),
+			{ priority: 'critical' },
+		);
+	}
+
 	/*************************************************************
 	 *
 	 * The following modules are lazy loaded,

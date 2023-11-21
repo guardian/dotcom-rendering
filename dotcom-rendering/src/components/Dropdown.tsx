@@ -502,7 +502,7 @@ export const Dropdown = ({
 						]}
 						aria-expanded={isExpanded ? 'true' : 'false'}
 						data-link-name={dataLinkName}
-						data-cy="dropdown-button"
+						data-testid="dropdown-button"
 						type="button"
 					>
 						{label}
@@ -519,7 +519,7 @@ export const Dropdown = ({
 						) : (
 							<ul
 								css={[ulStyles, cssOverrides]}
-								data-cy="dropdown-options"
+								data-testid="dropdown-options"
 							>
 								{links.map((link, index) => (
 									<DropdownLink

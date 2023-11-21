@@ -8,13 +8,15 @@ import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind } from 'bodyElement';
-import { none } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';
-import { articleContentWith } from 'helperTest';
+import { articleContentWith, articleMainContentWith } from 'helperTest';
 import { EmbedKind, Spotify, YouTube } from 'embed';
 import { Optional } from 'optional';
+import { Context } from './parserContext';
+import { MainMediaKind } from './mainMedia';
 
 const articleContent = {
 	id: '',
@@ -182,8 +184,8 @@ const articleContentWithImageWithoutFile = articleContentWith({
 	},
 });
 
-const f = (content: Content) =>
-	fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' })(
+const f = (content: Content, context?: Context) =>
+	fromCapi(context ?? { docParser: JSDOM.fragment, salt: 'mockSalt' })(
 		{ content },
 		none,
 	);
@@ -769,6 +771,64 @@ describe('interactive atom elements', () => {
 		) as Standard;
 		const element = getFirstBody(item);
 		expect(element.kind).toBe(ElementKind.InteractiveAtom);
+	});
+});
+
+describe('cartoon main media', () => {
+	const cartoonElement = {
+		type: ElementType.CARTOON,
+		assets: [],
+		cartoonTypeData: {
+			variants: [
+				{
+					viewportSize: 'small',
+					images: [
+						{
+							mimeType: 'image/jpeg',
+							file: 'https://media.guim.co.uk/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg',
+						},
+					],
+				},
+			],
+		},
+	};
+
+	test('filters out cartoon main media elements', () => {
+		const item = f(articleMainContentWith(cartoonElement));
+		expect(item.mainMedia).toBe(none);
+	});
+
+	test('parses cartoon elements in the context of the Editions app', () => {
+		const context: Context = {
+			docParser: JSDOM.fragment,
+			salt: 'mockSalt',
+			app: 'Editions',
+		};
+		const item = f(articleMainContentWith(cartoonElement), context);
+		expect(item.mainMedia).toEqual(
+			some({
+				kind: MainMediaKind.Cartoon,
+				cartoon: {
+					images: [
+						{
+							alt: {
+								kind: 1,
+							},
+							dpr2Srcset:
+								'https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=140&quality=45&fit=bounds&s=fccb23b637e2970bd5c35d34a530b195 140w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=500&quality=45&fit=bounds&s=fb3ae941852323c66bdb0bb754e322ef 500w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=1000&quality=45&fit=bounds&s=99309e223b7eb9acc5f220746ba232e8 1000w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=1500&quality=45&fit=bounds&s=4088c8622778828e8b7446d1993fac46 1500w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=2000&quality=45&fit=bounds&s=444dfac6ae8b7abc5399a6703d2a5044 2000w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=2500&quality=45&fit=bounds&s=e9c185e38293443fcaa4458c020cc5bd 2500w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=3000&quality=45&fit=bounds&s=0c4033597d76f42605f19d50b061e6e2 3000w',
+							height: 0,
+							imageSubtype: {
+								value: 0,
+							},
+							role: 0,
+							src: 'https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=900&quality=85&fit=bounds&s=9dd431d3bee30ce50b47e0e26e7d6b45',
+							srcset: 'https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=140&quality=85&fit=bounds&s=1268b37fe440155480614f94ec96cf34 140w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=500&quality=85&fit=bounds&s=72985d0c35600c6eaef05a73809329c8 500w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=1000&quality=85&fit=bounds&s=ac065e00e6b863a62ed06048cc117f56 1000w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=1500&quality=85&fit=bounds&s=32d615ed84bb1617949abed284acd63f 1500w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=2000&quality=85&fit=bounds&s=ae7c60fa6332e2a545da961762e434a8 2000w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=2500&quality=85&fit=bounds&s=5574ffc53c18cc7845baf053df3c9147 2500w, https://i.guim.co.uk/img/media/f3fb2433b05a75e99d9866db7a52a85f639fa70b/12_19_1955_3384/1955.jpg?width=3000&quality=85&fit=bounds&s=e85c763e1b7e11514fa3129aa9658c51 3000w',
+							width: 0,
+						},
+					],
+				},
+			}),
+		);
 	});
 });
 

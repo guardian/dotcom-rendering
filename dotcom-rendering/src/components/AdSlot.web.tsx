@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { adSizes, constants } from '@guardian/commercial';
 import type { SlotName } from '@guardian/commercial';
+import { adSizes, constants } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	breakpoints,
@@ -10,7 +10,6 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
 import { TopRightAdSlot } from './TopRightAdSlot';
 
@@ -94,22 +93,10 @@ export const labelStyles = css`
 		visibility: hidden;
 	}
 
-	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller):not(
-			.ad-slot--merchandising
-		):not(.ad-slot--merchandising-high)::before {
+	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
 		content: attr(ad-label-text);
 		display: block;
 		position: relative;
-		${individualLabelCSS}
-	}
-
-	.ad-slot--merchandising[data-label-show='true']::before,
-	.ad-slot--merchandising-high[data-label-show='true']::before {
-		content: attr(ad-label-text);
-		display: block;
-		position: relative;
-		max-width: 970px;
-		margin: auto;
 		${individualLabelCSS}
 	}
 
@@ -139,6 +126,13 @@ export const labelStyles = css`
 const adContainerCollapseStyles = css`
 	& .ad-slot.ad-slot--collapse {
 		display: none;
+	}
+`;
+
+const adContainerCentreSlotStyles = css`
+	&.ad-slot-container--centre-slot {
+		width: fit-content;
+		margin: 0 auto;
 	}
 `;
 
@@ -199,6 +193,12 @@ const merchandisingAdContainerStyles = css`
 const merchandisingAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.billboard.height}px;
+	margin: 12px auto;
+
+	${from.desktop} {
+		margin: 0;
+		padding-bottom: 20px;
+	}
 `;
 
 const inlineAdStyles = css`
@@ -406,7 +406,11 @@ const mobileStickyAdStyles = css`
 	}
 `;
 
-export const adContainerStyles = [adContainerCollapseStyles, labelStyles];
+export const adContainerStyles = [
+	adContainerCollapseStyles,
+	labelStyles,
+	adContainerCentreSlotStyles,
+];
 
 export const AdSlot = ({
 	position,
@@ -527,11 +531,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="ad-slot-container"
-					css={[
-						merchandisingAdContainerStyles,
-						hasPageskin && pageSkinContainer,
-						adContainerStyles,
-					]}
+					css={[merchandisingAdContainerStyles, adContainerStyles]}
 				>
 					<div
 						id="dfp-ad--merchandising-high"

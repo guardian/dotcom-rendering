@@ -2638,12 +2638,12 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.1.1.tgz#1a5b1959a528e374e8037c4396c3e825d6cf4a83"
   integrity sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==
 
-"@guardian/apps-rendering-api-models@6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-6.1.0.tgz#9f8a72d7078f8e20a823d1ea0f0a58aa2090e857"
-  integrity sha512-cXbtpuGy/3wux1zSuUIVUG17i2sof51BPc6Jexkf9m3pjNr69z1e7C7ABaLQeeOKbi/ge+Xuj2eD6kziO41ZEA==
+"@guardian/apps-rendering-api-models@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-6.2.0.tgz#0bf4262d8cfc23c98119da1e199d2d6259f27d57"
+  integrity sha512-G055TuAC/nRobB7k9xkdw9SFar+vJWdBPvUqI1iJkd6YvXD7sZNgwDdfR+mIWX2hM+Tafpq/KdoDVW9oM6rhRQ==
   dependencies:
-    "@guardian/content-api-models" "^17.6.2"
+    "@guardian/content-api-models" "^17.7.0"
     "@guardian/content-atom-model" "^3.4.0"
     "@guardian/content-entity-model" "^2.2.1"
     "@guardian/story-packages-model" "^2.2.0"
@@ -2652,10 +2652,10 @@
     node-int64 "^0.4.0"
     thrift "^0.15.0"
 
-"@guardian/bridget@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.0.0.tgz#9be79e1f8c0c4a9ee3829390b9bcb828d78cb4d7"
-  integrity sha512-bCNIQuPe74AwR0eZWHgN/at3vumPOB0NxozciTujGUblhun23f+Fagtkkf1zyIqQ2VjaYmSVy5zVug+E5v9auw==
+"@guardian/bridget@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.5.0.tgz#1a5b1adeea08398b678f38e15cb8c598a5e73b19"
+  integrity sha512-H60m0zTPGgwJJm4SG/a7XO6Cxmn2PPJQhGULjueX+z5ZkEfhc78dsc6a578GZbJWFSTw10clgnXM7ruXON2vUw==
 
 "@guardian/cdk@^50.10.10":
   version "50.10.10"
@@ -2676,10 +2676,10 @@
     read-pkg-up "7.0.1"
     yargs "^17.6.2"
 
-"@guardian/content-api-models@^17.6.2":
-  version "17.6.2"
-  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.6.2.tgz#abedae35d37745ce5b5ff7e99306c7eba7cc413f"
-  integrity sha512-2mmlL9HX73b86EzYZqyYxiNlu4x2EoqWsMVt58vHIiM0QxEj0baQtD4H9bF8yq/hJ2BQKSHBrDnkW/Aak5Ojfg==
+"@guardian/content-api-models@17.8.0", "@guardian/content-api-models@^17.7.0":
+  version "17.8.0"
+  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.8.0.tgz#ef42d8d0d6c9afe896c3a34880f02ebfe8ab2f6d"
+  integrity sha512-qfYCnrWupF3CncBioFwqxiFAgZt/hD+ax1XH0kMWm1IhkxZXBVV06ZZyk7eUcDUYYyakAgQxIjS8Z0LXy3nHYw==
   dependencies:
     "@guardian/content-atom-model" "^3.4.2"
     "@guardian/content-entity-model" "^2.2.1"
@@ -6682,6 +6682,11 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==
+
+compare-versions@6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/compare-versions/-/compare-versions-6.1.0.tgz#3f2131e3ae93577df111dba133e6db876ffe127a"
+  integrity sha512-LNZQXhqUvqUTotpZ00qLSaify3b4VFD588aRr8MKFw4CMUr98ytzCW5wDH5qx/DEY5kCDXcbcRuCqL0szEf2tg==
 
 compress-commons@^2.1.1:
   version "2.1.1"

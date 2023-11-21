@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
-import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { getAllThemes } from '../lib/format';
 import { SubMeta } from './SubMeta';
 
@@ -55,11 +55,6 @@ const subMetaSectionLinks = [
 	},
 ];
 
-const allStandardThemes = getAllThemes({
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-});
-
 export const StandardStory = ({ format }: StoryProps) => {
 	return (
 		<Wrapper key={JSON.stringify(format)}>
@@ -76,7 +71,7 @@ export const StandardStory = ({ format }: StoryProps) => {
 	);
 };
 StandardStory.storyName = 'Standard - All pillars';
-StandardStory.decorators = [lightDecorator(allStandardThemes)];
+StandardStory.decorators = [splitTheme()];
 
 const allDeadBlogThemes = getAllThemes({
 	display: ArticleDisplay.Standard,
@@ -99,4 +94,4 @@ export const DeadBlogStory = ({ format }: StoryProps) => {
 	);
 };
 DeadBlogStory.storyName = 'Deadblog - All pillars';
-DeadBlogStory.decorators = [lightDecorator(allDeadBlogThemes)];
+DeadBlogStory.decorators = [splitTheme(allDeadBlogThemes)];
