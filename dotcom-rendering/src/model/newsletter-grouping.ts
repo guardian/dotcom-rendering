@@ -199,13 +199,13 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'morning-mail',
 				'afternoon-update',
 				'first-dog',
-				'five-great-reads',
 				'the-rural-network',
 			],
 		},
 		{
 			title: 'In depth',
 			newsletters: [
+				'the-crunch',
 				'green-light', // Down to Earth
 				'tech-scape',
 				'pushing-buttons',
@@ -230,6 +230,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Weekend reads',
 			newsletters: [
+				'five-great-reads',
 				'the-long-read',
 				'the-upside',
 				'house-to-home',
