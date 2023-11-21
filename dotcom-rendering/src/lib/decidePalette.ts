@@ -1693,6 +1693,7 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
+/** @deprecated use subNavLink in src/palette.ts */
 const textSubNavLink = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Picture:

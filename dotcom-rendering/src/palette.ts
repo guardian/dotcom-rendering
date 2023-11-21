@@ -2280,6 +2280,14 @@ const subNavBorder: PaletteFunction = ({ design, theme }) => {
 			}
 	}
 };
+const subNavLink = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[100];
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
 
 const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
@@ -2953,6 +2961,10 @@ const paletteColours = {
 	'--sub-nav-border': {
 		light: subNavBorder,
 		dark: subNavBorder,
+	},
+	'--sub-nav-link': {
+		light: subNavLink,
+		dark: subNavLink,
 	},
 	'--share-icon-fill': {
 		light: shareIconFillLight,
