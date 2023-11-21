@@ -1,3 +1,4 @@
+const semver = require('semver');
 const { warn, log } = require('../../../scripts/log');
 const pkg = require('../../package.json');
 
@@ -8,8 +9,7 @@ if (pkg.devDependencies) {
 }
 
 /**
- * Packages that are not semver-compatible, or are not simple major.minor.patch
- * versions (e.g. pre-releases etc)
+ * We don't check packages that are not semver-compatible
  */
 const exceptions = /** @type {const} */ ([
 	'https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0',
@@ -17,10 +17,7 @@ const exceptions = /** @type {const} */ ([
 
 const mismatches = Object.entries(pkg.dependencies)
 	.filter(([, version]) => !exceptions.includes(version))
-	.filter(
-		([, version]) =>
-			!version.match(/^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$/),
-	);
+	.filter(([, version]) => !semver.valid(version));
 
 if (mismatches.length !== 0) {
 	warn('dotcom-rendering dependencies should be pinned.');
