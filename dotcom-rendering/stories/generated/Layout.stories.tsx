@@ -314,3 +314,68 @@ export default {
 		];
 
 		
+
+		export const WebStandardLiveBlogNewsPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="NewsPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardLiveBlogNewsPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: NewsPillar, Mode: Light';
+		WebStandardLiveBlogNewsPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardLiveBlogNewsPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.News,
+				}]
+			),
+		];
+
+		
+
+		export const AppsStandardLiveBlogNewsPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="NewsPillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardLiveBlogNewsPillarLight.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: NewsPillar, Mode: Light';
+		AppsStandardLiveBlogNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogNewsPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.News,
+				}]
+			),
+		];
+
+		export const AppsStandardLiveBlogNewsPillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="NewsPillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardLiveBlogNewsPillarDark.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: NewsPillar, Mode: Dark';
+		AppsStandardLiveBlogNewsPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogNewsPillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.News,
+				}]
+			),
+		];

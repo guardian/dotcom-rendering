@@ -46,7 +46,7 @@ export const TableBlockComponent = ({ element }: Props) => {
 	return (
 		<div
 			css={tableEmbed}
-			data-cy="football-table-embed"
+			data-testid="football-table-embed"
 			dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}
 		/>
 	);

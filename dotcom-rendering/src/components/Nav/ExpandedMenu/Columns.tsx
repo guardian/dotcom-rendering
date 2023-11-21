@@ -238,7 +238,7 @@ export const Columns = ({
 				!hasPageSkin && columnsStyleFromLeftCol,
 			]}
 			role="menubar"
-			data-cy="nav-menu-columns"
+			data-testid="nav-menu-columns"
 		>
 			{nav.pillars.map(
 				(column, i) => (

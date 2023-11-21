@@ -55,7 +55,7 @@ export const SpotifyBlockComponent = ({
 			source={source}
 			sourceDomain={sourceDomain}
 		>
-			<div css={embedContainer} data-cy="spotify-embed">
+			<div css={embedContainer} data-testid="spotify-embed">
 				<iframe
 					src={embedUrl}
 					title={title}

@@ -131,7 +131,7 @@ describe('YouTube Atom', function () {
 			.should('have.attr', 'data-island-status', 'hydrated');
 
 		// Make sure overlay is displayed
-		const overlaySelector = `[data-cy^="youtube-overlay-S0CE1n-R3OY"]`;
+		const overlaySelector = `[data-testid^="youtube-overlay-S0CE1n-R3OY"]`;
 		cy.get(overlaySelector).should('be.visible');
 
 		// YouTube has not initialised
@@ -182,7 +182,7 @@ describe('YouTube Atom', function () {
 			.should('have.attr', 'data-island-status', 'hydrated');
 
 		// Make sure overlay is displayed
-		const overlaySelector = `[data-cy^="youtube-overlay-NtN-a6inr1E"]`;
+		const overlaySelector = `[data-testid^="youtube-overlay-NtN-a6inr1E"]`;
 		cy.get(overlaySelector).should('be.visible');
 
 		// Listen for the ophan call made when the video is played
@@ -236,7 +236,7 @@ describe('YouTube Atom', function () {
 		// Make sure overlays for both videos are displayed
 		const mediaDiv = 'div[data-gu-name="media"]';
 		const bodyDiv = 'div[data-gu-name="body"]';
-		const overlaySelectorforMultipleVideos = `[data-cy^="youtube-overlay-qkC9z-dSAOE"]`;
+		const overlaySelectorforMultipleVideos = `[data-testid^="youtube-overlay-qkC9z-dSAOE"]`;
 
 		cy.get(`${mediaDiv} ${overlaySelectorforMultipleVideos}`)
 			.should('have.length', 1)
@@ -344,7 +344,7 @@ describe('YouTube Atom', function () {
 			.should('have.attr', 'data-island-status', 'hydrated');
 
 		// Make sure overlay is displayed
-		const overlaySelector = `[data-cy^="youtube-overlay-NtN-a6inr1E"]`;
+		const overlaySelector = `[data-testid^="youtube-overlay-NtN-a6inr1E"]`;
 		cy.get(overlaySelector).should('be.visible');
 
 		// Listen for the ophan call made when the video is played
@@ -396,10 +396,10 @@ describe('YouTube Atom', function () {
 			});
 
 		const mediaDiv = 'div[data-gu-name="media"]';
-		const overlaySelectorforMultipleVideos = `[data-cy^="youtube-overlay-qkC9z-dSAOE"]`;
-		const stickySelector = '[data-cy^="youtube-sticky-qkC9z-dSAOE"]';
+		const overlaySelectorforMultipleVideos = `[data-testid^="youtube-overlay-qkC9z-dSAOE"]`;
+		const stickySelector = '[data-testid^="youtube-sticky-qkC9z-dSAOE"]';
 		const stickyCloseSelector =
-			'[data-cy^="youtube-sticky-close-qkC9z-dSAOE"]';
+			'[data-testid^="youtube-sticky-close-qkC9z-dSAOE"]';
 
 		/**
 		 * Main media video

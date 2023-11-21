@@ -71,8 +71,8 @@ describe('Paid content tests', function () {
 			'hydrated',
 		);
 
-		cy.get('[data-cy=branding-logo]').should('be.visible');
-		cy.get('[data-cy=branding-logo]').click();
+		cy.get('[data-testid=branding-logo]').should('be.visible');
+		cy.get('[data-testid=branding-logo]').click();
 
 		// Make sure the call to Google Analytics contains the info we want
 		cy.wait('@gaRequest').then((interception) => {
@@ -112,8 +112,8 @@ describe('Paid content tests', function () {
 			'hydrated',
 		);
 
-		cy.get('[data-cy=card-branding-logo]').should('be.visible');
-		cy.get('[data-cy=card-branding-logo]').first().click();
+		cy.get('[data-testid=card-branding-logo]').should('be.visible');
+		cy.get('[data-testid=card-branding-logo]').first().click();
 
 		// Make sure the call to Google Analytics contains the info we want
 		cy.wait('@gaRequest').then((interception) => {

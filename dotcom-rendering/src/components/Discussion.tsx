@@ -157,7 +157,7 @@ export const Discussion = ({
 				<div className="pending">
 					<Hide when="above" breakpoint="leftCol">
 						<div
-							data-cy="discussion"
+							data-testid="discussion"
 							css={css`
 								padding-bottom: ${space[2]}px;
 							`}

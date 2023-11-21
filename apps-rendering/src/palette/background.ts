@@ -451,6 +451,60 @@ const bulletDark = (
 	return neutral[46];
 };
 
+const articleContentFollowIcon = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[200];
+				case ArticlePillar.Sport:
+					return sport[200];
+				case ArticlePillar.Culture:
+					return culture[200];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[200];
+				case ArticlePillar.News:
+				default:
+					return news[200];
+			}
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return news[800];
+			}
+		case ArticleDesign.Gallery:
+			return neutral[7];
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return opinion[800];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return neutral[100];
+			}
+		default:
+			return neutral[100];
+	}
+};
+
 const articleContent = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
 		case ArticleDesign.Analysis:
@@ -1150,6 +1204,8 @@ const specialReportAltButtonDark = ({
 const background = {
 	adSlot,
 	adSlotDark,
+	articleContent,
+	articleContentFollowIcon,
 	articleContentDark,
 	analysisContrastColour,
 	analysisContrastHoverColour,
@@ -1191,7 +1247,6 @@ const background = {
 	tag,
 	tagDark,
 	pinnedPost,
-	articleContent,
 	newsletterSignUpFormDark,
 	editionsCameraIcon,
 	specialReportAltButton,
