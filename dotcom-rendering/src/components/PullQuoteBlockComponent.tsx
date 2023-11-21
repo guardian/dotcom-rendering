@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { from, headline, textSans } from '@guardian/source-foundations';
+import { from, headline, textSans, until } from '@guardian/source-foundations';
 import { unescapeData } from '../lib/escapeData';
 import { palette } from '../palette';
 import { QuoteIcon } from './QuoteIcon';
@@ -12,7 +12,7 @@ const pullQuoteCss = css`
 const fontCss = (role: string, format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return css`
-			${textSans.xlarge({ fontWeight: 'medium' })}
+			${textSans.large({ fontWeight: 'medium' })}
 		`;
 	}
 
@@ -166,6 +166,62 @@ const supportingQuoteCss = css`
 	}
 `;
 
+const basePhotoEssayQuoteCss = css`
+	line-height: 25px;
+	position: relative;
+	padding: 6px 10px 12px 10px;
+	margin-bottom: 16px;
+`;
+
+const rolePhotoEssayQuoteCss = (role: string) => {
+	switch (role) {
+		case 'supporting': {
+			return css`
+				margin-left: -10px;
+				margin-right: 10px;
+				padding-left: 10px;
+				padding-right: 10px;
+				clear: left;
+				float: left;
+				${until.mobileLandscape} {
+					width: 100%;
+				}
+				${from.mobileLandscape} {
+					width: 220px;
+				}
+				${from.leftCol} {
+					width: 140px;
+					margin-left: -150px;
+				}
+				${from.wide} {
+					width: 200px;
+					margin-left: -215px;
+				}
+			`;
+		}
+		default: {
+			return css`
+				margin-left: -10px;
+				display: block;
+			`;
+		}
+	}
+};
+
+const alignmentCss = (role: string, format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.PhotoEssay:
+			return css`
+				${basePhotoEssayQuoteCss}
+				${rolePhotoEssayQuoteCss(role)}
+			`;
+		default:
+			return css`
+				${role === 'supporting' ? supportingQuoteCss : inlineQuoteCss}
+			`;
+	}
+};
+
 const blockquoteCss = css`
 	display: inline;
 	font-style: italic;
@@ -191,7 +247,7 @@ export const PullQuoteBlockComponent = ({
 			css={[
 				pullQuoteCss,
 				fontCss(role, format),
-				role === 'supporting' ? supportingQuoteCss : inlineQuoteCss,
+				alignmentCss(role, format),
 			]}
 		>
 			<QuoteIcon colour={palette('--pullquote-icon')} />
