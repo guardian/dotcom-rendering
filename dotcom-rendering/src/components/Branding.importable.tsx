@@ -141,7 +141,7 @@ export const Branding = ({ branding, format }: Props) => {
 					rel="nofollow"
 					aria-label={`Visit the ${branding.sponsorName} website`}
 					onClick={() => trackSponsorLogoLinkClick(sponsorId)}
-					data-cy="branding-logo"
+					data-testid="branding-logo"
 				>
 					{decideLogo(branding, format, darkModeAvailable)}
 				</a>

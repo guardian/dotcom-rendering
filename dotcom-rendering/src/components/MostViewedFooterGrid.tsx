@@ -179,7 +179,7 @@ export const MostViewedFooterGrid = ({
 								]}
 								role="none"
 								id={`tabs-popular-${i}-tab`}
-								data-cy={`tab-heading-${i}`}
+								data-testid={`tab-heading-${i}`}
 								key={`tabs-popular-${tab.heading}-tab`}
 								data-link-name={`tab ${i + 1} ${tab.heading}`}
 								data-chromatic="ignore"
@@ -228,7 +228,7 @@ export const MostViewedFooterGrid = ({
 					</h3>
 					<ol
 						css={gridContainer}
-						data-cy={`tab-body-${i}`}
+						data-testid={`tab-body-${i}`}
 						data-link-name={tab.heading}
 						data-link-context={`most-read/${sectionId}`}
 					>

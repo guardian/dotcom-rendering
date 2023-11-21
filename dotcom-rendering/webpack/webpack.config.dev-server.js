@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const {
 	getContentFromURLMiddleware,
-} = require('../../src/server/lib/get-content-from-url');
+} = require('../src/server/lib/get-content-from-url');
 
 const port = 3030;
 

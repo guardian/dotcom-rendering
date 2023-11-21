@@ -264,7 +264,7 @@ export const YoutubeAtomSticky = ({
 		<div
 			ref={setRef}
 			css={isSticky && stickyContainerStyles(isMainMedia)}
-			data-cy={`youtube-sticky-${uniqueId}`}
+			data-testid={`youtube-sticky-${uniqueId}`}
 			data-is-sticky={isSticky}
 		>
 			<div css={isSticky && stickyStyles(showCloseButton)}>
@@ -281,7 +281,7 @@ export const YoutubeAtomSticky = ({
 						<button
 							css={buttonStyles}
 							onClick={handleCloseClick}
-							data-cy={`youtube-sticky-close-${uniqueId}`}
+							data-testid={`youtube-sticky-close-${uniqueId}`}
 							type="button"
 						>
 							<SvgCross size="medium" />

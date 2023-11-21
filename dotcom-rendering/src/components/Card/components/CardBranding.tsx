@@ -62,7 +62,7 @@ export const CardBranding = ({ branding, format }: Props) => {
 						branding.sponsorName.toLowerCase(),
 					)
 				}
-				data-cy="card-branding-logo"
+				data-testid="card-branding-logo"
 			>
 				<img
 					css={logoImageStyle}

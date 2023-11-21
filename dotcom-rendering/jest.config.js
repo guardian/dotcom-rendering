@@ -1,4 +1,4 @@
-const swcConfig = require('./scripts/webpack/.swcrc.json');
+const swcConfig = require('./webpack/.swcrc.json');
 
 module.exports = {
 	testEnvironment: 'jsdom',
