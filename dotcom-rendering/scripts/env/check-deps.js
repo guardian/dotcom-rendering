@@ -1,4 +1,3 @@
-const fs = require('node:fs');
 const { warn, log } = require('../../../scripts/log');
 const pkg = require('../../package.json');
 
@@ -8,23 +7,26 @@ if (pkg.devDependencies) {
 	process.exit(1);
 }
 
-const knownNonSemver = /** @type {const} */ ([
+/**
+ * Packages that are not semver-compatible, or are not simple major.minor.patch
+ * versions (e.g. pre-releases etc)
+ */
+const exceptions = /** @type {const} */ ([
 	'https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0',
 ]);
 
 const mismatches = Object.entries(pkg.dependencies)
+	.filter(([, version]) => !exceptions.includes(version))
 	.filter(
 		([, version]) =>
 			!version.match(/^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$/),
-	)
-	.filter(([, version]) => !knownNonSemver.includes(version))
-	.filter(([, version]) => !version.startsWith('file:.yalc'));
+	);
 
 if (mismatches.length !== 0) {
-	warn('Dependencies should be pinned.');
+	warn('dotcom-rendering dependencies should be pinned.');
 
 	for (const [name, version] of mismatches) {
-		warn(`You must fix: ${name}@${String(version)}`);
+		warn(`Please fix: ${name}@${String(version)}`);
 	}
 
 	process.exit(1);
