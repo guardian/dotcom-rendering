@@ -24,9 +24,9 @@ export const ContainerOverrides = ({
 	isDynamo,
 	children,
 }: Props) => {
-	const { text, background } = containerPalette
+	const { text, background, topBar } = containerPalette
 		? decideContainerOverrides(containerPalette)
-		: { text: undefined, background: undefined };
+		: { text: undefined, background: undefined, topBar: undefined };
 
 	const paletteOverrides = {
 		'--card-headline-text': isDynamo
@@ -38,6 +38,7 @@ export const ContainerOverrides = ({
 		'--card-kicker-text': isDynamo ? text?.dynamoKicker : text?.cardKicker,
 		'--card-background': background?.card,
 		'--card-byline-text': text?.cardByline,
+		'--card-border-top': topBar?.card,
 	} satisfies Partial<Record<ColourName, string>>;
 
 	return (
