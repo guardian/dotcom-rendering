@@ -26,7 +26,7 @@ const mismatches = Object.entries(pkg.dependencies)
 	.filter(([, version]) => !knownNonSemver.includes(version))
 	.filter(([, version]) => !version.startsWith('file:.yalc'));
 
-if (mismatches.length) {
+if (mismatches.length !== 0) {
 	warn('Dependencies should be pinned.');
 
 	for (const [name, version] of mismatches) {
