@@ -54,9 +54,7 @@ const cardStyles = (
 		/* a tag specific styles */
 		color: inherit;
 		text-decoration: none;
-		background-color: ${isDynamo
-			? 'transparent'
-			: palette('--card-background')};
+		background-color: ${palette('--card-background')};
 	`;
 
 	const decidePaletteBrightness = (thePalette: DCRContainerPalette) => {
