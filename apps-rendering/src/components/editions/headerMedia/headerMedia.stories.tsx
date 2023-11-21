@@ -1,10 +1,9 @@
 // ----- Imports ----- //
 
-import { ArticleDisplay, ArticlePillar, Pillar } from '@guardian/libs';
-import { article, cartoon, review } from 'fixtures/item';
+import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { article, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import HeaderMedia from './index';
-import { cartoonMainMedia } from '../../../fixtures/cartoon';
 
 // ----- Setup ------ //
 
@@ -63,16 +62,6 @@ const Video = (): ReactElement => (
 	/>
 );
 
-const Cartoon = (): ReactElement => (
-	<HeaderMedia
-		item={{
-			...cartoon,
-			mainMedia: cartoonMainMedia,
-			theme: Pillar.Opinion,
-		}}
-	/>
-);
-
 // ----- Exports ----- //
 
 export default {
@@ -80,4 +69,4 @@ export default {
 	title: 'AR/Editions/HeaderMedia',
 };
 
-export { Image, FullScreen, WithStarRating, Video, Cartoon };
+export { Image, FullScreen, WithStarRating, Video };

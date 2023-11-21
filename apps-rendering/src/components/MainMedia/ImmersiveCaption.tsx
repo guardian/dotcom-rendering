@@ -42,10 +42,7 @@ type Props = {
 
 const ImmersiveCaption: FC<Props> = ({ mainMedia, format }) =>
 	maybeRender(mainMedia, (media) => {
-		if (
-			media.kind === MainMediaKind.Video ||
-			media.kind === MainMediaKind.Cartoon
-		) {
+		if (media.kind === MainMediaKind.Video) {
 			return null;
 		}
 

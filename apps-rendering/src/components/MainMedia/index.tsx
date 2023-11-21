@@ -24,8 +24,6 @@ const MainMedia: FC<Props> = ({ format, mainMedia }) =>
 				return <MainMediaImage image={media.image} format={format} />;
 			case MainMediaKind.Video:
 				return <MainMediaVideo video={media.video} format={format} />;
-			case MainMediaKind.Cartoon:
-				return null;
 		}
 	});
 

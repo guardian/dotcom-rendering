@@ -24,7 +24,6 @@ import type { FC } from 'react';
 import FootballScores from '../footballScores';
 import { wideImageWidth } from '../styles';
 import Video from '../video';
-import Cartoon from '../cartoon';
 
 // ----- Styles ----- //
 
@@ -176,82 +175,75 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 		'football' in item ? item.football : Optional.none();
 
 	return maybeRender(item.mainMedia, (media) => {
-		switch (media.kind) {
-			case MainMediaKind.Image: {
-				const {
-					image,
-					image: { caption, credit },
-				} = media;
+		if (media.kind === MainMediaKind.Image) {
+			const {
+				image,
+				image: { caption, credit },
+			} = media;
 
-				return (
-					<figure
-						css={[getStyles(format, isPicture)]}
-						aria-labelledby={captionId}
-					>
-						{maybeRender(matchScores.toOption(), (scores) => {
-							return (
-								<div css={footballWrapperStyles(false)}>
-									<FootballScores
-										league={scores.league}
-										homeTeam={scores.homeTeam}
-										awayTeam={scores.awayTeam}
-										stadium={scores.stadium}
-									/>
-								</div>
-							);
+			return (
+				<figure
+					css={[getStyles(format, isPicture)]}
+					aria-labelledby={captionId}
+				>
+					{maybeRender(matchScores.toOption(), (scores) => {
+						return (
+							<div css={footballWrapperStyles(false)}>
+								<FootballScores
+									league={scores.league}
+									homeTeam={scores.homeTeam}
+									awayTeam={scores.awayTeam}
+									stadium={scores.stadium}
+								/>
+							</div>
+						);
+					})}
+					<Img
+						image={image}
+						sizes={getImageSizes(format, image, isPicture)}
+						format={item}
+						className={some(
+							getImageStyle(image, format, isPicture),
+						)}
+						lightbox={some({
+							className: 'js-launch-slideshow js-main-image',
+							caption: none,
+							credit: none,
 						})}
-						<Img
-							image={image}
-							sizes={getImageSizes(format, image, isPicture)}
-							format={item}
-							className={some(
-								getImageStyle(image, format, isPicture),
-							)}
-							lightbox={some({
-								className: 'js-launch-slideshow js-main-image',
-								caption: none,
-								credit: none,
-							})}
-						/>
-						<HeaderImageCaption
-							caption={caption}
-							credit={credit}
-							styles={getCaptionStyles(format)}
-							iconColor={iconColour}
-							iconBackgroundColor={iconBackgroundColour}
-							isFullWidthImage={isFullWidthImage(format)}
-						/>
-						<StarRating item={item} />
-					</figure>
-				);
-			}
-			case MainMediaKind.Video: {
-				const {
-					video: { title, atomId },
-				} = media;
+					/>
+					<HeaderImageCaption
+						caption={caption}
+						credit={credit}
+						styles={getCaptionStyles(format)}
+						iconColor={iconColour}
+						iconBackgroundColor={iconBackgroundColour}
+						isFullWidthImage={isFullWidthImage(format)}
+					/>
+					<StarRating item={item} />
+				</figure>
+			);
+		} else {
+			const {
+				video: { title, atomId },
+			} = media;
 
-				return (
-					<>
-						{maybeRender(matchScores.toOption(), (scores) => {
-							return (
-								<div css={footballWrapperStyles(true)}>
-									<FootballScores
-										league={scores.league}
-										homeTeam={scores.homeTeam}
-										awayTeam={scores.awayTeam}
-										stadium={scores.stadium}
-									/>
-								</div>
-							);
-						})}
-						<Video atomId={atomId} title={title} />
-					</>
-				);
-			}
-			case MainMediaKind.Cartoon: {
-				const { cartoon } = media;
-				return <Cartoon cartoon={cartoon} format={format}></Cartoon>;
-			}
+			return (
+				<>
+					{maybeRender(matchScores.toOption(), (scores) => {
+						return (
+							<div css={footballWrapperStyles(true)}>
+								<FootballScores
+									league={scores.league}
+									homeTeam={scores.homeTeam}
+									awayTeam={scores.awayTeam}
+									stadium={scores.stadium}
+								/>
+							</div>
+						);
+					})}
+					<Video atomId={atomId} title={title} />
+				</>
+			);
 		}
 	});
 };
