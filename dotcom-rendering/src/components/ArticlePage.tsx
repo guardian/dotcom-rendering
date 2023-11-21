@@ -1,6 +1,11 @@
 import { css, Global } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
+import {
+	brandAlt,
+	focusHalo,
+	neutral,
+	palette as sourcePalette,
+} from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
@@ -68,6 +73,9 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							? css`
 									@media (prefers-color-scheme: dark) {
 										${paletteDeclarations(format, 'dark')}
+										body {
+											color: ${sourcePalette.neutral[86]};
+										}
 									}
 							  `
 							: ''}
