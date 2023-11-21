@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { adSizes, constants } from '@guardian/commercial';
 import type { SlotName } from '@guardian/commercial';
+import { adSizes, constants } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	breakpoints,
@@ -10,7 +10,6 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
 import { TopRightAdSlot } from './TopRightAdSlot';
 
@@ -532,11 +531,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="ad-slot-container"
-					css={[
-						merchandisingAdContainerStyles,
-						hasPageskin && pageSkinContainer,
-						adContainerStyles,
-					]}
+					css={[merchandisingAdContainerStyles, adContainerStyles]}
 				>
 					<div
 						id="dfp-ad--merchandising-high"
