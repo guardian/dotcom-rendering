@@ -117,7 +117,10 @@ const articleMainMedia = (
 					kind: MainMediaKind.Cartoon,
 					cartoon,
 				}));
+		} else {
+			return Optional.none();
 		}
+	} else {
 		return Optional.none();
 	}
 };
