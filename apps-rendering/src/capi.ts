@@ -93,37 +93,32 @@ const articleMainMedia = (
 	content: Content,
 	context: Context,
 ): Optional<MainMedia> => {
-	const elementType: ElementType | undefined = (content.blocks?.main
-		?.elements ?? [])[0]?.type;
+	const element = content.blocks?.main?.elements[0];
 
-	switch (elementType) {
-		case ElementType.IMAGE:
+	if (element) {
+		if (isImage(element)) {
 			return articleMainImage(content)
 				.flatMap(parseImage(context))
 				.map<MainMedia>((image) => ({
 					kind: MainMediaKind.Image,
 					image,
 				}));
-		case ElementType.VIDEO:
+		} else if (isVideo(element)) {
 			return articleMainVideo(content)
 				.flatMap(parseVideo(content.atoms))
 				.map<MainMedia>((video) => ({
 					kind: MainMediaKind.Video,
 					video,
 				}));
-		case ElementType.CARTOON:
-			if (context.app === 'Editions') {
-				return articleMainCartoon(content)
-					.flatMap(parseCartoon(context))
-					.map<MainMedia>((cartoon) => ({
-						kind: MainMediaKind.Cartoon,
-						cartoon,
-					}));
-			} else {
-				return Optional.none();
-			}
-		default:
-			return Optional.none();
+		} else if (isCartoon(element) && context.app === 'Editions') {
+			return articleMainCartoon(content)
+				.flatMap(parseCartoon(context))
+				.map<MainMedia>((cartoon) => ({
+					kind: MainMediaKind.Cartoon,
+					cartoon,
+				}));
+		}
+		return Optional.none();
 	}
 };
 
