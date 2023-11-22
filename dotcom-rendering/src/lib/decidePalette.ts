@@ -630,6 +630,7 @@ const backgroundSectionTitle = (format: ArticleFormat): string => {
 			return 'transparent';
 	}
 };
+
 /** @deprecated this has been moved to the theme palette (--card-background) */
 const backgroundCard = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
@@ -1189,6 +1190,7 @@ const borderArticleLinkHover = (format: ArticleFormat): string => {
 	}
 	return pillarPalette[format.theme].main;
 };
+
 /** @deprecated this has been moved to the theme palette (--card-border-top) */
 const topBarCard = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[60];

@@ -1701,7 +1701,7 @@ const cardBorderTopLight: PaletteFunction = ({ theme, design }) => {
 		switch (theme) {
 			case Pillar.News:
 			case Pillar.Opinion:
-				return sourcePalette.news[300];
+				return pillarPalette(theme, 300);
 			case Pillar.Lifestyle:
 			case Pillar.Culture:
 			case Pillar.Sport:
@@ -1710,7 +1710,7 @@ const cardBorderTopLight: PaletteFunction = ({ theme, design }) => {
 	}
 	switch (theme) {
 		case Pillar.Opinion:
-			return sourcePalette.news[300];
+			return sourcePalette.opinion[300];
 		case Pillar.News:
 		case Pillar.Lifestyle:
 		case Pillar.Culture:
@@ -1811,7 +1811,7 @@ const cardBackgroundDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[10];
 		default:
-			return sourcePalette.neutral[7];
+			return sourcePalette.neutral[0];
 	}
 };
 const cardHeadlineTextLight: PaletteFunction = (format) => {
