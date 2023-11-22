@@ -1071,7 +1071,7 @@ const starRatingBackgroundColourLight: PaletteFunction = () =>
 const starRatingBackgroundColourDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
 
-const blockQuoteFillLight = (format: ArticleFormat): string => {
+const blockQuoteFillLight: PaletteFunction = (format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return sourcePalette.labs[300];
 	}
@@ -1138,7 +1138,10 @@ const blockQuoteFillLight = (format: ArticleFormat): string => {
 	}
 };
 
-const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
+const blockQuoteFillDark: PaletteFunction = ({
+	design,
+	theme,
+}: ArticleFormat) => {
 	if (theme === ArticleSpecial.Labs) {
 		return sourcePalette.labs[400];
 	}
@@ -1203,7 +1206,7 @@ const blockQuoteFillDark = ({ design, theme }: ArticleFormat): string => {
 			}
 	}
 };
-const blockquoteTextStylesLight = (format: ArticleFormat): string => {
+const blockquoteTextStylesLight: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
@@ -1234,7 +1237,7 @@ const blockquoteTextStylesLight = (format: ArticleFormat): string => {
 			}
 	}
 };
-const blockquoteTextStylesDark = (format: ArticleFormat): string => {
+const blockquoteTextStylesDark: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
@@ -1261,7 +1264,7 @@ const blockquoteTextStylesDark = (format: ArticleFormat): string => {
 	}
 };
 
-const blockQuoteLinkStylesLight = (format: ArticleFormat): string => {
+const blockQuoteLinkStylesLight: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
 		case Pillar.Sport:
@@ -1278,7 +1281,7 @@ const blockQuoteLinkStylesLight = (format: ArticleFormat): string => {
 	}
 };
 
-const blockQuoteLinkStylesDark = (format: ArticleFormat): string => {
+const blockQuoteLinkStylesDark: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
 		case Pillar.Sport:
@@ -2724,7 +2727,10 @@ const subNavLink = (format: ArticleFormat) => {
 	}
 };
 
-const pullQuoteTextLight = ({ design, theme }: ArticleFormat): string => {
+const pullQuoteTextLight: PaletteFunction = ({
+	design,
+	theme,
+}: ArticleFormat) => {
 	switch (design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -2755,7 +2761,10 @@ const pullQuoteTextLight = ({ design, theme }: ArticleFormat): string => {
 	}
 };
 
-const pullQuoteTextDark = ({ design, theme }: ArticleFormat): string => {
+const pullQuoteTextDark: PaletteFunction = ({
+	design,
+	theme,
+}: ArticleFormat) => {
 	switch (design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -2786,28 +2795,32 @@ const pullQuoteTextDark = ({ design, theme }: ArticleFormat): string => {
 	}
 };
 
-const pullQuoteBackgroundLight = (format: ArticleFormat): string => {
+const pullQuoteBackgroundLight: PaletteFunction = (format: ArticleFormat) => {
 	const articleBackground = decidePalette(format).background.article;
 	if (articleBackground === 'transparent') return sourcePalette.neutral[100];
 	return articleBackground;
 };
 
-const pullQuoteBackgroundDark = (format: ArticleFormat): string => {
+const pullQuoteBackgroundDark: PaletteFunction = (format: ArticleFormat) => {
 	const articleBackground = decidePalette(format).background.article;
 	if (articleBackground === 'transparent') return sourcePalette.neutral[0];
 	return articleBackground;
 };
 
-const pullQuoteBorderLight = (): string => sourcePalette.neutral[86];
-const pullQuoteBorderDark = (): string => sourcePalette.neutral[60];
+const pullQuoteBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const pullQuoteBorderDark: PaletteFunction = () => sourcePalette.neutral[60];
 
-const pullQuoteIconLight = (format: ArticleFormat): string => {
+const pullQuoteIconLight: PaletteFunction = (format: ArticleFormat) => {
 	const text = pullQuoteTextLight(format);
-	return text === sourcePalette.neutral[7] ? pullQuoteBorderDark() : text;
+	return text === sourcePalette.neutral[7]
+		? pullQuoteBorderDark(format)
+		: text;
 };
-const pullQuoteIconDark = (format: ArticleFormat): string => {
+const pullQuoteIconDark: PaletteFunction = (format: ArticleFormat) => {
 	const text = pullQuoteTextDark(format);
-	return text === sourcePalette.neutral[97] ? pullQuoteBorderLight() : text;
+	return text === sourcePalette.neutral[97]
+		? pullQuoteBorderLight(format)
+		: text;
 };
 
 const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
