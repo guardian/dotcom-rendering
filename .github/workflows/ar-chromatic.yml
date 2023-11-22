@@ -48,3 +48,4 @@ jobs:
           exitOnceUploaded: true
           onlyChanged: '!(main)' # only turbosnap on non-main branches
           workingDir: apps-rendering
+          buildScriptName: 'build-storybook'
