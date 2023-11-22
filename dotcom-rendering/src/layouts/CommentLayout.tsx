@@ -2,11 +2,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	brandBackground,
-	brandBorder,
-	brandLine,
 	from,
-	neutral,
+	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -44,10 +41,10 @@ import { SubNav } from '../components/SubNav.importable';
 import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
@@ -297,8 +294,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const { branding } = article.commercialProperties[article.editionId];
 
-	const palette = decidePalette(format);
-
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const renderAds = renderingTarget === 'Web' && canRenderAds(article);
@@ -329,7 +324,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								showTopBorder={false}
 								showSideBorders={false}
 								padSides={false}
-								backgroundColour={brandBackground.primary}
+								backgroundColour={sourcePalette.brand[400]}
 								element="header"
 							>
 								<Header
@@ -357,10 +352,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 						<Section
 							fullWidth={true}
-							borderColour={brandLine.primary}
+							borderColour={sourcePalette.brand[600]}
 							showTopBorder={false}
 							padSides={false}
-							backgroundColour={brandBackground.primary}
+							backgroundColour={sourcePalette.brand[400]}
 							element="nav"
 						>
 							<Nav
@@ -388,7 +383,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						{props.NAV.subNavSections && (
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								element="aside"
 							>
@@ -403,10 +400,12 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
-										linkHoverColour={
-											palette.text.articleLinkHover
-										}
-										borderColour={palette.border.subNav}
+										linkHoverColour={themePalette(
+											'--article-link-text-hover',
+										)}
+										borderColour={themePalette(
+											'--sub-nav-border',
+										)}
 									/>
 								</Island>
 							</Section>
@@ -414,7 +413,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 						<Section
 							fullWidth={true}
-							backgroundColour={palette.background.article}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
 							padSides={false}
 							showTopBorder={false}
 						>
@@ -423,7 +424,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								cssOverrides={css`
 									display: block;
 								`}
-								color={palette.border.secondary}
+								color={themePalette(
+									'--article-border-secondary',
+								)}
 							/>
 						</Section>
 					</SendToBack>
@@ -439,7 +442,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={themePalette('--article-background')}
 					element="article"
 				>
 					<StandardGrid display={format.display}>
@@ -527,7 +530,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											cssOverrides={css`
 												display: block;
 											`}
-											color={palette.border.secondary}
+											color={themePalette(
+												'--article-border-secondary',
+											)}
 										/>
 									</div>
 								</div>
@@ -541,7 +546,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										cssOverrides={css`
 											display: block;
 										`}
-										color={palette.border.secondary}
+										color={themePalette(
+											'--article-border-secondary',
+										)}
 									/>
 								</Hide>
 							</div>
@@ -663,7 +670,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										cssOverrides={css`
 											display: block;
 										`}
-										color={palette.border.secondary}
+										color={themePalette(
+											'--article-border-secondary',
+										)}
 									/>
 									<SubMeta
 										format={format}
@@ -722,7 +731,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -832,7 +841,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -849,8 +858,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={palette.text.articleLinkHover}
-							borderColour={palette.border.subNav}
+							linkHoverColour={themePalette(
+								'--article-link-text-hover',
+							)}
+							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>
@@ -860,8 +871,8 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					<Section
 						fullWidth={true}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
-						borderColour={brandBorder.primary}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
 					>
@@ -918,7 +929,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
-					backgroundColour={neutral[97]}
+					backgroundColour={sourcePalette.neutral[97]}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"

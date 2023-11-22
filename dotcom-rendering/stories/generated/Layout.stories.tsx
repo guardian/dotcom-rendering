@@ -203,7 +203,7 @@ export default {
 			);
 		};
 		AppsStandardCommentNewsPillarLight.storyName = 'Apps: Display: Standard, Design: Comment, Theme: NewsPillar, Mode: Light';
-		AppsStandardCommentNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
+		AppsStandardCommentNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
 		AppsStandardCommentNewsPillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Standard,
@@ -213,7 +213,26 @@ export default {
 			),
 		];
 
-		
+		export const AppsStandardCommentNewsPillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Comment"
+					theme="NewsPillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardCommentNewsPillarDark.storyName = 'Apps: Display: Standard, Design: Comment, Theme: NewsPillar, Mode: Dark';
+		AppsStandardCommentNewsPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardCommentNewsPillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Comment,
+					theme: {...ArticleSpecial, ...Pillar}.News,
+				}]
+			),
+		];
 
 		export const AppsStandardInteractiveNewsPillarLight = () => {
 			return (
