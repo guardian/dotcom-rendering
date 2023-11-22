@@ -14,9 +14,8 @@ import { Link, SvgExternal } from '@guardian/source-react-components';
 import React from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
-import { palette as schemedPalette } from '../palette';
+import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
-import type { Palette } from '../types/palette';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
@@ -182,7 +181,10 @@ const sublinkStyles = css`
 	}
 `;
 
-const lineStyles = (palette: Palette) => css`
+const lineStyles = (
+	format: ArticleFormat,
+	containerPalette?: DCRContainerPalette,
+) => css`
 	padding-top: 1px;
 	:before {
 		display: block;
@@ -190,7 +192,8 @@ const lineStyles = (palette: Palette) => css`
 		top: 0;
 		left: 0;
 		content: '';
-		border-top: 1px solid ${palette.border.cardSupporting};
+		border-top: 1px solid
+			${decidePalette(format, containerPalette).border.cardSupporting};
 
 		width: 120px;
 		${between.tablet.and.desktop} {
@@ -249,10 +252,7 @@ export const CardHeadline = ({
 	isDynamo,
 	isExternalLink,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
-	const kickerColour = isDynamo
-		? palette.text.dynamoKicker
-		: palette.text.cardKicker;
+	const kickerColour = palette('--card-kicker-text');
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
@@ -271,7 +271,9 @@ export const CardHeadline = ({
 							size: sizeOnMobile ?? size,
 							fontWeight: 'medium',
 						}),
-					showLine && !isDynamo && lineStyles(palette),
+					showLine &&
+						!isDynamo &&
+						lineStyles(format, containerPalette),
 				]}
 			>
 				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
@@ -288,13 +290,8 @@ export const CardHeadline = ({
 					{showQuotes && <QuoteIcon colour={kickerColour} />}
 					<span
 						css={css`
-							color: ${schemedPalette('--headline-colour')};
+							color: ${palette('--card-headline-text')};
 						`}
-						style={{
-							['--headline-colour']: isDynamo
-								? palette.text.dynamoHeadline
-								: palette.text.cardHeadline,
-						}}
 						className="show-underline"
 					>
 						{cleanHeadLineText}

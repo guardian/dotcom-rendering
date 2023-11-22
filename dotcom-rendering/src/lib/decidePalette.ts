@@ -735,6 +735,7 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 	return neutral[86]; // default previously defined in Standfirst.tsx
 };
 
+/** @deprecated use headerBackground in palette.ts */
 const backgroundHeader = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
