@@ -55,39 +55,6 @@ const headlineColourDark: PaletteFunction = ({ design }) => {
 			return sourcePalette.neutral[97];
 	}
 };
-const headerBackgroundLight: PaletteFunction = ({ design, display, theme }) => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-			switch (theme) {
-				case Pillar.News:
-				case ArticleSpecial.SpecialReportAlt:
-				case ArticleSpecial.Labs:
-					return sourcePalette.news[300];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[300];
-				case Pillar.Sport:
-					return sourcePalette.sport[300];
-				case Pillar.Culture:
-					return sourcePalette.culture[300];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[300];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[700];
-			}
-		default:
-			return articleBackgroundLight({ design, display, theme });
-	}
-};
-
-const headerBackgroundDark: PaletteFunction = ({ design }) => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-			return sourcePalette.news[200];
-		default:
-			return sourcePalette.neutral[7];
-	}
-};
-
 const headlineBackgroundLight: PaletteFunction = ({
 	display,
 	design,
@@ -115,13 +82,88 @@ const headlineBackgroundLight: PaletteFunction = ({
 	}
 };
 
-const headlineBackgroundDark: PaletteFunction = ({ design }) => {
+const headlineBackgroundDark: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
+	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[7];
+
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[7];
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[200];
+				default:
+					return pillarPalette(theme, 200);
+			}
+		case ArticleDesign.Interview:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[20];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[10];
+			}
+		default:
+			return sourcePalette.neutral[10];
+	}
+};
+
+const headlineBlogBackgroundLight: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return sourcePalette.news[200];
+			switch (theme) {
+				case Pillar.News:
+				case ArticleSpecial.SpecialReportAlt:
+				case ArticleSpecial.Labs:
+					return sourcePalette.news[300];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.Sport:
+					return sourcePalette.sport[300];
+				case Pillar.Culture:
+					return sourcePalette.culture[300];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[700];
+			}
 		default:
-			return sourcePalette.neutral[7];
+			return articleBackgroundLight({ design, display, theme });
 	}
+};
+
+const headlineBlogBackgroundDark: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
+	return headlineBackgroundDark({ design, display, theme });
 };
 
 const bylineLight: PaletteFunction = ({ design, theme }) => {
@@ -1380,7 +1422,11 @@ const standfirstLinkBorderDark: PaletteFunction = () => {
 	return sourcePalette.neutral[46];
 };
 
-const standfirstBackground: PaletteFunction = ({ design, display, theme }) => {
+const standfirstBackgroundLight: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			switch (theme) {
@@ -1404,6 +1450,47 @@ const standfirstBackground: PaletteFunction = ({ design, display, theme }) => {
 			}
 		default:
 			return articleBackgroundLight({ design, display, theme });
+	}
+};
+
+const standfirstBackgroundDark: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[10];
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.Opinion:
+					return sourcePalette.opinion[100];
+				case Pillar.Sport:
+					return sourcePalette.sport[100];
+				case Pillar.Culture:
+					return sourcePalette.culture[100];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[100];
+				case Pillar.News:
+				default:
+					return sourcePalette.news[100];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[10];
+			}
+		default:
+			return sourcePalette.neutral[10];
 	}
 };
 
@@ -2676,17 +2763,17 @@ const paletteColours = {
 		light: headlineColourLight,
 		dark: headlineColourDark,
 	},
-	'--headline-background': {
-		light: headlineBackgroundLight,
-		dark: headlineBackgroundDark,
-	},
 	'--headline-border': {
 		light: headlineBorder,
 		dark: headlineBorder,
 	},
-	'--header-background': {
-		light: headerBackgroundLight,
-		dark: headerBackgroundDark,
+	'--headline-background': {
+		light: headlineBackgroundLight,
+		dark: headlineBackgroundDark,
+	},
+	'--headline-blog-background': {
+		light: headlineBlogBackgroundLight,
+		dark: headlineBlogBackgroundDark,
 	},
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
@@ -2825,8 +2912,8 @@ const paletteColours = {
 		dark: standfirstBorder,
 	},
 	'--standfirst-background': {
-		light: standfirstBackground,
-		dark: standfirstBackground,
+		light: standfirstBackgroundLight,
+		dark: standfirstBackgroundDark,
 	},
 	'--card-border-top': {
 		light: cardBorderTopLight,
