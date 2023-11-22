@@ -4,7 +4,7 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- Automatically created with yarn run createtoc and on push hook -->
+<!-- Automatically created by running `yarn createtoc` in a pre-commit hook -->
 
 -   [Quick start](#quick-start)
     -   [Install Node.js](#install-nodejs)
@@ -16,11 +16,12 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
     -   [Concepts](#concepts)
     -   [Visual Debugging](#visual-debugging)
     -   [Feedback](#feedback)
--   [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+-   [Dotcom Rendering now renders most articles and fronts in Production](#dotcom-rendering-now-renders-most-articles-and-fronts-in-production)
 -   [Code Quality](#code-quality)
     -   [Snyk Code Scanning](#snyk-code-scanning)
 -   [IDE setup](#ide-setup)
     -   [Extensions](#extensions)
+    -   [Commit hooks](#commit-hooks)
     -   [Auto fix on save](#auto-fix-on-save)
 -   [Thanks](#thanks)
 
