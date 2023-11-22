@@ -96,7 +96,7 @@ export default {
 			);
 		};
 		AppsShowcaseStandardNewsPillarLight.storyName = 'Apps: Display: Showcase, Design: Standard, Theme: NewsPillar, Mode: Light';
-		AppsShowcaseStandardNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
+		AppsShowcaseStandardNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
 		AppsShowcaseStandardNewsPillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Showcase,
@@ -106,7 +106,26 @@ export default {
 			),
 		];
 
-		
+		export const AppsShowcaseStandardNewsPillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Showcase"
+					designName="Standard"
+					theme="NewsPillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsShowcaseStandardNewsPillarDark.storyName = 'Apps: Display: Showcase, Design: Standard, Theme: NewsPillar, Mode: Dark';
+		AppsShowcaseStandardNewsPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsShowcaseStandardNewsPillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Showcase,
+					design: ArticleDesign.Standard,
+					theme: {...ArticleSpecial, ...Pillar}.News,
+				}]
+			),
+		];
 
 		export const WebShowcasePictureOpinionPillarLight = () => {
 			return (
@@ -357,19 +376,19 @@ export default {
 
 		
 
-		export const WebStandardLiveBlogOpinionPillarLight = () => {
+		export const AppsStandardLiveBlogOpinionPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
 					displayName="Standard"
 					designName="LiveBlog"
 					theme="OpinionPillar"
-					renderingTarget="Web"
+					renderingTarget="Apps"
 				/>
 			);
 		};
-		WebStandardLiveBlogOpinionPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: OpinionPillar, Mode: Light';
-		WebStandardLiveBlogOpinionPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
-		WebStandardLiveBlogOpinionPillarLight.decorators = [lightDecorator(
+		AppsStandardLiveBlogOpinionPillarLight.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: OpinionPillar, Mode: Light';
+		AppsStandardLiveBlogOpinionPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogOpinionPillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.LiveBlog,
@@ -378,21 +397,40 @@ export default {
 			),
 		];
 
-		
+		export const AppsStandardLiveBlogOpinionPillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="OpinionPillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardLiveBlogOpinionPillarDark.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: OpinionPillar, Mode: Dark';
+		AppsStandardLiveBlogOpinionPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogOpinionPillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.Opinion,
+				}]
+			),
+		];
 
-		export const WebStandardLiveBlogSportPillarLight = () => {
+		export const AppsStandardLiveBlogSportPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
 					displayName="Standard"
 					designName="LiveBlog"
 					theme="SportPillar"
-					renderingTarget="Web"
+					renderingTarget="Apps"
 				/>
 			);
 		};
-		WebStandardLiveBlogSportPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: SportPillar, Mode: Light';
-		WebStandardLiveBlogSportPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
-		WebStandardLiveBlogSportPillarLight.decorators = [lightDecorator(
+		AppsStandardLiveBlogSportPillarLight.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: SportPillar, Mode: Light';
+		AppsStandardLiveBlogSportPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogSportPillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.LiveBlog,
@@ -401,21 +439,40 @@ export default {
 			),
 		];
 
-		
+		export const AppsStandardLiveBlogSportPillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="SportPillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardLiveBlogSportPillarDark.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: SportPillar, Mode: Dark';
+		AppsStandardLiveBlogSportPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogSportPillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.Sport,
+				}]
+			),
+		];
 
-		export const WebStandardLiveBlogCulturePillarLight = () => {
+		export const AppsStandardLiveBlogCulturePillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
 					displayName="Standard"
 					designName="LiveBlog"
 					theme="CulturePillar"
-					renderingTarget="Web"
+					renderingTarget="Apps"
 				/>
 			);
 		};
-		WebStandardLiveBlogCulturePillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: CulturePillar, Mode: Light';
-		WebStandardLiveBlogCulturePillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
-		WebStandardLiveBlogCulturePillarLight.decorators = [lightDecorator(
+		AppsStandardLiveBlogCulturePillarLight.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: CulturePillar, Mode: Light';
+		AppsStandardLiveBlogCulturePillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogCulturePillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.LiveBlog,
@@ -424,21 +481,40 @@ export default {
 			),
 		];
 
-		
+		export const AppsStandardLiveBlogCulturePillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="CulturePillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardLiveBlogCulturePillarDark.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: CulturePillar, Mode: Dark';
+		AppsStandardLiveBlogCulturePillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogCulturePillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.Culture,
+				}]
+			),
+		];
 
-		export const WebStandardLiveBlogLifestylePillarLight = () => {
+		export const AppsStandardLiveBlogLifestylePillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
 					displayName="Standard"
 					designName="LiveBlog"
 					theme="LifestylePillar"
-					renderingTarget="Web"
+					renderingTarget="Apps"
 				/>
 			);
 		};
-		WebStandardLiveBlogLifestylePillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: LifestylePillar, Mode: Light';
-		WebStandardLiveBlogLifestylePillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
-		WebStandardLiveBlogLifestylePillarLight.decorators = [lightDecorator(
+		AppsStandardLiveBlogLifestylePillarLight.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: LifestylePillar, Mode: Light';
+		AppsStandardLiveBlogLifestylePillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogLifestylePillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.LiveBlog,
@@ -447,21 +523,40 @@ export default {
 			),
 		];
 
-		
+		export const AppsStandardLiveBlogLifestylePillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="LifestylePillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardLiveBlogLifestylePillarDark.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: LifestylePillar, Mode: Dark';
+		AppsStandardLiveBlogLifestylePillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogLifestylePillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.Lifestyle,
+				}]
+			),
+		];
 
-		export const WebStandardLiveBlogSpecialReportPillarLight = () => {
+		export const AppsStandardLiveBlogSpecialReportPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
 					displayName="Standard"
 					designName="LiveBlog"
 					theme="SpecialReportPillar"
-					renderingTarget="Web"
+					renderingTarget="Apps"
 				/>
 			);
 		};
-		WebStandardLiveBlogSpecialReportPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: SpecialReportPillar, Mode: Light';
-		WebStandardLiveBlogSpecialReportPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
-		WebStandardLiveBlogSpecialReportPillarLight.decorators = [lightDecorator(
+		AppsStandardLiveBlogSpecialReportPillarLight.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: SpecialReportPillar, Mode: Light';
+		AppsStandardLiveBlogSpecialReportPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogSpecialReportPillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.LiveBlog,
@@ -470,21 +565,40 @@ export default {
 			),
 		];
 
-		
+		export const AppsStandardLiveBlogSpecialReportPillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="SpecialReportPillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardLiveBlogSpecialReportPillarDark.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: SpecialReportPillar, Mode: Dark';
+		AppsStandardLiveBlogSpecialReportPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogSpecialReportPillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.SpecialReport,
+				}]
+			),
+		];
 
-		export const WebStandardLiveBlogLabsPillarLight = () => {
+		export const AppsStandardLiveBlogLabsPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
 					displayName="Standard"
 					designName="LiveBlog"
 					theme="LabsPillar"
-					renderingTarget="Web"
+					renderingTarget="Apps"
 				/>
 			);
 		};
-		WebStandardLiveBlogLabsPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: LabsPillar, Mode: Light';
-		WebStandardLiveBlogLabsPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
-		WebStandardLiveBlogLabsPillarLight.decorators = [lightDecorator(
+		AppsStandardLiveBlogLabsPillarLight.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: LabsPillar, Mode: Light';
+		AppsStandardLiveBlogLabsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogLabsPillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.LiveBlog,
@@ -493,21 +607,40 @@ export default {
 			),
 		];
 
-		
+		export const AppsStandardLiveBlogLabsPillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="LabsPillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardLiveBlogLabsPillarDark.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: LabsPillar, Mode: Dark';
+		AppsStandardLiveBlogLabsPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogLabsPillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.Labs,
+				}]
+			),
+		];
 
-		export const WebStandardLiveBlogSpecialReportAltPillarLight = () => {
+		export const AppsStandardLiveBlogSpecialReportAltPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
 					displayName="Standard"
 					designName="LiveBlog"
 					theme="SpecialReportAltPillar"
-					renderingTarget="Web"
+					renderingTarget="Apps"
 				/>
 			);
 		};
-		WebStandardLiveBlogSpecialReportAltPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: SpecialReportAltPillar, Mode: Light';
-		WebStandardLiveBlogSpecialReportAltPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
-		WebStandardLiveBlogSpecialReportAltPillarLight.decorators = [lightDecorator(
+		AppsStandardLiveBlogSpecialReportAltPillarLight.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: SpecialReportAltPillar, Mode: Light';
+		AppsStandardLiveBlogSpecialReportAltPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogSpecialReportAltPillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Standard,
 					design: ArticleDesign.LiveBlog,
@@ -516,7 +649,26 @@ export default {
 			),
 		];
 
-		
+		export const AppsStandardLiveBlogSpecialReportAltPillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="SpecialReportAltPillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardLiveBlogSpecialReportAltPillarDark.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: SpecialReportAltPillar, Mode: Dark';
+		AppsStandardLiveBlogSpecialReportAltPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardLiveBlogSpecialReportAltPillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.SpecialReportAlt,
+				}]
+			),
+		];
 
 		export const AppsStandardLiveBlogNewsPillarLight = () => {
 			return (

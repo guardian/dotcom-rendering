@@ -738,25 +738,6 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 	return neutral[86]; // default previously defined in Standfirst.tsx
 };
 
-/** @deprecated use headerBackground in palette.ts */
-const backgroundHeader = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return news[300];
-				case ArticleSpecial.SpecialReport:
-					return specialReport[700];
-				case ArticleSpecial.SpecialReportAlt:
-					return news[300];
-				default:
-					return pillarPalette[format.theme][300];
-			}
-		default:
-			return backgroundArticle(format);
-	}
-};
-
 /** @deprecated this has been moved to the theme palette (--standfirst-background) */
 const backgroundStandfirst = (format: ArticleFormat): string => {
 	switch (format.design) {
@@ -1696,6 +1677,7 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
+/** @deprecated use subNavLink in src/palette.ts */
 const textSubNavLink = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Picture:
@@ -1840,7 +1822,6 @@ export const decidePalette = (
 			headline: backgroundHeadline(format),
 			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
-			header: backgroundHeader(format),
 			standfirst: backgroundStandfirst(format),
 			richLink: backgroundRichLink(format),
 			imageTitle: backgroundImageTitle(format),
