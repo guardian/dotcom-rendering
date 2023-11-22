@@ -6773,10 +6773,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/relateurl@0.2.32":
-  version "0.2.32"
-  resolved "https://registry.yarnpkg.com/@types/relateurl/-/relateurl-0.2.32.tgz#145d58cecb77c6b85868dd66208271ca408444d3"
-  integrity sha512-S3RXiF4jV2ECprVGfKLyRHbObSV2UOfpml1pHzqSgBLj/jd79siRtyR1Qyv/I57P079DVHaMOj4UwDOqYh3vQA==
+"@types/relateurl@0.2.33":
+  version "0.2.33"
+  resolved "https://registry.yarnpkg.com/@types/relateurl/-/relateurl-0.2.33.tgz#fa174c30100d91e88d7b0ba60cefd7e8c532516f"
+  integrity sha512-bTQCKsVbIdzLqZhLkF5fcJQreE4y1ro4DIyVrlDNSCJRRwHhB8Z+4zXXa8jN6eDvc2HbRsEYgbvrnGvi54EpSw==
 
 "@types/response-time@2.3.5":
   version "2.3.5"
