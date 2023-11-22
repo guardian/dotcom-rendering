@@ -45,5 +45,6 @@
 	},
 	"resolutions": {
 		"**/crypto-js": "4.2.0"
-	}
+	},
+	"packageManager": "yarn@1.22.19"
 }
