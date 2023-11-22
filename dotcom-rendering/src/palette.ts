@@ -2735,6 +2735,7 @@ const pullQuoteTextLight = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
+		case ArticleDesign.PhotoEssay:
 			switch (theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
@@ -2765,6 +2766,7 @@ const pullQuoteTextDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
+		case ArticleDesign.PhotoEssay:
 			switch (theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
