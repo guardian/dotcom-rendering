@@ -477,7 +477,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={themePalette('--headline-background')}
+						backgroundColour={themePalette('--header-background')}
 						borderColour={themePalette('--headline-border')}
 					>
 						<HeadlineGrid>

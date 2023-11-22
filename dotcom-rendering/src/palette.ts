@@ -55,14 +55,66 @@ const headlineColourDark: PaletteFunction = ({ design }) => {
 			return sourcePalette.neutral[97];
 	}
 };
-const headlineBackgroundLight: PaletteFunction = ({ design }) => {
+const headerBackgroundLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return sourcePalette.news[400];
+			switch (theme) {
+				case Pillar.News:
+				case ArticleSpecial.SpecialReportAlt:
+				case ArticleSpecial.Labs:
+					return sourcePalette.news[300];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.Sport:
+					return sourcePalette.sport[300];
+				case Pillar.Culture:
+					return sourcePalette.culture[300];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[700];
+			}
 		default:
-			return sourcePalette.neutral[100];
+			return articleBackgroundLight({ design, display, theme });
 	}
 };
+
+const headerBackgroundDark: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.news[200];
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+
+const headlineBackgroundLight: PaletteFunction = ({
+	display,
+	design,
+	theme,
+}) => {
+	switch (display) {
+		case ArticleDisplay.Immersive:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				default:
+					return sourcePalette.neutral[0];
+			}
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard:
+			switch (design) {
+				case ArticleDesign.Interview:
+					return sourcePalette.neutral[0];
+				default:
+					return 'transparent';
+			}
+		default:
+			return 'transparent';
+	}
+};
+
 const headlineBackgroundDark: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
@@ -2625,6 +2677,10 @@ const paletteColours = {
 	'--headline-border': {
 		light: headlineBorder,
 		dark: headlineBorder,
+	},
+	'--header-background': {
+		light: headerBackgroundLight,
+		dark: headerBackgroundDark,
 	},
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
