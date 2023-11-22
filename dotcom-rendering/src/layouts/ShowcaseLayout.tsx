@@ -44,7 +44,7 @@ import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
-import { palette } from '../palette';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
@@ -337,7 +337,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									{props.NAV.subNavSections && (
 										<Section
 											fullWidth={true}
-											backgroundColour={palette(
+											backgroundColour={themePalette(
 												'--article-background',
 											)}
 											padSides={false}
@@ -355,13 +355,13 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													currentNavLink={
 														props.NAV.currentNavLink
 													}
-													linkHoverColour={palette(
+													linkHoverColour={themePalette(
 														'--article-link-text-hover',
 													)}
-													borderColour={palette(
+													borderColour={themePalette(
 														'--sub-nav-border',
 													)}
-													subNavLinkColour={palette(
+													subNavLinkColour={themePalette(
 														'--sub-nav-link',
 													)}
 												/>
@@ -371,18 +371,18 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 									<Section
 										fullWidth={true}
-										backgroundColour={palette(
+										backgroundColour={themePalette(
 											'--article-background',
 										)}
 										padSides={false}
 										showTopBorder={false}
-										borderColour={palette(
+										borderColour={themePalette(
 											'--article-border-secondary',
 										)}
 									>
 										<StraightLines
 											count={4}
-											color={palette(
+											color={themePalette(
 												'--article-border-secondary',
 											)}
 											cssOverrides={css`
@@ -478,9 +478,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
-					backgroundColour={palette('--article-background')}
+					backgroundColour={themePalette('--article-background')}
 					element="article"
-					borderColour={palette('--article-border-secondary')}
+					borderColour={themePalette('--article-border-secondary')}
 				>
 					<ShowcaseGrid>
 						<GridItem area="media">
@@ -548,7 +548,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								<div css={stretchLines}>
 									<DecideLines
 										format={format}
-										color={palette(
+										color={themePalette(
 											'--article-border-secondary',
 										)}
 									/>
@@ -652,7 +652,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								)}
 								<StraightLines
 									count={4}
-									color={palette(
+									color={themePalette(
 										'--article-border-secondary',
 									)}
 									cssOverrides={css`
@@ -842,10 +842,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={palette(
+							linkHoverColour={themePalette(
 								'--article-link-text-hover',
 							)}
-							borderColour={palette('--sub-nav-border')}
+							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>
