@@ -2802,18 +2802,10 @@ const pullQuoteBorderLight = (): string => sourcePalette.neutral[86];
 const pullQuoteBorderDark = (): string => sourcePalette.neutral[60];
 
 const pullQuoteIconLight = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) {
-		return sourcePalette.labs[300];
-	}
-
 	const text = pullQuoteTextLight(format);
 	return text === sourcePalette.neutral[7] ? pullQuoteBorderDark() : text;
 };
 const pullQuoteIconDark = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) {
-		return sourcePalette.labs[400];
-	}
-
 	const text = pullQuoteTextDark(format);
 	return text === sourcePalette.neutral[97] ? pullQuoteBorderLight() : text;
 };
