@@ -87,12 +87,30 @@ const headerBackgroundDark: PaletteFunction = ({ design }) => {
 	}
 };
 
-const headlineBackgroundLight: PaletteFunction = ({ design }) => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-			return sourcePalette.news[400];
+const headlineBackgroundLight: PaletteFunction = ({
+	display,
+	design,
+	theme,
+}) => {
+	switch (display) {
+		case ArticleDisplay.Immersive:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				default:
+					return sourcePalette.neutral[0];
+			}
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard:
+			switch (design) {
+				case ArticleDesign.Interview:
+					return sourcePalette.neutral[0];
+				default:
+					return 'transparent';
+			}
 		default:
-			return sourcePalette.neutral[100];
+			return 'transparent';
 	}
 };
 
