@@ -55,7 +55,11 @@ const headlineColourDark: PaletteFunction = ({ design }) => {
 			return sourcePalette.neutral[97];
 	}
 };
-const headerBackgroundLight: PaletteFunction = ({ design, display, theme }) => {
+const headerBlogBackgroundLight: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			switch (theme) {
@@ -79,12 +83,51 @@ const headerBackgroundLight: PaletteFunction = ({ design, display, theme }) => {
 	}
 };
 
-const headerBackgroundDark: PaletteFunction = ({ design }) => {
+const headerBlogBackgroundDark: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
+	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[7];
+
 	switch (design) {
-		case ArticleDesign.LiveBlog:
-			return sourcePalette.news[200];
-		default:
+		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[7];
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[200];
+				default:
+					return pillarPalette(theme, 200);
+			}
+		case ArticleDesign.Interview:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[20];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[10];
+			}
+		default:
+			return sourcePalette.neutral[10];
 	}
 };
 
@@ -115,12 +158,51 @@ const headlineBackgroundLight: PaletteFunction = ({
 	}
 };
 
-const headlineBackgroundDark: PaletteFunction = ({ design }) => {
+const headlineBackgroundDark: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
+	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[7];
+
 	switch (design) {
-		case ArticleDesign.LiveBlog:
-			return sourcePalette.news[200];
-		default:
+		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[7];
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[200];
+				default:
+					return pillarPalette(theme, 200);
+			}
+		case ArticleDesign.Interview:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[20];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[10];
+			}
+		default:
+			return sourcePalette.neutral[10];
 	}
 };
 
@@ -2678,9 +2760,9 @@ const paletteColours = {
 		light: headlineBorder,
 		dark: headlineBorder,
 	},
-	'--header-background': {
-		light: headerBackgroundLight,
-		dark: headerBackgroundDark,
+	'--header-blog-background': {
+		light: headerBlogBackgroundLight,
+		dark: headerBlogBackgroundDark,
 	},
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
