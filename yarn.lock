@@ -9508,10 +9508,10 @@ cypress-wait-until@2.0.1:
   resolved "https://registry.yarnpkg.com/cypress-wait-until/-/cypress-wait-until-2.0.1.tgz#69c575c7207d83e4ae023e2aaecf2b66148c9fc0"
   integrity sha512-+IyVnYNiaX1+C+V/LazrJWAi/CqiwfNoRSrFviECQEyolW1gDRy765PZosL2alSSGK8V10Y7BGfOQyZUDgmnjQ==
 
-cypress@13.4.0:
-  version "13.4.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-13.4.0.tgz#7d91069983ba7c664c505abde84d3e3e20484344"
-  integrity sha512-KeWNC9xSHG/ewZURVbaQsBQg2mOKw4XhjJZFKjWbEjgZCdxpPXLpJnfq5Jns1Gvnjp6AlnIfpZfWFlDgVKXdWQ==
+cypress@13.6.0:
+  version "13.6.0"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-13.6.0.tgz#b98b7b837679012ed09c7ecee5565bf7b31d4982"
+  integrity sha512-quIsnFmtj4dBUEJYU4OH0H12bABJpSujvWexC24Ju1gTlKMJbeT6tTO0vh7WNfiBPPjoIXLN+OUqVtiKFs6SGw==
   dependencies:
     "@cypress/request" "^3.0.0"
     "@cypress/xvfb" "^1.2.4"
@@ -16730,7 +16730,7 @@ semver-truncate@^3.0.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.2.tgz#48d55db737c3287cd4835e17fa13feace1c41ef8"
   integrity sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==
 
-semver@7.5.4, semver@^7.5.1, semver@^7.5.4:
+semver@7.5.4, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.1, semver@^7.5.3, semver@^7.5.4:
   version "7.5.4"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.4.tgz#483986ec4ed38e1c6c48c34894a9182dbff68a6e"
   integrity sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==
@@ -16741,13 +16741,6 @@ semver@^6.0.0, semver@^6.1.1, semver@^6.1.2, semver@^6.3.0, semver@^6.3.1:
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.1.tgz#556d2ef8689146e46dcea4bfdd095f3434dffcb4"
   integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
-
-semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3:
-  version "7.5.3"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.3.tgz#161ce8c2c6b4b3bdca6caadc9fa3317a4c4fe88e"
-  integrity sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ==
-  dependencies:
-    lru-cache "^6.0.0"
 
 send@0.18.0:
   version "0.18.0"
