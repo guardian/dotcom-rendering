@@ -20,8 +20,6 @@ import {
 import { logEpicView } from '../lib/viewLog';
 import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 
-console.log('Using local liveblog epic');
-
 const container = (clientName: string) => css`
 	padding: 6px 10px 28px 10px;
 	border-top: 1px solid ${brandAlt[400]};
