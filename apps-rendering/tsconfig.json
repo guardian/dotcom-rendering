@@ -1,19 +1,19 @@
 {
-    "compilerOptions": {
-        "target": "es2019",
-        // Enable strictest settings like strictNullChecks & noImplicitAny.
-        "strict": true,
-        // Import non-ES modules as default imports.
-        "esModuleInterop": true,
-        // Don't transpile jsx (handled by babel w/ emotion)
-        "jsx": "react-jsx",
-        "jsxImportSource": "@emotion/react",
-        // Allows discovery of node_modules packages
-        "moduleResolution": "node",
-        "noUnusedLocals": true,
-        "noUnusedParameters": false,
-        "baseUrl": "src/",
-        "forceConsistentCasingInFileNames": true,
-        "noFallthroughCasesInSwitch": true
-    }
+	"compilerOptions": {
+		"target": "es2019",
+		// Enable strictest settings like strictNullChecks & noImplicitAny.
+		"strict": true,
+		// Import non-ES modules as default imports.
+		"esModuleInterop": true,
+		// Don't transpile jsx (handled by babel w/ emotion)
+		"jsx": "react-jsx",
+		"jsxImportSource": "@emotion/react",
+		// Allows discovery of node_modules packages
+		"moduleResolution": "node",
+		"noUnusedLocals": true,
+		"noUnusedParameters": false,
+		"baseUrl": "src/",
+		"forceConsistentCasingInFileNames": true,
+		"noFallthroughCasesInSwitch": true
+	}
 }

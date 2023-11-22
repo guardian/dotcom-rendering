@@ -60,9 +60,9 @@ export const MostViewedFooter = ({
 			css={css`
 				width: 100%;
 			`}
-			data-cy="mostviewed-footer"
-			data-cy-ab-user-in-variant={abTestCypressDataAttr}
-			data-cy-ab-runnable-test={variantFromRunnable}
+			data-testid="mostviewed-footer"
+			data-testid-ab-user-in-variant={abTestCypressDataAttr}
+			data-testid-ab-runnable-test={variantFromRunnable}
 			data-link-name="most popular"
 		>
 			<MostViewedFooterGrid

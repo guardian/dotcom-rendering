@@ -84,7 +84,7 @@ declare global {
 		YT?: {
 			ImaManager: typeof ImaManager;
 		};
-		onYouTubeIframeAPIReady?: () => void
+		onYouTubeIframeAPIReady?: () => void;
 	}
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

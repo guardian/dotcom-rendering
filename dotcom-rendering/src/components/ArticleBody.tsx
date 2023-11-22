@@ -3,13 +3,12 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
-import { decidePalette } from '../lib/decidePalette';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
+import { palette as themePalette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TableOfContentsItem } from '../types/frontend';
-import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
@@ -92,15 +91,16 @@ const bodyPadding = css`
 	}
 `;
 
-const globalLinkStyles = (palette: Palette) => css`
+const globalLinkStyles = () => css`
 	a:not([data-ignore='global-link-styling']) {
 		text-decoration: none;
-		border-bottom: 1px solid ${palette.border.articleLink};
-		color: ${palette.text.articleLink};
+		border-bottom: 1px solid ${themePalette('--article-link-border')};
+		color: ${themePalette('--article-link-text')};
 
 		:hover {
-			color: ${palette.text.articleLinkHover};
-			border-bottom: 1px solid ${palette.border.articleLinkHover};
+			color: ${themePalette('--article-link-text-hover')};
+			border-bottom: 1px solid
+				${themePalette('--article-link-border-hover')};
 		}
 	}
 `;
@@ -142,7 +142,6 @@ export const ArticleBody = ({
 	imagesForAppsLightbox,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
-	const palette = decidePalette(format);
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 
@@ -159,7 +158,7 @@ export const ArticleBody = ({
 					globalStrongStyles,
 					globalH2Styles(format.display),
 					globalH3Styles(format.display),
-					globalLinkStyles(palette),
+					globalLinkStyles(),
 					// revealStyles is used to animate the reveal of new blocks
 					(format.design === ArticleDesign.DeadBlog ||
 						format.design === ArticleDesign.LiveBlog) &&
@@ -212,7 +211,7 @@ export const ArticleBody = ({
 					globalH3Styles(format.display),
 					globalOlStyles(),
 					globalStrongStyles,
-					globalLinkStyles(palette),
+					globalLinkStyles(),
 				]}
 				lang={language}
 				dir={languageDirection}

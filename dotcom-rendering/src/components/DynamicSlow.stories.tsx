@@ -66,7 +66,7 @@ export const Avatar = () => {
 	);
 };
 Avatar.storyName = 'With avatars';
-Avatar.decorators = [lightDecorator(articleFormat)];
+Avatar.decorators = [lightDecorator([articleFormat])];
 
 /* First Slice Variants */
 export const OneHugeTwoBigsFourStandards = () => (

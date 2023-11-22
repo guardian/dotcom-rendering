@@ -30,7 +30,8 @@ describe('formatContactNumbers', () => {
 			},
 		];
 
-		const expected = 'Contact us on Test at 1 or Signal at 2 or Telegram at 3';
+		const expected =
+			'Contact us on Test at 1 or Signal at 2 or Telegram at 3';
 		expect(formatContactNumbers(mockContacts)).toEqual(expected);
 	});
 

@@ -1,7 +1,7 @@
 import path from 'node:path';
 import webpackPreprocessor from '@cypress/webpack-preprocessor';
 import { defineConfig } from 'cypress';
-import { babelExclude } from './scripts/webpack/webpack.config.client.js';
+import { babelExclude } from './webpack/webpack.config.client.js';
 
 // https://docs.cypress.io/guides/references/configuration
 

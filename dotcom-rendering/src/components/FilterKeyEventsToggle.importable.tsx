@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 const cssOverrides = css`
 	display: inline-flex;
+	color: inherit;
 	padding-bottom: ${remSpace[3]};
 
 	${from.desktop} {

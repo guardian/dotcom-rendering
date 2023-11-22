@@ -32,7 +32,7 @@ export const SignInGateMain = ({
 	const { renderingTarget } = useConfig();
 
 	return (
-		<div css={signInGateContainer} data-cy="sign-in-gate-main">
+		<div css={signInGateContainer} data-testid="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
 			<h1 css={headingStyles}>Register: it’s quick and easy</h1>
@@ -46,7 +46,7 @@ export const SignInGateMain = ({
 				allows us to keep our journalism free for all. You’ll always be
 				able to control your own{' '}
 				<button
-					data-cy="sign-in-gate-main_privacy"
+					data-testid="sign-in-gate-main_privacy"
 					css={privacyLink}
 					onClick={() => {
 						cmp.showPrivacyManager();
@@ -64,7 +64,7 @@ export const SignInGateMain = ({
 			</p>
 			<div css={actionButtons}>
 				<LinkButton
-					data-cy="sign-in-gate-main_register"
+					data-testid="sign-in-gate-main_register"
 					data-ignore="global-link-styling"
 					css={registerButton}
 					priority="primary"
@@ -83,7 +83,7 @@ export const SignInGateMain = ({
 				</LinkButton>
 				{!isMandatory && (
 					<Button
-						data-cy="sign-in-gate-main_dismiss"
+						data-testid="sign-in-gate-main_dismiss"
 						data-ignore="global-link-styling"
 						css={laterButton}
 						priority="subdued"
@@ -108,7 +108,7 @@ export const SignInGateMain = ({
 			</p>
 
 			<Link
-				data-cy="sign-in-gate-main_signin"
+				data-testid="sign-in-gate-main_signin"
 				data-ignore="global-link-styling"
 				css={signInLink}
 				href={signInUrl}

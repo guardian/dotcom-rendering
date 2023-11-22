@@ -1,7 +1,11 @@
 dist
 .yarn
 deno
+.nvmrc
 
 # generated files
 dotcom-rendering/src/model/*-schema.json
 dotcom-rendering/stories/generated
+
+# specific files
+/**/*/curl-with-js-and-domReady.js
