@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
-import { remSpace, space, textSans } from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import {
 	SvgCheckmark,
 	SvgNotificationsOff,
@@ -52,9 +52,9 @@ const buttonStyles = css`
 	background: none;
 	border: none;
 	display: block;
-	margin-top: ${remSpace[1]};
+	margin-top: ${space[1]}px;
 	margin-left: 0;
-	min-height: ${remSpace[6]};
+	min-height: ${space[6]}px;
 	padding: 0;
 	text-align: left;
 `;
@@ -65,49 +65,26 @@ const containerStyles = css`
 	column-gap: 0.2em;
 `;
 
-const notificationsTextSpan = ({ isFollowing }: Pick<Props, 'isFollowing'>) => (
+const notificationsTextSpan = ({
+	isFollowing,
+}: Pick<ButtonProps, 'isFollowing'>) => (
 	<span>Notifications {isFollowing ? 'on' : 'off'}</span>
 );
 
 const tagTextSpan = ({
 	isFollowing,
 	displayName,
-}: Pick<Props, 'isFollowing' | 'displayName'>) => (
+}: {
+	isFollowing: boolean;
+	displayName?: string;
+}) => (
 	<span>
 		{isFollowing ? 'Following' : 'Follow'} {displayName}
 	</span>
 );
 
-const generateFollowButton = ({
-	isFollowing,
-	onClickHandler,
-	iconIsFollowing,
-	iconIsNotFollowing,
-	textSpan,
-}: Props & {
-	iconIsFollowing: EmotionJSX.Element;
-	iconIsNotFollowing: EmotionJSX.Element;
-	textSpan: EmotionJSX.Element;
-}): EmotionJSX.Element => {
-	return (
-		<>
-			<button onClick={onClickHandler} type="button" css={buttonStyles}>
-				<span css={containerStyles}>
-					<FollowIcon
-						isFollowing={isFollowing}
-						iconIsFollowing={iconIsFollowing}
-						iconIsNotFollowing={iconIsNotFollowing}
-					/>
-					{textSpan}
-				</span>
-			</button>
-		</>
-	);
-};
-
 // bridget props
-type Props = {
-	displayName?: string;
+type ButtonProps = {
 	isFollowing: boolean;
 	onClickHandler: () => void;
 };
@@ -115,24 +92,36 @@ type Props = {
 export const FollowNotificationsButton = ({
 	isFollowing,
 	onClickHandler,
-}: Props) =>
-	generateFollowButton({
-		isFollowing,
-		onClickHandler,
-		textSpan: notificationsTextSpan({ isFollowing }),
-		iconIsFollowing: <SvgNotificationsOn size="xsmall" />,
-		iconIsNotFollowing: <SvgNotificationsOff size="xsmall" />,
-	});
+}: ButtonProps) => {
+	return (
+		<button onClick={onClickHandler} type="button" css={buttonStyles}>
+			<span css={containerStyles}>
+				<FollowIcon
+					isFollowing={isFollowing}
+					iconIsFollowing={<SvgNotificationsOn size="xsmall" />}
+					iconIsNotFollowing={<SvgNotificationsOff size="xsmall" />}
+				/>
+				{notificationsTextSpan({ isFollowing })}
+			</span>
+		</button>
+	);
+};
 
 export const FollowTagButton = ({
-	displayName,
 	isFollowing,
+	displayName = '',
 	onClickHandler,
-}: Props) =>
-	generateFollowButton({
-		isFollowing,
-		onClickHandler,
-		textSpan: tagTextSpan({ isFollowing, displayName }),
-		iconIsFollowing: <SvgCheckmark size="xsmall" />,
-		iconIsNotFollowing: <SvgPlus size="xsmall" />,
-	});
+}: ButtonProps & { displayName: string }) => {
+	return (
+		<button onClick={onClickHandler} type="button" css={buttonStyles}>
+			<span css={containerStyles}>
+				<FollowIcon
+					isFollowing={isFollowing}
+					iconIsFollowing={<SvgCheckmark size="xsmall" />}
+					iconIsNotFollowing={<SvgPlus size="xsmall" />}
+				/>
+				{tagTextSpan({ isFollowing, displayName })}
+			</span>
+		</button>
+	);
+};

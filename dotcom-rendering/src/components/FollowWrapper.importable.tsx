@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
+import { log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
@@ -35,12 +36,20 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 		void getNotificationsClient()
 			.isFollowing(topic)
 			.then(setIsFollowingNotifications)
-			.catch((e) => console.error(e));
+			.catch((e) =>
+				log(
+					'dotcom',
+					'Bridget getNotificationsClient.isFollowing Error:',
+					e,
+				),
+			);
 
 		void getTagClient()
 			.isFollowing(topic)
 			.then(setIsFollowingTag)
-			.catch((e) => console.error(e));
+			.catch((e) =>
+				log('dotcom', 'Bridget getTagClient.isFollowing Error:', e),
+			);
 	}, [id, displayName]);
 
 	const tagHandler = () => {
@@ -54,11 +63,19 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 			? void getTagClient()
 					.unfollow(topic)
 					.then(() => setIsFollowingTag(false))
-					.catch((e) => console.error(e))
+					.catch((e) =>
+						log(
+							'dotcom',
+							'Bridget getTagClient.unfollow Error:',
+							e,
+						),
+					)
 			: void getTagClient()
 					.follow(topic)
 					.then(() => setIsFollowingTag(true))
-					.catch((e) => console.error(e));
+					.catch((e) =>
+						log('dotcom', 'Bridget getTagClient.follow Error:', e),
+					);
 	};
 
 	const notificationsHandler = () => {
@@ -72,11 +89,23 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 			? void getNotificationsClient()
 					.unfollow(topic)
 					.then(() => setIsFollowingNotifications(false))
-					.catch((e) => console.error(e))
+					.catch((e) =>
+						log(
+							'dotcom',
+							'Bridget getNotificationsClient.unfollow Error:',
+							e,
+						),
+					)
 			: void getNotificationsClient()
 					.follow(topic)
 					.then(() => setIsFollowingNotifications(true))
-					.catch((e) => console.error(e));
+					.catch((e) =>
+						log(
+							'dotcom',
+							'Bridget getNotificationsClient.follow Error:',
+							e,
+						),
+					);
 	};
 
 	return (
@@ -98,7 +127,6 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 			)}
 			<FollowNotificationsButton
 				isFollowing={isFollowingNotifications ?? false}
-				displayName={displayName}
 				onClickHandler={
 					isFollowingNotifications !== undefined
 						? notificationsHandler
