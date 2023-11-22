@@ -1,3 +1,4 @@
+import { log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getEnvironmentClient } from './bridgetApi';
 
@@ -10,7 +11,7 @@ export const useIsMyGuardianEnabled = (): boolean | undefined => {
 			.then(setIsEnabled)
 			.catch((error) => {
 				setIsEnabled(false);
-				console.log('isMyGuardianEnabled', { error });
+				log('dotcom', 'isMyGuardianEnabled check failed:', error);
 			});
 	}, []);
 	return isEnabled;
