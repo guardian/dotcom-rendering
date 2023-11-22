@@ -8,7 +8,7 @@ it('should show a Notifications Off button for a single contributor when renderi
 			onClickHandler={() => undefined}
 		/>,
 	);
-	expect(getByText('Notifications off')).toBeInTheDocument();
+	expect(getByText('Notifications! off')).toBeInTheDocument();
 });
 
 it('should show a Notifications On button for a single contributor when rendering for apps', async () => {
@@ -19,7 +19,7 @@ it('should show a Notifications On button for a single contributor when renderin
 		/>,
 	);
 	await waitFor(() =>
-		expect(getByText('Notifications on')).toBeInTheDocument(),
+		expect(getByText('Notifications! on')).toBeInTheDocument(),
 	);
 });
 

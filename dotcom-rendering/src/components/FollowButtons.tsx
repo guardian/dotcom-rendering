@@ -68,7 +68,7 @@ const containerStyles = css`
 const notificationsTextSpan = ({
 	isFollowing,
 }: Pick<ButtonProps, 'isFollowing'>) => (
-	<span>Notifications {isFollowing ? 'on' : 'off'}</span>
+	<span>Notifications! {isFollowing ? 'on' : 'off'}</span>
 );
 
 const tagTextSpan = ({
