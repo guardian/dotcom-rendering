@@ -1284,6 +1284,8 @@ const standfirstBulletDark: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[46];
 			}
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case Pillar.News:
@@ -2560,7 +2562,7 @@ const subMetaTextLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const subMetaTextDark: PaletteFunction = ({ theme }) => {
+const subMetaTextDark: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[700];
@@ -2571,7 +2573,11 @@ const subMetaTextDark: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[300];
 		default:
-			return pillarPalette(theme, 500);
+			if (design === ArticleDesign.Picture) {
+				return sourcePalette.neutral[86];
+			} else {
+				return pillarPalette(theme, 500);
+			}
 	}
 };
 
