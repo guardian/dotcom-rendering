@@ -9,6 +9,7 @@ import {
 } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
 import { buttonThemeDefault } from '@guardian/source-react-components';
+import { decidePalette } from './lib/decidePalette';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
@@ -1550,6 +1551,148 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 	}
 };
 
+const cardBorderTopLight = (format: ArticleFormat): string => {
+	return decidePalette(format).topBar.card;
+};
+const cardBorderTopDark = (): string => {
+	return sourcePalette.neutral[20];
+};
+const cardAgeTextLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.cardFooter;
+};
+const cardAgeTextDark = (): string => {
+	return sourcePalette.neutral[60];
+};
+const cardBackgroundLight = (format: ArticleFormat): string => {
+	return decidePalette(format).background.card;
+};
+const cardBackgroundDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.Lifestyle:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Opinion:
+					return pillarPalette(theme, 100);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[200];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[100];
+				case Pillar.News:
+				case ArticleSpecial.SpecialReportAlt:
+				default:
+					return sourcePalette.news[100];
+			}
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[10];
+		default:
+			return sourcePalette.neutral[0];
+	}
+};
+const cardTrailTextLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.cardStandfirst;
+};
+const cardTextDark = (): string => {
+	return sourcePalette.neutral[86];
+};
+
+const cardBylineKickerTextDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Opinion:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+				case Pillar.News:
+				default:
+					return sourcePalette.news[500];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Letter:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Lifestyle:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Opinion:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+			}
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Lifestyle:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Opinion:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+			}
+		default:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Lifestyle:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Opinion:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[500];
+			}
+	}
+};
+const cardKickerTextLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.cardKicker;
+};
+const cardHeadlineTextLight = (format: ArticleFormat): string => {
+	return decidePalette(format).text.cardHeadline;
+};
+const cardBackgroundHoverLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
+			/* TODO: This colour is hard coded here because it does not yet
+		exist in source-foundations. Once it's been added, please
+		remove this. @siadcock is aware. */
+			/* stylelint-disable-next-line color-no-hex */
+			return '#fdf0e8';
+		default:
+			return sourcePalette.neutral[93];
+	}
+};
+
 const captionTextLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
 		case ArticleSpecial.SpecialReport:
@@ -2622,6 +2765,34 @@ const paletteColours = {
 	'--standfirst-background': {
 		light: standfirstBackground,
 		dark: standfirstBackground,
+	},
+	'--card-border-top': {
+		light: cardBorderTopLight,
+		dark: cardBorderTopDark,
+	},
+	'--card-footer-text': {
+		light: cardAgeTextLight,
+		dark: cardAgeTextDark,
+	},
+	'--card-background': {
+		light: cardBackgroundLight,
+		dark: cardBackgroundDark,
+	},
+	'--card-trail-text': {
+		light: cardTrailTextLight,
+		dark: cardTextDark,
+	},
+	'--card-kicker-text': {
+		light: cardKickerTextLight,
+		dark: cardBylineKickerTextDark,
+	},
+	'--card-headline-text': {
+		light: cardHeadlineTextLight,
+		dark: cardTextDark,
+	},
+	'--card-background-hover': {
+		light: cardBackgroundHoverLight,
+		dark: cardBackgroundDark,
 	},
 	'--caption-text': {
 		light: captionTextLight,
