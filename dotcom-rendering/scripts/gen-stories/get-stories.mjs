@@ -278,6 +278,48 @@ const testLayoutFormats =
 		{
 			display: 'Standard',
 			design: 'LiveBlog',
+			theme: 'OpinionPillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'LiveBlog',
+			theme: 'SportPillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'LiveBlog',
+			theme: 'CulturePillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'LiveBlog',
+			theme: 'LifestylePillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'LiveBlog',
+			theme: 'SpecialReportPillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'LiveBlog',
+			theme: 'LabsPillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'LiveBlog',
+			theme: 'SpecialReportAltPillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'LiveBlog',
 			theme: 'NewsPillar',
 			config: { renderingTarget: 'Apps', darkModeAvailable: true },
 		},

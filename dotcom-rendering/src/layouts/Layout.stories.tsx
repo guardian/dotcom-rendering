@@ -1,4 +1,3 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useEffect } from 'react';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { Analysis } from '../../fixtures/generated/articles/Analysis';
@@ -153,20 +152,3 @@ export const LiveblogWithNoKeyEvents = () => {
 LiveblogWithNoKeyEvents.decorators = [
 	lightDecorator([decideFormat(Live.format)]),
 ];
-
-const liveBlogCultureFormat: ArticleFormat = {
-	design: ArticleDesign.LiveBlog,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.Culture,
-};
-export const LiveBlogCulture = () => {
-	return (
-		<HydratedLayout
-			serverArticle={{
-				...Live,
-			}}
-			renderingTarget="Web"
-		/>
-	);
-};
-LiveBlogCulture.decorators = [lightDecorator([liveBlogCultureFormat])];

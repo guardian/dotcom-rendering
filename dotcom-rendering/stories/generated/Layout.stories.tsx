@@ -338,6 +338,167 @@ export default {
 
 		
 
+		export const WebStandardLiveBlogOpinionPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="OpinionPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardLiveBlogOpinionPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: OpinionPillar, Mode: Light';
+		WebStandardLiveBlogOpinionPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardLiveBlogOpinionPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.Opinion,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardLiveBlogSportPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="SportPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardLiveBlogSportPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: SportPillar, Mode: Light';
+		WebStandardLiveBlogSportPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardLiveBlogSportPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.Sport,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardLiveBlogCulturePillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="CulturePillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardLiveBlogCulturePillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: CulturePillar, Mode: Light';
+		WebStandardLiveBlogCulturePillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardLiveBlogCulturePillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.Culture,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardLiveBlogLifestylePillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="LifestylePillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardLiveBlogLifestylePillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: LifestylePillar, Mode: Light';
+		WebStandardLiveBlogLifestylePillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardLiveBlogLifestylePillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.Lifestyle,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardLiveBlogSpecialReportPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="SpecialReportPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardLiveBlogSpecialReportPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: SpecialReportPillar, Mode: Light';
+		WebStandardLiveBlogSpecialReportPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardLiveBlogSpecialReportPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.SpecialReport,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardLiveBlogLabsPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="LabsPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardLiveBlogLabsPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: LabsPillar, Mode: Light';
+		WebStandardLiveBlogLabsPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardLiveBlogLabsPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.Labs,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardLiveBlogSpecialReportAltPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="SpecialReportAltPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardLiveBlogSpecialReportAltPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: SpecialReportAltPillar, Mode: Light';
+		WebStandardLiveBlogSpecialReportAltPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardLiveBlogSpecialReportAltPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.SpecialReportAlt,
+				}]
+			),
+		];
+
+		
+
 		export const AppsStandardLiveBlogNewsPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
