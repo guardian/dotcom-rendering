@@ -91,5 +91,4 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 
 export const Byline = ({ text, format, size }: Props) => {
 	return <span css={[baseStyles, bylineStyles(size, format)]}>{text}</span>;
-	return <span css={[baseStyles, bylineStyles(size, format)]}>{text}</span>;
 };
