@@ -1420,7 +1420,11 @@ const standfirstLinkBorderDark: PaletteFunction = () => {
 	return sourcePalette.neutral[46];
 };
 
-const standfirstBackground: PaletteFunction = ({ design, display, theme }) => {
+const standfirstBackgroundLight: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			switch (theme) {
@@ -1444,6 +1448,47 @@ const standfirstBackground: PaletteFunction = ({ design, display, theme }) => {
 			}
 		default:
 			return articleBackgroundLight({ design, display, theme });
+	}
+};
+
+const standfirstBackgroundDark: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[10];
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.Opinion:
+					return sourcePalette.opinion[100];
+				case Pillar.Sport:
+					return sourcePalette.sport[100];
+				case Pillar.Culture:
+					return sourcePalette.culture[100];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[100];
+				case Pillar.News:
+				default:
+					return sourcePalette.news[100];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[10];
+			}
+		default:
+			return sourcePalette.neutral[10];
 	}
 };
 
@@ -2861,8 +2906,8 @@ const paletteColours = {
 		dark: standfirstBorder,
 	},
 	'--standfirst-background': {
-		light: standfirstBackground,
-		dark: standfirstBackground,
+		light: standfirstBackgroundLight,
+		dark: standfirstBackgroundDark,
 	},
 	'--card-border-top': {
 		light: cardBorderTopLight,
