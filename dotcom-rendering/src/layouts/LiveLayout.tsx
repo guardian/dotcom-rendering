@@ -478,7 +478,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						fullWidth={true}
 						showTopBorder={false}
 						backgroundColour={themePalette(
-							'--header-blog-background',
+							'--headline-blog-background',
 						)}
 						borderColour={themePalette('--headline-border')}
 					>
