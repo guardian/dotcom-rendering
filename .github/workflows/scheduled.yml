@@ -44,6 +44,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CAPI_KEY: ${{ secrets.CAPI_KEY }}
 
+      - run: corepack enable
+
       # The peer dependencies script relies on `yarn`
       - uses: actions/setup-node@v3
         with:

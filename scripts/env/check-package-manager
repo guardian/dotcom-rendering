@@ -13,11 +13,11 @@ const red = '\x1b[31m';
 const dim = '\x1b[2m';
 
 // get the package manager and version we need from package.json
-const pkgPackageManager = require('../../package.json').packageManger;
+const pkgPackageManager = require('../../package.json').packageManager;
 
 if (!pkgPackageManager) {
 	warn(
-		`The 'packageManger' field is missing from the root package.json, but it is needed by ./scripts/env/check-package-manager (i.e. this file).`,
+		`The 'packageManager' field is missing from the root package.json, but it is needed by ./scripts/env/check-package-manager (i.e. this file).`,
 	);
 	log('Is that deliberate?');
 	process.exit(1);
