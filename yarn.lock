@@ -869,7 +869,7 @@
     json5 "^2.2.2"
     semver "^6.3.0"
 
-"@babel/core@^7.21.3", "@babel/core@^7.23.2":
+"@babel/core@^7.16.7", "@babel/core@^7.21.3":
   version "7.23.3"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.23.3.tgz#5ec09c8803b91f51cc887dedc2654a35852849c9"
   integrity sha512-Jg+msLuNuCJDyBvFv5+OKOUjWMZgd85bKjbICd3zWrKAo+bJ49HJufi7CQE0q0uR8NGyO6xkCACScNqyjHSZew==
@@ -6965,11 +6965,6 @@
   integrity sha512-6i0aC7jV6QzQB8ne1joVZ0eSFIstHsCrobmOtghM11yGlH0j43FKL2UhWdELkyps0zuf7qVTUVCCR+tgSlyLLw==
   dependencies:
     "@types/yargs-parser" "*"
-
-"@types/yarnpkg__lockfile@1.1.6":
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/@types/yarnpkg__lockfile/-/yarnpkg__lockfile-1.1.6.tgz#60a35ede6197d8cbedd5bb8393f3921e8d56d44b"
-  integrity sha512-kbdQa3J+hVCkqmGQm31fthEwGxszZtepw84p9QGCiJB7TmiPqPAf3/g9eZUnkCeanmiFOaG4pVhiPDyqJxaoaw==
 
 "@types/yauzl@^2.9.1":
   version "2.10.0"
