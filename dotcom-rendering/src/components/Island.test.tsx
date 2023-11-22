@@ -9,6 +9,7 @@ import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CommentCount } from './CommentCount.importable';
 import { ConfigProvider } from './ConfigContext';
+import { DiscussionMeta } from './DiscussionMeta.importable';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
@@ -137,6 +138,23 @@ describe('Island: server-side rendering', () => {
 				/>,
 			),
 		).not.toThrow();
+	});
+
+	test('DiscussionMeta', () => {
+		expect(() =>
+			renderToString(
+				<DiscussionMeta
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+					discussionApiUrl={''}
+					shortUrlId={''}
+					enableDiscussionSwitch={false}
+				/>,
+			),
+		);
 	});
 
 	test('EnhancePinnedPost', () => {

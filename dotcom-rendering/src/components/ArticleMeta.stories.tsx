@@ -7,6 +7,7 @@ import {
 } from '@guardian/libs';
 import {
 	breakpoints,
+	from,
 	palette as sourcePalette,
 } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
@@ -187,7 +188,8 @@ export const BrandingLiveBlog: StoryObj = ({ format }: StoryArgs) => {
 			// on screens below desktop size
 			css={css`
 				background-color: ${sourcePalette.sport[100]};
-				@media (min-width: ${breakpoints.desktop}px) {
+
+				${from.desktop} {
 					background-color: inherit;
 				}
 			`}
@@ -477,34 +479,33 @@ TwoContributorsStory.storyName = 'Feature, with two contributors';
 TwoContributorsStory.decorators = [lightDecorator([sportFeatureFormat])];
 TwoContributorsStory.args = { format: sportFeatureFormat };
 
-export const DeadBlogStory: StoryObj = () => {
-	return (
-		<>
-			{getAllThemes({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.DeadBlog,
-			}).map((format) => (
-				<Wrapper key={JSON.stringify(format)}>
-					<p>{getThemeNameAsString(format)}</p>
-					<ArticleMeta
-						format={format}
-						pageId=""
-						webTitle=""
-						byline="Lanre Bakare"
-						tags={tagsWithByTwoContributors}
-						primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-						secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
-						isCommentable={false}
-						discussionApiUrl=""
-						shortUrlId=""
-						ajaxUrl=""
-					/>
-				</Wrapper>
-			))}
-		</>
-	);
-};
+export const DeadBlogStory: StoryObj = ({ format }: StoryArgs) => (
+	<Wrapper key={JSON.stringify(format)}>
+		<p>{getThemeNameAsString(format)}</p>
+		<ArticleMeta
+			format={format}
+			pageId=""
+			webTitle=""
+			byline="Lanre Bakare"
+			tags={tagsWithByTwoContributors}
+			primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+			secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+			isCommentable={false}
+			discussionApiUrl=""
+			shortUrlId=""
+			ajaxUrl=""
+		/>
+	</Wrapper>
+);
 DeadBlogStory.storyName = 'Deadblog - All pillars';
+DeadBlogStory.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.DeadBlog,
+		}),
+	),
+];
 
 export const Dateline: StoryObj = ({ format }: StoryArgs) => {
 	return (

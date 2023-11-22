@@ -208,7 +208,7 @@ export const SignInGateMainCheckoutComplete = ({
 	};
 
 	return (
-		<div css={signInGateContainer} data-cy="sign-in-gate-main">
+		<div css={signInGateContainer} data-testid="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
 			<h1 css={personalisedHeadingStyles}>{getHeadingText(product)}</h1>
@@ -227,7 +227,7 @@ export const SignInGateMainCheckoutComplete = ({
 			</ul>
 			<div css={personalisedActionButtons}>
 				<LinkButton
-					data-cy="sign-in-gate-main_register"
+					data-testid="sign-in-gate-main_register"
 					data-ignore="global-link-styling"
 					css={registerButton}
 					priority="primary"
@@ -246,7 +246,7 @@ export const SignInGateMainCheckoutComplete = ({
 				</LinkButton>
 				{!isMandatory && (
 					<Button
-						data-cy="sign-in-gate-main_dismiss"
+						data-testid="sign-in-gate-main_dismiss"
 						data-ignore="global-link-styling"
 						css={notNowButton}
 						priority="subdued"

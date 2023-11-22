@@ -3,24 +3,16 @@ import { FollowButton } from './FollowButton';
 
 it('should show a follow button for a single contributor when rendering for apps', () => {
 	const { getByText } = render(
-		<FollowButton
-			isFollowing={false}
-			onClickHandler={() => undefined}
-			displayName="Gwyn Topham"
-		/>,
+		<FollowButton isFollowing={false} onClickHandler={() => undefined} />,
 	);
-	expect(getByText('Follow Gwyn Topham')).toBeInTheDocument();
+	expect(getByText('Notifications off')).toBeInTheDocument();
 });
 
 it('should show a follow button for a single contributor when rendering for apps', async () => {
 	const { getByText } = render(
-		<FollowButton
-			onClickHandler={() => undefined}
-			displayName="Gwyn Topham"
-			isFollowing={true}
-		/>,
+		<FollowButton onClickHandler={() => undefined} isFollowing={true} />,
 	);
 	await waitFor(() =>
-		expect(getByText('Unfollow Gwyn Topham')).toBeInTheDocument(),
+		expect(getByText('Notifications on')).toBeInTheDocument(),
 	);
 });

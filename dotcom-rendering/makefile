@@ -28,7 +28,7 @@ riffraff-bundle: clean-dist build cdk-synth
 
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
+	@NODE_ENV=production webpack --config ./webpack/webpack.config.js --progress
 	$(call log, "generating Islands report card")
 	@node ./scripts/islands/island-descriptions.mjs
 
@@ -44,20 +44,20 @@ ci: prod
 
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development webpack serve --config ./webpack/webpack.config.js
 
 dev-variant: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./webpack/webpack.config.js
 
 dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development BUILD_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development BUILD_LEGACY=true webpack serve --config ./webpack/webpack.config.js
 
 dev-debug: clear clean-dist install
 	$(call log, "starting DEV server and debugger")
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
-	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./webpack/webpack.config.js
 
 # storybook #########################################
 
@@ -161,7 +161,7 @@ reinstall: clear clean-deps install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=production webpack --config ./webpack/webpack.config.js
 
 check-env: # private
 	$(call log, "checking environment")

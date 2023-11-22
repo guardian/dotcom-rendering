@@ -145,7 +145,6 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 					<FollowWrapper
 						displayName={soleContributor.title}
 						id={soleContributor.id}
-						format={format}
 					/>
 				</Island>
 			) : null}

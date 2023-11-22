@@ -1,7 +1,4 @@
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../../scripts/webpack/bundles';
+import { BUILD_VARIANT, dcrJavascriptBundle } from '../../../webpack/bundles';
 import { loadSentryOnError, stubSentry } from './loadSentry';
 
 type IsSentryEnabled = {

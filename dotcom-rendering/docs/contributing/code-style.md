@@ -20,7 +20,7 @@
 
 ## TypeScript
 
-We use TSlint and [Prettier](https://prettier.io/) to enforce our TypeScript code style.
+We use ESlint and [Prettier](https://prettier.io/) to enforce our TypeScript code style.
 Running `make fix` after making any changes will fix most things.
 
 There are some styles the linter can't pick up. If you are unsure of anything, [Excel Micro's fork of AirBnB's style

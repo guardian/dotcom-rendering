@@ -44,11 +44,7 @@ export const DiscussionLayout = ({
 				// If we're not hiding an advert stretch to the right
 				stretchRight={!hideAd}
 				leftContent={
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'visible' }}
-					>
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<DiscussionMeta
 							format={format}
 							discussionApiUrl={discussionApiUrl}

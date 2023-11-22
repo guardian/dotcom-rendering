@@ -311,13 +311,7 @@ export const CardHeadline = ({
 				</WithLink>
 			</h3>
 			{!!byline && showByline && (
-				<Byline
-					text={byline}
-					format={format}
-					containerPalette={containerPalette}
-					size={size}
-					isCard={true}
-				/>
+				<Byline text={byline} format={format} size={size} />
 			)}
 		</>
 	);
