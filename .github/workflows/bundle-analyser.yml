@@ -19,7 +19,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
 
       - name: Generate production build
         run: make build

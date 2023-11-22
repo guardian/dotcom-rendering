@@ -25,7 +25,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
 
       - name: Validate AMP
         run: make ampValidation

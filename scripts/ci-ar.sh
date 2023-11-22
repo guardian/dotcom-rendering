@@ -33,7 +33,7 @@ else
     nvm use
 
     npm i -g yarn@1.x
-    yarn --silent --frozen-lockfile
+    yarn --silent --immutable
 
     cd apps-rendering
     yarn test

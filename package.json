@@ -6,14 +6,8 @@
 	"private": true,
 	"workspaces": {
 		"packages": [
+			"apps-rendering",
 			"dotcom-rendering"
-		],
-		"nohoist": [
-			"type-fest",
-			"**/@types/webpack",
-			"**/@types/react",
-			"**/@types/express-serve-static-core",
-			"**/@guardian/**"
 		]
 	},
 	"scripts": {
@@ -48,7 +42,7 @@
 		"tslib": "2.6.2"
 	},
 	"resolutions": {
-		"**/crypto-js": "4.2.0"
+		"crypto-js": "4.2.0"
 	},
-	"packageManager": "yarn@1.22.19"
+	"packageManager": "yarn@4.0.2"
 }
