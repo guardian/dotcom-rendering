@@ -47,7 +47,7 @@ export const TrailTextWrapper = ({
 				css`
 					display: flex;
 					flex-direction: column;
-					color: ${palette('--card-trail-text')};
+					color: ${palette('--card-headline-trail-text')};
 					${body.small({ lineHeight: 'regular' })};
 					font-size: 14px;
 					padding-left: 5px;

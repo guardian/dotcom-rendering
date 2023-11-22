@@ -416,6 +416,7 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette (--card-headline-trail-text) */
 const textCardHeadline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
 
@@ -456,6 +457,7 @@ const textCardHeadline = (format: ArticleFormat): string => {
 
 const textCardStandfirst = textCardHeadline;
 
+/** @deprecated this has been moved to the theme palette (--card-kicker-text) */
 const textCardKicker = (format: ArticleFormat): string => {
 	if (
 		format.theme === ArticleSpecial.SpecialReport &&
@@ -506,6 +508,7 @@ const textCardKicker = (format: ArticleFormat): string => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette (--card-footer-text) */
 const textCardFooter = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[100];
@@ -627,7 +630,7 @@ const backgroundSectionTitle = (format: ArticleFormat): string => {
 			return 'transparent';
 	}
 };
-
+/** @deprecated this has been moved to the theme palette (--card-background) */
 const backgroundCard = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[700];
@@ -1205,7 +1208,7 @@ const borderArticleLinkHover = (format: ArticleFormat): string => {
 	}
 	return pillarPalette[format.theme].main;
 };
-
+/** @deprecated this has been moved to the theme palette (--card-border-top) */
 const topBarCard = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[60];
 	if (format.theme === ArticleSpecial.SpecialReport)
