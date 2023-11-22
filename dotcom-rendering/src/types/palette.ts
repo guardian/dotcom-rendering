@@ -7,13 +7,11 @@ export type Palette = {
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		seriesTitleWhenMatch: Colour;
-		byline: Colour;
 		twitterHandle: Colour;
 		twitterHandleBelowDesktop: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		cardHeadline: Colour;
-		cardByline: Colour;
 		cardKicker: Colour;
 		dynamoHeadline: Colour;
 		dynamoKicker: Colour;
@@ -21,7 +19,6 @@ export type Palette = {
 		linkKicker: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
-		headlineByline: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
 		lastUpdated: Colour;
@@ -60,7 +57,6 @@ export type Palette = {
 		sectionTitle: Colour;
 		card: Colour;
 		headline: Colour;
-		headlineByline: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
 		header: Colour;
@@ -122,7 +118,6 @@ export type Palette = {
 		card: Colour;
 	};
 	hover: {
-		headlineByline: Colour;
 		standfirstLink: Colour;
 		pagination: Colour;
 	};

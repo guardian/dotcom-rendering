@@ -191,7 +191,13 @@ We recommend you update your workspace settings to automatically fix formatting 
     >Preferences: Open Settings (JSON)
     ```
 
-2. Add the key value `"tslint.autoFixOnSave": true,`
+2. Add the following:
+
+    ```
+    "editor.codeActionsOnSave": {
+    	"source.fixAll.eslint": true
+    }
+    ```
 
 If you prefer not to use an editor like VSCode then you can use the following commands to manage formatting and (try to fix) linting errors:
 

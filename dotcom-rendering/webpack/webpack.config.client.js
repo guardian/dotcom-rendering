@@ -20,7 +20,7 @@ const swcLoader = (targets) => [
 	},
 ];
 
-/** @typedef {import('../../src/lib/assets').Build} Build*/
+/** @typedef {import('../src/lib/assets').Build} Build*/
 
 /**
  * @param {Build} build

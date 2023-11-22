@@ -99,7 +99,7 @@ export const CommentCount = ({
 	return (
 		<data
 			css={containerStyles(palette)}
-			data-cy="comment-counts"
+			data-testid="comment-counts"
 			value={`${long} comments on this article`}
 		>
 			<a

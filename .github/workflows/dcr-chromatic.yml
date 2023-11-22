@@ -37,6 +37,8 @@ jobs:
       - run: yarn install --frozen-lockfile
 
       - name: Chromatic - DCR
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
@@ -45,3 +47,4 @@ jobs:
           onlyChanged: true
           untraced: '**/(package*.json|yarn.lock|preview.js)'
           workingDir: dotcom-rendering
+          buildScriptName: 'build-storybook'

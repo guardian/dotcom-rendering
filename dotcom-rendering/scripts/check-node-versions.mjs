@@ -35,7 +35,8 @@ const requiredNodeVersionMatches =
 		},
 		{
 			filepath: 'scripts/deploy/riff-raff.yaml',
-			pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+\.\d+\.\d+)$/m,
+			pattern:
+				/^ +Recipe: dotcom-rendering.*-node-(\d+\.\d+\.\d+)(-v.*)?$/m,
 		},
 		{
 			filepath: '../apps-rendering/riff-raff.yaml',

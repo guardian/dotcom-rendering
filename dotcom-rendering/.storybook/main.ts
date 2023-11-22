@@ -1,12 +1,9 @@
 import path from 'node:path';
 import webpack from 'webpack';
-import {
-	babelExclude,
-	getLoaders,
-} from '../scripts/webpack/webpack.config.client';
+import { babelExclude, getLoaders } from '../webpack/webpack.config.client';
 import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
 import type { StorybookConfig } from '@storybook/react-webpack5';
-import { svgr } from '../scripts/webpack/svg.cjs';
+import { svgr } from '../webpack/svg.cjs';
 
 // Generate dynamic Card and Layout stories
 saveStories();
