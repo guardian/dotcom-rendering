@@ -2876,6 +2876,8 @@ const syndicationButtonBorder: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[86];
 	}
 };
+const mostViewedHeadlineLight = (): string => sourcePalette.neutral[7];
+const mostViewedHeadlineDark = (): string => sourcePalette.neutral[86];
 
 const appsEpicBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
@@ -2884,6 +2886,48 @@ const appsEpicBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
 const appsEpicBorderLight: PaletteFunction = () => sourcePalette.brandAlt[400];
 const appsEpicBorderDark: PaletteFunction = () => sourcePalette.brandAlt[200];
 
+const linkKickerText = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.Analysis:
+			switch (format.theme) {
+				case Pillar.News:
+					return sourcePalette.news[300];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+			}
+		default:
+			switch (format.theme) {
+				case Pillar.News:
+					return sourcePalette.news[200];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.Sport:
+					return sourcePalette.sport[400];
+				case Pillar.Culture:
+					return sourcePalette.culture[400];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+			}
+	}
+};
 // ----- Palette ----- //
 
 /**
@@ -3280,6 +3324,14 @@ const paletteColours = {
 	'--apps-epic-border': {
 		light: appsEpicBorderLight,
 		dark: appsEpicBorderDark,
+	},
+	'--most-viewed-headline': {
+		light: mostViewedHeadlineLight,
+		dark: mostViewedHeadlineDark,
+	},
+	'--link-kicker-text': {
+		light: linkKickerText,
+		dark: linkKickerText,
 	},
 } satisfies PaletteColours;
 

@@ -16,7 +16,6 @@ export type Palette = {
 		dynamoHeadline: Colour;
 		dynamoKicker: Colour;
 		dynamoMeta: Colour;
-		linkKicker: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
 		standfirst: Colour;
