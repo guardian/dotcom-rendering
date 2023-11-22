@@ -59,7 +59,6 @@ export type Palette = {
 		headline: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
-		header: Colour;
 		standfirst: Colour;
 		richLink: Colour;
 		imageTitle: Colour;
