@@ -61,7 +61,7 @@ export const Default = ({ format }: StoryProps) => {
 	);
 };
 Default.storyName = 'default';
-Default.decorators = [splitTheme([defaultFormat])];
+Default.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
 export const InlineMap = ({ format }: StoryProps) => {
 	return (
@@ -82,7 +82,9 @@ export const InlineMap = ({ format }: StoryProps) => {
 	);
 };
 InlineMap.storyName = 'Inline interactive Map';
-InlineMap.decorators = [splitTheme([defaultFormat])];
+InlineMap.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
 
 export const Showcase = ({ format }: StoryProps) => {
 	return (
@@ -104,7 +106,9 @@ export const Showcase = ({ format }: StoryProps) => {
 	);
 };
 Showcase.storyName = 'Showcase interactive element';
-Showcase.decorators = [splitTheme([defaultFormat])];
+Showcase.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
 
 export const WithCaption = ({ format }: StoryProps) => {
 	return (
@@ -127,7 +131,9 @@ export const WithCaption = ({ format }: StoryProps) => {
 	);
 };
 WithCaption.storyName = 'with caption';
-WithCaption.decorators = [splitTheme([defaultFormat])];
+WithCaption.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
 
 export const NonBootJs = ({ format }: StoryProps) => {
 	return (
@@ -149,4 +155,6 @@ export const NonBootJs = ({ format }: StoryProps) => {
 	);
 };
 NonBootJs.storyName = 'Non-boot.js interactive element';
-NonBootJs.decorators = [splitTheme([defaultFormat])];
+NonBootJs.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
