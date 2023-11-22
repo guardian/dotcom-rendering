@@ -98,14 +98,14 @@ const headlineBackgroundLight: PaletteFunction = ({
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[300];
 				default:
-					return sourcePalette.neutral[0];
+					return sourcePalette.neutral[7];
 			}
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Standard:
 			switch (design) {
 				case ArticleDesign.Interview:
-					return sourcePalette.neutral[0];
+					return sourcePalette.neutral[7];
 				default:
 					return 'transparent';
 			}
@@ -1604,7 +1604,7 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 	}
 };
 
-const cardBorderTopLight = ({ theme, design }: ArticleFormat): string => {
+const cardBorderTopLight: PaletteFunction = ({ theme, design }) => {
 	if (theme === ArticleSpecial.SpecialReportAlt)
 		return sourcePalette.neutral[60];
 	if (theme === ArticleSpecial.SpecialReport)
@@ -1635,7 +1635,7 @@ const cardBorderTopLight = ({ theme, design }: ArticleFormat): string => {
 const cardBorderTopDark = (): string => {
 	return sourcePalette.neutral[20];
 };
-const cardAgeTextLight = (format: ArticleFormat): string => {
+const cardAgeTextLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return sourcePalette.specialReportAlt[100];
 
@@ -1651,7 +1651,7 @@ const cardAgeTextLight = (format: ArticleFormat): string => {
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[0];
+					return sourcePalette.neutral[7];
 				default:
 					return sourcePalette.neutral[100];
 			}
@@ -1671,7 +1671,7 @@ const cardAgeTextLight = (format: ArticleFormat): string => {
 const cardAgeTextDark = (): string => {
 	return sourcePalette.neutral[60];
 };
-const cardBackgroundLight = (format: ArticleFormat): string => {
+const cardBackgroundLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return sourcePalette.specialReportAlt[700];
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -1700,7 +1700,7 @@ const cardBackgroundLight = (format: ArticleFormat): string => {
 			return sourcePalette.neutral[97];
 	}
 };
-const cardBackgroundDark = ({ design, theme }: ArticleFormat): string => {
+const cardBackgroundDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			switch (theme) {
@@ -1724,10 +1724,10 @@ const cardBackgroundDark = ({ design, theme }: ArticleFormat): string => {
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[10];
 		default:
-			return sourcePalette.neutral[0];
+			return sourcePalette.neutral[7];
 	}
 };
-const cardHeadlineTextLight = (format: ArticleFormat): string => {
+const cardHeadlineTextLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return sourcePalette.neutral[100];
 
@@ -1738,7 +1738,7 @@ const cardHeadlineTextLight = (format: ArticleFormat): string => {
 		format.design !== ArticleDesign.Gallery &&
 		format.display === ArticleDisplay.Immersive
 	) {
-		return sourcePalette.neutral[0];
+		return sourcePalette.neutral[7];
 	}
 
 	switch (format.design) {
@@ -1749,7 +1749,7 @@ const cardHeadlineTextLight = (format: ArticleFormat): string => {
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[0];
+					return sourcePalette.neutral[7];
 				case Pillar.News:
 				case Pillar.Sport:
 				case Pillar.Opinion:
@@ -1759,14 +1759,14 @@ const cardHeadlineTextLight = (format: ArticleFormat): string => {
 					return sourcePalette.neutral[100];
 			}
 		default:
-			return sourcePalette.neutral[0];
+			return sourcePalette.neutral[7];
 	}
 };
 const cardTextDark = (): string => {
 	return sourcePalette.neutral[86];
 };
 
-const cardBylineKickerTextDark = ({ design, theme }: ArticleFormat): string => {
+const cardBylineKickerTextDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Analysis:
 			switch (theme) {
@@ -1838,7 +1838,7 @@ const cardBylineKickerTextDark = ({ design, theme }: ArticleFormat): string => {
 			}
 	}
 };
-const cardKickerTextLight = (format: ArticleFormat): string => {
+const cardKickerTextLight: PaletteFunction = (format) => {
 	if (
 		format.theme === ArticleSpecial.SpecialReport &&
 		(format.design === ArticleDesign.Comment ||
@@ -1855,7 +1855,7 @@ const cardKickerTextLight = (format: ArticleFormat): string => {
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[0];
+					return sourcePalette.neutral[7];
 				case Pillar.News:
 					return sourcePalette.news[600];
 				case Pillar.Sport:
