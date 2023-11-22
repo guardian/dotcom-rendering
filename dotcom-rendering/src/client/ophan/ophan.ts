@@ -99,6 +99,15 @@ export const submitEvent = async (
 	log('dotcom', '🧿 Ophan event recorded:', event);
 };
 
+export const record = async (
+	data: { [key: string]: string | number },
+	renderingTarget: RenderingTarget,
+): Promise<void> => {
+	const ophan = await getOphan(renderingTarget);
+	ophan.record(data);
+	log('dotcom', '🧿 Ophan data recorded:', data);
+};
+
 export const submitComponentEvent = async (
 	componentEvent: OphanComponentEvent,
 	renderingTarget: RenderingTarget,

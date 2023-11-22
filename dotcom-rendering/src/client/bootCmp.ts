@@ -8,7 +8,7 @@ import type {
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { submitComponentEvent, submitEvent } from './ophan/ophan';
+import { submitComponentEvent, record } from './ophan/ophan';
 
 const submitConsentEventsToOphan = (renderingTarget: RenderingTarget) =>
 	onConsent().then((consentState: ConsentState) => {
@@ -112,7 +112,7 @@ const submitConsentToOphan = (renderingTarget: RenderingTarget) =>
 				: 'false';
 		}
 
-		return submitEvent(
+		return record(
 			{
 				consentJurisdiction,
 				consentUUID,
