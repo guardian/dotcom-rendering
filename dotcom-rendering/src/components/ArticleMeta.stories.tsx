@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import {
 	breakpoints,
 	from,
@@ -82,7 +77,7 @@ const defaultFormat: ArticleFormat = {
 	theme: Pillar.News,
 };
 
-export const ArticleStory: StoryObj = ({ format }: StoryArgs) => {
+export const Web: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
@@ -101,10 +96,10 @@ export const ArticleStory: StoryObj = ({ format }: StoryArgs) => {
 		</Wrapper>
 	);
 };
-ArticleStory.storyName = 'Article';
-ArticleStory.args = { format: defaultFormat };
+Web.parameters = { config: { renderingTarget: 'Web' } };
+Web.decorators = [splitTheme()];
 
-export const ArticleAppsStory: StoryObj = ({ format }: StoryArgs) => {
+export const Apps: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
@@ -123,10 +118,8 @@ export const ArticleAppsStory: StoryObj = ({ format }: StoryArgs) => {
 		</Wrapper>
 	);
 };
-/** @see /dotcom-rendering/docs/development/storybook.md */
-ArticleAppsStory.args = { format: defaultFormat };
-ArticleAppsStory.parameters = { config: { renderingTarget: 'Apps' } };
-ArticleAppsStory.decorators = [splitTheme([defaultFormat])];
+Apps.parameters = { config: { renderingTarget: 'Apps' } };
+Apps.decorators = [splitTheme()];
 
 const branding: BrandingType = {
 	brandingType: { name: 'sponsored' },
@@ -229,34 +222,6 @@ BrandingLiveBlog.decorators = [
 	]),
 ];
 
-const featureFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Feature,
-	theme: Pillar.Culture,
-};
-export const FeatureStory: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Wrapper>
-			<ArticleMeta
-				format={format}
-				pageId=""
-				webTitle=""
-				byline="Lanre Bakare"
-				tags={tagsWithLargeBylineImage}
-				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
-				isCommentable={false}
-				discussionApiUrl=""
-				shortUrlId=""
-				ajaxUrl=""
-			/>
-		</Wrapper>
-	);
-};
-FeatureStory.storyName = 'Feature';
-FeatureStory.decorators = [splitTheme([featureFormat])];
-FeatureStory.args = { format: featureFormat };
-
 export const FeatureWithMismatchedContributor: StoryObj = ({
 	format,
 }: StoryArgs) => {
@@ -280,10 +245,16 @@ export const FeatureWithMismatchedContributor: StoryObj = ({
 };
 FeatureWithMismatchedContributor.storyName =
 	'Feature with a byline mismatching the contributor tag';
-FeatureWithMismatchedContributor.decorators = [splitTheme([featureFormat])];
-FeatureWithMismatchedContributor.args = { format: featureFormat };
+FeatureWithMismatchedContributor.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+		}),
+	),
+];
 
-export const FeatureStoryWithSmallBylineImage: StoryObj = ({
+export const FeatureWithSmallBylineImage: StoryObj = ({
 	format,
 }: StoryArgs) => {
 	return (
@@ -304,16 +275,17 @@ export const FeatureStoryWithSmallBylineImage: StoryObj = ({
 		</Wrapper>
 	);
 };
-FeatureStoryWithSmallBylineImage.storyName = 'Feature with Small Byline Image';
-FeatureStoryWithSmallBylineImage.decorators = [splitTheme([featureFormat])];
-FeatureStoryWithSmallBylineImage.args = { format: featureFormat };
+FeatureWithSmallBylineImage.storyName = 'Feature with Small Byline Image';
+FeatureWithSmallBylineImage.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+		}),
+	),
+];
 
-const specialReportFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Feature,
-	theme: ArticleSpecial.SpecialReport,
-};
-export const SpecialReportStory: StoryObj = ({ format }: StoryArgs) => {
+export const Comment: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
@@ -332,16 +304,16 @@ export const SpecialReportStory: StoryObj = ({ format }: StoryArgs) => {
 		</Wrapper>
 	);
 };
-SpecialReportStory.storyName = 'SpecialReport';
-SpecialReportStory.decorators = [splitTheme([specialReportFormat])];
-SpecialReportStory.args = { format: specialReportFormat };
+Comment.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+		}),
+	),
+];
 
-const specialReportAltFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Feature,
-	theme: ArticleSpecial.SpecialReportAlt,
-};
-export const SpecialReportAlt: StoryObj = ({ format }: StoryArgs) => {
+export const Interview: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
@@ -360,71 +332,15 @@ export const SpecialReportAlt: StoryObj = ({ format }: StoryArgs) => {
 		</Wrapper>
 	);
 };
-SpecialReportAlt.storyName = 'SpecialReportAlt';
-SpecialReportAlt.decorators = [splitTheme([specialReportAltFormat])];
-SpecialReportAlt.args = { format: specialReportAltFormat };
+Interview.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Interview,
+		}),
+	),
+];
 
-const commentFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Comment,
-	theme: Pillar.Opinion,
-};
-export const CommentStory: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Wrapper>
-			<ArticleMeta
-				format={format}
-				pageId=""
-				webTitle=""
-				byline="Lanre Bakare"
-				tags={tagsWithLargeBylineImage}
-				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
-				isCommentable={false}
-				discussionApiUrl=""
-				shortUrlId=""
-				ajaxUrl=""
-			/>
-		</Wrapper>
-	);
-};
-CommentStory.storyName = 'Comment';
-CommentStory.decorators = [splitTheme([commentFormat])];
-CommentStory.args = { format: commentFormat };
-
-const interviewFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Interview,
-	theme: Pillar.Lifestyle,
-};
-export const InterviewStory: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Wrapper>
-			<ArticleMeta
-				format={format}
-				pageId=""
-				webTitle=""
-				byline="Lanre Bakare"
-				tags={tagsWithLargeBylineImage}
-				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
-				isCommentable={false}
-				discussionApiUrl=""
-				shortUrlId=""
-				ajaxUrl=""
-			/>
-		</Wrapper>
-	);
-};
-InterviewStory.storyName = 'Interview';
-InterviewStory.decorators = [splitTheme([interviewFormat])];
-InterviewStory.args = { format: interviewFormat };
-
-const immersiveFormat = {
-	display: ArticleDisplay.Immersive,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
-};
 export const ImmersiveStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
@@ -445,15 +361,16 @@ export const ImmersiveStory: StoryObj = ({ format }: StoryArgs) => {
 	);
 };
 ImmersiveStory.storyName = 'Immersive';
-ImmersiveStory.decorators = [splitTheme([immersiveFormat])];
-ImmersiveStory.args = { format: immersiveFormat };
+ImmersiveStory.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+		}),
+	),
+];
 
-const sportFeatureFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Feature,
-	theme: Pillar.Sport,
-};
-export const TwoContributorsStory: StoryObj = ({ format }: StoryArgs) => {
+export const FeatureTwoContributors: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
@@ -472,11 +389,17 @@ export const TwoContributorsStory: StoryObj = ({ format }: StoryArgs) => {
 		</Wrapper>
 	);
 };
-TwoContributorsStory.storyName = 'Feature, with two contributors';
-TwoContributorsStory.decorators = [splitTheme([sportFeatureFormat])];
-TwoContributorsStory.args = { format: sportFeatureFormat };
+FeatureTwoContributors.storyName = 'Feature, with two contributors';
+FeatureTwoContributors.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+		}),
+	),
+];
 
-export const DeadBlogStory: StoryObj = ({ format }: StoryArgs) => (
+export const DeadBlog: StoryObj = ({ format }: StoryArgs) => (
 	<Wrapper key={JSON.stringify(format)}>
 		<p>{getThemeNameAsString(format)}</p>
 		<ArticleMeta
@@ -494,8 +417,7 @@ export const DeadBlogStory: StoryObj = ({ format }: StoryArgs) => (
 		/>
 	</Wrapper>
 );
-DeadBlogStory.storyName = 'Deadblog - All pillars';
-DeadBlogStory.decorators = [
+DeadBlog.decorators = [
 	splitTheme(
 		getAllThemes({
 			display: ArticleDisplay.Standard,
