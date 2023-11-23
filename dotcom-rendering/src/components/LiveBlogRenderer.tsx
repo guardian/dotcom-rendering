@@ -154,7 +154,6 @@ export const LiveBlogRenderer = ({
 					// but this island manipulate the DOM via portals,
 					// its actual position has no bearing on its effect
 					defer={{ until: 'idle' }}
-					clientOnly={true}
 				>
 					<LiveBlogEpic
 						sectionId={sectionId}
