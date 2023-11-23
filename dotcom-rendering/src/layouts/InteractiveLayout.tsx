@@ -218,14 +218,15 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 		config: { isPaidContent, host },
 	} = article;
 
-	const showComments = article.isCommentable;
+	const isApps = renderingTarget === 'Apps';
+	const isWeb = renderingTarget === 'Web';
+
+	const showComments = isWeb && article.isCommentable;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const isApps = renderingTarget === 'Apps';
-	const isWeb = renderingTarget === 'Web';
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
@@ -714,7 +715,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{!isPaidContent && (
+				{isWeb && !isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}

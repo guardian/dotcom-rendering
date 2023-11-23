@@ -259,7 +259,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
-	const showComments = article.isCommentable;
+	const showComments = isWeb && article.isCommentable;
 
 	const { branding } = article.commercialProperties[article.editionId];
 

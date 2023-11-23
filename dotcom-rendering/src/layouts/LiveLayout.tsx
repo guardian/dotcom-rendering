@@ -1217,7 +1217,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Island>
 
-					{!isPaidContent && article.isCommentable && (
+					{isWeb && !isPaidContent && article.isCommentable && (
 						<Section
 							fullWidth={true}
 							showTopBorder={false}
@@ -1246,7 +1246,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					)}
 
-					{!isPaidContent && (
+					{isWeb && !isPaidContent && (
 						<Section
 							title="Most viewed"
 							padContent={false}

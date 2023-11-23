@@ -219,9 +219,11 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 
 	const showBodyEndSlot =
-		renderingTarget === 'Web' &&
+		isWeb &&
 		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
 			article.config.switches.slotBodyEnd);
 
@@ -229,19 +231,19 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
-	const showComments = article.isCommentable;
+	const showComments = isWeb && article.isCommentable;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const renderAds = renderingTarget === 'Web' && canRenderAds(article);
+	const renderAds = isWeb && canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	return (
 		<>
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<>
 					{!isLabs ? (
 						<>
@@ -470,7 +472,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
-				{renderingTarget === 'Apps' && (
+				{isApps && (
 					<Island priority="critical">
 						<AdPortals />
 					</Island>
@@ -670,8 +672,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons &&
-										renderingTarget === 'Web'
+										article.showBottomSocialButtons && isWeb
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -743,7 +744,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderingTarget === 'Web' && (
+				{isWeb && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
@@ -791,7 +792,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderingTarget === 'Web' && !isPaidContent && (
+				{isWeb && !isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}
@@ -834,7 +835,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				)}
 			</main>
 
-			{renderingTarget === 'Web' && props.NAV.subNavSections && (
+			{isWeb && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
@@ -849,7 +850,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				</Section>
 			)}
 
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<>
 					<Section
 						fullWidth={true}
@@ -905,7 +906,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				</>
 			)}
 
-			{renderingTarget === 'Apps' && (
+			{isApps && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"

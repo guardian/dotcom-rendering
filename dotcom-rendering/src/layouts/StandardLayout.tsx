@@ -327,7 +327,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	const showComments = article.isCommentable;
+	const showComments = isWeb && article.isCommentable;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
@@ -887,7 +887,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</Section>
 						)}
 
-						{!isPaidContent && (
+						{isWeb && !isPaidContent && (
 							<Section
 								title="Most viewed"
 								padContent={false}
