@@ -620,6 +620,63 @@ const bylineUnderline: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const datelineLight: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[20];
+			}
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.Interview:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.Review:
+		case ArticleDesign.Standard:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[100];
+				default:
+					return sourcePalette.neutral[46];
+			}
+		default:
+			return sourcePalette.neutral[46];
+	}
+};
+
+const datelineDark: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[93];
+				default:
+					return sourcePalette.neutral[60];
+			}
+		default:
+			return sourcePalette.neutral[60];
+	}
+};
+
 const headlineBorder: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
@@ -2929,6 +2986,10 @@ const paletteColours = {
 	'--byline-hover': {
 		light: bylineHoverLight,
 		dark: bylineHoverDark,
+	},
+	'--dateline': {
+		light: datelineLight,
+		dark: datelineDark,
 	},
 	'--headline-colour': {
 		light: headlineColourLight,

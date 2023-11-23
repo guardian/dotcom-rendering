@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	isString,
+} from '@guardian/libs';
 import {
 	between,
 	border,
@@ -363,13 +368,14 @@ export const ArticleMeta = ({
 						)}
 
 						<div>
-							{shouldShowContributor(format) && !!byline && (
-								<Contributor
-									byline={byline}
-									tags={tags}
-									format={format}
-								/>
-							)}
+							{shouldShowContributor(format) &&
+								isString(byline) && (
+									<Contributor
+										byline={byline}
+										tags={tags}
+										format={format}
+									/>
+								)}
 							{messageUs &&
 								format.design === ArticleDesign.LiveBlog && (
 									<Island
