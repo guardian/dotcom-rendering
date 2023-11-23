@@ -2899,7 +2899,21 @@ const dropCapLight: PaletteFunction = (format) => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
-			return sourcePalette.opinion[400];
+			switch (format.theme) {
+				case Pillar.Opinion:
+					return sourcePalette.opinion[400];
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(format.theme, 300);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReport[100];
+			}
 
 		default:
 			switch (format.theme) {

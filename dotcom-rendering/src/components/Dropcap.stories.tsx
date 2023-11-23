@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { body } from '@guardian/source-foundations';
-import { DropCap } from './DropCap';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { DropCap } from './DropCap';
 
 export default {
 	component: DropCap,
