@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { TextBlockComponent } from './TextBlockComponent';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { TextBlockComponent } from './TextBlockComponent';
 
 const html =
 	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>';

@@ -3387,6 +3387,7 @@ const paletteColours = {
 	'--drop-cap': {
 		light: dropCapLight,
 		dark: dropCapDark,
+	},
 	'--apps-epic-background': {
 		light: appsEpicBackgroundLight,
 		dark: appsEpicBackgroundDark,
