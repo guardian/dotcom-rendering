@@ -1,5 +1,6 @@
 import * as User from '@guardian/bridget/User';
 import * as Acquisitions from '@guardian/bridget/Acquisitions';
+import * as Notifications from '@guardian/bridget/Notifications';
 /**
  * This is a mock logger to replace [bridgetApi.ts][]
  *
@@ -8,6 +9,7 @@ import * as Acquisitions from '@guardian/bridget/Acquisitions';
 
 export const getUserClient: () => Partial<User.Client<void>> = () => ({
 	isPremium: async () => false,
+	doesCcpaApply: async () => false,
 });
 
 export const getAcquisitionsClient: () => Partial<
@@ -21,4 +23,10 @@ export const getAcquisitionsClient: () => Partial<
 		},
 	}),
 	epicSeen: async () => {},
+});
+
+export const getNotificationsClient: () => Partial<
+	Notifications.Client<void>
+> = () => ({
+	isFollowing: async () => false,
 });
