@@ -367,6 +367,8 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[100];
 			}
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case Pillar.News:
@@ -441,6 +443,8 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 			}
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[60];
 		default:
 			switch (theme) {
 				case Pillar.News:

@@ -1,14 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import {
-	breakpoints,
-	from,
-	palette as sourcePalette,
-} from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { browserThemeDecorator } from '../../.storybook/decorators/themeDecorator';
-import { getAllThemes, getThemeNameAsString } from '../lib/format';
+import { getAllThemes } from '../lib/format';
+import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import { ArticleMeta } from './ArticleMeta';
 
@@ -177,7 +174,7 @@ export const BrandingLiveBlog: StoryObj = ({ format }: StoryArgs) => {
 			// Demonstrates niche requirement of liveblog article meta
 			// on screens below desktop size
 			css={css`
-				background-color: ${sourcePalette.sport[100]};
+				background-color: ${palette('--standfirst-background')};
 
 				${from.desktop} {
 					background-color: inherit;
@@ -204,7 +201,6 @@ export const BrandingLiveBlog: StoryObj = ({ format }: StoryArgs) => {
 	);
 };
 BrandingLiveBlog.storyName = 'Branding - LiveBlog';
-BrandingLiveBlog.args = { format: defaultFormat };
 BrandingLiveBlog.parameters = {
 	viewport: {
 		defaultViewport: 'tablet',
@@ -213,13 +209,12 @@ BrandingLiveBlog.parameters = {
 	config: { darkModeAvailable: true },
 };
 BrandingLiveBlog.decorators = [
-	splitTheme([
-		{
-			...defaultFormat,
-			theme: Pillar.Sport,
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
 			design: ArticleDesign.LiveBlog,
-		},
-	]),
+		}),
+	),
 ];
 
 export const FeatureWithMismatchedContributor: StoryObj = ({
@@ -400,8 +395,7 @@ FeatureTwoContributors.decorators = [
 ];
 
 export const DeadBlog: StoryObj = ({ format }: StoryArgs) => (
-	<Wrapper key={JSON.stringify(format)}>
-		<p>{getThemeNameAsString(format)}</p>
+	<Wrapper>
 		<ArticleMeta
 			format={format}
 			pageId=""

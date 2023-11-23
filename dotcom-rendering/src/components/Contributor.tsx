@@ -37,6 +37,10 @@ const twitterHandleStyles = css`
 const standfirstColourBelowDesktop = css`
 	${until.desktop} {
 		color: ${schemedPalette('--standfirst-text')};
+
+		a {
+			color: ${schemedPalette('--standfirst-text')};
+		}
 	}
 `;
 
