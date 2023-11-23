@@ -1,6 +1,7 @@
 import { Hide } from '@guardian/source-react-components';
 import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { FilterKeyEventsToggle } from './FilterKeyEventsToggle.importable';
 import { Island } from './Island';
@@ -62,6 +63,9 @@ export const LiveBlogRenderer = ({
 	selectedTopics,
 	isInLiveblogAdSlotTest = false,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+	const isWeb = renderingTarget === 'Web';
+
 	const filtered =
 		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
 
@@ -143,7 +147,7 @@ export const LiveBlogRenderer = ({
 				pinnedPost={pinnedPost}
 				isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 			/>
-			{blocks.length > 4 && (
+			{isWeb && blocks.length > 4 && (
 				<Island
 					priority="feature"
 					// this should really be deferred until visible,
