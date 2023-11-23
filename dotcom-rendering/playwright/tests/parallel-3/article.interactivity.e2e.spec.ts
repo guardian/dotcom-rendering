@@ -158,7 +158,9 @@ test.describe('Interactivity', () => {
 					.filter({ hasText: 'Most Viewed' }),
 			).toBeVisible();
 
-			await waitForIsland(page, 'MostViewedFooterData');
+			await waitForIsland(page, 'MostViewedFooterData', {
+				status: 'hydrated',
+			});
 			await expect(
 				page
 					.locator(`gu-island[name="MostViewedFooterData"]`)

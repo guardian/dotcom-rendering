@@ -19,6 +19,7 @@ import { LightboxJavascript } from './LightboxJavascript.importable';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
+import { MostViewedFooterData } from './MostViewedFooterData.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
@@ -278,6 +279,22 @@ describe('Island: server-side rendering', () => {
 				>
 					<Metrics commercialMetricsEnabled={true} tests={{}} />
 				</ConfigProvider>,
+			),
+		).not.toThrow();
+	});
+
+	test('MostViewedFooterData', () => {
+		expect(() =>
+			renderToString(
+				<MostViewedFooterData
+					ajaxUrl={''}
+					edition={'UK'}
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+				/>,
 			),
 		).not.toThrow();
 	});

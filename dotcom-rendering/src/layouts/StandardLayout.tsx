@@ -904,7 +904,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<MostViewedFooterLayout renderAds={renderAds}>
 									<Island
 										priority="feature"
-										clientOnly={true}
 										defer={{ until: 'visible' }}
 									>
 										<MostViewedFooterData
