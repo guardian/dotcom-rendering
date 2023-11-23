@@ -697,10 +697,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									)}
 
 								{isApps && (
-									<Island
-										priority="critical"
-										clientOnly={true}
-									>
+									<Island priority="critical">
 										<AppsEpic />
 									</Island>
 								)}

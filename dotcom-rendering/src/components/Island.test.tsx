@@ -5,6 +5,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { AppsEpic } from './AppsEpic.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CommentCount } from './CommentCount.importable';
@@ -96,6 +97,10 @@ const Mock = () => <>🏝️</>;
 describe('Island: server-side rendering', () => {
 	test('AlreadyVisited', () => {
 		expect(() => renderToString(<AlreadyVisited />)).not.toThrow();
+	});
+
+	test('AppsEpic', () => {
+		expect(() => renderToString(<AppsEpic />)).not.toThrow();
 	});
 
 	test('BrazeMessaging', () => {
