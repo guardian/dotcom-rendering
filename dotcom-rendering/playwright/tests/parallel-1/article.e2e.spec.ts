@@ -87,7 +87,9 @@ test.describe('E2E Page rendering', () => {
 			).toBeVisible();
 
 			// expect most read footer to be loaded, its data response and its text to be visible
-			await waitForIsland(page, 'MostViewedFooterData');
+			await waitForIsland(page, 'MostViewedFooterData', {
+				status: 'hydrated',
+			});
 			await mostReadFooterResponsePromise;
 			await expect(
 				page

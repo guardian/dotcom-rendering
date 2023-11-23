@@ -841,7 +841,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
 								priority="feature"
-								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
 								<MostViewedFooterData

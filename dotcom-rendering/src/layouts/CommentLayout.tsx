@@ -821,7 +821,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
 								priority="feature"
-								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
 								<MostViewedFooterData
