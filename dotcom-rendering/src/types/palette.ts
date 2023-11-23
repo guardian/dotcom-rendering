@@ -7,8 +7,6 @@ export type Palette = {
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		seriesTitleWhenMatch: Colour;
-		twitterHandle: Colour;
-		twitterHandleBelowDesktop: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		cardHeadline: Colour;
@@ -87,8 +85,6 @@ export type Palette = {
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
-		twitterHandleBelowDesktop: Colour;
-		twitterHandle: Colour;
 		guardianLogo: Colour;
 	};
 	border: {

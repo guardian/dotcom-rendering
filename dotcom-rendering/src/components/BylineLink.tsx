@@ -1,4 +1,4 @@
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, isString } from '@guardian/libs';
 import {
 	getBylineComponentsFromTokens,
 	getSoleContributor,
@@ -94,7 +94,7 @@ const ContributorLink = ({
 	<a
 		rel="author"
 		data-link-name="auto tag link"
-		href={`//www.theguardian.com/${contributorTagId}`}
+		href={`https://www.theguardian.com/${contributorTagId}`}
 	>
 		{contributor}
 	</a>
@@ -113,7 +113,7 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
 
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
-		if (typeof bylineComponent === 'string') {
+		if (isString(bylineComponent)) {
 			const displayString =
 				format.design === ArticleDesign.Analysis && hasSoleContributor
 					? removeComma(bylineComponent)
