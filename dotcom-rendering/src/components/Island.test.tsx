@@ -5,6 +5,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { AppEmailSignUp } from './AppEmailSignUp.importable';
 import { AppsEpic } from './AppsEpic.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
@@ -98,6 +99,22 @@ const Mock = () => <>🏝️</>;
 describe('Island: server-side rendering', () => {
 	test('AlreadyVisited', () => {
 		expect(() => renderToString(<AlreadyVisited />)).not.toThrow();
+	});
+
+	test('AppEmailSignup', () => {
+		expect(() =>
+			renderToString(
+				<AppEmailSignUp
+					skipToIndex={0}
+					identityName={''}
+					successDescription={''}
+					name={''}
+					description={''}
+					frequency={''}
+					theme={''}
+				/>,
+			),
+		).not.toThrow();
 	});
 
 	test('AppsEpic', () => {
