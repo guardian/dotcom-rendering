@@ -143,7 +143,7 @@ const branding: BrandingType = {
 		'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
 };
 
-export const BrandingStory: StoryObj = ({ format }: StoryArgs) => {
+export const Branding: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
@@ -163,10 +163,9 @@ export const BrandingStory: StoryObj = ({ format }: StoryArgs) => {
 		</Wrapper>
 	);
 };
-BrandingStory.storyName = 'Branding';
-BrandingStory.args = { format: defaultFormat };
-BrandingStory.parameters = { config: { darkModeAvailable: true } };
-BrandingStory.decorators = [browserThemeDecorator(defaultFormat)];
+Branding.args = { format: defaultFormat };
+Branding.parameters = { config: { darkModeAvailable: true } };
+Branding.decorators = [browserThemeDecorator(defaultFormat)];
 
 export const BrandingLiveBlog: StoryObj = ({ format }: StoryArgs) => {
 	return (
@@ -336,7 +335,7 @@ Interview.decorators = [
 	),
 ];
 
-export const ImmersiveStory: StoryObj = ({ format }: StoryArgs) => {
+export const Immersive: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
@@ -355,8 +354,7 @@ export const ImmersiveStory: StoryObj = ({ format }: StoryArgs) => {
 		</Wrapper>
 	);
 };
-ImmersiveStory.storyName = 'Immersive';
-ImmersiveStory.decorators = [
+Immersive.decorators = [
 	splitTheme(
 		getAllThemes({
 			display: ArticleDisplay.Immersive,
