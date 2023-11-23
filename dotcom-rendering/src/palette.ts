@@ -1748,6 +1748,32 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 	}
 };
 
+const twitterHandleLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[0];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+		default:
+			return sourcePalette.neutral[46];
+	}
+};
+
+const twitterHandleDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[86];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[700];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[700];
+		default:
+			return sourcePalette.neutral[60];
+	}
+};
+
 const cardBorderTopLight: PaletteFunction = ({ theme, design }) => {
 	if (theme === ArticleSpecial.SpecialReportAlt)
 		return sourcePalette.neutral[60];
@@ -3014,6 +3040,10 @@ const paletteColours = {
 	'--star-rating-background': {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
+	},
+	'--twitter-handle': {
+		light: twitterHandleLight,
+		dark: twitterHandleDark,
 	},
 	'--block-quote-fill': {
 		light: blockQuoteFillLight,

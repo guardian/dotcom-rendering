@@ -214,22 +214,6 @@ const textLastUpdated = (format: ArticleFormat): string => {
 	return BLACK;
 };
 
-const textTwitterHandle = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return palette.specialReportAlt[100];
-
-	return text.supporting;
-};
-
-const textTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) return WHITE;
-
-	return textTwitterHandle(format);
-};
-
 /** @deprecated this has been moved to the theme palette (--article-link-text) */
 const textArticleLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -941,29 +925,10 @@ const fillBlockquoteIcon = (format: ArticleFormat): string => {
 	}
 };
 
-const fillTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) return WHITE;
-
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.DeadBlog
-	)
-		return palette.specialReportAlt[100];
-
-	return neutral[46];
-};
-
 const fillGuardianLogo = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.NewsletterSignup) return WHITE;
 
 	return WHITE;
-};
-
-const fillTwitterHandle = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return palette.specialReportAlt[100];
-
-	return neutral[46];
 };
 
 /** @deprecated this has been moved to the theme palette */
@@ -1768,8 +1733,6 @@ export const decidePalette = (
 			seriesTitle: textSeriesTitle(format),
 			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
 			sectionTitle: textSectionTitle(format),
-			twitterHandle: textTwitterHandle(format),
-			twitterHandleBelowDesktop: textTwitterHandleBelowDesktop(format),
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline:
@@ -1854,8 +1817,6 @@ export const decidePalette = (
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),
-			twitterHandleBelowDesktop: fillTwitterHandleBelowDesktop(format),
-			twitterHandle: fillTwitterHandle(format),
 			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {
