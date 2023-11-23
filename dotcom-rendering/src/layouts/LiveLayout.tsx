@@ -651,7 +651,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								`}
 							/>
 							<Island
-								clientOnly={true}
 								priority="feature"
 								defer={{ until: 'idle' }}
 							>
