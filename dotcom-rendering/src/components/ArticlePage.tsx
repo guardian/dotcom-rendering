@@ -71,7 +71,8 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							color: ${sourcePalette.neutral[7]};
 						}
 						/* Dark palette only for apps and only if switch turned on */
-						${renderingTarget === 'Apps'
+						${article.config.switches.darkModeInApps &&
+						renderingTarget === 'Apps'
 							? css`
 									@media (prefers-color-scheme: dark) {
 										${paletteDeclarations(format, 'dark')}
