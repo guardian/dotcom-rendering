@@ -10,12 +10,17 @@ const year = new Date().getFullYear();
 const footerStyles = css`
 	${textSans.small({ lineHeight: 'regular' })}
 	padding: ${remSpace[4]} ${remSpace[3]};
+	background-color: ${palette('--apps-footer-background')};
 `;
 
 const linkStyles = css`
 	${textSans.small({ lineHeight: 'regular' })};
 	color: ${palette('--apps-footer-links-text')};
-	background-color: ${palette('--apps-footer-links-background')};
+
+	:active,
+	:hover {
+		color: ${palette('--apps-footer-links-text-hover')};
+	}
 `;
 
 type PrivacySettingsProps = {
