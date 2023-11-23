@@ -20,7 +20,7 @@ const baseBlockquoteStyles = css`
 		lineHeight: 'loose',
 	})};
 
-	color: ${palette('--block-quote-text-styles')};
+	color: ${palette('--block-quote-text')};
 
 	p {
 		margin-bottom: 8px;

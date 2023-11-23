@@ -1206,7 +1206,7 @@ const blockQuoteFillDark: PaletteFunction = ({
 			}
 	}
 };
-const blockquoteTextStylesLight: PaletteFunction = (format: ArticleFormat) => {
+const blockquoteTextLight: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
@@ -1237,7 +1237,7 @@ const blockquoteTextStylesLight: PaletteFunction = (format: ArticleFormat) => {
 			}
 	}
 };
-const blockquoteTextStylesDark: PaletteFunction = (format: ArticleFormat) => {
+const blockquoteTextDark: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
@@ -1264,7 +1264,7 @@ const blockquoteTextStylesDark: PaletteFunction = (format: ArticleFormat) => {
 	}
 };
 
-const blockQuoteLinkStylesLight: PaletteFunction = (format: ArticleFormat) => {
+const blockQuoteLinkLight: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
 		case Pillar.Sport:
@@ -1281,7 +1281,7 @@ const blockQuoteLinkStylesLight: PaletteFunction = (format: ArticleFormat) => {
 	}
 };
 
-const blockQuoteLinkStylesDark: PaletteFunction = (format: ArticleFormat) => {
+const blockQuoteLinkDark: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
 		case Pillar.Sport:
@@ -2796,13 +2796,13 @@ const pullQuoteTextDark: PaletteFunction = ({
 };
 
 const pullQuoteBackgroundLight: PaletteFunction = (format: ArticleFormat) => {
-	const articleBackground = decidePalette(format).background.article;
+	const articleBackground = articleBackgroundLight(format);
 	if (articleBackground === 'transparent') return sourcePalette.neutral[100];
 	return articleBackground;
 };
 
 const pullQuoteBackgroundDark: PaletteFunction = (format: ArticleFormat) => {
-	const articleBackground = decidePalette(format).background.article;
+	const articleBackground = articleBackgroundLight(format);
 	if (articleBackground === 'transparent') return sourcePalette.neutral[0];
 	return articleBackground;
 };
@@ -3435,13 +3435,13 @@ const paletteColours = {
 		light: blockQuoteFillLight,
 		dark: blockQuoteFillDark,
 	},
-	'--block-quote-text-styles': {
-		light: blockquoteTextStylesLight,
-		dark: blockquoteTextStylesDark,
+	'--block-quote-text': {
+		light: blockquoteTextLight,
+		dark: blockquoteTextDark,
 	},
-	'--block-quote-link-styles': {
-		light: blockQuoteLinkStylesLight,
-		dark: blockQuoteLinkStylesDark,
+	'--block-quote-link': {
+		light: blockQuoteLinkLight,
+		dark: blockQuoteLinkDark,
 	},
 	'--accordion-title-row-fill': {
 		light: accordionTitleRowFillLight,
