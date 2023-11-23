@@ -1444,6 +1444,7 @@ const textCarouselTitle = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+/** @deprecated this has been moved to the theme palette (--drop-cap) */
 const textDropCap = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Analysis: {
