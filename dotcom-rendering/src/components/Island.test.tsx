@@ -30,6 +30,7 @@ import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
+import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { Snow } from './Snow.importable';
@@ -403,6 +404,10 @@ describe('Island: server-side rendering', () => {
 				/>,
 			),
 		).not.toThrow();
+	});
+
+	test('ShowHideContainers', () => {
+		expect(() => renderToString(<ShowHideContainers />)).not.toThrow();
 	});
 
 	test('SignInGateSelector', () => {

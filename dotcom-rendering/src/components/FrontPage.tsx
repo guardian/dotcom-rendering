@@ -71,11 +71,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 					tests={front.config.abTests}
 				/>
 			</Island>
-			<Island
-				priority="enhancement"
-				defer={{ until: 'idle' }}
-				clientOnly={true}
-			>
+			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<ShowHideContainers />
 			</Island>
 			<Island priority="critical" clientOnly={true}>
