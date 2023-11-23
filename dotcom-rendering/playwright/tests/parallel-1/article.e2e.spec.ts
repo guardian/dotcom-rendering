@@ -78,7 +78,9 @@ test.describe('E2E Page rendering', () => {
 			).toBeVisible();
 
 			// expect most read right to be loaded, its data response and its text to be visible
-			await waitForIsland(page, 'MostViewedRightWrapper');
+			await waitForIsland(page, 'MostViewedRightWrapper', {
+				status: 'hydrated',
+			});
 			await mostReadRightResponsePromise;
 			await expect(
 				page

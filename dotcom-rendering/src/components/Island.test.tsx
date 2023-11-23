@@ -22,6 +22,7 @@ import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
 import { MostViewedFooterData } from './MostViewedFooterData.importable';
+import { MostViewedRightWrapper } from './MostViewedRightWrapper.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
@@ -318,6 +319,18 @@ describe('Island: server-side rendering', () => {
 						design: ArticleDesign.Standard,
 						display: ArticleDisplay.Standard,
 					}}
+				/>,
+			),
+		).not.toThrow();
+	});
+
+	test('MostViewedRightWrapper', () => {
+		expect(() =>
+			renderToString(
+				<MostViewedRightWrapper
+					componentDataAttribute={''}
+					maxHeightPx={0}
+					renderAds={false}
 				/>,
 			),
 		).not.toThrow();
