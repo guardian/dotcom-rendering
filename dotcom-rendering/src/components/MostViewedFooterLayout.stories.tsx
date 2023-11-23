@@ -1,9 +1,18 @@
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { StoryObj } from '@storybook/react';
 import React, { useEffect } from 'react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { trails } from '../../fixtures/manual/trails';
 import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { MostViewedFooter } from './MostViewedFooter.importable';
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 import { Section } from './Section';
+
+const standardFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
 
 const Hydrated = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {
@@ -18,9 +27,10 @@ export default {
 	parameters: {
 		chromatic: { diffThreshold: 0.2 },
 	},
+	decorators: [splitTheme([standardFormat], { orientation: 'vertical' })],
 };
 
-export const withTwoTabsAdFree = () => {
+export const withTwoTabsAdFree: StoryObj = () => {
 	return (
 		<Hydrated>
 			<Section>
@@ -38,7 +48,7 @@ export const withTwoTabsAdFree = () => {
 };
 withTwoTabsAdFree.storyName = 'with two tabs ad free';
 
-export const withOneTabsAdFree = () => {
+export const withOneTabsAdFree: StoryObj = () => {
 	return (
 		<Hydrated>
 			<Section>
@@ -58,7 +68,7 @@ export const withOneTabsAdFree = () => {
 };
 withOneTabsAdFree.storyName = 'with one tab ad free';
 
-export const withTwoTabs = () => {
+export const withTwoTabs: StoryObj = () => {
 	return (
 		<Hydrated>
 			<Section>
@@ -76,7 +86,7 @@ export const withTwoTabs = () => {
 };
 withTwoTabs.storyName = 'with two tabs';
 
-export const withOneTabs = () => {
+export const withOneTabs: StoryObj = () => {
 	return (
 		<Hydrated>
 			<Section>

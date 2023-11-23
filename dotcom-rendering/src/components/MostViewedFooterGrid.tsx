@@ -8,6 +8,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useState } from 'react';
+import { palette } from '../palette';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
@@ -66,7 +67,7 @@ const unselectedStyles = css`
 
 const buttonStyles = (isSelected: boolean) => css`
 	${headline.xxxsmall()};
-	color: ${neutral[7]};
+	color: ${palette('--article-text')};
 	margin: 0;
 	border: 0;
 	background: transparent;

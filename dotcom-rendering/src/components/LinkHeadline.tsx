@@ -4,6 +4,7 @@ import { palette } from '../palette';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
+
 type Props = {
 	headlineText: string; // The text shown
 	format: ArticleFormat;
@@ -50,7 +51,7 @@ const textDecorationUnderline = css`
 
 const linkStyles = css`
 	position: relative;
-	color: inherit;
+	color: ${palette('--article-text')};
 	text-decoration: none;
 	:hover {
 		text-decoration: underline;
@@ -76,14 +77,7 @@ export const LinkHeadline = ({
 	byline,
 }: Props) => {
 	return (
-		<h4
-			css={[
-				fontStyles(size),
-				css`
-					color: ${palette('--most-viewed-headline')};
-				`,
-			]}
-		>
+		<h4 css={[fontStyles(size)]}>
 			{!!kickerText && (
 				<Kicker
 					text={kickerText}

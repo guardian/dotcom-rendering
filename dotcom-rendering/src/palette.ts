@@ -2886,10 +2886,10 @@ const appsEpicBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
 const appsEpicBorderLight: PaletteFunction = () => sourcePalette.brandAlt[400];
 const appsEpicBorderDark: PaletteFunction = () => sourcePalette.brandAlt[200];
 
-const linkKickerText = (format: ArticleFormat): string => {
-	switch (format.design) {
+const linkKickerTextLight: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
 		case ArticleDesign.Analysis:
-			switch (format.theme) {
+			switch (theme) {
 				case Pillar.News:
 					return sourcePalette.news[300];
 				case Pillar.Opinion:
@@ -2908,9 +2908,9 @@ const linkKickerText = (format: ArticleFormat): string => {
 					return sourcePalette.specialReportAlt[200];
 			}
 		default:
-			switch (format.theme) {
+			switch (theme) {
 				case Pillar.News:
-					return sourcePalette.news[200];
+					return sourcePalette.news[400];
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
 				case Pillar.Sport:
@@ -2928,6 +2928,37 @@ const linkKickerText = (format: ArticleFormat): string => {
 			}
 	}
 };
+
+const linkKickerTextDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[500];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[500];
+		case Pillar.Sport:
+			return sourcePalette.sport[500];
+		case Pillar.Culture:
+			return sourcePalette.culture[500];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[500];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const articleTextLight: PaletteFunction = () => sourcePalette.neutral[7];
+const articleTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+
+const mostViewedFooterHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const mostViewedFooterHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+// '--most-viewed-footer-tab
 // ----- Palette ----- //
 
 /**
@@ -3330,8 +3361,16 @@ const paletteColours = {
 		dark: mostViewedHeadlineDark,
 	},
 	'--link-kicker-text': {
-		light: linkKickerText,
-		dark: linkKickerText,
+		light: linkKickerTextLight,
+		dark: linkKickerTextDark,
+	},
+	'--article-text': {
+		light: articleTextLight,
+		dark: articleTextDark,
+	},
+	'--most-viewed-footer-hover': {
+		light: mostViewedFooterHoverLight,
+		dark: mostViewedFooterHoverDark,
 	},
 } satisfies PaletteColours;
 
