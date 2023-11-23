@@ -22,6 +22,8 @@ jobs:
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v4
 
+      - run: corepack enable
+
       - name: Install Node
         uses: actions/setup-node@v3
         with:

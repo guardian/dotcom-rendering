@@ -4,7 +4,8 @@
 
 1. Clone the repo, then CD into the `apps-rendering` subdirectory before running any commands -
 2. Make sure you're using the version of Node specified in [`.nvmrc`](/.nvmrc)
-3. Install dependencies:
+3. Once Node is installed, make sure you're using the correct package manager by running `corepack enable`
+4. Install dependencies:
 
 ```sh
 yarn

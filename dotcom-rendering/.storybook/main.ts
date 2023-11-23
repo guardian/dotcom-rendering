@@ -95,6 +95,10 @@ const webpackConfig = (config: Configuration) => {
 		path.resolve(__dirname, '../src/server/lib/logging.ts')
 	] = path.resolve(__dirname, './mocks/log4js.ts');
 
+	// Mock BridgetApi for storybook
+	config.resolve.alias[path.resolve(__dirname, '../src/lib/bridgetApi.ts')] =
+		path.resolve(__dirname, './mocks/bridgetApi.ts');
+
 	// SecureSignup uses @emotion/cache and @emotion/server - can't be used in storybook
 	config.resolve.alias[
 		path.resolve(__dirname, '../src/components/SecureSignup.tsx')

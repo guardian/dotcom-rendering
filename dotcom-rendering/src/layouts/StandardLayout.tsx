@@ -904,7 +904,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<MostViewedFooterLayout renderAds={renderAds}>
 									<Island
 										priority="feature"
-										clientOnly={true}
 										defer={{ until: 'visible' }}
 									>
 										<MostViewedFooterData
@@ -1028,7 +1027,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
-						backgroundColour={neutral[97]}
+						backgroundColour={themePalette(
+							'--apps-footer-background',
+						)}
 						padSides={false}
 						showSideBorders={false}
 						element="footer"

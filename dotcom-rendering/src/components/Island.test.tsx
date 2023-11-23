@@ -19,8 +19,10 @@ import { LightboxJavascript } from './LightboxJavascript.importable';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
+import { MostViewedFooterData } from './MostViewedFooterData.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
@@ -282,10 +284,49 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
+	test('MostViewedFooterData', () => {
+		expect(() =>
+			renderToString(
+				<MostViewedFooterData
+					ajaxUrl={''}
+					edition={'UK'}
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+				/>,
+			),
+		).not.toThrow();
+	});
+
 	test('ReaderRevenueDev', () => {
 		expect(() =>
 			renderToString(
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />,
+			),
+		).not.toThrow();
+	});
+
+	test('ReaderRevenueLinks', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<ReaderRevenueLinks
+						editionId={'UK'}
+						dataLinkNamePrefix={''}
+						inHeader={false}
+						remoteHeader={false}
+						contributionsServiceUrl={''}
+						urls={{
+							subscribe: '',
+							support: '',
+							contribute: '',
+						}}
+					/>
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});

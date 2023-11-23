@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
 import { body, until } from '@guardian/source-foundations';
-import { decidePalette } from '../../../lib/decidePalette';
+import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 type Props = {
 	children: string | React.ReactNode;
-	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
 	imagePosition?: ImagePositionType;
 	imageSize?: ImageSizeType;
@@ -37,20 +36,18 @@ const showTrailText = (
 
 export const TrailTextWrapper = ({
 	children,
-	format,
 	containerPalette,
 	imagePosition,
 	imageSize,
 	imageType,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
 	return (
 		<div
 			css={[
 				css`
 					display: flex;
 					flex-direction: column;
-					color: ${palette.text.cardStandfirst};
+					color: ${palette('--card-headline-trail-text')};
 					${body.small({ lineHeight: 'regular' })};
 					font-size: 14px;
 					padding-left: 5px;

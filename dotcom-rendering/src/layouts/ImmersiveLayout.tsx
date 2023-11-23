@@ -53,6 +53,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { Palette } from '../types/palette';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -841,7 +842,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
 								priority="feature"
-								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
 								<MostViewedFooterData
@@ -947,7 +947,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
-					backgroundColour={neutral[97]}
+					backgroundColour={themePalette('--apps-footer-background')}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"

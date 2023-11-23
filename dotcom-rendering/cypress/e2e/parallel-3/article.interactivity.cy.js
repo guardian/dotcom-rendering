@@ -100,7 +100,7 @@ describe('Interactivity', function () {
 				// Wait for hydration
 				cy.get('gu-island[name=MostViewedFooterData]')
 					.last()
-					.should('have.attr', 'data-island-status', 'rendered');
+					.should('have.attr', 'data-island-status', 'hydrated');
 				cy.wait('@getMostRead');
 				cy.wait('@getMostReadGeo');
 				cy.get('[data-testid=mostviewed-footer]').should('exist');

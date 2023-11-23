@@ -416,6 +416,7 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette (--card-headline-trail-text) */
 const textCardHeadline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
 
@@ -456,6 +457,7 @@ const textCardHeadline = (format: ArticleFormat): string => {
 
 const textCardStandfirst = textCardHeadline;
 
+/** @deprecated this has been moved to the theme palette (--card-kicker-text) */
 const textCardKicker = (format: ArticleFormat): string => {
 	if (
 		format.theme === ArticleSpecial.SpecialReport &&
@@ -506,6 +508,7 @@ const textCardKicker = (format: ArticleFormat): string => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette (--card-footer-text) */
 const textCardFooter = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[100];
@@ -628,6 +631,7 @@ const backgroundSectionTitle = (format: ArticleFormat): string => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette (--card-background) */
 const backgroundCard = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[700];
@@ -733,24 +737,6 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 		return palette.specialReportAlt[100];
 
 	return neutral[86]; // default previously defined in Standfirst.tsx
-};
-
-const backgroundHeader = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return news[300];
-				case ArticleSpecial.SpecialReport:
-					return specialReport[700];
-				case ArticleSpecial.SpecialReportAlt:
-					return news[300];
-				default:
-					return pillarPalette[format.theme][300];
-			}
-		default:
-			return backgroundArticle(format);
-	}
 };
 
 /** @deprecated this has been moved to the theme palette (--standfirst-background) */
@@ -1205,6 +1191,7 @@ const borderArticleLinkHover = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+/** @deprecated this has been moved to the theme palette (--card-border-top) */
 const topBarCard = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[60];
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -1692,6 +1679,7 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
+/** @deprecated use subNavLink in src/palette.ts */
 const textSubNavLink = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Picture:
@@ -1836,7 +1824,6 @@ export const decidePalette = (
 			headline: backgroundHeadline(format),
 			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
-			header: backgroundHeader(format),
 			standfirst: backgroundStandfirst(format),
 			richLink: backgroundRichLink(format),
 			imageTitle: backgroundImageTitle(format),

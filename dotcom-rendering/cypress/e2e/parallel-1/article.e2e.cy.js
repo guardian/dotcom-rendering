@@ -83,7 +83,7 @@ describe('E2E Page rendering', function () {
 			cy.get('gu-island[name=MostViewedFooterData]').should(
 				'have.attr',
 				'data-island-status',
-				'rendered',
+				'hydrated',
 			);
 
 			cy.get('[data-testid-ab-user-in-variant=ab-test-variant]').should(
@@ -117,7 +117,7 @@ describe('E2E Page rendering', function () {
 			cy.get('gu-island[name=MostViewedFooterData]').should(
 				'have.attr',
 				'data-island-status',
-				'rendered',
+				'hydrated',
 			);
 
 			cy.get(

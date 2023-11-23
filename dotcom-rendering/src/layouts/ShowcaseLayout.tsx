@@ -2,13 +2,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	border,
-	brandBackground,
-	brandBorder,
-	brandLine,
 	from,
-	labs,
-	neutral,
+	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -45,11 +40,11 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
@@ -238,8 +233,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 	const { branding } = article.commercialProperties[article.editionId];
 
-	const palette = decidePalette(format);
-
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const renderAds = renderingTarget === 'Web' && canRenderAds(article);
@@ -274,7 +267,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										showSideBorders={false}
 										padSides={false}
 										backgroundColour={
-											brandBackground.primary
+											sourcePalette.brand[400]
 										}
 										element="header"
 									>
@@ -305,11 +298,11 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									</Section>
 									<Section
 										fullWidth={true}
-										borderColour={brandLine.primary}
+										borderColour={sourcePalette.brand[600]}
 										showTopBorder={false}
 										padSides={false}
 										backgroundColour={
-											brandBackground.primary
+											sourcePalette.brand[400]
 										}
 										element="nav"
 										format={format}
@@ -344,9 +337,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									{props.NAV.subNavSections && (
 										<Section
 											fullWidth={true}
-											backgroundColour={
-												palette.background.article
-											}
+											backgroundColour={themePalette(
+												'--article-background',
+											)}
 											padSides={false}
 											element="aside"
 											format={format}
@@ -362,16 +355,15 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													currentNavLink={
 														props.NAV.currentNavLink
 													}
-													linkHoverColour={
-														palette.text
-															.articleLinkHover
-													}
-													borderColour={
-														palette.border.subNav
-													}
-													subNavLinkColour={
-														palette.text.subNavLink
-													}
+													linkHoverColour={themePalette(
+														'--article-link-text-hover',
+													)}
+													borderColour={themePalette(
+														'--sub-nav-border',
+													)}
+													subNavLinkColour={themePalette(
+														'--sub-nav-link',
+													)}
 												/>
 											</Island>
 										</Section>
@@ -379,16 +371,20 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 									<Section
 										fullWidth={true}
-										backgroundColour={
-											palette.background.article
-										}
+										backgroundColour={themePalette(
+											'--article-background',
+										)}
 										padSides={false}
 										showTopBorder={false}
-										borderColour={palette.border.secondary}
+										borderColour={themePalette(
+											'--article-border-secondary',
+										)}
 									>
 										<StraightLines
 											count={4}
-											color={palette.border.secondary}
+											color={themePalette(
+												'--article-border-secondary',
+											)}
 											cssOverrides={css`
 												display: block;
 											`}
@@ -416,11 +412,11 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								<Stuck zIndex="stickyAdWrapperNav">
 									<Section
 										fullWidth={true}
-										borderColour={brandLine.primary}
+										borderColour={sourcePalette.brand[600]}
 										showTopBorder={false}
 										padSides={false}
 										backgroundColour={
-											brandBackground.primary
+											sourcePalette.brand[400]
 										}
 										element="nav"
 									>
@@ -456,8 +452,8 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								<Section
 									fullWidth={true}
 									showTopBorder={false}
-									backgroundColour={labs[400]}
-									borderColour={border.primary}
+									backgroundColour={sourcePalette.labs[400]}
+									borderColour={sourcePalette.neutral[60]}
 									sectionId="labs-header"
 								>
 									<LabsHeader />
@@ -482,9 +478,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={themePalette('--article-background')}
 					element="article"
-					borderColour={palette.border.secondary}
+					borderColour={themePalette('--article-border-secondary')}
 				>
 					<ShowcaseGrid>
 						<GridItem area="media">
@@ -552,7 +548,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								<div css={stretchLines}>
 									<DecideLines
 										format={format}
-										color={palette.border.secondary}
+										color={themePalette(
+											'--article-border-secondary',
+										)}
 									/>
 								</div>
 							</div>
@@ -654,7 +652,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								)}
 								<StraightLines
 									count={4}
-									color={palette.border.secondary}
+									color={themePalette(
+										'--article-border-secondary',
+									)}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -715,7 +715,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -805,7 +805,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
 								priority="feature"
-								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
 								<MostViewedFooterData
@@ -825,7 +824,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -842,8 +841,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={palette.text.articleLinkHover}
-							borderColour={palette.border.subNav}
+							linkHoverColour={themePalette(
+								'--article-link-text-hover',
+							)}
+							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>
@@ -854,8 +855,8 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					<Section
 						fullWidth={true}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
-						borderColour={brandBorder.primary}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
 					>
@@ -913,7 +914,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
-					backgroundColour={neutral[97]}
+					backgroundColour={themePalette('--apps-footer-background')}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"

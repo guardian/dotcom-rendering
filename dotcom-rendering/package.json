@@ -16,7 +16,7 @@
 		"test": "jest --maxWorkers=50%",
 		"test:watch": "jest --watch --maxWorkers=25%",
 		"test:ci": "jest --runInBand",
-		"createtoc": "doctoc $npm_package_tocList --github --update-only --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
+		"createtoc": "doctoc $npm_package_tocList --github --update-only --title '<!-- Automatically created by running `yarn createtoc` in a pre-commit hook -->' ",
 		"addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true",
 		"playwright:open": "playwright test --ui",
 		"playwright:run": "playwright test",

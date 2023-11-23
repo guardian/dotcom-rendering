@@ -166,7 +166,7 @@ validate-build: # private
 check-env: # private
 	$(call log, "checking environment")
 	@cd .. && scripts/env/check-node
-	@cd .. && scripts/env/check-yarn
+	@cd .. && scripts/env/check-package-manager
 
 clear: # private
 	@clear
