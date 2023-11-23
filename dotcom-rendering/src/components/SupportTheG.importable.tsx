@@ -37,6 +37,7 @@ import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
+import { usePageViewId } from '../lib/usePageViewId';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 import { useConfig } from './ConfigContext';
 
@@ -435,10 +436,11 @@ export const SupportTheG = ({
 	contributionsServiceUrl,
 	hasPageSkin = false,
 }: Props) => {
+	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode('support-the-Guardian');
-	const pageViewId = window.guardian.config.ophan.pageViewId;
+	const pageViewId = usePageViewId(renderingTarget);
 
-	if (countryCode) {
+	if (countryCode && pageViewId) {
 		if (inHeader && remoteHeader) {
 			return (
 				<ReaderRevenueLinksRemote

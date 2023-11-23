@@ -128,7 +128,7 @@ test.describe('Interactivity', () => {
 		}) => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
-			await waitForIsland(page, 'SupportTheG');
+			await waitForIsland(page, 'SupportTheG', { status: 'hydrated' });
 			await expect(
 				page
 					.locator('header')
