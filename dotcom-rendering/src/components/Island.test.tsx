@@ -307,11 +307,16 @@ describe('Island: server-side rendering', () => {
 	test('SetABTests', () => {
 		expect(() =>
 			renderToString(
-				<SetABTests
-					isDev={false}
-					pageIsSensitive={false}
-					abTestSwitches={{}}
-				/>,
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<SetABTests
+						isDev={false}
+						pageIsSensitive={false}
+						abTestSwitches={{}}
+					/>
+					,
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});
