@@ -798,7 +798,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
-					backgroundColour={neutral[97]}
+					backgroundColour={themePalette('--apps-footer-background')}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"

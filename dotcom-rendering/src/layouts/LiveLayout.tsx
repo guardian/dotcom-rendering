@@ -13,6 +13,7 @@ import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -1376,6 +1377,22 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</BannerWrapper>
 					<MobileStickyContainer data-print-layout="hide" />
 				</>
+			)}
+
+			{isApps && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					backgroundColour={themePalette('--apps-footer-background')}
+					borderColour={themePalette('--article-border')}
+					padSides={false}
+					showSideBorders={false}
+					element="footer"
+				>
+					<Island priority="critical">
+						<AppsFooter />
+					</Island>
+				</Section>
 			)}
 		</>
 	);

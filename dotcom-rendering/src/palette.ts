@@ -1211,9 +1211,13 @@ const appsFooterLinksTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const appsFooterLinksTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[60];
-const appsFooterLinksBackgroundLight: PaletteFunction = () =>
+const appsFooterLinksTextHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+const appsFooterLinksTextHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const appsFooterBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
-const appsFooterLinksBackgroundDark = (format: ArticleFormat): string => {
+const appsFooterBackgroundDark = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[10];
@@ -3022,9 +3026,13 @@ const paletteColours = {
 		light: appsFooterLinksTextLight,
 		dark: appsFooterLinksTextDark,
 	},
-	'--apps-footer-links-background': {
-		light: appsFooterLinksBackgroundLight,
-		dark: appsFooterLinksBackgroundDark,
+	'--apps-footer-links-text-hover': {
+		light: appsFooterLinksTextHoverLight,
+		dark: appsFooterLinksTextHoverDark,
+	},
+	'--apps-footer-background': {
+		light: appsFooterBackgroundLight,
+		dark: appsFooterBackgroundDark,
 	},
 	'--click-to-view-background': {
 		light: clickToViewBackgroundLight,

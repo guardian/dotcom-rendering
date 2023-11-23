@@ -914,7 +914,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
-					backgroundColour={sourcePalette.neutral[97]}
+					backgroundColour={themePalette('--apps-footer-background')}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"
