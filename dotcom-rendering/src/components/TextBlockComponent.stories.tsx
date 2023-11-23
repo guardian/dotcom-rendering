@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { TextBlockComponent } from './TextBlockComponent';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 
 const html =
 	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>';
@@ -88,6 +89,15 @@ export const DropCap = () => {
 	);
 };
 DropCap.storyName = 'with drop cap';
+DropCap.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Culture,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Immersive,
+		},
+	]),
+];
 
 export const QuotedDropCap = () => {
 	return (
@@ -106,6 +116,15 @@ export const QuotedDropCap = () => {
 	);
 };
 QuotedDropCap.storyName = 'with quoted drop cap';
+QuotedDropCap.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Opinion,
+			design: ArticleDesign.Comment,
+			display: ArticleDisplay.Standard,
+		},
+	]),
+];
 
 export const ShortText = () => {
 	return (
@@ -124,6 +143,15 @@ export const ShortText = () => {
 	);
 };
 ShortText.storyName = 'with text less than 200 characters';
+ShortText.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.News,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+	]),
+];
 
 export const NoTags = () => {
 	return (
@@ -142,6 +170,15 @@ export const NoTags = () => {
 	);
 };
 NoTags.storyName = 'with no p tags';
+NoTags.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.News,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+	]),
+];
 
 export const FeatureDropCap = () => {
 	return (
@@ -160,6 +197,15 @@ export const FeatureDropCap = () => {
 	);
 };
 FeatureDropCap.storyName = 'with design of Feature';
+FeatureDropCap.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Culture,
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.Standard,
+		},
+	]),
+];
 
 export const AList = () => {
 	return (
@@ -282,6 +328,15 @@ export const autoLinkStory = () => {
 	);
 };
 autoLinkStory.storyName = 'Automatic hyperlink near the start';
+autoLinkStory.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Culture,
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.Immersive,
+		},
+	]),
+];
 
 export const nestedParagraphsStory = () => {
 	return (
@@ -299,6 +354,15 @@ export const nestedParagraphsStory = () => {
 	);
 };
 nestedParagraphsStory.storyName = 'Nested paragraphs';
+nestedParagraphsStory.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Culture,
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.Immersive,
+		},
+	]),
+];
 
 export const InvisibleStrong = () => {
 	return (
@@ -316,3 +380,12 @@ export const InvisibleStrong = () => {
 	);
 };
 InvisibleStrong.storyName = 'Invisible Strong';
+InvisibleStrong.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Culture,
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.Immersive,
+		},
+	]),
+];
