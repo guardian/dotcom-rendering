@@ -2,14 +2,12 @@ import { AB } from '@guardian/ab-core';
 import type { CoreAPIConfig } from '@guardian/ab-core';
 import { getCookie, log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import type { OphanRecordFunction } from '../client/ophan/ophan';
 import { getOphan } from '../client/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
 import { getCypressSwitches } from '../experiments/cypress-switches';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 import { setABTests } from '../lib/useAB';
-import { useOnce } from '../lib/useOnce';
 import type { ABTestSwitches } from '../model/enhance-switches';
 import { useConfig } from './ConfigContext';
 
@@ -38,14 +36,12 @@ export const SetABTests = ({
 	forcedTestVariants,
 }: Props) => {
 	const { renderingTarget } = useConfig();
-	const [ophanRecord, setOphanRecord] = useState<OphanRecordFunction>();
+	const [ophan, setOphan] = useState<typeof window.guardian.ophan>();
 
 	useEffect(() => {
-		console.log('rendering target', renderingTarget);
 		getOphan(renderingTarget)
-			.then((ophan) => {
-				setOphanRecord(ophan.record);
-				console.log('set ophan record', ophan.record);
+			.then((ophanWindow) => {
+				setOphan(ophanWindow);
 			})
 			.catch((e) => {
 				console.log(
@@ -55,13 +51,8 @@ export const SetABTests = ({
 			});
 	}, [renderingTarget]);
 
-	useOnce(() => {
-		console.log('Ophan use once', ophanRecord);
-	}, [ophanRecord]);
-
 	useEffect(() => {
-		console.log('Ophan record in use effect', ophanRecord);
-		if (ophanRecord) {
+		if (ophan) {
 			const mvtId = Number(
 				(isDev &&
 					getCookie({
@@ -95,7 +86,7 @@ export const SetABTests = ({
 				},
 				arrayOfTestObjects: tests,
 				forcedTestVariants: allForcedTestVariants,
-				ophanRecord,
+				ophanRecord: ophan.record,
 			});
 			const allRunnableTests = ab.allRunnableTests(tests);
 			const participations =
@@ -111,14 +102,8 @@ export const SetABTests = ({
 			ab.registerCompleteEvents(allRunnableTests);
 			log('dotcom', 'AB tests initialised');
 		}
-	}, [
-		abTestSwitches,
-		forcedTestVariants,
-		isDev,
-		pageIsSensitive,
-		ophanRecord,
-	]);
+	}, [abTestSwitches, forcedTestVariants, isDev, pageIsSensitive, ophan]);
 
 	// we don’t render anything
-	return <></>;
+	return null;
 };
