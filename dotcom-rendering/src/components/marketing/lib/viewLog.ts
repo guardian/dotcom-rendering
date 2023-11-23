@@ -1,4 +1,10 @@
 /**
+ * @file
+ * This file was migrated from:
+ * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/shared/src/lib/viewLog.ts
+ */
+
+/**
  * We log epic views in this local storage item.
  * This is used to limit the number of epics a browser sees in a period of time.
  */

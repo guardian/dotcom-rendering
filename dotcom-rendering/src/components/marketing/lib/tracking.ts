@@ -1,3 +1,9 @@
+/**
+ * @file
+ * This file was migrated from:
+ * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/shared/src/lib/tracking.ts
+ */
+import type { OphanAction, OphanComponentEvent } from '@guardian/libs';
 import { addRegionIdToSupportUrl } from '@guardian/support-dotcom-components';
 import type {
 	BannerTest,
@@ -7,11 +13,6 @@ import type {
 	TargetingAbTest,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import type {
-	OphanAction,
-	OphanComponentEvent,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
-// import {OphanAction, OphanComponentEvent} from "@guardian/libs";
 
 // TRACKING VIA support.theguardian.com
 type LinkParams = {
