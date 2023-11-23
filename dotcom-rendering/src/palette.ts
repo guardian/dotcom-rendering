@@ -1217,7 +1217,7 @@ const appsFooterLinksTextHoverDark: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 const appsFooterBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
-const appsFooterBackgroundDark = (format: ArticleFormat): string => {
+const appsFooterBackgroundDark: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[10];
