@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanABTestMeta, OphanComponentEvent } from '@guardian/libs';
-import { getCookie } from '@guardian/libs';
+import { getCookie, isUndefined } from '@guardian/libs';
 import {
 	brandAlt,
 	brandText,
@@ -440,27 +440,22 @@ export const SupportTheG = ({
 	const countryCode = useCountryCode('support-the-Guardian');
 	const pageViewId = usePageViewId(renderingTarget);
 
-	if (countryCode && pageViewId) {
-		if (inHeader && remoteHeader) {
-			return (
-				<ReaderRevenueLinksRemote
-					countryCode={countryCode}
-					pageViewId={pageViewId}
-					contributionsServiceUrl={contributionsServiceUrl}
-				/>
-			);
-		}
-		return (
-			<ReaderRevenueLinksNative
-				editionId={editionId}
-				dataLinkNamePrefix={dataLinkNamePrefix}
-				inHeader={inHeader}
-				urls={urls}
-				pageViewId={pageViewId}
-				hasPageSkin={hasPageSkin}
-			/>
-		);
-	}
+	if (isUndefined(countryCode) || isUndefined(pageViewId)) return null;
 
-	return null;
+	return inHeader && remoteHeader ? (
+		<ReaderRevenueLinksRemote
+			countryCode={countryCode}
+			pageViewId={pageViewId}
+			contributionsServiceUrl={contributionsServiceUrl}
+		/>
+	) : (
+		<ReaderRevenueLinksNative
+			editionId={editionId}
+			dataLinkNamePrefix={dataLinkNamePrefix}
+			inHeader={inHeader}
+			urls={urls}
+			pageViewId={pageViewId}
+			hasPageSkin={hasPageSkin}
+		/>
+	);
 };
