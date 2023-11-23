@@ -30,11 +30,11 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
-import { getLocaleCode } from '../lib/getCountryCode';
 import type { AuthStatus } from '../lib/identity';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { setAutomat } from '../lib/setAutomat';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
@@ -435,21 +435,8 @@ export const SupportTheG = ({
 	contributionsServiceUrl,
 	hasPageSkin = false,
 }: Props) => {
-	const [countryCode, setCountryCode] = useState<string>();
+	const countryCode = useCountryCode('support-the-Guardian');
 	const pageViewId = window.guardian.config.ophan.pageViewId;
-
-	useEffect(() => {
-		const callFetch = () => {
-			getLocaleCode()
-				.then((cc) => {
-					setCountryCode(cc ?? '');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${String(e)}`),
-				);
-		};
-		callFetch();
-	}, []);
 
 	if (countryCode) {
 		if (inHeader && remoteHeader) {

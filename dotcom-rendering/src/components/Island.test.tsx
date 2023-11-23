@@ -21,6 +21,7 @@ import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
@@ -286,6 +287,29 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />,
+			),
+		).not.toThrow();
+	});
+
+	test('ReaderRevenueLinks', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<ReaderRevenueLinks
+						editionId={'UK'}
+						dataLinkNamePrefix={''}
+						inHeader={false}
+						remoteHeader={false}
+						contributionsServiceUrl={''}
+						urls={{
+							subscribe: '',
+							support: '',
+							contribute: '',
+						}}
+					/>
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});
