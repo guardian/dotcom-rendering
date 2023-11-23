@@ -9,12 +9,11 @@ import {
 } from '@guardian/core-web-vitals';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
-import { getOphan } from '../client/ophan/ophan';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
+import { usePageViewId } from '../lib/usePageViewId';
 import type { ServerSideTests } from '../types/config';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
 
 type Props = {
@@ -44,22 +43,6 @@ const useBrowserId = () => {
 	}, []);
 
 	return browserId;
-};
-
-const usePageViewId = (renderingTarget: RenderingTarget) => {
-	const [id, setId] = useState<string>();
-
-	useEffect(() => {
-		getOphan(renderingTarget)
-			.then(({ pageViewId }) => {
-				setId(pageViewId);
-			})
-			.catch(() => {
-				setId('no-page-view-id-available');
-			});
-	}, [renderingTarget]);
-
-	return id;
 };
 
 const useDev = () => {
