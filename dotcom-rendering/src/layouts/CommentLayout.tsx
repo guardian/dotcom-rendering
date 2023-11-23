@@ -435,7 +435,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 			<main data-layout="CommentLayout">
 				{renderingTarget === 'Apps' && (
-					<Island priority="critical" clientOnly={true}>
+					<Island priority="critical">
 						<AdPortals />
 					</Island>
 				)}

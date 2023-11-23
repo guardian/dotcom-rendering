@@ -471,7 +471,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
 				{renderingTarget === 'Apps' && (
-					<Island priority="critical" clientOnly={true}>
+					<Island priority="critical">
 						<AdPortals />
 					</Island>
 				)}

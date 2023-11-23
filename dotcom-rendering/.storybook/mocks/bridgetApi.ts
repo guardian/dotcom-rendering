@@ -30,3 +30,5 @@ export const getNotificationsClient: () => Partial<
 > = () => ({
 	isFollowing: async () => false,
 });
+
+export const getCommercialClient = () => undefined;

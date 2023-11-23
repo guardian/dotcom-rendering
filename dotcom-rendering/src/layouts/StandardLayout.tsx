@@ -488,7 +488,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<main data-layout="StandardLayout">
 				{isApps && (
-					<Island priority="critical" clientOnly={true}>
+					<Island priority="critical">
 						<AdPortals />
 					</Island>
 				)}

@@ -400,7 +400,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main data-layout="InteractiveLayout">
 				{isApps && (
-					<Island priority="critical" clientOnly={true}>
+					<Island priority="critical">
 						<AdPortals />
 					</Island>
 				)}

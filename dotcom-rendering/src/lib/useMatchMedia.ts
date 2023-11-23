@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 
 /**
  * Stores constructed media queries by their query string, so they don't have
@@ -13,26 +13,29 @@ const cachedQueries = new Map<string, MediaQueryList>();
  * re-render whenever the match status changes in either direction;
  * e.g. from `true` to `false`, or from `false` to `true`.
  *
- * @param query A media query string for use with `window.matchMedia`
- * @returns A `boolean` signifying whether the media query currently matches
+ * @param {string} query for use with `window.matchMedia`
+ * @returns {boolean} whether the media query currently matches
  */
 const useMatchMedia = (query: string): boolean => {
-	const maybeQuery = cachedQueries.get(query);
-	const mediaQuery = maybeQuery ?? window.matchMedia(query);
+	const [mediaQuery, setMediaQuery] = useState(cachedQueries.get(query));
 
-	if (maybeQuery === undefined) {
-		cachedQueries.set(query, mediaQuery);
-	}
+	useEffect(() => {
+		if (mediaQuery) return;
+		cachedQueries.set(query, window.matchMedia(query));
+		setMediaQuery(cachedQueries.get(query));
+	}, [mediaQuery, query]);
 
+	/** @see https://react.dev/reference/react/useSyncExternalStore */
 	return useSyncExternalStore(
 		(callback) => {
-			mediaQuery.addEventListener('change', callback);
+			mediaQuery?.addEventListener('change', callback);
 
 			return () => {
-				mediaQuery.removeEventListener('change', callback);
+				mediaQuery?.removeEventListener('change', callback);
 			};
 		},
-		() => mediaQuery.matches,
+		() => !!mediaQuery?.matches,
+		() => false, // we cannot have media queries on the server
 	);
 };
 
