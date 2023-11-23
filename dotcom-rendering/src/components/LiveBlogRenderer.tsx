@@ -64,7 +64,7 @@ export const LiveBlogRenderer = ({
 	isInLiveblogAdSlotTest = false,
 }: Props) => {
 	const { renderingTarget } = useConfig();
-	const isApps = renderingTarget === 'Apps';
+	const isWeb = renderingTarget === 'Web';
 
 	const filtered =
 		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
@@ -147,7 +147,7 @@ export const LiveBlogRenderer = ({
 				pinnedPost={pinnedPost}
 				isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 			/>
-			{!isApps && blocks.length > 4 && (
+			{isWeb && blocks.length > 4 && (
 				<Island
 					priority="feature"
 					// this should really be deferred until visible,

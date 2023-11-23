@@ -2877,11 +2877,12 @@ const syndicationButtonBorder: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const appsEpicBackgroundLight = () => sourcePalette.neutral[97];
-const appsEpicBackgroundDark = () => sourcePalette.neutral[20];
+const appsEpicBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const appsEpicBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
 
-const appsEpicBorderLight = () => sourcePalette.brandAlt[400];
-const appsEpicBorderDark = () => sourcePalette.brandAlt[200];
+const appsEpicBorderLight: PaletteFunction = () => sourcePalette.brandAlt[400];
+const appsEpicBorderDark: PaletteFunction = () => sourcePalette.brandAlt[200];
 
 // ----- Palette ----- //
 
