@@ -101,18 +101,10 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<LightboxLayout
 						imageCount={article.imagesForLightbox.length}
 					/>
-					<Island
-						clientOnly={true}
-						priority="feature"
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<LightboxHash />
 					</Island>
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'hash' }}
-					>
+					<Island priority="feature" defer={{ until: 'hash' }}>
 						<LightboxJavascript
 							format={format}
 							images={article.imagesForLightbox}
