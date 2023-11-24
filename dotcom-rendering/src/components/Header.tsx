@@ -81,11 +81,7 @@ export const Header = ({
 				<Snow />
 			</Island>
 			<Logo editionId={editionId} hasPageSkin={hasPageSkin} />
-			<Island
-				priority="feature"
-				defer={{ until: 'idle' }}
-				clientOnly={true}
-			>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<SupportTheG
 					urls={urls}
 					editionId={editionId}

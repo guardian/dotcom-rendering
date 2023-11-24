@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanABTestMeta, OphanComponentEvent } from '@guardian/libs';
-import { getCookie } from '@guardian/libs';
+import { getCookie, isUndefined } from '@guardian/libs';
 import {
 	brandAlt,
 	brandText,
@@ -37,6 +37,7 @@ import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
+import { usePageViewId } from '../lib/usePageViewId';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 import { useConfig } from './ConfigContext';
 
@@ -435,30 +436,26 @@ export const SupportTheG = ({
 	contributionsServiceUrl,
 	hasPageSkin = false,
 }: Props) => {
+	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode('support-the-Guardian');
-	const pageViewId = window.guardian.config.ophan.pageViewId;
+	const pageViewId = usePageViewId(renderingTarget);
 
-	if (countryCode) {
-		if (inHeader && remoteHeader) {
-			return (
-				<ReaderRevenueLinksRemote
-					countryCode={countryCode}
-					pageViewId={pageViewId}
-					contributionsServiceUrl={contributionsServiceUrl}
-				/>
-			);
-		}
-		return (
-			<ReaderRevenueLinksNative
-				editionId={editionId}
-				dataLinkNamePrefix={dataLinkNamePrefix}
-				inHeader={inHeader}
-				urls={urls}
-				pageViewId={pageViewId}
-				hasPageSkin={hasPageSkin}
-			/>
-		);
-	}
+	if (isUndefined(countryCode) || isUndefined(pageViewId)) return null;
 
-	return null;
+	return inHeader && remoteHeader ? (
+		<ReaderRevenueLinksRemote
+			countryCode={countryCode}
+			pageViewId={pageViewId}
+			contributionsServiceUrl={contributionsServiceUrl}
+		/>
+	) : (
+		<ReaderRevenueLinksNative
+			editionId={editionId}
+			dataLinkNamePrefix={dataLinkNamePrefix}
+			inHeader={inHeader}
+			urls={urls}
+			pageViewId={pageViewId}
+			hasPageSkin={hasPageSkin}
+		/>
+	);
 };

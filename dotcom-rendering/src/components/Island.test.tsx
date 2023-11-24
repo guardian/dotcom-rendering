@@ -31,6 +31,7 @@ import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { Snow } from './Snow.importable';
 import { StickyBottomBanner } from './StickyBottomBanner.importable';
+import { SupportTheG } from './SupportTheG.importable';
 
 // Type tests
 // Test that impossible prop combinations are caught by TypeScript.
@@ -435,6 +436,29 @@ describe('Island: server-side rendering', () => {
 						remoteBannerSwitch={true}
 						puzzleBannerSwitch={false}
 						isSensitive={false}
+					/>
+				</ConfigProvider>,
+			),
+		).not.toThrow();
+	});
+
+	test('SupportTheG', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<SupportTheG
+						editionId={'UK'}
+						dataLinkNamePrefix={''}
+						inHeader={false}
+						remoteHeader={false}
+						contributionsServiceUrl={''}
+						urls={{
+							subscribe: '',
+							support: '',
+							contribute: '',
+						}}
 					/>
 				</ConfigProvider>,
 			),
