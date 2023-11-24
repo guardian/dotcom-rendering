@@ -52,56 +52,55 @@ export const SetABTests = ({
 	}, [renderingTarget]);
 
 	useEffect(() => {
-		if (ophan) {
-			const mvtId = Number(
-				(isDev &&
-					getCookie({
-						name: 'GU_mvt_id_local',
-						shouldMemoize: true,
-					})) || // Simplify localhost testing by creating a different mvt id
-					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
+		if (!ophan) return;
+
+		const mvtId = Number(
+			(isDev &&
+				getCookie({
+					name: 'GU_mvt_id_local',
+					shouldMemoize: true,
+				})) || // Simplify localhost testing by creating a different mvt id
+				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
+		);
+		if (!mvtId) {
+			// 0 is default and falsy here
+			console.log(
+				'There is no MVT ID set, see SetABTests.importable.tsx',
 			);
-			if (!mvtId) {
-				// 0 is default and falsy here
-				console.log(
-					'There is no MVT ID set, see SetABTests.importable.tsx',
-				);
-			}
-
-			// Get the forced switches to use for when running within cypress
-			// Is empty object if not in cypress
-			const cypressAbSwitches = getCypressSwitches();
-
-			const allForcedTestVariants = {
-				...forcedTestVariants,
-				...getForcedParticipationsFromUrl(window.location.hash),
-			};
-
-			const ab = new AB({
-				mvtId,
-				pageIsSensitive,
-				abTestSwitches: {
-					...abTestSwitches,
-					...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
-				},
-				arrayOfTestObjects: tests,
-				forcedTestVariants: allForcedTestVariants,
-				ophanRecord: ophan.record,
-			});
-			const allRunnableTests = ab.allRunnableTests(tests);
-			const participations =
-				runnableTestsToParticipations(allRunnableTests);
-
-			setABTests({
-				api: ab,
-				participations,
-			});
-
-			ab.trackABTests(allRunnableTests);
-			ab.registerImpressionEvents(allRunnableTests);
-			ab.registerCompleteEvents(allRunnableTests);
-			log('dotcom', 'AB tests initialised');
 		}
+
+		// Get the forced switches to use for when running within cypress
+		// Is empty object if not in cypress
+		const cypressAbSwitches = getCypressSwitches();
+
+		const allForcedTestVariants = {
+			...forcedTestVariants,
+			...getForcedParticipationsFromUrl(window.location.hash),
+		};
+
+		const ab = new AB({
+			mvtId,
+			pageIsSensitive,
+			abTestSwitches: {
+				...abTestSwitches,
+				...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
+			},
+			arrayOfTestObjects: tests,
+			forcedTestVariants: allForcedTestVariants,
+			ophanRecord: ophan.record,
+		});
+		const allRunnableTests = ab.allRunnableTests(tests);
+		const participations = runnableTestsToParticipations(allRunnableTests);
+
+		setABTests({
+			api: ab,
+			participations,
+		});
+
+		ab.trackABTests(allRunnableTests);
+		ab.registerImpressionEvents(allRunnableTests);
+		ab.registerCompleteEvents(allRunnableTests);
+		log('dotcom', 'AB tests initialised');
 	}, [abTestSwitches, forcedTestVariants, isDev, pageIsSensitive, ophan]);
 
 	// we don’t render anything
