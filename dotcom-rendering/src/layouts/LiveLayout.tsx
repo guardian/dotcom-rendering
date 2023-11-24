@@ -296,6 +296,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
+	const showComments = isWeb && article.isCommentable;
+
 	const isInLiveblogAdSlotTest =
 		article.config.abTests.serverSideLiveblogInlineAdsVariant === 'variant';
 
@@ -584,7 +586,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										secondaryDateline={
 											article.webPublicationSecondaryDateDisplay
 										}
-										isCommentable={article.isCommentable}
+										isCommentable={showComments}
 										discussionApiUrl={
 											article.config.discussionApiUrl
 										}
@@ -748,9 +750,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											secondaryDateline={
 												article.webPublicationSecondaryDateDisplay
 											}
-											isCommentable={
-												article.isCommentable
-											}
+											isCommentable={showComments}
 											discussionApiUrl={
 												article.config.discussionApiUrl
 											}
@@ -1217,7 +1217,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Island>
 
-					{isWeb && !isPaidContent && article.isCommentable && (
+					{!isPaidContent && showComments && (
 						<Section
 							fullWidth={true}
 							showTopBorder={false}

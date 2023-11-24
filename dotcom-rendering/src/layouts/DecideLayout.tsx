@@ -120,7 +120,6 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 					return notSupported;
 				default:
 					return (
-						// TODO: Check footer
 						<StandardLayout
 							article={article}
 							format={format}
