@@ -706,7 +706,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									<Island
 										priority="feature"
 										defer={{ until: 'visible' }}
-										clientOnly={true}
 									>
 										<SlotBodyEnd
 											contentType={article.contentType}
