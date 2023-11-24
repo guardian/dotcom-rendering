@@ -2968,6 +2968,109 @@ const syndicationButtonBorder: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
+const dropCapLight: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.Analysis: {
+			switch (format.theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+					return pillarPalette(format.theme, 300);
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(format.theme, 400);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReport[200];
+			}
+		}
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
+			switch (format.theme) {
+				case Pillar.Opinion:
+					return sourcePalette.opinion[400];
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(format.theme, 300);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReport[100];
+			}
+
+		default:
+			switch (format.theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(format.theme, 300);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReport[100];
+			}
+	}
+};
+
+const dropCapDark: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case Pillar.Opinion:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				case Pillar.Sport:
+				case Pillar.News:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+			}
+		default:
+			switch (theme) {
+				case Pillar.Opinion:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				case Pillar.Sport:
+				case Pillar.News:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[500];
+			}
+	}
+};
+
 const appsEpicBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const appsEpicBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
@@ -3375,6 +3478,10 @@ const paletteColours = {
 	'--syndication-button-border': {
 		light: syndicationButtonBorder,
 		dark: syndicationButtonBorder,
+	},
+	'--drop-cap': {
+		light: dropCapLight,
+		dark: dropCapDark,
 	},
 	'--apps-epic-background': {
 		light: appsEpicBackgroundLight,
