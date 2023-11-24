@@ -12,7 +12,6 @@ import type { TableOfContentsItem } from '../types/frontend';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
-import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { TableOfContents } from './TableOfContents.importable';
 
 type Props = {
@@ -104,9 +103,6 @@ const globalLinkStyles = () => css`
 		}
 	}
 `;
-
-const isRecipe = (tags: TagType[]): boolean =>
-	tags.some(({ id }) => id === 'tone/recipes');
 
 export const ArticleBody = ({
 	format,
@@ -216,15 +212,6 @@ export const ArticleBody = ({
 				lang={language}
 				dir={languageDirection}
 			>
-				{isRecipe(tags) && (
-					<Island
-						priority="feature"
-						defer={{ until: 'hash' }}
-						clientOnly={true}
-					>
-						<RecipeMultiplier />
-					</Island>
-				)}
 				<ArticleRenderer
 					format={format}
 					elements={blocks[0] ? blocks[0].elements : []}
