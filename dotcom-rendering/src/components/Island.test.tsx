@@ -5,6 +5,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { AppEmailSignUp } from './AppEmailSignUp.importable';
 import { AppsEpic } from './AppsEpic.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
@@ -21,6 +22,7 @@ import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
 import { MostViewedFooterData } from './MostViewedFooterData.importable';
+import { MostViewedRightWrapper } from './MostViewedRightWrapper.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
@@ -28,6 +30,7 @@ import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
+import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { Snow } from './Snow.importable';
@@ -98,6 +101,22 @@ const Mock = () => <>🏝️</>;
 describe('Island: server-side rendering', () => {
 	test('AlreadyVisited', () => {
 		expect(() => renderToString(<AlreadyVisited />)).not.toThrow();
+	});
+
+	test('AppEmailSignup', () => {
+		expect(() =>
+			renderToString(
+				<AppEmailSignUp
+					skipToIndex={0}
+					identityName={''}
+					successDescription={''}
+					name={''}
+					description={''}
+					frequency={''}
+					theme={''}
+				/>,
+			),
+		).not.toThrow();
 	});
 
 	test('AppsEpic', () => {
@@ -306,6 +325,18 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
+	test('MostViewedRightWrapper', () => {
+		expect(() =>
+			renderToString(
+				<MostViewedRightWrapper
+					componentDataAttribute={''}
+					maxHeightPx={0}
+					renderAds={false}
+				/>,
+			),
+		).not.toThrow();
+	});
+
 	test('ReaderRevenueDev', () => {
 		expect(() =>
 			renderToString(
@@ -373,6 +404,10 @@ describe('Island: server-side rendering', () => {
 				/>,
 			),
 		).not.toThrow();
+	});
+
+	test('ShowHideContainers', () => {
+		expect(() => renderToString(<ShowHideContainers />)).not.toThrow();
 	});
 
 	test('SignInGateSelector', () => {
