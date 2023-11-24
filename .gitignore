@@ -11,10 +11,9 @@ yarn-error.log*
 
 # Dependency directories
 node_modules
-
-# Yarn Integrity file
-.yarn-integrity
 .yarn/*
+
+# Things yarn might create that we'd want to check in
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
