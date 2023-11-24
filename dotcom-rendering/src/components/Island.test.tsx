@@ -34,7 +34,6 @@ import { SetAdTargeting } from './SetAdTargeting.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
-import { Snow } from './Snow.importable';
 import { StickyBottomBanner } from './StickyBottomBanner.importable';
 import { SupportTheG } from './SupportTheG.importable';
 
@@ -211,10 +210,6 @@ describe('Island: server-side rendering', () => {
 				<InteractiveSupportButton editionId="UK" subscribeUrl="" />,
 			),
 		).not.toThrow();
-	});
-
-	test('Snow', () => {
-		expect(() => renderToString(<Snow />)).not.toThrow();
 	});
 
 	test('OnwardsUpper', () => {
