@@ -820,7 +820,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						/>
 					</Section>
 				)}
-				{isWeb && !isPaidContent && (
+				{!isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}

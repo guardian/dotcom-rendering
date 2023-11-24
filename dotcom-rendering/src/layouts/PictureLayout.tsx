@@ -679,7 +679,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{isWeb && !isPaidContent && (
+				{!isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}

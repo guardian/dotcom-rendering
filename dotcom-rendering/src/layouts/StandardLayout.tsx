@@ -832,104 +832,95 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				)}
 
 				{isWeb && (
-					<>
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<OnwardsUpper
-								ajaxUrl={article.config.ajaxUrl}
-								hasRelated={article.hasRelated}
-								hasStoryPackage={article.hasStoryPackage}
-								isAdFreeUser={article.isAdFreeUser}
-								pageId={article.pageId}
-								isPaidContent={!!article.config.isPaidContent}
-								showRelatedContent={
-									article.config.showRelatedContent
-								}
-								keywordIds={article.config.keywordIds}
-								contentType={article.contentType}
-								tags={article.tags}
-								format={format}
-								pillar={format.theme}
-								editionId={article.editionId}
-								shortUrlId={article.config.shortUrlId}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-							/>
-						</Island>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<OnwardsUpper
+							ajaxUrl={article.config.ajaxUrl}
+							hasRelated={article.hasRelated}
+							hasStoryPackage={article.hasStoryPackage}
+							isAdFreeUser={article.isAdFreeUser}
+							pageId={article.pageId}
+							isPaidContent={!!article.config.isPaidContent}
+							showRelatedContent={
+								article.config.showRelatedContent
+							}
+							keywordIds={article.config.keywordIds}
+							contentType={article.contentType}
+							tags={article.tags}
+							format={format}
+							pillar={format.theme}
+							editionId={article.editionId}
+							shortUrlId={article.config.shortUrlId}
+							discussionApiUrl={article.config.discussionApiUrl}
+						/>
+					</Island>
+				)}
 
-						{!isPaidContent && showComments && (
-							<Section
-								fullWidth={true}
-								sectionId="comments"
-								data-print-layout="hide"
-								element="section"
+				{!isPaidContent && showComments && (
+					<Section
+						fullWidth={true}
+						sectionId="comments"
+						data-print-layout="hide"
+						element="section"
+					>
+						<DiscussionLayout
+							discussionApiUrl={article.config.discussionApiUrl}
+							shortUrlId={article.config.shortUrlId}
+							format={format}
+							discussionD2Uid={article.config.discussionD2Uid}
+							discussionApiClientHeader={
+								article.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								!!article.config.switches.enableDiscussionSwitch
+							}
+							isAdFreeUser={article.isAdFreeUser}
+							shouldHideAds={article.shouldHideAds}
+							idApiUrl={article.config.idApiUrl}
+						/>
+					</Section>
+				)}
+
+				{!isPaidContent && (
+					<Section
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
+						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
+					>
+						<MostViewedFooterLayout renderAds={renderAds}>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
 							>
-								<DiscussionLayout
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									shortUrlId={article.config.shortUrlId}
+								<MostViewedFooterData
+									sectionId={article.config.section}
 									format={format}
-									discussionD2Uid={
-										article.config.discussionD2Uid
-									}
-									discussionApiClientHeader={
-										article.config.discussionApiClientHeader
-									}
-									enableDiscussionSwitch={
-										!!article.config.switches
-											.enableDiscussionSwitch
-									}
-									isAdFreeUser={article.isAdFreeUser}
-									shouldHideAds={article.shouldHideAds}
-									idApiUrl={article.config.idApiUrl}
+									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
 								/>
-							</Section>
-						)}
+							</Island>
+						</MostViewedFooterLayout>
+					</Section>
+				)}
 
-						{isWeb && !isPaidContent && (
-							<Section
-								title="Most viewed"
-								padContent={false}
-								verticalMargins={false}
-								element="aside"
-								data-print-layout="hide"
-								data-link-name="most-popular"
-								data-component="most-popular"
-							>
-								<MostViewedFooterLayout renderAds={renderAds}>
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<MostViewedFooterData
-											sectionId={article.config.section}
-											format={format}
-											ajaxUrl={article.config.ajaxUrl}
-											edition={article.editionId}
-										/>
-									</Island>
-								</MostViewedFooterLayout>
-							</Section>
-						)}
-
-						{renderAds && !isLabs && (
-							<Section
-								fullWidth={true}
-								data-print-layout="hide"
-								padSides={false}
-								showTopBorder={false}
-								showSideBorders={false}
-								backgroundColour={neutral[93]}
-								element="aside"
-							>
-								<AdSlot
-									position="merchandising"
-									display={format.display}
-								/>
-							</Section>
-						)}
-					</>
+				{renderAds && !isLabs && (
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+						/>
+					</Section>
 				)}
 			</main>
 			{isWeb && (

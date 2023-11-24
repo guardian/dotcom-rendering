@@ -809,7 +809,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{isWeb && !isPaidContent && (
+				{!isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}
