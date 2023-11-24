@@ -61,6 +61,20 @@ const useDev = () => {
 	return isDev;
 };
 
+/**
+ * Record relevant metrics to our data warehouse:
+ * - Core Web Vitals
+ * - Commercial Metrics
+ *
+ * ## Why does this need to be an Island?
+ *
+ * Metrics are tied to a single page view and are gathered
+ * on the client-side exclusively.
+ *
+ * ---
+ *
+ * (No visual story exists as this does not render anything)
+ */
 export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 	const abTestApi = useAB()?.api;
 	const adBlockerInUse = useAdBlockInUse();
