@@ -463,7 +463,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 			<main data-layout="ImmersiveLayout">
 				{renderingTarget === 'Apps' && (
-					<Island priority="critical" clientOnly={true}>
+					<Island priority="critical">
 						<AdPortals />
 					</Island>
 				)}

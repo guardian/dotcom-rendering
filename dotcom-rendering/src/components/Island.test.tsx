@@ -4,6 +4,7 @@
 
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
+import { AdPortals } from './AdPortals.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { AppEmailSignUp } from './AppEmailSignUp.importable';
 import { AppsEpic } from './AppsEpic.importable';
@@ -99,6 +100,10 @@ const Mock = () => <>🏝️</>;
 // Jest tests
 
 describe('Island: server-side rendering', () => {
+	test('AdPortals', () => {
+		expect(() => renderToString(<AdPortals />)).not.toThrow();
+	});
+
 	test('AlreadyVisited', () => {
 		expect(() => renderToString(<AlreadyVisited />)).not.toThrow();
 	});
