@@ -6,19 +6,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-      - run: make install
-        working-directory: dotcom-rendering
+
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
+
       - name: Lint Project
         run: make lint-project
         working-directory: dotcom-rendering
+
       - name: Lint
         run: make lint
         working-directory: dotcom-rendering
+
       - name: Stylelint
         run: make stylelint
         working-directory: dotcom-rendering
