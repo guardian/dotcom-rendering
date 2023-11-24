@@ -10,6 +10,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
 import { TopRightAdSlot } from './TopRightAdSlot';
 
@@ -502,29 +503,31 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<div
-					className="ad-slot-container"
-					css={[adContainerStyles, mostPopContainerStyles]}
-				>
+				<Hide until="tablet">
 					<div
-						id="dfp-ad--mostpop"
-						className={[
-							'js-ad-slot',
-							'ad-slot',
-							'ad-slot--mostpop',
-							'ad-slot--mpu-banner-ad',
-							'ad-slot--rendered',
-						].join(' ')}
-						css={[
-							fluidAdStyles,
-							fluidFullWidthAdStyles,
-							mostPopAdStyles,
-						]}
-						data-link-name="ad slot mostpop"
-						data-name="mostpop"
-						aria-hidden="true"
-					/>
-				</div>
+						className="ad-slot-container"
+						css={[adContainerStyles, mostPopContainerStyles]}
+					>
+						<div
+							id="dfp-ad--mostpop"
+							className={[
+								'js-ad-slot',
+								'ad-slot',
+								'ad-slot--mostpop',
+								'ad-slot--mpu-banner-ad',
+								'ad-slot--rendered',
+							].join(' ')}
+							css={[
+								fluidAdStyles,
+								fluidFullWidthAdStyles,
+								mostPopAdStyles,
+							]}
+							data-link-name="ad slot mostpop"
+							data-name="mostpop"
+							aria-hidden="true"
+						/>
+					</div>
+				</Hide>
 			);
 		}
 		case 'merchandising-high': {
