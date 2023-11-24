@@ -982,11 +982,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						/>
 					</Section>
 					<BannerWrapper data-print-layout="hide">
-						<Island
-							priority="feature"
-							defer={{ until: 'idle' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={

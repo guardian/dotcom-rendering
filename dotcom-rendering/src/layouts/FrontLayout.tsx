@@ -719,11 +719,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			</Section>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island
-					priority="feature"
-					defer={{ until: 'idle' }}
-					clientOnly={true}
-				>
+				<Island priority="feature" defer={{ until: 'idle' }}>
 					<StickyBottomBanner
 						contentType={front.config.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}
