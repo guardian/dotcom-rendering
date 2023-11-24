@@ -153,7 +153,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							}
 						/>
 					</Island>
-					<Island clientOnly={true} priority="critical">
+					<Island priority="critical">
 						<SetABTests
 							abTestSwitches={filterABTestSwitches(
 								article.config.switches,
