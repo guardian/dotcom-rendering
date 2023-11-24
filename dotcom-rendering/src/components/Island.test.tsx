@@ -370,6 +370,7 @@ describe('Island: server-side rendering', () => {
 
 	test('RecipeMultiplier', () => {
 		expect(() => renderToString(<RecipeMultiplier />)).not.toThrow();
+		expect(renderToString(<RecipeMultiplier />)).toBe('');
 	});
 
 	test('SendTargetingParams', () => {

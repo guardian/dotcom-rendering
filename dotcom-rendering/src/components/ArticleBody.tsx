@@ -217,11 +217,7 @@ export const ArticleBody = ({
 				dir={languageDirection}
 			>
 				{isRecipe(tags) && (
-					<Island
-						priority="feature"
-						defer={{ until: 'hash' }}
-						clientOnly={true}
-					>
+					<Island priority="feature" defer={{ until: 'hash' }}>
 						<RecipeMultiplier />
 					</Island>
 				)}

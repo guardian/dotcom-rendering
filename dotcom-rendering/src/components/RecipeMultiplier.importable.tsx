@@ -4,6 +4,7 @@ import { palette, space, textSans } from '@guardian/source-foundations';
 import { Button, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
 import { useEffect, useState } from 'react';
+import { onNavigation } from '../client/islands/onNavigation';
 
 const colours = `
 gu-recipe {
@@ -120,10 +121,17 @@ const transform = ({
 };
 
 export const RecipeMultiplier = () => {
+	const [enabled, setEnabled] = useState(false);
 	const [servesElement, setServesElement] = useState<HTMLElement>();
 	const [serves, setServes] = useState<number>(1);
 	const [servings, setServings] = useState<number>(serves);
 	const [multiplier, setMultiplier] = useState(1);
+
+	useEffect(() => {
+		onNavigation(() => {
+			setEnabled(window.location.hash === `#RecipeMultiplier`);
+		});
+	}, []);
 
 	useEffect(() => {
 		if (!servesElement) return;
@@ -137,6 +145,7 @@ export const RecipeMultiplier = () => {
 	}, [servesElement]);
 
 	useEffect(() => {
+		if (!enabled) return;
 		log('dotcom', 'Injecting multiplier');
 		const style = document.createElement('style');
 		style.innerHTML = colours;
@@ -223,7 +232,7 @@ export const RecipeMultiplier = () => {
 				log('design', index, length, node.textContent);
 			}
 		}
-	}, []);
+	}, [enabled]);
 
 	useEffect(() => {
 		if (servesElement) servesElement.innerText = servings.toString();
@@ -258,6 +267,8 @@ export const RecipeMultiplier = () => {
 
 		if (!Number.isNaN(float)) setServings(float);
 	};
+
+	if (!enabled) return null;
 
 	return (
 		<ul css={styles}>
