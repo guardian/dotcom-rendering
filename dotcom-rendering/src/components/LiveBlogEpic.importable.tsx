@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
@@ -17,6 +18,7 @@ import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	sectionId: string;
@@ -189,6 +191,7 @@ const Fetch = ({
 	contributionsServiceUrl: string;
 }) => {
 	const response = useSDCLiveblogEpic(contributionsServiceUrl, payload);
+	const { renderingTarget } = useConfig();
 
 	// If we didn't get a module in response (or we're still waiting) do nothing. If
 	// no epic should be shown the response is equal to {}, hence the Object.keys
@@ -200,7 +203,8 @@ const Fetch = ({
 	// Add submitComponentEvent function to props to enable Ophan tracking in the component
 	const props = {
 		...response.data.module.props,
-		submitComponentEvent,
+		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+			submitComponentEvent(componentEvent, renderingTarget),
 	};
 
 	// Take any returned module and render it
