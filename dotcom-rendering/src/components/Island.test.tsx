@@ -27,7 +27,6 @@ import { MostViewedRightWrapper } from './MostViewedRightWrapper.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
-import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
@@ -366,10 +365,6 @@ describe('Island: server-side rendering', () => {
 				</ConfigProvider>,
 			),
 		).not.toThrow();
-	});
-
-	test('RecipeMultiplier', () => {
-		expect(() => renderToString(<RecipeMultiplier />)).not.toThrow();
 	});
 
 	test('SendTargetingParams', () => {

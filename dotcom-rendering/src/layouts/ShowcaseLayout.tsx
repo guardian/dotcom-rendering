@@ -621,7 +621,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									<Island
 										priority="feature"
 										defer={{ until: 'visible' }}
-										clientOnly={true}
 									>
 										<SlotBodyEnd
 											contentType={article.contentType}

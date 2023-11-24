@@ -576,11 +576,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							max-width: 620px;
 						`}
 					>
-						<Island
-							priority="feature"
-							defer={{ until: 'visible' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<SlotBodyEnd
 								contentType={article.contentType}
 								contributionsServiceUrl={
