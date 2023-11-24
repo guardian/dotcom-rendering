@@ -40,9 +40,7 @@ export const SetABTests = ({
 
 	useEffect(() => {
 		getOphan(renderingTarget)
-			.then((ophanWindow) => {
-				setOphan(ophanWindow);
-			})
+			.then(setOphan)
 			.catch((e) => {
 				console.log(
 					`There was an error retrieving the ophan window object`,
