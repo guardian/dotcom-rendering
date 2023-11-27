@@ -2313,6 +2313,8 @@ const standfirstTextLight: PaletteFunction = (format) => {
 				default:
 					return sourcePalette.neutral[86];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[100];
 		default:
 			if (
 				format.theme === ArticleSpecial.SpecialReportAlt &&
