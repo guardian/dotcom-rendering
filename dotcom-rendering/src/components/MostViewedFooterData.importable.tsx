@@ -11,6 +11,7 @@ import type {
 	TrailTabType,
 } from '../types/trails';
 import { MostViewedFooter } from './MostViewedFooter.importable';
+import { Placeholder } from './Placeholder';
 
 interface Props {
 	sectionId?: string;
@@ -108,5 +109,5 @@ export const MostViewedFooterData = ({
 		);
 	}
 
-	return null;
+	return <Placeholder height={360} />;
 };

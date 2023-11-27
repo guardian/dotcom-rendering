@@ -2,7 +2,7 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- Automatically created with yarn run createtoc and on push hook -->
+<!-- Automatically created by running `yarn createtoc` in a pre-commit hook -->
 
 -   [TypeScript](#typescript)
     -   [Always used named exports](#always-used-named-exports)
@@ -20,7 +20,7 @@
 
 ## TypeScript
 
-We use TSlint and [Prettier](https://prettier.io/) to enforce our TypeScript code style.
+We use ESlint and [Prettier](https://prettier.io/) to enforce our TypeScript code style.
 Running `make fix` after making any changes will fix most things.
 
 There are some styles the linter can't pick up. If you are unsure of anything, [Excel Micro's fork of AirBnB's style

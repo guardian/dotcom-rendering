@@ -23,6 +23,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - run: corepack enable
+
       # Get the desired version of Node installed
       - uses: actions/setup-node@v3
         with:

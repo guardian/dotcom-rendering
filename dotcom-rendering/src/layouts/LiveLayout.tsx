@@ -13,6 +13,7 @@ import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -423,7 +424,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main data-layout="LiveLayout">
 				{isApps && (
-					<Island priority="critical" clientOnly={true}>
+					<Island priority="critical">
 						<AdPortals rightAlignFrom="wide" />
 					</Island>
 				)}
@@ -477,7 +478,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={themePalette('--headline-background')}
+						backgroundColour={themePalette(
+							'--headline-blog-background',
+						)}
 						borderColour={themePalette('--headline-border')}
 					>
 						<HeadlineGrid>
@@ -648,7 +651,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								`}
 							/>
 							<Island
-								clientOnly={true}
 								priority="feature"
 								defer={{ until: 'idle' }}
 							>
@@ -1258,7 +1260,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							<MostViewedFooterLayout renderAds={renderAds}>
 								<Island
 									priority="feature"
-									clientOnly={true}
 									defer={{ until: 'visible' }}
 								>
 									<MostViewedFooterData
@@ -1340,11 +1341,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper data-print-layout="hide">
-						<Island
-							priority="feature"
-							defer={{ until: 'idle' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -1375,6 +1372,22 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</BannerWrapper>
 					<MobileStickyContainer data-print-layout="hide" />
 				</>
+			)}
+
+			{isApps && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					backgroundColour={themePalette('--apps-footer-background')}
+					borderColour={themePalette('--article-border')}
+					padSides={false}
+					showSideBorders={false}
+					element="footer"
+				>
+					<Island priority="critical">
+						<AppsFooter />
+					</Island>
+				</Section>
 			)}
 		</>
 	);

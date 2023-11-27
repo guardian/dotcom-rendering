@@ -454,7 +454,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 			<main data-layout="ImmersiveLayout">
 				{renderingTarget === 'Apps' && (
-					<Island priority="critical" clientOnly={true}>
+					<Island priority="critical">
 						<AdPortals />
 					</Island>
 				)}
@@ -636,7 +636,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									<Island
 										priority="feature"
 										defer={{ until: 'visible' }}
-										clientOnly={true}
 									>
 										<SlotBodyEnd
 											contentType={article.contentType}
@@ -833,7 +832,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
 								priority="feature"
-								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
 								<MostViewedFooterData
@@ -941,7 +939,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
-					backgroundColour={neutral[97]}
+					backgroundColour={themePalette('--apps-footer-background')}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"

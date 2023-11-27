@@ -400,7 +400,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main data-layout="InteractiveLayout">
 				{isApps && (
-					<Island priority="critical" clientOnly={true}>
+					<Island priority="critical">
 						<AdPortals />
 					</Island>
 				)}
@@ -576,11 +576,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							max-width: 620px;
 						`}
 					>
-						<Island
-							priority="feature"
-							defer={{ until: 'visible' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<SlotBodyEnd
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -735,7 +731,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
 								priority="feature"
-								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
 								<MostViewedFooterData
@@ -809,11 +804,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper data-print-layout="hide">
-						<Island
-							priority="feature"
-							defer={{ until: 'idle' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -849,7 +840,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
-					backgroundColour={neutral[97]}
+					backgroundColour={themePalette('--apps-footer-background')}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"

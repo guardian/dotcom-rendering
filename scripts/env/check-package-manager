@@ -1,0 +1,59 @@
+#!/usr/bin/env node
+
+// no external deps can be used here, because this runs before deps are installed
+const { execSync } = require('child_process');
+const { stdout } = require('process');
+const { colourise, log, warn } = require('../log');
+
+// we can't use chalk, because this runs before deps are installed
+// https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+const reset = '\x1b[0m';
+const blue = '\x1b[34m';
+const red = '\x1b[31m';
+const dim = '\x1b[2m';
+
+// get the package manager and version we need from package.json
+const pkgPackageManager = require('../../package.json').packageManager;
+
+if (!pkgPackageManager) {
+	warn(
+		`The 'packageManager' field is missing from the root package.json, but it is needed by ./scripts/env/check-package-manager (i.e. this file).`,
+	);
+	log('Is that deliberate?');
+	process.exit(1);
+}
+
+const [packageManager, version] = pkgPackageManager.split('@');
+
+try {
+	// Try and get the current version of the package manager we need.
+	// If it's not installed, this will error and we will land in the `catch` below.
+	const userVersion = execSync(`${packageManager} --version`, {
+		encoding: 'utf-8',
+	}).trim();
+
+	// If the user is using the correct version, then we're done.
+	if (userVersion === version) {
+		log(`Using ${packageManager} ${reset}${blue}${version}${reset}`);
+		process.exit(0);
+	}
+
+	// Now we know the user has the correct package manager but the wrong version.
+	// If corepack was enabled, it would be the right version. So it's not enabled.
+	warn(`Found incorrect ${packageManager} version.`);
+	log(
+		`You have ${reset}${red}v${userVersion}${reset}${dim} installed, but this project requires ${reset}${blue}v${version}${reset}${dim}.`,
+	);
+	log(
+		`Please run 'corepack enable' to automatically use the correct version.`,
+	);
+	log(
+		`If you wish, you can then safely uninstall your global ${packageManager}.`,
+	);
+	process.exit(1);
+} catch (e) {
+	// The package manager is not available, so corepack is not enabled.
+	// Enabling corepack will fix this.
+	warn(`Could not find ${packageManager}. Please run 'corepack enable'.`);
+	process.exit(1);
+}

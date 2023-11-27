@@ -47,9 +47,9 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-island-status', 'rendered');
+			.should('have.attr', 'data-island-status', 'hydrated');
 		cy.scrollTo('center');
-		cy.get(`[data-cy="toast"]`).should('not.exist');
+		cy.get(`[data-testid="toast"]`).should('not.exist');
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
 				numNewBlocks: 1,
@@ -57,7 +57,7 @@ describe('Liveblogs', function () {
 				mostRecentBlockId: 'abc',
 			});
 		});
-		cy.get(`[data-cy="toast"]`).should('exist');
+		cy.get(`[data-testid="toast"]`).should('exist');
 		cy.contains('1 new update');
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
@@ -75,7 +75,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-island-status', 'rendered');
+			.should('have.attr', 'data-island-status', 'hydrated');
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
 				numNewBlocks: 1,
@@ -92,9 +92,9 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]', { timeout: 30000 })
 			.first()
-			.should('have.attr', 'data-island-status', 'rendered');
+			.should('have.attr', 'data-island-status', 'hydrated');
 		cy.scrollTo('bottom');
-		cy.get(`[data-cy="toast"]`).should('not.exist');
+		cy.get(`[data-testid="toast"]`).should('not.exist');
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
 				numNewBlocks: 1,
@@ -102,9 +102,9 @@ describe('Liveblogs', function () {
 				mostRecentBlockId: 'abc',
 			});
 		});
-		cy.get(`[data-cy="toast"]`).should('exist');
+		cy.get(`[data-testid="toast"]`).should('exist');
 		cy.contains('1 new update').click({ force: true });
-		cy.get(`[data-cy="toast"]`).should('not.exist');
+		cy.get(`[data-testid="toast"]`).should('not.exist');
 	});
 
 	/**
@@ -128,7 +128,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-island-status', 'rendered');
+			.should('have.attr', 'data-island-status', 'hydrated');
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
 				numNewBlocks: 1,
@@ -171,9 +171,9 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]', { timeout: 30000 })
 			.first()
-			.should('have.attr', 'data-island-status', 'rendered');
+			.should('have.attr', 'data-island-status', 'hydrated');
 		cy.scrollTo('bottom');
-		cy.get(`[data-cy="toast"]`).should('not.exist');
+		cy.get(`[data-testid="toast"]`).should('not.exist');
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
 				numNewBlocks: 1,
@@ -181,7 +181,7 @@ describe('Liveblogs', function () {
 				mostRecentBlockId: 'abc',
 			});
 		});
-		cy.get(`[data-cy="toast"]`).should('exist');
+		cy.get(`[data-testid="toast"]`).should('exist');
 		cy.contains('1 new update').click({ force: true });
 		cy.location().should((loc) => {
 			expect(loc.hash).to.eq('#maincontent');
@@ -198,7 +198,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-island-status', 'rendered');
+			.should('have.attr', 'data-island-status', 'hydrated');
 		cy.scrollTo('bottom', { duration: 1000 });
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({

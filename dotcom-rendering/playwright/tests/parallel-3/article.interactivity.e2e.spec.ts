@@ -24,17 +24,17 @@ test.describe('Interactivity', () => {
 
 			await waitForIsland(page, 'HeaderTopBar', { status: 'hydrated' });
 			// Open it
-			await page.locator('[data-cy=dropdown-button]').click();
-			await expectToBeVisible(page, '[data-cy=dropdown-options]');
+			await page.locator('[data-testid=dropdown-button]').click();
+			await expectToBeVisible(page, '[data-testid=dropdown-options]');
 			// Pressing esc hides it
 			await page.locator('body').press('Escape');
-			await expectToNotBeVisible(page, '[data-cy=dropdown-options]');
+			await expectToNotBeVisible(page, '[data-testid=dropdown-options]');
 			// Open it again
-			await page.locator('[data-cy=dropdown-button]').click();
-			await expectToBeVisible(page, '[data-cy=dropdown-options]');
+			await page.locator('[data-testid=dropdown-button]').click();
+			await expectToBeVisible(page, '[data-testid=dropdown-options]');
 			// Clicking elsewhere in the document hides it
 			await page.locator('h1').first().click();
-			await expectToNotBeVisible(page, '[data-cy=dropdown-options]');
+			await expectToNotBeVisible(page, '[data-testid=dropdown-options]');
 		});
 
 		test('loads the discussion when you click the comment count', async ({
@@ -47,15 +47,15 @@ test.describe('Interactivity', () => {
 				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster`,
 			);
 
-			await expectToBeVisible(page, '[data-cy=comment-counts]');
+			await expectToBeVisible(page, '[data-testid=comment-counts]');
 			// The discusion is not yet loaded
-			await expectToNotBeVisible(page, '[data-cy=discussion]');
+			await expectToNotBeVisible(page, '[data-testid=discussion]');
 			// Click the comment count
-			await page.locator('[data-cy=comment-counts]').click();
+			await page.locator('[data-testid=comment-counts]').click();
 			await waitForIsland(page, 'DiscussionContainer', {
 				status: 'hydrated',
 			});
-			await expectToExist(page, '[data-cy=discussion]');
+			await expectToExist(page, '[data-testid=discussion]');
 		});
 
 		test('loads the discussion immediately when you use a url ending in #comments', async ({
@@ -67,7 +67,7 @@ test.describe('Interactivity', () => {
 				page,
 				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
 			);
-			await expectToExist(page, '[data-cy=discussion]');
+			await expectToExist(page, '[data-testid=discussion]');
 		});
 
 		test('loads the discussion immediately when you use a permalink', async ({
@@ -93,7 +93,9 @@ test.describe('Interactivity', () => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
 			await expectToNotExist(page, '[data-component=geo-most-popular]');
-			await waitForIsland(page, 'MostViewedRightWrapper');
+			await waitForIsland(page, 'MostViewedRightWrapper', {
+				status: 'hydrated',
+			});
 			await expectToExist(page, '[data-component=geo-most-popular]');
 		});
 
@@ -128,7 +130,7 @@ test.describe('Interactivity', () => {
 		}) => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
-			await waitForIsland(page, 'SupportTheG');
+			await waitForIsland(page, 'SupportTheG', { status: 'hydrated' });
 			await expect(
 				page
 					.locator('header')
@@ -147,18 +149,22 @@ test.describe('Interactivity', () => {
 
 			// Make sure most viewed footer isn't in the dom yet
 			await expect(
-				page.locator('[data-cy=mostviewed-footer]'),
+				page.locator('[data-testid=mostviewed-footer]'),
 			).toHaveCount(0);
 
 			// Wait for hydration
-			await waitForIsland(page, 'MostViewedRightWrapper');
+			await waitForIsland(page, 'MostViewedRightWrapper', {
+				status: 'hydrated',
+			});
 			await expect(
 				page
 					.locator(`gu-island[name="MostViewedRightWrapper"]`)
 					.filter({ hasText: 'Most Viewed' }),
 			).toBeVisible();
 
-			await waitForIsland(page, 'MostViewedFooterData');
+			await waitForIsland(page, 'MostViewedFooterData', {
+				status: 'hydrated',
+			});
 			await expect(
 				page
 					.locator(`gu-island[name="MostViewedFooterData"]`)
@@ -166,11 +172,11 @@ test.describe('Interactivity', () => {
 			).toBeVisible();
 
 			await mockApis(page);
-			await expectToBeVisible(page, '[data-cy=tab-body-0]');
-			await expectToNotBeVisible(page, '[data-cy=tab-body-1]');
-			await page.locator('[data-cy=tab-heading-1]').click();
-			await expectToNotBeVisible(page, '[data-cy=tab-body-0]');
-			await expectToBeVisible(page, '[data-cy=tab-body-1]');
+			await expectToBeVisible(page, '[data-testid=tab-body-0]');
+			await expectToNotBeVisible(page, '[data-testid=tab-body-1]');
+			await page.locator('[data-testid=tab-heading-1]').click();
+			await expectToNotBeVisible(page, '[data-testid=tab-body-0]');
+			await expectToBeVisible(page, '[data-testid=tab-body-1]');
 		});
 	});
 
@@ -183,23 +189,23 @@ test.describe('Interactivity', () => {
 			await loadPage(page, `/Article/${articleUrl}`);
 
 			// Open pillar menu
-			await page.locator('[data-cy=nav-show-more-button]').click();
+			await page.locator('[data-testid=nav-show-more-button]').click();
 			await expect(
 				page
-					.locator('[data-cy=expanded-menu]')
+					.locator('[data-testid=expanded-menu]')
 					.filter({ hasText: 'Columnists' }),
 			).toBeVisible();
 
 			// Assert newslinks second item (first visible) is focused
 			// TODO e2e find a better way to filter on visible list items :visible doesn't work
 			await expect(
-				page.locator('[data-cy="newsLinks"] > li:nth-child(2) a'),
+				page.locator('[data-testid="newsLinks"] > li:nth-child(2) a'),
 			).toBeFocused();
 
 			// Press escape and assert show more is focused
 			await page.locator('body').press('Escape');
 			await expect(
-				page.locator('[data-cy=nav-show-more-button]'),
+				page.locator('[data-testid=nav-show-more-button]'),
 			).toBeFocused();
 		});
 
@@ -212,7 +218,7 @@ test.describe('Interactivity', () => {
 				await disableCMP(context);
 				await loadPage(page, `/Article/${articleUrl}`);
 
-				await page.locator('[data-cy=veggie-burger]').click();
+				await page.locator('[data-testid=veggie-burger]').click();
 				await expect(
 					page
 						.locator('nav')
@@ -220,7 +226,9 @@ test.describe('Interactivity', () => {
 						.filter({ hasText: 'Crosswords' }),
 				).toBeVisible();
 
-				await page.locator('[data-cy=column-collapse-Opinion]').click();
+				await page
+					.locator('[data-testid=column-collapse-Opinion]')
+					.click();
 				await expect(
 					page
 						.locator('nav')
@@ -230,7 +238,7 @@ test.describe('Interactivity', () => {
 
 				await page.locator('body').press('Escape');
 				await expect(
-					page.locator('[data-cy=veggie-burger]'),
+					page.locator('[data-testid=veggie-burger]'),
 				).toBeFocused();
 			});
 
@@ -242,10 +250,10 @@ test.describe('Interactivity', () => {
 				await disableCMP(context);
 				await loadPage(page, `/Article/${articleUrl}`);
 
-				await page.locator('[data-cy=veggie-burger]').focus();
-				await page.locator('[data-cy=veggie-burger]').press('Tab');
+				await page.locator('[data-testid=veggie-burger]').focus();
+				await page.locator('[data-testid=veggie-burger]').press('Tab');
 				await expect(
-					page.locator('[data-cy=sub-nav] a').first(),
+					page.locator('[data-testid=sub-nav] a').first(),
 				).toBeFocused();
 			});
 
@@ -257,9 +265,9 @@ test.describe('Interactivity', () => {
 				await disableCMP(context);
 				await loadPage(page, `/Article/${articleUrl}`);
 
-				await page.locator('[data-cy=veggie-burger]').click();
+				await page.locator('[data-testid=veggie-burger]').click();
 				await expect(
-					page.locator('[data-cy=column-collapse-News]'),
+					page.locator('[data-testid=column-collapse-News]'),
 				).toBeFocused();
 			});
 
@@ -272,14 +280,14 @@ test.describe('Interactivity', () => {
 				await loadPage(page, `/Article/${articleUrl}`);
 
 				// tab to the first sub menu item
-				await page.locator('[data-cy=veggie-burger]').click();
+				await page.locator('[data-testid=veggie-burger]').click();
 				await page.keyboard.press('Enter');
 				await page.keyboard.press('Tab');
 
 				// Assert first item of first sub menu is focused
 				await expect(
 					page.locator(
-						'[data-cy="nav-menu-columns"] > li:nth-child(1) > ul > li:nth-child(1) > a',
+						'[data-testid="nav-menu-columns"] > li:nth-child(1) > ul > li:nth-child(1) > a',
 					),
 				).toBeFocused();
 			});
@@ -292,19 +300,23 @@ test.describe('Interactivity', () => {
 				await disableCMP(context);
 				await loadPage(page, `/Article/${articleUrl}`);
 
-				await page.locator('[data-cy=veggie-burger]').press('Enter');
+				await page
+					.locator('[data-testid=veggie-burger]')
+					.press('Enter');
 
 				// Close the news menu
 				await page.locator('*:focus').press('Tab');
 				await expect(
-					page.locator('[data-cy=column-collapse-Opinion]'),
+					page.locator('[data-testid=column-collapse-Opinion]'),
 				).toBeFocused();
 
 				// Open the opinion menu
 				await page.locator('*:focus').press('Enter');
 				await page.locator('*:focus').press('Tab');
 				await expect(
-					page.locator('[data-cy=column-collapse-sublink-Opinion]'),
+					page.locator(
+						'[data-testid=column-collapse-sublink-Opinion]',
+					),
 				).toBeFocused();
 			});
 
@@ -328,32 +340,38 @@ test.describe('Interactivity', () => {
 
 				// Both subnav buttons show 'More'
 				await expect(
-					page.locator('[data-cy=subnav-toggle]').first(),
+					page.locator('[data-testid=subnav-toggle]').first(),
 				).toHaveText('More');
 				await expect(
-					page.locator('[data-cy=subnav-toggle]').last(),
+					page.locator('[data-testid=subnav-toggle]').last(),
 				).toHaveText('More');
 
 				// Click Show more in the first sub nav
-				await page.locator('[data-cy=subnav-toggle]').first().click();
+				await page
+					.locator('[data-testid=subnav-toggle]')
+					.first()
+					.click();
 				// The first button now shows 'Less'
 				await expect(
-					page.locator('[data-cy=subnav-toggle]').first(),
+					page.locator('[data-testid=subnav-toggle]').first(),
 				).toHaveText('Less');
 
 				// The last subnav still shows 'More'
 				await expect(
-					page.locator('[data-cy=subnav-toggle]').last(),
+					page.locator('[data-testid=subnav-toggle]').last(),
 				).toHaveText('More');
 
 				// Click Show more on the last sub nav
-				await page.locator('[data-cy=subnav-toggle]').last().click();
+				await page
+					.locator('[data-testid=subnav-toggle]')
+					.last()
+					.click();
 				// Both subnav buttons show 'Less'
 				await expect(
-					page.locator('[data-cy=subnav-toggle]').first(),
+					page.locator('[data-testid=subnav-toggle]').first(),
 				).toHaveText('Less');
 				await expect(
-					page.locator('[data-cy=subnav-toggle]').last(),
+					page.locator('[data-testid=subnav-toggle]').last(),
 				).toHaveText('Less');
 			});
 		});

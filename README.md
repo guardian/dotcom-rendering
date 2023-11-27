@@ -10,7 +10,11 @@ We recommend using [fnm](https://github.com/Schniz/fnm). It is great at managing
 
 > You may find it useful to add `--version-file-strategy recursive` to the [`fnm` shell setup](https://github.com/Schniz/fnm?tab=readme-ov-file#shell-setup). This will set the active Node version to first version it finds in the current directory _or_ any parent directory.
 
-Install [Yarn 1 (Classic)](https://classic.yarnpkg.com/).
+Once Node is installed, make sure you're using the correct package manager by [enabling corepack](https://github.com/nodejs/corepack?tab=readme-ov-file#utility-commands):
+
+```sh
+corepack enable
+```
 
 ## Install
 

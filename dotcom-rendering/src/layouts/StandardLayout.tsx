@@ -488,7 +488,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<main data-layout="StandardLayout">
 				{isApps && (
-					<Island priority="critical" clientOnly={true}>
+					<Island priority="critical">
 						<AdPortals />
 					</Island>
 				)}
@@ -697,10 +697,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									)}
 
 								{isApps && (
-									<Island
-										priority="critical"
-										clientOnly={true}
-									>
+									<Island priority="critical">
 										<AppsEpic />
 									</Island>
 								)}
@@ -709,7 +706,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									<Island
 										priority="feature"
 										defer={{ until: 'visible' }}
-										clientOnly={true}
 									>
 										<SlotBodyEnd
 											contentType={article.contentType}
@@ -904,7 +900,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<MostViewedFooterLayout renderAds={renderAds}>
 									<Island
 										priority="feature"
-										clientOnly={true}
 										defer={{ until: 'visible' }}
 									>
 										<MostViewedFooterData
@@ -986,11 +981,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						/>
 					</Section>
 					<BannerWrapper data-print-layout="hide">
-						<Island
-							priority="feature"
-							defer={{ until: 'idle' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -1028,7 +1019,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
-						backgroundColour={neutral[97]}
+						backgroundColour={themePalette(
+							'--apps-footer-background',
+						)}
 						padSides={false}
 						showSideBorders={false}
 						element="footer"

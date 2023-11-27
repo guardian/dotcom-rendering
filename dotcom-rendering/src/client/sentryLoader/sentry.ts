@@ -1,10 +1,7 @@
 import * as Sentry from '@sentry/browser';
 import type { BrowserOptions } from '@sentry/browser';
 import { CaptureConsole } from '@sentry/integrations';
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../../scripts/webpack/bundles';
+import { BUILD_VARIANT, dcrJavascriptBundle } from '../../../webpack/bundles';
 
 const allowUrls: BrowserOptions['allowUrls'] = [
 	/webpack-internal/,

@@ -28,6 +28,8 @@ jobs:
         with:
           fetch-depth: 0
 
+      - run: corepack enable
+
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
@@ -37,6 +39,8 @@ jobs:
       - run: yarn install --frozen-lockfile
 
       - name: Chromatic - Apps Rendering
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'
         uses: chromaui/action@v1
 
         with:
@@ -46,3 +50,4 @@ jobs:
           exitOnceUploaded: true
           onlyChanged: '!(main)' # only turbosnap on non-main branches
           workingDir: apps-rendering
+          buildScriptName: 'build-storybook'

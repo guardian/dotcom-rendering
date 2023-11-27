@@ -275,11 +275,7 @@ const FooterLinks = ({
 
 	const rrLinks = (
 		<div css={readerRevenueLinks}>
-			<Island
-				priority="feature"
-				defer={{ until: 'visible' }}
-				clientOnly={true}
-			>
+			<Island priority="feature" defer={{ until: 'visible' }}>
 				<ReaderRevenueLinks
 					urls={urls}
 					editionId={editionId}

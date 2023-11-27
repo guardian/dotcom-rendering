@@ -13,7 +13,7 @@ const ReadMe = () => (
 			The stories in this directory are automatically generated.
 		</p>
 		<p>
-			To add new format variations to test, please edit the list in `get-stories.js`.
+			To add new format variations to test, please edit the list in `get-stories.mjs`.
 		</p>
 	</section>
 );

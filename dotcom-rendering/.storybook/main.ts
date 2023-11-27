@@ -1,12 +1,9 @@
 import path from 'node:path';
 import webpack from 'webpack';
-import {
-	babelExclude,
-	getLoaders,
-} from '../scripts/webpack/webpack.config.client';
+import { babelExclude, getLoaders } from '../webpack/webpack.config.client';
 import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
 import type { StorybookConfig } from '@storybook/react-webpack5';
-import { svgr } from '../scripts/webpack/svg.cjs';
+import { svgr } from '../webpack/svg.cjs';
 
 // Generate dynamic Card and Layout stories
 saveStories();
@@ -97,6 +94,10 @@ const webpackConfig = (config: Configuration) => {
 	config.resolve.alias[
 		path.resolve(__dirname, '../src/server/lib/logging.ts')
 	] = path.resolve(__dirname, './mocks/log4js.ts');
+
+	// Mock BridgetApi for storybook
+	config.resolve.alias[path.resolve(__dirname, '../src/lib/bridgetApi.ts')] =
+		path.resolve(__dirname, './mocks/bridgetApi.ts');
 
 	// SecureSignup uses @emotion/cache and @emotion/server - can't be used in storybook
 	config.resolve.alias[

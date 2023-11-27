@@ -83,18 +83,20 @@ describe('E2E Page rendering', function () {
 			cy.get('gu-island[name=MostViewedFooterData]').should(
 				'have.attr',
 				'data-island-status',
-				'rendered',
+				'hydrated',
 			);
 
-			cy.get('[data-cy-ab-user-in-variant=ab-test-variant]').should(
+			cy.get('[data-testid-ab-user-in-variant=ab-test-variant]').should(
 				'be.visible',
 			);
 
-			cy.get('[data-cy-ab-runnable-test=variant]').should('be.visible');
-
-			cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
-				'not.exist',
+			cy.get('[data-testid-ab-runnable-test=variant]').should(
+				'be.visible',
 			);
+
+			cy.get(
+				'[data-testid-ab-user-in-variant=ab-test-not-in-test]',
+			).should('not.exist');
 		});
 
 		it('should not edit the page if not in an AB test', function () {
@@ -115,14 +117,14 @@ describe('E2E Page rendering', function () {
 			cy.get('gu-island[name=MostViewedFooterData]').should(
 				'have.attr',
 				'data-island-status',
-				'rendered',
+				'hydrated',
 			);
 
-			cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
-				'be.visible',
-			);
+			cy.get(
+				'[data-testid-ab-user-in-variant=ab-test-not-in-test]',
+			).should('be.visible');
 
-			cy.get('[data-cy-ab-runnable-test=not-runnable]').should(
+			cy.get('[data-testid-ab-runnable-test=not-runnable]').should(
 				'be.visible',
 			);
 		});

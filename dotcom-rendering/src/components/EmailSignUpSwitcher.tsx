@@ -19,7 +19,7 @@ export const EmailSignUpSwitcher = ({
 	const { renderingTarget } = useConfig();
 
 	return renderingTarget === 'Apps' ? (
-		<Island priority="feature" clientOnly={true} defer={{ until: 'idle' }}>
+		<Island priority="feature" defer={{ until: 'idle' }}>
 			<AppEmailSignUp skipToIndex={index} {...emailSignUpProps} />
 		</Island>
 	) : (

@@ -226,6 +226,170 @@ const iconDark = ({ design, theme }: ArticleFormat): Colour => {
 	}
 };
 
+const followIcon = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[300];
+				case ArticlePillar.News:
+				default:
+					return news[500];
+			}
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[600];
+				case ArticlePillar.Sport:
+					return sport[600];
+				case ArticlePillar.Culture:
+					return culture[600];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[600];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+				case ArticlePillar.News:
+				default:
+					return news[600];
+			}
+		case ArticleDesign.Standard: {
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+				case ArticlePillar.News:
+				default:
+					return news[400];
+			}
+		}
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+				case ArticlePillar.News:
+				default:
+					return news[400];
+			}
+		default:
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+				case ArticlePillar.News:
+				default:
+					return news[400];
+			}
+	}
+};
+
+const followIconDark = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return neutral[93];
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[700];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[700];
+				case ArticlePillar.News:
+				default:
+					return news[500];
+			}
+		default:
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[700];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[700];
+				case ArticlePillar.News:
+				default:
+					return news[500];
+			}
+	}
+};
+
 const blockquoteIcon = (format: ArticleFormat): Colour => {
 	switch (format.design) {
 		case ArticleDesign.DeadBlog:
@@ -347,6 +511,8 @@ const fill = {
 	commentCountWide,
 	icon,
 	iconDark,
+	followIcon,
+	followIconDark,
 	blockquoteIcon,
 	blockquoteIconDark,
 	lines,
