@@ -2967,6 +2967,8 @@ const syndicationButtonBorder: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[86];
 	}
 };
+const interactiveBlockBackground = () => sourcePalette.neutral[100];
+
 const mostViewedHeadlineLight = (): string => sourcePalette.neutral[7];
 const mostViewedHeadlineDark = (): string => sourcePalette.neutral[86];
 
@@ -3565,6 +3567,10 @@ const paletteColours = {
 	'--apps-epic-border': {
 		light: appsEpicBorderLight,
 		dark: appsEpicBorderDark,
+	},
+	'--interactive-block-background': {
+		light: interactiveBlockBackground,
+		dark: interactiveBlockBackground,
 	},
 	'--most-viewed-headline': {
 		light: mostViewedHeadlineLight,

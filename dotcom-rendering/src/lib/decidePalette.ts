@@ -531,7 +531,7 @@ const textCricketScoreboardLink = (): string => {
 	return sport[300];
 };
 
-/** @deprecated this has been moved to the theme palette */
+/** @deprecated this has been moved to the theme palette (--article-background) */
 const backgroundArticle = (format: ArticleFormat): string => {
 	// specialreport blogs should have specialreport background
 	if (
@@ -919,7 +919,7 @@ const fillGuardianLogo = (format: ArticleFormat): string => {
 	return WHITE;
 };
 
-/** @deprecated this has been moved to the theme palette */
+/** @deprecated this has been moved to the theme palette (--sub-nav-border) */
 const borderSubNav = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
@@ -1233,7 +1233,7 @@ const borderRichLink: (format: ArticleFormat) => string = (format) => {
 const borderNavPillar: (format: ArticleFormat) => string = (format) =>
 	pillarPalette[format.theme].bright;
 
-/** @deprecated this has been moved to the theme palette */
+/** @deprecated this has been moved to the theme palette (--article-border) */
 const borderArticle: (format: ArticleFormat) => string = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
