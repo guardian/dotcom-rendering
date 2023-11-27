@@ -13,7 +13,7 @@ describe('get liveblog ad positions', () => {
 	it('should insert an ad after the first block if two blocks', () => {
 		expect(getLiveblogAdPositions(twoBlocks, false)).toEqual([0]);
 	});
-	it('should insert an ad after every fourth block if repeated text elements of 1,000', () => {
+	it('should insert an ad after every fourth block given repeated text elements of 1,000 characters', () => {
 		const block: Block = {
 			...mockBlock,
 			elements: [
@@ -24,6 +24,7 @@ describe('get liveblog ad positions', () => {
 				},
 			],
 		};
+
 		const twentyBlocks = Array<Block>(20).fill(block);
 		expect(getLiveblogAdPositions(twentyBlocks, false)).toEqual([
 			0, 4, 8, 12, 16,
