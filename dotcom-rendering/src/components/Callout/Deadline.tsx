@@ -1,10 +1,7 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { SvgClock } from '@guardian/source-react-components';
+import { palette } from '../../palette';
 
 type Props = {
 	until?: number;
@@ -12,11 +9,16 @@ type Props = {
 
 const deadlineStyles = css`
 	${textSans.xxsmall()};
-	background-color: ${sourcePalette.brandAlt[400]};
+	color: ${palette('--star-rating-fill')};
+	background-color: ${palette('--star-rating-background')};
 	right: 0;
 	display: flex;
 	align-items: center;
 	padding-right: ${space[1]}px;
+
+	svg {
+		fill: currentColor;
+	}
 `;
 
 function getDaysBetween(first: Date, second: Date): number {

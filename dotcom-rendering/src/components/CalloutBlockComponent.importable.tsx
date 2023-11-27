@@ -1,14 +1,9 @@
-import { css } from '@emotion/react';
-import { palette } from '@guardian/source-foundations';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
+import { palette } from '../palette';
 import type { CalloutBlockElementV2 } from '../types/content';
 import { CalloutBlock } from './Callout/Callout';
 import { CalloutExpired } from './Callout/CalloutComponents';
 import { Deadline } from './Callout/Deadline';
-
-const collapsibleCalloutStyle = css`
-	background-color: ${palette.neutral[97]};
-`;
 
 /**
  * A callout to readers to share their stories.
@@ -24,11 +19,9 @@ const collapsibleCalloutStyle = css`
 export const CalloutBlockComponent = ({
 	callout,
 	pageId,
-	format,
 }: {
 	callout: CalloutBlockElementV2;
 	pageId: string;
-	format: ArticleFormat;
 }) => {
 	const {
 		prompt,
@@ -63,23 +56,51 @@ export const CalloutBlockComponent = ({
 				<aside>
 					<ExpandingWrapper
 						name={`${callout.formId} form`}
+						theme={{
+							'--background': palette(
+								'--expandingWrapper--background',
+							),
+							'--border': palette('--expandingWrapper--border'),
+							'--collapseBackground': palette(
+								'--expandingWrapper--collapseBackground',
+							),
+							'--collapseBackgroundHover': palette(
+								'--expandingWrapper--collapseBackgroundHover',
+							),
+							'--collapseText': palette(
+								'--expandingWrapper--collapseText',
+							),
+							'--collapseTextHover': palette(
+								'--expandingWrapper--collapseTextHover',
+							),
+							'--text': palette('--expandingWrapper--text'),
+							'--horizontalRules': palette(
+								'--expandingWrapper--horizontalRules',
+							),
+							'--expandBackground': palette(
+								'--expandingWrapper--expandBackground',
+							),
+							'--expandBackgroundHover': palette(
+								'--expandingWrapper--expandBackgroundHover',
+							),
+							'--expandText': palette(
+								'--expandingWrapper--expandText',
+							),
+						}}
 						renderExtra={() => <Deadline until={activeUntil} />}
 						collapsedHeight={'160px'}
 					>
-						<div css={collapsibleCalloutStyle}>
-							<CalloutBlock
-								formId={id}
-								prompt={prompt}
-								heading={title}
-								description={description}
-								formFields={formFields}
-								submissionURL={calloutsUrl}
-								isNonCollapsible={isNonCollapsible}
-								contacts={contacts}
-								pageId={pageId}
-								format={format}
-							/>
-						</div>
+						<CalloutBlock
+							formId={id}
+							prompt={prompt}
+							heading={title}
+							description={description}
+							formFields={formFields}
+							submissionURL={calloutsUrl}
+							isNonCollapsible={isNonCollapsible}
+							contacts={contacts}
+							pageId={pageId}
+						/>
 					</ExpandingWrapper>
 				</aside>
 			) : (
@@ -93,7 +114,6 @@ export const CalloutBlockComponent = ({
 					isNonCollapsible={isNonCollapsible}
 					contacts={contacts}
 					pageId={pageId}
-					format={format}
 				/>
 			)}
 		</>
