@@ -20,7 +20,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
-      - run: yarn install --immutable
+      - run: yarn install --frozen-lockfile
 
       - name: Run check-schema script
         run: make check-schema

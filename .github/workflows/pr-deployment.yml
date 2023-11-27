@@ -23,7 +23,7 @@ jobs:
           node-version-file: .nvmrc
           cache: 'yarn'
       # Make sure we install dependencies in the root directory
-      - run: yarn install --immutable
+      - run: yarn install --frozen-lockfile
       - run: make build
         working-directory: dotcom-rendering
       - name: Boot server and run ngrok

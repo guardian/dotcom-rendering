@@ -25,7 +25,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
-      - run: yarn --immutable
+      - run: yarn --frozen-lockfile
 
       - name: lint
         run: yarn lint
