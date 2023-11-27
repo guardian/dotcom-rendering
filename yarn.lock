@@ -4042,10 +4042,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-16.0.1.tgz#24d4c4081e6a293a101b3217b598fccf151b04bd"
   integrity sha512-M/zrs+G5NqykicECNf803B9815tVkPfazwmYsGfrDdKGptBmLhcofGlpC/MGdKiJ9lTlOQBieUyZ2y6i2mBJyQ==
 
-"@guardian/support-dotcom-components@1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.7.tgz#b3aadcca5f6ee35b2c541121144be237d72bd3e0"
-  integrity sha512-MhaO+rC+ujXMcaMd1TL5D0t0eEuHWGh3OrFkM8BhPwhMkjela/dCOPeVPvGJDJ0a37o4PeMszqy+dSuiR4BvvQ==
+"@guardian/support-dotcom-components@1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.8.tgz#1f1b3e11483e3f17a472ec1ad375100f96bed0ea"
+  integrity sha512-5Llcfv2DLfqGyjylJXtlyShhZJqImFHvMQBNKR0JxKZeGPX/rz8FZlyLKSmGuzaK0ommRUtvHgeumdxzzK9jfA==
 
 "@guardian/tsconfig@0.2.0":
   version "0.2.0"
@@ -13949,7 +13949,7 @@ lru_map@^0.3.3:
   resolved "https://registry.yarnpkg.com/lru_map/-/lru_map-0.3.3.tgz#b5c8351b9464cbd750335a79650a0ec0e56118dd"
   integrity sha512-Pn9cox5CsMYngeDbmChANltQl+5pi6XmTrraMSzhPmMBbmgcxmqWry0U3PGapCU1yB4/LqCcom7qhHZiF/jGfQ==
 
-lz-string@^1.5.0:
+lz-string@1.5.0, lz-string@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/lz-string/-/lz-string-1.5.0.tgz#c1ab50f77887b712621201ba9fd4e3a6ed099941"
   integrity sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==
