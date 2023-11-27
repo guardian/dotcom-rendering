@@ -1071,137 +1071,232 @@ const starRatingBackgroundColourLight: PaletteFunction = () =>
 const starRatingBackgroundColourDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
 
-const blockQuoteFillLight: PaletteFunction = ({ design, theme }) => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog: {
-			switch (theme) {
+const blockQuoteFillLight: PaletteFunction = (format: ArticleFormat) => {
+	if (format.theme === ArticleSpecial.Labs) {
+		return sourcePalette.labs[300];
+	}
+
+	switch (format.design) {
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.LiveBlog: {
+			switch (format.theme) {
 				case Pillar.News:
-					return sourcePalette.news[400];
+					return sourcePalette.neutral[46];
 				case Pillar.Opinion:
-					return sourcePalette.opinion[400];
 				case Pillar.Sport:
-					return sourcePalette.sport[400];
 				case Pillar.Culture:
-					return sourcePalette.culture[400];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
+					return pillarPalette(format.theme, 200);
 				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.news[400];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-			}
-		}
-		case ArticleDesign.Analysis: {
-			switch (theme) {
-				case Pillar.News:
-					return sourcePalette.news[300];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[300];
-				case Pillar.Sport:
-					return sourcePalette.sport[400];
-				case Pillar.Culture:
-					return sourcePalette.culture[400];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[400];
+					return sourcePalette.specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+			}
+		}
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline: {
+			return sourcePalette.neutral[46];
+		}
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review: {
+			switch (format.theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(format.theme, 200);
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[200];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
 			}
 		}
 		default: {
-			switch (theme) {
-				case Pillar.News:
-					return sourcePalette.news[400];
+			switch (format.theme) {
 				case Pillar.Opinion:
 					return sourcePalette.opinion[300];
+				case Pillar.News:
 				case Pillar.Sport:
-					return sourcePalette.sport[400];
 				case Pillar.Culture:
-					return sourcePalette.culture[400];
 				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[400];
+					return pillarPalette(format.theme, 400);
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
 			}
 		}
 	}
 };
-const blockQuoteFillDark: PaletteFunction = ({ design, theme }) => {
+
+const blockQuoteFillDark: PaletteFunction = ({
+	design,
+	theme,
+}: ArticleFormat) => {
+	if (theme === ArticleSpecial.Labs) {
+		return sourcePalette.labs[400];
+	}
+
 	switch (design) {
 		case ArticleDesign.DeadBlog:
-		case ArticleDesign.LiveBlog:
+		case ArticleDesign.LiveBlog: {
+			switch (theme) {
+				case Pillar.News:
+					return sourcePalette.neutral[60];
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+			}
+		}
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline: {
 			return sourcePalette.neutral[60];
+		}
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review: {
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+			}
+		}
 		default:
-			switch (design) {
-				case ArticleDesign.Analysis: {
-					switch (theme) {
-						case Pillar.News:
-							return sourcePalette.news[300];
-						case Pillar.Opinion:
-							return sourcePalette.opinion[300];
-						case Pillar.Sport:
-							return sourcePalette.sport[400];
-						case Pillar.Culture:
-							return sourcePalette.culture[400];
-						case Pillar.Lifestyle:
-							return sourcePalette.lifestyle[400];
-						case ArticleSpecial.SpecialReport:
-							return sourcePalette.specialReport[400];
-						case ArticleSpecial.SpecialReportAlt:
-							return sourcePalette.specialReportAlt[200];
-						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
-					}
-				}
-				default: {
-					switch (theme) {
-						case Pillar.News:
-							return sourcePalette.news[400];
-						case Pillar.Opinion:
-							return sourcePalette.opinion[300];
-						case Pillar.Sport:
-							return sourcePalette.sport[400];
-						case Pillar.Culture:
-							return sourcePalette.culture[400];
-						case Pillar.Lifestyle:
-							return sourcePalette.lifestyle[400];
-						case ArticleSpecial.SpecialReport:
-							return sourcePalette.specialReport[400];
-						case ArticleSpecial.SpecialReportAlt:
-							return sourcePalette.specialReportAlt[200];
-						case ArticleSpecial.Labs:
-							return sourcePalette.labs[400];
-					}
-				}
+			switch (theme) {
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 400);
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
 			}
 	}
 };
-const quotedBlockquoteStylesLight: PaletteFunction = (format): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return sourcePalette.neutral[7];
-
+const blockquoteTextLight: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
-			return sourcePalette.neutral[7];
 		case ArticleDesign.Analysis:
-			return sourcePalette.neutral[7];
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.neutral[7];
+			}
 		default:
-			return sourcePalette.neutral[46];
+			switch (format.theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[46];
+			}
 	}
 };
-const quotedBlockquoteStylesDark: PaletteFunction = () =>
-	sourcePalette.neutral[100];
+const blockquoteTextDark: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[100];
+				default:
+					return sourcePalette.neutral[60];
+			}
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
+
+const blockQuoteLinkLight: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+		case Pillar.Opinion:
+			return pillarPalette(format.theme, 400);
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+	}
+};
+
+const blockQuoteLinkDark: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+		case Pillar.Opinion:
+			return pillarPalette(format.theme, 500);
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+	}
+};
 
 const accordionTitleRowFillLight: PaletteFunction = () =>
 	sourcePalette.neutral[46];
@@ -2632,6 +2727,102 @@ const subNavLink = (format: ArticleFormat) => {
 	}
 };
 
+const pullQuoteTextLight: PaletteFunction = ({
+	design,
+	theme,
+}: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+		case ArticleDesign.PhotoEssay:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 200);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[200];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[200];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+			}
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+
+const pullQuoteTextDark: PaletteFunction = ({
+	design,
+	theme,
+}: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+		case ArticleDesign.PhotoEssay:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+			}
+		default:
+			return sourcePalette.neutral[97];
+	}
+};
+
+const pullQuoteBackgroundLight: PaletteFunction = (format: ArticleFormat) => {
+	const articleBackground = articleBackgroundLight(format);
+	if (articleBackground === 'transparent') return sourcePalette.neutral[100];
+	return articleBackground;
+};
+
+const pullQuoteBackgroundDark: PaletteFunction = (format: ArticleFormat) => {
+	const articleBackground = articleBackgroundLight(format);
+	if (articleBackground === 'transparent') return sourcePalette.neutral[0];
+	return articleBackground;
+};
+
+const pullQuoteBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const pullQuoteBorderDark: PaletteFunction = () => sourcePalette.neutral[60];
+
+const pullQuoteIconLight: PaletteFunction = (format: ArticleFormat) => {
+	const text = pullQuoteTextLight(format);
+	return text === sourcePalette.neutral[7]
+		? pullQuoteBorderDark(format)
+		: text;
+};
+const pullQuoteIconDark: PaletteFunction = (format: ArticleFormat) => {
+	const text = pullQuoteTextDark(format);
+	return text === sourcePalette.neutral[97]
+		? pullQuoteBorderLight(format)
+		: text;
+};
+
 const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
@@ -3244,9 +3435,13 @@ const paletteColours = {
 		light: blockQuoteFillLight,
 		dark: blockQuoteFillDark,
 	},
-	'--quoted-block-quote-styles': {
-		light: quotedBlockquoteStylesLight,
-		dark: quotedBlockquoteStylesDark,
+	'--block-quote-text': {
+		light: blockquoteTextLight,
+		dark: blockquoteTextDark,
+	},
+	'--block-quote-link': {
+		light: blockQuoteLinkLight,
+		dark: blockQuoteLinkDark,
 	},
 	'--accordion-title-row-fill': {
 		light: accordionTitleRowFillLight,
@@ -3587,6 +3782,22 @@ const paletteColours = {
 	'--most-viewed-footer-hover': {
 		light: mostViewedFooterHoverLight,
 		dark: mostViewedFooterHoverDark,
+	},
+	'--pullquote-text': {
+		light: pullQuoteTextLight,
+		dark: pullQuoteTextDark,
+	},
+	'--pullquote-background': {
+		light: pullQuoteBackgroundLight,
+		dark: pullQuoteBackgroundDark,
+	},
+	'--pullquote-border': {
+		light: pullQuoteBorderLight,
+		dark: pullQuoteBorderDark,
+	},
+	'--pullquote-icon': {
+		light: pullQuoteIconLight,
+		dark: pullQuoteIconDark,
 	},
 } satisfies PaletteColours;
 

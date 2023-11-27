@@ -13,14 +13,28 @@ type Props = {
 };
 
 const baseBlockquoteStyles = css`
-	margin-bottom: 16px;
-	${body.medium()};
-	font-style: italic;
+	margin-bottom: 14px;
+	${body.medium({
+		fontWeight: 'regular',
+		fontStyle: 'italic',
+		lineHeight: 'loose',
+	})};
+
+	color: ${palette('--block-quote-text')};
+
 	p {
 		margin-bottom: 8px;
 	}
+
 	a {
-		color: ${palette('--quoted-block-quote-styles')};
+		color: ${palette('--article-link-text')};
+		text-decoration: none;
+		border-bottom: 1px solid ${palette('--article-link-border')};
+
+		:hover {
+			color: ${palette('--article-link-text-hover')};
+			border-bottom: 1px solid ${palette('--article-link-border-hover')};
+		}
 	}
 `;
 
@@ -34,7 +48,6 @@ const simpleBlockquoteStyles = css`
 
 const quotedBlockquoteStyles = css`
 	${baseBlockquoteStyles}
-	color: ${palette('--quoted-block-quote-styles')};
 `;
 
 /**

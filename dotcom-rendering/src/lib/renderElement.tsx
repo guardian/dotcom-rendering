@@ -501,7 +501,6 @@ export const renderElement = ({
 				<PullQuoteBlockComponent
 					key={index}
 					html={element.html}
-					palette={palette}
 					format={format}
 					attribution={element.attribution}
 					role={element.role}
