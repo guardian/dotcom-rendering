@@ -9,11 +9,10 @@ import {
 const getLiveblogAdPositions = (blocks: Block[], isMobile: boolean): number[] =>
 	blocks.reduce<{
 		heightSinceAd: number;
-		adCounter: number;
 		adPositions: number[];
 	}>(
 		(accumulator, block, index) => {
-			const { heightSinceAd, adCounter, adPositions } = accumulator;
+			const { heightSinceAd, adPositions } = accumulator;
 
 			const updatedPxSinceAd =
 				heightSinceAd +
@@ -22,27 +21,24 @@ const getLiveblogAdPositions = (blocks: Block[], isMobile: boolean): number[] =>
 			const willInsertAd = shouldDisplayAd(
 				index + 1,
 				blocks.length,
-				adCounter,
+				adPositions.length,
 				updatedPxSinceAd,
 				isMobile,
 			);
 
 			if (willInsertAd) {
-				adPositions.push(index);
-
 				return {
-					...accumulator,
 					heightSinceAd: 0,
-					adCounter: adCounter + 1,
+					adPositions: [...adPositions, index],
 				};
 			} else {
 				return {
-					...accumulator,
 					heightSinceAd: updatedPxSinceAd,
+					adPositions,
 				};
 			}
 		},
-		{ heightSinceAd: 0, adCounter: 0, adPositions: [] },
+		{ heightSinceAd: 0, adPositions: [] },
 	).adPositions;
 
 export { getLiveblogAdPositions };
