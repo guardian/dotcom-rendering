@@ -102,24 +102,23 @@ const roleCss = {
 	`,
 
 	gallery: css`
-		display: flex;
-		flex-direction: row-reverse;
 		margin-top: ${space[2]}px;
+		${from.leftCol} {
+			display: flex;
+			flex-direction: row-reverse;
+		}
 		figcaption {
-			/* margin-top: ${space[2]}px; */
 			margin-bottom: ${space[2]}px;
-			float: left;
-			clear: left;
-			width: 120px;
-			margin-right: 20px;
-			${from.tablet} {
+
+			${from.leftCol} {
+				float: left;
+				clear: left;
+				margin-right: 20px;
+				margin-left: -230px;
 				width: 210px;
 			}
 			${from.wide} {
 				margin-left: -240px;
-			}
-			${from.leftCol} {
-				margin-left: -230px;
 			}
 		}
 	`,
