@@ -12,7 +12,6 @@ module.exports = {
 		'^svgs/(.*)$': '<rootDir>/__mocks__/svgMock.tsx',
 		'^(.*)\\.svg$': '<rootDir>/__mocks__/svgMock.tsx',
 	},
-	testResultsProcessor: 'jest-teamcity-reporter',
 	transformIgnorePatterns: ['/node_modules/(?!@guardian/)'],
 	collectCoverageFrom: ['src/**/*.{ts,tsx}'],
 };
