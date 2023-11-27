@@ -2,6 +2,8 @@
  * @jest-environment jsdom
  */
 
+/* eslint-disable react/no-deprecated -- currently still working in 17 mode */
+
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
