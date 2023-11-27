@@ -12,8 +12,6 @@ import {
 	brandAltBackground,
 	brandAltLine,
 	brandAltText,
-	brandAlt as brandAltTheme,
-	brand as brandTheme,
 	culture,
 	from,
 	neutral,
@@ -22,6 +20,8 @@ import {
 } from '@guardian/source-foundations';
 import {
 	Button,
+	buttonThemeBrand,
+	buttonThemeBrandAlt,
 	buttonThemeDefault,
 	SvgCross,
 } from '@guardian/source-react-components';
@@ -56,8 +56,8 @@ const BORDER_COLOURS = {
 };
 
 const BUTTON_THEMES = {
-	epic: brandTheme,
-	banner: brandAltTheme,
+	epic: buttonThemeBrand,
+	banner: buttonThemeBrandAlt,
 	['investigations-moment-banner']: buttonThemeDefault,
 	['us-eoy-moment-banner']: buttonThemeDefault,
 	['global-new-year-moment-banner']: buttonThemeDefault,
