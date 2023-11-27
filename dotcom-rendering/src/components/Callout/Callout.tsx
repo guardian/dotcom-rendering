@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { brand, headline, neutral, space } from '@guardian/source-foundations';
+import {
+	headline,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source-foundations';
 import type { TabProps } from '@guardian/source-react-components-development-kitchen';
 import { Tabs } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
@@ -21,7 +25,9 @@ const summaryContentWrapper = (isNonCollapsible: boolean) => css`
 
 const promptStyles = (isNonCollapsible: boolean) => css`
 	${headline.xxsmall({ fontWeight: 'bold' })};
-	color: ${isNonCollapsible ? neutral[7] : brand[500]};
+	color: ${isNonCollapsible
+		? sourcePalette.neutral[7]
+		: sourcePalette.brand[500]};
 `;
 
 const subtitleTextHeaderStyles = css`

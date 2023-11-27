@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import {
-	brand,
-	brandAlt,
 	brandText,
 	from,
+	palette as sourcePalette,
 	textSans,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
@@ -68,7 +67,7 @@ const pillarDivider = css`
 			bottom: 0;
 			width: 1px;
 			height: auto;
-			background-color: ${brand[600]};
+			background-color: ${sourcePalette.brand[600]};
 			z-index: 1;
 		}
 	}
@@ -90,7 +89,7 @@ const pillarDividerExtended = css`
 			left: 0;
 			width: 1px;
 			height: auto;
-			background-color: ${brand[600]};
+			background-color: ${sourcePalette.brand[600]};
 			z-index: 1;
 		}
 	}
@@ -150,7 +149,7 @@ const columnLinkTitle = css`
 	}
 	:hover,
 	:focus {
-		color: ${brandAlt[400]};
+		color: ${sourcePalette.brandAlt[400]};
 		text-decoration: underline;
 	}
 

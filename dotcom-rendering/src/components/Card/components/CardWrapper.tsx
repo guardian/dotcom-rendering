@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { from, neutral } from '@guardian/source-foundations';
+import { from, palette as sourcePalette } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
@@ -47,7 +47,7 @@ const cardStyles = (
 			width: 100%;
 			height: 100%;
 			left: 0;
-			background-color: ${neutral[7]};
+			background-color: ${sourcePalette.neutral[7]};
 			opacity: 0.1;
 		}
 
