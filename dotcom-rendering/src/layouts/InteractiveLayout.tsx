@@ -221,7 +221,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const isApps = renderingTarget === 'Apps';
 	const isWeb = renderingTarget === 'Web';
 
-	const showComments = isWeb && article.isCommentable;
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
@@ -690,7 +691,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					/>
 				</Island>
 
-				{!isPaidContent && showComments && (
+				{showComments && (
 					<Section
 						fullWidth={true}
 						sectionId="comments"

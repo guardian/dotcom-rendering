@@ -296,7 +296,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	const showComments = isWeb && article.isCommentable;
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	const isInLiveblogAdSlotTest =
 		article.config.abTests.serverSideLiveblogInlineAdsVariant === 'variant';
@@ -1217,7 +1218,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Island>
 
-					{!isPaidContent && showComments && (
+					{showComments && (
 						<Section
 							fullWidth={true}
 							showTopBorder={false}
