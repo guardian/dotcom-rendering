@@ -169,8 +169,18 @@ const useCheckoutCompleteCookieData = () => {
 	return data;
 };
 
-// component with conditional logic which determines if a sign in gate
-// should be shown on the current page
+/**
+ * Component with conditional logic which determines if a sign in gate
+ * should be shown on the current page.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * The sign-in gate logic is entirely client-side
+ *
+ * ---
+ *
+ * (No visual story exists)
+ */
 export const SignInGateSelector = ({
 	contentType,
 	sectionId = '',
