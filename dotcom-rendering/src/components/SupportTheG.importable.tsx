@@ -60,6 +60,10 @@ const headerStyles = css`
 	padding-left: 10px;
 	max-width: 310px;
 
+	${until.mobile} {
+		max-width: 80px;
+	}
+
 	${from.mobileMedium} {
 		padding-top: 44px;
 	}
