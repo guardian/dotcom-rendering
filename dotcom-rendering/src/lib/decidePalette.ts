@@ -527,18 +527,6 @@ const textCardFooter = (format: ArticleFormat): string => {
 	}
 };
 
-const textLinkKicker = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
 const textCricketScoreboardLink = (): string => {
 	return sport[300];
 };
@@ -1743,7 +1731,6 @@ export const decidePalette = (
 			cardKicker: overrides?.text.cardKicker ?? textCardKicker(format),
 			dynamoKicker:
 				overrides?.text.dynamoKicker ?? textCardKicker(format),
-			linkKicker: textLinkKicker(format),
 			cardStandfirst:
 				overrides?.text.cardStandfirst ?? textCardStandfirst(format),
 			cardFooter: overrides?.text.cardFooter ?? textCardFooter(format),
