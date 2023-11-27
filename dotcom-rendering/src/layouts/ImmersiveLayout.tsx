@@ -899,11 +899,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					</Section>
 
 					<BannerWrapper>
-						<Island
-							priority="feature"
-							defer={{ until: 'idle' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
