@@ -60,7 +60,7 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
-			<Island priority="critical" clientOnly={true}>
+			<Island priority="critical">
 				<Metrics
 					commercialMetricsEnabled={
 						!!tagFront.config.switches.commercialMetrics
