@@ -108,7 +108,6 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
-					// Should be CommentLayout once implemented for apps
 					return (
 						<CommentLayout
 							article={article}
@@ -117,6 +116,7 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
+					// Should be NewsletterSignup once implemented for apps
 					return notSupported;
 				default:
 					return (
