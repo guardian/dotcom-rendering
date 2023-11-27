@@ -101,6 +101,29 @@ const roleCss = {
 		}
 	`,
 
+	gallery: css`
+		display: flex;
+		flex-direction: row-reverse;
+		margin-top: ${space[2]}px;
+		figcaption {
+			/* margin-top: ${space[2]}px; */
+			margin-bottom: ${space[2]}px;
+			float: left;
+			clear: left;
+			width: 120px;
+			margin-right: 20px;
+			${from.tablet} {
+				width: 210px;
+			}
+			${from.wide} {
+				margin-left: -240px;
+			}
+			${from.leftCol} {
+				margin-left: -230px;
+			}
+		}
+	`,
+
 	// This is a special use case where we want RichLinks to appear wider when in the left col
 	richLink: css`
 		margin-bottom: ${space[1]}px;
@@ -155,7 +178,12 @@ export const defaultRoleStyles = (
 ) => {
 	switch (role) {
 		case 'inline':
-			return roleCss.inline;
+			switch (format.design) {
+				case ArticleDesign.Gallery:
+					return roleCss.gallery;
+				default:
+					return roleCss.inline;
+			}
 		case 'supporting':
 			return roleCss.supporting;
 		case 'immersive':
