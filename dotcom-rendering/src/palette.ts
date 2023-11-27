@@ -3218,6 +3218,8 @@ const articleBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.news[800];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[7];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video: {
