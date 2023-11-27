@@ -82,12 +82,14 @@ const HydratedLayout = ({
 	}, [serverArticle]);
 
 	return (
-		<DecideLayout
-			article={serverArticle}
-			NAV={NAV}
-			format={format}
-			renderingTarget={renderingTarget}
-		/>
+		<div>
+			<DecideLayout
+				article={serverArticle}
+				NAV={NAV}
+				format={format}
+				renderingTarget={renderingTarget}
+			/>
+		</div>
 	);
 };
 
