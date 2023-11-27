@@ -81,7 +81,10 @@ const decideImageWidths = ({
 				];
 		}
 	}
-	if (format.design === ArticleDesign.Picture) {
+	if (
+		format.design === ArticleDesign.Picture ||
+		format.design === ArticleDesign.Gallery
+	) {
 		// the order is important here. Picture content type images come through as main media, so needs to appear
 		// above `isMainMedia`, so the images do not appear low quality.
 		return [
