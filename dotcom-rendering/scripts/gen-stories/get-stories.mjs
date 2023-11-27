@@ -250,7 +250,7 @@ const testLayoutFormats =
 			display: 'Immersive',
 			design: 'Standard',
 			theme: 'NewsPillar',
-			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+			config: { renderingTarget: 'Apps', darkModeAvailable: true },
 		},
 		{
 			display: 'Immersive',

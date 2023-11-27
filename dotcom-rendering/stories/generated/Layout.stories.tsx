@@ -268,7 +268,7 @@ export default {
 			);
 		};
 		AppsImmersiveStandardNewsPillarLight.storyName = 'Apps: Display: Immersive, Design: Standard, Theme: NewsPillar, Mode: Light';
-		AppsImmersiveStandardNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
+		AppsImmersiveStandardNewsPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
 		AppsImmersiveStandardNewsPillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Immersive,
@@ -278,7 +278,26 @@ export default {
 			),
 		];
 
-		
+		export const AppsImmersiveStandardNewsPillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Immersive"
+					designName="Standard"
+					theme="NewsPillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsImmersiveStandardNewsPillarDark.storyName = 'Apps: Display: Immersive, Design: Standard, Theme: NewsPillar, Mode: Dark';
+		AppsImmersiveStandardNewsPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsImmersiveStandardNewsPillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Immersive,
+					design: ArticleDesign.Standard,
+					theme: {...ArticleSpecial, ...Pillar}.News,
+				}]
+			),
+		];
 
 		export const WebImmersivePhotoEssayLabsLight = () => {
 			return (
