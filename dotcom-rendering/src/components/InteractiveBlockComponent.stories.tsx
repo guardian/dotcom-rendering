@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { StoryObj } from '@storybook/react';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { InteractiveBlockComponent } from './InteractiveBlockComponent.importable';
@@ -135,7 +136,7 @@ WithCaption.decorators = [
 	splitTheme([defaultFormat], { orientation: 'vertical' }),
 ];
 
-export const NonBootJs = ({ format }: StoryProps) => {
+export const NonBootJs: StoryObj = ({ format }: StoryProps) => {
 	return (
 		<Wrapper>
 			<SomeText />
