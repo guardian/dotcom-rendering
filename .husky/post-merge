@@ -11,7 +11,7 @@ changedNode="$(echo "$changedFiles" | { grep '.nvmrc' || :; })"
 if [[ ! -z $changedLock ]]
 then
 	echo "${RED}This application has new dependencies. Running 'yarn'... ${ENDCOLOR}"
-	yarn --immutable
+	yarn --frozen-lockfile
 fi
 
 if [[ ! -z $changedNode ]]

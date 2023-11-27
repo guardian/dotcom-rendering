@@ -23,7 +23,7 @@ jobs:
           cache: 'yarn'
 
       - name: install
-        run: yarn --immutable
+        run: yarn --frozen-lockfile
         working-directory: apps-rendering
       - name: run
         working-directory: apps-rendering

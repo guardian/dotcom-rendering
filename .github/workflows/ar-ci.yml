@@ -33,7 +33,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn --silent --immutable
+          yarn --silent --frozen-lockfile
 
       # Execute some tasks from the `apps-rendering/package.json` file, using `yarn`
       - name: Build and package

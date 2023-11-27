@@ -153,7 +153,7 @@ clean-deps:
 
 install: check-env
 	$(call log, "refreshing dependencies")
-	@yarn --silent --immutable
+	@yarn --silent --frozen-lockfile
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
