@@ -2,9 +2,8 @@ import { css } from '@emotion/react';
 import {
 	background,
 	border,
-	brandAlt,
 	from,
-	neutral,
+	palette as sourcePalette,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
@@ -54,7 +53,7 @@ const ulExpanded = css`
 const linkStyles = (disabled: boolean) => css`
 	${textSans.small()};
 	text-align: left;
-	color: ${disabled ? neutral[86] : neutral[46]};
+	color: ${disabled ? sourcePalette.neutral[86] : sourcePalette.neutral[46]};
 	position: relative;
 	text-decoration: none;
 	margin-top: 1px;
@@ -70,7 +69,7 @@ const linkStyles = (disabled: boolean) => css`
 	${!disabled &&
 	`
     :hover {
-      background-color: ${neutral[93]};
+      background-color: ${sourcePalette.neutral[93]};
       text-decoration: underline;
     }
 
@@ -109,14 +108,14 @@ const buttonStyles = css`
 	border: none;
 	/* Design System: The buttons should be components that handle their own layout using primitives  */
 	line-height: 1.2;
-	color: ${neutral[46]};
+	color: ${sourcePalette.neutral[46]};
 	transition: color 80ms ease-out;
 	padding: 0px 10px 6px 0px;
 	margin: 1px 0 0;
 	text-decoration: none;
 
 	:hover {
-		/* color: ${brandAlt[400]}; */
+		/* color: ${sourcePalette.brandAlt[400]}; */
 
 		:after {
 			transform: translateY(0) rotate(45deg);
@@ -149,7 +148,7 @@ const expandedStyles = css`
 
 const labelStyles = css`
 	${textSans.small({ fontWeight: 'bold' })};
-	color: ${neutral[46]};
+	color: ${sourcePalette.neutral[46]};
 `;
 
 export const Dropdown = ({ id, label, options, format, onSelect }: Props) => {

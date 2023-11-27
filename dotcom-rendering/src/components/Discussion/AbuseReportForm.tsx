@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
@@ -15,7 +19,7 @@ type FormData = {
 
 const formWrapper = css`
 	z-index: 1;
-	border: 1px solid ${neutral[86]};
+	border: 1px solid ${sourcePalette.neutral[86]};
 	position: absolute;
 	width: 300px;
 	top: 0;
@@ -46,7 +50,7 @@ const inputWrapper = css`
 	textarea {
 		min-height: ${space[5]}px;
 		width: 75%;
-		border: 1px solid ${neutral[86]};
+		border: 1px solid ${sourcePalette.neutral[86]};
 	}
 `;
 

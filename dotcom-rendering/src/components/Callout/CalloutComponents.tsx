@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	body,
-	brand,
-	neutral,
-	palette,
+	palette as sourcePalette,
 	space,
 	success,
 	textSans,
@@ -22,13 +20,13 @@ const linkDecorationColour = '#12121240';
 
 export const calloutLinkStyles = css`
 	a {
-		color: ${brand[500]};
+		color: ${sourcePalette.brand[500]};
 		text-decoration: none;
 		border-bottom: 1px solid ${linkDecorationColour};
 	}
 	a:hover,
 	a:active {
-		border-bottom: 1px solid ${brand[500]};
+		border-bottom: 1px solid ${sourcePalette.brand[500]};
 	}
 `;
 
@@ -85,8 +83,8 @@ export const CalloutDescription = ({
 
 const expiredStyles = css`
 	${textSans.small()};
-	color: ${palette.brand};
-	background-color: ${palette.brandAlt[400]};
+	color: ${sourcePalette.brand};
+	background-color: ${sourcePalette.brandAlt[400]};
 	width: fit-content;
 `;
 
@@ -123,7 +121,9 @@ const shareCalloutLinkStyles = (
 	brandPalette: Palette,
 ) => css`
 	${textSans.xsmall()}
-	color: ${useBrandColour ? brandPalette.text.articleLink : brand[500]};
+	color: ${useBrandColour
+		? brandPalette.text.articleLink
+		: sourcePalette.brand[500]};
 	border-bottom: 1px solid ${linkDecorationColour};
 	text-decoration: none;
 	transition: none;
@@ -132,7 +132,7 @@ const shareCalloutLinkStyles = (
 		border-bottom: 1px solid
 			${useBrandColour
 				? brandPalette.border.articleLinkHover
-				: brand[500]};
+				: sourcePalette.brand[500]};
 	}
 `;
 
@@ -143,8 +143,8 @@ const sharePopupStyles = css`
 	align-items: center;
 	min-width: 180px;
 	transform: translate(100%, 0);
-	background-color: ${neutral[100]};
-	color: ${neutral[7]};
+	background-color: ${sourcePalette.neutral[100]};
+	color: ${sourcePalette.neutral[7]};
 	font-weight: normal;
 	border-radius: ${space[1]}px;
 	z-index: 1;
@@ -160,9 +160,13 @@ const shareIconStyles = (useBrandColour: boolean, brandPalette: Palette) => css`
 	margin-right: ${space[2]}px;
 	border-radius: 50%;
 	border: 1px solid
-		${useBrandColour ? brandPalette.text.articleLink : brand[500]};
+		${useBrandColour
+			? brandPalette.text.articleLink
+			: sourcePalette.brand[500]};
 	box-sizing: border-box;
-	fill: ${useBrandColour ? brandPalette.text.articleLink : brand[500]};
+	fill: ${useBrandColour
+		? brandPalette.text.articleLink
+		: sourcePalette.brand[500]};
 	padding: 0.5px 0;
 `;
 

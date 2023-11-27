@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial, Pillar } from '@guardian/libs';
-import { neutral, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	textSans,
+} from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 
@@ -48,7 +51,7 @@ const buttonOverrides = (
 					${textSans.small({ fontWeight: 'bold' })}
 					background-color: ${decidePalette(format).background
 						.discussionPillarButton};
-					color: ${neutral[100]};
+					color: ${sourcePalette.neutral[100]};
 
 					:hover {
 						background-color: ${decidePalette(format)
