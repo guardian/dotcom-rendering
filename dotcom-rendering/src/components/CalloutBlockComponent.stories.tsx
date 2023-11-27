@@ -1,5 +1,11 @@
+import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { StoryObj } from '@storybook/react';
 import fetchMock from 'fetch-mock';
+import {
+	splitTheme,
+	type StoryProps,
+} from '../../.storybook/decorators/splitThemeDecorator';
 import { calloutCampaign as calloutCampaignV2 } from '../../fixtures/manual/calloutCampaignV2';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
@@ -34,12 +40,18 @@ const badRequest = () => {
 		.spy('end:.hot-update.json');
 };
 
+const defaultFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+} satisfies ArticleFormat;
+
 export default {
 	component: CalloutBlockComponent,
 	title: 'Components/CalloutBlockComponent',
 };
 
-export const Collapsible = () => {
+export const Collapsible: StoryObj = ({ format }: StoryProps) => {
 	goodRequest();
 	return (
 		<CalloutBlockComponent
@@ -49,68 +61,50 @@ export const Collapsible = () => {
 				activeUntil: tomorrow,
 			}}
 			pageId={pageId}
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 		/>
 	);
 };
 
-Collapsible.storyName = 'Collapsible';
+Collapsible.decorators = [splitTheme([defaultFormat])];
 
-export const NonCollapsible = () => {
+export const NonCollapsible: StoryObj = ({ format }: StoryProps) => {
 	goodRequest();
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
 			pageId={pageId}
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 		/>
 	);
 };
-
 NonCollapsible.storyName = 'NonCollapsible';
+NonCollapsible.decorators = [splitTheme([defaultFormat])];
 
-export const SubmissionFailure = () => {
+export const SubmissionFailure: StoryObj = ({ format }: StoryProps) => {
 	badRequest();
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
 			pageId={pageId}
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 		/>
 	);
 };
+SubmissionFailure.decorators = [splitTheme([defaultFormat])];
 
-SubmissionFailure.storyName = 'Submission Failure';
-
-export const Expired = () => {
+export const Expired: StoryObj = ({ format }: StoryProps) => {
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: yesterday }}
 			pageId={pageId}
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 		/>
 	);
 };
+Expired.decorators = [splitTheme([defaultFormat])];
 
-Expired.storyName = 'Expired';
-
-export const MinimalCallout = () => {
+export const MinimalCallout: StoryObj = ({ format }: StoryProps) => {
 	return (
 		<>
 			<div css={{ fontWeight: 'bold', paddingBottom: '16px' }}>
@@ -126,14 +120,9 @@ export const MinimalCallout = () => {
 					description: '',
 				}}
 				pageId={pageId}
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={format}
 			/>
 		</>
 	);
 };
-
-Expired.storyName = 'Expired';
+MinimalCallout.decorators = [splitTheme([defaultFormat])];
