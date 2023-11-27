@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { getLiveblogAdPositions } from '../lib/getLiveblogAdPositions';
 import type { Switches } from '../types/config';
 import { AdPlaceholder } from './AdPlaceholder.apps';
@@ -55,13 +56,40 @@ export const LiveBlogBlocksAndAdverts = ({
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	let webDesktopAdPositions: number[] = [];
-	let webMobileAdPositions: number[] = [];
+	const LiveBlockComponent = ({ block }: { block: Block }) => {
+		return (
+			<LiveBlock
+				format={format}
+				block={block}
+				pageId={pageId}
+				webTitle={webTitle}
+				host={host}
+				ajaxUrl={ajaxUrl}
+				isLiveUpdate={isLiveUpdate}
+				switches={switches}
+				isAdFreeUser={!isAdFreeUser}
+				isSensitive={isSensitive}
+				isPinnedPost={false}
+				pinnedPostId={pinnedPost?.id}
+			/>
+		);
+	};
 
-	if (isWeb && !isAdFreeUser) {
-		webDesktopAdPositions = getLiveblogAdPositions(blocks, true);
-		webMobileAdPositions = getLiveblogAdPositions(blocks, false);
+	if (!isWeb || isAdFreeUser) {
+		return (
+			<>
+				{blocks.map((block, index) => (
+					<Fragment key={block.id}>
+						<LiveBlockComponent block={block} />
+						{shouldInsertAppAd(isApps, index) && <AdPlaceholder />}
+					</Fragment>
+				))}
+			</>
+		);
 	}
+
+	const webDesktopAdPositions = getLiveblogAdPositions(blocks, true);
+	const webMobileAdPositions = getLiveblogAdPositions(blocks, false);
 
 	return (
 		<>
@@ -73,22 +101,8 @@ export const LiveBlogBlocksAndAdverts = ({
 				const showAdMobile = adPositionMobile !== -1;
 
 				return (
-					<>
-						<LiveBlock
-							key={block.id}
-							format={format}
-							block={block}
-							pageId={pageId}
-							webTitle={webTitle}
-							host={host}
-							ajaxUrl={ajaxUrl}
-							isLiveUpdate={isLiveUpdate}
-							switches={switches}
-							isAdFreeUser={isAdFreeUser}
-							isSensitive={isSensitive}
-							isPinnedPost={false}
-							pinnedPostId={pinnedPost?.id}
-						/>
+					<Fragment key={block.id}>
+						<LiveBlockComponent block={block} />
 						{showAdDesktop && (
 							<AdSlot
 								position="liveblog-inline"
@@ -101,9 +115,7 @@ export const LiveBlogBlocksAndAdverts = ({
 								index={adPositionMobile}
 							/>
 						)}
-
-						{shouldInsertAppAd(isApps, index) && <AdPlaceholder />}
-					</>
+					</Fragment>
 				);
 			})}
 		</>

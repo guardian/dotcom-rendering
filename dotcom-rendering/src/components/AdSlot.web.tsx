@@ -429,7 +429,7 @@ export const AdSlot = ({
 					return (
 						<div
 							className="ad-slot-container"
-							css={[adContainerStyles]}
+							css={adContainerStyles}
 						>
 							<div
 								id="dfp-ad--right"
@@ -461,7 +461,7 @@ export const AdSlot = ({
 			}
 		case 'comments': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id="dfp-ad--comments"
 						className={[
@@ -640,7 +640,7 @@ export const AdSlot = ({
 		case 'inline': {
 			const advertId = `inline${index + 1}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
@@ -650,7 +650,7 @@ export const AdSlot = ({
 							'ad-slot--container-inline',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[inlineAdStyles]}
+						css={inlineAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						aria-hidden="true"
@@ -663,7 +663,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="ad-slot-container ad-slot-desktop"
-					css={[adContainerStyles]}
+					css={adContainerStyles}
 				>
 					<div
 						id={`dfp-ad--${advertId}`}
@@ -674,7 +674,7 @@ export const AdSlot = ({
 							`ad-slot--${advertId}`,
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[liveblogInlineAdStyles]}
+						css={liveblogInlineAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						aria-hidden="true"
@@ -687,7 +687,7 @@ export const AdSlot = ({
 			return (
 				<div
 					className="ad-slot-container ad-slot-mobile"
-					css={[adContainerStyles]}
+					css={adContainerStyles}
 				>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
@@ -698,7 +698,7 @@ export const AdSlot = ({
 							`ad-slot--liveblog-inline--mobile`,
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[liveblogInlineMobileAdStyles]}
+						css={liveblogInlineMobileAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						aria-hidden="true"
@@ -709,7 +709,7 @@ export const AdSlot = ({
 		case 'mobile-front': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -731,7 +731,7 @@ export const AdSlot = ({
 		}
 		case 'pageskin': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id="dfp-ad--pageskin-inread"
 						className={[
@@ -754,7 +754,7 @@ export const AdSlot = ({
 		}
 		case 'article-end': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id="dfp-ad--article-end"
 						className={[

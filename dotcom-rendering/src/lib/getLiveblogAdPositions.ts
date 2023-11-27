@@ -6,37 +6,43 @@ import {
 /**
  * Decides where ads should be inserted on liveblogs/deadblogs.
  */
-const getLiveblogAdPositions = (
-	blocks: Block[],
-	isMobile: boolean,
-): number[] => {
-	let pxSinceAd = 0;
-	let adCounter = 0;
-	const adPositions = [];
+const getLiveblogAdPositions = (blocks: Block[], isMobile: boolean): number[] =>
+	blocks.reduce<{
+		heightSinceAd: number;
+		adCounter: number;
+		adPositions: number[];
+	}>(
+		(accumulator, block, index) => {
+			const { heightSinceAd, adCounter, adPositions } = accumulator;
 
-	for (const [index, block] of blocks.entries()) {
-		const updatedPxSinceAd =
-			pxSinceAd +
-			calculateApproximateBlockHeight(block.elements, isMobile);
+			const updatedPxSinceAd =
+				heightSinceAd +
+				calculateApproximateBlockHeight(block.elements, isMobile);
 
-		const willInsertAd = shouldDisplayAd(
-			index + 1,
-			blocks.length,
-			adCounter,
-			updatedPxSinceAd,
-			isMobile,
-		);
+			const willInsertAd = shouldDisplayAd(
+				index + 1,
+				blocks.length,
+				adCounter,
+				updatedPxSinceAd,
+				isMobile,
+			);
 
-		if (willInsertAd) {
-			adCounter++;
-			adPositions.push(index);
-			pxSinceAd = 0;
-		} else {
-			pxSinceAd = updatedPxSinceAd;
-		}
-	}
+			if (willInsertAd) {
+				adPositions.push(index);
 
-	return adPositions;
-};
+				return {
+					...accumulator,
+					heightSinceAd: 0,
+					adCounter: adCounter + 1,
+				};
+			} else {
+				return {
+					...accumulator,
+					heightSinceAd: updatedPxSinceAd,
+				};
+			}
+		},
+		{ heightSinceAd: 0, adCounter: 0, adPositions: [] },
+	).adPositions;
 
 export { getLiveblogAdPositions };
