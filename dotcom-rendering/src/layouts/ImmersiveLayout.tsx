@@ -34,7 +34,7 @@ import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { minNavHeightPx, Nav } from '../components/Nav/Nav';
+import { Nav, minNavHeightPx } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -51,10 +51,9 @@ import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
-import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-
+import { palette as themePalette } from '../palette';
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -70,7 +69,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 			${from.wide} {
 				margin-left: 230px;
 			}
-
 			@supports (display: grid) {
 				display: grid;
 				width: 100%;
@@ -304,6 +302,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				shouldLimitWidth={true}
 				isLeftCol={true}
 				isMainMedia={true}
+				isOverlaid={true}
 			/>
 		</div>
 	);
@@ -489,6 +488,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									captionText={captionText}
 									format={format}
 									shouldLimitWidth={false}
+									isOverlaid={true}
 								/>
 							</Hide>
 						</GridItem>
