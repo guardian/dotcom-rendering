@@ -1,9 +1,4 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { StoryObj } from '@storybook/react';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
@@ -14,6 +9,25 @@ export default {
 	component: LinkHeadline,
 	title: 'Components/LinkHeadline',
 };
+type StoryArgs = { format: ArticleFormat };
+
+const defaultFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
+
+export const defaultStory: StoryObj = ({ format }: StoryProps) => (
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+		<LinkHeadline
+			headlineText="This is how a headline with each pillar looks"
+			format={format}
+			kickerText="The kicker text"
+		/>
+	</Section>
+);
+defaultStory.storyName = 'Default Link Headline';
+defaultStory.decorators = [splitTheme()];
 
 export const xsmallStory: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -25,15 +39,7 @@ export const xsmallStory: StoryObj = ({ format }: StoryProps) => (
 	</Section>
 );
 xsmallStory.storyName = 'Size | large';
-xsmallStory.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
+xsmallStory.decorators = [splitTheme([defaultFormat])];
 
 export const liveStory: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -45,17 +51,9 @@ export const liveStory: StoryObj = ({ format }: StoryProps) => (
 	</Section>
 );
 liveStory.storyName = 'With Live kicker';
-liveStory.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
+liveStory.decorators = [splitTheme([defaultFormat])];
 
-export const noLinebreak: StoryObj = ({ format }: StoryProps) => (
+export const noLinebreak: StoryObj = ({ format }: StoryArgs) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with no kicker line break looks"
@@ -66,17 +64,9 @@ export const noLinebreak: StoryObj = ({ format }: StoryProps) => (
 	</Section>
 );
 noLinebreak.storyName = 'With Live kicker but no line break';
-noLinebreak.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
+noLinebreak.decorators = [splitTheme([defaultFormat])];
 
-export const pulsingDot: StoryObj = ({ format }: StoryProps) => (
+export const pulsingDot: StoryObj = ({ format }: StoryArgs) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with a pulsing dot looks"
@@ -87,35 +77,7 @@ export const pulsingDot: StoryObj = ({ format }: StoryProps) => (
 	</Section>
 );
 pulsingDot.storyName = 'With pulsing dot';
-pulsingDot.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
-
-export const cultureVariant: StoryObj = ({ format }: StoryProps) => (
-	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-		<LinkHeadline
-			headlineText="This is how a headline with the culture pillar looks"
-			format={format}
-			kickerText="Art and stuff"
-		/>
-	</Section>
-);
-cultureVariant.storyName = 'With a culture kicker';
-cultureVariant.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.Culture,
-		},
-	]),
-];
+pulsingDot.decorators = [splitTheme([defaultFormat])];
 
 export const opinionxxxsmall: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -139,48 +101,6 @@ opinionxxxsmall.decorators = [
 	]),
 ];
 
-export const OpinionKicker: StoryObj = ({ format }: StoryProps) => (
-	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-		<LinkHeadline
-			headlineText="This is how an opinion headline with a kicker looks"
-			format={format}
-			showQuotes={true}
-			kickerText="George Monbiot"
-		/>
-	</Section>
-);
-OpinionKicker.storyName = 'With an opinion kicker';
-OpinionKicker.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Comment,
-			theme: Pillar.Opinion,
-		},
-	]),
-];
-
-export const SpecialReport: StoryObj = ({ format }: StoryProps) => (
-	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-		<LinkHeadline
-			headlineText="This is how a Special Report headline with a kicker looks"
-			format={format}
-			showQuotes={true}
-			kickerText="Special Report"
-		/>
-	</Section>
-);
-SpecialReport.storyName = 'when Special Report';
-SpecialReport.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Comment,
-			theme: ArticleSpecial.SpecialReport,
-		},
-	]),
-];
-
 export const InUnderlinedState: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
@@ -196,15 +116,7 @@ export const InUnderlinedState: StoryObj = ({ format }: StoryProps) => (
 	</Section>
 );
 InUnderlinedState.storyName = 'With showUnderline true';
-InUnderlinedState.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
+InUnderlinedState.decorators = [splitTheme([defaultFormat])];
 
 export const linkStory: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
