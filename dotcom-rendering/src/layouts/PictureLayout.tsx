@@ -259,7 +259,8 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
-	const showComments = article.isCommentable;
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
@@ -559,7 +560,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									secondaryDateline={
 										article.webPublicationSecondaryDateDisplay
 									}
-									isCommentable={article.isCommentable}
+									isCommentable={showComments}
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
@@ -655,7 +656,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Island>
 				)}
-				{!isPaidContent && showComments && (
+				{showComments && (
 					<Section
 						fullWidth={true}
 						sectionId="comments"
@@ -679,7 +680,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{isWeb && !isPaidContent && (
+				{!isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}

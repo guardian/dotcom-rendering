@@ -296,6 +296,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
+
 	const isInLiveblogAdSlotTest =
 		article.config.abTests.serverSideLiveblogInlineAdsVariant === 'variant';
 
@@ -584,7 +587,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										secondaryDateline={
 											article.webPublicationSecondaryDateDisplay
 										}
-										isCommentable={article.isCommentable}
+										isCommentable={showComments}
 										discussionApiUrl={
 											article.config.discussionApiUrl
 										}
@@ -748,9 +751,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											secondaryDateline={
 												article.webPublicationSecondaryDateDisplay
 											}
-											isCommentable={
-												article.isCommentable
-											}
+											isCommentable={showComments}
 											discussionApiUrl={
 												article.config.discussionApiUrl
 											}
@@ -1217,7 +1218,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Island>
 
-					{!isPaidContent && article.isCommentable && (
+					{showComments && (
 						<Section
 							fullWidth={true}
 							showTopBorder={false}

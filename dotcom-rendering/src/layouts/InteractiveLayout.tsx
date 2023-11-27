@@ -218,14 +218,16 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 		config: { isPaidContent, host },
 	} = article;
 
-	const showComments = article.isCommentable;
+	const isApps = renderingTarget === 'Apps';
+	const isWeb = renderingTarget === 'Web';
+
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const isApps = renderingTarget === 'Apps';
-	const isWeb = renderingTarget === 'Web';
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
@@ -508,7 +510,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										secondaryDateline={
 											article.webPublicationSecondaryDateDisplay
 										}
-										isCommentable={article.isCommentable}
+										isCommentable={showComments}
 										discussionApiUrl={
 											article.config.discussionApiUrl
 										}
@@ -689,7 +691,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					/>
 				</Island>
 
-				{!isPaidContent && showComments && (
+				{showComments && (
 					<Section
 						fullWidth={true}
 						sectionId="comments"

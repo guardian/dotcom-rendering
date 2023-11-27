@@ -274,12 +274,14 @@ interface AppsProps extends CommonProps {
 
 export const CommentLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 	const {
 		config: { isPaidContent, host },
 	} = article;
 
 	const showBodyEndSlot =
-		renderingTarget === 'Web' &&
+		isWeb &&
 		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
 			article.config.switches.slotBodyEnd);
 
@@ -287,7 +289,8 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
-	const showComments = article.isCommentable;
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	const avatarUrl = getSoleContributor(article.tags, article.byline)
 		?.bylineLargeImageUrl;
@@ -296,11 +299,11 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const renderAds = renderingTarget === 'Web' && canRenderAds(article);
+	const renderAds = isWeb && canRenderAds(article);
 
 	return (
 		<>
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<div id="bannerandheader">
 					{renderAds && (
 						<Stuck>
@@ -434,7 +437,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 			)}
 
 			<main data-layout="CommentLayout">
-				{renderingTarget === 'Apps' && (
+				{isApps && (
 					<Island priority="critical">
 						<AdPortals />
 					</Island>
@@ -574,7 +577,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 									secondaryDateline={
 										article.webPublicationSecondaryDateDisplay
 									}
-									isCommentable={article.isCommentable}
+									isCommentable={showComments}
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
@@ -686,7 +689,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										webTitle={article.webTitle}
 										showBottomSocialButtons={
 											article.showBottomSocialButtons &&
-											renderingTarget === 'Web'
+											isWeb
 										}
 										badge={article.badge?.enhanced}
 									/>
@@ -759,7 +762,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderingTarget === 'Web' && (
+				{isWeb && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
@@ -783,7 +786,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					</Island>
 				)}
 
-				{!isPaidContent && showComments && (
+				{showComments && (
 					<Section
 						fullWidth={true}
 						sectionId="comments"
@@ -807,7 +810,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderingTarget === 'Web' && !isPaidContent && (
+				{!isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}
@@ -850,7 +853,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 				)}
 			</main>
 
-			{renderingTarget === 'Web' && props.NAV.subNavSections && (
+			{isWeb && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
@@ -864,7 +867,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					</Island>
 				</Section>
 			)}
-			{renderingTarget === 'Web' && !isPaidContent && (
+			{isWeb && !isPaidContent && (
 				<>
 					<Section
 						fullWidth={true}
@@ -919,7 +922,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					<MobileStickyContainer />
 				</>
 			)}
-			{renderingTarget === 'Apps' && (
+			{isApps && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"

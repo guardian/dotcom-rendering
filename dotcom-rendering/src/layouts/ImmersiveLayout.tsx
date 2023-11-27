@@ -232,9 +232,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 
 	const showBodyEndSlot =
-		renderingTarget === 'Web' &&
+		isWeb &&
 		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
 			article.config.switches.slotBodyEnd);
 
@@ -242,7 +244,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
-	const showComments = article.isCommentable;
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	const mainMedia = article.mainMediaElements[0];
 
@@ -301,11 +304,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 		</div>
 	);
 
-	const renderAds = renderingTarget === 'Web' && canRenderAds(article);
+	const renderAds = isWeb && canRenderAds(article);
 
 	return (
 		<>
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<>
 					<div
 						css={css`
@@ -453,7 +456,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 			</header>
 
 			<main data-layout="ImmersiveLayout">
-				{renderingTarget === 'Apps' && (
+				{isApps && (
 					<Island priority="critical">
 						<AdPortals />
 					</Island>
@@ -585,7 +588,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									secondaryDateline={
 										article.webPublicationSecondaryDateDisplay
 									}
-									isCommentable={article.isCommentable}
+									isCommentable={showComments}
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
@@ -682,8 +685,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons &&
-										renderingTarget === 'Web'
+										article.showBottomSocialButtons && isWeb
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -770,7 +772,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					</Section>
 				)}
 
-				{renderingTarget === 'Web' && (
+				{isWeb && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
@@ -796,7 +798,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					</Island>
 				)}
 
-				{!isPaidContent && showComments && (
+				{showComments && (
 					<Section
 						fullWidth={true}
 						sectionId="comments"
@@ -819,7 +821,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						/>
 					</Section>
 				)}
-				{renderingTarget === 'Web' && !isPaidContent && (
+				{!isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}
@@ -861,7 +863,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				)}
 			</main>
 
-			{renderingTarget === 'Web' && props.NAV.subNavSections && (
+			{isWeb && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
@@ -876,7 +878,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				</Section>
 			)}
 
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<>
 					<Section
 						fullWidth={true}
@@ -931,7 +933,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					{renderAds && <MobileStickyContainer />}
 				</>
 			)}
-			{renderingTarget === 'Apps' && (
+			{isApps && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
