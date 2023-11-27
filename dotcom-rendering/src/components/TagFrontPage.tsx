@@ -68,7 +68,7 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 					tests={tagFront.config.abTests}
 				/>
 			</Island>
-			<Island priority="critical" clientOnly={true}>
+			<Island priority="critical">
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(
 						tagFront.config.switches,
