@@ -8,7 +8,7 @@ import {
 	headlineMedium20,
 	headlineMedium24,
 	headlineMediumItalic20,
-	palette,
+	palette as sourcePalette,
 	space,
 	textSans20,
 	textSans24,
@@ -92,7 +92,7 @@ const analysisStyles = css`
 		}
 	}
 	span {
-		color: ${palette.neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 `;
 
@@ -110,6 +110,10 @@ const immersiveStyles = (format: ArticleFormat) => css`
 		margin-bottom: 0;
 		${format.theme === ArticleSpecial.Labs ? textSans24 : headlineMedium24}
 	}
+`;
+
+const galleryStyles = css`
+	color: ${sourcePalette.neutral[100]};
 `;
 
 const immersiveLinkStyles = css`
@@ -149,7 +153,13 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return (
-				<div css={immersiveStyles(format)}>
+				<div
+					css={[
+						immersiveStyles(format),
+						format.design === ArticleDesign.Gallery &&
+							galleryStyles,
+					]}
+				>
 					By{' '}
 					<span css={immersiveLinkStyles}>
 						<BylineLink
