@@ -15,9 +15,10 @@ export const getUserClient: BridgetApi<'getUserClient'> = () => ({
 	doesCcpaApply: async () => false,
 });
 
-export const getEnvironmentClient: BridgetApi<
-	'getEnvironmentClient'
-> = () => ({});
+export const getEnvironmentClient: BridgetApi<'getEnvironmentClient'> = () => ({
+	isMyGuardianEnabled: async () => false,
+	nativeThriftPackageVersion: async () => '2.1.0',
+});
 
 export const getGalleryClient: BridgetApi<'getGalleryClient'> = () => ({});
 
@@ -57,6 +58,10 @@ export const getNotificationsClient: BridgetApi<
 export const getCommercialClient: BridgetApi<'getCommercialClient'> = () => ({
 	insertAdverts: () => Promise.resolve(),
 	updateAdverts: () => Promise.resolve(),
+});
+
+export const getTagClient: BridgetApi<'getTagClient'> = () => ({
+	isFollowing: async () => false,
 });
 
 export const ensure_all_exports_are_present = {
