@@ -44,6 +44,7 @@ type FENewsletterDetailConfigType = {
 export interface FENewsletterDetailPageType {
 	id: string;
 	newsletter: Newsletter;
+	backfillRecommendedNewsletters: Newsletter[];
 	editionId: EditionId;
 	subscribeUrl: string;
 	contributionsServiceUrl: string;
