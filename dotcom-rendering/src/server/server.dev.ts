@@ -1,4 +1,5 @@
 import type { Handler } from 'express';
+import { handleNewsletterDetailPage } from './handler.newsletterDetailPage.web';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
 import { handleAMPArticle } from './handler.article.amp';
 import {
@@ -62,6 +63,8 @@ export const devServer = (): Handler => {
 				return handleTagFrontJson(req, res, next);
 			case 'EmailNewsletters':
 				return handleAllEditorialNewslettersPage(req, res, next);
+			case 'EmailNewsletterDetail':
+				return handleNewsletterDetailPage(req, res, next);
 			case 'AppsArticle':
 				return handleAppsArticle(req, res, next);
 			case 'AppsInteractive':
