@@ -33,7 +33,7 @@ jobs:
       - name: Add commit hash for PRout
         working-directory: dotcom-rendering
         run: |
-          echo 'export const GIT_COMMIT_HASH = "${{ github.sha }}";' > /server/prout.ts
+          echo 'export const GIT_COMMIT_HASH = "${{ github.sha }}";' > src/server/prout.ts
 
       - name: Generate production bundle
         run: make riffraff-bundle
