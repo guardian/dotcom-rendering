@@ -1,6 +1,6 @@
 import type { EditionId } from '../lib/edition';
 import type { ServerSideTests, Switches } from './config';
-import type { Newsletter } from './content';
+import type { Newsletter, NewsletterDetailData } from './content';
 import type { FooterType } from './footer';
 
 // currently same as config for all newsletters page - but might deviate
@@ -40,10 +40,9 @@ type FENewsletterDetailConfigType = {
 	// isPreview?: boolean;
 	googleRecaptchaSiteKey?: string;
 };
-
 export interface FENewsletterDetailPageType {
 	id: string;
-	newsletter: Newsletter;
+	newsletter: NewsletterDetailData;
 	backfillRecommendedNewsletters: Newsletter[];
 	editionId: EditionId;
 	subscribeUrl: string;

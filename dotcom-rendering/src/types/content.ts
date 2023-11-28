@@ -1,6 +1,7 @@
+import type { NewsletterApiData } from '@guardian/newsletter-types';
+
 // -------------------------------------
 // Elements
-
 // -------------------------------------
 interface ThirdPartyEmbeddedContent {
 	isThirdPartyTracking: boolean;
@@ -936,15 +937,24 @@ export type SharingUrlsType = {
 // Newsletter
 // -------------------------------------
 
-export type Newsletter = {
-	listId: number;
-	identityName: string;
-	name: string;
+export type Newsletter = Pick<
+	NewsletterApiData,
+	| 'listId'
+	| 'identityName'
+	| 'name'
+	| 'frequency'
+	| 'theme'
+	| 'group'
+	| 'regionFocus'
+	| 'illustrationCard'
+> & {
 	description: string;
-	frequency: string;
 	successDescription: string;
-	theme: string;
-	group: string;
-	regionFocus?: string;
-	illustrationCard?: string;
+};
+
+// TO DO - FE doesn't include all fields in the API response - Omit more fieids (or pick the ones provided)
+// TO DO - fix the type library - has signUpHeadline as a string, but should be optional
+// also should upgrade its version of tslib or put in a resolution in the package.json - downgraded the dependency on this project for now
+export type NewsletterDetailData = Omit<NewsletterApiData, 'signUpHeadline'> & {
+	signUpHeadline?: string;
 };

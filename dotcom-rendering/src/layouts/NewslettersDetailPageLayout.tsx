@@ -16,6 +16,7 @@ import {
 	Column,
 	Columns,
 	Hide,
+	Link,
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -322,17 +323,49 @@ export const NewsletterDetailPageLayout = ({
 					showTopBorder={false}
 					stretchRight={true}
 					leftContent={
-						showRegionalFocus && (
+						<>
 							<div css={topMarginStyle(space[4])}>
-								<NewsletterDetail text={regionalFocusText} />
+								{!!newsletterDetailPage.newsletter
+									.seriesTag && (
+									<Link
+										href={`/${newsletterDetailPage.newsletter.seriesTag}`}
+									>
+										{
+											newsletterDetailPage.newsletter
+												.seriesTag
+										}
+									</Link>
+								)}
+								{showRegionalFocus && (
+									<NewsletterDetail
+										text={regionalFocusText}
+									/>
+								)}
+								<NewsletterDetail
+									text={
+										newsletterDetailPage.newsletter.category
+									}
+								/>
 							</div>
-						)
+						</>
 					}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
 							{!!newsletterDetailPage.newsletter.regionFocus && (
 								<Hide from="leftCol">
+									{/* TO DO - make this nice */}
+									{!!newsletterDetailPage.newsletter
+										.seriesTag && (
+										<Link
+											href={`/${newsletterDetailPage.newsletter.seriesTag}`}
+										>
+											{
+												newsletterDetailPage.newsletter
+													.seriesTag
+											}
+										</Link>
+									)}
 									{showRegionalFocus && (
 										<div css={regionalFocusDivStyle}>
 											<NewsletterDetail
@@ -340,14 +373,27 @@ export const NewsletterDetailPageLayout = ({
 											/>
 										</div>
 									)}
+									<div css={regionalFocusDivStyle}>
+										<NewsletterDetail
+											text={
+												newsletterDetailPage.newsletter
+													.category
+											}
+										/>
+									</div>
 								</Hide>
 							)}
 
 							<h1 css={titleStyle}>
-								{newsletterDetailPage.newsletter.name}
+								{newsletterDetailPage.newsletter
+									.signUpHeadline ||
+									newsletterDetailPage.newsletter.name}
 							</h1>
 							<p css={descriptionStyle}>
-								{newsletterDetailPage.newsletter.description}
+								{
+									newsletterDetailPage.newsletter
+										.signUpDescription
+								}
 							</p>
 
 							<div css={shareDivStyle}>
@@ -388,7 +434,7 @@ export const NewsletterDetailPageLayout = ({
 								}
 								successDescription={
 									newsletterDetailPage.newsletter
-										.successDescription
+										.signUpDescription
 								}
 								hidePrivacyMessage={false}
 							/>
