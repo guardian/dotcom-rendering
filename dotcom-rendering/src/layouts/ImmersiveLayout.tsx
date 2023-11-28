@@ -54,7 +54,13 @@ import type { NavType } from '../model/extract-nav';
 import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 import { palette as themePalette } from '../palette';
-const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
+const ImmersiveGrid = ({
+	children,
+	isGallery,
+}: {
+	children: React.ReactNode;
+	isGallery: boolean;
+}) => (
 	<div
 		css={css`
 			/* IE Fallback */
@@ -82,22 +88,40 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 					Right Column
 				*/
-				${from.wide} {
-					grid-column-gap: 10px;
-					grid-template-columns: 219px 1px 620px 60px 300px;
-					grid-template-areas:
-						'caption    border      title      . right-column'
-						'.          border      headline   . right-column'
-						'.          border      standfirst . right-column'
-						'.          border      byline     . right-column'
-						'lines      border      body       . right-column'
-						'meta       border      body       . right-column'
-						'meta       border      body       . right-column'
-						'.          border      body       . right-column'
-						'.          border      .          . right-column';
-				}
 
-				/*
+				${from.wide} {
+					${isGallery
+						? css`
+								grid-column-gap: 10px;
+								grid-template-columns: 219px 1px 1fr;
+								grid-template-areas:
+									'caption    border      title       '
+									'.          border      headline    '
+									'.          border      standfirst  '
+									'.          border      byline      '
+									'meta       border      .        '
+									'meta       border      .        '
+									'.          border      body       '
+									'.          border      .           ';
+						  `
+						: css`
+								grid-column-gap: 10px;
+								grid-template-columns: 219px 1px 620px 60px 300px;
+								grid-template-areas:
+									'caption    border      title      . right-column'
+									'.          border      headline   . right-column'
+									'.          border      standfirst . right-column'
+									'.          border      byline     . right-column'
+									'lines      border      body       . right-column'
+									'meta       border      body       . right-column'
+									'meta       border      body       . right-column'
+									'.          border      body       . right-column'
+									'.          border      .          . right-column';
+						  `}
+				}
+			}
+
+			/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column (220 - 1px border)
@@ -105,54 +129,70 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 					Right Column
 				*/
-				${until.wide} {
-					grid-column-gap: 10px;
-					grid-template-columns: 140px 1px 620px 300px;
-					grid-template-areas:
-						'.          border      title       right-column'
-						'.          border      headline    right-column'
-						'.          border      standfirst  right-column'
-						'.          border      byline      right-column'
-						'lines      border      body        right-column'
-						'meta       border      body        right-column'
-						'meta       border      body        right-column'
-						'.          border      body        right-column'
-						'.          border      .           right-column';
-				}
+			${until.wide} {
+				${isGallery
+					? css`
+							grid-column-gap: 10px;
+							grid-template-columns: 140px 1px 1fr;
+							grid-template-areas:
+								'.          border      title       '
+								'.          border      headline    '
+								'.          border      standfirst  '
+								'.          border      byline      '
+								'.      border      .        '
+								'meta       border      .        '
+								'meta       border      .        '
+								'.          border      body       '
+								'.          border      .           ';
+					  `
+					: css`
+							grid-column-gap: 10px;
+							grid-template-columns: 140px 1px 620px 300px;
+							grid-template-areas:
+								'.          border      title       right-column'
+								'.          border      headline    right-column'
+								'.          border      standfirst  right-column'
+								'.          border      byline      right-column'
+								'lines      border      body        right-column'
+								'meta       border      body        right-column'
+								'meta       border      body        right-column'
+								'.          border      body        right-column'
+								'.          border      .           right-column';
+					  `}
+			}
 
-				/*
+			/*
 					Explanation of each unit of grid-template-columns
 
 					Main content
 					Right Column
 				*/
-				${until.leftCol} {
-					grid-template-columns: 620px 300px;
-					grid-column-gap: 20px;
-					grid-template-areas:
-						'title       right-column'
-						'headline    right-column'
-						'standfirst  right-column'
-						'byline      right-column'
-						'caption     right-column'
-						'lines       right-column'
-						'meta        right-column'
-						'body        right-column';
-				}
+			${until.leftCol} {
+				grid-template-columns: 620px 300px;
+				grid-column-gap: 20px;
+				grid-template-areas:
+					'title       right-column'
+					'headline    right-column'
+					'standfirst  right-column'
+					'byline      right-column'
+					'caption     right-column'
+					'lines       right-column'
+					'meta        right-column'
+					'body        right-column';
+			}
 
-				${until.desktop} {
-					grid-column-gap: 0px;
-					grid-template-columns: 100%; /* Main content */
-					grid-template-areas:
-						'title'
-						'headline'
-						'standfirst'
-						'byline'
-						'caption'
-						'lines'
-						'meta'
-						'body';
-				}
+			${until.desktop} {
+				grid-column-gap: 0px;
+				grid-template-columns: 100%; /* Main content */
+				grid-template-areas:
+					'title'
+					'headline'
+					'standfirst'
+					'byline'
+					'caption'
+					'lines'
+					'meta'
+					'body';
 			}
 		`}
 	>
@@ -314,6 +354,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 		isWeb &&
 		article.config.abTests.tagLinkDesignVariant === 'variant' &&
 		article.tags.some((tag) => tag.id === 'football/euro-2024');
+	const isGallery = format.design === ArticleDesign.Gallery;
+
 	return (
 		<>
 			{isWeb && (
@@ -480,7 +522,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					backgroundColour={themePalette('--article-background')}
 					element="article"
 				>
-					<ImmersiveGrid>
+					<ImmersiveGrid isGallery={isGallery}>
 						{/* Above leftCol, the Caption is controlled by Section ^^ */}
 						<GridItem area="caption">
 							<Hide when="above" breakpoint="leftCol">
@@ -559,28 +601,31 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								/>
 							)}
 						</GridItem>
-						<GridItem area="lines">
-							{format.design === ArticleDesign.PhotoEssay &&
-							!isLabs ? (
-								<></>
-							) : (
-								<div css={maxWidth}>
-									<div css={[stretchLines, linesMargin]}>
-										{format.theme ===
-										ArticleSpecial.Labs ? (
-											<GuardianLabsLines />
-										) : (
-											<DecideLines
-												format={format}
-												color={themePalette(
-													'--article-border',
-												)}
-											/>
-										)}
+						$
+						{!isGallery && (
+							<GridItem area="lines">
+								{format.design === ArticleDesign.PhotoEssay &&
+								!isLabs ? (
+									<></>
+								) : (
+									<div css={maxWidth}>
+										<div css={[stretchLines, linesMargin]}>
+											{format.theme ===
+											ArticleSpecial.Labs ? (
+												<GuardianLabsLines />
+											) : (
+												<DecideLines
+													format={format}
+													color={themePalette(
+														'--article-border',
+													)}
+												/>
+											)}
+										</div>
 									</div>
-								</div>
-							)}
-						</GridItem>
+								)}
+							</GridItem>
+						)}
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								{isApps ? (
@@ -759,51 +804,56 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								/>
 							</ArticleContainer>
 						</GridItem>
-						<GridItem area="right-column">
-							<div
-								css={css`
-									padding-top: 6px;
-									height: 100%;
-									${from.desktop} {
-										/* above 980 */
-										margin-left: 20px;
-										margin-right: -20px;
-									}
-									${from.leftCol} {
-										/* above 1140 */
-										margin-left: 0px;
-										margin-right: 0px;
-									}
-								`}
-							>
-								<RightColumn>
-									<>
-										{mainMedia && renderAds && (
-											<div
-												css={css`
-													margin-top: ${space[4]}px;
-												`}
-											>
-												{
-													<AdSlot
-														position="right"
-														display={format.display}
-														isPaidContent={
-															article.pageType
-																.isPaidContent
-														}
-														shouldHideReaderRevenue={
-															!!article.config
-																.shouldHideReaderRevenue
-														}
-													/>
-												}
-											</div>
-										)}
-									</>
-								</RightColumn>
-							</div>
-						</GridItem>
+						$
+						{!isGallery && (
+							<GridItem area="right-column">
+								<div
+									css={css`
+										padding-top: 6px;
+										height: 100%;
+										${from.desktop} {
+											/* above 980 */
+											margin-left: 20px;
+											margin-right: -20px;
+										}
+										${from.leftCol} {
+											/* above 1140 */
+											margin-left: 0px;
+											margin-right: 0px;
+										}
+									`}
+								>
+									<RightColumn>
+										<>
+											{mainMedia && renderAds && (
+												<div
+													css={css`
+														margin-top: ${space[4]}px;
+													`}
+												>
+													{
+														<AdSlot
+															position="right"
+															display={
+																format.display
+															}
+															isPaidContent={
+																article.pageType
+																	.isPaidContent
+															}
+															shouldHideReaderRevenue={
+																!!article.config
+																	.shouldHideReaderRevenue
+															}
+														/>
+													}
+												</div>
+											)}
+										</>
+									</RightColumn>
+								</div>
+							</GridItem>
+						)}
 					</ImmersiveGrid>
 				</Section>
 				{!isLabs && renderAds && (
