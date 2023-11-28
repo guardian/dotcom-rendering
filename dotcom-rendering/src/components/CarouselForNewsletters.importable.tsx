@@ -27,6 +27,7 @@ type Props = {
 	activeDotColour: string;
 	titleHighlightColour: string;
 	carouselPosition?: number;
+	cardFunction?: 'sign-up' | 'link';
 };
 
 // TO DO - this file was adapted from the Caroursel component and duplicates much of the code
@@ -389,6 +390,7 @@ export const CarouselForNewsletters = ({
 	activeDotColour,
 	titleHighlightColour,
 	carouselPosition,
+	cardFunction = 'sign-up',
 }: Props) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
 
@@ -618,6 +620,7 @@ export const CarouselForNewsletters = ({
 										cardPosition={i}
 										groupTitle={heading}
 										carouselPosition={carouselPosition}
+										cardFunction={cardFunction}
 									/>
 								</div>
 							</LI>

@@ -7,6 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import {
 	Button,
+	LinkButton,
 	SvgCheckmark,
 	SvgPlus,
 } from '@guardian/source-react-components';
@@ -23,6 +24,7 @@ interface Props {
 	cardPosition: number;
 	carouselPosition?: number;
 	groupTitle: string;
+	cardFunction: 'sign-up' | 'link';
 }
 
 export const BUTTON_ROLE = 'GroupedNewslettersList-sign-up-button';
@@ -152,6 +154,7 @@ export const NewsletterCard = ({
 	groupTitle,
 	cardPosition,
 	carouselPosition,
+	cardFunction,
 }: Props) => {
 	const [hasBeenSeen, setIsInViewRef] = useIsInView({ threshold: 0.9 });
 	const [haveReportedBeingSeen, setHaveReportedBeingSeen] = useState(false);
@@ -229,28 +232,39 @@ export const NewsletterCard = ({
 				<h3>{newsletter.name}</h3>
 				<p>{newsletter.description}</p>
 				<div css={buttonHolderStyle}>
-					<Button
-						{...getButtonInitialAriaAttribute(newsletter.name)}
-						priority="tertiary"
-						size="xsmall"
-						iconSide="left"
-						icon={
-							<>
-								<span className={ICON_PLUS_CLASS}>
-									<SvgPlus />
-								</span>
-								<span className={ICON_TICK_CLASS}>
-									<SvgCheckmark />
-								</span>
-							</>
-						}
-						cssOverrides={buttonStyle}
-						data-identity-name={newsletter.identityName}
-						data-list-id={newsletter.listId}
-						data-role={BUTTON_ROLE}
-					>
-						Sign up
-					</Button>
+					{cardFunction === 'sign-up' && (
+						<Button
+							{...getButtonInitialAriaAttribute(newsletter.name)}
+							priority="tertiary"
+							size="xsmall"
+							iconSide="left"
+							icon={
+								<>
+									<span className={ICON_PLUS_CLASS}>
+										<SvgPlus />
+									</span>
+									<span className={ICON_TICK_CLASS}>
+										<SvgCheckmark />
+									</span>
+								</>
+							}
+							cssOverrides={buttonStyle}
+							data-identity-name={newsletter.identityName}
+							data-list-id={newsletter.listId}
+							data-role={BUTTON_ROLE}
+						>
+							Sign up
+						</Button>
+					)}
+					{cardFunction === 'link' && (
+						<LinkButton
+							href={`/email-newsletters/${newsletter.identityName}`}
+							size="xsmall"
+							priority="subdued"
+						>
+							See More
+						</LinkButton>
+					)}
 				</div>
 			</div>
 		</article>
