@@ -5,9 +5,6 @@ import type { BrowserContext, Cookie } from '@playwright/test';
  *
  * Playwright does not currently have a useful method for removing a single cookie
  * so this workaround is required
- *
- * @param context
- * @param cookieName
  */
 const clearCookie = async (
 	context: BrowserContext,
