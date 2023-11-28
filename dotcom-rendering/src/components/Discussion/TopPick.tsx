@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
 import {
-	brand,
 	from,
-	neutral,
+	palette as sourcePalette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
@@ -40,12 +39,12 @@ const pickStyles = css`
 		margin-left: ${space[5]}px;
 		margin-right: ${space[5]}px;
 		padding-left: ${space[2]}px;
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 `;
 
 const arrowSize = 25;
-const bg = neutral[93];
+const bg = sourcePalette.neutral[93];
 
 const userNameStyles = (format: ArticleFormat) => css`
 	margin-top: 3px;
@@ -74,7 +73,7 @@ const linkStyles = css`
 // to override a tag styles from dangerouslySetInnerHTML
 const inCommentLinkStyling = css`
 	a {
-		color: ${brand[500]};
+		color: ${sourcePalette.brand[500]};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;

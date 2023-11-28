@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	brandAlt,
 	brandText,
 	from,
 	headline,
+	palette as sourcePalette,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgChevronDownSingle } from '@guardian/source-react-components';
@@ -61,7 +61,7 @@ const openExpandedMenuStyles = (isImmersive: boolean) => css`
 
 	:hover,
 	:focus {
-		color: ${brandAlt[400]};
+		color: ${sourcePalette.brandAlt[400]};
 		svg {
 			transform: translateY(2px);
 		}

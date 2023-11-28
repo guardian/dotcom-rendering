@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import {
 	body,
 	headline,
-	neutral,
+	palette as sourcePalette,
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
@@ -63,8 +63,8 @@ export const Summary = ({
 	`;
 
 	const showHideStyling = css`
-		background: ${neutral[7]};
-		color: ${neutral[100]};
+		background: ${sourcePalette.neutral[7]};
+		color: ${sourcePalette.neutral[100]};
 		height: 2rem;
 		position: absolute;
 		bottom: 0;

@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { palette, space, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import { SvgClock } from '@guardian/source-react-components';
 
 type Props = {
@@ -8,7 +12,7 @@ type Props = {
 
 const deadlineStyles = css`
 	${textSans.xxsmall()};
-	background-color: ${palette.brandAlt[400]};
+	background-color: ${sourcePalette.brandAlt[400]};
 	right: 0;
 	display: flex;
 	align-items: center;

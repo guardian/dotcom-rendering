@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
 import { isString, storage } from '@guardian/libs';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import {
 	getDiscussion,
@@ -86,7 +90,7 @@ const DEFAULT_FILTERS = {
 const NoComments = () => (
 	<div
 		css={css`
-			color: ${neutral[46]};
+			color: ${sourcePalette.neutral[46]};
 			${textSans.small()}
 			padding-top: ${space[5]}px;
 			padding-left: ${space[1]}px;

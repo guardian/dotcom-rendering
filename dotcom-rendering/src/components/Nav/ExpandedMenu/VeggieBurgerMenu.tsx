@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	brandAlt,
 	from,
-	neutral,
+	palette as sourcePalette,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -70,8 +69,8 @@ const veggieBurgerIconStyles = css`
 `;
 
 const veggieBurgerStyles = (isImmersive: boolean) => css`
-	background-color: ${brandAlt[400]};
-	color: ${neutral[7]};
+	background-color: ${sourcePalette.brandAlt[400]};
+	color: ${sourcePalette.neutral[7]};
 	cursor: pointer;
 	height: 42px;
 	min-width: 42px;

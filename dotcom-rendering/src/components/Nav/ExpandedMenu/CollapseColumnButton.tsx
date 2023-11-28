@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	brandAlt,
 	brandText,
 	from,
 	headline,
+	palette as sourcePalette,
 	textSans,
 } from '@guardian/source-foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
@@ -64,7 +64,7 @@ const collapseColumnButton = css`
 	}
 	:hover,
 	:focus {
-		color: ${brandAlt[400]};
+		color: ${sourcePalette.brandAlt[400]};
 	}
 `;
 

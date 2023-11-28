@@ -1,8 +1,8 @@
 import { css, keyframes } from '@emotion/react';
-import { neutral, space } from '@guardian/source-foundations';
+import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { Row } from './Row';
 
-const BACKGROUND_COLOUR = neutral[93];
+const BACKGROUND_COLOUR = sourcePalette.neutral[93];
 
 const shimmer = keyframes`
   0% {
@@ -18,7 +18,7 @@ const shimmerStyles = css`
 	background: linear-gradient(
 		to right,
 		${BACKGROUND_COLOUR} 4%,
-		${neutral[86]} 25%,
+		${sourcePalette.neutral[86]} 25%,
 		${BACKGROUND_COLOUR} 36%
 	);
 	background-size: 1500px 100%;

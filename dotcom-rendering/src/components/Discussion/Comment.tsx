@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import {
 	border,
-	brand,
 	from,
-	neutral,
 	remSpace,
+	palette as sourcePalette,
 	space,
 	textSans,
 	until,
@@ -85,7 +84,7 @@ const commentCss = css`
 		margin-left: ${space[5]}px;
 		margin-right: ${space[5]}px;
 		padding-left: ${space[2]}px;
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 
 	i {
@@ -104,14 +103,14 @@ const commentCss = css`
 `;
 
 const blockedCommentStyles = css`
-	color: ${neutral[46]};
+	color: ${sourcePalette.neutral[46]};
 	${textSans.xxsmall()}
 `;
 
 // to override a tag styles from dangerouslySetInnerHTML
 const commentLinkStyling = css`
 	a {
-		color: ${brand[500]};
+		color: ${sourcePalette.brand[500]};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
@@ -126,7 +125,7 @@ const commentWrapper = css`
 `;
 
 const selectedStyles = css`
-	background-color: ${neutral[97]};
+	background-color: ${sourcePalette.neutral[97]};
 	margin-left: -${space[2]}px;
 	padding-left: ${space[2]}px;
 	margin-right: -${space[2]}px;
@@ -168,7 +167,7 @@ const regularFont = css`
 const svgReplyArrow = css`
 	svg {
 		/* stylelint-disable-next-line declaration-no-important */
-		fill: ${neutral[46]} !important;
+		fill: ${sourcePalette.neutral[46]} !important;
 	}
 `;
 
@@ -245,7 +244,7 @@ const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
 
 const buttonLinkBaseStyles = css`
 	button {
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -254,7 +253,7 @@ const buttonLinkBaseStyles = css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${neutral[46]};
+			text-decoration-color: ${sourcePalette.neutral[46]};
 		}
 	}
 `;
