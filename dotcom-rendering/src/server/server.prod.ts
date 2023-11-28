@@ -30,6 +30,7 @@ import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
+import { GIT_COMMIT_HASH } from './prout';
 
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
@@ -52,6 +53,10 @@ export const prodServer = (): void => {
 
 	app.get('/_healthcheck', (req: Request, res: Response) => {
 		res.status(200).send('OKAY');
+	});
+
+	app.get('/_prout', (req: Request, res: Response) => {
+		res.status(200).send(GIT_COMMIT_HASH);
 	});
 
 	// if running prod server locally, serve local assets
