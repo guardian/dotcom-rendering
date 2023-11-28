@@ -5,6 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Figure } from './Figure';
 import { RichLink } from './RichLink';
 import { Section } from './Section';
@@ -75,6 +76,8 @@ export const Article = () => {
 		</Section>
 	);
 };
+Article.storyName = 'Article';
+Article.decorators = [splitTheme([mockFormatNews])];
 
 export const Network = () => {
 	return (
@@ -106,6 +109,7 @@ Network.story = {
 		chromatic: { viewports: [380] },
 	},
 };
+Network.decorators = [splitTheme([mockFormatCulture])];
 
 export const SectionStory = () => {
 	return (
@@ -132,6 +136,7 @@ export const SectionStory = () => {
 	);
 };
 SectionStory.storyName = 'Section';
+SectionStory.decorators = [splitTheme([mockFormatNews])];
 
 export const Inline = () => {
 	return (
@@ -158,6 +163,7 @@ export const Inline = () => {
 	);
 };
 Inline.storyName = 'Inline';
+Inline.decorators = [splitTheme([mockFormatNews])];
 
 export const ImageContent = () => {
 	return (
@@ -189,6 +195,7 @@ ImageContent.story = {
 		chromatic: { viewports: [1300] },
 	},
 };
+ImageContent.decorators = [splitTheme([mockFormatNews])];
 
 export const Interactive = () => {
 	return (
@@ -219,6 +226,7 @@ Interactive.story = {
 		viewport: { defaultViewport: 'leftCol' },
 	},
 };
+Interactive.decorators = [splitTheme([mockFormatNews])];
 
 export const Gallery = () => {
 	return (
@@ -258,6 +266,7 @@ Gallery.story = {
 		viewport: { defaultViewport: 'leftCol' },
 	},
 };
+Gallery.decorators = [splitTheme([mockFormatNews])];
 
 export const Video = () => {
 	return (
@@ -290,6 +299,7 @@ Video.story = {
 		chromatic: { viewports: [380] },
 	},
 };
+Video.decorators = [splitTheme([mockFormatNews])];
 
 export const Audio = () => {
 	return (
@@ -315,6 +325,8 @@ export const Audio = () => {
 		</Section>
 	);
 };
+Audio.storyName = 'Audio';
+Audio.decorators = [splitTheme([mockFormatNews])];
 
 export const LiveBlog = () => {
 	return (
@@ -362,6 +374,7 @@ LiveBlog.story = {
 		chromatic: { viewports: [380] },
 	},
 };
+LiveBlog.decorators = [splitTheme([mockFormatNews])];
 
 export const Tag = () => {
 	return (
@@ -387,6 +400,8 @@ export const Tag = () => {
 		</Section>
 	);
 };
+Tag.storyName = 'Tag';
+Tag.decorators = [splitTheme([mockFormatNews])];
 
 export const Index = () => {
 	return (
@@ -419,6 +434,8 @@ export const Index = () => {
 		</Section>
 	);
 };
+Index.storyName = 'Index';
+Index.decorators = [splitTheme([mockFormatNews])];
 
 export const Crossword = () => {
 	return (
@@ -444,6 +461,8 @@ export const Crossword = () => {
 		</Section>
 	);
 };
+Crossword.storyName = 'Crossword';
+Crossword.decorators = [splitTheme([mockFormatNews])];
 
 export const Survey = () => {
 	return (
@@ -469,6 +488,8 @@ export const Survey = () => {
 		</Section>
 	);
 };
+Survey.storyName = 'Survey';
+Survey.decorators = [splitTheme([mockFormatNews])];
 
 export const Signup = () => {
 	return (
@@ -495,6 +516,8 @@ export const Signup = () => {
 		</Section>
 	);
 };
+Signup.storyName = 'Signup';
+Signup.decorators = [splitTheme([mockFormatNews])];
 
 export const Userid = () => {
 	return (
@@ -520,6 +543,8 @@ export const Userid = () => {
 		</Section>
 	);
 };
+Userid.storyName = 'Userid';
+Userid.decorators = [splitTheme([mockFormatNews])];
 
 export const PaidFor = () => {
 	return (
@@ -551,6 +576,8 @@ export const PaidFor = () => {
 		</Section>
 	);
 };
+PaidFor.storyName = 'PaidFor';
+PaidFor.decorators = [splitTheme([mockFormatNews])];
 
 export const Analysis = () => {
 	return (
@@ -601,3 +628,4 @@ export const Analysis = () => {
 		</div>
 	);
 };
+Analysis.storyName = 'Analysis';

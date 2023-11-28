@@ -21,7 +21,6 @@ export type Palette = {
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
-		richLink: Colour;
 		witnessIcon: Colour;
 		witnessAuthor: Colour;
 		witnessTitle: Colour;
@@ -44,8 +43,6 @@ export type Palette = {
 	};
 	background: {
 		article: Colour;
-		analysisContrast: Colour;
-		analysisContrastHover: Colour;
 		audioAtom: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
@@ -54,7 +51,6 @@ export type Palette = {
 		bullet: Colour;
 		bulletStandfirst: Colour;
 		standfirst: Colour;
-		richLink: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
 		carouselDot: Colour;
@@ -77,8 +73,6 @@ export type Palette = {
 	fill: {
 		commentCount: Colour;
 		commentCountUntilDesktop: Colour;
-		richLink: Colour;
-		quoteIcon: Colour;
 		guardianLogo: Colour;
 	};
 	border: {
@@ -90,7 +84,6 @@ export type Palette = {
 		standfirstLink: Colour;
 		headline: Colour;
 		standfirst: Colour;
-		richLink: Colour;
 		navPillar: Colour;
 		article: Colour;
 		lines: Colour;
