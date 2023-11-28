@@ -2000,6 +2000,16 @@ const cardBackgroundDark: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[0];
 	}
 };
+const onwardJourneyCardBackgroundLight: PaletteFunction = (format) => {
+	const cardBackground = cardBackgroundLight(format);
+	if (cardBackground === sourcePalette.neutral[97]) return 'transparent';
+	return cardBackground;
+};
+const onwardJourneyCardBackgroundDark: PaletteFunction = (format) => {
+	const cardBackground = cardBackgroundDark(format);
+	if (cardBackground === sourcePalette.neutral[0]) return 'transparent';
+	return cardBackground;
+};
 const cardHeadlineTextLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return sourcePalette.neutral[100];
@@ -3340,6 +3350,92 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 const articleTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const articleTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const carouselTextLight: PaletteFunction = () => sourcePalette.neutral[7];
+const carouselTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+
+const carouselBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const carouselBorderDark: PaletteFunction = () => sourcePalette.neutral[60];
+
+const carouselArrowLight: PaletteFunction = () => sourcePalette.neutral[100];
+const carouselArrowDark: PaletteFunction = () => sourcePalette.neutral[0];
+
+const carouselArrowBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+const carouselArrowBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
+const carouselArrowBackgroundHoverLight: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const carouselArrowBackgroundHoverDark: PaletteFunction = () =>
+	sourcePalette.brandAlt[200];
+
+const carouselDotLight: PaletteFunction = () => sourcePalette.neutral[93];
+const carouselDotDark: PaletteFunction = () => sourcePalette.neutral[20];
+
+const carouselDotHoverLight: PaletteFunction = () => sourcePalette.neutral[86];
+const carouselDotHoverDark: PaletteFunction = () => sourcePalette.neutral[46];
+
+const carouselActiveDotLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+const carouselActiveDotDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[700];
+		default:
+			return pillarPalette(theme, 500);
+	}
+};
+
+const carouselTitleHighlightLight: PaletteFunction = ({ theme, design }) => {
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.neutral[7];
+		case Pillar.News:
+			if (design === ArticleDesign.Analysis) {
+				return sourcePalette.news[300];
+			}
+			return sourcePalette.news[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+
+const carouselTitleHighlightDark: PaletteFunction = ({ theme, design }) => {
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.neutral[97];
+		case Pillar.News:
+			if (design === ArticleDesign.Analysis) {
+				return sourcePalette.news[600];
+			}
+			return sourcePalette.news[500];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		default:
+			return pillarPalette(theme, 500);
+	}
+};
+
 const mostViewedFooterHoverLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const mostViewedFooterHoverDark: PaletteFunction = () =>
@@ -3583,6 +3679,10 @@ const paletteColours = {
 		light: cardBackgroundLight,
 		dark: cardBackgroundDark,
 	},
+	'--onward-journey-card-background': {
+		light: onwardJourneyCardBackgroundLight,
+		dark: onwardJourneyCardBackgroundDark,
+	},
 	'--card-headline-trail-text': {
 		light: cardHeadlineTextLight,
 		dark: cardTextDark,
@@ -3778,6 +3878,46 @@ const paletteColours = {
 	'--article-text': {
 		light: articleTextLight,
 		dark: articleTextDark,
+	},
+	'--carousel-text': {
+		light: carouselTextLight,
+		dark: carouselTextDark,
+	},
+	'--carousel-title-highlight': {
+		light: carouselTitleHighlightLight,
+		dark: carouselTitleHighlightDark,
+	},
+	'--carousel-border': {
+		light: carouselBorderLight,
+		dark: carouselBorderDark,
+	},
+	'--carousel-dot': {
+		light: carouselDotLight,
+		dark: carouselDotDark,
+	},
+	'--carousel-dot-hover': {
+		light: carouselDotHoverLight,
+		dark: carouselDotHoverDark,
+	},
+	'--carousel-active-dot': {
+		light: carouselActiveDotLight,
+		dark: carouselActiveDotDark,
+	},
+	'--carousel-active-dot-hover': {
+		light: carouselActiveDotLight,
+		dark: carouselActiveDotDark,
+	},
+	'--carousel-arrow': {
+		light: carouselArrowLight,
+		dark: carouselArrowDark,
+	},
+	'--carousel-arrow-background': {
+		light: carouselArrowBackgroundLight,
+		dark: carouselArrowBackgroundDark,
+	},
+	'--carousel-arrow-background-hover': {
+		light: carouselArrowBackgroundHoverLight,
+		dark: carouselArrowBackgroundHoverDark,
 	},
 	'--most-viewed-footer-hover': {
 		light: mostViewedFooterHoverLight,

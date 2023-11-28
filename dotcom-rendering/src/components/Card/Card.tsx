@@ -71,6 +71,7 @@ export type Props = {
 	imageSize?: ImageSizeType;
 	imageLoading: Loading;
 	isCrossword?: boolean;
+	isOnwardContent?: boolean;
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
@@ -291,6 +292,7 @@ export const Card = ({
 	discussionId,
 	isDynamo,
 	isCrossword,
+	isOnwardContent = false,
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
@@ -308,6 +310,8 @@ export const Card = ({
 	);
 
 	const showQuotes = !!showQuotedHeadline;
+	const rightAlignFooter = isOnwardContent;
+	const roundedImage = isOnwardContent;
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
@@ -321,6 +325,7 @@ export const Card = ({
 				format={format}
 				containerPalette={containerPalette}
 				displayLines={displayLines}
+				rightAlign={rightAlignFooter}
 				age={
 					(!!onwardsSource && webPublicationDate) ||
 					(showAge &&
@@ -405,8 +410,10 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
+			showTopBar={!isOnwardContent}
 			containerPalette={containerPalette}
 			isDynamo={isDynamo}
+			isOnwardContent={isOnwardContent}
 		>
 			<CardLink
 				linkTo={linkTo}
@@ -517,6 +524,7 @@ export const Card = ({
 											imageSize={imageSize}
 											alt={headlineText}
 											loading={imageLoading}
+											roundedCorners={roundedImage}
 										/>
 									</div>
 								)}
@@ -529,6 +537,7 @@ export const Card = ({
 									imageSize={imageSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
+									roundedCorners={roundedImage}
 								/>
 								{showPlayIcon && (
 									<MediaDuration

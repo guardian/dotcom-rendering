@@ -558,6 +558,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										defer={{ until: 'visible' }}
 									>
 										<Carousel
+											isOnwardContent={false}
 											heading={collection.displayName}
 											trails={trails}
 											onwardsSource={'unknown-source'}

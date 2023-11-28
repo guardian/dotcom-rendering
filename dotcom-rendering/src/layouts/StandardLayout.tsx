@@ -814,7 +814,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true}>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
@@ -890,6 +894,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island

@@ -1,21 +1,19 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	brandAlt,
 	from,
 	headline,
-	neutral,
+	palette as sourcePalette,
 	space,
-	text,
 	until,
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
+import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { DCRContainerPalette, DCRContainerType } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
@@ -39,12 +37,14 @@ type Props = {
 
 type ArticleProps = Props & {
 	format: ArticleFormat;
+	isOnwardContent?: true;
 };
 
 type FrontProps = Props & {
 	palette: DCRContainerPalette;
 	containerType?: DCRContainerType;
 	hasPageSkin?: boolean;
+	isOnwardContent?: false;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -164,8 +164,12 @@ const carouselStyle = css`
 	}
 `;
 
-const dotsStyle = css`
+const dotsSmallMargin = css`
 	margin-bottom: ${space[2]}px;
+`;
+
+const dotsLargeMargin = css`
+	margin-bottom: ${space[3]}px;
 `;
 
 const dotStyle = css`
@@ -173,7 +177,7 @@ const dotStyle = css`
 	display: inline-block;
 	height: ${space[3]}px;
 	width: ${space[3]}px;
-	background-color: ${neutral[93]};
+	background-color: ${themePalette('--carousel-dot')};
 	border-radius: 100%;
 	border: 0 none;
 	padding: 0;
@@ -181,7 +185,7 @@ const dotStyle = css`
 
 	&:hover,
 	&:focus {
-		background-color: ${neutral[86]};
+		background-color: ${themePalette('--carousel-dot-hover')};
 		outline: none;
 	}
 `;
@@ -279,14 +283,15 @@ const buttonStyle = (
 	cursor: pointer;
 	margin-top: 10px;
 	padding: 0;
-	background-color: ${arrowBackgroundColour ?? neutral[0]};
+	background-color: ${arrowBackgroundColour ?? sourcePalette.neutral[0]};
 
 	&:active,
 	&:hover {
 		outline: none;
-		background-color: ${arrowBackgroundHoverColour ?? brandAlt[400]};
+		background-color: ${arrowBackgroundHoverColour ??
+		sourcePalette.brandAlt[400]};
 		svg {
-			fill: ${neutral[7]};
+			fill: ${sourcePalette.neutral[7]};
 		}
 	}
 
@@ -295,7 +300,7 @@ const buttonStyle = (
 	}
 
 	svg {
-		fill: ${arrowColour ?? neutral[100]};
+		fill: ${arrowColour ?? sourcePalette.neutral[100]};
 		height: 34px;
 	}
 `;
@@ -317,18 +322,18 @@ const prevButtonStyle = (
 	arrowBackgroundHoverColour?: string,
 ) => css`
 	background-color: ${index !== 0
-		? arrowBackgroundColour ?? neutral[0]
-		: neutral[46]};
+		? arrowBackgroundColour ?? sourcePalette.neutral[0]
+		: sourcePalette.neutral[46]};
 	cursor: ${index !== 0 ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
 		background-color: ${index !== 0
-			? arrowBackgroundHoverColour ?? brandAlt[400]
-			: neutral[46]};
+			? arrowBackgroundHoverColour ?? sourcePalette.brandAlt[400]
+			: sourcePalette.neutral[46]};
 
 		svg {
-			fill: ${arrowColour ?? neutral[100]};
+			fill: ${arrowColour ?? sourcePalette.neutral[100]};
 		}
 	}
 `;
@@ -348,8 +353,8 @@ const nextButtonStyle = (
 		totalStories,
 		totalCardsShowing,
 	)
-		? arrowBackgroundColour ?? neutral[0]
-		: neutral[46]};
+		? arrowBackgroundColour ?? sourcePalette.neutral[0]
+		: sourcePalette.neutral[46]};
 	cursor: ${!isLastCardShowing(index, totalStories, totalCardsShowing)
 		? 'pointer'
 		: 'default'};
@@ -361,11 +366,11 @@ const nextButtonStyle = (
 			totalStories,
 			totalCardsShowing,
 		)
-			? arrowBackgroundHoverColour ?? brandAlt[400]
-			: neutral[46]};
+			? arrowBackgroundHoverColour ?? sourcePalette.brandAlt[400]
+			: sourcePalette.neutral[46]};
 
 		svg {
-			fill: ${arrowColour ?? neutral[100]};
+			fill: ${arrowColour ?? sourcePalette.neutral[100]};
 		}
 	}
 `;
@@ -382,7 +387,7 @@ const headerRowStyles = css`
 
 const headerStyles = css`
 	${headline.xsmall({ fontWeight: 'bold' })};
-	color: ${text.primary};
+	color: ${sourcePalette.neutral[7]};
 	${headline.xsmall({ fontWeight: 'bold' })};
 	padding-bottom: ${space[2]}px;
 	padding-top: ${space[1]}px;
@@ -472,6 +477,7 @@ type CarouselCardProps = {
 	imageUrl?: string;
 	dataLinkName?: string;
 	discussionApiUrl: string;
+	isOnwardContent?: boolean;
 	discussionId?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
@@ -498,16 +504,22 @@ const CarouselCard = ({
 	containerType,
 	imageLoading,
 	discussionApiUrl,
+	isOnwardContent,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
+	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
 	return (
 		<LI
 			percentage="25%"
-			showDivider={!isFirst && !isVideoContainer}
+			showDivider={!isFirst && !isVideoContainer && !isOnwardContent}
 			padSides={true}
 			padSidesOnMobile={true}
 			snapAlignStart={true}
 			verticalDividerColour={verticalDividerColour}
+			{...(isOnwardContent && {
+				padSidesMobileOverride: space[2],
+				padSidesOverride: space[2],
+			})}
 		>
 			<Card
 				linkTo={linkTo}
@@ -519,7 +531,6 @@ const CarouselCard = ({
 				imageSize={'small'}
 				showClock={true}
 				showAge={true}
-				imagePositionOnMobile="top"
 				pauseOffscreenVideo={isVideoContainer}
 				showQuotedHeadline={format.design === ArticleDesign.Comment}
 				dataLinkName={dataLinkName}
@@ -533,6 +544,9 @@ const CarouselCard = ({
 				containerType={containerType}
 				imageLoading={imageLoading}
 				discussionApiUrl={discussionApiUrl}
+				isOnwardContent={isOnwardContent}
+				imagePosition={cardImagePosition}
+				imagePositionOnMobile={cardImagePosition}
 			/>
 		</LI>
 	);
@@ -549,6 +563,7 @@ type HeaderAndNavProps = {
 	isCuratedContent?: boolean;
 	containerType?: DCRContainerType;
 	url?: string;
+	isOnwardContent?: boolean;
 };
 
 const HeaderAndNav = ({
@@ -562,6 +577,7 @@ const HeaderAndNav = ({
 	isCuratedContent,
 	containerType,
 	url,
+	isOnwardContent,
 }: HeaderAndNavProps) => {
 	return (
 		<div>
@@ -572,7 +588,7 @@ const HeaderAndNav = ({
 				isCuratedContent={isCuratedContent}
 				url={url}
 			/>
-			<div css={dotsStyle}>
+			<div css={isOnwardContent ? dotsLargeMargin : dotsSmallMargin}>
 				{trails.map((_, i) => (
 					<span
 						onClick={() => goToIndex(i)}
@@ -611,6 +627,7 @@ const Header = ({
 	containerType,
 	hasPageSkin,
 	url,
+	isOnwardContent,
 }: {
 	heading: string;
 	trails: TrailType[];
@@ -624,6 +641,7 @@ const Header = ({
 	containerType?: DCRContainerType;
 	hasPageSkin: boolean;
 	url?: string;
+	isOnwardContent?: boolean;
 }) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	const header = (
@@ -639,6 +657,7 @@ const Header = ({
 				goToIndex={goToIndex}
 				containerType={containerType}
 				url={url}
+				isOnwardContent={isOnwardContent}
 			/>
 			<Hide when="below" breakpoint="desktop">
 				<button
@@ -829,15 +848,16 @@ const decideCarouselColours = (
 				containerOverrides.background.carouselArrowHover,
 		};
 	} else {
-		const palette = decidePalette(props.format);
 		return {
-			titleColour: neutral[7],
-			titleHighlightColour: palette.text.carouselTitle,
-			borderColour: neutral[86],
-			activeDotColour: palette.background.carouselDot,
-			arrowColour: neutral[100],
-			arrowBackgroundColour: neutral[0],
-			arrowBackgroundHoverColour: brandAlt[400],
+			titleColour: themePalette('--carousel-text'),
+			titleHighlightColour: themePalette('--carousel-title-highlight'),
+			borderColour: themePalette('--carousel-border'),
+			activeDotColour: themePalette('--carousel-active-dot'),
+			arrowColour: themePalette('--carousel-arrow'),
+			arrowBackgroundColour: themePalette('--carousel-arrow-background'),
+			arrowBackgroundHoverColour: themePalette(
+				'--carousel-arrow-background-hover',
+			),
 		};
 	}
 };
@@ -860,6 +880,7 @@ export const Carousel = ({
 	onwardsSource,
 	leftColSize,
 	discussionApiUrl,
+	isOnwardContent = true,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselColours = decideCarouselColours(props);
@@ -983,7 +1004,6 @@ export const Carousel = ({
 			data-component={isVideoContainer ? 'video-playlist' : undefined}
 		>
 			<LeftColumn
-				borderType="partial"
 				size={leftColSize}
 				borderColour={carouselColours.borderColour}
 				hasPageSkin={hasPageSkin}
@@ -1034,6 +1054,7 @@ export const Carousel = ({
 					containerType={containerType}
 					hasPageSkin={hasPageSkin}
 					url={props.url}
+					isOnwardContent={isOnwardContent}
 				/>
 				<ul
 					css={[
@@ -1089,6 +1110,7 @@ export const Carousel = ({
 								containerType={containerType}
 								imageLoading={imageLoading}
 								discussionApiUrl={discussionApiUrl}
+								isOnwardContent={isOnwardContent}
 							/>
 						);
 					})}

@@ -5,6 +5,7 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
@@ -194,6 +195,12 @@ const trails: TrailType[] = [
 
 const immersiveTrails = convertToImmersive(trails);
 
+const defaultFormat = {
+	theme: Pillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+};
+
 export const Headlines = () => (
 	<>
 		<Section fullWidth={true}>
@@ -201,11 +208,7 @@ export const Headlines = () => (
 				heading="More on this story"
 				trails={trails}
 				onwardsSource="more-on-this-story"
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
+				format={defaultFormat}
 				leftColSize={'compact'}
 				discussionApiUrl={discussionApiUrl}
 			/>
@@ -236,11 +239,7 @@ export const SingleItemCarousel = () => (
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
 				onwardsSource="more-on-this-story"
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
+				format={defaultFormat}
 				leftColSize={'compact'}
 				discussionApiUrl={discussionApiUrl}
 			/>
@@ -316,3 +315,22 @@ export const SpecialReportAlt = () => {
 };
 
 SpecialReportAlt.storyName = 'SpecialReportAlt';
+
+export const OnwardJourneyCarousel = () => (
+	<>
+		<Section fullWidth={true}>
+			<Carousel
+				isOnwardJourney={true}
+				heading="More on this story"
+				trails={trails}
+				onwardsSource="more-on-this-story"
+				format={defaultFormat}
+				leftColSize={'compact'}
+				discussionApiUrl={discussionApiUrl}
+			/>
+		</Section>
+	</>
+);
+
+OnwardJourneyCarousel.storyName = 'Onward journey carousel';
+OnwardJourneyCarousel.decorators = [splitTheme()];

@@ -25,7 +25,6 @@ export type Palette = {
 		witnessIcon: Colour;
 		witnessAuthor: Colour;
 		witnessTitle: Colour;
-		carouselTitle: Colour;
 		pagination: Colour;
 		dropCap: Colour;
 		numberedTitle: Colour;
@@ -57,7 +56,6 @@ export type Palette = {
 		richLink: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
-		carouselDot: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		matchNav: Colour;

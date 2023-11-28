@@ -1293,20 +1293,6 @@ const textSignInLink = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
-const textCarouselTitle = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
-
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
 /** @deprecated this has been moved to the theme palette (--drop-cap) */
 const textDropCap = (format: ArticleFormat): string => {
 	switch (format.design) {
@@ -1367,27 +1353,6 @@ const backgroundFilterButton = (): string => neutral[100];
 
 const backgroundHeadlineTag = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
-
-const backgroundCarouselDot = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Lifestyle:
-			return lifestyle[400];
-		case Pillar.Culture:
-			return culture[400];
-		case Pillar.Opinion:
-			return opinion[400];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return palette.specialReportAlt[100];
-	}
-};
 
 const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
@@ -1641,7 +1606,6 @@ export const decidePalette = (
 			witnessIcon: textWitnessIcon(format),
 			witnessAuthor: textWitnessAuthor(format),
 			witnessTitle: textWitnessTitle(format),
-			carouselTitle: textCarouselTitle(format),
 			dropCap: textDropCap(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
@@ -1673,7 +1637,6 @@ export const decidePalette = (
 			imageTitle: backgroundImageTitle(format),
 			lightboxDivider: backgroundLightboxDivider(format),
 			speechBubble: backgroundSpeechBubble(format),
-			carouselDot: backgroundCarouselDot(format),
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
 			matchNav: backgroundMatchNav(),
