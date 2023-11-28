@@ -3448,17 +3448,8 @@ const richLinkBorderTopLight: PaletteFunction = ({ design, theme }) => {
 };
 const richLinkBorderTopDark: PaletteFunction = () => sourcePalette.neutral[60];
 const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
-	if (design === ArticleDesign.Analysis) {
-		switch (theme) {
-			case Pillar.News:
-			case Pillar.Opinion:
-				return pillarPalette(theme, 300);
-			case Pillar.Lifestyle:
-			case Pillar.Culture:
-			case Pillar.Sport:
-				return pillarPalette(theme, 400);
-		}
-	}
+	if (design === ArticleDesign.Analysis && theme === Pillar.News)
+		return sourcePalette.news[300];
 	switch (theme) {
 		case Pillar.Opinion:
 			return sourcePalette.opinion[300];
