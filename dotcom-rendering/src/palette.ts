@@ -2000,12 +2000,12 @@ const cardBackgroundDark: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[0];
 	}
 };
-const onwardJourneyCardBackgroundLight: PaletteFunction = (format) => {
+const onwardContentCardBackgroundLight: PaletteFunction = (format) => {
 	const cardBackground = cardBackgroundLight(format);
 	if (cardBackground === sourcePalette.neutral[97]) return 'transparent';
 	return cardBackground;
 };
-const onwardJourneyCardBackgroundDark: PaletteFunction = (format) => {
+const onwardContentCardBackgroundDark: PaletteFunction = (format) => {
 	const cardBackground = cardBackgroundDark(format);
 	if (cardBackground === sourcePalette.neutral[0]) return 'transparent';
 	return cardBackground;
@@ -3679,9 +3679,9 @@ const paletteColours = {
 		light: cardBackgroundLight,
 		dark: cardBackgroundDark,
 	},
-	'--onward-journey-card-background': {
-		light: onwardJourneyCardBackgroundLight,
-		dark: onwardJourneyCardBackgroundDark,
+	'--onward-content-card-background': {
+		light: onwardContentCardBackgroundLight,
+		dark: onwardContentCardBackgroundDark,
 	},
 	'--card-headline-trail-text': {
 		light: cardHeadlineTextLight,

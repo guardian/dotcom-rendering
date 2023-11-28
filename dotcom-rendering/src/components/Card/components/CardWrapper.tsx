@@ -123,7 +123,7 @@ const cardStyles = css`
 `;
 
 const onwardContentCardStyles = css`
-	background-color: ${palette('--onward-journey-card-background')};
+	background-color: ${palette('--onward-content-card-background')};
 	border-radius: ${space[2]}px;
 `;
 

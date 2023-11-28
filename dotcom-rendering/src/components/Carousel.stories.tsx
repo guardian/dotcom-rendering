@@ -5,7 +5,9 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
@@ -200,29 +202,20 @@ const defaultFormat = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 };
+const sportFormat = {
+	theme: Pillar.Sport,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+};
 
-export const Headlines = () => (
+export const Headlines: StoryObj = ({ format }: StoryProps) => (
 	<>
 		<Section fullWidth={true}>
 			<Carousel
 				heading="More on this story"
 				trails={trails}
 				onwardsSource="more-on-this-story"
-				format={defaultFormat}
-				leftColSize={'compact'}
-				discussionApiUrl={discussionApiUrl}
-			/>
-		</Section>
-		<Section fullWidth={true}>
-			<Carousel
-				heading="Sport"
-				trails={trails}
-				onwardsSource="curated-content"
-				format={{
-					theme: Pillar.Sport,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
+				format={format}
 				leftColSize={'compact'}
 				discussionApiUrl={discussionApiUrl}
 			/>
@@ -231,6 +224,9 @@ export const Headlines = () => (
 );
 
 Headlines.storyName = 'Headlines carousel';
+Headlines.decorators = [
+	splitTheme([defaultFormat, sportFormat], { orientation: 'vertical' }),
+];
 
 export const SingleItemCarousel = () => (
 	<>
@@ -316,21 +312,23 @@ export const SpecialReportAlt = () => {
 
 SpecialReportAlt.storyName = 'SpecialReportAlt';
 
-export const OnwardJourneyCarousel = () => (
+export const FrontCarousel = () => (
 	<>
+		The front carousel was not included in an onwards content redesign, so
+		looks a bit different to the others.
 		<Section fullWidth={true}>
 			<Carousel
-				isOnwardJourney={true}
+				isOnwardContent={false}
 				heading="More on this story"
 				trails={trails}
-				onwardsSource="more-on-this-story"
-				format={defaultFormat}
+				onwardsSource="unknown-source"
 				leftColSize={'compact'}
+				url={'https://www.theguardian.com'}
 				discussionApiUrl={discussionApiUrl}
+				palette={'Branded'}
 			/>
 		</Section>
 	</>
 );
 
-OnwardJourneyCarousel.storyName = 'Onward journey carousel';
-OnwardJourneyCarousel.decorators = [splitTheme()];
+FrontCarousel.storyName = 'Front carousel';
