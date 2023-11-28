@@ -213,7 +213,7 @@ export const Interactive = () => {
 					contentType="interactive"
 					url=""
 					linkFormat={mockFormatLifestyle}
-					format={mockFormatCulture}
+					format={mockFormatLifestyle}
 					tags={[]}
 					sponsorName=""
 				/>

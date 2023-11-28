@@ -3447,7 +3447,34 @@ const richLinkBorderTopLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 const richLinkBorderTopDark: PaletteFunction = () => sourcePalette.neutral[60];
-
+const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Analysis) {
+		switch (theme) {
+			case Pillar.News:
+			case Pillar.Opinion:
+				return pillarPalette(theme, 300);
+			case Pillar.Lifestyle:
+			case Pillar.Culture:
+			case Pillar.Sport:
+				return pillarPalette(theme, 400);
+		}
+	}
+	switch (theme) {
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+		case Pillar.Sport:
+			return pillarPalette(theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
 // '--most-viewed-footer-tab
 // ----- Palette ----- //
 
@@ -3931,7 +3958,7 @@ const paletteColours = {
 		dark: richLinkHeaderDark,
 	},
 	'--rich-link-quote-icon': {
-		light: blockQuoteFillLight,
+		light: richLinkQuoteFillLight,
 		dark: pillarPaletteDark,
 	},
 	'--rich-link-border-top': {
