@@ -10,15 +10,22 @@ const isDinkus = (element: FEElement): boolean => {
 	)
 		return false;
 
-	const frag = JSDOM.fragment(element.html);
-	if (!frag.firstChild) return false;
-	// A dinkus is can be spaced or unspaced
-	return (
-		frag.textContent === '***' ||
-		frag.textContent === '* * *' ||
-		frag.textContent === '•••' ||
-		frag.textContent === '• • •'
-	);
+	const dinkusExpression = /(?:\*\*\*|\* \* \*|•••|• • •)/gm;
+	const mightHaveDinkus = dinkusExpression.test(element.html);
+
+	if (mightHaveDinkus) {
+		const frag = JSDOM.fragment(element.html);
+		if (!frag.firstChild) return false;
+		// A dinkus is can be spaced or unspaced
+		return (
+			frag.textContent === '***' ||
+			frag.textContent === '* * *' ||
+			frag.textContent === '•••' ||
+			frag.textContent === '• • •'
+		);
+	} else {
+		false;
+	}
 };
 
 const checkForDividers = (elements: FEElement[]): FEElement[] =>
