@@ -33,8 +33,6 @@ const pillarPalette = (
 			return sourcePalette.culture[lightness];
 		case Pillar.Opinion:
 			return sourcePalette.opinion[lightness];
-		default:
-			return sourcePalette.news[lightness];
 	}
 };
 
