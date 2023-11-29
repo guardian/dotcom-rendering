@@ -18,9 +18,10 @@ const waitForGARequest = (page: Page) => {
 		const matchUrl = request
 			.url()
 			.includes('https://www.google-analytics.com/collect?v=1');
-		const hasClick = request.url().includes('ec=click');
-		const hasSponsor = request.url().includes('ea=sponsor%20logo');
-		const hasWestfield = request.url().includes('el=westfield');
+		const searchParams = new URLSearchParams(request.url());
+		const hasClick = searchParams.get('ec') === 'click';
+		const hasSponsor = searchParams.get('ea') === 'sponsor logo';
+		const hasWestfield = searchParams.get('el') === 'westfield';
 		return matchUrl && hasClick && hasSponsor && hasWestfield;
 	});
 };
