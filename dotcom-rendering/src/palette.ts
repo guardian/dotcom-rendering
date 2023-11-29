@@ -3219,7 +3219,7 @@ const dropCapLight: PaletteFunction = (format) => {
 	}
 };
 
-const pillarThemeDark: PaletteFunction = ({ design, theme }) => {
+const richLinkFillDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -3367,7 +3367,7 @@ const richLinkTextLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 const richLinkTextDark: PaletteFunction = () => sourcePalette.neutral[86];
-const richLinkBackgroundLight: PaletteFunction = ({ design, theme }) => {
+const richLinkBackgroundLight: PaletteFunction = ({ design }) => {
 	return design === ArticleDesign.Analysis
 		? '#F2E8E6'
 		: sourcePalette.neutral[97];
@@ -3855,7 +3855,7 @@ const paletteColours = {
 	},
 	'--drop-cap': {
 		light: dropCapLight,
-		dark: pillarThemeDark,
+		dark: richLinkFillDark,
 	},
 	'--apps-epic-background': {
 		light: appsEpicBackgroundLight,
@@ -3911,7 +3911,7 @@ const paletteColours = {
 	},
 	'--rich-link-fill': {
 		light: richLinkFillLight,
-		dark: pillarThemeDark,
+		dark: richLinkFillDark,
 	},
 	'--rich-link-background-hover': {
 		light: richLinkBackgroundHoverLight,
@@ -3927,7 +3927,7 @@ const paletteColours = {
 	},
 	'--quote-icon-fill': {
 		light: richLinkQuoteFillLight,
-		dark: pillarThemeDark,
+		dark: richLinkFillDark,
 	},
 	'--rich-link-border': {
 		light: richLinkBorderLight,
