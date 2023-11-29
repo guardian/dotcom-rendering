@@ -34,6 +34,7 @@ import { Section } from '../components/Section';
 import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { SubNav } from '../components/SubNav.importable';
+import { editionList } from '../lib/edition';
 import { pillarFromCurrentLink } from '../lib/layoutHelpers';
 import type { NavType } from '../model/extract-nav';
 import type { NewsletterDetailData } from '../types/content';
@@ -179,8 +180,15 @@ const DetailBlock = (props: {
 }) => {
 	const { newsletter, forMobile } = props;
 	const { seriesTag } = newsletter;
-	const region =
-		newsletter.regionFocus && `${newsletter.regionFocus} Focused`;
+
+	// If there's an edition matching the value of regionFocus, get the first word of the long title
+	// EG "UK", "Europe", "Australia" etc
+	const editionDescription = editionList
+		.find((_) => _.editionId === newsletter.regionFocus)
+		?.longTitle.split(' ')
+		.shift();
+
+	const region = editionDescription && `${editionDescription} Focused`;
 	const categoryDescription = categoryToDescription(newsletter.category);
 
 	if (!region && !categoryDescription && !seriesTag) {
