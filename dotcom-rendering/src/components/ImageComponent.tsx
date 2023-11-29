@@ -321,7 +321,7 @@ export const ImageComponent = ({
 				{renderingTarget === 'Apps' ? (
 					<Island priority="critical">
 						<AppsLightboxImage
-							images={imagesForAppsLightbox}
+							// images={imagesForAppsLightbox}
 							currentIndex={imagesForAppsLightbox.findIndex(
 								(img) => img.elementId === element.elementId,
 							)}
@@ -388,7 +388,7 @@ export const ImageComponent = ({
 				{renderingTarget === 'Apps' ? (
 					<Island priority="critical">
 						<AppsLightboxImage
-							images={imagesForAppsLightbox}
+							// images={imagesForAppsLightbox}
 							currentIndex={imagesForAppsLightbox.findIndex(
 								(img) => img.elementId === element.elementId,
 							)}
@@ -458,7 +458,7 @@ export const ImageComponent = ({
 				{renderingTarget === 'Apps' ? (
 					<Island priority="critical">
 						<AppsLightboxImage
-							images={imagesForAppsLightbox}
+							// images={imagesForAppsLightbox}
 							currentIndex={imagesForAppsLightbox.findIndex(
 								(img) => img.elementId === element.elementId,
 							)}
