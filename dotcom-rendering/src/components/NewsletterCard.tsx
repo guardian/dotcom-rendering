@@ -7,7 +7,6 @@ import {
 } from '@guardian/source-foundations';
 import {
 	Button,
-	LinkButton,
 	SvgCheckmark,
 	SvgPlus,
 } from '@guardian/source-react-components';
@@ -15,6 +14,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
+import { CardLink } from './Card/components/CardLink';
 import { CardPicture } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import { NewsletterDetail } from './NewsletterDetail';
@@ -208,6 +208,13 @@ export const NewsletterCard = ({
 			css={groupItemStyle}
 			aria-label={newsletter.name}
 		>
+			{cardFunction == 'link' && (
+				<CardLink
+					linkTo={`/email-newsletters/${newsletter.identityName}`}
+					headlineText={newsletter.name}
+					isExternalLink={false}
+				/>
+			)}
 			{newsletter.illustrationCard ? (
 				<div css={illustrationStyle}>
 					<CardPicture
@@ -255,15 +262,6 @@ export const NewsletterCard = ({
 						>
 							Sign up
 						</Button>
-					)}
-					{cardFunction === 'link' && (
-						<LinkButton
-							href={`/email-newsletters/${newsletter.identityName}`}
-							size="xsmall"
-							priority="subdued"
-						>
-							See More
-						</LinkButton>
 					)}
 				</div>
 			</div>

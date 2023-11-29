@@ -610,7 +610,9 @@ export const CarouselForNewsletters = ({
 									css={css`
 										min-width: 220px;
 										max-width: 220px;
-										min-height: 380px;
+										min-height: ${cardFunction === 'sign-up'
+											? 380
+											: 215}px;
 										display: flex;
 										flex-direction: column;
 									`}
