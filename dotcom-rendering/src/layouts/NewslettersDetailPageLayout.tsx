@@ -16,7 +16,7 @@ import {
 	Column,
 	Columns,
 	Hide,
-	Link,
+	LinkButton,
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -36,6 +36,7 @@ import { ShareIcons } from '../components/ShareIcons';
 import { SubNav } from '../components/SubNav.importable';
 import { pillarFromCurrentLink } from '../lib/layoutHelpers';
 import type { NavType } from '../model/extract-nav';
+import type { NewsletterDetailData } from '../types/content';
 import type { DCRNewsletterDetailPageType } from '../types/newsletterDetailPage';
 import { Stuck } from './lib/stickiness';
 
@@ -149,9 +150,60 @@ const frequencyDivStyle = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-const regionalFocusDivStyle = css`
+const categoryToDescription = (
+	category: NewsletterDetailData['category'],
+): string | undefined => {
+	switch (category) {
+		case 'article-based':
+		case 'article-based-legacy':
+			return 'Article Newsletter';
+		case 'fronts-based':
+			return 'Headlines Newsletter';
+		case 'manual-send':
+		case 'other':
+			return undefined;
+	}
+};
+
+const mobileDetailsDiv = css`
 	margin-bottom: ${space[2]}px;
+	display: flex;
+	> div {
+		margin-right: ${space[4]}px;
+	}
 `;
+
+const DetailBlock = (props: {
+	newsletter: NewsletterDetailData;
+	forMobile?: boolean;
+}) => {
+	const { newsletter, forMobile } = props;
+	const { seriesTag } = newsletter;
+	const region =
+		newsletter.regionFocus && `${newsletter.regionFocus} Focused`;
+	const categoryDescription = categoryToDescription(newsletter.category);
+
+	if (!region && !categoryDescription && !seriesTag) {
+		return <></>;
+	}
+	return (
+		<div css={forMobile ? mobileDetailsDiv : topMarginStyle(space[4])}>
+			{!!region && <NewsletterDetail text={region} />}
+			{!!categoryDescription && (
+				<NewsletterDetail text={categoryDescription} />
+			)}
+			{!!seriesTag && (
+				<LinkButton
+					priority="subdued"
+					size="xsmall"
+					href={`/${seriesTag}`}
+				>
+					See articles in series
+				</LinkButton>
+			)}
+		</div>
+	);
+};
 
 export const NewsletterDetailPageLayout = ({
 	newsletterDetailPage,
@@ -164,17 +216,13 @@ export const NewsletterDetailPageLayout = ({
 		contributionsServiceUrl: pageContributionsServiceUrl,
 		config,
 		isAdFreeUser,
+		newsletter,
 	} = newsletterDetailPage;
 
-	const renderAds = !isAdFreeUser;
+	const renderAds = Date.now() === 0 && !isAdFreeUser;
 
 	const contributionsServiceUrl =
 		process.env.SDC_URL ?? pageContributionsServiceUrl;
-
-	const regionalFocusText = newsletterDetailPage.newsletter.regionFocus
-		? `${newsletterDetailPage.newsletter.regionFocus} Focused`
-		: '';
-	const showRegionalFocus = Boolean(regionalFocusText);
 
 	return (
 		<>
@@ -322,78 +370,22 @@ export const NewsletterDetailPageLayout = ({
 					centralBorder="full"
 					showTopBorder={false}
 					stretchRight={true}
-					leftContent={
-						<>
-							<div css={topMarginStyle(space[4])}>
-								{!!newsletterDetailPage.newsletter
-									.seriesTag && (
-									<Link
-										href={`/${newsletterDetailPage.newsletter.seriesTag}`}
-									>
-										{
-											newsletterDetailPage.newsletter
-												.seriesTag
-										}
-									</Link>
-								)}
-								{showRegionalFocus && (
-									<NewsletterDetail
-										text={regionalFocusText}
-									/>
-								)}
-								<NewsletterDetail
-									text={
-										newsletterDetailPage.newsletter.category
-									}
-								/>
-							</div>
-						</>
-					}
+					leftContent={<DetailBlock newsletter={newsletter} />}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
-							{!!newsletterDetailPage.newsletter.regionFocus && (
-								<Hide from="leftCol">
-									{/* TO DO - make this nice */}
-									{!!newsletterDetailPage.newsletter
-										.seriesTag && (
-										<Link
-											href={`/${newsletterDetailPage.newsletter.seriesTag}`}
-										>
-											{
-												newsletterDetailPage.newsletter
-													.seriesTag
-											}
-										</Link>
-									)}
-									{showRegionalFocus && (
-										<div css={regionalFocusDivStyle}>
-											<NewsletterDetail
-												text={regionalFocusText}
-											/>
-										</div>
-									)}
-									<div css={regionalFocusDivStyle}>
-										<NewsletterDetail
-											text={
-												newsletterDetailPage.newsletter
-													.category
-											}
-										/>
-									</div>
-								</Hide>
-							)}
+							<Hide from="leftCol">
+								<DetailBlock
+									newsletter={newsletter}
+									forMobile={true}
+								/>
+							</Hide>
 
 							<h1 css={titleStyle}>
-								{newsletterDetailPage.newsletter
-									.signUpHeadline ||
-									newsletterDetailPage.newsletter.name}
+								{newsletter.signUpHeadline ?? newsletter.name}
 							</h1>
 							<p css={descriptionStyle}>
-								{
-									newsletterDetailPage.newsletter
-										.signUpDescription
-								}
+								{newsletter.signUpDescription}
 							</p>
 
 							<div css={shareDivStyle}>
@@ -420,21 +412,15 @@ export const NewsletterDetailPageLayout = ({
 
 							<div css={frequencyDivStyle}>
 								<NewsletterFrequency
-									frequency={
-										newsletterDetailPage.newsletter
-											.frequency
-									}
+									frequency={newsletter.frequency}
 								/>
 							</div>
 
 							<SecureSignup
-								name={newsletterDetailPage.newsletter.name}
-								newsletterId={
-									newsletterDetailPage.newsletter.identityName
-								}
+								name={newsletter.name}
+								newsletterId={newsletter.identityName}
 								successDescription={
-									newsletterDetailPage.newsletter
-										.signUpDescription
+									newsletter.signUpDescription
 								}
 								hidePrivacyMessage={false}
 							/>
@@ -442,15 +428,11 @@ export const NewsletterDetailPageLayout = ({
 
 						<Column width={[1, 1, 3 / 8, 1 / 2, 1 / 2]}>
 							<div css={mainGraphicWrapperStyle}>
-								{newsletterDetailPage.newsletter
-									.illustrationCard ? (
+								{newsletter.illustrationCard ? (
 									<CardPicture
 										imageSize="medium"
 										alt=""
-										mainImage={
-											newsletterDetailPage.newsletter
-												.illustrationCard
-										}
+										mainImage={newsletter.illustrationCard}
 										loading="eager"
 									/>
 								) : (
