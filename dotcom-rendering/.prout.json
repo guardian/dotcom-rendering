@@ -1,7 +1,7 @@
 {
 	"checkpoints": {
-		"FRONTS-PROD": {
-			"url": "https://www.theguardian.com/uk",
+		"PROD": {
+			"url": "https://www.theguardian.com/prout-dcr",
 			"overdue": "30M"
 		}
 	}
