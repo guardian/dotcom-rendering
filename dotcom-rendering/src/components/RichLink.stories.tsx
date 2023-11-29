@@ -10,6 +10,10 @@ import { Figure } from './Figure';
 import { RichLink } from './RichLink';
 import { Section } from './Section';
 
+interface AnalysisProps {
+	theme: string;
+}
+
 const someContributor =
 	'https://uploads.guim.co.uk/2017/10/09/Oliver-Wainwright,-L.png';
 
@@ -579,12 +583,13 @@ export const PaidFor = () => {
 PaidFor.storyName = 'PaidFor';
 PaidFor.decorators = [splitTheme([mockFormatNews])];
 
-export const Analysis = () => {
+export const Analysis = ({ theme }: AnalysisProps) => {
 	return (
 		<div
+			className="light"
 			css={css`
 				/* stylelint-disable-next-line color-no-hex */
-				background-color: #fff4f2;
+				background-color: ${theme === 'light' ? '#fff4f2' : 'inherit'};
 			`}
 		>
 			Analysis Articles have a different color background, so rich links
@@ -629,3 +634,12 @@ export const Analysis = () => {
 	);
 };
 Analysis.storyName = 'Analysis';
+Analysis.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: Pillar.Culture,
+		},
+	]),
+];

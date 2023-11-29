@@ -43,18 +43,14 @@ const neutralBackground = css`
 	}
 `;
 
-const pillarBackground = css`
-	background-color: ${themePalette('--rich-link-pillar-background')};
+const textColour = css`
+	color: ${themePalette('--rich-link-text')};
 `;
-
-const textColour = () => {
-	return themePalette('--rich-link-text');
-};
 
 const richLinkTopBorder = css`
 	border-top: 1px;
 	border-top-style: solid;
-	border-top-color: ${themePalette('--rich-link-border-top')};
+	border-top-color: ${themePalette('--rich-link-border')};
 `;
 
 const richLinkLink = css`
@@ -225,92 +221,100 @@ export const RichLink = ({
 		: richLinkTitle(parentIsBlog);
 
 	return (
-		<div
-			data-print-layout="hide"
-			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
-			data-component="rich-link"
-			css={[pillarBackground, neutralBackground]}
-			data-name={isPlaceholder ? 'placeholder' : ''}
-		>
-			<FormatBoundary format={format}>
-				<a css={richLinkLink} href={url}>
-					<div css={richLinkTopBorder} />
-					{showImage && (
-						<div>
-							<img
-								css={imageStyles}
-								src={imageData.thumbnailUrl}
-								alt={imageData.altText}
-								width={imageData.width}
-								height={imageData.height}
-							/>
-						</div>
-					)}
-					<div css={richLinkElements}>
-						<div css={richLinkHeader}>
-							<div css={richLinkTitlePicker}>
-								{isOpinion && (
-									<>
-										<Hide when="above" breakpoint="wide">
-											<QuoteIcon
-												colour={themePalette(
-													'--rich-link-quote-icon',
-												)}
-											/>
-										</Hide>
-										<Hide when="below" breakpoint="wide">
-											<QuoteIcon
-												colour={themePalette(
-													'--rich-link-quote-icon',
-												)}
-											/>
-										</Hide>
-									</>
-								)}
-								{linkText}
-							</div>
-							{isOpinion && (
-								<div css={[byline, textColour]}>
-									{mainContributor}
-								</div>
-							)}
-							{starRating !== undefined && (
-								<div css={starWrapper}>
-									<StarRating
-										rating={starRating}
-										size="medium"
-									/>
-								</div>
-							)}
-							{!!(isPaidContent && sponsorName) && (
-								<div css={paidForBranding}>
-									Paid for by {sponsorName}
-								</div>
-							)}
-						</div>
-						{!!(isOpinion && contributorImage) && (
-							<div css={contributorImageWrapper}>
-								<Avatar
-									src={contributorImage}
-									alt={mainContributor}
+		<FormatBoundary format={linkFormat}>
+			<div
+				data-print-layout="hide"
+				data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
+				data-component="rich-link"
+				css={[neutralBackground]}
+				data-name={isPlaceholder ? 'placeholder' : ''}
+			>
+				<FormatBoundary format={format}>
+					<a css={richLinkLink} href={url}>
+						<div css={richLinkTopBorder} />
+						{showImage && (
+							<div>
+								<img
+									css={imageStyles}
+									src={imageData.thumbnailUrl}
+									alt={imageData.altText}
+									width={imageData.width}
+									height={imageData.height}
 								/>
 							</div>
 						)}
-						<div css={richLinkReadMore}>
-							<ArrowInCircle />
-							<div
-								css={
-									isLabs
-										? labsReadMoreTextStyle
-										: readMoreTextStyle
-								}
-							>
-								{readMoreText(contentType)}
+						<div css={richLinkElements}>
+							<div css={richLinkHeader}>
+								<div css={richLinkTitlePicker}>
+									{isOpinion && (
+										<>
+											<Hide
+												when="above"
+												breakpoint="wide"
+											>
+												<QuoteIcon
+													colour={themePalette(
+														'--quote-icon-fill',
+													)}
+												/>
+											</Hide>
+											<Hide
+												when="below"
+												breakpoint="wide"
+											>
+												<QuoteIcon
+													colour={themePalette(
+														'--quote-icon-fill',
+													)}
+												/>
+											</Hide>
+										</>
+									)}
+									{linkText}
+								</div>
+								{isOpinion && (
+									<div css={[byline, textColour]}>
+										{mainContributor}
+									</div>
+								)}
+								{starRating !== undefined && (
+									<div css={starWrapper}>
+										<StarRating
+											rating={starRating}
+											size="medium"
+										/>
+									</div>
+								)}
+								{!!(isPaidContent && sponsorName) && (
+									<div css={paidForBranding}>
+										Paid for by {sponsorName}
+									</div>
+								)}
+							</div>
+							{!!(isOpinion && contributorImage) && (
+								<div css={contributorImageWrapper}>
+									<Avatar
+										src={contributorImage}
+										alt={mainContributor}
+									/>
+								</div>
+							)}
+							<div css={richLinkReadMore}>
+								<ArrowInCircle />
+								<div
+									css={
+										isLabs
+											? labsReadMoreTextStyle
+											: readMoreTextStyle
+									}
+								>
+									{readMoreText(contentType)}
+								</div>
 							</div>
 						</div>
-					</div>
-				</a>
-			</FormatBoundary>
-		</div>
+					</a>
+				</FormatBoundary>
+			</div>
+		</FormatBoundary>
 	);
 };
