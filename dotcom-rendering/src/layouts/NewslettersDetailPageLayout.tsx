@@ -30,6 +30,7 @@ import { Nav } from '../components/Nav/Nav';
 import { NewsletterBadge } from '../components/NewsletterBadge';
 import { NewsletterDetail } from '../components/NewsletterDetail';
 import { NewsletterFrequency } from '../components/NewsletterFrequency';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
 import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
@@ -44,6 +45,12 @@ import { Stuck } from './lib/stickiness';
 type Props = {
 	newsletterDetailPage: DCRNewsletterDetailPageType;
 	NAV: NavType;
+};
+
+const mockedFormat = {
+	theme: Pillar.News,
+	design: ArticleDesign.NewsletterSignup,
+	display: ArticleDisplay.Standard,
 };
 
 const titleStyle = css`
@@ -403,11 +410,7 @@ export const NewsletterDetailPageLayout = ({
 								<ShareIcons
 									pageId={newsletterDetailPage.canonicalUrl}
 									webTitle={newsletterDetailPage.webTitle}
-									format={{
-										theme: Pillar.News,
-										design: ArticleDesign.NewsletterSignup,
-										display: ArticleDisplay.Standard,
-									}}
+									format={mockedFormat}
 									displayIcons={[
 										'facebook',
 										'twitter',
@@ -485,6 +488,38 @@ export const NewsletterDetailPageLayout = ({
 					</Island>
 				</Section>
 			</aside>
+
+			{!!newsletter.seriesTag && (
+				<aside>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<OnwardsUpper
+							ajaxUrl={newsletterDetailPage.config.ajaxUrl}
+							hasRelated={false}
+							hasStoryPackage={false}
+							isAdFreeUser={true}
+							pageId={newsletterDetailPage.id}
+							isPaidContent={false}
+							showRelatedContent={true}
+							keywordIds={''}
+							contentType={'Article'}
+							tags={[
+								{
+									id: newsletter.seriesTag,
+									type: 'Series',
+									title: newsletter.name,
+								},
+							]}
+							format={mockedFormat}
+							pillar={mockedFormat.theme}
+							editionId={newsletterDetailPage.config.edition}
+							shortUrlId={newsletterDetailPage.id}
+							discussionApiUrl={
+								newsletterDetailPage.config.discussionApiUrl
+							}
+						/>
+					</Island>
+				</aside>
+			)}
 
 			<Section
 				fullWidth={true}
