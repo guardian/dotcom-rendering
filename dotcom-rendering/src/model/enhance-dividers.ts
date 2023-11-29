@@ -7,8 +7,9 @@ const isDinkus = (element: FEElement): boolean => {
 		element._type !==
 			'model.dotcomrendering.pageElements.SubheadingBlockElement' &&
 		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
-	)
+	) {
 		return false;
+	}
 
 	const dinkusExpression = /(?:\*\*\*|\* \* \*|•••|• • •)/gm;
 	const mightHaveDinkus = dinkusExpression.test(element.html);
@@ -23,9 +24,8 @@ const isDinkus = (element: FEElement): boolean => {
 			frag.textContent === '•••' ||
 			frag.textContent === '• • •'
 		);
-	} else {
-		false;
 	}
+	return false;
 };
 
 const checkForDividers = (elements: FEElement[]): FEElement[] =>
