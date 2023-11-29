@@ -325,7 +325,7 @@ export const FrontCarousel = () => (
 				leftColSize={'compact'}
 				url={'https://www.theguardian.com'}
 				discussionApiUrl={discussionApiUrl}
-				palette={'Branded'}
+				palette={'BreakingPalette'}
 			/>
 		</Section>
 	</>

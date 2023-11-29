@@ -9,7 +9,6 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
@@ -22,6 +21,8 @@ import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import type { Loading } from './CardPicture';
+import { ContainerOverrides } from './ContainerOverrides';
+import { FormatBoundary } from './FormatBoundary';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
 
@@ -81,6 +82,30 @@ const SvgChevronRightSingle = () => {
 			/>
 		</svg>
 	);
+};
+
+const CarouselColours = ({
+	props,
+	children,
+}: {
+	props: { format: ArticleFormat } | { palette: DCRContainerPalette };
+	children: React.ReactElement;
+}): React.ReactElement => {
+	if ('palette' in props) {
+		return (
+			<ContainerOverrides
+				containerPalette={props.palette}
+				isDynamo={false}
+			>
+				{children}
+			</ContainerOverrides>
+		);
+	}
+	if ('format' in props) {
+		return (
+			<FormatBoundary format={props.format}>{children}</FormatBoundary>
+		);
+	}
 };
 
 const wrapperStyle = (length: number) => css`
@@ -190,12 +215,12 @@ const dotStyle = css`
 	}
 `;
 
-const activeDotStyles = (activeDotColour: string) => css`
-	background-color: ${activeDotColour};
+const activeDotStyles = css`
+	background-color: ${themePalette('--carousel-active-dot')};
 
 	&:hover,
 	&:focus {
-		background-color: ${activeDotColour};
+		background-color: ${themePalette('--carousel-active-dot')};
 	}
 `;
 
@@ -271,11 +296,7 @@ const nextButtonContainerStyle = css`
 	right: 10px;
 `;
 
-const buttonStyle = (
-	arrowColour?: string,
-	arrowBackgroundColour?: string,
-	arrowBackgroundHoverColour?: string,
-) => css`
+const buttonStyle = css`
 	border: 0 none;
 	border-radius: 100%;
 	height: 34px;
@@ -283,13 +304,12 @@ const buttonStyle = (
 	cursor: pointer;
 	margin-top: 10px;
 	padding: 0;
-	background-color: ${arrowBackgroundColour ?? sourcePalette.neutral[0]};
+	background-color: ${themePalette('--carousel-arrow-background')};
 
 	&:active,
 	&:hover {
 		outline: none;
-		background-color: ${arrowBackgroundHoverColour ??
-		sourcePalette.brandAlt[400]};
+		background-color: ${themePalette('--carousel-arrow-background-hover')};
 		svg {
 			fill: ${sourcePalette.neutral[7]};
 		}
@@ -300,7 +320,7 @@ const buttonStyle = (
 	}
 
 	svg {
-		fill: ${arrowColour ?? sourcePalette.neutral[100]};
+		fill: ${themePalette('--carousel-arrow')};
 		height: 34px;
 	}
 `;
@@ -315,25 +335,20 @@ const headerStylesWithUrl = css`
 	}
 `;
 
-const prevButtonStyle = (
-	index: number,
-	arrowColour?: string,
-	arrowBackgroundColour?: string,
-	arrowBackgroundHoverColour?: string,
-) => css`
+const prevButtonStyle = (index: number) => css`
 	background-color: ${index !== 0
-		? arrowBackgroundColour ?? sourcePalette.neutral[0]
+		? themePalette('--carousel-arrow-background')
 		: sourcePalette.neutral[46]};
 	cursor: ${index !== 0 ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
 		background-color: ${index !== 0
-			? arrowBackgroundHoverColour ?? sourcePalette.brandAlt[400]
+			? themePalette('--carousel-arrow-background-hover')
 			: sourcePalette.neutral[46]};
 
 		svg {
-			fill: ${arrowColour ?? sourcePalette.neutral[100]};
+			fill: ${themePalette('--carousel-arrow')};
 		}
 	}
 `;
@@ -342,9 +357,6 @@ const nextButtonStyle = (
 	index: number,
 	totalStories: number,
 	totalCardsShowing: number,
-	arrowColour?: string,
-	arrowBackgroundColour?: string,
-	arrowBackgroundHoverColour?: string,
 ) => css`
 	padding-left: 5px; /* Fix centering of SVG*/
 	margin-left: 10px;
@@ -353,7 +365,7 @@ const nextButtonStyle = (
 		totalStories,
 		totalCardsShowing,
 	)
-		? arrowBackgroundColour ?? sourcePalette.neutral[0]
+		? themePalette('--carousel-arrow-background')
 		: sourcePalette.neutral[46]};
 	cursor: ${!isLastCardShowing(index, totalStories, totalCardsShowing)
 		? 'pointer'
@@ -366,11 +378,11 @@ const nextButtonStyle = (
 			totalStories,
 			totalCardsShowing,
 		)
-			? arrowBackgroundHoverColour ?? sourcePalette.brandAlt[400]
+			? themePalette('--carousel-arrow-background-hover')
 			: sourcePalette.neutral[46]};
 
 		svg {
-			fill: ${arrowColour ?? sourcePalette.neutral[100]};
+			fill: ${themePalette('--carousel-arrow')};
 		}
 	}
 `;
@@ -394,12 +406,10 @@ const headerStyles = css`
 	margin-left: 0;
 `;
 
-const titleStyle = (
-	titleColour: string,
-	titleHighlightColour: string,
-	isCuratedContent?: boolean,
-) => css`
-	color: ${isCuratedContent ? titleHighlightColour : titleColour};
+const titleStyle = (isCuratedContent?: boolean) => css`
+	color: ${isCuratedContent
+		? themePalette('--carousel-title-highlight')
+		: themePalette('--carousel-text')};
 	display: inline-block;
 	&::first-letter {
 		text-transform: capitalize;
@@ -416,14 +426,10 @@ const getDataLinkNameCarouselButton = (
 
 const Title = ({
 	title,
-	titleColour,
-	titleHighlightColour,
 	isCuratedContent,
 	url,
 }: {
 	title: string;
-	titleColour: string;
-	titleHighlightColour: string;
 	isCuratedContent?: boolean;
 	url?: string;
 }) =>
@@ -438,16 +444,7 @@ const Title = ({
 			}
 		>
 			<h2 css={headerStyles}>
-				<span
-					css={[
-						headerStylesWithUrl,
-						titleStyle(
-							titleColour,
-							titleHighlightColour,
-							isCuratedContent,
-						),
-					]}
-				>
+				<span css={[headerStylesWithUrl, titleStyle(isCuratedContent)]}>
 					{title}
 				</span>
 			</h2>
@@ -455,15 +452,7 @@ const Title = ({
 	) : (
 		<h2 css={headerStyles}>
 			{isCuratedContent ? 'More from ' : ''}
-			<span
-				css={titleStyle(
-					titleColour,
-					titleHighlightColour,
-					isCuratedContent,
-				)}
-			>
-				{title}
-			</span>
+			<span css={titleStyle(isCuratedContent)}>{title}</span>
 		</h2>
 	);
 type CarouselCardProps = {
@@ -482,7 +471,6 @@ type CarouselCardProps = {
 	/** Only used on Labs cards */
 	branding?: Branding;
 	mainMedia?: MainMedia;
-	verticalDividerColour?: string;
 	onwardsSource?: string;
 	containerType?: DCRContainerType;
 };
@@ -499,7 +487,6 @@ const CarouselCard = ({
 	discussionId,
 	branding,
 	mainMedia,
-	verticalDividerColour,
 	onwardsSource,
 	containerType,
 	imageLoading,
@@ -515,7 +502,7 @@ const CarouselCard = ({
 			padSides={true}
 			padSidesOnMobile={true}
 			snapAlignStart={true}
-			verticalDividerColour={verticalDividerColour}
+			verticalDividerColour={themePalette('--carousel-border')}
 			{...(isOnwardContent && {
 				padSidesMobileOverride: space[2],
 				padSidesOverride: space[2],
@@ -555,9 +542,6 @@ const CarouselCard = ({
 type HeaderAndNavProps = {
 	heading: string;
 	trails: TrailType[];
-	titleColour: string;
-	titleHighlightColour: string;
-	activeDotColour: string;
 	index: number;
 	goToIndex: (newIndex: number) => void;
 	isCuratedContent?: boolean;
@@ -569,9 +553,6 @@ type HeaderAndNavProps = {
 const HeaderAndNav = ({
 	heading,
 	trails,
-	titleColour,
-	titleHighlightColour,
-	activeDotColour,
 	index,
 	goToIndex,
 	isCuratedContent,
@@ -583,8 +564,6 @@ const HeaderAndNav = ({
 		<div>
 			<Title
 				title={heading}
-				titleColour={titleColour}
-				titleHighlightColour={titleHighlightColour}
 				isCuratedContent={isCuratedContent}
 				url={url}
 			/>
@@ -599,7 +578,7 @@ const HeaderAndNav = ({
 						key={`dot-${i}`}
 						css={[
 							dotStyle,
-							i === index && activeDotStyles(activeDotColour),
+							i === index && activeDotStyles,
 							adjustNumberOfDotsStyle(
 								i,
 								trails.length,
@@ -617,7 +596,6 @@ const HeaderAndNav = ({
 const Header = ({
 	heading,
 	trails,
-	carouselColours,
 	index,
 	goToIndex,
 	prev,
@@ -631,7 +609,6 @@ const Header = ({
 }: {
 	heading: string;
 	trails: TrailType[];
-	carouselColours: CarouselColours;
 	index: number;
 	goToIndex: (newIndex: number) => void;
 	prev: () => void;
@@ -649,9 +626,6 @@ const Header = ({
 			<HeaderAndNav
 				heading={heading}
 				trails={trails}
-				titleHighlightColour={carouselColours.titleHighlightColour}
-				titleColour={carouselColours.titleColour}
-				activeDotColour={carouselColours.activeDotColour}
 				index={index}
 				isCuratedContent={isCuratedContent}
 				goToIndex={goToIndex}
@@ -664,19 +638,7 @@ const Header = ({
 					type="button"
 					onClick={prev}
 					aria-label="Move carousel backwards"
-					css={[
-						buttonStyle(
-							carouselColours.arrowColour,
-							carouselColours.arrowBackgroundColour,
-							carouselColours.arrowBackgroundHoverColour,
-						),
-						prevButtonStyle(
-							index,
-							carouselColours.arrowColour,
-							carouselColours.arrowBackgroundColour,
-							carouselColours.arrowBackgroundHoverColour,
-						),
-					]}
+					css={[buttonStyle, prevButtonStyle(index)]}
 					data-link-name={getDataLinkNameCarouselButton(
 						'prev',
 						arrowName,
@@ -690,18 +652,11 @@ const Header = ({
 					onClick={next}
 					aria-label="Move carousel forwards"
 					css={[
-						buttonStyle(
-							carouselColours.arrowColour,
-							carouselColours.arrowBackgroundColour,
-							carouselColours.arrowBackgroundHoverColour,
-						),
+						buttonStyle,
 						nextButtonStyle(
 							index,
 							trails.length,
 							isVideoContainer ? 1 : 4,
-							carouselColours.arrowColour,
-							carouselColours.arrowBackgroundColour,
-							carouselColours.arrowBackgroundHoverColour,
 						),
 					]}
 					data-link-name={getDataLinkNameCarouselButton(
@@ -731,7 +686,6 @@ const Header = ({
 
 const InlineChevrons = ({
 	trails,
-	carouselColours,
 	index,
 	prev,
 	next,
@@ -741,7 +695,6 @@ const InlineChevrons = ({
 	hasPageSkin,
 }: {
 	trails: TrailType[];
-	carouselColours: CarouselColours;
 	index: number;
 	prev: () => void;
 	next: () => void;
@@ -762,19 +715,7 @@ const InlineChevrons = ({
 				type="button"
 				onClick={prev}
 				aria-label="Move carousel backwards"
-				css={[
-					buttonStyle(
-						carouselColours.arrowColour,
-						carouselColours.arrowBackgroundColour,
-						carouselColours.arrowBackgroundHoverColour,
-					),
-					prevButtonStyle(
-						index,
-						carouselColours.arrowColour,
-						carouselColours.arrowBackgroundColour,
-						carouselColours.arrowBackgroundHoverColour,
-					),
-				]}
+				css={[buttonStyle, prevButtonStyle(index)]}
 				data-link-name={getDataLinkNameCarouselButton(
 					'prev',
 					arrowName,
@@ -796,18 +737,11 @@ const InlineChevrons = ({
 				onClick={next}
 				aria-label="Move carousel forwards"
 				css={[
-					buttonStyle(
-						carouselColours.arrowColour,
-						carouselColours.arrowBackgroundColour,
-						carouselColours.arrowBackgroundHoverColour,
-					),
+					buttonStyle,
 					nextButtonStyle(
 						index,
 						trails.length,
 						isVideoContainer ? 1 : 4,
-						carouselColours.arrowColour,
-						carouselColours.arrowBackgroundColour,
-						carouselColours.arrowBackgroundHoverColour,
 					),
 				]}
 				data-link-name={getDataLinkNameCarouselButton(
@@ -821,46 +755,6 @@ const InlineChevrons = ({
 		</div>
 	</>
 );
-
-type CarouselColours = {
-	titleColour: string;
-	titleHighlightColour: string;
-	borderColour: string;
-	activeDotColour: string;
-	arrowColour: string;
-	arrowBackgroundColour: string;
-	arrowBackgroundHoverColour: string;
-};
-
-const decideCarouselColours = (
-	props: { format: ArticleFormat } | { palette: DCRContainerPalette },
-): CarouselColours => {
-	if ('palette' in props) {
-		const containerOverrides = decideContainerOverrides(props.palette);
-		return {
-			titleColour: containerOverrides.text.container,
-			titleHighlightColour: containerOverrides.text.container,
-			borderColour: containerOverrides.border.lines,
-			activeDotColour: containerOverrides.background.carouselDot,
-			arrowColour: containerOverrides.border.carouselArrow,
-			arrowBackgroundColour: containerOverrides.background.carouselArrow,
-			arrowBackgroundHoverColour:
-				containerOverrides.background.carouselArrowHover,
-		};
-	} else {
-		return {
-			titleColour: themePalette('--carousel-text'),
-			titleHighlightColour: themePalette('--carousel-title-highlight'),
-			borderColour: themePalette('--carousel-border'),
-			activeDotColour: themePalette('--carousel-active-dot'),
-			arrowColour: themePalette('--carousel-arrow'),
-			arrowBackgroundColour: themePalette('--carousel-arrow-background'),
-			arrowBackgroundHoverColour: themePalette(
-				'--carousel-arrow-background-hover',
-			),
-		};
-	}
-};
 
 /**
  * A carousel of cards, mainly used in onward journeys,
@@ -883,8 +777,6 @@ export const Carousel = ({
 	isOnwardContent = true,
 	...props
 }: ArticleProps | FrontProps) => {
-	const carouselColours = decideCarouselColours(props);
-
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
@@ -998,124 +890,118 @@ export const Carousel = ({
 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
 
 	return (
-		<div
-			css={wrapperStyle(trails.length)}
-			data-link-name={formatAttrString(heading)}
-			data-component={isVideoContainer ? 'video-playlist' : undefined}
-		>
-			<LeftColumn
-				size={leftColSize}
-				borderColour={carouselColours.borderColour}
-				hasPageSkin={hasPageSkin}
-			>
-				<HeaderAndNav
-					heading={heading}
-					trails={trails}
-					activeDotColour={carouselColours.activeDotColour}
-					titleColour={carouselColours.titleColour}
-					titleHighlightColour={carouselColours.titleHighlightColour}
-					index={index}
-					isCuratedContent={isCuratedContent}
-					goToIndex={goToIndex}
-					url={props.url}
-				/>
-			</LeftColumn>
-			<InlineChevrons
-				trails={trails}
-				carouselColours={carouselColours}
-				index={index}
-				prev={prev}
-				next={next}
-				arrowName={arrowName}
-				isVideoContainer={isVideoContainer}
-				leftColSize={leftColSize}
-				hasPageSkin={hasPageSkin}
-			/>
+		<CarouselColours props={props}>
 			<div
-				css={[
-					containerStyles,
-					containerMargins,
-					!hasPageSkin && containerMarginsFromLeftCol,
-					isVideoContainer && videoContainerMargins,
-				]}
-				data-component={onwardsSource}
-				data-link={formatAttrString(heading)}
+				css={wrapperStyle(trails.length)}
+				data-link-name={formatAttrString(heading)}
+				data-component={isVideoContainer ? 'video-playlist' : undefined}
 			>
-				<Header
-					heading={heading}
+				<LeftColumn
+					size={leftColSize}
+					borderColour={themePalette('--carousel-border')}
+					hasPageSkin={hasPageSkin}
+				>
+					<HeaderAndNav
+						heading={heading}
+						trails={trails}
+						index={index}
+						isCuratedContent={isCuratedContent}
+						goToIndex={goToIndex}
+						url={props.url}
+					/>
+				</LeftColumn>
+				<InlineChevrons
 					trails={trails}
-					carouselColours={carouselColours}
 					index={index}
-					goToIndex={goToIndex}
 					prev={prev}
 					next={next}
 					arrowName={arrowName}
-					isCuratedContent={isCuratedContent}
-					containerType={containerType}
+					isVideoContainer={isVideoContainer}
+					leftColSize={leftColSize}
 					hasPageSkin={hasPageSkin}
-					url={props.url}
-					isOnwardContent={isOnwardContent}
 				/>
-				<ul
+				<div
 					css={[
-						carouselStyle,
-						isVideoContainer && videoContainerHeight,
+						containerStyles,
+						containerMargins,
+						!hasPageSkin && containerMarginsFromLeftCol,
+						isVideoContainer && videoContainerMargins,
 					]}
-					ref={carouselRef}
-					data-component={`carousel-small | maxIndex-${maxIndex}`}
+					data-component={onwardsSource}
+					data-link={formatAttrString(heading)}
 				>
-					{trails.map((trail, i) => {
-						const {
-							url: linkTo,
-							headline: headlineText,
-							webPublicationDate,
-							format: trailFormat,
-							image,
-							kickerText,
-							branding,
-							discussion,
-							mainMedia,
-						} = trail;
+					<Header
+						heading={heading}
+						trails={trails}
+						index={index}
+						goToIndex={goToIndex}
+						prev={prev}
+						next={next}
+						arrowName={arrowName}
+						isCuratedContent={isCuratedContent}
+						containerType={containerType}
+						hasPageSkin={hasPageSkin}
+						url={props.url}
+						isOnwardContent={isOnwardContent}
+					/>
+					<ul
+						css={[
+							carouselStyle,
+							isVideoContainer && videoContainerHeight,
+						]}
+						ref={carouselRef}
+						data-component={`carousel-small | maxIndex-${maxIndex}`}
+					>
+						{trails.map((trail, i) => {
+							const {
+								url: linkTo,
+								headline: headlineText,
+								webPublicationDate,
+								format: trailFormat,
+								image,
+								kickerText,
+								branding,
+								discussion,
+								mainMedia,
+							} = trail;
 
-						// Don't try to render cards that have no publication date. This property is technically optional
-						// but we rarely if ever expect it not to exist
-						if (!webPublicationDate) return null;
+							// Don't try to render cards that have no publication date. This property is technically optional
+							// but we rarely if ever expect it not to exist
+							if (!webPublicationDate) return null;
 
-						const imageUrl = image && getSourceImageUrl(image);
+							const imageUrl = image && getSourceImageUrl(image);
 
-						const imageLoading = i > 3 ? 'lazy' : 'eager';
+							const imageLoading = i > 3 ? 'lazy' : 'eager';
 
-						return (
-							<CarouselCard
-								key={`${trail.url}${i}`}
-								isFirst={i === 0}
-								format={trailFormat}
-								linkTo={linkTo}
-								headlineText={headlineText}
-								webPublicationDate={webPublicationDate}
-								imageUrl={imageUrl}
-								kickerText={kickerText}
-								dataLinkName={`carousel-small-card-position-${i}`}
-								discussionId={
-									discussion?.isCommentable
-										? discussion.discussionId
-										: undefined
-								}
-								branding={branding}
-								mainMedia={mainMedia}
-								verticalDividerColour={
-									carouselColours.borderColour
-								}
-								onwardsSource={onwardsSource}
-								containerType={containerType}
-								imageLoading={imageLoading}
-								discussionApiUrl={discussionApiUrl}
-								isOnwardContent={isOnwardContent}
-							/>
-						);
-					})}
-				</ul>
+							return (
+								<CarouselCard
+									key={`${trail.url}${i}`}
+									isFirst={i === 0}
+									format={trailFormat}
+									linkTo={linkTo}
+									headlineText={headlineText}
+									webPublicationDate={webPublicationDate}
+									imageUrl={imageUrl}
+									kickerText={kickerText}
+									dataLinkName={`carousel-small-card-position-${i}`}
+									discussionId={
+										discussion?.isCommentable
+											? discussion.discussionId
+											: undefined
+									}
+									branding={branding}
+									mainMedia={mainMedia}
+									onwardsSource={onwardsSource}
+									containerType={containerType}
+									imageLoading={imageLoading}
+									discussionApiUrl={discussionApiUrl}
+									isOnwardContent={isOnwardContent}
+								/>
+							);
+						})}
+					</ul>
+				</div>
 			</div>
-		</div>
+		</CarouselColours>
 	);
 };
