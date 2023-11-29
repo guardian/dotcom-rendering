@@ -436,7 +436,24 @@ export const NewsletterDetailPageLayout = ({
 										loading="eager"
 									/>
 								) : (
-									<p>No image</p>
+									<Hide until="desktop">
+										<div
+											css={css`
+												background-color: ${palette
+													.brand[400]};
+												padding: ${space[3]}px;
+											`}
+										>
+											<CardPicture
+												imageSize="medium"
+												alt=""
+												mainImage={
+													'https://uploads.guim.co.uk/2023/11/02/Newsletters_titlepiece.svg'
+												}
+												loading="eager"
+											/>
+										</div>
+									</Hide>
 								)}
 							</div>
 						</Column>
