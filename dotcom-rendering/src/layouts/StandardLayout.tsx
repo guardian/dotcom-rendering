@@ -59,7 +59,6 @@ import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { Foo } from '../components/Foo.importable';
 
 const StandardGrid = ({
 	children,

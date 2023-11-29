@@ -14,6 +14,7 @@ import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -427,9 +428,16 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main data-layout="LiveLayout">
 				{isApps && (
-					<Island priority="critical">
-						<AdPortals rightAlignFrom="wide" />
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals rightAlignFrom="wide" />
+						</Island>
+						<Island priority="critical">
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				{footballMatchUrl ? (
 					<Section

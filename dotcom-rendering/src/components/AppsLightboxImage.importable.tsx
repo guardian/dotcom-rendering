@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
 import { type RoleType } from '../types/content';
+import { onImageClick } from './AppsLightboxImageStore.importable';
 import { Picture } from './Picture';
-import { getOnClickHandler } from './Foo.importable';
-import { element } from 'screenfull';
 
 type Props = {
-	currentIndex: number;
 	elementId: string;
 	role: RoleType;
 	format: ArticleFormat;
@@ -18,7 +16,6 @@ type Props = {
 };
 
 export const AppsLightboxImage = ({
-	currentIndex,
 	elementId,
 	role,
 	format,
@@ -29,7 +26,6 @@ export const AppsLightboxImage = ({
 	isMainMedia = false,
 	isLazy = true,
 }: Props) => {
-	const hasLightbox = currentIndex !== -1;
 	const picture = (
 		<Picture
 			role={role}
@@ -42,9 +38,9 @@ export const AppsLightboxImage = ({
 			isMainMedia={isMainMedia}
 		/>
 	);
-	return hasLightbox ? (
+	return (
 		<button
-			onClick={getOnClickHandler(elementId)}
+			onClick={() => onImageClick(elementId)}
 			type="button"
 			css={css`
 				border: none;
@@ -56,7 +52,5 @@ export const AppsLightboxImage = ({
 		>
 			{picture}
 		</button>
-	) : (
-		picture
 	);
 };
