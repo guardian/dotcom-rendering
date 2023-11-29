@@ -6,7 +6,11 @@ import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 // Gets assigned a value when the component is rendered
 let imageStore: ImageForAppsLightbox[];
 
-export const onImageClick = (elementId: string): void => {
+/**
+ * Uses Bridget's Gallery service to open the native lightbox at the provided image element ID.
+ * This function should never be called server-side.
+ */
+export const openLightboxForImageId = (elementId: string): void => {
 	const currentIndex = imageStore.findIndex(
 		(img) => img.elementId === elementId,
 	);

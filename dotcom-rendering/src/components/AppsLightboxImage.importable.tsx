@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { type RoleType } from '../types/content';
-import { onImageClick } from './AppsLightboxImageStore.importable';
+import { openLightboxForImageId } from './AppsLightboxImageStore.importable';
 import { Picture } from './Picture';
 
 type Props = {
@@ -40,7 +40,7 @@ export const AppsLightboxImage = ({
 	);
 	return (
 		<button
-			onClick={() => onImageClick(elementId)}
+			onClick={() => openLightboxForImageId(elementId)}
 			type="button"
 			css={css`
 				border: none;
