@@ -244,6 +244,9 @@ export const SingleItemCarousel = () => (
 );
 
 SingleItemCarousel.storyName = 'Carousel with single item';
+SingleItemCarousel.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
 
 export const Immersive = () => (
 	<>
@@ -280,15 +283,17 @@ export const Immersive = () => (
 
 Immersive.storyName = 'Immersive carousel';
 
+const specialReportAltFormat = {
+	theme: ArticleSpecial.SpecialReportAlt,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+};
+
 export const SpecialReportAlt = () => {
 	const specialReportTrails = [...trails];
 
 	for (const trail of specialReportTrails)
-		trail.format = {
-			theme: ArticleSpecial.SpecialReportAlt,
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-		};
+		trail.format = specialReportAltFormat;
 
 	return (
 		<>
@@ -297,11 +302,7 @@ export const SpecialReportAlt = () => {
 					heading="SpecialReportAlt"
 					trails={specialReportTrails}
 					onwardsSource="curated-content"
-					format={{
-						theme: ArticleSpecial.SpecialReportAlt,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
+					format={specialReportAltFormat}
 					leftColSize={'compact'}
 					discussionApiUrl={discussionApiUrl}
 				/>
@@ -311,6 +312,9 @@ export const SpecialReportAlt = () => {
 };
 
 SpecialReportAlt.storyName = 'SpecialReportAlt';
+SpecialReportAlt.decorators = [
+	splitTheme([specialReportAltFormat], { orientation: 'vertical' }),
+];
 
 export const FrontCarousel = () => (
 	<>

@@ -106,6 +106,7 @@ const CarouselColours = ({
 			<FormatBoundary format={props.format}>{children}</FormatBoundary>
 		);
 	}
+	return children;
 };
 
 const wrapperStyle = (length: number) => css`

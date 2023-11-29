@@ -310,8 +310,6 @@ export const Card = ({
 	);
 
 	const showQuotes = !!showQuotedHeadline;
-	const rightAlignFooter = isOnwardContent;
-	const roundedImage = isOnwardContent;
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
@@ -325,7 +323,7 @@ export const Card = ({
 				format={format}
 				containerPalette={containerPalette}
 				displayLines={displayLines}
-				rightAlign={rightAlignFooter}
+				rightAlign={isOnwardContent}
 				age={
 					(!!onwardsSource && webPublicationDate) ||
 					(showAge &&
@@ -524,7 +522,7 @@ export const Card = ({
 											imageSize={imageSize}
 											alt={headlineText}
 											loading={imageLoading}
-											roundedCorners={roundedImage}
+											roundedCorners={isOnwardContent}
 										/>
 									</div>
 								)}
@@ -537,7 +535,7 @@ export const Card = ({
 									imageSize={imageSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
-									roundedCorners={roundedImage}
+									roundedCorners={isOnwardContent}
 								/>
 								{showPlayIcon && (
 									<MediaDuration
