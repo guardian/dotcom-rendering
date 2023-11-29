@@ -48,6 +48,7 @@ import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { Foo } from '../components/Foo.importable';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -474,9 +475,14 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
 				{isApps && (
-					<Island priority="critical">
-						<AdPortals />
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="critical">
+							<Foo images={article.imagesForAppsLightbox} />
+						</Island>
+					</>
 				)}
 				<Section
 					fullWidth={true}
