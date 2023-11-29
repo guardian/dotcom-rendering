@@ -32,6 +32,9 @@ const colourSchemeDecorator =
 		<>
 			{formats.map((format) => (
 				<div
+					// We need to set the class name here, as the FormatBoundary relies on it
+					// To declare the correct palette
+					className={colourScheme}
 					css={[
 						css(paletteDeclarations(format, colourScheme)),
 						colourScheme === 'dark' ? darkStoryCss : lightStoryCss,
