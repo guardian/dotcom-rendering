@@ -10,6 +10,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -48,7 +49,6 @@ import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
-import { Foo } from '../components/Foo.importable';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -480,7 +480,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							<AdPortals />
 						</Island>
 						<Island priority="critical">
-							<Foo images={article.imagesForAppsLightbox} />
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
 						</Island>
 					</>
 				)}

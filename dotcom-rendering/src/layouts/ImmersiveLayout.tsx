@@ -15,6 +15,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -457,9 +458,16 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 			<main data-layout="ImmersiveLayout">
 				{isApps && (
-					<Island priority="critical">
-						<AdPortals />
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="critical">
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				<Section
 					fullWidth={true}
