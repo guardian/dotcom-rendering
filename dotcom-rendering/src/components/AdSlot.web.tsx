@@ -677,6 +677,7 @@ export const AdSlot = ({
 						css={liveblogInlineAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
+						data-testid={`liveblog-inline--${advertId}`}
 						aria-hidden="true"
 					/>
 				</div>
@@ -701,6 +702,7 @@ export const AdSlot = ({
 						css={liveblogInlineMobileAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
+						data-testid={`liveblog-inline-mobile--${advertId}`}
 						aria-hidden="true"
 					/>
 				</div>
