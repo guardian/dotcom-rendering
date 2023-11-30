@@ -391,7 +391,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
-						imagesForAppsLightbox={article.imagesForAppsLightbox}
 					/>
 				</div>
 				{mainMedia && (
@@ -633,9 +632,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									lang={article.lang}
 									isRightToLeftLang={
 										article.isRightToLeftLang
-									}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
 									}
 								/>
 								{showBodyEndSlot && (

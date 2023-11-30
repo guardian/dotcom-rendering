@@ -435,7 +435,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										switches={article.config.switches}
 										isAdFreeUser={article.isAdFreeUser}
 										isSensitive={article.config.isSensitive}
-										imagesForAppsLightbox={[]}
 									/>
 								</div>
 							</GridItem>
@@ -562,7 +561,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
-										imagesForAppsLightbox={[]}
 									/>
 								</ArticleContainer>
 							</GridItem>

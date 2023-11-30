@@ -552,9 +552,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 							</div>
 						</GridItem>
@@ -682,9 +679,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									lang={article.lang}
 									isRightToLeftLang={
 										article.isRightToLeftLang
-									}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
 									}
 								/>
 								{format.design === ArticleDesign.MatchReport &&

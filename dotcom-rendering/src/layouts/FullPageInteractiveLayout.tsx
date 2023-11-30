@@ -74,7 +74,6 @@ const Renderer = ({
 	const output = elements.map((element, index) => {
 		const el = renderElement({
 			format,
-
 			element,
 			host,
 			index,
@@ -85,7 +84,6 @@ const Renderer = ({
 			isAdFreeUser,
 			isSensitive,
 			switches,
-			imagesForAppsLightbox: [],
 		});
 
 		switch (element._type) {

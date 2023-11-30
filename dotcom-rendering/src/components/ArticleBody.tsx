@@ -5,7 +5,6 @@ import { between, body, headline, space } from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
-import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { palette as themePalette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TableOfContentsItem } from '../types/frontend';
@@ -44,7 +43,6 @@ type Props = {
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
 	isRightToLeftLang?: boolean;
-	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -133,7 +131,6 @@ export const ArticleBody = ({
 	tableOfContents,
 	lang,
 	isRightToLeftLang = false,
-	imagesForAppsLightbox,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const language = decideLanguage(lang);
@@ -227,7 +224,6 @@ export const ArticleBody = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					abTests={abTests}
-					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			</div>
 		</>
