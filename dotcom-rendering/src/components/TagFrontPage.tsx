@@ -1,10 +1,15 @@
 import { css, Global } from '@emotion/react';
-import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	focusHalo,
+	palette as sourcePalette,
+} from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { TagFrontLayout } from '../layouts/TagFrontLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
+import { paletteDeclarations } from '../palette';
 import type { DCRTagFrontType } from '../types/tagFront';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { FocusStyles } from './FocusStyles.importable';
@@ -37,18 +42,33 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 		adUnit: tagFront.config.adUnit,
 	});
 
+	/* We use this as our "base" or default format */
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.News,
+	};
+
 	return (
 		<StrictMode>
 			<Global
 				styles={css`
+					:root {
+						/* Light palette is default on all platforms */
+						/* We do not support dark mode on tag pages */
+						${paletteDeclarations(format, 'light')}
+						body {
+							color: ${sourcePalette.neutral[7]};
+						}
+					}
 					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
 					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
 					*:focus {
 						${focusHalo}
 					}
 					::selection {
-						background: ${brandAlt[400]};
-						color: ${neutral[7]};
+						background: ${sourcePalette.brandAlt[400]};
+						color: ${sourcePalette.neutral[7]};
 					}
 				`}
 			/>
