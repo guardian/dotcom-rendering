@@ -291,6 +291,7 @@ export const WithSponsoredBranding = () => {
 					aboutThisLink:
 						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
 				},
+				isContainerBranding: false,
 			}}
 		>
 			<Placeholder />
@@ -316,6 +317,7 @@ export const WithPaidBranding = () => {
 					aboutThisLink:
 						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
 				},
+				isContainerBranding: false,
 			}}
 		>
 			<Placeholder />
@@ -341,6 +343,7 @@ export const WithPaidContentForWholeFront = () => {
 					aboutThisLink:
 						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
 				},
+				isContainerBranding: false,
 			}}
 		>
 			<Placeholder />
