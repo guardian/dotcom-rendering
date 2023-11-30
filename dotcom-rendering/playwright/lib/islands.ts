@@ -28,8 +28,8 @@ const waitForIsland = async (
 	await islandLocator.scrollIntoViewIfNeeded();
 	// wait for it to be rendered or hydrated
 	const hydratedIslandSelector = `gu-island[name="${name}"][data-island-status="${status}"]`;
-	const hyrdatedIslandLocator = page.locator(hydratedIslandSelector).nth(nth);
-	await hyrdatedIslandLocator.waitFor({
+	const hydratedIslandLocator = page.locator(hydratedIslandSelector).nth(nth);
+	await hydratedIslandLocator.waitFor({
 		state: waitFor,
 		timeout: 30_000,
 	});
