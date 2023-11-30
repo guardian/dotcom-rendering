@@ -1,44 +1,7 @@
-import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { standardArticle } from '../../fixtures/manual/standard-article';
 import { disableCMP } from '../../lib/cmp';
 import { addCookie } from '../../lib/cookies';
-import { BASE_URL, loadPage } from '../../lib/load-page';
-
-/**
- * Create a POST request to the /Article endpoint so we can override switches
- * in the json sent to DCR
- */
-const visitArticleNoOkta = async (page: Page) => {
-	const path = `/Article`;
-	await page.route(`${BASE_URL}${path}`, async (route) => {
-		const postData = {
-			...standardArticle,
-			config: {
-				...standardArticle.config,
-				switches: {
-					...standardArticle.config.switches,
-					/**
-					 * We want to continue using cookies for signed in features
-					 * until we figure out how to use Okta in e2e testing.
-					 * See https://github.com/guardian/dotcom-rendering/issues/8758
-					 */
-					okta: false,
-					idCookieRefresh: false,
-					userFeaturesDcr: true,
-				},
-			},
-		};
-		await route.continue({
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			postData,
-		});
-	});
-	await loadPage(page, path);
-};
+import { loadPageNoOkta } from '../../lib/load-page';
 
 test.describe('User cookies tests', () => {
 	test(`Request to user features API is sent when no user features expiry cookie`, async ({
@@ -57,7 +20,7 @@ test.describe('User cookies tests', () => {
 			'https://members-data-api.theguardian.com/user-attributes/me',
 		);
 
-		await visitArticleNoOkta(page);
+		await loadPageNoOkta(page);
 
 		await membersDataApiPromise;
 
@@ -98,7 +61,7 @@ test.describe('User cookies tests', () => {
 			'https://members-data-api.theguardian.com/user-attributes/me',
 		);
 
-		await visitArticleNoOkta(page);
+		await loadPageNoOkta(page);
 
 		await membersDataApiPromise;
 	});
@@ -125,7 +88,7 @@ test.describe('User cookies tests', () => {
 		});
 
 		await disableCMP(context);
-		await visitArticleNoOkta(page);
+		await loadPageNoOkta(page);
 
 		// expect existing cookies to be deleted when GU_U is not present
 		expect(

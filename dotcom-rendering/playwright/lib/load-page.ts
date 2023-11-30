@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test';
+import { standardArticle } from '../fixtures/manual/standard-article';
 
 const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
@@ -38,4 +39,39 @@ const loadPage = async (
 	await page.goto(`${BASE_URL}${path}`, { waitUntil });
 };
 
-export { BASE_URL, loadPage };
+/**
+ * Create a POST request to the /Article endpoint so we can override switches
+ * in the json sent to DCR
+ */
+const loadPageNoOkta = async (page: Page): Promise<void> => {
+	const path = `/Article`;
+	await page.route(`${BASE_URL}${path}`, async (route) => {
+		const postData = {
+			...standardArticle,
+			config: {
+				...standardArticle.config,
+				switches: {
+					...standardArticle.config.switches,
+					/**
+					 * We want to continue using cookies for signed in features
+					 * until we figure out how to use Okta in e2e testing.
+					 * See https://github.com/guardian/dotcom-rendering/issues/8758
+					 */
+					okta: false,
+					idCookieRefresh: false,
+					userFeaturesDcr: true,
+				},
+			},
+		};
+		await route.continue({
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			postData,
+		});
+	});
+	await loadPage(page, path);
+};
+
+export { BASE_URL, loadPage, loadPageNoOkta };
