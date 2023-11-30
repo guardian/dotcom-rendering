@@ -432,7 +432,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						<Island priority="critical">
 							<AdPortals rightAlignFrom="wide" />
 						</Island>
-						<Island priority="critical">
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<AppsLightboxImageStore
 								images={article.imagesForAppsLightbox}
 							/>

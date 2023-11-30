@@ -479,7 +479,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						<Island priority="critical">
 							<AdPortals />
 						</Island>
-						<Island priority="critical">
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<AppsLightboxImageStore
 								images={article.imagesForAppsLightbox}
 							/>

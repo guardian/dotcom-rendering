@@ -490,16 +490,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<main data-layout="StandardLayout">
 				{isApps && (
-					<Island priority="critical">
-						<AdPortals />
-					</Island>
-				)}
-				{isApps && (
-					<Island priority="critical">
-						<AppsLightboxImageStore
-							images={article.imagesForAppsLightbox}
-						/>
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				<Section
 					fullWidth={true}
