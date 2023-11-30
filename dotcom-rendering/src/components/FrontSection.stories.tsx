@@ -281,7 +281,7 @@ export const WithSponsoredBranding = () => {
 			discussionApiUrl={discussionApiUrl}
 			collectionBranding={{
 				kind: 'sponsored',
-				isFrontBranding: true,
+				isFrontBranding: false,
 				branding: {
 					brandingType: {
 						name: 'sponsored',
