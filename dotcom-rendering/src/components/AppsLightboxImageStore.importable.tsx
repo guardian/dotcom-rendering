@@ -46,6 +46,9 @@ export const openLightboxForImageId = (elementId: string): void => {
 		.catch(() => undefined);
 };
 
+export const imageHasLightbox = (elementId: string): boolean =>
+	imageStore.some((img) => img.elementId === elementId);
+
 export const AppsLightboxImageStore = ({
 	images,
 }: {
