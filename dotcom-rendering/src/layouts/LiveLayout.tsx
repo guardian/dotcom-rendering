@@ -1248,6 +1248,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							data-link-name="most-popular"
 							data-component="most-popular"
 							leftColSize="wide"
+							backgroundColour={themePalette(
+								'--article-section-background',
+							)}
+							borderColour={themePalette('--article-border')}
+							fontColour={themePalette('--article-section-title')}
 						>
 							<MostViewedFooterLayout renderAds={renderAds}>
 								<Island

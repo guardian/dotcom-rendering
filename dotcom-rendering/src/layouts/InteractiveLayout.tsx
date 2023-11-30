@@ -565,8 +565,11 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					stretchRight={false}
 					showTopBorder={false}
-					backgroundColour={themePalette('--article-background')}
+					backgroundColour={themePalette(
+						'--article-section-background',
+					)}
 					borderColour={themePalette('--article-border')}
+					fontColour={themePalette('--article-section-title')}
 					padContent={false}
 				>
 					<div
@@ -725,6 +728,11 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
