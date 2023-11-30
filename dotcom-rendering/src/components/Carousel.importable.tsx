@@ -190,14 +190,6 @@ const carouselStyle = css`
 	}
 `;
 
-const dotsSmallMargin = css`
-	margin-bottom: ${space[2]}px;
-`;
-
-const dotsLargeMargin = css`
-	margin-bottom: ${space[3]}px;
-`;
-
 const dotStyle = css`
 	cursor: pointer;
 	display: inline-block;
@@ -467,6 +459,7 @@ type CarouselCardProps = {
 	imageUrl?: string;
 	dataLinkName?: string;
 	discussionApiUrl: string;
+	/* Onward content carousels use different card styles (this is currently everything but fronts) */
 	isOnwardContent?: boolean;
 	discussionId?: string;
 	/** Only used on Labs cards */
@@ -568,7 +561,11 @@ const HeaderAndNav = ({
 				isCuratedContent={isCuratedContent}
 				url={url}
 			/>
-			<div css={isOnwardContent ? dotsLargeMargin : dotsSmallMargin}>
+			<div
+				style={{
+					marginBottom: `${isOnwardContent ? space[3] : space[2]}px`,
+				}}
+			>
 				{trails.map((_, i) => (
 					<span
 						onClick={() => goToIndex(i)}

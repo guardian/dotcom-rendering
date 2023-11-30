@@ -216,7 +216,7 @@ export const Headlines: StoryObj = ({ format }: StoryProps) => (
 				trails={trails}
 				onwardsSource="more-on-this-story"
 				format={format}
-				leftColSize={'compact'}
+				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
@@ -236,7 +236,7 @@ export const SingleItemCarousel = () => (
 				trails={trails.slice(1, 2)}
 				onwardsSource="more-on-this-story"
 				format={defaultFormat}
-				leftColSize={'compact'}
+				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
@@ -260,7 +260,7 @@ export const Immersive = () => (
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Immersive,
 				}}
-				leftColSize={'compact'}
+				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
@@ -274,7 +274,7 @@ export const Immersive = () => (
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Immersive,
 				}}
-				leftColSize={'compact'}
+				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
@@ -303,7 +303,7 @@ export const SpecialReportAlt = () => {
 					trails={specialReportTrails}
 					onwardsSource="curated-content"
 					format={specialReportAltFormat}
-					leftColSize={'compact'}
+					leftColSize="compact"
 					discussionApiUrl={discussionApiUrl}
 				/>
 			</Section>
@@ -326,7 +326,7 @@ export const FrontCarousel = () => (
 				heading="More on this story"
 				trails={trails}
 				onwardsSource="unknown-source"
-				leftColSize={'compact'}
+				leftColSize="compact"
 				url={'https://www.theguardian.com'}
 				discussionApiUrl={discussionApiUrl}
 				palette={'BreakingPalette'}
