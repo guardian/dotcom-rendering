@@ -12,6 +12,7 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import { getAgeWarning } from '../lib/age-warning';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import { palette as themePalette } from '../palette';
 import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { AgeWarning } from './AgeWarning';
@@ -225,8 +226,8 @@ const ageWarningMargins = (format: ArticleFormat) =>
 				}
 		  `;
 
-const backgroundStyles = (palette: Palette) => css`
-	background-color: ${palette.background.ageWarning};
+const backgroundStyles = css`
+	background-color: ${themePalette('--age-warning-background')};
 `;
 
 const WithAgeWarning = ({
@@ -240,15 +241,12 @@ const WithAgeWarning = ({
 	format: ArticleFormat;
 	children: React.ReactNode;
 }) => {
-	const palette = decidePalette(format);
 	const age = getAgeWarning(tags, webPublicationDateDeprecated);
 
 	if (age) {
 		return (
 			<>
-				<div
-					css={[backgroundStyles(palette), ageWarningMargins(format)]}
-				>
+				<div css={[backgroundStyles, ageWarningMargins(format)]}>
 					<AgeWarning age={age} />
 				</div>
 				{children}

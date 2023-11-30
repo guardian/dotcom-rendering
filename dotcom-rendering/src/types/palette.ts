@@ -60,7 +60,6 @@ export type Palette = {
 		matchNav: Colour;
 		analysisUnderline: Colour;
 		matchStats: Colour;
-		ageWarning: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;

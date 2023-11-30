@@ -607,15 +607,6 @@ const backgroundHeadline = (format: ArticleFormat): string => {
 	}
 };
 
-const backgroundAgeWarning = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.Interview:
-			return backgroundArticle(format);
-		default:
-			return backgroundHeadline(format);
-	}
-};
-
 const backgroundBullet = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -1603,7 +1594,6 @@ export const decidePalette = (
 			matchNav: backgroundMatchNav(),
 			analysisUnderline: backgroundUnderline(format),
 			matchStats: backgroundMatchStats(format),
-			ageWarning: backgroundAgeWarning(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),

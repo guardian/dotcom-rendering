@@ -28,7 +28,6 @@ import { SubNav } from '../components/SubNav.importable';
 import { TagFrontHeader } from '../components/TagFrontHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
 import {
 	getTagFrontMobileAdPositions,
@@ -109,14 +108,6 @@ const SectionLeftContent = ({
 };
 
 export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
-
-	const palette = decidePalette(format);
-
 	const {
 		config: { switches, hasPageSkin, isPaidContent },
 	} = tagFront;
