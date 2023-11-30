@@ -1,5 +1,5 @@
 import type { Page } from '@playwright/test';
-import { standardArticle } from '../fixtures/manual/standard-article';
+import type { DCRArticle } from '../../src/types/frontend';
 
 const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
@@ -43,15 +43,20 @@ const loadPage = async (
  * Create a POST request to the /Article endpoint so we can override switches
  * in the json sent to DCR
  */
-const loadPageNoOkta = async (page: Page): Promise<void> => {
+const loadPageNoOkta = async (
+	page: Page,
+	article: DCRArticle,
+	configOverrides?: Record<string, unknown>,
+): Promise<void> => {
 	const path = `/Article`;
 	await page.route(`${BASE_URL}${path}`, async (route) => {
 		const postData = {
-			...standardArticle,
+			...article,
 			config: {
-				...standardArticle.config,
+				...article.config,
+				...configOverrides,
 				switches: {
-					...standardArticle.config.switches,
+					...article.config.switches,
 					/**
 					 * We want to continue using cookies for signed in features
 					 * until we figure out how to use Okta in e2e testing.

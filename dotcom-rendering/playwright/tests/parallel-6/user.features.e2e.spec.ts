@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { Standard as standardArticle } from '../../../fixtures/generated/articles/Standard';
 import { disableCMP } from '../../lib/cmp';
 import { addCookie } from '../../lib/cookies';
 import { loadPageNoOkta } from '../../lib/load-page';
@@ -20,7 +21,10 @@ test.describe('User cookies tests', () => {
 			'https://members-data-api.theguardian.com/user-attributes/me',
 		);
 
-		await loadPageNoOkta(page);
+		await loadPageNoOkta(page, standardArticle, {
+			userAttributesApiUrl:
+				'https://members-data-api.theguardian.com/user-attributes',
+		});
 
 		await membersDataApiPromise;
 
@@ -61,7 +65,10 @@ test.describe('User cookies tests', () => {
 			'https://members-data-api.theguardian.com/user-attributes/me',
 		);
 
-		await loadPageNoOkta(page);
+		await loadPageNoOkta(page, standardArticle, {
+			userAttributesApiUrl:
+				'https://members-data-api.theguardian.com/user-attributes',
+		});
 
 		await membersDataApiPromise;
 	});
@@ -88,7 +95,7 @@ test.describe('User cookies tests', () => {
 		});
 
 		await disableCMP(context);
-		await loadPageNoOkta(page);
+		await loadPageNoOkta(page, standardArticle);
 
 		// expect existing cookies to be deleted when GU_U is not present
 		expect(
