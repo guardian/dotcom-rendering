@@ -35,6 +35,7 @@ import {
 	getTagFrontsBannerAdPositions,
 } from '../lib/getTagFrontsAdPositions';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRTagFrontType } from '../types/tagFront';
 import { Stuck } from './lib/stickiness';
 
@@ -196,7 +197,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								element="aside"
 							>
@@ -214,7 +217,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							</Section>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								showTopBorder={false}
 							>

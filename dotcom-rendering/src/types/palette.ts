@@ -41,7 +41,6 @@ export type Palette = {
 		youtubeOverlayKicker: Colour;
 	};
 	background: {
-		article: Colour;
 		analysisContrast: Colour;
 		analysisContrastHover: Colour;
 		audioAtom: Colour;

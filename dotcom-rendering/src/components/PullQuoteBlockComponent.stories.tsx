@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
 import { Section } from './Section';
 
@@ -92,7 +92,7 @@ export const Supporting = ({ format }: { format: ArticleFormat }) => (
 		centralBorder="full"
 		showSideBorders={false}
 		key={format.theme}
-		backgroundColour={decidePalette(format).background.article}
+		backgroundColour={themePalette('--article-background')}
 		// Description is less intrusive, but isn't rendered if title prop not provided
 		title={' '}
 		description={ArticleDesign[format.design]}

@@ -527,47 +527,6 @@ const textCricketScoreboardLink = (): string => {
 	return sport[300];
 };
 
-/** @deprecated this has been moved to the theme palette (--article-background) */
-const backgroundArticle = (format: ArticleFormat): string => {
-	// specialreport blogs should have specialreport background
-	if (
-		(format.design === ArticleDesign.LiveBlog ||
-			format.design === ArticleDesign.DeadBlog) &&
-		format.theme !== ArticleSpecial.SpecialReport
-	)
-		return neutral[97];
-	// Order matters. We want comment special report pieces to have the opinion background
-	if (format.design === ArticleDesign.Letter) return opinion[800];
-	if (format.design === ArticleDesign.Comment) {
-		if (format.theme === ArticleSpecial.SpecialReportAlt)
-			return palette.specialReportAlt[800];
-
-		return opinion[800];
-	}
-	if (format.design === ArticleDesign.Editorial) return opinion[800];
-
-	if (format.design === ArticleDesign.Analysis) {
-		if (format.theme === ArticleSpecial.SpecialReportAlt)
-			return palette.specialReportAlt[800];
-		else return news[800];
-	}
-
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[800]; // Note, check theme rather than design here
-
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return palette.specialReportAlt[800];
-
-	if (
-		format.theme === ArticleSpecial.Labs &&
-		format.display !== ArticleDisplay.Immersive
-	)
-		return neutral[97];
-	if (format.design === ArticleDesign.Picture) return BLACK;
-
-	return 'transparent';
-};
-
 const backgroundSeriesTitle = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return brandAltBackground.primary;
@@ -1624,7 +1583,6 @@ export const decidePalette = (
 			youtubeOverlayKicker: textYoutubeOverlayKicker(format),
 		},
 		background: {
-			article: backgroundArticle(format),
 			analysisContrast: backgroundAnalysisContrastColour(),
 			analysisContrastHover: backgroundAnalysisContrastHoverColour(),
 			audioAtom: backgroundAudioAtom(format),
