@@ -146,7 +146,7 @@ export const decideCollectionBranding = ({
 			kind,
 			isFrontBranding: true,
 			branding: frontBranding,
-			isContainerBranding: isContainerBranding,
+			isContainerBranding,
 		};
 	}
 

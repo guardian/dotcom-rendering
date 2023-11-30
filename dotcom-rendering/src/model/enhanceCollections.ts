@@ -69,7 +69,7 @@ export const enhanceCollections = ({
 			cards: allCards,
 			editionId,
 			isContainerBranding:
-				collection.config.metadata?.some((x) => x.type === 'Branded') ||
+				collection.config.metadata?.some((x) => x.type === 'Branded') ??
 				false,
 		});
 
