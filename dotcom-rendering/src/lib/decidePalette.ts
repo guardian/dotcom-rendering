@@ -657,41 +657,6 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 	return neutral[86]; // default previously defined in Standfirst.tsx
 };
 
-/** @deprecated this has been moved to the theme palette (--standfirst-background) */
-const backgroundStandfirst = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case Pillar.News:
-					return news[200];
-				case Pillar.Culture:
-					return culture[200];
-				case Pillar.Sport:
-					return sport[100];
-				case Pillar.Lifestyle:
-					return lifestyle[200];
-				case Pillar.Opinion:
-					return opinion[200];
-				case ArticleSpecial.Labs:
-					return news[200];
-				case ArticleSpecial.SpecialReport:
-					return specialReport[300];
-				case ArticleSpecial.SpecialReportAlt:
-					return news[200];
-			}
-		case ArticleDesign.DeadBlog:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReport:
-					return specialReport[700];
-				default:
-					return neutral[93];
-			}
-
-		default:
-			return backgroundArticle(format);
-	}
-};
-
 const backgroundImageTitle = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
@@ -1583,7 +1548,6 @@ export const decidePalette = (
 			headline: backgroundHeadline(format),
 			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
-			standfirst: backgroundStandfirst(format),
 			richLink: backgroundRichLink(format),
 			imageTitle: backgroundImageTitle(format),
 			lightboxDivider: backgroundLightboxDivider(format),

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import { ArticleLastUpdated } from './ArticleLastUpdated';
 
 export default {
@@ -14,12 +14,11 @@ export const LiveBlog = () => {
 		design: ArticleDesign.LiveBlog,
 		theme: Pillar.News,
 	};
-	const palette = decidePalette(format);
 
 	return (
 		<div
 			css={css`
-				background: ${palette.background.standfirst};
+				background: ${themePalette('--standfirst-background')};
 			`}
 		>
 			<ArticleLastUpdated format={format} lastUpdated={1641038370000} />
@@ -33,12 +32,11 @@ export const DeadBlog = () => {
 		design: ArticleDesign.DeadBlog,
 		theme: Pillar.News,
 	};
-	const palette = decidePalette(format);
 
 	return (
 		<div
 			css={css`
-				background: ${palette.background.standfirst};
+				background: ${themePalette('--standfirst-background')};
 			`}
 		>
 			<ArticleLastUpdated format={format} lastUpdated={1641038370000} />

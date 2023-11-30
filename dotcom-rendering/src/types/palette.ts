@@ -50,7 +50,6 @@ export type Palette = {
 		headline: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
-		standfirst: Colour;
 		richLink: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
