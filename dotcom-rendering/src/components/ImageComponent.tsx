@@ -34,6 +34,7 @@ type Props = {
 	title?: string;
 	isAvatar?: boolean;
 	switches?: Switches;
+	// eslint-disable-next-line react/no-unused-prop-types -- keep this so the diff isn't too big
 	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
@@ -241,7 +242,6 @@ export const ImageComponent = ({
 	title,
 	isAvatar,
 	switches,
-	imagesForAppsLightbox,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
@@ -321,10 +321,7 @@ export const ImageComponent = ({
 				{renderingTarget === 'Apps' ? (
 					<Island priority="critical">
 						<AppsLightboxImage
-							images={imagesForAppsLightbox}
-							currentIndex={imagesForAppsLightbox.findIndex(
-								(img) => img.elementId === element.elementId,
-							)}
+							elementId={element.elementId}
 							role={role}
 							format={format}
 							master={image.url}
@@ -388,10 +385,7 @@ export const ImageComponent = ({
 				{renderingTarget === 'Apps' ? (
 					<Island priority="critical">
 						<AppsLightboxImage
-							images={imagesForAppsLightbox}
-							currentIndex={imagesForAppsLightbox.findIndex(
-								(img) => img.elementId === element.elementId,
-							)}
+							elementId={element.elementId}
 							role={role}
 							format={format}
 							master={image.url}
@@ -458,10 +452,7 @@ export const ImageComponent = ({
 				{renderingTarget === 'Apps' ? (
 					<Island priority="critical">
 						<AppsLightboxImage
-							images={imagesForAppsLightbox}
-							currentIndex={imagesForAppsLightbox.findIndex(
-								(img) => img.elementId === element.elementId,
-							)}
+							elementId={element.elementId}
 							role={role}
 							format={format}
 							master={image.url}
