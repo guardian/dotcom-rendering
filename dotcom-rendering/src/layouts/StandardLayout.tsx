@@ -497,9 +497,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					fullWidth={true}
 					data-print-layout="hide"
 					showTopBorder={false}
-					backgroundColour={themePalette(
-						'--article-section-background',
-					)}
+					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
 					fontColour={themePalette('--article-section-title')}
 					element="article"
