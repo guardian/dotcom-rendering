@@ -27,11 +27,14 @@ const TAG_FRONT_URL = /^\/(tone|series|profile)\/[a-z-]+/;
 /** assets are paths like /assets/index.xxx.js */
 const ASSETS_URL = /^assets\/.+\.js/;
 
-//editionalise fronts for dev
+//editionalise front url to uk
 const editionalisefront = (url: string): string => {
-	let parts = url.split('/');
-	parts.splice(-1, 0, 'uk');
-	return parts.join('/');
+	const parts = url.split('/');
+	if (parts.length === 4) {
+		parts.splice(-1, 0, 'uk');
+		return parts.join('/');
+	}
+	return url;
 };
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
