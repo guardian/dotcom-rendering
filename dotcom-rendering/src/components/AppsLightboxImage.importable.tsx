@@ -1,9 +1,6 @@
 import { css } from '@emotion/react';
 import { type RoleType } from '../types/content';
-import {
-	imageHasLightbox,
-	openLightboxForImageId,
-} from './AppsLightboxImageStore.importable';
+import { openLightboxForImageId } from './AppsLightboxImageStore.importable';
 import { Picture } from './Picture';
 
 type Props = {
@@ -41,7 +38,7 @@ export const AppsLightboxImage = ({
 			isMainMedia={isMainMedia}
 		/>
 	);
-	return imageHasLightbox(elementId) ? (
+	return (
 		<button
 			onClick={() => openLightboxForImageId(elementId)}
 			type="button"
@@ -55,7 +52,5 @@ export const AppsLightboxImage = ({
 		>
 			{picture}
 		</button>
-	) : (
-		picture
 	);
 };
