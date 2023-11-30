@@ -567,10 +567,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										) : (
 											<DecideLines
 												format={format}
-												color={
-													decidePalette(format).border
-														.article
-												}
+												color={themePalette(
+													'--article-border',
+												)}
 											/>
 										)}
 									</div>
