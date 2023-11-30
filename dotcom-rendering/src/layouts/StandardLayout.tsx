@@ -8,6 +8,7 @@ import {
 	from,
 	labs,
 	neutral,
+	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source-foundations';
@@ -362,9 +363,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							showSideBorders={false}
 							padSides={false}
 							shouldCenter={false}
-							backgroundColour={themePalette(
-								'--article-section-background',
-							)}
+							backgroundColour={sourcePalette.brand[400]}
 							element="header"
 						>
 							<Header
@@ -394,9 +393,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						borderColour={brandLine.primary}
 						showTopBorder={false}
 						padSides={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={sourcePalette.brand[400]}
 						element="nav"
 					>
 						<Nav
@@ -497,8 +494,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					fullWidth={true}
 					data-print-layout="hide"
 					showTopBorder={false}
-					backgroundColour={themePalette('--article-background')}
+					backgroundColour={themePalette(
+						'--article-section-background',
+					)}
 					borderColour={themePalette('--article-border')}
+					fontColour={themePalette('--article-section-title')}
 					element="article"
 				>
 					<StandardGrid isMatchReport={isMatchReport}>
@@ -814,7 +814,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true}>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
+					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
@@ -890,6 +897,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
@@ -954,9 +966,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						fullWidth={true}
 						data-print-layout="hide"
 						padSides={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={sourcePalette.brand[400]}
 						borderColour={brandBorder.primary}
 						showSideBorders={false}
 						element="footer"
@@ -1012,7 +1022,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						fullWidth={true}
 						data-print-layout="hide"
 						backgroundColour={themePalette(
-							'--apps-footer-background',
+							'--article-section-background',
 						)}
 						padSides={false}
 						showSideBorders={false}

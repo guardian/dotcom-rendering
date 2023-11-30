@@ -2521,8 +2521,17 @@ const articleBackgroundDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const articleSectionBackground: PaletteFunction = () =>
-	sourcePalette.brand[400];
+const articleSectionBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
+const articleSectionBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const articleSectionTitleLight: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const articleSectionTitleDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
 
 const articleLinkTextLight: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis) return sourcePalette.news[300];
@@ -3668,8 +3677,12 @@ const paletteColours = {
 		dark: articleBackgroundDark,
 	},
 	'--article-section-background': {
-		light: articleSectionBackground,
-		dark: articleSectionBackground,
+		light: articleSectionBackgroundLight,
+		dark: articleSectionBackgroundDark,
+	},
+	'--article-section-title': {
+		light: articleSectionTitleLight,
+		dark: articleSectionTitleDark,
 	},
 	'--article-link-text': {
 		light: articleLinkTextLight,
