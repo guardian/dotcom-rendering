@@ -62,7 +62,9 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 		isFollowingTag
 			? void getTagClient()
 					.unfollow(topic)
-					.then(() => setIsFollowingTag(false))
+					.then((success) => {
+						success && setIsFollowingTag(false);
+					})
 					.catch((e) =>
 						log(
 							'dotcom',
@@ -72,7 +74,9 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 					)
 			: void getTagClient()
 					.follow(topic)
-					.then(() => setIsFollowingTag(true))
+					.then((success) => {
+						success && setIsFollowingTag(true);
+					})
 					.catch((e) =>
 						log('dotcom', 'Bridget getTagClient.follow Error:', e),
 					);
@@ -88,7 +92,9 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 		isFollowingNotifications
 			? void getNotificationsClient()
 					.unfollow(topic)
-					.then(() => setIsFollowingNotifications(false))
+					.then((success) => {
+						success && setIsFollowingNotifications(false);
+					})
 					.catch((e) =>
 						log(
 							'dotcom',
@@ -98,7 +104,9 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 					)
 			: void getNotificationsClient()
 					.follow(topic)
-					.then(() => setIsFollowingNotifications(true))
+					.then((success) => {
+						success && setIsFollowingNotifications(true);
+					})
 					.catch((e) =>
 						log(
 							'dotcom',
