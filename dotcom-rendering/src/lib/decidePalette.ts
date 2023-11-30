@@ -1307,28 +1307,6 @@ const textCarouselTitle = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-/** @deprecated this has been moved to the theme palette (--drop-cap) */
-const textDropCap = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.Analysis: {
-			switch (format.theme) {
-				case Pillar.News:
-					return news[300];
-				default:
-					return pillarPalette[format.theme].main;
-			}
-		}
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			return format.theme === Pillar.Opinion
-				? pillarPalette[format.theme].main
-				: pillarPalette[format.theme].dark;
-		default:
-			return pillarPalette[format.theme].dark;
-	}
-};
-
 const textBetaLabel = (): string => neutral[46];
 
 const textDesignTag = (format: ArticleFormat): string => {
@@ -1529,16 +1507,6 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
-/** @deprecated use subNavLink in src/palette.ts */
-const textSubNavLink = (format: ArticleFormat) => {
-	switch (format.design) {
-		case ArticleDesign.Picture:
-			return WHITE;
-		default:
-			return palette.neutral[7];
-	}
-};
-
 const discussion = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -1642,7 +1610,6 @@ export const decidePalette = (
 			witnessAuthor: textWitnessAuthor(format),
 			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
-			dropCap: textDropCap(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			cricketScoreboardLink: textCricketScoreboardLink(),
@@ -1654,7 +1621,6 @@ export const decidePalette = (
 			dateLine: textDateLine(format),
 			expandableAtom: textExpandableAtom(format),
 			expandableAtomHover: textExpandableAtomHover(format),
-			subNavLink: textSubNavLink(format),
 			youtubeOverlayKicker: textYoutubeOverlayKicker(format),
 		},
 		background: {

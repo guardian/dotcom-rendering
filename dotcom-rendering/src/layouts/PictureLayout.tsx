@@ -378,9 +378,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 											palette.text.articleLinkHover
 										}
 										borderColour={palette.border.subNav}
-										subNavLinkColour={
-											palette.text.subNavLink
-										}
+										subNavLinkColour={themePalette(
+											'--sub-nav-link',
+										)}
 									/>
 								</Island>
 							</Section>

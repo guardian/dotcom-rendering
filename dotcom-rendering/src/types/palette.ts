@@ -27,7 +27,6 @@ export type Palette = {
 		witnessTitle: Colour;
 		carouselTitle: Colour;
 		pagination: Colour;
-		dropCap: Colour;
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
@@ -39,7 +38,6 @@ export type Palette = {
 		dateLine: Colour;
 		expandableAtom: Colour;
 		expandableAtomHover: Colour;
-		subNavLink: Colour;
 		youtubeOverlayKicker: Colour;
 	};
 	background: {
