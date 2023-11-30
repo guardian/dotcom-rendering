@@ -147,7 +147,7 @@ export const splitTheme =
 				css={[
 					css`
 						background-color: ${sourcePalette.neutral[100]};
-						color: ${sourcePalette.neutral[7]};
+						color: ${sourcePalette.neutral[0]};
 					`,
 					css(paletteDeclarations(defaultFormats[0], 'light')),
 				]}
@@ -165,7 +165,7 @@ export const splitTheme =
 				css={[
 					css`
 						background-color: ${sourcePalette.neutral[0]};
-						color: ${sourcePalette.neutral[97]};
+						color: ${sourcePalette.neutral[100]};
 					`,
 					css(paletteDeclarations(defaultFormats[0], 'dark')),
 				]}

@@ -2,12 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	border,
-	brandBorder,
-	brandLine,
 	from,
-	labs,
-	neutral,
 	palette as sourcePalette,
 	space,
 	until,
@@ -390,7 +385,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					)}
 					<Section
 						fullWidth={true}
-						borderColour={brandLine.primary}
+						borderColour={sourcePalette.brand[600]}
 						showTopBorder={false}
 						padSides={false}
 						backgroundColour={sourcePalette.brand[400]}
@@ -470,8 +465,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={labs[400]}
-						borderColour={border.primary}
+						backgroundColour={sourcePalette.labs[400]}
+						borderColour={sourcePalette.neutral[60]}
 						sectionId="labs-header"
 						element="aside"
 					>
@@ -802,7 +797,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -926,7 +921,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -967,7 +962,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						data-print-layout="hide"
 						padSides={false}
 						backgroundColour={sourcePalette.brand[400]}
-						borderColour={brandBorder.primary}
+						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
 					>
