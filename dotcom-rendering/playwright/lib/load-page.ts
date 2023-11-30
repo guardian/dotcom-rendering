@@ -40,13 +40,16 @@ const loadPage = async (
 };
 
 /**
- * Create a POST request to the /Article endpoint so we can override switches
- * in the json sent to DCR
+ * Create a POST request to the /Article endpoint so we can override config
+ * and switches in the json sent to DCR
  */
-const loadPageNoOkta = async (
+const loadPageWithOverrides = async (
 	page: Page,
 	article: DCRArticle,
-	configOverrides?: Record<string, unknown>,
+	overrides?: {
+		configOverrides?: Record<string, unknown>;
+		switchOverrides?: Record<string, unknown>;
+	},
 ): Promise<void> => {
 	const path = `/Article`;
 	await page.route(`${BASE_URL}${path}`, async (route) => {
@@ -54,17 +57,10 @@ const loadPageNoOkta = async (
 			...article,
 			config: {
 				...article.config,
-				...configOverrides,
+				...overrides?.configOverrides,
 				switches: {
 					...article.config.switches,
-					/**
-					 * We want to continue using cookies for signed in features
-					 * until we figure out how to use Okta in e2e testing.
-					 * See https://github.com/guardian/dotcom-rendering/issues/8758
-					 */
-					okta: false,
-					idCookieRefresh: false,
-					userFeaturesDcr: true,
+					...overrides?.switchOverrides,
 				},
 			},
 		};
@@ -79,4 +75,28 @@ const loadPageNoOkta = async (
 	await loadPage(page, path);
 };
 
-export { BASE_URL, loadPage, loadPageNoOkta };
+/**
+ * Allows us to continue using cookies for signed in features
+ * until we figure out how to use Okta in e2e testing.
+ * See https://github.com/guardian/dotcom-rendering/issues/8758
+ */
+const loadPageNoOkta = async (
+	page: Page,
+	article: DCRArticle,
+	overrides?: {
+		configOverrides?: Record<string, unknown>;
+		switchOverrides?: Record<string, unknown>;
+	},
+): Promise<void> => {
+	return loadPageWithOverrides(page, article, {
+		configOverrides: overrides?.configOverrides,
+		switchOverrides: {
+			...overrides?.switchOverrides,
+			okta: false,
+			idCookieRefresh: false,
+			userFeaturesDcr: true,
+		},
+	});
+};
+
+export { BASE_URL, loadPage, loadPageWithOverrides, loadPageNoOkta };

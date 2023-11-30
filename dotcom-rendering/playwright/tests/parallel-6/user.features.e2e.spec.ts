@@ -22,8 +22,11 @@ test.describe('User cookies tests', () => {
 		);
 
 		await loadPageNoOkta(page, standardArticle, {
-			userAttributesApiUrl:
-				'https://members-data-api.theguardian.com/user-attributes',
+			// user-features expects this config to be present
+			configOverrides: {
+				userAttributesApiUrl:
+					'https://members-data-api.theguardian.com/user-attributes',
+			},
 		});
 
 		await membersDataApiPromise;
@@ -66,8 +69,11 @@ test.describe('User cookies tests', () => {
 		);
 
 		await loadPageNoOkta(page, standardArticle, {
-			userAttributesApiUrl:
-				'https://members-data-api.theguardian.com/user-attributes',
+			// user-features expects this config to be present
+			configOverrides: {
+				userAttributesApiUrl:
+					'https://members-data-api.theguardian.com/user-attributes',
+			},
 		});
 
 		await membersDataApiPromise;
