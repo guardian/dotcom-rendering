@@ -570,7 +570,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							{format.theme === ArticleSpecial.Labs ? (
 								<></>
 							) : (
-								<Border format={format} />
+								<Border />
 							)}
 						</GridItem>
 						<GridItem area="headline">

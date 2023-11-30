@@ -2923,17 +2923,7 @@ const liveBlockContainerBackgroundLight: PaletteFunction = () =>
 const liveBlockContainerBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
-const liveBlockBorderTopLight: PaletteFunction = ({ design, theme }) => {
-	if (design === ArticleDesign.DeadBlog) {
-		switch (theme) {
-			case Pillar.Culture:
-				return sourcePalette.culture[350];
-			case Pillar.Opinion:
-				return sourcePalette.opinion[300];
-			default:
-				break;
-		}
-	}
+const liveBlockBorderTopLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[400];
@@ -3344,6 +3334,14 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const ageWarningBackground: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return articleBackgroundLight(format);
+		default:
+			return headlineBackgroundLight(format);
+	}
+};
 const articleTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const articleTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
@@ -3809,6 +3807,10 @@ const paletteColours = {
 	'--pullquote-icon': {
 		light: pullQuoteIconLight,
 		dark: pullQuoteIconDark,
+	},
+	'--age-warning-background': {
+		light: ageWarningBackground,
+		dark: ageWarningBackground,
 	},
 } satisfies PaletteColours;
 

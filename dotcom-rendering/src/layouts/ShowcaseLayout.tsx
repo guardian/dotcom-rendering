@@ -527,7 +527,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border format={format} />
+							<Border />
 						</GridItem>
 						<GridItem area="headline">
 							<PositionHeadline design={format.design}>

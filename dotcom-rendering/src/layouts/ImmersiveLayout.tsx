@@ -486,7 +486,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							{format.design === ArticleDesign.PhotoEssay ? (
 								<></>
 							) : (
-								<Border format={format} />
+								<Border />
 							)}
 						</GridItem>
 						<GridItem area="title" element="aside">
@@ -566,10 +566,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										) : (
 											<DecideLines
 												format={format}
-												color={
-													decidePalette(format).border
-														.article
-												}
+												color={themePalette(
+													'--article-border',
+												)}
 											/>
 										)}
 									</div>

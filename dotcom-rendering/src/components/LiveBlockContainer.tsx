@@ -170,7 +170,6 @@ export const LiveBlockContainer = ({
 						blockId={blockId}
 						isPinnedPost={isPinnedPost}
 						isOriginalPinnedPost={isOriginalPinnedPost}
-						format={format}
 						host={host}
 						pageId={pageId}
 					/>

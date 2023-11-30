@@ -357,7 +357,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						{props.NAV.subNavSections && (
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								element="aside"
 								format={format}
@@ -378,9 +380,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 											palette.text.articleLinkHover
 										}
 										borderColour={palette.border.subNav}
-										subNavLinkColour={
-											palette.text.subNavLink
-										}
+										subNavLinkColour={themePalette(
+											'--sub-nav-link',
+										)}
 									/>
 								</Island>
 							</Section>
@@ -388,7 +390,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 						<Section
 							fullWidth={true}
-							backgroundColour={palette.background.article}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
 							padSides={false}
 							showTopBorder={false}
 							borderColour={palette.border.secondary}
@@ -442,7 +446,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border format={format} />
+							<Border />
 						</GridItem>
 
 						{displayAvatarUrl ? (
