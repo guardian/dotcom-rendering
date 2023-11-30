@@ -982,133 +982,128 @@ export const Carousel = ({
 		[],
 	);
 
+	if (isAndroid) {
+		return null;
+	}
+
 	return (
-		<>
-			{!isAndroid && (
-				<div
-					css={wrapperStyle(trails.length)}
-					data-link-name={formatAttrString(heading)}
-					data-component={
-						isVideoContainer ? 'video-playlist' : undefined
-					}
+		<div
+			css={wrapperStyle(trails.length)}
+			data-link-name={formatAttrString(heading)}
+			data-component={isVideoContainer ? 'video-playlist' : undefined}
+		>
+			<LeftColumn
+				borderType="partial"
+				size={leftColSize}
+				borderColour={carouselColours.borderColour}
+				hasPageSkin={hasPageSkin}
+			>
+				<HeaderAndNav
+					heading={heading}
+					trails={trails}
+					activeDotColour={carouselColours.activeDotColour}
+					titleColour={carouselColours.titleColour}
+					titleHighlightColour={carouselColours.titleHighlightColour}
+					index={index}
+					isCuratedContent={isCuratedContent}
+					goToIndex={goToIndex}
+					url={props.url}
+				/>
+			</LeftColumn>
+			<InlineChevrons
+				trails={trails}
+				carouselColours={carouselColours}
+				index={index}
+				prev={prev}
+				next={next}
+				arrowName={arrowName}
+				isVideoContainer={isVideoContainer}
+				leftColSize={leftColSize}
+				hasPageSkin={hasPageSkin}
+			/>
+			<div
+				css={[
+					containerStyles,
+					containerMargins,
+					!hasPageSkin && containerMarginsFromLeftCol,
+					isVideoContainer && videoContainerMargins,
+				]}
+				data-component={onwardsSource}
+				data-link={formatAttrString(heading)}
+			>
+				<Header
+					heading={heading}
+					trails={trails}
+					carouselColours={carouselColours}
+					index={index}
+					goToIndex={goToIndex}
+					prev={prev}
+					next={next}
+					arrowName={arrowName}
+					isCuratedContent={isCuratedContent}
+					containerType={containerType}
+					hasPageSkin={hasPageSkin}
+					url={props.url}
+				/>
+				<ul
+					css={[
+						carouselStyle,
+						isVideoContainer && videoContainerHeight,
+					]}
+					ref={carouselRef}
+					data-component={`carousel-small | maxIndex-${maxIndex}`}
 				>
-					<LeftColumn
-						borderType="partial"
-						size={leftColSize}
-						borderColour={carouselColours.borderColour}
-						hasPageSkin={hasPageSkin}
-					>
-						<HeaderAndNav
-							heading={heading}
-							trails={trails}
-							activeDotColour={carouselColours.activeDotColour}
-							titleColour={carouselColours.titleColour}
-							titleHighlightColour={
-								carouselColours.titleHighlightColour
-							}
-							index={index}
-							isCuratedContent={isCuratedContent}
-							goToIndex={goToIndex}
-							url={props.url}
-						/>
-					</LeftColumn>
-					<InlineChevrons
-						trails={trails}
-						carouselColours={carouselColours}
-						index={index}
-						prev={prev}
-						next={next}
-						arrowName={arrowName}
-						isVideoContainer={isVideoContainer}
-						leftColSize={leftColSize}
-						hasPageSkin={hasPageSkin}
-					/>
-					<div
-						css={[
-							containerStyles,
-							containerMargins,
-							!hasPageSkin && containerMarginsFromLeftCol,
-							isVideoContainer && videoContainerMargins,
-						]}
-						data-component={onwardsSource}
-						data-link={formatAttrString(heading)}
-					>
-						<Header
-							heading={heading}
-							trails={trails}
-							carouselColours={carouselColours}
-							index={index}
-							goToIndex={goToIndex}
-							prev={prev}
-							next={next}
-							arrowName={arrowName}
-							isCuratedContent={isCuratedContent}
-							containerType={containerType}
-							hasPageSkin={hasPageSkin}
-							url={props.url}
-						/>
-						<ul
-							css={[
-								carouselStyle,
-								isVideoContainer && videoContainerHeight,
-							]}
-							ref={carouselRef}
-							data-component={`carousel-small | maxIndex-${maxIndex}`}
-						>
-							{trails.map((trail, i) => {
-								const {
-									url: linkTo,
-									headline: headlineText,
-									webPublicationDate,
-									format: trailFormat,
-									image,
-									kickerText,
-									branding,
-									discussion,
-									mainMedia,
-								} = trail;
+					{trails.map((trail, i) => {
+						const {
+							url: linkTo,
+							headline: headlineText,
+							webPublicationDate,
+							format: trailFormat,
+							image,
+							kickerText,
+							branding,
+							discussion,
+							mainMedia,
+						} = trail;
 
-								// Don't try to render cards that have no publication date. This property is technically optional
-								// but we rarely if ever expect it not to exist
-								if (!webPublicationDate) return null;
+						// Don't try to render cards that have no publication date. This property is technically optional
+						// but we rarely if ever expect it not to exist
+						if (!webPublicationDate) return null;
 
-								const imageUrl =
-									image && getSourceImageUrl(image);
+						const imageUrl = image && getSourceImageUrl(image);
 
-								const imageLoading = i > 3 ? 'lazy' : 'eager';
+						const imageLoading = i > 3 ? 'lazy' : 'eager';
 
-								return (
-									<CarouselCard
-										key={`${trail.url}${i}`}
-										isFirst={i === 0}
-										format={trailFormat}
-										linkTo={linkTo}
-										headlineText={headlineText}
-										webPublicationDate={webPublicationDate}
-										imageUrl={imageUrl}
-										kickerText={kickerText}
-										dataLinkName={`carousel-small-card-position-${i}`}
-										discussionId={
-											discussion?.isCommentable
-												? discussion.discussionId
-												: undefined
-										}
-										branding={branding}
-										mainMedia={mainMedia}
-										verticalDividerColour={
-											carouselColours.borderColour
-										}
-										onwardsSource={onwardsSource}
-										containerType={containerType}
-										imageLoading={imageLoading}
-										discussionApiUrl={discussionApiUrl}
-									/>
-								);
-							})}
-						</ul>
-					</div>
-				</div>
-			)}
-		</>
+						return (
+							<CarouselCard
+								key={`${trail.url}${i}`}
+								isFirst={i === 0}
+								format={trailFormat}
+								linkTo={linkTo}
+								headlineText={headlineText}
+								webPublicationDate={webPublicationDate}
+								imageUrl={imageUrl}
+								kickerText={kickerText}
+								dataLinkName={`carousel-small-card-position-${i}`}
+								discussionId={
+									discussion?.isCommentable
+										? discussion.discussionId
+										: undefined
+								}
+								branding={branding}
+								mainMedia={mainMedia}
+								verticalDividerColour={
+									carouselColours.borderColour
+								}
+								onwardsSource={onwardsSource}
+								containerType={containerType}
+								imageLoading={imageLoading}
+								discussionApiUrl={discussionApiUrl}
+							/>
+						);
+					})}
+				</ul>
+			</div>
+		</div>
 	);
 };
