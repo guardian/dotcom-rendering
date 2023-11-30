@@ -3,6 +3,7 @@ import { ArticleDesign } from '@guardian/libs';
 import { headline, space, until } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import type { Palette } from '../types/palette';
 
 const tagStyles = (palette: Palette) => css`
@@ -12,9 +13,7 @@ const tagStyles = (palette: Palette) => css`
 	padding: 2px 0 4px 0;
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	line-height: 115%;
-	box-shadow:
-		6px 0 0 ${palette.background.headlineTag},
-		-6px 0 0 ${palette.background.headlineTag};
+	box-shadow: 6px 0 0 ${themePalette('--headline-background')};
 	box-decoration-break: clone;
 	${until.tablet} {
 		${headline.xxxsmall({ fontWeight: 'bold' })}

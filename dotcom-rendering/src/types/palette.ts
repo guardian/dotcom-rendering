@@ -47,7 +47,6 @@ export type Palette = {
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		card: Colour;
-		headline: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
 		richLink: Colour;

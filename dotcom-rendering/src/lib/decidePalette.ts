@@ -590,23 +590,6 @@ const backgroundCard = (format: ArticleFormat): string => {
 	}
 };
 
-/** @deprecated this has been moved to the theme palette (--headline-background) */
-const backgroundHeadline = (format: ArticleFormat): string => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			if (format.theme === ArticleSpecial.SpecialReport)
-				return specialReport[300];
-			return BLACK;
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-			if (format.design === ArticleDesign.Interview) return BLACK;
-			return 'transparent';
-		default:
-			return 'transparent';
-	}
-};
-
 const backgroundBullet = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -1545,7 +1528,6 @@ export const decidePalette = (
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			card: overrides?.background.card ?? backgroundCard(format),
-			headline: backgroundHeadline(format),
 			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
 			richLink: backgroundRichLink(format),
