@@ -132,7 +132,7 @@ const shareCalloutLinkStyles = (
 	:active {
 		border-bottom: 1px solid
 			${useBrandColour
-				? themePalette('--article-border')
+				? brandPalette.border.articleLinkHover
 				: sourcePalette.brand[500]};
 	}
 `;
