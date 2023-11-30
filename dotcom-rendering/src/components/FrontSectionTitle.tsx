@@ -59,8 +59,9 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 			const {
 				branding: { logo },
 				isFrontBranding,
+				isContainerBranding,
 			} = collectionBranding;
-			if (isFrontBranding) {
+			if (isFrontBranding || isContainerBranding) {
 				return (
 					<>
 						<Hide until="leftCol">
@@ -81,10 +82,11 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 		case 'paid-content': {
 			const {
 				isFrontBranding,
+				isContainerBranding,
 				branding: { logo },
 			} = collectionBranding;
 
-			if (isFrontBranding) {
+			if (isFrontBranding || isContainerBranding) {
 				return (
 					<div css={titleStyle}>
 						{title}
@@ -125,9 +127,10 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 		case 'sponsored': {
 			const {
 				branding: { logo, aboutThisLink },
+				isContainerBranding,
 				isFrontBranding,
 			} = collectionBranding;
-			if (isFrontBranding) {
+			if (isFrontBranding || isContainerBranding) {
 				return (
 					<div css={titleStyle}>
 						{title}

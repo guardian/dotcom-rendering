@@ -68,6 +68,9 @@ export const enhanceCollections = ({
 			seriesTag: collection.config.href,
 			cards: allCards,
 			editionId,
+			isContainerBranding:
+				collection.config.metadata?.some((x) => x.type === 'Branded') ||
+				false,
 		});
 
 		const containerPalette = decideContainerPalette(
