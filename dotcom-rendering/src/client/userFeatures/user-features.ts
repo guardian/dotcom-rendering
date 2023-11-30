@@ -54,13 +54,14 @@ const userHasData = () => {
 const validateResponse = (
 	response: unknown,
 ): response is UserFeaturesResponse => {
-	if (!isObject(response)) return false;
-	if (!isBoolean(response.showSupportMessaging)) return false;
-	if (!isObject(response.contentAccess)) return false;
-	if (!isBoolean(response.contentAccess.paidMember)) return false;
-	if (!isBoolean(response.contentAccess.recurringContributor)) return false;
-	if (!isBoolean(response.contentAccess.digitalPack)) return false;
-	return true;
+	return (
+		isObject(response) &&
+		isBoolean(response.showSupportMessaging) &&
+		isObject(response.contentAccess) &&
+		isBoolean(response.contentAccess.paidMember) &&
+		isBoolean(response.contentAccess.recurringContributor) &&
+		isBoolean(response.contentAccess.digitalPack)
+	);
 };
 
 const persistResponse = (JsonResponse: UserFeaturesResponse) => {
