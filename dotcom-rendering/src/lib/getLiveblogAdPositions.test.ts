@@ -51,6 +51,7 @@ describe('get liveblog ad positions', () => {
 			);
 		});
 
+		// 40 blocks is enough that without a limit, there would be more than 8 blocks inserted on both mobile and desktop.
 		const fortyBlocks = Array<Block>(40).fill(block);
 
 		it('On desktop, it should not insert more that 8 slots', () => {
