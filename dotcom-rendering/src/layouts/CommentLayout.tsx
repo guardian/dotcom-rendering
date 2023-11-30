@@ -482,9 +482,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 							</div>
 						</GridItem>
@@ -630,9 +627,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										lang={article.lang}
 										isRightToLeftLang={
 											article.isRightToLeftLang
-										}
-										imagesForAppsLightbox={
-											article.imagesForAppsLightbox
 										}
 									/>
 									{showBodyEndSlot && (
