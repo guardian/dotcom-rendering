@@ -82,7 +82,6 @@ export type Palette = {
 		pinnedPost: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
-		standfirst: Colour;
 		richLink: Colour;
 		navPillar: Colour;
 		lines: Colour;

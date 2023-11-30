@@ -862,15 +862,6 @@ const borderHeadline = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
-/** @deprecated this has been moved to the theme palette (--headline-border) */
-const borderStandfirst = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) {
-		return 'rgba(255,255,255, 0.2)';
-	}
-	if (format.design === ArticleDesign.DeadBlog) return '#BDBDBD';
-	return border.secondary;
-};
-
 const matchTab = (): string => {
 	return border.secondary;
 };
@@ -1548,7 +1539,6 @@ export const decidePalette = (
 			pinnedPost: borderPinnedPost(format),
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
-			standfirst: borderStandfirst(format),
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			lines: overrides?.border.lines ?? borderLines(format),
