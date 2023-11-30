@@ -13,6 +13,7 @@ import {
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
+import { palette as themePalette } from '../../palette';
 import type { Palette } from '../../types/palette';
 
 /* stylelint-disable-next-line color-no-hex */
@@ -131,7 +132,7 @@ const shareCalloutLinkStyles = (
 	:active {
 		border-bottom: 1px solid
 			${useBrandColour
-				? brandPalette.border.articleLinkHover
+				? themePalette('--article-border')
 				: sourcePalette.brand[500]};
 	}
 `;

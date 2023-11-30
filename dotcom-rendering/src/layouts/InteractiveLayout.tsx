@@ -459,7 +459,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								{format.theme === ArticleSpecial.Labs ? (
 									<></>
 								) : (
-									<Border format={format} />
+									<Border />
 								)}
 							</GridItem>
 							<GridItem area="headline">

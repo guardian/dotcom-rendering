@@ -446,7 +446,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border format={format} />
+							<Border />
 						</GridItem>
 
 						{displayAvatarUrl ? (

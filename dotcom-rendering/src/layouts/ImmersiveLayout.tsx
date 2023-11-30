@@ -487,7 +487,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							{format.design === ArticleDesign.PhotoEssay ? (
 								<></>
 							) : (
-								<Border format={format} />
+								<Border />
 							)}
 						</GridItem>
 						<GridItem area="title" element="aside">

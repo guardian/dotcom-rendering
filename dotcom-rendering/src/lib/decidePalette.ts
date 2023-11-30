@@ -1056,18 +1056,6 @@ const borderRichLink: (format: ArticleFormat) => string = (format) => {
 const borderNavPillar: (format: ArticleFormat) => string = (format) =>
 	pillarPalette[format.theme].bright;
 
-/** @deprecated this has been moved to the theme palette (--article-border) */
-const borderArticle: (format: ArticleFormat) => string = (format) => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return transparentColour(neutral[60], 0.3);
-	if (format.design === ArticleDesign.Picture)
-		return transparentColour(neutral[60], 0.5);
-
-	if (format.theme === ArticleSpecial.Labs) return neutral[60];
-
-	return neutral[86];
-};
-
 const borderLines = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	if (
@@ -1563,7 +1551,6 @@ export const decidePalette = (
 			standfirst: borderStandfirst(format),
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
-			article: borderArticle(format),
 			lines: overrides?.border.lines ?? borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),

@@ -499,7 +499,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border format={format} />
+							<Border />
 						</GridItem>
 						<GridItem area="headline">
 							<div css={maxWidth}>

@@ -85,7 +85,6 @@ export type Palette = {
 		standfirst: Colour;
 		richLink: Colour;
 		navPillar: Colour;
-		article: Colour;
 		lines: Colour;
 		matchTab: Colour;
 		activeMatchTab: Colour;
