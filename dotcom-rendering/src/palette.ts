@@ -2923,17 +2923,7 @@ const liveBlockContainerBackgroundLight: PaletteFunction = () =>
 const liveBlockContainerBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
-const liveBlockBorderTopLight: PaletteFunction = ({ design, theme }) => {
-	if (design === ArticleDesign.DeadBlog) {
-		switch (theme) {
-			case Pillar.Culture:
-				return sourcePalette.culture[350];
-			case Pillar.Opinion:
-				return sourcePalette.opinion[300];
-			default:
-				break;
-		}
-	}
+const liveBlockBorderTopLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[400];

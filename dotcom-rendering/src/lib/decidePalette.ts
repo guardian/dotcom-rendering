@@ -760,32 +760,6 @@ const borderSubNav = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-/** @deprecated this has been moved to the theme palette */
-const borderLiveBlock = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.DeadBlog) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[400];
-			case Pillar.Culture:
-				return culture[350];
-			case Pillar.Lifestyle:
-				return lifestyle[400];
-			case Pillar.Sport:
-				return sport[400];
-			case Pillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return labs[400];
-			case ArticleSpecial.SpecialReport:
-				return specialReport[400];
-			case ArticleSpecial.SpecialReportAlt:
-				return news[400];
-		}
-	}
-
-	return pillarPalette[format.theme].main;
-};
-
 const borderPinnedPost = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -1535,7 +1509,6 @@ export const decidePalette = (
 			subNav: borderSubNav(format),
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
-			liveBlock: borderLiveBlock(format),
 			pinnedPost: borderPinnedPost(format),
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
