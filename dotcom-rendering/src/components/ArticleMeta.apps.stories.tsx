@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { StoryObj } from '@storybook/react';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
-import { ArticleMeta as ArticleMetaApps } from './ArticleMetaApps';
+import { ArticleMeta as ArticleMetaApps } from './ArticleMeta.apps';
 
 type StoryArgs = { format: ArticleFormat; isCommentable: boolean };
 
