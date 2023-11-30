@@ -3,8 +3,8 @@ import { getGalleryClient } from '../lib/bridgetApi';
 import { generateImageURL } from '../lib/image';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 
-// Gets assigned a value when the component is rendered
-let imageStore: ImageForAppsLightbox[];
+// Populated when the component is rendered
+let imageStore: ImageForAppsLightbox[] = [];
 
 /**
  * Uses Bridget's Gallery service to open the native lightbox at the provided image element ID.
@@ -15,8 +15,8 @@ export const openLightboxForImageId = (elementId: string): void => {
 		(img) => img.elementId === elementId,
 	);
 
-	// Don't open the lightbox if the currentIndex couldn't be found
-	if (currentIndex == -1) {
+	// Don't open the lightbox if the image wasn't found
+	if (currentIndex === -1) {
 		return;
 	}
 
