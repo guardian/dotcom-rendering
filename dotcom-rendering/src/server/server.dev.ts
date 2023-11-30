@@ -27,6 +27,13 @@ const TAG_FRONT_URL = /^\/(tone|series|profile)\/[a-z-]+/;
 /** assets are paths like /assets/index.xxx.js */
 const ASSETS_URL = /^assets\/.+\.js/;
 
+//editionalise fronts for dev
+const editionalisefront = (url: string): string => {
+	let parts = url.split('/');
+	parts.splice(-1, 0, 'uk');
+	return parts.join('/');
+};
+
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info
 export const devServer = (): Handler => {
@@ -94,7 +101,7 @@ export const devServer = (): Handler => {
 						'https://www.theguardian.com/',
 					).toString();
 					console.info('redirecting to Front:', url);
-					return res.redirect(`/Front/${url}`);
+					return res.redirect(`/Front/${editionalisefront(url)}`);
 				}
 
 				next();
