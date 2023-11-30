@@ -88,16 +88,16 @@ export const LiveBlogBlocksAndAdverts = ({
 		);
 	}
 
-	const webDesktopAdPositions = getLiveblogAdPositions(blocks, true);
-	const webMobileAdPositions = getLiveblogAdPositions(blocks, false);
+	const { mobileAdPositions, desktopAdPositions } =
+		getLiveblogAdPositions(blocks);
 
 	return (
 		<>
 			{blocks.map((block, index) => {
-				const adPositionDesktop = webDesktopAdPositions.indexOf(index);
+				const adPositionDesktop = desktopAdPositions.indexOf(index);
 				const showAdDesktop = adPositionDesktop !== -1;
 
-				const adPositionMobile = webMobileAdPositions.indexOf(index);
+				const adPositionMobile = mobileAdPositions.indexOf(index);
 				const showAdMobile = adPositionMobile !== -1;
 
 				return (

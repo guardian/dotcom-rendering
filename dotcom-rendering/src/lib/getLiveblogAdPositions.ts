@@ -3,10 +3,31 @@ import {
 	shouldDisplayAd,
 } from './liveblogAdSlots';
 
+const getLiveblogAdPositions = (
+	blocks: Block[],
+): { mobileAdPositions: number[]; desktopAdPositions: number[] } => {
+	return {
+		mobileAdPositions: getAdPositionsForScreenSize({
+			blocks,
+			isMobile: true,
+		}),
+		desktopAdPositions: getAdPositionsForScreenSize({
+			blocks,
+			isMobile: false,
+		}),
+	};
+};
+
 /**
  * Decides where ads should be inserted on liveblogs/deadblogs.
  */
-const getLiveblogAdPositions = (blocks: Block[], isMobile: boolean): number[] =>
+const getAdPositionsForScreenSize = ({
+	blocks,
+	isMobile,
+}: {
+	blocks: Block[];
+	isMobile: boolean;
+}): number[] =>
 	blocks.reduce<{
 		heightSinceAd: number;
 		adPositions: number[];
