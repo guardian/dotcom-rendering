@@ -940,11 +940,6 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 	}
 };
 
-/** @deprecated this has been moved to the theme palette (--match-nav-background) */
-const backgroundMatchNav = (): string => {
-	return brandAlt[400];
-};
-
 const backgroundUnderline = (format: ArticleFormat): string =>
 	transparentColour(textCardKicker(format));
 
@@ -1537,7 +1532,6 @@ export const decidePalette = (
 			carouselDot: backgroundCarouselDot(format),
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
-			matchNav: backgroundMatchNav(),
 			analysisUnderline: backgroundUnderline(format),
 			matchStats: backgroundMatchStats(format),
 			filterButton: backgroundFilterButton(),

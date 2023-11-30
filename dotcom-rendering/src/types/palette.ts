@@ -55,7 +55,6 @@ export type Palette = {
 		carouselDot: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
-		matchNav: Colour;
 		analysisUnderline: Colour;
 		matchStats: Colour;
 		filterButton: Colour;
