@@ -13,7 +13,6 @@ import {
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
-import { palette as themePalette } from '../../palette';
 import type { Palette } from '../../types/palette';
 
 /* stylelint-disable-next-line color-no-hex */
