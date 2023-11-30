@@ -10,7 +10,6 @@ import {
 import { decidePalette } from '../lib/decidePalette';
 import { getLargest, getMaster } from '../lib/image';
 import { isWideEnough } from '../lib/lightbox';
-import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { palette as themePalette } from '../palette';
 import type { Switches } from '../types/config';
 import type { ImageBlockElement, RoleType } from '../types/content';
@@ -34,8 +33,6 @@ type Props = {
 	title?: string;
 	isAvatar?: boolean;
 	switches?: Switches;
-	// eslint-disable-next-line react/no-unused-prop-types -- keep this so the diff isn't too big
-	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 const starsWrapper = css`

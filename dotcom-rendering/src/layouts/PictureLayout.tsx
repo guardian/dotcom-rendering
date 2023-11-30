@@ -531,9 +531,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 							</div>
 						</GridItem>
