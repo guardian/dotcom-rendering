@@ -330,6 +330,12 @@ const testLayoutFormats =
 			theme: 'NewsPillar',
 			config: { renderingTarget: 'Apps', darkModeAvailable: true },
 		},
+		{
+			display: 'Standard',
+			design: 'Analysis',
+			theme: 'CulturePillar',
+			config: { renderingTarget: 'Apps', darkModeAvailable: true },
+		},
 	]);
 
 const generateLayoutStories = () => {
