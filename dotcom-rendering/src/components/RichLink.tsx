@@ -221,100 +221,92 @@ export const RichLink = ({
 		: richLinkTitle(parentIsBlog);
 
 	return (
-		<FormatBoundary format={linkFormat}>
-			<div
-				data-print-layout="hide"
-				data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
-				data-component="rich-link"
-				css={[neutralBackground]}
-				data-name={isPlaceholder ? 'placeholder' : ''}
-			>
-				<FormatBoundary format={format}>
-					<a css={richLinkLink} href={url}>
-						<div css={richLinkTopBorder} />
-						{showImage && (
-							<div>
-								<img
-									css={imageStyles}
-									src={imageData.thumbnailUrl}
-									alt={imageData.altText}
-									width={imageData.width}
-									height={imageData.height}
-								/>
-							</div>
-						)}
-						<div css={richLinkElements}>
-							<div css={richLinkHeader}>
-								<div css={richLinkTitlePicker}>
-									{isOpinion && (
-										<>
-											<Hide
-												when="above"
-												breakpoint="wide"
-											>
-												<QuoteIcon
-													colour={themePalette(
-														'--quote-icon-fill',
-													)}
-												/>
-											</Hide>
-											<Hide
-												when="below"
-												breakpoint="wide"
-											>
-												<QuoteIcon
-													colour={themePalette(
-														'--quote-icon-fill',
-													)}
-												/>
-											</Hide>
-										</>
-									)}
-									{linkText}
-								</div>
+		<div
+			data-print-layout="hide"
+			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
+			data-component="rich-link"
+			css={[neutralBackground]}
+			data-name={isPlaceholder ? 'placeholder' : ''}
+		>
+			<FormatBoundary format={linkFormat}>
+				<a css={richLinkLink} href={url}>
+					<div css={richLinkTopBorder} />
+					{showImage && (
+						<div>
+							<img
+								css={imageStyles}
+								src={imageData.thumbnailUrl}
+								alt={imageData.altText}
+								width={imageData.width}
+								height={imageData.height}
+							/>
+						</div>
+					)}
+					<div css={richLinkElements}>
+						<div css={richLinkHeader}>
+							<div css={richLinkTitlePicker}>
 								{isOpinion && (
-									<div css={[byline, textColour]}>
-										{mainContributor}
-									</div>
+									<>
+										<Hide when="above" breakpoint="wide">
+											<QuoteIcon
+												colour={themePalette(
+													'--quote-icon-fill',
+												)}
+											/>
+										</Hide>
+										<Hide when="below" breakpoint="wide">
+											<QuoteIcon
+												colour={themePalette(
+													'--quote-icon-fill',
+												)}
+											/>
+										</Hide>
+									</>
 								)}
-								{starRating !== undefined && (
-									<div css={starWrapper}>
-										<StarRating
-											rating={starRating}
-											size="medium"
-										/>
-									</div>
-								)}
-								{!!(isPaidContent && sponsorName) && (
-									<div css={paidForBranding}>
-										Paid for by {sponsorName}
-									</div>
-								)}
+								{linkText}
 							</div>
-							{!!(isOpinion && contributorImage) && (
-								<div css={contributorImageWrapper}>
-									<Avatar
-										src={contributorImage}
-										alt={mainContributor}
+							{isOpinion && (
+								<div css={[byline, textColour]}>
+									{mainContributor}
+								</div>
+							)}
+							{starRating !== undefined && (
+								<div css={starWrapper}>
+									<StarRating
+										rating={starRating}
+										size="medium"
 									/>
 								</div>
 							)}
-							<div css={richLinkReadMore}>
-								<ArrowInCircle />
-								<div
-									css={
-										isLabs
-											? labsReadMoreTextStyle
-											: readMoreTextStyle
-									}
-								>
-									{readMoreText(contentType)}
+							{!!(isPaidContent && sponsorName) && (
+								<div css={paidForBranding}>
+									Paid for by {sponsorName}
 								</div>
+							)}
+						</div>
+						{!!(isOpinion && contributorImage) && (
+							<div css={contributorImageWrapper}>
+								<Avatar
+									src={contributorImage}
+									alt={mainContributor}
+								/>
+							</div>
+						)}
+						<div css={richLinkReadMore}>
+							<ArrowInCircle />
+							<div
+								css={
+									isLabs
+										? labsReadMoreTextStyle
+										: readMoreTextStyle
+								}
+							>
+								{readMoreText(contentType)}
 							</div>
 						</div>
-					</a>
-				</FormatBoundary>
-			</div>
-		</FormatBoundary>
+					</div>
+				</a>
+			</FormatBoundary>
+		</div>
 	);
 };
