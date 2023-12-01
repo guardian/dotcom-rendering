@@ -126,12 +126,14 @@ export const decideCollectionBranding = ({
 	seriesTag,
 	cards,
 	editionId,
+	isContainerBranding,
 }: {
 	frontBranding: Branding | undefined;
 	couldDisplayFrontBranding: boolean;
 	seriesTag: string | undefined;
 	cards: CardWithBranding[];
 	editionId: EditionId;
+	isContainerBranding: boolean;
 }): CollectionBranding | undefined => {
 	// If this collection is eligible to display front branding
 	// AND there is front branding defined, we should display it
@@ -144,6 +146,7 @@ export const decideCollectionBranding = ({
 			kind,
 			isFrontBranding: true,
 			branding: frontBranding,
+			isContainerBranding,
 		};
 	}
 
@@ -189,5 +192,6 @@ export const decideCollectionBranding = ({
 		kind,
 		isFrontBranding: false,
 		branding,
+		isContainerBranding,
 	};
 };
