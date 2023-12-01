@@ -21,7 +21,6 @@ test.describe('Epics', () => {
 		// Wait for hydration of the Epic
 		// The LiveBlogEpic island does not become visible so we wait for it to be attached
 		await waitForIsland(page, 'LiveBlogEpic', {
-			status: 'hydrated',
 			waitFor: 'attached',
 		});
 

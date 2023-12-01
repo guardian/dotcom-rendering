@@ -74,27 +74,6 @@ const Mock = () => <>🏝️</>;
 	</Island>
 );
 
-() => (
-	<Island
-		priority="enhancement"
-		defer={{ until: 'visible' }}
-		clientOnly={true}
-	>
-		<Mock />
-	</Island>
-);
-
-() => (
-	// @ts-expect-error -- until interaction must have server-rendered fallback
-	<Island
-		priority="enhancement"
-		defer={{ until: 'interaction' }}
-		clientOnly={true}
-	>
-		<Mock />
-	</Island>
-);
-
 // Jest tests
 
 describe('Island: server-side rendering', () => {
