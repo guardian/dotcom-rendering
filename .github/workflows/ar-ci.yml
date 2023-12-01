@@ -26,7 +26,7 @@ jobs:
       - run: corepack enable
 
       # Get the desired version of Node installed
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           cache: yarn
           node-version-file: .nvmrc
