@@ -63,7 +63,6 @@ const nestedStyles = (format: ArticleFormat) => {
 const baseStyles = css`
 	margin-top: ${space[2]}px;
 	margin-bottom: ${space[3]}px;
-	line-height: 22px;
 	max-width: 540px;
 	color: ${palette('--standfirst-text')};
 `;
@@ -89,7 +88,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 									fontWeight: 'light',
 							  })};
 						padding-top: ${space[4]}px;
-						line-height: none;
 						margin-bottom: none;
 						margin-top: none;
 						max-width: 280px;
@@ -109,7 +107,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				${headline.xxsmall({
 					fontWeight: 'bold',
 				})};
-				line-height: none;
 				margin-top: none;
 			`;
 
@@ -131,7 +128,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						${headline.xxsmall({
 							fontWeight: 'light',
 						})};
-						line-height: none;
 						margin-top: none;
 
 						li:before {
@@ -145,7 +141,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						${headline.xxxsmall({
 							fontWeight: 'bold',
 						})};
-						line-height: 20px;
 						margin-top: ${space[1]}px;
 					`;
 				case ArticleDesign.Analysis:
@@ -165,7 +160,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 								${headline.xxxsmall({
 									fontWeight: 'bold',
 								})};
-								line-height: 20px;
 								margin-top: none;
 							`;
 					}
