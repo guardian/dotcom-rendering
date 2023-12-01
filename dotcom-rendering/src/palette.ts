@@ -3941,6 +3941,7 @@ const paletteColours = {
 	'--rich-link-border': {
 		light: richLinkBorderLight,
 		dark: richLinkBorderDark,
+	},
 	'--age-warning-background': {
 		light: ageWarningBackground,
 		dark: ageWarningBackground,
