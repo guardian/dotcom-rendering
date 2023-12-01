@@ -271,6 +271,13 @@ export const BrazeStyleableBannerComponent = (
 			styleCloseBackground: args.styleCloseBackground,
 			styleCloseHover: args.styleCloseHover,
 			ophanComponentId: args.ophanComponentId,
+			reminderStage: args.reminderStage,
+			reminderOption: args.reminderOption,
+			showPrivacyText: args.showPrivacyText,
+			styleReminderButton: args.styleReminderButton,
+			styleReminderButtonBackground: args.styleReminderButtonBackground,
+			styleReminderButtonHover: args.styleReminderButtonHover,
+			styleReminderAnimation: args.styleReminderAnimation,
 		};
 
 		return (
@@ -323,6 +330,13 @@ BrazeStyleableBannerComponent.args = {
 	styleCloseHover: '#e5e5e5',
 	componentName: 'StyleableBannerWithLink',
 	ophanComponentId: 'change_me_ophan_component_id',
+	reminderStage: 'PRE',
+	reminderOption: 'recurring-contribution-upsell',
+	showPrivacyText: 'false',
+	styleReminderButton: '#121212',
+	styleReminderButtonBackground: '#ededed',
+	styleReminderButtonHover: '#dcdcdc',
+	styleReminderAnimation: '#707070',
 };
 
 BrazeStyleableBannerComponent.storyName = 'StyleableBannerWithLink';
