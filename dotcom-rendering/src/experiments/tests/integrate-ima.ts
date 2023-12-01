@@ -3,7 +3,7 @@ import type { ABTest } from '@guardian/ab-core';
 export const integrateIma: ABTest = {
 	id: 'IntegrateIma',
 	start: '2022-07-14',
-	expiry: '2023-07-03',
+	expiry: '2024-02-28',
 	author: 'Zeke Hunter-Green',
 	description:
 		'Test the commercial impact of replacing YouTube ads with Interactive Media Ads on first-party videos',

@@ -2,12 +2,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	border,
-	brandBackground,
-	brandBorder,
 	from,
-	labs,
-	neutral,
+	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source-foundations';
@@ -15,6 +11,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -48,13 +45,13 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail, filterTrails } from '../lib/decideTrail';
+import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
-import type { Palette } from '../types/palette';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -195,13 +192,7 @@ interface AppProps extends CommonProps {
 	renderingTarget: 'Apps';
 }
 
-const Box = ({
-	palette,
-	children,
-}: {
-	palette: Palette;
-	children: React.ReactNode;
-}) => (
+const Box = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			/*
@@ -220,7 +211,7 @@ const Box = ({
 					position: absolute;
 					width: 50%;
 					right: 0;
-					background-color: ${palette.background.headline};
+					background-color: ${themePalette('--headline-background')};
 					${getZIndex('immersiveBlackBox')}
 					top: 0;
 					bottom: 0;
@@ -238,9 +229,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 
 	const showBodyEndSlot =
-		renderingTarget === 'Web' &&
+		isWeb &&
 		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
 			article.config.switches.slotBodyEnd);
 
@@ -248,7 +241,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
-	const showComments = article.isCommentable;
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	const mainMedia = article.mainMediaElements[0];
 
@@ -259,8 +253,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
-
-	const palette = decidePalette(format);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
@@ -309,11 +301,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 		</div>
 	);
 
-	const renderAds = renderingTarget === 'Web' && canRenderAds(article);
+	const renderAds = isWeb && canRenderAds(article);
 
 	return (
 		<>
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<>
 					<div
 						css={css`
@@ -326,7 +318,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							showSideBorders={false}
 							showTopBorder={false}
 							padSides={false}
-							backgroundColour={brandBackground.primary}
+							backgroundColour={sourcePalette.brand[400]}
 							element="nav"
 						>
 							<Nav
@@ -357,8 +349,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={labs[400]}
-								borderColour={border.primary}
+								backgroundColour={sourcePalette.labs[400]}
+								borderColour={sourcePalette.neutral[60]}
 								sectionId="labs-header"
 							>
 								<LabsHeader />
@@ -370,7 +362,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 			<header
 				css={css`
-					background-color: ${palette.background.article};
+					background-color: ${themePalette('--article-background')};
 				`}
 			>
 				<div
@@ -399,7 +391,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
-						imagesForAppsLightbox={article.imagesForAppsLightbox}
 					/>
 				</div>
 				{mainMedia && (
@@ -433,7 +424,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									badge={article.badge?.enhanced}
 								/>
 							</Section>
-							<Box palette={palette}>
+							<Box>
 								<Section
 									verticalMargins={false}
 									padContent={false}
@@ -461,16 +452,23 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 			</header>
 
 			<main data-layout="ImmersiveLayout">
-				{renderingTarget === 'Apps' && (
-					<Island priority="critical" clientOnly={true}>
-						<AdPortals />
-					</Island>
+				{isApps && (
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
-					backgroundColour={decidePalette(format).background.article}
+					backgroundColour={themePalette('--article-background')}
 					element="article"
 				>
 					<ImmersiveGrid>
@@ -488,7 +486,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							{format.design === ArticleDesign.PhotoEssay ? (
 								<></>
 							) : (
-								<Border format={format} />
+								<Border />
 							)}
 						</GridItem>
 						<GridItem area="title" element="aside">
@@ -568,10 +566,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										) : (
 											<DecideLines
 												format={format}
-												color={
-													decidePalette(format).border
-														.article
-												}
+												color={themePalette(
+													'--article-border',
+												)}
 											/>
 										)}
 									</div>
@@ -593,7 +590,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									secondaryDateline={
 										article.webPublicationSecondaryDateDisplay
 									}
-									isCommentable={article.isCommentable}
+									isCommentable={showComments}
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
@@ -636,15 +633,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 								{showBodyEndSlot && (
 									<Island
 										priority="feature"
 										defer={{ until: 'visible' }}
-										clientOnly={true}
 									>
 										<SlotBodyEnd
 											contentType={article.contentType}
@@ -691,8 +684,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons &&
-										renderingTarget === 'Web'
+										article.showBottomSocialButtons && isWeb
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -747,7 +739,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -765,9 +757,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={filterTrails(
-									article.storyPackage.trails,
-								).map(decideTrail)}
+								trails={article.storyPackage.trails.map(
+									decideTrail,
+								)}
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
@@ -779,7 +771,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					</Section>
 				)}
 
-				{renderingTarget === 'Web' && (
+				{isWeb && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
@@ -805,7 +797,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					</Island>
 				)}
 
-				{!isPaidContent && showComments && (
+				{showComments && (
 					<Section
 						fullWidth={true}
 						sectionId="comments"
@@ -828,7 +820,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						/>
 					</Section>
 				)}
-				{renderingTarget === 'Web' && !isPaidContent && (
+				{!isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}
@@ -837,11 +829,15 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
 								priority="feature"
-								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
 								<MostViewedFooterData
@@ -860,7 +856,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -871,26 +867,28 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				)}
 			</main>
 
-			{renderingTarget === 'Web' && props.NAV.subNavSections && (
+			{isWeb && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={palette.text.articleLinkHover}
-							borderColour={palette.border.subNav}
+							linkHoverColour={themePalette(
+								'--article-link-text-hover',
+							)}
+							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>
 			)}
 
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<>
 					<Section
 						fullWidth={true}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
-						borderColour={brandBorder.primary}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
 					>
@@ -907,11 +905,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					</Section>
 
 					<BannerWrapper>
-						<Island
-							priority="feature"
-							defer={{ until: 'idle' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -943,11 +937,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					{renderAds && <MobileStickyContainer />}
 				</>
 			)}
-			{renderingTarget === 'Apps' && (
+			{isApps && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
-					backgroundColour={neutral[97]}
+					backgroundColour={themePalette('--apps-footer-background')}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"

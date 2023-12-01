@@ -1,13 +1,12 @@
 import { getCookie, isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { getOphan } from '../client/ophan/ophan';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useOnce } from '../lib/useOnce';
+import { usePageViewId } from '../lib/usePageViewId';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { Switches } from '../types/config';
-import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
@@ -151,22 +150,6 @@ const ShowSignInGate = ({
 	return <></>;
 };
 
-const usePageViewId = (renderingTarget: RenderingTarget) => {
-	const [id, setId] = useState<string>();
-
-	useEffect(() => {
-		getOphan(renderingTarget)
-			.then(({ pageViewId }) => {
-				setId(pageViewId);
-			})
-			.catch(() => {
-				setId('no-page-view-id-available');
-			});
-	}, [renderingTarget]);
-
-	return id;
-};
-
 const useCheckoutCompleteCookieData = () => {
 	const [data, setData] = useState<CheckoutCompleteCookieData>();
 
@@ -186,8 +169,18 @@ const useCheckoutCompleteCookieData = () => {
 	return data;
 };
 
-// component with conditional logic which determines if a sign in gate
-// should be shown on the current page
+/**
+ * Component with conditional logic which determines if a sign in gate
+ * should be shown on the current page.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * The sign-in gate logic is entirely client-side
+ *
+ * ---
+ *
+ * (No visual story exists)
+ */
 export const SignInGateSelector = ({
 	contentType,
 	sectionId = '',

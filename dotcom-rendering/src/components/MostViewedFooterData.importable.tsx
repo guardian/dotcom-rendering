@@ -1,7 +1,7 @@
 import { joinUrl, log } from '@guardian/libs';
 import { abTestTest } from '../experiments/tests/ab-test-test';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail, filterTrails } from '../lib/decideTrail';
+import { decideTrail } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
@@ -11,6 +11,7 @@ import type {
 	TrailTabType,
 } from '../types/trails';
 import { MostViewedFooter } from './MostViewedFooter.importable';
+import { Placeholder } from './Placeholder';
 
 interface Props {
 	sectionId?: string;
@@ -45,7 +46,7 @@ function buildSectionUrl(
 function transformTabs(tabs: FETrailTabType[]): TrailTabType[] {
 	return tabs.map((tab) => ({
 		...tab,
-		trails: filterTrails(tab.trails).map((trail) => decideTrail(trail)),
+		trails: tab.trails.map((trail) => decideTrail(trail)),
 	}));
 }
 
@@ -108,5 +109,5 @@ export const MostViewedFooterData = ({
 		);
 	}
 
-	return null;
+	return <Placeholder height={360} />;
 };

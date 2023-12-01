@@ -1,5 +1,8 @@
 import { css } from '@emotion/react';
-import { neutral, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	textSans,
+} from '@guardian/source-foundations';
 import { useState } from 'react';
 import { dateFormatter } from '../../lib/discussionDateFormatter';
 import { useInterval } from '../../lib/useInterval';
@@ -12,7 +15,7 @@ type Props = {
 };
 
 const linkStyles = css`
-	color: ${neutral[46]};
+	color: ${sourcePalette.neutral[46]};
 	text-decoration: none;
 	:hover,
 	:focus {

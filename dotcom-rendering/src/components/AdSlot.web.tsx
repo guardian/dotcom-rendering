@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { adSizes, constants } from '@guardian/commercial';
 import type { SlotName } from '@guardian/commercial';
+import { adSizes, constants } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	breakpoints,
@@ -10,7 +10,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { pageSkinContainer } from '../layouts/lib/pageSkin';
+import { Hide } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
 import { TopRightAdSlot } from './TopRightAdSlot';
 
@@ -194,6 +194,12 @@ const merchandisingAdContainerStyles = css`
 const merchandisingAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.billboard.height}px;
+	margin: 12px auto;
+
+	${from.desktop} {
+		margin: 0;
+		padding-bottom: 20px;
+	}
 `;
 
 const inlineAdStyles = css`
@@ -423,7 +429,7 @@ export const AdSlot = ({
 					return (
 						<div
 							className="ad-slot-container"
-							css={[adContainerStyles]}
+							css={adContainerStyles}
 						>
 							<div
 								id="dfp-ad--right"
@@ -455,7 +461,7 @@ export const AdSlot = ({
 			}
 		case 'comments': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id="dfp-ad--comments"
 						className={[
@@ -497,40 +503,38 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<div
-					className="ad-slot-container"
-					css={[adContainerStyles, mostPopContainerStyles]}
-				>
+				<Hide until="tablet">
 					<div
-						id="dfp-ad--mostpop"
-						className={[
-							'js-ad-slot',
-							'ad-slot',
-							'ad-slot--mostpop',
-							'ad-slot--mpu-banner-ad',
-							'ad-slot--rendered',
-						].join(' ')}
-						css={[
-							fluidAdStyles,
-							fluidFullWidthAdStyles,
-							mostPopAdStyles,
-						]}
-						data-link-name="ad slot mostpop"
-						data-name="mostpop"
-						aria-hidden="true"
-					/>
-				</div>
+						className="ad-slot-container"
+						css={[adContainerStyles, mostPopContainerStyles]}
+					>
+						<div
+							id="dfp-ad--mostpop"
+							className={[
+								'js-ad-slot',
+								'ad-slot',
+								'ad-slot--mostpop',
+								'ad-slot--mpu-banner-ad',
+								'ad-slot--rendered',
+							].join(' ')}
+							css={[
+								fluidAdStyles,
+								fluidFullWidthAdStyles,
+								mostPopAdStyles,
+							]}
+							data-link-name="ad slot mostpop"
+							data-name="mostpop"
+							aria-hidden="true"
+						/>
+					</div>
+				</Hide>
 			);
 		}
 		case 'merchandising-high': {
 			return (
 				<div
 					className="ad-slot-container"
-					css={[
-						merchandisingAdContainerStyles,
-						hasPageskin && pageSkinContainer,
-						adContainerStyles,
-					]}
+					css={[merchandisingAdContainerStyles, adContainerStyles]}
 				>
 					<div
 						id="dfp-ad--merchandising-high"
@@ -636,7 +640,7 @@ export const AdSlot = ({
 		case 'inline': {
 			const advertId = `inline${index + 1}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
@@ -646,7 +650,7 @@ export const AdSlot = ({
 							'ad-slot--container-inline',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[inlineAdStyles]}
+						css={inlineAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						aria-hidden="true"
@@ -655,30 +659,37 @@ export const AdSlot = ({
 			);
 		}
 		case 'liveblog-inline': {
-			const advertId = `inline${index}`;
+			const advertId = `inline${index + 1}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div
+					className="ad-slot-container ad-slot-desktop"
+					css={adContainerStyles}
+				>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
 							'js-ad-slot',
 							'ad-slot',
-							`ad-slot--${advertId}`,
 							'ad-slot--liveblog-inline',
+							`ad-slot--${advertId}`,
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[liveblogInlineAdStyles]}
+						css={liveblogInlineAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
+						data-testid={`liveblog-inline--${advertId}`}
 						aria-hidden="true"
 					/>
 				</div>
 			);
 		}
 		case 'liveblog-inline-mobile': {
-			const advertId = `inline${index}`;
+			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div
+					className="ad-slot-container ad-slot-mobile"
+					css={adContainerStyles}
+				>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -688,9 +699,10 @@ export const AdSlot = ({
 							`ad-slot--liveblog-inline--mobile`,
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[liveblogInlineMobileAdStyles]}
+						css={liveblogInlineMobileAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
+						data-testid={`liveblog-inline-mobile--${advertId}`}
 						aria-hidden="true"
 					/>
 				</div>
@@ -699,7 +711,7 @@ export const AdSlot = ({
 		case 'mobile-front': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -721,7 +733,7 @@ export const AdSlot = ({
 		}
 		case 'pageskin': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id="dfp-ad--pageskin-inread"
 						className={[
@@ -744,7 +756,7 @@ export const AdSlot = ({
 		}
 		case 'article-end': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id="dfp-ad--article-end"
 						className={[

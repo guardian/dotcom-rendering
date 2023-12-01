@@ -1,14 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { isString } from '@guardian/libs';
-import {
-	body,
-	from,
-	headline,
-	neutral,
-	space,
-} from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { body, from, headline, space } from '@guardian/source-foundations';
 import { palette } from '../palette';
 import { FirstPublished } from './FirstPublished';
 
@@ -115,6 +108,22 @@ const BlockByline = ({
 	);
 };
 
+const liveBlockContainerStyles = () => css`
+	padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
+	box-sizing: border-box;
+	margin-bottom: ${space[3]}px;
+	background: ${palette('--live-block-container-background')};
+	${from.tablet} {
+		padding: ${space[2]}px ${SIDE_MARGIN}px;
+		padding-left: ${LEFT_MARGIN_DESKTOP}px;
+	}
+`;
+
+const liveBlockBorderStyles = css`
+	border-top: 1px solid ${palette('--live-block-border-top')};
+	border-bottom: 1px solid ${palette('--live-block-border-bottom')};
+`;
+
 export const LiveBlockContainer = ({
 	id,
 	children,
@@ -148,21 +157,10 @@ export const LiveBlockContainer = ({
 			className={['block', isLiveUpdate && 'pending']
 				.filter(isString)
 				.join(' ')}
-			css={css`
-				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
-				box-sizing: border-box;
-				margin-bottom: ${space[3]}px;
-				background: ${neutral[100]};
-				${!isPinnedPost &&
-				`border-top: 1px solid ${
-					decidePalette(format).border.liveBlock
-				};
-				border-bottom: 1px solid ${neutral[86]};`}
-				${from.tablet} {
-					padding: ${space[2]}px ${SIDE_MARGIN}px;
-					padding-left: ${LEFT_MARGIN_DESKTOP}px;
-				}
-			`}
+			css={[
+				liveBlockContainerStyles,
+				!isPinnedPost && liveBlockBorderStyles,
+			]}
 		>
 			<Header>
 				{blockFirstPublished !== undefined && (
@@ -172,7 +170,6 @@ export const LiveBlockContainer = ({
 						blockId={blockId}
 						isPinnedPost={isPinnedPost}
 						isOriginalPinnedPost={isOriginalPinnedPost}
-						format={format}
 						host={host}
 						pageId={pageId}
 					/>

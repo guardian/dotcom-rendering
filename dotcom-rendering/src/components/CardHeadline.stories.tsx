@@ -49,23 +49,28 @@ Article.decorators = [
 export const Analysis: StoryObj = ({ format }: StoryProps) => (
 	<>
 		{smallHeadlineSizes.map((size) => (
-			<div key={size}>
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					showSideBorders={false}
-				>
-					<CardHeadline
-						headlineText={`This is how a ${size} ${
-							Pillar[format.theme] ??
-							ArticleSpecial[format.theme] ??
-							'Unknown'
-						} card headline looks`}
-						format={format}
-						size={size}
-					/>
-				</Section>
-			</div>
+			<Section
+				key={size}
+				fullWidth={true}
+				showTopBorder={false}
+				showSideBorders={false}
+				padBottom={true}
+				backgroundColour={
+					format.theme === ArticleSpecial.SpecialReport
+						? palette.specialReport[300]
+						: undefined
+				}
+			>
+				<CardHeadline
+					headlineText={`This is how a ${size} ${
+						Pillar[format.theme] ??
+						ArticleSpecial[format.theme] ??
+						'Unknown'
+					} card headline looks`}
+					format={format}
+					size={size}
+				/>
+			</Section>
 		))}
 	</>
 );
@@ -127,20 +132,19 @@ Feature.decorators = [
 export const Size: StoryObj = ({ format }: StoryProps) => (
 	<>
 		{smallHeadlineSizes.map((size) => (
-			<div key={size}>
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					showSideBorders={false}
-				>
-					<CardHeadline
-						headlineText={`This is how a ${size} card headline looks`}
-						format={format}
-						size={size}
-					/>
-				</Section>
-				<br />
-			</div>
+			<Section
+				key={size}
+				fullWidth={true}
+				showTopBorder={false}
+				showSideBorders={false}
+				padBottom={true}
+			>
+				<CardHeadline
+					headlineText={`This is how a ${size} card headline looks`}
+					format={format}
+					size={size}
+				/>
+			</Section>
 		))}
 	</>
 );
@@ -158,32 +162,34 @@ Size.decorators = [
 export const MobileSize: StoryObj = ({ format }: StoryProps) => (
 	<>
 		{smallHeadlineSizes.map((size) => (
-			<div key={size}>
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					showSideBorders={false}
-				>
-					<CardHeadline
-						headlineText={`This is how a mobile ${size} card headline looks`}
-						format={format}
-						size="medium"
-						sizeOnMobile={size}
-					/>
-				</Section>
-				<br />
-			</div>
+			<Section
+				key={size}
+				fullWidth={true}
+				showTopBorder={false}
+				showSideBorders={false}
+				padBottom={true}
+			>
+				<CardHeadline
+					headlineText={`This is how a mobile ${size} card headline looks`}
+					format={format}
+					size="medium"
+					sizeOnMobile={size}
+				/>
+			</Section>
 		))}
 	</>
 );
 MobileSize.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		},
-	]),
+	splitTheme(
+		[
+			{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: Pillar.News,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 MobileSize.parameters = {
 	chromatic: {
@@ -297,22 +303,21 @@ Opinion.decorators = [
 export const OpinionKicker: StoryObj = ({ format }: StoryProps) => (
 	<>
 		{smallHeadlineSizes.map((size) => (
-			<div key={size}>
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					showSideBorders={false}
-				>
-					<CardHeadline
-						headlineText={`This is how a ${size} opinion card headline with a kicker and quotes looks`}
-						format={format}
-						showQuotes={true}
-						kickerText="George Monbiot"
-						size={size}
-					/>
-				</Section>
-				<br />
-			</div>
+			<Section
+				key={size}
+				fullWidth={true}
+				showTopBorder={false}
+				showSideBorders={false}
+				padBottom={true}
+			>
+				<CardHeadline
+					headlineText={`This is how a ${size} opinion card headline with a kicker and quotes looks`}
+					format={format}
+					showQuotes={true}
+					kickerText="George Monbiot"
+					size={size}
+				/>
+			</Section>
 		))}
 	</>
 );

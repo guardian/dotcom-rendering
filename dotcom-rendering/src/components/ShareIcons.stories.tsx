@@ -1,4 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { ShareIcons } from './ShareIcons';
 
 export default {
@@ -12,7 +14,7 @@ const defaultFormat = {
 	theme: Pillar.News,
 };
 
-export const Medium = () => {
+export const Medium = ({ format }: StoryProps) => {
 	return (
 		<ShareIcons
 			pageId=""
@@ -25,15 +27,16 @@ export const Medium = () => {
 				'twitter',
 				'whatsApp',
 			]}
-			format={defaultFormat}
+			format={format}
 			size="medium"
 			context="LiveBlock"
 		/>
 	);
 };
 Medium.storyName = 'Medium';
+Medium.decorators = [splitTheme([defaultFormat])];
 
-export const Small = () => {
+export const Small = ({ format }: StoryProps) => {
 	return (
 		<ShareIcons
 			pageId=""
@@ -46,10 +49,11 @@ export const Small = () => {
 				'twitter',
 				'whatsApp',
 			]}
-			format={defaultFormat}
+			format={format}
 			size="small"
 			context="LiveBlock"
 		/>
 	);
 };
 Small.storyName = 'Small';
+Small.decorators = [splitTheme([defaultFormat])];

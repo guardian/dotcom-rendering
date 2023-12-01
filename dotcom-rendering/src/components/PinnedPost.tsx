@@ -3,7 +3,7 @@ import {
 	focusHalo,
 	from,
 	height,
-	neutral,
+	palette as sourcePalette,
 	space,
 	textSans,
 	transitions,
@@ -23,7 +23,7 @@ const pinnedPostContainer = (palette: Palette) => css`
 	border: 3px solid ${palette.border.pinnedPost};
 	padding-bottom: ${space[1]}px;
 	position: relative;
-	background: ${neutral[100]};
+	background: ${sourcePalette.neutral[100]};
 	${from.mobile} {
 		margin-bottom: 34px;
 	}
@@ -57,7 +57,7 @@ const rowStyles = (palette: Palette) => css`
 	display: flex;
 	align-items: center;
 	svg {
-		fill: ${neutral[100]};
+		fill: ${sourcePalette.neutral[100]};
 		height: 32px;
 		margin-bottom: ${space[1]}px;
 	}
@@ -65,7 +65,7 @@ const rowStyles = (palette: Palette) => css`
 
 const timeAgoStyles = css`
 	${textSans.small({ fontWeight: 'bold' })};
-	color: ${neutral[100]};
+	color: ${sourcePalette.neutral[100]};
 	${from.tablet} {
 		margin-left: 28px;
 	}
@@ -75,8 +75,8 @@ const timeAgoStyles = css`
 const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
-		${neutral[100]},
-		${neutral[100]} 40%,
+		${sourcePalette.neutral[100]},
+		${sourcePalette.neutral[100]} 40%,
 		rgba(255, 255, 255, 0)
 	);
 	height: 80px;

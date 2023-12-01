@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import { from, neutral, space } from '@guardian/source-foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source-foundations';
 import { SvgCross } from '@guardian/source-react-components';
 import detectMobile from 'is-mobile';
 import { useEffect, useState } from 'react';
@@ -14,7 +18,7 @@ const buttonStyles = css`
 	left: -36px;
 	top: 0;
 	z-index: 22;
-	background-color: ${neutral[7]};
+	background-color: ${sourcePalette.neutral[7]};
 	height: 32px;
 	width: 32px;
 	border-radius: 50%;
@@ -31,7 +35,7 @@ const buttonStyles = css`
 	}
 
 	svg {
-		fill: ${neutral[100]};
+		fill: ${sourcePalette.neutral[100]};
 	}
 `;
 
@@ -264,7 +268,7 @@ export const YoutubeAtomSticky = ({
 		<div
 			ref={setRef}
 			css={isSticky && stickyContainerStyles(isMainMedia)}
-			data-cy={`youtube-sticky-${uniqueId}`}
+			data-testid={`youtube-sticky-${uniqueId}`}
 			data-is-sticky={isSticky}
 		>
 			<div css={isSticky && stickyStyles(showCloseButton)}>
@@ -281,7 +285,7 @@ export const YoutubeAtomSticky = ({
 						<button
 							css={buttonStyles}
 							onClick={handleCloseClick}
-							data-cy={`youtube-sticky-close-${uniqueId}`}
+							data-testid={`youtube-sticky-close-${uniqueId}`}
 							type="button"
 						>
 							<SvgCross size="medium" />

@@ -30,6 +30,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { renderElement } from '../lib/renderElement';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { DCRArticle } from '../types/frontend';
@@ -73,7 +74,6 @@ const Renderer = ({
 	const output = elements.map((element, index) => {
 		const el = renderElement({
 			format,
-
 			element,
 			host,
 			index,
@@ -84,7 +84,6 @@ const Renderer = ({
 			isAdFreeUser,
 			isSensitive,
 			switches,
-			imagesForAppsLightbox: [],
 		});
 
 		switch (element._type) {
@@ -296,7 +295,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 			)}
 			<header
 				css={css`
-					background-color: ${palette.background.article};
+					background-color: ${themePalette('--article-background')};
 				`}
 			>
 				<NavHeader article={article} NAV={NAV} format={format} />
@@ -323,7 +322,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				showSideBorders={false}
 				shouldCenter={false}
 				padSides={false}
-				backgroundColour={palette.background.article}
+				backgroundColour={themePalette('--article-background')}
 				element="main"
 			>
 				<article
@@ -384,11 +383,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper>
-				<Island
-					priority="feature"
-					defer={{ until: 'idle' }}
-					clientOnly={true}
-				>
+				<Island priority="feature" defer={{ until: 'idle' }}>
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={

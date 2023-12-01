@@ -10,13 +10,11 @@ async function recursivelyFetchConfig(
 	currentConfig?: Config,
 ): Promise<Config> {
 	const path = `/${App}/${Stage}/${Stack}/`;
-	const result = await ssm
-		.getParametersByPath({
-			Path: path,
-			WithDecryption: true,
-			NextToken: nextToken,
-		})
-		.promise();
+	const result = await ssm.getParametersByPath({
+		Path: path,
+		WithDecryption: true,
+		NextToken: nextToken,
+	});
 	const fetchedConfig: Config = {};
 	if (result.Parameters) {
 		result.Parameters.forEach((param) => {

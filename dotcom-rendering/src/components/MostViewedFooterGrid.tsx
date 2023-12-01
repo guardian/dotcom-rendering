@@ -8,6 +8,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useState } from 'react';
+import { palette } from '../palette';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
@@ -66,7 +67,7 @@ const unselectedStyles = css`
 
 const buttonStyles = (isSelected: boolean) => css`
 	${headline.xxxsmall()};
-	color: ${neutral[7]};
+	color: ${palette('--article-text')};
 	margin: 0;
 	border: 0;
 	background: transparent;
@@ -179,7 +180,7 @@ export const MostViewedFooterGrid = ({
 								]}
 								role="none"
 								id={`tabs-popular-${i}-tab`}
-								data-cy={`tab-heading-${i}`}
+								data-testid={`tab-heading-${i}`}
 								key={`tabs-popular-${tab.heading}-tab`}
 								data-link-name={`tab ${i + 1} ${tab.heading}`}
 								data-chromatic="ignore"
@@ -228,7 +229,7 @@ export const MostViewedFooterGrid = ({
 					</h3>
 					<ol
 						css={gridContainer}
-						data-cy={`tab-body-${i}`}
+						data-testid={`tab-body-${i}`}
 						data-link-name={tab.heading}
 						data-link-context={`most-read/${sectionId}`}
 					>

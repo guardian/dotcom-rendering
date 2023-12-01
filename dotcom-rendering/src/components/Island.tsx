@@ -38,33 +38,7 @@ type PriorityProps = {
 
 type IslandProps = {
 	children: JSX.Element;
-	clientOnly?: never;
 } & PriorityProps[keyof PriorityProps];
-
-type ClientOnlyPriorityProps = {
-	critical: {
-		priority: SchedulePriority['critical'];
-		// a critical island should never defer until idle
-		// a ClientOnly island should never defer until interaction
-		defer?: DeferredProps[Exclude<
-			keyof DeferredProps,
-			'idle' | 'interaction'
-		>];
-	};
-	feature: {
-		priority: SchedulePriority['feature'];
-		defer: DeferredProps[Exclude<keyof DeferredProps, 'interaction'>];
-	};
-	enhancement: {
-		priority: SchedulePriority['enhancement'];
-		defer: DeferredProps[Exclude<keyof DeferredProps, 'interaction'>];
-	};
-};
-
-type ClientOnlyIslandProps = {
-	children: JSX.Element;
-	clientOnly: true;
-} & ClientOnlyPriorityProps[keyof ClientOnlyPriorityProps];
 
 /**
  * Adds interactivity to the client by either hydrating or inserting content.
@@ -72,15 +46,15 @@ type ClientOnlyIslandProps = {
  * Note. The component passed as children must follow the [MyComponent].importable.tsx
  * namimg convention
  *
- * @param {IslandProps | ClientOnlyIslandProps} props - JSX Props
+ * @param {IslandProps } props - JSX Props
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
  */
 export const Island = ({
 	priority,
-	clientOnly,
+
 	defer,
 	children,
-}: IslandProps | ClientOnlyIslandProps) => {
+}: IslandProps) => {
 	/**
 	 * Where is this coming from?
 	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
@@ -99,23 +73,13 @@ export const Island = ({
 			priority={priority}
 			deferUntil={defer?.until}
 			props={JSON.stringify(children.props)}
-			clientOnly={clientOnly}
 			rootMargin={rootMargin}
 			config={JSON.stringify(config)}
 		>
-			{clientOnly ? null : children}
+			{children}
 		</gu-island>
 	);
 };
-
-/**
- * If JavaScript is disabled, hide client-only islands
- */
-export const islandNoscriptStyles = `
-<style>
-	gu-island[clientOnly] { display: none; }
-</style>
-`;
 
 /**
  * Used for JSX custom element declaration
@@ -126,7 +90,6 @@ export type GuIsland = {
 	priority: ScheduleOptions['priority'];
 	deferUntil?: NonNullable<IslandProps['defer']>['until'];
 	rootMargin?: string;
-	clientOnly?: boolean;
 	props: string;
 	children: React.ReactNode;
 	/**

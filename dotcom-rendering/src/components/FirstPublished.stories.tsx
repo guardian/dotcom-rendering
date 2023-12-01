@@ -1,4 +1,3 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { FirstPublished } from './FirstPublished';
 
 export default {
@@ -12,11 +11,6 @@ export const Default = () => (
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={false}
 		isOriginalPinnedPost={false}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		}}
 	/>
 );
 
@@ -27,11 +21,6 @@ export const WithFirstPublishedDisplay = () => (
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={false}
 		isOriginalPinnedPost={false}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		}}
 	/>
 );
 
@@ -41,11 +30,6 @@ export const PinnedPost = () => (
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={true}
 		isOriginalPinnedPost={false}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		}}
 	/>
 );
 
@@ -55,10 +39,5 @@ export const OriginalPinnedPost = () => (
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={false}
 		isOriginalPinnedPost={true}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		}}
 	/>
 );

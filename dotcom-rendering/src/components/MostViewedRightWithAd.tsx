@@ -52,7 +52,6 @@ export const MostViewedRightWithAd = ({
 			{!isPaidContent ? (
 				<Island
 					priority="feature"
-					clientOnly={true}
 					defer={{
 						until: 'visible',
 						// Provide a much higher value for the top margin for the intersection observer

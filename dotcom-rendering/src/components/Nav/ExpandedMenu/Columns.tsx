@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	brand,
-	brandAlt,
 	brandText,
 	from,
 	headline,
-	neutral,
+	palette as sourcePalette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
@@ -33,8 +31,12 @@ const columnsStyle = (isImmersive: boolean) => css`
 		position: relative;
 		margin: 0 auto;
 		display: flex;
-		border-left: ${isImmersive ? 'none' : `1px solid ${brand[600]}`};
-		border-right: ${isImmersive ? 'none' : `1px solid ${brand[600]}`};
+		border-left: ${isImmersive
+			? 'none'
+			: `1px solid ${sourcePalette.brand[600]}`};
+		border-right: ${isImmersive
+			? 'none'
+			: `1px solid ${sourcePalette.brand[600]}`};
 	}
 `;
 
@@ -117,7 +119,7 @@ const brandExtensionLink = css`
 	}
 	:hover,
 	:focus {
-		color: ${brandAlt[400]};
+		color: ${sourcePalette.brandAlt[400]};
 	}
 	> * {
 		pointer-events: none;
@@ -150,13 +152,13 @@ const searchInput = css`
 	border: 0;
 	border-radius: 1000px;
 	box-sizing: border-box;
-	color: ${neutral[100]};
+	color: ${sourcePalette.neutral[100]};
 	height: 36px;
 	padding-left: 38px;
 	vertical-align: middle;
 	width: 100%;
 	&::placeholder {
-		color: ${neutral[100]};
+		color: ${sourcePalette.neutral[100]};
 	}
 	&:focus {
 		padding-right: 40px;
@@ -175,7 +177,7 @@ const searchGlass = css`
 	position: absolute;
 	left: 7px;
 	top: 7px;
-	fill: ${neutral[100]};
+	fill: ${sourcePalette.neutral[100]};
 `;
 
 const searchSubmit = css`
@@ -190,7 +192,7 @@ const searchSubmit = css`
 	right: 0;
 	top: 0;
 	width: 50px;
-	fill: ${neutral[100]};
+	fill: ${sourcePalette.neutral[100]};
 	&:focus,
 	&:active {
 		opacity: 0;
@@ -238,7 +240,7 @@ export const Columns = ({
 				!hasPageSkin && columnsStyleFromLeftCol,
 			]}
 			role="menubar"
-			data-cy="nav-menu-columns"
+			data-testid="nav-menu-columns"
 		>
 			{nav.pillars.map(
 				(column, i) => (

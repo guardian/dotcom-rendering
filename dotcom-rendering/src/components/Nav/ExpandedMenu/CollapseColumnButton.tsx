@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	brandAlt,
 	brandText,
 	from,
 	headline,
+	palette as sourcePalette,
 	textSans,
 } from '@guardian/source-foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
@@ -64,7 +64,7 @@ const collapseColumnButton = css`
 	}
 	:hover,
 	:focus {
-		color: ${brandAlt[400]};
+		color: ${sourcePalette.brandAlt[400]};
 	}
 `;
 
@@ -101,7 +101,7 @@ export const CollapseColumnButton = ({
 		tabIndex={-1}
 		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 		role="menuitem"
-		data-cy={`column-collapse-${title}`}
+		data-testid={`column-collapse-${title}`}
 		data-link-name={nestedOphanComponents('nav2', `secondary`, title)}
 	>
 		{title}

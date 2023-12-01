@@ -72,6 +72,10 @@ const adStyles = css`
 
 	.ad-slot-container {
 		margin: ${space[3]}px auto;
+		:not(:has(.ad-slot)) {
+			margin: 0;
+		}
+
 		/* this is centring the ad iframe as they are display: inline; elements by default */
 		text-align: center;
 		display: flex;

@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { from, neutral } from '@guardian/source-foundations';
+import { from, palette as sourcePalette } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
+import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
-import type { Palette } from '../../../types/palette';
 import { ContainerOverrides } from '../../ContainerOverrides';
 import { FormatBoundary } from '../../FormatBoundary';
 
@@ -18,7 +18,6 @@ type Props = {
 
 const cardStyles = (
 	format: ArticleFormat,
-	palette: Palette,
 	isDynamo?: true,
 	containerPalette?: DCRContainerPalette,
 ) => {
@@ -48,14 +47,14 @@ const cardStyles = (
 			width: 100%;
 			height: 100%;
 			left: 0;
-			background-color: ${neutral[7]};
+			background-color: ${sourcePalette.neutral[7]};
 			opacity: 0.1;
 		}
 
 		/* a tag specific styles */
 		color: inherit;
 		text-decoration: none;
-		background-color: ${isDynamo ? 'transparent' : palette.background.card};
+		background-color: ${palette('--card-background')};
 	`;
 
 	const decidePaletteBrightness = (thePalette: DCRContainerPalette) => {
@@ -106,19 +105,6 @@ const cardStyles = (
 	}
 
 	switch (format.design) {
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			return css`
-				${baseCardStyles};
-				:hover {
-					/* TODO: This colour is hard coded here because it does not yet
-                           exist in source-foundations. Once it's been added, please
-                           remove this. @siadcock is aware. */
-					/* stylelint-disable-next-line color-no-hex */
-					background-color: #fdf0e8;
-				}
-			`;
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -133,7 +119,7 @@ const cardStyles = (
 			return css`
 				${baseCardStyles};
 				:hover {
-					background-color: ${neutral[93]};
+					background-color: ${palette('--card-background-hover')};
 				}
 			`;
 	}
@@ -141,16 +127,16 @@ const cardStyles = (
 
 const topBarStyles = ({
 	isDynamo,
-	palette,
+	format,
 }: {
 	isDynamo?: true;
-	palette: Palette;
+	format: ArticleFormat;
 }) => {
 	/* Styling for top bar */
 	const baseStyles = css`
 		background-color: ${isDynamo
-			? palette.text.dynamoKicker
-			: palette.topBar.card};
+			? decidePalette(format).text.dynamoKicker
+			: palette('--card-border-top')};
 		content: '';
 		height: 1px;
 		z-index: 2;
@@ -180,7 +166,6 @@ export const CardWrapper = ({
 	containerPalette,
 	isDynamo,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides
@@ -189,8 +174,8 @@ export const CardWrapper = ({
 			>
 				<div
 					css={[
-						cardStyles(format, palette, isDynamo, containerPalette),
-						topBarStyles({ isDynamo, palette }),
+						cardStyles(format, isDynamo, containerPalette),
+						topBarStyles({ isDynamo, format }),
 					]}
 				>
 					{children}

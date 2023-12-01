@@ -1,4 +1,3 @@
-import { filterTrails } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import type { DCRFrontCard } from '../types/front';
 import type { TrailTabType, TrailType } from '../types/trails';
@@ -41,7 +40,7 @@ export const FrontMostViewed = ({
 	const tabs: TrailTabType[] = [
 		{
 			heading: localisedTitle(sectionName, editionId),
-			trails: filterTrails(trails).slice(0, 10),
+			trails: trails.slice(0, 10),
 		},
 	];
 

@@ -61,7 +61,7 @@ export const DocumentBlockComponent = ({
 					height={height}
 					width={width}
 					allowFullScreen={true}
-					data-cy="document-embed"
+					data-testid="document-embed"
 				/>
 				{source === 'DocumentCloud' ? (
 					<LinkButton

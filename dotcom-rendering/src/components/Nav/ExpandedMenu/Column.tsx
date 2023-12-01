@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import {
-	brand,
-	brandAlt,
 	brandText,
 	from,
+	palette as sourcePalette,
 	textSans,
 	until,
 	visuallyHidden,
@@ -32,7 +31,7 @@ const pillarDivider = css`
 			top: 0;
 			bottom: 0;
 			width: 1px;
-			background-color: ${brand[600]};
+			background-color: ${sourcePalette.brand[600]};
 			z-index: 1;
 		}
 	}
@@ -65,7 +64,7 @@ const columnLinkTitle = css`
 
 	:hover,
 	:focus {
-		color: ${brandAlt[400]};
+		color: ${sourcePalette.brandAlt[400]};
 		text-decoration: underline;
 	}
 
@@ -117,13 +116,13 @@ const firstColumnLinks = css`
 		padding-left: 0;
 	}
 	${until.tablet} {
-		background: ${brand[300]};
+		background: ${sourcePalette.brand[300]};
 	}
 `;
 
 const pillarColumnLinks = css`
 	${until.tablet} {
-		background: ${brand[300]};
+		background: ${sourcePalette.brand[300]};
 	}
 `;
 
@@ -149,7 +148,7 @@ export const lineStyle = css`
 	${from.desktop} {
 		display: none;
 	}
-	background-color: ${brand[600]};
+	background-color: ${sourcePalette.brand[600]};
 	content: '';
 	display: block;
 	height: 1px;
@@ -178,7 +177,7 @@ const columnStyle = css`
 		width: 134px;
 		float: left;
 		position: relative;
-		border-left: 1px solid ${brand[600]};
+		border-left: 1px solid ${sourcePalette.brand[600]};
 
 		:after {
 			height: 100%;
@@ -289,7 +288,7 @@ export const Column = ({
 				]}
 				role="menu"
 				id={ariaControls}
-				data-cy={ariaControls}
+				data-testid={ariaControls}
 			>
 				{(column.children ?? []).map((link) => (
 					<li
@@ -310,7 +309,7 @@ export const Column = ({
 								'secondary',
 								link.longTitle,
 							)}
-							data-cy={`column-collapse-sublink-${link.title}`}
+							data-testid={`column-collapse-sublink-${link.title}`}
 							tabIndex={-1}
 						>
 							{link.longTitle}

@@ -2,17 +2,15 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	brandBackground,
-	brandBorder,
-	brandLine,
 	from,
-	neutral,
+	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
@@ -41,9 +39,10 @@ import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail, filterTrails } from '../lib/decideTrail';
+import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
@@ -251,11 +250,15 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 		config: { isPaidContent, host },
 	} = article;
 
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
-	const showComments = article.isCommentable;
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
@@ -263,7 +266,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const renderAds = renderingTarget === 'Web' && canRenderAds(article);
+	const renderAds = isWeb && canRenderAds(article);
 
 	const showSubNavTopBorder = false;
 
@@ -274,7 +277,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	return (
 		<>
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<div>
 					{renderAds && (
 						<Stuck>
@@ -296,7 +299,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
-							backgroundColour={brandBackground.primary}
+							backgroundColour={sourcePalette.brand[400]}
 							element="header"
 						>
 							<Header
@@ -322,10 +325,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						</Section>
 						<Section
 							fullWidth={true}
-							borderColour={brandLine.primary}
+							borderColour={sourcePalette.brand[600]}
 							showTopBorder={false}
 							padSides={false}
-							backgroundColour={brandBackground.primary}
+							backgroundColour={sourcePalette.brand[400]}
 							element="nav"
 							format={format}
 						>
@@ -354,7 +357,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						{props.NAV.subNavSections && (
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								element="aside"
 								format={format}
@@ -375,9 +380,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 											palette.text.articleLinkHover
 										}
 										borderColour={palette.border.subNav}
-										subNavLinkColour={
-											palette.text.subNavLink
-										}
+										subNavLinkColour={themePalette(
+											'--sub-nav-link',
+										)}
 									/>
 								</Island>
 							</Section>
@@ -385,7 +390,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 						<Section
 							fullWidth={true}
-							backgroundColour={palette.background.article}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
 							padSides={false}
 							showTopBorder={false}
 							borderColour={palette.border.secondary}
@@ -408,17 +415,24 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
-				{renderingTarget === 'Apps' && (
-					<Island priority="critical" clientOnly={true}>
-						<AdPortals />
-					</Island>
+				{isApps && (
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={themePalette('--article-background')}
 					element="article"
-					borderColour={palette.border.secondary}
+					borderColour={themePalette('--article-border-secondary')}
 				>
 					<PictureGrid>
 						<GridItem area="title" element="aside">
@@ -432,7 +446,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border format={format} />
+							<Border />
 						</GridItem>
 
 						{displayAvatarUrl ? (
@@ -471,7 +485,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 											cssOverrides={css`
 												display: block;
 											`}
-											color={palette.border.secondary}
+											color={themePalette(
+												'--article-border-secondary',
+											)}
 										/>
 									</div>
 								</div>
@@ -519,9 +535,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 							</div>
 						</GridItem>
@@ -532,7 +545,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={palette.border.secondary}
+									color={themePalette(
+										'--article-border-secondary',
+									)}
 								/>
 							</div>
 						</GridItem>
@@ -551,7 +566,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									secondaryDateline={
 										article.webPublicationSecondaryDateDisplay
 									}
-									isCommentable={article.isCommentable}
+									isCommentable={showComments}
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
@@ -563,7 +578,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						<GridItem area="submeta">
 							<ArticleContainer format={format}>
 								<DecideLines
-									color={palette.border.secondary}
+									color={themePalette(
+										'--article-border-secondary',
+									)}
 									format={format}
 								/>
 								<SubMeta
@@ -578,8 +595,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons &&
-										renderingTarget === 'Web'
+										article.showBottomSocialButtons && isWeb
 									}
 									badge={article.badge?.enhanced}
 								/>
@@ -594,7 +610,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -609,9 +625,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={filterTrails(
-									article.storyPackage.trails,
-								).map(decideTrail)}
+								trails={article.storyPackage.trails.map(
+									decideTrail,
+								)}
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
@@ -623,7 +639,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderingTarget === 'Web' && (
+				{isWeb && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
@@ -646,7 +662,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Island>
 				)}
-				{!isPaidContent && showComments && (
+				{showComments && (
 					<Section
 						fullWidth={true}
 						sectionId="comments"
@@ -670,7 +686,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{renderingTarget === 'Web' && !isPaidContent && (
+				{!isPaidContent && (
 					<Section
 						title="Most viewed"
 						padContent={false}
@@ -679,11 +695,15 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
 								priority="feature"
-								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
 								<MostViewedFooterData
@@ -703,7 +723,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -714,7 +734,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 				)}
 			</main>
 
-			{renderingTarget === 'Web' && props.NAV.subNavSections && (
+			{isWeb && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
@@ -727,13 +747,13 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 				</Section>
 			)}
 
-			{renderingTarget === 'Web' && (
+			{isWeb && (
 				<>
 					<Section
 						fullWidth={true}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
-						borderColour={brandBorder.primary}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
 					>
@@ -750,11 +770,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper>
-						<Island
-							priority="feature"
-							defer={{ until: 'idle' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -786,11 +802,11 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					<MobileStickyContainer />
 				</>
 			)}
-			{renderingTarget === 'Apps' && (
+			{isApps && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
-					backgroundColour={neutral[97]}
+					backgroundColour={themePalette('--apps-footer-background')}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"
