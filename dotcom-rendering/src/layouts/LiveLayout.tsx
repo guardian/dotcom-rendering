@@ -14,6 +14,7 @@ import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -424,9 +425,16 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main data-layout="LiveLayout">
 				{isApps && (
-					<Island priority="critical">
-						<AdPortals rightAlignFrom="wide" />
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals rightAlignFrom="wide" />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				{footballMatchUrl ? (
 					<Section
@@ -719,9 +727,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										switches={article.config.switches}
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
-										imagesForAppsLightbox={
-											article.imagesForAppsLightbox
-										}
 									/>
 								</div>
 							</GridItem>
@@ -907,9 +912,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 														article.config
 															.keywordIds
 													}
-													imagesForAppsLightbox={
-														article.imagesForAppsLightbox
-													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1058,7 +1060,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													isRightToLeftLang={
 														article.isRightToLeftLang
 													}
-													imagesForAppsLightbox={[]}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1248,6 +1249,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							data-link-name="most-popular"
 							data-component="most-popular"
 							leftColSize="wide"
+							backgroundColour={themePalette(
+								'--article-section-background',
+							)}
+							borderColour={themePalette('--article-border')}
+							fontColour={themePalette('--article-section-title')}
 						>
 							<MostViewedFooterLayout renderAds={renderAds}>
 								<Island
