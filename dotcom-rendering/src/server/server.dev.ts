@@ -30,9 +30,19 @@ const ASSETS_URL = /^assets\/.+\.js/;
 //editionalise front url to uk
 const editionalisefront = (url: string): string => {
 	const parts = url.split('/');
-	if (parts.length === 4) {
-		parts.splice(-1, 0, 'uk');
-		return parts.join('/');
+	const editionalisedFronts = [
+		'culture',
+		'sport',
+		'commentisfree',
+		'business',
+		'money',
+		'travel',
+		'lifestyle',
+		'lifeandstyle',
+	];
+	const frontTitle = parts[3];
+	if (frontTitle && editionalisedFronts.includes(frontTitle)) {
+		return url.replace(frontTitle, `uk/${frontTitle}`);
 	}
 	return url;
 };
