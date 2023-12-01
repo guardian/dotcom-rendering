@@ -76,7 +76,6 @@ export const LiveBlock = ({
 					isSensitive={isSensitive}
 					switches={switches}
 					isPinnedPost={isPinnedPost}
-					imagesForAppsLightbox={[]}
 				/>
 			))}
 			<footer

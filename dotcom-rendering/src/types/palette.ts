@@ -21,13 +21,11 @@ export type Palette = {
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
-		richLink: Colour;
 		witnessIcon: Colour;
 		witnessAuthor: Colour;
 		witnessTitle: Colour;
 		carouselTitle: Colour;
 		pagination: Colour;
-		dropCap: Colour;
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
@@ -39,31 +37,24 @@ export type Palette = {
 		dateLine: Colour;
 		expandableAtom: Colour;
 		expandableAtomHover: Colour;
-		subNavLink: Colour;
 		youtubeOverlayKicker: Colour;
 	};
 	background: {
-		article: Colour;
 		analysisContrast: Colour;
 		analysisContrastHover: Colour;
 		audioAtom: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		card: Colour;
-		headline: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
-		standfirst: Colour;
-		richLink: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
 		carouselDot: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
-		matchNav: Colour;
 		analysisUnderline: Colour;
 		matchStats: Colour;
-		ageWarning: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -77,22 +68,16 @@ export type Palette = {
 	fill: {
 		commentCount: Colour;
 		commentCountUntilDesktop: Colour;
-		richLink: Colour;
-		quoteIcon: Colour;
 		guardianLogo: Colour;
 	};
 	border: {
 		subNav: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
-		liveBlock: Colour;
 		pinnedPost: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
-		standfirst: Colour;
-		richLink: Colour;
 		navPillar: Colour;
-		article: Colour;
 		lines: Colour;
 		matchTab: Colour;
 		activeMatchTab: Colour;

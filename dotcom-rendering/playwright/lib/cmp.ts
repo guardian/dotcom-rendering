@@ -1,4 +1,5 @@
 import type { BrowserContext, Page } from '@playwright/test';
+import { addCookie } from './cookies';
 import { waitForIsland } from './islands';
 
 const SP_LAYER1_IFRAME = '[id*="sp_message_iframe"]';
@@ -33,6 +34,7 @@ const cmpRejectAll = async (page: Page): Promise<void> => {
 		.frameLocator(SP_LAYER2_IFRAME)
 		.locator(SP_LAYER2_REJECT_ALL_BUTTON);
 	await rejectAllButton.click();
+	// wait for consent settings to apply
 	await new Promise((r) => setTimeout(r, 2000));
 };
 
@@ -50,6 +52,7 @@ const cmpReconsent = async (page: Page): Promise<void> => {
 		.frameLocator(SP_LAYER2_IFRAME)
 		.locator(SP_LAYER2_ACCEPT_ALL_BUTTON);
 	await acceptAllButton.click();
+	// wait for consent settings to apply
 	await new Promise((r) => setTimeout(r, 2000));
 };
 
@@ -57,14 +60,10 @@ const cmpReconsent = async (page: Page): Promise<void> => {
  * Disable CMP
  */
 const disableCMP = async (context: BrowserContext): Promise<void> => {
-	await context.addCookies([
-		{
-			name: 'gu-cmp-disabled',
-			value: 'true',
-			domain: 'localhost',
-			path: '/',
-		},
-	]);
+	await addCookie(context, {
+		name: 'gu-cmp-disabled',
+		value: 'true',
+	});
 };
 
 export { cmpAcceptAll, cmpReconsent, cmpRejectAll, disableCMP };

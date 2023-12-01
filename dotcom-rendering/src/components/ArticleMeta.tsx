@@ -16,9 +16,8 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
-import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
@@ -110,8 +109,8 @@ const borderColourWhenBackgroundDark = css`
 	}
 `;
 
-const metaExtras = (palette: Palette, isPictureContent: boolean) => css`
-	border-top: 1px solid ${palette.border.article};
+const metaExtras = (isPictureContent: boolean) => css`
+	border-top: 1px solid ${themePalette('--article-border')};
 	flex-grow: 1;
 	padding-top: 6px;
 
@@ -134,8 +133,8 @@ const metaExtras = (palette: Palette, isPictureContent: boolean) => css`
 	}
 `;
 
-const metaNumbers = (palette: Palette, isPictureContent: boolean) => css`
-	border-top: 1px solid ${palette.border.article};
+const metaNumbers = (isPictureContent: boolean) => css`
+	border-top: 1px solid ${themePalette('--article-border')};
 	display: flex;
 	flex-grow: 1;
 
@@ -324,8 +323,6 @@ export const ArticleMeta = ({
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
-	const palette = decidePalette(format);
-
 	const isPictureContent = format.design === ArticleDesign.Picture;
 
 	const { renderingTarget } = useConfig();
@@ -408,7 +405,7 @@ export const ArticleMeta = ({
 									: ''
 							}
 							css={[
-								metaExtras(palette, isPictureContent),
+								metaExtras(isPictureContent),
 								format.design === ArticleDesign.LiveBlog &&
 									css(
 										borderColourWhenBackgroundDark,
@@ -433,7 +430,7 @@ export const ArticleMeta = ({
 								: ''
 						}
 						css={[
-							metaNumbers(palette, isPictureContent),
+							metaNumbers(isPictureContent),
 							format.design === ArticleDesign.LiveBlog &&
 								css(
 									borderColourWhenBackgroundDark,

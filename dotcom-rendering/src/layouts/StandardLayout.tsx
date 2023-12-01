@@ -2,12 +2,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	border,
-	brandBorder,
-	brandLine,
 	from,
-	labs,
-	neutral,
+	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source-foundations';
@@ -16,6 +12,7 @@ import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsEpic } from '../components/AppsEpic.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -362,9 +359,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							showSideBorders={false}
 							padSides={false}
 							shouldCenter={false}
-							backgroundColour={themePalette(
-								'--article-section-background',
-							)}
+							backgroundColour={sourcePalette.brand[400]}
 							element="header"
 						>
 							<Header
@@ -391,12 +386,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					)}
 					<Section
 						fullWidth={true}
-						borderColour={brandLine.primary}
+						borderColour={sourcePalette.brand[600]}
 						showTopBorder={false}
 						padSides={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={sourcePalette.brand[400]}
 						element="nav"
 					>
 						<Nav
@@ -473,8 +466,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={labs[400]}
-						borderColour={border.primary}
+						backgroundColour={sourcePalette.labs[400]}
+						borderColour={sourcePalette.neutral[60]}
 						sectionId="labs-header"
 						element="aside"
 					>
@@ -489,9 +482,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<main data-layout="StandardLayout">
 				{isApps && (
-					<Island priority="critical">
-						<AdPortals />
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				<Section
 					fullWidth={true}
@@ -499,6 +499,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
+					fontColour={themePalette('--article-section-title')}
 					element="article"
 				>
 					<StandardGrid isMatchReport={isMatchReport}>
@@ -549,9 +550,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 							</div>
 						</GridItem>
@@ -570,7 +568,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							{format.theme === ArticleSpecial.Labs ? (
 								<></>
 							) : (
-								<Border format={format} />
+								<Border />
 							)}
 						</GridItem>
 						<GridItem area="headline">
@@ -679,9 +677,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									lang={article.lang}
 									isRightToLeftLang={
 										article.isRightToLeftLang
-									}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
 									}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
@@ -802,7 +797,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -814,7 +809,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true}>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
+					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
@@ -890,6 +892,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
@@ -914,7 +921,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -954,10 +961,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						fullWidth={true}
 						data-print-layout="hide"
 						padSides={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
-						borderColour={brandBorder.primary}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
 					>
@@ -1012,7 +1017,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						fullWidth={true}
 						data-print-layout="hide"
 						backgroundColour={themePalette(
-							'--apps-footer-background',
+							'--article-section-background',
 						)}
 						padSides={false}
 						showSideBorders={false}

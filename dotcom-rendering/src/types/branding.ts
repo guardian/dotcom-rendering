@@ -51,6 +51,11 @@ export type CollectionBranding =
 			 */
 			isFrontBranding: boolean;
 			branding: Branding;
+			/**
+			 * In certain circumstances a collection might display the branding only on its own container.
+			 * is eligible to display a brand logo.
+			 */
+			isContainerBranding: boolean;
 	  }
 	| {
 			/**

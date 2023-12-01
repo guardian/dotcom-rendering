@@ -58,28 +58,35 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 		case 'foundation': {
 			const {
 				branding: { logo },
+				isFrontBranding,
+				isContainerBranding,
 			} = collectionBranding;
-			return (
-				<>
-					<Hide until="leftCol">
-						<Badge imageSrc={logo.src} href={logo.link} />
-					</Hide>
-					<div css={titleStyle}>
-						<Hide from="leftCol">
+			if (isFrontBranding || isContainerBranding) {
+				return (
+					<>
+						<Hide until="leftCol">
 							<Badge imageSrc={logo.src} href={logo.link} />
 						</Hide>
-						{title}
-					</div>
-				</>
-			);
+						<div css={titleStyle}>
+							<Hide from="leftCol">
+								<Badge imageSrc={logo.src} href={logo.link} />
+							</Hide>
+							{title}
+						</div>
+					</>
+				);
+			}
+
+			return <div css={titleStyle}>{title}</div>;
 		}
 		case 'paid-content': {
 			const {
 				isFrontBranding,
+				isContainerBranding,
 				branding: { logo },
 			} = collectionBranding;
 
-			if (isFrontBranding) {
+			if (isFrontBranding || isContainerBranding) {
 				return (
 					<div css={titleStyle}>
 						{title}
@@ -120,19 +127,24 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 		case 'sponsored': {
 			const {
 				branding: { logo, aboutThisLink },
+				isContainerBranding,
+				isFrontBranding,
 			} = collectionBranding;
-			return (
-				<div css={titleStyle}>
-					{title}
-					<>
-						<p css={labelStyles}>{logo.label}</p>
-						<Badge imageSrc={logo.src} href={logo.link} />
-						<a href={aboutThisLink} css={aboutThisLinkStyles}>
-							About this content
-						</a>
-					</>
-				</div>
-			);
+			if (isFrontBranding || isContainerBranding) {
+				return (
+					<div css={titleStyle}>
+						{title}
+						<>
+							<p css={labelStyles}>{logo.label}</p>
+							<Badge imageSrc={logo.src} href={logo.link} />
+							<a href={aboutThisLink} css={aboutThisLinkStyles}>
+								About this content
+							</a>
+						</>
+					</div>
+				);
+			}
+			return <div css={titleStyle}>{title}</div>;
 		}
 		case undefined: {
 			return <div css={titleStyle}>{title}</div>;

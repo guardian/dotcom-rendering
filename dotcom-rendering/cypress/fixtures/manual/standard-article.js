@@ -1474,7 +1474,6 @@ export const Standard = {
 			abElementsManager: true,
 			prebidHeaderBidding: true,
 			idCookieRefresh: true,
-			serverSideLiveblogInlineAds: true,
 			discussionPageSize: true,
 			smartAppBanner: false,
 			abPrebidKargo: true,
