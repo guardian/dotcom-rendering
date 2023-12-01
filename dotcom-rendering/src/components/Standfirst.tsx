@@ -60,6 +60,14 @@ const nestedStyles = (format: ArticleFormat) => {
 	`;
 };
 
+const baseStyles = css`
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[3]}px;
+	line-height: 22px;
+	max-width: 540px;
+	color: ${palette('--standfirst-text')};
+`;
+
 const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
@@ -67,21 +75,11 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.PhotoEssay:
 					if (theme === ArticleSpecial.Labs) {
 						return css`
-							${textSans.large({})};
-							margin-top: ${space[2]}px;
-							margin-bottom: ${space[3]}px;
-							line-height: 22px;
-							max-width: 540px;
-							color: ${palette('--standfirst-text')};
+							${textSans.large()};
 						`;
 					}
 					return css`
-						${headline.xxxsmall({})};
-						margin-top: ${space[2]}px;
-						margin-bottom: ${space[3]}px;
-						line-height: 22px;
-						max-width: 540px;
-						color: ${palette('--standfirst-text')};
+						${headline.xxxsmall()};
 					`;
 				default:
 					return css`
@@ -91,12 +89,14 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 									fontWeight: 'light',
 							  })};
 						padding-top: ${space[4]}px;
-
+						line-height: none;
+						margin-bottom: none;
+						margin-top: none;
 						max-width: 280px;
+
 						${from.tablet} {
 							max-width: 460px;
 						}
-						color: ${palette('--standfirst-text')};
 						li:before {
 							height: 17px;
 							width: 17px;
@@ -109,9 +109,8 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				${headline.xxsmall({
 					fontWeight: 'bold',
 				})};
-				margin-bottom: ${space[3]}px;
-				max-width: 540px;
-				color: ${palette('--standfirst-text')};
+				line-height: none;
+				margin-top: none;
 			`;
 
 		case ArticleDisplay.Showcase:
@@ -132,9 +131,9 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						${headline.xxsmall({
 							fontWeight: 'light',
 						})};
-						margin-bottom: ${space[3]}px;
-						max-width: 540px;
-						color: ${palette('--standfirst-text')};
+						line-height: none;
+						margin-top: none;
+
 						li:before {
 							height: 15px;
 							width: 15px;
@@ -148,30 +147,18 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						})};
 						line-height: 20px;
 						margin-top: ${space[1]}px;
-						margin-bottom: ${space[3]}px;
-						max-width: 540px;
-						color: ${palette('--standfirst-text')};
 					`;
 				case ArticleDesign.Analysis:
 					return css`
 						${headline.xxxsmall()};
-						margin-bottom: ${space[3]}px;
-						max-width: 540px;
-						color: ${palette('--standfirst-text')};
+						margin-top: none;
 					`;
 				default:
 					switch (theme) {
 						case ArticleSpecial.Labs:
 							return css`
 								${textSans.medium()}
-								margin-bottom: ${space[3]}px;
-								max-width: 540px;
-								color: ${palette('--standfirst-text')};
-								a {
-									color: ${palette('--standfirst-link-text')};
-									border-bottom: 1px solid
-										${palette('--standfirst-link-border')};
-								}
+								margin-top: none;
 							`;
 						default:
 							return css`
@@ -179,9 +166,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 									fontWeight: 'bold',
 								})};
 								line-height: 20px;
-								margin-bottom: ${space[3]}px;
-								max-width: 540px;
-								color: ${palette('--standfirst-text')};
+								margin-top: none;
 							`;
 					}
 			}
@@ -201,6 +186,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 			<div
 				css={[
 					nestedStyles(format),
+					baseStyles,
 					standfirstStyles(format),
 					hoverStyles,
 				]}
