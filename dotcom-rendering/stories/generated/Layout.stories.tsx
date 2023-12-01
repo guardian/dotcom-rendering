@@ -768,3 +768,45 @@ export default {
 				}]
 			),
 		];
+
+		export const AppsStandardAnalysisCulturePillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Analysis"
+					theme="CulturePillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardAnalysisCulturePillarLight.storyName = 'Apps: Display: Standard, Design: Analysis, Theme: CulturePillar, Mode: Light';
+		AppsStandardAnalysisCulturePillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardAnalysisCulturePillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Analysis,
+					theme: {...ArticleSpecial, ...Pillar}.Culture,
+				}]
+			),
+		];
+
+		export const AppsStandardAnalysisCulturePillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Analysis"
+					theme="CulturePillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardAnalysisCulturePillarDark.storyName = 'Apps: Display: Standard, Design: Analysis, Theme: CulturePillar, Mode: Dark';
+		AppsStandardAnalysisCulturePillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardAnalysisCulturePillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Analysis,
+					theme: {...ArticleSpecial, ...Pillar}.Culture,
+				}]
+			),
+		];

@@ -1,4 +1,5 @@
 import type { BrowserContext, Page } from '@playwright/test';
+import { addCookie } from './cookies';
 import { waitForIsland } from './islands';
 
 const SP_LAYER1_IFRAME = '[id*="sp_message_iframe"]';
@@ -11,7 +12,6 @@ const SP_LAYER2_REJECT_ALL_BUTTON = 'button.sp_choice_type_REJECT_ALL';
 
 /**
  * Accept all on the Sourcepoint CMP banner
- * @param page
  */
 const cmpAcceptAll = async (page: Page): Promise<void> => {
 	const acceptAllButton = page
@@ -24,7 +24,6 @@ const cmpAcceptAll = async (page: Page): Promise<void> => {
 
 /**
  * Reject all on the Sourcepoint CMP banner
- * @param page
  */
 const cmpRejectAll = async (page: Page): Promise<void> => {
 	const manageMyCookiesButton = page
@@ -35,6 +34,7 @@ const cmpRejectAll = async (page: Page): Promise<void> => {
 		.frameLocator(SP_LAYER2_IFRAME)
 		.locator(SP_LAYER2_REJECT_ALL_BUTTON);
 	await rejectAllButton.click();
+	// wait for consent settings to apply
 	await new Promise((r) => setTimeout(r, 2000));
 };
 
@@ -42,7 +42,6 @@ const cmpRejectAll = async (page: Page): Promise<void> => {
  * Reconsent on the Sourcepoint CMP banner
  *
  * Clicks the Privacy Settings link in the footer then the Accept All button
- * @param page
  */
 const cmpReconsent = async (page: Page): Promise<void> => {
 	await waitForIsland(page, 'PrivacySettingsLink');
@@ -53,22 +52,18 @@ const cmpReconsent = async (page: Page): Promise<void> => {
 		.frameLocator(SP_LAYER2_IFRAME)
 		.locator(SP_LAYER2_ACCEPT_ALL_BUTTON);
 	await acceptAllButton.click();
+	// wait for consent settings to apply
 	await new Promise((r) => setTimeout(r, 2000));
 };
 
 /**
  * Disable CMP
- * @param page
  */
 const disableCMP = async (context: BrowserContext): Promise<void> => {
-	await context.addCookies([
-		{
-			name: 'gu-cmp-disabled',
-			value: 'true',
-			domain: 'localhost',
-			path: '/',
-		},
-	]);
+	await addCookie(context, {
+		name: 'gu-cmp-disabled',
+		value: 'true',
+	});
 };
 
 export { cmpAcceptAll, cmpReconsent, cmpRejectAll, disableCMP };

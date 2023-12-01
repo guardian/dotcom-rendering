@@ -111,7 +111,7 @@ describe('Liveblogs', function () {
 	 * Note: This test periodically failed when running in TeamCity
 	 * It passes locally _almost_ every time.
 	 *
-	 * Cypress tests have now been disabled in TeamCity
+	 * We've moved away from TeamCity and are currently migrating our tests to Playwright: https://github.com/guardian/dotcom-rendering/issues/9448
 	 */
 	it('should enhance tweets after they have been inserted', function () {
 		const getTwitterIframe = () => {

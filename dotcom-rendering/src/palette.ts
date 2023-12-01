@@ -33,8 +33,6 @@ const pillarPalette = (
 			return sourcePalette.culture[lightness];
 		case Pillar.Opinion:
 			return sourcePalette.opinion[lightness];
-		default:
-			return sourcePalette.news[lightness];
 	}
 };
 
@@ -2521,8 +2519,17 @@ const articleBackgroundDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const articleSectionBackground: PaletteFunction = () =>
-	sourcePalette.brand[400];
+const articleSectionBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
+const articleSectionBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const articleSectionTitleLight: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const articleSectionTitleDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
 
 const articleLinkTextLight: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis) return sourcePalette.news[300];
@@ -2916,17 +2923,7 @@ const liveBlockContainerBackgroundLight: PaletteFunction = () =>
 const liveBlockContainerBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
-const liveBlockBorderTopLight: PaletteFunction = ({ design, theme }) => {
-	if (design === ArticleDesign.DeadBlog) {
-		switch (theme) {
-			case Pillar.Culture:
-				return sourcePalette.culture[350];
-			case Pillar.Opinion:
-				return sourcePalette.opinion[300];
-			default:
-				break;
-		}
-	}
+const liveBlockBorderTopLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[400];
@@ -3337,6 +3334,14 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const ageWarningBackground: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return articleBackgroundLight(format);
+		default:
+			return headlineBackgroundLight(format);
+	}
+};
 const articleTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const articleTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
@@ -3770,8 +3775,12 @@ const paletteColours = {
 		dark: articleBackgroundDark,
 	},
 	'--article-section-background': {
-		light: articleSectionBackground,
-		dark: articleSectionBackground,
+		light: articleSectionBackgroundLight,
+		dark: articleSectionBackgroundDark,
+	},
+	'--article-section-title': {
+		light: articleSectionTitleLight,
+		dark: articleSectionTitleDark,
 	},
 	'--article-link-text': {
 		light: articleLinkTextLight,
@@ -3932,6 +3941,9 @@ const paletteColours = {
 	'--rich-link-border': {
 		light: richLinkBorderLight,
 		dark: richLinkBorderDark,
+	'--age-warning-background': {
+		light: ageWarningBackground,
+		dark: ageWarningBackground,
 	},
 } satisfies PaletteColours;
 

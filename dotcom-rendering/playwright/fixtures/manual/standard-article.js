@@ -1,4 +1,4 @@
-export const Standard = {
+export const standardArticle = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="c0c1beb4b6c6889b095fbb4aef36009222420d65"> <img src="https://media.guim.co.uk/c0c1beb4b6c6889b095fbb4aef36009222420d65/0_184_5015_3009/1000.jpg" alt="The Palace Theatre, London, showing Harry Potter and the Cursed Child" width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">Tickets for the West End show Harry Potter and the Cursed Child at the Palace Theatre, London, are among those targeted by the secondary ticketing industry. </span> <span class="element-image__credit">Photograph: Kirsty Wigglesworth/AP</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
