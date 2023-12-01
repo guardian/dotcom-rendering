@@ -948,28 +948,6 @@ const topBarCard = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const textRichLink = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) return news[300];
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Culture:
-			return culture[350];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return BLACK;
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
 const textPagination = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -993,29 +971,6 @@ const textPagination = (format: ArticleFormat) => {
 
 const hoverStandfirstLink = (format: ArticleFormat): string => {
 	return textStandfirstLink(format);
-};
-
-const borderRichLink: (format: ArticleFormat) => string = (format) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return format.design === ArticleDesign.Analysis
-				? news[300]
-				: news[400];
-		case Pillar.Culture:
-			return culture[350];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
 };
 
 const borderNavPillar: (format: ArticleFormat) => string = (format) =>
@@ -1042,18 +997,6 @@ const borderLines = (format: ArticleFormat): string => {
 	return neutral[86];
 };
 
-const backgroundRichLink = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
 const borderCricketScoreboardTop = (): string => {
 	return sport[300];
 };
@@ -1075,40 +1018,6 @@ const borderSecondary = (format: ArticleFormat) => {
 
 const borderPagination = () => {
 	return neutral[86];
-};
-
-const fillRichLink = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) return news[400];
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Culture:
-			return culture[350];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
-const fillQuoteIcon = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
 };
 
 const backgroundAnalysisContrastColour = (): string => '#F2E8E6';
@@ -1450,7 +1359,6 @@ export const decidePalette = (
 			lastUpdated: textLastUpdated(format),
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),
-			richLink: textRichLink(format),
 			pagination: textPagination(format),
 			witnessIcon: textWitnessIcon(format),
 			witnessAuthor: textWitnessAuthor(format),
@@ -1478,7 +1386,6 @@ export const decidePalette = (
 			card: overrides?.background.card ?? backgroundCard(format),
 			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
-			richLink: backgroundRichLink(format),
 			imageTitle: backgroundImageTitle(format),
 			lightboxDivider: backgroundLightboxDivider(format),
 			speechBubble: backgroundSpeechBubble(format),
@@ -1501,8 +1408,6 @@ export const decidePalette = (
 		fill: {
 			commentCount: fillCommentCount(format),
 			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
-			richLink: fillRichLink(format),
-			quoteIcon: fillQuoteIcon(format),
 			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {
@@ -1512,7 +1417,6 @@ export const decidePalette = (
 			pinnedPost: borderPinnedPost(format),
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
-			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			lines: overrides?.border.lines ?? borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),

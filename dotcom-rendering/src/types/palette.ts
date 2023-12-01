@@ -21,7 +21,6 @@ export type Palette = {
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
-		richLink: Colour;
 		witnessIcon: Colour;
 		witnessAuthor: Colour;
 		witnessTitle: Colour;
@@ -49,7 +48,6 @@ export type Palette = {
 		card: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
-		richLink: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
 		carouselDot: Colour;
@@ -70,8 +68,6 @@ export type Palette = {
 	fill: {
 		commentCount: Colour;
 		commentCountUntilDesktop: Colour;
-		richLink: Colour;
-		quoteIcon: Colour;
 		guardianLogo: Colour;
 	};
 	border: {
@@ -81,7 +77,6 @@ export type Palette = {
 		pinnedPost: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
-		richLink: Colour;
 		navPillar: Colour;
 		lines: Colour;
 		matchTab: Colour;

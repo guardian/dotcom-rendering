@@ -3216,7 +3216,7 @@ const dropCapLight: PaletteFunction = (format) => {
 	}
 };
 
-const dropCapDark: PaletteFunction = ({ design, theme }) => {
+const richLinkFillDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
@@ -3350,6 +3350,108 @@ const mostViewedFooterHoverLight: PaletteFunction = () =>
 const mostViewedFooterHoverDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
+const richLinkTextLight: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Analysis) return sourcePalette.news[300];
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[350];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[7];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+	}
+};
+const richLinkTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+const richLinkBackgroundLight: PaletteFunction = ({ design }) => {
+	return design === ArticleDesign.Analysis
+		? '#F2E8E6'
+		: sourcePalette.neutral[97];
+};
+const richLinkBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
+const richLinkFillLight: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Analysis) return sourcePalette.news[400];
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[350];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+	}
+};
+const richLinkBackgroundHoverLight: PaletteFunction = ({ design }) => {
+	return design === ArticleDesign.Analysis
+		? '#e9d9d5' //not available in colour palette. Check with design to update or change.
+		: sourcePalette.neutral[93];
+};
+const richLinkBackgroundHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+const richLinkHeaderLight: PaletteFunction = () => sourcePalette.neutral[0];
+const richLinkHeaderDark: PaletteFunction = () => sourcePalette.neutral[100];
+const richLinkBrandingTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const richLinkBorderLight: PaletteFunction = ({ design, theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return design === ArticleDesign.Analysis
+				? sourcePalette.news[300]
+				: sourcePalette.news[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[350];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+	}
+};
+const richLinkBorderDark: PaletteFunction = () => sourcePalette.neutral[60];
+const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Analysis && theme === Pillar.News)
+		return sourcePalette.news[300];
+	switch (theme) {
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+		case Pillar.Sport:
+			return pillarPalette(theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
 // '--most-viewed-footer-tab
 // ----- Palette ----- //
 
@@ -3762,7 +3864,7 @@ const paletteColours = {
 	},
 	'--drop-cap': {
 		light: dropCapLight,
-		dark: dropCapDark,
+		dark: richLinkFillDark,
 	},
 	'--apps-epic-background': {
 		light: appsEpicBackgroundLight,
@@ -3807,6 +3909,38 @@ const paletteColours = {
 	'--pullquote-icon': {
 		light: pullQuoteIconLight,
 		dark: pullQuoteIconDark,
+	},
+	'--rich-link-text': {
+		light: richLinkTextLight,
+		dark: richLinkTextDark,
+	},
+	'--rich-link-background': {
+		light: richLinkBackgroundLight,
+		dark: richLinkBackgroundDark,
+	},
+	'--rich-link-fill': {
+		light: richLinkFillLight,
+		dark: richLinkFillDark,
+	},
+	'--rich-link-background-hover': {
+		light: richLinkBackgroundHoverLight,
+		dark: richLinkBackgroundHoverDark,
+	},
+	'--rich-link-header': {
+		light: richLinkHeaderLight,
+		dark: richLinkHeaderDark,
+	},
+	'--rich-link-branding-text': {
+		light: richLinkBrandingTextLight,
+		dark: richLinkHeaderDark,
+	},
+	'--quote-icon-fill': {
+		light: richLinkQuoteFillLight,
+		dark: richLinkFillDark,
+	},
+	'--rich-link-border': {
+		light: richLinkBorderLight,
+		dark: richLinkBorderDark,
 	},
 	'--age-warning-background': {
 		light: ageWarningBackground,
