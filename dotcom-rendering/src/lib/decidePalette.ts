@@ -1020,6 +1020,9 @@ const borderPagination = () => {
 	return neutral[86];
 };
 
+const backgroundAnalysisContrastColour = (): string => '#F2E8E6';
+const backgroundAnalysisContrastHoverColour = (): string => '#e9d9d5';
+
 const backgroundMessageForm = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case Pillar.News:
