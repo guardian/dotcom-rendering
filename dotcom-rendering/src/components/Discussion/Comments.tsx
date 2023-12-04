@@ -211,9 +211,7 @@ export const Comments = ({
 			isClosedForComments,
 		}),
 	);
-	const [isExpanded, setIsExpanded] = useState<boolean>(
-		expanded || window.location.hash === '#comments',
-	);
+	const [isExpanded, setIsExpanded] = useState<boolean>(expanded);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [totalPages, setTotalPages] = useState<number>(0);
 	const [page, setPage] = useState<number>(initialPage ?? 1);
@@ -225,6 +223,10 @@ export const Comments = ({
 		useState<number>(10);
 	const [commentCount, setCommentCount] = useState<number>(0);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
+
+	useEffect(() => {
+		if (window.location.hash === '#comments') setIsExpanded(true);
+	}, []);
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
 
