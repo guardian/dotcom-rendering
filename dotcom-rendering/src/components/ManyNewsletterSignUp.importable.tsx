@@ -135,6 +135,7 @@ export const ManyNewsletterSignUp = () => {
 		}[]
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
+	const [hideForm, setHideForm] = useState(false);
 	const [email, setEmail] = useState('');
 	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const useReCaptcha = isServer
@@ -189,6 +190,9 @@ export const ManyNewsletterSignUp = () => {
 	);
 
 	const removeAll = useCallback(() => {
+		if (status === 'Success') {
+			setHideForm(true);
+		}
 		if (!userCanInteract) {
 			return;
 		}
@@ -206,7 +210,7 @@ export const ManyNewsletterSignUp = () => {
 		}
 
 		setNewslettersToSignUpFor([]);
-	}, [userCanInteract]);
+	}, [userCanInteract, status]);
 
 	useEffect(() => {
 		const signUpButtons = [
@@ -356,7 +360,11 @@ export const ManyNewsletterSignUp = () => {
 	};
 
 	return (
-		<div css={sectionWrapperStyle(newslettersToSignUpFor.length === 0)}>
+		<div
+			css={sectionWrapperStyle(
+				newslettersToSignUpFor.length === 0 || hideForm,
+			)}
+		>
 			<Section
 				backgroundColour={palette.brand[800]}
 				showSideBorders={false}
