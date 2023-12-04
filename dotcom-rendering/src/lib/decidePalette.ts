@@ -58,12 +58,12 @@ const textHeadline = (format: ArticleFormat): string => {
 				case ArticleDesign.PrintShop:
 					switch (format.theme) {
 						case ArticleSpecial.SpecialReport:
-							return WHITE;
+							return palette.neutral[100];
 						default:
-							return BLACK;
+							return palette.neutral[7];
 					}
 				default: {
-					return WHITE;
+					return palette.neutral[100];
 				}
 			}
 		case ArticleDisplay.Showcase:
@@ -73,7 +73,7 @@ const textHeadline = (format: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReport: {
 					switch (format.design) {
 						case ArticleDesign.Interview:
-							return WHITE;
+							return palette.neutral[100];
 						default:
 							return palette.specialReport[100];
 					}
@@ -83,9 +83,9 @@ const textHeadline = (format: ArticleFormat): string => {
 						case ArticleDesign.Interview:
 							return palette.specialReport[800];
 						case ArticleDesign.LiveBlog:
-							return WHITE;
+							return palette.neutral[100];
 						case ArticleDesign.DeadBlog:
-							return BLACK;
+							return palette.neutral[7];
 						default:
 							return palette.neutral[7];
 					}
@@ -112,14 +112,14 @@ const textHeadline = (format: ArticleFormat): string => {
 						case ArticleDesign.Interview:
 						case ArticleDesign.LiveBlog:
 						case ArticleDesign.Picture:
-							return WHITE;
+							return palette.neutral[100];
 						default:
-							return BLACK;
+							return palette.neutral[7];
 					}
 				}
 			}
 		default:
-			return BLACK;
+			return palette.neutral[7];
 	}
 };
 
