@@ -66,6 +66,7 @@ module.exports = {
 		// eslint-config-prettier disables formatting rules that conflict with prettier
 		// needs to go last so it can override other configuration. See https://github.com/prettier/eslint-config-prettier#installation
 		'prettier',
+		'plugin:ssr-friendly/recommended',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -82,6 +83,7 @@ module.exports = {
 		'jsx-expressions',
 		'custom-elements',
 		'unicorn',
+		'ssr-friendly',
 	],
 	rules: {
 		// React, Hooks & JSX
@@ -259,6 +261,13 @@ module.exports = {
 			],
 			rules: {
 				'import/no-default-export': 'off',
+			},
+		},
+		{
+			files: ['src/client/**/*.ts'],
+			rules: {
+				// the modules in the src/client/ directory are meant to run in a browser
+				'ssr-friendly/no-dom-globals-in-module-scope': 'off',
 			},
 		},
 	],
