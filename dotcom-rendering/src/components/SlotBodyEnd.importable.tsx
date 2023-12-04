@@ -218,17 +218,30 @@ export const SlotBodyEnd = ({
 	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount, browserId]);
 
 	useEffect(() => {
-		const additionalSizes: SizeMapping = mpuWhenNoEpicEnabled
-			? { mobile: [adSizes.mpu] }
-			: {};
+		const additionalSizes = (): SizeMapping => {
+			if (mpuWhenNoEpicEnabled) {
+				return { mobile: [adSizes.mpu] };
+			} else if (showPublicGood) {
+				return { mobile: [adSizes.fluid] };
+			}
+			return {};
+		};
 		if (SelectedEpic === null && showArticleEndSlot) {
 			document.dispatchEvent(
 				new CustomEvent('gu.commercial.slot.fill', {
-					detail: { slotId: 'dfp-ad--article-end', additionalSizes },
+					detail: {
+						slotId: 'dfp-ad--article-end',
+						additionalSizes: additionalSizes(),
+					},
 				}),
 			);
 		}
-	}, [SelectedEpic, showArticleEndSlot, mpuWhenNoEpicEnabled]);
+	}, [
+		SelectedEpic,
+		showArticleEndSlot,
+		mpuWhenNoEpicEnabled,
+		showPublicGood,
+	]);
 
 	if (SelectedEpic !== null && SelectedEpic !== undefined) {
 		return (
