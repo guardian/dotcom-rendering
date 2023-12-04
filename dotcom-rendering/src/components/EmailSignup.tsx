@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import {
 	from,
 	headline,
-	neutral,
 	space,
-	sport,
+	palette as sourcePalette,
 	textSans,
 } from '@guardian/source-foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
+import { palette as themePalette } from '../palette';
 import { NewsletterDetail } from './NewsletterDetail';
 
 export type EmailSignUpProps = {
@@ -20,7 +20,7 @@ export type EmailSignUpProps = {
 
 const containerStyles = css`
 	clear: left;
-	border: ${neutral[0]} 3px dashed;
+	border: ${themePalette('--recaptcha-border')} 3px dashed;
 	border-radius: 12px;
 	margin-bottom: ${space[3]}px;
 	padding: ${space[2]}px;
@@ -45,7 +45,7 @@ const titleStyles = (theme: string) => css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	flex-grow: 1;
 	span {
-		color: ${theme === 'news' ? sport[400] : 'inherit'};
+		color: ${theme === 'news' ? sourcePalette.sport[400] : 'inherit'};
 	}
 `;
 
