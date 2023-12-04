@@ -12,7 +12,7 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import type { FormEvent, ReactEventHandler } from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
 // Use the default export instead.
@@ -219,7 +219,7 @@ export const SecureReCAPTCHASignup = ({
 	successDescription,
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
-
+	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
@@ -229,6 +229,9 @@ export const SecureReCAPTCHASignup = ({
 		undefined,
 	);
 
+	useEffect(() => {
+		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
+	}, []);
 	const { renderingTarget } = useConfig();
 
 	const hasResponse = typeof responseOk === 'boolean';
@@ -299,8 +302,6 @@ export const SecureReCAPTCHASignup = ({
 		sendTracking(newsletterId, 'open-captcha', renderingTarget);
 		recaptchaRef.current?.execute();
 	};
-
-	const captchaSiteKey = window.guardian.config.page.googleRecaptchaSiteKey;
 
 	return (
 		<>
