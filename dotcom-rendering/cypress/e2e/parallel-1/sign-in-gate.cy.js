@@ -2,8 +2,7 @@ import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Labs } from '../../../fixtures/generated/articles/Labs';
-import { MorningDate } from '../../lib/mockDate';
-import { AfternoonDate } from '../../lib/mockDate';
+import { MorningDate, AfternoonDate } from '../../lib/mockDate';
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
@@ -95,7 +94,7 @@ describe('Sign In Gate Tests', function () {
 	describe('SignInGateMain', function () {
 		beforeEach(function () {
 			disableCMP();
-			// sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
+			// sign in gate main runs from 0-900000 MVT IDs, so 400 forces user into test
 			setMvtCookie('400000');
 
 			// set article count to be min number to view gate
@@ -123,7 +122,9 @@ describe('Sign In Gate Tests', function () {
 
 		describe('AB Test -> Test varying sign in gate frequency by page view time of day', function () {
 			beforeEach(function () {
-				setMvtCookie('500001');
+				// Putting user into the second half of the audience segment where this
+				// test is running
+				setMvtCookie('500000');
 			});
 
 			it('should load the gate on every article view if user is reading in the morning', function () {
@@ -140,8 +141,8 @@ describe('Sign In Gate Tests', function () {
 
 				scrollToGateForLazyLoading();
 
-				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-				cy.get('[data-cy=sign-in-gate-main_register]')
+				cy.get('[data-testid=sign-in-gate-main]').should('be.visible');
+				cy.get('[data-testid=sign-in-gate-main_register]')
 					.should('have.attr', 'href')
 					.and('contains', 'abTestName%3DSignInGateTimesOfDay');
 			});
@@ -160,7 +161,7 @@ describe('Sign In Gate Tests', function () {
 
 				scrollToGateForLazyLoading();
 
-				cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
+				cy.get('[data-testid=sign-in-gate-main]').should('not.exist');
 			});
 
 			it('should load the gate on every third article view if user is reading at a time other than morning', function () {
@@ -177,8 +178,8 @@ describe('Sign In Gate Tests', function () {
 
 				scrollToGateForLazyLoading();
 
-				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-				cy.get('[data-cy=sign-in-gate-main_register]')
+				cy.get('[data-testid=sign-in-gate-main]').should('be.visible');
+				cy.get('[data-testid=sign-in-gate-main_register]')
 					.should('have.attr', 'href')
 					.and('contains', 'abTestName%3DSignInGateTimesOfDay');
 			});
