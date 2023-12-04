@@ -1,5 +1,5 @@
 import { isNonNullable } from '@guardian/libs';
-import { isServer } from './isServer';
+import { useEffect, useState } from 'react';
 import { useApi } from './useApi';
 
 type CommentCounts = Record<string, number>;
@@ -13,38 +13,40 @@ type CommentCounts = Record<string, number>;
  */
 export const DISCUSSION_ID_DATA_ATTRIBUTE = 'data-discussion-id';
 
-const uniqueDiscussionIds = isServer
-	? undefined
-	: new Set<string>(
-			// create an initial set of IDs by reading what is in the DOM
-			[...document.querySelectorAll(`[${DISCUSSION_ID_DATA_ATTRIBUTE}]`)]
-				.map((element) =>
-					element.getAttribute(DISCUSSION_ID_DATA_ATTRIBUTE),
-				)
-				.filter(isNonNullable),
-	  );
+/**
+ * We only want to create this set on a client, never on the server
+ */
+let uniqueDiscussionIds: Set<string> | undefined;
 
-const getUrl = (base: string, ids: Set<string> | undefined) =>
-	ids
-		? `${base}/getCommentCounts?${new URLSearchParams({
-				'short-urls': [...ids]
-					.sort() // ensures identical sets produce the same query parameter
-					.join(','),
-		  }).toString()}`
-		: undefined;
+/**
+ * Create an initial set of IDs by reading what is in the DOM
+ */
+const getInitialIds = () =>
+	[...document.querySelectorAll(`[${DISCUSSION_ID_DATA_ATTRIBUTE}]`)]
+		.map((element) => element.getAttribute(DISCUSSION_ID_DATA_ATTRIBUTE))
+		.filter(isNonNullable);
 
 export const useCommentCount = (
 	discussionApiUrl: string,
 	shortUrl: string,
 ): number | undefined => {
-	uniqueDiscussionIds?.add(shortUrl);
+	// A falsy value prevents fetching: https://swr.vercel.app/docs/conditional-fetching#conditional
+	const [url, setUrl] = useState<string>();
 
-	/**
-	 * Generate an URL string or `undefined`,
-	 * to enable conditional fetching with SWR.
-	 * @see https://swr.vercel.app/docs/conditional-fetching#conditional
-	 */
-	const url = getUrl(discussionApiUrl, uniqueDiscussionIds);
+	useEffect(() => {
+		uniqueDiscussionIds ??= new Set(getInitialIds());
+		uniqueDiscussionIds.add(shortUrl);
+
+		const getCommentCountUrl = `${discussionApiUrl}/getCommentCounts?${new URLSearchParams(
+			{
+				'short-urls': [...uniqueDiscussionIds]
+					.sort() // ensures identical sets produce the same query parameter
+					.join(','),
+			},
+		).toString()}`;
+
+		setUrl(getCommentCountUrl);
+	}, [discussionApiUrl, shortUrl]);
 
 	const { data } = useApi<CommentCounts>(url);
 
