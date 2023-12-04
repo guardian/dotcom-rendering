@@ -1,5 +1,5 @@
 import { isNonNullable } from '@guardian/libs';
-import { isServer } from './isServer';
+import { useEffect } from 'react';
 import { useApi } from './useApi';
 
 type CommentCounts = Record<string, number>;
@@ -13,16 +13,7 @@ type CommentCounts = Record<string, number>;
  */
 export const DISCUSSION_ID_DATA_ATTRIBUTE = 'data-discussion-id';
 
-const uniqueDiscussionIds = isServer
-	? undefined
-	: new Set<string>(
-			// create an initial set of IDs by reading what is in the DOM
-			[...document.querySelectorAll(`[${DISCUSSION_ID_DATA_ATTRIBUTE}]`)]
-				.map((element) =>
-					element.getAttribute(DISCUSSION_ID_DATA_ATTRIBUTE),
-				)
-				.filter(isNonNullable),
-	  );
+const uniqueDiscussionIds = new Set<string>();
 
 const getUrl = (base: string, ids: Set<string> | undefined) =>
 	ids
@@ -37,7 +28,11 @@ export const useCommentCount = (
 	discussionApiUrl: string,
 	shortUrl: string,
 ): number | undefined => {
-	uniqueDiscussionIds?.add(shortUrl);
+	uniqueDiscussionIds.add(shortUrl);
+
+	useEffect(() => {
+		if (uniqueDiscussionIds.size === 0) setInitialIds();
+	}, []);
 
 	/**
 	 * Generate an URL string or `undefined`,
@@ -53,8 +48,20 @@ export const useCommentCount = (
 
 /** Ensure that we reduce the number of requests to get comment counts */
 export const addDiscussionIds = (ids: string[]): void => {
-	if (!uniqueDiscussionIds) return;
 	for (const id of ids) {
 		uniqueDiscussionIds.add(id);
 	}
+};
+
+/**
+ * Create an initial set of IDs by reading what is in the DOM
+ */
+const setInitialIds = () => {
+	const ids = [
+		...document.querySelectorAll(`[${DISCUSSION_ID_DATA_ATTRIBUTE}]`),
+	]
+		.map((element) => element.getAttribute(DISCUSSION_ID_DATA_ATTRIBUTE))
+		.filter(isNonNullable);
+
+	addDiscussionIds(ids);
 };
