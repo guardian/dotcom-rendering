@@ -5,9 +5,8 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { news } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
-import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { getAllThemes } from '../lib/format';
 import { ArticleContainer } from './ArticleContainer';
 import { ArticleHeadline } from './ArticleHeadline';
@@ -24,6 +23,29 @@ export default {
 };
 
 type StoryArgs = { format: ArticleFormat };
+
+const themeVariations = [
+	Pillar.Sport,
+	Pillar.News,
+	Pillar.Culture,
+	Pillar.Opinion,
+	Pillar.Lifestyle,
+	ArticleSpecial.SpecialReport,
+	ArticleSpecial.SpecialReportAlt,
+	ArticleSpecial.Labs,
+];
+
+const allThemeStandardVariations = themeVariations.map((theme) => ({
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme,
+}));
+
+const allThemeFeatureVariations = themeVariations.map((theme) => ({
+	design: ArticleDesign.Feature,
+	display: ArticleDisplay.Standard,
+	theme,
+}));
 
 export const ArticleStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
@@ -45,15 +67,7 @@ export const ArticleStory: StoryObj = ({ format }: StoryArgs) => {
 	);
 };
 ArticleStory.storyName = 'Article';
-ArticleStory.decorators = [
-	lightDecorator([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
+ArticleStory.decorators = [splitTheme(allThemeStandardVariations)];
 
 export const Feature: StoryObj = ({ format }: StoryArgs) => {
 	return (
@@ -75,15 +89,7 @@ export const Feature: StoryObj = ({ format }: StoryArgs) => {
 	);
 };
 Feature.storyName = 'Feature';
-Feature.decorators = [
-	lightDecorator([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Feature,
-			theme: Pillar.Lifestyle,
-		},
-	]),
-];
+Feature.decorators = [splitTheme(allThemeFeatureVariations)];
 
 export const ShowcaseInterview: StoryObj = ({ format }: StoryArgs) => {
 	return (
@@ -124,7 +130,7 @@ export const ShowcaseInterview: StoryObj = ({ format }: StoryArgs) => {
 };
 ShowcaseInterview.storyName = 'Interview (with showcase)';
 ShowcaseInterview.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Showcase,
 			design: ArticleDesign.Interview,
@@ -172,7 +178,7 @@ export const ShowcaseInterviewNobyline: StoryObj = ({ format }: StoryArgs) => {
 };
 ShowcaseInterviewNobyline.storyName = 'Interview (with showcase and NO BYLINE)';
 ShowcaseInterviewNobyline.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Showcase,
 			design: ArticleDesign.Interview,
@@ -218,7 +224,7 @@ export const Interview: StoryObj = ({ format }: StoryArgs) => {
 };
 Interview.storyName = 'Interview (without showcase)';
 Interview.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Interview,
@@ -265,7 +271,7 @@ export const InterviewSpecialReport: StoryObj = ({ format }: StoryArgs) => {
 InterviewSpecialReport.storyName =
 	'Interview Special Report (without showcase)';
 InterviewSpecialReport.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Interview,
@@ -311,7 +317,7 @@ export const InterviewNoByline: StoryObj = ({ format }: StoryArgs) => {
 };
 InterviewNoByline.storyName = 'Interview (without showcase with NO BYLINE)';
 InterviewNoByline.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Interview,
@@ -341,9 +347,9 @@ export const Comment: StoryObj = ({ format }: StoryArgs) => {
 };
 Comment.storyName = 'Comment';
 Comment.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
-			display: ArticleDisplay.Showcase,
+			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Comment,
 			theme: Pillar.Opinion,
 		},
@@ -378,7 +384,7 @@ const analysisFormats = getAllThemes({
 	design: ArticleDesign.Analysis,
 });
 Analysis.storyName = 'Analysis';
-Analysis.decorators = [lightDecorator(analysisFormats)];
+Analysis.decorators = [splitTheme(analysisFormats)];
 
 export const Gallery: StoryObj = ({ format }: StoryArgs) => {
 	return (
@@ -401,7 +407,7 @@ export const Gallery: StoryObj = ({ format }: StoryArgs) => {
 };
 Gallery.storyName = 'Gallery';
 Gallery.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Gallery,
@@ -431,7 +437,7 @@ export const Review: StoryObj = ({ format }: StoryArgs) => {
 };
 Review.storyName = 'Review';
 Review.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Review,
@@ -461,7 +467,7 @@ export const PhotoEssay: StoryObj = ({ format }: StoryArgs) => {
 };
 PhotoEssay.storyName = 'PhotoEssay';
 PhotoEssay.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.PhotoEssay,
@@ -491,7 +497,7 @@ export const Explainer: StoryObj = ({ format }: StoryArgs) => {
 };
 Explainer.storyName = 'Review';
 Explainer.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Explainer,
@@ -521,7 +527,7 @@ export const Quiz: StoryObj = ({ format }: StoryArgs) => {
 };
 Quiz.storyName = 'Quiz';
 Quiz.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Quiz,
@@ -551,7 +557,7 @@ export const Recipe: StoryObj = ({ format }: StoryArgs) => {
 };
 Recipe.storyName = 'Recipe';
 Recipe.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Recipe,
@@ -581,7 +587,7 @@ export const Immersive: StoryObj = ({ format }: StoryArgs) => {
 };
 Immersive.storyName = 'Immersive';
 Immersive.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Immersive,
 			design: ArticleDesign.Standard,
@@ -611,7 +617,7 @@ export const ImmersiveNoMainMedia: StoryObj = ({ format }: StoryArgs) => {
 };
 ImmersiveNoMainMedia.storyName = 'Printshop (with no main media)';
 ImmersiveNoMainMedia.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Immersive,
 			design: ArticleDesign.PrintShop,
@@ -646,7 +652,7 @@ export const ImmersiveComment: StoryObj = ({ format }: StoryArgs) => {
 };
 ImmersiveComment.storyName = 'Immersive opinion piece';
 ImmersiveComment.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Immersive,
 			design: ArticleDesign.Comment,
@@ -676,7 +682,7 @@ export const Editorial: StoryObj = ({ format }: StoryArgs) => {
 };
 Editorial.storyName = 'Editorial';
 Editorial.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Editorial,
@@ -706,7 +712,7 @@ export const MatchReport: StoryObj = ({ format }: StoryArgs) => {
 };
 MatchReport.storyName = 'MatchReport';
 MatchReport.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.MatchReport,
@@ -715,69 +721,9 @@ MatchReport.decorators = [
 	]),
 ];
 
-export const SpecialReport: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when pillar is SpecialReport"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-SpecialReport.storyName = 'SpecialReport';
-SpecialReport.decorators = [
-	lightDecorator([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: ArticleSpecial.SpecialReport,
-		},
-	]),
-];
-
-export const SpecialReportAlt: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when pillar is SpecialReportAlt"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-SpecialReportAlt.storyName = 'SpecialReportAlt';
-SpecialReportAlt.decorators = [
-	lightDecorator([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: ArticleSpecial.SpecialReportAlt,
-		},
-	]),
-];
-
 export const LiveBlog: StoryObj = ({ format }: StoryArgs) => {
 	return (
-		<Section fullWidth={true}>
+		<Section fullWidth={true} backgroundColour="#AB0613">
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -795,21 +741,8 @@ export const LiveBlog: StoryObj = ({ format }: StoryArgs) => {
 	);
 };
 LiveBlog.storyName = 'LiveBlog';
-LiveBlog.story = {
-	parameters: {
-		backgrounds: {
-			default: 'red',
-			values: [
-				{
-					name: 'red',
-					value: news[300],
-				},
-			],
-		},
-	},
-};
 LiveBlog.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.LiveBlog,
@@ -839,7 +772,7 @@ export const DeadBlog: StoryObj = ({ format }: StoryArgs) => {
 };
 DeadBlog.storyName = 'DeadBlog';
 DeadBlog.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.DeadBlog,
@@ -874,7 +807,7 @@ export const ReviewWithoutStars: StoryObj = ({ format }: StoryArgs) => {
 };
 ReviewWithoutStars.storyName = 'Review without stars';
 ReviewWithoutStars.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Review,
@@ -925,4 +858,4 @@ const ageWarningFormats = [
 	theme: Pillar.News,
 }));
 AgeWarning.storyName = 'with age warning';
-AgeWarning.decorators = [lightDecorator(ageWarningFormats)];
+AgeWarning.decorators = [splitTheme(ageWarningFormats)];
