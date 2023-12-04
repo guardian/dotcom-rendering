@@ -34,7 +34,6 @@ export const FormatBoundary = ({ format, children }: Props) => {
 			data-format-display={format.display}
 			css={[
 				displayContents,
-				paletteDeclarations(format, 'light'),
 				darkModeAvailable &&
 					css`
 						@media (prefers-color-scheme: dark) {
