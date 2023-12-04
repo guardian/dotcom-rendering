@@ -20,6 +20,7 @@ import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
+import { palette } from 'src/palette';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
@@ -37,6 +38,7 @@ type Props = {
 const labelStyles = css`
 	div {
 		${textSans.xsmall({ fontWeight: 'bold' })}
+		color: ${palette('--article-text')}
 	}
 `;
 
