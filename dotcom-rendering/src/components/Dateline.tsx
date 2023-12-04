@@ -1,15 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { textSans, until } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
-
-const captionFont = (palette: Palette) => css`
-	${textSans.xxsmall()};
-	color: ${palette.text.dateLine};
-`;
+import { palette } from '../palette';
 
 const datelineStyles = css`
+	${textSans.xxsmall()};
+	color: ${palette('--dateline')};
 	padding-top: 2px;
 	margin-bottom: 6px;
 `;
@@ -30,9 +26,9 @@ const hoverUnderline = css`
 
 // for liveblog smaller breakpoints article meta is located in the same
 // container as standfirst and needs the same styling as standfirst
-const standfirstColouring = (palette: Palette) => css`
+const standfirstColouring = css`
 	${until.desktop} {
-		color: ${palette.text.standfirst};
+		color: ${palette('--standfirst-text')};
 	}
 `;
 
@@ -50,18 +46,14 @@ export const Dateline = ({
 	secondaryDateline,
 	format,
 }: Props) => {
-	const palette = decidePalette(format);
+	const styles = [
+		datelineStyles,
+		format.design === ArticleDesign.LiveBlog && standfirstColouring,
+	];
 
 	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {
 		return (
-			<details
-				css={[
-					datelineStyles,
-					captionFont(palette),
-					format.design === ArticleDesign.LiveBlog &&
-						standfirstColouring(palette),
-				]}
-			>
+			<details css={styles}>
 				<summary css={primaryStyles}>
 					<span css={hoverUnderline}>{primaryDateline}</span>
 				</summary>
@@ -69,16 +61,5 @@ export const Dateline = ({
 			</details>
 		);
 	}
-	return (
-		<div
-			css={[
-				datelineStyles,
-				captionFont(palette),
-				format.design === ArticleDesign.LiveBlog &&
-					standfirstColouring(palette),
-			]}
-		>
-			{primaryDateline}
-		</div>
-	);
+	return <div css={styles}>{primaryDateline}</div>;
 };

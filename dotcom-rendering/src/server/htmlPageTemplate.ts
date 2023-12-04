@@ -1,6 +1,5 @@
 import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
-import { islandNoscriptStyles } from '../components/Island';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
 import { getFontsCss } from '../lib/fonts-css';
@@ -205,8 +204,13 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: '<!-- no canonical URL -->'
 				}
                 <meta charset="utf-8">
-
-                <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+				${
+					renderingTarget === 'Web'
+						? `<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">`
+						: // We want to disable the pinch-to-zoom in DCAR because
+						  // it interferes with the Android app's article navigation gestures.
+						  `<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">`
+				}
                 ${
 					renderingTarget === 'Web'
 						? `<meta name="theme-color" content="${brandBackground.primary}" />`
@@ -356,8 +360,6 @@ https://workforus.theguardian.com/careers/product-engineering/
 							comscorekw: props.keywords,
 						},
 					).toString()}" />
-
-					${islandNoscriptStyles}
                 </noscript>
 				`
 						: ''

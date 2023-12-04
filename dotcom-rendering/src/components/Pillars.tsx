@@ -44,9 +44,6 @@ const pillarsStyles = (isImmersive: boolean) => css`
 		${from.desktop} {
 			width: ${preLeftColPillarWidth}px;
 		}
-		${from.leftCol} {
-			width: ${pillarWidth}px;
-		}
 		/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 		/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
 		&::before {
@@ -71,6 +68,14 @@ const pillarsStyles = (isImmersive: boolean) => css`
 		}
 		${from.desktop} {
 			height: ${isImmersive ? '48px' : '42px'};
+		}
+	}
+`;
+
+const pillarsStylesFromLeftCol = css`
+	li {
+		${from.leftCol} {
+			width: ${pillarWidth}px;
 		}
 	}
 `;
@@ -110,10 +115,6 @@ const pillarStyle = css`
 		${from.desktop} {
 			width: ${preLeftColFirstPillarWidth}px;
 		}
-
-		${from.leftCol} {
-			width: ${firstPillarWidth}px;
-		}
 		a {
 			padding-left: 20px;
 		}
@@ -122,6 +123,14 @@ const pillarStyle = css`
 	:last-child a:before {
 		${until.desktop} {
 			content: none;
+		}
+	}
+`;
+
+const pillarStyleFromLeftCol = css`
+	:first-of-type {
+		${from.leftCol} {
+			width: ${firstPillarWidth}px;
 		}
 	}
 `;
@@ -191,11 +200,6 @@ const linkStyle = (isImmersive: boolean) => css`
 		height: ${isImmersive ? '48px' : '42px'};
 	}
 
-	${from.wide} {
-		padding-top: ${isImmersive ? '10px' : '7px'};
-		font-size: 24px;
-	}
-
 	:focus:after {
 		transform: translateY(4px);
 	}
@@ -206,6 +210,14 @@ const linkStyle = (isImmersive: boolean) => css`
 		transform: translateY(4px);
 	}
 `;
+
+const linkStyleFromWide = (isImmersive: boolean) => css`
+	${from.wide} {
+		padding-top: ${isImmersive ? '10px' : '7px'};
+		font-size: 24px;
+	}
+`;
+
 const pillarUnderline = (palette: Palette) => css`
 	:after {
 		border-top: 4px solid ${palette.border.navPillar};
@@ -244,6 +256,7 @@ type Props = {
 	selectedPillar?: Pillar;
 	showLastPillarDivider?: boolean;
 	dataLinkName: string;
+	hasPageSkin?: boolean;
 };
 
 export const Pillars = ({
@@ -253,17 +266,28 @@ export const Pillars = ({
 	selectedPillar,
 	showLastPillarDivider = true,
 	dataLinkName,
+	hasPageSkin,
 }: Props) => (
-	<ul data-testid="pillar-list" css={pillarsStyles(isImmersive)}>
+	<ul
+		data-testid="pillar-list"
+		css={[
+			pillarsStyles(isImmersive),
+			!hasPageSkin && pillarsStylesFromLeftCol,
+		]}
+	>
 		{pillars.map((p, i) => {
 			const isSelected = p.pillar === selectedPillar;
 			const showDivider =
 				showLastPillarDivider || isNotLastPillar(i, pillars.length);
 			return (
-				<li key={p.title} css={pillarStyle}>
+				<li
+					key={p.title}
+					css={[pillarStyle, !hasPageSkin && pillarStyleFromLeftCol]}
+				>
 					<a
 						css={[
 							linkStyle(isImmersive),
+							!hasPageSkin && linkStyleFromWide(isImmersive),
 							pillarUnderline(
 								decidePalette({
 									display: ArticleDisplay.Standard,

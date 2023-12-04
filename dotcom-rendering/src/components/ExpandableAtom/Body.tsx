@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { body, neutral, textSans } from '@guardian/source-foundations';
+import {
+	body,
+	palette as sourcePalette,
+	textSans,
+} from '@guardian/source-foundations';
 import { SvgInfo } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 
@@ -22,7 +26,7 @@ const creditStyling = css`
 	align-items: center;
 	svg {
 		width: 30px;
-		fill: ${neutral[60]};
+		fill: ${sourcePalette.neutral[60]};
 	}
 `;
 
@@ -57,7 +61,7 @@ const bodyStyling = css`
 		height: 0.75rem;
 		width: 0.75rem;
 		margin-right: 0.5rem;
-		background-color: ${neutral[86]};
+		background-color: ${sourcePalette.neutral[86]};
 		margin-left: -1.25rem;
 	}
 
@@ -75,7 +79,7 @@ const linkStyling = (format: ArticleFormat) => css`
 	a {
 		color: ${decidePalette(format).text.expandableAtom};
 		text-decoration: none;
-		border-bottom: 0.0625rem solid ${neutral[86]};
+		border-bottom: 0.0625rem solid ${sourcePalette.neutral[86]};
 		transition: border-color 0.15s ease-out;
 	}
 

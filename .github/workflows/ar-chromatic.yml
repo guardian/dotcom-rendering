@@ -4,12 +4,14 @@ on:
   push:
     branches: [main]
   pull_request:
-    types: [opened, labeled, synchronize]
+    types: [opened, labeled, synchronize, ready_for_review]
 
 jobs:
   chromatic:
     name: Chromatic
     runs-on: ubuntu-latest
+    # Don't run Chromatic on draft PRs unless `run_chromatic` label has been applied.
+    if: (contains(github.event.pull_request.labels.*.name, 'run_chromatic') || github.event.pull_request.draft == false)
     steps:
       - name: Checkout - On Pull Request
         uses: actions/checkout@v4
@@ -26,7 +28,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - run: corepack enable
+
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
@@ -35,10 +39,10 @@ jobs:
       - run: yarn install --frozen-lockfile
 
       - name: Chromatic - Apps Rendering
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'
         uses: chromaui/action@v1
-        # Run Chromatic only if `run_chromatic` label has been applied or we're
-        # pushing to `main`.
-        if: (contains(github.event.pull_request.labels.*.name, 'run_chromatic') ||  github.ref == 'refs/heads/main')
+
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -46,3 +50,4 @@ jobs:
           exitOnceUploaded: true
           onlyChanged: '!(main)' # only turbosnap on non-main branches
           workingDir: apps-rendering
+          buildScriptName: 'build-storybook'

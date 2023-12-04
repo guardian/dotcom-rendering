@@ -174,18 +174,21 @@ const getFootballContent = async (
 
 	const selectorId = map2(getFootballSelector)(date)(teams);
 
-	return fold(async (selectorIdValue: string) => {
-		const footballEndpoint = getFootballEndpoint(selectorIdValue);
+	return fold(
+		async (selectorIdValue: string) => {
+			const footballEndpoint = getFootballEndpoint(selectorIdValue);
 
-		const response = await fetch(footballEndpoint);
+			const response = await fetch(footballEndpoint);
 
-		const footballContent = await parseFootballResponse(
-			response,
-			selectorIdValue,
-		);
+			const footballContent = await parseFootballResponse(
+				response,
+				selectorIdValue,
+			);
 
-		return footballContent;
-	}, Promise.resolve(Result.err('Could not get selectorId')))(selectorId);
+			return footballContent;
+		},
+		Promise.resolve(Result.err('Could not get selectorId')),
+	)(selectorId);
 };
 
 export { getFootballContent };

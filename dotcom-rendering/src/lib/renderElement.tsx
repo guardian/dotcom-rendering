@@ -1,9 +1,3 @@
-import {
-	ExplainerAtom,
-	InteractiveAtom,
-	InteractiveLayoutAtom,
-	VideoAtom,
-} from '@guardian/atoms-rendering';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
@@ -13,7 +7,7 @@ import { CalloutBlockComponent } from '../components/CalloutBlockComponent.impor
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { CartoonComponent } from '../components/CartoonComponent';
-import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
+import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
@@ -21,25 +15,28 @@ import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpSwitcher } from '../components/EmailSignUpSwitcher';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
+import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
+import { InteractiveAtom } from '../components/InteractiveAtom';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
+import { InteractiveLayoutAtom } from '../components/InteractiveLayoutAtom';
 import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
-import { KnowledgeQuizAtomWrapper } from '../components/KnowledgeQuizAtomWrapper.importable';
+import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
-import { PersonalityQuizAtomWrapper } from '../components/PersonalityQuizAtomWrapper.importable';
+import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
-import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
+import { QandaAtom } from '../components/QandaAtom.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
@@ -47,9 +44,10 @@ import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent
 import { SubheadingBlockComponent } from '../components/SubheadingBlockComponent';
 import { TableBlockComponent } from '../components/TableBlockComponent';
 import { TextBlockComponent } from '../components/TextBlockComponent';
-import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
+import { TimelineAtom } from '../components/TimelineAtom.importable';
 import { TweetBlockComponent } from '../components/TweetBlockComponent.importable';
 import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
+import { VideoAtom } from '../components/VideoAtom';
 import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockComponent.importable';
 import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
@@ -65,7 +63,6 @@ import {
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
 import { getSharingUrls } from '../lib/sharing-urls';
-import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
 import { decidePalette } from './decidePalette';
@@ -86,7 +83,6 @@ type Props = {
 	switches: Switches;
 	isPinnedPost?: boolean;
 	abTests?: ServerSideTests;
-	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -141,7 +137,6 @@ export const renderElement = ({
 	isSensitive,
 	isPinnedPost,
 	abTests,
-	imagesForAppsLightbox,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -171,7 +166,6 @@ export const renderElement = ({
 				<BlockquoteBlockComponent
 					key={index}
 					html={element.html}
-					palette={palette}
 					quoted={element.quoted}
 				/>
 			);
@@ -223,7 +217,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ChartAtomWrapper id={element.id} html={element.html} />
+					<ChartAtom id={element.id} html={element.html} />
 				</Island>
 			);
 
@@ -358,7 +352,6 @@ export const renderElement = ({
 					title={element.title}
 					isAvatar={element.isAvatar}
 					switches={switches}
-					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -461,7 +454,6 @@ export const renderElement = ({
 					images={element.images}
 					caption={element.caption}
 					switches={switches}
-					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
@@ -495,7 +487,7 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						pillar={format.theme}
+						format={format}
 					/>
 				</Island>
 			);
@@ -504,7 +496,6 @@ export const renderElement = ({
 				<PullQuoteBlockComponent
 					key={index}
 					html={element.html}
-					palette={palette}
 					format={format}
 					attribution={element.attribution}
 					role={element.role}
@@ -513,13 +504,13 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.QABlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<QandaAtomWrapper
+					<QandaAtom
 						id={element.id}
 						title={element.title}
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						pillar={format.theme}
+						format={format}
 					/>
 				</Island>
 			);
@@ -531,7 +522,7 @@ export const renderElement = ({
 							priority="critical"
 							defer={{ until: 'visible' }}
 						>
-							<PersonalityQuizAtomWrapper
+							<PersonalityQuizAtom
 								id={element.id}
 								questions={element.questions}
 								resultBuckets={element.resultBuckets}
@@ -545,7 +536,7 @@ export const renderElement = ({
 							priority="critical"
 							defer={{ until: 'visible' }}
 						>
-							<KnowledgeQuizAtomWrapper
+							<KnowledgeQuizAtom
 								id={element.id}
 								questions={element.questions}
 								resultGroups={element.resultGroups}
@@ -614,10 +605,10 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<TimelineAtomWrapper
+					<TimelineAtom
 						id={element.id}
 						title={element.title}
-						pillar={format.theme}
+						format={format}
 						events={element.events}
 						description={element.description}
 					/>
@@ -811,7 +802,6 @@ export const RenderArticleElement = ({
 	switches,
 	isPinnedPost,
 	abTests,
-	imagesForAppsLightbox,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -831,7 +821,6 @@ export const RenderArticleElement = ({
 		switches,
 		isPinnedPost,
 		abTests,
-		imagesForAppsLightbox,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

@@ -131,7 +131,7 @@ describe('YouTube Atom', function () {
 			.should('have.attr', 'data-island-status', 'hydrated');
 
 		// Make sure overlay is displayed
-		const overlaySelector = `[data-cy^="youtube-overlay-S0CE1n-R3OY"]`;
+		const overlaySelector = `[data-testid^="youtube-overlay-S0CE1n-R3OY"]`;
 		cy.get(overlaySelector).should('be.visible');
 
 		// YouTube has not initialised
@@ -176,13 +176,13 @@ describe('YouTube Atom', function () {
 			.click();
 
 		// Wait for hydration
+		cy.get('[data-component=youtube-atom]').parent().scrollIntoView();
 		cy.get('[data-component=youtube-atom]')
 			.parent()
-			.scrollIntoView()
 			.should('have.attr', 'data-island-status', 'hydrated');
 
 		// Make sure overlay is displayed
-		const overlaySelector = `[data-cy^="youtube-overlay-NtN-a6inr1E"]`;
+		const overlaySelector = `[data-testid^="youtube-overlay-NtN-a6inr1E"]`;
 		cy.get(overlaySelector).should('be.visible');
 
 		// Listen for the ophan call made when the video is played
@@ -227,28 +227,22 @@ describe('YouTube Atom', function () {
 		cy.get('[data-component=youtube-atom]')
 			.should('have.length', 3)
 			.each((item) => {
+				cy.wrap(item).parent().scrollIntoView();
 				cy.wrap(item)
 					.parent()
-					.scrollIntoView()
 					.should('have.attr', 'data-island-status', 'hydrated');
 			});
 
 		// Make sure overlays for both videos are displayed
 		const mediaDiv = 'div[data-gu-name="media"]';
 		const bodyDiv = 'div[data-gu-name="body"]';
-		const overlaySelectorforMultipleVideos = `[data-cy^="youtube-overlay-qkC9z-dSAOE"]`;
+		const overlaySelectorforMultipleVideos = `[data-testid^="youtube-overlay-qkC9z-dSAOE"]`;
 
-		cy.get(mediaDiv)
-			.within(() => {
-				cy.get(overlaySelectorforMultipleVideos);
-			})
+		cy.get(`${mediaDiv} ${overlaySelectorforMultipleVideos}`)
 			.should('have.length', 1)
 			.and('be.visible');
 
-		cy.get(bodyDiv)
-			.within(() => {
-				cy.get(overlaySelectorforMultipleVideos);
-			})
+		cy.get(`${bodyDiv} ${overlaySelectorforMultipleVideos}`)
 			.should('have.length', 1)
 			.and('be.visible');
 
@@ -344,13 +338,13 @@ describe('YouTube Atom', function () {
 			.click();
 
 		// Wait for hydration
+		cy.get('[data-component=youtube-atom]').parent().scrollIntoView();
 		cy.get('[data-component=youtube-atom]')
 			.parent()
-			.scrollIntoView()
 			.should('have.attr', 'data-island-status', 'hydrated');
 
 		// Make sure overlay is displayed
-		const overlaySelector = `[data-cy^="youtube-overlay-NtN-a6inr1E"]`;
+		const overlaySelector = `[data-testid^="youtube-overlay-NtN-a6inr1E"]`;
 		cy.get(overlaySelector).should('be.visible');
 
 		// Listen for the ophan call made when the video is played
@@ -395,17 +389,17 @@ describe('YouTube Atom', function () {
 		cy.get('[data-component=youtube-atom]')
 			.should('have.length', 3)
 			.each((item) => {
+				cy.wrap(item).parent().scrollIntoView();
 				cy.wrap(item)
 					.parent()
-					.scrollIntoView()
 					.should('have.attr', 'data-island-status', 'hydrated');
 			});
 
 		const mediaDiv = 'div[data-gu-name="media"]';
-		const overlaySelectorforMultipleVideos = `[data-cy^="youtube-overlay-qkC9z-dSAOE"]`;
-		const stickySelector = '[data-cy^="youtube-sticky-qkC9z-dSAOE"]';
+		const overlaySelectorforMultipleVideos = `[data-testid^="youtube-overlay-qkC9z-dSAOE"]`;
+		const stickySelector = '[data-testid^="youtube-sticky-qkC9z-dSAOE"]';
 		const stickyCloseSelector =
-			'[data-cy^="youtube-sticky-close-qkC9z-dSAOE"]';
+			'[data-testid^="youtube-sticky-close-qkC9z-dSAOE"]';
 
 		/**
 		 * Main media video

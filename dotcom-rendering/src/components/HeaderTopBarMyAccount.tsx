@@ -3,6 +3,11 @@ import { joinUrl } from '@guardian/libs';
 import { brand, from, neutral, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
+import type {
+	AuthStatus,
+	SignedInWithCookies,
+	SignedInWithOkta,
+} from '../lib/identity';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 import {
 	addNotificationsToDropdownLinks,
@@ -11,13 +16,10 @@ import {
 import type { Notification } from '../lib/notification';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useApi } from '../lib/useApi';
-import type {
-	AuthStatus,
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import ProfileIcon from '../static/icons/profile.svg';
+import type { RenderingTarget } from '../types/renderingTarget';
+import { useConfig } from './ConfigContext';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
 
@@ -32,6 +34,7 @@ interface MyAccountProps {
 //when SignedIn, authStatus can only be one of the two SignedIn states
 type SignedInProps = MyAccountProps & {
 	authStatus: SignedInWithCookies | SignedInWithOkta;
+	renderingTarget: RenderingTarget;
 };
 
 const myAccountStyles = css`
@@ -254,8 +257,13 @@ const SignedInWithNotifications = ({
 	);
 };
 
-const SignedIn = ({ idApiUrl, authStatus, ...props }: SignedInProps) => {
-	const { brazeCards } = useBraze(idApiUrl);
+const SignedIn = ({
+	idApiUrl,
+	authStatus,
+	renderingTarget,
+	...props
+}: SignedInProps) => {
+	const { brazeCards } = useBraze(idApiUrl, renderingTarget);
 	const [brazeNotifications, setBrazeNotifications] = useState<
 		Notification[]
 	>([]);
@@ -285,19 +293,24 @@ export const MyAccount = ({
 	discussionApiUrl,
 	idApiUrl,
 	authStatus,
-}: MyAccountProps) => (
-	<div css={myAccountStyles}>
-		{authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies' ? (
-			<SignedIn
-				mmaUrl={mmaUrl}
-				idUrl={idUrl}
-				discussionApiUrl={discussionApiUrl}
-				idApiUrl={idApiUrl}
-				authStatus={authStatus}
-			/>
-		) : (
-			<SignIn idUrl={idUrl} />
-		)}
-	</div>
-);
+}: MyAccountProps) => {
+	const { renderingTarget } = useConfig();
+
+	return (
+		<div css={myAccountStyles}>
+			{authStatus.kind === 'SignedInWithOkta' ||
+			authStatus.kind === 'SignedInWithCookies' ? (
+				<SignedIn
+					mmaUrl={mmaUrl}
+					idUrl={idUrl}
+					discussionApiUrl={discussionApiUrl}
+					idApiUrl={idApiUrl}
+					authStatus={authStatus}
+					renderingTarget={renderingTarget}
+				/>
+			) : (
+				<SignIn idUrl={idUrl} />
+			)}
+		</div>
+	);
+};

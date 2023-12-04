@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { neutral, space, text, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	space,
+	text,
+	textSans,
+} from '@guardian/source-foundations';
 import { Button, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
@@ -23,7 +28,7 @@ const indentStyles = css`
 	width: 18px;
 	svg {
 		/* stylelint-disable-next-line declaration-no-important */
-		fill: ${neutral[46]} !important;
+		fill: ${sourcePalette.neutral[46]} !important;
 	}
 `;
 
@@ -39,7 +44,7 @@ const replyPreviewHeaderStyle = css`
 `;
 
 const arrowSize = 15;
-const bg = neutral[93];
+const bg = sourcePalette.neutral[93];
 const previewStyle = css`
 	padding-top: ${space[3]}px;
 	padding-bottom: ${space[3]}px;
@@ -91,7 +96,7 @@ const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
 
 const buttonLinkBaseStyles = css`
 	button {
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -100,7 +105,7 @@ const buttonLinkBaseStyles = css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${neutral[46]};
+			text-decoration-color: ${sourcePalette.neutral[46]};
 		}
 	}
 `;

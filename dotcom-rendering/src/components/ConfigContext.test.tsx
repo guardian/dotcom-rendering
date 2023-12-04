@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import type { Config } from '../types/configContext';
 import { ConfigProvider, useConfig } from './ConfigContext';
 
 const testId = 'testId';
@@ -19,10 +20,13 @@ describe('ConfigContext', () => {
 	});
 
 	describe('with ConfigProvider', () => {
-		it.each(['Web', 'Apps'] as const)(
-			'provides correct context through useConfig hook with renderingTarget: "%s"',
-			(renderingTarget) => {
-				const config = { renderingTarget };
+		it.each([
+			{ renderingTarget: 'Web', darkModeAvailable: false },
+			{ renderingTarget: 'Apps', darkModeAvailable: true },
+			{ renderingTarget: 'Apps', darkModeAvailable: false },
+		] as const satisfies ReadonlyArray<Config>)(
+			'useConfig hook provides correct config: "%o"',
+			(config) => {
 				const Component = () => {
 					return (
 						<ConfigProvider value={config}>
@@ -34,7 +38,7 @@ describe('ConfigContext', () => {
 
 				expect(getByTestId(testId)).toBeInTheDocument();
 				expect(getByText(/renderingTarget/)).toHaveTextContent(
-					renderingTarget,
+					config.renderingTarget,
 				);
 			},
 		);

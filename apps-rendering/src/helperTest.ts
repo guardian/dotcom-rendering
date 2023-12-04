@@ -34,3 +34,18 @@ export const articleContentWith = (
 		],
 	},
 });
+
+export const articleMainContentWith = (element: BlockElement): Content => ({
+	...articleContent,
+	blocks: {
+		main: {
+			id: '',
+			bodyHtml: '',
+			bodyTextSummary: '',
+			attributes: {},
+			published: true,
+			contributors: [],
+			elements: [element],
+		},
+	},
+});

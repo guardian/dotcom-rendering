@@ -1,22 +1,18 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, space } from '@guardian/source-foundations';
 import {
 	Button,
-	buttonThemeBrandAlt,
 	Hide,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
 import { useRef } from 'react';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { palette } from '../palette';
 import { KeyEventCard } from './KeyEventCard';
 
 interface Props {
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
-	format: ArticleFormat;
 	id: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
 }
 type ValidBlock = Block & {
@@ -24,8 +20,8 @@ type ValidBlock = Block & {
 	blockFirstPublished: number;
 };
 
-const carouselStyles = (palette: Palette) => css`
-	background-color: ${palette.background.keyEvent};
+const carouselStyles = css`
+	background-color: ${palette('--key-event-background')};
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overflow-x: auto;
@@ -37,7 +33,7 @@ const carouselStyles = (palette: Palette) => css`
 
 	${from.desktop} {
 		margin-right: 0px;
-		background-color: ${palette.background.keyEventFromDesktop};
+		background-color: ${palette('--key-event-background-desktop')};
 		scrollbar-width: none;
 		&::-webkit-scrollbar {
 			display: none;
@@ -58,6 +54,7 @@ const marginBottomStyles = css`
 const titleStyles = css`
 	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'regular' })};
 	padding-top: ${space[3]}px;
+	color: ${palette('--key-event-title')};
 `;
 
 const containerStyles = css`
@@ -73,11 +70,14 @@ const buttonStyles = css`
 	position: absolute;
 	bottom: 0;
 	margin-bottom: ${space[4]}px;
-	background-color: ${buttonThemeBrandAlt.button.backgroundPrimary};
+	background-color: ${palette('--key-event-button')};
 	&:active,
 	&:hover {
 		outline: none;
-		background-color: ${buttonThemeBrandAlt.button.backgroundTertiaryHover};
+		background-color: ${palette('--key-event-button-hover')};
+	}
+	svg {
+		fill: ${palette('--key-event-button-fill')};
 	}
 `;
 
@@ -98,11 +98,9 @@ const isValidKeyEvent = (keyEvent: Block): keyEvent is ValidBlock => {
 export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
-	format,
 	id,
 }: Props) => {
 	const carousel = useRef<HTMLDivElement | null>(null);
-	const palette = decidePalette(format);
 	const cardWidth = 200;
 
 	const goPrevious = () => {
@@ -124,17 +122,13 @@ export const KeyEventsCarousel = ({
 			<div
 				ref={carousel}
 				id="key-events-carousel"
-				css={[
-					carouselStyles(palette),
-					shortCarousel && leftMarginStyles,
-				]}
+				css={[carouselStyles, shortCarousel && leftMarginStyles]}
 			>
 				<ul css={[containerStyles, longCarousel && marginBottomStyles]}>
 					{filteredKeyEvents.map((keyEvent, index) => {
 						return (
 							<KeyEventCard
 								key={keyEvent.id}
-								format={format}
 								filterKeyEvents={filterKeyEvents}
 								id={keyEvent.id}
 								blockFirstPublished={

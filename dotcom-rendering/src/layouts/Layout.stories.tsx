@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { Analysis } from '../../fixtures/generated/articles/Analysis';
 import { Audio } from '../../fixtures/generated/articles/Audio';
 import { Comment } from '../../fixtures/generated/articles/Comment';
@@ -23,7 +24,6 @@ import { SpecialReport } from '../../fixtures/generated/articles/SpecialReport';
 import { Standard } from '../../fixtures/generated/articles/Standard';
 import { Video } from '../../fixtures/generated/articles/Video';
 import { embedIframe } from '../client/embedIframe';
-import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
@@ -77,7 +77,6 @@ const HydratedLayout = ({
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${String(e)}`),
 		);
-		doStorybookHydration();
 	}, [serverArticle]);
 
 	return (
@@ -136,7 +135,8 @@ export default {
 	},
 };
 
-export const Liveblog = () => {
+// Additional stories for edge cases
+export const LiveblogWithNoKeyEvents = () => {
 	return (
 		<HydratedLayout
 			serverArticle={{
@@ -147,3 +147,6 @@ export const Liveblog = () => {
 		/>
 	);
 };
+LiveblogWithNoKeyEvents.decorators = [
+	lightDecorator([decideFormat(Live.format)]),
+];

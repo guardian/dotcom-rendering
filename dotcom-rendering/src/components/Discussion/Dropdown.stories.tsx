@@ -82,12 +82,10 @@ const optionsWithNoneActive = [
 	{ ...threadOptions[2] },
 ];
 
-/* tslint:disable */
 export default {
 	component: Dropdown,
 	title: 'Discussion/Dropdown',
 };
-/* tslint:enable */
 
 export const DropdownActive = () => (
 	<Container>

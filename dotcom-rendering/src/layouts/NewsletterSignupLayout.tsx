@@ -47,6 +47,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -289,7 +290,9 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					<>
 						<Section
 							fullWidth={true}
-							backgroundColour={palette.background.article}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
 							padSides={false}
 							showTopBorder={false}
 							element="aside"
@@ -310,7 +313,9 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						</Section>
 						<Section
 							fullWidth={true}
-							backgroundColour={palette.background.article}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
 							padSides={false}
 							showTopBorder={false}
 						>
@@ -490,7 +495,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
 									hideCaption={true}
-									imagesForAppsLightbox={[]}
 								/>
 							</div>
 						</Column>

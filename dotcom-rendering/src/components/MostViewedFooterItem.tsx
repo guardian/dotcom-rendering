@@ -5,12 +5,12 @@ import {
 	border,
 	breakpoints,
 	headline,
-	neutral,
-	text,
 	until,
 } from '@guardian/source-foundations';
+import { palette } from '../palette';
 import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber/BigNumber';
+import { FormatBoundary } from './FormatBoundary';
 import { LinkHeadline } from './LinkHeadline';
 import { generateSources } from './Picture';
 
@@ -50,7 +50,7 @@ const gridItem = (
 
 		&:hover,
 		:focus {
-			background: ${neutral[97]};
+			background: ${palette('--most-viewed-footer-hover')};
 		}
 	`;
 };
@@ -59,7 +59,7 @@ const bigNumber = css`
 	position: absolute;
 	top: 0.375rem;
 	left: 0.625rem;
-	fill: ${text.primary};
+	fill: ${palette('--article-text')};
 `;
 
 const headlineHeader = css`
@@ -70,7 +70,7 @@ const headlineHeader = css`
 
 const headlineLink = css`
 	text-decoration: none;
-	color: ${text.anchorSecondary};
+	color: ${palette('--article-text')};
 	font-weight: 500;
 	${headline.xxxsmall()};
 
@@ -158,27 +158,29 @@ export const MostViewedFooterItem = ({
 			</span>
 			{!!image && <MiniImage image={image} alt={headlineText} />}
 			<div css={[headlineHeader, !!image && textPaddingWithImage]}>
-				{format.design === ArticleDesign.LiveBlog ? (
-					<LinkHeadline
-						headlineText={headlineText}
-						format={format}
-						size="small"
-						kickerText="Live"
-						hideLineBreak={false}
-						showPulsingDot={true}
-						showQuotes={false}
-					/>
-				) : (
-					<LinkHeadline
-						headlineText={headlineText}
-						format={format}
-						size="small"
-						showQuotes={
-							format.design === ArticleDesign.Comment ||
-							format.design === ArticleDesign.Letter
-						}
-					/>
-				)}
+				<FormatBoundary format={format}>
+					{format.design === ArticleDesign.LiveBlog ? (
+						<LinkHeadline
+							headlineText={headlineText}
+							format={format}
+							size="small"
+							kickerText="Live"
+							hideLineBreak={false}
+							showPulsingDot={true}
+							showQuotes={false}
+						/>
+					) : (
+						<LinkHeadline
+							headlineText={headlineText}
+							format={format}
+							size="small"
+							showQuotes={
+								format.design === ArticleDesign.Comment ||
+								format.design === ArticleDesign.Letter
+							}
+						/>
+					)}
+				</FormatBoundary>
 			</div>
 			{!!ageWarning && (
 				<div css={ageWarningStyles}>

@@ -225,6 +225,9 @@
                                                                 "bio": {
                                                                     "type": "string"
                                                                 },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
                                                                 "bylineImageUrl": {
                                                                     "type": "string"
                                                                 },
@@ -736,6 +739,9 @@
                                         "type": "string"
                                     },
                                     "bio": {
+                                        "type": "string"
+                                    },
+                                    "description": {
                                         "type": "string"
                                     },
                                     "bylineImageUrl": {
@@ -1386,15 +1392,7 @@
             "type": "object",
             "properties": {
                 "brandingType": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
+                    "$ref": "#/definitions/BrandingType"
                 },
                 "sponsorName": {
                     "type": "string"
@@ -1477,6 +1475,46 @@
                 "aboutThisLink",
                 "logo",
                 "sponsorName"
+            ]
+        },
+        "BrandingType": {
+            "anyOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "const": "paid-content"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "const": "foundation"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "const": "sponsored"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                }
             ]
         },
         "FEFrontCardStyle": {

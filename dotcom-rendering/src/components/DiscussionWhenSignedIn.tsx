@@ -1,10 +1,7 @@
 import { joinUrl } from '@guardian/libs';
+import { getOptionsHeadersWithOkta } from '../lib/identity';
+import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
 import { useApi } from '../lib/useApi';
-import type {
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../lib/useAuthStatus';
-import { getOptionsHeadersWithOkta } from '../lib/useAuthStatus';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
 

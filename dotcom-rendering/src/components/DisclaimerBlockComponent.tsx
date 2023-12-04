@@ -18,7 +18,7 @@ type Props = {
 export const DisclaimerBlockComponent = ({ html }: Props) => (
 	<footer
 		css={disclaimerStyles}
-		data-cy="affiliate-disclaimer"
+		data-testid="affiliate-disclaimer"
 		dangerouslySetInnerHTML={{
 			__html: html,
 		}}

@@ -9,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
+import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
 import type { SignInGateProps } from '../types';
 import {
@@ -292,8 +293,10 @@ export const SignInGateFakeSocial = ({
 	const verticalButtonStack =
 		abTest?.variant === 'fake-social-variant-vertical';
 
+	const { renderingTarget } = useConfig();
+
 	return (
-		<div css={signInGateContainer} data-cy="sign-in-gate-fake-social">
+		<div css={signInGateContainer} data-testid="sign-in-gate-fake-social">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
 			<h1 css={[heading, bodyPadding]}>
@@ -311,11 +314,16 @@ export const SignInGateFakeSocial = ({
 			<p css={[bodyText, bodyPadding]}>
 				You’ll always be able to control your own&nbsp;
 				<button
-					data-cy="sign-in-gate-fake-social_privacy"
+					data-testid="sign-in-gate-fake-social_privacy"
 					css={privacyLink}
 					onClick={() => {
 						cmp.showPrivacyManager();
-						trackLink(ophanComponentId, 'privacy', abTest);
+						trackLink(
+							ophanComponentId,
+							'privacy',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					privacy settings
@@ -324,28 +332,38 @@ export const SignInGateFakeSocial = ({
 			</p>
 			<div css={[actionButtons, buttonMargin, bodyPadding]}>
 				<LinkButton
-					data-cy="sign-in-gate-fake-social_register"
+					data-testid="sign-in-gate-fake-social_register"
 					data-ignore="global-link-styling"
 					css={registerButton}
 					priority="primary"
 					size="small"
 					href={registerUrl}
 					onClick={() => {
-						trackLink(ophanComponentId, 'register-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'register-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Register for free
 				</LinkButton>
 
 				<Button
-					data-cy="sign-in-gate-fake-social_dismiss"
+					data-testid="sign-in-gate-fake-social_dismiss"
 					data-ignore="global-link-styling"
 					css={laterButton}
 					priority="subdued"
 					size="small"
 					onClick={() => {
 						dismissGate();
-						trackLink(ophanComponentId, 'not-now', abTest);
+						trackLink(
+							ophanComponentId,
+							'not-now',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					I’ll do it later
@@ -355,12 +373,17 @@ export const SignInGateFakeSocial = ({
 			<p css={[bodySeparator, bodyBold, signInHeader, bodyPadding]}>
 				Already registered?{' '}
 				<Link
-					data-cy="sign-in-gate-fake-social_signin"
+					data-testid="sign-in-gate-fake-social_signin"
 					data-ignore="global-link-styling"
 					css={[signInLink, inlineLink, fakeSocialSignInLink]}
 					href={signInUrl}
 					onClick={() => {
-						trackLink(ophanComponentId, 'sign-in-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'sign-in-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Sign In
@@ -379,14 +402,19 @@ export const SignInGateFakeSocial = ({
 			>
 				<span css={[hideMobile, socialBoxText]}>Or continue with</span>
 				<LinkButton
-					data-cy="sign-in-gate-fake-social_facebook"
+					data-testid="sign-in-gate-fake-social_facebook"
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
 					css={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
-						trackLink(ophanComponentId, 'facebook-button', abTest);
+						trackLink(
+							ophanComponentId,
+							'facebook-button',
+							renderingTarget,
+							abTest,
+						);
 					}}
 					iconSide="left"
 					icon={facebookIcon}
@@ -394,14 +422,19 @@ export const SignInGateFakeSocial = ({
 					Facebook
 				</LinkButton>
 				<LinkButton
-					data-cy="sign-in-gate-fake-social_google"
+					data-testid="sign-in-gate-fake-social_google"
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
 					css={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
-						trackLink(ophanComponentId, 'google-button', abTest);
+						trackLink(
+							ophanComponentId,
+							'google-button',
+							renderingTarget,
+							abTest,
+						);
 					}}
 					iconSide="left"
 					icon={googleIcon}
@@ -409,14 +442,19 @@ export const SignInGateFakeSocial = ({
 					Google
 				</LinkButton>
 				<LinkButton
-					data-cy="sign-in-gate-fake-social_apple"
+					data-testid="sign-in-gate-fake-social_apple"
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
 					css={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
-						trackLink(ophanComponentId, 'apple-button', abTest);
+						trackLink(
+							ophanComponentId,
+							'apple-button',
+							renderingTarget,
+							abTest,
+						);
 					}}
 					iconSide="left"
 					icon={appleIcon}
@@ -430,7 +468,12 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'how-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'how-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Why register & how does it help?
@@ -440,7 +483,12 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'why-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'why-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					How will my information & data be used?
@@ -450,7 +498,12 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/help/identity-faq`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'help-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'help-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Get help with registering or signing in.

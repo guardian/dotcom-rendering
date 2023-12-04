@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { headline, space } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import type { Palette } from '../types/palette';
 
 type Props = {
@@ -44,7 +45,7 @@ const tabLink = (palette: Palette) => css`
 	display: block;
 	text-decoration: none;
 	&:hover {
-		background-color: ${palette.background.article};
+		background-color: ${themePalette('--article-background')};
 	}
 `;
 

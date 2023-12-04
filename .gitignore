@@ -53,3 +53,11 @@ webArchitecture.svg
 # ESLint reports
 .eslint/
 .eslintcache
+
+# k6 load testing binaries
+k6-v*arm64
+
+# playwright
+test-results/
+playwright-report/
+playwright/.cache/

@@ -1,12 +1,14 @@
-import { getCookie } from '@guardian/libs';
+import { getCookie, isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useOnce } from '../lib/useOnce';
+import { usePageViewId } from '../lib/usePageViewId';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import {
 	submitViewEventTracking,
@@ -113,13 +115,18 @@ const ShowSignInGate = ({
 	checkoutCompleteCookieData,
 	personaliseSignInGateAfterCheckoutSwitch,
 }: ShowSignInGateProps) => {
+	const { renderingTarget } = useConfig();
+
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
-		submitViewEventTracking({
-			component: withComponentId(componentId),
-			abTest,
-		});
-	}, [abTest, componentId]);
+		submitViewEventTracking(
+			{
+				component: withComponentId(componentId),
+				abTest,
+			},
+			renderingTarget,
+		);
+	}, [abTest, componentId, renderingTarget]);
 
 	// some sign in gate ab test variants may not need to show a gate
 	// therefore the gate is optional
@@ -143,8 +150,37 @@ const ShowSignInGate = ({
 	return <></>;
 };
 
-// component with conditional logic which determines if a sign in gate
-// should be shown on the current page
+const useCheckoutCompleteCookieData = () => {
+	const [data, setData] = useState<CheckoutCompleteCookieData>();
+
+	useEffect(() => {
+		const rawCookie = getCookie({
+			name: 'GU_CO_COMPLETE',
+			shouldMemoize: true,
+		});
+
+		if (rawCookie === null) return;
+
+		const parsedCookieData = parseCheckoutCompleteCookieData(rawCookie);
+
+		if (parsedCookieData) setData(parsedCookieData);
+	}, []);
+
+	return data;
+};
+
+/**
+ * Component with conditional logic which determines if a sign in gate
+ * should be shown on the current page.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * The sign-in gate logic is entirely client-side
+ *
+ * ---
+ *
+ * (No visual story exists)
+ */
 export const SignInGateSelector = ({
 	contentType,
 	sectionId = '',
@@ -171,19 +207,13 @@ export const SignInGateSelector = ({
 	>(undefined);
 	const [canShowGate, setCanShowGate] = useState(false);
 
+	const { renderingTarget } = useConfig();
 	const gateSelector = useSignInGateSelector();
-	const { pageViewId } = window.guardian.config.ophan;
+	const pageViewId = usePageViewId(renderingTarget);
 
 	// START: Checkout Complete Personalisation
 	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
-	const checkOutCompleteString = getCookie({
-		name: 'GU_CO_COMPLETE',
-		shouldMemoize: true,
-	});
-	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
-		checkOutCompleteString !== null
-			? parseCheckoutCompleteCookieData(checkOutCompleteString)
-			: undefined;
+	const checkoutCompleteCookieData = useCheckoutCompleteCookieData();
 
 	const personaliseComponentId = (
 		currentComponentId: string | undefined,
@@ -196,6 +226,7 @@ export const SignInGateSelector = ({
 	const shouldPersonaliseComponentId = (): boolean => {
 		return personaliseSwitch && !!checkoutCompleteCookieData;
 	};
+	const { personaliseSignInGateAfterCheckout } = switches;
 	// END: Checkout Complete Personalisation
 
 	useOnce(() => {
@@ -220,11 +251,11 @@ export const SignInGateSelector = ({
 		}
 	}, [gateSelector]);
 
-	useOnce(() => {
-		if (switches.personaliseSignInGateAfterCheckout) {
-			setPersonaliseSwitch(switches.personaliseSignInGateAfterCheckout);
+	useEffect(() => {
+		if (personaliseSignInGateAfterCheckout) {
+			setPersonaliseSwitch(personaliseSignInGateAfterCheckout);
 		} else setPersonaliseSwitch(false);
-	}, []);
+	}, [personaliseSignInGateAfterCheckout]);
 
 	useEffect(() => {
 		if (gateVariant && currentTest) {
@@ -253,7 +284,7 @@ export const SignInGateSelector = ({
 		isPreview,
 	]);
 
-	if (!currentTest || !gateVariant) {
+	if (!currentTest || !gateVariant || isUndefined(pageViewId)) {
 		return null;
 	}
 	const signInGateComponentId = signInGateTestIdToComponentId[currentTest.id];
@@ -269,7 +300,7 @@ export const SignInGateSelector = ({
 		idUrl,
 		currentTest,
 		componentId,
-	};
+	} satisfies Parameters<typeof generateGatewayUrl>[1];
 
 	return (
 		<>

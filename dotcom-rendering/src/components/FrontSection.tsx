@@ -5,25 +5,21 @@ import {
 	between,
 	from,
 	neutral,
-	palette,
 	space,
-	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
-import type { DCRBadgeType } from '../types/badge';
-import type { Branding, EditionBranding } from '../types/branding';
+import type { CollectionBranding } from '../types/branding';
 import type { DCRContainerPalette, TreatType } from '../types/front';
 import type { DCRFrontPagination } from '../types/tagFront';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
-import { Badge } from './Badge';
 import { ContainerTitle } from './ContainerTitle';
 import { FrontPagination } from './FrontPagination';
+import { FrontSectionTitle } from './FrontSectionTitle';
 import { Island } from './Island';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
@@ -70,7 +66,6 @@ type Props = {
 	editionId?: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
-	badge?: DCRBadgeType;
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
 	canShowMore?: boolean;
 	ajaxUrl?: string;
@@ -79,8 +74,6 @@ type Props = {
 	pagination?: DCRFrontPagination;
 	/** Does this front section reside on a "paid for" content front */
 	isOnPaidContentFront?: boolean;
-	/** Denotes the position of this section on the front */
-	index?: number;
 	/** Indicates if the container is targetted to a specific territory */
 	targetedTerritory?: Territory;
 	/** Indicates if the page has a page skin advert
@@ -92,8 +85,7 @@ type Props = {
 	 */
 	hasPageSkin?: boolean;
 	discussionApiUrl: string;
-	frontBranding?: EditionBranding;
-	containerBranding?: Branding;
+	collectionBranding?: CollectionBranding;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -347,12 +339,6 @@ const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
 `;
 
-const titleStyle = css`
-	${until.leftCol} {
-		max-width: 74%;
-	}
-`;
-
 const decideBackgroundColour = (
 	overrideBackgroundColour: string | undefined,
 	hasPageSkin: boolean,
@@ -366,44 +352,6 @@ const decideBackgroundColour = (
 	return undefined;
 };
 
-const labelStyles = css`
-	${textSans.xxsmall()};
-	line-height: 1rem;
-	color: ${palette.neutral[46]};
-	font-weight: bold;
-	margin-top: 0.375rem;
-	padding-right: 0.625rem;
-	padding-bottom: 0.625rem;
-	text-align: left;
-`;
-
-const aboutThisLinkStyles = css`
-	${textSans.xxsmall()};
-	line-height: 11px;
-	color: ${palette.neutral[46]};
-	font-weight: normal;
-	text-decoration: none;
-`;
-
-const SponsoredBranding = ({
-	branding,
-}: {
-	branding: Branding | undefined;
-}) => {
-	if (!branding) {
-		return null;
-	}
-	const { logo, aboutThisLink } = branding;
-	return (
-		<>
-			<p css={labelStyles}>{logo.label}</p>
-			<Badge imageSrc={logo.src} href={logo.link} />
-			<a href={aboutThisLink} css={aboutThisLinkStyles}>
-				About this content
-			</a>
-		</>
-	);
-};
 /**
  * # Front Container
  *
@@ -504,17 +452,14 @@ export const FrontSection = ({
 	toggleable = false,
 	treats,
 	url,
-	badge,
 	canShowMore,
 	ajaxUrl,
 	pagination,
 	isOnPaidContentFront,
-	index,
 	targetedTerritory,
 	hasPageSkin = false,
-	frontBranding,
 	discussionApiUrl,
-	containerBranding,
+	collectionBranding,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -527,21 +472,6 @@ export const FrontSection = ({
 		!!collectionId &&
 		!!pageId &&
 		!!ajaxUrl;
-
-	const frontHasEditorialOrDesignBadge = !!badge;
-
-	// Only show the badge with a "Paid for by" label on the FIRST card of a paid front, aka as Labs front.
-	const isTheFirstContainerOnAPaidFront =
-		isOnPaidContentFront && index === 0 && !!frontBranding;
-
-	const isTheFirstContainerOnASponsoredFront =
-		!isOnPaidContentFront && index === 0 && !!frontBranding;
-
-	const showSponsoredBranding =
-		(isTheFirstContainerOnASponsoredFront && frontBranding.branding) ||
-		containerBranding;
-
-	const sponsoredBranding = frontBranding?.branding ?? containerBranding;
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -590,78 +520,21 @@ export const FrontSection = ({
 						sectionHeadlineHeight,
 				]}
 			>
-				{isTheFirstContainerOnAPaidFront ? (
-					<div css={titleStyle}>
+				<FrontSectionTitle
+					title={
 						<ContainerTitle
 							title={title}
 							fontColour={overrides?.text.container}
 							description={description}
 							// On paid fronts the title is not treated as a link
-							// Be explicit and pass in undefined
-							url={undefined}
+							url={!isOnPaidContentFront ? url : undefined}
 							containerPalette={containerPalette}
 							showDateHeader={showDateHeader}
 							editionId={editionId}
 						/>
-						{!!frontBranding.branding?.logo.src && (
-							<div
-								css={css`
-									display: inline-block;
-									border-top: 1px dotted
-										${palette.neutral[86]};
-									${textSans.xxsmall()}
-									color: ${palette.neutral[46]};
-									font-weight: bold;
-
-									${from.leftCol} {
-										width: 100%;
-									}
-								`}
-							>
-								Paid for by
-								<Badge
-									imageSrc={frontBranding.branding.logo.src}
-									href={frontBranding.branding.logo.link}
-								/>
-							</div>
-						)}
-					</div>
-				) : (
-					<>
-						{frontHasEditorialOrDesignBadge && (
-							<Hide until="leftCol">
-								<Badge
-									imageSrc={badge.imageSrc}
-									href={badge.href}
-								/>
-							</Hide>
-						)}
-						<div css={titleStyle}>
-							{frontHasEditorialOrDesignBadge && (
-								<Hide from="leftCol">
-									<Badge
-										imageSrc={badge.imageSrc}
-										href={badge.href}
-									/>
-								</Hide>
-							)}
-							<ContainerTitle
-								title={title}
-								fontColour={overrides?.text.container}
-								description={description}
-								url={url}
-								containerPalette={containerPalette}
-								showDateHeader={showDateHeader}
-								editionId={editionId}
-							/>
-							{showSponsoredBranding && (
-								<SponsoredBranding
-									branding={sponsoredBranding}
-								/>
-							)}
-						</div>
-					</>
-				)}
+					}
+					collectionBranding={collectionBranding}
+				/>
 				{leftContent}
 			</div>
 

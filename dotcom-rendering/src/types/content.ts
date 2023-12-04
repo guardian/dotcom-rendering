@@ -1,10 +1,6 @@
 // -------------------------------------
 // Elements
 
-import type { PersonalityQuizAtom } from '@guardian/atoms-rendering';
-
-export type QuizAtomType = Parameters<typeof PersonalityQuizAtom>[0];
-
 // -------------------------------------
 interface ThirdPartyEmbeddedContent {
 	isThirdPartyTracking: boolean;
@@ -134,13 +130,8 @@ interface QuizAtomBlockElement {
 	quizType: 'personality' | 'knowledge';
 	id: string;
 	questions: QuestionType[];
-	resultBuckets: QuizAtomType['resultBuckets'];
-	resultGroups: {
-		id: string;
-		title: string;
-		shareText: string;
-		minScore: number;
-	}[];
+	resultBuckets: ResultsBucketType[];
+	resultGroups: ResultGroupsType[];
 }
 
 interface CodeBlockElement {
@@ -761,7 +752,7 @@ interface VideoAssets {
 	};
 }
 
-interface TimelineEvent {
+export interface TimelineEvent {
 	title: string;
 	date: string;
 	unixDate: number;
@@ -769,6 +760,18 @@ interface TimelineEvent {
 	toDate?: string;
 	toUnixDate?: number;
 }
+
+export type TimelineAtomType = {
+	id: string;
+	events?: TimelineEvent[];
+	title: string;
+	format: ArticleFormat;
+	description?: string;
+	expandForStorybook?: boolean;
+	likeHandler?: () => void;
+	dislikeHandler?: () => void;
+	expandCallback?: () => void;
+};
 
 export type RatingSizeType = 'large' | 'medium' | 'small';
 
@@ -866,7 +869,7 @@ export type MessageUsFieldType = CampaignFieldText | CampaignFieldTextArea;
 // Quiz
 // -------------------------------------
 
-type AnswerType = {
+export type AnswerType = {
 	id: string;
 	text: string;
 	revealText?: string;
@@ -874,12 +877,59 @@ type AnswerType = {
 	answerBuckets: string[];
 };
 
-type QuestionType = {
+export type QuestionType = {
 	id: string;
 	text: string;
 	answers: AnswerType[];
 	imageUrl?: string;
 	imageAlt?: string;
+};
+
+export type ResultGroupsType = {
+	title: string;
+	shareText: string;
+	minScore: number;
+	id: string;
+};
+
+export type ResultsBucketType = {
+	id: string;
+	title: string;
+	description: string;
+};
+
+export type KnowledgeQuizAtomType = {
+	id: string;
+	questions: QuestionType[];
+	resultGroups: ResultGroupsType[];
+	sharingUrls: SharingUrlsType;
+	theme: ArticleTheme;
+};
+
+export type PersonalityQuizAtomType = {
+	id: string;
+	questions: QuestionType[];
+	resultBuckets: ResultsBucketType[];
+	sharingUrls: SharingUrlsType;
+	theme: ArticleTheme;
+};
+
+export type QuizSelectionType = Record<string, AnswerType>;
+
+export type SharePlatformType =
+	| 'facebook'
+	| 'twitter'
+	| 'email'
+	| 'linkedIn'
+	| 'pinterest'
+	| 'whatsApp'
+	| 'messenger';
+
+export type SharingUrlsType = {
+	[K in SharePlatformType]?: {
+		url: string;
+		userMessage: string;
+	};
 };
 
 // -------------------------------------

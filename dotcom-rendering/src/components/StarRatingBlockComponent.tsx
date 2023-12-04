@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brandAltBackground } from '@guardian/source-foundations';
+import { palette } from '../palette';
 import type { RatingSizeType } from '../types/content';
 import { StarRating } from './StarRating/StarRating';
 
@@ -9,7 +9,8 @@ type Props = {
 };
 
 const starsWrapper = css`
-	background-color: ${brandAltBackground.primary};
+	background-color: ${palette('--star-rating-background')};
+	color: ${palette('--star-rating-fill')};
 	display: inline-block;
 `;
 

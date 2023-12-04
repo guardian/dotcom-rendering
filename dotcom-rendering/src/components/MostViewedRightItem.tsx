@@ -1,10 +1,16 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { border, headline, neutral, text } from '@guardian/source-foundations';
+import {
+	border,
+	headline,
+	palette as sourcePalette,
+} from '@guardian/source-foundations';
 import { useHover } from '../lib/useHover';
+import { palette as themePalette } from '../palette';
 import type { TrailType } from '../types/trails';
 import { AgeWarning } from './AgeWarning';
 import { Avatar } from './Avatar';
+import { FormatBoundary } from './FormatBoundary';
 import { LinkHeadline } from './LinkHeadline';
 
 const listItemStyles = css`
@@ -34,11 +40,11 @@ const linkTagStyles = css`
 
 	&:link,
 	&:active {
-		color: ${text.anchorSecondary};
+		color: ${themePalette('--article-text')};
 	}
 
 	&:visited h4 {
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 
 	&:hover h4 {
@@ -80,52 +86,54 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 			css={listItemStyles}
 			data-link-name={`trail | ${mostViewedItemIndex + 1}`}
 		>
-			<a css={linkTagStyles} href={trail.url} ref={hoverRef}>
-				<div css={lineWrapperStyles}>
-					{!!trail.image && (
-						<div css={imageWrapperStyles}>
-							<Avatar
-								src={trail.image}
-								alt=""
-								format={trail.format}
-							/>
-						</div>
-					)}
-					<div css={headlineWrapperStyles}>
-						{trail.format.design === ArticleDesign.LiveBlog ? (
-							<LinkHeadline
-								headlineText={trail.headline}
-								format={trail.format}
-								size="small"
-								showUnderline={isHovered}
-								kickerText="Live"
-								hideLineBreak={true}
-								byline={
-									trail.showByline ? trail.byline : undefined
-								}
-							/>
-						) : (
-							<LinkHeadline
-								headlineText={trail.headline}
-								format={trail.format}
-								size="small"
-								showUnderline={isHovered}
-								byline={
-									trail.showByline ? trail.byline : undefined
-								}
-							/>
+			<FormatBoundary format={trail.format}>
+				<a css={linkTagStyles} href={trail.url} ref={hoverRef}>
+					<div css={lineWrapperStyles}>
+						{!!trail.image && (
+							<div css={imageWrapperStyles}>
+								<Avatar src={trail.image} alt="" />
+							</div>
 						)}
-						<div css={marginTopStyles}>
-							{!!trail.ageWarning && (
-								<AgeWarning
-									age={trail.ageWarning}
+						<div css={headlineWrapperStyles}>
+							{trail.format.design === ArticleDesign.LiveBlog ? (
+								<LinkHeadline
+									headlineText={trail.headline}
+									format={trail.format}
 									size="small"
+									showUnderline={isHovered}
+									kickerText="Live"
+									hideLineBreak={true}
+									byline={
+										trail.showByline
+											? trail.byline
+											: undefined
+									}
+								/>
+							) : (
+								<LinkHeadline
+									headlineText={trail.headline}
+									format={trail.format}
+									size="small"
+									showUnderline={isHovered}
+									byline={
+										trail.showByline
+											? trail.byline
+											: undefined
+									}
 								/>
 							)}
+							<div css={marginTopStyles}>
+								{!!trail.ageWarning && (
+									<AgeWarning
+										age={trail.ageWarning}
+										size="small"
+									/>
+								)}
+							</div>
 						</div>
 					</div>
-				</div>
-			</a>
+				</a>
+			</FormatBoundary>
 		</li>
 	);
 };

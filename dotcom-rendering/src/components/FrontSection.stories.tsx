@@ -242,57 +242,115 @@ export const TreatsStory = () => {
 };
 TreatsStory.storyName = 'with treats and date header';
 
-/**
- * Note only the first container should show a badge
- */
-export const MultipleOnAPaidFront = () => {
-	const frontBranding = {
-		edition: {
-			id: 'UK',
-		},
-		branding: {
-			brandingType: {
-				name: 'paid-content',
-			},
-			sponsorName: 'Grounded',
-			logo: {
-				src: 'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
-				dimensions: {
-					width: 140,
-					height: 90,
-				},
-				link: '/',
-				label: 'Paid for by',
-			},
-			aboutThisLink:
-				'https://www.theguardian.com/info/2016/jan/25/content-funding',
-		},
-	} as const;
-
+export const WithEditorialBadge = () => {
 	return (
-		<>
-			<FrontSection
-				title="Section one"
-				isOnPaidContentFront={true}
-				index={0}
-				frontBranding={frontBranding}
-				discussionApiUrl={discussionApiUrl}
-			>
-				<Placeholder />
-			</FrontSection>
-			<FrontSection
-				title="Section two"
-				isOnPaidContentFront={true}
-				index={1}
-				frontBranding={frontBranding}
-				discussionApiUrl={discussionApiUrl}
-			>
-				<Placeholder />
-			</FrontSection>
-		</>
+		<FrontSection
+			title="Section"
+			discussionApiUrl={discussionApiUrl}
+			collectionBranding={{
+				kind: 'editorial',
+				badge: {
+					href: 'world/series/the-new-arrivals',
+					imageSrc: 'badges/new-arrivals.png',
+				},
+			}}
+		>
+			<Placeholder />
+		</FrontSection>
 	);
 };
-MultipleOnAPaidFront.storyName = 'two sections on a paid front';
+WithEditorialBadge.storyName = 'with editorial badge';
+
+/**
+ * Use the same logo for each of the stories with branding
+ */
+const logo = {
+	src: 'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
+	dimensions: {
+		width: 140,
+		height: 90,
+	},
+	link: '/',
+	label: 'Paid for by',
+};
+
+export const WithSponsoredBranding = () => {
+	return (
+		<FrontSection
+			title="Section"
+			discussionApiUrl={discussionApiUrl}
+			collectionBranding={{
+				kind: 'sponsored',
+				isFrontBranding: false,
+				branding: {
+					brandingType: {
+						name: 'sponsored',
+					},
+					sponsorName: 'guardian.org',
+					logo,
+					aboutThisLink:
+						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+				},
+				isContainerBranding: false,
+			}}
+		>
+			<Placeholder />
+		</FrontSection>
+	);
+};
+WithSponsoredBranding.storyName = 'with sponsored branding';
+
+export const WithPaidBranding = () => {
+	return (
+		<FrontSection
+			title="Section"
+			discussionApiUrl={discussionApiUrl}
+			collectionBranding={{
+				kind: 'paid-content',
+				isFrontBranding: false,
+				branding: {
+					brandingType: {
+						name: 'paid-content',
+					},
+					sponsorName: 'guardian.org',
+					logo,
+					aboutThisLink:
+						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+				},
+				isContainerBranding: false,
+			}}
+		>
+			<Placeholder />
+		</FrontSection>
+	);
+};
+WithPaidBranding.storyName = 'with paid content branding';
+
+export const WithPaidContentForWholeFront = () => {
+	return (
+		<FrontSection
+			title="First Section"
+			discussionApiUrl={discussionApiUrl}
+			collectionBranding={{
+				kind: 'paid-content',
+				isFrontBranding: true,
+				branding: {
+					brandingType: {
+						name: 'paid-content',
+					},
+					sponsorName: 'guardian.org',
+					logo,
+					aboutThisLink:
+						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+				},
+				isContainerBranding: false,
+			}}
+		>
+			<Placeholder />
+		</FrontSection>
+	);
+};
+WithPaidContentForWholeFront.storyName = 'with paid content for whole front';
 
 export const PageSkinStory = () => {
 	return (

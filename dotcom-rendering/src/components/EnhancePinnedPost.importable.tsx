@@ -1,25 +1,14 @@
 import { startPerformanceMeasure } from '@guardian/libs';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { isServer } from '../lib/isServer';
 import { useIsInView } from '../lib/useIsInView';
-
-const pinnedPost: HTMLElement | null = !isServer
-	? window.document.querySelector('[data-gu-marker=pinned-post]')
-	: null;
-
-const pinnedPostCheckBox: HTMLElement | null = !isServer
-	? window.document.querySelector('input[name=pinned-post-checkbox]')
-	: null;
-
-const pinnedPostContent: HTMLElement | null = !isServer
-	? window.document.querySelector('#collapsible-body')
-	: null;
+import type { RenderingTarget } from '../types/renderingTarget';
+import { useConfig } from './ConfigContext';
 
 /**
  * toggle show more button and overlay on pinned post
  */
-function toggleShowMore(show: boolean) {
+function toggleShowMore(show: boolean, checked: boolean) {
 	const pinnedPostButton = document.querySelector<HTMLElement>(
 		'#pinned-post-button',
 	);
@@ -30,7 +19,7 @@ function toggleShowMore(show: boolean) {
 	if (pinnedPostButton) {
 		if (show) {
 			pinnedPostButton.style.removeProperty('display');
-		} else {
+		} else if (!checked) {
 			pinnedPostButton.style.display = 'none';
 		}
 	}
@@ -47,41 +36,80 @@ function toggleShowMore(show: boolean) {
 /**
  * Scroll to the top of the main content when the pinned post is collapsed if the top of the post is out of view
  */
-function scrollOnCollapse() {
-	const position = pinnedPost?.getBoundingClientRect();
-	if (position && position.top < 0) {
-		pinnedPost?.scrollIntoView({
+const scrollOnCollapse = (pinnedPost: HTMLElement) => {
+	const position = pinnedPost.getBoundingClientRect();
+	if (position.top < 0) {
+		pinnedPost.scrollIntoView({
 			behavior: 'smooth',
 		});
 	}
-}
+};
 
-const handleClickTracking = () => {
-	if (pinnedPostCheckBox instanceof HTMLInputElement) {
-		if (pinnedPostCheckBox.checked) {
-			void submitComponentEvent({
+const handleClickTracking = (
+	checked: boolean,
+	pinnedPost: HTMLElement,
+	renderingTarget: RenderingTarget,
+) => {
+	if (checked) {
+		void submitComponentEvent(
+			{
 				component: {
 					componentType: 'LIVE_BLOG_PINNED_POST',
-					id: pinnedPost?.id,
+					id: pinnedPost.id,
 				},
 				action: 'CLICK',
 				value: 'show-more',
-			});
-		} else {
-			void submitComponentEvent({
+			},
+			renderingTarget,
+		);
+	} else {
+		void submitComponentEvent(
+			{
 				component: {
 					componentType: 'LIVE_BLOG_PINNED_POST',
-					id: pinnedPost?.id,
+					id: pinnedPost.id,
 				},
 				action: 'CLICK',
 				value: 'show-less',
-			});
-			scrollOnCollapse();
-		}
+			},
+			renderingTarget,
+		);
+		scrollOnCollapse(pinnedPost);
 	}
 };
 
+/**
+ * Observes the pinned post element on live blogs.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We want to record how long this element was in view
+ *
+ * ---
+ *
+ * No visual output
+ */
 export const EnhancePinnedPost = () => {
+	const [pinnedPost, setPinnedPost] = useState<HTMLElement | null>(null);
+	const [pinnedPostCheckBox, setPinnedPostCheckBox] =
+		useState<HTMLInputElement | null>(null);
+	const [pinnedPostContent, setPinnedPostContent] =
+		useState<HTMLElement | null>(null);
+
+	useEffect(() => {
+		setPinnedPost(
+			document.querySelector<HTMLElement>('[data-gu-marker=pinned-post]'),
+		);
+		setPinnedPostCheckBox(
+			document.querySelector<HTMLInputElement>(
+				'input[name=pinned-post-checkbox]',
+			),
+		);
+		setPinnedPostContent(
+			document.querySelector<HTMLElement>('#collapsible-body'),
+		);
+	}, []);
+
 	const [hasBeenSeen, setHasBeenSeen] = useState(false);
 	const [isInView] = useIsInView({
 		threshold: 0.1,
@@ -89,18 +117,22 @@ export const EnhancePinnedPost = () => {
 		node: pinnedPost ?? undefined,
 	});
 
+	const { renderingTarget } = useConfig();
+
 	const pinnedPostTiming =
 		useRef<ReturnType<typeof startPerformanceMeasure>>();
 
-	const checkContentHeight = () => {
-		if (pinnedPostContent) {
-			const contentFitsContainer =
-				pinnedPostContent.scrollHeight <=
-				pinnedPostContent.clientHeight;
-			if (contentFitsContainer) toggleShowMore(false);
-			else toggleShowMore(true);
-		}
-	};
+	const checkContentHeight = useCallback(() => {
+		if (!pinnedPostContent) return;
+		if (!pinnedPostCheckBox) return;
+
+		const { checked } = pinnedPostCheckBox;
+
+		const contentFitsContainer =
+			pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
+		if (contentFitsContainer) toggleShowMore(false, checked);
+		else toggleShowMore(true, checked);
+	}, [pinnedPostCheckBox, pinnedPostContent]);
 
 	/**
 	 * Checks for dom updates (embeds loading etc) and updates content height
@@ -114,23 +146,28 @@ export const EnhancePinnedPost = () => {
 		const config = {
 			childList: true,
 			subtree: true,
-		};
+		} satisfies MutationObserverInit;
 
 		observer.observe(pinnedPost, config);
 
 		return () => observer.disconnect();
-	}, []);
+	}, [checkContentHeight, pinnedPost]);
 
 	useEffect(() => {
-		pinnedPostCheckBox?.addEventListener('change', handleClickTracking);
+		if (!pinnedPost) return;
+		if (!pinnedPostCheckBox) return;
 
-		return () => {
-			pinnedPostCheckBox?.removeEventListener(
-				'change',
-				handleClickTracking,
+		const listener = () =>
+			handleClickTracking(
+				pinnedPostCheckBox.checked,
+				pinnedPost,
+				renderingTarget,
 			);
-		};
-	}, []);
+
+		pinnedPostCheckBox.addEventListener('change', listener);
+
+		return () => pinnedPostCheckBox.removeEventListener('change', listener);
+	}, [pinnedPost, pinnedPostCheckBox, renderingTarget]);
 
 	// calculate duration when user is viewing pinned post
 	// and emit ophan events when the pinned post goes out of view
@@ -147,16 +184,21 @@ export const EnhancePinnedPost = () => {
 			const timeTaken = pinnedPostTiming.current?.endPerformanceMeasure();
 			if (timeTaken !== undefined) {
 				const timeTakenInSeconds = timeTaken / 1000;
-				void submitComponentEvent({
-					component: {
-						componentType: 'LIVE_BLOG_PINNED_POST',
-						id: pinnedPost.id,
+				void submitComponentEvent(
+					{
+						component: {
+							componentType: 'LIVE_BLOG_PINNED_POST',
+							id: pinnedPost.id,
+						},
+						action: 'VIEW',
+						value: timeTakenInSeconds.toString(),
 					},
-					action: 'VIEW',
-					value: timeTakenInSeconds.toString(),
-				});
+					renderingTarget,
+				);
 			}
 		}
-	}, [isInView, hasBeenSeen]);
+	}, [isInView, hasBeenSeen, renderingTarget, pinnedPost]);
+
+	// render nothing
 	return null;
 };

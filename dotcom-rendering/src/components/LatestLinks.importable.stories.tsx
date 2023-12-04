@@ -4,8 +4,6 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints, palette } from '@guardian/source-foundations';
 import fetchMock from 'fetch-mock';
 import type { PropsWithChildren } from 'react';
-import { useEffect } from 'react';
-import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
 import { Island } from './Island';
@@ -22,6 +20,8 @@ export default {
 				breakpoints.phablet,
 				breakpoints.desktop,
 			],
+			pauseAnimationAtEnd: true,
+			delay: 1200, // ensure “reveal” has finished before taking screenshot
 		},
 	},
 };
@@ -30,8 +30,6 @@ const Wrapper = ({
 	children,
 	styles,
 }: PropsWithChildren<{ styles: SerializedStyles }>) => {
-	useEffect(doStorybookHydration);
-
 	fetchMock
 		.restore()
 		.get(

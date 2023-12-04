@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, neutral, space, until } from '@guardian/source-foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+	until,
+} from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
@@ -71,7 +76,7 @@ const decideDivider = (
 		verticalDividerColour ??
 		(containerPalette &&
 			decideContainerOverrides(containerPalette).border.container) ??
-		neutral[86];
+		sourcePalette.neutral[86];
 
 	return offsetBottomPaddingOnDivider
 		? verticalDividerWithBottomOffset(paddingSize, borderColour)

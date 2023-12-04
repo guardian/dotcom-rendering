@@ -21,6 +21,7 @@ import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
+import { useConfig } from './ConfigContext';
 
 const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
 export interface DropdownLinkType {
@@ -279,6 +280,8 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 		[link],
 	);
 
+	const { renderingTarget } = useConfig();
+
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 	});
@@ -306,10 +309,13 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				notification.logImpression?.();
 			}
 
-			void submitComponentEvent({
-				component: ophanComponent,
-				action: 'VIEW',
-			});
+			void submitComponentEvent(
+				{
+					component: ophanComponent,
+					action: 'VIEW',
+				},
+				renderingTarget,
+			);
 		}
 	}, [
 		hasBeenSeen,
@@ -317,14 +323,18 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 		link.notifications,
 		hasSentViewEvent,
 		link.id,
+		renderingTarget,
 	]);
 
 	useOnce(() => {
 		if (ophanComponent) {
-			void submitComponentEvent({
-				component: ophanComponent,
-				action: 'INSERT',
-			});
+			void submitComponentEvent(
+				{
+					component: ophanComponent,
+					action: 'INSERT',
+				},
+				renderingTarget,
+			);
 		}
 	}, [ophanComponent]);
 
@@ -347,10 +357,13 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				data-link-name={link.dataLinkName}
 				onClick={() => {
 					if (ophanComponent) {
-						void submitComponentEvent({
-							component: ophanComponent,
-							action: 'CLICK',
-						});
+						void submitComponentEvent(
+							{
+								component: ophanComponent,
+								action: 'CLICK',
+							},
+							renderingTarget,
+						);
 					}
 				}}
 			>
@@ -489,7 +502,7 @@ export const Dropdown = ({
 						]}
 						aria-expanded={isExpanded ? 'true' : 'false'}
 						data-link-name={dataLinkName}
-						data-cy="dropdown-button"
+						data-testid="dropdown-button"
 						type="button"
 					>
 						{label}
@@ -506,7 +519,7 @@ export const Dropdown = ({
 						) : (
 							<ul
 								css={[ulStyles, cssOverrides]}
-								data-cy="dropdown-options"
+								data-testid="dropdown-options"
 							>
 								{links.map((link, index) => (
 									<DropdownLink

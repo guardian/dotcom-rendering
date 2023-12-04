@@ -3,8 +3,7 @@ import { cmp, onConsent } from '@guardian/consent-management-platform';
 import type { Framework } from '@guardian/consent-management-platform/dist/types';
 import { palette } from '@guardian/source-foundations';
 import { ButtonLink } from '@guardian/source-react-components';
-import { useState } from 'react';
-import { useOnce } from '../lib/useOnce';
+import { useEffect, useState } from 'react';
 
 const footerLink = css`
 	color: inherit;
@@ -38,7 +37,7 @@ type Props = {
 export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 	const [framework, setFramework] = useState<Framework>();
 
-	useOnce(() => {
+	useEffect(() => {
 		void onConsent().then((consentState) => {
 			setFramework(consentState.framework ?? undefined);
 		});

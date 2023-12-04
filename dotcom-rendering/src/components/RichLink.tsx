@@ -1,19 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import {
-	brandAltBackground,
-	from,
-	headline,
-	neutral,
-	text,
-	textSans,
-} from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { from, headline, textSans } from '@guardian/source-foundations';
+import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
-import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
+import { FormatBoundary } from './FormatBoundary';
 import { Hide } from './Hide';
 import { QuoteIcon } from './QuoteIcon';
 import { StarRating } from './StarRating/StarRating';
@@ -40,46 +33,25 @@ export interface RichLinkImageData {
 	height: string;
 }
 
-const neutralBackground = (format: ArticleFormat, palette: Palette) => {
-	// One off colours to match the analysis background colour
-	const background =
-		format.design === ArticleDesign.Analysis
-			? palette.background.analysisContrast
-			: neutral[97];
-	const backgroundHover =
-		format.design === ArticleDesign.Analysis
-			? palette.background.analysisContrastHover
-			: neutral[93];
-	return css`
-		background-color: ${background};
-		a {
-			color: inherit;
-		}
-		:hover {
-			background-color: ${backgroundHover};
-		}
-	`;
-};
+const neutralBackground = css`
+	background-color: ${themePalette('--rich-link-background')};
+	a {
+		color: inherit;
+	}
+	:hover {
+		background-color: ${themePalette('--rich-link-background-hover')};
+	}
+`;
 
-const pillarBackground = (palette: Palette) => {
-	return css`
-		background-color: ${palette.background.richLink};
-	`;
-};
+const textColour = css`
+	color: ${themePalette('--rich-link-text')};
+`;
 
-const textColour = (palette: Palette) => {
-	return css`
-		color: ${palette.text.richLink};
-	`;
-};
-
-const richLinkTopBorder = (palette: Palette) => {
-	return css`
-		border-top: 1px;
-		border-top-style: solid;
-		border-top-color: ${palette.border.richLink};
-	`;
-};
+const richLinkTopBorder = css`
+	border-top: 1px;
+	border-top-style: solid;
+	border-top-color: ${themePalette('--rich-link-border')};
+`;
 
 const richLinkLink = css`
 	text-decoration: none;
@@ -94,7 +66,7 @@ const richLinkElements = css`
 
 const richLinkHeader = css`
 	padding-bottom: 10px;
-	color: ${neutral[0]};
+	color: ${themePalette('--rich-link-header')};
 `;
 
 const richLinkTitle = (parentIsBlog: boolean) => css`
@@ -116,13 +88,11 @@ const labsRichLinkTitle = css`
 	${textSans.small({ fontWeight: 'bold', lineHeight: 'regular' })}
 `;
 
-const richLinkReadMore = (palette: Palette) => {
-	return css`
-		fill: ${palette.fill.richLink};
-		color: ${palette.text.richLink};
-		padding-top: 2px;
-	`;
-};
+const richLinkReadMore = css`
+	fill: ${themePalette('--rich-link-fill')};
+	color: ${themePalette('--rich-link-text')};
+	padding-top: 2px;
+`;
 
 const readMoreTextStyle = css`
 	${headline.xxxsmall()};
@@ -148,7 +118,7 @@ const labsReadMoreTextStyle = css`
 	padding-left: 4px;
 	vertical-align: top;
 	text-decoration: none;
-	color: ${neutral[7]};
+	color: ${themePalette('--rich-link-text')};
 `;
 
 const byline = css`
@@ -180,11 +150,12 @@ const contributorImageWrapper = css`
 const paidForBranding = css`
 	${textSans.xxsmall()};
 	font-weight: bold;
-	color: ${text.supporting};
+	color: ${themePalette('--rich-link-branding-text')};
 `;
 
 const starWrapper = css`
-	background-color: ${brandAltBackground.primary};
+	background-color: ${themePalette('--star-rating-background')};
+	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
 `;
 
@@ -226,7 +197,6 @@ export const RichLink = ({
 	contributorImage,
 	isPlaceholder,
 }: Props) => {
-	const palette = decidePalette(linkFormat);
 	const linkText =
 		cardStyle === 'letters' ? `${headlineText} | Letters ` : headlineText;
 
@@ -255,12 +225,12 @@ export const RichLink = ({
 			data-print-layout="hide"
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
-			css={pillarBackground(palette)}
+			css={[neutralBackground]}
 			data-name={isPlaceholder ? 'placeholder' : ''}
 		>
-			<div css={neutralBackground(format, palette)}>
+			<FormatBoundary format={linkFormat}>
 				<a css={richLinkLink} href={url}>
-					<div css={richLinkTopBorder(palette)} />
+					<div css={richLinkTopBorder} />
 					{showImage && (
 						<div>
 							<img
@@ -279,12 +249,16 @@ export const RichLink = ({
 									<>
 										<Hide when="above" breakpoint="wide">
 											<QuoteIcon
-												colour={palette.fill.quoteIcon}
+												colour={themePalette(
+													'--quote-icon-fill',
+												)}
 											/>
 										</Hide>
 										<Hide when="below" breakpoint="wide">
 											<QuoteIcon
-												colour={palette.fill.quoteIcon}
+												colour={themePalette(
+													'--quote-icon-fill',
+												)}
 											/>
 										</Hide>
 									</>
@@ -292,7 +266,7 @@ export const RichLink = ({
 								{linkText}
 							</div>
 							{isOpinion && (
-								<div css={[byline, textColour(palette)]}>
+								<div css={[byline, textColour]}>
 									{mainContributor}
 								</div>
 							)}
@@ -315,11 +289,10 @@ export const RichLink = ({
 								<Avatar
 									src={contributorImage}
 									alt={mainContributor}
-									format={format}
 								/>
 							</div>
 						)}
-						<div css={richLinkReadMore(palette)}>
+						<div css={richLinkReadMore}>
 							<ArrowInCircle />
 							<div
 								css={
@@ -333,7 +306,7 @@ export const RichLink = ({
 						</div>
 					</div>
 				</a>
-			</div>
+			</FormatBoundary>
 		</div>
 	);
 };

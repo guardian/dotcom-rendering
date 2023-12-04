@@ -8,6 +8,7 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
+import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
 import type { Product, SignInGateProps, UserType } from '../types';
 import {
@@ -174,6 +175,8 @@ export const SignInGateMainCheckoutComplete = ({
 	isMandatory = false,
 	checkoutCompleteCookieData,
 }: SignInGateProps) => {
+	const { renderingTarget } = useConfig();
+
 	// There is a type check above which means this shouldn't be
 	// possible to be undefined here, so this is just handling
 	// the fact that the type is optional.
@@ -205,7 +208,7 @@ export const SignInGateMainCheckoutComplete = ({
 	};
 
 	return (
-		<div css={signInGateContainer} data-cy="sign-in-gate-main">
+		<div css={signInGateContainer} data-testid="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
 			<h1 css={personalisedHeadingStyles}>{getHeadingText(product)}</h1>
@@ -224,28 +227,38 @@ export const SignInGateMainCheckoutComplete = ({
 			</ul>
 			<div css={personalisedActionButtons}>
 				<LinkButton
-					data-cy="sign-in-gate-main_register"
+					data-testid="sign-in-gate-main_register"
 					data-ignore="global-link-styling"
 					css={registerButton}
 					priority="primary"
 					size="small"
 					href={personaliseSignInURl(signInUrl)}
 					onClick={() => {
-						trackLink(ophanComponentId, 'register-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'register-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					{getButtonText(userType)}
 				</LinkButton>
 				{!isMandatory && (
 					<Button
-						data-cy="sign-in-gate-main_dismiss"
+						data-testid="sign-in-gate-main_dismiss"
 						data-ignore="global-link-styling"
 						css={notNowButton}
 						priority="subdued"
 						size="small"
 						onClick={() => {
 							dismissGate();
-							trackLink(ophanComponentId, 'not-now', abTest);
+							trackLink(
+								ophanComponentId,
+								'not-now',
+								renderingTarget,
+								abTest,
+							);
 						}}
 					>
 						Not now
@@ -258,7 +271,12 @@ export const SignInGateMainCheckoutComplete = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'why-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'why-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					How will my information & data be used?
@@ -268,7 +286,12 @@ export const SignInGateMainCheckoutComplete = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/help/identity-faq`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'help-link', abTest);
+						trackLink(
+							ophanComponentId,
+							'help-link',
+							renderingTarget,
+							abTest,
+						);
 					}}
 				>
 					Get help with registering or signing in

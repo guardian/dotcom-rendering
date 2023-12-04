@@ -24,6 +24,7 @@ import {
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
 import type { TagType } from '../../types/tag';
+import { useConfig } from '../ConfigContext';
 
 export type EpicConfig = {
 	module: ModuleData;
@@ -158,6 +159,7 @@ export const ReaderRevenueEpic = ({
 	stage,
 }: EpicConfig) => {
 	const [Epic, setEpic] = useState<EpicType>();
+	const { renderingTarget } = useConfig();
 
 	const openCmp = () => {
 		cmp.showPrivacyManager();
@@ -199,7 +201,9 @@ export const ReaderRevenueEpic = ({
 				<Epic
 					{...module.props}
 					fetchEmail={fetchEmail}
-					submitComponentEvent={submitComponentEvent}
+					submitComponentEvent={(event) =>
+						void submitComponentEvent(event, renderingTarget)
+					}
 					openCmp={openCmp}
 					hasConsentForArticleCount={hasConsentForArticleCount}
 					stage={stage}

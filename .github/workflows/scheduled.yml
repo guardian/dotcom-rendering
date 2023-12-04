@@ -23,16 +23,6 @@ jobs:
         with:
           deno-version: v1.x
 
-      - name: Components Ophan attributes tracker
-        run: |
-          deno run \
-            --allow-read \
-            --allow-net=www.theguardian.com,api.github.com \
-            --allow-env=HOME,GITHUB_TOKEN \
-            scripts/deno/ophan-components.ts
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Thrasher tracker
         run: |
           deno run \
@@ -54,8 +44,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CAPI_KEY: ${{ secrets.CAPI_KEY }}
 
+      - run: corepack enable
+
       # The peer dependencies script relies on `yarn`
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'

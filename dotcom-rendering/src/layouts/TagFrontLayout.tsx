@@ -1,16 +1,21 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import {
+	body,
 	brandBackground,
 	brandBorder,
 	brandLine,
 	neutral,
 	news,
+	space,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
-import { AdSlot } from '../components/AdSlot.web';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
+import {
+	decideFrontsBannerAdSlot,
+	decideMerchandisingSlot,
+	decideMerchHighAndMobileAdSlots,
+} from '../components/DecideFrontsAdSlots';
 import { Footer } from '../components/Footer';
 import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
@@ -19,20 +24,17 @@ import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
-import { TagFrontFastMpu } from '../components/TagFrontFastMpu';
 import { TagFrontHeader } from '../components/TagFrontHeader';
-import { TagFrontSlowMpu } from '../components/TagFrontSlowMpu';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
 import {
-	getMerchHighPosition,
 	getTagFrontMobileAdPositions,
-} from '../lib/getAdPositions';
+	getTagFrontsBannerAdPositions,
+} from '../lib/getTagFrontsAdPositions';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRTagFrontType } from '../types/tagFront';
-import { decideAdSlot } from './FrontLayout';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -62,29 +64,61 @@ const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
 	}
 };
 
-export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
+const titleStyle = css`
+	${body.medium({ fontWeight: 'regular' })};
+	color: ${neutral[7]};
+	padding-bottom: ${space[1]}px;
+	padding-top: ${space[1]}px;
+	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
+`;
 
-	const palette = decidePalette(format);
+const linkStyle = css`
+	text-decoration: none;
+	color: ${neutral[7]};
 
-	const merchHighPosition = getMerchHighPosition(
-		tagFront.groupedTrails.length,
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
+const SectionLeftContent = ({
+	url,
+	title,
+	dateString,
+}: {
+	title: string;
+	dateString: string;
+	url?: string;
+}) => {
+	if (url !== undefined) {
+		return (
+			<header css={titleStyle}>
+				<a href={url} css={linkStyle}>
+					<time dateTime={dateString}>{title}</time>
+				</a>
+			</header>
+		);
+	}
+	return (
+		<header css={titleStyle}>
+			<time dateTime={dateString}>{title}</time>
+		</header>
 	);
+};
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
+export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
+	const {
+		config: { switches, hasPageSkin, isPaidContent },
+	} = tagFront;
+
 	const renderAds = canRenderAds(tagFront);
 
+	const desktopAdPositions = renderAds
+		? getTagFrontsBannerAdPositions(tagFront.groupedTrails.length)
+		: [];
+
 	const mobileAdPositions = renderAds
-		? getTagFrontMobileAdPositions(
-				tagFront.groupedTrails,
-				merchHighPosition,
-		  )
+		? getTagFrontMobileAdPositions(tagFront.groupedTrails)
 		: [];
 
 	return (
@@ -120,14 +154,11 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							mmaUrl={tagFront.config.mmaUrl}
 							discussionApiUrl={tagFront.config.discussionApiUrl}
 							urls={tagFront.nav.readerRevenueLinks.header}
-							remoteHeader={
-								!!tagFront.config.switches.remoteHeader
-							}
+							remoteHeader={!!switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 							headerTopBarSearchCapiSwitch={
-								!!tagFront.config.switches
-									.headerTopBarSearchCapi
+								!!switches.headerTopBarSearchCapi
 							}
 						/>
 					</Section>
@@ -148,9 +179,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								tagFront.nav.readerRevenueLinks.header.subscribe
 							}
 							editionId={tagFront.editionId}
-							headerTopBarSwitch={
-								!!tagFront.config.switches.headerTopNav
-							}
+							headerTopBarSwitch={!!switches.headerTopNav}
 						/>
 					</Section>
 					{NAV.subNavSections && (
@@ -158,7 +187,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								element="aside"
 							>
@@ -176,7 +207,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							</Section>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								showTopBorder={false}
 							>
@@ -211,43 +244,16 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 						groupedTrails.day !== undefined,
 					);
 
-					const imageLoading =
-						tagFront.config.abTests.lazyLoadImagesVariant ===
-							'variant' && index > 0
-							? 'lazy'
-							: 'eager';
+					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
-					const ContainerComponent = () => {
-						if (
-							'injected' in groupedTrails &&
-							'speed' in groupedTrails
-						) {
-							if (groupedTrails.speed === 'fast') {
-								return (
-									<TagFrontFastMpu
-										{...groupedTrails}
-										adIndex={1} // There is only ever 1 inline ad in a tag front
-										imageLoading={imageLoading}
-									/>
-								);
-							} else {
-								return (
-									<TagFrontSlowMpu
-										{...groupedTrails}
-										adIndex={1} // There is only ever 1 inline ad in a tag front
-										imageLoading={imageLoading}
-									/>
-								);
-							}
-						}
-						return (
-							<DecideContainerByTrails
-								trails={groupedTrails.trails}
-								speed={tagFront.speed}
-								imageLoading={imageLoading}
-							/>
-						);
-					};
+					const title = date.toLocaleDateString('en-GB', {
+						day:
+							groupedTrails.day !== undefined
+								? 'numeric'
+								: undefined,
+						month: 'long',
+						year: 'numeric',
+					});
 
 					const url =
 						groupedTrails.day !== undefined
@@ -266,16 +272,26 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 					return (
 						<Fragment key={containedId}>
+							{decideFrontsBannerAdSlot(
+								renderAds,
+								hasPageSkin,
+								index,
+								desktopAdPositions,
+							)}
 							<FrontSection
-								title={date.toLocaleDateString('en-GB', {
-									day:
-										groupedTrails.day !== undefined
-											? 'numeric'
-											: undefined,
-									month: 'long',
-									year: 'numeric',
-								})}
-								url={url}
+								leftContent={
+									<SectionLeftContent
+										url={url}
+										title={title}
+										dateString={`${groupedTrails.year}-${
+											groupedTrails.month
+										}${
+											groupedTrails.day !== undefined
+												? `-${groupedTrails.day}`
+												: ''
+										}`}
+									/>
+								}
 								showTopBorder={true}
 								ophanComponentLink={`container-${index} | ${containedId}`}
 								ophanComponentName={containedId}
@@ -294,20 +310,25 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 									tagFront.config.discussionApiUrl
 								}
 							>
-								<ContainerComponent />
+								<DecideContainerByTrails
+									trails={groupedTrails.trails}
+									speed={tagFront.speed}
+									imageLoading={imageLoading}
+								/>
 							</FrontSection>
-							{decideAdSlot(
+							{decideMerchHighAndMobileAdSlots(
 								renderAds,
 								index,
 								tagFront.groupedTrails.length,
-								tagFront.config.isPaidContent,
+								isPaidContent,
 								mobileAdPositions,
-								tagFront.config.hasPageSkin,
+								hasPageSkin,
 							)}
 						</Fragment>
 					);
 				})}
 			</main>
+
 			<Section
 				fullWidth={true}
 				showTopBorder={false}
@@ -315,17 +336,8 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 			>
 				<TrendingTopics trendingTopics={tagFront.trendingTopics} />
 			</Section>
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				<AdSlot position="merchandising" display={format.display} />
-			</Section>
+
+			{decideMerchandisingSlot(renderAds, hasPageSkin)}
 
 			{NAV.subNavSections && (
 				<Section

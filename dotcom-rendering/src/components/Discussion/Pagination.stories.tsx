@@ -1,6 +1,14 @@
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { FilterOptions } from '../../types/discussion';
 import { Pagination } from './Pagination';
+
+const articleFormat: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
 
 export default { component: Pagination, title: 'Discussion/Pagination' };
 
@@ -51,9 +59,7 @@ export const WithBackground = () => {
 	);
 };
 WithBackground.storyName = 'with a dark background';
-WithBackground.story = {
-	parameters: { backgrounds: { default: 'dark' } },
-};
+WithBackground.decorators = [splitTheme([articleFormat])];
 
 export const ThreePages = () => {
 	const [page, setCurrentPage] = useState(1);

@@ -2,39 +2,33 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events -- TODO https://github.com/guardian/dotcom-rendering/issues/8161 */
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
-import {
-	headline,
-	neutral,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { headline, space, textSans } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../lib/decidePalette';
+import { palette } from '../palette';
 import type { TableOfContentsItem } from '../types/frontend';
-import type { Palette } from '../types/palette';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];
 	format: ArticleFormat;
 }
 
-const anchorStyles = (palette: Palette) => css`
-	color: ${palette.text.tableOfContents};
+const anchorStyles = css`
+	color: ${palette('--table-of-contents')};
 	text-decoration: none;
 	display: block;
 `;
 
-const listItemStyles = (format: ArticleFormat, palette: Palette) => {
+const listItemStyles = (format: ArticleFormat) => {
 	const fontWeight =
 		format.display === ArticleDisplay.Immersive ? 'light' : 'bold';
 	return css`
 		${headline.xxxsmall({ fontWeight })};
 		box-sizing: border-box;
-		border-top: 1px solid ${neutral[86]};
+		border-top: 1px solid ${palette('--table-of-contents-border')};
 		padding-bottom: ${space[4]}px;
 		padding-top: ${space[1]}px;
 		display: flex;
@@ -43,7 +37,7 @@ const listItemStyles = (format: ArticleFormat, palette: Palette) => {
 		&::before {
 			content: '';
 			position: absolute;
-			background-color: ${palette.text.tableOfContents};
+			background-color: ${palette('--table-of-contents')};
 			width: 100%;
 			height: 0;
 			transition: height 0.2s ease;
@@ -64,7 +58,7 @@ const detailsStyles = css`
 		display: none;
 	}
 	&:not([open]) {
-		border-bottom: 1px solid ${neutral[86]};
+		border-bottom: 1px solid ${palette('--table-of-contents-border')};
 	}
 	/* removes toggle triangle from webkit browsers such as Safari */
 	summary::-webkit-details-marker {
@@ -72,7 +66,7 @@ const detailsStyles = css`
 	}
 `;
 
-const summaryStyles = (palette: Palette) => css`
+const summaryStyles = css`
 	display: flex;
 	justify-content: space-between;
 	cursor: pointer;
@@ -80,20 +74,20 @@ const summaryStyles = (palette: Palette) => css`
 	list-style: none;
 
 	padding: ${space[1]}px 0;
-	border-top: 1px solid ${neutral[86]};
+	border-top: 1px solid ${palette('--table-of-contents-border')};
 
 	&:hover {
 		text-decoration: underline;
 	}
 
 	path {
-		fill: ${palette.text.tableOfContents};
+		fill: ${palette('--table-of-contents')};
 	}
 `;
 
-const titleStyle = (palette: Palette) => css`
+const titleStyle = css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
-	color: ${palette.text.tableOfContents};
+	color:${palette('--table-of-contents')};
 `;
 
 const indexStyle = css`
@@ -103,7 +97,7 @@ const indexStyle = css`
 const verticalStyle = css`
 	position: absolute;
 	left: ${space[4]}px;
-	border-left: 1px solid ${neutral[86]};
+	border-left: 1px solid ${palette('--table-of-contents-border')};
 	height: 22px;
 	top: 0;
 	transition: 0.3s all ease;
@@ -120,7 +114,6 @@ const verticalStyle = css`
  */
 
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
-	const palette = decidePalette(format);
 	const [open, setOpen] = useState(tableOfContents.length < 5);
 
 	return (
@@ -137,9 +130,9 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 				data-link-name={
 					open ? 'table-of-contents-close' : 'table-of-contents-open'
 				}
-				css={summaryStyles(palette)}
+				css={summaryStyles}
 			>
-				<h2 css={titleStyle(palette)}>Jump to</h2>
+				<h2 css={titleStyle}>Jump to</h2>
 				<span className="is-closed">
 					<SvgChevronDownSingle size="xsmall" />
 				</span>
@@ -152,7 +145,7 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 				{tableOfContents.map((item, index) => (
 					<li
 						key={item.id}
-						css={listItemStyles(format, palette)}
+						css={listItemStyles(format)}
 						data-link-name={`table-of-contents-item-${index}-${item.id}`}
 					>
 						{format.display === ArticleDisplay.NumberedList && (
@@ -162,7 +155,7 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 							</>
 						)}
 
-						<a href={`#${item.id}`} css={anchorStyles(palette)}>
+						<a href={`#${item.id}`} css={anchorStyles}>
 							{item.title}
 						</a>
 					</li>

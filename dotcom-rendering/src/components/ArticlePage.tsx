@@ -1,15 +1,22 @@
 import { css, Global } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
+import {
+	brandAlt,
+	focusHalo,
+	neutral,
+	palette as sourcePalette,
+} from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
+import { paletteDeclarations } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
+import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
@@ -57,6 +64,25 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		<StrictMode>
 			<Global
 				styles={css`
+					:root {
+						/* Light palette is default on all platforms */
+						${paletteDeclarations(format, 'light')}
+						body {
+							color: ${sourcePalette.neutral[7]};
+						}
+						/* Dark palette only for apps and only if switch turned on */
+						${article.config.switches.darkModeInApps &&
+						renderingTarget === 'Apps'
+							? css`
+									@media (prefers-color-scheme: dark) {
+										${paletteDeclarations(format, 'dark')}
+										body {
+											color: ${sourcePalette.neutral[86]};
+										}
+									}
+							  `
+							: ''}
+					}
 					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
 					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
 					*:focus {
@@ -75,18 +101,10 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<LightboxLayout
 						imageCount={article.imagesForLightbox.length}
 					/>
-					<Island
-						clientOnly={true}
-						priority="feature"
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<LightboxHash />
 					</Island>
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'hash' }}
-					>
+					<Island priority="feature" defer={{ until: 'hash' }}>
 						<LightboxJavascript
 							format={format}
 							images={article.imagesForLightbox}
@@ -95,11 +113,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				</>
 			)}
 
-			<Island
-				priority="enhancement"
-				clientOnly={true}
-				defer={{ until: 'idle' }}
-			>
+			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
 			{(format.design === ArticleDesign.LiveBlog ||
@@ -109,44 +123,29 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			{renderingTarget === 'Web' && (
 				<>
 					<SkipTo id="navigation" label="Skip to navigation" />
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<AlreadyVisited />
 					</Island>
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="critical">
 						<Metrics
 							commercialMetricsEnabled={
 								!!article.config.switches.commercialMetrics
 							}
+							tests={article.config.abTests}
 						/>
 					</Island>
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<BrazeMessaging idApiUrl={article.config.idApiUrl} />
 					</Island>
 
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<ReaderRevenueDev
 							shouldHideReaderRevenue={
 								article.shouldHideReaderRevenue
 							}
 						/>
 					</Island>
-					<Island clientOnly={true} priority="critical">
+					<Island priority="critical">
 						<SetABTests
 							abTestSwitches={filterABTestSwitches(
 								article.config.switches,
@@ -158,11 +157,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				</>
 			)}
 			{renderingTarget === 'Web' ? (
-				<Island clientOnly={true} priority="critical">
+				<Island priority="critical">
 					<SetAdTargeting adTargeting={adTargeting} />
 				</Island>
 			) : (
-				<Island clientOnly={true} priority="critical">
+				<Island priority="critical">
 					<SendTargetingParams
 						editionCommercialProperties={
 							article.commercialProperties[article.editionId]
@@ -170,6 +169,8 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					/>
 				</Island>
 			)}
+			{renderingTarget === 'Apps' &&
+				!article.config.switches.darkModeInApps && <DarkModeMessage />}
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout
 					article={article}

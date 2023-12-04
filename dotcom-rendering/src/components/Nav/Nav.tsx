@@ -19,6 +19,7 @@ type Props = {
 	isImmersive?: boolean;
 	selectedPillar?: Pillar;
 	headerTopBarSwitch: boolean;
+	hasPageSkin?: boolean;
 };
 
 const clearFixStyle = css`
@@ -61,6 +62,7 @@ export const Nav = ({
 	isImmersive,
 	selectedPillar,
 	headerTopBarSwitch,
+	hasPageSkin,
 }: Props) => {
 	return (
 		<div css={rowStyles}>
@@ -173,11 +175,7 @@ export const Nav = ({
 				data-component="nav2"
 			>
 				{isImmersive && (
-					<Island
-						priority="feature"
-						defer={{ until: 'visible' }}
-						clientOnly={true}
-					>
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<InteractiveSupportButton
 							editionId={editionId}
 							subscribeUrl={subscribeUrl}
@@ -210,12 +208,14 @@ export const Nav = ({
 					selectedPillar={selectedPillar}
 					dataLinkName="nav3"
 					isTopNav={true}
+					hasPageSkin={hasPageSkin}
 				/>
 				<ExpandedMenu
 					editionId={editionId}
 					nav={nav}
 					isImmersive={isImmersive}
 					headerTopBarSwitch={headerTopBarSwitch}
+					hasPageSkin={hasPageSkin}
 				/>
 			</div>
 			{displayRoundel && (

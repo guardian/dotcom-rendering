@@ -2,19 +2,16 @@ import { css, Global } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	border,
-	brandAltBackground,
-	brandBackground,
-	brandBorder,
-	brandLine,
 	from,
-	labs,
-	neutral,
+	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import React from 'react';
+import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -22,7 +19,6 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
-import { useConfig } from '../components/ConfigContext';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -45,10 +41,11 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
+import type { RenderingTarget } from '../types/renderingTarget';
 import {
 	interactiveGlobalStyles,
 	interactiveLegacyClasses,
@@ -184,7 +181,8 @@ const stretchLines = css`
 const starWrapper = css`
 	margin-bottom: 18px;
 	margin-top: 6px;
-	background-color: ${brandAltBackground.primary};
+	background-color: ${themePalette('--star-rating-background')};
+	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
 
 	${until.phablet} {
@@ -200,180 +198,224 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
-interface Props {
+interface CommonProps {
 	article: DCRArticle;
-	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
-export const InteractiveLayout = ({ article, NAV, format }: Props) => {
+interface WebProps extends CommonProps {
+	NAV: NavType;
+	renderingTarget: 'Web';
+}
+
+interface AppsProps extends CommonProps {
+	renderingTarget: 'Apps';
+}
+
+export const InteractiveLayout = (props: WebProps | AppsProps) => {
+	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
 	} = article;
 
-	const showComments = article.isCommentable;
+	const isApps = renderingTarget === 'Apps';
+	const isWeb = renderingTarget === 'Web';
+
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
-
-	const palette = decidePalette(format);
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
-	const renderAds = canRenderAds(article);
-
-	const { renderingTarget } = useConfig();
-
+	const renderAds = isWeb && canRenderAds(article);
 	return (
 		<>
-			{article.isLegacyInteractive && (
-				<Global styles={interactiveGlobalStyles} />
-			)}
+			{isWeb && (
+				<>
+					{article.isLegacyInteractive && (
+						<Global styles={interactiveGlobalStyles} />
+					)}
 
-			<div>
-				{renderAds && (
-					<Stuck>
-						<div data-print-layout="hide">
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								shouldCenter={false}
-							>
-								<HeaderAdSlot />
-							</Section>
-						</div>
-					</Stuck>
-				)}
+					<div>
+						{renderAds && (
+							<Stuck>
+								<div data-print-layout="hide">
+									<Section
+										fullWidth={true}
+										showTopBorder={false}
+										showSideBorders={false}
+										padSides={false}
+										shouldCenter={false}
+									>
+										<HeaderAdSlot />
+									</Section>
+								</div>
+							</Stuck>
+						)}
 
-				{format.theme !== ArticleSpecial.Labs && (
-					<div data-print-layout="hide">
+						{format.theme !== ArticleSpecial.Labs && (
+							<div data-print-layout="hide">
+								<Section
+									fullWidth={true}
+									shouldCenter={false}
+									showTopBorder={false}
+									showSideBorders={false}
+									padSides={false}
+									backgroundColour={sourcePalette.brand[400]}
+									element="header"
+								>
+									<Header
+										editionId={article.editionId}
+										idUrl={article.config.idUrl}
+										mmaUrl={article.config.mmaUrl}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										urls={
+											article.nav.readerRevenueLinks
+												.header
+										}
+										remoteHeader={
+											!!article.config.switches
+												.remoteHeader
+										}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										idApiUrl={article.config.idApiUrl}
+										headerTopBarSearchCapiSwitch={
+											!!article.config.switches
+												.headerTopBarSearchCapi
+										}
+									/>
+								</Section>
+							</div>
+						)}
+
 						<Section
 							fullWidth={true}
-							shouldCenter={false}
+							borderColour={sourcePalette.brand[600]}
 							showTopBorder={false}
-							showSideBorders={false}
 							padSides={false}
-							backgroundColour={brandBackground.primary}
-							element="header"
+							backgroundColour={sourcePalette.brand[400]}
+							element="nav"
 						>
-							<Header
+							<Nav
+								nav={props.NAV}
+								isImmersive={
+									format.display === ArticleDisplay.Immersive
+								}
+								displayRoundel={
+									format.display ===
+										ArticleDisplay.Immersive ||
+									format.theme === ArticleSpecial.Labs
+								}
+								selectedPillar={props.NAV.selectedPillar}
+								subscribeUrl={
+									article.nav.readerRevenueLinks.header
+										.subscribe
+								}
 								editionId={article.editionId}
-								idUrl={article.config.idUrl}
-								mmaUrl={article.config.mmaUrl}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								urls={article.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!article.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								headerTopBarSearchCapiSwitch={
-									!!article.config.switches
-										.headerTopBarSearchCapi
+								headerTopBarSwitch={
+									!!article.config.switches.headerTopNav
 								}
 							/>
 						</Section>
+
+						{props.NAV.subNavSections &&
+							format.theme !== ArticleSpecial.Labs && (
+								<Section
+									fullWidth={true}
+									backgroundColour={themePalette(
+										'--article-background',
+									)}
+									padSides={false}
+									element="aside"
+								>
+									<Island
+										priority="enhancement"
+										defer={{ until: 'idle' }}
+									>
+										<SubNav
+											subNavSections={
+												props.NAV.subNavSections
+											}
+											currentNavLink={
+												props.NAV.currentNavLink
+											}
+											linkHoverColour={themePalette(
+												'--article-link-text-hover',
+											)}
+											borderColour={themePalette(
+												'--sub-nav-border',
+											)}
+										/>
+									</Island>
+								</Section>
+							)}
+
+						{format.theme !== ArticleSpecial.Labs && (
+							<Section
+								fullWidth={true}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
+								padSides={false}
+								showTopBorder={false}
+							>
+								<StraightLines
+									cssOverrides={css`
+										display: block;
+									`}
+									count={4}
+								/>
+							</Section>
+						)}
 					</div>
-				)}
 
-				<Section
-					fullWidth={true}
-					borderColour={brandLine.primary}
-					showTopBorder={false}
-					padSides={false}
-					backgroundColour={brandBackground.primary}
-					element="nav"
-				>
-					<Nav
-						nav={NAV}
-						isImmersive={
-							format.display === ArticleDisplay.Immersive
-						}
-						displayRoundel={
-							format.display === ArticleDisplay.Immersive ||
-							format.theme === ArticleSpecial.Labs
-						}
-						selectedPillar={NAV.selectedPillar}
-						subscribeUrl={
-							article.nav.readerRevenueLinks.header.subscribe
-						}
-						editionId={article.editionId}
-						headerTopBarSwitch={
-							!!article.config.switches.headerTopNav
-						}
-					/>
-				</Section>
+					{format.theme === ArticleSpecial.Labs && (
+						<Stuck>
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								backgroundColour={sourcePalette.labs[400]}
+								borderColour={sourcePalette.neutral[60]}
+								sectionId="labs-header"
+							>
+								<LabsHeader />
+							</Section>
+						</Stuck>
+					)}
 
-				{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
-					<Section
-						fullWidth={true}
-						backgroundColour={palette.background.article}
-						padSides={false}
-						element="aside"
-					>
-						<Island
-							priority="enhancement"
-							defer={{ until: 'idle' }}
-						>
-							<SubNav
-								subNavSections={NAV.subNavSections}
-								currentNavLink={NAV.currentNavLink}
-								linkHoverColour={palette.text.articleLinkHover}
-								borderColour={palette.border.subNav}
-							/>
-						</Island>
-					</Section>
-				)}
-
-				{format.theme !== ArticleSpecial.Labs && (
-					<Section
-						fullWidth={true}
-						backgroundColour={palette.background.article}
-						padSides={false}
-						showTopBorder={false}
-					>
-						<StraightLines
-							cssOverrides={css`
-								display: block;
-							`}
-							count={4}
-						/>
-					</Section>
-				)}
-			</div>
-
-			{format.theme === ArticleSpecial.Labs && (
-				<Stuck>
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						backgroundColour={labs[400]}
-						borderColour={border.primary}
-						sectionId="labs-header"
-					>
-						<LabsHeader />
-					</Section>
-				</Stuck>
-			)}
-
-			{renderAds && article.config.switches.surveys && (
-				<AdSlot position="survey" display={format.display} />
+					{renderAds && article.config.switches.surveys && (
+						<AdSlot position="survey" display={format.display} />
+					)}
+				</>
 			)}
 			<main data-layout="InteractiveLayout">
+				{isApps && (
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
+				)}
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
-					borderColour={palette.border.article}
+					backgroundColour={themePalette('--article-background')}
+					borderColour={themePalette('--article-border')}
 					element="article"
 					className={interactiveLegacyClasses.contentInteractive}
 				>
@@ -393,7 +435,6 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 										switches={article.config.switches}
 										isAdFreeUser={article.isAdFreeUser}
 										isSensitive={article.config.isSensitive}
-										imagesForAppsLightbox={[]}
 									/>
 								</div>
 							</GridItem>
@@ -417,7 +458,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 								{format.theme === ArticleSpecial.Labs ? (
 									<></>
 								) : (
-									<Border format={format} />
+									<Border />
 								)}
 							</GridItem>
 							<GridItem area="headline">
@@ -476,7 +517,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 										secondaryDateline={
 											article.webPublicationSecondaryDateDisplay
 										}
-										isCommentable={article.isCommentable}
+										isCommentable={showComments}
 										discussionApiUrl={
 											article.config.discussionApiUrl
 										}
@@ -520,7 +561,6 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
-										imagesForAppsLightbox={[]}
 									/>
 								</ArticleContainer>
 							</GridItem>
@@ -531,8 +571,11 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 				<Section
 					stretchRight={false}
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
-					borderColour={palette.border.article}
+					backgroundColour={themePalette(
+						'--article-section-background',
+					)}
+					borderColour={themePalette('--article-border')}
+					fontColour={themePalette('--article-section-title')}
 					padContent={false}
 				>
 					<div
@@ -540,11 +583,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 							max-width: 620px;
 						`}
 					>
-						<Island
-							priority="feature"
-							defer={{ until: 'visible' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<SlotBodyEnd
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -574,7 +613,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 					fullWidth={true}
 					showTopBorder={false}
 					padSides={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={themePalette('--article-background')}
 				>
 					<StraightLines
 						count={4}
@@ -588,7 +627,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={themePalette('--article-background')}
 				>
 					<SubMeta
 						format={format}
@@ -611,7 +650,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -661,7 +700,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 					/>
 				</Island>
 
-				{!isPaidContent && showComments && (
+				{showComments && (
 					<Section
 						fullWidth={true}
 						sectionId="comments"
@@ -695,11 +734,15 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
 								priority="feature"
-								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
 								<MostViewedFooterData
@@ -720,7 +763,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[93]}
 						element="aside"
 					>
 						<AdSlot
@@ -731,7 +774,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 				)}
 			</main>
 
-			{NAV.subNavSections && (
+			{isWeb && props.NAV.subNavSections && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
@@ -740,65 +783,87 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 				>
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={palette.text.articleLinkHover}
-							borderColour={palette.border.subNav}
+							subNavSections={props.NAV.subNavSections}
+							currentNavLink={props.NAV.currentNavLink}
+							linkHoverColour={themePalette(
+								'--article-link-text-hover',
+							)}
+							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>
 			)}
 
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				backgroundColour={brandBackground.primary}
-				borderColour={brandBorder.primary}
-				showSideBorders={false}
-				element="footer"
-			>
-				<Footer
-					pageFooter={article.pageFooter}
-					selectedPillar={NAV.selectedPillar}
-					pillars={NAV.pillars}
-					urls={article.nav.readerRevenueLinks.header}
-					editionId={article.editionId}
-					contributionsServiceUrl={article.contributionsServiceUrl}
-				/>
-			</Section>
+			{isWeb && (
+				<>
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						padSides={false}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Footer
+							pageFooter={article.pageFooter}
+							selectedPillar={props.NAV.selectedPillar}
+							pillars={props.NAV.pillars}
+							urls={article.nav.readerRevenueLinks.header}
+							editionId={article.editionId}
+							contributionsServiceUrl={
+								article.contributionsServiceUrl
+							}
+						/>
+					</Section>
 
-			<BannerWrapper data-print-layout="hide">
-				<Island
-					priority="feature"
-					defer={{ until: 'idle' }}
-					clientOnly={true}
+					<BannerWrapper data-print-layout="hide">
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<StickyBottomBanner
+								contentType={article.contentType}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								isMinuteArticle={
+									article.pageType.isMinuteArticle
+								}
+								isPaidContent={article.pageType.isPaidContent}
+								isPreview={!!article.config.isPreview}
+								isSensitive={article.config.isSensitive}
+								keywordIds={article.config.keywordIds}
+								pageId={article.pageId}
+								sectionId={article.config.section}
+								shouldHideReaderRevenue={
+									article.shouldHideReaderRevenue
+								}
+								remoteBannerSwitch={
+									!!article.config.switches.remoteBanner
+								}
+								puzzleBannerSwitch={
+									!!article.config.switches.puzzlesBanner
+								}
+								tags={article.tags}
+							/>
+						</Island>
+					</BannerWrapper>
+					<MobileStickyContainer data-print-layout="hide" />
+				</>
+			)}
+			{isApps && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					backgroundColour={themePalette('--apps-footer-background')}
+					padSides={false}
+					showSideBorders={false}
+					element="footer"
 				>
-					<StickyBottomBanner
-						contentType={article.contentType}
-						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={article.config.idApiUrl}
-						isMinuteArticle={article.pageType.isMinuteArticle}
-						isPaidContent={article.pageType.isPaidContent}
-						isPreview={!!article.config.isPreview}
-						isSensitive={article.config.isSensitive}
-						keywordIds={article.config.keywordIds}
-						pageId={article.pageId}
-						sectionId={article.config.section}
-						shouldHideReaderRevenue={
-							article.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!article.config.switches.remoteBanner
-						}
-						puzzleBannerSwitch={
-							!!article.config.switches.puzzlesBanner
-						}
-						tags={article.tags}
-					/>
-				</Island>
-			</BannerWrapper>
-			<MobileStickyContainer data-print-layout="hide" />
+					<Island priority="critical">
+						<AppsFooter />
+					</Island>
+				</Section>
+			)}
 		</>
 	);
 };

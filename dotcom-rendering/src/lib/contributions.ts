@@ -1,14 +1,12 @@
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { DCRFrontType } from '../types/front';
 import type { DCRArticle } from '../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
-import { eitherInOktaTestOrElse } from './useAuthStatus';
-import { useOnce } from './useOnce';
-
+import { eitherInOktaTestOrElse } from './identity';
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
@@ -193,7 +191,7 @@ export const useHasOptedOutOfArticleCount = (): boolean | 'Pending' => {
 		'Pending',
 	);
 
-	useOnce(() => {
+	useEffect(() => {
 		hasOptedOutOfArticleCount()
 			.then(setHasOptedOut)
 			.catch(() => setHasOptedOut(true));

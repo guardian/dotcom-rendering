@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { brand, neutral, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	textSans,
+} from '@guardian/source-foundations';
 import { SvgArrowUpStraight } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { recommend as recommendDefault } from '../../lib/discussionApi';
-import type {
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../../lib/useAuthStatus';
+import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
 import { Row } from './Row';
 
 type Props = {
@@ -21,7 +21,7 @@ type Props = {
 const countStyles = css`
 	${textSans.xxsmall({ fontWeight: 'light' })}
 	min-width: 0.75rem;
-	color: ${neutral[46]};
+	color: ${sourcePalette.neutral[46]};
 	margin-right: 0.3125rem;
 `;
 
@@ -29,7 +29,9 @@ const buttonStyles = (recommended: boolean, isSignedIn: boolean) => css`
 	cursor: ${recommended || !isSignedIn ? 'default' : 'pointer'};
 	width: 1.1875rem;
 	height: 1.1875rem;
-	background-color: ${recommended ? brand[400] : neutral[97]};
+	background-color: ${recommended
+		? sourcePalette.brand[400]
+		: sourcePalette.neutral[97]};
 	border-radius: 62.5rem;
 	border: none;
 `;
@@ -39,7 +41,9 @@ const arrowStyles = (recommended: boolean) => css`
 	flex-direction: column;
 	align-items: center;
 	svg {
-		fill: ${recommended ? neutral[100] : neutral[46]};
+		fill: ${recommended
+			? sourcePalette.neutral[100]
+			: sourcePalette.neutral[46]};
 		height: 15px;
 		width: 15px;
 	}

@@ -1,5 +1,6 @@
 import { log } from '@guardian/libs';
 import { useBraze } from '../lib/useBraze';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	idApiUrl: string;
@@ -18,7 +19,9 @@ type Props = {
  * Does not render **anything**.
  */
 export const BrazeMessaging = ({ idApiUrl }: Props) => {
-	const { brazeMessages, brazeCards } = useBraze(idApiUrl);
+	const { renderingTarget } = useConfig();
+
+	const { brazeMessages, brazeCards } = useBraze(idApiUrl, renderingTarget);
 
 	if (brazeMessages) {
 		log('tx', 'Braze Messages Interface loaded', brazeMessages);

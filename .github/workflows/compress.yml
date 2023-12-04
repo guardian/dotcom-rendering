@@ -7,8 +7,8 @@ permissions:
 on:
   pull_request:
     paths-ignore:
-      - "apps-rendering/**"
-      - "dotcom-rendering/docs/**"
+      - 'apps-rendering/**'
+      - 'dotcom-rendering/docs/**'
 
 jobs:
   compressed_size:
@@ -18,14 +18,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
+      - run: corepack enable
+
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
       - uses: preactjs/compressed-size-action@v2
         with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
           build-script: build:dcr
 
           # https://github.com/preactjs/compressed-size-action#increasing-the-required-threshold
@@ -35,6 +37,7 @@ jobs:
           # The default hash digest is set to 20 chars in Webpack
           strip-hash: "\\.(\\w{20})\\.js$"
 
-          # reporting on “legacy” and “variant” bundles muddies the water
+          # report exclusively on the “web” bundle – no “apps”, “variant” or other
           # https://github.com/preactjs/compressed-size-action#customizing-the-list-of-files
-          pattern: "dotcom-rendering/dist/*.modern.*.js"
+          # The default hash digest is set to 20 chars in Webpack
+          pattern: 'dotcom-rendering/dist/*.web.????????????????????.js'

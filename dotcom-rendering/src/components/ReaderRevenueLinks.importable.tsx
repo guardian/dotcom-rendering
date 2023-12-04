@@ -30,12 +30,14 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
-import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
+import { usePageViewId } from '../lib/usePageViewId';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	editionId: EditionId;
@@ -180,6 +182,8 @@ const ReaderRevenueLinksRemote = ({
 		authStatus.kind === 'SignedInWithOkta' ||
 		authStatus.kind === 'SignedInWithCookies';
 
+	const { renderingTarget } = useConfig();
+
 	useOnce((): void => {
 		setAutomat();
 
@@ -241,7 +245,12 @@ const ReaderRevenueLinksRemote = ({
 				<SupportHeader
 					submitComponentEvent={(
 						componentEvent: OphanComponentEvent,
-					) => void submitComponentEvent(componentEvent)}
+					) =>
+						void submitComponentEvent(
+							componentEvent,
+							renderingTarget,
+						)
+					}
 					{...supportHeaderResponse.props}
 				/>
 			</div>
@@ -287,16 +296,18 @@ const ReaderRevenueLinksNative = ({
 		debounce: true,
 	});
 
+	const { renderingTarget } = useConfig();
+
 	useEffect(() => {
 		if (!hideSupportMessaging && inHeader) {
-			void sendOphanComponentEvent('INSERT', tracking);
+			void sendOphanComponentEvent('INSERT', tracking, renderingTarget);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		if (hasBeenSeen && inHeader) {
-			void sendOphanComponentEvent('VIEW', tracking);
+			void sendOphanComponentEvent('VIEW', tracking, renderingTarget);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hasBeenSeen]);
@@ -399,23 +410,11 @@ export const ReaderRevenueLinks = ({
 	urls,
 	contributionsServiceUrl,
 }: Props) => {
-	const [countryCode, setCountryCode] = useState<string>();
-	const pageViewId = window.guardian.config.ophan.pageViewId;
+	const { renderingTarget } = useConfig();
+	const countryCode = useCountryCode('reader-revenue-links');
+	const pageViewId = usePageViewId(renderingTarget);
 
-	useEffect(() => {
-		const callFetch = () => {
-			getLocaleCode()
-				.then((cc) => {
-					setCountryCode(cc ?? '');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${String(e)}`),
-				);
-		};
-		callFetch();
-	}, []);
-
-	if (countryCode) {
+	if (countryCode && pageViewId) {
 		if (inHeader && remoteHeader) {
 			return (
 				<ReaderRevenueLinksRemote

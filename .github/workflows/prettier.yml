@@ -6,7 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - run: corepack enable
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
@@ -15,4 +16,3 @@ jobs:
 
       - name: Prettier check
         run: yarn prettier:check
-        working-directory: dotcom-rendering

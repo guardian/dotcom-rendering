@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [1, 2, 3, 4, 5, 6]
+        group: [1, 2, 4, 5]
     services:
       DCR:
         image: ${{ inputs.container-image }}
@@ -22,7 +22,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
+      - run: corepack enable
+
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
@@ -33,7 +35,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           working-directory: dotcom-rendering
-          wait-on: "http://127.0.0.1:9000"
+          wait-on: 'http://127.0.0.1:9000'
           wait-on-timeout: 30
           browser: chrome
           spec: cypress/e2e/parallel-${{ matrix.group }}/*.js

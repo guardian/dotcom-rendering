@@ -34,6 +34,7 @@ export interface Guardian {
 			isPaidContent?: boolean;
 			isDev?: boolean;
 			hasInlineMerchandise?: boolean;
+			userAttributesApiUrl?: string;
 		};
 		libs: {
 			googletag: string;

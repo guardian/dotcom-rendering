@@ -195,7 +195,7 @@ const Selection = ({
 				}
 			`}
 			aria-hidden="true"
-			data-cy="lightbox-selected"
+			data-testid="lightbox-selected"
 		>
 			<span className="selected">{initialPosition}</span>
 			<span

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import {
-	neutral,
+	palette as sourcePalette,
 	textSans,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -16,7 +16,7 @@ const fieldDescription = css`
 
 const optionalTextStyles = css`
 	${textSans.small({ fontStyle: 'italic' })}
-	color: ${neutral[46]};
+	color: ${sourcePalette.neutral[46]};
 	padding-left: 5px;
 `;
 

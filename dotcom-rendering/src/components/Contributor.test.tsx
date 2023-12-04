@@ -15,7 +15,9 @@ describe('Contributor', () => {
 		};
 
 		const { container } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<Contributor
 					format={format}
 					byline="Observer writers"
@@ -43,7 +45,9 @@ describe('Contributor', () => {
 		};
 
 		const { container } = render(
-			<ConfigProvider value={{ renderingTarget: 'Web' }}>
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
 				<Contributor
 					format={format}
 					byline="Observer writers"

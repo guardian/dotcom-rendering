@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
-	brandAlt,
 	brandText,
 	from,
+	palette as sourcePalette,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
@@ -35,7 +35,7 @@ const columnLinkTitle = css`
 	width: 100%;
 
 	${until.desktop} {
-		color: ${brandAlt[400]};
+		color: ${sourcePalette.brandAlt[400]};
 		font-size: 20px;
 		font-weight: 700;
 	}
@@ -51,7 +51,7 @@ const columnLinkTitle = css`
 
 	:hover,
 	:focus {
-		color: ${brandAlt[400]};
+		color: ${sourcePalette.brandAlt[400]};
 		text-decoration: underline;
 	}
 
@@ -146,7 +146,7 @@ export const ReaderRevenueLinks = ({
 							'secondary',
 							link.longTitle,
 						)}
-						data-cy={`column-collapse-sublink-${link.title}`}
+						data-testid={`column-collapse-sublink-${link.title}`}
 						tabIndex={-1}
 					>
 						{link.longTitle}

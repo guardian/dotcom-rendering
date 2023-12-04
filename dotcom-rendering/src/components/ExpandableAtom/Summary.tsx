@@ -1,10 +1,8 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions -- TODO: Imported with minor changes from `@guardian/atoms-rendering` */
-/* eslint-disable jsx-a11y/click-events-have-key-events -- TODO: Imported with minor changes from `@guardian/atoms-rendering` */
 import { css } from '@emotion/react';
 import {
 	body,
 	headline,
-	neutral,
+	palette as sourcePalette,
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
@@ -65,8 +63,8 @@ export const Summary = ({
 	`;
 
 	const showHideStyling = css`
-		background: ${neutral[7]};
-		color: ${neutral[100]};
+		background: ${sourcePalette.neutral[7]};
+		color: ${sourcePalette.neutral[100]};
 		height: 2rem;
 		position: absolute;
 		bottom: 0;
@@ -85,6 +83,7 @@ export const Summary = ({
 	const [hasBeenExpanded, setHasBeenExpanded] = useState(false);
 	const [expandEventSent, setExpandEventFired] = useState(false);
 	return (
+		//eslint-disable-next-line -- expected from atoms rendering
 		<summary
 			onClick={() => {
 				if (!expandEventSent) {

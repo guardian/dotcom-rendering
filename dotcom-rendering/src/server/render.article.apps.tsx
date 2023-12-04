@@ -18,7 +18,10 @@ export const renderArticle = (
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const renderingTarget = 'Apps';
-	const config: Config = { renderingTarget };
+	const config: Config = {
+		renderingTarget,
+		darkModeAvailable: !!article.config.switches.darkModeInApps,
+	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -62,6 +65,7 @@ export const renderArticle = (
 		renderingTarget: 'Apps',
 		offerHttp3: false,
 		weAreHiring: !!article.config.switches.weAreHiring,
+		canonicalUrl: article.canonicalUrl,
 	});
 
 	return {

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	border,
-	neutral,
+	palette as sourcePalette,
 	space,
 	textSans,
 	until,
@@ -29,13 +29,15 @@ const pageButtonStyles = (isSelected: boolean) => css`
 	border-radius: 62.5rem;
 	box-sizing: border-box;
 
-	color: ${isSelected ? neutral[100] : neutral[46]};
-	background-color: ${isSelected ? neutral[46] : 'transparent'};
+	color: ${isSelected
+		? sourcePalette.neutral[100]
+		: sourcePalette.neutral[46]};
+	background-color: ${isSelected ? sourcePalette.neutral[46] : 'transparent'};
 	border: none;
 	:hover {
 		border-width: 0.0625rem;
 		border-style: solid;
-		border-color: ${neutral[46]};
+		border-color: ${sourcePalette.neutral[46]};
 	}
 
 	margin-right: 5px;
@@ -55,8 +57,10 @@ const chevronButtonStyles = ({ isSelected }: { isSelected: boolean }) => css`
 	border-radius: 62.5rem;
 	border-width: 1px;
 	border-style: solid;
-	border-color: ${neutral[86]};
-	background-color: ${isSelected ? neutral[46] : neutral[100]};
+	border-color: ${sourcePalette.neutral[86]};
+	background-color: ${isSelected
+		? sourcePalette.neutral[46]
+		: sourcePalette.neutral[100]};
 
 	height: 22px;
 	min-height: 22px;
@@ -70,13 +74,13 @@ const chevronButtonStyles = ({ isSelected }: { isSelected: boolean }) => css`
 	}
 
 	:hover {
-		border-color: ${neutral[60]};
+		border-color: ${sourcePalette.neutral[60]};
 	}
 
 	& svg {
 		/* Make the chevrons grey */
 		/* stylelint-disable-next-line declaration-no-important */
-		fill: ${neutral[46]} !important;
+		fill: ${sourcePalette.neutral[46]} !important;
 		/* Set the dimensions */
 		width: 22px;
 		height: 22px;
@@ -98,7 +102,7 @@ const elipsisStyles = css`
 
 const wrapperStyles = css`
 	${textSans.small()};
-	color: ${neutral[46]};
+	color: ${sourcePalette.neutral[46]};
 
 	display: flex;
 	flex-direction: row;
