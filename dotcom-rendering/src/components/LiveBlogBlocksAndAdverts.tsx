@@ -1,7 +1,5 @@
-import {
-	calculateApproximateBlockHeight,
-	shouldDisplayAd,
-} from '../lib/liveblogAdSlots';
+import { Fragment } from 'react';
+import { getLiveblogAdPositions } from '../lib/getLiveblogAdPositions';
 import type { Switches } from '../types/config';
 import { AdPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
@@ -20,7 +18,6 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	isLiveUpdate?: boolean;
-	isInLiveblogAdSlotTest?: boolean;
 };
 
 const appsFirstAdIndex = 1;
@@ -34,34 +31,14 @@ const shouldInsertAppAd = (isApps: boolean, blockIndex: number): boolean =>
 	(blockIndex === appsFirstAdIndex ||
 		(blockIndex - appsFirstAdIndex) % 5 === 0);
 
-const handleAdInsertion = (
-	block: Block,
-	isMobileView: boolean,
-	adCounter: number,
-	pxSinceAd: number,
-	isAdFreeUser: boolean,
-	totalBlocks: number,
-	currentIndex: number,
-) => {
-	const updatedPxSinceAd =
-		pxSinceAd +
-		calculateApproximateBlockHeight(block.elements, isMobileView);
-	const willInsertAd =
-		!isAdFreeUser &&
-		shouldDisplayAd(
-			currentIndex + 1,
-			totalBlocks,
-			adCounter,
-			updatedPxSinceAd,
-			isMobileView,
-		);
-	return {
-		adCounter: willInsertAd ? adCounter + 1 : adCounter,
-		pxSinceAd: willInsertAd ? 0 : updatedPxSinceAd,
-		willInsertAd,
-	};
-};
-
+/**
+ * On liveblogs we insert two sets of ad slots into the page: one set for small
+ * screens; one set for large screens. The appropriate set of slots based on the
+ * users viewport are filled with ads, the other set is hidden with CSS.
+ *
+ * This allows us to insert ad slots server-side and ensure a frequency that
+ * balances commercial and user interests (i.e. roughly one ad every 1.5 viewports).
+ */
 export const LiveBlogBlocksAndAdverts = ({
 	format,
 	blocks,
@@ -74,112 +51,71 @@ export const LiveBlogBlocksAndAdverts = ({
 	isAdFreeUser,
 	isSensitive,
 	isLiveUpdate,
-	isInLiveblogAdSlotTest = false,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	if (!isInLiveblogAdSlotTest) {
+	const LiveBlockComponent = ({ block }: { block: Block }) => {
+		return (
+			<LiveBlock
+				format={format}
+				block={block}
+				pageId={pageId}
+				webTitle={webTitle}
+				host={host}
+				ajaxUrl={ajaxUrl}
+				isLiveUpdate={isLiveUpdate}
+				switches={switches}
+				isAdFreeUser={!isAdFreeUser}
+				isSensitive={isSensitive}
+				isPinnedPost={false}
+				pinnedPostId={pinnedPost?.id}
+			/>
+		);
+	};
+
+	if (!isWeb || isAdFreeUser) {
 		return (
 			<>
 				{blocks.map((block, index) => (
-					<>
-						<LiveBlock
-							key={block.id}
-							format={format}
-							block={block}
-							pageId={pageId}
-							webTitle={webTitle}
-							host={host}
-							ajaxUrl={ajaxUrl}
-							isLiveUpdate={isLiveUpdate}
-							switches={switches}
-							isAdFreeUser={isAdFreeUser}
-							isSensitive={isSensitive}
-							isPinnedPost={false}
-							pinnedPostId={pinnedPost?.id}
-						/>
+					<Fragment key={block.id}>
+						<LiveBlockComponent block={block} />
 						{shouldInsertAppAd(isApps, index) && <AdPlaceholder />}
-					</>
+					</Fragment>
 				))}
 			</>
 		);
 	}
 
-	let pxSinceAdMobileView = 0;
-	let mobileViewAdCounter = 0;
-
-	let pxSinceAdDesktopView = 0;
-	let desktopViewAdCounter = 0;
+	const { mobileAdPositions, desktopAdPositions } =
+		getLiveblogAdPositions(blocks);
 
 	return (
 		<>
-			{blocks.map((block, i) => {
-				// Mobile viewport case
-				const mobileResult = handleAdInsertion(
-					block,
-					true,
-					mobileViewAdCounter,
-					pxSinceAdMobileView,
-					isAdFreeUser,
-					blocks.length,
-					i,
-				);
-				mobileViewAdCounter = mobileResult.adCounter;
-				pxSinceAdMobileView = mobileResult.pxSinceAd;
+			{blocks.map((block, index) => {
+				const adPositionDesktop = desktopAdPositions.indexOf(index);
+				const showAdDesktop = adPositionDesktop !== -1;
 
-				// Desktop viewport case
-				const desktopResult = handleAdInsertion(
-					block,
-					false,
-					desktopViewAdCounter,
-					pxSinceAdDesktopView,
-					isAdFreeUser,
-					blocks.length,
-					i,
-				);
-				desktopViewAdCounter = desktopResult.adCounter;
-				pxSinceAdDesktopView = desktopResult.pxSinceAd;
-
-				const shouldInsertMobileWebAd =
-					isWeb && mobileResult.willInsertAd;
-				const shouldInsertDesktopWebAd =
-					isWeb && desktopResult.willInsertAd;
+				const adPositionMobile = mobileAdPositions.indexOf(index);
+				const showAdMobile = adPositionMobile !== -1;
 
 				return (
-					<>
-						<LiveBlock
-							key={block.id}
-							format={format}
-							block={block}
-							pageId={pageId}
-							webTitle={webTitle}
-							host={host}
-							ajaxUrl={ajaxUrl}
-							isLiveUpdate={isLiveUpdate}
-							switches={switches}
-							isAdFreeUser={isAdFreeUser}
-							isSensitive={isSensitive}
-							isPinnedPost={false}
-							pinnedPostId={pinnedPost?.id}
-						/>
-
-						{shouldInsertDesktopWebAd && (
+					<Fragment key={block.id}>
+						<LiveBlockComponent block={block} />
+						{showAdDesktop && (
 							<AdSlot
 								position="liveblog-inline"
-								index={desktopViewAdCounter}
+								index={adPositionDesktop}
 							/>
 						)}
-						{shouldInsertMobileWebAd && (
+						{showAdMobile && (
 							<AdSlot
 								position="liveblog-inline-mobile"
-								index={mobileViewAdCounter}
+								index={adPositionMobile}
 							/>
 						)}
-
-						{shouldInsertAppAd(isApps, i) && <AdPlaceholder />}
-					</>
+					</Fragment>
 				);
 			})}
 		</>

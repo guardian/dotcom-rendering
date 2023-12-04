@@ -38,4 +38,4 @@ const loadPage = async (
 	await page.goto(`${BASE_URL}${path}`, { waitUntil });
 };
 
-export { loadPage };
+export { BASE_URL, loadPage };

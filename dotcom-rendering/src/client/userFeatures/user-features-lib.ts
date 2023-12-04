@@ -13,9 +13,9 @@ const timeInDaysFromNow = (daysFromNow: number): string => {
 };
 
 const cookieIsExpiredOrMissing = (cookieName: string): boolean => {
-	const expiryDateFromCookie = getCookie({ name: cookieName });
-	if (!expiryDateFromCookie) return true;
-	const expiryTime = parseInt(expiryDateFromCookie, 10);
+	const cookie = getCookie({ name: cookieName });
+	if (!cookie) return true;
+	const expiryTime = parseInt(cookie, 10);
 	const timeNow = new Date().getTime();
 	return timeNow >= expiryTime;
 };

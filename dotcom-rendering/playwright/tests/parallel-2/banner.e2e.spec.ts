@@ -1,17 +1,14 @@
 import type { BrowserContext, Request } from '@playwright/test';
 import { test } from '@playwright/test';
 import { disableCMP } from '../../lib/cmp';
+import { addCookie } from '../../lib/cookies';
 import { loadPage } from '../../lib/load-page';
 
 const optOutOfArticleCountConsent = async (context: BrowserContext) => {
-	await context.addCookies([
-		{
-			name: 'gu_articleCountOptOut',
-			value: 'true',
-			domain: 'localhost',
-			path: '/',
-		},
-	]);
+	await addCookie(context, {
+		name: 'gu_articleCountOptOut',
+		value: 'true',
+	});
 };
 
 const requestBodyHasProperties = (

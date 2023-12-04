@@ -156,7 +156,13 @@ export const splitTheme =
 				{formats.map((format) => (
 					<div css={css(paletteDeclarations(format, 'light'))}>
 						<FormatHeading format={format} />
-						<Story args={{ ...context.args, format }} />
+						<Story
+							args={{
+								...context.args,
+								format,
+								theme: 'light',
+							}}
+						/>
 					</div>
 				))}
 			</div>
@@ -174,7 +180,13 @@ export const splitTheme =
 				{formats.map((format) => (
 					<div css={css(paletteDeclarations(format, 'dark'))}>
 						<FormatHeading format={format} />
-						<Story args={{ ...context.args, format }} />
+						<Story
+							args={{
+								...context.args,
+								format,
+								theme: 'dark',
+							}}
+						/>
 					</div>
 				))}
 			</div>

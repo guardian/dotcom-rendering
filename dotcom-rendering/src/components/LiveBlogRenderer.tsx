@@ -35,7 +35,6 @@ type Props = {
 	filterKeyEvents?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
-	isInLiveblogAdSlotTest?: boolean;
 };
 
 export const LiveBlogRenderer = ({
@@ -61,7 +60,6 @@ export const LiveBlogRenderer = ({
 	filterKeyEvents = false,
 	availableTopics,
 	selectedTopics,
-	isInLiveblogAdSlotTest = false,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
@@ -73,11 +71,7 @@ export const LiveBlogRenderer = ({
 		<>
 			{pinnedPost && onFirstPage && !filtered && (
 				<>
-					<Island
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-						priority="feature"
-					>
+					<Island defer={{ until: 'idle' }} priority="feature">
 						<EnhancePinnedPost />
 					</Island>
 					<PinnedPost pinnedPost={pinnedPost} format={format}>
@@ -145,7 +139,6 @@ export const LiveBlogRenderer = ({
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				pinnedPost={pinnedPost}
-				isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 			/>
 			{isWeb && blocks.length > 4 && (
 				<Island

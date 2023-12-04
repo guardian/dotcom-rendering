@@ -779,6 +779,7 @@ export const Carousel = ({
 
 	const [index, setIndex] = useState(0);
 	const [maxIndex, setMaxIndex] = useState(0);
+	const [isAndroid, setIsAndroid] = useState(false);
 
 	const arrowName = 'carousel-small-arrow';
 
@@ -886,6 +887,15 @@ export const Carousel = ({
 	// using old data to determine the max index. Instead we say update maxIndex
 	// when index changes and compare it against the prior maxIndex only.
 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
+
+	useEffect(
+		() => setIsAndroid(() => /android/i.test(window.navigator.userAgent)),
+		[],
+	);
+
+	if (isAndroid) {
+		return null;
+	}
 
 	return (
 		<CarouselColours props={props}>
