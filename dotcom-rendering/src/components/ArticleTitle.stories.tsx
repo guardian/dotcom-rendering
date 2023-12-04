@@ -7,6 +7,7 @@ import {
 } from '@guardian/libs';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { ArticleTitle } from './ArticleTitle';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -109,6 +110,15 @@ export const immersiveComment = () => {
 	);
 };
 immersiveComment.storyName = 'Immersive comment piece';
+immersiveComment.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Comment,
+		},
+	]),
+];
 
 export const immersiveCommentTag = () => {
 	return (
@@ -137,6 +147,15 @@ export const immersiveCommentTag = () => {
 	);
 };
 immersiveCommentTag.storyName = 'Immersive comment piece with Blog tag';
+immersiveCommentTag.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Comment,
+		},
+	]),
+];
 
 export const ImmersiveSeriesTag = () => {
 	return (
@@ -160,6 +179,15 @@ export const ImmersiveSeriesTag = () => {
 	);
 };
 ImmersiveSeriesTag.storyName = 'Immersive with a Series tag';
+ImmersiveSeriesTag.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Review,
+		},
+	]),
+];
 
 export const ArticleBlogTag = () => {
 	return (
@@ -183,6 +211,15 @@ export const ArticleBlogTag = () => {
 	);
 };
 ArticleBlogTag.storyName = 'Article with a Blog tag';
+ArticleBlogTag.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const LiveblogTitle = () => {
 	return (
@@ -236,6 +273,15 @@ export const LiveblogTitle = () => {
 	);
 };
 LiveblogTitle.storyName = 'Liveblog title';
+LiveblogTitle.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+			design: ArticleDesign.LiveBlog,
+		},
+	]),
+];
 
 export const ArticleOpinionTag = () => {
 	return (
@@ -259,6 +305,15 @@ export const ArticleOpinionTag = () => {
 	);
 };
 ArticleOpinionTag.storyName = 'Article with a Opinion tag';
+ArticleOpinionTag.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const ArticleSeriesTag = () => {
 	return (
@@ -282,6 +337,15 @@ export const ArticleSeriesTag = () => {
 	);
 };
 ArticleSeriesTag.storyName = 'Article with a Series tag';
+ArticleSeriesTag.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const SpecialReportTitle = () => {
 	return (
@@ -305,6 +369,15 @@ export const SpecialReportTitle = () => {
 	);
 };
 SpecialReportTitle.storyName = 'Special report';
+SpecialReportTitle.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: ArticleSpecial.SpecialReport,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const SpecialReportAlt = () => {
 	return (
@@ -328,6 +401,15 @@ export const SpecialReportAlt = () => {
 	);
 };
 SpecialReportAlt.storyName = 'Special report Alt';
+SpecialReportAlt.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: ArticleSpecial.SpecialReportAlt,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const ArticleNoTags = () => {
 	return (
@@ -344,6 +426,15 @@ export const ArticleNoTags = () => {
 	);
 };
 ArticleNoTags.storyName = 'Article with no tags';
+ArticleNoTags.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const LabsStory = () => {
 	return (
@@ -367,6 +458,15 @@ export const LabsStory = () => {
 	);
 };
 LabsStory.storyName = 'Labs';
+LabsStory.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const LongStory = () => {
 	return (
@@ -390,6 +490,15 @@ export const LongStory = () => {
 	);
 };
 LongStory.storyName = 'Long title';
+LongStory.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const LongWord = () => {
 	return (
@@ -413,6 +522,15 @@ export const LongWord = () => {
 	);
 };
 LongWord.storyName = 'Long word';
+LongWord.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const ArticleDeadBlogTitle = () => {
 	return (
@@ -443,3 +561,12 @@ export const ArticleDeadBlogTitle = () => {
 };
 
 ArticleDeadBlogTitle.storyName = 'Deadblog - All pillars';
+ArticleDeadBlogTitle.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
