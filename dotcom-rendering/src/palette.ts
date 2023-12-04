@@ -3631,6 +3631,14 @@ const paletteColours = {
 		light: calloutSubmitBackgroundHoverLight,
 		dark: calloutSubmitBackgroundHoverDark,
 	},
+	'--callout-highlight-text': {
+		light: starRatingFillColourLight,
+		dark: starRatingFillColourDark,
+	},
+	'--callout-highlight-background': {
+		light: starRatingBackgroundColourLight,
+		dark: starRatingBackgroundColourDark,
+	},
 	'--dateline': {
 		light: datelineLight,
 		dark: datelineDark,

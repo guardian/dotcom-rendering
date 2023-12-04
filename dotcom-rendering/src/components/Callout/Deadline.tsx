@@ -9,8 +9,8 @@ type Props = {
 
 const deadlineStyles = css`
 	${textSans.xxsmall()};
-	color: ${palette('--star-rating-fill')};
-	background-color: ${palette('--star-rating-background')};
+	color: ${palette('--callout-highlight-text')};
+	background-color: ${palette('--callout-highlight-background')};
 	right: 0;
 	display: flex;
 	align-items: center;
