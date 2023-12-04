@@ -48,6 +48,7 @@ export const LoggedOutHiddenPicks = () => (
 			}}
 			expanded={false}
 			onPermalinkClick={() => {}}
+			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 		/>
@@ -81,6 +82,7 @@ export const InitialPage = () => (
 			}}
 			expanded={true}
 			onPermalinkClick={() => {}}
+			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 		/>
@@ -116,6 +118,7 @@ export const Overrides = () => (
 			}}
 			expanded={true}
 			onPermalinkClick={() => {}}
+			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 		/>
@@ -149,6 +152,7 @@ export const LoggedInHiddenNoPicks = () => (
 			}}
 			expanded={false}
 			onPermalinkClick={() => {}}
+			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 		/>
@@ -176,6 +180,7 @@ export const LoggedIn = () => (
 			}}
 			expanded={true}
 			onPermalinkClick={() => {}}
+			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 		/>
@@ -202,6 +207,7 @@ export const LoggedInShortDiscussion = () => (
 			}}
 			expanded={true}
 			onPermalinkClick={() => {}}
+			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 		/>
@@ -227,6 +233,7 @@ export const LoggedOutHiddenNoPicks = () => (
 			}}
 			expanded={false}
 			onPermalinkClick={() => {}}
+			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 		/>
@@ -261,6 +268,7 @@ export const Closed = () => (
 			}}
 			expanded={true}
 			onPermalinkClick={() => {}}
+			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 		/>
@@ -293,6 +301,7 @@ export const NoComments = () => (
 			}}
 			expanded={false}
 			onPermalinkClick={() => {}}
+			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 		/>
@@ -325,6 +334,7 @@ export const LegacyDiscussion = () => (
 			}}
 			expanded={false}
 			onPermalinkClick={() => {}}
+			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 		/>
