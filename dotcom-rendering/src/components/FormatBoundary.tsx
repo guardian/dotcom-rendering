@@ -19,6 +19,7 @@ const displayContents = css`
  * to that of the :root element
  */
 export const FormatBoundary = ({ format, children }: Props) => {
+	const { renderingTarget } = useConfig();
 	const { darkModeAvailable = false } = useConfig();
 
 	const [isStorybook, setIsStorybook] = useState(false);
@@ -34,12 +35,17 @@ export const FormatBoundary = ({ format, children }: Props) => {
 			data-format-display={format.display}
 			css={[
 				displayContents,
-				darkModeAvailable &&
-					css`
-						@media (prefers-color-scheme: dark) {
-							${paletteDeclarations(format, 'dark')}
-						}
-					`,
+				paletteDeclarations(format, 'light'),
+				darkModeAvailable && renderingTarget === 'Apps'
+					? css`
+							@media (prefers-color-scheme: light) {
+								${paletteDeclarations(format, 'light')}
+							}
+							@media (prefers-color-scheme: dark) {
+								${paletteDeclarations(format, 'dark')}
+							}
+					  `
+					: '',
 				isStorybook &&
 					css`
 						.light & {
