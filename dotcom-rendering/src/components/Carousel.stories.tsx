@@ -6,6 +6,7 @@ import {
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
+import fetchMock from 'fetch-mock';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
@@ -38,6 +39,22 @@ const convertToImmersive = (trails: TrailType[]): TrailType[] => {
 			format,
 		};
 	});
+};
+
+const mockDiscussionId = '/p/pf8fm';
+const encodedMockDiscussionId = '%2Fp%2Fpf8fm';
+
+const mockDiscussionUrl = `${discussionApiUrl}/getCommentCounts?short-urls=${encodedMockDiscussionId}`;
+const mockCommentCount = () => {
+	fetchMock
+		.restore()
+		.get(mockDiscussionUrl, {
+			status: 200,
+			body: {
+				[mockDiscussionId]: 1506,
+			} as Record<string, number>,
+		})
+		.spy('end:.hot-update.json');
 };
 
 const trails: TrailType[] = [
@@ -78,6 +95,11 @@ const trails: TrailType[] = [
 		shortUrl: 'https://gu.com/p/gey5n',
 		dataLinkName: 'news | group-2 | card-@2',
 		showQuotedHeadline: false,
+		discussion: {
+			isCommentable: true,
+			isClosedForComments: false,
+			discussionId: mockDiscussionId,
+		},
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/scottish-government-inadequately-prepared-for-covid-audit-scotland-report',
@@ -208,8 +230,9 @@ const sportFormat = {
 	display: ArticleDisplay.Standard,
 };
 
-export const Headlines: StoryObj = ({ format }: StoryProps) => (
-	<>
+export const Headlines: StoryObj = ({ format }: StoryProps) => {
+	mockCommentCount();
+	return (
 		<Section fullWidth={true}>
 			<Carousel
 				heading="More on this story"
@@ -220,16 +243,17 @@ export const Headlines: StoryObj = ({ format }: StoryProps) => (
 				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
-	</>
-);
+	);
+};
 
 Headlines.storyName = 'Headlines carousel';
 Headlines.decorators = [
 	splitTheme([defaultFormat, sportFormat], { orientation: 'vertical' }),
 ];
 
-export const SingleItemCarousel = () => (
-	<>
+export const SingleItemCarousel = () => {
+	mockCommentCount();
+	return (
 		<Section fullWidth={true}>
 			<Carousel
 				heading="More on this story"
@@ -240,46 +264,49 @@ export const SingleItemCarousel = () => (
 				discussionApiUrl={discussionApiUrl}
 			/>
 		</Section>
-	</>
-);
+	);
+};
 
 SingleItemCarousel.storyName = 'Carousel with single item';
 SingleItemCarousel.decorators = [
 	splitTheme([defaultFormat], { orientation: 'vertical' }),
 ];
 
-export const Immersive = () => (
-	<>
-		<Section fullWidth={true}>
-			<Carousel
-				heading="More on this story"
-				trails={immersiveTrails}
-				onwardsSource="more-on-this-story"
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Immersive,
-				}}
-				leftColSize="compact"
-				discussionApiUrl={discussionApiUrl}
-			/>
-		</Section>
-		<Section fullWidth={true}>
-			<Carousel
-				heading="Sport"
-				trails={immersiveTrails}
-				onwardsSource="curated-content"
-				format={{
-					theme: Pillar.Sport,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Immersive,
-				}}
-				leftColSize="compact"
-				discussionApiUrl={discussionApiUrl}
-			/>
-		</Section>
-	</>
-);
+export const Immersive = () => {
+	mockCommentCount();
+	return (
+		<>
+			<Section fullWidth={true}>
+				<Carousel
+					heading="More on this story"
+					trails={immersiveTrails}
+					onwardsSource="more-on-this-story"
+					format={{
+						theme: Pillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Immersive,
+					}}
+					leftColSize="compact"
+					discussionApiUrl={discussionApiUrl}
+				/>
+			</Section>
+			<Section fullWidth={true}>
+				<Carousel
+					heading="Sport"
+					trails={immersiveTrails}
+					onwardsSource="curated-content"
+					format={{
+						theme: Pillar.Sport,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Immersive,
+					}}
+					leftColSize="compact"
+					discussionApiUrl={discussionApiUrl}
+				/>
+			</Section>
+		</>
+	);
+};
 
 Immersive.storyName = 'Immersive carousel';
 
@@ -290,24 +317,23 @@ const specialReportAltFormat = {
 };
 
 export const SpecialReportAlt = () => {
+	mockCommentCount();
 	const specialReportTrails = [...trails];
 
 	for (const trail of specialReportTrails)
 		trail.format = specialReportAltFormat;
 
 	return (
-		<>
-			<Section fullWidth={true}>
-				<Carousel
-					heading="SpecialReportAlt"
-					trails={specialReportTrails}
-					onwardsSource="curated-content"
-					format={specialReportAltFormat}
-					leftColSize="compact"
-					discussionApiUrl={discussionApiUrl}
-				/>
-			</Section>
-		</>
+		<Section fullWidth={true}>
+			<Carousel
+				heading="SpecialReportAlt"
+				trails={specialReportTrails}
+				onwardsSource="curated-content"
+				format={specialReportAltFormat}
+				leftColSize="compact"
+				discussionApiUrl={discussionApiUrl}
+			/>
+		</Section>
 	);
 };
 
