@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanAction } from '@guardian/libs';
-import { neutral, space, textSans, until } from '@guardian/source-foundations';
+import { space, textSans, until } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
