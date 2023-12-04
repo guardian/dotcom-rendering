@@ -2,7 +2,6 @@ export type Colour = string;
 
 export type Palette = {
 	text: {
-		headline: Colour;
 		headlineWhenMatch: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
