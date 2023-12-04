@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isString, isUndefined } from '@guardian/libs';
 import {
 	headline,
 	palette,
@@ -9,6 +10,7 @@ import {
 import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
+import { palette as schemedPalette } from '../../palette';
 import type { CampaignFieldType } from '../../types/content';
 import { CalloutTermsAndConditions } from './CalloutComponents';
 import { FormField } from './FormField';
@@ -39,6 +41,34 @@ const formStyles = css`
 	justify-content: space-between;
 `;
 
+/**
+ * Source does not support dark mode,
+ * so we need to provide overrides to style the components
+ * in an visually accessible way
+ *
+ * @see https://github.com/guardian/dotcom-rendering/issues/9333
+ */
+const sourceColourOverrides = css`
+	input,
+	textarea,
+	select {
+		color: ${schemedPalette('--tabs--text')};
+		background-color: ${schemedPalette('--tabs-input')};
+	}
+
+	label > div,
+	legend > div {
+		color: ${schemedPalette('--tabs--text')};
+	}
+
+	label > p,
+	legend > div > span,
+	fieldset > p {
+		color: ${schemedPalette('--article-text')};
+		opacity: 0.66;
+	}
+`;
+
 const formFieldWrapperStyles = (hidden: boolean) => css`
 	display: flex;
 	flex-direction: column;
@@ -48,6 +78,15 @@ const submitButtonStyles = css`
 	margin: 20px 0px;
 	width: 100%;
 	display: block;
+	color: ${schemedPalette('--callout-submit-text')};
+	background-color: ${schemedPalette('--callout-submit-background')};
+
+	:hover,
+	:active {
+		background-color: ${schemedPalette(
+			'--callout-submit-background-hover',
+		)};
+	}
 `;
 
 const footerPaddingStyles = css`
@@ -57,7 +96,7 @@ const footerPaddingStyles = css`
 	padding-bottom: ${space[4]}px;
 `;
 
-type FormDataType = { [key in string]: any };
+type FormDataType = Record<string, string | string[] | undefined>;
 
 type FormProps = {
 	formFields: CampaignFieldType[];
@@ -98,7 +137,9 @@ export const Form = ({
 	const validateForm = (): boolean => {
 		const errors: { [key in string]: string } = {};
 		for (const field of formFields) {
-			if (field.required && !formData[field.id]) {
+			const data = formData[field.id];
+
+			if (field.required && isUndefined(data)) {
 				errors[field.id] = 'This field is required';
 			}
 			if (field.type === 'select' && field.required) {
@@ -107,21 +148,18 @@ export const Form = ({
 						'Please choose an option from the dropdown menu';
 				}
 			}
-			if (field.id === 'email' && formData[field.id]) {
+			if (field.id === 'email' && isString(data)) {
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-				if (!emailRegex.test(formData[field.id] as string)) {
+				if (!emailRegex.test(data)) {
 					errors[field.id] = 'Please enter a valid email address';
 				}
 			}
-			if (
-				['number', 'phone'].includes(field.type) &&
-				formData[field.id]
-			) {
+			if (['number', 'phone'].includes(field.type) && isString(data)) {
 				const numberRegex = /^[\d ()+-]+$/;
-				if (!numberRegex.test(formData[field.id] as string)) {
+				if (!numberRegex.test(data)) {
 					errors[field.id] = 'Please enter a valid number';
 				}
-				const noWhiteSpace = formData[field.id] as string;
+				const noWhiteSpace = data;
 				if (noWhiteSpace.length < 10) {
 					errors[field.id] = 'Please include your dialling/area code';
 				}
@@ -142,7 +180,7 @@ export const Form = ({
 	const submitForm = async (form: FormDataType) => {
 		setNetworkError('');
 
-		if (formData.twitterHandle) {
+		if (isString(formData.twitterHandle)) {
 			setNetworkError('Sorry we think you are a robot.');
 			return;
 		}
@@ -213,16 +251,16 @@ export const Form = ({
 			<form
 				action="/formstack-campaign/submit"
 				method="post"
-				css={formStyles}
+				css={[formStyles, sourceColourOverrides]}
 				noValidate={true}
 				onSubmit={(e) => {
 					e.preventDefault();
-					const isValid = validateForm();
-					if (!isValid) {
-						const firstInvalidFormElement: HTMLInputElement =
-							document.querySelectorAll(
-								':invalid',
-							)[1] as HTMLInputElement;
+					validateForm();
+					const firstInvalidFormElement =
+						document.querySelectorAll<HTMLInputElement>(
+							':invalid',
+						)[1];
+					if (firstInvalidFormElement) {
 						firstInvalidFormElement.focus();
 						return;
 					}
