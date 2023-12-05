@@ -853,10 +853,12 @@
 
 				/**
 				 * @param {Product} product
-				 * @return {string}
+				 * @return {URLSearchParams}
 				 */
 				params(product) {
-					return product === 'apps' ? '?dcr=apps' : '';
+					return new URLSearchParams(
+						product === 'apps' ? { dcr: 'apps' } : undefined,
+					);
 				}
 
 				/**
@@ -875,22 +877,37 @@
 				}
 
 				/**
+				 * @param {URL} devOrigin
 				 * @param {Product} product
 				 * @param {Env} env
 				 * @param {URL} url
+				 * @return {URL}
 				 */
-				buildUrl(product, env, url) {
+				buildUrl(devOrigin, product, env, url) {
 					switch (env) {
-						case 'PROD':
-							return `${this.prodOrigin(product)}${
-								url.pathname
-							}${this.params(product)}`;
-						case 'CODE':
-							return `${this.codeOrigin(product)}${
-								url.pathname
-							}${this.params(product)}`;
+						case 'PROD': {
+							const builtUrl = new URL(
+								url.pathname,
+								this.prodOrigin(product),
+							);
+							builtUrl.search = this.params(product).toString();
+
+							return builtUrl;
+						}
+						case 'CODE': {
+							const builtUrl = new URL(
+								url.pathname,
+								this.codeOrigin(product),
+							);
+							builtUrl.search = this.params(product).toString();
+
+							return builtUrl;
+						}
 						case 'DEV':
-							return `${this.devPath(product)}/${url.toString()}`;
+							return new URL(
+								`${this.devPath(product)}/${url.toString()}`,
+								devOrigin,
+							);
 					}
 				}
 
@@ -982,9 +999,11 @@
 
 					try {
 						const url = new URL(href);
+						const devOrigin = new URL(window.location.origin);
+
 						this.link.setAttribute(
 							'href',
-							this.buildUrl(product, env, url),
+							this.buildUrl(devOrigin, product, env, url).href,
 						);
 						this.linkText.textContent = this.getLinkText(product);
 
