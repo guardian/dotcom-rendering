@@ -4,7 +4,7 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- Automatically created with yarn run createtoc and on push hook -->
+<!-- Automatically created by running `yarn createtoc` in a pre-commit hook -->
 
 -   [Quick start](#quick-start)
     -   [Install Node.js](#install-nodejs)
@@ -16,11 +16,12 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
     -   [Concepts](#concepts)
     -   [Visual Debugging](#visual-debugging)
     -   [Feedback](#feedback)
--   [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+-   [Dotcom Rendering now renders most articles and fronts in Production](#dotcom-rendering-now-renders-most-articles-and-fronts-in-production)
 -   [Code Quality](#code-quality)
     -   [Snyk Code Scanning](#snyk-code-scanning)
 -   [IDE setup](#ide-setup)
     -   [Extensions](#extensions)
+    -   [Commit hooks](#commit-hooks)
     -   [Auto fix on save](#auto-fix-on-save)
 -   [Thanks](#thanks)
 
@@ -37,9 +38,16 @@ The only thing you need to make sure you have installed before you get going is 
 We recommend using a tool to help manage multiple versions of Node.js on on machine.
 [fnm](https://github.com/Schniz/fnm) is popular in the department at the moment, although
 [nvm](https://github.com/creationix/nvm) and [asdf](https://github.com/asdf-vm/asdf) are
-sometimes used instead.
-If you use nvm, you might find
-[this gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb) helpful.
+also used.
+
+> If you use nvm, you might find
+> [this gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb) helpful.
+
+Once Node is installed, make sure you're using the correct package manager by [enabling corepack](https://github.com/nodejs/corepack?tab=readme-ov-file#utility-commands):
+
+```sh
+corepack enable
+```
 
 ### Running instructions
 
@@ -47,8 +55,6 @@ Clone the repo, run `yarn` in the root, then CD into the `dotcom-rendering` subd
 
 ```
 $ git clone git@github.com:guardian/dotcom-rendering.git
-$ cd dotcom-rendering
-$ yarn install
 $ cd dotcom-rendering
 $ make dev
 ```

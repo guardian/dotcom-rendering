@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { neutral, space, text, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	space,
+	text,
+	textSans,
+} from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import {
 	addUserName,
@@ -54,16 +59,16 @@ const commentTextArea = css`
 	margin-bottom: ${space[3]}px;
 	padding: 8px 10px 10px 8px;
 	${textSans.small()};
-	border-color: ${neutral[86]};
+	border-color: ${sourcePalette.neutral[86]};
 	:focus {
-		border-color: ${neutral[46]};
+		border-color: ${sourcePalette.neutral[46]};
 		outline: none;
 	}
 `;
 
 const greyPlaceholder = css`
 	::placeholder {
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 `;
 
@@ -72,7 +77,7 @@ const blackPlaceholder = css`
 	::placeholder {
 		font-weight: bold;
 		opacity: 1;
-		color: ${neutral[0]};
+		color: ${sourcePalette.neutral[0]};
 	}
 `;
 
@@ -109,7 +114,7 @@ const linkStyles = css`
 `;
 
 const wrapperHeaderTextStyles = css`
-	background-color: ${neutral[97]};
+	background-color: ${sourcePalette.neutral[97]};
 	padding: 8px 10px 10px 8px;
 	width: 100%;
 	margin-top: 8px;
@@ -120,8 +125,8 @@ const commentAddOns = css`
 	height: 22px;
 	font-size: 13px;
 	line-height: 17px;
-	border: 1px solid ${neutral[100]};
-	color: ${neutral[46]};
+	border: 1px solid ${sourcePalette.neutral[100]};
+	color: ${sourcePalette.neutral[46]};
 	text-align: center;
 	cursor: pointer;
 	margin-left: 4px;

@@ -1,39 +1,34 @@
 import type { Page } from '@playwright/test';
 
-type IslandStatus = 'rendered' | 'hydrated';
 type WaitForIslandOptions = {
-	status?: IslandStatus;
 	nth?: number;
+	waitFor?: 'attached' | 'detached' | 'visible' | 'hidden';
 };
 
 /**
  * Wait for an island to hydrate
  *
- * Scrolls to the island and waits for its status to be hydrated or rendered and the element to be visible
+ * Scrolls to the island and waits for its status to be hydrated and the element to be visible
  *
- * @param page
- * @param island
- * @param status
- * @param nth 0 indexed
  */
 const waitForIsland = async (
 	page: Page,
-	island: string,
+	name: string,
 	options: WaitForIslandOptions = {},
 ): Promise<void> => {
-	const { status = 'rendered', nth = 0 } = options;
-	const islandSelector = `gu-island[name="${island}"]`;
+	const { nth = 0, waitFor = 'visible' } = options;
+	const islandSelector = `gu-island[name="${name}"]`;
 	// create a locator for the island
 	const islandLocator = page.locator(islandSelector).nth(nth);
 	// check that the island is present on the page
-	await islandLocator.isVisible();
+	await islandLocator.waitFor({ state: 'attached', timeout: 30_000 });
 	// scroll to it
 	await islandLocator.scrollIntoViewIfNeeded();
-	// wait for it to be rendered or hydrated
-	const hyrdatedIslandSelector = `gu-island[name="${island}"][data-island-status="${status}"]`;
-	const hyrdatedIslandLocator = page.locator(hyrdatedIslandSelector).nth(nth);
-	await hyrdatedIslandLocator.waitFor({
-		state: 'visible',
+	// wait for it to be hydrated
+	const hydratedIslandSelector = `gu-island[name="${name}"][data-island-status="hydrated"]`;
+	const hydratedIslandLocator = page.locator(hydratedIslandSelector).nth(nth);
+	await hydratedIslandLocator.waitFor({
+		state: waitFor,
 		timeout: 30_000,
 	});
 };

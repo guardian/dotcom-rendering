@@ -44,6 +44,23 @@ Unquoted.decorators = [
 	]),
 ];
 
+const blockQuoteStoryVariations = [
+	ArticleDesign.Standard,
+	ArticleDesign.Profile,
+	ArticleDesign.Explainer,
+	ArticleDesign.Timeline,
+	ArticleDesign.LiveBlog,
+	ArticleDesign.DeadBlog,
+	ArticleDesign.Analysis,
+	ArticleDesign.Feature,
+	ArticleDesign.Interview,
+	ArticleDesign.Recipe,
+	ArticleDesign.Review,
+	ArticleDesign.Obituary,
+	ArticleDesign.Comment,
+	ArticleDesign.Editorial,
+] as const satisfies ReadonlyArray<ArticleDesign>;
+
 const themeVariations = [
 	Pillar.Sport,
 	Pillar.News,
@@ -61,6 +78,36 @@ const allThemeStandardVariations = themeVariations.map((theme) => ({
 	theme,
 }));
 
+const allLiveBlogVariations = themeVariations.map((theme) => ({
+	design: ArticleDesign.LiveBlog,
+	display: ArticleDisplay.Standard,
+	theme,
+}));
+
+const allDeadBlogVariations = themeVariations.map((theme) => ({
+	design: ArticleDesign.DeadBlog,
+	display: ArticleDisplay.Standard,
+	theme,
+}));
+
+const allNewsVariations = blockQuoteStoryVariations.map((design) => ({
+	design,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+}));
+
+const allCultureVariations = blockQuoteStoryVariations.map((design) => ({
+	design,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.Culture,
+}));
+
+const allSportVariations = blockQuoteStoryVariations.map((design) => ({
+	design,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.Sport,
+}));
+
 export const StandardDesign = () => {
 	return (
 		<div>
@@ -72,84 +119,60 @@ export const StandardDesign = () => {
 StandardDesign.storyName = 'Standard Design - All theme variations';
 StandardDesign.decorators = [splitTheme(allThemeStandardVariations)];
 
-export const LiveBlogNews = () => {
+export const DesignVariationsNews = () => {
 	return (
 		<div>
-			<h1>LiveBlog News</h1>
 			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
 
-LiveBlogNews.storyName = 'LiveBlogNews';
-LiveBlogNews.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.LiveBlog,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
+DesignVariationsNews.storyName = 'News Pillar - Design variations';
+DesignVariationsNews.decorators = [splitTheme(allNewsVariations)];
 
-export const DeadBlogNews = () => {
+export const DesignVariationsCulture = () => {
 	return (
 		<div>
-			<h1>DeadBlog News</h1>
 			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
 
-DeadBlogNews.storyName = 'DeadBlogNews';
-DeadBlogNews.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.DeadBlog,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
+DesignVariationsCulture.storyName = 'Culture Pillar - Design variations';
+DesignVariationsCulture.decorators = [splitTheme(allCultureVariations)];
 
-export const LiveBlogSport = () => {
+export const DesignVariationsSport = () => {
 	return (
 		<div>
-			<h1>LiveBlog News</h1>
 			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
 
-LiveBlogSport.storyName = 'LiveBlogSport';
-LiveBlogSport.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.LiveBlog,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Sport,
-		},
-	]),
-];
+DesignVariationsSport.storyName = 'Sport Pillar - Design variations';
+DesignVariationsSport.decorators = [splitTheme(allSportVariations)];
 
-export const DeadBlogSport = () => {
+export const LiveBlogDesign = () => {
 	return (
-		<div css={containerStyles}>
-			<h1>DeadBlog Sport</h1>
+		<div>
 			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
-DeadBlogSport.storyName = 'DeadBlogSport';
-DeadBlogSport.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.DeadBlog,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Sport,
-		},
-	]),
-];
+
+LiveBlogDesign.storyName = 'LiveBlog Design - All theme variations';
+LiveBlogDesign.decorators = [splitTheme(allLiveBlogVariations)];
+
+export const DeadBlogDesign = () => {
+	return (
+		<div>
+			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
+		</div>
+	);
+};
+
+DeadBlogDesign.storyName = 'DeadBlog Design - All theme variations';
+DeadBlogDesign.decorators = [splitTheme(allDeadBlogVariations)];
 
 export const SpecialReportAltComment = () => {
 	return (

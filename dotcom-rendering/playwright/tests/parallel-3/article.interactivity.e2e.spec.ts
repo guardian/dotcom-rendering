@@ -22,7 +22,7 @@ test.describe('Interactivity', () => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
 
-			await waitForIsland(page, 'HeaderTopBar', { status: 'hydrated' });
+			await waitForIsland(page, 'HeaderTopBar');
 			// Open it
 			await page.locator('[data-testid=dropdown-button]').click();
 			await expectToBeVisible(page, '[data-testid=dropdown-options]');
@@ -52,9 +52,7 @@ test.describe('Interactivity', () => {
 			await expectToNotBeVisible(page, '[data-testid=discussion]');
 			// Click the comment count
 			await page.locator('[data-testid=comment-counts]').click();
-			await waitForIsland(page, 'DiscussionContainer', {
-				status: 'hydrated',
-			});
+			await waitForIsland(page, 'DiscussionContainer', {});
 			await expectToExist(page, '[data-testid=discussion]');
 		});
 
@@ -80,9 +78,7 @@ test.describe('Interactivity', () => {
 				page,
 				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
 			);
-			await waitForIsland(page, 'DiscussionContainer', {
-				status: 'hydrated',
-			});
+			await waitForIsland(page, 'DiscussionContainer', {});
 			await expectToBeVisible(page, '[id=comment-154433663]');
 		});
 
@@ -93,7 +89,7 @@ test.describe('Interactivity', () => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
 			await expectToNotExist(page, '[data-component=geo-most-popular]');
-			await waitForIsland(page, 'MostViewedRightWrapper');
+			await waitForIsland(page, 'MostViewedRightWrapper', {});
 			await expectToExist(page, '[data-component=geo-most-popular]');
 		});
 
@@ -109,11 +105,9 @@ test.describe('Interactivity', () => {
 			).toHaveCount(2);
 			// Verify hydration of both rich links
 			await waitForIsland(page, 'RichLinkComponent', {
-				status: 'hydrated',
 				nth: 0,
 			});
 			await waitForIsland(page, 'RichLinkComponent', {
-				status: 'hydrated',
 				nth: 1,
 			});
 			await expectToBeVisible(
@@ -151,14 +145,14 @@ test.describe('Interactivity', () => {
 			).toHaveCount(0);
 
 			// Wait for hydration
-			await waitForIsland(page, 'MostViewedRightWrapper');
+			await waitForIsland(page, 'MostViewedRightWrapper', {});
 			await expect(
 				page
 					.locator(`gu-island[name="MostViewedRightWrapper"]`)
 					.filter({ hasText: 'Most Viewed' }),
 			).toBeVisible();
 
-			await waitForIsland(page, 'MostViewedFooterData');
+			await waitForIsland(page, 'MostViewedFooterData', {});
 			await expect(
 				page
 					.locator(`gu-island[name="MostViewedFooterData"]`)
@@ -324,11 +318,9 @@ test.describe('Interactivity', () => {
 
 				// Wait for hydration of both navs
 				await waitForIsland(page, 'SubNav', {
-					status: 'hydrated',
 					nth: 0,
 				});
 				await waitForIsland(page, 'SubNav', {
-					status: 'hydrated',
 					nth: 1,
 				});
 

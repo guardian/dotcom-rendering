@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import {
 	body,
 	brandBackground,
@@ -28,13 +27,13 @@ import { SubNav } from '../components/SubNav.importable';
 import { TagFrontHeader } from '../components/TagFrontHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
 import {
 	getTagFrontMobileAdPositions,
 	getTagFrontsBannerAdPositions,
 } from '../lib/getTagFrontsAdPositions';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRTagFrontType } from '../types/tagFront';
 import { Stuck } from './lib/stickiness';
 
@@ -108,14 +107,6 @@ const SectionLeftContent = ({
 };
 
 export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
-
-	const palette = decidePalette(format);
-
 	const {
 		config: { switches, hasPageSkin, isPaidContent },
 	} = tagFront;
@@ -196,7 +187,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								element="aside"
 							>
@@ -214,7 +207,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							</Section>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								showTopBorder={false}
 							>

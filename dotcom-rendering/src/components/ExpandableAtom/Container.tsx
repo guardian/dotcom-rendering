@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { neutral, text } from '@guardian/source-foundations';
+import { palette as sourcePalette, text } from '@guardian/source-foundations';
 import { Summary } from './Summary';
 
 const containerStyling = css`
@@ -12,7 +12,9 @@ const containerStyling = css`
 export const detailStyling = (design?: ArticleDesign): SerializedStyles => {
 	// One off background colour for analysis articles
 	const background =
-		design === ArticleDesign.Analysis ? '#F2E8E6' : neutral[93];
+		design === ArticleDesign.Analysis
+			? '#F2E8E6'
+			: sourcePalette.neutral[93];
 	return css`
 		margin: 16px 0 36px;
 		background: ${background};
@@ -20,8 +22,8 @@ export const detailStyling = (design?: ArticleDesign): SerializedStyles => {
 		padding: 0 5px 6px;
 		border-image: repeating-linear-gradient(
 				to bottom,
-				${neutral[86]},
-				${neutral[86]} 1px,
+				${sourcePalette.neutral[86]},
+				${sourcePalette.neutral[86]} 1px,
 				transparent 1px,
 				transparent 4px
 			)

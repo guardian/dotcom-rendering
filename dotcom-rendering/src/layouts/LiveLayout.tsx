@@ -13,6 +13,8 @@ import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -295,8 +297,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	const isInLiveblogAdSlotTest =
-		article.config.abTests.serverSideLiveblogInlineAdsVariant === 'variant';
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	return (
 		<>
@@ -423,9 +425,16 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main data-layout="LiveLayout">
 				{isApps && (
-					<Island priority="critical" clientOnly={true}>
-						<AdPortals rightAlignFrom="wide" />
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals rightAlignFrom="wide" />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				{footballMatchUrl ? (
 					<Section
@@ -477,7 +486,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={themePalette('--header-background')}
+						backgroundColour={themePalette(
+							'--headline-blog-background',
+						)}
 						borderColour={themePalette('--headline-border')}
 					>
 						<HeadlineGrid>
@@ -581,7 +592,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										secondaryDateline={
 											article.webPublicationSecondaryDateDisplay
 										}
-										isCommentable={article.isCommentable}
+										isCommentable={showComments}
 										discussionApiUrl={
 											article.config.discussionApiUrl
 										}
@@ -648,7 +659,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								`}
 							/>
 							<Island
-								clientOnly={true}
 								priority="feature"
 								defer={{ until: 'idle' }}
 							>
@@ -717,9 +727,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										switches={article.config.switches}
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
-										imagesForAppsLightbox={
-											article.imagesForAppsLightbox
-										}
 									/>
 								</div>
 							</GridItem>
@@ -746,9 +753,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											secondaryDateline={
 												article.webPublicationSecondaryDateDisplay
 											}
-											isCommentable={
-												article.isCommentable
-											}
+											isCommentable={showComments}
 											discussionApiUrl={
 												article.config.discussionApiUrl
 											}
@@ -907,12 +912,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 														article.config
 															.keywordIds
 													}
-													isInLiveblogAdSlotTest={
-														isInLiveblogAdSlotTest
-													}
-													imagesForAppsLightbox={
-														article.imagesForAppsLightbox
-													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1057,14 +1056,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 														article.config
 															.keywordIds
 													}
-													isInLiveblogAdSlotTest={
-														isInLiveblogAdSlotTest
-													}
 													lang={article.lang}
 													isRightToLeftLang={
 														article.isRightToLeftLang
 													}
-													imagesForAppsLightbox={[]}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1215,7 +1210,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						/>
 					</Island>
 
-					{!isPaidContent && article.isCommentable && (
+					{showComments && (
 						<Section
 							fullWidth={true}
 							showTopBorder={false}
@@ -1254,11 +1249,15 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							data-link-name="most-popular"
 							data-component="most-popular"
 							leftColSize="wide"
+							backgroundColour={themePalette(
+								'--article-section-background',
+							)}
+							borderColour={themePalette('--article-border')}
+							fontColour={themePalette('--article-section-title')}
 						>
 							<MostViewedFooterLayout renderAds={renderAds}>
 								<Island
 									priority="feature"
-									clientOnly={true}
 									defer={{ until: 'visible' }}
 								>
 									<MostViewedFooterData
@@ -1340,11 +1339,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper data-print-layout="hide">
-						<Island
-							priority="feature"
-							defer={{ until: 'idle' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -1375,6 +1370,22 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</BannerWrapper>
 					<MobileStickyContainer data-print-layout="hide" />
 				</>
+			)}
+
+			{isApps && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					backgroundColour={themePalette('--apps-footer-background')}
+					borderColour={themePalette('--article-border')}
+					padSides={false}
+					showSideBorders={false}
+					element="footer"
+				>
+					<Island priority="critical">
+						<AppsFooter />
+					</Island>
+				</Section>
 			)}
 		</>
 	);

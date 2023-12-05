@@ -1,43 +1,28 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { from, headline, textSans, until } from '@guardian/source-foundations';
+import { ArticleDesign, ArticleSpecial, isString } from '@guardian/libs';
+import { headline, space, textSans, until } from '@guardian/source-foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
-import { decidePalette } from '../lib/decidePalette';
-import { palette as schemedPalette } from '../palette';
+import { palette, palette as schemedPalette } from '../palette';
 import TwitterIcon from '../static/icons/twitter.svg';
-import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';
 import { useConfig } from './ConfigContext';
 
-const twitterHandleColour = (palette: Palette) => css`
-	color: ${palette.text.twitterHandleBelowDesktop};
+const twitterHandleStyles = css`
+	${textSans.xxsmall({ fontWeight: 'bold' })};
+
+	color: ${palette('--twitter-handle')};
 
 	svg {
 		fill: currentColor;
+		height: 1em;
+		margin-right: ${space[1]}px;
+		transform: translateY(2px);
 	}
 
 	a {
 		color: inherit;
-	}
-
-	${from.desktop} {
-		color: ${palette.text.twitterHandle};
-	}
-`;
-
-const twitterHandleStyles = css`
-	${textSans.xxsmall()};
-	font-weight: bold;
-
-	svg {
-		height: 10px;
-		max-width: 12px;
-		margin-right: 0px;
-	}
-
-	a {
 		text-decoration: none;
 	}
 
@@ -45,34 +30,31 @@ const twitterHandleStyles = css`
 	display: inline-block;
 `;
 
-const bylineColorStyles = css`
-	color: ${schemedPalette('--byline')};
-
-	a {
-		color: inherit;
-	}
-`;
-
 /**
- * for liveblog smaller breakpoints article meta is located in the same
- * container as standfirst and needs the same styling as standfirst
+ * For LiveBlogs at breakpoints below desktop, the article meta is located
+ * in the same container as standfirst, which has a different background,
+ * and needs to be the same colour as standfirst to make it readable
  */
-const bylineLiveblogColour = css`
+const standfirstColourBelowDesktop = css`
 	${until.desktop} {
 		color: ${schemedPalette('--standfirst-text')};
+
+		a {
+			color: ${schemedPalette('--standfirst-text')};
+		}
 	}
 `;
 
-const bylineStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs
-		? textSans.medium()
-		: headline.xxxsmall()};
-	${format.theme === ArticleSpecial.Labs && 'line-height: 20px;'};
+const bylineStyles = css`
+	${headline.xxxsmall()}
 
 	padding-bottom: 8px;
 	font-style: italic;
 
+	color: ${schemedPalette('--byline')};
+
 	a {
+		color: ${schemedPalette('--byline-anchor')};
 		font-weight: 700;
 		text-decoration: none;
 		font-style: normal;
@@ -82,6 +64,10 @@ const bylineStyles = (format: ArticleFormat) => css`
 	}
 `;
 
+const labsBylineStyles = css`
+	${textSans.medium({ lineHeight: 'loose' })}
+`;
+
 type Props = {
 	byline: string;
 	tags: TagType[];
@@ -89,8 +75,6 @@ type Props = {
 };
 
 export const Contributor = ({ byline, tags, format }: Props) => {
-	const palette = decidePalette(format);
-
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
 
@@ -110,23 +94,29 @@ export const Contributor = ({ byline, tags, format }: Props) => {
 							: ''
 					}
 					css={[
-						bylineStyles(format),
-						bylineColorStyles,
+						bylineStyles,
+						format.theme === ArticleSpecial.Labs &&
+							labsBylineStyles,
 						format.design === ArticleDesign.LiveBlog &&
-							bylineLiveblogColour,
+							standfirstColourBelowDesktop,
 					]}
 				>
 					<BylineLink byline={byline} tags={tags} format={format} />
 				</div>
 			)}
-			{isWeb && !!twitterHandle && (
-				<div css={[twitterHandleStyles, twitterHandleColour(palette)]}>
-					<TwitterIcon />
+			{isWeb && isString(twitterHandle) && (
+				<div
+					css={[
+						twitterHandleStyles,
+						format.design === ArticleDesign.LiveBlog &&
+							standfirstColourBelowDesktop,
+					]}
+				>
 					<a
 						href={`https://www.twitter.com/${twitterHandle}`}
 						aria-label={`@${twitterHandle} on Twitter`}
 					>
-						@{twitterHandle}
+						<TwitterIcon />@{twitterHandle}
 					</a>
 				</div>
 			)}

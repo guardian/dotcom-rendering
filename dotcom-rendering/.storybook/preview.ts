@@ -74,6 +74,7 @@ window.guardian = {
 	},
 	ophan: {
 		record: ({}) => {},
+		pageViewId: 'storybook-does-not-have-a-page-view-id',
 	},
 	modules: {
 		sentry: {

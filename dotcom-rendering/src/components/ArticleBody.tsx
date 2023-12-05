@@ -5,14 +5,12 @@ import { between, body, headline, space } from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
-import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { palette as themePalette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TableOfContentsItem } from '../types/frontend';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
-import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { TableOfContents } from './TableOfContents.importable';
 
 type Props = {
@@ -41,12 +39,10 @@ type Props = {
 	filterKeyEvents?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
-	isInLiveblogAdSlotTest?: boolean;
 	abTests?: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
 	isRightToLeftLang?: boolean;
-	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -105,9 +101,6 @@ const globalLinkStyles = () => css`
 	}
 `;
 
-const isRecipe = (tags: TagType[]): boolean =>
-	tags.some(({ id }) => id === 'tone/recipes');
-
 export const ArticleBody = ({
 	format,
 	blocks,
@@ -134,12 +127,10 @@ export const ArticleBody = ({
 	availableTopics,
 	selectedTopics,
 	keywordIds,
-	isInLiveblogAdSlotTest = false,
 	abTests,
 	tableOfContents,
 	lang,
 	isRightToLeftLang = false,
-	imagesForAppsLightbox,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const language = decideLanguage(lang);
@@ -188,7 +179,6 @@ export const ArticleBody = ({
 					availableTopics={availableTopics}
 					selectedTopics={selectedTopics}
 					keywordIds={keywordIds}
-					isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 				/>
 			</div>
 		);
@@ -216,15 +206,6 @@ export const ArticleBody = ({
 				lang={language}
 				dir={languageDirection}
 			>
-				{isRecipe(tags) && (
-					<Island
-						priority="feature"
-						defer={{ until: 'hash' }}
-						clientOnly={true}
-					>
-						<RecipeMultiplier />
-					</Island>
-				)}
 				<ArticleRenderer
 					format={format}
 					elements={blocks[0] ? blocks[0].elements : []}
@@ -243,7 +224,6 @@ export const ArticleBody = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					abTests={abTests}
-					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			</div>
 		</>

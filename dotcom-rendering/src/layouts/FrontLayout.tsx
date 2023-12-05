@@ -6,9 +6,7 @@ import {
 	brandBackground,
 	brandBorder,
 	brandLine,
-	labs,
-	neutral,
-	news,
+	palette as sourcePalette,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
@@ -261,8 +259,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										linkHoverColour={news[400]}
-										borderColour={neutral[46]}
+										linkHoverColour={
+											sourcePalette.news[400]
+										}
+										borderColour={sourcePalette.neutral[46]}
 									/>
 								</Island>
 							</Section>
@@ -286,7 +286,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<Section
 							fullWidth={true}
 							showTopBorder={false}
-							backgroundColour={labs[400]}
+							backgroundColour={sourcePalette.labs[400]}
 							borderColour={border.primary}
 							sectionId="labs-header"
 						>
@@ -691,8 +691,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={news[400]}
-							borderColour={neutral[46]}
+							linkHoverColour={sourcePalette.news[400]}
+							borderColour={sourcePalette.neutral[46]}
 						/>
 					</Island>
 				</Section>
@@ -719,11 +719,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			</Section>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island
-					priority="feature"
-					defer={{ until: 'idle' }}
-					clientOnly={true}
-				>
+				<Island priority="feature" defer={{ until: 'idle' }}>
 					<StickyBottomBanner
 						contentType={front.config.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

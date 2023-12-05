@@ -1,18 +1,14 @@
-import SSM from 'aws-sdk/clients/ssm';
-import type { Credentials } from 'aws-sdk/lib/core';
-import {
-	CredentialProviderChain,
-	EC2MetadataCredentials,
-	SharedIniFileCredentials,
-} from 'aws-sdk/lib/core';
+import { fromIni, fromInstanceMetadata } from '@aws-sdk/credential-providers';
+import { chain as providerChain } from '@smithy/property-provider';
+import { SSM } from '@aws-sdk/client-ssm';
 import { Region } from './appIdentity';
 
-const credentialProvider = new CredentialProviderChain([
-	(): Credentials => new SharedIniFileCredentials({ profile: 'mobile' }),
-	(): Credentials => new EC2MetadataCredentials(),
-]);
+const credentialProvider = providerChain(
+	fromIni({ profile: 'mobile' }),
+	fromInstanceMetadata(),
+);
 
 export const ssm: SSM = new SSM({
 	region: Region,
-	credentialProvider: credentialProvider,
+	credentials: credentialProvider,
 });

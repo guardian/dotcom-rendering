@@ -29,7 +29,7 @@ export const ContainerOverrides = ({
 		: { text: undefined, background: undefined, topBar: undefined };
 
 	const paletteOverrides = {
-		'--card-headline-text': isDynamo
+		'--card-headline-trail-text': isDynamo
 			? text?.dynamoHeadline
 			: text?.cardHeadline,
 		'--card-footer-text': isDynamo

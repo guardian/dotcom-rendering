@@ -12,7 +12,7 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import { getAgeWarning } from '../lib/age-warning';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
-import type { Palette } from '../types/palette';
+import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { AgeWarning } from './AgeWarning';
 import { DesignTag } from './DesignTag';
@@ -112,12 +112,12 @@ const shiftSlightly = css`
 	margin-bottom: 16px;
 `;
 
-const invertedStyles = (palette: Palette) => css`
+const invertedStyles = css`
 	position: relative;
 	white-space: pre-wrap;
 	padding-bottom: ${space[1]}px;
 	padding-right: ${space[1]}px;
-	box-shadow: -6px 0 0 ${palette.background.headline};
+	box-shadow: -6px 0 0 ${themePalette('--headline-background')};
 	/* Box decoration is required to push the box shadow out on Firefox */
 	box-decoration-break: clone;
 `;
@@ -139,8 +139,8 @@ const reducedBottomPadding = css`
 	padding-bottom: ${space[4]}px;
 `;
 
-const darkBackground = (palette: Palette) => css`
-	background-color: ${palette.background.headline};
+const darkBackground = css`
+	background-color: ${themePalette('--headline-background')};
 `;
 
 const invertedText = css`
@@ -225,8 +225,8 @@ const ageWarningMargins = (format: ArticleFormat) =>
 				}
 		  `;
 
-const backgroundStyles = (palette: Palette) => css`
-	background-color: ${palette.background.ageWarning};
+const backgroundStyles = css`
+	background-color: ${themePalette('--age-warning-background')};
 `;
 
 const WithAgeWarning = ({
@@ -240,15 +240,12 @@ const WithAgeWarning = ({
 	format: ArticleFormat;
 	children: React.ReactNode;
 }) => {
-	const palette = decidePalette(format);
 	const age = getAgeWarning(tags, webPublicationDateDeprecated);
 
 	if (age) {
 		return (
 			<>
-				<div
-					css={[backgroundStyles(palette), ageWarningMargins(format)]}
-				>
+				<div css={[backgroundStyles, ageWarningMargins(format)]}>
 					<AgeWarning age={age} />
 				</div>
 				{children}
@@ -434,7 +431,7 @@ export const ArticleHeadline = ({
 							<h1
 								css={[
 									immersiveWrapper,
-									darkBackground(palette),
+									darkBackground,
 									css`
 										color: ${palette.text.headline};
 									`,
@@ -446,7 +443,7 @@ export const ArticleHeadline = ({
 											? jumboLabsFont
 											: jumboFont,
 										maxWidth,
-										invertedStyles(palette),
+										invertedStyles,
 										immersiveStyles,
 										displayBlock,
 									]}
@@ -646,8 +643,8 @@ export const ArticleHeadline = ({
 								>
 									<span
 										css={[
-											darkBackground(palette),
-											invertedStyles(palette),
+											darkBackground,
+											invertedStyles,
 											displayInline,
 										]}
 									>

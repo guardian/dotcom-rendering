@@ -63,7 +63,6 @@ import {
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
 import { getSharingUrls } from '../lib/sharing-urls';
-import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
 import { decidePalette } from './decidePalette';
@@ -84,7 +83,6 @@ type Props = {
 	switches: Switches;
 	isPinnedPost?: boolean;
 	abTests?: ServerSideTests;
-	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -139,7 +137,6 @@ export const renderElement = ({
 	isSensitive,
 	isPinnedPost,
 	abTests,
-	imagesForAppsLightbox,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -189,7 +186,6 @@ export const renderElement = ({
 						<CalloutBlockComponent
 							callout={element}
 							pageId={pageId}
-							format={format}
 						/>
 					</Island>
 				);
@@ -355,7 +351,6 @@ export const renderElement = ({
 					title={element.title}
 					isAvatar={element.isAvatar}
 					switches={switches}
-					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -458,7 +453,6 @@ export const renderElement = ({
 					images={element.images}
 					caption={element.caption}
 					switches={switches}
-					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
@@ -501,7 +495,6 @@ export const renderElement = ({
 				<PullQuoteBlockComponent
 					key={index}
 					html={element.html}
-					palette={palette}
 					format={format}
 					attribution={element.attribution}
 					role={element.role}
@@ -808,7 +801,6 @@ export const RenderArticleElement = ({
 	switches,
 	isPinnedPost,
 	abTests,
-	imagesForAppsLightbox,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -828,7 +820,6 @@ export const RenderArticleElement = ({
 		switches,
 		isPinnedPost,
 		abTests,
-		imagesForAppsLightbox,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

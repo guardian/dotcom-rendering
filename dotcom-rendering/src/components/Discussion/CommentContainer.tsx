@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { border, neutral, space } from '@guardian/source-foundations';
+import {
+	border,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { getMoreResponses } from '../../lib/discussionApi';
@@ -53,7 +57,7 @@ const commentContainerStyles = css`
 `;
 
 const selectedStyles = css`
-	background-color: ${neutral[97]};
+	background-color: ${sourcePalette.neutral[97]};
 	margin-left: -${space[2]}px;
 	padding-left: ${space[2]}px;
 	margin-right: -${space[2]}px;

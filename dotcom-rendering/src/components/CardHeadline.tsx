@@ -290,7 +290,7 @@ export const CardHeadline = ({
 					{showQuotes && <QuoteIcon colour={kickerColour} />}
 					<span
 						css={css`
-							color: ${palette('--card-headline-text')};
+							color: ${palette('--card-headline-trail-text')};
 						`}
 						className="show-underline"
 					>

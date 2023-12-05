@@ -1,5 +1,10 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { StoryObj } from '@storybook/react';
 import fetchMock from 'fetch-mock';
+import {
+	splitTheme,
+	type StoryProps,
+} from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleContainer } from './ArticleContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
@@ -8,15 +13,22 @@ import { MostViewedRight } from './MostViewedRight';
 import { RightColumn } from './RightColumn';
 import { Section } from './Section';
 
+const standardFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
+
 export default {
 	component: MostViewedRight,
 	title: 'Components/MostViewedRight',
 	parameters: {
 		chromatic: { diffThreshold: 0.2 },
 	},
+	decorators: [splitTheme([standardFormat], { orientation: 'vertical' })],
 };
 
-export const defaultStory = () => {
+export const defaultStory: StoryObj = ({ format }: StoryProps) => {
 	fetchMock
 		.restore()
 		.getOnce('*', {
@@ -31,13 +43,7 @@ export const defaultStory = () => {
 				<LeftColumn borderType="partial">
 					<></>
 				</LeftColumn>
-				<ArticleContainer
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
-				>
+				<ArticleContainer format={format}>
 					<></>
 				</ArticleContainer>
 				<RightColumn>
@@ -56,7 +62,7 @@ export const defaultStory = () => {
 };
 defaultStory.storyName = 'default';
 
-export const limitItemsStory = () => {
+export const limitItemsStory: StoryObj = ({ format }: StoryProps) => {
 	fetchMock
 		.restore()
 		.getOnce('*', {
@@ -71,13 +77,7 @@ export const limitItemsStory = () => {
 				<LeftColumn>
 					<></>
 				</LeftColumn>
-				<ArticleContainer
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
-				>
+				<ArticleContainer format={format}>
 					<></>
 				</ArticleContainer>
 				<RightColumn>
@@ -96,7 +96,7 @@ export const limitItemsStory = () => {
 };
 limitItemsStory.storyName = 'with a limit of 3 items';
 
-export const outsideContextStory = () => {
+export const outsideContextStory: StoryObj = () => {
 	fetchMock
 		.restore()
 		.getOnce('*', {

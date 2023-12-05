@@ -57,6 +57,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'trump-on-trial',
 				'follow-margaret-sullivan',
+				'follow-robert-reich',
 				'global-dispatch',
 				'documentaries',
 				'her-stage',
@@ -110,6 +111,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'green-light', // Down to Earth
 				'trump-on-trial',
 				'follow-margaret-sullivan',
+				'follow-robert-reich',
 				'best-of-opinion-us',
 				'patriarchy',
 				'bookmarks',
@@ -245,6 +247,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'trump-on-trial',
 				'follow-margaret-sullivan',
+				'follow-robert-reich',
 				'global-dispatch',
 				'cotton-capital',
 				'documentaries',

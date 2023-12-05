@@ -101,18 +101,10 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<LightboxLayout
 						imageCount={article.imagesForLightbox.length}
 					/>
-					<Island
-						clientOnly={true}
-						priority="feature"
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<LightboxHash />
 					</Island>
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'hash' }}
-					>
+					<Island priority="feature" defer={{ until: 'hash' }}>
 						<LightboxJavascript
 							format={format}
 							images={article.imagesForLightbox}
@@ -134,7 +126,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<Island priority="feature" defer={{ until: 'idle' }}>
 						<AlreadyVisited />
 					</Island>
-					<Island priority="critical" clientOnly={true}>
+					<Island priority="critical">
 						<Metrics
 							commercialMetricsEnabled={
 								!!article.config.switches.commercialMetrics
@@ -153,7 +145,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							}
 						/>
 					</Island>
-					<Island clientOnly={true} priority="critical">
+					<Island priority="critical">
 						<SetABTests
 							abTestSwitches={filterABTestSwitches(
 								article.config.switches,

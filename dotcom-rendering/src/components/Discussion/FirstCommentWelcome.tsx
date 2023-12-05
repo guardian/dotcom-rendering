@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	headline,
-	neutral,
+	palette as sourcePalette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
@@ -22,7 +22,7 @@ type Props = {
 
 const previewStyle = css`
 	padding: ${space[2]}px;
-	background-color: ${neutral[93]};
+	background-color: ${sourcePalette.neutral[93]};
 	margin-bottom: ${space[5]}px;
 	position: relative;
 	min-height: ${space[9]}px;

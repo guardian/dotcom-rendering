@@ -1,6 +1,7 @@
 import { Hide } from '@guardian/source-react-components';
 import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { FilterKeyEventsToggle } from './FilterKeyEventsToggle.importable';
 import { Island } from './Island';
@@ -34,7 +35,6 @@ type Props = {
 	filterKeyEvents?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
-	isInLiveblogAdSlotTest?: boolean;
 };
 
 export const LiveBlogRenderer = ({
@@ -60,8 +60,10 @@ export const LiveBlogRenderer = ({
 	filterKeyEvents = false,
 	availableTopics,
 	selectedTopics,
-	isInLiveblogAdSlotTest = false,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+	const isWeb = renderingTarget === 'Web';
+
 	const filtered =
 		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
 
@@ -69,11 +71,7 @@ export const LiveBlogRenderer = ({
 		<>
 			{pinnedPost && onFirstPage && !filtered && (
 				<>
-					<Island
-						clientOnly={true}
-						defer={{ until: 'idle' }}
-						priority="feature"
-					>
+					<Island defer={{ until: 'idle' }} priority="feature">
 						<EnhancePinnedPost />
 					</Island>
 					<PinnedPost pinnedPost={pinnedPost} format={format}>
@@ -141,16 +139,14 @@ export const LiveBlogRenderer = ({
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				pinnedPost={pinnedPost}
-				isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 			/>
-			{blocks.length > 4 && (
+			{isWeb && blocks.length > 4 && (
 				<Island
 					priority="feature"
 					// this should really be deferred until visible,
 					// but this island manipulate the DOM via portals,
 					// its actual position has no bearing on its effect
 					defer={{ until: 'idle' }}
-					clientOnly={true}
 				>
 					<LiveBlogEpic
 						sectionId={sectionId}
