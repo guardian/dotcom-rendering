@@ -1,4 +1,6 @@
 import { ArticleDesign } from '@guardian/libs';
+import { palette } from '@guardian/source-foundations';
+import { DottedLines } from '@guardian/source-react-components-development-kitchen';
 import {
 	getBylineComponentsFromTokens,
 	getSoleContributor,
@@ -141,12 +143,15 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 		<>
 			{renderedTokens}
 			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
-				<Island priority="critical">
-					<FollowWrapper
-						displayName={soleContributor.title}
-						id={soleContributor.id}
-					/>
-				</Island>
+				<>
+					<DottedLines count={1} color={palette.neutral[86]} />
+					<Island priority="critical">
+						<FollowWrapper
+							displayName={soleContributor.title}
+							id={soleContributor.id}
+						/>
+					</Island>
+				</>
 			) : null}
 		</>
 	);

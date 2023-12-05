@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	border,
@@ -15,15 +15,18 @@ import { decidePalette } from '../lib/decidePalette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
+import {
+	metaContainer as metaContainerMargins,
+	shouldShowAvatar,
+	shouldShowContributor,
+} from './ArticleMeta';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
-import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
 import { SendAMessage } from './SendAMessage.importable';
-import { ShareIcons } from './ShareIcons';
 
 type Props = {
 	format: ArticleFormat;
@@ -41,7 +44,109 @@ type Props = {
 	messageUs?: MessageUs;
 };
 
-const meta = (format: ArticleFormat) => {
+const metaGridContainer = (showAvatar: boolean) => css`
+	display: grid;
+	grid-template-rows: auto;
+
+	${showAvatar
+		? css`
+				grid-template-columns: auto 1fr auto;
+				grid-template-areas:
+					'avatar byline comment-count'
+					'avatar byline comment-count'
+					'dateline dateline dateline';
+		  `
+		: css`
+				grid-template-columns: 1fr auto;
+				grid-template-areas:
+					'byline comment-count'
+					'byline comment-count'
+					'dateline dateline';
+		  `}
+`;
+
+const MetaGridAvatar = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			grid-area: avatar;
+			width: 140px;
+			height: 140px;
+			margin-top: 6px;
+			margin-right: 10px;
+			margin-bottom: 12px;
+			margin-left: 0px;
+
+			${until.leftCol} {
+				grid-area: avatar;
+				width: 60px;
+				height: 60px;
+				margin-top: 3px;
+				margin-right: 10px;
+				margin-bottom: 12px;
+				margin-left: 0px;
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
+const MetaGridByline = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			grid-area: byline;
+			width: auto;
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
+const MetaGridCommentCount = ({
+	children,
+	palette,
+	isPictureContent,
+}: {
+	children: React.ReactNode;
+	palette: Palette;
+	isPictureContent: boolean;
+}) => (
+	<div
+		data-print-layout="hide"
+		css={css`
+			grid-area: comment-count;
+			border-left: 1px solid ${palette.border.article};
+
+			${!isPictureContent && until.phablet} {
+				margin-top: -2px;
+				padding-top: 2px;
+				padding-left: 10px;
+			}
+
+			${!isPictureContent && until.desktop} {
+				margin-top: -2px;
+				padding-top: 2px;
+				padding-left: 10px;
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
+const MetaGridDateline = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			grid-area: dateline;
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
+const metaPadding = (format: ArticleFormat) => {
 	if (
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
@@ -79,224 +184,23 @@ const meta = (format: ArticleFormat) => {
 	`;
 };
 
-const metaFlex = css`
-	margin-bottom: 6px;
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-`;
-
 const stretchLines = css`
 	display: block;
 
-	${until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-	}
 	${until.mobileLandscape} {
-		margin-left: -10px;
-		margin-right: -10px;
-	}
-`;
-
-const borderColourWhenBackgroundDark = css`
-	${until.desktop} {
-		border-top: 1px solid rgba(255, 255, 255, 0.4);
-	}
-`;
-
-const metaExtras = (palette: Palette, isPictureContent: boolean) => css`
-	border-top: 1px solid ${palette.border.article};
-	flex-grow: 1;
-	padding-top: 6px;
-
-	${!isPictureContent && until.phablet} {
 		margin-left: -20px;
 		margin-right: -20px;
-		padding-left: 20px;
-		padding-right: 20px;
+		width: auto;
 	}
 
-	${!isPictureContent && until.phablet} {
+	${until.phablet} {
 		margin-left: -10px;
 		margin-right: -10px;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-
-	${between.leftCol.and.wide} {
-		padding-bottom: 6px;
+		width: auto;
 	}
 `;
 
-const metaNumbers = (palette: Palette, isPictureContent: boolean) => css`
-	border-top: 1px solid ${palette.border.article};
-	display: flex;
-	flex-grow: 1;
-
-	justify-content: flex-end;
-	${between.leftCol.and.wide} {
-		justify-content: flex-start;
-	}
-
-	${!isPictureContent && until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-		padding-left: 20px;
-		padding-right: 20px;
-	}
-
-	${!isPictureContent && until.phablet} {
-		margin-left: -10px;
-		margin-right: -10px;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-`;
-
-const metaContainer = (format: ArticleFormat) => {
-	const defaultMargins = css`
-		${until.phablet} {
-			margin-left: -20px;
-			margin-right: -20px;
-		}
-		${until.mobileLandscape} {
-			margin-left: -10px;
-			margin-right: -10px;
-		}
-	`;
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard: {
-			switch (format.design) {
-				case ArticleDesign.PhotoEssay:
-					return format.theme === ArticleSpecial.Labs
-						? defaultMargins
-						: css`
-								${until.phablet} {
-									margin-left: -20px;
-									margin-right: -20px;
-								}
-								${until.mobileLandscape} {
-									margin-left: -10px;
-									margin-right: -10px;
-								}
-								${from.leftCol} {
-									margin-left: 20px;
-								}
-								${from.wide} {
-									margin-left: 40px;
-								}
-						  `;
-				case ArticleDesign.LiveBlog:
-				case ArticleDesign.DeadBlog: {
-					return '';
-				}
-				default:
-					return defaultMargins;
-			}
-		}
-	}
-};
-
-const shouldShowAvatar = (format: ArticleFormat) => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			return false;
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard: {
-			switch (format.design) {
-				case ArticleDesign.Feature:
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Interview:
-					return true;
-				default:
-					return false;
-			}
-		}
-		default:
-			return false;
-	}
-};
-
-const shouldShowContributor = (format: ArticleFormat) => {
-	switch (format.display) {
-		case ArticleDisplay.NumberedList:
-			return true;
-		case ArticleDisplay.Immersive:
-			return false;
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.Standard: {
-			switch (format.design) {
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Analysis:
-					return false;
-				default:
-					return true;
-			}
-		}
-		default:
-			return false;
-	}
-};
-
-const MetaAvatarContainer = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			width: 140px;
-			height: 140px;
-			margin-top: 6px;
-			margin-right: 10px;
-			margin-bottom: 12px;
-			margin-left: 0px;
-
-			${until.leftCol} {
-				width: 60px;
-				height: 60px;
-				margin-top: 3px;
-				margin-right: 10px;
-				margin-bottom: 12px;
-				margin-left: 0px;
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
-const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: column;
-
-			${until.leftCol} {
-				flex-direction: row;
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
-const metaExtrasLiveBlog = css`
-	${until.phablet} {
-		margin-right: 0;
-	}
-`;
-
-const metaNumbersExtrasLiveBlog = css`
-	${until.phablet} {
-		margin-left: 0;
-	}
-`;
-
-export const ArticleMeta = ({
+export const ArticleMetaApps = ({
 	branding,
 	format,
 	pageId,
@@ -322,48 +226,47 @@ export const ArticleMeta = ({
 	const palette = decidePalette(format);
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
-
-	const { renderingTarget } = useConfig();
-	console.log('renderingTarget', renderingTarget);
+	// const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
 	return (
 		<div
 			className={
 				isInteractive ? interactiveLegacyClasses.metaContainer : ''
 			}
-			css={metaContainer(format)}
+			css={metaContainerMargins(format)}
 		>
-			<div css={meta(format)}>
-				{branding && (
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<Branding branding={branding} format={format} />
-					</Island>
-				)}
-				{format.theme === ArticleSpecial.Labs ? (
-					<div>
-						<StraightLines
-							cssOverrides={stretchLines}
-							count={1}
-							color={border.primary}
-						/>
-						<div
-							css={css`
-								height: ${space[1]}px;
-							`}
-						/>
-					</div>
-				) : (
-					''
-				)}
-				<RowBelowLeftCol>
-					<>
+			<div css={[metaPadding(format)]}>
+				<div>
+					{branding && (
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<Branding branding={branding} format={format} />
+						</Island>
+					)}
+					{format.theme === ArticleSpecial.Labs ? (
+						<div>
+							<StraightLines
+								cssOverrides={stretchLines}
+								count={1}
+								color={border.primary}
+							/>
+							<div
+								css={css`
+									height: ${space[1]}px;
+								`}
+							/>
+						</div>
+					) : (
+						''
+					)}
+
+					<div css={metaGridContainer(!!avatarUrl)}>
 						{!!avatarUrl && (
-							<MetaAvatarContainer>
+							<MetaGridAvatar>
 								<Avatar src={avatarUrl} alt={authorName} />
-							</MetaAvatarContainer>
+							</MetaGridAvatar>
 						)}
 
-						<div>
+						<MetaGridByline>
 							{shouldShowContributor(format) && !!byline && (
 								<Contributor
 									byline={byline}
@@ -385,66 +288,14 @@ export const ArticleMeta = ({
 										/>
 									</Island>
 								)}
-							<Dateline
-								primaryDateline={primaryDateline}
-								secondaryDateline={secondaryDateline}
-								format={format}
-							/>
-						</div>
-					</>
-				</RowBelowLeftCol>
+						</MetaGridByline>
 
-				<div data-print-layout="hide" css={metaFlex}>
-					{renderingTarget === 'Web' && (
-						<div
-							className={
-								isInteractive
-									? interactiveLegacyClasses.shareIcons
-									: ''
-							}
-							css={[
-								metaExtras(palette, isPictureContent),
-								format.design === ArticleDesign.LiveBlog &&
-									css(
-										borderColourWhenBackgroundDark,
-										metaExtrasLiveBlog,
-									),
-							]}
-						>
-							<ShareIcons
-								pageId={pageId}
-								webTitle={webTitle}
-								format={format}
-								displayIcons={['facebook', 'twitter', 'email']}
-								size="medium"
-								context="ArticleMeta"
-							/>
-						</div>
-					)}
-					<div
-						className={
-							isInteractive
-								? interactiveLegacyClasses.shareAndCommentCounts
-								: ''
-						}
-						css={[
-							metaNumbers(palette, isPictureContent),
-							format.design === ArticleDesign.LiveBlog &&
-								css(
-									borderColourWhenBackgroundDark,
-									metaNumbersExtrasLiveBlog,
-								),
-						]}
-					>
-						<div
-							css={css`
-								display: flex;
-								flex-direction: row;
-								align-items: flex-start;
-							`}
-						>
-							<div>
-								{isCommentable && (
+						{isCommentable && (
+							<MetaGridCommentCount
+								palette={palette}
+								isPictureContent={isPictureContent}
+							>
+								<div>
 									<Island
 										priority="feature"
 										defer={{ until: 'idle' }}
@@ -455,9 +306,27 @@ export const ArticleMeta = ({
 											format={format}
 										/>
 									</Island>
-								)}
-							</div>
-						</div>
+								</div>
+							</MetaGridCommentCount>
+						)}
+
+						<MetaGridDateline>
+							<StraightLines
+								cssOverrides={[
+									stretchLines,
+									css`
+										margin-bottom: 10px;
+									`,
+								]}
+								count={1}
+								color={palette.border.article}
+							/>
+							<Dateline
+								primaryDateline={primaryDateline}
+								secondaryDateline={secondaryDateline}
+								format={format}
+							/>
+						</MetaGridDateline>
 					</div>
 				</div>
 			</div>
