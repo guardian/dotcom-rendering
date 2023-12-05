@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isString, isUndefined } from '@guardian/libs';
+import { isString } from '@guardian/libs';
 import {
 	headline,
 	palette,
@@ -137,9 +137,8 @@ export const Form = ({
 	const validateForm = (): boolean => {
 		const errors: { [key in string]: string } = {};
 		for (const field of formFields) {
-			const data = formData[field.id];
-
-			if (field.required && isUndefined(data)) {
+			// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- it works
+			if (field.required && !formData[field.id]) {
 				errors[field.id] = 'This field is required';
 			}
 			if (field.type === 'select' && field.required) {
@@ -148,18 +147,23 @@ export const Form = ({
 						'Please choose an option from the dropdown menu';
 				}
 			}
-			if (field.id === 'email' && isString(data)) {
+			// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- it works
+			if (field.id === 'email' && formData[field.id]) {
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-				if (!emailRegex.test(data)) {
+				if (!emailRegex.test(formData[field.id] as string)) {
 					errors[field.id] = 'Please enter a valid email address';
 				}
 			}
-			if (['number', 'phone'].includes(field.type) && isString(data)) {
+			if (
+				['number', 'phone'].includes(field.type) &&
+				// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- it works
+				formData[field.id]
+			) {
 				const numberRegex = /^[\d ()+-]+$/;
-				if (!numberRegex.test(data)) {
+				if (!numberRegex.test(formData[field.id] as string)) {
 					errors[field.id] = 'Please enter a valid number';
 				}
-				const noWhiteSpace = data;
+				const noWhiteSpace = formData[field.id] as string;
 				if (noWhiteSpace.length < 10) {
 					errors[field.id] = 'Please include your dialling/area code';
 				}
@@ -255,12 +259,12 @@ export const Form = ({
 				noValidate={true}
 				onSubmit={(e) => {
 					e.preventDefault();
-					validateForm();
-					const firstInvalidFormElement =
-						document.querySelectorAll<HTMLInputElement>(
-							':invalid',
-						)[1];
-					if (firstInvalidFormElement) {
+					const isValid = validateForm();
+					if (!isValid) {
+						const firstInvalidFormElement: HTMLInputElement =
+							document.querySelectorAll(
+								':invalid',
+							)[1] as HTMLInputElement;
 						firstInvalidFormElement.focus();
 						return;
 					}
