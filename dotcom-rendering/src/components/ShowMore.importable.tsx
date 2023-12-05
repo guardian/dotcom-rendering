@@ -210,7 +210,7 @@ export const ShowMore = ({
 							margin-left: 10px;
 						}
 						/* On smaller screens, button text overflows the container so we wrap to prevent it */
-						${until.mobileMedium} {
+						${until.phablet} {
 							text-wrap: wrap;
 							height: unset;
 						}
