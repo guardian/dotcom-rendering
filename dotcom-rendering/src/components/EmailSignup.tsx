@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	from,
 	headline,
-	space,
 	palette as sourcePalette,
+	space,
 	textSans,
 } from '@guardian/source-foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';

@@ -5,6 +5,7 @@ import {
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { palette as themePalette } from '../palette';
+
 interface Props {
 	textColor?: 'supporting' | 'regular';
 }
