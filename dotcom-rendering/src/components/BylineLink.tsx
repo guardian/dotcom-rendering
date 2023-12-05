@@ -1,11 +1,11 @@
 import { ArticleDesign } from '@guardian/libs';
-import { palette } from '@guardian/source-foundations';
 import { DottedLines } from '@guardian/source-react-components-development-kitchen';
 import {
 	getBylineComponentsFromTokens,
 	getSoleContributor,
 	isContributor,
 } from '../lib/byline';
+import { decidePalette } from '../lib/decidePalette';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import { FollowWrapper } from './FollowWrapper.importable';
@@ -113,6 +113,7 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const hasSoleContributor = !!soleContributor;
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
+	const palette = decidePalette(format);
 
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
 		if (typeof bylineComponent === 'string') {
@@ -144,7 +145,7 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 			{renderedTokens}
 			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
 				<>
-					<DottedLines count={1} color={palette.neutral[86]} />
+					<DottedLines count={1} color={palette.border.article} />
 					<Island priority="critical">
 						<FollowWrapper
 							displayName={soleContributor.title}

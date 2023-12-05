@@ -118,15 +118,9 @@ const MetaGridCommentCount = ({
 			grid-area: comment-count;
 			border-left: 1px solid ${palette.border.article};
 
-			${!isPictureContent && until.phablet} {
-				margin-top: -2px;
-				padding-top: 2px;
-				padding-left: 10px;
-			}
-
-			${!isPictureContent && until.desktop} {
-				margin-top: -2px;
-				padding-top: 2px;
+			${until.desktop} {
+				margin-top: ${isPictureContent ? '-6px' : '-2px'};
+				padding-top: ${isPictureContent ? '6px' : '2px'};
 				padding-left: 10px;
 			}
 		`}
@@ -184,16 +178,16 @@ const metaPadding = (format: ArticleFormat) => {
 	`;
 };
 
-const stretchLines = css`
+const stretchLines = (isPictureContent: boolean) => css`
 	display: block;
 
-	${until.mobileLandscape} {
+	${!isPictureContent && until.mobileLandscape} {
 		margin-left: -20px;
 		margin-right: -20px;
 		width: auto;
 	}
 
-	${until.phablet} {
+	${!isPictureContent && until.phablet} {
 		margin-left: -10px;
 		margin-right: -10px;
 		width: auto;
@@ -245,7 +239,7 @@ export const ArticleMetaApps = ({
 					{format.theme === ArticleSpecial.Labs ? (
 						<div>
 							<StraightLines
-								cssOverrides={stretchLines}
+								cssOverrides={stretchLines(isPictureContent)}
 								count={1}
 								color={border.primary}
 							/>
@@ -313,7 +307,7 @@ export const ArticleMetaApps = ({
 						<MetaGridDateline>
 							<StraightLines
 								cssOverrides={[
-									stretchLines,
+									stretchLines(isPictureContent),
 									css`
 										margin-bottom: 10px;
 									`,
