@@ -374,6 +374,16 @@ https://workforus.theguardian.com/careers/product-engineering/
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
 
+				${
+					/**
+					 * fontSize.css does not exist. The Android app intercepts this request
+					 * in order to support article scaling.
+					 */
+					renderingTarget === 'Apps'
+						? `<link rel="stylesheet" type="text/css" href="/fontSize.css">`
+						: ``
+				}
+
 			</head>
 
 			<body class="${hasPageSkin ? 'has-page-skin' : ''}">
