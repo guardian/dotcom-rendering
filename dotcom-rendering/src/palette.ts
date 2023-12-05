@@ -2912,7 +2912,7 @@ const pullQuoteBackgroundLight: PaletteFunction = (format: ArticleFormat) => {
 };
 
 const pullQuoteBackgroundDark: PaletteFunction = (format: ArticleFormat) => {
-	const articleBackground = articleBackgroundLight(format);
+	const articleBackground = articleBackgroundDark(format);
 	if (articleBackground === 'transparent') return sourcePalette.neutral[0];
 	return articleBackground;
 };
