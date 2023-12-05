@@ -517,7 +517,7 @@
 			 * is that anyone can add to this - make using DCR a more exciting & exploratory experience!
 			 */
 			const activationDate = new Date('2023-11-18'); // Come across this code before this date? Shhh!
-			const isActivated = () => Date.now() > activationDate;
+			const isActivated = () => Date.now() > activationDate.getTime();
 
 			const achievementTrackerGet = (category) => {
 				try {
@@ -638,7 +638,11 @@
 						<p>${message}</p>
 					</div>
 				`;
-				document.getElementById('achievements-root').innerHTML = html;
+
+				const root = document.getElementById('achievements-root');
+				if (root !== null) {
+					root.innerHTML = html;
+				}
 			};
 
 			pageViewAchievements();
