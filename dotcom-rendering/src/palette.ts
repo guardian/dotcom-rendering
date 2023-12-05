@@ -2778,7 +2778,7 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-/** @todo should be neutral.36 */
+/** @todo should be neutral.38 */
 const articleBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 
 const straightLinesLight: PaletteFunction = (format) => {
