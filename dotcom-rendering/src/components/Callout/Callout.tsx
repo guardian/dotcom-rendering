@@ -1,9 +1,12 @@
 import { css } from '@emotion/react';
-import { headline, space } from '@guardian/source-foundations';
+import {
+	headline,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source-foundations';
 import type { TabProps } from '@guardian/source-react-components-development-kitchen';
 import { Tabs } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
-import { palette } from '../../palette';
 import type {
 	CalloutContactType,
 	CampaignFieldType,
@@ -12,14 +15,19 @@ import { CalloutDescription, CalloutShare } from './CalloutComponents';
 import { Form } from './Form';
 import { conditionallyRenderContactIcon, MessageUs } from './MessageUs';
 
-const summaryContentWrapper = css`
+const summaryContentWrapper = (isNonCollapsible: boolean) => css`
 	visibility: visible;
 	padding-top: 2px;
 	padding-bottom: ${space[6]}px;
+	padding-left: ${isNonCollapsible ? 0 : space[2]}px;
+	padding-right: ${isNonCollapsible ? 0 : space[2]}px;
 `;
 
-const promptStyles = css`
+const promptStyles = (isNonCollapsible: boolean) => css`
 	${headline.xxsmall({ fontWeight: 'bold' })};
+	color: ${isNonCollapsible
+		? sourcePalette.neutral[7]
+		: sourcePalette.brand[500]};
 `;
 
 const subtitleTextHeaderStyles = css`
@@ -50,6 +58,7 @@ export interface CalloutBlockProps {
 	isNonCollapsible: boolean;
 	contacts?: CalloutContactType[];
 	pageId: string;
+	format: ArticleFormat;
 }
 
 export const CalloutBlock = ({
@@ -60,10 +69,11 @@ export const CalloutBlock = ({
 	formId,
 	submissionURL,
 	isNonCollapsible,
-	contacts = [],
+	contacts,
 	pageId,
+	format,
 }: CalloutBlockProps) => {
-	const shouldShowContacts = contacts.length > 0;
+	const shouldShowContacts = contacts && contacts.length > 0;
 	const shouldShowHeading = !!heading && !isNonCollapsible;
 	const form = {
 		id: 'form',
@@ -94,12 +104,7 @@ export const CalloutBlock = ({
 								</div>
 							</div>
 						),
-						content: (
-							<MessageUs
-								contacts={contacts}
-								useBrandColour={!isNonCollapsible}
-							/>
-						),
+						content: <MessageUs contacts={contacts} />,
 					},
 			  ]
 			: [form]
@@ -108,51 +113,30 @@ export const CalloutBlock = ({
 	const [selectedTab, setSelectedTab] = useState(form.id);
 
 	return (
-		<div
-			id={formId}
-			style={{
-				'--article-link-text': isNonCollapsible
-					? undefined
-					: palette('--callout-prompt'),
-			}}
-		>
-			<div
-				css={summaryContentWrapper}
-				style={{
-					paddingInline: isNonCollapsible ? 0 : `${space[2]}px`,
-				}}
-			>
+		<div id={formId}>
+			<div css={summaryContentWrapper(isNonCollapsible)}>
 				{!!prompt && (
-					<div
-						css={promptStyles}
-						style={{
-							color: isNonCollapsible
-								? palette('--article-text')
-								: palette('--callout-prompt'),
-						}}
-					>
-						{prompt}
-					</div>
+					<div css={promptStyles(isNonCollapsible)}>{prompt}</div>
 				)}
 				{shouldShowHeading && (
 					<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
 				)}
 				{!!description && (
-					<CalloutDescription description={description} />
+					<CalloutDescription
+						description={description}
+						useBrandColour={isNonCollapsible}
+					/>
 				)}
-				<CalloutShare title={heading} urlAnchor={formId} />
+				<CalloutShare
+					title={heading}
+					urlAnchor={formId}
+					useBrandColour={isNonCollapsible}
+					format={format}
+				/>
 			</div>
 			<Tabs
 				tabsLabel="Tell us via online form or message us using your phone"
 				tabElement="button"
-				theme={{
-					'--background': palette('--tabs--background'),
-					'--text': palette('--tabs--text'),
-					'--border': palette('--tabs--border'),
-					'--inactiveBackground': palette(
-						'--tabs--inactiveBackground',
-					),
-				}}
 				tabs={tabs}
 				selectedTab={selectedTab}
 				onTabChange={setSelectedTab}

@@ -8,16 +8,7 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
-import {
-	buttonThemeBrand,
-	buttonThemeDefault,
-} from '@guardian/source-react-components';
-import {
-	expandingWrapperDarkTheme,
-	expandingWrapperThemeDefault,
-	tabsDarkTheme,
-	tabsThemeDefault,
-} from '@guardian/source-react-components-development-kitchen';
+import { buttonThemeDefault } from '@guardian/source-react-components';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
@@ -629,100 +620,6 @@ const bylineUnderline: PaletteFunction = ({ theme }) => {
 		default:
 			return 'inherit';
 	}
-};
-
-const calloutPromptLight: PaletteFunction = () => sourcePalette.brand[500];
-const calloutPromptDark: PaletteFunction = () => sourcePalette.brand[800];
-
-const calloutSubmitTextLight: PaletteFunction = () =>
-	buttonThemeDefault.button.textPrimary;
-const calloutSubmitTextDark: PaletteFunction = () =>
-	buttonThemeBrand.button.textPrimary;
-
-const calloutSubmitBackgroundLight: PaletteFunction = () =>
-	buttonThemeDefault.button.backgroundPrimary;
-const calloutSubmitBackgroundDark: PaletteFunction = () =>
-	buttonThemeBrand.button.backgroundPrimary;
-
-const calloutSubmitBackgroundHoverLight: PaletteFunction = () =>
-	buttonThemeDefault.button.backgroundPrimaryHover;
-const calloutSubmitBackgroundHoverDark: PaletteFunction = () =>
-	buttonThemeBrand.button.backgroundPrimaryHover;
-
-export const expandingWrapper = {
-	'--expandingWrapper--background': {
-		light: () => expandingWrapperThemeDefault['--background'],
-		dark: () => expandingWrapperDarkTheme['--background'],
-	},
-	'--expandingWrapper--border': {
-		light: () => expandingWrapperThemeDefault['--border'],
-		dark: () => expandingWrapperDarkTheme['--border'],
-	},
-	'--expandingWrapper--collapseBackground': {
-		light: () => expandingWrapperThemeDefault['--collapseBackground'],
-		dark: () => expandingWrapperDarkTheme['--collapseBackground'],
-	},
-	'--expandingWrapper--collapseBackgroundHover': {
-		light: () => expandingWrapperThemeDefault['--collapseBackgroundHover'],
-		dark: () => expandingWrapperDarkTheme['--collapseBackgroundHover'],
-	},
-	'--expandingWrapper--collapseText': {
-		light: () => expandingWrapperThemeDefault['--collapseText'],
-		dark: () => expandingWrapperDarkTheme['--collapseText'],
-	},
-	'--expandingWrapper--collapseTextHover': {
-		light: () => expandingWrapperThemeDefault['--collapseTextHover'],
-		dark: () => expandingWrapperDarkTheme['--collapseTextHover'],
-	},
-	'--expandingWrapper--text': {
-		light: () => expandingWrapperThemeDefault['--text'],
-		dark: () => expandingWrapperDarkTheme['--text'],
-	},
-	'--expandingWrapper--horizontalRules': {
-		light: () => expandingWrapperThemeDefault['--horizontalRules'],
-		dark: () => expandingWrapperDarkTheme['--horizontalRules'],
-	},
-	'--expandingWrapper--expandBackground': {
-		light: () => expandingWrapperThemeDefault['--expandBackground'],
-		dark: () => expandingWrapperDarkTheme['--expandBackground'],
-	},
-	'--expandingWrapper--expandBackgroundHover': {
-		light: () => expandingWrapperThemeDefault['--expandBackgroundHover'],
-		dark: () => expandingWrapperDarkTheme['--expandBackgroundHover'],
-	},
-	'--expandingWrapper--expandText': {
-		light: () => expandingWrapperThemeDefault['--expandText'],
-		dark: () => expandingWrapperDarkTheme['--expandText'],
-	},
-} satisfies {
-	[Key in `--expandingWrapper${keyof typeof expandingWrapperThemeDefault}`]: {
-		light: PaletteFunction;
-		dark: PaletteFunction;
-	};
-};
-
-export const tabs = {
-	'--tabs--background': {
-		light: () => tabsThemeDefault['--background'],
-		dark: () => tabsDarkTheme['--background'],
-	},
-	'--tabs--text': {
-		light: () => tabsThemeDefault['--text'],
-		dark: () => tabsDarkTheme['--text'],
-	},
-	'--tabs--border': {
-		light: () => tabsThemeDefault['--border'],
-		dark: () => tabsDarkTheme['--border'],
-	},
-	'--tabs--inactiveBackground': {
-		light: () => tabsThemeDefault['--inactiveBackground'],
-		dark: () => tabsDarkTheme['--inactiveBackground'],
-	},
-} satisfies {
-	[Key in `--tabs${keyof typeof tabsThemeDefault}`]: {
-		light: PaletteFunction;
-		dark: PaletteFunction;
-	};
 };
 
 const datelineLight: PaletteFunction = ({ design, theme }) => {
@@ -3589,12 +3486,6 @@ type PaletteColours = Record<
  * is used instead.
  */
 const paletteColours = {
-	...expandingWrapper,
-	...tabs,
-	'--tabs-input': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[0],
-	},
 	'--byline': {
 		light: bylineLight,
 		dark: bylineDark,
@@ -3614,30 +3505,6 @@ const paletteColours = {
 	'--byline-hover': {
 		light: bylineHoverLight,
 		dark: bylineHoverDark,
-	},
-	'--callout-prompt': {
-		light: calloutPromptLight,
-		dark: calloutPromptDark,
-	},
-	'--callout-submit-text': {
-		light: calloutSubmitTextLight,
-		dark: calloutSubmitTextDark,
-	},
-	'--callout-submit-background': {
-		light: calloutSubmitBackgroundLight,
-		dark: calloutSubmitBackgroundDark,
-	},
-	'--callout-submit-background-hover': {
-		light: calloutSubmitBackgroundHoverLight,
-		dark: calloutSubmitBackgroundHoverDark,
-	},
-	'--callout-highlight-text': {
-		light: starRatingFillColourLight,
-		dark: starRatingFillColourDark,
-	},
-	'--callout-highlight-background': {
-		light: starRatingBackgroundColourLight,
-		dark: starRatingBackgroundColourDark,
 	},
 	'--dateline': {
 		light: datelineLight,

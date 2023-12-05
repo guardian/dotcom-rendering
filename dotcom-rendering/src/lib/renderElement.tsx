@@ -186,6 +186,7 @@ export const renderElement = ({
 						<CalloutBlockComponent
 							callout={element}
 							pageId={pageId}
+							format={format}
 						/>
 					</Island>
 				);

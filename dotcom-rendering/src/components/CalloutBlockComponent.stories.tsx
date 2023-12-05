@@ -2,7 +2,10 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { StoryObj } from '@storybook/react';
 import fetchMock from 'fetch-mock';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import {
+	splitTheme,
+	type StoryProps,
+} from '../../.storybook/decorators/splitThemeDecorator';
 import { calloutCampaign as calloutCampaignV2 } from '../../fixtures/manual/calloutCampaignV2';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
@@ -37,9 +40,6 @@ const badRequest = () => {
 		.spy('end:.hot-update.json');
 };
 
-/** ensure that multiple form IDs are not present on the same page */
-let counter = 0;
-
 const defaultFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
@@ -51,68 +51,60 @@ export default {
 	title: 'Components/CalloutBlockComponent',
 };
 
-export const Collapsible: StoryObj = () => {
+export const Collapsible: StoryObj = ({ format }: StoryProps) => {
 	goodRequest();
 	return (
 		<CalloutBlockComponent
 			callout={{
 				...calloutCampaignV2,
-				formId: calloutCampaignV2.formId + ++counter,
 				isNonCollapsible: false,
 				activeUntil: tomorrow,
 			}}
 			pageId={pageId}
+			format={format}
 		/>
 	);
 };
 
 Collapsible.decorators = [splitTheme([defaultFormat])];
 
-export const NonCollapsible: StoryObj = () => {
+export const NonCollapsible: StoryObj = ({ format }: StoryProps) => {
 	goodRequest();
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
 			pageId={pageId}
+			format={format}
 		/>
 	);
 };
 NonCollapsible.storyName = 'NonCollapsible';
 NonCollapsible.decorators = [splitTheme([defaultFormat])];
 
-export const SubmissionFailure: StoryObj = () => {
+export const SubmissionFailure: StoryObj = ({ format }: StoryProps) => {
 	badRequest();
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
 			pageId={pageId}
+			format={format}
 		/>
 	);
 };
 SubmissionFailure.decorators = [splitTheme([defaultFormat])];
-SubmissionFailure.play = async ({ canvasElement }) => {
-	await new Promise((resolve) => {
-		// there’s some weirdness that resets the form
-		setTimeout(resolve, 600);
-	});
-	const buttons = [...canvasElement.querySelectorAll('button[type=submit]')];
-	for (const button of buttons) {
-		if (!(button instanceof HTMLButtonElement)) return;
-		button.click();
-	}
-};
 
-export const Expired: StoryObj = () => {
+export const Expired: StoryObj = ({ format }: StoryProps) => {
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: yesterday }}
 			pageId={pageId}
+			format={format}
 		/>
 	);
 };
 Expired.decorators = [splitTheme([defaultFormat])];
 
-export const MinimalCallout: StoryObj = () => {
+export const MinimalCallout: StoryObj = ({ format }: StoryProps) => {
 	return (
 		<>
 			<div css={{ fontWeight: 'bold', paddingBottom: '16px' }}>
@@ -121,7 +113,6 @@ export const MinimalCallout: StoryObj = () => {
 			<CalloutBlockComponent
 				callout={{
 					...calloutCampaignV2,
-					formId: calloutCampaignV2.formId + ++counter,
 					activeUntil: tomorrow,
 					isNonCollapsible: false,
 					title: '',
@@ -129,6 +120,7 @@ export const MinimalCallout: StoryObj = () => {
 					description: '',
 				}}
 				pageId={pageId}
+				format={format}
 			/>
 		</>
 	);

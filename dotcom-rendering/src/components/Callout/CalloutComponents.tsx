@@ -12,22 +12,26 @@ import {
 	SvgTickRound,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { palette } from '../../palette';
+import { decidePalette } from '../../lib/decidePalette';
+import type { Palette } from '../../types/palette';
 
-export const linkStyles = css`
+/* stylelint-disable-next-line color-no-hex */
+const linkDecorationColour = '#12121240';
+
+export const calloutLinkStyles = css`
 	a {
-		color: ${palette('--article-link-text')};
-		text-decoration-color: ${palette('--article-link-border')};
-		text-underline-offset: 0.375em;
-		text-decoration-thickness: 1px;
+		color: ${sourcePalette.brand[500]};
+		text-decoration: none;
+		border-bottom: 1px solid ${linkDecorationColour};
 	}
 	a:hover,
 	a:active {
-		text-decoration-color: currentColor;
+		border-bottom: 1px solid ${sourcePalette.brand[500]};
 	}
 `;
 
-const calloutStyles = css`
+const descriptionStyles = (useBrandColour: boolean) => css`
+	${!useBrandColour && calloutLinkStyles}
 	padding-bottom: ${space[4]}px;
 	${body.medium()}
 
@@ -38,24 +42,37 @@ const calloutStyles = css`
 
 export const CalloutDescription = ({
 	description,
+	useBrandColour,
 }: {
 	description: string;
+	useBrandColour: boolean;
 }) => {
+	// this data-ignore attribute ensures correct formatting for links when the callout is collapsible
+	const htmlSplit = description.split('href');
+	const withDataIgnore = htmlSplit.join(
+		'data-ignore="global-link-styling" href',
+	);
 	return (
-		<div css={[linkStyles, calloutStyles]}>
+		<div css={descriptionStyles(useBrandColour)}>
 			<div
 				dangerouslySetInnerHTML={{
-					__html: description,
+					__html: useBrandColour ? description : withDataIgnore,
 				}}
-			/>
+			></div>
 			<div>
 				Please share your story if you are 18 or over, anonymously if
 				you wish. For more information please see our{' '}
-				<a href="https://www.theguardian.com/help/terms-of-service">
+				<a
+					data-ignore={!useBrandColour && 'global-link-styling'}
+					href="https://www.theguardian.com/help/terms-of-service"
+				>
 					terms of service
 				</a>{' '}
 				and{' '}
-				<a href="https://www.theguardian.com/help/privacy-policy">
+				<a
+					data-ignore={!useBrandColour && 'global-link-styling'}
+					href="https://www.theguardian.com/help/privacy-policy"
+				>
 					privacy policy
 				</a>
 				.
@@ -66,8 +83,8 @@ export const CalloutDescription = ({
 
 const expiredStyles = css`
 	${textSans.small()};
-	color: ${palette('--star-rating-fill')};
-	background-color: ${palette('--star-rating-background')};
+	color: ${sourcePalette.brand};
+	background-color: ${sourcePalette.brandAlt[400]};
 	width: fit-content;
 `;
 
@@ -99,9 +116,24 @@ const shareCalloutTextStyles = css`
 	${textSans.xsmall()}
 `;
 
-const shareCalloutLinkStyles = css`
+const shareCalloutLinkStyles = (
+	useBrandColour: boolean,
+	brandPalette: Palette,
+) => css`
 	${textSans.xsmall()}
-	color: ${palette('--article-link-text')};
+	color: ${useBrandColour
+		? brandPalette.text.articleLink
+		: sourcePalette.brand[500]};
+	border-bottom: 1px solid ${linkDecorationColour};
+	text-decoration: none;
+	transition: none;
+	:hover,
+	:active {
+		border-bottom: 1px solid
+			${useBrandColour
+				? brandPalette.border.articleLinkHover
+				: sourcePalette.brand[500]};
+	}
 `;
 
 const sharePopupStyles = css`
@@ -123,25 +155,34 @@ const sharePopupStyles = css`
 		fill: ${success[400]};
 	}
 `;
-const shareIconStyles = css`
+const shareIconStyles = (useBrandColour: boolean, brandPalette: Palette) => css`
 	display: inline-flex;
 	margin-right: ${space[2]}px;
 	border-radius: 50%;
-	border: 1px solid ${palette('--article-link-border')};
-
+	border: 1px solid
+		${useBrandColour
+			? brandPalette.text.articleLink
+			: sourcePalette.brand[500]};
 	box-sizing: border-box;
-	fill: ${palette('--article-link-text')};
+	fill: ${useBrandColour
+		? brandPalette.text.articleLink
+		: sourcePalette.brand[500]};
 	padding: 0.5px 0;
 `;
 
 export const CalloutShare = ({
 	title,
 	urlAnchor,
+	useBrandColour,
+	format,
 }: {
 	title?: string;
 	urlAnchor: string;
+	useBrandColour: boolean;
+	format: ArticleFormat;
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
+	const brandPalette = decidePalette(format);
 
 	const onShare = async () => {
 		const url = window.location.href;
@@ -177,7 +218,7 @@ export const CalloutShare = ({
 	return (
 		<>
 			<div css={shareCalloutStyles}>
-				<span css={shareIconStyles}>
+				<span css={shareIconStyles(useBrandColour, brandPalette)}>
 					<SvgShare size="small" />
 				</span>
 				<div css={shareCalloutTextStyles}>
@@ -185,12 +226,11 @@ export const CalloutShare = ({
 					<Button
 						size="xsmall"
 						priority="subdued"
-						onClick={() => {
-							onShare().catch(() => {
-								// do nothing
-							});
-						}}
-						cssOverrides={shareCalloutLinkStyles}
+						onClick={onShare}
+						cssOverrides={shareCalloutLinkStyles(
+							useBrandColour,
+							brandPalette,
+						)}
 					>
 						Please share this callout.
 					</Button>
@@ -207,12 +247,13 @@ export const CalloutShare = ({
 };
 
 const termsAndConditionsStyles = css`
+	${calloutLinkStyles}
 	${textSans.small()}
 	padding-bottom: ${space[4]}px;
 `;
 
 export const CalloutTermsAndConditions = () => (
-	<div css={[linkStyles, termsAndConditionsStyles]}>
+	<div css={termsAndConditionsStyles}>
 		Your responses, which can be anonymous, are secure as the form is
 		encrypted and only the Guardian has access to your contributions. We
 		will only use the data you provide us for the purpose of the feature and
