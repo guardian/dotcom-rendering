@@ -223,6 +223,12 @@ const testLayoutFormats =
 			config: { renderingTarget: 'Apps', darkModeAvailable: true },
 		},
 		{
+			display: 'Standard',
+			design: 'Recipe',
+			theme: 'LifestylePillar',
+			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+		},
+		{
 			display: 'Showcase',
 			design: 'Picture',
 			theme: 'OpinionPillar',
@@ -232,7 +238,7 @@ const testLayoutFormats =
 			display: 'Showcase',
 			design: 'Picture',
 			theme: 'OpinionPillar',
-			config: { renderingTarget: 'Apps', darkModeAvailable: true },
+			config: { renderingTarget: 'Apps', darkModeAvailable: false },
 		},
 		{
 			display: 'Standard',

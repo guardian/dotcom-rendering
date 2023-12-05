@@ -127,6 +127,29 @@ export default {
 			),
 		];
 
+		export const AppsStandardRecipeLifestylePillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Recipe"
+					theme="LifestylePillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardRecipeLifestylePillarLight.storyName = 'Apps: Display: Standard, Design: Recipe, Theme: LifestylePillar, Mode: Light';
+		AppsStandardRecipeLifestylePillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
+		AppsStandardRecipeLifestylePillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Recipe,
+					theme: {...ArticleSpecial, ...Pillar}.Lifestyle,
+				}]
+			),
+		];
+
+		
+
 		export const WebShowcasePictureOpinionPillarLight = () => {
 			return (
 				<HydratedLayoutWrapper
@@ -161,7 +184,7 @@ export default {
 			);
 		};
 		AppsShowcasePictureOpinionPillarLight.storyName = 'Apps: Display: Showcase, Design: Picture, Theme: OpinionPillar, Mode: Light';
-		AppsShowcasePictureOpinionPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsShowcasePictureOpinionPillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
 		AppsShowcasePictureOpinionPillarLight.decorators = [lightDecorator(
 				[{
 					display:  ArticleDisplay.Showcase,
@@ -171,26 +194,7 @@ export default {
 			),
 		];
 
-		export const AppsShowcasePictureOpinionPillarDark = () => {
-			return (
-				<HydratedLayoutWrapper
-					displayName="Showcase"
-					designName="Picture"
-					theme="OpinionPillar"
-					renderingTarget="Apps"
-				/>
-			);
-		};
-		AppsShowcasePictureOpinionPillarDark.storyName = 'Apps: Display: Showcase, Design: Picture, Theme: OpinionPillar, Mode: Dark';
-		AppsShowcasePictureOpinionPillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
-		AppsShowcasePictureOpinionPillarDark.decorators = [darkDecorator(
-				[{
-					display:  ArticleDisplay.Showcase,
-					design: ArticleDesign.Picture,
-					theme: {...ArticleSpecial, ...Pillar}.Opinion,
-				}]
-			),
-		];
+		
 
 		export const AppsStandardCommentNewsPillarLight = () => {
 			return (

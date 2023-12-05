@@ -30,15 +30,15 @@ const tagsWithLargeBylineImage = [
 	},
 ];
 
-const tagsWithSmallBylineImage = [
-	{
-		id: 'profile/nicola-slawson',
-		type: 'Contributor',
-		title: 'Nicola Slawson',
-		bylineImageUrl:
-			'https://uploads.guim.co.uk/2016/11/01/Nicola_Slawson.jpg',
-	},
-];
+// const tagsWithSmallBylineImage = [
+// 	{
+// 		id: 'profile/nicola-slawson',
+// 		type: 'Contributor',
+// 		title: 'Nicola Slawson',
+// 		bylineImageUrl:
+// 			'https://uploads.guim.co.uk/2016/11/01/Nicola_Slawson.jpg',
+// 	},
+// ];
 
 const tagsWithByTwoContributors = [
 	{
@@ -75,11 +75,11 @@ const avatarFormat: ArticleFormat = {
 	theme: Pillar.News,
 };
 
-const commentFormat: ArticleFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.Opinion,
-};
+// const commentFormat: ArticleFormat = {
+// 	display: ArticleDisplay.Standard,
+// 	design: ArticleDesign.Standard,
+// 	theme: Pillar.Opinion,
+// };
 
 const immersiveFormat: ArticleFormat = {
 	display: ArticleDisplay.Immersive,
