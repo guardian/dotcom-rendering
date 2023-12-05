@@ -38,7 +38,6 @@ import { SubNav } from '../components/SubNav.importable';
 import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
@@ -262,8 +261,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const { branding } = article.commercialProperties[article.editionId];
 
-	const palette = decidePalette(format);
-
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const renderAds = isWeb && canRenderAds(article);
@@ -299,7 +296,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
-							backgroundColour={sourcePalette.brand[400]}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
 							element="header"
 						>
 							<Header
@@ -328,7 +327,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							borderColour={sourcePalette.brand[600]}
 							showTopBorder={false}
 							padSides={false}
-							backgroundColour={sourcePalette.brand[400]}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
 							element="nav"
 							format={format}
 						>
@@ -376,12 +377,11 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
-										linkHoverColour={
-											palette.text.articleLinkHover
-										}
-										borderColour={palette.border.subNav}
-										subNavLinkColour={themePalette(
-											'--sub-nav-link',
+										linkHoverColour={themePalette(
+											'--article-link-text-hover',
+										)}
+										borderColour={themePalette(
+											'--sub-nav-border',
 										)}
 									/>
 								</Island>
@@ -395,11 +395,11 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							)}
 							padSides={false}
 							showTopBorder={false}
-							borderColour={palette.border.secondary}
+							borderColour={themePalette('--article-border')}
 						>
 							<StraightLines
 								count={4}
-								color={palette.border.secondary}
+								color={themePalette('--straight-lines')}
 								cssOverrides={css`
 									display: block;
 								`}
@@ -736,8 +736,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={palette.text.articleLinkHover}
-							borderColour={palette.border.subNav}
+							linkHoverColour={themePalette(
+								'--article-link-text-hover',
+							)}
+							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>
