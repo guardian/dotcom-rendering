@@ -29,6 +29,54 @@
 			.test-article-header > span:nth-child(1) {
 				width: 14em !important;
 			}
+
+			.article-examples {
+				overflow-x: auto;
+
+				& table {
+					text-align: left;
+					border-spacing: 0;
+				}
+
+				& th {
+					padding: 0.5rem 1rem;
+				}
+
+				& thead {
+					background-color: #dcdcdc;
+				}
+
+				& tbody {
+					& tr:nth-child(even) {
+						background-color: #ededed;
+					}
+
+					& tr:nth-child(odd) {
+						background-color: #f6f6f6;
+					}
+				}
+
+				& td {
+					padding: 1rem 2rem 1rem 1rem;
+					max-width: 20rem;
+					min-width: 9rem;
+				}
+
+				& dt {
+					font-weight: bold;
+					display: inline;
+				}
+
+				& dd {
+					display: inline;
+					margin: 0;
+				}
+
+				& .links,
+				& .format {
+					max-width: 9rem;
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -107,6 +155,117 @@
 				>
 			</li>
 		</ul>
+
+		<section>
+			<h2>
+				Article Examples <small><sup>Beta</sup></small>
+			</h2>
+
+			<div class="article-examples">
+				<table class="article-examples__table">
+					<thead>
+						<tr>
+							<th rowspan="2">Headline</th>
+							<th rowspan="2">Format</th>
+							<th colspan="3">Links</th>
+						</tr>
+						<tr>
+							<th>PROD</th>
+							<th>CODE</th>
+							<th>DEV</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							is="article-row"
+							design="Standard"
+							display="Standard"
+							theme="Lifestyle"
+							href="https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+							headline="Ticket touts face unlimited fines for using 'bots' to buy in bulk"
+						></tr>
+						<tr
+							is="article-row"
+							design="Feature"
+							display="Showcase"
+							theme="News"
+							href="https://www.theguardian.com/cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked"
+							headline="Reclaimed lakes and giant airports: how Mexico City might have looked"
+						></tr>
+					</tbody>
+				</table>
+			</div>
+
+			<small
+				>This table is in Beta because it doesn't yet work in Safari; it
+				will be updated to add support.</small
+			>
+
+			<template id="article-row-template">
+				<td class="headline"></td>
+				<td class="format">
+					<dl>
+						<dt>Design:</dt>
+						<dd class="design"></dd>
+						<dt>Display:</dt>
+						<dd class="display"></dd>
+						<dt>Theme:</dt>
+						<dd class="theme"></dd>
+					</dl>
+				</td>
+				<td class="links">
+					<article-link product="dotcom" env="PROD"></article-link>
+					<article-link product="apps" env="PROD"></article-link>
+					<article-link product="amp" env="PROD"></article-link>
+				</td>
+				<td class="links">
+					<article-link product="dotcom" env="CODE"></article-link>
+					<article-link product="apps" env="CODE"></article-link>
+					<article-link product="amp" env="CODE"></article-link>
+				</td>
+				<td class="links">
+					<article-link product="dotcom" env="DEV"></article-link>
+					<article-link product="apps" env="DEV"></article-link>
+					<article-link product="amp" env="DEV"></article-link>
+				</td>
+			</template>
+
+			<template id="article-link-template">
+				<style>
+					a {
+						border-radius: 1rem;
+						padding: 0.3rem 1rem;
+						display: flex;
+						justify-content: space-between;
+						text-decoration: none;
+						margin-bottom: 0.2rem;
+					}
+
+					.arrow {
+						padding-left: 0.5rem;
+					}
+
+					:host([env='PROD']) a {
+						background-color: #052962;
+						color: white;
+					}
+
+					:host([env='CODE']) a {
+						background-color: #22874d;
+						color: white;
+					}
+
+					:host([env='DEV']) a {
+						background-color: #ffe500;
+						color: black;
+					}
+				</style>
+				<a href="">
+					<span class="link-text">Link</span>
+					<span class="arrow">→</span>
+				</a>
+			</template>
+		</section>
 
 		<h2>Test Articles By Content Type</h2>
 
@@ -657,6 +816,286 @@
 						}
 					}
 				});
+
+			class ArticleLink extends HTMLElement {
+				/**
+				 * @typedef {'dotcom' | 'apps' | 'amp'} Product
+				 * @typedef {'PROD' | 'CODE' | 'DEV'} Env
+				 */
+
+				/** @type {DocumentFragment} */
+				content;
+
+				/** @type {HTMLAnchorElement} */
+				link;
+
+				/** @type {HTMLSpanElement} */
+				linkText;
+
+				/**
+				 * @param {Product} product
+				 * @return {string}
+				 */
+				prodOrigin(product) {
+					switch (product) {
+						case 'dotcom':
+						case 'apps':
+							return 'https://www.theguardian.com';
+						case 'amp':
+							return 'https://amp.theguardian.com';
+					}
+				}
+
+				/**
+				 * @param {Product} product
+				 * @return {string}
+				 */
+				codeOrigin(product) {
+					switch (product) {
+						case 'dotcom':
+						case 'apps':
+							return 'https://m.code.dev-theguardian.com';
+						case 'amp':
+							return 'https://amp.code.dev-theguardian.com';
+					}
+				}
+
+				/**
+				 * @param {Product} product
+				 * @return {URLSearchParams}
+				 */
+				params(product) {
+					return new URLSearchParams(
+						product === 'apps' ? { dcr: 'apps' } : undefined,
+					);
+				}
+
+				/**
+				 * @param {Product} product
+				 * @return {string}
+				 */
+				devPath(product) {
+					switch (product) {
+						case 'dotcom':
+							return '/Article';
+						case 'apps':
+							return '/AppsArticle';
+						case 'amp':
+							return '/AMPArticle';
+					}
+				}
+
+				/**
+				 * @param {URL} devOrigin
+				 * @param {Product} product
+				 * @param {Env} env
+				 * @param {URL} url
+				 * @return {URL}
+				 */
+				buildUrl(devOrigin, product, env, url) {
+					switch (env) {
+						case 'PROD': {
+							const builtUrl = new URL(
+								url.pathname,
+								this.prodOrigin(product),
+							);
+							builtUrl.search = this.params(product).toString();
+
+							return builtUrl;
+						}
+						case 'CODE': {
+							const builtUrl = new URL(
+								url.pathname,
+								this.codeOrigin(product),
+							);
+							builtUrl.search = this.params(product).toString();
+
+							return builtUrl;
+						}
+						case 'DEV':
+							return new URL(
+								`${this.devPath(product)}/${url.toString()}`,
+								devOrigin,
+							);
+					}
+				}
+
+				/**
+				 * @param {Product} product
+				 * @return {string}
+				 */
+				getLinkText(product) {
+					switch (product) {
+						case 'dotcom':
+							return '🌍 Dotcom';
+						case 'apps':
+							return '📱 Apps';
+						case 'amp':
+							return '⚡️ AMP';
+					}
+				}
+
+				constructor() {
+					super();
+
+					const template = document.getElementById(
+						'article-link-template',
+					);
+
+					if (!(template instanceof HTMLTemplateElement)) {
+						throw new Error(
+							"article-link: I couldn't find my template element",
+						);
+					}
+
+					const clone = template.content.cloneNode(true);
+
+					if (!(clone instanceof DocumentFragment)) {
+						throw new Error(
+							'article-link: my template content should be a DocumentFragment',
+						);
+					}
+
+					this.content = clone;
+
+					const a = this.content.querySelector('a');
+
+					if (a instanceof HTMLAnchorElement) {
+						this.link = a;
+					} else {
+						throw new Error(
+							'article-link: my template is missing an anchor',
+						);
+					}
+
+					const linkText = this.content.querySelector('.link-text');
+
+					if (linkText instanceof HTMLSpanElement) {
+						this.linkText = linkText;
+					} else {
+						throw new Error(
+							'article-link: my template is missing a link-text element',
+						);
+					}
+				}
+
+				connectedCallback() {
+					const product = this.getAttribute('product');
+					const env = this.getAttribute('env');
+					const href = this.getAttribute('href');
+
+					if (
+						product !== 'dotcom' &&
+						product !== 'apps' &&
+						product !== 'amp'
+					) {
+						this.textContent =
+							"article-link error: 'product' must be one of: 'dotcom', 'apps' or 'amp'";
+						return;
+					}
+
+					if (env !== 'PROD' && env !== 'CODE' && env !== 'DEV') {
+						this.textContent =
+							"article-link error: 'env' must be one of: 'PROD', 'CODE' or 'DEV'";
+						return;
+					}
+
+					if (href === null || href === '') {
+						this.textContent =
+							"article-link error: must have a non-empty 'href'";
+						return;
+					}
+
+					try {
+						const url = new URL(href);
+						const devOrigin = new URL(window.location.origin);
+
+						this.link.setAttribute(
+							'href',
+							this.buildUrl(devOrigin, product, env, url).href,
+						);
+						this.linkText.textContent = this.getLinkText(product);
+
+						const shadowRoot = this.attachShadow({ mode: 'open' });
+						shadowRoot.replaceChildren(this.content);
+					} catch (error) {
+						if (
+							error instanceof TypeError &&
+							error.message === 'Invalid URL'
+						) {
+							this.textContent =
+								"article-link error: 'href' must be a valid URL";
+						} else {
+							this.textContent =
+								'article-link error: unknown problem';
+						}
+					}
+				}
+			}
+
+			class ArticleRow extends HTMLTableRowElement {
+				/** @type {DocumentFragment} */
+				content;
+
+				/**
+				 * @param {string} name
+				 * @return {void}
+				 */
+				setElementFromAttribute(name) {
+					const attribute = this.getAttribute(name);
+					const element = this.content.querySelector(`.${name}`);
+
+					if (attribute !== null && element !== null) {
+						element.textContent = attribute;
+					}
+				}
+
+				constructor() {
+					super();
+
+					const template = document.getElementById(
+						'article-row-template',
+					);
+
+					if (!(template instanceof HTMLTemplateElement)) {
+						throw new Error(
+							"article-row: I couldn't find my template element",
+						);
+					}
+
+					const clone = template.content.cloneNode(true);
+
+					if (!(clone instanceof DocumentFragment)) {
+						throw new Error(
+							'article-row: my template content should be a DocumentFragment',
+						);
+					}
+
+					this.content = clone;
+				}
+
+				connectedCallback() {
+					const href = this.getAttribute('href');
+
+					if (href !== null) {
+						this.content
+							.querySelectorAll('article-link')
+							.forEach((link) => {
+								link.setAttribute('href', href);
+							});
+					}
+
+					this.setElementFromAttribute('headline');
+					this.setElementFromAttribute('design');
+					this.setElementFromAttribute('display');
+					this.setElementFromAttribute('theme');
+
+					this.replaceChildren(this.content);
+				}
+			}
+
+			customElements.define('article-link', ArticleLink);
+			customElements.define('article-row', ArticleRow, { extends: 'tr' });
 		</script>
 		<style>
 			/* Olly N. (Nov. 2023)
