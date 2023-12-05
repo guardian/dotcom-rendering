@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { StoryObj } from '@storybook/react';
-import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { getAllThemes } from '../lib/format';
 import { ArticleMetaApps } from './ArticleMeta.apps';
 
 type StoryArgs = { format: ArticleFormat; isCommentable: boolean };
@@ -29,16 +30,6 @@ const tagsWithLargeBylineImage = [
 			'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
 	},
 ];
-
-// const tagsWithSmallBylineImage = [
-// 	{
-// 		id: 'profile/nicola-slawson',
-// 		type: 'Contributor',
-// 		title: 'Nicola Slawson',
-// 		bylineImageUrl:
-// 			'https://uploads.guim.co.uk/2016/11/01/Nicola_Slawson.jpg',
-// 	},
-// ];
 
 const tagsWithByTwoContributors = [
 	{
@@ -75,12 +66,6 @@ const avatarFormat: ArticleFormat = {
 	theme: Pillar.News,
 };
 
-// const commentFormat: ArticleFormat = {
-// 	display: ArticleDisplay.Standard,
-// 	design: ArticleDesign.Standard,
-// 	theme: Pillar.Opinion,
-// };
-
 const immersiveFormat: ArticleFormat = {
 	display: ArticleDisplay.Immersive,
 	design: ArticleDesign.Standard,
@@ -112,7 +97,9 @@ export const ArticleAppsWithFollowStory: StoryObj = ({
 /** @see /dotcom-rendering/docs/development/storybook.md */
 ArticleAppsWithFollowStory.args = { format: defaultFormat };
 ArticleAppsWithFollowStory.parameters = { config: { renderingTarget: 'Apps' } };
-ArticleAppsWithFollowStory.decorators = [lightDecorator([defaultFormat])];
+ArticleAppsWithFollowStory.decorators = [
+	splitTheme(getAllThemes(defaultFormat)),
+];
 
 export const ArticleAppsWithFollowStoryNoTitle: StoryObj = ({
 	format,
@@ -142,7 +129,7 @@ ArticleAppsWithFollowStoryNoTitle.parameters = {
 	config: { renderingTarget: 'Apps' },
 };
 ArticleAppsWithFollowStoryNoTitle.decorators = [
-	lightDecorator([defaultFormat]),
+	splitTheme(getAllThemes(defaultFormat)),
 ];
 
 export const ArticleAppsWithAvatarAndFollowStory: StoryObj = ({
@@ -173,7 +160,7 @@ ArticleAppsWithAvatarAndFollowStory.parameters = {
 	config: { renderingTarget: 'Apps' },
 };
 ArticleAppsWithAvatarAndFollowStory.decorators = [
-	lightDecorator([avatarFormat]),
+	splitTheme(getAllThemes(avatarFormat)),
 ];
 
 export const ArticleAppsWithAvatarNoTitleAndFollowStory: StoryObj = ({
@@ -204,7 +191,7 @@ ArticleAppsWithAvatarNoTitleAndFollowStory.parameters = {
 	config: { renderingTarget: 'Apps' },
 };
 ArticleAppsWithAvatarNoTitleAndFollowStory.decorators = [
-	lightDecorator([avatarFormat]),
+	splitTheme(getAllThemes(avatarFormat)),
 ];
 
 export const ArticleAppsImmersiveAndFollowStory: StoryObj = ({
@@ -235,7 +222,7 @@ ArticleAppsImmersiveAndFollowStory.parameters = {
 	config: { renderingTarget: 'Apps' },
 };
 ArticleAppsImmersiveAndFollowStory.decorators = [
-	lightDecorator([immersiveFormat]),
+	splitTheme(getAllThemes(immersiveFormat)),
 ];
 
 export const ArticleAppsWithMultipleContributos: StoryObj = ({
@@ -266,5 +253,5 @@ ArticleAppsWithMultipleContributos.parameters = {
 	config: { renderingTarget: 'Apps' },
 };
 ArticleAppsWithMultipleContributos.decorators = [
-	lightDecorator([defaultFormat]),
+	splitTheme(getAllThemes(defaultFormat)),
 ];

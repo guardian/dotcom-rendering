@@ -15,6 +15,7 @@ type Props = {
 	byline: string;
 	tags: TagType[];
 	format: ArticleFormat;
+	isHeadline: boolean;
 };
 
 const applyCleverOrderingForMatching = (titles: string[]): string[] => {
@@ -108,7 +109,12 @@ function removeComma(bylinePart: string) {
 		: bylinePart;
 }
 
-export const BylineLink = ({ byline, tags, format }: Props) => {
+export const BylineLink = ({
+	byline,
+	tags,
+	format,
+	isHeadline = false,
+}: Props) => {
 	const tokens = bylineAsTokens(byline, tags);
 	const soleContributor = getSoleContributor(tags, byline);
 	const hasSoleContributor = !!soleContributor;
@@ -142,7 +148,9 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 	return (
 		<>
 			{renderedTokens}
-			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
+			{renderingTarget === 'Apps' &&
+			!isHeadline &&
+			soleContributor !== undefined ? (
 				<>
 					<DottedLines
 						count={1}

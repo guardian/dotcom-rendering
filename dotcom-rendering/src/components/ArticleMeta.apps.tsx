@@ -24,6 +24,7 @@ import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
 import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
+import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
 import { SendAMessage } from './SendAMessage.importable';
 
@@ -95,7 +96,6 @@ const MetaGridByline = ({ children }: { children: React.ReactNode }) => (
 		css={css`
 			grid-area: byline;
 			width: auto;
-			}
 		`}
 	>
 		{children}
@@ -130,7 +130,6 @@ const MetaGridDateline = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			grid-area: dateline;
-			}
 		`}
 	>
 		{children}
@@ -217,6 +216,10 @@ export const ArticleMetaApps = ({
 	const isPictureContent = format.design === ArticleDesign.Picture;
 	// const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
+	const isCommentLayout = format.design === ArticleDesign.Comment;
+	const shouldShowFollowButtonsOnCommentLayout =
+		isCommentLayout && !!byline && soleContributor !== undefined;
+
 	return (
 		<div
 			className={
@@ -248,6 +251,17 @@ export const ArticleMetaApps = ({
 						''
 					)}
 
+					{shouldShowFollowButtonsOnCommentLayout && (
+						<StraightLines
+							cssOverrides={[
+								css`
+									margin-bottom: -2px;
+								`,
+							]}
+							count={4}
+							color={themePalette('--article-border')}
+						/>
+					)}
 					<div css={metaGridContainer(!!avatarUrl)}>
 						{!!avatarUrl && (
 							<MetaGridAvatar>
@@ -262,6 +276,20 @@ export const ArticleMetaApps = ({
 									tags={tags}
 									format={format}
 								/>
+							)}
+							{shouldShowFollowButtonsOnCommentLayout && (
+								<div
+									css={css`
+										margin-bottom: 8px;
+									`}
+								>
+									<Island priority="critical">
+										<FollowWrapper
+											displayName={soleContributor.title}
+											id={soleContributor.id}
+										/>
+									</Island>
+								</div>
 							)}
 							{messageUs &&
 								format.design === ArticleDesign.LiveBlog && (

@@ -101,7 +101,12 @@ export const Contributor = ({ byline, tags, format }: Props) => {
 							standfirstColourBelowDesktop,
 					]}
 				>
-					<BylineLink byline={byline} tags={tags} format={format} />
+					<BylineLink
+						byline={byline}
+						tags={tags}
+						format={format}
+						isHeadline={false}
+					/>
 				</div>
 			)}
 			{isWeb && isString(twitterHandle) && (

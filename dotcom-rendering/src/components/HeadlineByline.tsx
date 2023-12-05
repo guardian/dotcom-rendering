@@ -159,6 +159,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 							byline={byline}
 							tags={tags}
 							format={format}
+							isHeadline={true}
 						/>
 					</span>
 				</div>
@@ -176,6 +177,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 									byline={byline}
 									tags={tags}
 									format={format}
+									isHeadline={true}
 								/>
 							</div>
 						</div>
@@ -195,6 +197,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 									byline={byline}
 									tags={tags}
 									format={format}
+									isHeadline={true}
 								/>
 							</div>
 						</div>
@@ -213,6 +216,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 									byline={byline}
 									tags={tags}
 									format={format}
+									isHeadline={true}
 								/>
 							</div>
 						</div>
