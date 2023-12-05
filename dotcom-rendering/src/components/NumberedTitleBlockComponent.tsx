@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
 import { decideFormat } from '../lib/decideFormat';
 import { decidePalette } from '../lib/decidePalette';
+import { palette as sourcePalette } from '../palette';
 import type { Palette } from '../types/palette';
 
 type Props = {
@@ -18,7 +19,7 @@ const titleStyles = (palette: Palette) => css`
 	strong {
 		${headline.medium({ fontWeight: 'bold' })}
 		display: block;
-		color: ${palette.text.numberedTitle};
+		color: ${sourcePalette('--numbered-list-title')};
 	}
 `;
 

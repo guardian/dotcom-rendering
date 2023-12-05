@@ -26,7 +26,6 @@ export type Palette = {
 		witnessTitle: Colour;
 		carouselTitle: Colour;
 		pagination: Colour;
-		numberedTitle: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
 		filterButton: Colour;
