@@ -63,6 +63,7 @@ export const getOphan = async (
 	if (!ophan) {
 		throw new Error('window.guardian.ophan is not available');
 	}
+
 	const record: OphanRecordFunction = (event, callback) => {
 		ophan.record(event, callback);
 		log('dotcom', '🧿 Ophan event recorded:', event);
@@ -82,30 +83,6 @@ export const getOphan = async (
 
 	cachedOphan = { ...ophan, record, trackComponentAttention };
 	return cachedOphan;
-};
-
-export const submitEvent = async (
-	event: { [key: string]: unknown } & {
-		/**
-		 * the experiences key will override previously set values.
-		 * Use `recordExperiences` instead.
-		 */
-		experiences?: never;
-	},
-	renderingTarget: RenderingTarget,
-): Promise<void> => {
-	const ophan = await getOphan(renderingTarget);
-	ophan.record({ event });
-	log('dotcom', '🧿 Ophan event recorded:', event);
-};
-
-export const record = async (
-	data: { [key: string]: string | number },
-	renderingTarget: RenderingTarget,
-): Promise<void> => {
-	const ophan = await getOphan(renderingTarget);
-	ophan.record(data);
-	log('dotcom', '🧿 Ophan data recorded:', data);
 };
 
 export const submitComponentEvent = async (
