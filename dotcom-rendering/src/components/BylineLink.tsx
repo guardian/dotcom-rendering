@@ -5,7 +5,7 @@ import {
 	getSoleContributor,
 	isContributor,
 } from '../lib/byline';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import { FollowWrapper } from './FollowWrapper.importable';
@@ -113,7 +113,6 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const hasSoleContributor = !!soleContributor;
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
-	const palette = decidePalette(format);
 
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
 		if (isString(bylineComponent)) {
@@ -145,7 +144,10 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 			{renderedTokens}
 			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
 				<>
-					<DottedLines count={1} color={palette.border.article} />
+					<DottedLines
+						count={1}
+						color={themePalette('--article-border')}
+					/>
 					<Island priority="critical">
 						<FollowWrapper
 							displayName={soleContributor.title}

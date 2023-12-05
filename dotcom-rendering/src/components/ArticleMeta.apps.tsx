@@ -11,9 +11,8 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
-import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import {
 	metaContainer as metaContainerMargins,
@@ -105,18 +104,16 @@ const MetaGridByline = ({ children }: { children: React.ReactNode }) => (
 
 const MetaGridCommentCount = ({
 	children,
-	palette,
 	isPictureContent,
 }: {
 	children: React.ReactNode;
-	palette: Palette;
 	isPictureContent: boolean;
 }) => (
 	<div
 		data-print-layout="hide"
 		css={css`
 			grid-area: comment-count;
-			border-left: 1px solid ${palette.border.article};
+			border-left: 1px solid ${themePalette('--article-border')};
 
 			${until.desktop} {
 				margin-top: ${isPictureContent ? '-6px' : '-2px'};
@@ -217,8 +214,6 @@ export const ArticleMetaApps = ({
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
-	const palette = decidePalette(format);
-
 	const isPictureContent = format.design === ArticleDesign.Picture;
 	// const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
@@ -286,7 +281,6 @@ export const ArticleMetaApps = ({
 
 						{isCommentable && (
 							<MetaGridCommentCount
-								palette={palette}
 								isPictureContent={isPictureContent}
 							>
 								<div>
@@ -313,7 +307,7 @@ export const ArticleMetaApps = ({
 									`,
 								]}
 								count={1}
-								color={palette.border.article}
+								color={themePalette('--article-border')}
 							/>
 							<Dateline
 								primaryDateline={primaryDateline}
