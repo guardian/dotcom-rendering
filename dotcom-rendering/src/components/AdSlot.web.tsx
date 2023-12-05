@@ -291,7 +291,7 @@ const frontsBannerAdStyles = css`
 
 const articleEndAdStyles = css`
 	position: relative;
-	min-height: 250px;
+	min-height: ${adSizes.mpu.height + labelHeight}px;
 
 	&.ad-slot--fluid {
 		min-height: 450px;
