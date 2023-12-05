@@ -33,45 +33,47 @@
 			.article-examples {
 				overflow-x: auto;
 
-				table {
+				& table {
 					text-align: left;
 					border-spacing: 0;
 				}
 
-				th {
+				& th {
 					padding: 0.5rem 1rem;
 				}
 
-				thead {
+				& thead {
 					background-color: #dcdcdc;
 				}
 
-				tbody tr:nth-child(even) {
-					background-color: #ededed;
+				& tbody {
+					& tr:nth-child(even) {
+						background-color: #ededed;
+					}
+
+					& tr:nth-child(odd) {
+						background-color: #f6f6f6;
+					}
 				}
 
-				tbody tr:nth-child(odd) {
-					background-color: #f6f6f6;
-				}
-
-				td {
+				& td {
 					padding: 1rem 2rem 1rem 1rem;
 					max-width: 20rem;
 					min-width: 9rem;
 				}
 
-				dt {
+				& dt {
 					font-weight: bold;
 					display: inline;
 				}
 
-				dd {
+				& dd {
 					display: inline;
 					margin: 0;
 				}
 
-				.links,
-				.format {
+				& .links,
+				& .format {
 					max-width: 9rem;
 				}
 			}
