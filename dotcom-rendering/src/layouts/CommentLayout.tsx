@@ -428,9 +428,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								cssOverrides={css`
 									display: block;
 								`}
-								color={themePalette(
-									'--article-border-secondary',
-								)}
+								color={themePalette('--straight-lines')}
 							/>
 						</Section>
 					</SendToBack>
@@ -539,7 +537,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												display: block;
 											`}
 											color={themePalette(
-												'--article-border-secondary',
+												'--straight-lines',
 											)}
 										/>
 									</div>
@@ -554,9 +552,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										cssOverrides={css`
 											display: block;
 										`}
-										color={themePalette(
-											'--article-border-secondary',
-										)}
+										color={themePalette('--straight-lines')}
 									/>
 								</Hide>
 							</div>
@@ -674,9 +670,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										cssOverrides={css`
 											display: block;
 										`}
-										color={themePalette(
-											'--article-border-secondary',
-										)}
+										color={themePalette('--straight-lines')}
 									/>
 									<SubMeta
 										format={format}

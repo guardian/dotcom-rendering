@@ -381,13 +381,13 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										padSides={false}
 										showTopBorder={false}
 										borderColour={themePalette(
-											'--article-border-secondary',
+											'--article-border',
 										)}
 									>
 										<StraightLines
 											count={4}
 											color={themePalette(
-												'--article-border-secondary',
+												'--straight-lines',
 											)}
 											cssOverrides={css`
 												display: block;
@@ -491,7 +491,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					element="article"
-					borderColour={themePalette('--article-border-secondary')}
+					borderColour={themePalette('--article-border')}
 				>
 					<ShowcaseGrid>
 						<GridItem area="media">
@@ -556,9 +556,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								<div css={stretchLines}>
 									<DecideLines
 										format={format}
-										color={themePalette(
-											'--article-border-secondary',
-										)}
+										color={themePalette('--straight-lines')}
 									/>
 								</div>
 							</div>
@@ -656,9 +654,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								)}
 								<StraightLines
 									count={4}
-									color={themePalette(
-										'--article-border-secondary',
-									)}
+									color={themePalette('--straight-lines')}
 									cssOverrides={css`
 										display: block;
 									`}

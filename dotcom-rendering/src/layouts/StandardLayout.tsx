@@ -736,9 +736,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={themePalette(
-										'--article-border-secondary',
-									)}
+									color={themePalette('--straight-lines')}
 								/>
 								<SubMeta
 									format={format}
