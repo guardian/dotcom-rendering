@@ -6,6 +6,7 @@
 	"tocList": "README.md docs/contributing/**",
 	"private": true,
 	"scripts": {
+		"preinstall": "../scripts/preinstall.mjs",
 		"lint": "yarn lint:src && yarn lint:cypress",
 		"lint:fix": "yarn lint:src --fix && yarn lint:cypress --fix",
 		"lint:src": "eslint . --ext .ts,.tsx --quiet --cache",
