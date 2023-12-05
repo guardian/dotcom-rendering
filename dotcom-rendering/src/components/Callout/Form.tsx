@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isString } from '@guardian/libs';
+import { isString, isUndefined } from '@guardian/libs';
 import {
 	headline,
 	palette,
@@ -9,7 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { palette as schemedPalette } from '../../palette';
 import type { CampaignFieldType } from '../../types/content';
 import { CalloutTermsAndConditions } from './CalloutComponents';
@@ -111,6 +111,7 @@ export const Form = ({
 	formID,
 	pageId,
 }: FormProps) => {
+	const formElement = useRef<HTMLFormElement>(null);
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
 		[key in string]: string;
@@ -136,35 +137,33 @@ export const Form = ({
 
 	const validateForm = (): boolean => {
 		const errors: { [key in string]: string } = {};
+
 		for (const field of formFields) {
-			// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- it works
-			if (field.required && !formData[field.id]) {
+			const data = formData[field.id];
+
+			if (field.required && isUndefined(data)) {
 				errors[field.id] = 'This field is required';
 			}
 			if (field.type === 'select' && field.required) {
-				if (formData[field.id] === 'Please choose an option') {
+				if (data === 'Please choose an option') {
 					errors[field.id] =
 						'Please choose an option from the dropdown menu';
 				}
 			}
-			// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- it works
-			if (field.id === 'email' && formData[field.id]) {
+
+			if (field.id === 'email' && isString(data)) {
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-				if (!emailRegex.test(formData[field.id] as string)) {
+				if (!emailRegex.test(data)) {
 					errors[field.id] = 'Please enter a valid email address';
 				}
 			}
-			if (
-				['number', 'phone'].includes(field.type) &&
-				// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- it works
-				formData[field.id]
-			) {
+			if (['number', 'phone'].includes(field.type) && isString(data)) {
 				const numberRegex = /^[\d ()+-]+$/;
-				if (!numberRegex.test(formData[field.id] as string)) {
+				if (!numberRegex.test(data)) {
 					errors[field.id] = 'Please enter a valid number';
 				}
-				const noWhiteSpace = formData[field.id] as string;
-				if (noWhiteSpace.length < 10) {
+				const digitsCount = data.replaceAll(/[^\d]/g, '').length;
+				if (digitsCount < 10) {
 					errors[field.id] = 'Please include your dialling/area code';
 				}
 			}
@@ -253,6 +252,7 @@ export const Form = ({
 		<>
 			<CalloutTermsAndConditions />
 			<form
+				ref={formElement}
 				action="/formstack-campaign/submit"
 				method="post"
 				css={[formStyles, sourceColourOverrides]}
@@ -261,11 +261,11 @@ export const Form = ({
 					e.preventDefault();
 					const isValid = validateForm();
 					if (!isValid) {
-						const firstInvalidFormElement: HTMLInputElement =
-							document.querySelectorAll(
+						const firstInvalidFormElement =
+							formElement.current?.querySelector<HTMLElement>(
 								':invalid',
-							)[1] as HTMLInputElement;
-						firstInvalidFormElement.focus();
+							);
+						firstInvalidFormElement?.focus();
 						return;
 					}
 					void submitForm(formData);
