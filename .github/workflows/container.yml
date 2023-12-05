@@ -30,6 +30,11 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
+      - name: Add commit hash for PRout
+        working-directory: dotcom-rendering
+        run: |
+          echo 'export const GIT_COMMIT_HASH = "${{ github.sha }}";' > src/server/prout.ts
+
       - name: Generate production bundle
         run: make riffraff-bundle
         working-directory: dotcom-rendering
