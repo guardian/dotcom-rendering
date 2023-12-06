@@ -10,7 +10,6 @@ import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
-import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpSwitcher } from '../components/EmailSignUpSwitcher';
@@ -186,7 +185,6 @@ export const renderElement = ({
 						<CalloutBlockComponent
 							callout={element}
 							pageId={pageId}
-							format={format}
 						/>
 					</Island>
 				);
@@ -239,8 +237,6 @@ export const renderElement = ({
 					permalink={element.permalink}
 				/>
 			);
-		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
-			return <DisclaimerBlockComponent html={element.html} />;
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
 			return (
 				<DividerBlockComponent
@@ -761,6 +757,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':
+		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
 		default:
 			return <></>;
 	}

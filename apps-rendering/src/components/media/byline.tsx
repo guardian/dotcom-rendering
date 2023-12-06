@@ -3,8 +3,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
-import { map, withDefault } from '@guardian/types';
-import type { Option } from '@guardian/types';
+import { map, withDefault } from '../../../vendor/@guardian/types/index';
+import type { Option } from '../../../vendor/@guardian/types/index';
 import Dateline from 'components/Dateline';
 import { getFormat } from 'item';
 import type { Item } from 'item';

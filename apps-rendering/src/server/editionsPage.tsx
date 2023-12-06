@@ -7,8 +7,13 @@ import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { ArticleTheme } from '@guardian/libs';
 import { resets } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { map, none, some, withDefault } from '@guardian/types';
+import type { Option } from '../../vendor/@guardian/types/index';
+import {
+	map,
+	none,
+	some,
+	withDefault,
+} from '../../vendor/@guardian/types/index';
 import { getThirdPartyEmbeds } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import Layout from 'components/editions/layout';

@@ -11,7 +11,7 @@ import {
 	pxToRem,
 	remSpace,
 } from '@guardian/source-foundations';
-import { fromNullable } from '@guardian/types';
+import { fromNullable } from '../../../vendor/@guardian/types/index';
 import Footer from 'components/Footer';
 import GridItem from 'components/GridItem';
 import type { KeyEvent } from 'components/KeyEvents';

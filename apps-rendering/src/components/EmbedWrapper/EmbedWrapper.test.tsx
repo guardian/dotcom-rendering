@@ -4,7 +4,7 @@
 
 import { matchers } from '@emotion/jest';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
-import { none, some } from '@guardian/types';
+import { none, some } from '../../../vendor/@guardian/types/index';
 import type {
 	EmailSignup,
 	Embed,

@@ -1,8 +1,14 @@
 // ----- Imports ----- //
 
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
-import type { Option } from '@guardian/types';
-import { fromNullable, map, none, some, withDefault } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import {
+	fromNullable,
+	map,
+	none,
+	some,
+	withDefault,
+} from '../../../vendor/@guardian/types/index';
 import ClickToView from 'components/ClickToView';
 import EmbedComponent from 'components/Embed';
 import { EmbedKind } from 'embed';

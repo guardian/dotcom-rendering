@@ -8,6 +8,9 @@
         "standfirst": {
             "type": "string"
         },
+        "affiliateLinksDisclaimer": {
+            "type": "string"
+        },
         "webTitle": {
             "type": "string"
         },

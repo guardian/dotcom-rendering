@@ -1,0 +1,8 @@
+{
+	"checkpoints": {
+		"PROD": {
+			"url": "https://www.theguardian.com/uk",
+			"overdue": "30M"
+		}
+	}
+}

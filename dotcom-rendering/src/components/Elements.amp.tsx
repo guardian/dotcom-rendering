@@ -6,7 +6,6 @@ import type { TagType } from '../types/tag';
 import { AudioAtomBlockComponent } from './AudioAtomBlockComponent.amp';
 import { CommentBlockComponent } from './CommentBlockComponent.amp';
 import { ContentAtomBlockComponent } from './ContentAtomBlockComponent.amp';
-import { DisclaimerBlockComponent } from './DisclaimerBlockComponent.amp';
 import { EmbedBlockComponent } from './EmbedBlockComponent.amp';
 import { Expandable } from './Expandable.amp';
 import { GuVideoBlockComponent } from './GuVideoBlockComponent.amp';
@@ -167,14 +166,6 @@ export const Elements = (
 				);
 			case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 				return <ContentAtomBlockComponent key={element.elementId} />;
-			case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
-				return (
-					<DisclaimerBlockComponent
-						key={element.elementId}
-						html={element.html}
-						pillar={pillar}
-					/>
-				);
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 				return (
 					<EmbedBlockComponent
@@ -360,6 +351,8 @@ export const Elements = (
 						adTargeting={adTargeting}
 					/>
 				);
+			case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
+				return <></>;
 			default:
 				console.log('Unsupported Element', JSON.stringify(element));
 				if ((element as { isMandatory?: boolean }).isMandatory) {

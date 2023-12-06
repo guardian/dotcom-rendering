@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isString } from '@guardian/libs';
 import { space, textSans } from '@guardian/source-foundations';
 import {
 	LinkButton,
@@ -6,9 +7,10 @@ import {
 	SvgTelegramBrand,
 	SvgWhatsAppBrand,
 } from '@guardian/source-react-components';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
+import { palette } from '../../palette';
 import type { CalloutContactType } from '../../types/content';
-import { calloutLinkStyles } from './CalloutComponents';
+import { linkStyles } from './CalloutComponents';
 
 const calloutPrimaryButtonStyles = css`
 	width: 100%;
@@ -21,7 +23,6 @@ const calloutPrimaryButtonStyles = css`
 `;
 
 const infoStyles = css`
-	${calloutLinkStyles}
 	margin-bottom: ${space[2]}px;
 	${textSans.xsmall()};
 `;
@@ -70,9 +71,9 @@ export const formatContactNumbers = (
 	);
 };
 
-const Disclaimer: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
+const Disclaimer = ({ contacts }: { contacts: CalloutContactType[] }) => {
 	const contactText = (
-		<p css={infoStyles}>{formatContactNumbers(contacts)}.</p>
+		<p css={[linkStyles, infoStyles]}>{formatContactNumbers(contacts)}.</p>
 	);
 
 	// If any of the contacts have guidance, display it in a readable string.
@@ -80,16 +81,11 @@ const Disclaimer: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 		<span>
 			For more information, please see our guidance on{' '}
 			{contacts.map(
-				(contact, i) =>
-					contact.guidance && (
+				({ guidance, name }, i) =>
+					isString(guidance) && (
 						<>
-							<a
-								key={i}
-								href={contact.guidance}
-								data-ignore="global-link-styling"
-							>
-								contacting us via{' '}
-								{formatContactType(contact.name)}
+							<a key={guidance} href={guidance}>
+								contacting us via {formatContactType(name)}
 							</a>
 							{i === contacts.length - 1 ? '.' : ', '}
 						</>
@@ -101,12 +97,7 @@ const Disclaimer: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 	const secureDropText = (
 		<span>
 			For true anonymity please use our{' '}
-			<a
-				href="https://www.theguardian.com/securedrop"
-				data-ignore="global-link-styling"
-			>
-				SecureDrop
-			</a>{' '}
+			<a href="https://www.theguardian.com/securedrop">SecureDrop</a>{' '}
 			service instead.
 		</span>
 	);
@@ -114,7 +105,7 @@ const Disclaimer: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 	return (
 		<>
 			{contactText}
-			<p css={infoStyles}>
+			<p css={[linkStyles, infoStyles]}>
 				{contacts.some((c) => !!c.guidance) && guidanceText}{' '}
 				{secureDropText}
 			</p>
@@ -122,9 +113,24 @@ const Disclaimer: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 	);
 };
 
-const MessageUs: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
+const MessageUs = ({
+	contacts,
+	useBrandColour,
+}: {
+	contacts: CalloutContactType[];
+	useBrandColour: boolean;
+}) => {
 	return (
-		<div className="js-message-us-tab">
+		<div
+			className="js-message-us-tab"
+			style={
+				useBrandColour
+					? {
+							'--article-link-text': palette('--callout-prompt'),
+					  }
+					: {}
+			}
+		>
 			<Disclaimer contacts={contacts} />
 
 			{contacts.map((contact, i) =>

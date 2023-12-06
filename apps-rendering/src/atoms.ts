@@ -1,6 +1,6 @@
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
-import { fromNullable } from '@guardian/types';
+import { fromNullable } from '../vendor/@guardian/types/index';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import { atomScript } from 'components/InteractiveAtom';

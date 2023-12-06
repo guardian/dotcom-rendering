@@ -2,8 +2,8 @@
 
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 import { ArticleElementRole } from '@guardian/libs';
-import { none, OptionKind, some } from '@guardian/types';
-import type { Option } from '@guardian/types';
+import { none, OptionKind, some } from '../../vendor/@guardian/types/index';
+import type { Option } from '../../vendor/@guardian/types/index';
 import type { Body } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import { parse } from 'client/parser';

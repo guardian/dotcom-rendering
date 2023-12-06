@@ -131,6 +131,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					return css`
 						${headline.xxsmall({
 							fontWeight: 'light',
+							lineHeight: 'tight',
 						})};
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
@@ -145,8 +146,8 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					return css`
 						${headline.xxxsmall({
 							fontWeight: 'bold',
+							lineHeight: 'tight',
 						})};
-						line-height: 20px;
 						margin-top: ${space[1]}px;
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
@@ -154,7 +155,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					`;
 				case ArticleDesign.Analysis:
 					return css`
-						${headline.xxxsmall()};
+						${headline.xxxsmall({ lineHeight: 'tight' })};
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
@@ -163,7 +164,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					switch (theme) {
 						case ArticleSpecial.Labs:
 							return css`
-								${textSans.medium()}
+								${textSans.medium({ lineHeight: 'tight' })}
 								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};
@@ -177,8 +178,8 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 							return css`
 								${headline.xxxsmall({
 									fontWeight: 'bold',
+									lineHeight: 'tight',
 								})};
-								line-height: 20px;
 								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};

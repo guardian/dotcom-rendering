@@ -2,7 +2,7 @@
 
 import { matchers } from '@emotion/jest';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { some } from '@guardian/types';
+import { some } from '../../../vendor/@guardian/types/index';
 import { JSDOM } from 'jsdom';
 import renderer from 'react-test-renderer';
 import MainMediaCaption from '.';

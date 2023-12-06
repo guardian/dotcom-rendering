@@ -1,5 +1,5 @@
-import type { Option } from '@guardian/types';
-import { OptionKind } from '@guardian/types';
+import type { Option } from '../../vendor/@guardian/types/index';
+import { OptionKind } from '../../vendor/@guardian/types/index';
 import { ArticleElementRole } from '@guardian/libs';
 import { Optional } from '../optional';
 import { ImageSubtype } from '../image/image';

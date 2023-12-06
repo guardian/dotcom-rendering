@@ -5,7 +5,7 @@ import { css, jsx as styledH } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleElementRole } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
-import { withDefault } from '@guardian/types';
+import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Image } from 'image';
 import { createElement as h } from 'react';
 import type { FC } from 'react';

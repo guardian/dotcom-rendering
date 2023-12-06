@@ -5,7 +5,7 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { none } from '@guardian/types';
+import { none } from '../../../vendor/@guardian/types/index';
 import { FollowTagStatus } from 'components/FollowStatus';
 import type { Contributor } from 'contributor';
 import { createElement as h } from 'react';

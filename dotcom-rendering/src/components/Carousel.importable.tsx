@@ -21,6 +21,7 @@ import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import type { Loading } from './CardPicture';
+import { useConfig } from './ConfigContext';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Hide } from './Hide';
@@ -775,6 +776,9 @@ export const Carousel = ({
 	isOnwardContent = true,
 	...props
 }: ArticleProps | FrontProps) => {
+	const { renderingTarget } = useConfig();
+	const isApps = renderingTarget === 'Apps';
+
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
@@ -893,7 +897,7 @@ export const Carousel = ({
 		[],
 	);
 
-	if (isAndroid) {
+	if (isApps && isAndroid) {
 		return null;
 	}
 

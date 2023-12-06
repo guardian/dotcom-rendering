@@ -1,6 +1,6 @@
 import { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
-import { none } from '@guardian/types';
+import { none } from '../vendor/@guardian/types/index';
 import { Optional } from 'optional';
 import {
 	Contributor,
