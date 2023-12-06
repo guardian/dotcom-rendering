@@ -20,6 +20,7 @@ import {
 } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
 import { Footer } from '../components/Footer';
@@ -34,6 +35,7 @@ import { NewsletterFrequency } from '../components/NewsletterFrequency';
 import { NewsletterPrivacyMessage } from '../components/NewsletterPrivacyMessage';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
+import { SecureReCAPTCHASignup } from '../components/SecureReCAPTCHASignup';
 import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
@@ -45,13 +47,23 @@ import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
+import { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
-type Props = {
+interface CommonProps {
 	article: DCRArticle;
-	NAV: NavType;
 	format: ArticleFormat;
-};
+	renderingTarget: RenderingTarget;
+}
+
+interface WebProps extends CommonProps {
+	NAV: NavType;
+	renderingTarget: 'Web';
+}
+
+interface AppsProps extends CommonProps {
+	renderingTarget: 'Apps';
+}
 
 const mainColWrapperStyle = css`
 	display: flex;
@@ -186,7 +198,11 @@ const getMainMediaCaptions = (article: DCRArticle): (string | undefined)[] =>
 			: undefined,
 	);
 
-export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
+export const NewsletterSignupLayout = (props: WebProps | AppsProps) => {
+	const { article, format, renderingTarget } = props;
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+
 	const {
 		promotedNewsletter,
 		config: { host },
@@ -213,122 +229,139 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 
 	return (
 		<>
-			<div data-print-layout="hide" id="bannerandheader">
-				{renderAds && (
-					<Stuck>
+			{isWeb && (
+				<>
+					<div data-print-layout="hide" id="bannerandheader">
+						{renderAds && (
+							<Stuck>
+								<Section
+									fullWidth={true}
+									showTopBorder={false}
+									showSideBorders={false}
+									padSides={false}
+									shouldCenter={false}
+								>
+									<HeaderAdSlot />
+								</Section>
+							</Stuck>
+						)}
+
 						<Section
 							fullWidth={true}
+							shouldCenter={false}
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
-							shouldCenter={false}
+							backgroundColour={sourcePalette.brand[400]}
+							element="header"
 						>
-							<HeaderAdSlot />
-						</Section>
-					</Stuck>
-				)}
-
-				<Section
-					fullWidth={true}
-					shouldCenter={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					padSides={false}
-					backgroundColour={sourcePalette.brand[400]}
-					element="header"
-				>
-					<Header
-						editionId={article.editionId}
-						idUrl={article.config.idUrl}
-						mmaUrl={article.config.mmaUrl}
-						discussionApiUrl={article.config.discussionApiUrl}
-						urls={article.nav.readerRevenueLinks.header}
-						remoteHeader={!!article.config.switches.remoteHeader}
-						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={article.config.idApiUrl}
-						headerTopBarSearchCapiSwitch={
-							!!article.config.switches.headerTopBarSearchCapi
-						}
-					/>
-				</Section>
-
-				<Section
-					fullWidth={true}
-					borderColour={sourcePalette.brand[600]}
-					showTopBorder={false}
-					padSides={false}
-					backgroundColour={sourcePalette.brand[400]}
-					element="nav"
-				>
-					<Nav
-						nav={NAV}
-						isImmersive={
-							format.display === ArticleDisplay.Immersive
-						}
-						displayRoundel={
-							format.display === ArticleDisplay.Immersive ||
-							format.theme === ArticleSpecial.Labs
-						}
-						selectedPillar={NAV.selectedPillar}
-						subscribeUrl={
-							article.nav.readerRevenueLinks.header.subscribe
-						}
-						editionId={article.editionId}
-						headerTopBarSwitch={
-							!!article.config.switches.headerTopNav
-						}
-					/>
-				</Section>
-
-				{!!NAV.subNavSections && (
-					<>
-						<Section
-							fullWidth={true}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
-							padSides={false}
-							showTopBorder={false}
-							element="aside"
-						>
-							<Island
-								priority="enhancement"
-								defer={{ until: 'idle' }}
-							>
-								<SubNav
-									subNavSections={NAV.subNavSections}
-									currentNavLink={NAV.currentNavLink}
-									linkHoverColour={themePalette(
-										'--article-link-text-hover',
-									)}
-									borderColour={themePalette(
-										'--sub-nav-border',
-									)}
-								/>
-							</Island>
-						</Section>
-						<Section
-							fullWidth={true}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
-							padSides={false}
-							showTopBorder={false}
-						>
-							<StraightLines
-								count={4}
-								cssOverrides={css`
-									display: block;
-								`}
-								color={themePalette('--straight-lines')}
+							<Header
+								editionId={article.editionId}
+								idUrl={article.config.idUrl}
+								mmaUrl={article.config.mmaUrl}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
+								urls={article.nav.readerRevenueLinks.header}
+								remoteHeader={
+									!!article.config.switches.remoteHeader
+								}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								headerTopBarSearchCapiSwitch={
+									!!article.config.switches
+										.headerTopBarSearchCapi
+								}
 							/>
 						</Section>
-					</>
-				)}
-			</div>
 
-			{renderAds && !!article.config.switches.surveys && (
-				<AdSlot position="survey" display={format.display} />
+						<Section
+							fullWidth={true}
+							borderColour={sourcePalette.brand[600]}
+							showTopBorder={false}
+							padSides={false}
+							backgroundColour={sourcePalette.brand[400]}
+							element="nav"
+						>
+							<Nav
+								nav={props.NAV}
+								isImmersive={
+									format.display === ArticleDisplay.Immersive
+								}
+								displayRoundel={
+									format.display ===
+										ArticleDisplay.Immersive ||
+									format.theme === ArticleSpecial.Labs
+								}
+								selectedPillar={props.NAV.selectedPillar}
+								subscribeUrl={
+									article.nav.readerRevenueLinks.header
+										.subscribe
+								}
+								editionId={article.editionId}
+								headerTopBarSwitch={
+									!!article.config.switches.headerTopNav
+								}
+							/>
+						</Section>
+
+						{!!props.NAV.subNavSections && (
+							<>
+								<Section
+									fullWidth={true}
+									backgroundColour={themePalette(
+										'--article-background',
+									)}
+									padSides={false}
+									showTopBorder={false}
+									element="aside"
+								>
+									<Island
+										priority="enhancement"
+										defer={{ until: 'idle' }}
+									>
+										<SubNav
+											subNavSections={
+												props.NAV.subNavSections
+											}
+											currentNavLink={
+												props.NAV.currentNavLink
+											}
+											linkHoverColour={themePalette(
+												'--article-link-text-hover',
+											)}
+											borderColour={themePalette(
+												'--sub-nav-border',
+											)}
+										/>
+									</Island>
+								</Section>
+								<Section
+									fullWidth={true}
+									backgroundColour={themePalette(
+										'--article-background',
+									)}
+									padSides={false}
+									showTopBorder={false}
+								>
+									<StraightLines
+										count={4}
+										cssOverrides={css`
+											display: block;
+										`}
+										color={themePalette('--straight-lines')}
+									/>
+								</Section>
+							</>
+						)}
+					</div>
+
+					{renderAds && !!article.config.switches.surveys && (
+						<AdSlot position="survey" display={format.display} />
+					)}
+				</>
 			)}
 
 			<main data-layout="NewsletterSignupLayout">
@@ -445,17 +478,33 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 										/>
 									</div>
 
-									<SecureSignup
-										name={promotedNewsletter.name}
-										newsletterId={
-											promotedNewsletter.identityName
-										}
-										successDescription={
-											promotedNewsletter.successDescription
-										}
-										hidePrivacyMessage={true}
-									/>
-
+									{isApps && (
+										<Island
+											priority="feature"
+											defer={{ until: 'idle' }}
+										>
+											<SecureReCAPTCHASignup
+												newsletterId={
+													promotedNewsletter.identityName
+												}
+												successDescription={
+													promotedNewsletter.successDescription
+												}
+											/>
+										</Island>
+									)}
+									{isWeb && (
+										<SecureSignup
+											name={promotedNewsletter.name}
+											newsletterId={
+												promotedNewsletter.identityName
+											}
+											successDescription={
+												promotedNewsletter.successDescription
+											}
+											hidePrivacyMessage={true}
+										/>
+									)}
 									<Hide from="desktop">
 										<NewsletterPrivacyMessage />
 									</Hide>
@@ -543,29 +592,48 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					/>
 				</Island>
 			</main>
+			{isWeb && (
+				<>
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						padSides={false}
+						showTopBorder={false}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Footer
+							pageFooter={article.pageFooter}
+							selectedPillar={props.NAV.selectedPillar}
+							pillars={props.NAV.pillars}
+							urls={article.nav.readerRevenueLinks.header}
+							editionId={article.editionId}
+							contributionsServiceUrl={
+								article.contributionsServiceUrl
+							}
+						/>
+					</Section>
 
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				showTopBorder={false}
-				backgroundColour={sourcePalette.brand[400]}
-				borderColour={sourcePalette.brand[600]}
-				showSideBorders={false}
-				element="footer"
-			>
-				<Footer
-					pageFooter={article.pageFooter}
-					selectedPillar={NAV.selectedPillar}
-					pillars={NAV.pillars}
-					urls={article.nav.readerRevenueLinks.header}
-					editionId={article.editionId}
-					contributionsServiceUrl={article.contributionsServiceUrl}
-				/>
-			</Section>
-
-			<BannerWrapper data-print-layout="hide" />
-			<MobileStickyContainer data-print-layout="hide" />
+					<BannerWrapper data-print-layout="hide" />
+					<MobileStickyContainer data-print-layout="hide" />
+				</>
+			)}
+			{isApps && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					backgroundColour={themePalette('--apps-footer-background')}
+					padSides={false}
+					showSideBorders={false}
+					element="footer"
+				>
+					<Island priority="critical">
+						<AppsFooter />
+					</Island>
+				</Section>
+			)}
 		</>
 	);
 };

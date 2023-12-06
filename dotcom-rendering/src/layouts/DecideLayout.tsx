@@ -116,8 +116,13 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
-					// Should be NewsletterSignup once implemented for apps
-					return notSupported;
+					return (
+						<NewsletterSignupLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				default:
 					return (
 						<StandardLayout
@@ -257,6 +262,7 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
