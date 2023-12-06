@@ -1,4 +1,8 @@
 # https://github.com/marketplace/actions/labeler
 
-dotcom-rendering: dotcom-rendering/**/*
-apps-rendering: apps-rendering/**/*
+dotcom-rendering:
+  - changed-files:
+      - any-glob-to-any-file: 'dotcom-rendering/**/*'
+apps-rendering:
+  - changed-files:
+      - any-glob-to-any-file: 'apps-rendering/**/*'
