@@ -8,6 +8,7 @@
 		"ios >= 12"
 	],
 	"scripts": {
+		"preinstall": "../scripts/preinstall.mjs",
 		"upload": "node-riffraff-artifact",
 		"copy-manifest": "cp dist/assets/manifest.json dist/server/manifest.json",
 		"copy-fonts": "cp -R assets/fonts dist/assets/fonts",
