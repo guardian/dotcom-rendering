@@ -432,7 +432,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					element="article"
-					borderColour={themePalette('--article-border-secondary')}
+					borderColour={themePalette('--straight-lines')}
 				>
 					<PictureGrid>
 						<GridItem area="title" element="aside">
@@ -486,7 +486,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 												display: block;
 											`}
 											color={themePalette(
-												'--article-border-secondary',
+												'--straight-lines',
 											)}
 										/>
 									</div>
@@ -545,9 +545,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={themePalette(
-										'--article-border-secondary',
-									)}
+									color={themePalette('--straight-lines')}
 								/>
 							</div>
 						</GridItem>
@@ -578,9 +576,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						<GridItem area="submeta">
 							<ArticleContainer format={format}>
 								<DecideLines
-									color={themePalette(
-										'--article-border-secondary',
-									)}
+									color={themePalette('--straight-lines')}
 									format={format}
 								/>
 								<SubMeta
