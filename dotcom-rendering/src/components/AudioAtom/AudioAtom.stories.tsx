@@ -1,6 +1,6 @@
-import { AudioAtom as AudioAtomComponent } from './AudioAtom';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { AudioAtom as AudioAtomComponent } from './AudioAtom';
 
 const meta: Meta<typeof AudioAtomComponent> = {
 	title: 'Components/Audio Atom',
