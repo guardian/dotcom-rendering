@@ -2762,7 +2762,7 @@ const articleLinkBorderHoverLight: PaletteFunction = ({ design, theme }) => {
 const articleLinkBorderHoverDark: PaletteFunction = (f) =>
 	articleLinkTextDark(f);
 
-const articleBorder: PaletteFunction = ({ design, theme }) => {
+const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
 		case ArticleSpecial.SpecialReportAlt:
 			return transparentColour(sourcePalette.neutral[60], 0.3);
@@ -2778,12 +2778,39 @@ const articleBorder: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const articleBorderSecondary: PaletteFunction = (format) => {
+const articleBorderDark: PaletteFunction = () => sourcePalette.neutral[38];
+
+const straightLinesLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(sourcePalette.neutral[60], 0.3);
 	if (format.design === ArticleDesign.Picture)
 		return transparentColour(sourcePalette.neutral[60], 0.5);
 	return sourcePalette.neutral[86];
+};
+
+const straightLinesDark: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.neutral[20];
+			}
+		default:
+			return sourcePalette.neutral[20];
+	}
 };
 
 const subNavBorder: PaletteFunction = ({ design, theme }) => {
@@ -3932,12 +3959,12 @@ const paletteColours = {
 		dark: articleLinkBorderHoverDark,
 	},
 	'--article-border': {
-		light: articleBorder,
-		dark: articleBorder,
+		light: articleBorderLight,
+		dark: articleBorderDark,
 	},
-	'--article-border-secondary': {
-		light: articleBorderSecondary,
-		dark: articleBorderSecondary,
+	'--straight-lines': {
+		light: straightLinesLight,
+		dark: straightLinesDark,
 	},
 	'--sub-nav-border': {
 		light: subNavBorder,
