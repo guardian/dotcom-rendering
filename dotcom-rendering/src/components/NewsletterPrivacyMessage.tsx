@@ -47,14 +47,11 @@ const textStyles = (textColor: 'supporting' | 'regular') => {
 		case 'supporting':
 			return css`
 				color: ${sourcePalette.neutral[46]};
-				a {
+				a, strong {
 					color: ${themePalette('--privacy-text-supporting')};
 					:hover {
-						color: ${themePalette('--privacy-text-supporting')};
+						color: inherit;
 					}
-				}
-				strong {
-					color: ${themePalette('--privacy-text-supporting')};
 				}
 			`;
 		case 'regular':
