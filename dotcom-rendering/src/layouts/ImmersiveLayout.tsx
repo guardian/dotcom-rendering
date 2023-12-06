@@ -21,6 +21,7 @@ import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
+import { Disclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -90,6 +91,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'caption    border      title       right-column'
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
+						'.          border      disclaimer  right-column'
 						'.          border      byline      right-column'
 						'lines      border      body        right-column'
 						'meta       border      body        right-column'
@@ -113,6 +115,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      title       right-column'
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
+						'.          border      disclaimer  right-column'
 						'.          border      byline      right-column'
 						'lines      border      body        right-column'
 						'meta       border      body        right-column'
@@ -134,6 +137,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'title       right-column'
 						'headline    right-column'
 						'standfirst  right-column'
+						'disclaimer  right-column'
 						'byline      right-column'
 						'caption     right-column'
 						'lines       right-column'
@@ -148,6 +152,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'title'
 						'headline'
 						'standfirst'
+						'disclaimer'
 						'byline'
 						'caption'
 						'lines'
@@ -267,6 +272,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const navAndLabsHeaderHeight = isLabs
 		? `${combinedHeight}px`
 		: `${minNavHeightPx}px`;
+
+	const hasAffiliateLinksDisclaimer = !!article.affiliateLinksDisclaimer;
 
 	const hasMainMediaStyles = css`
 		height: calc(80vh - ${navAndLabsHeaderHeight});
@@ -543,6 +550,15 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								format={format}
 								standfirst={article.standfirst}
 							/>
+						</GridItem>
+						<GridItem area="disclaimer">
+							{hasAffiliateLinksDisclaimer && (
+								<Disclaimer
+									html={
+										article.affiliateLinksDisclaimer ?? ''
+									}
+								></Disclaimer>
+							)}
 						</GridItem>
 						<GridItem area="byline">
 							{!!article.byline && (
