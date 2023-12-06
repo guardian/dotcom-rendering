@@ -202,11 +202,7 @@ export const SeriesSectionLink = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const seriesTitleColour = isMatch
-		? themePalette('--series-title-match-text')
-		: themePalette('--series-title-text');
-
-	const sectionTitleColour = isMatch
+	const titleColour = isMatch
 		? themePalette('--series-title-match-text')
 		: themePalette('--series-title-text');
 
@@ -229,7 +225,7 @@ export const SeriesSectionLink = ({
 										fontStyles(format),
 										breakWord,
 										css`
-											color: ${seriesTitleColour};
+											color: ${titleColour};
 											background-color: ${themePalette(
 												'--series-title-background',
 											)};
@@ -296,7 +292,7 @@ export const SeriesSectionLink = ({
 									fontStyles(format),
 									breakWord,
 									css`
-										color: ${sectionTitleColour};
+										color: ${titleColour};
 										background-color: ${themePalette(
 											'--section-title-background',
 										)};
@@ -347,7 +343,7 @@ export const SeriesSectionLink = ({
 										breakWord,
 										!badge && sectionPadding,
 										css`
-											color: ${seriesTitleColour};
+											color: ${titleColour};
 											background-color: ${themePalette(
 												'--series-title-background',
 											)};
@@ -391,7 +387,7 @@ export const SeriesSectionLink = ({
 									css={[
 										fontStyles(format),
 										css`
-											color: ${seriesTitleColour};
+											color: ${titleColour};
 										`,
 									]}
 								>
@@ -409,7 +405,7 @@ export const SeriesSectionLink = ({
 							css={[
 								sectionLabelLink,
 								css`
-									color: ${seriesTitleColour};
+									color: ${titleColour};
 									background-color: ${themePalette(
 										'--series-title-background',
 									)};
@@ -444,7 +440,7 @@ export const SeriesSectionLink = ({
 									displayBlock,
 									breakWord,
 									css`
-										color: ${sectionTitleColour};
+										color: ${titleColour};
 										background-color: ${themePalette(
 											'--section-title-background',
 										)};
@@ -468,7 +464,7 @@ export const SeriesSectionLink = ({
 								css={[
 									fontStyles(format),
 									css`
-										color: ${seriesTitleColour};
+										color: ${titleColour};
 									`,
 								]}
 							>
@@ -486,7 +482,7 @@ export const SeriesSectionLink = ({
 						css={[
 							sectionLabelLink,
 							css`
-								color: ${sectionTitleColour};
+								color: ${titleColour};
 								background-color: ${themePalette(
 									'--section-title-background',
 								)};

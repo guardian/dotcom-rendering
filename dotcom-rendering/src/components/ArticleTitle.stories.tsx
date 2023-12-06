@@ -6,8 +6,14 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { getAllThemes, getThemeNameAsString } from '../lib/format';
+import { getThemeNameAsString } from '../lib/format';
 import { ArticleTitle } from './ArticleTitle';
+
+interface BackgroundProps {
+	theme: string;
+}
+
+type StoryArgs = { format: ArticleFormat };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -90,11 +96,13 @@ export const beyondTheBlade = () => {
 };
 beyondTheBlade.storyName = 'Beyond the blade badge';
 
-export const immersiveComment = () => {
+export const immersiveComment = ({ theme }: BackgroundProps) => {
 	return (
 		<div
 			css={css`
-				background-color: lightgray;
+				background-color: ${theme === 'light'
+					? 'lightgray'
+					: 'inherit'};
 				padding: 20px;
 			`}
 		>
@@ -120,11 +128,13 @@ immersiveComment.decorators = [
 	]),
 ];
 
-export const immersiveCommentTag = () => {
+export const immersiveCommentTag = ({ theme }: BackgroundProps) => {
 	return (
 		<div
 			css={css`
-				background-color: lightgray;
+				background-color: ${theme === 'light'
+					? 'lightgray'
+					: 'inherit'};
 				padding: 20px;
 			`}
 		>
@@ -221,13 +231,15 @@ ArticleBlogTag.decorators = [
 	]),
 ];
 
-export const LiveblogTitle = () => {
+export const LiveblogTitle = ({ theme }: BackgroundProps) => {
 	return (
 		<Wrapper>
 			<div
 				css={css`
 					/* stylelint-disable-next-line color-no-hex */
-					background-color: #005689;
+					background-color: ${theme === 'light'
+						? '#005689'
+						: 'inherit'};
 				`}
 			>
 				<ArticleTitle
@@ -249,7 +261,9 @@ export const LiveblogTitle = () => {
 			<div
 				css={css`
 					/* stylelint-disable-next-line color-no-hex */
-					background-color: #ffe500;
+					background-color: ${theme === 'light'
+						? '#ffe500'
+						: 'inherit'};
 				`}
 			>
 				<ArticleTitle
@@ -532,35 +546,48 @@ LongWord.decorators = [
 	]),
 ];
 
-export const ArticleDeadBlogTitle = () => {
+const themeVariations = [
+	Pillar.Sport,
+	Pillar.News,
+	Pillar.Culture,
+	Pillar.Opinion,
+	Pillar.Lifestyle,
+	ArticleSpecial.SpecialReport,
+	ArticleSpecial.SpecialReportAlt,
+	ArticleSpecial.Labs,
+];
+
+const allThemeDeadBlogVariations = themeVariations.map((theme) => ({
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.DeadBlog,
+	theme,
+}));
+
+export const ArticleDeadBlogTitle = ({ format }: StoryArgs) => {
 	return (
 		<>
-			{getAllThemes({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.DeadBlog,
-			}).map((format) => (
-				<div key={JSON.stringify(format)}>
-					<p>{getThemeNameAsString(format)}</p>
-					<ArticleTitle
-						{...FEArticle}
-						format={format}
-						tags={[
-							{
-								id: '',
-								title: 'Deadblog title',
-								type: 'Blog',
-							},
-						]}
-					/>
-					<br />
-					<br />
-				</div>
-			))}
+			<div key={JSON.stringify(format)}>
+				<p>{getThemeNameAsString(format)}</p>
+				<ArticleTitle
+					{...FEArticle}
+					format={format}
+					tags={[
+						{
+							id: '',
+							title: 'Deadblog title',
+							type: 'Blog',
+						},
+					]}
+				/>
+				<br />
+				<br />
+			</div>
 		</>
 	);
 };
 
 ArticleDeadBlogTitle.storyName = 'Deadblog - All pillars';
+ArticleDeadBlogTitle.decorators = [splitTheme(allThemeDeadBlogVariations)];
 
 export const ArticleTitleAll = () => {
 	return (

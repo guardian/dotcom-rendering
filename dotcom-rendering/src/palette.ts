@@ -3688,7 +3688,8 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 			return sourcePalette.neutral[7];
 	}
 };
-const seriesTitleTextDark: PaletteFunction = ({ design, theme }) => {
+const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
+	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[100];
 	switch (design) {
 		case ArticleDesign.Analysis:
 			switch (theme) {
@@ -3772,8 +3773,6 @@ const seriesTitleMatchTextLight: PaletteFunction = (format) => {
 	}
 	return seriesTitleTextLight(format);
 };
-const seriesSectionTitleBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[0];
 // '--most-viewed-footer-tab
 // ----- Palette ----- //
 
@@ -4300,11 +4299,11 @@ const paletteColours = {
 	},
 	'--series-title-background': {
 		light: seriesTitleBackgroundLight,
-		dark: seriesSectionTitleBackgroundDark,
+		dark: seriesTitleBackgroundLight,
 	},
 	'--section-title-background': {
 		light: sectionTitleBackgroundLight,
-		dark: seriesSectionTitleBackgroundDark,
+		dark: sectionTitleBackgroundLight,
 	},
 	'--series-title-text': {
 		light: seriesTitleTextLight,
