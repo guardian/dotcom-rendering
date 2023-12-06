@@ -64,7 +64,15 @@ export default merge(base(import.meta.url), {
 			},
 			{
 				test: /\.svg$/,
-				use: ['desvg-loader/react', 'svg-loader'],
+				use: [
+					{
+						loader: '@svgr/webpack',
+						options: {
+							/** this ensures that we keep the viewBox for imported SVGs */
+							svgo: false,
+						},
+					},
+				],
 			},
 		],
 	},
