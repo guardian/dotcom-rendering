@@ -43,7 +43,6 @@ export const server = {
 						loader: 'swc-loader',
 						options: {
 							jsc: {
-								baseUrl: '.',
 								parser: {
 									syntax: 'typescript',
 									tsx: true,
@@ -58,7 +57,6 @@ export const server = {
 								},
 							},
 							sourceMaps: true,
-
 							minify: true,
 							env: {
 								targets: {
