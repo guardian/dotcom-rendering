@@ -323,6 +323,7 @@ export const Card = ({
 				format={format}
 				containerPalette={containerPalette}
 				displayLines={displayLines}
+				leftAlign={isOnwardContent}
 				age={
 					(!!onwardsSource && webPublicationDate) ||
 					(showAge &&

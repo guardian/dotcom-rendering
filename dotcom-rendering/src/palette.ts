@@ -2109,7 +2109,6 @@ const onwardContentCardBackgroundLight: PaletteFunction = ({
 		case ArticleSpecial.SpecialReportAlt:
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.neutral[46];
-
 		default:
 			switch (design) {
 				case ArticleDesign.Gallery:
@@ -2117,7 +2116,12 @@ const onwardContentCardBackgroundLight: PaletteFunction = ({
 				case ArticleDesign.Video:
 					return sourcePalette.neutral[46];
 				case ArticleDesign.LiveBlog:
-					return sourcePalette.news[400];
+					switch (theme) {
+						case ArticleSpecial.Labs:
+							return sourcePalette.neutral[100];
+						default:
+							return pillarPalette(theme, 400);
+					}
 				default:
 					return sourcePalette.neutral[100];
 			}
@@ -2140,7 +2144,12 @@ const onwardContentCardBackgroundDark: PaletteFunction = ({
 				case ArticleDesign.Video:
 					return sourcePalette.neutral[20];
 				case ArticleDesign.LiveBlog:
-					return sourcePalette.news[200];
+					switch (theme) {
+						case ArticleSpecial.Labs:
+							return sourcePalette.neutral[0];
+						default:
+							return pillarPalette(theme, 200);
+					}
 				default:
 					return sourcePalette.neutral[0];
 			}
@@ -2159,7 +2168,12 @@ const onwardContentCardHoverLight: PaletteFunction = ({ theme, design }) => {
 				case ArticleDesign.Video:
 					return sourcePalette.neutral[20];
 				case ArticleDesign.LiveBlog:
-					return sourcePalette.news[300];
+					switch (theme) {
+						case ArticleSpecial.Labs:
+							return sourcePalette.neutral[97];
+						default:
+							return pillarPalette(theme, 300);
+					}
 				default:
 					return sourcePalette.neutral[97];
 			}
@@ -2179,7 +2193,12 @@ const onwardContentCardHoverDark: PaletteFunction = ({ theme, design }) => {
 				case ArticleDesign.Video:
 					return sourcePalette.neutral[46];
 				case ArticleDesign.LiveBlog:
-					return sourcePalette.news[300];
+					switch (theme) {
+						case ArticleSpecial.Labs:
+							return sourcePalette.neutral[10];
+						default:
+							return pillarPalette(theme, 300);
+					}
 				default:
 					return sourcePalette.neutral[10];
 			}
