@@ -20,6 +20,7 @@ import type { FETrailType } from './trails';
 export interface FEArticleType {
 	headline: string;
 	standfirst: string;
+	affiliateLinksDisclaimer?: string;
 	webTitle: string;
 	mainMediaElements: FEElement[];
 	main: string;

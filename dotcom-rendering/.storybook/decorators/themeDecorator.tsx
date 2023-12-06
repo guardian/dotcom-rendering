@@ -32,6 +32,7 @@ const colourSchemeDecorator =
 		<>
 			{formats.map((format) => (
 				<div
+					data-color-scheme={colourScheme}
 					css={[
 						css(paletteDeclarations(format, colourScheme)),
 						colourScheme === 'dark' ? darkStoryCss : lightStoryCss,

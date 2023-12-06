@@ -2,8 +2,9 @@ import { css } from '@emotion/react';
 import { isNonNullable } from '@guardian/libs';
 import {
 	from,
-	neutral,
+	palette,
 	space,
+	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import {
@@ -198,15 +199,20 @@ export const ShowMore = ({
 					cssOverrides={css`
 						margin-top: ${space[4]}px;
 						margin-right: 10px;
-						color: ${neutral[100]};
-						background-color: ${neutral[7]};
-						border-color: ${neutral[7]};
+						color: ${palette.neutral[100]};
+						background-color: ${palette.neutral[7]};
+						border-color: ${palette.neutral[7]};
 						&:hover {
-							background-color: ${neutral[46]};
-							border-color: ${neutral[46]};
+							background-color: ${palette.neutral[46]};
+							border-color: ${palette.neutral[46]};
 						}
 						${from.tablet} {
 							margin-left: 10px;
+						}
+						/* On smaller screens, button text overflows the container so we wrap to prevent it */
+						${until.phablet} {
+							text-wrap: wrap;
+							height: unset;
 						}
 					`}
 					aria-controls={showMoreContainerId}
