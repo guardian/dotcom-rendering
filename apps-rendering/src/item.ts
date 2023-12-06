@@ -23,10 +23,10 @@ import {
 	fromNullable,
 	map,
 	none,
+	OptionKind,
 	some,
 } from '../vendor/@guardian/types/index';
 import type { Option } from '../vendor/@guardian/types/index';
-import { OptionKind } from '../vendor/@guardian/types/index';
 import { getPillarFromId } from 'articleFormat';
 import type { BodyElement } from 'bodyElement';
 import { parseElements } from 'bodyElement';

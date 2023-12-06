@@ -1,4 +1,5 @@
 import type { Option } from './option';
+
 declare enum ResultKind {
 	Ok = 0,
 	Err = 1,
@@ -97,7 +98,9 @@ declare type Partitioned<E, A> = {
  * @return {Partitioned} An object with two fields, one for the list of `Err`s
  * and one for the list of `Ok`s
  */
-declare const partition: <E, A>(results: Result<E, A>[]) => Partitioned<E, A>;
+declare const partition: <E, A>(
+	results: Array<Result<E, A>>,
+) => Partitioned<E, A>;
 export {
 	ResultKind,
 	ok,
