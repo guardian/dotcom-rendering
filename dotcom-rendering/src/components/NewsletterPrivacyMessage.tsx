@@ -57,14 +57,11 @@ const textStyles = (textColor: 'supporting' | 'regular') => {
 		case 'regular':
 			return css`
 				color: ${sourcePalette.neutral[20]};
-				a {
+				a, strong {
 					color: ${themePalette('--privacy-text-regular')};
 					:hover {
-						color: ${themePalette('--privacy-text-regular')};
+						color: inherit;
 					}
-				}
-				strong {
-					color: ${themePalette('--privacy-text-regular')};
 				}
 			`;
 	}
