@@ -36,7 +36,6 @@ export default merge(base(import.meta.url), {
 						loader: 'swc-loader',
 						options: {
 							jsc: {
-								baseUrl: '.',
 								parser: {
 									syntax: 'typescript',
 									tsx: true,

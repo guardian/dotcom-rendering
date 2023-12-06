@@ -36,7 +36,6 @@ export const web = {
 						loader: 'swc-loader',
 						options: {
 							jsc: {
-								baseUrl: '.',
 								parser: {
 									syntax: 'typescript',
 									tsx: true,
