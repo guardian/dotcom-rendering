@@ -3582,7 +3582,22 @@ const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.specialReportAlt[200];
 	}
 };
-// '--most-viewed-footer-tab
+const recaptchaButtonLight: PaletteFunction = () => sourcePalette.neutral[0];
+const recaptchaButtonDark: PaletteFunction = () => sourcePalette.neutral[86];
+const recaptchaButtonHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+const recaptchaButtonHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const recaptchaButtonTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const recaptchaButtonTextDark: PaletteFunction = () => sourcePalette.neutral[7];
+const recaptchaBorderLight: PaletteFunction = () => sourcePalette.neutral[7];
+const recaptchaBorderDark: PaletteFunction = () => sourcePalette.neutral[86];
+const privacyTextSupportingLight: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
+const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+
 // ----- Palette ----- //
 
 /**
@@ -4105,6 +4120,30 @@ const paletteColours = {
 	'--age-warning-background': {
 		light: ageWarningBackground,
 		dark: ageWarningBackground,
+	},
+	'--recaptcha-button': {
+		light: recaptchaButtonLight,
+		dark: recaptchaButtonDark,
+	},
+	'--recaptcha-button-hover': {
+		light: recaptchaButtonHoverLight,
+		dark: recaptchaButtonHoverDark,
+	},
+	'--recaptcha-button-text': {
+		light: recaptchaButtonTextLight,
+		dark: recaptchaButtonTextDark,
+	},
+	'--recaptcha-border': {
+		light: recaptchaBorderLight,
+		dark: recaptchaBorderDark,
+	},
+	'--privacy-text-supporting': {
+		light: privacyTextSupportingLight,
+		dark: privacyTextDark,
+	},
+	'--privacy-text-regular': {
+		light: privacyTextRegularLight,
+		dark: privacyTextDark,
 	},
 } satisfies PaletteColours;
 

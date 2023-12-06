@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanAction } from '@guardian/libs';
-import { neutral, space, textSans, until } from '@guardian/source-foundations';
+import { space, textSans, until } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
@@ -18,6 +18,7 @@ import { useEffect, useRef, useState } from 'react';
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
 
@@ -37,6 +38,8 @@ type Props = {
 const labelStyles = css`
 	div {
 		${textSans.xsmall({ fontWeight: 'bold' })}
+		color: ${palette('--article-text')};
+		padding-bottom: ${space[1]}px;
 	}
 `;
 
@@ -57,13 +60,16 @@ const inputContainerStyles = css`
 const textInputStyles = css`
 	height: 36px;
 	margin-top: 0;
+	background-color: ${palette('--article-section-background')};
+	color: ${palette('--article-text')};
 `;
 
 const buttonCssOverrides = css`
 	justify-content: center;
-	background-color: ${neutral[0]};
+	background-color: ${palette('--recaptcha-button')};
+	color: ${palette('--recaptcha-button-text')};
 	:hover {
-		background-color: ${neutral[20]};
+		background-color: ${palette('--recaptcha-button-hover')};
 	}
 	flex-basis: 118px;
 	flex-shrink: 0;
@@ -354,9 +360,13 @@ export const SecureReCAPTCHASignup = ({
 							}
 							button {
 								margin-left: ${space[1]}px;
-								background-color: ${neutral[0]};
+								background-color: ${palette(
+									'--recaptcha-button',
+								)};
 								:hover {
-									background-color: ${neutral[20]};
+									background-color: ${palette(
+										'--recaptcha-button-hover',
+									)};
 								}
 							}
 						`}
