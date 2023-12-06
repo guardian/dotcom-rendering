@@ -159,21 +159,21 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 						case ArticleDesign.Recipe:
 						case ArticleDesign.Feature:
 							switch (theme) {
+								case ArticleSpecial.Labs:
+									return sourcePalette.labs[300];
 								case Pillar.News:
 								case Pillar.Sport:
 								case Pillar.Culture:
 								case Pillar.Lifestyle:
 								case Pillar.Opinion:
-									return pillarPalette(theme, 500);
-								case ArticleSpecial.Labs:
-									return sourcePalette.labs[300];
+									return sourcePalette.neutral[86];
 							}
 						case ArticleDesign.Interview:
 						case ArticleDesign.LiveBlog:
 						case ArticleDesign.Picture:
 							return sourcePalette.neutral[100];
 						default:
-							return sourcePalette.neutral[60];
+							return sourcePalette.neutral[86];
 					}
 				}
 			}
