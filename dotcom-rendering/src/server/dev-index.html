@@ -29,54 +29,6 @@
 			.test-article-header > span:nth-child(1) {
 				width: 14em !important;
 			}
-
-			.article-examples {
-				overflow-x: auto;
-
-				& table {
-					text-align: left;
-					border-spacing: 0;
-				}
-
-				& th {
-					padding: 0.5rem 1rem;
-				}
-
-				& thead {
-					background-color: #dcdcdc;
-				}
-
-				& tbody {
-					& tr:nth-child(even) {
-						background-color: #ededed;
-					}
-
-					& tr:nth-child(odd) {
-						background-color: #f6f6f6;
-					}
-				}
-
-				& td {
-					padding: 1rem 2rem 1rem 1rem;
-					max-width: 20rem;
-					min-width: 9rem;
-				}
-
-				& dt {
-					font-weight: bold;
-					display: inline;
-				}
-
-				& dd {
-					display: inline;
-					margin: 0;
-				}
-
-				& .links,
-				& .format {
-					max-width: 9rem;
-				}
-			}
 		</style>
 	</head>
 	<body>
@@ -157,12 +109,89 @@
 		</ul>
 
 		<section>
-			<h2>
-				Article Examples <small><sup>Beta</sup></small>
-			</h2>
+			<h2>Article Examples</h2>
 
-			<div class="article-examples">
-				<table class="article-examples__table">
+			<article-examples>
+				<ul>
+					<li
+						data-design="Standard"
+						data-display="Standard"
+						data-theme="Lifestyle"
+					>
+						<a
+							href="https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+						>
+							Ticket touts face unlimited fines for using 'bots'
+							to buy in bulk
+						</a>
+					</li>
+					<li
+						data-design="Feature"
+						data-display="Showcase"
+						data-theme="News"
+					>
+						<a
+							href="https://www.theguardian.com/cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked"
+						>
+							Reclaimed lakes and giant airports: how Mexico City
+							might have looked
+						</a>
+					</li>
+				</ul>
+			</article-examples>
+
+			<template id="articles-table-template">
+				<style>
+					:host {
+						display: block;
+						overflow-x: auto;
+					}
+
+					table {
+						text-align: left;
+						border-spacing: 0;
+					}
+
+					th {
+						padding: 0.5rem 1rem;
+					}
+
+					thead {
+						background-color: #dcdcdc;
+					}
+
+					tbody {
+						& tr:nth-child(even) {
+							background-color: #ededed;
+						}
+
+						& tr:nth-child(odd) {
+							background-color: #f6f6f6;
+						}
+					}
+
+					td {
+						padding: 1rem 2rem 1rem 1rem;
+						max-width: 20rem;
+						min-width: 9rem;
+					}
+
+					dt {
+						font-weight: bold;
+						display: inline;
+					}
+
+					dd {
+						display: inline;
+						margin: 0;
+					}
+
+					.links,
+					.format {
+						max-width: 9rem;
+					}
+				</style>
+				<table>
 					<thead>
 						<tr>
 							<th rowspan="2">Headline</th>
@@ -175,59 +204,45 @@
 							<th>DEV</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr
-							is="article-row"
-							design="Standard"
-							display="Standard"
-							theme="Lifestyle"
-							href="https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
-							headline="Ticket touts face unlimited fines for using 'bots' to buy in bulk"
-						></tr>
-						<tr
-							is="article-row"
-							design="Feature"
-							display="Showcase"
-							theme="News"
-							href="https://www.theguardian.com/cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked"
-							headline="Reclaimed lakes and giant airports: how Mexico City might have looked"
-						></tr>
-					</tbody>
+					<tbody></tbody>
 				</table>
-			</div>
-
-			<small
-				>This table is in Beta because it doesn't yet work in Safari; it
-				will be updated to add support.</small
-			>
+			</template>
 
 			<template id="article-row-template">
-				<td class="headline"></td>
-				<td class="format">
-					<dl>
-						<dt>Design:</dt>
-						<dd class="design"></dd>
-						<dt>Display:</dt>
-						<dd class="display"></dd>
-						<dt>Theme:</dt>
-						<dd class="theme"></dd>
-					</dl>
-				</td>
-				<td class="links">
-					<article-link product="dotcom" env="PROD"></article-link>
-					<article-link product="apps" env="PROD"></article-link>
-					<article-link product="amp" env="PROD"></article-link>
-				</td>
-				<td class="links">
-					<article-link product="dotcom" env="CODE"></article-link>
-					<article-link product="apps" env="CODE"></article-link>
-					<article-link product="amp" env="CODE"></article-link>
-				</td>
-				<td class="links">
-					<article-link product="dotcom" env="DEV"></article-link>
-					<article-link product="apps" env="DEV"></article-link>
-					<article-link product="amp" env="DEV"></article-link>
-				</td>
+				<tr>
+					<td class="headline"></td>
+					<td class="format">
+						<dl>
+							<dt>Design:</dt>
+							<dd class="design"></dd>
+							<dt>Display:</dt>
+							<dd class="display"></dd>
+							<dt>Theme:</dt>
+							<dd class="theme"></dd>
+						</dl>
+					</td>
+					<td class="links">
+						<article-link
+							product="dotcom"
+							env="PROD"
+						></article-link>
+						<article-link product="apps" env="PROD"></article-link>
+						<article-link product="amp" env="PROD"></article-link>
+					</td>
+					<td class="links">
+						<article-link
+							product="dotcom"
+							env="CODE"
+						></article-link>
+						<article-link product="apps" env="CODE"></article-link>
+						<article-link product="amp" env="CODE"></article-link>
+					</td>
+					<td class="links">
+						<article-link product="dotcom" env="DEV"></article-link>
+						<article-link product="apps" env="DEV"></article-link>
+						<article-link product="amp" env="DEV"></article-link>
+					</td>
+				</tr>
 			</template>
 
 			<template id="article-link-template">
@@ -1037,33 +1052,105 @@
 				}
 			}
 
-			class ArticleRow extends HTMLTableRowElement {
+			class ArticleExamples extends HTMLElement {
 				/** @type {DocumentFragment} */
 				content;
+				/** @type {HTMLTemplateElement} */
+				rowTemplate;
 
 				/**
+				 * @param {DocumentFragment} row
+				 * @param {HTMLElement} dataElement
 				 * @param {string} name
 				 * @return {void}
 				 */
-				setElementFromAttribute(name) {
-					const attribute = this.getAttribute(name);
-					const element = this.content.querySelector(`.${name}`);
+				setElementFromData(row, dataElement, name) {
+					const attribute = dataElement.dataset[name];
+					const element = row.querySelector(`.${name}`);
 
-					if (attribute !== null && element !== null) {
+					if (attribute !== undefined && element !== null) {
 						element.textContent = attribute;
 					}
+				}
+
+				/**
+				 * @param {DocumentFragment} row
+				 * @param {HTMLAnchorElement} anchor
+				 * @return {void}
+				 */
+				setHeadline(row, anchor) {
+					const headlineText = anchor.textContent;
+					const headline = row.querySelector('.headline');
+
+					if (headlineText !== null && headline !== null) {
+						headline.textContent = headlineText;
+					}
+				}
+
+				/**
+				 * @param {DocumentFragment} row
+				 * @param {HTMLAnchorElement} anchor
+				 * @return {void}
+				 */
+				setLinks(row, anchor) {
+					const href = anchor.getAttribute('href');
+
+					if (href !== null) {
+						row.querySelectorAll('article-link').forEach((link) => {
+							link.setAttribute('href', href);
+						});
+					}
+				}
+
+				/**
+				 * @param {HTMLLIElement} listItem
+				 * @return {DocumentFragment}
+				 */
+				tableRow(listItem) {
+					const row = this.rowTemplate.content.cloneNode(true);
+
+					if (!(row instanceof DocumentFragment)) {
+						throw new Error(
+							'article-examples: my row template content should be a DocumentFragment',
+						);
+					}
+
+					const anchor = listItem.querySelector('a');
+
+					if (!(anchor instanceof HTMLAnchorElement)) {
+						throw new Error(
+							'article-examples: each list item should have an anchor',
+						);
+					}
+
+					this.setHeadline(row, anchor);
+					this.setLinks(row, anchor);
+					this.setElementFromData(row, listItem, 'design');
+					this.setElementFromData(row, listItem, 'display');
+					this.setElementFromData(row, listItem, 'theme');
+
+					return row;
 				}
 
 				constructor() {
 					super();
 
 					const template = document.getElementById(
+						'articles-table-template',
+					);
+					const rowTemplate = document.getElementById(
 						'article-row-template',
 					);
 
 					if (!(template instanceof HTMLTemplateElement)) {
 						throw new Error(
-							"article-row: I couldn't find my template element",
+							"article-examples: I couldn't find my template element",
+						);
+					}
+
+					if (!(rowTemplate instanceof HTMLTemplateElement)) {
+						throw new Error(
+							"article-examples: I couldn't find my row template element",
 						);
 					}
 
@@ -1071,35 +1158,29 @@
 
 					if (!(clone instanceof DocumentFragment)) {
 						throw new Error(
-							'article-row: my template content should be a DocumentFragment',
+							'article-examples: my template content should be a DocumentFragment',
 						);
 					}
 
 					this.content = clone;
+					this.rowTemplate = rowTemplate;
 				}
 
 				connectedCallback() {
-					const href = this.getAttribute('href');
+					const rows = Array.from(this.querySelectorAll('li')).map(
+						(li) => this.tableRow(li),
+					);
+					this.content
+						.querySelector('tbody')
+						?.replaceChildren(...rows);
 
-					if (href !== null) {
-						this.content
-							.querySelectorAll('article-link')
-							.forEach((link) => {
-								link.setAttribute('href', href);
-							});
-					}
-
-					this.setElementFromAttribute('headline');
-					this.setElementFromAttribute('design');
-					this.setElementFromAttribute('display');
-					this.setElementFromAttribute('theme');
-
-					this.replaceChildren(this.content);
+					const shadowRoot = this.attachShadow({ mode: 'open' });
+					shadowRoot.replaceChildren(this.content);
 				}
 			}
 
 			customElements.define('article-link', ArticleLink);
-			customElements.define('article-row', ArticleRow, { extends: 'tr' });
+			customElements.define('article-examples', ArticleExamples);
 		</script>
 		<style>
 			/* Olly N. (Nov. 2023)
