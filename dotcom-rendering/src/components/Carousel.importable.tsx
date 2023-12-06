@@ -510,7 +510,7 @@ const CarouselCard = ({
 				kickerText={kickerText}
 				imageUrl={imageUrl}
 				imageSize={'small'}
-				showClock={true}
+				showClock={!isOnwardContent && true}
 				showAge={true}
 				pauseOffscreenVideo={isVideoContainer}
 				showQuotedHeadline={format.design === ArticleDesign.Comment}
