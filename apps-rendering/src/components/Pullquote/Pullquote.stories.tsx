@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { some } from '@guardian/types';
+import { some } from '../../../vendor/@guardian/types/index';
 import type { FC } from 'react';
 import Pullquote from './';
 

@@ -1,6 +1,6 @@
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import type { Image as ImageData } from 'image/image';
-import { fromNullable } from '@guardian/types';
+import { fromNullable } from '../vendor/@guardian/types/index';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { CartoonImage } from '@guardian/content-api-models/v1/cartoonImage';

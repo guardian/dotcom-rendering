@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { some } from '@guardian/types';
+import { some } from '../../../vendor/@guardian/types/index';
 import { article, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import StarRating from './';

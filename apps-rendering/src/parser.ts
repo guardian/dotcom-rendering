@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import type { Option } from '@guardian/types';
+import type { Option } from '../vendor/@guardian/types/index';
 import { Result } from 'result';
 
 // ----- Types ----- //

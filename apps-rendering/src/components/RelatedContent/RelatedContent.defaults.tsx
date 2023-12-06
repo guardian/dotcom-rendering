@@ -10,8 +10,8 @@ import {
 	remSpace,
 	until,
 } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { map, none, withDefault } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import { map, none, withDefault } from '../../../vendor/@guardian/types/index';
 import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import type { ResizedRelatedContent } from 'item';

@@ -2,8 +2,8 @@
 
 import { css } from '@emotion/react';
 import { neutral, remSpace } from '@guardian/source-foundations';
-import { withDefault } from '@guardian/types';
-import type { Option } from '@guardian/types';
+import { withDefault } from '../../../vendor/@guardian/types/index';
+import type { Option } from '../../../vendor/@guardian/types/index';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

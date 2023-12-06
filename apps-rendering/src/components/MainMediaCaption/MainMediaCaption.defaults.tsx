@@ -10,8 +10,8 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgCamera } from '@guardian/source-react-components';
-import type { Option } from '@guardian/types';
-import { OptionKind, withDefault } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import { OptionKind, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Styleable } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';

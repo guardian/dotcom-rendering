@@ -3,8 +3,12 @@
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import type { Option } from '@guardian/types';
-import { map, OptionKind, withDefault } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import {
+	map,
+	OptionKind,
+	withDefault,
+} from '../../../vendor/@guardian/types/index';
 import AdSlot from 'adSlot';
 import LiveBlock from 'components/LiveBlock';
 import PinnedPost from 'components/PinnedPost';

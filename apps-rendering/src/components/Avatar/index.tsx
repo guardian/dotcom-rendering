@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
-import { map, withDefault } from '@guardian/types';
+import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import Img from 'components/Img';
 import { isSingleContributor } from 'contributor';
 import type { Contributor } from 'contributor';

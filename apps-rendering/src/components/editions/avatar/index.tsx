@@ -1,7 +1,12 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { map, none, some, withDefault } from '@guardian/types';
+import {
+	map,
+	none,
+	some,
+	withDefault,
+} from '../../../../vendor/@guardian/types/index';
 import Img from 'components/ImgAlt';
 import type { Sizes } from 'image/sizes';
 import type { Item } from 'item';

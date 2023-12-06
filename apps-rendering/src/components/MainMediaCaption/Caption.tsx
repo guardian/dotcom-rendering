@@ -3,8 +3,8 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, textSans } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { OptionKind } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import { OptionKind } from '../../../vendor/@guardian/types/index';
 import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getHref } from 'renderer';
