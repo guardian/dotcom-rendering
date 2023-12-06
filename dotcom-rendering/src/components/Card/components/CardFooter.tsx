@@ -13,12 +13,11 @@ type Props = {
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	supportingContent?: JSX.Element;
-	rightAlign?: boolean;
 };
 
-const spacing = (rightAlign: boolean) => css`
+const spacing = () => css`
 	display: flex;
-	justify-content: ${rightAlign ? 'flex-end' : 'space-between'};
+	justify-content: flex-start;
 	align-items: center;
 `;
 
@@ -40,7 +39,6 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	supportingContent,
-	rightAlign = false,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -59,7 +57,7 @@ export const CardFooter = ({
 		return (
 			<footer css={margins}>
 				{supportingContent}
-				<div css={spacing(rightAlign)}>
+				<div css={spacing}>
 					{age}
 					{displayLines && (
 						<StraightLines
@@ -84,7 +82,7 @@ export const CardFooter = ({
 		return (
 			<footer css={margins}>
 				{supportingContent}
-				<div css={spacing(rightAlign)}>
+				<div css={spacing}>
 					{age}
 					{commentCount}
 				</div>
