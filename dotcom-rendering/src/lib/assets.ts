@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { isObject, isString } from '@guardian/libs';
+import { isObject, isString, isUndefined } from '@guardian/libs';
 import { BUILD_VARIANT, dcrJavascriptBundle } from '../../webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
 import { makeMemoizedFunction } from './memoize';
@@ -25,7 +25,7 @@ export const decideAssetOrigin = (
 		case 'CODE':
 			return 'https://assets-code.guim.co.uk/';
 		default: {
-			if (isDev) {
+			if (isDev && isUndefined(process.env.HOSTNAME)) {
 				// Use absolute asset paths in development mode
 				// This is so paths are correct when treated as relative to Frontend
 				return 'http://localhost:3030/';
