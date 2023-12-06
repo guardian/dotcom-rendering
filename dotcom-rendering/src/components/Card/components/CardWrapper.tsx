@@ -127,6 +127,12 @@ const onwardContentCardStyles = css`
 	border-radius: ${space[2]}px;
 `;
 
+const onwardContentHoverStyles = css`
+	:hover {
+		background-color: ${palette('--onward-content-card-hover')};
+	}
+`;
+
 const topBarStyles = ({
 	isDynamo,
 	format,
@@ -179,10 +185,12 @@ export const CardWrapper = ({
 				<div
 					css={[
 						baseCardStyles,
-						hoverStyles(format),
 						containerPalette &&
 							containerPaletteStyles(containerPalette),
 						isOnwardContent ? onwardContentCardStyles : cardStyles,
+						isOnwardContent
+							? onwardContentHoverStyles
+							: hoverStyles(format),
 						showTopBar && topBarStyles({ isDynamo, format }),
 					]}
 				>

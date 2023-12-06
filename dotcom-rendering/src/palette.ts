@@ -1998,16 +1998,91 @@ const cardBackgroundDark: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[0];
 	}
 };
-const onwardContentCardBackgroundLight: PaletteFunction = (format) => {
-	const cardBackground = cardBackgroundLight(format);
-	if (cardBackground === sourcePalette.neutral[97]) return 'transparent';
-	return cardBackground;
+const onwardContentCardBackgroundLight: PaletteFunction = ({
+	theme,
+	design,
+}) => {
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.neutral[46];
+
+		default:
+			switch (design) {
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Video:
+					return sourcePalette.neutral[46];
+				case ArticleDesign.LiveBlog:
+					return sourcePalette.news[400];
+				default:
+					return sourcePalette.neutral[100];
+			}
+	}
 };
-const onwardContentCardBackgroundDark: PaletteFunction = (format) => {
-	const cardBackground = cardBackgroundDark(format);
-	if (cardBackground === sourcePalette.neutral[0]) return 'transparent';
-	return cardBackground;
+
+const onwardContentCardBackgroundDark: PaletteFunction = ({
+	theme,
+	design,
+}) => {
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.neutral[20];
+
+		default:
+			switch (design) {
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Video:
+					return sourcePalette.neutral[20];
+				case ArticleDesign.LiveBlog:
+					return sourcePalette.news[200];
+				default:
+					return sourcePalette.neutral[0];
+			}
+	}
 };
+
+const onwardContentCardHoverLight: PaletteFunction = ({ theme, design }) => {
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.neutral[20];
+		default:
+			switch (design) {
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Video:
+					return sourcePalette.neutral[20];
+				case ArticleDesign.LiveBlog:
+					return sourcePalette.news[300];
+				default:
+					return sourcePalette.neutral[97];
+			}
+	}
+};
+
+const onwardContentCardHoverDark: PaletteFunction = ({ theme, design }) => {
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.neutral[46];
+
+		default:
+			switch (design) {
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Video:
+					return sourcePalette.neutral[46];
+				case ArticleDesign.LiveBlog:
+					return sourcePalette.news[300];
+				default:
+					return sourcePalette.neutral[10];
+			}
+	}
+};
+
 const cardHeadlineTextLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return sourcePalette.neutral[100];
@@ -3789,6 +3864,10 @@ const paletteColours = {
 	'--onward-content-card-background': {
 		light: onwardContentCardBackgroundLight,
 		dark: onwardContentCardBackgroundDark,
+	},
+	'--onward-content-card-hover': {
+		light: onwardContentCardHoverLight,
+		dark: onwardContentCardHoverDark,
 	},
 	'--card-headline-trail-text': {
 		light: cardHeadlineTextLight,
