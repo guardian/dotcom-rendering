@@ -25,7 +25,7 @@ export const decideAssetOrigin = (
 		case 'CODE':
 			return 'https://assets-code.guim.co.uk/';
 		default: {
-			if (isDev) {
+			if (isDev && process.env.HOSTNAME === undefined) {
 				// Use absolute asset paths in development mode
 				// This is so paths are correct when treated as relative to Frontend
 				return 'http://localhost:3030/';
