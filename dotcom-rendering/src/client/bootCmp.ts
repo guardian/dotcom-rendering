@@ -101,7 +101,7 @@ const submitConsentToOphan = async (renderingTarget: RenderingTarget) => {
 			return {
 				consentJurisdiction: 'CCPA',
 				consentUUID: getCookie({ name: 'ccpaUUID' }) ?? '',
-				consent: !consentState.ccpa.doNotSell ? 'true' : 'false',
+				consent: consentState.ccpa.doNotSell ? 'false' : 'true',
 			};
 		}
 		if (consentState.aus) {
