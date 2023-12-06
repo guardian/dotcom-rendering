@@ -45,7 +45,6 @@ import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
@@ -684,9 +683,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								)}
 								<StraightLines
 									count={4}
-									color={
-										decidePalette(format).border.secondary
-									}
+									color={themePalette('--straight-lines')}
 								/>
 								<SubMeta
 									format={format}
