@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
-import { decideFormat } from '../lib/decideFormat';
 import { decidePalette } from '../lib/decidePalette';
 import { palette as sourcePalette } from '../palette';
 import type { Palette } from '../types/palette';
@@ -8,10 +7,10 @@ import type { Palette } from '../types/palette';
 type Props = {
 	position: number;
 	html: string;
-	format: FEFormat;
+	format: ArticleFormat;
 };
 
-const titleStyles = (palette: Palette) => css`
+const titleStyles = () => css`
 	h2 {
 		${headline.medium({ fontWeight: 'light' })}
 	}
@@ -34,7 +33,8 @@ export const NumberedTitleBlockComponent = ({
 	html,
 	format,
 }: Props) => {
-	const palette = decidePalette(decideFormat(format));
+	const palette = decidePalette(format);
+
 	return (
 		<div
 			css={css`
@@ -43,7 +43,7 @@ export const NumberedTitleBlockComponent = ({
 		>
 			<div css={numberStyles(palette)}>{position}</div>
 			<div
-				css={titleStyles(palette)}
+				css={titleStyles()}
 				dangerouslySetInnerHTML={{ __html: html }}
 			/>
 		</div>
