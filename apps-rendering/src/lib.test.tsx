@@ -252,7 +252,7 @@ describe('maybeRender', () => {
 		expect(maybeRender(some(''), (value) => <>{value}</>))
 			.toMatchInlineSnapshot(`
 		<React.Fragment>
-
+		  
 		</React.Fragment>
 	`);
 	});
