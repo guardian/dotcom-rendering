@@ -273,11 +273,34 @@ SingleItemCarousel.decorators = [
 ];
 export const SingleOpinionCarousel = () => {
 	mockCommentCount();
+	const comment = {
+		url: 'https://www.theguardian.com/sport/2023/dec/04/golf-pga-tour-liv-rory-mcilroy-tiger-woods-jon-rahm',
+		linkText:
+			'Golf’s obscene money list shows sport is in danger of losing the plot | Ewan Murray',
+		showByline: true,
+		byline: 'Ewan Murray',
+		image: 'https://i.guim.co.uk/img/media/06ddef097983c7590f45243f2128e4c8dffdcfbf/0_47_4170_2502/master/4170.jpg?width=300&quality=85&auto=format&fit=max&s=79cde35702ccaf33215ac48a2b11f44d',
+		format: {
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Opinion,
+			design: ArticleDesign.Comment,
+		},
+		webPublicationDate: new Date(Date.now() - 60 * 60 * 1000).toString(),
+		headline: 'Sport opinion card example',
+		shortUrl: 'https://www.theguardian.com/p/pf8g9',
+		dataLinkName: 'comment | group-0 | card-@1',
+		discussion: {
+			isCommentable: true,
+			isClosedForComments: false,
+			discussionId: mockDiscussionId,
+		},
+	};
+
 	return (
 		<Section fullWidth={true}>
 			<Carousel
 				heading="More on this story"
-				trails={trails.slice(1, 2)}
+				trails={[comment]}
 				onwardsSource="more-on-this-story"
 				format={{
 					theme: Pillar.Opinion,
