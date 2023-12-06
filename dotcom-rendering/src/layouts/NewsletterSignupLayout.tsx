@@ -335,7 +335,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 				<Section
 					showTopBorder={false}
 					showSideBorders={false}
-					backgroundColour={sourcePalette.brand[400]}
+					innerBackgroundColour={sourcePalette.brand[400]}
 					leftContent={
 						<div css={leftColWrapperStyle}>
 							<Hide until="leftCol">
