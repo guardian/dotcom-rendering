@@ -271,6 +271,30 @@ SingleItemCarousel.storyName = 'Carousel with single item';
 SingleItemCarousel.decorators = [
 	splitTheme([defaultFormat], { orientation: 'vertical' }),
 ];
+export const SingleOpinionCarousel = () => {
+	mockCommentCount();
+	return (
+		<Section fullWidth={true}>
+			<Carousel
+				heading="More on this story"
+				trails={trails.slice(1, 2)}
+				onwardsSource="more-on-this-story"
+				format={{
+					theme: Pillar.Opinion,
+					design: ArticleDesign.Comment,
+					display: ArticleDisplay.Standard,
+				}}
+				leftColSize="compact"
+				discussionApiUrl={discussionApiUrl}
+			/>
+		</Section>
+	);
+};
+
+SingleOpinionCarousel.storyName = 'Carousel with single comment item';
+SingleOpinionCarousel.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
 
 export const Immersive = () => {
 	mockCommentCount();
@@ -407,7 +431,9 @@ export const AllCards = () => {
 				theme: Pillar.Opinion,
 				design: ArticleDesign.Comment,
 			},
-			webPublicationDate: '2023-12-04T11:25:11.000Z',
+			webPublicationDate: new Date(
+				Date.now() - 60 * 60 * 1000,
+			).toString(),
 			headline: 'Opinion card example',
 			shortUrl: 'https://www.theguardian.com/p/pecpq',
 			discussion: {

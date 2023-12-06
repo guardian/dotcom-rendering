@@ -156,30 +156,17 @@ const DecideFooter = ({
 	isOpinion,
 	hasSublinks,
 	isOnwardContent,
-	showCommentFooter,
 	renderFooter,
-	palette,
 }: {
 	isOpinion: boolean;
 	hasSublinks?: boolean;
 	isOnwardContent?: boolean;
-	showCommentFooter?: boolean;
 	renderFooter: RenderFooter;
-	palette: Palette;
 }) => {
-	if (isOpinion && isOnwardContent && showCommentFooter) {
-		return (
-			<CommentFooter
-				hasSublinks={hasSublinks}
-				palette={palette}
-				renderFooter={renderFooter}
-			/>
-		);
-	}
-
-	if (isOpinion && !hasSublinks) {
+	if (isOpinion && !hasSublinks && !isOnwardContent) {
 		// Opinion cards without sublinks render the entire footer, including lines,
 		// outside, sitting along the very bottom of the card
+		// Unless they are onwardContent cards
 		return null;
 	}
 	// For all other cases (including opinion cards that *do* have sublinks) we
@@ -187,8 +174,6 @@ const DecideFooter = ({
 	return renderFooter({
 		displayLines: false,
 	});
-	// Note. Opinion cards that are not onwardsContent cards always show the lines at the bottom if the card (in CommentFooter)
-	// If they are onwardsContent cards, they still show the lines, but in the middle of the card
 };
 
 const CommentFooter = ({
@@ -408,7 +393,9 @@ export const Card = ({
 	// Otherwise, this is handled by the YoutubeAtom
 	const showPlayIcon =
 		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
-	const showCommentFooter = isOpinion && !isDynamo;
+
+	// We want to show the comment footer with lines, for opinion cards that are not onwardsContent or dynamo
+	const showCommentLinesFooter = isOpinion && !isDynamo && !isOnwardContent;
 
 	const media = getMedia({
 		imageUrl,
@@ -651,10 +638,8 @@ export const Card = ({
 							<DecideFooter
 								isOpinion={isOpinion}
 								hasSublinks={hasSublinks}
-								isOnwardContent={isOnwardContent}
-								showCommentFooter={showCommentFooter}
 								renderFooter={renderFooter}
-								palette={palette}
+								isOnwardContent={isOnwardContent}
 							/>
 							{hasSublinks && sublinkPosition === 'inner' && (
 								<SupportingContent
@@ -679,7 +664,7 @@ export const Card = ({
 					alignment={supportingContentAlignment}
 				/>
 			)}
-			{!isOnwardContent && showCommentFooter && (
+			{showCommentLinesFooter && (
 				<CommentFooter
 					hasSublinks={hasSublinks}
 					palette={palette}
