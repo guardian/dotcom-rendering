@@ -143,7 +143,7 @@ export const splitTheme =
 			}}
 		>
 			<div
-				className="light"
+				data-color-scheme="light"
 				css={[
 					css`
 						background-color: ${sourcePalette.neutral[100]};
@@ -167,7 +167,7 @@ export const splitTheme =
 				))}
 			</div>
 			<div
-				className="dark"
+				data-color-scheme="dark"
 				css={[
 					css`
 						background-color: ${sourcePalette.neutral[0]};
