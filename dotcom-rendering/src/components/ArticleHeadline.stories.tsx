@@ -5,6 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import { palette } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { getAllThemes } from '../lib/format';
@@ -723,7 +724,7 @@ MatchReport.decorators = [
 
 export const LiveBlog: StoryObj = ({ format }: StoryArgs) => {
 	return (
-		<Section fullWidth={true} backgroundColour="#AB0613">
+		<Section fullWidth={true} backgroundColour={palette.news[300]}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>

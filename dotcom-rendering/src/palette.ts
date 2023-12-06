@@ -45,7 +45,7 @@ const pillarPalette = (
 	}
 };
 
-const headlineColourLight: PaletteFunction = ({ design, display, theme }) => {
+const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (design) {
@@ -112,7 +112,7 @@ const headlineColourLight: PaletteFunction = ({ design, display, theme }) => {
 			return sourcePalette.neutral[7];
 	}
 };
-const headlineColourDark: PaletteFunction = ({ design, display, theme }) => {
+const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (design) {
@@ -3764,8 +3764,8 @@ const paletteColours = {
 		dark: datelineDark,
 	},
 	'--headline-colour': {
-		light: headlineColourLight,
-		dark: headlineColourDark,
+		light: headlineTextLight,
+		dark: headlineTextDark,
 	},
 	'--headline-border': {
 		light: headlineBorder,
