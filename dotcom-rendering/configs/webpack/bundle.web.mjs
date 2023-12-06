@@ -9,14 +9,14 @@
 
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import { merge } from 'webpack-merge';
-import { getBrowserTargets } from '../../scripts/webpack/browser-targets.js';
+import { getBrowserTargets } from '../../webpack/browser-targets.js';
 import { base } from './base.mjs';
 
 /** @type {import("webpack").Configuration} */
 export const web = {
 	entry: {
-		index: './src/client/index.ts',
-		debug: './src/client/debug/index.ts',
+		index: './src/client/main.web.ts',
+		debug: './src/client/debug/debug.ts',
 	},
 	module: {
 		rules: [

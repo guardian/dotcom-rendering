@@ -12,7 +12,6 @@ import { fileURLToPath } from 'node:url';
 // eslint-disable-next-line import/no-named-as-default -- it’s how webpack works
 import webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
 import WebpackMessages from 'webpack-messages';
 import { isDev, isProd, mode } from './utils/env.mjs';
 
@@ -59,9 +58,6 @@ export const base = (name) => {
 			new webpack.DefinePlugin({
 				'process.env.NODE_ENV': JSON.stringify(mode),
 				'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
-			}),
-			new FilterWarningsPlugin({
-				exclude: /export .* was not found in/,
 			}),
 			// Matching modules specified in this regex will not be imported
 			// during the webpack build We use this if there are optional

@@ -1,4 +1,4 @@
-import { log, prompt, warn } from '../../../scripts/env/log.js';
+import { log, prompt, warn } from '../../../../scripts/log.js';
 
 if (!['development', 'production'].includes(process.env.NODE_ENV)) {
 	warn(`Invalid NODE_ENV value ("${String(process.env.NODE_ENV)}")`);

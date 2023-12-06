@@ -13,7 +13,7 @@ import { base } from './base.mjs';
 /** @type {import("webpack").Configuration} */
 export const server = {
 	entry: {
-		server: './src/server/index.ts',
+		server: './src/server/server.ts',
 	},
 	output: {
 		filename: `[name].js`,
