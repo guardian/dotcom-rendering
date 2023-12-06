@@ -4,9 +4,6 @@ export type Palette = {
 	text: {
 		headline: Colour;
 		headlineWhenMatch: Colour;
-		seriesTitle: Colour;
-		sectionTitle: Colour;
-		seriesTitleWhenMatch: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		cardHeadline: Colour;
@@ -43,8 +40,6 @@ export type Palette = {
 		analysisContrast: Colour;
 		analysisContrastHover: Colour;
 		audioAtom: Colour;
-		seriesTitle: Colour;
-		sectionTitle: Colour;
 		card: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;

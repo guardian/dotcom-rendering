@@ -5,9 +5,9 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { ArticleTitle } from './ArticleTitle';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -561,12 +561,28 @@ export const ArticleDeadBlogTitle = () => {
 };
 
 ArticleDeadBlogTitle.storyName = 'Deadblog - All pillars';
-ArticleDeadBlogTitle.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-			design: ArticleDesign.Standard,
-		},
-	]),
-];
+
+export const ArticleTitleAll = () => {
+	return (
+		<>
+			<ArticleTitle
+				{...FEArticle}
+				format={{
+					display: ArticleDisplay.Standard,
+					theme: Pillar.News,
+					design: ArticleDesign.Standard,
+				}}
+				tags={[
+					{
+						id: '',
+						title: 'Article title',
+						type: 'Blog',
+					},
+				]}
+			/>
+		</>
+	);
+};
+
+ArticleTitleAll.storyName = 'ArticleTitleAll';
+ArticleTitleAll.decorators = [splitTheme()];
