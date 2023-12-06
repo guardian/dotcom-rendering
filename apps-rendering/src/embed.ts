@@ -2,8 +2,8 @@
 
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
-import { fromNullable, withDefault } from '@guardian/types';
-import type { Option } from '@guardian/types';
+import { fromNullable, withDefault } from '../vendor/@guardian/types/index';
+import type { Option } from '../vendor/@guardian/types/index';
 import { parseIntOpt, pipe, resultFromNullable } from 'lib';
 import { Optional } from 'optional';
 import type { DocParser } from 'parserContext';

@@ -1,4 +1,4 @@
-import { none, some } from '@guardian/types';
+import { none, some } from '../../vendor/@guardian/types/index';
 import type { Image } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import { ImageSubtype } from 'image/image';

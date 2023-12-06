@@ -28,8 +28,8 @@ import {
 	OptionKind,
 	some,
 	withDefault,
-} from '@guardian/types';
-import type { Option } from '@guardian/types';
+} from '../../../vendor/@guardian/types/index';
+import type { Option } from '../../../vendor/@guardian/types/index';
 import { getPillarOrElseNews } from 'articleFormat';
 import Img from 'components/ImgAlt';
 import Kicker from 'components/Kicker';

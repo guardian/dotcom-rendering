@@ -10,7 +10,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { SvgClock, SvgNewsletter } from '@guardian/source-react-components';
-import { OptionKind } from '@guardian/types/dist/option';
+import { OptionKind } from '../../../vendor/@guardian/types/index';
 import ArticleBody from 'components/ArticleBody';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
