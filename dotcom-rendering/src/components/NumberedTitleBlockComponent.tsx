@@ -10,7 +10,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const titleStyles = () => css`
+const titleStyles = css`
 	h2 {
 		${headline.medium({ fontWeight: 'light' })}
 	}
@@ -42,10 +42,7 @@ export const NumberedTitleBlockComponent = ({
 			`}
 		>
 			<div css={numberStyles(palette)}>{position}</div>
-			<div
-				css={titleStyles()}
-				dangerouslySetInnerHTML={{ __html: html }}
-			/>
+			<div css={titleStyles} dangerouslySetInnerHTML={{ __html: html }} />
 		</div>
 	);
 };

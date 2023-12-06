@@ -2475,20 +2475,7 @@ const numberedListTitleLight: PaletteFunction = ({ theme }) => {
 };
 
 const numberedListTitleDark: PaletteFunction = ({ theme }) => {
-	switch (theme) {
-		case Pillar.News:
-		case Pillar.Sport:
-		case Pillar.Lifestyle:
-		case Pillar.Culture:
-		case Pillar.Opinion:
-			return pillarPalette(theme, 500);
-		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
-		case ArticleSpecial.SpecialReport:
-			return sourcePalette.specialReport[500];
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[300];
-	}
+	return sourcePalette.neutral[86];
 };
 
 const summaryEventBulletLight: PaletteFunction = ({ theme }) => {
