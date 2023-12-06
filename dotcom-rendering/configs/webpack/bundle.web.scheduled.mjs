@@ -14,8 +14,8 @@ import { web } from './bundle.web.mjs';
 /** @type {import("webpack").Configuration} */
 export const webScheduled = {
 	entry: {
-		index: './src/client/index.scheduled.ts',
-		debug: './src/client/debug/index.ts',
+		index: './src/client/main.web.ts',
+		debug: './src/client/debug/debug.ts',
 	},
 };
 

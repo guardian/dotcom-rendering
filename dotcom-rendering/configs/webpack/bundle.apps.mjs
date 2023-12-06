@@ -15,8 +15,8 @@ import { base } from './base.mjs';
 
 export default merge(base(import.meta.url), {
 	entry: {
-		index: './src/client/index.ts',
-		debug: './src/client/debug/index.ts',
+		index: './src/client/main.web.ts',
+		debug: './src/client/debug/debug.ts',
 	},
 	module: {
 		rules: [
