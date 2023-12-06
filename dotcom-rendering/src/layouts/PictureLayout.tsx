@@ -296,9 +296,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
+							backgroundColour={sourcePalette.brand[400]}
 							element="header"
 						>
 							<Header
@@ -327,9 +325,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							borderColour={sourcePalette.brand[600]}
 							showTopBorder={false}
 							padSides={false}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
+							backgroundColour={sourcePalette.brand[400]}
 							element="nav"
 							format={format}
 						>
@@ -382,6 +378,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 										)}
 										borderColour={themePalette(
 											'--sub-nav-border',
+										)}
+										subNavLinkColour={themePalette(
+											'--sub-nav-link',
 										)}
 									/>
 								</Island>
