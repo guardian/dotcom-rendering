@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { lightDecorator } from '.storybook/decorators/themeDecorator';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import type { WitnessAssetType } from '../types/content';
 import {
 	WitnessImageBlockComponent,
