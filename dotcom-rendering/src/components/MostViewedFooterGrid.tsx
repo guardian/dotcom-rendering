@@ -46,7 +46,7 @@ const listTab = css`
 	padding: 0 0 0;
 	margin-bottom: 16px;
 	width: 240px;
-	min-height: 28px;
+	height: 28px;
 `;
 
 const firstTab = css`

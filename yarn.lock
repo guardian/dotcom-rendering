@@ -882,7 +882,7 @@
     json5 "^2.2.2"
     semver "^6.3.0"
 
-"@babel/core@^7.18.9", "@babel/core@^7.23.0", "@babel/core@^7.23.2":
+"@babel/core@^7.16.7", "@babel/core@^7.18.9", "@babel/core@^7.23.0", "@babel/core@^7.23.2":
   version "7.23.5"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.23.5.tgz#6e23f2acbcb77ad283c5ed141f824fd9f70101c7"
   integrity sha512-Cwc2XjUrG4ilcfOw4wBAK+enbdgwAcAJCfGUItPBKR7Mjw4aEfAFYrLxeRp4jWgtNIKn3n2AlBOfwwafl+42/g==
