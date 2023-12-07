@@ -17,6 +17,7 @@ const loadPage = async (
 	path: string,
 	waitUntil: 'load' | 'domcontentloaded' = 'domcontentloaded',
 	region = 'GB',
+	preventSupportBanner = true,
 ): Promise<void> => {
 	await page.addInitScript((regionProvided) => {
 		// force geo region
@@ -24,11 +25,12 @@ const loadPage = async (
 			'gu.geo.override',
 			JSON.stringify({ value: regionProvided }),
 		);
-		// prevent support banner
-		window.localStorage.setItem(
-			'gu.prefs.engagementBannerLastClosedAt',
-			`{"value":"${new Date().toISOString()}"}`,
-		);
+		if (preventSupportBanner) {
+			window.localStorage.setItem(
+				'gu.prefs.engagementBannerLastClosedAt',
+				`{"value":"${new Date().toISOString()}"}`,
+			);
+		}
 	}, region);
 	// Abort all ophan requests as they hang and stop the page from firing the 'load' event
 	await page.route(/ophan.theguardian.com/, async (route) => {

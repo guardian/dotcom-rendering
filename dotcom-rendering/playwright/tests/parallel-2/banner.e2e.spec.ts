@@ -43,6 +43,9 @@ test.describe('The banner', function () {
 		await loadPage(
 			page,
 			`/Article/https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people`,
+			'domcontentloaded',
+			'GB',
+			false,
 		);
 
 		await rrBannerRequestPromise;
