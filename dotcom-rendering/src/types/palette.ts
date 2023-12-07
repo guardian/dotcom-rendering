@@ -78,8 +78,6 @@ export type Palette = {
 		headline: Colour;
 		navPillar: Colour;
 		lines: Colour;
-		matchTab: Colour;
-		activeMatchTab: Colour;
 		cricketScoreboardTop: Colour;
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;

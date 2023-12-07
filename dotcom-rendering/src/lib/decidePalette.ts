@@ -860,16 +860,6 @@ const borderHeadline = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
-/** @deprecated this has been moved to the theme palette ('--match-tab-border) */
-const matchTab = (): string => {
-	return border.secondary;
-};
-
-/** @deprecated this has been moved to the theme palette ('--match-active-tab-border) */
-const activeMatchTab = (): string => {
-	return sport[300];
-};
-
 const borderCardSupporting = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Comment:
@@ -1436,8 +1426,6 @@ export const decidePalette = (
 			lines: overrides?.border.lines ?? borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
-			matchTab: matchTab(),
-			activeMatchTab: activeMatchTab(),
 			cardSupporting: borderCardSupporting(format),
 			filterButton: borderFilterButton(),
 			secondary: borderSecondary(format),
