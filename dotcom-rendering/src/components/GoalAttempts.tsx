@@ -4,7 +4,6 @@ import {
 	palette as sourcePalette,
 	textSans,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
 import { isLight } from '../lib/isLight';
 import { transparentColour } from '../lib/transparentColour';
 import { palette as themePalette } from '../palette';
@@ -12,7 +11,6 @@ import { palette as themePalette } from '../palette';
 type Props = {
 	left: SectionType;
 	right: SectionType;
-	format: ArticleFormat;
 };
 
 type SectionType = {
@@ -77,16 +75,12 @@ const Side = ({
 	onTarget,
 	teamColours,
 	position,
-	format,
 }: {
 	offTarget: number;
 	onTarget: number;
 	teamColours: string;
 	position: 'left' | 'right';
-	format: ArticleFormat;
 }) => {
-	const palette = decidePalette(format);
-
 	return (
 		<div
 			css={[
@@ -142,7 +136,7 @@ const Side = ({
 	);
 };
 
-export const GoalAttempts = ({ left, right, format }: Props) => {
+export const GoalAttempts = ({ left, right }: Props) => {
 	return (
 		<Row>
 			<Side
@@ -150,14 +144,12 @@ export const GoalAttempts = ({ left, right, format }: Props) => {
 				offTarget={left.offTarget}
 				onTarget={left.onTarget}
 				teamColours={left.color}
-				format={format}
 			/>
 			<Side
 				position="right"
 				offTarget={right.offTarget}
 				onTarget={right.onTarget}
 				teamColours={right.color}
-				format={format}
 			/>
 		</Row>
 	);
