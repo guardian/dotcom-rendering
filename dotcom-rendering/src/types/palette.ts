@@ -21,9 +21,6 @@ export type Palette = {
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
-		witnessIcon: Colour;
-		witnessAuthor: Colour;
-		witnessTitle: Colour;
 		carouselTitle: Colour;
 		pagination: Colour;
 		numberedTitle: Colour;

@@ -308,12 +308,15 @@ const textArticleLink = (format: ArticleFormat): string => {
 const textDisclaimerLink = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
+/** @deprecated this has been moved to the theme palette (--witness-title-icon) */
 const textWitnessIcon = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].main;
 
+/** @deprecated this has been moved to the theme palette (--witness-title-text) */
 const textWitnessTitle = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].main;
 
+/** @deprecated this has been moved to the theme palette (--witness-title-author) */
 const textWitnessAuthor = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].main;
 
@@ -1384,9 +1387,6 @@ export const decidePalette = (
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),
 			pagination: textPagination(format),
-			witnessIcon: textWitnessIcon(format),
-			witnessAuthor: textWitnessAuthor(format),
-			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
