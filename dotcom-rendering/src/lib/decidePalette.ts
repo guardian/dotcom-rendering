@@ -51,78 +51,6 @@ const blogsGrayBackgroundPalette = (format: ArticleFormat): string => {
 	}
 };
 
-const textHeadline = (format: ArticleFormat): string => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			switch (format.design) {
-				case ArticleDesign.PrintShop:
-					switch (format.theme) {
-						case ArticleSpecial.SpecialReport:
-							return palette.neutral[100];
-						default:
-							return palette.neutral[7];
-					}
-				default: {
-					return palette.neutral[100];
-				}
-			}
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReport: {
-					switch (format.design) {
-						case ArticleDesign.Interview:
-							return palette.neutral[100];
-						default:
-							return palette.specialReport[100];
-					}
-				}
-				case ArticleSpecial.SpecialReportAlt: {
-					switch (format.design) {
-						case ArticleDesign.Interview:
-							return palette.specialReport[800];
-						case ArticleDesign.LiveBlog:
-							return palette.neutral[100];
-						case ArticleDesign.DeadBlog:
-							return palette.neutral[7];
-						default:
-							return palette.neutral[7];
-					}
-				}
-				default: {
-					switch (format.design) {
-						case ArticleDesign.Review:
-						case ArticleDesign.Recipe:
-						case ArticleDesign.Feature:
-							switch (format.theme) {
-								case Pillar.News:
-									return palette.news[300];
-								case Pillar.Sport:
-									return palette.sport[300];
-								case Pillar.Culture:
-									return palette.culture[300];
-								case Pillar.Lifestyle:
-									return palette.lifestyle[300];
-								case Pillar.Opinion:
-									return palette.opinion[300];
-								case ArticleSpecial.Labs:
-									return palette.labs[300];
-							}
-						case ArticleDesign.Interview:
-						case ArticleDesign.LiveBlog:
-						case ArticleDesign.Picture:
-							return palette.neutral[100];
-						default:
-							return palette.neutral[7];
-					}
-				}
-			}
-		default:
-			return palette.neutral[7];
-	}
-};
-
 const textSeriesTitle = (format: ArticleFormat): string => {
 	if (
 		format.theme === ArticleSpecial.Labs &&
@@ -1360,7 +1288,6 @@ export const decidePalette = (
 		containerPalette && decideContainerOverrides(containerPalette);
 	return {
 		text: {
-			headline: textHeadline(format),
 			headlineWhenMatch: textHeadlineWhenMatch(format),
 			seriesTitle: textSeriesTitle(format),
 			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
