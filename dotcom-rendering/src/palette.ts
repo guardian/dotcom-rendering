@@ -3738,6 +3738,21 @@ const privacyTextSupportingLight: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+const witnessTitleText: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+const witnessTitleIcon: PaletteFunction = (format) => witnessTitleText(format);
+const witnessTitleAuthor: PaletteFunction = (format) =>
+	witnessTitleText(format);
 
 // ----- Palette ----- //
 
@@ -4289,6 +4304,18 @@ const paletteColours = {
 	'--privacy-text-regular': {
 		light: privacyTextRegularLight,
 		dark: privacyTextDark,
+	},
+	'--witness-title-text': {
+		light: witnessTitleText,
+		dark: witnessTitleText,
+	},
+	'--witness-title-icon': {
+		light: witnessTitleIcon,
+		dark: witnessTitleIcon,
+	},
+	'--witness-title-author': {
+		light: witnessTitleAuthor,
+		dark: witnessTitleAuthor,
 	},
 } satisfies PaletteColours;
 

@@ -236,15 +236,6 @@ const textArticleLink = (format: ArticleFormat): string => {
 const textDisclaimerLink = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
-const textWitnessIcon = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
-const textWitnessTitle = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
-const textWitnessAuthor = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
 const textStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -1307,9 +1298,6 @@ export const decidePalette = (
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),
 			pagination: textPagination(format),
-			witnessIcon: textWitnessIcon(format),
-			witnessAuthor: textWitnessAuthor(format),
-			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
 			numberedPosition: textNumberedPosition(),
 			cricketScoreboardLink: textCricketScoreboardLink(),
