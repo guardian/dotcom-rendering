@@ -1,9 +1,9 @@
-import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
+import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
-import { SecureReCAPTCHASignup } from './SecureReCAPTCHASignup';
+import { SecureReCAPTCHASignup } from './SecureReCAPTCHASignup.importable';
 
 interface AppEmailSignupProps extends EmailSignUpProps {
 	skipToIndex: number;
@@ -17,22 +17,18 @@ export const AppEmailSignUp = ({
 	skipToIndex,
 	...emailSignUpProps
 }: AppEmailSignupProps) => {
-	const isCompatible = useIsBridgetCompatible();
-
-	if (!isCompatible) {
-		return null;
-	}
-
 	return (
 		<InlineSkipToWrapper
 			id={`EmailSignup-skip-link-${skipToIndex}`}
 			blockDescription="newsletter promotion"
 		>
 			<EmailSignup {...emailSignUpProps}>
-				<SecureReCAPTCHASignup
-					newsletterId={emailSignUpProps.identityName}
-					successDescription={emailSignUpProps.successDescription}
-				/>
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<SecureReCAPTCHASignup
+						newsletterId={emailSignUpProps.identityName}
+						successDescription={emailSignUpProps.successDescription}
+					/>
+				</Island>
 				{!emailSignUpProps.hidePrivacyMessage && (
 					<NewsletterPrivacyMessage />
 				)}
