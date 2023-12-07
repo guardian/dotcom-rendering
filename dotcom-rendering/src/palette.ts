@@ -2042,6 +2042,15 @@ const cardAgeTextLight: PaletteFunction = (format) => {
 			}
 	}
 };
+const cardOnwardContentAgeTextLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.neutral[100];
+		default:
+			return cardAgeTextLight(format);
+	}
+};
+
 const cardAgeTextDark = (): string => {
 	return sourcePalette.neutral[60];
 };
@@ -2242,6 +2251,15 @@ const cardHeadlineTextLight: PaletteFunction = (format) => {
 };
 const cardTextDark = (): string => {
 	return sourcePalette.neutral[86];
+};
+
+const cardOnwardContentTextLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.neutral[100];
+		default:
+			return cardHeadlineTextLight(format);
+	}
 };
 
 const cardBylineKickerTextDark: PaletteFunction = ({ design, theme }) => {
@@ -4051,6 +4069,10 @@ const paletteColours = {
 		light: cardAgeTextLight,
 		dark: cardAgeTextDark,
 	},
+	'--card-footer-onwards-content-text': {
+		light: cardOnwardContentAgeTextLight,
+		dark: cardAgeTextDark,
+	},
 	'--card-background': {
 		light: cardBackgroundLight,
 		dark: cardBackgroundDark,
@@ -4062,6 +4084,10 @@ const paletteColours = {
 	'--onward-content-card-hover': {
 		light: onwardContentCardHoverLight,
 		dark: onwardContentCardHoverDark,
+	},
+	'--card-headline-onward-content-text': {
+		light: cardOnwardContentTextLight,
+		dark: cardTextDark,
 	},
 	'--card-headline-trail-text': {
 		light: cardHeadlineTextLight,

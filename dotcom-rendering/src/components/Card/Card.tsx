@@ -335,6 +335,7 @@ export const Card = ({
 							webPublicationDate={webPublicationDate}
 							showClock={showClock}
 							isDynamo={isDynamo}
+							isOnwardContent={isOnwardContent}
 						/>
 					) : undefined
 				}
@@ -368,6 +369,7 @@ export const Card = ({
 									format={format}
 									discussionApiUrl={discussionApiUrl}
 									discussionId={discussionId}
+									isOnwardContent={isOnwardContent}
 								/>
 							</Island>
 						</Link>
@@ -590,6 +592,7 @@ export const Card = ({
 								showByline={showByline}
 								isDynamo={isDynamo}
 								isExternalLink={isExternalLink}
+								isOnwardContent={isOnwardContent}
 							/>
 							{starRating !== undefined ? (
 								<StarRatingComponent
