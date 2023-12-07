@@ -60,6 +60,9 @@ const bigNumber = css`
 	top: 0.375rem;
 	left: 0.625rem;
 	fill: ${palette('--article-text')};
+	svg {
+		height: 2.5rem;
+	}
 `;
 
 const headlineHeader = css`
