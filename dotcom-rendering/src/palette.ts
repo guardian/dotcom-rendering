@@ -3048,6 +3048,18 @@ const shareIconFillBlogLight: PaletteFunction = ({ design, theme }) => {
 const shareIconFillBlogDark: PaletteFunction = () => sourcePalette.neutral[60];
 const matchNavBackground: PaletteFunction = () => sourcePalette.brandAlt[400];
 
+const matchStatsBackground: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[97];
+		default:
+			// One off colour for match stats
+			// https://github.com/guardian/dotcom-rendering/issues/9531
+			return '#d9edf6';
+	}
+};
+
 const liveBlockContainerBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const liveBlockContainerBackgroundDark: PaletteFunction = () =>
@@ -4000,6 +4012,10 @@ const paletteColours = {
 	'--match-nav-background': {
 		light: matchNavBackground,
 		dark: matchNavBackground,
+	},
+	'--match-stats-background': {
+		light: matchStatsBackground,
+		dark: matchStatsBackground,
 	},
 	'--live-block-container-background': {
 		light: liveBlockContainerBackgroundLight,

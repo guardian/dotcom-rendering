@@ -1150,6 +1150,7 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
+/** @deprecated this has been moved to the theme palette (--match-stats-background) */
 const backgroundMatchStats = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
