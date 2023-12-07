@@ -308,18 +308,6 @@ const textArticleLink = (format: ArticleFormat): string => {
 const textDisclaimerLink = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
-/** @deprecated this has been moved to the theme palette (--witness-title-icon) */
-const textWitnessIcon = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
-/** @deprecated this has been moved to the theme palette (--witness-title-text) */
-const textWitnessTitle = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
-/** @deprecated this has been moved to the theme palette (--witness-title-author) */
-const textWitnessAuthor = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
 const textStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
 	if (format.design === ArticleDesign.DeadBlog) {
