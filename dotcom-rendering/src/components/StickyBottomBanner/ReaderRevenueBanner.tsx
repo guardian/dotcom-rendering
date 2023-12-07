@@ -22,6 +22,7 @@ import {
 	hasOptedOutOfArticleCount,
 	lazyFetchEmailWithTimeout,
 	MODULES_VERSION,
+	recentlyClosedBanner,
 	setLocalNoBannerCachePeriod,
 	shouldHideSupportMessaging,
 	withinLocalNoBannerCachePeriod,
@@ -183,14 +184,22 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 
 	const hasForceBannerParam = window.location.search.includes('force-banner');
 
-	if (
-		!showSignInPrompt &&
-		!hasForceBannerParam &&
-		engagementBannerLastClosedAt &&
-		subscriptionBannerLastClosedAt &&
-		withinLocalNoBannerCachePeriod()
-	) {
-		return { show: false };
+	if (!showSignInPrompt && !hasForceBannerParam) {
+		// Don't show a banner if one was closed recently
+		if (
+			recentlyClosedBanner(engagementBannerLastClosedAt) ||
+			recentlyClosedBanner(subscriptionBannerLastClosedAt)
+		) {
+			return { show: false };
+		}
+		// Don't ask the API for a banner again if it's recently told us not to show one
+		if (
+			engagementBannerLastClosedAt &&
+			subscriptionBannerLastClosedAt &&
+			withinLocalNoBannerCachePeriod()
+		) {
+			return { show: false };
+		}
 	}
 
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();

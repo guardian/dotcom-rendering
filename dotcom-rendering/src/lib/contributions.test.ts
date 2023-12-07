@@ -4,6 +4,7 @@ import {
 	isRecentOneOffContributor,
 	lazyFetchEmailWithTimeout,
 	ONE_OFF_CONTRIBUTION_DATE_COOKIE,
+	recentlyClosedBanner,
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
 } from './contributions';
 import { getIdApiUserData } from './getIdapiUserData';
@@ -172,5 +173,26 @@ describe('getPurchaseInfo', () => {
 			value: 'utter-nonsense',
 		});
 		expect(getPurchaseInfo()).toBeUndefined();
+	});
+});
+
+describe('recentlyClosedBanner', () => {
+	it('returns true if banner was closed 59 mins ago', () => {
+		const lastClosedAt = '2023-12-07T09:00:00.000Z';
+		const now = new Date(lastClosedAt).getTime() + 1000 * 59 * 60;
+		console.log('comparing', new Date(lastClosedAt).getTime(), now);
+		expect(recentlyClosedBanner(lastClosedAt, now)).toEqual(true);
+	});
+
+	it('returns false if banner was closed 60 mins ago', () => {
+		const lastClosedAt = '2023-12-07T09:00:00.000Z';
+		const now = new Date(lastClosedAt).getTime() + 1000 * 60 * 60;
+		expect(recentlyClosedBanner(lastClosedAt, now)).toEqual(false);
+	});
+
+	it('returns false if banner was not closed', () => {
+		const lastClosedAt = undefined;
+		const now = new Date('2023-12-07T09:00:00.000Z').getTime();
+		expect(recentlyClosedBanner(lastClosedAt, now)).toEqual(false);
 	});
 });
