@@ -1150,17 +1150,6 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
-/** @deprecated this has been moved to the theme palette (--match-stats-background) */
-const backgroundMatchStats = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return neutral[97];
-		default:
-			return '#d9edf6';
-	}
-};
-
 const backgroundTreat = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -1418,7 +1407,6 @@ export const decidePalette = (
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
 			analysisUnderline: backgroundUnderline(format),
-			matchStats: backgroundMatchStats(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),

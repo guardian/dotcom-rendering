@@ -7,6 +7,7 @@ import {
 import { decidePalette } from '../lib/decidePalette';
 import { isLight } from '../lib/isLight';
 import { transparentColour } from '../lib/transparentColour';
+import { palette as themePalette } from '../palette';
 
 type Props = {
 	left: SectionType;
@@ -119,11 +120,12 @@ const Side = ({
 					height: 70px;
 					width: 92px;
 
-					border-top: 8px solid ${palette.background.matchStats};
+					border-top: 8px solid
+						${themePalette('--match-stats-background')};
 					border-left: ${position === 'left' &&
-					`8px solid ${palette.background.matchStats}`};
+					`8px solid ${themePalette('--match-stats-background')}`};
 					border-right: ${position === 'right' &&
-					`8px solid ${palette.background.matchStats}`};
+					`8px solid ${themePalette('--match-stats-background')}`};
 				`}
 			>
 				{onTarget}

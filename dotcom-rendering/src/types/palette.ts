@@ -54,7 +54,6 @@ export type Palette = {
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		analysisUnderline: Colour;
-		matchStats: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
