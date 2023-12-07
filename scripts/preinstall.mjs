@@ -55,7 +55,7 @@ if (process.execPath?.includes('asdf')) {
 
 console.log(``);
 log(
-	`You will still be able to use ${packageManager} in other projects, as before.`,
+	`You will still be able to use ${packageManager} in other projects, but you will need to run 'corepack enable' in each version of Node you use.`,
 );
 log(`See https://github.com/nodejs/corepack for more information.`);
 
