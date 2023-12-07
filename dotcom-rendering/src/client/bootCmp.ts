@@ -9,6 +9,7 @@ import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { submitComponentEvent } from './ophan/ophan';
+import { getOphan } from './ophan/ophan';
 
 const submitConsentEventsToOphan = (renderingTarget: RenderingTarget) =>
 	onConsent().then((consentState: ConsentState) => {
@@ -81,24 +82,69 @@ const submitConsentEventsToOphan = (renderingTarget: RenderingTarget) =>
 		return submitComponentEvent(event, renderingTarget);
 	});
 
-const initialiseCmp = () =>
-	getLocaleCode().then((code) => {
-		const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
-		const { pageViewId } = window.guardian.config.ophan;
+const submitConsentToOphan = async (renderingTarget: RenderingTarget) => {
+	const consentState: ConsentState = await onConsent();
 
-		const country = code ?? undefined;
-		cmp.init({
-			pubData: {
-				platform: 'next-gen',
-				// If `undefined`, the resulting consent signal cannot be joined to a page view.
-				browserId: browserId ?? undefined,
-				pageViewId,
-			},
-			country,
-		});
-		log('dotcom', 'CMP initialised');
+	const consentDetails = (): {
+		consentJurisdiction: 'TCF' | 'CCPA' | 'AUS' | 'OTHER';
+		consentUUID: string;
+		consent: string;
+	} => {
+		if (consentState.tcfv2) {
+			return {
+				consentJurisdiction: 'TCF',
+				consentUUID: getCookie({ name: 'consentUUID' }) ?? '',
+				consent: consentState.tcfv2.tcString,
+			};
+		}
+		if (consentState.ccpa) {
+			return {
+				consentJurisdiction: 'CCPA',
+				consentUUID: getCookie({ name: 'ccpaUUID' }) ?? '',
+				consent: consentState.ccpa.doNotSell ? 'false' : 'true',
+			};
+		}
+		if (consentState.aus) {
+			return {
+				consentJurisdiction: 'AUS',
+				consentUUID: getCookie({ name: 'ccpaUUID' }) ?? '',
+				/*consent =
+						getCookie({ name: 'consentStatus' }) ?? '';
+						*/
+				consent: consentState.aus.personalisedAdvertising
+					? 'true'
+					: 'false',
+			};
+		}
+		return {
+			consentJurisdiction: 'OTHER',
+			consentUUID: '',
+			consent: '',
+		};
+	};
+
+	// Register changes in consent state with Ophan
+	const ophan = await getOphan(renderingTarget);
+	return ophan.record(consentDetails());
+};
+
+const initialiseCmp = async () => {
+	const code = await getLocaleCode();
+	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
+	const { pageViewId } = window.guardian.config.ophan;
+
+	const country = code ?? undefined;
+	cmp.init({
+		pubData: {
+			platform: 'next-gen',
+			// If `undefined`, the resulting consent signal cannot be joined to a page view.
+			browserId: browserId ?? undefined,
+			pageViewId,
+		},
+		country,
 	});
-
+	log('dotcom', 'CMP initialised');
+};
 /**
  * Hydrating this island is so critical that it should not be imported
  * as a separate chunk. @see {PrivacySettingsLink.importable.tsx}
@@ -121,5 +167,6 @@ export const bootCmp = async (
 		initialiseCmp(),
 		eagerlyImportPrivacySettingsLinkIsland(),
 		submitConsentEventsToOphan(renderingTarget),
+		submitConsentToOphan(renderingTarget),
 	]);
 };
