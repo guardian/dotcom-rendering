@@ -2047,7 +2047,13 @@ const cardOnwardContentAgeTextLight: PaletteFunction = (format) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.neutral[100];
 		default:
-			return cardAgeTextLight(format);
+			if (
+				format.display === ArticleDisplay.Immersive &&
+				format.design === ArticleDesign.LiveBlog
+			) {
+				return sourcePalette.neutral[100];
+			}
+			return cardHeadlineTextLight(format);
 	}
 };
 
@@ -2258,6 +2264,12 @@ const cardOnwardContentTextLight: PaletteFunction = (format) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.neutral[100];
 		default:
+			if (
+				format.display === ArticleDisplay.Immersive &&
+				format.design === ArticleDesign.LiveBlog
+			) {
+				return sourcePalette.neutral[100];
+			}
 			return cardHeadlineTextLight(format);
 	}
 };

@@ -325,20 +325,6 @@ export const Immersive = () => {
 		<>
 			<Section fullWidth={true}>
 				<Carousel
-					heading="More on this story"
-					trails={immersiveTrails}
-					onwardsSource="more-on-this-story"
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Immersive,
-					}}
-					leftColSize="compact"
-					discussionApiUrl={discussionApiUrl}
-				/>
-			</Section>
-			<Section fullWidth={true}>
-				<Carousel
 					heading="Sport"
 					trails={immersiveTrails}
 					onwardsSource="curated-content"
@@ -356,6 +342,16 @@ export const Immersive = () => {
 };
 
 Immersive.storyName = 'Immersive carousel';
+Immersive.Decorators = splitTheme(
+	[
+		{
+			theme: Pillar.Sport,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Immersive,
+		},
+	],
+	{ orientation: 'vertical' },
+);
 
 const specialReportAltFormat = {
 	theme: ArticleSpecial.SpecialReportAlt,
