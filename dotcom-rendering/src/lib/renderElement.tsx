@@ -471,7 +471,7 @@ export const renderElement = ({
 				<NumberedTitleBlockComponent
 					position={element.position}
 					html={element.html}
-					format={element.format}
+					format={format}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':

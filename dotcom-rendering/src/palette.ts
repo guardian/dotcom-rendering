@@ -2577,6 +2577,27 @@ const keyEventButtonFillLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const keyEventButtonFillDark: PaletteFunction = () => sourcePalette.neutral[7];
 
+const numberedListTitleLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const numberedListTitleDark: PaletteFunction = ({ theme }) => {
+	return sourcePalette.neutral[86];
+};
+
 const summaryEventBulletLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -4048,6 +4069,10 @@ const paletteColours = {
 	'--key-event-button-fill': {
 		light: keyEventButtonFillLight,
 		dark: keyEventButtonFillDark,
+	},
+	'--numbered-list-title': {
+		light: numberedListTitleLight,
+		dark: numberedListTitleDark,
 	},
 	'--summary-event-bullet': {
 		light: summaryEventBulletLight,

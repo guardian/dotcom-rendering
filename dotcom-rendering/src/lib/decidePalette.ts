@@ -1034,10 +1034,6 @@ const textDateLine = (format: ArticleFormat): string => {
 	return neutral[46];
 };
 
-const textNumberedTitle = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme].main;
-};
-
 const textNumberedPosition = (): string => {
 	return text.supporting;
 };
@@ -1315,7 +1311,6 @@ export const decidePalette = (
 			witnessAuthor: textWitnessAuthor(format),
 			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
-			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			filterButton: textFilterButton(),
