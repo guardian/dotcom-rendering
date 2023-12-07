@@ -284,24 +284,22 @@ export const SecureReCAPTCHASignup = ({
 		const emailAddress: string = input?.value ?? '';
 
 		sendTracking(newsletterId, 'form-submission', renderingTarget);
-		if (renderingTarget === 'Web') {
-			const response = await postFormData(
-				window.guardian.config.page.ajaxUrl + '/email',
-				buildFormData(emailAddress, newsletterId, token),
-			);
+		const response = await postFormData(
+			window.guardian.config.page.ajaxUrl + '/email',
+			buildFormData(emailAddress, newsletterId, token),
+		);
 
-			// The response body could be accessed with await response.text()
-			// here and added to state but the response is not informative
-			// enough to convey the actualreason for a failure to the user,
-			// so a generic failure message is used.
-			setIsWaitingForResponse(false);
-			setResponseOk(response.ok);
-			sendTracking(
-				newsletterId,
-				response.ok ? 'submission-confirmed' : 'submission-failed',
-				renderingTarget,
-			);
-		}
+		// The response body could be accessed with await response.text()
+		// here and added to state but the response is not informative
+		// enough to convey the actualreason for a failure to the user,
+		// so a generic failure message is used.
+		setIsWaitingForResponse(false);
+		setResponseOk(response.ok);
+		sendTracking(
+			newsletterId,
+			response.ok ? 'submission-confirmed' : 'submission-failed',
+			renderingTarget,
+		);
 	};
 
 	const resetForm: ReactEventHandler<HTMLButtonElement> = () => {
