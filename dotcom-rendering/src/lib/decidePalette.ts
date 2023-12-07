@@ -860,10 +860,12 @@ const borderHeadline = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
+/** @deprecated this has been moved to the theme palette ('--match-tab-border) */
 const matchTab = (): string => {
 	return border.secondary;
 };
 
+/** @deprecated this has been moved to the theme palette ('--match-active-tab-border) */
 const activeMatchTab = (): string => {
 	return sport[300];
 };

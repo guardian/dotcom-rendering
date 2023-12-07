@@ -376,7 +376,6 @@ export const MatchStats = ({ home, away, format }: Props) => {
 							offTarget: away.shotsOff,
 							color: away.colours,
 						}}
-						format={format}
 					/>
 				</GridItem>
 				<GridItem area="corners">

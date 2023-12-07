@@ -3060,6 +3060,9 @@ const matchStatsBackground: PaletteFunction = ({ design }) => {
 	}
 };
 
+const matchTabBorder: PaletteFunction = () => sourcePalette.neutral[86];
+const matchActiveTabBorder: PaletteFunction = () => sourcePalette.sport[300];
+
 const liveBlockContainerBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const liveBlockContainerBackgroundDark: PaletteFunction = () =>
@@ -4016,6 +4019,14 @@ const paletteColours = {
 	'--match-stats-background': {
 		light: matchStatsBackground,
 		dark: matchStatsBackground,
+	},
+	'--match-tab-border': {
+		light: matchTabBorder,
+		dark: matchTabBorder,
+	},
+	'--match-active-tab-border': {
+		light: matchActiveTabBorder,
+		dark: matchActiveTabBorder,
 	},
 	'--live-block-container-background': {
 		light: liveBlockContainerBackgroundLight,
