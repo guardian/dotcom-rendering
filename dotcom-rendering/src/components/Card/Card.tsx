@@ -607,7 +607,13 @@ export const Card = ({
 							)}
 						</HeadlineWrapper>
 						{/* This div is needed to push this content to the bottom of the card */}
-						<div>
+						<div
+							style={
+								isOnwardContent
+									? { marginTop: `${space[4]}px` }
+									: {}
+							}
+						>
 							{!!trailText && (
 								<TrailTextWrapper
 									containerPalette={containerPalette}
