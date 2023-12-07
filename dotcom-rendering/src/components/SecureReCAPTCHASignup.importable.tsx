@@ -18,6 +18,7 @@ import { useEffect, useRef, useState } from 'react';
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { getNewslettersClient } from '../lib/bridgetApi';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -224,6 +225,8 @@ export const SecureReCAPTCHASignup = ({
 	newsletterId,
 	successDescription,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
 	const [isWaitingForResponse, setIsWaitingForResponse] =
@@ -238,33 +241,67 @@ export const SecureReCAPTCHASignup = ({
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
 	}, []);
-	const { renderingTarget } = useConfig();
+
+	useEffect(() => {
+		if (renderingTarget == 'Apps' && isWaitingForResponse) {
+			const input: HTMLInputElement | null =
+				document.querySelector('input[type="email"]') ?? null;
+			const emailAddress: string = input?.value ?? '';
+
+			sendTracking(newsletterId, 'form-submission', renderingTarget);
+
+			getNewslettersClient()
+				.requestSignUp(emailAddress, newsletterId)
+				.then((success) => {
+					setIsWaitingForResponse(false);
+					setResponseOk(success);
+					sendTracking(
+						newsletterId,
+						'submission-confirmed',
+						renderingTarget,
+					);
+				})
+				.catch((error) => {
+					console.error(error);
+					sendTracking(
+						newsletterId,
+						'form-submit-error',
+						renderingTarget,
+					);
+					setErrorMessage(
+						`Sorry, there was an error signing you up.`,
+					);
+					setIsWaitingForResponse(false);
+				});
+		}
+	}, [isWaitingForResponse, newsletterId, renderingTarget]);
 
 	const hasResponse = typeof responseOk === 'boolean';
 
-	const submitForm = async (token: string): Promise<void> => {
+	const submitWebForm = async (token: string): Promise<void> => {
 		const input: HTMLInputElement | null =
 			document.querySelector('input[type="email"]') ?? null;
 		const emailAddress: string = input?.value ?? '';
 
 		sendTracking(newsletterId, 'form-submission', renderingTarget);
-		const response = await postFormData(
-			window.guardian.config.page.ajaxUrl + '/email',
-			buildFormData(emailAddress, newsletterId, token),
-		);
+		if (renderingTarget === 'Web') {
+			const response = await postFormData(
+				window.guardian.config.page.ajaxUrl + '/email',
+				buildFormData(emailAddress, newsletterId, token),
+			);
 
-		// The response body could be accessed with await response.text()
-		// here and added to state but the response is not informative
-		// enough to convey the actualreason for a failure to the user,
-		// so a generic failure message is used.
-		setIsWaitingForResponse(false);
-		setResponseOk(response.ok);
-
-		sendTracking(
-			newsletterId,
-			response.ok ? 'submission-confirmed' : 'submission-failed',
-			renderingTarget,
-		);
+			// The response body could be accessed with await response.text()
+			// here and added to state but the response is not informative
+			// enough to convey the actualreason for a failure to the user,
+			// so a generic failure message is used.
+			setIsWaitingForResponse(false);
+			setResponseOk(response.ok);
+			sendTracking(
+				newsletterId,
+				response.ok ? 'submission-confirmed' : 'submission-failed',
+				renderingTarget,
+			);
+		}
 	};
 
 	const resetForm: ReactEventHandler<HTMLButtonElement> = () => {
@@ -286,13 +323,19 @@ export const SecureReCAPTCHASignup = ({
 		}
 		sendTracking(newsletterId, 'captcha-passed', renderingTarget);
 		setIsWaitingForResponse(true);
-		submitForm(token).catch((error) => {
-			// eslint-disable-next-line no-console -- unexpected error
-			console.error(error);
-			sendTracking(newsletterId, 'form-submit-error', renderingTarget);
-			setErrorMessage(`Sorry, there was an error signing you up.`);
-			setIsWaitingForResponse(false);
-		});
+		if (renderingTarget === 'Web') {
+			submitWebForm(token).catch((error) => {
+				// eslint-disable-next-line no-console -- unexpected error
+				console.error(error);
+				sendTracking(
+					newsletterId,
+					'form-submit-error',
+					renderingTarget,
+				);
+				setErrorMessage(`Sorry, there was an error signing you up.`);
+				setIsWaitingForResponse(false);
+			});
+		}
 	};
 
 	const handleClick = (): void => {

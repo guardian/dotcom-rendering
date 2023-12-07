@@ -35,7 +35,7 @@ import { NewsletterFrequency } from '../components/NewsletterFrequency';
 import { NewsletterPrivacyMessage } from '../components/NewsletterPrivacyMessage';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
-import { SecureReCAPTCHASignup } from '../components/SecureReCAPTCHASignup';
+import { SecureReCAPTCHASignup } from '../components/SecureReCAPTCHASignup.importable';
 import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
@@ -47,7 +47,7 @@ import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
-import { RenderingTarget } from '../types/renderingTarget';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface CommonProps {
