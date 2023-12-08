@@ -11,7 +11,6 @@ import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import { paletteDeclarations } from '../palette';
 import type { DCRFrontType } from '../types/front';
-import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
@@ -77,9 +76,6 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<AlreadyVisited />
-			</Island>
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>

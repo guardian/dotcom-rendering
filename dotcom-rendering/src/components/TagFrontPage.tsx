@@ -11,7 +11,6 @@ import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import { paletteDeclarations } from '../palette';
 import type { DCRTagFrontType } from '../types/tagFront';
-import { AlreadyVisited } from './AlreadyVisited.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
@@ -74,9 +73,6 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<AlreadyVisited />
-			</Island>
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>

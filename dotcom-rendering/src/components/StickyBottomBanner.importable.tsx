@@ -5,7 +5,6 @@ import type {
 import { cmp } from '@guardian/consent-management-platform';
 import type { CountryCode } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
 import type {
@@ -142,7 +141,6 @@ const buildRRBannerConfigWith = ({
 						isSensitive,
 						tags,
 						contributionsServiceUrl,
-						alreadyVisitedCount: getAlreadyVisitedCount(),
 						engagementBannerLastClosedAt: getBannerLastClosedAt(
 							'engagementBannerLastClosedAt',
 						),
