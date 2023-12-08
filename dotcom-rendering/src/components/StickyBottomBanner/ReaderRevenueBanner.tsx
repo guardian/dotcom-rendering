@@ -185,14 +185,14 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	const hasForceBannerParam = window.location.search.includes('force-banner');
 
 	if (!showSignInPrompt && !hasForceBannerParam) {
-		// Don't show a banner if one was closed recently
+		// Don't show a banner if one was closed recently. This is to improve user experience by not showing banners on consecutive pageviews
 		if (
 			recentlyClosedBanner(engagementBannerLastClosedAt) ||
 			recentlyClosedBanner(subscriptionBannerLastClosedAt)
 		) {
 			return { show: false };
 		}
-		// Don't ask the API for a banner again if it's recently told us not to show one
+		// Don't ask the API for a banner again if it's recently told us not to show one. This is an optimisation to reduce traffic to the API
 		if (
 			engagementBannerLastClosedAt &&
 			subscriptionBannerLastClosedAt &&
