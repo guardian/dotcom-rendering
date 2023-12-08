@@ -75,7 +75,7 @@ const buttonStyles = (isSelected: boolean) => css`
 	text-align: left;
 	text-decoration: none;
 	font-weight: 600;
-	min-height: 36px;
+	min-height: 28px;
 	display: block;
 	width: 100%;
 
