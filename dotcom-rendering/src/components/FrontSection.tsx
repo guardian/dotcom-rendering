@@ -120,7 +120,6 @@ const fallbackStyles = css`
 `;
 
 const containerStylesUntilLeftCol = css`
-	contain: layout;
 	display: grid;
 
 	grid-template-rows:
