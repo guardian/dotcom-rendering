@@ -400,7 +400,9 @@ export const ArticleHeadline = ({
 											: lightFont,
 										invertedText,
 										css`
-											color: ${palette.text.headline};
+											color: ${themePalette(
+												'--headline-colour',
+											)};
 										`,
 									]}
 								>
@@ -433,7 +435,9 @@ export const ArticleHeadline = ({
 									immersiveWrapper,
 									darkBackground,
 									css`
-										color: ${palette.text.headline};
+										color: ${themePalette(
+											'--headline-colour',
+										)};
 									`,
 								]}
 							>
@@ -479,7 +483,7 @@ export const ArticleHeadline = ({
 									: boldFont,
 								topPadding,
 								css`
-									color: ${palette.text.headline};
+									color: ${themePalette('--headline-colour')};
 								`,
 							]}
 						>
@@ -521,7 +525,9 @@ export const ArticleHeadline = ({
 											: boldFont,
 										topPadding,
 										css`
-											color: ${palette.text.headline};
+											color: ${themePalette(
+												'--headline-colour',
+											)};
 										`,
 									]}
 								>
@@ -555,7 +561,9 @@ export const ArticleHeadline = ({
 											: lightFont,
 										topPadding,
 										css`
-											color: ${palette.text.headline};
+											color: ${themePalette(
+												'--headline-colour',
+											)};
 										`,
 									]}
 								>
@@ -596,7 +604,9 @@ export const ArticleHeadline = ({
 											: lightFont,
 										topPadding,
 										css`
-											color: ${palette.text.headline};
+											color: ${themePalette(
+												'--headline-colour',
+											)};
 										`,
 									]}
 								>
@@ -637,7 +647,9 @@ export const ArticleHeadline = ({
 										invertedWrapper,
 										zIndex,
 										css`
-											color: ${palette.text.headline};
+											color: ${themePalette(
+												'--headline-colour',
+											)};
 										`,
 									]}
 								>
@@ -685,7 +697,9 @@ export const ArticleHeadline = ({
 											: standardFont,
 										topPadding,
 										css`
-											color: ${palette.text.headline};
+											color: ${themePalette(
+												'--headline-colour',
+											)};
 										`,
 									]}
 								>
@@ -727,7 +741,9 @@ export const ArticleHeadline = ({
 										css`
 											color: ${isMatch
 												? palette.text.headlineWhenMatch
-												: palette.text.headline};
+												: themePalette(
+														'--headline-colour',
+												  )};
 											padding-bottom: ${space[9]}px;
 										`,
 									]}
@@ -769,7 +785,9 @@ export const ArticleHeadline = ({
 											: standardFont,
 										topPadding,
 										css`
-											color: ${palette.text.headline};
+											color: ${themePalette(
+												'--headline-colour',
+											)};
 										`,
 									]}
 								>
@@ -795,7 +813,9 @@ export const ArticleHeadline = ({
 										: standardFont,
 									topPadding,
 									css`
-										color: ${palette.text.headline};
+										color: ${themePalette(
+											'--headline-colour',
+										)};
 									`,
 								]}
 							>
@@ -827,7 +847,9 @@ export const ArticleHeadline = ({
 											: standardFont,
 										topPadding,
 										css`
-											color: ${palette.text.headline};
+											color: ${themePalette(
+												'--headline-colour',
+											)};
 										`,
 									]}
 								>

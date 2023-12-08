@@ -1,3 +1,5 @@
+/* eslint-disable react/no-deprecated -- currently still working in 17 mode */
+
 import {
 	initPingEditionsRendering,
 	MessageKind,
