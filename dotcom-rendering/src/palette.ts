@@ -2164,8 +2164,9 @@ const cardAgeTextLight: PaletteFunction = (format) => {
 };
 const cardOnwardContentAgeTextLight: PaletteFunction = (format) => {
 	switch (format.theme) {
+		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.neutral[100];
+			return sourcePalette.brandAlt[400];
 		default:
 			if (
 				format.display === ArticleDisplay.Immersive &&
