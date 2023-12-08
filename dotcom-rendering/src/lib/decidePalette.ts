@@ -51,78 +51,6 @@ const blogsGrayBackgroundPalette = (format: ArticleFormat): string => {
 	}
 };
 
-const textHeadline = (format: ArticleFormat): string => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			switch (format.design) {
-				case ArticleDesign.PrintShop:
-					switch (format.theme) {
-						case ArticleSpecial.SpecialReport:
-							return palette.neutral[100];
-						default:
-							return palette.neutral[7];
-					}
-				default: {
-					return palette.neutral[100];
-				}
-			}
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReport: {
-					switch (format.design) {
-						case ArticleDesign.Interview:
-							return palette.neutral[100];
-						default:
-							return palette.specialReport[100];
-					}
-				}
-				case ArticleSpecial.SpecialReportAlt: {
-					switch (format.design) {
-						case ArticleDesign.Interview:
-							return palette.specialReport[800];
-						case ArticleDesign.LiveBlog:
-							return palette.neutral[100];
-						case ArticleDesign.DeadBlog:
-							return palette.neutral[7];
-						default:
-							return palette.neutral[7];
-					}
-				}
-				default: {
-					switch (format.design) {
-						case ArticleDesign.Review:
-						case ArticleDesign.Recipe:
-						case ArticleDesign.Feature:
-							switch (format.theme) {
-								case Pillar.News:
-									return palette.news[300];
-								case Pillar.Sport:
-									return palette.sport[300];
-								case Pillar.Culture:
-									return palette.culture[300];
-								case Pillar.Lifestyle:
-									return palette.lifestyle[300];
-								case Pillar.Opinion:
-									return palette.opinion[300];
-								case ArticleSpecial.Labs:
-									return palette.labs[300];
-							}
-						case ArticleDesign.Interview:
-						case ArticleDesign.LiveBlog:
-						case ArticleDesign.Picture:
-							return palette.neutral[100];
-						default:
-							return palette.neutral[7];
-					}
-				}
-			}
-		default:
-			return palette.neutral[7];
-	}
-};
-
 const textSeriesTitle = (format: ArticleFormat): string => {
 	if (
 		format.theme === ArticleSpecial.Labs &&
@@ -307,15 +235,6 @@ const textArticleLink = (format: ArticleFormat): string => {
 
 const textDisclaimerLink = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
-
-const textWitnessIcon = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
-const textWitnessTitle = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
-const textWitnessAuthor = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
 
 const textStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
@@ -1098,10 +1017,6 @@ const textDateLine = (format: ArticleFormat): string => {
 	return neutral[46];
 };
 
-const textNumberedTitle = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme].main;
-};
-
 const textNumberedPosition = (): string => {
 	return text.supporting;
 };
@@ -1342,7 +1257,6 @@ export const decidePalette = (
 		containerPalette && decideContainerOverrides(containerPalette);
 	return {
 		text: {
-			headline: textHeadline(format),
 			headlineWhenMatch: textHeadlineWhenMatch(format),
 			seriesTitle: textSeriesTitle(format),
 			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
@@ -1366,11 +1280,7 @@ export const decidePalette = (
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),
 			pagination: textPagination(format),
-			witnessIcon: textWitnessIcon(format),
-			witnessAuthor: textWitnessAuthor(format),
-			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
-			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			filterButton: textFilterButton(),

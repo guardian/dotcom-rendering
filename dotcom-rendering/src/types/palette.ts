@@ -2,7 +2,6 @@ export type Colour = string;
 
 export type Palette = {
 	text: {
-		headline: Colour;
 		headlineWhenMatch: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
@@ -21,12 +20,8 @@ export type Palette = {
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
-		witnessIcon: Colour;
-		witnessAuthor: Colour;
-		witnessTitle: Colour;
 		carouselTitle: Colour;
 		pagination: Colour;
-		numberedTitle: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
 		filterButton: Colour;
