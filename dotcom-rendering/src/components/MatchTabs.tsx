@@ -34,11 +34,11 @@ const tab = css`
 `;
 
 const activeTab = css`
-	border-top: 3px solid ${themePalette('--match-active-tab-border')};
+	border-top: 3px solid ${themePalette('--match-tab-border-active')};
 `;
 
 const tabLink = css`
-	color: ${themePalette('--match-active-tab-border')};
+	color: ${themePalette('--match-tab-border-active')};
 	display: block;
 	text-decoration: none;
 	&:hover {

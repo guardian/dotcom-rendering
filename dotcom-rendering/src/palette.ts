@@ -4024,7 +4024,7 @@ const paletteColours = {
 		light: matchTabBorder,
 		dark: matchTabBorder,
 	},
-	'--match-active-tab-border': {
+	'--match-tab-border-active': {
 		light: matchActiveTabBorder,
 		dark: matchActiveTabBorder,
 	},
