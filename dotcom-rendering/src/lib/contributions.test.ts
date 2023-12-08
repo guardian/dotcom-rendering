@@ -180,7 +180,6 @@ describe('recentlyClosedBanner', () => {
 	it('returns true if banner was closed 59 mins ago', () => {
 		const lastClosedAt = '2023-12-07T09:00:00.000Z';
 		const now = new Date(lastClosedAt).getTime() + 1000 * 59 * 60;
-		console.log('comparing', new Date(lastClosedAt).getTime(), now);
 		expect(recentlyClosedBanner(lastClosedAt, now)).toEqual(true);
 	});
 
