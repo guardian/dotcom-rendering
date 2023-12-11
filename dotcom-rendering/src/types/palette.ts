@@ -49,7 +49,6 @@ export type Palette = {
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		analysisUnderline: Colour;
-		matchStats: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -74,8 +73,6 @@ export type Palette = {
 		headline: Colour;
 		navPillar: Colour;
 		lines: Colour;
-		matchTab: Colour;
-		activeMatchTab: Colour;
 		cricketScoreboardTop: Colour;
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;

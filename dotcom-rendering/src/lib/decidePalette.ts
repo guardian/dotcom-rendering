@@ -779,14 +779,6 @@ const borderHeadline = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
-const matchTab = (): string => {
-	return border.secondary;
-};
-
-const activeMatchTab = (): string => {
-	return sport[300];
-};
-
 const borderCardSupporting = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Comment:
@@ -1065,16 +1057,6 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
-const backgroundMatchStats = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return neutral[97];
-		default:
-			return '#d9edf6';
-	}
-};
-
 const backgroundTreat = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -1327,7 +1309,6 @@ export const decidePalette = (
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
 			analysisUnderline: backgroundUnderline(format),
-			matchStats: backgroundMatchStats(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),
@@ -1355,8 +1336,6 @@ export const decidePalette = (
 			lines: overrides?.border.lines ?? borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
-			matchTab: matchTab(),
-			activeMatchTab: activeMatchTab(),
 			cardSupporting: borderCardSupporting(format),
 			filterButton: borderFilterButton(),
 			secondary: borderSecondary(format),

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { GoalAttempts } from './GoalAttempts';
 
 export default {
@@ -33,13 +34,17 @@ export const Default = () => {
 					offTarget: 4,
 					color: '#e3f45a',
 				}}
-				format={{
-					design: ArticleDesign.Standard,
-					theme: Pillar.Sport,
-					display: ArticleDisplay.Standard,
-				}}
 			/>
 		</Wrapper>
 	);
 };
 Default.storyName = 'default';
+Default.decorators = [
+	lightDecorator([
+		{
+			design: ArticleDesign.Standard,
+			theme: Pillar.Sport,
+			display: ArticleDisplay.Standard,
+		},
+	]),
+];
