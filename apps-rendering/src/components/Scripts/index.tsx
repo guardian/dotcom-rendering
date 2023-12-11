@@ -1,7 +1,7 @@
 // ----- Section ----- //
 
-import type { Option } from '@guardian/types';
-import { map, withDefault } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 

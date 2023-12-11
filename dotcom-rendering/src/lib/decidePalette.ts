@@ -31,78 +31,6 @@ import { transparentColour } from './transparentColour';
 const WHITE = neutral[100];
 const BLACK = neutral[7];
 
-const textHeadline = (format: ArticleFormat): string => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			switch (format.design) {
-				case ArticleDesign.PrintShop:
-					switch (format.theme) {
-						case ArticleSpecial.SpecialReport:
-							return palette.neutral[100];
-						default:
-							return palette.neutral[7];
-					}
-				default: {
-					return palette.neutral[100];
-				}
-			}
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReport: {
-					switch (format.design) {
-						case ArticleDesign.Interview:
-							return palette.neutral[100];
-						default:
-							return palette.specialReport[100];
-					}
-				}
-				case ArticleSpecial.SpecialReportAlt: {
-					switch (format.design) {
-						case ArticleDesign.Interview:
-							return palette.specialReport[800];
-						case ArticleDesign.LiveBlog:
-							return palette.neutral[100];
-						case ArticleDesign.DeadBlog:
-							return palette.neutral[7];
-						default:
-							return palette.neutral[7];
-					}
-				}
-				default: {
-					switch (format.design) {
-						case ArticleDesign.Review:
-						case ArticleDesign.Recipe:
-						case ArticleDesign.Feature:
-							switch (format.theme) {
-								case Pillar.News:
-									return palette.news[300];
-								case Pillar.Sport:
-									return palette.sport[300];
-								case Pillar.Culture:
-									return palette.culture[300];
-								case Pillar.Lifestyle:
-									return palette.lifestyle[300];
-								case Pillar.Opinion:
-									return palette.opinion[300];
-								case ArticleSpecial.Labs:
-									return palette.labs[300];
-							}
-						case ArticleDesign.Interview:
-						case ArticleDesign.LiveBlog:
-						case ArticleDesign.Picture:
-							return palette.neutral[100];
-						default:
-							return palette.neutral[7];
-					}
-				}
-			}
-		default:
-			return palette.neutral[7];
-	}
-};
-
 const textHeadlineWhenMatch = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.MatchReport:
@@ -218,15 +146,6 @@ const textArticleLink = (format: ArticleFormat): string => {
 
 const textDisclaimerLink = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
-
-const textWitnessIcon = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
-const textWitnessTitle = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
-const textWitnessAuthor = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
 
 const textStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
@@ -740,14 +659,6 @@ const borderHeadline = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
-const matchTab = (): string => {
-	return border.secondary;
-};
-
-const activeMatchTab = (): string => {
-	return sport[300];
-};
-
 const borderCardSupporting = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Comment:
@@ -986,10 +897,6 @@ const textDateLine = (format: ArticleFormat): string => {
 	return neutral[46];
 };
 
-const textNumberedTitle = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme].main;
-};
-
 const textNumberedPosition = (): string => {
 	return text.supporting;
 };
@@ -1028,16 +935,6 @@ const backgroundCarouselDot = (format: ArticleFormat): string => {
 
 const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
-};
-
-const backgroundMatchStats = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return neutral[97];
-		default:
-			return '#d9edf6';
-	}
 };
 
 const backgroundTreat = (format: ArticleFormat): string => {
@@ -1240,7 +1137,6 @@ export const decidePalette = (
 		containerPalette && decideContainerOverrides(containerPalette);
 	return {
 		text: {
-			headline: textHeadline(format),
 			headlineWhenMatch: textHeadlineWhenMatch(format),
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
@@ -1261,11 +1157,7 @@ export const decidePalette = (
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),
 			pagination: textPagination(format),
-			witnessIcon: textWitnessIcon(format),
-			witnessAuthor: textWitnessAuthor(format),
-			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
-			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			filterButton: textFilterButton(),
@@ -1292,7 +1184,6 @@ export const decidePalette = (
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
 			analysisUnderline: backgroundUnderline(format),
-			matchStats: backgroundMatchStats(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),
@@ -1320,8 +1211,6 @@ export const decidePalette = (
 			lines: overrides?.border.lines ?? borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
-			matchTab: matchTab(),
-			activeMatchTab: activeMatchTab(),
 			cardSupporting: borderCardSupporting(format),
 			filterButton: borderFilterButton(),
 			secondary: borderSecondary(format),

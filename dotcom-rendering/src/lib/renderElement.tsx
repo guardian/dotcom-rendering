@@ -10,7 +10,6 @@ import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
-import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpSwitcher } from '../components/EmailSignUpSwitcher';
@@ -65,7 +64,6 @@ import {
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
-import { decidePalette } from './decidePalette';
 
 type Props = {
 	format: ArticleFormat;
@@ -138,8 +136,6 @@ export const renderElement = ({
 	isPinnedPost,
 	abTests,
 }: Props) => {
-	const palette = decidePalette(format);
-
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
@@ -238,8 +234,6 @@ export const renderElement = ({
 					permalink={element.permalink}
 				/>
 			);
-		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
-			return <DisclaimerBlockComponent html={element.html} />;
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
 			return (
 				<DividerBlockComponent
@@ -474,7 +468,7 @@ export const renderElement = ({
 				<NumberedTitleBlockComponent
 					position={element.position}
 					html={element.html}
-					format={element.format}
+					format={format}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
@@ -695,7 +689,6 @@ export const renderElement = ({
 							authorName={authorName}
 							dateCreated={dateCreated}
 							alt={alt}
-							palette={palette}
 						/>
 					);
 				}
@@ -714,7 +707,6 @@ export const renderElement = ({
 							authorName={authorName}
 							youtubeHtml={youtubeHtml}
 							dateCreated={dateCreated}
-							palette={palette}
 						/>
 					);
 				}
@@ -726,7 +718,6 @@ export const renderElement = ({
 							description={witnessTypeDataText.description}
 							authorName={witnessTypeDataText.authorName}
 							dateCreated={witnessTypeDataText.dateCreated}
-							palette={palette}
 						/>
 					);
 				}
@@ -760,6 +751,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':
+		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
 		default:
 			return <></>;
 	}

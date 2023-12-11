@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
-import { some } from '@guardian/types';
+import { some } from '../../../vendor/@guardian/types/index';
 import { EmbedKind } from 'embed';
 import EmbedComponentWrapper from './';
 

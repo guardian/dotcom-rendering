@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { none } from '@guardian/types';
+import { none } from '../../../vendor/@guardian/types/index';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import type { FC } from 'react';
 import Follow from './';

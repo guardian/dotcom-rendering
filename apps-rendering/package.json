@@ -8,6 +8,7 @@
 		"ios >= 12"
 	],
 	"scripts": {
+		"preinstall": "../scripts/preinstall.mjs",
 		"upload": "node-riffraff-artifact",
 		"copy-manifest": "cp dist/assets/manifest.json dist/server/manifest.json",
 		"copy-fonts": "cp -R assets/fonts dist/assets/fonts",
@@ -33,8 +34,8 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@aws-sdk/credential-providers": "3.441.0",
 		"@aws-sdk/client-ssm": "3.441.0",
+		"@aws-sdk/credential-providers": "3.441.0",
 		"@babel/core": "7.23.2",
 		"@babel/preset-env": "^7.20.2",
 		"@creditkarma/thrift-server-core": "^1.0.4",
@@ -55,7 +56,6 @@
 		"@guardian/source-foundations": "^13.0.0",
 		"@guardian/source-react-components": "16.0.1",
 		"@guardian/source-react-components-development-kitchen": "14.0.2",
-		"@guardian/types": "^9.0.1",
 		"@storybook/addon-essentials": "^7.2.0",
 		"@storybook/addons": "^7.2.0",
 		"@storybook/api": "^7.2.0",

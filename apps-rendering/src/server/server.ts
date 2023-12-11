@@ -7,7 +7,7 @@ import type { RenderingRequest } from '@guardian/apps-rendering-api-models/rende
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import type { Option } from '@guardian/types';
+import type { Option } from '../../vendor/@guardian/types/index';
 import {
 	fromNullable,
 	map,
@@ -15,7 +15,7 @@ import {
 	OptionKind,
 	some,
 	withDefault,
-} from '@guardian/types';
+} from '../../vendor/@guardian/types/index';
 import {
 	capiEndpoint,
 	getMockCampaigns,

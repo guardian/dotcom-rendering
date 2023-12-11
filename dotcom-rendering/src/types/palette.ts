@@ -2,7 +2,6 @@ export type Colour = string;
 
 export type Palette = {
 	text: {
-		headline: Colour;
 		headlineWhenMatch: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
@@ -18,12 +17,8 @@ export type Palette = {
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
-		witnessIcon: Colour;
-		witnessAuthor: Colour;
-		witnessTitle: Colour;
 		carouselTitle: Colour;
 		pagination: Colour;
-		numberedTitle: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
 		filterButton: Colour;
@@ -49,7 +44,6 @@ export type Palette = {
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		analysisUnderline: Colour;
-		matchStats: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -74,8 +68,6 @@ export type Palette = {
 		headline: Colour;
 		navPillar: Colour;
 		lines: Colour;
-		matchTab: Colour;
-		activeMatchTab: Colour;
 		cricketScoreboardTop: Colour;
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;

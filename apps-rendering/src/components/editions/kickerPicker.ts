@@ -1,7 +1,7 @@
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
-import type { Option } from '@guardian/types';
-import { none, some } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import { none, some } from '../../../vendor/@guardian/types/index';
 import type { Item } from 'item';
 
 const tagTitleIsAlreadyInHeadline = (tag: Tag, headline: string): boolean =>

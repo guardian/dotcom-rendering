@@ -7,6 +7,7 @@ import type { TagType } from './tag';
 export interface AMPArticleModel {
 	headline: string;
 	standfirst: string;
+	affiliateLinksDisclaimer?: string;
 	webTitle: string;
 	mainMediaElements: FEElement[];
 	keyEvents: Block[]; // liveblog-specific

@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import { remSpace, text, textSans } from '@guardian/source-foundations';
-import { withDefault } from '@guardian/types';
+import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Generic, TikTok } from 'embed';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';

@@ -13,7 +13,7 @@ import {
 	remSpace,
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
-import { OptionKind } from '@guardian/types';
+import { OptionKind } from '../../../../vendor/@guardian/types/index';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { index } from 'lib';
