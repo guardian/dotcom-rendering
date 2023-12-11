@@ -135,7 +135,6 @@ export const ManyNewsletterSignUp = () => {
 		}[]
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
-	const [hideForm, setHideForm] = useState(false);
 	const [email, setEmail] = useState('');
 	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const useReCaptcha = isServer
@@ -191,7 +190,7 @@ export const ManyNewsletterSignUp = () => {
 
 	const removeAll = useCallback(() => {
 		if (status === 'Success') {
-			setHideForm(true);
+			window.location.reload();
 		}
 		if (!userCanInteract) {
 			return;
@@ -210,7 +209,7 @@ export const ManyNewsletterSignUp = () => {
 		}
 
 		setNewslettersToSignUpFor([]);
-	}, [userCanInteract, status]);
+	}, [userCanInteract]);
 
 	useEffect(() => {
 		const signUpButtons = [
@@ -308,7 +307,7 @@ export const ManyNewsletterSignUp = () => {
 			);
 			return;
 		}
-		setStatus('Loading');
+		setStatus('Success');
 		// successful execution triggers a call to sendRequest
 		// with the onChange prop on the captcha Component
 		void reportTrackingEvent(
@@ -360,11 +359,7 @@ export const ManyNewsletterSignUp = () => {
 	};
 
 	return (
-		<div
-			css={sectionWrapperStyle(
-				newslettersToSignUpFor.length === 0 || hideForm,
-			)}
-		>
+		<div css={sectionWrapperStyle(newslettersToSignUpFor.length === 0)}>
 			<Section
 				backgroundColour={palette.brand[800]}
 				showSideBorders={false}
