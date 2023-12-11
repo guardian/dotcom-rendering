@@ -5,12 +5,11 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import {
-	StoryProps,
-	splitTheme,
-} from '../../.storybook/decorators/splitThemeDecorator';
+import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { getThemeNameAsString } from '../lib/format';
 import { ArticleTitle } from './ArticleTitle';
+
 interface StoryArgs extends StoryProps {
 	theme: string;
 }
