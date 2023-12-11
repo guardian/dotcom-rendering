@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticleFormat, Pillar } from '@guardian/libs';
 import { headline, space, until } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
@@ -166,6 +166,14 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 				<Margins format={format}>
 					<Tag format={format}>
 						<TagLink href="/tone/profiles">Profile</TagLink>
+					</Tag>
+				</Margins>
+			);
+		case ArticleDesign.Comment:
+			return (
+				<Margins format={format}>
+					<Tag format={format}>
+						<TagLink href="/tone/comment">Opinion</TagLink>
 					</Tag>
 				</Margins>
 			);
