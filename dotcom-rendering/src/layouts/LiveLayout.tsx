@@ -1167,7 +1167,13 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					)}
 
 					{article.storyPackage && (
-						<Section fullWidth={true}>
+						<Section
+							fullWidth={true}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
+							borderColour={themePalette('--article-border')}
+						>
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
