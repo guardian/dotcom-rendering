@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { headline, space, until } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
