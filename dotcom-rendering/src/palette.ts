@@ -4537,6 +4537,7 @@ const paletteColours = {
 	'--series-title-match-text': {
 		light: seriesTitleMatchTextLight,
 		dark: seriesTitleTextDark,
+	},
 	'--recaptcha-button': {
 		light: recaptchaButtonLight,
 		dark: recaptchaButtonDark,
