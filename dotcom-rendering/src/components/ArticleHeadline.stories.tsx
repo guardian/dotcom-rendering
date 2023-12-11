@@ -13,7 +13,6 @@ import { ArticleContainer } from './ArticleContainer';
 import { ArticleHeadline } from './ArticleHeadline';
 import { mainMediaElements } from './ArticleHeadline.mocks';
 import { Flex } from './Flex';
-import { LeftColumn } from './LeftColumn';
 import { MainMedia } from './MainMedia';
 import { Section } from './Section';
 import { Standfirst } from './Standfirst';
@@ -52,9 +51,6 @@ export const ArticleStory: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is how the default headline looks"
@@ -74,9 +70,6 @@ export const Feature: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is a Feature headline, it has colour applied based on pillar"
@@ -96,9 +89,6 @@ export const ShowcaseInterview: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<div
 						css={css`
@@ -144,9 +134,6 @@ export const ShowcaseInterviewNobyline: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<div
 						css={css`
@@ -192,9 +179,6 @@ export const Interview: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
@@ -238,9 +222,6 @@ export const InterviewSpecialReport: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
@@ -285,9 +266,6 @@ export const InterviewNoByline: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
@@ -331,9 +309,6 @@ export const Comment: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="Yes, the billionaire club is one we really need to shut down"
@@ -361,9 +336,6 @@ export const Analysis: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString={`This is an Analysis headline in ${
@@ -391,9 +363,6 @@ export const Gallery: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is Gallery"
@@ -421,9 +390,6 @@ export const Review: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is Review"
@@ -451,9 +417,6 @@ export const PhotoEssay: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is PhotoEssay"
@@ -481,9 +444,6 @@ export const Explainer: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is Explainer"
@@ -511,9 +471,6 @@ export const Quiz: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is Quiz"
@@ -541,9 +498,6 @@ export const Recipe: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is Recipe"
@@ -571,9 +525,6 @@ export const Immersive: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when display type is Immersive"
@@ -601,9 +552,6 @@ export const ImmersiveNoMainMedia: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is PrintShop, which has no main media"
@@ -636,9 +584,6 @@ export const ImmersiveComment: StoryObj = ({ format }: StoryArgs) => {
 			backgroundColour="orange"
 		>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when display type is Immersive and design Comment"
@@ -666,9 +611,6 @@ export const Editorial: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is Editorial"
@@ -696,9 +638,6 @@ export const MatchReport: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is MatchReport"
@@ -726,9 +665,6 @@ export const LiveBlog: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true} backgroundColour={palette.news[300]}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is LiveBlog"
@@ -756,9 +692,6 @@ export const DeadBlog: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is DeadBlog"
@@ -786,9 +719,6 @@ export const ReviewWithoutStars: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is a Review headline."
@@ -821,9 +751,6 @@ export const AgeWarning: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Section fullWidth={true}>
 			<Flex>
-				<LeftColumn>
-					<></>
-				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString={`This is a headline in ${
