@@ -209,7 +209,7 @@ export const ManyNewsletterSignUp = () => {
 		}
 
 		setNewslettersToSignUpFor([]);
-	}, [userCanInteract]);
+	}, [userCanInteract, status]);
 
 	useEffect(() => {
 		const signUpButtons = [
