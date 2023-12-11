@@ -9,13 +9,15 @@ import type {
 	BannerPayload,
 	EpicPayload,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import useSWRImmutable from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
 const useSDC = <T>(
 	key: string,
 	fetcher: (baseUrl: string, payload: T) => Promise<ModuleDataResponse>,
 ): ModuleDataResponse | undefined => {
-	const { data, error } = useSWRImmutable(key, fetcher);
+	const { data, error } = useSWRImmutable(key, fetcher, {
+		revalidateOnFocus: false,
+	});
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'rr-epic');
 	}
