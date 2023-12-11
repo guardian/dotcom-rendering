@@ -1,20 +1,31 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay } from '@guardian/libs';
 import { unifyPageContent } from '../lib/unifyPageContent';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
+import { InteractiveAtomMessenger } from './InteractiveAtomMessenger.importable';
+import { Island } from './Island';
 
 const containerStyles = css`
 	margin: 0;
+	width: 100%;
+	position: relative;
+	contain: layout;
 `;
 
-const styles = css`
+const iframe = css`
 	width: 100%;
 	background-color: ${palette('--interactive-atom-background')};
 `;
 const fullHeightStyles = css`
 	height: 100%;
+`;
+
+const scrollyStyles = css`
+	position: sticky;
+	top: 0;
+	height: 100vh;
+	height: 100dvh;
+	overflow: hidden;
 `;
 
 type InteractiveAtomType = {
@@ -23,9 +34,16 @@ type InteractiveAtomType = {
 	elementJs?: string;
 	elementCss?: string;
 	isMainMedia?: boolean;
-	format: ArticleFormat;
 	title: string;
 };
+
+/** this hardcoded list is temporary, but we do not currently have a identifying mechanism */
+const scrollies = new Set([
+	'interactives/2018/06/migrant-deaths',
+	'interactives/2022/02/orion/project-in-numbers',
+	'interactives/2022/02/interactive-russian-deployments-ukraine-article/default',
+	'interactives/2023/01/colour-of-power/default',
+]);
 
 export const InteractiveAtom = ({
 	id,
@@ -33,26 +51,22 @@ export const InteractiveAtom = ({
 	elementJs,
 	elementCss,
 	isMainMedia,
-	format,
 	title,
 }: InteractiveAtomType) => {
 	const { renderingTarget } = useConfig();
 
+	const isScrolly = scrollies.has(id);
+
 	return (
 		<div
-			css={[containerStyles, isMainMedia && fullHeightStyles]}
+			css={[containerStyles, !!isMainMedia && fullHeightStyles]}
 			data-atom-id={id}
 			data-atom-type="interactive"
 		>
 			<iframe
 				title={title}
 				id={id}
-				css={[
-					styles,
-					isMainMedia &&
-						format.display === ArticleDisplay.Immersive &&
-						fullHeightStyles,
-				]}
+				css={[iframe, isScrolly && scrollyStyles]}
 				srcDoc={unifyPageContent({
 					elementJs,
 					elementCss,
@@ -61,6 +75,11 @@ export const InteractiveAtom = ({
 				})}
 				frameBorder="0"
 			/>
+			{isScrolly ? (
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<InteractiveAtomMessenger id={id} />
+				</Island>
+			) : null}
 		</div>
 	);
 };

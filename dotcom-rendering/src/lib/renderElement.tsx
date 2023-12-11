@@ -386,7 +386,6 @@ export const renderElement = ({
 					elementHtml={element.html}
 					elementJs={element.js}
 					elementCss={element.css}
-					format={format}
 					title={element.title}
 				/>
 			);
