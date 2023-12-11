@@ -209,7 +209,10 @@ describe('Elements', function () {
 			getBody().contains('Liverpool');
 		});
 
-		it('should render the affiliate disclaimer block', function () {
+		// Skipping for now as the change to the affiliate disclaimer block has been reverted
+		// https://github.com/guardian/frontend/pull/26749
+		// eslint-disable-next-line mocha/no-skipped-tests
+		it.skip('should render the affiliate disclaimer block', function () {
 			const getBody = () => {
 				return cy
 					.get('[data-testid="affiliate-disclaimer"]')
