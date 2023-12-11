@@ -7,7 +7,6 @@ import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';
-import { Hide } from './Hide';
 import { QuoteIcon } from './QuoteIcon';
 import { StarRating } from './StarRating/StarRating';
 
@@ -63,11 +62,16 @@ const headerStyles = css`
 	color: ${themePalette('--rich-link-header')};
 `;
 
+const smallFontStyles = css`
+	font-size: 0.875rem;
+`;
+
 const titleStyles = () => {
 	const fontWeight = 'light';
 
 	return css`
 		${headline.xxxsmall({ fontWeight })};
+		${smallFontStyles}
 		padding-top: 1px;
 		padding-bottom: 1px;
 
@@ -77,10 +81,6 @@ const titleStyles = () => {
 		}
 	`;
 };
-
-const smallFontStyles = css`
-	font-size: 0.875rem;
-`;
 
 const labsTitleStyles = () => {
 	const fontWeight = 'bold';
@@ -100,6 +100,7 @@ const bylineStyles = () => {
 	return css`
 		color: ${themePalette('--rich-link-text')};
 		${headline.xxxsmall({ fontStyle })};
+		${smallFontStyles}
 
 		${from.wide} {
 			${headline.xxsmall({ fontStyle })};
