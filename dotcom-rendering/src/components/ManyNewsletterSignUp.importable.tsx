@@ -307,7 +307,7 @@ export const ManyNewsletterSignUp = () => {
 			);
 			return;
 		}
-		setStatus('Success');
+		setStatus('Loading');
 		// successful execution triggers a call to sendRequest
 		// with the onChange prop on the captcha Component
 		void reportTrackingEvent(
