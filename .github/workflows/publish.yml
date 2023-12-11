@@ -39,10 +39,11 @@ jobs:
           tar -zcf front-web.tar.gz front-web
           rm -r front-web/*
           mv front-web.tar.gz front-web/
-      - uses: aws-actions/configure-aws-credentials@v2
+      - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: eu-west-1
           role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+          mask-aws-account-id: true
 
       - uses: guardian/actions-riff-raff@v2
         with:

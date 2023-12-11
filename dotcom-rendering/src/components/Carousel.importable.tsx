@@ -24,6 +24,7 @@ import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import type { Loading } from './CardPicture';
+import { useConfig } from './ConfigContext';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
 
@@ -862,6 +863,9 @@ export const Carousel = ({
 	discussionApiUrl,
 	...props
 }: ArticleProps | FrontProps) => {
+	const { renderingTarget } = useConfig();
+	const isApps = renderingTarget === 'Apps';
+
 	const carouselColours = decideCarouselColours(props);
 
 	const carouselRef = useRef<HTMLUListElement>(null);
@@ -982,7 +986,7 @@ export const Carousel = ({
 		[],
 	);
 
-	if (isAndroid) {
+	if (isApps && isAndroid) {
 		return null;
 	}
 

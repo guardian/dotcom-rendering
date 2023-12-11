@@ -1,4 +1,4 @@
-import { isString } from '@guardian/libs';
+import { ArticleDesign, isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { generateScriptTags, getPathFromManifest } from '../lib/assets';
@@ -6,6 +6,7 @@ import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
+import type { FEElement } from '../types/content';
 import type { DCRArticle } from '../types/frontend';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
@@ -36,6 +37,27 @@ export const renderArticle = (
 	const clientScripts = [getPathFromManifest('apps', 'index.js')];
 	const scriptTags = generateScriptTags([...clientScripts].filter(isString));
 
+	const initTwitter = `
+<script>
+// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/set-up-twitter-for-websites
+window.twttr = (function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0],
+	t = window.twttr || {};
+	if (d.getElementById(id)) return t;
+	js = d.createElement(s);
+	js.id = id;
+	js.src = "https://platform.twitter.com/widgets.js";
+	fjs.parentNode.insertBefore(js, fjs);
+
+	t._e = [];
+	t.ready = function(f) {
+	t._e.push(f);
+	};
+
+	return t;
+}(document, "script", "twitter-wjs"));
+</script>`;
+
 	const guardian = createGuardian({
 		editionId: article.editionId,
 		stage: article.config.stage,
@@ -56,6 +78,17 @@ export const renderArticle = (
 		unknownConfig: article.config,
 	});
 
+	// We want to only insert script tags for the elements or main media elements on this page view
+	// so we need to check what elements we have and use the mapping to the the chunk name
+	const elements: FEElement[] = article.blocks
+		.map((block) => block.elements)
+		.flat();
+	const pageHasTweetElements = elements.some(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.TweetBlockElement',
+	);
+
 	const renderedPage = htmlPageTemplate({
 		css: extractedCss,
 		html,
@@ -66,6 +99,10 @@ export const renderArticle = (
 		offerHttp3: false,
 		weAreHiring: !!article.config.switches.weAreHiring,
 		canonicalUrl: article.canonicalUrl,
+		initTwitter:
+			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
+				? initTwitter
+				: undefined,
 	});
 
 	return {

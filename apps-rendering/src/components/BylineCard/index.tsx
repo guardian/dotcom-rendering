@@ -9,8 +9,12 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
-import type { Option } from '@guardian/types';
-import { fromNullable, map, withDefault } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import {
+	fromNullable,
+	map,
+	withDefault,
+} from '../../../vendor/@guardian/types/index';
 import { formatFromRelatedItem } from 'components/Card';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';

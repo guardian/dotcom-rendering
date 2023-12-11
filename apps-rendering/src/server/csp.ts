@@ -2,7 +2,7 @@
 
 import { createHash } from 'crypto';
 import { ArticleDesign } from '@guardian/libs';
-import { map, withDefault } from '@guardian/types';
+import { map, withDefault } from '../../vendor/@guardian/types/index';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import type { ThirdPartyEmbeds } from 'capi';

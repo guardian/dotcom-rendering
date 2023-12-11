@@ -8,8 +8,8 @@ import {
 	neutral,
 	remSpace,
 } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { map, none, some, withDefault } from '@guardian/types';
+import type { Option } from '../vendor/@guardian/types/index';
+import { map, none, some, withDefault } from '../vendor/@guardian/types/index';
 import { pipe } from 'lib';
 import { fill } from 'palette';
 

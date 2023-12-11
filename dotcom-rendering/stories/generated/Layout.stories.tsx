@@ -810,3 +810,26 @@ export default {
 				}]
 			),
 		];
+
+		export const WebStandardNewsletterSignupSportPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="NewsletterSignup"
+					theme="SportPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardNewsletterSignupSportPillarLight.storyName = 'Web: Display: Standard, Design: NewsletterSignup, Theme: SportPillar, Mode: Light';
+		WebStandardNewsletterSignupSportPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardNewsletterSignupSportPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.NewsletterSignup,
+					theme: {...ArticleSpecial, ...Pillar}.Sport,
+				}]
+			),
+		];
+
+		

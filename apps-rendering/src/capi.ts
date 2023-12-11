@@ -10,8 +10,13 @@ import { ContentType } from '@guardian/content-api-models/v1/contentType';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
-import type { Option } from '@guardian/types';
-import { andThen, fromNullable, none, some } from '@guardian/types';
+import type { Option } from '../vendor/@guardian/types/index';
+import {
+	andThen,
+	fromNullable,
+	none,
+	some,
+} from '../vendor/@guardian/types/index';
 import { fromString as dateFromString } from 'date';
 import { parseImage } from 'image';
 import { isLabs } from 'item';

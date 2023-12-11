@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import type { SerializedStyles } from '@emotion/react';
-import type { Option } from '@guardian/types';
+import type { Option } from '../vendor/@guardian/types/index';
 import {
 	fromNullable,
 	map,
@@ -9,7 +9,7 @@ import {
 	OptionKind,
 	some,
 	withDefault,
-} from '@guardian/types';
+} from '../vendor/@guardian/types/index';
 import { Optional } from 'optional';
 import type { ReactElement } from 'react';
 import { Result } from 'result';

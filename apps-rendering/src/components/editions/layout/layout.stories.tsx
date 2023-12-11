@@ -6,7 +6,7 @@ import {
 	ArticlePillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { none, some } from '@guardian/types';
+import { none, some } from '../../../../vendor/@guardian/types/index';
 import type { Contributor } from 'contributor';
 import {
 	analysis,

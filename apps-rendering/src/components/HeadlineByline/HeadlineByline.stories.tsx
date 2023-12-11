@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { Option } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
 import { parse } from 'client/parser';
 import type { FC } from 'react';
 import HeadlineByline from './';

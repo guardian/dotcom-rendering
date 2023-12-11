@@ -8,7 +8,7 @@ import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind } from 'bodyElement';
-import { none, some } from '@guardian/types';
+import { none, some } from '../vendor/@guardian/types/index';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';

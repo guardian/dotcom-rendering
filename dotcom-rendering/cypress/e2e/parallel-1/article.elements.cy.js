@@ -220,7 +220,7 @@ describe('Elements', function () {
 				'/Article/https://www.theguardian.com/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue',
 			);
 
-			getBody().contains('affiliate links');
+			getBody().contains('affiliate link');
 		});
 	});
 });

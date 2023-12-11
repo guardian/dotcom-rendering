@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { ArticleElementRole } from '@guardian/libs';
-import { some } from '@guardian/types';
+import { some } from '../../vendor/@guardian/types/index';
 import type { Image } from 'image/image';
 import { ImageSubtype } from 'image/image';
 import { Optional } from 'optional';

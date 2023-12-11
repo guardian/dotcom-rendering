@@ -46,7 +46,7 @@ const listTab = css`
 	padding: 0 0 0;
 	margin-bottom: 16px;
 	width: 240px;
-	height: 28px;
+	min-height: 28px;
 `;
 
 const firstTab = css`
@@ -75,7 +75,7 @@ const buttonStyles = (isSelected: boolean) => css`
 	text-align: left;
 	text-decoration: none;
 	font-weight: 600;
-	min-height: 36px;
+	min-height: 28px;
 	display: block;
 	width: 100%;
 

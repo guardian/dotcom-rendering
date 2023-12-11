@@ -5,7 +5,7 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
 import { AgeWarning } from '@guardian/source-react-components-development-kitchen';
-import type { Option } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
 import { grid } from 'grid/grid';
 import { isComment, isNews } from 'item';
 import { Optional } from 'optional';

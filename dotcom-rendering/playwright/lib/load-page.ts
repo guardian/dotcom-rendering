@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test';
+import type { DCRArticle } from '../../src/types/frontend';
 
 const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
@@ -16,6 +17,7 @@ const loadPage = async (
 	path: string,
 	waitUntil: 'load' | 'domcontentloaded' = 'domcontentloaded',
 	region = 'GB',
+	preventSupportBanner = true,
 ): Promise<void> => {
 	await page.addInitScript((regionProvided) => {
 		// force geo region
@@ -23,11 +25,12 @@ const loadPage = async (
 			'gu.geo.override',
 			JSON.stringify({ value: regionProvided }),
 		);
-		// prevent support banner
-		window.localStorage.setItem(
-			'gu.prefs.engagementBannerLastClosedAt',
-			`{"value":"${new Date().toISOString()}"}`,
-		);
+		if (preventSupportBanner) {
+			window.localStorage.setItem(
+				'gu.prefs.engagementBannerLastClosedAt',
+				`{"value":"${new Date().toISOString()}"}`,
+			);
+		}
 	}, region);
 	// Abort all ophan requests as they hang and stop the page from firing the 'load' event
 	await page.route(/ophan.theguardian.com/, async (route) => {
@@ -38,4 +41,64 @@ const loadPage = async (
 	await page.goto(`${BASE_URL}${path}`, { waitUntil });
 };
 
-export { BASE_URL, loadPage };
+/**
+ * Create a POST request to the /Article endpoint so we can override config
+ * and switches in the json sent to DCR
+ */
+const loadPageWithOverrides = async (
+	page: Page,
+	article: DCRArticle,
+	overrides?: {
+		configOverrides?: Record<string, unknown>;
+		switchOverrides?: Record<string, unknown>;
+	},
+): Promise<void> => {
+	const path = `/Article`;
+	await page.route(`${BASE_URL}${path}`, async (route) => {
+		const postData = {
+			...article,
+			config: {
+				...article.config,
+				...overrides?.configOverrides,
+				switches: {
+					...article.config.switches,
+					...overrides?.switchOverrides,
+				},
+			},
+		};
+		await route.continue({
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			postData,
+		});
+	});
+	await loadPage(page, path);
+};
+
+/**
+ * Allows us to continue using cookies for signed in features
+ * until we figure out how to use Okta in e2e testing.
+ * See https://github.com/guardian/dotcom-rendering/issues/8758
+ */
+const loadPageNoOkta = async (
+	page: Page,
+	article: DCRArticle,
+	overrides?: {
+		configOverrides?: Record<string, unknown>;
+		switchOverrides?: Record<string, unknown>;
+	},
+): Promise<void> => {
+	return loadPageWithOverrides(page, article, {
+		configOverrides: overrides?.configOverrides,
+		switchOverrides: {
+			...overrides?.switchOverrides,
+			okta: false,
+			idCookieRefresh: false,
+			userFeaturesDcr: true,
+		},
+	});
+};
+
+export { BASE_URL, loadPage, loadPageWithOverrides, loadPageNoOkta };

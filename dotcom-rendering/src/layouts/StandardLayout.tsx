@@ -21,6 +21,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
+import { Disclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
@@ -112,6 +113,7 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  headline     right-column'
 									'.      border  standfirst   right-column'
+									'.      border  disclaimer   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -146,6 +148,7 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  headline     right-column'
 									'.      border  standfirst   right-column'
+									'.      border  disclaimer   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -180,6 +183,7 @@ const StandardGrid = ({
 									'title         right-column'
 									'headline      right-column'
 									'standfirst    right-column'
+									'disclaimer    right-column'
 									'media         right-column'
 									'lines         right-column'
 									'meta          right-column'
@@ -208,6 +212,7 @@ const StandardGrid = ({
 									'title'
 									'headline'
 									'standfirst'
+									'disclaimer'
 									'media'
 									'lines'
 									'meta'
@@ -238,6 +243,7 @@ const StandardGrid = ({
 									'title'
 									'headline'
 									'standfirst'
+									'disclaimer'
 									'lines'
 									'meta'
 									'body';
@@ -603,6 +609,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
+						<GridItem area="disclaimer">
+							{!!article.affiliateLinksDisclaimer && (
+								<Disclaimer
+									html={article.affiliateLinksDisclaimer}
+								></Disclaimer>
+							)}
+						</GridItem>
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
@@ -736,9 +749,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={themePalette(
-										'--article-border-secondary',
-									)}
+									color={themePalette('--straight-lines')}
 								/>
 								<SubMeta
 									format={format}

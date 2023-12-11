@@ -6,7 +6,12 @@ import { parseCardImage, parseImage, Image } from 'image';
 import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
-import { none, OptionKind, some, withDefault } from '@guardian/types';
+import {
+	none,
+	OptionKind,
+	some,
+	withDefault,
+} from '../vendor/@guardian/types/index';
 import { ArticleElementRole } from '@guardian/libs';
 import { ImageElementFields } from '@guardian/content-api-models/v1/imageElementFields';
 import { Context } from 'parserContext';
