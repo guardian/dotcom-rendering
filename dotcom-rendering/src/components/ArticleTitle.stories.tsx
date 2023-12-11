@@ -5,15 +5,15 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import {
+	StoryProps,
+	splitTheme,
+} from '../../.storybook/decorators/splitThemeDecorator';
 import { getThemeNameAsString } from '../lib/format';
 import { ArticleTitle } from './ArticleTitle';
-
-interface BackgroundProps {
+interface StoryArgs extends StoryProps {
 	theme: string;
 }
-
-type StoryArgs = { format: ArticleFormat };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -96,7 +96,7 @@ export const beyondTheBlade = () => {
 };
 beyondTheBlade.storyName = 'Beyond the blade badge';
 
-export const immersiveComment = ({ theme }: BackgroundProps) => {
+export const immersiveComment = ({ theme }: StoryArgs) => {
 	return (
 		<div
 			css={css`
@@ -128,7 +128,7 @@ immersiveComment.decorators = [
 	]),
 ];
 
-export const immersiveCommentTag = ({ theme }: BackgroundProps) => {
+export const immersiveCommentTag = ({ theme }: StoryArgs) => {
 	return (
 		<div
 			css={css`
@@ -231,7 +231,7 @@ ArticleBlogTag.decorators = [
 	]),
 ];
 
-export const LiveblogTitle = ({ theme }: BackgroundProps) => {
+export const LiveblogTitle = ({ theme }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<div
