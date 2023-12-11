@@ -43,11 +43,11 @@ export const FormatBoundary = ({ format, children }: Props) => {
 					`,
 				isStorybook &&
 					css`
-						.light & {
+						[data-color-scheme='light'] & {
 							${paletteDeclarations(format, 'light')}
 						}
 
-						.dark & {
+						[data-color-scheme='dark'] & {
 							${paletteDeclarations(format, 'dark')}
 						}
 					`,

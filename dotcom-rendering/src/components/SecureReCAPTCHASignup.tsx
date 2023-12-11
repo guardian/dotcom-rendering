@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanAction } from '@guardian/libs';
-import { neutral, space, textSans, until } from '@guardian/source-foundations';
+import { space, textSans, until } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
@@ -12,12 +12,13 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import type { FormEvent, ReactEventHandler } from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
 
@@ -37,6 +38,8 @@ type Props = {
 const labelStyles = css`
 	div {
 		${textSans.xsmall({ fontWeight: 'bold' })}
+		color: ${palette('--article-text')};
+		padding-bottom: ${space[1]}px;
 	}
 `;
 
@@ -57,13 +60,16 @@ const inputContainerStyles = css`
 const textInputStyles = css`
 	height: 36px;
 	margin-top: 0;
+	background-color: ${palette('--article-section-background')};
+	color: ${palette('--article-text')};
 `;
 
 const buttonCssOverrides = css`
 	justify-content: center;
-	background-color: ${neutral[0]};
+	background-color: ${palette('--recaptcha-button')};
+	color: ${palette('--recaptcha-button-text')};
 	:hover {
-		background-color: ${neutral[20]};
+		background-color: ${palette('--recaptcha-button-hover')};
 	}
 	flex-basis: 118px;
 	flex-shrink: 0;
@@ -219,7 +225,7 @@ export const SecureReCAPTCHASignup = ({
 	successDescription,
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
-
+	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
@@ -229,6 +235,9 @@ export const SecureReCAPTCHASignup = ({
 		undefined,
 	);
 
+	useEffect(() => {
+		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
+	}, []);
 	const { renderingTarget } = useConfig();
 
 	const hasResponse = typeof responseOk === 'boolean';
@@ -300,8 +309,6 @@ export const SecureReCAPTCHASignup = ({
 		recaptchaRef.current?.execute();
 	};
 
-	const captchaSiteKey = window.guardian.config.page.googleRecaptchaSiteKey;
-
 	return (
 		<>
 			<form onSubmit={handleSubmit} id={`secure-signup-${newsletterId}`}>
@@ -353,9 +360,13 @@ export const SecureReCAPTCHASignup = ({
 							}
 							button {
 								margin-left: ${space[1]}px;
-								background-color: ${neutral[0]};
+								background-color: ${palette(
+									'--recaptcha-button',
+								)};
 								:hover {
-									background-color: ${neutral[20]};
+									background-color: ${palette(
+										'--recaptcha-button-hover',
+									)};
 								}
 							}
 						`}

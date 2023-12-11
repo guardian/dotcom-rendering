@@ -46,15 +46,10 @@ type IslandProps = {
  * Note. The component passed as children must follow the [MyComponent].importable.tsx
  * namimg convention
  *
- * @param {IslandProps } props - JSX Props
+ * @param {IslandProps} props - JSX Props
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
  */
-export const Island = ({
-	priority,
-
-	defer,
-	children,
-}: IslandProps) => {
+export const Island = ({ priority, defer, children }: IslandProps) => {
 	/**
 	 * Where is this coming from?
 	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
@@ -66,10 +61,12 @@ export const Island = ({
 	const rootMargin =
 		defer?.until === 'visible' ? defer.rootMargin : undefined;
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
+	const name = String(children.type.name);
+
 	return (
 		<gu-island
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
-			name={children.type.name}
+			name={name}
 			priority={priority}
 			deferUntil={defer?.until}
 			props={JSON.stringify(children.props)}

@@ -49,6 +49,10 @@ Once Node is installed, make sure you're using the correct package manager by [e
 corepack enable
 ```
 
+> [!NOTE]
+>
+> If you're using `asdf`, you'll need to run `asdf reshim nodejs` after running `corepack enable`.
+
 ### Running instructions
 
 Clone the repo, run `yarn` in the root, then CD into the `dotcom-rendering` subdirectory -

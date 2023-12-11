@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
 import { DefaultByline } from './Byline.defaults';
 import { blogColor } from './LiveBlogByline';
 

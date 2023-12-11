@@ -10,8 +10,8 @@ import {
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { withDefault } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import { withDefault } from '../../../vendor/@guardian/types/index';
 import Anchor from 'components/Anchor';
 import { maybeRender } from 'lib';
 import { text } from 'palette';

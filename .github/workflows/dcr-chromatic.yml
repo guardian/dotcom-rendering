@@ -36,7 +36,7 @@ jobs:
           cache: 'yarn'
 
       # Root yarn installs all workspaces (root, dotcom)
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
 
       - name: Chromatic - DCR
         env:

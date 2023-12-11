@@ -11,7 +11,7 @@ import {
 	wideArticleMargin,
 	wideContentWidth,
 } from '../styles';
-import { none, some } from '@guardian/types';
+import { none, some } from '../../../../vendor/@guardian/types/index';
 import Img from '../../ImgAlt';
 
 const cartoonId = 'multi-panel-cartoon-figure';

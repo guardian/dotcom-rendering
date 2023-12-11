@@ -8,6 +8,7 @@ import { getSharingUrls } from '../lib/sharing-urls';
 import type { AMPArticleModel } from '../types/article.amp';
 import { Branding, BrandingRegionContainer } from './Branding.amp';
 import { Byline } from './Byline.amp';
+import { Disclaimer } from './Disclaimer.amp';
 import { MainMedia } from './MainMedia.amp';
 import { SeriesLink } from './SeriesLink.amp';
 import { Standfirst } from './Standfirst.amp';
@@ -97,6 +98,13 @@ export const TopMetaNews = ({
 			/>
 
 			<Standfirst text={articleData.standfirst} pillar={pillar} />
+
+			{!!articleData.affiliateLinksDisclaimer && (
+				<Disclaimer
+					html={articleData.affiliateLinksDisclaimer}
+					pillar={pillar}
+				/>
+			)}
 
 			<BrandingRegionContainer
 				commercialProperties={articleData.commercialProperties}

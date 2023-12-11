@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { withDefault } from '@guardian/types';
+import { withDefault } from '../vendor/@guardian/types/index';
 import { ElementKind } from 'bodyElementKind';
 import { pipe } from 'lib';
 import type { Parser } from 'parser';

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
-import { withDefault } from '@guardian/types';
+import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { EmailSignup } from 'embed';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';

@@ -3,6 +3,7 @@ import { headline } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decideTrail } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
+import { palette as themePalette } from '../palette';
 import type { FETrailTabType, TrailType } from '../types/trails';
 import { MostViewedRightItem } from './MostViewedRightItem';
 
@@ -57,6 +58,7 @@ export const MostViewedRight = ({
 						display: block;
 					`}
 					count={4}
+					color={themePalette('--straight-lines')}
 				/>
 				<h3 css={headingStyles}>Most viewed</h3>
 				<ul data-link-name="Right hand most popular geo GB">

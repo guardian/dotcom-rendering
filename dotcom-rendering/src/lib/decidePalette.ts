@@ -51,54 +51,6 @@ const blogsGrayBackgroundPalette = (format: ArticleFormat): string => {
 	}
 };
 
-const textHeadline = (format: ArticleFormat): string => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
-			switch (format.design) {
-				case ArticleDesign.PrintShop:
-					return BLACK;
-				default:
-					return WHITE;
-			}
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard: {
-			if (
-				format.theme === ArticleSpecial.SpecialReport &&
-				format.design !== ArticleDesign.Interview
-			)
-				return specialReport[100];
-
-			if (format.theme === ArticleSpecial.SpecialReportAlt) {
-				if (format.design === ArticleDesign.Interview)
-					return palette.specialReportAlt[800];
-
-				if (
-					format.design !== ArticleDesign.LiveBlog &&
-					format.design !== ArticleDesign.DeadBlog
-				)
-					return neutral[7];
-			}
-
-			switch (format.design) {
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Feature:
-					return pillarPalette[format.theme].dark;
-				case ArticleDesign.Interview:
-				case ArticleDesign.LiveBlog:
-				case ArticleDesign.Picture:
-					return WHITE;
-				default:
-					return BLACK;
-			}
-		}
-		default:
-			return BLACK;
-	}
-};
-
 const textSeriesTitle = (format: ArticleFormat): string => {
 	if (
 		format.theme === ArticleSpecial.Labs &&
@@ -283,15 +235,6 @@ const textArticleLink = (format: ArticleFormat): string => {
 
 const textDisclaimerLink = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
-
-const textWitnessIcon = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
-const textWitnessTitle = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
-
-const textWitnessAuthor = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
 
 const textStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
@@ -836,14 +779,6 @@ const borderHeadline = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
-const matchTab = (): string => {
-	return border.secondary;
-};
-
-const activeMatchTab = (): string => {
-	return sport[300];
-};
-
 const borderCardSupporting = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Comment:
@@ -1082,10 +1017,6 @@ const textDateLine = (format: ArticleFormat): string => {
 	return neutral[46];
 };
 
-const textNumberedTitle = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme].main;
-};
-
 const textNumberedPosition = (): string => {
 	return text.supporting;
 };
@@ -1124,16 +1055,6 @@ const backgroundCarouselDot = (format: ArticleFormat): string => {
 
 const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
-};
-
-const backgroundMatchStats = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return neutral[97];
-		default:
-			return '#d9edf6';
-	}
 };
 
 const backgroundTreat = (format: ArticleFormat): string => {
@@ -1336,7 +1257,6 @@ export const decidePalette = (
 		containerPalette && decideContainerOverrides(containerPalette);
 	return {
 		text: {
-			headline: textHeadline(format),
 			headlineWhenMatch: textHeadlineWhenMatch(format),
 			seriesTitle: textSeriesTitle(format),
 			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
@@ -1360,11 +1280,7 @@ export const decidePalette = (
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),
 			pagination: textPagination(format),
-			witnessIcon: textWitnessIcon(format),
-			witnessAuthor: textWitnessAuthor(format),
-			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
-			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			filterButton: textFilterButton(),
@@ -1393,7 +1309,6 @@ export const decidePalette = (
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
 			analysisUnderline: backgroundUnderline(format),
-			matchStats: backgroundMatchStats(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),
@@ -1421,8 +1336,6 @@ export const decidePalette = (
 			lines: overrides?.border.lines ?? borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
-			matchTab: matchTab(),
-			activeMatchTab: activeMatchTab(),
 			cardSupporting: borderCardSupporting(format),
 			filterButton: borderFilterButton(),
 			secondary: borderSecondary(format),
