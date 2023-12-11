@@ -9,7 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { palette } from '../palette';
 import { AgeWarning } from './AgeWarning';
-import { BigNumber } from './BigNumber/BigNumber';
+import { BigNumber } from './BigNumber';
 import { FormatBoundary } from './FormatBoundary';
 import { LinkHeadline } from './LinkHeadline';
 import { generateSources } from './Picture';
