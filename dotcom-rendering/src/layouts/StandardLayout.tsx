@@ -330,8 +330,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
-	const showComments = isWeb && article.isCommentable && !isPaidContent;
+	const showComments = article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
@@ -875,6 +874,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						sectionId="comments"
 						data-print-layout="hide"
 						element="section"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}

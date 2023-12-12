@@ -238,8 +238,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
-	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
-	const showComments = isWeb && article.isCommentable && !isPaidContent;
+	const showComments = article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
@@ -789,6 +788,11 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						fullWidth={true}
 						sectionId="comments"
 						element="section"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
