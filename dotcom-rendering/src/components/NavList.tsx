@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { border, from, palette, space } from '@guardian/source-foundations';
+import { from, palette, space } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
 import type { ContainerOverrides } from '../types/palette';
@@ -14,7 +14,7 @@ type Props = {
 
 const columnRuleColour = (containerOverrides?: ContainerOverrides) => css`
 	column-rule: 1px solid
-		${containerOverrides?.border?.container ?? border.secondary};
+		${containerOverrides?.border.container ?? palette.neutral[86]};
 `;
 
 const topBorderColour = (containerOverrides?: ContainerOverrides) => css`

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
-import { border, from } from '@guardian/source-foundations';
+import { from, palette as sourcePalette } from '@guardian/source-foundations';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
@@ -26,8 +26,8 @@ const stackBelow = (breakpoint: Breakpoint) => css`
 `;
 
 const secondTierStyles = css`
-	border-left: 1px solid ${border.secondary};
-	border-right: 1px solid ${border.secondary};
+	border-left: 1px solid ${sourcePalette.neutral[86]};
+	border-right: 1px solid ${sourcePalette.neutral[86]};
 
 	${from.tablet} {
 		padding-top: 24px;

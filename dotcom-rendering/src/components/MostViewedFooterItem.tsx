@@ -2,9 +2,9 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	border,
 	breakpoints,
 	headline,
+	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
 import { palette } from '../palette';
@@ -21,12 +21,12 @@ const gridItem = (
 ) => {
 	const borderTop = hasPageSkin
 		? css`
-				border-top: 1px solid ${border.secondary};
+				border-top: 1px solid ${sourcePalette.neutral[86]};
 		  `
 		: css`
 				/* Below leftCol always set top border */
 				${until.leftCol} {
-					border-top: 1px solid ${border.secondary};
+					border-top: 1px solid ${sourcePalette.neutral[86]};
 				}
 		  `;
 	return css`
@@ -38,10 +38,10 @@ const gridItem = (
 		items to prevent double borders */
 		border-top: ${position !== 1 &&
 		position !== 6 &&
-		`1px solid ${border.secondary}`};
+		`1px solid ${sourcePalette.neutral[86]}`};
 
 		/* The left border is set on the container */
-		border-right: 1px solid ${border.secondary};
+		border-right: 1px solid ${sourcePalette.neutral[86]};
 		min-height: ${isWithImage ? '4rem' : '3.25rem'};
 
 		&:hover {

@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	border,
 	headline,
 	palette as sourcePalette,
 } from '@guardian/source-foundations';
@@ -25,7 +24,7 @@ const listItemStyles = css`
 	}
 	padding-top: 4px;
 	margin-bottom: 12px;
-	border-top: 1px solid ${border.secondary};
+	border-top: 1px solid ${sourcePalette.neutral[86]};
 
 	&:first-of-type {
 		padding-top: 0;
