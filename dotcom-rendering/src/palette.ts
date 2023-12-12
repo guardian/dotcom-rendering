@@ -2157,25 +2157,44 @@ const cardAgeTextLight: PaletteFunction = (format) => {
 			}
 	}
 };
-const cardOnwardContentAgeTextLight: PaletteFunction = (format) => {
-	switch (format.theme) {
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.brandAlt[400];
-		default:
-			if (
-				format.display === ArticleDisplay.Immersive &&
-				format.design === ArticleDesign.LiveBlog
-			) {
-				return sourcePalette.neutral[100];
-			}
-			return cardHeadlineTextLight(format);
-	}
-};
 
 const cardAgeTextDark = (): string => {
 	return sourcePalette.neutral[60];
 };
+
+const cardOnwardContentFooterLight: PaletteFunction = ({ theme, design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			return sourcePalette.neutral[100];
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				default:
+					return sourcePalette.neutral[100];
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.brandAlt[400];
+				default:
+					return sourcePalette.neutral[46];
+			}
+	}
+};
+
+const cardOnwardContentFooterDark = (): string => {
+	return sourcePalette.neutral[60];
+};
+
 const cardBackgroundLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return sourcePalette.specialReportAlt[700];
@@ -4278,9 +4297,9 @@ const paletteColours = {
 		light: cardAgeTextLight,
 		dark: cardAgeTextDark,
 	},
-	'--card-footer-onwards-content-text': {
-		light: cardOnwardContentAgeTextLight,
-		dark: cardAgeTextDark,
+	'--card-footer-onwards-content': {
+		light: cardOnwardContentFooterLight,
+		dark: cardOnwardContentFooterDark,
 	},
 	'--card-background': {
 		light: cardBackgroundLight,
