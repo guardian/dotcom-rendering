@@ -22,7 +22,7 @@ type Props = {
 	isOnwardContent?: boolean;
 };
 
-const baseCardStyles = css`
+const baseCardStyles = (isOnwardContent: boolean) => css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -50,6 +50,7 @@ const baseCardStyles = css`
 		left: 0;
 		background-color: ${sourcePalette.neutral[7]};
 		opacity: 0.1;
+		border-radius: ${isOnwardContent ? space[2] : 0}px;
 	}
 
 	/* a tag specific styles */
@@ -184,7 +185,7 @@ export const CardWrapper = ({
 			>
 				<div
 					css={[
-						baseCardStyles,
+						baseCardStyles(isOnwardContent),
 						containerPalette &&
 							containerPaletteStyles(containerPalette),
 						isOnwardContent ? onwardContentCardStyles : cardStyles,
