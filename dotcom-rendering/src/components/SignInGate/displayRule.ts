@@ -71,7 +71,13 @@ export const calculateArticleLimit = (
 	currentTest: CurrentSignInGateABTest,
 ): number => {
 	const hours = timeOfPageView.getHours();
-	if (currentTest.id !== 'SignInGateTimesOfDay') return 3;
+	if (
+		!(
+			currentTest.id !== 'SignInGateTimesOfDay' &&
+			currentTest.variant == 'times-of-day-morning'
+		)
+	)
+		return 3;
 	if (hours >= 6 && hours < 10) return 1;
 	else return 3;
 };

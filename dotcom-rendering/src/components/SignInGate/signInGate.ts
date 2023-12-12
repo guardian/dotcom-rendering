@@ -22,7 +22,8 @@ export const signInGateTests: ReadonlyArray<ABTest> = [
 export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 	'main-control-5': gateMainControl,
 	'main-variant-5': gateMainVariant,
-	morning: gateMainVariant,
+	'times-of-day-morning': gateMainVariant,
+	'times-of-day-control': gateMainVariant,
 };
 
 // Component Id does not need to match gate test name, as ab test info passed separately to ophan
