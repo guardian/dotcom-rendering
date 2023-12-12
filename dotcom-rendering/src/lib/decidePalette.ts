@@ -760,15 +760,6 @@ const borderCricketScoreboardDivider = (): string => {
 
 const borderFilterButton = (): string => neutral[60];
 
-/** @deprecated this has been moved to the theme palette */
-const borderSecondary = (format: ArticleFormat) => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return transparentColour(neutral[60], 0.3);
-	if (format.design === ArticleDesign.Picture)
-		return transparentColour(neutral[60], 0.5);
-	return neutral[86];
-};
-
 const borderPagination = () => {
 	return neutral[86];
 };
@@ -1113,7 +1104,6 @@ export const decidePalette = (
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			cardSupporting: borderCardSupporting(format),
 			filterButton: borderFilterButton(),
-			secondary: borderSecondary(format),
 			pagination: borderPagination(),
 		},
 		topBar: {

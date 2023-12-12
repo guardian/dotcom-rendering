@@ -69,7 +69,6 @@ export type Palette = {
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
 		filterButton: Colour;
-		secondary: Colour;
 		pagination: Colour;
 	};
 	topBar: {
