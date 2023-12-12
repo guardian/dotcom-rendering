@@ -40,11 +40,8 @@ export const DiscussionMeta = ({
 			: undefined,
 	);
 
-	const palette = decidePalette(format);
-
 	return (
 		<SignedInAs
-			palette={palette}
 			enableDiscussionSwitch={enableDiscussionSwitch}
 			user={data?.userProfile}
 			commentCount={commentCount}

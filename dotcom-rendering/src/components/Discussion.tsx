@@ -163,7 +163,6 @@ export const Discussion = ({
 							`}
 						>
 							<SignedInAs
-								palette={palette}
 								enableDiscussionSwitch={enableDiscussionSwitch}
 								user={user?.profile}
 								commentCount={commentCount}
