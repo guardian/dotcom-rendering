@@ -67,11 +67,10 @@ const smallFontStyles = css`
 `;
 
 const titleStyles = () => {
-	const fontWeight = 'light';
+	const fontWeight = 'regular';
 
 	return css`
 		${headline.xxxsmall({ fontWeight })};
-		${smallFontStyles}
 		padding-top: 1px;
 		padding-bottom: 1px;
 
@@ -134,6 +133,11 @@ const starWrapperStyles = css`
 const readMoreStyles = css`
 	fill: ${themePalette('--rich-link-fill')};
 	padding-top: 2px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding-bottom: 6px;
 `;
 
 const readMoreTextStyle = () => {
@@ -143,10 +147,7 @@ const readMoreTextStyle = () => {
 		${headline.xxxsmall({ fontWeight })};
 		${smallFontStyles}
 		color: ${themePalette('--rich-link-text')};
-		display: inline-block;
-		height: 30px;
 		padding-left: 4px;
-		vertical-align: top;
 		text-decoration: none;
 
 		${from.wide} {
@@ -296,7 +297,9 @@ export const RichLink = ({
 							<div
 								css={[
 									readMoreTextStyle,
-									isLabs && labsReadMoreTextStyle,
+									isLabs
+										? labsReadMoreTextStyle
+										: smallFontStyles,
 								]}
 							>
 								{readMoreText(contentType)}
