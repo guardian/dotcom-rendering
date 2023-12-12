@@ -97,9 +97,7 @@ export const ArticleAppsWithFollowStory: StoryObj = ({
 /** @see /dotcom-rendering/docs/development/storybook.md */
 ArticleAppsWithFollowStory.args = { format: defaultFormat };
 ArticleAppsWithFollowStory.parameters = { config: { renderingTarget: 'Apps' } };
-ArticleAppsWithFollowStory.decorators = [
-	splitTheme(getAllThemes(defaultFormat)),
-];
+ArticleAppsWithFollowStory.decorators = [splitTheme()];
 
 export const ArticleAppsWithFollowStoryNoTitle: StoryObj = ({
 	format,
@@ -128,9 +126,7 @@ ArticleAppsWithFollowStoryNoTitle.args = { format: defaultFormat };
 ArticleAppsWithFollowStoryNoTitle.parameters = {
 	config: { renderingTarget: 'Apps' },
 };
-ArticleAppsWithFollowStoryNoTitle.decorators = [
-	splitTheme(getAllThemes(defaultFormat)),
-];
+ArticleAppsWithFollowStoryNoTitle.decorators = [splitTheme()];
 
 export const ArticleAppsWithAvatarAndFollowStory: StoryObj = ({
 	format,
@@ -252,6 +248,4 @@ ArticleAppsWithMultipleContributos.args = { format: defaultFormat };
 ArticleAppsWithMultipleContributos.parameters = {
 	config: { renderingTarget: 'Apps' },
 };
-ArticleAppsWithMultipleContributos.decorators = [
-	splitTheme(getAllThemes(defaultFormat)),
-];
+ArticleAppsWithMultipleContributos.decorators = [splitTheme()];
