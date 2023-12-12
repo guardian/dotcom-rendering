@@ -28,10 +28,7 @@
 		"unused-exports": "yarn ts-unused-exports ./tsconfig.json --ignoreFiles='(/(fixtures|__mocks__)/|.+\\.(stories|mocks))' --exitWithCount",
 		"storybook": "storybook dev -p 4002",
 		"build-storybook": "storybook build",
-		"makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./webpack/webpack.config.js",
-		"cdk:build": "tsc -p ./tsconfig.cdk.json",
-		"cdk:synth": "cdk synth --path-metadata false --version-reporting false",
-		"cdk:diff": "cdk diff --path-metadata false --version-reporting false"
+		"makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./webpack/webpack.config.js"
 	},
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "3.350.0",
