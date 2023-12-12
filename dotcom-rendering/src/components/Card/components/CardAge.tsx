@@ -26,7 +26,7 @@ const ageStyles = (
 		${textSans.xxsmall({ lineHeight: 'tight' })};
 		margin-top: -4px;
 		color: ${isOnwardsContent
-			? palette('--card-footer-onwards-content-text')
+			? palette('--card-footer-onwards-content')
 			: palette('--card-footer-text')};
 
 		/* Provide side padding for positioning and also to keep spacing
@@ -39,7 +39,7 @@ const ageStyles = (
 
 		svg {
 			fill: ${isOnwardsContent
-				? palette('--card-footer-onwards-content-text')
+				? palette('--card-footer-onwards-content')
 				: palette('--card-footer-text')};
 			margin-bottom: -1px;
 			height: 11px;
