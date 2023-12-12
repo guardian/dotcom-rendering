@@ -6491,7 +6491,7 @@ __metadata:
     "@guardian/source-foundations": "npm:13.2.0"
     "@guardian/source-react-components": "npm:16.0.1"
     "@guardian/source-react-components-development-kitchen": "npm:15.0.0"
-    "@guardian/support-dotcom-components": "npm:1.0.8"
+    "@guardian/support-dotcom-components": "npm:1.1.0"
     "@guardian/tsconfig": "npm:0.2.0"
     "@playwright/test": "npm:1.39.0"
     "@sentry/browser": "npm:7.75.1"
@@ -6951,10 +6951,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@guardian/support-dotcom-components@npm:1.0.8":
-  version: 1.0.8
-  resolution: "@guardian/support-dotcom-components@npm:1.0.8"
-  checksum: a56d04c966d0b609d3325592e2d8047282de3339f6efd5d1ac4e199b7db3d113dbb3178d0278b9bb92c8063d156d00f65533fc95b0b91982f2702ab2269794ad
+"@guardian/support-dotcom-components@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@guardian/support-dotcom-components@npm:1.1.0"
+  checksum: 081ea35c68e4cb04c597b2a99e0c939051771119a5282dbbd0d3847bd4e8b95b03c366d4cf25c9eeec08666a06220bf9d7dda0360556719f5522739dd62ca584
   languageName: node
   linkType: hard
 
