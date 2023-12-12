@@ -4,6 +4,7 @@ import { between, textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { formatCount } from '../lib/formatCount';
 import { useCommentCount } from '../lib/useCommentCount';
+import { palette as themePalette } from '../palette';
 import CommentIcon from '../static/icons/comment.svg';
 import type { Palette } from '../types/palette';
 
@@ -19,7 +20,7 @@ const containerStyles = (palette: Palette) => css`
 	flex-direction: column;
 	${textSans.medium()};
 	font-weight: bold;
-	color: ${palette.fill.commentCount};
+	color: ${themePalette('--comment-count-fill')};
 	padding-top: 5px;
 
 	${until.desktop} {
@@ -39,7 +40,7 @@ const iconContainerStyles = css`
 `;
 
 const iconStyles = (palette: Palette) => css`
-	fill: ${palette.fill.commentCount};
+	fill: ${themePalette('--comment-count-fill')};
 	${until.desktop} {
 		fill: ${palette.fill.commentCountUntilDesktop};
 	}

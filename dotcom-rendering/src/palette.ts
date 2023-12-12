@@ -3985,6 +3985,30 @@ const witnessTitleIcon: PaletteFunction = (format) => witnessTitleText(format);
 const witnessTitleAuthor: PaletteFunction = (format) =>
 	witnessTitleText(format);
 
+const commentCountFill: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.LiveBlog || design === ArticleDesign.DeadBlog)
+		return sourcePalette.neutral[46];
+	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[7];
+	if (theme === ArticleSpecial.SpecialReport)
+		return sourcePalette.specialReport[300];
+
+	if (theme === ArticleSpecial.SpecialReportAlt)
+		return sourcePalette.specialReportAlt[100];
+
+	if (design === ArticleDesign.Analysis) {
+		switch (theme) {
+			case Pillar.News:
+				return sourcePalette.news[300];
+			default:
+				pillarPalette(theme, 400);
+		}
+	}
+	if (design === ArticleDesign.Picture) {
+		return sourcePalette.neutral[86];
+	}
+	return pillarPalette(theme, 400);
+};
+
 // ----- Palette ----- //
 
 /**
@@ -4615,6 +4639,10 @@ const paletteColours = {
 	'--witness-title-author': {
 		light: witnessTitleAuthor,
 		dark: witnessTitleAuthor,
+	},
+	'--comment-count-fill': {
+		light: commentCountFill,
+		dark: commentCountFill,
 	},
 } satisfies PaletteColours;
 

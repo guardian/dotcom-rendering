@@ -523,6 +523,7 @@ const backgroundFilterButtonActive = (format: ArticleFormat): string => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette (--comment-count-fill) */
 const fillCommentCount = (format: ArticleFormat): string => {
 	if (
 		format.design === ArticleDesign.LiveBlog ||
@@ -1090,7 +1091,6 @@ export const decidePalette = (
 				backgroundDynamoSublink(format),
 		},
 		fill: {
-			commentCount: fillCommentCount(format),
 			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
 			guardianLogo: fillGuardianLogo(format),
 		},
