@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { palette as sourcePalette } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
@@ -24,9 +25,14 @@ export const ContainerOverrides = ({
 	isDynamo,
 	children,
 }: Props) => {
-	const { text, background, topBar } = containerPalette
+	const { text, background, topBar, border } = containerPalette
 		? decideContainerOverrides(containerPalette)
-		: { text: undefined, background: undefined, topBar: undefined };
+		: {
+				text: undefined,
+				background: undefined,
+				topBar: undefined,
+				border: undefined,
+		  };
 
 	const paletteOverrides = {
 		'--card-headline-trail-text': isDynamo
@@ -39,6 +45,15 @@ export const ContainerOverrides = ({
 		'--card-background': isDynamo ? 'transparent' : background?.card,
 		'--byline': text?.cardByline,
 		'--card-border-top': isDynamo ? text?.dynamoKicker : topBar?.card,
+		'--carousel-text': text?.container,
+		'--carousel-title-highlight': text?.container,
+		'--carousel-border': border?.lines,
+		'--carousel-dot': sourcePalette.neutral[93],
+		'--carousel-dot-hover': sourcePalette.neutral[86],
+		'--carousel-active-dot': background?.carouselDot,
+		'--carousel-arrow': border?.carouselArrow,
+		'--carousel-arrow-background': background?.carouselArrow,
+		'--carousel-arrow-background-hover': background?.carouselArrowHover,
 	} satisfies Partial<Record<ColourName, string>>;
 
 	return (

@@ -20,7 +20,6 @@ export type Palette = {
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
-		carouselTitle: Colour;
 		pagination: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
@@ -45,11 +44,9 @@ export type Palette = {
 		bulletStandfirst: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
-		carouselDot: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		analysisUnderline: Colour;
-		matchStats: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -74,8 +71,6 @@ export type Palette = {
 		headline: Colour;
 		navPillar: Colour;
 		lines: Colour;
-		matchTab: Colour;
-		activeMatchTab: Colour;
 		cricketScoreboardTop: Colour;
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;

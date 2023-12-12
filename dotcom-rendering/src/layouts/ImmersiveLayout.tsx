@@ -763,7 +763,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true}>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
 						<Island
 							priority="enhancement"
 							defer={{ until: 'visible' }}

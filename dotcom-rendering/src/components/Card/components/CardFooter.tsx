@@ -13,11 +13,12 @@ type Props = {
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	supportingContent?: JSX.Element;
+	leftAlign?: boolean;
 };
 
-const spaceBetween = css`
+const spacing = (leftAlign: boolean) => css`
 	display: flex;
-	justify-content: space-between;
+	justify-content: ${leftAlign ? 'flex-start' : 'space-between'};
 	align-items: center;
 `;
 
@@ -39,6 +40,7 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	supportingContent,
+	leftAlign = false,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -57,7 +59,7 @@ export const CardFooter = ({
 		return (
 			<footer css={margins}>
 				{supportingContent}
-				<div css={spaceBetween}>
+				<div css={spacing(leftAlign)}>
 					{age}
 					{displayLines && (
 						<StraightLines
@@ -67,7 +69,7 @@ export const CardFooter = ({
 								align-self: flex-end;
 							`}
 							color={
-								overrides?.border?.lines ?? palette.border.lines
+								overrides?.border.lines ?? palette.border.lines
 							}
 							count={4}
 						/>
@@ -82,7 +84,7 @@ export const CardFooter = ({
 		return (
 			<footer css={margins}>
 				{supportingContent}
-				<div css={spaceBetween}>
+				<div css={spacing(leftAlign)}>
 					{age}
 					{commentCount}
 				</div>

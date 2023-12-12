@@ -779,14 +779,6 @@ const borderHeadline = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
-const matchTab = (): string => {
-	return border.secondary;
-};
-
-const activeMatchTab = (): string => {
-	return sport[300];
-};
-
 const borderCardSupporting = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Comment:
@@ -991,20 +983,6 @@ const textSignInLink = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
-const textCarouselTitle = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
-
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
 const textBetaLabel = (): string => neutral[46];
 
 const textDesignTag = (format: ArticleFormat): string => {
@@ -1040,39 +1018,8 @@ const backgroundFilterButton = (): string => neutral[100];
 const backgroundHeadlineTag = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
-const backgroundCarouselDot = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Lifestyle:
-			return lifestyle[400];
-		case Pillar.Culture:
-			return culture[400];
-		case Pillar.Opinion:
-			return opinion[400];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return palette.specialReportAlt[100];
-	}
-};
-
 const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
-};
-
-const backgroundMatchStats = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return neutral[97];
-		default:
-			return '#d9edf6';
-	}
 };
 
 const backgroundTreat = (format: ArticleFormat): string => {
@@ -1298,7 +1245,6 @@ export const decidePalette = (
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),
 			pagination: textPagination(format),
-			carouselTitle: textCarouselTitle(format),
 			numberedPosition: textNumberedPosition(),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			filterButton: textFilterButton(),
@@ -1323,11 +1269,9 @@ export const decidePalette = (
 			imageTitle: backgroundImageTitle(format),
 			lightboxDivider: backgroundLightboxDivider(format),
 			speechBubble: backgroundSpeechBubble(format),
-			carouselDot: backgroundCarouselDot(format),
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
 			analysisUnderline: backgroundUnderline(format),
-			matchStats: backgroundMatchStats(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),
@@ -1355,8 +1299,6 @@ export const decidePalette = (
 			lines: overrides?.border.lines ?? borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
-			matchTab: matchTab(),
-			activeMatchTab: activeMatchTab(),
 			cardSupporting: borderCardSupporting(format),
 			filterButton: borderFilterButton(),
 			secondary: borderSecondary(format),
