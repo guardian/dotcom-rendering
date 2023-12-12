@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ExplainerAtom as ExplainerAtomComponent } from './ExplainerAtom';
 
@@ -20,7 +20,7 @@ export const ExplainerAtom: Story = {
 	args: {
 		id: 'abc123',
 		title: 'Cranes Lean In by Imtiaz Dharker',
-		html: html,
+		html,
 	},
 	decorators: [
 		splitTheme([

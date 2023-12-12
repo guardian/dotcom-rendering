@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { headline, space, textSans } from '@guardian/source-foundations';
 import { palette } from '../palette';
+
 interface Props {
 	id: string;
 	title: string;
