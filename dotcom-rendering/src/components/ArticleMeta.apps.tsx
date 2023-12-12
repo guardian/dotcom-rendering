@@ -1,13 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import {
-	between,
-	border,
-	from,
-	space,
-	until,
-} from '@guardian/source-foundations';
+import { ArticleDesign } from '@guardian/libs';
+import { between, from, space, until } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
@@ -44,46 +38,29 @@ type Props = {
 	messageUs?: MessageUs;
 };
 
-const metaGridContainer = (showAvatar: boolean) => css`
+const metaGridContainer = css`
 	display: grid;
-	grid-template-rows: auto;
-
-	${showAvatar
-		? css`
-				grid-template-columns: auto 1fr auto;
-				grid-template-areas:
-					'avatar byline comment-count'
-					'avatar byline comment-count'
-					'dateline dateline dateline';
-		  `
-		: css`
-				grid-template-columns: 1fr auto;
-				grid-template-areas:
-					'byline comment-count'
-					'byline comment-count'
-					'dateline dateline';
-		  `}
+	grid-template-rows: auto auto auto;
+	grid-template-columns: auto 1fr auto;
+	grid-template-areas:
+		'avatar byline comment-count'
+		'avatar byline comment-count'
+		'dateline dateline dateline';
 `;
 
 const MetaGridAvatar = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			grid-area: avatar;
-			width: 140px;
-			height: 140px;
-			margin-top: 6px;
-			margin-right: 10px;
-			margin-bottom: 12px;
+			width: 60px;
+			height: 60px;
+			margin-top: ${space[1]}px;
+			margin-right: ${space[2]}px;
+			margin-bottom: ${space[3]}px;
 			margin-left: 0px;
-
-			${until.leftCol} {
-				grid-area: avatar;
-				width: 60px;
-				height: 60px;
-				margin-top: 3px;
-				margin-right: 10px;
-				margin-bottom: 12px;
-				margin-left: 0px;
+			${from.leftCol} {
+				width: 140px;
+				height: 140px;
 			}
 		`}
 	>
@@ -96,6 +73,12 @@ const MetaGridByline = ({ children }: { children: React.ReactNode }) => (
 		css={css`
 			grid-area: byline;
 			width: auto;
+			padding-top: ${space[2]}px;
+
+			address > div > svg:first-of-type {
+				display: block;
+				margin-top: ${space[2]}px;
+			}
 		`}
 	>
 		{children}
@@ -130,6 +113,14 @@ const MetaGridDateline = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			grid-area: dateline;
+			details {
+				padding-top: ${space[2]}px;
+				margin-bottom: ${space[4]}px;
+			}
+			div {
+				padding-top: ${space[2]}px;
+				margin-bottom: ${space[4]}px;
+			}
 		`}
 	>
 		{children}
@@ -156,13 +147,12 @@ const metaPadding = (format: ArticleFormat) => {
 		}
 
 		${until.mobileLandscape} {
-			padding-left: 10px;
-			padding-right: 10px;
+			padding-inline: ${space[2]}px;
 		}
 
 		${from.mobileLandscape} {
-			padding-left: 20px;
-			padding-right: 20px;
+			padding-left: ${space[5]}px;
+			padding-right: ${space[5]}px;
 		}
 
 		${from.phablet} {
@@ -174,20 +164,21 @@ const metaPadding = (format: ArticleFormat) => {
 	`;
 };
 
-const stretchLines = (isPictureContent: boolean) => css`
+// ${!isPictureContent && until.mobileLandscape} {
+// 	margin-left: -20px;
+// 	margin-right: -20px;
+// 	width: auto;
+// }
+
+// ${!isPictureContent && until.phablet} {
+// 	margin-left: -10px;
+// 	margin-right: -10px;
+// 	width: auto;
+// }
+const stretchLines = css`
 	display: block;
-
-	${!isPictureContent && until.mobileLandscape} {
-		margin-left: -20px;
-		margin-right: -20px;
-		width: auto;
-	}
-
-	${!isPictureContent && until.phablet} {
-		margin-left: -10px;
-		margin-right: -10px;
-		width: auto;
-	}
+	margin-left: calc((-100vw + 100%) / 2);
+	width: 100vw;
 `;
 
 export const ArticleMetaApps = ({
@@ -234,22 +225,6 @@ export const ArticleMetaApps = ({
 							<Branding branding={branding} format={format} />
 						</Island>
 					)}
-					{format.theme === ArticleSpecial.Labs ? (
-						<div>
-							<StraightLines
-								cssOverrides={stretchLines(isPictureContent)}
-								count={1}
-								color={border.primary}
-							/>
-							<div
-								css={css`
-									height: ${space[1]}px;
-								`}
-							/>
-						</div>
-					) : (
-						''
-					)}
 
 					{shouldShowFollowButtonsOnCommentLayout && (
 						<StraightLines
@@ -262,7 +237,8 @@ export const ArticleMetaApps = ({
 							color={themePalette('--article-border')}
 						/>
 					)}
-					<div css={metaGridContainer(!!avatarUrl)}>
+
+					<div css={metaGridContainer}>
 						{!!avatarUrl && (
 							<MetaGridAvatar>
 								<Avatar src={avatarUrl} alt={authorName} />
@@ -283,7 +259,10 @@ export const ArticleMetaApps = ({
 										margin-bottom: 8px;
 									`}
 								>
-									<Island priority="critical">
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
 										<FollowWrapper
 											displayName={soleContributor.title}
 											id={soleContributor.id}
@@ -328,12 +307,7 @@ export const ArticleMetaApps = ({
 
 						<MetaGridDateline>
 							<StraightLines
-								cssOverrides={[
-									stretchLines(isPictureContent),
-									css`
-										margin-bottom: 10px;
-									`,
-								]}
+								cssOverrides={[stretchLines]}
 								count={1}
 								color={themePalette('--article-border')}
 							/>
