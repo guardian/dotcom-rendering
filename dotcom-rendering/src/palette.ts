@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-import { sign } from 'node:crypto';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	ArticleDesign,
@@ -4052,6 +4051,12 @@ const signInLinkDark: PaletteFunction = () => sourcePalette.neutral[100];
 const signInLinkLineLight: PaletteFunction = () => sourcePalette.neutral[86];
 const signInLinkLineDark: PaletteFunction = () => sourcePalette.neutral[60];
 
+const topPickBackgroundLight: PaletteFunction = () => sourcePalette.neutral[93];
+const topPickBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
+
+const staffLabelLight: PaletteFunction = () => sourcePalette.brand[400];
+const staffLabelDark: PaletteFunction = () => sourcePalette.brand[300];
+
 // ----- Palette ----- //
 
 /**
@@ -4698,6 +4703,14 @@ const paletteColours = {
 	'--sign-in-link-underline': {
 		light: signInLinkLineLight,
 		dark: signInLinkLineDark,
+	},
+	'--top-pick-background': {
+		light: topPickBackgroundLight,
+		dark: topPickBackgroundDark,
+	},
+	'--staff-label': {
+		light: staffLabelLight,
+		dark: staffLabelDark,
 	},
 } satisfies PaletteColours;
 

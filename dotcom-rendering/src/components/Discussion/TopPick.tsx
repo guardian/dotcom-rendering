@@ -8,6 +8,7 @@ import {
 import { Link } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
+import { palette as themePalette } from '../../palette';
 import type { CommentType } from '../../types/discussion';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianStaff } from './Badges';
@@ -44,7 +45,6 @@ const pickStyles = css`
 `;
 
 const arrowSize = 25;
-const bg = sourcePalette.neutral[93];
 
 const userNameStyles = (format: ArticleFormat) => css`
 	margin-top: 3px;
@@ -104,7 +104,7 @@ const PickBubble = ({ children }: { children: React.ReactNode }) => (
 			justify-content: space-between;
 
 			padding: ${space[3]}px;
-			background-color: ${bg};
+			background-color: ${themePalette('--top-pick-background')};
 			border-radius: 15px;
 			margin-bottom: ${arrowSize + 5}px;
 			position: relative;
@@ -118,7 +118,8 @@ const PickBubble = ({ children }: { children: React.ReactNode }) => (
 				margin-left: ${space[6]}px;
 				position: absolute;
 				border-right: ${arrowSize}px solid transparent;
-				border-top: ${arrowSize}px solid ${bg};
+				border-top: ${arrowSize}px solid
+					${themePalette('--top-pick-background')};
 				bottom: -${arrowSize - 1}px;
 			}
 

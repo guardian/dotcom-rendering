@@ -46,7 +46,6 @@ export const DiscussionLayout = ({
 				leftContent={
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<DiscussionMeta
-							format={format}
 							discussionApiUrl={discussionApiUrl}
 							shortUrlId={shortUrlId}
 							enableDiscussionSwitch={enableDiscussionSwitch}

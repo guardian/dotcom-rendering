@@ -4,7 +4,6 @@ import { neutral, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
-import { decidePalette } from '../lib/decidePalette';
 import { getCommentContext } from '../lib/getCommentContext';
 import { isServer } from '../lib/isServer';
 import { revealStyles } from '../lib/revealStyles';
@@ -85,8 +84,6 @@ export const Discussion = ({
 	const { commentCount, isClosedForComments } = useDiscussion(
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
-
-	const palette = decidePalette(format);
 
 	const hasCommentsHash = !isServer && window.location.hash === '#comments';
 
