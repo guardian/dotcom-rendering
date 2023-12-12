@@ -130,7 +130,8 @@ test.describe('YouTube Atom', () => {
 		await waitForIsland(page, 'YoutubeBlockComponent');
 
 		// Make sure overlay is displayed
-		const overlaySelector = `[data-testid^="youtube-overlay-S0CE1n-R3OY"]`;
+		const videoId = 'S0CE1n-R3OY';
+		const overlaySelector = `[data-testid^="youtube-overlay-${videoId}"]`;
 		await expectToBeVisible(page, overlaySelector);
 
 		// YouTube has not initialised
@@ -148,7 +149,7 @@ test.describe('YouTube Atom', () => {
 		// Listen for the YouTube embed call made when the video is played
 		const youTubeEmbedPromise = interceptYouTubeEmbed({
 			page,
-			videoId: 'S0CE1n-R3OY',
+			videoId,
 			adUnit: '/59666047/theguardian.com/uk-news/article/ng',
 			pageUrl:
 				'/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
@@ -159,7 +160,7 @@ test.describe('YouTube Atom', () => {
 		await page.locator(overlaySelector).click();
 
 		// Mute video
-		await muteYouTube(page, `iframe[id^="youtube-video-S0CE1n-R3OY"]`);
+		await muteYouTube(page, `iframe[id^="youtube-video-${videoId}"]`);
 
 		await ophanPlayEventPromise;
 
@@ -179,7 +180,8 @@ test.describe('YouTube Atom', () => {
 		await waitForIsland(page, 'YoutubeBlockComponent');
 
 		// Make sure overlay is displayed
-		const overlaySelector = `[data-testid^="youtube-overlay-NtN-a6inr1E"]`;
+		const videoId = 'NtN-a6inr1E';
+		const overlaySelector = `[data-testid^="youtube-overlay-${videoId}"]`;
 		await expectToBeVisible(page, overlaySelector);
 
 		// YouTube has not initialised
@@ -197,7 +199,7 @@ test.describe('YouTube Atom', () => {
 		// Listen for the YouTube embed call made when the video is played
 		const youTubeEmbedPromise = interceptYouTubeEmbed({
 			page,
-			videoId: 'NtN-a6inr1E',
+			videoId,
 			adUnit: '/59666047/theguardian.com/environment/article/ng',
 			pageUrl:
 				'/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
@@ -208,7 +210,7 @@ test.describe('YouTube Atom', () => {
 		await page.locator(overlaySelector).click();
 
 		// Mute video
-		await muteYouTube(page, `iframe[id^="youtube-video-NtN-a6inr1E"]`);
+		await muteYouTube(page, `iframe[id^="youtube-video-${videoId}"]`);
 
 		await ophanPlayEventPromise;
 
@@ -218,7 +220,7 @@ test.describe('YouTube Atom', () => {
 		await expectToNotExist(page, overlaySelector);
 	});
 
-	test('plays when the same video exists both in body and in main media of a blog', async ({
+	test('each video plays when the same video exists both in body and in main media of a blog', async ({
 		page,
 	}) => {
 		await loadPage(
@@ -233,9 +235,10 @@ test.describe('YouTube Atom', () => {
 		await waitForIsland(page, 'YoutubeBlockComponent', { nth: 2 });
 
 		// Make sure overlays for both videos are displayed
+		const videoId = 'qkC9z-dSAOE';
 		const mediaDiv = 'div[data-gu-name="media"]';
 		const bodyDiv = 'div[data-gu-name="body"]';
-		const overlaySelectorforMultipleVideos = `[data-testid^="youtube-overlay-qkC9z-dSAOE"]`;
+		const overlaySelectorforMultipleVideos = `[data-testid^="youtube-overlay-${videoId}"]`;
 
 		await expectToBeVisible(
 			page,
@@ -260,7 +263,7 @@ test.describe('YouTube Atom', () => {
 		// Listen for the YouTube embed call made when the video is played
 		const youTubeEmbedPromise = interceptYouTubeEmbed({
 			page,
-			videoId: 'qkC9z-dSAOE',
+			videoId,
 			adUnit: '/59666047/theguardian.com/world/liveblog/ng',
 			pageUrl:
 				'/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
@@ -274,7 +277,7 @@ test.describe('YouTube Atom', () => {
 
 		await muteYouTube(
 			page,
-			`${mediaDiv} iframe[id^="youtube-video-qkC9z-dSAOE"]`,
+			`${mediaDiv} iframe[id^="youtube-video-${videoId}"]`,
 		);
 
 		// check if the main media video overplay is gone
@@ -300,7 +303,7 @@ test.describe('YouTube Atom', () => {
 		// Listen for the YouTube embed call made when the video is played
 		const youTubeEmbedPromise2 = interceptYouTubeEmbed({
 			page,
-			videoId: 'qkC9z-dSAOE',
+			videoId,
 			adUnit: '/59666047/theguardian.com/world/liveblog/ng',
 			pageUrl:
 				'/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
@@ -333,7 +336,8 @@ test.describe('YouTube Atom', () => {
 		await waitForIsland(page, 'YoutubeBlockComponent');
 
 		// Make sure overlay is displayed
-		const overlaySelector = `[data-testid^="youtube-overlay-NtN-a6inr1E"]`;
+		const videoId = 'NtN-a6inr1E';
+		const overlaySelector = `[data-testid^="youtube-overlay-${videoId}"]`;
 		await expectToBeVisible(page, overlaySelector);
 
 		// YouTube has not initialised
@@ -351,7 +355,7 @@ test.describe('YouTube Atom', () => {
 		// Listen for the YouTube embed call made when the video is played
 		const youTubeEmbedPromise = interceptYouTubeEmbed({
 			page,
-			videoId: 'NtN-a6inr1E',
+			videoId,
 			adUnit: '/59666047/theguardian.com/environment/article/ng',
 			pageUrl:
 				'/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
@@ -362,7 +366,7 @@ test.describe('YouTube Atom', () => {
 		await page.locator(overlaySelector).click();
 
 		// Mute video
-		await muteYouTube(page, `iframe[id^="youtube-video-NtN-a6inr1E"]`);
+		await muteYouTube(page, `iframe[id^="youtube-video-${videoId}"]`);
 
 		await ophanPlayEventPromise;
 
@@ -386,11 +390,11 @@ test.describe('YouTube Atom', () => {
 		await waitForIsland(page, 'YoutubeBlockComponent', { nth: 1 });
 		await waitForIsland(page, 'YoutubeBlockComponent', { nth: 2 });
 
+		const videoId = 'qkC9z-dSAOE';
 		const mediaDiv = 'div[data-gu-name="media"]';
-		const overlaySelectorforMultipleVideos = `[data-testid^="youtube-overlay-qkC9z-dSAOE"]`;
-		const stickySelector = '[data-testid^="youtube-sticky-qkC9z-dSAOE"]';
-		const stickyCloseSelector =
-			'[data-testid^="youtube-sticky-close-qkC9z-dSAOE"]';
+		const overlaySelector = `[data-testid^="youtube-overlay-${videoId}"]`;
+		const stickySelector = `[data-testid^="youtube-sticky-${videoId}"]`;
+		const stickyCloseSelector = `[data-testid^="youtube-sticky-close-${videoId}"]`;
 
 		/**
 		 * Main media video
@@ -406,15 +410,13 @@ test.describe('YouTube Atom', () => {
 		});
 
 		// Play main media video
-		await page
-			.locator(`${mediaDiv} ${overlaySelectorforMultipleVideos}`)
-			.click();
+		await page.locator(`${mediaDiv} ${overlaySelector}`).click();
 
 		await ophanPlayEventPromise;
 
 		await muteYouTube(
 			page,
-			`${mediaDiv} iframe[id^="youtube-video-qkC9z-dSAOE"]`,
+			`${mediaDiv} iframe[id^="youtube-video-${videoId}"]`,
 		);
 
 		// Scroll past the main media video to the third block
