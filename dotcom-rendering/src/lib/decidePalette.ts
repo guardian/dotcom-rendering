@@ -562,19 +562,6 @@ const fillGuardianLogo = (format: ArticleFormat): string => {
 	return WHITE;
 };
 
-/** @deprecated this has been moved to the theme palette (--sub-nav-border) */
-const borderSubNav = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
 const borderPinnedPost = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -594,23 +581,6 @@ const borderPinnedPost = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReportAlt:
 			return news[300];
 	}
-};
-
-/** @deprecated this has been moved to the theme palette ('--article-link-border) */
-const borderArticleLink = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return neutral[60];
-
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.DeadBlog &&
-		format.design !== ArticleDesign.LiveBlog
-	)
-		return transparentColour(neutral[60], 0.3);
-
-	return border.secondary;
 };
 
 const borderStandfirstLink = (format: ArticleFormat): string => {
@@ -714,30 +684,6 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 
 const backgroundUnderline = (format: ArticleFormat): string =>
 	transparentColour(textCardKicker(format));
-
-/** @deprecated this has been moved to the theme palette (--article-link-border-hover) */
-const borderArticleLinkHover = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[100];
-
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.LiveBlog &&
-		format.design !== ArticleDesign.DeadBlog
-	)
-		return palette.specialReportAlt[200];
-
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
 
 /** @deprecated this has been moved to the theme palette (--card-border-top) */
 const topBarCard = (format: ArticleFormat): string => {
@@ -1159,9 +1105,6 @@ export const decidePalette = (
 			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {
-			subNav: borderSubNav(format),
-			articleLink: borderArticleLink(format),
-			articleLinkHover: borderArticleLinkHover(format),
 			pinnedPost: borderPinnedPost(format),
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
