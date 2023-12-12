@@ -25,7 +25,7 @@ const defaultFormat = {
 	theme: Pillar.News,
 };
 
-export const NeverRecomended = () => (
+export const NeverRecommended = () => (
 	<Wrapper>
 		<RecommendationCount
 			commentId={123}
@@ -36,9 +36,9 @@ export const NeverRecomended = () => (
 		/>
 	</Wrapper>
 );
-NeverRecomended.decorators = [splitTheme([defaultFormat])];
+NeverRecommended.decorators = [splitTheme([defaultFormat])];
 
-export const AlreadyRecomended = () => (
+export const AlreadyRecommended = () => (
 	<Wrapper>
 		<RecommendationCount
 			commentId={123}
@@ -49,7 +49,7 @@ export const AlreadyRecomended = () => (
 		/>
 	</Wrapper>
 );
-AlreadyRecomended.decorators = [splitTheme([defaultFormat])];
+AlreadyRecommended.decorators = [splitTheme([defaultFormat])];
 
 export const NotSignedIn = () => (
 	<Wrapper>
