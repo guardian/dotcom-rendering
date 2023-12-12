@@ -1,5 +1,9 @@
 import { ArticleDesign, ArticleDisplay, Pillar, storage } from '@guardian/libs';
+import type { StoryObj } from '@storybook/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { DiscussionLayout } from './DiscussionLayout';
+
+type StoryArgs = { format: ArticleFormat };
 
 export default {
 	component: DiscussionLayout,
@@ -10,7 +14,8 @@ export default {
 		},
 	},
 };
-export const Basic = () => {
+
+export const Basic: StoryObj = ({ format }: StoryArgs) => {
 	// Aiming to stop flakiness in Chromatic visual diffs by explicitly
 	// setting the desired comments sorting order in local storage
 	storage.local.set('gu.prefs.discussion.order', 'newest');
@@ -19,11 +24,7 @@ export const Basic = () => {
 		<DiscussionLayout
 			discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 			shortUrlId="/p/4v8kk"
-			format={{
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Culture,
-			}}
+			format={format}
 			discussionD2Uid="zHoBy6HNKsk"
 			discussionApiClientHeader="nextgen"
 			enableDiscussionSwitch={true}
@@ -35,3 +36,15 @@ export const Basic = () => {
 };
 
 Basic.storyName = 'A discussion with short comments';
+Basic.decorators = [
+	splitTheme(
+		[
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Culture,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
