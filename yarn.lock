@@ -5092,12 +5092,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:7.20.13":
-  version: 7.20.13
-  resolution: "@babel/runtime@npm:7.20.13"
+"@babel/runtime@npm:7.23.6":
+  version: 7.23.6
+  resolution: "@babel/runtime@npm:7.23.6"
   dependencies:
-    regenerator-runtime: "npm:^0.13.11"
-  checksum: 4bea540b54d50af157efc6e9117727c0e9a146b9db43fcd89b8f0024c9464620194efc73e57588b4b141974188dc6f9d338319d74b855d32a785bf14a6fd0d6d
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: d886954e985ef8e421222f7a2848884d96a752e0020d3078b920dd104e672fdf23bcc6f51a44313a048796319f1ac9d09c2c88ec8cbb4e1f09174bcd3335b9ff
   languageName: node
   linkType: hard
 
@@ -6464,7 +6464,7 @@ __metadata:
     "@babel/preset-env": "npm:7.22.6"
     "@babel/preset-react": "npm:7.18.6"
     "@babel/preset-typescript": "npm:7.18.6"
-    "@babel/runtime": "npm:7.20.13"
+    "@babel/runtime": "npm:7.23.6"
     "@braze/web-sdk-core": "npm:3.5.1"
     "@creditkarma/thrift-server-core": "npm:1.0.4"
     "@cypress/skip-test": "npm:2.6.1"
