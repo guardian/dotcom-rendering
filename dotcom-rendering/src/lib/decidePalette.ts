@@ -1054,7 +1054,6 @@ export const decidePalette = (
 			cardStandfirst:
 				overrides?.text.cardStandfirst ?? textCardStandfirst(format),
 			cardFooter: overrides?.text.cardFooter ?? textCardFooter(format),
-			dynamoMeta: overrides?.text.dynamoMeta ?? textCardFooter(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
 			lastUpdated: textLastUpdated(format),
