@@ -9,7 +9,6 @@ import type { StoryObj } from '@storybook/react';
 import fetchMock from 'fetch-mock';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
-import { darkDecorator } from '../../.storybook/decorators/themeDecorator';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
