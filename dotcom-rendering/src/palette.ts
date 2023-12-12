@@ -4009,6 +4009,12 @@ const commentCountFill: PaletteFunction = ({ design, theme }) => {
 	return pillarPalette(theme, 400);
 };
 
+const mobileCommentCountFill: PaletteFunction = (format) => {
+	if (format.design === ArticleDesign.LiveBlog)
+		return sourcePalette.neutral[100];
+	return commentCountFill(format);
+};
+
 // ----- Palette ----- //
 
 /**
@@ -4643,6 +4649,10 @@ const paletteColours = {
 	'--comment-count-fill': {
 		light: commentCountFill,
 		dark: commentCountFill,
+	},
+	'--comment-count-mobile-fill': {
+		light: mobileCommentCountFill,
+		dark: mobileCommentCountFill,
 	},
 } satisfies PaletteColours;
 

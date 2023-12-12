@@ -55,7 +55,6 @@ export type Palette = {
 		dynamoSublink: Colour;
 	};
 	fill: {
-		commentCountUntilDesktop: Colour;
 		guardianLogo: Colour;
 	};
 	border: {

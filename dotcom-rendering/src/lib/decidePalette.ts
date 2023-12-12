@@ -523,40 +523,6 @@ const backgroundFilterButtonActive = (format: ArticleFormat): string => {
 	}
 };
 
-/** @deprecated this has been moved to the theme palette (--comment-count-fill) */
-const fillCommentCount = (format: ArticleFormat): string => {
-	if (
-		format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.DeadBlog
-	)
-		return neutral[46];
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return palette.specialReportAlt[100];
-
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	if (format.design === ArticleDesign.Picture) {
-		return palette.neutral[86];
-	}
-	return pillarPalette[format.theme].main;
-};
-
-const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) return WHITE;
-
-	return fillCommentCount(format);
-};
-
 const fillGuardianLogo = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.NewsletterSignup) return WHITE;
 
@@ -1091,7 +1057,6 @@ export const decidePalette = (
 				backgroundDynamoSublink(format),
 		},
 		fill: {
-			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
 			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {
