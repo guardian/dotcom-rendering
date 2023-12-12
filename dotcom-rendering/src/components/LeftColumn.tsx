@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	border,
 	from,
+	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source-foundations';
@@ -91,7 +91,7 @@ type Props = {
 export const LeftColumn = ({
 	children,
 	borderType,
-	borderColour = border.secondary,
+	borderColour = sourcePalette.neutral[86],
 	size = 'compact',
 	verticalMargins = true,
 	hasPageSkin = false,

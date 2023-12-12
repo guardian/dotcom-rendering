@@ -17,8 +17,13 @@ endef
 
 # deployment #########################################
 
+# https://www.npmjs.com/package/aws-cdk#cdk-synthesize
 cdk-synth:
-	@yarn cdk:synth
+	@yarn cdk synth --path-metadata false --version-reporting false
+
+# https://www.npmjs.com/package/aws-cdk#cdk-diff
+cdk-diff:
+	@yarn cdk diff --path-metadata false --version-reporting false
 
 riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")

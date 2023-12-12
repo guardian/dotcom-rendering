@@ -3,13 +3,10 @@ export type Colour = string;
 export type Palette = {
 	text: {
 		headlineWhenMatch: Colour;
-		articleLink: Colour;
-		articleLinkHover: Colour;
 		cardHeadline: Colour;
 		cardKicker: Colour;
 		dynamoHeadline: Colour;
 		dynamoKicker: Colour;
-		dynamoMeta: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
 		standfirst: Colour;
@@ -17,7 +14,6 @@ export type Palette = {
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
-		carouselTitle: Colour;
 		pagination: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
@@ -40,7 +36,6 @@ export type Palette = {
 		bulletStandfirst: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
-		carouselDot: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		analysisUnderline: Colour;
@@ -55,14 +50,9 @@ export type Palette = {
 		dynamoSublink: Colour;
 	};
 	fill: {
-		commentCount: Colour;
-		commentCountUntilDesktop: Colour;
 		guardianLogo: Colour;
 	};
 	border: {
-		subNav: Colour;
-		articleLink: Colour;
-		articleLinkHover: Colour;
 		pinnedPost: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
@@ -72,7 +62,6 @@ export type Palette = {
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
 		filterButton: Colour;
-		secondary: Colour;
 		pagination: Colour;
 	};
 	topBar: {

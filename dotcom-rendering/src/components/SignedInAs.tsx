@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
 import {
-	border,
 	headline,
-	neutral,
-	news,
+	palette as sourcePalette,
 	space,
 	text,
 	textSans,
@@ -68,10 +66,10 @@ const usernameStyles = css`
 const linkStyles = (palette: Palette) => css`
 	color: ${palette.text.signInLink};
 	text-decoration: none;
-	border-bottom: 1px solid ${border.secondary};
+	border-bottom: 1px solid ${sourcePalette.neutral[86]};
 	transition: border-color 0.15s ease-out;
 	:hover {
-		border-color: ${news[300]};
+		border-color: ${sourcePalette.news[300]};
 	}
 `;
 
@@ -89,7 +87,7 @@ const Heading = ({ count }: { count?: number }) => {
 			comments{' '}
 			<span
 				css={css`
-					color: ${neutral[60]};
+					color: ${sourcePalette.neutral[60]};
 				`}
 			>
 				({count ?? '…'})

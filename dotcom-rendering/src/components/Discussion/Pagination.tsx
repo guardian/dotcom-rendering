@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	border,
 	palette as sourcePalette,
 	space,
 	textSans,
@@ -110,7 +109,7 @@ const wrapperStyles = css`
 	width: 100%;
 	padding-top: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
-	border-top: 1px solid ${border.secondary};
+	border-top: 1px solid ${sourcePalette.neutral[86]};
 	${until.mobileLandscape} {
 		flex-direction: column;
 	}

@@ -147,7 +147,7 @@ export const ManyNewsletterSignUp = () => {
 
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
-			if (!userCanInteract) {
+			if (status === 'Loading') {
 				return;
 			}
 			const { target: button } = event;
@@ -184,12 +184,13 @@ export const ManyNewsletterSignUp = () => {
 					button.dataset.ariaLabelWhenUnchecked ?? 'add to list',
 				);
 			}
+			setStatus('NotSent');
 		},
-		[newslettersToSignUpFor, userCanInteract],
+		[newslettersToSignUpFor, status],
 	);
 
 	const removeAll = useCallback(() => {
-		if (!userCanInteract) {
+		if (status === 'Loading') {
 			return;
 		}
 		const signUpButtons = [
@@ -206,7 +207,8 @@ export const ManyNewsletterSignUp = () => {
 		}
 
 		setNewslettersToSignUpFor([]);
-	}, [userCanInteract]);
+		setStatus('NotSent');
+	}, [status]);
 
 	useEffect(() => {
 		const signUpButtons = [
