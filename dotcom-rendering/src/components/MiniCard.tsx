@@ -3,9 +3,9 @@ import { body, breakpoints } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
-import type { ContainerOverrides } from '../types/palette';
 import type { TrailType } from '../types/trails';
 import { generateSources } from './Picture';
+import { ContainerOverrides } from './ContainerOverrides';
 
 const imageStyles = css`
 	width: 120px;
@@ -18,11 +18,7 @@ const linkStyles = css`
 	display: flex;
 	align-items: flex-start;
 	text-decoration: none;
-`;
-
-const linkOverrideStyles = (containerOverrides?: ContainerOverrides) => css`
-	${containerOverrides?.text?.cardHeadline &&
-	`color: ${containerOverrides.text.cardHeadline};`}
+	color:;
 `;
 
 type Props = {
@@ -67,19 +63,18 @@ const MiniCardPicture = ({ image, alt }: MiniCardPictureProps) => {
  * Primarily used for rendering Snaps in containers such as {@linkcode NavList}
  */
 export const MiniCard = ({ trail, showImage, containerPalette }: Props) => {
-	const containerOverrides =
-		containerPalette && decideContainerOverrides(containerPalette);
-
 	return (
-		<Link
-			href={trail.url}
-			priority="secondary"
-			cssOverrides={[linkStyles, linkOverrideStyles(containerOverrides)]}
-		>
-			{showImage && !!trail.image && (
-				<MiniCardPicture image={trail.image} alt={trail.headline} />
-			)}
-			<span>{trail.headline}</span>
-		</Link>
+		<ContainerOverrides containerPalette={containerPalette} isDynamo>
+			<Link
+				href={trail.url}
+				priority="secondary"
+				cssOverrides={[linkStyles]}
+			>
+				{showImage && !!trail.image && (
+					<MiniCardPicture image={trail.image} alt={trail.headline} />
+				)}
+				<span>{trail.headline}</span>
+			</Link>
+		</ContainerOverrides>
 	);
 };

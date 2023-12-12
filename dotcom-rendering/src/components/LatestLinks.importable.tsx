@@ -13,6 +13,7 @@ import { useApi } from '../lib/useApi';
 import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
 import { RelativeTime } from './RelativeTime.importable';
+import { palette as themePalette } from '../palette';
 
 type Props = {
 	id: string;
@@ -134,7 +135,7 @@ export const LatestLinks = ({
 				revealStyles,
 				isDynamo || direction === 'horizontal' ? horizontal : vertical,
 				css`
-					color: ${text.cardHeadline};
+					color: ${themePalette('--card-headline-trail-text')};
 				`,
 			]}
 		>
