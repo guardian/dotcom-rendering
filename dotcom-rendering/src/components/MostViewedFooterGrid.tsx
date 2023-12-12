@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import {
-	border,
 	from,
 	headline,
-	neutral,
+	palette as sourcePalette,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -12,7 +11,7 @@ import { palette } from '../palette';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
-const thinGreySolid = `1px solid ${border.secondary}`;
+const thinGreySolid = `1px solid ${sourcePalette.neutral[86]}`;
 
 const hidePanel = css`
 	display: none;
@@ -60,7 +59,7 @@ const selectedListTabStyles = (selectedColour: string) => css`
 
 const unselectedStyles = css`
 	&:hover {
-		box-shadow: inset 0px 4px 0px 0px ${neutral[86]};
+		box-shadow: inset 0px 4px 0px 0px ${sourcePalette.neutral[86]};
 		transition: box-shadow 0.3s ease-in-out;
 	}
 `;
@@ -100,7 +99,7 @@ const gridContainer = css`
 
 	/* We set left border on the grid container, and then right border on
     the gridItems to prevent borders doubling up */
-	border-left: 1px solid ${border.secondary};
+	border-left: 1px solid ${sourcePalette.neutral[86]};
 `;
 
 type Props = {
@@ -133,7 +132,7 @@ const TabHeading = ({ heading }: { heading: string }) => {
 export const MostViewedFooterGrid = ({
 	data,
 	sectionId = '',
-	selectedColour = neutral[0],
+	selectedColour = sourcePalette.neutral[0],
 	hasPageSkin = false,
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);

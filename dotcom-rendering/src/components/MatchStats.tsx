@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
 	between,
-	border,
 	from,
 	headline,
+	palette as sourcePalette,
 	space,
 	textSans,
 	until,
@@ -233,7 +233,7 @@ const RightBorder = ({ children }: { children: React.ReactNode }) => (
 	<h4
 		css={css`
 			${from.phablet} {
-				border-right: 1px solid ${border.secondary};
+				border-right: 1px solid ${sourcePalette.neutral[86]};
 			}
 			margin-right: 10px;
 			padding-right: 10px;

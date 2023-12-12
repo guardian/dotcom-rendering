@@ -10,7 +10,6 @@ export type Palette = {
 		cardKicker: Colour;
 		dynamoHeadline: Colour;
 		dynamoKicker: Colour;
-		dynamoMeta: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
 		standfirst: Colour;
@@ -70,7 +69,6 @@ export type Palette = {
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
 		filterButton: Colour;
-		secondary: Colour;
 		pagination: Colour;
 	};
 	topBar: {

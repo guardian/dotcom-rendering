@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	background,
-	border,
 	from,
 	palette as sourcePalette,
 	textSans,
@@ -26,7 +25,7 @@ const containerStyles = css`
 const ulStyles = css`
 	z-index: 2;
 	list-style: none;
-	border: 1px solid ${border.secondary};
+	border: 1px solid ${sourcePalette.neutral[86]};
 	margin-left: -8px;
 	padding: 0px;
 	display: none;
