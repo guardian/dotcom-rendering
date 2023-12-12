@@ -6,8 +6,6 @@ export type Palette = {
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		seriesTitleWhenMatch: Colour;
-		articleLink: Colour;
-		articleLinkHover: Colour;
 		cardHeadline: Colour;
 		cardKicker: Colour;
 		dynamoHeadline: Colour;
@@ -63,9 +61,6 @@ export type Palette = {
 		guardianLogo: Colour;
 	};
 	border: {
-		subNav: Colour;
-		articleLink: Colour;
-		articleLinkHover: Colour;
 		pinnedPost: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
