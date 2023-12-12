@@ -4057,6 +4057,25 @@ const topPickBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
 const staffLabelLight: PaletteFunction = () => sourcePalette.brand[400];
 const staffLabelDark: PaletteFunction = () => sourcePalette.brand[300];
 
+const recommendationCountLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const recommendationCountDark: PaletteFunction = () => sourcePalette.neutral[0];
+
+const recommendationCountSelectedLight: PaletteFunction = () =>
+	sourcePalette.brand[400];
+const recommendationCountSelectedDark: PaletteFunction = () =>
+	sourcePalette.brand[300];
+
+const recommendationCountArrowLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const recommendationCountArrowDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
+const recommendationCountArrowSelectedLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const recommendationCountArrowSelectedDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
 // ----- Palette ----- //
 
 /**
@@ -4711,6 +4730,22 @@ const paletteColours = {
 	'--staff-label': {
 		light: staffLabelLight,
 		dark: staffLabelDark,
+	},
+	'--recommendation-count': {
+		light: recommendationCountLight,
+		dark: recommendationCountDark,
+	},
+	'--recommendation-count-selected': {
+		light: recommendationCountSelectedLight,
+		dark: recommendationCountSelectedDark,
+	},
+	'--recommendation-count-arrow': {
+		light: recommendationCountArrowLight,
+		dark: recommendationCountArrowDark,
+	},
+	'--recommendation-count-arrow-selected': {
+		light: recommendationCountArrowSelectedLight,
+		dark: recommendationCountArrowSelectedDark,
 	},
 } satisfies PaletteColours;
 

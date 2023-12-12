@@ -8,6 +8,7 @@ import { getCommentContext } from '../lib/getCommentContext';
 import { isServer } from '../lib/isServer';
 import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
+import { palette as themePalette } from '../palette';
 import type { SignedInUser } from '../types/discussion';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
@@ -27,8 +28,8 @@ export type Props = {
 const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
-		${neutral[100]},
-		${neutral[100]} 40%,
+		${themePalette('--article-section-background')},
+		${themePalette('--article-section-background')} 40%,
 		rgba(255, 255, 255, 0)
 	);
 	height: 80px;
@@ -197,6 +198,7 @@ export const Discussion = ({
 				</div>
 			</div>
 			{!isExpanded && (
+				// TODO: Update this button in source to use theming
 				<EditorialButton
 					format={format}
 					onClick={() => {
