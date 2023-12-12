@@ -2,13 +2,12 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- Automatically created by running `yarn createtoc` in a pre-commit hook -->
+<!-- Automatically created by running `pnpm createtoc` in a pre-commit hook -->
 
 -   [High level diagram](#high-level-diagram)
 -   [Developing](#developing)
     -   [Setup](#setup)
         -   [Node.js](#nodejs)
-        -   [Yarn](#yarn)
     -   [Start](#start)
     -   [Previewing article on local](#previewing-article-on-local)
     -   [Previewing AMP on local](#previewing-amp-on-local)
@@ -29,7 +28,7 @@ This high level diagram shows the difference between the data flow when DCR is u
 
 ### Setup
 
-The only things you need to make sure you have installed before you get going are Node and yarn.
+The only thing you need to make sure you have installed before you get going is Node.
 
 #### Node.js
 
@@ -42,28 +41,6 @@ If you use nvm, you might find
 
 If you prefer to [install Node.js manually](https://nodejs.org),
 check the [.nvmrc](https://github.com/guardian/dotcom-rendering/blob/main/.nvmrc) for the current required version.
-
-#### Yarn
-
-Node packages for this project are managed using the 'classic' version of [Yarn](https://classic.yarnpkg.com/).
-Currently [the recommended way to install Yarn](https://classic.yarnpkg.com/lang/en/docs/install/)
-is with npm, which should be available if you have already installed Node.js. To install Yarn
-globally using npm, you can run:
-
-```
-npm install --global yarn
-```
-
-If you don't want to install it globally, you could add an alias to your shell config which runs
-Yarn via [npx](https://www.npmjs.com/package/npx):
-
-```
-alias yarn="npx yarn"
-```
-
-Once you have installed Yarn, run `yarn` in the repo's root directory to install the npm packages
-for this project. Once these are installed, `cd` into the `dotcom-rendering` directory in order to
-run the `make` commands described below.
 
 ### Start
 

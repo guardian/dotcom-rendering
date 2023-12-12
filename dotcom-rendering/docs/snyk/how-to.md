@@ -30,7 +30,6 @@ corresponds to the following DCR structure:
 
 1. Install the Snyk CLI
     - using npm: `npm install snyk -g`
-    - using yarn: `yarn global add snyk`
 2. Authenticate your machine to associate the Snyk CLI with your Snyk account. There are currently two ways to do this locally:
     - Run `snyk auth`. This will open a browser window with prompts to log in to your Snyk account and authenticate. If you're already logged it, you will be authenticated automatically.
     - Using your API token. To do this follow the instructions in the [official documentation](https://docs.snyk.io/snyk-cli/authenticate-the-cli-with-your-account).

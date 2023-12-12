@@ -5,17 +5,17 @@ RED='\033[0;31m'
 ENDCOLOR='\033[0m'
 
 changedFiles="$(git diff-tree -r --name-only --no-commit-id HEAD@{1} HEAD)"
-changedLock="$(echo "$changedFiles" | { grep -E 'yarn.lock|package-lock.json' || :; })"
+changedLock="$(echo "$changedFiles" | { grep -E 'pnpm-lock.yaml' || :; })"
 changedNode="$(echo "$changedFiles" | { grep '.nvmrc' || :; })"
 
 if [[ ! -z $changedLock ]]
 then
-	echo "${RED}This application has new dependencies. Running 'yarn'... ${ENDCOLOR}"
-	yarn --immutable
+	echo "${RED}This application has new dependencies. Running 'pnpm'... ${ENDCOLOR}"
+	pnpm install --frozen-lockfile
 fi
 
 if [[ ! -z $changedNode ]]
 then
 	version="$(cat .nvmrc)"
-	echo "${RED}This project now uses node version "$version". Please use 'nvm use' & run 'yarn'${ENDCOLOR}"
+	echo "${RED}This project now uses node version "$version". Please use 'nvm use' & run 'pnpm install --frozen-lockfile'${ENDCOLOR}"
 fi
