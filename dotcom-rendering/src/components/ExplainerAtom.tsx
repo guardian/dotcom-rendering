@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
-import {
-	headline,
-	neutral,
-	space,
-	text,
-	textSans,
-} from '@guardian/source-foundations';
-
+import { headline, space, textSans } from '@guardian/source-foundations';
+import { palette } from '../palette';
 interface Props {
 	id: string;
 	title: string;
@@ -28,10 +22,9 @@ const Container = ({
 				padding-bottom: ${space[1]}px;
 				padding-left: ${space[2]}px;
 				padding-right: ${space[2]}px;
-				border-top: 1px solid ${text.primary};
-				color: ${text.primary};
-				background: ${neutral[97]};
-
+				border-top: 1px solid ${palette('--explainer-atom-accent')};
+				background: ${palette('--explainer-atom-accent')};
+				background: ${palette('--explainer-atom-background')};
 				p {
 					margin-top: ${space[3]}px;
 					margin-bottom: ${space[3]}px;
