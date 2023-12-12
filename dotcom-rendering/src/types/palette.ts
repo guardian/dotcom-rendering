@@ -6,8 +6,6 @@ export type Palette = {
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		seriesTitleWhenMatch: Colour;
-		articleLink: Colour;
-		articleLinkHover: Colour;
 		cardHeadline: Colour;
 		cardKicker: Colour;
 		dynamoHeadline: Colour;

@@ -166,73 +166,6 @@ const textLastUpdated = (format: ArticleFormat): string => {
 	return BLACK;
 };
 
-/** @deprecated this has been moved to the theme palette (--article-link-text) */
-const textArticleLink = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.DeadBlog) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[400];
-			case Pillar.Culture:
-				return culture[350];
-			case Pillar.Lifestyle:
-				return lifestyle[400];
-			case Pillar.Sport:
-				return sport[400];
-			case Pillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
-			case ArticleSpecial.SpecialReportAlt:
-				return news[400];
-		}
-	}
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			case Pillar.Culture:
-				return culture[350];
-			case Pillar.Lifestyle:
-				return lifestyle[400];
-			case Pillar.Sport:
-				return sport[400];
-			case Pillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
-			case ArticleSpecial.SpecialReportAlt:
-				return palette.specialReportAlt[200];
-		}
-	}
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.LiveBlog
-	)
-		return palette.specialReportAlt[200];
-
-	switch (format.theme) {
-		case Pillar.Opinion:
-		case Pillar.Culture:
-			return pillarPalette[format.theme].dark;
-		case Pillar.News:
-			return news[400];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Lifestyle:
-			return lifestyle[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
 const textDisclaimerLink = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
@@ -268,67 +201,6 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[100];
-
-	switch (format.theme) {
-		case Pillar.Opinion:
-		case Pillar.Culture:
-			return pillarPalette[format.theme].dark;
-		default:
-			return pillarPalette[format.theme].main;
-	}
-};
-
-/** @deprecated this has been moved to the theme palette (--article-link-text-hover) */
-const textArticleLinkHover = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.DeadBlog) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[400];
-			case Pillar.Culture:
-				return culture[350];
-			case Pillar.Lifestyle:
-				return lifestyle[400];
-			case Pillar.Sport:
-				return sport[400];
-			case Pillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[100];
-			case ArticleSpecial.SpecialReportAlt:
-				return news[400];
-		}
-	}
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			case Pillar.Culture:
-				return culture[350];
-			case Pillar.Lifestyle:
-				return lifestyle[400];
-			case Pillar.Sport:
-				return sport[400];
-			case Pillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[100];
-			case ArticleSpecial.SpecialReportAlt:
-				return palette.specialReportAlt[200];
-		}
-	}
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[100];
-
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.LiveBlog
-	)
-		return palette.specialReportAlt[200];
 
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -1226,8 +1098,6 @@ export const decidePalette = (
 			seriesTitle: textSeriesTitle(format),
 			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
 			sectionTitle: textSectionTitle(format),
-			articleLink: textArticleLink(format),
-			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline:
 				overrides?.text.cardHeadline ?? textCardHeadline(format),
 			dynamoHeadline:
