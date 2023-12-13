@@ -3973,6 +3973,225 @@ const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.specialReportAlt[200];
 	}
 };
+
+const seriesTitleBackgroundLight: PaletteFunction = ({ theme, display }) => {
+	if (theme === ArticleSpecial.SpecialReport)
+		return sourcePalette.brandAlt[400];
+	switch (display) {
+		case ArticleDisplay.Immersive:
+			switch (theme) {
+				case Pillar.Opinion:
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 400);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+			}
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard:
+		default:
+			return 'transparent';
+	}
+};
+const sectionTitleBackgroundLight: PaletteFunction = ({ theme, display }) => {
+	switch (display) {
+		case ArticleDisplay.Immersive:
+			switch (theme) {
+				case Pillar.Opinion:
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 400);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+			}
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard:
+		default:
+			return 'transparent';
+	}
+};
+const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
+	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
+		return sourcePalette.neutral[7];
+	}
+	if (
+		theme === ArticleSpecial.SpecialReportAlt &&
+		design !== ArticleDesign.LiveBlog &&
+		design !== ArticleDesign.DeadBlog
+	) {
+		return sourcePalette.specialReportAlt[100];
+	}
+
+	if (theme === ArticleSpecial.SpecialReport) {
+		return sourcePalette.specialReport[300];
+	}
+	switch (display) {
+		case ArticleDisplay.Immersive:
+			return sourcePalette.neutral[100];
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard:
+			switch (design) {
+				case ArticleDesign.DeadBlog:
+					switch (theme) {
+						case Pillar.News:
+						case Pillar.Opinion:
+							return pillarPalette(theme, 400);
+						case Pillar.Sport:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+							return pillarPalette(theme, 300);
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.news[400];
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[300];
+					}
+
+				case ArticleDesign.Analysis:
+					switch (theme) {
+						case Pillar.News:
+							return sourcePalette.news[300];
+						case Pillar.Opinion:
+						case Pillar.Sport:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+							return pillarPalette(theme, 400);
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[400];
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[200];
+					}
+				case ArticleDesign.LiveBlog:
+					switch (theme) {
+						case Pillar.News:
+							return sourcePalette.news[600];
+						case Pillar.Sport:
+						case Pillar.Lifestyle:
+						case Pillar.Culture:
+						case Pillar.Opinion:
+						default:
+							return sourcePalette.neutral[100];
+					}
+				case ArticleDesign.MatchReport:
+					return sourcePalette.neutral[7];
+				case ArticleDesign.Picture:
+					return sourcePalette.neutral[86];
+				default:
+					switch (theme) {
+						case Pillar.Opinion:
+						case Pillar.News:
+						case Pillar.Sport:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+							return pillarPalette(theme, 400);
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[400];
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[200];
+					}
+			}
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
+	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[100];
+	switch (design) {
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.Labs:
+					return sourcePalette.news[500];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Letter:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+			}
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+			}
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[60];
+		default:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[500];
+			}
+	}
+};
+const seriesTitleMatchTextLight: PaletteFunction = (format) => {
+	if (
+		format.design === ArticleDesign.MatchReport ||
+		format.design === ArticleDesign.LiveBlog
+	) {
+		return sourcePalette.neutral[7];
+	}
+	return seriesTitleTextLight(format);
+};
+
 const recaptchaButtonLight: PaletteFunction = () => sourcePalette.neutral[0];
 const recaptchaButtonDark: PaletteFunction = () => sourcePalette.neutral[86];
 const recaptchaButtonHoverLight: PaletteFunction = () =>
@@ -4648,6 +4867,22 @@ const paletteColours = {
 	'--age-warning-background': {
 		light: ageWarningBackground,
 		dark: ageWarningBackground,
+	},
+	'--series-title-background': {
+		light: seriesTitleBackgroundLight,
+		dark: seriesTitleBackgroundLight,
+	},
+	'--section-title-background': {
+		light: sectionTitleBackgroundLight,
+		dark: sectionTitleBackgroundLight,
+	},
+	'--series-title-text': {
+		light: seriesTitleTextLight,
+		dark: seriesTitleTextDark,
+	},
+	'--series-title-match-text': {
+		light: seriesTitleMatchTextLight,
+		dark: seriesTitleTextDark,
 	},
 	'--recaptcha-button': {
 		light: recaptchaButtonLight,
