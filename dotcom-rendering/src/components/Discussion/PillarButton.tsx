@@ -7,6 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
+import { palette as themePalette } from '../../palette';
 
 type Props = {
 	format: ArticleFormat;
@@ -54,8 +55,9 @@ const buttonOverrides = (
 					color: ${sourcePalette.neutral[100]};
 
 					:hover {
-						background-color: ${decidePalette(format)
-							.discussionGeneric};
+						background-color: ${themePalette(
+							'--discussion-colour',
+						)};
 					}
 				}
 			`;
@@ -65,8 +67,8 @@ const buttonOverrides = (
 				button {
 					${textSans.small({ fontWeight: 'bold' })}
 					background-color: transparent;
-					border: 1px solid ${decidePalette(format).discussionGeneric};
-					color: ${decidePalette(format).discussionGeneric};
+					border: 1px solid ${themePalette('--discussion-colour')};
+					color: ${themePalette('--discussion-colour')};
 
 					:hover {
 						background-color: ${dark(format)};
@@ -78,7 +80,7 @@ const buttonOverrides = (
 				button {
 					${textSans.small({ fontWeight: 'bold' })}
 					background-color: transparent;
-					color: ${decidePalette(format).discussionGeneric};
+					color: ${themePalette('--discussion-colour')};
 					border-radius: 0;
 				}
 			`;
