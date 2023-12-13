@@ -88,7 +88,6 @@ export const LongPick = () => (
 		`}
 	>
 		<TopPick
-			format={format}
 			comment={comment}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
@@ -106,10 +105,6 @@ export const ShortPick = () => (
 		`}
 	>
 		<TopPick
-			format={{
-				...format,
-				theme: Pillar.Opinion,
-			}}
 			comment={commentWithShortBody}
 			authStatus={signedInStatus}
 			userMadeComment={false}
@@ -128,7 +123,6 @@ export const LongPickContributor = () => (
 		`}
 	>
 		<TopPick
-			format={format}
 			comment={commentContributor}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
@@ -146,10 +140,6 @@ export const ShortPickContributor = () => (
 		`}
 	>
 		<TopPick
-			format={{
-				...format,
-				theme: Pillar.Opinion,
-			}}
 			comment={contributorCommentWithShortBody}
 			authStatus={signedInStatus}
 			userMadeComment={false}

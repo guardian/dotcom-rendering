@@ -4299,6 +4299,51 @@ const recommendationCountArrowSelectedLight: PaletteFunction = () =>
 const recommendationCountArrowSelectedDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 
+const discussionLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		default:
+			return sourcePalette.news[400];
+	}
+};
+const discussionDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[600];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[600];
+		case Pillar.Sport:
+			return sourcePalette.sport[600];
+		case Pillar.Culture:
+			return sourcePalette.culture[600];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[600];
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[600];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[600];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[600];
+		default:
+			return sourcePalette.news[600];
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -4989,6 +5034,10 @@ const paletteColours = {
 	'--recommendation-count-arrow-selected': {
 		light: recommendationCountArrowSelectedLight,
 		dark: recommendationCountArrowSelectedDark,
+	},
+	'--discussion-colour': {
+		light: discussionLight,
+		dark: discussionDark,
 	},
 } satisfies PaletteColours;
 

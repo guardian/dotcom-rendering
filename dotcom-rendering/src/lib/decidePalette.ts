@@ -800,6 +800,7 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
+/** @deprecated this has been moved to the theme palette (--discussion-colour) */
 const discussion = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
