@@ -3,9 +3,6 @@ export type Colour = string;
 export type Palette = {
 	text: {
 		headlineWhenMatch: Colour;
-		seriesTitle: Colour;
-		sectionTitle: Colour;
-		seriesTitleWhenMatch: Colour;
 		cardHeadline: Colour;
 		cardKicker: Colour;
 		dynamoHeadline: Colour;
@@ -33,8 +30,6 @@ export type Palette = {
 		analysisContrast: Colour;
 		analysisContrastHover: Colour;
 		audioAtom: Colour;
-		seriesTitle: Colour;
-		sectionTitle: Colour;
 		card: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
