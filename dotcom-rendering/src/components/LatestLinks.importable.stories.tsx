@@ -8,6 +8,7 @@ import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
 import { Island } from './Island';
 import { LatestLinks } from './LatestLinks.importable';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 
 export default {
 	component: LatestLinks,
@@ -144,11 +145,6 @@ const Wrapper = ({
 };
 
 export const WorldCupFinal2023 = () => {
-	const format = {
-		theme: Pillar.Sport,
-		design: ArticleDesign.LiveBlog,
-		display: ArticleDisplay.Standard,
-	};
 	const containerPalette = 'EventAltPalette' satisfies DCRContainerPalette;
 	const overrides = decideContainerOverrides(containerPalette);
 	return (
@@ -169,14 +165,18 @@ export const WorldCupFinal2023 = () => {
 		</Wrapper>
 	);
 };
+WorldCupFinal2023.storyName = 'World Cup Final 2023';
+WorldCupFinal2023.decorators = [
+	lightDecorator([
+		{
+			theme: Pillar.Sport,
+			design: ArticleDesign.LiveBlog,
+			display: ArticleDisplay.Standard,
+		},
+	]),
+];
 
 export const LondonPride2022 = () => {
-	const format = {
-		theme: Pillar.News,
-		design: ArticleDesign.LiveBlog,
-		display: ArticleDisplay.Standard,
-	};
-
 	return (
 		<Wrapper
 			styles={css`
@@ -193,3 +193,13 @@ export const LondonPride2022 = () => {
 		</Wrapper>
 	);
 };
+LondonPride2022.storyName = 'London Pride 2022';
+LondonPride2022.decorators = [
+	lightDecorator([
+		{
+			theme: Pillar.News,
+			design: ArticleDesign.LiveBlog,
+			display: ArticleDisplay.Standard,
+		},
+	]),
+];

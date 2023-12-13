@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat } from '@guardian/libs';
 import {
 	lineHeights,
 	palette,
@@ -139,7 +138,7 @@ export const LatestLinks = ({
 					<>
 						<ContainerOverrides
 							containerPalette={containerPalette}
-							isDynamo={isDynamo}
+							isDynamo={isDynamo ? isDynamo : false}
 						>
 							{index > 0 && (
 								<li
