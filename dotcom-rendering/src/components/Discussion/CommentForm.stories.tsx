@@ -1,10 +1,17 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentForm } from './CommentForm';
 
 export default { component: CommentForm, title: 'Discussion/CommentForm' };
 
 const shortUrl = '/p/39f5z';
+
+const defaultFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
 
 const aUser: SignedInUser = {
 	profile: {
@@ -56,55 +63,48 @@ const aComment: CommentType = {
 export const Default = () => (
 	<CommentForm
 		shortUrl={shortUrl}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		}}
 		user={aUser}
 		onAddComment={(comment) => {}}
 	/>
 );
 Default.storyName = 'default';
+Default.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
 // This story has a mocked post endpoint that returns an error, see 97d6eab4a98917f63bc96a7ac64f7ca7
 export const Error = () => (
 	<CommentForm
 		shortUrl={'/p/g8g7v'}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		}}
 		user={aUser}
 		onAddComment={(comment) => {}}
 	/>
 );
 Error.storyName = 'form with errors';
+Error.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
 export const Active = () => (
 	<CommentForm
 		shortUrl={shortUrl}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Culture,
-		}}
 		user={aUser}
 		onAddComment={(comment) => {}}
 		commentBeingRepliedTo={aComment}
 	/>
 );
 Active.storyName = 'form is active';
+Active.decorators = [
+	splitTheme(
+		[
+			{
+				...defaultFormat,
+				theme: Pillar.Culture,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
 export const Premoderated = () => (
 	<CommentForm
 		shortUrl={shortUrl}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Opinion,
-		}}
 		user={{
 			...aUser,
 			profile: {
@@ -121,3 +121,14 @@ export const Premoderated = () => (
 	/>
 );
 Premoderated.storyName = 'user is premoderated';
+Premoderated.decorators = [
+	splitTheme(
+		[
+			{
+				...defaultFormat,
+				theme: Pillar.Opinion,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
