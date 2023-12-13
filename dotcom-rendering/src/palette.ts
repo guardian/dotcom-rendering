@@ -4253,6 +4253,26 @@ const mobileCommentCountFill: PaletteFunction = (format) => {
 	return commentCountFill(format);
 };
 
+const recommendationCountLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const recommendationCountDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const recommendationCountSelectedLight: PaletteFunction = () =>
+	sourcePalette.brand[400];
+const recommendationCountSelectedDark: PaletteFunction = () =>
+	sourcePalette.brand[600];
+
+const recommendationCountArrowLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const recommendationCountArrowDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
+const recommendationCountArrowSelectedLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const recommendationCountArrowSelectedDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
 // ----- Palette ----- //
 
 /**
@@ -4907,6 +4927,22 @@ const paletteColours = {
 	'--comment-count-mobile-fill': {
 		light: mobileCommentCountFill,
 		dark: mobileCommentCountFill,
+	},
+	'--recommendation-count': {
+		light: recommendationCountLight,
+		dark: recommendationCountDark,
+	},
+	'--recommendation-count-selected': {
+		light: recommendationCountSelectedLight,
+		dark: recommendationCountSelectedDark,
+	},
+	'--recommendation-count-arrow': {
+		light: recommendationCountArrowLight,
+		dark: recommendationCountArrowDark,
+	},
+	'--recommendation-count-arrow-selected': {
+		light: recommendationCountArrowSelectedLight,
+		dark: recommendationCountArrowSelectedDark,
 	},
 } satisfies PaletteColours;
 
