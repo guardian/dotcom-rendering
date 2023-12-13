@@ -72,6 +72,13 @@ const linkStyles = css`
 	}
 `;
 
+const jumpToLinkStyles = css`
+	color: ${themePalette('--top-pick-link')};
+	:hover {
+		color: ${themePalette('--top-pick-link')};
+	}
+`;
+
 // to override a tag styles from dangerouslySetInnerHTML
 const inCommentLinkStyling = css`
 	a {
@@ -194,7 +201,7 @@ export const TopPick = ({
 						<Link
 							priority="primary"
 							href={comment.webUrl}
-							cssOverrides={linkStyles}
+							css={jumpToLinkStyles}
 							onClick={(
 								e: React.MouseEvent<HTMLAnchorElement>,
 							) => {
