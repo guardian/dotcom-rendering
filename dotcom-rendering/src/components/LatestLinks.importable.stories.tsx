@@ -4,11 +4,11 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints, palette } from '@guardian/source-foundations';
 import fetchMock from 'fetch-mock';
 import type { PropsWithChildren } from 'react';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
 import { Island } from './Island';
 import { LatestLinks } from './LatestLinks.importable';
-import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 
 export default {
 	component: LatestLinks,
