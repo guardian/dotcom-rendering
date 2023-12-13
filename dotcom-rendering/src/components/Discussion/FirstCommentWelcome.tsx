@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	headline,
-	palette as sourcePalette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { headline, space, textSans } from '@guardian/source-foundations';
 import { Link, TextInput } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { preview as defaultPreview } from '../../lib/discussionApi';
