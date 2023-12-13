@@ -58,7 +58,7 @@ const headlineStyles = css`
 
 const usernameStyles = css`
 	font-weight: 700;
-	color: ${themePalette('--sign-in-link')};
+	color: ${themePalette('--article-text')};
 `;
 
 const linkStyles = css`
