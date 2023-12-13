@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { SvgCheckmark } from '@guardian/source-react-components';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { PillarButton } from './PillarButton';
 import { Row } from './Row';
 
@@ -21,13 +22,13 @@ const makeFormatForPillar = (pillar: Pillar): ArticleFormat => ({
 	theme: pillar,
 });
 
-const formats = {
-	lifestyle: makeFormatForPillar(Pillar.Lifestyle),
-	sport: makeFormatForPillar(Pillar.Sport),
-	news: makeFormatForPillar(Pillar.News),
-	opinion: makeFormatForPillar(Pillar.Opinion),
-	culture: makeFormatForPillar(Pillar.Culture),
-} as const;
+const formats = [
+	makeFormatForPillar(Pillar.Lifestyle),
+	makeFormatForPillar(Pillar.Sport),
+	makeFormatForPillar(Pillar.News),
+	makeFormatForPillar(Pillar.Opinion),
+	makeFormatForPillar(Pillar.Culture),
+];
 
 export const EachPillar = () => (
 	<Row>
@@ -35,54 +36,14 @@ export const EachPillar = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			format={formats.lifestyle}
 			linkName=""
 		>
-			Lifestyle
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.sport}
-			linkName=""
-		>
-			Sport
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.news}
-			linkName=""
-		>
-			News
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.opinion}
-			linkName=""
-		>
-			Opinion
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.culture}
-			linkName=""
-		>
-			Culture
+			Button
 		</PillarButton>
 	</Row>
 );
 EachPillar.storyName = 'with each pillar';
+EachPillar.decorators = [splitTheme(formats)];
 
 export const EachSize = () => (
 	<Row>
@@ -90,7 +51,6 @@ export const EachSize = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			format={formats.news}
 			linkName=""
 			size="xsmall"
 		>
@@ -101,7 +61,6 @@ export const EachSize = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			format={formats.news}
 			linkName=""
 			size="small"
 		>
@@ -112,7 +71,6 @@ export const EachSize = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			format={formats.news}
 			linkName=""
 			size="default"
 		>
@@ -121,35 +79,36 @@ export const EachSize = () => (
 	</Row>
 );
 EachSize.storyName = 'with each size';
+EachSize.decorators = [splitTheme(formats)];
 
 export const IconLeft = () => (
 	<PillarButton
 		onClick={() => {
 			alert('Clicked!');
 		}}
-		format={formats.lifestyle}
 		icon={<SvgCheckmark />}
 		iconSide="left"
 		linkName="left"
 	>
-		Left
+		Button
 	</PillarButton>
 );
 IconLeft.storyName = 'with an icon on the left';
+IconLeft.decorators = [splitTheme(formats)];
 
 export const IconRight = () => (
 	<PillarButton
 		onClick={() => {
 			alert('Clicked!');
 		}}
-		format={formats.sport}
 		icon={<SvgCheckmark />}
 		iconSide="right"
 		linkName=""
 	>
-		Right
+		Button
 	</PillarButton>
 );
+IconRight.decorators = [splitTheme(formats)];
 
 export const Secondary = () => (
 	<Row>
@@ -157,59 +116,15 @@ export const Secondary = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			format={formats.lifestyle}
 			priority="secondary"
 			linkName=""
 		>
-			Lifestyle
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.sport}
-			priority="secondary"
-			linkName=""
-		>
-			Sport
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.news}
-			priority="secondary"
-			linkName=""
-		>
-			News
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.opinion}
-			priority="secondary"
-			linkName=""
-		>
-			Opinion
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.culture}
-			priority="secondary"
-			linkName=""
-		>
-			Culture
+			Button
 		</PillarButton>
 	</Row>
 );
 Secondary.storyName = 'with secondary priority';
+Secondary.decorators = [splitTheme(formats)];
 
 export const Subdued = () => (
 	<Row>
@@ -217,56 +132,12 @@ export const Subdued = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			format={formats.lifestyle}
 			priority="subdued"
 			linkName=""
 		>
-			Lifestyle
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.sport}
-			priority="subdued"
-			linkName=""
-		>
-			Sport
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.news}
-			priority="subdued"
-			linkName=""
-		>
-			News
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.opinion}
-			priority="subdued"
-			linkName=""
-		>
-			Opinion
-		</PillarButton>
-		<Space amount={2} />
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			format={formats.culture}
-			priority="subdued"
-			linkName=""
-		>
-			Culture
+			Button
 		</PillarButton>
 	</Row>
 );
 Subdued.storyName = 'with subdued priority';
+Subdued.decorators = [splitTheme(formats)];
