@@ -70,7 +70,6 @@ export type Palette = {
 		standfirstLink: Colour;
 		pagination: Colour;
 	};
-	discussionGeneric: Colour;
 };
 
 export type ContainerOverrides = {
