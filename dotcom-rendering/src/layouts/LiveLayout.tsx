@@ -1153,9 +1153,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							fullWidth={true}
 							data-print-layout="hide"
 							padSides={false}
-							showTopBorder={false}
+							showTopBorder={true}
 							showSideBorders={false}
-							backgroundColour={sourcePalette.neutral[93]}
+							backgroundColour={sourcePalette.neutral[97]}
+							shouldCenter={false}
 							element="aside"
 						>
 							<AdSlot
@@ -1284,7 +1285,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							showTopBorder={false}
 							showSideBorders={false}
-							backgroundColour={sourcePalette.neutral[93]}
+							backgroundColour={sourcePalette.neutral[97]}
 							element="aside"
 						>
 							<AdSlot
