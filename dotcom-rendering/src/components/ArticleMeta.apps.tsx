@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -286,31 +286,41 @@ export const ArticleMetaApps = ({
 								)}
 						</MetaGridByline>
 
-						{isCommentable && (
-							<MetaGridCommentCount
-								isPictureContent={isPictureContent}
-							>
-								<div>
-									<Island
-										priority="feature"
-										defer={{ until: 'idle' }}
-									>
-										<CommentCount
-											discussionApiUrl={discussionApiUrl}
-											shortUrlId={shortUrlId}
-											format={format}
-										/>
-									</Island>
-								</div>
-							</MetaGridCommentCount>
-						)}
+						{/* Immersive articles may or may not have comments,
+						but the new designs have not factored this layout in yet
+						and currently commentable artilces are rendered via legacy
+						templates. This check should be removed when design changes
+						for Immersive layouts are available */}
+						{isCommentable &&
+							format.display !== ArticleDisplay.Immersive && (
+								<MetaGridCommentCount
+									isPictureContent={isPictureContent}
+								>
+									<div>
+										<Island
+											priority="feature"
+											defer={{ until: 'idle' }}
+										>
+											<CommentCount
+												discussionApiUrl={
+													discussionApiUrl
+												}
+												shortUrlId={shortUrlId}
+												format={format}
+											/>
+										</Island>
+									</div>
+								</MetaGridCommentCount>
+							)}
 
 						<MetaGridDateline>
-							<StraightLines
-								cssOverrides={[stretchLines]}
-								count={1}
-								color={themePalette('--article-border')}
-							/>
+							{format.display !== ArticleDisplay.Immersive && (
+								<StraightLines
+									cssOverrides={[stretchLines]}
+									count={1}
+									color={themePalette('--article-border')}
+								/>
+							)}
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}
