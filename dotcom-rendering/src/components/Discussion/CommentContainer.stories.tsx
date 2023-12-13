@@ -1,4 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { StoryObj } from '@storybook/react';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import type { StoryProps } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
@@ -171,19 +174,16 @@ const commentDataThreadedWithLongUserNames: CommentType = {
 	},
 };
 
-const format = {
+const defaultFormat = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 	theme: Pillar.News,
 };
 
-export const defaultStory = () => (
+export const defaultStory: StoryObj = ({ format }: StoryProps) => (
 	<CommentContainer
 		comment={commentData}
-		format={{
-			...format,
-			theme: Pillar.Sport,
-		}}
+		format={format}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -195,14 +195,22 @@ export const defaultStory = () => (
 	/>
 );
 defaultStory.storyName = 'default';
+defaultStory.decorators = [
+	splitTheme(
+		[
+			{
+				...defaultFormat,
+				theme: Pillar.Sport,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
-export const threadedComment = () => (
+export const threadedComment: StoryObj = ({ format }: StoryProps) => (
 	<CommentContainer
 		comment={commentDataThreaded}
-		format={{
-			...format,
-			theme: Pillar.Lifestyle,
-		}}
+		format={format}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -214,14 +222,24 @@ export const threadedComment = () => (
 	/>
 );
 threadedComment.storyName = 'threaded';
+threadedComment.decorators = [
+	splitTheme(
+		[
+			{
+				...defaultFormat,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
-export const threadedCommentWithShowMore = () => (
+export const threadedCommentWithShowMore: StoryObj = ({
+	format,
+}: StoryProps) => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongThread}
-		format={{
-			...format,
-			theme: Pillar.Lifestyle,
-		}}
+		format={format}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -233,14 +251,24 @@ export const threadedCommentWithShowMore = () => (
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
+threadedCommentWithShowMore.decorators = [
+	splitTheme(
+		[
+			{
+				...defaultFormat,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
-export const threadedCommentWithLongUsernames = () => (
+export const threadedCommentWithLongUsernames: StoryObj = ({
+	format,
+}: StoryProps) => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
-		format={{
-			...format,
-			theme: Pillar.Lifestyle,
-		}}
+		format={format}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -252,14 +280,24 @@ export const threadedCommentWithLongUsernames = () => (
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
+threadedCommentWithLongUsernames.decorators = [
+	splitTheme(
+		[
+			{
+				...defaultFormat,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
-export const threadedCommentWithLongUsernamesMobile = () => (
+export const threadedCommentWithLongUsernamesMobile: StoryObj = ({
+	format,
+}: StoryProps) => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
-		format={{
-			...format,
-			theme: Pillar.Lifestyle,
-		}}
+		format={format}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -278,3 +316,14 @@ threadedCommentWithLongUsernamesMobile.story = {
 		chromatic: { viewports: [375] },
 	},
 };
+threadedCommentWithLongUsernamesMobile.decorators = [
+	splitTheme(
+		[
+			{
+				...defaultFormat,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];

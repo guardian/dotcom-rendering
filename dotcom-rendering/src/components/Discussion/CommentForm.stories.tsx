@@ -1,4 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { StoryObj } from '@storybook/react';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import type { StoryProps } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentForm } from './CommentForm';
 
@@ -53,58 +56,61 @@ const aComment: CommentType = {
 	},
 };
 
-export const Default = () => (
+const defaultFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
+
+export const Default: StoryObj = ({ format }: StoryProps) => (
 	<CommentForm
 		shortUrl={shortUrl}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		}}
+		format={format}
 		user={aUser}
 		onAddComment={(comment) => {}}
 	/>
 );
 Default.storyName = 'default';
+Default.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
 // This story has a mocked post endpoint that returns an error, see 97d6eab4a98917f63bc96a7ac64f7ca7
-export const Error = () => (
+export const Error: StoryObj = ({ format }: StoryProps) => (
 	<CommentForm
 		shortUrl={'/p/g8g7v'}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		}}
+		format={format}
 		user={aUser}
 		onAddComment={(comment) => {}}
 	/>
 );
 Error.storyName = 'form with errors';
+Error.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
-export const Active = () => (
+export const Active: StoryObj = ({ format }: StoryProps) => (
 	<CommentForm
 		shortUrl={shortUrl}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Culture,
-		}}
+		format={format}
 		user={aUser}
 		onAddComment={(comment) => {}}
 		commentBeingRepliedTo={aComment}
 	/>
 );
 Active.storyName = 'form is active';
+Active.decorators = [
+	splitTheme(
+		[
+			{
+				...defaultFormat,
+				theme: Pillar.Culture,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
-export const Premoderated = () => (
+export const Premoderated: StoryObj = ({ format }: StoryProps) => (
 	<CommentForm
 		shortUrl={shortUrl}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Opinion,
-		}}
+		format={format}
 		user={{
 			...aUser,
 			profile: {
@@ -121,3 +127,14 @@ export const Premoderated = () => (
 	/>
 );
 Premoderated.storyName = 'user is premoderated';
+Premoderated.decorators = [
+	splitTheme(
+		[
+			{
+				...defaultFormat,
+				theme: Pillar.Opinion,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
