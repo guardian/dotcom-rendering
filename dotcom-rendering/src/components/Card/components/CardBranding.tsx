@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../../../client/ga/ga';
 import { decideLogo } from '../../../lib/decideLogo';
-import { decidePalette } from '../../../lib/decidePalette';
 import { getZIndex } from '../../../lib/getZIndex';
 import { palette as themePalette } from '../../../palette';
 import type { Branding } from '../../../types/branding';
@@ -37,7 +36,6 @@ const labelStyle = css`
 
 export const CardBranding = ({ branding, format }: Props) => {
 	const logo = decideLogo(format, branding);
-	const palette = decidePalette(format);
 	return (
 		<div css={brandingWrapperStyle}>
 			<div css={labelStyle}>{logo.label}</div>

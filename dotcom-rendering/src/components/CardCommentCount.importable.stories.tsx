@@ -44,11 +44,6 @@ export const GalleryStory = () => {
 		<Wrapper>
 			<Island priority="critical">
 				<CardCommentCount
-					format={{
-						design: ArticleDesign.Gallery,
-						theme: Pillar.Culture,
-						display: ArticleDisplay.Standard,
-					}}
 					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 					discussionId="/p/zemg8"
 				/>

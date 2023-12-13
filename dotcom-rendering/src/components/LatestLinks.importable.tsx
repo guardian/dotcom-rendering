@@ -7,7 +7,6 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { decidePalette } from '../lib/decidePalette';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
 import { palette as themePalette } from '../palette';

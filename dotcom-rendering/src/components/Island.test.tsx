@@ -120,15 +120,7 @@ describe('Island: server-side rendering', () => {
 	test('CardCommentCount', () => {
 		expect(() =>
 			renderToString(
-				<CardCommentCount
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-					discussionApiUrl=""
-					discussionId=""
-				/>,
+				<CardCommentCount discussionApiUrl="" discussionId="" />,
 			),
 		).not.toThrow();
 	});

@@ -6,7 +6,6 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../../../lib/decidePalette';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';
