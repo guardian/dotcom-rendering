@@ -3,12 +3,6 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { SignedInAs } from './SignedInAs';
 
-const defaultFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
-};
-
 const aUser = {
 	userId: 'abc123',
 	displayName: 'Jane Smith',
@@ -52,7 +46,15 @@ export const SignedIn = () => {
 	);
 };
 SignedIn.storyName = 'when signed in';
-SignedIn.decorators = [splitTheme([defaultFormat])];
+SignedIn.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.News,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const Image = () => {
 	return (
@@ -69,7 +71,15 @@ export const Image = () => {
 	);
 };
 Image.storyName = 'when signed in with an avatar set';
-Image.decorators = [splitTheme([defaultFormat])];
+Image.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Culture,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const Banned = () => {
 	return (
@@ -89,7 +99,15 @@ export const Banned = () => {
 	);
 };
 Banned.storyName = 'when user is banned';
-Banned.decorators = [splitTheme([defaultFormat])];
+Banned.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Culture,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const NoDisplayName = () => {
 	return (
@@ -106,7 +124,15 @@ export const NoDisplayName = () => {
 	);
 };
 NoDisplayName.storyName = 'before a display name has been set';
-NoDisplayName.decorators = [splitTheme([defaultFormat])];
+NoDisplayName.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.News,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const NotSignedIn = () => {
 	return (
@@ -116,7 +142,15 @@ export const NotSignedIn = () => {
 	);
 };
 NotSignedIn.storyName = 'when the discussion is open but user is not signed in';
-NotSignedIn.decorators = [splitTheme([defaultFormat])];
+NotSignedIn.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Lifestyle,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const DiscussionClosed = () => {
 	return (
@@ -132,7 +166,15 @@ export const DiscussionClosed = () => {
 };
 DiscussionClosed.storyName =
 	'when the discussion is closed and the user is signed in';
-DiscussionClosed.decorators = [splitTheme([defaultFormat])];
+DiscussionClosed.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Opinion,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const DiscussionClosedSignedOut = () => {
 	return (
@@ -147,7 +189,15 @@ export const DiscussionClosedSignedOut = () => {
 };
 DiscussionClosedSignedOut.storyName =
 	'when the discussion is closed and the user is signed out';
-DiscussionClosedSignedOut.decorators = [splitTheme([defaultFormat])];
+DiscussionClosedSignedOut.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Sport,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const DiscussionDisabled = () => {
 	return (
@@ -163,7 +213,15 @@ export const DiscussionDisabled = () => {
 };
 DiscussionDisabled.storyName =
 	'with discussion disabled sitewide and the user signed in';
-DiscussionDisabled.decorators = [splitTheme([defaultFormat])];
+DiscussionDisabled.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Opinion,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const DiscussionDisabledSignedOut = () => {
 	return (
@@ -178,4 +236,12 @@ export const DiscussionDisabledSignedOut = () => {
 };
 DiscussionDisabledSignedOut.storyName =
 	'with discussion disabled sitewide and the user signed out';
-DiscussionDisabledSignedOut.decorators = [splitTheme([defaultFormat])];
+DiscussionDisabledSignedOut.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Opinion,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
