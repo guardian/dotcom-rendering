@@ -84,7 +84,7 @@ const rowUntilDesktop = css`
 const Heading = ({ count }: { count?: number }) => {
 	return (
 		<h2 css={headingStyles}>
-			comments{' '}
+			Comments{' '}
 			<span
 				css={css`
 					color: ${sourcePalette.neutral[60]};
