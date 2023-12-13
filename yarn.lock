@@ -4661,7 +4661,7 @@ __metadata:
     webpack-bundle-analyzer: "npm:4.8.0"
     webpack-cli: "npm:5.0.1"
     webpack-dev-middleware: "npm:5.3.3"
-    webpack-dev-server: "npm:4.15.0"
+    webpack-dev-server: "npm:4.15.1"
     webpack-hot-middleware: "npm:2.25.3"
     webpack-hot-server-middleware: "npm:0.6.1"
     webpack-manifest-plugin: "npm:5.0.0"
@@ -9748,12 +9748,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ws@npm:^8.5.1":
-  version: 8.5.5
-  resolution: "@types/ws@npm:8.5.5"
+"@types/ws@npm:^8.5.5":
+  version: 8.5.10
+  resolution: "@types/ws@npm:8.5.10"
   dependencies:
     "@types/node": "npm:*"
-  checksum: 9fb5aaeb2899f2c5aa55946656a39fdf679e48ec4eff557901215249ac84f435853b1d224214e88a93fcbca4bc9a0b0af01113d76f37db0b5873a882e5e99935
+  checksum: e9af279b984c4a04ab53295a40aa95c3e9685f04888df5c6920860d1dd073fcc57c7bd33578a04b285b2c655a0b52258d34bee0a20569dca8defb8393e1e5d29
   languageName: node
   linkType: hard
 
@@ -11024,7 +11024,7 @@ __metadata:
     uuid: "npm:8.3.2"
     webpack: "npm:5.76.1"
     webpack-cli: "npm:5.0.1"
-    webpack-dev-server: "npm:4.15.0"
+    webpack-dev-server: "npm:4.15.1"
     webpack-manifest-plugin: "npm:5.0.0"
     whatwg-fetch: "npm:3.6.19"
     winston: "npm:3.11.0"
@@ -27041,9 +27041,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-dev-server@npm:4.15.0":
-  version: 4.15.0
-  resolution: "webpack-dev-server@npm:4.15.0"
+"webpack-dev-server@npm:4.15.1":
+  version: 4.15.1
+  resolution: "webpack-dev-server@npm:4.15.1"
   dependencies:
     "@types/bonjour": "npm:^3.5.9"
     "@types/connect-history-api-fallback": "npm:^1.3.5"
@@ -27051,7 +27051,7 @@ __metadata:
     "@types/serve-index": "npm:^1.9.1"
     "@types/serve-static": "npm:^1.13.10"
     "@types/sockjs": "npm:^0.3.33"
-    "@types/ws": "npm:^8.5.1"
+    "@types/ws": "npm:^8.5.5"
     ansi-html-community: "npm:^0.0.8"
     bonjour-service: "npm:^1.0.11"
     chokidar: "npm:^3.5.3"
@@ -27084,7 +27084,7 @@ __metadata:
       optional: true
   bin:
     webpack-dev-server: bin/webpack-dev-server.js
-  checksum: 7e4555b687071f2f4c6d7ff0faa1c7fc155bc35983c703b6fd250f3fb3e387a18394e0bd43ce0ede9bb433efe0947bc05ad55996b3ac5669a8adb64d6c1abba0
+  checksum: 2cf3edf556dcafdfc938e0adeac3dadf97fb959ed66b88bdd70acdb0b77b0f25be5e2d4b30cca2da8732548451418cadf00eb09e751e7674ff914fd9ab646b26
   languageName: node
   linkType: hard
 
