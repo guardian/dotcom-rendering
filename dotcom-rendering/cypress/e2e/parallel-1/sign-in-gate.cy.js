@@ -124,7 +124,7 @@ describe('Sign In Gate Tests', function () {
 			beforeEach(function () {
 				// Putting user into the second half of the audience segment where this
 				// test is running
-				setMvtCookie('500000');
+				setMvtCookie('850000');
 			});
 
 			it('should load the gate on every article view if user is reading in the morning', function () {
