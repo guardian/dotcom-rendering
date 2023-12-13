@@ -3,7 +3,7 @@ import type { ABTest } from '@guardian/ab-core';
 export const signInGateTimesOfDay: ABTest = {
 	id: 'SignInGateTimesOfDay',
 	start: '2023-12-11',
-	expiry: '2023-12-18',
+	expiry: '2023-12-20',
 	author: 'Lindsey Dew',
 	description: 'Show sign in gate more frequently to users in the morning',
 	audience: 0.08,
