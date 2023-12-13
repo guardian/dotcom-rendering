@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { none } from '@guardian/types';
+import { none } from '../../../vendor/@guardian/types/index';
 import { image } from 'fixtures/image';
 import type { FC } from 'react';
 import Img from '.';

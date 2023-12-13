@@ -7,6 +7,7 @@ import { SvgArrowUpStraight } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { recommend as recommendDefault } from '../../lib/discussionApi';
 import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
+import { palette as themePalette } from '../../palette';
 import { Row } from './Row';
 
 type Props = {
@@ -30,8 +31,8 @@ const buttonStyles = (recommended: boolean, isSignedIn: boolean) => css`
 	width: 1.1875rem;
 	height: 1.1875rem;
 	background-color: ${recommended
-		? sourcePalette.brand[400]
-		: sourcePalette.neutral[97]};
+		? themePalette('--recommendation-count-selected')
+		: themePalette('--recommendation-count')};
 	border-radius: 62.5rem;
 	border: none;
 `;
@@ -42,8 +43,8 @@ const arrowStyles = (recommended: boolean) => css`
 	align-items: center;
 	svg {
 		fill: ${recommended
-			? sourcePalette.neutral[100]
-			: sourcePalette.neutral[46]};
+			? themePalette('--recommendation-count-arrow-selected')
+			: themePalette('--recommendation-count-arrow')};
 		height: 15px;
 		width: 15px;
 	}

@@ -135,17 +135,7 @@ describe('Island: server-side rendering', () => {
 
 	test('CommentCount', () => {
 		expect(() =>
-			renderToString(
-				<CommentCount
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-					discussionApiUrl=""
-					shortUrlId=""
-				/>,
-			),
+			renderToString(<CommentCount discussionApiUrl="" shortUrlId="" />),
 		).not.toThrow();
 	});
 
@@ -153,11 +143,6 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<DiscussionMeta
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					discussionApiUrl={''}
 					shortUrlId={''}
 					enableDiscussionSwitch={false}

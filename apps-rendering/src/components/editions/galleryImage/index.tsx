@@ -7,8 +7,14 @@ import {
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { map, none, OptionKind, some, withDefault } from '@guardian/types';
+import type { Option } from '../../../../vendor/@guardian/types/index';
+import {
+	map,
+	none,
+	OptionKind,
+	some,
+	withDefault,
+} from '../../../../vendor/@guardian/types/index';
 import type { Image } from 'bodyElement';
 import Img from 'components/ImgAlt';
 import type { Sizes } from 'image/sizes';

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import type { ArticleFormat } from '@guardian/libs';
-import type { Option } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
 import MainMediaImage from 'components/MainMedia/MainMediaImage';
 import MainMediaVideo from 'components/MainMedia/MainMediaVideo';
 import { maybeRender } from 'lib';

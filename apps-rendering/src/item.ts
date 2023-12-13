@@ -18,8 +18,15 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { andThen, fromNullable, map, none, some } from '@guardian/types';
-import type { Option } from '@guardian/types';
+import {
+	andThen,
+	fromNullable,
+	map,
+	none,
+	OptionKind,
+	some,
+} from '../vendor/@guardian/types/index';
+import type { Option } from '../vendor/@guardian/types/index';
 import { getPillarFromId } from 'articleFormat';
 import type { BodyElement } from 'bodyElement';
 import { parseElements } from 'bodyElement';
@@ -52,7 +59,6 @@ import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { Result } from 'result';
 import { MainMediaKind } from 'mainMedia';
-import { OptionKind } from '@guardian/types/src/option';
 
 // ----- Item Type ----- //
 

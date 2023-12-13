@@ -20,6 +20,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
+import { Disclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -90,6 +91,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines  border  media       media'
 						'meta   border  media       media'
 						'meta   border  standfirst  right-column'
+						'meta   border  disclaimer  right-column'
 						'.      border  body        right-column'
 						'.      border  .           right-column';
 				}
@@ -101,6 +103,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines  border  media       media'
 						'meta   border  media       media'
 						'meta   border  standfirst  right-column'
+						'meta   border  disclaimer  right-column'
 						'.      border  body        right-column'
 						'.      border  .           right-column';
 				}
@@ -117,6 +120,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title      right-column'
 						'headline   right-column'
 						'standfirst right-column'
+						'disclaimer right-column'
 						'media      right-column'
 						'lines      right-column'
 						'meta       right-column'
@@ -131,6 +135,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title'
 						'headline'
 						'standfirst'
+						'disclaimer'
 						'media'
 						'lines'
 						'meta'
@@ -145,6 +150,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title'
 						'headline'
 						'standfirst'
+						'disclaimer'
 						'lines'
 						'meta'
 						'body';
@@ -382,13 +388,13 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										padSides={false}
 										showTopBorder={false}
 										borderColour={themePalette(
-											'--article-border-secondary',
+											'--article-border',
 										)}
 									>
 										<StraightLines
 											count={4}
 											color={themePalette(
-												'--article-border-secondary',
+												'--straight-lines',
 											)}
 											cssOverrides={css`
 												display: block;
@@ -492,7 +498,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					element="article"
-					borderColour={themePalette('--article-border-secondary')}
+					borderColour={themePalette('--article-border')}
 				>
 					<ShowcaseGrid>
 						<GridItem area="media">
@@ -552,14 +558,19 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
+						<GridItem area="disclaimer">
+							{!!article.affiliateLinksDisclaimer && (
+								<Disclaimer
+									html={article.affiliateLinksDisclaimer}
+								></Disclaimer>
+							)}
+						</GridItem>
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									<DecideLines
 										format={format}
-										color={themePalette(
-											'--article-border-secondary',
-										)}
+										color={themePalette('--straight-lines')}
 									/>
 								</div>
 							</div>
@@ -680,9 +691,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								)}
 								<StraightLines
 									count={4}
-									color={themePalette(
-										'--article-border-secondary',
-									)}
+									color={themePalette('--straight-lines')}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -753,7 +762,11 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true}>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}

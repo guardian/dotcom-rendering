@@ -24,18 +24,18 @@ const liStyles = css`
 	row-gap: ${GAP_SIZE};
 `;
 
-const sidePaddingStylesMobile = css`
+const sidePaddingStylesMobile = (override?: number) => css`
 	/* Set spacing on the li element */
 	${until.tablet} {
-		padding-left: 10px;
-		padding-right: 10px;
+		padding-left: ${override ?? 10}px;
+		padding-right: ${override ?? 10}px;
 	}
 `;
 
-const sidePaddingStyles = css`
+const sidePaddingStyles = (override?: number) => css`
 	${from.tablet} {
-		padding-left: 10px;
-		padding-right: 10px;
+		padding-left: ${override ?? 10}px;
+		padding-right: ${override ?? 10}px;
 	}
 `;
 
@@ -93,8 +93,12 @@ type Props = {
 	showDivider?: boolean;
 	/** If this LI directly wraps a card this should be true */
 	padSides?: boolean;
+	/** Overrides the default padding */
+	padSidesOverride?: number;
 	/** Should be true if spacing between cards is desired on mobile devices */
 	padSidesOnMobile?: boolean;
+	/** Overrides the default mobile padding */
+	padSidesMobileOverride?: number;
 	/** True when snapping card when scrolling e.g. in carousel */
 	snapAlignStart?: boolean;
 	/** Prevent the divider from spanning the LI's bottom padding. To be used when you know that the
@@ -111,7 +115,9 @@ export const LI = ({
 	stretch,
 	showDivider,
 	padSides = false,
+	padSidesOverride,
 	padSidesOnMobile = false,
+	padSidesMobileOverride,
 	snapAlignStart = false,
 	offsetBottomPaddingOnDivider = false,
 	containerPalette,
@@ -132,8 +138,9 @@ export const LI = ({
 						containerPalette,
 						verticalDividerColour,
 					),
-				padSides && sidePaddingStyles,
-				padSidesOnMobile && sidePaddingStylesMobile,
+				padSides && sidePaddingStyles(padSidesOverride),
+				padSidesOnMobile &&
+					sidePaddingStylesMobile(padSidesMobileOverride),
 				snapAlignStart && snapAlignStartStyles,
 			]}
 		>

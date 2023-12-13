@@ -457,7 +457,6 @@ export const ArticleMeta = ({
 										<CommentCount
 											discussionApiUrl={discussionApiUrl}
 											shortUrlId={shortUrlId}
-											format={format}
 										/>
 									</Island>
 								)}

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
-import { none, some } from '@guardian/types';
+import { none, some } from '../vendor/@guardian/types/index';
 import type { Body, BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import type { DeadBlog, Quiz, Standard } from 'item';

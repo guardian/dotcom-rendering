@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { none, some } from '@guardian/types';
+import { none, some } from '../../../../vendor/@guardian/types/index';
 import type { Contributor } from 'contributor';
 import { article } from 'fixtures/item';
 import type { Image } from 'image';

@@ -8,9 +8,8 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import type { DCRBadgeType } from '../types/badge';
-import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { Badge } from './Badge';
 import { Hide } from './Hide';
@@ -157,7 +156,7 @@ const sectionPadding = css`
 	}
 `;
 
-const immersiveTitleBadgeStyle = (palette: Palette) => css`
+const immersiveTitleBadgeStyle = css`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -166,10 +165,10 @@ const immersiveTitleBadgeStyle = (palette: Palette) => css`
 	line-height: 1.15;
 	/* Offset parent container margins when Immersive */
 	margin-bottom: -10px;
-	background-color: ${palette.background.seriesTitle};
+	background-color: ${themePalette('--series-title-background')};
 	box-shadow:
-		-6px 0 0 0 ${palette.background.seriesTitle},
-		6px 0 0 0 ${palette.background.seriesTitle};
+		-6px 0 0 0 ${themePalette('--series-title-background')},
+		6px 0 0 0 ${themePalette('--series-title-background')};
 `;
 
 export const SeriesSectionLink = ({
@@ -203,15 +202,9 @@ export const SeriesSectionLink = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const palette = decidePalette(format);
-
-	const seriesTitleColour = isMatch
-		? palette.text.seriesTitleWhenMatch
-		: palette.text.seriesTitle;
-
-	const sectionTitleColour = isMatch
-		? palette.text.seriesTitleWhenMatch
-		: palette.text.sectionTitle;
+	const titleColour = isMatch
+		? themePalette('--series-title-match-text')
+		: themePalette('--series-title-text');
 
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -232,16 +225,19 @@ export const SeriesSectionLink = ({
 										fontStyles(format),
 										breakWord,
 										css`
-											color: ${seriesTitleColour};
-											background-color: ${palette
-												.background.seriesTitle};
+											color: ${titleColour};
+											background-color: ${themePalette(
+												'--series-title-background',
+											)};
 											box-shadow:
 												-6px 0 0 0
-													${palette.background
-														.seriesTitle},
+													${themePalette(
+														'--series-title-background',
+													)},
 												6px 0 0 0
-													${palette.background
-														.seriesTitle};
+													${themePalette(
+														'--series-title-background',
+													)};
 										`,
 									]}
 									data-component="series"
@@ -259,17 +255,21 @@ export const SeriesSectionLink = ({
 											displayBlock,
 											breakWord,
 											css`
-												color: ${palette.text
-													.sectionTitle};
-												background-color: ${palette
-													.background.sectionTitle};
+												color: ${themePalette(
+													'--series-title-text',
+												)};
+												background-color: ${themePalette(
+													'--section-title-background',
+												)};
 												box-shadow:
 													-6px 0 0 0
-														${palette.background
-															.seriesTitle},
+														${themePalette(
+															'--series-title-background',
+														)},
 													6px 0 0 0
-														${palette.background
-															.seriesTitle};
+														${themePalette(
+															'--series-title-background',
+														)};
 											`,
 										]}
 										data-component="section"
@@ -292,16 +292,19 @@ export const SeriesSectionLink = ({
 									fontStyles(format),
 									breakWord,
 									css`
-										color: ${sectionTitleColour};
-										background-color: ${palette.background
-											.sectionTitle};
+										color: ${titleColour};
+										background-color: ${themePalette(
+											'--section-title-background',
+										)};
 										box-shadow:
 											-6px 0 0 0
-												${palette.background
-													.seriesTitle},
+												${themePalette(
+													'--series-title-background',
+												)},
 											6px 0 0 0
-												${palette.background
-													.seriesTitle};
+												${themePalette(
+													'--series-title-background',
+												)};
 									`,
 								]}
 								data-component="section"
@@ -317,9 +320,7 @@ export const SeriesSectionLink = ({
 						const title = tag?.title ? tag.title : sectionLabel;
 						const linkExt = tag?.id ? tag.id : sectionUrl;
 						return (
-							<div
-								css={badge && immersiveTitleBadgeStyle(palette)}
-							>
+							<div css={badge && immersiveTitleBadgeStyle}>
 								{badge && (
 									<div
 										css={[
@@ -342,16 +343,19 @@ export const SeriesSectionLink = ({
 										breakWord,
 										!badge && sectionPadding,
 										css`
-											color: ${seriesTitleColour};
-											background-color: ${palette
-												.background.seriesTitle};
+											color: ${titleColour};
+											background-color: ${themePalette(
+												'--series-title-background',
+											)};
 											box-shadow:
 												-6px 0 0 0
-													${palette.background
-														.seriesTitle},
+													${themePalette(
+														'--series-title-background',
+													)},
 												6px 0 0 0
-													${palette.background
-														.seriesTitle};
+													${themePalette(
+														'--series-title-background',
+													)};
 										`,
 									]}
 									href={`${guardianBaseURL}/${linkExt}`}
@@ -383,7 +387,7 @@ export const SeriesSectionLink = ({
 									css={[
 										fontStyles(format),
 										css`
-											color: ${seriesTitleColour};
+											color: ${titleColour};
 										`,
 									]}
 								>
@@ -401,9 +405,10 @@ export const SeriesSectionLink = ({
 							css={[
 								sectionLabelLink,
 								css`
-									color: ${seriesTitleColour};
-									background-color: ${palette.background
-										.seriesTitle};
+									color: ${titleColour};
+									background-color: ${themePalette(
+										'--series-title-background',
+									)};
 								`,
 								marginRight,
 								fontStyles(format),
@@ -411,9 +416,13 @@ export const SeriesSectionLink = ({
 								css`
 									box-shadow:
 										-6px 0 0 0
-											${palette.background.seriesTitle},
+											${themePalette(
+												'--series-title-background',
+											)},
 										6px 0 0 0
-											${palette.background.seriesTitle};
+											${themePalette(
+												'--series-title-background',
+											)};
 								`,
 							]}
 							data-component="series"
@@ -431,9 +440,10 @@ export const SeriesSectionLink = ({
 									displayBlock,
 									breakWord,
 									css`
-										color: ${sectionTitleColour};
-										background-color: ${palette.background
-											.sectionTitle};
+										color: ${titleColour};
+										background-color: ${themePalette(
+											'--section-title-background',
+										)};
 									`,
 								]}
 								data-component="section"
@@ -454,7 +464,7 @@ export const SeriesSectionLink = ({
 								css={[
 									fontStyles(format),
 									css`
-										color: ${seriesTitleColour};
+										color: ${titleColour};
 									`,
 								]}
 							>
@@ -472,9 +482,10 @@ export const SeriesSectionLink = ({
 						css={[
 							sectionLabelLink,
 							css`
-								color: ${sectionTitleColour};
-								background-color: ${palette.background
-									.sectionTitle};
+								color: ${titleColour};
+								background-color: ${themePalette(
+									'--section-title-background',
+								)};
 							`,
 							marginRight,
 							fontStyles(format),

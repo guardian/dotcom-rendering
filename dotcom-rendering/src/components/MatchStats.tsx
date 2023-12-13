@@ -2,14 +2,14 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
 	between,
-	border,
 	from,
 	headline,
+	palette as sourcePalette,
 	space,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import { Distribution } from './Distribution';
 import { Doughnut } from './Doughnut';
 import { GoalAttempts } from './GoalAttempts';
@@ -30,7 +30,6 @@ const StatsGrid = ({
 	children: React.ReactNode;
 	format: ArticleFormat;
 }) => {
-	const palette = decidePalette(format);
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
@@ -41,7 +40,9 @@ const StatsGrid = ({
 						display: flex;
 						flex-direction: column;
 
-						background-color: ${palette.background.matchStats};
+						background-color: ${themePalette(
+							'--match-stats-background',
+						)};
 						@supports (display: grid) {
 							display: grid;
 
@@ -97,7 +98,9 @@ const StatsGrid = ({
 						display: flex;
 						flex-direction: column;
 
-						background-color: ${palette.background.matchStats};
+						background-color: ${themePalette(
+							'--match-stats-background',
+						)};
 						@supports (display: grid) {
 							display: grid;
 
@@ -147,48 +150,40 @@ const StatsGrid = ({
 	}
 };
 
-const StretchBackground = ({
-	format,
-	children,
-}: {
-	format: ArticleFormat;
-	children: React.ReactNode;
-}) => {
-	const palette = decidePalette(format);
+const StretchBackground = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			clear: left;
+			position: relative;
+			flex-grow: 1;
+			padding: ${space[2]}px 10px;
+			${from.mobileLandscape} {
+				margin-left: ${space[3]}px;
+			}
+			/* We use min-height to help reduce our CLS value */
+			min-height: 800px;
+			background-color: ${themePalette('--match-stats-background')};
 
-	return (
-		<div
-			css={css`
-				clear: left;
-				position: relative;
-				flex-grow: 1;
-				padding: ${space[2]}px 10px;
-				${from.mobileLandscape} {
-					margin-left: ${space[3]}px;
+			${from.leftCol} {
+				:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					/* stretch left */
+					left: -100vw;
+					right: 0;
+					background-color: ${themePalette(
+						'--match-stats-background',
+					)};
+					z-index: -1;
 				}
-				/* We use min-height to help reduce our CLS value */
-				min-height: 800px;
-				background-color: ${palette.background.matchStats};
-
-				${from.leftCol} {
-					:before {
-						content: '';
-						position: absolute;
-						top: 0;
-						bottom: 0;
-						/* stretch left */
-						left: -100vw;
-						right: 0;
-						background-color: ${palette.background.matchStats};
-						z-index: -1;
-					}
-				}
-			`}
-		>
-			{children}
-		</div>
-	);
-};
+			}
+		`}
+	>
+		{children}
+	</div>
+);
 
 const ShiftLeft = ({
 	children,
@@ -238,7 +233,7 @@ const RightBorder = ({ children }: { children: React.ReactNode }) => (
 	<h4
 		css={css`
 			${from.phablet} {
-				border-right: 1px solid ${border.secondary};
+				border-right: 1px solid ${sourcePalette.neutral[86]};
 			}
 			margin-right: 10px;
 			padding-right: 10px;
@@ -339,7 +334,7 @@ const DecideDoughnut = ({
 
 export const MatchStats = ({ home, away, format }: Props) => {
 	return (
-		<StretchBackground format={format}>
+		<StretchBackground>
 			<StatsGrid format={format}>
 				<GridItem area="title" element="aside">
 					<ShiftLeft format={format}>
@@ -381,7 +376,6 @@ export const MatchStats = ({ home, away, format }: Props) => {
 							offTarget: away.shotsOff,
 							color: away.colours,
 						}}
-						format={format}
 					/>
 				</GridItem>
 				<GridItem area="corners">

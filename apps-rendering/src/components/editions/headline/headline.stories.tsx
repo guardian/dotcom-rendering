@@ -5,7 +5,7 @@ import {
 	ArticleElementRole,
 	ArticlePillar,
 } from '@guardian/libs';
-import { none, some } from '@guardian/types';
+import { none, some } from '../../../../vendor/@guardian/types/index';
 import type { Contributor } from 'contributor';
 import {
 	analysis,

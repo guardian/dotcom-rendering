@@ -342,6 +342,12 @@ const testLayoutFormats =
 			theme: 'CulturePillar',
 			config: { renderingTarget: 'Apps', darkModeAvailable: true },
 		},
+		{
+			display: 'Standard',
+			design: 'NewsletterSignup',
+			theme: 'SportPillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
+		},
 	]);
 
 const generateLayoutStories = () => {

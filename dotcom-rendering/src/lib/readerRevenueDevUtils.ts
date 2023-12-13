@@ -1,5 +1,4 @@
 import { getCookie, removeCookie, setCookie, storage } from '@guardian/libs';
-import { setAlreadyVisited } from './alreadyVisited';
 import {
 	HIDE_SUPPORT_MESSAGING_COOKIE,
 	RECURRING_CONTRIBUTOR_COOKIE,
@@ -102,7 +101,6 @@ const showMeTheBanner = (
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	clearBannerLastClosedAt();
-	setAlreadyVisited(2);
 	clearCommonReaderRevenueStateAndReload(
 		asExistingSupporter,
 		shouldHideReaderRevenue,

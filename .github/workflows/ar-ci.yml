@@ -33,7 +33,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn --silent --frozen-lockfile
+          yarn --silent --immutable
 
       # Execute some tasks from the `apps-rendering/package.json` file, using `yarn`
       - name: Build and package
@@ -48,10 +48,11 @@ jobs:
           zip -j dist/server/mobile-apps-rendering.zip dist/server/*
 
       - name: AWS Auth
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           aws-region: eu-west-1
+          mask-aws-account-id: true
 
       - name: Upload to riff-raff
         uses: guardian/actions-riff-raff@v2.2.2

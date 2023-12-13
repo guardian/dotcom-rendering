@@ -1,9 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	border,
-	palette as sourcePalette,
-	space,
-} from '@guardian/source-foundations';
+import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { getMoreResponses } from '../../lib/discussionApi';
@@ -48,7 +44,7 @@ const nestingStyles = css`
 `;
 
 const topBorder = css`
-	border-top: 1px solid ${border.secondary};
+	border-top: 1px solid ${sourcePalette.neutral[86]};
 `;
 
 const commentContainerStyles = css`
