@@ -208,7 +208,6 @@ export const CommentContainer = ({
 							css={nestingStyles}
 						>
 							<CommentReplyPreview
-								format={format}
 								commentBeingRepliedTo={commentBeingRepliedTo}
 							/>
 							<CommentForm

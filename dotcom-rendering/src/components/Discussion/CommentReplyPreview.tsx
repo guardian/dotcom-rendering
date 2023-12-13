@@ -2,17 +2,15 @@ import { css } from '@emotion/react';
 import {
 	palette as sourcePalette,
 	space,
-	text,
 	textSans,
 } from '@guardian/source-foundations';
 import { Button, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { palette as themePalette } from '../../palette';
 import type { CommentType } from '../../types/discussion';
 import { Row } from './Row';
 
 type Props = {
-	format: ArticleFormat;
 	commentBeingRepliedTo: CommentType;
 };
 
@@ -75,12 +73,12 @@ const commentStyles = css`
 `;
 
 const blueLink = css`
-	color: ${text.anchorPrimary};
+	color: ${sourcePalette.brand[500]};
 `;
 
-const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
+const buttonLinkPillarBaseStyles = css`
 	button {
-		color: ${decidePalette(format).discussionGeneric};
+		color: ${themePalette('--discussion-colour')};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -89,7 +87,7 @@ const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${decidePalette(format).discussionGeneric};
+			text-decoration-color: ${themePalette('--discussion-colour')};
 		}
 	}
 `;
@@ -110,10 +108,7 @@ const buttonLinkBaseStyles = css`
 	}
 `;
 
-export const CommentReplyPreview = ({
-	format,
-	commentBeingRepliedTo,
-}: Props) => {
+export const CommentReplyPreview = ({ commentBeingRepliedTo }: Props) => {
 	const [displayReplyComment, setDisplayReplyComment] =
 		useState<boolean>(false);
 	return (
@@ -129,7 +124,7 @@ export const CommentReplyPreview = ({
 				<Space amount={3} />
 				<div
 					css={[
-						buttonLinkPillarBaseStyles(format),
+						buttonLinkPillarBaseStyles,
 						css`
 							button {
 								${textSans.small({ fontWeight: 'bold' })}
