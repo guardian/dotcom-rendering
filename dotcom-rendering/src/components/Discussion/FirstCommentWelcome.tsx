@@ -8,6 +8,7 @@ import {
 import { Link, TextInput } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { preview as defaultPreview } from '../../lib/discussionApi';
+import { palette as schemedPalette } from '../../palette';
 import { PillarButton } from './PillarButton';
 import { Row } from './Row';
 
@@ -21,7 +22,8 @@ type Props = {
 
 const previewStyle = css`
 	padding: ${space[2]}px;
-	background-color: ${sourcePalette.neutral[93]};
+	background-color: ${schemedPalette('--first-comment-preview')};
+	color: inherit;
 	margin-bottom: ${space[5]}px;
 	position: relative;
 	min-height: ${space[9]}px;
@@ -36,9 +38,25 @@ const textStyling = css`
 	${textSans.small()};
 `;
 
+const linkStyles = css`
+	color: ${schemedPalette('--discussion-link')};
+`;
+
 const Text = ({ children }: { children: React.ReactNode }) => (
 	<p css={textStyling}>{children}</p>
 );
+
+const inputLabelStyles = css`
+	> label {
+		> * {
+			color: inherit;
+		}
+	}
+`;
+const textInputStyles = css`
+	background-color: transparent;
+	color: inherit;
+`;
 
 export const FirstCommentWelcome = ({
 	body,
@@ -92,16 +110,19 @@ export const FirstCommentWelcome = ({
 					your comments to show up. You can only set your username
 					once.
 				</Text>
-				<TextInput
-					label="Username:"
-					supporting="Must be 6-20 characters, letters and/or numbers only, no spaces."
-					value={userName}
-					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						setUserName(e.target.value)
-					}
-					width={30}
-					error={error}
-				/>
+				<div css={inputLabelStyles}>
+					<TextInput
+						label="Username:"
+						supporting="Must be 6-20 characters, letters and/or numbers only, no spaces."
+						value={userName}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+							setUserName(e.target.value)
+						}
+						width={30}
+						error={error}
+						cssOverrides={textInputStyles}
+					/>
+				</div>
 				<Text>
 					<>
 						Please keep your posts respectful and abide by the{' '}
@@ -110,6 +131,7 @@ export const FirstCommentWelcome = ({
 							priority="primary"
 							subdued={true}
 							rel="nofollow"
+							cssOverrides={linkStyles}
 						>
 							<span css={textStyling}>community guidelines</span>
 						</Link>

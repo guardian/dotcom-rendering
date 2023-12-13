@@ -4321,22 +4321,25 @@ const discussionLight: PaletteFunction = ({ theme }) => {
 const discussionDark: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[600];
+			return sourcePalette.lifestyle[300];
 		case Pillar.Sport:
-			return sourcePalette.sport[600];
+			return sourcePalette.sport[300];
 		case Pillar.Culture:
-			return sourcePalette.culture[600];
+			return sourcePalette.culture[300];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[600];
+			return sourcePalette.opinion[300];
 		case ArticleSpecial.Labs:
-			return sourcePalette.lifestyle[600];
+			return sourcePalette.lifestyle[300];
 		case Pillar.News:
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.SpecialReportAlt:
 		default:
-			return sourcePalette.news[600];
+			return sourcePalette.news[300];
 	}
 };
+
+const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
+const discussionLinkDark: PaletteFunction = () => sourcePalette.neutral[100];
 
 const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -4357,23 +4360,28 @@ const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const discussionSecondaryButtonHover: PaletteFunction = ({ theme }) => {
+const discussionButtonHover: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.Culture:
-			return sourcePalette.culture[800];
+			return sourcePalette.culture[400];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[800];
+			return sourcePalette.opinion[400];
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[800];
+			return sourcePalette.lifestyle[400];
 		case Pillar.Sport:
-			return sourcePalette.sport[800];
+			return sourcePalette.sport[400];
 		case Pillar.News:
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.Labs:
 		default:
-			return sourcePalette.news[800];
+			return sourcePalette.news[400];
 	}
 };
+
+const firstCommentPreviewLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const firstCommentPreviewDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
 
 // ----- Palette ----- //
 
@@ -5070,13 +5078,21 @@ const paletteColours = {
 		light: discussionLight,
 		dark: discussionDark,
 	},
+	'--discussion-link': {
+		light: discussionLinkLight,
+		dark: discussionLinkDark,
+	},
 	'--discussion-primary-button-background': {
 		light: discussionPrimaryButtonBackground,
 		dark: discussionPrimaryButtonBackground,
 	},
-	'--discussion-secondary-button-hover': {
-		light: discussionSecondaryButtonHover,
-		dark: discussionSecondaryButtonHover,
+	'--discussion-button-hover': {
+		light: discussionButtonHover,
+		dark: discussionButtonHover,
+	},
+	'--first-comment-preview': {
+		light: firstCommentPreviewLight,
+		dark: firstCommentPreviewDark,
 	},
 } satisfies PaletteColours;
 
