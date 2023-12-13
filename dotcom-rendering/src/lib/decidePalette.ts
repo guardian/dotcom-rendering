@@ -1,10 +1,5 @@
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
 import {
 	border,
 	brandAlt,
