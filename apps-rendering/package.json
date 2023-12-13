@@ -106,7 +106,6 @@
 		"thrift": "^0.16.0",
 		"ts-jest": "^28.0.7",
 		"ts-loader": "^9.4.1",
-		"ts-node": "^10.9.1",
 		"tslib": "^2.5.0",
 		"typescript": "~5.1.3",
 		"webpack": "^5.76.1",
