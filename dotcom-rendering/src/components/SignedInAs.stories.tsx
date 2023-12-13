@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { decidePalette } from '../lib/decidePalette';
 import { SignedInAs } from './SignedInAs';
 
 const defaultFormat = {

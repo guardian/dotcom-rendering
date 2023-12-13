@@ -8,7 +8,6 @@ import {
 } from '@guardian/source-foundations';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 import { palette as themePalette } from '../palette';
-import type { Palette } from '../types/palette';
 
 type Props = {
 	commentCount?: number;
