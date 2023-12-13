@@ -199,7 +199,7 @@ gen-stories:
 
 gen-fixtures:
 	$(call log, "Generating new fixture data")
-	@npx ts-node --project tsconfig.json --files scripts/test-data/gen-fixtures.js
+	@yarn tsx scripts/test-data/gen-fixtures.js
 
 perf-test:
 	@node scripts/perf/perf-test.js

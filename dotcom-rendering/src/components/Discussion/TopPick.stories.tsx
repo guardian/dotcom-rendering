@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { SignedInWithCookies } from '../../lib/identity';
 import type { CommentType } from '../../types/discussion';
 import { TopPick } from './TopPick';
@@ -95,6 +96,7 @@ export const LongPick = () => (
 	</div>
 );
 LongPick.storyName = 'Long - Staff';
+LongPick.decorators = [splitTheme([format])];
 
 export const ShortPick = () => (
 	<div
@@ -116,6 +118,7 @@ export const ShortPick = () => (
 	</div>
 );
 ShortPick.storyName = 'Short - Staff';
+ShortPick.decorators = [splitTheme([format])];
 
 export const LongPickContributor = () => (
 	<div
@@ -133,6 +136,7 @@ export const LongPickContributor = () => (
 	</div>
 );
 LongPickContributor.storyName = 'Long - Contributor';
+LongPickContributor.decorators = [splitTheme([format])];
 
 export const ShortPickContributor = () => (
 	<div
@@ -154,3 +158,4 @@ export const ShortPickContributor = () => (
 	</div>
 );
 ShortPickContributor.storyName = 'Short - Contributor';
+ShortPickContributor.decorators = [splitTheme([format])];
