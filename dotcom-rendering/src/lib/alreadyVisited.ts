@@ -17,12 +17,12 @@ const setAlreadyVisited = (count: number): void => {
 	localStorage.setItem(AlreadyVisitedKey, count.toString());
 };
 
-export const incrementAlreadyVisited = (): Promise<void> =>
-	onConsent().then((consentState) => {
-		if (consentState.canTarget) {
-			const alreadyVisited = getAlreadyVisitedCount();
-			setAlreadyVisited(alreadyVisited + 1);
-		} else {
-			localStorage.removeItem(AlreadyVisitedKey);
-		}
-	});
+export const incrementAlreadyVisited = async (): Promise<void> => {
+	const { canTarget } = await onConsent();
+	if (canTarget) {
+		const alreadyVisited = getAlreadyVisitedCount();
+		setAlreadyVisited(alreadyVisited + 1);
+	} else {
+		localStorage.removeItem(AlreadyVisitedKey);
+	}
+};
