@@ -6,7 +6,6 @@ export type Palette = {
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		seriesTitleWhenMatch: Colour;
-		cardFooter: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
 		lastUpdated: Colour;
@@ -31,7 +30,6 @@ export type Palette = {
 		audioAtom: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
-		card: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
 		imageTitle: Colour;
@@ -62,9 +60,6 @@ export type Palette = {
 		cardSupporting: Colour;
 		filterButton: Colour;
 		pagination: Colour;
-	};
-	topBar: {
-		card: Colour;
 	};
 	hover: {
 		standfirstLink: Colour;

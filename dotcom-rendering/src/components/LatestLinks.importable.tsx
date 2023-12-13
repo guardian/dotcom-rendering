@@ -10,11 +10,11 @@ import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { decidePalette } from '../lib/decidePalette';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
+import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
-import { RelativeTime } from './RelativeTime.importable';
-import { palette as themePalette } from '../palette';
 import { ContainerOverrides } from './ContainerOverrides';
+import { RelativeTime } from './RelativeTime.importable';
 
 type Props = {
 	id: string;

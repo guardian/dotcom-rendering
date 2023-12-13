@@ -4,8 +4,8 @@ import { trackSponsorLogoLinkClick } from '../../../client/ga/ga';
 import { decideLogo } from '../../../lib/decideLogo';
 import { decidePalette } from '../../../lib/decidePalette';
 import { getZIndex } from '../../../lib/getZIndex';
+import { palette as themePalette } from '../../../palette';
 import type { Branding } from '../../../types/branding';
-import type { Palette } from '../../../types/palette';
 
 type Props = {
 	branding: Branding;
@@ -30,19 +30,17 @@ const brandingWrapperStyle = css`
 	position: relative;
 `;
 
-const labelStyle = (palette: Palette) => {
-	return css`
-		${textSans.xxsmall()}
-		color: ${palette.text.cardFooter};
-	`;
-};
+const labelStyle = css`
+	${textSans.xxsmall()}
+	color: ${themePalette('--card-footer-text')};
+`;
 
 export const CardBranding = ({ branding, format }: Props) => {
 	const logo = decideLogo(format, branding);
 	const palette = decidePalette(format);
 	return (
 		<div css={brandingWrapperStyle}>
-			<div css={labelStyle(palette)}>{logo.label}</div>
+			<div css={labelStyle}>{logo.label}</div>
 			<span
 				css={css`
 					${visuallyHidden};

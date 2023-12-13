@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { SvgAudio, SvgCamera } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
-import { palette as themePalette } from '../palette';
 
 type Props = {
 	mediaType: MediaType;
@@ -18,7 +18,7 @@ const iconWrapperStyles = (palette: Palette, hasKicker: boolean) => css`
 	/* We’re using the text colour for the icon badge */
 	background-color: ${hasKicker
 		? themePalette('--card-kicker-text')
-		: palette.text.cardFooter};
+		: themePalette('--card-footer-text')};
 	border-radius: 50%;
 	display: inline-block;
 
@@ -29,7 +29,7 @@ const iconWrapperStyles = (palette: Palette, hasKicker: boolean) => css`
 		margin-right: auto;
 		margin-top: 2px;
 		display: block;
-		fill: ${palette.background.card};
+		fill: ${themePalette('--card-background')};
 	}
 `;
 

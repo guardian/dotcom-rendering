@@ -211,41 +211,6 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 	}
 };
 
-/** @deprecated this has been moved to the theme palette (--card-footer-text) */
-const textCardFooter = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return palette.specialReportAlt[100];
-
-	switch (format.design) {
-		case ArticleDesign.Comment:
-		case ArticleDesign.Letter:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReport:
-					return neutral[86];
-				default:
-					return neutral[46];
-			}
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return BLACK;
-				default:
-					return neutral[100];
-			}
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return neutral[86];
-		default:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReport:
-					return brandAltBackground.primary;
-				default:
-					return neutral[46];
-			}
-	}
-};
-
 const textCricketScoreboardLink = (): string => {
 	return sport[300];
 };
@@ -278,38 +243,6 @@ const backgroundSectionTitle = (format: ArticleFormat): string => {
 		case ArticleDisplay.Standard:
 		default:
 			return 'transparent';
-	}
-};
-
-/** @deprecated this has been moved to the theme palette (--card-background) */
-const backgroundCard = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return palette.specialReportAlt[700];
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-	switch (format.design) {
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			return opinion[800];
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return neutral[20];
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return labs[400];
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Opinion:
-				case Pillar.Lifestyle:
-				case Pillar.Culture:
-				default:
-					return pillarPalette[format.theme][300];
-			}
-		default:
-			return neutral[97];
 	}
 };
 
@@ -555,22 +488,6 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 					return neutral[86];
 			}
 	}
-};
-
-/** @deprecated this has been moved to the theme palette (--card-border-top) */
-const topBarCard = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[60];
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return brandAltBackground.primary;
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
 };
 
 const textPagination = (format: ArticleFormat) => {
@@ -907,7 +824,6 @@ export const decidePalette = (
 			seriesTitle: textSeriesTitle(format),
 			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
 			sectionTitle: textSectionTitle(format),
-			cardFooter: overrides?.text.cardFooter ?? textCardFooter(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
 			lastUpdated: textLastUpdated(format),
@@ -932,7 +848,6 @@ export const decidePalette = (
 			audioAtom: backgroundAudioAtom(format),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
-			card: overrides?.background.card ?? backgroundCard(format),
 			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
 			imageTitle: backgroundImageTitle(format),
@@ -965,9 +880,6 @@ export const decidePalette = (
 			cardSupporting: borderCardSupporting(format),
 			filterButton: borderFilterButton(),
 			pagination: borderPagination(),
-		},
-		topBar: {
-			card: overrides?.topBar?.card ?? topBarCard(format),
 		},
 		hover: {
 			standfirstLink: hoverStandfirstLink(format),

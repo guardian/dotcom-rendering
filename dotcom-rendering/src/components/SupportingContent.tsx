@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { from, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { transparentColour } from '../lib/transparentColour';
+import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
 import { CardHeadline } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
@@ -138,10 +139,9 @@ export const SupportingContent = ({
 											containerPalette,
 										),
 										css`
-											border-color: ${decidePalette(
-												parentFormat,
-												containerPalette,
-											).topBar.card};
+											border-color: ${themePalette(
+												'--card-border-top',
+											)};
 										`,
 								  ]
 								: liStyles,
