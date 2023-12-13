@@ -14,7 +14,7 @@ import { incrementAlreadyVisited } from '../lib/alreadyVisited';
  */
 export const AlreadyVisited = () => {
 	useEffect(() => {
-		incrementAlreadyVisited();
+		void incrementAlreadyVisited();
 	}, []);
 	// Nothing is rendered by this component
 	return null;
