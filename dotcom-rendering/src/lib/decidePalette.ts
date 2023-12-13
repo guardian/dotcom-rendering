@@ -22,6 +22,7 @@ import {
 } from '@guardian/source-foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
+import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
 import { decideContainerOverrides } from './decideContainerOverrides';
@@ -30,105 +31,15 @@ import { transparentColour } from './transparentColour';
 const WHITE = neutral[100];
 const BLACK = neutral[7];
 
-const blogsGrayBackgroundPalette = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Opinion:
-			return opinion[300];
-		case Pillar.Sport:
-			return sport[300];
-		case Pillar.Culture:
-			return culture[300];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-		case ArticleSpecial.Labs:
-			return labs[300];
-	}
-};
-
-const textSeriesTitle = (format: ArticleFormat): string => {
-	if (
-		format.theme === ArticleSpecial.Labs &&
-		format.design !== ArticleDesign.LiveBlog
-	) {
-		return BLACK;
-	}
-
-	if (
-		format.theme === ArticleSpecial.SpecialReportAlt &&
-		format.design !== ArticleDesign.LiveBlog &&
-		format.design !== ArticleDesign.DeadBlog
-	)
-		return palette.specialReportAlt[100];
-
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			return WHITE;
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-			switch (format.design) {
-				case ArticleDesign.Analysis: {
-					switch (format.theme) {
-						case Pillar.News:
-							return news[300];
-						default:
-							return pillarPalette[format.theme].main;
-					}
-				}
-				case ArticleDesign.LiveBlog:
-					switch (format.theme) {
-						case Pillar.News:
-							return news[600];
-						case Pillar.Sport:
-						case Pillar.Lifestyle:
-						case Pillar.Culture:
-						case Pillar.Opinion:
-						default:
-							return WHITE;
-					}
-				case ArticleDesign.DeadBlog:
-					return blogsGrayBackgroundPalette(format);
-				case ArticleDesign.MatchReport:
-					return BLACK;
-				case ArticleDesign.Picture:
-					return palette.neutral[86];
-				default:
-					return pillarPalette[format.theme].main;
-			}
-		default:
-			return BLACK;
-	}
-};
-
-const textSeriesTitleWhenMatch = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.MatchReport:
-		case ArticleDesign.LiveBlog:
-			return BLACK;
-		default:
-			return textSeriesTitle(format);
-	}
-};
-
 const textHeadlineWhenMatch = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.MatchReport:
 		case ArticleDesign.LiveBlog:
 			return BLACK;
 		default:
-			return textSeriesTitle(format);
+			return themePalette('--series-title-text');
 	}
 };
-
-const textSectionTitle = textSeriesTitle;
 
 const textStandfirst = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
@@ -340,37 +251,6 @@ const textCardFooter = (format: ArticleFormat): string => {
 
 const textCricketScoreboardLink = (): string => {
 	return sport[300];
-};
-
-const backgroundSeriesTitle = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return brandAltBackground.primary;
-
-	switch (format.display) {
-		case ArticleDisplay.Immersive: {
-			if (format.theme === ArticleSpecial.SpecialReportAlt)
-				return palette.specialReportAlt[300];
-
-			return pillarPalette[format.theme].main;
-		}
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-		default:
-			return 'transparent';
-	}
-};
-
-const backgroundSectionTitle = (format: ArticleFormat): string => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			return pillarPalette[format.theme].main;
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-		default:
-			return 'transparent';
-	}
 };
 
 /** @deprecated this has been moved to the theme palette (--card-background) */
@@ -999,9 +879,6 @@ export const decidePalette = (
 	return {
 		text: {
 			headlineWhenMatch: textHeadlineWhenMatch(format),
-			seriesTitle: textSeriesTitle(format),
-			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
-			sectionTitle: textSectionTitle(format),
 			cardHeadline:
 				overrides?.text.cardHeadline ?? textCardHeadline(format),
 			dynamoHeadline:
@@ -1034,8 +911,6 @@ export const decidePalette = (
 			analysisContrast: backgroundAnalysisContrastColour(),
 			analysisContrastHover: backgroundAnalysisContrastHoverColour(),
 			audioAtom: backgroundAudioAtom(format),
-			seriesTitle: backgroundSeriesTitle(format),
-			sectionTitle: backgroundSectionTitle(format),
 			card: overrides?.background.card ?? backgroundCard(format),
 			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
