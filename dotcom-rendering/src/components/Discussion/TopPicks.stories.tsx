@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { SignedInWithCookies } from '../../lib/identity';
 import type { CommentType } from '../../types/discussion';
 import { TopPicks } from './TopPicks';
@@ -66,8 +67,9 @@ export const SingleComment = () => (
 	/>
 );
 SingleComment.storyName = 'Single Comment';
+SingleComment.decorators = [splitTheme([format], { orientation: 'vertical' })];
 
-export const MulitColumn = () => (
+export const MultiColumn = () => (
 	<TopPicks
 		format={{
 			...format,
@@ -83,7 +85,18 @@ export const MulitColumn = () => (
 		onPermalinkClick={() => {}}
 	/>
 );
-MulitColumn.storyName = 'Mulitple Columns Comments';
+MultiColumn.storyName = 'Multiple Columns Comments';
+MultiColumn.decorators = [
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Culture,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
 export const SingleColumn = () => (
 	<TopPicks
@@ -107,3 +120,14 @@ SingleColumn.story = {
 		viewport: { defaultViewport: 'phablet' },
 	},
 };
+SingleColumn.decorators = [
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Sport,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
