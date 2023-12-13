@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
@@ -195,6 +196,14 @@ export const defaultStory = () => (
 	/>
 );
 defaultStory.storyName = 'default';
+defaultStory.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
 export const threadedComment = () => (
 	<CommentContainer
@@ -214,6 +223,14 @@ export const threadedComment = () => (
 	/>
 );
 threadedComment.storyName = 'threaded';
+threadedComment.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
 export const threadedCommentWithShowMore = () => (
 	<CommentContainer
@@ -233,6 +250,14 @@ export const threadedCommentWithShowMore = () => (
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
+threadedCommentWithShowMore.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
 export const threadedCommentWithLongUsernames = () => (
 	<CommentContainer
@@ -252,6 +277,14 @@ export const threadedCommentWithLongUsernames = () => (
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
+threadedCommentWithLongUsernames.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
 export const threadedCommentWithLongUsernamesMobile = () => (
 	<CommentContainer
@@ -278,3 +311,11 @@ threadedCommentWithLongUsernamesMobile.story = {
 		chromatic: { viewports: [375] },
 	},
 };
+threadedCommentWithLongUsernamesMobile.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
