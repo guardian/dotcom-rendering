@@ -15,7 +15,7 @@ import { base } from './base.mjs';
 
 export default merge(base(import.meta.url), {
 	entry: {
-		index: './src/client/main.web.ts',
+		index: './src/client/main.apps.ts',
 		debug: './src/client/debug/debug.ts',
 	},
 	module: {
@@ -78,8 +78,7 @@ export default merge(base(import.meta.url), {
 	},
 	plugins: [
 		new WebpackManifestPlugin(),
-
-		// the Webpack way
+		// eslint-disable-next-line import/no-named-as-default-member -- the Webpack way
 		new webpack.optimize.LimitChunkCountPlugin({
 			maxChunks: 1,
 		}),
