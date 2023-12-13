@@ -31,16 +31,14 @@ const formats = [
 ];
 
 export const EachPillar = () => (
-	<Row>
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			linkName=""
-		>
-			Button
-		</PillarButton>
-	</Row>
+	<PillarButton
+		onClick={() => {
+			alert('Clicked!');
+		}}
+		linkName=""
+	>
+		Button
+	</PillarButton>
 );
 EachPillar.storyName = 'with each pillar';
 EachPillar.decorators = [splitTheme(formats)];
@@ -111,33 +109,29 @@ export const IconRight = () => (
 IconRight.decorators = [splitTheme(formats)];
 
 export const Secondary = () => (
-	<Row>
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			priority="secondary"
-			linkName=""
-		>
-			Button
-		</PillarButton>
-	</Row>
+	<PillarButton
+		onClick={() => {
+			alert('Clicked!');
+		}}
+		priority="secondary"
+		linkName=""
+	>
+		Button
+	</PillarButton>
 );
 Secondary.storyName = 'with secondary priority';
 Secondary.decorators = [splitTheme(formats)];
 
 export const Subdued = () => (
-	<Row>
-		<PillarButton
-			onClick={() => {
-				alert('Clicked!');
-			}}
-			priority="subdued"
-			linkName=""
-		>
-			Button
-		</PillarButton>
-	</Row>
+	<PillarButton
+		onClick={() => {
+			alert('Clicked!');
+		}}
+		priority="subdued"
+		linkName=""
+	>
+		Button
+	</PillarButton>
 );
 Subdued.storyName = 'with subdued priority';
 Subdued.decorators = [splitTheme(formats)];
