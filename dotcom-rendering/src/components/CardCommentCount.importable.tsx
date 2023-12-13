@@ -5,6 +5,7 @@ import { useCommentCount } from '../lib/useCommentCount';
 import { palette as themePalette } from '../palette';
 import CommentIcon from '../static/icons/comment.svg';
 import type { DCRContainerPalette } from '../types/front';
+import { ContainerOverrides } from './ContainerOverrides';
 
 type Props = {
 	containerPalette?: DCRContainerPalette;
@@ -74,16 +75,21 @@ export const CardCommentCount = ({
 
 	const { long, short } = formatCount(count);
 	return (
-		<div css={containerStyles(isDynamo, isOnwardContent)}>
-			<div css={svgStyles(isDynamo, isOnwardContent)}>
-				<CommentIcon />
+		<ContainerOverrides
+			containerPalette={containerPalette}
+			isDynamo={isDynamo ? isDynamo : false}
+		>
+			<div css={containerStyles(isDynamo, isOnwardContent)}>
+				<div css={svgStyles(isDynamo, isOnwardContent)}>
+					<CommentIcon />
+				</div>
+				<div css={longStyles} aria-hidden="true">
+					{long}
+				</div>
+				<div css={shortStyles} aria-hidden="true">
+					{short}
+				</div>
 			</div>
-			<div css={longStyles} aria-hidden="true">
-				{long}
-			</div>
-			<div css={shortStyles} aria-hidden="true">
-				{short}
-			</div>
-		</div>
+		</ContainerOverrides>
 	);
 };
