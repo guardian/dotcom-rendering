@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { border, from, space } from '@guardian/source-foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source-foundations';
 
 type Props = {
 	size?: 'full' | 'partial';
@@ -10,7 +14,7 @@ const baseStyles = css`
 	height: 1px;
 	border: 0;
 	margin-bottom: 3px;
-	background-color: ${border.secondary};
+	background-color: ${sourcePalette.neutral[86]};
 `;
 const sizeFullStyle = css`
 	width: 100%;

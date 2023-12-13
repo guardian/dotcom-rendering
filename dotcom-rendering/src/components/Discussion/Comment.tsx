@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	border,
 	from,
 	remSpace,
 	palette as sourcePalette,
@@ -119,7 +118,7 @@ const commentLinkStyling = css`
 `;
 
 const commentWrapper = css`
-	border-top: 1px solid ${border.secondary};
+	border-top: 1px solid ${sourcePalette.neutral[86]};
 	display: flex;
 	padding: ${space[2]}px 0;
 `;

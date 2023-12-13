@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import { constants } from '@guardian/commercial';
-import { border, neutral, space } from '@guardian/source-foundations';
+import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { adContainerStyles, AdSlot } from './AdSlot.web';
 import { Hide } from './Hide';
 
@@ -18,9 +18,9 @@ const headerMinHeight =
 const headerAdWrapper = css`
 	z-index: 1080;
 	width: 100%;
-	background-color: ${neutral[97]};
+	background-color: ${sourcePalette.neutral[97]};
 	min-height: ${headerMinHeight}px;
-	border-bottom: ${borderBottomHeight}px solid ${border.secondary};
+	border-bottom: ${borderBottomHeight}px solid ${sourcePalette.neutral[86]};
 	padding-bottom: ${padding}px;
 
 	display: flex;

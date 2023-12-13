@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { border, space } from '@guardian/source-foundations';
+import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import type {
 	FilterOptions,
 	OrderByType,
@@ -20,7 +20,7 @@ const filterBar = css`
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[2]}px;
 
-	border-top: 1px solid ${border.secondary};
+	border-top: 1px solid ${sourcePalette.neutral[86]};
 
 	display: flex;
 	flex-direction: row;
@@ -33,7 +33,7 @@ const dividerStyles = css`
 		content: '';
 		display: block;
 		width: 1px;
-		background-color: ${border.secondary};
+		background-color: ${sourcePalette.neutral[86]};
 		position: absolute;
 		top: -${space[1]}px;
 		bottom: ${space[1]}px;
