@@ -14,7 +14,7 @@ const getIframeBody = async (page: Page, iframeSelector: string) => {
 	return iframeLocator;
 };
 
-test.describe('Elements', () => {
+test.describe('Embeds', () => {
 	test.describe('AMP', () => {
 		test('should render the corona interactive atom embed', async ({
 			page,
