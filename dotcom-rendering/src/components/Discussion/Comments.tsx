@@ -384,7 +384,6 @@ export const Comments = ({
 				{picks.length !== 0 ? (
 					<div css={picksWrapper}>
 						<TopPicks
-							format={format}
 							comments={picks.slice(0, 2)}
 							authStatus={user?.authStatus}
 							onPermalinkClick={onPermalinkClick}
@@ -462,7 +461,6 @@ export const Comments = ({
 			)}
 			{!!picks.length && (
 				<TopPicks
-					format={format}
 					comments={picks}
 					authStatus={user?.authStatus}
 					onPermalinkClick={onPermalinkClick}
