@@ -4037,6 +4037,9 @@ const mobileCommentCountFill: PaletteFunction = (format) => {
 const topPickBackgroundLight: PaletteFunction = () => sourcePalette.neutral[93];
 const topPickBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
 
+const topPickLinkLight: PaletteFunction = () => sourcePalette.brand[500];
+const topPickLinkDark: PaletteFunction = () => sourcePalette.brand[800];
+
 const staffLabelLight: PaletteFunction = () => sourcePalette.brand[400];
 const staffLabelDark: PaletteFunction = () => sourcePalette.brand[600];
 
@@ -4682,6 +4685,10 @@ const paletteColours = {
 	'--top-pick-background': {
 		light: topPickBackgroundLight,
 		dark: topPickBackgroundDark,
+	},
+	'--top-pick-link': {
+		light: topPickLinkLight,
+		dark: topPickLinkDark,
 	},
 	'--staff-label-color': {
 		light: staffLabelLight,

@@ -64,16 +64,18 @@ const smallFontSize = css`
 `;
 
 const linkStyles = css`
+	color: ${themePalette('--top-pick-link')};
 	text-decoration: none;
 	:hover {
 		text-decoration: underline;
+		color: ${themePalette('--top-pick-link')};
 	}
 `;
 
 // to override a tag styles from dangerouslySetInnerHTML
 const inCommentLinkStyling = css`
 	a {
-		color: ${sourcePalette.brand[500]};
+		color: ${themePalette('--top-pick-link')};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
@@ -192,6 +194,7 @@ export const TopPick = ({
 						<Link
 							priority="primary"
 							href={comment.webUrl}
+							cssOverrides={linkStyles}
 							onClick={(
 								e: React.MouseEvent<HTMLAnchorElement>,
 							) => {
