@@ -306,7 +306,6 @@ export const ArticleMetaApps = ({
 													discussionApiUrl
 												}
 												shortUrlId={shortUrlId}
-												format={format}
 											/>
 										</Island>
 									</div>
@@ -314,13 +313,14 @@ export const ArticleMetaApps = ({
 							)}
 
 						<MetaGridDateline>
-							{format.display !== ArticleDisplay.Immersive && (
-								<StraightLines
-									cssOverrides={[stretchLines]}
-									count={1}
-									color={themePalette('--article-border')}
-								/>
-							)}
+							{format.display !== ArticleDisplay.Immersive &&
+								format.design !== ArticleDesign.Analysis && (
+									<StraightLines
+										cssOverrides={[stretchLines]}
+										count={1}
+										color={themePalette('--article-border')}
+									/>
+								)}
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}
