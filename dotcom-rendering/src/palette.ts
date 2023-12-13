@@ -4253,6 +4253,23 @@ const mobileCommentCountFill: PaletteFunction = (format) => {
 	return commentCountFill(format);
 };
 
+const signInLinkLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+		default:
+			return pillarPalette(theme, 300);
+	}
+};
+const signInLinkDark: PaletteFunction = () => sourcePalette.neutral[100];
+
+const signInLinkLineLight: PaletteFunction = () => sourcePalette.neutral[86];
+const signInLinkLineDark: PaletteFunction = () => sourcePalette.neutral[60];
+
 const topPickBackgroundLight: PaletteFunction = () => sourcePalette.neutral[93];
 const topPickBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
 
@@ -4936,6 +4953,14 @@ const paletteColours = {
 	'--comment-count-mobile-fill': {
 		light: mobileCommentCountFill,
 		dark: mobileCommentCountFill,
+	},
+	'--sign-in-link': {
+		light: signInLinkLight,
+		dark: signInLinkDark,
+	},
+	'--sign-in-link-underline': {
+		light: signInLinkLineLight,
+		dark: signInLinkLineDark,
 	},
 	'--top-pick-background': {
 		light: topPickBackgroundLight,

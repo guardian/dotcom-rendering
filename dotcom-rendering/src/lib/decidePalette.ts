@@ -635,10 +635,6 @@ const backgroundMessageForm = (format: ArticleFormat): string => {
 	}
 };
 
-const textSignInLink = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme].dark;
-};
-
 const textBetaLabel = (): string => neutral[46];
 
 const textDesignTag = (format: ArticleFormat): string => {
@@ -893,7 +889,6 @@ export const decidePalette = (
 			standfirstLink: textStandfirstLink(format),
 			lastUpdated: textLastUpdated(format),
 			disclaimerLink: textDisclaimerLink(format),
-			signInLink: textSignInLink(format),
 			pagination: textPagination(format),
 			numberedPosition: textNumberedPosition(),
 			cricketScoreboardLink: textCricketScoreboardLink(),

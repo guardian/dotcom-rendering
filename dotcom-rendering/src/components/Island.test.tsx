@@ -143,11 +143,6 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<DiscussionMeta
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					discussionApiUrl={''}
 					shortUrlId={''}
 					enableDiscussionSwitch={false}
