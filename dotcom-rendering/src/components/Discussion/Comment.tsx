@@ -107,7 +107,7 @@ const blockedCommentStyles = css`
 // to override a tag styles from dangerouslySetInnerHTML
 const commentLinkStyling = css`
 	a {
-		color: ${sourcePalette.brand[500]};
+		color: ${themePalette('--discussion-link')};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
@@ -137,7 +137,6 @@ const avatarMargin = css`
 	}
 `;
 
-// Check contrast in dark mode for this
 const colourStyles = css`
 	a {
 		color: ${themePalette('--discussion-colour')};
@@ -502,13 +501,11 @@ export const Comment = ({
 										</div>
 									</Row>
 									<Row>
-										{/* TODO - Check this contract */}
 										{showStaffBadge && (
 											<div css={iconWrapper}>
 												<GuardianStaff />
 											</div>
 										)}
-										{/* TODO - this is defo wrong in dark */}
 										{showContributorBadge &&
 											!showStaffBadge && (
 												<div css={iconWrapper}>

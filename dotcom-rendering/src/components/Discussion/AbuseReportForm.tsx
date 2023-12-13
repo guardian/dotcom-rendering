@@ -181,12 +181,11 @@ export const AbuseReportForm = ({
 			});
 	};
 
-	const labelStylesClass = labelStyles;
 	return (
 		<div aria-modal="true" ref={modalRef}>
 			<form css={formWrapper} onSubmit={onSubmit}>
 				<div css={inputWrapper}>
-					<label css={labelStylesClass} htmlFor="category">
+					<label css={labelStyles} htmlFor="category">
 						Category
 					</label>
 					<select
@@ -223,7 +222,7 @@ export const AbuseReportForm = ({
 				</div>
 
 				<div css={inputWrapper}>
-					<label css={labelStylesClass} htmlFor="reason">
+					<label css={labelStyles} htmlFor="reason">
 						Reason (optional)
 					</label>
 					<textarea
@@ -243,7 +242,7 @@ export const AbuseReportForm = ({
 				</div>
 
 				<div css={inputWrapper}>
-					<label css={labelStylesClass} htmlFor="email">
+					<label css={labelStyles} htmlFor="email">
 						Email (optional)
 					</label>
 					<input

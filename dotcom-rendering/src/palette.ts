@@ -4277,7 +4277,7 @@ const topPickLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const topPickLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
 const staffLabelLight: PaletteFunction = () => sourcePalette.brand[400];
-const staffLabelDark: PaletteFunction = () => sourcePalette.brand[600];
+const staffLabelDark: PaletteFunction = () => sourcePalette.brand[800];
 
 const recommendationCountLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
@@ -4321,22 +4321,25 @@ const discussionLight: PaletteFunction = ({ theme }) => {
 const discussionDark: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[300];
+			return sourcePalette.lifestyle[600];
 		case Pillar.Sport:
-			return sourcePalette.sport[300];
+			return sourcePalette.sport[600];
 		case Pillar.Culture:
-			return sourcePalette.culture[300];
+			return sourcePalette.culture[600];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[400];
+			return sourcePalette.opinion[600];
 		case ArticleSpecial.Labs:
-			return sourcePalette.lifestyle[300];
+			return sourcePalette.lifestyle[600];
 		case Pillar.News:
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.SpecialReportAlt:
 		default:
-			return sourcePalette.news[300];
+			return sourcePalette.news[600];
 	}
 };
+
+const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
+const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
 // ----- Palette ----- //
 
@@ -5032,6 +5035,10 @@ const paletteColours = {
 	'--discussion-colour': {
 		light: discussionLight,
 		dark: discussionDark,
+	},
+	'--discussion-link': {
+		light: discussionLinkLight,
+		dark: discussionLinkDark,
 	},
 } satisfies PaletteColours;
 
