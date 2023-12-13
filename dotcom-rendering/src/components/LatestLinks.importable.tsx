@@ -17,7 +17,6 @@ import { RelativeTime } from './RelativeTime.importable';
 
 type Props = {
 	id: string;
-	format: ArticleFormat;
 	direction: 'horizontal' | 'vertical';
 	isDynamo?: true;
 	containerPalette?: DCRContainerPalette;
@@ -90,7 +89,6 @@ const extractAboutThreeLines = (text: string) =>
  */
 export const LatestLinks = ({
 	id,
-	format,
 	direction,
 	isDynamo,
 	containerPalette,

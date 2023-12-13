@@ -25,11 +25,6 @@ export const CommentCountStory = () => {
 		<Wrapper>
 			<Island priority="critical">
 				<CardCommentCount
-					format={{
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-						display: ArticleDisplay.Standard,
-					}}
 					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 					discussionId="/p/zemg8"
 				/>
