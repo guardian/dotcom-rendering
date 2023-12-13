@@ -3,6 +3,7 @@ import { SvgAudio, SvgCamera } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
+import { palette as themePalette } from '../palette';
 
 type Props = {
 	mediaType: MediaType;
@@ -16,7 +17,7 @@ const iconWrapperStyles = (palette: Palette, hasKicker: boolean) => css`
 	height: 24px;
 	/* We’re using the text colour for the icon badge */
 	background-color: ${hasKicker
-		? palette.text.cardKicker
+		? themePalette('--card-kicker-text')
 		: palette.text.cardFooter};
 	border-radius: 50%;
 	display: inline-block;

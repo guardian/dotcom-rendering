@@ -14,6 +14,7 @@ import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
 import { RelativeTime } from './RelativeTime.importable';
 import { palette as themePalette } from '../palette';
+import { ContainerOverrides } from './ContainerOverrides';
 
 type Props = {
 	id: string;
@@ -107,9 +108,6 @@ export const LatestLinks = ({
 		refreshInterval: 9_600,
 	});
 
-	const { text } = decidePalette(format, containerPalette);
-	const kickerColour = isDynamo ? text.dynamoKicker : text.cardKicker;
-
 	const dividerColour = css`
 		color: ${containerPalette
 			? decideContainerOverrides(containerPalette).border.container
@@ -142,31 +140,43 @@ export const LatestLinks = ({
 			{data && data.blocks.length >= 3 ? (
 				data.blocks.slice(0, 3).map((block, index) => (
 					<>
-						{index > 0 && (
-							<li
-								key={block.id + ' : divider'}
-								css={[dividerStyles, dividerColour]}
-							></li>
-						)}
-						<li
-							key={block.id}
-							css={linkStyles}
-							className={'reveal'}
+						<ContainerOverrides
+							containerPalette={containerPalette}
+							isDynamo={isDynamo}
 						>
-							<WithLink
-								linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
-								isDynamo={isDynamo}
+							{index > 0 && (
+								<li
+									key={block.id + ' : divider'}
+									css={[dividerStyles, dividerColour]}
+								></li>
+							)}
+							<li
+								key={block.id}
+								css={linkStyles}
+								className={'reveal'}
 							>
-								<div css={bold} style={{ color: kickerColour }}>
-									<RelativeTime
-										then={block.publishedDateTime}
-									/>
-								</div>
-								<span className="show-underline">
-									{extractAboutThreeLines(block.body)}
-								</span>
-							</WithLink>
-						</li>
+								<WithLink
+									linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
+									isDynamo={isDynamo}
+								>
+									<div
+										css={bold}
+										style={{
+											color: themePalette(
+												'--card-kicker-text',
+											),
+										}}
+									>
+										<RelativeTime
+											then={block.publishedDateTime}
+										/>
+									</div>
+									<span className="show-underline">
+										{extractAboutThreeLines(block.body)}
+									</span>
+								</WithLink>
+							</li>
+						</ContainerOverrides>
 					</>
 				))
 			) : (

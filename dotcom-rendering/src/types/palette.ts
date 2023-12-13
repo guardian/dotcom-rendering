@@ -6,11 +6,6 @@ export type Palette = {
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		seriesTitleWhenMatch: Colour;
-		cardHeadline: Colour;
-		cardKicker: Colour;
-		dynamoHeadline: Colour;
-		dynamoKicker: Colour;
-		cardStandfirst: Colour;
 		cardFooter: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
@@ -43,7 +38,6 @@ export type Palette = {
 		speechBubble: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
-		analysisUnderline: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;

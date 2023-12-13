@@ -134,17 +134,11 @@ const onwardContentHoverStyles = css`
 	}
 `;
 
-const topBarStyles = ({
-	isDynamo,
-	format,
-}: {
-	isDynamo?: true;
-	format: ArticleFormat;
-}) => {
+const topBarStyles = ({ isDynamo }: { isDynamo?: true }) => {
 	/* Styling for top bar */
 	const baseStyles = css`
 		background-color: ${isDynamo
-			? decidePalette(format).text.dynamoKicker
+			? palette('--card-kicker-text')
 			: palette('--card-border-top')};
 		content: '';
 		height: 1px;
@@ -192,7 +186,7 @@ export const CardWrapper = ({
 						isOnwardContent
 							? onwardContentHoverStyles
 							: hoverStyles(format),
-						showTopBar && topBarStyles({ isDynamo, format }),
+						showTopBar && topBarStyles({ isDynamo }),
 					]}
 				>
 					{children}

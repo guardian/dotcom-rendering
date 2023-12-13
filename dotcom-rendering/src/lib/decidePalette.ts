@@ -211,98 +211,6 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 	}
 };
 
-/** @deprecated this has been moved to the theme palette (--card-headline-trail-text) */
-const textCardHeadline = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
-
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return palette.specialReportAlt[100];
-
-	if (
-		// Galleries are now considered Immersive, which would give them a dark background, so mustn't have `BLACK` text.
-		// There color is decided below in the `format.design` `switch`.
-		// see: https://github.com/guardian/content-api-scala-client/pull/387/files#diff-9384ebc9ebed8b6773587afc23b56246ec6ad014752a9b3718fd68339b705f1fR209
-		format.design !== ArticleDesign.Gallery &&
-		format.display === ArticleDisplay.Immersive
-	) {
-		return BLACK;
-	}
-
-	switch (format.design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return WHITE;
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return BLACK;
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Opinion:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-				default:
-					return WHITE;
-			}
-		default:
-			return BLACK;
-	}
-};
-
-const textCardStandfirst = textCardHeadline;
-
-/** @deprecated this has been moved to the theme palette (--card-kicker-text) */
-const textCardKicker = (format: ArticleFormat): string => {
-	if (
-		format.theme === ArticleSpecial.SpecialReport &&
-		(format.design === ArticleDesign.Comment ||
-			format.design === ArticleDesign.Letter)
-	)
-		return brandAlt[400];
-	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
-
-	if (format.theme === ArticleSpecial.SpecialReport) return brandAlt[400];
-
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return BLACK;
-				case Pillar.News:
-					return news[600];
-				case Pillar.Sport:
-					return sport[600];
-				default:
-					return neutral[100];
-			}
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			switch (format.theme) {
-				case Pillar.News:
-					return news[550];
-				case Pillar.Sport:
-					return sport[600];
-				case Pillar.Opinion:
-					return opinion[550];
-				case Pillar.Lifestyle:
-					return lifestyle[500];
-				case Pillar.Culture:
-					return culture[500];
-				case ArticleSpecial.Labs:
-					return labs[400];
-			}
-		default:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return labs[200];
-				default:
-					return pillarPalette[format.theme].main;
-			}
-	}
-};
-
 /** @deprecated this has been moved to the theme palette (--card-footer-text) */
 const textCardFooter = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
@@ -648,9 +556,6 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 			}
 	}
 };
-
-const backgroundUnderline = (format: ArticleFormat): string =>
-	transparentColour(textCardKicker(format));
 
 /** @deprecated this has been moved to the theme palette (--card-border-top) */
 const topBarCard = (format: ArticleFormat): string => {
@@ -1002,15 +907,6 @@ export const decidePalette = (
 			seriesTitle: textSeriesTitle(format),
 			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
 			sectionTitle: textSectionTitle(format),
-			cardHeadline:
-				overrides?.text.cardHeadline ?? textCardHeadline(format),
-			dynamoHeadline:
-				overrides?.text.dynamoHeadline ?? textCardHeadline(format),
-			cardKicker: overrides?.text.cardKicker ?? textCardKicker(format),
-			dynamoKicker:
-				overrides?.text.dynamoKicker ?? textCardKicker(format),
-			cardStandfirst:
-				overrides?.text.cardStandfirst ?? textCardStandfirst(format),
 			cardFooter: overrides?.text.cardFooter ?? textCardFooter(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
@@ -1044,7 +940,6 @@ export const decidePalette = (
 			speechBubble: backgroundSpeechBubble(format),
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
-			analysisUnderline: backgroundUnderline(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),

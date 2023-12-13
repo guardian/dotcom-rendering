@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { body, breakpoints } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
 import type { TrailType } from '../types/trails';
 import { generateSources } from './Picture';
 import { ContainerOverrides } from './ContainerOverrides';
+import { palette } from '../palette';
 
 const imageStyles = css`
 	width: 120px;
@@ -18,7 +18,7 @@ const linkStyles = css`
 	display: flex;
 	align-items: flex-start;
 	text-decoration: none;
-	color:;
+	color: ${palette('--card-headline-trail-text')};
 `;
 
 type Props = {
