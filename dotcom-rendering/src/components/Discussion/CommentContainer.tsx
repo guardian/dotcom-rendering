@@ -124,7 +124,6 @@ export const CommentContainer = ({
 		<div css={[commentToScrollTo === comment.id && selectedStyles]}>
 			<Comment
 				comment={comment}
-				format={format}
 				isClosedForComments={isClosedForComments}
 				setCommentBeingRepliedTo={setCommentBeingRepliedTo}
 				user={user}
@@ -143,7 +142,6 @@ export const CommentContainer = ({
 								<li key={responseComment.id}>
 									<Comment
 										comment={responseComment}
-										format={format}
 										isClosedForComments={
 											isClosedForComments
 										}

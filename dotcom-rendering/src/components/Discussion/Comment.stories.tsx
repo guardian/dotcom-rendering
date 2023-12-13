@@ -149,7 +149,6 @@ const format = {
 export const Root = () => (
 	<Comment
 		comment={commentData}
-		format={format}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -170,10 +169,6 @@ Root.decorators = [splitTheme([format], { orientation: 'vertical' })];
 export const RootMobile = () => (
 	<Comment
 		comment={commentData}
-		format={{
-			...format,
-			theme: Pillar.Sport,
-		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
 		isClosedForComments={false}
@@ -189,15 +184,21 @@ RootMobile.story = {
 		chromatic: { viewports: [375] },
 	},
 };
-RootMobile.decorators = [splitTheme([format], { orientation: 'vertical' })];
+RootMobile.decorators = [
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Sport,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
 export const ReplyComment = () => (
 	<Comment
 		comment={replyCommentData}
-		format={{
-			...format,
-			theme: Pillar.Lifestyle,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
@@ -213,15 +214,21 @@ ReplyComment.story = {
 		chromatic: { viewports: [1300] },
 	},
 };
-ReplyComment.decorators = [splitTheme([format], { orientation: 'vertical' })];
+ReplyComment.decorators = [
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
 export const MobileReply = () => (
 	<Comment
 		comment={replyCommentData}
-		format={{
-			...format,
-			theme: Pillar.Culture,
-		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
 		isClosedForComments={false}
@@ -237,15 +244,21 @@ MobileReply.story = {
 		chromatic: { viewports: [375] },
 	},
 };
-MobileReply.decorators = [splitTheme([format], { orientation: 'vertical' })];
+MobileReply.decorators = [
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Culture,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
 export const LongMobileReply = () => (
 	<Comment
 		comment={longReplyCommentData}
-		format={{
-			...format,
-			theme: Pillar.Culture,
-		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
 		isClosedForComments={false}
@@ -262,16 +275,20 @@ LongMobileReply.story = {
 	},
 };
 LongMobileReply.decorators = [
-	splitTheme([format], { orientation: 'vertical' }),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Culture,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const LongBothMobileReply = () => (
 	<Comment
 		comment={longBothReplyCommentData}
-		format={{
-			...format,
-			theme: Pillar.Culture,
-		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
 		isClosedForComments={false}
@@ -288,7 +305,15 @@ LongBothMobileReply.story = {
 	},
 };
 LongBothMobileReply.decorators = [
-	splitTheme([format], { orientation: 'vertical' }),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Culture,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const PickedComment = () => (
@@ -297,7 +322,6 @@ export const PickedComment = () => (
 			...commentData,
 			isHighlighted: true,
 		}}
-		format={format}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -312,10 +336,6 @@ PickedComment.decorators = [splitTheme([format], { orientation: 'vertical' })];
 export const StaffUserComment = () => (
 	<Comment
 		comment={commentStaffData}
-		format={{
-			...format,
-			theme: Pillar.Opinion,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -326,16 +346,20 @@ export const StaffUserComment = () => (
 );
 StaffUserComment.storyName = 'Staff User Comment';
 StaffUserComment.decorators = [
-	splitTheme([format], { orientation: 'vertical' }),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Opinion,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const ContributorUserComment = () => (
 	<Comment
 		comment={commentContributorData}
-		format={{
-			...format,
-			theme: Pillar.Opinion,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -346,7 +370,15 @@ export const ContributorUserComment = () => (
 );
 ContributorUserComment.storyName = 'Contributor User Comment';
 ContributorUserComment.decorators = [
-	splitTheme([format], { orientation: 'vertical' }),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Opinion,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const PickedStaffUserComment = () => (
@@ -355,7 +387,6 @@ export const PickedStaffUserComment = () => (
 			...commentStaffData,
 			isHighlighted: true,
 		}}
-		format={format}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -381,10 +412,6 @@ export const PickedStaffUserCommentMobile = () => (
 			...commentStaffData,
 			isHighlighted: true,
 		}}
-		format={{
-			...format,
-			theme: Pillar.Sport,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -402,7 +429,15 @@ PickedStaffUserCommentMobile.story = {
 	},
 };
 PickedStaffUserCommentMobile.decorators = [
-	splitTheme([format], { orientation: 'vertical' }),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Sport,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const ContributorUserCommentDesktop = () => (
@@ -411,7 +446,6 @@ export const ContributorUserCommentDesktop = () => (
 			...commentContributorData,
 			isHighlighted: true,
 		}}
-		format={format}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -438,10 +472,6 @@ export const ContributorUserCommentMobile = () => (
 			...commentContributorData,
 			isHighlighted: true,
 		}}
-		format={{
-			...format,
-			theme: Pillar.Sport,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -459,16 +489,20 @@ ContributorUserCommentMobile.story = {
 	},
 };
 ContributorUserCommentMobile.decorators = [
-	splitTheme([format], { orientation: 'vertical' }),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Sport,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const LoggedInAsModerator = () => (
 	<Comment
 		comment={commentData}
-		format={{
-			...format,
-			theme: Pillar.Lifestyle,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		user={staffUser}
@@ -480,16 +514,20 @@ export const LoggedInAsModerator = () => (
 );
 LoggedInAsModerator.storyName = 'Logged in as moderator';
 LoggedInAsModerator.decorators = [
-	splitTheme([format], { orientation: 'vertical' }),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const LoggedInAsUser = () => (
 	<Comment
 		comment={commentData}
-		format={{
-			...format,
-			theme: Pillar.Lifestyle,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		user={user}
@@ -500,15 +538,21 @@ export const LoggedInAsUser = () => (
 	/>
 );
 LoggedInAsUser.storyName = 'Logged in as normal user';
-LoggedInAsUser.decorators = [splitTheme([format], { orientation: 'vertical' })];
+LoggedInAsUser.decorators = [
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
 export const BlockedComment = () => (
 	<Comment
 		comment={blockedCommentData}
-		format={{
-			...format,
-			theme: Pillar.Culture,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -518,15 +562,21 @@ export const BlockedComment = () => (
 	/>
 );
 BlockedComment.storyName = 'Blocked comment';
-BlockedComment.decorators = [splitTheme([format], { orientation: 'vertical' })];
+BlockedComment.decorators = [
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Culture,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
 export const MutedComment = () => (
 	<Comment
 		comment={blockedCommentData}
-		format={{
-			...format,
-			theme: Pillar.Sport,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -536,12 +586,21 @@ export const MutedComment = () => (
 	/>
 );
 MutedComment.storyName = 'Muted comment';
-MutedComment.decorators = [splitTheme([format], { orientation: 'vertical' })];
+MutedComment.decorators = [
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Sport,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
 export const ClosedForComments = () => (
 	<Comment
 		comment={commentData}
-		format={format}
 		isClosedForComments={true}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}

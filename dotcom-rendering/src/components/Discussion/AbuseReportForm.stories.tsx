@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { AbuseReportForm } from './AbuseReportForm';
 
 export default { title: 'Discussion/Abuse Report Form' };

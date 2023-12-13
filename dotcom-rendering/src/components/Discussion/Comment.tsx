@@ -24,7 +24,6 @@ import { Timestamp } from './Timestamp';
 type Props = {
 	user?: SignedInUser;
 	comment: CommentType;
-	format: ArticleFormat;
 	isClosedForComments: boolean;
 	setCommentBeingRepliedTo: (commentBeingRepliedTo?: CommentType) => void;
 	isReply: boolean;
@@ -294,7 +293,6 @@ const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 
 export const Comment = ({
 	comment,
-	format,
 	isClosedForComments,
 	setCommentBeingRepliedTo,
 	user,
