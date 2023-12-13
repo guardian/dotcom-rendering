@@ -45,7 +45,6 @@ type BaseProps = {
 	isSensitive: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
-	alreadyVisitedCount: number;
 	engagementBannerLastClosedAt?: string;
 	subscriptionBannerLastClosedAt?: string;
 	signInBannerLastClosedAt?: string;
@@ -92,7 +91,6 @@ const buildPayload = async ({
 	isSignedIn,
 	shouldHideReaderRevenue,
 	isPaidContent,
-	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
@@ -117,7 +115,6 @@ const buildPayload = async ({
 			referrerUrl: window.location.origin + window.location.pathname,
 		},
 		targeting: {
-			alreadyVisitedCount,
 			shouldHideReaderRevenue,
 			isPaidContent,
 			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
@@ -157,7 +154,6 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	isSensitive,
 	tags,
 	contributionsServiceUrl,
-	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
@@ -214,7 +210,6 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		tags,
 		contributionsServiceUrl,
 		isSensitive,
-		alreadyVisitedCount,
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
 		signInBannerLastClosedAt,
@@ -254,7 +249,6 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	isSensitive,
 	tags,
 	contributionsServiceUrl,
-	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	asyncArticleCounts,
@@ -281,7 +275,6 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 			tags,
 			contributionsServiceUrl,
 			isSensitive,
-			alreadyVisitedCount,
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			optedOutOfArticleCount,
