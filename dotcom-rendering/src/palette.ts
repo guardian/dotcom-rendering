@@ -4301,8 +4301,6 @@ const recommendationCountArrowSelectedDark: PaletteFunction = () =>
 
 const discussionLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
-		case Pillar.News:
-			return sourcePalette.news[400];
 		case Pillar.Lifestyle:
 			return sourcePalette.lifestyle[400];
 		case Pillar.Sport:
@@ -4313,34 +4311,30 @@ const discussionLight: PaletteFunction = ({ theme }) => {
 			return sourcePalette.opinion[400];
 		case ArticleSpecial.Labs:
 			return sourcePalette.lifestyle[400];
+		case Pillar.News:
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.news[400];
 		default:
 			return sourcePalette.news[400];
 	}
 };
 const discussionDark: PaletteFunction = ({ theme }) => {
 	switch (theme) {
-		case Pillar.News:
-			return sourcePalette.news[600];
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[600];
+			return sourcePalette.lifestyle[300];
 		case Pillar.Sport:
-			return sourcePalette.sport[600];
+			return sourcePalette.sport[300];
 		case Pillar.Culture:
-			return sourcePalette.culture[600];
+			return sourcePalette.culture[300];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[600];
+			return sourcePalette.opinion[400];
 		case ArticleSpecial.Labs:
-			return sourcePalette.lifestyle[600];
+			return sourcePalette.lifestyle[300];
+		case Pillar.News:
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[600];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.news[600];
 		default:
-			return sourcePalette.news[600];
+			return sourcePalette.news[300];
 	}
 };
 

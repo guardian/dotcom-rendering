@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { Comment } from './Comment';
 
@@ -164,6 +165,7 @@ Root.story = {
 		chromatic: { viewports: [1300] },
 	},
 };
+Root.decorators = [splitTheme([format], { orientation: 'vertical' })];
 
 export const RootMobile = () => (
 	<Comment
@@ -187,6 +189,7 @@ RootMobile.story = {
 		chromatic: { viewports: [375] },
 	},
 };
+RootMobile.decorators = [splitTheme([format], { orientation: 'vertical' })];
 
 export const ReplyComment = () => (
 	<Comment
@@ -210,6 +213,7 @@ ReplyComment.story = {
 		chromatic: { viewports: [1300] },
 	},
 };
+ReplyComment.decorators = [splitTheme([format], { orientation: 'vertical' })];
 
 export const MobileReply = () => (
 	<Comment
@@ -233,6 +237,7 @@ MobileReply.story = {
 		chromatic: { viewports: [375] },
 	},
 };
+MobileReply.decorators = [splitTheme([format], { orientation: 'vertical' })];
 
 export const LongMobileReply = () => (
 	<Comment
@@ -256,6 +261,9 @@ LongMobileReply.story = {
 		chromatic: { viewports: [375] },
 	},
 };
+LongMobileReply.decorators = [
+	splitTheme([format], { orientation: 'vertical' }),
+];
 
 export const LongBothMobileReply = () => (
 	<Comment
@@ -279,6 +287,9 @@ LongBothMobileReply.story = {
 		chromatic: { viewports: [375] },
 	},
 };
+LongBothMobileReply.decorators = [
+	splitTheme([format], { orientation: 'vertical' }),
+];
 
 export const PickedComment = () => (
 	<Comment
@@ -296,6 +307,7 @@ export const PickedComment = () => (
 	/>
 );
 PickedComment.storyName = 'Picked Comment';
+PickedComment.decorators = [splitTheme([format], { orientation: 'vertical' })];
 
 export const StaffUserComment = () => (
 	<Comment
@@ -313,6 +325,9 @@ export const StaffUserComment = () => (
 	/>
 );
 StaffUserComment.storyName = 'Staff User Comment';
+StaffUserComment.decorators = [
+	splitTheme([format], { orientation: 'vertical' }),
+];
 
 export const ContributorUserComment = () => (
 	<Comment
@@ -330,6 +345,9 @@ export const ContributorUserComment = () => (
 	/>
 );
 ContributorUserComment.storyName = 'Contributor User Comment';
+ContributorUserComment.decorators = [
+	splitTheme([format], { orientation: 'vertical' }),
+];
 
 export const PickedStaffUserComment = () => (
 	<Comment
@@ -353,6 +371,9 @@ PickedStaffUserComment.story = {
 		chromatic: { viewports: [1300] },
 	},
 };
+PickedStaffUserComment.decorators = [
+	splitTheme([format], { orientation: 'vertical' }),
+];
 
 export const PickedStaffUserCommentMobile = () => (
 	<Comment
@@ -380,6 +401,9 @@ PickedStaffUserCommentMobile.story = {
 		chromatic: { viewports: [375] },
 	},
 };
+PickedStaffUserCommentMobile.decorators = [
+	splitTheme([format], { orientation: 'vertical' }),
+];
 
 export const ContributorUserCommentDesktop = () => (
 	<Comment
@@ -404,6 +428,9 @@ ContributorUserCommentDesktop.story = {
 		chromatic: { viewports: [1300] },
 	},
 };
+ContributorUserCommentDesktop.decorators = [
+	splitTheme([format], { orientation: 'vertical' }),
+];
 
 export const ContributorUserCommentMobile = () => (
 	<Comment
@@ -431,6 +458,9 @@ ContributorUserCommentMobile.story = {
 		chromatic: { viewports: [375] },
 	},
 };
+ContributorUserCommentMobile.decorators = [
+	splitTheme([format], { orientation: 'vertical' }),
+];
 
 export const LoggedInAsModerator = () => (
 	<Comment
@@ -449,6 +479,9 @@ export const LoggedInAsModerator = () => (
 	/>
 );
 LoggedInAsModerator.storyName = 'Logged in as moderator';
+LoggedInAsModerator.decorators = [
+	splitTheme([format], { orientation: 'vertical' }),
+];
 
 export const LoggedInAsUser = () => (
 	<Comment
@@ -467,6 +500,7 @@ export const LoggedInAsUser = () => (
 	/>
 );
 LoggedInAsUser.storyName = 'Logged in as normal user';
+LoggedInAsUser.decorators = [splitTheme([format], { orientation: 'vertical' })];
 
 export const BlockedComment = () => (
 	<Comment
@@ -484,6 +518,7 @@ export const BlockedComment = () => (
 	/>
 );
 BlockedComment.storyName = 'Blocked comment';
+BlockedComment.decorators = [splitTheme([format], { orientation: 'vertical' })];
 
 export const MutedComment = () => (
 	<Comment
@@ -501,6 +536,7 @@ export const MutedComment = () => (
 	/>
 );
 MutedComment.storyName = 'Muted comment';
+MutedComment.decorators = [splitTheme([format], { orientation: 'vertical' })];
 
 export const ClosedForComments = () => (
 	<Comment
@@ -521,3 +557,6 @@ ClosedForComments.story = {
 		chromatic: { viewports: [1300] },
 	},
 };
+ClosedForComments.decorators = [
+	splitTheme([format], { orientation: 'vertical' }),
+];
