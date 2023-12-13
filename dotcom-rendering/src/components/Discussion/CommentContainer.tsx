@@ -184,7 +184,6 @@ export const CommentContainer = ({
 										iconSide="left"
 										linkName="Show more replies"
 										onClick={() => expand(comment.id)}
-										format={format}
 										size="xsmall"
 									>
 										{loading
@@ -215,7 +214,6 @@ export const CommentContainer = ({
 							/>
 							<CommentForm
 								shortUrl={shortUrl}
-								format={format}
 								onAddComment={(response) =>
 									setResponses([...responses, response])
 								}

@@ -823,25 +823,6 @@ const discussion = (format: ArticleFormat) => {
 	}
 };
 
-const backgroundDiscussionPillarButton = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[300];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Sport:
-			return sport[300];
-		case Pillar.Culture:
-			return culture[300];
-		case Pillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return lifestyle[300];
-		default:
-			return news[300];
-	}
-};
-
 const textYoutubeOverlayKicker = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -921,7 +902,6 @@ export const decidePalette = (
 			treat: backgroundTreat(format),
 			designTag: backgroundDesignTag(format),
 			messageForm: backgroundMessageForm(format),
-			discussionPillarButton: backgroundDiscussionPillarButton(format),
 			dynamoSublink:
 				overrides?.background.dynamoSublink ??
 				backgroundDynamoSublink(format),
