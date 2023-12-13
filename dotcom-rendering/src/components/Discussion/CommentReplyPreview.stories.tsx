@@ -51,14 +51,7 @@ const padding = css`
 `;
 
 export const Default = () => (
-	<CommentReplyPreview
-		format={{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		}}
-		commentBeingRepliedTo={commentBeingRepliedTo}
-	/>
+	<CommentReplyPreview commentBeingRepliedTo={commentBeingRepliedTo} />
 );
 Default.storyName = 'default';
 
