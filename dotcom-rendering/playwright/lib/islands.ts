@@ -1,7 +1,7 @@
 import type { Page } from '@playwright/test';
 
 type WaitForIslandOptions = {
-	nth?: number;
+	nth?: number; // 0-based index of the island to wait for
 	waitFor?: 'attached' | 'detached' | 'visible' | 'hidden';
 };
 
@@ -25,8 +25,9 @@ const waitForIsland = async (
 	// scroll to it
 	await islandLocator.scrollIntoViewIfNeeded();
 	// wait for it to be hydrated
-	const hydratedIslandSelector = `gu-island[name="${name}"][data-island-status="hydrated"]`;
-	const hydratedIslandLocator = page.locator(hydratedIslandSelector).nth(nth);
+	const hydratedIslandLocator = islandLocator.and(
+		page.locator('[data-island-status="hydrated"]'),
+	);
 	await hydratedIslandLocator.waitFor({
 		state: waitFor,
 		timeout: 30_000,
