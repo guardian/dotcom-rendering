@@ -48,6 +48,7 @@ export const useSignInGateWillShow = ({
 
 	useEffect(() => {
 		if (gateVariant && currentTest) {
+			const timeOfPageView = new Date();
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			gateVariant
 				.canShow({
@@ -58,6 +59,7 @@ export const useSignInGateWillShow = ({
 					tags,
 					isPaidContent,
 					isPreview,
+					timeOfPageView,
 				})
 				.then(setCanShowGate);
 		}

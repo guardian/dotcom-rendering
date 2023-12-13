@@ -25,7 +25,7 @@ const getCommentCountColour = (
 	if (isDynamo) {
 		return palette.text.dynamoHeadline;
 	} else if (isOnwardContent) {
-		return themePalette('--card-footer-onwards-content-text');
+		return themePalette('--card-footer-onwards-content');
 	} else {
 		return palette.text.cardFooter;
 	}

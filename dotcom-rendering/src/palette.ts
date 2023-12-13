@@ -2157,25 +2157,44 @@ const cardAgeTextLight: PaletteFunction = (format) => {
 			}
 	}
 };
-const cardOnwardContentAgeTextLight: PaletteFunction = (format) => {
-	switch (format.theme) {
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.brandAlt[400];
-		default:
-			if (
-				format.display === ArticleDisplay.Immersive &&
-				format.design === ArticleDesign.LiveBlog
-			) {
-				return sourcePalette.neutral[100];
-			}
-			return cardHeadlineTextLight(format);
-	}
-};
 
 const cardAgeTextDark = (): string => {
 	return sourcePalette.neutral[60];
 };
+
+const cardOnwardContentFooterLight: PaletteFunction = ({ theme, design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			return sourcePalette.neutral[100];
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				default:
+					return sourcePalette.neutral[100];
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.brandAlt[400];
+				default:
+					return sourcePalette.neutral[46];
+			}
+	}
+};
+
+const cardOnwardContentFooterDark = (): string => {
+	return sourcePalette.neutral[60];
+};
+
 const cardBackgroundLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return sourcePalette.specialReportAlt[700];
@@ -3954,6 +3973,225 @@ const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.specialReportAlt[200];
 	}
 };
+
+const seriesTitleBackgroundLight: PaletteFunction = ({ theme, display }) => {
+	if (theme === ArticleSpecial.SpecialReport)
+		return sourcePalette.brandAlt[400];
+	switch (display) {
+		case ArticleDisplay.Immersive:
+			switch (theme) {
+				case Pillar.Opinion:
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 400);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+			}
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard:
+		default:
+			return 'transparent';
+	}
+};
+const sectionTitleBackgroundLight: PaletteFunction = ({ theme, display }) => {
+	switch (display) {
+		case ArticleDisplay.Immersive:
+			switch (theme) {
+				case Pillar.Opinion:
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 400);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+			}
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard:
+		default:
+			return 'transparent';
+	}
+};
+const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
+	if (theme === ArticleSpecial.Labs && design !== ArticleDesign.LiveBlog) {
+		return sourcePalette.neutral[7];
+	}
+	if (
+		theme === ArticleSpecial.SpecialReportAlt &&
+		design !== ArticleDesign.LiveBlog &&
+		design !== ArticleDesign.DeadBlog
+	) {
+		return sourcePalette.specialReportAlt[100];
+	}
+
+	if (theme === ArticleSpecial.SpecialReport) {
+		return sourcePalette.specialReport[300];
+	}
+	switch (display) {
+		case ArticleDisplay.Immersive:
+			return sourcePalette.neutral[100];
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard:
+			switch (design) {
+				case ArticleDesign.DeadBlog:
+					switch (theme) {
+						case Pillar.News:
+						case Pillar.Opinion:
+							return pillarPalette(theme, 400);
+						case Pillar.Sport:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+							return pillarPalette(theme, 300);
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.news[400];
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[300];
+					}
+
+				case ArticleDesign.Analysis:
+					switch (theme) {
+						case Pillar.News:
+							return sourcePalette.news[300];
+						case Pillar.Opinion:
+						case Pillar.Sport:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+							return pillarPalette(theme, 400);
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[400];
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[200];
+					}
+				case ArticleDesign.LiveBlog:
+					switch (theme) {
+						case Pillar.News:
+							return sourcePalette.news[600];
+						case Pillar.Sport:
+						case Pillar.Lifestyle:
+						case Pillar.Culture:
+						case Pillar.Opinion:
+						default:
+							return sourcePalette.neutral[100];
+					}
+				case ArticleDesign.MatchReport:
+					return sourcePalette.neutral[7];
+				case ArticleDesign.Picture:
+					return sourcePalette.neutral[86];
+				default:
+					switch (theme) {
+						case Pillar.Opinion:
+						case Pillar.News:
+						case Pillar.Sport:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+							return pillarPalette(theme, 400);
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[400];
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[200];
+					}
+			}
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
+	if (display === ArticleDisplay.Immersive) return sourcePalette.neutral[100];
+	switch (design) {
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.Labs:
+					return sourcePalette.news[500];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Letter:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+			}
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+			}
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[60];
+		default:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[500];
+			}
+	}
+};
+const seriesTitleMatchTextLight: PaletteFunction = (format) => {
+	if (
+		format.design === ArticleDesign.MatchReport ||
+		format.design === ArticleDesign.LiveBlog
+	) {
+		return sourcePalette.neutral[7];
+	}
+	return seriesTitleTextLight(format);
+};
+
 const recaptchaButtonLight: PaletteFunction = () => sourcePalette.neutral[0];
 const recaptchaButtonDark: PaletteFunction = () => sourcePalette.neutral[86];
 const recaptchaButtonHoverLight: PaletteFunction = () =>
@@ -4014,6 +4252,52 @@ const mobileCommentCountFill: PaletteFunction = (format) => {
 		return sourcePalette.neutral[100];
 	return commentCountFill(format);
 };
+
+const signInLinkLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+		default:
+			return pillarPalette(theme, 300);
+	}
+};
+const signInLinkDark: PaletteFunction = () => sourcePalette.neutral[100];
+
+const signInLinkLineLight: PaletteFunction = () => sourcePalette.neutral[86];
+const signInLinkLineDark: PaletteFunction = () => sourcePalette.neutral[60];
+
+const topPickBackgroundLight: PaletteFunction = () => sourcePalette.neutral[93];
+const topPickBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
+
+const topPickLinkLight: PaletteFunction = () => sourcePalette.brand[500];
+const topPickLinkDark: PaletteFunction = () => sourcePalette.brand[800];
+
+const staffLabelLight: PaletteFunction = () => sourcePalette.brand[400];
+const staffLabelDark: PaletteFunction = () => sourcePalette.brand[600];
+
+const recommendationCountLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const recommendationCountDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const recommendationCountSelectedLight: PaletteFunction = () =>
+	sourcePalette.brand[400];
+const recommendationCountSelectedDark: PaletteFunction = () =>
+	sourcePalette.brand[600];
+
+const recommendationCountArrowLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const recommendationCountArrowDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
+const recommendationCountArrowSelectedLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const recommendationCountArrowSelectedDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
 
 // ----- Palette ----- //
 
@@ -4278,9 +4562,9 @@ const paletteColours = {
 		light: cardAgeTextLight,
 		dark: cardAgeTextDark,
 	},
-	'--card-footer-onwards-content-text': {
-		light: cardOnwardContentAgeTextLight,
-		dark: cardAgeTextDark,
+	'--card-footer-onwards-content': {
+		light: cardOnwardContentFooterLight,
+		dark: cardOnwardContentFooterDark,
 	},
 	'--card-background': {
 		light: cardBackgroundLight,
@@ -4610,6 +4894,22 @@ const paletteColours = {
 		light: ageWarningBackground,
 		dark: ageWarningBackground,
 	},
+	'--series-title-background': {
+		light: seriesTitleBackgroundLight,
+		dark: seriesTitleBackgroundLight,
+	},
+	'--section-title-background': {
+		light: sectionTitleBackgroundLight,
+		dark: sectionTitleBackgroundLight,
+	},
+	'--series-title-text': {
+		light: seriesTitleTextLight,
+		dark: seriesTitleTextDark,
+	},
+	'--series-title-match-text': {
+		light: seriesTitleMatchTextLight,
+		dark: seriesTitleTextDark,
+	},
 	'--recaptcha-button': {
 		light: recaptchaButtonLight,
 		dark: recaptchaButtonDark,
@@ -4653,6 +4953,42 @@ const paletteColours = {
 	'--comment-count-mobile-fill': {
 		light: mobileCommentCountFill,
 		dark: mobileCommentCountFill,
+	},
+	'--sign-in-link': {
+		light: signInLinkLight,
+		dark: signInLinkDark,
+	},
+	'--sign-in-link-underline': {
+		light: signInLinkLineLight,
+		dark: signInLinkLineDark,
+	},
+	'--top-pick-background': {
+		light: topPickBackgroundLight,
+		dark: topPickBackgroundDark,
+	},
+	'--top-pick-link': {
+		light: topPickLinkLight,
+		dark: topPickLinkDark,
+	},
+	'--staff-label-color': {
+		light: staffLabelLight,
+		dark: staffLabelDark,
+	},
+	'--recommendation-count': {
+		light: recommendationCountLight,
+		dark: recommendationCountDark,
+	},
+	'--recommendation-count-selected': {
+		light: recommendationCountSelectedLight,
+		dark: recommendationCountSelectedDark,
+	},
+	'--recommendation-count-arrow': {
+		light: recommendationCountArrowLight,
+		dark: recommendationCountArrowDark,
+	},
+	'--recommendation-count-arrow-selected': {
+		light: recommendationCountArrowSelectedLight,
+		dark: recommendationCountArrowSelectedDark,
 	},
 } satisfies PaletteColours;
 

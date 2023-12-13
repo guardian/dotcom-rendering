@@ -5,7 +5,7 @@ import type { DailyArticle } from '../../lib/dailyArticleCount';
 import { getDailyArticleCount } from '../../lib/dailyArticleCount';
 import type { TagType } from '../../types/tag';
 import { hasUserDismissedGateMoreThanCount } from './dismissGate';
-import type { CanShowGateProps } from './types';
+import type { CanShowGateProps, CurrentSignInGateABTest } from './types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n = 2): boolean => {
@@ -66,6 +66,22 @@ export const isValidTag = (tags: TagType[]): boolean => {
 	);
 };
 
+export const calculateArticleLimit = (
+	timeOfPageView: Date,
+	currentTest: CurrentSignInGateABTest,
+): number => {
+	const hours = timeOfPageView.getHours();
+	if (
+		!(
+			currentTest.id == 'SignInGateTimesOfDay' &&
+			currentTest.variant == 'times-of-day-morning'
+		)
+	)
+		return 3;
+	if (hours >= 6 && hours < 10) return 1;
+	else return 3;
+};
+
 // check CMP banner consents
 export const hasRequiredConsents = (): Promise<boolean> =>
 	onConsent()
@@ -80,6 +96,7 @@ export const canShowSignInGate = ({
 	tags,
 	isPaidContent,
 	isPreview,
+	timeOfPageView,
 }: CanShowGateProps): Promise<boolean> =>
 	Promise.resolve(
 		!isSignedIn &&
@@ -88,7 +105,9 @@ export const canShowSignInGate = ({
 				currentTest.name,
 				5,
 			) &&
-			isNPageOrHigherPageView(3) &&
+			isNPageOrHigherPageView(
+				calculateArticleLimit(timeOfPageView, currentTest),
+			) &&
 			isValidContentType(contentType) &&
 			isValidSection(sectionId) &&
 			isValidTag(tags) &&
@@ -107,6 +126,7 @@ export const canShowSignInGateMandatory: ({
 	tags,
 	isPaidContent,
 	isPreview,
+	timeOfPageView,
 }: CanShowGateProps) => Promise<boolean> = async ({
 	isSignedIn,
 	currentTest,
@@ -115,6 +135,7 @@ export const canShowSignInGateMandatory: ({
 	tags,
 	isPaidContent,
 	isPreview,
+	timeOfPageView,
 }: CanShowGateProps) => {
 	return (
 		(await hasRequiredConsents()) &&
@@ -126,6 +147,7 @@ export const canShowSignInGateMandatory: ({
 			tags,
 			isPaidContent,
 			isPreview,
+			timeOfPageView,
 		}))
 	);
 };
