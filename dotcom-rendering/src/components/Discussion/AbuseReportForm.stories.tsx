@@ -16,11 +16,6 @@ export const Dialog = () => (
 	<div css={wrapperStyles}>
 		<AbuseReportForm
 			toggleSetShowForm={() => {}}
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.Sport,
-			}}
 			commentId={123}
 			authStatus={undefined}
 		/>

@@ -7,9 +7,9 @@ import {
 } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
 import { reportAbuse } from '../../lib/discussionApi';
 import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
+import { palette as themePalette } from '../../palette';
 
 type FormData = {
 	categoryId: number;
@@ -31,8 +31,8 @@ const formWrapper = css`
 	${textSans.xxsmall()};
 `;
 
-const labelStyles = (format: ArticleFormat) => css`
-	color: ${decidePalette(format).discussionGeneric};
+const labelStyles = css`
+	color: ${themePalette('--discussion-colour')};
 	${textSans.small({ fontWeight: 'bold' })}
 `;
 
@@ -61,14 +61,12 @@ const errorMessageStyles = css`
 type Props = {
 	commentId: number;
 	toggleSetShowForm: () => void;
-	format: ArticleFormat;
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
 };
 
 export const AbuseReportForm = ({
 	commentId,
 	toggleSetShowForm,
-	format,
 	authStatus,
 }: Props) => {
 	const modalRef = useRef<HTMLDivElement>(null);
@@ -183,7 +181,7 @@ export const AbuseReportForm = ({
 			});
 	};
 
-	const labelStylesClass = labelStyles(format);
+	const labelStylesClass = labelStyles;
 	return (
 		<div aria-modal="true" ref={modalRef}>
 			<form css={formWrapper} onSubmit={onSubmit}>

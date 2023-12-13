@@ -789,7 +789,6 @@ export const Comment = ({
 												toggleSetShowForm={
 													toggleSetShowForm
 												}
-												format={format}
 												commentId={comment.id}
 												authStatus={user?.authStatus}
 											/>
