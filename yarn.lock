@@ -5950,9 +5950,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@guardian/braze-components@npm:16.1.1":
-  version: 16.1.1
-  resolution: "@guardian/braze-components@npm:16.1.1"
+"@guardian/braze-components@npm:16.2.0":
+  version: 16.2.0
+  resolution: "@guardian/braze-components@npm:16.2.0"
   peerDependencies:
     "@emotion/react": ^11.1.2
     "@guardian/libs": ^15.1.0
@@ -5960,7 +5960,7 @@ __metadata:
     "@guardian/source-react-components": ^15.0.1
     "@guardian/source-react-components-development-kitchen": ^13.0.1
     react: 17.0.2 || 18.2.0
-  checksum: ed14b5f275683f1ab60c7d9c128fae2d104aef1d7570f0452290792544a5683e4621008ea261a25550f37efdb43d85e84285a5dc2b133eeb8a643b2a8c46ccca
+  checksum: 60f7367b09914b6a51a65d9b76bd7308b4825a7230916def94e67936c5dd50335d2c471da50dd34a6846b2d59b772d1cd1d2fd4eeca0a9c03a4f787539831866
   languageName: node
   linkType: hard
 
@@ -6162,7 +6162,7 @@ __metadata:
     "@emotion/react": "npm:11.11.1"
     "@emotion/server": "npm:11.11.0"
     "@guardian/ab-core": "npm:5.0.0"
-    "@guardian/braze-components": "npm:16.1.1"
+    "@guardian/braze-components": "npm:16.2.0"
     "@guardian/bridget": "npm:2.5.0"
     "@guardian/browserslist-config": "npm:5.0.0"
     "@guardian/cdk": "npm:50.10.6"
