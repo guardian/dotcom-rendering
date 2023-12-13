@@ -6,12 +6,9 @@ import { cmpAcceptAll } from '../../lib/cmp';
 import { loadPage } from '../../lib/load-page';
 
 const getIframeBody = async (page: Page, iframeSelector: string) => {
-	const iframeLocator = page.frameLocator(iframeSelector).locator('body');
-	await iframeLocator.scrollIntoViewIfNeeded();
-	await expect(
-		page.frameLocator(iframeSelector).locator('body'),
-	).toBeAttached();
-	return iframeLocator;
+	const iframeBodyLocator = page.frameLocator(iframeSelector).locator('body');
+	await expect(iframeBodyLocator).toBeAttached({ timeout: 10000 });
+	return iframeBodyLocator;
 };
 
 test.describe('Embeds', () => {
