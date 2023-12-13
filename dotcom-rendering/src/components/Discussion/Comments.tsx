@@ -393,7 +393,6 @@ export const Comments = ({
 				) : (
 					<>
 						<Filters
-							format={format}
 							filters={filters}
 							onFilterChange={onFilterChange}
 							totalPages={totalPages}
@@ -468,7 +467,6 @@ export const Comments = ({
 				/>
 			)}
 			<Filters
-				format={format}
 				filters={filters}
 				onFilterChange={onFilterChange}
 				totalPages={totalPages}
