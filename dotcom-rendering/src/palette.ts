@@ -1252,6 +1252,8 @@ const followIconFillDark: PaletteFunction = ({ theme, design }) => {
 					return sourcePalette.culture[500];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[700];
 				case ArticleSpecial.SpecialReportAlt:
@@ -4247,10 +4249,39 @@ const commentCountFill: PaletteFunction = ({ design, theme }) => {
 	return pillarPalette(theme, 400);
 };
 
+const commentCountFillDark: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.LiveBlog || design === ArticleDesign.DeadBlog)
+		return sourcePalette.neutral[46];
+	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[86];
+	if (theme === ArticleSpecial.SpecialReport)
+		return sourcePalette.specialReport[500];
+
+	if (theme === ArticleSpecial.SpecialReportAlt)
+		return sourcePalette.specialReportAlt[700];
+
+	if (design === ArticleDesign.Analysis) {
+		switch (theme) {
+			case Pillar.News:
+				return sourcePalette.news[500];
+			default:
+				pillarPalette(theme, 500);
+		}
+	}
+	if (design === ArticleDesign.Picture) {
+		return sourcePalette.neutral[86];
+	}
+	return pillarPalette(theme, 500);
+};
+
 const mobileCommentCountFill: PaletteFunction = (format) => {
 	if (format.design === ArticleDesign.LiveBlog)
 		return sourcePalette.neutral[100];
 	return commentCountFill(format);
+};
+const mobileCommentCountFillDark: PaletteFunction = (format) => {
+	if (format.design === ArticleDesign.LiveBlog)
+		return sourcePalette.neutral[100];
+	return commentCountFillDark(format);
 };
 
 const signInLinkLight: PaletteFunction = ({ theme }) => {
@@ -4948,11 +4979,11 @@ const paletteColours = {
 	},
 	'--comment-count-fill': {
 		light: commentCountFill,
-		dark: commentCountFill,
+		dark: commentCountFillDark,
 	},
 	'--comment-count-mobile-fill': {
 		light: mobileCommentCountFill,
-		dark: mobileCommentCountFill,
+		dark: mobileCommentCountFillDark,
 	},
 	'--sign-in-link': {
 		light: signInLinkLight,
