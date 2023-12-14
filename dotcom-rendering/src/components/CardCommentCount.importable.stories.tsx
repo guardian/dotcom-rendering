@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { space } from '@guardian/source-foundations';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { Island } from './Island';
 
@@ -11,7 +12,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div
 			css={css`
-				margin: 40px;
+				padding: ${space[6]}px;
 			`}
 		>
 			{children}
