@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { SignedInAs } from './SignedInAs';
 
 const aUser = {
@@ -38,11 +38,6 @@ export const SignedIn = () => {
 	return (
 		<Wrapper>
 			<SignedInAs
-				palette={decidePalette({
-					theme: Pillar.News,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
 				enableDiscussionSwitch={true}
 				commentCount={3}
 				user={aUser}
@@ -51,16 +46,20 @@ export const SignedIn = () => {
 	);
 };
 SignedIn.storyName = 'when signed in';
+SignedIn.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.News,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const Image = () => {
 	return (
 		<Wrapper>
 			<SignedInAs
-				palette={decidePalette({
-					theme: Pillar.Culture,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
 				enableDiscussionSwitch={true}
 				commentCount={32}
 				user={{
@@ -72,16 +71,20 @@ export const Image = () => {
 	);
 };
 Image.storyName = 'when signed in with an avatar set';
+Image.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Culture,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const Banned = () => {
 	return (
 		<Wrapper>
 			<SignedInAs
-				palette={decidePalette({
-					theme: Pillar.Culture,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
 				enableDiscussionSwitch={true}
 				commentCount={32}
 				user={{
@@ -96,16 +99,20 @@ export const Banned = () => {
 	);
 };
 Banned.storyName = 'when user is banned';
+Banned.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Culture,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const NoDisplayName = () => {
 	return (
 		<Wrapper>
 			<SignedInAs
-				palette={decidePalette({
-					theme: Pillar.News,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
 				enableDiscussionSwitch={true}
 				commentCount={32}
 				user={{
@@ -117,33 +124,38 @@ export const NoDisplayName = () => {
 	);
 };
 NoDisplayName.storyName = 'before a display name has been set';
+NoDisplayName.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.News,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const NotSignedIn = () => {
 	return (
 		<Wrapper>
-			<SignedInAs
-				palette={decidePalette({
-					theme: Pillar.Lifestyle,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
-				enableDiscussionSwitch={true}
-				commentCount={32}
-			/>
+			<SignedInAs enableDiscussionSwitch={true} commentCount={32} />
 		</Wrapper>
 	);
 };
 NotSignedIn.storyName = 'when the discussion is open but user is not signed in';
+NotSignedIn.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Lifestyle,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const DiscussionClosed = () => {
 	return (
 		<Wrapper>
 			<SignedInAs
-				palette={decidePalette({
-					theme: Pillar.Opinion,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
 				enableDiscussionSwitch={true}
 				commentCount={32}
 				isClosedForComments={true}
@@ -154,16 +166,20 @@ export const DiscussionClosed = () => {
 };
 DiscussionClosed.storyName =
 	'when the discussion is closed and the user is signed in';
+DiscussionClosed.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Opinion,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const DiscussionClosedSignedOut = () => {
 	return (
 		<Wrapper>
 			<SignedInAs
-				palette={decidePalette({
-					theme: Pillar.Sport,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
 				enableDiscussionSwitch={true}
 				commentCount={32}
 				isClosedForComments={true}
@@ -173,16 +189,20 @@ export const DiscussionClosedSignedOut = () => {
 };
 DiscussionClosedSignedOut.storyName =
 	'when the discussion is closed and the user is signed out';
+DiscussionClosedSignedOut.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Sport,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const DiscussionDisabled = () => {
 	return (
 		<Wrapper>
 			<SignedInAs
-				palette={decidePalette({
-					theme: Pillar.Opinion,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
 				enableDiscussionSwitch={false}
 				commentCount={32}
 				isClosedForComments={false}
@@ -193,16 +213,20 @@ export const DiscussionDisabled = () => {
 };
 DiscussionDisabled.storyName =
 	'with discussion disabled sitewide and the user signed in';
+DiscussionDisabled.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Opinion,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const DiscussionDisabledSignedOut = () => {
 	return (
 		<Wrapper>
 			<SignedInAs
-				palette={decidePalette({
-					theme: Pillar.Opinion,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
 				enableDiscussionSwitch={false}
 				commentCount={32}
 				isClosedForComments={false}
@@ -212,3 +236,12 @@ export const DiscussionDisabledSignedOut = () => {
 };
 DiscussionDisabledSignedOut.storyName =
 	'with discussion disabled sitewide and the user signed out';
+DiscussionDisabledSignedOut.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Opinion,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];

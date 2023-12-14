@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar, storage } from '@guardian/libs';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { DiscussionLayout } from './DiscussionLayout';
 
 export default {
@@ -35,3 +36,12 @@ export const Basic = () => {
 };
 
 Basic.storyName = 'A discussion with short comments';
+Basic.decorators = [
+	lightDecorator([
+		{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
+	]),
+];

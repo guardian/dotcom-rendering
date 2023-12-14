@@ -11,6 +11,7 @@ export type CanShowGateProps = {
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview?: boolean;
+	timeOfPageView: Date;
 };
 
 export type SignInGateComponent = {
@@ -18,6 +19,7 @@ export type SignInGateComponent = {
 	canShow: ({
 		isSignedIn,
 		currentTest,
+		timeOfPageView,
 	}: CanShowGateProps) => Promise<boolean>;
 };
 
