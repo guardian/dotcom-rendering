@@ -7,7 +7,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { palette as schemedPalette } from '../../palette';
 import type { DropdownOptionType } from '../../types/discussion';
 
 type Props = {
@@ -82,12 +82,12 @@ const firstStyles = css`
 	margin-top: 0;
 `;
 
-const activeStyles = (format: ArticleFormat) => css`
+const activeStyles = css`
 	font-weight: bold;
 
 	:after {
 		content: '';
-		border: 2px solid ${decidePalette(format).discussionGeneric};
+		border: 2px solid ${schemedPalette('--discussion-colour')};
 		border-top: 0px;
 		border-right: 0px;
 		position: absolute;
@@ -207,7 +207,7 @@ export const Dropdown = ({ id, label, options, format, onSelect }: Props) => {
 							onClick={() => onSelect(option.value)}
 							css={[
 								linkStyles(!!option.disabled),
-								option.isActive && activeStyles(format),
+								option.isActive && activeStyles,
 								index === 0 && firstStyles,
 							]}
 							disabled={!!option.isActive || !!option.disabled}
