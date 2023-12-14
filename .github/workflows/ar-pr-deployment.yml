@@ -16,15 +16,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
 
-      - name: install
-        run: yarn --immutable
-        working-directory: apps-rendering
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
+
       - name: run
         working-directory: apps-rendering
         run: |

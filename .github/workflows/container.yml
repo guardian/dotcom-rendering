@@ -22,18 +22,8 @@ jobs:
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v4
 
-      - run: corepack enable
-
-      - name: Install Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-
-      - name: Add commit hash for PRout
-        working-directory: dotcom-rendering
-        run: |
-          echo 'export const GIT_COMMIT_HASH = "${{ github.sha }}";' > src/server/prout.ts
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
 
       - name: Generate production bundle
         run: make riffraff-bundle
