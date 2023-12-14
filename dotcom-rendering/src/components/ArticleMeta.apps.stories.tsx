@@ -84,13 +84,7 @@ export default {
 			defaultViewport: 'wide',
 		},
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.mobileLandscape,
-				breakpoints.phablet,
-				breakpoints.tablet,
-			],
+			viewports: [breakpoints.mobile, breakpoints.tablet],
 		},
 	},
 };
