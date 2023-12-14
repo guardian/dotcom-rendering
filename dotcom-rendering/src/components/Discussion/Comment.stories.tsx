@@ -611,6 +611,9 @@ MutedComment.decorators = [
 export const ClosedForComments = () => (
 	<Comment
 		comment={commentData}
+		isClosedForComments={true}
+		setCommentBeingRepliedTo={() => {}}
+		isReply={false}
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
