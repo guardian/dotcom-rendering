@@ -4,10 +4,15 @@ const stubResponse = async (
 	page: Page,
 	url: string | RegExp,
 	fulfill: Parameters<Route['fulfill']>[0],
+	times = 1,
 ): Promise<void> => {
-	await page.route(url, async (route) => {
-		await route.fulfill(fulfill);
-	});
+	await page.route(
+		url,
+		async (route) => {
+			await route.fulfill(fulfill);
+		},
+		{ times },
+	);
 };
 
 export { stubResponse };
