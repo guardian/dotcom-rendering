@@ -87,10 +87,10 @@ const getLoaders = (build) => {
 };
 
 /**
- * @param {{ build: Build, sessionId: string }} options
+ * @param {{ build: Build }} options
  * @returns {import('webpack').Configuration}
  */
-module.exports = ({ build, sessionId }) => ({
+module.exports = ({ build }) => ({
 	entry: {
 		index: getEntryIndex(build),
 		debug: './src/client/debug/debug.ts',
