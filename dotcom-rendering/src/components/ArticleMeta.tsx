@@ -158,7 +158,6 @@ const metaNumbers = (isPictureContent: boolean) => css`
 	}
 `;
 
-// used by ArticleMeta.apps.tsx
 export const metaContainer = (format: ArticleFormat) => {
 	const defaultMargins = css`
 		${until.phablet} {

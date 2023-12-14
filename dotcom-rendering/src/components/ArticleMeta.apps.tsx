@@ -1,18 +1,14 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { between, from, space, until } from '@guardian/source-foundations';
+import { from, space, until } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { TagType } from '../types/tag';
-import {
-	metaContainer as metaContainerMargins,
-	shouldShowAvatar,
-	shouldShowContributor,
-} from './ArticleMeta';
+import { shouldShowAvatar, shouldShowContributor } from './ArticleMeta';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
@@ -40,12 +36,33 @@ type Props = {
 
 const metaGridContainer = css`
 	display: grid;
-	grid-template-rows: auto auto auto;
-	grid-template-columns: auto 1fr auto;
+	grid-template-rows: auto auto auto auto auto;
+	grid-template-columns: 10px auto 1fr auto 10px;
 	grid-template-areas:
-		'avatar byline comment-count'
-		'avatar byline comment-count'
-		'dateline dateline dateline';
+		' . . . . .'
+		'. avatar byline comment-count .'
+		'. avatar byline comment-count .'
+		' . . . . .'
+		'. dateline dateline dateline .';
+
+	${from.mobileLandscape} {
+		grid-template-columns: 20px auto 1fr auto 20px;
+	}
+
+	${from.phablet} {
+		grid-template-columns: 0px auto 1fr auto 0px;
+	}
+`;
+
+const metaContainerMargins = css`
+	${until.phablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
 `;
 
 const MetaGridAvatar = ({ children }: { children: React.ReactNode }) => (
@@ -127,58 +144,8 @@ const MetaGridDateline = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const metaPadding = (format: ArticleFormat) => {
-	if (
-		format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.DeadBlog
-	) {
-		return css`
-			${between.tablet.and.leftCol} {
-				order: 3;
-			}
-
-			padding-top: 2px;
-		`;
-	}
-
-	return css`
-		${between.tablet.and.leftCol} {
-			order: 3;
-		}
-
-		${until.mobileLandscape} {
-			padding-inline: ${space[2]}px;
-		}
-
-		${from.mobileLandscape} {
-			padding-left: ${space[5]}px;
-			padding-right: ${space[5]}px;
-		}
-
-		${from.phablet} {
-			padding-left: 0px;
-			padding-right: 0px;
-		}
-
-		padding-top: 2px;
-	`;
-};
-
-// ${!isPictureContent && until.mobileLandscape} {
-// 	margin-left: -20px;
-// 	margin-right: -20px;
-// 	width: auto;
-// }
-
-// ${!isPictureContent && until.phablet} {
-// 	margin-left: -10px;
-// 	margin-right: -10px;
-// 	width: auto;
-// }
 const stretchLines = css`
-	display: block;
-	margin-left: calc((-100vw + 100%) / 2);
-	width: 100vw;
+	grid-column: 1 / -1;
 `;
 
 export const ArticleMetaApps = ({
@@ -216,120 +183,108 @@ export const ArticleMetaApps = ({
 			className={
 				isInteractive ? interactiveLegacyClasses.metaContainer : ''
 			}
-			css={metaContainerMargins(format)}
+			css={metaContainerMargins}
 		>
-			<div css={[metaPadding(format)]}>
-				<div>
-					{branding && (
+			<div css={metaGridContainer}>
+				{shouldShowFollowButtonsOnCommentLayout && (
+					<StraightLines
+						cssOverrides={[
+							stretchLines,
+							css`
+								grid-row: 1 / -1;
+							`,
+						]}
+						count={4}
+						color={themePalette('--article-border')}
+					/>
+				)}
+				{!!avatarUrl && (
+					<MetaGridAvatar>
+						<Avatar src={avatarUrl} alt={authorName} />
+					</MetaGridAvatar>
+				)}
+
+				<MetaGridByline>
+					{shouldShowContributor(format) && !!byline && (
+						<Contributor
+							byline={byline}
+							tags={tags}
+							format={format}
+						/>
+					)}
+					{shouldShowFollowButtonsOnCommentLayout && (
+						<div
+							css={css`
+								margin-bottom: 8px;
+							`}
+						>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<FollowWrapper
+									displayName={soleContributor.title}
+									id={soleContributor.id}
+								/>
+							</Island>
+						</div>
+					)}
+					{messageUs && format.design === ArticleDesign.LiveBlog && (
 						<Island priority="feature" defer={{ until: 'visible' }}>
-							<Branding branding={branding} format={format} />
+							<SendAMessage
+								formFields={messageUs.formFields}
+								formId={messageUs.formId}
+								format={format}
+								pageId={pageId}
+							/>
 						</Island>
 					)}
+				</MetaGridByline>
 
-					{shouldShowFollowButtonsOnCommentLayout && (
+				{isCommentable && (
+					<MetaGridCommentCount isPictureContent={isPictureContent}>
+						<div>
+							<Island
+								priority="feature"
+								defer={{ until: 'idle' }}
+							>
+								<CommentCount
+									discussionApiUrl={discussionApiUrl}
+									shortUrlId={shortUrlId}
+								/>
+							</Island>
+						</div>
+					</MetaGridCommentCount>
+				)}
+
+				{format.display !== ArticleDisplay.Immersive &&
+					format.design !== ArticleDesign.Analysis && (
 						<StraightLines
 							cssOverrides={[
+								stretchLines,
 								css`
-									margin-bottom: -2px;
+									grid-row: 4 / -4;
 								`,
 							]}
-							count={4}
+							count={1}
 							color={themePalette('--article-border')}
 						/>
 					)}
 
-					<div css={metaGridContainer}>
-						{!!avatarUrl && (
-							<MetaGridAvatar>
-								<Avatar src={avatarUrl} alt={authorName} />
-							</MetaGridAvatar>
-						)}
-
-						<MetaGridByline>
-							{shouldShowContributor(format) && !!byline && (
-								<Contributor
-									byline={byline}
-									tags={tags}
-									format={format}
-								/>
-							)}
-							{shouldShowFollowButtonsOnCommentLayout && (
-								<div
-									css={css`
-										margin-bottom: 8px;
-									`}
-								>
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<FollowWrapper
-											displayName={soleContributor.title}
-											id={soleContributor.id}
-										/>
-									</Island>
-								</div>
-							)}
-							{messageUs &&
-								format.design === ArticleDesign.LiveBlog && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<SendAMessage
-											formFields={messageUs.formFields}
-											formId={messageUs.formId}
-											format={format}
-											pageId={pageId}
-										/>
-									</Island>
-								)}
-						</MetaGridByline>
-
-						{/* Immersive articles may or may not have comments,
-						but the new designs have not factored this layout in yet
-						and currently commentable artilces are rendered via legacy
-						templates. This check should be removed when design changes
-						for Immersive layouts are available */}
-						{isCommentable &&
-							format.display !== ArticleDisplay.Immersive && (
-								<MetaGridCommentCount
-									isPictureContent={isPictureContent}
-								>
-									<div>
-										<Island
-											priority="feature"
-											defer={{ until: 'idle' }}
-										>
-											<CommentCount
-												discussionApiUrl={
-													discussionApiUrl
-												}
-												shortUrlId={shortUrlId}
-											/>
-										</Island>
-									</div>
-								</MetaGridCommentCount>
-							)}
-
-						<MetaGridDateline>
-							{format.display !== ArticleDisplay.Immersive &&
-								format.design !== ArticleDesign.Analysis && (
-									<StraightLines
-										cssOverrides={[stretchLines]}
-										count={1}
-										color={themePalette('--article-border')}
-									/>
-								)}
-							<Dateline
-								primaryDateline={primaryDateline}
-								secondaryDateline={secondaryDateline}
-								format={format}
-							/>
-						</MetaGridDateline>
-					</div>
-				</div>
+				<MetaGridDateline>
+					<Dateline
+						primaryDateline={primaryDateline}
+						secondaryDateline={secondaryDateline}
+						format={format}
+					/>
+				</MetaGridDateline>
 			</div>
+
+			{branding && (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<Branding branding={branding} format={format} />
+				</Island>
+			)}
 		</div>
 	);
 };
