@@ -4381,6 +4381,21 @@ const discussionButtonHover: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const commentFormInputBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const commentFormInputBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const commentFormHeaderBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const commentFormHeaderBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const commentFormAddonBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const commentFormAddonBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+
 const firstCommentPreviewLight: PaletteFunction = () =>
 	sourcePalette.neutral[93];
 const firstCommentPreviewDark: PaletteFunction = () =>
@@ -5104,6 +5119,18 @@ const paletteColours = {
 	'--first-comment-preview': {
 		light: firstCommentPreviewLight,
 		dark: firstCommentPreviewDark,
+	},
+	'--comment-form-input-background': {
+		light: commentFormInputBackgroundLight,
+		dark: commentFormInputBackgroundDark,
+	},
+	'--comment-form-header-background': {
+		light: commentFormHeaderBackgroundLight,
+		dark: commentFormHeaderBackgroundDark,
+	},
+	'--comment-form-addon-button': {
+		light: commentFormAddonBackgroundLight,
+		dark: commentFormAddonBackgroundDark,
 	},
 } satisfies PaletteColours;
 
