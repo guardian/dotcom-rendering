@@ -594,7 +594,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								{isApps ? (
-									<Hide from="leftCol">
+									<Hide when="above" breakpoint="leftCol">
 										<ArticleMetaApps
 											branding={branding}
 											format={format}
