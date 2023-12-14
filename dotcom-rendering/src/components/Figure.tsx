@@ -105,8 +105,20 @@ const roleCss = {
 		margin-bottom: ${space[1]}px;
 		float: left;
 		clear: left;
-		width: 140px;
+		width: 8.75rem;
 		margin-right: 20px;
+
+		/* Acts as until.mobileMedium but accounts for font scaling */
+		@media (max-width: 23.4rem) {
+			width: 100%;
+			box-sizing: border-box;
+
+			img,
+			.avatar {
+				display: none;
+			}
+		}
+
 		${from.tablet} {
 			width: 140px;
 		}

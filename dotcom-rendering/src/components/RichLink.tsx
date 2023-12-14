@@ -283,7 +283,10 @@ export const RichLink = ({
 						</div>
 
 						{!!(isOpinion && contributorImage) && (
-							<div css={contributorWrapperStyles}>
+							<div
+								className="avatar"
+								css={contributorWrapperStyles}
+							>
 								<Avatar
 									src={contributorImage}
 									alt={mainContributor}
