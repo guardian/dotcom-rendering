@@ -1,10 +1,6 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import {
-	palette as sourcePalette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
 import { reportAbuse } from '../../lib/discussionApi';
