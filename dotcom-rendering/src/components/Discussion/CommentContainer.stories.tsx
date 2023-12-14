@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
@@ -181,10 +181,6 @@ const format = {
 export const defaultStory = () => (
 	<CommentContainer
 		comment={commentData}
-		format={{
-			...format,
-			theme: Pillar.Sport,
-		}}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -197,21 +193,20 @@ export const defaultStory = () => (
 );
 defaultStory.storyName = 'default';
 defaultStory.decorators = [
-	lightDecorator([
-		{
-			...format,
-			theme: Pillar.Lifestyle,
-		},
-	]),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Sport,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const threadedComment = () => (
 	<CommentContainer
 		comment={commentDataThreaded}
-		format={{
-			...format,
-			theme: Pillar.Lifestyle,
-		}}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -224,21 +219,20 @@ export const threadedComment = () => (
 );
 threadedComment.storyName = 'threaded';
 threadedComment.decorators = [
-	lightDecorator([
-		{
-			...format,
-			theme: Pillar.Lifestyle,
-		},
-	]),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const threadedCommentWithShowMore = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongThread}
-		format={{
-			...format,
-			theme: Pillar.Lifestyle,
-		}}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -251,21 +245,20 @@ export const threadedCommentWithShowMore = () => (
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
 threadedCommentWithShowMore.decorators = [
-	lightDecorator([
-		{
-			...format,
-			theme: Pillar.Lifestyle,
-		},
-	]),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const threadedCommentWithLongUsernames = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
-		format={{
-			...format,
-			theme: Pillar.Lifestyle,
-		}}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -278,21 +271,20 @@ export const threadedCommentWithLongUsernames = () => (
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
 threadedCommentWithLongUsernames.decorators = [
-	lightDecorator([
-		{
-			...format,
-			theme: Pillar.Lifestyle,
-		},
-	]),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const threadedCommentWithLongUsernamesMobile = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
-		format={{
-			...format,
-			theme: Pillar.Lifestyle,
-		}}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -312,10 +304,13 @@ threadedCommentWithLongUsernamesMobile.story = {
 	},
 };
 threadedCommentWithLongUsernamesMobile.decorators = [
-	lightDecorator([
-		{
-			...format,
-			theme: Pillar.Lifestyle,
-		},
-	]),
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];

@@ -417,7 +417,6 @@ export const Comments = ({
 									<li key={comment.id}>
 										<CommentContainer
 											comment={comment}
-											format={format}
 											isClosedForComments={
 												isClosedForComments
 											}
@@ -494,7 +493,6 @@ export const Comments = ({
 							<li key={comment.id}>
 								<CommentContainer
 									comment={comment}
-									format={format}
 									isClosedForComments={isClosedForComments}
 									shortUrl={shortUrl}
 									user={user}
