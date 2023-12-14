@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import type { SignedInUser } from '../../types/discussion';
 import { Comments } from './Comments';
@@ -58,7 +59,7 @@ export const LoggedOutHiddenPicks = () => (
 );
 LoggedOutHiddenPicks.storyName = 'when logged out, unexpanded and with picks';
 LoggedOutHiddenPicks.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			...format,
 			theme: Pillar.Culture,
@@ -95,7 +96,7 @@ export const InitialPage = () => (
 );
 InitialPage.storyName = 'with initial page set to 3';
 InitialPage.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			...format,
 			theme: Pillar.Lifestyle,
@@ -134,7 +135,7 @@ export const Overrides = () => (
 );
 Overrides.storyName = 'with page size overridden to 50';
 Overrides.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			...format,
 			theme: Pillar.Opinion,
@@ -168,7 +169,7 @@ export const LoggedInHiddenNoPicks = () => (
 );
 LoggedInHiddenNoPicks.storyName =
 	'when logged in, with no picks and not expanded';
-LoggedInHiddenNoPicks.decorators = [lightDecorator([format])];
+LoggedInHiddenNoPicks.decorators = [splitTheme([format])];
 
 export const LoggedIn = () => (
 	<div
@@ -222,7 +223,7 @@ export const LoggedInShortDiscussion = () => (
 	</div>
 );
 LoggedInShortDiscussion.storyName = 'when logged in but only two comments made';
-LoggedInShortDiscussion.decorators = [lightDecorator([format])];
+LoggedInShortDiscussion.decorators = [splitTheme([format])];
 
 export const LoggedOutHiddenNoPicks = () => (
 	<div
@@ -252,8 +253,8 @@ export const LoggedOutHiddenNoPicks = () => (
 );
 LoggedOutHiddenNoPicks.storyName =
 	'when logged out, with no picks and not expanded';
-LoggedIn.decorators = [
-	lightDecorator([
+LoggedOutHiddenNoPicks.decorators = [
+	splitTheme([
 		{
 			...format,
 			theme: Pillar.Sport,
@@ -290,7 +291,7 @@ export const Closed = () => (
 );
 Closed.storyName = 'Logged in but closed for comments';
 Closed.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			...format,
 			theme: Pillar.Lifestyle,
@@ -326,7 +327,7 @@ export const NoComments = () => (
 );
 NoComments.storyName = 'when no comments have been made';
 NoComments.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			...format,
 			theme: Pillar.Culture,
@@ -362,7 +363,7 @@ export const LegacyDiscussion = () => (
 );
 LegacyDiscussion.storyName = "a legacy discussion that doesn't allow threading";
 LegacyDiscussion.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			...format,
 			theme: Pillar.Culture,
