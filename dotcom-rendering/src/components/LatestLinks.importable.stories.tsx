@@ -4,6 +4,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints, palette } from '@guardian/source-foundations';
 import fetchMock from 'fetch-mock';
 import type { PropsWithChildren } from 'react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
@@ -173,7 +174,7 @@ export const WorldCupFinal2023 = () => {
 };
 WorldCupFinal2023.storyName = 'World Cup Final 2023';
 WorldCupFinal2023.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			theme: Pillar.Sport,
 			design: ArticleDesign.LiveBlog,
@@ -201,7 +202,7 @@ export const LondonPride2022 = () => {
 };
 LondonPride2022.storyName = 'London Pride 2022';
 LondonPride2022.decorators = [
-	lightDecorator([
+	splitTheme([
 		{
 			theme: Pillar.News,
 			design: ArticleDesign.LiveBlog,

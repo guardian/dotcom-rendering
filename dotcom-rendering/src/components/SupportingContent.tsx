@@ -115,46 +115,46 @@ export const SupportingContent = ({
 	parentFormat,
 }: Props) => {
 	return (
-		<ul
-			css={[
-				wrapperStyles,
-				isDynamo ? dynamoStyles : directionStyles(alignment),
-			]}
+		<ContainerOverrides
+			containerPalette={containerPalette}
+			isDynamo={!!isDynamo}
 		>
-			{supportingContent.map((subLink, index, { length }) => {
-				// The model has this property as optional but it is very likely
-				// to exist
-				if (!subLink.headline) return null;
-				const shouldPadLeft =
-					!isDynamo && index > 0 && alignment === 'horizontal';
-				const isLast = index === length - 1;
-				return (
-					<li
-						key={subLink.url}
-						css={[
-							isDynamo
-								? [
-										dynamoLiStyles(
-											parentFormat,
-											containerPalette,
-										),
-										css`
-											border-color: ${themePalette(
-												'--card-border-top',
-											)};
-										`,
-								  ]
-								: liStyles,
-							shouldPadLeft && leftMargin,
-							isLast && bottomMargin,
-						]}
-						data-link-name={`sublinks | ${index + 1}`}
-					>
-						<FormatBoundary format={subLink.format}>
-							<ContainerOverrides
-								containerPalette={containerPalette}
-								isDynamo={!!isDynamo}
-							>
+			<ul
+				css={[
+					wrapperStyles,
+					isDynamo ? dynamoStyles : directionStyles(alignment),
+				]}
+			>
+				{supportingContent.map((subLink, index, { length }) => {
+					// The model has this property as optional but it is very likely
+					// to exist
+					if (!subLink.headline) return null;
+					const shouldPadLeft =
+						!isDynamo && index > 0 && alignment === 'horizontal';
+					const isLast = index === length - 1;
+					return (
+						<li
+							key={subLink.url}
+							css={[
+								isDynamo
+									? [
+											dynamoLiStyles(
+												parentFormat,
+												containerPalette,
+											),
+											css`
+												border-color: ${themePalette(
+													'--card-border-top',
+												)};
+											`,
+									  ]
+									: liStyles,
+								shouldPadLeft && leftMargin,
+								isLast && bottomMargin,
+							]}
+							data-link-name={`sublinks | ${index + 1}`}
+						>
+							<FormatBoundary format={subLink.format}>
 								<CardHeadline
 									format={subLink.format}
 									size="tiny"
@@ -166,11 +166,11 @@ export const SupportingContent = ({
 									headlineText={subLink.headline}
 									kickerText={subLink.kickerText}
 								/>
-							</ContainerOverrides>
-						</FormatBoundary>
-					</li>
-				);
-			})}
-		</ul>
+							</FormatBoundary>
+						</li>
+					);
+				})}
+			</ul>
+		</ContainerOverrides>
 	);
 };
