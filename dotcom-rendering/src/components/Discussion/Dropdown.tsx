@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	background,
 	from,
 	palette as sourcePalette,
 	textSans,
@@ -14,7 +13,6 @@ type Props = {
 	id: string;
 	label: string;
 	options: DropdownOptionType[];
-	format: ArticleFormat;
 	onSelect: (value: string) => void;
 };
 
@@ -29,7 +27,7 @@ const ulStyles = css`
 	margin-left: -8px;
 	padding: 0px;
 	display: none;
-	background-color: ${background.primary};
+	background-color: ${sourcePalette.neutral[100]};
 
 	position: absolute;
 
@@ -150,7 +148,7 @@ const labelStyles = css`
 	color: ${sourcePalette.neutral[46]};
 `;
 
-export const Dropdown = ({ id, label, options, format, onSelect }: Props) => {
+export const Dropdown = ({ id, label, options, onSelect }: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	useEffect(() => {

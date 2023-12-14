@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { DropdownOptionType } from '../../types/discussion';
 import { Dropdown } from './Dropdown';
 
@@ -44,7 +45,6 @@ const DropdownParent = () => {
 		<Dropdown
 			id="d3"
 			label="Page Size"
-			format={format}
 			options={pageSizeOptions}
 			onSelect={(value: string) => {
 				setSelected(value);
@@ -91,10 +91,6 @@ export const DropdownActive = () => (
 	<Container>
 		<Dropdown
 			id="d1"
-			format={{
-				...format,
-				theme: Pillar.Lifestyle,
-			}}
 			label="Threads"
 			options={threadOptions}
 			onSelect={(value: string) => {
@@ -105,13 +101,20 @@ export const DropdownActive = () => (
 	</Container>
 );
 DropdownActive.storyName = 'Dropdown with first item active';
+DropdownActive.decorators = [
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
 export const DropdownNoActive = () => (
 	<Container>
 		<Dropdown
 			id="d2"
 			label="Threads"
-			format={format}
 			options={optionsWithNoneActive}
 			onSelect={(value: string) => {
 				console.log('clicked: ', value);
@@ -120,6 +123,7 @@ export const DropdownNoActive = () => (
 	</Container>
 );
 DropdownNoActive.storyName = 'Dropdown with nothing active';
+DropdownNoActive.decorators = [splitTheme([format])];
 
 export const DropdownWithState = () => (
 	<Container>
@@ -127,3 +131,4 @@ export const DropdownWithState = () => (
 	</Container>
 );
 DropdownWithState.storyName = 'Dropdown with working selection';
+DropdownNoActive.decorators = [splitTheme([format])];

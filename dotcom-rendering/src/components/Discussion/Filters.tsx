@@ -57,7 +57,6 @@ export const Filters = ({
 			<Dropdown
 				id="order-by-dropdown"
 				label="Sort by"
-				format={format}
 				options={[
 					{
 						title: 'Newest',
@@ -88,7 +87,6 @@ export const Filters = ({
 			<Dropdown
 				id="page-size-dropdown"
 				label="Per page"
-				format={format}
 				options={[
 					{
 						title: '25',
@@ -122,7 +120,6 @@ export const Filters = ({
 			<Dropdown
 				id="threads-dropdown"
 				label="Display threads"
-				format={format}
 				options={[
 					{
 						title: 'Collapsed',
