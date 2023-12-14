@@ -12,6 +12,7 @@ import {
 	preview as defaultPreview,
 	reply as defaultReply,
 } from '../../lib/discussionApi';
+import { palette as schemedPalette } from '../../palette';
 import type {
 	CommentResponse,
 	CommentType,
@@ -63,6 +64,8 @@ const commentTextArea = css`
 		border-color: ${sourcePalette.neutral[46]};
 		outline: none;
 	}
+	color: inherit;
+	background-color: ${schemedPalette('--comment-form-input-background')};
 `;
 
 const greyPlaceholder = css`
@@ -76,7 +79,7 @@ const blackPlaceholder = css`
 	::placeholder {
 		font-weight: bold;
 		opacity: 1;
-		color: ${sourcePalette.neutral[0]};
+		color: inherit;
 	}
 `;
 
@@ -103,7 +106,7 @@ const msgContainerStyles = css`
 
 const linkStyles = css`
 	a {
-		color: ${text.anchorPrimary};
+		color: ${schemedPalette('--discussion-link')};
 		text-decoration: none;
 		:hover,
 		:focus {
@@ -113,7 +116,7 @@ const linkStyles = css`
 `;
 
 const wrapperHeaderTextStyles = css`
-	background-color: ${sourcePalette.neutral[97]};
+	background-color: ${schemedPalette('--comment-form-header-background')};
 	padding: 8px 10px 10px 8px;
 	width: 100%;
 	margin-top: 8px;
@@ -124,8 +127,9 @@ const commentAddOns = css`
 	height: 22px;
 	font-size: 13px;
 	line-height: 17px;
-	border: 1px solid ${sourcePalette.neutral[100]};
-	color: ${sourcePalette.neutral[46]};
+	border: 1px solid ${schemedPalette('--comment-form-input-background')};
+	background-color: ${schemedPalette('--comment-form-addon-button')};
+	color: inherit;
 	text-align: center;
 	cursor: pointer;
 	margin-left: 4px;
