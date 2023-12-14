@@ -11,7 +11,6 @@ import type { CommentType } from '../../types/discussion';
 import { Row } from './Row';
 
 type Props = {
-	format: ArticleFormat;
 	commentBeingRepliedTo: CommentType;
 };
 
@@ -109,10 +108,7 @@ const buttonLinkBaseStyles = css`
 	}
 `;
 
-export const CommentReplyPreview = ({
-	format,
-	commentBeingRepliedTo,
-}: Props) => {
+export const CommentReplyPreview = ({ commentBeingRepliedTo }: Props) => {
 	const [displayReplyComment, setDisplayReplyComment] =
 		useState<boolean>(false);
 	return (
