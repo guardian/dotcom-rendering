@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import type { SignedInUser } from '../../types/discussion';
 import { Comments } from './Comments';
 
@@ -56,6 +57,14 @@ export const LoggedOutHiddenPicks = () => (
 	</div>
 );
 LoggedOutHiddenPicks.storyName = 'when logged out, unexpanded and with picks';
+LoggedOutHiddenPicks.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Culture,
+		},
+	]),
+];
 
 export const InitialPage = () => (
 	<div
@@ -85,6 +94,14 @@ export const InitialPage = () => (
 	</div>
 );
 InitialPage.storyName = 'with initial page set to 3';
+InitialPage.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
 export const Overrides = () => (
 	<div
@@ -116,6 +133,14 @@ export const Overrides = () => (
 	</div>
 );
 Overrides.storyName = 'with page size overridden to 50';
+Overrides.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Opinion,
+		},
+	]),
+];
 
 export const LoggedInHiddenNoPicks = () => (
 	<div
@@ -143,6 +168,7 @@ export const LoggedInHiddenNoPicks = () => (
 );
 LoggedInHiddenNoPicks.storyName =
 	'when logged in, with no picks and not expanded';
+LoggedInHiddenNoPicks.decorators = [lightDecorator([format])];
 
 export const LoggedIn = () => (
 	<div
@@ -169,6 +195,7 @@ export const LoggedIn = () => (
 	</div>
 );
 LoggedIn.storyName = 'when logged in and expanded';
+LoggedIn.decorators = [lightDecorator([format])];
 
 export const LoggedInShortDiscussion = () => (
 	<div
@@ -195,6 +222,7 @@ export const LoggedInShortDiscussion = () => (
 	</div>
 );
 LoggedInShortDiscussion.storyName = 'when logged in but only two comments made';
+LoggedInShortDiscussion.decorators = [lightDecorator([format])];
 
 export const LoggedOutHiddenNoPicks = () => (
 	<div
@@ -224,6 +252,14 @@ export const LoggedOutHiddenNoPicks = () => (
 );
 LoggedOutHiddenNoPicks.storyName =
 	'when logged out, with no picks and not expanded';
+LoggedIn.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Sport,
+		},
+	]),
+];
 
 export const Closed = () => (
 	<div
@@ -253,6 +289,14 @@ export const Closed = () => (
 	</div>
 );
 Closed.storyName = 'Logged in but closed for comments';
+Closed.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
 export const NoComments = () => (
 	<div
@@ -281,6 +325,14 @@ export const NoComments = () => (
 	</div>
 );
 NoComments.storyName = 'when no comments have been made';
+NoComments.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Culture,
+		},
+	]),
+];
 
 export const LegacyDiscussion = () => (
 	<div
@@ -309,3 +361,11 @@ export const LegacyDiscussion = () => (
 	</div>
 );
 LegacyDiscussion.storyName = "a legacy discussion that doesn't allow threading";
+LegacyDiscussion.decorators = [
+	lightDecorator([
+		{
+			...format,
+			theme: Pillar.Culture,
+		},
+	]),
+];
