@@ -71,8 +71,8 @@ const MetaGridAvatar = ({ children }: { children: React.ReactNode }) => (
 			grid-area: avatar;
 			width: 60px;
 			height: 60px;
-			margin-top: ${space[1]}px;
-			margin-right: ${space[2]}px;
+			margin-top: ${space[2]}px;
+			margin-right: ${space[3]}px;
 			margin-bottom: ${space[3]}px;
 			margin-left: 0px;
 			${from.leftCol} {
@@ -90,11 +90,12 @@ const MetaGridByline = ({ children }: { children: React.ReactNode }) => (
 		css={css`
 			grid-area: byline;
 			width: auto;
-			padding-top: ${space[2]}px;
+			margin-top: ${space[2]}px;
+			margin-bottom: ${space[2]}px;
 
 			address > div > svg:first-of-type {
 				display: block;
-				margin-top: ${space[2]}px;
+				margin-top: ${space[3]}px;
 			}
 		`}
 	>
@@ -102,14 +103,21 @@ const MetaGridByline = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const MetaGridCommentCount = ({ children }: { children: React.ReactNode }) => (
+const MetaGridCommentCount = ({
+	children,
+	isPictureContent,
+}: {
+	children: React.ReactNode;
+	isPictureContent: boolean;
+}) => (
 	<div
-		data-print-layout="hide"
+		data-print-Content="hide"
 		css={css`
 			grid-area: comment-count;
 			border-left: 1px solid ${themePalette('--article-border')};
 			padding-top: ${space[2]}px;
 			padding-left: ${space[2]}px;
+			${isPictureContent && 'margin-top: -4px;'}
 
 			${from.mobileLandscape} {
 				padding-top: ${space[2]}px;
@@ -129,22 +137,24 @@ const MetaGridDateline = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			grid-area: dateline;
-			details {
-				padding-top: ${space[2]}px;
-				margin-bottom: ${space[4]}px;
-			}
-			div {
-				padding-top: ${space[2]}px;
-				margin-bottom: ${space[4]}px;
-			}
+			margin-top: ${space[2]}px;
+			margin-bottom: ${space[4]}px;
 		`}
 	>
 		{children}
 	</div>
 );
 
-const stretchLines = css`
+const stretchLines = ({
+	isPictureContent,
+}: {
+	isPictureContent: boolean;
+}) => css`
 	grid-column: 1 / -1;
+
+	${isPictureContent &&
+	`grid-column: 2 / -2;
+	`}
 `;
 
 export const ArticleMetaApps = ({
@@ -171,7 +181,6 @@ export const ArticleMetaApps = ({
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
-	// const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
 	const isCommentLayout = format.design === ArticleDesign.Comment;
 	const shouldShowFollowButtonsOnCommentLayout =
@@ -188,7 +197,7 @@ export const ArticleMetaApps = ({
 				{shouldShowFollowButtonsOnCommentLayout && (
 					<StraightLines
 						cssOverrides={[
-							stretchLines,
+							stretchLines({ isPictureContent }),
 							css`
 								grid-row: 1 / -1;
 							`,
@@ -212,21 +221,12 @@ export const ArticleMetaApps = ({
 						/>
 					)}
 					{shouldShowFollowButtonsOnCommentLayout && (
-						<div
-							css={css`
-								margin-bottom: 8px;
-							`}
-						>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<FollowWrapper
-									displayName={soleContributor.title}
-									id={soleContributor.id}
-								/>
-							</Island>
-						</div>
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<FollowWrapper
+								displayName={soleContributor.title}
+								id={soleContributor.id}
+							/>
+						</Island>
 					)}
 					{messageUs && format.design === ArticleDesign.LiveBlog && (
 						<Island priority="feature" defer={{ until: 'visible' }}>
@@ -241,7 +241,7 @@ export const ArticleMetaApps = ({
 				</MetaGridByline>
 
 				{isCommentable && (
-					<MetaGridCommentCount>
+					<MetaGridCommentCount isPictureContent={isPictureContent}>
 						<Island priority="feature" defer={{ until: 'idle' }}>
 							<CommentCount
 								discussionApiUrl={discussionApiUrl}
@@ -255,7 +255,7 @@ export const ArticleMetaApps = ({
 					format.design !== ArticleDesign.Analysis && (
 						<StraightLines
 							cssOverrides={[
-								stretchLines,
+								stretchLines({ isPictureContent }),
 								css`
 									grid-row: 4 / -4;
 								`,
