@@ -67,7 +67,6 @@ export const TopPicks = ({
 					{leftColComments.map((comment) => (
 						<TopPick
 							key={comment.id}
-							format={format}
 							comment={comment}
 							authStatus={authStatus}
 							userMadeComment={
@@ -83,7 +82,6 @@ export const TopPicks = ({
 					{rightColComments.map((comment) => (
 						<TopPick
 							key={comment.id}
-							format={format}
 							comment={comment}
 							authStatus={authStatus}
 							userMadeComment={
@@ -100,7 +98,6 @@ export const TopPicks = ({
 				{comments.map((comment) => (
 					<TopPick
 						key={comment.id}
-						format={format}
 						comment={comment}
 						authStatus={authStatus}
 						userMadeComment={

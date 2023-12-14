@@ -17,7 +17,6 @@ import { Row } from './Row';
 import { Timestamp } from './Timestamp';
 
 type Props = {
-	format: ArticleFormat;
 	comment: CommentType;
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
 	userMadeComment: boolean;
@@ -168,7 +167,6 @@ const truncateText = (input: string, limit: number) => {
 };
 
 export const TopPick = ({
-	format,
 	comment,
 	authStatus,
 	userMadeComment,
