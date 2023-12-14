@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
 import { pickComment, unPickComment } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
+import { palette as schemedPalette } from '../../palette';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { AbuseReportForm } from './AbuseReportForm';
 import { Avatar } from './Avatar';
@@ -35,13 +36,13 @@ type Props = {
 	onRecommend?: (commentId: number) => Promise<boolean>;
 };
 
-const commentControlsLink = (format: ArticleFormat) => css`
+const commentControlsLink = css`
 	margin-top: -2px;
 
 	a {
 		${textSans.small({ fontWeight: 'bold' })}
 		margin-right: ${space[2]}px;
-		color: ${decidePalette(format).discussionGeneric};
+		color: ${schemedPalette('--discussion-colour')};
 		/*
       We do not want underline to be applied to SVG
       therefore we override the styles and apply them to the nested <span>
@@ -50,10 +51,10 @@ const commentControlsLink = (format: ArticleFormat) => css`
 			text-decoration: none;
 			text-decoration-color: none;
 			span {
-				color: ${decidePalette(format).discussionGeneric};
+				color: ${schemedPalette('--discussion-colour')};
 				text-decoration: underline;
-				text-decoration-color: ${decidePalette(format)
-					.discussionGeneric};
+				text-decoration-color: $
+					${schemedPalette('--discussion-colour')};
 			}
 		}
 	}
@@ -139,13 +140,13 @@ const avatarMargin = css`
 	}
 `;
 
-const colourStyles = (format: ArticleFormat) => css`
+const colourStyles = css`
 	a {
-		color: ${decidePalette(format).discussionGeneric};
-		text-decoration-color: ${decidePalette(format).discussionGeneric};
+		color: ${schemedPalette('--discussion-colour')};
+		text-decoration-color: ${schemedPalette('--discussion-colour')};
 		:hover {
-			color: ${decidePalette(format).discussionGeneric};
-			text-decoration-color: ${decidePalette(format).discussionGeneric};
+			color: ${schemedPalette('--discussion-colour')};
+			text-decoration-color: ${schemedPalette('--discussion-colour')};
 		}
 	}
 `;
@@ -225,9 +226,9 @@ const cssReplyToWrapper = css`
 	}
 `;
 
-const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
+const buttonLinkPillarBaseStyles = css`
 	button {
-		color: ${decidePalette(format).discussionGeneric};
+		color: ${schemedPalette('--discussion-colour')};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -236,7 +237,7 @@ const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${decidePalette(format).discussionGeneric};
+			text-decoration-color: ${schemedPalette('--discussion-colour')};
 		}
 	}
 `;
@@ -400,7 +401,7 @@ export const Comment = ({
 										<Column>
 											<div
 												css={[
-													colourStyles(format),
+													colourStyles,
 													boldFont,
 													negativeMargin,
 												]}
@@ -441,7 +442,7 @@ export const Comment = ({
 									<Row>
 										<div
 											css={[
-												colourStyles(format),
+												colourStyles,
 												boldFont,
 												cssReplyAlphaDisplayName,
 											]}
@@ -630,9 +631,7 @@ export const Comment = ({
 												<div
 													css={[
 														svgReplyArrow,
-														buttonLinkPillarBaseStyles(
-															format,
-														),
+														buttonLinkPillarBaseStyles,
 														css`
 															button {
 																${textSans.small(
@@ -663,9 +662,7 @@ export const Comment = ({
 												<div
 													css={[
 														svgReplyArrow,
-														commentControlsLink(
-															format,
-														),
+														commentControlsLink,
 													]}
 												>
 													<Link
@@ -698,9 +695,7 @@ export const Comment = ({
 											comment.userProfile.userId && (
 											<div
 												css={[
-													buttonLinkPillarBaseStyles(
-														format,
-													),
+													buttonLinkPillarBaseStyles,
 													css`
 														button {
 															${textSans.small({
