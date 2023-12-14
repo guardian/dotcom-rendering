@@ -1,6 +1,5 @@
 // @ts-check
 const path = require('node:path');
-const { v4: uuidv4 } = require('uuid');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { merge } = require('webpack-merge');
@@ -13,8 +12,6 @@ const DEV = process.env.NODE_ENV === 'development';
 
 const BUILD_LEGACY = process.env.BUILD_LEGACY === 'true';
 const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
-
-const sessionId = uuidv4();
 
 /** @typedef {import('../src/lib/assets').Build} Build */
 
@@ -125,7 +122,7 @@ module.exports = [
 		commonConfigs({
 			platform: 'server',
 		}),
-		require(`./webpack.config.server`)({ sessionId }),
+		require(`./webpack.config.server`),
 		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
 	...clientBuilds.map((build) =>
@@ -135,7 +132,6 @@ module.exports = [
 			}),
 			require(`./webpack.config.client`)({
 				build,
-				sessionId,
 			}),
 		),
 	),
