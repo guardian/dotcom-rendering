@@ -41,10 +41,6 @@ export const LoggedOutHiddenPicks = () => (
 		<Comments
 			shortUrl="p/39f5z"
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Culture,
-			}}
 			isClosedForComments={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
@@ -78,10 +74,6 @@ export const InitialPage = () => (
 			shortUrl="p/39f5z"
 			initialPage={3}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Lifestyle,
-			}}
 			isClosedForComments={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
@@ -117,10 +109,6 @@ export const Overrides = () => (
 			pageSizeOverride={50}
 			orderByOverride="recommendations"
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Opinion,
-			}}
 			isClosedForComments={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
@@ -152,7 +140,6 @@ export const LoggedInHiddenNoPicks = () => (
 	>
 		<Comments
 			shortUrl="p/abc123"
-			format={format}
 			isClosedForComments={false}
 			user={aUser}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
@@ -180,7 +167,6 @@ export const LoggedIn = () => (
 	>
 		<Comments
 			shortUrl="p/abc123"
-			format={format}
 			isClosedForComments={false}
 			user={aUser}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
@@ -207,7 +193,6 @@ export const LoggedInShortDiscussion = () => (
 	>
 		<Comments
 			shortUrl="p/39f5a" // Two comments"
-			format={format}
 			isClosedForComments={false}
 			user={aUser}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
@@ -234,10 +219,6 @@ export const LoggedOutHiddenNoPicks = () => (
 	>
 		<Comments
 			shortUrl="p/abc123"
-			format={{
-				...format,
-				theme: Pillar.Sport,
-			}}
 			isClosedForComments={false}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			additionalHeaders={{
@@ -272,10 +253,6 @@ export const Closed = () => (
 		<Comments
 			shortUrl="p/39f5z"
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Lifestyle,
-			}}
 			isClosedForComments={true}
 			user={aUser}
 			additionalHeaders={{
@@ -309,10 +286,6 @@ export const NoComments = () => (
 		<Comments
 			shortUrl="p/39f5x" // A discussion with zero comments
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Culture,
-			}}
 			isClosedForComments={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
@@ -345,10 +318,6 @@ export const LegacyDiscussion = () => (
 		<Comments
 			shortUrl="p/32255" // A 'legacy' discussion that doesn't allow threading
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Culture,
-			}}
 			isClosedForComments={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',

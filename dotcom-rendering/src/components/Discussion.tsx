@@ -170,7 +170,6 @@ export const Discussion = ({
 					<Comments
 						user={user}
 						baseUrl={discussionApiUrl}
-						format={format}
 						initialPage={commentPage}
 						pageSizeOverride={commentPageSize}
 						isClosedForComments={

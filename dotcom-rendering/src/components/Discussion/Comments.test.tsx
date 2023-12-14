@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom/extend-expect';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import {
 	render,
 	screen,
@@ -16,11 +15,6 @@ describe('App', () => {
 			<Comments
 				shortUrl="p/39f5z"
 				baseUrl="https://discussion.theguardian.com/discussion-api"
-				format={{
-					theme: Pillar.Culture,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				}}
 				isClosedForComments={false}
 				additionalHeaders={{
 					'D2-X-UID': 'testD2Header',

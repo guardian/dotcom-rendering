@@ -33,7 +33,6 @@ import { TopPicks } from './TopPicks';
 type Props = {
 	shortUrl: string;
 	baseUrl: string;
-	format: ArticleFormat;
 	isClosedForComments: boolean;
 	commentToScrollTo?: number;
 	initialPage?: number;
@@ -185,7 +184,6 @@ const writeMutes = (mutes: string[]) => {
 export const Comments = ({
 	baseUrl,
 	shortUrl,
-	format,
 	isClosedForComments,
 	initialPage,
 	commentToScrollTo,
