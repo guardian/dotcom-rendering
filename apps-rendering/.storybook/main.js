@@ -31,9 +31,12 @@ module.exports = {
 		// Get project specific webpack options
 		config = webpackConfig(config);
 
-		// Global options for webpack
-		config.resolve.extensions.push('.ts', '.tsx');
+		config.resolve ??= {};
 
+		// Global options for webpack
+		config.resolve.extensions?.push('.ts', '.tsx');
+
+		config.resolve.fallback ??= {};
 		// clean-css will try to import these packages
 		config.resolve.fallback['http'] = false;
 		config.resolve.fallback['https'] = false;
