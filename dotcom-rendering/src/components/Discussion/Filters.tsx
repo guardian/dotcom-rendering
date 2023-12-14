@@ -10,7 +10,6 @@ import { Dropdown } from './Dropdown';
 
 type Props = {
 	filters: FilterOptions;
-	format: ArticleFormat;
 	onFilterChange: (newFilterObject: FilterOptions) => void;
 	totalPages: number;
 	commentCount: number;
@@ -47,7 +46,6 @@ const filterPadding = css`
 
 export const Filters = ({
 	filters,
-	format,
 	onFilterChange,
 	totalPages,
 	commentCount,
