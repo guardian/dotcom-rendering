@@ -4321,20 +4321,20 @@ const discussionLight: PaletteFunction = ({ theme }) => {
 const discussionDark: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[600];
+			return sourcePalette.lifestyle[500];
 		case Pillar.Sport:
-			return sourcePalette.sport[600];
+			return sourcePalette.sport[500];
 		case Pillar.Culture:
-			return sourcePalette.culture[600];
+			return sourcePalette.culture[500];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[600];
+			return sourcePalette.opinion[500];
 		case ArticleSpecial.Labs:
-			return sourcePalette.lifestyle[600];
+			return sourcePalette.lifestyle[500];
 		case Pillar.News:
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.SpecialReportAlt:
 		default:
-			return sourcePalette.news[600];
+			return sourcePalette.news[500];
 	}
 };
 
@@ -4374,6 +4374,16 @@ const discussionSecondaryButtonHover: PaletteFunction = ({ theme }) => {
 			return sourcePalette.news[800];
 	}
 };
+
+const discussionReportBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const discussionReportBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const discussionReportBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const discussionReportBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
 
 // ----- Palette ----- //
 
@@ -5077,6 +5087,14 @@ const paletteColours = {
 	'--discussion-secondary-button-hover': {
 		light: discussionSecondaryButtonHover,
 		dark: discussionSecondaryButtonHover,
+	},
+	'--discussion-report-background': {
+		light: discussionReportBackgroundLight,
+		dark: discussionReportBackgroundDark,
+	},
+	'--discussion-report-border': {
+		light: discussionReportBorderLight,
+		dark: discussionReportBorderDark,
 	},
 } satisfies PaletteColours;
 
