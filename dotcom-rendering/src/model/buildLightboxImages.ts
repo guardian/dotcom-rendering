@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import type { Orientation } from '../components/Picture';
 import { getLargest, getMaster } from '../lib/image';
 import { isHighEnough, isWideEnough } from '../lib/lightbox';
@@ -195,7 +196,7 @@ export const buildLightboxImages = (
 	return [
 		...new Map(
 			lightboxImages.map<[string, ImageForLightbox]>((image) => [
-				decideImageId(image) ?? crypto.randomUUID(),
+				decideImageId(image) ?? randomUUID(),
 				image,
 			]),
 		).values(),
