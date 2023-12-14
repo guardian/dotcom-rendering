@@ -7,9 +7,9 @@ import type { PropsWithChildren } from 'react';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
+import { ContainerOverrides } from './ContainerOverrides';
 import { Island } from './Island';
 import { LatestLinks } from './LatestLinks.importable';
-import { ContainerOverrides } from './ContainerOverrides';
 
 export default {
 	component: LatestLinks,
