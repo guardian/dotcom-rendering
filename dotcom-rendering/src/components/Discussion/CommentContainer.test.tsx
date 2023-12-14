@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom/extend-expect';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
@@ -37,12 +36,6 @@ const aUser: SignedInUser = {
 		},
 	},
 	authStatus: { kind: 'SignedInWithCookies' },
-};
-
-const format = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.News,
 };
 
 describe('CommentContainer', () => {
