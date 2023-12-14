@@ -34,6 +34,10 @@ module.exports = {
 		// Global options for webpack
 		config.resolve.extensions.push('.ts', '.tsx');
 
+		// clean-css will try to import these packages
+		config.resolve.fallback['http'] = false;
+		config.resolve.fallback['https'] = false;
+
 		// Required as otherwise 'process' will not be defined when included on its own (without .env)
 		// e.g process?.env?.SOME_VAR
 		config.plugins.push(

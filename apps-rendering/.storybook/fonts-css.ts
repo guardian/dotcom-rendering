@@ -1,3 +1,5 @@
+import CleanCSS from 'clean-css';
+
 type FontFamily =
 	| 'GH Guardian Headline'
 	| 'Guardian Egyptian Web' // Legacy of GH Guardian Headline
@@ -276,7 +278,5 @@ const getStyleString: () => string = () => {
 	);
 };
 
-const minifyCssString = (css: string) =>
-	css.replace(/\n/g, '').replace(/\s\s+/g, ' ');
-
-export const getFontsCss = (): string => minifyCssString(getStyleString());
+export const getFontsCss = (): string =>
+	new CleanCSS().minify(getStyleString()).styles;
