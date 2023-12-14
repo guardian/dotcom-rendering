@@ -4391,6 +4391,21 @@ const discussionReportBorderLight: PaletteFunction = () =>
 const discussionReportBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
+const commentFormInputBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const commentFormInputBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const commentFormHeaderBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const commentFormHeaderBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const commentFormAddonBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const commentFormAddonBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+
 const firstCommentPreviewLight: PaletteFunction = () =>
 	sourcePalette.neutral[93];
 const firstCommentPreviewDark: PaletteFunction = () =>
@@ -5122,6 +5137,18 @@ const paletteColours = {
 	'--discussion-report-border': {
 		light: discussionReportBorderLight,
 		dark: discussionReportBorderDark,
+	},
+	'--comment-form-input-background': {
+		light: commentFormInputBackgroundLight,
+		dark: commentFormInputBackgroundDark,
+	},
+	'--comment-form-header-background': {
+		light: commentFormHeaderBackgroundLight,
+		dark: commentFormHeaderBackgroundDark,
+	},
+	'--comment-form-addon-button': {
+		light: commentFormAddonBackgroundLight,
+		dark: commentFormAddonBackgroundDark,
 	},
 } satisfies PaletteColours;
 
