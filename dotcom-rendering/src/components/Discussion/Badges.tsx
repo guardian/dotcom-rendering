@@ -33,7 +33,7 @@ const staffLabel = css`
 	color: ${themePalette('--staff-label-color')};
 `;
 const guardianPickLabel = css`
-	color: ${sourcePalette.neutral[7]};
+	color: ${themePalette('--pick-label-color')};
 `;
 
 export const GuardianStaff = () => (

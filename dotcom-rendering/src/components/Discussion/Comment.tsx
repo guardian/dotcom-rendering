@@ -40,7 +40,7 @@ const commentControlsLink = css`
 	a {
 		${textSans.small({ fontWeight: 'bold' })}
 		margin-right: ${space[2]}px;
-		color: ${schemedPalette('--discussion-colour')};
+		color: ${schemedPalette('--discussion-link')};
 		/*
       We do not want underline to be applied to SVG
       therefore we override the styles and apply them to the nested <span>
@@ -49,10 +49,9 @@ const commentControlsLink = css`
 			text-decoration: none;
 			text-decoration-color: none;
 			span {
-				color: ${schemedPalette('--discussion-colour')};
+				color: ${schemedPalette('--discussion-link')};
 				text-decoration: underline;
-				text-decoration-color: $
-					${schemedPalette('--discussion-colour')};
+				text-decoration-color: ${schemedPalette('--discussion-link')};
 			}
 		}
 	}

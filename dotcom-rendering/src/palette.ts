@@ -4288,6 +4288,9 @@ const topPickLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 const staffLabelLight: PaletteFunction = () => sourcePalette.brand[400];
 const staffLabelDark: PaletteFunction = () => sourcePalette.brand[600];
 
+const staffPickLight: PaletteFunction = () => sourcePalette.neutral[7];
+const staffPickDark: PaletteFunction = () => sourcePalette.neutral[97];
+
 const recommendationCountLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const recommendationCountDark: PaletteFunction = () =>
@@ -5093,6 +5096,10 @@ const paletteColours = {
 	'--staff-label-color': {
 		light: staffLabelLight,
 		dark: staffLabelDark,
+	},
+	'--pick-label-color': {
+		light: staffPickLight,
+		dark: staffPickDark,
 	},
 	'--recommendation-count': {
 		light: recommendationCountLight,

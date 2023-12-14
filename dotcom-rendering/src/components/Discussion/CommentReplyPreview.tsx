@@ -42,13 +42,13 @@ const replyPreviewHeaderStyle = css`
 `;
 
 const arrowSize = 15;
-const bg = sourcePalette.neutral[93];
+
 const previewStyle = css`
 	padding-top: ${space[3]}px;
 	padding-bottom: ${space[3]}px;
 	padding-left: ${space[5]}px;
 	padding-right: ${space[5]}px;
-	background-color: ${bg};
+	background-color: ${schemedPalette('--top-pick-background')};
 	margin-top: ${arrowSize}px;
 	margin-bottom: ${arrowSize + 5}px;
 	position: relative;
@@ -57,7 +57,8 @@ const previewStyle = css`
 	:before {
 		content: '';
 		position: absolute;
-		border-left: ${arrowSize}px solid ${bg};
+		border-left: ${arrowSize}px solid
+			${schemedPalette('--top-pick-background')};
 		border-top: ${arrowSize}px solid transparent;
 		top: -${arrowSize - 1}px;
 		margin-left: ${space[9]}px;
