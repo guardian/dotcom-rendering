@@ -4,6 +4,7 @@ import { breakpoints } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { getAllThemes } from '../lib/format';
+import type { Branding as BrandingType } from '../types/branding';
 import { ArticleMetaApps } from './ArticleMeta.apps';
 
 type StoryArgs = { format: ArticleFormat; isCommentable: boolean };
@@ -49,6 +50,31 @@ const tagsWithByTwoContributors = [
 		title: 'Laura Banks',
 	},
 ];
+
+const branding: BrandingType = {
+	brandingType: { name: 'sponsored' },
+	sponsorName: 'theguardian.org',
+	logo: {
+		src: 'https://static.theguardian.com/commercial/sponsor/19/Dec/2022/57ba1d00-b2bd-4f6d-ba35-15a82b8d9507-0094b90a-bdb8-4e97-b866-dcf49179b29d-theguardian.org.png',
+		dimensions: {
+			width: 280,
+			height: 180,
+		},
+		link: 'https://theguardian.org/',
+		label: 'Supported by',
+	},
+	logoForDarkBackground: {
+		src: 'https://static.theguardian.com/commercial/sponsor/19/Dec/2022/58a1e08d-cd4a-47a5-966a-4846b0461642-46629471-cb0b-4c59-9a06-1ef23778b41f-theguardian.org2.png',
+		dimensions: {
+			width: 280,
+			height: 180,
+		},
+		link: 'https://theguardian.org/',
+		label: 'Supported by',
+	},
+	aboutThisLink:
+		'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
+};
 
 export default {
 	component: ArticleMetaApps,
@@ -232,9 +258,7 @@ ArticleAppsImmersiveAndFollowStory.args = { format: defaultFormat };
 ArticleAppsImmersiveAndFollowStory.parameters = {
 	config: { renderingTarget: 'Apps' },
 };
-ArticleAppsImmersiveAndFollowStory.decorators = [
-	splitTheme(getAllThemes(immersiveFormat)),
-];
+ArticleAppsImmersiveAndFollowStory.decorators = [splitTheme([immersiveFormat])];
 
 export const ArticleAppsWithMultipleContributors: StoryObj = ({
 	format,
@@ -264,3 +288,33 @@ ArticleAppsWithMultipleContributors.parameters = {
 	config: { renderingTarget: 'Apps' },
 };
 ArticleAppsWithMultipleContributors.decorators = [splitTheme()];
+
+export const ArticleAppsWithBrandingStory: StoryObj = ({
+	format,
+	isCommentable = true,
+}: StoryArgs) => {
+	return (
+		<Wrapper>
+			<ArticleMetaApps
+				format={format}
+				pageId=""
+				webTitle=""
+				byline="Lanre Bakare Chief music writer"
+				tags={tagsWithLargeBylineImage}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={isCommentable}
+				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
+				shortUrlId="/p/zemg8"
+				ajaxUrl=""
+				branding={branding}
+			/>
+		</Wrapper>
+	);
+};
+/** @see /dotcom-rendering/docs/development/storybook.md */
+ArticleAppsWithBrandingStory.args = { format: defaultFormat };
+ArticleAppsWithBrandingStory.parameters = {
+	config: { renderingTarget: 'Apps' },
+};
+ArticleAppsWithBrandingStory.decorators = [splitTheme([defaultFormat])];
