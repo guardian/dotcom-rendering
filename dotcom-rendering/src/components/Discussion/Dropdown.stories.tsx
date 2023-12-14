@@ -131,4 +131,4 @@ export const DropdownWithState = () => (
 	</Container>
 );
 DropdownWithState.storyName = 'Dropdown with working selection';
-DropdownNoActive.decorators = [splitTheme([format])];
+DropdownWithState.decorators = [splitTheme([format])];
