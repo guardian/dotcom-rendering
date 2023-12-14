@@ -1,4 +1,4 @@
-import { neutral } from '@guardian/source-foundations';
+import { palette } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import type { ReactNode } from 'react';
 import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
@@ -64,7 +64,7 @@ export const decideMerchandisingSlot = (
 			padSides={false}
 			showTopBorder={false}
 			showSideBorders={false}
-			backgroundColour={neutral[93]}
+			backgroundColour={palette.neutral[97]}
 			element="aside"
 		>
 			{children}

@@ -193,12 +193,13 @@ const merchandisingAdContainerStyles = css`
 
 const merchandisingAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.billboard.height}px;
+	min-height: ${adSizes.billboard.height + labelHeight}px;
 	margin: 12px auto;
 
 	${from.desktop} {
 		margin: 0;
 		padding-bottom: 20px;
+		min-height: ${adSizes.billboard.height + labelHeight + 20}px;
 	}
 `;
 
@@ -212,7 +213,7 @@ const inlineAdStyles = css`
 
 const liveblogInlineAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
+	min-height: ${adSizes.mpu.height + labelHeight}px;
 	background-color: ${palette.neutral[93]};
 
 	${until.tablet} {
@@ -222,7 +223,7 @@ const liveblogInlineAdStyles = css`
 
 const liveblogInlineMobileAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.outstreamMobile.height + constants.AD_LABEL_HEIGHT}px;
+	min-height: ${adSizes.outstreamMobile.height + labelHeight}px;
 	background-color: ${palette.neutral[93]};
 
 	${from.tablet} {

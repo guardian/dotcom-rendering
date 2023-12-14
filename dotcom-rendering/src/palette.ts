@@ -4341,6 +4341,9 @@ const discussionDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
+const discussionLinkDark: PaletteFunction = () => sourcePalette.neutral[100];
+
 const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -4360,21 +4363,21 @@ const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const discussionSecondaryButtonHover: PaletteFunction = ({ theme }) => {
+const discussionButtonHover: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.Culture:
-			return sourcePalette.culture[800];
+			return sourcePalette.culture[400];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[800];
+			return sourcePalette.opinion[400];
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[800];
+			return sourcePalette.lifestyle[400];
 		case Pillar.Sport:
-			return sourcePalette.sport[800];
+			return sourcePalette.sport[400];
 		case Pillar.News:
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.Labs:
 		default:
-			return sourcePalette.news[800];
+			return sourcePalette.news[400];
 	}
 };
 
@@ -4387,6 +4390,11 @@ const discussionReportBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const discussionReportBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
+
+const firstCommentPreviewLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const firstCommentPreviewDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
 
 // ----- Palette ----- //
 
@@ -5091,13 +5099,21 @@ const paletteColours = {
 		light: discussionLight,
 		dark: discussionDark,
 	},
+	'--discussion-link': {
+		light: discussionLinkLight,
+		dark: discussionLinkDark,
+	},
 	'--discussion-primary-button-background': {
 		light: discussionPrimaryButtonBackground,
 		dark: discussionPrimaryButtonBackground,
 	},
-	'--discussion-secondary-button-hover': {
-		light: discussionSecondaryButtonHover,
-		dark: discussionSecondaryButtonHover,
+	'--discussion-button-hover': {
+		light: discussionButtonHover,
+		dark: discussionButtonHover,
+	},
+	'--first-comment-preview': {
+		light: firstCommentPreviewLight,
+		dark: firstCommentPreviewDark,
 	},
 	'--discussion-report-background': {
 		light: discussionReportBackgroundLight,
