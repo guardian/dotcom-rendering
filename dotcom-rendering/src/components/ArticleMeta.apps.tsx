@@ -102,23 +102,22 @@ const MetaGridByline = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const MetaGridCommentCount = ({
-	children,
-	isPictureContent,
-}: {
-	children: React.ReactNode;
-	isPictureContent: boolean;
-}) => (
+const MetaGridCommentCount = ({ children }: { children: React.ReactNode }) => (
 	<div
 		data-print-layout="hide"
 		css={css`
 			grid-area: comment-count;
 			border-left: 1px solid ${themePalette('--article-border')};
+			padding-top: ${space[2]}px;
+			padding-left: ${space[2]}px;
 
-			${until.desktop} {
-				margin-top: ${isPictureContent ? '-6px' : '-2px'};
-				padding-top: ${isPictureContent ? '6px' : '2px'};
-				padding-left: 10px;
+			${from.mobileLandscape} {
+				padding-top: ${space[2]}px;
+				padding-left: ${space[4]}px;
+			}
+
+			${from.phablet} {
+				padding-right: ${space[4]}px;
 			}
 		`}
 	>
@@ -242,18 +241,13 @@ export const ArticleMetaApps = ({
 				</MetaGridByline>
 
 				{isCommentable && (
-					<MetaGridCommentCount isPictureContent={isPictureContent}>
-						<div>
-							<Island
-								priority="feature"
-								defer={{ until: 'idle' }}
-							>
-								<CommentCount
-									discussionApiUrl={discussionApiUrl}
-									shortUrlId={shortUrlId}
-								/>
-							</Island>
-						</div>
+					<MetaGridCommentCount>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<CommentCount
+								discussionApiUrl={discussionApiUrl}
+								shortUrlId={shortUrlId}
+							/>
+						</Island>
 					</MetaGridCommentCount>
 				)}
 
