@@ -52,6 +52,7 @@ import {
 	interactiveLegacyClasses,
 } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { Hide } from '@guardian/source-react-components';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -506,30 +507,33 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							<GridItem area="meta" element="aside">
 								<div css={maxWidth}>
 									{isApps ? (
-										<ArticleMetaApps
-											branding={branding}
-											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
-											byline={article.byline}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											isCommentable={
-												article.isCommentable
-											}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-											ajaxUrl={article.config.ajaxUrl}
-										></ArticleMetaApps>
+										<Hide from="leftCol">
+											<ArticleMetaApps
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={
+													article.isCommentable
+												}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
+												ajaxUrl={article.config.ajaxUrl}
+											></ArticleMetaApps>
+										</Hide>
 									) : (
 										<ArticleMeta
 											branding={branding}

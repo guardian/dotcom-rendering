@@ -57,6 +57,7 @@ import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { Hide } from '@guardian/source-react-components';
 
 const StandardGrid = ({
 	children,
@@ -635,28 +636,34 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							{isApps ? (
-								<div css={maxWidth}>
-									<ArticleMetaApps
-										branding={branding}
-										format={format}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										byline={article.byline}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={article.isCommentable}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
-									></ArticleMetaApps>
-								</div>
+								<Hide from="leftCol">
+									<div css={maxWidth}>
+										<ArticleMetaApps
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											ajaxUrl={article.config.ajaxUrl}
+										></ArticleMetaApps>
+									</div>
+								</Hide>
 							) : (
 								<div css={maxWidth}>
 									<ArticleMeta

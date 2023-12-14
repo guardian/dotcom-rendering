@@ -34,7 +34,7 @@ import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { minNavHeightPx, Nav } from '../components/Nav/Nav';
+import { Nav, minNavHeightPx } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -594,26 +594,32 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								{isApps ? (
-									<ArticleMetaApps
-										branding={branding}
-										format={format}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										byline={article.byline}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={article.isCommentable}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
-									></ArticleMetaApps>
+									<Hide from="leftCol">
+										<ArticleMetaApps
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											ajaxUrl={article.config.ajaxUrl}
+										></ArticleMetaApps>
+									</Hide>
 								) : (
 									<ArticleMeta
 										branding={branding}

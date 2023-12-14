@@ -567,26 +567,32 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								{isApps ? (
-									<ArticleMetaApps
-										branding={branding}
-										format={format}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										byline={article.byline}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={article.isCommentable}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
-									></ArticleMetaApps>
+									<Hide from="leftCol">
+										<ArticleMetaApps
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											ajaxUrl={article.config.ajaxUrl}
+										></ArticleMetaApps>
+									</Hide>
 								) : (
 									<ArticleMeta
 										branding={branding}
