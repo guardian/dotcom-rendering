@@ -4381,6 +4381,16 @@ const discussionButtonHover: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const discussionReportBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const discussionReportBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const discussionReportBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const discussionReportBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
 const commentFormInputBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const commentFormInputBackgroundDark: PaletteFunction = () =>
@@ -5119,6 +5129,14 @@ const paletteColours = {
 	'--first-comment-preview': {
 		light: firstCommentPreviewLight,
 		dark: firstCommentPreviewDark,
+	},
+	'--discussion-report-background': {
+		light: discussionReportBackgroundLight,
+		dark: discussionReportBackgroundDark,
+	},
+	'--discussion-report-border': {
+		light: discussionReportBorderLight,
+		dark: discussionReportBorderDark,
 	},
 	'--comment-form-input-background': {
 		light: commentFormInputBackgroundLight,
