@@ -196,6 +196,7 @@ const merchandisingAdStyles = css`
 	min-height: ${adSizes.billboard.height + labelHeight}px;
 	margin: 12px auto;
 	max-width: ${breakpoints['wide']}px;
+	overflow: hidden;
 
 	${from.desktop} {
 		margin: 0;
