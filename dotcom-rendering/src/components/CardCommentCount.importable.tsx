@@ -77,7 +77,7 @@ export const CardCommentCount = ({
 	return (
 		<ContainerOverrides
 			containerPalette={containerPalette}
-			isDynamo={isDynamo ? isDynamo : false}
+			isDynamo={!!isDynamo}
 		>
 			<div css={containerStyles(isDynamo, isOnwardContent)}>
 				<div css={svgStyles(isDynamo, isOnwardContent)}>

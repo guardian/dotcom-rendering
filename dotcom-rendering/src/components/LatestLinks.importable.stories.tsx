@@ -9,6 +9,7 @@ import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
 import { Island } from './Island';
 import { LatestLinks } from './LatestLinks.importable';
+import { ContainerOverrides } from './ContainerOverrides';
 
 export default {
 	component: LatestLinks,
@@ -154,14 +155,19 @@ export const WorldCupFinal2023 = () => {
 				background-color: ${overrides.background.container};
 			`}
 		>
-			<Island priority="critical">
-				<LatestLinks
-					id="/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live"
-					direction="horizontal"
-					containerPalette={containerPalette}
-					isDynamo={true}
-				/>
-			</Island>
+			<ContainerOverrides
+				containerPalette={containerPalette}
+				isDynamo={true}
+			>
+				<Island priority="critical">
+					<LatestLinks
+						id="/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live"
+						direction="horizontal"
+						containerPalette={containerPalette}
+						isDynamo={true}
+					/>
+				</Island>
+			</ContainerOverrides>
 		</Wrapper>
 	);
 };
