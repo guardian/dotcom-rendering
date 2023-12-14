@@ -107,7 +107,7 @@ const blockedCommentStyles = css`
 // to override a tag styles from dangerouslySetInnerHTML
 const commentLinkStyling = css`
 	a {
-		color: ${sourcePalette.brand[500]};
+		color: ${schemedPalette('--discussion-link')};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
