@@ -5,7 +5,6 @@ import { breakpoints, palette } from '@guardian/source-foundations';
 import fetchMock from 'fetch-mock';
 import type { PropsWithChildren } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
