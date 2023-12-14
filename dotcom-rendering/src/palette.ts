@@ -4253,6 +4253,15 @@ const mobileCommentCountFill: PaletteFunction = (format) => {
 	return commentCountFill(format);
 };
 
+const explainerAtomBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const explainerAtomBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+const explainerAtomAccentLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+const explainerAtomAccentDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 const signInLinkLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
@@ -4953,6 +4962,14 @@ const paletteColours = {
 	'--comment-count-mobile-fill': {
 		light: mobileCommentCountFill,
 		dark: mobileCommentCountFill,
+	},
+	'--explainer-atom-background': {
+		light: explainerAtomBackgroundLight,
+		dark: explainerAtomBackgroundDark,
+	},
+	'--explainer-atom-accent': {
+		light: explainerAtomAccentLight,
+		dark: explainerAtomAccentDark,
 	},
 	'--sign-in-link': {
 		light: signInLinkLight,
