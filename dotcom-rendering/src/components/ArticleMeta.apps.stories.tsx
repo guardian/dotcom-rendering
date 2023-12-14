@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { breakpoints } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { getAllThemes } from '../lib/format';
@@ -43,15 +44,29 @@ const tagsWithByTwoContributors = [
 			'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
 	},
 	{
-		id: 'profile/lanre-bakare',
+		id: 'profile/laura-banks',
 		type: 'Contributor',
-		title: 'Lanre Bakare',
+		title: 'Laura Banks',
 	},
 ];
 
 export default {
 	component: ArticleMetaApps,
 	title: 'Components/ArticleMetaApps',
+	parameters: {
+		viewport: {
+			defaultViewport: 'wide',
+		},
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.mobileMedium,
+				breakpoints.mobileLandscape,
+				breakpoints.phablet,
+				breakpoints.tablet,
+			],
+		},
+	},
 };
 
 const defaultFormat: ArticleFormat = {
@@ -221,7 +236,7 @@ ArticleAppsImmersiveAndFollowStory.decorators = [
 	splitTheme(getAllThemes(immersiveFormat)),
 ];
 
-export const ArticleAppsWithMultipleContributos: StoryObj = ({
+export const ArticleAppsWithMultipleContributors: StoryObj = ({
 	format,
 	isCommentable,
 }: StoryArgs) => {
@@ -231,7 +246,7 @@ export const ArticleAppsWithMultipleContributos: StoryObj = ({
 				format={format}
 				pageId=""
 				webTitle=""
-				byline="Lanre Bakare"
+				byline="Lanre Bakare in New York and Laura Banks in London"
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -244,8 +259,8 @@ export const ArticleAppsWithMultipleContributos: StoryObj = ({
 	);
 };
 /** @see /dotcom-rendering/docs/development/storybook.md */
-ArticleAppsWithMultipleContributos.args = { format: defaultFormat };
-ArticleAppsWithMultipleContributos.parameters = {
+ArticleAppsWithMultipleContributors.args = { format: defaultFormat };
+ArticleAppsWithMultipleContributors.parameters = {
 	config: { renderingTarget: 'Apps' },
 };
-ArticleAppsWithMultipleContributos.decorators = [splitTheme()];
+ArticleAppsWithMultipleContributors.decorators = [splitTheme()];
