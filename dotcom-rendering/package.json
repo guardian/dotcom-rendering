@@ -131,7 +131,7 @@
 		"@types/tough-cookie": "4.0.2",
 		"@types/trusted-types": "2.0.3",
 		"@types/twitter-for-web": "0.0.2",
-		"@types/uuid": "9.0.6",
+		"@types/uuid": "9.0.7",
 		"@types/webpack-bundle-analyzer": "4.6.0",
 		"@types/webpack-env": "1.18.0",
 		"@types/webpack-node-externals": "3.0.0",
