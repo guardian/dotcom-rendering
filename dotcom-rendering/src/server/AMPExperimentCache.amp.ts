@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 type AmpExperiment = {
 	sticky?: boolean;
 	consentNotificationId?: string;
