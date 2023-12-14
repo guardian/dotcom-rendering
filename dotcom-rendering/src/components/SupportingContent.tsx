@@ -155,17 +155,22 @@ export const SupportingContent = ({
 							data-link-name={`sublinks | ${index + 1}`}
 						>
 							<FormatBoundary format={subLink.format}>
-								<CardHeadline
-									format={subLink.format}
-									size="tiny"
-									hideLineBreak={true}
-									showLine={true}
-									linkTo={subLink.url}
+								<ContainerOverrides
 									containerPalette={containerPalette}
-									isDynamo={isDynamo}
-									headlineText={subLink.headline}
-									kickerText={subLink.kickerText}
-								/>
+									isDynamo={!!isDynamo}
+								>
+									<CardHeadline
+										format={subLink.format}
+										size="tiny"
+										hideLineBreak={true}
+										showLine={true}
+										linkTo={subLink.url}
+										containerPalette={containerPalette}
+										isDynamo={isDynamo}
+										headlineText={subLink.headline}
+										kickerText={subLink.kickerText}
+									/>
+								</ContainerOverrides>
 							</FormatBoundary>
 						</li>
 					);
