@@ -56,7 +56,7 @@
 		"@emotion/server": "11.11.0",
 		"@guardian/ab-core": "5.0.0",
 		"@guardian/braze-components": "16.2.0",
-		"@guardian/bridget": "2.5.0",
+		"@guardian/bridget": "2.6.0",
 		"@guardian/browserslist-config": "5.0.0",
 		"@guardian/cdk": "50.10.6",
 		"@guardian/commercial": "11.25.0",
