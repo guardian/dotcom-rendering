@@ -601,8 +601,6 @@ export const Card = ({
 							) : null}
 							{!!mainMedia && mainMedia.type !== 'Video' && (
 								<MediaMeta
-									containerPalette={containerPalette}
-									format={format}
 									mediaType={mainMedia.type}
 									hasKicker={!!kickerText}
 								/>

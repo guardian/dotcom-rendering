@@ -1,18 +1,13 @@
 import { css } from '@emotion/react';
 import { SvgAudio, SvgCamera } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
 import { palette as themePalette } from '../palette';
-import type { DCRContainerPalette } from '../types/front';
-import type { Palette } from '../types/palette';
 
 type Props = {
 	mediaType: MediaType;
-	containerPalette?: DCRContainerPalette;
-	format: ArticleFormat;
 	hasKicker: boolean;
 };
 
-const iconWrapperStyles = (palette: Palette, hasKicker: boolean) => css`
+const iconWrapperStyles = (hasKicker: boolean) => css`
 	width: 24px;
 	height: 24px;
 	/* We’re using the text colour for the icon badge */
@@ -52,34 +47,22 @@ const Icon = ({ mediaType }: { mediaType: MediaType }) => {
 
 const MediaIcon = ({
 	mediaType,
-	palette,
 	hasKicker,
 }: {
 	mediaType: MediaType;
-	palette: Palette;
 	hasKicker: boolean;
 }) => {
 	return (
-		<span css={iconWrapperStyles(palette, hasKicker)}>
+		<span css={iconWrapperStyles(hasKicker)}>
 			<Icon mediaType={mediaType} />
 		</span>
 	);
 };
 
-export const MediaMeta = ({
-	mediaType,
-	format,
-	containerPalette,
-	hasKicker,
-}: Props) => {
-	const palette = decidePalette(format, containerPalette);
+export const MediaMeta = ({ mediaType, hasKicker }: Props) => {
 	return (
 		<div css={wrapperStyles}>
-			<MediaIcon
-				mediaType={mediaType}
-				palette={palette}
-				hasKicker={hasKicker}
-			/>
+			<MediaIcon mediaType={mediaType} hasKicker={hasKicker} />
 		</div>
 	);
 };
