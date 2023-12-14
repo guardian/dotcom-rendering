@@ -451,7 +451,6 @@ export const Comments = ({
 		<div data-component="discussion" css={commentColumnWrapperStyles}>
 			{user && !isClosedForComments && (
 				<CommentForm
-					format={format}
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}
@@ -537,7 +536,6 @@ export const Comments = ({
 			)}
 			{user && !isClosedForComments && comments.length > 10 && (
 				<CommentForm
-					format={format}
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}

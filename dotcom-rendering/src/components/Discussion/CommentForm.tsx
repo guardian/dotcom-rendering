@@ -24,7 +24,6 @@ import { Row } from './Row';
 
 type Props = {
 	shortUrl: string;
-	format: ArticleFormat;
 	user: SignedInUser;
 	onAddComment: (response: CommentType) => void;
 	setCommentBeingRepliedTo?: () => void;
@@ -205,7 +204,6 @@ const simulateNewComment = (
 
 export const CommentForm = ({
 	shortUrl,
-	format,
 	onAddComment,
 	user,
 	setCommentBeingRepliedTo,
@@ -421,7 +419,6 @@ export const CommentForm = ({
 	if (userNameMissing && body) {
 		return (
 			<FirstCommentWelcome
-				format={format}
 				body={body}
 				error={error}
 				submitForm={submitUserName}
@@ -503,7 +500,6 @@ export const CommentForm = ({
 					<Row>
 						<>
 							<PillarButton
-								format={format}
 								type="submit"
 								linkName="post comment"
 								size="small"
@@ -514,7 +510,6 @@ export const CommentForm = ({
 								<>
 									<Space amount={3} />
 									<PillarButton
-										format={format}
 										onClick={fetchShowPreview}
 										priority="secondary"
 										linkName="preview-comment"
@@ -525,7 +520,6 @@ export const CommentForm = ({
 									<Space amount={3} />
 
 									<PillarButton
-										format={format}
 										onClick={resetForm}
 										priority="subdued"
 										linkName="cancel-post-comment"

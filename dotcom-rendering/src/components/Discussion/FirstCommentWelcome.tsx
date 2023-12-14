@@ -13,7 +13,6 @@ import { Row } from './Row';
 
 type Props = {
 	body: string;
-	format: ArticleFormat;
 	error?: string;
 	submitForm: (userName: string) => Promise<void>;
 	cancelSubmit: () => void;
@@ -43,7 +42,6 @@ const Text = ({ children }: { children: React.ReactNode }) => (
 
 export const FirstCommentWelcome = ({
 	body,
-	format,
 	error = '',
 	submitForm,
 	cancelSubmit,
@@ -130,7 +128,6 @@ export const FirstCommentWelcome = ({
 				/>
 				<Row>
 					<PillarButton
-						format={format}
 						onClick={() => void submitForm(userName)}
 						linkName="post comment"
 						size="small"
@@ -143,7 +140,6 @@ export const FirstCommentWelcome = ({
 						`}
 					></div>
 					<PillarButton
-						format={format}
 						priority="subdued"
 						onClick={cancelSubmit}
 						linkName="cancel-post-comment"

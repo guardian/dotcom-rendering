@@ -4308,6 +4308,76 @@ const recommendationCountArrowSelectedLight: PaletteFunction = () =>
 const recommendationCountArrowSelectedDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 
+const discussionLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[400];
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 400);
+		case Pillar.News:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+		default:
+			return sourcePalette.news[400];
+	}
+};
+const discussionDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[500];
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case Pillar.News:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+		default:
+			return sourcePalette.news[500];
+	}
+};
+
+const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[300];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[300];
+		default:
+			return sourcePalette.news[300];
+	}
+};
+
+const discussionSecondaryButtonHover: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.Culture:
+			return sourcePalette.culture[800];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[800];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[800];
+		case Pillar.Sport:
+			return sourcePalette.sport[800];
+		case Pillar.News:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.Labs:
+		default:
+			return sourcePalette.news[800];
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -5006,6 +5076,18 @@ const paletteColours = {
 	'--recommendation-count-arrow-selected': {
 		light: recommendationCountArrowSelectedLight,
 		dark: recommendationCountArrowSelectedDark,
+	},
+	'--discussion-colour': {
+		light: discussionLight,
+		dark: discussionDark,
+	},
+	'--discussion-primary-button-background': {
+		light: discussionPrimaryButtonBackground,
+		dark: discussionPrimaryButtonBackground,
+	},
+	'--discussion-secondary-button-hover': {
+		light: discussionSecondaryButtonHover,
+		dark: discussionSecondaryButtonHover,
 	},
 } satisfies PaletteColours;
 
