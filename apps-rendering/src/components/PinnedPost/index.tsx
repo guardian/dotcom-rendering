@@ -187,8 +187,7 @@ const PinnedPost: FC<Props> = ({ pinnedPost, format, edition }: Props) => {
 				/>
 			</div>
 			<div id="pinned-post-overlay" css={overlayStyles} />
-			{/* eslint-disable jsx-a11y/label-has-associated-control --
-				i don't know why it's failing, it has htmlFor */}
+
 			<label
 				css={fakeButtonStyles(format)}
 				htmlFor="pinned-post-checkbox"
@@ -203,7 +202,6 @@ const PinnedPost: FC<Props> = ({ pinnedPost, format, edition }: Props) => {
 					</span>
 				</>
 			</label>
-			{/* eslint-enable jsx-a11y/label-has-associated-control */}
 		</div>
 	);
 };
