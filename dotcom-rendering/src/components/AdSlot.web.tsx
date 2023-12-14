@@ -195,6 +195,7 @@ const merchandisingAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.billboard.height + labelHeight}px;
 	margin: 12px auto;
+	max-width: ${breakpoints['wide']}px;
 
 	${from.desktop} {
 		margin: 0;
@@ -545,9 +546,9 @@ export const AdSlot = ({
 							'ad-slot--merchandising-high',
 						].join(' ')}
 						css={[
-							merchandisingAdStyles,
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
+							merchandisingAdStyles,
 						]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
@@ -571,9 +572,9 @@ export const AdSlot = ({
 							'ad-slot--merchandising',
 						].join(' ')}
 						css={[
-							merchandisingAdStyles,
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
+							merchandisingAdStyles,
 						]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
