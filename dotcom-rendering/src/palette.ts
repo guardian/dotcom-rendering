@@ -4345,7 +4345,7 @@ const discussionDark: PaletteFunction = ({ theme }) => {
 };
 
 const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
-const discussionLinkDark: PaletteFunction = () => sourcePalette.neutral[100];
+const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
 const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
 	switch (theme) {
