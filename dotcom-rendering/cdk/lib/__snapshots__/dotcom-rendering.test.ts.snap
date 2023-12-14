@@ -1035,7 +1035,7 @@ sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make 
                   {
                     "Ref": "ELKStreamId",
                   },
-                  " /var/log/dotcom-rendering/dotcom-rendering.log",
+                  " "/var/log/dotcom-rendering/dotcom-rendering.log"",
                 ],
               ],
             },
