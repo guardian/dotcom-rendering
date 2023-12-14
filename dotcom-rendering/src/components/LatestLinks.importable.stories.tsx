@@ -173,13 +173,16 @@ export const WorldCupFinal2023 = () => {
 };
 WorldCupFinal2023.storyName = 'World Cup Final 2023';
 WorldCupFinal2023.decorators = [
-	splitTheme([
-		{
-			theme: Pillar.Sport,
-			design: ArticleDesign.LiveBlog,
-			display: ArticleDisplay.Standard,
-		},
-	]),
+	splitTheme(
+		[
+			{
+				theme: Pillar.Sport,
+				design: ArticleDesign.LiveBlog,
+				display: ArticleDisplay.Standard,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
 
 export const LondonPride2022 = () => {
@@ -201,11 +204,14 @@ export const LondonPride2022 = () => {
 };
 LondonPride2022.storyName = 'London Pride 2022';
 LondonPride2022.decorators = [
-	splitTheme([
-		{
-			theme: Pillar.News,
-			design: ArticleDesign.LiveBlog,
-			display: ArticleDisplay.Standard,
-		},
-	]),
+	splitTheme(
+		[
+			{
+				theme: Pillar.News,
+				design: ArticleDesign.LiveBlog,
+				display: ArticleDisplay.Standard,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
 ];
