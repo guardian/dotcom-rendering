@@ -4411,6 +4411,21 @@ const firstCommentPreviewLight: PaletteFunction = () =>
 const firstCommentPreviewDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
+const discussionPaginationTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const discussionPaginationTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const discussionPaginationBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const discussionPaginationBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+
+const discussionPaginationBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const discussionPaginationBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
 // ----- Palette ----- //
 
 /**
@@ -5137,6 +5152,18 @@ const paletteColours = {
 	'--discussion-report-border': {
 		light: discussionReportBorderLight,
 		dark: discussionReportBorderDark,
+	},
+	'--discussion-pagination-text': {
+		light: discussionPaginationTextLight,
+		dark: discussionPaginationTextDark,
+	},
+	'--discussion-pagination-background': {
+		light: discussionPaginationBackgroundLight,
+		dark: discussionPaginationBackgroundDark,
+	},
+	'--discussion-pagination-border': {
+		light: discussionPaginationBorderLight,
+		dark: discussionPaginationBorderDark,
 	},
 	'--comment-form-input-background': {
 		light: commentFormInputBackgroundLight,
