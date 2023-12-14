@@ -6,6 +6,12 @@
 import type { OphanComponentEvent } from '@guardian/libs';
 
 const OPHAN_COMPONENT_ID_CTAS_VIEW = 'contributions-epic-ctas-view';
+const OPHAN_COMPONENT_ID_APPLEPAY_AUTHORISED =
+	'contributions-epic-applepay-authorised';
+const OPHAN_COMPONENT_ID_APPLEPAY_VIEW = 'contributions-epic-applepay-view';
+const OPHAN_COMPONENT_ID_APPLEPAY_CTA = 'contributions-epic-applepay-cta';
+const OPHAN_COMPONENT_ID_PRIMARY_CTA = 'contributions-epic-primary-cta';
+const OPHAN_COMPONENT_ID_SECONDARY_CTA = 'contributions-epic-secondary-cta';
 const OPHAN_COMPONENT_ID_REMINDER_VIEW = 'contributions-epic-reminder-view';
 const OPHAN_COMPONENT_ID_REMINDER_OPEN = 'contributions-epic-reminder-open';
 const OPHAN_COMPONENT_ID_REMINDER_SET = 'contributions-epic-reminder-set';
@@ -41,6 +47,46 @@ export const OPHAN_COMPONENT_EVENT_CTAS_VIEW: OphanComponentEvent = {
 		id: OPHAN_COMPONENT_ID_CTAS_VIEW,
 	},
 	action: 'VIEW',
+};
+
+export const OPHAN_COMPONENT_EVENT_APPLEPAY_VIEW: OphanComponentEvent = {
+	component: {
+		componentType: 'ACQUISITIONS_OTHER',
+		id: OPHAN_COMPONENT_ID_APPLEPAY_VIEW,
+	},
+	action: 'VIEW',
+};
+
+export const OPHAN_COMPONENT_EVENT_APPLEPAY_AUTHORISED: OphanComponentEvent = {
+	component: {
+		componentType: 'ACQUISITIONS_OTHER',
+		id: OPHAN_COMPONENT_ID_APPLEPAY_AUTHORISED,
+	},
+	action: 'CLICK',
+};
+
+export const OPHAN_COMPONENT_EVENT_APPLEPAY_CTA: OphanComponentEvent = {
+	component: {
+		componentType: 'ACQUISITIONS_OTHER',
+		id: OPHAN_COMPONENT_ID_APPLEPAY_CTA,
+	},
+	action: 'CLICK',
+};
+
+export const OPHAN_COMPONENT_EVENT_PRIMARY_CTA: OphanComponentEvent = {
+	component: {
+		componentType: 'ACQUISITIONS_OTHER',
+		id: OPHAN_COMPONENT_ID_PRIMARY_CTA,
+	},
+	action: 'CLICK',
+};
+
+export const OPHAN_COMPONENT_EVENT_SECONDARY_CTA: OphanComponentEvent = {
+	component: {
+		componentType: 'ACQUISITIONS_OTHER',
+		id: OPHAN_COMPONENT_ID_SECONDARY_CTA,
+	},
+	action: 'CLICK',
 };
 
 export const OPHAN_COMPONENT_EVENT_REMINDER_OPEN: OphanComponentEvent = {
