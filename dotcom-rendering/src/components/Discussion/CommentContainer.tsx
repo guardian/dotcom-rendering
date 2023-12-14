@@ -16,7 +16,6 @@ import { PillarButton } from './PillarButton';
 
 type Props = {
 	comment: CommentType;
-	format: ArticleFormat;
 	isClosedForComments: boolean;
 	shortUrl: string;
 	user?: SignedInUser;
@@ -72,7 +71,6 @@ export const avatar = (avatarSize: number) => css`
 
 export const CommentContainer = ({
 	comment,
-	format,
 	isClosedForComments,
 	user,
 	shortUrl,
@@ -124,7 +122,6 @@ export const CommentContainer = ({
 		<div css={[commentToScrollTo === comment.id && selectedStyles]}>
 			<Comment
 				comment={comment}
-				format={format}
 				isClosedForComments={isClosedForComments}
 				setCommentBeingRepliedTo={setCommentBeingRepliedTo}
 				user={user}
@@ -143,7 +140,6 @@ export const CommentContainer = ({
 								<li key={responseComment.id}>
 									<Comment
 										comment={responseComment}
-										format={format}
 										isClosedForComments={
 											isClosedForComments
 										}
@@ -209,7 +205,6 @@ export const CommentContainer = ({
 							css={nestingStyles}
 						>
 							<CommentReplyPreview
-								format={format}
 								commentBeingRepliedTo={commentBeingRepliedTo}
 							/>
 							<CommentForm
