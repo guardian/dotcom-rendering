@@ -4259,13 +4259,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@guardian/bridget@npm:2.5.0":
-  version: 2.5.0
-  resolution: "@guardian/bridget@npm:2.5.0"
-  checksum: a9e6a5e4ec9d39f79eb7667c787f51af060f1c6e5a8a9208b9abd004bb9c15c787cfec5e2534623fe7fd6c6ed2e86294601c9fbff74d97ffd3641001c60dfcf2
-  languageName: node
-  linkType: hard
-
 "@guardian/bridget@npm:2.6.0":
   version: 2.6.0
   resolution: "@guardian/bridget@npm:2.6.0"
@@ -4458,7 +4451,7 @@ __metadata:
     "@emotion/server": "npm:11.11.0"
     "@guardian/ab-core": "npm:5.0.0"
     "@guardian/braze-components": "npm:16.2.0"
-    "@guardian/bridget": "npm:2.5.0"
+    "@guardian/bridget": "npm:2.6.0"
     "@guardian/browserslist-config": "npm:5.0.0"
     "@guardian/cdk": "npm:50.10.6"
     "@guardian/commercial": "npm:11.25.0"
