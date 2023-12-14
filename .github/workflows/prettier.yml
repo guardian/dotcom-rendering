@@ -6,13 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
 
-      - run: yarn install --immutable
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
 
       - name: Prettier check
         run: yarn prettier:check

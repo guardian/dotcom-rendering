@@ -4253,6 +4253,15 @@ const mobileCommentCountFill: PaletteFunction = (format) => {
 	return commentCountFill(format);
 };
 
+const explainerAtomBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const explainerAtomBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+const explainerAtomAccentLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+const explainerAtomAccentDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 const signInLinkLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
@@ -4298,6 +4307,109 @@ const recommendationCountArrowSelectedLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const recommendationCountArrowSelectedDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
+
+const discussionLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[400];
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 400);
+		case Pillar.News:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+		default:
+			return sourcePalette.news[400];
+	}
+};
+const discussionDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[500];
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case Pillar.News:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+		default:
+			return sourcePalette.news[500];
+	}
+};
+
+const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
+const discussionLinkDark: PaletteFunction = () => sourcePalette.neutral[100];
+
+const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[300];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[300];
+		default:
+			return sourcePalette.news[300];
+	}
+};
+
+const discussionButtonHover: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.News:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.Labs:
+		default:
+			return sourcePalette.news[400];
+	}
+};
+
+const discussionReportBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const discussionReportBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const discussionReportBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const discussionReportBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const commentFormInputBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const commentFormInputBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const commentFormHeaderBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const commentFormHeaderBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const commentFormAddonBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const commentFormAddonBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+
+const firstCommentPreviewLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const firstCommentPreviewDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
 
 // ----- Palette ----- //
 
@@ -4954,6 +5066,14 @@ const paletteColours = {
 		light: mobileCommentCountFill,
 		dark: mobileCommentCountFill,
 	},
+	'--explainer-atom-background': {
+		light: explainerAtomBackgroundLight,
+		dark: explainerAtomBackgroundDark,
+	},
+	'--explainer-atom-accent': {
+		light: explainerAtomAccentLight,
+		dark: explainerAtomAccentDark,
+	},
 	'--sign-in-link': {
 		light: signInLinkLight,
 		dark: signInLinkDark,
@@ -4989,6 +5109,46 @@ const paletteColours = {
 	'--recommendation-count-arrow-selected': {
 		light: recommendationCountArrowSelectedLight,
 		dark: recommendationCountArrowSelectedDark,
+	},
+	'--discussion-colour': {
+		light: discussionLight,
+		dark: discussionDark,
+	},
+	'--discussion-link': {
+		light: discussionLinkLight,
+		dark: discussionLinkDark,
+	},
+	'--discussion-primary-button-background': {
+		light: discussionPrimaryButtonBackground,
+		dark: discussionPrimaryButtonBackground,
+	},
+	'--discussion-button-hover': {
+		light: discussionButtonHover,
+		dark: discussionButtonHover,
+	},
+	'--first-comment-preview': {
+		light: firstCommentPreviewLight,
+		dark: firstCommentPreviewDark,
+	},
+	'--discussion-report-background': {
+		light: discussionReportBackgroundLight,
+		dark: discussionReportBackgroundDark,
+	},
+	'--discussion-report-border': {
+		light: discussionReportBorderLight,
+		dark: discussionReportBorderDark,
+	},
+	'--comment-form-input-background': {
+		light: commentFormInputBackgroundLight,
+		dark: commentFormInputBackgroundDark,
+	},
+	'--comment-form-header-background': {
+		light: commentFormHeaderBackgroundLight,
+		dark: commentFormHeaderBackgroundDark,
+	},
+	'--comment-form-addon-button': {
+		light: commentFormAddonBackgroundLight,
+		dark: commentFormAddonBackgroundDark,
 	},
 } satisfies PaletteColours;
 

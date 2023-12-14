@@ -37,7 +37,6 @@ export type Palette = {
 		designTag: Colour;
 		lightboxDivider: Colour;
 		messageForm: Colour;
-		discussionPillarButton: Colour;
 		dynamoSublink: Colour;
 	};
 	fill: {
