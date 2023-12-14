@@ -65,7 +65,6 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithoutReply} //TODO: should be comments with reponses
-				format={format}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -103,7 +102,6 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithoutReply} //TODO: should be comments with reponses
-				format={format}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -140,7 +138,6 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithReply} //TODO: should be comments with reponses
-				format={format}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -178,7 +175,6 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithoutReply} //TODO: should be comments with reponses
-				format={format}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}

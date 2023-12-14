@@ -16,7 +16,6 @@ import { PillarButton } from './PillarButton';
 
 type Props = {
 	comment: CommentType;
-	format: ArticleFormat;
 	isClosedForComments: boolean;
 	shortUrl: string;
 	user?: SignedInUser;
@@ -72,7 +71,6 @@ export const avatar = (avatarSize: number) => css`
 
 export const CommentContainer = ({
 	comment,
-	format,
 	isClosedForComments,
 	user,
 	shortUrl,
