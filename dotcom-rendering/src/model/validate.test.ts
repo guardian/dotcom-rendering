@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import { validateAsArticleType } from './validate';
 
 // TODO avoid fetch, write script to fetch new version in gen-schema.js and store as fixture files
