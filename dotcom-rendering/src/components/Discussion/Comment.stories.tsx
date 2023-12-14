@@ -149,7 +149,6 @@ const defaultFormat = {
 export const Root = () => (
 	<Comment
 		comment={commentData}
-		format={defaultFormat}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -170,10 +169,6 @@ Root.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 export const RootMobile = () => (
 	<Comment
 		comment={commentData}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Sport,
-		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
 		isClosedForComments={false}
@@ -204,10 +199,6 @@ RootMobile.decorators = [
 export const ReplyComment = () => (
 	<Comment
 		comment={replyCommentData}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Lifestyle,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
@@ -238,10 +229,6 @@ ReplyComment.decorators = [
 export const MobileReply = () => (
 	<Comment
 		comment={replyCommentData}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Culture,
-		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
 		isClosedForComments={false}
@@ -272,10 +259,6 @@ MobileReply.decorators = [
 export const LongMobileReply = () => (
 	<Comment
 		comment={longReplyCommentData}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Culture,
-		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
 		isClosedForComments={false}
@@ -306,10 +289,6 @@ LongMobileReply.decorators = [
 export const LongBothMobileReply = () => (
 	<Comment
 		comment={longBothReplyCommentData}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Culture,
-		}}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={true}
 		isClosedForComments={false}
@@ -343,7 +322,6 @@ export const PickedComment = () => (
 			...commentData,
 			isHighlighted: true,
 		}}
-		format={defaultFormat}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -368,10 +346,6 @@ PickedComment.decorators = [
 export const StaffUserComment = () => (
 	<Comment
 		comment={commentStaffData}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Opinion,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -396,10 +370,6 @@ StaffUserComment.decorators = [
 export const ContributorUserComment = () => (
 	<Comment
 		comment={commentContributorData}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Opinion,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -427,7 +397,6 @@ export const PickedStaffUserComment = () => (
 			...commentStaffData,
 			isHighlighted: true,
 		}}
-		format={defaultFormat}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -452,10 +421,6 @@ export const PickedStaffUserCommentMobile = () => (
 		comment={{
 			...commentStaffData,
 			isHighlighted: true,
-		}}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Sport,
 		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
@@ -491,7 +456,6 @@ export const ContributorUserCommentDesktop = () => (
 			...commentContributorData,
 			isHighlighted: true,
 		}}
-		format={defaultFormat}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -517,10 +481,6 @@ export const ContributorUserCommentMobile = () => (
 		comment={{
 			...commentContributorData,
 			isHighlighted: true,
-		}}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Sport,
 		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
@@ -553,10 +513,6 @@ ContributorUserCommentMobile.decorators = [
 export const LoggedInAsModerator = () => (
 	<Comment
 		comment={commentData}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Lifestyle,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		user={staffUser}
@@ -582,10 +538,6 @@ LoggedInAsModerator.decorators = [
 export const LoggedInAsUser = () => (
 	<Comment
 		comment={commentData}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Lifestyle,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		user={user}
@@ -611,10 +563,6 @@ LoggedInAsUser.decorators = [
 export const BlockedComment = () => (
 	<Comment
 		comment={blockedCommentData}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Culture,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -639,10 +587,6 @@ BlockedComment.decorators = [
 export const MutedComment = () => (
 	<Comment
 		comment={blockedCommentData}
-		format={{
-			...defaultFormat,
-			theme: Pillar.Sport,
-		}}
 		isClosedForComments={false}
 		setCommentBeingRepliedTo={() => {}}
 		isReply={false}
@@ -667,10 +611,6 @@ MutedComment.decorators = [
 export const ClosedForComments = () => (
 	<Comment
 		comment={commentData}
-		format={defaultFormat}
-		isClosedForComments={true}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}

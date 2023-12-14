@@ -2,12 +2,11 @@ import { css } from '@emotion/react';
 import {
 	palette as sourcePalette,
 	space,
-	text,
 	textSans,
 } from '@guardian/source-foundations';
 import { Button, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { palette as schemedPalette } from '../../palette';
 import type { CommentType } from '../../types/discussion';
 import { Row } from './Row';
 
@@ -75,12 +74,12 @@ const commentStyles = css`
 `;
 
 const blueLink = css`
-	color: ${text.anchorPrimary};
+	color: ${schemedPalette('--discussion-link')};
 `;
 
-const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
+const buttonLinkPillarBaseStyles = css`
 	button {
-		color: ${decidePalette(format).discussionGeneric};
+		color: ${schemedPalette('--discussion-colour')};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -89,7 +88,7 @@ const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${decidePalette(format).discussionGeneric};
+			text-decoration-color: ${schemedPalette('--discussion-colour')};
 		}
 	}
 `;
@@ -129,7 +128,7 @@ export const CommentReplyPreview = ({
 				<Space amount={3} />
 				<div
 					css={[
-						buttonLinkPillarBaseStyles(format),
+						buttonLinkPillarBaseStyles,
 						css`
 							button {
 								${textSans.small({ fontWeight: 'bold' })}
