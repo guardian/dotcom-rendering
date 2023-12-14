@@ -49,9 +49,9 @@ const commentControlsLink = css`
 			text-decoration: none;
 			text-decoration-color: none;
 			span {
-				color: ${schemedPalette('--discussion-link')};
+				color: ${schemedPalette('--discussion-colour')};
 				text-decoration: underline;
-				text-decoration-color: ${schemedPalette('--discussion-link')};
+				text-decoration-color: ${schemedPalette('--discussion-colour')};
 			}
 		}
 	}
