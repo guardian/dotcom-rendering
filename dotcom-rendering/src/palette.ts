@@ -4037,7 +4037,7 @@ const mobileCommentCountFill: PaletteFunction = (format) => {
 const explainerAtomBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const explainerAtomBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[10];
+	sourcePalette.neutral[20];
 const explainerAtomAccentLight: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const explainerAtomAccentDark: PaletteFunction = () =>
