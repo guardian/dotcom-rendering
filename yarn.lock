@@ -4491,7 +4491,7 @@ __metadata:
     "@testing-library/user-event": "npm:14.4.3"
     "@types/amphtml-validator": "npm:1.0.1"
     "@types/body-parser": "npm:1.19.2"
-    "@types/clean-css": "npm:4.2.6"
+    "@types/clean-css": "npm:4.2.11"
     "@types/compression": "npm:1.7.2"
     "@types/connect": "npm:3.4.35"
     "@types/crypto-js": "npm:4.1.3"
@@ -4545,6 +4545,7 @@ __metadata:
     browserslist: "npm:4.21.9"
     buffer: "npm:6.0.3"
     chalk: "npm:4.1.2"
+    clean-css: "npm:5.3.3"
     compare-versions: "npm:6.1.0"
     compression: "npm:1.7.4"
     constructs: "npm:10.2.69"
@@ -8710,23 +8711,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/clean-css@npm:*, @types/clean-css@npm:4.2.10":
-  version: 4.2.10
-  resolution: "@types/clean-css@npm:4.2.10"
+"@types/clean-css@npm:*, @types/clean-css@npm:4.2.11":
+  version: 4.2.11
+  resolution: "@types/clean-css@npm:4.2.11"
   dependencies:
     "@types/node": "npm:*"
     source-map: "npm:^0.6.0"
-  checksum: d4f21cc0e968c2715414c2b61dd87b41ce8d8201da6b8d55f2b83fdff8d971462b85ce2fe8b1ff5a47a026a17e40a161a23506f1e36701f678e556ebb901c683
-  languageName: node
-  linkType: hard
-
-"@types/clean-css@npm:4.2.6":
-  version: 4.2.6
-  resolution: "@types/clean-css@npm:4.2.6"
-  dependencies:
-    "@types/node": "npm:*"
-    source-map: "npm:^0.6.0"
-  checksum: 1fa527ddb77c84571002ea359660181f3c68b2c223c6087c7229b713292746aefc89e61f08e1664f77f8b20986675459f779ed707dfcebc60f2411fb59899947
+  checksum: bd9848821982500854fed36e672981d9ff286a4cf37b8a7d15a51bbb3f3a3e90676ec18e29e0e753a4c1785c108ca0c30939209cc7dd72712a32fa9d727ea601
   languageName: node
   linkType: hard
 
@@ -10936,7 +10927,7 @@ __metadata:
     "@storybook/react": "npm:7.6.4"
     "@storybook/react-webpack5": "npm:7.6.4"
     "@storybook/theming": "npm:7.6.4"
-    "@types/clean-css": "npm:4.2.10"
+    "@types/clean-css": "npm:4.2.11"
     "@types/compression": "npm:1.7.2"
     "@types/express": "npm:4.17.21"
     "@types/html-webpack-plugin": "npm:3.2.9"
@@ -10952,7 +10943,7 @@ __metadata:
     aws-cdk-lib: "npm:2.90.0"
     babel-loader: "npm:9.1.3"
     buffer: "npm:6.0.3"
-    clean-css: "npm:5.3.2"
+    clean-css: "npm:5.3.3"
     compare-versions: "npm:6.1.0"
     compression: "npm:1.7.4"
     constructs: "npm:10.2.69"
@@ -12454,12 +12445,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clean-css@npm:5.3.2, clean-css@npm:^5.2.2":
-  version: 5.3.2
-  resolution: "clean-css@npm:5.3.2"
+"clean-css@npm:5.3.3, clean-css@npm:^5.2.2":
+  version: 5.3.3
+  resolution: "clean-css@npm:5.3.3"
   dependencies:
     source-map: "npm:~0.6.0"
-  checksum: 315e0e81306524bd2c1905fa6823bf7658be40799b78f446e5e6922808718d2b80266fb3e96842a06176fa683bc2c1a0d2827b08d154e2f9cf136d7bda909d33
+  checksum: 381de7523e23f3762eb180e327dcc0cedafaf8cb1cd8c26b7cc1fc56e0829a92e734729c4f955394d65ed72fb62f82d8baf78af34b33b8a7d41ebad2accdd6fb
   languageName: node
   linkType: hard
 
