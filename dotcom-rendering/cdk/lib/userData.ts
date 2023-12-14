@@ -34,7 +34,7 @@ export const getUserData = ({
 
 		`sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make prod`,
 
-		`/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${region} ${elkStreamId} /var/log/dotcom-rendering/dotcom-rendering.log`,
+		`/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${region} ${elkStreamId} "/var/log/dotcom-rendering/dotcom-rendering.log"`,
 	].join('\n');
 
 	return userData;
