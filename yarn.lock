@@ -9230,7 +9230,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node-int64@npm:*, @types/node-int64@npm:^0.4.29":
+"@types/node-int64@npm:*, @types/node-int64@npm:0.4.32, @types/node-int64@npm:^0.4.29":
   version: 0.4.32
   resolution: "@types/node-int64@npm:0.4.32"
   dependencies:
@@ -10914,6 +10914,7 @@ __metadata:
     "@types/jest": "npm:28.1.8"
     "@types/jsdom": "npm:16.2.15"
     "@types/node": "npm:18.18.14"
+    "@types/node-int64": "npm:0.4.32"
     "@types/react": "npm:18.2.45"
     "@types/react-dom": "npm:18.2.17"
     "@types/react-test-renderer": "npm:18.0.0"
