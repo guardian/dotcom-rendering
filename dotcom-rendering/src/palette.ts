@@ -4970,6 +4970,7 @@ const paletteColours = {
 	'--explainer-atom-accent': {
 		light: explainerAtomAccentLight,
 		dark: explainerAtomAccentDark,
+	},
 	'--sign-in-link': {
 		light: signInLinkLight,
 		dark: signInLinkDark,
