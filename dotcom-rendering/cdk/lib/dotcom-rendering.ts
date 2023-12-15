@@ -1,5 +1,9 @@
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
-import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
+import {
+	GuDistributionBucketParameter,
+	GuStack,
+	GuStringParameter,
+} from '@guardian/cdk/lib/constructs/core';
 import {
 	GuSecurityGroup,
 	GuVpc,
@@ -238,12 +242,10 @@ export class DotcomRendering extends GuStack {
 			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
 			userData: getUserData({
 				app,
-				region,
 				stage,
-				elkStreamId: new GuStringParameter(this, 'ELKStreamId', {
-					fromSSM: true,
-					default: `${ssmPrefix}/logging.stream.name`,
-				}).valueAsString,
+				artifactsBucket:
+					GuDistributionBucketParameter.getInstance(this)
+						.valueAsString,
 			}),
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
