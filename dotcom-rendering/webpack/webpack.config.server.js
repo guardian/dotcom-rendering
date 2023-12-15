@@ -21,7 +21,8 @@ const swcLoader = [
 	},
 ];
 
-module.exports = /** @type {import('webpack').Configuration} */ ({
+/** @type {import('webpack').Configuration} */
+module.exports = {
 	entry: {
 		server: './src/server/server.ts',
 	},
@@ -81,4 +82,4 @@ module.exports = /** @type {import('webpack').Configuration} */ ({
 			svgr,
 		],
 	},
-});
+};

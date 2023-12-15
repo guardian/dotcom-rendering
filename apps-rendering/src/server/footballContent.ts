@@ -13,8 +13,6 @@ import {
 import type { Option } from '../../vendor/@guardian/types/index';
 import { padStart } from 'date';
 import { fold, pipe } from 'lib';
-import fetch from 'node-fetch';
-import type { Response } from 'node-fetch';
 import type { Parser } from 'parser';
 import {
 	arrayParser,
