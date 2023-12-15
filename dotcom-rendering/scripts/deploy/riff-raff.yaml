@@ -7,11 +7,11 @@ templates:
   cloudformation:
     type: cloud-formation
     parameters:
-        amiEncrypted: true
-        amiTags:
-            # Keep the Node version in sync with `.nvmrc`
-            Recipe: dotcom-rendering-ARM-jammy-node-18.18.2-cdk-base
-            AmigoStage: PROD
+      amiEncrypted: true
+      amiTags:
+        # Keep the Node version in sync with `.nvmrc`
+        Recipe: dotcom-rendering-ARM-jammy-node-18.18.2-cdk-base
+        AmigoStage: PROD
 deployments:
   frontend-cfn:
     template: cloudformation
