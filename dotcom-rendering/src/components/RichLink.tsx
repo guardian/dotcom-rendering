@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { FontScaleArgs } from '@guardian/source-foundations';
 import { from, headline, textSans } from '@guardian/source-foundations';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
@@ -62,50 +63,41 @@ const headerStyles = css`
 	color: ${themePalette('--rich-link-header')};
 `;
 
-const smallFontStyles = css`
+/** Re-sizes the headline.xxxsmall to 14px / 0.875rem as this isn't available in source */
+const miniHeadlineOverrideStyles = (fontArgs: FontScaleArgs) => css`
+	${headline.xxxsmall(fontArgs)};
 	font-size: 0.875rem;
 `;
 
-const titleStyles = () => {
-	const fontWeight = 'regular';
+const titleStyles = (parentIsBlog: boolean) => css`
+	${parentIsBlog
+		? headline.xxxsmall({ fontWeight: 'regular' })
+		: miniHeadlineOverrideStyles({ fontWeight: 'regular' })};
+	padding-top: 1px;
+	padding-bottom: 1px;
 
-	return css`
-		${headline.xxxsmall({ fontWeight })};
-		padding-top: 1px;
-		padding-bottom: 1px;
+	${from.wide} {
+		${headline.xxsmall({ fontWeight: 'regular' })};
+		padding-bottom: 5px;
+	}
+`;
 
-		${from.wide} {
-			${headline.xxsmall({ fontWeight })};
-			padding-bottom: 5px;
-		}
-	`;
-};
+const labsTitleStyles = css`
+	${textSans.small({ fontWeight: 'bold' })}
 
-const labsTitleStyles = () => {
-	const fontWeight = 'bold';
+	${from.wide} {
+		${textSans.medium({ fontWeight: 'bold' })}
+	}
+`;
 
-	return css`
-		${textSans.small({ fontWeight })}
+const bylineStyles = css`
+	color: ${themePalette('--rich-link-text')};
+	${miniHeadlineOverrideStyles({ fontStyle: 'italic' })};
 
-		${from.wide} {
-			${textSans.medium({ fontWeight })}
-		}
-	`;
-};
-
-const bylineStyles = () => {
-	const fontStyle = 'italic';
-
-	return css`
-		color: ${themePalette('--rich-link-text')};
-		${headline.xxxsmall({ fontStyle })};
-		${smallFontStyles}
-
-		${from.wide} {
-			${headline.xxsmall({ fontStyle })};
-		}
-	`;
-};
+	${from.wide} {
+		${headline.xxsmall({ fontStyle: 'italic' })};
+	}
+`;
 
 const contributorWrapperStyles = css`
 	width: 5rem;
@@ -140,21 +132,16 @@ const readMoreStyles = css`
 	padding-bottom: 6px;
 `;
 
-const readMoreTextStyle = () => {
-	const fontWeight = 'medium';
+const readMoreTextStyle = css`
+	${miniHeadlineOverrideStyles({ fontWeight: 'medium' })};
+	color: ${themePalette('--rich-link-text')};
+	padding-left: 4px;
+	text-decoration: none;
 
-	return css`
-		${headline.xxxsmall({ fontWeight })};
-		${smallFontStyles}
-		color: ${themePalette('--rich-link-text')};
-		padding-left: 4px;
-		text-decoration: none;
-
-		${from.wide} {
-			${headline.xxxsmall({ fontWeight })}
-		}
-	`;
-};
+	${from.wide} {
+		${headline.xxxsmall({ fontWeight: 'medium' })}
+	}
+`;
 
 const labsReadMoreTextStyle = css`
 	${textSans.medium({ fontWeight: 'regular' })}
@@ -246,8 +233,7 @@ export const RichLink = ({
 						<div css={headerStyles}>
 							<div
 								css={[
-									titleStyles,
-									!parentIsBlog && smallFontStyles,
+									titleStyles(parentIsBlog),
 									isLabs && labsTitleStyles,
 								]}
 							>
@@ -300,9 +286,7 @@ export const RichLink = ({
 							<div
 								css={[
 									readMoreTextStyle,
-									isLabs
-										? labsReadMoreTextStyle
-										: smallFontStyles,
+									isLabs && labsReadMoreTextStyle,
 								]}
 							>
 								{readMoreText(contentType)}

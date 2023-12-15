@@ -108,7 +108,10 @@ const roleCss = {
 		width: 8.75rem;
 		margin-right: 20px;
 
-		/* Acts as until.mobileMedium but accounts for font scaling */
+		/*
+		 Acts as until.mobileMedium but accounts for font scaling. On small screens and/or
+		 at certain font sizes, the RichLink will change to a full width version
+		*/
 		@media (max-width: 23.4rem) {
 			width: 100%;
 			box-sizing: border-box;
