@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, space, textSans } from '@guardian/source-foundations';
-import { neutral } from '@guardian/source-foundations/cjs/colour/palette';
+import { from, palette, space, textSans } from '@guardian/source-foundations';
 import {
 	Hide,
 	LinkButton,
@@ -52,7 +51,7 @@ const bold = css`
 
 const decidePaginationCss = css`
 	color: ${themePalette('--pagination-text')};
-	border: 1px solid ${neutral[86]};
+	border: 1px solid ${palette.neutral[86]};
 	:hover {
 		border: 1px solid ${themePalette('--pagination-text')};
 	}
