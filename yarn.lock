@@ -4497,7 +4497,6 @@ __metadata:
     "@types/crypto-js": "npm:4.1.3"
     "@types/dompurify": "npm:3.0.2"
     "@types/express": "npm:4.17.21"
-    "@types/express-serve-static-core": "npm:4.17.33"
     "@types/gapi.analytics": "npm:0.0.4"
     "@types/google.analytics": "npm:0.0.42"
     "@types/he": "npm:1.2.0"
@@ -4578,7 +4577,6 @@ __metadata:
     eslint-stats: "npm:1.0.1"
     execa: "npm:5.1.1"
     express: "npm:4.18.2"
-    express-serve-static-core: "npm:0.1.1"
     fetch-mock: "npm:9.11.0"
     find: "npm:0.3.0"
     form-data: "npm:4.0.0"
@@ -8877,17 +8875,6 @@ __metadata:
     "@types/range-parser": "npm:*"
     "@types/send": "npm:*"
   checksum: 08db6ffff07b5d53d852bb0a078ea5ee6dc3eb581d8c8fdf0d65f48c641db2830658074c797844e618b0933ce4ca2ddd08191f9d79b12eb2ec3d66f8551716ec
-  languageName: node
-  linkType: hard
-
-"@types/express-serve-static-core@npm:4.17.33":
-  version: 4.17.33
-  resolution: "@types/express-serve-static-core@npm:4.17.33"
-  dependencies:
-    "@types/node": "npm:*"
-    "@types/qs": "npm:*"
-    "@types/range-parser": "npm:*"
-  checksum: 68f21adeb8cb7085014692daa8fd75b33be2cbb91f954f42fef4804e04cb34abbe8020918d7656243afec4882949ce0c4e8074eaf5a5f8dfbef704690799724a
   languageName: node
   linkType: hard
 
@@ -15317,13 +15304,6 @@ __metadata:
   version: 3.1.1
   resolution: "exponential-backoff@npm:3.1.1"
   checksum: 160456d2d647e6019640bd07111634d8c353038d9fa40176afb7cd49b0548bdae83b56d05e907c2cce2300b81cae35d800ef92fefb9d0208e190fa3b7d6bb579
-  languageName: node
-  linkType: hard
-
-"express-serve-static-core@npm:0.1.1":
-  version: 0.1.1
-  resolution: "express-serve-static-core@npm:0.1.1"
-  checksum: ca423f71ee2dfd0f39bf5b0d18c71d4c06e3d823c884b215ba8ddd9ba9cc80812159d9be01a9a45a1bbc77f06c96bde8e6220983aa6561de591d806c9426362d
   languageName: node
   linkType: hard
 
