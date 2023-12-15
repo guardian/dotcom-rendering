@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat } from '@guardian/libs';
 import {
 	lineHeights,
 	palette,
@@ -7,16 +6,16 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { decidePalette } from '../lib/decidePalette';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
+import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
+import { ContainerOverrides } from './ContainerOverrides';
 import { RelativeTime } from './RelativeTime.importable';
 
 type Props = {
 	id: string;
-	format: ArticleFormat;
 	direction: 'horizontal' | 'vertical';
 	isDynamo?: true;
 	containerPalette?: DCRContainerPalette;
@@ -89,7 +88,6 @@ const extractAboutThreeLines = (text: string) =>
  */
 export const LatestLinks = ({
 	id,
-	format,
 	direction,
 	isDynamo,
 	containerPalette,
@@ -105,9 +103,6 @@ export const LatestLinks = ({
 	}>(`https://api.nextgen.guardianapps.co.uk${id}.json?rendered=false`, {
 		refreshInterval: 9_600,
 	});
-
-	const { text } = decidePalette(format, containerPalette);
-	const kickerColour = isDynamo ? text.dynamoKicker : text.cardKicker;
 
 	const dividerColour = css`
 		color: ${containerPalette
@@ -134,38 +129,50 @@ export const LatestLinks = ({
 				revealStyles,
 				isDynamo || direction === 'horizontal' ? horizontal : vertical,
 				css`
-					color: ${text.cardHeadline};
+					color: ${themePalette('--card-headline-trail-text')};
 				`,
 			]}
 		>
 			{data && data.blocks.length >= 3 ? (
 				data.blocks.slice(0, 3).map((block, index) => (
 					<>
-						{index > 0 && (
-							<li
-								key={block.id + ' : divider'}
-								css={[dividerStyles, dividerColour]}
-							></li>
-						)}
-						<li
-							key={block.id}
-							css={linkStyles}
-							className={'reveal'}
+						<ContainerOverrides
+							containerPalette={containerPalette}
+							isDynamo={!!isDynamo}
 						>
-							<WithLink
-								linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
-								isDynamo={isDynamo}
+							{index > 0 && (
+								<li
+									key={block.id + ' : divider'}
+									css={[dividerStyles, dividerColour]}
+								></li>
+							)}
+							<li
+								key={block.id}
+								css={linkStyles}
+								className={'reveal'}
 							>
-								<div css={bold} style={{ color: kickerColour }}>
-									<RelativeTime
-										then={block.publishedDateTime}
-									/>
-								</div>
-								<span className="show-underline">
-									{extractAboutThreeLines(block.body)}
-								</span>
-							</WithLink>
-						</li>
+								<WithLink
+									linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
+									isDynamo={isDynamo}
+								>
+									<div
+										css={bold}
+										style={{
+											color: themePalette(
+												'--card-kicker-text',
+											),
+										}}
+									>
+										<RelativeTime
+											then={block.publishedDateTime}
+										/>
+									</div>
+									<span className="show-underline">
+										{extractAboutThreeLines(block.body)}
+									</span>
+								</WithLink>
+							</li>
+						</ContainerOverrides>
 					</>
 				))
 			) : (

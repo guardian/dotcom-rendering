@@ -3,12 +3,6 @@ export type Colour = string;
 export type Palette = {
 	text: {
 		headlineWhenMatch: Colour;
-		cardHeadline: Colour;
-		cardKicker: Colour;
-		dynamoHeadline: Colour;
-		dynamoKicker: Colour;
-		cardStandfirst: Colour;
-		cardFooter: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
 		lastUpdated: Colour;
@@ -30,14 +24,12 @@ export type Palette = {
 		analysisContrast: Colour;
 		analysisContrastHover: Colour;
 		audioAtom: Colour;
-		card: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
-		analysisUnderline: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -61,9 +53,6 @@ export type Palette = {
 		cardSupporting: Colour;
 		filterButton: Colour;
 		pagination: Colour;
-	};
-	topBar: {
-		card: Colour;
 	};
 	hover: {
 		standfirstLink: Colour;
