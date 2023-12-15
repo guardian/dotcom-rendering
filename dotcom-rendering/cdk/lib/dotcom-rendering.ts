@@ -1,6 +1,7 @@
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
 import {
 	GuDistributionBucketParameter,
+	GuLoggingStreamNameParameter,
 	GuStack,
 	GuStringParameter,
 } from '@guardian/cdk/lib/constructs/core';
@@ -192,11 +193,8 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining logical ID of resource created via CDK which cannot be changed easily',
 		});
 
-		const loggingStreamName = new GuStringParameter(
-			this,
-			'KinesisLoggingStreamName',
-			{ default: '/account/services/logging.stream.name', fromSSM: true },
-		).valueAsString;
+		const loggingStreamName =
+			GuLoggingStreamNameParameter.getInstance(this).valueAsString;
 
 		const instanceRole = new GuInstanceRole(this, {
 			app,

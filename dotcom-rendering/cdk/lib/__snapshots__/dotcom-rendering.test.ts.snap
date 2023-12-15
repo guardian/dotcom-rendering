@@ -12,14 +12,13 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuClassicLoadBalancer",
       "GuDistributionBucketParameter",
       "GuSecurityGroup",
-      "GuStringParameter",
+      "GuLoggingStreamNameParameter",
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuInstanceRole",
       "GuDescribeEC2Policy",
-      "GuLoggingStreamNameParameter",
       "GuLogShippingPolicy",
       "GuGetDistributablePolicy",
       "GuParameterStoreReadPolicy",
@@ -53,10 +52,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "ELBLogsParameter": {
       "Default": "/TEST/frontend/rendering/elb.logs.bucketName",
       "Description": "S3 Bucket Name for ELB logs",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-    "KinesisLoggingStreamName": {
-      "Default": "/account/services/logging.stream.name",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "LoggingStreamName": {
@@ -275,7 +270,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Key": "LogKinesisStreamName",
             "PropagateAtLaunch": true,
             "Value": {
-              "Ref": "KinesisLoggingStreamName",
+              "Ref": "LoggingStreamName",
             },
           },
           {
