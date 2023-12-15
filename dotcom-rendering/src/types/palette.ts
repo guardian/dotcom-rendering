@@ -7,7 +7,6 @@ export type Palette = {
 		standfirstLink: Colour;
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
-		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
