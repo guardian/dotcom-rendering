@@ -65,6 +65,7 @@
 		"@storybook/react": "7.6.4",
 		"@storybook/react-webpack5": "7.6.4",
 		"@storybook/theming": "7.6.4",
+		"@swc/register": "0.1.10",
 		"@types/clean-css": "4.2.11",
 		"@types/compression": "1.7.2",
 		"@types/express": "4.17.21",
