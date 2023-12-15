@@ -161,6 +161,9 @@ export class DotcomRendering extends GuStack {
 			stringValue: loadBalancer.loadBalancerDnsName,
 		});
 
+		const artifactsBucket =
+			GuDistributionBucketParameter.getInstance(this).valueAsString;
+
 		// ------------------------------------
 
 		// ------------------------------------
@@ -198,34 +201,13 @@ export class DotcomRendering extends GuStack {
 		const instanceRole = new GuInstanceRole(this, {
 			app,
 			additionalPolicies: [
-				// TODO - double check if we are duplicating policies that
-				// are provided by default through GuCDK
 				new GuAllowPolicy(this, 'AllowPolicyGetArtifactsBucket', {
 					actions: ['s3:GetObject'],
-					resources: ['arn:aws:s3:::aws-frontend-artifacts/*'],
+					resources: [`arn:aws:s3:::${artifactsBucket}/*`],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
 					actions: ['cloudwatch:*', 'logs:*'],
 					resources: ['*'],
-				}),
-				new GuAllowPolicy(this, 'AllowPolicyDescribeEc2Autoscaling', {
-					actions: [
-						'ec2:DescribeTags',
-						'ec2:DescribeInstances',
-						'autoscaling:DescribeAutoScalingGroups',
-						'autoscaling:DescribeAutoScalingInstances',
-					],
-					resources: ['*'],
-				}),
-				new GuAllowPolicy(this, 'AllowPolicyKinesis', {
-					actions: [
-						'kinesis:Describe',
-						'kinesis:PutRecord',
-						'kinesis:PutRecords',
-					],
-					resources: [
-						`arn:aws:kinesis:${this.region}:${this.account}:stream/${loggingStreamName}`,
-					],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
 					actions: ['kms:Decrypt', 'kms:DescribeKey'],
@@ -236,7 +218,7 @@ export class DotcomRendering extends GuStack {
 				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
 					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
 					resources: [
-						`arn:aws:ssm:${region}:${this.account}:parameter/${ssmPrefix}/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter${ssmPrefix}/*`,
 						// TODO - these SSM prefixes are dated, should convert the params to the naming structure above
 						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
 						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
@@ -259,9 +241,7 @@ export class DotcomRendering extends GuStack {
 			userData: getUserData({
 				app,
 				stage,
-				artifactsBucket:
-					GuDistributionBucketParameter.getInstance(this)
-						.valueAsString,
+				artifactsBucket,
 			}),
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
