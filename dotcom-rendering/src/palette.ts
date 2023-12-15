@@ -4429,6 +4429,28 @@ const discussionPaginationBackgroundLight: PaletteFunction = () =>
 const discussionPaginationBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 
+const paginationTextLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+	}
+};
+const paginationTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+
 // ----- Palette ----- //
 
 /**
@@ -5183,6 +5205,10 @@ const paletteColours = {
 	'--comment-form-addon-button': {
 		light: commentFormAddonBackgroundLight,
 		dark: commentFormAddonBackgroundDark,
+	},
+	'--pagination-text': {
+		light: paginationTextLight,
+		dark: paginationTextDark,
 	},
 } satisfies PaletteColours;
 

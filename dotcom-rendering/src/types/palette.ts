@@ -7,7 +7,6 @@ export type Palette = {
 		standfirstLink: Colour;
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
-		pagination: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
 		filterButton: Colour;
@@ -52,11 +51,9 @@ export type Palette = {
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
 		filterButton: Colour;
-		pagination: Colour;
 	};
 	hover: {
 		standfirstLink: Colour;
-		pagination: Colour;
 	};
 	discussionGeneric: Colour;
 };
