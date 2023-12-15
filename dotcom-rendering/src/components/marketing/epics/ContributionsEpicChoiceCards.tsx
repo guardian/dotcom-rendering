@@ -6,13 +6,14 @@
 import React, { useEffect } from 'react';
 import { css } from '@emotion/react';
 import { until, visuallyHidden } from '@guardian/source-foundations';
+import { ChoiceCard, ChoiceCardGroup } from '@guardian/source-react-components';
 import { ChoiceCardSelection, contributionType } from '../lib/choiceCards';
 import { OphanComponentEvent } from '@guardian/libs';
-import {
+import type {
 	ContributionFrequency,
-	contributionTabFrequencies,
 	SelectedAmountsVariant,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import { contributionTabFrequencies } from '@guardian/support-dotcom-components';
 import { ReactComponent } from '../lib/ReactComponent';
 import { useIsInView } from '../../../lib/useIsInView';
 

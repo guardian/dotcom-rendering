@@ -174,7 +174,7 @@ export const ReaderRevenueEpic = ({
 		);
 
 		import(
-			/* webpackChunkName: "contributions-epic" */ `./marketing/epics/ContributionsEpic`
+			/* webpackChunkName: "contributions-epic" */ `../marketing/epics/ContributionsEpic`
 		)
 			.then((epicModule) => {
 				endPerformanceMeasure();

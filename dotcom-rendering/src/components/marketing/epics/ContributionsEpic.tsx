@@ -23,12 +23,12 @@ import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { OPHAN_COMPONENT_EVENT_APPLEPAY_AUTHORISED } from './utils/ophan';
 import { ReactComponent } from '../lib/ReactComponent';
 import { replaceArticleCount } from '../lib/replaceArticleCount';
-import { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types/props/epic';
-import { ChoiceCardSelection } from '../lib/choiceCards';
-import {
+import type {
+	EpicProps,
 	ContributionFrequency,
 	Stage,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import { ChoiceCardSelection } from '../lib/choiceCards';
 import {
 	containsNonArticleCountPlaceholder,
 	getLocalCurrencySymbol,
@@ -42,6 +42,7 @@ import {
 } from '../lib/tracking';
 import { isProd } from '../lib/stage';
 import { useIsInView } from '../../../lib/useIsInView';
+import { epicPropsSchema } from '@guardian/support-dotcom-components';
 
 // CSS Styling
 // -------------------------------------------
