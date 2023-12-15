@@ -6901,23 +6901,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/property-provider@npm:2.0.16":
+"@smithy/property-provider@npm:2.0.16, @smithy/property-provider@npm:^2.0.0, @smithy/property-provider@npm:^2.0.15":
   version: 2.0.16
   resolution: "@smithy/property-provider@npm:2.0.16"
   dependencies:
     "@smithy/types": "npm:^2.7.0"
     tslib: "npm:^2.5.0"
   checksum: 0cf5babdc6bf77803891e26e1af74976fa1dec2014524ecdb7f47fa6060a1d2ed98ce3612c8db8e054e0123b6a301bafbc834c5ed9d3f8d75d2bcb2e3ee403ce
-  languageName: node
-  linkType: hard
-
-"@smithy/property-provider@npm:^2.0.0, @smithy/property-provider@npm:^2.0.15":
-  version: 2.0.15
-  resolution: "@smithy/property-provider@npm:2.0.15"
-  dependencies:
-    "@smithy/types": "npm:^2.6.0"
-    tslib: "npm:^2.5.0"
-  checksum: 475e539b10dcccbd41785d765128896f5e0dcea0f44a0a8b536ed1b41fdae130e991e8ae787f0b04287fc483a3a494d353cdd6b913a71af3e27f641c76dc9042
   languageName: node
   linkType: hard
 
@@ -7018,16 +7008,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/types@npm:^2.4.0, @smithy/types@npm:^2.6.0":
-  version: 2.6.0
-  resolution: "@smithy/types@npm:2.6.0"
-  dependencies:
-    tslib: "npm:^2.5.0"
-  checksum: 10c47947d8c3054ef4525da852330f1ef7030578a887bc3edd5853f65f229cf22c68512da4c952e1431dc992c4d62a21432440475c3e66ab2c7032ed03591251
-  languageName: node
-  linkType: hard
-
-"@smithy/types@npm:^2.7.0":
+"@smithy/types@npm:^2.4.0, @smithy/types@npm:^2.6.0, @smithy/types@npm:^2.7.0":
   version: 2.7.0
   resolution: "@smithy/types@npm:2.7.0"
   dependencies:
