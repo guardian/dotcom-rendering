@@ -9217,7 +9217,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node-int64@npm:*, @types/node-int64@npm:0.4.32, @types/node-int64@npm:^0.4.29":
+"@types/node-int64@npm:*, @types/node-int64@npm:^0.4.29":
   version: 0.4.32
   resolution: "@types/node-int64@npm:0.4.32"
   dependencies:
@@ -9540,7 +9540,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/thrift@npm:^0.10.11":
+"@types/thrift@npm:0.10.17, @types/thrift@npm:^0.10.11":
   version: 0.10.17
   resolution: "@types/thrift@npm:0.10.17"
   dependencies:
@@ -10901,10 +10901,10 @@ __metadata:
     "@types/jest": "npm:28.1.8"
     "@types/jsdom": "npm:16.2.15"
     "@types/node": "npm:18.18.14"
-    "@types/node-int64": "npm:0.4.32"
     "@types/react": "npm:18.2.45"
     "@types/react-dom": "npm:18.2.17"
     "@types/react-test-renderer": "npm:18.0.0"
+    "@types/thrift": "npm:0.10.17"
     "@types/uuid": "npm:9.0.7"
     "@types/webpack": "npm:5.28.5"
     aws-cdk: "npm:2.90.0"
@@ -10927,7 +10927,6 @@ __metadata:
     jsdom: "npm:16.7.0"
     lodash.debounce: "npm:4.0.6"
     mockdate: "npm:3.0.5"
-    node-int64: "npm:0.4.0"
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
     react-test-renderer: "npm:18.2.0"
@@ -21274,7 +21273,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-int64@npm:0.4.0, node-int64@npm:^0.4.0":
+"node-int64@npm:^0.4.0":
   version: 0.4.0
   resolution: "node-int64@npm:0.4.0"
   checksum: a6a4d8369e2f2720e9c645255ffde909c0fbd41c92ea92a5607fc17055955daac99c1ff589d421eee12a0d24e99f7bfc2aabfeb1a4c14742f6c099a51863f31a
