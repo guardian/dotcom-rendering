@@ -1,7 +1,7 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, space, textSans } from '@guardian/source-foundations';
+import { neutral } from '@guardian/source-foundations/cjs/colour/palette';
 import {
 	Hide,
 	LinkButton,
@@ -10,7 +10,7 @@ import {
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 
 type Props = {
 	currentPage: number;
@@ -50,11 +50,11 @@ const bold = css`
 	font-weight: bold;
 `;
 
-const decidePaginationCss = (format: ArticleFormat): SerializedStyles => css`
-	color: ${decidePalette(format).text.pagination};
-	border: 1px solid ${decidePalette(format).border.pagination};
+const decidePaginationCss = css`
+	color: ${themePalette('--pagination-text')};
+	border: 1px solid ${neutral[86]};
 	:hover {
-		border: 1px solid ${decidePalette(format).hover.pagination};
+		border: 1px solid ${themePalette('--pagination-text')};
 	}
 `;
 
@@ -67,7 +67,7 @@ export const Pagination = ({
 	newer,
 	format,
 }: Props) => {
-	const cssOverrides = decidePaginationCss(format);
+	const cssOverrides = decidePaginationCss;
 
 	return (
 		<nav id={id} css={grid}>

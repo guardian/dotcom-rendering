@@ -365,27 +365,6 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 	}
 };
 
-const textPagination = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Sport:
-			return sport[300];
-		case Pillar.Culture:
-			return culture[300];
-		case Pillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
 const hoverStandfirstLink = (format: ArticleFormat): string => {
 	return textStandfirstLink(format);
 };
@@ -423,10 +402,6 @@ const borderCricketScoreboardDivider = (): string => {
 };
 
 const borderFilterButton = (): string => neutral[60];
-
-const borderPagination = () => {
-	return neutral[86];
-};
 
 const backgroundAnalysisContrastColour = (): string => '#F2E8E6';
 const backgroundAnalysisContrastHoverColour = (): string => '#e9d9d5';
@@ -530,27 +505,6 @@ const backgroundDesignTag = (format: ArticleFormat): string => {
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
 			return palette.specialReportAlt[100];
-	}
-};
-
-const hoverPagination = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Sport:
-			return sport[300];
-		case Pillar.Culture:
-			return culture[300];
-		case Pillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
 	}
 };
 
@@ -677,7 +631,6 @@ export const decidePalette = (
 			standfirstLink: textStandfirstLink(format),
 			lastUpdated: textLastUpdated(format),
 			disclaimerLink: textDisclaimerLink(format),
-			pagination: textPagination(format),
 			numberedPosition: textNumberedPosition(),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			filterButton: textFilterButton(),
@@ -724,11 +677,9 @@ export const decidePalette = (
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			cardSupporting: borderCardSupporting(format),
 			filterButton: borderFilterButton(),
-			pagination: borderPagination(),
 		},
 		hover: {
 			standfirstLink: hoverStandfirstLink(format),
-			pagination: hoverPagination(format),
 		},
 		discussionGeneric: discussion(format),
 	};
