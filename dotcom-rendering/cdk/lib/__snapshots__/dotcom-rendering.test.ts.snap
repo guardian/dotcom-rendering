@@ -1023,6 +1023,8 @@ aws --region eu-west-1 s3 cp s3://",
                   "/frontend/TEST/rendering/rendering.tar.gz ./
 tar -zxf rendering.tar.gz rendering
 chown -R dotcom-rendering:frontend rendering
+mkdir /var/log/dotcom-rendering
+chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
 cat >/etc/systemd/system/rendering.service <<EOL
 		[Unit]
 		Description=rendering

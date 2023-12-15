@@ -21,6 +21,10 @@ export const getUserData = ({
 
 		`chown -R dotcom-rendering:frontend ${app}`,
 
+		// Creates directory for logs
+		`mkdir /var/log/dotcom-rendering`,
+		`chown -R dotcom-rendering:frontend /var/log/dotcom-rendering`,
+
 		// write out systemd file
 		`cat >/etc/systemd/system/${app}.service <<EOL
 		[Unit]
