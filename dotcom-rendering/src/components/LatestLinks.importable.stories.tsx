@@ -11,6 +11,10 @@ import { ContainerOverrides } from './ContainerOverrides';
 import { Island } from './Island';
 import { LatestLinks } from './LatestLinks.importable';
 
+interface StoryArgs {
+	theme: string;
+}
+
 export default {
 	component: LatestLinks,
 	title: 'Components/LatestLinks',
@@ -185,12 +189,14 @@ WorldCupFinal2023.decorators = [
 	),
 ];
 
-export const LondonPride2022 = () => {
+export const LondonPride2022 = ({ theme }: StoryArgs) => {
 	return (
 		<Wrapper
 			styles={css`
 				max-width: 600px;
-				background-color: ${palette.news[300]};
+				background-color: ${theme === 'light'
+					? palette.news[300]
+					: 'inherit'};
 			`}
 		>
 			<Island priority="critical">
