@@ -4451,6 +4451,11 @@ const paginationTextLight: PaletteFunction = ({ theme }) => {
 };
 const paginationTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const interactiveContentsHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const interactiveContentsHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
 // ----- Palette ----- //
 
 /**
@@ -5209,6 +5214,10 @@ const paletteColours = {
 	'--pagination-text': {
 		light: paginationTextLight,
 		dark: paginationTextDark,
+	},
+	'--interactive-contents-hover': {
+		light: interactiveContentsHoverLight,
+		dark: interactiveContentsHoverDark,
 	},
 } satisfies PaletteColours;
 
