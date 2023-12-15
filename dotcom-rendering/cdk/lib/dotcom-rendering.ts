@@ -15,7 +15,7 @@ import {
 } from '@guardian/cdk/lib/constructs/iam';
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
-import { CfnOutput, Duration } from 'aws-cdk-lib';
+import { CfnOutput, Duration, Tags } from 'aws-cdk-lib';
 import {
 	AdjustmentType,
 	CfnScalingPolicy,
@@ -189,6 +189,12 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining logical ID of resource created via CDK which cannot be changed easily',
 		});
 
+		const loggingStreamName = new GuStringParameter(
+			this,
+			'KinesisLoggingStreamName',
+			{ default: '/account/services/logging.stream.name', fromSSM: true },
+		).valueAsString;
+
 		const instanceRole = new GuInstanceRole(this, {
 			app,
 			additionalPolicies: [
@@ -210,6 +216,16 @@ export class DotcomRendering extends GuStack {
 						'autoscaling:DescribeAutoScalingInstances',
 					],
 					resources: ['*'],
+				}),
+				new GuAllowPolicy(this, 'AllowPolicyKinesis', {
+					actions: [
+						'kinesis:Describe',
+						'kinesis:PutRecord',
+						'kinesis:PutRecords',
+					],
+					resources: [
+						`arn:aws:kinesis:${this.region}:${this.account}:stream/${loggingStreamName}`,
+					],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
 					actions: ['kms:Decrypt', 'kms:DescribeKey'],
@@ -252,6 +268,10 @@ export class DotcomRendering extends GuStack {
 			vpcSubnets: { subnets: privateSubnets },
 			withoutImdsv2: true,
 		});
+
+		Tags.of(asg).add('LogKinesisStreamName', loggingStreamName); // do we need PropagateAtLaunch?
+		Tags.of(asg).add('SystemdUnit', `${app}.service`);
+
 		// ! Important !
 		// Ensure the ASG is attached to the load balancer
 		// This is because our auto scaling group uses the ELB for healthchecks
