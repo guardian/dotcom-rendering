@@ -43,17 +43,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CAPI_KEY: ${{ secrets.CAPI_KEY }}
-
-      - name: Set up Node environment
-        uses: ./.github/actions/setup-node-env
-
-      - name: DCR peer dependencies tracker
-        run: |
-          deno run \
-            --allow-read \
-            --allow-net \
-            --allow-env=HOME,GITHUB_TOKEN \
-            --allow-run=yarn,npm \
-            scripts/deno/peer-dependencies.ts
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
