@@ -4591,7 +4591,7 @@ __metadata:
     load-json-file: "npm:6.2.0"
     lodash.debounce: "npm:4.0.8"
     lodash.get: "npm:4.4.2"
-    log4js: "npm:6.5.1"
+    log4js: "npm:6.9.1"
     lz-string: "npm:1.5.0"
     minimatch: "npm:5.1.6"
     mockdate: "npm:3.0.5"
@@ -6901,13 +6901,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/property-provider@npm:2.0.16, @smithy/property-provider@npm:^2.0.0, @smithy/property-provider@npm:^2.0.15":
+"@smithy/property-provider@npm:2.0.16":
   version: 2.0.16
   resolution: "@smithy/property-provider@npm:2.0.16"
   dependencies:
     "@smithy/types": "npm:^2.7.0"
     tslib: "npm:^2.5.0"
   checksum: 0cf5babdc6bf77803891e26e1af74976fa1dec2014524ecdb7f47fa6060a1d2ed98ce3612c8db8e054e0123b6a301bafbc834c5ed9d3f8d75d2bcb2e3ee403ce
+  languageName: node
+  linkType: hard
+
+"@smithy/property-provider@npm:^2.0.0, @smithy/property-provider@npm:^2.0.15":
+  version: 2.0.15
+  resolution: "@smithy/property-provider@npm:2.0.15"
+  dependencies:
+    "@smithy/types": "npm:^2.6.0"
+    tslib: "npm:^2.5.0"
+  checksum: 475e539b10dcccbd41785d765128896f5e0dcea0f44a0a8b536ed1b41fdae130e991e8ae787f0b04287fc483a3a494d353cdd6b913a71af3e27f641c76dc9042
   languageName: node
   linkType: hard
 
@@ -13282,7 +13292,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-format@npm:^4.0.10, date-format@npm:^4.0.14":
+"date-format@npm:^4.0.14":
   version: 4.0.14
   resolution: "date-format@npm:4.0.14"
   checksum: 1c67a4d77c677bb880328c81d81f5b9ed7fbf672bdaff74e5a0f7314b21188f3a829b06acf120c70cc1df876a7724e3e5c23d511e86d64656a3035a76ac3930b
@@ -15673,10 +15683,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flatted@npm:^3.1.0, flatted@npm:^3.2.5":
+"flatted@npm:^3.1.0":
   version: 3.2.7
   resolution: "flatted@npm:3.2.7"
   checksum: 207a87c7abfc1ea6928ea16bac84f9eaa6d44d365620ece419e5c41cf44a5e9902b4c1f59c9605771b10e4565a0cb46e99d78e0464e8aabb42c97de880642257
+  languageName: node
+  linkType: hard
+
+"flatted@npm:^3.2.7":
+  version: 3.2.9
+  resolution: "flatted@npm:3.2.9"
+  checksum: 5c91c5a0a21bbc0b07b272231e5b4efe6b822bcb4ad317caf6bb06984be4042a9e9045026307da0fdb4583f1f545e317a67ef1231a59e71f7fced3cc429cfc53
   languageName: node
   linkType: hard
 
@@ -19825,16 +19842,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"log4js@npm:6.5.1":
-  version: 6.5.1
-  resolution: "log4js@npm:6.5.1"
+"log4js@npm:6.9.1":
+  version: 6.9.1
+  resolution: "log4js@npm:6.9.1"
   dependencies:
-    date-format: "npm:^4.0.10"
+    date-format: "npm:^4.0.14"
     debug: "npm:^4.3.4"
-    flatted: "npm:^3.2.5"
+    flatted: "npm:^3.2.7"
     rfdc: "npm:^1.3.0"
-    streamroller: "npm:^3.1.1"
-  checksum: 6ee6aee21bd257c04f9f1d90a5d213751ade68afb205d97eb763653f65703690eacf85cf4d7eab123f8321f36cab45b2c1eb70bc87b1509a97276384367603f8
+    streamroller: "npm:^3.1.5"
+  checksum: 05846e48f72d662800c8189bd178c42b4aa2f0c574cfc90a1942cf90b76f621c44019e26796c8fd88da1b6f0fe8272cba607cbaad6ae6ede50a7a096b58197ea
   languageName: node
   linkType: hard
 
@@ -24548,7 +24565,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"streamroller@npm:^3.1.1":
+"streamroller@npm:^3.1.5":
   version: 3.1.5
   resolution: "streamroller@npm:3.1.5"
   dependencies:
@@ -26826,7 +26843,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-merge@npm:5.10.0, webpack-merge@npm:^5.7.3":
+"webpack-merge@npm:5.10.0":
   version: 5.10.0
   resolution: "webpack-merge@npm:5.10.0"
   dependencies:
@@ -26834,6 +26851,16 @@ __metadata:
     flat: "npm:^5.0.2"
     wildcard: "npm:^2.0.0"
   checksum: b607c84cabaf74689f965420051a55a08722d897bdd6c29cb0b2263b451c090f962d41ecf8c9bf56b0ab3de56e65476ace0a8ecda4f4a4663684243d90e0512b
+  languageName: node
+  linkType: hard
+
+"webpack-merge@npm:^5.7.3":
+  version: 5.9.0
+  resolution: "webpack-merge@npm:5.9.0"
+  dependencies:
+    clone-deep: "npm:^4.0.1"
+    wildcard: "npm:^2.0.0"
+  checksum: 74935a4b03612ee65c0867ca1050788ccfec3efa6d17bb5acceacbd4fbbd0356a073997723eff7380deccd88f13a55c52cb004e80e34f3a67808ac455da6ad64
   languageName: node
   linkType: hard
 
@@ -26889,7 +26916,44 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5, webpack@npm:5.89.0, webpack@npm:^5":
+"webpack@npm:5, webpack@npm:^5":
+  version: 5.88.1
+  resolution: "webpack@npm:5.88.1"
+  dependencies:
+    "@types/eslint-scope": "npm:^3.7.3"
+    "@types/estree": "npm:^1.0.0"
+    "@webassemblyjs/ast": "npm:^1.11.5"
+    "@webassemblyjs/wasm-edit": "npm:^1.11.5"
+    "@webassemblyjs/wasm-parser": "npm:^1.11.5"
+    acorn: "npm:^8.7.1"
+    acorn-import-assertions: "npm:^1.9.0"
+    browserslist: "npm:^4.14.5"
+    chrome-trace-event: "npm:^1.0.2"
+    enhanced-resolve: "npm:^5.15.0"
+    es-module-lexer: "npm:^1.2.1"
+    eslint-scope: "npm:5.1.1"
+    events: "npm:^3.2.0"
+    glob-to-regexp: "npm:^0.4.1"
+    graceful-fs: "npm:^4.2.9"
+    json-parse-even-better-errors: "npm:^2.3.1"
+    loader-runner: "npm:^4.2.0"
+    mime-types: "npm:^2.1.27"
+    neo-async: "npm:^2.6.2"
+    schema-utils: "npm:^3.2.0"
+    tapable: "npm:^2.1.1"
+    terser-webpack-plugin: "npm:^5.3.7"
+    watchpack: "npm:^2.4.0"
+    webpack-sources: "npm:^3.2.3"
+  peerDependenciesMeta:
+    webpack-cli:
+      optional: true
+  bin:
+    webpack: bin/webpack.js
+  checksum: 03389ad02342becf527c2f603b46bedb27f5352703e6a625daa9a1f80ed84417e135fbcd8a2a79d6aaf37aafb8b8b571cd920bad4b068ca76c629252b3bfc9d7
+  languageName: node
+  linkType: hard
+
+"webpack@npm:5.89.0":
   version: 5.89.0
   resolution: "webpack@npm:5.89.0"
   dependencies:
