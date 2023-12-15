@@ -13,8 +13,10 @@ const SP_LAYER2_REJECT_ALL_BUTTON = 'button.sp_choice_type_REJECT_ALL';
 /**
  * Accept all on the Sourcepoint CMP banner
  */
-const cmpAcceptAll = async (page: Page): Promise<void> => {
-	const acceptAllButton = page
+const cmpAcceptAll = async (page: Page, rootIframe?: string): Promise<void> => {
+	// root iframes are used for AMP pages which have two layers of iframes
+	const root = rootIframe ? page.frameLocator(rootIframe) : page;
+	const acceptAllButton = root
 		.frameLocator(SP_LAYER1_IFRAME)
 		.locator(SP_LAYER1_ACCEPT_ALL_BUTTON);
 	await acceptAllButton.click();
