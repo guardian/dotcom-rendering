@@ -16,7 +16,7 @@ import {
 } from '@guardian/cdk/lib/constructs/iam';
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
-import { CfnOutput, Duration } from 'aws-cdk-lib';
+import { CfnOutput, Duration, Tags } from 'aws-cdk-lib';
 import {
 	AdjustmentType,
 	CfnScalingPolicy,
@@ -247,6 +247,10 @@ export class DotcomRendering extends GuStack {
 			vpcSubnets: { subnets: privateSubnets },
 			withoutImdsv2: true,
 		});
+
+		Tags.of(asg).add('LogKinesisStreamName', loggingStreamName);
+		Tags.of(asg).add('SystemdUnit', `${app}.service`);
+
 		// ! Important !
 		// Ensure the ASG is attached to the load balancer
 		// This is because our auto scaling group uses the ELB for healthchecks

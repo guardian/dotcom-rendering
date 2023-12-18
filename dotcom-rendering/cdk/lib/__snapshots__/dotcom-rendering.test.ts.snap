@@ -267,6 +267,13 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Value": "guardian/dotcom-rendering",
           },
           {
+            "Key": "LogKinesisStreamName",
+            "PropagateAtLaunch": true,
+            "Value": {
+              "Ref": "LoggingStreamName",
+            },
+          },
+          {
             "Key": "Stack",
             "PropagateAtLaunch": true,
             "Value": "frontend",
@@ -275,6 +282,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Key": "Stage",
             "PropagateAtLaunch": true,
             "Value": "TEST",
+          },
+          {
+            "Key": "SystemdUnit",
+            "PropagateAtLaunch": true,
+            "Value": "rendering.service",
           },
         ],
         "VPCZoneIdentifier": {
