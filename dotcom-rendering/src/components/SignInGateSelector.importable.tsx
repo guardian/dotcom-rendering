@@ -259,7 +259,6 @@ export const SignInGateSelector = ({
 
 	useEffect(() => {
 		if (gateVariant && currentTest) {
-			const timeOfPageView = new Date();
 			void gateVariant
 				.canShow({
 					isSignedIn: !!isSignedIn,
@@ -269,7 +268,6 @@ export const SignInGateSelector = ({
 					tags,
 					isPaidContent,
 					isPreview,
-					timeOfPageView,
 				})
 				.then(setCanShowGate);
 		}
