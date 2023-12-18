@@ -36,7 +36,6 @@ export const GuideAtom = ({
 		<Container
 			id={id}
 			title={title}
-			format={format}
 			atomType="guide"
 			atomTypeTitle="Quick Guide"
 			expandForStorybook={expandForStorybook}
@@ -57,7 +56,7 @@ export const GuideAtom = ({
 					))
 			}
 		>
-			<Body html={html} image={image} credit={credit} format={format} />
+			<Body html={html} image={image} credit={credit} />
 			<Footer
 				format={format}
 				dislikeHandler={

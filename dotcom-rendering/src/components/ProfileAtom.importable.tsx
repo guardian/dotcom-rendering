@@ -35,7 +35,6 @@ export const ProfileAtom = ({
 		<Container
 			id={id}
 			title={title}
-			format={format}
 			atomType="profile"
 			atomTypeTitle="Profile"
 			expandForStorybook={expandForStorybook}
@@ -56,7 +55,7 @@ export const ProfileAtom = ({
 					))
 			}
 		>
-			<Body html={html} image={image} credit={credit} format={format} />
+			<Body html={html} image={image} credit={credit} />
 			<Footer
 				format={format}
 				dislikeHandler={
