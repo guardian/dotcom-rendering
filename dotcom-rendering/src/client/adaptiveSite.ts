@@ -1,5 +1,4 @@
 import { log } from '@guardian/libs';
-import { isServer } from '../lib/isServer';
 import { setSchedulerPriorityLastStartTime } from '../lib/scheduler';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { recordExperiences } from './ophan/ophan';
@@ -11,7 +10,6 @@ import { recordExperiences } from './ophan/ophan';
  * complete if you're in the adaptive site test variant.
  */
 export const shouldAdapt = async (): Promise<boolean> => {
-	if (isServer) return false;
 	if (window.location.hash === '#adapt') return true;
 	if (window.guardian.config.tests.adaptiveSiteVariant !== 'variant') {
 		return false;
