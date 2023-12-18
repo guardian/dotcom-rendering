@@ -4524,6 +4524,21 @@ const expandableAtomTextHoverLight: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const expandableAtomTextHoverDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[500];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[500];
+	}
+};
 const expandableAtomBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const expandableAtomBorderDark: PaletteFunction = () =>
@@ -5306,7 +5321,7 @@ const paletteColours = {
 	},
 	'--expandable-atom-text-hover': {
 		light: expandableAtomTextHoverLight,
-		dark: expandableAtomTextHoverLight,
+		dark: expandableAtomTextHoverDark,
 	},
 	'--expandable-atom-border': {
 		light: expandableAtomBorderLight,
