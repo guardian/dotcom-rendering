@@ -252,14 +252,18 @@ export const ArticleMetaApps = ({
 					)}
 					{shouldShowFollowButtons(
 						isComment || isAnalysis || isImmersive,
-					) && (
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<FollowWrapper
-								displayName={soleContributor.title}
-								id={soleContributor.id}
-							/>
-						</Island>
-					)}
+					) &&
+						soleContributor && (
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<FollowWrapper
+									displayName={soleContributor.title}
+									id={soleContributor.id}
+								/>
+							</Island>
+						)}
 					{messageUs && format.design === ArticleDesign.LiveBlog && (
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<SendAMessage
