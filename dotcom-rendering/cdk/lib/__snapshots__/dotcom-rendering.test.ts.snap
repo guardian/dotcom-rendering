@@ -1038,6 +1038,8 @@ StandardOutput=journal
 Environment=TERM=xterm-256color
 Environment=NODE_ENV=production
 Environment=GU_STAGE=TEST
+Environment=GU_APP=rendering
+Environment=GU_STACK=frontend
 ExecStart=make prod
 Restart=on-failure
 [Install]

@@ -238,6 +238,7 @@ export class DotcomRendering extends GuStack {
 			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
 			userData: getUserData({
 				app,
+				stack,
 				stage,
 				artifactsBucket,
 			}),

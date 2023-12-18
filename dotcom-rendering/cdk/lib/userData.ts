@@ -6,6 +6,7 @@ import type { UserDataProps } from './types';
  */
 export const getUserData = ({
 	app,
+	stack,
 	stage,
 	artifactsBucket,
 }: UserDataProps): string => {
@@ -41,6 +42,8 @@ export const getUserData = ({
 		`Environment=TERM=xterm-256color`,
 		`Environment=NODE_ENV=production`,
 		`Environment=GU_STAGE=${stage}`,
+		`Environment=GU_APP=${app}`,
+		`Environment=GU_STACK=${stack}`,
 		`ExecStart=make prod`,
 		`Restart=on-failure`,
 		`[Install]`,
