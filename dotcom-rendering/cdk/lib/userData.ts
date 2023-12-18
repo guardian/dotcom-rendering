@@ -38,7 +38,7 @@ export const getUserData = ({
 		`StandardError=journal`,
 		`StandardOutput=journal`,
 		`Environment=TERM=xterm-256color`,
-		`ExecStart=sudo NODE_ENV=production GU_STAGE=${stage} -u dotcom-rendering -g frontend make prod`,
+		`ExecStart=NODE_ENV=production GU_STAGE=${stage} -u dotcom-rendering -g frontend make prod`,
 		`Restart=on-failure`,
 		`[Install]`,
 		`WantedBy=multi-user.target`,
