@@ -4379,9 +4379,10 @@ const discussionButtonHover: PaletteFunction = ({ theme }) => {
 			return sourcePalette.lifestyle[400];
 		case Pillar.Sport:
 			return sourcePalette.sport[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
 		case Pillar.News:
 		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.Labs:
 		default:
 			return sourcePalette.news[400];
 	}
