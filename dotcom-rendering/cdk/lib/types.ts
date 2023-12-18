@@ -24,7 +24,8 @@ export interface DCRProps extends GuStackProps {
 	region: string;
 }
 
-export interface UserDataProps extends Pick<DCRProps, 'app' | 'stage'> {
+export interface UserDataProps
+	extends Pick<DCRProps, 'app' | 'stack' | 'stage'> {
 	artifactsBucket: string;
 }
 
