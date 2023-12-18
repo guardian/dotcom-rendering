@@ -70,7 +70,6 @@ export const DiscussionLayout = ({
 					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<DiscussionContainer
-								format={format}
 								discussionApiUrl={discussionApiUrl}
 								shortUrlId={shortUrlId}
 								discussionD2Uid={discussionD2Uid}
@@ -98,7 +97,7 @@ export const DiscussionLayout = ({
 							>
 								<AdSlot
 									position="comments"
-									display={format.display}
+									display={format.dispqlay}
 								/>
 							</div>
 						</RightColumn>
