@@ -26,23 +26,23 @@ export const getUserData = ({
 		`chown -R dotcom-rendering:frontend /var/log/dotcom-rendering`,
 
 		// write out systemd file
-		`cat >/etc/systemd/system/${app}.service <<EOL
-		[Unit]
-		Description=${app}
-		After=network.target
-		[Service]
-		WorkingDirectory=/home/dotcom-rendering/${app}
-		Type=simple
-		User=dotcom-rendering
-		StandardError=journal
-		StandardOutput=journal
-		Environment=STAGE=${stage}
-		Environment=TERM=xterm-256color
-		ExecStart=sudo NODE_ENV=production GU_STAGE=$STAGE -u dotcom-rendering -g frontend make prod
-		Restart=on-failure
-		[Install]
-		WantedBy=multi-user.target
-		EOL`,
+		`cat > /etc/systemd/system/${app}.service << EOF`,
+		`[Unit]`,
+		`Description=${app}`,
+		`After=network.target`,
+		`[Service]`,
+		`WorkingDirectory=/home/dotcom-rendering/${app}`,
+		`Type=simple`,
+		`User=dotcom-rendering`,
+		`StandardError=journal`,
+		`StandardOutput=journal`,
+		`Environment=TERM=xterm-256color`,
+		`ExecStart=sudo NODE_ENV=production GU_STAGE=${stage} -u dotcom-rendering -g frontend make prod`,
+		`Restart=on-failure`,
+		`[Install]`,
+		`WantedBy=multi-user.target`,
+		`EOF`,
+
 		`systemctl enable ${app}`, // enable the service
 		`systemctl start ${app}`, // start the service
 	].join('\n');
