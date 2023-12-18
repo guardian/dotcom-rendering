@@ -220,7 +220,12 @@ export const SlotBodyEnd = ({
 	useEffect(() => {
 		const additionalSizes = (): SizeMapping => {
 			if (mpuWhenNoEpicEnabled) {
-				return { mobile: [adSizes.mpu] };
+				return {
+					desktop: [
+						adSizes.outstreamDesktop,
+						adSizes.outstreamGoogleDesktop,
+					],
+				};
 			} else if (showPublicGood) {
 				return { mobile: [adSizes.fluid] };
 			}
