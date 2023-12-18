@@ -97,7 +97,7 @@ export const DiscussionLayout = ({
 							>
 								<AdSlot
 									position="comments"
-									display={format.dispqlay}
+									display={format.display}
 								/>
 							</div>
 						</RightColumn>

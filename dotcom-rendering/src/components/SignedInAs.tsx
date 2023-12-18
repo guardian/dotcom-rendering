@@ -85,7 +85,7 @@ const Heading = ({ count }: { count?: number }) => {
 			Comments{' '}
 			<span
 				css={css`
-					color: ${sourcePalette.neutral[60]};
+					color: ${themePalette('--discussion-grey')};
 				`}
 			>
 				({count ?? '…'})
