@@ -23,7 +23,7 @@ cdk-synth:
 
 # https://www.npmjs.com/package/aws-cdk#cdk-diff
 cdk-diff:
-	@yarn cdk diff --path-metadata false --version-reporting false
+	@yarn cdk diff --path-metadata false --version-reporting false --profile frontend
 
 riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
