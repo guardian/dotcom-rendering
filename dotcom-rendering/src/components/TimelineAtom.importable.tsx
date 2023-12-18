@@ -116,7 +116,6 @@ export const TimelineAtom = ({
 			atomType="timeline"
 			atomTypeTitle="Timeline"
 			id={id}
-			format={format}
 			expandForStorybook={expandForStorybook}
 			title={title}
 			expandCallback={

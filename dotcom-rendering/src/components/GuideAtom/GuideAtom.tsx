@@ -36,7 +36,6 @@ export const GuideAtom = ({
 		<Container
 			id={id}
 			title={title}
-			format={format}
 			atomType="guide"
 			atomTypeTitle="Quick Guide"
 			expandForStorybook={expandForStorybook}

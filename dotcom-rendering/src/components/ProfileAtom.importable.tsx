@@ -35,7 +35,6 @@ export const ProfileAtom = ({
 		<Container
 			id={id}
 			title={title}
-			format={format}
 			atomType="profile"
 			atomTypeTitle="Profile"
 			expandForStorybook={expandForStorybook}

@@ -40,10 +40,8 @@ const iconSpacing = css`
 export const Summary = ({
 	sectionTitle,
 	title,
-	format,
 	expandCallback,
 }: {
-	format: ArticleFormat;
 	sectionTitle: string;
 	title: string;
 	expandCallback: () => void;
