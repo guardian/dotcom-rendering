@@ -1013,23 +1013,35 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                   "#!/bin/bash -ev
 groupadd frontend
 useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
-usermod -a -G frontend aws-kinesis-agent-user
 cd /home/dotcom-rendering
-aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/TEST/rendering/rendering.tar.gz ./
+aws --region eu-west-1 s3 cp s3://",
+                  {
+                    "Ref": "DistributionBucketName",
+                  },
+                  "/frontend/TEST/rendering/rendering.tar.gz ./
 tar -zxf rendering.tar.gz rendering
 chown -R dotcom-rendering:frontend rendering
 cd rendering
-export TERM=xterm-256color
-export NODE_ENV=production
-export GU_STAGE=TEST
 mkdir /var/log/dotcom-rendering
 chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make prod
-/opt/aws-kinesis-agent/configure-aws-kinesis-agent eu-west-1 ",
-                  {
-                    "Ref": "LoggingStreamName",
-                  },
-                  " /var/log/dotcom-rendering/dotcom-rendering.log",
+cat > /etc/systemd/system/rendering.service << EOF
+[Unit]
+Description=rendering
+After=network.target
+[Service]
+WorkingDirectory=/home/dotcom-rendering/rendering
+Type=simple
+User=dotcom-rendering
+StandardError=journal
+StandardOutput=journal
+Environment=TERM=xterm-256color
+ExecStart=sudo NODE_ENV=production GU_STAGE=TEST -u dotcom-rendering -g frontend make prod
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl enable rendering
+systemctl start rendering",
                 ],
               ],
             },
