@@ -6,6 +6,7 @@ import {
 	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -51,7 +52,6 @@ import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
-import { Hide } from '@guardian/source-react-components';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div

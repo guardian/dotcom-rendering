@@ -6,6 +6,7 @@ import {
 	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import React from 'react';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -52,7 +53,6 @@ import {
 	interactiveLegacyClasses,
 } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { Hide } from '@guardian/source-react-components';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div

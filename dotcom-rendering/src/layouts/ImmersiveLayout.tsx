@@ -34,7 +34,7 @@ import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { Nav, minNavHeightPx } from '../components/Nav/Nav';
+import { minNavHeightPx, Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
