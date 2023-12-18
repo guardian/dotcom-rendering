@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
-import { Summary } from './Summary';
 import { palette as themePalette } from '../../palette';
+import { Summary } from './Summary';
 const containerStyling = css`
 	display: block;
 	position: relative;
@@ -21,7 +21,7 @@ export const detailStyling = css`
 			transparent 4px
 		)
 		13;
-	border-top: 13px solid black;
+	border-top: 13px solid ${sourcePalette.neutral[0]};
 	position: relative;
 	summary {
 		list-style: none;

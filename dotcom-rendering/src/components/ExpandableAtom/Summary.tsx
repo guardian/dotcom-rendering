@@ -22,7 +22,7 @@ const plusStyling = css`
 	margin-right: 12px;
 	margin-bottom: 6px;
 	width: 33px;
-	fill: white;
+	fill: ${sourcePalette.neutral[100]};
 	height: 28px;
 `;
 
@@ -30,7 +30,7 @@ const minusStyling = css`
 	margin-right: 14px;
 	margin-bottom: 6px;
 	width: 30px;
-	fill: white;
+	fill: ${sourcePalette.neutral[100]};
 	height: 25px;
 	padding-left: 4px;
 `;

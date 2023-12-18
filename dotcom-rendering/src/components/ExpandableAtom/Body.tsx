@@ -5,8 +5,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgInfo } from '@guardian/source-react-components';
-import { decidePalette } from '../../lib/decidePalette';
-
+import { palette as themePalette } from '../../palette';
 const imageStyling = css`
 	float: left;
 	margin-right: 16px;
@@ -75,9 +74,9 @@ const bodyStyling = css`
 	}
 `;
 
-const linkStyling = (format: ArticleFormat) => css`
+const linkStyling = css`
 	a {
-		color: ${decidePalette(format).text.expandableAtom};
+		color: ${themePalette('--expandable-atom-text-hover')};
 		text-decoration: none;
 		border-bottom: 0.0625rem solid ${sourcePalette.neutral[86]};
 		transition: border-color 0.15s ease-out;
@@ -85,7 +84,7 @@ const linkStyling = (format: ArticleFormat) => css`
 
 	a:hover {
 		border-bottom: solid 0.0625rem
-			${decidePalette(format).text.expandableAtomHover};
+			${themePalette('--expandable-atom-text-hover')};
 	}
 `;
 
@@ -93,18 +92,16 @@ export const Body = ({
 	html,
 	image,
 	credit,
-	format,
 }: {
 	html: string;
 	image?: string;
 	credit?: string;
-	format: ArticleFormat;
 }): JSX.Element => {
 	return (
 		<div>
 			{!!image && <img css={imageStyling} src={image} alt="" />}
 			<div
-				css={[bodyStyling, linkStyling(format)]}
+				css={[bodyStyling, linkStyling]}
 				dangerouslySetInnerHTML={{
 					__html: html,
 				}}
