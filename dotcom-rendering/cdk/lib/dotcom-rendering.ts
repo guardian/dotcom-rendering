@@ -238,9 +238,8 @@ export class DotcomRendering extends GuStack {
 			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
 			userData: getUserData({
 				app,
-				region,
 				stage,
-				elkStreamId: loggingStreamName,
+				artifactsBucket,
 			}),
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
