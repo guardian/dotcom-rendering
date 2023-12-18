@@ -6,6 +6,7 @@ import {
 } from '@guardian/source-foundations';
 import { SvgInfo } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
+import { palette as schemedPalette } from '../../palette';
 
 const imageStyling = css`
 	float: left;
@@ -85,7 +86,7 @@ const linkStyling = (format: ArticleFormat) => css`
 
 	a:hover {
 		border-bottom: solid 0.0625rem
-			${decidePalette(format).text.expandableAtomHover};
+			${schemedPalette('--expanding-atom-title-text')};
 	}
 `;
 

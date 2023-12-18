@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { palette as schemedPalette } from '../../palette';
 
 /// LIKE/DISLIKE FEEDBACK FOOTER
 const footerStyling = css`
@@ -53,7 +53,7 @@ export const Footer = ({
 		width: 28px;
 		height: 28px;
 		:hover {
-			background: ${decidePalette(format).text.expandableAtomHover};
+			background: ${schemedPalette('--expanding-atom-title-text')};
 		}
 		:focus {
 			border: none;

@@ -4451,6 +4451,57 @@ const paginationTextLight: PaletteFunction = ({ theme }) => {
 };
 const paginationTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const expandingAtomBackgroundLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Analysis:
+			return '#F2E8E6';
+		default:
+			return sourcePalette.neutral[93];
+	}
+};
+const expandingAtomBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const expandingAtomBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const expandingAtomBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const expandingAtomTitleTextLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+const expandingAtomTitleTextDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[500];
+		default:
+			return pillarPalette(theme, 500);
+	}
+};
+
+const expandingAtomButtonBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+const expandingAtomButtonBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+
+const expandingAtomButtonTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const expandingAtomButtonTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
 // ----- Palette ----- //
 
 /**
@@ -5209,6 +5260,26 @@ const paletteColours = {
 	'--pagination-text': {
 		light: paginationTextLight,
 		dark: paginationTextDark,
+	},
+	'--expanding-atom-background': {
+		light: expandingAtomBackgroundLight,
+		dark: expandingAtomBackgroundDark,
+	},
+	'--expanding-atom-border': {
+		light: expandingAtomBorderLight,
+		dark: expandingAtomBorderDark,
+	},
+	'--expanding-atom-title-text': {
+		light: expandingAtomTitleTextLight,
+		dark: expandingAtomTitleTextDark,
+	},
+	'--expanding-atom-button-background': {
+		light: expandingAtomButtonBackgroundLight,
+		dark: expandingAtomButtonBackgroundDark,
+	},
+	'--expanding-atom-button-text': {
+		light: expandingAtomButtonTextLight,
+		dark: expandingAtomButtonTextDark,
 	},
 } satisfies PaletteColours;
 

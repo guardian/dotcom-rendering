@@ -16,7 +16,6 @@ export type Palette = {
 		designTag: Colour;
 		dateLine: Colour;
 		expandableAtom: Colour;
-		expandableAtomHover: Colour;
 		youtubeOverlayKicker: Colour;
 	};
 	background: {
