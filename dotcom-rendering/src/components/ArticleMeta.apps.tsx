@@ -87,10 +87,10 @@ const MetaGridAvatar = ({ children }: { children: React.ReactNode }) => (
 
 const MetaGridByline = ({
 	children,
-	isCommentLayout,
+	isComment,
 }: {
 	children: React.ReactNode;
-	isCommentLayout: boolean;
+	isComment: boolean;
 }) => (
 	<div
 		css={css`
@@ -106,7 +106,7 @@ const MetaGridByline = ({
 			address > div > svg:first-of-type {
 				display: block;
 				margin-top: ${space[2]}px;
-				${!isCommentLayout && `margin-bottom: ${space[2]}px;`}
+				${!isComment && `margin-bottom: ${space[2]}px;`}
 			}
 		`}
 	>
@@ -116,12 +116,16 @@ const MetaGridByline = ({
 
 const MetaGridCommentCount = ({
 	children,
-	isPictureContent,
-	isCommentLayout,
+	isPicture,
+	isComment,
+	isImmersive,
+	isAnalysis,
 }: {
 	children: React.ReactNode;
-	isPictureContent: boolean;
-	isCommentLayout: boolean;
+	isPicture: boolean;
+	isComment: boolean;
+	isImmersive: boolean;
+	isAnalysis: boolean;
 }) => (
 	<div
 		data-print-Content="hide"
@@ -130,8 +134,9 @@ const MetaGridCommentCount = ({
 			border-left: 1px solid ${themePalette('--article-border')};
 			padding-top: ${space[2]}px;
 			padding-left: ${space[2]}px;
-			${isCommentLayout && `padding-bottom: ${space[4]}px;`}
-			${isPictureContent && 'margin-top: -4px;'}
+			${(isComment || isImmersive || isAnalysis) &&
+			`padding-bottom: ${space[3]}px;`}
+			${isPicture && 'margin-top: -4px;'}
 
 			${from.mobileLandscape} {
 				padding-top: ${space[2]}px;
@@ -147,10 +152,18 @@ const MetaGridCommentCount = ({
 	</div>
 );
 
-const MetaGridDateline = ({ children }: { children: React.ReactNode }) => (
+const MetaGridDateline = ({
+	children,
+	isImmersiveOrAnalysisWithMultipleAuthors,
+}: {
+	children: React.ReactNode;
+	isImmersiveOrAnalysisWithMultipleAuthors: boolean;
+}) => (
 	<div
 		css={css`
-			grid-area: dateline;
+			grid-area: ${isImmersiveOrAnalysisWithMultipleAuthors
+				? 'byline'
+				: 'dateline'};
 			margin-top: ${space[2]}px;
 			margin-bottom: ${space[4]}px;
 		`}
@@ -159,14 +172,10 @@ const MetaGridDateline = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const stretchLines = ({
-	isPictureContent,
-}: {
-	isPictureContent: boolean;
-}) => css`
+const stretchLines = ({ isPicture }: { isPicture: boolean }) => css`
 	grid-column: 1 / -1;
 
-	${isPictureContent &&
+	${isPicture &&
 	`grid-column: 2 / -2;
 	`}
 `;
@@ -193,11 +202,16 @@ export const ArticleMetaApps = ({
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
-	const isPictureContent = format.design === ArticleDesign.Picture;
-	const isCommentLayout = format.design === ArticleDesign.Comment;
-
-	const shouldShowFollowButtonsOnCommentLayout =
-		isCommentLayout && !!byline && soleContributor !== undefined;
+	const isPicture = format.design === ArticleDesign.Picture;
+	const isComment = format.design === ArticleDesign.Comment;
+	const isImmersive = format.display === ArticleDisplay.Immersive;
+	const isAnalysis = format.design === ArticleDesign.Analysis;
+	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
+		layoutOrDesignType && !!byline && soleContributor !== undefined;
+	const isImmersiveOrAnalysisWithMultipleAuthors =
+		(isAnalysis || isImmersive) &&
+		!!byline &&
+		soleContributor === undefined;
 
 	return (
 		<div
@@ -206,10 +220,18 @@ export const ArticleMetaApps = ({
 			}
 			css={metaContainerMargins}
 		>
-			<div css={metaGridContainer}>
-				{shouldShowFollowButtonsOnCommentLayout && (
+			<div
+				css={[
+					metaGridContainer,
+					css`
+						${isImmersiveOrAnalysisWithMultipleAuthors &&
+						`margin-bottom: ${space[4]}px;`}
+					`,
+				]}
+			>
+				{shouldShowFollowButtons(isComment) && (
 					<StraightLines
-						cssOverrides={[stretchLines({ isPictureContent })]}
+						cssOverrides={[stretchLines({ isPicture })]}
 						count={4}
 						color={themePalette('--article-border')}
 					/>
@@ -220,7 +242,7 @@ export const ArticleMetaApps = ({
 					</MetaGridAvatar>
 				)}
 
-				<MetaGridByline isCommentLayout={isCommentLayout}>
+				<MetaGridByline isComment={isComment}>
 					{shouldShowContributor(format) && !!byline && (
 						<Contributor
 							byline={byline}
@@ -228,7 +250,9 @@ export const ArticleMetaApps = ({
 							format={format}
 						/>
 					)}
-					{shouldShowFollowButtonsOnCommentLayout && (
+					{shouldShowFollowButtons(
+						isComment || isAnalysis || isImmersive,
+					) && (
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<FollowWrapper
 								displayName={soleContributor.title}
@@ -250,8 +274,10 @@ export const ArticleMetaApps = ({
 
 				{isCommentable && (
 					<MetaGridCommentCount
-						isPictureContent={isPictureContent}
-						isCommentLayout={isCommentLayout}
+						isPicture={isPicture}
+						isComment={isComment}
+						isImmersive={isImmersive}
+						isAnalysis={isAnalysis}
 					>
 						<Island priority="feature" defer={{ until: 'idle' }}>
 							<CommentCount
@@ -262,21 +288,22 @@ export const ArticleMetaApps = ({
 					</MetaGridCommentCount>
 				)}
 
-				{format.display !== ArticleDisplay.Immersive &&
-					format.design !== ArticleDesign.Analysis && (
-						<StraightLines
-							cssOverrides={[
-								stretchLines({ isPictureContent }),
-								css`
-									grid-row: 4 / -4;
-								`,
-							]}
-							count={1}
-							color={themePalette('--article-border')}
-						/>
-					)}
+				<StraightLines
+					cssOverrides={[
+						stretchLines({ isPicture }),
+						css`
+							grid-row: 4 / -4;
+						`,
+					]}
+					count={1}
+					color={themePalette('--article-border')}
+				/>
 
-				<MetaGridDateline>
+				<MetaGridDateline
+					isImmersiveOrAnalysisWithMultipleAuthors={
+						isImmersiveOrAnalysisWithMultipleAuthors
+					}
+				>
 					<Dateline
 						primaryDateline={primaryDateline}
 						secondaryDateline={secondaryDateline}

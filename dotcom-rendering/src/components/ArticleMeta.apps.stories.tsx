@@ -254,6 +254,39 @@ ArticleAppsImmersiveAndFollowStory.parameters = {
 };
 ArticleAppsImmersiveAndFollowStory.decorators = [splitTheme([immersiveFormat])];
 
+export const ArticleAppsImmersiveWithMultipleContributorsStory: StoryObj = ({
+	format,
+	isCommentable,
+}: StoryArgs) => {
+	return (
+		<Wrapper>
+			<ArticleMetaApps
+				format={format}
+				pageId=""
+				webTitle=""
+				byline="Lanre Bakare in New York and Laura Banks in London"
+				tags={tagsWithByTwoContributors}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={isCommentable}
+				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
+				shortUrlId="/p/zemg8"
+				ajaxUrl=""
+			/>
+		</Wrapper>
+	);
+};
+/** @see /dotcom-rendering/docs/development/storybook.md */
+ArticleAppsImmersiveWithMultipleContributorsStory.args = {
+	format: defaultFormat,
+};
+ArticleAppsImmersiveWithMultipleContributorsStory.parameters = {
+	config: { renderingTarget: 'Apps' },
+};
+ArticleAppsImmersiveWithMultipleContributorsStory.decorators = [
+	splitTheme([immersiveFormat]),
+];
+
 export const ArticleAppsWithMultipleContributors: StoryObj = ({
 	format,
 	isCommentable,
