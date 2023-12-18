@@ -875,6 +875,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						sectionId="comments"
 						data-print-layout="hide"
 						element="section"
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
