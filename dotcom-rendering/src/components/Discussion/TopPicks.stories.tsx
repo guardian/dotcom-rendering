@@ -60,7 +60,6 @@ const signedInStatus: SignedInWithCookies = { kind: 'SignedInWithCookies' };
 
 export const SingleComment = () => (
 	<TopPicks
-		format={format}
 		comments={[commentWithShortBody]}
 		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
@@ -71,10 +70,6 @@ SingleComment.decorators = [splitTheme([format], { orientation: 'vertical' })];
 
 export const MultiColumn = () => (
 	<TopPicks
-		format={{
-			...format,
-			theme: Pillar.Culture,
-		}}
 		comments={[
 			commentWithLongBody,
 			commentWithShortBody,
@@ -100,10 +95,6 @@ MultiColumn.decorators = [
 
 export const SingleColumn = () => (
 	<TopPicks
-		format={{
-			...format,
-			theme: Pillar.Sport,
-		}}
 		comments={[
 			commentWithLongBody,
 			commentWithShortBody,

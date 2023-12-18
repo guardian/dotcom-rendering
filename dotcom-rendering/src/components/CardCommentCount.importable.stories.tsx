@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { space } from '@guardian/source-foundations';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { Island } from './Island';
 
@@ -12,7 +12,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div
 			css={css`
-				margin: 40px;
+				padding: ${space[6]}px;
 			`}
 		>
 			{children}
@@ -25,11 +25,6 @@ export const CommentCountStory = () => {
 		<Wrapper>
 			<Island priority="critical">
 				<CardCommentCount
-					format={{
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-						display: ArticleDisplay.Standard,
-					}}
 					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 					discussionId="/p/zemg8"
 				/>
@@ -44,11 +39,6 @@ export const GalleryStory = () => {
 		<Wrapper>
 			<Island priority="critical">
 				<CardCommentCount
-					format={{
-						design: ArticleDesign.Gallery,
-						theme: Pillar.Culture,
-						display: ArticleDisplay.Standard,
-					}}
 					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 					discussionId="/p/zemg8"
 				/>

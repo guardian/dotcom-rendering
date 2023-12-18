@@ -81,7 +81,7 @@ const analysisStyles = css`
 	})}
 	line-height: 38px;
 	font-style: italic;
-	color: ${schemedPalette('--byline')};
+	color: ${schemedPalette('--byline-anchor')};
 
 	${until.tablet} {
 		${headline.small({

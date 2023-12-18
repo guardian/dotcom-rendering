@@ -1,60 +1,60 @@
 stacks: [frontend]
 regions: [eu-west-1]
 allowedStages:
-    - CODE
-    - PROD
+  - CODE
+  - PROD
 templates:
-    cloudformation:
-        type: cloud-formation
-        parameters:
-            amiEncrypted: true
-            amiTags:
-                # Keep the Node version in sync with `.nvmrc`
-                Recipe: dotcom-rendering-ARM-jammy-node-18.18.2-v2
-                AmigoStage: PROD
+  cloudformation:
+    type: cloud-formation
+    parameters:
+      amiEncrypted: true
+      amiTags:
+        # Keep the Node version in sync with `.nvmrc`
+        Recipe: dotcom-rendering-ARM-jammy-node-18.18.2-v2
+        AmigoStage: PROD
 deployments:
-    frontend-cfn:
-        template: cloudformation
-        parameters:
-            templateStagePaths:
-                CODE: DotcomRendering-CODE.template.json
-                PROD: DotcomRendering-PROD.template.json
-            cloudFormationStackByTags: false
-            cloudFormationStackName: rendering
-            amiParameter: AMIRendering
-    rendering:
-        type: autoscaling
-        parameters:
-            bucketSsmKey: /account/services/dotcom-artifact.bucket
-        dependencies:
-            - frontend-static
-            - frontend-cfn
-    front-web-cfn:
-        template: cloudformation
-        parameters:
-            templateStagePaths:
-                CODE: DotcomRendering-front-web-CODE.template.json
-                PROD: DotcomRendering-front-web-PROD.template.json
-            cloudFormationStackByTags: false
-            cloudFormationStackName: front-web
-            amiParameter: AMIFrontweb
-    front-web:
-        type: autoscaling
-        parameters:
-            bucketSsmKey: /account/services/dotcom-artifact.bucket
-        dependencies:
-            - frontend-static
-            - front-web-cfn
-    frontend-static:
-        type: aws-s3
-        parameters:
-            bucketSsmKey: /account/services/dotcom-static.bucket
-            cacheControl:
-                - pattern: \/stats\/ # stats file can change on each deploy
-                  value: max-age=3600 # one hour in seconds
-                  # assume all other assets are hashed and never change,
-                  # even though this is not the case–e.g. icons
-                - pattern: .*
-                  value: public, max-age=315360000, immutable # one year in seconds
-            prefixStack: false
-            publicReadAcl: false
+  frontend-cfn:
+    template: cloudformation
+    parameters:
+      templateStagePaths:
+        CODE: DotcomRendering-CODE.template.json
+        PROD: DotcomRendering-PROD.template.json
+      cloudFormationStackByTags: false
+      cloudFormationStackName: rendering
+      amiParameter: AMIRendering
+  rendering:
+    type: autoscaling
+    parameters:
+      bucketSsmKey: /account/services/dotcom-artifact.bucket
+    dependencies:
+      - frontend-static
+      - frontend-cfn
+  front-web-cfn:
+    template: cloudformation
+    parameters:
+      templateStagePaths:
+        CODE: DotcomRendering-front-web-CODE.template.json
+        PROD: DotcomRendering-front-web-PROD.template.json
+      cloudFormationStackByTags: false
+      cloudFormationStackName: front-web
+      amiParameter: AMIFrontweb
+  front-web:
+    type: autoscaling
+    parameters:
+      bucketSsmKey: /account/services/dotcom-artifact.bucket
+    dependencies:
+      - frontend-static
+      - front-web-cfn
+  frontend-static:
+    type: aws-s3
+    parameters:
+      bucketSsmKey: /account/services/dotcom-static.bucket
+      cacheControl:
+        - pattern: \/stats\/ # stats file can change on each deploy
+          value: max-age=3600 # one hour in seconds
+          # assume all other assets are hashed and never change,
+          # even though this is not the case–e.g. icons
+        - pattern: .*
+          value: public, max-age=315360000, immutable # one year in seconds
+      prefixStack: false
+      publicReadAcl: false

@@ -1,3 +1,4 @@
+import CleanCSS from 'clean-css';
 import { getHttp3Url } from '../lib/getHttp3Url';
 
 type FontFamily =
@@ -249,9 +250,6 @@ const fontList: FontDisplay[] = [
 	},
 ];
 
-const minifyCssString = (css: string) =>
-	css.replace(/\n/g, '').replace(/\s\s+/g, ' ');
-
 const getFontUrl = (path: string): string =>
 	`https://assets.guim.co.uk/static/frontend/${path}`;
 
@@ -282,5 +280,5 @@ export const getFontsCss = (offerHttp3 = false): string => {
 		`;
 	}
 
-	return minifyCssString(fontCss);
+	return new CleanCSS().minify(fontCss).styles;
 };

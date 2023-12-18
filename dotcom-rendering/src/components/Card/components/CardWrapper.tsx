@@ -6,7 +6,6 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../../../lib/decidePalette';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';
@@ -134,17 +133,11 @@ const onwardContentHoverStyles = css`
 	}
 `;
 
-const topBarStyles = ({
-	isDynamo,
-	format,
-}: {
-	isDynamo?: true;
-	format: ArticleFormat;
-}) => {
+const topBarStyles = ({ isDynamo }: { isDynamo?: true }) => {
 	/* Styling for top bar */
 	const baseStyles = css`
 		background-color: ${isDynamo
-			? decidePalette(format).text.dynamoKicker
+			? palette('--card-kicker-text')
 			: palette('--card-border-top')};
 		content: '';
 		height: 1px;
@@ -192,7 +185,7 @@ export const CardWrapper = ({
 						isOnwardContent
 							? onwardContentHoverStyles
 							: hoverStyles(format),
-						showTopBar && topBarStyles({ isDynamo, format }),
+						showTopBar && topBarStyles({ isDynamo }),
 					]}
 				>
 					{children}

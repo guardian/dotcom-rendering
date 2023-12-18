@@ -1,4 +1,4 @@
-import Int64 from 'node-int64';
+import { Int64 } from 'thrift';
 import { ContentType } from '@guardian/content-api-models/v1/contentType';
 import { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';

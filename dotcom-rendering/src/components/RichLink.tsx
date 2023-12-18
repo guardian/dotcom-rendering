@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { FontScaleArgs } from '@guardian/source-foundations';
 import { from, headline, textSans } from '@guardian/source-foundations';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';
-import { Hide } from './Hide';
 import { QuoteIcon } from './QuoteIcon';
 import { StarRating } from './StarRating/StarRating';
 
@@ -33,130 +33,118 @@ export interface RichLinkImageData {
 	height: string;
 }
 
-const neutralBackground = css`
+const backgroundStyles = css`
 	background-color: ${themePalette('--rich-link-background')};
-	a {
-		color: inherit;
-	}
 	:hover {
 		background-color: ${themePalette('--rich-link-background-hover')};
 	}
 `;
 
-const textColour = css`
-	color: ${themePalette('--rich-link-text')};
+const linkStyles = css`
+	color: inherit;
+	text-decoration: none;
 `;
 
-const richLinkTopBorder = css`
+const topBorderStyles = css`
 	border-top: 1px;
 	border-top-style: solid;
 	border-top-color: ${themePalette('--rich-link-border')};
 `;
 
-const richLinkLink = css`
-	text-decoration: none;
-`;
-
-const richLinkElements = css`
+const innerWrapperStyles = css`
 	padding-top: 2px;
 	padding-right: 5px;
 	padding-left: 5px;
 	padding-bottom: 5px;
 `;
 
-const richLinkHeader = css`
+const headerStyles = css`
 	padding-bottom: 10px;
 	color: ${themePalette('--rich-link-header')};
 `;
 
-const richLinkTitle = (parentIsBlog: boolean) => css`
-	${headline.xxxsmall()};
-	${!parentIsBlog && 'font-size: 14px'};
+/** Re-sizes the headline.xxxsmall to 14px / 0.875rem as this isn't available in source */
+const miniHeadlineOverrideStyles = (fontArgs: FontScaleArgs) => css`
+	${headline.xxxsmall(fontArgs)};
+	font-size: 0.875rem;
+`;
+
+const titleStyles = (parentIsBlog: boolean) => css`
+	${parentIsBlog
+		? headline.xxxsmall({ fontWeight: 'regular' })
+		: miniHeadlineOverrideStyles({ fontWeight: 'regular' })};
 	padding-top: 1px;
 	padding-bottom: 1px;
-	font-weight: 400;
+
 	${from.wide} {
-		${headline.xxsmall()};
+		${headline.xxsmall({ fontWeight: 'regular' })};
 		padding-bottom: 5px;
 	}
 `;
 
-const labsRichLinkTitle = css`
+const labsTitleStyles = css`
+	${textSans.small({ fontWeight: 'bold' })}
+
 	${from.wide} {
-		${textSans.medium({ fontWeight: 'bold', lineHeight: 'regular' })}
+		${textSans.medium({ fontWeight: 'bold' })}
 	}
-	${textSans.small({ fontWeight: 'bold', lineHeight: 'regular' })}
 `;
 
-const richLinkReadMore = css`
-	fill: ${themePalette('--rich-link-fill')};
+const bylineStyles = css`
 	color: ${themePalette('--rich-link-text')};
-	padding-top: 2px;
-`;
+	${miniHeadlineOverrideStyles({ fontStyle: 'italic' })};
 
-const readMoreTextStyle = css`
-	${headline.xxxsmall()};
-	font-size: 14px;
 	${from.wide} {
-		${headline.xxxsmall()}
-		line-height: 25px;
-	}
-	display: inline-block;
-	height: 30px;
-	line-height: 25px;
-	padding-left: 4px;
-	vertical-align: top;
-	font-weight: 500;
-	text-decoration: none;
-`;
-
-const labsReadMoreTextStyle = css`
-	${textSans.medium({ fontWeight: 'regular' })}
-	display: inline-block;
-	height: 30px;
-	line-height: 25px;
-	padding-left: 4px;
-	vertical-align: top;
-	text-decoration: none;
-	color: ${themePalette('--rich-link-text')};
-`;
-
-const byline = css`
-	${headline.xxxsmall()};
-	font-size: 14px;
-	font-style: italic;
-	${from.wide} {
-		${headline.xxsmall()};
+		${headline.xxsmall({ fontStyle: 'italic' })};
 	}
 `;
 
-const contributorImageWrapper = css`
+const contributorWrapperStyles = css`
 	width: 5rem;
 	height: 5rem;
 	margin-left: auto;
 	margin-right: 0.3rem;
+
 	${from.wide} {
 		width: 8.5rem;
 		height: 8.5rem;
 	}
-
-	/* TODO remove the default img styling in ArticleBody.tsx - do we need direct element styling? */
-	img {
-		width: 100%;
-		height: 100%;
-	}
 `;
 
-const paidForBranding = css`
-	${textSans.xxsmall()};
-	font-weight: bold;
+const paidForBrandingStyles = css`
 	color: ${themePalette('--rich-link-branding-text')};
+	${textSans.xxsmall({ fontWeight: 'bold' })};
 `;
 
-const starWrapper = css`
+const starWrapperStyles = css`
 	background-color: ${themePalette('--star-rating-background')};
 	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
+`;
+
+const readMoreStyles = css`
+	fill: ${themePalette('--rich-link-fill')};
+	padding-top: 2px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding-bottom: 6px;
+`;
+
+const readMoreTextStyle = css`
+	${miniHeadlineOverrideStyles({ fontWeight: 'medium' })};
+	color: ${themePalette('--rich-link-text')};
+	padding-left: 4px;
+	text-decoration: none;
+
+	${from.wide} {
+		${headline.xxxsmall({ fontWeight: 'medium' })}
+	}
+`;
+
+const labsReadMoreTextStyle = css`
+	${textSans.medium({ fontWeight: 'regular' })}
 `;
 
 const readMoreText: (contentType: string) => string = (contentType) => {
@@ -209,6 +197,7 @@ export const RichLink = ({
 		imageData.thumbnailUrl !== '' &&
 		imageCardStyles.includes(cardStyle) &&
 		!parentIsBlog;
+
 	const isPaidContent = !!tags.find(
 		({ id }) => id === 'tone/advertisement-features',
 	);
@@ -216,21 +205,18 @@ export const RichLink = ({
 	const mainContributor = getMainContributor(tags);
 	const isLabs = linkFormat.theme === ArticleSpecial.Labs;
 
-	const richLinkTitlePicker = isLabs
-		? labsRichLinkTitle
-		: richLinkTitle(parentIsBlog);
-
 	return (
 		<div
 			data-print-layout="hide"
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
-			css={[neutralBackground]}
+			css={backgroundStyles}
 			data-name={isPlaceholder ? 'placeholder' : ''}
 		>
 			<FormatBoundary format={linkFormat}>
-				<a css={richLinkLink} href={url}>
-					<div css={richLinkTopBorder} />
+				<a css={linkStyles} href={url}>
+					<div css={topBorderStyles} />
+
 					{showImage && (
 						<div>
 							<img
@@ -242,64 +228,66 @@ export const RichLink = ({
 							/>
 						</div>
 					)}
-					<div css={richLinkElements}>
-						<div css={richLinkHeader}>
-							<div css={richLinkTitlePicker}>
+
+					<div css={innerWrapperStyles}>
+						<div css={headerStyles}>
+							<div
+								css={[
+									titleStyles(parentIsBlog),
+									isLabs && labsTitleStyles,
+								]}
+							>
 								{isOpinion && (
-									<>
-										<Hide when="above" breakpoint="wide">
-											<QuoteIcon
-												colour={themePalette(
-													'--quote-icon-fill',
-												)}
-											/>
-										</Hide>
-										<Hide when="below" breakpoint="wide">
-											<QuoteIcon
-												colour={themePalette(
-													'--quote-icon-fill',
-												)}
-											/>
-										</Hide>
-									</>
+									<QuoteIcon
+										colour={themePalette(
+											'--quote-icon-fill',
+										)}
+									/>
 								)}
+
 								{linkText}
 							</div>
+
 							{isOpinion && (
-								<div css={[byline, textColour]}>
-									{mainContributor}
-								</div>
+								<div css={bylineStyles}>{mainContributor}</div>
 							)}
+
 							{starRating !== undefined && (
-								<div css={starWrapper}>
+								<div css={starWrapperStyles}>
 									<StarRating
 										rating={starRating}
 										size="medium"
 									/>
 								</div>
 							)}
+
 							{!!(isPaidContent && sponsorName) && (
-								<div css={paidForBranding}>
+								<div css={paidForBrandingStyles}>
 									Paid for by {sponsorName}
 								</div>
 							)}
 						</div>
+
 						{!!(isOpinion && contributorImage) && (
-							<div css={contributorImageWrapper}>
+							<div
+								className="avatar"
+								css={contributorWrapperStyles}
+							>
 								<Avatar
 									src={contributorImage}
 									alt={mainContributor}
 								/>
 							</div>
 						)}
-						<div css={richLinkReadMore}>
+
+						<div css={readMoreStyles}>
 							<ArrowInCircle />
+
 							<div
-								css={
-									isLabs
-										? labsReadMoreTextStyle
-										: readMoreTextStyle
-								}
+								css={[
+									readMoreTextStyle,
+									isLabs && labsReadMoreTextStyle,
+								]}
 							>
 								{readMoreText(contentType)}
 							</div>

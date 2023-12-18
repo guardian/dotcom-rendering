@@ -27,7 +27,7 @@ import { TimelineItem } from '@guardian/content-atom-model/timeline/timelineItem
 import { fromNullable, some } from '../vendor/@guardian/types/index';
 import { ElementKind } from 'bodyElement';
 import { atomScript } from 'components/InteractiveAtom';
-import Int64 from 'node-int64';
+import { Int64 } from 'thrift';
 import { DocParser } from 'parserContext';
 import { Result } from 'result';
 import { formatOptionalDate, parseAtom } from './atoms';

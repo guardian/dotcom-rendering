@@ -48,6 +48,9 @@ const buttonOverrides = (priority: 'primary' | 'secondary' | 'subdued') => {
 						background-color: ${themePalette(
 							'--discussion-button-hover',
 						)};
+						border: 1px solid
+							${themePalette('--discussion-button-hover')};
+						color: ${sourcePalette.neutral[100]};
 					}
 				}
 			`;

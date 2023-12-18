@@ -1,7 +1,4 @@
-const { URLSearchParams } = require('url');
-
-// @ts-check
-const fetch = require('node-fetch').default;
+const { URLSearchParams } = require('node:url');
 
 /** @type {(_: [string, unknown]) => _ is [string, string]} */
 const isStringTuple = (_) => typeof _[1] === 'string';

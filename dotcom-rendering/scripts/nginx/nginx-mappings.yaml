@@ -1,5 +1,5 @@
 name: dotcom-rendering
 domain-root: thegulocal.com
 mappings:
-    - prefix: r
-      port: 3030
+  - prefix: r
+    port: 3030

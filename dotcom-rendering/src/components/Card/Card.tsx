@@ -366,7 +366,6 @@ export const Card = ({
 								defer={{ until: 'visible' }}
 							>
 								<CardCommentCount
-									format={format}
 									discussionApiUrl={discussionApiUrl}
 									discussionId={discussionId}
 									isOnwardContent={isOnwardContent}
@@ -602,8 +601,6 @@ export const Card = ({
 							) : null}
 							{!!mainMedia && mainMedia.type !== 'Video' && (
 								<MediaMeta
-									containerPalette={containerPalette}
-									format={format}
 									mediaType={mainMedia.type}
 									hasKicker={!!kickerText}
 								/>
@@ -638,7 +635,6 @@ export const Card = ({
 								>
 									<LatestLinks
 										id={linkTo}
-										format={format}
 										isDynamo={isDynamo}
 										direction={supportingContentAlignment}
 										containerPalette={containerPalette}

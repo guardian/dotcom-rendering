@@ -4319,6 +4319,9 @@ const topPickLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 const staffLabelLight: PaletteFunction = () => sourcePalette.brand[400];
 const staffLabelDark: PaletteFunction = () => sourcePalette.brand[600];
 
+const staffPickLight: PaletteFunction = () => sourcePalette.neutral[7];
+const staffPickDark: PaletteFunction = () => sourcePalette.neutral[97];
+
 const recommendationCountLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const recommendationCountDark: PaletteFunction = () =>
@@ -4373,7 +4376,7 @@ const discussionDark: PaletteFunction = ({ theme }) => {
 };
 
 const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
-const discussionLinkDark: PaletteFunction = () => sourcePalette.neutral[100];
+const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
 const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -4441,6 +4444,43 @@ const firstCommentPreviewLight: PaletteFunction = () =>
 	sourcePalette.neutral[93];
 const firstCommentPreviewDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
+
+const discussionPaginationTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const discussionPaginationTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const discussionPaginationBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const discussionPaginationBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+
+const discussionPaginationBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const discussionPaginationBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const paginationTextLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+	}
+};
+const paginationTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 // ----- Palette ----- //
 
@@ -5125,6 +5165,10 @@ const paletteColours = {
 		light: staffLabelLight,
 		dark: staffLabelDark,
 	},
+	'--pick-label-color': {
+		light: staffPickLight,
+		dark: staffPickDark,
+	},
 	'--recommendation-count': {
 		light: recommendationCountLight,
 		dark: recommendationCountDark,
@@ -5169,6 +5213,18 @@ const paletteColours = {
 		light: discussionReportBorderLight,
 		dark: discussionReportBorderDark,
 	},
+	'--discussion-pagination-text': {
+		light: discussionPaginationTextLight,
+		dark: discussionPaginationTextDark,
+	},
+	'--discussion-pagination-background': {
+		light: discussionPaginationBackgroundLight,
+		dark: discussionPaginationBackgroundDark,
+	},
+	'--discussion-pagination-border': {
+		light: discussionPaginationBorderLight,
+		dark: discussionPaginationBorderDark,
+	},
 	'--comment-form-input-background': {
 		light: commentFormInputBackgroundLight,
 		dark: commentFormInputBackgroundDark,
@@ -5180,6 +5236,10 @@ const paletteColours = {
 	'--comment-form-addon-button': {
 		light: commentFormAddonBackgroundLight,
 		dark: commentFormAddonBackgroundDark,
+	},
+	'--pagination-text': {
+		light: paginationTextLight,
+		dark: paginationTextDark,
 	},
 } satisfies PaletteColours;
 

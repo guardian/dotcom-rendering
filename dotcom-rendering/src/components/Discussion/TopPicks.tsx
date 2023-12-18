@@ -5,7 +5,6 @@ import type { CommentType, UserProfile } from '../../types/discussion';
 import { TopPick } from './TopPick';
 
 type Props = {
-	format: ArticleFormat;
 	user?: UserProfile;
 	comments: CommentType[];
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
@@ -47,7 +46,6 @@ const oneColCommentsStyles = css`
 `;
 
 export const TopPicks = ({
-	format,
 	user,
 	comments,
 	authStatus,
@@ -67,7 +65,6 @@ export const TopPicks = ({
 					{leftColComments.map((comment) => (
 						<TopPick
 							key={comment.id}
-							format={format}
 							comment={comment}
 							authStatus={authStatus}
 							userMadeComment={
@@ -83,7 +80,6 @@ export const TopPicks = ({
 					{rightColComments.map((comment) => (
 						<TopPick
 							key={comment.id}
-							format={format}
 							comment={comment}
 							authStatus={authStatus}
 							userMadeComment={
@@ -100,7 +96,6 @@ export const TopPicks = ({
 				{comments.map((comment) => (
 					<TopPick
 						key={comment.id}
-						format={format}
 						comment={comment}
 						authStatus={authStatus}
 						userMadeComment={

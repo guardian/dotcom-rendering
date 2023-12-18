@@ -3,17 +3,10 @@ export type Colour = string;
 export type Palette = {
 	text: {
 		headlineWhenMatch: Colour;
-		cardHeadline: Colour;
-		cardKicker: Colour;
-		dynamoHeadline: Colour;
-		dynamoKicker: Colour;
-		cardStandfirst: Colour;
-		cardFooter: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
-		pagination: Colour;
 		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
 		filterButton: Colour;
@@ -30,14 +23,12 @@ export type Palette = {
 		analysisContrast: Colour;
 		analysisContrastHover: Colour;
 		audioAtom: Colour;
-		card: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
-		analysisUnderline: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -60,16 +51,10 @@ export type Palette = {
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
 		filterButton: Colour;
-		pagination: Colour;
-	};
-	topBar: {
-		card: Colour;
 	};
 	hover: {
 		standfirstLink: Colour;
-		pagination: Colour;
 	};
-	discussionGeneric: Colour;
 };
 
 export type ContainerOverrides = {

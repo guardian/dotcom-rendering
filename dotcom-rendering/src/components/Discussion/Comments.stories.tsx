@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import type { SignedInUser } from '../../types/discussion';
 import { Comments } from './Comments';
 
@@ -39,10 +41,6 @@ export const LoggedOutHiddenPicks = () => (
 		<Comments
 			shortUrl="p/39f5z"
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Culture,
-			}}
 			isClosedForComments={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
@@ -56,6 +54,14 @@ export const LoggedOutHiddenPicks = () => (
 	</div>
 );
 LoggedOutHiddenPicks.storyName = 'when logged out, unexpanded and with picks';
+LoggedOutHiddenPicks.decorators = [
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Culture,
+		},
+	]),
+];
 
 export const InitialPage = () => (
 	<div
@@ -68,10 +74,6 @@ export const InitialPage = () => (
 			shortUrl="p/39f5z"
 			initialPage={3}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Lifestyle,
-			}}
 			isClosedForComments={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
@@ -85,6 +87,14 @@ export const InitialPage = () => (
 	</div>
 );
 InitialPage.storyName = 'with initial page set to 3';
+InitialPage.decorators = [
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
 export const Overrides = () => (
 	<div
@@ -99,10 +109,6 @@ export const Overrides = () => (
 			pageSizeOverride={50}
 			orderByOverride="recommendations"
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Opinion,
-			}}
 			isClosedForComments={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
@@ -116,6 +122,14 @@ export const Overrides = () => (
 	</div>
 );
 Overrides.storyName = 'with page size overridden to 50';
+Overrides.decorators = [
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Opinion,
+		},
+	]),
+];
 
 export const LoggedInHiddenNoPicks = () => (
 	<div
@@ -126,7 +140,6 @@ export const LoggedInHiddenNoPicks = () => (
 	>
 		<Comments
 			shortUrl="p/abc123"
-			format={format}
 			isClosedForComments={false}
 			user={aUser}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
@@ -143,6 +156,7 @@ export const LoggedInHiddenNoPicks = () => (
 );
 LoggedInHiddenNoPicks.storyName =
 	'when logged in, with no picks and not expanded';
+LoggedInHiddenNoPicks.decorators = [splitTheme([format])];
 
 export const LoggedIn = () => (
 	<div
@@ -153,7 +167,6 @@ export const LoggedIn = () => (
 	>
 		<Comments
 			shortUrl="p/abc123"
-			format={format}
 			isClosedForComments={false}
 			user={aUser}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
@@ -169,6 +182,7 @@ export const LoggedIn = () => (
 	</div>
 );
 LoggedIn.storyName = 'when logged in and expanded';
+LoggedIn.decorators = [lightDecorator([format])];
 
 export const LoggedInShortDiscussion = () => (
 	<div
@@ -179,7 +193,6 @@ export const LoggedInShortDiscussion = () => (
 	>
 		<Comments
 			shortUrl="p/39f5a" // Two comments"
-			format={format}
 			isClosedForComments={false}
 			user={aUser}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
@@ -195,6 +208,7 @@ export const LoggedInShortDiscussion = () => (
 	</div>
 );
 LoggedInShortDiscussion.storyName = 'when logged in but only two comments made';
+LoggedInShortDiscussion.decorators = [splitTheme([format])];
 
 export const LoggedOutHiddenNoPicks = () => (
 	<div
@@ -205,10 +219,6 @@ export const LoggedOutHiddenNoPicks = () => (
 	>
 		<Comments
 			shortUrl="p/abc123"
-			format={{
-				...format,
-				theme: Pillar.Sport,
-			}}
 			isClosedForComments={false}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			additionalHeaders={{
@@ -224,6 +234,14 @@ export const LoggedOutHiddenNoPicks = () => (
 );
 LoggedOutHiddenNoPicks.storyName =
 	'when logged out, with no picks and not expanded';
+LoggedOutHiddenNoPicks.decorators = [
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Sport,
+		},
+	]),
+];
 
 export const Closed = () => (
 	<div
@@ -235,10 +253,6 @@ export const Closed = () => (
 		<Comments
 			shortUrl="p/39f5z"
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Lifestyle,
-			}}
 			isClosedForComments={true}
 			user={aUser}
 			additionalHeaders={{
@@ -253,6 +267,14 @@ export const Closed = () => (
 	</div>
 );
 Closed.storyName = 'Logged in but closed for comments';
+Closed.decorators = [
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
 export const NoComments = () => (
 	<div
@@ -264,10 +286,6 @@ export const NoComments = () => (
 		<Comments
 			shortUrl="p/39f5x" // A discussion with zero comments
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Culture,
-			}}
 			isClosedForComments={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
@@ -281,6 +299,14 @@ export const NoComments = () => (
 	</div>
 );
 NoComments.storyName = 'when no comments have been made';
+NoComments.decorators = [
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Culture,
+		},
+	]),
+];
 
 export const LegacyDiscussion = () => (
 	<div
@@ -292,10 +318,6 @@ export const LegacyDiscussion = () => (
 		<Comments
 			shortUrl="p/32255" // A 'legacy' discussion that doesn't allow threading
 			baseUrl="https://discussion.theguardian.com/discussion-api"
-			format={{
-				...format,
-				theme: Pillar.Culture,
-			}}
 			isClosedForComments={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
@@ -309,3 +331,11 @@ export const LegacyDiscussion = () => (
 	</div>
 );
 LegacyDiscussion.storyName = "a legacy discussion that doesn't allow threading";
+LegacyDiscussion.decorators = [
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Culture,
+		},
+	]),
+];
