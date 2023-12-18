@@ -1032,10 +1032,13 @@ After=network.target
 WorkingDirectory=/home/dotcom-rendering/rendering
 Type=simple
 User=dotcom-rendering
+Group=frontend
 StandardError=journal
 StandardOutput=journal
 Environment=TERM=xterm-256color
-ExecStart=NODE_ENV=production GU_STAGE=TEST -u dotcom-rendering -g frontend make prod
+Environment=NODE_ENV=production
+Environment=GU_STAGE=TEST
+ExecStart=make prod
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
