@@ -252,7 +252,11 @@ module.exports = {
 			},
 		},
 		{
-			files: ['**/**.config.ts'],
+			files: [
+				'**/**.config.ts',
+				'**/webpack.config.*',
+				'**/webpack/**/*.*',
+			],
 			rules: {
 				'import/no-default-export': 'off',
 			},
