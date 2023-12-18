@@ -74,10 +74,14 @@ const enableLog4j = {
 			// Owner Read & Write, Group Read
 			mode: 0o640,
 		},
+		out: {
+			type: 'stdout',
+			layout: { type: 'json', separator: ',' },
+		},
 	},
 	categories: {
-		default: { appenders: ['fileAppender'], level: 'info' },
-		production: { appenders: ['fileAppender'], level: 'info' },
+		default: { appenders: ['out', 'fileAppender'], level: 'info' },
+		production: { appenders: ['out', 'fileAppender'], level: 'info' },
 		development: { appenders: ['console'], level: 'info' },
 	},
 	// log4js cluster mode handling does not work as it prevents
