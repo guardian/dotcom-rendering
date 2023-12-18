@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { space, textSans } from '@guardian/source-foundations';
@@ -52,7 +53,6 @@ const buttonStyles = css`
 	background: none;
 	border: none;
 	display: block;
-	margin-top: ${space[1]}px;
 	margin-left: 0;
 	min-height: ${space[6]}px;
 	padding: 0;
@@ -92,9 +92,14 @@ type ButtonProps = {
 export const FollowNotificationsButton = ({
 	isFollowing,
 	onClickHandler,
-}: ButtonProps) => {
+	cssOverrides,
+}: ButtonProps & { cssOverrides?: SerializedStyles }) => {
 	return (
-		<button onClick={onClickHandler} type="button" css={buttonStyles}>
+		<button
+			onClick={onClickHandler}
+			type="button"
+			css={[buttonStyles, cssOverrides]}
+		>
 			<span css={containerStyles}>
 				<FollowIcon
 					isFollowing={isFollowing}
@@ -111,9 +116,14 @@ export const FollowTagButton = ({
 	isFollowing,
 	displayName = '',
 	onClickHandler,
-}: ButtonProps & { displayName: string }) => {
+	cssOverrides,
+}: ButtonProps & { displayName: string; cssOverrides?: SerializedStyles }) => {
 	return (
-		<button onClick={onClickHandler} type="button" css={buttonStyles}>
+		<button
+			onClick={onClickHandler}
+			type="button"
+			css={[buttonStyles, cssOverrides]}
+		>
 			<span css={containerStyles}>
 				<FollowIcon
 					isFollowing={isFollowing}

@@ -85,17 +85,28 @@ const MetaGridAvatar = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const MetaGridByline = ({ children }: { children: React.ReactNode }) => (
+const MetaGridByline = ({
+	children,
+	isCommentLayout,
+}: {
+	children: React.ReactNode;
+	isCommentLayout: boolean;
+}) => (
 	<div
 		css={css`
 			grid-area: byline;
 			width: auto;
 			margin-top: ${space[2]}px;
-			margin-bottom: ${space[2]}px;
+			margin-bottom: ${space[3]}px;
+
+			address > div {
+				padding-bottom: 0px;
+			}
 
 			address > div > svg:first-of-type {
 				display: block;
-				margin-top: ${space[3]}px;
+				margin-top: ${space[2]}px;
+				${!isCommentLayout && `margin-bottom: ${space[2]}px;`}
 			}
 		`}
 	>
@@ -106,9 +117,11 @@ const MetaGridByline = ({ children }: { children: React.ReactNode }) => (
 const MetaGridCommentCount = ({
 	children,
 	isPictureContent,
+	isCommentLayout,
 }: {
 	children: React.ReactNode;
 	isPictureContent: boolean;
+	isCommentLayout: boolean;
 }) => (
 	<div
 		data-print-Content="hide"
@@ -117,6 +130,7 @@ const MetaGridCommentCount = ({
 			border-left: 1px solid ${themePalette('--article-border')};
 			padding-top: ${space[2]}px;
 			padding-left: ${space[2]}px;
+			${isCommentLayout && `padding-bottom: ${space[4]}px;`}
 			${isPictureContent && 'margin-top: -4px;'}
 
 			${from.mobileLandscape} {
@@ -179,10 +193,9 @@ export const ArticleMetaApps = ({
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
-
 	const isPictureContent = format.design === ArticleDesign.Picture;
-
 	const isCommentLayout = format.design === ArticleDesign.Comment;
+
 	const shouldShowFollowButtonsOnCommentLayout =
 		isCommentLayout && !!byline && soleContributor !== undefined;
 
@@ -196,12 +209,7 @@ export const ArticleMetaApps = ({
 			<div css={metaGridContainer}>
 				{shouldShowFollowButtonsOnCommentLayout && (
 					<StraightLines
-						cssOverrides={[
-							stretchLines({ isPictureContent }),
-							css`
-								grid-row: 1 / -1;
-							`,
-						]}
+						cssOverrides={[stretchLines({ isPictureContent })]}
 						count={4}
 						color={themePalette('--article-border')}
 					/>
@@ -212,7 +220,7 @@ export const ArticleMetaApps = ({
 					</MetaGridAvatar>
 				)}
 
-				<MetaGridByline>
+				<MetaGridByline isCommentLayout={isCommentLayout}>
 					{shouldShowContributor(format) && !!byline && (
 						<Contributor
 							byline={byline}
@@ -241,7 +249,10 @@ export const ArticleMetaApps = ({
 				</MetaGridByline>
 
 				{isCommentable && (
-					<MetaGridCommentCount isPictureContent={isPictureContent}>
+					<MetaGridCommentCount
+						isPictureContent={isPictureContent}
+						isCommentLayout={isCommentLayout}
+					>
 						<Island priority="feature" defer={{ until: 'idle' }}>
 							<CommentCount
 								discussionApiUrl={discussionApiUrl}
