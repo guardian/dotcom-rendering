@@ -76,17 +76,18 @@ const bodyStyling = css`
 	}
 `;
 
-const linkStyling = (format: ArticleFormat) => css`
+const linkStyling = css`
 	a {
-		color: ${decidePalette(format).text.expandableAtom};
+		color: ${schemedPalette('--expanding-atom-link-text')};
 		text-decoration: none;
-		border-bottom: 0.0625rem solid ${sourcePalette.neutral[86]};
+		border-bottom: 0.0625rem solid
+			${schemedPalette('--expanding-atom-button-background')};
 		transition: border-color 0.15s ease-out;
 	}
 
 	a:hover {
 		border-bottom: solid 0.0625rem
-			${schemedPalette('--expanding-atom-title-text')};
+			${schemedPalette('--expanding-atom-link-text')};
 	}
 `;
 
@@ -94,18 +95,16 @@ export const Body = ({
 	html,
 	image,
 	credit,
-	format,
 }: {
 	html: string;
 	image?: string;
 	credit?: string;
-	format: ArticleFormat;
 }): JSX.Element => {
 	return (
 		<div>
 			{!!image && <img css={imageStyling} src={image} alt="" />}
 			<div
-				css={[bodyStyling, linkStyling(format)]}
+				css={[bodyStyling, linkStyling]}
 				dangerouslySetInnerHTML={{
 					__html: html,
 				}}

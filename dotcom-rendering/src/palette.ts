@@ -4467,6 +4467,31 @@ const expandingAtomBorderLight: PaletteFunction = () =>
 const expandingAtomBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
+const expandingAtomLinkTextLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[300];
+		default:
+			return pillarPalette(theme, 300);
+	}
+};
+const expandingAtomLinkTextDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+
 const expandingAtomTitleTextLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
@@ -5272,6 +5297,10 @@ const paletteColours = {
 	'--expanding-atom-title-text': {
 		light: expandingAtomTitleTextLight,
 		dark: expandingAtomTitleTextDark,
+	},
+	'--expanding-atom-link-text': {
+		light: expandingAtomLinkTextLight,
+		dark: expandingAtomLinkTextDark,
 	},
 	'--expanding-atom-button-background': {
 		light: expandingAtomButtonBackgroundLight,
