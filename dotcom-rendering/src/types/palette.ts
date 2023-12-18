@@ -55,7 +55,6 @@ export type Palette = {
 	hover: {
 		standfirstLink: Colour;
 	};
-	discussionGeneric: Colour;
 };
 
 export type ContainerOverrides = {

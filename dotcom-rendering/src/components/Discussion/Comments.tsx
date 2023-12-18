@@ -33,7 +33,6 @@ import { TopPicks } from './TopPicks';
 type Props = {
 	shortUrl: string;
 	baseUrl: string;
-	format: ArticleFormat;
 	isClosedForComments: boolean;
 	commentToScrollTo?: number;
 	initialPage?: number;
@@ -185,7 +184,6 @@ const writeMutes = (mutes: string[]) => {
 export const Comments = ({
 	baseUrl,
 	shortUrl,
-	format,
 	isClosedForComments,
 	initialPage,
 	commentToScrollTo,
@@ -384,7 +382,6 @@ export const Comments = ({
 				{picks.length !== 0 ? (
 					<div css={picksWrapper}>
 						<TopPicks
-							format={format}
 							comments={picks.slice(0, 2)}
 							authStatus={user?.authStatus}
 							onPermalinkClick={onPermalinkClick}
@@ -394,7 +391,6 @@ export const Comments = ({
 				) : (
 					<>
 						<Filters
-							format={format}
 							filters={filters}
 							onFilterChange={onFilterChange}
 							totalPages={totalPages}
@@ -460,7 +456,6 @@ export const Comments = ({
 			)}
 			{!!picks.length && (
 				<TopPicks
-					format={format}
 					comments={picks}
 					authStatus={user?.authStatus}
 					onPermalinkClick={onPermalinkClick}
@@ -468,7 +463,6 @@ export const Comments = ({
 				/>
 			)}
 			<Filters
-				format={format}
 				filters={filters}
 				onFilterChange={onFilterChange}
 				totalPages={totalPages}

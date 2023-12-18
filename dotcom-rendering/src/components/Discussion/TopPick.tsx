@@ -6,7 +6,6 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { decidePalette } from '../../lib/decidePalette';
 import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
 import { palette as themePalette } from '../../palette';
 import type { CommentType } from '../../types/discussion';
@@ -18,7 +17,6 @@ import { Row } from './Row';
 import { Timestamp } from './Timestamp';
 
 type Props = {
-	format: ArticleFormat;
 	comment: CommentType;
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
 	userMadeComment: boolean;
@@ -46,11 +44,11 @@ const pickStyles = css`
 
 const arrowSize = 25;
 
-const userNameStyles = (format: ArticleFormat) => css`
+const userNameStyles = css`
 	margin-top: 3px;
 	margin-bottom: -6px;
 	font-weight: bold;
-	color: ${decidePalette(format).discussionGeneric};
+	color: ${themePalette('--discussion-colour')};
 `;
 
 const avatarMargin = css`
@@ -169,7 +167,6 @@ const truncateText = (input: string, limit: number) => {
 };
 
 export const TopPick = ({
-	format,
 	comment,
 	authStatus,
 	userMadeComment,
@@ -225,7 +222,7 @@ export const TopPick = ({
 						/>
 					</div>
 					<Column>
-						<span css={userNameStyles(format)}>
+						<span css={userNameStyles}>
 							<a
 								href={comment.userProfile.webUrl}
 								css={[linkStyles, inheritColour]}

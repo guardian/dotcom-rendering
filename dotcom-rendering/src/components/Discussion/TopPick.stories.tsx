@@ -88,7 +88,6 @@ export const LongPick = () => (
 		`}
 	>
 		<TopPick
-			format={format}
 			comment={comment}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
@@ -106,10 +105,6 @@ export const ShortPick = () => (
 		`}
 	>
 		<TopPick
-			format={{
-				...format,
-				theme: Pillar.Opinion,
-			}}
 			comment={commentWithShortBody}
 			authStatus={signedInStatus}
 			userMadeComment={false}
@@ -118,7 +113,14 @@ export const ShortPick = () => (
 	</div>
 );
 ShortPick.storyName = 'Short - Staff';
-ShortPick.decorators = [splitTheme([format])];
+ShortPick.decorators = [
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Opinion,
+		},
+	]),
+];
 
 export const LongPickContributor = () => (
 	<div
@@ -128,7 +130,6 @@ export const LongPickContributor = () => (
 		`}
 	>
 		<TopPick
-			format={format}
 			comment={commentContributor}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
@@ -146,10 +147,6 @@ export const ShortPickContributor = () => (
 		`}
 	>
 		<TopPick
-			format={{
-				...format,
-				theme: Pillar.Opinion,
-			}}
 			comment={contributorCommentWithShortBody}
 			authStatus={signedInStatus}
 			userMadeComment={false}
@@ -158,4 +155,11 @@ export const ShortPickContributor = () => (
 	</div>
 );
 ShortPickContributor.storyName = 'Short - Contributor';
-ShortPickContributor.decorators = [splitTheme([format])];
+ShortPickContributor.decorators = [
+	splitTheme([
+		{
+			...format,
+			theme: Pillar.Opinion,
+		},
+	]),
+];

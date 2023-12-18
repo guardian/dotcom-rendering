@@ -571,29 +571,6 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
-const discussion = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Lifestyle:
-			return lifestyle[400];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Culture:
-			return culture[400];
-		case Pillar.Opinion:
-			return opinion[400];
-		case ArticleSpecial.Labs:
-			return lifestyle[400];
-		case ArticleSpecial.SpecialReport:
-			return news[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-		default:
-			return news[400];
-	}
-};
-
 const textYoutubeOverlayKicker = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -681,6 +658,5 @@ export const decidePalette = (
 		hover: {
 			standfirstLink: hoverStandfirstLink(format),
 		},
-		discussionGeneric: discussion(format),
 	};
 };
