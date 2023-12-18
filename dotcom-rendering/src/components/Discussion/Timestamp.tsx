@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	textSans,
-} from '@guardian/source-foundations';
+import { textSans } from '@guardian/source-foundations';
 import { useState } from 'react';
 import { dateFormatter } from '../../lib/discussionDateFormatter';
 import { useInterval } from '../../lib/useInterval';
+import { palette as schemedPalette } from '../../palette';
 
 type Props = {
 	isoDateTime: string;
@@ -15,7 +13,7 @@ type Props = {
 };
 
 const linkStyles = css`
-	color: ${sourcePalette.neutral[46]};
+	color: ${schemedPalette('--discussion-grey')};
 	text-decoration: none;
 	:hover,
 	:focus {

@@ -52,7 +52,7 @@ const textStyles = css`
 
 const headlineStyles = css`
 	${headline.xxxsmall()}
-	color: ${sourcePalette.neutral[46]};
+	color: ${themePalette('--discussion-grey')};
 	padding-bottom: ${space[1]}px;
 `;
 
