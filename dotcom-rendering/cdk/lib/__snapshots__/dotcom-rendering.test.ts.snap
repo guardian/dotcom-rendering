@@ -925,6 +925,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::EC2::SecurityGroup",
     },
     "frontendTESTrenderingF3FD9600": {
+      "DependsOn": [
+        "InstanceRole",
+      ],
       "Properties": {
         "LaunchTemplateData": {
           "IamInstanceProfile": {

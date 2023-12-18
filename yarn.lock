@@ -40,24 +40,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-cdk/asset-awscli-v1@npm:^2.2.177, @aws-cdk/asset-awscli-v1@npm:^2.2.200":
+"@aws-cdk/asset-awscli-v1@npm:^2.2.200":
   version: 2.2.201
   resolution: "@aws-cdk/asset-awscli-v1@npm:2.2.201"
   checksum: 07838367f2f163deaaad0c6fa8fb4248be80795255b8f21e891f318b2aa735ec927a606fbcef6f232545b0ce54ccea26fb43eba4f85bd8d771da6b5fb05d9702
   languageName: node
   linkType: hard
 
-"@aws-cdk/asset-kubectl-v20@npm:^2.1.1, @aws-cdk/asset-kubectl-v20@npm:^2.1.2":
+"@aws-cdk/asset-kubectl-v20@npm:^2.1.2":
   version: 2.1.2
   resolution: "@aws-cdk/asset-kubectl-v20@npm:2.1.2"
   checksum: 491883ada4b62f89e48e3d45d776b72d30cbb2d87e0802424164343c81723b23dd77044ab3cb02a7ecad9960622dc264f9f716d2ec830404482117ee63f8bb2d
   languageName: node
   linkType: hard
 
-"@aws-cdk/asset-node-proxy-agent-v5@npm:^2.0.148, @aws-cdk/asset-node-proxy-agent-v5@npm:^2.0.166":
-  version: 2.0.166
-  resolution: "@aws-cdk/asset-node-proxy-agent-v5@npm:2.0.166"
-  checksum: 7385d48e25f199cdaac4e961ec6a95a031a60bb9a93d78ababaf3b91122593dc965fa764de6aeca2af9e12113dcbd18535aa031c67a1846e534294f2cf051558
+"@aws-cdk/asset-node-proxy-agent-v6@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@aws-cdk/asset-node-proxy-agent-v6@npm:2.0.1"
+  checksum: 1f4b11a66483b3c0f1bf3f7d325d94e5f0175ea49347f75b10b13ddfc35578d5bf4b45c1cb4b1e03c08ba0d2c3c52f8e914150bd7c0cfdb92ae71de3f07cedf3
   languageName: node
   linkType: hard
 
@@ -4276,57 +4276,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@guardian/cdk@npm:50.10.10":
-  version: 50.10.10
-  resolution: "@guardian/cdk@npm:50.10.10"
+"@guardian/cdk@npm:50.13.0":
+  version: 50.13.0
+  resolution: "@guardian/cdk@npm:50.13.0"
   dependencies:
-    "@oclif/core": "npm:2.11.8"
-    aws-cdk-lib: "npm:2.90.0"
-    aws-sdk: "npm:^2.1438.0"
+    "@oclif/core": "npm:2.15.0"
+    aws-cdk-lib: "npm:2.100.0"
+    aws-sdk: "npm:^2.1469.0"
     chalk: "npm:^4.1.2"
-    codemaker: "npm:^1.87.0"
-    constructs: "npm:10.2.69"
+    codemaker: "npm:^1.89.0"
+    constructs: "npm:10.3.0"
     git-url-parse: "npm:^13.1.0"
     js-yaml: "npm:^4.1.0"
     lodash.camelcase: "npm:^4.3.0"
     lodash.kebabcase: "npm:^4.1.1"
     lodash.upperfirst: "npm:^4.3.1"
     read-pkg-up: "npm:7.0.1"
-    yargs: "npm:^17.6.2"
+    yargs: "npm:^17.7.2"
   peerDependencies:
-    aws-cdk: 2.90.0
-    aws-cdk-lib: 2.90.0
-    constructs: 10.2.69
+    aws-cdk: 2.100.0
+    aws-cdk-lib: 2.100.0
+    constructs: 10.3.0
   bin:
     gu-cdk: bin/gu-cdk
-  checksum: b7a9ba1117d3ce2c10662b51704a7c55cd9fec6764d6ff57257c086ad7f8d74b66fcef5ee505a24991d4b0cbbe9fd0d62a65fcfebaa786ff95bfd2a97161078a
-  languageName: node
-  linkType: hard
-
-"@guardian/cdk@npm:50.10.6":
-  version: 50.10.6
-  resolution: "@guardian/cdk@npm:50.10.6"
-  dependencies:
-    "@oclif/core": "npm:2.10.0"
-    aws-cdk-lib: "npm:2.87.0"
-    aws-sdk: "npm:^2.1415.0"
-    chalk: "npm:^4.1.2"
-    codemaker: "npm:^1.85.0"
-    constructs: "npm:10.2.69"
-    git-url-parse: "npm:^13.1.0"
-    js-yaml: "npm:^4.1.0"
-    lodash.camelcase: "npm:^4.3.0"
-    lodash.kebabcase: "npm:^4.1.1"
-    lodash.upperfirst: "npm:^4.3.1"
-    read-pkg-up: "npm:7.0.1"
-    yargs: "npm:^17.6.2"
-  peerDependencies:
-    aws-cdk: 2.87.0
-    aws-cdk-lib: 2.87.0
-    constructs: 10.2.69
-  bin:
-    gu-cdk: bin/gu-cdk
-  checksum: 36e83806df0af7f18bbbab8f0e33e5fa3d1e6d0a8b75b86f5a754a087a656daf798c7062aab53a7e610e3fcc4c946041d2ad3b01694789ea1df49e212b36ed1d
+  checksum: c67aba15264251f84a48950de2f13ed3e3c18ab6453d5f581d1ffb982458118d51868db2b3de0ff45085b1f12857c1963f72958e7d151f60d2712510459eda54
   languageName: node
   linkType: hard
 
@@ -4453,7 +4426,7 @@ __metadata:
     "@guardian/braze-components": "npm:16.2.0"
     "@guardian/bridget": "npm:2.6.0"
     "@guardian/browserslist-config": "npm:5.0.0"
-    "@guardian/cdk": "npm:50.10.6"
+    "@guardian/cdk": "npm:50.13.0"
     "@guardian/commercial": "npm:11.25.0"
     "@guardian/consent-management-platform": "npm:13.7.1"
     "@guardian/core-web-vitals": "npm:5.1.0"
@@ -4534,8 +4507,8 @@ __metadata:
     ajv: "npm:8.12.0"
     ajv-formats: "npm:2.1.1"
     amphtml-validator: "npm:1.0.35"
-    aws-cdk: "npm:2.87.0"
-    aws-cdk-lib: "npm:2.87.0"
+    aws-cdk: "npm:2.100.0"
+    aws-cdk-lib: "npm:2.100.0"
     babel-loader: "npm:8.3.0"
     babel-plugin-polyfill-corejs3: "npm:0.6.0"
     babel-plugin-px-to-rem: "https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0"
@@ -5705,9 +5678,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oclif/core@npm:2.10.0":
-  version: 2.10.0
-  resolution: "@oclif/core@npm:2.10.0"
+"@oclif/core@npm:2.15.0":
+  version: 2.15.0
+  resolution: "@oclif/core@npm:2.15.0"
   dependencies:
     "@types/cli-progress": "npm:^3.11.0"
     ansi-escapes: "npm:^4.3.2"
@@ -5718,7 +5691,6 @@ __metadata:
     cli-progress: "npm:^3.12.0"
     debug: "npm:^4.3.4"
     ejs: "npm:^3.1.8"
-    fs-extra: "npm:^9.1.0"
     get-package-type: "npm:^0.1.0"
     globby: "npm:^11.1.0"
     hyperlinker: "npm:^1.0.0"
@@ -5728,7 +5700,6 @@ __metadata:
     natural-orderby: "npm:^2.0.3"
     object-treeify: "npm:^1.1.33"
     password-prompt: "npm:^1.1.2"
-    semver: "npm:^7.5.3"
     slice-ansi: "npm:^4.0.0"
     string-width: "npm:^4.2.3"
     strip-ansi: "npm:^6.0.1"
@@ -5739,45 +5710,7 @@ __metadata:
     widest-line: "npm:^3.1.0"
     wordwrap: "npm:^1.0.0"
     wrap-ansi: "npm:^7.0.0"
-  checksum: ed85495628a011e5e64d58e8adffafbdee0d63bcf9edf0acd2b7987b26ca9887dff550cbf435217b73e33a8b28de634854ea7c6315bb9b9a60e2ceb8d8deeb49
-  languageName: node
-  linkType: hard
-
-"@oclif/core@npm:2.11.8":
-  version: 2.11.8
-  resolution: "@oclif/core@npm:2.11.8"
-  dependencies:
-    "@types/cli-progress": "npm:^3.11.0"
-    ansi-escapes: "npm:^4.3.2"
-    ansi-styles: "npm:^4.3.0"
-    cardinal: "npm:^2.1.1"
-    chalk: "npm:^4.1.2"
-    clean-stack: "npm:^3.0.1"
-    cli-progress: "npm:^3.12.0"
-    debug: "npm:^4.3.4"
-    ejs: "npm:^3.1.8"
-    fs-extra: "npm:^9.1.0"
-    get-package-type: "npm:^0.1.0"
-    globby: "npm:^11.1.0"
-    hyperlinker: "npm:^1.0.0"
-    indent-string: "npm:^4.0.0"
-    is-wsl: "npm:^2.2.0"
-    js-yaml: "npm:^3.14.1"
-    natural-orderby: "npm:^2.0.3"
-    object-treeify: "npm:^1.1.33"
-    password-prompt: "npm:^1.1.2"
-    semver: "npm:^7.5.3"
-    slice-ansi: "npm:^4.0.0"
-    string-width: "npm:^4.2.3"
-    strip-ansi: "npm:^6.0.1"
-    supports-color: "npm:^8.1.1"
-    supports-hyperlinks: "npm:^2.2.0"
-    ts-node: "npm:^10.9.1"
-    tslib: "npm:^2.5.0"
-    widest-line: "npm:^3.1.0"
-    wordwrap: "npm:^1.0.0"
-    wrap-ansi: "npm:^7.0.0"
-  checksum: 2a6ad76ff10c7b444c6b2efd6d70d8972d27446794c70b581d02103b0b3facd30f81715213c5f3d896c27c98b7de7ff168ff03ed2e115d47ad36846cba9db657
+  checksum: 8a2913468b5b784d125ac5fe42c463f0be2c0d41d645deaf8dbc32294b1bccb8667e021592a2e3c3386783b7f458d6e0d94087125bb2331b5d745a24e53a88d7
   languageName: node
   linkType: hard
 
@@ -10728,7 +10661,7 @@ __metadata:
     "@emotion/server": "npm:11.11.0"
     "@guardian/apps-rendering-api-models": "npm:6.2.0"
     "@guardian/bridget": "npm:2.6.0"
-    "@guardian/cdk": "npm:50.10.10"
+    "@guardian/cdk": "npm:50.13.0"
     "@guardian/content-api-models": "npm:17.8.0"
     "@guardian/content-atom-model": "npm:3.4.4"
     "@guardian/eslint-config-typescript": "npm:7.0.0"
@@ -10761,8 +10694,8 @@ __metadata:
     "@types/react-test-renderer": "npm:18.0.0"
     "@types/thrift": "npm:0.10.17"
     "@types/uuid": "npm:9.0.7"
-    aws-cdk: "npm:2.90.0"
-    aws-cdk-lib: "npm:2.90.0"
+    aws-cdk: "npm:2.100.0"
+    aws-cdk-lib: "npm:2.100.0"
     babel-loader: "npm:9.1.3"
     buffer: "npm:6.0.3"
     clean-css: "npm:5.3.3"
@@ -11122,36 +11055,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-cdk-lib@npm:2.87.0":
-  version: 2.87.0
-  resolution: "aws-cdk-lib@npm:2.87.0"
-  dependencies:
-    "@aws-cdk/asset-awscli-v1": "npm:^2.2.177"
-    "@aws-cdk/asset-kubectl-v20": "npm:^2.1.1"
-    "@aws-cdk/asset-node-proxy-agent-v5": "npm:^2.0.148"
-    "@balena/dockerignore": "npm:^1.0.2"
-    case: "npm:1.6.3"
-    fs-extra: "npm:^11.1.1"
-    ignore: "npm:^5.2.4"
-    jsonschema: "npm:^1.4.1"
-    minimatch: "npm:^3.1.2"
-    punycode: "npm:^2.3.0"
-    semver: "npm:^7.5.1"
-    table: "npm:^6.8.1"
-    yaml: "npm:1.10.2"
-  peerDependencies:
-    constructs: ^10.0.0
-  checksum: d573d3c19b2b75886b291dd0bf6000ba75fd25f809e792ffce76880410ca9878c33a2a1523f7701ff907db2e80752d6480c941a6ebd5e59cb3540dede0c672a3
-  languageName: node
-  linkType: hard
-
-"aws-cdk-lib@npm:2.90.0":
-  version: 2.90.0
-  resolution: "aws-cdk-lib@npm:2.90.0"
+"aws-cdk-lib@npm:2.100.0":
+  version: 2.100.0
+  resolution: "aws-cdk-lib@npm:2.100.0"
   dependencies:
     "@aws-cdk/asset-awscli-v1": "npm:^2.2.200"
     "@aws-cdk/asset-kubectl-v20": "npm:^2.1.2"
-    "@aws-cdk/asset-node-proxy-agent-v5": "npm:^2.0.166"
+    "@aws-cdk/asset-node-proxy-agent-v6": "npm:^2.0.1"
     "@balena/dockerignore": "npm:^1.0.2"
     case: "npm:1.6.3"
     fs-extra: "npm:^11.1.1"
@@ -11164,13 +11074,13 @@ __metadata:
     yaml: "npm:1.10.2"
   peerDependencies:
     constructs: ^10.0.0
-  checksum: 406f9e95086d4038d4d065d55386d5546bcdd6e637fa05e63e9a913604fe799e19957a6d9a883ee3a21ce2b4b539eeafc62f3f1b22a725caa723adefb587fcf1
+  checksum: 69c28176f49eff794d6ce8d0378017fcbe7cbacd45c61a99ecde2f2e31698311658276c7803133519cd6140ad7f18be9aef99508233aaf01effab954edfdc30d
   languageName: node
   linkType: hard
 
-"aws-cdk@npm:2.87.0":
-  version: 2.87.0
-  resolution: "aws-cdk@npm:2.87.0"
+"aws-cdk@npm:2.100.0":
+  version: 2.100.0
+  resolution: "aws-cdk@npm:2.100.0"
   dependencies:
     fsevents: "npm:2.3.2"
   dependenciesMeta:
@@ -11178,27 +11088,13 @@ __metadata:
       optional: true
   bin:
     cdk: bin/cdk
-  checksum: 8c8970ca524bf97a1ea4d0a3d211fb2fff3b76e45d0a184992d919975de8b55de4ae692113648a42af7927cc2583c6a207f6092354227ee8f725add18ee4b7e5
+  checksum: 1ecbb678b2968c038b390aac6f7b6f9cfeeabcf2c09907169fbc41fb917ecc7b51e53c97df369960f9cef123c91149857a60fc202ae0468f3d367f750247cabd
   languageName: node
   linkType: hard
 
-"aws-cdk@npm:2.90.0":
-  version: 2.90.0
-  resolution: "aws-cdk@npm:2.90.0"
-  dependencies:
-    fsevents: "npm:2.3.2"
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  bin:
-    cdk: bin/cdk
-  checksum: 4130bb6979eaad81a5a2266bc8968c12f29e53a32d65a7c7bd5ab5e65baac2ea8274154137eb16346a10bfcd36eab561cf8b55500575fa111b7eeab7eb7b43e8
-  languageName: node
-  linkType: hard
-
-"aws-sdk@npm:^2.1415.0, aws-sdk@npm:^2.1438.0, aws-sdk@npm:^2.946.0":
-  version: 2.1499.0
-  resolution: "aws-sdk@npm:2.1499.0"
+"aws-sdk@npm:^2.1469.0, aws-sdk@npm:^2.946.0":
+  version: 2.1518.0
+  resolution: "aws-sdk@npm:2.1518.0"
   dependencies:
     buffer: "npm:4.9.2"
     events: "npm:1.1.1"
@@ -11210,7 +11106,7 @@ __metadata:
     util: "npm:^0.12.4"
     uuid: "npm:8.0.0"
     xml2js: "npm:0.5.0"
-  checksum: 498fde969ec297edd551f3e65c364735797fec514de6f7e7de4f460469fc8c6122250d0b63e26f079aa26979c823529a481073f60e4536f172ca4792a7fc5d6b
+  checksum: a8d42047b8946e82738452f7a120cbad06a1a8fea01bcbde9d0adaf28db1c0246172a18f5f952487a9cacdb54d828877691c1a302e4df4b9839a263580331b01
   languageName: node
   linkType: hard
 
@@ -12430,14 +12326,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"codemaker@npm:^1.85.0, codemaker@npm:^1.87.0":
-  version: 1.92.0
-  resolution: "codemaker@npm:1.92.0"
+"codemaker@npm:^1.89.0":
+  version: 1.93.0
+  resolution: "codemaker@npm:1.93.0"
   dependencies:
     camelcase: "npm:^6.3.0"
     decamelize: "npm:^5.0.1"
     fs-extra: "npm:^10.1.0"
-  checksum: 2d6d9e11a83a9877921d7bb733bf7b9380b08fe4a57f2d79363e965c95a49baddc3195793091272d6b892d3af8b37fe24653e1fd356fffc458d687ef3e4723ce
+  checksum: 2b063ff341917dd0dc54a57ec385186790eb1977d96b2ed2668a7a651aac6e784c47fc2878498ad1c1723135e5a24b14fa45f9965b52276358681d8040631e7f
   languageName: node
   linkType: hard
 
@@ -12704,6 +12600,13 @@ __metadata:
   version: 10.2.69
   resolution: "constructs@npm:10.2.69"
   checksum: fd7f16909e0d2a190312d5320b4f3619da7f53df287f3269e71c7c3ea3e1ff696ed0af6cc914c7709cf5b1e19c90fee5186405fe29efa7e7072e88a6de496b35
+  languageName: node
+  linkType: hard
+
+"constructs@npm:10.3.0":
+  version: 10.3.0
+  resolution: "constructs@npm:10.3.0"
+  checksum: be93ff934f28f2226a674dc18cd608dc7543e2cd6e17e4fbbb55faf80a5ab30b5346bdb18f266ea9b9192438debaafa0b65cad09d67a33a9f84fd8919200ee79
   languageName: node
   linkType: hard
 
@@ -23851,7 +23754,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.5.4, semver@npm:7.x, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8, semver@npm:^7.5.1, semver@npm:^7.5.3, semver@npm:^7.5.4":
+"semver@npm:7.5.4, semver@npm:7.x, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8, semver@npm:^7.5.3, semver@npm:^7.5.4":
   version: 7.5.4
   resolution: "semver@npm:7.5.4"
   dependencies:
@@ -27464,7 +27367,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^17.1.1, yargs@npm:^17.3.1, yargs@npm:^17.6.2, yargs@npm:^17.7.1":
+"yargs@npm:^17.1.1, yargs@npm:^17.3.1, yargs@npm:^17.7.1, yargs@npm:^17.7.2":
   version: 17.7.2
   resolution: "yargs@npm:17.7.2"
   dependencies:
