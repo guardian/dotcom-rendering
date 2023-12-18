@@ -138,7 +138,6 @@ export const TimelineAtom = ({
 			{!!description && <Body html={description} format={format} />}
 			{events && <TimelineContents events={events} format={format} />}
 			<Footer
-				format={format}
 				dislikeHandler={
 					dislikeHandler ??
 					(() =>

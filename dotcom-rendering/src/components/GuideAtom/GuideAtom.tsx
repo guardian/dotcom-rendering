@@ -58,7 +58,6 @@ export const GuideAtom = ({
 		>
 			<Body html={html} image={image} credit={credit} format={format} />
 			<Footer
-				format={format}
 				dislikeHandler={
 					dislikeHandler ??
 					(() =>
