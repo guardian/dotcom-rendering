@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { palette as sourcePalette, text } from '@guardian/source-foundations';
+import { palette as sourcePalette } from '@guardian/source-foundations';
 import { Summary } from './Summary';
 import { palette as themePalette } from '../../palette';
 const containerStyling = css`
@@ -15,8 +15,8 @@ export const detailStyling = css`
 	padding: 0 5px 6px;
 	border-image: repeating-linear-gradient(
 			to bottom,
-			${sourcePalette.neutral[86]},
-			${sourcePalette.neutral[86]} 1px,
+			${themePalette('--expandable-atom-border')},
+			${themePalette('--expandable-atom-border')}1px,
 			transparent 1px,
 			transparent 4px
 		)

@@ -4524,6 +4524,11 @@ const expandableAtomTextHoverLight: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const expandableAtomBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const expandableAtomBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+
 // ----- Palette ----- //
 
 /**
@@ -5302,6 +5307,10 @@ const paletteColours = {
 	'--expandable-atom-text-hover': {
 		light: expandableAtomTextHoverLight,
 		dark: expandableAtomTextHoverLight,
+	},
+	'--expandable-atom-border': {
+		light: expandableAtomBorderLight,
+		dark: expandableAtomBorderDark,
 	},
 } satisfies PaletteColours;
 
