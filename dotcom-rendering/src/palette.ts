@@ -4501,6 +4501,29 @@ const paginationTextLight: PaletteFunction = ({ theme }) => {
 };
 const paginationTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const qandaContainerBackgroundLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Analysis:
+			return '#F2E8E6';
+		default:
+			return sourcePalette.neutral[93];
+	}
+};
+const qandaContainerBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const expandableAtomTextHoverLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -5271,6 +5294,14 @@ const paletteColours = {
 	'--pagination-text': {
 		light: paginationTextLight,
 		dark: paginationTextDark,
+	},
+	'--qanda-container-background': {
+		light: qandaContainerBackgroundLight,
+		dark: qandaContainerBackgroundDark,
+	},
+	'--expandable-atom-text-hover': {
+		light: expandableAtomTextHoverLight,
+		dark: expandableAtomTextHoverLight,
 	},
 } satisfies PaletteColours;
 

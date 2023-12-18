@@ -36,7 +36,6 @@ export const QandaAtom = ({
 			title={title}
 			atomType="qanda"
 			atomTypeTitle="Q&A"
-			format={format}
 			expandForStorybook={expandForStorybook}
 			expandCallback={
 				expandCallback ??

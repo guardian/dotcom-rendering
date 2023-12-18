@@ -7,8 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
-
+import { palette as themePalette } from '../../palette';
 /// SUMMARY ELEMENT
 
 const titleStyling = css`
@@ -45,10 +44,8 @@ const iconSpacing = css`
 export const Summary = ({
 	sectionTitle,
 	title,
-	format,
 	expandCallback,
 }: {
-	format: ArticleFormat;
 	sectionTitle: string;
 	title: string;
 	expandCallback: () => void;
@@ -59,7 +56,7 @@ export const Summary = ({
 			lineHeight: 'tight',
 			fontWeight: 'bold',
 		})};
-		color: ${decidePalette(format).text.expandableAtomHover};
+		color: ${themePalette('--expandable-atom-text-hover')};
 	`;
 
 	const showHideStyling = css`
@@ -77,7 +74,7 @@ export const Summary = ({
 		border: 0;
 		margin: 0;
 		:hover {
-			background: ${decidePalette(format).text.expandableAtomHover};
+			background: ${themePalette('--expandable-atom-text-hover')};
 		}
 	`;
 	const [hasBeenExpanded, setHasBeenExpanded] = useState(false);
