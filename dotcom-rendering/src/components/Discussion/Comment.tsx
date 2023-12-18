@@ -100,7 +100,7 @@ const commentCss = css`
 `;
 
 const blockedCommentStyles = css`
-	color: ${sourcePalette.neutral[46]};
+	color: ${schemedPalette('--discussion-grey')};
 	${textSans.xxsmall()}
 `;
 

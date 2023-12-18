@@ -4363,7 +4363,7 @@ const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return sourcePalette.opinion[400];
 		case ArticleSpecial.Labs:
-			return sourcePalette.lifestyle[300];
+			return sourcePalette.labs[300];
 		default:
 			return sourcePalette.news[300];
 	}
