@@ -204,10 +204,7 @@ export const Discussion = ({
 						background-color: ${themePalette(
 							'--discussion-primary-button-background',
 						)};
-						border: 1px solid
-							${themePalette(
-								'--discussion-primary-button-background',
-							)};
+						border: 1px solid currentColor;
 						:hover {
 							background-color: ${themePalette(
 								'--discussion-button-hover',
