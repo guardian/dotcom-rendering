@@ -4501,6 +4501,83 @@ const paginationTextLight: PaletteFunction = ({ theme }) => {
 };
 const paginationTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const audioAtomBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const audioAtomBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const audioAtomKickerLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+	}
+};
+
+const audioAtomKickerDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[500];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[500];
+	}
+};
+
+const audioAtomBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const audioAtomBorderDark: PaletteFunction = () => sourcePalette.neutral[38];
+
+const audioAtomIconsLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+	}
+};
+
+const audioAtomIconsDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[500];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[500];
+	}
+};
+
+const audioAtomProgressBarLight: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+const audioAtomProgressBarDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
 // ----- Palette ----- //
 
 /**
@@ -5271,6 +5348,26 @@ const paletteColours = {
 	'--pagination-text': {
 		light: paginationTextLight,
 		dark: paginationTextDark,
+	},
+	'--audio-atom-background': {
+		light: audioAtomBackgroundLight,
+		dark: audioAtomBackgroundDark,
+	},
+	'--audio-atom-kicker': {
+		light: audioAtomKickerLight,
+		dark: audioAtomKickerDark,
+	},
+	'--audio-atom-border': {
+		light: audioAtomBorderLight,
+		dark: audioAtomBorderDark,
+	},
+	'--audio-atom-icons': {
+		light: audioAtomIconsLight,
+		dark: audioAtomIconsDark,
+	},
+	'--audio-atom-progress-bar': {
+		light: audioAtomProgressBarLight,
+		dark: audioAtomProgressBarDark,
 	},
 } satisfies PaletteColours;
 
