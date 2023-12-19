@@ -140,6 +140,10 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 							? tagHandler
 							: () => undefined
 					}
+					cssOverrides={css`
+						margin-bottom: ${space[2]}px;
+						}
+					`}
 				/>
 			)}
 			<FollowNotificationsButton
@@ -151,7 +155,7 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 				}
 				cssOverrides={css`
 					margin-top: ${space[2]}px;
-					${!showFollowTagButton && 'margin-top: 0px;'}
+					${showFollowTagButton && 'margin-top: 0px;'}
 				`}
 			/>
 		</div>
