@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
 import { palette as themePalette } from '../../palette';
 import { Summary } from './Summary';
@@ -48,7 +47,6 @@ export const Container = ({
 }: {
 	id: string;
 	title: string;
-	design?: ArticleDesign;
 	format: ArticleFormat;
 	expandForStorybook?: boolean;
 	atomType: string;
