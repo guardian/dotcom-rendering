@@ -51,7 +51,7 @@ type Props = {
 		parentCommentId: number,
 	) => Promise<CommentResponse>;
 	onPreview?: (body: string) => Promise<string>;
-	onExpand?: () => void;
+	onExpand: () => void;
 	idApiUrl: string;
 };
 
@@ -211,9 +211,7 @@ export const Comments = ({
 			isClosedForComments,
 		}),
 	);
-	const [isExpanded, setIsExpanded] = useState<boolean>(
-		expanded || window.location.hash === '#comments',
-	);
+
 	const [loading, setLoading] = useState<boolean>(true);
 	const [totalPages, setTotalPages] = useState<number>(0);
 	const [page, setPage] = useState<number>(initialPage ?? 1);
@@ -229,7 +227,7 @@ export const Comments = ({
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
 
 	useEffect(() => {
-		if (isExpanded) {
+		if (expanded) {
 			// We want react to complete the current work and render, without trying to batch this update
 			// before resetting the number of comments
 			// to the total comment amount.
@@ -240,13 +238,7 @@ export const Comments = ({
 			}, 0);
 			return () => clearTimeout(timer);
 		} else return;
-	}, [isExpanded, comments.length]);
-
-	useEffect(() => {
-		// We need this use effect to capture any changes in the expanded prop. This is typicallly
-		// seen when clicking permalinks
-		setIsExpanded(expanded);
-	}, [expanded]);
+	}, [expanded, comments.length]);
 
 	useEffect(() => {
 		setLoading(true);
@@ -325,14 +317,13 @@ export const Comments = ({
 
 		rememberFilters(newFilterObject);
 		// Filters also show when the view is not expanded but we want to expand when they're changed
-		setIsExpanded(true);
-		onExpand?.();
+		onExpand();
 		setFilters(newFilterObject);
 	};
 
 	const onPageChange = (pageNumber: number) => {
 		// Pagination also show when the view is not expanded so we want to expand when clicked
-		setIsExpanded(true);
+		onExpand();
 		const element = document.getElementById('comment-filters');
 		element?.scrollIntoView();
 		setPage(pageNumber);
@@ -358,11 +349,8 @@ export const Comments = ({
 		// Replace it with this new comment at the start
 		setComments([comment, ...comments.slice(0, -1)]);
 
-		if (!isExpanded) {
-			// It's possible to post a comment without the view being expanded
-			setIsExpanded(true);
-			if (typeof onExpand === 'function') onExpand();
-		}
+		// It's possible to post a comment without the view being expanded
+		onExpand();
 
 		const commentElement = document.getElementById(`comment-${comment.id}`);
 		commentElement?.scrollIntoView();
@@ -372,11 +360,11 @@ export const Comments = ({
 
 	const showPagination = totalPages > 1;
 
-	if (!isExpanded && loading) {
+	if (!expanded && loading) {
 		return <span data-testid="loading-comments"></span>;
 	}
 
-	if (!isExpanded) {
+	if (!expanded) {
 		return (
 			<div data-component="discussion" css={commentContainerStyles}>
 				{picks.length !== 0 ? (
