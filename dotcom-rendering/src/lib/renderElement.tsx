@@ -598,7 +598,6 @@ export const renderElement = ({
 					<TimelineAtom
 						id={element.id}
 						title={element.title}
-						format={format}
 						events={element.events}
 						description={element.description}
 					/>

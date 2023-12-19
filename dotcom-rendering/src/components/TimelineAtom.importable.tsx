@@ -54,13 +54,7 @@ const EventToDate = css`
 	})};
 `;
 
-const TimelineContents = ({
-	events,
-	format,
-}: {
-	events: TimelineEvent[];
-	format: ArticleFormat;
-}) => {
+const TimelineContents = ({ events }: { events: TimelineEvent[] }) => {
 	return (
 		<div>
 			{events.map((event, index) => {
@@ -101,7 +95,6 @@ export const TimelineAtom = ({
 	events,
 	description,
 	title,
-	format,
 	expandForStorybook,
 	likeHandler,
 	dislikeHandler,
@@ -134,7 +127,7 @@ export const TimelineAtom = ({
 			}
 		>
 			{!!description && <Body html={description} />}
-			{events && <TimelineContents events={events} format={format} />}
+			{events && <TimelineContents events={events} />}
 			<Footer
 				dislikeHandler={
 					dislikeHandler ??
