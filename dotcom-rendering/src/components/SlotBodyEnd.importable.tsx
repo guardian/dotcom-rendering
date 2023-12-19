@@ -160,7 +160,6 @@ export const SlotBodyEnd = ({
 			countryCode === 'GB') ??
 		false;
 
-	// Show the article end slot if the epic is not shown, currently only used in the US for Public Good
 	const showArticleEndSlot =
 		renderAds &&
 		!isLabs &&
@@ -220,20 +219,20 @@ export const SlotBodyEnd = ({
 	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount, browserId]);
 
 	useEffect(() => {
-		const additionalSizes = (): SizeMapping => {
-			if (mpuWhenNoEpicEnabled) {
-				return {
-					desktop: [
-						adSizes.outstreamDesktop,
-						adSizes.outstreamGoogleDesktop,
-					],
-				};
-			} else if (showPublicGood) {
-				return { mobile: [adSizes.fluid] };
-			}
-			return {};
-		};
 		if (SelectedEpic === null && showArticleEndSlot) {
+			const additionalSizes = (): SizeMapping => {
+				if (mpuWhenNoEpicEnabled) {
+					return {
+						desktop: [
+							adSizes.outstreamDesktop,
+							adSizes.outstreamGoogleDesktop,
+						],
+					};
+				} else if (showPublicGood) {
+					return { mobile: [adSizes.fluid] };
+				}
+				return {};
+			};
 			document.dispatchEvent(
 				new CustomEvent('gu.commercial.slot.fill', {
 					detail: {
