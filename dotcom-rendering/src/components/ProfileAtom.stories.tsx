@@ -18,7 +18,6 @@ const format: ArticleFormat = {
 };
 
 const defaultArgs = {
-	format: format,
 	expandForStorybook: true,
 	likeHandler: () => {
 		console.log('LIKED');

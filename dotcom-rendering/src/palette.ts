@@ -4543,6 +4543,14 @@ const expandableAtomBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const expandableAtomBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[38];
+const expandableAtomButtonLight: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+const expandableAtomButtonDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const expandableAtomButtonFillLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const expandableAtomButtonFillDark: PaletteFunction = () =>
+	sourcePalette.neutral[7];
 
 // ----- Palette ----- //
 
@@ -5326,6 +5334,14 @@ const paletteColours = {
 	'--expandable-atom-border': {
 		light: expandableAtomBorderLight,
 		dark: expandableAtomBorderDark,
+	},
+	'--expandable-atom-button': {
+		light: expandableAtomButtonLight,
+		dark: expandableAtomButtonDark,
+	},
+	'--expandable-atom-button-fill': {
+		light: expandableAtomButtonFillLight,
+		dark: expandableAtomButtonFillDark,
 	},
 } satisfies PaletteColours;
 

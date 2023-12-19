@@ -1,8 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	textSans,
-} from '@guardian/source-foundations';
+import { textSans } from '@guardian/source-foundations';
 import { useState } from 'react';
 import { palette as themePalette } from '../../palette';
 
@@ -33,11 +30,9 @@ const ThumbImage = () => {
 };
 
 export const Footer = ({
-	format,
 	likeHandler,
 	dislikeHandler,
 }: {
-	format: ArticleFormat;
 	likeHandler: () => void;
 	dislikeHandler: () => void;
 }): JSX.Element => {
@@ -47,8 +42,8 @@ export const Footer = ({
 		cursor: pointer;
 		align-items: center;
 		justify-content: center;
-		background: ${sourcePalette.neutral[0]};
-		color: ${sourcePalette.neutral[100]};
+		background: ${'--expandable-atom-button'};
+		color: ${'--expandable-atom-button-fill'};
 		border-style: hidden;
 		border-radius: 100%;
 		margin: 0 0 0 5px;
