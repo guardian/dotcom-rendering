@@ -21,10 +21,7 @@ const ThumbImage = () => {
 			`}
 			viewBox="0 0 40 40"
 		>
-			<path
-				fill="#FFF"
-				d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-			></path>
+			<path d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"></path>
 		</svg>
 	);
 };
@@ -44,8 +41,7 @@ export const Footer = ({
 		cursor: pointer;
 		align-items: center;
 		justify-content: center;
-		background: ${'--expandable-atom-button'};
-		color: ${'--expandable-atom-button-fill'};
+		background: ${themePalette('--expandable-atom-button')};
 		border-style: hidden;
 		border-radius: 100%;
 		margin: 0 0 0 5px;
@@ -57,6 +53,9 @@ export const Footer = ({
 		}
 		:focus {
 			border: none;
+		}
+		svg {
+			fill: ${themePalette('--expandable-atom-button-fill')};
 		}
 	`;
 	const [showThankYou, setShowThankYou] = useState(false);
