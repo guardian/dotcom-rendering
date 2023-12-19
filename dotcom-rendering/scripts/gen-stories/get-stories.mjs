@@ -107,6 +107,51 @@ export default {
 	},
 };
 `;
+const EXTRA_APPS_LAYOUT_STORIES = `
+export const LiveblogAppsSingleContributorLight = () => {
+	return (
+			<HydratedLayoutWrapper
+				displayName="Standard"
+				designName="LiveBlog"
+				theme="NewsPillar"
+				renderingTarget="Apps"
+				fixtureName='LiveBlogSingleContributor'
+			/>
+		);
+	};
+	LiveblogAppsSingleContributorLight.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: NewsPillar, Mode: Light';
+	LiveblogAppsSingleContributorLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+	LiveblogAppsSingleContributorLight.decorators = [lightDecorator(
+			[{
+				display:  ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: {...Pillar}.News,
+			}]
+		),
+	];
+
+	export const LiveblogAppsSingleContributorDark = () => {
+	return (
+			<HydratedLayoutWrapper
+				displayName="Standard"
+				designName="LiveBlog"
+				theme="NewsPillar"
+				renderingTarget="Apps"
+				fixtureName='LiveBlogSingleContributor'
+			/>
+		);
+	};
+	LiveblogAppsSingleContributorDark.storyName = 'Apps: Display: Standard, Design: LiveBlog, Theme: NewsPillar, Mode: Dark';
+	LiveblogAppsSingleContributorDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+	LiveblogAppsSingleContributorDark.decorators = [darkDecorator(
+			[{
+				display:  ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: {...Pillar}.News,
+			}]
+		),
+	];
+`;
 
 /** @param {string} componentName */
 const README_TEMPLATE = (componentName) => `
@@ -390,7 +435,7 @@ const generateLayoutAppsStories = () => {
 	}
 
 	success(`[scripts/gen-stories] Generated ${stories} layout stories!`);
-	return template;
+	return (template += EXTRA_APPS_LAYOUT_STORIES);
 };
 
 const testCardFormats = [

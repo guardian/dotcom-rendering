@@ -28,7 +28,7 @@ const hoverUnderline = css`
 // container as standfirst and needs the same styling as standfirst
 const standfirstColouring = css`
 	${until.desktop} {
-		color: ${palette('--standfirst-text')};
+		color: ${palette('--dateline-mobile')};
 	}
 `;
 

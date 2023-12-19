@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -843,6 +843,58 @@ export const tabs = {
 		light: PaletteFunction;
 		dark: PaletteFunction;
 	};
+};
+
+const datelineLightMobile: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 600);
+				default:
+					return sourcePalette.neutral[100];
+			}
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
+		default:
+			if (
+				theme === ArticleSpecial.SpecialReportAlt &&
+				design !== ArticleDesign.DeadBlog
+			) {
+				return sourcePalette.specialReportAlt[100];
+			}
+			return sourcePalette.neutral[0];
+	}
+};
+
+const datelineDarktMobile: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 600);
+				default:
+					return sourcePalette.neutral[100];
+			}
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
+		default:
+			if (
+				theme === ArticleSpecial.SpecialReportAlt &&
+				design !== ArticleDesign.DeadBlog
+			) {
+				return sourcePalette.specialReportAlt[100];
+			}
+			return sourcePalette.neutral[0];
+	}
 };
 
 const datelineLight: PaletteFunction = ({ design, theme }) => {
@@ -2574,7 +2626,7 @@ const captionTextLight: PaletteFunction = ({ design, theme }) => {
 		default:
 			switch (design) {
 				case ArticleDesign.PhotoEssay:
-					switch (theme as ArticleTheme) {
+					switch (theme) {
 						case Pillar.News:
 							return sourcePalette.news[300];
 						case Pillar.Opinion:
@@ -4275,9 +4327,19 @@ const commentCountFillDark: PaletteFunction = ({ design, theme }) => {
 
 const mobileCommentCountFill: PaletteFunction = (format) => {
 	if (format.design === ArticleDesign.LiveBlog)
-		return sourcePalette.neutral[100];
+		switch (format.theme) {
+			case Pillar.News:
+			case Pillar.Opinion:
+			case Pillar.Sport:
+			case Pillar.Culture:
+			case Pillar.Lifestyle:
+				return pillarPalette(format.theme, 600);
+			default:
+				return sourcePalette.neutral[100];
+		}
 	return commentCountFill(format);
 };
+
 const mobileCommentCountFillDark: PaletteFunction = (format) => {
 	if (format.design === ArticleDesign.LiveBlog)
 		return sourcePalette.neutral[100];
@@ -4568,6 +4630,10 @@ const paletteColours = {
 	'--dateline': {
 		light: datelineLight,
 		dark: datelineDark,
+	},
+	'--dateline-mobile': {
+		light: datelineLightMobile,
+		dark: standfirstTextDark,
 	},
 	'--headline-colour': {
 		light: headlineTextLight,

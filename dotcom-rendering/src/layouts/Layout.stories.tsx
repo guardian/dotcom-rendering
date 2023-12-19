@@ -11,6 +11,7 @@ import { Interview } from '../../fixtures/generated/articles/Interview';
 import { Labs } from '../../fixtures/generated/articles/Labs';
 import { Letter } from '../../fixtures/generated/articles/Letter';
 import { Live } from '../../fixtures/generated/articles/Live';
+import { LiveBlogSingleContributor } from '../../fixtures/generated/articles/LiveBlogSingleContributor';
 import { MatchReport } from '../../fixtures/generated/articles/MatchReport';
 import { NewsletterSignup } from '../../fixtures/generated/articles/NewsletterSignup';
 import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
@@ -44,6 +45,7 @@ const Fixtures: { [key: string]: DCRArticle } = {
 	Feature,
 	LiveBlog: Live,
 	DeadBlog: Live,
+	LiveBlogSingleContributor,
 	Editorial,
 	Letter,
 	Interview,
@@ -97,13 +99,15 @@ export const HydratedLayoutWrapper = ({
 	designName,
 	theme,
 	renderingTarget,
+	fixtureName,
 }: {
 	displayName: string;
 	designName: string;
 	theme: string;
 	renderingTarget: RenderingTarget;
+	fixtureName?: string;
 }) => {
-	const fixture = Fixtures[designName] ?? Standard;
+	const fixture = Fixtures[fixtureName ?? designName] ?? Standard;
 
 	const serverArticle = {
 		...fixture,

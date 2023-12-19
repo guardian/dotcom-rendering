@@ -20,6 +20,7 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
@@ -259,6 +260,7 @@ interface WebProps extends BaseProps {
 
 export const LiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
+	console.log('format', format);
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -577,10 +579,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							</Hide>
 						</GridItem>
 						<GridItem area="meta">
-							<Hide from="desktop">
-								<div css={sidePaddingDesktop}>
-									<ArticleMeta
-										branding={branding}
+							{isApps && (
+								<Hide from="desktop">
+									<ArticleMetaApps
 										format={format}
 										pageId={article.pageId}
 										webTitle={article.webTitle}
@@ -592,16 +593,45 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										secondaryDateline={
 											article.webPublicationSecondaryDateDisplay
 										}
-										isCommentable={showComments}
+										isCommentable={true} // todo
 										discussionApiUrl={
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
 										ajaxUrl={article.config.ajaxUrl}
 										messageUs={article.messageUs}
-									/>
-								</div>
-							</Hide>
+									></ArticleMetaApps>
+								</Hide>
+							)}
+							{isWeb && (
+								<Hide from="desktop">
+									<div css={sidePaddingDesktop}>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={showComments}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											ajaxUrl={article.config.ajaxUrl}
+											messageUs={article.messageUs}
+										/>
+									</div>
+								</Hide>
+							)}
 						</GridItem>
 					</StandFirstGrid>
 				</Section>

@@ -119,6 +119,7 @@ export const BylineLink = ({
 	const soleContributor = getSoleContributor(tags, byline);
 	const hasSoleContributor = !!soleContributor;
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
+	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
 		if (isString(bylineComponent)) {
@@ -154,7 +155,11 @@ export const BylineLink = ({
 				<>
 					<DottedLines
 						count={1}
-						color={themePalette('--article-border')}
+						color={
+							isLiveBlog
+								? 'rgba(255, 255, 255, 0.4)'
+								: themePalette('--article-border')
+						}
 					/>
 					<Island priority="critical">
 						<FollowWrapper

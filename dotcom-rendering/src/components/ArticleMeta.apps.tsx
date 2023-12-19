@@ -120,21 +120,26 @@ const MetaGridCommentCount = ({
 	isComment,
 	isImmersive,
 	isAnalysis,
+	isLiveBlog,
 }: {
 	children: React.ReactNode;
 	isPicture: boolean;
 	isComment: boolean;
 	isImmersive: boolean;
 	isAnalysis: boolean;
+	isLiveBlog: boolean;
 }) => (
 	<div
 		data-print-Content="hide"
 		css={css`
 			grid-area: comment-count;
-			border-left: 1px solid ${themePalette('--article-border')};
+			border-left: 1px solid
+				${isLiveBlog
+					? 'rgba(255, 255, 255, 0.4)'
+					: themePalette('--article-border')};
 			padding-top: ${space[2]}px;
 			padding-left: ${space[2]}px;
-			${(isComment || isImmersive || isAnalysis) &&
+			${(isComment || isImmersive || isAnalysis || isLiveBlog) &&
 			`padding-bottom: ${space[3]}px;`}
 			${isPicture && 'margin-top: -4px;'}
 
@@ -172,10 +177,16 @@ const MetaGridDateline = ({
 	</div>
 );
 
-const stretchLines = ({ isPicture }: { isPicture: boolean }) => css`
+const stretchLines = ({
+	isPicture,
+	isLiveBlog,
+}: {
+	isPicture: boolean;
+	isLiveBlog: boolean;
+}) => css`
 	grid-column: 1 / -1;
 
-	${isPicture &&
+	${(isPicture || isLiveBlog) &&
 	`grid-column: 2 / -2;
 	`}
 `;
@@ -206,6 +217,7 @@ export const ArticleMetaApps = ({
 	const isComment = format.design === ArticleDesign.Comment;
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isAnalysis = format.design === ArticleDesign.Analysis;
+	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
 		layoutOrDesignType && !!byline && soleContributor !== undefined;
 	const isImmersiveOrAnalysisWithMultipleAuthors =
@@ -231,7 +243,7 @@ export const ArticleMetaApps = ({
 			>
 				{shouldShowFollowButtons(isComment) && (
 					<StraightLines
-						cssOverrides={[stretchLines({ isPicture })]}
+						cssOverrides={[stretchLines({ isPicture, isLiveBlog })]}
 						count={4}
 						color={themePalette('--article-border')}
 					/>
@@ -241,7 +253,6 @@ export const ArticleMetaApps = ({
 						<Avatar src={avatarUrl} alt={authorName} />
 					</MetaGridAvatar>
 				)}
-
 				<MetaGridByline isComment={isComment}>
 					{shouldShowContributor(format) && !!byline && (
 						<Contributor
@@ -275,13 +286,13 @@ export const ArticleMetaApps = ({
 						</Island>
 					)}
 				</MetaGridByline>
-
 				{isCommentable && (
 					<MetaGridCommentCount
 						isPicture={isPicture}
 						isComment={isComment}
 						isImmersive={isImmersive}
 						isAnalysis={isAnalysis}
+						isLiveBlog={isLiveBlog}
 					>
 						<Island priority="feature" defer={{ until: 'idle' }}>
 							<CommentCount
@@ -291,18 +302,20 @@ export const ArticleMetaApps = ({
 						</Island>
 					</MetaGridCommentCount>
 				)}
-
 				<StraightLines
 					cssOverrides={[
-						stretchLines({ isPicture }),
+						stretchLines({ isPicture, isLiveBlog }),
 						css`
 							grid-row: 4 / -4;
 						`,
 					]}
 					count={1}
-					color={themePalette('--article-border')}
+					color={
+						isLiveBlog
+							? 'rgba(255, 255, 255, 0.4)'
+							: themePalette('--article-border')
+					}
 				/>
-
 				<MetaGridDateline
 					isImmersiveOrAnalysisWithMultipleAuthors={
 						isImmersiveOrAnalysisWithMultipleAuthors
@@ -315,7 +328,6 @@ export const ArticleMetaApps = ({
 					/>
 				</MetaGridDateline>
 			</div>
-
 			{branding && (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<Branding branding={branding} format={format} />
