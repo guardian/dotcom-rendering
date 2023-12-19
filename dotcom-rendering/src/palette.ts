@@ -4460,12 +4460,12 @@ const expandingAtomBackgroundLight: PaletteFunction = ({ design }) => {
 	}
 };
 const expandingAtomBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[10];
+	sourcePalette.neutral[20];
 
 const expandingAtomBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const expandingAtomBorderDark: PaletteFunction = () =>
-	sourcePalette.neutral[20];
+	sourcePalette.neutral[38];
 
 const expandingAtomLinkTextLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
