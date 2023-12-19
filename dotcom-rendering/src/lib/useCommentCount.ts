@@ -1,8 +1,6 @@
-import { isNonNullable } from '@guardian/libs';
+import { isNonNullable, isObject } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { useApi } from './useApi';
-
-type CommentCounts = Record<string, number>;
 
 /**
  * **Build an initial set of discussions**
@@ -48,9 +46,14 @@ export const useCommentCount = (
 		setUrl(getCommentCountUrl);
 	}, [discussionApiUrl, shortUrl]);
 
-	const { data } = useApi<CommentCounts>(url);
+	const { data } = useApi<unknown>(url);
 
-	return data?.[shortUrl];
+	/**
+	 * As per the endpoint, but let’s parse it
+	 * @see https://github.com/guardian/discussion-api/blob/73e805641f509c79d12f207aeb50c3f1fb58c886/discussion-api/src/main/scala/com.gu.discussion.api/repository/Discussion.scala#L233
+	 */
+	const count = isObject(data) ? data[shortUrl] : undefined;
+	return typeof count === 'number' ? count : undefined;
 };
 
 /** Ensure that we reduce the number of requests to get comment counts */
