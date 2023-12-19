@@ -56,7 +56,7 @@ describe('SignInGateMainCheckoutComplete', () => {
 
 			for (const [index, bullet] of bulletPoints.entries()) {
 				expect(bullet).toHaveTextContent(
-					SIGN_IN_INCENTIVES_DIGITAL[index],
+					SIGN_IN_INCENTIVES_DIGITAL[index] ?? '',
 				);
 			}
 			expect(button).toHaveTextContent(COMPLETE_REGISTRATION_BUTTON);
@@ -80,7 +80,7 @@ describe('SignInGateMainCheckoutComplete', () => {
 
 			for (const [index, bullet] of bulletPoints.entries()) {
 				expect(bullet).toHaveTextContent(
-					SIGN_IN_INCENTIVES_NON_DIGITAL[index],
+					SIGN_IN_INCENTIVES_NON_DIGITAL[index] ?? '',
 				);
 			}
 			expect(button).toHaveTextContent(COMPLETE_REGISTRATION_BUTTON);
@@ -104,7 +104,7 @@ describe('SignInGateMainCheckoutComplete', () => {
 
 			for (const [index, bullet] of bulletPoints.entries()) {
 				expect(bullet).toHaveTextContent(
-					SIGN_IN_INCENTIVES_NON_DIGITAL[index],
+					SIGN_IN_INCENTIVES_NON_DIGITAL[index] ?? '',
 				);
 			}
 			expect(button).toHaveTextContent(COMPLETE_REGISTRATION_BUTTON);
@@ -128,7 +128,7 @@ describe('SignInGateMainCheckoutComplete', () => {
 
 			for (const [index, bullet] of bulletPoints.entries()) {
 				expect(bullet).toHaveTextContent(
-					SIGN_IN_INCENTIVES_DIGITAL[index],
+					SIGN_IN_INCENTIVES_DIGITAL[index] ?? '',
 				);
 			}
 			expect(button).toHaveTextContent(SIGN_IN_BUTTON);
@@ -152,7 +152,7 @@ describe('SignInGateMainCheckoutComplete', () => {
 
 			for (const [index, bullet] of bulletPoints.entries()) {
 				expect(bullet).toHaveTextContent(
-					SIGN_IN_INCENTIVES_NON_DIGITAL[index],
+					SIGN_IN_INCENTIVES_NON_DIGITAL[index] ?? '',
 				);
 			}
 			expect(button).toHaveTextContent(SIGN_IN_BUTTON);
@@ -176,7 +176,7 @@ describe('SignInGateMainCheckoutComplete', () => {
 
 			for (const [index, bullet] of bulletPoints.entries()) {
 				expect(bullet).toHaveTextContent(
-					SIGN_IN_INCENTIVES_NON_DIGITAL[index],
+					SIGN_IN_INCENTIVES_NON_DIGITAL[index] ?? '',
 				);
 			}
 			expect(button).toHaveTextContent(SIGN_IN_BUTTON);
