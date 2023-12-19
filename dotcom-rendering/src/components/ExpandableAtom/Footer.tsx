@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { palette as themePalette } from '../../palette';
 
 /// LIKE/DISLIKE FEEDBACK FOOTER
 const footerStyling = css`
@@ -44,8 +44,8 @@ export const Footer = ({
 		cursor: pointer;
 		align-items: center;
 		justify-content: center;
-		background: black;
-		color: white;
+		background: ${'--expandable-atom-button'};
+		color: ${'--expandable-atom-button-fill'};
 		border-style: hidden;
 		border-radius: 100%;
 		margin: 0 0 0 5px;
@@ -53,7 +53,7 @@ export const Footer = ({
 		width: 28px;
 		height: 28px;
 		:hover {
-			background: ${decidePalette(format).text.expandableAtomHover};
+			background: ${themePalette('--expandable-atom-text-hover')};
 		}
 		:focus {
 			border: none;
