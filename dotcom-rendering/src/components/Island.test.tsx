@@ -403,8 +403,9 @@ describe('Island: server-side rendering', () => {
 						stage={''}
 						pageId={''}
 						keywordIds={''}
-						renderAds={false}
+						renderAds={true}
 						isLabs={false}
+						articleEndSlot={true}
 					/>
 				</ConfigProvider>,
 			),
