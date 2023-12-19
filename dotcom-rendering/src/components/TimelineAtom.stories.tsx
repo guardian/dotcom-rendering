@@ -25,7 +25,7 @@ const defaultFormat = {
 // Based on https://www.theguardian.com/stage/2018/mar/06/hamilton-nominated-olivier-awards
 export const NoTimelineEventsStoryExpanded: Story = {
 	args: { ...noTimelineEventsStoryExpanded },
-	decorators: [splitTheme()],
+	decorators: [splitTheme([defaultFormat])],
 };
 
 // Based on https://www.theguardian.com/uk-news/2020/jul/21/importance-of-prince-andrew-interview-became-clear-in-editing-suite-says-maitlis
