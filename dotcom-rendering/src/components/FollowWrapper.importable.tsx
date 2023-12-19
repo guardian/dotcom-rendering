@@ -142,7 +142,6 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 					}
 					cssOverrides={css`
 						margin-bottom: ${space[2]}px;
-						}
 					`}
 				/>
 			)}
