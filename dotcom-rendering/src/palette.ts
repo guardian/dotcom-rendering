@@ -4394,6 +4394,9 @@ const discussionDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const discussionSubduedLight: PaletteFunction = () => sourcePalette.neutral[46];
+const discussionSubduedDark: PaletteFunction = () => sourcePalette.neutral[60];
+
 const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
@@ -4410,7 +4413,7 @@ const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return sourcePalette.opinion[400];
 		case ArticleSpecial.Labs:
-			return sourcePalette.lifestyle[300];
+			return sourcePalette.labs[300];
 		default:
 			return sourcePalette.news[300];
 	}
@@ -4426,9 +4429,10 @@ const discussionButtonHover: PaletteFunction = ({ theme }) => {
 			return sourcePalette.lifestyle[400];
 		case Pillar.Sport:
 			return sourcePalette.sport[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
 		case Pillar.News:
 		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.Labs:
 		default:
 			return sourcePalette.news[400];
 	}
@@ -5332,6 +5336,10 @@ const paletteColours = {
 	'--discussion-pagination-border': {
 		light: discussionPaginationBorderLight,
 		dark: discussionPaginationBorderDark,
+	},
+	'--discussion-subdued': {
+		light: discussionSubduedLight,
+		dark: discussionSubduedDark,
 	},
 	'--comment-form-input-background': {
 		light: commentFormInputBackgroundLight,
