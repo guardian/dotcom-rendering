@@ -765,7 +765,6 @@ export type TimelineAtomType = {
 	id: string;
 	events?: TimelineEvent[];
 	title: string;
-	format: ArticleFormat;
 	description?: string;
 	expandForStorybook?: boolean;
 	likeHandler?: () => void;

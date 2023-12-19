@@ -17,7 +17,6 @@ export const NewsProfileStory = (): JSX.Element => {
 	// Based on: https://www.theguardian.com/us-news/2020/jul/13/ghislaine-maxwell-court-sex-trafficking-trial-epstein
 	return (
 		<ProfileAtom
-			format={format}
 			id="830f7948-c436-4a8d-9361-e4220444d49f"
 			image="https://i.guim.co.uk/img/media/cde1f62b34d6a110c7847af64864a4fc308b7967/464_266_975_975/975.jpg?width=620&quality=85&auto=format&fit=max&s=0e45463eaeec14d4e430220a925e665e"
 			title="Who is Ghislaine Maxwell?"
@@ -45,7 +44,6 @@ export const NewsProfileStory2 = (): JSX.Element => {
 	// Based on: https://www.theguardian.com/business/2020/may/11/richard-branson-to-sell-500m-worth-of-virgin-galactic-shares
 	return (
 		<ProfileAtom
-			format={format}
 			id="da5cfac0-b259-4db9-92a9-80a9a7cfe5f4"
 			image="https://i.guim.co.uk/img/media/d02ae7bbf3763747535a1b8be375396de7ae1666/439_557_2733_1640/2733.jpg?width=620&quality=85&auto=format&fit=max&s=2ed128901b717d8c01bc60b18894306a"
 			title="Virgin Galactic"
@@ -73,7 +71,6 @@ export const NoProfileImageStory = (): JSX.Element => {
 	// Modelled after: https://www.theguardian.com/politics/2020/jan/24/labour-leadership-unite-backs-brilliant-rebecca-long-bailey
 	return (
 		<ProfileAtom
-			format={format}
 			id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
 			title="Who is Jon Lansman?"
 			html="<p>A 62-year-old Labour veteran who joined the party in 1974 and worked for Labour icon Tony Benn during his deputy leadership campaign in the 1980s. Lansman served as director of operations for Corbyn’s leadership campaign. After Corbyn was elected as the leader of the Labour party in 2015, Lansman founded Momentum, a pro-Corbyn campaign group.<br></p>"

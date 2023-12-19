@@ -93,12 +93,10 @@ export const Body = ({
 	html,
 	image,
 	credit,
-	format,
 }: {
 	html: string;
 	image?: string;
 	credit?: string;
-	format: ArticleFormat;
 }): JSX.Element => {
 	return (
 		<div>
