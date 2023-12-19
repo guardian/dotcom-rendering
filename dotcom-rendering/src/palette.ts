@@ -4344,8 +4344,8 @@ const discussionDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const discussionGreyLight: PaletteFunction = () => sourcePalette.neutral[46];
-const discussionGreyDark: PaletteFunction = () => sourcePalette.neutral[60];
+const discussionSubduedLight: PaletteFunction = () => sourcePalette.neutral[46];
+const discussionSubduedDark: PaletteFunction = () => sourcePalette.neutral[60];
 
 const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
@@ -5198,7 +5198,7 @@ const paletteColours = {
 		light: discussionPaginationBorderLight,
 		dark: discussionPaginationBorderDark,
 	},
-	'--discussion-grey': {
+	'--discussion-subdued': {
 		light: discussionGreyLight,
 		dark: discussionGreyDark,
 	},

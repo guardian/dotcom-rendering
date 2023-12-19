@@ -13,7 +13,7 @@ type Props = {
 };
 
 const linkStyles = css`
-	color: ${schemedPalette('--discussion-grey')};
+	color: ${schemedPalette('--discussion-subdued')};
 	text-decoration: none;
 	:hover,
 	:focus {

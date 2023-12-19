@@ -19,7 +19,7 @@ type Props = {
 const countStyles = css`
 	${textSans.xxsmall({ fontWeight: 'light' })}
 	min-width: 0.75rem;
-	color: ${themePalette('--discussion-grey')};
+	color: ${themePalette('--discussion-subdued')};
 	margin-right: 0.3125rem;
 `;
 

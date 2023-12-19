@@ -105,7 +105,7 @@ const buttonStyles = css`
 	border: none;
 	/* Design System: The buttons should be components that handle their own layout using primitives  */
 	line-height: 1.2;
-	color: ${schemedPalette('--discussion-grey')};
+	color: ${schemedPalette('--discussion-subdued')};
 	transition: color 80ms ease-out;
 	padding: 0px 10px 6px 0px;
 	margin: 1px 0 0;
@@ -145,7 +145,7 @@ const expandedStyles = css`
 
 const labelStyles = css`
 	${textSans.small({ fontWeight: 'bold' })};
-	color: ${schemedPalette('--discussion-grey')};
+	color: ${schemedPalette('--discussion-subdued')};
 `;
 
 export const Dropdown = ({ id, label, options, onSelect }: Props) => {

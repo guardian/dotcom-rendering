@@ -52,7 +52,7 @@ const textStyles = css`
 
 const headlineStyles = css`
 	${headline.xxxsmall()}
-	color: ${themePalette('--discussion-grey')};
+	color: ${themePalette('--discussion-subdued')};
 	padding-bottom: ${space[1]}px;
 `;
 
@@ -85,7 +85,7 @@ const Heading = ({ count }: { count?: number }) => {
 			Comments{' '}
 			<span
 				css={css`
-					color: ${themePalette('--discussion-grey')};
+					color: ${themePalette('--discussion-subdued')};
 				`}
 			>
 				({count ?? '…'})
