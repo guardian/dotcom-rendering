@@ -10,7 +10,6 @@ export type QandaAtomProps = {
 	image?: string;
 	html: string;
 	credit?: string;
-	format: ArticleFormat;
 	expandForStorybook?: boolean;
 	likeHandler?: () => void;
 	dislikeHandler?: () => void;
@@ -22,7 +21,6 @@ export const QandaAtom = ({
 	image,
 	html,
 	credit,
-	format,
 	expandForStorybook,
 	likeHandler,
 	dislikeHandler,

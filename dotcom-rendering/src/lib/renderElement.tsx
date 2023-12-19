@@ -501,7 +501,6 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						format={format}
 					/>
 				</Island>
 			);
