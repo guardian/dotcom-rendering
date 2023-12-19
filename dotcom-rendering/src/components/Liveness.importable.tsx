@@ -1,9 +1,10 @@
+import { log } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
-import { isServer } from '../lib/isServer';
 import { useApi } from '../lib/useApi';
+import { useIsInView } from '../lib/useIsInView';
 import { Toast } from './Toast';
 
 type Props = {
@@ -20,24 +21,26 @@ type Props = {
 	selectedTopics?: Topic[];
 };
 
-const topOfBlog: Element | null = !isServer
-	? window.document.getElementById('top-of-blog')
-	: null;
-
-const toastRoot: Element | null = !isServer
-	? window.document.getElementById('toast-root')
-	: null;
-
 /**
  * insert
  *
  * Takes html, parses and hydrates it, inserts the resulting blocks
  * at the top of the liveblog, and then enhances any tweets
  *
- * @param {string} html The block html to be inserted
- * @returns void
+ * @param {Object} options
+ * @param {string} options.html The block html to be inserted
  */
-function insert(html: string, enhanceTweetsSwitch: boolean) {
+function insert({
+	html,
+	enhanceTweetsSwitch,
+	topOfBlog,
+	blogBody,
+}: {
+	html: string;
+	enhanceTweetsSwitch: boolean;
+	topOfBlog: HTMLElement;
+	blogBody: HTMLElement;
+}): void {
 	// Create
 	// ------
 	const template = document.createElement('template');
@@ -56,8 +59,7 @@ function insert(html: string, enhanceTweetsSwitch: boolean) {
 	// Shouldn't we sanitise this html?
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
-	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
-	if (!blogBody || !topOfBlog) return;
+
 	// nextSibling? See: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore#example_2
 	blogBody.insertBefore(fragment, topOfBlog.nextSibling);
 
@@ -78,19 +80,19 @@ function insert(html: string, enhanceTweetsSwitch: boolean) {
 /**
  * reveal any blocks that have been inserted but are still hidden
  */
-function revealPendingBlocks() {
-	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
+function revealPendingBlocks(blogBody: HTMLElement) {
 	const pendingBlocks =
-		blogBody?.querySelectorAll<HTMLElement>('.pending.block');
-	if (pendingBlocks)
-		for (const block of pendingBlocks) {
-			block.classList.add('reveal-slowly');
-			block.classList.remove('pending');
-		}
+		blogBody.querySelectorAll<HTMLElement>('.pending.block');
 
-	if (pendingBlocks !== undefined && pendingBlocks.length > 0)
-		// Notify commercial that new blocks are available and they can re-run spacefinder
-		document.dispatchEvent(new CustomEvent('liveblog:blocks-updated'));
+	if (pendingBlocks.length === 0) return;
+
+	for (const block of pendingBlocks) {
+		block.classList.add('reveal-slowly');
+		block.classList.remove('pending');
+	}
+
+	// Notify commercial that new blocks are available and they can re-run spacefinder
+	document.dispatchEvent(new CustomEvent('liveblog:blocks-updated'));
 }
 
 /**
@@ -136,6 +138,37 @@ function getKey(
 	}
 }
 
+const useVisibilityState = () => {
+	const [visibilityState, setVisibilityState] =
+		useState<DocumentVisibilityState>('visible');
+
+	useEffect(() => {
+		const handleVisibilityChange = () => {
+			setVisibilityState(document.visibilityState);
+		};
+
+		window.addEventListener('visibilitychange', handleVisibilityChange);
+
+		return () =>
+			window.removeEventListener(
+				'visibilitychange',
+				handleVisibilityChange,
+			);
+	}, []);
+
+	return visibilityState;
+};
+
+const useElementById = (id: string) => {
+	const [element, setElement] = useState<HTMLElement>();
+
+	useEffect(() => {
+		setElement(window.document.getElementById(id) ?? undefined);
+	}, [id]);
+
+	return element;
+};
+
 /**
  * Allow new blocks on live blogs to be added without page reload.
  * Polls the content API inserts news blocks if the user
@@ -158,8 +191,13 @@ export const Liveness = ({
 	hasPinnedPost,
 	selectedTopics,
 }: Props) => {
-	const [showToast, setShowToast] = useState(false);
-	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
+	const topOfBlog = useElementById('top-of-blog');
+	const blogBody = useElementById('liveblog-body');
+	const toastRoot = useElementById('toast-root');
+
+	const [topOfBlogVisible] = useIsInView({ node: topOfBlog, repeat: true });
+	const visibilityState = useVisibilityState();
+
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 	const [key, setKey] = useState<string>();
@@ -173,26 +211,21 @@ export const Liveness = ({
 		(data: LiveUpdateType) => {
 			if (data.numNewBlocks && data.numNewBlocks > 0) {
 				// Insert the new blocks in the dom (but hidden)
-				if (onFirstPage) {
+				if (onFirstPage && topOfBlog && blogBody) {
 					try {
-						insert(data.html, enhanceTweetsSwitch);
-					} catch (e) {
-						console.log('>> failed >>', e);
+						insert({
+							html: data.html,
+							enhanceTweetsSwitch,
+							topOfBlog,
+							blogBody,
+						});
+					} catch (error) {
+						log('dotcom', 'Failed to update blocks', error);
 					}
 				}
 
-				if (
-					onFirstPage &&
-					topOfBlogVisible &&
-					document.visibilityState === 'visible'
-				) {
-					revealPendingBlocks();
-					setNumHiddenBlocks(0);
-				} else {
-					setShowToast(true);
-					// Increment the count of new posts
-					setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
-				}
+				// Increment the count of new posts
+				setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
 			}
 
 			// Update the block id we use for polling
@@ -200,7 +233,13 @@ export const Liveness = ({
 				setLatestBlockId(data.mostRecentBlockId);
 			}
 		},
-		[onFirstPage, topOfBlogVisible, numHiddenBlocks, enhanceTweetsSwitch],
+		[
+			onFirstPage,
+			topOfBlog,
+			enhanceTweetsSwitch,
+			blogBody,
+			numHiddenBlocks,
+		],
 	);
 
 	useEffect(() => {
@@ -228,7 +267,7 @@ export const Liveness = ({
 	}, [pageId, ajaxUrl, latestBlockId, filterKeyEvents, selectedTopics]);
 
 	// useApi returns { data, loading, error } but we're not using them here
-	useApi(key, {
+	useApi<LiveUpdateType>(key, {
 		refreshInterval: 10_000,
 		refreshWhenHidden: true,
 		onSuccess,
@@ -240,59 +279,21 @@ export const Liveness = ({
 	}, [numHiddenBlocks, webTitle]);
 
 	useEffect(() => {
-		if (!topOfBlog) return;
+		if (!onFirstPage) return;
+		if (numHiddenBlocks <= 0) return;
+		if (visibilityState !== 'visible') return;
+		if (!topOfBlogVisible) return;
+		if (!blogBody) return;
 
-		const observer = new window.IntersectionObserver(([entry]) => {
-			if (!entry) return;
-
-			setTopOfBlogVisible(entry.isIntersecting);
-
-			if (entry.isIntersecting && onFirstPage) {
-				// If on first page, reveal blocks
-				revealPendingBlocks();
-				setNumHiddenBlocks(0);
-				setShowToast(false);
-			}
-		});
-
-		observer.observe(topOfBlog);
-
-		return () => {
-			observer.disconnect();
-		};
-	}, [onFirstPage]);
-
-	/**
-	 * This useEffect sets up a listener for when the page is backgrounded or restored. We
-	 * do this so that any new blocks that were fetched while the blog was in the
-	 * background are animated in at the point when focus is restored
-	 */
-	useEffect(() => {
-		const handleVisibilityChange = () => {
-			// The blog was either hidden or has become visible
-			if (
-				// If we're returning to a blog that has pending blocks and the reader
-				// is at the top of the first page then...
-				document.visibilityState === 'visible' &&
-				numHiddenBlocks > 0 &&
-				topOfBlogVisible &&
-				onFirstPage
-			) {
-				revealPendingBlocks();
-				setNumHiddenBlocks(0);
-				setShowToast(false);
-			}
-		};
-
-		window.addEventListener('visibilitychange', handleVisibilityChange);
-
-		return () => {
-			window.removeEventListener(
-				'visibilitychange',
-				handleVisibilityChange,
-			);
-		};
-	}, [numHiddenBlocks, onFirstPage, topOfBlogVisible]);
+		revealPendingBlocks(blogBody);
+		setNumHiddenBlocks(0);
+	}, [
+		blogBody,
+		numHiddenBlocks,
+		onFirstPage,
+		topOfBlogVisible,
+		visibilityState,
+	]);
 
 	const handleToastClick = useCallback(() => {
 		// We adjust the position we scroll readers to based on if there is a pinned
@@ -301,20 +302,16 @@ export const Liveness = ({
 		// see the key events filter
 		const placeToScrollTo = hasPinnedPost ? 'top-of-blog' : 'maincontent';
 		if (onFirstPage) {
-			setShowToast(false);
-
 			document.getElementById(placeToScrollTo)?.scrollIntoView({
 				behavior: 'smooth',
 			});
 			window.history.replaceState({}, '', `#${placeToScrollTo}`);
-			revealPendingBlocks();
-			setNumHiddenBlocks(0);
 		} else {
 			window.location.href = `${webURL}#${placeToScrollTo}`;
 		}
 	}, [hasPinnedPost, onFirstPage, webURL]);
 
-	if (toastRoot && showToast) {
+	if (toastRoot && numHiddenBlocks > 0 && !topOfBlogVisible) {
 		/**
 		 * Why `createPortal`?
 		 *
@@ -331,7 +328,7 @@ export const Liveness = ({
 		 * [stickily positioned element]: https://developer.mozilla.org/en-US/docs/Web/CSS/position#types_of_positioning
 		 * [containing block]: https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
 		 */
-		return ReactDOM.createPortal(
+		return createPortal(
 			<Toast
 				onClick={handleToastClick}
 				count={numHiddenBlocks}
