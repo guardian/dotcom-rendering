@@ -26,7 +26,8 @@ jobs:
         run: echo "CONTAINER_ID=$(docker create ${{ inputs.container-image }})" >> "$GITHUB_OUTPUT"
       - name: Move container files into GHA Workspace
         run: docker cp ${{ steps.create-container.outputs.CONTAINER_ID }}:/opt/app/dotcom-rendering/dotcom-rendering/. ${{ github.workspace }}
-      # We want to avoid uploading the uncompressed files to our riffraff bucket
+
+        # We want to avoid uploading the uncompressed files to our riffraff bucket
       # so we create our tarball outside the rendering/ folder, then delete the contents of rendering/
       # and finally move the tarball into rendering
       - name: Compress DCR server files
@@ -34,17 +35,20 @@ jobs:
           tar -zcf rendering.tar.gz rendering
           rm -r rendering/*
           mv rendering.tar.gz rendering/
-      - name: Compress DCR front-web server files
+
+      - name: Compress DCR NEW article server files
         run: |
-          tar -zcf front-web.tar.gz front-web
-          rm -r front-web/*
-          mv front-web.tar.gz front-web/
+          tar -zcf article.tar.gz article
+          rm -r article/*
+          mv article.tar.gz article/
+
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: eu-west-1
           role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           mask-aws-account-id: true
 
+      # Old rendering deployment
       - uses: guardian/actions-riff-raff@v3
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
@@ -52,13 +56,23 @@ jobs:
           configPath: riff-raff.yaml
           buildNumberOffset: 38860
           contentDirectories: |
-            frontend-cfn:
-              - frontend-cfn
+            rendering-cfn:
+              - rendering-cfn
             rendering:
               - rendering
-            front-web-cfn:
-              - front-web-cfn
-            front-web:
-              - front-web
+            frontend-static:
+              - frontend-static
+
+      # New article deployment
+      - uses: guardian/actions-riff-raff@v3
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          projectName: dotcom:rendering-all
+          configPath: riff-raff.yaml
+          contentDirectories: |
+            article-cfn:
+              - article-cfn
+            article:
+              - article
             frontend-static:
               - frontend-static
