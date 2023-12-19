@@ -1,4 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { Meta, StoryObj } from '@storybook/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	newsStoryWithDatesToExpanded,
 	newsTimelineStoryNoDescriptionExpanded,
@@ -6,8 +8,6 @@ import {
 	sportTimelineStoryWithDescriptionAndEventsExpanded,
 } from '../../fixtures/manual/timelineAtom';
 import { TimelineAtom as TimelineAtomComponent } from './TimelineAtom.importable';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { ArticleDisplay, ArticleDesign, Pillar } from '@guardian/libs';
 
 const meta: Meta<typeof TimelineAtomComponent> = {
 	title: 'Components/Timeline Atom',

@@ -6,6 +6,7 @@ import {
 } from '@guardian/source-foundations';
 import { SvgInfo } from '@guardian/source-react-components';
 import { palette as themePalette } from '../../palette';
+
 const imageStyling = css`
 	float: left;
 	margin-right: 16px;

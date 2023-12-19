@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
 	imageStoryExpanded,

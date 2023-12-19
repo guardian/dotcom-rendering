@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import type { ArticleDesign } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
 import { palette as themePalette } from '../../palette';
 import { Summary } from './Summary';
+
 const containerStyling = css`
 	display: block;
 	position: relative;
@@ -49,7 +50,6 @@ export const Container = ({
 }: {
 	id: string;
 	title: string;
-	design?: ArticleDesign;
 	expandForStorybook?: boolean;
 	atomType: string;
 	atomTypeTitle: string;

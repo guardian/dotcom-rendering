@@ -1,8 +1,8 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { ProfileAtom as ProfileAtomComponent } from './ProfileAtom.importable';
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { getAllThemes } from '../lib/format';
+import { ProfileAtom as ProfileAtomComponent } from './ProfileAtom.importable';
 
 const meta: Meta<typeof ProfileAtomComponent> = {
 	title: 'Components/Profile Atom',
