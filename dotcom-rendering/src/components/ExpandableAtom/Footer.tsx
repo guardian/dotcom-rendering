@@ -27,11 +27,9 @@ const ThumbImage = () => {
 };
 
 export const Footer = ({
-	format,
 	likeHandler,
 	dislikeHandler,
 }: {
-	format: ArticleFormat;
 	likeHandler: () => void;
 	dislikeHandler: () => void;
 }): JSX.Element => {

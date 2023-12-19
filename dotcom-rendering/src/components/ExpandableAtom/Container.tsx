@@ -39,7 +39,6 @@ export const Container = ({
 	id,
 	title,
 	children,
-	format,
 	expandForStorybook,
 	atomType,
 	atomTypeTitle,
@@ -47,7 +46,6 @@ export const Container = ({
 }: {
 	id: string;
 	title: string;
-	format: ArticleFormat;
 	expandForStorybook?: boolean;
 	atomType: string;
 	atomTypeTitle: string;
@@ -63,7 +61,6 @@ export const Container = ({
 		>
 			<Summary
 				sectionTitle={atomTypeTitle}
-				format={format}
 				title={title}
 				expandCallback={expandCallback}
 			/>
