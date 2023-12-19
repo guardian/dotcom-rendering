@@ -1,9 +1,8 @@
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
-import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import {
-	GuStack as CDKStack,
 	GuDistributionBucketParameter,
 	GuLoggingStreamNameParameter,
+	GuStack,
 	GuStringParameter,
 } from '@guardian/cdk/lib/constructs/core';
 import {
@@ -16,7 +15,7 @@ import {
 	GuInstanceRole,
 } from '@guardian/cdk/lib/constructs/iam';
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
-import type { App as CDKApp } from 'aws-cdk-lib';
+import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration, Tags } from 'aws-cdk-lib';
 import {
 	AdjustmentType,
@@ -27,34 +26,8 @@ import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
+import type { DCRAlarmConfig, DCRProps } from './types';
 import { getUserData } from './userData';
-
-export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
-	/**
-	 * The name of the application
-	 */
-	guApp: 'article' | 'facia' | 'misc' | 'interactive';
-	/**
-	 * The minimum number of instances in the autoscaling group
-	 */
-	minCapacity: number;
-	/**
-	 * The maximum number of instances in the autoscaling group.
-	 * Defaults to twice the minimum capacity if not specified
-	 */
-	maxCapacity?: number;
-	/**
-	 * EC2 Instance Type to use for dotcom-rendering
-	 */
-	instanceType: string;
-}
-
-interface DCRAlarmConfig {
-	comparisonOperator: string;
-	threshold: number;
-	evaluationPeriod: number;
-	period: number;
-}
 
 /**
  * DCR infrastructure provisioning via CDK
@@ -66,20 +39,13 @@ interface DCRAlarmConfig {
  * For this we'll need to do a dual-stack migration
  * @see https://github.com/guardian/cdk/blob/main/docs/migration-guide-ec2.md
  */
-export class RenderingCDKStack extends CDKStack {
-	constructor(scope: CDKApp, id: string, props: RenderingCDKStackProps) {
-		super(scope, id, {
-			...props,
-			// Any version of this app should run in the eu-west-1 region
-			env: { region: 'eu-west-1' },
-			// Set the stack within the constructor as this won't vary between apps
-			stack: 'rendering',
-		});
+export class DotcomRendering extends GuStack {
+	constructor(scope: App, id: string, props: DCRProps) {
+		super(scope, id, props);
 
-		const { guApp, stage } = props;
-		const { region, stack: guStack } = this;
+		const { app, region, stack, stage } = props;
 
-		const ssmPrefix = `/${stage}/${guStack}/${guApp}`;
+		const ssmPrefix = `/${stage}/${stack}/${app}`;
 
 		// This fetches the VPC using the SSM parameter defined for this account
 		// and specifies the CIDR block to use with it here
@@ -105,7 +71,7 @@ export class RenderingCDKStack extends CDKStack {
 			this,
 			'InternalLoadBalancerSecurityGroup',
 			{
-				app: guApp,
+				app,
 				description:
 					'Allows HTTP and HTTPS inbound connections from within the VPC',
 				vpc,
@@ -129,20 +95,21 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		/**
-		 * TODO - migrate this ELB (classic load balancer) to an ALB (guApplication load balancer)
+		 * TODO - migrate this ELB (classic load balancer) to an ALB (application load balancer)
 		 * @see https://github.com/guardian/cdk/blob/512536bd590b26d9fcac5d39329e8217103d7859/src/constructs/loadbalancing/elb.ts#L24-L46
 		 *
-		 * GOTCHA: The load balancer for article is named specifically for backwards compatibility
+		 * GOTCHA: The load balancer name appends `-ELB` when the `app = "rendering"` for backwards compatibility
+		 * We removed this to avoid the `LoadBalancerName.length > 32`. This will be fixable once we migrate to ALBs.
 		 */
 		const loadBalancerName =
-			guApp === 'article'
-				? `frontend-${stage}-rendering-ELB`
-				: `${guStack}-${stage}-${guApp}`;
+			app === 'rendering'
+				? `${stack}-${stage}-${app}-ELB`
+				: `${stack}-${stage}-${app}`;
 		const loadBalancer = new GuClassicLoadBalancer(
 			this,
 			'InternalLoadBalancer',
 			{
-				app: guApp,
+				app,
 				vpc,
 				accessLoggingPolicy: {
 					enabled: true,
@@ -156,7 +123,7 @@ export class RenderingCDKStack extends CDKStack {
 						},
 					).valueAsString,
 					emitInterval: 5,
-					s3BucketPrefix: `ELBLogs/${guStack}/${guApp}/${stage}`,
+					s3BucketPrefix: `ELBLogs/${stack}/${app}/${stage}`,
 				},
 				crossZone: true,
 				healthCheck: {
@@ -197,7 +164,7 @@ export class RenderingCDKStack extends CDKStack {
 
 		new StringParameter(this, 'loadBalancerDnsName', {
 			// Annoyingly this doesn't follow the same pattern as the other SSM parameters
-			parameterName: `/${guStack}/${stage}/${guApp}.loadBalancerDnsName`,
+			parameterName: `/${stack}/${stage}/${app}.loadBalancerDnsName`,
 			stringValue: loadBalancer.loadBalancerDnsName,
 		});
 
@@ -210,7 +177,7 @@ export class RenderingCDKStack extends CDKStack {
 			this,
 			'InstanceSecurityGroup',
 			{
-				app: guApp,
+				app,
 				vpc,
 				// This description is poor but changing it results in deletion and
 				// recreation of the security group, which is not ideal
@@ -230,7 +197,7 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		const instanceRole = new GuInstanceRole(this, {
-			app: guApp,
+			app,
 			additionalPolicies: [
 				new GuAllowPolicy(this, 'AllowPolicyGetArtifactsBucket', {
 					actions: ['s3:GetObject'],
@@ -263,15 +230,15 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		const asg = new GuAutoScalingGroup(this, 'AutoscalingGroup', {
-			app: guApp,
+			app,
 			vpc,
 			instanceType: new InstanceType(props.instanceType),
 			minimumInstances: props.minCapacity,
 			maximumInstances: props.maxCapacity,
 			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
 			userData: getUserData({
-				guApp,
-				guStack,
+				guApp: app,
+				guStack: stack,
 				stage,
 				artifactsBucket,
 			}),
@@ -282,7 +249,7 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		Tags.of(asg).add('LogKinesisStreamName', loggingStreamName);
-		Tags.of(asg).add('SystemdUnit', `${guApp}.service`);
+		Tags.of(asg).add('SystemdUnit', `${app}.service`);
 
 		// ! Important !
 		// Ensure the ASG is attached to the load balancer

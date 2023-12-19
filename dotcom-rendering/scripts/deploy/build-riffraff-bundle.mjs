@@ -12,7 +12,8 @@ const target = path.resolve(dirname, '../..', 'target');
  * ├── build.json
  * ├── riff-raff.yaml
  * ├── ${copyFrontendStatic()}
- * ├── ${copyApp('article')}
+ * ├── ${copyApp('rendering')} // old article app
+ * ├── ${copyApp('article')} // new article app
  * ├── ${copyApp('facia')}
  * ├── ${copyApp('misc')}
  * └── ${copyApp('interactive')}
@@ -31,14 +32,19 @@ const target = path.resolve(dirname, '../..', 'target');
  *     └── dist
  *         └── ${guAppName}.zip
  * *
- * @param guAppName {"article" | "facia" | "misc" | "interactive" }
+ * @param guAppName {"article" | "facia" | "misc" | "interactive" | string }
  **/
 const copyApp = (guAppName) => {
 	/** @param {"CODE" | "PROD"} stage */
-	const cfnTemplateName = (stage) =>
-		`${guAppName.charAt(0).toUpperCase()}${guAppName.slice(
-			1,
-		)}Rendering-${stage}.template.json`;
+	const cfnTemplateName = (stage) => {
+		if (guAppName === 'rendering') {
+			return `DotcomRendering-${stage}.template.json`;
+		} else {
+			return `${guAppName.charAt(0).toUpperCase()}${guAppName.slice(
+				1,
+			)}Rendering-${stage}.template.json`;
+		}
+	};
 
 	const cfnFolder = `${guAppName}-cfn`;
 
@@ -131,8 +137,9 @@ const copyRiffRaff = () => {
 };
 
 Promise.all([
-	...copyApp('article'),
-	...copyApp('facia'),
+	...copyApp('rendering'), // old article app
+	...copyApp('article'), // new article app
+	// ...copyApp('facia'),
 	// ...copyApp('misc'),
 	// ...copyApp('interactive'),
 	...copyFrontendStatic(),

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The RenderingCDKStack matches the snapshot 1`] = `
+exports[`The DotcomRendering stack matches the snapshot 1`] = `
 {
   "Metadata": {
     "gu:cdk:constructs": [
@@ -40,8 +40,8 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
     },
   },
   "Parameters": {
-    "AMIArticle": {
-      "Description": "Amazon Machine Image ID for the app article. Use this in conjunction with AMIgo to keep AMIs up to date.",
+    "AMIRendering": {
+      "Description": "Amazon Machine Image ID for the app rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
       "Type": "AWS::EC2::Image::Id",
     },
     "DistributionBucketName": {
@@ -50,7 +50,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "ELBLogsParameter": {
-      "Default": "/TEST/rendering/article/elb.logs.bucketName",
+      "Default": "/TEST/frontend/rendering/elb.logs.bucketName",
       "Description": "S3 Bucket Name for ELB logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
@@ -186,7 +186,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                       {
                         "Ref": "AWS::AccountId",
                       },
-                      ":parameter/TEST/rendering/article/*",
+                      ":parameter/TEST/frontend/rendering/*",
                     ],
                   ],
                 },
@@ -234,11 +234,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "HealthCheckType": "ELB",
         "LaunchTemplate": {
           "LaunchTemplateId": {
-            "Ref": "renderingTESTarticleE10559A7",
+            "Ref": "frontendTESTrenderingF3FD9600",
           },
           "Version": {
             "Fn::GetAtt": [
-              "renderingTESTarticleE10559A7",
+              "frontendTESTrenderingF3FD9600",
               "LatestVersionNumber",
             ],
           },
@@ -254,7 +254,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           {
             "Key": "App",
             "PropagateAtLaunch": true,
-            "Value": "article",
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -276,7 +276,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           {
             "Key": "Stack",
             "PropagateAtLaunch": true,
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -286,7 +286,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           {
             "Key": "SystemdUnit",
             "PropagateAtLaunch": true,
-            "Value": "article.service",
+            "Value": "rendering.service",
           },
         ],
         "VPCZoneIdentifier": {
@@ -371,7 +371,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "GetDistributablePolicyArticleAD1E3D45": {
+    "GetDistributablePolicyRenderingCA2FF5C7": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
@@ -386,7 +386,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                     {
                       "Ref": "DistributionBucketName",
                     },
-                    "/rendering/TEST/article/*",
+                    "/frontend/TEST/rendering/*",
                   ],
                 ],
               },
@@ -394,7 +394,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "GetDistributablePolicyArticleAD1E3D45",
+        "PolicyName": "GetDistributablePolicyRenderingCA2FF5C7",
         "Roles": [
           {
             "Ref": "InstanceRole",
@@ -403,7 +403,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "GuHttpsEgressSecurityGroupArticleAAE96989": {
+    "GuHttpsEgressSecurityGroupRenderingE17B2710": {
       "Properties": {
         "GroupDescription": "Allow all outbound HTTPS traffic",
         "SecurityGroupEgress": [
@@ -418,7 +418,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -430,7 +430,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -457,7 +457,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:kinesis:eu-west-1:",
+                    "arn:aws:kinesis:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
                     {
                       "Ref": "AWS::AccountId",
                     },
@@ -513,7 +517,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -525,7 +529,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -557,7 +561,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -569,7 +573,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -590,7 +594,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           "S3BucketName": {
             "Ref": "ELBLogsParameter",
           },
-          "S3BucketPrefix": "ELBLogs/rendering/article/TEST",
+          "S3BucketPrefix": "ELBLogs/frontend/rendering/TEST",
         },
         "CrossZone": true,
         "HealthCheck": {
@@ -624,7 +628,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -636,7 +640,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -646,9 +650,9 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
     },
-    "InternalLoadBalancerArticleSecurityGroupA9DD367D": {
+    "InternalLoadBalancerRenderingSecurityGroup53E3F9A7": {
       "Properties": {
-        "GroupDescription": "ArticleRendering/InternalLoadBalancerArticle/SecurityGroup",
+        "GroupDescription": "DotcomRendering/InternalLoadBalancerRendering/SecurityGroup",
         "SecurityGroupEgress": [
           {
             "CidrIp": "255.255.255.255/32",
@@ -670,7 +674,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -682,7 +686,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -724,7 +728,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -736,7 +740,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -787,7 +791,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
-    "ParameterStoreReadArticle1CDDF4AB": {
+    "ParameterStoreReadRenderingFDC91AAA": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
@@ -798,11 +802,15 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:ssm:eu-west-1:",
+                    "arn:aws:ssm:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/TEST/rendering/article",
+                    ":parameter/TEST/frontend/rendering",
                   ],
                 ],
               },
@@ -817,11 +825,15 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:ssm:eu-west-1:",
+                    "arn:aws:ssm:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/TEST/rendering/article/*",
+                    ":parameter/TEST/frontend/rendering/*",
                   ],
                 ],
               },
@@ -890,7 +902,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -903,26 +915,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "loadBalancerDnsName0B1DEBAD": {
-      "Properties": {
-        "Name": "/rendering/TEST/article.loadBalancerDnsName",
-        "Tags": {
-          "Stack": "rendering",
-          "Stage": "TEST",
-          "gu:cdk:version": "TEST",
-          "gu:repo": "guardian/dotcom-rendering",
-        },
-        "Type": "String",
-        "Value": {
-          "Fn::GetAtt": [
-            "InternalLoadBalancer",
-            "DNSName",
-          ],
-        },
-      },
-      "Type": "AWS::SSM::Parameter",
-    },
-    "renderingTESTarticleE10559A7": {
+    "frontendTESTrenderingF3FD9600": {
       "DependsOn": [
         "InstanceRole",
       ],
@@ -931,19 +924,19 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           "IamInstanceProfile": {
             "Arn": {
               "Fn::GetAtt": [
-                "renderingTESTarticleProfile333AE731",
+                "frontendTESTrenderingProfileA2D2425E",
                 "Arn",
               ],
             },
           },
           "ImageId": {
-            "Ref": "AMIArticle",
+            "Ref": "AMIRendering",
           },
           "InstanceType": "t4g.micro",
           "SecurityGroupIds": [
             {
               "Fn::GetAtt": [
-                "GuHttpsEgressSecurityGroupArticleAAE96989",
+                "GuHttpsEgressSecurityGroupRenderingE17B2710",
                 "GroupId",
               ],
             },
@@ -974,11 +967,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "ArticleRendering/rendering-TEST-article",
+                  "Value": "DotcomRendering/frontend-TEST-rendering",
                 },
                 {
                   "Key": "Stack",
-                  "Value": "rendering",
+                  "Value": "frontend",
                 },
                 {
                   "Key": "Stage",
@@ -999,11 +992,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "ArticleRendering/rendering-TEST-article",
+                  "Value": "DotcomRendering/frontend-TEST-rendering",
                 },
                 {
                   "Key": "Stack",
-                  "Value": "rendering",
+                  "Value": "frontend",
                 },
                 {
                   "Key": "Stage",
@@ -1025,18 +1018,18 @@ aws --region eu-west-1 s3 cp s3://",
                   {
                     "Ref": "DistributionBucketName",
                   },
-                  "/frontend/TEST/article/article.tar.gz ./
-tar -zxf article.tar.gz article
-chown -R dotcom-rendering:frontend article
-cd article
+                  "/frontend/TEST/rendering/rendering.tar.gz ./
+tar -zxf rendering.tar.gz rendering
+chown -R dotcom-rendering:frontend rendering
+cd rendering
 mkdir /var/log/dotcom-rendering
 chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-cat > /etc/systemd/system/article.service << EOF
+cat > /etc/systemd/system/rendering.service << EOF
 [Unit]
-Description=article
+Description=rendering
 After=network.target
 [Service]
-WorkingDirectory=/home/dotcom-rendering/article
+WorkingDirectory=/home/dotcom-rendering/rendering
 Type=simple
 User=dotcom-rendering
 Group=frontend
@@ -1045,15 +1038,15 @@ StandardOutput=journal
 Environment=TERM=xterm-256color
 Environment=NODE_ENV=production
 Environment=GU_STAGE=TEST
-Environment=GU_APP=article
-Environment=GU_STACK=rendering
+Environment=GU_APP=rendering
+Environment=GU_STACK=frontend
 ExecStart=make prod
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 EOF
-systemctl enable article
-systemctl start article",
+systemctl enable rendering
+systemctl start rendering",
                 ],
               ],
             },
@@ -1073,11 +1066,11 @@ systemctl start article",
               },
               {
                 "Key": "Name",
-                "Value": "ArticleRendering/rendering-TEST-article",
+                "Value": "DotcomRendering/frontend-TEST-rendering",
               },
               {
                 "Key": "Stack",
-                "Value": "rendering",
+                "Value": "frontend",
               },
               {
                 "Key": "Stage",
@@ -1089,7 +1082,7 @@ systemctl start article",
       },
       "Type": "AWS::EC2::LaunchTemplate",
     },
-    "renderingTESTarticleProfile333AE731": {
+    "frontendTESTrenderingProfileA2D2425E": {
       "Properties": {
         "Roles": [
           {
@@ -1098,6 +1091,25 @@ systemctl start article",
         ],
       },
       "Type": "AWS::IAM::InstanceProfile",
+    },
+    "loadBalancerDnsName0B1DEBAD": {
+      "Properties": {
+        "Name": "/frontend/TEST/rendering.loadBalancerDnsName",
+        "Tags": {
+          "Stack": "frontend",
+          "Stage": "TEST",
+          "gu:cdk:version": "TEST",
+          "gu:repo": "guardian/dotcom-rendering",
+        },
+        "Type": "String",
+        "Value": {
+          "Fn::GetAtt": [
+            "InternalLoadBalancer",
+            "DNSName",
+          ],
+        },
+      },
+      "Type": "AWS::SSM::Parameter",
     },
   },
 }
