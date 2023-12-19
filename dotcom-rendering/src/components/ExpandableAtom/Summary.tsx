@@ -1,13 +1,8 @@
 import { css } from '@emotion/react';
-import {
-	body,
-	headline,
-	palette as sourcePalette,
-	textSans,
-} from '@guardian/source-foundations';
+import { body, headline, textSans } from '@guardian/source-foundations';
 import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { palette as themePalette } from '../../palette';
 
 /// SUMMARY ELEMENT
 
@@ -23,7 +18,7 @@ const plusStyling = css`
 	margin-right: 12px;
 	margin-bottom: 6px;
 	width: 33px;
-	fill: white;
+	fill: ${themePalette('--expandable-atom-button-fill')};
 	height: 28px;
 `;
 
@@ -31,7 +26,7 @@ const minusStyling = css`
 	margin-right: 14px;
 	margin-bottom: 6px;
 	width: 30px;
-	fill: white;
+	fill: ${themePalette('--expandable-atom-button-fill')};
 	height: 25px;
 	padding-left: 4px;
 `;
@@ -59,12 +54,12 @@ export const Summary = ({
 			lineHeight: 'tight',
 			fontWeight: 'bold',
 		})};
-		color: ${decidePalette(format).text.expandableAtomHover};
+		color: ${themePalette('--expandable-atom-text-hover')};
 	`;
 
 	const showHideStyling = css`
-		background: ${sourcePalette.neutral[7]};
-		color: ${sourcePalette.neutral[100]};
+		background: ${themePalette('--expandable-atom-button')};
+		color: ${themePalette('--expandable-atom-button-fill')};
 		height: 2rem;
 		position: absolute;
 		bottom: 0;
@@ -77,7 +72,7 @@ export const Summary = ({
 		border: 0;
 		margin: 0;
 		:hover {
-			background: ${decidePalette(format).text.expandableAtomHover};
+			background: ${themePalette('--expandable-atom-text-hover')};
 		}
 	`;
 	const [hasBeenExpanded, setHasBeenExpanded] = useState(false);
