@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { body, headline, textSans } from '@guardian/source-foundations';
 import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
 import { palette as themePalette } from '../../palette';
 
 /// SUMMARY ELEMENT
