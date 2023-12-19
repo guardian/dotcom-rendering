@@ -5199,8 +5199,8 @@ const paletteColours = {
 		dark: discussionPaginationBorderDark,
 	},
 	'--discussion-subdued': {
-		light: discussionGreyLight,
-		dark: discussionGreyDark,
+		light: discussionSubduedLight,
+		dark: discussionSubduedDark,
 	},
 	'--comment-form-input-background': {
 		light: commentFormInputBackgroundLight,
