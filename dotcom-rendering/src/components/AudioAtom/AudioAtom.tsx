@@ -1,26 +1,21 @@
 import { css } from '@emotion/react';
-import {
-	focusHalo,
-	headline,
-	neutral,
-	textSans,
-} from '@guardian/source-foundations';
+import { focusHalo, headline, textSans } from '@guardian/source-foundations';
 import type { MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { palette } from '../../palette';
 
 const wrapperStyles = css`
 	width: 100%;
 	border-image: repeating-linear-gradient(
 			to bottom,
-			${neutral[86]},
-			${neutral[86]} 1px,
+			${palette('--audio-atom-border')},
+			${palette('--audio-atom-border')} 1px,
 			transparent 1px,
 			transparent 4px
 		)
 		13;
 	border-top: 13px solid black;
-	background-color: ${neutral[97]};
+	background-color: ${palette('--audio-atom-background')};
 	position: relative;
 	padding-left: 5px;
 	padding-right: 5px;
@@ -28,8 +23,8 @@ const wrapperStyles = css`
 	margin: 16px 0 36px;
 `;
 
-const kickerStyle = (color: string) => css`
-	color: ${color};
+const kickerStyle = css`
+	color: ${palette('--audio-atom-kicker')};
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 `;
 
@@ -98,10 +93,14 @@ const progressBarStyle = css`
 	display: block;
 `;
 
-const progressBarInputStyle = (color: string) => css`
+const progressBarInputStyle = css`
 	width: 100%;
 	appearance: none;
-	background-image: linear-gradient(to right, ${color} 0%, ${neutral[60]} 0%);
+	background-image: linear-gradient(
+		to right,
+		${palette('--audio-atom-icons')} 0%,
+		${palette('--audio-atom-progress-bar')} 0%
+	);
 	height: 6px;
 	outline: 0;
 	cursor: pointer;
@@ -113,21 +112,21 @@ const progressBarInputStyle = (color: string) => css`
 
 	/* Use the pillar to style the colour of the range thumb */
 	&::-webkit-slider-thumb {
-		background: ${color};
+		background: ${palette('--audio-atom-icons')};
 		-webkit-appearance: none; /* stylelint-disable-line property-no-vendor-prefix */
 		width: 14px;
 		height: 14px;
 		border-radius: 50px;
 	}
 	&::-moz-range-thumb {
-		background: ${color};
+		background: ${palette('--audio-atom-icons')};
 		width: 14px;
 		height: 14px;
 		border: none;
 		border-radius: 50px;
 	}
 	&::-ms-thumb {
-		background: ${color};
+		background: ${palette('--audio-atom-icons')};
 		width: 14px;
 		height: 14px;
 		border: none;
@@ -155,24 +154,34 @@ const formatTime = (t: number) => {
 	return `${formatNum(hour)}:${formatNum(minute)}:${formatNum(second)}`;
 };
 
-const PauseSVG = ({ circleFill }: { circleFill: string }) => (
+const PauseSVG = () => (
 	<svg css={svgPauseStyle} width="30px" height="30px" viewBox="0 0 30 30">
 		<g fill="none" fillRule="evenodd">
-			<circle fill={circleFill} cx="15" cy="15" r="15"></circle>
+			<circle
+				fill={palette('--audio-atom-icons')}
+				cx="15"
+				cy="15"
+				r="15"
+			></circle>
 			<path
 				d="M9.429 7.286h3.429v15.429h-3.43zm7.286 0h3.429v15.429h-3.43z"
-				fill={neutral[100]}
+				fill={palette('--audio-atom-background')}
 			></path>
 		</g>
 	</svg>
 );
 
-const PlaySVG = ({ circleFill }: { circleFill: string }) => (
+const PlaySVG = () => (
 	<svg css={svgPlayStyle} width="30px" height="30px" viewBox="0 0 30 30">
 		<g fill="none" fillRule="evenodd">
-			<circle fill={circleFill} cx="15" cy="15" r="15"></circle>
+			<circle
+				fill={palette('--audio-atom-icons')}
+				cx="15"
+				cy="15"
+				r="15"
+			></circle>
 			<path
-				fill={neutral[100]}
+				fill={palette('--audio-atom-background')}
 				d="M10.113 8.571l-.47.366V20.01l.472.347 13.456-5.593v-.598z"
 			></path>
 		</g>
@@ -206,7 +215,6 @@ export const AudioAtom = ({
 }: Props): JSX.Element => {
 	const audioEl = useRef<HTMLAudioElement>(null);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
-	const palette = decidePalette(format);
 
 	// update current time and progress bar position
 	const [currentTime, setCurrentTime] = useState<number>(0);
@@ -320,9 +328,7 @@ export const AudioAtom = ({
 					padding-left: 5px;
 				`}
 			>
-				<span css={kickerStyle(palette.background.audioAtom)}>
-					{kicker}
-				</span>
+				<span css={kickerStyle}>{kicker}</span>
 				<h4 css={titleStyle}>{title}</h4>
 			</div>
 			<div css={audioBodyStyle}>
@@ -349,15 +355,7 @@ export const AudioAtom = ({
 						onClick={() => (isPlaying ? pauseAudio() : playAudio())}
 						css={buttonStyle}
 					>
-						{isPlaying ? (
-							<PauseSVG
-								circleFill={palette.background.audioAtom}
-							/>
-						) : (
-							<PlaySVG
-								circleFill={palette.background.audioAtom}
-							/>
-						)}
+						{isPlaying ? <PauseSVG /> : <PlaySVG />}
 					</button>
 				</div>
 				<div css={timingStyle}>
@@ -366,9 +364,7 @@ export const AudioAtom = ({
 					</div>
 					<div css={progressBarStyle}>
 						<input
-							css={progressBarInputStyle(
-								palette.background.audioAtom,
-							)}
+							css={progressBarInputStyle}
 							ref={progressBarEl}
 							type="range"
 							min="0"

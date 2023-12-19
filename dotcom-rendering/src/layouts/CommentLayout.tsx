@@ -692,6 +692,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												tags={article.tags}
 												renderAds={renderAds}
 												isLabs={false}
+												articleEndSlot={
+													!!article.config.switches
+														.articleEndSlot
+												}
 											/>
 										</Island>
 									)}
@@ -821,6 +825,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						fullWidth={true}
 						sectionId="comments"
 						element="aside"
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}

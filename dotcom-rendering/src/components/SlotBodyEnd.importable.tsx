@@ -45,6 +45,7 @@ type Props = {
 	keywordIds: string;
 	renderAds: boolean;
 	isLabs: boolean;
+	articleEndSlot: boolean;
 };
 
 const buildReaderRevenueEpicConfig = (
@@ -135,6 +136,7 @@ export const SlotBodyEnd = ({
 	keywordIds,
 	renderAds,
 	isLabs,
+	articleEndSlot,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
@@ -149,10 +151,7 @@ export const SlotBodyEnd = ({
 
 	// Show the article end slot if the epic is not shown, currently only used in the US for Public Good
 	const showArticleEndSlot =
-		renderAds &&
-		!isLabs &&
-		countryCode === 'US' &&
-		window.guardian.config.switches.articleEndSlot;
+		renderAds && !isLabs && countryCode === 'US' && articleEndSlot;
 
 	useEffect(() => {
 		setAsyncArticleCount(

@@ -1,8 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	textSans,
-} from '@guardian/source-foundations';
+import { textSans } from '@guardian/source-foundations';
 import { SvgArrowUpStraight } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { recommend as recommendDefault } from '../../lib/discussionApi';
@@ -22,7 +19,7 @@ type Props = {
 const countStyles = css`
 	${textSans.xxsmall({ fontWeight: 'light' })}
 	min-width: 0.75rem;
-	color: ${sourcePalette.neutral[46]};
+	color: ${themePalette('--discussion-subdued')};
 	margin-right: 0.3125rem;
 `;
 

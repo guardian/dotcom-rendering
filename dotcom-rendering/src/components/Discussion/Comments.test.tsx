@@ -22,6 +22,9 @@ describe('App', () => {
 				}}
 				expanded={false}
 				onPermalinkClick={() => {}}
+				onExpand={() => {
+					// do nothing
+				}}
 				apiKey=""
 				idApiUrl="https://idapi.theguardian.com"
 			/>,
