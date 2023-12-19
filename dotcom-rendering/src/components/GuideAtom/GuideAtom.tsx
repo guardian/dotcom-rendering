@@ -1,4 +1,3 @@
-import type { ArticleFormat } from '@guardian/libs';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import { useConfig } from '../ConfigContext';
 import { Body } from '../ExpandableAtom/Body';
@@ -11,7 +10,6 @@ export type GuideAtomProps = {
 	image?: string;
 	html: string;
 	credit?: string;
-	format: ArticleFormat;
 	expandForStorybook?: boolean;
 	likeHandler?: () => void;
 	dislikeHandler?: () => void;
@@ -24,7 +22,6 @@ export const GuideAtom = ({
 	image,
 	html,
 	credit,
-	format,
 	expandForStorybook,
 	likeHandler,
 	dislikeHandler,
@@ -58,7 +55,6 @@ export const GuideAtom = ({
 		>
 			<Body html={html} image={image} credit={credit} />
 			<Footer
-				format={format}
 				dislikeHandler={
 					dislikeHandler ??
 					(() =>
