@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleDesign } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source-foundations';
 import { palette as themePalette } from '../../palette';
 import { Summary } from './Summary';
