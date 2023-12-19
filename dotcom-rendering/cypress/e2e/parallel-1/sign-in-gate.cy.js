@@ -1,3 +1,4 @@
+/* eslint-disable mocha/no-exclusive-tests */
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
@@ -227,6 +228,59 @@ describe('Sign In Gate Tests', function () {
 			cy.get('[data-testid=sign-in-gate-main_privacy]').click();
 
 			cy.contains('privacy settings');
+		});
+
+		describe.only('AB Test', function () {
+			describe('variant a', function () {
+				it('should show the sign gate more frequently when a user is on web', function () {
+					setArticleCount(1);
+					cy.visit(
+						'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+						{
+							onBeforeLoad: (win) => {
+								Object.defineProperty(
+									win.navigator,
+									'userAgent',
+									{
+										value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0',
+									},
+								);
+							},
+						},
+					);
+
+					scrollToGateForLazyLoading();
+
+					cy.get('[data-testid=sign-in-gate-main]').should(
+						'be.visible',
+					);
+				});
+			});
+			describe('variant b', function () {
+				it('should show the sign gate more frequently when a user is on mobile', function () {
+					setArticleCount(1);
+					cy.visit(
+						'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+						{
+							onBeforeLoad: (win) => {
+								Object.defineProperty(
+									win.navigator,
+									'userAgent',
+									{
+										value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/114.0.5735.99 Mobile/15E148 Safari/604.1',
+									},
+								);
+							},
+						},
+					);
+
+					scrollToGateForLazyLoading();
+
+					cy.get('[data-testid=sign-in-gate-main]').should(
+						'be.visible',
+					);
+				});
+			});
 		});
 
 		describe('Sign in gate should personalise based on the GU_CO_COMPLETE cookie', function () {
