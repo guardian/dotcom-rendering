@@ -1,5 +1,3 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
 export const defaultStoryExpanded = {
 	id: 'a76d998e-d4b0-4d00-8afb-773eddb4064c',
 	title: "Wednesday's Hong Kong tips",
