@@ -4546,6 +4546,7 @@ __metadata:
     eslint-plugin-mocha: "npm:10.1.0"
     eslint-plugin-react: "npm:7.33.2"
     eslint-plugin-react-hooks: "npm:4.6.0"
+    eslint-plugin-ssr-friendly: "npm:1.3.0"
     eslint-plugin-unicorn: "npm:48.0.1"
     eslint-stats: "npm:1.0.1"
     execa: "npm:5.1.1"
@@ -14661,6 +14662,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-ssr-friendly@npm:1.3.0":
+  version: 1.3.0
+  resolution: "eslint-plugin-ssr-friendly@npm:1.3.0"
+  dependencies:
+    globals: "npm:^13.8.0"
+  peerDependencies:
+    eslint: ">=0.8.0"
+  checksum: 6238caf31bca475332f8878e70865b24f23727d5f6fd568799de1290d5bc2bcd2698a343fef8de962552fad56d62ea7b244890f80f76febf75fb950a0f700197
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-unicorn@npm:48.0.1":
   version: 48.0.1
   resolution: "eslint-plugin-unicorn@npm:48.0.1"
@@ -16145,6 +16157,15 @@ __metadata:
   dependencies:
     type-fest: "npm:^0.20.2"
   checksum: fc05e184b3be59bffa2580f28551a12a758c3a18df4be91444202982c76f13f52821ad54ffaf7d3f2a4d2498fdf54aeaca8d4540fd9e860a9edb09d34ef4c507
+  languageName: node
+  linkType: hard
+
+"globals@npm:^13.8.0":
+  version: 13.24.0
+  resolution: "globals@npm:13.24.0"
+  dependencies:
+    type-fest: "npm:^0.20.2"
+  checksum: d3c11aeea898eb83d5ec7a99508600fbe8f83d2cf00cbb77f873dbf2bcb39428eff1b538e4915c993d8a3b3473fa71eeebfe22c9bb3a3003d1e26b1f2c8a42cd
   languageName: node
   linkType: hard
 

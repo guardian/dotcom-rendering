@@ -2,7 +2,6 @@ import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Labs } from '../../../fixtures/generated/articles/Labs';
-import { MorningDate, AfternoonDate } from '../../lib/mockDate';
 import {
 	SUBSCRIPTION_HEADER,
 	SIGN_IN_PROMPT,
@@ -48,6 +47,7 @@ describe('Sign In Gate Tests', function () {
 	};
 
 	const GATE_HEADER = 'Register: it’s quick and easy';
+	const GATE_HEADER_ALT = 'Take a moment to register';
 	// helper method over the cypress visit method to avoid having to repeat the same url by setting a default
 	// can override the parameter if required
 
@@ -100,22 +100,18 @@ describe('Sign In Gate Tests', function () {
 	describe('SignInGateMain', function () {
 		beforeEach(function () {
 			disableCMP();
-			// sign in gate main runs from 0-900000 MVT IDs, so 400 forces user into test
-			setMvtCookie('400000');
+			// sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
+			setMvtCookie('500000');
 
 			// set article count to be min number to view gate
 			setArticleCount(3);
 		});
+
 		it('should load the sign in gate', function () {
 			visitArticleAndScrollToGateForLazyLoad();
 
 			cy.get('[data-testid=sign-in-gate-main]').should('be.visible');
 			cy.get('[data-testid=sign-in-gate-main]').contains(GATE_HEADER);
-
-			cy.get('[data-testid=sign-in-gate-main_register]')
-				.should('have.attr', 'href')
-				.and('contains', '/register?returnUrl=')
-				.and('contains', 'SignInGateMain');
 		});
 
 		it('should not load the sign in gate if the user has not read at least 3 article in a day', function () {
@@ -124,71 +120,6 @@ describe('Sign In Gate Tests', function () {
 			visitArticleAndScrollToGateForLazyLoad();
 
 			cy.get('[data-testid=sign-in-gate-main]').should('not.exist');
-		});
-
-		describe('AB Test -> Test varying sign in gate frequency by page view time of day', function () {
-			beforeEach(function () {
-				// Putting user into the second half of the audience segment where this
-				// test is running
-				setMvtCookie('850000');
-			});
-
-			it('should load the gate on every article view if user is reading in the morning', function () {
-				setArticleCount(1);
-
-				cy.visit(
-					'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-					{
-						onBeforeLoad: (win) => {
-							win.Date = MorningDate;
-						},
-					},
-				);
-
-				scrollToGateForLazyLoading();
-
-				cy.get('[data-testid=sign-in-gate-main]').should('be.visible');
-				cy.get('[data-testid=sign-in-gate-main_register]')
-					.should('have.attr', 'href')
-					.and('contains', 'abTestName%3DSignInGateTimesOfDay');
-			});
-
-			it('should not load the gate on every article view if user is reading in the afternoon', function () {
-				setArticleCount(1);
-
-				cy.visit(
-					'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-					{
-						onBeforeLoad: (win) => {
-							win.Date = AfternoonDate;
-						},
-					},
-				);
-
-				scrollToGateForLazyLoading();
-
-				cy.get('[data-testid=sign-in-gate-main]').should('not.exist');
-			});
-
-			it('should load the gate on every third article view if user is reading at a time other than morning', function () {
-				setArticleCount(3);
-
-				cy.visit(
-					'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-					{
-						onBeforeLoad: (win) => {
-							win.Date = AfternoonDate;
-						},
-					},
-				);
-
-				scrollToGateForLazyLoading();
-
-				cy.get('[data-testid=sign-in-gate-main]').should('be.visible');
-				cy.get('[data-testid=sign-in-gate-main_register]')
-					.should('have.attr', 'href')
-					.and('contains', 'abTestName%3DSignInGateTimesOfDay');
-			});
 		});
 
 		it('should not load the sign in gate if the user is signed in', function () {

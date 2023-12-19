@@ -6,35 +6,52 @@ import type { UserDataProps } from './types';
  */
 export const getUserData = ({
 	app,
-	region,
+	stack,
 	stage,
-	elkStreamId,
+	artifactsBucket,
 }: UserDataProps): string => {
 	const userData = [
 		`#!/bin/bash -ev`,
 
 		`groupadd frontend`,
 		`useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering`,
-		`usermod -a -G frontend aws-kinesis-agent-user`,
 		`cd /home/dotcom-rendering`,
 
-		`aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${stage}/${app}/${app}.tar.gz ./`,
+		`aws --region eu-west-1 s3 cp s3://${artifactsBucket}/frontend/${stage}/${app}/${app}.tar.gz ./`,
 		`tar -zxf ${app}.tar.gz ${app}`,
 
 		`chown -R dotcom-rendering:frontend ${app}`,
 
 		`cd ${app}`,
 
-		`export TERM=xterm-256color`,
-		`export NODE_ENV=production`,
-		`export GU_STAGE=${stage}`,
-
 		`mkdir /var/log/dotcom-rendering`,
 		`chown -R dotcom-rendering:frontend /var/log/dotcom-rendering`,
 
-		`sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make prod`,
+		// write out systemd file
+		`cat > /etc/systemd/system/${app}.service << EOF`,
+		`[Unit]`,
+		`Description=${app}`,
+		`After=network.target`,
+		`[Service]`,
+		`WorkingDirectory=/home/dotcom-rendering/${app}`,
+		`Type=simple`,
+		`User=dotcom-rendering`,
+		`Group=frontend`,
+		`StandardError=journal`,
+		`StandardOutput=journal`,
+		`Environment=TERM=xterm-256color`,
+		`Environment=NODE_ENV=production`,
+		`Environment=GU_STAGE=${stage}`,
+		`Environment=GU_APP=${app}`,
+		`Environment=GU_STACK=${stack}`,
+		`ExecStart=make prod`,
+		`Restart=on-failure`,
+		`[Install]`,
+		`WantedBy=multi-user.target`,
+		`EOF`,
 
-		`/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${region} ${elkStreamId} /var/log/dotcom-rendering/dotcom-rendering.log`,
+		`systemctl enable ${app}`, // enable the service
+		`systemctl start ${app}`, // start the service
 	].join('\n');
 
 	return userData;

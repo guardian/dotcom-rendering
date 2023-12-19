@@ -604,6 +604,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								tags={article.tags}
 								renderAds={renderAds}
 								isLabs={false}
+								articleEndSlot={
+									!!article.config.switches.articleEndSlot
+								}
 							/>
 						</Island>
 					</div>

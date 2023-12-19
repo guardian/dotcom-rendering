@@ -5,7 +5,6 @@ import { SvgPlus } from '@guardian/source-react-components';
 import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
 import { getCommentContext } from '../lib/getCommentContext';
-import { isServer } from '../lib/isServer';
 import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
 import type { SignedInUser } from '../types/discussion';
@@ -50,8 +49,6 @@ const positionRelative = css`
 `;
 
 const commentIdFromUrl = () => {
-	if (typeof window === 'undefined') return;
-
 	const { hash } = window.location;
 	if (!hash.includes('comment')) return;
 
@@ -85,10 +82,7 @@ export const Discussion = ({
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
 
-	const hasCommentsHash = !isServer && window.location.hash === '#comments';
-
 	const handlePermalink = (commentId: number) => {
-		if (isServer) return false;
 		window.location.hash = `#comment-${commentId}`;
 		// Put this comment id into the hashCommentId state which will
 		// trigger an api call to get the comment context and then expand
@@ -98,7 +92,6 @@ export const Discussion = ({
 	};
 
 	const dispatchCommentsExpandedEvent = () => {
-		if (isServer) return;
 		const event = new CustomEvent('comments-expanded');
 		document.dispatchEvent(event);
 	};
@@ -122,13 +115,12 @@ export const Discussion = ({
 	}, [discussionApiUrl, hashCommentId]);
 
 	useEffect(() => {
-		if (hasCommentsHash) {
+		if (window.location.hash === '#comments') {
 			setIsExpanded(true);
 		}
-	}, [hasCommentsHash]);
+	}, []);
 
 	useEffect(() => {
-		if (isServer) return;
 		const pendingElements = document.querySelectorAll<HTMLElement>(
 			'.discussion > .pending',
 		);
