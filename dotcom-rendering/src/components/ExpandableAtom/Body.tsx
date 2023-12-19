@@ -5,7 +5,6 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgInfo } from '@guardian/source-react-components';
-import { decidePalette } from '../../lib/decidePalette';
 import { palette as schemedPalette } from '../../palette';
 
 const imageStyling = css`

@@ -55,7 +55,7 @@ export const ProfileAtom = ({
 					))
 			}
 		>
-			<Body html={html} image={image} credit={credit} format={format} />
+			<Body html={html} image={image} credit={credit} />
 			<Footer
 				dislikeHandler={
 					dislikeHandler ??
