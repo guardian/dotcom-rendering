@@ -54,13 +54,7 @@ const EventToDate = css`
 	})};
 `;
 
-const TimelineContents = ({
-	events,
-	format,
-}: {
-	events: TimelineEvent[];
-	format: ArticleFormat;
-}) => {
+const TimelineContents = ({ events }: { events: TimelineEvent[] }) => {
 	return (
 		<div>
 			{events.map((event, index) => {
@@ -88,9 +82,7 @@ const TimelineContents = ({
 						{!!event.title && (
 							<div css={EventTitle}>{event.title}</div>
 						)}
-						{!!event.body && (
-							<Body html={event.body} format={format} />
-						)}
+						{!!event.body && <Body html={event.body} />}
 					</div>
 				);
 			})}
@@ -103,7 +95,6 @@ export const TimelineAtom = ({
 	events,
 	description,
 	title,
-	format,
 	expandForStorybook,
 	likeHandler,
 	dislikeHandler,
@@ -116,7 +107,6 @@ export const TimelineAtom = ({
 			atomType="timeline"
 			atomTypeTitle="Timeline"
 			id={id}
-			format={format}
 			expandForStorybook={expandForStorybook}
 			title={title}
 			expandCallback={
@@ -136,10 +126,9 @@ export const TimelineAtom = ({
 					))
 			}
 		>
-			{!!description && <Body html={description} format={format} />}
-			{events && <TimelineContents events={events} format={format} />}
+			{!!description && <Body html={description} />}
+			{events && <TimelineContents events={events} />}
 			<Footer
-				format={format}
 				dislikeHandler={
 					dislikeHandler ??
 					(() =>

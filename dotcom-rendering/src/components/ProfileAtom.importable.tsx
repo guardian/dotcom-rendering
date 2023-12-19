@@ -1,4 +1,3 @@
-import type { ArticleFormat } from '@guardian/libs';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useConfig } from './ConfigContext';
 import { Body } from './ExpandableAtom/Body';
@@ -11,7 +10,6 @@ export interface ProfileAtomProps {
 	image?: string;
 	html: string;
 	credit?: string;
-	format: ArticleFormat;
 	expandForStorybook?: boolean;
 	likeHandler?: () => void;
 	dislikeHandler?: () => void;
@@ -23,7 +21,6 @@ export const ProfileAtom = ({
 	image,
 	html,
 	credit,
-	format,
 	expandForStorybook,
 	likeHandler,
 	dislikeHandler,
@@ -35,7 +32,6 @@ export const ProfileAtom = ({
 		<Container
 			id={id}
 			title={title}
-			format={format}
 			atomType="profile"
 			atomTypeTitle="Profile"
 			expandForStorybook={expandForStorybook}
@@ -56,9 +52,8 @@ export const ProfileAtom = ({
 					))
 			}
 		>
-			<Body html={html} image={image} credit={credit} format={format} />
+			<Body html={html} image={image} credit={credit} />
 			<Footer
-				format={format}
 				dislikeHandler={
 					dislikeHandler ??
 					(() =>
