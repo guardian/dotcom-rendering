@@ -14,7 +14,8 @@ const target = path.resolve(dirname, '../..', 'target');
  * ├── ${copyFrontendStatic()}
  * ├── ${copyApp('article')}
  * ├── ${copyApp('facia')}
- * └── ${copyApp('general')}
+ * ├── ${copyApp('misc')}
+ * └── ${copyApp('interactive')}
  */
 
 /**
@@ -23,27 +24,27 @@ const target = path.resolve(dirname, '../..', 'target');
  * - .zip artefact comprised of the JS app
  *
  * It generates a folder like this:
- * ├── ${appName}-cfn
- * │   ├── ${appName}Rendering-CODE.template.json
- * │   └── ${appName}Rendering-PROD.template.json
- * └── ${appName}
+ * ├── ${guAppName}-cfn
+ * │   ├── ${guAppName}Rendering-CODE.template.json
+ * │   └── ${guAppName}Rendering-PROD.template.json
+ * └── ${guAppName}
  *     └── dist
- *         └── ${appName}.zip
+ *         └── ${guAppName}.zip
  * *
- * @param appName {"article" | "facia" | "general" }
+ * @param guAppName {"article" | "facia" | "misc" | "interactive" }
  **/
-const copyApp = (appName) => {
+const copyApp = (guAppName) => {
 	/** @param {"CODE" | "PROD"} stage */
 	const cfnTemplateName = (stage) =>
-		`${appName.charAt(0).toUpperCase()}${appName.slice(
+		`${guAppName.charAt(0).toUpperCase()}${guAppName.slice(
 			1,
 		)}Rendering-${stage}.template.json`;
 
-	const cfnFolder = `${appName}-cfn`;
+	const cfnFolder = `${guAppName}-cfn`;
 
-	log(` - copying app: ${appName}`);
+	log(` - copying app: ${guAppName}`);
 
-	log(` - ${appName}: copying cloudformation config`);
+	log(` - ${guAppName}: copying cloudformation config`);
 	const cfnJob = cpy(
 		[
 			`cdk.out/${cfnTemplateName('CODE')}`,
@@ -52,22 +53,22 @@ const copyApp = (appName) => {
 		path.resolve(target, cfnFolder),
 	);
 
-	log(` - ${appName}: copying makefile`);
-	const makefileJob = cpy(['makefile'], path.resolve(target, appName));
+	log(` - ${guAppName}: copying makefile`);
+	const makefileJob = cpy(['makefile'], path.resolve(target, guAppName));
 
-	log(` - ${appName}: copying server dist`);
+	log(` - ${guAppName}: copying server dist`);
 	const serverDistJob = cpy(
 		path.resolve(dirname, '../../dist/**'),
-		path.resolve(target, appName, 'dist'),
+		path.resolve(target, guAppName, 'dist'),
 		{
 			nodir: true,
 		},
 	);
 
-	log(`' - ${appName}: copying scripts`);
+	log(` - ${guAppName}: copying scripts`);
 	const scriptsJob = cpy(
 		path.resolve(dirname, '../../scripts/**'),
-		path.resolve(target, appName, 'scripts'),
+		path.resolve(target, guAppName, 'scripts'),
 		{
 			nodir: true,
 		},
@@ -132,7 +133,8 @@ const copyRiffRaff = () => {
 Promise.all([
 	...copyApp('article'),
 	...copyApp('facia'),
-	// ...copyApp('general'),
+	// ...copyApp('misc'),
+	// ...copyApp('interactive'),
 	...copyFrontendStatic(),
 	copyRiffRaff(),
 ]).catch((err) => {
