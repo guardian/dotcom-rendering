@@ -68,6 +68,13 @@ export const ContributionsEpicChoiceCards: ReactComponent<
 		threshold: 0,
 	});
 
+	const {
+		testName = 'test_undefined',
+		variantName = 'variant_undefined',
+		displayContributionType = contributionTabFrequencies,
+		amountsCardData,
+	} = amountsTest;
+
 	useEffect(() => {
 		if (hasBeenSeen) {
 			// For ophan
@@ -90,13 +97,6 @@ export const ContributionsEpicChoiceCards: ReactComponent<
 	if (!selection) {
 		return <></>;
 	}
-
-	const {
-		testName = 'test_undefined',
-		variantName = 'variant_undefined',
-		displayContributionType = contributionTabFrequencies,
-		amountsCardData,
-	} = amountsTest;
 
 	const trackClick = (type: 'amount' | 'frequency'): void => {
 		if (submitComponentEvent) {

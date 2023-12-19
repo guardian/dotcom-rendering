@@ -7,7 +7,6 @@ import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import { body, neutral } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import React from 'react';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { OPHAN_COMPONENT_SIGN_IN } from './utils/ophan';
 
