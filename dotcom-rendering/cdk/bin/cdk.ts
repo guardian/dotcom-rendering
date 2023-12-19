@@ -1,46 +1,49 @@
 import { App } from 'aws-cdk-lib';
-import { DotcomRendering } from '../lib/dotcom-rendering';
+import { RenderingApp } from '../lib/rendering-app';
 
 const app = new App();
 
-const sharedProps = {
-	stack: 'frontend',
-	region: 'eu-west-1',
-};
-
-new DotcomRendering(app, 'DotcomRendering-PROD', {
-	...sharedProps,
-	app: 'rendering',
+new RenderingApp(app, 'ArticleRendering-CODE', {
+	app: 'article',
+	stage: 'CODE',
+	minCapacity: 1,
+	maxCapacity: 4,
+	instanceType: 't4g.micro',
+});
+new RenderingApp(app, 'ArticleRendering-PROD', {
+	app: 'article',
 	stage: 'PROD',
 	minCapacity: 27,
 	maxCapacity: 120,
 	instanceType: 't4g.small',
 });
 
-new DotcomRendering(app, 'DotcomRendering-CODE', {
-	...sharedProps,
-	app: 'rendering',
+new RenderingApp(app, 'FaciaRendering-CODE', {
+	app: 'facia',
 	stage: 'CODE',
 	minCapacity: 1,
 	maxCapacity: 4,
 	instanceType: 't4g.micro',
 });
-
-new DotcomRendering(app, 'DotcomRendering-front-web-CODE', {
-	...sharedProps,
-	app: 'front-web',
-	stage: 'CODE',
-	minCapacity: 1,
-	maxCapacity: 4,
-	instanceType: 't4g.micro',
-});
-
-new DotcomRendering(app, 'DotcomRendering-front-web-PROD', {
-	...sharedProps,
-	app: 'front-web',
+new RenderingApp(app, 'FaciaRendering-PROD', {
+	app: 'facia',
 	stage: 'PROD',
-	// TODO: up this once we have code working
 	minCapacity: 1,
 	maxCapacity: 4,
 	instanceType: 't4g.micro',
 });
+
+// new RenderingApp(app, 'GeneralRendering-CODE', {
+// 	app: 'general',
+// 	stage: 'CODE',
+// 	minCapacity: 1,
+// 	maxCapacity: 4,
+// 	instanceType: 't4g.micro',
+// });
+// new RenderingApp(app, 'GeneralRenderingPROD', {
+// 	app: 'general',
+// 	stage: 'PROD',
+// 	minCapacity: 1,
+// 	maxCapacity: 4,
+// 	instanceType: 't4g.micro',
+// });

@@ -1,4 +1,9 @@
-import type { UserDataProps } from './types';
+import type { RenderingAppProps } from './rendering-app';
+
+interface UserDataProps extends Pick<RenderingAppProps, 'app' | 'stage'> {
+	stack: string;
+	artifactsBucket: string;
+}
 
 /**
  * Returns user data configuration for instances in the rendering app

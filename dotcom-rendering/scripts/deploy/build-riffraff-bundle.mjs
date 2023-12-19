@@ -1,8 +1,6 @@
-import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import * as url from 'node:url';
 import cpy from 'cpy';
-import execa from 'execa';
 import { log, warn } from '../../../scripts/log.js';
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -14,8 +12,9 @@ const target = path.resolve(dirname, '../..', 'target');
  * ├── build.json
  * ├── riff-raff.yaml
  * ├── ${copyFrontendStatic()}
- * ├── ${copyApp('rendering')}
- * └── ${copyApp('renderi-front')}
+ * ├── ${copyApp('article')}
+ * ├── ${copyApp('facia')}
+ * └── ${copyApp('general')}
  */
 
 /**
@@ -25,29 +24,30 @@ const target = path.resolve(dirname, '../..', 'target');
  *
  * It generates a folder like this:
  * ├── ${appName}-cfn
- * │   ├── DotcomRendering-${appName}-CODE.template.json
- * │   └── DotcomRendering-${appName}-PROD.template.json
+ * │   ├── ${appName}Rendering-CODE.template.json
+ * │   └── ${appName}Rendering-PROD.template.json
  * └── ${appName}
  *     └── dist
  *         └── ${appName}.zip
- *
- * Except for the instance where appName === 'rendering' due to backwards compatibility
- *
- * @param appName {string}
+ * *
+ * @param appName {"article" | "facia" | "general" }
  **/
 const copyApp = (appName) => {
-	// GOTCHA: This is a little hack to be backwards compatible with the naming for when this was a single stack app
-	const cfnTemplateName = appName === 'rendering' ? '' : `-${appName}`;
-	const cfnFolder =
-		appName === 'rendering' ? 'frontend-cfn' : `${appName}-cfn`;
+	/** @param {"CODE" | "PROD"} stage */
+	const cfnTemplateName = (stage) =>
+		`${appName.charAt(0).toUpperCase()}${appName.slice(
+			1,
+		)}Rendering-${stage}.template.json`;
+
+	const cfnFolder = `${appName}-cfn`;
 
 	log(` - copying app: ${appName}`);
 
 	log(` - ${appName}: copying cloudformation config`);
 	const cfnJob = cpy(
 		[
-			`cdk.out/DotcomRendering${cfnTemplateName}-CODE.template.json`,
-			`cdk.out/DotcomRendering${cfnTemplateName}-PROD.template.json`,
+			`cdk.out/${cfnTemplateName('CODE')}`,
+			`cdk.out/${cfnTemplateName('PROD')}`,
 		],
 		path.resolve(target, cfnFolder),
 	);
@@ -130,11 +130,13 @@ const copyRiffRaff = () => {
 };
 
 Promise.all([
-	...copyApp('rendering'),
-	...copyApp('front-web'),
+	...copyApp('article'),
+	...copyApp('facia'),
+	// ...copyApp('general'),
 	...copyFrontendStatic(),
 	copyRiffRaff(),
 ]).catch((err) => {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- ignore
 	warn(err.stack);
 	process.exit(1);
 });

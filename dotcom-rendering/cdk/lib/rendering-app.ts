@@ -1,4 +1,5 @@
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
+import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import {
 	GuDistributionBucketParameter,
 	GuLoggingStreamNameParameter,
@@ -26,8 +27,34 @@ import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
-import type { DCRAlarmConfig, DCRProps } from './types';
 import { getUserData } from './userData';
+
+export interface RenderingAppProps extends Omit<GuStackProps, 'stack'> {
+	/**
+	 * The name of the application
+	 */
+	app: `${'article' | 'facia' | 'general'}`;
+	/**
+	 * The minimum number of instances in the autoscaling group
+	 */
+	minCapacity: number;
+	/**
+	 * The maximum number of instances in the autoscaling group.
+	 * Defaults to twice the minimum capacity if not specified
+	 */
+	maxCapacity?: number;
+	/**
+	 * EC2 Instance Type to use for dotcom-rendering
+	 */
+	instanceType: string;
+}
+
+interface DCRAlarmConfig {
+	comparisonOperator: string;
+	threshold: number;
+	evaluationPeriod: number;
+	period: number;
+}
 
 /**
  * DCR infrastructure provisioning via CDK
@@ -39,11 +66,18 @@ import { getUserData } from './userData';
  * For this we'll need to do a dual-stack migration
  * @see https://github.com/guardian/cdk/blob/main/docs/migration-guide-ec2.md
  */
-export class DotcomRendering extends GuStack {
-	constructor(scope: App, id: string, props: DCRProps) {
-		super(scope, id, props);
+export class RenderingApp extends GuStack {
+	constructor(scope: App, id: string, props: RenderingAppProps) {
+		super(scope, id, {
+			...props,
+			// Any version of this app should run in the eu-west-1 region
+			env: { region: 'eu-west-1' },
+			// Set the stack within the constructor as this won't vary between apps
+			stack: 'rendering',
+		});
 
-		const { app, region, stack, stage } = props;
+		const { app, stage } = props;
+		const { region, stack } = this;
 
 		const ssmPrefix = `/${stage}/${stack}/${app}`;
 
@@ -98,12 +132,11 @@ export class DotcomRendering extends GuStack {
 		 * TODO - migrate this ELB (classic load balancer) to an ALB (application load balancer)
 		 * @see https://github.com/guardian/cdk/blob/512536bd590b26d9fcac5d39329e8217103d7859/src/constructs/loadbalancing/elb.ts#L24-L46
 		 *
-		 * GOTCHA: The load balancer name appends `-ELB` when the `app = "rendering"` for backwards compatibility
-		 * We removed this to avoid the `LoadBalancerName.length > 32`. This will be fixable once we migrate to ALBs.
+		 * GOTCHA: The load balancer for article is named specifically for backwards compatibility
 		 */
 		const loadBalancerName =
-			app === 'rendering'
-				? `${stack}-${stage}-${app}-ELB`
+			app === 'article'
+				? `frontend-${stage}-rendering-ELB`
 				: `${stack}-${stage}-${app}`;
 		const loadBalancer = new GuClassicLoadBalancer(
 			this,
