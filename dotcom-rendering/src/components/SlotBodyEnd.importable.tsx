@@ -47,6 +47,7 @@ type Props = {
 	keywordIds: string;
 	renderAds: boolean;
 	isLabs: boolean;
+	articleEndSlot: boolean;
 };
 
 const buildReaderRevenueEpicConfig = (
@@ -137,6 +138,7 @@ export const SlotBodyEnd = ({
 	keywordIds,
 	renderAds,
 	isLabs,
+	articleEndSlot,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
@@ -163,7 +165,7 @@ export const SlotBodyEnd = ({
 		renderAds &&
 		!isLabs &&
 		(showPublicGood || mpuWhenNoEpicEnabled) &&
-		window.guardian.config.switches.articleEndSlot;
+		articleEndSlot;
 
 	useEffect(() => {
 		setAsyncArticleCount(

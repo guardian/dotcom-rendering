@@ -662,6 +662,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											tags={article.tags}
 											renderAds={renderAds}
 											isLabs={isLabs}
+											articleEndSlot={
+												!!article.config.switches
+													.articleEndSlot
+											}
 										/>
 									</Island>
 								)}
