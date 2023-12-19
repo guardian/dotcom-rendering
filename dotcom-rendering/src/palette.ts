@@ -4482,13 +4482,13 @@ const expandingAtomLinkTextLight: PaletteFunction = ({ theme }) => {
 const expandingAtomLinkTextDark: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
-			return sourcePalette.lifestyle[400];
+			return sourcePalette.lifestyle[600];
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[400];
+			return sourcePalette.news[600];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.news[400];
+			return sourcePalette.news[600];
 		default:
-			return pillarPalette(theme, 400);
+			return pillarPalette(theme, 600);
 	}
 };
 

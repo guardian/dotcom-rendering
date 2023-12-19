@@ -80,7 +80,7 @@ const linkStyling = css`
 		color: ${schemedPalette('--expanding-atom-link-text')};
 		text-decoration: none;
 		border-bottom: 0.0625rem solid
-			${schemedPalette('--expanding-atom-button-background')};
+			${schemedPalette('--expanding-atom-border')};
 		transition: border-color 0.15s ease-out;
 	}
 

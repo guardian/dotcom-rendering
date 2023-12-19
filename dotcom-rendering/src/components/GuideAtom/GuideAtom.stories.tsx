@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette } from '@guardian/source-foundations';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import {
 	analysisStoryExpanded,
@@ -9,12 +8,19 @@ import {
 	listStoryExpanded,
 	orderedListStoryExpanded,
 } from '../../../fixtures/manual/guideAtom';
+import { palette } from '../../palette';
 import { GuideAtom } from './GuideAtom';
 
 export default {
 	title: 'Components/GuideAtom',
 	component: GuideAtom,
 };
+
+export const DefaultStoryCollapsed = (): JSX.Element => {
+	// Modelled after: https://www.theguardian.com/sport/2020/may/19/pinatubo-has-probably-trained-on-for-the-2000-guineas-says-charlie-appleby
+	return <GuideAtom {...defaultStoryExpanded} expandForStorybook={false} />;
+};
+DefaultStoryCollapsed.decorators = [splitTheme([defaultStoryExpanded.format])];
 
 export const DefaultStoryExpanded = (): JSX.Element => {
 	// Modelled after: https://www.theguardian.com/sport/2020/may/19/pinatubo-has-probably-trained-on-for-the-2000-guineas-says-charlie-appleby
@@ -55,11 +61,11 @@ export const AnalysisStoryExpanded = (): JSX.Element => {
 	return (
 		<div
 			css={css`
-				background-color: ${sourcePalette.news[800]};
+				background-color: ${palette('--article-background')};
 			`}
 		>
-			Analysis Articles have a different color background, so quick guide
-			atoms should too.
+			Analysis Articles have a different color background in light mode,
+			so quick guide atoms should too.
 			<GuideAtom {...analysisStoryExpanded} />
 		</div>
 	);
