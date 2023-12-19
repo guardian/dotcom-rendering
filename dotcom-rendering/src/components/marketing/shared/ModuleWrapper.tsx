@@ -1,5 +1,5 @@
-import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
-import { ReactComponent } from '../lib/ReactComponent';
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
+import type { ReactComponent } from '../lib/ReactComponent';
 
 export function withParsedProps<
 	ModuleProps extends EmotionJSX.IntrinsicAttributes,

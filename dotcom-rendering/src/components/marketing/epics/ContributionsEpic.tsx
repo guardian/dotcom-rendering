@@ -3,46 +3,46 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpic.tsx
  */
-import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { body, headline } from '@guardian/source-foundations';
 import { palette, space } from '@guardian/source-foundations';
 import { from } from '@guardian/source-foundations';
-import { BylineWithHeadshot } from './BylineWithHeadshot';
-import { ContributionsEpicTicker } from './ContributionsEpicTicker';
-import { OphanTracking } from '../shared/ArticleCountOptOutPopup';
-import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpicArticleCountAboveWithOptOut';
-import { useArticleCountOptOut } from '../hooks/useArticleCountOptOut';
-import { withParsedProps } from '../shared/ModuleWrapper';
-import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
-import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
-import ContributionsEpicNewsletterSignup from './ContributionsEpicNewsletterSignup';
-import { ContributionsEpicCtas } from './ContributionsEpicCtas';
-// TODO - do we need this in DCR?
-// import { isValidApplePayWalletSession } from '../utils/applePay';
-import { OPHAN_COMPONENT_EVENT_APPLEPAY_AUTHORISED } from './utils/ophan';
-import { ReactComponent } from '../lib/ReactComponent';
-import { replaceArticleCount } from '../lib/replaceArticleCount';
-import type {
-	EpicProps,
-	ContributionFrequency,
-	Stage,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
-import { ChoiceCardSelection } from '../lib/choiceCards';
 import {
 	containsNonArticleCountPlaceholder,
 	getLocalCurrencySymbol,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
-import { logEpicView } from '../lib/viewLog';
+import { epicPropsSchema } from '@guardian/support-dotcom-components';
+import type {
+	ContributionFrequency,
+	EpicProps,
+	Stage,
+} from '@guardian/support-dotcom-components/dist/shared/src/types';
+import { useEffect, useState } from 'react';
+import { useIsInView } from '../../../lib/useIsInView';
+import { useArticleCountOptOut } from '../hooks/useArticleCountOptOut';
+import type { ChoiceCardSelection } from '../lib/choiceCards';
+import type { ReactComponent } from '../lib/ReactComponent';
+import { replaceArticleCount } from '../lib/replaceArticleCount';
+import { isProd } from '../lib/stage';
 import {
 	addTrackingParamsToBodyLinks,
 	createInsertEventFromTracking,
 	createViewEventFromTracking,
 } from '../lib/tracking';
-import { isProd } from '../lib/stage';
-import { useIsInView } from '../../../lib/useIsInView';
-import { epicPropsSchema } from '@guardian/support-dotcom-components';
+import { logEpicView } from '../lib/viewLog';
+import type { OphanTracking } from '../shared/ArticleCountOptOutPopup';
+import { withParsedProps } from '../shared/ModuleWrapper';
+import { BylineWithHeadshot } from './BylineWithHeadshot';
+import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpicArticleCountAboveWithOptOut';
+import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
+import { ContributionsEpicCtas } from './ContributionsEpicCtas';
+import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
+import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
+import { ContributionsEpicTicker } from './ContributionsEpicTicker';
+// TODO - do we need this in DCR?
+// import { isValidApplePayWalletSession } from '../utils/applePay';
+import { OPHAN_COMPONENT_EVENT_APPLEPAY_AUTHORISED } from './utils/ophan';
 
 // CSS Styling
 // -------------------------------------------
@@ -144,7 +144,6 @@ const EpicHeader: ReactComponent<EpicHeaderProps> = ({
 // -------------------------------------------
 type HighlightedProps = {
 	highlightedText: string;
-	countryCode?: string;
 	numArticles: number;
 	tracking?: OphanTracking;
 	showAboveArticleCount: boolean;
@@ -210,14 +209,12 @@ const EpicBodyParagraph: ReactComponent<EpicBodyParagraphProps> = ({
 type BodyProps = {
 	paragraphs: string[];
 	highlightedText?: string;
-	countryCode?: string;
 	numArticles: number;
 	tracking?: OphanTracking;
 	showAboveArticleCount: boolean;
 };
 
 const EpicBody: ReactComponent<BodyProps> = ({
-	countryCode,
 	numArticles,
 	paragraphs,
 	highlightedText,
@@ -236,7 +233,6 @@ const EpicBody: ReactComponent<BodyProps> = ({
 							highlightedText && idx === paragraphs.length - 1 ? (
 								<Highlighted
 									highlightedText={highlightedText}
-									countryCode={countryCode}
 									numArticles={numArticles}
 									showAboveArticleCount={
 										showAboveArticleCount
@@ -252,6 +248,31 @@ const EpicBody: ReactComponent<BodyProps> = ({
 			})}
 		</>
 	);
+};
+
+const sendEpicViewEvent = (
+	url: string,
+	stage?: Stage,
+	countryCode?: string,
+): void => {
+	const path = 'events/epic-view';
+	const host = isProd(stage)
+		? 'https://contributions.guardianapis.com'
+		: 'https://contributions.code.dev-guardianapis.com';
+	const eventBody = JSON.stringify({
+		url,
+		countryCode,
+	});
+
+	void fetch(`${host}/${path}`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: eventBody,
+	}).then((response) => {
+		if (!response.ok) {
+			console.log('Epic view event request failed', response);
+		}
+	});
 };
 
 // ContributionsEpic - exported component
@@ -293,7 +314,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			// 	}
 			// });
 		}
-	}, []);
+	}, [tracking.abTestName]);
 
 	const [choiceCardSelection, setChoiceCardSelection] = useState<
 		ChoiceCardSelection | undefined
@@ -305,8 +326,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				choiceCardAmounts.defaultContributionType || 'MONTHLY';
 			const localAmounts =
 				choiceCardAmounts.amountsCardData[defaultFrequency];
-			const defaultAmount =
-				localAmounts.defaultAmount || localAmounts.amounts[1] || 1;
+			const defaultAmount = localAmounts.defaultAmount;
 
 			setChoiceCardSelection({
 				frequency: defaultFrequency,
@@ -328,7 +348,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	useEffect(() => {
 		if (hasBeenSeen) {
 			// For the event stream
-			sendEpicViewEvent(tracking.referrerUrl, countryCode, stage);
+			sendEpicViewEvent(tracking.referrerUrl, stage, countryCode);
 
 			// For epic view count
 			logEpicView(tracking.abTestName);
@@ -343,7 +363,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				);
 			}
 		}
-	}, [hasBeenSeen, submitComponentEvent]);
+	}, [hasBeenSeen, submitComponentEvent, countryCode, stage, tracking]);
 
 	useEffect(() => {
 		if (submitComponentEvent) {
@@ -351,37 +371,12 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				createInsertEventFromTracking(tracking, tracking.campaignCode),
 			);
 		}
-	}, [submitComponentEvent]);
+	}, [submitComponentEvent, tracking]);
 
 	const cleanHighlighted = replaceNonArticleCountPlaceholders(
 		variant.highlightedText,
 		countryCode,
 	);
-
-	const sendEpicViewEvent = (
-		url: string,
-		countryCode?: string,
-		stage?: Stage,
-	): void => {
-		const path = 'events/epic-view';
-		const host = isProd(stage)
-			? 'https://contributions.guardianapis.com'
-			: 'https://contributions.code.dev-guardianapis.com';
-		const body = JSON.stringify({
-			url,
-			countryCode,
-		});
-
-		fetch(`${host}/${path}`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body,
-		}).then((response) => {
-			if (!response.ok) {
-				console.log('Epic view event request failed', response);
-			}
-		});
-	};
 
 	const cleanHeading = replaceNonArticleCountPlaceholders(
 		variant.heading,
@@ -436,7 +431,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				</div>
 			)}
 
-			{tickerSettings && tickerSettings.tickerData && (
+			{tickerSettings?.tickerData && (
 				<ContributionsEpicTicker
 					settings={tickerSettings}
 					total={tickerSettings.tickerData.total}
@@ -454,7 +449,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				</div>
 			)}
 
-			{cleanHeading && (
+			{!!cleanHeading && (
 				<EpicHeader
 					text={cleanHeading}
 					numArticles={articleCounts.forTargetedWeeks}
@@ -466,7 +461,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			<EpicBody
 				paragraphs={cleanParagraphs}
 				highlightedText={cleanHighlighted}
-				countryCode={countryCode}
 				numArticles={articleCounts.forTargetedWeeks}
 				tracking={ophanTracking}
 				showAboveArticleCount={showAboveArticleCount}

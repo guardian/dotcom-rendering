@@ -3,19 +3,20 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpicChoiceCards.tsx
  */
-import React, { useEffect } from 'react';
 import { css } from '@emotion/react';
+import type { OphanComponentEvent } from '@guardian/libs';
 import { until, visuallyHidden } from '@guardian/source-foundations';
 import { ChoiceCard, ChoiceCardGroup } from '@guardian/source-react-components';
-import { ChoiceCardSelection, contributionType } from '../lib/choiceCards';
-import { OphanComponentEvent } from '@guardian/libs';
+import { contributionTabFrequencies } from '@guardian/support-dotcom-components';
 import type {
 	ContributionFrequency,
 	SelectedAmountsVariant,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import { contributionTabFrequencies } from '@guardian/support-dotcom-components';
-import { ReactComponent } from '../lib/ReactComponent';
+import React, { useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
+import { contributionType } from '../lib/choiceCards';
+import type { ChoiceCardSelection } from '../lib/choiceCards';
+import type { ReactComponent } from '../lib/ReactComponent';
 
 // CSS Styling
 // -------------------------------------------
@@ -62,21 +63,6 @@ export const ContributionsEpicChoiceCards: ReactComponent<
 	currencySymbol,
 	amountsTest,
 }: EpicChoiceCardProps) => {
-	if (!selection || !amountsTest) {
-		return <></>;
-	}
-
-	const {
-		testName = 'test_undefined',
-		variantName = 'variant_undefined',
-		displayContributionType = contributionTabFrequencies,
-		amountsCardData,
-	} = amountsTest;
-
-	if (!amountsCardData) {
-		return <></>;
-	}
-
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 		threshold: 0,
@@ -99,7 +85,18 @@ export const ContributionsEpicChoiceCards: ReactComponent<
 				});
 			}
 		}
-	}, [hasBeenSeen, submitComponentEvent]);
+	}, [hasBeenSeen, submitComponentEvent, testName, variantName]);
+
+	if (!selection) {
+		return <></>;
+	}
+
+	const {
+		testName = 'test_undefined',
+		variantName = 'variant_undefined',
+		displayContributionType = contributionTabFrequencies,
+		amountsCardData,
+	} = amountsTest;
 
 	const trackClick = (type: 'amount' | 'frequency'): void => {
 		if (submitComponentEvent) {
@@ -117,20 +114,20 @@ export const ContributionsEpicChoiceCards: ReactComponent<
 		trackClick('amount');
 		setSelectionsCallback({
 			frequency: selection.frequency,
-			amount: amount,
+			amount,
 		});
 	};
 
 	const updateFrequency = (frequency: ContributionFrequency) => {
 		trackClick('frequency');
 		setSelectionsCallback({
-			frequency: frequency,
+			frequency,
 			amount: amountsCardData[frequency].defaultAmount,
 		});
 	};
 
 	const ChoiceCardAmount = ({ amount }: { amount?: number }) => {
-		if (amount) {
+		if (amount !== undefined) {
 			return (
 				<ChoiceCard
 					value={`${amount}`}

@@ -3,13 +3,13 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpicSignInCta.tsx
  */
-import React from 'react';
 import { css } from '@emotion/react';
-import { OPHAN_COMPONENT_SIGN_IN } from './utils/ophan';
+import type { OphanComponentEvent } from '@guardian/libs';
 import { body, neutral } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { OphanComponentEvent } from '@guardian/libs';
-import { ReactComponent } from '../lib/ReactComponent';
+import React from 'react';
+import type { ReactComponent } from '../lib/ReactComponent';
+import { OPHAN_COMPONENT_SIGN_IN } from './utils/ophan';
 
 const signInLink = css`
 	margin: 0;

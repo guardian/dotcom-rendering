@@ -3,14 +3,15 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpicTicker.tsx
  */
-import { useEffect, useState } from 'react';
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { palette } from '@guardian/source-foundations';
 import { textSans } from '@guardian/source-foundations';
-import { ReactComponent } from '../lib/ReactComponent';
-import { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import { useTicker } from '../hooks/useTicker';
+import type { ReactComponent } from '../lib/ReactComponent';
 
 // This ticker component provides an animated progress bar and counter for the
 // epic. It mirrors the behaviour of the "unlimited" ticker type from frontend.

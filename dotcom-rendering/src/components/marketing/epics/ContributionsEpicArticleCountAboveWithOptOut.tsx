@@ -3,24 +3,24 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpicArticleCountAboveWithOptOut.tsx
  */
-import React, { useState } from 'react';
-import { body, textSans } from '@guardian/source-foundations';
-import { palette, space } from '@guardian/source-foundations';
 import { css } from '@emotion/react';
-import {
-	OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT_OPEN,
-	OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT_CLOSE,
-	OPHAN_COMPONENT_ARTICLE_COUNT_STAY_IN,
-	OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT,
-	OPHAN_COMPONENT_ARTICLE_COUNT_STAY_OUT,
-	OPHAN_COMPONENT_ARTICLE_COUNT_OPT_IN,
-} from './utils/ophan';
+import type { OphanComponentEvent } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
+import { palette, space } from '@guardian/source-foundations';
+import { body, textSans } from '@guardian/source-foundations';
 import { Button, ButtonLink } from '@guardian/source-react-components';
-import { ArticleCounts } from '../../../lib/articleCount';
-import { ArticleCountType } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import { OphanComponentEvent } from '@guardian/libs';
-import { ReactComponent } from '../lib/ReactComponent';
+import type { ArticleCountType } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import React, { useState } from 'react';
+import type { ArticleCounts } from '../../../lib/articleCount';
+import type { ReactComponent } from '../lib/ReactComponent';
+import {
+	OPHAN_COMPONENT_ARTICLE_COUNT_OPT_IN,
+	OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT,
+	OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT_CLOSE,
+	OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT_OPEN,
+	OPHAN_COMPONENT_ARTICLE_COUNT_STAY_IN,
+	OPHAN_COMPONENT_ARTICLE_COUNT_STAY_OUT,
+} from './utils/ophan';
 
 export interface ContributionsEpicArticleCountAboveWithOptOutProps {
 	articleCounts: ArticleCounts;
@@ -49,38 +49,33 @@ export const ContributionsEpicArticleCountAboveWithOptOut: ReactComponent<
 
 	const onToggleClick = () => {
 		setIsOpen(!isOpen);
-		submitComponentEvent &&
-			submitComponentEvent(
-				isOpen
-					? OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT_CLOSE
-					: OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT_OPEN,
-			);
+		submitComponentEvent?.(
+			isOpen
+				? OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT_CLOSE
+				: OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT_OPEN,
+		);
 	};
 
 	const onStayInClick = () => {
 		setIsOpen(false);
-		submitComponentEvent &&
-			submitComponentEvent(OPHAN_COMPONENT_ARTICLE_COUNT_STAY_IN);
+		submitComponentEvent?.(OPHAN_COMPONENT_ARTICLE_COUNT_STAY_IN);
 	};
 
 	const onOptOutClick = () => {
 		setIsOpen(false);
 		onArticleCountOptOut();
-		submitComponentEvent &&
-			submitComponentEvent(OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT);
+		submitComponentEvent?.(OPHAN_COMPONENT_ARTICLE_COUNT_OPT_OUT);
 	};
 
 	const onOptInClick = () => {
 		setIsOpen(false);
 		onArticleCountOptIn();
-		submitComponentEvent &&
-			submitComponentEvent(OPHAN_COMPONENT_ARTICLE_COUNT_OPT_IN);
+		submitComponentEvent?.(OPHAN_COMPONENT_ARTICLE_COUNT_OPT_IN);
 	};
 
 	const onStayOutClick = () => {
 		setIsOpen(false);
-		submitComponentEvent &&
-			submitComponentEvent(OPHAN_COMPONENT_ARTICLE_COUNT_STAY_OUT);
+		submitComponentEvent?.(OPHAN_COMPONENT_ARTICLE_COUNT_STAY_OUT);
 	};
 
 	const articleCount = articleCounts[countType ?? 'for52Weeks'];
