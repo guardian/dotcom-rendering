@@ -151,7 +151,7 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 				}
 				cssOverrides={css`
 					margin-top: ${space[2]}px;
-					${!showFollowTagButton} && margin-top: 0px;
+					${!showFollowTagButton && 'margin-top: 0px;'}
 				`}
 			/>
 		</div>
