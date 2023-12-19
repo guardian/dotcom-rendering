@@ -529,28 +529,6 @@ const backgroundAudioAtom = (format: ArticleFormat) => {
 	}
 };
 
-// TODO: migrate
-const textExpandableAtom = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[300];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Sport:
-			return sport[300];
-		case Pillar.Culture:
-			return culture[300];
-		case Pillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return lifestyle[300];
-		case ArticleSpecial.SpecialReport:
-			return news[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[300];
-	}
-};
-
 const textYoutubeOverlayKicker = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -596,7 +574,6 @@ export const decidePalette = (
 			betaLabel: textBetaLabel(),
 			designTag: textDesignTag(format),
 			dateLine: textDateLine(format),
-			expandableAtom: textExpandableAtom(format),
 			youtubeOverlayKicker: textYoutubeOverlayKicker(format),
 		},
 		background: {

@@ -15,7 +15,6 @@ export type Palette = {
 		betaLabel: Colour;
 		designTag: Colour;
 		dateLine: Colour;
-		expandableAtom: Colour;
 		youtubeOverlayKicker: Colour;
 	};
 	background: {
