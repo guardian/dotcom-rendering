@@ -2726,6 +2726,11 @@ const keyEventButtonFillLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const keyEventButtonFillDark: PaletteFunction = () => sourcePalette.neutral[7];
 
+const numberedListNumberLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+
+const numberedListNumberDark: PaletteFunction = () => sourcePalette.neutral[60];
+
 const numberedListTitleLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -2744,8 +2749,32 @@ const numberedListTitleLight: PaletteFunction = ({ theme }) => {
 };
 
 const numberedListTitleDark: PaletteFunction = ({ theme }) => {
-	return sourcePalette.neutral[86];
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
 };
+const numberedListHeadingLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
+const numberedListHeadingDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const numberedListLinksLight: PaletteFunction = (format: ArticleFormat) =>
+	numberedListTitleLight(format);
+
+const numberedListLinksDark: PaletteFunction = (format: ArticleFormat) =>
+	numberedListTitleDark(format);
 
 const summaryEventBulletLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -2940,7 +2969,28 @@ const articleLinkTextLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const articleLinkTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+const articleLinkTextDark: PaletteFunction = ({ display, theme }) => {
+	switch (display) {
+		case ArticleDisplay.NumberedList: {
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Lifestyle:
+				case Pillar.Culture:
+				case Pillar.Opinion:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+			}
+		}
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
 
 const articleLinkBorderLight: PaletteFunction = ({ design, theme }) => {
 	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[60];
@@ -4798,9 +4848,21 @@ const paletteColours = {
 		light: keyEventButtonFillLight,
 		dark: keyEventButtonFillDark,
 	},
+	'--numbered-list-number': {
+		light: numberedListNumberLight,
+		dark: numberedListNumberDark,
+	},
 	'--numbered-list-title': {
 		light: numberedListTitleLight,
 		dark: numberedListTitleDark,
+	},
+	'--numbered-list-links': {
+		light: numberedListLinksLight,
+		dark: numberedListLinksDark,
+	},
+	'--numbered-list-heading': {
+		light: numberedListHeadingLight,
+		dark: numberedListHeadingDark,
 	},
 	'--summary-event-bullet': {
 		light: summaryEventBulletLight,
