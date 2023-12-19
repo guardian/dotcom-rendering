@@ -4633,6 +4633,19 @@ const expandableAtomButtonFillLight: PaletteFunction = () =>
 const expandableAtomButtonFillDark: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 
+const timelineAtomBulletLight: PaletteFunction = () => sourcePalette.neutral[7];
+const timelineAtomBulletDark: PaletteFunction = () => sourcePalette.neutral[93];
+sourcePalette.neutral[0];
+
+const timelineAtomHighlightText: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const timelineAtomHighlightTextBackgroundLight: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const timelineAtomHighlightTextBackgroundDark: PaletteFunction = () =>
+	sourcePalette.brandAlt[200];
+sourcePalette.neutral[0];
+
 // ----- Palette ----- //
 
 /**
@@ -5447,6 +5460,18 @@ const paletteColours = {
 	'--expandable-atom-button-fill': {
 		light: expandableAtomButtonFillLight,
 		dark: expandableAtomButtonFillDark,
+	},
+	'--timeline-atom-bullet': {
+		light: timelineAtomBulletLight,
+		dark: timelineAtomBulletDark,
+	},
+	'--timeline-atom-highlight-text': {
+		light: timelineAtomHighlightText,
+		dark: timelineAtomHighlightText,
+	},
+	'--timeline-atom-highlight-text-background': {
+		light: timelineAtomHighlightTextBackgroundLight,
+		dark: timelineAtomHighlightTextBackgroundDark,
 	},
 } satisfies PaletteColours;
 
