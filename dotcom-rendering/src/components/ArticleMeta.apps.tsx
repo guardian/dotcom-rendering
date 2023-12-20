@@ -130,7 +130,7 @@ const MetaGridCommentCount = ({
 	isLiveBlog: boolean;
 }) => (
 	<div
-		data-print-Content="hide"
+		data-print-content="hide"
 		css={css`
 			grid-area: comment-count;
 			border-left: 1px solid

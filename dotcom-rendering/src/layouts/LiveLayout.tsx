@@ -595,8 +595,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							</Hide>
 						</GridItem>
 						<GridItem area="meta">
-							{isApps && (
-								<Hide from="desktop">
+							<Hide from="desktop">
+								{isApps && (
 									<ArticleMetaApps
 										format={format}
 										pageId={article.pageId}
@@ -617,10 +617,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										ajaxUrl={article.config.ajaxUrl}
 										messageUs={article.messageUs}
 									></ArticleMetaApps>
-								</Hide>
-							)}
-							{isWeb && (
-								<Hide from="desktop">
+								)}
+								{isWeb && (
 									<div css={sidePaddingDesktop}>
 										<ArticleMeta
 											branding={branding}
@@ -646,8 +644,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											messageUs={article.messageUs}
 										/>
 									</div>
-								</Hide>
-							)}
+								)}
+							</Hide>
 						</GridItem>
 					</StandFirstGrid>
 				</Section>

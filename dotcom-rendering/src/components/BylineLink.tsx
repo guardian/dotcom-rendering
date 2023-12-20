@@ -1,4 +1,5 @@
-import { ArticleDesign, isString } from '@guardian/libs';
+import { ArticleDesign, isString, isUndefined } from '@guardian/libs';
+import { Hide } from '@guardian/source-react-components';
 import { DottedLines } from '@guardian/source-react-components-development-kitchen';
 import {
 	getBylineComponentsFromTokens,
@@ -151,8 +152,8 @@ export const BylineLink = ({
 			{renderedTokens}
 			{renderingTarget === 'Apps' &&
 			!isHeadline &&
-			soleContributor !== undefined ? (
-				<>
+			!isUndefined(soleContributor) ? (
+				<Hide from="desktop">
 					<DottedLines
 						count={1}
 						color={
@@ -167,7 +168,7 @@ export const BylineLink = ({
 							id={soleContributor.id}
 						/>
 					</Island>
-				</>
+				</Hide>
 			) : null}
 		</>
 	);
