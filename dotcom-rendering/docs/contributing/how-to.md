@@ -60,3 +60,5 @@ We currently use [SWR](https://swr.vercel.app/) to manage AJAX requests on the
 client. Your starting point should be the [`useApi` hook](../../src/web/lib/useApi.tsx),
 which is DCR's wrapper around SWR's own hook. Because this hook requires
 client-side React code, you will need to place your component in an `<Island>` wrapper.
+
+Adding some notes to markdown
