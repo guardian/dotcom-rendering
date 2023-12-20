@@ -141,6 +141,11 @@ const adSlotCollapseStyles = css`
 	&.ad-slot.ad-slot--collapse {
 		display: none;
 	}
+	&.ad-slot--merchandising-billboard {
+		${until.desktop} {
+			display: none;
+		}
+	}
 `;
 
 /**
@@ -291,7 +296,7 @@ const frontsBannerAdStyles = css`
 
 const articleEndAdStyles = css`
 	position: relative;
-	min-height: 450px;
+	min-height: ${adSizes.mpu.height + labelHeight}px;
 
 	&.ad-slot--fluid {
 		min-height: 450px;
@@ -550,6 +555,7 @@ export const AdSlot = ({
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
 							merchandisingAdStyles,
+							adSlotCollapseStyles,
 						]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
@@ -576,6 +582,7 @@ export const AdSlot = ({
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
 							merchandisingAdStyles,
+							adSlotCollapseStyles,
 						]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
