@@ -1,7 +1,7 @@
-import { CodeBlockComponent } from './CodeBlockComponent';
-import { Section } from './Section';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { CodeBlockComponent } from './CodeBlockComponent';
+import { Section } from './Section';
 
 export default {
 	component: CodeBlockComponent,
