@@ -27,29 +27,11 @@ const hoverUnderline = css`
 
 // for liveblog smaller breakpoints article meta is located in the same
 // container as standfirst and needs the same styling as standfirst on web
-const liveblogStyles = ({
-	isLiveBlog,
-	isApps,
-}: {
-	isLiveBlog: boolean;
-	isApps: boolean;
-}) => {
-	if (isLiveBlog && isApps) {
-		return css`
-			${until.desktop} {
-				color: ${palette('--dateline-mobile')};
-			}
-		`;
+const liveBlogStyles = css`
+	${until.desktop} {
+		color: var(--mobile-color);
 	}
-	if (isLiveBlog)
-		return css`
-			${until.desktop} {
-				color: ${palette('--standfirst-text')};
-			}
-		`;
-
-	return null;
-};
+`;
 
 // At the moment the 'First published on' / 'Last modified on' is passed through on
 // the secondaryDateline (this will be refactored). The current logic checks if the primary
@@ -69,11 +51,17 @@ export const Dateline = ({
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const isApps = renderingTarget === 'Apps';
 
-	const styles = [datelineStyles, liveblogStyles({ isLiveBlog, isApps })];
-
+	const mobileColor = {
+		'--mobile-color':
+			isApps && isLiveBlog
+				? palette('--dateline-mobile')
+				: isLiveBlog
+				? palette('--standfirst-text')
+				: undefined,
+	};
 	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {
 		return (
-			<details css={styles}>
+			<details css={[datelineStyles, liveBlogStyles]} style={mobileColor}>
 				<summary css={primaryStyles}>
 					<span css={hoverUnderline}>{primaryDateline}</span>
 				</summary>
@@ -81,5 +69,9 @@ export const Dateline = ({
 			</details>
 		);
 	}
-	return <div css={styles}>{primaryDateline}</div>;
+	return (
+		<div css={[datelineStyles, liveBlogStyles]} style={mobileColor}>
+			{primaryDateline}
+		</div>
+	);
 };
