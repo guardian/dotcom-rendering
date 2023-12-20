@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
 
@@ -22,6 +22,7 @@ type Props = {
 	isLazy?: boolean;
 	isLightbox?: boolean;
 	orientation?: Orientation;
+	onLoad?: () => void;
 };
 
 export type ImageWidthType = { breakpoint: number; width: number };
@@ -318,7 +319,22 @@ export const Picture = ({
 	isLazy = true,
 	isLightbox = false,
 	orientation = 'landscape',
+	onLoad,
 }: Props) => {
+	const ref = useRef<HTMLImageElement>(null);
+	const [loaded, setLoaded] = useState(false);
+
+	useEffect(() => {
+		if (!ref.current) return;
+
+		if (ref.current.complete) return setLoaded(true);
+		ref.current.addEventListener('load', () => setLoaded(true));
+	}, [ref]);
+
+	useEffect(() => {
+		if (loaded && onLoad) onLoad();
+	}, [loaded, onLoad]);
+
 	const sources = generateSources(
 		master,
 		decideImageWidths({
@@ -383,6 +399,7 @@ export const Picture = ({
 			)}
 			<Sources sources={sources} />
 			<img
+				ref={ref}
 				alt={alt}
 				src={fallbackSource.lowResUrl}
 				width={fallbackSource.width}

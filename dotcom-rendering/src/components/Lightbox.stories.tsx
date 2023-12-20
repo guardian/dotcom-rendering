@@ -73,13 +73,7 @@ const Initialise = ({
 		}
 		const imageRoot = document.querySelector('ul#lightbox-images');
 		if (!imageRoot) return;
-		const loaded = new Set(
-			Array.from({ length: images.length }, (_, index) => index + 1),
-		);
-		render(
-			<LightboxImages format={format} images={images} loaded={loaded} />,
-			imageRoot,
-		);
+		render(<LightboxImages format={format} images={images} />, imageRoot);
 	}, [format, images, shouldShowInfo]);
 
 	return <div style={{ height: '100vh' }}>{children}</div>;
