@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source-foundations';
+import { palette, space } from '@guardian/source-foundations';
 
 interface Props {
 	id: string;
@@ -8,6 +8,7 @@ interface Props {
 
 const chartAtomStyles = css`
 	padding-bottom: ${space[1]}px;
+	background: ${palette.neutral[100]};
 `;
 
 export const ChartAtom = ({ id, html }: Props) => {
