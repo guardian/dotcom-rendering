@@ -158,6 +158,17 @@ const maxWidth = css`
 	}
 `;
 
+const stretchLines = css`
+	${until.phablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+`;
+
 const mainMediaWrapper = (displayAvatarUrl: boolean) => css`
 	position: relative;
 	${until.phablet} {
@@ -540,7 +551,12 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="lines">
-							<div css={LeftColLines(displayAvatarUrl)}>
+							<div
+								css={[
+									LeftColLines(displayAvatarUrl),
+									isApps && stretchLines,
+								]}
+							>
 								<StraightLines
 									count={displayAvatarUrl ? 8 : 4}
 									cssOverrides={css`
