@@ -31,7 +31,7 @@ export const pickBrandingForEdition = (
  * @returns `undefined` if AT LEAST ONE of the cards is missing branding,
  * otherwise returns a non-empty array of branding
  */
-const getBrandingFromCards = (
+export const getBrandingFromCards = (
 	cards: CardWithBranding[],
 	editionId: EditionId,
 ): NonEmptyArray<Branding> | undefined => {

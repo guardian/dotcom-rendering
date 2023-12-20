@@ -1,7 +1,14 @@
-import { decideCollectionBranding } from '../lib/branding';
+import {
+	decideCollectionBranding,
+	getBrandingFromCards,
+} from '../lib/branding';
 import type { EditionId } from '../lib/edition';
 import type { Branding } from '../types/branding';
-import type { DCRCollectionType, FECollectionType } from '../types/front';
+import type {
+	DCRCollectionType,
+	FECollectionType,
+	FEFrontCard,
+} from '../types/front';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
@@ -37,6 +44,16 @@ const findCollectionSuitableForFrontBranding = (
 		return undefined;
 	}
 	return index;
+};
+
+const isCollectionPaidContent = (
+	allCards: FEFrontCard[],
+	editionId: EditionId,
+) => {
+	const allBranding = getBrandingFromCards(allCards, editionId) ?? [];
+	return allBranding.every(
+		({ brandingType }) => brandingType?.name === 'paid-content',
+	);
 };
 
 export const enhanceCollections = ({
@@ -82,7 +99,8 @@ export const enhanceCollections = ({
 			{
 				canBeBranded:
 					!isOnPaidContentFront &&
-					collectionBranding?.kind === 'paid-content',
+					(collectionBranding?.kind === 'paid-content' ||
+						isCollectionPaidContent(allCards, editionId)),
 			},
 		);
 
