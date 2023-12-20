@@ -1,6 +1,7 @@
 import { incrementDailyArticleCount } from '../../lib/dailyArticleCount';
 import {
 	isIOS9,
+	isMobile,
 	isNPageOrHigherPageView,
 	isValidContentType,
 	isValidSection,
@@ -113,6 +114,69 @@ describe('SignInGate - displayRule methods', () => {
 
 		test('not ios device is false', () => {
 			expect(isIOS9()).toBe(false);
+		});
+	});
+	// https://deviceatlas.com/blog/list-of-user-agent-strings
+
+	describe('isMobile', () => {
+		// spy on user agent to mock return value
+		const userAgentGetter = jest.spyOn(
+			window.navigator,
+			'userAgent',
+			'get',
+		);
+		describe('mobile devices', function () {
+			test('samsung is true', () => {
+				userAgentGetter.mockReturnValueOnce(
+					'Mozilla/5.0 (Linux; Android 13; SM-S901B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36',
+				);
+				expect(isMobile()).toBe(true);
+			});
+			test('pixel is true', () => {
+				userAgentGetter.mockReturnValueOnce(
+					'Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36',
+				);
+				expect(isMobile()).toBe(true);
+			});
+			test('motorola is true', () => {
+				userAgentGetter.mockReturnValueOnce(
+					'Mozilla/5.0 (Linux; Android 12; moto g pure) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36',
+				);
+				expect(isMobile()).toBe(true);
+			});
+			test('windows phone is true', () => {
+				userAgentGetter.mockReturnValueOnce(
+					'Mozilla/5.0 (Windows Phone 10.0; Android 6.0.1; Microsoft; RM-1152) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Mobile Safari/537.36 Edge/15.15254',
+				);
+				expect(isMobile()).toBe(true);
+			});
+			test('iphone is true', () => {
+				userAgentGetter.mockReturnValueOnce(
+					'Mozilla/5.0 (iPhone; CPU OS 9_0 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
+				);
+				expect(isMobile()).toBe(true);
+			});
+		});
+
+		describe('browsers', function () {
+			test('windows browser is false', () => {
+				userAgentGetter.mockReturnValueOnce(
+					'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246',
+				);
+				expect(isMobile()).toBe(false);
+			});
+			test('chrome is false', () => {
+				userAgentGetter.mockReturnValueOnce(
+					'Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36',
+				);
+				expect(isMobile()).toBe(false);
+			});
+			test('safari is false', () => {
+				userAgentGetter.mockReturnValueOnce(
+					'Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36',
+				);
+				expect(isMobile()).toBe(false);
+			});
 		});
 	});
 

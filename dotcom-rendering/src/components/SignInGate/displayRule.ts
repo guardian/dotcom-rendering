@@ -20,7 +20,7 @@ export const isNPageOrHigherPageView = (n = 2): boolean => {
 const calculatePageViewLimit = (currentTest: CurrentSignInGateABTest) => {
 	if (currentTest.id !== 'SignInGateDevice') return 3;
 	else if (currentTest.variant === 'mobile' && isMobile()) return 2;
-	else if (currentTest.variant === 'desktop' && isDesktop()) return 2;
+	else if (currentTest.variant === 'desktop' && !isMobile()) return 2;
 	else return 3;
 };
 
@@ -36,16 +36,12 @@ export const isIOS9 = (): boolean => {
 	// if both true, then it's an apple ios 9 device
 	return appleDevice && os;
 };
-
-const isMobile = (): boolean => {
+// https://hacks.mozilla.org/2013/09/user-agent-detection-history-and-checklist/
+export const isMobile = (): boolean => {
 	const ua = navigator.userAgent;
-	return /mobile/i.test(ua);
+	return /mobi/i.test(ua);
 };
 
-const isDesktop = (): boolean => {
-	const ua = navigator.userAgent;
-	return /firefox/i.test(ua);
-};
 // hide the sign in gate on article types that are not supported
 export const isValidContentType = (contentType: string): boolean => {
 	// It's safer to definitively *include* types as we
