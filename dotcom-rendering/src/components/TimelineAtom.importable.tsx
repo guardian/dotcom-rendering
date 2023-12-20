@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { body, palette, remSpace, space } from '@guardian/source-foundations';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { palette as schemedPalette } from '../palette';
 import type { TimelineAtomType, TimelineEvent } from '../types/content';
 import { useConfig } from './ConfigContext';
 import { Body } from './ExpandableAtom/Body';
@@ -31,7 +32,7 @@ const EventDateBullet = css`
 	float: left;
 	position: relative;
 	left: -24px;
-	background-color: ${palette.neutral[7]};
+	background-color: ${schemedPalette('--timeline-atom-bullet')};
 `;
 
 const EventDate = css`
@@ -39,7 +40,8 @@ const EventDate = css`
 		${EventDateBullet}
 	}
 	margin-left: -16px;
-	background: ${palette.brandAlt[400]};
+	background: ${schemedPalette('--timeline-atom-highlight-text-background')};
+	color: ${schemedPalette('--timeline-atom-highlight-text')};
 	${body.medium({
 		lineHeight: 'tight',
 		fontWeight: 'bold',
@@ -47,7 +49,8 @@ const EventDate = css`
 `;
 
 const EventToDate = css`
-	background: ${palette.brandAlt[400]};
+	background: ${schemedPalette('--timeline-atom-highlight-text-background')};
+	color: ${schemedPalette('--timeline-atom-highlight-text')};
 	${body.medium({
 		lineHeight: 'tight',
 		fontWeight: 'bold',
