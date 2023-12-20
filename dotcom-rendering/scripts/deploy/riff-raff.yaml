@@ -14,6 +14,7 @@ templates:
         AmigoStage: PROD
 deployments:
   frontend-static:
+    stacks: [frontend, rendering]
     type: aws-s3
     parameters:
       bucketSsmKey: /account/services/dotcom-static.bucket
@@ -46,6 +47,7 @@ deployments:
   # New stack for article rendering
   article-cfn:
     template: cloudformation
+    stacks: [rendering]
     parameters:
       templateStagePaths:
         CODE: ArticleRendering-CODE.template.json
@@ -55,6 +57,7 @@ deployments:
       amiParameter: AMIArticle
   article:
     type: autoscaling
+    stacks: [rendering]
     parameters:
       bucketSsmKey: /account/services/dotcom-artifact.bucket
       # Default is 900 (15 mins), this is 25 mins
