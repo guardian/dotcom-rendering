@@ -6,6 +6,7 @@ import {
 	GuStack as CDKStack,
 	GuDistributionBucketParameter,
 } from '@guardian/cdk/lib/constructs/core';
+import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import type { App as CDKApp } from 'aws-cdk-lib';
 import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
@@ -29,7 +30,7 @@ export class RenderingCDKStack extends CDKStack {
 			stack: 'frontend',
 		});
 
-		const { stack: guStack } = this;
+		const { stack: guStack, region, account } = this;
 		const { guApp, stage, instanceSize, scaling } = props;
 
 		const artifactsBucket =
@@ -77,6 +78,35 @@ export class RenderingCDKStack extends CDKStack {
 				stage,
 				artifactsBucket,
 			}),
+			healthcheck: {
+				path: '/_healthcheck',
+			},
+			roleConfiguration: {
+				additionalPolicies: [
+					new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
+						actions: ['cloudwatch:*', 'logs:*'],
+						resources: ['*'],
+					}),
+					new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
+						actions: ['kms:Decrypt', 'kms:DescribeKey'],
+						resources: [
+							`arn:aws:kms:${region}:${account}:FrontendConfigKey`,
+						],
+					}),
+					new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
+						actions: [
+							'ssm:GetParametersByPath',
+							'ssm:GetParameter',
+						],
+						resources: [
+							// This is for backwards compatibility reasons with frontend apps and an old SSM naming system
+							// TODO - ideally we should convert these params to use the newer naming style for consistency
+							`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
+							`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
+						],
+					}),
+				],
+			},
 		});
 	}
 }
