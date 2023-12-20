@@ -23,8 +23,7 @@ const plusStyling = css`
 `;
 
 const minusStyling = css`
-	margin-right: 14px;
-	margin-bottom: 6px;
+	margin: auto 6px auto 0;
 	width: 30px;
 	fill: ${themePalette('--expandable-atom-button-fill')};
 	height: 25px;
