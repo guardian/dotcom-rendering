@@ -16,6 +16,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'this-is-europe',
 				'the-guide-staying-in',
 				'the-long-read',
+				'reclaim-your-brain',
 			],
 		},
 		{
@@ -107,12 +108,13 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'us-morning-newsletter', // First Thing
 				'today-us', // Headlines US
-				'headlines-europe',
-				'green-light', // Down to Earth
 				'trump-on-trial',
+				'reclaim-your-brain',
 				'follow-margaret-sullivan',
 				'follow-robert-reich',
 				'best-of-opinion-us',
+				'headlines-europe',
+				'green-light', // Down to Earth
 				'patriarchy',
 				'bookmarks',
 			],
@@ -204,6 +206,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'afternoon-update',
 				'first-dog',
 				'the-rural-network',
+				'reclaim-your-brain',
 			],
 		},
 		{
