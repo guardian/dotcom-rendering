@@ -15,15 +15,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-      # Make sure we install dependencies in the root directory
-      - run: yarn install --frozen-lockfile
+
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
+
       - run: make build
         working-directory: dotcom-rendering
+
       - name: Install and run Lighthouse CI
         working-directory: dotcom-rendering
         env:

@@ -10,6 +10,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -427,9 +428,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								cssOverrides={css`
 									display: block;
 								`}
-								color={themePalette(
-									'--article-border-secondary',
-								)}
+								color={themePalette('--straight-lines')}
 							/>
 						</Section>
 					</SendToBack>
@@ -438,9 +437,16 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 			<main data-layout="CommentLayout">
 				{isApps && (
-					<Island priority="critical">
-						<AdPortals />
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				<Section
 					fullWidth={true}
@@ -474,9 +480,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 							</div>
 						</GridItem>
@@ -491,7 +494,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border format={format} />
+							<Border />
 						</GridItem>
 						<GridItem area="headline">
 							<div css={maxWidth}>
@@ -534,7 +537,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												display: block;
 											`}
 											color={themePalette(
-												'--article-border-secondary',
+												'--straight-lines',
 											)}
 										/>
 									</div>
@@ -549,9 +552,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										cssOverrides={css`
 											display: block;
 										`}
-										color={themePalette(
-											'--article-border-secondary',
-										)}
+										color={themePalette('--straight-lines')}
 									/>
 								</Hide>
 							</div>
@@ -623,9 +624,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
-										imagesForAppsLightbox={
-											article.imagesForAppsLightbox
-										}
 									/>
 									{showBodyEndSlot && (
 										<Island
@@ -664,6 +662,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												tags={article.tags}
 												renderAds={renderAds}
 												isLabs={false}
+												articleEndSlot={
+													!!article.config.switches
+														.articleEndSlot
+												}
 											/>
 										</Island>
 									)}
@@ -672,9 +674,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										cssOverrides={css`
 											display: block;
 										`}
-										color={themePalette(
-											'--article-border-secondary',
-										)}
+										color={themePalette('--straight-lines')}
 									/>
 									<SubMeta
 										format={format}
@@ -733,7 +733,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot
@@ -744,7 +744,11 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true}>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
@@ -791,6 +795,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						fullWidth={true}
 						sectionId="comments"
 						element="aside"
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
@@ -819,6 +826,11 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
@@ -842,7 +854,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot

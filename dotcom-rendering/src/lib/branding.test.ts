@@ -49,6 +49,7 @@ describe('decideCollectionBranding', () => {
 				},
 			],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toStrictEqual({
 			kind: 'editorial',
@@ -92,6 +93,7 @@ describe('decideCollectionBranding', () => {
 			seriesTag: undefined,
 			cards,
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(ukBranding).toMatchObject({
 			kind: 'paid-content',
@@ -102,6 +104,7 @@ describe('decideCollectionBranding', () => {
 				aboutThisLink: '',
 				logo,
 			},
+			isContainerBranding: false,
 		});
 		const usBranding = decideCollectionBranding({
 			frontBranding: undefined,
@@ -109,6 +112,7 @@ describe('decideCollectionBranding', () => {
 			seriesTag: undefined,
 			cards,
 			editionId: 'US',
+			isContainerBranding: false,
 		});
 		expect(usBranding).toMatchObject({
 			kind: 'sponsored',
@@ -119,6 +123,7 @@ describe('decideCollectionBranding', () => {
 				aboutThisLink: '',
 				logo,
 			},
+			isContainerBranding: false,
 		});
 	});
 
@@ -166,6 +171,7 @@ describe('decideCollectionBranding', () => {
 				},
 			],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toMatchObject({
 			kind: 'paid-content',
@@ -218,6 +224,7 @@ describe('decideCollectionBranding', () => {
 				},
 			],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toBeUndefined();
 	});
@@ -245,6 +252,7 @@ describe('decideCollectionBranding', () => {
 				},
 			],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toBeUndefined();
 	});
@@ -302,6 +310,7 @@ describe('decideCollectionBranding', () => {
 				},
 			],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toBeUndefined();
 	});
@@ -350,11 +359,13 @@ describe('decideCollectionBranding', () => {
 				},
 			],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toStrictEqual({
 			kind: 'sponsored',
 			isFrontBranding: false,
 			branding: cardBranding,
+			isContainerBranding: false,
 		});
 	});
 
@@ -412,6 +423,7 @@ describe('decideCollectionBranding', () => {
 				},
 			],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toBeUndefined();
 	});
@@ -454,6 +466,7 @@ describe('decideCollectionBranding', () => {
 				},
 			],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toStrictEqual({
 			kind: 'paid-content',
@@ -464,6 +477,7 @@ describe('decideCollectionBranding', () => {
 				aboutThisLink: '',
 				logo,
 			},
+			isContainerBranding: false,
 		});
 	});
 
@@ -505,6 +519,7 @@ describe('decideCollectionBranding', () => {
 				},
 			],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toBeUndefined();
 	});
@@ -521,6 +536,7 @@ describe('decideCollectionBranding', () => {
 			seriesTag: undefined,
 			cards: [],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toStrictEqual({
 			kind: 'paid-content',
@@ -531,6 +547,7 @@ describe('decideCollectionBranding', () => {
 				aboutThisLink: '',
 				logo,
 			},
+			isContainerBranding: false,
 		});
 	});
 
@@ -546,6 +563,7 @@ describe('decideCollectionBranding', () => {
 			seriesTag: undefined,
 			cards: [],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toBeUndefined();
 	});
@@ -599,11 +617,13 @@ describe('decideCollectionBranding', () => {
 				},
 			],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toStrictEqual({
 			kind: 'paid-content',
 			isFrontBranding: false,
 			branding: cardBranding,
+			isContainerBranding: false,
 		});
 	});
 
@@ -656,6 +676,7 @@ describe('decideCollectionBranding', () => {
 				},
 			],
 			editionId: 'UK',
+			isContainerBranding: false,
 		});
 		expect(collectionBranding).toBeUndefined();
 	});

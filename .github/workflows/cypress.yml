@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [1, 2, 4, 5, 6]
+        group: [1, 2, 5]
     services:
       DCR:
         image: ${{ inputs.container-image }}
@@ -22,14 +22,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - run: corepack enable
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-
-      - run: yarn install --frozen-lockfile
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
 
       - name: Cypress run
         uses: cypress-io/github-action@v6

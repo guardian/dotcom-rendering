@@ -1,17 +1,8 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-
-const format: ArticleFormat = {
-	design: ArticleDesign.Quiz,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.News,
-};
-
 // Non-expanded version for Cypress tests
 export const imageStory = {
 	id: '78014307-ca67-47dc-b524-d5f24f3dbcd8',
 	title: 'What is bitcoin?',
 	html: "<p>Bitcoin is the first, and the biggest, 'cryptocurrency' – a decentralised tradeable digital asset. The lack of any central authority oversight is one of the attraction.&nbsp;</p><p>Cryptocurrencies can be used to send transactions between two parties via the use of private and public keys. These transfers can be done with minimal processing cost, allowing users to avoid the fees charged by traditional financial institutions - as well as the oversight and regulation that entails.</p><p>This means it has attracted a range of backers, from libertarian monetarists who enjoy the idea of a currency with no inflation and no central bank, to drug dealers who like the fact that it is hard (but not impossible) to trace a bitcoin transaction back to a physical person.</p><p>The exchange rate has been volatile, making it a risky investment. Whether it is a bad investment is yet to be seen. In practice it has been far more important for the dark economy than it has for most legitimate uses, but with Facebook's announcement that it is launching a new digital currency - <a href='https://www.theguardian.com/technology/2019/jun/18/what-is-libra-facebook-new-cryptocurrency'>Libra</a> - mainstream interest in bitcoin has surged.<br></p>",
-	format,
 	image: 'https://i.guim.co.uk/img/media/5f74d365b0a3072c2edcd764cf08d6fa4fcd873b/0_59_5190_3114/5190.jpg?width=620&quality=85&auto=format&fit=max&s=ed95a62cd07881336635129287b406a1',
 	expandForStorybook: false,
 	likeHandler: (): null => null,
@@ -23,7 +14,6 @@ export const imageStoryExpanded = {
 	id: '78014307-ca67-47dc-b524-d5f24f3dbcd8',
 	title: 'What is bitcoin?',
 	html: "<p>Bitcoin is the first, and the biggest, 'cryptocurrency' – a decentralised tradeable digital asset. The lack of any central authority oversight is one of the attraction.&nbsp;</p><p>Cryptocurrencies can be used to send transactions between two parties via the use of private and public keys. These transfers can be done with minimal processing cost, allowing users to avoid the fees charged by traditional financial institutions - as well as the oversight and regulation that entails.</p><p>This means it has attracted a range of backers, from libertarian monetarists who enjoy the idea of a currency with no inflation and no central bank, to drug dealers who like the fact that it is hard (but not impossible) to trace a bitcoin transaction back to a physical person.</p><p>The exchange rate has been volatile, making it a risky investment. Whether it is a bad investment is yet to be seen. In practice it has been far more important for the dark economy than it has for most legitimate uses, but with Facebook's announcement that it is launching a new digital currency - <a href='https://www.theguardian.com/technology/2019/jun/18/what-is-libra-facebook-new-cryptocurrency'>Libra</a> - mainstream interest in bitcoin has surged.<br></p>",
-	format,
 	image: 'https://i.guim.co.uk/img/media/5f74d365b0a3072c2edcd764cf08d6fa4fcd873b/0_59_5190_3114/5190.jpg?width=620&quality=85&auto=format&fit=max&s=ed95a62cd07881336635129287b406a1',
 	expandForStorybook: true,
 	likeHandler: (): null => null,
@@ -52,7 +42,6 @@ export const imageStoryWithCreditExpanded = {
     <p><b>US&nbsp;</b>132,310 deaths, 3,055,491 cases</p>
     <p>The US ban on travellers from overseas came too late, and though most states had lockdowns of some form in spring, they varied in length and strictness. Some places that were among the earliest to lift them are now battling fast-rising outbreaks, and the country has the highest number of confirmed cases and deaths. Opposition to lockdowns and mask-wearing remains widespread.</p>
     <p>Source: Johns Hopkins CSSE, 9 July</p>`,
-	format,
 	image: 'https://i.guim.co.uk/img/media/1cd3cc5864d9e6fc0b74134eaff7ab329cb89678/914_0_1757_1757/1757.jpg?width=620&quality=85&auto=format&fit=max&s=c1aadf54045c6a8c11e9c077324e238f',
 	credit: 'Photograph: Mark R Cristino/EPA',
 	expandForStorybook: true,
@@ -65,7 +54,6 @@ export const listStoryExpanded = {
 	id: '7a6078f6-5a66-4d3e-9339-5610fe320767',
 	title: 'How can I protect myself and others from the coronavirus outbreak?',
 	html: '<p>The World Health Organization is recommending that people take simple precautions to reduce exposure to and transmission of the coronavirus, for which there is no specific cure or vaccine.</p> <p>The UN agency&nbsp;<a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public">advises</a>&nbsp;people to:</p> <ul> <li>Frequently wash their hands with an alcohol-based hand rub or warm water and soap</li> <li>Cover their mouth and nose with a flexed elbow or tissue when sneezing or coughing</li> <li>Avoid close contact with anyone who has a fever or cough</li> <li>Seek early medical help if they have a fever, cough and difficulty breathing, and share their travel history with healthcare providers</li> <li>Advice about face masks varies. Wearing them while out and about may offer some protection against both spreading and catching the virus via coughs and sneezes, but it is not a cast-iron guarantee of protection</li> </ul> <p>Many countries are now enforcing or recommending curfews or lockdowns. <b>Check with your local authorities for up-to-date information about the situation in your area.</b>&nbsp;</p> <p>In the UK, NHS advice is that anyone with symptoms should&nbsp;<b>stay at home for at least 7 days</b>.</p> <p>If you live with other people,&nbsp;<b>they should stay at home for at least 14 days</b>, to avoid spreading the infection outside the home.</p>',
-	format,
 	expandForStorybook: true,
 	likeHandler: (): null => null,
 	dislikeHandler: (): null => null,

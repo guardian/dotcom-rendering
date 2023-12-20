@@ -2,34 +2,11 @@ export type Colour = string;
 
 export type Palette = {
 	text: {
-		headline: Colour;
 		headlineWhenMatch: Colour;
-		seriesTitle: Colour;
-		sectionTitle: Colour;
-		seriesTitleWhenMatch: Colour;
-		articleLink: Colour;
-		articleLinkHover: Colour;
-		cardHeadline: Colour;
-		cardKicker: Colour;
-		dynamoHeadline: Colour;
-		dynamoKicker: Colour;
-		dynamoMeta: Colour;
-		cardStandfirst: Colour;
-		cardFooter: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
-		signInLink: Colour;
-		richLink: Colour;
-		witnessIcon: Colour;
-		witnessAuthor: Colour;
-		witnessTitle: Colour;
-		carouselTitle: Colour;
-		pagination: Colour;
-		dropCap: Colour;
-		numberedTitle: Colour;
-		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
@@ -39,31 +16,17 @@ export type Palette = {
 		dateLine: Colour;
 		expandableAtom: Colour;
 		expandableAtomHover: Colour;
-		subNavLink: Colour;
 		youtubeOverlayKicker: Colour;
 	};
 	background: {
-		article: Colour;
 		analysisContrast: Colour;
 		analysisContrastHover: Colour;
-		audioAtom: Colour;
-		seriesTitle: Colour;
-		sectionTitle: Colour;
-		card: Colour;
-		headline: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
-		standfirst: Colour;
-		richLink: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
-		carouselDot: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
-		matchNav: Colour;
-		analysisUnderline: Colour;
-		matchStats: Colour;
-		ageWarning: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
@@ -71,46 +34,25 @@ export type Palette = {
 		designTag: Colour;
 		lightboxDivider: Colour;
 		messageForm: Colour;
-		discussionPillarButton: Colour;
 		dynamoSublink: Colour;
 	};
 	fill: {
-		commentCount: Colour;
-		commentCountUntilDesktop: Colour;
-		richLink: Colour;
-		quoteIcon: Colour;
 		guardianLogo: Colour;
 	};
 	border: {
-		subNav: Colour;
-		articleLink: Colour;
-		articleLinkHover: Colour;
-		liveBlock: Colour;
 		pinnedPost: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
-		standfirst: Colour;
-		richLink: Colour;
 		navPillar: Colour;
-		article: Colour;
 		lines: Colour;
-		matchTab: Colour;
-		activeMatchTab: Colour;
 		cricketScoreboardTop: Colour;
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
 		filterButton: Colour;
-		secondary: Colour;
-		pagination: Colour;
-	};
-	topBar: {
-		card: Colour;
 	};
 	hover: {
 		standfirstLink: Colour;
-		pagination: Colour;
 	};
-	discussionGeneric: Colour;
 };
 
 export type ContainerOverrides = {

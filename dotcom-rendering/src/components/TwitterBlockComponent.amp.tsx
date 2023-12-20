@@ -85,7 +85,11 @@ export const TwitterBlockComponent = ({ element, pillar }: Props) => {
 			data-dnt="true"
 		>
 			{!!fallbackHTML && (
-				<div placeholder="" css={TextStyle(pillar)}>
+				<div
+					// @ts-expect-error -- this is an AMP extension: https://amp.dev/documentation/components/amp-twitter#placeholders-&-fallbacks
+					placeholder={true}
+					css={TextStyle(pillar)}
+				>
 					<blockquote
 						dangerouslySetInnerHTML={{ __html: fallbackHTML }}
 					/>

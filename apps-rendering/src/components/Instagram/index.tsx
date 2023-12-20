@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { Option } from '@guardian/types';
-import { withDefault } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { FC } from 'react';
 
 // ----- Functions ----- //

@@ -2,12 +2,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	border,
-	brandBackground,
-	brandBorder,
 	from,
-	labs,
-	neutral,
+	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source-foundations';
@@ -15,6 +11,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -24,6 +21,7 @@ import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
+import { Disclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -47,7 +45,6 @@ import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
@@ -93,6 +90,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'caption    border      title       right-column'
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
+						'.          border      disclaimer  right-column'
 						'.          border      byline      right-column'
 						'lines      border      body        right-column'
 						'meta       border      body        right-column'
@@ -116,6 +114,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      title       right-column'
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
+						'.          border      disclaimer  right-column'
 						'.          border      byline      right-column'
 						'lines      border      body        right-column'
 						'meta       border      body        right-column'
@@ -137,6 +136,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'title       right-column'
 						'headline    right-column'
 						'standfirst  right-column'
+						'disclaimer  right-column'
 						'byline      right-column'
 						'caption     right-column'
 						'lines       right-column'
@@ -151,6 +151,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'title'
 						'headline'
 						'standfirst'
+						'disclaimer'
 						'byline'
 						'caption'
 						'lines'
@@ -271,6 +272,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 		? `${combinedHeight}px`
 		: `${minNavHeightPx}px`;
 
+	const hasAffiliateLinksDisclaimer = !!article.affiliateLinksDisclaimer;
+
 	const hasMainMediaStyles = css`
 		height: calc(80vh - ${navAndLabsHeaderHeight});
 		/**
@@ -321,7 +324,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							showSideBorders={false}
 							showTopBorder={false}
 							padSides={false}
-							backgroundColour={brandBackground.primary}
+							backgroundColour={sourcePalette.brand[400]}
 							element="nav"
 						>
 							<Nav
@@ -352,8 +355,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={labs[400]}
-								borderColour={border.primary}
+								backgroundColour={sourcePalette.labs[400]}
+								borderColour={sourcePalette.neutral[60]}
 								sectionId="labs-header"
 							>
 								<LabsHeader />
@@ -394,7 +397,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
-						imagesForAppsLightbox={article.imagesForAppsLightbox}
 					/>
 				</div>
 				{mainMedia && (
@@ -457,9 +459,16 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 			<main data-layout="ImmersiveLayout">
 				{isApps && (
-					<Island priority="critical">
-						<AdPortals />
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				<Section
 					fullWidth={true}
@@ -483,7 +492,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							{format.design === ArticleDesign.PhotoEssay ? (
 								<></>
 							) : (
-								<Border format={format} />
+								<Border />
 							)}
 						</GridItem>
 						<GridItem area="title" element="aside">
@@ -541,6 +550,15 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
+						<GridItem area="disclaimer">
+							{hasAffiliateLinksDisclaimer && (
+								<Disclaimer
+									html={
+										article.affiliateLinksDisclaimer ?? ''
+									}
+								></Disclaimer>
+							)}
+						</GridItem>
 						<GridItem area="byline">
 							{!!article.byline && (
 								<HeadlineByline
@@ -563,10 +581,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										) : (
 											<DecideLines
 												format={format}
-												color={
-													decidePalette(format).border
-														.article
-												}
+												color={themePalette(
+													'--article-border',
+												)}
 											/>
 										)}
 									</div>
@@ -631,9 +648,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 								{showBodyEndSlot && (
 									<Island
@@ -664,14 +678,16 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											tags={article.tags}
 											renderAds={renderAds}
 											isLabs={isLabs}
+											articleEndSlot={
+												!!article.config.switches
+													.articleEndSlot
+											}
 										/>
 									</Island>
 								)}
 								<StraightLines
 									count={4}
-									color={
-										decidePalette(format).border.secondary
-									}
+									color={themePalette('--straight-lines')}
 								/>
 								<SubMeta
 									format={format}
@@ -740,7 +756,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot
@@ -751,7 +767,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true}>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
 						<Island
 							priority="enhancement"
 							defer={{ until: 'visible' }}
@@ -803,6 +823,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						fullWidth={true}
 						sectionId="comments"
 						element="aside"
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
@@ -830,6 +853,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
@@ -852,7 +880,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot
@@ -883,8 +911,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
-						borderColour={brandBorder.primary}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
 					>

@@ -4,6 +4,7 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
+import { palette as themePalette } from '../../palette';
 
 const staffBadge = css`
 	display: flex;
@@ -29,10 +30,10 @@ const staffIcon = css`
 `;
 
 const staffLabel = css`
-	color: ${sourcePalette.brand[400]};
+	color: ${themePalette('--staff-label-color')};
 `;
 const guardianPickLabel = css`
-	color: ${sourcePalette.neutral[7]};
+	color: ${themePalette('--pick-label-color')};
 `;
 
 export const GuardianStaff = () => (

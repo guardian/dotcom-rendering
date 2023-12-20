@@ -8,8 +8,8 @@ import type { RenderingRequest } from '@guardian/apps-rendering-api-models/rende
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { background, resets } from '@guardian/source-foundations';
-import { map, none, some } from '@guardian/types';
-import type { Option } from '@guardian/types';
+import { map, none, some } from '../../vendor/@guardian/types/index';
+import type { Option } from '../../vendor/@guardian/types/index';
 import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import { atomCss, atomScript } from 'components/InteractiveAtom';

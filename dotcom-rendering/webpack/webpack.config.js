@@ -1,9 +1,7 @@
 // @ts-check
 const path = require('node:path');
-const { v4: uuidv4 } = require('uuid');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
 const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } = require('./bundles');
@@ -14,8 +12,6 @@ const DEV = process.env.NODE_ENV === 'development';
 
 const BUILD_LEGACY = process.env.BUILD_LEGACY === 'true';
 const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
-
-const sessionId = uuidv4();
 
 /** @typedef {import('../src/lib/assets').Build} Build */
 
@@ -67,10 +63,6 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
-		}),
-		// @ts-expect-error -- somehow the type declaration isn’t playing nice
-		new FilterWarningsPlugin({
-			exclude: /export .* was not found in/,
 		}),
 		// Matching modules specified in this regex will not be imported during the webpack build
 		// We use this if there are optional dependencies (e.g in jsdom, ws) to remove uneccesary warnings in our builds / console outpouts.
@@ -130,7 +122,7 @@ module.exports = [
 		commonConfigs({
 			platform: 'server',
 		}),
-		require(`./webpack.config.server`)({ sessionId }),
+		require(`./webpack.config.server`),
 		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
 	...clientBuilds.map((build) =>
@@ -140,7 +132,6 @@ module.exports = [
 			}),
 			require(`./webpack.config.client`)({
 				build,
-				sessionId,
 			}),
 		),
 	),

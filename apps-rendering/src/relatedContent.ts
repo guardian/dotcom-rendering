@@ -2,7 +2,7 @@ import type { Image } from '@guardian/apps-rendering-api-models/image';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import { map, withDefault } from '@guardian/types';
+import { map, withDefault } from '../vendor/@guardian/types/index';
 import {
 	articleContributors,
 	articleMainImage,

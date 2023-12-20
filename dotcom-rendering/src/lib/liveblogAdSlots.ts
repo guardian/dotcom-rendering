@@ -312,8 +312,8 @@ const shouldDisplayAd = (
 	}
 
 	// Always show an advert after the first content block
-	const isFirstAd = block === 1;
-	if (isFirstAd) {
+	const isFirstBlock = block === 1;
+	if (isFirstBlock) {
 		return true;
 	}
 

@@ -4,7 +4,13 @@
  * https://github.com/guardian/commercial/blob/1a429d6be05657f20df4ca909df7d01a5c3d7402/src/lib/user-features.ts
  */
 
-import { getCookie, isObject, removeCookie, setCookie } from '@guardian/libs';
+import {
+	getCookie,
+	isBoolean,
+	isObject,
+	removeCookie,
+	setCookie,
+} from '@guardian/libs';
 import {
 	getAuthStatus,
 	getOptionsHeadersWithOkta,
@@ -48,19 +54,14 @@ const userHasData = () => {
 const validateResponse = (
 	response: unknown,
 ): response is UserFeaturesResponse => {
-	if (!isObject(response)) return false;
-
-	if (
-		typeof response.showSupportMessaging === 'boolean' &&
+	return (
+		isObject(response) &&
+		isBoolean(response.showSupportMessaging) &&
 		isObject(response.contentAccess) &&
-		typeof response.contentAccess.paidMember === 'boolean' &&
-		typeof response.contentAccess.recurringContributor === 'boolean' &&
-		typeof response.contentAccess.digitalPack === 'boolean'
-	) {
-		return true;
-	}
-
-	return false;
+		isBoolean(response.contentAccess.paidMember) &&
+		isBoolean(response.contentAccess.recurringContributor) &&
+		isBoolean(response.contentAccess.digitalPack)
+	);
 };
 
 const persistResponse = (JsonResponse: UserFeaturesResponse) => {

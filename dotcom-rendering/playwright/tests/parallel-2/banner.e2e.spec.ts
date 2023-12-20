@@ -1,17 +1,14 @@
 import type { BrowserContext, Request } from '@playwright/test';
 import { test } from '@playwright/test';
 import { disableCMP } from '../../lib/cmp';
+import { addCookie } from '../../lib/cookies';
 import { loadPage } from '../../lib/load-page';
 
 const optOutOfArticleCountConsent = async (context: BrowserContext) => {
-	await context.addCookies([
-		{
-			name: 'gu_articleCountOptOut',
-			value: 'true',
-			domain: 'localhost',
-			path: '/',
-		},
-	]);
+	await addCookie(context, {
+		name: 'gu_articleCountOptOut',
+		value: 'true',
+	});
 };
 
 const requestBodyHasProperties = (
@@ -46,6 +43,9 @@ test.describe('The banner', function () {
 		await loadPage(
 			page,
 			`/Article/https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people`,
+			'domcontentloaded',
+			'GB',
+			false,
 		);
 
 		await rrBannerRequestPromise;

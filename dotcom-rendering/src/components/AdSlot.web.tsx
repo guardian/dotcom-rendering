@@ -141,6 +141,11 @@ const adSlotCollapseStyles = css`
 	&.ad-slot.ad-slot--collapse {
 		display: none;
 	}
+	&.ad-slot--merchandising-billboard {
+		${until.desktop} {
+			display: none;
+		}
+	}
 `;
 
 /**
@@ -193,12 +198,15 @@ const merchandisingAdContainerStyles = css`
 
 const merchandisingAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.billboard.height}px;
+	min-height: ${adSizes.billboard.height + labelHeight}px;
 	margin: 12px auto;
+	max-width: ${breakpoints['wide']}px;
+	overflow: hidden;
 
 	${from.desktop} {
 		margin: 0;
 		padding-bottom: 20px;
+		min-height: ${adSizes.billboard.height + labelHeight + 20}px;
 	}
 `;
 
@@ -212,7 +220,7 @@ const inlineAdStyles = css`
 
 const liveblogInlineAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
+	min-height: ${adSizes.mpu.height + labelHeight}px;
 	background-color: ${palette.neutral[93]};
 
 	${until.tablet} {
@@ -222,7 +230,7 @@ const liveblogInlineAdStyles = css`
 
 const liveblogInlineMobileAdStyles = css`
 	position: relative;
-	min-height: ${adSizes.outstreamMobile.height + constants.AD_LABEL_HEIGHT}px;
+	min-height: ${adSizes.outstreamMobile.height + labelHeight}px;
 	background-color: ${palette.neutral[93]};
 
 	${from.tablet} {
@@ -288,7 +296,7 @@ const frontsBannerAdStyles = css`
 
 const articleEndAdStyles = css`
 	position: relative;
-	min-height: 450px;
+	min-height: ${adSizes.mpu.height + labelHeight}px;
 
 	&.ad-slot--fluid {
 		min-height: 450px;
@@ -429,7 +437,7 @@ export const AdSlot = ({
 					return (
 						<div
 							className="ad-slot-container"
-							css={[adContainerStyles]}
+							css={adContainerStyles}
 						>
 							<div
 								id="dfp-ad--right"
@@ -461,7 +469,7 @@ export const AdSlot = ({
 			}
 		case 'comments': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id="dfp-ad--comments"
 						className={[
@@ -544,9 +552,10 @@ export const AdSlot = ({
 							'ad-slot--merchandising-high',
 						].join(' ')}
 						css={[
-							merchandisingAdStyles,
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
+							merchandisingAdStyles,
+							adSlotCollapseStyles,
 						]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
@@ -570,9 +579,10 @@ export const AdSlot = ({
 							'ad-slot--merchandising',
 						].join(' ')}
 						css={[
-							merchandisingAdStyles,
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
+							merchandisingAdStyles,
+							adSlotCollapseStyles,
 						]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
@@ -640,7 +650,7 @@ export const AdSlot = ({
 		case 'inline': {
 			const advertId = `inline${index + 1}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
@@ -650,7 +660,7 @@ export const AdSlot = ({
 							'ad-slot--container-inline',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[inlineAdStyles]}
+						css={inlineAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						aria-hidden="true"
@@ -659,30 +669,37 @@ export const AdSlot = ({
 			);
 		}
 		case 'liveblog-inline': {
-			const advertId = `inline${index}`;
+			const advertId = `inline${index + 1}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div
+					className="ad-slot-container ad-slot-desktop"
+					css={adContainerStyles}
+				>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
 							'js-ad-slot',
 							'ad-slot',
-							`ad-slot--${advertId}`,
 							'ad-slot--liveblog-inline',
+							`ad-slot--${advertId}`,
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[liveblogInlineAdStyles]}
+						css={liveblogInlineAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
+						data-testid={`liveblog-inline--${advertId}`}
 						aria-hidden="true"
 					/>
 				</div>
 			);
 		}
 		case 'liveblog-inline-mobile': {
-			const advertId = `inline${index}`;
+			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div
+					className="ad-slot-container ad-slot-mobile"
+					css={adContainerStyles}
+				>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -692,9 +709,10 @@ export const AdSlot = ({
 							`ad-slot--liveblog-inline--mobile`,
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[liveblogInlineMobileAdStyles]}
+						css={liveblogInlineMobileAdStyles}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
+						data-testid={`liveblog-inline-mobile--${advertId}`}
 						aria-hidden="true"
 					/>
 				</div>
@@ -703,7 +721,7 @@ export const AdSlot = ({
 		case 'mobile-front': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -725,7 +743,7 @@ export const AdSlot = ({
 		}
 		case 'pageskin': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id="dfp-ad--pageskin-inread"
 						className={[
@@ -748,7 +766,7 @@ export const AdSlot = ({
 		}
 		case 'article-end': {
 			return (
-				<div className="ad-slot-container" css={[adContainerStyles]}>
+				<div className="ad-slot-container" css={adContainerStyles}>
 					<div
 						id="dfp-ad--article-end"
 						className={[

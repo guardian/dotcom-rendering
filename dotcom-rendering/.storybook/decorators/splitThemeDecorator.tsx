@@ -143,7 +143,7 @@ export const splitTheme =
 			}}
 		>
 			<div
-				className="light"
+				data-color-scheme="light"
 				css={[
 					css`
 						background-color: ${sourcePalette.neutral[100]};
@@ -156,12 +156,18 @@ export const splitTheme =
 				{formats.map((format) => (
 					<div css={css(paletteDeclarations(format, 'light'))}>
 						<FormatHeading format={format} />
-						<Story args={{ ...context.args, format }} />
+						<Story
+							args={{
+								...context.args,
+								format,
+								theme: 'light',
+							}}
+						/>
 					</div>
 				))}
 			</div>
 			<div
-				className="dark"
+				data-color-scheme="dark"
 				css={[
 					css`
 						background-color: ${sourcePalette.neutral[0]};
@@ -174,7 +180,13 @@ export const splitTheme =
 				{formats.map((format) => (
 					<div css={css(paletteDeclarations(format, 'dark'))}>
 						<FormatHeading format={format} />
-						<Story args={{ ...context.args, format }} />
+						<Story
+							args={{
+								...context.args,
+								format,
+								theme: 'dark',
+							}}
+						/>
 					</div>
 				))}
 			</div>

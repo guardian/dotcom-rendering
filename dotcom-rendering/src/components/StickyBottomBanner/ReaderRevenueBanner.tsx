@@ -22,6 +22,7 @@ import {
 	hasOptedOutOfArticleCount,
 	lazyFetchEmailWithTimeout,
 	MODULES_VERSION,
+	recentlyClosedBanner,
 	setLocalNoBannerCachePeriod,
 	shouldHideSupportMessaging,
 	withinLocalNoBannerCachePeriod,
@@ -44,7 +45,6 @@ type BaseProps = {
 	isSensitive: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
-	alreadyVisitedCount: number;
 	engagementBannerLastClosedAt?: string;
 	subscriptionBannerLastClosedAt?: string;
 	signInBannerLastClosedAt?: string;
@@ -91,7 +91,6 @@ const buildPayload = async ({
 	isSignedIn,
 	shouldHideReaderRevenue,
 	isPaidContent,
-	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
@@ -116,7 +115,6 @@ const buildPayload = async ({
 			referrerUrl: window.location.origin + window.location.pathname,
 		},
 		targeting: {
-			alreadyVisitedCount,
 			shouldHideReaderRevenue,
 			isPaidContent,
 			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
@@ -156,7 +154,6 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	isSensitive,
 	tags,
 	contributionsServiceUrl,
-	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
@@ -183,14 +180,22 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 
 	const hasForceBannerParam = window.location.search.includes('force-banner');
 
-	if (
-		!showSignInPrompt &&
-		!hasForceBannerParam &&
-		engagementBannerLastClosedAt &&
-		subscriptionBannerLastClosedAt &&
-		withinLocalNoBannerCachePeriod()
-	) {
-		return { show: false };
+	if (!showSignInPrompt && !hasForceBannerParam) {
+		// Don't show a banner if one was closed recently. This is to improve user experience by not showing banners on consecutive pageviews
+		if (
+			recentlyClosedBanner(engagementBannerLastClosedAt) ||
+			recentlyClosedBanner(subscriptionBannerLastClosedAt)
+		) {
+			return { show: false };
+		}
+		// Don't ask the API for a banner again if it's recently told us not to show one. This is an optimisation to reduce traffic to the API
+		if (
+			engagementBannerLastClosedAt &&
+			subscriptionBannerLastClosedAt &&
+			withinLocalNoBannerCachePeriod()
+		) {
+			return { show: false };
+		}
 	}
 
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
@@ -205,7 +210,6 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		tags,
 		contributionsServiceUrl,
 		isSensitive,
-		alreadyVisitedCount,
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
 		signInBannerLastClosedAt,
@@ -245,7 +249,6 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	isSensitive,
 	tags,
 	contributionsServiceUrl,
-	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	asyncArticleCounts,
@@ -272,7 +275,6 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 			tags,
 			contributionsServiceUrl,
 			isSensitive,
-			alreadyVisitedCount,
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			optedOutOfArticleCount,

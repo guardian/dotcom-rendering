@@ -19,26 +19,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
 
-      - run: yarn --frozen-lockfile
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
 
-      - name: lint
+      - name: Lint
         run: yarn lint
         working-directory: apps-rendering
 
-      - name: test
+      - name: Test
         run: yarn test
         working-directory: apps-rendering
 
-      - name: compile client
+      - name: Compile client
         run: yarn build:client:prod
         working-directory: apps-rendering
 
-      - name: compile server
+      - name: Compile server
         run: yarn build:server:prod
         working-directory: apps-rendering

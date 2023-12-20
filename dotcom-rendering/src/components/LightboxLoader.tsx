@@ -24,10 +24,9 @@ const flash = keyframes`
  *
  * Pamplemouse? Pretty sure it was only called this to ensure the classnames were unique
  */
-export const LightboxLoader = ({ position }: { position: number }) => {
+export const LightboxLoader = () => {
 	return (
 		<div
-			id={`lightbox-loader-${position}`}
 			css={css`
 				width: 100%;
 				height: 100%;

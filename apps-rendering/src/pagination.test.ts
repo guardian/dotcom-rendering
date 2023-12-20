@@ -1,4 +1,4 @@
-import { none, some } from '@guardian/types';
+import { none, some } from '../vendor/@guardian/types/index';
 import { LiveBlock } from 'liveBlock';
 import { Optional } from 'optional';
 import { getPagedBlocks, Pagination, PageReference } from 'pagination';

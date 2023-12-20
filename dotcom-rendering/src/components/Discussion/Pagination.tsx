@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	border,
 	palette as sourcePalette,
 	space,
 	textSans,
@@ -11,6 +10,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
+import { palette as schemedPalette } from '../../palette';
 import type { FilterOptions } from '../../types/discussion';
 
 type Props = {
@@ -30,14 +30,16 @@ const pageButtonStyles = (isSelected: boolean) => css`
 	box-sizing: border-box;
 
 	color: ${isSelected
-		? sourcePalette.neutral[100]
-		: sourcePalette.neutral[46]};
-	background-color: ${isSelected ? sourcePalette.neutral[46] : 'transparent'};
+		? schemedPalette('--discussion-pagination-background')
+		: schemedPalette('--discussion-pagination-text')};
+	background-color: ${isSelected
+		? schemedPalette('--discussion-pagination-text')
+		: 'transparent'};
 	border: none;
 	:hover {
 		border-width: 0.0625rem;
 		border-style: solid;
-		border-color: ${sourcePalette.neutral[46]};
+		border-color: ${schemedPalette('--discussion-pagination-text')};
 	}
 
 	margin-right: 5px;
@@ -59,9 +61,8 @@ const chevronButtonStyles = ({ isSelected }: { isSelected: boolean }) => css`
 	border-style: solid;
 	border-color: ${sourcePalette.neutral[86]};
 	background-color: ${isSelected
-		? sourcePalette.neutral[46]
-		: sourcePalette.neutral[100]};
-
+		? schemedPalette('--discussion-pagination-text')
+		: schemedPalette('--discussion-pagination-background')};
 	height: 22px;
 	min-height: 22px;
 	width: 22px;
@@ -71,6 +72,7 @@ const chevronButtonStyles = ({ isSelected }: { isSelected: boolean }) => css`
 		height: 22px;
 		min-height: 22px;
 		width: 22px;
+		color: ${schemedPalette('--discussion-pagination-text')};
 	}
 
 	:hover {
@@ -79,8 +81,7 @@ const chevronButtonStyles = ({ isSelected }: { isSelected: boolean }) => css`
 
 	& svg {
 		/* Make the chevrons grey */
-		/* stylelint-disable-next-line declaration-no-important */
-		fill: ${sourcePalette.neutral[46]} !important;
+		fill: currentColor;
 		/* Set the dimensions */
 		width: 22px;
 		height: 22px;
@@ -102,7 +103,7 @@ const elipsisStyles = css`
 
 const wrapperStyles = css`
 	${textSans.small()};
-	color: ${sourcePalette.neutral[46]};
+	color: ${schemedPalette('--discussion-pagination-text')};
 
 	display: flex;
 	flex-direction: row;
@@ -110,7 +111,7 @@ const wrapperStyles = css`
 	width: 100%;
 	padding-top: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
-	border-top: 1px solid ${border.secondary};
+	border-top: 1px solid ${schemedPalette('--discussion-pagination-border')};
 	${until.mobileLandscape} {
 		flex-direction: column;
 	}

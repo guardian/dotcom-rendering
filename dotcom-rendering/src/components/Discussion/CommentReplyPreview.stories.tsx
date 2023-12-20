@@ -1,7 +1,14 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { CommentType } from '../../types/discussion';
 import { CommentReplyPreview, Preview } from './CommentReplyPreview';
+
+const defaultFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
 
 export default { title: 'Discussion/CommentReplyPreview' };
 
@@ -51,16 +58,10 @@ const padding = css`
 `;
 
 export const Default = () => (
-	<CommentReplyPreview
-		format={{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		}}
-		commentBeingRepliedTo={commentBeingRepliedTo}
-	/>
+	<CommentReplyPreview commentBeingRepliedTo={commentBeingRepliedTo} />
 );
 Default.storyName = 'default';
+Default.decorators = [splitTheme([defaultFormat])];
 
 export const SingleLinePreview = () => (
 	<div css={padding}>
@@ -75,6 +76,7 @@ export const SingleLinePreview = () => (
 	</div>
 );
 SingleLinePreview.storyName = 'Single line';
+SingleLinePreview.decorators = [splitTheme([defaultFormat])];
 
 export const SingleBlockPreview = () => (
 	<div css={padding}>
@@ -89,6 +91,7 @@ export const SingleBlockPreview = () => (
 	</div>
 );
 SingleBlockPreview.storyName = 'Single Block';
+SingleBlockPreview.decorators = [splitTheme([defaultFormat])];
 
 export const MultiBlockPreview = () => (
 	<div css={padding}>
@@ -103,3 +106,4 @@ export const MultiBlockPreview = () => (
 	</div>
 );
 MultiBlockPreview.storyName = 'Multi Block';
+MultiBlockPreview.decorators = [splitTheme([defaultFormat])];

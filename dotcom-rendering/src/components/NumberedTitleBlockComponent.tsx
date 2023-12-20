@@ -1,31 +1,32 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
-import { decideFormat } from '../lib/decideFormat';
 import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import type { Palette } from '../types/palette';
 
 type Props = {
 	position: number;
 	html: string;
-	format: FEFormat;
+	format: ArticleFormat;
 };
 
-const titleStyles = (palette: Palette) => css`
+const titleStyles = css`
 	h2 {
 		${headline.medium({ fontWeight: 'light' })}
+		color: ${themePalette('--numbered-list-heading')}
 	}
 
 	strong {
 		${headline.medium({ fontWeight: 'bold' })}
 		display: block;
-		color: ${palette.text.numberedTitle};
+		color: ${themePalette('--numbered-list-title')};
 	}
 `;
 
 const numberStyles = (palette: Palette) => css`
 	${headline.large({ fontWeight: 'bold' })}
 	font-size: 56px;
-	color: ${palette.text.numberedPosition};
+	color: ${themePalette('--numbered-list-number')};
 `;
 
 export const NumberedTitleBlockComponent = ({
@@ -33,7 +34,8 @@ export const NumberedTitleBlockComponent = ({
 	html,
 	format,
 }: Props) => {
-	const palette = decidePalette(decideFormat(format));
+	const palette = decidePalette(format);
+
 	return (
 		<div
 			css={css`
@@ -41,10 +43,7 @@ export const NumberedTitleBlockComponent = ({
 			`}
 		>
 			<div css={numberStyles(palette)}>{position}</div>
-			<div
-				css={titleStyles(palette)}
-				dangerouslySetInnerHTML={{ __html: html }}
-			/>
+			<div css={titleStyles} dangerouslySetInnerHTML={{ __html: html }} />
 		</div>
 	);
 };

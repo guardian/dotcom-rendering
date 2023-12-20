@@ -1,4 +1,4 @@
-import Int64 from 'node-int64';
+import { Int64 } from 'thrift';
 import { ContentType } from '@guardian/content-api-models/v1/contentType';
 import { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
@@ -8,7 +8,7 @@ import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind } from 'bodyElement';
-import { none, some } from '@guardian/types';
+import { none, some } from '../vendor/@guardian/types/index';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';

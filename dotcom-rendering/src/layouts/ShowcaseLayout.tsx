@@ -10,6 +10,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -18,6 +19,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
+import { Disclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -88,6 +90,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines  border  media       media'
 						'meta   border  media       media'
 						'meta   border  standfirst  right-column'
+						'meta   border  disclaimer  right-column'
 						'.      border  body        right-column'
 						'.      border  .           right-column';
 				}
@@ -99,6 +102,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines  border  media       media'
 						'meta   border  media       media'
 						'meta   border  standfirst  right-column'
+						'meta   border  disclaimer  right-column'
 						'.      border  body        right-column'
 						'.      border  .           right-column';
 				}
@@ -115,6 +119,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title      right-column'
 						'headline   right-column'
 						'standfirst right-column'
+						'disclaimer right-column'
 						'media      right-column'
 						'lines      right-column'
 						'meta       right-column'
@@ -129,6 +134,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title'
 						'headline'
 						'standfirst'
+						'disclaimer'
 						'media'
 						'lines'
 						'meta'
@@ -143,6 +149,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title'
 						'headline'
 						'standfirst'
+						'disclaimer'
 						'lines'
 						'meta'
 						'body';
@@ -380,13 +387,13 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										padSides={false}
 										showTopBorder={false}
 										borderColour={themePalette(
-											'--article-border-secondary',
+											'--article-border',
 										)}
 									>
 										<StraightLines
 											count={4}
 											color={themePalette(
-												'--article-border-secondary',
+												'--straight-lines',
 											)}
 											cssOverrides={css`
 												display: block;
@@ -474,16 +481,23 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
 				{isApps && (
-					<Island priority="critical">
-						<AdPortals />
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					element="article"
-					borderColour={themePalette('--article-border-secondary')}
+					borderColour={themePalette('--article-border')}
 				>
 					<ShowcaseGrid>
 						<GridItem area="media">
@@ -505,9 +519,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 							</div>
 						</GridItem>
@@ -522,7 +533,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border format={format} />
+							<Border />
 						</GridItem>
 						<GridItem area="headline">
 							<PositionHeadline design={format.design}>
@@ -546,14 +557,19 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
+						<GridItem area="disclaimer">
+							{!!article.affiliateLinksDisclaimer && (
+								<Disclaimer
+									html={article.affiliateLinksDisclaimer}
+								></Disclaimer>
+							)}
+						</GridItem>
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									<DecideLines
 										format={format}
-										color={themePalette(
-											'--article-border-secondary',
-										)}
+										color={themePalette('--straight-lines')}
 									/>
 								</div>
 							</div>
@@ -616,9 +632,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 								{showBodyEndSlot && (
 									<Island
@@ -649,14 +662,16 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											tags={article.tags}
 											renderAds={renderAds}
 											isLabs={isLabs}
+											articleEndSlot={
+												!!article.config.switches
+													.articleEndSlot
+											}
 										/>
 									</Island>
 								)}
 								<StraightLines
 									count={4}
-									color={themePalette(
-										'--article-border-secondary',
-									)}
+									color={themePalette('--straight-lines')}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -716,7 +731,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot
@@ -727,7 +742,11 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true}>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
@@ -774,6 +793,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						fullWidth={true}
 						sectionId="comments"
 						element="section"
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
@@ -802,6 +824,11 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
@@ -825,7 +852,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot

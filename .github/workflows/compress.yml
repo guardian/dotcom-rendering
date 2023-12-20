@@ -18,12 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: corepack enable
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
 
       - uses: preactjs/compressed-size-action@v2
         with:
@@ -41,3 +37,9 @@ jobs:
           # https://github.com/preactjs/compressed-size-action#customizing-the-list-of-files
           # The default hash digest is set to 20 chars in Webpack
           pattern: 'dotcom-rendering/dist/*.web.????????????????????.js'
+
+      # preactjs/compressed-size-action does its own checkout, so we need to
+      # checkout the repo again so that the 'Post Run' step
+      # for ./.github/actions/setup-node-env can find the local file.
+      # It's a bit wierd but it doesn't take long.
+      - uses: actions/checkout@v4

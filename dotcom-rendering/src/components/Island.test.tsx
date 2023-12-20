@@ -74,27 +74,6 @@ const Mock = () => <>🏝️</>;
 	</Island>
 );
 
-() => (
-	<Island
-		priority="enhancement"
-		defer={{ until: 'visible' }}
-		clientOnly={true}
-	>
-		<Mock />
-	</Island>
-);
-
-() => (
-	// @ts-expect-error -- until interaction must have server-rendered fallback
-	<Island
-		priority="enhancement"
-		defer={{ until: 'interaction' }}
-		clientOnly={true}
-	>
-		<Mock />
-	</Island>
-);
-
 // Jest tests
 
 describe('Island: server-side rendering', () => {
@@ -141,32 +120,14 @@ describe('Island: server-side rendering', () => {
 	test('CardCommentCount', () => {
 		expect(() =>
 			renderToString(
-				<CardCommentCount
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-					discussionApiUrl=""
-					discussionId=""
-				/>,
+				<CardCommentCount discussionApiUrl="" discussionId="" />,
 			),
 		).not.toThrow();
 	});
 
 	test('CommentCount', () => {
 		expect(() =>
-			renderToString(
-				<CommentCount
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-					discussionApiUrl=""
-					shortUrlId=""
-				/>,
-			),
+			renderToString(<CommentCount discussionApiUrl="" shortUrlId="" />),
 		).not.toThrow();
 	});
 
@@ -174,11 +135,6 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<DiscussionMeta
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					discussionApiUrl={''}
 					shortUrlId={''}
 					enableDiscussionSwitch={false}
@@ -447,8 +403,9 @@ describe('Island: server-side rendering', () => {
 						stage={''}
 						pageId={''}
 						keywordIds={''}
-						renderAds={false}
+						renderAds={true}
 						isLabs={false}
+						articleEndSlot={true}
 					/>
 				</ConfigProvider>,
 			),

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { ArticleDesign } from '@guardian/libs';
-import { OptionKind } from '@guardian/types';
+import { OptionKind } from '../vendor/@guardian/types/index';
 import { getPillarOrElseNews } from 'articleFormat';
 import type { Body, BodyElement, NewsletterSignUp } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';

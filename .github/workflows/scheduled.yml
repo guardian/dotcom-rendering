@@ -43,22 +43,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CAPI_KEY: ${{ secrets.CAPI_KEY }}
-
-      - run: corepack enable
-
-      # The peer dependencies script relies on `yarn`
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-
-      - name: DCR peer dependencies tracker
-        run: |
-          deno run \
-            --allow-read \
-            --allow-net \
-            --allow-env=HOME,GITHUB_TOKEN \
-            --allow-run=yarn,npm \
-            scripts/deno/peer-dependencies.ts
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

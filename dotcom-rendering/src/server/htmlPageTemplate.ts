@@ -1,12 +1,12 @@
-import { brandBackground, resets } from '@guardian/source-foundations';
+import { resets, palette as sourcePalette } from '@guardian/source-foundations';
 import he from 'he';
-import { islandNoscriptStyles } from '../components/Island';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
 import { getFontsCss } from '../lib/fonts-css';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import type { Guardian } from '../model/guardian';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { GIT_COMMIT_HASH } from './prout';
 
 type BaseProps = {
 	css: string;
@@ -197,6 +197,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 						? weAreHiringMessage
 						: '<!-- Hello there, HTML enthusiast! -->'
 				}
+
+				<!-- DCR commit hash ${GIT_COMMIT_HASH} -->
+
                 <title>${title}</title>
                 <meta name="description" content="${he.encode(description)}" />
 				${
@@ -214,7 +217,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 				}
                 ${
 					renderingTarget === 'Web'
-						? `<meta name="theme-color" content="${brandBackground.primary}" />`
+						? `<meta name="theme-color" content="${sourcePalette.brand[400]}" />`
 						: ``
 				}
 				<link rel="manifest" href="${ASSET_ORIGIN}static/frontend/manifest.json" />
@@ -361,8 +364,6 @@ https://workforus.theguardian.com/careers/product-engineering/
 							comscorekw: props.keywords,
 						},
 					).toString()}" />
-
-					${islandNoscriptStyles}
                 </noscript>
 				`
 						: ''
@@ -372,6 +373,16 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
+
+				${
+					/**
+					 * fontSize.css does not exist. The Android app intercepts this request
+					 * in order to support article scaling.
+					 */
+					renderingTarget === 'Apps'
+						? `<link rel="stylesheet" type="text/css" href="/fontSize.css">`
+						: ``
+				}
 
 			</head>
 

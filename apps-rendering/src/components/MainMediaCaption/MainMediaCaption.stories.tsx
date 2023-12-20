@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { some } from '@guardian/types';
+import { some } from '../../../vendor/@guardian/types/index';
 import { parseHtml } from 'fixtures/item';
 import type { FC } from 'react';
 import MainMediaCaption from '.';

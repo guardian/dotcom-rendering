@@ -6,25 +6,20 @@
 	"private": true,
 	"workspaces": {
 		"packages": [
+			"apps-rendering",
 			"dotcom-rendering"
-		],
-		"nohoist": [
-			"type-fest",
-			"**/@types/webpack",
-			"**/@types/react",
-			"**/@types/express-serve-static-core",
-			"**/@guardian/**"
 		]
 	},
 	"scripts": {
+		"preinstall": "./scripts/preinstall.mjs",
 		"postinstall": "./scripts/postinstall.sh",
 		"storybook": "npm-run-all --parallel storybook:*",
 		"storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook --no-open --quiet",
-		"storybook:ar": "cd apps-rendering && yarn storybook --no-open --quiet",
+		"storybook:ar": "yarn workspace apps-rendering storybook --no-open --quiet",
 		"build-storybook": "npm-run-all --parallel build-storybook:*",
-		"build-storybook:ar": "cd apps-rendering && yarn build-storybook",
+		"build-storybook:ar": "yarn workspace apps-rendering build-storybook",
 		"build-storybook:dcr": "yarn workspace @guardian/dotcom-rendering build-storybook",
-		"build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
+		"build:dcr": "yarn workspace @guardian/dotcom-rendering makeBuild",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky install",
 		"lint-staged": "lint-staged",
@@ -48,7 +43,8 @@
 		"tslib": "2.6.2"
 	},
 	"resolutions": {
-		"**/crypto-js": "4.2.0"
+		"crypto-js": "4.2.0",
+		"uuid": "9.0.1"
 	},
-	"packageManager": "yarn@1.22.19"
+	"packageManager": "yarn@4.0.2"
 }

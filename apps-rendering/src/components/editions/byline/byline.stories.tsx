@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { none, some } from '@guardian/types';
+import { none, some } from '../../../../vendor/@guardian/types/index';
 import { parse } from 'client/parser';
 import type { Contributor } from 'contributor';
 import {

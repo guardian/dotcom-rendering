@@ -49,7 +49,7 @@ test.describe('Paid content tests', () => {
 		// Wait for a request to Google Analytics to be made with the correct params
 		const gaRquestPromise = waitForGARequest(page);
 
-		await waitForIsland(page, 'Branding', { status: 'hydrated' });
+		await waitForIsland(page, 'Branding');
 
 		await expectToBeVisible(page, '[data-testid=branding-logo]');
 		await page.locator('[data-testid=branding-logo]').click();
@@ -73,7 +73,7 @@ test.describe('Paid content tests', () => {
 		// Wait for a request to Google Analytics to be made with the correct params
 		const gaRquestPromise = waitForGARequest(page);
 
-		await waitForIsland(page, 'OnwardsUpper', { status: 'hydrated' });
+		await waitForIsland(page, 'OnwardsUpper');
 
 		await expectToBeVisible(page, '[data-testid=card-branding-logo]');
 		await page.locator('[data-testid=card-branding-logo]').first().click();
