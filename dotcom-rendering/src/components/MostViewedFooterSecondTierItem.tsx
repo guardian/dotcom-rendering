@@ -1,15 +1,15 @@
 import { css } from '@emotion/react';
 import {
-	border,
 	from,
 	headline,
-	neutral,
-	text,
+	palette as sourcePalette,
 } from '@guardian/source-foundations';
+import { palette as themePalette } from '../palette';
 import type { TrailType } from '../types/trails';
 import { AgeWarning } from './AgeWarning';
 import { Avatar } from './Avatar';
 import { Flex } from './Flex';
+import { FormatBoundary } from './FormatBoundary';
 import { LinkHeadline } from './LinkHeadline';
 
 const itemStyles = (showRightBorder?: boolean) => css`
@@ -19,9 +19,10 @@ const itemStyles = (showRightBorder?: boolean) => css`
 	padding-right: 10px;
 	padding-bottom: 12px;
 
-	border-top: 1px solid ${border.secondary};
+	border-top: 1px solid ${sourcePalette.neutral[86]};
 	${from.tablet} {
-		border-right: ${showRightBorder && `1px solid ${border.secondary}`};
+		border-right: ${showRightBorder &&
+		`1px solid ${sourcePalette.neutral[86]}`};
 	}
 
 	min-height: 3.25rem;
@@ -34,7 +35,7 @@ const itemStyles = (showRightBorder?: boolean) => css`
 
 	&:hover,
 	:focus {
-		background: ${neutral[97]};
+		background: ${themePalette('--most-viewed-footer-hover')};
 	}
 `;
 
@@ -50,7 +51,7 @@ const headlineStyles = css`
 
 const headlineLink = css`
 	text-decoration: none;
-	color: ${text.anchorSecondary};
+	color: inherit;
 	font-weight: 500;
 	${headline.xxxsmall()};
 
@@ -106,34 +107,32 @@ export const MostViewedFooterSecondTierItem = ({
 				data-link-name={trail.dataLinkName}
 			>
 				<Flex>
-					<div css={headlineStyles}>
-						<div css={titleStyles}>{title}</div>
-						<LinkHeadline
-							headlineText={headlineText}
-							format={format}
-							size="small"
-							byline={showByline ? byline : undefined}
-						/>
+					<FormatBoundary format={format}>
+						<div css={headlineStyles}>
+							<div css={titleStyles}>{title}</div>
+							<LinkHeadline
+								headlineText={headlineText}
+								format={format}
+								size="small"
+								byline={showByline ? byline : undefined}
+							/>
 
-						{!!ageWarning && (
-							<div css={ageWarningStyles}>
-								<AgeWarning age={ageWarning} size="small" />
-							</div>
-						)}
-					</div>
-					<>
-						{!!avatarToShow && (
-							<div css={avatarContainerStyles}>
-								<div css={avatarSizeStyles}>
-									<Avatar
-										src={avatarToShow}
-										alt=""
-										format={format}
-									/>
+							{!!ageWarning && (
+								<div css={ageWarningStyles}>
+									<AgeWarning age={ageWarning} size="small" />
 								</div>
-							</div>
-						)}
-					</>
+							)}
+						</div>
+						<>
+							{!!avatarToShow && (
+								<div css={avatarContainerStyles}>
+									<div css={avatarSizeStyles}>
+										<Avatar src={avatarToShow} alt="" />
+									</div>
+								</div>
+							)}
+						</>
+					</FormatBoundary>
 				</Flex>
 			</a>
 		</div>

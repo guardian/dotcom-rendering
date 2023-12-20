@@ -1,20 +1,15 @@
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/source-foundations';
-import type {
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../../lib/useAuthStatus';
+import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
 import type { CommentType, UserProfile } from '../../types/discussion';
 import { TopPick } from './TopPick';
 
 type Props = {
-	format: ArticleFormat;
 	user?: UserProfile;
 	comments: CommentType[];
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
 	onPermalinkClick: (commentId: number) => void;
 	onRecommend?: (commentId: number) => Promise<boolean>;
-	isClosedForComments: boolean;
 };
 
 const columWrapperStyles = css`
@@ -51,13 +46,11 @@ const oneColCommentsStyles = css`
 `;
 
 export const TopPicks = ({
-	format,
 	user,
 	comments,
 	authStatus,
 	onPermalinkClick,
 	onRecommend,
-	isClosedForComments,
 }: Props) => {
 	const leftColComments: CommentType[] = [];
 	const rightColComments: CommentType[] = [];
@@ -72,7 +65,6 @@ export const TopPicks = ({
 					{leftColComments.map((comment) => (
 						<TopPick
 							key={comment.id}
-							format={format}
 							comment={comment}
 							authStatus={authStatus}
 							userMadeComment={
@@ -81,7 +73,6 @@ export const TopPicks = ({
 							}
 							onPermalinkClick={onPermalinkClick}
 							onRecommend={onRecommend}
-							isClosedForComments={isClosedForComments}
 						/>
 					))}
 				</div>
@@ -89,7 +80,6 @@ export const TopPicks = ({
 					{rightColComments.map((comment) => (
 						<TopPick
 							key={comment.id}
-							format={format}
 							comment={comment}
 							authStatus={authStatus}
 							userMadeComment={
@@ -98,7 +88,6 @@ export const TopPicks = ({
 							}
 							onPermalinkClick={onPermalinkClick}
 							onRecommend={onRecommend}
-							isClosedForComments={isClosedForComments}
 						/>
 					))}
 				</div>
@@ -107,7 +96,6 @@ export const TopPicks = ({
 				{comments.map((comment) => (
 					<TopPick
 						key={comment.id}
-						format={format}
 						comment={comment}
 						authStatus={authStatus}
 						userMadeComment={
@@ -115,7 +103,6 @@ export const TopPicks = ({
 						}
 						onPermalinkClick={onPermalinkClick}
 						onRecommend={onRecommend}
-						isClosedForComments={isClosedForComments}
 					/>
 				))}
 			</div>

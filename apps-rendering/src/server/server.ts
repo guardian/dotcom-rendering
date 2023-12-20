@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-import 'source-map-support/register'; // activating the source map support
 import path from 'path';
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
@@ -8,7 +7,7 @@ import type { RenderingRequest } from '@guardian/apps-rendering-api-models/rende
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import type { Option } from '@guardian/types';
+import type { Option } from '../../vendor/@guardian/types/index';
 import {
 	fromNullable,
 	map,
@@ -16,7 +15,7 @@ import {
 	OptionKind,
 	some,
 	withDefault,
-} from '@guardian/types';
+} from '../../vendor/@guardian/types/index';
 import {
 	capiEndpoint,
 	getMockCampaigns,
@@ -34,8 +33,6 @@ import { JSDOM } from 'jsdom';
 import { pipe, resultToNullable, toArray } from 'lib';
 import { logger } from 'logger';
 import { MainMediaKind } from 'mainMedia';
-import type { Response } from 'node-fetch';
-import fetch from 'node-fetch';
 import { parseRelatedContent } from 'relatedContent';
 import { Result } from 'result';
 import {
@@ -98,7 +95,7 @@ const capiRequest =
 const parseCapiResponse =
 	(articleId: string) =>
 	async (capiResponse: Response): CapiReturn => {
-		const buffer = await capiResponse.buffer();
+		const buffer = Buffer.from(await capiResponse.arrayBuffer());
 
 		switch (capiResponse.status) {
 			case 200: {

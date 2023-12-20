@@ -3,12 +3,16 @@ import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballT
 import type { Scorer } from '@guardian/apps-rendering-api-models/scorer';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import { fromNullable, map2, none, map as optMap, some } from '@guardian/types';
-import type { Option } from '@guardian/types';
+import {
+	fromNullable,
+	map2,
+	none,
+	map as optMap,
+	some,
+} from '../../vendor/@guardian/types/index';
+import type { Option } from '../../vendor/@guardian/types/index';
 import { padStart } from 'date';
 import { fold, pipe } from 'lib';
-import fetch from 'node-fetch';
-import type { Response } from 'node-fetch';
 import type { Parser } from 'parser';
 import {
 	arrayParser,
@@ -174,18 +178,21 @@ const getFootballContent = async (
 
 	const selectorId = map2(getFootballSelector)(date)(teams);
 
-	return fold(async (selectorIdValue: string) => {
-		const footballEndpoint = getFootballEndpoint(selectorIdValue);
+	return fold(
+		async (selectorIdValue: string) => {
+			const footballEndpoint = getFootballEndpoint(selectorIdValue);
 
-		const response = await fetch(footballEndpoint);
+			const response = await fetch(footballEndpoint);
 
-		const footballContent = await parseFootballResponse(
-			response,
-			selectorIdValue,
-		);
+			const footballContent = await parseFootballResponse(
+				response,
+				selectorIdValue,
+			);
 
-		return footballContent;
-	}, Promise.resolve(Result.err('Could not get selectorId')))(selectorId);
+			return footballContent;
+		},
+		Promise.resolve(Result.err('Could not get selectorId')),
+	)(selectorId);
 };
 
 export { getFootballContent };

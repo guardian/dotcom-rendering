@@ -1,21 +1,21 @@
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
-import { fromNullable } from '@guardian/types';
+import { fromNullable } from '../vendor/@guardian/types/index';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import { atomScript } from 'components/InteractiveAtom';
 import { isValidDate } from 'date';
-import type Int64 from 'node-int64';
+import type { Int64 } from 'thrift';
 import type { DocParser } from 'parserContext';
 import { Result } from 'result';
 
 interface TimelineEvent {
-    title: string;
-    date: string;
-    unixDate: number;
-    body?: string;
-    toDate?: string;
-    toUnixDate?: number;
+	title: string;
+	date: string;
+	unixDate: number;
+	body?: string;
+	toDate?: string;
+	toUnixDate?: number;
 }
 
 function formatOptionalDate(date: Int64 | undefined): string | undefined {

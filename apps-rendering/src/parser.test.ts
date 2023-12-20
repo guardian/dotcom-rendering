@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { none } from '@guardian/types';
+import { none } from '../vendor/@guardian/types/index';
 import { Result } from 'result';
 import {
 	maybe,

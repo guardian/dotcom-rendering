@@ -450,86 +450,7 @@
                                 "editionBrandings": {
                                     "type": "array",
                                     "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "edition": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "required": [
-                                                    "id"
-                                                ]
-                                            },
-                                            "branding": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "brandingType": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "name": {
-                                                                "type": "string"
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "name"
-                                                        ]
-                                                    },
-                                                    "sponsorName": {
-                                                        "type": "string"
-                                                    },
-                                                    "logo": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "src": {
-                                                                "type": "string"
-                                                            },
-                                                            "dimensions": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "width": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "height": {
-                                                                        "type": "number"
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "height",
-                                                                    "width"
-                                                                ]
-                                                            },
-                                                            "link": {
-                                                                "type": "string"
-                                                            },
-                                                            "label": {
-                                                                "type": "string"
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "dimensions",
-                                                            "label",
-                                                            "link",
-                                                            "src"
-                                                        ]
-                                                    },
-                                                    "aboutThisLink": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "required": [
-                                                    "aboutThisLink",
-                                                    "brandingType",
-                                                    "logo",
-                                                    "sponsorName"
-                                                ]
-                                            }
-                                        },
-                                        "required": [
-                                            "edition"
-                                        ]
+                                        "$ref": "#/definitions/EditionBranding"
                                     }
                                 },
                                 "editionAdTargetings": {},
@@ -790,6 +711,9 @@
                                                                                     "bio": {
                                                                                         "type": "string"
                                                                                     },
+                                                                                    "description": {
+                                                                                        "type": "string"
+                                                                                    },
                                                                                     "bylineImageUrl": {
                                                                                         "type": "string"
                                                                                     },
@@ -924,26 +848,7 @@
                                                 "editionBrandings": {
                                                     "type": "array",
                                                     "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "edition": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "id": {
-                                                                        "$ref": "#/definitions/EditionId"
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "id"
-                                                                ]
-                                                            },
-                                                            "branding": {
-                                                                "$ref": "#/definitions/Branding"
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "edition"
-                                                        ]
+                                                        "$ref": "#/definitions/EditionBranding"
                                                     }
                                                 },
                                                 "href": {
@@ -1519,6 +1424,9 @@
                                                                                     "bio": {
                                                                                         "type": "string"
                                                                                     },
+                                                                                    "description": {
+                                                                                        "type": "string"
+                                                                                    },
                                                                                     "bylineImageUrl": {
                                                                                         "type": "string"
                                                                                     },
@@ -1653,26 +1561,7 @@
                                                 "editionBrandings": {
                                                     "type": "array",
                                                     "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "edition": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "id": {
-                                                                        "$ref": "#/definitions/EditionId"
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "id"
-                                                                ]
-                                                            },
-                                                            "branding": {
-                                                                "$ref": "#/definitions/Branding"
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "edition"
-                                                        ]
+                                                        "$ref": "#/definitions/EditionBranding"
                                                     }
                                                 },
                                                 "href": {
@@ -2248,6 +2137,9 @@
                                                                                     "bio": {
                                                                                         "type": "string"
                                                                                     },
+                                                                                    "description": {
+                                                                                        "type": "string"
+                                                                                    },
                                                                                     "bylineImageUrl": {
                                                                                         "type": "string"
                                                                                     },
@@ -2382,26 +2274,7 @@
                                                 "editionBrandings": {
                                                     "type": "array",
                                                     "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "edition": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "id": {
-                                                                        "$ref": "#/definitions/EditionId"
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "id"
-                                                                ]
-                                                            },
-                                                            "branding": {
-                                                                "$ref": "#/definitions/Branding"
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "edition"
-                                                        ]
+                                                        "$ref": "#/definitions/EditionBranding"
                                                     }
                                                 },
                                                 "href": {
@@ -2897,6 +2770,167 @@
                 "seoData"
             ]
         },
+        "EditionBranding": {
+            "type": "object",
+            "properties": {
+                "edition": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "$ref": "#/definitions/EditionId"
+                        }
+                    },
+                    "required": [
+                        "id"
+                    ]
+                },
+                "branding": {
+                    "$ref": "#/definitions/Branding"
+                }
+            },
+            "required": [
+                "edition"
+            ]
+        },
+        "EditionId": {
+            "enum": [
+                "AU",
+                "EUR",
+                "INT",
+                "UK",
+                "US"
+            ],
+            "type": "string"
+        },
+        "Branding": {
+            "type": "object",
+            "properties": {
+                "brandingType": {
+                    "$ref": "#/definitions/BrandingType"
+                },
+                "sponsorName": {
+                    "type": "string"
+                },
+                "logo": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
+                },
+                "aboutThisLink": {
+                    "type": "string"
+                },
+                "logoForDarkBackground": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
+                }
+            },
+            "required": [
+                "aboutThisLink",
+                "logo",
+                "sponsorName"
+            ]
+        },
+        "BrandingType": {
+            "anyOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "const": "paid-content"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "const": "foundation"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "const": "sponsored"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                }
+            ]
+        },
         "FEDesign": {
             "enum": [
                 "AnalysisDesign",
@@ -3066,113 +3100,6 @@
                 "mediaType",
                 "mimeType",
                 "url"
-            ]
-        },
-        "EditionId": {
-            "enum": [
-                "AU",
-                "EUR",
-                "INT",
-                "UK",
-                "US"
-            ],
-            "type": "string"
-        },
-        "Branding": {
-            "type": "object",
-            "properties": {
-                "brandingType": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                "sponsorName": {
-                    "type": "string"
-                },
-                "logo": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
-                    ]
-                },
-                "aboutThisLink": {
-                    "type": "string"
-                },
-                "logoForDarkBackground": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
-                    ]
-                }
-            },
-            "required": [
-                "aboutThisLink",
-                "logo",
-                "sponsorName"
             ]
         },
         "FEFrontCardStyle": {

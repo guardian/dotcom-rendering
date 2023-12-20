@@ -7,8 +7,13 @@ import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { ArticleTheme } from '@guardian/libs';
 import { resets } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { map, none, some, withDefault } from '@guardian/types';
+import type { Option } from '../../vendor/@guardian/types/index';
+import {
+	map,
+	none,
+	some,
+	withDefault,
+} from '../../vendor/@guardian/types/index';
 import { getThirdPartyEmbeds } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import Layout from 'components/editions/layout';
@@ -24,7 +29,7 @@ import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import {
-	pageFonts as devFonts,
+	editionsDevFonts as devFonts,
 	editionsPreviewFonts as previewFonts,
 	editionsPageFonts as prodFonts,
 } from 'styles';
@@ -164,7 +169,10 @@ function render(
 	const path = res.req.path;
 	const isPreview = res.req.query.isPreview === 'true';
 	const environment = getEditionsEnv(isPreview, path);
-	const item = fromCapi({ docParser, salt: imageSalt })(request, none);
+	const item = fromCapi({ docParser, salt: imageSalt, app: 'Editions' })(
+		request,
+		none,
+	);
 
 	const newItem = {
 		...item,

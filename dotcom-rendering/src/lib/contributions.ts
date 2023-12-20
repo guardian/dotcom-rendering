@@ -1,14 +1,12 @@
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { DCRFrontType } from '../types/front';
 import type { DCRArticle } from '../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
-import { eitherInOktaTestOrElse } from './useAuthStatus';
-import { useOnce } from './useOnce';
-
+import { eitherInOktaTestOrElse } from './identity';
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
@@ -193,7 +191,7 @@ export const useHasOptedOutOfArticleCount = (): boolean | 'Pending' => {
 		'Pending',
 	);
 
-	useOnce(() => {
+	useEffect(() => {
 		hasOptedOutOfArticleCount()
 			.then(setHasOptedOut)
 			.catch(() => setHasOptedOut(true));
@@ -236,6 +234,18 @@ export const withinLocalNoBannerCachePeriod = (): boolean => {
 
 export const setLocalNoBannerCachePeriod = (): void =>
 	window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);
+
+// Returns true if banner was closed in the last hour
+const ONE_HOUR_IN_MS = 1000 * 60 * 60;
+export const recentlyClosedBanner = (
+	lastClosedAt?: string,
+	now = Date.now(),
+): boolean => {
+	if (lastClosedAt) {
+		return now - new Date(lastClosedAt).getTime() < ONE_HOUR_IN_MS;
+	}
+	return false;
+};
 
 const getEmail = async (ajaxUrl: string): Promise<string | undefined> =>
 	// TODO Okta: Remove either when at 100% in oktaVariant test, and just use idToken

@@ -13,8 +13,8 @@ import {
 	OptionKind,
 	some,
 	withDefault,
-} from '@guardian/types';
-import type { Option } from '@guardian/types';
+} from '../vendor/@guardian/types/index';
+import type { Option } from '../vendor/@guardian/types/index';
 import { getAdPlaceholderInserter } from 'ads';
 import { ElementKind } from 'bodyElement';
 import type {

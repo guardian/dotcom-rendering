@@ -1,102 +1,98 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { from, neutral } from '@guardian/source-foundations';
-import { decidePalette } from '../../../lib/decidePalette';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source-foundations';
+import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
-import type { Palette } from '../../../types/palette';
+import { ContainerOverrides } from '../../ContainerOverrides';
+import { FormatBoundary } from '../../FormatBoundary';
 
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
+	showTopBar?: boolean;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
+	isOnwardContent?: boolean;
 };
 
-const cardStyles = (
-	format: ArticleFormat,
-	palette: Palette,
-	isDynamo?: true,
-	containerPalette?: DCRContainerPalette,
-) => {
-	const baseCardStyles = css`
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		width: 100%;
-		/* We absolutely position the faux link
+const baseCardStyles = (isOnwardContent: boolean) => css`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	/* We absolutely position the faux link
 		so this is required here */
-		position: relative;
+	position: relative;
 
-		/* Target Safari 10.1 */
-		/* https://www.browserstack.com/guide/create-browser-specific-css */
-		@media not all and (min-resolution: 0.001dpcm) {
-			@supports (-webkit-appearance: none) and
-				(not (stroke-color: transparent)) {
-				display: grid;
-				grid-auto-rows: min-content;
-				align-content: start;
-			}
+	/* Target Safari 10.1 */
+	/* https://www.browserstack.com/guide/create-browser-specific-css */
+	@media not all and (min-resolution: 0.001dpcm) {
+		@supports (-webkit-appearance: none) and
+			(not (stroke-color: transparent)) {
+			display: grid;
+			grid-auto-rows: min-content;
+			align-content: start;
 		}
-
-		:hover .image-overlay {
-			position: absolute;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			left: 0;
-			background-color: ${neutral[7]};
-			opacity: 0.1;
-		}
-
-		/* a tag specific styles */
-		color: inherit;
-		text-decoration: none;
-		background-color: ${isDynamo ? 'transparent' : palette.background.card};
-	`;
-
-	const decidePaletteBrightness = (thePalette: DCRContainerPalette) => {
-		switch (thePalette) {
-			case 'EventPalette':
-				return `96%`;
-			case 'BreakingPalette':
-				return `85%`;
-			case 'EventAltPalette':
-				return `95%`;
-			case 'InvestigationPalette':
-				return `90%`;
-			case 'LongRunningPalette':
-				return `84%`;
-			case 'LongRunningAltPalette':
-				return `95%`;
-			case 'SombrePalette':
-				return `90%`;
-			case 'SombreAltPalette':
-				return `85%`;
-			case 'SpecialReportAltPalette':
-				return `95%`;
-			default:
-				return `90%`;
-		}
-	};
-	if (containerPalette) {
-		return css`
-			${baseCardStyles};
-			:hover {
-				filter: brightness(
-					${decidePaletteBrightness(containerPalette)}
-				);
-			}
-		`;
 	}
 
+	:hover .image-overlay {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		background-color: ${sourcePalette.neutral[7]};
+		opacity: 0.1;
+		border-radius: ${isOnwardContent ? space[2] : 0}px;
+	}
+
+	/* a tag specific styles */
+	color: inherit;
+	text-decoration: none;
+`;
+
+const decidePaletteBrightness = (thePalette: DCRContainerPalette) => {
+	switch (thePalette) {
+		case 'EventPalette':
+			return `96%`;
+		case 'BreakingPalette':
+			return `85%`;
+		case 'EventAltPalette':
+			return `95%`;
+		case 'InvestigationPalette':
+			return `90%`;
+		case 'LongRunningPalette':
+			return `84%`;
+		case 'LongRunningAltPalette':
+			return `95%`;
+		case 'SombrePalette':
+			return `90%`;
+		case 'SombreAltPalette':
+			return `85%`;
+		case 'SpecialReportAltPalette':
+			return `95%`;
+		default:
+			return `90%`;
+	}
+};
+
+const containerPaletteStyles = (containerPalette: DCRContainerPalette) => css`
+	:hover {
+		filter: brightness(${decidePaletteBrightness(containerPalette)});
+	}
+`;
+const hoverStyles = (format: ArticleFormat) => {
 	if (
 		format.theme === ArticleSpecial.SpecialReport ||
 		format.theme === ArticleSpecial.SpecialReportAlt
 	) {
 		return css`
-			${baseCardStyles};
 			:hover {
 				filter: brightness(90%);
 			}
@@ -104,51 +100,45 @@ const cardStyles = (
 	}
 
 	switch (format.design) {
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			return css`
-				${baseCardStyles};
-				:hover {
-					/* TODO: This colour is hard coded here because it does not yet
-                           exist in source-foundations. Once it's been added, please
-                           remove this. @siadcock is aware. */
-					/* stylelint-disable-next-line color-no-hex */
-					background-color: #fdf0e8;
-				}
-			`;
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.LiveBlog:
 			return css`
-				${baseCardStyles};
 				:hover {
 					filter: brightness(90%);
 				}
 			`;
 		default:
 			return css`
-				${baseCardStyles};
 				:hover {
-					background-color: ${neutral[93]};
+					background-color: ${palette('--card-background-hover')};
 				}
 			`;
 	}
 };
 
-const topBarStyles = ({
-	isDynamo,
-	palette,
-}: {
-	isDynamo?: true;
-	palette: Palette;
-}) => {
+const cardStyles = css`
+	background-color: ${palette('--card-background')};
+`;
+
+const onwardContentCardStyles = css`
+	background-color: ${palette('--onward-content-card-background')};
+	border-radius: ${space[2]}px;
+`;
+
+const onwardContentHoverStyles = css`
+	:hover {
+		background-color: ${palette('--onward-content-card-hover')};
+	}
+`;
+
+const topBarStyles = ({ isDynamo }: { isDynamo?: true }) => {
 	/* Styling for top bar */
 	const baseStyles = css`
 		background-color: ${isDynamo
-			? palette.text.dynamoKicker
-			: palette.topBar.card};
+			? palette('--card-kicker-text')
+			: palette('--card-border-top')};
 		content: '';
 		height: 1px;
 		z-index: 2;
@@ -177,16 +167,30 @@ export const CardWrapper = ({
 	format,
 	containerPalette,
 	isDynamo,
+	showTopBar = true,
+	isOnwardContent = false,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
 	return (
-		<div
-			css={[
-				cardStyles(format, palette, isDynamo, containerPalette),
-				topBarStyles({ isDynamo, palette }),
-			]}
-		>
-			{children}
-		</div>
+		<FormatBoundary format={format}>
+			<ContainerOverrides
+				containerPalette={containerPalette}
+				isDynamo={!!isDynamo}
+			>
+				<div
+					css={[
+						baseCardStyles(isOnwardContent),
+						containerPalette &&
+							containerPaletteStyles(containerPalette),
+						isOnwardContent ? onwardContentCardStyles : cardStyles,
+						isOnwardContent
+							? onwardContentHoverStyles
+							: hoverStyles(format),
+						showTopBar && topBarStyles({ isDynamo }),
+					]}
+				>
+					{children}
+				</div>
+			</ContainerOverrides>
+		</FormatBoundary>
 	);
 };

@@ -1,13 +1,8 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	palette,
-	remSpace,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { remSpace, textSans, until } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { forwardRef } from 'react';
+import { palette } from '../palette';
 
 // Exported for Storybook use
 export interface Props {
@@ -16,37 +11,19 @@ export interface Props {
 }
 
 const adHeightPx = 258;
-const wideContentWidthPx = 620;
 
 const styles = css`
 	clear: both;
 	margin: ${remSpace[4]} 0;
-	color: ${palette.neutral[20]};
-	background: ${palette.neutral[97]};
-
-	${from.desktop} {
-		position: absolute;
-		margin-left: calc(${wideContentWidthPx}px + ${remSpace[4]});
-		min-width: 300px;
-		margin-bottom: ${remSpace[6]};
-	}
+	background: ${palette('--ad-background')};
 
 	${until.phablet} {
-		margin: 1em -${remSpace[3]};
-	}
-`;
-
-const firstAdSlotStyles = css`
-	/** This is mainly for iPad users, so that the ad sits directly
-	 * under the "Most viewed" onwards section on the right */
-	${from.desktop} {
-		top: 0;
+		margin: 1em 0px;
 	}
 `;
 
 const adLabelsStyles = css`
 	${textSans.xsmall()}
-	color: ${palette.neutral[46]};
 	padding: ${remSpace[3]};
 	float: left;
 
@@ -58,6 +35,7 @@ const adLabelsStyles = css`
 		float: left;
 		font-size: 16px;
 		font-weight: 400;
+		color: ${palette('--ad-labels-text')};
 	}
 `;
 
@@ -70,24 +48,26 @@ const adSlotSquareStyles = css`
 	${adSlotStyles}
 	height: 344px;
 	width: 320px;
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: 10px;
+	margin-right: 10px;
 	padding-bottom: 0;
 `;
 
 const supportBannerStyles = css`
-	padding: ${remSpace[3]};
-	background-color: ${palette.neutral[93]};
+	padding: ${remSpace[2]};
+	background-color: ${palette('--ad-support-banner-background')};
 
 	p {
 		${textSans.small()};
-		color: ${palette.brand[400]};
+		color: ${palette('--ad-support-banner-text')};
 		font-weight: bold;
 		margin-top: 0;
 	}
 
 	button {
 		margin-top: ${remSpace[2]};
+		color: ${palette('--ad-support-banner-button-text')};
+		background-color: ${palette('--ad-support-banner-button-background')};
 	}
 `;
 
@@ -120,7 +100,7 @@ const SupportBanner = ({
  */
 export const AdSlot = forwardRef<HTMLDivElement, Props>(
 	({ isFirstAdSlot, onClickSupportButton }, ref) => (
-		<aside css={[styles, isFirstAdSlot && firstAdSlotStyles]}>
+		<aside css={styles}>
 			<div css={adLabelsStyles}>
 				<p>Advertisement</p>
 			</div>

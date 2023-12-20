@@ -10,16 +10,16 @@ import {
 	SvgSpinner,
 } from '@guardian/source-react-components';
 import type { ReactEventHandler } from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
-import {
-	getOphanRecordFunction,
-	submitComponentEvent,
-} from '../client/ophan/ophan';
-import { isServer } from '../lib/isServer';
+import { submitComponentEvent } from '../client/ophan/ophan';
+import { useHydrated } from '../lib/useHydrated';
+import type { RenderingTarget } from '../types/renderingTarget';
+import { useConfig } from './ConfigContext';
+import { Placeholder } from './Placeholder';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
@@ -126,9 +126,8 @@ type EventDescription =
 const sendTracking = (
 	newsletterId: string,
 	eventDescription: EventDescription,
+	renderingTarget: RenderingTarget,
 ): void => {
-	const ophanRecord = getOphanRecordFunction();
-
 	let action: OphanAction = 'CLICK';
 
 	switch (eventDescription) {
@@ -164,7 +163,7 @@ const sendTracking = (
 		timestamp: Date.now(),
 	});
 
-	submitComponentEvent(
+	void submitComponentEvent(
 		{
 			action,
 			value,
@@ -173,7 +172,7 @@ const sendTracking = (
 				id: `DCR SecureSignupIframe ${newsletterId}`,
 			},
 		},
-		ophanRecord,
+		renderingTarget,
 	);
 };
 
@@ -198,6 +197,7 @@ export const SecureSignupIframe = ({
 }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
+	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
 
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
@@ -208,6 +208,14 @@ export const SecureSignupIframe = ({
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
+	useEffect(() => {
+		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
+	}, []);
+
+	const { renderingTarget } = useConfig();
+
+	const hydrated = useHydrated();
+	if (!hydrated) return <Placeholder height={65} />;
 
 	const hasResponse = typeof responseOk === 'boolean';
 
@@ -218,7 +226,7 @@ export const SecureSignupIframe = ({
 			null;
 		const emailAddress: string = input?.value ?? '';
 
-		sendTracking(newsletterId, 'form-submission');
+		sendTracking(newsletterId, 'form-submission', renderingTarget);
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
 			buildFormData(emailAddress, newsletterId, token),
@@ -234,6 +242,7 @@ export const SecureSignupIframe = ({
 		sendTracking(
 			newsletterId,
 			response.ok ? 'submission-confirmed' : 'submission-failed',
+			renderingTarget,
 		);
 	};
 
@@ -244,22 +253,22 @@ export const SecureSignupIframe = ({
 	};
 
 	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = () => {
-		sendTracking(newsletterId, 'captcha-load-error');
+		sendTracking(newsletterId, 'captcha-load-error', renderingTarget);
 		setErrorMessage(`Sorry, the reCAPTCHA failed to load.`);
 		recaptchaRef.current?.reset();
 	};
 
 	const handleCaptchaComplete = (token: string | null) => {
 		if (!token) {
-			sendTracking(newsletterId, 'captcha-not-passed');
+			sendTracking(newsletterId, 'captcha-not-passed', renderingTarget);
 			return;
 		}
-		sendTracking(newsletterId, 'captcha-passed');
+		sendTracking(newsletterId, 'captcha-passed', renderingTarget);
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
 			// eslint-disable-next-line no-console -- unexpected error
 			console.error(error);
-			sendTracking(newsletterId, 'form-submit-error');
+			sendTracking(newsletterId, 'form-submit-error', renderingTarget);
 			setErrorMessage(`Sorry, there was an error signing you up.`);
 			setIsWaitingForResponse(false);
 		});
@@ -285,7 +294,7 @@ export const SecureSignupIframe = ({
 	};
 
 	const handleClickInIFrame = (): void => {
-		sendTracking(newsletterId, 'click-button');
+		sendTracking(newsletterId, 'click-button', renderingTarget);
 	};
 
 	const handleSubmitInIFrame = (event: Event): void => {
@@ -294,7 +303,7 @@ export const SecureSignupIframe = ({
 			return;
 		}
 		setErrorMessage(undefined);
-		sendTracking(newsletterId, 'open-captcha');
+		sendTracking(newsletterId, 'open-captcha', renderingTarget);
 		recaptchaRef.current?.execute();
 	};
 
@@ -342,10 +351,6 @@ export const SecureSignupIframe = ({
 		attachListenersToIframe();
 		addFontsToIframe(['GuardianTextSans']);
 	};
-
-	const captchaSiteKey = isServer
-		? undefined
-		: window.guardian.config.page.googleRecaptchaSiteKey;
 
 	return (
 		<>

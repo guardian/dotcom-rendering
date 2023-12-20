@@ -1,5 +1,6 @@
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
+import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { FEArticleBadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
@@ -19,6 +20,7 @@ import type { FETrailType } from './trails';
 export interface FEArticleType {
 	headline: string;
 	standfirst: string;
+	affiliateLinksDisclaimer?: string;
 	webTitle: string;
 	mainMediaElements: FEElement[];
 	main: string;
@@ -124,6 +126,7 @@ export interface FEArticleType {
  */
 export type DCRArticle = FEArticleType & {
 	imagesForLightbox?: ImageForLightbox[];
+	imagesForAppsLightbox: ImageForAppsLightbox[];
 	tableOfContents?: TableOfContentsItem[];
 };
 

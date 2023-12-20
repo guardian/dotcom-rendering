@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import type { SignedInWithCookies } from '../../lib/useAuthStatus';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import type { SignedInWithCookies } from '../../lib/identity';
 import type { CommentType } from '../../types/discussion';
 import { TopPicks } from './TopPicks';
 
@@ -59,21 +60,16 @@ const signedInStatus: SignedInWithCookies = { kind: 'SignedInWithCookies' };
 
 export const SingleComment = () => (
 	<TopPicks
-		format={format}
 		comments={[commentWithShortBody]}
 		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
-		isClosedForComments={false}
 	/>
 );
 SingleComment.storyName = 'Single Comment';
+SingleComment.decorators = [splitTheme([format], { orientation: 'vertical' })];
 
-export const MulitColumn = () => (
+export const MultiColumn = () => (
 	<TopPicks
-		format={{
-			...format,
-			theme: Pillar.Culture,
-		}}
 		comments={[
 			commentWithLongBody,
 			commentWithShortBody,
@@ -82,17 +78,23 @@ export const MulitColumn = () => (
 		]}
 		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
-		isClosedForComments={false}
 	/>
 );
-MulitColumn.storyName = 'Mulitple Columns Comments';
+MultiColumn.storyName = 'Multiple Columns Comments';
+MultiColumn.decorators = [
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Culture,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
 export const SingleColumn = () => (
 	<TopPicks
-		format={{
-			...format,
-			theme: Pillar.Sport,
-		}}
 		comments={[
 			commentWithLongBody,
 			commentWithShortBody,
@@ -101,7 +103,6 @@ export const SingleColumn = () => (
 		]}
 		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
-		isClosedForComments={false}
 	/>
 );
 SingleColumn.storyName = 'Single Column Comments';
@@ -110,3 +111,14 @@ SingleColumn.story = {
 		viewport: { defaultViewport: 'phablet' },
 	},
 };
+SingleColumn.decorators = [
+	splitTheme(
+		[
+			{
+				...format,
+				theme: Pillar.Sport,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];

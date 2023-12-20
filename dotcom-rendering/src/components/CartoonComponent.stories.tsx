@@ -3,6 +3,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { CartoonComponent } from './CartoonComponent';
 import {
 	cartoon,
+	cartoonWithNoMobileImages,
 	cartoonWithoutCreditOrCaption,
 } from './CartoonComponent.mocks';
 import { Figure } from './Figure';
@@ -89,3 +90,29 @@ export const CartoonWithoutCredit = () => {
 	);
 };
 CartoonWithoutCredit.storyName = 'with no credit or caption';
+
+export const CartoonWithNoMobileImages = () => {
+	return (
+		<Wrapper>
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				}}
+				isMainMedia={false}
+				role="inline"
+			>
+				<CartoonComponent
+					element={cartoonWithNoMobileImages}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+				/>
+			</Figure>
+		</Wrapper>
+	);
+};
+CartoonWithNoMobileImages.storyName = 'with no mobile images';

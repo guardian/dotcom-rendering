@@ -19,6 +19,70 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/27/itv-grand-slammers-review-england-rugby-legends-world-cup',
+			linkText:
+				'Grand Slammers review – can prisoners help turn things round for dejected England rugby legends?',
+			showByline: false,
+			byline: 'Jack Seale',
+			masterImage:
+				'https://media.guim.co.uk/4aea539eaa687847960bb123b5a0e79aa9e3a877/0_550_8256_4954/master/8256.jpg',
+			image: 'https://i.guim.co.uk/img/media/4aea539eaa687847960bb123b5a0e79aa9e3a877/0_550_8256_4954/master/8256.jpg?width=300&quality=85&auto=format&fit=max&s=57dc7eaff0fb434afa388d457e3413b0',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/4aea539eaa687847960bb123b5a0e79aa9e3a877/0_550_8256_4954/master/8256.jpg?width=300&quality=85&auto=format&fit=max&s=57dc7eaff0fb434afa388d457e3413b0',
+				'460': 'https://i.guim.co.uk/img/media/4aea539eaa687847960bb123b5a0e79aa9e3a877/0_550_8256_4954/master/8256.jpg?width=460&quality=85&auto=format&fit=max&s=7506dd79b2c91720e5b758965eb46cab',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-09-27T21:30:09.000Z',
+			headline:
+				'Grand Slammers review – can prisoners help turn things round for dejected England rugby legends?',
+			shortUrl: 'https://www.theguardian.com/p/pxk85',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/pxk85',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/27/moulin-rouge-yes-we-can-can-review-theres-zero-glamour-in-this-high-kicking-tale',
+			linkText:
+				'Moulin Rouge: Yes We Can-Can! review – there’s zero glamour in this high-kicking tale',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/49dbc03da25c9e5b80560bcfbba1ebb7e727913e/0_76_4280_2568/master/4280.jpg',
+			image: 'https://i.guim.co.uk/img/media/49dbc03da25c9e5b80560bcfbba1ebb7e727913e/0_76_4280_2568/master/4280.jpg?width=300&quality=85&auto=format&fit=max&s=c3d77368e1157df0d76735e692600cb9',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/49dbc03da25c9e5b80560bcfbba1ebb7e727913e/0_76_4280_2568/master/4280.jpg?width=300&quality=85&auto=format&fit=max&s=c3d77368e1157df0d76735e692600cb9',
+				'460': 'https://i.guim.co.uk/img/media/49dbc03da25c9e5b80560bcfbba1ebb7e727913e/0_76_4280_2568/master/4280.jpg?width=460&quality=85&auto=format&fit=max&s=389e0ee6a02e474d6b73a4bae7e576ce',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-09-27T21:30:09.000Z',
+			headline:
+				'Moulin Rouge: Yes We Can-Can! review – there’s zero glamour in this high-kicking tale',
+			shortUrl: 'https://www.theguardian.com/p/pxkbm',
+			starRating: 2,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/pxkbm',
+			},
+		},
+		{
 			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/26/the-great-british-bake-off-2023-review',
 			linkText:
 				'The Great British Bake Off review – Alison Hammond’s sheer joy has reinvigorated this show',
@@ -206,7 +270,7 @@ export const series = {
 			starRating: 5,
 			discussion: {
 				isCommentable: true,
-				isClosedForComments: false,
+				isClosedForComments: true,
 				discussionId: '/p/pvyyq',
 			},
 		},
@@ -272,70 +336,6 @@ export const series = {
 				isCommentable: false,
 				isClosedForComments: true,
 				discussionId: '/p/pvpkq',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/22/american-horror-story-delicate-tv-review-kim-kardashian-ryan-murphy',
-			linkText:
-				'American Horror Story: Delicate review – Kim Kardashian is scarily not bad',
-			showByline: false,
-			byline: 'Benjamin Lee',
-			masterImage:
-				'https://media.guim.co.uk/16ae6631d4a55be13a7b987b07d8ff100aed7d0a/80_0_2920_1752/master/2920.jpg',
-			image: 'https://i.guim.co.uk/img/media/16ae6631d4a55be13a7b987b07d8ff100aed7d0a/80_0_2920_1752/master/2920.jpg?width=300&quality=85&auto=format&fit=max&s=a93deca43f5ac9886e4f30e4ef93a333',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/16ae6631d4a55be13a7b987b07d8ff100aed7d0a/80_0_2920_1752/master/2920.jpg?width=300&quality=85&auto=format&fit=max&s=a93deca43f5ac9886e4f30e4ef93a333',
-				'460': 'https://i.guim.co.uk/img/media/16ae6631d4a55be13a7b987b07d8ff100aed7d0a/80_0_2920_1752/master/2920.jpg?width=460&quality=85&auto=format&fit=max&s=e5a53ce2a685b559b5188c43f5cde67d',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-09-22T13:45:27.000Z',
-			headline:
-				'American Horror Story: Delicate review – Kim Kardashian is scarily not bad',
-			shortUrl: 'https://www.theguardian.com/p/pvmgn',
-			starRating: 3,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/pvmgn',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/sep/22/still-up-review-this-insomnia-romcom-is-well-worth-sticking-with',
-			linkText:
-				'Still Up review – this insomnia romcom is well worth sticking with',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/befadd3f2cad9254d82decf5d7ce50e63435c8bf/0_197_5930_3560/master/5930.jpg',
-			image: 'https://i.guim.co.uk/img/media/befadd3f2cad9254d82decf5d7ce50e63435c8bf/0_197_5930_3560/master/5930.jpg?width=300&quality=85&auto=format&fit=max&s=6a41c5e17c66eb2bd3a3b9f486e72b4b',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/befadd3f2cad9254d82decf5d7ce50e63435c8bf/0_197_5930_3560/master/5930.jpg?width=300&quality=85&auto=format&fit=max&s=6a41c5e17c66eb2bd3a3b9f486e72b4b',
-				'460': 'https://i.guim.co.uk/img/media/befadd3f2cad9254d82decf5d7ce50e63435c8bf/0_197_5930_3560/master/5930.jpg?width=460&quality=85&auto=format&fit=max&s=e997f18ceb2b151709ebda728208e38d',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-09-22T07:00:12.000Z',
-			headline:
-				'Still Up review – this insomnia romcom is well worth sticking with',
-			shortUrl: 'https://www.theguardian.com/p/pvkzd',
-			starRating: 3,
-			discussion: {
-				isCommentable: true,
-				isClosedForComments: true,
-				discussionId: '/p/pvkzd',
 			},
 		},
 	],

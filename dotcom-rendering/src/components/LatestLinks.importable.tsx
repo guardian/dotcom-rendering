@@ -1,9 +1,4 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	type ArticleFormat,
-	timeAgo as timeAgoHasAWeirdInterface,
-} from '@guardian/libs';
 import {
 	lineHeights,
 	palette,
@@ -11,32 +6,20 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { decidePalette } from '../lib/decidePalette';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
+import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
+import { ContainerOverrides } from './ContainerOverrides';
+import { RelativeTime } from './RelativeTime.importable';
 
 type Props = {
 	id: string;
-	format: ArticleFormat;
 	direction: 'horizontal' | 'vertical';
 	isDynamo?: true;
 	containerPalette?: DCRContainerPalette;
 };
-
-const timeAgo = (epoch: number) => {
-	const value = timeAgoHasAWeirdInterface(epoch);
-
-	if (typeof value === 'string' && value !== '') return value;
-	else return undefined;
-};
-
-const style = css`
-	display: flex;
-	gap: 5px;
-	padding-bottom: ${space[2]}px;
-`;
 
 const horizontal = css`
 	flex-direction: row;
@@ -75,25 +58,6 @@ const transparent = css`
 	color: transparent;
 `;
 
-const Time = ({
-	epoch,
-	colour,
-}: {
-	epoch: number;
-	colour: SerializedStyles;
-}) => (
-	<>
-		<time
-			dateTime={new Date(epoch).toISOString()}
-			data-relativeformat="med"
-			css={[bold, colour]}
-		>
-			{timeAgo(epoch)}
-		</time>
-		<br />
-	</>
-);
-
 const THREE_LINES_AS_CHARACTERS = 75;
 
 /**
@@ -124,7 +88,6 @@ const extractAboutThreeLines = (text: string) =>
  */
 export const LatestLinks = ({
 	id,
-	format,
 	direction,
 	isDynamo,
 	containerPalette,
@@ -141,73 +104,84 @@ export const LatestLinks = ({
 		refreshInterval: 9_600,
 	});
 
-	const { text } = decidePalette(format, containerPalette);
-	const kickerColour = isDynamo ? text.dynamoKicker : text.cardKicker;
-
-	const colour = css`
-		color: ${kickerColour};
-	`;
-
 	const dividerColour = css`
 		color: ${containerPalette
 			? decideContainerOverrides(containerPalette).border.container
 			: palette.neutral[86]};
 	`;
 
-	const li = [
-		linkStyles,
-		isDynamo
-			? css`
-					max-height: calc(5px + 4 * ${lineHeights.regular}em);
-			  `
-			: css`
-					max-height: calc(4 * ${lineHeights.regular}em);
-			  `,
-	];
+	const height = isDynamo
+		? `calc(5px + 4 * ${lineHeights.regular}em)`
+		: `calc(4 * ${lineHeights.regular}em)`;
+
+	const ulStyle = css`
+		display: flex;
+		gap: 5px;
+		padding-bottom: ${space[2]}px;
+		box-sizing: border-box;
+		height: ${height};
+	`;
 
 	return (
 		<ul
 			css={[
-				style,
+				ulStyle,
 				revealStyles,
 				isDynamo || direction === 'horizontal' ? horizontal : vertical,
 				css`
-					color: ${text.cardHeadline};
+					color: ${themePalette('--card-headline-trail-text')};
 				`,
 			]}
 		>
 			{data && data.blocks.length >= 3 ? (
 				data.blocks.slice(0, 3).map((block, index) => (
 					<>
-						{index > 0 && (
+						<ContainerOverrides
+							containerPalette={containerPalette}
+							isDynamo={!!isDynamo}
+						>
+							{index > 0 && (
+								<li
+									key={block.id + ' : divider'}
+									css={[dividerStyles, dividerColour]}
+								></li>
+							)}
 							<li
-								key={block.id + ' : divider'}
-								css={[dividerStyles, dividerColour]}
-							></li>
-						)}
-						<li key={block.id} css={li} className={'reveal'}>
-							<WithLink
-								linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
-								isDynamo={isDynamo}
+								key={block.id}
+								css={linkStyles}
+								className={'reveal'}
 							>
-								<Time
-									epoch={block.publishedDateTime}
-									colour={colour}
-								/>
-								<span className="show-underline">
-									{extractAboutThreeLines(block.body)}
-								</span>
-							</WithLink>
-						</li>
+								<WithLink
+									linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
+									isDynamo={isDynamo}
+								>
+									<div
+										css={bold}
+										style={{
+											color: themePalette(
+												'--card-kicker-text',
+											),
+										}}
+									>
+										<RelativeTime
+											then={block.publishedDateTime}
+										/>
+									</div>
+									<span className="show-underline">
+										{extractAboutThreeLines(block.body)}
+									</span>
+								</WithLink>
+							</li>
+						</ContainerOverrides>
 					</>
 				))
 			) : (
 				<>
-					<li css={li} />
+					<li css={linkStyles} />
 					<li css={[dividerStyles, transparent]} />
-					<li css={li} />
+					<li css={linkStyles} />
 					<li css={[dividerStyles, transparent]} />
-					<li css={li} />
+					<li css={linkStyles} />
 				</>
 			)}
 		</ul>

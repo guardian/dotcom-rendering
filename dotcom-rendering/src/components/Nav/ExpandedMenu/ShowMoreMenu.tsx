@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	brandAlt,
 	brandText,
 	from,
 	headline,
+	palette as sourcePalette,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgChevronDownSingle } from '@guardian/source-react-components';
@@ -61,7 +61,7 @@ const openExpandedMenuStyles = (isImmersive: boolean) => css`
 
 	:hover,
 	:focus {
-		color: ${brandAlt[400]};
+		color: ${sourcePalette.brandAlt[400]};
 		svg {
 			transform: translateY(2px);
 		}
@@ -88,7 +88,7 @@ export const ShowMoreMenu = ({
 			tabIndex={0}
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 			role="button"
-			data-cy="nav-show-more-button"
+			data-testid="nav-show-more-button"
 		>
 			<span css={screenReadable}>Show</span>
 			<span css={showMoreTextStyles}>

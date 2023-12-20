@@ -1,12 +1,12 @@
-import { brandBackground, resets } from '@guardian/source-foundations';
+import { resets, palette as sourcePalette } from '@guardian/source-foundations';
 import he from 'he';
-import { islandNoscriptStyles } from '../components/Island';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
 import { getFontsCss } from '../lib/fonts-css';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import type { Guardian } from '../model/guardian';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { GIT_COMMIT_HASH } from './prout';
 
 type BaseProps = {
 	css: string;
@@ -197,6 +197,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 						? weAreHiringMessage
 						: '<!-- Hello there, HTML enthusiast! -->'
 				}
+
+				<!-- DCR commit hash ${GIT_COMMIT_HASH} -->
+
                 <title>${title}</title>
                 <meta name="description" content="${he.encode(description)}" />
 				${
@@ -205,11 +208,16 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: '<!-- no canonical URL -->'
 				}
                 <meta charset="utf-8">
-
-                <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+				${
+					renderingTarget === 'Web'
+						? `<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">`
+						: // We want to disable the pinch-to-zoom in DCAR because
+						  // it interferes with the Android app's article navigation gestures.
+						  `<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">`
+				}
                 ${
 					renderingTarget === 'Web'
-						? `<meta name="theme-color" content="${brandBackground.primary}" />`
+						? `<meta name="theme-color" content="${sourcePalette.brand[400]}" />`
 						: ``
 				}
 				<link rel="manifest" href="${ASSET_ORIGIN}static/frontend/manifest.json" />
@@ -289,7 +297,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                     function guardianPolyfilled() {
                         window.guardian.polyfilled = true;
                         if (window.guardian.mustardCut === false) {
-                            window.guardian.queue.forEach(function(startup) { startup() })
+                            window.guardian.queue.forEach(function(callback) { callback() })
                         }
                     }
 
@@ -356,8 +364,6 @@ https://workforus.theguardian.com/careers/product-engineering/
 							comscorekw: props.keywords,
 						},
 					).toString()}" />
-
-					${islandNoscriptStyles}
                 </noscript>
 				`
 						: ''
@@ -367,6 +373,16 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
+
+				${
+					/**
+					 * fontSize.css does not exist. The Android app intercepts this request
+					 * in order to support article scaling.
+					 */
+					renderingTarget === 'Apps'
+						? `<link rel="stylesheet" type="text/css" href="/fontSize.css">`
+						: ``
+				}
 
 			</head>
 

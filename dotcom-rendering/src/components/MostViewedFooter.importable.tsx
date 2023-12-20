@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
-import { border, from } from '@guardian/source-foundations';
+import { from, palette as sourcePalette } from '@guardian/source-foundations';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
@@ -26,8 +26,8 @@ const stackBelow = (breakpoint: Breakpoint) => css`
 `;
 
 const secondTierStyles = css`
-	border-left: 1px solid ${border.secondary};
-	border-right: 1px solid ${border.secondary};
+	border-left: 1px solid ${sourcePalette.neutral[86]};
+	border-right: 1px solid ${sourcePalette.neutral[86]};
 
 	${from.tablet} {
 		padding-top: 24px;
@@ -60,9 +60,9 @@ export const MostViewedFooter = ({
 			css={css`
 				width: 100%;
 			`}
-			data-cy="mostviewed-footer"
-			data-cy-ab-user-in-variant={abTestCypressDataAttr}
-			data-cy-ab-runnable-test={variantFromRunnable}
+			data-testid="mostviewed-footer"
+			data-testid-ab-user-in-variant={abTestCypressDataAttr}
+			data-testid-ab-runnable-test={variantFromRunnable}
 			data-link-name="most popular"
 		>
 			<MostViewedFooterGrid

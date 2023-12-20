@@ -1,5 +1,5 @@
-import type { ArticleFormat } from '@guardian/libs';
 import { submitComponentEvent } from '../../client/ophan/ophan';
+import { useConfig } from '../ConfigContext';
 import { Body } from '../ExpandableAtom/Body';
 import { Container } from '../ExpandableAtom/Container';
 import { Footer } from '../ExpandableAtom/Footer';
@@ -10,7 +10,6 @@ export type GuideAtomProps = {
 	image?: string;
 	html: string;
 	credit?: string;
-	format: ArticleFormat;
 	expandForStorybook?: boolean;
 	likeHandler?: () => void;
 	dislikeHandler?: () => void;
@@ -23,62 +22,70 @@ export const GuideAtom = ({
 	image,
 	html,
 	credit,
-	format,
 	expandForStorybook,
 	likeHandler,
 	dislikeHandler,
 	expandCallback,
 }: GuideAtomProps): JSX.Element => {
+	const { renderingTarget } = useConfig();
+
 	return (
 		<Container
 			id={id}
 			title={title}
-			format={format}
 			atomType="guide"
 			atomTypeTitle="Quick Guide"
 			expandForStorybook={expandForStorybook}
 			expandCallback={
 				expandCallback ??
 				(() =>
-					submitComponentEvent({
-						component: {
-							componentType: 'GUIDE_ATOM',
-							id,
-							products: [],
-							labels: [],
-						},
-						action: 'EXPAND',
-					}))
-			}
-		>
-			<Body html={html} image={image} credit={credit} format={format} />
-			<Footer
-				format={format}
-				dislikeHandler={
-					dislikeHandler ??
-					(() =>
-						submitComponentEvent({
+					submitComponentEvent(
+						{
 							component: {
 								componentType: 'GUIDE_ATOM',
 								id,
 								products: [],
 								labels: [],
 							},
-							action: 'DISLIKE',
-						}))
+							action: 'EXPAND',
+						},
+						renderingTarget,
+					))
+			}
+		>
+			<Body html={html} image={image} credit={credit} />
+			<Footer
+				dislikeHandler={
+					dislikeHandler ??
+					(() =>
+						submitComponentEvent(
+							{
+								component: {
+									componentType: 'GUIDE_ATOM',
+									id,
+									products: [],
+									labels: [],
+								},
+								action: 'DISLIKE',
+							},
+							renderingTarget,
+						))
 				}
 				likeHandler={
 					likeHandler ??
 					(() =>
-						submitComponentEvent({
-							component: {
-								componentType: 'GUIDE_ATOM',
-								id,
-								products: [],
-								labels: [],
+						submitComponentEvent(
+							{
+								component: {
+									componentType: 'GUIDE_ATOM',
+									id,
+									products: [],
+									labels: [],
+								},
+								action: 'LIKE',
 							},
-							action: 'LIKE',
-						}))
+							renderingTarget,
+						))
 				}
 			></Footer>
 		</Container>

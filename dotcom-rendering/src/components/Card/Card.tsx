@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAltBackground, from, space } from '@guardian/source-foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decidePalette } from '../../lib/decidePalette';
@@ -67,6 +71,7 @@ export type Props = {
 	imageSize?: ImageSizeType;
 	imageLoading: Loading;
 	isCrossword?: boolean;
+	isOnwardContent?: boolean;
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
@@ -99,7 +104,19 @@ export type Props = {
 	showLivePlayable?: boolean;
 	onwardsSource?: string;
 	pauseOffscreenVideo?: boolean;
+	showMainVideo?: boolean;
 };
+
+const starWrapper = (cardHasImage: boolean) => css`
+	background-color: ${sourcePalette.brandAlt[400]};
+	color: ${sourcePalette.neutral[0]};
+	margin-top: ${cardHasImage ? '2' : space[1]}px;
+	display: inline-block;
+
+	${from.tablet} {
+		margin-top: ${space[1]}px;
+	}
+`;
 
 const StarRatingComponent = ({
 	rating,
@@ -108,17 +125,7 @@ const StarRatingComponent = ({
 	rating: number;
 	cardHasImage: boolean;
 }) => (
-	<div
-		css={css`
-			background-color: ${brandAltBackground.primary};
-			margin-top: ${cardHasImage ? '2' : space[1]}px;
-			display: inline-block;
-
-			${from.tablet} {
-				margin-top: ${space[1]}px;
-			}
-		`}
-	>
+	<div css={starWrapper(cardHasImage)}>
 		<Hide when="above" breakpoint="desktop">
 			<StarRating rating={rating} size="small" breakpoint="mobile" />
 		</Hide>
@@ -148,17 +155,18 @@ type RenderFooter = ({
 const DecideFooter = ({
 	isOpinion,
 	hasSublinks,
-
+	isOnwardContent,
 	renderFooter,
 }: {
 	isOpinion: boolean;
 	hasSublinks?: boolean;
-
+	isOnwardContent?: boolean;
 	renderFooter: RenderFooter;
 }) => {
-	if (isOpinion && !hasSublinks) {
+	if (isOpinion && !hasSublinks && !isOnwardContent) {
 		// Opinion cards without sublinks render the entire footer, including lines,
 		// outside, sitting along the very bottom of the card
+		// Unless they are onwardContent cards
 		return null;
 	}
 	// For all other cases (including opinion cards that *do* have sublinks) we
@@ -166,7 +174,6 @@ const DecideFooter = ({
 	return renderFooter({
 		displayLines: false,
 	});
-	// Note. Opinion cards always show the lines at the bottom of the card (in CommentFooter)
 };
 
 const CommentFooter = ({
@@ -211,7 +218,11 @@ const getMedia = ({
 	isPlayableMediaCard?: boolean;
 }) => {
 	if (mainMedia && mainMedia.type === 'Video' && !!isPlayableMediaCard) {
-		return { type: 'video', mainMedia } as const;
+		return {
+			type: 'video',
+			mainMedia,
+			...(imageUrl && { imageUrl }),
+		} as const;
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
@@ -281,11 +292,13 @@ export const Card = ({
 	discussionId,
 	isDynamo,
 	isCrossword,
+	isOnwardContent = false,
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
 	onwardsSource,
 	pauseOffscreenVideo = false,
+	showMainVideo = true,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -310,6 +323,7 @@ export const Card = ({
 				format={format}
 				containerPalette={containerPalette}
 				displayLines={displayLines}
+				leftAlign={isOnwardContent}
 				age={
 					(!!onwardsSource && webPublicationDate) ||
 					(showAge &&
@@ -321,6 +335,7 @@ export const Card = ({
 							webPublicationDate={webPublicationDate}
 							showClock={showClock}
 							isDynamo={isDynamo}
+							isOnwardContent={isOnwardContent}
 						/>
 					) : undefined
 				}
@@ -346,11 +361,14 @@ export const Card = ({
 								min-height: 10px;
 							`}
 						>
-							<Island deferUntil="visible">
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
 								<CardCommentCount
-									format={format}
 									discussionApiUrl={discussionApiUrl}
 									discussionId={discussionId}
+									isOnwardContent={isOnwardContent}
 								/>
 							</Island>
 						</Link>
@@ -375,7 +393,11 @@ export const Card = ({
 
 	// If the card isn't playable, we need to show a play icon.
 	// Otherwise, this is handled by the YoutubeAtom
-	const showPlayIcon = mainMedia?.type === 'Video' && !isPlayableMediaCard;
+	const showPlayIcon =
+		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
+
+	// We want to show the comment footer with lines, for opinion cards that are not onwardsContent or dynamo
+	const showCommentLinesFooter = isOpinion && !isDynamo && !isOnwardContent;
 
 	const media = getMedia({
 		imageUrl,
@@ -390,8 +412,10 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
+			showTopBar={!isOnwardContent}
 			containerPalette={containerPalette}
 			isDynamo={isDynamo}
+			isOnwardContent={isOnwardContent}
 		>
 			<CardLink
 				linkTo={linkTo}
@@ -429,56 +453,93 @@ export const Card = ({
 								<Avatar
 									src={media.avatarUrl}
 									alt={byline ?? ''}
-									containerPalette={containerPalette}
-									format={format}
 								/>
 							</AvatarContainer>
 						)}
 						{media.type === 'video' && (
-							<div
-								data-chromatic="ignore"
-								data-component="youtube-atom"
-								css={css`
-									display: block;
-									position: relative;
-									${getZIndex('card-nested-link')}
-								`}
-							>
-								<Island>
-									<YoutubeBlockComponent
-										id={media.mainMedia.elementId}
-										elementId={media.mainMedia.elementId}
-										assetId={media.mainMedia.videoId}
-										duration={media.mainMedia.duration}
-										posterImage={media.mainMedia.images}
-										width={media.mainMedia.width}
-										height={media.mainMedia.height}
-										origin={media.mainMedia.origin}
-										mediaTitle={headlineText}
-										expired={media.mainMedia.expired}
-										format={format}
-										isMainMedia={true}
-										hideCaption={true}
-										role="inline"
-										stickyVideos={false}
-										kickerText={kickerText}
-										pauseOffscreenVideo={
-											pauseOffscreenVideo
-										}
-										showTextOverlay={
-											containerType === 'fixed/video'
-										}
-									/>
-								</Island>
-							</div>
+							<>
+								{showMainVideo ? (
+									<div
+										data-chromatic="ignore"
+										data-component="youtube-atom"
+										css={css`
+											display: block;
+											position: relative;
+											${getZIndex('card-nested-link')}
+										`}
+									>
+										<Island
+											priority="critical"
+											defer={{ until: 'visible' }}
+										>
+											<YoutubeBlockComponent
+												id={media.mainMedia.elementId}
+												elementId={
+													media.mainMedia.elementId
+												}
+												assetId={
+													media.mainMedia.videoId
+												}
+												duration={
+													media.mainMedia.duration
+												}
+												posterImage={
+													media.mainMedia.images
+												}
+												overrideImage={media.imageUrl}
+												width={media.mainMedia.width}
+												height={media.mainMedia.height}
+												origin={media.mainMedia.origin}
+												mediaTitle={headlineText}
+												expired={
+													media.mainMedia.expired
+												}
+												format={format}
+												isMainMedia={true}
+												hideCaption={true}
+												stickyVideos={false}
+												kickerText={kickerText}
+												pauseOffscreenVideo={
+													pauseOffscreenVideo
+												}
+												showTextOverlay={
+													containerType ===
+													'fixed/video'
+												}
+											/>
+										</Island>
+									</div>
+								) : (
+									<div>
+										<CardPicture
+											mainImage={
+												media.imageUrl
+													? media.imageUrl
+													: media.mainMedia.images.reduce(
+															(prev, current) =>
+																prev.width >
+																current.width
+																	? prev
+																	: current,
+													  ).url
+											}
+											imageSize={imageSize}
+											alt={headlineText}
+											loading={imageLoading}
+											roundedCorners={isOnwardContent}
+										/>
+									</div>
+								)}
+							</>
 						)}
 						{media.type === 'picture' && (
 							<>
 								<CardPicture
-									master={media.imageUrl}
+									mainImage={media.imageUrl}
 									imageSize={imageSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
+									roundedCorners={isOnwardContent}
 								/>
 								{showPlayIcon && (
 									<MediaDuration
@@ -530,6 +591,7 @@ export const Card = ({
 								showByline={showByline}
 								isDynamo={isDynamo}
 								isExternalLink={isExternalLink}
+								isOnwardContent={isOnwardContent}
 							/>
 							{starRating !== undefined ? (
 								<StarRatingComponent
@@ -539,19 +601,22 @@ export const Card = ({
 							) : null}
 							{!!mainMedia && mainMedia.type !== 'Video' && (
 								<MediaMeta
-									containerPalette={containerPalette}
-									format={format}
 									mediaType={mainMedia.type}
 									hasKicker={!!kickerText}
 								/>
 							)}
 						</HeadlineWrapper>
 						{/* This div is needed to push this content to the bottom of the card */}
-						<div>
+						<div
+							style={
+								isOnwardContent
+									? { marginTop: `${space[4]}px` }
+									: {}
+							}
+						>
 							{!!trailText && (
 								<TrailTextWrapper
 									containerPalette={containerPalette}
-									format={format}
 									imagePosition={imagePosition}
 									imageSize={imageSize}
 									imageType={media?.type}
@@ -564,10 +629,12 @@ export const Card = ({
 								</TrailTextWrapper>
 							)}
 							{showLivePlayable && (
-								<Island>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
 									<LatestLinks
 										id={linkTo}
-										format={format}
 										isDynamo={isDynamo}
 										direction={supportingContentAlignment}
 										containerPalette={containerPalette}
@@ -578,6 +645,7 @@ export const Card = ({
 								isOpinion={isOpinion}
 								hasSublinks={hasSublinks}
 								renderFooter={renderFooter}
+								isOnwardContent={isOnwardContent}
 							/>
 							{hasSublinks && sublinkPosition === 'inner' && (
 								<SupportingContent
@@ -602,7 +670,7 @@ export const Card = ({
 					alignment={supportingContentAlignment}
 				/>
 			)}
-			{isOpinion && !isDynamo && (
+			{showCommentLinesFooter && (
 				<CommentFooter
 					hasSublinks={hasSublinks}
 					palette={palette}

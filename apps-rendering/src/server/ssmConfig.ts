@@ -1,5 +1,5 @@
-import type { Option } from '@guardian/types';
-import { none, OptionKind, some } from '@guardian/types';
+import type { Option } from '../../vendor/@guardian/types/index';
+import { none, OptionKind, some } from '../../vendor/@guardian/types/index';
 import { App, Stack, Stage } from './appIdentity';
 import { ssm } from './aws';
 
@@ -10,13 +10,11 @@ async function recursivelyFetchConfig(
 	currentConfig?: Config,
 ): Promise<Config> {
 	const path = `/${App}/${Stage}/${Stack}/`;
-	const result = await ssm
-		.getParametersByPath({
-			Path: path,
-			WithDecryption: true,
-			NextToken: nextToken,
-		})
-		.promise();
+	const result = await ssm.getParametersByPath({
+		Path: path,
+		WithDecryption: true,
+		NextToken: nextToken,
+	});
 	const fetchedConfig: Config = {};
 	if (result.Parameters) {
 		result.Parameters.forEach((param) => {

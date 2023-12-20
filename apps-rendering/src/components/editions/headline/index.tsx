@@ -13,7 +13,7 @@ import {
 	remSpace,
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
-import { OptionKind } from '@guardian/types';
+import { OptionKind } from '../../../../vendor/@guardian/types/index';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { index } from 'lib';
@@ -107,7 +107,8 @@ const interviewFontStyles = css`
 	white-space: pre-wrap;
 	padding-top: 0.0625rem;
 	padding-bottom: ${remSpace[1]};
-	box-shadow: -${remSpace[3]} 0 0 ${neutral[7]},
+	box-shadow:
+		-${remSpace[3]} 0 0 ${neutral[7]},
 		${remSpace[3]} 0 0 ${neutral[7]};
 	display: inline;
 `;

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints, space } from '@guardian/source-foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
@@ -10,9 +10,10 @@ export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 
 type Props = {
 	imageSize: ImageSizeType;
-	master: string;
+	mainImage: string;
 	loading: Loading;
 	alt?: string;
+	roundedCorners?: boolean;
 };
 
 /**
@@ -94,13 +95,28 @@ const aspectRatio = css`
 	}
 `;
 
-export const CardPicture = ({ master, alt, imageSize, loading }: Props) => {
-	const sources = generateSources(master, decideImageWidths(imageSize));
+const borderRadius = css`
+	& > * {
+		border-radius: ${space[2]}px;
+	}
+`;
+
+export const CardPicture = ({
+	mainImage,
+	alt,
+	imageSize,
+	loading,
+	roundedCorners,
+}: Props) => {
+	const sources = generateSources(mainImage, decideImageWidths(imageSize));
 
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture data-size={imageSize} css={[block, aspectRatio]}>
+		<picture
+			data-size={imageSize}
+			css={[block, aspectRatio, roundedCorners && borderRadius]}
+		>
 			{sources.map((source) => {
 				return (
 					<React.Fragment key={source.breakpoint}>

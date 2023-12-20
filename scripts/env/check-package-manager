@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+// get the package manager and version we need from package.json
+const pkgPackageManager = require('../../package.json').packageManager;
+
+if (!pkgPackageManager) {
+	const { warn } = require('../log');
+	warn(`The 'packageManager' field is missing from the root package.json`);
+	process.exit(1);
+}

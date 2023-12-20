@@ -5,7 +5,9 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints, palette } from '@guardian/source-foundations';
+import type { StoryObj } from '@storybook/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Caption } from './Caption';
 import { Section } from './Section';
 import { StarRating } from './StarRating/StarRating';
@@ -13,6 +15,12 @@ import { StarRating } from './StarRating/StarRating';
 export default {
 	component: Caption,
 	title: 'Components/Caption',
+};
+
+const articleFormat: ArticleFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
 };
 
 /**
@@ -27,124 +35,152 @@ export default {
     isOverlaid?: boolean; // Not tested here as this option only works in the context of the ImageComponent
  */
 
-export const Article = () => (
+export const Article: StoryObj = ({ format }: { format: ArticleFormat }) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Article caption looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 		/>
 	</Section>
 );
 Article.storyName = 'Article';
+Article.decorators = [splitTheme([articleFormat])];
 
-export const Analysis = () => (
+export const Analysis: StoryObj = ({ format }: { format: ArticleFormat }) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Analysis caption looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Analysis,
-				theme: Pillar.News,
-			}}
+			format={format}
 		/>
 	</Section>
 );
 Analysis.storyName = 'Analysis';
+Analysis.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const PhotoEssay = () => (
+export const PhotoEssay: StoryObj = ({ format }: { format: ArticleFormat }) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="<ul><li>This is how a PhotoEssay caption looks</li></ul>"
-			format={{
-				display: ArticleDisplay.Immersive,
-				design: ArticleDesign.PhotoEssay,
-				theme: Pillar.News,
-			}}
+			format={format}
 		/>
 	</Section>
 );
 PhotoEssay.storyName = 'PhotoEssay';
+PhotoEssay.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.PhotoEssay,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const SpecialReport = () => (
+export const SpecialReport: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a SpecialReport caption looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticleSpecial.SpecialReport,
-			}}
+			format={format}
 		/>
 	</Section>
 );
 SpecialReport.storyName = 'SpecialReport';
+SpecialReport.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.SpecialReport,
+		},
+	]),
+];
 
-export const PhotoEssayLimitedWidth = () => (
+export const PhotoEssayLimitedWidth: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="<ul><li>This is how a PhotoEssay caption looks when width is limited</li></ul>"
-			format={{
-				display: ArticleDisplay.Immersive,
-				design: ArticleDesign.PhotoEssay,
-				theme: Pillar.News,
-			}}
+			format={format}
 			shouldLimitWidth={true}
 		/>
 	</Section>
 );
 PhotoEssayLimitedWidth.storyName = 'PhotoEssay with width limited';
+PhotoEssayLimitedWidth.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.PhotoEssay,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const Credit = () => (
+export const Credit: StoryObj = ({ format }: { format: ArticleFormat }) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a Feature caption looks with credit showing"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Feature,
-				theme: Pillar.News,
-			}}
+			format={format}
 			credit="Credited to Able Jones"
 			displayCredit={true}
 		/>
 	</Section>
 );
 Credit.storyName = 'with credit';
+Credit.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const WidthLimited = () => (
+export const WidthLimited: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a caption looks with width limited"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 			shouldLimitWidth={true}
 		/>
 	</Section>
 );
 WidthLimited.storyName = 'with width limited';
+WidthLimited.decorators = [splitTheme([articleFormat])];
 
-export const Padded = () => (
+export const Padded: StoryObj = ({ format }: { format: ArticleFormat }) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a caption looks when padded"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 			padCaption={true}
 		/>
 	</Section>
 );
 Padded.storyName = 'when padded';
+Padded.decorators = [splitTheme([articleFormat])];
 
-export const Overlaid = () => (
+export const Overlaid: StoryObj = ({ format }: { format: ArticleFormat }) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<div
 			css={css`
@@ -166,19 +202,20 @@ export const Overlaid = () => (
 			<Caption
 				isOverlaid={true}
 				captionText="This is how a caption looks when it's overlaid"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={format}
 				padCaption={true}
 			/>
 		</div>
 	</Section>
 );
 Overlaid.storyName = 'when overlaid';
+Overlaid.decorators = [splitTheme([articleFormat])];
 
-export const OverlaidWithStars = () => (
+export const OverlaidWithStars: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<div
 			css={css`
@@ -200,18 +237,15 @@ export const OverlaidWithStars = () => (
 			<Caption
 				isOverlaid={true}
 				captionText="This is how a caption looks when it's overlaid with stars"
-				format={{
-					display: ArticleDisplay.Showcase,
-					design: ArticleDesign.Review,
-					theme: Pillar.News,
-				}}
+				format={format}
 				padCaption={true}
 			/>
 			<div
 				css={css`
 					position: absolute;
 					bottom: 0;
-					background-color: yellow;
+					background-color: ${palette.brandAlt[400]};
+					color: ${palette.neutral[7]};
 				`}
 			>
 				<StarRating rating={3} size="large" />
@@ -220,16 +254,25 @@ export const OverlaidWithStars = () => (
 	</Section>
 );
 OverlaidWithStars.storyName = 'when overlaid on stars';
+OverlaidWithStars.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Showcase,
+			design: ArticleDesign.Review,
+			theme: Pillar.News,
+		},
+	]),
+];
 
-export const VideoCaption = () => (
+export const VideoCaption: StoryObj = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Article caption looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: Pillar.News,
-			}}
+			format={format}
 			mediaType="Video"
 		/>
 	</Section>
@@ -246,3 +289,4 @@ VideoCaption.story = {
 		},
 	},
 };
+VideoCaption.decorators = [splitTheme([articleFormat])];

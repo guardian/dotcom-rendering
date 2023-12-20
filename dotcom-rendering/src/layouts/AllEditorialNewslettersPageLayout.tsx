@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	brandBackground,
-	brandBorder,
-	brandLine,
-	palette,
-} from '@guardian/source-foundations';
+import { palette as sourcePalette } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Footer } from '../components/Footer';
 import { GroupedNewslettersList } from '../components/GroupedNewsletterList';
@@ -17,6 +12,7 @@ import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { Stuck } from './lib/stickiness';
 
@@ -72,7 +68,7 @@ export const AllEditorialNewslettersPageLayout = ({
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
+						backgroundColour={sourcePalette.brand[400]}
 						element="header"
 					>
 						<Header
@@ -96,10 +92,10 @@ export const AllEditorialNewslettersPageLayout = ({
 					</Section>
 					<Section
 						fullWidth={true}
-						borderColour={brandLine.primary}
+						borderColour={sourcePalette.brand[600]}
 						showTopBorder={false}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
+						backgroundColour={sourcePalette.brand[400]}
 						element="nav"
 					>
 						<Nav
@@ -109,28 +105,37 @@ export const AllEditorialNewslettersPageLayout = ({
 							editionId={editionId}
 						/>
 					</Section>
-					{NAV.subNavSections && (
+					{!!NAV.subNavSections && (
 						<>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.neutral[100]}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								element="aside"
 							>
-								<Island deferUntil="idle">
+								<Island
+									priority="enhancement"
+									defer={{ until: 'idle' }}
+								>
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										linkHoverColour={
-											'palette.text.articleLinkHover'
-										}
-										borderColour={'palette.border.subNav'}
+										linkHoverColour={themePalette(
+											'--article-link-text-hover',
+										)}
+										borderColour={themePalette(
+											'--sub-nav-border',
+										)}
 									/>
 								</Island>
 							</Section>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.neutral[100]}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								showTopBorder={false}
 							>
@@ -139,7 +144,7 @@ export const AllEditorialNewslettersPageLayout = ({
 									cssOverrides={css`
 										display: block;
 									`}
-									color={palette.brand[400]}
+									color={themePalette('--straight-lines')}
 								/>
 							</Section>
 						</>
@@ -155,8 +160,7 @@ export const AllEditorialNewslettersPageLayout = ({
 				<GroupedNewslettersList
 					groupedNewsletters={newslettersPage.groupedNewsletters}
 				/>
-
-				<Island deferUntil="idle">
+				<Island priority="feature" defer={{ until: 'idle' }}>
 					<ManyNewsletterSignUp />
 				</Island>
 			</main>
@@ -165,8 +169,8 @@ export const AllEditorialNewslettersPageLayout = ({
 				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
-				backgroundColour={brandBackground.primary}
-				borderColour={brandBorder.primary}
+				backgroundColour={sourcePalette.brand[400]}
+				borderColour={sourcePalette.brand[600]}
 				showSideBorders={false}
 				element="footer"
 			>

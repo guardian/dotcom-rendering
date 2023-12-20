@@ -1,6 +1,8 @@
 import { AdSlot as BridgetAdSlot } from '@guardian/bridget/AdSlot';
 import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
 import type { IRect as BridgetRect } from '@guardian/bridget/Rect';
+import { breakpoints } from '@guardian/source-foundations';
+import type { Breakpoint } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -9,6 +11,11 @@ import {
 	getCommercialClient,
 	getUserClient,
 } from '../lib/bridgetApi';
+import { useMatchMedia } from '../lib/useMatchMedia';
+import {
+	adPlaceholderClass,
+	rightAdsPlaceholderClass,
+} from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.apps';
 
 const calculateAdPosition = (element: Element): BridgetRect => {
@@ -67,15 +74,58 @@ const updateAds = (positions: BridgetAdSlot[]) =>
 
 const debounceUpdateAds = libDebounce(updateAds, 100, { leading: true });
 
-export const AdPortals = () => {
-	// Server-rendered placeholder elements for ad slots to be inserted into.
+/* ********* AD PORTALS ********* \
+ * AD POSITIONS IN RIGHT COLUMN
+ * If we're on a screen bigger than the `rightAlignFrom` prop (defaults to desktop)
+ * We attempt to find the right aligned ad placeholder
+ * If we find it, we create a single portal for the right aligned adverts
+ * And include the individual adverts inside it (spaced out using flexbox)
+ * .________._________________.________.
+ * |        |_________________|        |
+ * |        |_________________|########|
+ * |        |_________________|        |
+ * |        |_________________|        |
+ * |        |_________________|########|
+ * |________|_________________|________|
+ *
+ *
+ * INLINE ADVERTS
+ * If we're on a screen smaller than the `rightAlignFrom` prop (defaults to desktop)
+ * Or we are unable to find the right aligned ad placeholder
+ * We fall back to the inline ad placeholders
+ * And we create individual portals for each inline advert
+ * .________________.
+ * |________________|
+ * |################|
+ * |________________|
+ * |________________|
+ * |################|
+ * .________________.
+ *
+ */
+
+export const AdPortals = ({
+	rightAlignFrom = 'desktop',
+}: {
+	// In most cases, we want to try to display ads in the right column from desktop upwards.
+	// For blogs, we want right aligned from wide upwards.
+	rightAlignFrom?: Breakpoint;
+}) => {
+	// Server-rendered placeholder elements for inline ad slots to be inserted into (below desktop breakpoint)
 	const [adPlaceholders, setAdPlaceholders] = useState<Element[]>([]);
+	// Server-rendered placeholder elements for right aligned ad slots to be inserted into (above desktop breakpoint)
+	const [rightAdPlaceholder, setRightAdPlaceholder] = useState<Element>();
 	// References to client-side rendered ad slots.
 	const adSlots = useRef<HTMLDivElement[]>([]);
+	// Reset list of ad slot references, they're re-populated during rendering
+	adSlots.current = [];
 	// Positions of client-side rendered ad slots.
 	const adPositions = useRef<BridgetAdSlot[]>([]);
 	// The height of the body element.
 	const bodyHeight = useRef(0);
+	const tryRightAligned = useMatchMedia(
+		`(min-width: ${breakpoints[rightAlignFrom]}px)`,
+	);
 
 	/**
 	 * Setup Ads
@@ -92,10 +142,13 @@ export const AdPortals = () => {
 				if (!isPremium) {
 					setAdPlaceholders(
 						Array.from(
-							document.getElementsByClassName(
-								'ad-portal-placeholder',
-							),
+							document.getElementsByClassName(adPlaceholderClass),
 						),
+					);
+					setRightAdPlaceholder(
+						document.getElementsByClassName(
+							rightAdsPlaceholderClass,
+						)[0],
 					);
 				}
 			});
@@ -161,22 +214,32 @@ export const AdPortals = () => {
 		);
 	};
 
+	const renderAdSlot = (id: string, index: number) => (
+		<AdSlot
+			key={id}
+			isFirstAdSlot={index === 0}
+			onClickSupportButton={handleClickSupportButton}
+			ref={(node) => {
+				if (node !== null) {
+					adSlots.current = [...adSlots.current, node];
+				}
+			}}
+		/>
+	);
+
+	if (tryRightAligned && rightAdPlaceholder) {
+		return createPortal(
+			<>
+				{adPlaceholders.map((ad, index) => renderAdSlot(ad.id, index))}
+			</>,
+			rightAdPlaceholder,
+		);
+	}
+
 	return (
 		<>
 			{adPlaceholders.map((ad, index) =>
-				createPortal(
-					<AdSlot
-						key={ad.id}
-						isFirstAdSlot={index === 0}
-						onClickSupportButton={handleClickSupportButton}
-						ref={(node) => {
-							if (node !== null) {
-								adSlots.current = [...adSlots.current, node];
-							}
-						}}
-					/>,
-					ad,
-				),
+				createPortal(renderAdSlot(ad.id, index), ad),
 			)}
 		</>
 	);

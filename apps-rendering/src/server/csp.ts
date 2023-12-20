@@ -2,7 +2,7 @@
 
 import { createHash } from 'crypto';
 import { ArticleDesign } from '@guardian/libs';
-import { map, withDefault } from '@guardian/types';
+import { map, withDefault } from '../../vendor/@guardian/types/index';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import type { ThirdPartyEmbeds } from 'capi';
@@ -102,7 +102,7 @@ const buildCsp = (
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
 	};
-    frame-src https://www.theguardian.com https://www.scribd.com https://www.google.com https://webstories.theguardian.com https://www.linkedin.com https://datawrapper.dwcdn.net ${
+    frame-src https://www.theguardian.com https://www.scribd.com https://www.google.com https://webstories.theguardian.com https://www.linkedin.com https://datawrapper.dwcdn.net https://apps.enformant.com ${
 		thirdPartyEmbed.instagram ? 'https://www.instagram.com' : ''
 	} https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk ${
 		thirdPartyEmbed.spotify ? 'https://open.spotify.com' : ''
@@ -113,9 +113,9 @@ const buildCsp = (
 			? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com'
 			: ''
 	};
-    font-src 'self' https://interactive.guim.co.uk;
+    font-src 'self' https://assets.guim.co.uk https://interactive.guim.co.uk;
     connect-src 'self' https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/;
-    media-src 'self' https://audio.guim.co.uk/
+    media-src 'self' https://audio.guim.co.uk/ https://multimedia.guardianapis.com https://cdn.theguardian.tv;
 `.trim();
 
 function buildCspEditions(
@@ -145,7 +145,7 @@ function buildCspEditions(
 			? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com'
 			: ''
 	};
-	font-src 'self' https://interactive.guim.co.uk https://editions-published-code.s3.eu-west-1.amazonaws.com https://editions-published-prod.s3.eu-west-1.amazonaws.com;
+	font-src 'self' https://assets.guim.co.uk https://interactive.guim.co.uk https://editions-published-code.s3.eu-west-1.amazonaws.com https://editions-published-prod.s3.eu-west-1.amazonaws.com;
 	connect-src 'self' https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/;
 	media-src 'self' https://audio.guim.co.uk/
 	`;

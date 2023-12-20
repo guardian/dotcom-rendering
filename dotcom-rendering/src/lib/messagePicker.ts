@@ -1,5 +1,6 @@
 import { startPerformanceMeasure } from '@guardian/libs';
-import { record } from '../client/ophan/ophan';
+import { getOphan } from '../client/ophan/ophan';
+import type { RenderingTarget } from '../types/renderingTarget';
 
 export type MaybeFC = React.FC | null;
 type ShowMessage<T> = (meta: T) => MaybeFC;
@@ -34,15 +35,22 @@ export type SlotConfig = {
 	name: string;
 };
 
-const recordMessageTimeoutInOphan = (candidateId: string, slotName: string) =>
-	record({
+const recordMessageTimeoutInOphan = async (
+	candidateId: string,
+	slotName: string,
+	renderingTarget: RenderingTarget,
+) => {
+	const ophan = await getOphan(renderingTarget);
+	ophan.record({
 		component: `${slotName}-picker-timeout-dcr`,
 		value: candidateId,
 	});
+};
 
 const timeoutify = <T>(
 	candidateConfig: CandidateConfig<T>,
 	slotName: string,
+	renderingTarget: RenderingTarget,
 ): CandidateConfigWithTimeout<T> => {
 	let timer: number | undefined;
 
@@ -56,9 +64,10 @@ const timeoutify = <T>(
 
 			if (candidateConfig.timeoutMillis !== null) {
 				timer = window.setTimeout(() => {
-					recordMessageTimeoutInOphan(
+					void recordMessageTimeoutInOphan(
 						candidateConfig.candidate.id,
 						slotName,
+						renderingTarget,
 					);
 					resolve({ show: false });
 				}, candidateConfig.timeoutMillis);
@@ -72,9 +81,11 @@ const timeoutify = <T>(
 					const canShowTimeTaken = endPerformanceMeasure();
 
 					if (candidateConfig.reportTiming) {
-						record({
-							component: perfName,
-							value: canShowTimeTaken,
+						void getOphan(renderingTarget).then((ophan) => {
+							ophan.record({
+								component: perfName,
+								value: canShowTimeTaken,
+							});
 						});
 					}
 				})
@@ -110,13 +121,13 @@ interface WinningMessage<T> {
 	candidate: Candidate<T>;
 }
 
-export const pickMessage = ({
-	candidates,
-	name,
-}: SlotConfig): Promise<() => MaybeFC> =>
+export const pickMessage = (
+	{ candidates, name }: SlotConfig,
+	renderingTarget: RenderingTarget,
+): Promise<() => MaybeFC> =>
 	new Promise((resolve) => {
 		const candidateConfigsWithTimeout = candidates.map((c) =>
-			timeoutify(c, name),
+			timeoutify(c, name, renderingTarget),
 		);
 		const results: PendingMessage<any>[] = candidateConfigsWithTimeout.map(
 			(candidateConfig) => ({

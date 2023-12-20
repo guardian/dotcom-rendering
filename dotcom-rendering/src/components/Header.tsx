@@ -7,7 +7,6 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { HeaderTopBar } from './HeaderTopBar.importable';
 import { Island } from './Island';
 import { Logo } from './Logo';
-import { Snow } from './Snow.importable';
 import { SupportTheG } from './SupportTheG.importable';
 
 /** Ensures we do not cause CLS from lazy loaded component height */
@@ -55,7 +54,7 @@ export const Header = ({
 	hasPageSkin = false,
 }: Props) => (
 	<div css={headerStyles} data-component="nav3">
-		<Island>
+		<Island priority="critical">
 			<HeaderTopBar
 				editionId={editionId}
 				dataLinkName={nestedOphanComponents(
@@ -73,11 +72,8 @@ export const Header = ({
 		</Island>
 
 		<div css={[hasPageSkin ? pageSkinContainer : center, explicitHeight]}>
-			<Island deferUntil="hash" clientOnly={true}>
-				<Snow />
-			</Island>
 			<Logo editionId={editionId} hasPageSkin={hasPageSkin} />
-			<Island deferUntil="idle" clientOnly={true}>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<SupportTheG
 					urls={urls}
 					editionId={editionId}

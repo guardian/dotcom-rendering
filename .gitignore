@@ -11,9 +11,14 @@ yarn-error.log*
 
 # Dependency directories
 node_modules
+.yarn/*
 
-# Yarn Integrity file
-.yarn-integrity
+# Things yarn might create that we'd want to check in
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # IDE files
 .idea
@@ -53,3 +58,11 @@ webArchitecture.svg
 # ESLint reports
 .eslint/
 .eslintcache
+
+# k6 load testing binaries
+k6-v*arm64
+
+# playwright
+test-results/
+playwright-report/
+playwright/.cache/

@@ -8,10 +8,9 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { palette } from '../palette';
 import CameraSvg from '../static/icons/camera.svg';
 import VideoSvg from '../static/icons/video-icon.svg';
-import type { Palette } from '../types/palette';
 
 type Props = {
 	captionText?: string;
@@ -27,16 +26,15 @@ type Props = {
 };
 
 type IconProps = {
-	palette: Palette;
 	format: ArticleFormat;
 };
 
-const captionStyle = (palette: Palette) => css`
+const captionStyle = css`
 	${textSans.xsmall()};
 	line-height: 135%;
 	padding-top: 6px;
 	overflow-wrap: break-all;
-	color: ${palette.text.caption};
+	color: ${palette('--caption-text')};
 `;
 
 const bottomMarginStyles = css`
@@ -57,7 +55,7 @@ const overlaidBottomPadding = (format: ArticleFormat) => {
 	`;
 };
 
-const overlaidStyles = (palette: Palette, format: ArticleFormat) => css`
+const overlaidStyles = (format: ArticleFormat) => css`
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -65,15 +63,15 @@ const overlaidStyles = (palette: Palette, format: ArticleFormat) => css`
 	background: rgba(18, 18, 18, 0.8);
 
 	span {
-		color: ${palette.text.overlaidCaption};
+		color: ${palette('--caption-overlay-text')};
 		font-size: 0.75rem;
 		line-height: 1rem;
 	}
 
 	svg {
-		fill: ${palette.text.overlaidCaption};
+		fill: currentcolor;
 	}
-	color: ${palette.text.overlaidCaption};
+	color: ${palette('--caption-overlay-text')};
 	font-size: 0.75rem;
 	line-height: 1rem;
 	padding-top: 0.375rem;
@@ -151,8 +149,8 @@ const hideIconBelowLeftCol = css`
 const pictureRatio = (13 / 18) * 100;
 const videoRatio = (23 / 36) * 100;
 
-const iconStyle = (palette: Palette) => css`
-	fill: ${palette.fill.cameraCaptionIcon};
+const iconStyle = css`
+	fill: ${palette('--caption-text')};
 	margin-right: ${space[1]}px;
 	display: inline-block;
 	position: relative;
@@ -181,9 +179,9 @@ const videoIconStyle = css`
 	}
 `;
 
-const captionLink = (palette: Palette) => css`
+const captionLink = css`
 	a {
-		color: ${palette.text.captionLink};
+		color: ${palette('--caption-link')};
 		text-decoration: none;
 	}
 	a:hover {
@@ -194,11 +192,11 @@ const captionLink = (palette: Palette) => css`
 	}
 `;
 
-const CameraIcon = ({ palette, format }: IconProps) => {
+const CameraIcon = ({ format }: IconProps) => {
 	return (
 		<span
 			css={[
-				iconStyle(palette),
+				iconStyle,
 				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 			]}
@@ -208,11 +206,11 @@ const CameraIcon = ({ palette, format }: IconProps) => {
 	);
 };
 
-const VideoIcon = ({ palette, format }: IconProps) => {
+const VideoIcon = ({ format }: IconProps) => {
 	return (
 		<span
 			css={[
-				iconStyle(palette),
+				iconStyle,
 				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 				videoIconStyle,
@@ -241,7 +239,6 @@ export const Caption = ({
 	const hideCredit = !displayCredit;
 	if (noCaption && (noCredit || hideCredit)) return null;
 
-	const palette = decidePalette(format);
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
@@ -249,24 +246,22 @@ export const Caption = ({
 	const defaultCaption = (
 		<figcaption
 			css={[
-				captionStyle(palette),
+				captionStyle,
 				shouldLimitWidth && limitedWidth,
-				isOverlaid
-					? overlaidStyles(palette, format)
-					: bottomMarginStyles,
+				isOverlaid ? overlaidStyles(format) : bottomMarginStyles,
 				isMainMedia && isBlog && tabletCaptionPadding,
 				padCaption && captionPadding,
 				mediaType === 'Video' && videoPadding,
 			]}
 		>
 			{mediaType === 'Video' ? (
-				<VideoIcon palette={palette} format={format} />
+				<VideoIcon format={format} />
 			) : (
-				<CameraIcon palette={palette} format={format} />
+				<CameraIcon format={format} />
 			)}
 			{!!captionText && (
 				<span
-					css={captionLink(palette)}
+					css={captionLink}
 					dangerouslySetInnerHTML={{
 						__html: captionText || '',
 					}}
@@ -287,7 +282,7 @@ export const Caption = ({
 					css={[
 						css`
 							${textSans.xxsmall({ lineHeight: 'tight' })};
-							color: ${palette.text.caption};
+							color: ${palette('--caption-text')};
 							width: 100%;
 							margin-top: ${space[3]}px;
 							li:not(:first-child) {
@@ -295,7 +290,8 @@ export const Caption = ({
 							}
 							li {
 								padding-top: ${space[2]}px;
-								border-top: 1px solid ${palette.text.caption};
+								border-top: 1px solid
+									${palette('--caption-text')};
 							}
 						`,
 						bottomMarginStyles,
@@ -306,7 +302,7 @@ export const Caption = ({
 				>
 					{!!captionText && (
 						<span
-							css={captionLink(palette)}
+							css={captionLink}
 							dangerouslySetInnerHTML={{
 								__html: captionText || '',
 							}}

@@ -18,6 +18,7 @@ import {
 	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
+import { useConfig } from './ConfigContext';
 import { Flex } from './Flex';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard';
@@ -142,10 +143,11 @@ export const ManyNewsletterSignUp = () => {
 	const captchaSiteKey = useReCaptcha ? getCaptchaSiteKey() : undefined;
 
 	const userCanInteract = status !== 'Success' && status !== 'Loading';
+	const { renderingTarget } = useConfig();
 
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
-			if (!userCanInteract) {
+			if (status === 'Loading') {
 				return;
 			}
 			const { target: button } = event;
@@ -182,12 +184,13 @@ export const ManyNewsletterSignUp = () => {
 					button.dataset.ariaLabelWhenUnchecked ?? 'add to list',
 				);
 			}
+			setStatus('NotSent');
 		},
-		[newslettersToSignUpFor, userCanInteract],
+		[newslettersToSignUpFor, status],
 	);
 
 	const removeAll = useCallback(() => {
-		if (!userCanInteract) {
+		if (status === 'Loading') {
 			return;
 		}
 		const signUpButtons = [
@@ -204,7 +207,8 @@ export const ManyNewsletterSignUp = () => {
 		}
 
 		setNewslettersToSignUpFor([]);
-	}, [userCanInteract]);
+		setStatus('NotSent');
+	}, [status]);
 
 	useEffect(() => {
 		const signUpButtons = [
@@ -228,9 +232,14 @@ export const ManyNewsletterSignUp = () => {
 			(newsletter) => newsletter.listId,
 		);
 
-		void reportTrackingEvent('ManyNewsletterSignUp', 'form-submit', {
-			listIds,
-		});
+		void reportTrackingEvent(
+			'ManyNewsletterSignUp',
+			'form-submit',
+			renderingTarget,
+			{
+				listIds,
+			},
+		);
 
 		const response = await requestMultipleSignUps(
 			email,
@@ -247,6 +256,7 @@ export const ManyNewsletterSignUp = () => {
 			void reportTrackingEvent(
 				'ManyNewsletterSignUp',
 				'failure-response',
+				renderingTarget,
 				{
 					listIds,
 					// If the backend handles the failure and responds with an informative
@@ -261,9 +271,14 @@ export const ManyNewsletterSignUp = () => {
 			return setStatus('Failed');
 		}
 
-		void reportTrackingEvent('ManyNewsletterSignUp', 'success-response', {
-			listIds,
-		});
+		void reportTrackingEvent(
+			'ManyNewsletterSignUp',
+			'success-response',
+			renderingTarget,
+			{
+				listIds,
+			},
+		);
 		setStatus('Success');
 	};
 
@@ -287,30 +302,48 @@ export const ManyNewsletterSignUp = () => {
 			void reportTrackingEvent(
 				'ManyNewsletterSignUp',
 				'captcha-not-loaded-when-needed',
+				renderingTarget,
 			);
 			return;
 		}
 		setStatus('Loading');
 		// successful execution triggers a call to sendRequest
 		// with the onChange prop on the captcha Component
-		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-execute');
+		void reportTrackingEvent(
+			'ManyNewsletterSignUp',
+			'captcha-execute',
+			renderingTarget,
+		);
 		const result = await reCaptchaRef.current.executeAsync();
 
 		if (typeof result !== 'string') {
-			void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-failure');
+			void reportTrackingEvent(
+				'ManyNewsletterSignUp',
+				'captcha-failure',
+				renderingTarget,
+			);
 			setStatus('Failed');
 			return;
 		}
 
-		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-success');
+		void reportTrackingEvent(
+			'ManyNewsletterSignUp',
+			'captcha-success',
+			renderingTarget,
+		);
 		return sendRequest(result);
 	};
 
 	const handleCaptchaError: ReactEventHandler<HTMLDivElement> = (event) => {
-		void reportTrackingEvent('ManyNewsletterSignUp', 'captcha-error', {
-			eventType: event.type,
-			status,
-		});
+		void reportTrackingEvent(
+			'ManyNewsletterSignUp',
+			'captcha-error',
+			renderingTarget,
+			{
+				eventType: event.type,
+				status,
+			},
+		);
 		reCaptchaRef.current?.reset();
 	};
 

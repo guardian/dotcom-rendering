@@ -1,6 +1,8 @@
+/* eslint-disable ssr-friendly/no-dom-globals-in-module-scope -- this runs in JSDOM */
 // add some helpful assertions
 import '@testing-library/jest-dom/extend-expect';
 import { TextDecoder, TextEncoder } from 'node:util';
+import { isServer } from '../../src/lib/isServer';
 import type { Guardian } from '../../src/model/guardian';
 
 const windowGuardianConfig = {
@@ -66,7 +68,7 @@ const windowGuardian = {
 // We should never be able to directly set things to the global window object.
 // But in this case we want to stub things for testing, so it's ok to ignore this rule
 // @ts-expect-error
-window.guardian = windowGuardian;
+!isServer && (window.guardian = windowGuardian);
 
 // Mock Local Storage
 // See: https://github.com/facebook/jest/issues/2098#issuecomment-260733457
@@ -91,9 +93,10 @@ const localStorageMock = (function () {
 	};
 })();
 
-Object.defineProperty(window, 'localStorage', {
-	value: localStorageMock,
-});
+!isServer &&
+	Object.defineProperty(window, 'localStorage', {
+		value: localStorageMock,
+	});
 
 /**
  * This is to polyfill `TextEncoder` and `TextDecoder`.

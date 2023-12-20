@@ -1,12 +1,7 @@
 import * as Sentry from '@sentry/browser';
 import type { BrowserOptions } from '@sentry/browser';
 import { CaptureConsole } from '@sentry/integrations';
-import {
-	adaptive,
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-	ophanEsm,
-} from '../../../scripts/webpack/bundles';
+import { BUILD_VARIANT, dcrJavascriptBundle } from '../../../webpack/bundles';
 
 const allowUrls: BrowserOptions['allowUrls'] = [
 	/webpack-internal/,
@@ -58,14 +53,6 @@ if (
 	window.guardian.config.tests[dcrJavascriptBundle('Variant')] === 'variant'
 ) {
 	Sentry.setTag('dcr.bundle', dcrJavascriptBundle('Variant'));
-}
-
-if (window.guardian.config.tests[adaptive('Variant')] === 'variant') {
-	Sentry.setTag('dcr.bundle', 'adaptive');
-}
-
-if (window.guardian.config.tests[ophanEsm('Variant')] === 'variant') {
-	Sentry.setTag('dcr.bundle', 'ophanEsm');
 }
 
 export const reportError = (error: Error, feature?: string): void => {

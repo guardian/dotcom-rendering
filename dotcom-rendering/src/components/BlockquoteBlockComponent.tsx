@@ -3,22 +3,38 @@ import { body } from '@guardian/source-foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
+import { palette } from '../palette';
 import { logger } from '../server/lib/logging';
-import type { Palette } from '../types/palette';
 import { QuoteIcon } from './QuoteIcon';
 
 type Props = {
 	html: string;
-	palette: Palette;
 	quoted?: boolean;
 };
 
 const baseBlockquoteStyles = css`
-	margin-bottom: 16px;
-	${body.medium()};
-	font-style: italic;
+	margin-bottom: 14px;
+	${body.medium({
+		fontWeight: 'regular',
+		fontStyle: 'italic',
+		lineHeight: 'loose',
+	})};
+
+	color: ${palette('--block-quote-text')};
+
 	p {
 		margin-bottom: 8px;
+	}
+
+	a {
+		color: ${palette('--article-link-text')};
+		text-decoration: none;
+		border-bottom: 1px solid ${palette('--article-link-border')};
+
+		:hover {
+			color: ${palette('--article-link-text-hover')};
+			border-bottom: 1px solid ${palette('--article-link-border-hover')};
+		}
 	}
 `;
 
@@ -30,9 +46,8 @@ const simpleBlockquoteStyles = css`
 	margin-left: 33px;
 `;
 
-const quotedBlockquoteStyles = (palette: Palette) => css`
+const quotedBlockquoteStyles = css`
 	${baseBlockquoteStyles}
-	color: ${palette.text.blockquote};
 `;
 
 /**
@@ -47,12 +62,10 @@ const isFirstSiblingOfType = (name: string, node: Node): boolean => {
 };
 
 const textElement =
-	(isQuoted: boolean, palette: Palette) =>
+	(isQuoted: boolean) =>
 	(node: Node, key: number): ReactNode => {
 		const text = node.textContent ?? '';
-		const children = Array.from(node.childNodes).map(
-			textElement(isQuoted, palette),
-		);
+		const children = Array.from(node.childNodes).map(textElement(isQuoted));
 		switch (node.nodeName) {
 			case 'P': {
 				// We want to add the quote icon to the first "P" node of the blockquote element
@@ -63,7 +76,7 @@ const textElement =
 				) {
 					return (
 						<p>
-							<QuoteIcon colour={palette.fill.blockquoteIcon} />
+							<QuoteIcon colour={palette('--block-quote-fill')} />
 							{children}
 						</p>
 					);
@@ -75,7 +88,7 @@ const textElement =
 					key,
 					children,
 					css: isQuoted
-						? quotedBlockquoteStyles(palette)
+						? quotedBlockquoteStyles
 						: simpleBlockquoteStyles,
 				});
 			case 'A':
@@ -128,12 +141,10 @@ const textElement =
 		}
 	};
 
-export const BlockquoteBlockComponent = ({ html, palette, quoted }: Props) => {
+export const BlockquoteBlockComponent = ({ html, quoted }: Props) => {
 	const fragment = parseHtml(html);
 
 	return jsx(Fragment, {
-		children: Array.from(fragment.childNodes).map(
-			textElement(!!quoted, palette),
-		),
+		children: Array.from(fragment.childNodes).map(textElement(!!quoted)),
 	});
 };

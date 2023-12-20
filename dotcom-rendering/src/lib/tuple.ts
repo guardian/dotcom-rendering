@@ -82,3 +82,14 @@ export const takeFirst = <
 ): SlicedTuple<T, N> =>
 	//@ts-expect-error – this output is tested by jest and it’s a very helpful method
 	array.slice(0, count);
+
+/**
+ * Type representing an array with at least one element
+ */
+export type NonEmptyArray<T> = [T, ...T[]];
+
+/**
+ * Type guard for determining whether an array has at least one element
+ */
+export const isNonEmptyArray = <T>(items: T[]): items is NonEmptyArray<T> =>
+	items.length > 0;

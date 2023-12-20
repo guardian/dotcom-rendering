@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	isString,
+} from '@guardian/libs';
 import {
 	between,
 	border,
@@ -11,20 +16,17 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
-import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
 import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
-import { Counts } from './Counts';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
 import { SendAMessage } from './SendAMessage.importable';
-import { ShareCount } from './ShareCount.importable';
 import { ShareIcons } from './ShareIcons';
 
 type Props = {
@@ -40,7 +42,6 @@ type Props = {
 	shortUrlId: string;
 	isCommentable: boolean;
 	ajaxUrl: string;
-	showShareCount: boolean;
 	messageUs?: MessageUs;
 };
 
@@ -108,8 +109,8 @@ const borderColourWhenBackgroundDark = css`
 	}
 `;
 
-const metaExtras = (palette: Palette, isPictureContent: boolean) => css`
-	border-top: 1px solid ${palette.border.article};
+const metaExtras = (isPictureContent: boolean) => css`
+	border-top: 1px solid ${themePalette('--article-border')};
 	flex-grow: 1;
 	padding-top: 6px;
 
@@ -132,8 +133,8 @@ const metaExtras = (palette: Palette, isPictureContent: boolean) => css`
 	}
 `;
 
-const metaNumbers = (palette: Palette, isPictureContent: boolean) => css`
-	border-top: 1px solid ${palette.border.article};
+const metaNumbers = (isPictureContent: boolean) => css`
+	border-top: 1px solid ${themePalette('--article-border')};
 	display: flex;
 	flex-grow: 1;
 
@@ -312,7 +313,6 @@ export const ArticleMeta = ({
 	shortUrlId,
 	isCommentable,
 	ajaxUrl,
-	showShareCount,
 	messageUs,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
@@ -322,8 +322,6 @@ export const ArticleMeta = ({
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
-
-	const palette = decidePalette(format);
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
 
@@ -338,12 +336,8 @@ export const ArticleMeta = ({
 		>
 			<div css={meta(format)}>
 				{branding && (
-					<Island deferUntil="visible">
-						<Branding
-							branding={branding}
-							palette={palette}
-							format={format}
-						/>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<Branding branding={branding} format={format} />
 					</Island>
 				)}
 				{format.theme === ArticleSpecial.Labs ? (
@@ -366,25 +360,25 @@ export const ArticleMeta = ({
 					<>
 						{!!avatarUrl && (
 							<MetaAvatarContainer>
-								<Avatar
-									src={avatarUrl}
-									alt={authorName}
-									format={format}
-								/>
+								<Avatar src={avatarUrl} alt={authorName} />
 							</MetaAvatarContainer>
 						)}
 
 						<div>
-							{shouldShowContributor(format) && !!byline && (
-								<Contributor
-									byline={byline}
-									tags={tags}
-									format={format}
-								/>
-							)}
+							{shouldShowContributor(format) &&
+								isString(byline) && (
+									<Contributor
+										byline={byline}
+										tags={tags}
+										format={format}
+									/>
+								)}
 							{messageUs &&
 								format.design === ArticleDesign.LiveBlog && (
-									<Island deferUntil="visible">
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
 										<SendAMessage
 											formFields={messageUs.formFields}
 											formId={messageUs.formId}
@@ -411,7 +405,7 @@ export const ArticleMeta = ({
 									: ''
 							}
 							css={[
-								metaExtras(palette, isPictureContent),
+								metaExtras(isPictureContent),
 								format.design === ArticleDesign.LiveBlog &&
 									css(
 										borderColourWhenBackgroundDark,
@@ -436,7 +430,7 @@ export const ArticleMeta = ({
 								: ''
 						}
 						css={[
-							metaNumbers(palette, isPictureContent),
+							metaNumbers(isPictureContent),
 							format.design === ArticleDesign.LiveBlog &&
 								css(
 									borderColourWhenBackgroundDark,
@@ -444,35 +438,27 @@ export const ArticleMeta = ({
 								),
 						]}
 					>
-						<Counts format={format}>
-							{/* The meta-number css is needed by Counts.tsx */}
-							<div className="meta-number">
-								{showShareCount &&
-									renderingTarget === 'Web' && (
-										<Island
-											clientOnly={true}
-											deferUntil="idle"
-										>
-											<ShareCount
-												ajaxUrl={ajaxUrl}
-												pageId={pageId}
-												format={format}
-											/>
-										</Island>
-									)}
-							</div>
-							<div className="meta-number">
+						<div
+							css={css`
+								display: flex;
+								flex-direction: row;
+								align-items: flex-start;
+							`}
+						>
+							<div>
 								{isCommentable && (
-									<Island clientOnly={true} deferUntil="idle">
+									<Island
+										priority="feature"
+										defer={{ until: 'idle' }}
+									>
 										<CommentCount
 											discussionApiUrl={discussionApiUrl}
 											shortUrlId={shortUrlId}
-											format={format}
 										/>
 									</Island>
 								)}
 							</div>
-						</Counts>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -18,9 +18,6 @@ import './commands';
 import 'cypress-plugin-tab';
 import 'cypress-real-events';
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
-
 Cypress.on('uncaught:exception', (err, runnable) => {
 	// don't break our tests if sourcepoint code breaks
 	if (/wrapperMessagingWithoutDetection/.test(err.stack)) {

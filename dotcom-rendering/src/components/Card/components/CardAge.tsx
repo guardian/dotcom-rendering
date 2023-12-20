@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
 import { textSans, until } from '@guardian/source-foundations';
-import { decidePalette } from '../../../lib/decidePalette';
+import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';
 import type { DCRContainerPalette } from '../../../types/front';
-import type { Palette } from '../../../types/palette';
+import { Island } from '../../Island';
+import { RelativeTime } from '../../RelativeTime.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -12,19 +13,21 @@ type Props = {
 	webPublicationDate: string;
 	showClock?: boolean;
 	isDynamo?: true;
+	isOnwardContent?: boolean;
 };
 
 const ageStyles = (
 	format: ArticleFormat,
-	palette: Palette,
+	containerPalette?: DCRContainerPalette,
 	isDynamo?: true,
+	isOnwardsContent?: boolean,
 ) => {
 	return css`
 		${textSans.xxsmall({ lineHeight: 'tight' })};
 		margin-top: -4px;
-		color: ${isDynamo
-			? palette.text.dynamoHeadline
-			: palette.text.cardFooter};
+		color: ${isOnwardsContent
+			? palette('--card-footer-onwards-content')
+			: palette('--card-footer-text')};
 
 		/* Provide side padding for positioning and also to keep spacing
     between any sibings (like Lines) */
@@ -35,7 +38,9 @@ const ageStyles = (
 		}
 
 		svg {
-			fill: ${palette.text.cardFooter};
+			fill: ${isOnwardsContent
+				? palette('--card-footer-onwards-content')
+				: palette('--card-footer-text')};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;
@@ -61,22 +66,20 @@ export const CardAge = ({
 	webPublicationDate,
 	showClock,
 	isDynamo,
+	isOnwardContent,
 }: Props) => {
-	const displayString = timeAgo(new Date(webPublicationDate).getTime());
-	const palette = decidePalette(format, containerPalette);
-
-	if (displayString === false) {
+	if (timeAgo(new Date(webPublicationDate).getTime()) === false) {
 		return null;
 	}
 
 	return (
-		<span css={ageStyles(format, palette, isDynamo)}>
-			<span>
-				{showClock && <ClockIcon />}
-				<time dateTime={webPublicationDate} data-relativeformat="med">
-					{displayString}
-				</time>
-			</span>
+		<span
+			css={ageStyles(format, containerPalette, isDynamo, isOnwardContent)}
+		>
+			{showClock && <ClockIcon />}
+			<Island priority="enhancement" defer={{ until: 'visible' }}>
+				<RelativeTime then={new Date(webPublicationDate).getTime()} />
+			</Island>
 		</span>
 	);
 };

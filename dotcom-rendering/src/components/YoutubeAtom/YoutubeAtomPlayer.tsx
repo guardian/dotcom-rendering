@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import type { Participations } from '@guardian/ab-core';
 import type { AdsConfig } from '@guardian/commercial';
 import {
@@ -14,6 +15,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
+import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { google } from './ima';
 import type { VideoEventKey } from './YoutubeAtom';
 import type { PlayerListenerName } from './YoutubePlayer';
@@ -80,6 +82,27 @@ type PlayerListeners = Array<PlayerListener<PlayerListenerName>>;
  * return its event type (e.g. OnStateChangeEvent)
  */
 type ExtractEventType<T> = T extends YT.PlayerEventHandler<infer X> ? X : never;
+
+const imaAdContainerStyles = css`
+	/*
+		The IMA script gives the following styles to the ad container element:
+			width: [pixel value equal to the youtube iframe's width]
+			height: [pixel value equal to the youtube iframe's height]
+			position: relative;
+			display: block;
+		We need to override these styles to make sure that the ad container overlays
+		the youtube player exactly and to avoid a player-sized white space underneath the ad.
+	*/
+	/* stylelint-disable-next-line declaration-no-important -- we need this to override inline styles added by youtube */
+	width: 100% !important;
+	/* stylelint-disable-next-line declaration-no-important -- we need this to override inline styles added by youtube */
+	height: 100% !important;
+	/* stylelint-disable-next-line declaration-no-important -- we need this to override inline styles added by youtube */
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	display: none;
+`;
 
 const dispatchCustomPlayEvent = (uniqueId: string) => {
 	document.dispatchEvent(
@@ -289,6 +312,7 @@ const createInstantiateImaManager =
 		abTestParticipations: Participations,
 		imaManager: React.MutableRefObject<ImaManager | undefined>,
 		adsManager: React.MutableRefObject<google.ima.AdsManager | undefined>,
+		isSignedIn: boolean,
 	) =>
 	(player: YT.Player) => {
 		const adTargetingEnabled = adTargeting && !adTargeting.disableAds;
@@ -305,6 +329,7 @@ const createInstantiateImaManager =
 				customParams,
 				consentState,
 				clientSideParticipations: abTestParticipations,
+				isSignedIn,
 			});
 			if (window.google) {
 				adsRenderingSettings.uiElements = [
@@ -400,6 +425,12 @@ export const YoutubeAtomPlayer = ({
 	const id = `youtube-video-${uniqueId}`;
 	const imaAdContainerId = `ima-ad-container-${uniqueId}`;
 
+	const authStatus = useAuthStatus();
+
+	const isSignedIn =
+		authStatus.kind === 'SignedInWithOkta' ||
+		authStatus.kind === 'SignedInWithCookies';
+
 	/**
 	 * Initialise player useEffect
 	 */
@@ -420,6 +451,7 @@ export const YoutubeAtomPlayer = ({
 								consentState,
 								customParams: adTargeting.customParams,
 								isAdFreeUser: false,
+								isSignedIn,
 						  });
 
 				const embedConfig = {
@@ -442,6 +474,7 @@ export const YoutubeAtomPlayer = ({
 							abTestParticipations,
 							imaManager,
 							adsManager,
+							isSignedIn,
 					  )
 					: undefined;
 
@@ -542,6 +575,7 @@ export const YoutubeAtomPlayer = ({
 			imaAdContainerId,
 			playerReadyCallback,
 			deactivateVideo,
+			isSignedIn,
 		],
 	);
 
@@ -630,6 +664,7 @@ export const YoutubeAtomPlayer = ({
 				<div
 					id={imaAdContainerId}
 					data-atom-type="ima-ad-container"
+					css={imaAdContainerStyles}
 				></div>
 			)}
 		</>

@@ -1,7 +1,7 @@
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import { ArticleElementRole } from '@guardian/libs';
-import type { Option } from '@guardian/types';
-import { none, some } from '@guardian/types';
+import type { Option } from '../../vendor/@guardian/types/index';
+import { none, some } from '../../vendor/@guardian/types/index';
 import { ImageSubtype } from 'image/image';
 import type { ResizedRelatedContent } from 'item';
 import { Optional } from 'optional';

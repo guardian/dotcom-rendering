@@ -8,8 +8,8 @@ import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { ArticleTheme } from '@guardian/libs';
-import type { Option } from '@guardian/types';
-import { fromNullable } from '@guardian/types';
+import type { Option } from '../vendor/@guardian/types/index';
+import { fromNullable } from '../vendor/@guardian/types/index';
 import type { TimelineEvent } from 'atoms';
 import { parseAtom } from 'atoms';
 import { ElementKind } from 'bodyElementKind';
@@ -142,7 +142,7 @@ type Callout = {
 
 type SpecialReportAltAtom = {
 	kind: ElementKind.SpecialReportAltAtom;
-}
+};
 
 type BodyElement =
 	| Text
@@ -369,15 +369,24 @@ const parse =
 					);
 				}
 
-
 				return getCallout(campaignId, campaigns)
 					.map(({ callout, name, activeUntil }) =>
 						Result.ok<string, Callout>({
 							kind: ElementKind.Callout,
 							isNonCollapsible,
-							prompt: overridePrompt === undefined ? "Share your experience" : overridePrompt,
-							heading: overrideTitle === undefined ? callout.callout : overrideTitle,
-							description: context.docParser(overrideDescription === undefined ? callout.description ?? '' : overrideDescription),
+							prompt:
+								overridePrompt === undefined
+									? 'Share your experience'
+									: overridePrompt,
+							heading:
+								overrideTitle === undefined
+									? callout.callout
+									: overrideTitle,
+							description: context.docParser(
+								overrideDescription === undefined
+									? callout.description ?? ''
+									: overrideDescription,
+							),
 							formFields: callout.formFields,
 							formId: callout.formId,
 							name: name,

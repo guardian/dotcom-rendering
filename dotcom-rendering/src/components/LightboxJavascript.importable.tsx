@@ -1,7 +1,7 @@
 import { log, storage } from '@guardian/libs';
 import libDebounce from 'lodash.debounce';
-import { useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import screenfull from 'screenfull';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxImages } from './LightboxImages';
@@ -25,7 +25,10 @@ import { LightboxImages } from './LightboxImages';
  *
  */
 
-function initialiseLightbox(lightbox: HTMLElement) {
+function initialiseLightbox(
+	lightbox: HTMLElement,
+	addLoaded: (id: number) => void,
+) {
 	log('dotcom', '💡 Initialising lightbox');
 
 	// --------------------------------------------------------------------------------
@@ -354,10 +357,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		}
 	}
 
-	function removeLoader(position: number) {
-		lightbox.querySelector(`#lightbox-loader-${position}`)?.remove();
-	}
-
 	// --------------------------------------------------------------------------------
 	// EVENT LISTENERS
 	// --------------------------------------------------------------------------------
@@ -375,9 +374,9 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		const position = parseInt(index, 10);
 		const image = picture.querySelector('img');
 		if (image?.complete) {
-			removeLoader(position);
+			addLoaded(position);
 		} else {
-			image?.addEventListener('load', () => removeLoader(position));
+			image?.addEventListener('load', () => addLoaded(position));
 		}
 	}
 
@@ -483,6 +482,16 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	lightbox.setAttribute('data-island-status', 'rendered');
 }
 
+const useElementById = (id: string) => {
+	const [element, setElement] = useState<HTMLElement>();
+
+	useEffect(() => {
+		setElement(window.document.getElementById(id) ?? undefined);
+	}, [id]);
+
+	return element;
+};
+
 export const LightboxJavascript = ({
 	format,
 	images,
@@ -490,19 +499,6 @@ export const LightboxJavascript = ({
 	format: ArticleFormat;
 	images: ImageForLightbox[];
 }) => {
-	const lightbox = document.querySelector<HTMLElement>('#gu-lightbox');
-	useEffect(() => {
-		if (!lightbox) return;
-		/**
-		 * We only want to initialise the lightbox once so we check to see if it is already marked as ready
-		 */
-		if (lightbox.dataset.guReady) {
-			log('dotcom', '💡 Lightbox already initialised, skipping');
-			return;
-		}
-		initialiseLightbox(lightbox);
-	}, [lightbox]);
-
 	/**
 	 * Hydration has been requested so the first step is to render the list of images and put them into
 	 * the DOM
@@ -515,11 +511,33 @@ export const LightboxJavascript = ({
 	 * is so verbose) and we don't want every page view to have to download it, only those that are opening
 	 * lightbox
 	 */
-	const imageRoot = lightbox?.querySelector('ul#lightbox-images');
-	if (!imageRoot) return null;
+	const root = useElementById('lightbox-images');
+	const lightbox = useElementById('gu-lightbox');
+	const [initialised, setInitialised] = useState(false);
+
+	const [loaded, setLoaded] = useState<Set<number>>();
+
+	useEffect(() => {
+		setLoaded(new Set());
+	}, []);
+
+	useEffect(() => {
+		if (!lightbox) return;
+		if (!loaded) return;
+		log('dotcom', '💡 loaded:', loaded);
+		if (initialised) {
+			log('dotcom', '💡 Lightbox already initialised, skipping');
+			return;
+		}
+		initialiseLightbox(lightbox, (id) => setLoaded(loaded.add(id)));
+		setInitialised(true);
+	}, [initialised, lightbox, loaded]);
+
+	if (!root || !loaded) return null;
+
 	log('dotcom', '💡 Generating HTML for lightbox images...');
-	return ReactDOM.createPortal(
-		<LightboxImages format={format} images={images} />,
-		imageRoot,
+	return createPortal(
+		<LightboxImages format={format} images={images} loaded={loaded} />,
+		root,
 	);
 };

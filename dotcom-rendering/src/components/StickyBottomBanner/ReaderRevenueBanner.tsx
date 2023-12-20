@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { CountryCode } from '@guardian/libs';
 import { getCookie } from '@guardian/libs';
 import {
 	getBanner,
@@ -9,7 +10,8 @@ import type {
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useState } from 'react';
+import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
+import { useEffect, useState } from 'react';
 import { trackNonClickInteraction } from '../../client/ga/ga';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
@@ -20,6 +22,7 @@ import {
 	hasOptedOutOfArticleCount,
 	lazyFetchEmailWithTimeout,
 	MODULES_VERSION,
+	recentlyClosedBanner,
 	setLocalNoBannerCachePeriod,
 	shouldHideSupportMessaging,
 	withinLocalNoBannerCachePeriod,
@@ -42,7 +45,6 @@ type BaseProps = {
 	isSensitive: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
-	alreadyVisitedCount: number;
 	engagementBannerLastClosedAt?: string;
 	subscriptionBannerLastClosedAt?: string;
 	signInBannerLastClosedAt?: string;
@@ -55,7 +57,7 @@ type BuildPayloadProps = BaseProps & {
 };
 
 type CanShowProps = BaseProps & {
-	asyncCountryCode: Promise<string>;
+	countryCode: CountryCode;
 	remoteBannerConfig: boolean;
 	isPreview: boolean;
 	idApiUrl: string;
@@ -89,7 +91,6 @@ const buildPayload = async ({
 	isSignedIn,
 	shouldHideReaderRevenue,
 	isPaidContent,
-	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
@@ -114,7 +115,6 @@ const buildPayload = async ({
 			referrerUrl: window.location.origin + window.location.pathname,
 		},
 		targeting: {
-			alreadyVisitedCount,
 			shouldHideReaderRevenue,
 			isPaidContent,
 			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
@@ -145,7 +145,7 @@ const buildPayload = async ({
 export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	remoteBannerConfig,
 	isSignedIn,
-	asyncCountryCode,
+	countryCode,
 	contentType,
 	sectionId,
 	shouldHideReaderRevenue,
@@ -154,7 +154,6 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	isSensitive,
 	tags,
 	contributionsServiceUrl,
-	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
@@ -181,17 +180,24 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 
 	const hasForceBannerParam = window.location.search.includes('force-banner');
 
-	if (
-		!showSignInPrompt &&
-		!hasForceBannerParam &&
-		engagementBannerLastClosedAt &&
-		subscriptionBannerLastClosedAt &&
-		withinLocalNoBannerCachePeriod()
-	) {
-		return { show: false };
+	if (!showSignInPrompt && !hasForceBannerParam) {
+		// Don't show a banner if one was closed recently. This is to improve user experience by not showing banners on consecutive pageviews
+		if (
+			recentlyClosedBanner(engagementBannerLastClosedAt) ||
+			recentlyClosedBanner(subscriptionBannerLastClosedAt)
+		) {
+			return { show: false };
+		}
+		// Don't ask the API for a banner again if it's recently told us not to show one. This is an optimisation to reduce traffic to the API
+		if (
+			engagementBannerLastClosedAt &&
+			subscriptionBannerLastClosedAt &&
+			withinLocalNoBannerCachePeriod()
+		) {
+			return { show: false };
+		}
 	}
 
-	const countryCode = await asyncCountryCode;
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = await buildPayload({
 		isSignedIn,
@@ -204,7 +210,6 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		tags,
 		contributionsServiceUrl,
 		isSensitive,
-		alreadyVisitedCount,
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
 		signInBannerLastClosedAt,
@@ -235,7 +240,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	remoteBannerConfig,
 	isSignedIn,
-	asyncCountryCode,
+	countryCode,
 	contentType,
 	sectionId,
 	shouldHideReaderRevenue,
@@ -244,7 +249,6 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	isSensitive,
 	tags,
 	contributionsServiceUrl,
-	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	asyncArticleCounts,
@@ -259,7 +263,6 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	}
 
 	if (isPuzzlesPage && remoteBannerConfig) {
-		const countryCode = await asyncCountryCode;
 		const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 		const bannerPayload = await buildPayload({
 			isSignedIn,
@@ -272,7 +275,6 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 			tags,
 			contributionsServiceUrl,
 			isSensitive,
-			alreadyVisitedCount,
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			optedOutOfArticleCount,
@@ -294,7 +296,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 };
 
 export type BannerProps = {
-	meta: any;
+	meta: TestTracking;
 	module: ModuleData;
 	// eslint-disable-next-line react/no-unused-prop-types -- ESLint is wrong: it is used in ReaderRevenueBanner
 	fetchEmail?: () => Promise<string | null>;
@@ -319,11 +321,7 @@ const RemoteBanner = ({
 		debounce: true,
 	});
 
-	useOnce(() => {
-		if (module === undefined || meta === undefined) {
-			return;
-		}
-
+	useEffect(() => {
 		setAutomat();
 
 		window
@@ -333,14 +331,12 @@ const RemoteBanner = ({
 			})
 			.catch((error) => {
 				const msg = `Error importing RR banner: ${String(error)}`;
-
-				console.log(msg);
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
 					'rr-banner',
 				);
 			});
-	}, []);
+	}, [module]);
 
 	useOnce(() => {
 		const { componentType } = meta;

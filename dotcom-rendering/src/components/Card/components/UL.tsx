@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, neutral, space, until } from '@guardian/source-foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+	until,
+} from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import type { DCRContainerPalette } from '../../../types/front';
@@ -11,10 +16,21 @@ const ulStyles = (direction: Direction) => css`
 	position: relative;
 	display: flex;
 	flex-direction: ${direction};
-	row-gap: 12px;
 	${until.tablet} {
 		flex-direction: column;
 		width: 100%;
+	}
+
+	& > li {
+		margin-bottom: ${space[3]}px;
+	}
+
+	@supports (row-gap: 1em) {
+		& > li {
+			margin-bottom: 0;
+		}
+		/* Supported in flex layout is lacking: https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap#browser_compatibility */
+		row-gap: ${space[3]}px;
 	}
 `;
 
@@ -52,7 +68,7 @@ export const UL = ({
 	const borderColour =
 		(containerPalette &&
 			decideContainerOverrides(containerPalette).border.container) ??
-		neutral[86];
+		sourcePalette.neutral[86];
 
 	return (
 		<ul

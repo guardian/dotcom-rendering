@@ -4,7 +4,7 @@
 
 // ----- Imports ----- //
 
-import { none, some } from '@guardian/types';
+import { none, some } from '../vendor/@guardian/types/index';
 import {
 	compose,
 	errorToString,

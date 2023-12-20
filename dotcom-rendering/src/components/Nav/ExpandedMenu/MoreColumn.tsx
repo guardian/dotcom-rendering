@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import {
-	brand,
-	brandAlt,
 	brandText,
 	from,
+	palette as sourcePalette,
 	textSans,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
@@ -49,7 +48,9 @@ const columnStyle = css`
 			content: none;
 		}
 	}
+`;
 
+const columnStyleFromLeftCol = css`
 	${from.leftCol} {
 		width: 160px;
 	}
@@ -66,7 +67,7 @@ const pillarDivider = css`
 			bottom: 0;
 			width: 1px;
 			height: auto;
-			background-color: ${brand[600]};
+			background-color: ${sourcePalette.brand[600]};
 			z-index: 1;
 		}
 	}
@@ -88,7 +89,7 @@ const pillarDividerExtended = css`
 			left: 0;
 			width: 1px;
 			height: auto;
-			background-color: ${brand[600]};
+			background-color: ${sourcePalette.brand[600]};
 			z-index: 1;
 		}
 	}
@@ -146,10 +147,9 @@ const columnLinkTitle = css`
 		font-size: 16px;
 		padding: 6px 0;
 	}
-
 	:hover,
 	:focus {
-		color: ${brandAlt[400]};
+		color: ${sourcePalette.brandAlt[400]};
 		text-decoration: underline;
 	}
 
@@ -180,9 +180,14 @@ const shareIconStyles = css`
 type Props = {
 	otherLinks: LinkType[];
 	brandExtensions: LinkType[];
+	hasPageSkin?: boolean;
 };
 
-export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
+export const MoreColumn = ({
+	otherLinks,
+	brandExtensions,
+	hasPageSkin,
+}: Props) => {
 	const subNavId = 'moreLinks';
 
 	const links = [
@@ -196,7 +201,12 @@ export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
 	return (
 		<>
 			<li
-				css={[columnStyle, pillarDivider, pillarDividerExtended]}
+				css={[
+					columnStyle,
+					!hasPageSkin && columnStyleFromLeftCol,
+					pillarDivider,
+					pillarDividerExtended,
+				]}
 				role="none"
 			>
 				<ul css={[columnLinks]} role="menu" id={subNavId}>
@@ -219,7 +229,7 @@ export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
 									'secondary',
 									link.longTitle,
 								)}
-								data-cy={`column-collapse-sublink-${link.title}`}
+								data-testid={`column-collapse-sublink-${link.title}`}
 								tabIndex={-1}
 							>
 								{link.longTitle}
@@ -230,7 +240,10 @@ export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
 			</li>
 			{/** Social buttons hidden from menus from desktop */}
 			<Hide from="desktop">
-				<li css={columnStyle} role="none">
+				<li
+					css={[columnStyle, !hasPageSkin && columnStyleFromLeftCol]}
+					role="none"
+				>
 					<ul css={[columnLinks]} role="menu">
 						<li
 							key="facebook"

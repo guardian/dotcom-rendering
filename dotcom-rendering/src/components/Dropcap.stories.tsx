@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { body } from '@guardian/source-foundations';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { DropCap } from './DropCap';
 
 export default {
@@ -48,6 +49,15 @@ export const Article = () => {
 	);
 };
 Article.storyName = 'Article | news';
+Article.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		},
+	]),
+];
 
 export const OpinionArticle = () => {
 	return (
@@ -78,6 +88,15 @@ export const OpinionArticle = () => {
 	);
 };
 OpinionArticle.storyName = 'Article | opinion';
+OpinionArticle.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Opinion,
+		},
+	]),
+];
 
 export const Feature = () => {
 	return (
@@ -108,6 +127,15 @@ export const Feature = () => {
 	);
 };
 Feature.storyName = 'Feature | culture';
+Feature.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
+	]),
+];
 
 export const PhotoEssay = () => {
 	return (
@@ -138,6 +166,15 @@ export const PhotoEssay = () => {
 	);
 };
 PhotoEssay.storyName = 'PhotoEssay | sport';
+PhotoEssay.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.PhotoEssay,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+		},
+	]),
+];
 
 export const Interview = () => {
 	return (
@@ -168,6 +205,15 @@ export const Interview = () => {
 	);
 };
 Interview.storyName = 'Interview | lifestyle';
+Interview.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Interview,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Lifestyle,
+		},
+	]),
+];
 
 export const Comment = () => {
 	return (
@@ -198,6 +244,15 @@ export const Comment = () => {
 	);
 };
 Comment.storyName = 'Comment | opinion';
+Comment.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Comment,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Opinion,
+		},
+	]),
+];
 
 export const CommentSport = () => {
 	return (
@@ -228,6 +283,15 @@ export const CommentSport = () => {
 	);
 };
 CommentSport.storyName = 'Comment | sport';
+CommentSport.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Comment,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+		},
+	]),
+];
 
 export const CommentCulture = () => {
 	return (
@@ -258,3 +322,12 @@ export const CommentCulture = () => {
 	);
 };
 CommentCulture.storyName = 'Comment | culture';
+CommentCulture.decorators = [
+	splitTheme([
+		{
+			design: ArticleDesign.Comment,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
+	]),
+];

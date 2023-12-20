@@ -1,46 +1,47 @@
 stacks: [mobile, mobile-preview]
 regions: [eu-west-1]
 allowedStages:
-  - CODE
-  - PROD
+    - CODE
+    - PROD
 templates:
-  cloudformation:
-    type: cloud-formation
-    app: mobile-apps-rendering
-    parameters:
-      amiParameter: AMIMobileappsrendering
-      amiEncrypted: true
-      amiTags:
-        # Keep the Node version in sync with `.nvmrc`
-        Recipe: jammy-mobile-node18.17.0-ARM
-        AmigoStage: PROD
+    cloudformation:
+        type: cloud-formation
+        app: mobile-apps-rendering
+        parameters:
+            amiParameter: AMIMobileappsrendering
+            amiEncrypted: true
+            amiTags:
+                # Keep the Node version in sync with `.nvmrc`
+                Recipe: jammy-mobile-node18.18.2-ARM
+                AmigoStage: PROD
 deployments:
-  mobile-apps-rendering-cfn:
-    template: cloudformation
-    stacks:
-        - mobile
-    parameters:
-      templateStagePaths:
-        CODE: MobileAppsRendering-CODE.template.json
-        PROD: MobileAppsRendering-PROD.template.json
-  mobile-apps-rendering-preview-cfn:
-    template: cloudformation
-    stacks:
-        - mobile-preview
-    parameters:
-      templateStagePaths:
-        CODE: MobileAppsRenderingPreview-CODE.template.json
-        PROD: MobileAppsRenderingPreview-PROD.template.json
-  mobile-apps-rendering:
-    type: autoscaling
-    parameters:
-      bucketSsmLookup: true
-    dependencies: [mobile-apps-rendering-cfn, mobile-apps-rendering-preview-cfn]
-  mobile-assets:
-    type: aws-s3
-    parameters:
-      bucketSsmLookup: true
-      bucketSsmKey: /account/services/apps-rendering-static.bucket
-      cacheControl: public, max-age=315360000
-      prefixStack: false
-      publicReadAcl: false
+    mobile-apps-rendering-cfn:
+        template: cloudformation
+        stacks:
+            - mobile
+        parameters:
+            templateStagePaths:
+                CODE: MobileAppsRendering-CODE.template.json
+                PROD: MobileAppsRendering-PROD.template.json
+    mobile-apps-rendering-preview-cfn:
+        template: cloudformation
+        stacks:
+            - mobile-preview
+        parameters:
+            templateStagePaths:
+                CODE: MobileAppsRenderingPreview-CODE.template.json
+                PROD: MobileAppsRenderingPreview-PROD.template.json
+    mobile-apps-rendering:
+        type: autoscaling
+        parameters:
+            bucketSsmLookup: true
+        dependencies:
+            [mobile-apps-rendering-cfn, mobile-apps-rendering-preview-cfn]
+    mobile-assets:
+        type: aws-s3
+        parameters:
+            bucketSsmLookup: true
+            bucketSsmKey: /account/services/apps-rendering-static.bucket
+            cacheControl: public, max-age=315360000
+            prefixStack: false
+            publicReadAcl: false

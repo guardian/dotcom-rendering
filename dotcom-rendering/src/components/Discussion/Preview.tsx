@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 
 type Props = {
 	previewHtml: string;
@@ -8,7 +12,7 @@ type Props = {
 const previewStyle = css`
 	${textSans.small()}
 	padding: ${space[2]}px ${space[4]}px;
-	background-color: ${neutral[93]};
+	background-color: ${sourcePalette.neutral[93]};
 	border-radius: 5px;
 	margin-top: 0;
 	margin-bottom: ${20}px;
@@ -20,7 +24,7 @@ const previewStyle = css`
 		margin-left: ${space[5]}px;
 		margin-right: ${space[5]}px;
 		padding-left: ${space[2]}px;
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 
 	i {
@@ -54,7 +58,7 @@ const spout = css`
 	width: 0;
 	height: 0;
 	border-right: 1rem solid transparent;
-	border-bottom: 1rem solid ${neutral[93]};
+	border-bottom: 1rem solid ${sourcePalette.neutral[93]};
 	margin-left: 12.5rem;
 	border-right-style: inset;
 `;

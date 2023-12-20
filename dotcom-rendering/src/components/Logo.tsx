@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	neutral,
+	palette as sourcePalette,
 	space,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -109,7 +109,7 @@ export const Logo = ({ editionId, hasPageSkin = false }: Props) => {
 					>
 						The Guardian - Back to home
 					</span>
-					<SvgGuardianLogo textColor={neutral[100]} />
+					<SvgGuardianLogo textColor={sourcePalette.neutral[100]} />
 				</a>
 			);
 	}

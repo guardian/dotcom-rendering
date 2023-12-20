@@ -2,22 +2,27 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { getCookie } from '@guardian/libs';
+import { adSizes, type SizeMapping } from '@guardian/commercial';
+import type { CountryCode } from '@guardian/libs';
+import { getCookie, isString, isUndefined } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
-import { getLocaleCode } from '../lib/getCountryCode';
+import type { AuthStatus } from '../lib/identity';
 import type {
 	CandidateConfig,
 	MaybeFC,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
+import { useAB } from '../lib/useAB';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
 import { AdSlot } from './AdSlot.web';
+import { useConfig } from './ConfigContext';
 import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 import {
 	canShowReaderRevenueEpic,
@@ -42,6 +47,7 @@ type Props = {
 	keywordIds: string;
 	renderAds: boolean;
 	isLabs: boolean;
+	articleEndSlot: boolean;
 };
 
 const buildReaderRevenueEpicConfig = (
@@ -61,7 +67,7 @@ const buildReaderRevenueEpicConfig = (
 
 const buildBrazeEpicConfig = (
 	brazeMessages: BrazeMessagesInterface,
-	countryCode: string,
+	countryCode: CountryCode,
 	idApiUrl: string,
 	contentType: string,
 	brazeArticleContext: BrazeArticleContext,
@@ -79,14 +85,13 @@ const buildBrazeEpicConfig = (
 					tags,
 					shouldHideReaderRevenue,
 				),
-			show: (meta: any) => () =>
-				(
-					<MaybeBrazeEpic
-						meta={meta}
-						countryCode={countryCode}
-						idApiUrl={idApiUrl}
-					/>
-				),
+			show: (meta: any) => () => (
+				<MaybeBrazeEpic
+					meta={meta}
+					countryCode={countryCode}
+					idApiUrl={idApiUrl}
+				/>
+			),
 		},
 		timeoutMillis: 2000,
 	};
@@ -105,6 +110,20 @@ function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
 	}
 }
 
+const useBrowserId = () => {
+	const [browserId, setBrowserId] = useState<string>();
+
+	useEffect(() => {
+		const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
+
+		const id = isString(cookie) ? cookie : 'no-browser-id-available';
+
+		setBrowserId(id);
+	}, []);
+
+	return browserId;
+};
+
 export const SlotBodyEnd = ({
 	contentType,
 	sectionId,
@@ -119,36 +138,33 @@ export const SlotBodyEnd = ({
 	keywordIds,
 	renderAds,
 	isLabs,
+	articleEndSlot,
 }: Props) => {
-	const { brazeMessages } = useBraze(idApiUrl);
-	const [countryCode, setCountryCode] = useState<string>();
+	const { renderingTarget } = useConfig();
+	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
+	const countryCode = useCountryCode('slot-body-end');
 	const isSignedIn = getIsSignedIn(useAuthStatus());
-	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
-	const [SelectedEpic, setSelectedEpic] = useState<React.ElementType | null>(
-		null,
-	);
+	const browserId = useBrowserId();
+	const [SelectedEpic, setSelectedEpic] = useState<
+		React.ElementType | null | undefined
+	>();
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
-	// Show the article end slot if the epic is not shown, currently only used in the US for Public Good
+	const showPublicGood = countryCode === 'US';
+
+	const abTests = useAB();
+	const abTestsApi = abTests?.api;
+	const mpuWhenNoEpicEnabled =
+		(abTestsApi?.isUserInVariant('MpuWhenNoEpic', 'variant') &&
+			countryCode === 'GB') ??
+		false;
+
 	const showArticleEndSlot =
 		renderAds &&
 		!isLabs &&
-		countryCode === 'US' &&
-		window.guardian.config.switches.articleEndSlot;
-
-	useEffect(() => {
-		const callFetch = () => {
-			getLocaleCode()
-				.then((cc) => {
-					setCountryCode(cc ?? '');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${String(e)}`),
-				);
-		};
-		callFetch();
-	}, []);
+		(showPublicGood || mpuWhenNoEpicEnabled) &&
+		articleEndSlot;
 
 	useEffect(() => {
 		setAsyncArticleCount(
@@ -159,6 +175,8 @@ export const SlotBodyEnd = ({
 	}, [pageId, keywordIds]);
 
 	useOnce(() => {
+		if (isUndefined(countryCode)) return;
+
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
 			isSignedIn,
 			countryCode,
@@ -174,14 +192,14 @@ export const SlotBodyEnd = ({
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
 			>,
-			browserId: browserId ?? undefined,
+			browserId,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
 		};
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as BrazeMessagesInterface,
-			countryCode as string,
+			countryCode,
 			idApiUrl,
 			contentType,
 			brazeArticleContext,
@@ -193,20 +211,51 @@ export const SlotBodyEnd = ({
 			name: 'slotBodyEnd',
 		};
 
-		pickMessage(epicConfig)
+		pickMessage(epicConfig, renderingTarget)
 			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);
-	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
+	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount, browserId]);
 
-	if (SelectedEpic !== null) {
+	useEffect(() => {
+		if (SelectedEpic === null && showArticleEndSlot) {
+			const additionalSizes = (): SizeMapping => {
+				if (mpuWhenNoEpicEnabled) {
+					return {
+						desktop: [
+							adSizes.outstreamDesktop,
+							adSizes.outstreamGoogleDesktop,
+						],
+					};
+				} else if (showPublicGood) {
+					return { mobile: [adSizes.fluid] };
+				}
+				return {};
+			};
+			document.dispatchEvent(
+				new CustomEvent('gu.commercial.slot.fill', {
+					detail: {
+						slotId: 'dfp-ad--article-end',
+						additionalSizes: additionalSizes(),
+					},
+				}),
+			);
+		}
+	}, [
+		SelectedEpic,
+		showArticleEndSlot,
+		mpuWhenNoEpicEnabled,
+		showPublicGood,
+	]);
+
+	if (SelectedEpic !== null && SelectedEpic !== undefined) {
 		return (
 			<div id="slot-body-end">
 				<SelectedEpic />
 			</div>
 		);
-	} else if (showArticleEndSlot) {
+	} else if (SelectedEpic === null && showArticleEndSlot) {
 		return (
 			<div id="slot-body-end">
 				<AdSlot data-print-layout="hide" position="article-end" />

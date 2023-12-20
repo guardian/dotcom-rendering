@@ -13,7 +13,7 @@ import { ArticlePillar } from '@guardian/libs';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
-import { none, some } from '@guardian/types';
+import { none, some } from '../vendor/@guardian/types/index';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { EmbedKind } from 'embed';

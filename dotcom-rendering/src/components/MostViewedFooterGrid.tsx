@@ -1,17 +1,17 @@
 import { css } from '@emotion/react';
 import {
-	border,
 	from,
 	headline,
-	neutral,
+	palette as sourcePalette,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useState } from 'react';
+import { palette } from '../palette';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
-const thinGreySolid = `1px solid ${border.secondary}`;
+const thinGreySolid = `1px solid ${sourcePalette.neutral[86]}`;
 
 const hidePanel = css`
 	display: none;
@@ -45,7 +45,7 @@ const listTab = css`
 	padding: 0 0 0;
 	margin-bottom: 16px;
 	width: 240px;
-	height: 28px;
+	min-height: 28px;
 `;
 
 const firstTab = css`
@@ -59,14 +59,14 @@ const selectedListTabStyles = (selectedColour: string) => css`
 
 const unselectedStyles = css`
 	&:hover {
-		box-shadow: inset 0px 4px 0px 0px ${neutral[86]};
+		box-shadow: inset 0px 4px 0px 0px ${sourcePalette.neutral[86]};
 		transition: box-shadow 0.3s ease-in-out;
 	}
 `;
 
 const buttonStyles = (isSelected: boolean) => css`
 	${headline.xxxsmall()};
-	color: ${neutral[7]};
+	color: ${palette('--article-text')};
 	margin: 0;
 	border: 0;
 	background: transparent;
@@ -74,7 +74,7 @@ const buttonStyles = (isSelected: boolean) => css`
 	text-align: left;
 	text-decoration: none;
 	font-weight: 600;
-	min-height: 36px;
+	min-height: 28px;
 	display: block;
 	width: 100%;
 
@@ -99,7 +99,7 @@ const gridContainer = css`
 
 	/* We set left border on the grid container, and then right border on
     the gridItems to prevent borders doubling up */
-	border-left: 1px solid ${border.secondary};
+	border-left: 1px solid ${sourcePalette.neutral[86]};
 `;
 
 type Props = {
@@ -132,7 +132,7 @@ const TabHeading = ({ heading }: { heading: string }) => {
 export const MostViewedFooterGrid = ({
 	data,
 	sectionId = '',
-	selectedColour = neutral[0],
+	selectedColour = sourcePalette.neutral[0],
 	hasPageSkin = false,
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
@@ -179,7 +179,7 @@ export const MostViewedFooterGrid = ({
 								]}
 								role="none"
 								id={`tabs-popular-${i}-tab`}
-								data-cy={`tab-heading-${i}`}
+								data-testid={`tab-heading-${i}`}
 								key={`tabs-popular-${tab.heading}-tab`}
 								data-link-name={`tab ${i + 1} ${tab.heading}`}
 								data-chromatic="ignore"
@@ -228,7 +228,7 @@ export const MostViewedFooterGrid = ({
 					</h3>
 					<ol
 						css={gridContainer}
-						data-cy={`tab-body-${i}`}
+						data-testid={`tab-body-${i}`}
 						data-link-name={tab.heading}
 						data-link-context={`most-read/${sectionId}`}
 					>

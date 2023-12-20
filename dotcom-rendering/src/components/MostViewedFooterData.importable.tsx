@@ -1,4 +1,4 @@
-import { joinUrl } from '@guardian/libs';
+import { joinUrl, log } from '@guardian/libs';
 import { abTestTest } from '../experiments/tests/ab-test-test';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -11,6 +11,7 @@ import type {
 	TrailTabType,
 } from '../types/trails';
 import { MostViewedFooter } from './MostViewedFooter.importable';
+import { Placeholder } from './Placeholder';
 
 interface Props {
 	sectionId?: string;
@@ -26,10 +27,19 @@ function buildSectionUrl(
 ) {
 	const sectionsWithoutPopular = ['info', 'global'];
 	const hasSection =
-		sectionId !== undefined && !sectionsWithoutPopular.includes(sectionId);
+		!!sectionId && !sectionsWithoutPopular.includes(sectionId);
+
 	const endpoint = `/most-read${
 		hasSection ? `/${sectionId}` : ''
 	}.json?_edition=${edition}`;
+
+	if (sectionId?.length === 0) {
+		log(
+			'dotcom',
+			`DCR received empty section field. Falling back to getting most viewed data from endpoint: ${endpoint}&dcr=true`,
+		);
+	}
+
 	return joinUrl(ajaxUrl, `${endpoint}&dcr=true`);
 }
 
@@ -99,5 +109,5 @@ export const MostViewedFooterData = ({
 		);
 	}
 
-	return null;
+	return <Placeholder height={360} />;
 };

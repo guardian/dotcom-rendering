@@ -11,19 +11,20 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Get started',
 			newsletters: [
-				'morning-briefing',
+				'morning-briefing', // First Edition
+				'word-of-mouth', // Feast
 				'this-is-europe',
-				'green-light',
 				'the-guide-staying-in',
 				'the-long-read',
+				'reclaim-your-brain',
 			],
 		},
 		{
 			title: 'In depth',
 			newsletters: [
+				'green-light', // Down to Earth
 				'whats-on',
 				'tech-scape',
-				'word-of-mouth',
 				'fashion-statement',
 				'pushing-buttons',
 				'cotton-capital',
@@ -56,6 +57,8 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'The world explained',
 			newsletters: [
 				'trump-on-trial',
+				'follow-margaret-sullivan',
+				'follow-robert-reich',
 				'global-dispatch',
 				'documentaries',
 				'her-stage',
@@ -64,7 +67,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Sport',
 			newsletters: [
-				'the-fiver',
+				'the-fiver', // Football Daily
 				'moving-the-goalposts',
 				'soccer-with-jonathan-wilson',
 				'the-spin',
@@ -76,10 +79,10 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'In brief',
 			newsletters: [
-				'today-uk',
+				'today-uk', // Headlines UK
 				'headlines-europe',
-				'today-us',
-				'today-au',
+				'today-us', // Headlines US
+				'today-au', // Headlines AUS
 				'best-of-opinion',
 				'best-of-opinion-us',
 				'best-of-opinion-au',
@@ -89,7 +92,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'International correspondents',
 			newsletters: [
-				'us-morning-newsletter',
+				'us-morning-newsletter', // First Thing
 				'morning-mail',
 				'afternoon-update',
 				'patriarchy',
@@ -103,12 +106,15 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Get started',
 			newsletters: [
-				'us-morning-newsletter',
-				'today-us',
-				'headlines-europe',
-				'green-light',
+				'us-morning-newsletter', // First Thing
+				'today-us', // Headlines US
 				'trump-on-trial',
+				'reclaim-your-brain',
+				'follow-margaret-sullivan',
+				'follow-robert-reich',
 				'best-of-opinion-us',
+				'headlines-europe',
+				'green-light', // Down to Earth
 				'patriarchy',
 				'bookmarks',
 			],
@@ -120,7 +126,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'the-guide-staying-in',
 				'tech-scape',
 				'fashion-statement',
-				'word-of-mouth',
+				'word-of-mouth', // Feast
 				'pushing-buttons',
 			],
 		},
@@ -162,7 +168,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Sport',
 			newsletters: [
 				'soccer-with-jonathan-wilson',
-				'the-fiver',
+				'the-fiver', // Football Daily
 				'moving-the-goalposts',
 				'the-spin',
 				'the-breakdown',
@@ -173,8 +179,8 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'In brief',
 			newsletters: [
-				'today-uk',
-				'today-au',
+				'today-uk', // Headlines UK
+				'today-au', // Headlines AUS
 				'headlines-europe',
 				'best-of-opinion',
 				'best-of-opinion-au',
@@ -183,7 +189,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'International correspondents',
 			newsletters: [
-				'morning-briefing',
+				'morning-briefing', // First Edition
 				'morning-mail',
 				'afternoon-update',
 				'first-dog',
@@ -199,18 +205,19 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'morning-mail',
 				'afternoon-update',
 				'first-dog',
-				'five-great-reads',
 				'the-rural-network',
+				'reclaim-your-brain',
 			],
 		},
 		{
 			title: 'In depth',
 			newsletters: [
-				'green-light',
+				'the-crunch',
+				'green-light', // Down to Earth
 				'tech-scape',
 				'pushing-buttons',
 				'fashion-statement',
-				'word-of-mouth',
+				'word-of-mouth', // Feast
 				'the-guide-staying-in',
 			],
 		},
@@ -230,6 +237,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Weekend reads',
 			newsletters: [
+				'five-great-reads',
 				'the-long-read',
 				'the-upside',
 				'house-to-home',
@@ -241,6 +249,8 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'The world explained',
 			newsletters: [
 				'trump-on-trial',
+				'follow-margaret-sullivan',
+				'follow-robert-reich',
 				'global-dispatch',
 				'cotton-capital',
 				'documentaries',
@@ -253,7 +263,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Sport',
 			newsletters: [
 				'sports-au',
-				'the-fiver',
+				'the-fiver', // Football Daily
 				'moving-the-goalposts',
 				'the-spin',
 				'soccer-with-jonathan-wilson',
@@ -264,11 +274,11 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'In brief',
 			newsletters: [
-				'today-au',
+				'today-au', // Headlines AUS
 				'australian-politics',
 				'best-of-opinion-au',
-				'today-uk',
-				'today-us',
+				'today-uk', // Headlines UK
+				'today-us', // Headlines US
 				'headlines-europe',
 				'best-of-opinion',
 				'best-of-opinion-us',
@@ -277,8 +287,8 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'International correspondents',
 			newsletters: [
-				'morning-briefing',
-				'us-morning-newsletter',
+				'morning-briefing', // First Edition
+				'us-morning-newsletter', // First Thing
 				'this-is-europe',
 				'business-today',
 			],

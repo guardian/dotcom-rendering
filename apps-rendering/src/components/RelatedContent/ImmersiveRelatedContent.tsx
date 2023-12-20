@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, until } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { ResizedRelatedContent } from 'item';

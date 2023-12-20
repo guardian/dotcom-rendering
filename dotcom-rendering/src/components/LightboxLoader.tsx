@@ -24,10 +24,9 @@ const flash = keyframes`
  *
  * Pamplemouse? Pretty sure it was only called this to ensure the classnames were unique
  */
-export const LightboxLoader = ({ position }: { position: number }) => {
+export const LightboxLoader = () => {
 	return (
 		<div
-			id={`lightbox-loader-${position}`}
 			css={css`
 				width: 100%;
 				height: 100%;
@@ -46,7 +45,9 @@ export const LightboxLoader = ({ position }: { position: number }) => {
 					height: 12px;
 					border-radius: 50%;
 					background-color: ${neutral[100]};
-					box-shadow: 26px 0 ${neutral[100]}, -26px 0 ${neutral[100]};
+					box-shadow:
+						26px 0 ${neutral[100]},
+						-26px 0 ${neutral[100]};
 					position: relative;
 					animation: ${flash} 0.5s ease-out infinite alternate;
 					@media (prefers-reduced-motion) {

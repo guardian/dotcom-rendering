@@ -3,27 +3,25 @@ import {
 	focusHalo,
 	from,
 	headline,
-	palette,
+	palette as sourcePalette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 import { formatTime } from '../../lib/formatTime';
-import type { ImageSource, RoleType } from '../../types/content';
 import type { Palette } from '../../types/palette';
-import { Picture } from './Picture';
+import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 export type VideoCategory = 'live' | 'documentary' | 'explainer';
 
 type Props = {
 	uniqueId: string;
-	overrideImage?: ImageSource[];
-	posterImage?: ImageSource[];
+	overrideImage?: string;
+	posterImage?: string;
 	height: number;
 	width: number;
 	alt: string;
-	role: RoleType;
 	duration?: number; // in seconds
 	title?: string;
 	onClick: () => void;
@@ -73,7 +71,7 @@ const svgStyles = css`
 	padding-left: ${space[2]}px;
 	svg {
 		transform-origin: center;
-		fill: ${palette.neutral[100]};
+		fill: ${sourcePalette.neutral[100]};
 		height: 60px;
 		transform: scale(1.15);
 		transition-duration: 300ms;
@@ -103,7 +101,7 @@ const pillStyles = css`
 	right: ${space[2]}px;
 	${textSans.xxsmall({ fontWeight: 'bold' })};
 	background-color: rgba(0, 0, 0, 0.7);
-	color: ${palette.neutral[100]};
+	color: ${sourcePalette.neutral[100]};
 	border-radius: ${space[3]}px;
 	padding: 0 6px;
 	display: inline-flex;
@@ -127,7 +125,7 @@ const liveStyles = css`
 		width: 9px;
 		height: 9px;
 		border-radius: 50%;
-		background-color: ${palette.news[500]};
+		background-color: ${sourcePalette.news[500]};
 		display: inline-block;
 		position: relative;
 		margin-right: 0.1875rem;
@@ -143,7 +141,7 @@ const textOverlayStyles = css`
 	);
 	width: 100%;
 	bottom: 0;
-	color: ${palette.neutral[100]};
+	color: ${sourcePalette.neutral[100]};
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -176,7 +174,6 @@ export const YoutubeAtomOverlay = ({
 	height,
 	width,
 	alt,
-	role,
 	duration,
 	title,
 	onClick,
@@ -190,23 +187,24 @@ export const YoutubeAtomOverlay = ({
 	const showPill = !!videoCategory || hasDuration;
 	const isLive = videoCategory === 'live';
 	const dcrPalette = decidePalette(format);
+	const image = overrideImage ?? posterImage;
 
 	return (
 		<button
-			data-cy={id}
 			data-testid={id}
 			onClick={onClick}
 			css={overlayStyles}
 			aria-label={title ? `Play video: ${title}` : `Play video`}
 			type="button"
 		>
-			<Picture
-				imageSources={overrideImage ?? posterImage ?? []}
-				role={role}
-				alt={alt}
-				height={height}
-				width={width}
-			/>
+			{!!image && (
+				<YoutubeAtomPicture
+					image={image}
+					alt={alt}
+					height={height}
+					width={width}
+				/>
+			)}
 			{showPill && (
 				<div css={pillStyles}>
 					{!!videoCategory && (

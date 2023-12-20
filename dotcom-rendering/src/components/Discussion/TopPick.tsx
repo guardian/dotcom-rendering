@@ -1,17 +1,13 @@
 import { css } from '@emotion/react';
 import {
-	brand,
 	from,
-	neutral,
+	palette as sourcePalette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { decidePalette } from '../../lib/decidePalette';
-import type {
-	SignedInWithCookies,
-	SignedInWithOkta,
-} from '../../lib/useAuthStatus';
+import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
+import { palette as themePalette } from '../../palette';
 import type { CommentType } from '../../types/discussion';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianStaff } from './Badges';
@@ -21,13 +17,11 @@ import { Row } from './Row';
 import { Timestamp } from './Timestamp';
 
 type Props = {
-	format: ArticleFormat;
 	comment: CommentType;
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
 	userMadeComment: boolean;
 	onPermalinkClick: (commentId: number) => void;
 	onRecommend?: (commentId: number) => Promise<boolean>;
-	isClosedForComments: boolean;
 };
 
 const pickStyles = css`
@@ -44,18 +38,17 @@ const pickStyles = css`
 		margin-left: ${space[5]}px;
 		margin-right: ${space[5]}px;
 		padding-left: ${space[2]}px;
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 `;
 
 const arrowSize = 25;
-const bg = neutral[93];
 
-const userNameStyles = (format: ArticleFormat) => css`
+const userNameStyles = css`
 	margin-top: 3px;
 	margin-bottom: -6px;
 	font-weight: bold;
-	color: ${decidePalette(format).discussionGeneric};
+	color: ${themePalette('--discussion-colour')};
 `;
 
 const avatarMargin = css`
@@ -69,16 +62,25 @@ const smallFontSize = css`
 `;
 
 const linkStyles = css`
+	color: ${themePalette('--top-pick-link')};
 	text-decoration: none;
 	:hover {
 		text-decoration: underline;
+		color: ${themePalette('--top-pick-link')};
+	}
+`;
+
+const jumpToLinkStyles = css`
+	color: ${themePalette('--top-pick-link')};
+	:hover {
+		color: ${themePalette('--top-pick-link')};
 	}
 `;
 
 // to override a tag styles from dangerouslySetInnerHTML
 const inCommentLinkStyling = css`
 	a {
-		color: ${brand[500]};
+		color: ${themePalette('--top-pick-link')};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
@@ -109,7 +111,7 @@ const PickBubble = ({ children }: { children: React.ReactNode }) => (
 			justify-content: space-between;
 
 			padding: ${space[3]}px;
-			background-color: ${bg};
+			background-color: ${themePalette('--top-pick-background')};
 			border-radius: 15px;
 			margin-bottom: ${arrowSize + 5}px;
 			position: relative;
@@ -123,7 +125,8 @@ const PickBubble = ({ children }: { children: React.ReactNode }) => (
 				margin-left: ${space[6]}px;
 				position: absolute;
 				border-right: ${arrowSize}px solid transparent;
-				border-top: ${arrowSize}px solid ${bg};
+				border-top: ${arrowSize}px solid
+					${themePalette('--top-pick-background')};
 				bottom: -${arrowSize - 1}px;
 			}
 
@@ -164,13 +167,11 @@ const truncateText = (input: string, limit: number) => {
 };
 
 export const TopPick = ({
-	format,
 	comment,
 	authStatus,
 	userMadeComment,
 	onPermalinkClick,
 	onRecommend,
-	isClosedForComments,
 }: Props) => {
 	const showStaffBadge = comment.userProfile.badge.some(
 		(obj) => obj['name'] === 'Staff',
@@ -197,6 +198,7 @@ export const TopPick = ({
 						<Link
 							priority="primary"
 							href={comment.webUrl}
+							css={jumpToLinkStyles}
 							onClick={(
 								e: React.MouseEvent<HTMLAnchorElement>,
 							) => {
@@ -220,7 +222,7 @@ export const TopPick = ({
 						/>
 					</div>
 					<Column>
-						<span css={userNameStyles(format)}>
+						<span css={userNameStyles}>
 							<a
 								href={comment.userProfile.webUrl}
 								css={[linkStyles, inheritColour]}
@@ -248,7 +250,6 @@ export const TopPick = ({
 					authStatus={authStatus}
 					userMadeComment={userMadeComment}
 					onRecommend={onRecommend}
-					isClosedForComments={isClosedForComments}
 				/>
 			</PickMeta>
 		</div>

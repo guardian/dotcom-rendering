@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleSpecial, Pillar } from '@guardian/libs';
-import { neutral, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	textSans,
+} from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
-import { decidePalette } from '../../lib/decidePalette';
+import { palette as themePalette } from '../../palette';
 
 type Props = {
-	format: ArticleFormat;
 	onClick?: () => void | Promise<void>;
 	children: string;
 	type?: 'submit';
@@ -17,42 +17,21 @@ type Props = {
 	size?: 'xsmall' | 'small' | 'default';
 };
 
-// Why this abstraction? To solve an issue where when we use the 800 key in `palette typescript throws errors. Most
-// likely caused by the fact labs only uses 300 & 400 so the union is restricted
-const dark = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case Pillar.Culture:
-			return '#FBF6EF';
-		case Pillar.Opinion:
-			return '#FEF9F5';
-		case Pillar.Lifestyle:
-			return '#FEEEF7';
-		case Pillar.Sport:
-			return '#F1F8FC';
-		case Pillar.News:
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.Labs:
-		default:
-			return '#FFF4F2';
-	}
-};
-
-const buttonOverrides = (
-	format: ArticleFormat,
-	priority: 'primary' | 'secondary' | 'subdued',
-) => {
+const buttonOverrides = (priority: 'primary' | 'secondary' | 'subdued') => {
 	switch (priority) {
 		case 'primary':
 			return css`
 				button {
 					${textSans.small({ fontWeight: 'bold' })}
-					background-color: ${decidePalette(format).background
-						.discussionPillarButton};
-					color: ${neutral[100]};
+					background-color: ${themePalette(
+						'--discussion-primary-button-background',
+					)};
+					color: ${sourcePalette.neutral[100]};
 
 					:hover {
-						background-color: ${decidePalette(format)
-							.discussionGeneric};
+						background-color: ${themePalette(
+							'--discussion-button-hover',
+						)};
 					}
 				}
 			`;
@@ -62,11 +41,16 @@ const buttonOverrides = (
 				button {
 					${textSans.small({ fontWeight: 'bold' })}
 					background-color: transparent;
-					border: 1px solid ${decidePalette(format).discussionGeneric};
-					color: ${decidePalette(format).discussionGeneric};
+					border: 1px solid ${themePalette('--discussion-colour')};
+					color: ${themePalette('--discussion-colour')};
 
 					:hover {
-						background-color: ${dark(format)};
+						background-color: ${themePalette(
+							'--discussion-button-hover',
+						)};
+						border: 1px solid
+							${themePalette('--discussion-button-hover')};
+						color: ${sourcePalette.neutral[100]};
 					}
 				}
 			`;
@@ -75,7 +59,7 @@ const buttonOverrides = (
 				button {
 					${textSans.small({ fontWeight: 'bold' })}
 					background-color: transparent;
-					color: ${decidePalette(format).discussionGeneric};
+					color: ${themePalette('--discussion-colour')};
 					border-radius: 0;
 				}
 			`;
@@ -83,7 +67,6 @@ const buttonOverrides = (
 };
 
 export const PillarButton = ({
-	format,
 	onClick,
 	type,
 	priority = 'primary',
@@ -93,7 +76,7 @@ export const PillarButton = ({
 	linkName,
 	size = 'default',
 }: Props) => (
-	<div css={buttonOverrides(format, priority)}>
+	<div css={buttonOverrides(priority)}>
 		<Button
 			priority={priority}
 			size={size}

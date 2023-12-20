@@ -13,7 +13,7 @@ permissions:
   # Allow GitHub to request an OIDC JWT ID token, for exchange with `aws-actions/configure-aws-credentials`
   # See https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#updating-your-github-actions-workflow
   id-token: write
-
+  pull-requests: write # required by guardian/actions-riff-raff@v3
 jobs:
   riffraff:
     runs-on: ubuntu-latest
@@ -30,19 +30,24 @@ jobs:
       # so we create our tarball outside the rendering/ folder, then delete the contents of rendering/
       # and finally move the tarball into rendering
       - name: Compress DCR server files
-        run: tar -zcf rendering.tar.gz rendering
-      - name: Remove uncompressed DCR server files from rendering/
-        run: rm -r rendering/*
-      - name: Move compressed DCR server files to rendering/
-        run: mv rendering.tar.gz rendering/
-
-      - uses: aws-actions/configure-aws-credentials@v2
+        run: |
+          tar -zcf rendering.tar.gz rendering
+          rm -r rendering/*
+          mv rendering.tar.gz rendering/
+      - name: Compress DCR front-web server files
+        run: |
+          tar -zcf front-web.tar.gz front-web
+          rm -r front-web/*
+          mv front-web.tar.gz front-web/
+      - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: eu-west-1
           role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+          mask-aws-account-id: true
 
-      - uses: guardian/actions-riff-raff@v2
+      - uses: guardian/actions-riff-raff@v3
         with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: dotcom:rendering
           configPath: riff-raff.yaml
           buildNumberOffset: 38860
@@ -51,6 +56,9 @@ jobs:
               - frontend-cfn
             rendering:
               - rendering
+            front-web-cfn:
+              - front-web-cfn
+            front-web:
+              - front-web
             frontend-static:
               - frontend-static
-

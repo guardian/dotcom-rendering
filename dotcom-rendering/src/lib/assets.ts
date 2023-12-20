@@ -1,12 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { isObject, isString } from '@guardian/libs';
-import {
-	adaptive,
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-	ophanEsm,
-} from '../../scripts/webpack/bundles';
+import { isObject, isString, isUndefined } from '@guardian/libs';
+import { BUILD_VARIANT, dcrJavascriptBundle } from '../../webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
 import { makeMemoizedFunction } from './memoize';
 
@@ -30,7 +25,7 @@ export const decideAssetOrigin = (
 		case 'CODE':
 			return 'https://assets-code.guim.co.uk/';
 		default: {
-			if (isDev) {
+			if (isDev && isUndefined(process.env.HOSTNAME)) {
 				// Use absolute asset paths in development mode
 				// This is so paths are correct when treated as relative to Frontend
 				return 'http://localhost:3030/';
@@ -68,13 +63,7 @@ const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	}
 });
 
-export type Build =
-	| 'apps'
-	| 'web'
-	| 'web.variant'
-	| 'web.ophan-esm'
-	| 'web.scheduled'
-	| 'web.legacy';
+export type Build = 'apps' | 'web' | 'web.variant' | 'web.legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
@@ -118,7 +107,6 @@ const getScriptRegex = (build: Build) =>
 export const WEB = getScriptRegex('web');
 export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');
 export const WEB_LEGACY_SCRIPT = getScriptRegex('web.legacy');
-export const WEB_SCHEDULED_SCRIPT = getScriptRegex('web.scheduled');
 export const APPS_SCRIPT = getScriptRegex('apps');
 
 export const generateScriptTags = (scripts: string[]): string[] =>
@@ -142,19 +130,12 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 
 export const getModulesBuild = ({
 	tests,
-	switches,
 }: {
 	tests: ServerSideTests;
 	switches: Switches;
 }): Exclude<Extract<Build, `web${string}`>, 'web.legacy'> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
 		return 'web.variant';
-	}
-	if (tests[ophanEsm('Variant')] === 'variant') {
-		return 'web.ophan-esm';
-	}
-	if (switches.scheduler || tests[adaptive('Variant')] === 'variant') {
-		return 'web.scheduled';
 	}
 	return 'web';
 };

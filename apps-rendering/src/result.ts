@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { Option } from '@guardian/types';
-import { none, some } from '@guardian/types';
+import type { Option } from '../vendor/@guardian/types/index';
+import { none, some } from '../vendor/@guardian/types/index';
 import { Optional } from 'optional';
 
 // ----- Classes ----- //

@@ -2,8 +2,9 @@ import { css } from '@emotion/react';
 import { isNonNullable } from '@guardian/libs';
 import {
 	from,
-	neutral,
+	palette,
 	space,
+	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import {
@@ -16,7 +17,6 @@ import { useEffect, useState } from 'react';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import type { EditionId } from '../lib/edition';
 import { useApi } from '../lib/useApi';
-import { useOnce } from '../lib/useOnce';
 import { enhanceCards } from '../model/enhanceCards';
 import type { DCRContainerPalette, FEFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
@@ -93,7 +93,7 @@ export const ShowMore = ({
 	 * allow us to filter out duplicated stories when we load them from the
 	 * 'show-more' endpoint.
 	 */
-	useOnce(() => {
+	useEffect(() => {
 		const container = document.getElementById(`container-${sectionId}`);
 		const containerLinks = Array.from(
 			container?.querySelectorAll('a') ?? [],
@@ -102,7 +102,7 @@ export const ShowMore = ({
 			.filter(isNonNullable);
 
 		setExistingCardLinks(containerLinks);
-	}, []);
+	}, [sectionId]);
 
 	/** We only pass an actual URL to SWR when 'showMore' is true.
 	 * Toggling 'isOpen' will trigger a re-render
@@ -199,15 +199,20 @@ export const ShowMore = ({
 					cssOverrides={css`
 						margin-top: ${space[4]}px;
 						margin-right: 10px;
-						color: ${neutral[100]};
-						background-color: ${neutral[7]};
-						border-color: ${neutral[7]};
+						color: ${palette.neutral[100]};
+						background-color: ${palette.neutral[7]};
+						border-color: ${palette.neutral[7]};
 						&:hover {
-							background-color: ${neutral[46]};
-							border-color: ${neutral[46]};
+							background-color: ${palette.neutral[46]};
+							border-color: ${palette.neutral[46]};
 						}
 						${from.tablet} {
 							margin-left: 10px;
+						}
+						/* On smaller screens, button text overflows the container so we wrap to prevent it */
+						${until.phablet} {
+							text-wrap: wrap;
+							height: unset;
 						}
 					`}
 					aria-controls={showMoreContainerId}

@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
+import { ConfigProvider } from './ConfigContext';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
 
@@ -40,12 +41,16 @@ const LABEL = 'Dropdown label';
 describe('Dropdown', () => {
 	it('should display the given label', () => {
 		const { getByText } = render(
-			<Dropdown
-				id="abc"
-				label={LABEL}
-				links={links}
-				dataLinkName="linkname"
-			/>,
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<Dropdown
+					id="abc"
+					label={LABEL}
+					links={links}
+					dataLinkName="linkname"
+				/>
+			</ConfigProvider>,
 		);
 
 		expect(getByText(LABEL)).toBeInTheDocument();
@@ -53,12 +58,16 @@ describe('Dropdown', () => {
 
 	it('should display link titles', () => {
 		const { getByText } = render(
-			<Dropdown
-				id="abc"
-				label={LABEL}
-				links={links}
-				dataLinkName="linkname"
-			/>,
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<Dropdown
+					id="abc"
+					label={LABEL}
+					links={links}
+					dataLinkName="linkname"
+				/>
+			</ConfigProvider>,
 		);
 
 		expect(getByText(links[0].title)).toBeInTheDocument();
@@ -69,12 +78,16 @@ describe('Dropdown', () => {
 
 	it('should render the correct number of link items', () => {
 		const { container } = render(
-			<Dropdown
-				id="abc"
-				label={LABEL}
-				links={links}
-				dataLinkName="linkname"
-			/>,
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<Dropdown
+					id="abc"
+					label={LABEL}
+					links={links}
+					dataLinkName="linkname"
+				/>
+			</ConfigProvider>,
 		);
 
 		const listItems = container.querySelectorAll('li');
@@ -84,12 +97,16 @@ describe('Dropdown', () => {
 
 	it('should expand the menu when clicked upon', () => {
 		const { container, getByRole } = render(
-			<Dropdown
-				id="abc"
-				label={LABEL}
-				links={links}
-				dataLinkName="linkname"
-			/>,
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<Dropdown
+					id="abc"
+					label={LABEL}
+					links={links}
+					dataLinkName="linkname"
+				/>
+			</ConfigProvider>,
 		);
 
 		const ulElement = container.querySelector('ul');
@@ -101,12 +118,16 @@ describe('Dropdown', () => {
 
 	it('should close the expanded menu when they click away', () => {
 		const { container, getByRole } = render(
-			<Dropdown
-				id="abc"
-				label={LABEL}
-				links={links}
-				dataLinkName="linkname"
-			/>,
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<Dropdown
+					id="abc"
+					label={LABEL}
+					links={links}
+					dataLinkName="linkname"
+				/>
+			</ConfigProvider>,
 		);
 
 		const ulElement = container.querySelector('ul');
@@ -119,12 +140,16 @@ describe('Dropdown', () => {
 
 	it('should close the expanded menu when blurred', () => {
 		const { container, getByRole } = render(
-			<Dropdown
-				id="abc"
-				label={LABEL}
-				links={links}
-				dataLinkName="linkname"
-			/>,
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<Dropdown
+					id="abc"
+					label={LABEL}
+					links={links}
+					dataLinkName="linkname"
+				/>
+			</ConfigProvider>,
 		);
 
 		const ulElement = container.querySelector('ul');

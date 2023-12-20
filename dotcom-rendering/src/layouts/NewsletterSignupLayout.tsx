@@ -3,11 +3,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	brandAlt,
-	brandBackground,
-	brandBorder,
-	brandLine,
 	from,
+	palette as sourcePalette,
 	space,
 	textSans,
 	until,
@@ -43,10 +40,10 @@ import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -130,7 +127,7 @@ const mainGraphicWrapperStyle = css`
 const previewCaptionStyle = css`
 	display: flex;
 	align-items: center;
-	background-color: ${brandAlt[400]};
+	background-color: ${sourcePalette.brandAlt[400]};
 	padding: ${space[1]}px ${space[3]}px;
 	${textSans.medium({ fontWeight: 'bold' })};
 	text-decoration: none;
@@ -197,8 +194,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const palette = decidePalette(format);
-
 	const regionalFocusText = promotedNewsletter?.regionFocus
 		? `${promotedNewsletter.regionFocus} Focused`
 		: '';
@@ -239,7 +234,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					showTopBorder={false}
 					showSideBorders={false}
 					padSides={false}
-					backgroundColour={brandBackground.primary}
+					backgroundColour={sourcePalette.brand[400]}
 					element="header"
 				>
 					<Header
@@ -259,10 +254,10 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 
 				<Section
 					fullWidth={true}
-					borderColour={brandLine.primary}
+					borderColour={sourcePalette.brand[600]}
 					showTopBorder={false}
 					padSides={false}
-					backgroundColour={brandBackground.primary}
+					backgroundColour={sourcePalette.brand[400]}
 					element="nav"
 				>
 					<Nav
@@ -289,25 +284,34 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					<>
 						<Section
 							fullWidth={true}
-							backgroundColour={palette.background.article}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
 							padSides={false}
 							showTopBorder={false}
 							element="aside"
 						>
-							<Island deferUntil="idle">
+							<Island
+								priority="enhancement"
+								defer={{ until: 'idle' }}
+							>
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
-									linkHoverColour={
-										palette.text.articleLinkHover
-									}
-									borderColour={palette.border.subNav}
+									linkHoverColour={themePalette(
+										'--article-link-text-hover',
+									)}
+									borderColour={themePalette(
+										'--sub-nav-border',
+									)}
 								/>
 							</Island>
 						</Section>
 						<Section
 							fullWidth={true}
-							backgroundColour={palette.background.article}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
 							padSides={false}
 							showTopBorder={false}
 						>
@@ -316,6 +320,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 								cssOverrides={css`
 									display: block;
 								`}
+								color={themePalette('--straight-lines')}
 							/>
 						</Section>
 					</>
@@ -330,13 +335,13 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 				<Section
 					showTopBorder={false}
 					showSideBorders={false}
-					innerBackgroundColour={brandBackground.primary}
+					innerBackgroundColour={sourcePalette.brand[400]}
 					leftContent={
 						<div css={leftColWrapperStyle}>
 							<Hide until="leftCol">
 								<span css={guardianLogoContainerStyle}>
 									<SvgGuardianLogo
-										textColor={palette.fill.guardianLogo}
+										textColor={sourcePalette.neutral[100]}
 										width={200}
 									/>
 								</span>
@@ -348,7 +353,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						<Hide from="leftCol">
 							<span css={guardianLogoContainerStyle}>
 								<SvgGuardianLogo
-									textColor={palette.fill.guardianLogo}
+									textColor={sourcePalette.neutral[100]}
 									width={200}
 								/>
 							</span>
@@ -501,7 +506,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 
 				{article.storyPackage && (
 					<Section fullWidth={true}>
-						<Island deferUntil="visible">
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
 								trails={article.storyPackage.trails.map(
@@ -518,11 +523,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}
@@ -548,8 +549,8 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 				data-print-layout="hide"
 				padSides={false}
 				showTopBorder={false}
-				backgroundColour={brandBackground.primary}
-				borderColour={brandBorder.primary}
+				backgroundColour={sourcePalette.brand[400]}
+				borderColour={sourcePalette.brand[600]}
 				showSideBorders={false}
 				element="footer"
 			>

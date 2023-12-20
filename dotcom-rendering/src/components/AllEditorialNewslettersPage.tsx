@@ -1,8 +1,13 @@
 import { css, Global } from '@emotion/react';
-import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	focusHalo,
+	palette as sourcePalette,
+} from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { AllEditorialNewslettersPageLayout } from '../layouts/AllEditorialNewslettersPageLayout';
 import type { NavType } from '../model/extract-nav';
+import { paletteDeclarations } from '../palette';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { FocusStyles } from './FocusStyles.importable';
@@ -28,34 +33,50 @@ export const AllEditorialNewslettersPage = ({
 	newslettersPage,
 	NAV,
 }: Props) => {
+	/* We use this as our "base" or default format */
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.News,
+	};
+
 	return (
 		<StrictMode>
 			<Global
 				styles={css`
+					:root {
+						/* Light palette is default on all platforms */
+						/* We do not support dark mode on tag pages */
+						${paletteDeclarations(format, 'light')}
+						body {
+							color: ${sourcePalette.neutral[7]};
+						}
+					}
 					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
 					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
 					*:focus {
 						${focusHalo}
 					}
 					::selection {
-						background: ${brandAlt[400]};
-						color: ${neutral[7]};
+						background: ${sourcePalette.brandAlt[400]};
+						color: ${sourcePalette.neutral[7]};
 					}
 				`}
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island clientOnly={true} deferUntil="idle">
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<AlreadyVisited />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island priority="critical">
 				<Metrics
 					commercialMetricsEnabled={
 						!!newslettersPage.config.switches.commercialMetrics
 					}
+					tests={newslettersPage.config.abTests}
 				/>
 			</Island>
 			<AllEditorialNewslettersPageLayout

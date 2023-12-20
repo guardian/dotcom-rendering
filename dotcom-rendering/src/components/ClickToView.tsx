@@ -1,12 +1,8 @@
 import { css } from '@emotion/react';
-import {
-	background,
-	border,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { Button, SvgCheckmark } from '@guardian/source-react-components';
 import { useState } from 'react';
+import { palette } from '../palette';
 import type { RoleType } from '../types/content';
 
 type Props = {
@@ -86,6 +82,16 @@ const roleButtonText = (role: RoleType) => {
 	}
 };
 
+const buttonCss = css`
+	background-color: ${palette('--click-to-view-button')};
+	color: ${palette('--click-to-view-button-text')};
+
+	:hover,
+	:focus {
+		background-color: ${palette('--click-to-view-button-hover')};
+	}
+`;
+
 const shouldDisplayOverlay = ({
 	isTracking,
 	isOverlayClicked,
@@ -135,8 +141,8 @@ export const ClickToView = ({
 			<div
 				css={css`
 					width: 100%;
-					background: ${background.secondary};
-					border: 1px solid ${border.secondary};
+					background: ${palette('--click-to-view-background')};
+					border: 1px solid ${palette('--click-to-view-border')};
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
@@ -196,8 +202,9 @@ export const ClickToView = ({
 						icon={<SvgCheckmark />}
 						iconSide="left"
 						onClick={() => handleClick()}
-						data-cy="click-to-view-button"
+						data-testid="click-to-view-button"
 						data-link-name="allow-button"
+						css={buttonCss}
 					>
 						{roleButtonText(role)}
 					</Button>

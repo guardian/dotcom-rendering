@@ -41,7 +41,7 @@ export const withSignInGateSlot = ({
 				{/* Add the placeholder div after the second article element */}
 				{i === 1 && (
 					<div id="sign-in-gate">
-						<Island clientOnly={true}>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<SignInGateSelector
 								contentType={contentType}
 								sectionId={sectionId}

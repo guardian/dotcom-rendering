@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { BUILD_VARIANT } from '../../scripts/webpack/bundles';
+import { BUILD_VARIANT } from '../../webpack/bundles';
 import {
 	APPS_SCRIPT,
 	decideAssetOrigin,
@@ -7,7 +7,6 @@ import {
 	getPathFromManifest,
 	WEB,
 	WEB_LEGACY_SCRIPT,
-	WEB_SCHEDULED_SCRIPT,
 	WEB_VARIANT_SCRIPT,
 } from './assets';
 
@@ -69,9 +68,6 @@ describe('regular expression to match files', () => {
 			'https://assets.guim.co.uk/assets/ophan.web.variant.abcdefghijklmnopqrst.js',
 		).toMatch(WEB_VARIANT_SCRIPT);
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.web.scheduled.abcdefghijklmnopqrst.js',
-		).toMatch(WEB_SCHEDULED_SCRIPT);
-		expect(
 			'https://assets.guim.co.uk/assets/ophan.web.legacy.eb74205c979f58659ed7.js',
 		).toMatch(WEB_LEGACY_SCRIPT);
 		expect(
@@ -131,29 +127,5 @@ describe('getModulesBuild', () => {
 		});
 		const expected = BUILD_VARIANT ? 'web.variant' : 'web';
 		expect(build).toBe(expected);
-	});
-
-	it('should support Ophan ESM build when in test', () => {
-		const build = getModulesBuild({
-			tests: { ophanEsmVariant: 'variant' },
-			switches: {},
-		});
-		expect(build).toBe('web.ophan-esm');
-	});
-
-	it('should serve the scheduled build when in adaptive test', () => {
-		const build = getModulesBuild({
-			tests: { adaptiveSiteVariant: 'variant' },
-			switches: {},
-		});
-		expect(build).toBe('web.scheduled');
-	});
-
-	it('should serve the scheduled build when switched on', () => {
-		const build = getModulesBuild({
-			tests: {},
-			switches: { scheduler: true },
-		});
-		expect(build).toBe('web.scheduled');
 	});
 });

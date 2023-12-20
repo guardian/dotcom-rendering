@@ -5,9 +5,14 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Figure } from './Figure';
 import { RichLink } from './RichLink';
 import { Section } from './Section';
+
+interface AnalysisProps {
+	theme: string;
+}
 
 const someContributor =
 	'https://uploads.guim.co.uk/2017/10/09/Oliver-Wainwright,-L.png';
@@ -75,6 +80,8 @@ export const Article = () => {
 		</Section>
 	);
 };
+Article.storyName = 'Article';
+Article.decorators = [splitTheme([mockFormatNews])];
 
 export const Network = () => {
 	return (
@@ -106,6 +113,7 @@ Network.story = {
 		chromatic: { viewports: [380] },
 	},
 };
+Network.decorators = [splitTheme([mockFormatCulture])];
 
 export const SectionStory = () => {
 	return (
@@ -132,6 +140,7 @@ export const SectionStory = () => {
 	);
 };
 SectionStory.storyName = 'Section';
+SectionStory.decorators = [splitTheme([mockFormatNews])];
 
 export const Inline = () => {
 	return (
@@ -158,6 +167,7 @@ export const Inline = () => {
 	);
 };
 Inline.storyName = 'Inline';
+Inline.decorators = [splitTheme([mockFormatNews])];
 
 export const ImageContent = () => {
 	return (
@@ -189,6 +199,7 @@ ImageContent.story = {
 		chromatic: { viewports: [1300] },
 	},
 };
+ImageContent.decorators = [splitTheme([mockFormatNews])];
 
 export const Interactive = () => {
 	return (
@@ -206,7 +217,7 @@ export const Interactive = () => {
 					contentType="interactive"
 					url=""
 					linkFormat={mockFormatLifestyle}
-					format={mockFormatCulture}
+					format={mockFormatLifestyle}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -219,6 +230,7 @@ Interactive.story = {
 		viewport: { defaultViewport: 'leftCol' },
 	},
 };
+Interactive.decorators = [splitTheme([mockFormatNews])];
 
 export const Gallery = () => {
 	return (
@@ -258,6 +270,7 @@ Gallery.story = {
 		viewport: { defaultViewport: 'leftCol' },
 	},
 };
+Gallery.decorators = [splitTheme([mockFormatNews])];
 
 export const Video = () => {
 	return (
@@ -290,6 +303,7 @@ Video.story = {
 		chromatic: { viewports: [380] },
 	},
 };
+Video.decorators = [splitTheme([mockFormatNews])];
 
 export const Audio = () => {
 	return (
@@ -315,6 +329,8 @@ export const Audio = () => {
 		</Section>
 	);
 };
+Audio.storyName = 'Audio';
+Audio.decorators = [splitTheme([mockFormatNews])];
 
 export const LiveBlog = () => {
 	return (
@@ -362,6 +378,7 @@ LiveBlog.story = {
 		chromatic: { viewports: [380] },
 	},
 };
+LiveBlog.decorators = [splitTheme([mockFormatNews])];
 
 export const Tag = () => {
 	return (
@@ -387,6 +404,8 @@ export const Tag = () => {
 		</Section>
 	);
 };
+Tag.storyName = 'Tag';
+Tag.decorators = [splitTheme([mockFormatNews])];
 
 export const Index = () => {
 	return (
@@ -419,6 +438,8 @@ export const Index = () => {
 		</Section>
 	);
 };
+Index.storyName = 'Index';
+Index.decorators = [splitTheme([mockFormatNews])];
 
 export const Crossword = () => {
 	return (
@@ -444,6 +465,8 @@ export const Crossword = () => {
 		</Section>
 	);
 };
+Crossword.storyName = 'Crossword';
+Crossword.decorators = [splitTheme([mockFormatNews])];
 
 export const Survey = () => {
 	return (
@@ -469,6 +492,8 @@ export const Survey = () => {
 		</Section>
 	);
 };
+Survey.storyName = 'Survey';
+Survey.decorators = [splitTheme([mockFormatNews])];
 
 export const Signup = () => {
 	return (
@@ -495,6 +520,8 @@ export const Signup = () => {
 		</Section>
 	);
 };
+Signup.storyName = 'Signup';
+Signup.decorators = [splitTheme([mockFormatNews])];
 
 export const Userid = () => {
 	return (
@@ -520,6 +547,8 @@ export const Userid = () => {
 		</Section>
 	);
 };
+Userid.storyName = 'Userid';
+Userid.decorators = [splitTheme([mockFormatNews])];
 
 export const PaidFor = () => {
 	return (
@@ -551,13 +580,16 @@ export const PaidFor = () => {
 		</Section>
 	);
 };
+PaidFor.storyName = 'PaidFor';
+PaidFor.decorators = [splitTheme([mockFormatNews])];
 
-export const Analysis = () => {
+export const Analysis = ({ theme }: AnalysisProps) => {
 	return (
 		<div
+			className="light"
 			css={css`
 				/* stylelint-disable-next-line color-no-hex */
-				background-color: #fff4f2;
+				background-color: ${theme === 'light' ? '#fff4f2' : 'inherit'};
 			`}
 		>
 			Analysis Articles have a different color background, so rich links
@@ -601,3 +633,13 @@ export const Analysis = () => {
 		</div>
 	);
 };
+Analysis.storyName = 'Analysis';
+Analysis.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: Pillar.Culture,
+		},
+	]),
+];

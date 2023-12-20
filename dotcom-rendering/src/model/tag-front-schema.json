@@ -225,6 +225,9 @@
                                                                 "bio": {
                                                                     "type": "string"
                                                                 },
+                                                                "description": {
+                                                                    "type": "string"
+                                                                },
                                                                 "bylineImageUrl": {
                                                                     "type": "string"
                                                                 },
@@ -359,26 +362,7 @@
                             "editionBrandings": {
                                 "type": "array",
                                 "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "edition": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "$ref": "#/definitions/EditionId"
-                                                }
-                                            },
-                                            "required": [
-                                                "id"
-                                            ]
-                                        },
-                                        "branding": {
-                                            "$ref": "#/definitions/Branding"
-                                        }
-                                    },
-                                    "required": [
-                                        "edition"
-                                    ]
+                                    "$ref": "#/definitions/EditionBranding"
                                 }
                             },
                             "href": {
@@ -755,6 +739,9 @@
                                         "type": "string"
                                     },
                                     "bio": {
+                                        "type": "string"
+                                    },
+                                    "description": {
                                         "type": "string"
                                     },
                                     "bylineImageUrl": {
@@ -1369,6 +1356,28 @@
                 "url"
             ]
         },
+        "EditionBranding": {
+            "type": "object",
+            "properties": {
+                "edition": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "$ref": "#/definitions/EditionId"
+                        }
+                    },
+                    "required": [
+                        "id"
+                    ]
+                },
+                "branding": {
+                    "$ref": "#/definitions/Branding"
+                }
+            },
+            "required": [
+                "edition"
+            ]
+        },
         "EditionId": {
             "enum": [
                 "AU",
@@ -1383,15 +1392,7 @@
             "type": "object",
             "properties": {
                 "brandingType": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
+                    "$ref": "#/definitions/BrandingType"
                 },
                 "sponsorName": {
                     "type": "string"
@@ -1474,6 +1475,46 @@
                 "aboutThisLink",
                 "logo",
                 "sponsorName"
+            ]
+        },
+        "BrandingType": {
+            "anyOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "const": "paid-content"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "const": "foundation"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "const": "sponsored"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                }
             ]
         },
         "FEFrontCardStyle": {

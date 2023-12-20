@@ -1,7 +1,6 @@
-const fs = require('node:fs');
-const lockfile = require('@yarnpkg/lockfile');
+const semver = require('semver');
+const { warn, log } = require('../../../scripts/log');
 const pkg = require('../../package.json');
-const { warn, log } = require('./log');
 
 if (pkg.devDependencies) {
 	warn('Don’t use devDependencies');
@@ -9,25 +8,23 @@ if (pkg.devDependencies) {
 	process.exit(1);
 }
 
-const { object: json } = lockfile.parse(
-	fs.readFileSync('../yarn.lock', 'utf8'),
-);
-
-const knownNonSemver = /** @type {const} */ ([
+/**
+ * We don't check packages that are not semver-compatible
+ */
+const exceptions = /** @type {const} */ ([
 	'https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0',
-	'npm:ophan-tracker-js@2.0.0-beta-5',
 ]);
 
 const mismatches = Object.entries(pkg.dependencies)
-	.filter(([name, version]) => {
-		const pinned = json[name + '@' + version]?.version;
-		return version !== pinned;
-	})
-	.filter(([, version]) => !knownNonSemver.includes(version));
+	.filter(([, version]) => !exceptions.includes(version))
+	.filter(([, version]) => !semver.valid(version));
 
-if (mismatches.length) warn('All dependencies should be pinned');
-for (const [name, version] of mismatches) {
-	warn(`You must fix: ${name}@${String(version)}`);
+if (mismatches.length !== 0) {
+	warn('dotcom-rendering dependencies should be pinned.');
+
+	for (const [name, version] of mismatches) {
+		warn(`Please fix: ${name}@${String(version)}`);
+	}
+
+	process.exit(1);
 }
-
-process.exit(mismatches.length === 0 ? 0 : 1);

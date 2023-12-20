@@ -4,12 +4,14 @@ on:
   push:
     branches: [main]
   pull_request:
-    types: [opened, labeled, synchronize]
+    types: [opened, labeled, synchronize, ready_for_review]
 
 jobs:
   chromatic:
     name: Chromatic
     runs-on: ubuntu-latest
+    # Don't run Chromatic on draft PRs unless `run_chromatic` label has been applied.
+    if: (contains(github.event.pull_request.labels.*.name, 'run_chromatic') || github.event.pull_request.draft == false)
     steps:
       - name: Checkout - On Pull Request
         uses: actions/checkout@v4
@@ -26,19 +28,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-
-      # Root yarn installs all workspaces (root, dotcom)
-      - run: yarn install --frozen-lockfile
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
 
       - name: Chromatic - DCR
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'
         uses: chromaui/action@v1
-        # Run Chromatic only if `run_chromatic` label has been applied or we're
-        # pushing to `main`.
-        if: (contains(github.event.pull_request.labels.*.name, 'run_chromatic')  ||  github.ref == 'refs/heads/main')
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -46,3 +42,4 @@ jobs:
           onlyChanged: true
           untraced: '**/(package*.json|yarn.lock|preview.js)'
           workingDir: dotcom-rendering
+          buildScriptName: 'build-storybook'

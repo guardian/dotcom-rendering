@@ -48,7 +48,7 @@ const listStyleNone = css`
 			transparent 36px,
 			transparent 37px,
 			${neutral[100]} 37px,
-			${neutral[100]} 46px
+			${neutral[100]} 48px
 		),
 		repeating-linear-gradient(
 			to right,

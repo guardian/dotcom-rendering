@@ -3,16 +3,13 @@ import type { LoggingEvent } from 'log4js';
 import { addLayout, configure, getLogger, shutdown } from 'log4js';
 import { loggingStore } from './logging-store';
 
+const logName = `dotcom-rendering.log`;
+
 const logLocation =
 	process.env.NODE_ENV === 'production' &&
 	!process.env.DISABLE_LOGGING_AND_METRICS
-		? '/var/log/dotcom-rendering/dotcom-rendering.log'
-		: `${path.resolve('logs')}/dotcom-rendering.log`;
-
-const stage =
-	typeof process.env.GU_STAGE === 'string'
-		? process.env.GU_STAGE.toUpperCase()
-		: 'DEV';
+		? `/var/log/dotcom-rendering/${logName}`
+		: `${path.resolve('logs')}/${logName}`;
 
 const logFields = (logEvent: LoggingEvent): unknown => {
 	const { request } = loggingStore.getStore() ?? {
@@ -20,14 +17,19 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 	};
 
 	const coreFields = {
-		stack: 'frontend',
-		app: 'dotcom-rendering',
-		stage,
+		stack: process.env.GU_STACK ?? 'frontend',
+		app: process.env.GU_APP ?? 'rendering',
+		stage:
+			typeof process.env.GU_STAGE === 'string'
+				? process.env.GU_STAGE.toUpperCase()
+				: 'DEV',
 		'@timestamp': logEvent.startTime,
 		'@version': 1,
 		level: logEvent.level.levelStr,
 		level_value: logEvent.level.level,
 		request,
+		// NODE_APP_INSTANCE is set by cluster mode
+		thread_name: process.env.NODE_APP_INSTANCE ?? '0',
 	};
 	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
@@ -72,13 +74,20 @@ const enableLog4j = {
 			// Owner Read & Write, Group Read
 			mode: 0o640,
 		},
+		out: {
+			type: 'stdout',
+			layout: { type: 'json', separator: ',' },
+		},
 	},
 	categories: {
-		default: { appenders: ['fileAppender'], level: 'info' },
-		production: { appenders: ['fileAppender'], level: 'info' },
+		default: { appenders: ['out', 'fileAppender'], level: 'info' },
+		production: { appenders: ['out', 'fileAppender'], level: 'info' },
 		development: { appenders: ['console'], level: 'info' },
 	},
-	pm2: true,
+	// log4js cluster mode handling does not work as it prevents
+	// logs from processes other than the main process from
+	// writing to the log.
+	disableClustering: true,
 };
 
 if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {

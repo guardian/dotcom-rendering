@@ -1,5 +1,5 @@
 import { log } from '@guardian/libs';
-import { useOnce } from '../lib/useOnce';
+import { useEffect } from 'react';
 
 /**
  * This small snippet of javascript is executed at page load. It checks to
@@ -23,7 +23,7 @@ import { useOnce } from '../lib/useOnce';
  * Does not render **anything**.
  */
 export const LightboxHash = () => {
-	useOnce(() => {
+	useEffect(() => {
 		const hash = window.location.hash;
 		if (hash.startsWith('#img-')) {
 			log(

@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import React from 'react';
+import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
 
 /**
@@ -77,6 +78,19 @@ const decideImageWidths = ({
 					{ breakpoint: breakpoints.wide, width: 1900 },
 				];
 		}
+	}
+	if (format.design === ArticleDesign.Picture) {
+		// the order is important here. Picture content type images come through as main media, so needs to appear
+		// above `isMainMedia`, so the images do not appear low quality.
+		return [
+			{ breakpoint: breakpoints.mobile, width: 480 },
+			{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+			{ breakpoint: breakpoints.phablet, width: 740 },
+			{ breakpoint: breakpoints.tablet, width: 980 },
+			{ breakpoint: breakpoints.desktop, width: 1140 },
+			{ breakpoint: breakpoints.leftCol, width: 1300 },
+			{ breakpoint: breakpoints.wide, width: 1900 },
+		];
 	}
 	if (isMainMedia) {
 		switch (format.display) {
@@ -196,44 +210,6 @@ const decideImageWidths = ({
 	}
 };
 
-const getServiceFromUrl = (url: URL): string => {
-	const serviceName = url.hostname.split('.')[0] ?? '';
-	if (serviceName === 'static-secure') return 'static';
-	else return serviceName;
-};
-
-/**
- * Generates a URL for calling the Fastly Image Optimiser.
- *
- * @see https://developer.fastly.com/reference/io/
- * @see https://github.com/guardian/fastly-image-service/blob/main/fastly-io_guim_co_uk/src/main/resources/varnish/main.vcl
- *
- */
-const generateImageURL = ({
-	master,
-	imageWidth,
-	resolution,
-}: {
-	master: string;
-	imageWidth: number;
-	resolution: 'low' | 'high';
-}): string => {
-	const url = new URL(master);
-
-	// In CODE, we do not generate optimised replacement images
-	if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;
-
-	const params = new URLSearchParams({
-		width: imageWidth.toString(),
-		dpr: String(resolution === 'high' ? 2 : 1),
-		s: 'none',
-	});
-
-	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${
-		url.pathname
-	}?${params.toString()}`;
-};
-
 const descendingByBreakpoint = (a: ImageWidthType, b: ImageWidthType) => {
 	// We need to list the largest images first as browsers read top down and stop
 	// as soon as they hit a matching media query
@@ -267,11 +243,11 @@ type ImageSource = {
 /**
  * Generate image sources for an image.
  *
- * @param master source image URL
+ * @param mainImage source image URL
  * @param imageWidths list of image widths
  */
 export const generateSources = (
-	master: string,
+	mainImage: string,
 	imageWidths: readonly [ImageWidthType, ...ImageWidthType[]],
 ): ImageSource[] =>
 	imageWidths
@@ -282,12 +258,12 @@ export const generateSources = (
 				breakpoint,
 				width: imageWidth,
 				hiResUrl: generateImageURL({
-					master,
+					mainImage,
 					imageWidth,
 					resolution: 'high',
 				}),
 				lowResUrl: generateImageURL({
-					master,
+					mainImage,
 					imageWidth,
 					resolution: 'low',
 				}),

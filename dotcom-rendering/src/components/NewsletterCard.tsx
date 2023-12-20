@@ -11,13 +11,11 @@ import {
 	SvgPlus,
 } from '@guardian/source-react-components';
 import { useCallback, useEffect, useState } from 'react';
-import {
-	getOphanRecordFunction,
-	submitComponentEvent,
-} from '../client/ophan/ophan';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
 import { CardPicture } from './CardPicture';
+import { useConfig } from './ConfigContext';
 import { NewsletterDetail } from './NewsletterDetail';
 
 interface Props {
@@ -157,9 +155,9 @@ export const NewsletterCard = ({
 }: Props) => {
 	const [hasBeenSeen, setIsInViewRef] = useIsInView({ threshold: 0.9 });
 	const [haveReportedBeingSeen, setHaveReportedBeingSeen] = useState(false);
+	const { renderingTarget } = useConfig();
 
 	const reportSeen = useCallback(() => {
-		const record = getOphanRecordFunction();
 		const valueData = {
 			eventDescription: 'card-viewed',
 			newsletterId: newsletter.identityName,
@@ -169,7 +167,7 @@ export const NewsletterCard = ({
 			timestamp: Date.now(),
 		};
 
-		submitComponentEvent(
+		void submitComponentEvent(
 			{
 				component: {
 					componentType: 'CARD',
@@ -178,9 +176,15 @@ export const NewsletterCard = ({
 				action: 'VIEW',
 				value: JSON.stringify(valueData),
 			},
-			record,
+			renderingTarget,
 		);
-	}, [cardPosition, carouselPosition, groupTitle, newsletter.identityName]);
+	}, [
+		cardPosition,
+		carouselPosition,
+		groupTitle,
+		newsletter.identityName,
+		renderingTarget,
+	]);
 
 	useEffect(() => {
 		if (hasBeenSeen && !haveReportedBeingSeen) {
@@ -206,7 +210,7 @@ export const NewsletterCard = ({
 					<CardPicture
 						imageSize="carousel"
 						alt=""
-						master={newsletter.illustrationCard}
+						mainImage={newsletter.illustrationCard}
 						loading="lazy"
 					/>
 				</div>

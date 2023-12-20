@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { CountryCode } from '@guardian/libs';
+import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
@@ -14,11 +14,11 @@ import {
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
-import { getLocaleCode } from '../lib/getCountryCode';
-import { setAutomat } from '../lib/setAutomat';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	sectionId: string;
@@ -30,26 +30,6 @@ type Props = {
 	keywordIds: string;
 };
 
-const useCountryCode = () => {
-	const [countryCode, setCountryCode] = useState<CountryCode | null>();
-
-	useEffect(() => {
-		getLocaleCode()
-			.then((cc) => {
-				setCountryCode(cc);
-			})
-			.catch((e) => {
-				const msg = `Error fetching country code: ${String(e)}`;
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'liveblog-epic',
-				);
-			});
-	}, []);
-
-	return countryCode;
-};
-
 const useEpic = ({ url, name }: { url: string; name: string }) => {
 	// Using state here to store the Epic component that gets imported allows
 	// us to render it with React (instead of inserting it into the dom manually)
@@ -57,12 +37,12 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 		useState<React.ElementType<{ [key: string]: unknown }>>();
 
 	useEffect(() => {
-		setAutomat();
-		window
-			.guardianPolyfilledImport(url)
+		import(
+			/* webpackChunkName: "contributions-liveblog-epic" */ `./marketing/epics/ContributionsLiveblogEpic`
+		)
 			.then((epicModule) => {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- required for dynamic import
-				setEpic(() => epicModule[name]); // useState requires functions to be wrapped
+				// @ts-expect-error -- currently the type of the props in the response is too general
+				setEpic(() => epicModule.ContributionsLiveblogEpic);
 			})
 			.catch((err) => {
 				const msg = `Error importing LiveBlog epic: ${String(err)}`;
@@ -74,6 +54,22 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 	}, [url, name]);
 
 	return { Epic };
+};
+
+const useMvtId = (isDev = false): number => {
+	const [mvtId, setMvtId] = useState<number>(0);
+
+	useEffect(() => {
+		const cookie = getCookie({ name: 'GU_mvt_id', shouldMemoize: true });
+
+		if (cookie === null) return;
+
+		const id = Number(cookie) || 0;
+
+		setMvtId(id);
+	}, [isDev]);
+
+	return mvtId;
 };
 
 /**
@@ -102,9 +98,8 @@ const usePayload = ({
 }): EpicPayload | undefined => {
 	const articleCounts = useArticleCounts(pageId, keywordIds);
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
-	const countryCode = useCountryCode();
-	const mvtId =
-		Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })) || 0;
+	const countryCode = useCountryCode('liveblog-epic');
+	const mvtId = useMvtId();
 	const authStatus = useAuthStatus();
 	const isSignedIn =
 		authStatus.kind === 'SignedInWithOkta' ||
@@ -196,6 +191,7 @@ const Fetch = ({
 	contributionsServiceUrl: string;
 }) => {
 	const response = useSDCLiveblogEpic(contributionsServiceUrl, payload);
+	const { renderingTarget } = useConfig();
 
 	// If we didn't get a module in response (or we're still waiting) do nothing. If
 	// no epic should be shown the response is equal to {}, hence the Object.keys
@@ -207,7 +203,8 @@ const Fetch = ({
 	// Add submitComponentEvent function to props to enable Ophan tracking in the component
 	const props = {
 		...response.data.module.props,
-		submitComponentEvent,
+		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+			submitComponentEvent(componentEvent, renderingTarget),
 	};
 
 	// Take any returned module and render it

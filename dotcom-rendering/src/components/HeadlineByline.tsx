@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	brandAltBackground,
 	headline,
 	neutral,
 	space,
@@ -10,8 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { getSoleContributor } from '../lib/byline';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { palette as schemedPalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';
 
@@ -30,9 +28,10 @@ const yellowBoxStyles = (format: ArticleFormat) => css`
 				lineHeight: 'loose',
 		  })}
 	font-style: italic;
-	background-color: ${brandAltBackground.primary};
-	box-shadow: 4px 0 0 ${brandAltBackground.primary},
-		-6px 0 0 ${brandAltBackground.primary};
+	background-color: ${schemedPalette('--byline-background')};
+	box-shadow:
+		4px 0 0 ${schemedPalette('--byline-background')},
+		-6px 0 0 ${schemedPalette('--byline-background')};
 	display: inline-block;
 	box-decoration-break: clone;
 
@@ -49,7 +48,7 @@ const opinionWrapperStyles = css`
 	display: inline-block;
 `;
 
-const opinionStyles = (palette: Palette, format: ArticleFormat) => css`
+const opinionStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs
 		? textSans.xxxlarge({ lineHeight: 'loose' })
 		: headline.medium({
@@ -59,8 +58,7 @@ const opinionStyles = (palette: Palette, format: ArticleFormat) => css`
 	/* Used to prevent the byline stretching full width */
 	display: inline;
 	font-style: italic;
-	color: ${palette.text.headlineByline};
-	background: ${palette.background.headlineByline};
+	color: ${schemedPalette('--byline')};
 
 	${until.mobileMedium} {
 		${headline.small({
@@ -77,20 +75,13 @@ const opinionStyles = (palette: Palette, format: ArticleFormat) => css`
 	}
 `;
 
-const analysisStyles = (palette: Palette, hasSingleContributor: boolean) => css`
+const analysisStyles = css`
 	${headline.medium({
 		fontWeight: 'light',
 	})}
 	line-height: 38px;
 	font-style: italic;
-	color: ${palette.text.headlineByline};
-	background: ${palette.background.headlineByline};
-
-	${hasSingleContributor &&
-	css`
-		display: flex;
-		flex-direction: column;
-	`}
+	color: ${schemedPalette('--byline-anchor')};
 
 	${until.tablet} {
 		${headline.small({
@@ -110,6 +101,11 @@ const analysisStyles = (palette: Palette, hasSingleContributor: boolean) => css`
 	}
 `;
 
+const analysisSingleContributorStyles = css`
+	display: flex;
+	flex-direction: column;
+`;
+
 const immersiveStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs
 		? textSans.large({ lineHeight: 'tight' })
@@ -119,18 +115,18 @@ const immersiveStyles = (format: ArticleFormat) => css`
 	margin-bottom: ${space[6]}px;
 `;
 
-const immersiveLinkStyles = (palette: Palette, format: ArticleFormat) => css`
+const immersiveLinkStyles = css`
 	a {
-		color: ${palette.text.headlineByline};
-		border-bottom: 1px solid
-			${format.theme === ArticleSpecial.Labs
-				? palette.border.articleLink
-				: palette.text.headlineByline};
-		text-decoration: none;
+		color: ${schemedPalette('--byline-anchor')};
+		/* https://caniuse.com/mdn-css_properties_text-decoration-color */
+		text-decoration-color: ${schemedPalette('--byline-underline')};
+		/* https://caniuse.com/mdn-css_properties_text-decoration-thickness */
+		text-decoration-thickness: 1px;
+		/* https://caniuse.com/mdn-css_properties_text-underline-offset */
+		text-underline-offset: 6px;
 		:hover {
-			border-bottom: 1px solid ${palette.hover.headlineByline};
-			color: ${palette.hover.headlineByline};
-			text-decoration: none;
+			color: ${schemedPalette('--byline-hover')};
+			text-decoration-color: inherit;
 		}
 	}
 `;
@@ -151,8 +147,6 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 		return null;
 	}
 
-	const palette = decidePalette(format);
-
 	const hasSingleContributor = !!getSoleContributor(tags, byline);
 
 	switch (format.display) {
@@ -160,7 +154,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 			return (
 				<div css={immersiveStyles(format)}>
 					by{' '}
-					<span css={immersiveLinkStyles(palette, format)}>
+					<span css={immersiveLinkStyles}>
 						<BylineLink
 							byline={byline}
 							tags={tags}
@@ -196,7 +190,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 								hasSingleContributor && authorBylineWithImage,
 							]}
 						>
-							<div css={opinionStyles(palette, format)}>
+							<div css={opinionStyles(format)}>
 								<BylineLink
 									byline={byline}
 									tags={tags}
@@ -209,10 +203,11 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 					return (
 						<div css={opinionWrapperStyles}>
 							<div
-								css={analysisStyles(
-									palette,
-									hasSingleContributor,
-								)}
+								css={[
+									analysisStyles,
+									hasSingleContributor &&
+										analysisSingleContributorStyles,
+								]}
 							>
 								<BylineLink
 									byline={byline}

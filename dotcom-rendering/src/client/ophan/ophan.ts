@@ -7,18 +7,54 @@ import type {
 } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import type { ServerSideTests } from '../../types/config';
+import type { RenderingTarget } from '../../types/renderingTarget';
 
 export type OphanRecordFunction = (
-	event: { [key: string]: unknown },
+	event: { [key: string]: unknown } & {
+		/**
+		 * the experiences key will override previously set values.
+		 * Use `recordExperiences` instead.
+		 */
+		experiences?: never;
+	},
 	callback?: () => void,
 ) => void;
 
 /**
+ * Store a reference to Ophan so that we don't need to load/enhance it more than once.
+ */
+let cachedOphan: typeof window.guardian.ophan;
+
+/**
  * Loads Ophan (if it hasn't already been loaded) and returns a promise of Ophan's methods.
  */
-export const getOphan = async (): Promise<
-	NonNullable<typeof window.guardian.ophan>
-> => {
+export const getOphan = async (
+	renderingTarget: RenderingTarget,
+): Promise<NonNullable<typeof window.guardian.ophan>> => {
+	if (cachedOphan) {
+		return cachedOphan;
+	}
+
+	if (renderingTarget === 'Apps') {
+		cachedOphan = {
+			setEventEmitter: () => undefined, // We don't currently have a custom eventEmitter on DCR - like 'mediator' in Frontend.
+			trackComponentAttention: () => undefined,
+			record: (e) => {
+				if (e instanceof Error) {
+					window.guardian.modules.sentry.reportError(
+						e,
+						"We are in DCAR but Ophan record method got called. This shouldn't have happened. Please investigate why",
+					);
+				}
+			},
+			viewId: 'Apps',
+			pageViewId: 'Apps',
+		};
+
+		return cachedOphan;
+	}
+
+	// We've taken 'ophan-tracker-js' out of the apps client bundle (made it external in webpack) because we don't ever expect this method to be called. Tracking in apps is done natively.
 	// @ts-expect-error -- side effect only
 	await import(/* webpackMode: "eager" */ 'ophan-tracker-js');
 
@@ -45,56 +81,27 @@ export const getOphan = async (): Promise<
 		});
 	};
 
-	// this is the future of `getOphan`'s API, but we need to move to a
-	// dynamic import of the Ophan library to get there, so just returning a
-	// meaningless promise for now, for future-proofing
-	return Promise.resolve({ ...ophan, record, trackComponentAttention });
+	cachedOphan = { ...ophan, record, trackComponentAttention };
+	return cachedOphan;
 };
 
-/**
- * @deprecated use `getOphan` instead
- */
-export const getOphanRecordFunction = (): OphanRecordFunction => {
-	const record = window.guardian.ophan?.record;
-
-	if (record) return record;
-
-	// eslint-disable-next-line no-console -- worth informing all users
-	console.warn('window.guardian.ophan.record is not available');
-	return () => {
-		/* do nothing */
-	};
-};
-
-/**
- * @deprecated use `getOphan` instead
- */
-export const record: OphanRecordFunction = (event) => {
-	if (window.guardian.ophan?.record) {
-		window.guardian.ophan.record(event, () =>
-			log('dotcom', '🧿 Ophan event recorded:', event),
-		);
-	} else {
-		throw new Error("window.guardian.ophan.record doesn't exist");
-	}
-};
-
-export const submitComponentEvent = (
+export const submitComponentEvent = async (
 	componentEvent: OphanComponentEvent,
-	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
-): void => {
-	ophanRecord({ componentEvent });
+	renderingTarget: RenderingTarget,
+): Promise<void> => {
+	const ophan = await getOphan(renderingTarget);
+	ophan.record({ componentEvent });
 };
 
 interface SdcTestMeta extends OphanABTestMeta {
 	labels?: string[];
 }
 
-export const sendOphanComponentEvent = (
+export const sendOphanComponentEvent = async (
 	action: OphanAction,
 	testMeta: SdcTestMeta,
-	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
-): void => {
+	renderingTarget: RenderingTarget,
+): Promise<void> => {
 	const {
 		abTestName,
 		abTestVariant,
@@ -119,7 +126,7 @@ export const sendOphanComponentEvent = (
 		action,
 	};
 
-	submitComponentEvent(componentEvent, ophanRecord);
+	await submitComponentEvent(componentEvent, renderingTarget);
 };
 
 export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
@@ -134,7 +141,9 @@ export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
 	return { abTestRegister: records };
 };
 
-export const recordPerformance = (): void => {
+export const recordPerformance = async (
+	renderingTarget: RenderingTarget,
+): Promise<void> => {
 	const { performance: performanceAPI } = window;
 	const supportsPerformanceProperties =
 		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Safety on browsers
@@ -160,7 +169,26 @@ export const recordPerformance = (): void => {
 		redirectCount: performanceAPI.navigation.redirectCount,
 	};
 
-	record({
+	const ophan = await getOphan(renderingTarget);
+	ophan.record({
 		performance,
+	});
+};
+
+const experiencesSet = new Set(['dotcom-rendering']);
+export const recordExperiences = async (
+	renderingTarget: RenderingTarget,
+	experiences: string[],
+): Promise<void> => {
+	for (const experience of experiences) {
+		experiencesSet.add(experience);
+	}
+
+	const { record } = await getOphan(renderingTarget);
+
+	// this is the only allowed usage of sending experiences!
+	// otherwise, race conditions might lead to different results
+	record({
+		['experiences' as string]: [...experiencesSet].sort().join(','),
 	});
 };

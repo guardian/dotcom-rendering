@@ -2,14 +2,9 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { OphanComponent } from '@guardian/libs';
 import {
-	border,
-	brandAlt,
-	brandText,
 	from,
-	neutral,
-	news,
 	palette,
-	text,
+	palette as sourcePalette,
 	textSans,
 	until,
 	visuallyHidden,
@@ -21,6 +16,7 @@ import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
+import { useConfig } from './ConfigContext';
 
 const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
 export interface DropdownLinkType {
@@ -89,7 +85,7 @@ const displayNone = css`
 
 const linkStyles = css`
 	${textSans.small()};
-	color: ${text.anchorSecondary};
+	color: ${sourcePalette.neutral[7]};
 	position: relative;
 	transition: color 80ms ease-out;
 	margin: -1px 0 0 0;
@@ -98,7 +94,7 @@ const linkStyles = css`
 	padding: 10px 18px 15px 30px;
 
 	:hover {
-		background-color: ${neutral[93]};
+		background-color: ${sourcePalette.neutral[93]};
 		text-decoration: none;
 	}
 
@@ -108,7 +104,7 @@ const linkStyles = css`
 
 	:before {
 		content: '';
-		border-top: 1px solid ${border.secondary};
+		border-top: 1px solid ${sourcePalette.neutral[86]};
 		display: block;
 		position: absolute;
 		top: 0px;
@@ -122,7 +118,7 @@ const linkActive = css`
 
 	:after {
 		content: '';
-		border: 2px solid ${news[400]};
+		border: 2px solid ${sourcePalette.news[400]};
 		border-top: 0px;
 		border-right: 0px;
 		position: absolute;
@@ -148,7 +144,7 @@ const buttonStyles = css`
 	border: none;
 	/* Design System: The buttons should be components that handle their own layout using primitives  */
 	line-height: 1.2;
-	color: ${brandText.primary};
+	color: ${sourcePalette.neutral[100]};
 	transition: color 80ms ease-out;
 	padding: 0px 10px 6px 5px;
 	margin: 1px 0 0;
@@ -156,7 +152,7 @@ const buttonStyles = css`
 	position: relative;
 
 	:hover {
-		color: ${brandAlt[400]};
+		color: ${sourcePalette.brandAlt[400]};
 
 		:after {
 			transform: translateY(0) rotate(45deg);
@@ -279,6 +275,8 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 		[link],
 	);
 
+	const { renderingTarget } = useConfig();
+
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 	});
@@ -306,10 +304,13 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				notification.logImpression?.();
 			}
 
-			submitComponentEvent({
-				component: ophanComponent,
-				action: 'VIEW',
-			});
+			void submitComponentEvent(
+				{
+					component: ophanComponent,
+					action: 'VIEW',
+				},
+				renderingTarget,
+			);
 		}
 	}, [
 		hasBeenSeen,
@@ -317,14 +318,18 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 		link.notifications,
 		hasSentViewEvent,
 		link.id,
+		renderingTarget,
 	]);
 
 	useOnce(() => {
 		if (ophanComponent) {
-			submitComponentEvent({
-				component: ophanComponent,
-				action: 'INSERT',
-			});
+			void submitComponentEvent(
+				{
+					component: ophanComponent,
+					action: 'INSERT',
+				},
+				renderingTarget,
+			);
 		}
 	}, [ophanComponent]);
 
@@ -347,10 +352,13 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				data-link-name={link.dataLinkName}
 				onClick={() => {
 					if (ophanComponent) {
-						submitComponentEvent({
-							component: ophanComponent,
-							action: 'CLICK',
-						});
+						void submitComponentEvent(
+							{
+								component: ophanComponent,
+								action: 'CLICK',
+							},
+							renderingTarget,
+						);
 					}
 				}}
 			>
@@ -489,7 +497,7 @@ export const Dropdown = ({
 						]}
 						aria-expanded={isExpanded ? 'true' : 'false'}
 						data-link-name={dataLinkName}
-						data-cy="dropdown-button"
+						data-testid="dropdown-button"
 						type="button"
 					>
 						{label}
@@ -506,7 +514,7 @@ export const Dropdown = ({
 						) : (
 							<ul
 								css={[ulStyles, cssOverrides]}
-								data-cy="dropdown-options"
+								data-testid="dropdown-options"
 							>
 								{links.map((link, index) => (
 									<DropdownLink

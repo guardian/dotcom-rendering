@@ -1,13 +1,16 @@
 import { css } from '@emotion/react';
-import { neutral, space, text, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import { Button, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { palette as schemedPalette } from '../../palette';
 import type { CommentType } from '../../types/discussion';
 import { Row } from './Row';
 
 type Props = {
-	format: ArticleFormat;
 	commentBeingRepliedTo: CommentType;
 };
 
@@ -23,7 +26,7 @@ const indentStyles = css`
 	width: 18px;
 	svg {
 		/* stylelint-disable-next-line declaration-no-important */
-		fill: ${neutral[46]} !important;
+		fill: ${sourcePalette.neutral[46]} !important;
 	}
 `;
 
@@ -39,13 +42,13 @@ const replyPreviewHeaderStyle = css`
 `;
 
 const arrowSize = 15;
-const bg = neutral[93];
+
 const previewStyle = css`
 	padding-top: ${space[3]}px;
 	padding-bottom: ${space[3]}px;
 	padding-left: ${space[5]}px;
 	padding-right: ${space[5]}px;
-	background-color: ${bg};
+	background-color: ${schemedPalette('--top-pick-background')};
 	margin-top: ${arrowSize}px;
 	margin-bottom: ${arrowSize + 5}px;
 	position: relative;
@@ -54,7 +57,8 @@ const previewStyle = css`
 	:before {
 		content: '';
 		position: absolute;
-		border-left: ${arrowSize}px solid ${bg};
+		border-left: ${arrowSize}px solid
+			${schemedPalette('--top-pick-background')};
 		border-top: ${arrowSize}px solid transparent;
 		top: -${arrowSize - 1}px;
 		margin-left: ${space[9]}px;
@@ -70,12 +74,12 @@ const commentStyles = css`
 `;
 
 const blueLink = css`
-	color: ${text.anchorPrimary};
+	color: ${schemedPalette('--discussion-link')};
 `;
 
-const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
+const buttonLinkPillarBaseStyles = css`
 	button {
-		color: ${decidePalette(format).discussionGeneric};
+		color: ${schemedPalette('--discussion-colour')};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -84,14 +88,14 @@ const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${decidePalette(format).discussionGeneric};
+			text-decoration-color: ${schemedPalette('--discussion-colour')};
 		}
 	}
 `;
 
 const buttonLinkBaseStyles = css`
 	button {
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -100,15 +104,12 @@ const buttonLinkBaseStyles = css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${neutral[46]};
+			text-decoration-color: ${sourcePalette.neutral[46]};
 		}
 	}
 `;
 
-export const CommentReplyPreview = ({
-	format,
-	commentBeingRepliedTo,
-}: Props) => {
+export const CommentReplyPreview = ({ commentBeingRepliedTo }: Props) => {
 	const [displayReplyComment, setDisplayReplyComment] =
 		useState<boolean>(false);
 	return (
@@ -124,7 +125,7 @@ export const CommentReplyPreview = ({
 				<Space amount={3} />
 				<div
 					css={[
-						buttonLinkPillarBaseStyles(format),
+						buttonLinkPillarBaseStyles,
 						css`
 							button {
 								${textSans.small({ fontWeight: 'bold' })}

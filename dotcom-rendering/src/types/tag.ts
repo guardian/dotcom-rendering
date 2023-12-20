@@ -10,6 +10,7 @@ export type FETagType = {
 		webTitle: string;
 		/* bio is html */
 		bio?: string;
+		description?: string;
 		bylineImageUrl?: string;
 		bylineLargeImageUrl?: string;
 		contributorLargeImagePath?: string;

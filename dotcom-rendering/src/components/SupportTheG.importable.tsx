@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanABTestMeta, OphanComponentEvent } from '@guardian/libs';
-import { getCookie } from '@guardian/libs';
+import { getCookie, isUndefined } from '@guardian/libs';
 import {
 	brandAlt,
 	brandText,
@@ -18,9 +18,7 @@ import type {
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import type { OphanRecordFunction } from '../client/ophan/ophan';
 import {
-	getOphanRecordFunction,
 	sendOphanComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
@@ -32,14 +30,16 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
-import { getLocaleCode } from '../lib/getCountryCode';
+import type { AuthStatus } from '../lib/identity';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { setAutomat } from '../lib/setAutomat';
-import type { AuthStatus } from '../lib/useAuthStatus';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
+import { usePageViewId } from '../lib/usePageViewId';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	editionId: EditionId;
@@ -164,7 +164,6 @@ type ReaderRevenueLinksRemoteProps = {
 	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
-	ophanRecord: OphanRecordFunction;
 };
 
 function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
@@ -184,13 +183,14 @@ const ReaderRevenueLinksRemote = ({
 	countryCode,
 	pageViewId,
 	contributionsServiceUrl,
-	ophanRecord,
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType | null>(null);
 	const isSignedIn = getIsSignedIn(useAuthStatus());
+
+	const { renderingTarget } = useConfig();
 
 	useOnce((): void => {
 		setAutomat();
@@ -253,7 +253,12 @@ const ReaderRevenueLinksRemote = ({
 				<SupportHeader
 					submitComponentEvent={(
 						componentEvent: OphanComponentEvent,
-					) => submitComponentEvent(componentEvent, ophanRecord)}
+					) =>
+						void submitComponentEvent(
+							componentEvent,
+							renderingTarget,
+						)
+					}
 					{...supportHeaderResponse.props}
 				/>
 			</div>
@@ -272,7 +277,6 @@ type ReaderRevenueLinksNativeProps = {
 		support: string;
 		contribute: string;
 	};
-	ophanRecord: OphanRecordFunction;
 	pageViewId: string;
 	hasPageSkin: boolean;
 };
@@ -282,7 +286,6 @@ const ReaderRevenueLinksNative = ({
 	dataLinkNamePrefix,
 	inHeader,
 	urls,
-	ophanRecord,
 	pageViewId,
 	hasPageSkin,
 }: ReaderRevenueLinksNativeProps) => {
@@ -298,6 +301,8 @@ const ReaderRevenueLinksNative = ({
 		campaignCode,
 	};
 
+	const { renderingTarget } = useConfig();
+
 	const [hasBeenSeen, setNode] = useIsInView({
 		threshold: 0,
 		debounce: true,
@@ -305,14 +310,14 @@ const ReaderRevenueLinksNative = ({
 
 	useEffect(() => {
 		if (!hideSupportMessaging && inHeader) {
-			sendOphanComponentEvent('INSERT', tracking, ophanRecord);
+			void sendOphanComponentEvent('INSERT', tracking, renderingTarget);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		if (hasBeenSeen && inHeader) {
-			sendOphanComponentEvent('VIEW', tracking, ophanRecord);
+			void sendOphanComponentEvent('VIEW', tracking, renderingTarget);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hasBeenSeen]);
@@ -431,46 +436,26 @@ export const SupportTheG = ({
 	contributionsServiceUrl,
 	hasPageSkin = false,
 }: Props) => {
-	const [countryCode, setCountryCode] = useState<string>();
-	const pageViewId = window.guardian.config.ophan.pageViewId;
-	const ophanRecord = getOphanRecordFunction();
+	const { renderingTarget } = useConfig();
+	const countryCode = useCountryCode('support-the-Guardian');
+	const pageViewId = usePageViewId(renderingTarget);
 
-	useEffect(() => {
-		const callFetch = () => {
-			getLocaleCode()
-				.then((cc) => {
-					setCountryCode(cc ?? '');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${String(e)}`),
-				);
-		};
-		callFetch();
-	}, []);
+	if (isUndefined(countryCode) || isUndefined(pageViewId)) return null;
 
-	if (countryCode) {
-		if (inHeader && remoteHeader) {
-			return (
-				<ReaderRevenueLinksRemote
-					countryCode={countryCode}
-					pageViewId={pageViewId}
-					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophanRecord}
-				/>
-			);
-		}
-		return (
-			<ReaderRevenueLinksNative
-				editionId={editionId}
-				dataLinkNamePrefix={dataLinkNamePrefix}
-				inHeader={inHeader}
-				urls={urls}
-				ophanRecord={ophanRecord}
-				pageViewId={pageViewId}
-				hasPageSkin={hasPageSkin}
-			/>
-		);
-	}
-
-	return null;
+	return inHeader && remoteHeader ? (
+		<ReaderRevenueLinksRemote
+			countryCode={countryCode}
+			pageViewId={pageViewId}
+			contributionsServiceUrl={contributionsServiceUrl}
+		/>
+	) : (
+		<ReaderRevenueLinksNative
+			editionId={editionId}
+			dataLinkNamePrefix={dataLinkNamePrefix}
+			inHeader={inHeader}
+			urls={urls}
+			pageViewId={pageViewId}
+			hasPageSkin={hasPageSkin}
+		/>
+	);
 };

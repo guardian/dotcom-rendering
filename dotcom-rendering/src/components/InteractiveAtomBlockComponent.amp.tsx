@@ -92,7 +92,7 @@ export const InteractiveAtomBlockComponent = ({
 						height="1"
 						width="1"
 						resizable=""
-						data-cy="atom-embed-url"
+						data-testid="atom-embed-url"
 					>
 						{!!placeholderUrl && (
 							<amp-img

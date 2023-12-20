@@ -1,19 +1,31 @@
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
+import { log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { getNotificationsClient } from '../lib/bridgetApi';
-import { FollowButton } from './FollowButton';
+import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
+import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
+import { useIsMyGuardianEnabled } from '../lib/useIsMyGuardianEnabled';
+import { FollowNotificationsButton, FollowTagButton } from './FollowButtons';
 
 type Props = {
 	id: string;
 	displayName: string;
-	format: ArticleFormat;
 };
 
-export const FollowWrapper = ({ id, displayName, format }: Props) => {
-	const [isFollowing, setIsFollowing] = useState<boolean | undefined>(
+export const FollowWrapper = ({ id, displayName }: Props) => {
+	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
+		boolean | undefined
+	>(undefined);
+	const [isFollowingTag, setIsFollowingTag] = useState<boolean | undefined>(
 		undefined,
 	);
+	const [showFollowTagButton, setShowFollowTagButton] =
+		useState<boolean>(false);
+
+	const isMyGuardianEnabled = useIsMyGuardianEnabled();
+	const isBridgetCompatible = useIsBridgetCompatible('2.5.0');
+	isBridgetCompatible && isMyGuardianEnabled && setShowFollowTagButton(true);
+
 	useEffect(() => {
 		const topic = new Topic({
 			id,
@@ -23,40 +35,111 @@ export const FollowWrapper = ({ id, displayName, format }: Props) => {
 
 		void getNotificationsClient()
 			.isFollowing(topic)
-			.then(setIsFollowing)
-			.catch((e) => console.error(e));
+			.then(setIsFollowingNotifications)
+			.catch((e) =>
+				log(
+					'dotcom',
+					'Bridget getNotificationsClient.isFollowing Error:',
+					e,
+				),
+			);
+
+		void getTagClient()
+			.isFollowing(topic)
+			.then(setIsFollowingTag)
+			.catch((e) =>
+				log('dotcom', 'Bridget getTagClient.isFollowing Error:', e),
+			);
 	}, [id, displayName]);
 
-	const handler = () => {
+	const tagHandler = () => {
 		const topic = new Topic({
 			id,
 			displayName,
 			type: 'tag-contributor',
 		});
 
-		isFollowing
+		isFollowingTag
+			? void getTagClient()
+					.unfollow(topic)
+					.then((success) => {
+						success && setIsFollowingTag(false);
+					})
+					.catch((e) =>
+						log(
+							'dotcom',
+							'Bridget getTagClient.unfollow Error:',
+							e,
+						),
+					)
+			: void getTagClient()
+					.follow(topic)
+					.then((success) => {
+						success && setIsFollowingTag(true);
+					})
+					.catch((e) =>
+						log('dotcom', 'Bridget getTagClient.follow Error:', e),
+					);
+	};
+
+	const notificationsHandler = () => {
+		const topic = new Topic({
+			id,
+			displayName,
+			type: 'tag-contributor',
+		});
+
+		isFollowingNotifications
 			? void getNotificationsClient()
 					.unfollow(topic)
-					.then(() => setIsFollowing(false))
-					.catch((e) => console.error(e))
+					.then((success) => {
+						success && setIsFollowingNotifications(false);
+					})
+					.catch((e) =>
+						log(
+							'dotcom',
+							'Bridget getNotificationsClient.unfollow Error:',
+							e,
+						),
+					)
 			: void getNotificationsClient()
 					.follow(topic)
-					.then(() => setIsFollowing(true))
-					.catch((e) => console.error(e));
+					.then((success) => {
+						success && setIsFollowingNotifications(true);
+					})
+					.catch((e) =>
+						log(
+							'dotcom',
+							'Bridget getNotificationsClient.follow Error:',
+							e,
+						),
+					);
 	};
+
 	return (
 		<div
 			css={css`
 				min-height: 24px;
 			`}
 		>
-			<FollowButton
-				isFollowing={isFollowing ?? false}
-				displayName={displayName}
+			{showFollowTagButton && (
+				<FollowTagButton
+					isFollowing={isFollowingTag ?? false}
+					displayName={displayName}
+					onClickHandler={
+						isFollowingTag !== undefined
+							? tagHandler
+							: () => undefined
+					}
+				/>
+			)}
+			<FollowNotificationsButton
+				isFollowing={isFollowingNotifications ?? false}
 				onClickHandler={
-					isFollowing !== undefined ? handler : () => undefined
+					isFollowingNotifications !== undefined
+						? notificationsHandler
+						: () => undefined
 				}
-				format={format}
 			/>
 		</div>
 	);

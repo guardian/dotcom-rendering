@@ -1,5 +1,7 @@
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
 import {
+	GuDistributionBucketParameter,
+	GuLoggingStreamNameParameter,
 	GuStack,
 	GuStringParameter,
 } from '@guardian/cdk/lib/constructs/core';
@@ -14,7 +16,7 @@ import {
 } from '@guardian/cdk/lib/constructs/iam';
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
-import { CfnOutput, Duration } from 'aws-cdk-lib';
+import { CfnOutput, Duration, Tags } from 'aws-cdk-lib';
 import {
 	AdjustmentType,
 	CfnScalingPolicy,
@@ -23,6 +25,7 @@ import {
 import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
+import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import type { DCRAlarmConfig, DCRProps } from './types';
 import { getUserData } from './userData';
 
@@ -54,6 +57,12 @@ export class DotcomRendering extends GuStack {
 		const privateSubnets = GuVpc.subnetsFromParameter(this, {
 			type: SubnetType.PRIVATE,
 		});
+
+		const artifactsBucket =
+			GuDistributionBucketParameter.getInstance(this).valueAsString;
+
+		const loggingStreamName =
+			GuLoggingStreamNameParameter.getInstance(this).valueAsString;
 
 		// ------------------------------------
 		// Load balancer related resources
@@ -88,7 +97,14 @@ export class DotcomRendering extends GuStack {
 		/**
 		 * TODO - migrate this ELB (classic load balancer) to an ALB (application load balancer)
 		 * @see https://github.com/guardian/cdk/blob/512536bd590b26d9fcac5d39329e8217103d7859/src/constructs/loadbalancing/elb.ts#L24-L46
+		 *
+		 * GOTCHA: The load balancer name appends `-ELB` when the `app = "rendering"` for backwards compatibility
+		 * We removed this to avoid the `LoadBalancerName.length > 32`. This will be fixable once we migrate to ALBs.
 		 */
+		const loadBalancerName =
+			app === 'rendering'
+				? `${stack}-${stage}-${app}-ELB`
+				: `${stack}-${stage}-${app}`;
 		const loadBalancer = new GuClassicLoadBalancer(
 			this,
 			'InternalLoadBalancer',
@@ -129,7 +145,7 @@ export class DotcomRendering extends GuStack {
 				],
 				subnetSelection: { subnets: publicSubnets },
 				propertiesToOverride: {
-					LoadBalancerName: `${stack}-${stage}-${app}-ELB`,
+					LoadBalancerName: loadBalancerName,
 					// Note: this does not prevent the GuClassicLoadBalancer
 					// from creating a default security group, though it does
 					// override which one is used/associated with the load balancer
@@ -145,6 +161,13 @@ export class DotcomRendering extends GuStack {
 		new CfnOutput(this, 'LoadBalancerUrl', {
 			value: loadBalancer.loadBalancerDnsName,
 		});
+
+		new StringParameter(this, 'loadBalancerDnsName', {
+			// Annoyingly this doesn't follow the same pattern as the other SSM parameters
+			parameterName: `/${stack}/${stage}/${app}.loadBalancerDnsName`,
+			stringValue: loadBalancer.loadBalancerDnsName,
+		});
+
 		// ------------------------------------
 
 		// ------------------------------------
@@ -176,23 +199,12 @@ export class DotcomRendering extends GuStack {
 		const instanceRole = new GuInstanceRole(this, {
 			app,
 			additionalPolicies: [
-				// TODO - double check if we are duplicating policies that
-				// are provided by default through GuCDK
 				new GuAllowPolicy(this, 'AllowPolicyGetArtifactsBucket', {
 					actions: ['s3:GetObject'],
-					resources: ['arn:aws:s3:::aws-frontend-artifacts/*'],
+					resources: [`arn:aws:s3:::${artifactsBucket}/*`],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
 					actions: ['cloudwatch:*', 'logs:*'],
-					resources: ['*'],
-				}),
-				new GuAllowPolicy(this, 'AllowPolicyDescribeEc2Autoscaling', {
-					actions: [
-						'ec2:DescribeTags',
-						'ec2:DescribeInstances',
-						'autoscaling:DescribeAutoScalingGroups',
-						'autoscaling:DescribeAutoScalingInstances',
-					],
 					resources: ['*'],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
@@ -204,7 +216,7 @@ export class DotcomRendering extends GuStack {
 				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
 					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
 					resources: [
-						`arn:aws:ssm:${region}:${this.account}:parameter/${ssmPrefix}/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter${ssmPrefix}/*`,
 						// TODO - these SSM prefixes are dated, should convert the params to the naming structure above
 						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
 						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
@@ -226,18 +238,19 @@ export class DotcomRendering extends GuStack {
 			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
 			userData: getUserData({
 				app,
-				region,
+				stack,
 				stage,
-				elkStreamId: new GuStringParameter(this, 'ELKStreamId', {
-					fromSSM: true,
-					default: `${ssmPrefix}/logging.stream.name`,
-				}).valueAsString,
+				artifactsBucket,
 			}),
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
 			vpcSubnets: { subnets: privateSubnets },
 			withoutImdsv2: true,
 		});
+
+		Tags.of(asg).add('LogKinesisStreamName', loggingStreamName);
+		Tags.of(asg).add('SystemdUnit', `${app}.service`);
+
 		// ! Important !
 		// Ensure the ASG is attached to the load balancer
 		// This is because our auto scaling group uses the ELB for healthchecks

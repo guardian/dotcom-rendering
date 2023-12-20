@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 	<head>
 		<link
@@ -34,6 +34,17 @@
 	<body>
 		<h2>Default Endpoints</h2>
 
+		<form name="url-form">
+			<input
+				type="url"
+				name="url-input"
+				size="100"
+				required
+				placeholder="https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+			/>
+			<input type="submit" value="Add" />
+		</form>
+
 		<ul id="default-endpoints">
 			<li>
 				<a
@@ -57,6 +68,12 @@
 				<a
 					href="/AMPInteractive/https://www.theguardian.com/world/2021/mar/24/how-a-container-ship-blocked-the-suez-canal-visual-guide"
 					>⚡️Interactive</a
+				>
+			</li>
+			<li>
+				<a
+					href="/AppsInteractive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive"
+					>Apps Interactive</a
 				>
 			</li>
 			<li>
@@ -90,6 +107,180 @@
 				>
 			</li>
 		</ul>
+
+		<section>
+			<h2>Article Examples</h2>
+
+			<article-examples>
+				<ul>
+					<li
+						data-design="Standard"
+						data-display="Standard"
+						data-theme="Lifestyle"
+					>
+						<a
+							href="https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+						>
+							Ticket touts face unlimited fines for using 'bots'
+							to buy in bulk
+						</a>
+					</li>
+					<li
+						data-design="Feature"
+						data-display="Showcase"
+						data-theme="News"
+					>
+						<a
+							href="https://www.theguardian.com/cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked"
+						>
+							Reclaimed lakes and giant airports: how Mexico City
+							might have looked
+						</a>
+					</li>
+				</ul>
+			</article-examples>
+
+			<template id="articles-table-template">
+				<style>
+					:host {
+						display: block;
+						overflow-x: auto;
+					}
+
+					table {
+						text-align: left;
+						border-spacing: 0;
+					}
+
+					th {
+						padding: 0.5rem 1rem;
+					}
+
+					thead {
+						background-color: #dcdcdc;
+					}
+
+					tbody {
+						& tr:nth-child(even) {
+							background-color: #ededed;
+						}
+
+						& tr:nth-child(odd) {
+							background-color: #f6f6f6;
+						}
+					}
+
+					td {
+						padding: 1rem 2rem 1rem 1rem;
+						max-width: 20rem;
+						min-width: 9rem;
+					}
+
+					dt {
+						font-weight: bold;
+						display: inline;
+					}
+
+					dd {
+						display: inline;
+						margin: 0;
+					}
+
+					.links,
+					.format {
+						max-width: 9rem;
+					}
+				</style>
+				<table>
+					<thead>
+						<tr>
+							<th rowspan="2">Headline</th>
+							<th rowspan="2">Format</th>
+							<th colspan="3">Links</th>
+						</tr>
+						<tr>
+							<th>PROD</th>
+							<th>CODE</th>
+							<th>DEV</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</template>
+
+			<template id="article-row-template">
+				<tr>
+					<td class="headline"></td>
+					<td class="format">
+						<dl>
+							<dt>Design:</dt>
+							<dd class="design"></dd>
+							<dt>Display:</dt>
+							<dd class="display"></dd>
+							<dt>Theme:</dt>
+							<dd class="theme"></dd>
+						</dl>
+					</td>
+					<td class="links">
+						<article-link
+							product="dotcom"
+							env="PROD"
+						></article-link>
+						<article-link product="apps" env="PROD"></article-link>
+						<article-link product="amp" env="PROD"></article-link>
+					</td>
+					<td class="links">
+						<article-link
+							product="dotcom"
+							env="CODE"
+						></article-link>
+						<article-link product="apps" env="CODE"></article-link>
+						<article-link product="amp" env="CODE"></article-link>
+					</td>
+					<td class="links">
+						<article-link product="dotcom" env="DEV"></article-link>
+						<article-link product="apps" env="DEV"></article-link>
+						<article-link product="amp" env="DEV"></article-link>
+					</td>
+				</tr>
+			</template>
+
+			<template id="article-link-template">
+				<style>
+					a {
+						border-radius: 1rem;
+						padding: 0.3rem 1rem;
+						display: flex;
+						justify-content: space-between;
+						text-decoration: none;
+						margin-bottom: 0.2rem;
+					}
+
+					.arrow {
+						padding-left: 0.5rem;
+					}
+
+					:host([env='PROD']) a {
+						background-color: #052962;
+						color: white;
+					}
+
+					:host([env='CODE']) a {
+						background-color: #22874d;
+						color: white;
+					}
+
+					:host([env='DEV']) a {
+						background-color: #ffe500;
+						color: black;
+					}
+				</style>
+				<a href="">
+					<span class="link-text">Link</span>
+					<span class="arrow">→</span>
+				</a>
+			</template>
+		</section>
 
 		<h2>Test Articles By Content Type</h2>
 
@@ -143,8 +334,10 @@
 			<li>VideoBlockElement</li>
 			<li>VideoFacebookBlockElement</li>
 		</ul>
+		<div id="achievements-root"></div>
 
 		<script>
+			// @ts-check
 			var testContentTypes = [
 				{
 					name: 'Live Blog',
@@ -347,7 +540,7 @@
 				{
 					name: 'Q&A Atom',
 					article:
-						'/world/2020/jul/16/a-single-use-face-mask-or-one-like-amber-heards-how-i-learnt-to-choose-wisely',
+						'/film/2023/jul/30/disaster-movies-films-climate-crisis-documentaries',
 				},
 				{
 					name: 'Quiz Atom',
@@ -378,51 +571,71 @@
 				else return 'Front';
 			};
 
+			/**
+			 * @typedef {'input' | 'clipboard'} Source
+			 * @param {Source} source
+			 * @return {string}
+			 */
+			const sourceIcon = (source) => {
+				switch (source) {
+					case 'input':
+						return '✍️';
+					case 'clipboard':
+						return '📋';
+				}
+			};
+
+			/**
+			 * @param {Source} source
+			 * @return {(text: string) => void}
+			 */
+			const addUrl = (source) => (text) => {
+				const guurl = [
+					'https://www.theguardian.com/',
+					'https://m.code.dev-theguardian.com/',
+					'http://localhost:9000/',
+				].find((base) => text.startsWith(base));
+				if (guurl) {
+					if (urls.has(text)) return;
+
+					urls.add(text);
+					const fragment = document.createDocumentFragment();
+					const li = document.createElement('li');
+					const a = document.createElement('a');
+					const slug = text.slice(guurl.length, 64);
+
+					const pageType = getPageType(text);
+					checkForClipboardAchievements(guurl, pageType);
+
+					a.setAttribute('href', `/${pageType}/${text}`);
+					a.innerText = `${sourceIcon(
+						source,
+					)} ${pageType} from ${source}: /${slug}…`;
+
+					li.appendChild(a);
+
+					if (pageType === 'Front') {
+						const aJSON = document.createElement('a');
+						aJSON.setAttribute('href', `/${pageType}JSON/${text}`);
+						aJSON.innerHTML = 'Enhanced JSON';
+						li.append(' (', aJSON, ')');
+					}
+
+					fragment.appendChild(li);
+
+					document
+						.querySelector('#default-endpoints')
+						?.appendChild(fragment);
+				}
+			};
+
 			const checkClipboard = (e) => {
 				if (document.visibilityState !== 'visible') return;
 				if (!navigator?.clipboard) return;
 				if (!document.hasFocus()) return;
 				if (typeof navigator.clipboard.readText !== 'function') return;
 
-				navigator.clipboard.readText().then((text) => {
-					const guurl = [
-						'https://www.theguardian.com/',
-						'https://m.code.dev-theguardian.com/',
-						'http://localhost:9000/',
-					].find((base) => text.startsWith(base));
-					if (guurl) {
-						if (urls.has(text)) return;
-
-						urls.add(text);
-						const fragment = document.createDocumentFragment();
-						const li = document.createElement('li');
-						const a = document.createElement('a');
-						const slug = text.slice(guurl.length, 64);
-
-						const pageType = getPageType(text);
-
-						a.setAttribute('href', `/${pageType}/${text}`);
-						a.innerText = `📋 ${pageType} from clipboard: /${slug}…`;
-
-						li.appendChild(a);
-
-						if (pageType === 'Front') {
-							const aJSON = document.createElement('a');
-							aJSON.setAttribute(
-								'href',
-								`/${pageType}JSON/${text}`,
-							);
-							aJSON.innerHTML = 'Enhanced JSON';
-							li.append(' (', aJSON, ')');
-						}
-
-						fragment.appendChild(li);
-
-						document
-							.querySelector('#default-endpoints')
-							.appendChild(fragment);
-					}
-				});
+				navigator.clipboard.readText().then(addUrl('clipboard'));
 			};
 
 			document.addEventListener('visibilitychange', checkClipboard);
@@ -440,20 +653,580 @@
 			         `;
 
 			testContentTypes.forEach((a) => {
-				document.getElementById('test-articles-by-content').innerHTML +=
-					makeTestArticle(a);
+				const testArticles = document.getElementById(
+					'test-articles-by-content',
+				);
+
+				if (testArticles !== null) {
+					testArticles.innerHTML += makeTestArticle(a);
+				}
 			});
 
 			testArticles.forEach((a) => {
-				document.getElementById('test-articles-by-element').innerHTML +=
-					makeTestArticle(a);
+				const testArticles = document.getElementById(
+					'test-articles-by-element',
+				);
+
+				if (testArticles !== null) {
+					testArticles.innerHTML += makeTestArticle(a);
+				}
 			});
 
 			testContentAtomTypes.forEach((a) => {
-				document.getElementById(
+				const testArticles = document.getElementById(
 					'test-articles-by-atom-type',
-				).innerHTML += makeTestArticle(a);
+				);
+
+				if (testArticles !== null) {
+					testArticles.innerHTML += makeTestArticle(a);
+				}
 			});
+
+			/**
+			 * Olly N (Nov 2023)
+			 * Enjoy some achievements for using the DCR dev server!
+			 *
+			 * Are you a future traveler on your way out from the guardian, or just looking for some 10% fun?
+			 * Consider adding your own achievements! I've added a few basic ones already, but the fun of this
+			 * is that anyone can add to this - make using DCR a more exciting & exploratory experience!
+			 */
+			const activationDate = new Date('2023-11-18'); // Come across this code before this date? Shhh!
+			const isActivated = () => Date.now() > activationDate.getTime();
+
+			const achievementTrackerGet = (category) => {
+				try {
+					const raw = localStorage.getItem(
+						`gu.achievement.${category}`,
+					);
+					if (raw !== null) return new Set(JSON.parse(raw));
+					else return new Set();
+				} catch (err) {
+					console.error(err);
+					return new Set();
+				}
+			};
+
+			const achievementTrackerAdd = (category, value, override) => {
+				try {
+					const set = override ?? achievementTrackerGet(category);
+					set.add(value);
+					localStorage.setItem(
+						`gu.achievement.${category}`,
+						JSON.stringify(Array.from(set)),
+					);
+					return set;
+				} catch (err) {
+					console.error(err);
+					return new Set([value]); // Shh
+				}
+			};
+
+			const pageViewAchievements = () => {
+				if (!isActivated()) return; // Only start tracking after Olly N is gone
+				const set = achievementTrackerGet('indexpageview');
+				// this is a bit of a hack because I made the local storage use sets
+				const count = (set.values().next().value ?? 0) + 1;
+				achievementTrackerAdd('indexpageview', count, new Set());
+
+				const createAchievement = (userType, count) =>
+					achievement(
+						`${userType} user!`,
+						`Visited the dev server index page ${count} times`,
+					);
+
+				switch (count) {
+					case 100:
+						return createAchievement('Light', 100);
+					case 500:
+						return createAchievement('Confident', 500);
+					case 1000:
+						return createAchievement('Experienced', 1000);
+					case 5000:
+						return createAchievement('Expert', 5000);
+					case 10000:
+						return createAchievement('Pro', 10000);
+					case -1:
+						return achievement(
+							'Hacker',
+							'Hacked the dev server to get your page count to be -1!',
+						);
+				}
+			};
+
+			const checkForClipboardAchievements = (host, pageType) => {
+				if (!isActivated()) return; // Only start tracking after Olly N is gone
+				const hostsUsed = achievementTrackerAdd('clipboardhosts', host);
+				const pageTypesUsed = achievementTrackerAdd(
+					'clipboardpagetypes',
+					pageType,
+				);
+				if (pageTypesUsed.size === 3) {
+					achievement(
+						'Page type traveler!',
+						'Have had all 3 types of page in your clipboard',
+					);
+				}
+				if (hostsUsed.size === 3) {
+					achievement(
+						'Environment explorer!',
+						'Have had all 3 environments in your clipboard ',
+					);
+				}
+
+				const set = achievementTrackerGet('clipboarduse');
+				// this is a bit of a hack because I made the local storage use sets
+				const count = (set.values().next().value ?? 0) + 1;
+				achievementTrackerAdd('clipboarduse', count, new Set());
+
+				const createAchievement = (level, count) =>
+					achievement(
+						`Clipboard Level ${level}!`,
+						`Copied ${count} guardian pages for quick access on the dev-server`,
+					);
+
+				switch (count) {
+					case 25:
+						return createAchievement(1, 25);
+					case 100:
+						return createAchievement(2, 100);
+					case 500:
+						return createAchievement(3, 1000);
+					case 15000:
+						return createAchievement(4, 5000);
+					case 5000:
+						return createAchievement(5, 10000);
+					case -1:
+						return achievement(
+							'Clipboard Hacker!',
+							'Hacked the dev server to get your clipboard use to be -1!',
+						);
+				}
+			};
+
+			const achievement = (title, message) => {
+				if (achievementTrackerGet('shown').has(title)) return;
+				achievementTrackerAdd('shown', title);
+				const html = `
+					<div class="achievement">
+						<h2>${title}</h2>
+						<p>${message}</p>
+					</div>
+				`;
+
+				const root = document.getElementById('achievements-root');
+				if (root !== null) {
+					root.innerHTML = html;
+				}
+			};
+
+			pageViewAchievements();
+			document
+				.getElementsByName('url-form')[0]
+				?.addEventListener('submit', (event) => {
+					event.preventDefault();
+
+					if (event.target instanceof HTMLFormElement) {
+						const formData = new FormData(event.target);
+						const url = formData.get('url-input');
+
+						if (typeof url === 'string') {
+							addUrl('input')(url);
+							event.target.reset();
+						}
+					}
+				});
+
+			class ArticleLink extends HTMLElement {
+				/**
+				 * @typedef {'dotcom' | 'apps' | 'amp'} Product
+				 * @typedef {'PROD' | 'CODE' | 'DEV'} Env
+				 */
+
+				/** @type {DocumentFragment} */
+				content;
+
+				/** @type {HTMLAnchorElement} */
+				link;
+
+				/** @type {HTMLSpanElement} */
+				linkText;
+
+				/**
+				 * @param {Product} product
+				 * @return {string}
+				 */
+				prodOrigin(product) {
+					switch (product) {
+						case 'dotcom':
+						case 'apps':
+							return 'https://www.theguardian.com';
+						case 'amp':
+							return 'https://amp.theguardian.com';
+					}
+				}
+
+				/**
+				 * @param {Product} product
+				 * @return {string}
+				 */
+				codeOrigin(product) {
+					switch (product) {
+						case 'dotcom':
+						case 'apps':
+							return 'https://m.code.dev-theguardian.com';
+						case 'amp':
+							return 'https://amp.code.dev-theguardian.com';
+					}
+				}
+
+				/**
+				 * @param {Product} product
+				 * @return {URLSearchParams}
+				 */
+				params(product) {
+					return new URLSearchParams(
+						product === 'apps' ? { dcr: 'apps' } : undefined,
+					);
+				}
+
+				/**
+				 * @param {Product} product
+				 * @return {string}
+				 */
+				devPath(product) {
+					switch (product) {
+						case 'dotcom':
+							return '/Article';
+						case 'apps':
+							return '/AppsArticle';
+						case 'amp':
+							return '/AMPArticle';
+					}
+				}
+
+				/**
+				 * @param {URL} devOrigin
+				 * @param {Product} product
+				 * @param {Env} env
+				 * @param {URL} url
+				 * @return {URL}
+				 */
+				buildUrl(devOrigin, product, env, url) {
+					switch (env) {
+						case 'PROD': {
+							const builtUrl = new URL(
+								url.pathname,
+								this.prodOrigin(product),
+							);
+							builtUrl.search = this.params(product).toString();
+
+							return builtUrl;
+						}
+						case 'CODE': {
+							const builtUrl = new URL(
+								url.pathname,
+								this.codeOrigin(product),
+							);
+							builtUrl.search = this.params(product).toString();
+
+							return builtUrl;
+						}
+						case 'DEV':
+							return new URL(
+								`${this.devPath(product)}/${url.toString()}`,
+								devOrigin,
+							);
+					}
+				}
+
+				/**
+				 * @param {Product} product
+				 * @return {string}
+				 */
+				getLinkText(product) {
+					switch (product) {
+						case 'dotcom':
+							return '🌍 Dotcom';
+						case 'apps':
+							return '📱 Apps';
+						case 'amp':
+							return '⚡️ AMP';
+					}
+				}
+
+				constructor() {
+					super();
+
+					const template = document.getElementById(
+						'article-link-template',
+					);
+
+					if (!(template instanceof HTMLTemplateElement)) {
+						throw new Error(
+							"article-link: I couldn't find my template element",
+						);
+					}
+
+					const clone = template.content.cloneNode(true);
+
+					if (!(clone instanceof DocumentFragment)) {
+						throw new Error(
+							'article-link: my template content should be a DocumentFragment',
+						);
+					}
+
+					this.content = clone;
+
+					const a = this.content.querySelector('a');
+
+					if (a instanceof HTMLAnchorElement) {
+						this.link = a;
+					} else {
+						throw new Error(
+							'article-link: my template is missing an anchor',
+						);
+					}
+
+					const linkText = this.content.querySelector('.link-text');
+
+					if (linkText instanceof HTMLSpanElement) {
+						this.linkText = linkText;
+					} else {
+						throw new Error(
+							'article-link: my template is missing a link-text element',
+						);
+					}
+				}
+
+				connectedCallback() {
+					const product = this.getAttribute('product');
+					const env = this.getAttribute('env');
+					const href = this.getAttribute('href');
+
+					if (
+						product !== 'dotcom' &&
+						product !== 'apps' &&
+						product !== 'amp'
+					) {
+						this.textContent =
+							"article-link error: 'product' must be one of: 'dotcom', 'apps' or 'amp'";
+						return;
+					}
+
+					if (env !== 'PROD' && env !== 'CODE' && env !== 'DEV') {
+						this.textContent =
+							"article-link error: 'env' must be one of: 'PROD', 'CODE' or 'DEV'";
+						return;
+					}
+
+					if (href === null || href === '') {
+						this.textContent =
+							"article-link error: must have a non-empty 'href'";
+						return;
+					}
+
+					try {
+						const url = new URL(href);
+						const devOrigin = new URL(window.location.origin);
+
+						this.link.setAttribute(
+							'href',
+							this.buildUrl(devOrigin, product, env, url).href,
+						);
+						this.linkText.textContent = this.getLinkText(product);
+
+						const shadowRoot = this.attachShadow({ mode: 'open' });
+						shadowRoot.replaceChildren(this.content);
+					} catch (error) {
+						if (
+							error instanceof TypeError &&
+							error.message === 'Invalid URL'
+						) {
+							this.textContent =
+								"article-link error: 'href' must be a valid URL";
+						} else {
+							this.textContent =
+								'article-link error: unknown problem';
+						}
+					}
+				}
+			}
+
+			class ArticleExamples extends HTMLElement {
+				/** @type {DocumentFragment} */
+				content;
+				/** @type {HTMLTemplateElement} */
+				rowTemplate;
+
+				/**
+				 * @param {DocumentFragment} row
+				 * @param {HTMLElement} dataElement
+				 * @param {string} name
+				 * @return {void}
+				 */
+				setElementFromData(row, dataElement, name) {
+					const attribute = dataElement.dataset[name];
+					const element = row.querySelector(`.${name}`);
+
+					if (attribute !== undefined && element !== null) {
+						element.textContent = attribute;
+					}
+				}
+
+				/**
+				 * @param {DocumentFragment} row
+				 * @param {HTMLAnchorElement} anchor
+				 * @return {void}
+				 */
+				setHeadline(row, anchor) {
+					const headlineText = anchor.textContent;
+					const headline = row.querySelector('.headline');
+
+					if (headlineText !== null && headline !== null) {
+						headline.textContent = headlineText;
+					}
+				}
+
+				/**
+				 * @param {DocumentFragment} row
+				 * @param {HTMLAnchorElement} anchor
+				 * @return {void}
+				 */
+				setLinks(row, anchor) {
+					const href = anchor.getAttribute('href');
+
+					if (href !== null) {
+						row.querySelectorAll('article-link').forEach((link) => {
+							link.setAttribute('href', href);
+						});
+					}
+				}
+
+				/**
+				 * @param {HTMLLIElement} listItem
+				 * @return {DocumentFragment}
+				 */
+				tableRow(listItem) {
+					const row = this.rowTemplate.content.cloneNode(true);
+
+					if (!(row instanceof DocumentFragment)) {
+						throw new Error(
+							'article-examples: my row template content should be a DocumentFragment',
+						);
+					}
+
+					const anchor = listItem.querySelector('a');
+
+					if (!(anchor instanceof HTMLAnchorElement)) {
+						throw new Error(
+							'article-examples: each list item should have an anchor',
+						);
+					}
+
+					this.setHeadline(row, anchor);
+					this.setLinks(row, anchor);
+					this.setElementFromData(row, listItem, 'design');
+					this.setElementFromData(row, listItem, 'display');
+					this.setElementFromData(row, listItem, 'theme');
+
+					return row;
+				}
+
+				constructor() {
+					super();
+
+					const template = document.getElementById(
+						'articles-table-template',
+					);
+					const rowTemplate = document.getElementById(
+						'article-row-template',
+					);
+
+					if (!(template instanceof HTMLTemplateElement)) {
+						throw new Error(
+							"article-examples: I couldn't find my template element",
+						);
+					}
+
+					if (!(rowTemplate instanceof HTMLTemplateElement)) {
+						throw new Error(
+							"article-examples: I couldn't find my row template element",
+						);
+					}
+
+					const clone = template.content.cloneNode(true);
+
+					if (!(clone instanceof DocumentFragment)) {
+						throw new Error(
+							'article-examples: my template content should be a DocumentFragment',
+						);
+					}
+
+					this.content = clone;
+					this.rowTemplate = rowTemplate;
+				}
+
+				connectedCallback() {
+					const rows = Array.from(this.querySelectorAll('li')).map(
+						(li) => this.tableRow(li),
+					);
+					this.content
+						.querySelector('tbody')
+						?.replaceChildren(...rows);
+
+					const shadowRoot = this.attachShadow({ mode: 'open' });
+					shadowRoot.replaceChildren(this.content);
+				}
+			}
+
+			customElements.define('article-link', ArticleLink);
+			customElements.define('article-examples', ArticleExamples);
 		</script>
+		<style>
+			/* Olly N. (Nov. 2023)
+			   DCR Dev server achievements  */
+			@keyframes achievementAnimation {
+				0% {
+					opacity: 0%;
+					transform: translateY(-50px);
+				}
+				7% {
+					opacity: 100%;
+					transform: translateY(0);
+				}
+
+				93% {
+					opacity: 100%;
+					transform: translateY(0);
+				}
+				100% {
+					opacity: 0%;
+					transform: translateY(50px);
+				}
+			}
+
+			.achievement {
+				position: fixed;
+				top: 0;
+				right: 0;
+				margin: 24px;
+				background-color: #333;
+				border: 4px solid #555;
+				padding: 20px;
+				border-radius: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+				width: 300px;
+				opacity: 0%;
+				animation: achievementAnimation 10s 1;
+			}
+			.achievement h2 {
+				margin: 0;
+				color: #ffe500;
+			}
+			.achievement p {
+				margin: 0;
+				color: #ffffff;
+			}
+		</style>
 	</body>
 </html>

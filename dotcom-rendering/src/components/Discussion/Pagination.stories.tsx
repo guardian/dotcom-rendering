@@ -1,6 +1,14 @@
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { FilterOptions } from '../../types/discussion';
 import { Pagination } from './Pagination';
+
+const articleFormat: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+};
 
 export default { component: Pagination, title: 'Discussion/Pagination' };
 
@@ -23,6 +31,7 @@ export const Default = () => {
 	);
 };
 Default.storyName = 'default';
+Default.decorators = [splitTheme([articleFormat])];
 
 export const TwoPages = () => {
 	const [page, setCurrentPage] = useState(1);
@@ -37,23 +46,7 @@ export const TwoPages = () => {
 	);
 };
 TwoPages.storyName = 'with two pages';
-
-export const WithBackground = () => {
-	const [page, setCurrentPage] = useState(1);
-	return (
-		<Pagination
-			totalPages={2}
-			currentPage={page}
-			setCurrentPage={setCurrentPage}
-			filters={DEFAULT_FILTERS}
-			commentCount={56}
-		/>
-	);
-};
-WithBackground.storyName = 'with a dark background';
-WithBackground.story = {
-	parameters: { backgrounds: { default: 'dark' } },
-};
+TwoPages.decorators = [splitTheme([articleFormat])];
 
 export const ThreePages = () => {
 	const [page, setCurrentPage] = useState(1);
@@ -68,6 +61,7 @@ export const ThreePages = () => {
 	);
 };
 ThreePages.storyName = 'with three pages';
+ThreePages.decorators = [splitTheme([articleFormat])];
 
 export const FourPages = () => {
 	const [page, setCurrentPage] = useState(1);
@@ -82,6 +76,7 @@ export const FourPages = () => {
 	);
 };
 FourPages.storyName = 'with four pages';
+FourPages.decorators = [splitTheme([articleFormat])];
 
 export const FivePages = () => {
 	const [page, setCurrentPage] = useState(1);
@@ -96,6 +91,7 @@ export const FivePages = () => {
 	);
 };
 FivePages.storyName = 'with five pages';
+FivePages.decorators = [splitTheme([articleFormat])];
 
 export const SixPages = () => {
 	const [page, setCurrentPage] = useState(1);
@@ -110,6 +106,7 @@ export const SixPages = () => {
 	);
 };
 SixPages.storyName = 'with six pages';
+SixPages.decorators = [splitTheme([articleFormat])];
 
 export const SevenPages = () => {
 	const [page, setCurrentPage] = useState(1);
@@ -124,6 +121,7 @@ export const SevenPages = () => {
 	);
 };
 SevenPages.storyName = 'with seven pages';
+SevenPages.decorators = [splitTheme([articleFormat])];
 
 export const TwelvePages = () => {
 	const [page, setCurrentPage] = useState(1);
@@ -138,6 +136,7 @@ export const TwelvePages = () => {
 	);
 };
 TwelvePages.storyName = 'with twelve pages';
+TwelvePages.decorators = [splitTheme([articleFormat])];
 
 export const LotsOfPages = () => {
 	const [page, setCurrentPage] = useState(1);
@@ -152,6 +151,7 @@ export const LotsOfPages = () => {
 	);
 };
 LotsOfPages.storyName = 'with many pages';
+LotsOfPages.decorators = [splitTheme([articleFormat])];
 
 export const WhenExpanded = () => {
 	const [page, setCurrentPage] = useState(1);
@@ -166,6 +166,7 @@ export const WhenExpanded = () => {
 	);
 };
 WhenExpanded.storyName = 'when expanded';
+WhenExpanded.decorators = [splitTheme([articleFormat])];
 
 export const WhenCollapsed = () => {
 	const [page, setCurrentPage] = useState(1);
@@ -180,6 +181,7 @@ export const WhenCollapsed = () => {
 	);
 };
 WhenCollapsed.storyName = 'when collapsed';
+WhenCollapsed.decorators = [splitTheme([articleFormat])];
 
 export const WhenUnthreaded = () => {
 	const [page, setCurrentPage] = useState(1);
@@ -194,3 +196,4 @@ export const WhenUnthreaded = () => {
 	);
 };
 WhenUnthreaded.storyName = 'when unthreaded';
+WhenUnthreaded.decorators = [splitTheme([articleFormat])];

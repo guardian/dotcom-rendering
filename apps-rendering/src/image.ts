@@ -5,8 +5,14 @@ import type { Asset } from '@guardian/content-api-models/v1/asset';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import type { Option } from '@guardian/types';
-import { andThen, fromNullable, map, none, some } from '@guardian/types';
+import type { Option } from '../vendor/@guardian/types/index';
+import {
+	andThen,
+	fromNullable,
+	map,
+	none,
+	some,
+} from '../vendor/@guardian/types/index';
 import type { Image as ImageData } from 'image/image';
 import { ImageSubtype } from 'image/image';
 import { Dpr, src, srcsets } from 'image/srcsets';

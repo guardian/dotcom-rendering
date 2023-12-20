@@ -23,16 +23,6 @@ jobs:
         with:
           deno-version: v1.x
 
-      - name: Components Ophan attributes tracker
-        run: |
-          deno run \
-            --allow-read \
-            --allow-net=www.theguardian.com,api.github.com \
-            --allow-env=HOME,GITHUB_TOKEN \
-            scripts/deno/ophan-components.ts
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Thrasher tracker
         run: |
           deno run \
@@ -53,20 +43,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CAPI_KEY: ${{ secrets.CAPI_KEY }}
-
-      # The peer dependencies script relies on `yarn`
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-
-      - name: DCR peer dependencies tracker
-        run: |
-          deno run \
-            --allow-read \
-            --allow-net \
-            --allow-env=HOME,GITHUB_TOKEN \
-            --allow-run=yarn,npm \
-            scripts/deno/peer-dependencies.ts
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import type { ArticleElementRole } from '@guardian/libs';
-import type { Option } from '@guardian/types';
+import type { Option } from '../../vendor/@guardian/types/index';
 import type { Optional } from 'optional';
 
 // ----- Types ----- //

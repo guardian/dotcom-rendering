@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
-import { withDefault } from '@guardian/types';
+import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { HeadingTwo as HeadingTwoType } from 'bodyElement';
 import Anchor from 'components/Anchor';
 import HorizontalRule from 'components/HorizontalRule';

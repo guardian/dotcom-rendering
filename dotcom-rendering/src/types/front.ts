@@ -1,8 +1,7 @@
 import type { ArticleSpecial, Pillar } from '@guardian/libs';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
-import type { DCRBadgeType } from './badge';
-import type { Branding } from './branding';
+import type { Branding, CollectionBranding, EditionBranding } from './branding';
 import type { ServerSideTests, Switches } from './config';
 import type { Image } from './content';
 import type { FooterType } from './footer';
@@ -228,7 +227,7 @@ export type FEFrontCard = {
 		webTitle: string;
 		linkText?: string;
 		webUrl?: string;
-		editionBrandings: { edition: { id: EditionId }; branding?: Branding }[];
+		editionBrandings: EditionBranding[];
 		href?: string;
 		embedUri?: string;
 	};
@@ -320,6 +319,7 @@ export type DCRFrontCard = {
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable: boolean;
+	showMainVideo?: boolean;
 };
 
 export type DCRSlideshowImage = {
@@ -400,9 +400,7 @@ export type DCRCollectionType = {
 	 * will always be `false`.
 	 **/
 	canShowMore?: boolean;
-	editorialBadge?: DCRBadgeType;
-	paidContentBadge?: DCRBadgeType;
-	sponsoredContentBranding?: Branding;
+	collectionBranding?: CollectionBranding;
 	targetedTerritory?: Territory;
 };
 
@@ -508,27 +506,7 @@ type FESeoDataType = {
 type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
 	commercial: {
-		editionBrandings: Array<{
-			edition: {
-				id: string;
-			};
-			branding?: {
-				brandingType: {
-					name: string;
-				};
-				sponsorName: string;
-				logo: {
-					src: string;
-					dimensions: {
-						width: number;
-						height: number;
-					};
-					link: string;
-					label: string;
-				};
-				aboutThisLink: string;
-			};
-		}>;
+		editionBrandings: EditionBranding[];
 		editionAdTargetings: unknown;
 		prebidIndexSites?: unknown;
 	};
