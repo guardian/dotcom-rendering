@@ -621,7 +621,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									{format.theme === ArticleSpecial.Labs ? (
+									{isWeb &&
+									format.theme === ArticleSpecial.Labs ? (
 										<GuardianLabsLines />
 									) : (
 										<DecideLines
