@@ -19,6 +19,7 @@ import { Picture } from './Picture';
 type Props = {
 	format: ArticleFormat;
 	images: ImageForLightbox[];
+	loaded: Set<number>;
 };
 
 const liStyles = css`
@@ -172,18 +173,20 @@ const Selection = ({
 	);
 };
 
-export const LightboxImages = ({ format, images }: Props) => {
+export const LightboxImages = ({ format, images, loaded }: Props) => {
 	return (
 		<>
 			{images.map((image, index) => {
 				const orientation =
 					image.width > image.height ? 'landscape' : 'portrait';
 
+				const position = index + 1;
+
 				return (
 					<li
 						// eslint-disable-next-line react/no-array-index-key -- because we know this key is unique
 						key={`${image.masterUrl}-${index}`}
-						data-index={index + 1}
+						data-index={position}
 						data-element-id={image.elementId}
 						css={[
 							liStyles,
@@ -192,7 +195,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 						]}
 					>
 						<figure css={figureStyles}>
-							<LightboxLoader position={index + 1} />
+							{!loaded.has(position) && <LightboxLoader />}
 							<Picture
 								// Using the role of immersive here indicates the intentions for lightbox
 								// images but it's moot because the `isLightbox` prop overrides the decision
@@ -251,7 +254,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 								<Hide from="tablet">
 									<Selection
 										countOfImages={images.length}
-										initialPosition={index + 1}
+										initialPosition={position}
 									/>
 								</Hide>
 								<LightboxCaption
