@@ -23,7 +23,7 @@ import {
 	HealthCheck,
 	StepScalingPolicy,
 } from 'aws-cdk-lib/aws-autoscaling';
-import {CfnAlarm, Metric} from 'aws-cdk-lib/aws-cloudwatch';
+import { CfnAlarm, Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
@@ -278,11 +278,14 @@ export class DotcomRendering extends GuStack {
 			scalingAdjustment: 100,
 		});
 		const minAsgSize = 27;
+
+		// @ts-ignore
 		const scaleUpPolicy2 = new StepScalingPolicy(this, 'ScaleUp', {
 			autoScalingGroup: asg,
 			metric: new Metric({
 				metricName: 'Latency',
-				namespace: 'AWS/ELB',}),
+				namespace: 'AWS/ELB',
+			}),
 			scalingSteps: [
 				{
 					change: minAsgSize + 3,
