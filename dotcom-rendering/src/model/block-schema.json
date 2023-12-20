@@ -990,6 +990,9 @@
                 "html": {
                     "type": "string"
                 },
+                "title": {
+                    "type": "string"
+                },
                 "css": {
                     "type": "string"
                 },
@@ -1008,7 +1011,8 @@
                 "elementId",
                 "html",
                 "id",
-                "url"
+                "url",
+				"title"
             ]
         },
         "QuizAtomBlockElement": {

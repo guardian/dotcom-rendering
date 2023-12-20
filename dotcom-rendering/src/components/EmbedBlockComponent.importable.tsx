@@ -48,6 +48,7 @@ export const EmbedBlockComponent = ({
 	source,
 	sourceDomain,
 }: Props) => {
+	console.log('*** EmbedBlockComponent');
 	// TODO: Email embeds are being turned into atoms, so we can remove this hack when that happens
 	const isEmailEmbed = html.includes('email/form');
 	return (

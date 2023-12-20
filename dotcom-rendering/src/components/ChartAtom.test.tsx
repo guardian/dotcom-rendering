@@ -5,7 +5,9 @@ import { ChartAtom } from './ChartAtom.importable';
 
 describe('ChartAtom', () => {
 	it('should render', () => {
-		const { getByTestId } = render(<ChartAtom id="123abc" html={html} />);
+		const { getByTestId } = render(
+			<ChartAtom id="123abc" html={html} title="test-title" />,
+		);
 
 		expect(getByTestId('chart')).toBeInTheDocument();
 	});

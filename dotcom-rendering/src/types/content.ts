@@ -118,6 +118,7 @@ interface ChartAtomBlockElement {
 	id: string;
 	url: string;
 	html: string;
+	title: string;
 	css?: string;
 	js?: string;
 	role?: RoleType;
@@ -295,6 +296,12 @@ export interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
+interface InteractiveAtomBlockElementData {
+	atomId: string;
+	atomType: string;
+	cta: string;
+}
+
 export interface InteractiveAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
 	elementId: string;
@@ -305,6 +312,7 @@ export interface InteractiveAtomBlockElement {
 	css?: string;
 	placeholderUrl?: string;
 	role?: RoleType;
+	data?: InteractiveAtomBlockElementData;
 }
 
 // Can't guarantee anything in interactiveBlockElement :shrug:
