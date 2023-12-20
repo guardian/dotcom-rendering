@@ -202,6 +202,17 @@ const maxWidth = css`
 	}
 `;
 
+const stretchLines = css`
+	${until.phablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+`;
+
 const sidePaddingDesktop = css`
 	${from.desktop} {
 		padding-left: ${space[5]}px;
@@ -260,7 +271,6 @@ interface WebProps extends BaseProps {
 
 export const LiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
-	console.log('format', format);
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -563,9 +573,15 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 							</Hide>
 						</GridItem>
+
 						<GridItem area="lines">
 							<Hide from="desktop">
-								<div css={sidePaddingDesktop}>
+								<div
+									css={[
+										sidePaddingDesktop,
+										isApps && stretchLines,
+									]}
+								>
 									<DecideLines
 										format={format}
 										color={

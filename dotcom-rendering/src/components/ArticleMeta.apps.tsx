@@ -177,18 +177,8 @@ const MetaGridDateline = ({
 	</div>
 );
 
-const stretchLines = ({
-	isPicture,
-	isLiveBlog,
-}: {
-	isPicture: boolean;
-	isLiveBlog: boolean;
-}) => css`
+const stretchLines = css`
 	grid-column: 1 / -1;
-
-	${(isPicture || isLiveBlog) &&
-	`grid-column: 2 / -2;
-	`}
 `;
 
 export const ArticleMetaApps = ({
@@ -243,7 +233,7 @@ export const ArticleMetaApps = ({
 			>
 				{shouldShowFollowButtons(isComment) && (
 					<StraightLines
-						cssOverrides={[stretchLines({ isPicture, isLiveBlog })]}
+						cssOverrides={stretchLines}
 						count={4}
 						color={themePalette('--article-meta-lines')}
 					/>
@@ -304,7 +294,7 @@ export const ArticleMetaApps = ({
 				)}
 				<StraightLines
 					cssOverrides={[
-						stretchLines({ isPicture, isLiveBlog }),
+						stretchLines,
 						css`
 							grid-row: 4 / -4;
 						`,
