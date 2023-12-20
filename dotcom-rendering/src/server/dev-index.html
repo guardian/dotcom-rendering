@@ -1216,13 +1216,9 @@
 				connectedCallback() {
 					const rows = Array.from(
 						this.querySelectorAll(':scope > ul > li'),
-					).reduce((elements, li) => {
-						if (li instanceof HTMLLIElement) {
-							return [...elements, this.tableRow(li)];
-						}
-
-						return elements;
-					}, []);
+					).flatMap((li) =>
+						li instanceof HTMLLIElement ? [this.tableRow(li)] : [],
+					);
 
 					this.content
 						.querySelector('tbody')
