@@ -38,14 +38,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         ],
       },
     },
-    "LoadBalancerUrl": {
-      "Value": {
-        "Fn::GetAtt": [
-          "LoadBalancerArticle513F753A",
-          "DNSName",
-        ],
-      },
-    },
   },
   "Parameters": {
     "AMIArticle": {
@@ -90,11 +82,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "HealthCheckType": "ELB",
         "LaunchTemplate": {
           "LaunchTemplateId": {
-            "Ref": "renderingTESTarticleE10559A7",
+            "Ref": "frontendTESTarticleE6555094",
           },
           "Version": {
             "Fn::GetAtt": [
-              "renderingTESTarticleE10559A7",
+              "frontendTESTarticleE6555094",
               "LatestVersionNumber",
             ],
           },
@@ -127,7 +119,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           {
             "Key": "Stack",
             "PropagateAtLaunch": true,
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -149,7 +141,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
     "CertificateArticle11C315DC": {
       "DeletionPolicy": "Retain",
       "Properties": {
-        "DomainName": "article-rendering.code.dev-gutools.co.uk",
+        "DomainName": "article-frontend.code.dev-gutools.co.uk",
         "Tags": [
           {
             "Key": "App",
@@ -169,7 +161,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -222,7 +214,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                     {
                       "Ref": "DistributionBucketName",
                     },
-                    "/rendering/TEST/article/*",
+                    "/frontend/TEST/article/*",
                   ],
                 ],
               },
@@ -266,7 +258,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -403,7 +395,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -440,7 +432,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -539,7 +531,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "access_logs.s3.prefix",
-            "Value": "ELBLogs/rendering/article/TEST",
+            "Value": "ELBLogs/frontend/article/TEST",
           },
         ],
         "Scheme": "internal",
@@ -575,7 +567,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -604,7 +596,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -674,7 +666,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/TEST/rendering/article",
+                    ":parameter/TEST/frontend/article",
                   ],
                 ],
               },
@@ -693,7 +685,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/TEST/rendering/article/*",
+                    ":parameter/TEST/frontend/article/*",
                   ],
                 ],
               },
@@ -734,7 +726,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -789,7 +781,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stack",
-            "Value": "rendering",
+            "Value": "frontend",
           },
           {
             "Key": "Stage",
@@ -844,7 +836,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "renderingTESTarticleE10559A7": {
+    "frontendTESTarticleE6555094": {
       "DependsOn": [
         "InstanceRoleArticleC88A1967",
       ],
@@ -853,7 +845,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           "IamInstanceProfile": {
             "Arn": {
               "Fn::GetAtt": [
-                "renderingTESTarticleProfile333AE731",
+                "frontendTESTarticleProfile1C431D3D",
                 "Arn",
               ],
             },
@@ -893,11 +885,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "ArticleRendering/rendering-TEST-article",
+                  "Value": "ArticleRendering/frontend-TEST-article",
                 },
                 {
                   "Key": "Stack",
-                  "Value": "rendering",
+                  "Value": "frontend",
                 },
                 {
                   "Key": "Stage",
@@ -918,11 +910,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "ArticleRendering/rendering-TEST-article",
+                  "Value": "ArticleRendering/frontend-TEST-article",
                 },
                 {
                   "Key": "Stack",
-                  "Value": "rendering",
+                  "Value": "frontend",
                 },
                 {
                   "Key": "Stage",
@@ -965,7 +957,7 @@ Environment=TERM=xterm-256color
 Environment=NODE_ENV=production
 Environment=GU_STAGE=TEST
 Environment=GU_APP=article
-Environment=GU_STACK=rendering
+Environment=GU_STACK=frontend
 ExecStart=make prod
 Restart=on-failure
 [Install]
@@ -992,11 +984,11 @@ systemctl start article",
               },
               {
                 "Key": "Name",
-                "Value": "ArticleRendering/rendering-TEST-article",
+                "Value": "ArticleRendering/frontend-TEST-article",
               },
               {
                 "Key": "Stack",
-                "Value": "rendering",
+                "Value": "frontend",
               },
               {
                 "Key": "Stage",
@@ -1008,7 +1000,7 @@ systemctl start article",
       },
       "Type": "AWS::EC2::LaunchTemplate",
     },
-    "renderingTESTarticleProfile333AE731": {
+    "frontendTESTarticleProfile1C431D3D": {
       "Properties": {
         "Roles": [
           {

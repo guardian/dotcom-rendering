@@ -8,7 +8,6 @@ import {
 } from '@guardian/cdk/lib/constructs/core';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import type { App as CDKApp } from 'aws-cdk-lib';
-import { CfnOutput } from 'aws-cdk-lib';
 import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { getUserData } from './userData';
@@ -28,7 +27,7 @@ export class RenderingCDKStack extends CDKStack {
 			// Any version of this app should run in the eu-west-1 region
 			env: { region: 'eu-west-1' },
 			// Set the stack within the constructor as this won't vary between apps
-			stack: 'rendering',
+			stack: 'frontend',
 		});
 
 		const { stack: guStack } = this;
@@ -50,7 +49,7 @@ export class RenderingCDKStack extends CDKStack {
 				  } satisfies Alarms)
 				: ({ noMonitoring: true } satisfies NoMonitoring);
 
-		const ec2app = new GuEc2App(this, {
+		new GuEc2App(this, {
 			app: guApp,
 			// TODO - should we change to 3000?
 			applicationPort: 9000,
@@ -79,11 +78,6 @@ export class RenderingCDKStack extends CDKStack {
 				stage,
 				artifactsBucket,
 			}),
-		});
-
-		// Load balancer DNS name output
-		new CfnOutput(this, 'LoadBalancerUrl', {
-			value: ec2app.loadBalancer.loadBalancerDnsName,
 		});
 	}
 }

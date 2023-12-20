@@ -1,4 +1,4 @@
-stacks: [rendering]
+stacks: [frontend]
 regions: [eu-west-1]
 allowedStages:
   - CODE
