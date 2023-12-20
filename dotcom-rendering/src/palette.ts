@@ -4394,6 +4394,9 @@ const discussionDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const discussionSubduedLight: PaletteFunction = () => sourcePalette.neutral[46];
+const discussionSubduedDark: PaletteFunction = () => sourcePalette.neutral[60];
+
 const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
@@ -4410,7 +4413,7 @@ const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
 		case Pillar.Opinion:
 			return sourcePalette.opinion[400];
 		case ArticleSpecial.Labs:
-			return sourcePalette.lifestyle[300];
+			return sourcePalette.labs[300];
 		default:
 			return sourcePalette.news[300];
 	}
@@ -4426,9 +4429,10 @@ const discussionButtonHover: PaletteFunction = ({ theme }) => {
 			return sourcePalette.lifestyle[400];
 		case Pillar.Sport:
 			return sourcePalette.sport[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
 		case Pillar.News:
 		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.Labs:
 		default:
 			return sourcePalette.news[400];
 	}
@@ -4577,6 +4581,70 @@ const audioAtomProgressBarLight: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 const audioAtomProgressBarDark: PaletteFunction = () =>
 	sourcePalette.neutral[60];
+
+const expandableAtomBackgroundLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Analysis:
+			return '#F2E8E6';
+		default:
+			return sourcePalette.neutral[93];
+	}
+};
+const expandableAtomBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const expandableAtomTextHoverLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		default:
+			return pillarPalette(theme, 400);
+	}
+};
+
+const expandableAtomTextHoverDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.lifestyle[500];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[500];
+	}
+};
+const expandableAtomBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const expandableAtomBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+const expandableAtomButtonLight: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+const expandableAtomButtonDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const expandableAtomButtonFillLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const expandableAtomButtonFillDark: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
+const timelineAtomBulletLight: PaletteFunction = () => sourcePalette.neutral[7];
+const timelineAtomBulletDark: PaletteFunction = () => sourcePalette.neutral[93];
+sourcePalette.neutral[0];
+
+const timelineAtomHighlightText: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const timelineAtomHighlightTextBackgroundLight: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const timelineAtomHighlightTextBackgroundDark: PaletteFunction = () =>
+	sourcePalette.brandAlt[200];
+sourcePalette.neutral[0];
 
 // ----- Palette ----- //
 
@@ -5333,6 +5401,10 @@ const paletteColours = {
 		light: discussionPaginationBorderLight,
 		dark: discussionPaginationBorderDark,
 	},
+	'--discussion-subdued': {
+		light: discussionSubduedLight,
+		dark: discussionSubduedDark,
+	},
 	'--comment-form-input-background': {
 		light: commentFormInputBackgroundLight,
 		dark: commentFormInputBackgroundDark,
@@ -5368,6 +5440,38 @@ const paletteColours = {
 	'--audio-atom-progress-bar': {
 		light: audioAtomProgressBarLight,
 		dark: audioAtomProgressBarDark,
+	},
+	'--expandable-atom-background': {
+		light: expandableAtomBackgroundLight,
+		dark: expandableAtomBackgroundDark,
+	},
+	'--expandable-atom-text-hover': {
+		light: expandableAtomTextHoverLight,
+		dark: expandableAtomTextHoverDark,
+	},
+	'--expandable-atom-border': {
+		light: expandableAtomBorderLight,
+		dark: expandableAtomBorderDark,
+	},
+	'--expandable-atom-button': {
+		light: expandableAtomButtonLight,
+		dark: expandableAtomButtonDark,
+	},
+	'--expandable-atom-button-fill': {
+		light: expandableAtomButtonFillLight,
+		dark: expandableAtomButtonFillDark,
+	},
+	'--timeline-atom-bullet': {
+		light: timelineAtomBulletLight,
+		dark: timelineAtomBulletDark,
+	},
+	'--timeline-atom-highlight-text': {
+		light: timelineAtomHighlightText,
+		dark: timelineAtomHighlightText,
+	},
+	'--timeline-atom-highlight-text-background': {
+		light: timelineAtomHighlightTextBackgroundLight,
+		dark: timelineAtomHighlightTextBackgroundDark,
 	},
 } satisfies PaletteColours;
 
