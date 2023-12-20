@@ -7,7 +7,8 @@ const PORT = 3030;
 /** @type {import('k6/data').SharedArray} */
 const jsonPayload = new SharedArray('jsonPayload', function () {
 	const f = JSON.parse(open('./article-nier-automata.json'));
-	return [f];
+	const string = JSON.stringify(f);
+	return [string];
 });
 
 /** @type {import('k6/options').Options} */
@@ -21,7 +22,7 @@ export default function () {
 	const response = http.post(
 		`http://localhost:${PORT}/Article`,
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- k6 api
-		JSON.stringify(jsonPayload[0]),
+		jsonPayload[0],
 		{ headers: { 'Content-type': 'application/json' } },
 	);
 	check(response, {
