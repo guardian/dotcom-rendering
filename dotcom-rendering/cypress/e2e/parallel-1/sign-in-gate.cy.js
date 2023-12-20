@@ -250,7 +250,7 @@ describe('Sign In Gate Tests', function () {
 			const desktopUA =
 				'Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0';
 
-			describe('variant a', function () {
+			describe('desktop', function () {
 				beforeEach(function () {
 					setMvtCookie('810001');
 				});
@@ -273,7 +273,7 @@ describe('Sign In Gate Tests', function () {
 					);
 				});
 			});
-			describe('variant b', function () {
+			describe('mobile', function () {
 				beforeEach(function () {
 					setMvtCookie('810002');
 				});
@@ -290,6 +290,29 @@ describe('Sign In Gate Tests', function () {
 				it('should not show the gate more frequently if user is not on mobile', function () {
 					setArticleCount(2);
 					visitArticleWithUserAgentOverride(desktopUA);
+
+					cy.get('[data-testid=sign-in-gate-main]').should(
+						'not.exist',
+					);
+				});
+			});
+			describe('control', function () {
+				beforeEach(function () {
+					setMvtCookie('810003');
+				});
+				it('should not show the sign gate more frequently when a user is on web', function () {
+					setArticleCount(2);
+
+					visitArticleWithUserAgentOverride(desktopUA);
+					scrollToGateForLazyLoading();
+
+					cy.get('[data-testid=sign-in-gate-main]').should(
+						'not.exist',
+					);
+				});
+				it('should not show the gate more frequently if user is not on mobile', function () {
+					setArticleCount(2);
+					visitArticleWithUserAgentOverride(mobileUA);
 
 					cy.get('[data-testid=sign-in-gate-main]').should(
 						'not.exist',
