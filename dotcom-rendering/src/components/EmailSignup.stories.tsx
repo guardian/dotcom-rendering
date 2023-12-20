@@ -1,6 +1,6 @@
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { EmailSignup } from './EmailSignup';
 import { Section } from './Section';
 import { SecureSignup } from './SecureSignup';

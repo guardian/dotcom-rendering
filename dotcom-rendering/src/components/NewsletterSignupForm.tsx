@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { palette as schemedPalette } from '../palette';
 import { space, textSans } from '@guardian/source-foundations';
 import { Button, Label, TextInput } from '@guardian/source-react-components';
+import { palette as schemedPalette } from '../palette';
 
 type Props = { newsletterId: string };
 
