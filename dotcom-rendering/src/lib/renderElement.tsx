@@ -379,6 +379,7 @@ export const renderElement = ({
 					elementJs={element.js}
 					elementCss={element.css}
 					format={format}
+					title={element.title}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement': {

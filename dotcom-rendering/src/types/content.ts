@@ -300,6 +300,7 @@ export interface InteractiveAtomBlockElement {
 	elementId: string;
 	url: string;
 	id: string;
+	title: string;
 	js?: string;
 	html?: string;
 	css?: string;

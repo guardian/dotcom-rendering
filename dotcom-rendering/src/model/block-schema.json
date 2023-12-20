@@ -1790,6 +1790,9 @@
                 "id": {
                     "type": "string"
                 },
+                "title": {
+                    "type": "string"
+                },
                 "js": {
                     "type": "string"
                 },
@@ -1810,6 +1813,7 @@
                 "_type",
                 "elementId",
                 "id",
+                "title",
                 "url"
             ]
         },
