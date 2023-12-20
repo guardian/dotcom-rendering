@@ -21,7 +21,6 @@ import {
 	AdjustmentType,
 	CfnScalingPolicy,
 	HealthCheck,
-	StepScalingPolicy,
 } from 'aws-cdk-lib/aws-autoscaling';
 import { CfnAlarm, Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
@@ -279,9 +278,7 @@ export class DotcomRendering extends GuStack {
 		});
 		const minAsgSize = 27;
 
-		// @ts-ignore
-		const scaleUpPolicy2 = new StepScalingPolicy(this, 'ScaleUp', {
-			autoScalingGroup: asg,
+		asg.scaleOnMetric('LatencyStepScalingPolicy', {
 			metric: new Metric({
 				metricName: 'Latency',
 				namespace: 'AWS/ELB',
@@ -300,6 +297,7 @@ export class DotcomRendering extends GuStack {
 			],
 			adjustmentType: AdjustmentType.EXACT_CAPACITY,
 		});
+
 		const scaleDownPolicy = new CfnScalingPolicy(this, 'ScaleDownPolicy', {
 			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
 			autoScalingGroupName: asg.autoScalingGroupName,
