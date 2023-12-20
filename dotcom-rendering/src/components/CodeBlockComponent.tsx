@@ -3,6 +3,7 @@
 
 import { css } from '@emotion/react';
 import { space } from '@guardian/source-foundations';
+import { palette } from '../palette';
 
 type Props = {
 	code: string;
@@ -15,7 +16,7 @@ const codeStyles = css`
     * Based on dabblet (http://dabblet.com)
     * @author Lea Verou
     */
-	color: black;
+	color: 'inherit';
 	text-shadow: 0 1px white;
 	/* The GU fonts don't work here */
 	/* stylelint-disable-next-line property-disallowed-list */
@@ -33,7 +34,7 @@ const codeStyles = css`
 	padding: ${space[3]}px;
 	overflow: auto;
 
-	background: #f5f2f0;
+	background: ${palette('--code-block-background')};
 
 	@media print {
 		text-shadow: none;

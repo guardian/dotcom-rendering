@@ -4646,6 +4646,10 @@ const timelineAtomHighlightTextBackgroundDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
 sourcePalette.neutral[0];
 
+const codeBlockBackgroundLight: PaletteFunction = () => '#f5f2f0';
+const codeBlockBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+
 // ----- Palette ----- //
 
 /**
@@ -5472,6 +5476,10 @@ const paletteColours = {
 	'--timeline-atom-highlight-text-background': {
 		light: timelineAtomHighlightTextBackgroundLight,
 		dark: timelineAtomHighlightTextBackgroundDark,
+	},
+	'--code-block-background': {
+		light: codeBlockBackgroundLight,
+		dark: codeBlockBackgroundDark,
 	},
 } satisfies PaletteColours;
 
