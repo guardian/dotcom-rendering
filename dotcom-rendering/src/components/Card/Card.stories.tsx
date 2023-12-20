@@ -288,6 +288,18 @@ export const WithMediaType = () => {
 					{...basicCardProps}
 					format={{
 						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={{ ...mainVideo, duration: 0 }}
+					headlineText="Video without duration"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Audio,
 						theme: Pillar.Sport,
 					}}
