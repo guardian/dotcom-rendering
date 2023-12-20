@@ -1,3 +1,5 @@
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { EmailSignup } from './EmailSignup';
 import { Section } from './Section';
@@ -32,6 +34,12 @@ export default {
 		},
 	},
 	decorators: [withSectionWrapper],
+};
+
+const defaultFormat: ArticleFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.Culture,
 };
 
 export const Default = ({
@@ -99,16 +107,29 @@ Default.story = {
 	args: {
 		hidePrivacyMessage: false,
 	},
+	decorators: [splitTheme([defaultFormat], { orientation: 'vertical' })],
 };
 NewsTheme.storyName = 'news theme';
 NewsTheme.story = {
 	args: {
 		hidePrivacyMessage: false,
 	},
+	decorators: [
+		splitTheme(
+			[
+				{
+					...defaultFormat,
+					theme: Pillar.News,
+				},
+			],
+			{ orientation: 'vertical' },
+		),
+	],
 };
 IrregularFrequency.storyName = 'irregular frequency';
 IrregularFrequency.story = {
 	args: {
 		hidePrivacyMessage: false,
 	},
+	decorators: [splitTheme([defaultFormat], { orientation: 'vertical' })],
 };
