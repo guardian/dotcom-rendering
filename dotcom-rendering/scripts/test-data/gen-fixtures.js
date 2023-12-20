@@ -59,6 +59,10 @@ const articles = [
 		url: 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	},
 	{
+		name: 'LiveBlogSingleContributor',
+		url: 'https://www.theguardian.com/politics/live/2023/dec/13/james-cleverly-rwanda-bill-immigration-asylum-rishi-sunak-keir-starmer-pmqs-politics-live-latest',
+	},
+	{
 		name: 'Dead',
 		url: 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	},
@@ -161,7 +165,10 @@ const requests = articles.map((article) => {
 			}
 
 			// Manual hack for LiveBlog vs DeadBlog
-			if (article.name === 'Live') {
+			if (
+				article.name === 'Live' ||
+				article.name === 'LiveBlogSingleContributor'
+			) {
 				json.format.design = 'LiveBlogDesign';
 			}
 
