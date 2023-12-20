@@ -53,7 +53,7 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: dotcom:rendering
-          configPath: riff-raff.yaml
+          configPath: old-riff-raff.yaml
           buildNumberOffset: 38860
           contentDirectories: |
             rendering-cfn:

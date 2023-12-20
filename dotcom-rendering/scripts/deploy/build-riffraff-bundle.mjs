@@ -133,7 +133,9 @@ const copyFrontendStatic = () => {
 
 const copyRiffRaff = () => {
 	log(' - copying riffraff yaml');
-	return cpy(['riff-raff.yaml'], target, { cwd: dirname });
+	return cpy(['riff-raff.yaml', 'old-riff-raff.yaml'], target, {
+		cwd: dirname,
+	});
 };
 
 Promise.all([
