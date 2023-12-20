@@ -63,7 +63,8 @@ export class RenderingCDKStack extends CDKStack {
 				enabled: true,
 				prefix: `ELBLogs/${guStack}/${guApp}/${stage}`,
 			},
-			// TODO, this is horrible
+			// Certificate is necessary for the creation of a listener on port 443,
+			// instead of the default 8080 which is unreachable.
 			certificateProps: {
 				domainName: `${guApp}-${guStack}.${
 					stage === 'PROD' ? '' : 'code.dev-'
@@ -78,7 +79,6 @@ export class RenderingCDKStack extends CDKStack {
 				stage,
 				artifactsBucket,
 			}),
-			// TODO - check changes to healthcheck
 		});
 
 		// Load balancer DNS name output

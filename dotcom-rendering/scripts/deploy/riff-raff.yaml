@@ -52,7 +52,7 @@ deployments:
         PROD: ArticleRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: article-rendering
-      amiParameter: AMIArticlerendering
+      amiParameter: AMIArticle
   article:
     type: autoscaling
     parameters:
