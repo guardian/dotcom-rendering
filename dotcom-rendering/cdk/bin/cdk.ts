@@ -29,13 +29,13 @@ new DotcomRendering(cdkApp, 'DotcomRendering-CODE', {
 
 /** NEW article stack */
 new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
-	guApp: 'article',
+	guApp: 'article-rendering',
 	stage: 'CODE',
 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 	instanceSize: InstanceSize.MICRO,
 });
 new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
-	guApp: 'article',
+	guApp: 'article-rendering',
 	stage: 'PROD',
 	scaling: { minimumInstances: 27, maximumInstances: 120 },
 	instanceSize: InstanceSize.SMALL,
@@ -43,13 +43,13 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 
 /** Facia */
 // new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
-// 	guApp: 'facia',
+// 	guApp: 'facia-rendering',
 // 	stage: 'CODE',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 // 	instanceSize: InstanceSize.MICRO,
 // });
 // new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
-// 	guApp: 'facia',
+// 	guApp: 'facia-rendering',
 // 	stage: 'PROD',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 // 	instanceSize: InstanceSize.MICRO,
@@ -57,13 +57,13 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 
 /** Misc */
 // new RenderingCDKStack(cdkApp, 'MiscRendering-CODE', {
-// 	guApp: 'misc',
+// 	guApp: 'misc-rendering',
 // 	stage: 'CODE',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 //  instanceSize: InstanceSize.MICRO,
 // });
 // new RenderingCDKStack(cdkApp, 'MiscRenderingPROD', {
-// 	guApp: 'misc',
+// 	guApp: 'misc-rendering',
 // 	stage: 'PROD',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 //  instanceSize: InstanceSize.MICRO,
@@ -71,13 +71,13 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 
 /** Interactive */
 // new RenderingCDKStack(cdkApp, 'InteractiveRendering-CODE', {
-// 	guApp: 'interactive',
+// 	guApp: 'interactive-rendering',
 // 	stage: 'CODE',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 //  instanceSize: InstanceSize.MICRO,
 // });
 // new RenderingCDKStack(cdkApp, 'InteractiveRenderingPROD', {
-// 	guApp: 'interactive',
+// 	guApp: 'interactive-rendering',
 // 	stage: 'PROD',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 //  instanceSize: InstanceSize.MICRO,

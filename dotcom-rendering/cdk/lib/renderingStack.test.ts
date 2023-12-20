@@ -12,7 +12,7 @@ describe('The RenderingCDKStack', () => {
 		const app = new App();
 		const stack = new RenderingCDKStack(app, 'ArticleRendering', {
 			stage: 'TEST',
-			guApp: 'article',
+			guApp: 'article-rendering',
 			scaling: { minimumInstances: 1, maximumInstances: 4 },
 			instanceSize: InstanceSize.MICRO,
 		});

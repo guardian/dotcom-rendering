@@ -26,17 +26,17 @@ deployments:
           value: public, max-age=315360000, immutable # one year in seconds
       prefixStack: false
       publicReadAcl: false
-  # New stack for article rendering
-  article-cfn:
+  # Old stack for article rendering
+  rendering-cfn:
     template: cloudformation
     parameters:
       templateStagePaths:
-        CODE: ArticleRendering-CODE.template.json
-        PROD: ArticleRendering-PROD.template.json
+        CODE: DotcomRendering-CODE.template.json
+        PROD: DotcomRendering-PROD.template.json
       cloudFormationStackByTags: false
-      cloudFormationStackName: article-rendering
-      amiParameter: AMIArticle
-  article:
+      cloudFormationStackName: rendering
+      amiParameter: AMIRendering
+  rendering:
     type: autoscaling
     parameters:
       bucketSsmKey: /account/services/dotcom-artifact.bucket
@@ -44,4 +44,4 @@ deployments:
       secondsToWait: 1500
     dependencies:
       - frontend-static
-      - article-cfn
+      - rendering-cfn

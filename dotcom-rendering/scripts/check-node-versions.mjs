@@ -34,7 +34,11 @@ const requiredNodeVersionMatches =
 			pattern: /^FROM node:(.+)-alpine$/m,
 		},
 		{
-			filepath: 'scripts/deploy/riff-raff.yaml',
+			filepath: 'scripts/deploy/riff-raff-v1.yaml',
+			pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
+		},
+		{
+			filepath: 'scripts/deploy/riff-raff-v2.yaml',
 			pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
 		},
 		{

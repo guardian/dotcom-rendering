@@ -30,17 +30,17 @@ jobs:
         # We want to avoid uploading the uncompressed files to our riffraff bucket
       # so we create our tarball outside the rendering/ folder, then delete the contents of rendering/
       # and finally move the tarball into rendering
-      - name: Compress DCR server files
+      - name: Compress existing DCR server files
         run: |
           tar -zcf rendering.tar.gz rendering
           rm -r rendering/*
           mv rendering.tar.gz rendering/
 
-      - name: Compress DCR NEW article server files
+      - name: Compress new DCR server files
         run: |
-          tar -zcf article.tar.gz article
-          rm -r article/*
-          mv article.tar.gz article/
+          tar -zcf article-rendering.tar.gz article-rendering
+          rm -r article-rendering/*
+          mv article-rendering.tar.gz article-rendering/
 
       - uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -49,11 +49,12 @@ jobs:
           mask-aws-account-id: true
 
       # Old rendering deployment
-      - uses: guardian/actions-riff-raff@v3
+      - name: Upload existing rendering app to RiffRaff
+        uses: guardian/actions-riff-raff@v3
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: dotcom:rendering
-          configPath: old-riff-raff.yaml
+          configPath: riff-raff-v1.yaml
           buildNumberOffset: 38860
           contentDirectories: |
             rendering-cfn:
@@ -64,15 +65,16 @@ jobs:
               - frontend-static
 
       # New article deployment
-      - uses: guardian/actions-riff-raff@v3
+      - name: Upload new rendering apps to RiffRaff
+        uses: guardian/actions-riff-raff@v3
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: dotcom:rendering-all
-          configPath: riff-raff.yaml
+          configPath: riff-raff-v2.yaml
           contentDirectories: |
-            article-cfn:
-              - article-cfn
-            article:
-              - article
+            article-rendering-cfn:
+              - article-rendering-cfn
+            article-rendering:
+              - article-rendering
             frontend-static:
               - frontend-static

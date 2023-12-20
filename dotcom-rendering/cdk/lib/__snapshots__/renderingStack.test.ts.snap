@@ -29,19 +29,19 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
     "gu:cdk:version": "TEST",
   },
   "Outputs": {
-    "LoadBalancerArticleDnsName": {
-      "Description": "DNS entry for LoadBalancerArticle",
+    "LoadBalancerArticlerenderingDnsName": {
+      "Description": "DNS entry for LoadBalancerArticlerendering",
       "Value": {
         "Fn::GetAtt": [
-          "LoadBalancerArticle513F753A",
+          "LoadBalancerArticlerendering49883BBC",
           "DNSName",
         ],
       },
     },
   },
   "Parameters": {
-    "AMIArticle": {
-      "Description": "Amazon Machine Image ID for the app article. Use this in conjunction with AMIgo to keep AMIs up to date.",
+    "AMIArticlerendering": {
+      "Description": "Amazon Machine Image ID for the app article-rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
       "Type": "AWS::EC2::Image::Id",
     },
     "AccessLoggingBucket": {
@@ -64,29 +64,29 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
       "Type": "AWS::SSM::Parameter::Value<AWS::EC2::VPC::Id>",
     },
-    "articlePrivateSubnets": {
+    "articlerenderingPrivateSubnets": {
       "Default": "/account/vpc/primary/subnets/private",
       "Description": "A list of private subnets",
       "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
-    "articlePublicSubnets": {
+    "articlerenderingPublicSubnets": {
       "Default": "/account/vpc/primary/subnets/public",
       "Description": "A list of public subnets",
       "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
   },
   "Resources": {
-    "AutoScalingGroupArticleASG4E8D3339": {
+    "AutoScalingGroupArticlerenderingASG8488C3F1": {
       "Properties": {
         "HealthCheckGracePeriod": 120,
         "HealthCheckType": "ELB",
         "LaunchTemplate": {
           "LaunchTemplateId": {
-            "Ref": "frontendTESTarticleE6555094",
+            "Ref": "frontendTESTarticlerendering6160AD1F",
           },
           "Version": {
             "Fn::GetAtt": [
-              "frontendTESTarticleE6555094",
+              "frontendTESTarticlerendering6160AD1F",
               "LatestVersionNumber",
             ],
           },
@@ -97,7 +97,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           {
             "Key": "App",
             "PropagateAtLaunch": true,
-            "Value": "article",
+            "Value": "article-rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -129,23 +129,23 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         ],
         "TargetGroupARNs": [
           {
-            "Ref": "TargetGroupArticle0A67D938",
+            "Ref": "TargetGroupArticlerendering3605E498",
           },
         ],
         "VPCZoneIdentifier": {
-          "Ref": "articlePrivateSubnets",
+          "Ref": "articlerenderingPrivateSubnets",
         },
       },
       "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
-    "CertificateArticle11C315DC": {
+    "CertificateArticlerendering3297EFD3": {
       "DeletionPolicy": "Retain",
       "Properties": {
-        "DomainName": "article-frontend.code.dev-gutools.co.uk",
+        "DomainName": "article-rendering-frontend.code.dev-gutools.co.uk",
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "article-rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -157,7 +157,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Name",
-            "Value": "ArticleRendering/CertificateArticle",
+            "Value": "ArticleRendering/CertificateArticlerendering",
           },
           {
             "Key": "Stack",
@@ -193,13 +193,13 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "PolicyName": "describe-ec2-policy",
         "Roles": [
           {
-            "Ref": "InstanceRoleArticleC88A1967",
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "GetDistributablePolicyArticleAD1E3D45": {
+    "GetDistributablePolicyArticlerendering7F5C432B": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
@@ -214,7 +214,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                     {
                       "Ref": "DistributionBucketName",
                     },
-                    "/frontend/TEST/article/*",
+                    "/frontend/TEST/article-rendering/*",
                   ],
                 ],
               },
@@ -222,16 +222,16 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "GetDistributablePolicyArticleAD1E3D45",
+        "PolicyName": "GetDistributablePolicyArticlerendering7F5C432B",
         "Roles": [
           {
-            "Ref": "InstanceRoleArticleC88A1967",
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "GuHttpsEgressSecurityGroupArticleAAE96989": {
+    "GuHttpsEgressSecurityGroupArticlerendering4B299451": {
       "Properties": {
         "GroupDescription": "Allow all outbound HTTPS traffic",
         "SecurityGroupEgress": [
@@ -246,7 +246,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "article-rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -271,20 +271,20 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "GuHttpsEgressSecurityGroupArticlefromArticleRenderingInternalIngressSecurityGroupArticle34567A0D9000CBF5873C": {
+    "GuHttpsEgressSecurityGroupArticlerenderingfromArticleRenderingInternalIngressSecurityGroupArticlerendering10793F4F9000FADBA0B9": {
       "Properties": {
         "Description": "Load balancer to target",
         "FromPort": 9000,
         "GroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupArticleAAE96989",
+            "GuHttpsEgressSecurityGroupArticlerendering4B299451",
             "GroupId",
           ],
         },
         "IpProtocol": "tcp",
         "SourceSecurityGroupId": {
           "Fn::GetAtt": [
-            "InternalIngressSecurityGroupArticle7EB0353F",
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
             "GroupId",
           ],
         },
@@ -292,20 +292,20 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "GuHttpsEgressSecurityGroupArticlefromArticleRenderingLoadBalancerArticleSecurityGroupC945293090002FA067C0": {
+    "GuHttpsEgressSecurityGroupArticlerenderingfromArticleRenderingLoadBalancerArticlerenderingSecurityGroupF4F96B3190008A9DDDD4": {
       "Properties": {
         "Description": "Load balancer to target",
         "FromPort": 9000,
         "GroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupArticleAAE96989",
+            "GuHttpsEgressSecurityGroupArticlerendering4B299451",
             "GroupId",
           ],
         },
         "IpProtocol": "tcp",
         "SourceSecurityGroupId": {
           "Fn::GetAtt": [
-            "LoadBalancerArticleSecurityGroup09BF1E2F",
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
             "GroupId",
           ],
         },
@@ -345,13 +345,13 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "PolicyName": "GuLogShippingPolicy981BFE5A",
         "Roles": [
           {
-            "Ref": "InstanceRoleArticleC88A1967",
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "InstanceRoleArticleC88A1967": {
+    "InstanceRoleArticlerendering0D4717E8": {
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -383,7 +383,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "article-rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -405,7 +405,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
-    "InternalIngressSecurityGroupArticle7EB0353F": {
+    "InternalIngressSecurityGroupArticlerendering3856ADE0": {
       "Properties": {
         "GroupDescription": "Allow restricted ingress from CIDR ranges",
         "SecurityGroupIngress": [
@@ -420,7 +420,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "article-rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -445,19 +445,19 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupArticletoArticleRenderingGuHttpsEgressSecurityGroupArticle23635CF09000B4CE417D": {
+    "InternalIngressSecurityGroupArticlerenderingtoArticleRenderingGuHttpsEgressSecurityGroupArticlerendering338FF4BE9000D56A0676": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupArticleAAE96989",
+            "GuHttpsEgressSecurityGroupArticlerendering4B299451",
             "GroupId",
           ],
         },
         "FromPort": 9000,
         "GroupId": {
           "Fn::GetAtt": [
-            "InternalIngressSecurityGroupArticle7EB0353F",
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
             "GroupId",
           ],
         },
@@ -466,7 +466,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "InternalIngressSecurityGroupArticletoArticleRenderingWazuhSecurityGroupF05C451A9000ED698B97": {
+    "InternalIngressSecurityGroupArticlerenderingtoArticleRenderingWazuhSecurityGroupF05C451A900050F43182": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
@@ -478,7 +478,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "FromPort": 9000,
         "GroupId": {
           "Fn::GetAtt": [
-            "InternalIngressSecurityGroupArticle7EB0353F",
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
             "GroupId",
           ],
         },
@@ -487,32 +487,32 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "ListenerArticle4580CB95": {
+    "ListenerArticlerendering9419D5F6": {
       "Properties": {
         "Certificates": [
           {
             "CertificateArn": {
-              "Ref": "CertificateArticle11C315DC",
+              "Ref": "CertificateArticlerendering3297EFD3",
             },
           },
         ],
         "DefaultActions": [
           {
             "TargetGroupArn": {
-              "Ref": "TargetGroupArticle0A67D938",
+              "Ref": "TargetGroupArticlerendering3605E498",
             },
             "Type": "forward",
           },
         ],
         "LoadBalancerArn": {
-          "Ref": "LoadBalancerArticle513F753A",
+          "Ref": "LoadBalancerArticlerendering49883BBC",
         },
         "Port": 443,
         "Protocol": "HTTPS",
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
     },
-    "LoadBalancerArticle513F753A": {
+    "LoadBalancerArticlerendering49883BBC": {
       "Properties": {
         "LoadBalancerAttributes": [
           {
@@ -531,31 +531,31 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "access_logs.s3.prefix",
-            "Value": "ELBLogs/frontend/article/TEST",
+            "Value": "ELBLogs/frontend/article-rendering/TEST",
           },
         ],
         "Scheme": "internal",
         "SecurityGroups": [
           {
             "Fn::GetAtt": [
-              "LoadBalancerArticleSecurityGroup09BF1E2F",
+              "LoadBalancerArticlerenderingSecurityGroupB13618F9",
               "GroupId",
             ],
           },
           {
             "Fn::GetAtt": [
-              "InternalIngressSecurityGroupArticle7EB0353F",
+              "InternalIngressSecurityGroupArticlerendering3856ADE0",
               "GroupId",
             ],
           },
         ],
         "Subnets": {
-          "Ref": "articlePrivateSubnets",
+          "Ref": "articlerenderingPrivateSubnets",
         },
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "article-rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -578,13 +578,13 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
     },
-    "LoadBalancerArticleSecurityGroup09BF1E2F": {
+    "LoadBalancerArticlerenderingSecurityGroupB13618F9": {
       "Properties": {
-        "GroupDescription": "Automatically created Security Group for ELB ArticleRenderingLoadBalancerArticle392945FF",
+        "GroupDescription": "Automatically created Security Group for ELB ArticleRenderingLoadBalancerArticlerendering054C3B73",
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "article-rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -609,19 +609,19 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "LoadBalancerArticleSecurityGrouptoArticleRenderingGuHttpsEgressSecurityGroupArticle23635CF090005B8077E0": {
+    "LoadBalancerArticlerenderingSecurityGrouptoArticleRenderingGuHttpsEgressSecurityGroupArticlerendering338FF4BE90004762FB02": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
-            "GuHttpsEgressSecurityGroupArticleAAE96989",
+            "GuHttpsEgressSecurityGroupArticlerendering4B299451",
             "GroupId",
           ],
         },
         "FromPort": 9000,
         "GroupId": {
           "Fn::GetAtt": [
-            "LoadBalancerArticleSecurityGroup09BF1E2F",
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
             "GroupId",
           ],
         },
@@ -630,7 +630,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "LoadBalancerArticleSecurityGrouptoArticleRenderingWazuhSecurityGroupF05C451A90005C206BE0": {
+    "LoadBalancerArticlerenderingSecurityGrouptoArticleRenderingWazuhSecurityGroupF05C451A9000FDE30D45": {
       "Properties": {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": {
@@ -642,7 +642,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "FromPort": 9000,
         "GroupId": {
           "Fn::GetAtt": [
-            "LoadBalancerArticleSecurityGroup09BF1E2F",
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
             "GroupId",
           ],
         },
@@ -651,7 +651,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "ParameterStoreReadArticle1CDDF4AB": {
+    "ParameterStoreReadArticlerendering1D29E674": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
@@ -666,7 +666,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/TEST/frontend/article",
+                    ":parameter/TEST/frontend/article-rendering",
                   ],
                 ],
               },
@@ -685,7 +685,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/TEST/frontend/article/*",
+                    ":parameter/TEST/frontend/article-rendering/*",
                   ],
                 ],
               },
@@ -696,13 +696,13 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "PolicyName": "parameter-store-read-policy",
         "Roles": [
           {
-            "Ref": "InstanceRoleArticleC88A1967",
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "TargetGroupArticle0A67D938": {
+    "TargetGroupArticlerendering3605E498": {
       "Properties": {
         "HealthCheckIntervalSeconds": 10,
         "HealthCheckPath": "/healthcheck",
@@ -714,7 +714,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "article",
+            "Value": "article-rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -794,7 +794,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "WazuhSecurityGroupfromArticleRenderingInternalIngressSecurityGroupArticle34567A0D90003B1A90BE": {
+    "WazuhSecurityGroupfromArticleRenderingInternalIngressSecurityGroupArticlerendering10793F4F90003792E165": {
       "Properties": {
         "Description": "Load balancer to target",
         "FromPort": 9000,
@@ -807,7 +807,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "IpProtocol": "tcp",
         "SourceSecurityGroupId": {
           "Fn::GetAtt": [
-            "InternalIngressSecurityGroupArticle7EB0353F",
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
             "GroupId",
           ],
         },
@@ -815,7 +815,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "WazuhSecurityGroupfromArticleRenderingLoadBalancerArticleSecurityGroupC94529309000C9C68748": {
+    "WazuhSecurityGroupfromArticleRenderingLoadBalancerArticlerenderingSecurityGroupF4F96B31900028E630C0": {
       "Properties": {
         "Description": "Load balancer to target",
         "FromPort": 9000,
@@ -828,7 +828,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "IpProtocol": "tcp",
         "SourceSecurityGroupId": {
           "Fn::GetAtt": [
-            "LoadBalancerArticleSecurityGroup09BF1E2F",
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
             "GroupId",
           ],
         },
@@ -836,22 +836,22 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "frontendTESTarticleE6555094": {
+    "frontendTESTarticlerendering6160AD1F": {
       "DependsOn": [
-        "InstanceRoleArticleC88A1967",
+        "InstanceRoleArticlerendering0D4717E8",
       ],
       "Properties": {
         "LaunchTemplateData": {
           "IamInstanceProfile": {
             "Arn": {
               "Fn::GetAtt": [
-                "frontendTESTarticleProfile1C431D3D",
+                "frontendTESTarticlerenderingProfile8DDE1B22",
                 "Arn",
               ],
             },
           },
           "ImageId": {
-            "Ref": "AMIArticle",
+            "Ref": "AMIArticlerendering",
           },
           "InstanceType": "t4g.micro",
           "MetadataOptions": {
@@ -860,7 +860,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           "SecurityGroupIds": [
             {
               "Fn::GetAtt": [
-                "GuHttpsEgressSecurityGroupArticleAAE96989",
+                "GuHttpsEgressSecurityGroupArticlerendering4B299451",
                 "GroupId",
               ],
             },
@@ -885,7 +885,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "ArticleRendering/frontend-TEST-article",
+                  "Value": "ArticleRendering/frontend-TEST-article-rendering",
                 },
                 {
                   "Key": "Stack",
@@ -910,7 +910,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "ArticleRendering/frontend-TEST-article",
+                  "Value": "ArticleRendering/frontend-TEST-article-rendering",
                 },
                 {
                   "Key": "Stack",
@@ -936,18 +936,18 @@ aws --region eu-west-1 s3 cp s3://",
                   {
                     "Ref": "DistributionBucketName",
                   },
-                  "/frontend/TEST/article/article.tar.gz ./
-tar -zxf article.tar.gz article
-chown -R dotcom-rendering:frontend article
-cd article
+                  "/frontend/TEST/article-rendering/article-rendering.tar.gz ./
+tar -zxf article-rendering.tar.gz article-rendering
+chown -R dotcom-rendering:frontend article-rendering
+cd article-rendering
 mkdir /var/log/dotcom-rendering
 chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-cat > /etc/systemd/system/article.service << EOF
+cat > /etc/systemd/system/article-rendering.service << EOF
 [Unit]
-Description=article
+Description=article-rendering
 After=network.target
 [Service]
-WorkingDirectory=/home/dotcom-rendering/article
+WorkingDirectory=/home/dotcom-rendering/article-rendering
 Type=simple
 User=dotcom-rendering
 Group=frontend
@@ -956,15 +956,15 @@ StandardOutput=journal
 Environment=TERM=xterm-256color
 Environment=NODE_ENV=production
 Environment=GU_STAGE=TEST
-Environment=GU_APP=article
+Environment=GU_APP=article-rendering
 Environment=GU_STACK=frontend
 ExecStart=make prod
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 EOF
-systemctl enable article
-systemctl start article",
+systemctl enable article-rendering
+systemctl start article-rendering",
                 ],
               ],
             },
@@ -984,7 +984,7 @@ systemctl start article",
               },
               {
                 "Key": "Name",
-                "Value": "ArticleRendering/frontend-TEST-article",
+                "Value": "ArticleRendering/frontend-TEST-article-rendering",
               },
               {
                 "Key": "Stack",
@@ -1000,11 +1000,11 @@ systemctl start article",
       },
       "Type": "AWS::EC2::LaunchTemplate",
     },
-    "frontendTESTarticleProfile1C431D3D": {
+    "frontendTESTarticlerenderingProfile8DDE1B22": {
       "Properties": {
         "Roles": [
           {
-            "Ref": "InstanceRoleArticleC88A1967",
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
           },
         ],
       },

@@ -6,6 +6,13 @@ import { log, warn } from '../../../scripts/log.js';
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const target = path.resolve(dirname, '../..', 'target');
 
+const kebabToPascalCase = (str) => {
+	const words = str.split('-');
+	return words
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join('');
+};
+
 /** This task generates the riff-raff bundle. It creates the following
  * directory layout under target/
  * target
@@ -31,8 +38,10 @@ const target = path.resolve(dirname, '../..', 'target');
  * └── ${guAppName}
  *     └── dist
  *         └── ${guAppName}.zip
- * *
- * @param guAppName {"article" | "facia" | "misc" | "interactive" | string }
+ *
+ *  Except for the instance where appName === 'rendering' due to backwards compatibility
+ *
+ * @param guAppName {`${'article' | 'facia' | 'misc' | 'interactive'}-rendering` }
  **/
 const copyApp = (guAppName) => {
 	/** @param {"CODE" | "PROD"} stage */
@@ -40,9 +49,7 @@ const copyApp = (guAppName) => {
 		if (guAppName === 'rendering') {
 			return `DotcomRendering-${stage}.template.json`;
 		} else {
-			return `${guAppName.charAt(0).toUpperCase()}${guAppName.slice(
-				1,
-			)}Rendering-${stage}.template.json`;
+			return `${kebabToPascalCase(guAppName)}-${stage}.template.json`;
 		}
 	};
 
@@ -133,17 +140,17 @@ const copyFrontendStatic = () => {
 
 const copyRiffRaff = () => {
 	log(' - copying riffraff yaml');
-	return cpy(['riff-raff.yaml', 'old-riff-raff.yaml'], target, {
+	return cpy(['riff-raff-v1.yaml', 'riff-raff-v2.yaml'], target, {
 		cwd: dirname,
 	});
 };
 
 Promise.all([
 	...copyApp('rendering'), // old article app
-	...copyApp('article'), // new article app
-	// ...copyApp('facia'),
-	// ...copyApp('misc'),
-	// ...copyApp('interactive'),
+	...copyApp('article-rendering'), // new article app
+	// ...copyApp('facia-rendering'),
+	// ...copyApp('misc-rendering'),
+	// ...copyApp('interactive-rendering'),
 	...copyFrontendStatic(),
 	copyRiffRaff(),
 ]).catch((err) => {

@@ -13,8 +13,7 @@ import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { getUserData } from './userData';
 
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
-	// TODO - change guApp type to 'article' | 'facia' | 'misc' | 'interactive';
-	guApp: string;
+	guApp: `${'article' | 'facia' | 'misc' | 'interactive'}-rendering` | string; // TODO - remove string
 	instanceSize: InstanceSize;
 	scaling: GuAsgCapacity;
 }
