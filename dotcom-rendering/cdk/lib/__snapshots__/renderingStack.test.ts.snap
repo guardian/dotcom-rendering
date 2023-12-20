@@ -141,7 +141,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
     "CertificateArticlerendering3297EFD3": {
       "DeletionPolicy": "Retain",
       "Properties": {
-        "DomainName": "article-rendering-frontend.code.dev-gutools.co.uk",
+        "DomainName": "article-rendering.code.dev-gutools.co.uk",
         "Tags": [
           {
             "Key": "App",

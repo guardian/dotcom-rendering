@@ -64,7 +64,7 @@ export class RenderingCDKStack extends CDKStack {
 			// Certificate is necessary for the creation of a listener on port 443,
 			// instead of the default 8080 which is unreachable.
 			certificateProps: {
-				domainName: `${guApp}-${guStack}.${
+				domainName: `${guApp}.${
 					stage === 'PROD' ? '' : 'code.dev-'
 				}gutools.co.uk`,
 			},
