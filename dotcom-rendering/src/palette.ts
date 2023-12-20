@@ -891,6 +891,8 @@ const datelineLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.NewsletterSignup:
 		case ArticleDesign.PhotoEssay:
 		case ArticleDesign.Review:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[60];
 		case ArticleDesign.Standard:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
@@ -3038,6 +3040,19 @@ const articleLinkBorderLight: PaletteFunction = ({ design, theme }) => {
 
 const articleLinkBorderDark: PaletteFunction = () => sourcePalette.neutral[46];
 
+const articleMetaLinesDark: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[20];
+		case ArticleDesign.Comment:
+			return sourcePalette.neutral[20];
+		case ArticleDesign.Interactive:
+			return sourcePalette.neutral[46];
+		default:
+			return sourcePalette.neutral[46];
+	}
+};
+
 const articleLinkHoverLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
@@ -5067,6 +5082,10 @@ const paletteColours = {
 	'--straight-lines': {
 		light: straightLinesLight,
 		dark: straightLinesDark,
+	},
+	'--article-meta-lines': {
+		light: articleBorderLight,
+		dark: articleMetaLinesDark,
 	},
 	'--sub-nav-border': {
 		light: subNavBorder,

@@ -158,7 +158,7 @@ export const BylineLink = ({
 						color={
 							isLiveBlog
 								? 'rgba(255, 255, 255, 0.4)'
-								: themePalette('--article-border')
+								: themePalette('--article-meta-lines')
 						}
 					/>
 					<Island priority="critical">

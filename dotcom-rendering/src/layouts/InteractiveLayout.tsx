@@ -500,7 +500,12 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							<GridItem area="lines">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
-										<DecideLines format={format} />
+										<DecideLines
+											format={format}
+											color={themePalette(
+												'--article-meta-lines',
+											)}
+										/>
 									</div>
 								</div>
 							</GridItem>

@@ -136,7 +136,7 @@ const MetaGridCommentCount = ({
 			border-left: 1px solid
 				${isLiveBlog
 					? 'rgba(255, 255, 255, 0.4)'
-					: themePalette('--article-border')};
+					: themePalette('--article-meta-lines')};
 			padding-top: ${space[2]}px;
 			padding-left: ${space[2]}px;
 			${(isComment || isImmersive || isAnalysis || isLiveBlog) &&
@@ -245,7 +245,7 @@ export const ArticleMetaApps = ({
 					<StraightLines
 						cssOverrides={[stretchLines({ isPicture, isLiveBlog })]}
 						count={4}
-						color={themePalette('--article-border')}
+						color={themePalette('--article-meta-lines')}
 					/>
 				)}
 				{!!avatarUrl && (
@@ -313,7 +313,7 @@ export const ArticleMetaApps = ({
 					color={
 						isLiveBlog
 							? 'rgba(255, 255, 255, 0.4)'
-							: themePalette('--article-border')
+							: themePalette('--article-meta-lines')
 					}
 				/>
 				<MetaGridDateline
