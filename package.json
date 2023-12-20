@@ -28,6 +28,7 @@
 	},
 	"lint-staged": {
 		"dotcom-rendering/**/*.md": [
+			"yarn workspace @guardian/dotcom-rendering createtoc",
 			"prettier --write --cache"
 		],
 		"*": "prettier --ignore-unknown --write --cache"
