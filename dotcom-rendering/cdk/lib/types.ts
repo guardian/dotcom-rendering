@@ -25,8 +25,8 @@ export interface DCRProps extends GuStackProps {
 }
 
 export interface UserDataProps
-	extends Pick<DCRProps, 'app' | 'region' | 'stage'> {
-	elkStreamId: string;
+	extends Pick<DCRProps, 'app' | 'stack' | 'stage'> {
+	artifactsBucket: string;
 }
 
 export interface DCRAlarmConfig {

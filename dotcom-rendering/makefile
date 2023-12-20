@@ -17,8 +17,13 @@ endef
 
 # deployment #########################################
 
+# https://www.npmjs.com/package/aws-cdk#cdk-synthesize
 cdk-synth:
-	@yarn cdk:synth
+	@yarn cdk synth --path-metadata false --version-reporting false
+
+# https://www.npmjs.com/package/aws-cdk#cdk-diff
+cdk-diff:
+	@yarn cdk diff --path-metadata false --version-reporting false --profile frontend
 
 riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
@@ -153,7 +158,7 @@ clean-deps:
 
 install: check-env
 	$(call log, "refreshing dependencies")
-	@cd .. && yarn --silent --frozen-lockfile
+	@cd .. && yarn --silent --immutable
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
@@ -194,7 +199,7 @@ gen-stories:
 
 gen-fixtures:
 	$(call log, "Generating new fixture data")
-	@npx ts-node --project tsconfig.json --files scripts/test-data/gen-fixtures.js
+	@yarn tsx scripts/test-data/gen-fixtures.js
 
 perf-test:
 	@node scripts/perf/perf-test.js

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { body, palette, remSpace, space } from '@guardian/source-foundations';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { palette as schemedPalette } from '../palette';
 import type { TimelineAtomType, TimelineEvent } from '../types/content';
 import { useConfig } from './ConfigContext';
 import { Body } from './ExpandableAtom/Body';
@@ -31,7 +32,7 @@ const EventDateBullet = css`
 	float: left;
 	position: relative;
 	left: -24px;
-	background-color: ${palette.neutral[7]};
+	background-color: ${schemedPalette('--timeline-atom-bullet')};
 `;
 
 const EventDate = css`
@@ -39,7 +40,8 @@ const EventDate = css`
 		${EventDateBullet}
 	}
 	margin-left: -16px;
-	background: ${palette.brandAlt[400]};
+	background: ${schemedPalette('--timeline-atom-highlight-text-background')};
+	color: ${schemedPalette('--timeline-atom-highlight-text')};
 	${body.medium({
 		lineHeight: 'tight',
 		fontWeight: 'bold',
@@ -47,20 +49,15 @@ const EventDate = css`
 `;
 
 const EventToDate = css`
-	background: ${palette.brandAlt[400]};
+	background: ${schemedPalette('--timeline-atom-highlight-text-background')};
+	color: ${schemedPalette('--timeline-atom-highlight-text')};
 	${body.medium({
 		lineHeight: 'tight',
 		fontWeight: 'bold',
 	})};
 `;
 
-const TimelineContents = ({
-	events,
-	format,
-}: {
-	events: TimelineEvent[];
-	format: ArticleFormat;
-}) => {
+const TimelineContents = ({ events }: { events: TimelineEvent[] }) => {
 	return (
 		<div>
 			{events.map((event, index) => {
@@ -88,9 +85,7 @@ const TimelineContents = ({
 						{!!event.title && (
 							<div css={EventTitle}>{event.title}</div>
 						)}
-						{!!event.body && (
-							<Body html={event.body} format={format} />
-						)}
+						{!!event.body && <Body html={event.body} />}
 					</div>
 				);
 			})}
@@ -103,7 +98,6 @@ export const TimelineAtom = ({
 	events,
 	description,
 	title,
-	format,
 	expandForStorybook,
 	likeHandler,
 	dislikeHandler,
@@ -116,7 +110,6 @@ export const TimelineAtom = ({
 			atomType="timeline"
 			atomTypeTitle="Timeline"
 			id={id}
-			format={format}
 			expandForStorybook={expandForStorybook}
 			title={title}
 			expandCallback={
@@ -136,10 +129,9 @@ export const TimelineAtom = ({
 					))
 			}
 		>
-			{!!description && <Body html={description} format={format} />}
-			{events && <TimelineContents events={events} format={format} />}
+			{!!description && <Body html={description} />}
+			{events && <TimelineContents events={events} />}
 			<Footer
-				format={format}
 				dislikeHandler={
 					dislikeHandler ??
 					(() =>

@@ -64,7 +64,6 @@ import {
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
-import { decidePalette } from './decidePalette';
 
 type Props = {
 	format: ArticleFormat;
@@ -137,8 +136,6 @@ export const renderElement = ({
 	isPinnedPost,
 	abTests,
 }: Props) => {
-	const palette = decidePalette(format);
-
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
@@ -320,7 +317,6 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						format={format}
 					/>
 				</Island>
 			);
@@ -471,7 +467,7 @@ export const renderElement = ({
 				<NumberedTitleBlockComponent
 					position={element.position}
 					html={element.html}
-					format={element.format}
+					format={format}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
@@ -483,7 +479,6 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						format={format}
 					/>
 				</Island>
 			);
@@ -506,7 +501,6 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						format={format}
 					/>
 				</Island>
 			);
@@ -604,7 +598,6 @@ export const renderElement = ({
 					<TimelineAtom
 						id={element.id}
 						title={element.title}
-						format={format}
 						events={element.events}
 						description={element.description}
 					/>
@@ -692,7 +685,6 @@ export const renderElement = ({
 							authorName={authorName}
 							dateCreated={dateCreated}
 							alt={alt}
-							palette={palette}
 						/>
 					);
 				}
@@ -711,7 +703,6 @@ export const renderElement = ({
 							authorName={authorName}
 							youtubeHtml={youtubeHtml}
 							dateCreated={dateCreated}
-							palette={palette}
 						/>
 					);
 				}
@@ -723,7 +714,6 @@ export const renderElement = ({
 							description={witnessTypeDataText.description}
 							authorName={witnessTypeDataText.authorName}
 							dateCreated={witnessTypeDataText.dateCreated}
-							palette={palette}
 						/>
 					);
 				}

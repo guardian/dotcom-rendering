@@ -1,11 +1,13 @@
 import { css } from '@emotion/react';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { Button, Label, TextInput } from '@guardian/source-react-components';
+import { palette as schemedPalette } from '../palette';
 
 type Props = { newsletterId: string };
 
 const labelStyles = css`
 	div {
+		color: inherit;
 		${textSans.xsmall({ fontWeight: 'bold' })}
 	}
 `;
@@ -31,9 +33,10 @@ const textInputStyles = css`
 
 const buttonCssOverrides = css`
 	justify-content: center;
-	background-color: ${neutral[0]};
+	background-color: ${schemedPalette('--email-signup-button-background')};
+	color: ${schemedPalette('--email-signup-button-text')};
 	:hover {
-		background-color: ${neutral[20]};
+		background-color: ${schemedPalette('--email-signup-button-hover')};
 	}
 	flex-basis: 118px;
 	flex-shrink: 0;

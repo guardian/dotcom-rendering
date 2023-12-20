@@ -13,6 +13,7 @@ concurrency:
 permissions:
   id-token: write
   contents: read
+  pull-requests: write # required by guardian/actions-riff-raff@v3
 
 jobs:
   build:
@@ -23,17 +24,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: corepack enable
-
-      # Get the desired version of Node installed
-      - uses: actions/setup-node@v4
-        with:
-          cache: yarn
-          node-version-file: .nvmrc
-
-      - name: Install dependencies
-        run: |
-          yarn --silent --frozen-lockfile
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
 
       # Execute some tasks from the `apps-rendering/package.json` file, using `yarn`
       - name: Build and package
@@ -55,8 +47,9 @@ jobs:
           mask-aws-account-id: true
 
       - name: Upload to riff-raff
-        uses: guardian/actions-riff-raff@v2.2.2
+        uses: guardian/actions-riff-raff@v3
         with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
           configPath: apps-rendering/riff-raff.yaml
           projectName: Mobile::mobile-apps-rendering
           buildNumberOffset: 27000 # This is the last build number from TeamCity

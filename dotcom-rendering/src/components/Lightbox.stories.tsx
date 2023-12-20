@@ -5,8 +5,8 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { useEffect } from 'react';
+import { render } from 'react-dom';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxImages } from './LightboxImages';
 import { LightboxLayout } from './LightboxLayout';
@@ -61,7 +61,6 @@ const Initialise = ({
 	format: ArticleFormat;
 	images: ImageForLightbox[];
 }) => {
-	const [isReady, setIsReady] = useState(false);
 	useEffect(() => {
 		const lightbox =
 			document.querySelector<HTMLDialogElement>('#gu-lightbox');
@@ -74,20 +73,14 @@ const Initialise = ({
 		}
 		const imageRoot = document.querySelector('ul#lightbox-images');
 		if (!imageRoot) return;
-		ReactDOM.render(
-			<LightboxImages format={format} images={images} />,
+		const loaded = new Set(
+			Array.from({ length: images.length }, (_, index) => index + 1),
+		);
+		render(
+			<LightboxImages format={format} images={images} loaded={loaded} />,
 			imageRoot,
 		);
-		setIsReady(true);
 	}, [format, images, shouldShowInfo]);
-
-	useEffect(() => {
-		const lightbox =
-			document.querySelector<HTMLDialogElement>('#gu-lightbox');
-		if (lightbox && isReady) {
-			lightbox.querySelector('#lightbox-loader-1')?.remove();
-		}
-	}, [isReady]);
 
 	return <div style={{ height: '100vh' }}>{children}</div>;
 };

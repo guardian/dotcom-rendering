@@ -678,6 +678,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											tags={article.tags}
 											renderAds={renderAds}
 											isLabs={isLabs}
+											articleEndSlot={
+												!!article.config.switches
+													.articleEndSlot
+											}
 										/>
 									</Island>
 								)}
@@ -752,7 +756,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot
@@ -763,7 +767,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true}>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
 						<Island
 							priority="enhancement"
 							defer={{ until: 'visible' }}
@@ -815,6 +823,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						fullWidth={true}
 						sectionId="comments"
 						element="aside"
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
@@ -869,7 +880,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot

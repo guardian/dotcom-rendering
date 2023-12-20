@@ -5,7 +5,7 @@ import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import { atomScript } from 'components/InteractiveAtom';
 import { isValidDate } from 'date';
-import type Int64 from 'node-int64';
+import type { Int64 } from 'thrift';
 import type { DocParser } from 'parserContext';
 import { Result } from 'result';
 

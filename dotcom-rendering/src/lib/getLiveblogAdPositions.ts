@@ -30,9 +30,7 @@ const getAdPositionsForScreenSize = ({
 		heightSinceAd: number;
 		adPositions: number[];
 	}>(
-		(accumulator, block, index) => {
-			const { heightSinceAd, adPositions } = accumulator;
-
+		({ heightSinceAd, adPositions }, block, index) => {
 			const updatedPxSinceAd =
 				heightSinceAd +
 				calculateApproximateBlockHeight(block.elements, isMobile);

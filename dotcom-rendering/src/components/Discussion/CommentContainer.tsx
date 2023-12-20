@@ -1,9 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	border,
-	palette as sourcePalette,
-	space,
-} from '@guardian/source-foundations';
+import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { getMoreResponses } from '../../lib/discussionApi';
@@ -20,7 +16,6 @@ import { PillarButton } from './PillarButton';
 
 type Props = {
 	comment: CommentType;
-	format: ArticleFormat;
 	isClosedForComments: boolean;
 	shortUrl: string;
 	user?: SignedInUser;
@@ -48,7 +43,7 @@ const nestingStyles = css`
 `;
 
 const topBorder = css`
-	border-top: 1px solid ${border.secondary};
+	border-top: 1px solid ${sourcePalette.neutral[86]};
 `;
 
 const commentContainerStyles = css`
@@ -76,7 +71,6 @@ export const avatar = (avatarSize: number) => css`
 
 export const CommentContainer = ({
 	comment,
-	format,
 	isClosedForComments,
 	user,
 	shortUrl,
@@ -128,7 +122,6 @@ export const CommentContainer = ({
 		<div css={[commentToScrollTo === comment.id && selectedStyles]}>
 			<Comment
 				comment={comment}
-				format={format}
 				isClosedForComments={isClosedForComments}
 				setCommentBeingRepliedTo={setCommentBeingRepliedTo}
 				user={user}
@@ -147,7 +140,6 @@ export const CommentContainer = ({
 								<li key={responseComment.id}>
 									<Comment
 										comment={responseComment}
-										format={format}
 										isClosedForComments={
 											isClosedForComments
 										}
@@ -188,7 +180,6 @@ export const CommentContainer = ({
 										iconSide="left"
 										linkName="Show more replies"
 										onClick={() => expand(comment.id)}
-										format={format}
 										size="xsmall"
 									>
 										{loading
@@ -214,12 +205,10 @@ export const CommentContainer = ({
 							css={nestingStyles}
 						>
 							<CommentReplyPreview
-								format={format}
 								commentBeingRepliedTo={commentBeingRepliedTo}
 							/>
 							<CommentForm
 								shortUrl={shortUrl}
-								format={format}
 								onAddComment={(response) =>
 									setResponses([...responses, response])
 								}

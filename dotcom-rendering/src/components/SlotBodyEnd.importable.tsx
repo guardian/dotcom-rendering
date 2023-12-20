@@ -2,6 +2,7 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
+import { adSizes, type SizeMapping } from '@guardian/commercial';
 import type { CountryCode } from '@guardian/libs';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
@@ -14,6 +15,7 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
+import { useAB } from '../lib/useAB';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -45,6 +47,7 @@ type Props = {
 	keywordIds: string;
 	renderAds: boolean;
 	isLabs: boolean;
+	articleEndSlot: boolean;
 };
 
 const buildReaderRevenueEpicConfig = (
@@ -135,6 +138,7 @@ export const SlotBodyEnd = ({
 	keywordIds,
 	renderAds,
 	isLabs,
+	articleEndSlot,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
@@ -147,12 +151,20 @@ export const SlotBodyEnd = ({
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
-	// Show the article end slot if the epic is not shown, currently only used in the US for Public Good
+	const showPublicGood = countryCode === 'US';
+
+	const abTests = useAB();
+	const abTestsApi = abTests?.api;
+	const mpuWhenNoEpicEnabled =
+		(abTestsApi?.isUserInVariant('MpuWhenNoEpic', 'variant') &&
+			countryCode === 'GB') ??
+		false;
+
 	const showArticleEndSlot =
 		renderAds &&
 		!isLabs &&
-		countryCode === 'US' &&
-		window.guardian.config.switches.articleEndSlot;
+		(showPublicGood || mpuWhenNoEpicEnabled) &&
+		articleEndSlot;
 
 	useEffect(() => {
 		setAsyncArticleCount(
@@ -208,13 +220,34 @@ export const SlotBodyEnd = ({
 
 	useEffect(() => {
 		if (SelectedEpic === null && showArticleEndSlot) {
+			const additionalSizes = (): SizeMapping => {
+				if (mpuWhenNoEpicEnabled) {
+					return {
+						desktop: [
+							adSizes.outstreamDesktop,
+							adSizes.outstreamGoogleDesktop,
+						],
+					};
+				} else if (showPublicGood) {
+					return { mobile: [adSizes.fluid] };
+				}
+				return {};
+			};
 			document.dispatchEvent(
 				new CustomEvent('gu.commercial.slot.fill', {
-					detail: { slotId: 'dfp-ad--article-end' },
+					detail: {
+						slotId: 'dfp-ad--article-end',
+						additionalSizes: additionalSizes(),
+					},
 				}),
 			);
 		}
-	}, [SelectedEpic, showArticleEndSlot]);
+	}, [
+		SelectedEpic,
+		showArticleEndSlot,
+		mpuWhenNoEpicEnabled,
+		showPublicGood,
+	]);
 
 	if (SelectedEpic !== null && SelectedEpic !== undefined) {
 		return (

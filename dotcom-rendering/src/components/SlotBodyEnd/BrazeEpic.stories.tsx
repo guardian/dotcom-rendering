@@ -123,9 +123,9 @@ export const BrazeEpic_DefaultWithReminder_Component = (
 			buttonUrl: args.buttonUrl,
 			hidePaymentIcons: args.hidePaymentIcons,
 			ophanComponentId: args.ophanComponentId,
-			remindMeButtonText: args.remindMeButtonText,
-			remindMeConfirmationText: args.remindMeConfirmationText,
-			remindMeConfirmationHeaderText: args.remindMeConfirmationHeaderText,
+			reminderStage: args.reminderStage,
+			reminderOption: args.reminderOption,
+			showPrivacyText: args.showPrivacyText,
 		};
 
 		return (
@@ -165,9 +165,9 @@ BrazeEpic_DefaultWithReminder_Component.args = {
 	ophanComponentId: 'example_ophan_component_id',
 	slotName: 'EndOfArticle',
 	componentName: 'Epic',
-	remindMeButtonText: 'Remind me in May',
-	remindMeConfirmationText: "Okay, we'll send you an email in May.",
-	remindMeConfirmationHeaderText: 'Thank you! Your reminder is set.',
+	reminderStage: 'PRE',
+	reminderOption: 'recurring-contribution-upsell',
+	showPrivacyText: 'true',
 };
 
 BrazeEpic_DefaultWithReminder_Component.storyName =

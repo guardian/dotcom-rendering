@@ -604,6 +604,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								tags={article.tags}
 								renderAds={renderAds}
 								isLabs={false}
+								articleEndSlot={
+									!!article.config.switches.articleEndSlot
+								}
 							/>
 						</Island>
 					</div>
@@ -650,7 +653,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot
@@ -662,7 +665,12 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true} showTopBorder={false}>
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
@@ -706,6 +714,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						sectionId="comments"
 						data-print-layout="hide"
 						element="section"
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
@@ -763,7 +774,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot

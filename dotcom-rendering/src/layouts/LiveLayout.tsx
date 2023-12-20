@@ -1153,9 +1153,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							fullWidth={true}
 							data-print-layout="hide"
 							padSides={false}
-							showTopBorder={false}
+							showTopBorder={true}
 							showSideBorders={false}
-							backgroundColour={sourcePalette.neutral[93]}
+							backgroundColour={sourcePalette.neutral[97]}
+							shouldCenter={false}
 							element="aside"
 						>
 							<AdSlot
@@ -1167,7 +1168,13 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					)}
 
 					{article.storyPackage && (
-						<Section fullWidth={true}>
+						<Section
+							fullWidth={true}
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
+							borderColour={themePalette('--article-border')}
+						>
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
@@ -1217,6 +1224,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							sectionId="comments"
 							data-print-layout="hide"
 							element="section"
+							backgroundColour={themePalette(
+								'--article-background',
+							)}
+							borderColour={themePalette('--article-border')}
+							fontColour={themePalette('--article-section-title')}
 						>
 							<DiscussionLayout
 								discussionApiUrl={
@@ -1278,7 +1290,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							showTopBorder={false}
 							showSideBorders={false}
-							backgroundColour={sourcePalette.neutral[93]}
+							backgroundColour={sourcePalette.neutral[97]}
 							element="aside"
 						>
 							<AdSlot

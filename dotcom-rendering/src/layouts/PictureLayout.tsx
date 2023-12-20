@@ -605,7 +605,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot
@@ -616,7 +616,11 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true}>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
@@ -662,6 +666,11 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						fullWidth={true}
 						sectionId="comments"
 						element="section"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
@@ -718,7 +727,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot

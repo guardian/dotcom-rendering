@@ -134,6 +134,7 @@ const EmailSignupForm: FC<Props> = ({
 						type="email"
 						width={30}
 						hideLabel
+						id={`email-signup-${identityName}`}
 						label="Enter your email address"
 						cssOverrides={css`
 							height: ${remSpace[9]};

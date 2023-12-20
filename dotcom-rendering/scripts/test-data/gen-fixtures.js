@@ -3,7 +3,6 @@
 const fs = require('node:fs/promises');
 const { resolve } = require('node:path');
 const execa = require('execa');
-const fetch = require('node-fetch');
 const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');

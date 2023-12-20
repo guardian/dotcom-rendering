@@ -71,6 +71,7 @@ export type Props = {
 	imageSize?: ImageSizeType;
 	imageLoading: Loading;
 	isCrossword?: boolean;
+	isOnwardContent?: boolean;
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
@@ -154,17 +155,18 @@ type RenderFooter = ({
 const DecideFooter = ({
 	isOpinion,
 	hasSublinks,
-
+	isOnwardContent,
 	renderFooter,
 }: {
 	isOpinion: boolean;
 	hasSublinks?: boolean;
-
+	isOnwardContent?: boolean;
 	renderFooter: RenderFooter;
 }) => {
-	if (isOpinion && !hasSublinks) {
+	if (isOpinion && !hasSublinks && !isOnwardContent) {
 		// Opinion cards without sublinks render the entire footer, including lines,
 		// outside, sitting along the very bottom of the card
+		// Unless they are onwardContent cards
 		return null;
 	}
 	// For all other cases (including opinion cards that *do* have sublinks) we
@@ -172,7 +174,6 @@ const DecideFooter = ({
 	return renderFooter({
 		displayLines: false,
 	});
-	// Note. Opinion cards always show the lines at the bottom of the card (in CommentFooter)
 };
 
 const CommentFooter = ({
@@ -291,6 +292,7 @@ export const Card = ({
 	discussionId,
 	isDynamo,
 	isCrossword,
+	isOnwardContent = false,
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
@@ -321,6 +323,7 @@ export const Card = ({
 				format={format}
 				containerPalette={containerPalette}
 				displayLines={displayLines}
+				leftAlign={isOnwardContent}
 				age={
 					(!!onwardsSource && webPublicationDate) ||
 					(showAge &&
@@ -332,6 +335,7 @@ export const Card = ({
 							webPublicationDate={webPublicationDate}
 							showClock={showClock}
 							isDynamo={isDynamo}
+							isOnwardContent={isOnwardContent}
 						/>
 					) : undefined
 				}
@@ -362,9 +366,9 @@ export const Card = ({
 								defer={{ until: 'visible' }}
 							>
 								<CardCommentCount
-									format={format}
 									discussionApiUrl={discussionApiUrl}
 									discussionId={discussionId}
+									isOnwardContent={isOnwardContent}
 								/>
 							</Island>
 						</Link>
@@ -392,6 +396,9 @@ export const Card = ({
 	const showPlayIcon =
 		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
 
+	// We want to show the comment footer with lines, for opinion cards that are not onwardsContent or dynamo
+	const showCommentLinesFooter = isOpinion && !isDynamo && !isOnwardContent;
+
 	const media = getMedia({
 		imageUrl,
 		imageAltText,
@@ -405,8 +412,10 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
+			showTopBar={!isOnwardContent}
 			containerPalette={containerPalette}
 			isDynamo={isDynamo}
+			isOnwardContent={isOnwardContent}
 		>
 			<CardLink
 				linkTo={linkTo}
@@ -517,6 +526,7 @@ export const Card = ({
 											imageSize={imageSize}
 											alt={headlineText}
 											loading={imageLoading}
+											roundedCorners={isOnwardContent}
 										/>
 									</div>
 								)}
@@ -529,8 +539,9 @@ export const Card = ({
 									imageSize={imageSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
+									roundedCorners={isOnwardContent}
 								/>
-								{showPlayIcon && (
+								{showPlayIcon && mainMedia.duration > 0 && (
 									<MediaDuration
 										mediaDuration={mainMedia.duration}
 										imagePosition={imagePosition}
@@ -580,6 +591,7 @@ export const Card = ({
 								showByline={showByline}
 								isDynamo={isDynamo}
 								isExternalLink={isExternalLink}
+								isOnwardContent={isOnwardContent}
 							/>
 							{starRating !== undefined ? (
 								<StarRatingComponent
@@ -589,15 +601,19 @@ export const Card = ({
 							) : null}
 							{!!mainMedia && mainMedia.type !== 'Video' && (
 								<MediaMeta
-									containerPalette={containerPalette}
-									format={format}
 									mediaType={mainMedia.type}
 									hasKicker={!!kickerText}
 								/>
 							)}
 						</HeadlineWrapper>
 						{/* This div is needed to push this content to the bottom of the card */}
-						<div>
+						<div
+							style={
+								isOnwardContent
+									? { marginTop: `${space[4]}px` }
+									: {}
+							}
+						>
 							{!!trailText && (
 								<TrailTextWrapper
 									containerPalette={containerPalette}
@@ -619,7 +635,6 @@ export const Card = ({
 								>
 									<LatestLinks
 										id={linkTo}
-										format={format}
 										isDynamo={isDynamo}
 										direction={supportingContentAlignment}
 										containerPalette={containerPalette}
@@ -630,6 +645,7 @@ export const Card = ({
 								isOpinion={isOpinion}
 								hasSublinks={hasSublinks}
 								renderFooter={renderFooter}
+								isOnwardContent={isOnwardContent}
 							/>
 							{hasSublinks && sublinkPosition === 'inner' && (
 								<SupportingContent
@@ -654,7 +670,7 @@ export const Card = ({
 					alignment={supportingContentAlignment}
 				/>
 			)}
-			{isOpinion && !isDynamo && (
+			{showCommentLinesFooter && (
 				<CommentFooter
 					hasSublinks={hasSublinks}
 					palette={palette}

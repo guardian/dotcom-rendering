@@ -13,17 +13,21 @@ type Props = {
 	webPublicationDate: string;
 	showClock?: boolean;
 	isDynamo?: true;
+	isOnwardContent?: boolean;
 };
 
 const ageStyles = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
 	isDynamo?: true,
+	isOnwardsContent?: boolean,
 ) => {
 	return css`
 		${textSans.xxsmall({ lineHeight: 'tight' })};
 		margin-top: -4px;
-		color: ${palette('--card-footer-text')};
+		color: ${isOnwardsContent
+			? palette('--card-footer-onwards-content')
+			: palette('--card-footer-text')};
 
 		/* Provide side padding for positioning and also to keep spacing
     between any sibings (like Lines) */
@@ -34,7 +38,9 @@ const ageStyles = (
 		}
 
 		svg {
-			fill: ${palette('--card-footer-text')};
+			fill: ${isOnwardsContent
+				? palette('--card-footer-onwards-content')
+				: palette('--card-footer-text')};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;
@@ -60,13 +66,16 @@ export const CardAge = ({
 	webPublicationDate,
 	showClock,
 	isDynamo,
+	isOnwardContent,
 }: Props) => {
 	if (timeAgo(new Date(webPublicationDate).getTime()) === false) {
 		return null;
 	}
 
 	return (
-		<span css={ageStyles(format, containerPalette, isDynamo)}>
+		<span
+			css={ageStyles(format, containerPalette, isDynamo, isOnwardContent)}
+		>
 			{showClock && <ClockIcon />}
 			<Island priority="enhancement" defer={{ until: 'visible' }}>
 				<RelativeTime then={new Date(webPublicationDate).getTime()} />

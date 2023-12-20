@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, border } from '@guardian/source-foundations';
+import { body, palette as sourcePalette } from '@guardian/source-foundations';
 import { useEffect } from 'react';
 import { unescapeData } from '../lib/escapeData';
 import type { TweetBlockElement } from '../types/content';
@@ -11,7 +11,7 @@ type Props = {
 // fallback styling for when JS is disabled
 const noJSStyling = css`
 	.nojs-tweet:not(.nojs-tweet-rendered) {
-		border: 1px solid ${border.secondary};
+		border: 1px solid ${sourcePalette.neutral[86]};
 		border-radius: 4px;
 		padding: 20px;
 		width: 100%;

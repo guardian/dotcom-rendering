@@ -5,8 +5,14 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { getAllThemes, getThemeNameAsString } from '../lib/format';
+import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { getThemeNameAsString } from '../lib/format';
 import { ArticleTitle } from './ArticleTitle';
+
+interface StoryArgs extends StoryProps {
+	theme: string;
+}
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -89,11 +95,13 @@ export const beyondTheBlade = () => {
 };
 beyondTheBlade.storyName = 'Beyond the blade badge';
 
-export const immersiveComment = () => {
+export const immersiveComment = ({ theme }: StoryArgs) => {
 	return (
 		<div
 			css={css`
-				background-color: lightgray;
+				background-color: ${theme === 'light'
+					? 'lightgray'
+					: 'inherit'};
 				padding: 20px;
 			`}
 		>
@@ -109,12 +117,23 @@ export const immersiveComment = () => {
 	);
 };
 immersiveComment.storyName = 'Immersive comment piece';
+immersiveComment.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Comment,
+		},
+	]),
+];
 
-export const immersiveCommentTag = () => {
+export const immersiveCommentTag = ({ theme }: StoryArgs) => {
 	return (
 		<div
 			css={css`
-				background-color: lightgray;
+				background-color: ${theme === 'light'
+					? 'lightgray'
+					: 'inherit'};
 				padding: 20px;
 			`}
 		>
@@ -137,6 +156,15 @@ export const immersiveCommentTag = () => {
 	);
 };
 immersiveCommentTag.storyName = 'Immersive comment piece with Blog tag';
+immersiveCommentTag.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Comment,
+		},
+	]),
+];
 
 export const ImmersiveSeriesTag = () => {
 	return (
@@ -160,6 +188,15 @@ export const ImmersiveSeriesTag = () => {
 	);
 };
 ImmersiveSeriesTag.storyName = 'Immersive with a Series tag';
+ImmersiveSeriesTag.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Immersive,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Review,
+		},
+	]),
+];
 
 export const ArticleBlogTag = () => {
 	return (
@@ -183,14 +220,25 @@ export const ArticleBlogTag = () => {
 	);
 };
 ArticleBlogTag.storyName = 'Article with a Blog tag';
+ArticleBlogTag.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
-export const LiveblogTitle = () => {
+export const LiveblogTitle = ({ theme }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<div
 				css={css`
 					/* stylelint-disable-next-line color-no-hex */
-					background-color: #005689;
+					background-color: ${theme === 'light'
+						? '#005689'
+						: 'inherit'};
 				`}
 			>
 				<ArticleTitle
@@ -212,7 +260,9 @@ export const LiveblogTitle = () => {
 			<div
 				css={css`
 					/* stylelint-disable-next-line color-no-hex */
-					background-color: #ffe500;
+					background-color: ${theme === 'light'
+						? '#ffe500'
+						: 'inherit'};
 				`}
 			>
 				<ArticleTitle
@@ -236,6 +286,15 @@ export const LiveblogTitle = () => {
 	);
 };
 LiveblogTitle.storyName = 'Liveblog title';
+LiveblogTitle.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+			design: ArticleDesign.LiveBlog,
+		},
+	]),
+];
 
 export const ArticleOpinionTag = () => {
 	return (
@@ -259,6 +318,15 @@ export const ArticleOpinionTag = () => {
 	);
 };
 ArticleOpinionTag.storyName = 'Article with a Opinion tag';
+ArticleOpinionTag.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const ArticleSeriesTag = () => {
 	return (
@@ -282,6 +350,15 @@ export const ArticleSeriesTag = () => {
 	);
 };
 ArticleSeriesTag.storyName = 'Article with a Series tag';
+ArticleSeriesTag.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const SpecialReportTitle = () => {
 	return (
@@ -305,6 +382,15 @@ export const SpecialReportTitle = () => {
 	);
 };
 SpecialReportTitle.storyName = 'Special report';
+SpecialReportTitle.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: ArticleSpecial.SpecialReport,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const SpecialReportAlt = () => {
 	return (
@@ -328,6 +414,15 @@ export const SpecialReportAlt = () => {
 	);
 };
 SpecialReportAlt.storyName = 'Special report Alt';
+SpecialReportAlt.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: ArticleSpecial.SpecialReportAlt,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const ArticleNoTags = () => {
 	return (
@@ -344,6 +439,15 @@ export const ArticleNoTags = () => {
 	);
 };
 ArticleNoTags.storyName = 'Article with no tags';
+ArticleNoTags.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const LabsStory = () => {
 	return (
@@ -367,6 +471,15 @@ export const LabsStory = () => {
 	);
 };
 LabsStory.storyName = 'Labs';
+LabsStory.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const LongStory = () => {
 	return (
@@ -390,6 +503,15 @@ export const LongStory = () => {
 	);
 };
 LongStory.storyName = 'Long title';
+LongStory.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
 export const LongWord = () => {
 	return (
@@ -413,33 +535,80 @@ export const LongWord = () => {
 	);
 };
 LongWord.storyName = 'Long word';
+LongWord.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];
 
-export const ArticleDeadBlogTitle = () => {
+const themeVariations = [
+	Pillar.Sport,
+	Pillar.News,
+	Pillar.Culture,
+	Pillar.Opinion,
+	Pillar.Lifestyle,
+	ArticleSpecial.SpecialReport,
+	ArticleSpecial.SpecialReportAlt,
+	ArticleSpecial.Labs,
+];
+
+const allThemeDeadBlogVariations = themeVariations.map((theme) => ({
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.DeadBlog,
+	theme,
+}));
+
+export const ArticleDeadBlogTitle = ({ format }: StoryArgs) => {
 	return (
 		<>
-			{getAllThemes({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.DeadBlog,
-			}).map((format) => (
-				<div key={JSON.stringify(format)}>
-					<p>{getThemeNameAsString(format)}</p>
-					<ArticleTitle
-						{...FEArticle}
-						format={format}
-						tags={[
-							{
-								id: '',
-								title: 'Deadblog title',
-								type: 'Blog',
-							},
-						]}
-					/>
-					<br />
-					<br />
-				</div>
-			))}
+			<div key={JSON.stringify(format)}>
+				<p>{getThemeNameAsString(format)}</p>
+				<ArticleTitle
+					{...FEArticle}
+					format={format}
+					tags={[
+						{
+							id: '',
+							title: 'Deadblog title',
+							type: 'Blog',
+						},
+					]}
+				/>
+				<br />
+				<br />
+			</div>
 		</>
 	);
 };
 
 ArticleDeadBlogTitle.storyName = 'Deadblog - All pillars';
+ArticleDeadBlogTitle.decorators = [splitTheme(allThemeDeadBlogVariations)];
+
+export const ArticleTitleAll = () => {
+	return (
+		<>
+			<ArticleTitle
+				{...FEArticle}
+				format={{
+					display: ArticleDisplay.Standard,
+					theme: Pillar.News,
+					design: ArticleDesign.Standard,
+				}}
+				tags={[
+					{
+						id: '',
+						title: 'Article title',
+						type: 'Blog',
+					},
+				]}
+			/>
+		</>
+	);
+};
+
+ArticleTitleAll.storyName = 'ArticleTitleAll';
+ArticleTitleAll.decorators = [splitTheme()];
