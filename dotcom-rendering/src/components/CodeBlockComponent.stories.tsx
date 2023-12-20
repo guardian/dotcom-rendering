@@ -1,5 +1,5 @@
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { CodeBlockComponent } from './CodeBlockComponent';
 import { Section } from './Section';
 

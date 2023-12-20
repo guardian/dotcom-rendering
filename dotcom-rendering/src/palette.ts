@@ -4649,6 +4649,10 @@ sourcePalette.neutral[0];
 const codeBlockBackgroundLight: PaletteFunction = () => '#f5f2f0';
 const codeBlockBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[38];
+const codeBlockTextShadowLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const codeBlockTextShadowDark: PaletteFunction = () => sourcePalette.neutral[0];
+sourcePalette.neutral[38];
 
 // ----- Palette ----- //
 
@@ -5480,6 +5484,10 @@ const paletteColours = {
 	'--code-block-background': {
 		light: codeBlockBackgroundLight,
 		dark: codeBlockBackgroundDark,
+	},
+	'--code-block-text-shadow': {
+		light: codeBlockTextShadowLight,
+		dark: codeBlockTextShadowDark,
 	},
 } satisfies PaletteColours;
 

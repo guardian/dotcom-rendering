@@ -16,8 +16,8 @@ const codeStyles = css`
     * Based on dabblet (http://dabblet.com)
     * @author Lea Verou
     */
-	color: 'inherit';
-	text-shadow: 0 1px white;
+	color: inherit;
+	text-shadow: 0 1px ${palette('--code-block-text-shadow')};
 	/* The GU fonts don't work here */
 	/* stylelint-disable-next-line property-disallowed-list */
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
