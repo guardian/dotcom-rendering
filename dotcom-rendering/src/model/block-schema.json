@@ -990,6 +990,9 @@
                 "html": {
                     "type": "string"
                 },
+                "title": {
+                    "type": "string"
+                },
                 "css": {
                     "type": "string"
                 },
@@ -1008,6 +1011,7 @@
                 "elementId",
                 "html",
                 "id",
+                "title",
                 "url"
             ]
         },
