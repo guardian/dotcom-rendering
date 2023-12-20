@@ -1,5 +1,4 @@
 /* eslint-disable mocha/no-setup-in-describe */
-/* eslint-disable mocha/no-exclusive-tests */
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
@@ -244,7 +243,7 @@ describe('Sign In Gate Tests', function () {
 			cy.contains('privacy settings');
 		});
 
-		describe.only('AB Test', function () {
+		describe('AB Test', function () {
 			const mobileUA =
 				'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/114.0.5735.99 Mobile/15E148 Safari/604.1';
 			const desktopUA =

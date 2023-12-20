@@ -158,6 +158,24 @@ describe('SignInGate - displayRule methods', () => {
 			});
 		});
 
+		// describe('tablet', function () {
+		// 	test('ipad', () => {
+		// 		userAgentGetter.mockReturnValueOnce(
+		// 			'Mozilla/5.0 (iPad; CPU OS 8_1 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
+		// 		);
+		// 	});
+		// 	test('samsung galaxy', () => {
+		// 		userAgentGetter.mockReturnValueOnce(
+		// 			'Mozilla/5.0 (Linux; Android 12; SM-X906C Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/80.0.3987.119 Mobile Safari/537.36',
+		// 		);
+		// 	});
+		// 	test('amazon kindle fire', () => {
+		// 		userAgentGetter.mockReturnValueOnce(
+		// 			'Mozilla/5.0 (Linux; Android 4.4.3; KFTHWI Build/KTU84M) AppleWebKit/537.36 (KHTML, like Gecko) Silk/47.1.79 like Chrome/47.0.2526.80 Safari/537.36',
+		// 		);
+		// 	})
+		// });
+
 		describe('browsers', function () {
 			test('windows browser is false', () => {
 				userAgentGetter.mockReturnValueOnce(
