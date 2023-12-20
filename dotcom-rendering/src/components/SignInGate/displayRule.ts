@@ -5,7 +5,7 @@ import type { DailyArticle } from '../../lib/dailyArticleCount';
 import { getDailyArticleCount } from '../../lib/dailyArticleCount';
 import type { TagType } from '../../types/tag';
 import { hasUserDismissedGateMoreThanCount } from './dismissGate';
-import type { CanShowGateProps } from './types';
+import type { CanShowGateProps, CurrentSignInGateABTest } from './types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n = 2): boolean => {
@@ -15,6 +15,13 @@ export const isNPageOrHigherPageView = (n = 2): boolean => {
 	const { count = 0 } = dailyCount;
 
 	return count >= n;
+};
+
+const calculatePageViewLimit = (currentTest: CurrentSignInGateABTest) => {
+	if (currentTest.id !== 'SignInGateDevice') return 3;
+	else if (currentTest.variant === 'mobile' && isMobile()) return 2;
+	else if (currentTest.variant === 'desktop' && isDesktop()) return 2;
+	else return 3;
 };
 
 // determine if the useragent is running iOS 9 (known to be buggy for sign in flow)
@@ -30,6 +37,15 @@ export const isIOS9 = (): boolean => {
 	return appleDevice && os;
 };
 
+const isMobile = (): boolean => {
+	const ua = navigator.userAgent;
+	return /mobile/i.test(ua);
+};
+
+const isDesktop = (): boolean => {
+	const ua = navigator.userAgent;
+	return /firefox/i.test(ua);
+};
 // hide the sign in gate on article types that are not supported
 export const isValidContentType = (contentType: string): boolean => {
 	// It's safer to definitively *include* types as we
@@ -88,7 +104,7 @@ export const canShowSignInGate = ({
 				currentTest.name,
 				5,
 			) &&
-			isNPageOrHigherPageView(3) &&
+			isNPageOrHigherPageView(calculatePageViewLimit(currentTest)) &&
 			isValidContentType(contentType) &&
 			isValidSection(sectionId) &&
 			isValidTag(tags) &&

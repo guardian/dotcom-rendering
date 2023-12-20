@@ -1,14 +1,14 @@
 import type { ABTest } from '@guardian/ab-core';
 
-export const signInGateMainVariant: ABTest = {
-	id: 'SignInGateMainVariant',
-	start: '2020-06-09',
-	expiry: '2025-12-01',
-	author: 'Mahesh Makani',
+export const signInGateDevice: ABTest = {
+	id: 'SignInGateDevice',
+	start: '2023-12-19',
+	expiry: '2024-01-30',
+	author: 'Lindsey Dew',
 	description:
-		'Show sign in gate to 100% of users on 3rd article view of simple article templates, and show a further 5 times after the first dismissal, with higher priority over banners and epic. Main/Variant Audience.',
-	audience: 0.81,
-	audienceOffset: 0.0,
+		'Test showing the sign in gate at different levels of frequency by device type',
+	audience: 0.09,
+	audienceOffset: 0.81,
 	successMeasure: 'Users sign in or create a Guardian account',
 	audienceCriteria:
 		'3rd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss, not on help, info sections etc. Exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
@@ -19,7 +19,15 @@ export const signInGateMainVariant: ABTest = {
 	canRun: () => true,
 	variants: [
 		{
-			id: 'main-variant-5',
+			id: 'control',
+			test: (): void => {},
+		},
+		{
+			id: 'desktop',
+			test: (): void => {},
+		},
+		{
+			id: 'mobile',
 			test: (): void => {},
 		},
 	],

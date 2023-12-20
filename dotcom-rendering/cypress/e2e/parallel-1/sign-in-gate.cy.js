@@ -1,3 +1,4 @@
+/* eslint-disable mocha/no-setup-in-describe */
 /* eslint-disable mocha/no-exclusive-tests */
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
@@ -66,6 +67,19 @@ describe('Sign In Gate Tests', function () {
 				'Content-Type': 'application/json',
 			},
 		});
+	};
+
+	const visitArticleWithUserAgentOverride = (ua) => {
+		cy.visit(
+			'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+			{
+				onBeforeLoad: (win) => {
+					Object.defineProperty(win.navigator, 'userAgent', {
+						value: ua,
+					});
+				},
+			},
+		);
 	};
 	// as the sign in gate is lazy loaded, we need to scroll to the rough position where it
 	// will be inserted to make it visible
@@ -231,23 +245,41 @@ describe('Sign In Gate Tests', function () {
 		});
 
 		describe.only('AB Test', function () {
+			const mobileUA =
+				'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/114.0.5735.99 Mobile/15E148 Safari/604.1';
+			const desktopUA =
+				'Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0';
+
 			describe('variant a', function () {
+				beforeEach(function () {
+					setMvtCookie('810001');
+				});
 				it('should show the sign gate more frequently when a user is on web', function () {
-					setArticleCount(1);
-					cy.visit(
-						'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-						{
-							onBeforeLoad: (win) => {
-								Object.defineProperty(
-									win.navigator,
-									'userAgent',
-									{
-										value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0',
-									},
-								);
-							},
-						},
+					setArticleCount(2);
+
+					visitArticleWithUserAgentOverride(desktopUA);
+					scrollToGateForLazyLoading();
+
+					cy.get('[data-testid=sign-in-gate-main]').should(
+						'be.visible',
 					);
+				});
+				it('should not show the gate more frequently if user is not on web', function () {
+					setArticleCount(2);
+					visitArticleWithUserAgentOverride(mobileUA);
+
+					cy.get('[data-testid=sign-in-gate-main]').should(
+						'not.exist',
+					);
+				});
+			});
+			describe('variant b', function () {
+				beforeEach(function () {
+					setMvtCookie('810002');
+				});
+				it('should show the sign gate more frequently when a user is on mobile', function () {
+					setArticleCount(2);
+					visitArticleWithUserAgentOverride(mobileUA);
 
 					scrollToGateForLazyLoading();
 
@@ -255,29 +287,12 @@ describe('Sign In Gate Tests', function () {
 						'be.visible',
 					);
 				});
-			});
-			describe('variant b', function () {
-				it('should show the sign gate more frequently when a user is on mobile', function () {
-					setArticleCount(1);
-					cy.visit(
-						'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-						{
-							onBeforeLoad: (win) => {
-								Object.defineProperty(
-									win.navigator,
-									'userAgent',
-									{
-										value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/114.0.5735.99 Mobile/15E148 Safari/604.1',
-									},
-								);
-							},
-						},
-					);
-
-					scrollToGateForLazyLoading();
+				it('should not show the gate more frequently if user is not on mobile', function () {
+					setArticleCount(2);
+					visitArticleWithUserAgentOverride(desktopUA);
 
 					cy.get('[data-testid=sign-in-gate-main]').should(
-						'be.visible',
+						'not.exist',
 					);
 				});
 			});

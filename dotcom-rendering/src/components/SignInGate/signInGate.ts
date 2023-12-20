@@ -1,5 +1,6 @@
 import type { ABTest } from '@guardian/ab-core';
 // Sign in Gate A/B Tests
+import { signInGateDevice } from '../../experiments/tests/sign-in-gate-device';
 import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant';
 // Sign in Gate Types
@@ -15,11 +16,15 @@ import type { SignInGateTestMap } from './types';
 export const signInGateTests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
 	signInGateMainControl,
+	signInGateDevice,
 ];
 
 export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 	'main-control-5': gateMainControl,
 	'main-variant-5': gateMainVariant,
+	control: gateMainVariant,
+	desktop: gateMainVariant,
+	mobile: gateMainVariant,
 };
 
 // Component Id does not need to match gate test name, as ab test info passed separately to ophan
@@ -27,4 +32,5 @@ export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 export const signInGateTestIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_5',
 	SignInGateMainControl: 'main_control_5',
+	SignInGateDevice: 'main_variant_5',
 };
