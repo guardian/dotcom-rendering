@@ -35,6 +35,7 @@ export interface Guardian {
 			isDev?: boolean;
 			hasInlineMerchandise?: boolean;
 			userAttributesApiUrl?: string;
+			idApiUrl?: string;
 		};
 		libs: {
 			googletag: string;

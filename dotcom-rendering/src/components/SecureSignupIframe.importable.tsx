@@ -16,6 +16,7 @@ import { useEffect, useRef, useState } from 'react';
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { lazyFetchEmailWithTimeout } from '../lib/contributions';
 import { useHydrated } from '../lib/useHydrated';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -317,6 +318,24 @@ export const SecureSignupIframe = ({
 		resetIframeHeight();
 	};
 
+	const fillPlaceholderEmail = () => {
+		const { current: iframe } = iframeRef;
+		const emailFormField = iframe?.contentDocument?.querySelector(
+			'input[name="email"]',
+		);
+		const { idApiUrl } = window.guardian.config.page;
+
+		const fetchEmail = idApiUrl
+			? lazyFetchEmailWithTimeout(idApiUrl)
+			: undefined;
+
+		void fetchEmail?.().then((resolvedEmail) => {
+			if (resolvedEmail) {
+				emailFormField?.setAttribute('placeholder', resolvedEmail);
+			}
+		});
+	};
+
 	const addFontsToIframe = (requiredFontNames: string[]) => {
 		const { current: iframe } = iframeRef;
 
@@ -350,6 +369,7 @@ export const SecureSignupIframe = ({
 	const onIFrameLoad = (): void => {
 		attachListenersToIframe();
 		addFontsToIframe(['GuardianTextSans']);
+		fillPlaceholderEmail();
 	};
 
 	return (
