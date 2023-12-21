@@ -982,7 +982,8 @@ export const Carousel = ({
 							// but we rarely if ever expect it not to exist
 							if (!webPublicationDate) return null;
 
-							const imageUrl = image && getSourceImageUrl(image);
+							const imageUrl =
+								image && getSourceImageUrl(image.src);
 
 							const imageLoading = i > 3 ? 'lazy' : 'eager';
 
