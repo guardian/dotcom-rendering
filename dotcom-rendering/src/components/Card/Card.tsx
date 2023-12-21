@@ -63,6 +63,7 @@ export type Props = {
 	byline?: string;
 	showByline?: boolean;
 	webPublicationDate?: string;
+	// TODO: Couple these
 	imageUrl?: string;
 	imageAltText?: string;
 	imagePosition?: ImagePositionType;

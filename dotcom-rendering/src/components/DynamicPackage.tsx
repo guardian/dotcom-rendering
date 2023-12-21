@@ -177,7 +177,8 @@ const Card25_Card25_Card25_Card25 = ({
 							containerType="dynamic/package"
 							showAge={showAge}
 							supportingContent={card.supportingContent}
-							imageUrl={showImage ? card.image : undefined}
+							// TODO: Why are we not passing imageAltText through?
+							imageUrl={showImage ? card.image?.src : undefined}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -443,12 +444,13 @@ const Card75_ColumnOfCards25 = ({
 									containerPalette={containerPalette}
 									containerType="dynamic/package"
 									showAge={showAge}
+									// TODO: Why are we not passing imageAltText through?
 									imageUrl={
 										// Always show the image on the first card and only
 										// on the second if there are two items in two
 										cardIndex === 0 ||
 										remaining.length === 2
-											? card.image
+											? card.image?.src
 											: undefined
 									}
 									headlineSize={

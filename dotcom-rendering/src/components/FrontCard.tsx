@@ -37,8 +37,9 @@ export const FrontCard = (props: Props) => {
 		kickerText: trail.kickerText,
 		showPulsingDot: trail.format.design === ArticleDesign.LiveBlog,
 		showClock: false,
-		imageUrl: trail.image,
-		imageAltText: trail.imageAltText,
+		// TODO: Couple these
+		imageUrl: trail.image?.src,
+		imageAltText: trail.image?.altText,
 		isCrossword: trail.isCrossword,
 		isPlayableMediaCard: true,
 		starRating: trail.starRating,
