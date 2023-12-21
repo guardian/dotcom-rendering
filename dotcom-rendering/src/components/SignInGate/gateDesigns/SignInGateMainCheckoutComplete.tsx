@@ -8,6 +8,15 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
+import {
+	COMPLETE_REGISTRATION_BUTTON,
+	SIGN_IN_BUTTON,
+	SIGN_IN_INCENTIVES_DIGITAL,
+	SIGN_IN_INCENTIVES_NON_DIGITAL,
+	SIGN_IN_PROMPT,
+	SUBSCRIPTION_HEADER,
+	SUPPORTER_HEADER,
+} from '../../../lib/signInAfterCheckOutText';
 import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
 import type { Product, SignInGateProps, UserType } from '../types';
@@ -111,30 +120,6 @@ export const bodySpacing = css`
 	padding-top: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
 `;
-
-// HEADER TEXT
-const SUBSCRIPTION_HEADER = 'Thank you for subscribing';
-const SUPPORTER_HEADER = 'Thank you for your support';
-
-// SUBHEADER TEXT
-const SIGN_IN_PROMPT = 'Remember to sign in for a better experience.';
-
-// BODY TEXT
-const SIGN_IN_INCENTIVES_DIGITAL = [
-	'Supporter rewards – unlock the benefits of your support',
-	'Incisive analysis and original reporting direct to your inbox, with our newsletters',
-	'Get involved in the discussion – comment on stories',
-];
-
-const SIGN_IN_INCENTIVES_NON_DIGITAL = [
-	'Fewer interruptions',
-	'Incisive analysis and original reporting direct to your inbox, with our newsletters',
-	'Get involved in the discussion – comment on stories',
-];
-
-// BUTTON TEXT
-const COMPLETE_REGISTRATION_BUTTON = 'Complete registration';
-const SIGN_IN_BUTTON = 'Sign in';
 
 const getHeadingText: (product: Product) => string = (product) => {
 	const headingMap: Record<Product, string> = {
