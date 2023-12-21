@@ -118,6 +118,7 @@ interface ChartAtomBlockElement {
 	id: string;
 	url: string;
 	html: string;
+	title: string;
 	css?: string;
 	js?: string;
 	role?: RoleType;
@@ -300,6 +301,7 @@ export interface InteractiveAtomBlockElement {
 	elementId: string;
 	url: string;
 	id: string;
+	title: string;
 	js?: string;
 	html?: string;
 	css?: string;

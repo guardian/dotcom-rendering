@@ -21,6 +21,7 @@ type InteractiveAtomType = {
 	elementCss?: string;
 	isMainMedia?: boolean;
 	format: ArticleFormat;
+	title: string;
 };
 
 export const InteractiveAtom = ({
@@ -30,6 +31,7 @@ export const InteractiveAtom = ({
 	elementCss,
 	isMainMedia,
 	format,
+	title,
 }: InteractiveAtomType) => (
 	<div
 		css={[containerStyles, isMainMedia && fullHeightStyles]}
@@ -37,13 +39,14 @@ export const InteractiveAtom = ({
 		data-atom-type="interactive"
 	>
 		<iframe
+			title={title}
+			id={id}
 			css={[
 				fullWidthStyles,
 				isMainMedia &&
 					format.display === ArticleDisplay.Immersive &&
 					fullHeightStyles,
 			]}
-			title={id}
 			srcDoc={unifyPageContent({ elementJs, elementCss, elementHtml })}
 			frameBorder="0"
 		/>

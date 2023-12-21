@@ -1401,6 +1401,9 @@
                 "html": {
                     "type": "string"
                 },
+                "title": {
+                    "type": "string"
+                },
                 "css": {
                     "type": "string"
                 },
@@ -1419,6 +1422,7 @@
                 "elementId",
                 "html",
                 "id",
+                "title",
                 "url"
             ]
         },
@@ -2201,6 +2205,9 @@
                 "id": {
                     "type": "string"
                 },
+                "title": {
+                    "type": "string"
+                },
                 "js": {
                     "type": "string"
                 },
@@ -2221,6 +2228,7 @@
                 "_type",
                 "elementId",
                 "id",
+                "title",
                 "url"
             ]
         },
