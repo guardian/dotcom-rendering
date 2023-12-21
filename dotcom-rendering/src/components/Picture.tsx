@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
 
@@ -321,15 +321,14 @@ export const Picture = ({
 	orientation = 'landscape',
 	onLoad,
 }: Props) => {
-	const ref = useRef<HTMLImageElement>(null);
 	const [loaded, setLoaded] = useState(false);
-
-	useEffect(() => {
-		if (!ref.current) return;
-
-		if (ref.current.complete) return setLoaded(true);
-		ref.current.addEventListener('load', () => setLoaded(true));
-	}, [ref]);
+	const ref = useCallback((node: HTMLImageElement) => {
+		if (node.complete) {
+			setLoaded(true);
+		} else {
+			node.addEventListener('load', () => setLoaded(true));
+		}
+	}, []);
 
 	useEffect(() => {
 		if (loaded && onLoad) onLoad();
