@@ -168,12 +168,11 @@ const MetaGridDateline = ({
 }) => (
 	<div
 		css={css`
-			grid-area: var(--dateline-grid-area);
 			margin-top: ${space[2]}px;
 			margin-bottom: ${space[4]}px;
 		`}
 		style={{
-			'--dateline-grid-area': isImmersiveOrAnalysisWithMultipleAuthors
+			gridArea: isImmersiveOrAnalysisWithMultipleAuthors
 				? 'byline'
 				: 'dateline',
 		}}
