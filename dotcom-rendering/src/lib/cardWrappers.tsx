@@ -104,8 +104,6 @@ export const Card100Media75 = ({
 			showAge={showAge}
 			headlineSize="huge"
 			headlineSizeOnMobile="large"
-			// TODO: Why are we not passing alttext through?
-			imageUrl={trail.image?.src}
 			imageSize="jumbo"
 			imagePosition="right"
 			imagePositionOnMobile="top"
@@ -195,8 +193,7 @@ export const Card100Media100Tall = ({
 			showAge={showAge}
 			headlineSize="medium"
 			headlineSizeOnMobile="large"
-			// TODO: Why are we not passing alttext through?
-			imageUrl={trail.image?.src}
+			image={trail.image}
 			imagePosition="top"
 			imagePositionOnMobile="top"
 			imageLoading={imageLoading}
@@ -730,7 +727,7 @@ export const CardDefault = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			imageUrl={undefined}
+			image={undefined}
 			imageLoading={'lazy'}
 			avatarUrl={undefined}
 			headlineSize="small"
