@@ -566,7 +566,7 @@ export const Card = ({
 						<HeadlineWrapper
 							imagePositionOnMobile={imagePositionOnMobile}
 							imagePosition={imagePosition}
-							imageUrl={imageUrl}
+							imageUrl={image?.src}
 							hasStarRating={starRating !== undefined}
 						>
 							<CardHeadline
@@ -595,7 +595,7 @@ export const Card = ({
 							{starRating !== undefined ? (
 								<StarRatingComponent
 									rating={starRating}
-									cardHasImage={imageUrl !== undefined}
+									cardHasImage={!!image}
 								/>
 							) : null}
 							{!!mainMedia && mainMedia.type !== 'Video' && (
