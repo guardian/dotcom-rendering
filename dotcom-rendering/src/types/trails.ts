@@ -1,12 +1,12 @@
 import type { Branding } from './branding';
-import type { DCRSnapType, DCRSupportingContent } from './front';
+import type { DCRFrontImage, DCRSnapType, DCRSupportingContent } from './front';
 import type { MainMedia } from './mainMedia';
 
 interface BaseTrailType {
 	url: string;
 	headline: string;
 	webPublicationDate?: string;
-	image?: string;
+	image?: DCRFrontImage;
 	avatarUrl?: string;
 	mediaDuration?: number;
 	ageWarning?: string;
