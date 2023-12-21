@@ -28,6 +28,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       "GuApplicationTargetGroup",
       "GuHttpsApplicationListener",
       "GuSecurityGroup",
+      "GuDnsRecordSet",
     ],
     "gu:cdk:version": "TEST",
   },
@@ -309,6 +310,23 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "DnsRecordSet": {
+      "Properties": {
+        "Name": "article-rendering.code.dev-gutools.co.uk",
+        "RecordType": "CNAME",
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "LoadBalancerArticlerendering49883BBC",
+              "DNSName",
+            ],
+          },
+        ],
+        "Stage": "TEST",
+        "TTL": 3600,
+      },
+      "Type": "Guardian::DNS::RecordSet",
     },
     "GetDistributablePolicyArticlerendering7F5C432B": {
       "Properties": {
