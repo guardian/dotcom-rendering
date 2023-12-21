@@ -4,9 +4,6 @@ import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dot
 import { useEffect, useState } from 'react';
 import type { DCRFrontType } from '../types/front';
 import type { DCRArticle } from '../types/frontend';
-import type { IdApiUserData } from './getIdapiUserData';
-import { getIdApiUserData } from './getIdapiUserData';
-import { eitherInOktaTestOrElse } from './identity';
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
@@ -246,38 +243,6 @@ export const recentlyClosedBanner = (
 	}
 	return false;
 };
-
-const getEmail = async (ajaxUrl: string): Promise<string | undefined> =>
-	// TODO Okta: Remove either when at 100% in oktaVariant test, and just use idToken
-	eitherInOktaTestOrElse(
-		(authState) => authState.idToken?.claims.email,
-		() =>
-			getIdApiUserData(ajaxUrl)
-				.then((data: IdApiUserData) => data.user?.primaryEmailAddress)
-				.catch((error) => {
-					window.guardian.modules.sentry.reportError(
-						error,
-						'getEmail',
-					);
-					return undefined;
-				}),
-	);
-
-export const lazyFetchEmailWithTimeout =
-	(idapiUrl: string): (() => Promise<string | null>) =>
-	() => {
-		return new Promise((resolve) => {
-			setTimeout(() => resolve(null), 1000);
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
-			getEmail(idapiUrl).then((email) => {
-				if (email) {
-					resolve(email);
-				} else {
-					resolve(null);
-				}
-			});
-		});
-	};
 
 export const getContributionsServiceUrl = (
 	config: DCRArticle | DCRFrontType,

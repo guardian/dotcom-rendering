@@ -16,7 +16,7 @@ import { useEffect, useRef, useState } from 'react';
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { lazyFetchEmailWithTimeout } from '../lib/contributions';
+import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { useHydrated } from '../lib/useHydrated';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';

@@ -17,10 +17,10 @@ import {
 	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
 	isRecurringContributor,
-	lazyFetchEmailWithTimeout,
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '../../lib/contributions';
+import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
 import type { TagType } from '../../types/tag';
