@@ -6,10 +6,7 @@ import {
 	GuStack as CDKStack,
 	GuDistributionBucketParameter,
 } from '@guardian/cdk/lib/constructs/core';
-import {
-	GuDnsRecordSet,
-	RecordType,
-} from '@guardian/cdk/lib/constructs/dns/dns-records';
+import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { type App as CDKApp, Duration } from 'aws-cdk-lib';
@@ -53,7 +50,7 @@ export class RenderingCDKStack extends CDKStack {
 				  } satisfies Alarms)
 				: ({ noMonitoring: true } satisfies NoMonitoring);
 
-		const domainName = `${guApp}.${
+		const domainName = `${guApp.toLowerCase()}.${
 			stage === 'PROD' ? '' : 'code.dev-'
 		}gutools.co.uk`;
 
@@ -70,15 +67,13 @@ export class RenderingCDKStack extends CDKStack {
 			},
 			applicationLogging: {
 				enabled: true,
-				systemdUnitName: `${guApp}`,
+				systemdUnitName: guApp,
 			},
 			// TODO - should we change to 3000?
 			applicationPort: 9000,
 			// Certificate is necessary for the creation of a listener on port 443,
 			// instead of the default 8080 which is unreachable.
-			certificateProps: {
-				domainName,
-			},
+			certificateProps: { domainName },
 			healthcheck: { path: '/_healthcheck' },
 			instanceType: InstanceType.of(InstanceClass.T4G, instanceSize),
 			monitoringConfiguration,
@@ -118,11 +113,11 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		// Maps the certificate domain name to the load balancer DNS name
-		new GuDnsRecordSet(this, 'DnsRecordSet', {
-			name: domainName,
-			recordType: RecordType.CNAME,
-			resourceRecords: [ec2app.loadBalancer.loadBalancerDnsName],
-			ttl: Duration.minutes(60),
+		new GuCname(this, 'LoadBalancerDNS', {
+			domainName,
+			app: guApp,
+			resourceRecord: ec2app.loadBalancer.loadBalancerDnsName,
+			ttl: Duration.hours(1),
 		});
 	}
 }
