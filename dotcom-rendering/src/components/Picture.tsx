@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import React, { useCallback, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
 
@@ -290,7 +290,7 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 		<>
 			{sources.map((source) => {
 				return (
-					<React.Fragment key={source.breakpoint}>
+					<Fragment key={source.breakpoint}>
 						{/* High resolution (HDPI) sources*/}
 						<source
 							srcSet={source.hiResUrl}
@@ -301,7 +301,7 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 							srcSet={source.lowResUrl}
 							media={`(min-width: ${source.breakpoint}px)`}
 						/>
-					</React.Fragment>
+					</Fragment>
 				);
 			})}
 		</>
