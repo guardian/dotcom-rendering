@@ -12,8 +12,9 @@ const jsonPayload = new SharedArray('jsonPayload', function () {
 
 /** @type {import('k6/options').Options} */
 export const options = {
-	vus: 10,
-	duration: '10s',
+	vus: 50,
+	duration: '60s',
+	discardResponseBodies: true,
 };
 
 // eslint-disable-next-line import/no-default-export -- k6 requires a default export
