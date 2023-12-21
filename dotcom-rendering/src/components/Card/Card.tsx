@@ -541,7 +541,7 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
 								/>
-								{showPlayIcon && (
+								{showPlayIcon && mainMedia.duration > 0 && (
 									<MediaDuration
 										mediaDuration={mainMedia.duration}
 										imagePosition={imagePosition}
