@@ -4133,6 +4133,9 @@
                 "masterImage": {
                     "type": "string"
                 },
+                "image": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -4141,21 +4144,6 @@
                 },
                 "webPublicationDate": {
                     "type": "string"
-                },
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
-                        },
-                        "altText": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "altText",
-                        "src"
-                    ]
                 },
                 "avatarUrl": {
                     "type": "string"
