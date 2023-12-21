@@ -287,6 +287,11 @@ export type FEFrontCard = {
 	type: string;
 };
 
+export type DCRFrontImage = {
+	src: string;
+	altText: string;
+};
+
 export type DCRFrontCard = {
 	format: ArticleFormat;
 	url: string;
@@ -295,8 +300,7 @@ export type DCRFrontCard = {
 	trailText?: string;
 	starRating?: number;
 	webPublicationDate?: string;
-	image?: string;
-	imageAltText?: string;
+	image?: DCRFrontImage;
 	kickerText?: string;
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
