@@ -45,7 +45,7 @@ module.exports = {
 					nodeExternals({
 						allowlist: [
 							/^@guardian/,
-							// this project is ESM-only and throws an error when bundled
+							// this project is ESM-only and throws an error when not bundled
 							'screenfull',
 						],
 						additionalModuleDirs: [
