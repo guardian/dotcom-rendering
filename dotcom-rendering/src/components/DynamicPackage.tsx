@@ -241,7 +241,7 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 									containerType="dynamic/package"
 									showAge={showAge}
 									supportingContent={card.supportingContent}
-									imageUrl={undefined}
+									image={undefined}
 									imageLoading={imageLoading}
 								/>
 							</LI>
@@ -315,7 +315,7 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 									containerType="dynamic/package"
 									showAge={showAge}
 									supportingContent={card.supportingContent}
-									imageUrl={undefined}
+									image={undefined}
 									imageLoading={imageLoading}
 								/>
 							</LI>
@@ -383,7 +383,7 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 									containerType="dynamic/package"
 									showAge={showAge}
 									supportingContent={card.supportingContent}
-									imageUrl={undefined}
+									image={undefined}
 									imageLoading={imageLoading}
 								/>
 							</LI>

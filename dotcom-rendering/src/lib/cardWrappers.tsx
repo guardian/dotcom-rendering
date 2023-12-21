@@ -55,8 +55,6 @@ export const Card100Media50 = ({
 			showAge={showAge}
 			headlineSize="huge"
 			headlineSizeOnMobile="medium"
-			// TODO: Why are we not passing alttext through?
-			imageUrl={trail.image?.src}
 			imageSize="medium"
 			imagePosition="right"
 			imagePositionOnMobile="top"
@@ -153,8 +151,6 @@ export const Card100Media100 = ({
 			showAge={showAge}
 			headlineSize="huge"
 			headlineSizeOnMobile="large"
-			// TODO: Why are we not passing alttext through? Is it pssed through on the trail? Why are we explicitly passing imageUrl through here then?
-			imageUrl={trail.image?.src}
 			imagePosition="top"
 			imagePositionOnMobile="top"
 			imageLoading={imageLoading}
