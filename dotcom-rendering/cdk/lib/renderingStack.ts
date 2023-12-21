@@ -12,7 +12,7 @@ import {
 } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
-import { Duration, type App as CDKApp } from 'aws-cdk-lib';
+import { type App as CDKApp, Duration } from 'aws-cdk-lib';
 import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { getUserData } from './userData';
@@ -59,8 +59,6 @@ export class RenderingCDKStack extends CDKStack {
 
 		const ec2app = new GuEc2App(this, {
 			app: guApp,
-			// TODO - should we change to 3000?
-			applicationPort: 9000,
 			access: {
 				// Restrict access to this range within the VPC
 				cidrRanges: [Peer.ipv4('10.0.0.0/8')],
@@ -70,23 +68,20 @@ export class RenderingCDKStack extends CDKStack {
 				enabled: true,
 				prefix: `ELBLogs/${guStack}/${guApp}/${stage}`,
 			},
+			applicationLogging: {
+				enabled: true,
+				systemdUnitName: `${guApp}`,
+			},
+			// TODO - should we change to 3000?
+			applicationPort: 9000,
 			// Certificate is necessary for the creation of a listener on port 443,
 			// instead of the default 8080 which is unreachable.
 			certificateProps: {
 				domainName,
 			},
+			healthcheck: { path: '/_healthcheck' },
 			instanceType: InstanceType.of(InstanceClass.T4G, instanceSize),
 			monitoringConfiguration,
-			scaling,
-			userData: getUserData({
-				guApp,
-				guStack,
-				stage,
-				artifactsBucket,
-			}),
-			healthcheck: {
-				path: '/_healthcheck',
-			},
 			roleConfiguration: {
 				additionalPolicies: [
 					new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
@@ -113,10 +108,13 @@ export class RenderingCDKStack extends CDKStack {
 					}),
 				],
 			},
-			applicationLogging: {
-				enabled: true,
-				systemdUnitName: `${guApp}`,
-			},
+			scaling,
+			userData: getUserData({
+				guApp,
+				guStack,
+				stage,
+				artifactsBucket,
+			}),
 		});
 
 		// Maps the certificate domain name to the load balancer DNS name
