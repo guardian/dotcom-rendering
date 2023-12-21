@@ -276,7 +276,8 @@ export class DotcomRendering extends GuStack {
 			cooldown: '600',
 			scalingAdjustment: 100,
 		});
-		const minAsgSize = 27;
+
+		const minAsgSize = 12;
 
 		asg.scaleOnMetric('LatencyStepScalingPolicy', {
 			metric: new Metric({
@@ -285,14 +286,29 @@ export class DotcomRendering extends GuStack {
 			}),
 			scalingSteps: [
 				{
-					change: minAsgSize + 3,
-					lower: 200,
-					upper: 300,
+					lower: 0,
+					upper: 100,
+					change: minAsgSize,
 				},
 				{
 					change: minAsgSize,
 					lower: 100,
 					upper: 200,
+				},
+				{
+					change: minAsgSize + 3,
+					lower: 200,
+					upper: 300,
+				},
+				{
+					change: minAsgSize + 6,
+					lower: 300,
+					upper: 400,
+				},
+				{
+					change: minAsgSize + 9,
+					lower: 400,
+					upper: undefined,
 				},
 			],
 			adjustmentType: AdjustmentType.EXACT_CAPACITY,
