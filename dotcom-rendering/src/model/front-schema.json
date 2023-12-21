@@ -3451,7 +3451,19 @@
                     "type": "string"
                 },
                 "image": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "altText": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "altText",
+                        "src"
+                    ]
                 },
                 "avatarUrl": {
                     "type": "string"
