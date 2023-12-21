@@ -63,4 +63,13 @@ export type CollectionBranding =
 			 */
 			kind: 'editorial';
 			badge: DCRBadgeType;
+	  }
+	| {
+			/**
+			 *
+			 */
+			kind: 'paid-content';
+			branding?: Branding;
+			isFrontBranding: boolean;
+			isContainerBranding: boolean;
 	  };

@@ -80,45 +80,58 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 			return <div css={titleStyle}>{title}</div>;
 		}
 		case 'paid-content': {
-			const {
-				isFrontBranding,
-				isContainerBranding,
-				branding: { logo },
-			} = collectionBranding;
+			const { isFrontBranding, isContainerBranding, branding } =
+				collectionBranding;
 
 			if (isFrontBranding || isContainerBranding) {
 				return (
 					<div css={titleStyle}>
 						{title}
-						<div
-							css={css`
-								display: inline-block;
-								border-top: 1px dotted ${palette.neutral[86]};
-								${textSans.xxsmall()}
-								color: ${palette.neutral[46]};
-								font-weight: bold;
+						{branding && (
+							<div
+								css={css`
+									display: inline-block;
+									border-top: 1px dotted
+										${palette.neutral[86]};
+									${textSans.xxsmall()}
+									color: ${palette.neutral[46]};
+									font-weight: bold;
 
-								${from.leftCol} {
-									width: 100%;
-								}
-							`}
-						>
-							Paid for by
-							<Badge imageSrc={logo.src} href={logo.link} />
-						</div>
+									${from.leftCol} {
+										width: 100%;
+									}
+								`}
+							>
+								Paid for by
+								<Badge
+									imageSrc={branding.logo.src}
+									href={branding.logo.link}
+								/>
+							</div>
+						)}
 					</div>
 				);
 			}
 
 			return (
 				<>
-					<Hide until="leftCol">
-						<Badge imageSrc={logo.src} href={logo.link} />
-					</Hide>
-					<div css={titleStyle}>
-						<Hide from="leftCol">
-							<Badge imageSrc={logo.src} href={logo.link} />
+					{branding && (
+						<Hide until="leftCol">
+							<Badge
+								imageSrc={branding.logo.src}
+								href={branding.logo.link}
+							/>
 						</Hide>
+					)}
+					<div css={titleStyle}>
+						{branding && (
+							<Hide from="leftCol">
+								<Badge
+									imageSrc={branding.logo.src}
+									href={branding.logo.link}
+								/>
+							</Hide>
+						)}
 						{title}
 					</div>
 				</>

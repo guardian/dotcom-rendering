@@ -102,11 +102,13 @@ export const badgeFromBranding = (
 		case 'paid-content':
 		case 'sponsored':
 		case 'foundation': {
-			const { logo } = collectionBranding.branding;
-			return {
-				imageSrc: logo.src,
-				href: logo.link,
-			};
+			const { logo } = collectionBranding.branding ?? {};
+			if (logo) {
+				return {
+					imageSrc: logo.src,
+					href: logo.link,
+				};
+			}
 		}
 		case 'editorial': {
 			return collectionBranding.badge;
@@ -185,6 +187,14 @@ export const decideCollectionBranding = ({
 
 	// Ensure each of the card's branding has the same sponsor
 	if (!everyCardHasSameSponsor(brandingForCards)) {
+		if (kind === 'paid-content') {
+			return {
+				kind,
+				isFrontBranding: false,
+				isContainerBranding,
+			};
+		}
+
 		return undefined;
 	}
 
