@@ -25,10 +25,7 @@ import { LightboxImages } from './LightboxImages';
  *
  */
 
-function initialiseLightbox(
-	lightbox: HTMLElement,
-	addLoaded: (id: number) => void,
-) {
+const initialiseLightbox = (lightbox: HTMLElement) => {
 	log('dotcom', '💡 Initialising lightbox');
 
 	// --------------------------------------------------------------------------------
@@ -368,16 +365,6 @@ function initialiseLightbox(
 			event.preventDefault();
 			event.stopPropagation();
 		});
-		// Remove the loader once the image has been downloaded
-		const index = picture.closest('li')?.dataset.index;
-		if (index === undefined) continue;
-		const position = parseInt(index, 10);
-		const image = picture.querySelector('img');
-		if (image?.complete) {
-			addLoaded(position);
-		} else {
-			image?.addEventListener('load', () => addLoaded(position));
-		}
 	}
 
 	imageList?.addEventListener(
@@ -480,7 +467,7 @@ function initialiseLightbox(
 
 	// Mark the lightbox as ready so that we don't try to re-initialise it later
 	lightbox.setAttribute('data-island-status', 'rendered');
-}
+};
 
 const useElementById = (id: string) => {
 	const [element, setElement] = useState<HTMLElement>();
@@ -515,29 +502,21 @@ export const LightboxJavascript = ({
 	const lightbox = useElementById('gu-lightbox');
 	const [initialised, setInitialised] = useState(false);
 
-	const [loaded, setLoaded] = useState<Set<number>>();
-
-	useEffect(() => {
-		setLoaded(new Set());
-	}, []);
-
 	useEffect(() => {
 		if (!lightbox) return;
-		if (!loaded) return;
-		log('dotcom', '💡 loaded:', loaded);
 		if (initialised) {
 			log('dotcom', '💡 Lightbox already initialised, skipping');
 			return;
 		}
-		initialiseLightbox(lightbox, (id) => setLoaded(loaded.add(id)));
+		initialiseLightbox(lightbox);
 		setInitialised(true);
-	}, [initialised, lightbox, loaded]);
+	}, [initialised, lightbox]);
 
-	if (!root || !loaded) return null;
+	if (!root || !lightbox) return null;
 
 	log('dotcom', '💡 Generating HTML for lightbox images...');
 	return createPortal(
-		<LightboxImages format={format} images={images} loaded={loaded} />,
+		<LightboxImages format={format} images={images} />,
 		root,
 	);
 };
