@@ -238,6 +238,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
             "PropagateAtLaunch": true,
             "Value": "TEST",
           },
+          {
+            "Key": "SystemdUnit",
+            "PropagateAtLaunch": true,
+            "Value": "article-rendering.service",
+          },
         ],
         "TargetGroupARNs": [
           {

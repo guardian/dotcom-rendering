@@ -113,10 +113,10 @@ export class RenderingCDKStack extends CDKStack {
 					}),
 				],
 			},
-			// applicationLogging: {
-			// 	enabled: true,
-			// 	systemdUnitName: `${guApp}.service`,
-			// },
+			applicationLogging: {
+				enabled: true,
+				systemdUnitName: `${guApp}`,
+			},
 		});
 
 		// Maps the certificate domain name to the load balancer DNS name
