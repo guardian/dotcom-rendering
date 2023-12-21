@@ -4,13 +4,14 @@ import { space } from '@guardian/source-foundations';
 interface Props {
 	id: string;
 	html: string;
+	title: string;
 }
 
 const chartAtomStyles = css`
 	padding-bottom: ${space[1]}px;
 `;
 
-export const ChartAtom = ({ id, html }: Props) => {
+export const ChartAtom = ({ id, html, title }: Props) => {
 	return (
 		<div
 			data-atom-id={id}
@@ -20,7 +21,7 @@ export const ChartAtom = ({ id, html }: Props) => {
 			css={chartAtomStyles}
 		>
 			<iframe
-				title="chart"
+				title={title}
 				className="atom__iframe"
 				name={id}
 				srcDoc={html}
