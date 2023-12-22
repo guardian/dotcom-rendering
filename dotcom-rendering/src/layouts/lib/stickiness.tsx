@@ -36,8 +36,7 @@ const bannerWrapper = css`
 	position: fixed !important;
 	bottom: 0;
 	${getZIndexImportant('banner')}
-	max-height: 80vh;
-	max-height: 80dvh;
+	max-height: 100vh;
 	overflow: visible;
 	/* stylelint-disable-next-line declaration-no-important */
 	width: 100% !important;
