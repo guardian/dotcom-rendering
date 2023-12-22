@@ -179,10 +179,8 @@ test.describe('Interactivity', () => {
 			// Open pillar menu
 			await page.locator('[data-testid=nav-show-more-button]').click();
 			await expect(
-				page
-					.locator('[data-testid=expanded-menu]')
-					.filter({ hasText: 'Columnists' }),
-			).toBeVisible();
+				page.locator('data-testid=expanded-menu'),
+			).toContainText('Columnists');
 
 			// Assert newslinks second item (first visible) is focused
 			// TODO e2e find a better way to filter on visible list items :visible doesn't work
@@ -208,21 +206,15 @@ test.describe('Interactivity', () => {
 
 				await page.locator('[data-testid=veggie-burger]').click();
 				await expect(
-					page
-						.locator('nav')
-						.first()
-						.filter({ hasText: 'Crosswords' }),
-				).toBeVisible();
+					page.locator('data-testid=expanded-menu'),
+				).toContainText('Crosswords');
 
 				await page
 					.locator('[data-testid=column-collapse-Opinion]')
 					.click();
 				await expect(
-					page
-						.locator('nav')
-						.first()
-						.filter({ hasText: 'Columnists' }),
-				).toBeVisible();
+					page.locator('data-testid=expanded-menu'),
+				).toContainText('Columnists');
 
 				await page.locator('body').press('Escape');
 				await expect(
