@@ -10,7 +10,7 @@ type Props = {
 export const VideoYoutubeBlockComponent = ({ element, pillar }: Props) => {
 	const youtubeId = getIdFromUrl(
 		element.originalUrl || element.url,
-		'^[a-zA-Z0-9_-]{11}$', // Alpha numeric, underscores and hyphens, exactly 11 numbers long
+		'^[a-zA-Z0-9_-]{11,}$', // Alphanumeric, underscores and hyphens, 11 or more characters long
 		true,
 		'v',
 	);
