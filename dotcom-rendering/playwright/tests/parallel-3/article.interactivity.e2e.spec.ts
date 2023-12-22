@@ -208,21 +208,15 @@ test.describe('Interactivity', () => {
 
 				await page.locator('[data-testid=veggie-burger]').click();
 				await expect(
-					page
-						.locator('nav')
-						.first()
-						.filter({ hasText: 'Crosswords' }),
-				).toBeVisible();
+					page.locator('data-testid=expanded-menu'),
+				).toContainText('Crosswords');
 
 				await page
 					.locator('[data-testid=column-collapse-Opinion]')
 					.click();
 				await expect(
-					page
-						.locator('nav')
-						.first()
-						.filter({ hasText: 'Columnists' }),
-				).toBeVisible();
+					page.locator('data-testid=expanded-menu'),
+				).toContainText('Columnists');
 
 				await page.locator('body').press('Escape');
 				await expect(
