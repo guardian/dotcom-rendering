@@ -4520,7 +4520,7 @@ __metadata:
     clean-css: "npm:5.3.3"
     compare-versions: "npm:6.1.0"
     compression: "npm:1.7.4"
-    constructs: "npm:10.2.69"
+    constructs: "npm:10.3.0"
     cpy: "npm:10.1.0"
     crypto-js: "npm:4.2.0"
     css-loader: "npm:6.7.3"
