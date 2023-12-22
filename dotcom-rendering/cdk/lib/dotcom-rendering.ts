@@ -19,8 +19,9 @@ import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration, Tags } from 'aws-cdk-lib';
 import {
 	AdjustmentType,
-	CfnScalingPolicy,
 	HealthCheck,
+	MetricAggregationType,
+	StepScalingPolicy,
 } from 'aws-cdk-lib/aws-autoscaling';
 import { CfnAlarm, Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
@@ -270,14 +271,64 @@ export class DotcomRendering extends GuStack {
 		/** TODO - migrate these simple scaling policies
 		 * @see https://github.com/guardian/dotcom-rendering/issues/8345#issuecomment-1647502598
 		 */
-		const scaleUpPolicy = new CfnScalingPolicy(this, 'ScaleUpPolicy', {
-			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
-			autoScalingGroupName: asg.autoScalingGroupName,
-			cooldown: '600',
-			scalingAdjustment: 100,
-		});
+		// const scaleUpPolicy = new CfnScalingPolicy(this, 'ScaleUpPolicy', {
+		// 	adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
+		// 	autoScalingGroupName: asg.autoScalingGroupName,
+		// 	cooldown: '600',
+		// 	scalingAdjustment: 100,
+		// });
 
-		const minAsgSize = 12;
+		// const scaleDownPolicy = new CfnScalingPolicy(this, 'ScaleDownPolicy', {
+		// 	adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
+		// 	autoScalingGroupName: asg.autoScalingGroupName,
+		// 	cooldown: '120',
+		// 	scalingAdjustment: -1,
+		// });
+
+		// @ts-ignore
+		const latencyStepScalingPolicy = new StepScalingPolicy(
+			this,
+			'LatencyStepScalingPolicy',
+			{
+				autoScalingGroup: asg,
+				metricAggregationType: MetricAggregationType.AVERAGE,
+				adjustmentType: AdjustmentType.EXACT_CAPACITY,
+				scalingSteps: [
+					{
+						lower: 0,
+						upper: 100,
+						change: props.minCapacity,
+					},
+					{
+						lower: 100,
+						upper: 200,
+						change: props.minCapacity,
+					},
+					{
+						change: props.minCapacity + 3,
+						lower: 200,
+						upper: 300,
+					},
+					{
+						change: props.minCapacity + 6,
+						lower: 300,
+						upper: undefined,
+					},
+				],
+				cooldown: Duration.seconds(60),
+				metric: new Metric({
+					namespace: 'AWS/ELB',
+					metricName: 'Latency',
+					period: Duration.minutes(1),
+				}),
+			},
+		);
+
+		// TODO: Link with CloudWatch alarms
+		// latencyStepScalingPolicy.lowerAlarm
+		// latencyStepScalingPolicy.upperAlarm
+		// latencyStepScalingPolicy.upperAction
+		// latencyStepScalingPolicy.lowerAction
 
 		asg.scaleOnMetric('LatencyStepScalingPolicy', {
 			metric: new Metric({
@@ -288,37 +339,27 @@ export class DotcomRendering extends GuStack {
 				{
 					lower: 0,
 					upper: 100,
-					change: minAsgSize,
+					change: props.minCapacity,
 				},
 				{
-					change: minAsgSize,
 					lower: 100,
 					upper: 200,
+					change: props.minCapacity,
 				},
 				{
-					change: minAsgSize + 3,
+					change: props.minCapacity + 3,
 					lower: 200,
 					upper: 300,
 				},
 				{
-					change: minAsgSize + 6,
+					change: props.minCapacity + 6,
 					lower: 300,
-					upper: 400,
-				},
-				{
-					change: minAsgSize + 9,
-					lower: 400,
 					upper: undefined,
 				},
 			],
 			adjustmentType: AdjustmentType.EXACT_CAPACITY,
-		});
-
-		const scaleDownPolicy = new CfnScalingPolicy(this, 'ScaleDownPolicy', {
-			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
-			autoScalingGroupName: asg.autoScalingGroupName,
-			cooldown: '120',
-			scalingAdjustment: -1,
+			cooldown: Duration.minutes(1),
+			evaluationPeriods: 1,
 		});
 
 		/** Returns an appropriate alarm description given the appropriate configuration object */
@@ -357,8 +398,8 @@ export class DotcomRendering extends GuStack {
 			statistic: 'Average',
 			threshold: latencyScalingAlarmConfig.threshold,
 			comparisonOperator: latencyScalingAlarmConfig.comparisonOperator,
-			okActions: [scaleDownPolicy.attrArn],
-			alarmActions: [scaleUpPolicy.attrArn],
+			// okActions: [scaleDownPolicy.attrArn],
+			// alarmActions: [scaleUpPolicy.attrArn],
 		});
 
 		// Backend 5XX alarm
