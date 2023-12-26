@@ -11,13 +11,14 @@ export default devServer;
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
 	const totalCPUs = availableParallelism();
+	const totalWorkers = totalCPUs - 1;
 	if (cluster.isPrimary) {
 		// eslint-disable-next-line no-console -- testing
 		console.log(`Number of CPUs is ${totalCPUs}`);
 		// eslint-disable-next-line no-console -- testing
 		console.log(`Primary ${process.pid} is running`);
 
-		for (let i = 0; i < totalCPUs; i++) {
+		for (let i = 0; i < totalWorkers; i++) {
 			cluster.fork();
 		}
 
