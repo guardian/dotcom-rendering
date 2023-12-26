@@ -3,12 +3,12 @@ import { availableParallelism } from 'node:os';
 import { devServer } from './server.dev';
 import { prodServer } from './server.prod';
 
+// this is the development server
 // this export is expected by webpack-hot-server-middleware
-// not used in prod
 // eslint-disable-next-line import/no-default-export -- it is what Webpack wants
 export default devServer;
 
-// this is the actual production server
+// this is the production server
 if (process.env.NODE_ENV === 'production') {
 	const totalCPUs = availableParallelism();
 	const totalWorkers = totalCPUs - 1;
@@ -19,7 +19,11 @@ if (process.env.NODE_ENV === 'production') {
 		console.log(`Primary ${process.pid} is running`);
 
 		for (let i = 0; i < totalWorkers; i++) {
-			cluster.fork();
+			cluster.fork({
+				// makes process.env.NODE_APP_INSTANCE available to each worker
+				// used by log4js to set the field 'thread_name'
+				NODE_APP_INSTANCE: i,
+			});
 		}
 
 		cluster.on('exit', (worker) => {
