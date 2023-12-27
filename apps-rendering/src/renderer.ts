@@ -177,13 +177,15 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 const shouldShowDropCap = (
 	text: string,
 	format: ArticleFormat,
-	isFirstParagraph: boolean,
+	positionAllowsDropCap: boolean,
 	isEditions: boolean,
 ): boolean => {
 	if (isEditions) {
 		return false;
 	}
-	return allowsDropCaps(format) && text.length >= 200 && isFirstParagraph;
+	return (
+		allowsDropCaps(format) && text.length >= 200 && positionAllowsDropCap
+	);
 };
 
 const textElement =
@@ -200,10 +202,14 @@ const textElement =
 				}
 
 				const isFirstParagraph = node.previousSibling === null;
+				const isAfterDinkus =
+					node.previousSibling?.previousSibling?.textContent ===
+					'* * *';
+
 				const showDropCap = shouldShowDropCap(
 					text,
 					format,
-					isFirstParagraph,
+					isFirstParagraph || isAfterDinkus,
 					isEditions,
 				);
 
