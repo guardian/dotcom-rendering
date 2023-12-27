@@ -11,7 +11,7 @@ describe('getIdFromUrl', () => {
 			},
 			{
 				url: 'http://www.youtube.com/ytscreeningroom?v=NRHEIGHTx8Ixyz',
-				id: 'NRHEIGHTx8Ixyz',
+				id: 'NRHEIGHTx8I',
 			},
 			{
 				url: 'http://www.youtube.com/ytscreeningroom?v=NRH_IGHTx8I',
