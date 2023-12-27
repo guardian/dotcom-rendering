@@ -539,6 +539,7 @@ describe('Transforms hrefs', () => {
 describe('Shows drop caps', () => {
 	const paragraph = new Array(50).fill('word').join(' ');
 	const isEditions = true;
+	const isFirstParagraph = true;
 	const format = {
 		display: ArticleDisplay.Standard,
 		theme: ArticlePillar.Culture,
@@ -546,7 +547,12 @@ describe('Shows drop caps', () => {
 	};
 
 	test('Shows drop cap if the paragraph is at least 200 characters long, and the article has the correct design', () => {
-		const showDropCap = shouldShowDropCap(paragraph, format, !isEditions);
+		const showDropCap = shouldShowDropCap(
+			paragraph,
+			format,
+			true,
+			!isEditions,
+		);
 		expect(showDropCap).toBe(true);
 	});
 
@@ -555,6 +561,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			unicodeLatin,
 			format,
+			isFirstParagraph,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(true);
@@ -566,6 +573,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			shortParagraph,
 			format,
+			isFirstParagraph,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(false);
@@ -575,6 +583,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			paragraph,
 			mockFormat,
+			isFirstParagraph,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(false);
@@ -583,8 +592,19 @@ describe('Shows drop caps', () => {
 	test('Does not show drop cap if the article is an Editions article', () => {
 		const showDropCap = shouldShowDropCap(
 			paragraph,
-			mockFormat,
+			format,
+			isFirstParagraph,
 			isEditions,
+		);
+		expect(showDropCap).toBe(false);
+	});
+
+	test('Does not show drop cap if the paragraph is not the first paragraph', () => {
+		const showDropCap = shouldShowDropCap(
+			paragraph,
+			format,
+			!isFirstParagraph,
+			!isEditions,
 		);
 		expect(showDropCap).toBe(false);
 	});
