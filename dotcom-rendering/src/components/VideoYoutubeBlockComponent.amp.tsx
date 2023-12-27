@@ -7,10 +7,12 @@ type Props = {
 	pillar: ArticleTheme;
 };
 
+export const ampYoutubeIdRegex = '^[a-zA-Z0-9_-]{11}$'; // Alphanumeric, underscores and hyphens, 11 characters long
+
 export const VideoYoutubeBlockComponent = ({ element, pillar }: Props) => {
 	const youtubeId = getIdFromUrl(
 		element.originalUrl || element.url,
-		'^[a-zA-Z0-9_-]{11}$', // Alphanumeric, underscores and hyphens, 11 characters long
+		ampYoutubeIdRegex,
 		true,
 		'v',
 	);

@@ -1,8 +1,9 @@
 import { getIdFromUrl } from './get-video-id.amp';
+import { ampYoutubeIdRegex } from '../components/VideoYoutubeBlockComponent.amp';
 
 describe('getIdFromUrl', () => {
 	it('Returns matching ID for YouTube formats', () => {
-		const youtubeRegEx = '^[a-zA-Z0-9_-]{11,}$';
+		const youtubeRegEx = ampYoutubeIdRegex;
 
 		const formats = [
 			{
