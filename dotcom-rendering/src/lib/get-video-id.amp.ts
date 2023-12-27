@@ -21,7 +21,9 @@ export const getIdFromUrl = (
 			? new URLSearchParams(url.query ?? '').get(tryQueryParam)
 			: undefined,
 		tryInPath ? (url.pathname ?? '').split('/').at(-1) : undefined,
-	].filter(isString).map(id => id.slice(0,11));
+	]
+		.filter(isString)
+		.map((id) => id.slice(0, 11));
 
 	if (!ids.length)
 		logErr(
