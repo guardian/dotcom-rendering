@@ -587,7 +587,7 @@ describe('Shows drop caps', () => {
 	test('Does not show drop cap if the article is an Editions article', () => {
 		const showDropCap = shouldShowDropCap(
 			paragraph,
-			mockFormat,
+			format,
 			isFirstParagraph,
 			isEditions,
 		);
@@ -597,7 +597,7 @@ describe('Shows drop caps', () => {
 	test('Does not show drop cap if the paragraph is not the first paragraph', () => {
 		const showDropCap = shouldShowDropCap(
 			paragraph,
-			mockFormat,
+			format,
 			!isFirstParagraph,
 			!isEditions,
 		);
