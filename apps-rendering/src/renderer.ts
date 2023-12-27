@@ -197,14 +197,15 @@ const textElement =
 		);
 		switch (node.nodeName) {
 			case 'P': {
-				if (text === '* * *') {
+				const dinkus = '* * *';
+				if (text === dinkus) {
 					return children;
 				}
 
 				const isFirstParagraph = node.previousSibling === null;
 				const isAfterDinkus =
 					node.previousSibling?.previousSibling?.textContent ===
-					'* * *';
+					dinkus;
 
 				const showDropCap = shouldShowDropCap(
 					text,
