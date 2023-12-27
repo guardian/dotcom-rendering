@@ -547,7 +547,12 @@ describe('Shows drop caps', () => {
 	};
 
 	test('Shows drop cap if the paragraph is at least 200 characters long, and the article has the correct design', () => {
-		const showDropCap = shouldShowDropCap(paragraph, format, true, !isEditions);
+		const showDropCap = shouldShowDropCap(
+			paragraph,
+			format,
+			true,
+			!isEditions,
+		);
 		expect(showDropCap).toBe(true);
 	});
 

@@ -200,7 +200,12 @@ const textElement =
 				}
 
 				const isFirstParagraph = node.previousSibling === null;
-				const showDropCap = shouldShowDropCap(text, format, isFirstParagraph, isEditions);
+				const showDropCap = shouldShowDropCap(
+					text,
+					format,
+					isFirstParagraph,
+					isEditions,
+				);
 
 				return h(
 					Paragraph,
