@@ -546,7 +546,7 @@ describe('Shows drop caps', () => {
 	};
 
 	test('Shows drop cap if the paragraph is at least 200 characters long, and the article has the correct design', () => {
-		const showDropCap = shouldShowDropCap(paragraph, format, !isEditions);
+		const showDropCap = shouldShowDropCap(paragraph, format, true, !isEditions);
 		expect(showDropCap).toBe(true);
 	});
 
@@ -555,6 +555,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			unicodeLatin,
 			format,
+			true,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(true);
@@ -566,6 +567,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			shortParagraph,
 			format,
+			true,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(false);
@@ -575,6 +577,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			paragraph,
 			mockFormat,
+			true,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(false);
@@ -584,6 +587,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			paragraph,
 			mockFormat,
+			true,
 			isEditions,
 		);
 		expect(showDropCap).toBe(false);
