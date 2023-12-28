@@ -7,6 +7,9 @@ import type { CartoonBlockElement, Image } from '../types/content';
 import { Caption } from './Caption';
 import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
+import {Island} from "./Island";
+import {AppsLightboxImage} from "./AppsLightboxImage.importable";
+import {useConfig} from "./ConfigContext";
 
 type Props = {
 	format: ArticleFormat;
@@ -15,6 +18,7 @@ type Props = {
 };
 
 export const CartoonComponent = ({ format, element, switches }: Props) => {
+	const { renderingTarget } = useConfig();
 	const smallVariant = element.variants.find(
 		(variant) => variant.viewportSize === 'small',
 	);
@@ -25,17 +29,36 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 	const render = (image: Image) => {
 		return (
 			<>
-				<Picture
-					master={image.url}
-					role={element.role}
-					format={format}
-					alt={`${element.alt ? `${element.alt}, ` : ''}panel ${
-						image.index + 1
-					}`}
-					height={parseInt(image.fields.height, 10)}
-					width={parseInt(image.fields.width, 10)}
-					key={image.index}
-				/>
+				{renderingTarget === 'Apps' ? (
+					<Island priority="critical">
+						<AppsLightboxImage
+							elementId={element.elementId}
+							role={element.role}
+							format={format}
+							master={image.url}
+							alt={`${element.alt ? `${element.alt}, ` : ''}panel ${
+								image.index + 1
+							}`}
+							height={parseInt(image.fields.height, 10)}
+							width={parseInt(image.fields.width, 10)}
+							isLazy={true}
+							isMainMedia={true}
+						/>
+					</Island>
+				) : (
+					<Picture
+						master={image.url}
+						role={element.role}
+						format={format}
+						alt={`${element.alt ? `${element.alt}, ` : ''}panel ${
+							image.index + 1
+						}`}
+						height={parseInt(image.fields.height, 10)}
+						width={parseInt(image.fields.width, 10)}
+						key={image.index}
+					/>
+				)}
+
 				{switches?.lightbox === true &&
 					isWideEnough(image) &&
 					element.position !== undefined && (
