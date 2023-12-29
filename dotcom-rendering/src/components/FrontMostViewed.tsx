@@ -85,7 +85,6 @@ export const FrontMostViewed = ({
 				<MostPopularFooterGrid
 					mostViewed={mostViewedItems}
 					deeplyRead={deeplyReadType}
-					sectionName="Most popular"
 					hasPageSkin={hasPageSkin}
 				/>
 			) : (

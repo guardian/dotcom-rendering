@@ -2,7 +2,6 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	breakpoints,
 	headline,
 	palette as sourcePalette,
 	until,
@@ -12,12 +11,8 @@ import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber';
 import { FormatBoundary } from './FormatBoundary';
 import { LinkHeadline } from './LinkHeadline';
-import { generateSources } from './Picture';
 
-const gridItem = (
-	position: number,
-	hasPageSkin: boolean,
-) => {
+const gridItem = (position: number, hasPageSkin: boolean) => {
 	const borderTop = hasPageSkin
 		? css`
 				border-top: 1px solid ${sourcePalette.neutral[86]};
@@ -94,10 +89,6 @@ const imageStyles = css`
 	top: 6px;
 `;
 
-const textPaddingWithImage = css`
-	padding-left: 122px;
-`;
-
 type Props = {
 	position: number;
 	url: string;
@@ -106,11 +97,6 @@ type Props = {
 	ageWarning?: string;
 	cssOverrides?: SerializedStyles | SerializedStyles[];
 	hasPageSkin?: boolean;
-};
-
-type MiniImageProps = {
-	image: string;
-	alt: string;
 };
 
 export const MostViewedFooterItem = ({

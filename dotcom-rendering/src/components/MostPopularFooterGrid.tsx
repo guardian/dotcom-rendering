@@ -110,11 +110,8 @@ const deeplyOverridesStyle = (index: number, mostViewedLength: number) => {
 	`;
 };
 
-const ophanLinkName = (name: string) => name.toLowerCase().replace(/ /g, '-');
-
 type Props = {
 	mostViewed: TrailTabType;
-	sectionName?: string;
 	deeplyRead: TrailTabType;
 	hasPageSkin?: boolean;
 };
@@ -122,7 +119,6 @@ type Props = {
 export const MostPopularFooterGrid = ({
 	mostViewed,
 	deeplyRead,
-	sectionName = '',
 	hasPageSkin = false,
 }: Props) => {
 	const shortenedMostViewed = mostViewed.trails.slice(0, 5);
@@ -130,8 +126,8 @@ export const MostPopularFooterGrid = ({
 
 	return (
 		<div
-			data-component={ophanLinkName(sectionName)}
-			data-link-name={ophanLinkName(sectionName)}
+			data-component="most-popular"
+			data-link-name="most-popular"
 			css={
 				hasPageSkin
 					? gridContainerStyleWithPageSkin
