@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
 import { from, palette as sourcePalette } from '@guardian/source-foundations';
 import type { TrailTabType, TrailType } from '../types/trails';
+import { MostPopularFooterGrid } from './MostPopularFooterGrid';
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
 
@@ -10,6 +11,8 @@ type Props = {
 	selectedColour?: string;
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
+	mostViewed: TrailTabType;
+	deeplyRead: TrailTabType;
 	abTestCypressDataAttr?: string;
 	variantFromRunnable?: string;
 	sectionId?: string;
@@ -49,12 +52,15 @@ export const MostViewedFooter = ({
 	tabs,
 	mostCommented,
 	mostShared,
+	mostViewed,
+	deeplyRead,
 	abTestCypressDataAttr,
 	variantFromRunnable,
 	sectionId,
 	selectedColour,
 	hasPageSkin = false,
 }: Props) => {
+	const showDeeplyRead = !!deeplyRead && !!mostViewed;
 	return (
 		<div
 			css={css`
@@ -65,12 +71,20 @@ export const MostViewedFooter = ({
 			data-testid-ab-runnable-test={variantFromRunnable}
 			data-link-name="most popular"
 		>
-			<MostViewedFooterGrid
-				data={tabs}
-				sectionId={sectionId}
-				selectedColour={selectedColour}
-				hasPageSkin={hasPageSkin}
-			/>
+			{showDeeplyRead ? (
+				<MostPopularFooterGrid
+					mostViewed={mostViewed}
+					deeplyRead={deeplyRead}
+					hasPageSkin={hasPageSkin}
+				/>
+			) : (
+				<MostViewedFooterGrid
+					data={tabs}
+					sectionId={sectionId}
+					selectedColour={selectedColour}
+					hasPageSkin={hasPageSkin}
+				/>
+			)}
 			<div css={[stackBelow('tablet'), secondTierStyles]}>
 				{mostCommented && (
 					<MostViewedFooterSecondTierItem
