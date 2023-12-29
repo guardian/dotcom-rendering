@@ -3,17 +3,17 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpic.stories.tsx
  */
-import type { Meta, StoryObj } from '@storybook/react';
-import lzstring from 'lz-string';
-import React from 'react';
-import { ContributionsEpicUnvalidated as ContributionsEpic } from './ContributionsEpic';
-import { props } from './utils/storybook';
 import { css } from '@emotion/react';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import {
 	TickerCountType,
 	TickerEndType,
 } from '@guardian/support-dotcom-components';
+import type { Meta, StoryObj } from '@storybook/react';
+import lzstring from 'lz-string';
+import React from 'react';
+import { ContributionsEpicUnvalidated as ContributionsEpic } from './ContributionsEpic';
+import { props } from './utils/storybook';
 
 const style = css`
 	max-width: 620px;
@@ -33,6 +33,7 @@ const meta: Meta<Props> = {
 		tracking,
 		countryCode: 'GB',
 		json: '',
+		stage: 'DEV',
 	},
 	render: ({ json, ...args }) => {
 		const jsonProps = json
@@ -344,6 +345,64 @@ export const WithChoiceCardsAndSignInLink: Story = {
 					},
 				},
 			},
+		},
+	},
+};
+
+export const WithSignInLink: Story = {
+	storyName: 'ContributionsEpic with sign-in link',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			showSignInLink: true,
+		},
+	},
+};
+
+export const WithoutSupportUrl: Story = {
+	storyName: 'ContributionsEpic without support url',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			cta: {
+				baseUrl: 'https://theguardian.com',
+				text: 'The Guardian',
+			},
+		},
+	},
+};
+
+export const WithNewsletterSignup: Story = {
+	storyName: 'ContributionsEpic with newsletter signup',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			highlightedText: undefined,
+			heading: 'Sign up to the Fiver',
+			paragraphs: [
+				"Kick off your evenings with the Guardian's take on the world of football",
+			],
+			newsletterSignup: {
+				url: 'https://www.theguardian.com/email/form/plaintone/rrcp-epic/4163',
+			},
+		},
+	},
+};
+export const WithParagraphLinks: Story = {
+	storyName: 'ContributionsEpic with paragraph links',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			paragraphs: [
+				`... we have a small favour to ask. You've read %%ARTICLE_COUNT%% articles. More people, like you, are reading and supporting <a href="https://support.theguardian.com/">the Guardian’s</a> independent, investigative journalism than ever before. And unlike many news organisations, we made the choice to keep our reporting open for all, regardless of where they live or what they can afford to pay.`,
+				'The Guardian will engage with the most critical issues of our time – from the escalating climate catastrophe to widespread inequality to the influence of big tech on our lives. At a time when factual information is a necessity, we believe that each of us, <a href="https://example.com">around the world</a>, deserves access to accurate reporting with integrity at its heart.',
+				'Our editorial independence means we set our own agenda and voice our own opinions. Guardian journalism is free from commercial and political bias and not influenced by billionaire owners or shareholders. This means we can give a voice to those less heard, explore where others turn away, and rigorously challenge those in power.',
+				'We hope you will consider supporting us today. We need your support to keep delivering quality journalism that’s open and independent. Every reader contribution, however big or small, is so valuable. ',
+			],
 		},
 	},
 };
