@@ -11,8 +11,8 @@ type Props = {
 	selectedColour?: string;
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
-	mostViewed: TrailTabType;
-	deeplyRead: TrailTabType;
+	mostViewed?: TrailTabType;
+	deeplyRead?: TrailTabType;
 	abTestCypressDataAttr?: string;
 	variantFromRunnable?: string;
 	sectionId?: string;
@@ -69,7 +69,7 @@ export const MostViewedFooter = ({
 			data-testid="mostviewed-footer"
 			data-testid-ab-user-in-variant={abTestCypressDataAttr}
 			data-testid-ab-runnable-test={variantFromRunnable}
-			data-link-name="most popular"
+			data-link-name="most-viewed"
 		>
 			{showDeeplyRead ? (
 				<MostPopularFooterGrid
