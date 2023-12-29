@@ -161,7 +161,6 @@ export const MostPopularFooterGrid = ({
 							headlineText={trail.headline}
 							ageWarning={trail.ageWarning}
 							cssOverrides={mostViewedOverridesStyle(j)}
-							image={trail.image}
 							hasPageSkin={hasPageSkin}
 						/>
 					))}
