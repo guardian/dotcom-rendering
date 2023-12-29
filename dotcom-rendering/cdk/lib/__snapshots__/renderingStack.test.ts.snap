@@ -258,7 +258,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
     "CertificateArticlerendering3297EFD3": {
       "DeletionPolicy": "Retain",
       "Properties": {
-        "DomainName": "article-rendering.code.dev-gutools.co.uk",
+        "DomainName": "article-rendering.test.dev-gutools.co.uk",
         "Tags": [
           {
             "Key": "App",
@@ -770,7 +770,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
     },
     "LoadBalancerDNS": {
       "Properties": {
-        "Name": "article-rendering.code.dev-gutools.co.uk",
+        "Name": "article-rendering.test.dev-gutools.co.uk",
         "RecordType": "CNAME",
         "ResourceRecords": [
           {

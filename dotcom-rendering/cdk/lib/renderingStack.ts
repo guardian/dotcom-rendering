@@ -16,6 +16,7 @@ import { getUserData } from './userData';
 
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	guApp: `${'article' | 'facia' | 'misc' | 'interactive'}-rendering` | string; // TODO - remove string
+	domainName: string;
 	instanceSize: InstanceSize;
 	scaling: GuAsgCapacity;
 }
@@ -32,7 +33,7 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		const { stack: guStack, region, account } = this;
-		const { guApp, stage, instanceSize, scaling } = props;
+		const { guApp, stage, instanceSize, scaling, domainName } = props;
 
 		const artifactsBucket =
 			GuDistributionBucketParameter.getInstance(this).valueAsString;
@@ -49,10 +50,6 @@ export class RenderingCDKStack extends CDKStack {
 						unhealthyInstancesAlarm: true,
 				  } satisfies Alarms)
 				: ({ noMonitoring: true } satisfies NoMonitoring);
-
-		const domainName = `${guApp.toLowerCase()}.${
-			stage === 'PROD' ? '' : 'code.dev-'
-		}gutools.co.uk`;
 
 		const ec2app = new GuEc2App(this, {
 			app: guApp,

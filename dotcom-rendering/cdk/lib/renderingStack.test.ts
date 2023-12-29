@@ -13,6 +13,7 @@ describe('The RenderingCDKStack', () => {
 		const stack = new RenderingCDKStack(app, 'ArticleRendering', {
 			stage: 'TEST',
 			guApp: 'article-rendering',
+			domainName: 'article-rendering.test.dev-gutools.co.uk',
 			scaling: { minimumInstances: 1, maximumInstances: 4 },
 			instanceSize: InstanceSize.MICRO,
 		});
