@@ -275,8 +275,6 @@ const sendEpicViewEvent = (
 	});
 };
 
-// ContributionsEpic - exported component
-// -------------------------------------------
 const ContributionsEpic: ReactComponent<EpicProps> = ({
 	variant,
 	tracking,
@@ -348,7 +346,9 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	useEffect(() => {
 		if (hasBeenSeen) {
 			// For the event stream
-			sendEpicViewEvent(tracking.referrerUrl, stage, countryCode);
+			if (!window?.guardian?.config?.isDev && stage !== 'DEV') {
+				sendEpicViewEvent(tracking.referrerUrl, stage, countryCode);
+			}
 
 			// For epic view count
 			logEpicView(tracking.abTestName);
