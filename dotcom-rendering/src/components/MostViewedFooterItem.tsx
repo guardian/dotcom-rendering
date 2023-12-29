@@ -80,15 +80,6 @@ const ageWarningStyles = css`
 	margin-bottom: 16px;
 `;
 
-const imageStyles = css`
-	width: 53px;
-	height: 53px;
-	object-fit: cover;
-	position: absolute;
-	left: 59px;
-	top: 6px;
-`;
-
 type Props = {
 	position: number;
 	url: string;
