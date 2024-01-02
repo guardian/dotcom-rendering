@@ -836,6 +836,21 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
+    "RenderingBaseURLParamAE11E777": {
+      "Properties": {
+        "Description": "The rendering base URL for frontend to call the article-rendering app in the TEST environment",
+        "Name": "/frontend/test/article-rendering.baseURL",
+        "Tags": {
+          "Stack": "frontend",
+          "Stage": "TEST",
+          "gu:cdk:version": "TEST",
+          "gu:repo": "guardian/dotcom-rendering",
+        },
+        "Type": "String",
+        "Value": "https://article-rendering.test.dev-gutools.co.uk",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
     "TargetGroupArticlerendering3605E498": {
       "Properties": {
         "HealthCheckIntervalSeconds": 10,

@@ -12,6 +12,7 @@ import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { type App as CDKApp, Duration } from 'aws-cdk-lib';
 import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
+import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
 
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
@@ -115,6 +116,13 @@ export class RenderingCDKStack extends CDKStack {
 			app: guApp,
 			resourceRecord: ec2app.loadBalancer.loadBalancerDnsName,
 			ttl: Duration.hours(1),
+		});
+
+		// Saves the value of the rendering base URL to SSM for frontend apps to use
+		new StringParameter(this, 'RenderingBaseURLParam', {
+			parameterName: `/${guStack}/${stage.toLowerCase()}/${guApp}.baseURL`,
+			stringValue: `https://${domainName}`,
+			description: `The rendering base URL for frontend to call the ${guApp} app in the ${stage} environment`,
 		});
 	}
 }
