@@ -6,7 +6,7 @@ const getIframeBody = async (
 	iframeSelector: string,
 ): Promise<Locator> => {
 	const iframeBodyLocator = page.frameLocator(iframeSelector).locator('body');
-	await expect(iframeBodyLocator).toBeAttached({ timeout: 10000 });
+	await expect(iframeBodyLocator).toBeAttached({ timeout: 10_000 });
 	return iframeBodyLocator;
 };
 
