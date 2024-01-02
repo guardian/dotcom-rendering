@@ -17,8 +17,19 @@ import {
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration, Tags } from 'aws-cdk-lib';
-import { AdjustmentType, HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
-import { CfnAlarm, Metric } from 'aws-cdk-lib/aws-cloudwatch';
+import {
+	AdjustmentType,
+	HealthCheck,
+	StepScalingAction,
+} from 'aws-cdk-lib/aws-autoscaling';
+import {
+	Alarm,
+	CfnAlarm,
+	ComparisonOperator,
+	Metric,
+	TreatMissingData,
+} from 'aws-cdk-lib/aws-cloudwatch';
+import { AutoScalingAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
@@ -280,36 +291,51 @@ export class DotcomRendering extends GuStack {
 		// 	scalingAdjustment: -1,
 		// });
 
-		const latencyMetric = new Metric({
-			metricName: 'Latency',
-			namespace: 'AWS/ELB',
-			period: Duration.minutes(1),
-			statistic: 'Average',
+		const latencyHighAlarm = new Alarm(this, 'HighLatency', {
+			actionsEnabled: true,
+			alarmDescription: 'Latency alarm for autoscaling',
+			threshold: 0.2,
+			comparisonOperator: ComparisonOperator.GREATER_THAN_THRESHOLD,
+			datapointsToAlarm: 2,
+			evaluationPeriods: 30,
+			metric: new Metric({
+				dimensionsMap: {
+					AutoScalingGroupName: asg.autoScalingGroupName,
+				},
+				metricName: 'Latency',
+				namespace: 'AWS/ELB',
+				period: Duration.seconds(1),
+				statistic: 'Average',
+			}),
+
+			treatMissingData: TreatMissingData.MISSING,
 		});
 
-		asg.scaleOnMetric('LatencyStepScalingPolicy', {
-			metric: latencyMetric,
-			scalingSteps: [
-				{
-					lower: 0,
-					upper: 0.2,
-					change: props.minCapacity,
-				},
-				{
-					lower: 0.2,
-					upper: 0.3,
-					change: props.minCapacity + 3,
-				},
-				{
-					lower: 0.3,
-					upper: undefined,
-					change: props.minCapacity + 6,
-				},
-			],
-			adjustmentType: AdjustmentType.EXACT_CAPACITY,
-			cooldown: Duration.minutes(2),
-			evaluationPeriods: 1,
+		const scaleUpStep = new StepScalingAction(this, 'ScaleUp', {
+			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
+			autoScalingGroup: asg,
+			// 10 minutes for prod. This is only for testing
+			cooldown: Duration.seconds(30),
 		});
+
+		scaleUpStep.addAdjustment({
+			lowerBound: 0,
+			adjustment: 100,
+		});
+		latencyHighAlarm.addAlarmAction(new AutoScalingAction(scaleUpStep));
+
+		const scaleDownStep = new StepScalingAction(this, 'ScaleDown', {
+			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
+			autoScalingGroup: asg,
+
+			// Every 2 minutes take out one instance for prod. This is for testing purposes
+			cooldown: Duration.seconds(15),
+		});
+		scaleDownStep.addAdjustment({
+			lowerBound: 0,
+			adjustment: -1,
+		});
+		latencyHighAlarm.addOkAction(new AutoScalingAction(scaleDownStep));
 
 		/** Returns an appropriate alarm description given the appropriate configuration object */
 		const getAlarmDescription = ({

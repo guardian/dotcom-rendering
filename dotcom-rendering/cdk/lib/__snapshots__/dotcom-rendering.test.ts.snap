@@ -295,83 +295,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
-    "AutoscalingGroupRenderingLatencyStepScalingPolicyLowerAlarmC8893E45": {
-      "Properties": {
-        "AlarmActions": [
-          {
-            "Ref": "AutoscalingGroupRenderingLatencyStepScalingPolicyLowerPolicy76D73EE7",
-          },
-        ],
-        "AlarmDescription": "Lower threshold scaling alarm",
-        "ComparisonOperator": "LessThanOrEqualToThreshold",
-        "EvaluationPeriods": 1,
-        "MetricName": "Latency",
-        "Namespace": "AWS/ELB",
-        "Period": 60,
-        "Statistic": "Average",
-        "Threshold": 0.2,
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "AutoscalingGroupRenderingLatencyStepScalingPolicyLowerPolicy76D73EE7": {
-      "Properties": {
-        "AdjustmentType": "ExactCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoscalingGroup",
-        },
-        "Cooldown": "120",
-        "MetricAggregationType": "Average",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalUpperBound": 0,
-            "ScalingAdjustment": 1,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
-    "AutoscalingGroupRenderingLatencyStepScalingPolicyUpperAlarmD121CE9C": {
-      "Properties": {
-        "AlarmActions": [
-          {
-            "Ref": "AutoscalingGroupRenderingLatencyStepScalingPolicyUpperPolicy08A879B8",
-          },
-        ],
-        "AlarmDescription": "Upper threshold scaling alarm",
-        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
-        "EvaluationPeriods": 1,
-        "MetricName": "Latency",
-        "Namespace": "AWS/ELB",
-        "Period": 60,
-        "Statistic": "Average",
-        "Threshold": 0.2,
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "AutoscalingGroupRenderingLatencyStepScalingPolicyUpperPolicy08A879B8": {
-      "Properties": {
-        "AdjustmentType": "ExactCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoscalingGroup",
-        },
-        "Cooldown": "120",
-        "MetricAggregationType": "Average",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalLowerBound": 0,
-            "MetricIntervalUpperBound": 0.09999999999999998,
-            "ScalingAdjustment": 4,
-          },
-          {
-            "MetricIntervalLowerBound": 0.09999999999999998,
-            "ScalingAdjustment": 7,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
     "Backend5xxAlarm": {
       "Properties": {
         "ActionsEnabled": false,
@@ -561,6 +484,40 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "HighLatencyBDC1CAA1": {
+      "Properties": {
+        "ActionsEnabled": true,
+        "AlarmActions": [
+          {
+            "Ref": "ScaleUpAF7DDD3C",
+          },
+        ],
+        "AlarmDescription": "Latency alarm for autoscaling",
+        "ComparisonOperator": "GreaterThanThreshold",
+        "DatapointsToAlarm": 2,
+        "Dimensions": [
+          {
+            "Name": "AutoScalingGroupName",
+            "Value": {
+              "Ref": "AutoscalingGroup",
+            },
+          },
+        ],
+        "EvaluationPeriods": 30,
+        "MetricName": "Latency",
+        "Namespace": "AWS/ELB",
+        "OKActions": [
+          {
+            "Ref": "ScaleDown2D6349BF",
+          },
+        ],
+        "Period": 1,
+        "Statistic": "Average",
+        "Threshold": 0.2,
+        "TreatMissingData": "missing",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
     },
     "InstanceRole": {
       "Properties": {
@@ -910,6 +867,40 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "ScaleDown2D6349BF": {
+      "Properties": {
+        "AdjustmentType": "ChangeInCapacity",
+        "AutoScalingGroupName": {
+          "Ref": "AutoscalingGroup",
+        },
+        "Cooldown": "15",
+        "PolicyType": "StepScaling",
+        "StepAdjustments": [
+          {
+            "MetricIntervalLowerBound": 0,
+            "ScalingAdjustment": -1,
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "ScaleUpAF7DDD3C": {
+      "Properties": {
+        "AdjustmentType": "PercentChangeInCapacity",
+        "AutoScalingGroupName": {
+          "Ref": "AutoscalingGroup",
+        },
+        "Cooldown": "30",
+        "PolicyType": "StepScaling",
+        "StepAdjustments": [
+          {
+            "MetricIntervalLowerBound": 0,
+            "ScalingAdjustment": 100,
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
     },
     "WazuhSecurityGroup": {
       "Properties": {
