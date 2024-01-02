@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { type RoleType } from '../types/content';
 import { openLightboxForImageId } from './AppsLightboxImageStore.importable';
+import type { Loading } from './CardPicture';
 import { Picture } from './Picture';
 
 type Props = {
@@ -11,8 +12,8 @@ type Props = {
 	alt: string;
 	height: number;
 	width: number;
+	loading: Loading;
 	isMainMedia?: boolean;
-	isLazy?: boolean;
 };
 
 export const AppsLightboxImage = ({
@@ -24,7 +25,7 @@ export const AppsLightboxImage = ({
 	height,
 	width,
 	isMainMedia = false,
-	isLazy = true,
+	loading = 'lazy',
 }: Props) => {
 	const picture = (
 		<Picture
@@ -34,7 +35,7 @@ export const AppsLightboxImage = ({
 			alt={alt}
 			width={width}
 			height={height}
-			isLazy={isLazy}
+			loading={loading}
 			isMainMedia={isMainMedia}
 		/>
 	);

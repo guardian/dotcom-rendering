@@ -278,6 +278,8 @@ export const ImageComponent = ({
 
 	const palette = decidePalette(format);
 
+	const loading = isMainMedia ? 'eager' : 'lazy';
+
 	if (
 		isMainMedia &&
 		format.display === ArticleDisplay.Immersive &&
@@ -325,7 +327,7 @@ export const ImageComponent = ({
 							alt={element.data.alt ?? ''}
 							width={imageWidth}
 							height={imageHeight}
-							isLazy={!isMainMedia}
+							loading={loading}
 							isMainMedia={isMainMedia}
 						/>
 					</Island>
@@ -337,7 +339,7 @@ export const ImageComponent = ({
 						alt={element.data.alt ?? ''}
 						width={imageWidth}
 						height={imageHeight}
-						isLazy={!isMainMedia}
+						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
 				)}
@@ -389,7 +391,7 @@ export const ImageComponent = ({
 							alt={element.data.alt ?? ''}
 							width={imageWidth}
 							height={imageHeight}
-							isLazy={!isMainMedia}
+							loading={loading}
 							isMainMedia={isMainMedia}
 						/>
 					</Island>
@@ -401,7 +403,7 @@ export const ImageComponent = ({
 						alt={element.data.alt ?? ''}
 						width={imageWidth}
 						height={imageHeight}
-						isLazy={!isMainMedia}
+						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
 				)}
@@ -456,7 +458,7 @@ export const ImageComponent = ({
 							alt={element.data.alt ?? ''}
 							width={imageWidth}
 							height={imageHeight}
-							isLazy={!isMainMedia}
+							loading={loading}
 							isMainMedia={isMainMedia}
 						/>
 					</Island>
@@ -468,7 +470,7 @@ export const ImageComponent = ({
 						alt={element.data.alt ?? ''}
 						width={imageWidth}
 						height={imageHeight}
-						isLazy={!isMainMedia}
+						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
 				)}

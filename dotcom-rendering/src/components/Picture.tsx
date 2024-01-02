@@ -4,6 +4,7 @@ import { breakpoints } from '@guardian/source-foundations';
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
+import type { Loading } from './CardPicture';
 
 /**
  * Working on this file? Checkout out 027-pictures.md & 029-signing-image-urls.md for background information & context
@@ -18,8 +19,8 @@ type Props = {
 	alt: string;
 	height: number;
 	width: number;
+	loading: Loading;
 	isMainMedia?: boolean;
-	isLazy?: boolean;
 	isLightbox?: boolean;
 	orientation?: Orientation;
 	onLoad?: () => void;
@@ -316,7 +317,7 @@ export const Picture = ({
 	height,
 	width,
 	isMainMedia = false,
-	isLazy = true,
+	loading,
 	isLightbox = false,
 	orientation = 'landscape',
 	onLoad,
@@ -403,9 +404,7 @@ export const Picture = ({
 				src={fallbackSource.lowResUrl}
 				width={fallbackSource.width}
 				height={fallbackSource.width * ratio}
-				loading={
-					isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
-				}
+				loading={Picture.disableLazyLoading ? undefined : loading}
 				css={isLightbox ? flex : block}
 			/>
 		</picture>
