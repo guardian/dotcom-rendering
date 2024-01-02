@@ -4,7 +4,10 @@ import { Hide } from '@guardian/source-react-components';
 import { isWideEnough } from '../lib/lightbox';
 import type { Switches } from '../types/config';
 import type { CartoonBlockElement, Image } from '../types/content';
+import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
+import { useConfig } from './ConfigContext';
+import { Island } from './Island';
 import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
 
@@ -15,6 +18,7 @@ type Props = {
 };
 
 export const CartoonComponent = ({ format, element, switches }: Props) => {
+	const { renderingTarget } = useConfig();
 	const smallVariant = element.variants.find(
 		(variant) => variant.viewportSize === 'small',
 	);
@@ -23,20 +27,41 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 	);
 
 	const render = (image: Image) => {
+		const altText = `${element.alt ? `${element.alt}, ` : ''}panel ${
+			image.index + 1
+		}`;
+		const height = parseInt(image.fields.height, 10);
+		const width = parseInt(image.fields.width, 10);
+
 		return (
 			<>
-				<Picture
-					master={image.url}
-					role={element.role}
-					format={format}
-					alt={`${element.alt ? `${element.alt}, ` : ''}panel ${
-						image.index + 1
-					}`}
-					height={parseInt(image.fields.height, 10)}
-					width={parseInt(image.fields.width, 10)}
-					key={image.index}
-					loading="lazy"
-				/>
+				{renderingTarget === 'Apps' ? (
+					<Island priority="critical">
+						<AppsLightboxImage
+							elementId={element.elementId}
+							role={element.role}
+							format={format}
+							master={image.url}
+							alt={altText}
+							height={height}
+							width={width}
+							loading="lazy"
+							isMainMedia={true}
+						/>
+					</Island>
+				) : (
+					<Picture
+						master={image.url}
+						role={element.role}
+						format={format}
+						alt={altText}
+						height={height}
+						width={width}
+						key={image.index}
+						loading="lazy"
+					/>
+				)}
+
 				{switches?.lightbox === true &&
 					isWideEnough(image) &&
 					element.position !== undefined && (
