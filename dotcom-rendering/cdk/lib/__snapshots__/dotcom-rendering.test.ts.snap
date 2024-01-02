@@ -307,7 +307,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "EvaluationPeriods": 1,
         "MetricName": "Latency",
         "Namespace": "AWS/ELB",
-        "Period": 300,
+        "Period": 60,
         "Statistic": "Average",
         "Threshold": 200,
       },
@@ -319,17 +319,18 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "AutoScalingGroupName": {
           "Ref": "AutoscalingGroup",
         },
+        "Cooldown": "120",
         "MetricAggregationType": "Average",
         "PolicyType": "StepScaling",
         "StepAdjustments": [
           {
             "MetricIntervalLowerBound": -100,
             "MetricIntervalUpperBound": 0,
-            "ScalingAdjustment": 12,
+            "ScalingAdjustment": 1,
           },
           {
             "MetricIntervalUpperBound": -100,
-            "ScalingAdjustment": 12,
+            "ScalingAdjustment": 1,
           },
         ],
       },
@@ -347,7 +348,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "EvaluationPeriods": 1,
         "MetricName": "Latency",
         "Namespace": "AWS/ELB",
-        "Period": 300,
+        "Period": 60,
         "Statistic": "Average",
         "Threshold": 200,
       },
@@ -359,22 +360,18 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "AutoScalingGroupName": {
           "Ref": "AutoscalingGroup",
         },
+        "Cooldown": "120",
         "MetricAggregationType": "Average",
         "PolicyType": "StepScaling",
         "StepAdjustments": [
           {
             "MetricIntervalLowerBound": 0,
             "MetricIntervalUpperBound": 100,
-            "ScalingAdjustment": 15,
+            "ScalingAdjustment": 4,
           },
           {
             "MetricIntervalLowerBound": 100,
-            "MetricIntervalUpperBound": 200,
-            "ScalingAdjustment": 18,
-          },
-          {
-            "MetricIntervalLowerBound": 200,
-            "ScalingAdjustment": 21,
+            "ScalingAdjustment": 7,
           },
         ],
       },
@@ -841,14 +838,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "LatencyScalingAlarm": {
       "Properties": {
         "ActionsEnabled": true,
-        "AlarmActions": [
-          {
-            "Fn::GetAtt": [
-              "ScaleUpPolicy",
-              "Arn",
-            ],
-          },
-        ],
         "AlarmDescription": "Scale up if latency is GreaterThanOrEqualToThreshold of 0.2 over 1 period(s) of 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
@@ -862,14 +851,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "EvaluationPeriods": 1,
         "MetricName": "Latency",
         "Namespace": "AWS/ELB",
-        "OKActions": [
-          {
-            "Fn::GetAtt": [
-              "ScaleDownPolicy",
-              "Arn",
-            ],
-          },
-        ],
         "Period": 60,
         "Statistic": "Average",
         "Threshold": 0.2,
@@ -934,28 +915,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "ScaleDownPolicy": {
-      "Properties": {
-        "AdjustmentType": "ChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoscalingGroup",
-        },
-        "Cooldown": "120",
-        "ScalingAdjustment": -1,
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
-    "ScaleUpPolicy": {
-      "Properties": {
-        "AdjustmentType": "PercentChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoscalingGroup",
-        },
-        "Cooldown": "600",
-        "ScalingAdjustment": 100,
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
     },
     "WazuhSecurityGroup": {
       "Properties": {

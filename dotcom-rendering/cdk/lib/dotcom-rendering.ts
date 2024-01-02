@@ -17,12 +17,7 @@ import {
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration, Tags } from 'aws-cdk-lib';
-import {
-	AdjustmentType,
-	HealthCheck,
-	MetricAggregationType,
-	StepScalingPolicy,
-} from 'aws-cdk-lib/aws-autoscaling';
+import { AdjustmentType, HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
 import { CfnAlarm, Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
@@ -285,55 +280,11 @@ export class DotcomRendering extends GuStack {
 		// 	scalingAdjustment: -1,
 		// });
 
-		// @ts-ignore
-		const latencyStepScalingPolicy = new StepScalingPolicy(
-			this,
-			'LatencyStepScalingPolicy',
-			{
-				autoScalingGroup: asg,
-				metricAggregationType: MetricAggregationType.AVERAGE,
-				adjustmentType: AdjustmentType.EXACT_CAPACITY,
-				scalingSteps: [
-					{
-						lower: 0,
-						upper: 100,
-						change: props.minCapacity,
-					},
-					{
-						lower: 100,
-						upper: 200,
-						change: props.minCapacity,
-					},
-					{
-						change: props.minCapacity + 3,
-						lower: 200,
-						upper: 300,
-					},
-					{
-						change: props.minCapacity + 6,
-						lower: 300,
-						upper: undefined,
-					},
-				],
-				cooldown: Duration.seconds(60),
-				metric: new Metric({
-					namespace: 'AWS/ELB',
-					metricName: 'Latency',
-					period: Duration.minutes(1),
-				}),
-			},
-		);
-
-		// TODO: Link with CloudWatch alarms
-		// latencyStepScalingPolicy.lowerAlarm
-		// latencyStepScalingPolicy.upperAlarm
-		// latencyStepScalingPolicy.upperAction
-		// latencyStepScalingPolicy.lowerAction
-
 		asg.scaleOnMetric('LatencyStepScalingPolicy', {
 			metric: new Metric({
 				metricName: 'Latency',
 				namespace: 'AWS/ELB',
+				period: Duration.minutes(1),
 			}),
 			scalingSteps: [
 				{
@@ -358,7 +309,7 @@ export class DotcomRendering extends GuStack {
 				},
 			],
 			adjustmentType: AdjustmentType.EXACT_CAPACITY,
-			cooldown: Duration.minutes(1),
+			cooldown: Duration.minutes(2),
 			evaluationPeriods: 1,
 		});
 
