@@ -84,7 +84,7 @@
 		"clean-css": "5.3.3",
 		"compare-versions": "6.1.0",
 		"compression": "1.7.4",
-		"constructs": "10.2.69",
+		"constructs": "10.3.0",
 		"core-js": "3.33.3",
 		"eslint": "8.54.0",
 		"eslint-plugin-jsx-a11y": "6.7.1",
