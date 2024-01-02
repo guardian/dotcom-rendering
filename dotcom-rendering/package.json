@@ -221,7 +221,6 @@
 		"semver": "7.5.4",
 		"serve-static": "1.15.0",
 		"simple-progress-webpack-plugin": "2.0.0",
-		"snyk": "1.1103.0",
 		"source-map": "0.7.4",
 		"start-server-and-test": "2.0.3",
 		"storybook": "7.6.6",

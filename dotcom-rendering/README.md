@@ -143,9 +143,15 @@ See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/dotcom
 
 [Read about testing tools and testing strategy](docs/testing.md).
 
-### Snyk Code Scanning
+### Vulnerabilities
 
-There's a Github action set up on the repository to scan for vulnerabilities. This is set to "continue on error" and so will show a green tick regardless. In order to check the vulnerabilities we can use the Github code scanning feature in the security tab and this will list all vulnerabilities for a given branch etc. You should use this if adding/removing/updating packages to see if there are any vulnerabilities.
+#### Dependabot
+
+To monitor vulnerabilities from GitHub, you can use [Dependabot alerts in the security tab](https://github.com/guardian/dotcom-rendering/security/dependabot).
+
+#### `pnpm audit`
+
+To check for vulnerabilities in development, you can run `pnpm audit`.
 
 ## IDE setup
 
