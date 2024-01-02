@@ -112,10 +112,6 @@ const webpackConfig = (config: Configuration) => {
 	config.resolve.alias[path.resolve(__dirname, '../src/lib/bridgetApi.ts')] =
 		path.resolve(__dirname, './mocks/bridgetApi.ts');
 
-	// SecureSignup uses @emotion/cache and @emotion/server - can't be used in storybook
-	config.resolve.alias[
-		path.resolve(__dirname, '../src/components/SecureSignup.tsx')
-	] = path.resolve(__dirname, '../__mocks__/SecureSignupMock.tsx');
 	const webpackLoaders = getLoaders('web');
 	// https://swc.rs/docs/usage/swc-loader#with-babel-loader
 	if (webpackLoaders[0].loader.startsWith('swc')) {
