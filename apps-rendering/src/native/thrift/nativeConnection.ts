@@ -61,7 +61,7 @@ function sendNativeMessage(nativeMessage: NativeMessage): void {
 }
 
 let uid = 1;
-const getUniqueConnectionId = () => `connection-${uid++}`;
+const getUniqueConnectionId = (): string => `connection-${uid++}`;
 
 export class NativeConnection<Context = void> extends ThriftConnection {
 	connectionId = getUniqueConnectionId();
