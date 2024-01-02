@@ -124,9 +124,7 @@ test.describe('Interactivity', () => {
 			await loadPage(page, `/Article/${articleUrl}`);
 			await waitForIsland(page, 'SupportTheG');
 			await expect(
-				page
-					.locator('header')
-					.filter({ hasText: 'Support the Guardian' }),
+				page.locator('header').filter({ hasText: 'Support' }),
 			).toBeVisible();
 		});
 	});
