@@ -14,7 +14,6 @@ import {
 	TApplicationExceptionType,
 	ThriftConnection,
 } from '@creditkarma/thrift-server-core';
-import * as uuid from 'uuid';
 import { TMultiplexedProtocol } from './protocols';
 
 declare global {
@@ -61,8 +60,11 @@ function sendNativeMessage(nativeMessage: NativeMessage): void {
 	}
 }
 
+let uid = 1;
+const getUniqueConnectionId = () => `connection-${uid++}`;
+
 export class NativeConnection<Context = void> extends ThriftConnection {
-	connectionId = uuid.v4();
+	connectionId = getUniqueConnectionId();
 	promises: PromiseResponse[] = [];
 	outBuffer: NativeMessage[] = [];
 
@@ -90,7 +92,7 @@ export class NativeConnection<Context = void> extends ThriftConnection {
 				);
 			});
 			this.promises = [];
-			this.connectionId = uuid.v4();
+			this.connectionId = getUniqueConnectionId();
 			window.nativeConnections[this.connectionId] = this;
 		}
 	}
