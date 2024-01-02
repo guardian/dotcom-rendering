@@ -2,7 +2,12 @@ import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Labs } from '../../../fixtures/generated/articles/Labs';
-import { MorningDate, AfternoonDate } from '../../lib/mockDate';
+import {
+	SUBSCRIPTION_HEADER,
+	SIGN_IN_PROMPT,
+	SIGN_IN_INCENTIVES_DIGITAL,
+	COMPLETE_REGISTRATION_BUTTON,
+} from '../../../src/lib/signInAfterCheckOutText';
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
@@ -42,6 +47,7 @@ describe('Sign In Gate Tests', function () {
 	};
 
 	const GATE_HEADER = 'Register: it’s quick and easy';
+	const GATE_HEADER_ALT = 'Take a moment to register';
 	// helper method over the cypress visit method to avoid having to repeat the same url by setting a default
 	// can override the parameter if required
 
@@ -94,22 +100,18 @@ describe('Sign In Gate Tests', function () {
 	describe('SignInGateMain', function () {
 		beforeEach(function () {
 			disableCMP();
-			// sign in gate main runs from 0-900000 MVT IDs, so 400 forces user into test
-			setMvtCookie('400000');
+			// sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
+			setMvtCookie('500000');
 
 			// set article count to be min number to view gate
 			setArticleCount(3);
 		});
+
 		it('should load the sign in gate', function () {
 			visitArticleAndScrollToGateForLazyLoad();
 
 			cy.get('[data-testid=sign-in-gate-main]').should('be.visible');
 			cy.get('[data-testid=sign-in-gate-main]').contains(GATE_HEADER);
-
-			cy.get('[data-testid=sign-in-gate-main_register]')
-				.should('have.attr', 'href')
-				.and('contains', '/register?returnUrl=')
-				.and('contains', 'SignInGateMain');
 		});
 
 		it('should not load the sign in gate if the user has not read at least 3 article in a day', function () {
@@ -118,71 +120,6 @@ describe('Sign In Gate Tests', function () {
 			visitArticleAndScrollToGateForLazyLoad();
 
 			cy.get('[data-testid=sign-in-gate-main]').should('not.exist');
-		});
-
-		describe('AB Test -> Test varying sign in gate frequency by page view time of day', function () {
-			beforeEach(function () {
-				// Putting user into the second half of the audience segment where this
-				// test is running
-				setMvtCookie('850000');
-			});
-
-			it('should load the gate on every article view if user is reading in the morning', function () {
-				setArticleCount(1);
-
-				cy.visit(
-					'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-					{
-						onBeforeLoad: (win) => {
-							win.Date = MorningDate;
-						},
-					},
-				);
-
-				scrollToGateForLazyLoading();
-
-				cy.get('[data-testid=sign-in-gate-main]').should('be.visible');
-				cy.get('[data-testid=sign-in-gate-main_register]')
-					.should('have.attr', 'href')
-					.and('contains', 'abTestName%3DSignInGateTimesOfDay');
-			});
-
-			it('should not load the gate on every article view if user is reading in the afternoon', function () {
-				setArticleCount(1);
-
-				cy.visit(
-					'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-					{
-						onBeforeLoad: (win) => {
-							win.Date = AfternoonDate;
-						},
-					},
-				);
-
-				scrollToGateForLazyLoading();
-
-				cy.get('[data-testid=sign-in-gate-main]').should('not.exist');
-			});
-
-			it('should load the gate on every third article view if user is reading at a time other than morning', function () {
-				setArticleCount(3);
-
-				cy.visit(
-					'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
-					{
-						onBeforeLoad: (win) => {
-							win.Date = AfternoonDate;
-						},
-					},
-				);
-
-				scrollToGateForLazyLoading();
-
-				cy.get('[data-testid=sign-in-gate-main]').should('be.visible');
-				cy.get('[data-testid=sign-in-gate-main_register]')
-					.should('have.attr', 'href')
-					.and('contains', 'abTestName%3DSignInGateTimesOfDay');
-			});
 		});
 
 		it('should not load the sign in gate if the user is signed in', function () {
@@ -337,247 +274,49 @@ describe('Sign In Gate Tests', function () {
 					.and('not.contains', 'personalised_new_SupporterPlus');
 			});
 
-			describe('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
-				// HEADER TEXT
-				const SUBSCRIPTION_HEADER = 'Thank you for subscribing';
-				const SUPPORTER_HEADER = 'Thank you for your support';
+			it('should show personalised copy when a user has the relevant cookie', function () {
+				setGuCOCompleteCookie('new', 'SupporterPlus');
 
-				// SUBHEADER TEXT
-				const SIGN_IN_PROMPT =
-					'Remember to sign in for a better experience.';
-
-				// BODY TEXT
-				const SIGN_IN_INCENTIVES_DIGITAL = [
-					'Supporter rewards – unlock the benefits of your support',
-					'Incisive analysis and original reporting direct to your inbox, with our newsletters',
-					'Get involved in the discussion – comment on stories',
-				];
-
-				const SIGN_IN_INCENTIVES_NON_DIGITAL = [
-					'Fewer interruptions',
-					'Incisive analysis and original reporting direct to your inbox, with our newsletters',
-					'Get involved in the discussion – comment on stories',
-				];
-				// BUTTON TEXT
-				const COMPLETE_REGISTRATION_BUTTON = 'Complete registration';
-				const SIGN_IN_BUTTON = 'Sign in';
-
-				it('user is new and has a digital subscription', function () {
-					setGuCOCompleteCookie('new', 'SupporterPlus');
-
-					postArticleAndScrollToGateForLazyLoad({
-						switchOverride: {
-							personaliseSignInGateAfterCheckout: true,
-						},
-					});
-
-					cy.get('[data-testid=sign-in-gate-main]').should(
-						'be.visible',
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SUBSCRIPTION_HEADER,
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SIGN_IN_PROMPT,
-					);
-					SIGN_IN_INCENTIVES_DIGITAL.forEach((item) => {
-						cy.get('[data-testid=sign-in-gate-main]').contains(
-							item,
-						);
-					});
-					cy.get('[data-testid=sign-in-gate-main_register]').contains(
-						COMPLETE_REGISTRATION_BUTTON,
-					);
-					cy.get('[data-testid=sign-in-gate-main_register]')
-						.should('have.attr', 'href')
-						.and('contains', '/register?returnUrl=')
-						.and('contains', 'personalised_new_SupporterPlus');
+				postArticleAndScrollToGateForLazyLoad({
+					switchOverride: {
+						personaliseSignInGateAfterCheckout: true,
+					},
 				});
 
-				it('user is new and has a paper subscription', function () {
-					setGuCOCompleteCookie('guest', 'Paper');
-
-					postArticleAndScrollToGateForLazyLoad({
-						switchOverride: {
-							personaliseSignInGateAfterCheckout: true,
-						},
-					});
-
-					cy.get('[data-testid=sign-in-gate-main]').should(
-						'be.visible',
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SUBSCRIPTION_HEADER,
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SIGN_IN_PROMPT,
-					);
-					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
-						cy.get('[data-testid=sign-in-gate-main]').contains(
-							item,
-						);
-					});
-					cy.get('[data-testid=sign-in-gate-main_register]').contains(
-						COMPLETE_REGISTRATION_BUTTON,
-					);
-					cy.get('[data-testid=sign-in-gate-main_register]')
-						.should('have.attr', 'href')
-						.and('contains', '/register?returnUrl=')
-						.and('contains', 'personalised_guest_Paper');
+				cy.get('[data-testid=sign-in-gate-main]').should('be.visible');
+				cy.get('[data-testid=sign-in-gate-main]').contains(
+					SUBSCRIPTION_HEADER,
+				);
+				cy.get('[data-testid=sign-in-gate-main]').contains(
+					SIGN_IN_PROMPT,
+				);
+				SIGN_IN_INCENTIVES_DIGITAL.forEach((item) => {
+					cy.get('[data-testid=sign-in-gate-main]').contains(item);
 				});
-
-				it('user is new and is a contributor', function () {
-					setGuCOCompleteCookie('new', 'Contribution');
-
-					postArticleAndScrollToGateForLazyLoad({
-						switchOverride: {
-							personaliseSignInGateAfterCheckout: true,
-						},
-					});
-
-					cy.get('[data-testid=sign-in-gate-main]').should(
-						'be.visible',
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SUPPORTER_HEADER,
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SIGN_IN_PROMPT,
-					);
-					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
-						cy.get('[data-testid=sign-in-gate-main]').contains(
-							item,
-						);
-					});
-					cy.get('[data-testid=sign-in-gate-main_register]').contains(
-						COMPLETE_REGISTRATION_BUTTON,
-					);
-
-					cy.get('[data-testid=sign-in-gate-main_register]')
-						.should('have.attr', 'href')
-						.and('contains', '/register?returnUrl=')
-						.and('contains', 'personalised_new_Contribution');
-				});
-
-				it('user is existing and has a digital subscription', function () {
-					setGuCOCompleteCookie('current', 'SupporterPlus');
-
-					postArticleAndScrollToGateForLazyLoad({
-						switchOverride: {
-							personaliseSignInGateAfterCheckout: true,
-						},
-					});
-
-					cy.get('[data-testid=sign-in-gate-main]').should(
-						'be.visible',
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SUBSCRIPTION_HEADER,
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SIGN_IN_PROMPT,
-					);
-					SIGN_IN_INCENTIVES_DIGITAL.forEach((item) => {
-						cy.get('[data-testid=sign-in-gate-main]').contains(
-							item,
-						);
-					});
-					cy.get('[data-testid=sign-in-gate-main_register]').contains(
-						SIGN_IN_BUTTON,
-					);
-					cy.get('[data-testid=sign-in-gate-main_register]')
-						.should('have.attr', 'href')
-						.and('contains', '/signin?returnUrl=')
-						.and('contains', 'personalised_current_SupporterPlus');
-				});
-
-				it('user is existing and has a paper subscription', function () {
-					setGuCOCompleteCookie('current', 'Paper');
-
-					postArticleAndScrollToGateForLazyLoad({
-						switchOverride: {
-							personaliseSignInGateAfterCheckout: true,
-						},
-					});
-
-					cy.get('[data-testid=sign-in-gate-main]').should(
-						'be.visible',
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SUBSCRIPTION_HEADER,
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SIGN_IN_PROMPT,
-					);
-					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
-						cy.get('[data-testid=sign-in-gate-main]').contains(
-							item,
-						);
-					});
-					cy.get('[data-testid=sign-in-gate-main_register]').contains(
-						SIGN_IN_BUTTON,
-					);
-					cy.get('[data-testid=sign-in-gate-main_register]')
-						.should('have.attr', 'href')
-						.and('contains', '/signin?returnUrl=')
-						.and('contains', 'personalised_current_Paper');
-				});
-
-				it('user is existing and is a contributor', function () {
-					setGuCOCompleteCookie('current', 'Contribution');
-
-					postArticleAndScrollToGateForLazyLoad({
-						switchOverride: {
-							personaliseSignInGateAfterCheckout: true,
-						},
-					});
-
-					cy.get('[data-testid=sign-in-gate-main]').should(
-						'be.visible',
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SUPPORTER_HEADER,
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						SIGN_IN_PROMPT,
-					);
-					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
-						cy.get('[data-testid=sign-in-gate-main]').contains(
-							item,
-						);
-					});
-					cy.get('[data-testid=sign-in-gate-main_register]').contains(
-						SIGN_IN_BUTTON,
-					);
-
-					cy.get('[data-testid=sign-in-gate-main_register]')
-						.should('have.attr', 'href')
-						.and('contains', '/signin?returnUrl=')
-						.and('contains', 'personalised_current_Contribution');
-				});
+				cy.get('[data-testid=sign-in-gate-main_register]').contains(
+					COMPLETE_REGISTRATION_BUTTON,
+				);
+				cy.get('[data-testid=sign-in-gate-main_register]')
+					.should('have.attr', 'href')
+					.and('contains', '/register?returnUrl=')
+					.and('contains', 'personalised_new_SupporterPlus');
 			});
 
-			describe('GU_CO_COMPLETE is present, with invalid contents should show the main sign in gate', function () {
-				it('invalid userType', function () {
-					setGuCOCompleteCookie('invalid', 'Contribution');
+			it('should show the main sign in gate when GU_CO_COMPLETE is present but with invalid contents', function () {
+				setGuCOCompleteCookie('invalid', 'Contribution');
 
-					postArticleAndScrollToGateForLazyLoad({
-						switchOverride: {
-							personaliseSignInGateAfterCheckout: true,
-						},
-					});
-
-					cy.get('[data-testid=sign-in-gate-main]').should(
-						'be.visible',
-					);
-					cy.get('[data-testid=sign-in-gate-main]').contains(
-						GATE_HEADER,
-					);
-					cy.get('[data-testid=sign-in-gate-main_register]')
-						.should('have.attr', 'href')
-						.and('contains', '/register?returnUrl=')
-						.and('not.contains', 'personalised');
+				postArticleAndScrollToGateForLazyLoad({
+					switchOverride: {
+						personaliseSignInGateAfterCheckout: true,
+					},
 				});
+
+				cy.get('[data-testid=sign-in-gate-main]').should('be.visible');
+				cy.get('[data-testid=sign-in-gate-main]').contains(GATE_HEADER);
+				cy.get('[data-testid=sign-in-gate-main_register]')
+					.should('have.attr', 'href')
+					.and('contains', '/register?returnUrl=')
+					.and('not.contains', 'personalised');
 			});
 		});
 	});

@@ -740,6 +740,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											tags={article.tags}
 											renderAds={renderAds}
 											isLabs={isLabs}
+											articleEndSlot={
+												!!article.config.switches
+													.articleEndSlot
+											}
 										/>
 									</Island>
 								)}
@@ -875,6 +879,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						sectionId="comments"
 						data-print-layout="hide"
 						element="section"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}

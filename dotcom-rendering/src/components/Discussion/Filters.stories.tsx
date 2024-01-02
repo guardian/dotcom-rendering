@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { FilterOptions } from '../../types/discussion';
 import { Filters } from './Filters';
 
@@ -13,11 +14,6 @@ export const Default = () => {
 	});
 	return (
 		<Filters
-			format={{
-				theme: Pillar.Culture,
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-			}}
 			filters={filters}
 			onFilterChange={setFilters}
 			totalPages={5}
@@ -26,3 +22,12 @@ export const Default = () => {
 	);
 };
 Default.storyName = 'default';
+Default.decorators = [
+	splitTheme([
+		{
+			theme: Pillar.Culture,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+	]),
+];

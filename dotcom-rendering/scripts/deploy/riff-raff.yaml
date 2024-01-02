@@ -10,7 +10,7 @@ templates:
       amiEncrypted: true
       amiTags:
         # Keep the Node version in sync with `.nvmrc`
-        Recipe: dotcom-rendering-ARM-jammy-node-18.18.2-v2
+        Recipe: dotcom-rendering-ARM-jammy-node-18.18.2-cdk-base
         AmigoStage: PROD
 deployments:
   frontend-cfn:
@@ -26,6 +26,8 @@ deployments:
     type: autoscaling
     parameters:
       bucketSsmKey: /account/services/dotcom-artifact.bucket
+      # Default is 900 (15 mins), this is 25 mins
+      secondsToWait: 1500
     dependencies:
       - frontend-static
       - frontend-cfn
@@ -42,6 +44,8 @@ deployments:
     type: autoscaling
     parameters:
       bucketSsmKey: /account/services/dotcom-artifact.bucket
+      # Default is 900 (15 mins), this is 25 mins
+      secondsToWait: 1500
     dependencies:
       - frontend-static
       - front-web-cfn

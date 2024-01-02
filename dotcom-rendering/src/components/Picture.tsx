@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import React from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
 
@@ -22,6 +22,7 @@ type Props = {
 	isLazy?: boolean;
 	isLightbox?: boolean;
 	orientation?: Orientation;
+	onLoad?: () => void;
 };
 
 export type ImageWidthType = { breakpoint: number; width: number };
@@ -289,7 +290,7 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 		<>
 			{sources.map((source) => {
 				return (
-					<React.Fragment key={source.breakpoint}>
+					<Fragment key={source.breakpoint}>
 						{/* High resolution (HDPI) sources*/}
 						<source
 							srcSet={source.hiResUrl}
@@ -300,7 +301,7 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 							srcSet={source.lowResUrl}
 							media={`(min-width: ${source.breakpoint}px)`}
 						/>
-					</React.Fragment>
+					</Fragment>
 				);
 			})}
 		</>
@@ -318,7 +319,21 @@ export const Picture = ({
 	isLazy = true,
 	isLightbox = false,
 	orientation = 'landscape',
+	onLoad,
 }: Props) => {
+	const [loaded, setLoaded] = useState(false);
+	const ref = useCallback((node: HTMLImageElement) => {
+		if (node.complete) {
+			setLoaded(true);
+		} else {
+			node.addEventListener('load', () => setLoaded(true));
+		}
+	}, []);
+
+	useEffect(() => {
+		if (loaded && onLoad) onLoad();
+	}, [loaded, onLoad]);
+
 	const sources = generateSources(
 		master,
 		decideImageWidths({
@@ -383,6 +398,7 @@ export const Picture = ({
 			)}
 			<Sources sources={sources} />
 			<img
+				ref={ref}
 				alt={alt}
 				src={fallbackSource.lowResUrl}
 				width={fallbackSource.width}

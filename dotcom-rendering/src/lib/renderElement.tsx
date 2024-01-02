@@ -212,7 +212,11 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ChartAtom id={element.id} html={element.html} />
+					<ChartAtom
+						id={element.id}
+						html={element.html}
+						title={element.title}
+					/>
 				</Island>
 			);
 
@@ -317,7 +321,6 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						format={format}
 					/>
 				</Island>
 			);
@@ -380,6 +383,7 @@ export const renderElement = ({
 					elementJs={element.js}
 					elementCss={element.css}
 					format={format}
+					title={element.title}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement': {
@@ -480,7 +484,6 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						format={format}
 					/>
 				</Island>
 			);
@@ -503,7 +506,6 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						format={format}
 					/>
 				</Island>
 			);
@@ -601,7 +603,6 @@ export const renderElement = ({
 					<TimelineAtom
 						id={element.id}
 						title={element.title}
-						format={format}
 						events={element.events}
 						description={element.description}
 					/>

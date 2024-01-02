@@ -13,7 +13,6 @@ import {
 	palette,
 	specialReport,
 	sport,
-	text,
 } from '@guardian/source-foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
@@ -447,10 +446,6 @@ const textDateLine = (format: ArticleFormat): string => {
 	return neutral[46];
 };
 
-const textNumberedPosition = (): string => {
-	return text.supporting;
-};
-
 const textFilterButton = (): string => neutral[7];
 
 const textFilterButtonHover = (): string => neutral[100];
@@ -508,27 +503,6 @@ const backgroundDesignTag = (format: ArticleFormat): string => {
 	}
 };
 
-const backgroundAudioAtom = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Lifestyle:
-			return lifestyle[400];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Culture:
-			return culture[400];
-		case Pillar.Opinion:
-			return opinion[400];
-		case ArticleSpecial.Labs:
-			return lifestyle[400];
-		case ArticleSpecial.SpecialReport:
-			return news[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
 const textExpandableAtom = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -571,29 +545,6 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
-const discussion = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[400];
-		case Pillar.Lifestyle:
-			return lifestyle[400];
-		case Pillar.Sport:
-			return sport[400];
-		case Pillar.Culture:
-			return culture[400];
-		case Pillar.Opinion:
-			return opinion[400];
-		case ArticleSpecial.Labs:
-			return lifestyle[400];
-		case ArticleSpecial.SpecialReport:
-			return news[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-		default:
-			return news[400];
-	}
-};
-
 const textYoutubeOverlayKicker = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -631,7 +582,6 @@ export const decidePalette = (
 			standfirstLink: textStandfirstLink(format),
 			lastUpdated: textLastUpdated(format),
 			disclaimerLink: textDisclaimerLink(format),
-			numberedPosition: textNumberedPosition(),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			filterButton: textFilterButton(),
 			filterButtonHover: textFilterButtonHover(),
@@ -646,7 +596,6 @@ export const decidePalette = (
 		background: {
 			analysisContrast: backgroundAnalysisContrastColour(),
 			analysisContrastHover: backgroundAnalysisContrastHoverColour(),
-			audioAtom: backgroundAudioAtom(format),
 			bullet: backgroundBullet(format),
 			bulletStandfirst: backgroundBulletStandfirst(format),
 			imageTitle: backgroundImageTitle(format),
@@ -681,6 +630,5 @@ export const decidePalette = (
 		hover: {
 			standfirstLink: hoverStandfirstLink(format),
 		},
-		discussionGeneric: discussion(format),
 	};
 };

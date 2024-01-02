@@ -13,6 +13,7 @@ type Props = {
 const titleStyles = css`
 	h2 {
 		${headline.medium({ fontWeight: 'light' })}
+		color: ${themePalette('--numbered-list-heading')}
 	}
 
 	strong {
@@ -25,7 +26,7 @@ const titleStyles = css`
 const numberStyles = (palette: Palette) => css`
 	${headline.large({ fontWeight: 'bold' })}
 	font-size: 56px;
-	color: ${palette.text.numberedPosition};
+	color: ${themePalette('--numbered-list-number')};
 `;
 
 export const NumberedTitleBlockComponent = ({

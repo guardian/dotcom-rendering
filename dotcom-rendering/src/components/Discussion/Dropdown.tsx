@@ -1,20 +1,18 @@
 import { css } from '@emotion/react';
 import {
-	background,
 	from,
 	palette as sourcePalette,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { palette as schemedPalette } from '../../palette';
 import type { DropdownOptionType } from '../../types/discussion';
 
 type Props = {
 	id: string;
 	label: string;
 	options: DropdownOptionType[];
-	format: ArticleFormat;
 	onSelect: (value: string) => void;
 };
 
@@ -29,7 +27,7 @@ const ulStyles = css`
 	margin-left: -8px;
 	padding: 0px;
 	display: none;
-	background-color: ${background.primary};
+	background-color: ${sourcePalette.neutral[100]};
 
 	position: absolute;
 
@@ -82,12 +80,12 @@ const firstStyles = css`
 	margin-top: 0;
 `;
 
-const activeStyles = (format: ArticleFormat) => css`
+const activeStyles = css`
 	font-weight: bold;
 
 	:after {
 		content: '';
-		border: 2px solid ${decidePalette(format).discussionGeneric};
+		border: 2px solid ${schemedPalette('--discussion-colour')};
 		border-top: 0px;
 		border-right: 0px;
 		position: absolute;
@@ -107,7 +105,7 @@ const buttonStyles = css`
 	border: none;
 	/* Design System: The buttons should be components that handle their own layout using primitives  */
 	line-height: 1.2;
-	color: ${sourcePalette.neutral[46]};
+	color: ${schemedPalette('--discussion-subdued')};
 	transition: color 80ms ease-out;
 	padding: 0px 10px 6px 0px;
 	margin: 1px 0 0;
@@ -147,10 +145,10 @@ const expandedStyles = css`
 
 const labelStyles = css`
 	${textSans.small({ fontWeight: 'bold' })};
-	color: ${sourcePalette.neutral[46]};
+	color: ${schemedPalette('--discussion-subdued')};
 `;
 
-export const Dropdown = ({ id, label, options, format, onSelect }: Props) => {
+export const Dropdown = ({ id, label, options, onSelect }: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	useEffect(() => {
@@ -207,7 +205,7 @@ export const Dropdown = ({ id, label, options, format, onSelect }: Props) => {
 							onClick={() => onSelect(option.value)}
 							css={[
 								linkStyles(!!option.disabled),
-								option.isActive && activeStyles(format),
+								option.isActive && activeStyles,
 								index === 0 && firstStyles,
 							]}
 							disabled={!!option.isActive || !!option.disabled}

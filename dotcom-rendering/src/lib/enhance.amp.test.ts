@@ -8,6 +8,7 @@ const getData = (): InteractiveAtomBlockElement => ({
 	id: 'socrates-abc',
 	js: '',
 	html: '',
+	title: 'Socrate’s ABC',
 });
 
 describe('Enhance interactive atoms for AMP', () => {

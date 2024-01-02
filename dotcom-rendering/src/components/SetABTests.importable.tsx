@@ -36,7 +36,7 @@ export const SetABTests = ({
 	forcedTestVariants,
 }: Props) => {
 	const { renderingTarget } = useConfig();
-	const [ophan, setOphan] = useState<typeof window.guardian.ophan>();
+	const [ophan, setOphan] = useState<Awaited<ReturnType<typeof getOphan>>>();
 
 	useEffect(() => {
 		getOphan(renderingTarget)

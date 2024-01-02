@@ -1,20 +1,18 @@
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import { neutral, space } from '@guardian/source-foundations';
-import { SvgPlus } from '@guardian/source-react-components';
-import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
+import { palette, space } from '@guardian/source-foundations';
+import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { getCommentContext } from '../lib/getCommentContext';
-import { isServer } from '../lib/isServer';
 import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
+import { palette as themePalette } from '../palette';
 import type { SignedInUser } from '../types/discussion';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
 
 export type Props = {
-	format: ArticleFormat;
 	discussionApiUrl: string;
 	shortUrlId: string;
 	discussionD2Uid: string;
@@ -27,8 +25,8 @@ export type Props = {
 const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
-		${neutral[100]},
-		${neutral[100]} 40%,
+		${themePalette('--article-section-background')},
+		${themePalette('--article-section-background')} 40%,
 		rgba(255, 255, 255, 0)
 	);
 	height: 80px;
@@ -50,8 +48,6 @@ const positionRelative = css`
 `;
 
 const commentIdFromUrl = () => {
-	if (typeof window === 'undefined') return;
-
 	const { hash } = window.location;
 	if (!hash.includes('comment')) return;
 
@@ -62,7 +58,6 @@ const commentIdFromUrl = () => {
 };
 
 export const Discussion = ({
-	format,
 	discussionApiUrl,
 	shortUrlId,
 	discussionD2Uid,
@@ -85,10 +80,7 @@ export const Discussion = ({
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
 
-	const hasCommentsHash = !isServer && window.location.hash === '#comments';
-
 	const handlePermalink = (commentId: number) => {
-		if (isServer) return false;
 		window.location.hash = `#comment-${commentId}`;
 		// Put this comment id into the hashCommentId state which will
 		// trigger an api call to get the comment context and then expand
@@ -98,7 +90,6 @@ export const Discussion = ({
 	};
 
 	const dispatchCommentsExpandedEvent = () => {
-		if (isServer) return;
 		const event = new CustomEvent('comments-expanded');
 		document.dispatchEvent(event);
 	};
@@ -122,13 +113,12 @@ export const Discussion = ({
 	}, [discussionApiUrl, hashCommentId]);
 
 	useEffect(() => {
-		if (hasCommentsHash) {
+		if (window.location.hash === '#comments') {
 			setIsExpanded(true);
 		}
-	}, [hasCommentsHash]);
+	}, []);
 
 	useEffect(() => {
-		if (isServer) return;
 		const pendingElements = document.querySelectorAll<HTMLElement>(
 			'.discussion > .pending',
 		);
@@ -170,7 +160,6 @@ export const Discussion = ({
 					<Comments
 						user={user}
 						baseUrl={discussionApiUrl}
-						format={format}
 						initialPage={commentPage}
 						pageSizeOverride={commentPageSize}
 						isClosedForComments={
@@ -197,16 +186,29 @@ export const Discussion = ({
 				</div>
 			</div>
 			{!isExpanded && (
-				<EditorialButton
-					format={format}
+				<Button
 					onClick={() => {
 						setIsExpanded(true);
 						dispatchCommentsExpandedEvent();
 					}}
 					icon={<SvgPlus />}
+					cssOverrides={css`
+						background-color: ${themePalette(
+							'--discussion-primary-button-background',
+						)};
+						border: 1px solid currentColor;
+						:hover {
+							background-color: ${themePalette(
+								'--discussion-button-hover',
+							)};
+							border: 1px solid
+								${themePalette('--discussion-button-hover')};
+							color: ${palette.neutral[100]};
+						}
+					`}
 				>
 					View more comments
-				</EditorialButton>
+				</Button>
 			)}
 		</>
 	);

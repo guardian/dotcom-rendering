@@ -7,7 +7,6 @@ export type Palette = {
 		standfirstLink: Colour;
 		lastUpdated: Colour;
 		disclaimerLink: Colour;
-		numberedPosition: Colour;
 		cricketScoreboardLink: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
@@ -22,7 +21,6 @@ export type Palette = {
 	background: {
 		analysisContrast: Colour;
 		analysisContrastHover: Colour;
-		audioAtom: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
 		imageTitle: Colour;
@@ -55,7 +53,6 @@ export type Palette = {
 	hover: {
 		standfirstLink: Colour;
 	};
-	discussionGeneric: Colour;
 };
 
 export type ContainerOverrides = {

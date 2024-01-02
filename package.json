@@ -43,7 +43,8 @@
 		"tslib": "2.6.2"
 	},
 	"resolutions": {
-		"crypto-js": "4.2.0"
+		"crypto-js": "4.2.0",
+		"uuid": "9.0.1"
 	},
 	"packageManager": "yarn@4.0.2"
 }
