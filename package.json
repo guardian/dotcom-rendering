@@ -36,7 +36,6 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"crypto-js": "4.2.0",
 			"uuid": "9.0.1"
 		}
 	},
