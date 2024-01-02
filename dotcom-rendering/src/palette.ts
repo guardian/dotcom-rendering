@@ -5461,7 +5461,7 @@ const paletteColours = {
 	'--interactive-contents-hover': {
 		light: interactiveContentsHoverLight,
 		dark: interactiveContentsHoverDark,
-  },
+	},
 	'--audio-atom-background': {
 		light: audioAtomBackgroundLight,
 		dark: audioAtomBackgroundDark,
