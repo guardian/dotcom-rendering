@@ -171,9 +171,15 @@ test.describe('Liveblogs', () => {
 			return matchLastUpdate;
 		});
 
+		const searchParams = new URLSearchParams([
+			['live', 'true'],
+			['page', 'with:block-6214732b8f08f86d89ef68d6'],
+			['filterKeyEvents', 'false'],
+		]);
+
 		await loadPage(
 			page,
-			`/Article/${blogUrl}?live=true&page=with:block-6214732b8f08f86d89ef68d6&filterKeyEvents=false#liveblog-navigation`,
+			`/Article/${blogUrl}?${searchParams.toString()}#liveblog-navigation`,
 		);
 
 		await lastUpdateRequestPromise;
@@ -182,10 +188,17 @@ test.describe('Liveblogs', () => {
 	test('should handle when the toast is clicked from the second page', async ({
 		page,
 	}) => {
+		const searchParams = new URLSearchParams([
+			['live', 'true'],
+			['page', 'with:block-6214732b8f08f86d89ef68d6'],
+			['filterKeyEvents', 'false'],
+		]);
+
 		await loadPage(
 			page,
-			`/Article/${blogUrl}?live=true&page=with:block-6214732b8f08f86d89ef68d6&filterKeyEvents=false#liveblog-navigation`,
+			`/Article/${blogUrl}?${searchParams.toString()}#liveblog-navigation`,
 		);
+
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
 		await page.evaluate(() =>
@@ -278,7 +291,7 @@ test.describe('Liveblogs', () => {
 
 		await loadPage(
 			page,
-			`/Article/https://theguardian.com/sport/live/2022/mar/27/west-indies-v-england-third-test-day-four-live?live`,
+			`/Article/https://theguardian.com/sport/live/2022/mar/27/west-indies-v-england-third-test-day-four-live?live=true`,
 		);
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
