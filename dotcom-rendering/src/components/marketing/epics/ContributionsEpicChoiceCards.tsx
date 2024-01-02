@@ -12,7 +12,7 @@ import type {
 	ContributionFrequency,
 	SelectedAmountsVariant,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import { contributionType } from '../lib/choiceCards';
 import type { ChoiceCardSelection } from '../lib/choiceCards';

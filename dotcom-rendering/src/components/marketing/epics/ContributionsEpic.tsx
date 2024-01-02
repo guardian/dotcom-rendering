@@ -42,7 +42,7 @@ import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
 import { ContributionsEpicTicker } from './ContributionsEpicTicker';
 // TODO - do we need this in DCR?
 // import { isValidApplePayWalletSession } from '../utils/applePay';
-import { OPHAN_COMPONENT_EVENT_APPLEPAY_AUTHORISED } from './utils/ophan';
+// import { OPHAN_COMPONENT_EVENT_APPLEPAY_AUTHORISED } from './utils/ophan';
 
 // CSS Styling
 // -------------------------------------------
@@ -493,7 +493,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					onReminderOpen={onReminderOpen}
 					fetchEmail={fetchEmail}
 					submitComponentEvent={submitComponentEvent}
-					showApplePayButton={showApplePayButton}
+					// showApplePayButton={showApplePayButton}
 					showChoiceCards={showChoiceCards}
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}

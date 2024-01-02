@@ -178,15 +178,8 @@ export const ReaderRevenueEpic = ({
 		)
 			.then((epicModule) => {
 				endPerformanceMeasure();
-				// @ts-expect-error -- currently the type of the props in the response is too general
 				setEpic(() => epicModule.ContributionsEpic);
 			})
-			// window
-			// 	.guardianPolyfilledImport(module.url)
-			// 	.then((epicModule: { ContributionsEpic: EpicType }) => {
-			// 		endPerformanceMeasure();
-			// 		setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
-			// 	})
 			.catch((error) => {
 				const msg =
 					error instanceof Error

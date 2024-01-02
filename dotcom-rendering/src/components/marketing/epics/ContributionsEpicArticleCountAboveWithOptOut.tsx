@@ -9,9 +9,11 @@ import { from, until } from '@guardian/source-foundations';
 import { palette, space } from '@guardian/source-foundations';
 import { body, textSans } from '@guardian/source-foundations';
 import { Button, ButtonLink } from '@guardian/source-react-components';
-import type { ArticleCountType } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import React, { useState } from 'react';
-import type { ArticleCounts } from '../../../lib/articleCount';
+import type {
+	ArticleCounts,
+	ArticleCountType,
+} from '@guardian/support-dotcom-components/dist/shared/src/types';
+import { useState } from 'react';
 import type { ReactComponent } from '../lib/ReactComponent';
 import {
 	OPHAN_COMPONENT_ARTICLE_COUNT_OPT_IN,
@@ -246,7 +248,7 @@ const CustomArticleCountCopy: ReactComponent<CustomArticleCountCopyProps> = ({
 		<div css={articleCountAboveContainerStyles}>
 			{copyHead}
 			<span css={optOutContainer}>{articleCount}&nbsp;articles</span>
-			{copyTail.substring(1, 9) === 'articles'
+			{copyTail?.substring(1, 9) === 'articles'
 				? copyTail.substring(9)
 				: copyTail}
 		</div>
