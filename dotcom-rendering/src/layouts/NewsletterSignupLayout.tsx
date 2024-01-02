@@ -34,7 +34,7 @@ import { NewsletterFrequency } from '../components/NewsletterFrequency';
 import { NewsletterPrivacyMessage } from '../components/NewsletterPrivacyMessage';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
-import { SecureSignup } from '../components/SecureSignup';
+import { SecureReCAPTCHASignup } from '../components/SecureReCAPTCHASignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
@@ -445,20 +445,19 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 										/>
 									</div>
 
-									<SecureSignup
-										name={promotedNewsletter.name}
-										newsletterId={
-											promotedNewsletter.identityName
-										}
-										successDescription={
-											promotedNewsletter.successDescription
-										}
-										hidePrivacyMessage={true}
-									/>
-
-									<Hide from="desktop">
-										<NewsletterPrivacyMessage />
-									</Hide>
+									<Island
+										priority="feature"
+										defer={{ until: 'idle' }}
+									>
+										<SecureReCAPTCHASignup
+											newsletterId={
+												promotedNewsletter.identityName
+											}
+											successDescription={
+												promotedNewsletter.successDescription
+											}
+										/>
+									</Island>
 								</>
 							)}
 						</Column>
