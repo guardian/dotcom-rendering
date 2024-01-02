@@ -12,9 +12,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 // that version will compile and render but is non-functional.
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
-import { isServer } from '../lib/isServer';
 import {
-	getCaptchaSiteKey,
 	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
@@ -125,7 +123,15 @@ const attributeToNumber = (
 	return numericValue;
 };
 
-export const ManyNewsletterSignUp = () => {
+type Props = {
+	useReCaptcha: boolean;
+	captchaSiteKey?: string;
+};
+
+export const ManyNewsletterSignUp = ({
+	useReCaptcha,
+	captchaSiteKey,
+}: Props) => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		{
 			/** unique identifier for the newsletter in kebab-case format */
@@ -137,10 +143,6 @@ export const ManyNewsletterSignUp = () => {
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
 	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
-	const useReCaptcha = isServer
-		? false
-		: !!window.guardian.config.switches['emailSignupRecaptcha'];
-	const captchaSiteKey = useReCaptcha ? getCaptchaSiteKey() : undefined;
 
 	const userCanInteract = status !== 'Success' && status !== 'Loading';
 	const { renderingTarget } = useConfig();
