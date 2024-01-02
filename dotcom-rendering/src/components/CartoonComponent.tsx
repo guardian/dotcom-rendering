@@ -27,6 +27,12 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 	);
 
 	const render = (image: Image) => {
+		const altText = `${element.alt ? `${element.alt}, ` : ''}panel ${
+			image.index + 1
+		}`;
+		const height = parseInt(image.fields.height, 10);
+		const width = parseInt(image.fields.width, 10);
+
 		return (
 			<>
 				{renderingTarget === 'Apps' ? (
@@ -36,11 +42,9 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 							role={element.role}
 							format={format}
 							master={image.url}
-							alt={`${
-								element.alt ? `${element.alt}, ` : ''
-							}panel ${image.index + 1}`}
-							height={parseInt(image.fields.height, 10)}
-							width={parseInt(image.fields.width, 10)}
+							alt={altText}
+							height={height}
+							width={width}
 							isLazy={true}
 							isMainMedia={true}
 						/>
@@ -50,11 +54,9 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 						master={image.url}
 						role={element.role}
 						format={format}
-						alt={`${element.alt ? `${element.alt}, ` : ''}panel ${
-							image.index + 1
-						}`}
-						height={parseInt(image.fields.height, 10)}
-						width={parseInt(image.fields.width, 10)}
+						alt={altText}
+						height={height}
+						width={width}
 						key={image.index}
 					/>
 				)}
