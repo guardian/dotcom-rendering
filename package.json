@@ -20,10 +20,6 @@
 		"prettier:write": "prettier --ignore-unknown --write --cache ."
 	},
 	"lint-staged": {
-		"dotcom-rendering/**/*.md": [
-			"pnpm --filter @guardian/dotcom-rendering createtoc",
-			"prettier --write"
-		],
 		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {

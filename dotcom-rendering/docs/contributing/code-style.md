@@ -1,23 +1,5 @@
 # Code style
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- Automatically created by running `pnpm createtoc` in a pre-commit hook -->
-
--   [TypeScript](#typescript)
-    -   [Always used named exports](#always-used-named-exports)
-    -   [Never name a file `index.ts` or `index.tsx`](#never-name-a-file-indexts-or-indextsx)
--   [Components](#components)
-    -   [Use Emotion's `css` function to build a class name from styles](#use-emotions-css-function-to-build-a-class-name-from-styles)
-    -   [Extract CSS into a variable rather than defining it inline in a component](#extract-css-into-a-variable-rather-than-defining-it-inline-in-a-component)
-    -   [Extract dynamic styles into a function that takes `props`](#extract-dynamic-styles-into-a-function-that-takes-props)
-    -   [Define CSS using template literals rather than objects](#define-css-using-template-literals-rather-than-objects)
-    -   [Never define styles with more than one level of nesting](#never-define-styles-with-more-than-one-level-of-nesting)
-    -   [Prefer `cx` for style composition](#prefer-cx-for-style-composition)
-    -   [Do not use React.FC or equivalent](#do-not-use-reactfc-or-equivalent)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## TypeScript
 
 We use ESlint and [Prettier](https://prettier.io/) to enforce our TypeScript code style.
