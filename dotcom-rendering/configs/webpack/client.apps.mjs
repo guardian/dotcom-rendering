@@ -13,7 +13,8 @@ import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import { merge } from 'webpack-merge';
 import { base } from './base.mjs';
 
-export default merge(base(import.meta.url), {
+/** @type {import("webpack").Configuration} */
+export const apps = {
 	entry: {
 		index: './src/client/main.apps.ts',
 		debug: './src/client/debug/debug.ts',
@@ -91,4 +92,6 @@ export default merge(base(import.meta.url), {
 	// because we never expect to use it in apps pages.
 	// Tracking is done natively.
 	externals: { 'ophan-tracker-js': 'ophan-tracker-js' },
-});
+};
+
+export default merge(base(import.meta.url), apps);

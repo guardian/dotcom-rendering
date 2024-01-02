@@ -1,6 +1,8 @@
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { isObject, isString, isUndefined } from '@guardian/libs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { isObject, isString, joinUrl } from '@guardian/libs';
+import type { bundles } from '../../configs/webpack/manifest.bundles.mjs';
 import { BUILD_VARIANT, dcrJavascriptBundle } from '../../webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
 import { makeMemoizedFunction } from './memoize';
@@ -8,6 +10,13 @@ import { makeMemoizedFunction } from './memoize';
 interface AssetHash {
 	[key: string]: string;
 }
+
+const DIST = resolve(
+	dirname(fileURLToPath(import.meta.url)),
+	'..',
+	'..',
+	'dist',
+);
 
 /**
  * Decides the url to use for fetching assets
@@ -25,13 +34,12 @@ export const decideAssetOrigin = (
 		case 'CODE':
 			return 'https://assets-code.guim.co.uk/';
 		default: {
-			if (isDev && isUndefined(process.env.HOSTNAME)) {
-				// Use absolute asset paths in development mode
-				// This is so paths are correct when treated as relative to Frontend
-				return 'http://localhost:3030/';
-			} else {
-				return '/';
+			// This is so paths are correct when treated as relative to Frontend
+			if (process.env.HOSTNAME && process.env.HOSTNAME.length > 0) {
+				return `//${process.env.HOSTNAME}/`;
 			}
+
+			return isDev ? 'http://localhost:3030/' : 'http://localhost:9000/';
 		}
 	}
 };
@@ -63,12 +71,10 @@ const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	}
 });
 
-export type Build = 'apps' | 'web' | 'web.variant' | 'web.legacy';
+export type Build = (typeof bundles)[number];
 
-type ManifestPath = `./manifest.${Build}.json`;
-
-const getManifestPath = (build: Build): ManifestPath =>
-	`./manifest.${build}.json`;
+const getManifestPath = (build: Build): string =>
+	resolve(DIST, build, 'manifest.json');
 
 export const getPathFromManifest = (
 	build: Build,
@@ -78,10 +84,7 @@ export const getPathFromManifest = (
 		throw new Error('Invalid filename: extension must be .js');
 
 	if (isDev) {
-		return `${ASSET_ORIGIN}assets/${filename.replace(
-			'.js',
-			`.${build}.js`,
-		)}`;
+		return joinUrl(ASSET_ORIGIN, 'assets', build, filename);
 	}
 
 	const manifest = getManifest(getManifestPath(build));
@@ -91,7 +94,7 @@ export const getPathFromManifest = (
 		throw new Error(`Missing manifest for ${filename}`);
 	}
 
-	return `${ASSET_ORIGIN}assets/${filenameFromManifest}`;
+	return joinUrl(ASSET_ORIGIN, filenameFromManifest);
 };
 
 /**
@@ -102,12 +105,12 @@ export const getPathFromManifest = (
  * and stripped query parameters.
  */
 const getScriptRegex = (build: Build) =>
-	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
+	new RegExp(`\\/assets\\/${build}\\/\\w+\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
-export const WEB = getScriptRegex('web');
-export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');
-export const WEB_LEGACY_SCRIPT = getScriptRegex('web.legacy');
-export const APPS_SCRIPT = getScriptRegex('apps');
+export const WEB = getScriptRegex('client.web');
+export const WEB_VARIANT_SCRIPT = getScriptRegex('client.web.variant');
+export const WEB_LEGACY_SCRIPT = getScriptRegex('client.web.legacy');
+export const APPS_SCRIPT = getScriptRegex('client.apps');
 
 export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {
@@ -133,9 +136,9 @@ export const getModulesBuild = ({
 }: {
 	tests: ServerSideTests;
 	switches: Switches;
-}): Exclude<Extract<Build, `web${string}`>, 'web.legacy'> => {
+}): Exclude<Extract<Build, `client.web${string}`>, 'client.web.legacy'> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
-		return 'web.variant';
+		return 'client.web.variant';
 	}
-	return 'web';
+	return 'client.web';
 };

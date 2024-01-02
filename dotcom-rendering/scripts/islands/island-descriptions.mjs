@@ -11,7 +11,15 @@ import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 import * as zod from 'zod';
 
-const dir = resolve(fileURLToPath(import.meta.url), '../../../dist/stats');
+const dir = resolve(
+	fileURLToPath(import.meta.url),
+	'..',
+	'..',
+	'..',
+	'dist',
+	'client.web',
+	'stats',
+);
 
 /**
  * This regex is dynamic so we can find the precise JSDoc for
@@ -30,7 +38,11 @@ const getRegExForIsland = (name) =>
 
 const componentsDirectory = resolve(
 	fileURLToPath(import.meta.url),
-	'../../../src/components',
+	'..',
+	'..',
+	'..',
+	'src',
+	'components',
 );
 
 const chunk = zod.object({
@@ -43,7 +55,7 @@ const chunk = zod.object({
 
 /** Sorted by gzipSize */
 const getBundleReport = () =>
-	readFile(resolve(dir, 'client.web-bundles.json'), 'utf-8')
+	readFile(resolve(dir, 'bundles.json'), 'utf-8')
 		.then((bundle_data) => zod.array(chunk).parse(JSON.parse(bundle_data)))
 		.then((report) => report.sort((a, b) => b.gzipSize - a.gzipSize));
 

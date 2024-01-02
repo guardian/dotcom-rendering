@@ -1,3 +1,5 @@
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
@@ -41,6 +43,14 @@ const logRenderTime = responseTime(
 	},
 );
 
+/** When the prod server is running, it is in dist/server/main.js */
+const DIST = resolve(
+	dirname(fileURLToPath(import.meta.url)),
+	'..',
+	'..',
+	'dist',
+);
+
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
@@ -56,9 +66,11 @@ export const prodServer = (): void => {
 
 	// if running prod server locally, serve local assets
 	if (!process.env.GU_PUBLIC) {
-		app.use('/static/frontend', express.static(__dirname));
+		console.log({ DIST });
 
-		app.use('/assets', express.static(__dirname));
+		app.use('/static/frontend', express.static(DIST));
+
+		app.use('/assets', express.static(DIST));
 	}
 
 	app.post('/Article', logRenderTime, handleArticle);
@@ -197,3 +209,7 @@ export const prodServer = (): void => {
 
 	console.log(`Started production server on port ${port}\nready`);
 };
+
+if (process.env.NODE_ENV === 'production') {
+	prodServer();
+}

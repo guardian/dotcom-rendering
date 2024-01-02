@@ -33,14 +33,14 @@ riffraff-bundle: clean-dist build cdk-synth
 
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./webpack/webpack.config.js --progress
+	@NODE_ENV=production pnpm webpack --progress
 	$(call log, "generating Islands report card")
 	@node ./scripts/islands/island-descriptions.mjs
 
 prod:
 	@echo 'starting PROD server...'
 	@echo '' # just a spacer
-	NODE_ENV=production node dist/server.js
+	NODE_ENV=production node dist/server/main.js
 
 ci: export DISABLE_LOGGING_AND_METRICS = true
 ci: prod
@@ -49,20 +49,20 @@ ci: prod
 
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development webpack serve --config ./webpack/webpack.config.js
+	@NODE_ENV=development pnpm webpack serve --config ./configs/webpack/server.dev.mjs
 
 dev-variant: clear clean-dist install
-	$(call log, "starting DEV server")
-	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./webpack/webpack.config.js
+	$(call log, "starting DEV server with variant bundle")
+	@NODE_ENV=development WEB_BUNDLE=variant pnpm webpack serve --config ./configs/webpack/server.dev.mjs
 
 dev-legacy: clear clean-dist install
-	$(call log, "starting DEV server")
-	@NODE_ENV=development BUILD_LEGACY=true webpack serve --config ./webpack/webpack.config.js
+	$(call log, "starting DEV server with legacy bundle")
+	@NODE_ENV=development WEB_BUNDLE=legacy pnpm webpack serve --config ./configs/webpack/server.dev.mjs
 
 dev-debug: clear clean-dist install
 	$(call log, "starting DEV server and debugger")
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
-	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./webpack/webpack.config.js
+	@NODE_ENV=development NODE_OPTIONS="--inspect" pnpm webpack serve --config ./configs/webpack/server.dev.mjs
 
 # storybook #########################################
 
@@ -74,19 +74,19 @@ storybook-dev: clear clean-dist install
 
 cypress: clear clean-dist install build
 	$(call log, "starting PROD server for Cypress")
-	@NODE_ENV=production NODE_OPTIONS="--max-old-space-size=8192" DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
+	@NODE_ENV=production NODE_OPTIONS="--max-old-space-size=8192" DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server/main.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 cypress-open: clear clean-dist install build
 	$(call log, "starting PROD server and opening Cypress")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress open --e2e --browser electron'
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server/main.js' 9000 'cypress open --e2e --browser electron'
 
 playwright: clear clean-dist install build
 	$(call log, "starting PROD server for Playwright")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'playwright test'
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server/main.js' 9000 'playwright test'
 
 playwright-open: clear clean-dist install build
 	$(call log, "starting PROD server and opening Playwright")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'playwright test --ui'
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server/main.js' 9000 'playwright test --ui'
 
 ampValidation: clean-dist install
 	$(call log, "starting AMP Validation test")

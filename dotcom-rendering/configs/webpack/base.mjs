@@ -34,14 +34,14 @@ export const base = (name) => {
 		output: {
 			filename: ({ chunk }) =>
 				isProd &&
-				// We don't want to hash the debug script so it can be used in
-				// bookmarklets
-				chunk.name !== 'debug'
+				// We don't want to hash the debug script
+				// so it can be used in bookmarklets
+				chunk?.name !== 'debug'
 					? `[name].[chunkhash].js`
 					: `[name].js`,
 			chunkFilename: isProd ? `[name].[chunkhash].js` : `[name].js`,
 			path: DIST,
-			publicPath: '',
+			publicPath: `/assets/${bundleName}/`,
 		},
 		stats: isProd ? 'normal' : 'errors-only',
 		devtool: isProd ? 'source-map' : 'eval-cheap-module-source-map',

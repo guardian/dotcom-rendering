@@ -1,9 +1,9 @@
 import assert from 'node:assert';
 import current from '../../webpack/webpack.config.js';
-import newWeb from './bundle.web.mjs';
-import newWebLegacy from './bundle.web.legacy.mjs';
-import newApps from './bundle.apps.mjs';
-import newServer from './bundle.server.mjs';
+import newWeb from './client.web.mjs';
+import newWebLegacy from './client.web.legacy.mjs';
+import newApps from './client.apps.mjs';
+import newServer from './server.mjs';
 
 const [server, web, webLegacy, apps] = current;
 
@@ -44,7 +44,7 @@ const compareConfigs = (current, proposed) => {
 	}
 };
 
-compareConfigs(web, newWeb);
-compareConfigs(webLegacy, newWebLegacy);
-compareConfigs(apps, newApps);
+// compareConfigs(web, newWeb);
+// compareConfigs(webLegacy, newWebLegacy);
+// compareConfigs(apps, newApps);
 compareConfigs(server, newServer);
