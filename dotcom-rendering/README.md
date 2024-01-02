@@ -145,7 +145,13 @@ See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/dotcom
 
 ### Vulnerabilities
 
-To check for vulnerabilities, use the Github code scanning feature in the security tab. This will list all vulnerabilities for a given branch etc. You should use this if adding/removing/updating packages to see if there are any vulnerabilities.
+#### Dependabot
+
+To monitor vulnerabilities from GitHub, you can use [Dependabot alerts in the security tab](https://github.com/guardian/dotcom-rendering/security/dependabot).
+
+#### `pnpm audit`
+
+To check for vulnerabilities in development, you can run `pnpm audit`.
 
 ## IDE setup
 
