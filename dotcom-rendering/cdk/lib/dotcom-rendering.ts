@@ -291,20 +291,20 @@ export class DotcomRendering extends GuStack {
 		// 	scalingAdjustment: -1,
 		// });
 
-		const latencyHighAlarm = new Alarm(this, 'HighLatency', {
+		const latencyHighAlarm = new Alarm(this, 'HighLatencyAlarm', {
 			actionsEnabled: true,
 			alarmDescription: 'Latency alarm for autoscaling',
 			threshold: 0.2,
 			comparisonOperator: ComparisonOperator.GREATER_THAN_THRESHOLD,
 			datapointsToAlarm: 2,
-			evaluationPeriods: 30,
+			evaluationPeriods: 3,
 			metric: new Metric({
 				dimensionsMap: {
 					AutoScalingGroupName: asg.autoScalingGroupName,
 				},
 				metricName: 'Latency',
 				namespace: 'AWS/ELB',
-				period: Duration.seconds(1),
+				period: Duration.seconds(10),
 				statistic: 'Average',
 			}),
 

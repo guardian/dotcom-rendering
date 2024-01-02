@@ -485,7 +485,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "HighLatencyBDC1CAA1": {
+    "HighLatencyAlarm61213652": {
       "Properties": {
         "ActionsEnabled": true,
         "AlarmActions": [
@@ -504,7 +504,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             },
           },
         ],
-        "EvaluationPeriods": 30,
+        "EvaluationPeriods": 3,
         "MetricName": "Latency",
         "Namespace": "AWS/ELB",
         "OKActions": [
@@ -512,7 +512,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Ref": "ScaleDown2D6349BF",
           },
         ],
-        "Period": 1,
+        "Period": 10,
         "Statistic": "Average",
         "Threshold": 0.2,
         "TreatMissingData": "missing",
