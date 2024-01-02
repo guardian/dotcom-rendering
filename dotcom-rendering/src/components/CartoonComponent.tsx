@@ -35,6 +35,7 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 					height={parseInt(image.fields.height, 10)}
 					width={parseInt(image.fields.width, 10)}
 					key={image.index}
+					loading="lazy"
 				/>
 				{switches?.lightbox === true &&
 					isWideEnough(image) &&
