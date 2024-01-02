@@ -1,16 +1,5 @@
 # How-tos
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- Automatically created by running `pnpm createtoc` in a pre-commit hook -->
-
--   [How can I add to this document?](#how-can-i-add-to-this-document)
--   [How can I add client-side JavaScript?](#how-can-i-add-client-side-javascript)
--   [How can I create an 'island' in DCR?](#how-can-i-create-an-island-in-dcr)
--   [How to fetch external data on the client?](#how-to-fetch-external-data-on-the-client)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## How can I add to this document?
 
 We welcome additions and corrections! If you want to add a task that you know

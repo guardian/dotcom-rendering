@@ -2,31 +2,6 @@
 
 Frontend rendering framework for theguardian.com. It uses [React](https://reactjs.org/), with [Emotion](https://emotion.sh) for styling.
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- Automatically created by running `pnpm createtoc` in a pre-commit hook -->
-
--   [Quick start](#quick-start)
-    -   [Install Node.js](#install-nodejs)
-    -   [Running instructions](#running-instructions)
-    -   [Environment Variables](#environment-variables)
-    -   [Detailed Setup](#detailed-setup)
-    -   [Technologies](#technologies)
-    -   [UI Design System](#ui-design-system)
-    -   [Concepts](#concepts)
-    -   [Visual Debugging](#visual-debugging)
-    -   [Feedback](#feedback)
--   [Dotcom Rendering now renders most articles and fronts in Production](#dotcom-rendering-now-renders-most-articles-and-fronts-in-production)
--   [Code Quality](#code-quality)
-    -   [Snyk Code Scanning](#snyk-code-scanning)
--   [IDE setup](#ide-setup)
-    -   [Extensions](#extensions)
-    -   [Commit hooks](#commit-hooks)
-    -   [Auto fix on save](#auto-fix-on-save)
--   [Thanks](#thanks)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## Quick start
 
 This guide will help you get the `dotcom-rendering` application running on your development machine.

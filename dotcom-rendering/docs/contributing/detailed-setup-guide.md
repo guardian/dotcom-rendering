@@ -1,23 +1,5 @@
 # Detailed setup guide
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- Automatically created by running `pnpm createtoc` in a pre-commit hook -->
-
--   [High level diagram](#high-level-diagram)
--   [Developing](#developing)
-    -   [Setup](#setup)
-        -   [Node.js](#nodejs)
-    -   [Start](#start)
-    -   [Previewing article on local](#previewing-article-on-local)
-    -   [Previewing AMP on local](#previewing-amp-on-local)
-    -   [Note on rebasing vs merging](#note-on-rebasing-vs-merging)
-    -   [Debugging tools](#debugging-tools)
-    -   [Running alongside identity](#running-alongside-identity)
--   [Production](#production)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## High level diagram
 
 This high level diagram shows the difference between the data flow when DCR is used in production, driven by the frontend backend, and when DCR is used as a local server. The arrows are labelled in the order they happen. The bold arrow is the JSON data object that DCR uses to generate the HTML document.
