@@ -280,32 +280,30 @@ export class DotcomRendering extends GuStack {
 		// 	scalingAdjustment: -1,
 		// });
 
+		const latencyMetric = new Metric({
+			metricName: 'Latency',
+			namespace: 'AWS/ELB',
+			period: Duration.minutes(1),
+			statistic: 'Average',
+		});
+
 		asg.scaleOnMetric('LatencyStepScalingPolicy', {
-			metric: new Metric({
-				metricName: 'Latency',
-				namespace: 'AWS/ELB',
-				period: Duration.minutes(1),
-			}),
+			metric: latencyMetric,
 			scalingSteps: [
 				{
 					lower: 0,
-					upper: 100,
+					upper: 0.2,
 					change: props.minCapacity,
 				},
 				{
-					lower: 100,
-					upper: 200,
-					change: props.minCapacity,
-				},
-				{
+					lower: 0.2,
+					upper: 0.3,
 					change: props.minCapacity + 3,
-					lower: 200,
-					upper: 300,
 				},
 				{
-					change: props.minCapacity + 6,
-					lower: 300,
+					lower: 0.3,
 					upper: undefined,
+					change: props.minCapacity + 6,
 				},
 			],
 			adjustmentType: AdjustmentType.EXACT_CAPACITY,

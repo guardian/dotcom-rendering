@@ -309,7 +309,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Namespace": "AWS/ELB",
         "Period": 60,
         "Statistic": "Average",
-        "Threshold": 200,
+        "Threshold": 0.2,
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
@@ -324,12 +324,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyType": "StepScaling",
         "StepAdjustments": [
           {
-            "MetricIntervalLowerBound": -100,
             "MetricIntervalUpperBound": 0,
-            "ScalingAdjustment": 1,
-          },
-          {
-            "MetricIntervalUpperBound": -100,
             "ScalingAdjustment": 1,
           },
         ],
@@ -350,7 +345,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Namespace": "AWS/ELB",
         "Period": 60,
         "Statistic": "Average",
-        "Threshold": 200,
+        "Threshold": 0.2,
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
@@ -366,11 +361,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "StepAdjustments": [
           {
             "MetricIntervalLowerBound": 0,
-            "MetricIntervalUpperBound": 100,
+            "MetricIntervalUpperBound": 0.09999999999999998,
             "ScalingAdjustment": 4,
           },
           {
-            "MetricIntervalLowerBound": 100,
+            "MetricIntervalLowerBound": 0.09999999999999998,
             "ScalingAdjustment": 7,
           },
         ],
