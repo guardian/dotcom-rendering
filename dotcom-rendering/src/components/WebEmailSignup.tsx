@@ -27,7 +27,7 @@ export const WebEmailSignUp = ({
 					successDescription={emailSignUpProps.description}
 				/>
 			</EmailSignup>
-			{emailSignUpProps.hidePrivacyMessage && (
+			{!emailSignUpProps.hidePrivacyMessage && (
 				<NewsletterPrivacyMessage />
 			)}
 		</InlineSkipToWrapper>
