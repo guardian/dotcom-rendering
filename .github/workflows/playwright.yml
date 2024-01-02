@@ -26,11 +26,11 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Install Playwright Browsers
-        run: yarn playwright install --with-deps chromium
+        run: pnpm playwright install --with-deps chromium
         working-directory: ./dotcom-rendering
 
       - name: Run Playwright
-        run: yarn playwright test parallel-${{ matrix.group }}
+        run: pnpm playwright test parallel-${{ matrix.group }}
         working-directory: ./dotcom-rendering
 
       - uses: actions/upload-artifact@v3

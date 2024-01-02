@@ -4,7 +4,7 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- Automatically created by running `yarn createtoc` in a pre-commit hook -->
+<!-- Automatically created by running `pnpm createtoc` in a pre-commit hook -->
 
 -   [Quick start](#quick-start)
     -   [Install Node.js](#install-nodejs)
@@ -55,7 +55,7 @@ corepack enable
 
 ### Running instructions
 
-Clone the repo, run `yarn` in the root, then CD into the `dotcom-rendering` subdirectory -
+Clone the repo, run `pnpm install --frozen-lockfile` in the root, then CD into the `dotcom-rendering` subdirectory -
 
 ```
 $ git clone git@github.com:guardian/dotcom-rendering.git
@@ -188,8 +188,8 @@ Staged changes are automatically prettified on commit. You can disable this by a
 
 To run the prettier check manually, run either of the following commands from the workspace root:
 
--   `yarn prettier:check` &rarr; Checks for prettier issues
--   `yarn prettier:write` &rarr; Checks and fixes prettier issues
+-   `pnpm prettier:check` &rarr; Checks for prettier issues
+-   `pnpm prettier:write` &rarr; Checks and fixes prettier issues
 
 ### Auto fix on save
 
