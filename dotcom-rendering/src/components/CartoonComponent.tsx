@@ -45,7 +45,7 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 							alt={altText}
 							height={height}
 							width={width}
-							isLazy={true}
+							loading="lazy"
 							isMainMedia={true}
 						/>
 					</Island>
@@ -58,6 +58,7 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 						height={height}
 						width={width}
 						key={image.index}
+						loading="lazy"
 					/>
 				)}
 

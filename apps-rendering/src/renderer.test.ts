@@ -539,7 +539,7 @@ describe('Transforms hrefs', () => {
 describe('Shows drop caps', () => {
 	const paragraph = new Array(50).fill('word').join(' ');
 	const isEditions = true;
-	const isFirstParagraph = true;
+	const positionAllowsDropCap = true;
 	const format = {
 		display: ArticleDisplay.Standard,
 		theme: ArticlePillar.Culture,
@@ -561,7 +561,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			unicodeLatin,
 			format,
-			isFirstParagraph,
+			positionAllowsDropCap,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(true);
@@ -573,7 +573,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			shortParagraph,
 			format,
-			isFirstParagraph,
+			positionAllowsDropCap,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(false);
@@ -583,7 +583,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			paragraph,
 			mockFormat,
-			isFirstParagraph,
+			positionAllowsDropCap,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(false);
@@ -593,7 +593,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			paragraph,
 			format,
-			isFirstParagraph,
+			positionAllowsDropCap,
 			isEditions,
 		);
 		expect(showDropCap).toBe(false);
@@ -603,7 +603,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			paragraph,
 			format,
-			!isFirstParagraph,
+			!positionAllowsDropCap,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(false);

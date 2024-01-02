@@ -35,7 +35,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { WeatherWrapper } from '../components/WeatherWrapper.importable';
-import { badgeFromBranding } from '../lib/branding';
+import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -319,16 +319,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
-					// Remove the branding from each of the cards in a paid content collection
-					const trailsWithoutBranding =
-						collection.collectionBranding?.kind === 'paid-content'
-							? trails.map((labTrail) => {
-									return {
-										...labTrail,
-										branding: undefined,
-									};
-							  })
-							: trails;
+					// Remove the branding from each of the cards in a paid content
+					// collection if they are the same.
+					const trailsWithoutBranding = isPaidContentSameBranding(
+						collection.collectionBranding,
+					)
+						? trails.map((labTrail) => ({
+								...labTrail,
+								branding: undefined,
+						  }))
+						: trails;
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
