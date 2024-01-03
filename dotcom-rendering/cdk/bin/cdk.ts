@@ -32,14 +32,14 @@ new DotcomRendering(cdkApp, 'DotcomRendering-CODE', {
 new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
 	guApp: 'article-rendering',
 	stage: 'CODE',
-	domainName: 'article-rendering.code.dev-gutools.co.uk',
+	domainName: 'article-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 	instanceSize: InstanceSize.MICRO,
 });
 new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	guApp: 'article-rendering',
 	stage: 'PROD',
-	domainName: 'article-rendering.gutools.co.uk',
+	domainName: 'article-rendering.guardianapis.com',
 	scaling: { minimumInstances: 27, maximumInstances: 120 },
 	instanceSize: InstanceSize.SMALL,
 });
@@ -48,14 +48,14 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 // new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
 // 	guApp: 'facia-rendering',
 // 	stage: 'CODE',
-//	domainName: 'facia-rendering.code.dev-gutools.co.uk',
+//	domainName: 'facia-rendering.code.dev-guardianapis.com',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 // 	instanceSize: InstanceSize.MICRO,
 // });
 // new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 // 	guApp: 'facia-rendering',
 // 	stage: 'PROD',
-//	domainName: 'facia-rendering.gutools.co.uk',
+//	domainName: 'facia-rendering.guardianapis.com',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 // 	instanceSize: InstanceSize.MICRO,
 // });
@@ -64,14 +64,14 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 // new RenderingCDKStack(cdkApp, 'MiscRendering-CODE', {
 // 	guApp: 'misc-rendering',
 // 	stage: 'CODE',
-//	domainName: 'misc-rendering.code.dev-gutools.co.uk',
+//	domainName: 'misc-rendering.code.dev-guardianapis.com',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 //  instanceSize: InstanceSize.MICRO,
 // });
 // new RenderingCDKStack(cdkApp, 'MiscRenderingPROD', {
 // 	guApp: 'misc-rendering',
 // 	stage: 'PROD',
-//	domainName: 'misc-rendering.gutools.co.uk',
+//	domainName: 'misc-rendering.guardianapis.com',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 //  instanceSize: InstanceSize.MICRO,
 // });
@@ -80,14 +80,14 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 // new RenderingCDKStack(cdkApp, 'InteractiveRendering-CODE', {
 // 	guApp: 'interactive-rendering',
 // 	stage: 'CODE',
-//	domainName: 'interactive-rendering.code.dev-gutools.co.uk',
+//	domainName: 'interactive-rendering.code.dev-guardianapis.com',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 //  instanceSize: InstanceSize.MICRO,
 // });
 // new RenderingCDKStack(cdkApp, 'InteractiveRenderingPROD', {
 // 	guApp: 'interactive-rendering',
 // 	stage: 'PROD',
-//	domainName: 'interactive-rendering.gutools.co.uk',
+//	domainName: 'interactive-rendering.guardianapis.com',
 // 	scaling: { minimumInstances: 1, maximumInstances: 2 },
 //  instanceSize: InstanceSize.MICRO,
 // });
