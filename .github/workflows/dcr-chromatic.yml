@@ -40,6 +40,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
           onlyChanged: true
-          untraced: '**/(package*.json|yarn.lock|preview.js)'
+          untraced: '**/(package*.json|pnpm-lock.yaml|preview.js)'
           workingDir: dotcom-rendering
           buildScriptName: 'build-storybook'

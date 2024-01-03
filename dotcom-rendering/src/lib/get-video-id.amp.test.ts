@@ -1,12 +1,17 @@
+import { ampYoutubeIdRegex } from '../components/VideoYoutubeBlockComponent.amp';
 import { getIdFromUrl } from './get-video-id.amp';
 
 describe('getIdFromUrl', () => {
 	it('Returns matching ID for YouTube formats', () => {
-		const youtubeRegEx = '^[a-zA-Z0-9_-]{11}$';
+		const youtubeRegEx = ampYoutubeIdRegex;
 
 		const formats = [
 			{
 				url: 'http://www.youtube.com/ytscreeningroom?v=NRHEIGHTx8I',
+				id: 'NRHEIGHTx8I',
+			},
+			{
+				url: 'http://www.youtube.com/ytscreeningroom?v=NRHEIGHTx8Ixyz',
 				id: 'NRHEIGHTx8I',
 			},
 			{

@@ -14,7 +14,7 @@
 		"titleBar.activeBackground": "#648FFF",
 		"titleBar.activeForeground": "#000000"
 	},
-	"jest.jestCommandLine": "yarn workspaces run test",
+	"jest.jestCommandLine": "pnpm -r run test",
 	"gitlens.advanced.blame.customArguments": [
 		"--ignore-revs-file",
 		".git-blame-ignore-revs"

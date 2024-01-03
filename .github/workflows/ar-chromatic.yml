@@ -39,7 +39,7 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          untraced: '**/(package*.json|yarn.lock|preview.js)'
+          untraced: '**/(package*.json|pnpm-lock.yaml|preview.js)'
           exitOnceUploaded: true
           onlyChanged: '!(main)' # only turbosnap on non-main branches
           workingDir: apps-rendering

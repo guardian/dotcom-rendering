@@ -60,6 +60,7 @@ describe('getTargetingParams', () => {
 			['edition', 'uk'],
 			['tn', 'news'],
 			['p', 'app'],
+			['rp', 'dotcom-rendering'],
 			['k', 'us-politics,state-of-georgia,us-crime,us-news,donaldtrump'],
 		]);
 

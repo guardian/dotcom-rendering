@@ -46,7 +46,7 @@ const textStyles = (textColor: 'supporting' | 'regular') => {
 	switch (textColor) {
 		case 'supporting':
 			return css`
-				color: ${sourcePalette.neutral[46]};
+				color: ${themePalette('--privacy-text-supporting-subdued')};
 				a,
 				strong {
 					color: ${themePalette('--privacy-text-supporting')};

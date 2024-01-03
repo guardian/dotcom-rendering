@@ -212,7 +212,11 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ChartAtom id={element.id} html={element.html} />
+					<ChartAtom
+						id={element.id}
+						html={element.html}
+						title={element.title}
+					/>
 				</Island>
 			);
 
@@ -379,6 +383,7 @@ export const renderElement = ({
 					elementJs={element.js}
 					elementCss={element.css}
 					format={format}
+					title={element.title}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement': {

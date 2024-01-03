@@ -69,8 +69,9 @@ export const enhanceCollections = ({
 			cards: allCards,
 			editionId,
 			isContainerBranding:
-				collection.config.metadata?.some((x) => x.type === 'Branded') ??
-				false,
+				collection.config.metadata?.some(
+					({ type }) => type === 'Branded',
+				) ?? false,
 		});
 
 		const containerPalette = decideContainerPalette(
