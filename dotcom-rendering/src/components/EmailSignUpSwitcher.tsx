@@ -2,7 +2,7 @@ import { AppEmailSignUp } from './AppEmailSignUp.importable';
 import { useConfig } from './ConfigContext';
 import type { EmailSignUpProps } from './EmailSignup';
 import { Island } from './Island';
-import { WebEmailSignUp } from './WebEmailSignup';
+import { WebEmailSignUp } from './WebEmailSignUp.importable';
 
 interface EmailSignUpSwitcherProps extends EmailSignUpProps {
 	index: number;
@@ -23,8 +23,8 @@ export const EmailSignUpSwitcher = ({
 			<AppEmailSignUp skipToIndex={index} {...emailSignUpProps} />
 		</Island>
 	) : (
-		<>
+		<Island priority="feature" defer={{ until: 'idle' }}>
 			<WebEmailSignUp index={index} {...emailSignUpProps} />
-		</>
+		</Island>
 	);
 };
