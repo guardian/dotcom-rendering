@@ -26,10 +26,10 @@ export const WebEmailSignUp = ({
 					newsletterId={emailSignUpProps.identityName}
 					successDescription={emailSignUpProps.description}
 				/>
+				{!emailSignUpProps.hidePrivacyMessage && (
+					<NewsletterPrivacyMessage />
+				)}
 			</EmailSignup>
-			{!emailSignUpProps.hidePrivacyMessage && (
-				<NewsletterPrivacyMessage />
-			)}
 		</InlineSkipToWrapper>
 	);
 };
