@@ -3,7 +3,7 @@ import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
-import { SecureReCAPTCHASignup } from './SecureReCAPTCHASignup';
+import { SecureSignup } from './SecureSignup';
 
 interface AppEmailSignupProps extends EmailSignUpProps {
 	skipToIndex: number;
@@ -29,7 +29,7 @@ export const AppEmailSignUp = ({
 			blockDescription="newsletter promotion"
 		>
 			<EmailSignup {...emailSignUpProps}>
-				<SecureReCAPTCHASignup
+				<SecureSignup
 					newsletterId={emailSignUpProps.identityName}
 					successDescription={emailSignUpProps.successDescription}
 				/>

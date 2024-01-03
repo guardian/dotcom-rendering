@@ -1,7 +1,7 @@
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
-import { SecureReCAPTCHASignup } from '../components/SecureReCAPTCHASignup';
+import { SecureSignup } from './SecureSignup';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
 interface WebEmailSignProps extends EmailSignUpProps {
@@ -22,7 +22,7 @@ export const WebEmailSignUp = ({
 			blockDescription="newsletter promotion"
 		>
 			<EmailSignup {...emailSignUpProps}>
-				<SecureReCAPTCHASignup
+				<SecureSignup
 					newsletterId={emailSignUpProps.identityName}
 					successDescription={emailSignUpProps.description}
 				/>

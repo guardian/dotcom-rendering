@@ -3,7 +3,7 @@ import { breakpoints } from '@guardian/source-foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { EmailSignup } from './EmailSignup';
 import { Section } from './Section';
-import { SecureReCAPTCHASignup } from './SecureReCAPTCHASignup';
+import { SecureSignup } from './SecureSignup';
 
 const withSectionWrapper = (Story: typeof NewsTheme) => (
 	<Section
@@ -53,7 +53,7 @@ export const Default = ({
 		frequency="Weekly"
 		theme="opinion"
 	>
-		<SecureReCAPTCHASignup
+		<SecureSignup
 			newsletterId="patriarchy"
 			successDescription="Reviewing the most important stories on feminism and sexism and those fighting for equality"
 		/>
@@ -71,7 +71,7 @@ export const NewsTheme = ({
 		frequency="Every weekday"
 		theme="news"
 	>
-		<SecureReCAPTCHASignup
+		<SecureSignup
 			newsletterId="morning-briefing"
 			successDescription="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
 		/>
@@ -89,7 +89,7 @@ export const IrregularFrequency = ({
 		frequency="Whenever a new film is available"
 		theme="features"
 	>
-		<SecureReCAPTCHASignup
+		<SecureSignup
 			newsletterId="documentaries"
 			successDescription="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
 		/>
