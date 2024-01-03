@@ -4,14 +4,19 @@ on:
   push:
     branches: [main]
   pull_request:
-    types: [opened, labeled, synchronize, ready_for_review]
+    types: [opened, labeled, synchronize]
 
 jobs:
   chromatic:
     name: Chromatic
     runs-on: ubuntu-latest
-    # Don't run Chromatic on draft PRs unless `run_chromatic` label has been applied.
-    if: (contains(github.event.pull_request.labels.*.name, 'run_chromatic') || github.event.pull_request.draft == false)
+    # Run Chromatic only if `run_chromatic` label has been applied or we're
+    # pushing to `main`. Skip if this is a Dependabot PR as this is handled
+    # by the subsequent job.
+    if: |
+      (contains(github.event.pull_request.labels.*.name, 'run_chromatic') ||  github.ref == 'refs/heads/main') &&
+      (!contains(github.event.pull_request.labels.*.name, 'dependencies') &&
+      github.event.pull_request.user.login != 'dependabot')
     steps:
       - name: Checkout - On Pull Request
         uses: actions/checkout@v4
