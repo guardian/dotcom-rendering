@@ -34,7 +34,7 @@ import { NewsletterFrequency } from '../components/NewsletterFrequency';
 import { NewsletterPrivacyMessage } from '../components/NewsletterPrivacyMessage';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
-import { SecureReCAPTCHASignup } from '../components/SecureReCAPTCHASignup';
+import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
@@ -449,7 +449,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 										priority="feature"
 										defer={{ until: 'idle' }}
 									>
-										<SecureReCAPTCHASignup
+										<SecureSignup
 											newsletterId={
 												promotedNewsletter.identityName
 											}
