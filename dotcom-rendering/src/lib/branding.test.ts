@@ -51,10 +51,11 @@ describe('decideCollectionBranding', () => {
 			editionId: 'UK',
 			isContainerBranding: false,
 		});
+
 		expect(collectionBranding).toStrictEqual({
 			kind: 'editorial',
 			badge: {
-				imageSrc: `/static/frontend/badges/EUReferendumBadge.svg`,
+				imageSrc: `http://localhost:9000/static/frontend/badges/EUReferendumBadge.svg`,
 				href: `/politics/series/road-to-the-vote`,
 			},
 		});

@@ -37,8 +37,12 @@ describe('decideAssetOrigin for stage', () => {
 		);
 	});
 	it('DEV', () => {
-		expect(decideAssetOrigin('DEV', false)).toEqual('/');
-		expect(decideAssetOrigin(undefined, false)).toEqual('/');
+		expect(decideAssetOrigin('DEV', false)).toEqual(
+			'http://localhost:9000/',
+		);
+		expect(decideAssetOrigin(undefined, false)).toEqual(
+			'http://localhost:9000/',
+		);
 		expect(decideAssetOrigin('DEV', true)).toEqual(
 			'http://localhost:3030/',
 		);
@@ -87,8 +91,8 @@ describe('regular expression to match files', () => {
 describe('getPathFromManifest', () => {
 	beforeEach(() => {
 		const assetHash = `{
-			"7305.js": "7305.8cdc05567d98ebd9f67e.js",
-			"356.js": "356.0a1bbdf8c7a5e5826b7c.js"
+			"7305.js": "/assets/client.web/7305.8cdc05567d98ebd9f67e.js",
+			"356.js": "/assets/client.web/356.0a1bbdf8c7a5e5826b7c.js"
 		}`;
 		(readFileSync as jest.Mock).mockReturnValue(assetHash);
 	});
@@ -99,13 +103,13 @@ describe('getPathFromManifest', () => {
 
 	it('returns correct hashed asset (1)', () => {
 		expect(getPathFromManifest('client.web', '7305.js')).toBe(
-			'/assets/client.web/7305.8cdc05567d98ebd9f67e.js',
+			'http://localhost:9000/assets/client.web/7305.8cdc05567d98ebd9f67e.js',
 		);
 	});
 
 	it('returns correct hashed asset (2)', () => {
 		expect(getPathFromManifest('client.web', '356.js')).toBe(
-			'/assets/client.web/356.0a1bbdf8c7a5e5826b7c.js',
+			'http://localhost:9000/assets/client.web/356.0a1bbdf8c7a5e5826b7c.js',
 		);
 	});
 
