@@ -40,9 +40,6 @@ import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
 import { ContributionsEpicTicker } from './ContributionsEpicTicker';
-// TODO - do we need this in DCR?
-// import { isValidApplePayWalletSession } from '../utils/applePay';
-// import { OPHAN_COMPONENT_EVENT_APPLEPAY_AUTHORISED } from './utils/ophan';
 
 // CSS Styling
 // -------------------------------------------
@@ -287,32 +284,8 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	hasConsentForArticleCount,
 	stage,
 }: EpicProps) => {
-	const {
-		image,
-		tickerSettings,
-		showChoiceCards,
-		choiceCardAmounts,
-		forceApplePay,
-		name,
-	} = variant;
-	const [showApplePayButton, setShowApplePayButton] =
-		useState(
-			forceApplePay,
-		); /* forceApplePay displays ApplePay button in storybook */
-
-	useEffect(() => {
-		const isInApplePayEpicTest = tracking.abTestName.includes('APPLE-PAY');
-		if (isInApplePayEpicTest) {
-			// isValidApplePayWalletSession().then((validApplePayWalletSession) => {
-			// 	if (validApplePayWalletSession) {
-			// 		if (submitComponentEvent) {
-			// 			submitComponentEvent(OPHAN_COMPONENT_EVENT_APPLEPAY_AUTHORISED);
-			// 		}
-			// 		setShowApplePayButton(name === 'V1_APPLE_PAY');
-			// 	}
-			// });
-		}
-	}, [tracking.abTestName]);
+	const { image, tickerSettings, showChoiceCards, choiceCardAmounts } =
+		variant;
 
 	const [choiceCardSelection, setChoiceCardSelection] = useState<
 		ChoiceCardSelection | undefined
@@ -493,7 +466,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					onReminderOpen={onReminderOpen}
 					fetchEmail={fetchEmail}
 					submitComponentEvent={submitComponentEvent}
-					// showApplePayButton={showApplePayButton}
 					showChoiceCards={showChoiceCards}
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
