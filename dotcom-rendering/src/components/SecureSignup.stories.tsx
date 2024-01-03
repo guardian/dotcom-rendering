@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { WebEmailSignUp as SignupComponent } from './WebEmailSignup';
+
 const meta: Meta<typeof SignupComponent> = {
 	title: 'Components/Newsletter Signup',
 	component: SignupComponent,
