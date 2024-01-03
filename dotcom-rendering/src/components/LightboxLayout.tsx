@@ -1,7 +1,6 @@
 import { css, Global } from '@emotion/react';
 import {
 	from,
-	neutral,
 	palette,
 	space,
 	textSans,

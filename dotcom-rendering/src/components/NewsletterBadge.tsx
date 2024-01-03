@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline, neutral, palette } from '@guardian/source-foundations';
+import { headline, palette } from '@guardian/source-foundations';
 
 // Note - the font-size is non-standard since the pixels are
 // relative to the SVG viewbox and need to be this size
