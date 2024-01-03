@@ -42,6 +42,7 @@ export const server = {
 					{
 						loader: 'swc-loader',
 						options: {
+							$schema: 'http://json.schemastore.org/swcrc',
 							jsc: {
 								parser: {
 									syntax: 'typescript',
