@@ -3,6 +3,7 @@ import type { SlotName } from '@guardian/commercial';
 import { adSizes, constants } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
+	between,
 	breakpoints,
 	from,
 	palette,
@@ -142,7 +143,7 @@ const adSlotCollapseStyles = css`
 		display: none;
 	}
 	&.ad-slot--collapse-below-desktop {
-		${until.desktop} {
+		${between.tablet.and.desktop} {
 			display: none;
 		}
 	}
