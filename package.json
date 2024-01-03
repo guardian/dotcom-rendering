@@ -12,7 +12,7 @@
 		"build-storybook": "pnpm '/^build-storybook:.*/'",
 		"build-storybook:ar": "pnpm --filter apps-rendering build-storybook",
 		"build-storybook:dcr": "pnpm --filter @guardian/dotcom-rendering build-storybook",
-		"build:dcr": "pnpm --filter @guardian/dotcom-rendering makeBuild",
+		"build:dcr": "pushd dotcom-rendering && make build && popd",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky install",
 		"lint-staged": "lint-staged",
