@@ -4,6 +4,7 @@ import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { EmailSignup } from './EmailSignup';
 import { Section } from './Section';
 import { SecureSignup } from './SecureSignup';
+import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
 const withSectionWrapper = (Story: typeof NewsTheme) => (
 	<Section
@@ -57,6 +58,7 @@ export const Default = ({
 			newsletterId="patriarchy"
 			successDescription="Reviewing the most important stories on feminism and sexism and those fighting for equality"
 		/>
+		{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
 	</EmailSignup>
 );
 
@@ -75,6 +77,7 @@ export const NewsTheme = ({
 			newsletterId="morning-briefing"
 			successDescription="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
 		/>
+		{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
 	</EmailSignup>
 );
 
@@ -93,6 +96,7 @@ export const IrregularFrequency = ({
 			newsletterId="documentaries"
 			successDescription="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
 		/>
+		{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
 	</EmailSignup>
 );
 
