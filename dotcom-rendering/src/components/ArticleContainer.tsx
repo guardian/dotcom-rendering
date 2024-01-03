@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { adSizes, constants } from '@guardian/commercial';
 import { ArticleDesign } from '@guardian/libs';
-import { from, neutral, space, until } from '@guardian/source-foundations';
+import { from, palette, space, until } from '@guardian/source-foundations';
 import { carrotAdStyles, labelStyles } from './AdSlot.web';
 
 type Props = {
@@ -82,7 +82,7 @@ const adStyles = css`
 		justify-content: center;
 
 		${from.tablet} {
-			background-color: ${neutral[97]};
+			background-color: ${palette.neutral[97]};
 		}
 
 		/* Prevent merger with any nearby float left elements e.g. rich-links */

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import {
-	neutral,
+	palette,
 	space,
 	text as textColor,
 	textSans,
@@ -18,8 +18,8 @@ type Props = {
 
 const commentWrapperStyles = css`
 	${textSans.medium()};
-	border-left: 1px ${neutral[86]} solid;
-	border-top: 1px ${neutral[86]} solid;
+	border-left: 1px ${palette.neutral[86]} solid;
+	border-top: 1px ${palette.neutral[86]} solid;
 	padding-top: ${space[1]}px;
 	padding-left: ${space[2]}px;
 	margin-top: ${space[3]}px;
@@ -34,7 +34,7 @@ const bodyContentStyles = css`
 	blockquote {
 		font-style: italic;
 		color: ${textColor.supporting};
-		border-left: ${space[1]}px ${neutral[86]} solid;
+		border-left: ${space[1]}px ${palette.neutral[86]} solid;
 		margin-top: ${space[1]}px;
 		margin-right: 0;
 		margin-bottom: ${space[4]}px;
@@ -63,12 +63,12 @@ const usernameWrapperStyles = css`
 	height: ${space[12]}px;
 	/* in order to overwrite the a tag style we had to add a second class to give higher order specificity */
 	& > a.permalink {
-		color: ${neutral[46]};
+		color: ${palette.neutral[46]};
 		border-bottom: none;
 	}
 	& > a.permalink:hover {
-		color: ${neutral[46]};
-		border-bottom: 1px solid ${neutral[46]};
+		color: ${palette.neutral[46]};
+		border-bottom: 1px solid ${palette.neutral[46]};
 	}
 `;
 

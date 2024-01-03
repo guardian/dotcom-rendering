@@ -4,8 +4,7 @@ import {
 	brandBackground,
 	brandBorder,
 	brandLine,
-	neutral,
-	news,
+	palette,
 	space,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -66,7 +65,7 @@ const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
 
 const titleStyle = css`
 	${body.medium({ fontWeight: 'regular' })};
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	padding-bottom: ${space[1]}px;
 	padding-top: ${space[1]}px;
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
@@ -74,7 +73,7 @@ const titleStyle = css`
 
 const linkStyle = css`
 	text-decoration: none;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 
 	&:hover {
 		text-decoration: underline;
@@ -200,8 +199,8 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										linkHoverColour={news[400]}
-										borderColour={neutral[46]}
+										linkHoverColour={palette.news[400]}
+										borderColour={palette.neutral[46]}
 									/>
 								</Island>
 							</Section>
@@ -351,8 +350,8 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={news[400]}
-							borderColour={neutral[46]}
+							linkHoverColour={palette.news[400]}
+							borderColour={palette.neutral[46]}
 						/>
 					</Island>
 				</Section>

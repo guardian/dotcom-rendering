@@ -1,18 +1,18 @@
 import { css, keyframes } from '@emotion/react';
-import { neutral } from '@guardian/source-foundations';
+import { palette } from '@guardian/source-foundations';
 
 const flash = keyframes`
 	0% {
-		background-color: ${neutral[46]};
-		box-shadow: 26px 0 ${neutral[46]}, -26px 0 ${neutral[100]};
+		background-color: ${palette.neutral[46]};
+		box-shadow: 26px 0 ${palette.neutral[46]}, -26px 0 ${palette.neutral[100]};
 	}
 	50% {
-		background-color: ${neutral[100]};
-		box-shadow: 26px 0 ${neutral[46]}, -26px 0 ${neutral[46]};
+		background-color: ${palette.neutral[100]};
+		box-shadow: 26px 0 ${palette.neutral[46]}, -26px 0 ${palette.neutral[46]};
 	}
 	100% {
-		background-color: ${neutral[46]};
-		box-shadow: 26px 0 ${neutral[100]}, -26px 0 ${neutral[46]};
+		background-color: ${palette.neutral[46]};
+		box-shadow: 26px 0 ${palette.neutral[100]}, -26px 0 ${palette.neutral[46]};
 	}
 `;
 
@@ -33,7 +33,7 @@ export const LightboxLoader = () => {
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				background-color: ${neutral[10]};
+				background-color: ${palette.neutral[10]};
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -44,10 +44,10 @@ export const LightboxLoader = () => {
 					width: 12px;
 					height: 12px;
 					border-radius: 50%;
-					background-color: ${neutral[100]};
+					background-color: ${palette.neutral[100]};
 					box-shadow:
-						26px 0 ${neutral[100]},
-						-26px 0 ${neutral[100]};
+						26px 0 ${palette.neutral[100]},
+						-26px 0 ${palette.neutral[100]};
 					position: relative;
 					animation: ${flash} 0.5s ease-out infinite alternate;
 					@media (prefers-reduced-motion) {
