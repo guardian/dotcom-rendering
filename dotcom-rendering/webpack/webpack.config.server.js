@@ -26,13 +26,14 @@ module.exports = {
 	entry: {
 		server: './src/server/server.ts',
 	},
+	experiments: { outputModule: true },
 	output: {
 		filename: `[name].js`,
 		chunkFilename: `[name].js`,
-		libraryTarget: 'commonjs2',
+		libraryTarget: 'module',
 		pathinfo: true,
 	},
-	target: 'node',
+	target: 'node18',
 	externalsPresets: { node: true },
 	optimization: {
 		minimize: false,
