@@ -212,7 +212,7 @@ const sendTracking = (
 };
 
 /**
- * # Secure ReCAPTCHA Signup
+ * # Secure Signup
  *
  * We can only inject ReCAPTCHA client-side, and need to respond to user input.
  *
@@ -220,10 +220,7 @@ const sendTracking = (
  *
  * [`EmailSignup` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-emailsignup)
  */
-export const SecureReCAPTCHASignup = ({
-	newsletterId,
-	successDescription,
-}: Props) => {
+export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
 	const [isWaitingForResponse, setIsWaitingForResponse] =
