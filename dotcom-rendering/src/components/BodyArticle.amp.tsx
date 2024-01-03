@@ -4,14 +4,7 @@ import {
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '@guardian/libs';
-import {
-	neutral,
-	opinion,
-	palette,
-	text,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { palette, text, textSans, until } from '@guardian/source-foundations';
 import React from 'react';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { decideDesign } from '../lib/decideDesign';
