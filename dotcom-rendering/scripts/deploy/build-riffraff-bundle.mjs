@@ -114,8 +114,8 @@ const copyFrontendStatic = () => {
 
 	log(' - copying stats => assets');
 	const statsToAssetsJob = cpy(
-		path.resolve(source, 'stats'),
-		path.resolve(dest, 'stats'),
+		path.resolve(source, 'client.*', 'stats'),
+		path.resolve(dest, 'client.*', 'stats'),
 		{
 			nodir: true,
 		},
