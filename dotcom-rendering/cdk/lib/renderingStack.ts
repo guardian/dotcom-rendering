@@ -45,7 +45,7 @@ export class RenderingCDKStack extends CDKStack {
 						snsTopicName: `Frontend-${stage}-CriticalAlerts`,
 						// TODO – how does this overlap with the DevX debug dashboard?
 						http5xxAlarm: {
-							tolerated5xxPercentage: 10,
+							tolerated5xxPercentage: 0.5, // Monitor and increase if too noisy
 							numberOfMinutesAboveThresholdBeforeAlarm: 1,
 						},
 						unhealthyInstancesAlarm: true,
