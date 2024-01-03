@@ -1,8 +1,8 @@
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
-import { SecureSignup } from './SecureSignup';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import { SecureSignup } from './SecureSignup';
 
 interface WebEmailSignProps extends EmailSignUpProps {
 	index: number;
