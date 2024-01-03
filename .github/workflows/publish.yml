@@ -27,16 +27,17 @@ jobs:
       - name: Move container files into GHA Workspace
         run: docker cp ${{ steps.create-container.outputs.CONTAINER_ID }}:/opt/app/dotcom-rendering/dotcom-rendering/. ${{ github.workspace }}
 
-        # We want to avoid uploading the uncompressed files to our riffraff bucket
+      # We want to avoid uploading the uncompressed files to our riffraff bucket
       # so we create our tarball outside the rendering/ folder, then delete the contents of rendering/
       # and finally move the tarball into rendering
-      - name: Compress existing DCR server files
+      - name: Compress existing rendering server files
         run: |
           tar -zcf rendering.tar.gz rendering
           rm -r rendering/*
           mv rendering.tar.gz rendering/
 
-      - name: Compress new DCR server files
+      # TODO - add other rendering apps when ready
+      - name: Compress article-rendering server files
         run: |
           tar -zcf article-rendering.tar.gz article-rendering
           rm -r article-rendering/*
@@ -48,7 +49,7 @@ jobs:
           role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           mask-aws-account-id: true
 
-      # Old rendering deployment
+      # Old/existing rendering deployment
       - name: Upload existing rendering app to RiffRaff
         uses: guardian/actions-riff-raff@v3
         with:
@@ -64,8 +65,8 @@ jobs:
             frontend-static:
               - frontend-static
 
-      # New article deployment
-      - name: Upload new rendering apps to RiffRaff
+      # New rendering apps deployment
+      - name: Upload rendering apps to RiffRaff
         uses: guardian/actions-riff-raff@v3
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
