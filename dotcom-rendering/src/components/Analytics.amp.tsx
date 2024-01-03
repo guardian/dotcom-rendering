@@ -50,7 +50,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-ccpa",
 							"vars": {
-								"componentEvent": "%7B%22consentJurisdiction%22:%22CCPA%22,%22consentUUID%22:%22\${clientId(ccpaUUID)}%22,%22consent%22:%22\$EQUALS(\${consentState}, insufficient)%22%7D"
+								"componentEvent": "%7B%22consentJurisdiction%22:%22CCPA%22,%22consentUUID%22:%22\${clientId(ccpaUUID)}%22,%22consent%22:%22\$EQUALS({consentState}, insufficient)%22%7D"
 							}
 						},
 						"trackPageviewAus": {
@@ -58,7 +58,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-aus",
 							"vars": {
-								"componentEvent": "%7B%22consentJurisdiction%22:%22AUS%22,%22consentUUID%22:%22\${clientId(ccpaUUID)}%22,%22consent%22:%22\$EQUALS(\${consentState}, sufficient)%22%7D"
+								"componentEvent": "%7B%22consentJurisdiction%22:%22AUS%22,%22consentUUID%22:%22\${clientId(ccpaUUID)}%22,%22consent%22:%22\$EQUALS({consentState}, sufficient)%22%7D"
 							}
 						}
 					},
