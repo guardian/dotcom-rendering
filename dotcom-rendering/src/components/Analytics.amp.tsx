@@ -42,7 +42,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-tcfv2",
 							"vars": {
-								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:TCF.v2%22,%2202:\${clientId(consentUUID)}%22,%2203:\${consentString}%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+								"componentEvent": "%7B%22consentJurisdiction%22:%22TCF%22,%22consentUUID%22:%22\${clientId(consentUUID)}%22,%22consent%22:%22\${consentString}%22%7D"
 							}
 						},
 						"trackPageviewCcpa": {
@@ -50,7 +50,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-ccpa",
 							"vars": {
-								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:CCPA%22,%2204:\${clientId(ccpaUUID)}%22,%2205:\$EQUALS(\${consentState}, insufficient)\%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+								"componentEvent": "%7B%22consentJurisdiction%22:%22CCPA%22,%22consentUUID%22:%22\${clientId(ccpaUUID)}%22,%22consent%22:%22\$EQUALS(\${consentState}, insufficient)%22%7D"
 							}
 						},
 						"trackPageviewAus": {
@@ -58,7 +58,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-aus",
 							"vars": {
-								"componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2201:AUS%22,%2206:\${clientId(ccpaUUID)}%22,%2207:\${consentState}%22,%2208:\$EQUALS(\${consentState}, sufficient)%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+								"componentEvent": "%7B%22consentJurisdiction%22:%22AUS%22,%22consentUUID%22:%22\${clientId(ccpaUUID)}%22,%22consent%22:%22\$EQUALS(\${consentState}, sufficient)%22%7D"
 							}
 						}
 					},
