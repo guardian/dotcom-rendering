@@ -15,7 +15,7 @@ They _are_ though all valid and ready to use.
 You can try the setup out and build the configs by running this from `dotcom-rendering` app dir:
 
 ```shell
-$ NODE_ENV=production yarn webpack --progress
+$ NODE_ENV=production pnpm webpack --progress
 ```
 
 There are also some tests that compare the current and proposed configs in `./.test.mjs`.

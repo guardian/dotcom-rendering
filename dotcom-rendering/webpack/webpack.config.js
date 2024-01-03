@@ -37,7 +37,6 @@ const commonConfigs = ({ platform }) => ({
 			'react-dom': 'preact/compat',
 		},
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
-		symlinks: false,
 	},
 	ignoreWarnings: [
 		/**

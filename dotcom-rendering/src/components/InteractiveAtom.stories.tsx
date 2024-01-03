@@ -25,6 +25,7 @@ export const DefaultStory = (): JSX.Element => {
 				elementHtml={html}
 				elementJs={js}
 				elementCss={atomCss}
+				title="Superb Stuff"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -54,6 +55,7 @@ export const ImmersiveMainMediaStory = (): JSX.Element => {
 				elementJs={js}
 				elementCss={atomCss}
 				isMainMedia={true}
+				title="Superb Stuff"
 				format={{
 					display: ArticleDisplay.Immersive,
 					design: ArticleDesign.Standard,

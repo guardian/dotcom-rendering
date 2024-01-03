@@ -1,22 +1,5 @@
 # Where should my code live?
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- Automatically created by running `yarn createtoc` in a pre-commit hook -->
-
--   [File locations](#file-locations)
--   [File naming schemes](#file-naming-schemes)
--   [Scripts](#scripts)
--   [Data Sources & Extraction](#data-sources--extraction)
-    -   [Articles](#articles)
-    -   [Fronts](#fronts)
-    -   [Other](#other)
-    -   [Considerations](#considerations)
-        -   [Favour computation on the rendering server over computation on the client](#favour-computation-on-the-rendering-server-over-computation-on-the-client)
-        -   [Minimize data over the wire](#minimize-data-over-the-wire)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## File locations
 
 Code for DCR lives in the `src` directory. Inside this directory we have a series of key sub-directories:

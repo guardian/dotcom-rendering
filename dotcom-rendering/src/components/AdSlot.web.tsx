@@ -141,7 +141,7 @@ const adSlotCollapseStyles = css`
 	&.ad-slot.ad-slot--collapse {
 		display: none;
 	}
-	&.ad-slot--merchandising-billboard {
+	&.ad-slot--collapse-below-desktop {
 		${until.desktop} {
 			display: none;
 		}

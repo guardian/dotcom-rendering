@@ -294,10 +294,9 @@ const headlineBlogBackgroundDark: PaletteFunction = ({
 
 const bylineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
-		case ArticleDesign.Analysis:
-			return sourcePalette.neutral[46];
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[86];
+		case ArticleDesign.Analysis:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 			switch (theme) {
@@ -4255,6 +4254,11 @@ const recaptchaBorderLight: PaletteFunction = () => sourcePalette.neutral[7];
 const recaptchaBorderDark: PaletteFunction = () => sourcePalette.neutral[86];
 const privacyTextSupportingLight: PaletteFunction = () =>
 	sourcePalette.neutral[0];
+const privacyTextSupportingSubduedLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const privacyTextSupportingSubduedDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 const witnessTitleText: PaletteFunction = ({ theme }) => {
@@ -4505,6 +4509,11 @@ const paginationTextLight: PaletteFunction = ({ theme }) => {
 };
 const paginationTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const interactiveContentsHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const interactiveContentsHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
 const audioAtomBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const audioAtomBackgroundDark: PaletteFunction = () =>
@@ -4645,6 +4654,29 @@ const timelineAtomHighlightTextBackgroundLight: PaletteFunction = () =>
 const timelineAtomHighlightTextBackgroundDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
 sourcePalette.neutral[0];
+
+const emailSignupButtonBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+const emailSignupButtonBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const emailSignupButtonHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+const emailSignupButtonHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const emailSignupButtonTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const emailSignupButtonTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+const emailSignupTextSubduedLight: PaletteFunction = () => '';
+const emailSignupTextSubduedDark: PaletteFunction = () => '';
+
+const codeBlockBackgroundLight: PaletteFunction = () => '#f5f2f0';
+const codeBlockBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+const codeBlockTextShadowLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const codeBlockTextShadowDark: PaletteFunction = () => sourcePalette.neutral[0];
+sourcePalette.neutral[38];
 
 // ----- Palette ----- //
 
@@ -5289,6 +5321,10 @@ const paletteColours = {
 		light: privacyTextSupportingLight,
 		dark: privacyTextDark,
 	},
+	'--privacy-text-supporting-subdued': {
+		light: privacyTextSupportingSubduedLight,
+		dark: privacyTextSupportingSubduedDark,
+	},
 	'--privacy-text-regular': {
 		light: privacyTextRegularLight,
 		dark: privacyTextDark,
@@ -5421,6 +5457,10 @@ const paletteColours = {
 		light: paginationTextLight,
 		dark: paginationTextDark,
 	},
+	'--interactive-contents-hover': {
+		light: interactiveContentsHoverLight,
+		dark: interactiveContentsHoverDark,
+	},
 	'--audio-atom-background': {
 		light: audioAtomBackgroundLight,
 		dark: audioAtomBackgroundDark,
@@ -5472,6 +5512,30 @@ const paletteColours = {
 	'--timeline-atom-highlight-text-background': {
 		light: timelineAtomHighlightTextBackgroundLight,
 		dark: timelineAtomHighlightTextBackgroundDark,
+	},
+	'--email-signup-button-background': {
+		light: emailSignupButtonBackgroundLight,
+		dark: emailSignupButtonBackgroundDark,
+	},
+	'--email-signup-button-hover': {
+		light: emailSignupButtonHoverLight,
+		dark: emailSignupButtonHoverDark,
+	},
+	'--email-signup-button-text': {
+		light: emailSignupButtonTextLight,
+		dark: emailSignupButtonTextDark,
+	},
+	'--email-signup-text-subdued': {
+		light: emailSignupTextSubduedLight,
+		dark: emailSignupTextSubduedDark,
+	},
+	'--code-block-background': {
+		light: codeBlockBackgroundLight,
+		dark: codeBlockBackgroundDark,
+	},
+	'--code-block-text-shadow': {
+		light: codeBlockTextShadowLight,
+		dark: codeBlockTextShadowDark,
 	},
 } satisfies PaletteColours;
 

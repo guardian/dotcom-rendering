@@ -161,7 +161,15 @@ export const AllEditorialNewslettersPageLayout = ({
 					groupedNewsletters={newslettersPage.groupedNewsletters}
 				/>
 				<Island priority="feature" defer={{ until: 'idle' }}>
-					<ManyNewsletterSignUp />
+					<ManyNewsletterSignUp
+						useReCaptcha={
+							!!newslettersPage.config.switches
+								.emailSignupRecaptcha
+						}
+						captchaSiteKey={
+							newslettersPage.config.googleRecaptchaSiteKey
+						}
+					/>
 				</Island>
 			</main>
 
