@@ -308,7 +308,15 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit} id={`secure-signup-${newsletterId}`}>
+			<form
+				onSubmit={handleSubmit}
+				id={`secure-signup-${newsletterId}`}
+				css={css`
+					display: ${hasResponse || isWaitingForResponse
+						? 'none'
+						: 'block'};
+				`}
+			>
 				<Label
 					text="Enter your email address"
 					cssOverrides={labelStyles}
