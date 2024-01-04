@@ -237,8 +237,8 @@ export class DotcomRendering extends GuStack {
 			maximumInstances: props.maxCapacity,
 			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
 			userData: getUserData({
-				app,
-				stack,
+				guApp: app,
+				guStack: stack,
 				stage,
 				artifactsBucket,
 			}),

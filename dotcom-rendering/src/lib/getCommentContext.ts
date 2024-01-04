@@ -45,12 +45,15 @@ const initFiltersFromLocalStorage = (): FilterOptions => {
 	try {
 		// Try to read from local storage
 		orderBy = JSON.parse(
+			// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 			localStorage.getItem('gu.prefs.discussion.order') ?? '{}',
 		);
 		threads = JSON.parse(
+			// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 			localStorage.getItem('gu.prefs.discussion.threading') ?? '{}',
 		);
 		pageSize = JSON.parse(
+			// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 			localStorage.getItem('gu.prefs.discussion.pagesize') ?? '{}',
 		);
 	} catch (error) {
