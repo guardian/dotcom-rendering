@@ -1,4 +1,4 @@
-import { isObject, isString, storage } from '@guardian/libs';
+import { storage } from '@guardian/libs';
 
 export interface DailyArticle {
 	day: number;
