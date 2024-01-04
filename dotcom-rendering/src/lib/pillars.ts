@@ -1,16 +1,9 @@
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial, Pillar } from '@guardian/libs';
-import {
-	border,
-	culture,
-	labs,
-	lifestyle,
-	news,
-	opinion,
-	palette,
-	specialReport,
-	sport,
-} from '@guardian/source-foundations';
+import { border, palette } from '@guardian/source-foundations';
+
+const { culture, labs, lifestyle, news, opinion, specialReport, sport } =
+	palette;
 
 type ColourType = string;
 

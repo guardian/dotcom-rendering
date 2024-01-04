@@ -7,12 +7,10 @@ import type { SerializedStyles } from '@emotion/react';
 import { css, ThemeProvider } from '@emotion/react';
 import {
 	background,
-	brand,
 	brandAltBackground,
 	brandAltLine,
 	brandAltText,
 	from,
-	neutral,
 	palette,
 	space,
 	textSans,
@@ -26,6 +24,8 @@ import {
 } from '@guardian/source-react-components';
 import type { ReactComponent } from '../lib/ReactComponent';
 import type { ArticleCountOptOutType } from './ArticleCountOptOutPopup';
+
+const { brand, neutral } = palette;
 
 const COLOURS = {
 	epic: 'white',

@@ -3,8 +3,6 @@ import {
 	between,
 	body,
 	headline,
-	neutral,
-	news,
 	palette,
 	space,
 	until,
@@ -133,7 +131,7 @@ export const ContainerTitle = ({
 				<div css={dateStyles}>
 					<span
 						css={dateTextStyles(
-							overrides?.text.containerDate ?? neutral[0],
+							overrides?.text.containerDate ?? palette.neutral[0],
 						)}
 					>
 						{now.toLocaleString('en-GB', {
@@ -147,7 +145,8 @@ export const ContainerTitle = ({
 								display: block;
 							`,
 							dateTextStyles(
-								overrides?.text.containerDate ?? news[400],
+								overrides?.text.containerDate ??
+									palette.news[400],
 							),
 							bottomMargin,
 						]}

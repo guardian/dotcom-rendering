@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
 import {
-	brandAlt,
 	from,
 	headline,
-	neutral,
 	palette,
 	space,
 	text,
@@ -272,15 +270,15 @@ const nextButtonStyle = (index: number, totalStories: number) => css`
 	padding-left: 5px; /* Fix centering of SVG*/
 	margin-left: 10px;
 	background-color: ${!isLastCardShowing(index, totalStories)
-		? neutral[0]
-		: neutral[60]};
+		? palette.neutral[0]
+		: palette.neutral[60]};
 	cursor: ${!isLastCardShowing(index, totalStories) ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
 		background-color: ${!isLastCardShowing(index, totalStories)
-			? brandAlt[400]
-			: neutral[60]};
+			? palette.brandAlt[400]
+			: palette.neutral[60]};
 
 		svg {
 			fill: ${palette.neutral[100]};
