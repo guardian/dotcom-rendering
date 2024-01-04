@@ -23,12 +23,12 @@ import type { ReactComponent } from '../lib/ReactComponent';
 const frequencyChoiceCardGroupOverrides = css`
 	${until.mobileLandscape} {
 		> div {
-			display: flex !important;
+			display: flex;
 		}
 
 		> div label:nth-of-type(2) {
-			margin-left: 4px !important;
-			margin-right: 4px !important;
+			margin-left: 4px;
+			margin-right: 4px;
 		}
 	}
 `;
