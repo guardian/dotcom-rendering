@@ -7,7 +7,6 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial, Pillar } from '@guardian
 import { breakpoints } from '@guardian/source-foundations';
 import { darkDecorator, lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { HydratedLayoutWrapper } from '../../src/layouts/Layout.stories';
-
 // eslint-disable-next-line import/no-default-export -- we need a default here
 export default {
 	title: 'Components/Layout/Format Variations Apps',
@@ -511,7 +510,68 @@ export default {
 			),
 		];
 
-		
+		export const AppsStandardAnalysisCulturePillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Analysis"
+					theme="CulturePillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardAnalysisCulturePillarLight.storyName = 'Apps: Display: Standard, Design: Analysis, Theme: CulturePillar, Mode: Light';
+		AppsStandardAnalysisCulturePillarLight.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardAnalysisCulturePillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Analysis,
+					theme: {...ArticleSpecial, ...Pillar}.Culture,
+				}]
+			),
+		];
+
+		export const AppsStandardAnalysisCulturePillarDark = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Analysis"
+					theme="CulturePillar"
+					renderingTarget="Apps"
+				/>
+			);
+		};
+		AppsStandardAnalysisCulturePillarDark.storyName = 'Apps: Display: Standard, Design: Analysis, Theme: CulturePillar, Mode: Dark';
+		AppsStandardAnalysisCulturePillarDark.parameters = { config: {"renderingTarget":"Apps","darkModeAvailable":true} };
+		AppsStandardAnalysisCulturePillarDark.decorators = [darkDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Analysis,
+					theme: {...ArticleSpecial, ...Pillar}.Culture,
+				}]
+			),
+		];
+
+		export const WebStandardNewsletterSignupSportPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="NewsletterSignup"
+					theme="SportPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardNewsletterSignupSportPillarLight.storyName = 'Web: Display: Standard, Design: NewsletterSignup, Theme: SportPillar, Mode: Light';
+		WebStandardNewsletterSignupSportPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardNewsletterSignupSportPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.NewsletterSignup,
+					theme: {...ArticleSpecial, ...Pillar}.Sport,
+				}]
+			),
+		];
 
 export const LiveblogAppsSingleContributorLight = () => {
 	return (
@@ -534,7 +594,6 @@ export const LiveblogAppsSingleContributorLight = () => {
 			}]
 		),
 	];
-
 	export const LiveblogAppsSingleContributorDark = () => {
 	return (
 			<HydratedLayoutWrapper

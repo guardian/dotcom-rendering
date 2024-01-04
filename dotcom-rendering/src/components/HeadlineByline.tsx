@@ -3,7 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	headline,
-	neutral,
+	palette,
 	space,
 	textSans,
 	until,
@@ -97,7 +97,7 @@ const analysisStyles = css`
 		}
 	}
 	span {
-		color: ${neutral[46]};
+		color: ${palette.neutral[46]};
 	}
 `;
 

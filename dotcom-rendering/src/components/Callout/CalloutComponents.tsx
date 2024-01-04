@@ -3,7 +3,6 @@ import {
 	body,
 	palette as sourcePalette,
 	space,
-	success,
 	textSans,
 } from '@guardian/source-foundations';
 import {
@@ -120,7 +119,7 @@ const sharePopupStyles = css`
 	box-shadow: 0px 2px ${space[2]}px rgba(0, 0, 0, 0.5);
 
 	> svg {
-		fill: ${success[400]};
+		fill: ${sourcePalette.success[400]};
 	}
 `;
 const shareIconStyles = css`

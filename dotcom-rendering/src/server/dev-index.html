@@ -137,6 +137,22 @@
 							might have looked
 						</a>
 					</li>
+					<li
+						data-design="Feature"
+						data-display="Standard"
+						data-theme="Sport"
+					>
+						<a
+							href="https://www.theguardian.com/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may"
+						>
+							Bundesliga puts its reputation on the line with
+							return in mid-May
+						</a>
+						<p slot="description">
+							Contains rich links, an embed, a showcase body
+							image, and an audio atom.
+						</p>
+					</li>
 				</ul>
 			</article-examples>
 
@@ -190,11 +206,17 @@
 					.format {
 						max-width: 9rem;
 					}
+
+					.headline,
+					.description {
+						max-width: 15rem;
+					}
 				</style>
 				<table>
 					<thead>
 						<tr>
 							<th rowspan="2">Headline</th>
+							<th rowspan="2">Description</th>
 							<th rowspan="2">Format</th>
 							<th colspan="3">Links</th>
 						</tr>
@@ -211,6 +233,9 @@
 			<template id="article-row-template">
 				<tr>
 					<td class="headline"></td>
+					<td class="description">
+						<slot name="description"></slot>
+					</td>
 					<td class="format">
 						<dl>
 							<dt>Design:</dt>
@@ -1103,6 +1128,27 @@
 				}
 
 				/**
+				 * @param {DocumentFragment} row
+				 * @param {HTMLLIElement} listItem
+				 * @return {void}
+				 */
+				setDescription(row, listItem) {
+					const description = listItem.querySelector(
+						'[slot="description"]',
+					);
+					const descriptionSlot = row.querySelector(
+						'slot[name="description"]',
+					);
+
+					if (
+						description instanceof HTMLElement &&
+						descriptionSlot instanceof HTMLSlotElement
+					) {
+						descriptionSlot.replaceWith(description);
+					}
+				}
+
+				/**
 				 * @param {HTMLLIElement} listItem
 				 * @return {DocumentFragment}
 				 */
@@ -1125,6 +1171,7 @@
 
 					this.setHeadline(row, anchor);
 					this.setLinks(row, anchor);
+					this.setDescription(row, listItem);
 					this.setElementFromData(row, listItem, 'design');
 					this.setElementFromData(row, listItem, 'display');
 					this.setElementFromData(row, listItem, 'theme');
@@ -1167,9 +1214,12 @@
 				}
 
 				connectedCallback() {
-					const rows = Array.from(this.querySelectorAll('li')).map(
-						(li) => this.tableRow(li),
+					const rows = Array.from(
+						this.querySelectorAll(':scope > ul > li'),
+					).flatMap((li) =>
+						li instanceof HTMLLIElement ? [this.tableRow(li)] : [],
 					);
+
 					this.content
 						.querySelector('tbody')
 						?.replaceChildren(...rows);

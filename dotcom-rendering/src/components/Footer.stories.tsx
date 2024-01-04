@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import { Pillar } from '@guardian/libs';
 import {
-	brand,
 	breakpoints,
-	neutral,
+	palette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
@@ -17,8 +16,8 @@ const Wrapper = ({ children }: { children: JSX.Element }) => (
 	<Section
 		fullWidth={true}
 		padSides={false}
-		backgroundColour={brand[400]}
-		borderColour={neutral[93]}
+		backgroundColour={palette.brand[400]}
+		borderColour={palette.neutral[93]}
 		showSideBorders={false}
 		element="footer"
 	>
@@ -38,7 +37,7 @@ export const Footers = () => (
 			>
 				<h1
 					css={css`
-						color: ${brand[400]};
+						color: ${palette.brand[400]};
 						${textSans.xxxlarge()};
 					`}
 				>

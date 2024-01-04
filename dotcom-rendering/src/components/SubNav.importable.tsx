@@ -1,12 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	neutral,
-	news,
-	palette,
-	text,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, palette, text, textSans } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { SubNavType } from '../model/extract-nav';
@@ -116,7 +109,7 @@ const showMoreStyle = css`
 	color: ${text.supporting};
 
 	:hover {
-		color: ${news[400]};
+		color: ${palette.news[400]};
 	}
 
 	${from.desktop} {
@@ -132,7 +125,7 @@ const listItemStyles = (borderColour: string) => css`
 		height: 0;
 		border-top: 6px solid transparent;
 		border-bottom: 6px solid transparent;
-		border-left: 10px solid ${neutral[7]};
+		border-left: 10px solid ${palette.neutral[7]};
 		margin-top: 12px;
 		margin-left: 2px;
 		border-left-color: ${borderColour};

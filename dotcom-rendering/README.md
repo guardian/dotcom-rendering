@@ -2,31 +2,6 @@
 
 Frontend rendering framework for theguardian.com. It uses [React](https://reactjs.org/), with [Emotion](https://emotion.sh) for styling.
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<!-- Automatically created by running `yarn createtoc` in a pre-commit hook -->
-
--   [Quick start](#quick-start)
-    -   [Install Node.js](#install-nodejs)
-    -   [Running instructions](#running-instructions)
-    -   [Environment Variables](#environment-variables)
-    -   [Detailed Setup](#detailed-setup)
-    -   [Technologies](#technologies)
-    -   [UI Design System](#ui-design-system)
-    -   [Concepts](#concepts)
-    -   [Visual Debugging](#visual-debugging)
-    -   [Feedback](#feedback)
--   [Dotcom Rendering now renders most articles and fronts in Production](#dotcom-rendering-now-renders-most-articles-and-fronts-in-production)
--   [Code Quality](#code-quality)
-    -   [Snyk Code Scanning](#snyk-code-scanning)
--   [IDE setup](#ide-setup)
-    -   [Extensions](#extensions)
-    -   [Commit hooks](#commit-hooks)
-    -   [Auto fix on save](#auto-fix-on-save)
--   [Thanks](#thanks)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## Quick start
 
 This guide will help you get the `dotcom-rendering` application running on your development machine.
@@ -55,7 +30,7 @@ corepack enable
 
 ### Running instructions
 
-Clone the repo, run `yarn` in the root, then CD into the `dotcom-rendering` subdirectory -
+Clone the repo, run `pnpm install --frozen-lockfile` in the root, then CD into the `dotcom-rendering` subdirectory -
 
 ```
 $ git clone git@github.com:guardian/dotcom-rendering.git
@@ -168,9 +143,15 @@ See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/dotcom
 
 [Read about testing tools and testing strategy](docs/testing.md).
 
-### Snyk Code Scanning
+### Vulnerabilities
 
-There's a Github action set up on the repository to scan for vulnerabilities. This is set to "continue on error" and so will show a green tick regardless. In order to check the vulnerabilities we can use the Github code scanning feature in the security tab and this will list all vulnerabilities for a given branch etc. You should use this if adding/removing/updating packages to see if there are any vulnerabilities.
+#### Dependabot
+
+To monitor vulnerabilities from GitHub, you can use [Dependabot alerts in the security tab](https://github.com/guardian/dotcom-rendering/security/dependabot).
+
+#### `pnpm audit`
+
+To check for vulnerabilities in development, you can run `pnpm audit`.
 
 ## IDE setup
 
@@ -188,8 +169,8 @@ Staged changes are automatically prettified on commit. You can disable this by a
 
 To run the prettier check manually, run either of the following commands from the workspace root:
 
--   `yarn prettier:check` &rarr; Checks for prettier issues
--   `yarn prettier:write` &rarr; Checks and fixes prettier issues
+-   `pnpm prettier:check` &rarr; Checks for prettier issues
+-   `pnpm prettier:write` &rarr; Checks and fixes prettier issues
 
 ### Auto fix on save
 

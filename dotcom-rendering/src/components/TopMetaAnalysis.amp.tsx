@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline, neutral, until } from '@guardian/source-foundations';
+import { headline, palette, until } from '@guardian/source-foundations';
 import { string as curly } from 'curlyquotes';
 import { getAgeWarning } from '../lib/age-warning';
 import { getSoleContributor } from '../lib/byline';
@@ -19,7 +19,7 @@ const headerStyle = css`
 	font-weight: 500;
 	padding-bottom: 24px;
 	padding-top: 3px;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 `;
 
 const underlinedStyles = css`

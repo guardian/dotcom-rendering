@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
 import {
-	brand,
 	brandAlt,
 	brandText,
 	from,
 	headline,
-	neutral,
+	palette,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -15,7 +14,7 @@ import type { NavType, PillarLinkType } from '../model/extract-nav';
 import { ReaderRevenueButton } from './ReaderRevenueButton.amp';
 
 const headerStyles = css`
-	background-color: ${brand[400]};
+	background-color: ${palette.brand[400]};
 `;
 
 const row = css`
@@ -87,7 +86,7 @@ const pillarLinkStyle = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};
 	height: 36px;
 	padding: 9px 4px;
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	position: relative;
 	overflow: hidden;
 
@@ -127,8 +126,8 @@ const pillarLinkStyle = (pillar: ArticleTheme) => css`
 `;
 
 const veggieStyles = css`
-	background-color: ${brandAlt[400]};
-	color: ${neutral[97]};
+	background-color: ${palette.brandAlt[400]};
+	color: ${palette.neutral[97]};
 	height: 42px;
 	min-width: 42px;
 	border: 0;
@@ -152,7 +151,7 @@ const lineStyles = css`
 	height: 2px;
 	position: absolute;
 	width: 20px;
-	background-color: ${neutral[7]};
+	background-color: ${palette.neutral[7]};
 `;
 
 const pattyStyles = css`

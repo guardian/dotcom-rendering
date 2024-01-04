@@ -52,7 +52,6 @@ export const base = (name) => {
 				'react-dom': 'preact/compat',
 			},
 			extensions: ['.js', '.ts', '.tsx', '.jsx'],
-			symlinks: false,
 		},
 		plugins: [
 			new webpack.DefinePlugin({

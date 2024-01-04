@@ -86,7 +86,6 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial, Pillar } from '@guardian
 import { breakpoints } from '@guardian/source-foundations';
 import { darkDecorator, lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { HydratedLayoutWrapper } from '../../src/layouts/Layout.stories';
-
 // eslint-disable-next-line import/no-default-export -- we need a default here
 export default {
 	title: 'Components/Layout/Format Variations Apps',
@@ -107,6 +106,7 @@ export default {
 	},
 };
 `;
+
 const EXTRA_APPS_LAYOUT_STORIES = `
 export const LiveblogAppsSingleContributorLight = () => {
 	return (
@@ -129,7 +129,6 @@ export const LiveblogAppsSingleContributorLight = () => {
 			}]
 		),
 	];
-
 	export const LiveblogAppsSingleContributorDark = () => {
 	return (
 			<HydratedLayoutWrapper
@@ -407,6 +406,18 @@ const testLayoutAppsFormats =
 			design: 'LiveBlog',
 			theme: 'SpecialReportAltPillar',
 			config: { renderingTarget: 'Apps', darkModeAvailable: false },
+		},
+		{
+			display: 'Standard',
+			design: 'Analysis',
+			theme: 'CulturePillar',
+			config: { renderingTarget: 'Apps', darkModeAvailable: true },
+		},
+		{
+			display: 'Standard',
+			design: 'NewsletterSignup',
+			theme: 'SportPillar',
+			config: { renderingTarget: 'Web', darkModeAvailable: false },
 		},
 	]);
 

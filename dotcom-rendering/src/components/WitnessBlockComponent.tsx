@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { body, headline, neutral, space } from '@guardian/source-foundations';
+import { body, headline, palette, space } from '@guardian/source-foundations';
 import { palette as themePalette } from '../palette';
 import type { WitnessAssetType } from '../types/content';
 
 // Wrapper Styles
 const wrapperStyles = css`
 	border-width: 1px;
-	border-color: ${neutral[86]};
+	border-color: ${palette.neutral[86]};
 	border-style: solid;
 `;
 
@@ -33,10 +33,10 @@ const witnessIconStyles = css`
 
 const witnessDetailsWrapperStyles = css`
 	border-width: 1px;
-	border-color: ${neutral[86]};
+	border-color: ${palette.neutral[86]};
 	border-style: solid;
 
-	background-color: ${neutral[97]};
+	background-color: ${palette.neutral[97]};
 `;
 
 // Non Wrapper Styles
@@ -84,7 +84,7 @@ const WitnessWrapper = ({
 						guardian
 						<span
 							css={css`
-								color: ${neutral[46]};
+								color: ${palette.neutral[46]};
 							`}
 						>
 							witness

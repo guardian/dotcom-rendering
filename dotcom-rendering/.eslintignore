@@ -1,3 +1,6 @@
 node_modules
 .eslintrc.js
 storybook-static/
+
+# build output
+dist

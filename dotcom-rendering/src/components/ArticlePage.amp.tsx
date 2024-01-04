@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral } from '@guardian/source-foundations';
+import { palette } from '@guardian/source-foundations';
 import { filterForTagsOfType } from '../lib/tag-utils.amp';
 import type { NavType } from '../model/extract-nav';
 import type { AmpExperiments } from '../server/AMPExperimentCache.amp';
@@ -26,7 +26,7 @@ const containerStyles = css`
 `;
 
 const backgroundColour = css`
-	background-color: ${neutral[97]};
+	background-color: ${palette.neutral[97]};
 `;
 
 type BodyProps = {

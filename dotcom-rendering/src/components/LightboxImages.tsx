@@ -226,6 +226,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 								isLightbox={true}
 								orientation={orientation}
 								onLoad={onLoad}
+								loading="lazy"
 							/>
 							<aside css={asideStyles}>
 								{!!image.title && (
