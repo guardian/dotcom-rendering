@@ -47,30 +47,6 @@ const textStandfirst = (format: ArticleFormat): string => {
 	return BLACK;
 };
 
-const textLastUpdated = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[600];
-			case Pillar.Culture:
-				return culture[600];
-			case Pillar.Lifestyle:
-				return lifestyle[600];
-			case Pillar.Sport:
-				return sport[600];
-			case Pillar.Opinion:
-				return opinion[600];
-			case ArticleSpecial.Labs:
-				return news[600];
-			case ArticleSpecial.SpecialReport:
-				return specialReport[700];
-			case ArticleSpecial.SpecialReportAlt:
-				return news[600];
-		}
-	}
-	return BLACK;
-};
-
 const textDisclaimerLink = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
@@ -580,7 +556,6 @@ export const decidePalette = (
 			headlineWhenMatch: textHeadlineWhenMatch(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
-			lastUpdated: textLastUpdated(format),
 			disclaimerLink: textDisclaimerLink(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			filterButton: textFilterButton(),
