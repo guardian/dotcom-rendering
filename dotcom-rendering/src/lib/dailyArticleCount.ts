@@ -1,3 +1,5 @@
+import { storage } from '@guardian/libs';
+
 export interface DailyArticle {
 	day: number;
 	count: number;
@@ -14,10 +16,9 @@ export const DailyArticleCountKey = 'gu.history.dailyArticleCount';
 
 // Returns undefined if no daily article count in local storage
 export const getDailyArticleCount = (): DailyArticleHistory | undefined => {
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	const dailyCount = localStorage.getItem(DailyArticleCountKey);
+	const dailyCount = storage.local.get(DailyArticleCountKey);
 
-	if (!dailyCount) {
+	if (!dailyCount || typeof dailyCount !== 'string') {
 		return undefined;
 	}
 
@@ -32,8 +33,7 @@ export const getDailyArticleCount = (): DailyArticleHistory | undefined => {
 		return value;
 	} catch (e) {
 		// error parsing the string, so remove the key
-		// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-		localStorage.removeItem(DailyArticleCountKey);
+		storage.local.remove(DailyArticleCountKey);
 		return undefined;
 	}
 };
@@ -67,11 +67,10 @@ export const incrementDailyArticleCount = (): void => {
 	}
 
 	// set the latest article count
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	localStorage.setItem(
+	storage.local.set(
 		DailyArticleCountKey,
 		JSON.stringify({
 			value: dailyArticleCount,
-		} as DailyArticleCountLocalStorage),
+		}),
 	);
 };
