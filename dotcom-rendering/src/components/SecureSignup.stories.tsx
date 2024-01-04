@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { WebEmailSignUp as SignupComponent } from './EmailSignUpWrapper';
+import { EmailSignUpWrapper as SignupComponent } from './EmailSignUpWrapper';
 
 const meta: Meta<typeof SignupComponent> = {
 	title: 'Components/Newsletter Signup',
