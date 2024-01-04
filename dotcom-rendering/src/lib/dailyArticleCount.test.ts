@@ -1,4 +1,3 @@
-import { storage } from '@guardian/libs';
 import type { DailyArticle, DailyArticleHistory } from './dailyArticleCount';
 import {
 	DailyArticleCountKey,
@@ -25,7 +24,8 @@ const validDailyArticleCount: [DailyArticle, DailyArticle, DailyArticle] = [
 
 describe('dailyArticleCount', () => {
 	beforeEach(() => {
-		storage.local.clear();
+		// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
+		localStorage.clear();
 	});
 
 	it('gets undefined if no article count in local storage', () => {
@@ -35,7 +35,7 @@ describe('dailyArticleCount', () => {
 	});
 
 	it('returns array of valid daily article counts if they exist', () => {
-		storage.local.set(
+		localStorage.setItem(
 			DailyArticleCountKey,
 			JSON.stringify({ value: validDailyArticleCount }),
 		);
@@ -46,16 +46,16 @@ describe('dailyArticleCount', () => {
 	});
 
 	it('returns undefined if failed to parse local storage, and remove the key from localStorage', () => {
-		storage.local.set(DailyArticleCountKey, 'not a valid json string');
+		localStorage.setItem(DailyArticleCountKey, 'not a valid json string');
 
 		const output = getDailyArticleCount();
 
 		expect(output).toEqual(undefined);
-		expect(storage.local.get(DailyArticleCountKey)).toBeNull();
+		expect(localStorage.getItem(DailyArticleCountKey)).toBeNull();
 	});
 
 	it('returns undefined if invalid json format, and removes the key from localStorage', () => {
-		storage.local.set(
+		localStorage.setItem(
 			DailyArticleCountKey,
 			JSON.stringify(validDailyArticleCount), // invalid format (array only, not it { value: array } format)
 		);
@@ -63,7 +63,7 @@ describe('dailyArticleCount', () => {
 		const output = getDailyArticleCount();
 
 		expect(output).toEqual(undefined);
-		expect(storage.local.get(DailyArticleCountKey)).toBeNull();
+		expect(localStorage.getItem(DailyArticleCountKey)).toBeNull();
 	});
 
 	it('increments daily article count for today if daily article count does not exist', () => {
@@ -84,7 +84,7 @@ describe('dailyArticleCount', () => {
 
 	it('increments daily article count if it exists for today', () => {
 		// set localstorage to mock daily count
-		storage.local.set(
+		localStorage.setItem(
 			DailyArticleCountKey,
 			JSON.stringify({ value: validDailyArticleCount }),
 		);
@@ -106,7 +106,7 @@ describe('dailyArticleCount', () => {
 		const [, ...mocked] = validDailyArticleCount;
 
 		// set localstorage to mock daily count
-		storage.local.set(
+		localStorage.setItem(
 			DailyArticleCountKey,
 			JSON.stringify({ value: mocked }),
 		);
@@ -137,7 +137,7 @@ describe('dailyArticleCount', () => {
 		];
 
 		// set localstorage to mock daily count
-		storage.local.set(
+		localStorage.setItem(
 			DailyArticleCountKey,
 			JSON.stringify({ value: mocked }),
 		);

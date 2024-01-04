@@ -1,4 +1,4 @@
-import { storage } from '@guardian/libs';
+import { isObject, isString, storage } from '@guardian/libs';
 
 export interface DailyArticle {
 	day: number;
@@ -7,30 +7,21 @@ export interface DailyArticle {
 
 export type DailyArticleHistory = Array<DailyArticle>;
 
-// in localStorage, has format {"value":[{"day":18459,"count":1},{"day":18457,"count":1},{"day":18446,"count":1}]} to match frontend
-interface DailyArticleCountLocalStorage {
-	value: DailyArticleHistory;
-}
-
 export const DailyArticleCountKey = 'gu.history.dailyArticleCount';
 
 // Returns undefined if no daily article count in local storage
 export const getDailyArticleCount = (): DailyArticleHistory | undefined => {
-	const dailyCount = storage.local.get(DailyArticleCountKey);
-
-	if (!dailyCount || typeof dailyCount !== 'string') {
-		return undefined;
-	}
-
 	try {
-		const { value }: DailyArticleCountLocalStorage = JSON.parse(dailyCount);
+		const dailyCount = storage.local.get(
+			DailyArticleCountKey,
+		) as DailyArticleHistory;
 
 		// check if value parsed correctly
-		if (!value.length) {
+		if (!dailyCount.length) {
 			throw new Error('Invalid gu.history.dailyArticleCount value');
 		}
 
-		return value;
+		return dailyCount;
 	} catch (e) {
 		// error parsing the string, so remove the key
 		storage.local.remove(DailyArticleCountKey);
@@ -67,10 +58,5 @@ export const incrementDailyArticleCount = (): void => {
 	}
 
 	// set the latest article count
-	storage.local.set(
-		DailyArticleCountKey,
-		JSON.stringify({
-			value: dailyArticleCount,
-		}),
-	);
+	storage.local.set(DailyArticleCountKey, dailyArticleCount);
 };
