@@ -23,8 +23,7 @@
 		"cypress:run:e2e": "cypress run --spec 'cypress/e2e/**/*'",
 		"unused-exports": "pnpm ts-unused-exports ./tsconfig.json --ignoreFiles='(/(fixtures|__mocks__)/|.+\\.(stories|mocks))' --exitWithCount",
 		"storybook": "storybook dev -p 4002",
-		"build-storybook": "storybook build",
-		"makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./webpack/webpack.config.js"
+		"build-storybook": "storybook build"
 	},
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "3.350.0",
