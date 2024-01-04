@@ -72,7 +72,7 @@ export const ContributionsEpicNewsletterSignup = ({
 				seamless={true}
 				frameBorder="0"
 				css={css`
-					width: 100% !important;
+					width: 100%;
 					height: ${iframeHeight}px;
 				`}
 			/>
