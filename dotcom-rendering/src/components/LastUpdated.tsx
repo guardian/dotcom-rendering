@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, textSans } from '@guardian/source-foundations';
+import { palette, textSans } from '@guardian/source-foundations';
 
 const LastUpdated = ({
 	lastUpdatedDisplay,
@@ -14,7 +14,7 @@ const LastUpdated = ({
 				display: flex;
 				align-items: flex-end;
 				${textSans.xxsmall()};
-				color: ${neutral[46]};
+				color: ${palette.neutral[46]};
 			`}
 		>
 			<time

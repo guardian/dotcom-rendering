@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { timeAgo } from '@guardian/libs';
+import { log, timeAgo } from '@guardian/libs';
 import {
 	from,
 	headline,
@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import { Hide, Link } from '@guardian/source-react-components';
 import { StarRating } from '@guardian/source-react-components-development-kitchen';
+import { useEffect, useState } from 'react';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxCaption } from './LightboxCaption';
 import { LightboxLoader } from './LightboxLoader';
@@ -19,7 +20,6 @@ import { Picture } from './Picture';
 type Props = {
 	format: ArticleFormat;
 	images: ImageForLightbox[];
-	loaded: Set<number>;
 };
 
 const liStyles = css`
@@ -173,7 +173,13 @@ const Selection = ({
 	);
 };
 
-export const LightboxImages = ({ format, images, loaded }: Props) => {
+export const LightboxImages = ({ format, images }: Props) => {
+	const [loaded, setLoaded] = useState(new Set<number>());
+
+	useEffect(() => {
+		log('dotcom', '💡 images loaded:', loaded);
+	});
+
 	return (
 		<>
 			{images.map((image, index) => {
@@ -181,6 +187,14 @@ export const LightboxImages = ({ format, images, loaded }: Props) => {
 					image.width > image.height ? 'landscape' : 'portrait';
 
 				const position = index + 1;
+
+				const onLoad = () =>
+					setLoaded((set) => {
+						const previousSize = set.size;
+						set.add(position);
+						const newSize = set.size;
+						return previousSize !== newSize ? new Set(set) : set;
+					});
 
 				return (
 					<li
@@ -211,6 +225,8 @@ export const LightboxImages = ({ format, images, loaded }: Props) => {
 								format={format}
 								isLightbox={true}
 								orientation={orientation}
+								onLoad={onLoad}
+								loading="lazy"
 							/>
 							<aside css={asideStyles}>
 								{!!image.title && (

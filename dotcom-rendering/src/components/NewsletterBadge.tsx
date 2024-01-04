@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brandAlt, headline, neutral } from '@guardian/source-foundations';
+import { headline, palette } from '@guardian/source-foundations';
 
 // Note - the font-size is non-standard since the pixels are
 // relative to the SVG viewbox and need to be this size
@@ -8,7 +8,7 @@ const textStyle = css`
 	${headline.small({ fontWeight: 'bold' })};
 	font-size: 122%;
 	letter-spacing: -0.5px;
-	fill: ${brandAlt[400]};
+	fill: ${palette.brandAlt[400]};
 `;
 
 export const NewsletterBadge = () => (
@@ -16,7 +16,7 @@ export const NewsletterBadge = () => (
 		<text x="3" y="58" css={textStyle}>
 			Newsletters
 		</text>
-		<g stroke={neutral[100]} strokeMiterlimit="10">
+		<g stroke={palette.neutral[100]} strokeMiterlimit="10">
 			<path d="M111.69 61.08v1h-1" />
 			<path d="M108.7 62.08H2.49" strokeDasharray="1.99 1.99" />
 			<path d="M1.5 62.08h-1v-1" />

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brand, from, neutral, textSans } from '@guardian/source-foundations';
+import { from, palette, textSans } from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
 import SearchIcon from '../static/icons/search.svg';
 
@@ -15,7 +15,7 @@ const searchLinkStyles = css`
 	line-height: 1;
 	font-size: 1rem;
 	height: fit-content;
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	transition: color 80ms ease-out;
 	text-decoration: none;
 	padding: 7px 0;
@@ -44,7 +44,7 @@ const linkTablet = css`
 
 	:before {
 		content: '';
-		border-left: 1px solid ${brand[600]};
+		border-left: 1px solid ${palette.brand[600]};
 		height: 24px;
 	}
 

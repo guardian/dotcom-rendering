@@ -9,6 +9,7 @@ import {
 import { SvgChevronDownSingle } from '@guardian/source-react-components';
 import { useCallback, useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
+import { palette as themePalette } from '../palette';
 import type { SubheadingBlockElement } from '../types/content';
 
 const liStyles = css`
@@ -17,7 +18,7 @@ const liStyles = css`
 	border-top-style: solid;
 	border-top-color: ${sourcePalette.neutral[86]};
 	:hover {
-		background-color: ${sourcePalette.neutral[93]};
+		background-color: ${themePalette('--interactive-contents-hover')};
 	}
 `;
 

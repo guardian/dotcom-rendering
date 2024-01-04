@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
-import {
-	brandAlt,
-	from,
-	neutral,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, palette, textSans } from '@guardian/source-foundations';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
@@ -25,7 +20,7 @@ const headerStyle = css`
 `;
 
 const focusColor = css`
-	outline-color: ${brandAlt[400]};
+	outline-color: ${palette.brandAlt[400]};
 `;
 
 const metaStyle = css`
@@ -76,8 +71,8 @@ const popUpStyle = css`
 	transform: translate(-15%, 30%);
 	width: 266px;
 	padding: 16px;
-	background-color: ${neutral[7]};
-	color: ${neutral[100]};
+	background-color: ${palette.neutral[7]};
+	color: ${palette.neutral[100]};
 	font-weight: normal;
 	border-radius: 4px;
 	z-index: 100;

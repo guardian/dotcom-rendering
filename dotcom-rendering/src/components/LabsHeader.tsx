@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import {
 	border,
 	from,
-	labs,
+	palette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
@@ -90,7 +90,7 @@ const About = () => (
 	<div
 		css={css`
 			${textSans.small()};
-			background-color: ${labs[400]};
+			background-color: ${palette.labs[400]};
 			border-top: 1px solid ${border.primary};
 
 			width: 100vw;

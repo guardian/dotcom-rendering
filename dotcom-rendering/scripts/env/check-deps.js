@@ -12,7 +12,7 @@ if (pkg.devDependencies) {
  * We don't check packages that are not semver-compatible
  */
 const exceptions = /** @type {const} */ ([
-	'https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0',
+	'github:guardian/babel-plugin-px-to-rem#v0.1.0',
 ]);
 
 const mismatches = Object.entries(pkg.dependencies)

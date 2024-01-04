@@ -294,10 +294,9 @@ const headlineBlogBackgroundDark: PaletteFunction = ({
 
 const bylineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
-		case ArticleDesign.Analysis:
-			return sourcePalette.neutral[46];
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[86];
+		case ArticleDesign.Analysis:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 			switch (theme) {
@@ -4510,6 +4509,11 @@ const paginationTextLight: PaletteFunction = ({ theme }) => {
 };
 const paginationTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const interactiveContentsHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const interactiveContentsHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
 const audioAtomBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const audioAtomBackgroundDark: PaletteFunction = () =>
@@ -5452,6 +5456,10 @@ const paletteColours = {
 	'--pagination-text': {
 		light: paginationTextLight,
 		dark: paginationTextDark,
+	},
+	'--interactive-contents-hover': {
+		light: interactiveContentsHoverLight,
+		dark: interactiveContentsHoverDark,
 	},
 	'--audio-atom-background': {
 		light: audioAtomBackgroundLight,

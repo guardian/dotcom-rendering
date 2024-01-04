@@ -1,4 +1,4 @@
-import sha256 from 'crypto-js/sha256';
+import { createHash } from 'node:crypto';
 import React from 'react';
 import { guard } from '../lib/guard';
 import type { Switches } from '../types/config';
@@ -24,14 +24,14 @@ interface ContentABTestContext {
 export const getGroup = (pageId: string): ContentABTestGroup => {
 	// Apply a SHA-256 hash to the page ID
 	// Add the leading slash as this will be present when we apply the equivalent algorithm at the analysis stage
-	const hashedPageId = sha256(`/${pageId}`);
+	const hashedPageId = createHash('sha256').update(`/${pageId}`).digest();
 	// Take the last 4 bytes of the hash
 	// the sha256 function will always return a hash, even if the input is undefined.
-	const [lastFourBytes] = hashedPageId.words.slice(-1);
+	const lastFourBytes = hashedPageId.subarray(-4);
 
 	// Assign the group by applying mod base 12
 	// Mod can return negative values so we apply `Math.abs` to avoid negative groups
-	const group = Math.abs(lastFourBytes ?? NaN) % NUM_GROUPS;
+	const group = Math.abs(lastFourBytes.readInt32BE()) % NUM_GROUPS;
 
 	if (isContentABTestGroup(group)) {
 		return group;

@@ -9,4 +9,4 @@ then
 	exit 1
 fi
 
-yarn workspace @guardian/dotcom-rendering tsc
+pnpm --filter @guardian/dotcom-rendering tsc
