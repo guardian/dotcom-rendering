@@ -1,16 +1,11 @@
 import { css } from '@emotion/react';
-import {
-	brandAlt,
-	neutral,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { palette, textSans, until } from '@guardian/source-foundations';
 import type { NavType } from '../model/extract-nav';
 import ArrowRight from '../static/icons/arrow-right.svg';
 
 const supportStyles = css`
 	align-self: flex-start;
-	background-color: ${brandAlt[400]};
+	background-color: ${palette.brandAlt[400]};
 	border-radius: 20px;
 	display: flex;
 	align-items: center;
@@ -39,7 +34,7 @@ const supportFooterStyles = css`
 
 const supportLinkStyles = css`
 	position: relative;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	${textSans.medium()};
 	font-weight: 700;
 	display: block;

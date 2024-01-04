@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanAction } from '@guardian/libs';
-import { neutral, space, until } from '@guardian/source-foundations';
+import { palette, space, until } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
@@ -400,9 +400,9 @@ export const SecureSignupIframe = ({
 							}
 							button {
 								margin-left: ${space[1]}px;
-								background-color: ${neutral[0]};
+								background-color: ${palette.neutral[0]};
 								:hover {
-									background-color: ${neutral[20]};
+									background-color: ${palette.neutral[20]};
 								}
 							}
 						`}

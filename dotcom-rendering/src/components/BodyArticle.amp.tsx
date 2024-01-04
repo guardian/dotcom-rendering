@@ -4,13 +4,7 @@ import {
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '@guardian/libs';
-import {
-	neutral,
-	opinion,
-	text,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { palette, text, textSans, until } from '@guardian/source-foundations';
 import React from 'react';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { decideDesign } from '../lib/decideDesign';
@@ -55,13 +49,13 @@ const bulletStyle = (pillar: ArticleTheme) => css`
 `;
 
 const decideBackground = (design: Design, pillar: ArticleTheme): string => {
-	if (pillar === Special.Labs) return neutral[86];
+	if (pillar === Special.Labs) return palette.neutral[86];
 	switch (design) {
 		case Design.Comment:
 		case Design.Letter:
-			return opinion[800];
+			return palette.opinion[800];
 		default:
-			return neutral[100];
+			return palette.neutral[100];
 	}
 };
 
@@ -74,8 +68,8 @@ const body = (pillar: ArticleTheme, design: Design) => {
 
 const adStyle = css`
 	float: right;
-	background: ${neutral[93]};
-	border-top: 1px solid ${neutral[86]};
+	background: ${palette.neutral[93]};
+	border-top: 1px solid ${palette.neutral[86]};
 	width: min-content;
 	height: min-content;
 	clear: both;

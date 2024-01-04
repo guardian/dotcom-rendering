@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import {
+	space,
+	palette as srcPalette,
+	textSans,
+} from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
@@ -32,7 +36,7 @@ export const LightboxCaption = ({
 				<span
 					css={[
 						css`
-							color: ${neutral[97]};
+							color: ${srcPalette.neutral[97]};
 							a {
 								color: inherit;
 							}
@@ -50,7 +54,7 @@ export const LightboxCaption = ({
 			{!!credit && displayCredit && (
 				<div
 					css={css`
-						color: ${neutral[60]};
+						color: ${srcPalette.neutral[60]};
 					`}
 				>
 					{credit}

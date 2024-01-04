@@ -1,14 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import {
-	body,
-	neutral,
-	news,
-	space,
-	success,
-	textSans,
-} from '@guardian/source-foundations';
+import { body, palette, space, textSans } from '@guardian/source-foundations';
 import { SvgCheckmark, SvgCross } from '@guardian/source-react-components';
 
 // We export Radio wrapper styles to override Source Radio buttons to align
@@ -22,10 +15,10 @@ export const radioButtonWrapperStyles = (theme: ArticleTheme) => css`
 
 		margin-bottom: ${space[2]}px;
 
-		background-color: ${neutral[97]};
+		background-color: ${palette.neutral[97]};
 
 		:hover {
-			background-color: ${neutral[86]};
+			background-color: ${palette.neutral[86]};
 		}
 		/* TODO: apply same styles on focus (requires source update) */
 
@@ -54,7 +47,7 @@ const WhiteCheckmark = () => (
 
 			height: ${space[6]}px;
 			svg {
-				fill: ${neutral[100]};
+				fill: ${palette.neutral[100]};
 				height: ${space[6]}px;
 				width: ${space[6]}px;
 			}
@@ -71,7 +64,7 @@ const BlackCheckmark = () => (
 
 			height: ${space[6]}px;
 			svg {
-				fill: ${neutral[0]};
+				fill: ${palette.neutral[0]};
 				height: ${space[6]}px;
 				width: ${space[6]}px;
 			}
@@ -88,7 +81,7 @@ const WhiteCross = () => (
 
 			height: ${space[6]}px;
 			svg {
-				fill: ${neutral[100]};
+				fill: ${palette.neutral[100]};
 				height: ${space[6]}px;
 				width: ${space[6]}px;
 			}
@@ -113,7 +106,7 @@ const WhiteText = ({
 }) => (
 	<label
 		css={css`
-			color: ${neutral[100]};
+			color: ${palette.neutral[100]};
 			display: flex;
 			flex-direction: column;
 
@@ -156,7 +149,7 @@ const BlackText = ({
 }) => (
 	<label
 		css={css`
-			color: ${neutral[0]};
+			color: ${palette.neutral[0]};
 			display: flex;
 			flex-direction: column;
 
@@ -188,7 +181,7 @@ const correctSelectedAnswerStyles = css`
 	display: flex;
 	flex-direction: row;
 
-	background-color: ${success[400]};
+	background-color: ${palette.success[400]};
 `;
 
 export const CorrectSelectedAnswer = ({
@@ -218,7 +211,7 @@ const incorrectSelectedAnswerStyles = css`
 	display: flex;
 	flex-direction: row;
 
-	background-color: ${news[400]};
+	background-color: ${palette.news[400]};
 `;
 
 export const IncorrectAnswer = ({
@@ -244,10 +237,10 @@ export const IncorrectAnswer = ({
 const correctNonSelectedAnswerStyles = css`
 	display: flex;
 	flex-direction: row;
-	border: 2px solid ${success[400]};
+	border: 2px solid ${palette.success[400]};
 	padding-left: 10px;
 
-	background-color: ${neutral[97]};
+	background-color: ${palette.neutral[97]};
 `;
 
 export const NonSelectedCorrectAnswer = ({
@@ -274,7 +267,7 @@ export const NonSelectedCorrectAnswer = ({
 );
 
 const unselectedAnswerStyles = css`
-	background-color: ${neutral[97]};
+	background-color: ${palette.neutral[97]};
 	margin-bottom: ${space[2]}px;
 
 	padding-top: ${space[2]}px;

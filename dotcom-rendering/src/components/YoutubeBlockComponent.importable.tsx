@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import { body, neutral, space } from '@guardian/source-foundations';
+import { body, palette, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { trackVideoInteraction } from '../client/ga/ga';
@@ -46,8 +46,8 @@ const expiredOverlayStyles = (overrideImage?: string) =>
 				background-position: 49% 49%;
 				background-repeat: no-repeat;
 				padding-bottom: 56%;
-				color: ${neutral[100]};
-				background-color: ${neutral[20]};
+				color: ${palette.neutral[100]};
+				background-color: ${palette.neutral[20]};
 		  `
 		: undefined;
 
@@ -60,8 +60,8 @@ const expiredTextWrapperStyles = css`
 	padding-bottom: ${space[4]}px;
 	padding-left: ${space[1]}px;
 	padding-right: ${space[12]}px;
-	color: ${neutral[100]};
-	background-color: ${neutral[20]};
+	color: ${palette.neutral[100]};
+	background-color: ${palette.neutral[20]};
 `;
 
 const expiredSVGWrapperStyles = css`
@@ -69,7 +69,7 @@ const expiredSVGWrapperStyles = css`
 	svg {
 		width: ${space[12]}px;
 		height: ${space[12]}px;
-		fill: ${neutral[100]};
+		fill: ${palette.neutral[100]};
 	}
 `;
 
