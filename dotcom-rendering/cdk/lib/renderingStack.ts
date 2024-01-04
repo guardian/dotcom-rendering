@@ -16,7 +16,7 @@ import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
 
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
-	guApp: `${'article' | 'facia' | 'misc' | 'interactive'}-rendering` | string; // TODO - remove string
+	guApp: `${'article' | 'facia' | 'misc' | 'interactive'}-rendering`;
 	domainName: string;
 	instanceSize: InstanceSize;
 	scaling: GuAsgCapacity;

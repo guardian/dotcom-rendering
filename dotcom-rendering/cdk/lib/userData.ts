@@ -1,7 +1,7 @@
 import type { RenderingCDKStackProps } from './renderingStack';
 
-interface UserDataProps
-	extends Pick<RenderingCDKStackProps, 'guApp' | 'stage'> {
+interface UserDataProps extends Pick<RenderingCDKStackProps, 'stage'> {
+	guApp: string;
 	guStack: string;
 	artifactsBucket: string;
 }
