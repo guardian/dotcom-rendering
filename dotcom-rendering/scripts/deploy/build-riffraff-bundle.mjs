@@ -6,24 +6,17 @@ import { log, warn } from '../../../scripts/log.js';
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const target = path.resolve(dirname, '../..', 'target');
 
-const kebabToPascalCase = (str) => {
-	const words = str.split('-');
-	return words
-		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-		.join('');
-};
-
 /** This task generates the riff-raff bundle. It creates the following
  * directory layout under target/
  * target
  * ├── build.json
  * ├── riff-raff.yaml
  * ├── ${copyFrontendStatic()}
- * ├── ${copyApp('rendering')} // old article app
- * ├── ${copyApp('article')} // new article app
- * ├── ${copyApp('facia')}
- * ├── ${copyApp('misc')}
- * └── ${copyApp('interactive')}
+ * ├── ${copyApp('rendering')} // existing rendering app
+ * ├── ${copyApp('article-rendering')} // new article-rendering app
+ * ├── ${copyApp('facia-rendering')} // To be implemented
+ * ├── ${copyApp('misc-rendering')} // To be implemented
+ * └── ${copyApp('interactive-rendering')} // To be implemented
  */
 
 /**
@@ -41,10 +34,23 @@ const kebabToPascalCase = (str) => {
  *
  *  Except for the instance where appName === 'rendering' due to backwards compatibility
  *
- * @param guAppName {`${'article' | 'facia' | 'misc' | 'interactive'}-rendering` }
+ * @param guAppName {`${'article' | 'facia' | 'misc' | 'interactive'}-rendering` | 'rendering'}
  **/
 const copyApp = (guAppName) => {
-	/** @param {"CODE" | "PROD"} stage */
+	/**
+	 * @param {string} str
+	 * @returns {string}
+	 */
+	const kebabToPascalCase = (str) =>
+		str
+			.split('-')
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+			.join('');
+
+	/**
+	 * @param {"CODE" | "PROD"} stage
+	 * @returns {string}
+	 */
 	const cfnTemplateName = (stage) => {
 		if (guAppName === 'rendering') {
 			return `DotcomRendering-${stage}.template.json`;
@@ -140,17 +146,21 @@ const copyFrontendStatic = () => {
 
 const copyRiffRaff = () => {
 	log(' - copying riffraff yaml');
-	return cpy(['riff-raff-v1.yaml', 'riff-raff-v2.yaml'], target, {
-		cwd: dirname,
-	});
+	return cpy(
+		['riff-raff-rendering.yaml', 'riff-raff-rendering-all.yaml'],
+		target,
+		{
+			cwd: dirname,
+		},
+	);
 };
 
 Promise.all([
-	...copyApp('rendering'), // old article app
-	...copyApp('article-rendering'), // new article app
-	// ...copyApp('facia-rendering'),
-	// ...copyApp('misc-rendering'),
-	// ...copyApp('interactive-rendering'),
+	...copyApp('rendering'), // existing rendering app
+	...copyApp('article-rendering'), // new article-rendering app
+	// ...copyApp('facia-rendering'), // To be implemented
+	// ...copyApp('misc-rendering'), // To be implemented
+	// ...copyApp('interactive-rendering'), // To be implemented
 	...copyFrontendStatic(),
 	copyRiffRaff(),
 ]).catch((err) => {

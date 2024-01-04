@@ -26,7 +26,7 @@ deployments:
           value: public, max-age=315360000, immutable # one year in seconds
       prefixStack: false
       publicReadAcl: false
-  # New stack for article rendering
+  # article-rendering cloudformation
   article-rendering-cfn:
     template: cloudformation
     parameters:
@@ -36,6 +36,7 @@ deployments:
       cloudFormationStackByTags: false
       cloudFormationStackName: article-rendering
       amiParameter: AMIArticlerendering
+  # article-rendering autoscaling
   article-rendering:
     type: autoscaling
     parameters:
@@ -45,3 +46,7 @@ deployments:
     dependencies:
       - frontend-static
       - article-rendering-cfn
+  # To be implemented:
+  # - facia-rendering
+  # - misc-rendering
+  # - interactive-rendering
