@@ -42,6 +42,7 @@ const progressBarHeight = 10;
 const progressBarContainerStyles = css`
 	width: 100%;
 	height: ${progressBarHeight}px;
+	/* stylelint-disable-next-line color-no-hex */
 	background-color: #dda7a1;
 	position: absolute;
 	bottom: 0;
