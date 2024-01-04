@@ -4,7 +4,7 @@ import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { EmailSignup } from './EmailSignup';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Section } from './Section';
-import { SecureSignup } from './SecureSignup';
+import { SecureSignup } from './SecureSignup.importable';
 
 const withSectionWrapper = (Story: typeof NewsTheme) => (
 	<Section
