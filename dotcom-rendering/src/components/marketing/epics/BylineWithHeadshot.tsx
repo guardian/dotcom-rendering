@@ -4,7 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/BylineWithHeadshot.tsx
  */
 import { css } from '@emotion/react';
-import { body } from '@guardian/source-foundations';
+import { body, palette } from '@guardian/source-foundations';
 import type { BylineWithImage } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { ReactComponent } from '../lib/ReactComponent';
 
@@ -62,8 +62,8 @@ const bylineBottomDecoration = css`
 	height: calc(0.25rem * 4 + 1px);
 	background-image: repeating-linear-gradient(
 		to bottom,
-		#dcdcdc,
-		#dcdcdc 1px,
+		${palette.neutral[86]},
+		${palette.neutral[86]} 1px,
 		transparent 1px,
 		transparent 0.25rem
 	);
