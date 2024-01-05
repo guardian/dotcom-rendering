@@ -180,7 +180,6 @@ export const CalloutShare = ({
 					<SvgShare size="small" />
 				</span>
 				<div css={shareCalloutTextStyles}>
-					Know others who are affected?{' '}
 					<Button
 						size="xsmall"
 						priority="subdued"
@@ -191,7 +190,7 @@ export const CalloutShare = ({
 						}}
 						cssOverrides={shareCalloutLinkStyles}
 					>
-						Please share this callout.
+						Share this callout
 					</Button>
 					{isCopied && (
 						<span css={sharePopupStyles} role="alert">
