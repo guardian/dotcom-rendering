@@ -130,7 +130,7 @@ const shareIconStyles = css`
 
 	box-sizing: border-box;
 	fill: ${palette('--article-link-text')};
-	padding: 0.5px 0;
+	padding: 0 1px 0 0;
 `;
 
 export const CalloutShare = ({
