@@ -142,11 +142,6 @@ const adSlotCollapseStyles = css`
 	&.ad-slot.ad-slot--collapse {
 		display: none;
 	}
-	&.ad-slot--collapse-below-desktop {
-		${between.tablet.and.desktop} {
-			display: none;
-		}
-	}
 `;
 
 /**
@@ -208,6 +203,11 @@ const merchandisingAdStyles = css`
 		margin: 0;
 		padding-bottom: 20px;
 		min-height: ${adSizes.billboard.height + labelHeight + 20}px;
+	}
+	&:not(.ad-slot--fluid).ad-slot--rendered {
+		${between.phablet.and.desktop} {
+			display: none;
+		}
 	}
 `;
 
