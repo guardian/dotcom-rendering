@@ -14,6 +14,6 @@ module.exports = {
 		'^svgs/(.*)$': '<rootDir>/__mocks__/svgMock.tsx',
 		'^(.*)\\.svg$': '<rootDir>/__mocks__/svgMock.tsx',
 	},
-	transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
+	transformIgnorePatterns: [`/node_modules/.pnpm/(?!${esModules})`],
 	collectCoverageFrom: ['src/**/*.{ts,tsx}'],
 };
