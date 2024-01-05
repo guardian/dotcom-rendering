@@ -38,18 +38,42 @@ const getElementsFromBlocks = (blocks: Block[]): FEElement[] =>
 // Tests
 describe('Enhancing ad placeholders', () => {
 	const testCases = [
-		{ paragraphs: 0, expectedPlaceholders: 0, expectedPositions: [] },
-		{ paragraphs: 1, expectedPlaceholders: 0, expectedPositions: [] },
-		{ paragraphs: 3, expectedPlaceholders: 0, expectedPositions: [] },
-		{ paragraphs: 6, expectedPlaceholders: 1, expectedPositions: [3] },
-		{ paragraphs: 9, expectedPlaceholders: 1, expectedPositions: [3] },
-		{ paragraphs: 11, expectedPlaceholders: 2, expectedPositions: [3, 10] },
-	];
+		{ paragraphs: 0, expectedPositions: [] },
+		{ paragraphs: 1, expectedPositions: [] },
+		{ paragraphs: 3, expectedPositions: [] },
+		{ paragraphs: 6, expectedPositions: [3] },
+		{ paragraphs: 9, expectedPositions: [3] },
+		{ paragraphs: 11, expectedPositions: [3, 10] },
+		{ paragraphs: 12, expectedPositions: [3, 10] },
+		{
+			paragraphs: 16,
+			expectedPositions: [3, 10, 17],
+		},
+		{
+			paragraphs: 87,
+			expectedPositions: [
+				3, 10, 17, 24, 31, 38, 45, 52, 59, 66, 73, 80, 87, 94,
+			],
+		},
+		{
+			paragraphs: 88,
+			expectedPositions: [
+				3, 10, 17, 24, 31, 38, 45, 52, 59, 66, 73, 80, 87, 94, 101,
+			],
+		},
+		{
+			paragraphs: 999,
+			expectedPositions: [
+				3, 10, 17, 24, 31, 38, 45, 52, 59, 66, 73, 80, 87, 94, 101,
+			],
+		},
+	] satisfies Array<{ paragraphs: number; expectedPositions: number[] }>;
 
 	describe.each(testCases)(
 		'for $paragraphs paragraph(s) in an article',
-		({ paragraphs, expectedPlaceholders, expectedPositions }) => {
+		({ paragraphs, expectedPositions }) => {
 			const elements = getTestParagraphElements(paragraphs);
+			const expectedPlaceholders = expectedPositions.length;
 
 			const input: Block[] = [
 				{
@@ -60,23 +84,19 @@ describe('Enhancing ad placeholders', () => {
 
 			const output = enhanceAdPlaceholders(input);
 			const outputElements = getElementsFromBlocks(output);
-			const outputPlaceholders = outputElements.filter(
-				elementIsAdPlaceholder,
+			const placeholderIndices = outputElements.flatMap((el, idx) =>
+				elementIsAdPlaceholder(el) ? [idx] : [],
 			);
 
 			it(`should insert ${expectedPlaceholders} ad placeholder(s)`, () => {
-				expect(outputPlaceholders.length).toEqual(expectedPlaceholders);
+				expect(placeholderIndices.length).toEqual(expectedPlaceholders);
 			});
 
 			if (expectedPlaceholders > 0) {
-				it(`should insert ad placeholder(s) in the expected positions (${JSON.stringify(
-					expectedPositions,
-				)})`, () => {
-					const indexesOfPlaceholders = outputElements.flatMap(
-						(el, idx) => (elementIsAdPlaceholder(el) ? [idx] : []),
-					);
-
-					expect(indexesOfPlaceholders).toEqual(expectedPositions);
+				it(`should insert ad placeholder(s) in the expected position(s): ${expectedPositions.join(
+					',',
+				)}`, () => {
+					expect(placeholderIndices).toEqual(expectedPositions);
 				});
 			}
 		},
@@ -106,11 +126,11 @@ describe('Enhancing ad placeholders', () => {
 
 		expect(outputPlaceholders.length).toEqual(1);
 
-		const indexesOfPlaceholders = outputElements.flatMap((el, idx) =>
+		const placeholderIndices = outputElements.flatMap((el, idx) =>
 			elementIsAdPlaceholder(el) ? [idx] : [],
 		);
 
 		// Expect one placeholder to be present after the third paragraph only
-		expect(indexesOfPlaceholders).toEqual([3]);
+		expect(placeholderIndices).toEqual([3]);
 	});
 });
