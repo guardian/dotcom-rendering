@@ -4,7 +4,7 @@ import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 
 // Test helper functions
 
-const getTestElements = (length: number): FEElement[] => {
+const getTestParagraphElements = (length: number): FEElement[] => {
 	const textElement: FEElement = {
 		_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 		elementId: 'mockId',
@@ -12,6 +12,16 @@ const getTestElements = (length: number): FEElement[] => {
 	};
 	return Array<FEElement>(length).fill(textElement);
 };
+
+const getImageElement = (): FEElement => ({
+	_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+	media: { allImages: [] },
+	data: {},
+	displayCredit: true,
+	role: 'supporting',
+	imageSources: [],
+	elementId: '12345',
+});
 
 const elementIsAdPlaceholder = (element: FEElement): boolean =>
 	element._type ===
@@ -34,7 +44,7 @@ describe('Enhancing ad placeholders', () => {
 	describe.each(testCases)(
 		'for $paragraphs paragraph(s) in an article',
 		({ paragraphs, expectedPlaceholders, expectedPositions }) => {
-			const elements = getTestElements(paragraphs);
+			const elements = getTestParagraphElements(paragraphs);
 
 			const input: Block[] = [
 				{
@@ -73,4 +83,43 @@ describe('Enhancing ad placeholders', () => {
 			}
 		},
 	);
+
+	describe('should not insert an ad placeholder after a non text element', () => {
+		const threeParagraphs = getTestParagraphElements(3);
+
+		const elements = [
+			...threeParagraphs,
+			getImageElement(),
+			...threeParagraphs,
+		];
+
+		const input: Block[] = [
+			{
+				...blockMetaData,
+				elements,
+			},
+		];
+
+		const output = enhanceAdPlaceholders(input);
+		const outputElements = getElementsFromBlocks(output);
+		const outputPlaceholders = outputElements.filter(
+			elementIsAdPlaceholder,
+		) as AdPlaceholderBlockElement[];
+
+		expect(outputPlaceholders.length).toEqual(1);
+
+		const indexesOfPlaceholders = outputElements.reduce(
+			(idxs: number[], el: FEElement, idx: number) => {
+				if (elementIsAdPlaceholder(el)) {
+					return [...idxs, idx];
+				} else {
+					return idxs;
+				}
+			},
+			[],
+		);
+
+		// Expect one placeholder to be present after the third paragraph only
+		expect(indexesOfPlaceholders).toEqual([3]);
+	});
 });
