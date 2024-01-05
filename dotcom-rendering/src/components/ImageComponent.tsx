@@ -4,7 +4,7 @@ import {
 	between,
 	from,
 	headline,
-	neutral,
+	palette as srcPalette,
 	until,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
@@ -127,8 +127,8 @@ const titleWrapper = (palette: Palette) => css`
 	${from.desktop} {
 		${headline.xsmall({ fontWeight: 'light' })}
 	}
-	color: ${neutral[100]};
-	background: linear-gradient(transparent, ${neutral[0]});
+	color: ${srcPalette.neutral[100]};
+	background: linear-gradient(transparent, ${srcPalette.neutral[0]});
 
 	:before {
 		background-color: ${palette.background.imageTitle};
@@ -278,6 +278,8 @@ export const ImageComponent = ({
 
 	const palette = decidePalette(format);
 
+	const loading = isMainMedia ? 'eager' : 'lazy';
+
 	if (
 		isMainMedia &&
 		format.display === ArticleDisplay.Immersive &&
@@ -325,7 +327,7 @@ export const ImageComponent = ({
 							alt={element.data.alt ?? ''}
 							width={imageWidth}
 							height={imageHeight}
-							isLazy={!isMainMedia}
+							loading={loading}
 							isMainMedia={isMainMedia}
 						/>
 					</Island>
@@ -337,7 +339,7 @@ export const ImageComponent = ({
 						alt={element.data.alt ?? ''}
 						width={imageWidth}
 						height={imageHeight}
-						isLazy={!isMainMedia}
+						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
 				)}
@@ -389,7 +391,7 @@ export const ImageComponent = ({
 							alt={element.data.alt ?? ''}
 							width={imageWidth}
 							height={imageHeight}
-							isLazy={!isMainMedia}
+							loading={loading}
 							isMainMedia={isMainMedia}
 						/>
 					</Island>
@@ -401,7 +403,7 @@ export const ImageComponent = ({
 						alt={element.data.alt ?? ''}
 						width={imageWidth}
 						height={imageHeight}
-						isLazy={!isMainMedia}
+						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
 				)}
@@ -456,7 +458,7 @@ export const ImageComponent = ({
 							alt={element.data.alt ?? ''}
 							width={imageWidth}
 							height={imageHeight}
-							isLazy={!isMainMedia}
+							loading={loading}
 							isMainMedia={isMainMedia}
 						/>
 					</Island>
@@ -468,7 +470,7 @@ export const ImageComponent = ({
 						alt={element.data.alt ?? ''}
 						width={imageWidth}
 						height={imageHeight}
-						isLazy={!isMainMedia}
+						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
 				)}

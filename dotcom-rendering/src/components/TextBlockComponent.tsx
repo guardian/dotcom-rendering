@@ -4,7 +4,7 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	body,
 	from,
-	neutral,
+	palette,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
@@ -192,7 +192,7 @@ const styles = (format: ArticleFormat) => css`
 		border-radius: 50%;
 		height: 13px;
 		width: 13px;
-		background-color: ${neutral[86]};
+		background-color: ${palette.neutral[86]};
 		margin-left: -20px;
 		margin-right: 7px;
 	}

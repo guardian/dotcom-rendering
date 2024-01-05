@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	brand,
 	from,
 	headline,
 	line,
+	palette,
 	space,
 	text,
 	textSans,
@@ -80,7 +80,7 @@ export const registerButton = css`
 
 export const laterButton = css`
 	/* stylelint-disable-next-line declaration-no-important */
-	color: ${brand[400]} !important;
+	color: ${palette.brand[400]} !important;
 `;
 
 export const signInLink = css`

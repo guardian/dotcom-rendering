@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brand, neutral, textSans } from '@guardian/source-foundations';
+import { palette as srcPalette, textSans } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
@@ -18,8 +18,8 @@ const wrapperStyles = css`
 `;
 
 const calloutDetailsStyles = css`
-	border-top: 1px ${neutral[86]} solid;
-	border-bottom: 1px ${neutral[86]} solid;
+	border-top: 1px ${srcPalette.neutral[86]} solid;
+	border-bottom: 1px ${srcPalette.neutral[86]} solid;
 	position: relative;
 	padding-bottom: 10px;
 
@@ -30,7 +30,7 @@ const calloutDetailsStyles = css`
 `;
 
 const backgroundColorStyle = css`
-	background-color: ${neutral[97]};
+	background-color: ${srcPalette.neutral[97]};
 `;
 
 const speechBubbleWrapperStyles = css`
@@ -76,7 +76,7 @@ const summaryContentWrapper = css`
 
 const speechBubbleStyles = (palette: Palette) => css`
 	${textSans.medium({ fontWeight: 'bold' })}
-	color: ${neutral[100]};
+	color: ${srcPalette.neutral[100]};
 	background-color: ${palette.background.speechBubble};
 	min-width: 88px;
 	padding-bottom: 6px;
@@ -102,7 +102,7 @@ const descriptionStyles = css`
 
 const headingTextStyles = css`
 	a {
-		color: ${brand[500]};
+		color: ${srcPalette.brand[500]};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;

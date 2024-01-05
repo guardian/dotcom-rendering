@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import { palette, space, textSans } from '@guardian/source-foundations';
 import { SvgPinned } from '@guardian/source-react-components';
 import { palette as themePalette } from '../palette';
 import { Island } from './Island';
@@ -57,7 +57,7 @@ const FirstPublished = ({
 				{!isPinnedPost && (
 					<span
 						css={css`
-							color: ${neutral[46]};
+							color: ${palette.neutral[46]};
 							font-weight: bold;
 							margin-right: ${space[2]}px;
 						`}
@@ -73,7 +73,7 @@ const FirstPublished = ({
 				<span
 					css={css`
 						${textSans.xxsmall()};
-						color: ${neutral[46]};
+						color: ${palette.neutral[46]};
 					`}
 				>
 					{firstPublishedDisplay ?? fallbackDate(publishedDate)}
@@ -107,7 +107,7 @@ const FirstPublished = ({
 							align-self: center;
 							margin-left: ${space[2]}px;
 							svg {
-								fill: ${neutral[100]};
+								fill: ${palette.neutral[100]};
 							}
 						`}
 					>

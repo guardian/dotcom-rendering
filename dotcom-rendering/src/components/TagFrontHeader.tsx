@@ -1,10 +1,8 @@
 import { css, jsx } from '@emotion/react';
 import {
-	brand,
 	breakpoints,
 	from,
 	headline,
-	neutral,
 	palette,
 	space,
 	until,
@@ -198,15 +196,15 @@ const paragraphStyle = css`
 
 const titleStyle = css`
 	${headline.xxsmall({ fontWeight: 'bold' })};
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	padding-bottom: ${space[1]}px;
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
 `;
 
 const linkStyles = css`
-	color: ${brand[500]};
+	color: ${palette.brand[500]};
 	text-decoration: none;
-	border-bottom: 1px solid ${brand[500]};
+	border-bottom: 1px solid ${palette.brand[500]};
 `;
 
 const buildElementTree = (node: Node): ReactNode => {

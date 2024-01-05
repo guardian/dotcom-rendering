@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, neutral, text, textSans } from '@guardian/source-foundations';
+import { body, palette, text, textSans } from '@guardian/source-foundations';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { BaseLinkType } from '../model/extract-nav';
 import CommentIcon from '../static/icons/comment.svg';
@@ -34,7 +34,7 @@ const linkStyle = (pillar: ArticleTheme) => css`
 		pointer-events: none;
 		top: 0;
 		right: -3px;
-		color: ${neutral[86]};
+		color: ${palette.neutral[86]};
 	}
 `;
 
@@ -69,7 +69,7 @@ const sectionLinkStyle = (pillar: ArticleTheme) => css`
 		pointer-events: none;
 		top: 0;
 		right: -3px;
-		color: ${neutral[86]};
+		color: ${palette.neutral[86]};
 	}
 `;
 
@@ -94,7 +94,7 @@ const siteLinkStyle = css`
 	${textSans.small()};
 	font-weight: bold;
 	text-decoration: none;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	text-align: right;
 `;
 

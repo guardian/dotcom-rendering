@@ -38,7 +38,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 export const BarChart = () => {
 	return (
 		<Wrapper>
-			<ChartAtom id="123abc" html={barChartHtml} title="" />
+			<ChartAtom id="123abc" html={barChartHtml} title={''} />
 		</Wrapper>
 	);
 };
@@ -46,7 +46,7 @@ BarChart.decorators = [splitTheme([defaultFormat])];
 export const LineChart = () => {
 	return (
 		<Wrapper>
-			<ChartAtom id="123abc" html={lineChartHtml} title="" />
+			<ChartAtom id="123abc" html={lineChartHtml} title={''} />
 		</Wrapper>
 	);
 };

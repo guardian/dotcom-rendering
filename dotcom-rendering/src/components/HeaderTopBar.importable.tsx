@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brand, from, space } from '@guardian/source-foundations';
+import { from, palette, space } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
@@ -26,7 +26,7 @@ interface HeaderTopBarProps {
 const topBarStylesUntilLeftCol = css`
 	display: flex;
 	height: 30px;
-	background-color: ${brand[300]};
+	background-color: ${palette.brand[300]};
 	box-sizing: border-box;
 	padding-left: 10px;
 	${from.mobileLandscape} {
@@ -76,7 +76,7 @@ export const HeaderTopBar = ({
 	return (
 		<div
 			css={css`
-				background-color: ${brand[300]};
+				background-color: ${palette.brand[300]};
 			`}
 		>
 			<div

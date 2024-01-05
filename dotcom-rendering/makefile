@@ -19,11 +19,11 @@ endef
 
 # https://www.npmjs.com/package/aws-cdk#cdk-synthesize
 cdk-synth:
-	@yarn cdk synth --path-metadata false --version-reporting false
+	@pnpm cdk synth --path-metadata false --version-reporting false
 
 # https://www.npmjs.com/package/aws-cdk#cdk-diff
 cdk-diff:
-	@yarn cdk diff --path-metadata false --version-reporting false --profile frontend
+	@pnpm cdk diff --path-metadata false --version-reporting false --profile frontend
 
 riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
@@ -68,7 +68,7 @@ dev-debug: clear clean-dist install
 
 storybook-dev: clear clean-dist install
 	$(call log, "starting Storybook DEV server")
-	yarn storybook
+	@pnpm storybook
 
 # tests #####################################
 
@@ -104,22 +104,22 @@ tsc: clean-dist install
 
 lint-fix:
 	$(call log, "attempting to fix lint errors")
-	@yarn lint:fix
+	@pnpm lint:fix
 
 prettier:
 	$(call log, "attempting to fix prettier errors")
-	@cd .. && yarn prettier:write
+	@cd .. && pnpm prettier:write
 
 fix: clear clean-dist install lint-fix prettier
 	$(call log, "everything fixed")
 
 snapshot: clear clean-dist install
 	$(call log, "taking snapshots")
-	yarn chromatic
+	@pnpm chromatic
 
 lint: clean-dist install
 	$(call log, "checking for lint errors")
-	@yarn lint
+	@pnpm lint
 
 lint-project: check-env
 	$(call log, "linting project")
@@ -133,12 +133,12 @@ stylelint: clean-dist install
 
 test: clean-dist install
 	$(call log, "running tests")
-	@yarn test:ci --verbose
+	@pnpm test:ci --verbose
 	$(call log, "everything seems 👌")
 
 test-ci: clear clean-dist install
 	$(call log, "running tests")
-	@yarn test:ci --verbose --collectCoverage --coverageReporters=lcov
+	@pnpm test:ci --verbose --collectCoverage --coverageReporters=lcov
 
 validate: clean-dist install lint-project tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
@@ -158,7 +158,7 @@ clean-deps:
 
 install: check-env
 	$(call log, "refreshing dependencies")
-	@cd .. && yarn --silent --immutable
+	@cd .. && pnpm install --frozen-lockfile
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
@@ -199,24 +199,7 @@ gen-stories:
 
 gen-fixtures:
 	$(call log, "Generating new fixture data")
-	@yarn tsx scripts/test-data/gen-fixtures.js
+	@pnpm tsx scripts/test-data/gen-fixtures.js
 
 perf-test:
 	@node scripts/perf/perf-test.js
-
-# Because Snyk finds vulnerabilities snyk test command exits with error code 1 and make picks it up.
-# Adding - at the beginning of the command ignores the error and we're getting:
-# make: [snyk] Error 1 (ignored)
-# See docs: https://www.gnu.org/software/make/manual/html_node/Errors.html#:~:text=To%20ignore%20errors%20in%20a,to%20the%20shell%20for%20execution.&text=This%20causes%20make%20to%20continue,unable%20to%20remove%20a%20file
-
-snyk:
-	-@snyk test --severity-threshold=high --file="../package.json"
-
-snyk-dcr:
-	-@snyk test --severity-threshold=high --file=package.json
-
-snyk-ar:
-	-@snyk test --severity-threshold=high --file=../apps-rendering/package.json
-
-snyk-storybooks:
-	-@snyk test --severity-threshold=high --file=../storybooks/package.json

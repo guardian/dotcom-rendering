@@ -1,9 +1,7 @@
 import { css, Global } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	brandAlt,
 	focusHalo,
-	neutral,
 	palette as sourcePalette,
 } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
@@ -89,8 +87,8 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 						${focusHalo}
 					}
 					::selection {
-						background: ${brandAlt[400]};
-						color: ${neutral[7]};
+						background: ${sourcePalette.brandAlt[400]};
+						color: ${sourcePalette.neutral[7]};
 					}
 				`}
 			/>

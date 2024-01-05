@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { border, neutral, textSans } from '@guardian/source-foundations';
+import { border, palette, textSans } from '@guardian/source-foundations';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 
 type Identifier =
@@ -27,12 +27,12 @@ export const SkipTo = ({ id, label }: Props) => {
 				overflow: hidden;
 				padding: 0;
 				position: absolute;
-				background: ${neutral[100]};
+				background: ${palette.neutral[100]};
 				display: block;
 				text-align: center;
 				margin: 0;
 				text-decoration: none;
-				color: ${neutral[0]};
+				color: ${palette.neutral[0]};
 				&:focus,
 				&:active {
 					border: 5px solid ${border.focusHalo};
@@ -40,7 +40,7 @@ export const SkipTo = ({ id, label }: Props) => {
 				}
 				&:visited,
 				&:active {
-					color: ${neutral[0]};
+					color: ${palette.neutral[0]};
 				}
 			`}
 		>

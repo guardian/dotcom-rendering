@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brandAlt, neutral } from '@guardian/source-foundations';
+import { palette } from '@guardian/source-foundations';
 import type { TimelineEvent } from '../types/content';
 import { Expandable } from './Expandable.amp';
 
@@ -17,7 +17,7 @@ const eventStyle = css`
 `;
 
 const highlight = css`
-	background-color: ${brandAlt[400]};
+	background-color: ${palette.brandAlt[400]};
 `;
 
 const eventIconStyle = css`
@@ -28,7 +28,7 @@ const eventIconStyle = css`
 		border-radius: 100%;
 		float: left;
 		margin-left: -25px;
-		background-color: ${neutral[7]};
+		background-color: ${palette.neutral[7]};
 	}
 `;
 

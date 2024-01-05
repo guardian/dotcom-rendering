@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline, neutral } from '@guardian/source-foundations';
+import { headline, palette } from '@guardian/source-foundations';
 import { string as curly } from 'curlyquotes';
 import { getAgeWarning } from '../lib/age-warning';
 import { getSoleContributor } from '../lib/byline';
@@ -35,7 +35,7 @@ const headerStyle = (pillar: ArticleTheme) => css`
 	${headline.small()};
 	font-weight: 500;
 	padding: 3px 10px 24px;
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	background-color: ${pillarPalette_DO_NOT_USE[pillar].main};
 `;
 
@@ -56,13 +56,13 @@ const bylineStyle = (pillar: ArticleTheme) => css`
 
 const standfirstStyle = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	background-color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 	font-weight: bold;
 	padding: 3px 10px 12px;
 
 	a {
-		color: ${neutral[100]};
+		color: ${palette.neutral[100]};
 	}
 
 	p {

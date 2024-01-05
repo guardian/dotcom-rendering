@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, neutral, text, textSans } from '@guardian/source-foundations';
+import { body, palette, text, textSans } from '@guardian/source-foundations';
 import { getAgeWarning } from '../lib/age-warning';
 import { getSoleContributor } from '../lib/byline';
 import { getSharingUrls } from '../lib/sharing-urls';
@@ -17,18 +17,18 @@ const headerStyle = css`
 	font-weight: 400;
 	padding-top: 3px;
 	padding-bottom: 27px;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 `;
 
 const bylineStyle = css`
 	${body.medium()};
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	padding-bottom: 8px;
 	font-style: italic;
 
 	a {
 		font-weight: 700;
-		color: ${neutral[7]};
+		color: ${palette.neutral[7]};
 		text-decoration: none;
 		font-style: normal;
 	}

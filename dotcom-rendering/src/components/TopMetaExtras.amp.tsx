@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, text, textSans } from '@guardian/source-foundations';
+import { palette, text, textSans } from '@guardian/source-foundations';
 import {
 	neutralBorder,
 	pillarMap,
@@ -58,7 +58,7 @@ const metaStyle = css`
 `;
 
 const twitterIcon = css`
-	fill: ${neutral[46]};
+	fill: ${palette.neutral[46]};
 	height: 12px;
 	margin-bottom: -2px;
 	width: 12px;

@@ -14,6 +14,7 @@ export const DailyArticleCountKey = 'gu.history.dailyArticleCount';
 
 // Returns undefined if no daily article count in local storage
 export const getDailyArticleCount = (): DailyArticleHistory | undefined => {
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 	const dailyCount = localStorage.getItem(DailyArticleCountKey);
 
 	if (!dailyCount) {
@@ -31,6 +32,7 @@ export const getDailyArticleCount = (): DailyArticleHistory | undefined => {
 		return value;
 	} catch (e) {
 		// error parsing the string, so remove the key
+		// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 		localStorage.removeItem(DailyArticleCountKey);
 		return undefined;
 	}
@@ -65,6 +67,7 @@ export const incrementDailyArticleCount = (): void => {
 	}
 
 	// set the latest article count
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 	localStorage.setItem(
 		DailyArticleCountKey,
 		JSON.stringify({
