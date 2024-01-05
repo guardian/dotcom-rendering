@@ -1,19 +1,22 @@
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import type { AdPlaceholderBlockElement, FEElement } from '../types/content';
+import type {
+	AdPlaceholderBlockElement,
+	FEElement,
+	ImageBlockElement,
+	TextBlockElement,
+} from '../types/content';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 
 // Test helper functions
 
-const getTestParagraphElements = (length: number): FEElement[] => {
-	const textElement: FEElement = {
+const getTestParagraphElements = (length: number): TextBlockElement[] =>
+	Array<TextBlockElement>(length).fill({
 		_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 		elementId: 'mockId',
 		html: '<p>I am a paragraph</p>',
-	};
-	return Array<FEElement>(length).fill(textElement);
-};
+	});
 
-const getImageElement = (): FEElement => ({
+const getImageElement = (): ImageBlockElement => ({
 	_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 	media: { allImages: [] },
 	data: {},
@@ -30,7 +33,7 @@ const elementIsAdPlaceholder = (
 	'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 
 const getElementsFromBlocks = (blocks: Block[]): FEElement[] =>
-	blocks.map((o) => o.elements).flat();
+	blocks.flatMap(({ elements }) => elements);
 
 // Tests
 describe('Enhancing ad placeholders', () => {
@@ -69,15 +72,8 @@ describe('Enhancing ad placeholders', () => {
 				it(`should insert ad placeholder(s) in the expected positions (${JSON.stringify(
 					expectedPositions,
 				)})`, () => {
-					const indexesOfPlaceholders = outputElements.reduce(
-						(idxs: number[], el: FEElement, idx: number) => {
-							if (elementIsAdPlaceholder(el)) {
-								return [...idxs, idx];
-							} else {
-								return idxs;
-							}
-						},
-						[],
+					const indexesOfPlaceholders = outputElements.flatMap(
+						(el, idx) => (elementIsAdPlaceholder(el) ? [idx] : []),
 					);
 
 					expect(indexesOfPlaceholders).toEqual(expectedPositions);
@@ -110,15 +106,8 @@ describe('Enhancing ad placeholders', () => {
 
 		expect(outputPlaceholders.length).toEqual(1);
 
-		const indexesOfPlaceholders = outputElements.reduce(
-			(idxs: number[], el: FEElement, idx: number) => {
-				if (elementIsAdPlaceholder(el)) {
-					return [...idxs, idx];
-				} else {
-					return idxs;
-				}
-			},
-			[],
+		const indexesOfPlaceholders = outputElements.flatMap((el, idx) =>
+			elementIsAdPlaceholder(el) ? [idx] : [],
 		);
 
 		// Expect one placeholder to be present after the third paragraph only
