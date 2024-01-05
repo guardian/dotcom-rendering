@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { border, palette, textSans } from '@guardian/source-foundations';
+import { palette, textSans } from '@guardian/source-foundations';
 import type { ReactNode } from 'react';
 
 type Props = {
@@ -24,7 +24,7 @@ const skipLinkCss = css`
 	color: ${palette.neutral[0]};
 	&:focus,
 	&:active {
-		border: 5px solid ${border.focusHalo};
+		border: 5px solid ${palette.focus[400]};
 		position: static;
 	}
 	&:visited,
