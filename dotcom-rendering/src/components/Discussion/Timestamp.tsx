@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
-import { useState } from 'react';
-import { dateFormatter } from '../../lib/discussionDateFormatter';
-import { useInterval } from '../../lib/useInterval';
 import { palette as schemedPalette } from '../../palette';
+import { RelativeTime } from '../RelativeTime.importable';
 
 type Props = {
 	isoDateTime: string;
@@ -19,12 +17,13 @@ const linkStyles = css`
 	:focus {
 		text-decoration: underline;
 	}
-`;
-const timeStyles = css`
-	${textSans.xxsmall({ fontWeight: 'light' })}
-	min-width: 0.75rem;
-	margin-right: 0.3125rem;
-	white-space: nowrap;
+
+	time {
+		${textSans.xxsmall({ fontWeight: 'light' })}
+		min-width: 0.75rem;
+		margin-right: 0.3125rem;
+		white-space: nowrap;
+	}
 `;
 
 export const Timestamp = ({
@@ -33,12 +32,6 @@ export const Timestamp = ({
 	commentId,
 	onPermalinkClick,
 }: Props) => {
-	const [timeAgo, setTimeAgo] = useState(dateFormatter(isoDateTime));
-
-	useInterval(() => {
-		setTimeAgo(dateFormatter(isoDateTime));
-	}, 15000);
-
 	return (
 		<a
 			href={webUrl}
@@ -50,9 +43,7 @@ export const Timestamp = ({
 			}}
 			rel="nofollow"
 		>
-			<time dateTime={isoDateTime.toString()} css={timeStyles}>
-				{timeAgo}
-			</time>
+			<RelativeTime then={new Date(isoDateTime).getTime()} />
 		</a>
 	);
 };

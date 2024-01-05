@@ -6,12 +6,7 @@ export default {
 };
 
 export const Default = () => {
-	return (
-		<LastUpdated
-			lastUpdated={1613763519000}
-			lastUpdatedDisplay="19.38 GMT"
-		/>
-	);
+	return <LastUpdated lastUpdated={1613763519000} />;
 };
 
 Default.storyName = 'Default';

@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { body, headline, palette, space } from '@guardian/source-foundations';
 import { palette as themePalette } from '../palette';
 import type { WitnessAssetType } from '../types/content';
+import { RelativeTime } from './RelativeTime.importable';
 
 // Wrapper Styles
 const wrapperStyles = css`
@@ -112,9 +113,9 @@ const WitnessWrapper = ({
 								${body.small()}
 							`}
 						>
-							<time itemProp="dateCreated" dateTime={dateCreated}>
-								{new Date(dateCreated).toDateString()}
-							</time>
+							<RelativeTime
+								then={new Date(dateCreated).getTime()}
+							/>
 						</p>
 					</div>
 				</div>

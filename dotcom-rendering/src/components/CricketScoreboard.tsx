@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { between, space, textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
+import { RelativeTime } from './RelativeTime.importable';
 
 const ALL_OUT_WICKETS = 10;
 
@@ -130,11 +131,10 @@ export const CricketInnings = ({
 
 export const CricketScoreboard = ({ scorecardUrl, match, format }: Props) => {
 	const palette = decidePalette(format);
-	const date = new Date(match.gameDate);
 	return (
 		<div css={containerStyle}>
 			<h2 css={screenReaderOnlyStyle}>
-				<time dateTime={date.toISOString()}>{date.toDateString()}</time>
+				<RelativeTime then={new Date(match.gameDate).getTime()} />
 				{match.competitionName}, {match.venueName}
 			</h2>
 			<table css={tableStyle}>

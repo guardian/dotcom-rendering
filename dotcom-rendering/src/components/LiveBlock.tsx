@@ -96,10 +96,7 @@ export const LiveBlock = ({
 				{showLastUpdated &&
 					block.blockLastUpdated !== undefined &&
 					!!block.blockLastUpdatedDisplay && (
-						<LastUpdated
-							lastUpdated={block.blockLastUpdated}
-							lastUpdatedDisplay={block.blockLastUpdatedDisplay}
-						/>
+						<LastUpdated lastUpdated={block.blockLastUpdated} />
 					)}
 			</footer>
 		</LiveBlockContainer>

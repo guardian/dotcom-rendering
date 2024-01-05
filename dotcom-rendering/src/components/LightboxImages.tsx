@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { log, timeAgo } from '@guardian/libs';
+import { log } from '@guardian/libs';
 import {
 	from,
 	headline,
@@ -16,6 +16,7 @@ import type { ImageForLightbox } from '../types/content';
 import { LightboxCaption } from './LightboxCaption';
 import { LightboxLoader } from './LightboxLoader';
 import { Picture } from './Picture';
+import { RelativeTime } from './RelativeTime.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -293,21 +294,16 @@ export const LightboxImages = ({ format, images }: Props) => {
 												}
 											`}
 										>
-											<time
-												dateTime={new Date(
-													image.firstPublished,
-												).toISOString()}
-												title="View original post"
+											<span
+												css={css`
+													${visuallyHidden}
+												`}
 											>
-												<span
-													css={css`
-														${visuallyHidden}
-													`}
-												>
-													Original post published{' '}
-												</span>
-												{timeAgo(image.firstPublished)}
-											</time>
+												Original post published{' '}
+											</span>
+											<RelativeTime
+												then={image.firstPublished}
+											/>
 										</Link>
 									)}
 							</aside>
