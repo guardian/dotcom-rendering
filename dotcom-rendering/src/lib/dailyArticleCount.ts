@@ -1,4 +1,4 @@
-import { storage } from '@guardian/libs';
+import { isObject, storage } from '@guardian/libs';
 
 export interface DailyArticle {
 	day: number;
@@ -9,15 +9,23 @@ export type DailyArticleHistory = Array<DailyArticle>;
 
 export const DailyArticleCountKey = 'gu.history.dailyArticleCount';
 
+const isValidHistory = (history: unknown): history is DailyArticleHistory =>
+	Array.isArray(history) &&
+	history.every(
+		(daily) =>
+			isObject(daily) &&
+			'day' in daily &&
+			'count' in daily &&
+			typeof daily.day === 'number' &&
+			typeof daily.count === 'number',
+	);
+
 // Returns undefined if no daily article count in local storage
 export const getDailyArticleCount = (): DailyArticleHistory | undefined => {
 	try {
-		const dailyCount = storage.local.get(
-			DailyArticleCountKey,
-		) as DailyArticleHistory;
+		const dailyCount = storage.local.get(DailyArticleCountKey);
 
-		// check if value parsed correctly
-		if (!dailyCount.length) {
+		if (!isValidHistory(dailyCount)) {
 			throw new Error('Invalid gu.history.dailyArticleCount value');
 		}
 
