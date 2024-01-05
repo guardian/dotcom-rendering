@@ -23,7 +23,9 @@ const getImageElement = (): FEElement => ({
 	elementId: '12345',
 });
 
-const elementIsAdPlaceholder = (element: FEElement): boolean =>
+const elementIsAdPlaceholder = (
+	element: FEElement,
+): element is AdPlaceholderBlockElement =>
 	element._type ===
 	'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 
@@ -57,7 +59,7 @@ describe('Enhancing ad placeholders', () => {
 			const outputElements = getElementsFromBlocks(output);
 			const outputPlaceholders = outputElements.filter(
 				elementIsAdPlaceholder,
-			) as AdPlaceholderBlockElement[];
+			);
 
 			it(`should insert ${expectedPlaceholders} ad placeholder(s)`, () => {
 				expect(outputPlaceholders.length).toEqual(expectedPlaceholders);
@@ -104,7 +106,7 @@ describe('Enhancing ad placeholders', () => {
 		const outputElements = getElementsFromBlocks(output);
 		const outputPlaceholders = outputElements.filter(
 			elementIsAdPlaceholder,
-		) as AdPlaceholderBlockElement[];
+		);
 
 		expect(outputPlaceholders.length).toEqual(1);
 
