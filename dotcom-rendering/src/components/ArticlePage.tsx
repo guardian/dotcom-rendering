@@ -58,9 +58,9 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		adUnit: article.config.adUnit,
 	});
 
-	const lightboxEnabled =
-		!!article.config.switches.lightbox ||
+	const isInLightboxTest =
 		article.config.abTests.lightboxVariant === 'variant';
+	const webLightbox = renderingTarget === 'Web' && isInLightboxTest;
 
 	return (
 		<StrictMode>
@@ -98,7 +98,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			{lightboxEnabled && article.imagesForLightbox.length > 0 && (
+			{webLightbox && article.imagesForLightbox.length > 0 && (
 				<>
 					<LightboxLayout
 						imageCount={article.imagesForLightbox.length}
