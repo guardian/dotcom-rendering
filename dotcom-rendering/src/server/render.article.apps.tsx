@@ -34,7 +34,7 @@ export const renderArticle = (
 		</ConfigProvider>,
 	);
 
-	const clientScripts = [getPathFromManifest('apps', 'index.js')];
+	const clientScripts = [getPathFromManifest('client.apps', 'index.js')];
 	const scriptTags = generateScriptTags([...clientScripts].filter(isString));
 
 	const initTwitter = `

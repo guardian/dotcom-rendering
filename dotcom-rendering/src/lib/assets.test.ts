@@ -53,31 +53,33 @@ describe('decideAssetOrigin for stage', () => {
 
 describe('regular expression to match files', () => {
 	it('should handle CI environment', () => {
-		expect('/assets/ophan.web.eb74205c979f58659ed7.js').toMatch(WEB);
+		expect('/assets/ophan.client.web.eb74205c979f58659ed7.js').toMatch(WEB);
 	});
 
 	it('should handle DEV environment', () => {
-		expect('/assets/ophan.web.variant.js').toMatch(WEB_VARIANT_SCRIPT);
+		expect('/assets/ophan.client.web.variant.js').toMatch(
+			WEB_VARIANT_SCRIPT,
+		);
 	});
 
 	it('should handle PROD environment', () => {
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.web.abcdefghijklmnopqrst.js',
+			'https://assets.guim.co.uk/assets/ophan.client.web.abcdefghijklmnopqrst.js',
 		).toMatch(WEB);
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.web.variant.abcdefghijklmnopqrst.js',
+			'https://assets.guim.co.uk/assets/ophan.client.web.variant.abcdefghijklmnopqrst.js',
 		).toMatch(WEB_VARIANT_SCRIPT);
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.web.legacy.eb74205c979f58659ed7.js',
+			'https://assets.guim.co.uk/assets/ophan.client.web.legacy.eb74205c979f58659ed7.js',
 		).toMatch(WEB_LEGACY_SCRIPT);
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.apps.eb74205c979f58659ed7.js',
+			'https://assets.guim.co.uk/assets/ophan.client.apps.eb74205c979f58659ed7.js',
 		).toMatch(APPS_SCRIPT);
 	});
 
 	it('should handle http3 query param', () => {
 		expect(
-			'https://assets.guim.co.uk/assets/ophan.web.eb74205c979f58659ed7.js?http3=true',
+			'https://assets.guim.co.uk/assets/ophan.client.web.eb74205c979f58659ed7.js?http3=true',
 		).toMatch(WEB);
 	});
 });
@@ -85,8 +87,8 @@ describe('regular expression to match files', () => {
 describe('getPathFromManifest', () => {
 	beforeEach(() => {
 		const assetHash = `{
-			"7305.web.js": "7305.web.8cdc05567d98ebd9f67e.js",
-			"356.web.js": "356.web.0a1bbdf8c7a5e5826b7c.js"
+			"7305.client.web.js": "7305.client.web.8cdc05567d98ebd9f67e.js",
+			"356.client.web.js": "356.client.web.0a1bbdf8c7a5e5826b7c.js"
 		}`;
 		(readFileSync as jest.Mock).mockReturnValue(assetHash);
 	});
@@ -96,19 +98,19 @@ describe('getPathFromManifest', () => {
 	});
 
 	it('returns correct hashed asset (1)', () => {
-		expect(getPathFromManifest('web', '7305.web.js')).toBe(
-			'/assets/7305.web.8cdc05567d98ebd9f67e.js',
+		expect(getPathFromManifest('client.web', '7305.client.web.js')).toBe(
+			'/assets/7305.client.web.8cdc05567d98ebd9f67e.js',
 		);
 	});
 
 	it('returns correct hashed asset (2)', () => {
-		expect(getPathFromManifest('web', '356.web.js')).toBe(
-			'/assets/356.web.0a1bbdf8c7a5e5826b7c.js',
+		expect(getPathFromManifest('client.web', '356.client.web.js')).toBe(
+			'/assets/356.client.web.0a1bbdf8c7a5e5826b7c.js',
 		);
 	});
 
 	it('throws an error when the hashed asset cant be found', () => {
-		expect(() => getPathFromManifest('web', 'foo.bar.js')).toThrow(
+		expect(() => getPathFromManifest('client.web', 'foo.bar.js')).toThrow(
 			'Missing manifest for foo.bar.js',
 		);
 	});
@@ -117,7 +119,7 @@ describe('getPathFromManifest', () => {
 describe('getModulesBuild', () => {
 	it('should default to web', () => {
 		const build = getModulesBuild({ tests: {}, switches: {} });
-		expect(build).toBe('web');
+		expect(build).toBe('client.web');
 	});
 
 	it('should support variant build when in test, if enabled', () => {
@@ -125,7 +127,7 @@ describe('getModulesBuild', () => {
 			tests: { dcrJavascriptBundleVariant: 'variant' },
 			switches: {},
 		});
-		const expected = BUILD_VARIANT ? 'web.variant' : 'web';
+		const expected = BUILD_VARIANT ? 'client.web.variant' : 'client.web';
 		expect(build).toBe(expected);
 	});
 });
