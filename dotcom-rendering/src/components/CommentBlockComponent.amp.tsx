@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, news, textSans } from '@guardian/source-foundations';
+import { palette, textSans } from '@guardian/source-foundations';
 import type { CommentBlockElement } from '../types/content';
 
 const wrapper = css`
@@ -9,7 +9,7 @@ const wrapper = css`
 	padding-top: 12px;
 	${textSans.medium()};
 	padding-left: 20px;
-	border-left: 8px solid ${neutral[86]};
+	border-left: 8px solid ${palette.neutral[86]};
 	clear: left;
 `;
 
@@ -20,8 +20,8 @@ const avatar = css`
 `;
 
 const metaLink = css`
-	border-bottom: 1px solid ${neutral[86]};
-	color: ${news[400]};
+	border-bottom: 1px solid ${palette.neutral[86]};
+	color: ${palette.news[400]};
 	text-decoration: none;
 	${textSans.xxsmall()};
 `;

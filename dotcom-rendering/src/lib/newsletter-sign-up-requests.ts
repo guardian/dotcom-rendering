@@ -2,11 +2,6 @@ import type { OphanAction } from '@guardian/libs';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
-const isServer = typeof window === 'undefined';
-
-export const getCaptchaSiteKey = (): string | undefined =>
-	isServer ? undefined : window.guardian.config.page.googleRecaptchaSiteKey;
-
 const buildNewsletterSignUpFormData = (
 	emailAddress: string,
 	newsletterIdOrList: string | string[],

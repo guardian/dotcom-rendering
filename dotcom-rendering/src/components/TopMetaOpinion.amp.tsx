@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline, neutral } from '@guardian/source-foundations';
+import { headline, palette } from '@guardian/source-foundations';
 import { getAgeWarning } from '../lib/age-warning';
 import { getSoleContributor } from '../lib/byline';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
@@ -16,7 +16,7 @@ const headerStyle = css`
 	${headline.small()};
 	font-weight: 100;
 	padding-top: 3px;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 `;
 
 const bylineStyle = (pillar: ArticleTheme) => css`
@@ -44,8 +44,8 @@ const bylineWrapper = css`
 
 	background-image: repeating-linear-gradient(
 		to bottom,
-		${neutral[86]},
-		${neutral[86]} 1px,
+		${palette.neutral[86]},
+		${palette.neutral[86]} 1px,
 		transparent 1px,
 		transparent 4px
 	);

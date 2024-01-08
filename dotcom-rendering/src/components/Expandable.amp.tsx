@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import {
 	body,
 	headline,
-	neutral,
+	palette,
 	textSans,
 } from '@guardian/source-foundations';
 import React from 'react';
@@ -51,7 +51,7 @@ const TextStyle = (pillar: ArticleTheme) => css`
 		${body.medium()};
 		font-weight: 300;
 		word-wrap: break-word;
-		color: ${neutral[7]};
+		color: ${palette.neutral[7]};
 	}
 
 	blockquote {
@@ -66,16 +66,16 @@ const TextStyle = (pillar: ArticleTheme) => css`
 `;
 
 const wrapper = (pillar: ArticleTheme) => css`
-	background: ${neutral[93]};
+	background: ${palette.neutral[93]};
 	position: relative;
 	padding: 0 5px 6px;
 	margin: 16px 0 36px;
 
-	border-top: 13px solid ${neutral[7]};
+	border-top: 13px solid ${palette.neutral[7]};
 	border-image: repeating-linear-gradient(
 			to bottom,
-			${neutral[86]},
-			${neutral[86]} 1px,
+			${palette.neutral[86]},
+			${palette.neutral[86]} 1px,
 			transparent 1px,
 			transparent 4px
 		)
@@ -88,9 +88,9 @@ const wrapper = (pillar: ArticleTheme) => css`
 
 const buttonStyles = css`
 	height: 32px;
-	background-color: ${neutral[7]};
+	background-color: ${palette.neutral[7]};
 	border-radius: 1600px;
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	border: none;
 	${textSans.small()};
 	font-weight: 700;
@@ -109,7 +109,7 @@ const buttonStyles = css`
 	}
 
 	svg {
-		fill: ${neutral[100]};
+		fill: ${palette.neutral[100]};
 		width: 20px;
 		height: 20px;
 		margin-right: 10px;
@@ -140,7 +140,7 @@ const innerStyle = css`
 
 const iconStyle = css`
 	display: inline-flex;
-	background: ${neutral[60]};
+	background: ${palette.neutral[60]};
 	border-radius: 100%;
 	width: 16px;
 	height: 16px;
@@ -150,7 +150,7 @@ const iconStyle = css`
 
 	svg {
 		height: 12px;
-		fill: ${neutral[100]};
+		fill: ${palette.neutral[100]};
 	}
 `;
 

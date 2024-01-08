@@ -3,10 +3,8 @@ import { css } from '@emotion/react';
 import {
 	focusHalo,
 	from,
-	neutral,
 	palette,
 	space,
-	success,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
@@ -29,9 +27,9 @@ const CALLOUT_URL =
 const containerStyles = (format: ArticleFormat) => css`
 	${until.desktop} {
 		background-color: ${decidePalette(format).background.messageForm};
-		color: ${neutral[100]};
+		color: ${palette.neutral[100]};
 	}
-	background-color: ${neutral[86]};
+	background-color: ${palette.neutral[86]};
 	padding: ${space[3]}px;
 `;
 const textStyles = css`
@@ -42,12 +40,12 @@ const textStyles = css`
 const successStyles = css`
 	${textSans.xsmall()};
 	${until.desktop} {
-		color: ${neutral[100]};
+		color: ${palette.neutral[100]};
 	}
 `;
 
 const tickBoxStyles = css`
-	fill: ${success[400]};
+	fill: ${palette.success[400]};
 	width: ${space[12]}px;
 	margin-left: -${space[2]}px;
 `;
@@ -71,17 +69,17 @@ const formFieldWrapperStyles = css`
 	${until.desktop} {
 		label > div,
 		label > div > span {
-			color: ${neutral[100]};
+			color: ${palette.neutral[100]};
 		}
 	}
 `;
 
 const submitButtonStyles = css`
-	background-color: ${neutral[100]};
-	color: ${neutral[0]};
+	background-color: ${palette.neutral[100]};
+	color: ${palette.neutral[0]};
 	:hover,
 	:active {
-		background-color: ${neutral[86]};
+		background-color: ${palette.neutral[86]};
 	}
 	${until.phablet} {
 		width: 100%;
@@ -93,12 +91,12 @@ const submitButtonStyles = css`
 		align-self: flex-start;
 	}
 	${from.desktop} {
-		color: ${neutral[100]};
-		background-color: ${neutral[7]};
+		color: ${palette.neutral[100]};
+		background-color: ${palette.neutral[7]};
 		align-self: center;
 		:hover,
 		:active {
-			background-color: ${neutral[20]};
+			background-color: ${palette.neutral[20]};
 		}
 	}
 `;
@@ -115,10 +113,10 @@ const footerPaddingStyles = css`
 
 const prefaceStyles = css`
 	${textSans.xsmall()};
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	padding-bottom: ${space[4]}px;
 	${from.desktop} {
-		color: ${neutral[0]};
+		color: ${palette.neutral[0]};
 	}
 `;
 

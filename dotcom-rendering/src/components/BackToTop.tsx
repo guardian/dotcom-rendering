@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
-	brandAlt,
 	brandBackground,
 	brandText,
+	palette,
 	textSans,
 } from '@guardian/source-foundations';
 
@@ -25,10 +25,10 @@ const link = css`
 	line-height: ${iconHeight};
 
 	:hover {
-		color: ${brandAlt[400]};
+		color: ${palette.brandAlt[400]};
 
 		.icon-container {
-			background-color: ${brandAlt[400]};
+			background-color: ${palette.brandAlt[400]};
 		}
 	}
 `;

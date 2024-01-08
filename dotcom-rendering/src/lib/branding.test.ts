@@ -105,6 +105,7 @@ describe('decideCollectionBranding', () => {
 				logo,
 			},
 			isContainerBranding: false,
+			hasMultipleBranding: false,
 		});
 		const usBranding = decideCollectionBranding({
 			frontBranding: undefined,
@@ -124,6 +125,7 @@ describe('decideCollectionBranding', () => {
 				logo,
 			},
 			isContainerBranding: false,
+			hasMultipleBranding: false,
 		});
 	});
 
@@ -366,6 +368,7 @@ describe('decideCollectionBranding', () => {
 			isFrontBranding: false,
 			branding: cardBranding,
 			isContainerBranding: false,
+			hasMultipleBranding: false,
 		});
 	});
 
@@ -478,10 +481,11 @@ describe('decideCollectionBranding', () => {
 				logo,
 			},
 			isContainerBranding: false,
+			hasMultipleBranding: false,
 		});
 	});
 
-	it('is undefined when branding cards are paid-content and have different sponsor names', () => {
+	it('is paid content multiple branding when branding cards are paid-content and have different sponsor names', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
@@ -521,7 +525,18 @@ describe('decideCollectionBranding', () => {
 			editionId: 'UK',
 			isContainerBranding: false,
 		});
-		expect(collectionBranding).toBeUndefined();
+		expect(collectionBranding).toStrictEqual({
+			kind: 'paid-content',
+			isFrontBranding: false,
+			branding: {
+				brandingType: { name: 'paid-content' },
+				sponsorName: 'foo',
+				aboutThisLink: '',
+				logo,
+			},
+			isContainerBranding: false,
+			hasMultipleBranding: true,
+		});
 	});
 
 	it('is front branding when present and possible to display', () => {
@@ -548,6 +563,7 @@ describe('decideCollectionBranding', () => {
 				logo,
 			},
 			isContainerBranding: false,
+			hasMultipleBranding: false,
 		});
 	});
 
@@ -624,6 +640,7 @@ describe('decideCollectionBranding', () => {
 			isFrontBranding: false,
 			branding: cardBranding,
 			isContainerBranding: false,
+			hasMultipleBranding: false,
 		});
 	});
 

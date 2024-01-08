@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
 import {
-	brand,
-	brandAlt,
 	from,
 	headline,
-	neutral,
+	palette,
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
@@ -22,7 +20,7 @@ const searchLinkStyles = css`
 	line-height: 1;
 	font-size: 1rem;
 	height: fit-content;
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	transition: color 80ms ease-out;
 	text-decoration: none;
 	padding: 7px 0;
@@ -52,7 +50,7 @@ const linkTablet = css`
 
 	:before {
 		content: '';
-		border-left: 1px solid ${brand[600]};
+		border-left: 1px solid ${palette.brand[600]};
 		height: 24px;
 	}
 
@@ -146,7 +144,7 @@ export const HeaderTopBarSearchCapi = () => {
 				<form
 					css={css`
 						position: absolute;
-						background: ${brand[400]};
+						background: ${palette.brand[400]};
 						z-index: 1000;
 						right: 0;
 						width: 50%;
@@ -160,7 +158,7 @@ export const HeaderTopBarSearchCapi = () => {
 				>
 					<div
 						css={css`
-							background: ${neutral[100]};
+							background: ${palette.neutral[100]};
 							display: flex;
 							justify-content: space-between;
 						`}
@@ -199,10 +197,10 @@ export const HeaderTopBarSearchCapi = () => {
 							css={css`
 								${textSans.medium()};
 								padding: 1rem 25px;
-								color: ${neutral[100]};
+								color: ${palette.neutral[100]};
 
 								:hover {
-									color: ${brandAlt[400]};
+									color: ${palette.brandAlt[400]};
 								}
 							`}
 						>
@@ -213,7 +211,7 @@ export const HeaderTopBarSearchCapi = () => {
 					{data && data.response.results.length > 0 && (
 						<ul
 							css={css`
-								border: 1px solid ${neutral[46]};
+								border: 1px solid ${palette.neutral[46]};
 								border-top: none;
 								padding-top: 8px;
 							`}
@@ -226,19 +224,20 @@ export const HeaderTopBarSearchCapi = () => {
 											css={css`
 												${headline.xxxsmall()};
 												text-decoration: none;
-												color: ${neutral[100]};
+												color: ${palette.neutral[100]};
 												display: block;
 												padding-left: 20px;
 
 												:hover {
-													color: ${brandAlt[400]};
+													color: ${palette
+														.brandAlt[400]};
 												}
 											`}
 										>
 											<div
 												css={css`
 													border-top: 1px solid
-														${neutral[46]};
+														${palette.neutral[46]};
 													padding: 4px 50px 16px 0;
 												`}
 											>

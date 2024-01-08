@@ -4,7 +4,6 @@ import {
 	headline,
 	palette,
 	space,
-	success,
 	textSans,
 } from '@guardian/source-foundations';
 import { Button, SvgTickRound } from '@guardian/source-react-components';
@@ -26,7 +25,7 @@ const successStyles = css`
 `;
 
 const tickBoxStyles = css`
-	fill: ${success[400]};
+	fill: ${palette.success[400]};
 	width: 48px;
 `;
 const errorTextStyles = css`

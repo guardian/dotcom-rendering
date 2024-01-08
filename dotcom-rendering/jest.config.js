@@ -1,10 +1,12 @@
 const swcConfig = require('./webpack/.swcrc.json');
 
+const esModules = ['@guardian/', 'screenfull'].join('|');
+
 module.exports = {
 	testEnvironment: 'jsdom',
 	moduleDirectories: ['node_modules', 'src'],
 	transform: {
-		'^.+\\.(ts|tsx)$': ['@swc/jest', swcConfig],
+		'^.+\\.(js|ts|tsx)$': ['@swc/jest', swcConfig],
 	},
 	testMatch: ['**/*.test.+(ts|tsx|js)'],
 	setupFilesAfterEnv: ['<rootDir>/scripts/jest/setup.ts'],
@@ -12,6 +14,6 @@ module.exports = {
 		'^svgs/(.*)$': '<rootDir>/__mocks__/svgMock.tsx',
 		'^(.*)\\.svg$': '<rootDir>/__mocks__/svgMock.tsx',
 	},
-	transformIgnorePatterns: ['/node_modules/(?!@guardian/)'],
+	transformIgnorePatterns: [`/node_modules/.pnpm/(?!${esModules})`],
 	collectCoverageFrom: ['src/**/*.{ts,tsx}'],
 };

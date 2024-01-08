@@ -1,21 +1,20 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { palette } from '../palette';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
 
-const lastUpdatedStyles = (palette: Palette) => css`
+const lastUpdatedStyles = css`
 	${textSans.small()}
 	padding-bottom: 0.125rem;
 	padding-top: 0.125rem;
-	color: ${palette.text.lastUpdated};
+	color: ${palette('--last-updated-text')};
 `;
 
-const livePulseIconStyles = (palette: Palette) => css`
+const livePulseIconStyles = css`
 	${textSans.small({ fontWeight: 'bold' })}
-	color: ${palette.text.standfirst};
+	color: ${palette('--standfirst-text')};
 `;
 
 type Props = {
@@ -24,14 +23,13 @@ type Props = {
 };
 
 export const ArticleLastUpdated = ({ format, lastUpdated }: Props) => {
-	const palette = decidePalette(format);
 	const displayString = timeAgo(lastUpdated);
 	const date = new Date(lastUpdated);
 
 	return (
-		<div css={lastUpdatedStyles(palette)}>
+		<div css={lastUpdatedStyles}>
 			{format.design === ArticleDesign.LiveBlog && (
-				<span css={livePulseIconStyles(palette)}>
+				<span css={livePulseIconStyles}>
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<PulsingDot />
 					</Island>

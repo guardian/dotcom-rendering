@@ -248,8 +248,13 @@ export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 			<div css={[nowCSS, slotCSS]} className="now">
 				<WeatherSlot {...now} edition={edition} />
 				<label htmlFor={checkboxId} className="checkbox-label">
-					<SvgChevronDownSingle size="xsmall"></SvgChevronDownSingle>
+					{/*
+					Ordering matters here!
+					1st SVG is displayed when opened
+					2nd SVG is displayed when collapsed
+					*/}
 					<SvgChevronUpSingle size="xsmall"></SvgChevronUpSingle>
+					<SvgChevronDownSingle size="xsmall"></SvgChevronDownSingle>
 				</label>
 			</div>
 

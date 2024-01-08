@@ -4,22 +4,15 @@
 	"repository": "git@github.com:guardian/dotcom-rendering.git",
 	"license": "Apache-2.0",
 	"private": true,
-	"workspaces": {
-		"packages": [
-			"apps-rendering",
-			"dotcom-rendering"
-		]
-	},
 	"scripts": {
-		"preinstall": "./scripts/preinstall.mjs",
 		"postinstall": "./scripts/postinstall.sh",
-		"storybook": "npm-run-all --parallel storybook:*",
-		"storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook --no-open --quiet",
-		"storybook:ar": "yarn workspace apps-rendering storybook --no-open --quiet",
-		"build-storybook": "npm-run-all --parallel build-storybook:*",
-		"build-storybook:ar": "yarn workspace apps-rendering build-storybook",
-		"build-storybook:dcr": "yarn workspace @guardian/dotcom-rendering build-storybook",
-		"build:dcr": "yarn workspace @guardian/dotcom-rendering makeBuild",
+		"storybook": "pnpm '/^storybook:.*/'",
+		"storybook:dcr": "pnpm --filter @guardian/dotcom-rendering storybook --no-open --quiet",
+		"storybook:ar": "pnpm --filter apps-rendering storybook --no-open --quiet",
+		"build-storybook": "pnpm '/^build-storybook:.*/'",
+		"build-storybook:ar": "pnpm --filter apps-rendering build-storybook",
+		"build-storybook:dcr": "pnpm --filter @guardian/dotcom-rendering build-storybook",
+		"build:dcr": "cd dotcom-rendering && make build",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky install",
 		"lint-staged": "lint-staged",
@@ -27,24 +20,15 @@
 		"prettier:write": "prettier --ignore-unknown --write --cache ."
 	},
 	"lint-staged": {
-		"dotcom-rendering/**/*.md": [
-			"yarn workspace @guardian/dotcom-rendering createtoc",
-			"prettier --write --cache"
-		],
-		"*": "prettier --ignore-unknown --write --cache"
+		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {
 		"@guardian/prettier": "5.0.0",
 		"chromatic": "^6.19.9",
 		"husky": "^8.0.3",
 		"lint-staged": "13.2.1",
-		"npm-run-all": "^4.1.5",
 		"prettier": "3.0.3",
 		"tslib": "2.6.2"
 	},
-	"resolutions": {
-		"crypto-js": "4.2.0",
-		"uuid": "9.0.1"
-	},
-	"packageManager": "yarn@4.0.2"
+	"packageManager": "pnpm@8.12.1"
 }

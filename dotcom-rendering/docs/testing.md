@@ -11,19 +11,19 @@ make test
 To run an individual test suite, run the command:
 
 ```bash
-yarn test [TestSuiteName]
+pnpm test [TestSuiteName]
 ```
 
 For example to run `ShareCount.test.tsx` only you can run the command:
 
 ```bash
-yarn test ShareCount
+pnpm test ShareCount
 ```
 
 Alternatively, you can use `watch` mode to have jest run the suite as files are updated:
 
 ```
-yarn test --watch
+pnpm test --watch
 ```
 
 ## Writing tests
@@ -84,7 +84,7 @@ Running Cypress locally requires having a DCR server running. To run the CI serv
 To run Cypress in interactive mode (visually):
 
 ```
-yarn cypress:open
+pnpm cypress:open
 ```
 
 This opens a test GUI. Use this when writing or debugging tests.
@@ -92,17 +92,17 @@ This opens a test GUI. Use this when writing or debugging tests.
 To run cypress in headless mode (for ci):
 
 ```
-yarn cypress:run
+pnpm cypress:run
 ```
 
 To only run mocked tests:
 
 ```
-yarn cypress:run:mocked
+pnpm cypress:run:mocked
 ```
 
 To only run e2e tests:
 
 ```
-yarn cypress:run:e2e
+pnpm cypress:run:e2e
 ```

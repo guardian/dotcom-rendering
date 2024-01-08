@@ -125,7 +125,7 @@ export interface FEArticleType {
  * receiving the data from Frontend.
  */
 export type DCRArticle = FEArticleType & {
-	imagesForLightbox?: ImageForLightbox[];
+	imagesForLightbox: ImageForLightbox[];
 	imagesForAppsLightbox: ImageForAppsLightbox[];
 	tableOfContents?: TableOfContentsItem[];
 };

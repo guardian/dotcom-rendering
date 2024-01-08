@@ -3,6 +3,7 @@ import type { SlotName } from '@guardian/commercial';
 import { adSizes, constants } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
+	between,
 	breakpoints,
 	from,
 	palette,
@@ -203,6 +204,11 @@ const merchandisingAdStyles = css`
 		padding-bottom: 20px;
 		min-height: ${adSizes.billboard.height + labelHeight + 20}px;
 	}
+	&:not(.ad-slot--fluid).ad-slot--rendered {
+		${between.phablet.and.desktop} {
+			display: none;
+		}
+	}
 `;
 
 const inlineAdStyles = css`
@@ -291,7 +297,7 @@ const frontsBannerAdStyles = css`
 
 const articleEndAdStyles = css`
 	position: relative;
-	min-height: 450px;
+	min-height: ${adSizes.mpu.height + labelHeight}px;
 
 	&.ad-slot--fluid {
 		min-height: 450px;
@@ -550,6 +556,7 @@ export const AdSlot = ({
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
 							merchandisingAdStyles,
+							adSlotCollapseStyles,
 						]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
@@ -576,6 +583,7 @@ export const AdSlot = ({
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
 							merchandisingAdStyles,
+							adSlotCollapseStyles,
 						]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"

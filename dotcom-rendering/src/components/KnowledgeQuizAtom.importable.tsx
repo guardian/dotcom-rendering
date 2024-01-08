@@ -1,13 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import {
-	body,
-	brand,
-	neutral,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { body, palette, space, textSans } from '@guardian/source-foundations';
 import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
 import { Fragment, useEffect, useState } from 'react';
 import type {
@@ -297,7 +291,7 @@ const Answers = ({
 };
 
 const resultWrapperStyles = css`
-	background-color: ${neutral[93]};
+	background-color: ${palette.neutral[93]};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[3]}px;
 	padding: ${space[2]}px;
@@ -311,12 +305,12 @@ const resultDescriptionStyles = css`
 
 const resultsNumberStyles = css`
 	${textSans.xxxlarge({ fontWeight: 'bold' })}
-	color: ${brand[400]};
+	color: ${palette.brand[400]};
 `;
 
 const resultHeaderStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })}
-	color: ${neutral[20]};
+	color: ${palette.neutral[20]};
 	padding-bottom: ${space[1]}px;
 `;
 

@@ -1,10 +1,256 @@
-import { isNonNullable, log, storage } from '@guardian/libs';
+import { isUndefined, log, storage } from '@guardian/libs';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import screenfull from 'screenfull';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxImages } from './LightboxImages';
+
+/**
+ * Translate the pixel (scrollLeft) document value into a numeric
+ * position value
+ */
+const getPosition = (
+	lightbox: HTMLElement,
+	imageList: HTMLUListElement,
+): number | undefined => {
+	const scrollPosition = imageList.scrollLeft;
+	const liWidth = lightbox.querySelector('li')?.clientWidth;
+	if (scrollPosition === 0 && liWidth === 0) return;
+	if (isUndefined(liWidth)) return;
+	if (Number.isNaN(liWidth) || Number.isNaN(scrollPosition)) return;
+	if (scrollPosition === 0) return 1;
+	return Math.round(scrollPosition / liWidth) + 1;
+};
+
+/**
+ * **getTabbableElements**
+ *
+ * Returns a list of all the html elements on the *active* page that can be tabbed to
+ *
+ * Any elements that are off screen, such as caption links for images that are not
+ * currently showing, are ignored
+ */
+const getTabbableElements = (
+	lightbox: HTMLElement,
+	imageList: HTMLUListElement,
+): HTMLElement[] => {
+	function getElements(parent: HTMLElement): HTMLElement[] {
+		return Array.from(
+			parent.querySelectorAll(
+				'button:not([disabled]), a:not([disabled]), input:not([disabled]), select:not([disabled])',
+			),
+		);
+	}
+	const currentPosition = getPosition(lightbox, imageList);
+	if (currentPosition == null) return [];
+	const currentPage = lightbox.querySelector<HTMLElement>(
+		`li[data-index="${currentPosition}"]`,
+	);
+	const nav = lightbox.querySelector('nav');
+	const elementsFromCaption = currentPage ? getElements(currentPage) : [];
+	const elementsFromNav = nav ? getElements(nav) : [];
+	if (lightbox.classList.contains('hide-info')) {
+		// The caption is hidden
+		return elementsFromNav;
+	} else {
+		return [...elementsFromCaption, ...elementsFromNav];
+	}
+};
+
+const requestFullscreen = async (lightbox: Element) => {
+	if (screenfull.isEnabled) {
+		return screenfull.request(lightbox);
+	}
+};
+
+const exitFullscreen = async () => {
+	if (screenfull.isEnabled && screenfull.isFullscreen) {
+		return screenfull.exit();
+	}
+};
+
+const restoreFocus = (previouslyFocused: Element) => {
+	if (!(previouslyFocused instanceof HTMLElement)) return;
+	previouslyFocused.focus();
+};
+
+/**
+ * Each time a new image is selected, this function is called so we can update
+ * the state of the page/lightbox to reflect the new image
+ */
+const onSelect = (
+	positionIndicator: HTMLElement,
+	position: number,
+	length: number,
+	closeButton: HTMLButtonElement,
+): void => {
+	positionIndicator.innerHTML = position.toString();
+
+	// Update the url based on the fact we've selected (navigated
+	// to) a new image
+	window.history.replaceState({}, '', `#img-${position}`);
+	// Ensure the close button is always visible on the last slide on mobile
+	closeButton.classList.toggle('reveal', position === length);
+};
+
+/**
+ * Images are 'selected' simply by being scrolled to. You can even select an image
+ * by swiping left and right. Because of this, scrollTo is how we navigate the lightbox
+ */
+const scrollTo = (
+	position: number,
+	lightbox: HTMLElement,
+	imageList: HTMLUListElement,
+): void => {
+	// liWidth is the actual dom width in pixels of the containing li element for each image
+	const liWidth = lightbox.querySelector('li')?.clientWidth;
+	if (isUndefined(liWidth)) return;
+	switch (position) {
+		case 0:
+		case 1: {
+			imageList.scrollLeft = 0;
+			break;
+		}
+		default: {
+			imageList.scrollLeft = (position - 1) * liWidth;
+		}
+	}
+};
+
+const getPreviousPosition = (position: number, length: number): number =>
+	position <= 1
+		? // Cycle around to the end
+		  length
+		: position - 1;
+
+const getNextPosition = (position: number, length: number): number =>
+	position >= length
+		? // Cycle back to the start
+		  1
+		: position + 1;
+
+const eagerLoad = (images: HTMLImageElement[], position: number) => {
+	const image = images[position - 1];
+	if (image) image.loading = 'eager';
+};
+
+/**
+ * We eager load adjacent images by adding the loading=eager attribute
+ * to their img tag
+ */
+const loadAdjacentImages = (
+	images: HTMLImageElement[],
+	currentPosition: number,
+): void => {
+	const { length } = images;
+	const previousImage = getPreviousPosition(currentPosition, length);
+	const nextImage = getNextPosition(currentPosition, length);
+	eagerLoad(images, previousImage);
+	eagerLoad(images, nextImage);
+};
+
+const pulseButton = (button: HTMLButtonElement): void => {
+	button.classList.add('active');
+
+	const timer = setTimeout(() => {
+		button.classList.remove('active');
+		clearTimeout(timer);
+	}, 75);
+};
+
+const goBack = (
+	lightbox: HTMLElement,
+	images: HTMLImageElement[],
+	previousButton: HTMLButtonElement,
+	imageList: HTMLUListElement,
+) => {
+	const { length } = images;
+	pulseButton(previousButton);
+	const positionNow = getPosition(lightbox, imageList);
+	if (positionNow != null) {
+		const newPosition = getPreviousPosition(positionNow, length);
+		scrollTo(newPosition, lightbox, imageList);
+	}
+};
+
+const goForward = (
+	lightbox: HTMLElement,
+	images: HTMLImageElement[],
+	nextButton: HTMLButtonElement,
+	imageList: HTMLUListElement,
+) => {
+	const { length } = images;
+	pulseButton(nextButton);
+	const positionNow = getPosition(lightbox, imageList);
+	if (positionNow != null) {
+		const newPosition = getNextPosition(positionNow, length);
+		scrollTo(newPosition, lightbox, imageList);
+	}
+};
+
+let previouslyFocused: Element | undefined;
+const open = async (
+	lightbox: HTMLElement,
+	imageList: HTMLUListElement,
+	position: number,
+	handleKeydown: (event: KeyboardEvent) => void,
+) => {
+	log('dotcom', '💡 Opening lightbox.');
+	// Remember where we were so we can restore focus
+	if (document.activeElement) previouslyFocused = document.activeElement;
+	// We use this class to prevent the main page from scrolling in the background while lightbox is open
+	document.documentElement.classList.add('lightbox-open');
+	// Show lightbox
+	lightbox.removeAttribute('hidden');
+	// Now we have the index of the image that was clicked, show it
+	// in the lightbox
+	scrollTo(position, lightbox, imageList);
+	// We only want this listener active while the lightbox is open
+	window.addEventListener('keydown', handleKeydown);
+	// Try to open the lightbox in fullscreen mode. This may fail
+	try {
+		await requestFullscreen(lightbox);
+	} catch {
+		// Do nothing, requests to open fullscreen are just requests and can fail
+	}
+};
+
+const closeLightbox = (
+	lightbox: HTMLElement,
+	handleKeydown: (ev: KeyboardEvent) => void,
+) => {
+	// Re-enable scrolling
+	document.documentElement.classList.remove('lightbox-open');
+	// Hide lightbox
+	lightbox.setAttribute('hidden', 'true');
+	// Stop listening for keyboard shortcuts
+	window.removeEventListener('keydown', handleKeydown);
+};
+
+const close = async (
+	lightbox: HTMLElement,
+	handleKeydown: (ev: KeyboardEvent) => void,
+) => {
+	log('dotcom', '💡 Closing lightbox.');
+	await exitFullscreen();
+	closeLightbox(lightbox, handleKeydown);
+	history.back();
+	previouslyFocused && restoreFocus(previouslyFocused);
+};
+
+const toggleInfo = (
+	lightbox: HTMLElement,
+	button: HTMLButtonElement,
+	force?: 'hide' | 'show',
+): void => {
+	const action =
+		force ?? (lightbox.classList.contains('hide-info') ? 'show' : 'hide');
+
+	button.classList.toggle('active', action === 'show');
+	lightbox.classList.toggle('hide-info', action === 'hide');
+	storage.local.set('gu.prefs.lightbox-info', action);
+};
 
 /**
  * 💡 Lightbox
@@ -25,7 +271,7 @@ import { LightboxImages } from './LightboxImages';
  *
  */
 
-function initialiseLightbox(lightbox: HTMLElement) {
+const initialiseLightbox = (lightbox: HTMLElement) => {
 	log('dotcom', '💡 Initialising lightbox');
 
 	// --------------------------------------------------------------------------------
@@ -41,8 +287,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	const infoButton = lightbox.querySelector<HTMLButtonElement>('button.info');
 	const closeButton =
 		lightbox.querySelector<HTMLButtonElement>('button.close');
-	const positionIndicator =
-		lightbox.querySelector<HTMLElement>('nav .selected'); // Eg. 2/4, as in image 2 of 4
 	/**
 	 * imageList is the horizontal list of all images. We use it to scroll left and right
 	 * effectively navigating the lightbox
@@ -50,198 +294,60 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	const imageList = lightbox.querySelector<HTMLUListElement>('ul');
 	const pictures =
 		lightbox.querySelectorAll<HTMLPictureElement>('li picture');
-	const images = lightbox.querySelectorAll<HTMLImageElement>('li img');
+	const images = Array.from(
+		lightbox.querySelectorAll<HTMLImageElement>('li img'),
+	);
+
 	const captionLinks =
 		lightbox.querySelectorAll<HTMLAnchorElement>('li aside a');
+
+	if (!imageList) return;
+	if (!closeButton) return;
+	if (!previousButton) return;
+	if (!nextButton) return;
+	if (!infoButton) return;
 
 	// --------------------------------------------------------------------------------
 	// FUNCTIONS
 	// --------------------------------------------------------------------------------
-	/**
-	 * **getTabableElements**
-	 *
-	 * Returns a list of all the html elements on the *active* page that can be tabbed to
-	 *
-	 * Any elements that are off screen, such as caption links for images that are not
-	 * currently showing, are ignored
-	 */
-	function getTabableElements(): HTMLElement[] {
-		function getElements(parent: HTMLElement): HTMLElement[] {
-			return Array.from(
-				parent.querySelectorAll(
-					'button:not([disabled]), a:not([disabled]), input:not([disabled]), select:not([disabled])',
-				),
-			);
-		}
-		const currentPosition = getPosition();
-		if (currentPosition == null) return [];
-		const currentPage = lightbox.querySelector<HTMLElement>(
-			`li[data-index="${currentPosition}"]`,
-		);
-		const nav = lightbox.querySelector('nav');
-		const elementsFromCaption = currentPage ? getElements(currentPage) : [];
-		const elementsFromNav = nav ? getElements(nav) : [];
-		if (lightbox.classList.contains('hide-info')) {
-			// The caption is hidden
-			return elementsFromNav;
-		} else {
-			return [...elementsFromCaption, ...elementsFromNav];
-		}
-	}
 
-	function requestFullscreen() {
-		if (screenfull.isEnabled) {
-			return screenfull.request(lightbox);
-		}
-		return;
-	}
-
-	function exitFullscreen() {
-		if (screenfull.isEnabled && screenfull.isFullscreen) {
-			return screenfull.exit();
-		}
-		return Promise.resolve();
-	}
-
-	/**
-	 * Each time a new image is selected, this function is called so we can update
-	 * the state of the page/lightbox to reflect the new image
-	 */
-	function onSelect(position: number): void {
-		if (positionIndicator) {
-			positionIndicator.innerHTML = position.toString();
-		}
-		// Update the url based on the fact we've selected (navigated
-		// to) a new image
-		window.history.replaceState({}, '', `#img-${position}`);
-		// Ensure the close button is always visible on the last slide on mobile
-		if (position === images.length) {
-			closeButton?.classList.add('reveal');
-		} else {
-			closeButton?.classList.remove('reveal');
-		}
-	}
-
-	/**
-	 * Images are 'selected' simply by being scrolled to. You can even select an image
-	 * by swiping left and right. Because of this, scrollTo is how we navigate the lightbox
-	 */
-	function scrollTo(position: number): void {
-		// liWidth is the actual dom width in pixels of the containing li element for each image
-		const liWidth = lightbox.querySelector('li')?.clientWidth;
-		if (!imageList || liWidth == null) return;
-		switch (position) {
-			case 0:
-			case 1: {
-				imageList.scrollLeft = 0;
-				break;
-			}
-			default: {
-				imageList.scrollLeft = (position - 1) * liWidth;
-			}
-		}
-	}
-
-	/**
-	 * Translate the pixel (scrollLeft) document value into a numeric
-	 * position value
-	 */
-	function getPosition(): number | null {
-		const scrollPosition = imageList?.scrollLeft;
-		const liWidth = lightbox.querySelector('li')?.clientWidth;
-		if (scrollPosition === 0 && liWidth === 0) return null;
-		if (scrollPosition == undefined || liWidth == undefined) return null;
-		if (Number.isNaN(liWidth) || Number.isNaN(scrollPosition)) return null;
-		if (scrollPosition === 0) return 1;
-		return Math.round(scrollPosition / liWidth) + 1;
-	}
-
-	function getPreviousPosition(positionNow: number): number {
-		if (positionNow === 1) {
-			// Cycle around to the end
-			return images.length;
-		} else {
-			return positionNow - 1;
-		}
-	}
-
-	function getNextPosition(positionNow: number): number {
-		if (positionNow === images.length) {
-			// Cycle back to the start
-			return 1;
-		} else {
-			return positionNow + 1;
-		}
-	}
-
-	// We eager load adjacent images by adding the loading=eager attribute
-	// to their img tag
-	function loadAdjacentImages(currentPosition: number): void {
-		function eagerLoad(position: number) {
-			const allImages =
-				lightbox.querySelectorAll<HTMLImageElement>('li img');
-			const imgArray = Array.from(allImages);
-			const imgElement = imgArray[position - 1];
-			if (imgElement) imgElement.loading = 'eager';
-		}
-		const previousImage = getPreviousPosition(currentPosition);
-		const nextImage = getNextPosition(currentPosition);
-		eagerLoad(previousImage);
-		eagerLoad(nextImage);
-	}
-
-	function goBack(): void {
-		if (previousButton) pulseButton(previousButton);
-		const positionNow = getPosition();
-		if (positionNow != null) {
-			const newPosition = getPreviousPosition(positionNow);
-			scrollTo(newPosition);
-		}
-	}
-
-	function goForward(): void {
-		if (nextButton) pulseButton(nextButton);
-		const positionNow = getPosition();
-		if (positionNow != null) {
-			const newPosition = getNextPosition(positionNow);
-			scrollTo(newPosition);
-		}
-	}
-
-	function handleKeydown(event: KeyboardEvent) {
+	const handleKeydown = (event: KeyboardEvent) => {
 		if (event.ctrlKey || event.metaKey || event.altKey) return;
 		switch (event.code) {
 			case 'Tab': {
 				event.preventDefault();
-				const tabableElements = getTabableElements();
-				const activeElement = tabableElements.find(
+				const tabbableElements = getTabbableElements(
+					lightbox,
+					imageList,
+				);
+				const activeElement = tabbableElements.find(
 					(element) => element === document.activeElement,
 				);
-				const firstTabableElement = tabableElements[0];
-				const lastTabableElement =
-					tabableElements[tabableElements.length - 1];
+				const firstTabbableElement = tabbableElements[0];
+				const lastTabbableElement =
+					tabbableElements[tabbableElements.length - 1];
 
 				if (!activeElement) {
 					// Start at the start
-					firstTabableElement?.focus();
+					firstTabbableElement?.focus();
 				} else {
 					const currentPosition =
-						tabableElements.indexOf(activeElement);
+						tabbableElements.indexOf(activeElement);
 					const firstElementHasFocus = currentPosition === 0;
 					const lastElementHasFocus =
-						currentPosition === tabableElements.length - 1;
+						currentPosition === tabbableElements.length - 1;
 
 					if (event.shiftKey) {
 						if (firstElementHasFocus) {
-							lastTabableElement?.focus();
+							lastTabbableElement?.focus();
 						} else {
-							tabableElements[currentPosition - 1]?.focus();
+							tabbableElements[currentPosition - 1]?.focus();
 						}
 					} else {
 						if (lastElementHasFocus) {
-							firstTabableElement?.focus();
+							firstTabbableElement?.focus();
 						} else {
-							tabableElements[currentPosition + 1]?.focus();
+							tabbableElements[currentPosition + 1]?.focus();
 						}
 					}
 				}
@@ -249,114 +355,20 @@ function initialiseLightbox(lightbox: HTMLElement) {
 				break;
 			}
 			case 'ArrowLeft':
-				goBack();
-				break;
+				return goBack(lightbox, images, previousButton, imageList);
 			case 'ArrowRight':
-				goForward();
-				break;
+				return goForward(lightbox, images, nextButton, imageList);
 			case 'KeyI':
-				toggleInfo();
-				break;
-			case 'KeyQ':
-				void close();
-				break;
+				return toggleInfo(lightbox, infoButton);
 			case 'ArrowUp':
-				showInfo();
-				break;
+				return toggleInfo(lightbox, infoButton, 'show');
 			case 'ArrowDown':
-				hideInfo();
-				break;
+				return toggleInfo(lightbox, infoButton, 'hide');
+			case 'KeyQ':
 			case 'Escape':
-				void close();
-				break;
+				return void close(lightbox, handleKeydown);
 		}
-	}
-
-	let previouslyFocused: Element;
-	async function open(position: number) {
-		log('dotcom', '💡 Opening lightbox.');
-		// Remember where we were so we can restore focus
-		if (document.activeElement) previouslyFocused = document.activeElement;
-		// We use this class to prevent the main page from scrolling in the background while lightbox is open
-		document.documentElement.classList.add('lightbox-open');
-		// Show lightbox
-		lightbox.removeAttribute('hidden');
-		// Now we have the index of the image that was clicked, show it
-		// in the lightbox
-		scrollTo(position);
-		// We only want this listener active while the lightbox is open
-		window.addEventListener('keydown', handleKeydown);
-		// Try to open the lightbox in fullscreen mode. This may fail
-		try {
-			await requestFullscreen();
-		} catch {
-			// Do nothing, requests to open fullscreen are just requests and can fail
-		}
-	}
-
-	async function close() {
-		log('dotcom', '💡 Closing lightbox.');
-		await exitFullscreen();
-		closeLightbox();
-		history.back();
-		restoreFocus();
-	}
-
-	function closeLightbox() {
-		// Re-enable scrolling
-		document.documentElement.classList.remove('lightbox-open');
-		// Hide lightbox
-		lightbox.setAttribute('hidden', 'true');
-		// Stop listening for keyboard shortcuts
-		window.removeEventListener('keydown', handleKeydown);
-	}
-
-	function restoreFocus() {
-		// Restore focus
-		// Okay, sure, it 👋 might not 👋 be an HTMLButtonElement but it *will* be
-		// focusable because it came from activeElement
-		(previouslyFocused as HTMLButtonElement).focus();
-	}
-
-	function pulseButton(button: HTMLButtonElement): void {
-		button.classList.add('active');
-
-		window.setTimeout(() => {
-			button.classList.remove('active');
-		}, 75);
-	}
-
-	function showInfo(): void {
-		infoButton?.classList.add('active');
-		lightbox.classList.remove('hide-info');
-		try {
-			storage.local.set('gu.prefs.lightbox-hideinfo', false);
-		} catch (error) {
-			// Do nothing. Errors accessing local storage are common
-		}
-	}
-
-	function hideInfo(): void {
-		infoButton?.classList.remove('active');
-		lightbox.classList.add('hide-info');
-		try {
-			storage.local.set('gu.prefs.lightbox-hideinfo', true);
-		} catch (error) {
-			// Do nothing. Errors accessing local storage are common
-		}
-	}
-
-	function toggleInfo(): void {
-		if (lightbox.classList.contains('hide-info')) {
-			showInfo();
-		} else {
-			hideInfo();
-		}
-	}
-
-	function removeLoader(position: number) {
-		lightbox.querySelector(`#lightbox-loader-${position}`)?.remove();
-	}
+	};
 
 	// --------------------------------------------------------------------------------
 	// EVENT LISTENERS
@@ -364,44 +376,48 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	for (const picture of pictures) {
 		// Clicking on the image toggles the caption
 		picture.addEventListener('mousedown', (event) => {
-			toggleInfo();
+			toggleInfo(lightbox, infoButton);
 			// We want to maintain focus so halt all further actions
 			event.preventDefault();
 			event.stopPropagation();
 		});
-		// Remove the loader once the image has been downloaded
-		const index = picture.closest('li')?.dataset.index;
-		if (index === undefined) continue;
-		const position = parseInt(index, 10);
-		const image = picture.querySelector('img');
-		if (image?.complete) {
-			removeLoader(position);
-		} else {
-			image?.addEventListener('load', () => removeLoader(position));
-		}
 	}
 
-	imageList?.addEventListener(
+	imageList.addEventListener(
 		'scroll',
 		libDebounce(
 			() => {
-				const currentPosition = getPosition();
-				if (currentPosition != null) {
-					onSelect(currentPosition);
-					loadAdjacentImages(currentPosition);
-				}
+				const currentPosition = getPosition(lightbox, imageList);
+				if (isUndefined(currentPosition)) return;
+				const positionIndicator =
+					lightbox.querySelector<HTMLElement>('nav .selected'); // Eg. 2/4, as in image 2 of 4
+				if (!positionIndicator) return;
+
+				onSelect(
+					positionIndicator,
+					currentPosition,
+					images.length,
+					closeButton,
+				);
+				loadAdjacentImages(images, currentPosition);
 			},
 			150,
 			{ leading: true },
 		),
 	);
 
-	closeButton?.addEventListener('click', () => {
-		void close();
+	closeButton.addEventListener('click', () => {
+		void close(lightbox, handleKeydown);
 	});
-	previousButton?.addEventListener('click', goBack);
-	nextButton?.addEventListener('click', goForward);
-	infoButton?.addEventListener('click', toggleInfo);
+	previousButton.addEventListener('click', () => {
+		goBack(lightbox, images, previousButton, imageList);
+	});
+	nextButton.addEventListener('click', () => {
+		goForward(lightbox, images, nextButton, imageList);
+	});
+	infoButton.addEventListener('click', () => {
+		toggleInfo(lightbox, infoButton);
+	});
 
 	for (const link of captionLinks) {
 		link.addEventListener('click', (event) => {
@@ -428,9 +444,9 @@ function initialiseLightbox(lightbox: HTMLElement) {
 				if (!lightbox.hasAttribute('hidden')) {
 					// If lightbox is still showing then the escape key was probably pressed
 					// which closes fullscreen mode but not the lightbox, so let's close it
-					closeLightbox();
+					closeLightbox(lightbox, handleKeydown);
 					history.back();
-					restoreFocus();
+					previouslyFocused && restoreFocus(previouslyFocused);
 				}
 			}
 		});
@@ -446,13 +462,13 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	window.addEventListener('popstate', () => {
 		const hash = window.location.hash;
 		if (hash.startsWith('#img-') && !lightbox.hasAttribute('open')) {
-			const position = hash.substring(5);
-			void open(parseInt(position, 10));
+			const position = parseInt(hash.substring(5), 10);
+			void open(lightbox, imageList, position, handleKeydown);
 		} else {
 			// There's no img hash so close the lightbox
 			void exitFullscreen();
-			closeLightbox();
-			restoreFocus();
+			closeLightbox(lightbox, handleKeydown);
+			previouslyFocused && restoreFocus(previouslyFocused);
 		}
 	});
 
@@ -462,26 +478,29 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	// --------------------------------------------------------------------------------
 
 	// Check the user's preferences to decide if we show the caption or not
-	try {
-		if (storage.local.get('gu.prefs.lightbox-hideinfo') === true) {
-			hideInfo();
-		} else {
-			showInfo(); // Default
-		}
-	} catch (error) {
-		// Do nothing. Errors accessing local storage are common
-	}
+	const info = storage.local.get('gu.prefs.lightbox-info');
+	if (info === 'hide') toggleInfo(lightbox, infoButton, 'hide');
 
 	// Open the lightbox at the position given in the url hash
-	const hash = window.location.hash;
+	const { hash } = window.location;
 	if (hash.startsWith('#img-')) {
-		const position = hash.substring(5);
-		void open(parseInt(position, 10));
+		const position = parseInt(hash.substring(5), 10);
+		void open(lightbox, imageList, position, handleKeydown);
 	}
 
 	// Mark the lightbox as ready so that we don't try to re-initialise it later
 	lightbox.setAttribute('data-island-status', 'rendered');
-}
+};
+
+const useElementById = (id: string) => {
+	const [element, setElement] = useState<HTMLElement>();
+
+	useEffect(() => {
+		setElement(window.document.getElementById(id) ?? undefined);
+	}, [id]);
+
+	return element;
+};
 
 export const LightboxJavascript = ({
 	format,
@@ -490,43 +509,36 @@ export const LightboxJavascript = ({
 	format: ArticleFormat;
 	images: ImageForLightbox[];
 }) => {
-	const [root, setRoot] = useState<HTMLUListElement>();
+	/**
+	 * Hydration has been requested so the first step is to render the list of images and put them into
+	 * the DOM
+	 *
+	 * LightboxLayout provides a marker for where these images should go `ul#lightbox-images`. We look for
+	 * this and then use createPortal to insert LightboxImages into this location.
+	 *
+	 * Why do we do this here, and not on the server?
+	 * Because the size of the html generated by LightboxImages is very large (because the Picture element
+	 * is so verbose) and we don't want every page view to have to download it, only those that are opening
+	 * lightbox
+	 */
+	const root = useElementById('lightbox-images');
+	const lightbox = useElementById('gu-lightbox');
+	const [initialised, setInitialised] = useState(false);
 
 	useEffect(() => {
-		const lightbox = document.querySelector<HTMLElement>('#gu-lightbox');
-		if (!isNonNullable(lightbox)) return;
-
-		/**
-		 * We only want to initialise the lightbox once so we check to see if it is already marked as ready
-		 */
-		if (lightbox.dataset.guReady) {
+		if (!lightbox) return;
+		if (initialised) {
 			log('dotcom', '💡 Lightbox already initialised, skipping');
 			return;
 		}
 		initialiseLightbox(lightbox);
+		setInitialised(true);
+	}, [initialised, lightbox]);
 
-		/**
-		 * Hydration has been requested so the first step is to render the list of images and put them into
-		 * the DOM
-		 *
-		 * LightboxLayout provides a marker for where these images should go `ul#lightbox-images`. We look for
-		 * this and then use createPortal to insert LightboxImages into this location.
-		 *
-		 * Why do we do this here, and not on the server?
-		 * Because the size of the html generated by LightboxImages is very large (because the Picture element
-		 * is so verbose) and we don't want every page view to have to download it, only those that are opening
-		 * lightbox
-		 */
-		const ul =
-			lightbox.querySelector<HTMLUListElement>('ul#lightbox-images');
-
-		if (isNonNullable(ul)) setRoot(ul);
-	}, []);
-
-	if (!root) return null;
+	if (!root || !lightbox) return null;
 
 	log('dotcom', '💡 Generating HTML for lightbox images...');
-	return ReactDOM.createPortal(
+	return createPortal(
 		<LightboxImages format={format} images={images} />,
 		root,
 	);

@@ -16,5 +16,5 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Check typescript
-        run: yarn tsc
+        run: pnpm tsc
         working-directory: dotcom-rendering

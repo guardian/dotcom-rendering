@@ -1,12 +1,18 @@
-import type { UserDataProps } from './types';
+import type { RenderingCDKStackProps } from './renderingStack';
+
+interface UserDataProps extends Pick<RenderingCDKStackProps, 'stage'> {
+	guApp: string;
+	guStack: string;
+	artifactsBucket: string;
+}
 
 /**
  * Returns user data configuration for instances in the rendering app
  * @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
  */
 export const getUserData = ({
-	app,
-	stack,
+	guApp,
+	guStack,
 	stage,
 	artifactsBucket,
 }: UserDataProps): string => {
@@ -17,23 +23,23 @@ export const getUserData = ({
 		`useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering`,
 		`cd /home/dotcom-rendering`,
 
-		`aws --region eu-west-1 s3 cp s3://${artifactsBucket}/frontend/${stage}/${app}/${app}.tar.gz ./`,
-		`tar -zxf ${app}.tar.gz ${app}`,
+		`aws --region eu-west-1 s3 cp s3://${artifactsBucket}/frontend/${stage}/${guApp}/${guApp}.tar.gz ./`,
+		`tar -zxf ${guApp}.tar.gz ${guApp}`,
 
-		`chown -R dotcom-rendering:frontend ${app}`,
+		`chown -R dotcom-rendering:frontend ${guApp}`,
 
-		`cd ${app}`,
+		`cd ${guApp}`,
 
 		`mkdir /var/log/dotcom-rendering`,
 		`chown -R dotcom-rendering:frontend /var/log/dotcom-rendering`,
 
 		// write out systemd file
-		`cat > /etc/systemd/system/${app}.service << EOF`,
+		`cat > /etc/systemd/system/${guApp}.service << EOF`,
 		`[Unit]`,
-		`Description=${app}`,
+		`Description=${guApp}`,
 		`After=network.target`,
 		`[Service]`,
-		`WorkingDirectory=/home/dotcom-rendering/${app}`,
+		`WorkingDirectory=/home/dotcom-rendering/${guApp}`,
 		`Type=simple`,
 		`User=dotcom-rendering`,
 		`Group=frontend`,
@@ -42,16 +48,16 @@ export const getUserData = ({
 		`Environment=TERM=xterm-256color`,
 		`Environment=NODE_ENV=production`,
 		`Environment=GU_STAGE=${stage}`,
-		`Environment=GU_APP=${app}`,
-		`Environment=GU_STACK=${stack}`,
+		`Environment=GU_APP=${guApp}`,
+		`Environment=GU_STACK=${guStack}`,
 		`ExecStart=make prod`,
 		`Restart=on-failure`,
 		`[Install]`,
 		`WantedBy=multi-user.target`,
 		`EOF`,
 
-		`systemctl enable ${app}`, // enable the service
-		`systemctl start ${app}`, // start the service
+		`systemctl enable ${guApp}`, // enable the service
+		`systemctl start ${guApp}`, // start the service
 	].join('\n');
 
 	return userData;

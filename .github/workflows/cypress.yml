@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [1, 2, 5]
+        group: [1, 5]
     services:
       DCR:
         image: ${{ inputs.container-image }}
@@ -24,6 +24,10 @@ jobs:
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
+
+      # https://github.com/cypress-io/github-action/issues/1044
+      - run: pnpm cypress install
+        working-directory: dotcom-rendering
 
       - name: Cypress run
         uses: cypress-io/github-action@v6

@@ -267,7 +267,7 @@ mainPatientia.storyName = 'patientia_standalone';
 
 The props can be set to anything here, since storybook is only interested in the design of the component.
 
-To view it in storybook simply run `yarn storybook` which will launch a storybook server (with live reloading) to be able to view and develop it.
+To view it in storybook simply run `make storybook-dev` which will launch a storybook server (with live reloading) to be able to view and develop it.
 
 #### Forced Test Variant
 
@@ -394,7 +394,7 @@ it('should load the sign in gate', () => {
 ...
 ```
 
-To run the cypress tests interactively, make sure the development server is running first, and then use `yarn cypress:open` to open the interactive cypress testing tool.
+To run the cypress tests interactively, make sure the development server is running first, and then use `pnpm cypress:open` to open the interactive cypress testing tool.
 
 Since the Cypress tests rely on a production article, it would normally get the AB switch state from there. In some cases this switch may not be on, or may not be defined yet, in turn meaning that the Cypress tests will fail.
 
@@ -415,4 +415,4 @@ Now the AB test will be picked up even if the switch does not exist yet in Front
 
 Finally for specific code which can be unit tested too, there are some tests for those too. For display rules, you'll find them in `src/web/components/SignInGate/displayRule.test.ts` and for the setting/checking if the gate has been dismissed in `src/web/components/SignInGate/dismissGate.test.ts`. Ideally unit tests should not be a replacement for the integration tests.
 
-You can run tests using `yarn test`, if you want to run for a specific test file use `yarn test ./path/to/file` e.g. `yarn test ./src/web/components/SignInGate/displayRule.test.ts`
+You can run tests using `pnpm test`, if you want to run for a specific test file use `pnpm test ./path/to/file` e.g. `pnpm test ./src/web/components/SignInGate/displayRule.test.ts`

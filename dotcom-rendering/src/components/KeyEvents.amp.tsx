@@ -1,26 +1,21 @@
 import { css } from '@emotion/react';
-import {
-	headline,
-	neutral,
-	sport,
-	textSans,
-} from '@guardian/source-foundations';
+import { headline, palette, textSans } from '@guardian/source-foundations';
 import { blockLink } from '../lib/block-link.amp';
 import DownArrow from '../static/icons/down-arrow.svg';
 
 const headingStyle = css`
 	${headline.xxsmall()};
-	background-color: ${neutral[100]};
+	background-color: ${palette.neutral[100]};
 	padding: 0.375rem 0.625rem;
 	font-weight: bold;
 	span {
-		background-color: ${neutral[46]};
+		background-color: ${palette.neutral[46]};
 		float: right;
 		position: relative;
 	}
 
 	svg {
-		fill: ${neutral[100]};
+		fill: ${palette.neutral[100]};
 		color: black;
 		display: block;
 	}
@@ -32,7 +27,7 @@ const listItemStyle = css`
 	width: 100%;
 	overflow: hidden;
 	min-height: 2.5rem;
-	border-bottom: 0.0625rem solid ${neutral[86]};
+	border-bottom: 0.0625rem solid ${palette.neutral[86]};
 	padding: 0.125rem 0 0.375rem;
 `;
 
@@ -54,7 +49,7 @@ const wrapper = css`
 const eventLinkStyle = css`
 	display: block;
 	text-decoration: none;
-	color: ${sport[300]};
+	color: ${palette.sport[300]};
 	:hover {
 		text-decoration: underline;
 	}
