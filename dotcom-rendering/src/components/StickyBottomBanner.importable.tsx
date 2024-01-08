@@ -62,11 +62,10 @@ type RRBannerConfig = {
 const getBannerLastClosedAt = (key: string): string | undefined => {
 	const item = storage.local.get(`gu.prefs.${key}`) as undefined | string;
 
-	if (item) {
-		const parsedItem = JSON.parse(item) as Record<string, any>;
-		return parsedItem.value;
+	if (typeof item === 'string') {
+		return item;
 	}
-	return item;
+	return undefined;
 };
 
 const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;
