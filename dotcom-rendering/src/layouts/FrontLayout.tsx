@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import {
 	background,
 	brandBackground,
@@ -10,13 +10,13 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
-import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
+import { Carousel } from '../components/Carousel.importable';
 import { DecideContainer } from '../components/DecideContainer';
 import {
 	decideFrontsBannerAdSlot,
-	decideMerchandisingSlot,
 	decideMerchHighAndMobileAdSlots,
+	decideMerchandisingSlot,
 } from '../components/DecideFrontsAdSlots';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
@@ -26,6 +26,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { LabsSection } from '../components/LabsSection';
+import { LiveUpdateToast } from '../components/LiveUpdateToast.importable';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -42,6 +43,7 @@ import {
 	getFrontsBannerAdPositions,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
+import { getZIndex } from '../lib/getZIndex';
 import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
@@ -158,9 +160,31 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
-
+	console.log('pressed page id ====', front.pressedPage.id);
 	return (
 		<>
+			<Island priority="critical">
+				<LiveUpdateToast
+					format={{
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+					}}
+					webURL={''}
+					channel={front.pressedPage.id}
+				/>
+			</Island>
+			{/* The Toast component is inserted into this div using a Portal */}
+			<div
+				id="toast-root"
+				css={css`
+					position: sticky;
+					top: 0;
+					${getZIndex('toast')};
+					display: flex;
+					justify-content: center;
+				`}
+			/>
 			<div data-print-layout="hide" id="bannerandheader">
 				<>
 					{renderAds && (
@@ -697,7 +721,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					</Island>
 				</Section>
 			)}
-
 			<Section
 				fullWidth={true}
 				data-print-layout="hide"
@@ -717,7 +740,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
-
 			<BannerWrapper data-print-layout="hide">
 				<Island priority="feature" defer={{ until: 'idle' }}>
 					<StickyBottomBanner

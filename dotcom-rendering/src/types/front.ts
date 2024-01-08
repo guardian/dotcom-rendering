@@ -46,6 +46,7 @@ export interface DCRFrontType {
 	deeplyRead?: TrailType[];
 	trendingTopics?: FETagType[];
 	contributionsServiceUrl: string;
+	webURL: string;
 }
 
 interface FEPressedPageType {
