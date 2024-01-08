@@ -113,7 +113,7 @@ export const LiveUpdateToast = ({ format, webURL, channel }: Props) => {
 			// Cleanup when the component unmounts
 			socket.close();
 		};
-	}, []);
+	}, [channel]);
 
 	const handleToastClick = useCallback(() => {
 		const placeToScrollTo = 'maincontent';
