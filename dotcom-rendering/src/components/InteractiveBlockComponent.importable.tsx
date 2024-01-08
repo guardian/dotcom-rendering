@@ -115,6 +115,10 @@ const placeholderLinkStyle = css`
 	left: ${space[1]}px;
 `;
 
+const mainMediaFigureStyles = css`
+	height: 100%;
+`;
+
 // https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js
 const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 	// Calls func on trailing edge of the wait period
@@ -294,7 +298,9 @@ export const InteractiveBlockComponent = ({
 				id={elementId} // boot scripts use id when inserting interactive content
 				ref={wrapperRef}
 				css={[
-					defaultRoleStyles(role, format),
+					isMainMedia
+						? mainMediaFigureStyles
+						: defaultRoleStyles(role, format),
 					wrapperStyle({ format, role, loaded }),
 				]}
 				className={interactiveLegacyFigureClasses(
