@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
-import type { Switches } from '../types/config';
 import type { ImageBlockElement } from '../types/content';
 import { Caption } from './Caption';
 import { GridItem } from './GridItem';
@@ -10,7 +9,7 @@ type Props = {
 	images: ImageBlockElement[];
 	format: ArticleFormat;
 	caption?: string;
-	switches?: Switches;
+	isInLightboxTest?: boolean;
 };
 
 const ieFallback = css`
@@ -104,12 +103,12 @@ const OneImage = ({
 	images,
 	format,
 	caption,
-	switches,
+	isInLightboxTest,
 }: {
 	images: [ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-	switches?: Switches;
+	isInLightboxTest: boolean;
 }) => (
 	<div css={wrapper}>
 		<ImageComponent
@@ -117,7 +116,7 @@ const OneImage = ({
 			element={images[0]}
 			hideCaption={true}
 			role={images[0].role}
-			switches={switches}
+			isInLightboxTest={isInLightboxTest}
 		/>
 		{!!caption && (
 			<Caption
@@ -133,12 +132,12 @@ const TwoImage = ({
 	images,
 	format,
 	caption,
-	switches,
+	isInLightboxTest,
 }: {
 	images: [ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-	switches?: Switches;
+	isInLightboxTest: boolean;
 }) => (
 	<div css={wrapper}>
 		<SideBySideGrid>
@@ -148,7 +147,7 @@ const TwoImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -157,7 +156,7 @@ const TwoImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			</GridItem>
 		</SideBySideGrid>
@@ -175,12 +174,12 @@ const ThreeImage = ({
 	images,
 	format,
 	caption,
-	switches,
+	isInLightboxTest,
 }: {
 	images: [ImageBlockElement, ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-	switches?: Switches;
+	isInLightboxTest: boolean;
 }) => (
 	<div css={wrapper}>
 		<OneAboveTwoGrid>
@@ -190,7 +189,7 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -199,7 +198,7 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			</GridItem>
 			<GridItem area="third">
@@ -208,7 +207,7 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[2].role}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			</GridItem>
 		</OneAboveTwoGrid>
@@ -226,7 +225,7 @@ const FourImage = ({
 	images,
 	format,
 	caption,
-	switches,
+	isInLightboxTest,
 }: {
 	images: [
 		ImageBlockElement,
@@ -236,7 +235,7 @@ const FourImage = ({
 	];
 	format: ArticleFormat;
 	caption?: string;
-	switches?: Switches;
+	isInLightboxTest: boolean;
 }) => (
 	<div css={wrapper}>
 		<GridOfFour>
@@ -246,7 +245,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -255,7 +254,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			</GridItem>
 			<GridItem area="third">
@@ -264,7 +263,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[2].role}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			</GridItem>
 			<GridItem area="forth">
@@ -273,7 +272,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[3].role}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			</GridItem>
 		</GridOfFour>
@@ -291,7 +290,7 @@ export const MultiImageBlockComponent = ({
 	images,
 	format,
 	caption,
-	switches,
+	isInLightboxTest = false,
 }: Props) => {
 	const [one, two, three, four] = images;
 
@@ -301,7 +300,7 @@ export const MultiImageBlockComponent = ({
 				images={[one, two, three, four]}
 				format={format}
 				caption={caption}
-				switches={switches}
+				isInLightboxTest={isInLightboxTest}
 			/>
 		);
 	}
@@ -312,7 +311,7 @@ export const MultiImageBlockComponent = ({
 				images={[one, two, three]}
 				format={format}
 				caption={caption}
-				switches={switches}
+				isInLightboxTest={isInLightboxTest}
 			/>
 		);
 	}
@@ -323,7 +322,7 @@ export const MultiImageBlockComponent = ({
 				images={[one, two]}
 				format={format}
 				caption={caption}
-				switches={switches}
+				isInLightboxTest={isInLightboxTest}
 			/>
 		);
 	}
@@ -334,7 +333,7 @@ export const MultiImageBlockComponent = ({
 				images={[one]}
 				format={format}
 				caption={caption}
-				switches={switches}
+				isInLightboxTest={isInLightboxTest}
 			/>
 		);
 	}
