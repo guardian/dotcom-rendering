@@ -6,11 +6,17 @@ import screenfull from 'screenfull';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxImages } from './LightboxImages';
 
+const getPositionFromHash = (): number | undefined => {
+	const [, digit] = location.hash.match(/#img-(\d+)/) ?? [];
+	if (!digit) return;
+	return parseInt(digit, 10);
+};
+
 /**
  * Translate the pixel (scrollLeft) document value into a numeric
  * position value
  */
-const getPosition = (
+const getPositionFromScroll = (
 	lightbox: HTMLElement,
 	imageList: HTMLUListElement,
 ): number | undefined => {
@@ -42,7 +48,7 @@ const getTabbableElements = (
 			),
 		);
 	}
-	const currentPosition = getPosition(lightbox, imageList);
+	const currentPosition = getPositionFromScroll(lightbox, imageList);
 	if (currentPosition == null) return [];
 	const currentPage = lightbox.querySelector<HTMLElement>(
 		`li[data-index="${currentPosition}"]`,
@@ -167,7 +173,7 @@ const goBack = (
 ) => {
 	const { length } = images;
 	pulseButton(previousButton);
-	const positionNow = getPosition(lightbox, imageList);
+	const positionNow = getPositionFromScroll(lightbox, imageList);
 	if (positionNow != null) {
 		const newPosition = getPreviousPosition(positionNow, length);
 		scrollTo(newPosition, lightbox, imageList);
@@ -182,7 +188,7 @@ const goForward = (
 ) => {
 	const { length } = images;
 	pulseButton(nextButton);
-	const positionNow = getPosition(lightbox, imageList);
+	const positionNow = getPositionFromScroll(lightbox, imageList);
 	if (positionNow != null) {
 		const newPosition = getNextPosition(positionNow, length);
 		scrollTo(newPosition, lightbox, imageList);
@@ -386,7 +392,10 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 		'scroll',
 		libDebounce(
 			() => {
-				const currentPosition = getPosition(lightbox, imageList);
+				const currentPosition = getPositionFromScroll(
+					lightbox,
+					imageList,
+				);
 				if (isUndefined(currentPosition)) return;
 				const positionIndicator =
 					lightbox.querySelector<HTMLElement>('nav .selected'); // Eg. 2/4, as in image 2 of 4
@@ -459,9 +468,8 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 	 * here depending on if we have an img hash or not.
 	 */
 	window.addEventListener('popstate', () => {
-		const hash = window.location.hash;
-		if (hash.startsWith('#img-') && !lightbox.hasAttribute('open')) {
-			const position = parseInt(hash.substring(5), 10);
+		const position = getPositionFromHash();
+		if (typeof position === 'number' && !lightbox.hasAttribute('open')) {
 			void open(lightbox, imageList, position, handleKeydown);
 		} else {
 			// There's no img hash so close the lightbox
@@ -481,9 +489,8 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 	if (info === 'hide') toggleInfo(lightbox, infoButton, 'hide');
 
 	// Open the lightbox at the position given in the url hash
-	const { hash } = window.location;
-	if (hash.startsWith('#img-')) {
-		const position = parseInt(hash.substring(5), 10);
+	const position = getPositionFromHash();
+	if (typeof position === 'number') {
 		void open(lightbox, imageList, position, handleKeydown);
 	}
 
