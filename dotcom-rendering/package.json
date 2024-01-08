@@ -147,7 +147,7 @@
 		"compression": "1.7.4",
 		"constructs": "10.3.0",
 		"cpy": "10.1.0",
-		"css-loader": "6.7.3",
+		"css-loader": "6.8.1",
 		"csstype": "3.1.1",
 		"curlyquotes": "1.5.5",
 		"cypress": "13.6.0",
