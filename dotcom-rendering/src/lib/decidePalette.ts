@@ -1,18 +1,6 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
-import {
-	brandAlt,
-	brandAltBackground,
-	culture,
-	labs,
-	lifestyle,
-	neutral,
-	news,
-	opinion,
-	palette,
-	specialReport,
-	sport,
-} from '@guardian/source-foundations';
+import { brandAltBackground, palette } from '@guardian/source-foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
 import { palette as themePalette } from '../palette';
@@ -20,6 +8,18 @@ import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
 import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
+
+const {
+	brandAlt,
+	culture,
+	lifestyle,
+	news,
+	neutral,
+	opinion,
+	specialReport,
+	sport,
+	labs,
+} = palette;
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
