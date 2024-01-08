@@ -32,18 +32,25 @@ const waitForUrlToContain = async (page: Page, value: string) => {
 /**
  * Wait for an element to have an attribute value
  */
-const waitForAttribute = async (
-	page: Page,
-	selector: string,
-	name: string,
-	value: string,
-) => {
+const waitForAttribute = async ({
+	page,
+	selector,
+	attributeName,
+	attributeValue,
+}: {
+	page: Page;
+	selector: string;
+	attributeName: string;
+	attributeValue: string;
+}) => {
 	return page.waitForFunction(
 		(args) => {
 			const elem = document.querySelector(args.selector);
-			return elem?.getAttribute(args.name) === args.value;
+			return (
+				elem?.getAttribute(args.attributeName) === args.attributeValue
+			);
 		},
-		{ selector, name, value },
+		{ selector, attributeName, attributeValue },
 		{ polling: 250, timeout: 30_000 },
 	);
 };
@@ -248,12 +255,12 @@ test.describe('Lightbox', () => {
 
 		async function imageHasLoadingValue(nth: number, loadingValue: string) {
 			// TODO check if waiting for the attribute to be set is correct vs an immediate check
-			return waitForAttribute(
+			return waitForAttribute({
 				page,
-				`li[data-index="${nth}"] img`,
-				'loading',
-				loadingValue,
-			);
+				selector: `li[data-index="${nth}"] img`,
+				attributeName: 'loading',
+				attributeValue: loadingValue,
+			});
 		}
 
 		await disableCMP(context);
