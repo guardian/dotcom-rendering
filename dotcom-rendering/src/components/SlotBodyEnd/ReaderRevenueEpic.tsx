@@ -178,7 +178,7 @@ export const ReaderRevenueEpic = ({
 		)
 			.then((epicModule) => {
 				endPerformanceMeasure();
-				setEpic(() => epicModule.ContributionsEpic);
+				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
 			})
 			.catch((error) => {
 				const msg =
