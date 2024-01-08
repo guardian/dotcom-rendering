@@ -213,8 +213,8 @@ importers:
         specifier: 16.7.0
         version: 16.7.0
       lodash.debounce:
-        specifier: 4.0.6
-        version: 4.0.6
+        specifier: 4.0.8
+        version: 4.0.8
       mockdate:
         specifier: 3.0.5
         version: 3.0.5
@@ -17058,10 +17058,6 @@ packages:
 
   /lodash.clonedeep@4.5.0:
     resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
-    dev: false
-
-  /lodash.debounce@4.0.6:
-    resolution: {integrity: sha512-bvQ3Dur2OS7mlFg4XYHH8aoKEOyOubvORNQcIaYD999s/bB8b8WK03y/mFOKpkyT8K5E4EdREVxSucgREyVHQQ==}
     dev: false
 
   /lodash.debounce@4.0.8:
