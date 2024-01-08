@@ -1,7 +1,6 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
 import {
-	border,
 	brandAlt,
 	brandAltBackground,
 	culture,
@@ -292,7 +291,7 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
 
-	return border.secondary;
+	return palette.neutral[86];
 };
 
 const borderHeadline = (format: ArticleFormat): string => {
@@ -300,7 +299,7 @@ const borderHeadline = (format: ArticleFormat): string => {
 		return 'rgba(255,255,255, 0.2)';
 	}
 	if (format.design === ArticleDesign.DeadBlog) return '#CDCDCD';
-	return border.secondary;
+	return palette.neutral[86];
 };
 
 const borderCardSupporting = (format: ArticleFormat): string => {

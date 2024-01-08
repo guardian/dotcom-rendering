@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	background,
-	border,
 	brandBackground,
 	brandBorder,
 	brandLine,
@@ -287,7 +286,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							fullWidth={true}
 							showTopBorder={false}
 							backgroundColour={sourcePalette.labs[400]}
-							borderColour={border.primary}
+							borderColour={sourcePalette.neutral[60]}
 							sectionId="labs-header"
 						>
 							<LabsHeader />

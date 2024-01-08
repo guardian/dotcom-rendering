@@ -1,16 +1,6 @@
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial, Pillar } from '@guardian/libs';
-import {
-	border,
-	culture,
-	labs,
-	lifestyle,
-	news,
-	opinion,
-	palette,
-	specialReport,
-	sport,
-} from '@guardian/source-foundations';
+import { palette } from '@guardian/source-foundations';
 
 type ColourType = string;
 
@@ -67,82 +57,82 @@ export const pillarPalette_DO_NOT_USE: Record<
 	PillarPalette | SpecialPalette | LabsPalette | SpecialAltPalette
 > = {
 	[Pillar.News]: {
-		dark: news[300],
-		main: news[400],
-		bright: news[500],
-		pastel: news[600],
-		faded: news[800],
-		300: news[300],
-		400: news[400],
-		500: news[500],
-		600: news[600],
-		800: news[800],
+		dark: palette.news[300],
+		main: palette.news[400],
+		bright: palette.news[500],
+		pastel: palette.news[600],
+		faded: palette.news[800],
+		300: palette.news[300],
+		400: palette.news[400],
+		500: palette.news[500],
+		600: palette.news[600],
+		800: palette.news[800],
 	},
 	[Pillar.Opinion]: {
-		dark: opinion[300],
-		main: opinion[300],
-		bright: opinion[500],
-		pastel: opinion[600],
-		faded: opinion[800],
-		300: opinion[300],
-		400: opinion[400],
-		500: opinion[500],
-		600: opinion[600],
-		800: opinion[800],
+		dark: palette.opinion[300],
+		main: palette.opinion[300],
+		bright: palette.opinion[500],
+		pastel: palette.opinion[600],
+		faded: palette.opinion[800],
+		300: palette.opinion[300],
+		400: palette.opinion[400],
+		500: palette.opinion[500],
+		600: palette.opinion[600],
+		800: palette.opinion[800],
 	},
 	[Pillar.Sport]: {
-		dark: sport[300],
-		main: sport[400],
-		bright: sport[500],
-		pastel: sport[600],
-		faded: sport[800],
-		300: sport[300],
-		400: sport[400],
-		500: sport[500],
-		600: sport[600],
-		800: sport[800],
+		dark: palette.sport[300],
+		main: palette.sport[400],
+		bright: palette.sport[500],
+		pastel: palette.sport[600],
+		faded: palette.sport[800],
+		300: palette.sport[300],
+		400: palette.sport[400],
+		500: palette.sport[500],
+		600: palette.sport[600],
+		800: palette.sport[800],
 	},
 	[Pillar.Culture]: {
-		dark: culture[300],
-		main: culture[400],
-		bright: culture[500],
-		pastel: culture[600],
-		faded: culture[800],
-		300: culture[300],
-		400: culture[400],
-		500: culture[500],
-		600: culture[600],
-		800: culture[800],
+		dark: palette.culture[300],
+		main: palette.culture[400],
+		bright: palette.culture[500],
+		pastel: palette.culture[600],
+		faded: palette.culture[800],
+		300: palette.culture[300],
+		400: palette.culture[400],
+		500: palette.culture[500],
+		600: palette.culture[600],
+		800: palette.culture[800],
 	},
 	[Pillar.Lifestyle]: {
-		dark: lifestyle[300],
-		main: lifestyle[400],
-		bright: lifestyle[500],
-		pastel: lifestyle[600],
-		faded: lifestyle[800],
-		300: lifestyle[300],
-		400: lifestyle[400],
-		500: lifestyle[500],
-		600: lifestyle[600],
-		800: lifestyle[800],
+		dark: palette.lifestyle[300],
+		main: palette.lifestyle[400],
+		bright: palette.lifestyle[500],
+		pastel: palette.lifestyle[600],
+		faded: palette.lifestyle[800],
+		300: palette.lifestyle[300],
+		400: palette.lifestyle[400],
+		500: palette.lifestyle[500],
+		600: palette.lifestyle[600],
+		800: palette.lifestyle[800],
 	},
 	[ArticleSpecial.Labs]: {
-		dark: labs[300],
-		main: labs[400],
-		bright: labs[400], // bright teal
-		faded: labs[300], // dark teal
-		300: labs[300],
-		400: labs[400],
+		dark: palette.labs[300],
+		main: palette.labs[400],
+		bright: palette.labs[400], // bright teal
+		faded: palette.labs[300], // dark teal
+		300: palette.labs[300],
+		400: palette.labs[400],
 	},
 	[ArticleSpecial.SpecialReport]: {
-		dark: specialReport[300],
-		main: specialReport[400],
-		bright: specialReport[500],
-		faded: specialReport[800],
-		300: specialReport[300],
-		400: specialReport[400],
-		500: specialReport[500],
-		800: specialReport[800],
+		dark: palette.specialReport[300],
+		main: palette.specialReport[400],
+		bright: palette.specialReport[500],
+		faded: palette.specialReport[800],
+		300: palette.specialReport[300],
+		400: palette.specialReport[400],
+		500: palette.specialReport[500],
+		800: palette.specialReport[800],
 	},
 	[ArticleSpecial.SpecialReportAlt]: {
 		dark: palette.specialReportAlt[100],
@@ -184,8 +174,8 @@ Further notes on this function:
 export const neutralBorder = (pillar: ArticleTheme): ColourType => {
 	switch (pillar) {
 		case ArticleSpecial.Labs:
-			return border.primary; // 'dark' theme
+			return palette.neutral[60]; // 'dark' theme
 		default:
-			return border.secondary;
+			return palette.neutral[86];
 	}
 };

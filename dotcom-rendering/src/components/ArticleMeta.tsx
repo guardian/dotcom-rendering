@@ -8,8 +8,8 @@ import {
 } from '@guardian/libs';
 import {
 	between,
-	border,
 	from,
+	palette,
 	space,
 	until,
 } from '@guardian/source-foundations';
@@ -345,7 +345,7 @@ export const ArticleMeta = ({
 						<StraightLines
 							cssOverrides={stretchLines}
 							count={1}
-							color={border.primary}
+							color={palette.neutral[60]}
 						/>
 						<div
 							css={css`
