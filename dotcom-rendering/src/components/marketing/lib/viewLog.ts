@@ -36,17 +36,14 @@ export const getEpicViewLog = (): EpicViewLog | undefined => {
  * The number of entries is limited to the number in maxLogEntries.
  */
 export const logEpicView = (testId: string): void => {
-	const item = storage.local.get(viewLogKey);
-	const viewLog = (Array.isArray(item) ? item : []) as EpicView[];
+	const viewLog = getEpicViewLog() ?? [];
 
-	viewLog.push({
+	const newView = {
 		date: new Date().getTime(),
 		testId,
-	});
-
-	const newValue = {
-		value: viewLog.slice(-maxLogEntries),
 	};
+
+	const newValue = [...viewLog, newView].slice(-maxLogEntries);
 
 	storage.local.set(viewLogKey, newValue);
 };
