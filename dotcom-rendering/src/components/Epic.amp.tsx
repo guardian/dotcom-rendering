@@ -238,17 +238,16 @@ const tickerProgressStyle = css`
 	width: 100%;
 	transform-origin: left;
 `;
-/* stylelint-disable */
 const tickerBackgroundStyle = css`
 	overflow: hidden;
 	position: relative;
 	margin: 5px 0;
 	height: 10px;
 	width: 100%;
+	/* stylelint-disable-next-line color-no-hex */
 	background-color: #dda7a1;
 	border: none;
 `;
-/* stylelint-enable */
 const topLeftStyle = css`
 	${textSans.small({ fontWeight: 'bold' })};
 `;
