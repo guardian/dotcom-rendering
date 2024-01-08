@@ -87,10 +87,10 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 219px 1px 1fr 300px;
 					grid-template-areas:
 						'title  border  headline    headline'
-						'lines  border  media       media'
-						'meta   border  media       media'
+						'.      border  media       media'
+						'lines  border  standfirst  right-column'
 						'meta   border  standfirst  right-column'
-						'meta   border  disclaimer  right-column'
+						'.      border  disclaimer  right-column'
 						'.      border  body        right-column'
 						'.      border  .           right-column';
 				}
@@ -99,10 +99,10 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 140px 1px 1fr 300px;
 					grid-template-areas:
 						'title  border  headline    headline'
-						'lines  border  media       media'
-						'meta   border  media       media'
+						'.      border  media       media'
+						'lines  border  standfirst  right-column'
 						'meta   border  standfirst  right-column'
-						'meta   border  disclaimer  right-column'
+						'.      border  disclaimer  right-column'
 						'.      border  body        right-column'
 						'.      border  .           right-column';
 				}
