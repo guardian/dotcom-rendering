@@ -1,8 +1,6 @@
-import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import * as url from 'node:url';
 import cpy from 'cpy';
-import execa from 'execa';
 import { log, warn } from '../../../scripts/log.js';
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -14,8 +12,11 @@ const target = path.resolve(dirname, '../..', 'target');
  * ├── build.json
  * ├── riff-raff.yaml
  * ├── ${copyFrontendStatic()}
- * ├── ${copyApp('rendering')}
- * └── ${copyApp('renderi-front')}
+ * ├── ${copyApp('rendering')} // existing rendering app
+ * ├── ${copyApp('article-rendering')} // new article-rendering app
+ * ├── ${copyApp('facia-rendering')} // To be implemented
+ * ├── ${copyApp('misc-rendering')} // To be implemented
+ * └── ${copyApp('interactive-rendering')} // To be implemented
  */
 
 /**
@@ -24,50 +25,69 @@ const target = path.resolve(dirname, '../..', 'target');
  * - .zip artefact comprised of the JS app
  *
  * It generates a folder like this:
- * ├── ${appName}-cfn
- * │   ├── DotcomRendering-${appName}-CODE.template.json
- * │   └── DotcomRendering-${appName}-PROD.template.json
- * └── ${appName}
+ * ├── ${guAppName}-cfn
+ * │   ├── ${guAppName}Rendering-CODE.template.json
+ * │   └── ${guAppName}Rendering-PROD.template.json
+ * └── ${guAppName}
  *     └── dist
- *         └── ${appName}.zip
+ *         └── ${guAppName}.zip
  *
- * Except for the instance where appName === 'rendering' due to backwards compatibility
+ *  Except for the instance where appName === 'rendering' due to backwards compatibility
  *
- * @param appName {string}
+ * @param guAppName {`${'article' | 'facia' | 'misc' | 'interactive'}-rendering` | 'rendering'}
  **/
-const copyApp = (appName) => {
-	// GOTCHA: This is a little hack to be backwards compatible with the naming for when this was a single stack app
-	const cfnTemplateName = appName === 'rendering' ? '' : `-${appName}`;
-	const cfnFolder =
-		appName === 'rendering' ? 'frontend-cfn' : `${appName}-cfn`;
+const copyApp = (guAppName) => {
+	/**
+	 * @param {string} str
+	 * @returns {string}
+	 */
+	const kebabToPascalCase = (str) =>
+		str
+			.split('-')
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+			.join('');
 
-	log(` - copying app: ${appName}`);
+	/**
+	 * @param {"CODE" | "PROD"} stage
+	 * @returns {string}
+	 */
+	const cfnTemplateName = (stage) => {
+		if (guAppName === 'rendering') {
+			return `DotcomRendering-${stage}.template.json`;
+		} else {
+			return `${kebabToPascalCase(guAppName)}-${stage}.template.json`;
+		}
+	};
 
-	log(` - ${appName}: copying cloudformation config`);
+	const cfnFolder = `${guAppName}-cfn`;
+
+	log(` - copying app: ${guAppName}`);
+
+	log(` - ${guAppName}: copying cloudformation config`);
 	const cfnJob = cpy(
 		[
-			`cdk.out/DotcomRendering${cfnTemplateName}-CODE.template.json`,
-			`cdk.out/DotcomRendering${cfnTemplateName}-PROD.template.json`,
+			`cdk.out/${cfnTemplateName('CODE')}`,
+			`cdk.out/${cfnTemplateName('PROD')}`,
 		],
 		path.resolve(target, cfnFolder),
 	);
 
-	log(` - ${appName}: copying makefile`);
-	const makefileJob = cpy(['makefile'], path.resolve(target, appName));
+	log(` - ${guAppName}: copying makefile`);
+	const makefileJob = cpy(['makefile'], path.resolve(target, guAppName));
 
-	log(` - ${appName}: copying server dist`);
+	log(` - ${guAppName}: copying server dist`);
 	const serverDistJob = cpy(
 		path.resolve(dirname, '../../dist/**'),
-		path.resolve(target, appName, 'dist'),
+		path.resolve(target, guAppName, 'dist'),
 		{
 			nodir: true,
 		},
 	);
 
-	log(`' - ${appName}: copying scripts`);
+	log(` - ${guAppName}: copying scripts`);
 	const scriptsJob = cpy(
 		path.resolve(dirname, '../../scripts/**'),
-		path.resolve(target, appName, 'scripts'),
+		path.resolve(target, guAppName, 'scripts'),
 		{
 			nodir: true,
 		},
@@ -126,15 +146,25 @@ const copyFrontendStatic = () => {
 
 const copyRiffRaff = () => {
 	log(' - copying riffraff yaml');
-	return cpy(['riff-raff.yaml'], target, { cwd: dirname });
+	return cpy(
+		['riff-raff-rendering.yaml', 'riff-raff-rendering-all.yaml'],
+		target,
+		{
+			cwd: dirname,
+		},
+	);
 };
 
 Promise.all([
-	...copyApp('rendering'),
-	...copyApp('front-web'),
+	...copyApp('rendering'), // existing rendering app
+	...copyApp('article-rendering'), // new article-rendering app
+	// ...copyApp('facia-rendering'), // To be implemented
+	// ...copyApp('misc-rendering'), // To be implemented
+	// ...copyApp('interactive-rendering'), // To be implemented
 	...copyFrontendStatic(),
 	copyRiffRaff(),
 ]).catch((err) => {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- ignore
 	warn(err.stack);
 	process.exit(1);
 });

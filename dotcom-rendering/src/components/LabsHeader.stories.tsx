@@ -1,4 +1,4 @@
-import { border, palette } from '@guardian/source-foundations';
+import { palette } from '@guardian/source-foundations';
 import { LabsHeader } from './LabsHeader';
 import { Section } from './Section';
 
@@ -13,7 +13,7 @@ export const Default = () => {
 			fullWidth={true}
 			showTopBorder={false}
 			backgroundColour={palette.labs[400]}
-			borderColour={border.primary}
+			borderColour={palette.neutral[60]}
 		>
 			<LabsHeader />
 		</Section>

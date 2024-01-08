@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { border, space } from '@guardian/source-foundations';
+import { palette, space } from '@guardian/source-foundations';
 import {
 	DottedLines,
 	StraightLines,
@@ -11,12 +11,20 @@ const block = css`
 
 export const GuardianLabsLines = () => (
 	<>
-		<StraightLines cssOverrides={block} count={1} color={border.primary} />
+		<StraightLines
+			cssOverrides={block}
+			count={1}
+			color={palette.neutral[60]}
+		/>
 		<div
 			css={css`
 				height: ${space[2]}px;
 			`}
 		/>
-		<DottedLines cssOverrides={block} count={1} color={border.primary} />
+		<DottedLines
+			cssOverrides={block}
+			count={1}
+			color={palette.neutral[60]}
+		/>
 	</>
 );

@@ -59,6 +59,7 @@ type RRBannerConfig = {
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 	const item = localStorage.getItem(`gu.prefs.${key}`) as undefined | string;
 
 	if (item) {

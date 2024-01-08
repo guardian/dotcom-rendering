@@ -21,6 +21,7 @@ const localStorageDismissedCountKey = (
 const getSigninGatePrefsSafely = (): { [key: string]: any } => {
 	try {
 		const prefs: { [key: string]: any } = JSON.parse(
+			// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 			localStorage.getItem(localStorageKey) ?? '{}',
 		);
 
@@ -34,6 +35,7 @@ const getSigninGatePrefsSafely = (): { [key: string]: any } => {
 };
 
 const setSigninGatePrefs = (prefs: any) => {
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 	localStorage.setItem(localStorageKey, JSON.stringify({ value: prefs }));
 };
 

@@ -29,6 +29,7 @@ export const getEpicViewLog = (
 	// Return undefined instead of null if view log does not exist
 	// Needed because the localStorage API returns null for non-existing keys
 	// but Contributions API expects a view log or undefined.
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 	return localStorage.get(viewLogKey) || undefined;
 };
 
@@ -37,6 +38,7 @@ export const getEpicViewLog = (
  * The number of entries is limited to the number in maxLogEntries.
  */
 export const logEpicView = (testId: string): void => {
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 	const item = localStorage.getItem(viewLogKey);
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	const viewLog = (item ? JSON.parse(item).value : []) as EpicView[];
@@ -50,5 +52,6 @@ export const logEpicView = (testId: string): void => {
 		value: viewLog.slice(-maxLogEntries),
 	};
 
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 	localStorage.setItem(viewLogKey, JSON.stringify(newValue));
 };

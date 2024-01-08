@@ -25,9 +25,12 @@ export const removeArticleCountOptOutCookie = (): void =>
 	removeCookie({ name: ARTICLE_COUNT_OPT_OUT_COOKIE.name });
 
 export const removeArticleCountFromLocalStorage = (): void => {
-	window.localStorage.removeItem(DAILY_ARTICLE_COUNT_STORAGE_KEY);
-	window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_STORAGE_KEY);
-	window.localStorage.removeItem(ARTICLES_THIS_WEEK_STORAGE_KEY);
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
+	localStorage.removeItem(DAILY_ARTICLE_COUNT_STORAGE_KEY);
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
+	localStorage.removeItem(WEEKLY_ARTICLE_COUNT_STORAGE_KEY);
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
+	localStorage.removeItem(ARTICLES_THIS_WEEK_STORAGE_KEY);
 };
 
 export const hasArticleCountOptOutCookie = (): boolean =>
