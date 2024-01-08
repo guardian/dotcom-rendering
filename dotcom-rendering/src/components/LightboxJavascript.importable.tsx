@@ -197,6 +197,9 @@ const open = async (
 	handleKeydown: (event: KeyboardEvent) => void,
 ) => {
 	log('dotcom', '💡 Opening lightbox.');
+	await requestFullscreen(lightbox).catch(() => {
+		// fullscreen request failed
+	});
 	// Remember where we were so we can restore focus
 	if (document.activeElement) previouslyFocused = document.activeElement;
 	// We use this class to prevent the main page from scrolling in the background while lightbox is open
@@ -208,12 +211,6 @@ const open = async (
 	scrollTo(position, lightbox, imageList);
 	// We only want this listener active while the lightbox is open
 	window.addEventListener('keydown', handleKeydown);
-	// Try to open the lightbox in fullscreen mode. This may fail
-	try {
-		await requestFullscreen(lightbox);
-	} catch {
-		// Do nothing, requests to open fullscreen are just requests and can fail
-	}
 };
 
 const closeLightbox = (
@@ -233,7 +230,9 @@ const close = async (
 	handleKeydown: (ev: KeyboardEvent) => void,
 ) => {
 	log('dotcom', '💡 Closing lightbox.');
-	await exitFullscreen();
+	await exitFullscreen().catch(() => {
+		// fullscreen request failed
+	});
 	closeLightbox(lightbox, handleKeydown);
 	history.back();
 	previouslyFocused && restoreFocus(previouslyFocused);
