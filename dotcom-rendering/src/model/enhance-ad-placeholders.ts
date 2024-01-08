@@ -12,6 +12,7 @@ const isSuitablePosition = (
 	paragraphCounter: number,
 	numberOfAdsInserted: number,
 	isLastElement: boolean,
+	isParagraph: boolean,
 ): boolean => {
 	// Rules for ad placement
 	const adEveryNParagraphs = 6;
@@ -29,8 +30,11 @@ const isSuitablePosition = (
 	}
 
 	// Insert an ad placeholder every `adEveryNParagraphs` paragraphs,
-	// starting from the paragraph at `firstAdIndex`
-	return (paragraphCounter - firstAdIndex) % adEveryNParagraphs === 0;
+	// starting from the paragraph at `firstAdIndex` and only after a paragraph
+	return (
+		isParagraph &&
+		(paragraphCounter - firstAdIndex) % adEveryNParagraphs === 0
+	);
 };
 
 const isParagraph = (element: FEElement) =>
@@ -67,6 +71,7 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 				paragraphCounter,
 				prev.numberOfAdsInserted,
 				elements.length === idx + 1,
+				isParagraph(currentElement),
 			);
 
 			const currentElements = [...prev.elements, currentElement];

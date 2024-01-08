@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	brandAlt,
 	brandText,
 	from,
 	headline,
@@ -220,7 +219,7 @@ export const Header = ({ nav, guardianBaseURL }: Props) => (
 				</span>
 				<SvgGuardianBestWebsiteLogo
 					textColor={brandText.primary}
-					textAccentColor={brandAlt[400]}
+					textAccentColor={palette.brandAlt[400]}
 				/>
 			</a>
 		</div>

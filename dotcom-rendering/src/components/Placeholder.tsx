@@ -1,7 +1,7 @@
 import { css, keyframes } from '@emotion/react';
-import { neutral, space } from '@guardian/source-foundations';
+import { palette, space } from '@guardian/source-foundations';
 
-const BACKGROUND_COLOUR = neutral[93];
+const BACKGROUND_COLOUR = palette.neutral[93];
 
 type Props = {
 	height: number;

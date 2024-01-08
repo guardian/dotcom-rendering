@@ -1,19 +1,6 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
-import {
-	border,
-	brandAlt,
-	brandAltBackground,
-	culture,
-	labs,
-	lifestyle,
-	neutral,
-	news,
-	opinion,
-	palette,
-	specialReport,
-	sport,
-} from '@guardian/source-foundations';
+import { brandAltBackground, palette } from '@guardian/source-foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
 import { palette as themePalette } from '../palette';
@@ -21,6 +8,18 @@ import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
 import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
+
+const {
+	brandAlt,
+	culture,
+	lifestyle,
+	news,
+	neutral,
+	opinion,
+	specialReport,
+	sport,
+	labs,
+} = palette;
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
@@ -292,7 +291,7 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
 
-	return border.secondary;
+	return palette.neutral[86];
 };
 
 const borderHeadline = (format: ArticleFormat): string => {
@@ -300,7 +299,7 @@ const borderHeadline = (format: ArticleFormat): string => {
 		return 'rgba(255,255,255, 0.2)';
 	}
 	if (format.design === ArticleDesign.DeadBlog) return '#CDCDCD';
-	return border.secondary;
+	return palette.neutral[86];
 };
 
 const borderCardSupporting = (format: ArticleFormat): string => {

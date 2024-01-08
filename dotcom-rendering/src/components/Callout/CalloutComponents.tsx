@@ -130,7 +130,7 @@ const shareIconStyles = css`
 
 	box-sizing: border-box;
 	fill: ${palette('--article-link-text')};
-	padding: 0.5px 0;
+	padding: 0 1px 0 0;
 `;
 
 export const CalloutShare = ({
@@ -180,7 +180,6 @@ export const CalloutShare = ({
 					<SvgShare size="small" />
 				</span>
 				<div css={shareCalloutTextStyles}>
-					Know others who are affected?{' '}
 					<Button
 						size="xsmall"
 						priority="subdued"
@@ -191,7 +190,7 @@ export const CalloutShare = ({
 						}}
 						cssOverrides={shareCalloutLinkStyles}
 					>
-						Please share this callout.
+						Share this callout
 					</Button>
 					{isCopied && (
 						<span css={sharePopupStyles} role="alert">
