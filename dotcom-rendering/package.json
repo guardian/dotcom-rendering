@@ -59,7 +59,7 @@
 		"@guardian/core-web-vitals": "5.1.0",
 		"@guardian/eslint-config": "4.1.0",
 		"@guardian/eslint-config-typescript": "6.0.1",
-		"@guardian/eslint-plugin-source-react-components": "18.0.0",
+		"@guardian/eslint-plugin-source-react-components": "21.0.1",
 		"@guardian/identity-auth": "1.1.0",
 		"@guardian/identity-auth-frontend": "1.0.0",
 		"@guardian/libs": "15.7.1",
