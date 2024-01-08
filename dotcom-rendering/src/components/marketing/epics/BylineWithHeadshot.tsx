@@ -71,7 +71,7 @@ const bylineBottomDecoration = css`
 
 export const BylineWithHeadshot: ReactComponent<BylineWithHeadshotProps> = ({
 	bylineWithImage,
-}: BylineWithHeadshotProps) => {
+}) => {
 	const { name, description, headshot } = bylineWithImage;
 
 	return (
