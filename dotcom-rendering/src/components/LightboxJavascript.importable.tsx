@@ -24,14 +24,14 @@ const getPosition = (
 };
 
 /**
- * **getTabableElements**
+ * **getTabbableElements**
  *
  * Returns a list of all the html elements on the *active* page that can be tabbed to
  *
  * Any elements that are off screen, such as caption links for images that are not
  * currently showing, are ignored
  */
-const getTabableElements = (
+const getTabbableElements = (
 	lightbox: HTMLElement,
 	imageList: HTMLUListElement,
 ): HTMLElement[] => {
@@ -316,35 +316,38 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 		switch (event.code) {
 			case 'Tab': {
 				event.preventDefault();
-				const tabableElements = getTabableElements(lightbox, imageList);
-				const activeElement = tabableElements.find(
+				const tabbableElements = getTabbableElements(
+					lightbox,
+					imageList,
+				);
+				const activeElement = tabbableElements.find(
 					(element) => element === document.activeElement,
 				);
-				const firstTabableElement = tabableElements[0];
-				const lastTabableElement =
-					tabableElements[tabableElements.length - 1];
+				const firstTabbableElement = tabbableElements[0];
+				const lastTabbableElement =
+					tabbableElements[tabbableElements.length - 1];
 
 				if (!activeElement) {
 					// Start at the start
-					firstTabableElement?.focus();
+					firstTabbableElement?.focus();
 				} else {
 					const currentPosition =
-						tabableElements.indexOf(activeElement);
+						tabbableElements.indexOf(activeElement);
 					const firstElementHasFocus = currentPosition === 0;
 					const lastElementHasFocus =
-						currentPosition === tabableElements.length - 1;
+						currentPosition === tabbableElements.length - 1;
 
 					if (event.shiftKey) {
 						if (firstElementHasFocus) {
-							lastTabableElement?.focus();
+							lastTabbableElement?.focus();
 						} else {
-							tabableElements[currentPosition - 1]?.focus();
+							tabbableElements[currentPosition - 1]?.focus();
 						}
 					} else {
 						if (lastElementHasFocus) {
-							firstTabableElement?.focus();
+							firstTabbableElement?.focus();
 						} else {
-							tabableElements[currentPosition + 1]?.focus();
+							tabbableElements[currentPosition + 1]?.focus();
 						}
 					}
 				}
