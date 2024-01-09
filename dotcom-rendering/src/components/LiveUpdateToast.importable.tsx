@@ -76,7 +76,7 @@ type Props = {
 };
 
 const toastRoot: Element | null = !isServer
-	? window.document.getElementById('toast-root')
+	? window.document.getElementById('fronts-toast-root')
 	: null;
 
 export const LiveUpdateToast = ({ format, webURL, channel }: Props) => {
@@ -116,17 +116,18 @@ export const LiveUpdateToast = ({ format, webURL, channel }: Props) => {
 	}, [channel]);
 
 	const handleToastClick = useCallback(() => {
-		const placeToScrollTo = 'maincontent';
-		setShowToast(false);
+		window.stop();
+		window.location.reload();
 
-		document.getElementById(placeToScrollTo)?.scrollIntoView({
-			behavior: 'smooth',
-		});
-
-		// window.history.replaceState({}, '', `#${placeToScrollTo}`);
-		// } else {
-		window.location.href = `${webURL}#${placeToScrollTo}`;
-		// }
+		// const placeToScrollTo = 'maincontent';
+		// setShowToast(false);
+		// document.getElementById(placeToScrollTo)?.scrollIntoView({
+		// 	behavior: 'smooth',
+		// });
+		// // window.history.replaceState({}, '', `#${placeToScrollTo}`);
+		// // } else {
+		// window.location.href = `${webURL}#${placeToScrollTo}`;
+		// // }
 	}, [webURL]);
 
 	if (toastRoot && showToast) {

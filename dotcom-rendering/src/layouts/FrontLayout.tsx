@@ -176,7 +176,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			</Island>
 			{/* The Toast component is inserted into this div using a Portal */}
 			<div
-				id="toast-root"
+				id="fronts-toast-root"
 				css={css`
 					position: sticky;
 					top: 0;
