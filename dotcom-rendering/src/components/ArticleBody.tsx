@@ -39,7 +39,7 @@ type Props = {
 	filterKeyEvents?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
-	abTests?: ServerSideTests;
+	abTests: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
 	isRightToLeftLang?: boolean;
@@ -165,6 +165,7 @@ export const ArticleBody = ({
 					webTitle={webTitle}
 					ajaxUrl={ajaxUrl}
 					switches={switches}
+					abTests={abTests}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					isLiveUpdate={false}
