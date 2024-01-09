@@ -4,6 +4,7 @@ import { getIframeBody } from 'playwright/lib/iframe';
 import { waitForIsland } from 'playwright/lib/islands';
 import { loadPage } from 'playwright/lib/load-page';
 import {
+	expectToBeVisible,
 	expectToExist,
 	expectToNotBeVisible,
 	expectToNotExist,
@@ -112,12 +113,8 @@ test.describe('Liveblogs', () => {
 		await loadPage(page, `/Article/${blogUrl}?live=true`);
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
-		await page.evaluate((tweet) => {
-			window.mockLiveUpdate({
-				numNewBlocks: 1,
-				html: tweet,
-				mostRecentBlockId: 'abc',
-			});
+		await page.evaluate((block) => {
+			window.mockLiveUpdate(block);
 		}, tweetBlock);
 
 		const updateLocator = page
@@ -131,23 +128,17 @@ test.describe('Liveblogs', () => {
 			waitFor: 'attached',
 		});
 
-		// have to use an attribute selector here as a numeric id is not a valid selector
-		const tweetContainerSelector =
-			'[id="46d194c9-ea50-4cd5-af8b-a51e8b15c65e"]';
+		const tweetIframeSelector =
+			'#tweet-container-60f4fe21-3568-4345-90f0-6838a247ec98 iframe';
 
-		await page
-			.locator(tweetContainerSelector)
-			.waitFor({ state: 'visible', timeout: 20000 });
+		await page.locator(tweetIframeSelector).scrollIntoViewIfNeeded();
 
-		await page.locator(tweetContainerSelector).scrollIntoViewIfNeeded();
+		await expectToBeVisible(page, tweetIframeSelector);
 
-		const twitterIframe = getIframeBody(
-			page,
-			`${tweetContainerSelector} iframe`,
-		);
+		const twitterIframe = getIframeBody(page, tweetIframeSelector);
 
 		await expect(await twitterIframe).toContainText(
-			'They will prepare the extraordinary European Council meeting tonight',
+			'Don’t believe the spin. Once you break through typical Washington math',
 			{ timeout: 20000 },
 		);
 	});
@@ -249,29 +240,33 @@ test.describe('Liveblogs', () => {
 			window.scrollTo(0, document.documentElement.scrollHeight),
 		);
 
-		await page.evaluate((tweet) => {
-			window.mockLiveUpdate({
-				numNewBlocks: 1,
-				html: tweet,
-				mostRecentBlockId: 'abc',
-			});
+		await page.evaluate((block) => {
+			window.mockLiveUpdate(block);
 		}, tweetBlock);
 
-		await waitForIsland(page, 'TweetBlockComponent', {
-			waitFor: 'attached',
-		});
+		const tweetIframeSelector =
+			'#tweet-container-60f4fe21-3568-4345-90f0-6838a247ec98 iframe';
 
-		// have to use an attribute selector here as a numeric id is not a valid selector
-		const tweetContainerSelector =
-			'[id="46d194c9-ea50-4cd5-af8b-a51e8b15c65e"]';
-
-		await expectToNotBeVisible(page, tweetContainerSelector);
+		await expectToNotBeVisible(page, tweetIframeSelector);
 
 		await page
 			.locator('div[data-gu-name="media"]')
 			.scrollIntoViewIfNeeded();
 
-		await expectToExist(page, tweetContainerSelector);
+		await waitForIsland(page, 'TweetBlockComponent', {
+			waitFor: 'attached',
+		});
+
+		await page.locator(tweetIframeSelector).scrollIntoViewIfNeeded();
+
+		await expectToBeVisible(page, tweetIframeSelector);
+
+		const twitterIframe = getIframeBody(page, tweetIframeSelector);
+
+		await expect(await twitterIframe).toContainText(
+			'Don’t believe the spin. Once you break through typical Washington math',
+			{ timeout: 20000 },
+		);
 	});
 
 	test('should render live score updates to a cricketblog', async ({
