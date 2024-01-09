@@ -140,6 +140,8 @@ export const renderElement = ({
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
+	const isInLightboxTest = abTests.lightboxVariant === 'variant';
+
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return (
@@ -347,7 +349,7 @@ export const renderElement = ({
 					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -450,7 +452,7 @@ export const renderElement = ({
 					key={index}
 					images={element.images}
 					caption={element.caption}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
