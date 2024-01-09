@@ -2,7 +2,6 @@
 import { css } from '@emotion/react';
 import {
 	body,
-	border,
 	brandBackground,
 	headline,
 	palette,
@@ -20,7 +19,7 @@ export const epicChoiceCardCss = `
 		color: ${palette.neutral[46]};
 		cursor: pointer;
 		border-radius: 4px;
-		box-shadow: inset 0 0 0 2px ${border.primary};
+		box-shadow: inset 0 0 0 2px ${palette.neutral[60]};
 		box-sizing: border-box;
 		min-height: 44px;
 		margin: 0 0 8px 0;
@@ -238,17 +237,16 @@ const tickerProgressStyle = css`
 	width: 100%;
 	transform-origin: left;
 `;
-/* stylelint-disable */
 const tickerBackgroundStyle = css`
 	overflow: hidden;
 	position: relative;
 	margin: 5px 0;
 	height: 10px;
 	width: 100%;
+	/* stylelint-disable-next-line color-no-hex */
 	background-color: #dda7a1;
 	border: none;
 `;
-/* stylelint-enable */
 const topLeftStyle = css`
 	${textSans.small({ fontWeight: 'bold' })};
 `;
