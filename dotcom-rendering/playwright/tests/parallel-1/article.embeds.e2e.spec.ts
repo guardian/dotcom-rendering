@@ -1,15 +1,9 @@
-import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
+import { getIframeBody } from 'playwright/lib/iframe';
 import { waitForIsland } from 'playwright/lib/islands';
 import { expectToBeVisible } from 'playwright/lib/locators';
 import { cmpAcceptAll } from '../../lib/cmp';
 import { loadPage } from '../../lib/load-page';
-
-const getIframeBody = async (page: Page, iframeSelector: string) => {
-	const iframeBodyLocator = page.frameLocator(iframeSelector).locator('body');
-	await expect(iframeBodyLocator).toBeAttached({ timeout: 10000 });
-	return iframeBodyLocator;
-};
 
 test.describe('Embeds', () => {
 	test.describe('AMP', () => {
