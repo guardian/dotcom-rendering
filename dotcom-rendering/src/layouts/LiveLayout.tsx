@@ -609,7 +609,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										secondaryDateline={
 											article.webPublicationSecondaryDateDisplay
 										}
-										isCommentable={true} // todo
+										isCommentable={showComments}
 										discussionApiUrl={
 											article.config.discussionApiUrl
 										}
