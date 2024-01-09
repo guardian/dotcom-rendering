@@ -78,9 +78,7 @@ test.describe('Lightbox', () => {
 	}) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
-			switchOverrides: {
-				lightbox: true,
-			},
+			configOverrides: { abTests: { lightboxVariant: 'variant' } },
 		});
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
@@ -103,8 +101,8 @@ test.describe('Lightbox', () => {
 	}) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
-			switchOverrides: {
-				lightbox: true,
+			configOverrides: {
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -125,8 +123,8 @@ test.describe('Lightbox', () => {
 	test('should trap focus', async ({ context, page }) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
-			switchOverrides: {
-				lightbox: true,
+			configOverrides: {
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -174,8 +172,8 @@ test.describe('Lightbox', () => {
 	}) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
-			switchOverrides: {
-				lightbox: true,
+			configOverrides: {
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -266,8 +264,8 @@ test.describe('Lightbox', () => {
 
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
-			switchOverrides: {
-				lightbox: true,
+			configOverrides: {
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -309,8 +307,8 @@ test.describe('Lightbox', () => {
 	}) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
-			switchOverrides: {
-				lightbox: true,
+			configOverrides: {
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -360,8 +358,8 @@ test.describe('Lightbox', () => {
 	}) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
-			switchOverrides: {
-				lightbox: true,
+			configOverrides: {
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -406,8 +404,8 @@ test.describe('Lightbox', () => {
 	}) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, LiveBlog, {
-			switchOverrides: {
-				lightbox: true,
+			configOverrides: {
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -437,8 +435,8 @@ test.describe('Lightbox', () => {
 	}) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
-			switchOverrides: {
-				lightbox: true,
+			configOverrides: {
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -471,8 +469,8 @@ test.describe('Lightbox', () => {
 	}) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
-			switchOverrides: {
-				lightbox: true,
+			configOverrides: {
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
