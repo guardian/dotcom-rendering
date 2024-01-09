@@ -41,7 +41,7 @@ type Props = {
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests?: ServerSideTests;
+	abTests: ServerSideTests;
 };
 
 export const ArticleRenderer = ({
