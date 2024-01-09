@@ -4,6 +4,7 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	headline,
+	lineHeights,
 	space,
 	textSans,
 	textSansSizes,
@@ -48,7 +49,7 @@ const labsFont = css`
 	line-height: 32px;
 	${from.tablet} {
 		font-size: ${textSansSizes.xxxlarge};
-		line-height: 38px;
+		line-height: ${lineHeights.regular};
 	}
 `;
 
