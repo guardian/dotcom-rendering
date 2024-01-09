@@ -48,7 +48,7 @@
 		"@guardian/content-api-models": "17.8.0",
 		"@guardian/content-atom-model": "3.4.4",
 		"@guardian/eslint-config-typescript": "7.0.0",
-		"@guardian/eslint-plugin-source-react-components": "18.0.0",
+		"@guardian/eslint-plugin-source-react-components": "21.0.1",
 		"@guardian/libs": "15.7.1",
 		"@guardian/node-riffraff-artifact": "0.3.2",
 		"@guardian/renditions": "0.2.0",
