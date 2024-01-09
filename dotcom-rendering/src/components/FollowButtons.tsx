@@ -1,4 +1,3 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { space, textSans } from '@guardian/source-foundations';
@@ -47,7 +46,7 @@ const FollowIcon = ({
 	</div>
 );
 
-const buttonStyles = css`
+const buttonStyles = (withExtraBottomMargin: boolean) => css`
 	${textSans.small()}
 	color: ${palette('--follow-text')};
 	background: none;
@@ -57,6 +56,7 @@ const buttonStyles = css`
 	min-height: ${space[6]}px;
 	padding: 0;
 	text-align: left;
+	${withExtraBottomMargin && `margin-bottom: ${space[2]}px;`}
 `;
 
 const containerStyles = css`
@@ -92,13 +92,13 @@ type ButtonProps = {
 export const FollowNotificationsButton = ({
 	isFollowing,
 	onClickHandler,
-	cssOverrides,
-}: ButtonProps & { cssOverrides?: SerializedStyles }) => {
+	withExtraBottomMargin = false,
+}: ButtonProps & { withExtraBottomMargin?: boolean }) => {
 	return (
 		<button
 			onClick={onClickHandler}
 			type="button"
-			css={[buttonStyles, cssOverrides]}
+			css={[buttonStyles(withExtraBottomMargin)]}
 		>
 			<span css={containerStyles}>
 				<FollowIcon
@@ -116,13 +116,13 @@ export const FollowTagButton = ({
 	isFollowing,
 	displayName = '',
 	onClickHandler,
-	cssOverrides,
-}: ButtonProps & { displayName: string; cssOverrides?: SerializedStyles }) => {
+	withExtraBottomMargin = false,
+}: ButtonProps & { displayName: string; withExtraBottomMargin?: boolean }) => {
 	return (
 		<button
 			onClick={onClickHandler}
 			type="button"
-			css={[buttonStyles, cssOverrides]}
+			css={[buttonStyles(withExtraBottomMargin)]}
 		>
 			<span css={containerStyles}>
 				<FollowIcon
