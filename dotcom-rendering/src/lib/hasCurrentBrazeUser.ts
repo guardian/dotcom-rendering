@@ -1,18 +1,17 @@
+import { storage } from '@guardian/libs';
+
 const KEY = 'gu.brazeUserSet';
 
 const hasCurrentBrazeUser = (): boolean => {
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	return localStorage.getItem(KEY) === 'true';
+	return storage.local.get(KEY) === 'true';
 };
 
 const setHasCurrentBrazeUser = (): void => {
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	localStorage.setItem(KEY, 'true');
+	storage.local.set(KEY, 'true');
 };
 
 const clearHasCurrentBrazeUser = (): void => {
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	localStorage.removeItem(KEY);
+	storage.local.remove(KEY);
 };
 
 export {
