@@ -1,3 +1,4 @@
+import { storage } from '@guardian/libs';
 import type { Page } from '@playwright/test';
 import { test } from '@playwright/test';
 import { cmpAcceptAll } from 'playwright/lib/cmp';
@@ -20,7 +21,7 @@ const expectLocalStorageItem = (
 ) => {
 	return page.waitForFunction(
 		(args) => {
-			const itemValue = window.localStorage.getItem(args.key);
+			const itemValue = storage.local.get(args.key);
 			// eslint-disable-next-line no-console -- test
 			console.log(
 				`localstorage item ${args.key} is ${String(itemValue)}`,
@@ -113,11 +114,8 @@ test.describe('Braze messaging', () => {
 
 		// Set cache data in localStorage so we can check it's cleared below
 		await page.evaluate(() => {
-			window.localStorage.setItem(
-				'gu.brazeMessageCache.EndOfArticle',
-				'[]',
-			);
-			window.localStorage.setItem('gu.brazeMessageCache.Banner', '[]');
+			storage.local.set('gu.brazeMessageCache.EndOfArticle', '[]');
+			storage.local.set('gu.brazeMessageCache.Banner', '[]');
 		});
 
 		// User no longer logged in
