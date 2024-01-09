@@ -4,6 +4,7 @@ import type {
 } from '@guardian/braze-components/logic';
 import { cmp } from '@guardian/consent-management-platform';
 import type { CountryCode } from '@guardian/libs';
+import { isString, storage } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
@@ -59,14 +60,8 @@ type RRBannerConfig = {
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	const item = localStorage.getItem(`gu.prefs.${key}`) as undefined | string;
-
-	if (item) {
-		const parsedItem = JSON.parse(item) as Record<string, any>;
-		return parsedItem.value;
-	}
-	return item;
+	const item = storage.local.get(`gu.prefs.${key}`);
+	return isString(item) ? item : undefined;
 };
 
 const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;
