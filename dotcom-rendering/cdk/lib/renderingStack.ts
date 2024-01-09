@@ -10,6 +10,14 @@ import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { type App as CDKApp, Duration } from 'aws-cdk-lib';
+import { AdjustmentType, StepScalingAction } from 'aws-cdk-lib/aws-autoscaling';
+import {
+	Alarm,
+	ComparisonOperator,
+	Metric,
+	TreatMissingData,
+} from 'aws-cdk-lib/aws-cloudwatch';
+import { AutoScalingAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
@@ -117,6 +125,62 @@ export class RenderingCDKStack extends CDKStack {
 			resourceRecord: ec2app.loadBalancer.loadBalancerDnsName,
 			ttl: Duration.hours(1),
 		});
+
+		// Alarms
+		// evaluationPeriods and period should change for PROD. These values were chosen for testing purposes.
+		// Currently, they are period: 60 and evaluationPeriod: 1
+		// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L299
+		const latencyHighAlarm = new Alarm(this, 'HighLatencyAlarm', {
+			// When merged this can become actionsEnabled: stage === 'PROD'
+			actionsEnabled: true,
+			alarmDescription: 'Latency alarm for autoscaling',
+			threshold: 0.2,
+			comparisonOperator: ComparisonOperator.GREATER_THAN_THRESHOLD,
+			evaluationPeriods: 3,
+			metric: new Metric({
+				dimensionsMap: {
+					AutoScalingGroupName:
+						ec2app.autoScalingGroup.autoScalingGroupName,
+				},
+				metricName: 'TargetResponseTime',
+				namespace: 'AWS/ApplicationELB',
+				period: Duration.seconds(10),
+				statistic: 'Average',
+			}),
+
+			treatMissingData: TreatMissingData.MISSING,
+		});
+
+		const scaleUpStep = new StepScalingAction(this, 'ScaleUp', {
+			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
+			autoScalingGroup: ec2app.autoScalingGroup,
+			// Current PROD: 10 minutes
+			// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L276-L277
+			cooldown: Duration.seconds(30),
+		});
+
+		scaleUpStep.addAdjustment({
+			lowerBound: 0,
+			adjustment: 100,
+		});
+
+		latencyHighAlarm.addAlarmAction(new AutoScalingAction(scaleUpStep));
+
+		const scaleDownStep = new StepScalingAction(this, 'ScaleDown', {
+			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
+			autoScalingGroup: ec2app.autoScalingGroup,
+
+			// Current PROD: Every 2 minutes take out one instance for prod. This is for testing purposes
+			// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L282
+			cooldown: Duration.seconds(15),
+		});
+
+		scaleDownStep.addAdjustment({
+			lowerBound: 0,
+			adjustment: -1,
+		});
+
+		latencyHighAlarm.addOkAction(new AutoScalingAction(scaleDownStep));
 
 		// Saves the value of the rendering base URL to SSM for frontend apps to use
 		new StringParameter(this, 'RenderingBaseURLParam', {
