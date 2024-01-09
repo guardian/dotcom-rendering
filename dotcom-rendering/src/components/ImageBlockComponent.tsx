@@ -1,3 +1,4 @@
+import type { Switches } from '../types/config';
 import type { ImageBlockElement } from '../types/content';
 import { ImageComponent } from './ImageComponent';
 
@@ -9,7 +10,7 @@ type Props = {
 	isMainMedia?: boolean;
 	starRating?: number;
 	isAvatar?: boolean;
-	isInLightboxTest: boolean;
+	switches?: Switches;
 };
 
 export const ImageBlockComponent = ({
@@ -20,7 +21,7 @@ export const ImageBlockComponent = ({
 	isMainMedia,
 	starRating,
 	isAvatar,
-	isInLightboxTest,
+	switches,
 }: Props) => {
 	const { role } = element;
 	return (
@@ -33,7 +34,7 @@ export const ImageBlockComponent = ({
 			role={role}
 			title={title}
 			isAvatar={isAvatar}
-			isInLightboxTest={isInLightboxTest}
+			switches={switches}
 		/>
 	);
 };

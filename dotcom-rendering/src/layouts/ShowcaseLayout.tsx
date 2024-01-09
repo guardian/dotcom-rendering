@@ -516,7 +516,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									pageId={article.pageId}
 									webTitle={article.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
-									abTests={article.config.abTests}
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
