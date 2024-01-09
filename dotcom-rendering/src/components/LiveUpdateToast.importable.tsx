@@ -128,7 +128,8 @@ export const LiveUpdateToast = ({ format, webURL, channel }: Props) => {
 		// // } else {
 		// window.location.href = `${webURL}#${placeToScrollTo}`;
 		// // }
-	}, [webURL]);
+		// }, [webURL]);
+	}, []);
 
 	if (toastRoot && showToast) {
 		/**
