@@ -6,6 +6,7 @@ import {
 	headline,
 	space,
 	textSans,
+	textSansSizes,
 	until,
 } from '@guardian/source-foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -46,7 +47,7 @@ const labsFont = css`
 	${textSans.xlarge({ fontWeight: 'bold' })};
 	line-height: 32px;
 	${from.tablet} {
-		${textSans.xxxlarge({ fontWeight: 'bold' })};
+		font-size: ${textSansSizes.xxxlarge};
 		line-height: 38px;
 	}
 `;
