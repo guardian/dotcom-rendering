@@ -62,6 +62,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		section,
 		sharedAdTargeting,
 		adUnit,
+		abTests,
 		switches,
 		keywordIds,
 	} =
@@ -83,6 +84,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		section,
 		sharedAdTargeting,
 		adUnit,
+		abTests,
 		switches,
 		keywordIds,
 	});

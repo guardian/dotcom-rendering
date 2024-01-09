@@ -81,6 +81,7 @@ export const Sport = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
 				/>
@@ -126,6 +127,7 @@ export const News = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
 				/>
@@ -171,6 +173,7 @@ export const Culture = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
 				/>
@@ -216,6 +219,7 @@ export const Lifestyle = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
 				/>
@@ -261,6 +265,7 @@ export const Opinion = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
 				/>
@@ -306,6 +311,7 @@ export const SpecialReport = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
 				/>
@@ -351,6 +357,7 @@ export const Labs = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
 				/>
