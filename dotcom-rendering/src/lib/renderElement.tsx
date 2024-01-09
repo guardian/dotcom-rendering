@@ -80,7 +80,7 @@ type Props = {
 	isSensitive: boolean;
 	switches: Switches;
 	isPinnedPost?: boolean;
-	abTests?: ServerSideTests;
+	abTests: ServerSideTests;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -140,7 +140,7 @@ export const renderElement = ({
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
-	const isInLightboxTest = abTests?.lightboxVariant === 'variant';
+	const isInLightboxTest = abTests.lightboxVariant === 'variant';
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':

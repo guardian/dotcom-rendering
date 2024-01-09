@@ -25,7 +25,7 @@ import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { renderElement } from '../lib/renderElement';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { Switches } from '../types/config';
+import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { DCRArticle } from '../types/frontend';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
@@ -46,6 +46,7 @@ type RendererProps = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	abTests: ServerSideTests;
 	switches: Switches;
 };
 
@@ -58,6 +59,7 @@ const Renderer = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
+	abTests,
 	switches,
 }: RendererProps) => {
 	// const cleanedElements = elements.map(element =>
@@ -78,6 +80,7 @@ const Renderer = ({
 			isAdFreeUser,
 			isSensitive,
 			switches,
+			abTests,
 		});
 
 		switch (element._type) {
@@ -331,6 +334,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 						pageId={article.pageId}
 						webTitle={article.webTitle}
 						ajaxUrl={article.config.ajaxUrl}
+						abTests={article.config.abTests}
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}

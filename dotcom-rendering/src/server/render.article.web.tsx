@@ -249,6 +249,7 @@ export const renderBlocks = ({
 	isAdFreeUser,
 	isSensitive,
 	section,
+	abTests,
 	switches,
 	keywordIds,
 }: FEBlocksRequest): string => {
@@ -268,6 +269,7 @@ export const renderBlocks = ({
 				ajaxUrl={ajaxUrl}
 				isSensitive={isSensitive}
 				isAdFreeUser={isAdFreeUser}
+				abTests={abTests}
 				switches={switches}
 				isLiveUpdate={true}
 				sectionId={section}
