@@ -80,7 +80,7 @@ type Props = {
 	isSensitive: boolean;
 	switches: Switches;
 	isPinnedPost?: boolean;
-	abTests?: ServerSideTests;
+	abTests: ServerSideTests;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most

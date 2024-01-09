@@ -268,6 +268,7 @@ export const renderBlocks = ({
 				ajaxUrl={ajaxUrl}
 				isSensitive={isSensitive}
 				isAdFreeUser={isAdFreeUser}
+				abTests={{}} // @TODO: start passing `abTests` to the block endpoint
 				switches={switches}
 				isLiveUpdate={true}
 				sectionId={section}
