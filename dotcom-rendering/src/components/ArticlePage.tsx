@@ -60,6 +60,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 
 	const isInLightboxTest =
 		article.config.abTests.lightboxVariant === 'variant';
+
 	const webLightbox = renderingTarget === 'Web' && isInLightboxTest;
 
 	return (

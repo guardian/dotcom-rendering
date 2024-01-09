@@ -208,7 +208,7 @@ export const renderElement = ({
 				<CartoonComponent
 					format={format}
 					element={element}
-					isInLightboxTest={isInLightboxTest}
+					switches={switches}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':

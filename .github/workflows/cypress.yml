@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [1, 5]
+        group: [1]
     services:
       DCR:
         image: ${{ inputs.container-image }}

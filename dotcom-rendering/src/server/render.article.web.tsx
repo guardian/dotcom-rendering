@@ -249,7 +249,6 @@ export const renderBlocks = ({
 	isAdFreeUser,
 	isSensitive,
 	section,
-	abTests,
 	switches,
 	keywordIds,
 }: FEBlocksRequest): string => {
@@ -269,7 +268,7 @@ export const renderBlocks = ({
 				ajaxUrl={ajaxUrl}
 				isSensitive={isSensitive}
 				isAdFreeUser={isAdFreeUser}
-				abTests={abTests}
+				abTests={{}} // @TODO: start passing `abTests` to the block endpoint
 				switches={switches}
 				isLiveUpdate={true}
 				sectionId={section}

@@ -79,8 +79,8 @@ const Renderer = ({
 			ajaxUrl,
 			isAdFreeUser,
 			isSensitive,
-			switches,
 			abTests,
+			switches,
 		});
 
 		switch (element._type) {

@@ -78,11 +78,7 @@ test.describe('Lightbox', () => {
 	}) => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
-			configOverrides: {
-				abTests: {
-					lightboxVariant: 'variant',
-				},
-			},
+			configOverrides: { abTests: { lightboxVariant: 'variant' } },
 		});
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
@@ -106,9 +102,7 @@ test.describe('Lightbox', () => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
 			configOverrides: {
-				abTests: {
-					lightboxVariant: 'variant',
-				},
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -130,9 +124,7 @@ test.describe('Lightbox', () => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
 			configOverrides: {
-				abTests: {
-					lightboxVariant: 'variant',
-				},
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -181,9 +173,7 @@ test.describe('Lightbox', () => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
 			configOverrides: {
-				abTests: {
-					lightboxVariant: 'variant',
-				},
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -202,6 +192,7 @@ test.describe('Lightbox', () => {
 
 		// We should be able to navigate using arrow keys
 		await page.locator('button.open-lightbox').nth(1).click();
+		await expectToBeVisible(page, '#gu-lightbox');
 		await expectToNotBeInViewport(page, 'li[data-index="3"]');
 		await page.keyboard.press('ArrowRight');
 		await expectToBeInViewport(page, 'li[data-index="3"]');
@@ -274,14 +265,13 @@ test.describe('Lightbox', () => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
 			configOverrides: {
-				abTests: {
-					lightboxVariant: 'variant',
-				},
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
 		// eq(6) here means the 7th button is clicked (base zero)
 		await page.locator('button.open-lightbox').nth(6).click();
+		await expectToBeVisible(page, '#gu-lightbox');
 
 		// We validate that adjacent images get downloaded early by checking the
 		// value of the `loading` attribute
@@ -318,28 +308,31 @@ test.describe('Lightbox', () => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
 			configOverrides: {
-				abTests: {
-					lightboxVariant: 'variant',
-				},
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
 		await page.locator('button.open-lightbox').nth(1).click();
+		await expectToBeVisible(page, '#gu-lightbox');
 		await expectToBeVisible(page, 'li[data-index="2"] aside');
 
 		// Clicking an image toggles the caption
 		await page.locator('li[data-index="2"] img').click();
+		await expectToBeVisible(page, '#gu-lightbox');
 		await expectToNotBeVisible(page, 'li[data-index="2"] aside');
 
 		// Close lightbox
 		await page.keyboard.press('Escape');
+		await expectToNotBeVisible(page, '#gu-lightbox');
 
 		// Re-open lightbox to see if the info aside element is now open
 		await page.locator('button.open-lightbox').nth(1).click();
+		await expectToBeVisible(page, '#gu-lightbox');
 		await expectToNotBeVisible(page, 'li[data-index="2"] aside');
 
 		// Close lightbox
 		await page.keyboard.press('Escape');
+		await expectToNotBeVisible(page, '#gu-lightbox');
 
 		// Reload the page to see if my preference for having the caption hidden
 		// has been preserved
@@ -352,6 +345,7 @@ test.describe('Lightbox', () => {
 		// caption is again showing by default
 		await page.keyboard.press('i');
 		await page.reload();
+		await expectToBeVisible(page, '#gu-lightbox');
 		// TODO: this assertion is failing because the lightbox reopens on page reload
 		// double check this is the required behaviour and the test assertion is incorrect
 		// await page.locator('button.open-lightbox').nth(1).click();
@@ -365,13 +359,12 @@ test.describe('Lightbox', () => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
 			configOverrides: {
-				abTests: {
-					lightboxVariant: 'variant',
-				},
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
 		await page.locator('button.open-lightbox').nth(1).click();
+		await expectToBeVisible(page, '#gu-lightbox');
 		await expectToBeVisible(page, 'li[data-index="2"] img');
 
 		// Scroll the 5th image into view
@@ -412,9 +405,7 @@ test.describe('Lightbox', () => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, LiveBlog, {
 			configOverrides: {
-				abTests: {
-					lightboxVariant: 'variant',
-				},
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
@@ -445,13 +436,12 @@ test.describe('Lightbox', () => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
 			configOverrides: {
-				abTests: {
-					lightboxVariant: 'variant',
-				},
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
 		await page.locator('button.open-lightbox').nth(1).click();
+		await expectToBeVisible(page, '#gu-lightbox');
 		await expect(
 			page.locator('nav [data-testid="lightbox-selected"]'),
 		).toContainText('2/23');
@@ -480,15 +470,14 @@ test.describe('Lightbox', () => {
 		await disableCMP(context);
 		await loadPageWithOverrides(page, photoEssayArticle, {
 			configOverrides: {
-				abTests: {
-					lightboxVariant: 'variant',
-				},
+				abTests: { lightboxVariant: 'variant' },
 			},
 		});
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
 		// Open lightbox using the second button on the page (the first is main media)
 		await page.locator('button.open-lightbox').nth(1).click();
+		await expectToBeVisible(page, '#gu-lightbox');
 		await expect(
 			page.locator('nav [data-testid="lightbox-selected"]'),
 		).toContainText('2/23');

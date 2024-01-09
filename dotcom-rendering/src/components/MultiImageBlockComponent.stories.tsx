@@ -40,8 +40,8 @@ export const SingleImageWithCaption = () => {
 					theme: Pillar.News,
 				}}
 				images={oneImage}
-				caption="This is the caption for a single image"
 				isInLightboxTest={false}
+				caption="This is the caption for a single image"
 			/>
 		</Section>
 	);
@@ -75,8 +75,8 @@ export const SideBySideWithCaption = () => {
 					theme: Pillar.News,
 				}}
 				images={twoImages}
-				caption="This is the caption for side by side"
 				isInLightboxTest={false}
+				caption="This is the caption for side by side"
 			/>
 		</Section>
 	);
@@ -110,8 +110,8 @@ export const OneAboveTwoWithCaption = () => {
 					theme: Pillar.News,
 				}}
 				images={threeImages}
-				caption="This is the caption for one above two"
 				isInLightboxTest={false}
+				caption="This is the caption for one above two"
 			/>
 		</Section>
 	);
@@ -145,8 +145,8 @@ export const GridOfFourWithCaption = () => {
 					theme: Pillar.News,
 				}}
 				images={fourImages}
-				caption="This is the caption for grid of four"
 				isInLightboxTest={false}
+				caption="This is the caption for grid of four"
 			/>
 		</Section>
 	);
