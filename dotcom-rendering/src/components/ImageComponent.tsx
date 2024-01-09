@@ -266,13 +266,6 @@ export const ImageComponent = ({
 	const webLightbox =
 		renderingTarget === 'Web' && isInLightboxTest && isWideEnough(image);
 
-	// console.log({
-	// 	webLightbox,
-	// 	renderingTarget,
-	// 	isInLightboxTest,
-	// 	isWideEnough: isWideEnough(image),
-	// });
-
 	/**
 	 * We use height and width for two things.
 	 *
