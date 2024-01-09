@@ -31,6 +31,7 @@ module.exports = {
 		chunkFilename: `[name].js`,
 		libraryTarget: 'commonjs2',
 		pathinfo: true,
+		publicPath: '',
 	},
 	target: 'node',
 	externalsPresets: { node: true },

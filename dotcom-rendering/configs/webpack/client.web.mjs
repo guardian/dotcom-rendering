@@ -35,6 +35,7 @@ export const web = {
 					{
 						loader: 'swc-loader',
 						options: {
+							$schema: 'http://json.schemastore.org/swcrc',
 							jsc: {
 								parser: {
 									syntax: 'typescript',
@@ -76,7 +77,9 @@ export const web = {
 			},
 		],
 	},
-	plugins: [new WebpackManifestPlugin()],
+	plugins: [
+		new WebpackManifestPlugin({ fileName: 'manifest.client.web.json' }),
+	],
 	optimization: {
 		splitChunks: {
 			cacheGroups: {

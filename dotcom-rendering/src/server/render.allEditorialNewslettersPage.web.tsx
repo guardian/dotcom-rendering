@@ -61,8 +61,8 @@ export const renderEditorialNewslettersPage = ({
 	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
 
 	const legacyScripts = [
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
+		getPathFromManifest('client.web.legacy', 'frameworks.js'),
+		getPathFromManifest('client.web.legacy', 'index.js'),
 	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
 
 	const scriptTags = generateScriptTags([

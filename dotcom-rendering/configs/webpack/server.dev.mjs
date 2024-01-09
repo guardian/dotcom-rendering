@@ -13,7 +13,7 @@
 import { mergeWithRules } from 'webpack-merge';
 import nodeExternals from 'webpack-node-externals';
 import { base } from './base.mjs';
-import { server } from './bundle.server.mjs';
+import { server } from './server.mjs';
 
 /** @type {import("webpack").Configuration} */
 export const devServer = {

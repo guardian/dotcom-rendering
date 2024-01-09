@@ -26,7 +26,7 @@ const OUTPUT_PATH = 'dist';
  */
 export const base = (name) => {
 	const bundleName = basename(name, '.mjs');
-	const DIST = resolve(DIRNAME, '..', '..', OUTPUT_PATH, bundleName);
+	const DIST = resolve(DIRNAME, '..', '..', OUTPUT_PATH);
 
 	return {
 		name: bundleName,
@@ -39,7 +39,9 @@ export const base = (name) => {
 				chunk.name !== 'debug'
 					? `[name].[chunkhash].js`
 					: `[name].js`,
-			chunkFilename: isProd ? `[name].[chunkhash].js` : `[name].js`,
+			chunkFilename: isProd
+				? `[name].${bundleName}.[chunkhash].js`
+				: `[name].${bundleName}.js`,
 			path: DIST,
 			publicPath: '',
 		},
@@ -67,14 +69,22 @@ export const base = (name) => {
 			}),
 			isProd &&
 				new BundleAnalyzerPlugin({
-					reportFilename: resolve(DIST, 'stats', `bundles.html`),
+					reportFilename: resolve(
+						DIST,
+						'stats',
+						`${bundleName}-bundles.html`,
+					),
 					analyzerMode: 'static',
 					openAnalyzer: false,
 					logLevel: 'warn',
 				}),
 			isProd &&
 				new BundleAnalyzerPlugin({
-					reportFilename: resolve(DIST, 'stats', `bundles.json`),
+					reportFilename: resolve(
+						DIST,
+						'stats',
+						`${bundleName}-bundles.json`,
+					),
 					analyzerMode: 'json',
 					openAnalyzer: false,
 					logLevel: 'warn',

@@ -9,7 +9,7 @@
 
 import { merge } from 'webpack-merge';
 import { base } from './base.mjs';
-import { web } from './bundle.web.mjs';
+import { web } from './client.web.mjs';
 
 /** @type {import("webpack").Configuration} */
 export const webVariant = {};
