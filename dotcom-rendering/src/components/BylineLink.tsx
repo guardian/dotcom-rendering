@@ -150,9 +150,7 @@ export const BylineLink = ({
 	return (
 		<>
 			{renderedTokens}
-			{renderingTarget === 'Apps' &&
-			!isHeadline &&
-			!isUndefined(soleContributor) ? (
+			{renderingTarget === 'Apps' && !isHeadline && hasSoleContributor ? (
 				<Hide from="desktop">
 					<DottedLines
 						count={1}

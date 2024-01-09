@@ -9,6 +9,10 @@ const datelineStyles = css`
 	color: ${palette('--dateline')};
 	padding-top: 2px;
 	margin-bottom: 6px;
+
+	${until.desktop} {
+		color: var(--mobile-color);
+	}
 `;
 
 const primaryStyles = css`
@@ -22,14 +26,6 @@ const primaryStyles = css`
 const hoverUnderline = css`
 	:hover {
 		text-decoration: underline;
-	}
-`;
-
-// for liveblog smaller breakpoints article meta is located in the same
-// container as standfirst and needs the same styling as standfirst on web
-const liveBlogStyles = css`
-	${until.desktop} {
-		color: var(--mobile-color);
 	}
 `;
 
@@ -51,16 +47,18 @@ export const Dateline = ({
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const isApps = renderingTarget === 'Apps';
 
+	// for liveblog smaller breakpoints article meta is located in the same
+	// container as standfirst and needs the same styling as standfirst on web
 	const mobileColor = {
 		'--mobile-color': isApps
 			? palette('--dateline-mobile')
 			: isLiveBlog
 			? palette('--standfirst-text')
-			: undefined,
+			: 'inherit',
 	};
 	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {
 		return (
-			<details css={[datelineStyles, liveBlogStyles]} style={mobileColor}>
+			<details css={[datelineStyles]} style={mobileColor}>
 				<summary css={primaryStyles}>
 					<span css={hoverUnderline}>{primaryDateline}</span>
 				</summary>
@@ -69,7 +67,7 @@ export const Dateline = ({
 		);
 	}
 	return (
-		<div css={[datelineStyles, liveBlogStyles]} style={mobileColor}>
+		<div css={[datelineStyles]} style={mobileColor}>
 			{primaryDateline}
 		</div>
 	);

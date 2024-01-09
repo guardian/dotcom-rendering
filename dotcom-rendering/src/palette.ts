@@ -844,7 +844,7 @@ export const tabs = {
 	};
 };
 
-const datelineLightMobile: PaletteFunction = ({ design, theme }) => {
+const datelineMobileLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			switch (theme) {
@@ -4868,7 +4868,7 @@ const paletteColours = {
 		dark: datelineDark,
 	},
 	'--dateline-mobile': {
-		light: datelineLightMobile,
+		light: datelineMobileLight,
 		dark: standfirstTextDark,
 	},
 	'--headline-colour': {

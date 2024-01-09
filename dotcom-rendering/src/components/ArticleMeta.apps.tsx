@@ -39,11 +39,11 @@ const metaGridContainer = css`
 	grid-template-rows: auto auto auto auto auto;
 	grid-template-columns: 10px auto 1fr auto 10px;
 	grid-template-areas:
-		' . . . . .'
-		'. avatar byline comment-count .'
-		'. avatar byline comment-count .'
-		' . . . . .'
-		'. dateline dateline dateline .';
+		'. .        .        .             .'
+		'. avatar   byline   comment-count .'
+		'. avatar   byline   comment-count .'
+		'. .        .        .             .'
+		'. dateline dateline dateline      .';
 
 	${from.mobileLandscape} {
 		grid-template-columns: 20px auto 1fr auto 20px;
