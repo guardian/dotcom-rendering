@@ -858,7 +858,7 @@ const datelineLightMobile: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.neutral[100];
 			}
 		case ArticleDesign.Picture:
-			return sourcePalette.neutral[86];
+			return sourcePalette.neutral[46];
 		default:
 			if (
 				theme === ArticleSpecial.SpecialReportAlt &&
@@ -866,7 +866,7 @@ const datelineLightMobile: PaletteFunction = ({ design, theme }) => {
 			) {
 				return sourcePalette.specialReportAlt[100];
 			}
-			return sourcePalette.neutral[0];
+			return sourcePalette.neutral[46];
 	}
 };
 

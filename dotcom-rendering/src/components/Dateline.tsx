@@ -52,12 +52,11 @@ export const Dateline = ({
 	const isApps = renderingTarget === 'Apps';
 
 	const mobileColor = {
-		'--mobile-color':
-			isApps && isLiveBlog
-				? palette('--dateline-mobile')
-				: isLiveBlog
-				? palette('--standfirst-text')
-				: undefined,
+		'--mobile-color': isApps
+			? palette('--dateline-mobile')
+			: isLiveBlog
+			? palette('--standfirst-text')
+			: undefined,
 	};
 	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {
 		return (
