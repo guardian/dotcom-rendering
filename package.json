@@ -6,12 +6,6 @@
 	"private": true,
 	"scripts": {
 		"postinstall": "./scripts/postinstall.sh",
-		"storybook": "pnpm '/^storybook:.*/'",
-		"storybook:dcr": "pnpm --filter @guardian/dotcom-rendering storybook --no-open --quiet",
-		"storybook:ar": "pnpm --filter apps-rendering storybook --no-open --quiet",
-		"build-storybook": "pnpm '/^build-storybook:.*/'",
-		"build-storybook:ar": "pnpm --filter apps-rendering build-storybook",
-		"build-storybook:dcr": "pnpm --filter @guardian/dotcom-rendering build-storybook",
 		"build:dcr": "cd dotcom-rendering && make build",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky install",
