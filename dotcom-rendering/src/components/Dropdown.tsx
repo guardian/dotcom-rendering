@@ -187,7 +187,7 @@ const buttonExpanded = css`
 
 const notificationColor = palette.error[400];
 
-const notificationBadgeStyles = (diameter: number) => css`
+const notificationBadgeStyles = css`
 	background-color: ${notificationColor};
 	color: ${palette.neutral[100]};
 	text-align: center;
@@ -196,10 +196,6 @@ const notificationBadgeStyles = (diameter: number) => css`
 	align-items: center;
 	${textSans.xsmall()};
 	line-height: 1;
-
-	width: ${diameter}px;
-	height: ${diameter}px;
-	border-radius: ${diameter}px;
 `;
 
 const dropdownButtonNotificationBadgeStyles = css`
@@ -252,7 +248,14 @@ const addTrackingToUrl = (
 
 const NotificationBadge = ({ diameter }: { diameter: number }) => {
 	return (
-		<div css={notificationBadgeStyles(diameter)}>
+		<div
+			css={notificationBadgeStyles}
+			style={{
+				width: `${diameter}px`,
+				height: `${diameter}px`,
+				borderRadius: `${diameter}px`,
+			}}
+		>
 			<span>!</span>
 		</div>
 	);
