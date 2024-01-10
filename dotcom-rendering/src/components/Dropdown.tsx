@@ -196,6 +196,7 @@ const notificationBadgeStyles = css`
 	align-items: center;
 	${textSans.xsmall()};
 	line-height: 1;
+	flex-shrink: 0;
 `;
 
 const dropdownButtonNotificationBadgeStyles = css`
@@ -376,11 +377,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 						/>
 					))}
 				</div>
-				{hasNotifications && (
-					<div style={{ display: 'block' }}>
-						<NotificationBadge diameter={22} />
-					</div>
-				)}
+				{hasNotifications && <NotificationBadge diameter={22} />}
 			</a>
 		</li>
 	);
