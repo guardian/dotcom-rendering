@@ -35,6 +35,7 @@ interface Props {
 	dataLinkName: string;
 	cssOverrides?: SerializedStyles;
 	children?: React.ReactNode;
+	defaultIsExpanded?: boolean;
 }
 
 const ulStyles = css`
@@ -208,6 +209,14 @@ const dropdownButtonNotificationBadgeStyles = css`
 	margin-top: -3px;
 `;
 
+const dropdownItemContainerStyles = css`
+	display: flex;
+`;
+
+const dropdownItemTextContainerStyles = css`
+	display: block;
+`;
+
 const notificationTextStyles = css`
 	${textSans.xxsmall()};
 `;
@@ -362,25 +371,27 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 					}
 				}}
 			>
-				{link.title}
-				{link.notifications?.map((notification) => (
-					<NotificationMessage
-						notification={notification}
-						key={notification.id}
-					/>
-				))}
-			</a>
-
-			{hasNotifications && (
-				<div
-					css={css`
-						margin-top: 12px;
-						margin-right: 8px;
-					`}
-				>
-					<NotificationBadge diameter={22} />
+				<div css={dropdownItemContainerStyles}>
+					<div css={dropdownItemTextContainerStyles}>
+						{link.title}
+						{link.notifications?.map((notification) => (
+							<NotificationMessage
+								notification={notification}
+								key={notification.id}
+							/>
+						))}
+					</div>
+					{hasNotifications && (
+						<div
+							css={css`
+								margin-left: 10px;
+							`}
+						>
+							<NotificationBadge diameter={22} />
+						</div>
+					)}
 				</div>
-			)}
+			</a>
 		</li>
 	);
 };
@@ -392,8 +403,9 @@ export const Dropdown = ({
 	dataLinkName,
 	cssOverrides,
 	children,
+	defaultIsExpanded = false,
 }: Props) => {
-	const [isExpanded, setIsExpanded] = useState(false);
+	const [isExpanded, setIsExpanded] = useState(defaultIsExpanded);
 	const [noJS, setNoJS] = useState(true);
 
 	useEffect(() => {
