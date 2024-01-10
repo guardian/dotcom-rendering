@@ -19,17 +19,10 @@ import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration, Tags } from 'aws-cdk-lib';
 import {
 	AdjustmentType,
+	CfnScalingPolicy,
 	HealthCheck,
-	StepScalingAction,
 } from 'aws-cdk-lib/aws-autoscaling';
-import {
-	Alarm,
-	CfnAlarm,
-	ComparisonOperator,
-	Metric,
-	TreatMissingData,
-} from 'aws-cdk-lib/aws-cloudwatch';
-import { AutoScalingAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
+import { CfnAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
@@ -277,73 +270,18 @@ export class DotcomRendering extends GuStack {
 		/** TODO - migrate these simple scaling policies
 		 * @see https://github.com/guardian/dotcom-rendering/issues/8345#issuecomment-1647502598
 		 */
-		// const scaleUpPolicy = new CfnScalingPolicy(this, 'ScaleUpPolicy', {
-		// 	adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
-		// 	autoScalingGroupName: asg.autoScalingGroupName,
-		// 	cooldown: '600',
-		// 	scalingAdjustment: 100,
-		// });
-		// const scaleDownPolicy = new CfnScalingPolicy(this, 'ScaleDownPolicy', {
-		// 	adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
-		// 	autoScalingGroupName: asg.autoScalingGroupName,
-		// 	cooldown: '120',
-		// 	scalingAdjustment: -1,
-		// });
-
-		// Alarms
-		// evaluationPeriods and period should change for PROD. These values were chosen for testing purposes.
-		// Currently, they are period: 60 and evaluationPeriod: 1
-		// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L299
-		const latencyHighAlarm = new Alarm(this, 'HighLatencyAlarm', {
-			// When merged this can become actionsEnabled: stage === 'PROD'
-			actionsEnabled: true,
-			alarmDescription: 'Latency alarm for autoscaling',
-			threshold: 0.2,
-			comparisonOperator: ComparisonOperator.GREATER_THAN_THRESHOLD,
-			evaluationPeriods: 3,
-			metric: new Metric({
-				dimensionsMap: {
-					LoadBalancerName: loadBalancer.loadBalancerName,
-				},
-				metricName: 'Latency',
-				namespace: 'AWS/ELB',
-				period: Duration.seconds(10),
-				statistic: 'Average',
-			}),
-
-			treatMissingData: TreatMissingData.MISSING,
-		});
-
-		const scaleUpStep = new StepScalingAction(this, 'ScaleUp', {
+		const scaleUpPolicy = new CfnScalingPolicy(this, 'ScaleUpPolicy', {
 			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
-			autoScalingGroup: asg,
-			// Current PROD: 10 minutes
-			// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L276-L277
-			cooldown: Duration.seconds(30),
+			autoScalingGroupName: asg.autoScalingGroupName,
+			cooldown: '600',
+			scalingAdjustment: 100,
 		});
-
-		scaleUpStep.addAdjustment({
-			lowerBound: 0,
-			adjustment: 100,
-		});
-
-		latencyHighAlarm.addAlarmAction(new AutoScalingAction(scaleUpStep));
-
-		const scaleDownStep = new StepScalingAction(this, 'ScaleDown', {
+		const scaleDownPolicy = new CfnScalingPolicy(this, 'ScaleDownPolicy', {
 			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
-			autoScalingGroup: asg,
-
-			// Current PROD: Every 2 minutes take out one instance for prod. This is for testing purposes
-			// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L282
-			cooldown: Duration.seconds(15),
+			autoScalingGroupName: asg.autoScalingGroupName,
+			cooldown: '120',
+			scalingAdjustment: -1,
 		});
-
-		scaleDownStep.addAdjustment({
-			lowerBound: 0,
-			adjustment: -1,
-		});
-
-		latencyHighAlarm.addOkAction(new AutoScalingAction(scaleDownStep));
 
 		/** Returns an appropriate alarm description given the appropriate configuration object */
 		const getAlarmDescription = ({
@@ -381,8 +319,8 @@ export class DotcomRendering extends GuStack {
 			statistic: 'Average',
 			threshold: latencyScalingAlarmConfig.threshold,
 			comparisonOperator: latencyScalingAlarmConfig.comparisonOperator,
-			// okActions: [scaleDownPolicy.attrArn],
-			// alarmActions: [scaleUpPolicy.attrArn],
+			okActions: [scaleDownPolicy.attrArn],
+			alarmActions: [scaleUpPolicy.attrArn],
 		});
 
 		// Backend 5XX alarm

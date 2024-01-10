@@ -485,39 +485,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "HighLatencyAlarm61213652": {
-      "Properties": {
-        "ActionsEnabled": true,
-        "AlarmActions": [
-          {
-            "Ref": "ScaleUpAF7DDD3C",
-          },
-        ],
-        "AlarmDescription": "Latency alarm for autoscaling",
-        "ComparisonOperator": "GreaterThanThreshold",
-        "Dimensions": [
-          {
-            "Name": "LoadBalancerName",
-            "Value": {
-              "Ref": "InternalLoadBalancer",
-            },
-          },
-        ],
-        "EvaluationPeriods": 3,
-        "MetricName": "Latency",
-        "Namespace": "AWS/ELB",
-        "OKActions": [
-          {
-            "Ref": "ScaleDown2D6349BF",
-          },
-        ],
-        "Period": 10,
-        "Statistic": "Average",
-        "Threshold": 0.2,
-        "TreatMissingData": "missing",
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
     "InstanceRole": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -789,6 +756,14 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "LatencyScalingAlarm": {
       "Properties": {
         "ActionsEnabled": false,
+        "AlarmActions": [
+          {
+            "Fn::GetAtt": [
+              "ScaleUpPolicy",
+              "Arn",
+            ],
+          },
+        ],
         "AlarmDescription": "Scale up if latency is GreaterThanOrEqualToThreshold of 0.2 over 1 period(s) of 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
@@ -802,6 +777,14 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "EvaluationPeriods": 1,
         "MetricName": "Latency",
         "Namespace": "AWS/ELB",
+        "OKActions": [
+          {
+            "Fn::GetAtt": [
+              "ScaleDownPolicy",
+              "Arn",
+            ],
+          },
+        ],
         "Period": 60,
         "Statistic": "Average",
         "Threshold": 0.2,
@@ -867,37 +850,25 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "ScaleDown2D6349BF": {
+    "ScaleDownPolicy": {
       "Properties": {
         "AdjustmentType": "ChangeInCapacity",
         "AutoScalingGroupName": {
           "Ref": "AutoscalingGroup",
         },
-        "Cooldown": "15",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalLowerBound": 0,
-            "ScalingAdjustment": -1,
-          },
-        ],
+        "Cooldown": "120",
+        "ScalingAdjustment": -1,
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
     },
-    "ScaleUpAF7DDD3C": {
+    "ScaleUpPolicy": {
       "Properties": {
         "AdjustmentType": "PercentChangeInCapacity",
         "AutoScalingGroupName": {
           "Ref": "AutoscalingGroup",
         },
-        "Cooldown": "30",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalLowerBound": 0,
-            "ScalingAdjustment": 100,
-          },
-        ],
+        "Cooldown": "600",
+        "ScalingAdjustment": 100,
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
     },
