@@ -480,9 +480,12 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "ComparisonOperator": "GreaterThanThreshold",
         "Dimensions": [
           {
-            "Name": "AutoScalingGroupName",
+            "Name": "LoadBalancerName",
             "Value": {
-              "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
+              "Fn::GetAtt": [
+                "LoadBalancerArticlerendering49883BBC",
+                "LoadBalancerName",
+              ],
             },
           },
         ],
