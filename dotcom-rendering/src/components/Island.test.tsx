@@ -18,7 +18,7 @@ import { FocusStyles } from './FocusStyles.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
-import { LightboxJavascript } from './LightboxJavascript.importable';
+import { LightboxJavascript } from './LightboxJavascript';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';

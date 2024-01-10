@@ -323,7 +323,8 @@ export const Picture = ({
 	onLoad,
 }: Props) => {
 	const [loaded, setLoaded] = useState(false);
-	const ref = useCallback((node: HTMLImageElement) => {
+	const ref = useCallback((node: HTMLImageElement | null) => {
+		if (!node) return;
 		if (node.complete) {
 			setLoaded(true);
 		} else {
