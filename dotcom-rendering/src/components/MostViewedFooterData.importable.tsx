@@ -5,11 +5,7 @@ import { decideTrail } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
-import type {
-	FETrailTabType,
-	FETrailType,
-	TrailTabType,
-} from '../types/trails';
+import type { FETrailTabType, TrailTabType } from '../types/trails';
 import { MostViewedFooter } from './MostViewedFooter.importable';
 import { Placeholder } from './Placeholder';
 
