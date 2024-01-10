@@ -91,7 +91,7 @@ const linkStyles = css`
 	margin: -1px 0 0 0;
 	text-decoration: none;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: space-between;
 	padding: 10px 18px 15px 30px;
 
