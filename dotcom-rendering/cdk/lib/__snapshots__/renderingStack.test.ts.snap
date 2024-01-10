@@ -468,39 +468,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "HighLatencyAlarm61213652": {
-      "Properties": {
-        "ActionsEnabled": true,
-        "AlarmActions": [
-          {
-            "Ref": "ScaleUpAF7DDD3C",
-          },
-        ],
-        "AlarmDescription": "Latency alarm for autoscaling",
-        "ComparisonOperator": "GreaterThanThreshold",
-        "Dimensions": [
-          {
-            "Name": "AutoScalingGroupName",
-            "Value": {
-              "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
-            },
-          },
-        ],
-        "EvaluationPeriods": 3,
-        "MetricName": "TargetResponseTime",
-        "Namespace": "AWS/ApplicationELB",
-        "OKActions": [
-          {
-            "Ref": "ScaleDown2D6349BF",
-          },
-        ],
-        "Period": 10,
-        "Statistic": "Average",
-        "Threshold": 0.2,
-        "TreatMissingData": "missing",
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
     "InstanceRoleArticlerendering0D4717E8": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -883,40 +850,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Value": "https://article-rendering.test.dev-guardianapis.com",
       },
       "Type": "AWS::SSM::Parameter",
-    },
-    "ScaleDown2D6349BF": {
-      "Properties": {
-        "AdjustmentType": "ChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
-        },
-        "Cooldown": "15",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalLowerBound": 0,
-            "ScalingAdjustment": -1,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
-    "ScaleUpAF7DDD3C": {
-      "Properties": {
-        "AdjustmentType": "PercentChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
-        },
-        "Cooldown": "30",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalLowerBound": 0,
-            "ScalingAdjustment": 100,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
     },
     "TargetGroupArticlerendering3605E498": {
       "Properties": {
