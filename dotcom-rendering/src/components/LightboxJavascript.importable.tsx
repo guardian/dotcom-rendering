@@ -58,8 +58,8 @@ const getTabbableElements = (
 	}
 };
 
-/** Reject a Promise after a delay (defaults to 120ms)  */
-const timeout = <T,>(promise: Promise<T>, delay = 120) =>
+/** Reject a Promise after a delay  */
+const timeout = <T,>(promise: Promise<T>, delay = 1200) =>
 	Promise.race([
 		promise,
 		new Promise<void>((_, reject) => {
