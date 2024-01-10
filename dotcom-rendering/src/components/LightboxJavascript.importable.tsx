@@ -1,5 +1,4 @@
 import { isUndefined, log, storage } from '@guardian/libs';
-import libDebounce from 'lodash.debounce';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import screenfull from 'screenfull';
@@ -285,7 +284,11 @@ const toggleInfo = (
  *
  */
 
-const initialiseLightbox = (lightbox: HTMLElement) => {
+const initialiseLightbox = (
+	lightbox: HTMLElement,
+	imageList: HTMLUListElement,
+	closeButton: HTMLButtonElement,
+) => {
 	log('dotcom', '💡 Initialising lightbox');
 
 	// --------------------------------------------------------------------------------
@@ -299,13 +302,6 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 	const previousButton =
 		lightbox.querySelector<HTMLButtonElement>('button.previous');
 	const infoButton = lightbox.querySelector<HTMLButtonElement>('button.info');
-	const closeButton =
-		lightbox.querySelector<HTMLButtonElement>('button.close');
-	/**
-	 * imageList is the horizontal list of all images. We use it to scroll left and right
-	 * effectively navigating the lightbox
-	 */
-	const imageList = lightbox.querySelector<HTMLUListElement>('ul');
 	const pictures =
 		lightbox.querySelectorAll<HTMLPictureElement>('li picture');
 	const images = Array.from(
@@ -315,8 +311,6 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 	const captionLinks =
 		lightbox.querySelectorAll<HTMLAnchorElement>('li aside a');
 
-	if (!imageList) return;
-	if (!closeButton) return;
 	if (!previousButton) return;
 	if (!nextButton) return;
 	if (!infoButton) return;
@@ -396,29 +390,6 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 			event.stopPropagation();
 		});
 	}
-
-	imageList.addEventListener(
-		'scroll',
-		libDebounce(
-			() => {
-				const currentPosition = getPosition(lightbox, imageList);
-				if (isUndefined(currentPosition)) return;
-				const positionIndicator =
-					lightbox.querySelector<HTMLElement>('nav .selected'); // Eg. 2/4, as in image 2 of 4
-				if (!positionIndicator) return;
-
-				onSelect(
-					positionIndicator,
-					currentPosition,
-					images.length,
-					closeButton,
-				);
-				loadAdjacentImages(images, currentPosition);
-			},
-			150,
-			{ leading: true },
-		),
-	);
 
 	closeButton.addEventListener('click', () => {
 		void close(lightbox, handleKeydown);
@@ -538,16 +509,63 @@ export const LightboxJavascript = ({
 	const root = useElementById('lightbox-images');
 	const lightbox = useElementById('gu-lightbox');
 	const [initialised, setInitialised] = useState(false);
+	/**
+	 * imageList is the horizontal list of all images. We use it to scroll left and right
+	 * effectively navigating the lightbox
+	 */
+	const [imageList, setImageList] = useState<HTMLUListElement>();
+	const [closeButton, setCloseButton] = useState<HTMLButtonElement>();
 
 	useEffect(() => {
 		if (!lightbox) return;
+
+		setImageList(
+			lightbox.querySelector<HTMLUListElement>('ul') ?? undefined,
+		);
+		setCloseButton(
+			lightbox.querySelector<HTMLButtonElement>('button.close') ??
+				undefined,
+		);
+	}, [lightbox]);
+
+	useEffect(() => {
+		if (!lightbox) return;
+		if (!imageList) return;
+		if (!closeButton) return;
+
+		const imageElements = Array.from(imageList.querySelectorAll('img'));
+
+		const handleScroll = () => {
+			const currentPosition = getPosition(lightbox, imageList);
+			if (isUndefined(currentPosition)) return;
+			const positionIndicator =
+				lightbox.querySelector<HTMLElement>('nav .selected'); // Eg. 2/4, as in image 2 of 4
+			if (!positionIndicator) return;
+
+			onSelect(
+				positionIndicator,
+				currentPosition,
+				imageElements.length,
+				closeButton,
+			);
+			loadAdjacentImages(imageElements, currentPosition);
+		};
+
+		imageList.addEventListener('scroll', handleScroll);
+		return () => imageList.removeEventListener('scroll', handleScroll);
+	}, [closeButton, imageList, lightbox]);
+
+	useEffect(() => {
+		if (!lightbox) return;
+		if (!imageList) return;
+		if (!closeButton) return;
 		if (initialised) {
 			log('dotcom', '💡 Lightbox already initialised, skipping');
 			return;
 		}
-		initialiseLightbox(lightbox);
+		initialiseLightbox(lightbox, imageList, closeButton);
 		setInitialised(true);
-	}, [initialised, lightbox]);
+	}, [closeButton, imageList, initialised, lightbox]);
 
 	if (!root || !lightbox) return null;
 
