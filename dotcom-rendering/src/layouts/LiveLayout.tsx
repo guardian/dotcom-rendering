@@ -20,6 +20,7 @@ import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
@@ -198,6 +199,17 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 700px;
+	}
+`;
+
+const stretchLines = css`
+	${until.phablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
 	}
 `;
 
@@ -561,9 +573,15 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 							</Hide>
 						</GridItem>
+
 						<GridItem area="lines">
 							<Hide from="desktop">
-								<div css={sidePaddingDesktop}>
+								<div
+									css={[
+										sidePaddingDesktop,
+										isApps && stretchLines,
+									]}
+								>
 									<DecideLines
 										format={format}
 										color={
@@ -578,9 +596,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</GridItem>
 						<GridItem area="meta">
 							<Hide from="desktop">
-								<div css={sidePaddingDesktop}>
-									<ArticleMeta
-										branding={branding}
+								{isApps && (
+									<ArticleMetaApps
 										format={format}
 										pageId={article.pageId}
 										webTitle={article.webTitle}
@@ -599,8 +616,35 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										shortUrlId={article.config.shortUrlId}
 										ajaxUrl={article.config.ajaxUrl}
 										messageUs={article.messageUs}
-									/>
-								</div>
+									></ArticleMetaApps>
+								)}
+								{isWeb && (
+									<div css={sidePaddingDesktop}>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={showComments}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											ajaxUrl={article.config.ajaxUrl}
+											messageUs={article.messageUs}
+										/>
+									</div>
+								)}
 							</Hide>
 						</GridItem>
 					</StandFirstGrid>
@@ -724,6 +768,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										ajaxUrl={article.config.ajaxUrl}
+										abTests={article.config.abTests}
 										switches={article.config.switches}
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
@@ -857,6 +902,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													}
 													sectionId={
 														article.config.section
+													}
+													abTests={
+														article.config.abTests
 													}
 													switches={
 														article.config.switches
@@ -1001,6 +1049,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													}
 													sectionId={
 														article.config.section
+													}
+													abTests={
+														article.config.abTests
 													}
 													switches={
 														article.config.switches

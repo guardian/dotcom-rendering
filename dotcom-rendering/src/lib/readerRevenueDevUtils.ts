@@ -17,16 +17,12 @@ const readerRevenueCookies = [
 ];
 
 const clearEpicViewLog = (): void =>
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	localStorage.removeItem('gu.contributions.views');
+	storage.local.remove('gu.contributions.views');
 
 const clearBannerLastClosedAt = (): void => {
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	localStorage.removeItem('gu.prefs.engagementBannerLastClosedAt');
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	localStorage.removeItem('gu.prefs.subscriptionBannerLastClosedAt');
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	localStorage.removeItem('gu.noRRBannerTimestamp');
+	storage.local.remove('gu.prefs.engagementBannerLastClosedAt');
+	storage.local.remove('gu.prefs.subscriptionBannerLastClosedAt');
+	storage.local.remove('gu.noRRBannerTimestamp');
 };
 
 const fakeOneOffContributor = (): void =>

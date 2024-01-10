@@ -3,6 +3,7 @@ import type { SlotName } from '@guardian/commercial';
 import { adSizes, constants } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
+	between,
 	breakpoints,
 	from,
 	palette,
@@ -141,11 +142,6 @@ const adSlotCollapseStyles = css`
 	&.ad-slot.ad-slot--collapse {
 		display: none;
 	}
-	&.ad-slot--collapse-below-desktop {
-		${until.desktop} {
-			display: none;
-		}
-	}
 `;
 
 /**
@@ -207,6 +203,11 @@ const merchandisingAdStyles = css`
 		margin: 0;
 		padding-bottom: 20px;
 		min-height: ${adSizes.billboard.height + labelHeight + 20}px;
+	}
+	&:not(.ad-slot--fluid).ad-slot--rendered {
+		${between.phablet.and.desktop} {
+			display: none;
+		}
 	}
 `;
 

@@ -63,7 +63,11 @@ const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	}
 });
 
-export type Build = 'apps' | 'web' | 'web.variant' | 'web.legacy';
+export type Build =
+	| 'client.apps'
+	| 'client.web'
+	| 'client.web.variant'
+	| 'client.web.legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
@@ -104,10 +108,10 @@ export const getPathFromManifest = (
 const getScriptRegex = (build: Build) =>
 	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
-export const WEB = getScriptRegex('web');
-export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');
-export const WEB_LEGACY_SCRIPT = getScriptRegex('web.legacy');
-export const APPS_SCRIPT = getScriptRegex('apps');
+export const WEB = getScriptRegex('client.web');
+export const WEB_VARIANT_SCRIPT = getScriptRegex('client.web.variant');
+export const WEB_LEGACY_SCRIPT = getScriptRegex('client.web.legacy');
+export const APPS_SCRIPT = getScriptRegex('client.apps');
 
 export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {
@@ -133,9 +137,9 @@ export const getModulesBuild = ({
 }: {
 	tests: ServerSideTests;
 	switches: Switches;
-}): Exclude<Extract<Build, `web${string}`>, 'web.legacy'> => {
+}): Exclude<Extract<Build, `client.web${string}`>, 'client.web.legacy'> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
-		return 'web.variant';
+		return 'client.web.variant';
 	}
-	return 'web';
+	return 'client.web';
 };
