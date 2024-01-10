@@ -318,11 +318,16 @@ export const SecureSignupIframe = ({
 		resetIframeHeight();
 	};
 
-	const fillPlaceholderEmail = () => {
+	const autofillEmailIfSignedIn = () => {
 		const { current: iframe } = iframeRef;
 		const emailFormField = iframe?.contentDocument?.querySelector(
 			'input[name="email"]',
 		);
+		const signUpButton = iframe?.contentDocument?.querySelector(
+			'button[type="submit"]',
+		);
+		const labelNodeList =
+			iframe?.contentDocument?.querySelectorAll('label');
 		const { idApiUrl } = window.guardian.config.page;
 
 		const fetchEmail = idApiUrl
@@ -331,7 +336,20 @@ export const SecureSignupIframe = ({
 
 		void fetchEmail?.().then((resolvedEmail) => {
 			if (resolvedEmail) {
-				emailFormField?.setAttribute('placeholder', resolvedEmail);
+				labelNodeList &&
+					[...labelNodeList].map((labelNode: HTMLLabelElement) =>
+						labelNode.setAttribute('hidden', 'true'),
+					);
+				emailFormField?.setAttribute('style', 'display: none;');
+				emailFormField?.parentElement?.setAttribute(
+					'style',
+					'flex-basis: 0; margin: 0;',
+				);
+				signUpButton?.setAttribute(
+					'style',
+					`margin-top: ${space[2]}px;`,
+				);
+				emailFormField?.setAttribute('value', resolvedEmail);
 			}
 		});
 	};
@@ -369,7 +387,7 @@ export const SecureSignupIframe = ({
 	const onIFrameLoad = (): void => {
 		attachListenersToIframe();
 		addFontsToIframe(['GuardianTextSans']);
-		fillPlaceholderEmail();
+		autofillEmailIfSignedIn();
 	};
 
 	return (
