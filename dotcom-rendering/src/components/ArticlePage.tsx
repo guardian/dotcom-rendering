@@ -1,9 +1,7 @@
 import { css, Global } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	brandAlt,
 	focusHalo,
-	neutral,
 	palette as sourcePalette,
 } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
@@ -60,6 +58,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		adUnit: article.config.adUnit,
 	});
 
+	const isInLightboxTest =
+		article.config.abTests.lightboxVariant === 'variant';
+
+	const webLightbox = renderingTarget === 'Web' && isInLightboxTest;
+
 	return (
 		<StrictMode>
 			<Global
@@ -89,14 +92,14 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 						${focusHalo}
 					}
 					::selection {
-						background: ${brandAlt[400]};
-						color: ${neutral[7]};
+						background: ${sourcePalette.brandAlt[400]};
+						color: ${sourcePalette.neutral[7]};
 					}
 				`}
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			{article.config.switches.lightbox && article.imagesForLightbox && (
+			{webLightbox && article.imagesForLightbox.length > 0 && (
 				<>
 					<LightboxLayout
 						imageCount={article.imagesForLightbox.length}

@@ -24,17 +24,17 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
         working-directory: apps-rendering
 
       - name: Test
-        run: yarn test
+        run: pnpm test
         working-directory: apps-rendering
 
       - name: Compile client
-        run: yarn build:client:prod
+        run: pnpm build:client:prod
         working-directory: apps-rendering
 
       - name: Compile server
-        run: yarn build:server:prod
+        run: pnpm build:server:prod
         working-directory: apps-rendering

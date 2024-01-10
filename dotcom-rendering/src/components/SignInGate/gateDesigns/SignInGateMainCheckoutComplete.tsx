@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import {
 	body,
-	brand,
 	from,
 	headline,
-	neutral,
+	palette,
 	space,
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
@@ -30,7 +29,7 @@ import { SignInGateMain } from './SignInGateMain';
 
 const personalisedHeadingStyles = css`
 	${headline.small({ fontWeight: 'bold' })};
-	border-top: 2px ${brand[400]} solid;
+	border-top: 2px ${palette.brand[400]} solid;
 	${from.phablet} {
 		padding-right: 160px;
 		${headline.medium({ fontWeight: 'bold' })};
@@ -43,13 +42,13 @@ const personalisedBodyBold = css`
 	${from.phablet} {
 		padding-right: 130px;
 	}
-	color: ${brand[400]};
+	color: ${palette.brand[400]};
 `;
 
 const bulletStyles = css`
 	text-indent: -30px; /* second line indentation */
 	margin-left: 30px; /* second line indentation */
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	display: flex;
 	flex-direction: column;
 	li:not(:first-of-type) {
@@ -61,7 +60,7 @@ const bulletStyles = css`
 		width: 12px;
 		height: 12px;
 		margin-right: ${space[4]}px;
-		background: ${brand[400]};
+		background: ${palette.brand[400]};
 		border-radius: 50%;
 	}
 `;
@@ -94,7 +93,7 @@ const personalisedActionButtons = css`
 
 const notNowButton = css`
 	/* stylelint-disable-next-line declaration-no-important */
-	color: ${brand[400]} !important;
+	color: ${palette.brand[400]} !important;
 	text-decoration: none;
 `;
 
@@ -105,14 +104,14 @@ const faqPersonalised = css`
 		display: block;
 		margin-top: ${space[6]}px;
 		margin-bottom: ${space[4]}px;
-		color: ${brand[500]};
-		text-decoration-color: ${brand[500]};
+		color: ${palette.brand[500]};
+		text-decoration-color: ${palette.brand[500]};
 		text-underline-position: under;
 	}
 
 	& a:hover {
-		color: ${brand[500]};
-		text-decoration-color: ${brand[500]};
+		color: ${palette.brand[500]};
+		text-decoration-color: ${palette.brand[500]};
 	}
 `;
 

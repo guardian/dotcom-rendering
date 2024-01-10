@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, textSans } from '@guardian/source-foundations';
+import { palette, textSans } from '@guardian/source-foundations';
 import ChevronLeftDouble from '../static/icons/chevron-left-double.svg';
 import ChevronLeftSingle from '../static/icons/chevron-left-single.svg';
 import ChevronRightDouble from '../static/icons/chevron-right-double.svg';
@@ -19,15 +19,15 @@ const paginationLinkStyle = (isActive: boolean) => css`
 	border-radius: 100%;
 
 	position: relative;
-	color: ${neutral[7]};
-	border: 1px solid ${neutral[86]};
+	color: ${palette.neutral[7]};
+	border: 1px solid ${palette.neutral[86]};
 	height: 36px;
 	display: inline-block;
 
 	margin-right: 0px;
 
 	span {
-		fill: ${neutral[100]};
+		fill: ${palette.neutral[100]};
 
 		svg {
 			position: absolute;
@@ -35,7 +35,7 @@ const paginationLinkStyle = (isActive: boolean) => css`
 			left: 9px;
 			width: 16px;
 			height: 16px;
-			fill: ${isActive ? neutral[46] : neutral[86]};
+			fill: ${isActive ? palette.neutral[46] : palette.neutral[86]};
 		}
 	}
 `;

@@ -11,5 +11,5 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Run Jest
-        run: CI=true yarn test
+        run: CI=true pnpm test
         working-directory: dotcom-rendering

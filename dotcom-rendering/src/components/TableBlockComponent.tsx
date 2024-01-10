@@ -1,16 +1,16 @@
 import { css } from '@emotion/react';
-import { border, neutral, text, textSans } from '@guardian/source-foundations';
+import { palette, text, textSans } from '@guardian/source-foundations';
 import { unescapeData } from '../lib/escapeData';
 import type { TableBlockElement } from '../types/content';
 
 const tableEmbed = css`
 	.table--football {
 		width: 100%;
-		background: ${neutral[97]};
-		border-top: 0.0625rem solid ${border.focusHalo};
+		background: ${palette.neutral[97]};
+		border-top: 0.0625rem solid ${palette.focus[400]};
 		border-collapse: inherit;
 		tr:nth-child(odd) > td {
-			background-color: ${neutral[93]};
+			background-color: ${palette.neutral[93]};
 		}
 		th {
 			padding: 0.5rem;

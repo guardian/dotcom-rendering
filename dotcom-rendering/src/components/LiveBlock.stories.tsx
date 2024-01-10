@@ -76,6 +76,7 @@ export const VideoAsSecond = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 			/>
@@ -121,6 +122,7 @@ export const Title = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 			/>
@@ -187,6 +189,7 @@ export const Video = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 			/>
@@ -228,6 +231,7 @@ export const RichLink = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 			/>
@@ -260,6 +264,7 @@ export const FirstImage = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 			/>
@@ -316,6 +321,7 @@ export const ImageRoles = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
@@ -363,6 +369,7 @@ export const Thumbnail = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
@@ -398,6 +405,7 @@ export const ImageAndTitle = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 			/>
@@ -427,6 +435,7 @@ export const Updated = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 			/>
@@ -458,6 +467,7 @@ export const Contributor = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
@@ -489,6 +499,7 @@ export const NoAvatar = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
@@ -523,6 +534,7 @@ export const TitleAndContributor = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}

@@ -7,9 +7,10 @@
 // If you want to edit the working webpack config, look in:
 // ../../scripts/webpack/webpack.config.js.
 
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import { mergeWithRules } from 'webpack-merge';
 import { base } from './base.mjs';
-import { web } from './bundle.web.mjs';
+import { web } from './client.web.mjs';
 
 /** @type {import("webpack").Configuration} */
 export const webLegacy = {
@@ -47,6 +48,11 @@ export const webLegacy = {
 			},
 		],
 	},
+	plugins: [
+		new WebpackManifestPlugin({
+			fileName: 'manifest.client.web.legacy.json',
+		}),
+	],
 };
 
 /**
@@ -63,4 +69,4 @@ const merge = mergeWithRules({
 	},
 });
 
-export default merge(base(import.meta.url), web, webLegacy);
+export default merge(base(import.meta.url), { ...web, plugins: [] }, webLegacy);

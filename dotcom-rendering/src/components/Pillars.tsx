@@ -2,11 +2,10 @@ import { css } from '@emotion/react';
 import type { Pillar } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
-	brand,
-	brandAlt,
 	brandText,
 	from,
 	headline,
+	palette as srcPalette,
 	until,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
@@ -56,7 +55,7 @@ const pillarsStyles = (isImmersive: boolean) => css`
 
 	:after {
 		content: '';
-		border-top: 1px solid ${brand[600]};
+		border-top: 1px solid ${srcPalette.brand[600]};
 		position: absolute;
 		bottom: 0;
 		left: 0;
@@ -98,7 +97,7 @@ const showMenuUnderlineStyles = css`
 		:hover,
 		:focus {
 			text-decoration: underline;
-			color: ${brandAlt[400]};
+			color: ${srcPalette.brandAlt[400]};
 		}
 
 		:after {
@@ -144,7 +143,7 @@ const pillarDivider = css`
 		top: 0;
 		bottom: 0;
 		width: 1px;
-		background-color: ${brand[600]};
+		background-color: ${srcPalette.brand[600]};
 
 		${from.tablet} {
 			bottom: 17px;

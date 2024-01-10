@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import { headline, neutral, textSans } from '@guardian/source-foundations';
+import { headline, palette, textSans } from '@guardian/source-foundations';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 
 const ListStyle = (iconColour: string) => css`
@@ -39,7 +39,7 @@ const LinkStyle = (pillar: ArticleTheme) => css`
 const standfirstCss = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};
 	font-weight: 100;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	margin-bottom: 12px;
 
 	p {

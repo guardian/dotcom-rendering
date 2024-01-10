@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import { brand, from, neutral, textSans } from '@guardian/source-foundations';
+import { from, palette, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import type {
@@ -46,7 +46,7 @@ const myAccountStyles = css`
 	${from.desktop} {
 		:before {
 			content: '';
-			border-left: 1px solid ${brand[600]};
+			border-left: 1px solid ${palette.brand[600]};
 			height: 24px;
 		}
 	}
@@ -60,7 +60,7 @@ const myAccountLinkStyles = css`
 	${textSans.medium()};
 	font-size: 1rem;
 	line-height: 1;
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	transition: color 80ms ease-out;
 	text-decoration: none;
 	padding: 0;
@@ -168,7 +168,7 @@ const SignIn = ({ idUrl }: { idUrl: string }) => (
 );
 
 export const dropDownOverrides = css`
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	padding-right: 0;
 	padding-bottom: 0;
 	margin-top: 0;
@@ -176,7 +176,7 @@ export const dropDownOverrides = css`
 	font-size: 1rem;
 
 	&:not(ul):hover {
-		color: ${neutral[100]};
+		color: ${palette.neutral[100]};
 		text-decoration: underline;
 	}
 

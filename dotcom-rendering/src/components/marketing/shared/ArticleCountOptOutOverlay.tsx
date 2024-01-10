@@ -4,17 +4,14 @@
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/modules/shared/ArticleCountOptOutOverlay.tsx
  */
 import type { SerializedStyles } from '@emotion/react';
-import { css } from '@emotion/react';
-import { ThemeProvider } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import {
 	background,
-	brand,
 	brandAltBackground,
 	brandAltLine,
 	brandAltText,
-	culture,
 	from,
-	neutral,
+	palette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
@@ -27,6 +24,8 @@ import {
 } from '@guardian/source-react-components';
 import type { ReactComponent } from '../lib/ReactComponent';
 import type { ArticleCountOptOutType } from './ArticleCountOptOutPopup';
+
+const { brand, neutral } = palette;
 
 const COLOURS = {
 	epic: 'white',
@@ -120,42 +119,42 @@ const BUTTON_OVERRIDES = {
 	epic: css``,
 	banner: css``,
 	['investigations-moment-banner']: css`
-		background-color: ${neutral[100]};
-		color: ${neutral[0]};
-		border: 1px solid ${neutral[0]};
+		background-color: ${palette.neutral[100]};
+		color: ${palette.neutral[0]};
+		border: 1px solid ${palette.neutral[0]};
 
 		&:hover {
-			background-color: ${neutral[86]};
+			background-color: ${palette.neutral[86]};
 		}
 	`,
 	['us-eoy-moment-banner']: css`
-		color: ${neutral[7]};
-		border: 1px solid ${neutral[7]};
+		color: ${palette.neutral[7]};
+		border: 1px solid ${palette.neutral[7]};
 
 		&:hover {
-			background-color: ${culture[350]};
-			color: ${neutral[100]};
-			border: 1px solid ${culture[350]};
+			background-color: ${palette.culture[350]};
+			color: ${palette.neutral[100]};
+			border: 1px solid ${palette.culture[350]};
 		}
 	`,
 	['global-new-year-moment-banner']: css`
-		color: ${neutral[7]};
-		border: 1px solid ${neutral[7]};
+		color: ${palette.neutral[7]};
+		border: 1px solid ${palette.neutral[7]};
 
 		&:hover {
-			background-color: ${brand[500]};
-			color: ${neutral[100]};
-			border: 1px solid ${brand[500]};
+			background-color: ${palette.brand[500]};
+			color: ${palette.neutral[100]};
+			border: 1px solid ${palette.brand[500]};
 		}
 	`,
 	['election-au-moment-banner']: css`
-		color: ${neutral[7]};
-		border: 1px solid ${neutral[7]};
+		color: ${palette.neutral[7]};
+		border: 1px solid ${palette.neutral[7]};
 
 		&:hover {
-			background-color: ${brand[500]};
-			color: ${neutral[100]};
-			border: 1px solid ${brand[500]};
+			background-color: ${palette.brand[500]};
+			color: ${palette.neutral[100]};
+			border: 1px solid ${palette.brand[500]};
 		}
 	`,
 };
@@ -164,45 +163,45 @@ const PRIMARY_BUTTON_OVERRIDES = {
 	epic: css``,
 	banner: css``,
 	['investigations-moment-banner']: css`
-		background-color: ${neutral[0]};
-		color: ${neutral[100]};
-		border: 1px solid ${neutral[0]};
+		background-color: ${palette.neutral[0]};
+		color: ${palette.neutral[100]};
+		border: 1px solid ${palette.neutral[0]};
 
 		&:hover {
-			background-color: ${neutral[46]};
-			border-color: ${neutral[46]};
+			background-color: ${palette.neutral[46]};
+			border-color: ${palette.neutral[46]};
 		}
 	`,
 	['us-eoy-moment-banner']: css`
-		background-color: ${neutral[7]};
-		color: ${neutral[100]};
-		border: 1px solid ${neutral[7]};
+		background-color: ${palette.neutral[7]};
+		color: ${palette.neutral[100]};
+		border: 1px solid ${palette.neutral[7]};
 
 		&:hover {
-			background-color: ${culture[350]};
-			color: ${neutral[100]};
-			border: 1px solid ${culture[350]};
+			background-color: ${palette.culture[350]};
+			color: ${palette.neutral[100]};
+			border: 1px solid ${palette.culture[350]};
 		}
 	`,
 	['global-new-year-moment-banner']: css`
-		background-color: ${neutral[0]};
-		color: ${neutral[100]};
-		border: 1px solid ${neutral[0]};
+		background-color: ${palette.neutral[0]};
+		color: ${palette.neutral[100]};
+		border: 1px solid ${palette.neutral[0]};
 
 		&:hover {
-			background-color: ${brand[500]};
-			color: ${neutral[100]};
-			border: 1px solid ${brand[500]};
+			background-color: ${palette.brand[500]};
+			color: ${palette.neutral[100]};
+			border: 1px solid ${palette.brand[500]};
 		}
 	`,
 	['election-au-moment-banner']: css`
-		background-color: ${neutral[0]};
-		color: ${neutral[100]};
-		border: 1px solid ${neutral[0]};
+		background-color: ${palette.neutral[0]};
+		color: ${palette.neutral[100]};
+		border: 1px solid ${palette.neutral[0]};
 
 		&:hover {
 			background-color: ${background.ctaPrimaryHover};
-			color: ${neutral[100]};
+			color: ${palette.neutral[100]};
 			border: 1px solid ${background.ctaPrimaryHover};
 		}
 	`,

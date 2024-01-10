@@ -110,8 +110,8 @@ export const renderHtml = ({
 		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
 
 	const legacyScripts = [
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
+		getPathFromManifest('client.web.legacy', 'frameworks.js'),
+		getPathFromManifest('client.web.legacy', 'index.js'),
 	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
 
 	const scriptTags = generateScriptTags([
@@ -268,6 +268,7 @@ export const renderBlocks = ({
 				ajaxUrl={ajaxUrl}
 				isSensitive={isSensitive}
 				isAdFreeUser={isAdFreeUser}
+				abTests={{}} // @TODO: start passing `abTests` to the block endpoint
 				switches={switches}
 				isLiveUpdate={true}
 				sectionId={section}

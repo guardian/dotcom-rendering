@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brand } from '@guardian/source-foundations';
+import { palette } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import { editionList, getEditionFromId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
@@ -20,7 +20,7 @@ const editionDropdownStyles = css`
 	position: relative;
 	:before {
 		content: '';
-		border-left: 1px solid ${brand[600]};
+		border-left: 1px solid ${palette.brand[600]};
 		height: 24px;
 	}
 `;

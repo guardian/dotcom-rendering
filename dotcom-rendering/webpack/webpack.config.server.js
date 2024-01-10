@@ -31,6 +31,7 @@ module.exports = {
 		chunkFilename: `[name].js`,
 		libraryTarget: 'commonjs2',
 		pathinfo: true,
+		publicPath: '',
 	},
 	target: 'node',
 	externalsPresets: { node: true },
@@ -43,9 +44,13 @@ module.exports = {
 		...(DEV
 			? [
 					nodeExternals({
-						allowlist: [/^@guardian/],
+						allowlist: [
+							/^@guardian/,
+							// this project is ESM-only and throws an error when not bundled
+							'screenfull',
+						],
 						additionalModuleDirs: [
-							// Since we use yarn-workspaces for the monorepo, node_modules will be co-located
+							// Since we use workspaces for the monorepo, node_modules will be co-located
 							// both in the '(project-root)/dotcom-rendering/node_modules' directory (default for webpack-node-externals)
 							// but also in project root, and any workspaces we link to.
 							// We want to make sure all of these are removed from the server build.

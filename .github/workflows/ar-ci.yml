@@ -27,16 +27,16 @@ jobs:
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
 
-      # Execute some tasks from the `apps-rendering/package.json` file, using `yarn`
+      # Execute some tasks from the `apps-rendering/package.json` file, using `pnpm`
       - name: Build and package
         working-directory: apps-rendering
         run: |
-          yarn test
-          yarn build:client:prod
-          yarn build:server:prod
-          yarn copy-manifest
-          yarn copy-fonts
-          yarn synth
+          pnpm test
+          pnpm build:client:prod
+          pnpm build:server:prod
+          pnpm copy-manifest
+          pnpm copy-fonts
+          pnpm synth
           zip -j dist/server/mobile-apps-rendering.zip dist/server/*
 
       - name: AWS Auth

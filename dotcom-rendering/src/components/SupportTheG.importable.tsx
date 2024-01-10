@@ -2,11 +2,10 @@ import { css } from '@emotion/react';
 import type { OphanABTestMeta, OphanComponentEvent } from '@guardian/libs';
 import { getCookie, isUndefined } from '@guardian/libs';
 import {
-	brandAlt,
 	brandText,
 	from,
 	headline,
-	neutral,
+	palette,
 	space,
 	textSans,
 	until,
@@ -81,7 +80,7 @@ const headerStyles = css`
 `;
 
 const messageStylesUntilLeftCol = css`
-	color: ${brandAlt[400]};
+	color: ${palette.brandAlt[400]};
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	padding-top: 3px;
 	margin-bottom: 3px;
@@ -99,10 +98,10 @@ const messageStylesFromLeftCol = (isThankYouMessage: boolean) => css`
 `;
 
 const linkStyles = css`
-	background: ${brandAlt[400]};
+	background: ${palette.brandAlt[400]};
 	border-radius: 16px;
 	box-sizing: border-box;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	float: left;
 	${textSans.small()};
 	font-weight: 700;

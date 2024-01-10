@@ -16,7 +16,7 @@ const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
 /** @typedef {import('../src/lib/assets').Build} Build */
 
 /**
- * @param {{ platform: 'server' | `client.${Build}`}} options
+ * @param {{ platform: 'server' | Build}} options
  * @returns {import('webpack').Configuration}
  */
 const commonConfigs = ({ platform }) => ({
@@ -37,7 +37,6 @@ const commonConfigs = ({ platform }) => ({
 			'react-dom': 'preact/compat',
 		},
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
-		symlinks: false,
 	},
 	ignoreWarnings: [
 		/**
@@ -108,13 +107,15 @@ const commonConfigs = ({ platform }) => ({
 
 /** @type {readonly Build[]} */
 const clientBuilds = [
-	'web',
+	'client.web',
 	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
-		? /** @type {const} */ (['web.variant'])
+		? /** @type {const} */ (['client.web.variant'])
 		: []),
 	// TODO: ignore static files for legacy compilation
-	...(PROD || BUILD_LEGACY ? /** @type {const} */ (['web.legacy']) : []),
-	'apps',
+	...(PROD || BUILD_LEGACY
+		? /** @type {const} */ (['client.web.legacy'])
+		: []),
+	'client.apps',
 ];
 
 module.exports = [
@@ -128,7 +129,7 @@ module.exports = [
 	...clientBuilds.map((build) =>
 		merge(
 			commonConfigs({
-				platform: `client.${build}`,
+				platform: build,
 			}),
 			require(`./webpack.config.client`)({
 				build,

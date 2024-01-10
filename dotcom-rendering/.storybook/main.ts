@@ -116,7 +116,7 @@ const webpackConfig = (config: Configuration) => {
 	config.resolve.alias[
 		path.resolve(__dirname, '../src/components/SecureSignup.tsx')
 	] = path.resolve(__dirname, '../__mocks__/SecureSignupMock.tsx');
-	const webpackLoaders = getLoaders('web');
+	const webpackLoaders = getLoaders('client.web');
 	// https://swc.rs/docs/usage/swc-loader#with-babel-loader
 	if (webpackLoaders[0].loader.startsWith('swc')) {
 		webpackLoaders[0].options.parseMap = true;

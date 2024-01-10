@@ -64,11 +64,7 @@ window.guardian = {
 			pageViewId: 'mockPageViewId',
 		},
 		page: {
-			googleRecaptchaSiteKey: 'TEST_RECAPTCHA_SITE_KEY',
 			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		},
-		switches: {
-			emailSignupRecaptcha: false,
 		},
 		tests: {},
 	},

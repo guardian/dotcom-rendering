@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	from,
-	neutral,
+	palette,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -119,7 +119,7 @@ export const LightboxLink = ({
 						right: 0;
 						svg {
 							margin-top: 3px;
-							fill: ${neutral[100]};
+							fill: ${palette.neutral[100]};
 						}
 						margin: 6px;
 						${until.tablet} {
