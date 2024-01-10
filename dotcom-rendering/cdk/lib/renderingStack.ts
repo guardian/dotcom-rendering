@@ -138,15 +138,16 @@ export class RenderingCDKStack extends CDKStack {
 				actionsEnabled: true,
 				alarmDescription: `ALB latency for ${guStack}-${guApp} is higher than 0.2 ms`,
 				threshold: 0.2,
-				comparisonOperator: ComparisonOperator.GREATER_THAN_THRESHOLD,
-				evaluationPeriods: 3,
+				comparisonOperator:
+					ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+				evaluationPeriods: 1,
 				metric: new Metric({
 					dimensionsMap: {
 						LoadBalancerName: ec2app.loadBalancer.loadBalancerName,
 					},
 					metricName: 'TargetResponseTime',
 					namespace: 'AWS/ApplicationELB',
-					period: Duration.seconds(10),
+					period: Duration.seconds(30),
 					statistic: 'Average',
 				}),
 
