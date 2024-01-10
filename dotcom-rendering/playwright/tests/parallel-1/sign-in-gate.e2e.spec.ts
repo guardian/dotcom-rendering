@@ -26,8 +26,8 @@ const setArticleCount = async (page: Page, dailyArticleCount: number) => {
 };
 
 const setMvtCookie = async (context: BrowserContext) => {
-	// sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
-	await addCookie(context, { name: 'GU_mvt_id', value: '500000' });
+	// sign in gate main runs from 0-900000 MVT IDs, so 500_000 forces user into test
+	await addCookie(context, { name: 'GU_mvt_id', value: String(500_000) });
 };
 
 const setGuCOCompleteCookie = async (
