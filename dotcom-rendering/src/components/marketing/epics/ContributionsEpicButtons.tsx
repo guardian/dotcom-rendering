@@ -57,6 +57,7 @@ const PrimaryCtaButton = ({
 	amountsTestName,
 	amountsVariantName,
 	numArticles,
+	submitComponentEvent,
 }: {
 	cta?: Cta;
 	tracking: Tracking;
@@ -64,6 +65,7 @@ const PrimaryCtaButton = ({
 	amountsTestName?: string;
 	amountsVariantName?: string;
 	numArticles: number;
+	submitComponentEvent?: (event: OphanComponentEvent) => void;
 }): JSX.Element | null => {
 	if (!cta) {
 		return null;
@@ -84,6 +86,7 @@ const PrimaryCtaButton = ({
 		<div css={buttonMarginStyles}>
 			<EpicButton
 				onClickAction={urlWithRegionAndTracking}
+				submitComponentEvent={submitComponentEvent}
 				showArrow={true}
 				data-ignore="global-link-styling"
 			>
@@ -98,11 +101,13 @@ const SecondaryCtaButton = ({
 	tracking,
 	numArticles,
 	countryCode,
+	submitComponentEvent,
 }: {
 	cta: Cta;
 	tracking: Tracking;
 	countryCode?: string;
 	numArticles: number;
+	submitComponentEvent?: (event: OphanComponentEvent) => void;
 }): JSX.Element | null => {
 	const url = addRegionIdAndTrackingParamsToSupportUrl(
 		cta.baseUrl,
@@ -114,6 +119,7 @@ const SecondaryCtaButton = ({
 		<div css={buttonMarginStyles}>
 			<EpicButton
 				onClickAction={url}
+				submitComponentEvent={submitComponentEvent}
 				showArrow={true}
 				priority="secondary"
 			>
@@ -204,6 +210,7 @@ export const ContributionsEpicButtons = ({
 							amountsTestName={amountsTestName}
 							amountsVariantName={amountsVariantName}
 							countryCode={countryCode}
+							submitComponentEvent={submitComponentEvent}
 						/>
 						{secondaryCta?.type === SecondaryCtaType.Custom &&
 							!!secondaryCta.cta.baseUrl &&
@@ -213,6 +220,7 @@ export const ContributionsEpicButtons = ({
 									tracking={tracking}
 									countryCode={countryCode}
 									numArticles={numArticles}
+									submitComponentEvent={submitComponentEvent}
 								/>
 							)}
 					</>
