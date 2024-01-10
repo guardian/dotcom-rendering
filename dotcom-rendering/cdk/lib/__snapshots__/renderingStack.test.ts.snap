@@ -468,42 +468,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "HighLatencyAlarm61213652": {
-      "Properties": {
-        "ActionsEnabled": true,
-        "AlarmActions": [
-          {
-            "Ref": "ScaleUpAF7DDD3C",
-          },
-        ],
-        "AlarmDescription": "Latency alarm for autoscaling",
-        "ComparisonOperator": "GreaterThanThreshold",
-        "Dimensions": [
-          {
-            "Name": "LoadBalancerName",
-            "Value": {
-              "Fn::GetAtt": [
-                "LoadBalancerArticlerendering49883BBC",
-                "LoadBalancerName",
-              ],
-            },
-          },
-        ],
-        "EvaluationPeriods": 3,
-        "MetricName": "TargetResponseTime",
-        "Namespace": "AWS/ApplicationELB",
-        "OKActions": [
-          {
-            "Ref": "ScaleDown2D6349BF",
-          },
-        ],
-        "Period": 10,
-        "Statistic": "Average",
-        "Threshold": 0.2,
-        "TreatMissingData": "missing",
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
     "InstanceRoleArticlerendering0D4717E8": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -1228,6 +1192,42 @@ systemctl start article-rendering",
         ],
       },
       "Type": "AWS::IAM::InstanceProfile",
+    },
+    "frontendarticlerenderingHighLatencyAlarm99D28C58": {
+      "Properties": {
+        "ActionsEnabled": true,
+        "AlarmActions": [
+          {
+            "Ref": "ScaleUpAF7DDD3C",
+          },
+        ],
+        "AlarmDescription": "ALB latency for frontend-article-rendering is higher than 0.2 ms",
+        "ComparisonOperator": "GreaterThanThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancerName",
+            "Value": {
+              "Fn::GetAtt": [
+                "LoadBalancerArticlerendering49883BBC",
+                "LoadBalancerName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 3,
+        "MetricName": "TargetResponseTime",
+        "Namespace": "AWS/ApplicationELB",
+        "OKActions": [
+          {
+            "Ref": "ScaleDown2D6349BF",
+          },
+        ],
+        "Period": 10,
+        "Statistic": "Average",
+        "Threshold": 0.2,
+        "TreatMissingData": "missing",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
     },
   },
 }

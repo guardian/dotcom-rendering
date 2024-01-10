@@ -130,25 +130,29 @@ export class RenderingCDKStack extends CDKStack {
 		// evaluationPeriods and period should change for PROD. These values were chosen for testing purposes.
 		// Currently, they are period: 60 and evaluationPeriod: 1
 		// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L299
-		const latencyHighAlarm = new Alarm(this, 'HighLatencyAlarm', {
-			// When merged this can become actionsEnabled: stage === 'PROD'
-			actionsEnabled: true,
-			alarmDescription: 'Latency alarm for autoscaling',
-			threshold: 0.2,
-			comparisonOperator: ComparisonOperator.GREATER_THAN_THRESHOLD,
-			evaluationPeriods: 3,
-			metric: new Metric({
-				dimensionsMap: {
-					LoadBalancerName: ec2app.loadBalancer.loadBalancerName,
-				},
-				metricName: 'TargetResponseTime',
-				namespace: 'AWS/ApplicationELB',
-				period: Duration.seconds(10),
-				statistic: 'Average',
-			}),
+		const highLatencyAlarm = new Alarm(
+			this,
+			`${guStack}-${guApp}-HighLatencyAlarm`,
+			{
+				// When merged this can become actionsEnabled: stage === 'PROD'
+				actionsEnabled: true,
+				alarmDescription: `ALB latency for ${guStack}-${guApp} is higher than 0.2 ms`,
+				threshold: 0.2,
+				comparisonOperator: ComparisonOperator.GREATER_THAN_THRESHOLD,
+				evaluationPeriods: 3,
+				metric: new Metric({
+					dimensionsMap: {
+						LoadBalancerName: ec2app.loadBalancer.loadBalancerName,
+					},
+					metricName: 'TargetResponseTime',
+					namespace: 'AWS/ApplicationELB',
+					period: Duration.seconds(10),
+					statistic: 'Average',
+				}),
 
-			treatMissingData: TreatMissingData.MISSING,
-		});
+				treatMissingData: TreatMissingData.MISSING,
+			},
+		);
 
 		const scaleUpStep = new StepScalingAction(this, 'ScaleUp', {
 			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
@@ -163,7 +167,7 @@ export class RenderingCDKStack extends CDKStack {
 			adjustment: 100,
 		});
 
-		latencyHighAlarm.addAlarmAction(new AutoScalingAction(scaleUpStep));
+		highLatencyAlarm.addAlarmAction(new AutoScalingAction(scaleUpStep));
 
 		const scaleDownStep = new StepScalingAction(this, 'ScaleDown', {
 			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
@@ -179,7 +183,7 @@ export class RenderingCDKStack extends CDKStack {
 			adjustment: -1,
 		});
 
-		latencyHighAlarm.addOkAction(new AutoScalingAction(scaleDownStep));
+		highLatencyAlarm.addOkAction(new AutoScalingAction(scaleDownStep));
 
 		// Saves the value of the rendering base URL to SSM for frontend apps to use
 		new StringParameter(this, 'RenderingBaseURLParam', {
