@@ -7,6 +7,7 @@ import { palette, palette as schemedPalette } from '../palette';
 import TwitterIcon from '../static/icons/twitter.svg';
 import type { TagType } from '../types/tag';
 import { BylineLink } from './BylineLink';
+import { useConfig } from './ConfigContext';
 
 const twitterHandleStyles = css`
 	${textSans.xxsmall({ fontWeight: 'bold' })};
@@ -74,6 +75,9 @@ type Props = {
 };
 
 export const Contributor = ({ byline, tags, format }: Props) => {
+	const { renderingTarget } = useConfig();
+	const isWeb = renderingTarget === 'Web';
+
 	const { twitterHandle } = getSoleContributor(tags, byline) ?? {};
 
 	return (
@@ -97,10 +101,15 @@ export const Contributor = ({ byline, tags, format }: Props) => {
 							standfirstColourBelowDesktop,
 					]}
 				>
-					<BylineLink byline={byline} tags={tags} format={format} />
+					<BylineLink
+						byline={byline}
+						tags={tags}
+						format={format}
+						isHeadline={false}
+					/>
 				</div>
 			)}
-			{isString(twitterHandle) && (
+			{isWeb && isString(twitterHandle) && (
 				<div
 					css={[
 						twitterHandleStyles,
