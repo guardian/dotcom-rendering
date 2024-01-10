@@ -52,8 +52,6 @@ function transformTabs(tabs: FETrailTabType[]): TrailTabType[] {
 
 interface MostViewedFooterPayloadType {
 	tabs: FETrailTabType[];
-	mostCommented: FETrailType;
-	mostShared: FETrailType;
 }
 
 export const MostViewedFooterData = ({
@@ -91,16 +89,6 @@ export const MostViewedFooterData = ({
 		return (
 			<MostViewedFooter
 				tabs={transformTabs(tabs)}
-				mostCommented={
-					'mostCommented' in data
-						? decideTrail(data.mostCommented)
-						: undefined
-				}
-				mostShared={
-					'mostShared' in data
-						? decideTrail(data.mostShared)
-						: undefined
-				}
 				abTestCypressDataAttr={abTestCypressDataAttr}
 				variantFromRunnable={variantFromRunnable}
 				sectionId={sectionId}
