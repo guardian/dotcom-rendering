@@ -87,11 +87,12 @@ const displayNone = css`
 const linkStyles = css`
 	${textSans.small()};
 	color: ${sourcePalette.neutral[7]};
-	position: relative;
 	transition: color 80ms ease-out;
 	margin: -1px 0 0 0;
 	text-decoration: none;
-	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	padding: 10px 18px 15px 30px;
 
 	:hover {
@@ -207,14 +208,6 @@ const dropdownButtonNotificationBadgeStyles = css`
 	left: 0;
 	margin-left: -10px;
 	margin-top: -3px;
-`;
-
-const dropdownItemContainerStyles = css`
-	display: flex;
-`;
-
-const dropdownItemTextContainerStyles = css`
-	display: block;
 `;
 
 const notificationTextStyles = css`
@@ -371,26 +364,16 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 					}
 				}}
 			>
-				<div css={dropdownItemContainerStyles}>
-					<div css={dropdownItemTextContainerStyles}>
-						{link.title}
-						{link.notifications?.map((notification) => (
-							<NotificationMessage
-								notification={notification}
-								key={notification.id}
-							/>
-						))}
-					</div>
-					{hasNotifications && (
-						<div
-							css={css`
-								margin-left: 10px;
-							`}
-						>
-							<NotificationBadge diameter={22} />
-						</div>
-					)}
+				<div>
+					{link.title}
+					{link.notifications?.map((notification) => (
+						<NotificationMessage
+							notification={notification}
+							key={notification.id}
+						/>
+					))}
 				</div>
+				{hasNotifications && <NotificationBadge diameter={22} />}
 			</a>
 		</li>
 	);
