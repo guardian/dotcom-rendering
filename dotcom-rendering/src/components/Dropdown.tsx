@@ -376,7 +376,11 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 						/>
 					))}
 				</div>
-				{hasNotifications && <NotificationBadge diameter={22} />}
+				{hasNotifications && (
+					<div style={{ display: 'block' }}>
+						<NotificationBadge diameter={22} />
+					</div>
+				)}
 			</a>
 		</li>
 	);
