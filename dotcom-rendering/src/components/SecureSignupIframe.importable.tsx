@@ -318,40 +318,38 @@ export const SecureSignupIframe = ({
 		resetIframeHeight();
 	};
 
-	const autofillEmailIfSignedIn = () => {
-		const { current: iframe } = iframeRef;
-		const emailFormField = iframe?.contentDocument?.querySelector(
-			'input[name="email"]',
-		);
-		const signUpButton = iframe?.contentDocument?.querySelector(
-			'button[type="submit"]',
-		);
-		const labelNodeList =
-			iframe?.contentDocument?.querySelectorAll('label');
+	const autofillEmailIfSignedIn = async () => {
 		const { idApiUrl } = window.guardian.config.page;
-
 		const fetchEmail = idApiUrl
 			? lazyFetchEmailWithTimeout(idApiUrl)
 			: undefined;
+		if (!fetchEmail) return;
 
-		void fetchEmail?.().then((resolvedEmail) => {
-			if (resolvedEmail) {
-				labelNodeList &&
-					[...labelNodeList].map((labelNode: HTMLLabelElement) =>
-						labelNode.setAttribute('hidden', 'true'),
-					);
-				emailFormField?.setAttribute('style', 'display: none;');
-				emailFormField?.parentElement?.setAttribute(
-					'style',
-					'flex-basis: 0; margin: 0;',
-				);
-				signUpButton?.setAttribute(
-					'style',
-					`margin-top: ${space[2]}px;`,
-				);
-				emailFormField?.setAttribute('value', resolvedEmail);
-			}
-		});
+		const email = await fetchEmail();
+		if (!email) return;
+
+		const { current: iframe } = iframeRef;
+		if (!iframe) return;
+
+		const emailFormField = iframe.contentDocument?.querySelector(
+			'input[name="email"]',
+		);
+		const signUpButton = iframe.contentDocument?.querySelector(
+			'button[type="submit"]',
+		);
+		const labelNodeList = iframe.contentDocument?.querySelectorAll('label');
+
+		labelNodeList &&
+			[...labelNodeList].map((labelNode: HTMLLabelElement) =>
+				labelNode.setAttribute('hidden', 'true'),
+			);
+		emailFormField?.setAttribute('style', 'display: none;');
+		emailFormField?.parentElement?.setAttribute(
+			'style',
+			'flex-basis: 0; margin: 0;',
+		);
+		signUpButton?.setAttribute('style', `margin-top: ${space[2]}px;`);
+		emailFormField?.setAttribute('value', email);
 	};
 
 	const addFontsToIframe = (requiredFontNames: string[]) => {
@@ -387,7 +385,7 @@ export const SecureSignupIframe = ({
 	const onIFrameLoad = (): void => {
 		attachListenersToIframe();
 		addFontsToIframe(['GuardianTextSans']);
-		autofillEmailIfSignedIn();
+		void autofillEmailIfSignedIn();
 	};
 
 	return (
