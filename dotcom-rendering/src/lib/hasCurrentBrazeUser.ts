@@ -3,11 +3,11 @@ import { storage } from '@guardian/libs';
 const KEY = 'gu.brazeUserSet';
 
 const hasCurrentBrazeUser = (): boolean => {
-	return storage.local.get(KEY) === 'true';
+	return storage.local.getRaw(KEY) === 'true';
 };
 
 const setHasCurrentBrazeUser = (): void => {
-	storage.local.set(KEY, 'true');
+	storage.local.setRaw(KEY, 'true');
 };
 
 const clearHasCurrentBrazeUser = (): void => {
