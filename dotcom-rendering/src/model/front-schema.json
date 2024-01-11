@@ -372,12 +372,6 @@
                 "$ref": "#/definitions/FETrailType"
             }
         },
-        "mostCommented": {
-            "$ref": "#/definitions/FETrailType"
-        },
-        "mostShared": {
-            "$ref": "#/definitions/FETrailType"
-        },
         "deeplyRead": {
             "type": "array",
             "items": {

@@ -408,44 +408,4 @@ export const mostRead = {
 			],
 		},
 	],
-	mostCommented: {
-		url: 'https://www.theguardian.com/commentisfree/2021/mar/05/covid-inquiry-tories-judgment-government-failures',
-		linkText: '',
-		showByline: true,
-		byline: 'Andy Beckett',
-		image: 'https://i.guim.co.uk/img/media/88b31db15c809a716d2727dcd7b1ed1f2393949f/0_113_4000_2401/500.jpg?quality=85&auto=format&fit=max&s=2c33bd30495d6c242905681f52b04286',
-		isLiveBlog: false,
-		format: {
-			design: 'CommentDesign',
-			theme: 'OpinionPillar',
-			display: 'StandardDisplay',
-		},
-		pillar: 'opinion',
-		designType: 'Comment',
-		webPublicationDate: '2021-03-05T07:00:30.000Z',
-		headline: "Don't rely on a Covid inquiry to bring down the Tories",
-		shortUrl: 'https://www.theguardian.com/p/gjxxc',
-		avatarUrl:
-			'https://i.guim.co.uk/img/media/88b31db15c809a716d2727dcd7b1ed1f2393949f/0_113_4000_2401/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=77a825483e14a4869b3160ef1fee6bf2',
-	},
-	mostShared: {
-		url: 'https://www.theguardian.com/music/2021/mar/04/ian-brown-pulls-out-of-music-festival-over-covid-vaccination-row',
-		linkText: '',
-		showByline: false,
-		image: 'https://i.guim.co.uk/img/media/a239454ddd6386e8beec534cf30005d6a6cc3816/0_0_2323_1394/500.jpg?quality=85&auto=format&fit=max&s=116eb3c2bb6d4de12e4b04344fe4e892',
-		isLiveBlog: false,
-		format: {
-			design: 'ArticleDesign',
-			theme: 'CulturePillar',
-			display: 'StandardDisplay',
-		},
-		pillar: 'culture',
-		designType: 'Article',
-		webPublicationDate: '2021-03-04T14:46:23.000Z',
-		headline:
-			'Ian Brown pulls out of music festival over Covid vaccination row',
-		shortUrl: 'https://www.theguardian.com/p/gj48g',
-		avatarUrl:
-			'https://i.guim.co.uk/img/media/a239454ddd6386e8beec534cf30005d6a6cc3816/0_0_2323_1394/master/2323.jpg?width=300&quality=85&auto=format&fit=max&s=eedfe72b0ca6f2663a93f1377dc3fc55',
-	},
 };
