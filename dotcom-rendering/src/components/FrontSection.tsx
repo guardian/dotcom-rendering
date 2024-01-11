@@ -4,7 +4,7 @@ import {
 	background,
 	between,
 	from,
-	neutral,
+	palette,
 	space,
 	until,
 } from '@guardian/source-foundations';
@@ -498,7 +498,9 @@ export const FrontSection = ({
 		>
 			<div
 				css={[
-					decoration(overrides?.border.container ?? neutral[86]),
+					decoration(
+						overrides?.border.container ?? palette.neutral[86],
+					),
 					sideBorders,
 					showTopBorder && topBorder,
 				]}
@@ -514,7 +516,7 @@ export const FrontSection = ({
 					),
 					!hasPageSkin &&
 						sectionHeadlineFromLeftCol(
-							overrides?.border.container ?? neutral[86],
+							overrides?.border.container ?? palette.neutral[86],
 						),
 					title?.toLowerCase() === 'headlines' &&
 						sectionHeadlineHeight,
@@ -606,7 +608,9 @@ export const FrontSection = ({
 					<Treats
 						treats={treats}
 						borderColour={overrides?.border.container}
-						fontColour={overrides?.text.container ?? neutral[7]}
+						fontColour={
+							overrides?.text.container ?? palette.neutral[7]
+						}
 					/>
 				</div>
 			)}

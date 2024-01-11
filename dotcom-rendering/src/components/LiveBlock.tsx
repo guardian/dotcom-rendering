@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { RenderArticleElement } from '../lib/renderElement';
-import type { Switches } from '../types/config';
+import type { ServerSideTests, Switches } from '../types/config';
 import { LastUpdated } from './LastUpdated';
 import { LiveBlockContainer } from './LiveBlockContainer';
 import { ShareIcons } from './ShareIcons';
@@ -14,6 +14,7 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	abTests: ServerSideTests;
 	switches: Switches;
 	isLiveUpdate?: boolean;
 	isPinnedPost: boolean;
@@ -29,6 +30,7 @@ export const LiveBlock = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
+	abTests,
 	switches,
 	isLiveUpdate,
 	isPinnedPost,
@@ -74,9 +76,9 @@ export const LiveBlock = ({
 					webTitle={webTitle}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
+					abTests={abTests}
 					switches={switches}
 					isPinnedPost={isPinnedPost}
-					imagesForAppsLightbox={[]}
 				/>
 			))}
 			<footer

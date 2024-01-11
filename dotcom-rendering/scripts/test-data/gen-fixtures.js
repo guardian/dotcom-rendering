@@ -3,7 +3,6 @@
 const fs = require('node:fs/promises');
 const { resolve } = require('node:path');
 const execa = require('execa');
-const fetch = require('node-fetch');
 const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
@@ -57,6 +56,10 @@ const articles = [
 	{
 		name: 'Live',
 		url: 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+	},
+	{
+		name: 'LiveBlogSingleContributor',
+		url: 'https://www.theguardian.com/politics/live/2023/dec/13/james-cleverly-rwanda-bill-immigration-asylum-rishi-sunak-keir-starmer-pmqs-politics-live-latest',
 	},
 	{
 		name: 'Dead',
@@ -161,7 +164,10 @@ const requests = articles.map((article) => {
 			}
 
 			// Manual hack for LiveBlog vs DeadBlog
-			if (article.name === 'Live') {
+			if (
+				article.name === 'Live' ||
+				article.name === 'LiveBlogSingleContributor'
+			) {
 				json.format.design = 'LiveBlogDesign';
 			}
 

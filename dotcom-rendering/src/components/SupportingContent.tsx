@@ -2,8 +2,11 @@ import { css } from '@emotion/react';
 import { from, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { transparentColour } from '../lib/transparentColour';
+import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
 import { CardHeadline } from './CardHeadline';
+import { ContainerOverrides } from './ContainerOverrides';
+import { FormatBoundary } from './FormatBoundary';
 
 export type Alignment = 'vertical' | 'horizontal';
 
@@ -112,56 +115,67 @@ export const SupportingContent = ({
 	parentFormat,
 }: Props) => {
 	return (
-		<ul
-			css={[
-				wrapperStyles,
-				isDynamo ? dynamoStyles : directionStyles(alignment),
-			]}
+		<ContainerOverrides
+			containerPalette={containerPalette}
+			isDynamo={!!isDynamo}
 		>
-			{supportingContent.map((subLink, index, { length }) => {
-				// The model has this property as optional but it is very likely
-				// to exist
-				if (!subLink.headline) return null;
-				const shouldPadLeft =
-					!isDynamo && index > 0 && alignment === 'horizontal';
-				const isLast = index === length - 1;
-				return (
-					<li
-						key={subLink.url}
-						css={[
-							isDynamo
-								? [
-										dynamoLiStyles(
-											parentFormat,
-											containerPalette,
-										),
-										css`
-											border-color: ${decidePalette(
+			<ul
+				css={[
+					wrapperStyles,
+					isDynamo ? dynamoStyles : directionStyles(alignment),
+				]}
+			>
+				{supportingContent.map((subLink, index, { length }) => {
+					// The model has this property as optional but it is very likely
+					// to exist
+					if (!subLink.headline) return null;
+					const shouldPadLeft =
+						!isDynamo && index > 0 && alignment === 'horizontal';
+					const isLast = index === length - 1;
+					return (
+						<li
+							key={subLink.url}
+							css={[
+								isDynamo
+									? [
+											dynamoLiStyles(
 												parentFormat,
 												containerPalette,
-											).topBar.card};
-										`,
-								  ]
-								: liStyles,
-							shouldPadLeft && leftMargin,
-							isLast && bottomMargin,
-						]}
-						data-link-name={`sublinks | ${index + 1}`}
-					>
-						<CardHeadline
-							format={subLink.format}
-							size="tiny"
-							hideLineBreak={true}
-							showLine={true}
-							linkTo={subLink.url}
-							containerPalette={containerPalette}
-							isDynamo={isDynamo}
-							headlineText={subLink.headline}
-							kickerText={subLink.kickerText}
-						/>
-					</li>
-				);
-			})}
-		</ul>
+											),
+											css`
+												border-color: ${themePalette(
+													'--card-border-top',
+												)};
+											`,
+									  ]
+									: liStyles,
+								shouldPadLeft && leftMargin,
+								isLast && bottomMargin,
+							]}
+							data-link-name={`sublinks | ${index + 1}`}
+						>
+							<FormatBoundary format={subLink.format}>
+								<ContainerOverrides
+									containerPalette={containerPalette}
+									isDynamo={!!isDynamo}
+								>
+									<CardHeadline
+										format={subLink.format}
+										size="tiny"
+										hideLineBreak={true}
+										showLine={true}
+										linkTo={subLink.url}
+										containerPalette={containerPalette}
+										isDynamo={isDynamo}
+										headlineText={subLink.headline}
+										kickerText={subLink.kickerText}
+									/>
+								</ContainerOverrides>
+							</FormatBoundary>
+						</li>
+					);
+				})}
+			</ul>
+		</ContainerOverrides>
 	);
 };

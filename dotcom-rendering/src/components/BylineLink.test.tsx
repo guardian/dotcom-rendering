@@ -115,6 +115,7 @@ describe('BylineLink', () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					isHeadline={false}
 				/>
 			</ConfigProvider>,
 		);
@@ -152,6 +153,7 @@ describe('BylineLink', () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					isHeadline={false}
 				/>
 			</ConfigProvider>,
 		);
@@ -191,6 +193,7 @@ describe('BylineLink', () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					isHeadline={false}
 				/>
 			</ConfigProvider>,
 		);

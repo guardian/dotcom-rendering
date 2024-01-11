@@ -4,41 +4,31 @@
 	"repository": "git@github.com:guardian/dotcom-rendering.git",
 	"license": "Apache-2.0",
 	"private": true,
-	"workspaces": {
-		"packages": [
-			"dotcom-rendering"
-		],
-		"nohoist": [
-			"type-fest",
-			"**/@types/webpack",
-			"**/@types/react",
-			"**/@types/express-serve-static-core",
-			"**/@guardian/**"
-		]
-	},
 	"scripts": {
 		"postinstall": "./scripts/postinstall.sh",
-		"storybook": "npm-run-all --parallel storybook:*",
-		"storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook --no-open --quiet",
-		"storybook:ar": "cd apps-rendering && yarn storybook --no-open --quiet",
-		"build-storybook": "npm-run-all --parallel build-storybook:*",
-		"build-storybook:ar": "cd apps-rendering && yarn build-storybook",
-		"build-storybook:dcr": "yarn workspace @guardian/dotcom-rendering build-storybook",
-		"build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
+		"storybook": "pnpm '/^storybook:.*/'",
+		"storybook:dcr": "pnpm --filter @guardian/dotcom-rendering storybook --no-open --quiet",
+		"storybook:ar": "pnpm --filter apps-rendering storybook --no-open --quiet",
+		"build-storybook": "pnpm '/^build-storybook:.*/'",
+		"build-storybook:ar": "pnpm --filter apps-rendering build-storybook",
+		"build-storybook:dcr": "pnpm --filter @guardian/dotcom-rendering build-storybook",
+		"build:dcr": "cd dotcom-rendering && make build",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky install",
-		"lint-staged": "lint-staged"
+		"lint-staged": "lint-staged",
+		"prettier:check": "prettier --ignore-unknown --check --cache .",
+		"prettier:write": "prettier --ignore-unknown --write --cache ."
 	},
 	"lint-staged": {
 		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {
-		"@guardian/prettier": "^4.0.0",
+		"@guardian/prettier": "5.0.0",
 		"chromatic": "^6.19.9",
 		"husky": "^8.0.3",
 		"lint-staged": "13.2.1",
-		"npm-run-all": "^4.1.5",
-		"prettier": "^2.8.8",
-		"typescript": "5.1.3"
-	}
+		"prettier": "3.0.3",
+		"tslib": "2.6.2"
+	},
+	"packageManager": "pnpm@8.12.1"
 }

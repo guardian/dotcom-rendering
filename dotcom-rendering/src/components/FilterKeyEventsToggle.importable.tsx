@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
-import { from, neutral, remSpace, until } from '@guardian/source-foundations';
+import { from, palette, remSpace, until } from '@guardian/source-foundations';
 import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 
 const cssOverrides = css`
 	display: inline-flex;
+	color: inherit;
 	padding-bottom: ${remSpace[3]};
 
 	${from.desktop} {
@@ -26,7 +27,7 @@ const toggleWrapperStyles = css`
 		padding-top: ${remSpace[3]};
 	}
 	${from.desktop} {
-		border-top: 1px solid ${neutral[86]};
+		border-top: 1px solid ${palette.neutral[86]};
 	}
 `;
 

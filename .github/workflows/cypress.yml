@@ -1,5 +1,5 @@
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       container-image:
         description: 'Image used by DCR service'
@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [1, 2, 3, 4, 5, 6]
+        group: [1]
     services:
       DCR:
         image: ${{ inputs.container-image }}
@@ -22,18 +22,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
 
-      - run: yarn install --frozen-lockfile
+      # https://github.com/cypress-io/github-action/issues/1044
+      - run: pnpm cypress install
+        working-directory: dotcom-rendering
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           working-directory: dotcom-rendering
-          wait-on: "http://127.0.0.1:9000"
+          wait-on: 'http://127.0.0.1:9000'
           wait-on-timeout: 30
           browser: chrome
           spec: cypress/e2e/parallel-${{ matrix.group }}/*.js

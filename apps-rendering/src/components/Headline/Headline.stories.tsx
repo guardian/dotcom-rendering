@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { some } from '@guardian/types';
+import { some } from '../../../vendor/@guardian/types/index';
 import { analysis, article, feature, labs, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import Headline from './';

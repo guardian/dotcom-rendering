@@ -1,63 +1,34 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { neutral, textSans, until } from '@guardian/source-foundations';
+import { breakpoints, from, textSans } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../client/ga/ga';
+import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
-import type { Palette } from '../types/palette';
-import { Hide } from './Hide';
+import { useConfig } from './ConfigContext';
 
 const brandingStyle = css`
 	padding-bottom: 10px;
 `;
 
-/**
- * for liveblog smaller breakpoints article meta is located in the same
- * container as standfirst and needs the same styling as standfirst
- **/
-function brandingLabelStyle(palette: Palette, format: ArticleFormat) {
-	const invariantStyles = css`
-		${textSans.xxsmall()}
-	`;
+const labelStyle = css`
+	${textSans.xxsmall()}
+	color: ${palette('--branding-label-text')};
 
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			return [
-				invariantStyles,
-				css`
-					color: ${neutral[20]};
-
-					${until.desktop} {
-						color: ${palette.text.standfirst};
-					}
-
-					a {
-						color: ${neutral[20]};
-
-						${until.desktop} {
-							color: ${palette.text.standfirst};
-						}
-					}
-				`,
-			];
-		}
-		default: {
-			return [
-				invariantStyles,
-				css`
-					color: ${neutral[20]};
-
-					a {
-						color: ${neutral[20]};
-					}
-				`,
-			];
-		}
+	a {
+		color: inherit;
 	}
-}
+`;
+
+const liveBlogLabelStyle = css`
+	color: ${palette('--standfirst-text')};
+
+	${from.desktop} {
+		color: ${palette('--branding-label-text')};
+	}
+`;
 
 const brandingLogoStyle = css`
 	padding: 10px 0;
-
 	display: block;
 
 	& img {
@@ -65,100 +36,79 @@ const brandingLogoStyle = css`
 	}
 `;
 
+const aboutLinkStyle = css`
+	${textSans.xxsmall()}
+	display: block;
+	text-decoration: none;
+
+	color: ${palette('--branding-link-text')};
+	a {
+		color: inherit;
+	}
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
 /**
  * for liveblog smaller breakpoints article meta is located in the same
  * container as standfirst and needs the same styling as standfirst
  **/
-const brandingAboutLink = (palette: Palette, format: ArticleFormat) => {
-	const invariantStyles = css`
-		${textSans.xxsmall()}
-		display: block;
-		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
-	`;
+const liveBlogAboutLinkStyle = css`
+	color: ${palette('--standfirst-text')};
 
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			return [
-				invariantStyles,
-				css`
-					color: ${palette.text.branding};
-					${until.desktop} {
-						color: ${palette.text.standfirst};
-					}
-					a {
-						color: ${palette.text.branding};
-						${until.desktop} {
-							color: ${palette.text.standfirst};
-						}
-					}
-				`,
-			];
-		}
-		default: {
-			return [
-				invariantStyles,
-				css`
-					color: ${palette.text.branding};
-					a {
-						color: ${palette.text.branding};
-					}
-				`,
-			];
-		}
+	${from.desktop} {
+		color: ${palette('--branding-link-text')};
 	}
-};
+`;
 
-function decideLogo(branding: BrandingType, format: ArticleFormat) {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			/**
+function decideLogo(
+	branding: BrandingType,
+	format: ArticleFormat,
+	darkModeAvailable: boolean,
+) {
+	/** logoForDarkBackground is not required on branding,
+	 *  so fallback to standard logo if not present */
+	const maybeDarkLogo = branding.logoForDarkBackground ?? branding.logo;
+
+	return (
+		<picture>
+			{/**
 			 * For LiveBlogs, the background colour of the 'meta' section is light
-			 * on desktop but dark on mobile. If the logo has a version designed for
+			 * from desktop but dark below desktop. If the logo has a version designed for
 			 * dark backgrounds, it should be shown on breakpoints below desktop.
-			 */
-			return (
-				<>
-					<Hide when="above" breakpoint="desktop" el="span">
-						<img
-							width={branding.logo.dimensions.width}
-							height={branding.logo.dimensions.height}
-							src={
-								branding.logoForDarkBackground?.src ??
-								branding.logo.src
-							}
-							alt={branding.sponsorName}
-						/>
-					</Hide>
-					<Hide when="below" breakpoint="desktop" el="span">
-						<img
-							width={branding.logo.dimensions.width}
-							height={branding.logo.dimensions.height}
-							src={branding.logo.src}
-							alt={branding.sponsorName}
-						/>
-					</Hide>
-				</>
-			);
-		}
-		default: {
-			return (
-				<img
-					width={branding.logo.dimensions.width}
-					height={branding.logo.dimensions.height}
-					src={branding.logo.src}
-					alt={branding.sponsorName}
+			 */}
+			{format.design === ArticleDesign.LiveBlog && (
+				<source
+					width={maybeDarkLogo.dimensions.width}
+					height={maybeDarkLogo.dimensions.height}
+					srcSet={maybeDarkLogo.src}
+					media={`(max-width: ${breakpoints.desktop - 1}px)`}
 				/>
-			);
-		}
-	}
+			)}
+			{/** High contrast logo if dark mode available & dark mode logo exists for branding */}
+			{darkModeAvailable && branding.logoForDarkBackground && (
+				<source
+					width={branding.logoForDarkBackground.dimensions.width}
+					height={branding.logoForDarkBackground.dimensions.height}
+					srcSet={branding.logoForDarkBackground.src}
+					media={'(prefers-color-scheme: dark)'}
+				/>
+			)}
+			{/** Default to standard logo for light backgrounds */}
+			<img
+				width={branding.logo.dimensions.width}
+				height={branding.logo.dimensions.height}
+				src={branding.logo.src}
+				alt={branding.sponsorName}
+			/>
+		</picture>
+	);
 }
 
 type Props = {
 	branding: BrandingType;
-	palette: Palette;
 	format: ArticleFormat;
 };
 
@@ -173,12 +123,15 @@ type Props = {
  *
  * (No visual story exists)
  */
-export const Branding = ({ branding, palette, format }: Props) => {
+export const Branding = ({ branding, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
+	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
+
+	const { darkModeAvailable } = useConfig();
 
 	return (
 		<div css={brandingStyle}>
-			<div css={brandingLabelStyle(palette, format)}>
+			<div css={[labelStyle, isLiveBlog && liveBlogLabelStyle]}>
 				{branding.logo.label}
 			</div>
 			<div css={brandingLogoStyle}>
@@ -188,15 +141,15 @@ export const Branding = ({ branding, palette, format }: Props) => {
 					rel="nofollow"
 					aria-label={`Visit the ${branding.sponsorName} website`}
 					onClick={() => trackSponsorLogoLinkClick(sponsorId)}
-					data-cy="branding-logo"
+					data-testid="branding-logo"
 				>
-					{decideLogo(branding, format)}
+					{decideLogo(branding, format, darkModeAvailable)}
 				</a>
 			</div>
 
 			<a
 				href={branding.aboutThisLink}
-				css={brandingAboutLink(palette, format)}
+				css={[aboutLinkStyle, isLiveBlog && liveBlogAboutLinkStyle]}
 			>
 				About this content
 			</a>

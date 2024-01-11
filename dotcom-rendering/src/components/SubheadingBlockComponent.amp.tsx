@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial as Special } from '@guardian/libs';
-import { headline, neutral, textSans } from '@guardian/source-foundations';
+import { headline, palette, textSans } from '@guardian/source-foundations';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 
 const style = (pillar: ArticleTheme) => css`
@@ -15,7 +15,7 @@ const style = (pillar: ArticleTheme) => css`
 	a {
 		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 		text-decoration: none;
-		border-bottom: 1px solid ${neutral[86]};
+		border-bottom: 1px solid ${palette.neutral[86]};
 		:hover {
 			border-bottom: 1px solid ${pillarPalette_DO_NOT_USE[pillar].dark};
 		}

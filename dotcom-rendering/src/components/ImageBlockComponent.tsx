@@ -1,5 +1,3 @@
-import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
-import type { Switches } from '../types/config';
 import type { ImageBlockElement } from '../types/content';
 import { ImageComponent } from './ImageComponent';
 
@@ -11,8 +9,7 @@ type Props = {
 	isMainMedia?: boolean;
 	starRating?: number;
 	isAvatar?: boolean;
-	switches?: Switches;
-	imagesForAppsLightbox: ImageForAppsLightbox[];
+	isInLightboxTest: boolean;
 };
 
 export const ImageBlockComponent = ({
@@ -23,8 +20,7 @@ export const ImageBlockComponent = ({
 	isMainMedia,
 	starRating,
 	isAvatar,
-	switches,
-	imagesForAppsLightbox,
+	isInLightboxTest,
 }: Props) => {
 	const { role } = element;
 	return (
@@ -37,8 +33,7 @@ export const ImageBlockComponent = ({
 			role={role}
 			title={title}
 			isAvatar={isAvatar}
-			switches={switches}
-			imagesForAppsLightbox={imagesForAppsLightbox}
+			isInLightboxTest={isInLightboxTest}
 		/>
 	);
 };

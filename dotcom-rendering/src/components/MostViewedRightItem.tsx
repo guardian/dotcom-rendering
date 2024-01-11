@@ -1,7 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { border, headline, neutral, text } from '@guardian/source-foundations';
+import {
+	headline,
+	palette as sourcePalette,
+} from '@guardian/source-foundations';
 import { useHover } from '../lib/useHover';
+import { palette as themePalette } from '../palette';
 import type { TrailType } from '../types/trails';
 import { AgeWarning } from './AgeWarning';
 import { Avatar } from './Avatar';
@@ -20,7 +24,7 @@ const listItemStyles = css`
 	}
 	padding-top: 4px;
 	margin-bottom: 12px;
-	border-top: 1px solid ${border.secondary};
+	border-top: 1px solid ${sourcePalette.neutral[86]};
 
 	&:first-of-type {
 		padding-top: 0;
@@ -35,11 +39,11 @@ const linkTagStyles = css`
 
 	&:link,
 	&:active {
-		color: ${text.anchorSecondary};
+		color: ${themePalette('--article-text')};
 	}
 
 	&:visited h4 {
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 
 	&:hover h4 {

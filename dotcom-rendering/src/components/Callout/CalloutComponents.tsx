@@ -1,11 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	body,
-	brand,
-	neutral,
-	palette,
+	palette as sourcePalette,
 	space,
-	success,
 	textSans,
 } from '@guardian/source-foundations';
 import {
@@ -14,26 +11,22 @@ import {
 	SvgTickRound,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
-import type { Palette } from '../../types/palette';
+import { palette } from '../../palette';
 
-/* stylelint-disable-next-line color-no-hex */
-const linkDecorationColour = '#12121240';
-
-export const calloutLinkStyles = css`
+export const linkStyles = css`
 	a {
-		color: ${brand[500]};
-		text-decoration: none;
-		border-bottom: 1px solid ${linkDecorationColour};
+		color: ${palette('--article-link-text')};
+		text-decoration-color: ${palette('--article-link-border')};
+		text-underline-offset: 0.375em;
+		text-decoration-thickness: 1px;
 	}
 	a:hover,
 	a:active {
-		border-bottom: 1px solid ${brand[500]};
+		text-decoration-color: currentColor;
 	}
 `;
 
-const descriptionStyles = (useBrandColour: boolean) => css`
-	${!useBrandColour && calloutLinkStyles}
+const calloutStyles = css`
 	padding-bottom: ${space[4]}px;
 	${body.medium()}
 
@@ -44,37 +37,24 @@ const descriptionStyles = (useBrandColour: boolean) => css`
 
 export const CalloutDescription = ({
 	description,
-	useBrandColour,
 }: {
 	description: string;
-	useBrandColour: boolean;
 }) => {
-	// this data-ignore attribute ensures correct formatting for links when the callout is collapsible
-	const htmlSplit = description.split('href');
-	const withDataIgnore = htmlSplit.join(
-		'data-ignore="global-link-styling" href',
-	);
 	return (
-		<div css={descriptionStyles(useBrandColour)}>
+		<div css={[linkStyles, calloutStyles]}>
 			<div
 				dangerouslySetInnerHTML={{
-					__html: useBrandColour ? description : withDataIgnore,
+					__html: description,
 				}}
-			></div>
+			/>
 			<div>
 				Please share your story if you are 18 or over, anonymously if
 				you wish. For more information please see our{' '}
-				<a
-					data-ignore={!useBrandColour && 'global-link-styling'}
-					href="https://www.theguardian.com/help/terms-of-service"
-				>
+				<a href="https://www.theguardian.com/help/terms-of-service">
 					terms of service
 				</a>{' '}
 				and{' '}
-				<a
-					data-ignore={!useBrandColour && 'global-link-styling'}
-					href="https://www.theguardian.com/help/privacy-policy"
-				>
+				<a href="https://www.theguardian.com/help/privacy-policy">
 					privacy policy
 				</a>
 				.
@@ -85,8 +65,8 @@ export const CalloutDescription = ({
 
 const expiredStyles = css`
 	${textSans.small()};
-	color: ${palette.brand};
-	background-color: ${palette.brandAlt[400]};
+	color: ${palette('--star-rating-fill')};
+	background-color: ${palette('--star-rating-background')};
 	width: fit-content;
 `;
 
@@ -118,22 +98,9 @@ const shareCalloutTextStyles = css`
 	${textSans.xsmall()}
 `;
 
-const shareCalloutLinkStyles = (
-	useBrandColour: boolean,
-	brandPalette: Palette,
-) => css`
+const shareCalloutLinkStyles = css`
 	${textSans.xsmall()}
-	color: ${useBrandColour ? brandPalette.text.articleLink : brand[500]};
-	border-bottom: 1px solid ${linkDecorationColour};
-	text-decoration: none;
-	transition: none;
-	:hover,
-	:active {
-		border-bottom: 1px solid
-			${useBrandColour
-				? brandPalette.border.articleLinkHover
-				: brand[500]};
-	}
+	color: ${palette('--article-link-text')};
 `;
 
 const sharePopupStyles = css`
@@ -143,8 +110,8 @@ const sharePopupStyles = css`
 	align-items: center;
 	min-width: 180px;
 	transform: translate(100%, 0);
-	background-color: ${neutral[100]};
-	color: ${neutral[7]};
+	background-color: ${sourcePalette.neutral[100]};
+	color: ${sourcePalette.neutral[7]};
 	font-weight: normal;
 	border-radius: ${space[1]}px;
 	z-index: 1;
@@ -152,33 +119,28 @@ const sharePopupStyles = css`
 	box-shadow: 0px 2px ${space[2]}px rgba(0, 0, 0, 0.5);
 
 	> svg {
-		fill: ${success[400]};
+		fill: ${sourcePalette.success[400]};
 	}
 `;
-const shareIconStyles = (useBrandColour: boolean, brandPalette: Palette) => css`
+const shareIconStyles = css`
 	display: inline-flex;
 	margin-right: ${space[2]}px;
 	border-radius: 50%;
-	border: 1px solid
-		${useBrandColour ? brandPalette.text.articleLink : brand[500]};
+	border: 1px solid ${palette('--article-link-border')};
+
 	box-sizing: border-box;
-	fill: ${useBrandColour ? brandPalette.text.articleLink : brand[500]};
-	padding: 0.5px 0;
+	fill: ${palette('--article-link-text')};
+	padding: 0 1px 0 0;
 `;
 
 export const CalloutShare = ({
 	title,
 	urlAnchor,
-	useBrandColour,
-	format,
 }: {
 	title?: string;
 	urlAnchor: string;
-	useBrandColour: boolean;
-	format: ArticleFormat;
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
-	const brandPalette = decidePalette(format);
 
 	const onShare = async () => {
 		const url = window.location.href;
@@ -214,21 +176,21 @@ export const CalloutShare = ({
 	return (
 		<>
 			<div css={shareCalloutStyles}>
-				<span css={shareIconStyles(useBrandColour, brandPalette)}>
+				<span css={shareIconStyles}>
 					<SvgShare size="small" />
 				</span>
 				<div css={shareCalloutTextStyles}>
-					Know others who are affected?{' '}
 					<Button
 						size="xsmall"
 						priority="subdued"
-						onClick={onShare}
-						cssOverrides={shareCalloutLinkStyles(
-							useBrandColour,
-							brandPalette,
-						)}
+						onClick={() => {
+							onShare().catch(() => {
+								// do nothing
+							});
+						}}
+						cssOverrides={shareCalloutLinkStyles}
 					>
-						Please share this callout.
+						Share this callout
 					</Button>
 					{isCopied && (
 						<span css={sharePopupStyles} role="alert">
@@ -243,13 +205,12 @@ export const CalloutShare = ({
 };
 
 const termsAndConditionsStyles = css`
-	${calloutLinkStyles}
 	${textSans.small()}
 	padding-bottom: ${space[4]}px;
 `;
 
 export const CalloutTermsAndConditions = () => (
-	<div css={termsAndConditionsStyles}>
+	<div css={[linkStyles, termsAndConditionsStyles]}>
 		Your responses, which can be anonymous, are secure as the form is
 		encrypted and only the Guardian has access to your contributions. We
 		will only use the data you provide us for the purpose of the feature and

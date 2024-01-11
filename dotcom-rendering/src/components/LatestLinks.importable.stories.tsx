@@ -4,12 +4,16 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints, palette } from '@guardian/source-foundations';
 import fetchMock from 'fetch-mock';
 import type { PropsWithChildren } from 'react';
-import { useEffect } from 'react';
-import { doStorybookHydration } from '../client/islands/doStorybookHydration';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
+import { ContainerOverrides } from './ContainerOverrides';
 import { Island } from './Island';
 import { LatestLinks } from './LatestLinks.importable';
+
+interface StoryArgs {
+	theme: string;
+}
 
 export default {
 	component: LatestLinks,
@@ -32,8 +36,6 @@ const Wrapper = ({
 	children,
 	styles,
 }: PropsWithChildren<{ styles: SerializedStyles }>) => {
-	useEffect(doStorybookHydration);
-
 	fetchMock
 		.restore()
 		.get(
@@ -148,11 +150,6 @@ const Wrapper = ({
 };
 
 export const WorldCupFinal2023 = () => {
-	const format = {
-		theme: Pillar.Sport,
-		design: ArticleDesign.LiveBlog,
-		display: ArticleDisplay.Standard,
-	};
 	const containerPalette = 'EventAltPalette' satisfies DCRContainerPalette;
 	const overrides = decideContainerOverrides(containerPalette);
 	return (
@@ -162,40 +159,65 @@ export const WorldCupFinal2023 = () => {
 				background-color: ${overrides.background.container};
 			`}
 		>
-			<Island priority="critical">
-				<LatestLinks
-					id="/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live"
-					format={format}
-					direction="horizontal"
-					containerPalette={containerPalette}
-					isDynamo={true}
-				/>
-			</Island>
+			<ContainerOverrides
+				containerPalette={containerPalette}
+				isDynamo={true}
+			>
+				<Island priority="critical">
+					<LatestLinks
+						id="/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live"
+						direction="horizontal"
+						containerPalette={containerPalette}
+						isDynamo={true}
+					/>
+				</Island>
+			</ContainerOverrides>
 		</Wrapper>
 	);
 };
+WorldCupFinal2023.storyName = 'World Cup Final 2023';
+WorldCupFinal2023.decorators = [
+	splitTheme(
+		[
+			{
+				theme: Pillar.Sport,
+				design: ArticleDesign.LiveBlog,
+				display: ArticleDisplay.Standard,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];
 
-export const LondonPride2022 = () => {
-	const format = {
-		theme: Pillar.News,
-		design: ArticleDesign.LiveBlog,
-		display: ArticleDisplay.Standard,
-	};
-
+export const LondonPride2022 = ({ theme }: StoryArgs) => {
 	return (
 		<Wrapper
 			styles={css`
 				max-width: 600px;
-				background-color: ${palette.news[300]};
+				background-color: ${theme === 'light'
+					? palette.news[300]
+					: 'inherit'};
 			`}
 		>
 			<Island priority="critical">
 				<LatestLinks
 					id="/world/live/2022/jul/02/pride-in-london-2022-huge-turnout-expected-at-first-march-since-pandemic-live-updates"
-					format={format}
 					direction="horizontal"
 				/>
 			</Island>
 		</Wrapper>
 	);
 };
+LondonPride2022.storyName = 'London Pride 2022';
+LondonPride2022.decorators = [
+	splitTheme(
+		[
+			{
+				theme: Pillar.News,
+				design: ArticleDesign.LiveBlog,
+				display: ArticleDisplay.Standard,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];

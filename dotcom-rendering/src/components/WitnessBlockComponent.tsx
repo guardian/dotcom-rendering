@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { body, headline, neutral, space } from '@guardian/source-foundations';
+import { body, headline, palette, space } from '@guardian/source-foundations';
+import { palette as themePalette } from '../palette';
 import type { WitnessAssetType } from '../types/content';
-import type { Palette } from '../types/palette';
 
 // Wrapper Styles
 const wrapperStyles = css`
 	border-width: 1px;
-	border-color: ${neutral[86]};
+	border-color: ${palette.neutral[86]};
 	border-style: solid;
 `;
 
@@ -24,19 +24,19 @@ const witnessIconWrapperStyles = css`
 	padding-bottom: ${space[2]}px;
 `;
 
-const witnessIconStyles = (palette: Palette) => css`
+const witnessIconStyles = css`
 	padding-left: ${space[1]}px;
 
-	color: ${palette.text.witnessIcon};
+	color: ${themePalette('--witness-title-icon')};
 	${body.small({ fontWeight: 'bold' })}
 `;
 
 const witnessDetailsWrapperStyles = css`
 	border-width: 1px;
-	border-color: ${neutral[86]};
+	border-color: ${palette.neutral[86]};
 	border-style: solid;
 
-	background-color: ${neutral[97]};
+	background-color: ${palette.neutral[97]};
 `;
 
 // Non Wrapper Styles
@@ -44,9 +44,9 @@ const captionStyles = css`
 	margin-top: ${space[3]}px;
 `;
 
-const titleStyles = (palette: Palette) => css`
+const titleStyles = css`
 	margin-bottom: ${space[2]}px;
-	color: ${palette.text.witnessTitle};
+	color: ${themePalette('--witness-title-text')};
 	${headline.xxxsmall()}
 `;
 
@@ -57,23 +57,21 @@ const witnessDetailsSpacingStyles = css`
 	padding-bottom: ${space[3]}px;
 `;
 
-const authorNameStyles = (palette: Palette) => css`
+const authorNameStyles = css`
 	padding-left: 5px;
-	color: ${palette.text.witnessAuthor};
+	color: ${themePalette('--witness-title-author')};
 	${body.small({ fontWeight: 'bold' })}
 `;
 
 type WrapperProps = {
 	authorName: string;
 	dateCreated: string;
-	palette: Palette;
 	children: React.ReactNode;
 };
 
 const WitnessWrapper = ({
 	authorName,
 	dateCreated,
-	palette,
 	children,
 }: WrapperProps) => {
 	return (
@@ -82,11 +80,11 @@ const WitnessWrapper = ({
 			<footer>
 				<p css={witnessIconWrapperStyles}>
 					Sent via
-					<span css={witnessIconStyles(palette)}>
+					<span css={witnessIconStyles}>
 						guardian
 						<span
 							css={css`
-								color: ${neutral[46]};
+								color: ${palette.neutral[46]};
 							`}
 						>
 							witness
@@ -102,7 +100,7 @@ const WitnessWrapper = ({
 						>
 							By
 							<span
-								css={authorNameStyles(palette)}
+								css={authorNameStyles}
 								itemProp="author"
 								itemType="http://schema.org/Person"
 							>
@@ -132,7 +130,6 @@ type ImageProps = {
 	authorName: string;
 	dateCreated: string;
 	alt: string;
-	palette: Palette;
 };
 
 export const WitnessImageBlockComponent = ({
@@ -142,7 +139,6 @@ export const WitnessImageBlockComponent = ({
 	authorName,
 	dateCreated,
 	alt,
-	palette,
 }: ImageProps) => {
 	// witness images seem to always use `mediumoriginalaspectdouble`, but in case that isn't found we use the 1st
 	// asset in the list
@@ -151,11 +147,7 @@ export const WitnessImageBlockComponent = ({
 			(asset) => asset.typeData?.name === 'mediumoriginalaspectdouble',
 		) ?? assets[0];
 	return (
-		<WitnessWrapper
-			authorName={authorName}
-			dateCreated={dateCreated}
-			palette={palette}
-		>
+		<WitnessWrapper authorName={authorName} dateCreated={dateCreated}>
 			<>
 				<img
 					css={css`
@@ -167,7 +159,7 @@ export const WitnessImageBlockComponent = ({
 				/>
 				<figcaption css={captionStyles}>
 					<h3
-						css={titleStyles(palette)}
+						css={titleStyles}
 						itemProp="name"
 						dangerouslySetInnerHTML={{ __html: title }}
 					/>
@@ -192,7 +184,6 @@ type TextProps = {
 	authorName: string;
 	dateCreated: string;
 	description: string;
-	palette: Palette;
 };
 
 export const WitnessTextBlockComponent = ({
@@ -200,16 +191,11 @@ export const WitnessTextBlockComponent = ({
 	authorName,
 	dateCreated,
 	description,
-	palette,
 }: TextProps) => (
-	<WitnessWrapper
-		authorName={authorName}
-		dateCreated={dateCreated}
-		palette={palette}
-	>
+	<WitnessWrapper authorName={authorName} dateCreated={dateCreated}>
 		<>
 			<h3
-				css={titleStyles(palette)}
+				css={titleStyles}
 				itemProp="name"
 				dangerouslySetInnerHTML={{ __html: title }}
 			/>
@@ -231,7 +217,6 @@ type VideoProps = {
 	authorName: string;
 	youtubeHtml: string;
 	dateCreated: string;
-	palette: Palette;
 };
 
 export const WitnessVideoBlockComponent = ({
@@ -240,13 +225,8 @@ export const WitnessVideoBlockComponent = ({
 	authorName,
 	youtubeHtml,
 	dateCreated,
-	palette,
 }: VideoProps) => (
-	<WitnessWrapper
-		authorName={authorName}
-		dateCreated={dateCreated}
-		palette={palette}
-	>
+	<WitnessWrapper authorName={authorName} dateCreated={dateCreated}>
 		<>
 			<div
 				css={css`
@@ -258,7 +238,7 @@ export const WitnessVideoBlockComponent = ({
 			/>
 			<figcaption css={captionStyles}>
 				<h3
-					css={titleStyles(palette)}
+					css={titleStyles}
 					itemProp="name"
 					dangerouslySetInnerHTML={{ __html: title }}
 				/>

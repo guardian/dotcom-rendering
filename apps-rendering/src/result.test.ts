@@ -19,22 +19,24 @@ describe('either', () => {
 	});
 
 	it('runs the correct function when Result is Err', () => {
-		expect(
-			mockErr.either<string | number>(onError, onOk),
-		).toBe('Output: message');
+		expect(mockErr.either<string | number>(onError, onOk)).toBe(
+			'Output: message',
+		);
 	});
 });
 
 describe('map', () => {
 	it('runs the function when Result is Ok', () => {
-		expect(mockOk.map(onOk).either<string | number>(identity, identity)).toBe(6);
+		expect(
+			mockOk.map(onOk).either<string | number>(identity, identity),
+		).toBe(6);
 	});
 
 	it('passes the error through when Result is Err', () => {
 		expect(
 			mockErr
-			.map((a: number) => `Output: ${a}`)
-			.either(identity, identity),
+				.map((a: number) => `Output: ${a}`)
+				.either(identity, identity),
 		).toBe('message');
 	});
 });
@@ -44,9 +46,7 @@ describe('flatMap', () => {
 		const f = (a: number): Result<string, number> => Result.ok(a + 2);
 
 		expect(
-			mockOk
-			.flatMap(f)
-			.either<string | number>(identity, identity),
+			mockOk.flatMap(f).either<string | number>(identity, identity),
 		).toBe(6);
 	});
 
@@ -54,9 +54,7 @@ describe('flatMap', () => {
 		const f = (a: number): Result<string, number> => Result.ok(a + 2);
 
 		expect(
-			mockErr
-			.flatMap(f)
-			.either<string | number>(identity, identity),
+			mockErr.flatMap(f).either<string | number>(identity, identity),
 		).toBe('message');
 	});
 
@@ -64,9 +62,7 @@ describe('flatMap', () => {
 		const f = (): Result<string, number> => Result.err('message');
 
 		expect(
-			mockOk
-			.flatMap(f)
-			.either<string | number>(identity, identity),
+			mockOk.flatMap(f).either<string | number>(identity, identity),
 		).toBe('message');
 	});
 
@@ -74,9 +70,7 @@ describe('flatMap', () => {
 		const f = (): Result<string, number> => Result.err('secondMessage');
 
 		expect(
-			mockErr
-			.flatMap(f)
-			.either<string | number>(identity, identity),
+			mockErr.flatMap(f).either<string | number>(identity, identity),
 		).toBe('message');
 	});
 });
@@ -85,14 +79,16 @@ describe('mapError', () => {
 	it('passes through the result when Result is Ok', () => {
 		expect(
 			mockOk
-			.mapError(onError)
-			.either<string | number>(identity, identity),
+				.mapError(onError)
+				.either<string | number>(identity, identity),
 		).toBe(4);
 	});
 
 	it('runs the function when Result is Err', () => {
 		expect(
-			mockErr.mapError(onError).either<string | number>(identity, identity),
+			mockErr
+				.mapError(onError)
+				.either<string | number>(identity, identity),
 		).toBe('Output: message');
 	});
 });

@@ -10,6 +10,13 @@ jobs:
   chromatic:
     name: Chromatic
     runs-on: ubuntu-latest
+    # Run Chromatic only if `run_chromatic` label has been applied or we're
+    # pushing to `main`. Skip if this is a Dependabot PR as this is handled
+    # by the subsequent job.
+    if: |
+      (contains(github.event.pull_request.labels.*.name, 'run_chromatic')  ||  github.ref == 'refs/heads/main') &&
+      (!contains(github.event.pull_request.labels.*.name, 'dependencies') &&
+      github.event.pull_request.user.login != 'dependabot')
     steps:
       - name: Checkout - On Pull Request
         uses: actions/checkout@v4
@@ -26,23 +33,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
-
-      # Root yarn installs all workspaces (root, dotcom)
-      - run: yarn install --frozen-lockfile
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
 
       - name: Chromatic - DCR
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'
         uses: chromaui/action@v1
-        # Run Chromatic only if `run_chromatic` label has been applied or we're
-        # pushing to `main`.
-        if: (contains(github.event.pull_request.labels.*.name, 'run_chromatic')  ||  github.ref == 'refs/heads/main')
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
           onlyChanged: true
-          untraced: '**/(package*.json|yarn.lock|preview.js)'
+          untraced: '**/(package*.json|pnpm-lock.yaml|preview.js)'
           workingDir: dotcom-rendering
+          buildScriptName: 'build-storybook'

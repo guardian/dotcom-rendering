@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
-import { none, some } from '@guardian/types';
+import { none, some } from '../vendor/@guardian/types/index';
 import type { Body, BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import type { DeadBlog, Quiz, Standard } from 'item';
@@ -30,28 +30,22 @@ const makeTextElementNode = (html: string, outerTag = 'p'): Node => {
 	return doc.firstChild!;
 };
 
-const makeParagraph = (html: string): BodyElement =>
-	({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode(html),
-	});
+const makeParagraph = (html: string): BodyElement => ({
+	kind: ElementKind.Text,
+	doc: makeTextElementNode(html),
+});
 
-const makeHeading = (
-	html: string,
-	id: string,
-): BodyElement =>
-	({
-		kind: ElementKind.HeadingTwo,
-		id: Optional.some(id),
-		doc: makeTextElementNode(html, 'h2'),
-	});
+const makeHeading = (html: string, id: string): BodyElement => ({
+	kind: ElementKind.HeadingTwo,
+	id: Optional.some(id),
+	doc: makeTextElementNode(html, 'h2'),
+});
 
-const makePullquote = (): BodyElement =>
-	({
-		kind: ElementKind.Pullquote,
-		quote: 'Why should the crown be allowed to carry on with a feudal system just because they want to?',
-		attribution: { kind: 0, value: 'Jane Giddins' },
-	});
+const makePullquote = (): BodyElement => ({
+	kind: ElementKind.Pullquote,
+	quote: 'Why should the crown be allowed to carry on with a feudal system just because they want to?',
+	attribution: { kind: 0, value: 'Jane Giddins' },
+});
 
 const makeBodyWithPlaceToInsert = (): Body => [
 	makeParagraph('Introductory paragraph.'),

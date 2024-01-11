@@ -5,8 +5,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, remSpace, textSans } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { map, withDefault } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
 import { border, fill, text } from 'palette';
 import type { FC } from 'react';
@@ -24,7 +24,9 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	border: none;
 	background: none;
 	border-left: 1px solid ${border.commentCount(format)};
+	margin-top: ${remSpace[4]};
 	padding-top: ${remSpace[3]};
+	margin-bottom: 0;
 	color: ${text.commentCount(format)};
 	${darkModeCss`
 		color: ${text.commentCountDark(format)};

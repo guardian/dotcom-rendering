@@ -1,1 +1,15 @@
-*			@guardian/dotcom-platform
+# This file is matched from top down; subsequent matches override previous matches.
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# By default all files are owned by these teams:
+* 												@guardian/dotcom-platform @guardian/client-side-infra
+
+# These folders and all their contents are owned by the following teams.
+/dotcom-rendering/ 								@guardian/dotcom-platform
+/apps-rendering/ 								@guardian/dotcom-platform
+/dotcom-rendering/src/components/marketing/ 	@guardian/tx-engineers
+/dotcom-rendering/src/client/userFeatures/ 		@guardian/supporter-revenue-stream
+
+# These file types, wherever they are, are co-owned by the following teams.
+package.json 									@guardian/dotcom-platform @guardian/client-side-infra
+tsconfig.json 									@guardian/dotcom-platform @guardian/client-side-infra

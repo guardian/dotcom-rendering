@@ -1,7 +1,7 @@
 import { css, Global } from '@emotion/react';
 import {
 	from,
-	neutral,
+	palette,
 	space,
 	textSans,
 	until,
@@ -22,7 +22,7 @@ type Props = {
 const lightboxStyles = css`
 	width: 100%;
 	height: 100%;
-	background-color: ${neutral[10]};
+	background-color: ${palette.neutral[10]};
 
 	&.hide-info {
 		/* Always hide the info aside when the hide-info class exists on the lightbox element */
@@ -38,7 +38,7 @@ const lightboxStyles = css`
 	}
 
 	button.active {
-		background-color: ${neutral[46]};
+		background-color: ${palette.neutral[46]};
 	}
 
 	button.reveal {
@@ -72,12 +72,12 @@ const navStyles = css`
 	}
 	color: white;
 	${until.tablet} {
-		border-bottom: 1px solid ${neutral[20]};
+		border-bottom: 1px solid ${palette.neutral[20]};
 	}
 	${from.tablet} {
-		border-left: 1px solid ${neutral[20]};
+		border-left: 1px solid ${palette.neutral[20]};
 	}
-	background-color: ${neutral[7]};
+	background-color: ${palette.neutral[7]};
 `;
 
 const ulStyles = css`
@@ -107,7 +107,7 @@ const ulStyles = css`
 
 const buttonStyles = css`
 	svg {
-		fill: ${neutral[100]};
+		fill: ${palette.neutral[100]};
 		margin-top: 3px;
 	}
 	margin-top: ${space[2]}px;
@@ -121,9 +121,9 @@ const buttonStyles = css`
 	border: none;
 	cursor: pointer;
 	transition: background-color 0.2s;
-	background-color: ${neutral[20]};
+	background-color: ${palette.neutral[20]};
 	:hover {
-		background-color: ${neutral[46]};
+		background-color: ${palette.neutral[46]};
 	}
 `;
 
@@ -166,7 +166,7 @@ const SvgInfo = () => (
 		viewBox="0 0 9 24"
 	>
 		<path
-			fill={neutral[100]}
+			fill={palette.neutral[100]}
 			d="M.3 22L3.9 9.1H1.3l.4-1.4 5.6-.9.3.3-4.4 14.8H6L5.6 23c-.9.4-2.8.9-4.1.9-1.1 0-1.7-.5-1.2-1.9zM5.5 2C5.5.9 6.4.1 7.3.1c1 0 1.6.7 1.6 1.5 0 1.1-.9 1.9-1.8 1.9-1 .1-1.6-.6-1.6-1.5z"
 		/>
 	</svg>
@@ -189,13 +189,13 @@ const Selection = ({
 					margin-bottom: ${space[1]}px;
 				}
 				${textSans.xsmall()};
-				color: ${neutral[86]};
+				color: ${palette.neutral[86]};
 				${until.tablet} {
 					margin-bottom: ${space[2]}px;
 				}
 			`}
 			aria-hidden="true"
-			data-cy="lightbox-selected"
+			data-testid="lightbox-selected"
 		>
 			<span className="selected">{initialPosition}</span>
 			<span
@@ -208,7 +208,7 @@ const Selection = ({
 			</span>
 			<span
 				css={css`
-					color: ${neutral[97]};
+					color: ${palette.neutral[97]};
 				`}
 			>
 				{countOfImages}
@@ -230,7 +230,7 @@ export const LightboxLayout = ({ imageCount }: Props) => {
 
 						body {
 							/* This ensures the menu and sidebars on iPhones have the same background as lightbox */
-							background-color: ${neutral[10]};
+							background-color: ${palette.neutral[10]};
 						}
 					}
 				`}

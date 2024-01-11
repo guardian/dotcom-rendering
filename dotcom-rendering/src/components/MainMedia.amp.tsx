@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import {
-	neutral,
+	palette,
 	textSans,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -25,7 +25,7 @@ const captionStyle = css`
 	right: 0;
 	bottom: 0;
 	background: rgba(18, 18, 18, 0.8);
-	color: ${neutral[100]};
+	color: ${palette.neutral[100]};
 	display: none;
 	padding: 6px 40px 12px 10px;
 	max-width: 100%;
@@ -61,7 +61,7 @@ const labelStyle = css`
 		left: 0;
 		margin: auto;
 		position: absolute;
-		fill: ${neutral[100]};
+		fill: ${palette.neutral[100]};
 	}
 `;
 

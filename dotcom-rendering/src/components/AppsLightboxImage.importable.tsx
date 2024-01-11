@@ -1,27 +1,23 @@
 import { css } from '@emotion/react';
-import { Image } from '@guardian/bridget/Image';
-import { getGalleryClient } from '../lib/bridgetApi';
-import { generateImageURL } from '../lib/image';
-import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { type RoleType } from '../types/content';
+import { openLightboxForImageId } from './AppsLightboxImageStore.importable';
+import type { Loading } from './CardPicture';
 import { Picture } from './Picture';
 
 type Props = {
-	images: ImageForAppsLightbox[];
-	currentIndex: number;
+	elementId: string;
 	role: RoleType;
 	format: ArticleFormat;
 	master: string;
 	alt: string;
 	height: number;
 	width: number;
+	loading: Loading;
 	isMainMedia?: boolean;
-	isLazy?: boolean;
 };
 
 export const AppsLightboxImage = ({
-	images,
-	currentIndex,
+	elementId,
 	role,
 	format,
 	master,
@@ -29,35 +25,8 @@ export const AppsLightboxImage = ({
 	height,
 	width,
 	isMainMedia = false,
-	isLazy = true,
+	loading = 'lazy',
 }: Props) => {
-	const hasLightbox = currentIndex !== -1;
-	const onClick = () => {
-		// Handle the case the device is rotated
-		const imageWidth = Math.max(window.innerHeight, window.innerWidth);
-		const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
-		void getGalleryClient()
-			.launchSlideshow(
-				images.map(
-					(image) =>
-						new Image({
-							width: image.width,
-							height: image.height,
-							url: generateImageURL({
-								mainImage: image.masterUrl,
-								imageWidth,
-								resolution,
-							}),
-							caption: image.caption,
-							credit: image.credit,
-						}),
-				),
-				currentIndex,
-				document.title,
-			)
-			// we don't need to handle this error
-			.catch(() => undefined);
-	};
 	const picture = (
 		<Picture
 			role={role}
@@ -66,13 +35,13 @@ export const AppsLightboxImage = ({
 			alt={alt}
 			width={width}
 			height={height}
-			isLazy={isLazy}
+			loading={loading}
 			isMainMedia={isMainMedia}
 		/>
 	);
-	return hasLightbox ? (
+	return (
 		<button
-			onClick={onClick}
+			onClick={() => openLightboxForImageId(elementId)}
 			type="button"
 			css={css`
 				border: none;
@@ -84,7 +53,5 @@ export const AppsLightboxImage = ({
 		>
 			{picture}
 		</button>
-	) : (
-		picture
 	);
 };

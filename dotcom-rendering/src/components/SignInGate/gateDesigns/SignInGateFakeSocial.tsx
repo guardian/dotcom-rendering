@@ -296,7 +296,7 @@ export const SignInGateFakeSocial = ({
 	const { renderingTarget } = useConfig();
 
 	return (
-		<div css={signInGateContainer} data-cy="sign-in-gate-fake-social">
+		<div css={signInGateContainer} data-testid="sign-in-gate-fake-social">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
 			<h1 css={[heading, bodyPadding]}>
@@ -314,7 +314,7 @@ export const SignInGateFakeSocial = ({
 			<p css={[bodyText, bodyPadding]}>
 				You’ll always be able to control your own&nbsp;
 				<button
-					data-cy="sign-in-gate-fake-social_privacy"
+					data-testid="sign-in-gate-fake-social_privacy"
 					css={privacyLink}
 					onClick={() => {
 						cmp.showPrivacyManager();
@@ -332,7 +332,7 @@ export const SignInGateFakeSocial = ({
 			</p>
 			<div css={[actionButtons, buttonMargin, bodyPadding]}>
 				<LinkButton
-					data-cy="sign-in-gate-fake-social_register"
+					data-testid="sign-in-gate-fake-social_register"
 					data-ignore="global-link-styling"
 					css={registerButton}
 					priority="primary"
@@ -351,7 +351,7 @@ export const SignInGateFakeSocial = ({
 				</LinkButton>
 
 				<Button
-					data-cy="sign-in-gate-fake-social_dismiss"
+					data-testid="sign-in-gate-fake-social_dismiss"
 					data-ignore="global-link-styling"
 					css={laterButton}
 					priority="subdued"
@@ -373,7 +373,7 @@ export const SignInGateFakeSocial = ({
 			<p css={[bodySeparator, bodyBold, signInHeader, bodyPadding]}>
 				Already registered?{' '}
 				<Link
-					data-cy="sign-in-gate-fake-social_signin"
+					data-testid="sign-in-gate-fake-social_signin"
 					data-ignore="global-link-styling"
 					css={[signInLink, inlineLink, fakeSocialSignInLink]}
 					href={signInUrl}
@@ -402,7 +402,7 @@ export const SignInGateFakeSocial = ({
 			>
 				<span css={[hideMobile, socialBoxText]}>Or continue with</span>
 				<LinkButton
-					data-cy="sign-in-gate-fake-social_facebook"
+					data-testid="sign-in-gate-fake-social_facebook"
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
@@ -422,7 +422,7 @@ export const SignInGateFakeSocial = ({
 					Facebook
 				</LinkButton>
 				<LinkButton
-					data-cy="sign-in-gate-fake-social_google"
+					data-testid="sign-in-gate-fake-social_google"
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
@@ -442,7 +442,7 @@ export const SignInGateFakeSocial = ({
 					Google
 				</LinkButton>
 				<LinkButton
-					data-cy="sign-in-gate-fake-social_apple"
+					data-testid="sign-in-gate-fake-social_apple"
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"

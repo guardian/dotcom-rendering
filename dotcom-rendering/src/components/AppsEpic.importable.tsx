@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { getAcquisitionsClient, getUserClient } from '../lib/bridgetApi';
+import { palette as themePalette } from '../palette';
 import { EpicContent } from './EpicContent.apps';
 
 export const AppsEpic = () => {
@@ -28,7 +29,7 @@ export const AppsEpic = () => {
 		void getAcquisitionsClient()
 			.getEpics()
 			.then((maybeEpic) => {
-				setEpic(maybeEpic?.epic);
+				setEpic(maybeEpic.epic);
 			})
 			.catch(() => undefined);
 	}, []);
@@ -56,8 +57,8 @@ const epicStyles: SerializedStyles = css`
 			margin: ${remSpace[3]} 0;
 		}
 
-		border-top: 1px solid ${palette.brandAlt[400]};
-		background: ${palette.neutral[97]};
+		border-top: 1px solid ${themePalette('--apps-epic-border')};
+		background: ${themePalette('--apps-epic-background')};
 		padding: ${remSpace[3]};
 		${bodySizes.medium()}
 		clear: left;

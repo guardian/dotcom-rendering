@@ -187,6 +187,7 @@ const PinnedPost: FC<Props> = ({ pinnedPost, format, edition }: Props) => {
 				/>
 			</div>
 			<div id="pinned-post-overlay" css={overlayStyles} />
+
 			<label
 				css={fakeButtonStyles(format)}
 				htmlFor="pinned-post-checkbox"

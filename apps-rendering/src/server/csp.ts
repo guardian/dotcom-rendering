@@ -2,7 +2,7 @@
 
 import { createHash } from 'crypto';
 import { ArticleDesign } from '@guardian/libs';
-import { map, withDefault } from '@guardian/types';
+import { map, withDefault } from '../../vendor/@guardian/types/index';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import type { ThirdPartyEmbeds } from 'capi';
@@ -102,7 +102,7 @@ const buildCsp = (
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
 	};
-    frame-src https://www.theguardian.com https://www.scribd.com https://www.google.com https://webstories.theguardian.com https://www.linkedin.com https://datawrapper.dwcdn.net ${
+    frame-src https://www.theguardian.com https://www.scribd.com https://www.google.com https://webstories.theguardian.com https://www.linkedin.com https://datawrapper.dwcdn.net https://apps.enformant.com ${
 		thirdPartyEmbed.instagram ? 'https://www.instagram.com' : ''
 	} https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk ${
 		thirdPartyEmbed.spotify ? 'https://open.spotify.com' : ''

@@ -5,12 +5,9 @@ import { decideTrail } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
-import type {
-	FETrailTabType,
-	FETrailType,
-	TrailTabType,
-} from '../types/trails';
+import type { FETrailTabType, TrailTabType } from '../types/trails';
 import { MostViewedFooter } from './MostViewedFooter.importable';
+import { Placeholder } from './Placeholder';
 
 interface Props {
 	sectionId?: string;
@@ -51,8 +48,6 @@ function transformTabs(tabs: FETrailTabType[]): TrailTabType[] {
 
 interface MostViewedFooterPayloadType {
 	tabs: FETrailTabType[];
-	mostCommented: FETrailType;
-	mostShared: FETrailType;
 }
 
 export const MostViewedFooterData = ({
@@ -90,16 +85,6 @@ export const MostViewedFooterData = ({
 		return (
 			<MostViewedFooter
 				tabs={transformTabs(tabs)}
-				mostCommented={
-					'mostCommented' in data
-						? decideTrail(data.mostCommented)
-						: undefined
-				}
-				mostShared={
-					'mostShared' in data
-						? decideTrail(data.mostShared)
-						: undefined
-				}
 				abTestCypressDataAttr={abTestCypressDataAttr}
 				variantFromRunnable={variantFromRunnable}
 				sectionId={sectionId}
@@ -108,5 +93,5 @@ export const MostViewedFooterData = ({
 		);
 	}
 
-	return null;
+	return <Placeholder height={360} />;
 };

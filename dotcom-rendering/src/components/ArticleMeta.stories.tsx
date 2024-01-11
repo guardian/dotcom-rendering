@@ -1,13 +1,15 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
-import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
-import { getAllThemes, getThemeNameAsString } from '../lib/format';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { breakpoints, from } from '@guardian/source-foundations';
+import type { StoryObj } from '@storybook/react';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { browserThemeDecorator } from '../../.storybook/decorators/themeDecorator';
+import { getAllThemes } from '../lib/format';
+import { palette } from '../palette';
+import type { Branding as BrandingType } from '../types/branding';
 import { ArticleMeta } from './ArticleMeta';
+
+type StoryArgs = { format: ArticleFormat };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -66,40 +68,17 @@ export default {
 	title: 'Components/ArticleMeta',
 };
 
-export const ArticleStory = () => {
-	return (
-		<Wrapper>
-			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
-				pageId=""
-				webTitle=""
-				byline="Lanre Bakare"
-				tags={tagsWithLargeBylineImage}
-				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
-				isCommentable={false}
-				discussionApiUrl=""
-				shortUrlId=""
-				ajaxUrl=""
-			/>
-		</Wrapper>
-	);
-};
-
-const appsFormat = {
+const defaultFormat: ArticleFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
 	theme: Pillar.News,
 };
-export const ArticleAppsStory = () => {
+
+export const Web: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={appsFormat}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -114,36 +93,40 @@ export const ArticleAppsStory = () => {
 		</Wrapper>
 	);
 };
-/** @see /dotcom-rendering/docs/development/storybook.md */
-ArticleAppsStory.args = { config: { renderingTarget: 'Apps' } };
-ArticleAppsStory.decorators = [lightDecorator(appsFormat)];
+Web.parameters = { config: { renderingTarget: 'Web' } };
+Web.decorators = [splitTheme()];
 
-export const BrandingStory = () => {
+const branding: BrandingType = {
+	brandingType: { name: 'sponsored' },
+	sponsorName: 'theguardian.org',
+	logo: {
+		src: 'https://static.theguardian.com/commercial/sponsor/19/Dec/2022/57ba1d00-b2bd-4f6d-ba35-15a82b8d9507-0094b90a-bdb8-4e97-b866-dcf49179b29d-theguardian.org.png',
+		dimensions: {
+			width: 280,
+			height: 180,
+		},
+		link: 'https://theguardian.org/',
+		label: 'Supported by',
+	},
+	logoForDarkBackground: {
+		src: 'https://static.theguardian.com/commercial/sponsor/19/Dec/2022/58a1e08d-cd4a-47a5-966a-4846b0461642-46629471-cb0b-4c59-9a06-1ef23778b41f-theguardian.org2.png',
+		dimensions: {
+			width: 280,
+			height: 180,
+		},
+		link: 'https://theguardian.org/',
+		label: 'Supported by',
+	},
+	aboutThisLink:
+		'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
+};
+
+export const Branding: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				branding={{
-					sponsorName: 'Humanity United',
-					logo: {
-						src: 'https://static.theguardian.com/commercial/sponsor/14/May/2018/533d381b-ac99-4e10-83be-8b64a1da9710-hu.png',
-						dimensions: { width: 140, height: 90 },
-						link: 'http://www.humanityunited.org/ ',
-						label: 'Supported by',
-					},
-					logoForDarkBackground: {
-						src: 'https://static.theguardian.com/commercial/sponsor/14/May/2018/4192d462-d794-4f07-a43c-6b546f4dcd93-hu-white.png',
-						dimensions: { width: 140, height: 39 },
-						link: 'http://www.humanityunited.org/ ',
-						label: 'Supported by',
-					},
-					aboutThisLink:
-						'https://www.theguardian.com/info/2016/jan/25/content-funding',
-				}}
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				branding={branding}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -158,50 +141,66 @@ export const BrandingStory = () => {
 		</Wrapper>
 	);
 };
+Branding.args = { format: defaultFormat };
+Branding.parameters = { config: { darkModeAvailable: true } };
+Branding.decorators = [browserThemeDecorator(defaultFormat)];
 
-ArticleStory.storyName = 'Article';
-
-export const FeatureStory = () => {
+export const BrandingLiveBlog: StoryObj = ({ format }: StoryArgs) => {
 	return (
-		<Wrapper>
-			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: Pillar.Culture,
-				}}
-				pageId=""
-				webTitle=""
-				byline="Lanre Bakare"
-				tags={tagsWithLargeBylineImage}
-				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
-				isCommentable={false}
-				discussionApiUrl=""
-				shortUrlId=""
-				ajaxUrl=""
-			/>
-		</Wrapper>
+		<div
+			// Demonstrates niche requirement of liveblog article meta
+			// on screens below desktop size
+			css={css`
+				background-color: ${palette('--standfirst-background')};
+
+				${from.desktop} {
+					background-color: inherit;
+				}
+			`}
+		>
+			<Wrapper>
+				<ArticleMeta
+					branding={branding}
+					format={format}
+					pageId=""
+					webTitle=""
+					byline="Lanre Bakare"
+					tags={tagsWithLargeBylineImage}
+					primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+					secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+					isCommentable={false}
+					discussionApiUrl=""
+					shortUrlId=""
+					ajaxUrl=""
+				/>
+			</Wrapper>
+		</div>
 	);
 };
-FeatureStory.storyName = 'Feature';
-FeatureStory.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Feature,
-		theme: Pillar.Culture,
-	}),
+BrandingLiveBlog.storyName = 'Branding - LiveBlog';
+BrandingLiveBlog.parameters = {
+	viewport: {
+		defaultViewport: 'tablet',
+	},
+	chromatic: { viewports: [breakpoints.tablet] },
+	config: { darkModeAvailable: true },
+};
+BrandingLiveBlog.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.LiveBlog,
+		}),
+	),
 ];
 
-export const FeatureWithMismatchedContributor = () => {
+export const FeatureWithMismatchedContributor: StoryObj = ({
+	format,
+}: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: Pillar.Culture,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Gabriel Smith"
@@ -218,16 +217,22 @@ export const FeatureWithMismatchedContributor = () => {
 };
 FeatureWithMismatchedContributor.storyName =
 	'Feature with a byline mismatching the contributor tag';
+FeatureWithMismatchedContributor.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+		}),
+	),
+];
 
-export const FeatureStoryWithSmallBylineImage = () => {
+export const FeatureWithSmallBylineImage: StoryObj = ({
+	format,
+}: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: Pillar.Culture,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Nicola Slawson"
@@ -242,49 +247,21 @@ export const FeatureStoryWithSmallBylineImage = () => {
 		</Wrapper>
 	);
 };
-FeatureStoryWithSmallBylineImage.storyName = 'Feature with Small Byline Image';
-
-export const SpecialReportStory = () => {
-	return (
-		<Wrapper>
-			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticleSpecial.SpecialReport,
-				}}
-				pageId=""
-				webTitle=""
-				byline="Lanre Bakare"
-				tags={tagsWithLargeBylineImage}
-				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
-				isCommentable={false}
-				discussionApiUrl=""
-				shortUrlId=""
-				ajaxUrl=""
-			/>
-		</Wrapper>
-	);
-};
-SpecialReportStory.storyName = 'SpecialReport';
-SpecialReportStory.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Feature,
-		theme: ArticleSpecial.SpecialReport,
-	}),
+FeatureWithSmallBylineImage.storyName = 'Feature with Small Byline Image';
+FeatureWithSmallBylineImage.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+		}),
+	),
 ];
 
-export const SpecialReportAlt = () => {
+export const Comment: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticleSpecial.SpecialReportAlt,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -299,24 +276,20 @@ export const SpecialReportAlt = () => {
 		</Wrapper>
 	);
 };
-SpecialReportAlt.storyName = 'SpecialReportAlt';
-SpecialReportAlt.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Feature,
-		theme: ArticleSpecial.SpecialReportAlt,
-	}),
+Comment.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+		}),
+	),
 ];
 
-export const CommentStory = () => {
+export const Interview: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Comment,
-					theme: Pillar.Opinion,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -331,49 +304,20 @@ export const CommentStory = () => {
 		</Wrapper>
 	);
 };
-CommentStory.storyName = 'Comment';
-
-export const InterviewStory = () => {
-	return (
-		<Wrapper>
-			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Interview,
-					theme: Pillar.Lifestyle,
-				}}
-				pageId=""
-				webTitle=""
-				byline="Lanre Bakare"
-				tags={tagsWithLargeBylineImage}
-				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
-				isCommentable={false}
-				discussionApiUrl=""
-				shortUrlId=""
-				ajaxUrl=""
-			/>
-		</Wrapper>
-	);
-};
-InterviewStory.storyName = 'Interview';
-InterviewStory.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Interview,
-		theme: Pillar.Lifestyle,
-	}),
+Interview.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Interview,
+		}),
+	),
 ];
 
-export const ImmersiveStory = () => {
+export const Immersive: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Immersive,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -388,17 +332,20 @@ export const ImmersiveStory = () => {
 		</Wrapper>
 	);
 };
-ImmersiveStory.storyName = 'Immersive';
+Immersive.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Immersive,
+			design: ArticleDesign.Standard,
+		}),
+	),
+];
 
-export const TwoContributorsStory = () => {
+export const FeatureTwoContributors: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: Pillar.Sport,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -413,53 +360,47 @@ export const TwoContributorsStory = () => {
 		</Wrapper>
 	);
 };
-TwoContributorsStory.storyName = 'Feature, with two contributors';
-TwoContributorsStory.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Feature,
-		theme: Pillar.Sport,
-	}),
+FeatureTwoContributors.storyName = 'Feature, with two contributors';
+FeatureTwoContributors.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Feature,
+		}),
+	),
 ];
 
-export const DeadBlogStory = () => {
-	return (
-		<>
-			{getAllThemes({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.DeadBlog,
-			}).map((format) => (
-				<Wrapper key={JSON.stringify(format)}>
-					<p>{getThemeNameAsString(format)}</p>
-					<ArticleMeta
-						format={format}
-						pageId=""
-						webTitle=""
-						byline="Lanre Bakare"
-						tags={tagsWithByTwoContributors}
-						primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-						secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
-						isCommentable={false}
-						discussionApiUrl=""
-						shortUrlId=""
-						ajaxUrl=""
-					/>
-				</Wrapper>
-			))}
-		</>
-	);
-};
-DeadBlogStory.storyName = 'Deadblog - All pillars';
+export const DeadBlog: StoryObj = ({ format }: StoryArgs) => (
+	<Wrapper>
+		<ArticleMeta
+			format={format}
+			pageId=""
+			webTitle=""
+			byline="Lanre Bakare"
+			tags={tagsWithByTwoContributors}
+			primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+			secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+			isCommentable={false}
+			discussionApiUrl=""
+			shortUrlId=""
+			ajaxUrl=""
+		/>
+	</Wrapper>
+);
+DeadBlog.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.DeadBlog,
+		}),
+	),
+];
 
-export const Dateline = () => {
+export const Dateline: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
 			<ArticleMeta
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				}}
+				format={format}
 				pageId=""
 				webTitle=""
 				byline="Lanre Bakare"
@@ -475,3 +416,4 @@ export const Dateline = () => {
 	);
 };
 Dateline.storyName = 'With no secondary dateline';
+Dateline.decorators = [splitTheme()];

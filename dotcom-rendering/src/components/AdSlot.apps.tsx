@@ -18,7 +18,7 @@ const styles = css`
 	background: ${palette('--ad-background')};
 
 	${until.phablet} {
-		margin: 1em -${remSpace[3]};
+		margin: 1em 0px;
 	}
 `;
 
@@ -46,10 +46,14 @@ const adSlotStyles = css`
 
 const adSlotSquareStyles = css`
 	${adSlotStyles}
+	${until.phablet} {
+		width: 320px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
 	height: 344px;
-	width: 320px;
-	margin-left: auto;
-	margin-right: auto;
+	width: 300px;
 	padding-bottom: 0;
 `;
 

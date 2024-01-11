@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { brandAltBackground, from } from '@guardian/source-foundations';
-import { none, some } from '@guardian/types';
+import { none, some } from '../../../../vendor/@guardian/types/index';
 import HeaderImageCaption, {
 	captionId,
 } from 'components/editions/headerImageCaption';
@@ -24,6 +24,7 @@ import type { FC } from 'react';
 import FootballScores from '../footballScores';
 import { wideImageWidth } from '../styles';
 import Video from '../video';
+import Cartoon from '../cartoon';
 
 // ----- Styles ----- //
 
@@ -175,75 +176,82 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 		'football' in item ? item.football : Optional.none();
 
 	return maybeRender(item.mainMedia, (media) => {
-		if (media.kind === MainMediaKind.Image) {
-			const {
-				image,
-				image: { caption, credit },
-			} = media;
+		switch (media.kind) {
+			case MainMediaKind.Image: {
+				const {
+					image,
+					image: { caption, credit },
+				} = media;
 
-			return (
-				<figure
-					css={[getStyles(format, isPicture)]}
-					aria-labelledby={captionId}
-				>
-					{maybeRender(matchScores.toOption(), (scores) => {
-						return (
-							<div css={footballWrapperStyles(false)}>
-								<FootballScores
-									league={scores.league}
-									homeTeam={scores.homeTeam}
-									awayTeam={scores.awayTeam}
-									stadium={scores.stadium}
-								/>
-							</div>
-						);
-					})}
-					<Img
-						image={image}
-						sizes={getImageSizes(format, image, isPicture)}
-						format={item}
-						className={some(
-							getImageStyle(image, format, isPicture),
-						)}
-						lightbox={some({
-							className: 'js-launch-slideshow js-main-image',
-							caption: none,
-							credit: none,
+				return (
+					<figure
+						css={[getStyles(format, isPicture)]}
+						aria-labelledby={captionId}
+					>
+						{maybeRender(matchScores.toOption(), (scores) => {
+							return (
+								<div css={footballWrapperStyles(false)}>
+									<FootballScores
+										league={scores.league}
+										homeTeam={scores.homeTeam}
+										awayTeam={scores.awayTeam}
+										stadium={scores.stadium}
+									/>
+								</div>
+							);
 						})}
-					/>
-					<HeaderImageCaption
-						caption={caption}
-						credit={credit}
-						styles={getCaptionStyles(format)}
-						iconColor={iconColour}
-						iconBackgroundColor={iconBackgroundColour}
-						isFullWidthImage={isFullWidthImage(format)}
-					/>
-					<StarRating item={item} />
-				</figure>
-			);
-		} else {
-			const {
-				video: { title, atomId },
-			} = media;
+						<Img
+							image={image}
+							sizes={getImageSizes(format, image, isPicture)}
+							format={item}
+							className={some(
+								getImageStyle(image, format, isPicture),
+							)}
+							lightbox={some({
+								className: 'js-launch-slideshow js-main-image',
+								caption: none,
+								credit: none,
+							})}
+						/>
+						<HeaderImageCaption
+							caption={caption}
+							credit={credit}
+							styles={getCaptionStyles(format)}
+							iconColor={iconColour}
+							iconBackgroundColor={iconBackgroundColour}
+							isFullWidthImage={isFullWidthImage(format)}
+						/>
+						<StarRating item={item} />
+					</figure>
+				);
+			}
+			case MainMediaKind.Video: {
+				const {
+					video: { title, atomId },
+				} = media;
 
-			return (
-				<>
-					{maybeRender(matchScores.toOption(), (scores) => {
-						return (
-							<div css={footballWrapperStyles(true)}>
-								<FootballScores
-									league={scores.league}
-									homeTeam={scores.homeTeam}
-									awayTeam={scores.awayTeam}
-									stadium={scores.stadium}
-								/>
-							</div>
-						);
-					})}
-					<Video atomId={atomId} title={title} />
-				</>
-			);
+				return (
+					<>
+						{maybeRender(matchScores.toOption(), (scores) => {
+							return (
+								<div css={footballWrapperStyles(true)}>
+									<FootballScores
+										league={scores.league}
+										homeTeam={scores.homeTeam}
+										awayTeam={scores.awayTeam}
+										stadium={scores.stadium}
+									/>
+								</div>
+							);
+						})}
+						<Video atomId={atomId} title={title} />
+					</>
+				);
+			}
+			case MainMediaKind.Cartoon: {
+				const { cartoon } = media;
+				return <Cartoon cartoon={cartoon} format={format}></Cartoon>;
+			}
 		}
 	});
 };

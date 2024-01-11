@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { adSizes, constants } from '@guardian/commercial';
 import { ArticleDesign } from '@guardian/libs';
-import { from, neutral, space, until } from '@guardian/source-foundations';
+import { from, palette, space, until } from '@guardian/source-foundations';
 import { carrotAdStyles, labelStyles } from './AdSlot.web';
 
 type Props = {
@@ -72,13 +72,17 @@ const adStyles = css`
 
 	.ad-slot-container {
 		margin: ${space[3]}px auto;
+		:not(:has(.ad-slot)) {
+			margin: 0;
+		}
+
 		/* this is centring the ad iframe as they are display: inline; elements by default */
 		text-align: center;
 		display: flex;
 		justify-content: center;
 
 		${from.tablet} {
-			background-color: ${neutral[97]};
+			background-color: ${palette.neutral[97]};
 		}
 
 		/* Prevent merger with any nearby float left elements e.g. rich-links */

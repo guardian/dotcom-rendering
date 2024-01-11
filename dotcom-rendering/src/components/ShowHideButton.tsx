@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import { palette, space, textSans } from '@guardian/source-foundations';
 import { ButtonLink } from '@guardian/source-react-components';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 const showHideButtonCss = (
 	overrideContainerToggleColour: string | undefined,
 ) => css`
-	color: ${overrideContainerToggleColour ?? neutral[46]};
+	color: ${overrideContainerToggleColour ?? palette.neutral[46]};
 	${textSans.xsmall()};
 
 	margin-top: ${space[2]}px;

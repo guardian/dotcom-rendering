@@ -44,7 +44,10 @@ export const Default = () => {
 					],
 				}}
 			/>
-			<ManyNewsletterSignUp />
+			<ManyNewsletterSignUp
+				useReCaptcha={false}
+				captchaSiteKey="TEST_RECAPTCHA_SITE_KEY"
+			/>
 		</>
 	);
 };

@@ -1,4 +1,4 @@
-.PHONY: install dev dev-legacy build clean-dist start stop monitor clear
+.PHONY: install dev dev-legacy build clean-dist clear
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -17,8 +17,13 @@ endef
 
 # deployment #########################################
 
+# https://www.npmjs.com/package/aws-cdk#cdk-synthesize
 cdk-synth:
-	@yarn cdk:synth
+	@pnpm cdk synth --path-metadata false --version-reporting false
+
+# https://www.npmjs.com/package/aws-cdk#cdk-diff
+cdk-diff:
+	@pnpm cdk diff --path-metadata false --version-reporting false --profile frontend
 
 riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
@@ -28,74 +33,42 @@ riffraff-bundle: clean-dist build cdk-synth
 
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
+	@NODE_ENV=production webpack --config ./webpack/webpack.config.js --progress
 	$(call log, "generating Islands report card")
 	@node ./scripts/islands/island-descriptions.mjs
 
-
-build-ci: clean-dist install
-	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
-
-start-ci: install
-	$(call log, "starting PROD server...")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.js
-
-start: install
-	$(call log, "starting PROD server...")
-	@echo '' # just a spacer
-	NODE_ENV=production pm2 start dist/server.js
-	@echo '' # just a spacer
-	$(call log, "PROD server is running")
-	@NODE_ENV=production pm2 logs
-
-# Used in cloudformation.yml which specifically:
-# - Launches pm2 from /usr/local/node rather than /node_modules
-start-prod:
+prod:
 	@echo 'starting PROD server...'
 	@echo '' # just a spacer
-	NODE_ENV=production /usr/local/node/pm2 start dist/server.js
-	@echo '' # just a spacer
-	@echo 'PROD server is running'
+	NODE_ENV=production node dist/server.js
 
-stop:
-	@pm2 kill
-
-monitor:
-	@pm2 monit
-
-logs:
-	@pm2 logs
-
-run: stop build start
-
-run-ci: stop build-ci start-ci
-
+ci: export DISABLE_LOGGING_AND_METRICS = true
+ci: prod
 
 # dev #########################################
 
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development webpack serve --config ./webpack/webpack.config.js
 
 dev-variant: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./webpack/webpack.config.js
 
 dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development BUILD_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development BUILD_LEGACY=true webpack serve --config ./webpack/webpack.config.js
 
 dev-debug: clear clean-dist install
 	$(call log, "starting DEV server and debugger")
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
-	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./webpack/webpack.config.js
 
 # storybook #########################################
 
 storybook-dev: clear clean-dist install
 	$(call log, "starting Storybook DEV server")
-	yarn storybook
+	@pnpm storybook
 
 # tests #####################################
 
@@ -106,6 +79,14 @@ cypress: clear clean-dist install build
 cypress-open: clear clean-dist install build
 	$(call log, "starting PROD server and opening Cypress")
 	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress open --e2e --browser electron'
+
+playwright: clear clean-dist install build
+	$(call log, "starting PROD server for Playwright")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'playwright test'
+
+playwright-open: clear clean-dist install build
+	$(call log, "starting PROD server and opening Playwright")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'playwright test --ui'
 
 ampValidation: clean-dist install
 	$(call log, "starting AMP Validation test")
@@ -121,18 +102,24 @@ tsc: clean-dist install
 	$(call log, "checking for type errors")
 	@tsc
 
-fix: clear clean-dist install
+lint-fix:
 	$(call log, "attempting to fix lint errors")
-	@yarn lint:fix
-	@yarn prettier:fix
+	@pnpm lint:fix
+
+prettier:
+	$(call log, "attempting to fix prettier errors")
+	@cd .. && pnpm prettier:write
+
+fix: clear clean-dist install lint-fix prettier
+	$(call log, "everything fixed")
 
 snapshot: clear clean-dist install
 	$(call log, "taking snapshots")
-	yarn chromatic
+	@pnpm chromatic
 
 lint: clean-dist install
 	$(call log, "checking for lint errors")
-	@yarn lint
+	@pnpm lint
 
 lint-project: check-env
 	$(call log, "linting project")
@@ -146,12 +133,12 @@ stylelint: clean-dist install
 
 test: clean-dist install
 	$(call log, "running tests")
-	@yarn test:ci --verbose
+	@pnpm test:ci --verbose
 	$(call log, "everything seems 👌")
 
 test-ci: clear clean-dist install
 	$(call log, "running tests")
-	@yarn test:ci --verbose --collectCoverage --coverageReporters=lcov
+	@pnpm test:ci --verbose --collectCoverage --coverageReporters=lcov
 
 validate: clean-dist install lint-project tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
@@ -171,7 +158,7 @@ clean-deps:
 
 install: check-env
 	$(call log, "refreshing dependencies")
-	@yarn --silent --frozen-lockfile
+	@cd .. && pnpm install --frozen-lockfile
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
@@ -179,12 +166,12 @@ reinstall: clear clean-deps install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=production webpack --config ./webpack/webpack.config.js
 
 check-env: # private
 	$(call log, "checking environment")
 	@cd .. && scripts/env/check-node
-	@cd .. && scripts/env/check-yarn
+	@cd .. && scripts/env/check-package-manager
 
 clear: # private
 	@clear
@@ -212,24 +199,7 @@ gen-stories:
 
 gen-fixtures:
 	$(call log, "Generating new fixture data")
-	@npx ts-node --project tsconfig.json --files scripts/test-data/gen-fixtures.js
+	@pnpm tsx scripts/test-data/gen-fixtures.js
 
 perf-test:
 	@node scripts/perf/perf-test.js
-
-# Because Snyk finds vulnerabilities snyk test command exits with error code 1 and make picks it up.
-# Adding - at the beginning of the command ignores the error and we're getting:
-# make: [snyk] Error 1 (ignored)
-# See docs: https://www.gnu.org/software/make/manual/html_node/Errors.html#:~:text=To%20ignore%20errors%20in%20a,to%20the%20shell%20for%20execution.&text=This%20causes%20make%20to%20continue,unable%20to%20remove%20a%20file
-
-snyk:
-	-@snyk test --severity-threshold=high --file="../package.json"
-
-snyk-dcr:
-	-@snyk test --severity-threshold=high --file=package.json
-
-snyk-ar:
-	-@snyk test --severity-threshold=high --file=../apps-rendering/package.json
-
-snyk-storybooks:
-	-@snyk test --severity-threshold=high --file=../storybooks/package.json

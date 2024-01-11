@@ -2,11 +2,10 @@ import { css } from '@emotion/react';
 import type { OphanABTestMeta, OphanComponentEvent } from '@guardian/libs';
 import { getCookie } from '@guardian/libs';
 import {
-	brandAlt,
 	brandText,
 	from,
 	headline,
-	neutral,
+	palette,
 	space,
 	textSans,
 	until,
@@ -30,11 +29,12 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
-import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
+import { usePageViewId } from '../lib/usePageViewId';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 import { useConfig } from './ConfigContext';
 
@@ -77,7 +77,7 @@ const headerStyles = css`
 `;
 
 const messageStyles = (isThankYouMessage: boolean) => css`
-	color: ${brandAlt[400]};
+	color: ${palette.brandAlt[400]};
 	${headline.xxsmall({ fontWeight: 'bold' })};
 	padding-top: 3px;
 	margin-bottom: 3px;
@@ -94,10 +94,10 @@ const messageStyles = (isThankYouMessage: boolean) => css`
 `;
 
 const linkStyles = css`
-	background: ${brandAlt[400]};
+	background: ${palette.brandAlt[400]};
 	border-radius: 16px;
 	box-sizing: border-box;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	float: left;
 	${textSans.small()};
 	font-weight: 700;
@@ -409,23 +409,11 @@ export const ReaderRevenueLinks = ({
 	urls,
 	contributionsServiceUrl,
 }: Props) => {
-	const [countryCode, setCountryCode] = useState<string>();
-	const pageViewId = window.guardian.config.ophan.pageViewId;
+	const { renderingTarget } = useConfig();
+	const countryCode = useCountryCode('reader-revenue-links');
+	const pageViewId = usePageViewId(renderingTarget);
 
-	useEffect(() => {
-		const callFetch = () => {
-			getLocaleCode()
-				.then((cc) => {
-					setCountryCode(cc ?? '');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${String(e)}`),
-				);
-		};
-		callFetch();
-	}, []);
-
-	if (countryCode) {
+	if (countryCode && pageViewId) {
 		if (inHeader && remoteHeader) {
 			return (
 				<ReaderRevenueLinksRemote

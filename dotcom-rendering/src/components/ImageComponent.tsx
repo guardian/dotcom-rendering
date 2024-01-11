@@ -1,18 +1,16 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
 import {
 	between,
 	from,
 	headline,
-	neutral,
+	palette as srcPalette,
 	until,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { getLargest, getMaster } from '../lib/image';
 import { isWideEnough } from '../lib/lightbox';
-import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { palette as themePalette } from '../palette';
-import type { Switches } from '../types/config';
 import type { ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';
@@ -33,8 +31,7 @@ type Props = {
 	starRating?: number;
 	title?: string;
 	isAvatar?: boolean;
-	switches?: Switches;
-	imagesForAppsLightbox: ImageForAppsLightbox[];
+	isInLightboxTest: boolean;
 };
 
 const starsWrapper = css`
@@ -129,8 +126,8 @@ const titleWrapper = (palette: Palette) => css`
 	${from.desktop} {
 		${headline.xsmall({ fontWeight: 'light' })}
 	}
-	color: ${neutral[100]};
-	background: linear-gradient(transparent, ${neutral[0]});
+	color: ${srcPalette.neutral[100]};
+	background: linear-gradient(transparent, ${srcPalette.neutral[0]});
 
 	:before {
 		background-color: ${palette.background.imageTitle};
@@ -240,8 +237,7 @@ export const ImageComponent = ({
 	starRating,
 	title,
 	isAvatar,
-	switches,
-	imagesForAppsLightbox,
+	isInLightboxTest,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
@@ -267,6 +263,9 @@ export const ImageComponent = ({
 		return null;
 	}
 
+	const webLightbox =
+		renderingTarget === 'Web' && isInLightboxTest && isWideEnough(image);
+
 	/**
 	 * We use height and width for two things.
 	 *
@@ -281,6 +280,8 @@ export const ImageComponent = ({
 
 	const palette = decidePalette(format);
 
+	const loading = isMainMedia ? 'eager' : 'lazy';
+
 	if (
 		isMainMedia &&
 		format.display === ArticleDisplay.Immersive &&
@@ -289,7 +290,7 @@ export const ImageComponent = ({
 		return (
 			<div
 				id={
-					element.position !== undefined
+					!isUndefined(element.position)
 						? `img-${element.position}`
 						: ''
 				}
@@ -321,17 +322,14 @@ export const ImageComponent = ({
 				{renderingTarget === 'Apps' ? (
 					<Island priority="critical">
 						<AppsLightboxImage
-							images={imagesForAppsLightbox}
-							currentIndex={imagesForAppsLightbox.findIndex(
-								(img) => img.elementId === element.elementId,
-							)}
+							elementId={element.elementId}
 							role={role}
 							format={format}
 							master={image.url}
 							alt={element.data.alt ?? ''}
 							width={imageWidth}
 							height={imageHeight}
-							isLazy={!isMainMedia}
+							loading={loading}
 							isMainMedia={isMainMedia}
 						/>
 					</Island>
@@ -343,7 +341,7 @@ export const ImageComponent = ({
 						alt={element.data.alt ?? ''}
 						width={imageWidth}
 						height={imageHeight}
-						isLazy={!isMainMedia}
+						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
 				)}
@@ -351,17 +349,15 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{switches?.lightbox === true &&
-					isWideEnough(image) &&
-					element.position !== undefined && (
-						<LightboxLink
-							role={role}
-							format={format}
-							elementId={element.elementId}
-							isMainMedia={isMainMedia}
-							position={element.position}
-						/>
-					)}
+				{webLightbox && !isUndefined(element.position) && (
+					<LightboxLink
+						role={role}
+						format={format}
+						elementId={element.elementId}
+						isMainMedia={isMainMedia}
+						position={element.position}
+					/>
+				)}
 			</div>
 		);
 	}
@@ -388,17 +384,14 @@ export const ImageComponent = ({
 				{renderingTarget === 'Apps' ? (
 					<Island priority="critical">
 						<AppsLightboxImage
-							images={imagesForAppsLightbox}
-							currentIndex={imagesForAppsLightbox.findIndex(
-								(img) => img.elementId === element.elementId,
-							)}
+							elementId={element.elementId}
 							role={role}
 							format={format}
 							master={image.url}
 							alt={element.data.alt ?? ''}
 							width={imageWidth}
 							height={imageHeight}
-							isLazy={!isMainMedia}
+							loading={loading}
 							isMainMedia={isMainMedia}
 						/>
 					</Island>
@@ -410,7 +403,7 @@ export const ImageComponent = ({
 						alt={element.data.alt ?? ''}
 						width={imageWidth}
 						height={imageHeight}
-						isLazy={!isMainMedia}
+						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
 				)}
@@ -421,17 +414,15 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{switches?.lightbox === true &&
-					isWideEnough(image) &&
-					element.position !== undefined && (
-						<LightboxLink
-							role={role}
-							format={format}
-							elementId={element.elementId}
-							isMainMedia={isMainMedia}
-							position={element.position}
-						/>
-					)}
+				{webLightbox && !isUndefined(element.position) && (
+					<LightboxLink
+						role={role}
+						format={format}
+						elementId={element.elementId}
+						isMainMedia={isMainMedia}
+						position={element.position}
+					/>
+				)}
 			</div>
 		);
 	}
@@ -458,17 +449,14 @@ export const ImageComponent = ({
 				{renderingTarget === 'Apps' ? (
 					<Island priority="critical">
 						<AppsLightboxImage
-							images={imagesForAppsLightbox}
-							currentIndex={imagesForAppsLightbox.findIndex(
-								(img) => img.elementId === element.elementId,
-							)}
+							elementId={element.elementId}
 							role={role}
 							format={format}
 							master={image.url}
 							alt={element.data.alt ?? ''}
 							width={imageWidth}
 							height={imageHeight}
-							isLazy={!isMainMedia}
+							loading={loading}
 							isMainMedia={isMainMedia}
 						/>
 					</Island>
@@ -480,7 +468,7 @@ export const ImageComponent = ({
 						alt={element.data.alt ?? ''}
 						width={imageWidth}
 						height={imageHeight}
-						isLazy={!isMainMedia}
+						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
 				)}
@@ -530,17 +518,15 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 
-				{switches?.lightbox === true &&
-					isWideEnough(image) &&
-					element.position !== undefined && (
-						<LightboxLink
-							role={role}
-							format={format}
-							elementId={element.elementId}
-							isMainMedia={isMainMedia}
-							position={element.position}
-						/>
-					)}
+				{webLightbox && !isUndefined(element.position) && (
+					<LightboxLink
+						role={role}
+						format={format}
+						elementId={element.elementId}
+						isMainMedia={isMainMedia}
+						position={element.position}
+					/>
+				)}
 			</div>
 			{isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">

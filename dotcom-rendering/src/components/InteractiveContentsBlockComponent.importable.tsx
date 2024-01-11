@@ -1,33 +1,33 @@
 import { css } from '@emotion/react';
 import {
-	border,
 	from,
 	headline,
-	neutral,
+	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source-foundations';
 import { SvgChevronDownSingle } from '@guardian/source-react-components';
 import { useCallback, useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
+import { palette as themePalette } from '../palette';
 import type { SubheadingBlockElement } from '../types/content';
 
 const liStyles = css`
-	border-top: 1px solid ${neutral[86]};
+	border-top: 1px solid ${sourcePalette.neutral[86]};
 	border-top-width: 1px;
 	border-top-style: solid;
-	border-top-color: ${neutral[86]};
+	border-top-color: ${sourcePalette.neutral[86]};
 	:hover {
-		background-color: ${neutral[93]};
+		background-color: ${themePalette('--interactive-contents-hover')};
 	}
 `;
 
 const borderRightStyles = css`
 	${from.mobileLandscape} {
-		border-right: 1px solid ${neutral[86]};
+		border-right: 1px solid ${sourcePalette.neutral[86]};
 		border-right-width: 1px;
 		border-right-style: solid;
-		border-right-color: ${neutral[86]};
+		border-right-color: ${sourcePalette.neutral[86]};
 	}
 `;
 
@@ -62,8 +62,8 @@ const stickyNavBaseStyles = css`
 		max-width: 650px;
 		margin-left: ${space[4]}px;
 	}
-	background-color: ${neutral[100]};
-	border: 1px solid ${border.secondary};
+	background-color: ${sourcePalette.neutral[100]};
+	border: 1px solid ${sourcePalette.neutral[86]};
 	top: 0;
 	${getZIndex('banner')}
 `;

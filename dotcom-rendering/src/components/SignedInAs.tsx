@@ -1,20 +1,16 @@
 import { css } from '@emotion/react';
 import {
-	border,
 	headline,
-	neutral,
-	news,
+	palette as sourcePalette,
 	space,
-	text,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
-import type { Palette } from '../types/palette';
+import { palette as themePalette } from '../palette';
 
 type Props = {
 	commentCount?: number;
-	palette: Palette;
 	enableDiscussionSwitch: boolean;
 	user?: UserProfile;
 	isClosedForComments?: boolean;
@@ -50,28 +46,28 @@ const textStyles = css`
 	${until.desktop} {
 		${textSans.xxsmall()}
 	}
-	color: ${text.supporting};
+	color: ${sourcePalette.neutral[46]};
 	padding-bottom: ${space[1]}px;
 `;
 
 const headlineStyles = css`
 	${headline.xxxsmall()}
-	color: ${text.supporting};
+	color: ${themePalette('--discussion-subdued')};
 	padding-bottom: ${space[1]}px;
 `;
 
 const usernameStyles = css`
 	font-weight: 700;
-	color: ${text.primary};
+	color: ${themePalette('--article-text')};
 `;
 
-const linkStyles = (palette: Palette) => css`
-	color: ${palette.text.signInLink};
+const linkStyles = css`
+	color: ${themePalette('--sign-in-link')};
 	text-decoration: none;
-	border-bottom: 1px solid ${border.secondary};
+	border-bottom: 1px solid ${themePalette('--sign-in-link-underline')};
 	transition: border-color 0.15s ease-out;
 	:hover {
-		border-color: ${news[300]};
+		border-color: ${themePalette('--sign-in-link')};
 	}
 `;
 
@@ -86,10 +82,10 @@ const rowUntilDesktop = css`
 const Heading = ({ count }: { count?: number }) => {
 	return (
 		<h2 css={headingStyles}>
-			comments{' '}
+			Comments{' '}
 			<span
 				css={css`
-					color: ${neutral[60]};
+					color: ${themePalette('--discussion-subdued')};
 				`}
 			>
 				({count ?? '…'})
@@ -100,7 +96,6 @@ const Heading = ({ count }: { count?: number }) => {
 
 export const SignedInAs = ({
 	commentCount,
-	palette,
 	enableDiscussionSwitch,
 	user,
 	isClosedForComments,
@@ -129,7 +124,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
 							'signin_to_comment',
 						)}`}
-						css={linkStyles(palette)}
+						css={linkStyles}
 					>
 						sign in
 					</a>{' '}
@@ -138,7 +133,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
 							'register_to_comment',
 						)}`}
-						css={linkStyles(palette)}
+						css={linkStyles}
 					>
 						create your Guardian account
 					</a>{' '}
@@ -157,7 +152,7 @@ export const SignedInAs = ({
 					Commenting has been disabled for this account (
 					<a
 						href="https://www.theguardian.com/community-faqs#321a"
-						css={linkStyles(palette)}
+						css={linkStyles}
 					>
 						why?
 					</a>{' '}
@@ -190,7 +185,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
 							'signin_to_comment',
 						)}`}
-						css={linkStyles(palette)}
+						css={linkStyles}
 					>
 						sign in
 					</a>{' '}
@@ -199,7 +194,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
 							'register_to_comment',
 						)}`}
-						css={linkStyles(palette)}
+						css={linkStyles}
 					>
 						create your Guardian account
 					</a>{' '}
@@ -219,7 +214,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
 							'signin_to_comment',
 						)}`}
-						css={linkStyles(palette)}
+						css={linkStyles}
 					>
 						Sign in
 					</a>{' '}
@@ -228,7 +223,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
 							'register_to_comment',
 						)}`}
-						css={linkStyles(palette)}
+						css={linkStyles}
 					>
 						create your Guardian account
 					</a>{' '}

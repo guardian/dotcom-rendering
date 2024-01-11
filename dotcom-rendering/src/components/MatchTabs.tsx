@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { headline, space } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { palette as themePalette } from '../palette';
 
 type Props = {
 	minByMinUrl?: string;
@@ -10,41 +9,40 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const thinGreySolid = (palette: Palette) =>
-	`1px solid ${palette.border.matchTab}`;
+const thinGreySolid = `1px solid ${themePalette('--match-tab-border')}`;
 
-const GreyBorder = ({ palette }: { palette: Palette }) => (
+const GreyBorder = () => (
 	<div
 		css={css`
-			border-left: ${thinGreySolid(palette)};
+			border-left: ${thinGreySolid};
 			margin-left: ${space[1]}px;
 			width: ${space[2]}px;
 		`}
 	/>
 );
 
-const tabsContainer = (palette: Palette) => css`
+const tabsContainer = css`
 	display: flex;
 	position: relative;
-	border-bottom: ${thinGreySolid(palette)};
+	border-bottom: ${thinGreySolid};
 `;
 
-const tab = (palette: Palette) => css`
+const tab = css`
 	flex-basis: 50%;
 	height: 40px;
-	border-top: 3px solid ${palette.border.matchTab};
+	border-top: 3px solid ${themePalette('--match-tab-border')};
 `;
 
-const activeTab = (palette: Palette) => css`
-	border-top: 3px solid ${palette.border.activeMatchTab};
+const activeTab = css`
+	border-top: 3px solid ${themePalette('--match-tab-border-active')};
 `;
 
-const tabLink = (palette: Palette) => css`
-	color: ${palette.border.activeMatchTab};
+const tabLink = css`
+	color: ${themePalette('--match-tab-border-active')};
 	display: block;
 	text-decoration: none;
 	&:hover {
-		background-color: ${palette.background.article};
+		background-color: ${themePalette('--article-background')};
 	}
 `;
 
@@ -59,45 +57,32 @@ const tabLabel = css`
 	width: 100%;
 `;
 
-export const MatchTabs = ({ minByMinUrl, reportUrl, format }: Props) => {
-	const palette = decidePalette(format);
-
-	return (
-		<div>
-			<ul css={tabsContainer(palette)}>
-				<li
-					css={[
-						tab(palette),
-						format.design === ArticleDesign.MatchReport &&
-							activeTab(palette),
-					]}
-				>
-					<a
-						href={reportUrl}
-						data-link-name="report"
-						css={tabLink(palette)}
-					>
-						<span css={tabLabel}>Report</span>
-					</a>
-				</li>
-				<GreyBorder palette={palette} />
-				<li
-					css={[
-						tab(palette),
-						(format.design === ArticleDesign.DeadBlog ||
-							format.design === ArticleDesign.LiveBlog) &&
-							activeTab(palette),
-					]}
-				>
-					<a
-						href={minByMinUrl}
-						data-link-name="Min-by-min"
-						css={tabLink(palette)}
-					>
-						<span css={tabLabel}>Min-by-min</span>
-					</a>
-				</li>
-			</ul>
-		</div>
-	);
-};
+export const MatchTabs = ({ minByMinUrl, reportUrl, format }: Props) => (
+	<div>
+		<ul css={tabsContainer}>
+			<li
+				css={[
+					tab,
+					format.design === ArticleDesign.MatchReport && activeTab,
+				]}
+			>
+				<a href={reportUrl} data-link-name="report" css={tabLink}>
+					<span css={tabLabel}>Report</span>
+				</a>
+			</li>
+			<GreyBorder />
+			<li
+				css={[
+					tab,
+					(format.design === ArticleDesign.DeadBlog ||
+						format.design === ArticleDesign.LiveBlog) &&
+						activeTab,
+				]}
+			>
+				<a href={minByMinUrl} data-link-name="Min-by-min" css={tabLink}>
+					<span css={tabLabel}>Min-by-min</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+);

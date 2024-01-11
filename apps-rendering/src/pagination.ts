@@ -1,5 +1,11 @@
-import { andThen, map, none, some, withDefault } from '@guardian/types';
-import type { Option } from '@guardian/types';
+import {
+	andThen,
+	map,
+	none,
+	some,
+	withDefault,
+} from '../vendor/@guardian/types/index';
+import type { Option } from '../vendor/@guardian/types/index';
 import { index, pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 

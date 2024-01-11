@@ -1,19 +1,23 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	isString,
+} from '@guardian/libs';
 import {
 	between,
-	border,
 	from,
+	palette,
 	space,
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
-import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
@@ -105,8 +109,8 @@ const borderColourWhenBackgroundDark = css`
 	}
 `;
 
-const metaExtras = (palette: Palette, isPictureContent: boolean) => css`
-	border-top: 1px solid ${palette.border.article};
+const metaExtras = (isPictureContent: boolean) => css`
+	border-top: 1px solid ${themePalette('--article-border')};
 	flex-grow: 1;
 	padding-top: 6px;
 
@@ -129,8 +133,8 @@ const metaExtras = (palette: Palette, isPictureContent: boolean) => css`
 	}
 `;
 
-const metaNumbers = (palette: Palette, isPictureContent: boolean) => css`
-	border-top: 1px solid ${palette.border.article};
+const metaNumbers = (isPictureContent: boolean) => css`
+	border-top: 1px solid ${themePalette('--article-border')};
 	display: flex;
 	flex-grow: 1;
 
@@ -154,7 +158,7 @@ const metaNumbers = (palette: Palette, isPictureContent: boolean) => css`
 	}
 `;
 
-const metaContainer = (format: ArticleFormat) => {
+export const metaContainer = (format: ArticleFormat) => {
 	const defaultMargins = css`
 		${until.phablet} {
 			margin-left: -20px;
@@ -201,7 +205,8 @@ const metaContainer = (format: ArticleFormat) => {
 	}
 };
 
-const shouldShowAvatar = (format: ArticleFormat) => {
+// used by ArticleMeta.apps.tsx
+export const shouldShowAvatar = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return false;
@@ -223,7 +228,8 @@ const shouldShowAvatar = (format: ArticleFormat) => {
 	}
 };
 
-const shouldShowContributor = (format: ArticleFormat) => {
+// used by ArticleMeta.apps.tsx
+export const shouldShowContributor = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.NumberedList:
 			return true;
@@ -319,8 +325,6 @@ export const ArticleMeta = ({
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
-	const palette = decidePalette(format);
-
 	const isPictureContent = format.design === ArticleDesign.Picture;
 
 	const { renderingTarget } = useConfig();
@@ -335,11 +339,7 @@ export const ArticleMeta = ({
 			<div css={meta(format)}>
 				{branding && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
-						<Branding
-							branding={branding}
-							palette={palette}
-							format={format}
-						/>
+						<Branding branding={branding} format={format} />
 					</Island>
 				)}
 				{format.theme === ArticleSpecial.Labs ? (
@@ -347,7 +347,7 @@ export const ArticleMeta = ({
 						<StraightLines
 							cssOverrides={stretchLines}
 							count={1}
-							color={border.primary}
+							color={palette.neutral[60]}
 						/>
 						<div
 							css={css`
@@ -367,13 +367,14 @@ export const ArticleMeta = ({
 						)}
 
 						<div>
-							{shouldShowContributor(format) && !!byline && (
-								<Contributor
-									byline={byline}
-									tags={tags}
-									format={format}
-								/>
-							)}
+							{shouldShowContributor(format) &&
+								isString(byline) && (
+									<Contributor
+										byline={byline}
+										tags={tags}
+										format={format}
+									/>
+								)}
 							{messageUs &&
 								format.design === ArticleDesign.LiveBlog && (
 									<Island
@@ -406,7 +407,7 @@ export const ArticleMeta = ({
 									: ''
 							}
 							css={[
-								metaExtras(palette, isPictureContent),
+								metaExtras(isPictureContent),
 								format.design === ArticleDesign.LiveBlog &&
 									css(
 										borderColourWhenBackgroundDark,
@@ -431,7 +432,7 @@ export const ArticleMeta = ({
 								: ''
 						}
 						css={[
-							metaNumbers(palette, isPictureContent),
+							metaNumbers(isPictureContent),
 							format.design === ArticleDesign.LiveBlog &&
 								css(
 									borderColourWhenBackgroundDark,
@@ -450,13 +451,11 @@ export const ArticleMeta = ({
 								{isCommentable && (
 									<Island
 										priority="feature"
-										clientOnly={true}
 										defer={{ until: 'idle' }}
 									>
 										<CommentCount
 											discussionApiUrl={discussionApiUrl}
 											shortUrlId={shortUrlId}
-											format={format}
 										/>
 									</Island>
 								)}

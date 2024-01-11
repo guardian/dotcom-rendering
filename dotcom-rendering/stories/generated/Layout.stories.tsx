@@ -20,146 +20,186 @@ export default {
 	},
 };
 
-export const WebStandardStandardNewsPillar = () => {
-	return (
-		<HydratedLayoutWrapper
-			displayName="Standard"
-			designName="Standard"
-			theme="NewsPillar"
-			renderingTarget="Web"
-		/>
-	);
-};
-WebStandardStandardNewsPillar.storyName = 'Web: Display: Standard, Design: Standard, Theme: NewsPillar';
-WebStandardStandardNewsPillar.args = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
-WebStandardStandardNewsPillar.decorators = [lightDecorator({
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: {...ArticleSpecial, ...Pillar}.News,
-})];
+		export const WebStandardStandardNewsPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Standard"
+					theme="NewsPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardStandardNewsPillarLight.storyName = 'Web: Display: Standard, Design: Standard, Theme: NewsPillar, Mode: Light';
+		WebStandardStandardNewsPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardStandardNewsPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: {...ArticleSpecial, ...Pillar}.News,
+				}]
+			),
+		];
 
-export const AppsStandardStandardNewsPillar = () => {
-	return (
-		<HydratedLayoutWrapper
-			displayName="Standard"
-			designName="Standard"
-			theme="NewsPillar"
-			renderingTarget="Apps"
-		/>
-	);
-};
-AppsStandardStandardNewsPillar.storyName = 'Apps: Display: Standard, Design: Standard, Theme: NewsPillar';
-AppsStandardStandardNewsPillar.args = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
-AppsStandardStandardNewsPillar.decorators = [lightDecorator({
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: {...ArticleSpecial, ...Pillar}.News,
-})];
+		
 
-export const AppsShowcaseStandardNewsPillar = () => {
-	return (
-		<HydratedLayoutWrapper
-			displayName="Showcase"
-			designName="Standard"
-			theme="NewsPillar"
-			renderingTarget="Apps"
-		/>
-	);
-};
-AppsShowcaseStandardNewsPillar.storyName = 'Apps: Display: Showcase, Design: Standard, Theme: NewsPillar';
-AppsShowcaseStandardNewsPillar.args = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
-AppsShowcaseStandardNewsPillar.decorators = [lightDecorator({
-	display: ArticleDisplay.Showcase,
-	design: ArticleDesign.Standard,
-	theme: {...ArticleSpecial, ...Pillar}.News,
-})];
+		export const WebStandardNewsletterSignupSportPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="NewsletterSignup"
+					theme="SportPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardNewsletterSignupSportPillarLight.storyName = 'Web: Display: Standard, Design: NewsletterSignup, Theme: SportPillar, Mode: Light';
+		WebStandardNewsletterSignupSportPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardNewsletterSignupSportPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.NewsletterSignup,
+					theme: {...ArticleSpecial, ...Pillar}.Sport,
+				}]
+			),
+		];
 
-export const WebShowcasePictureOpinionPillar = () => {
-	return (
-		<HydratedLayoutWrapper
-			displayName="Showcase"
-			designName="Picture"
-			theme="OpinionPillar"
-			renderingTarget="Web"
-		/>
-	);
-};
-WebShowcasePictureOpinionPillar.storyName = 'Web: Display: Showcase, Design: Picture, Theme: OpinionPillar';
-WebShowcasePictureOpinionPillar.args = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
-WebShowcasePictureOpinionPillar.decorators = [lightDecorator({
-	display: ArticleDisplay.Showcase,
-	design: ArticleDesign.Picture,
-	theme: {...ArticleSpecial, ...Pillar}.Opinion,
-})];
+		
 
-export const AppsShowcasePictureOpinionPillar = () => {
-	return (
-		<HydratedLayoutWrapper
-			displayName="Showcase"
-			designName="Picture"
-			theme="OpinionPillar"
-			renderingTarget="Apps"
-		/>
-	);
-};
-AppsShowcasePictureOpinionPillar.storyName = 'Apps: Display: Showcase, Design: Picture, Theme: OpinionPillar';
-AppsShowcasePictureOpinionPillar.args = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
-AppsShowcasePictureOpinionPillar.decorators = [lightDecorator({
-	display: ArticleDisplay.Showcase,
-	design: ArticleDesign.Picture,
-	theme: {...ArticleSpecial, ...Pillar}.Opinion,
-})];
+		export const WebShowcasePictureOpinionPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Showcase"
+					designName="Picture"
+					theme="OpinionPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebShowcasePictureOpinionPillarLight.storyName = 'Web: Display: Showcase, Design: Picture, Theme: OpinionPillar, Mode: Light';
+		WebShowcasePictureOpinionPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebShowcasePictureOpinionPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Showcase,
+					design: ArticleDesign.Picture,
+					theme: {...ArticleSpecial, ...Pillar}.Opinion,
+				}]
+			),
+		];
 
-export const AppsStandardCommentNewsPillar = () => {
-	return (
-		<HydratedLayoutWrapper
-			displayName="Standard"
-			designName="Comment"
-			theme="NewsPillar"
-			renderingTarget="Apps"
-		/>
-	);
-};
-AppsStandardCommentNewsPillar.storyName = 'Apps: Display: Standard, Design: Comment, Theme: NewsPillar';
-AppsStandardCommentNewsPillar.args = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
-AppsStandardCommentNewsPillar.decorators = [lightDecorator({
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Comment,
-	theme: {...ArticleSpecial, ...Pillar}.News,
-})];
+		
 
-export const AppsStandardInteractiveNewsPillar = () => {
-	return (
-		<HydratedLayoutWrapper
-			displayName="Standard"
-			designName="Interactive"
-			theme="NewsPillar"
-			renderingTarget="Apps"
-		/>
-	);
-};
-AppsStandardInteractiveNewsPillar.storyName = 'Apps: Display: Standard, Design: Interactive, Theme: NewsPillar';
-AppsStandardInteractiveNewsPillar.args = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
-AppsStandardInteractiveNewsPillar.decorators = [lightDecorator({
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Interactive,
-	theme: {...ArticleSpecial, ...Pillar}.News,
-})];
+		export const WebImmersivePhotoEssayLabsLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Immersive"
+					designName="PhotoEssay"
+					theme="Labs"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebImmersivePhotoEssayLabsLight.storyName = 'Web: Display: Immersive, Design: PhotoEssay, Theme: Labs, Mode: Light';
+		WebImmersivePhotoEssayLabsLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebImmersivePhotoEssayLabsLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Immersive,
+					design: ArticleDesign.PhotoEssay,
+					theme: {...ArticleSpecial, ...Pillar}.Labs,
+				}]
+			),
+		];
 
-export const AppsImmersiveStandardNewsPillar = () => {
-	return (
-		<HydratedLayoutWrapper
-			displayName="Immersive"
-			designName="Standard"
-			theme="NewsPillar"
-			renderingTarget="Apps"
-		/>
-	);
-};
-AppsImmersiveStandardNewsPillar.storyName = 'Apps: Display: Immersive, Design: Standard, Theme: NewsPillar';
-AppsImmersiveStandardNewsPillar.args = { config: {"renderingTarget":"Apps","darkModeAvailable":false} };
-AppsImmersiveStandardNewsPillar.decorators = [lightDecorator({
-	display: ArticleDisplay.Immersive,
-	design: ArticleDesign.Standard,
-	theme: {...ArticleSpecial, ...Pillar}.News,
-})];
+		
+
+		export const WebStandardStandardLabsLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Standard"
+					theme="Labs"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardStandardLabsLight.storyName = 'Web: Display: Standard, Design: Standard, Theme: Labs, Mode: Light';
+		WebStandardStandardLabsLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardStandardLabsLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: {...ArticleSpecial, ...Pillar}.Labs,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardFeatureLabsLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Feature"
+					theme="Labs"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardFeatureLabsLight.storyName = 'Web: Display: Standard, Design: Feature, Theme: Labs, Mode: Light';
+		WebStandardFeatureLabsLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardFeatureLabsLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: {...ArticleSpecial, ...Pillar}.Labs,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardRecipeLabsLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="Recipe"
+					theme="Labs"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardRecipeLabsLight.storyName = 'Web: Display: Standard, Design: Recipe, Theme: Labs, Mode: Light';
+		WebStandardRecipeLabsLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardRecipeLabsLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.Recipe,
+					theme: {...ArticleSpecial, ...Pillar}.Labs,
+				}]
+			),
+		];
+
+		
+
+		export const WebStandardLiveBlogNewsPillarLight = () => {
+			return (
+				<HydratedLayoutWrapper
+					displayName="Standard"
+					designName="LiveBlog"
+					theme="NewsPillar"
+					renderingTarget="Web"
+				/>
+			);
+		};
+		WebStandardLiveBlogNewsPillarLight.storyName = 'Web: Display: Standard, Design: LiveBlog, Theme: NewsPillar, Mode: Light';
+		WebStandardLiveBlogNewsPillarLight.parameters = { config: {"renderingTarget":"Web","darkModeAvailable":false} };
+		WebStandardLiveBlogNewsPillarLight.decorators = [lightDecorator(
+				[{
+					display:  ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: {...ArticleSpecial, ...Pillar}.News,
+				}]
+			),
+		];
+
+		

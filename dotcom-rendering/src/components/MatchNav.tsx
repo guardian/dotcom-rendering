@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	background,
-	brandAlt,
 	headline,
+	palette,
 	space,
 	textSans,
 	until,
@@ -46,7 +46,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 			justify-content: space-between;
 			position: relative;
 			padding: ${space[2]}px;
-			background-color: ${brandAlt[400]};
+			background-color: ${palette.brandAlt[400]};
 			margin-bottom: 10px;
 			${until.tablet} {
 				margin: 0 -10px 10px;
@@ -59,7 +59,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 				bottom: 0;
 				width: 100vw;
 				left: -100vw;
-				background-color: ${brandAlt[400]};
+				background-color: ${palette.brandAlt[400]};
 				z-index: -1;
 			}
 		`}

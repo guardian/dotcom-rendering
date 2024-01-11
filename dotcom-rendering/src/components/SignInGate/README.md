@@ -84,32 +84,32 @@ Once the switch is set up, you'll need to add a test definition to the `src/web/
 import { ABTest } from '@guardian/ab-core';
 
 export const signInGatePatientia: ABTest = {
-    id: 'SignInGatePatientia',
-    start: '2020-04-30',
-    expiry: '2020-12-01',
-    author: 'Mahesh Makani',
-    description:
-        'Marathon sign in gate test on 3nd article view of simple article templates, with higher priority over banners and epic',
-    audience: 0.0001,
-    audienceOffset: 0.9999,
-    successMeasure: 'Users sign in or create a Guardian account',
-    audienceCriteria:
-        '2nd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss, not on help, info sections etc. Exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
-    dataLinkNames: 'SignInGatePatientia',
-    idealOutcome:
-        'Conversion to sign in is higher when the gate is shown over a longer period of time, with no sustained negative impact to engagement levels or supporter acquisition',
-    showForSensitive: false,
-    canRun: () => true,
-    variants: [
-        {
-            id: 'patientia-control-1',
-            test: (): void => {},
-        },
-        {
-            id: 'patientia-variant-1',
-            test: (): void => {},
-        },
-    ],
+	id: 'SignInGatePatientia',
+	start: '2020-04-30',
+	expiry: '2020-12-01',
+	author: 'Mahesh Makani',
+	description:
+		'Marathon sign in gate test on 3nd article view of simple article templates, with higher priority over banners and epic',
+	audience: 0.0001,
+	audienceOffset: 0.9999,
+	successMeasure: 'Users sign in or create a Guardian account',
+	audienceCriteria:
+		'2nd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss, not on help, info sections etc. Exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
+	dataLinkNames: 'SignInGatePatientia',
+	idealOutcome:
+		'Conversion to sign in is higher when the gate is shown over a longer period of time, with no sustained negative impact to engagement levels or supporter acquisition',
+	showForSensitive: false,
+	canRun: () => true,
+	variants: [
+		{
+			id: 'patientia-control-1',
+			test: (): void => {},
+		},
+		{
+			id: 'patientia-variant-1',
+			test: (): void => {},
+		},
+	],
 };
 ```
 
@@ -149,8 +149,8 @@ In the `src/web/components/SignInGate/gates` folder, we have a file for each uni
 ```ts
 // src/web/components/SignInGate/types.ts
 type SignInGateComponent = {
-    gate?: (props: SignInGateProps) => JSX.Element;
-    canShow: (isSignedIn: boolean, currentTest: CurrentABTest) => boolean;
+	gate?: (props: SignInGateProps) => JSX.Element;
+	canShow: (isSignedIn: boolean, currentTest: CurrentABTest) => boolean;
 };
 ```
 
@@ -251,23 +251,23 @@ In the `SignInGate.stories.tsx` file, simply import the gate design component, a
 
 ```tsx
 export const mainPatientia = () => {
-    return (
-        <Section fullWidth={true}>
-            <SignInGatePatientia
-                guUrl="https://theguardian.com"
-                signInUrl="https://profile.theguardian.com/"
-                dismissGate={() => {}}
-                component="test"
-            />
-        </Section>
-    );
+	return (
+		<Section fullWidth={true}>
+			<SignInGatePatientia
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				component="test"
+			/>
+		</Section>
+	);
 };
 mainPatientia.storyName = 'patientia_standalone';
 ```
 
 The props can be set to anything here, since storybook is only interested in the design of the component.
 
-To view it in storybook simply run `yarn storybook` which will launch a storybook server (with live reloading) to be able to view and develop it.
+To view it in storybook simply run `make storybook-dev` which will launch a storybook server (with live reloading) to be able to view and develop it.
 
 #### Forced Test Variant
 
@@ -288,19 +288,19 @@ The disadvantage of this method is that it's a bit tricky to work out exactly wh
 **B)** Add the `forcedTestVariant` prop to the `SetABTests` Island:
 
 ```tsx
-<Island priority="critical" clientOnly={true}>
-    <SetABTests
-        abTestSwitches={CAPIArticle.config.switches}
-        pageIsSensitive={CAPIArticle.config.isSensitive}
-        isDev={!!CAPIArticle.config.isDev}
-        // forced test variant prop
-        forcedTestVariant={{
-            // id of the test from the test definition
-            testId: 'SignInGatePatientia',
-            // name of the variant to force into
-            variant: { id: 'patientia-variant-1', test: () => {} },
-        }}
-    />
+<Island priority="critical">
+	<SetABTests
+		abTestSwitches={CAPIArticle.config.switches}
+		pageIsSensitive={CAPIArticle.config.isSensitive}
+		isDev={!!CAPIArticle.config.isDev}
+		// forced test variant prop
+		forcedTestVariant={{
+			// id of the test from the test definition
+			testId: 'SignInGatePatientia',
+			// name of the variant to force into
+			variant: { id: 'patientia-variant-1', test: () => {} },
+		}}
+	/>
 </Island>
 ```
 
@@ -369,17 +369,17 @@ In each test the `visitArticleAndScrollToGateForLazyLoad` should be called, this
 
 ```js
 visitArticleAndScrollToGateForLazyLoad({
-    url: 'some overriden article url', // use this to override the default article that is visited, e.g. to test that it displays correctly on different article types/sections
+	url: 'some overriden article url', // use this to override the default article that is visited, e.g. to test that it displays correctly on different article types/sections
 
-    roughPosition: 1000, // use this to override the default y position that is scrolled to after the sign in gate is loaded, you should only need this if the gate does not load because the article had not scrolled enough to lazy load the gate
+	roughPosition: 1000, // use this to override the default y position that is scrolled to after the sign in gate is loaded, you should only need this if the gate does not load because the article had not scrolled enough to lazy load the gate
 });
 ```
 
-In the gate designs themselves, it is useful to set a `data-cy` attributes on any specific element you need to target in Cypress. For example we add this attribute to the top level of the sign in gate div element which we can use to test it's been inserted onto the page. For example:
+In the gate designs themselves, it is useful to set a `data-testid` attributes on any specific element you need to target in Cypress. For example we add this attribute to the top level of the sign in gate div element which we can use to test it's been inserted onto the page. For example:
 
 ```html
 // gateDesigns/SignInGatePatientia.tsx ...
-<div className="{signinGate}" data-cy="sign-in-gate-patientia">...</div>
+<div className="{signinGate}" data-testid="sign-in-gate-patientia">...</div>
 ...
 ```
 
@@ -389,12 +389,12 @@ In the gate designs themselves, it is useful to set a `data-cy` attributes on an
 it('should load the sign in gate', () => {
     visitArticleAndScrollToGateForLazyLoad();
 
-    cy.get('[data-cy=sign-in-gate-patientia]').should('be.visible');
+    cy.get('[data-testid=sign-in-gate-patientia]').should('be.visible');
 });
 ...
 ```
 
-To run the cypress tests interactively, make sure the development server is running first, and then use `yarn cypress:open` to open the interactive cypress testing tool.
+To run the cypress tests interactively, make sure the development server is running first, and then use `pnpm cypress:open` to open the interactive cypress testing tool.
 
 Since the Cypress tests rely on a production article, it would normally get the AB switch state from there. In some cases this switch may not be on, or may not be defined yet, in turn meaning that the Cypress tests will fail.
 
@@ -415,4 +415,4 @@ Now the AB test will be picked up even if the switch does not exist yet in Front
 
 Finally for specific code which can be unit tested too, there are some tests for those too. For display rules, you'll find them in `src/web/components/SignInGate/displayRule.test.ts` and for the setting/checking if the gate has been dismissed in `src/web/components/SignInGate/dismissGate.test.ts`. Ideally unit tests should not be a replacement for the integration tests.
 
-You can run tests using `yarn test`, if you want to run for a specific test file use `yarn test ./path/to/file` e.g. `yarn test ./src/web/components/SignInGate/displayRule.test.ts`
+You can run tests using `pnpm test`, if you want to run for a specific test file use `pnpm test ./path/to/file` e.g. `pnpm test ./src/web/components/SignInGate/displayRule.test.ts`

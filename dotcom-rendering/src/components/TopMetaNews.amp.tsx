@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline, neutral } from '@guardian/source-foundations';
+import { headline, palette } from '@guardian/source-foundations';
 import { string as curly } from 'curlyquotes';
 import { getAgeWarning } from '../lib/age-warning';
 import { getSoleContributor } from '../lib/byline';
@@ -8,6 +8,7 @@ import { getSharingUrls } from '../lib/sharing-urls';
 import type { AMPArticleModel } from '../types/article.amp';
 import { Branding, BrandingRegionContainer } from './Branding.amp';
 import { Byline } from './Byline.amp';
+import { Disclaimer } from './Disclaimer.amp';
 import { MainMedia } from './MainMedia.amp';
 import { SeriesLink } from './SeriesLink.amp';
 import { Standfirst } from './Standfirst.amp';
@@ -19,7 +20,7 @@ const headerStyle = css`
 	font-weight: 500;
 	padding-bottom: 24px;
 	padding-top: 3px;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 `;
 const bylineStyle = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};
@@ -97,6 +98,13 @@ export const TopMetaNews = ({
 			/>
 
 			<Standfirst text={articleData.standfirst} pillar={pillar} />
+
+			{!!articleData.affiliateLinksDisclaimer && (
+				<Disclaimer
+					html={articleData.affiliateLinksDisclaimer}
+					pillar={pillar}
+				/>
+			)}
 
 			<BrandingRegionContainer
 				commercialProperties={articleData.commercialProperties}

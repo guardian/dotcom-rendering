@@ -21,11 +21,30 @@ import {
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
 /** fronts are a series of lowercase strings, dashes and forward slashes */
-const FRONT_URL = /^\/[a-z-/]+/;
+const FRONT_URL = /^\/[a-z-/]+(?<!\.css)$/;
 /** This is imperfect, but covers *some* cases of tag fronts, consider expanding in the future */
 const TAG_FRONT_URL = /^\/(tone|series|profile)\/[a-z-]+/;
 /** assets are paths like /assets/index.xxx.js */
 const ASSETS_URL = /^assets\/.+\.js/;
+
+//editionalise front url to uk
+const editionalisefront = (url: string): string => {
+	const [, , , frontTitle] = url.split('/');
+	const editionalisedFronts = [
+		'culture',
+		'sport',
+		'commentisfree',
+		'business',
+		'money',
+		'travel',
+		'lifestyle',
+		'lifeandstyle',
+	];
+	if (frontTitle && editionalisedFronts.includes(frontTitle)) {
+		return url.replace(frontTitle, `uk/${frontTitle}`);
+	}
+	return url;
+};
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info
@@ -94,7 +113,7 @@ export const devServer = (): Handler => {
 						'https://www.theguardian.com/',
 					).toString();
 					console.info('redirecting to Front:', url);
-					return res.redirect(`/Front/${url}`);
+					return res.redirect(`/Front/${editionalisefront(url)}`);
 				}
 
 				next();

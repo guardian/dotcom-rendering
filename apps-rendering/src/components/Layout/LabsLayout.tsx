@@ -8,7 +8,7 @@ import {
 	neutral,
 } from '@guardian/source-foundations';
 import { DottedLines } from '@guardian/source-react-components-development-kitchen';
-import { map, withDefault } from '@guardian/types';
+import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import ArticleBody from 'components/ArticleBody';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';

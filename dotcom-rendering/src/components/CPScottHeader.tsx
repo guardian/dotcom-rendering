@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	headline,
-	neutral,
-	opinion,
-	until,
-} from '@guardian/source-foundations';
+import { headline, palette, until } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { generateSources, getFallbackSource } from './Picture';
 import { QuoteIcon } from './QuoteIcon';
@@ -14,7 +9,7 @@ const scottAvatarStyles = css`
 	height: 72px;
 	border-radius: 100%;
 	overflow: hidden;
-	background-color: ${opinion[800]};
+	background-color: ${palette.opinion[800]};
 	flex-shrink: 0;
 	display: inline-flex;
 	/* Align at end to prevent cut off (see https://github.com/guardian/dotcom-rendering/issues/8510) */
@@ -41,7 +36,7 @@ const scottTextStyles = css`
 `;
 
 const quoteLineStyles = css`
-	color: ${neutral[46]};
+	color: ${palette.neutral[46]};
 `;
 
 const containerStyles = css`
@@ -82,7 +77,7 @@ export const CPScottHeader = () => {
 			<div css={scottTextStyles}>
 				<div css={quoteLineStyles}>
 					<div css={textWrapStyle}>
-						<QuoteIcon colour={neutral[46]} />
+						<QuoteIcon colour={palette.neutral[46]} />
 						Comment is free&hellip;
 					</div>
 					<div css={textWrapStyle}>but facts are sacred</div>
@@ -92,7 +87,7 @@ export const CPScottHeader = () => {
 						'http://www.theguardian.com/commentisfree/2002/nov/29/1'
 					}
 					cssOverrides={css`
-						color: ${neutral[7]};
+						color: ${palette.neutral[7]};
 						text-decoration: none;
 						${scottTextStyles}
 					`}

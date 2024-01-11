@@ -146,3 +146,20 @@ export const DropdownWithNotifications = () => (
 );
 
 DropdownWithNotifications.storyName = 'Dropdown with notifications';
+
+export const DropdownExpandedWithNotifications = () => (
+	<Header>
+		<Nav>
+			<Dropdown
+				id="d3"
+				label="My Account"
+				links={linksWithNotifications}
+				dataLinkName="linkname3"
+				defaultIsExpanded={true}
+			/>
+		</Nav>
+	</Header>
+);
+
+DropdownExpandedWithNotifications.storyName =
+	'Dropdown expanded with notifications';

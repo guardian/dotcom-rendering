@@ -24,6 +24,7 @@ const validDailyArticleCount: [DailyArticle, DailyArticle, DailyArticle] = [
 
 describe('dailyArticleCount', () => {
 	beforeEach(() => {
+		// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 		localStorage.clear();
 	});
 

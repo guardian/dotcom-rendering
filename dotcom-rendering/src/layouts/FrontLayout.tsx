@@ -2,13 +2,10 @@ import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	background,
-	border,
 	brandBackground,
 	brandBorder,
 	brandLine,
-	labs,
-	neutral,
-	news,
+	palette as sourcePalette,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
@@ -18,6 +15,7 @@ import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import {
 	decideFrontsBannerAdSlot,
+	decideMerchandisingSlot,
 	decideMerchHighAndMobileAdSlots,
 } from '../components/DecideFrontsAdSlots';
 import { Footer } from '../components/Footer';
@@ -36,7 +34,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { WeatherWrapper } from '../components/WeatherWrapper.importable';
-import { badgeFromBranding } from '../lib/branding';
+import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -260,8 +258,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										linkHoverColour={news[400]}
-										borderColour={neutral[46]}
+										linkHoverColour={
+											sourcePalette.news[400]
+										}
+										borderColour={sourcePalette.neutral[46]}
 									/>
 								</Island>
 							</Section>
@@ -285,8 +285,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<Section
 							fullWidth={true}
 							showTopBorder={false}
-							backgroundColour={labs[400]}
-							borderColour={border.primary}
+							backgroundColour={sourcePalette.labs[400]}
+							borderColour={sourcePalette.neutral[60]}
 							sectionId="labs-header"
 						>
 							<LabsHeader />
@@ -318,16 +318,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
-					// Remove the branding from each of the cards in a paid content collection
-					const trailsWithoutBranding =
-						collection.collectionBranding?.kind === 'paid-content'
-							? trails.map((labTrail) => {
-									return {
-										...labTrail,
-										branding: undefined,
-									};
-							  })
-							: trails;
+					// Remove the branding from each of the cards in a paid content
+					// collection if they are the same.
+					const trailsWithoutBranding = isPaidContentSameBranding(
+						collection.collectionBranding,
+					)
+						? trails.map((labTrail) => ({
+								...labTrail,
+								branding: undefined,
+						  }))
+						: trails;
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
@@ -433,8 +433,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										displayName={collection.displayName}
 										trails={trails}
 										mostViewed={front.mostViewed}
-										mostCommented={front.mostCommented}
-										mostShared={front.mostShared}
 										isNetworkFront={front.isNetworkFront}
 										deeplyRead={deeplyReadData}
 										editionId={front.editionId}
@@ -557,6 +555,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										defer={{ until: 'visible' }}
 									>
 										<Carousel
+											isOnwardContent={false}
 											heading={collection.displayName}
 											trails={trails}
 											onwardsSource={'unknown-source'}
@@ -662,6 +661,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					);
 				})}
 			</main>
+
 			<Section
 				fullWidth={true}
 				showTopBorder={false}
@@ -671,20 +671,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
-			{renderAds && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-					hasPageSkin={hasPageSkin}
-				>
-					<AdSlot position="merchandising" />
-				</Section>
-			)}
+
+			{decideMerchandisingSlot(renderAds, hasPageSkin)}
 
 			{NAV.subNavSections && (
 				<Section
@@ -701,8 +689,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={news[400]}
-							borderColour={neutral[46]}
+							linkHoverColour={sourcePalette.news[400]}
+							borderColour={sourcePalette.neutral[46]}
 						/>
 					</Island>
 				</Section>
@@ -729,11 +717,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			</Section>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island
-					priority="feature"
-					defer={{ until: 'idle' }}
-					clientOnly={true}
-				>
+				<Island priority="feature" defer={{ until: 'idle' }}>
 					<StickyBottomBanner
 						contentType={front.config.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

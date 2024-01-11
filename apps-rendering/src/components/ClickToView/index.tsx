@@ -8,8 +8,8 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Button, SvgCheckmark } from '@guardian/source-react-components';
-import type { Option } from '@guardian/types';
-import { OptionKind, withDefault } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import { OptionKind, withDefault } from '../../../vendor/@guardian/types/index';
 import { fold } from 'lib';
 import type { FC } from 'react';
 import React, { useState } from 'react';

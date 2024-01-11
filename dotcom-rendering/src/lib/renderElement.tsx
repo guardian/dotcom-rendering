@@ -10,7 +10,6 @@ import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
-import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpSwitcher } from '../components/EmailSignUpSwitcher';
@@ -63,10 +62,8 @@ import {
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
 import { getSharingUrls } from '../lib/sharing-urls';
-import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
-import { decidePalette } from './decidePalette';
 
 type Props = {
 	format: ArticleFormat;
@@ -83,8 +80,7 @@ type Props = {
 	isSensitive: boolean;
 	switches: Switches;
 	isPinnedPost?: boolean;
-	abTests?: ServerSideTests;
-	imagesForAppsLightbox: ImageForAppsLightbox[];
+	abTests: ServerSideTests;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -139,13 +135,12 @@ export const renderElement = ({
 	isSensitive,
 	isPinnedPost,
 	abTests,
-	imagesForAppsLightbox,
 }: Props) => {
-	const palette = decidePalette(format);
-
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
+
+	const isInLightboxTest = abTests.lightboxVariant === 'variant';
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -189,7 +184,6 @@ export const renderElement = ({
 						<CalloutBlockComponent
 							callout={element}
 							pageId={pageId}
-							format={format}
 						/>
 					</Island>
 				);
@@ -220,7 +214,11 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ChartAtom id={element.id} html={element.html} />
+					<ChartAtom
+						id={element.id}
+						html={element.html}
+						title={element.title}
+					/>
 				</Island>
 			);
 
@@ -242,8 +240,6 @@ export const renderElement = ({
 					permalink={element.permalink}
 				/>
 			);
-		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
-			return <DisclaimerBlockComponent html={element.html} />;
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
 			return (
 				<DividerBlockComponent
@@ -327,7 +323,6 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						format={format}
 					/>
 				</Island>
 			);
@@ -354,8 +349,7 @@ export const renderElement = ({
 					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
-					switches={switches}
-					imagesForAppsLightbox={imagesForAppsLightbox}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -391,6 +385,7 @@ export const renderElement = ({
 					elementJs={element.js}
 					elementCss={element.css}
 					format={format}
+					title={element.title}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement': {
@@ -457,8 +452,7 @@ export const renderElement = ({
 					key={index}
 					images={element.images}
 					caption={element.caption}
-					switches={switches}
-					imagesForAppsLightbox={imagesForAppsLightbox}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
@@ -480,7 +474,7 @@ export const renderElement = ({
 				<NumberedTitleBlockComponent
 					position={element.position}
 					html={element.html}
-					format={element.format}
+					format={format}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
@@ -492,7 +486,6 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						format={format}
 					/>
 				</Island>
 			);
@@ -501,7 +494,6 @@ export const renderElement = ({
 				<PullQuoteBlockComponent
 					key={index}
 					html={element.html}
-					palette={palette}
 					format={format}
 					attribution={element.attribution}
 					role={element.role}
@@ -516,7 +508,6 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						format={format}
 					/>
 				</Island>
 			);
@@ -614,7 +605,6 @@ export const renderElement = ({
 					<TimelineAtom
 						id={element.id}
 						title={element.title}
-						format={format}
 						events={element.events}
 						description={element.description}
 					/>
@@ -702,7 +692,6 @@ export const renderElement = ({
 							authorName={authorName}
 							dateCreated={dateCreated}
 							alt={alt}
-							palette={palette}
 						/>
 					);
 				}
@@ -721,7 +710,6 @@ export const renderElement = ({
 							authorName={authorName}
 							youtubeHtml={youtubeHtml}
 							dateCreated={dateCreated}
-							palette={palette}
 						/>
 					);
 				}
@@ -733,7 +721,6 @@ export const renderElement = ({
 							description={witnessTypeDataText.description}
 							authorName={witnessTypeDataText.authorName}
 							dateCreated={witnessTypeDataText.dateCreated}
-							palette={palette}
 						/>
 					);
 				}
@@ -767,6 +754,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':
+		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
 		default:
 			return <></>;
 	}
@@ -808,7 +796,6 @@ export const RenderArticleElement = ({
 	switches,
 	isPinnedPost,
 	abTests,
-	imagesForAppsLightbox,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -828,7 +815,6 @@ export const RenderArticleElement = ({
 		switches,
 		isPinnedPost,
 		abTests,
-		imagesForAppsLightbox,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

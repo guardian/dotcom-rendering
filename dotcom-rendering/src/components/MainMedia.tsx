@@ -3,8 +3,7 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { until } from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
-import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
-import type { Switches } from '../types/config';
+import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 
 const mainMedia = css`
@@ -73,8 +72,8 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	abTests: ServerSideTests;
 	switches: Switches;
-	imagesForAppsLightbox: ImageForAppsLightbox[];
 };
 
 export const MainMedia = ({
@@ -88,8 +87,8 @@ export const MainMedia = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
+	abTests,
 	switches,
-	imagesForAppsLightbox,
 }: Props) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -107,10 +106,10 @@ export const MainMedia = ({
 					webTitle={webTitle}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
+					abTests={abTests}
 					switches={switches}
 					hideCaption={hideCaption}
 					starRating={starRating}
-					imagesForAppsLightbox={imagesForAppsLightbox}
 				/>
 			))}
 		</div>

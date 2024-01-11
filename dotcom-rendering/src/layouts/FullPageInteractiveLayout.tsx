@@ -2,13 +2,8 @@ import { css, Global } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	border,
-	brandBackground,
-	brandBorder,
-	brandLine,
 	from,
-	labs,
-	neutral,
+	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
 import {
@@ -25,12 +20,12 @@ import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
-import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { renderElement } from '../lib/renderElement';
 import type { NavType } from '../model/extract-nav';
-import type { Switches } from '../types/config';
+import { palette as themePalette } from '../palette';
+import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { DCRArticle } from '../types/frontend';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
@@ -51,6 +46,7 @@ type RendererProps = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	abTests: ServerSideTests;
 	switches: Switches;
 };
 
@@ -63,6 +59,7 @@ const Renderer = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
+	abTests,
 	switches,
 }: RendererProps) => {
 	// const cleanedElements = elements.map(element =>
@@ -73,7 +70,6 @@ const Renderer = ({
 	const output = elements.map((element, index) => {
 		const el = renderElement({
 			format,
-
 			element,
 			host,
 			index,
@@ -83,8 +79,8 @@ const Renderer = ({
 			ajaxUrl,
 			isAdFreeUser,
 			isSensitive,
+			abTests,
 			switches,
-			imagesForAppsLightbox: [],
 		});
 
 		switch (element._type) {
@@ -134,8 +130,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	// often reach readers who are less familiar with the Guardian.
 	const isSlimNav = !article.config.switches.interactiveFullHeaderSwitch;
 
-	const palette = decidePalette(format);
-
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
@@ -151,10 +145,10 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 			>
 				<Section
 					fullWidth={true}
-					borderColour={brandLine.primary}
+					borderColour={sourcePalette.brand[600]}
 					showTopBorder={false}
 					padSides={false}
-					backgroundColour={brandBackground.primary}
+					backgroundColour={sourcePalette.brand[400]}
 					element="nav"
 				>
 					<Nav
@@ -213,7 +207,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
+						backgroundColour={sourcePalette.brand[400]}
 						element="header"
 					>
 						<Header
@@ -239,10 +233,10 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 
 			<Section
 				fullWidth={true}
-				borderColour={brandLine.primary}
+				borderColour={sourcePalette.brand[600]}
 				showTopBorder={false}
 				padSides={false}
-				backgroundColour={brandBackground.primary}
+				backgroundColour={sourcePalette.brand[400]}
 				element="nav"
 			>
 				<Nav
@@ -264,7 +258,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 			{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
 				<Section
 					fullWidth={true}
-					backgroundColour={neutral[100]}
+					backgroundColour={themePalette('--article-background')}
 					padSides={false}
 					element="aside"
 				>
@@ -272,8 +266,10 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={palette.text.articleLinkHover}
-							borderColour={palette.border.subNav}
+							linkHoverColour={themePalette(
+								'--article-link-text-hover',
+							)}
+							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>
@@ -287,8 +283,6 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 		config: { host },
 	} = article;
 
-	const palette = decidePalette(format);
-
 	return (
 		<>
 			{article.isLegacyInteractive && (
@@ -296,7 +290,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 			)}
 			<header
 				css={css`
-					background-color: ${palette.background.article};
+					background-color: ${themePalette('--article-background')};
 				`}
 			>
 				<NavHeader article={article} NAV={NAV} format={format} />
@@ -307,8 +301,8 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 							fullWidth={true}
 							showTopBorder={false}
 							padSides={true}
-							backgroundColour={labs[400]}
-							borderColour={border.primary}
+							backgroundColour={sourcePalette.labs[400]}
+							borderColour={sourcePalette.neutral[60]}
 							sectionId="labs-header"
 						>
 							<LabsHeader />
@@ -323,7 +317,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				showSideBorders={false}
 				shouldCenter={false}
 				padSides={false}
-				backgroundColour={palette.background.article}
+				backgroundColour={themePalette('--article-background')}
 				element="main"
 			>
 				<article
@@ -340,6 +334,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 						pageId={article.pageId}
 						webTitle={article.webTitle}
 						ajaxUrl={article.config.ajaxUrl}
+						abTests={article.config.abTests}
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
@@ -351,15 +346,17 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				<Section
 					fullWidth={true}
 					padSides={false}
-					backgroundColour={neutral[100]}
+					backgroundColour={themePalette('--article-background')}
 					element="aside"
 				>
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={palette.text.articleLinkHover}
-							borderColour={palette.border.subNav}
+							linkHoverColour={themePalette(
+								'--article-link-text-hover',
+							)}
+							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>
@@ -368,8 +365,8 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 			<Section
 				fullWidth={true}
 				padSides={false}
-				backgroundColour={brandBackground.primary}
-				borderColour={brandBorder.primary}
+				backgroundColour={sourcePalette.brand[400]}
+				borderColour={sourcePalette.brand[600]}
 				showSideBorders={false}
 				element="footer"
 			>
@@ -384,11 +381,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper>
-				<Island
-					priority="feature"
-					defer={{ until: 'idle' }}
-					clientOnly={true}
-				>
+				<Island priority="feature" defer={{ until: 'idle' }}>
 					<StickyBottomBanner
 						contentType={article.contentType}
 						contributionsServiceUrl={

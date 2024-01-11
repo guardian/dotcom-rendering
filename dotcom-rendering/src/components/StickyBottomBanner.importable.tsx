@@ -4,8 +4,8 @@ import type {
 } from '@guardian/braze-components/logic';
 import { cmp } from '@guardian/consent-management-platform';
 import type { CountryCode } from '@guardian/libs';
+import { isString, storage } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
 import type {
@@ -60,13 +60,8 @@ type RRBannerConfig = {
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
-	const item = localStorage.getItem(`gu.prefs.${key}`) as undefined | string;
-
-	if (item) {
-		const parsedItem = JSON.parse(item) as Record<string, any>;
-		return parsedItem.value;
-	}
-	return item;
+	const item = storage.local.get(`gu.prefs.${key}`);
+	return isString(item) ? item : undefined;
 };
 
 const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;
@@ -142,7 +137,6 @@ const buildRRBannerConfigWith = ({
 						isSensitive,
 						tags,
 						contributionsServiceUrl,
-						alreadyVisitedCount: getAlreadyVisitedCount(),
 						engagementBannerLastClosedAt: getBannerLastClosedAt(
 							'engagementBannerLastClosedAt',
 						),
@@ -159,14 +153,13 @@ const buildRRBannerConfigWith = ({
 					}),
 				show:
 					({ meta, module, fetchEmail }: BannerProps) =>
-					() =>
-						(
-							<BannerComponent
-								meta={meta}
-								module={module}
-								fetchEmail={fetchEmail}
-							/>
-						),
+					() => (
+						<BannerComponent
+							meta={meta}
+							module={module}
+							fetchEmail={fetchEmail}
+						/>
+					),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};
@@ -205,8 +198,9 @@ const buildBrazeBanner = (
 				tags,
 				shouldHideReaderRevenue,
 			),
-		show: (meta: any) => () =>
-			<BrazeBanner meta={meta} idApiUrl={idApiUrl} />,
+		show: (meta: any) => () => (
+			<BrazeBanner meta={meta} idApiUrl={idApiUrl} />
+		),
 	},
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });

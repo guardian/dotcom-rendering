@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { joinUrl } from '@guardian/libs';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import { palette, space, textSans } from '@guardian/source-foundations';
 import { SvgPinned } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import { Island } from './Island';
 import { RelativeTime } from './RelativeTime.importable';
 
@@ -18,7 +17,6 @@ type Props = {
 	blockId: string;
 	isPinnedPost: boolean;
 	isOriginalPinnedPost: boolean;
-	format: ArticleFormat;
 	host?: string;
 	pageId?: string;
 };
@@ -29,12 +27,10 @@ const FirstPublished = ({
 	blockId,
 	isPinnedPost,
 	isOriginalPinnedPost,
-	format,
 	host,
 	pageId,
 }: Props) => {
 	const baseHref = host && pageId ? joinUrl(host, pageId) : '';
-	const { border } = decidePalette(format);
 	const publishedDate = new Date(firstPublished);
 	return (
 		<div
@@ -61,7 +57,7 @@ const FirstPublished = ({
 				{!isPinnedPost && (
 					<span
 						css={css`
-							color: ${neutral[46]};
+							color: ${palette.neutral[46]};
 							font-weight: bold;
 							margin-right: ${space[2]}px;
 						`}
@@ -77,7 +73,7 @@ const FirstPublished = ({
 				<span
 					css={css`
 						${textSans.xxsmall()};
-						color: ${neutral[46]};
+						color: ${palette.neutral[46]};
 					`}
 				>
 					{firstPublishedDisplay ?? fallbackDate(publishedDate)}
@@ -105,11 +101,13 @@ const FirstPublished = ({
 							width: 14px;
 							height: 14px;
 							border-radius: 50%;
-							background-color: ${border.liveBlock};
+							background-color: ${themePalette(
+								'--live-block-border-top',
+							)};
 							align-self: center;
 							margin-left: ${space[2]}px;
 							svg {
-								fill: ${neutral[100]};
+								fill: ${palette.neutral[100]};
 							}
 						`}
 					>

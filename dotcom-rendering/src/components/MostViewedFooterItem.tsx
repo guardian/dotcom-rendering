@@ -2,15 +2,15 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	border,
 	breakpoints,
 	headline,
-	neutral,
-	text,
+	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
+import { palette } from '../palette';
 import { AgeWarning } from './AgeWarning';
-import { BigNumber } from './BigNumber/BigNumber';
+import { BigNumber } from './BigNumber';
+import { FormatBoundary } from './FormatBoundary';
 import { LinkHeadline } from './LinkHeadline';
 import { generateSources } from './Picture';
 
@@ -21,12 +21,12 @@ const gridItem = (
 ) => {
 	const borderTop = hasPageSkin
 		? css`
-				border-top: 1px solid ${border.secondary};
+				border-top: 1px solid ${sourcePalette.neutral[86]};
 		  `
 		: css`
 				/* Below leftCol always set top border */
 				${until.leftCol} {
-					border-top: 1px solid ${border.secondary};
+					border-top: 1px solid ${sourcePalette.neutral[86]};
 				}
 		  `;
 	return css`
@@ -38,10 +38,10 @@ const gridItem = (
 		items to prevent double borders */
 		border-top: ${position !== 1 &&
 		position !== 6 &&
-		`1px solid ${border.secondary}`};
+		`1px solid ${sourcePalette.neutral[86]}`};
 
 		/* The left border is set on the container */
-		border-right: 1px solid ${border.secondary};
+		border-right: 1px solid ${sourcePalette.neutral[86]};
 		min-height: ${isWithImage ? '4rem' : '3.25rem'};
 
 		&:hover {
@@ -50,7 +50,7 @@ const gridItem = (
 
 		&:hover,
 		:focus {
-			background: ${neutral[97]};
+			background: ${palette('--most-viewed-footer-hover')};
 		}
 	`;
 };
@@ -59,7 +59,10 @@ const bigNumber = css`
 	position: absolute;
 	top: 0.375rem;
 	left: 0.625rem;
-	fill: ${text.primary};
+	fill: ${palette('--article-text')};
+	svg {
+		height: 2.5rem;
+	}
 `;
 
 const headlineHeader = css`
@@ -70,7 +73,7 @@ const headlineHeader = css`
 
 const headlineLink = css`
 	text-decoration: none;
-	color: ${text.anchorSecondary};
+	color: ${palette('--article-text')};
 	font-weight: 500;
 	${headline.xxxsmall()};
 
@@ -158,27 +161,29 @@ export const MostViewedFooterItem = ({
 			</span>
 			{!!image && <MiniImage image={image} alt={headlineText} />}
 			<div css={[headlineHeader, !!image && textPaddingWithImage]}>
-				{format.design === ArticleDesign.LiveBlog ? (
-					<LinkHeadline
-						headlineText={headlineText}
-						format={format}
-						size="small"
-						kickerText="Live"
-						hideLineBreak={false}
-						showPulsingDot={true}
-						showQuotes={false}
-					/>
-				) : (
-					<LinkHeadline
-						headlineText={headlineText}
-						format={format}
-						size="small"
-						showQuotes={
-							format.design === ArticleDesign.Comment ||
-							format.design === ArticleDesign.Letter
-						}
-					/>
-				)}
+				<FormatBoundary format={format}>
+					{format.design === ArticleDesign.LiveBlog ? (
+						<LinkHeadline
+							headlineText={headlineText}
+							format={format}
+							size="small"
+							kickerText="Live"
+							hideLineBreak={false}
+							showPulsingDot={true}
+							showQuotes={false}
+						/>
+					) : (
+						<LinkHeadline
+							headlineText={headlineText}
+							format={format}
+							size="small"
+							showQuotes={
+								format.design === ArticleDesign.Comment ||
+								format.design === ArticleDesign.Letter
+							}
+						/>
+					)}
+				</FormatBoundary>
 			</div>
 			{!!ageWarning && (
 				<div css={ageWarningStyles}>

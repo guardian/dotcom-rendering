@@ -10,8 +10,6 @@ import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 type Props = {
 	trails: DCRFrontCard[];
 	mostViewed: TrailType[];
-	mostCommented?: TrailType;
-	mostShared?: TrailType;
 	displayName: string;
 	isNetworkFront: boolean;
 	deeplyRead?: TrailType[];
@@ -24,8 +22,6 @@ type Props = {
 export const FrontMostViewed = ({
 	trails,
 	mostViewed,
-	mostCommented,
-	mostShared,
 	displayName,
 	isNetworkFront,
 	deeplyRead,
@@ -76,8 +72,6 @@ export const FrontMostViewed = ({
 					<MostViewedFooter
 						tabs={tabs}
 						sectionId="Most viewed"
-						mostCommented={mostCommented}
-						mostShared={mostShared}
 						hasPageSkin={hasPageSkin}
 					/>
 				</Island>
@@ -92,8 +86,6 @@ export const FrontMostViewed = ({
 				<MostViewedFooter
 					tabs={tabs}
 					sectionId="Most viewed"
-					mostCommented={mostCommented}
-					mostShared={mostShared}
 					hasPageSkin={hasPageSkin}
 				/>
 			)}

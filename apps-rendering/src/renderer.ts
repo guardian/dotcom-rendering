@@ -13,8 +13,8 @@ import {
 	OptionKind,
 	some,
 	withDefault,
-} from '@guardian/types';
-import type { Option } from '@guardian/types';
+} from '../vendor/@guardian/types/index';
+import type { Option } from '../vendor/@guardian/types/index';
 import { getAdPlaceholderInserter } from 'ads';
 import { ElementKind } from 'bodyElement';
 import type {
@@ -177,12 +177,15 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 const shouldShowDropCap = (
 	text: string,
 	format: ArticleFormat,
+	positionAllowsDropCap: boolean,
 	isEditions: boolean,
 ): boolean => {
 	if (isEditions) {
 		return false;
 	}
-	return allowsDropCaps(format) && text.length >= 200;
+	return (
+		allowsDropCaps(format) && text.length >= 200 && positionAllowsDropCap
+	);
 };
 
 const textElement =
@@ -194,11 +197,22 @@ const textElement =
 		);
 		switch (node.nodeName) {
 			case 'P': {
-				if (text === '* * *') {
+				const dinkus = '* * *';
+				if (text === dinkus) {
 					return children;
 				}
 
-				const showDropCap = shouldShowDropCap(text, format, isEditions);
+				const isFirstParagraph = node.previousSibling === null;
+				const isAfterDinkus =
+					node.previousSibling?.previousSibling?.textContent ===
+					dinkus;
+
+				const showDropCap = shouldShowDropCap(
+					text,
+					format,
+					isFirstParagraph || isAfterDinkus,
+					isEditions,
+				);
 
 				return h(
 					Paragraph,

@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
 import { reportAbuse } from '../../lib/discussionApi';
 import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
+import { palette as schemedPalette } from '../../palette';
 
 type FormData = {
 	categoryId: number;
@@ -15,7 +15,7 @@ type FormData = {
 
 const formWrapper = css`
 	z-index: 1;
-	border: 1px solid ${neutral[86]};
+	border: 1px solid ${schemedPalette('--discussion-report-border')};
 	position: absolute;
 	width: 300px;
 	top: 0;
@@ -23,12 +23,12 @@ const formWrapper = css`
 	display: flex;
 	flex-direction: column;
 	padding: ${space[3]}px;
-	background-color: white;
+	background-color: ${schemedPalette('--discussion-report-background')};
 	${textSans.xxsmall()};
 `;
 
-const labelStyles = (format: ArticleFormat) => css`
-	color: ${decidePalette(format).discussionGeneric};
+const labelStyles = css`
+	color: ${schemedPalette('--discussion-colour')};
 	${textSans.small({ fontWeight: 'bold' })}
 `;
 
@@ -44,9 +44,11 @@ const inputWrapper = css`
 	select,
 	input,
 	textarea {
+		background-color: ${schemedPalette('--discussion-report-background')};
 		min-height: ${space[5]}px;
 		width: 75%;
-		border: 1px solid ${neutral[86]};
+		border: 1px solid ${schemedPalette('--discussion-report-border')};
+		color: inherit;
 	}
 `;
 
@@ -57,14 +59,12 @@ const errorMessageStyles = css`
 type Props = {
 	commentId: number;
 	toggleSetShowForm: () => void;
-	format: ArticleFormat;
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
 };
 
 export const AbuseReportForm = ({
 	commentId,
 	toggleSetShowForm,
-	format,
 	authStatus,
 }: Props) => {
 	const modalRef = useRef<HTMLDivElement>(null);
@@ -179,12 +179,11 @@ export const AbuseReportForm = ({
 			});
 	};
 
-	const labelStylesClass = labelStyles(format);
 	return (
 		<div aria-modal="true" ref={modalRef}>
 			<form css={formWrapper} onSubmit={onSubmit}>
 				<div css={inputWrapper}>
-					<label css={labelStylesClass} htmlFor="category">
+					<label css={labelStyles} htmlFor="category">
 						Category
 					</label>
 					<select
@@ -221,7 +220,7 @@ export const AbuseReportForm = ({
 				</div>
 
 				<div css={inputWrapper}>
-					<label css={labelStylesClass} htmlFor="reason">
+					<label css={labelStyles} htmlFor="reason">
 						Reason (optional)
 					</label>
 					<textarea
@@ -241,7 +240,7 @@ export const AbuseReportForm = ({
 				</div>
 
 				<div css={inputWrapper}>
-					<label css={labelStylesClass} htmlFor="email">
+					<label css={labelStyles} htmlFor="email">
 						Email (optional)
 					</label>
 					<input

@@ -6,7 +6,7 @@ import {
 	ArticleElementRole,
 	ArticlePillar,
 } from '@guardian/libs';
-import { none } from '@guardian/types';
+import { none } from '../../../vendor/@guardian/types/index';
 import { image } from 'fixtures/image';
 import { Optional } from 'optional';
 import type { FC } from 'react';

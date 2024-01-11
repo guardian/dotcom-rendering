@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brand, from } from '@guardian/source-foundations';
+import { from, palette } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
@@ -7,7 +7,6 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { HeaderTopBar } from './HeaderTopBar.importable';
 import { Island } from './Island';
 import { Logo } from './Logo';
-import { Snow } from './Snow.importable';
 import { SupportTheG } from './SupportTheG.importable';
 
 /** Ensures we do not cause CLS from lazy loaded component height */
@@ -26,7 +25,7 @@ const explicitHeight = css`
 `;
 
 const headerStyles = css`
-	background-color: ${brand[400]};
+	background-color: ${palette.brand[400]};
 `;
 
 type Props = {
@@ -73,19 +72,8 @@ export const Header = ({
 		</Island>
 
 		<div css={[hasPageSkin ? pageSkinContainer : center, explicitHeight]}>
-			<Island
-				priority="enhancement"
-				defer={{ until: 'hash' }}
-				clientOnly={true}
-			>
-				<Snow />
-			</Island>
 			<Logo editionId={editionId} hasPageSkin={hasPageSkin} />
-			<Island
-				priority="feature"
-				defer={{ until: 'idle' }}
-				clientOnly={true}
-			>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<SupportTheG
 					urls={urls}
 					editionId={editionId}

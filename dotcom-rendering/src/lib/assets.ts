@@ -1,10 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { isObject, isString } from '@guardian/libs';
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles';
+import { isObject, isString, isUndefined } from '@guardian/libs';
+import { BUILD_VARIANT, dcrJavascriptBundle } from '../../webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
 import { makeMemoizedFunction } from './memoize';
 
@@ -28,7 +25,7 @@ export const decideAssetOrigin = (
 		case 'CODE':
 			return 'https://assets-code.guim.co.uk/';
 		default: {
-			if (isDev) {
+			if (isDev && isUndefined(process.env.HOSTNAME)) {
 				// Use absolute asset paths in development mode
 				// This is so paths are correct when treated as relative to Frontend
 				return 'http://localhost:3030/';
@@ -66,7 +63,11 @@ const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	}
 });
 
-export type Build = 'apps' | 'web' | 'web.variant' | 'web.legacy';
+export type Build =
+	| 'client.apps'
+	| 'client.web'
+	| 'client.web.variant'
+	| 'client.web.legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
 
@@ -107,10 +108,10 @@ export const getPathFromManifest = (
 const getScriptRegex = (build: Build) =>
 	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
-export const WEB = getScriptRegex('web');
-export const WEB_VARIANT_SCRIPT = getScriptRegex('web.variant');
-export const WEB_LEGACY_SCRIPT = getScriptRegex('web.legacy');
-export const APPS_SCRIPT = getScriptRegex('apps');
+export const WEB = getScriptRegex('client.web');
+export const WEB_VARIANT_SCRIPT = getScriptRegex('client.web.variant');
+export const WEB_LEGACY_SCRIPT = getScriptRegex('client.web.legacy');
+export const APPS_SCRIPT = getScriptRegex('client.apps');
 
 export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {
@@ -136,9 +137,9 @@ export const getModulesBuild = ({
 }: {
 	tests: ServerSideTests;
 	switches: Switches;
-}): Exclude<Extract<Build, `web${string}`>, 'web.legacy'> => {
+}): Exclude<Extract<Build, `client.web${string}`>, 'client.web.legacy'> => {
 	if (BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant') {
-		return 'web.variant';
+		return 'client.web.variant';
 	}
-	return 'web';
+	return 'client.web';
 };

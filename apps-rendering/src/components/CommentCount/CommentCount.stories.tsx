@@ -2,7 +2,7 @@
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { some } from '@guardian/types';
+import { some } from '../../../vendor/@guardian/types/index';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import type { FC, ReactElement } from 'react';
 import CommentCount from './';

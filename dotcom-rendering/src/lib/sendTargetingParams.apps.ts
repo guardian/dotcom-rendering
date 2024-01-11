@@ -14,5 +14,7 @@ export const getTargetingParams = (
 					? adTargetingParam.value.join(',')
 					: adTargetingParam.value,
 			]),
-	).set('p', 'app');
+	)
+		.set('p', 'app')
+		.set('rp', 'dotcom-rendering');
 };

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { timeAgo } from '@guardian/libs';
+import { log, timeAgo } from '@guardian/libs';
 import {
 	from,
 	headline,
@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import { Hide, Link } from '@guardian/source-react-components';
 import { StarRating } from '@guardian/source-react-components-development-kitchen';
+import { useEffect, useState } from 'react';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxCaption } from './LightboxCaption';
 import { LightboxLoader } from './LightboxLoader';
@@ -150,7 +151,7 @@ const Selection = ({
 				}
 			`}
 			aria-hidden="true"
-			data-cy="lightbox-selected"
+			data-testid="lightbox-selected"
 		>
 			<span className="selected">{initialPosition}</span>
 			<span
@@ -173,17 +174,33 @@ const Selection = ({
 };
 
 export const LightboxImages = ({ format, images }: Props) => {
+	const [loaded, setLoaded] = useState(new Set<number>());
+
+	useEffect(() => {
+		log('dotcom', '💡 images loaded:', loaded);
+	});
+
 	return (
 		<>
 			{images.map((image, index) => {
 				const orientation =
 					image.width > image.height ? 'landscape' : 'portrait';
 
+				const position = index + 1;
+
+				const onLoad = () =>
+					setLoaded((set) => {
+						const previousSize = set.size;
+						set.add(position);
+						const newSize = set.size;
+						return previousSize !== newSize ? new Set(set) : set;
+					});
+
 				return (
 					<li
 						// eslint-disable-next-line react/no-array-index-key -- because we know this key is unique
 						key={`${image.masterUrl}-${index}`}
-						data-index={index + 1}
+						data-index={position}
 						data-element-id={image.elementId}
 						css={[
 							liStyles,
@@ -192,7 +209,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 						]}
 					>
 						<figure css={figureStyles}>
-							<LightboxLoader position={index + 1} />
+							{!loaded.has(position) && <LightboxLoader />}
 							<Picture
 								// Using the role of immersive here indicates the intentions for lightbox
 								// images but it's moot because the `isLightbox` prop overrides the decision
@@ -208,6 +225,8 @@ export const LightboxImages = ({ format, images }: Props) => {
 								format={format}
 								isLightbox={true}
 								orientation={orientation}
+								onLoad={onLoad}
+								loading="lazy"
 							/>
 							<aside css={asideStyles}>
 								{!!image.title && (
@@ -251,7 +270,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 								<Hide from="tablet">
 									<Selection
 										countOfImages={images.length}
-										initialPosition={index + 1}
+										initialPosition={position}
 									/>
 								</Hide>
 								<LightboxCaption

@@ -2,24 +2,22 @@ import { css, Global } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	border,
-	brandBackground,
-	brandBorder,
-	brandLine,
 	from,
-	labs,
-	neutral,
+	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import React from 'react';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
@@ -45,7 +43,6 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -224,16 +221,16 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 		config: { isPaidContent, host },
 	} = article;
 
-	const showComments = article.isCommentable;
+	const isApps = renderingTarget === 'Apps';
+	const isWeb = renderingTarget === 'Web';
+
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
-	const palette = decidePalette(format);
-
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const isApps = renderingTarget === 'Apps';
-	const isWeb = renderingTarget === 'Web';
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
@@ -271,7 +268,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									showTopBorder={false}
 									showSideBorders={false}
 									padSides={false}
-									backgroundColour={brandBackground.primary}
+									backgroundColour={sourcePalette.brand[400]}
 									element="header"
 								>
 									<Header
@@ -304,10 +301,10 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 
 						<Section
 							fullWidth={true}
-							borderColour={brandLine.primary}
+							borderColour={sourcePalette.brand[600]}
 							showTopBorder={false}
 							padSides={false}
-							backgroundColour={brandBackground.primary}
+							backgroundColour={sourcePalette.brand[400]}
 							element="nav"
 						>
 							<Nav
@@ -336,9 +333,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							format.theme !== ArticleSpecial.Labs && (
 								<Section
 									fullWidth={true}
-									backgroundColour={
-										palette.background.article
-									}
+									backgroundColour={themePalette(
+										'--article-background',
+									)}
 									padSides={false}
 									element="aside"
 								>
@@ -353,10 +350,12 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 											currentNavLink={
 												props.NAV.currentNavLink
 											}
-											linkHoverColour={
-												palette.text.articleLinkHover
-											}
-											borderColour={palette.border.subNav}
+											linkHoverColour={themePalette(
+												'--article-link-text-hover',
+											)}
+											borderColour={themePalette(
+												'--sub-nav-border',
+											)}
 										/>
 									</Island>
 								</Section>
@@ -365,7 +364,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						{format.theme !== ArticleSpecial.Labs && (
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								showTopBorder={false}
 							>
@@ -384,8 +385,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={labs[400]}
-								borderColour={border.primary}
+								backgroundColour={sourcePalette.labs[400]}
+								borderColour={sourcePalette.neutral[60]}
 								sectionId="labs-header"
 							>
 								<LabsHeader />
@@ -400,16 +401,23 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main data-layout="InteractiveLayout">
 				{isApps && (
-					<Island priority="critical" clientOnly={true}>
-						<AdPortals />
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
-					borderColour={palette.border.article}
+					backgroundColour={themePalette('--article-background')}
+					borderColour={themePalette('--article-border')}
 					element="article"
 					className={interactiveLegacyClasses.contentInteractive}
 				>
@@ -426,10 +434,10 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										ajaxUrl={article.config.ajaxUrl}
+										abTests={article.config.abTests}
 										switches={article.config.switches}
 										isAdFreeUser={article.isAdFreeUser}
 										isSensitive={article.config.isSensitive}
-										imagesForAppsLightbox={[]}
 									/>
 								</div>
 							</GridItem>
@@ -453,7 +461,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								{format.theme === ArticleSpecial.Labs ? (
 									<></>
 								) : (
-									<Border format={format} />
+									<Border />
 								)}
 							</GridItem>
 							<GridItem area="headline">
@@ -493,32 +501,71 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							<GridItem area="lines">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
-										<DecideLines format={format} />
+										<DecideLines
+											format={format}
+											color={themePalette(
+												'--article-meta-lines',
+											)}
+										/>
 									</div>
 								</div>
 							</GridItem>
 							<GridItem area="meta" element="aside">
 								<div css={maxWidth}>
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										byline={article.byline}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={article.isCommentable}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
-									/>
+									{isApps ? (
+										<Hide from="leftCol">
+											<ArticleMetaApps
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={
+													article.isCommentable
+												}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
+												ajaxUrl={article.config.ajaxUrl}
+											></ArticleMetaApps>
+										</Hide>
+									) : (
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											ajaxUrl={article.config.ajaxUrl}
+										/>
+									)}
 								</div>
 							</GridItem>
 							<GridItem area="body" element="article">
@@ -530,6 +577,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										ajaxUrl={article.config.ajaxUrl}
+										abTests={article.config.abTests}
 										switches={article.config.switches}
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
@@ -556,7 +604,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
-										imagesForAppsLightbox={[]}
 									/>
 								</ArticleContainer>
 							</GridItem>
@@ -567,8 +614,11 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					stretchRight={false}
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
-					borderColour={palette.border.article}
+					backgroundColour={themePalette(
+						'--article-section-background',
+					)}
+					borderColour={themePalette('--article-border')}
+					fontColour={themePalette('--article-section-title')}
 					padContent={false}
 				>
 					<div
@@ -576,11 +626,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							max-width: 620px;
 						`}
 					>
-						<Island
-							priority="feature"
-							defer={{ until: 'visible' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'visible' }}>
 							<SlotBodyEnd
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -601,6 +647,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								tags={article.tags}
 								renderAds={renderAds}
 								isLabs={false}
+								articleEndSlot={
+									!!article.config.switches.articleEndSlot
+								}
 							/>
 						</Island>
 					</div>
@@ -610,7 +659,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					fullWidth={true}
 					showTopBorder={false}
 					padSides={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={themePalette('--article-background')}
 				>
 					<StraightLines
 						count={4}
@@ -624,7 +673,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={themePalette('--article-background')}
 				>
 					<SubMeta
 						format={format}
@@ -647,7 +696,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot
@@ -659,7 +708,12 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true} showTopBorder={false}>
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
@@ -697,12 +751,15 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					/>
 				</Island>
 
-				{!isPaidContent && showComments && (
+				{showComments && (
 					<Section
 						fullWidth={true}
 						sectionId="comments"
 						data-print-layout="hide"
 						element="section"
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
@@ -731,11 +788,15 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island
 								priority="feature"
-								clientOnly={true}
 								defer={{ until: 'visible' }}
 							>
 								<MostViewedFooterData
@@ -756,7 +817,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot
@@ -778,8 +839,10 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={palette.text.articleLinkHover}
-							borderColour={palette.border.subNav}
+							linkHoverColour={themePalette(
+								'--article-link-text-hover',
+							)}
+							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>
@@ -791,8 +854,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						fullWidth={true}
 						data-print-layout="hide"
 						padSides={false}
-						backgroundColour={brandBackground.primary}
-						borderColour={brandBorder.primary}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
 					>
@@ -809,11 +872,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					</Section>
 
 					<BannerWrapper data-print-layout="hide">
-						<Island
-							priority="feature"
-							defer={{ until: 'idle' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -849,7 +908,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
-					backgroundColour={neutral[97]}
+					backgroundColour={themePalette('--apps-footer-background')}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"

@@ -3,7 +3,7 @@
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { Block } from '@guardian/content-api-models/v1/block';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import { OptionKind } from '@guardian/types';
+import { OptionKind } from '../vendor/@guardian/types/index';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import { maybeCapiDate } from 'capi';

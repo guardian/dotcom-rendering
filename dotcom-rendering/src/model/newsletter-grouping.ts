@@ -16,6 +16,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'this-is-europe',
 				'the-guide-staying-in',
 				'the-long-read',
+				'reclaim-your-brain',
 			],
 		},
 		{
@@ -56,6 +57,8 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'The world explained',
 			newsletters: [
 				'trump-on-trial',
+				'follow-margaret-sullivan',
+				'follow-robert-reich',
 				'global-dispatch',
 				'documentaries',
 				'her-stage',
@@ -105,10 +108,13 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'us-morning-newsletter', // First Thing
 				'today-us', // Headlines US
+				'trump-on-trial',
+				'reclaim-your-brain',
+				'follow-margaret-sullivan',
+				'follow-robert-reich',
+				'best-of-opinion-us',
 				'headlines-europe',
 				'green-light', // Down to Earth
-				'trump-on-trial',
-				'best-of-opinion-us',
 				'patriarchy',
 				'bookmarks',
 			],
@@ -199,13 +205,14 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'morning-mail',
 				'afternoon-update',
 				'first-dog',
-				'five-great-reads',
 				'the-rural-network',
+				'reclaim-your-brain',
 			],
 		},
 		{
 			title: 'In depth',
 			newsletters: [
+				'the-crunch',
 				'green-light', // Down to Earth
 				'tech-scape',
 				'pushing-buttons',
@@ -230,6 +237,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Weekend reads',
 			newsletters: [
+				'five-great-reads',
 				'the-long-read',
 				'the-upside',
 				'house-to-home',
@@ -241,6 +249,8 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'The world explained',
 			newsletters: [
 				'trump-on-trial',
+				'follow-margaret-sullivan',
+				'follow-robert-reich',
 				'global-dispatch',
 				'cotton-capital',
 				'documentaries',

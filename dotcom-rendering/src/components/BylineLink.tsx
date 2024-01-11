@@ -1,9 +1,12 @@
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, isString } from '@guardian/libs';
+import { Hide } from '@guardian/source-react-components';
+import { DottedLines } from '@guardian/source-react-components-development-kitchen';
 import {
 	getBylineComponentsFromTokens,
 	getSoleContributor,
 	isContributor,
 } from '../lib/byline';
+import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import { FollowWrapper } from './FollowWrapper.importable';
@@ -13,6 +16,7 @@ type Props = {
 	byline: string;
 	tags: TagType[];
 	format: ArticleFormat;
+	isHeadline: boolean;
 };
 
 const applyCleverOrderingForMatching = (titles: string[]): string[] => {
@@ -94,7 +98,7 @@ const ContributorLink = ({
 	<a
 		rel="author"
 		data-link-name="auto tag link"
-		href={`//www.theguardian.com/${contributorTagId}`}
+		href={`https://www.theguardian.com/${contributorTagId}`}
 	>
 		{contributor}
 	</a>
@@ -106,14 +110,20 @@ function removeComma(bylinePart: string) {
 		: bylinePart;
 }
 
-export const BylineLink = ({ byline, tags, format }: Props) => {
+export const BylineLink = ({
+	byline,
+	tags,
+	format,
+	isHeadline = false,
+}: Props) => {
 	const tokens = bylineAsTokens(byline, tags);
 	const soleContributor = getSoleContributor(tags, byline);
 	const hasSoleContributor = !!soleContributor;
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
+	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
-		if (typeof bylineComponent === 'string') {
+		if (isString(bylineComponent)) {
 			const displayString =
 				format.design === ArticleDesign.Analysis && hasSoleContributor
 					? removeComma(bylineComponent)
@@ -140,14 +150,23 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 	return (
 		<>
 			{renderedTokens}
-			{renderingTarget === 'Apps' && soleContributor !== undefined ? (
-				<Island priority="critical">
-					<FollowWrapper
-						displayName={soleContributor.title}
-						id={soleContributor.id}
-						format={format}
+			{renderingTarget === 'Apps' && !isHeadline && hasSoleContributor ? (
+				<Hide from="desktop">
+					<DottedLines
+						count={1}
+						color={
+							isLiveBlog
+								? 'rgba(255, 255, 255, 0.4)'
+								: themePalette('--article-meta-lines')
+						}
 					/>
-				</Island>
+					<Island priority="critical">
+						<FollowWrapper
+							displayName={soleContributor.title}
+							id={soleContributor.id}
+						/>
+					</Island>
+				</Hide>
 			) : null}
 		</>
 	);

@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { neutral, space, text, textSans } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	space,
+	text,
+	textSans,
+} from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import {
 	addUserName,
@@ -7,6 +12,7 @@ import {
 	preview as defaultPreview,
 	reply as defaultReply,
 } from '../../lib/discussionApi';
+import { palette as schemedPalette } from '../../palette';
 import type {
 	CommentResponse,
 	CommentType,
@@ -19,7 +25,6 @@ import { Row } from './Row';
 
 type Props = {
 	shortUrl: string;
-	format: ArticleFormat;
 	user: SignedInUser;
 	onAddComment: (response: CommentType) => void;
 	setCommentBeingRepliedTo?: () => void;
@@ -54,16 +59,18 @@ const commentTextArea = css`
 	margin-bottom: ${space[3]}px;
 	padding: 8px 10px 10px 8px;
 	${textSans.small()};
-	border-color: ${neutral[86]};
+	border-color: ${sourcePalette.neutral[86]};
 	:focus {
-		border-color: ${neutral[46]};
+		border-color: ${sourcePalette.neutral[46]};
 		outline: none;
 	}
+	color: inherit;
+	background-color: ${schemedPalette('--comment-form-input-background')};
 `;
 
 const greyPlaceholder = css`
 	::placeholder {
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 `;
 
@@ -72,7 +79,7 @@ const blackPlaceholder = css`
 	::placeholder {
 		font-weight: bold;
 		opacity: 1;
-		color: ${neutral[0]};
+		color: inherit;
 	}
 `;
 
@@ -99,7 +106,7 @@ const msgContainerStyles = css`
 
 const linkStyles = css`
 	a {
-		color: ${text.anchorPrimary};
+		color: ${schemedPalette('--discussion-link')};
 		text-decoration: none;
 		:hover,
 		:focus {
@@ -109,7 +116,7 @@ const linkStyles = css`
 `;
 
 const wrapperHeaderTextStyles = css`
-	background-color: ${neutral[97]};
+	background-color: ${schemedPalette('--comment-form-header-background')};
 	padding: 8px 10px 10px 8px;
 	width: 100%;
 	margin-top: 8px;
@@ -120,8 +127,9 @@ const commentAddOns = css`
 	height: 22px;
 	font-size: 13px;
 	line-height: 17px;
-	border: 1px solid ${neutral[100]};
-	color: ${neutral[46]};
+	border: 1px solid ${schemedPalette('--comment-form-input-background')};
+	background-color: ${schemedPalette('--comment-form-addon-button')};
+	color: inherit;
 	text-align: center;
 	cursor: pointer;
 	margin-left: 4px;
@@ -200,7 +208,6 @@ const simulateNewComment = (
 
 export const CommentForm = ({
 	shortUrl,
-	format,
 	onAddComment,
 	user,
 	setCommentBeingRepliedTo,
@@ -416,7 +423,6 @@ export const CommentForm = ({
 	if (userNameMissing && body) {
 		return (
 			<FirstCommentWelcome
-				format={format}
 				body={body}
 				error={error}
 				submitForm={submitUserName}
@@ -498,7 +504,6 @@ export const CommentForm = ({
 					<Row>
 						<>
 							<PillarButton
-								format={format}
 								type="submit"
 								linkName="post comment"
 								size="small"
@@ -509,7 +514,6 @@ export const CommentForm = ({
 								<>
 									<Space amount={3} />
 									<PillarButton
-										format={format}
 										onClick={fetchShowPreview}
 										priority="secondary"
 										linkName="preview-comment"
@@ -520,7 +524,6 @@ export const CommentForm = ({
 									<Space amount={3} />
 
 									<PillarButton
-										format={format}
 										onClick={resetForm}
 										priority="subdued"
 										linkName="cancel-post-comment"

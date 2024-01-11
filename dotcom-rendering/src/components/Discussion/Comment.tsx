@@ -1,19 +1,17 @@
 import { css } from '@emotion/react';
 import {
-	border,
-	brand,
 	from,
-	neutral,
 	remSpace,
+	palette as sourcePalette,
 	space,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
 import { pickComment, unPickComment } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
+import { palette as schemedPalette } from '../../palette';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { AbuseReportForm } from './AbuseReportForm';
 import { Avatar } from './Avatar';
@@ -26,7 +24,6 @@ import { Timestamp } from './Timestamp';
 type Props = {
 	user?: SignedInUser;
 	comment: CommentType;
-	format: ArticleFormat;
 	isClosedForComments: boolean;
 	setCommentBeingRepliedTo: (commentBeingRepliedTo?: CommentType) => void;
 	isReply: boolean;
@@ -37,13 +34,13 @@ type Props = {
 	onRecommend?: (commentId: number) => Promise<boolean>;
 };
 
-const commentControlsLink = (format: ArticleFormat) => css`
+const commentControlsLink = css`
 	margin-top: -2px;
 
 	a {
 		${textSans.small({ fontWeight: 'bold' })}
 		margin-right: ${space[2]}px;
-		color: ${decidePalette(format).discussionGeneric};
+		color: ${schemedPalette('--discussion-colour')};
 		/*
       We do not want underline to be applied to SVG
       therefore we override the styles and apply them to the nested <span>
@@ -52,10 +49,9 @@ const commentControlsLink = (format: ArticleFormat) => css`
 			text-decoration: none;
 			text-decoration-color: none;
 			span {
-				color: ${decidePalette(format).discussionGeneric};
+				color: ${schemedPalette('--discussion-colour')};
 				text-decoration: underline;
-				text-decoration-color: ${decidePalette(format)
-					.discussionGeneric};
+				text-decoration-color: ${schemedPalette('--discussion-colour')};
 			}
 		}
 	}
@@ -85,7 +81,7 @@ const commentCss = css`
 		margin-left: ${space[5]}px;
 		margin-right: ${space[5]}px;
 		padding-left: ${space[2]}px;
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 
 	i {
@@ -104,14 +100,14 @@ const commentCss = css`
 `;
 
 const blockedCommentStyles = css`
-	color: ${neutral[46]};
+	color: ${schemedPalette('--discussion-subdued')};
 	${textSans.xxsmall()}
 `;
 
 // to override a tag styles from dangerouslySetInnerHTML
 const commentLinkStyling = css`
 	a {
-		color: ${brand[500]};
+		color: ${schemedPalette('--discussion-link')};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
@@ -120,13 +116,13 @@ const commentLinkStyling = css`
 `;
 
 const commentWrapper = css`
-	border-top: 1px solid ${border.secondary};
+	border-top: 1px solid ${sourcePalette.neutral[86]};
 	display: flex;
 	padding: ${space[2]}px 0;
 `;
 
 const selectedStyles = css`
-	background-color: ${neutral[97]};
+	background-color: ${sourcePalette.neutral[97]};
 	margin-left: -${space[2]}px;
 	padding-left: ${space[2]}px;
 	margin-right: -${space[2]}px;
@@ -141,13 +137,13 @@ const avatarMargin = css`
 	}
 `;
 
-const colourStyles = (format: ArticleFormat) => css`
+const colourStyles = css`
 	a {
-		color: ${decidePalette(format).discussionGeneric};
-		text-decoration-color: ${decidePalette(format).discussionGeneric};
+		color: ${schemedPalette('--discussion-colour')};
+		text-decoration-color: ${schemedPalette('--discussion-colour')};
 		:hover {
-			color: ${decidePalette(format).discussionGeneric};
-			text-decoration-color: ${decidePalette(format).discussionGeneric};
+			color: ${schemedPalette('--discussion-colour')};
+			text-decoration-color: ${schemedPalette('--discussion-colour')};
 		}
 	}
 `;
@@ -168,7 +164,7 @@ const regularFont = css`
 const svgReplyArrow = css`
 	svg {
 		/* stylelint-disable-next-line declaration-no-important */
-		fill: ${neutral[46]} !important;
+		fill: ${sourcePalette.neutral[46]} !important;
 	}
 `;
 
@@ -227,9 +223,9 @@ const cssReplyToWrapper = css`
 	}
 `;
 
-const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
+const buttonLinkPillarBaseStyles = css`
 	button {
-		color: ${decidePalette(format).discussionGeneric};
+		color: ${schemedPalette('--discussion-colour')};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -238,14 +234,14 @@ const buttonLinkPillarBaseStyles = (format: ArticleFormat) => css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${decidePalette(format).discussionGeneric};
+			text-decoration-color: ${schemedPalette('--discussion-colour')};
 		}
 	}
 `;
 
 const buttonLinkBaseStyles = css`
 	button {
-		color: ${neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -254,7 +250,7 @@ const buttonLinkBaseStyles = css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${neutral[46]};
+			text-decoration-color: ${sourcePalette.neutral[46]};
 		}
 	}
 `;
@@ -296,7 +292,6 @@ const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 
 export const Comment = ({
 	comment,
-	format,
 	isClosedForComments,
 	setCommentBeingRepliedTo,
 	user,
@@ -402,7 +397,7 @@ export const Comment = ({
 										<Column>
 											<div
 												css={[
-													colourStyles(format),
+													colourStyles,
 													boldFont,
 													negativeMargin,
 												]}
@@ -443,7 +438,7 @@ export const Comment = ({
 									<Row>
 										<div
 											css={[
-												colourStyles(format),
+												colourStyles,
 												boldFont,
 												cssReplyAlphaDisplayName,
 											]}
@@ -464,7 +459,7 @@ export const Comment = ({
 										{comment.responseTo ? (
 											<div
 												css={[
-													colourStyles(format),
+													colourStyles,
 													regularFont,
 													svgReplyArrow,
 													cssReplyBetaDisplayName,
@@ -632,9 +627,7 @@ export const Comment = ({
 												<div
 													css={[
 														svgReplyArrow,
-														buttonLinkPillarBaseStyles(
-															format,
-														),
+														buttonLinkPillarBaseStyles,
 														css`
 															button {
 																${textSans.small(
@@ -665,9 +658,7 @@ export const Comment = ({
 												<div
 													css={[
 														svgReplyArrow,
-														commentControlsLink(
-															format,
-														),
+														commentControlsLink,
 													]}
 												>
 													<Link
@@ -700,9 +691,7 @@ export const Comment = ({
 											comment.userProfile.userId && (
 											<div
 												css={[
-													buttonLinkPillarBaseStyles(
-														format,
-													),
+													buttonLinkPillarBaseStyles,
 													css`
 														button {
 															${textSans.small({
@@ -795,7 +784,6 @@ export const Comment = ({
 												toggleSetShowForm={
 													toggleSetShowForm
 												}
-												format={format}
 												commentId={comment.id}
 												authStatus={user?.authStatus}
 											/>

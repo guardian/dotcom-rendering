@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, palette, textSans } from '@guardian/source-foundations';
+import { palette, textSans } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { FETagType } from '../types/tag';
 
@@ -43,17 +43,17 @@ const listStyleNone = css`
 	gap: 1.5rem 0.25rem;
 	background-image: repeating-linear-gradient(
 			to bottom,
-			${neutral[100]} 0px,
-			${neutral[100]} 36px,
+			${palette.neutral[100]} 0px,
+			${palette.neutral[100]} 36px,
 			transparent 36px,
 			transparent 37px,
-			${neutral[100]} 37px,
-			${neutral[100]} 48px
+			${palette.neutral[100]} 37px,
+			${palette.neutral[100]} 48px
 		),
 		repeating-linear-gradient(
 			to right,
-			${neutral[86]} 0px,
-			${neutral[86]} 3px,
+			${palette.neutral[86]} 0px,
+			${palette.neutral[86]} 3px,
 			transparent 3px,
 			transparent 5px
 		);

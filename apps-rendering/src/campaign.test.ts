@@ -4,7 +4,7 @@ import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import { CampaignFields } from '@guardian/apps-rendering-api-models/campaignFields';
 import { ParticipationFields } from '@guardian/apps-rendering-api-models/participationFields';
 import { ArticleSpecial } from '@guardian/libs';
-import Int64 from 'node-int64';
+import { Int64 } from 'thrift';
 import { getCallout, getReport } from 'campaign';
 
 // ----- Mocks ----- //
@@ -56,7 +56,7 @@ describe('getCallout', () => {
 				formFields: [],
 			},
 			name: 'mockName',
-			activeUntil: 1730542820000
+			activeUntil: 1730542820000,
 		});
 	});
 

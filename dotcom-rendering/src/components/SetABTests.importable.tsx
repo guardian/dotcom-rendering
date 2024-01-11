@@ -1,13 +1,15 @@
 import { AB } from '@guardian/ab-core';
 import type { CoreAPIConfig } from '@guardian/ab-core';
 import { getCookie, log } from '@guardian/libs';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { getOphan } from '../client/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
 import { getCypressSwitches } from '../experiments/cypress-switches';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 import { setABTests } from '../lib/useAB';
 import type { ABTestSwitches } from '../model/enhance-switches';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	abTestSwitches: ABTestSwitches;
@@ -33,10 +35,29 @@ export const SetABTests = ({
 	abTestSwitches,
 	forcedTestVariants,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+	const [ophan, setOphan] = useState<Awaited<ReturnType<typeof getOphan>>>();
+
 	useEffect(() => {
+		getOphan(renderingTarget)
+			.then(setOphan)
+			.catch((e) => {
+				console.log(
+					`There was an error retrieving the ophan window object`,
+					e,
+				);
+			});
+	}, [renderingTarget]);
+
+	useEffect(() => {
+		if (!ophan) return;
+
 		const mvtId = Number(
 			(isDev &&
-				getCookie({ name: 'GU_mvt_id_local', shouldMemoize: true })) || // Simplify localhost testing by creating a different mvt id
+				getCookie({
+					name: 'GU_mvt_id_local',
+					shouldMemoize: true,
+				})) || // Simplify localhost testing by creating a different mvt id
 				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 		);
 		if (!mvtId) {
@@ -64,6 +85,7 @@ export const SetABTests = ({
 			},
 			arrayOfTestObjects: tests,
 			forcedTestVariants: allForcedTestVariants,
+			ophanRecord: ophan.record,
 		});
 		const allRunnableTests = ab.allRunnableTests(tests);
 		const participations = runnableTestsToParticipations(allRunnableTests);
@@ -77,7 +99,7 @@ export const SetABTests = ({
 		ab.registerImpressionEvents(allRunnableTests);
 		ab.registerCompleteEvents(allRunnableTests);
 		log('dotcom', 'AB tests initialised');
-	}, [abTestSwitches, forcedTestVariants, isDev, pageIsSensitive]);
+	}, [abTestSwitches, forcedTestVariants, isDev, pageIsSensitive, ophan]);
 
 	// we don’t render anything
 	return null;

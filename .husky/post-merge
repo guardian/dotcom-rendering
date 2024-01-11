@@ -4,18 +4,27 @@
 RED='\033[0;31m'
 ENDCOLOR='\033[0m'
 
-changedFiles="$(git diff-tree -r --name-only --no-commit-id HEAD@{1} HEAD)"
-changedLock="$(echo "$changedFiles" | { grep -E 'yarn.lock|package-lock.json' || :; })"
-changedNode="$(echo "$changedFiles" | { grep '.nvmrc' || :; })"
-
-if [[ ! -z $changedLock ]]
-then
-	echo "${RED}This application has new dependencies. Running 'yarn'... ${ENDCOLOR}"
-	yarn --frozen-lockfile
+# Delete old yarn-based stuff while transitioning from yarn to pnpm. It can be
+# removed once we're confident that pnpm is working.
+if [ -d ".yarn" ]; then
+	echo "${RED}This application now uses pnpm. Cleaning up old yarn stuff...${ENDCOLOR}"
+	rm -rf .yarn
+	rm -rf **/node_modules # belt-and-braces
 fi
+
+changedFiles="$(git diff-tree -r --name-only --no-commit-id HEAD@{1} HEAD)"
+changedLock="$(echo "$changedFiles" | { grep -E 'pnpm-lock.yaml' || :; })"
+changedNode="$(echo "$changedFiles" | { grep '.nvmrc' || :; })"
 
 if [[ ! -z $changedNode ]]
 then
 	version="$(cat .nvmrc)"
-	echo "${RED}This project now uses node version "$version". Please use 'nvm use' & run 'yarn'${ENDCOLOR}"
+	echo "${RED}This project needs Node "$version". Please run 'nvm use', 'fnm use' or 'asdf install' (or whatever is appropriate) then run 'pnpm install --frozen-lockfile'${ENDCOLOR}"
+	exit 1
+fi
+
+if [[ ! -z $changedLock ]]
+then
+	echo "${RED}This application has updated dependencies. Installing with pnpm...${ENDCOLOR}"
+	pnpm install --frozen-lockfile
 fi

@@ -7,6 +7,8 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuVpcParameter",
       "GuSubnetListParameter",
       "GuSubnetListParameter",
+      "GuDistributionBucketParameter",
+      "GuLoggingStreamNameParameter",
       "GuSecurityGroup",
       "GuStringParameter",
       "GuClassicLoadBalancer",
@@ -15,15 +17,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
-      "GuAllowPolicy",
       "GuInstanceRole",
       "GuDescribeEC2Policy",
-      "GuLoggingStreamNameParameter",
       "GuLogShippingPolicy",
-      "GuDistributionBucketParameter",
       "GuGetDistributablePolicy",
       "GuParameterStoreReadPolicy",
-      "GuStringParameter",
       "GuAmiParameter",
       "GuHttpsEgressSecurityGroup",
       "GuWazuhAccess",
@@ -54,10 +52,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "ELBLogsParameter": {
       "Default": "/TEST/frontend/rendering/elb.logs.bucketName",
       "Description": "S3 Bucket Name for ELB logs",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-    "ELKStreamId": {
-      "Default": "/TEST/frontend/rendering/logging.stream.name",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "LoggingStreamName": {
@@ -141,32 +135,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "AllowPolicyDescribeEc2AutoscalingE4175956": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "ec2:DescribeTags",
-                "ec2:DescribeInstances",
-                "autoscaling:DescribeAutoScalingGroups",
-                "autoscaling:DescribeAutoScalingInstances",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "AllowPolicyDescribeEc2AutoscalingE4175956",
-        "Roles": [
-          {
-            "Ref": "InstanceRole",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
     "AllowPolicyGetArtifactsBucket2A1CDA44": {
       "Properties": {
         "PolicyDocument": {
@@ -174,7 +142,18 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             {
               "Action": "s3:GetObject",
               "Effect": "Allow",
-              "Resource": "arn:aws:s3:::aws-frontend-artifacts/*",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:s3:::",
+                    {
+                      "Ref": "DistributionBucketName",
+                    },
+                    "/*",
+                  ],
+                ],
+              },
             },
           ],
           "Version": "2012-10-17",
@@ -207,7 +186,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                       {
                         "Ref": "AWS::AccountId",
                       },
-                      ":parameter//TEST/frontend/rendering/*",
+                      ":parameter/TEST/frontend/rendering/*",
                     ],
                   ],
                 },
@@ -288,6 +267,13 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Value": "guardian/dotcom-rendering",
           },
           {
+            "Key": "LogKinesisStreamName",
+            "PropagateAtLaunch": true,
+            "Value": {
+              "Ref": "LoggingStreamName",
+            },
+          },
+          {
             "Key": "Stack",
             "PropagateAtLaunch": true,
             "Value": "frontend",
@@ -296,6 +282,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Key": "Stage",
             "PropagateAtLaunch": true,
             "Value": "TEST",
+          },
+          {
+            "Key": "SystemdUnit",
+            "PropagateAtLaunch": true,
+            "Value": "rendering.service",
           },
         ],
         "VPCZoneIdentifier": {
@@ -925,6 +916,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::EC2::SecurityGroup",
     },
     "frontendTESTrenderingF3FD9600": {
+      "DependsOn": [
+        "InstanceRole",
+      ],
       "Properties": {
         "LaunchTemplateData": {
           "IamInstanceProfile": {
@@ -1019,23 +1013,40 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                   "#!/bin/bash -ev
 groupadd frontend
 useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
-usermod -a -G frontend aws-kinesis-agent-user
 cd /home/dotcom-rendering
-aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/TEST/rendering/rendering.tar.gz ./
+aws --region eu-west-1 s3 cp s3://",
+                  {
+                    "Ref": "DistributionBucketName",
+                  },
+                  "/frontend/TEST/rendering/rendering.tar.gz ./
 tar -zxf rendering.tar.gz rendering
 chown -R dotcom-rendering:frontend rendering
 cd rendering
-export TERM=xterm-256color
-export NODE_ENV=production
-export GU_STAGE=TEST
 mkdir /var/log/dotcom-rendering
 chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make start-prod
-/opt/aws-kinesis-agent/configure-aws-kinesis-agent eu-west-1 ",
-                  {
-                    "Ref": "ELKStreamId",
-                  },
-                  " /var/log/dotcom-rendering/dotcom-rendering.log",
+cat > /etc/systemd/system/rendering.service << EOF
+[Unit]
+Description=rendering
+After=network.target
+[Service]
+WorkingDirectory=/home/dotcom-rendering/rendering
+Type=simple
+User=dotcom-rendering
+Group=frontend
+StandardError=journal
+StandardOutput=journal
+Environment=TERM=xterm-256color
+Environment=NODE_ENV=production
+Environment=GU_STAGE=TEST
+Environment=GU_APP=rendering
+Environment=GU_STACK=frontend
+ExecStart=make prod
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl enable rendering
+systemctl start rendering",
                 ],
               ],
             },

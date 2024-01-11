@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	border,
-	from,
-	labs,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, palette, space, textSans } from '@guardian/source-foundations';
 import {
 	Link,
 	LinkButton,
@@ -58,7 +52,7 @@ const HeaderSection = ({
 }) => (
 	<div
 		css={css`
-			border-right: 1px solid ${border.primary};
+			border-right: 1px solid ${palette.neutral[60]};
 			height: 100%;
 			display: flex;
 			align-items: center;
@@ -90,8 +84,8 @@ const About = () => (
 	<div
 		css={css`
 			${textSans.small()};
-			background-color: ${labs[400]};
-			border-top: 1px solid ${border.primary};
+			background-color: ${palette.labs[400]};
+			border-top: 1px solid ${palette.neutral[60]};
 
 			width: 100vw;
 			${from.desktop} {

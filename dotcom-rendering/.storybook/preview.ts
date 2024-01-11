@@ -64,16 +64,13 @@ window.guardian = {
 			pageViewId: 'mockPageViewId',
 		},
 		page: {
-			googleRecaptchaSiteKey: 'TEST_RECAPTCHA_SITE_KEY',
 			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		},
-		switches: {
-			emailSignupRecaptcha: false,
 		},
 		tests: {},
 	},
 	ophan: {
 		record: ({}) => {},
+		pageViewId: 'storybook-does-not-have-a-page-view-id',
 	},
 	modules: {
 		sentry: {
@@ -158,7 +155,7 @@ export default {
 	decorators: [
 		// @ts-expect-error -- this global decorator takes an option parameter
 		ConfigContextDecorator,
-		lightDecorator(defaultFormat),
+		lightDecorator([defaultFormat]),
 		(Story) => {
 			storage.local.clear();
 			return Story();

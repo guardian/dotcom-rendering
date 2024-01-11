@@ -45,12 +45,21 @@ export type CollectionBranding =
 			 * A collection can have branding that is funded by a third party
 			 */
 			kind: BrandingType['name'];
+			branding: Branding;
 			/**
 			 * In certain circumstances a collection might display the branding on behalf of an entire front
 			 * In that case this property is true
 			 */
 			isFrontBranding: boolean;
-			branding: Branding;
+			/**
+			 * In certain circumstances a collection might display the branding only on its own container.
+			 * Is eligible to display a brand logo.
+			 */
+			isContainerBranding: boolean;
+			/**
+			 * In certain circumstances a collection may display multiple brands within one container.
+			 */
+			hasMultipleBranding: boolean;
 	  }
 	| {
 			/**

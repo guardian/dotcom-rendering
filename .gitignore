@@ -11,9 +11,7 @@ yarn-error.log*
 
 # Dependency directories
 node_modules
-
-# Yarn Integrity file
-.yarn-integrity
+.yarn
 
 # IDE files
 .idea
@@ -56,3 +54,8 @@ webArchitecture.svg
 
 # k6 load testing binaries
 k6-v*arm64
+
+# playwright
+test-results/
+playwright-report/
+playwright/.cache/

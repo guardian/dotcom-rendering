@@ -44,243 +44,135 @@ Unquoted.decorators = [
 	]),
 ];
 
-export const News = () => {
+const blockQuoteStoryVariations = [
+	ArticleDesign.Standard,
+	ArticleDesign.Profile,
+	ArticleDesign.Explainer,
+	ArticleDesign.Timeline,
+	ArticleDesign.LiveBlog,
+	ArticleDesign.DeadBlog,
+	ArticleDesign.Analysis,
+	ArticleDesign.Feature,
+	ArticleDesign.Interview,
+	ArticleDesign.Recipe,
+	ArticleDesign.Review,
+	ArticleDesign.Obituary,
+	ArticleDesign.Comment,
+	ArticleDesign.Editorial,
+] as const satisfies ReadonlyArray<ArticleDesign>;
+
+const themeVariations = [
+	Pillar.Sport,
+	Pillar.News,
+	Pillar.Culture,
+	Pillar.Opinion,
+	Pillar.Lifestyle,
+	ArticleSpecial.SpecialReport,
+	ArticleSpecial.SpecialReportAlt,
+	ArticleSpecial.Labs,
+];
+
+const allThemeStandardVariations = themeVariations.map((theme) => ({
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme,
+}));
+
+const allLiveBlogVariations = themeVariations.map((theme) => ({
+	design: ArticleDesign.LiveBlog,
+	display: ArticleDisplay.Standard,
+	theme,
+}));
+
+const allDeadBlogVariations = themeVariations.map((theme) => ({
+	design: ArticleDesign.DeadBlog,
+	display: ArticleDisplay.Standard,
+	theme,
+}));
+
+const allNewsVariations = blockQuoteStoryVariations.map((design) => ({
+	design,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.News,
+}));
+
+const allCultureVariations = blockQuoteStoryVariations.map((design) => ({
+	design,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.Culture,
+}));
+
+const allSportVariations = blockQuoteStoryVariations.map((design) => ({
+	design,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.Sport,
+}));
+
+export const StandardDesign = () => {
 	return (
 		<div>
-			<h1>News</h1>
 			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
 
-News.storyName = 'News';
-News.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
+StandardDesign.storyName = 'Standard Design - All theme variations';
+StandardDesign.decorators = [splitTheme(allThemeStandardVariations)];
 
-export const Sport = () => {
+export const DesignVariationsNews = () => {
 	return (
 		<div>
-			<h1>Sport</h1>
 			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
 
-Sport.storyName = 'Sport';
-Sport.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Sport,
-		},
-	]),
-];
+DesignVariationsNews.storyName = 'News Pillar - Design variations';
+DesignVariationsNews.decorators = [splitTheme(allNewsVariations)];
 
-export const Culture = () => {
+export const DesignVariationsCulture = () => {
 	return (
 		<div>
-			<h1>Culture</h1>
 			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
 
-Culture.storyName = 'Culture';
-Culture.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Culture,
-		},
-	]),
-];
+DesignVariationsCulture.storyName = 'Culture Pillar - Design variations';
+DesignVariationsCulture.decorators = [splitTheme(allCultureVariations)];
 
-export const Lifestyle = () => {
+export const DesignVariationsSport = () => {
 	return (
 		<div>
-			<h1>Lifestyle</h1>
 			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
 
-Lifestyle.storyName = 'Lifestyle';
-Lifestyle.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Lifestyle,
-		},
-	]),
-];
+DesignVariationsSport.storyName = 'Sport Pillar - Design variations';
+DesignVariationsSport.decorators = [splitTheme(allSportVariations)];
 
-export const Opinion = () => {
+export const LiveBlogDesign = () => {
 	return (
 		<div>
-			<h1>Opinion</h1>
 			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
 
-Opinion.storyName = 'Opinion';
-Opinion.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Opinion,
-		},
-	]),
-];
+LiveBlogDesign.storyName = 'LiveBlog Design - All theme variations';
+LiveBlogDesign.decorators = [splitTheme(allLiveBlogVariations)];
 
-export const SpecialReport = () => {
+export const DeadBlogDesign = () => {
 	return (
 		<div>
-			<h1>SpecialReport</h1>
 			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
 		</div>
 	);
 };
 
-SpecialReport.storyName = 'SpecialReport';
-SpecialReport.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: ArticleSpecial.SpecialReport,
-		},
-	]),
-];
-
-export const Labs = () => {
-	return (
-		<div>
-			<h1>Labs</h1>
-			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
-		</div>
-	);
-};
-
-Labs.storyName = 'Labs';
-Labs.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: ArticleSpecial.Labs,
-		},
-	]),
-];
-
-export const LiveBlogNews = () => {
-	return (
-		<div>
-			<h1>LiveBlog News</h1>
-			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
-		</div>
-	);
-};
-
-LiveBlogNews.storyName = 'LiveBlogNews';
-LiveBlogNews.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.LiveBlog,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
-
-export const DeadBlogNews = () => {
-	return (
-		<div>
-			<h1>DeadBlog News</h1>
-			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
-		</div>
-	);
-};
-
-DeadBlogNews.storyName = 'DeadBlogNews';
-DeadBlogNews.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.DeadBlog,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
-
-export const LiveBlogSport = () => {
-	return (
-		<div>
-			<h1>LiveBlog News</h1>
-			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
-		</div>
-	);
-};
-
-LiveBlogSport.storyName = 'LiveBlogSport';
-LiveBlogSport.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.LiveBlog,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Sport,
-		},
-	]),
-];
-
-export const DeadBlogSport = () => {
-	return (
-		<div css={containerStyles}>
-			<h1>DeadBlog Sport</h1>
-			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
-		</div>
-	);
-};
-DeadBlogSport.storyName = 'DeadBlogSport';
-DeadBlogSport.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.DeadBlog,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Sport,
-		},
-	]),
-];
-
-export const SpecialReportAltStandard = () => {
-	return (
-		<div css={containerStyles}>
-			<h1>SpecialReportAlt Standard</h1>
-			<BlockquoteBlockComponent html={blockquoteHtml} quoted={true} />
-		</div>
-	);
-};
-SpecialReportAltStandard.storyName = 'SpecialReportAltStandard';
-SpecialReportAltStandard.decorators = [
-	splitTheme([
-		{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: ArticleSpecial.SpecialReportAlt,
-		},
-	]),
-];
+DeadBlogDesign.storyName = 'DeadBlog Design - All theme variations';
+DeadBlogDesign.decorators = [splitTheme(allDeadBlogVariations)];
 
 export const SpecialReportAltComment = () => {
 	return (

@@ -95,11 +95,24 @@ const brandingEqual = (b1: Branding, b2: Branding) => {
 	);
 };
 
+export const isPaidContentSameBranding = (
+	collectionBranding?: CollectionBranding,
+): boolean =>
+	collectionBranding?.kind === 'paid-content' &&
+	!collectionBranding.hasMultipleBranding;
+
 export const badgeFromBranding = (
 	collectionBranding: CollectionBranding | undefined,
 ): DCRBadgeType | undefined => {
 	switch (collectionBranding?.kind) {
-		case 'paid-content':
+		case 'paid-content': {
+			if (collectionBranding.hasMultipleBranding) return undefined;
+			const { logo } = collectionBranding.branding;
+			return {
+				imageSrc: logo.src,
+				href: logo.link,
+			};
+		}
 		case 'sponsored':
 		case 'foundation': {
 			const { logo } = collectionBranding.branding;
@@ -126,12 +139,14 @@ export const decideCollectionBranding = ({
 	seriesTag,
 	cards,
 	editionId,
+	isContainerBranding,
 }: {
 	frontBranding: Branding | undefined;
 	couldDisplayFrontBranding: boolean;
 	seriesTag: string | undefined;
 	cards: CardWithBranding[];
 	editionId: EditionId;
+	isContainerBranding: boolean;
 }): CollectionBranding | undefined => {
 	// If this collection is eligible to display front branding
 	// AND there is front branding defined, we should display it
@@ -144,6 +159,8 @@ export const decideCollectionBranding = ({
 			kind,
 			isFrontBranding: true,
 			branding: frontBranding,
+			isContainerBranding,
+			hasMultipleBranding: false,
 		};
 	}
 
@@ -180,8 +197,8 @@ export const decideCollectionBranding = ({
 		return undefined;
 	}
 
-	// Ensure each of the card's branding has the same sponsor
-	if (!everyCardHasSameSponsor(brandingForCards)) {
+	const hasMultipleBranding = !everyCardHasSameSponsor(brandingForCards);
+	if (kind !== 'paid-content' && hasMultipleBranding) {
 		return undefined;
 	}
 
@@ -189,5 +206,7 @@ export const decideCollectionBranding = ({
 		kind,
 		isFrontBranding: false,
 		branding,
+		isContainerBranding,
+		hasMultipleBranding,
 	};
 };

@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import {
-	brandAlt,
 	from,
 	headline,
-	neutral,
+	palette,
 	space,
 	text,
 	until,
@@ -144,7 +143,7 @@ const dotStyle = css`
 	display: inline-block;
 	height: ${space[3]}px;
 	width: ${space[3]}px;
-	background-color: ${neutral[93]};
+	background-color: ${palette.neutral[93]};
 	border-radius: 100%;
 	border: 0 none;
 	padding: 0;
@@ -152,7 +151,7 @@ const dotStyle = css`
 
 	&:hover,
 	&:focus {
-		background-color: ${neutral[86]};
+		background-color: ${palette.neutral[86]};
 		outline: none;
 	}
 `;
@@ -230,14 +229,14 @@ const buttonStyle = css`
 	cursor: pointer;
 	margin-top: 10px;
 	padding: 0;
-	background-color: ${neutral[0]};
+	background-color: ${palette.neutral[0]};
 
 	&:active,
 	&:hover {
 		outline: none;
-		background-color: ${brandAlt[400]};
+		background-color: ${palette.brandAlt[400]};
 		svg {
-			fill: ${neutral[7]};
+			fill: ${palette.neutral[7]};
 		}
 	}
 
@@ -246,21 +245,23 @@ const buttonStyle = css`
 	}
 
 	svg {
-		fill: ${neutral[100]};
+		fill: ${palette.neutral[100]};
 		height: 34px;
 	}
 `;
 
 const prevButtonStyle = (index: number) => css`
-	background-color: ${index !== 0 ? neutral[0] : neutral[60]};
+	background-color: ${index !== 0 ? palette.neutral[0] : palette.neutral[60]};
 	cursor: ${index !== 0 ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
-		background-color: ${index !== 0 ? brandAlt[400] : neutral[60]};
+		background-color: ${index !== 0
+			? palette.brandAlt[400]
+			: palette.neutral[60]};
 
 		svg {
-			fill: ${neutral[100]};
+			fill: ${palette.neutral[100]};
 		}
 	}
 `;
@@ -269,18 +270,18 @@ const nextButtonStyle = (index: number, totalStories: number) => css`
 	padding-left: 5px; /* Fix centering of SVG*/
 	margin-left: 10px;
 	background-color: ${!isLastCardShowing(index, totalStories)
-		? neutral[0]
-		: neutral[60]};
+		? palette.neutral[0]
+		: palette.neutral[60]};
 	cursor: ${!isLastCardShowing(index, totalStories) ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
 		background-color: ${!isLastCardShowing(index, totalStories)
-			? brandAlt[400]
-			: neutral[60]};
+			? palette.brandAlt[400]
+			: palette.neutral[60]};
 
 		svg {
-			fill: ${neutral[100]};
+			fill: ${palette.neutral[100]};
 		}
 	}
 `;

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, neutral } from '@guardian/source-foundations';
+import { body, palette } from '@guardian/source-foundations';
 import { JSDOM } from 'jsdom';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { TweetBlockElement } from '../types/content';
@@ -45,7 +45,7 @@ const TextStyle = (pillar: ArticleTheme) => css`
 		${body.medium()};
 		font-weight: 300;
 		word-wrap: break-word;
-		color: ${neutral[7]};
+		color: ${palette.neutral[7]};
 	}
 
 	blockquote {
@@ -85,7 +85,11 @@ export const TwitterBlockComponent = ({ element, pillar }: Props) => {
 			data-dnt="true"
 		>
 			{!!fallbackHTML && (
-				<div placeholder="" css={TextStyle(pillar)}>
+				<div
+					// @ts-expect-error -- this is an AMP extension: https://amp.dev/documentation/components/amp-twitter#placeholders-&-fallbacks
+					placeholder={true}
+					css={TextStyle(pillar)}
+				>
 					<blockquote
 						dangerouslySetInnerHTML={{ __html: fallbackHTML }}
 					/>

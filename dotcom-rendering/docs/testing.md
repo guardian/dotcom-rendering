@@ -11,19 +11,19 @@ make test
 To run an individual test suite, run the command:
 
 ```bash
-yarn test [TestSuiteName]
+pnpm test [TestSuiteName]
 ```
 
 For example to run `ShareCount.test.tsx` only you can run the command:
 
 ```bash
-yarn test ShareCount
+pnpm test ShareCount
 ```
 
 Alternatively, you can use `watch` mode to have jest run the suite as files are updated:
 
 ```
-yarn test --watch
+pnpm test --watch
 ```
 
 ## Writing tests
@@ -60,27 +60,31 @@ We will **not** be writing snaphot test Components for the following reasons:
 -   Developer time required to check snapshot test failures when simple non-breaking changes introduced, plus developer time required to review snapshot output in Pull Requests.
 
 ## Cypress Tests
+
 Cypress offers a solution for integration tests where tests are executed in a headless browser, using the actual browser apis. By executing at this level it provides an extremely realistic representation of a user interacting with the page.
 
 ### Types of Cypress tests
+
 We have two main types of Cypress tests. End to end and mocked. Both have pros and cons but by using a balance of both we aim to gain the most benefit at the least cost.
 
 #### End to end
+
 These tests use live data to load a page, populating components with real api response data. This tests are an absolute truth, if they work then the there is a very high level of confidence that the actual site will work.
 
 The down side to these types of tests is that they are slower and have a dependency on external endpoints. Too many such tests will slow down the suite and network transience can cause false negatives
 
 #### Mocked
+
 By using mocked data and endpoints, we increase the speed that tests execute at and have complete certainty in what to expect from our mocked endpoints. The risk though is that an api might have changed or break and we won't be aware of this.
 
 ### How to run locally
 
-Running Cypress locally requires having a DCR server running. To run the CI server locally, you can run `make run-ci`. The Cypress server should automatically re-load in response to changes in `.spec.` files, but the CI server will need to be re-built every time you want to update the DCR code itself, as opposed to the spec code. You can re-build DCR by re-running `make run-ci`.
+Running Cypress locally requires having a DCR server running. To run the CI server locally, you can run `make cypress`. The Cypress server should automatically re-load in response to changes in `.spec.` files, but the CI server will need to be re-built every time you want to update the DCR code itself, as opposed to the spec code. You can re-build DCR by re-running `make build`.
 
 To run Cypress in interactive mode (visually):
 
 ```
-yarn cypress:open
+pnpm cypress:open
 ```
 
 This opens a test GUI. Use this when writing or debugging tests.
@@ -88,17 +92,17 @@ This opens a test GUI. Use this when writing or debugging tests.
 To run cypress in headless mode (for ci):
 
 ```
-yarn cypress:run
+pnpm cypress:run
 ```
 
 To only run mocked tests:
 
 ```
-yarn cypress:run:mocked
+pnpm cypress:run:mocked
 ```
 
 To only run e2e tests:
 
 ```
-yarn cypress:run:e2e
+pnpm cypress:run:e2e
 ```

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanAction } from '@guardian/libs';
-import { neutral, space, until } from '@guardian/source-foundations';
+import { palette, space, until } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
@@ -10,13 +10,12 @@ import {
 	SvgSpinner,
 } from '@guardian/source-react-components';
 import type { ReactEventHandler } from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { isServer } from '../lib/isServer';
 import { useHydrated } from '../lib/useHydrated';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -198,6 +197,7 @@ export const SecureSignupIframe = ({
 }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
+	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
 
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
@@ -208,6 +208,9 @@ export const SecureSignupIframe = ({
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
+	useEffect(() => {
+		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
+	}, []);
 
 	const { renderingTarget } = useConfig();
 
@@ -349,10 +352,6 @@ export const SecureSignupIframe = ({
 		addFontsToIframe(['GuardianTextSans']);
 	};
 
-	const captchaSiteKey = isServer
-		? undefined
-		: window.guardian.config.page.googleRecaptchaSiteKey;
-
 	return (
 		<>
 			<iframe
@@ -401,9 +400,9 @@ export const SecureSignupIframe = ({
 							}
 							button {
 								margin-left: ${space[1]}px;
-								background-color: ${neutral[0]};
+								background-color: ${palette.neutral[0]};
 								:hover {
-									background-color: ${neutral[20]};
+									background-color: ${palette.neutral[20]};
 								}
 							}
 						`}

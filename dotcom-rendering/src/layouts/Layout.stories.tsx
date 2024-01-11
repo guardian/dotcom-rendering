@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { Analysis } from '../../fixtures/generated/articles/Analysis';
 import { Audio } from '../../fixtures/generated/articles/Audio';
 import { Comment } from '../../fixtures/generated/articles/Comment';
@@ -10,6 +11,7 @@ import { Interview } from '../../fixtures/generated/articles/Interview';
 import { Labs } from '../../fixtures/generated/articles/Labs';
 import { Letter } from '../../fixtures/generated/articles/Letter';
 import { Live } from '../../fixtures/generated/articles/Live';
+import { LiveBlogSingleContributor } from '../../fixtures/generated/articles/LiveBlogSingleContributor';
 import { MatchReport } from '../../fixtures/generated/articles/MatchReport';
 import { NewsletterSignup } from '../../fixtures/generated/articles/NewsletterSignup';
 import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
@@ -23,7 +25,6 @@ import { SpecialReport } from '../../fixtures/generated/articles/SpecialReport';
 import { Standard } from '../../fixtures/generated/articles/Standard';
 import { Video } from '../../fixtures/generated/articles/Video';
 import { embedIframe } from '../client/embedIframe';
-import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
@@ -44,6 +45,7 @@ const Fixtures: { [key: string]: DCRArticle } = {
 	Feature,
 	LiveBlog: Live,
 	DeadBlog: Live,
+	LiveBlogSingleContributor,
 	Editorial,
 	Letter,
 	Interview,
@@ -77,7 +79,6 @@ const HydratedLayout = ({
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${String(e)}`),
 		);
-		doStorybookHydration();
 	}, [serverArticle]);
 
 	return (
@@ -98,13 +99,15 @@ export const HydratedLayoutWrapper = ({
 	designName,
 	theme,
 	renderingTarget,
+	fixtureName,
 }: {
 	displayName: string;
 	designName: string;
 	theme: string;
 	renderingTarget: RenderingTarget;
+	fixtureName?: string;
 }) => {
-	const fixture = Fixtures[designName] ?? Standard;
+	const fixture = Fixtures[fixtureName ?? designName] ?? Standard;
 
 	const serverArticle = {
 		...fixture,
@@ -136,7 +139,8 @@ export default {
 	},
 };
 
-export const Liveblog = () => {
+// Additional stories for edge cases
+export const LiveblogWithNoKeyEvents = () => {
 	return (
 		<HydratedLayout
 			serverArticle={{
@@ -147,3 +151,6 @@ export const Liveblog = () => {
 		/>
 	);
 };
+LiveblogWithNoKeyEvents.decorators = [
+	lightDecorator([decideFormat(Live.format)]),
+];

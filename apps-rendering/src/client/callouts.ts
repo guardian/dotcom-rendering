@@ -1,9 +1,11 @@
+/* eslint-disable react/no-deprecated -- currently still working in 17 mode */
+
 import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { FormOption } from '@guardian/apps-rendering-api-models/formOption';
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
-import { withDefault } from '@guardian/types';
+import { withDefault } from '../../vendor/@guardian/types/index';
 import { ElementKind } from 'bodyElementKind';
 import { pipe, resultFromNullable } from 'lib';
 import {

@@ -7,8 +7,8 @@ import {
 	ArticleElementRole,
 	ArticlePillar,
 } from '@guardian/libs';
-import { none, OptionKind, some } from '@guardian/types';
-import type { Option } from '@guardian/types';
+import { none, OptionKind, some } from '../../vendor/@guardian/types/index';
+import type { Option } from '../../vendor/@guardian/types/index';
 import { parse } from 'client/parser';
 import { ImageSubtype } from 'image/image';
 import type { DeadBlog, LiveBlog } from 'item';

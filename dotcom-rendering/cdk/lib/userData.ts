@@ -1,40 +1,63 @@
-import type { UserDataProps } from './types';
+import type { RenderingCDKStackProps } from './renderingStack';
+
+interface UserDataProps extends Pick<RenderingCDKStackProps, 'stage'> {
+	guApp: string;
+	guStack: string;
+	artifactsBucket: string;
+}
 
 /**
  * Returns user data configuration for instances in the rendering app
  * @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
  */
 export const getUserData = ({
-	app,
-	region,
+	guApp,
+	guStack,
 	stage,
-	elkStreamId,
+	artifactsBucket,
 }: UserDataProps): string => {
 	const userData = [
 		`#!/bin/bash -ev`,
 
 		`groupadd frontend`,
 		`useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering`,
-		`usermod -a -G frontend aws-kinesis-agent-user`,
 		`cd /home/dotcom-rendering`,
 
-		`aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${stage}/${app}/${app}.tar.gz ./`,
-		`tar -zxf ${app}.tar.gz ${app}`,
+		`aws --region eu-west-1 s3 cp s3://${artifactsBucket}/frontend/${stage}/${guApp}/${guApp}.tar.gz ./`,
+		`tar -zxf ${guApp}.tar.gz ${guApp}`,
 
-		`chown -R dotcom-rendering:frontend ${app}`,
+		`chown -R dotcom-rendering:frontend ${guApp}`,
 
-		`cd ${app}`,
-
-		`export TERM=xterm-256color`,
-		`export NODE_ENV=production`,
-		`export GU_STAGE=${stage}`,
+		`cd ${guApp}`,
 
 		`mkdir /var/log/dotcom-rendering`,
 		`chown -R dotcom-rendering:frontend /var/log/dotcom-rendering`,
 
-		`sudo NODE_ENV=$NODE_ENV GU_STAGE=$GU_STAGE -u dotcom-rendering -g frontend make start-prod`,
+		// write out systemd file
+		`cat > /etc/systemd/system/${guApp}.service << EOF`,
+		`[Unit]`,
+		`Description=${guApp}`,
+		`After=network.target`,
+		`[Service]`,
+		`WorkingDirectory=/home/dotcom-rendering/${guApp}`,
+		`Type=simple`,
+		`User=dotcom-rendering`,
+		`Group=frontend`,
+		`StandardError=journal`,
+		`StandardOutput=journal`,
+		`Environment=TERM=xterm-256color`,
+		`Environment=NODE_ENV=production`,
+		`Environment=GU_STAGE=${stage}`,
+		`Environment=GU_APP=${guApp}`,
+		`Environment=GU_STACK=${guStack}`,
+		`ExecStart=make prod`,
+		`Restart=on-failure`,
+		`[Install]`,
+		`WantedBy=multi-user.target`,
+		`EOF`,
 
-		`/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${region} ${elkStreamId} /var/log/dotcom-rendering/dotcom-rendering.log`,
+		`systemctl enable ${guApp}`, // enable the service
+		`systemctl start ${guApp}`, // start the service
 	].join('\n');
 
 	return userData;

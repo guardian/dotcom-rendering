@@ -2,29 +2,28 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	border,
-	brandBackground,
-	brandBorder,
-	brandLine,
 	from,
-	labs,
-	neutral,
+	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsEpic } from '../components/AppsEpic.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
+import { Disclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
@@ -52,7 +51,6 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
@@ -117,6 +115,7 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  headline     right-column'
 									'.      border  standfirst   right-column'
+									'.      border  disclaimer   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -151,6 +150,7 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  headline     right-column'
 									'.      border  standfirst   right-column'
+									'.      border  disclaimer   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -185,6 +185,7 @@ const StandardGrid = ({
 									'title         right-column'
 									'headline      right-column'
 									'standfirst    right-column'
+									'disclaimer    right-column'
 									'media         right-column'
 									'lines         right-column'
 									'meta          right-column'
@@ -213,6 +214,7 @@ const StandardGrid = ({
 									'title'
 									'headline'
 									'standfirst'
+									'disclaimer'
 									'media'
 									'lines'
 									'meta'
@@ -243,6 +245,7 @@ const StandardGrid = ({
 									'title'
 									'headline'
 									'standfirst'
+									'disclaimer'
 									'lines'
 									'meta'
 									'body';
@@ -329,11 +332,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	const showComments = article.isCommentable;
+	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
+	const showComments = isWeb && article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
-
-	const palette = decidePalette(format);
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
@@ -365,7 +367,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							showSideBorders={false}
 							padSides={false}
 							shouldCenter={false}
-							backgroundColour={brandBackground.primary}
+							backgroundColour={sourcePalette.brand[400]}
 							element="header"
 						>
 							<Header
@@ -392,10 +394,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					)}
 					<Section
 						fullWidth={true}
-						borderColour={brandLine.primary}
+						borderColour={sourcePalette.brand[600]}
 						showTopBorder={false}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
+						backgroundColour={sourcePalette.brand[400]}
 						element="nav"
 					>
 						<Nav
@@ -421,7 +423,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								element="aside"
 							>
@@ -436,16 +440,20 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
-										linkHoverColour={
-											palette.text.articleLinkHover
-										}
-										borderColour={palette.border.subNav}
+										linkHoverColour={themePalette(
+											'--article-link-text-hover',
+										)}
+										borderColour={themePalette(
+											'--sub-nav-border',
+										)}
 									/>
 								</Island>
 							</Section>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
 								padSides={false}
 								showTopBorder={false}
 							>
@@ -454,7 +462,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={palette.border.secondary}
+									color={themePalette('--article-border')}
 								/>
 							</Section>
 						</>
@@ -466,8 +474,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={labs[400]}
-						borderColour={border.primary}
+						backgroundColour={sourcePalette.labs[400]}
+						borderColour={sourcePalette.neutral[60]}
 						sectionId="labs-header"
 						element="aside"
 					>
@@ -482,16 +490,24 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<main data-layout="StandardLayout">
 				{isApps && (
-					<Island priority="critical" clientOnly={true}>
-						<AdPortals />
-					</Island>
+					<>
+						<Island priority="critical">
+							<AdPortals />
+						</Island>
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<AppsLightboxImageStore
+								images={article.imagesForAppsLightbox}
+							/>
+						</Island>
+					</>
 				)}
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
 					showTopBorder={false}
-					backgroundColour={palette.background.article}
-					borderColour={palette.border.article}
+					backgroundColour={themePalette('--article-background')}
+					borderColour={themePalette('--article-border')}
+					fontColour={themePalette('--article-section-title')}
 					element="article"
 				>
 					<StandardGrid isMatchReport={isMatchReport}>
@@ -539,12 +555,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									pageId={article.pageId}
 									webTitle={article.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
+									abTests={article.config.abTests}
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 							</div>
 						</GridItem>
@@ -563,7 +577,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							{format.theme === ArticleSpecial.Labs ? (
 								<></>
 							) : (
-								<Border format={format} />
+								<Border />
 							)}
 						</GridItem>
 						<GridItem area="headline">
@@ -598,43 +612,84 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
+						<GridItem area="disclaimer">
+							{!!article.affiliateLinksDisclaimer && (
+								<Disclaimer
+									html={article.affiliateLinksDisclaimer}
+								></Disclaimer>
+							)}
+						</GridItem>
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									{format.theme === ArticleSpecial.Labs ? (
+									{isWeb &&
+									format.theme === ArticleSpecial.Labs ? (
 										<GuardianLabsLines />
 									) : (
 										<DecideLines
 											format={format}
-											color={palette.border.article}
+											color={themePalette(
+												'--article-border',
+											)}
 										/>
 									)}
 								</div>
 							</div>
 						</GridItem>
 						<GridItem area="meta" element="aside">
-							<div css={maxWidth}>
-								<ArticleMeta
-									branding={branding}
-									format={format}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									byline={article.byline}
-									tags={article.tags}
-									primaryDateline={
-										article.webPublicationDateDisplay
-									}
-									secondaryDateline={
-										article.webPublicationSecondaryDateDisplay
-									}
-									isCommentable={article.isCommentable}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									shortUrlId={article.config.shortUrlId}
-									ajaxUrl={article.config.ajaxUrl}
-								/>
-							</div>
+							{isApps ? (
+								<Hide from="leftCol">
+									<div css={maxWidth}>
+										<ArticleMetaApps
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											ajaxUrl={article.config.ajaxUrl}
+										></ArticleMetaApps>
+									</div>
+								</Hide>
+							) : (
+								<div css={maxWidth}>
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										ajaxUrl={article.config.ajaxUrl}
+									/>
+								</div>
+							)}
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer format={format}>
@@ -671,9 +726,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
-									imagesForAppsLightbox={
-										article.imagesForAppsLightbox
-									}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
@@ -689,10 +741,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									)}
 
 								{isApps && (
-									<Island
-										priority="critical"
-										clientOnly={true}
-									>
+									<Island priority="critical">
 										<AppsEpic />
 									</Island>
 								)}
@@ -701,7 +750,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									<Island
 										priority="feature"
 										defer={{ until: 'visible' }}
-										clientOnly={true}
 									>
 										<SlotBodyEnd
 											contentType={article.contentType}
@@ -727,6 +775,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											tags={article.tags}
 											renderAds={renderAds}
 											isLabs={isLabs}
+											articleEndSlot={
+												!!article.config.switches
+													.articleEndSlot
+											}
 										/>
 									</Island>
 								)}
@@ -736,7 +788,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={palette.border.secondary}
+									color={themePalette('--straight-lines')}
 								/>
 								<SubMeta
 									format={format}
@@ -795,7 +847,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
+						backgroundColour={sourcePalette.neutral[97]}
 						element="aside"
 					>
 						<AdSlot
@@ -807,7 +859,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				)}
 
 				{article.storyPackage && (
-					<Section fullWidth={true}>
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
+					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
@@ -826,105 +885,105 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				)}
 
 				{isWeb && (
-					<>
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<OnwardsUpper
-								ajaxUrl={article.config.ajaxUrl}
-								hasRelated={article.hasRelated}
-								hasStoryPackage={article.hasStoryPackage}
-								isAdFreeUser={article.isAdFreeUser}
-								pageId={article.pageId}
-								isPaidContent={!!article.config.isPaidContent}
-								showRelatedContent={
-									article.config.showRelatedContent
-								}
-								keywordIds={article.config.keywordIds}
-								contentType={article.contentType}
-								tags={article.tags}
-								format={format}
-								pillar={format.theme}
-								editionId={article.editionId}
-								shortUrlId={article.config.shortUrlId}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-							/>
-						</Island>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<OnwardsUpper
+							ajaxUrl={article.config.ajaxUrl}
+							hasRelated={article.hasRelated}
+							hasStoryPackage={article.hasStoryPackage}
+							isAdFreeUser={article.isAdFreeUser}
+							pageId={article.pageId}
+							isPaidContent={!!article.config.isPaidContent}
+							showRelatedContent={
+								article.config.showRelatedContent
+							}
+							keywordIds={article.config.keywordIds}
+							contentType={article.contentType}
+							tags={article.tags}
+							format={format}
+							pillar={format.theme}
+							editionId={article.editionId}
+							shortUrlId={article.config.shortUrlId}
+							discussionApiUrl={article.config.discussionApiUrl}
+						/>
+					</Island>
+				)}
 
-						{!isPaidContent && showComments && (
-							<Section
-								fullWidth={true}
-								sectionId="comments"
-								data-print-layout="hide"
-								element="section"
+				{showComments && (
+					<Section
+						fullWidth={true}
+						sectionId="comments"
+						data-print-layout="hide"
+						element="section"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
+					>
+						<DiscussionLayout
+							discussionApiUrl={article.config.discussionApiUrl}
+							shortUrlId={article.config.shortUrlId}
+							format={format}
+							discussionD2Uid={article.config.discussionD2Uid}
+							discussionApiClientHeader={
+								article.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								!!article.config.switches.enableDiscussionSwitch
+							}
+							isAdFreeUser={article.isAdFreeUser}
+							shouldHideAds={article.shouldHideAds}
+							idApiUrl={article.config.idApiUrl}
+						/>
+					</Section>
+				)}
+
+				{!isPaidContent && (
+					<Section
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
+						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
+					>
+						<MostViewedFooterLayout renderAds={renderAds}>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
 							>
-								<DiscussionLayout
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									shortUrlId={article.config.shortUrlId}
+								<MostViewedFooterData
+									sectionId={article.config.section}
 									format={format}
-									discussionD2Uid={
-										article.config.discussionD2Uid
-									}
-									discussionApiClientHeader={
-										article.config.discussionApiClientHeader
-									}
-									enableDiscussionSwitch={
-										!!article.config.switches
-											.enableDiscussionSwitch
-									}
-									isAdFreeUser={article.isAdFreeUser}
-									shouldHideAds={article.shouldHideAds}
-									idApiUrl={article.config.idApiUrl}
+									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
 								/>
-							</Section>
-						)}
+							</Island>
+						</MostViewedFooterLayout>
+					</Section>
+				)}
 
-						{!isPaidContent && (
-							<Section
-								title="Most viewed"
-								padContent={false}
-								verticalMargins={false}
-								element="aside"
-								data-print-layout="hide"
-								data-link-name="most-popular"
-								data-component="most-popular"
-							>
-								<MostViewedFooterLayout renderAds={renderAds}>
-									<Island
-										priority="feature"
-										clientOnly={true}
-										defer={{ until: 'visible' }}
-									>
-										<MostViewedFooterData
-											sectionId={article.config.section}
-											format={format}
-											ajaxUrl={article.config.ajaxUrl}
-											edition={article.editionId}
-										/>
-									</Island>
-								</MostViewedFooterLayout>
-							</Section>
-						)}
-
-						{renderAds && !isLabs && (
-							<Section
-								fullWidth={true}
-								data-print-layout="hide"
-								padSides={false}
-								showTopBorder={false}
-								showSideBorders={false}
-								backgroundColour={neutral[93]}
-								element="aside"
-							>
-								<AdSlot
-									position="merchandising"
-									display={format.display}
-								/>
-							</Section>
-						)}
-					</>
+				{renderAds && !isLabs && (
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={sourcePalette.neutral[97]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+						/>
+					</Section>
 				)}
 			</main>
 			{isWeb && (
@@ -943,10 +1002,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
-									linkHoverColour={
-										palette.text.articleLinkHover
-									}
-									borderColour={palette.border.subNav}
+									linkHoverColour={themePalette(
+										'--article-link-text-hover',
+									)}
+									borderColour={themePalette(
+										'--sub-nav-border',
+									)}
 								/>
 							</Island>
 						</Section>
@@ -955,8 +1016,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						fullWidth={true}
 						data-print-layout="hide"
 						padSides={false}
-						backgroundColour={brandBackground.primary}
-						borderColour={brandBorder.primary}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
 						showSideBorders={false}
 						element="footer"
 					>
@@ -972,11 +1033,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						/>
 					</Section>
 					<BannerWrapper data-print-layout="hide">
-						<Island
-							priority="feature"
-							defer={{ until: 'idle' }}
-							clientOnly={true}
-						>
+						<Island priority="feature" defer={{ until: 'idle' }}>
 							<StickyBottomBanner
 								contentType={article.contentType}
 								contributionsServiceUrl={
@@ -1014,7 +1071,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
-						backgroundColour={neutral[97]}
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
 						padSides={false}
 						showSideBorders={false}
 						element="footer"

@@ -1,5 +1,4 @@
 import { getCookie, removeCookie, setCookie, storage } from '@guardian/libs';
-import { setAlreadyVisited } from './alreadyVisited';
 import {
 	HIDE_SUPPORT_MESSAGING_COOKIE,
 	RECURRING_CONTRIBUTOR_COOKIE,
@@ -18,12 +17,12 @@ const readerRevenueCookies = [
 ];
 
 const clearEpicViewLog = (): void =>
-	localStorage.removeItem('gu.contributions.views');
+	storage.local.remove('gu.contributions.views');
 
 const clearBannerLastClosedAt = (): void => {
-	localStorage.removeItem('gu.prefs.engagementBannerLastClosedAt');
-	localStorage.removeItem('gu.prefs.subscriptionBannerLastClosedAt');
-	localStorage.removeItem('gu.noRRBannerTimestamp');
+	storage.local.remove('gu.prefs.engagementBannerLastClosedAt');
+	storage.local.remove('gu.prefs.subscriptionBannerLastClosedAt');
+	storage.local.remove('gu.noRRBannerTimestamp');
 };
 
 const fakeOneOffContributor = (): void =>
@@ -102,7 +101,6 @@ const showMeTheBanner = (
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	clearBannerLastClosedAt();
-	setAlreadyVisited(2);
 	clearCommonReaderRevenueStateAndReload(
 		asExistingSupporter,
 		shouldHideReaderRevenue,

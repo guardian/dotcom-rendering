@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, text, textSans } from '@guardian/source-foundations';
+import { palette, text, textSans } from '@guardian/source-foundations';
 import {
 	neutralBorder,
 	pillarMap,
@@ -10,17 +10,15 @@ import TwitterIcon from '../static/icons/twitter.svg';
 import { ShareIcons } from './ShareIcons.amp';
 
 const pillarColours = pillarMap(
-	(pillar) =>
-		css`
-			color: ${pillarPalette_DO_NOT_USE[pillar].main};
-		`,
+	(pillar) => css`
+		color: ${pillarPalette_DO_NOT_USE[pillar].main};
+	`,
 );
 
 const pillarFill = pillarMap(
-	(pillar) =>
-		css`
-			fill: ${pillarPalette_DO_NOT_USE[pillar].main};
-		`,
+	(pillar) => css`
+		fill: ${pillarPalette_DO_NOT_USE[pillar].main};
+	`,
 );
 
 const ageWarningCss = css`
@@ -60,7 +58,7 @@ const metaStyle = css`
 `;
 
 const twitterIcon = css`
-	fill: ${neutral[46]};
+	fill: ${palette.neutral[46]};
 	height: 12px;
 	margin-bottom: -2px;
 	width: 12px;

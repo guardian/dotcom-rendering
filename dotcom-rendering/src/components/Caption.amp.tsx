@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, textSans } from '@guardian/source-foundations';
+import { palette, textSans } from '@guardian/source-foundations';
 import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import TriangleIcon from '../static/icons/triangle.svg';
@@ -11,7 +11,7 @@ const captionStyle = css`
 	padding-top: 10px;
 	${textSans.xxsmall()};
 	word-wrap: break-word;
-	color: ${neutral[46]};
+	color: ${palette.neutral[46]};
 `;
 
 const captionPadding = css`

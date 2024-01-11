@@ -122,12 +122,12 @@ export const ExpandedMenu = ({
 		<div id="expanded-menu-root">
 			<ShowMoreMenu isImmersive={isImmersive} />
 			<VeggieBurgerMenu isImmersive={isImmersive} />
-			<div id="expanded-menu" css={wrapperMainMenuStyles}>
-				<div
-					css={mainMenuStyles}
-					data-testid="expanded-menu"
-					data-cy="expanded-menu"
-				>
+			<div
+				id="expanded-menu"
+				data-testid="expanded-menu"
+				css={wrapperMainMenuStyles}
+			>
+				<div css={mainMenuStyles}>
 					<Columns
 						editionId={editionId}
 						isImmersive={isImmersive}

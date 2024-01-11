@@ -7,6 +7,7 @@ import {
 } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import React from 'react';
+import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import type { MainMedia } from '../../types/mainMedia';
 import { Section } from '../Section';
@@ -78,7 +79,6 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div
 			css={css`
-				max-height: 360px;
 				max-width: 600px;
 				flex-basis: 100%;
 				${from.tablet} {
@@ -197,6 +197,9 @@ export default {
 	component: CardGroup,
 	// Export used by dotcom-rendering/stories/Card.stories.tsx
 	excludeStories: ['CardsWithDifferentThemes'],
+	decorators: [
+		splitTheme([basicCardProps.format], { orientation: 'vertical' }),
+	],
 };
 
 export const WithDifferentHeadlineSizes = () => {
@@ -278,6 +281,18 @@ export const WithMediaType = () => {
 					}}
 					mainMedia={{ ...mainVideo, duration: 30 }}
 					headlineText="Video"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={{ ...mainVideo, duration: 0 }}
+					headlineText="Video without duration"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -517,11 +532,13 @@ export const WithAnAvatar = () => {
 	);
 };
 WithAnAvatar.decorators = [
-	lightDecorator({
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Comment,
-		theme: Pillar.Opinion,
-	}),
+	lightDecorator([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.Opinion,
+		},
+	]),
 ];
 
 export const WhenVerticalAndThemeOpinion = () => {

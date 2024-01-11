@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, text, textSans } from '@guardian/source-foundations';
+import { palette, text, textSans } from '@guardian/source-foundations';
 import { blockLink } from '../lib/block-link.amp';
 import type { EditionId } from '../lib/edition';
 import { findBlockAdSlots } from '../lib/find-adslots.amp';
@@ -10,8 +10,8 @@ import { Elements } from './Elements.amp';
 import { InlineAd } from './InlineAd.amp';
 
 const adStyle = css`
-	background: ${neutral[93]};
-	border-top: 1px solid ${neutral[86]};
+	background: ${palette.neutral[93]};
+	border-top: 1px solid ${palette.neutral[86]};
 	width: min-content;
 	height: min-content;
 	clear: both;
@@ -34,14 +34,14 @@ const adStyle = css`
 
 const blockStyle = (pillar: ArticleTheme) => css`
 	padding: 6px 10px 12px;
-	background-color: ${neutral[100]};
+	background-color: ${palette.neutral[100]};
 	border-top: 1px solid ${pillarPalette_DO_NOT_USE[pillar].dark};
-	border-bottom: 1px solid ${neutral[93]};
+	border-bottom: 1px solid ${palette.neutral[93]};
 	margin-bottom: 12px;
 `;
 
 const firstPublishedStyle = css`
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	margin-bottom: 10px;
 	text-decoration: none;
 	font-weight: bold;
@@ -50,7 +50,7 @@ const firstPublishedStyle = css`
 
 const lastUpdatedStyle = css`
 	${textSans.xxsmall()};
-	color: ${neutral[60]};
+	color: ${palette.neutral[60]};
 	text-align: right;
 	padding-right: 15px;
 `;

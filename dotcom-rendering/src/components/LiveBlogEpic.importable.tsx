@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
@@ -13,11 +14,11 @@ import {
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
-import { setAutomat } from '../lib/setAutomat';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
 import type { TagType } from '../types/tag';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	sectionId: string;
@@ -36,12 +37,12 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 		useState<React.ElementType<{ [key: string]: unknown }>>();
 
 	useEffect(() => {
-		setAutomat();
-		window
-			.guardianPolyfilledImport(url)
+		import(
+			/* webpackChunkName: "contributions-liveblog-epic" */ `./marketing/epics/ContributionsLiveblogEpic`
+		)
 			.then((epicModule) => {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- required for dynamic import
-				setEpic(() => epicModule[name]); // useState requires functions to be wrapped
+				// @ts-expect-error -- currently the type of the props in the response is too general
+				setEpic(() => epicModule.ContributionsLiveblogEpic);
 			})
 			.catch((err) => {
 				const msg = `Error importing LiveBlog epic: ${String(err)}`;
@@ -190,6 +191,7 @@ const Fetch = ({
 	contributionsServiceUrl: string;
 }) => {
 	const response = useSDCLiveblogEpic(contributionsServiceUrl, payload);
+	const { renderingTarget } = useConfig();
 
 	// If we didn't get a module in response (or we're still waiting) do nothing. If
 	// no epic should be shown the response is equal to {}, hence the Object.keys
@@ -201,7 +203,8 @@ const Fetch = ({
 	// Add submitComponentEvent function to props to enable Ophan tracking in the component
 	const props = {
 		...response.data.module.props,
-		submitComponentEvent,
+		submitComponentEvent: (componentEvent: OphanComponentEvent) =>
+			submitComponentEvent(componentEvent, renderingTarget),
 	};
 
 	// Take any returned module and render it

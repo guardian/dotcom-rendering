@@ -30,7 +30,7 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 
 		if (!request?.type) return;
 
-		logger.info('Rendered page', {
+		const logArgs = {
 			response: {
 				status: res.statusCode,
 			},
@@ -40,7 +40,13 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 				message: error?.message,
 				stack: error?.stack,
 			},
-		});
+		};
+
+		if (error?.message || error?.stack) {
+			logger.error('Error rendering page', logArgs);
+		} else {
+			logger.info('Rendered page', logArgs);
+		}
 	});
 
 	loggingStore.run(loggerState, () => {

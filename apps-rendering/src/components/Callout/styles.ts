@@ -146,7 +146,8 @@ export const calloutSharelink = css`
 	color: ${brand[500]};
 	text-decoration: none;
 	border-bottom: 1px solid #12121240;
-	:hover, :active {
+	:hover,
+	:active {
 		border-bottom: 1px solid ${brand[500]};
 	}
 	${darkModeCss`
@@ -156,7 +157,6 @@ export const calloutSharelink = css`
 			border-bottom: 1px solid ${neutral[86]};
 		}
 	`}
-
 `;
 
 export const shareIcon = css`

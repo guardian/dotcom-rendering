@@ -14,10 +14,9 @@ import TwitterIconPadded from '../static/icons/twitter-padded.svg';
 import WhatsAppIcon from '../static/icons/whatsapp.svg';
 
 const pillarFill = pillarMap(
-	(pillar) =>
-		css`
-			fill: ${pillarPalette_DO_NOT_USE[pillar].main};
-		`,
+	(pillar) => css`
+		fill: ${pillarPalette_DO_NOT_USE[pillar].main};
+	`,
 );
 
 const shareIconsListItem = css`

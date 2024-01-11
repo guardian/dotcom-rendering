@@ -4,8 +4,8 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace, textSans } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { OptionKind } from '@guardian/types';
+import type { Option } from '../../../vendor/@guardian/types/index';
+import { OptionKind } from '../../../vendor/@guardian/types/index';
 import Caption from 'components/caption';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
@@ -53,7 +53,10 @@ type Props = {
 
 const GalleryCaption: FC<Props> = ({ mainMedia, format }) =>
 	maybeRender(mainMedia, (media) => {
-		if (media.kind === MainMediaKind.Video) {
+		if (
+			media.kind === MainMediaKind.Video ||
+			media.kind === MainMediaKind.Cartoon
+		) {
 			return null;
 		}
 

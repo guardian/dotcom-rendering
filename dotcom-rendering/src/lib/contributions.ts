@@ -153,7 +153,9 @@ export const hasArticleCountOptOutCookie = (): boolean =>
 	getCookie({ name: OPT_OUT_OF_ARTICLE_COUNT_COOKIE }) !== null;
 
 const removeArticleCountsFromLocalStorage = () => {
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 	window.localStorage.removeItem(DAILY_ARTICLE_COUNT_KEY);
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 	window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_KEY);
 };
 
@@ -220,11 +222,13 @@ export const hasCmpConsentForBrowserId = (): Promise<boolean> =>
 
 const twentyMins = 20 * 60000;
 export const withinLocalNoBannerCachePeriod = (): boolean => {
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 	const item = window.localStorage.getItem(NO_RR_BANNER_TIMESTAMP_KEY);
 	if (item && !Number.isNaN(parseInt(item, 10))) {
 		const withinCachePeriod = parseInt(item, 10) + twentyMins > Date.now();
 		if (!withinCachePeriod) {
 			// Expired
+			// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 			window.localStorage.removeItem(NO_RR_BANNER_TIMESTAMP_KEY);
 		}
 		return withinCachePeriod;
@@ -233,7 +237,20 @@ export const withinLocalNoBannerCachePeriod = (): boolean => {
 };
 
 export const setLocalNoBannerCachePeriod = (): void =>
+	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
 	window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);
+
+// Returns true if banner was closed in the last hour
+const ONE_HOUR_IN_MS = 1000 * 60 * 60;
+export const recentlyClosedBanner = (
+	lastClosedAt?: string,
+	now = Date.now(),
+): boolean => {
+	if (lastClosedAt) {
+		return now - new Date(lastClosedAt).getTime() < ONE_HOUR_IN_MS;
+	}
+	return false;
+};
 
 const getEmail = async (ajaxUrl: string): Promise<string | undefined> =>
 	// TODO Okta: Remove either when at 100% in oktaVariant test, and just use idToken

@@ -4,10 +4,9 @@ import { body, space, textSans } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { decidePalette } from '../lib/decidePalette';
 import { useOnce } from '../lib/useOnce';
+import { palette as themePalette } from '../palette';
 import type { RoleType } from '../types/content';
-import type { Palette } from '../types/palette';
 import { Caption } from './Caption';
 import { defaultRoleStyles } from './Figure';
 import { Placeholder } from './Placeholder';
@@ -99,15 +98,13 @@ const wrapperStyle = ({
 	format,
 	role,
 	loaded,
-	palette,
 }: {
 	format: ArticleFormat;
 	role: RoleType;
 	loaded: boolean;
-	palette: Palette;
 }) => css`
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
-	background-color: ${palette.background.article};
+	background-color: ${themePalette('--interactive-block-background')};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
 `;
@@ -116,6 +113,10 @@ const placeholderLinkStyle = css`
 	position: absolute;
 	bottom: ${space[1]}px;
 	left: ${space[1]}px;
+`;
+
+const mainMediaFigureStyles = css`
+	height: 100%;
 `;
 
 // https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js
@@ -241,7 +242,6 @@ export const InteractiveBlockComponent = ({
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
-	const palette = decidePalette(format);
 	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
 		if (
@@ -298,15 +298,17 @@ export const InteractiveBlockComponent = ({
 				id={elementId} // boot scripts use id when inserting interactive content
 				ref={wrapperRef}
 				css={[
-					defaultRoleStyles(role, format),
-					wrapperStyle({ format, role, loaded, palette }),
+					isMainMedia
+						? mainMediaFigureStyles
+						: defaultRoleStyles(role, format),
+					wrapperStyle({ format, role, loaded }),
 				]}
 				className={interactiveLegacyFigureClasses(
 					'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					role,
 				)}
 				data-alt={alt} // for compatibility with custom boot scripts
-				data-cypress={`interactive-element-${encodeURI(alt ?? '')}`}
+				data-testid={`interactive-element-${encodeURI(alt ?? '')}`}
 				data-spacefinder-role={role}
 			>
 				{!loaded && (

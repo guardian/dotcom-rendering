@@ -51,7 +51,7 @@ export const UnsafeEmbedBlockComponent = ({
 				// we therefore use the "unsafe-embed-" prefix followed by index to
 				// construct a unique ID
 				name={`unsafe-embed-${uniqueIndex}`}
-				data-cy="embed-block"
+				data-testid="embed-block"
 				srcDoc={`${html}
             <script src="https://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js"></script>
             <gu-script>iframeMessenger.enableAutoResize();</gu-script>`}

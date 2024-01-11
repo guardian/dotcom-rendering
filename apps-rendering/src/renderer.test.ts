@@ -13,7 +13,7 @@ import { ArticlePillar } from '@guardian/libs';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
-import { none, some } from '@guardian/types';
+import { none, some } from '../vendor/@guardian/types/index';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { EmbedKind } from 'embed';
@@ -539,6 +539,7 @@ describe('Transforms hrefs', () => {
 describe('Shows drop caps', () => {
 	const paragraph = new Array(50).fill('word').join(' ');
 	const isEditions = true;
+	const positionAllowsDropCap = true;
 	const format = {
 		display: ArticleDisplay.Standard,
 		theme: ArticlePillar.Culture,
@@ -546,7 +547,12 @@ describe('Shows drop caps', () => {
 	};
 
 	test('Shows drop cap if the paragraph is at least 200 characters long, and the article has the correct design', () => {
-		const showDropCap = shouldShowDropCap(paragraph, format, !isEditions);
+		const showDropCap = shouldShowDropCap(
+			paragraph,
+			format,
+			true,
+			!isEditions,
+		);
 		expect(showDropCap).toBe(true);
 	});
 
@@ -555,6 +561,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			unicodeLatin,
 			format,
+			positionAllowsDropCap,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(true);
@@ -566,6 +573,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			shortParagraph,
 			format,
+			positionAllowsDropCap,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(false);
@@ -575,6 +583,7 @@ describe('Shows drop caps', () => {
 		const showDropCap = shouldShowDropCap(
 			paragraph,
 			mockFormat,
+			positionAllowsDropCap,
 			!isEditions,
 		);
 		expect(showDropCap).toBe(false);
@@ -583,8 +592,19 @@ describe('Shows drop caps', () => {
 	test('Does not show drop cap if the article is an Editions article', () => {
 		const showDropCap = shouldShowDropCap(
 			paragraph,
-			mockFormat,
+			format,
+			positionAllowsDropCap,
 			isEditions,
+		);
+		expect(showDropCap).toBe(false);
+	});
+
+	test('Does not show drop cap if the paragraph is not the first paragraph', () => {
+		const showDropCap = shouldShowDropCap(
+			paragraph,
+			format,
+			!positionAllowsDropCap,
+			!isEditions,
 		);
 		expect(showDropCap).toBe(false);
 	});

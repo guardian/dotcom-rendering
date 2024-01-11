@@ -1,6 +1,9 @@
 import { css, Global } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
+import {
+	focusHalo,
+	palette as sourcePalette,
+} from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
@@ -55,6 +58,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		adUnit: article.config.adUnit,
 	});
 
+	const isInLightboxTest =
+		article.config.abTests.lightboxVariant === 'variant';
+
+	const webLightbox = renderingTarget === 'Web' && isInLightboxTest;
+
 	return (
 		<StrictMode>
 			<Global
@@ -62,12 +70,18 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					:root {
 						/* Light palette is default on all platforms */
 						${paletteDeclarations(format, 'light')}
-
+						body {
+							color: ${sourcePalette.neutral[7]};
+						}
 						/* Dark palette only for apps and only if switch turned on */
-						${article.config.switches.darkModeInApps && renderingTarget === 'Apps'
+						${article.config.switches.darkModeInApps &&
+						renderingTarget === 'Apps'
 							? css`
 									@media (prefers-color-scheme: dark) {
 										${paletteDeclarations(format, 'dark')}
+										body {
+											color: ${sourcePalette.neutral[86]};
+										}
 									}
 							  `
 							: ''}
@@ -78,30 +92,22 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 						${focusHalo}
 					}
 					::selection {
-						background: ${brandAlt[400]};
-						color: ${neutral[7]};
+						background: ${sourcePalette.brandAlt[400]};
+						color: ${sourcePalette.neutral[7]};
 					}
 				`}
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			{article.config.switches.lightbox && article.imagesForLightbox && (
+			{webLightbox && article.imagesForLightbox.length > 0 && (
 				<>
 					<LightboxLayout
 						imageCount={article.imagesForLightbox.length}
 					/>
-					<Island
-						clientOnly={true}
-						priority="feature"
-						defer={{ until: 'idle' }}
-					>
+					<Island priority="feature" defer={{ until: 'idle' }}>
 						<LightboxHash />
 					</Island>
-					<Island
-						priority="feature"
-						clientOnly={true}
-						defer={{ until: 'hash' }}
-					>
+					<Island priority="feature" defer={{ until: 'hash' }}>
 						<LightboxJavascript
 							format={format}
 							images={article.imagesForLightbox}
@@ -123,7 +129,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<Island priority="feature" defer={{ until: 'idle' }}>
 						<AlreadyVisited />
 					</Island>
-					<Island priority="critical" clientOnly={true}>
+					<Island priority="critical">
 						<Metrics
 							commercialMetricsEnabled={
 								!!article.config.switches.commercialMetrics
@@ -142,7 +148,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							}
 						/>
 					</Island>
-					<Island clientOnly={true} priority="critical">
+					<Island priority="critical">
 						<SetABTests
 							abTestSwitches={filterABTestSwitches(
 								article.config.switches,

@@ -1,5 +1,7 @@
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
 import {
+	GuDistributionBucketParameter,
+	GuLoggingStreamNameParameter,
 	GuStack,
 	GuStringParameter,
 } from '@guardian/cdk/lib/constructs/core';
@@ -14,7 +16,7 @@ import {
 } from '@guardian/cdk/lib/constructs/iam';
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
-import { CfnOutput, Duration } from 'aws-cdk-lib';
+import { CfnOutput, Duration, Tags } from 'aws-cdk-lib';
 import {
 	AdjustmentType,
 	CfnScalingPolicy,
@@ -56,6 +58,12 @@ export class DotcomRendering extends GuStack {
 			type: SubnetType.PRIVATE,
 		});
 
+		const artifactsBucket =
+			GuDistributionBucketParameter.getInstance(this).valueAsString;
+
+		const loggingStreamName =
+			GuLoggingStreamNameParameter.getInstance(this).valueAsString;
+
 		// ------------------------------------
 		// Load balancer related resources
 		// ------------------------------------
@@ -93,7 +101,10 @@ export class DotcomRendering extends GuStack {
 		 * GOTCHA: The load balancer name appends `-ELB` when the `app = "rendering"` for backwards compatibility
 		 * We removed this to avoid the `LoadBalancerName.length > 32`. This will be fixable once we migrate to ALBs.
 		 */
-		const loadBalancerName = app === 'rendering' ? `${stack}-${stage}-${app}-ELB` : `${stack}-${stage}-${app}`;
+		const loadBalancerName =
+			app === 'rendering'
+				? `${stack}-${stage}-${app}-ELB`
+				: `${stack}-${stage}-${app}`;
 		const loadBalancer = new GuClassicLoadBalancer(
 			this,
 			'InternalLoadBalancer',
@@ -188,23 +199,12 @@ export class DotcomRendering extends GuStack {
 		const instanceRole = new GuInstanceRole(this, {
 			app,
 			additionalPolicies: [
-				// TODO - double check if we are duplicating policies that
-				// are provided by default through GuCDK
 				new GuAllowPolicy(this, 'AllowPolicyGetArtifactsBucket', {
 					actions: ['s3:GetObject'],
-					resources: ['arn:aws:s3:::aws-frontend-artifacts/*'],
+					resources: [`arn:aws:s3:::${artifactsBucket}/*`],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
 					actions: ['cloudwatch:*', 'logs:*'],
-					resources: ['*'],
-				}),
-				new GuAllowPolicy(this, 'AllowPolicyDescribeEc2Autoscaling', {
-					actions: [
-						'ec2:DescribeTags',
-						'ec2:DescribeInstances',
-						'autoscaling:DescribeAutoScalingGroups',
-						'autoscaling:DescribeAutoScalingInstances',
-					],
 					resources: ['*'],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
@@ -216,7 +216,7 @@ export class DotcomRendering extends GuStack {
 				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
 					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
 					resources: [
-						`arn:aws:ssm:${region}:${this.account}:parameter/${ssmPrefix}/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter${ssmPrefix}/*`,
 						// TODO - these SSM prefixes are dated, should convert the params to the naming structure above
 						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
 						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
@@ -237,19 +237,20 @@ export class DotcomRendering extends GuStack {
 			maximumInstances: props.maxCapacity,
 			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
 			userData: getUserData({
-				app,
-				region,
+				guApp: app,
+				guStack: stack,
 				stage,
-				elkStreamId: new GuStringParameter(this, 'ELKStreamId', {
-					fromSSM: true,
-					default: `${ssmPrefix}/logging.stream.name`,
-				}).valueAsString,
+				artifactsBucket,
 			}),
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
 			vpcSubnets: { subnets: privateSubnets },
 			withoutImdsv2: true,
 		});
+
+		Tags.of(asg).add('LogKinesisStreamName', loggingStreamName);
+		Tags.of(asg).add('SystemdUnit', `${app}.service`);
+
 		// ! Important !
 		// Ensure the ASG is attached to the load balancer
 		// This is because our auto scaling group uses the ELB for healthchecks
