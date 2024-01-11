@@ -163,7 +163,7 @@ export class RenderingCDKStack extends CDKStack {
 			autoScalingGroup: ec2app.autoScalingGroup,
 			// Current PROD: 10 minutes
 			// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L276-L277
-			cooldown: Duration.seconds(30),
+			cooldown: Duration.seconds(15),
 		});
 
 		scaleUpStep.addAdjustment({

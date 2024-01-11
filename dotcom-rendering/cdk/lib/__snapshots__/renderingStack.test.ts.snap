@@ -874,7 +874,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "AutoScalingGroupName": {
           "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
         },
-        "Cooldown": "30",
+        "Cooldown": "15",
         "PolicyType": "StepScaling",
         "StepAdjustments": [
           {
