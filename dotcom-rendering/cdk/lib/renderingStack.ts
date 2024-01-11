@@ -151,8 +151,10 @@ export class RenderingCDKStack extends CDKStack {
 					period: Duration.seconds(30),
 					statistic: 'Average',
 				}),
-
-				treatMissingData: TreatMissingData.MISSING,
+				treatMissingData:
+					stage === 'PROD'
+						? TreatMissingData.MISSING
+						: TreatMissingData.NOT_BREACHING,
 			},
 		);
 
