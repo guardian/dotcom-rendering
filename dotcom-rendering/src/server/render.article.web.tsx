@@ -251,6 +251,7 @@ export const renderBlocks = ({
 	section,
 	switches,
 	keywordIds,
+	abTests = {},
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
@@ -268,7 +269,7 @@ export const renderBlocks = ({
 				ajaxUrl={ajaxUrl}
 				isSensitive={isSensitive}
 				isAdFreeUser={isAdFreeUser}
-				abTests={{}} // @TODO: start passing `abTests` to the block endpoint
+				abTests={abTests}
 				switches={switches}
 				isLiveUpdate={true}
 				sectionId={section}

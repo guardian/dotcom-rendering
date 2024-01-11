@@ -348,8 +348,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0(tslib@2.6.2)(typescript@5.1.3)
       '@guardian/braze-components':
-        specifier: 16.2.0
-        version: 16.2.0(@emotion/react@11.11.1)(@guardian/libs@15.7.1)(@guardian/source-foundations@13.2.0)(@guardian/source-react-components-development-kitchen@15.0.0)(@guardian/source-react-components@16.0.1)(react@18.2.0)
+        specifier: 16.3.0
+        version: 16.3.0(@emotion/react@11.11.1)(@guardian/libs@15.7.1)(@guardian/source-foundations@13.2.0)(@guardian/source-react-components-development-kitchen@15.0.0)(@guardian/source-react-components@16.0.1)(react@18.2.0)
       '@guardian/bridget':
         specifier: 2.6.0
         version: 2.6.0
@@ -781,7 +781,7 @@ importers:
         version: 7.1.2
       postcss-styled-syntax:
         specifier: 0.6.3
-        version: 0.6.3(postcss@8.4.32)
+        version: 0.6.3(postcss@8.4.33)
       preact:
         specifier: 10.15.1
         version: 10.15.1
@@ -4797,8 +4797,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@16.2.0(@emotion/react@11.11.1)(@guardian/libs@15.7.1)(@guardian/source-foundations@13.2.0)(@guardian/source-react-components-development-kitchen@15.0.0)(@guardian/source-react-components@16.0.1)(react@18.2.0):
-    resolution: {integrity: sha512-+wRKpo0LChL0PUqgRkqg/LrDpnz5ufIML1VokPwjZtyHpDMacB3393L3pBmKH46SNyBddmkRG98opfv1hdjqVA==}
+  /@guardian/braze-components@16.3.0(@emotion/react@11.11.1)(@guardian/libs@15.7.1)(@guardian/source-foundations@13.2.0)(@guardian/source-react-components-development-kitchen@15.0.0)(@guardian/source-react-components@16.0.1)(react@18.2.0):
+    resolution: {integrity: sha512-JQ9MkrJx6+7OXxwqPy2lfFNKvvmFGTCbdOedC2KczdLKusKUSWIw3EzLwdoRpgMTXsQSVpqrJ5N/VM3wDsAAxQ==}
     engines: {node: ^18.15 || ^20.9}
     peerDependencies:
       '@emotion/react': ^11.1.2
@@ -10182,7 +10182,7 @@ packages:
   /axios@1.6.2(debug@4.3.4):
     resolution: {integrity: sha512-7i24Ri4pmDRfJTR7LDBhsOTtcm+9kjX5WiY1X3wIisx6G9So3pfMkEiU7emUBe46oceVImccTEM3k6C5dbVW8A==}
     dependencies:
-      follow-redirects: 1.15.3(debug@4.3.4)
+      follow-redirects: 1.15.4(debug@4.3.4)
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -11224,6 +11224,11 @@ packages:
     requiresBuild: true
     dev: false
 
+  /core-js-pure@3.35.0:
+    resolution: {integrity: sha512-f+eRYmkou59uh7BPcyJ8MC76DiGhspj1KMxVIcF24tzP8NA9HVa1uC7BTW2tgx7E1QVCzDzsgp7kArrzhlz8Ew==}
+    requiresBuild: true
+    dev: false
+
   /core-js@2.6.12:
     resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
     deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
@@ -11232,6 +11237,11 @@ packages:
 
   /core-js@3.33.3:
     resolution: {integrity: sha512-lo0kOocUlLKmm6kv/FswQL8zbkH7mVsLJ/FULClOhv8WRVmKLVcs6XPNQAzstfeJTCHMyButEwG+z1kHxHoDZw==}
+    requiresBuild: true
+    dev: false
+
+  /core-js@3.35.0:
+    resolution: {integrity: sha512-ntakECeqg81KqMueeGJ79Q5ZgQNR+6eaE8sxGCx62zMbAIj65q+uYvatToew3m6eAGdU4gNZwpZ34NMe4GYswg==}
     requiresBuild: true
     dev: false
 
@@ -13675,8 +13685,8 @@ packages:
     resolution: {integrity: sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==}
     dev: false
 
-  /follow-redirects@1.15.3(debug@4.3.4):
-    resolution: {integrity: sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==}
+  /follow-redirects@1.15.4(debug@4.3.4):
+    resolution: {integrity: sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
@@ -14545,7 +14555,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.3(debug@4.3.4)
+      follow-redirects: 1.15.4(debug@4.3.4)
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -16178,8 +16188,8 @@ packages:
     engines: {node: '>=18'}
     dev: false
 
-  /live-connect-js@6.3.1:
-    resolution: {integrity: sha512-VUfPGTVNXweNKhj3zT1vQWggP/i8Vih3EyFPaMgONSzwM1QW4QMSkL2XXx+zCookketQhGQ97KrExU19HR1M+A==}
+  /live-connect-js@6.3.4:
+    resolution: {integrity: sha512-lg2XeCaj/eEbK66QGGDEdz9IdT/K3ExZ83Qo6xGVLdP5XJ33xAUCk/gds34rRTmpIwUfAnboOpyj3UoYtS3QUQ==}
     engines: {node: '>=18'}
     dependencies:
       live-connect-common: 3.0.3
@@ -17805,13 +17815,13 @@ packages:
       util-deprecate: 1.0.2
     dev: false
 
-  /postcss-styled-syntax@0.6.3(postcss@8.4.32):
+  /postcss-styled-syntax@0.6.3(postcss@8.4.33):
     resolution: {integrity: sha512-woEkwRaHWnVOVjToQKeQkRYasTwa3WY+0A7hcY0HmiBw458nxmWFbt7+XMvuGWwB4VYjNqeWYNr04Hx9/GVTpA==}
     engines: {node: '>=14.17'}
     peerDependencies:
       postcss: ^8.4.21
     dependencies:
-      postcss: 8.4.32
+      postcss: 8.4.33
       typescript: 5.3.3
     dev: false
 
@@ -17821,6 +17831,15 @@ packages:
 
   /postcss@8.4.32:
     resolution: {integrity: sha512-D/kj5JNu6oo2EIy+XL/26JEDTlIbB8hw85G8StOE6L74RQAVVP5rej6wxCNqyMbR4RkPfqvezVbPw81Ngd6Kcw==}
+    engines: {node: ^10 || ^12 || >=14}
+    dependencies:
+      nanoid: 3.3.7
+      picocolors: 1.0.0
+      source-map-js: 1.0.2
+    dev: false
+
+  /postcss@8.4.33:
+    resolution: {integrity: sha512-Kkpbhhdjw2qQs2O2DGX+8m5OVqEcbB9HRBvuYM9pgrjEFUg30A9LmXNlTAUj4S9kgtGyrMbTzVjH7E+s5Re2yg==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.7
@@ -21644,8 +21663,8 @@ packages:
       '@babel/preset-env': 7.22.6(@babel/core@7.23.2)
       '@babel/runtime': 7.20.13
       '@guardian/libs': 15.7.1(tslib@2.6.2)(typescript@5.1.3)
-      core-js: 3.33.3
-      core-js-pure: 3.34.0
+      core-js: 3.35.0
+      core-js-pure: 3.35.0
       criteo-direct-rsa-validate: 1.1.0
       crypto-js: 4.2.0
       dlv: 1.1.3
@@ -21653,7 +21672,7 @@ packages:
       express: 4.18.2
       fun-hooks: 0.9.10
       just-clone: 1.0.2
-      live-connect-js: 6.3.1
+      live-connect-js: 6.3.4
     optionalDependencies:
       fsevents: 2.3.3
     transitivePeerDependencies:

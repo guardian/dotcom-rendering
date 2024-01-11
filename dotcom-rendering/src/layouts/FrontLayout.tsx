@@ -433,8 +433,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										displayName={collection.displayName}
 										trails={trails}
 										mostViewed={front.mostViewed}
-										mostCommented={front.mostCommented}
-										mostShared={front.mostShared}
 										isNetworkFront={front.isNetworkFront}
 										deeplyRead={deeplyReadData}
 										editionId={front.editionId}
