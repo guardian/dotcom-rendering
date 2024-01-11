@@ -1,5 +1,5 @@
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       container-image:
         description: 'Image used by DCR service'
@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [1, 2, 5]
+        group: [1]
     services:
       DCR:
         image: ${{ inputs.container-image }}

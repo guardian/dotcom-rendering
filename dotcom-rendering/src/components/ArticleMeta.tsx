@@ -8,8 +8,8 @@ import {
 } from '@guardian/libs';
 import {
 	between,
-	border,
 	from,
+	palette,
 	space,
 	until,
 } from '@guardian/source-foundations';
@@ -158,7 +158,7 @@ const metaNumbers = (isPictureContent: boolean) => css`
 	}
 `;
 
-const metaContainer = (format: ArticleFormat) => {
+export const metaContainer = (format: ArticleFormat) => {
 	const defaultMargins = css`
 		${until.phablet} {
 			margin-left: -20px;
@@ -205,7 +205,8 @@ const metaContainer = (format: ArticleFormat) => {
 	}
 };
 
-const shouldShowAvatar = (format: ArticleFormat) => {
+// used by ArticleMeta.apps.tsx
+export const shouldShowAvatar = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return false;
@@ -227,7 +228,8 @@ const shouldShowAvatar = (format: ArticleFormat) => {
 	}
 };
 
-const shouldShowContributor = (format: ArticleFormat) => {
+// used by ArticleMeta.apps.tsx
+export const shouldShowContributor = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.NumberedList:
 			return true;
@@ -345,7 +347,7 @@ export const ArticleMeta = ({
 						<StraightLines
 							cssOverrides={stretchLines}
 							count={1}
-							color={border.primary}
+							color={palette.neutral[60]}
 						/>
 						<div
 							css={css`

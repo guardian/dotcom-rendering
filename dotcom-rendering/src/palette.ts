@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -844,6 +844,32 @@ export const tabs = {
 	};
 };
 
+const datelineMobileLight: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 600);
+				default:
+					return sourcePalette.neutral[100];
+			}
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[46];
+		default:
+			if (
+				theme === ArticleSpecial.SpecialReportAlt &&
+				design !== ArticleDesign.DeadBlog
+			) {
+				return sourcePalette.specialReportAlt[100];
+			}
+			return sourcePalette.neutral[46];
+	}
+};
+
 const datelineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Comment:
@@ -864,6 +890,8 @@ const datelineLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.NewsletterSignup:
 		case ArticleDesign.PhotoEssay:
 		case ArticleDesign.Review:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[60];
 		case ArticleDesign.Standard:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
@@ -1251,6 +1279,8 @@ const followIconFillDark: PaletteFunction = ({ theme, design }) => {
 					return sourcePalette.culture[500];
 				case Pillar.Lifestyle:
 					return sourcePalette.lifestyle[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[700];
 				case ArticleSpecial.SpecialReportAlt:
@@ -3009,6 +3039,19 @@ const articleLinkBorderLight: PaletteFunction = ({ design, theme }) => {
 
 const articleLinkBorderDark: PaletteFunction = () => sourcePalette.neutral[46];
 
+const articleMetaLinesDark: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[20];
+		case ArticleDesign.Comment:
+			return sourcePalette.neutral[20];
+		case ArticleDesign.Interactive:
+			return sourcePalette.neutral[46];
+		default:
+			return sourcePalette.neutral[46];
+	}
+};
+
 const articleLinkHoverLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
@@ -4301,10 +4344,49 @@ const commentCountFill: PaletteFunction = ({ design, theme }) => {
 	return pillarPalette(theme, 400);
 };
 
+const commentCountFillDark: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.LiveBlog || design === ArticleDesign.DeadBlog)
+		return sourcePalette.neutral[46];
+	if (theme === ArticleSpecial.Labs) return sourcePalette.neutral[86];
+	if (theme === ArticleSpecial.SpecialReport)
+		return sourcePalette.specialReport[500];
+
+	if (theme === ArticleSpecial.SpecialReportAlt)
+		return sourcePalette.specialReportAlt[700];
+
+	if (design === ArticleDesign.Analysis) {
+		switch (theme) {
+			case Pillar.News:
+				return sourcePalette.news[500];
+			default:
+				pillarPalette(theme, 500);
+		}
+	}
+	if (design === ArticleDesign.Picture) {
+		return sourcePalette.neutral[86];
+	}
+	return pillarPalette(theme, 500);
+};
+
 const mobileCommentCountFill: PaletteFunction = (format) => {
 	if (format.design === ArticleDesign.LiveBlog)
-		return sourcePalette.neutral[100];
+		switch (format.theme) {
+			case Pillar.News:
+			case Pillar.Opinion:
+			case Pillar.Sport:
+			case Pillar.Culture:
+			case Pillar.Lifestyle:
+				return pillarPalette(format.theme, 600);
+			default:
+				return sourcePalette.neutral[100];
+		}
 	return commentCountFill(format);
+};
+
+const mobileCommentCountFillDark: PaletteFunction = (format) => {
+	if (format.design === ArticleDesign.LiveBlog)
+		return sourcePalette.neutral[100];
+	return commentCountFillDark(format);
 };
 
 const explainerAtomBackgroundLight: PaletteFunction = () =>
@@ -4676,7 +4758,27 @@ const codeBlockBackgroundDark: PaletteFunction = () =>
 const codeBlockTextShadowLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const codeBlockTextShadowDark: PaletteFunction = () => sourcePalette.neutral[0];
-sourcePalette.neutral[38];
+
+const lastUpdatedText: PaletteFunction = ({ theme, design }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+					return pillarPalette(theme, 600);
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[600];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[700];
+			}
+		default:
+			return sourcePalette.neutral[0];
+	}
+};
 
 // ----- Palette ----- //
 
@@ -4764,6 +4866,10 @@ const paletteColours = {
 	'--dateline': {
 		light: datelineLight,
 		dark: datelineDark,
+	},
+	'--dateline-mobile': {
+		light: datelineMobileLight,
+		dark: standfirstTextDark,
 	},
 	'--headline-colour': {
 		light: headlineTextLight,
@@ -5093,6 +5199,10 @@ const paletteColours = {
 		light: straightLinesLight,
 		dark: straightLinesDark,
 	},
+	'--article-meta-lines': {
+		light: articleBorderLight,
+		dark: articleMetaLinesDark,
+	},
 	'--sub-nav-border': {
 		light: subNavBorder,
 		dark: subNavBorder,
@@ -5343,11 +5453,11 @@ const paletteColours = {
 	},
 	'--comment-count-fill': {
 		light: commentCountFill,
-		dark: commentCountFill,
+		dark: commentCountFillDark,
 	},
 	'--comment-count-mobile-fill': {
 		light: mobileCommentCountFill,
-		dark: mobileCommentCountFill,
+		dark: mobileCommentCountFillDark,
 	},
 	'--explainer-atom-background': {
 		light: explainerAtomBackgroundLight,
@@ -5536,6 +5646,10 @@ const paletteColours = {
 	'--code-block-text-shadow': {
 		light: codeBlockTextShadowLight,
 		dark: codeBlockTextShadowDark,
+	},
+	'--last-updated-text': {
+		light: lastUpdatedText,
+		dark: lastUpdatedText,
 	},
 } satisfies PaletteColours;
 

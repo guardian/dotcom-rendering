@@ -96,28 +96,6 @@ export const Web: StoryObj = ({ format }: StoryArgs) => {
 Web.parameters = { config: { renderingTarget: 'Web' } };
 Web.decorators = [splitTheme()];
 
-export const Apps: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Wrapper>
-			<ArticleMeta
-				format={format}
-				pageId=""
-				webTitle=""
-				byline="Lanre Bakare"
-				tags={tagsWithLargeBylineImage}
-				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
-				isCommentable={false}
-				discussionApiUrl=""
-				shortUrlId=""
-				ajaxUrl=""
-			/>
-		</Wrapper>
-	);
-};
-Apps.parameters = { config: { renderingTarget: 'Apps' } };
-Apps.decorators = [splitTheme()];
-
 const branding: BrandingType = {
 	brandingType: { name: 'sponsored' },
 	sponsorName: 'theguardian.org',

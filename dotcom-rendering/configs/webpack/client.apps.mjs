@@ -35,6 +35,7 @@ export default merge(base(import.meta.url), {
 					{
 						loader: 'swc-loader',
 						options: {
+							$schema: 'http://json.schemastore.org/swcrc',
 							jsc: {
 								parser: {
 									syntax: 'typescript',
@@ -77,7 +78,7 @@ export default merge(base(import.meta.url), {
 		],
 	},
 	plugins: [
-		new WebpackManifestPlugin(),
+		new WebpackManifestPlugin({ fileName: 'manifest.client.apps.json' }),
 		// eslint-disable-next-line import/no-named-as-default-member -- the Webpack way
 		new webpack.optimize.LimitChunkCountPlugin({
 			maxChunks: 1,

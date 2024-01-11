@@ -5,7 +5,6 @@ export type Palette = {
 		headlineWhenMatch: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
-		lastUpdated: Colour;
 		disclaimerLink: Colour;
 		cricketScoreboardLink: Colour;
 		filterButton: Colour;
