@@ -351,59 +351,7 @@ export const mockTab2: FETrailTabType = {
 	],
 };
 
-export const mockMostCommented = {
-	url: 'https://www.theguardian.com/politics/2019/sep/15/eu-officials-reject-boris-johnson-claim-huge-progress-brexit-talks',
-	headline:
-		"EU officials reject Boris Johnson claim of 'huge progress' in Brexit talks",
-	showByline: true,
-	byline: 'Jennifer Rankin and Daniel Boffey',
-	image: 'https://media.guim.co.uk/85377038aacd71b2c0e55b0a55478165fe6d3014/0_0_6000_3600/master/6000.jpg',
-	format: {
-		theme: 'OpinionPillar',
-		design: 'CommentDesign',
-		display: 'StandardDisplay',
-	},
-	pillar: 'opinion',
-	designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
-	avatarUrl:
-		'https://uploads.guim.co.uk/uploads/2017/10/06/George-Monbiot,-L.png',
-};
-
-export const mockMostShared = {
-	url: 'https://www.theguardian.com/us-news/2019/sep/15/brett-kavanaugh-donald-trump-impeachment-supreme-court-justice',
-	headline: 'Trump blasts calls for impeachment',
-	showByline: false,
-	byline: 'Martin Pengelly',
-	image: 'https://media.guim.co.uk/579fd19481e46b9d6ed3c69c2a6992483df84478/0_0_6000_3600/master/6000.jpg',
-	format: {
-		design: 'ArticleDesign',
-		theme: 'OpinionPillar',
-		display: 'StandardDisplay',
-	},
-	pillar: 'opinion',
-	designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
-	ageWarning: '1 year old',
-};
-
 const twoTabs: [FETrailTabType, FETrailTabType] = [mockTab1, mockTab2];
 export const responseWithTwoTabs = {
 	tabs: twoTabs,
-	mostCommented: mockMostCommented,
-	mostShared: mockMostShared,
-};
-
-const oneTab: [FETrailTabType] = [mockTab1];
-export const responseWithOneTab = {
-	tabs: oneTab,
-	mostCommented: mockMostCommented,
-	mostShared: mockMostShared,
-};
-
-export const responseWithMissingImage = {
-	tabs: oneTab,
-	mostCommented: mockMostCommented,
-	mostShared: {
-		...mockMostShared,
-		image: null,
-	},
 };

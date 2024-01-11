@@ -54,7 +54,7 @@ describe('MostViewedFooterData', () => {
 		expect(getAllByText(/Live/).length).toBe(3);
 
 		// Renders appropriate number of age warnins
-		expect(getAllByText(/This article is more than/).length).toBe(3);
+		expect(getAllByText(/This article is more than/).length).toBe(2);
 
 		// Handles &nbsp char
 		expect(getByText('Across The Guardian')).toBeInTheDocument();
@@ -212,11 +212,6 @@ describe('MostViewedFooterData', () => {
 			</ConfigProvider>,
 		);
 
-		// Renders tab data link name
-		// expect(
-		//	asFragment().querySelectorAll('[data-link-name="in Music"]').length,
-		// ).toBe(1); // Should add the data-link-name for Section Name tab */
-
 		// Renders Trail data-link-names
 		expect(
 			asFragment().querySelectorAll('[data-link-name*="| text"]').length,
@@ -229,19 +224,5 @@ describe('MostViewedFooterData', () => {
 		expect(
 			asFragment().querySelectorAll('[data-link-name="0 | text"]').length,
 		).toBe(0); // 1 indexed so should start at 1
-
-		// most commented
-		expect(
-			asFragment().querySelectorAll(
-				'[data-link-name="comment | group-0 | card-@1"]',
-			).length,
-		).toBe(1);
-
-		// most shared
-		expect(
-			asFragment().querySelectorAll(
-				'[data-link-name="news | group-0 | card-@1"]',
-			).length,
-		).toBe(1);
 	});
 });

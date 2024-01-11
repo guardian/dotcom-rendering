@@ -348,8 +348,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0(tslib@2.6.2)(typescript@5.1.3)
       '@guardian/braze-components':
-        specifier: 16.2.0
-        version: 16.2.0(@emotion/react@11.11.1)(@guardian/libs@15.7.1)(@guardian/source-foundations@13.2.0)(@guardian/source-react-components-development-kitchen@15.0.0)(@guardian/source-react-components@16.0.1)(react@18.2.0)
+        specifier: 16.3.0
+        version: 16.3.0(@emotion/react@11.11.1)(@guardian/libs@15.7.1)(@guardian/source-foundations@13.2.0)(@guardian/source-react-components-development-kitchen@15.0.0)(@guardian/source-react-components@16.0.1)(react@18.2.0)
       '@guardian/bridget':
         specifier: 2.6.0
         version: 2.6.0
@@ -4797,8 +4797,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@16.2.0(@emotion/react@11.11.1)(@guardian/libs@15.7.1)(@guardian/source-foundations@13.2.0)(@guardian/source-react-components-development-kitchen@15.0.0)(@guardian/source-react-components@16.0.1)(react@18.2.0):
-    resolution: {integrity: sha512-+wRKpo0LChL0PUqgRkqg/LrDpnz5ufIML1VokPwjZtyHpDMacB3393L3pBmKH46SNyBddmkRG98opfv1hdjqVA==}
+  /@guardian/braze-components@16.3.0(@emotion/react@11.11.1)(@guardian/libs@15.7.1)(@guardian/source-foundations@13.2.0)(@guardian/source-react-components-development-kitchen@15.0.0)(@guardian/source-react-components@16.0.1)(react@18.2.0):
+    resolution: {integrity: sha512-JQ9MkrJx6+7OXxwqPy2lfFNKvvmFGTCbdOedC2KczdLKusKUSWIw3EzLwdoRpgMTXsQSVpqrJ5N/VM3wDsAAxQ==}
     engines: {node: ^18.15 || ^20.9}
     peerDependencies:
       '@emotion/react': ^11.1.2

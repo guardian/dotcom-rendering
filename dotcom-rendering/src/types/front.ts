@@ -25,8 +25,6 @@ export interface FEFrontType {
 	isAdFreeUser: boolean;
 	isNetworkFront: boolean;
 	mostViewed: FETrailType[];
-	mostCommented?: FETrailType;
-	mostShared?: FETrailType;
 	deeplyRead?: FETrailType[];
 	contributionsServiceUrl: string;
 }
@@ -41,8 +39,6 @@ export interface DCRFrontType {
 	isAdFreeUser: boolean;
 	isNetworkFront: boolean;
 	mostViewed: TrailType[];
-	mostCommented?: TrailType;
-	mostShared?: TrailType;
 	deeplyRead?: TrailType[];
 	trendingTopics?: FETagType[];
 	contributionsServiceUrl: string;
