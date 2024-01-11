@@ -18,13 +18,17 @@ const getEmail = async (ajaxUrl: string): Promise<string | undefined> =>
 				}),
 	);
 
+/**
+ * Attempts to fetch a signed in user's email address either from okta token or falling back to IdApi request.
+ * Returns null if no email address is found or if the request times out after 1 second.
+ * @param {string} idapiUrl - Idapi url available from window.guardian.config.page
+ */
 export const lazyFetchEmailWithTimeout =
 	(idapiUrl: string): (() => Promise<string | null>) =>
 	() => {
 		return new Promise((resolve) => {
 			setTimeout(() => resolve(null), 1000);
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
-			getEmail(idapiUrl).then((email) => {
+			void getEmail(idapiUrl).then((email) => {
 				if (email) {
 					resolve(email);
 				} else {
