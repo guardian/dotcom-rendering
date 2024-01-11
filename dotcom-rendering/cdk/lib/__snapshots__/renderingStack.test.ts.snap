@@ -1205,11 +1205,20 @@ systemctl start article-rendering",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
-            "Name": "LoadBalancerName",
+            "Name": "LoadBalancer",
             "Value": {
               "Fn::GetAtt": [
                 "LoadBalancerArticlerendering49883BBC",
-                "LoadBalancerName",
+                "LoadBalancerFullName",
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "TargetGroupArticlerendering3605E498",
+                "TargetGroupFullName",
               ],
             },
           },

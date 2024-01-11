@@ -143,7 +143,8 @@ export class RenderingCDKStack extends CDKStack {
 				evaluationPeriods: 1,
 				metric: new Metric({
 					dimensionsMap: {
-						LoadBalancerName: ec2app.loadBalancer.loadBalancerName,
+						LoadBalancer: ec2app.loadBalancer.loadBalancerFullName,
+						TargetGroup: ec2app.targetGroup.targetGroupFullName,
 					},
 					metricName: 'TargetResponseTime',
 					namespace: 'AWS/ApplicationELB',
