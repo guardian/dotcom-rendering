@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { DateTime } from './DateTime';
 
 const meta: Meta<typeof DateTime> = {
-	title: 'Components/Time',
+	title: 'Components/DateTime',
 	component: DateTime,
 	decorators: (Story) => (
 		<div
@@ -24,23 +24,27 @@ type Story = StoryObj<typeof DateTime>;
 const date = new Date('2024-01-14T12:34:00.000Z');
 
 export const UK: Story = {
-	args: { date, edition: 'UK' },
+	args: { date, editionId: 'UK' },
+};
+
+export const TimeOnly: Story = {
+	args: { date, editionId: 'UK', showDate: false },
 };
 
 export const US: Story = {
-	args: { date, edition: 'US' },
+	args: { date, editionId: 'US' },
 };
 
 export const AU: Story = {
-	args: { date, edition: 'AU' },
+	args: { date, editionId: 'AU' },
 };
 
 export const EUR: Story = {
-	args: { date, edition: 'EUR' },
+	args: { date, editionId: 'EUR' },
 };
 
 export const INT: Story = {
-	args: { date, edition: 'INT' },
+	args: { date, editionId: 'INT' },
 };
 
 export default meta;

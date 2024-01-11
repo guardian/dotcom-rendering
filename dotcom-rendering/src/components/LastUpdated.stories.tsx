@@ -1,17 +1,15 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { LastUpdated } from './LastUpdated';
 
-export default {
+const meta: Meta = {
 	component: LastUpdated,
 	title: 'Components/LastUpdated',
 };
 
-export const Default = () => {
-	return (
-		<LastUpdated
-			lastUpdated={1613763519000}
-			lastUpdatedDisplay="19.38 GMT"
-		/>
-	);
+type Story = StoryObj<typeof LastUpdated>;
+
+export const Default: Story = {
+	args: { lastUpdated: 1613763519000, editionId: 'UK' },
 };
 
-Default.storyName = 'Default';
+export default meta;

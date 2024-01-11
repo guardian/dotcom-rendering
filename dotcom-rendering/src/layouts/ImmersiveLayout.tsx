@@ -679,6 +679,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									editionId={article.editionId}
 								/>
 								{showBodyEndSlot && (
 									<Island

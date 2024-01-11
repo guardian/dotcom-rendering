@@ -664,6 +664,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									editionId={article.editionId}
 								/>
 								{showBodyEndSlot && (
 									<Island
