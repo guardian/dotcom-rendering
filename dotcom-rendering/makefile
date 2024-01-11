@@ -72,14 +72,6 @@ storybook-dev: clear clean-dist install
 
 # tests #####################################
 
-cypress: clear clean-dist install build
-	$(call log, "starting PROD server for Cypress")
-	@NODE_ENV=production NODE_OPTIONS="--max-old-space-size=8192" DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
-
-cypress-open: clear clean-dist install build
-	$(call log, "starting PROD server and opening Cypress")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress open --e2e --browser electron'
-
 playwright: clear clean-dist install build
 	$(call log, "starting PROD server for Playwright")
 	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'playwright test'
