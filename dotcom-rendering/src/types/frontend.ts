@@ -3,7 +3,7 @@ import type { EditionId } from '../lib/edition';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { FEArticleBadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
-import type { ConfigType, ServerSideTests, Switches } from './config';
+import type { ConfigType, ServerSideTests } from './config';
 import type { FEElement, ImageForLightbox, Newsletter } from './content';
 import type { FooterType } from './footer';
 import type { FEOnwards } from './onwards';
@@ -156,7 +156,7 @@ export interface FEBlocksRequest {
 	sharedAdTargeting: SharedAdTargeting;
 	adUnit: string;
 	videoDuration?: number;
-	switches: Switches;
-	abTests: ServerSideTests;
+	switches: { [key: string]: boolean };
+	abTests?: ServerSideTests;
 	keywordIds: string;
 }

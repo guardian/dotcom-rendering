@@ -84,8 +84,8 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		section,
 		sharedAdTargeting,
 		adUnit,
-		abTests,
 		switches,
+		abTests,
 		keywordIds,
 	});
 

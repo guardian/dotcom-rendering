@@ -46,10 +46,14 @@ const adSlotStyles = css`
 
 const adSlotSquareStyles = css`
 	${adSlotStyles}
+	${until.phablet} {
+		width: 320px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
 	height: 344px;
-	width: 320px;
-	margin-left: 10px;
-	margin-right: 10px;
+	width: 300px;
 	padding-bottom: 0;
 `;
 

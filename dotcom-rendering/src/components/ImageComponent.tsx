@@ -26,12 +26,12 @@ type Props = {
 	element: ImageBlockElement;
 	role: RoleType;
 	format: ArticleFormat;
-	isInLightboxTest: boolean;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
 	starRating?: number;
 	title?: string;
 	isAvatar?: boolean;
+	isInLightboxTest: boolean;
 };
 
 const starsWrapper = css`
@@ -290,7 +290,7 @@ export const ImageComponent = ({
 		return (
 			<div
 				id={
-					element.position !== undefined
+					!isUndefined(element.position)
 						? `img-${element.position}`
 						: ''
 				}

@@ -263,6 +263,77 @@ BrazeEpic_SpecialHeader_Component.args = {
 
 BrazeEpic_SpecialHeader_Component.storyName = 'Epic with special header';
 
+// Braze Generic Newsletter Epic
+// ---------------------------------------
+export const BrazeEpicNewsletter_Generic_Component = (
+	args: BrazeMessageProps & { componentName: string },
+): ReactElement => {
+	const [BrazeMessage, setBrazeMessage] =
+		useState<typeof BrazeEndOfArticleComponent>();
+
+	useEffect(() => {
+		import('@guardian/braze-components')
+			.then((module) => {
+				setBrazeMessage(() => module.BrazeEndOfArticleComponent);
+			})
+			.catch((e) =>
+				console.error(
+					`braze-components dynamic import - error: ${String(e)}`,
+				),
+			);
+	}, []);
+
+	if (BrazeMessage) {
+		const brazeMessageProps: BrazeMessageProps = {
+			newsletterId: args.newsletterId,
+			imageUrl: args.imageUrl,
+			header: args.header,
+			frequency: args.frequency,
+			paragraph1: args.paragraph1,
+			paragraph2: args.paragraph2,
+			ophanComponentId: args.ophanComponentId,
+		};
+
+		return (
+			<BrazeMessage
+				componentName={args.componentName}
+				subscribeToNewsletter={() => Promise.resolve()}
+				logButtonClickWithBraze={(internalButtonId) => {
+					console.log(
+						`Button with internal ID ${internalButtonId} clicked`,
+					);
+				}}
+				submitComponentEvent={(componentEvent) => {
+					console.log(
+						'submitComponentEvent called with: ',
+						componentEvent,
+					);
+				}}
+				brazeMessageProps={brazeMessageProps}
+				fetchEmail={fetchEmail}
+			/>
+		);
+	}
+	return <div>Loading...</div>;
+};
+
+BrazeEpicNewsletter_Generic_Component.args = {
+	slotName: 'EndOfArticle',
+	newsletterId: '6023',
+	imageUrl:
+		'https://i.guim.co.uk/img/media/898c5401ab51b983dc4b2508aaaf0735e6bda0e2/0_0_2000_2000/2000.png?width=400&quality=75&s=9191ec413d946058f37caced7edd0b90',
+	header: `Newsletter title`,
+	frequency: 'Frequency',
+	paragraph1:
+		'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+	paragraph2:
+		'We thought you should know this newsletter may contain information about Guardian products and services.',
+	componentName: 'NewsletterEpic',
+	ophanComponentId: 'example_ophan_component_id',
+};
+
+BrazeEpicNewsletter_Generic_Component.storyName = 'Newsletter - Generic';
+
 // Braze Newsletter Epic - UK - MorningBriefing
 // ---------------------------------------
 export const BrazeNewsletterEpic_UK_MorningBriefing_Component = (

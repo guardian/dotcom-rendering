@@ -249,9 +249,9 @@ export const renderBlocks = ({
 	isAdFreeUser,
 	isSensitive,
 	section,
-	abTests,
 	switches,
 	keywordIds,
+	abTests = {},
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 

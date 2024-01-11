@@ -58,15 +58,28 @@ const getTabbableElements = (
 	}
 };
 
+/** Reject a Promise after a delay  */
+const timeout = <T,>(promise: Promise<T>, delay = 1200) =>
+	Promise.race([
+		promise,
+		new Promise<void>((_, reject) => {
+			const timer = setTimeout(() => {
+				reject();
+				clearTimeout(timer);
+			}, delay);
+		}),
+	]);
+
+/** will try to request fullscreen, but not wait more than 120ms */
 const requestFullscreen = async (lightbox: Element) => {
 	if (screenfull.isEnabled) {
-		return screenfull.request(lightbox);
+		return timeout(screenfull.request(lightbox));
 	}
 };
 
 const exitFullscreen = async () => {
 	if (screenfull.isEnabled && screenfull.isFullscreen) {
-		return screenfull.exit();
+		return timeout(screenfull.exit());
 	}
 };
 
@@ -105,6 +118,7 @@ const scrollTo = (
 ): void => {
 	// liWidth is the actual dom width in pixels of the containing li element for each image
 	const liWidth = lightbox.querySelector('li')?.clientWidth;
+
 	if (isUndefined(liWidth)) return;
 	switch (position) {
 		case 0:
@@ -199,6 +213,10 @@ const open = async (
 	log('dotcom', '💡 Opening lightbox.');
 	// Remember where we were so we can restore focus
 	if (document.activeElement) previouslyFocused = document.activeElement;
+	// Try to open the lightbox in fullscreen mode. This may fail
+	await requestFullscreen(lightbox).catch(() => {
+		// fullscreen request failed
+	});
 	// We use this class to prevent the main page from scrolling in the background while lightbox is open
 	document.documentElement.classList.add('lightbox-open');
 	// Show lightbox
@@ -208,12 +226,6 @@ const open = async (
 	scrollTo(position, lightbox, imageList);
 	// We only want this listener active while the lightbox is open
 	window.addEventListener('keydown', handleKeydown);
-	// Try to open the lightbox in fullscreen mode. This may fail
-	try {
-		await requestFullscreen(lightbox);
-	} catch {
-		// Do nothing, requests to open fullscreen are just requests and can fail
-	}
 };
 
 const closeLightbox = (
@@ -233,7 +245,9 @@ const close = async (
 	handleKeydown: (ev: KeyboardEvent) => void,
 ) => {
 	log('dotcom', '💡 Closing lightbox.');
-	await exitFullscreen();
+	await exitFullscreen().catch(() => {
+		// fullscreen request failed
+	});
 	closeLightbox(lightbox, handleKeydown);
 	history.back();
 	previouslyFocused && restoreFocus(previouslyFocused);

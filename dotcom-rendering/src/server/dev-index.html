@@ -153,6 +153,52 @@
 							image, and an audio atom.
 						</p>
 					</li>
+					<li
+						data-design="Deadblog"
+						data-display="Standard"
+						data-theme="Sport"
+					>
+						<a
+							href="https://www.theguardian.com/football/live/2018/jul/03/world-cup-2018-england-v-colombia-switzerland-v-sweden-buildup-live"
+						>
+							Buildup and World Cup latest before Colombia v
+							England - as it happened
+						</a>
+						<p slot="description">
+							Contains rich links, tweets, and media atoms
+						</p>
+					</li>
+					<li
+						data-design="Comment"
+						data-display="Standard"
+						data-theme="Opinion"
+					>
+						<a
+							href="https://www.theguardian.com/politics/2019/jul/15/it-will-be-boris-johnson-and-it-will-certainly-be-a-disaster"
+						>
+							It will be Boris Johnson. And it will certainly be a
+							disaster
+						</a>
+						<p slot="description">
+							Contains a rich link and has discussion
+						</p>
+					</li>
+					<li
+						data-design="Review"
+						data-display="Standard"
+						data-theme="Culture"
+					>
+						<a
+							href="https://www.theguardian.com/music/2018/aug/31/eminem-kamikaze-album-review"
+						>
+							Eminem: Kamikaze review - middle-aged gripes aired
+							with blazing skill
+						</a>
+						<p slot="description">
+							Contains a supporting body image, a rich link, a
+							video element, and an audio element
+						</p>
+					</li>
 				</ul>
 			</article-examples>
 
@@ -307,18 +353,6 @@
 			</template>
 		</section>
 
-		<h2>Test Articles By Content Type</h2>
-
-		<div id="test-articles-by-content" class="test-articles-list">
-			<div class="test-article-header">
-				<span>type</span>
-				<span>local</span>
-				<span>local-amp</span>
-				<span>production</span>
-				<span>production-amp</span>
-			</div>
-		</div>
-
 		<h2>Test Articles By Element</h2>
 
 		<div id="test-articles-by-element" class="test-articles-list">
@@ -363,28 +397,6 @@
 
 		<script>
 			// @ts-check
-			var testContentTypes = [
-				{
-					name: 'Live Blog',
-					article:
-						'/football/live/2018/jul/03/world-cup-2018-england-v-colombia-switzerland-v-sweden-buildup-live',
-				},
-				{
-					name: 'Opinion Piece',
-					article:
-						'/politics/2019/jul/15/it-will-be-boris-johnson-and-it-will-certainly-be-a-disaster',
-				},
-				{
-					name: 'Paid Content',
-					article:
-						'/bank-australia-clean-money/2019/feb/11/three-trillion-reasons-for-australians-to-join-the-clean-money-revolution',
-				},
-				{
-					name: 'Review',
-					article: '/music/2018/aug/31/eminem-kamikaze-album-review',
-				},
-			];
-
 			var testArticles = [
 				{
 					name: 'AudioBlockElement',
@@ -676,16 +688,6 @@
 			                 <span><a href="https://amp.theguardian.com${a.article}">example</a></span>
 			             </div>
 			         `;
-
-			testContentTypes.forEach((a) => {
-				const testArticles = document.getElementById(
-					'test-articles-by-content',
-				);
-
-				if (testArticles !== null) {
-					testArticles.innerHTML += makeTestArticle(a);
-				}
-			});
 
 			testArticles.forEach((a) => {
 				const testArticles = document.getElementById(
