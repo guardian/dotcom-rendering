@@ -446,7 +446,7 @@ test.describe('YouTube Atom', () => {
 		// Close the sticky video
 		// A regular click does not work here as the sticky close button requires a hover first
 		// to make it visible. Even when using hover() Playwright sees the button as invisible and
-		// Playwright (like Cypress) does not allow clicking on invisible elements. Instead we
+		// Playwright does not allow clicking on invisible elements. Instead we
 		// dispatch a click event directly on the element.
 		await page
 			.locator(`${stickyCloseSelector}`)

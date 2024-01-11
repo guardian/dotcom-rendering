@@ -11,7 +11,7 @@ export const defaultStoryExpanded = {
 	expandCallback: (): null => null,
 };
 
-// Non expanded version needed for Cypress
+// Non expanded version needed for e2e testing
 export const defaultStory = {
 	id: 'a76d998e-d4b0-4d00-8afb-773eddb4064c',
 	title: "Wednesday's Hong Kong tips",

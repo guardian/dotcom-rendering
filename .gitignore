@@ -34,10 +34,6 @@ target
 # Test coverage reports
 coverage
 
-# Cypress result files
-/dotcom-rendering/cypress/screenshots/*
-/dotcom-rendering/cypress/videos/*
-
 # Storybook static folder (used if taking snapshots locally)
 /storybook-static
 **/storybook-static

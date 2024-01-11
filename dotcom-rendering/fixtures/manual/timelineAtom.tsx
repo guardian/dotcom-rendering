@@ -300,7 +300,7 @@ export const noTimelineEventsStoryExpanded = {
 	expandCallback: (): null => null,
 };
 
-// Non-expanded version for Cypress, it fails if the atom loads already expanded
+// Non-expanded version for e2e tests, it fails if the atom loads already expanded
 export const noTimelineEventsStory = {
 	id: '9704dbd0-0273-49d2-8425-c58ccf9a1951',
 	description:
