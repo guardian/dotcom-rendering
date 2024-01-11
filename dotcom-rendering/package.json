@@ -50,7 +50,7 @@
 		"@emotion/react": "11.11.1",
 		"@emotion/server": "11.11.0",
 		"@guardian/ab-core": "5.0.0",
-		"@guardian/braze-components": "16.2.0",
+		"@guardian/braze-components": "16.3.0",
 		"@guardian/bridget": "2.6.0",
 		"@guardian/browserslist-config": "5.0.0",
 		"@guardian/cdk": "50.13.0",
