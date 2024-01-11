@@ -1,6 +1,13 @@
 import type { Switches } from '../types/config';
 
-export type ABTestSwitches = { [key: `ab${string}`]: boolean | undefined };
+export type ABTestSwitches = { [key: `ab${string}`]: boolean };
+
+const isValidEntry = (
+	entry: [string, boolean | undefined],
+): entry is [string, boolean] => {
+	const [key, value] = entry;
+	return key.startsWith('ab') && typeof value === 'boolean';
+};
 
 /**
  * Switches that start with "ab" are used for AB tests.
@@ -18,6 +25,4 @@ export type ABTestSwitches = { [key: `ab${string}`]: boolean | undefined };
  * @returns {ABTestSwitches} an object containing only AB switches
  */
 export const filterABTestSwitches = (switches: Switches): ABTestSwitches =>
-	Object.fromEntries(
-		Object.entries(switches).filter(([key]) => key.startsWith('ab')),
-	);
+	Object.fromEntries(Object.entries(switches).filter(isValidEntry));
