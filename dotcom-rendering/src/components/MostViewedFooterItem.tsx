@@ -51,16 +51,16 @@ const gridItem = (position: number, hasPageSkin: boolean) => {
 
 const bigNumber = css`
 	position: absolute;
-	top: 0.375rem;
-	left: 0.625rem;
+	top: 6px;
+	left: 10px;
 	fill: ${palette('--article-text')};
 	svg {
-		height: 2.5rem;
+		height: 40px;
 	}
 `;
 
 const headlineHeader = css`
-	padding: 0.1875rem 0.625rem 1.125rem 4.6875rem;
+	padding: 3px 10px 18px 75px;
 	word-wrap: break-word;
 	overflow: hidden;
 `;
@@ -75,7 +75,7 @@ const headlineLink = css`
 `;
 
 const ageWarningStyles = css`
-	padding-left: 4.6875rem;
+	padding-left: 75px;
 	margin-top: -16px;
 	margin-bottom: 16px;
 `;
