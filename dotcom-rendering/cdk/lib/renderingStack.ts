@@ -10,18 +10,12 @@ import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { type App as CDKApp, Duration } from 'aws-cdk-lib';
-import { AdjustmentType, StepScalingAction } from 'aws-cdk-lib/aws-autoscaling';
-import {
-	Alarm,
-	ComparisonOperator,
-	Metric,
-	TreatMissingData,
-} from 'aws-cdk-lib/aws-cloudwatch';
+import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
+import { Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
-import { AutoScalingAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	guApp: `${'article' | 'facia' | 'misc' | 'interactive'}-rendering`;
@@ -150,50 +144,50 @@ export class RenderingCDKStack extends CDKStack {
 		 * When scaling up, we use percentage change (50% each interval)
 		 * When scaling down, we use absolute change (-1 each interval)
 		 */
+		new StepScalingPolicy(this, 'LatencyScaleUpPolicy', {
+			autoScalingGroup: ec2app.autoScalingGroup,
+			metric: latencyMetric,
+			scalingSteps: [
+				{
+					change: 50,
 
-		// Alarms
-		const highLatencyAlarm = new Alarm(
-			this,
-			`${guStack}-${guApp}-HighLatencyAlarm`,
-			{
-				// When merged this can become actionsEnabled: stage === 'PROD'
-				actionsEnabled: true,
-				alarmDescription: `ALB latency for ${guStack}-${guApp} is higher than 0.2 ms`,
-				threshold: 0.2,
-				comparisonOperator:
-					ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
-				evaluationPeriods: 1,
-				metric: latencyMetric,
-				treatMissingData:
-					stage === 'PROD'
-						? TreatMissingData.MISSING
-						: TreatMissingData.NOT_BREACHING,
-			},
-		);
+					// When latency is higher than 0.2s we start scaling up
+					lower: 0.2,
+					upper: 0.3,
+				},
+				{
+					change: 50,
 
-		const scaleUpStep = new StepScalingAction(this, 'ScaleUp', {
+					// When latency is higher than 0.3s we scale up again
+					lower: 0.3,
+				},
+			],
 			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
+			evaluationPeriods: 1,
+		});
+
+		new StepScalingPolicy(this, 'LatencyScaleDownPolicy', {
 			autoScalingGroup: ec2app.autoScalingGroup,
-		});
+			metric: latencyMetric,
+			scalingSteps: [
+				{
+					change: -1,
 
-		scaleUpStep.addAdjustment({
-			lowerBound: 0,
-			adjustment: 100,
-		});
+					// When latency is lower than 0.2s we scale down by 1
+					upper: 0.2,
+					lower: 0.1,
+				},
+				{
+					change: -1,
 
-		highLatencyAlarm.addAlarmAction(new AutoScalingAction(scaleUpStep));
-
-		const scaleDownStep = new StepScalingAction(this, 'ScaleDown', {
+					// When latency is lower than 0.1s we scale down by 1
+					upper: 0.1,
+					lower: 0.0,
+				},
+			],
 			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
-			autoScalingGroup: ec2app.autoScalingGroup,
+			evaluationPeriods: 1,
 		});
-
-		scaleDownStep.addAdjustment({
-			upperBound: 0,
-			adjustment: -1,
-		});
-
-		highLatencyAlarm.addOkAction(new AutoScalingAction(scaleDownStep));
 
 		// Saves the value of the rendering base URL to SSM for frontend apps to use
 		new StringParameter(this, 'RenderingBaseURLParam', {
