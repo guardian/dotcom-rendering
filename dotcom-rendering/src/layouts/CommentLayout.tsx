@@ -655,6 +655,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
+										editionId={article.editionId}
 									/>
 									{showBodyEndSlot && (
 										<Island

@@ -11,6 +11,7 @@ import {
 } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
+import { isEditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { getCurrentPillar } from '../lib/layoutHelpers';
@@ -252,11 +253,14 @@ export const renderBlocks = ({
 	switches,
 	keywordIds,
 	abTests = {},
+	edition,
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
 	// Only currently supported for Web
 	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
+
+	const editionId = isEditionId(edition) ? edition : 'UK';
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -279,6 +283,7 @@ export const renderBlocks = ({
 				isPaidContent={false}
 				contributionsServiceUrl=""
 				keywordIds={keywordIds}
+				editionId={editionId}
 			/>
 		</ConfigProvider>,
 	);

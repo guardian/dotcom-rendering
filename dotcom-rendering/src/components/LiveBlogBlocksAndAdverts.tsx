@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import type { EditionId } from '../lib/edition';
 import { getLiveblogAdPositions } from '../lib/getLiveblogAdPositions';
 import type { ServerSideTests, Switches } from '../types/config';
 import { AdPlaceholder } from './AdPlaceholder.apps';
@@ -9,6 +10,7 @@ import { LiveBlock } from './LiveBlock';
 type Props = {
 	format: ArticleFormat;
 	blocks: Block[];
+	editionId: EditionId;
 	pinnedPost?: Block;
 	host?: string;
 	pageId: string;
@@ -53,6 +55,7 @@ export const LiveBlogBlocksAndAdverts = ({
 	isAdFreeUser,
 	isSensitive,
 	isLiveUpdate,
+	editionId,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
@@ -74,6 +77,7 @@ export const LiveBlogBlocksAndAdverts = ({
 				isSensitive={isSensitive}
 				isPinnedPost={false}
 				pinnedPostId={pinnedPost?.id}
+				editionId={editionId}
 			/>
 		);
 	};

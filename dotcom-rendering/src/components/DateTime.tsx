@@ -2,11 +2,12 @@ import { type EditionId, getEditionFromId } from '../lib/edition';
 
 type Props = {
 	date: Date;
-	edition: EditionId;
+	editionId: EditionId;
+	showDate?: boolean;
 };
 
-export const DateTime = ({ date, edition }: Props) => {
-	const { locale, timeZone } = getEditionFromId(edition);
+export const DateTime = ({ date, editionId, showDate = true }: Props) => {
+	const { locale, timeZone } = getEditionFromId(editionId);
 	return (
 		<time
 			dateTime={date.toISOString()}
@@ -22,15 +23,16 @@ export const DateTime = ({ date, edition }: Props) => {
 				timeZone,
 			})}
 		>
-			{date
-				.toLocaleDateString(locale, {
-					weekday: 'short',
-					day: 'numeric',
-					month: 'short',
-					year: 'numeric',
-					timeZone,
-				})
-				.replaceAll(',', '')}{' '}
+			{showDate &&
+				date
+					.toLocaleDateString(locale, {
+						weekday: 'short',
+						day: 'numeric',
+						month: 'short',
+						year: 'numeric',
+						timeZone,
+					})
+					.replaceAll(',', '')}{' '}
 			{date
 				.toLocaleTimeString(locale, {
 					hour12: false,
