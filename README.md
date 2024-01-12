@@ -26,7 +26,7 @@ Run `pnpm` in the root directory of this project to install packages.
 
 ## Run
 
-You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `pnpm watch` for apps-rendering).
+You should generally `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `pnpm watch` for apps-rendering) except for running or building storybook for multiple apps.
 
 ### `apps rendering`
 
@@ -35,3 +35,18 @@ Go to [apps rendering](apps-rendering/README.md) for more details.
 ### `dotcom rendering`
 
 Go to [dotcom rendering](dotcom-rendering/README.md) for more details.
+
+## Root actions
+
+Most commands are run from within each project but the following are managed from the monorepo root:
+
+### Storybook/Chromatic
+
+`pnpm storybook` - Runs Storybook for all projects
+`pnpm build-storybook` - Builds Storybook for all projects
+
+Chromatic now runs at project level. `cd` into the project dir and run `pnpm chromatic -t [CHROMATIC PROJECT TOKEN]`
+
+You can find the token in the project Chromatic instance.
+
+To run Chromatic in CI on your pr, add the `run_chromatic` label once you're ready to check for visual regressions.

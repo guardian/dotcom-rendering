@@ -6,8 +6,9 @@
 	"private": true,
 	"scripts": {
 		"postinstall": "./scripts/postinstall.sh",
-		"build:dcr": "cd dotcom-rendering && make build",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
+		"storybook:all": "pnpm '/^storybook:.*/'",
+		"build-storybook:all": "pnpm '/^build-storybook:.*/'",
 		"prepare": "husky install",
 		"lint-staged": "lint-staged",
 		"prettier:check": "prettier --ignore-unknown --check --cache .",
