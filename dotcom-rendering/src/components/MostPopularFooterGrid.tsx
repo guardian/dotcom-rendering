@@ -125,8 +125,8 @@ export const MostPopularFooterGrid = ({
 	sectionName = '',
 	hasPageSkin = false,
 }: Props) => {
-	const shortenedMostViewed = mostViewed.trails.slice(0, 5);
-	const shortenedDeeplyRead = deeplyRead.trails.slice(0, 5);
+	const shortenedMostViewed = mostViewed.trails.slice(0, 10);
+	const shortenedDeeplyRead = deeplyRead.trails.slice(0, 10);
 
 	return (
 		<div
