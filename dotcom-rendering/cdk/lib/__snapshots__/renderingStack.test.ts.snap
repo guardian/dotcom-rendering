@@ -864,6 +864,10 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
             "MetricIntervalLowerBound": -0.2,
             "ScalingAdjustment": -1,
           },
+          {
+            "MetricIntervalUpperBound": 0,
+            "ScalingAdjustment": -1,
+          },
         ],
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",

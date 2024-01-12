@@ -187,6 +187,11 @@ export class RenderingCDKStack extends CDKStack {
 			adjustment: -1,
 		});
 
+		scaleDownStep.addAdjustment({
+			upperBound: 0,
+			adjustment: -1,
+		});
+
 		highLatencyAlarm.addOkAction(new AutoScalingAction(scaleDownStep));
 
 		// Saves the value of the rendering base URL to SSM for frontend apps to use
