@@ -21,12 +21,6 @@ jobs:
   lint:
     uses: ./.github/workflows/lint.yml
 
-  cypress:
-    needs: [container]
-    uses: ./.github/workflows/cypress.yml
-    with:
-      container-image: ${{ needs.container.outputs.container-image }}
-
   playwright:
     needs: [container]
     uses: ./.github/workflows/playwright.yml
@@ -44,7 +38,7 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write # required by guardian/actions-riff-raff@v3
-    needs: [container, prettier, jest, lint, cypress, playwright, amp]
+    needs: [container, prettier, jest, lint, playwright, amp]
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}

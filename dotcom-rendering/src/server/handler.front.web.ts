@@ -42,10 +42,6 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 			}),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
-		mostCommented: data.mostCommented
-			? decideTrail(data.mostCommented)
-			: undefined,
-		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
 		trendingTopics: extractTrendingTopicsFomFront(
 			data.pressedPage.collections,
 			data.pageId,

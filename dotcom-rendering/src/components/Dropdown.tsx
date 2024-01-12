@@ -35,6 +35,7 @@ interface Props {
 	dataLinkName: string;
 	cssOverrides?: SerializedStyles;
 	children?: React.ReactNode;
+	defaultIsExpanded?: boolean;
 }
 
 const ulStyles = css`
@@ -86,11 +87,12 @@ const displayNone = css`
 const linkStyles = css`
 	${textSans.small()};
 	color: ${sourcePalette.neutral[7]};
-	position: relative;
 	transition: color 80ms ease-out;
 	margin: -1px 0 0 0;
 	text-decoration: none;
-	display: block;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
 	padding: 10px 18px 15px 30px;
 
 	:hover {
@@ -185,7 +187,7 @@ const buttonExpanded = css`
 
 const notificationColor = palette.error[400];
 
-const notificationBadgeStyles = (diameter: number) => css`
+const notificationBadgeStyles = css`
 	background-color: ${notificationColor};
 	color: ${palette.neutral[100]};
 	text-align: center;
@@ -194,10 +196,7 @@ const notificationBadgeStyles = (diameter: number) => css`
 	align-items: center;
 	${textSans.xsmall()};
 	line-height: 1;
-
-	width: ${diameter}px;
-	height: ${diameter}px;
-	border-radius: ${diameter}px;
+	flex-shrink: 0;
 `;
 
 const dropdownButtonNotificationBadgeStyles = css`
@@ -250,7 +249,14 @@ const addTrackingToUrl = (
 
 const NotificationBadge = ({ diameter }: { diameter: number }) => {
 	return (
-		<div css={notificationBadgeStyles(diameter)}>
+		<div
+			css={notificationBadgeStyles}
+			style={{
+				width: `${diameter}px`,
+				height: `${diameter}px`,
+				borderRadius: `${diameter}px`,
+			}}
+		>
 			<span>!</span>
 		</div>
 	);
@@ -362,25 +368,17 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 					}
 				}}
 			>
-				{link.title}
-				{link.notifications?.map((notification) => (
-					<NotificationMessage
-						notification={notification}
-						key={notification.id}
-					/>
-				))}
-			</a>
-
-			{hasNotifications && (
-				<div
-					css={css`
-						margin-top: 12px;
-						margin-right: 8px;
-					`}
-				>
-					<NotificationBadge diameter={22} />
+				<div>
+					{link.title}
+					{link.notifications?.map((notification) => (
+						<NotificationMessage
+							notification={notification}
+							key={notification.id}
+						/>
+					))}
 				</div>
-			)}
+				{hasNotifications && <NotificationBadge diameter={22} />}
+			</a>
 		</li>
 	);
 };
@@ -392,9 +390,11 @@ export const Dropdown = ({
 	dataLinkName,
 	cssOverrides,
 	children,
+	defaultIsExpanded = false,
 }: Props) => {
-	const [isExpanded, setIsExpanded] = useState(false);
+	const [isExpanded, setIsExpanded] = useState(defaultIsExpanded);
 	const [noJS, setNoJS] = useState(true);
+	const [buttonRef, setButtonRef] = useState<HTMLButtonElement | null>(null);
 
 	useEffect(() => {
 		// If hook runs we know client-side JS is enabled
@@ -415,20 +415,30 @@ export const Dropdown = ({
 	}, [isExpanded]);
 
 	useEffect(() => {
-		const dismissOnClick = (event: MouseEvent) => {
-			if (isExpanded) {
-				event.stopPropagation();
-				setIsExpanded(false);
+		if (!isExpanded || !buttonRef) {
+			return;
+		}
+
+		const dismissOnClickAway = (event: MouseEvent) => {
+			// If the source of the click is the button, do nothing as the
+			// button's click handler will have already toggled the isExpanded
+			// state
+			if (buttonRef === event.target) {
+				return;
 			}
+			event.stopPropagation();
+			setIsExpanded(false);
 		};
 
-		document.addEventListener('click', dismissOnClick, false);
+		document.addEventListener('click', dismissOnClickAway, false);
 
 		// Remove listener on unmount
-		return () => document.removeEventListener('click', dismissOnClick);
-	}, [isExpanded]);
+		return () => document.removeEventListener('click', dismissOnClickAway);
+	}, [isExpanded, buttonRef]);
 
-	const handleToggle = () => setIsExpanded(!isExpanded);
+	const handleToggle = () => {
+		setIsExpanded(!isExpanded);
+	};
 
 	// needs to be unique to allow multiple dropdowns on same page
 	const dropdownID = `dropbox-id-${id}`;
@@ -499,6 +509,7 @@ export const Dropdown = ({
 						data-link-name={dataLinkName}
 						data-testid="dropdown-button"
 						type="button"
+						ref={setButtonRef}
 					>
 						{label}
 						{notificationCount > 0 && (

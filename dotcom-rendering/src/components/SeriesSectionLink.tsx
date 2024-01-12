@@ -128,7 +128,6 @@ const secondaryFontStyles = (format: ArticleFormat) => {
 	}
 	return css`
 		${headline.xxxsmall({ fontWeight: 'regular' })}
-		line-height: 20px;
 	`;
 };
 
