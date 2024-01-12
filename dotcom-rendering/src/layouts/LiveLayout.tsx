@@ -758,6 +758,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											<GetCricketScoreboard
 												matchUrl={cricketMatchUrl}
 												format={format}
+												editionId={article.editionId}
 											/>
 										</Island>
 									)}

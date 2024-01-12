@@ -1,9 +1,10 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import type { Meta, StoryObj } from '@storybook/react';
 import { match } from '../../fixtures/manual/cricket-scoreboard';
 import { CricketScoreboard } from './CricketScoreboard';
 
-export default {
+const meta: Meta = {
 	component: CricketScoreboard,
 	title: 'Components/CricketScoreboard',
 	parameters: {
@@ -13,19 +14,20 @@ export default {
 	},
 };
 
-export const defaultStory = () => {
-	return (
-		<div>
-			<CricketScoreboard
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.LiveBlog,
-					theme: Pillar.Sport,
-				}}
-				match={match}
-				scorecardUrl="/test"
-			/>
-		</div>
-	);
+type Story = StoryObj<typeof CricketScoreboard>;
+
+export const defaultStory: Story = {
+	name: 'Cricket Scoreboard',
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.LiveBlog,
+			theme: Pillar.Sport,
+		},
+		match,
+		scorecardUrl: '/test',
+		editionId: 'UK',
+	},
 };
-defaultStory.storyName = 'Cricket Scoreboard';
+
+export default meta;
