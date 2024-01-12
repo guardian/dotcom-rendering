@@ -52,7 +52,7 @@ const scrollToGateForLazyLoading = async (page: Page) => {
 };
 
 test.describe('Sign In Gate Tests', () => {
-	test.beforeEach(async ({ context, page }) => {
+	test.beforeEach(async ({ context }) => {
 		await disableCMP(context);
 		await setMvtCookie(context);
 	});
@@ -104,7 +104,7 @@ test.describe('Sign In Gate Tests', () => {
 		}) => {
 			await loadPageWithOverrides(page, standardArticle);
 
-			await page.evaluate((n) => {
+			await page.evaluate(() => {
 				localStorage.setItem(
 					'gu.prefs.sign-in-gate',
 					JSON.stringify({

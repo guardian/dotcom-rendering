@@ -40,7 +40,7 @@ Test the expected behavior of a component: what it renders, how the props it rec
 
 Look for conditional statements (ternaries, if statements, and switch statements) in the render method for clues about what to test. You should always test your public interface (the props your component takes). For example, if the Component under test takes a prop which is a function that is executed onClick we can test it’s executed by simulating a click on the Component under test.
 
-Alongside jest we use [react-testing-library](https://github.com/kentcdodds/react-testing-library). This a testing utility that allows you to tests against the rendred DOM, output from your component. The utility makes you write tests from a “user-perspective”, asserting against user-facing properties.
+Alongside jest we use [react-testing-library](https://github.com/kentcdodds/react-testing-library). This a testing utility that allows you to tests against the rendered DOM, output from your component. The utility makes you write tests from a “user-perspective”, asserting against user-facing properties.
 
 #### Don't test
 

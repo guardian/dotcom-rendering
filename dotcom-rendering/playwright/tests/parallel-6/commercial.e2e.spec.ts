@@ -12,9 +12,7 @@ test.describe('Commercial E2E tests', () => {
 
 		await cmpAcceptAll(page);
 
-		// We are excluding survey slot as it only appears via cypress tests and only on frontend.
-		// Also, we are waiting *up to* 30 seconds here to give the ads time to load. In most
-		// cases this check will pass much faster
+		// We are excluding survey slot as they can be switched off
 		await expectToExist(page, '.js-ad-slot:not([data-name="survey"])', 15);
 
 		// Check all inline slots are present
