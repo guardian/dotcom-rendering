@@ -10,14 +10,8 @@ import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { type App as CDKApp, Duration } from 'aws-cdk-lib';
-import { AdjustmentType, StepScalingAction } from 'aws-cdk-lib/aws-autoscaling';
-import {
-	Alarm,
-	ComparisonOperator,
-	Metric,
-	TreatMissingData,
-} from 'aws-cdk-lib/aws-cloudwatch';
-import { AutoScalingAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
+import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
+import { Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
@@ -130,64 +124,114 @@ export class RenderingCDKStack extends CDKStack {
 		// evaluationPeriods and period should change for PROD. These values were chosen for testing purposes.
 		// Currently, they are period: 60 and evaluationPeriod: 1
 		// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L299
-		const highLatencyAlarm = new Alarm(
-			this,
-			`${guStack}-${guApp}-HighLatencyAlarm`,
-			{
-				// When merged this can become actionsEnabled: stage === 'PROD'
-				actionsEnabled: true,
-				alarmDescription: `ALB latency for ${guStack}-${guApp} is higher than 0.2 ms`,
-				threshold: 0.2,
-				comparisonOperator:
-					ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
-				evaluationPeriods: 1,
-				metric: new Metric({
-					dimensionsMap: {
-						LoadBalancer: ec2app.loadBalancer.loadBalancerFullName,
-						TargetGroup: ec2app.targetGroup.targetGroupFullName,
-					},
-					metricName: 'TargetResponseTime',
-					namespace: 'AWS/ApplicationELB',
-					period: Duration.seconds(30),
-					statistic: 'Average',
-				}),
-				treatMissingData:
-					stage === 'PROD'
-						? TreatMissingData.MISSING
-						: TreatMissingData.NOT_BREACHING,
+		// const highLatencyAlarm = new Alarm(
+		// 	this,
+		// 	`${guStack}-${guApp}-HighLatencyAlarm`,
+		// 	{
+		// 		// When merged this can become actionsEnabled: stage === 'PROD'
+		// 		actionsEnabled: true,
+		// 		alarmDescription: `ALB latency for ${guStack}-${guApp} is higher than 0.2 ms`,
+		// 		threshold: 0.2,
+		// 		comparisonOperator:
+		// 			ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+		// 		evaluationPeriods: 1,
+		// 		metric: latencyMetric,
+		// 		treatMissingData:
+		// 			stage === 'PROD'
+		// 				? TreatMissingData.MISSING
+		// 				: TreatMissingData.NOT_BREACHING,
+		// 	},
+		// );
+		//
+		// const scaleUpStep = new StepScalingAction(this, 'ScaleUp', {
+		// 	adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
+		// 	autoScalingGroup: ec2app.autoScalingGroup,
+		// 	// Current PROD: 10 minutes
+		// 	// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L276-L277
+		// 	cooldown: Duration.seconds(15),
+		// });
+		//
+		// scaleUpStep.addAdjustment({
+		// 	lowerBound: 0,
+		// 	adjustment: 100,
+		// });
+		//
+		// highLatencyAlarm.addAlarmAction(new AutoScalingAction(scaleUpStep));
+		//
+		// const scaleDownStep = new StepScalingAction(this, 'ScaleDown', {
+		// 	adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
+		// 	autoScalingGroup: ec2app.autoScalingGroup,
+		//
+		// 	// Current PROD: Every 2 minutes take out one instance for prod. This is for testing purposes
+		// 	// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L282
+		// 	cooldown: Duration.seconds(15),
+		// });
+		//
+		// scaleDownStep.addAdjustment({
+		// 	lowerBound: 0,
+		// 	adjustment: -1,
+		// });
+		//
+		// highLatencyAlarm.addOkAction(new AutoScalingAction(scaleDownStep));
+
+		const latencyMetric = new Metric({
+			dimensionsMap: {
+				LoadBalancer: ec2app.loadBalancer.loadBalancerFullName,
+				TargetGroup: ec2app.targetGroup.targetGroupFullName,
 			},
-		);
+			metricName: 'TargetResponseTime',
+			namespace: 'AWS/ApplicationELB',
+			period: Duration.seconds(30),
+			statistic: 'Average',
+		});
 
-		const scaleUpStep = new StepScalingAction(this, 'ScaleUp', {
+		new StepScalingPolicy(this, 'LatencyScaleUpPolicy', {
+			autoScalingGroup: ec2app.autoScalingGroup,
+			metric: latencyMetric,
+			scalingSteps: [
+				{
+					// No scaling up when latency is below 0.2
+					change: 0,
+					lower: 0,
+					upper: 0.2,
+				},
+				{
+					change: 100,
+
+					// When latency is higher than 0.2s we start scaling up
+					lower: 0.2,
+				},
+			],
+
+			// the properties below are optional
 			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
-			autoScalingGroup: ec2app.autoScalingGroup,
-			// Current PROD: 10 minutes
-			// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L276-L277
 			cooldown: Duration.seconds(15),
+			evaluationPeriods: 1,
 		});
 
-		scaleUpStep.addAdjustment({
-			lowerBound: 0,
-			adjustment: 100,
-		});
+		new StepScalingPolicy(this, 'LatencyScaleDownPolicy', {
+			autoScalingGroup: ec2app.autoScalingGroup,
+			metric: latencyMetric,
+			scalingSteps: [
+				{
+					change: -1,
 
-		highLatencyAlarm.addAlarmAction(new AutoScalingAction(scaleUpStep));
+					// When latency is lower than 0.2s we scale down
+					lower: 0,
+					upper: 0.2,
+				},
+				{
+					// When latency is above 0.2 we don't scale down
+					lower: 0.2,
+					change: 0,
+				},
+			],
 
-		const scaleDownStep = new StepScalingAction(this, 'ScaleDown', {
+			// the properties below are optional
 			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
-			autoScalingGroup: ec2app.autoScalingGroup,
-
-			// Current PROD: Every 2 minutes take out one instance for prod. This is for testing purposes
-			// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L282
 			cooldown: Duration.seconds(15),
+			evaluationPeriods: 1,
 		});
-
-		scaleDownStep.addAdjustment({
-			lowerBound: 0,
-			adjustment: -1,
-		});
-
-		highLatencyAlarm.addOkAction(new AutoScalingAction(scaleDownStep));
 
 		// Saves the value of the rendering base URL to SSM for frontend apps to use
 		new StringParameter(this, 'RenderingBaseURLParam', {
