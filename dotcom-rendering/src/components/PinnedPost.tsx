@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	focusHalo,
 	from,
@@ -16,8 +17,7 @@ import {
 } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
-import { Island } from './Island';
-import { RelativeTime } from './RelativeTime.importable';
+import { DateTime } from './DateTime';
 
 const pinnedPostContainer = (palette: Palette) => css`
 	border: 3px solid ${palette.border.pinnedPost};
@@ -164,17 +164,14 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 			/>
 			<div css={rowStyles(palette)}>
 				<SvgPinned />
-				{pinnedPost.blockFirstPublished !== undefined && (
+				{!isUndefined(pinnedPost.blockFirstPublished) && (
 					<div css={timeAgoStyles}>
 						From{' '}
-						<Island
-							priority="enhancement"
-							defer={{ until: 'visible' }}
-						>
-							<RelativeTime
-								then={pinnedPost.blockFirstPublished}
-							/>
-						</Island>
+						<DateTime
+							date={new Date(pinnedPost.blockFirstPublished)}
+							display="relative"
+							editionId="UK"
+						/>
 					</div>
 				)}
 			</div>

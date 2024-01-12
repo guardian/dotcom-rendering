@@ -1,9 +1,13 @@
+import { isString, timeAgo } from '@guardian/libs';
 import { type EditionId, getEditionFromId } from '../lib/edition';
+import { Island } from './Island';
+import { RelativeTime } from './RelativeTime.importable';
 
 type Props = {
 	date: Date;
 	editionId: EditionId;
 	show?: 'date & time' | 'date' | 'time';
+	display?: 'absolute' | 'relative';
 };
 
 const formatDate = (date: Date, locale: string, timeZone: string) =>
@@ -28,9 +32,23 @@ const formatTime = (date: Date, locale: string, timeZone: string) =>
 		})
 		.replace(':', '.');
 
-export const DateTime = ({ date, editionId, show = 'date & time' }: Props) => {
+export const DateTime = ({
+	date,
+	editionId,
+	show = 'date & time',
+	display = 'absolute',
+}: Props) => {
 	const { locale, timeZone } = getEditionFromId(editionId);
-	return (
+
+	const epoch = date.getTime();
+	const relativeTime = display === 'relative' && timeAgo(epoch);
+	const isRecent = isString(relativeTime) && relativeTime.endsWith(' ago');
+
+	return isRecent ? (
+		<Island priority="enhancement" defer={{ until: 'visible' }}>
+			<RelativeTime then={epoch} />
+		</Island>
+	) : (
 		<time
 			dateTime={date.toISOString()}
 			data-locale={locale}
