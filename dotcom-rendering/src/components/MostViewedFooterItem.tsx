@@ -90,11 +90,6 @@ type Props = {
 	hasPageSkin?: boolean;
 };
 
-type MiniImageProps = {
-	image: string;
-	alt: string;
-};
-
 export const MostViewedFooterItem = ({
 	position,
 	url,

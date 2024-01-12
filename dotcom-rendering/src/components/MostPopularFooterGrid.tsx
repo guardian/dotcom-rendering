@@ -192,7 +192,6 @@ export const MostPopularFooterGrid = ({
 								j,
 								shortenedMostViewed.length,
 							)}
-							image={trail.image}
 							hasPageSkin={hasPageSkin}
 						/>
 					))}
