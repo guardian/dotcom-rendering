@@ -394,6 +394,7 @@ export const Dropdown = ({
 }: Props) => {
 	const [isExpanded, setIsExpanded] = useState(defaultIsExpanded);
 	const [noJS, setNoJS] = useState(true);
+	const [buttonRef, setButtonRef] = useState<HTMLButtonElement | null>(null);
 
 	useEffect(() => {
 		// If hook runs we know client-side JS is enabled
@@ -414,20 +415,30 @@ export const Dropdown = ({
 	}, [isExpanded]);
 
 	useEffect(() => {
-		const dismissOnClick = (event: MouseEvent) => {
-			if (isExpanded) {
-				event.stopPropagation();
-				setIsExpanded(false);
+		if (!isExpanded || !buttonRef) {
+			return;
+		}
+
+		const dismissOnClickAway = (event: MouseEvent) => {
+			// If the source of the click is the button, do nothing as the
+			// button's click handler will have already toggled the isExpanded
+			// state
+			if (buttonRef === event.target) {
+				return;
 			}
+			event.stopPropagation();
+			setIsExpanded(false);
 		};
 
-		document.addEventListener('click', dismissOnClick, false);
+		document.addEventListener('click', dismissOnClickAway, false);
 
 		// Remove listener on unmount
-		return () => document.removeEventListener('click', dismissOnClick);
-	}, [isExpanded]);
+		return () => document.removeEventListener('click', dismissOnClickAway);
+	}, [isExpanded, buttonRef]);
 
-	const handleToggle = () => setIsExpanded(!isExpanded);
+	const handleToggle = () => {
+		setIsExpanded(!isExpanded);
+	};
 
 	// needs to be unique to allow multiple dropdowns on same page
 	const dropdownID = `dropbox-id-${id}`;
@@ -498,6 +509,7 @@ export const Dropdown = ({
 						data-link-name={dataLinkName}
 						data-testid="dropdown-button"
 						type="button"
+						ref={setButtonRef}
 					>
 						{label}
 						{notificationCount > 0 && (

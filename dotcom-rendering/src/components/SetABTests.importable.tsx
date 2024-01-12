@@ -86,6 +86,8 @@ export const SetABTests = ({
 			arrayOfTestObjects: tests,
 			forcedTestVariants: allForcedTestVariants,
 			ophanRecord: ophan.record,
+			serverSideTests: {},
+			errorReporter: () => void 0,
 		});
 		const allRunnableTests = ab.allRunnableTests(tests);
 		const participations = runnableTestsToParticipations(allRunnableTests);

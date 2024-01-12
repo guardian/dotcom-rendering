@@ -1,4 +1,5 @@
 import { onConsent } from '@guardian/consent-management-platform';
+import { storage } from '@guardian/libs';
 
 /**
  * This local storage item is used to target ads if a user has the correct consents
@@ -7,8 +8,7 @@ const AlreadyVisitedKey = 'gu.alreadyVisited';
 
 const getAlreadyVisitedCount = (): number => {
 	const alreadyVisited = parseInt(
-		// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-		localStorage.getItem(AlreadyVisitedKey) ?? '',
+		storage.local.getRaw(AlreadyVisitedKey) ?? '',
 		10,
 	);
 	return !Number.isNaN(alreadyVisited) ? alreadyVisited : 0;
@@ -18,10 +18,8 @@ export const incrementAlreadyVisited = async (): Promise<void> => {
 	const { canTarget } = await onConsent();
 	if (canTarget) {
 		const alreadyVisited = getAlreadyVisitedCount() + 1;
-		// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-		localStorage.setItem(AlreadyVisitedKey, alreadyVisited.toString());
+		storage.local.setRaw(AlreadyVisitedKey, alreadyVisited.toString());
 	} else {
-		// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-		localStorage.removeItem(AlreadyVisitedKey);
+		storage.local.remove(AlreadyVisitedKey);
 	}
 };
