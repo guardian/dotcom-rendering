@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { joinUrl, Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import { useHydrated } from '../lib/useHydrated';
+import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { TagType } from '../types/tag';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
@@ -65,6 +66,7 @@ const firstPopularTag = (keywordIds: string, isPaidContent: boolean) => {
 
 const onwardsWrapper = css`
 	width: 100%;
+	background: ${palette('--article-section-background')};
 `;
 
 // TODO: EUR edition urls are currently pointing to INT edition
@@ -288,7 +290,10 @@ export const OnwardsUpper = ({
 	return (
 		<div css={onwardsWrapper}>
 			{!!url && (
-				<Section fullWidth={true}>
+				<Section
+					fullWidth={true}
+					borderColour={palette('--article-border')}
+				>
 					<FetchOnwardsData
 						url={url}
 						limit={8}
@@ -299,7 +304,10 @@ export const OnwardsUpper = ({
 				</Section>
 			)}
 			{!!(!isPaidContent && curatedDataUrl) && (
-				<Section fullWidth={true}>
+				<Section
+					fullWidth={true}
+					borderColour={palette('--article-border')}
+				>
 					<FetchOnwardsData
 						url={curatedDataUrl}
 						limit={20}
