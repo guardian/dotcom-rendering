@@ -861,7 +861,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "PolicyType": "StepScaling",
         "StepAdjustments": [
           {
-            "MetricIntervalUpperBound": 0,
+            "MetricIntervalLowerBound": -0.2,
             "ScalingAdjustment": -1,
           },
         ],
