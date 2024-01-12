@@ -648,12 +648,16 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "AutoScalingGroupName": {
           "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
         },
-        "Cooldown": "15",
         "MetricAggregationType": "Average",
         "PolicyType": "StepScaling",
         "StepAdjustments": [
           {
+            "MetricIntervalLowerBound": -0.1,
             "MetricIntervalUpperBound": 0,
+            "ScalingAdjustment": -1,
+          },
+          {
+            "MetricIntervalUpperBound": -0.1,
             "ScalingAdjustment": -1,
           },
         ],
@@ -704,13 +708,17 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "AutoScalingGroupName": {
           "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
         },
-        "Cooldown": "15",
         "MetricAggregationType": "Average",
         "PolicyType": "StepScaling",
         "StepAdjustments": [
           {
             "MetricIntervalLowerBound": 0,
-            "ScalingAdjustment": 100,
+            "MetricIntervalUpperBound": 0.09999999999999998,
+            "ScalingAdjustment": 50,
+          },
+          {
+            "MetricIntervalLowerBound": 0.09999999999999998,
+            "ScalingAdjustment": 50,
           },
         ],
       },

@@ -120,60 +120,6 @@ export class RenderingCDKStack extends CDKStack {
 			ttl: Duration.hours(1),
 		});
 
-		// Alarms
-		// evaluationPeriods and period should change for PROD. These values were chosen for testing purposes.
-		// Currently, they are period: 60 and evaluationPeriod: 1
-		// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L299
-		// const highLatencyAlarm = new Alarm(
-		// 	this,
-		// 	`${guStack}-${guApp}-HighLatencyAlarm`,
-		// 	{
-		// 		// When merged this can become actionsEnabled: stage === 'PROD'
-		// 		actionsEnabled: true,
-		// 		alarmDescription: `ALB latency for ${guStack}-${guApp} is higher than 0.2 ms`,
-		// 		threshold: 0.2,
-		// 		comparisonOperator:
-		// 			ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
-		// 		evaluationPeriods: 1,
-		// 		metric: latencyMetric,
-		// 		treatMissingData:
-		// 			stage === 'PROD'
-		// 				? TreatMissingData.MISSING
-		// 				: TreatMissingData.NOT_BREACHING,
-		// 	},
-		// );
-		//
-		// const scaleUpStep = new StepScalingAction(this, 'ScaleUp', {
-		// 	adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
-		// 	autoScalingGroup: ec2app.autoScalingGroup,
-		// 	// Current PROD: 10 minutes
-		// 	// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L276-L277
-		// 	cooldown: Duration.seconds(15),
-		// });
-		//
-		// scaleUpStep.addAdjustment({
-		// 	lowerBound: 0,
-		// 	adjustment: 100,
-		// });
-		//
-		// highLatencyAlarm.addAlarmAction(new AutoScalingAction(scaleUpStep));
-		//
-		// const scaleDownStep = new StepScalingAction(this, 'ScaleDown', {
-		// 	adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
-		// 	autoScalingGroup: ec2app.autoScalingGroup,
-		//
-		// 	// Current PROD: Every 2 minutes take out one instance for prod. This is for testing purposes
-		// 	// https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/cdk/lib/dotcom-rendering.ts#L282
-		// 	cooldown: Duration.seconds(15),
-		// });
-		//
-		// scaleDownStep.addAdjustment({
-		// 	lowerBound: 0,
-		// 	adjustment: -1,
-		// });
-		//
-		// highLatencyAlarm.addOkAction(new AutoScalingAction(scaleDownStep));
-
 		const latencyMetric = new Metric({
 			dimensionsMap: {
 				LoadBalancer: ec2app.loadBalancer.loadBalancerFullName,
@@ -185,27 +131,38 @@ export class RenderingCDKStack extends CDKStack {
 			statistic: 'Average',
 		});
 
+		/** Scaling policies ASCII diagram
+		 *
+		 * Metric value (latency in seconds)
+		 *  0        0.1        0.2        0.3            infinity
+		 * --------------------------------------------------------
+		 *     - 1    |   - 1    |  + 50%   |      + 50%          |
+		 * --------------------------------------------------------
+		 * Instance change
+		 *
+		 * -
+		 * When scaling up, we use percentage change (50% each interval)
+		 * When scaling down, we use absolute change (-1 each interval)
+		 */
 		new StepScalingPolicy(this, 'LatencyScaleUpPolicy', {
 			autoScalingGroup: ec2app.autoScalingGroup,
 			metric: latencyMetric,
 			scalingSteps: [
 				{
-					// No scaling up when latency is below 0.2
-					change: 0,
-					lower: 0,
-					upper: 0.2,
-				},
-				{
-					change: 100,
+					change: 50,
 
 					// When latency is higher than 0.2s we start scaling up
 					lower: 0.2,
+					upper: 0.3,
+				},
+				{
+					change: 50,
+
+					// When latency is higher than 0.3s we scale up again
+					lower: 0.3,
 				},
 			],
-
-			// the properties below are optional
 			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
-			cooldown: Duration.seconds(15),
 			evaluationPeriods: 1,
 		});
 
@@ -216,20 +173,19 @@ export class RenderingCDKStack extends CDKStack {
 				{
 					change: -1,
 
-					// When latency is lower than 0.2s we scale down
-					lower: 0,
+					// When latency is lower than 0.2s we scale down by 1
 					upper: 0.2,
+					lower: 0.1,
 				},
 				{
-					// When latency is above 0.2 we don't scale down
-					lower: 0.2,
-					change: 0,
+					change: -1,
+
+					// When latency is lower than 0.1s we scale down by 1
+					upper: 0.1,
+					lower: 0.0,
 				},
 			],
-
-			// the properties below are optional
 			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
-			cooldown: Duration.seconds(15),
 			evaluationPeriods: 1,
 		});
 
