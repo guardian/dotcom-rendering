@@ -56,7 +56,7 @@
 		"@guardian/source-foundations": "14.1.2",
 		"@guardian/source-react-components": "18.0.0",
 		"@guardian/source-react-components-development-kitchen": "16.0.0",
-		"@smithy/property-provider": "2.0.16",
+		"@smithy/property-provider": "2.0.17",
 		"@storybook/addon-essentials": "7.6.6",
 		"@storybook/addons": "7.6.6",
 		"@storybook/api": "7.6.6",
