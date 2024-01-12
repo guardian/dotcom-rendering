@@ -1,11 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import {
-	headline,
-	palette as sourcePalette,
-	until,
-} from '@guardian/source-foundations';
+import { headline, until } from '@guardian/source-foundations';
 import { palette } from '../palette';
 import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber';
