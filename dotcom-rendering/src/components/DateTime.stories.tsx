@@ -28,7 +28,11 @@ export const UK: Story = {
 };
 
 export const TimeOnly: Story = {
-	args: { date, editionId: 'UK', showDate: false },
+	args: { date, editionId: 'UK', show: 'time' },
+};
+
+export const DateOnly: Story = {
+	args: { date, editionId: 'UK', show: 'date' },
 };
 
 export const US: Story = {

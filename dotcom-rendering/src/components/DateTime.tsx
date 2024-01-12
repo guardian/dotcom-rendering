@@ -3,10 +3,32 @@ import { type EditionId, getEditionFromId } from '../lib/edition';
 type Props = {
 	date: Date;
 	editionId: EditionId;
-	showDate?: boolean;
+	show?: 'date & time' | 'date' | 'time';
 };
 
-export const DateTime = ({ date, editionId, showDate = true }: Props) => {
+const formatDate = (date: Date, locale: string, timeZone: string) =>
+	date
+		.toLocaleDateString(locale, {
+			weekday: 'short',
+			day: 'numeric',
+			month: 'short',
+			year: 'numeric',
+			timeZone,
+		})
+		.replaceAll(',', '');
+
+const formatTime = (date: Date, locale: string, timeZone: string) =>
+	date
+		.toLocaleTimeString(locale, {
+			hour12: false,
+			hour: '2-digit',
+			minute: '2-digit',
+			timeZoneName: 'short',
+			timeZone,
+		})
+		.replace(':', '.');
+
+export const DateTime = ({ date, editionId, show = 'date & time' }: Props) => {
 	const { locale, timeZone } = getEditionFromId(editionId);
 	return (
 		<time
@@ -23,25 +45,8 @@ export const DateTime = ({ date, editionId, showDate = true }: Props) => {
 				timeZone,
 			})}
 		>
-			{showDate &&
-				date
-					.toLocaleDateString(locale, {
-						weekday: 'short',
-						day: 'numeric',
-						month: 'short',
-						year: 'numeric',
-						timeZone,
-					})
-					.replaceAll(',', '')}{' '}
-			{date
-				.toLocaleTimeString(locale, {
-					hour12: false,
-					hour: '2-digit',
-					minute: '2-digit',
-					timeZoneName: 'short',
-					timeZone,
-				})
-				.replace(':', '.')}
+			{show.includes('date') && formatDate(date, locale, timeZone)}{' '}
+			{show.includes('time') && formatTime(date, locale, timeZone)}
 		</time>
 	);
 };
