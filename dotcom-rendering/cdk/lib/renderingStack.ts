@@ -134,14 +134,14 @@ export class RenderingCDKStack extends CDKStack {
 		/** Scaling policies ASCII diagram
 		 *
 		 * Metric value (latency in seconds)
-		 *  0        0.1        0.2        0.3            infinity
-		 * --------------------------------------------------------
-		 *     - 1    |   - 1    |  + 50%   |      + 50%          |
-		 * --------------------------------------------------------
+		 *  0              0.2                  infinity
+		 * ----------------------------------------------
+		 *        - 1       |         + 100%           |
+		 * ----------------------------------------------
 		 * Instance change
 		 *
 		 * -
-		 * When scaling up, we use percentage change (50% each interval)
+		 * When scaling up, we use percentage change (+100% each interval)
 		 * When scaling down, we use absolute change (-1 each interval)
 		 */
 		new StepScalingPolicy(this, 'LatencyScaleUpPolicy', {
@@ -149,17 +149,15 @@ export class RenderingCDKStack extends CDKStack {
 			metric: latencyMetric,
 			scalingSteps: [
 				{
-					change: 50,
-
-					// When latency is higher than 0.2s we start scaling up
-					lower: 0.2,
-					upper: 0.3,
+					// No scaling up effect between 0 and 0.2s latency
+					change: 0,
+					lower: 0,
+					upper: 0.2,
 				},
 				{
-					change: 50,
-
-					// When latency is higher than 0.3s we scale up again
-					lower: 0.3,
+					// When latency is higher than 0.2s we scale up by 100%
+					change: 100,
+					lower: 0.2,
 				},
 			],
 			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
@@ -171,18 +169,15 @@ export class RenderingCDKStack extends CDKStack {
 			metric: latencyMetric,
 			scalingSteps: [
 				{
-					change: -1,
-
-					// When latency is lower than 0.2s we scale down by 1
-					upper: 0.2,
-					lower: 0.1,
+					// No scaling down effect when latency is higher than 0.2s
+					change: 0,
+					lower: 0.2,
 				},
 				{
+					// When latency is lower than 0.2s we scale down by 1
 					change: -1,
-
-					// When latency is lower than 0.1s we scale down by 1
-					upper: 0.1,
-					lower: 0.0,
+					upper: 0.2,
+					lower: 0,
 				},
 			],
 			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
