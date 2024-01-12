@@ -3160,7 +3160,7 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const articleBorderDark: PaletteFunction = () => sourcePalette.neutral[38];
+const articleBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 
 const straightLinesLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
