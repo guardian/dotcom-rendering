@@ -34,7 +34,7 @@ jobs:
             if (!hasChromaticLabel) {
               const commentLines = [
                 "Hello :wave:! When you're ready to run Chromatic, please apply the `run_chromatic` label to this PR.",
-                '[Click here to see the Chromatic project.](https://www.chromatic.com/builds?appId=63e251470cfbe61776b0ef19).',
+                '[Click here to see the Chromatic project.](https://www.chromatic.com/builds?appId=63e251470cfbe61776b0ef19)',
               ];
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
