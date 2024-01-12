@@ -604,126 +604,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "LatencyScaleDownPolicyLowerAlarm3AAA79CF": {
-      "Properties": {
-        "AlarmActions": [
-          {
-            "Ref": "LatencyScaleDownPolicyLowerPolicy5B8C5A01",
-          },
-        ],
-        "AlarmDescription": "Lower threshold scaling alarm",
-        "ComparisonOperator": "LessThanOrEqualToThreshold",
-        "Dimensions": [
-          {
-            "Name": "LoadBalancer",
-            "Value": {
-              "Fn::GetAtt": [
-                "LoadBalancerArticlerendering49883BBC",
-                "LoadBalancerFullName",
-              ],
-            },
-          },
-          {
-            "Name": "TargetGroup",
-            "Value": {
-              "Fn::GetAtt": [
-                "TargetGroupArticlerendering3605E498",
-                "TargetGroupFullName",
-              ],
-            },
-          },
-        ],
-        "EvaluationPeriods": 1,
-        "MetricName": "TargetResponseTime",
-        "Namespace": "AWS/ApplicationELB",
-        "Period": 30,
-        "Statistic": "Average",
-        "Threshold": 0.2,
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "LatencyScaleDownPolicyLowerPolicy5B8C5A01": {
-      "Properties": {
-        "AdjustmentType": "ChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
-        },
-        "MetricAggregationType": "Average",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalLowerBound": -0.1,
-            "MetricIntervalUpperBound": 0,
-            "ScalingAdjustment": -1,
-          },
-          {
-            "MetricIntervalUpperBound": -0.1,
-            "ScalingAdjustment": -1,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
-    "LatencyScaleUpPolicyUpperAlarmB2CCE62D": {
-      "Properties": {
-        "AlarmActions": [
-          {
-            "Ref": "LatencyScaleUpPolicyUpperPolicy4A22B34C",
-          },
-        ],
-        "AlarmDescription": "Upper threshold scaling alarm",
-        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
-        "Dimensions": [
-          {
-            "Name": "LoadBalancer",
-            "Value": {
-              "Fn::GetAtt": [
-                "LoadBalancerArticlerendering49883BBC",
-                "LoadBalancerFullName",
-              ],
-            },
-          },
-          {
-            "Name": "TargetGroup",
-            "Value": {
-              "Fn::GetAtt": [
-                "TargetGroupArticlerendering3605E498",
-                "TargetGroupFullName",
-              ],
-            },
-          },
-        ],
-        "EvaluationPeriods": 1,
-        "MetricName": "TargetResponseTime",
-        "Namespace": "AWS/ApplicationELB",
-        "Period": 30,
-        "Statistic": "Average",
-        "Threshold": 0.2,
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "LatencyScaleUpPolicyUpperPolicy4A22B34C": {
-      "Properties": {
-        "AdjustmentType": "PercentChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
-        },
-        "MetricAggregationType": "Average",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalLowerBound": 0,
-            "MetricIntervalUpperBound": 0.09999999999999998,
-            "ScalingAdjustment": 50,
-          },
-          {
-            "MetricIntervalLowerBound": 0.09999999999999998,
-            "ScalingAdjustment": 50,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
     "ListenerArticlerendering9419D5F6": {
       "Properties": {
         "Certificates": [
@@ -970,6 +850,38 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Value": "https://article-rendering.test.dev-guardianapis.com",
       },
       "Type": "AWS::SSM::Parameter",
+    },
+    "ScaleDown2D6349BF": {
+      "Properties": {
+        "AdjustmentType": "ChangeInCapacity",
+        "AutoScalingGroupName": {
+          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
+        },
+        "PolicyType": "StepScaling",
+        "StepAdjustments": [
+          {
+            "MetricIntervalUpperBound": 0,
+            "ScalingAdjustment": -1,
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "ScaleUpAF7DDD3C": {
+      "Properties": {
+        "AdjustmentType": "PercentChangeInCapacity",
+        "AutoScalingGroupName": {
+          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
+        },
+        "PolicyType": "StepScaling",
+        "StepAdjustments": [
+          {
+            "MetricIntervalLowerBound": 0,
+            "ScalingAdjustment": 100,
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
     },
     "TargetGroupArticlerendering3605E498": {
       "Properties": {
@@ -1278,6 +1190,51 @@ systemctl start article-rendering",
         ],
       },
       "Type": "AWS::IAM::InstanceProfile",
+    },
+    "frontendarticlerenderingHighLatencyAlarm99D28C58": {
+      "Properties": {
+        "ActionsEnabled": true,
+        "AlarmActions": [
+          {
+            "Ref": "ScaleUpAF7DDD3C",
+          },
+        ],
+        "AlarmDescription": "ALB latency for frontend-article-rendering is higher than 0.2 ms",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::GetAtt": [
+                "LoadBalancerArticlerendering49883BBC",
+                "LoadBalancerFullName",
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "TargetGroupArticlerendering3605E498",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "TargetResponseTime",
+        "Namespace": "AWS/ApplicationELB",
+        "OKActions": [
+          {
+            "Ref": "ScaleDown2D6349BF",
+          },
+        ],
+        "Period": 30,
+        "Statistic": "Average",
+        "Threshold": 0.2,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
     },
   },
 }
