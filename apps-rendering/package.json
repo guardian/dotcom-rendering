@@ -75,7 +75,7 @@
 		"@types/node": "18.18.14",
 		"@types/react": "18.2.45",
 		"@types/react-dom": "18.2.17",
-		"@types/react-test-renderer": "18.0.0",
+		"@types/react-test-renderer": "18.0.7",
 		"@types/thrift": "0.10.17",
 		"aws-cdk": "2.100.0",
 		"aws-cdk-lib": "2.100.0",
