@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { until } from '@guardian/source-foundations';
+import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
@@ -74,6 +75,7 @@ type Props = {
 	isSensitive: boolean;
 	abTests: ServerSideTests;
 	switches: Switches;
+	editionId: EditionId;
 };
 
 export const MainMedia = ({
@@ -89,6 +91,7 @@ export const MainMedia = ({
 	isSensitive,
 	abTests,
 	switches,
+	editionId,
 }: Props) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -110,6 +113,7 @@ export const MainMedia = ({
 					switches={switches}
 					hideCaption={hideCaption}
 					starRating={starRating}
+					editionId={editionId}
 				/>
 			))}
 		</div>

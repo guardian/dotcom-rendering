@@ -35,6 +35,7 @@ export const WitnessTextBlockComponentDefault = () => (
 			description='You could dial first and then push in ur 2p. I never had any change and needed a lift. My parents knew the routine, I&#39;d dial and you could get a second or two to shout down the line "Pick me up" Ah how I miss the days of a simple life where no one knew where I was and I could get away with anything as long as I was in the door by 10pm! '
 			authorName="Louise Griffiths"
 			dateCreated="2016-01-29T22:19:51Z"
+			editionId="UK"
 		/>
 	</div>
 );
@@ -121,6 +122,7 @@ export const WitnessImageBlockComponentDefault = () => (
 			authorName="Nick Ellis"
 			dateCreated="2015-08-25T12:20:58Z"
 			alt="Risk - Home Made Space expansion"
+			editionId="UK"
 		/>
 	</div>
 );
@@ -139,6 +141,7 @@ export const WitnessVideoBlockComponentDefault = () => (
 			authorName="Gregg Lewis-Qualls"
 			youtubeHtml='<iframe width="440" height="330" src="https://www.youtube.com/embed/N9Cgy-ke5-s?origin=https://www.theguardian.com&widgetid=1&modestbranding=1" frameborder="0" allowfullscreen></iframe>'
 			dateCreated="2015-08-27T13:32:32Z"
+			editionId="UK"
 		/>
 	</div>
 );
