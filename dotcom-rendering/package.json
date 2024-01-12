@@ -36,7 +36,7 @@
 		"@babel/preset-env": "7.22.6",
 		"@babel/preset-react": "7.18.6",
 		"@babel/preset-typescript": "7.18.6",
-		"@babel/runtime": "7.20.13",
+		"@babel/runtime": "7.23.8",
 		"@braze/web-sdk-core": "3.5.1",
 		"@creditkarma/thrift-server-core": "1.0.4",
 		"@emotion/babel-plugin": "11.11.0",
