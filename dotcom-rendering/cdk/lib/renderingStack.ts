@@ -183,12 +183,7 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		scaleDownStep.addAdjustment({
-			lowerBound: -0.2,
-			adjustment: -1,
-		});
-
-		scaleDownStep.addAdjustment({
-			upperBound: 0,
+			lowerBound: 0,
 			adjustment: -1,
 		});
 
