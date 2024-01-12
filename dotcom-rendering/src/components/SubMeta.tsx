@@ -76,8 +76,8 @@ const listStyleNone = css`
 		),
 		repeating-linear-gradient(
 			to right,
-			${sourcePalette.neutral[86]} 0px,
-			${sourcePalette.neutral[86]} 3px,
+			${palette('--article-border')} 0px,
+			${palette('--article-border')} 3px,
 			transparent 3px,
 			transparent 5px
 		);

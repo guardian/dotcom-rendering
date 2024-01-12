@@ -1069,6 +1069,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						backgroundColour={themePalette(
 							'--article-section-background',
 						)}
+						borderColour={themePalette('--article-border')}
 						padSides={false}
 						showSideBorders={false}
 						element="footer"

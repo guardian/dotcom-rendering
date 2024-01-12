@@ -3048,7 +3048,7 @@ const articleMetaLinesDark: PaletteFunction = ({ design }) => {
 		case ArticleDesign.Interactive:
 			return sourcePalette.neutral[46];
 		default:
-			return sourcePalette.neutral[46];
+			return sourcePalette.neutral[20];
 	}
 };
 
