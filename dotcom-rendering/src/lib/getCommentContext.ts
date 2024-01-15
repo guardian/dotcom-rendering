@@ -1,4 +1,4 @@
-import { joinUrl } from '@guardian/libs';
+import { isOneOf, isString, joinUrl, storage } from '@guardian/libs';
 
 // GET http://discussion.guardianapis.com/discussion-api/comment/3519111/context
 // {
@@ -15,6 +15,14 @@ import { joinUrl } from '@guardian/libs';
 //     page: 1,
 // };
 
+const orderByTypes = ['newest', 'oldest', 'recommendations'] as const;
+const threadTypes = ['collapsed', 'expanded', 'unthreaded'] as const;
+const pageSizeTypes = [25, 50, 100] as const;
+
+type OrderByType = (typeof orderByTypes)[number];
+type ThreadsType = (typeof threadTypes)[number];
+type PageSizeType = (typeof pageSizeTypes)[number];
+
 type CommentContextType = {
 	status: 'ok' | 'error';
 	commentId: number;
@@ -27,50 +35,35 @@ type CommentContextType = {
 	page: number;
 };
 
-type OrderByType = 'newest' | 'oldest' | 'recommendations';
-type ThreadsType = 'collapsed' | 'expanded' | 'unthreaded';
-type PageSizeType = 25 | 50 | 100;
-
 interface FilterOptions {
 	orderBy: OrderByType;
 	pageSize: PageSizeType;
 	threads: ThreadsType;
 }
 
+const getOrderByType = (value: unknown) =>
+	isString(value) && isOneOf(orderByTypes)(value) ? value : 'newest';
+const getThreadType = (value: unknown) =>
+	isString(value) && isOneOf(threadTypes)(value) ? value : 'collapsed';
+const getPageSizeType = (value: unknown) =>
+	typeof value === 'number' && isOneOf(pageSizeTypes)(value) ? value : 25;
+
+/** Retrieves stored values from local storage if available, otherwise it returns defaults */
 const initFiltersFromLocalStorage = (): FilterOptions => {
-	let threads: { [key: string]: ThreadsType } | undefined;
-	let pageSize: { [key: string]: PageSizeType } | undefined;
-	let orderBy: { [key: string]: OrderByType } | undefined;
+	const orderBy: OrderByType = getOrderByType(
+		storage.local.get('gu.prefs.discussion.order'),
+	);
+	const threads: ThreadsType = getThreadType(
+		storage.local.get('gu.prefs.discussion.threading'),
+	);
+	const pageSize: PageSizeType = getPageSizeType(
+		storage.local.get('gu.prefs.discussion.pagesize'),
+	);
 
-	try {
-		// Try to read from local storage
-		orderBy = JSON.parse(
-			// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-			localStorage.getItem('gu.prefs.discussion.order') ?? '{}',
-		);
-		threads = JSON.parse(
-			// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-			localStorage.getItem('gu.prefs.discussion.threading') ?? '{}',
-		);
-		pageSize = JSON.parse(
-			// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-			localStorage.getItem('gu.prefs.discussion.pagesize') ?? '{}',
-		);
-	} catch (error) {
-		// Sometimes it's not possible to access localStorage, we accept this and don't want to
-		// capture these errors
-		return {
-			orderBy: 'newest',
-			pageSize: 25,
-			threads: 'collapsed',
-		};
-	}
-
-	// If we found something in LS, use it, otherwise return defaults
 	return {
-		orderBy: orderBy?.value ? orderBy.value : 'newest',
-		threads: threads?.value ? threads.value : 'collapsed',
-		pageSize: pageSize?.value ? pageSize.value : 25,
+		orderBy,
+		threads,
+		pageSize,
 	};
 };
 
