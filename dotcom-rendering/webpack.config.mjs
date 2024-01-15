@@ -16,6 +16,9 @@
 import { mkdir, readdir, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import devServer from './configs/webpack/server.dev.mjs';
+import prodServer from './configs/webpack/server.mjs';
+import { isDev } from './configs/webpack/utils/env.mjs';
 
 const dirname = fileURLToPath(new URL('.', import.meta.url));
 
@@ -43,7 +46,9 @@ export const bundles = /** @type {const} @satisfies {readonly string[]} */ ([
 	'utf-8',
 );
 
-export default clientConfigs.map((name) =>
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- can't know what we are importing
-	import(`${configsDirectory}/${name}`).then((config) => config.default),
+export default [isDev ? devServer : prodServer].concat(
+	clientConfigs.map((name) =>
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- can't know what we are importing
+		import(`${configsDirectory}/${name}`).then((config) => config.default),
+	),
 );
