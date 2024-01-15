@@ -2,6 +2,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { trails } from '../../fixtures/manual/trails';
+import { palette } from '../palette';
 import { MostViewedFooter } from './MostViewedFooter.importable';
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 import { Section } from './Section';
@@ -30,6 +31,7 @@ export const withTwoTabsAdFree: StoryObj = () => {
 						{ heading: 'Tab 1', trails: trails.slice(0, 10) },
 						{ heading: 'Tab 2', trails: trails.slice(5, 15) },
 					]}
+					selectedColour={palette('--most-viewed-tab-border')}
 				/>
 			</MostViewedFooterLayout>
 		</Section>
@@ -48,6 +50,7 @@ export const withOneTabsAdFree: StoryObj = () => {
 							trails: trails.slice(0, 10),
 						},
 					]}
+					selectedColour={palette('--most-viewed-tab-border')}
 				/>
 			</MostViewedFooterLayout>
 		</Section>
@@ -64,6 +67,7 @@ export const withTwoTabs: StoryObj = () => {
 						{ heading: 'Tab 1', trails: trails.slice(0, 10) },
 						{ heading: 'Tab 2', trails: trails.slice(5, 15) },
 					]}
+					selectedColour={palette('--most-viewed-tab-border')}
 				/>
 			</MostViewedFooterLayout>
 		</Section>
@@ -82,6 +86,7 @@ export const withOneTabs: StoryObj = () => {
 							trails: trails.slice(0, 10),
 						},
 					]}
+					selectedColour={palette('--most-viewed-tab-border')}
 				/>
 			</MostViewedFooterLayout>
 		</Section>
