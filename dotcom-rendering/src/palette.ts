@@ -2330,7 +2330,7 @@ const onwardContentCardBackgroundDark: PaletteFunction = ({
 							return pillarPalette(theme, 200);
 					}
 				default:
-					return sourcePalette.neutral[0];
+					return sourcePalette.neutral[10];
 			}
 	}
 };
