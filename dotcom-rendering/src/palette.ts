@@ -3048,7 +3048,7 @@ const articleMetaLinesDark: PaletteFunction = ({ design }) => {
 		case ArticleDesign.Interactive:
 			return sourcePalette.neutral[46];
 		default:
-			return sourcePalette.neutral[46];
+			return sourcePalette.neutral[20];
 	}
 };
 
@@ -3160,7 +3160,7 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const articleBorderDark: PaletteFunction = () => sourcePalette.neutral[38];
+const articleBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 
 const straightLinesLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)

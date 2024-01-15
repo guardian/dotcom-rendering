@@ -1,11 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import {
-	headline,
-	palette as sourcePalette,
-	until,
-} from '@guardian/source-foundations';
+import { headline, until } from '@guardian/source-foundations';
 import { palette } from '../palette';
 import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber';
@@ -15,12 +11,12 @@ import { LinkHeadline } from './LinkHeadline';
 const gridItem = (position: number, hasPageSkin: boolean) => {
 	const borderTop = hasPageSkin
 		? css`
-				border-top: 1px solid ${sourcePalette.neutral[86]};
+				border-top: 1px solid ${palette('--article-border')};
 		  `
 		: css`
 				/* Below leftCol always set top border */
 				${until.leftCol} {
-					border-top: 1px solid ${sourcePalette.neutral[86]};
+					border-top: 1px solid ${palette('--article-border')};
 				}
 		  `;
 	return css`
@@ -32,10 +28,10 @@ const gridItem = (position: number, hasPageSkin: boolean) => {
 		items to prevent double borders */
 		border-top: ${position !== 1 &&
 		position !== 6 &&
-		`1px solid ${sourcePalette.neutral[86]}`};
+		`1px solid ${palette('--article-border')};`};
 
 		/* The left border is set on the container */
-		border-right: 1px solid ${sourcePalette.neutral[86]};
+		border-right: 1px solid ${palette('--article-border')};
 		min-height: 52px;
 
 		&:hover {

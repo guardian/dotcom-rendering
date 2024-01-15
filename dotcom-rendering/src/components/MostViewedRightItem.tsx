@@ -24,7 +24,7 @@ const listItemStyles = css`
 	}
 	padding-top: 4px;
 	margin-bottom: 12px;
-	border-top: 1px solid ${sourcePalette.neutral[86]};
+	border-top: 1px solid ${themePalette('--article-border')};
 
 	&:first-of-type {
 		padding-top: 0;
