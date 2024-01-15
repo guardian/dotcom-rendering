@@ -15,14 +15,14 @@ const rightAdsStyles = css`
  * client-side. See `AdPortals.importable.tsx` for more details.
  */
 const RightAdsPlaceholder = () => (
-	<div className={rightAdsPlaceholderClass} css={rightAdsStyles}></div>
+	<aside className={rightAdsPlaceholderClass} css={rightAdsStyles} />
 );
 
 /**
  * A server-side ad placeholder for apps, into which ads are inserted
  * client-side. See `AdPortals.importable.tsx` for more details.
  */
-const AdPlaceholder = () => <div className={adPlaceholderClass} />;
+const AdPlaceholder = () => <aside className={adPlaceholderClass} />;
 
 export {
 	AdPlaceholder,
