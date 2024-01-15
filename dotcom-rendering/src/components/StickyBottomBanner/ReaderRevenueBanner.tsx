@@ -20,7 +20,6 @@ import {
 	getPurchaseInfo,
 	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
-	lazyFetchEmailWithTimeout,
 	MODULES_VERSION,
 	recentlyClosedBanner,
 	setLocalNoBannerCachePeriod,
@@ -28,6 +27,7 @@ import {
 	withinLocalNoBannerCachePeriod,
 } from '../../lib/contributions';
 import { getToday } from '../../lib/dailyArticleCount';
+import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';

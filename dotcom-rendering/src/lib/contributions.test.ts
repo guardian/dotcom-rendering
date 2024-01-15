@@ -2,12 +2,10 @@ import { setCookie } from '@guardian/libs';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecentOneOffContributor,
-	lazyFetchEmailWithTimeout,
 	ONE_OFF_CONTRIBUTION_DATE_COOKIE,
 	recentlyClosedBanner,
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
 } from './contributions';
-import { getIdApiUserData } from './getIdapiUserData';
 
 const clearAllCookies = () => {
 	const cookies = document.cookie.split(';');
@@ -17,21 +15,6 @@ const clearAllCookies = () => {
 		document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT`;
 	}
 };
-
-const userResponse = {
-	status: 'ok',
-	user: {
-		primaryEmailAddress: 'test@guardian.co.uk',
-	},
-};
-
-jest.mock('./getIdapiUserData', () => {
-	const originalModule = jest.requireActual('./getIdapiUserData');
-	return {
-		...originalModule,
-		getIdApiUserData: jest.fn(() => Promise.resolve(userResponse)),
-	};
-});
 
 describe('getLastOneOffContributionDate', () => {
 	beforeEach(clearAllCookies);
@@ -128,17 +111,6 @@ describe('isRecentOneOffContributor', () => {
 		});
 		global.Date.now = jest.fn(() => Date.parse('2019-08-01T13:00:30'));
 		expect(isRecentOneOffContributor()).toBe(false);
-	});
-});
-
-describe('lazyFetchEmailWithTimeout', () => {
-	it('returns a function to get the email address', async () => {
-		const fetchEmail = lazyFetchEmailWithTimeout('https://idapi-url.com');
-		expect(getIdApiUserData).not.toHaveBeenCalled();
-
-		const result = await fetchEmail();
-		expect(result).toBe(userResponse.user.primaryEmailAddress);
-		expect(getIdApiUserData).toHaveBeenCalledWith('https://idapi-url.com');
 	});
 });
 
