@@ -1,7 +1,9 @@
 import { css } from '@emotion/react';
 import { between, space, textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import type { EditionId } from '../lib/edition';
 import type { Palette } from '../types/palette';
+import { DateTime } from './DateTime';
 
 const ALL_OUT_WICKETS = 10;
 
@@ -9,6 +11,7 @@ type Props = {
 	scorecardUrl: string;
 	match: CricketMatch;
 	format: ArticleFormat;
+	editionId: EditionId;
 };
 
 const screenReaderOnlyStyle = css`
@@ -128,13 +131,18 @@ export const CricketInnings = ({
 	return <p>Yet to bat</p>;
 };
 
-export const CricketScoreboard = ({ scorecardUrl, match, format }: Props) => {
+export const CricketScoreboard = ({
+	scorecardUrl,
+	match,
+	format,
+	editionId,
+}: Props) => {
 	const palette = decidePalette(format);
 	const date = new Date(match.gameDate);
 	return (
 		<div css={containerStyle}>
 			<h2 css={screenReaderOnlyStyle}>
-				<time dateTime={date.toISOString()}>{date.toDateString()}</time>
+				<DateTime date={date} editionId={editionId} show="date" />
 				{match.competitionName}, {match.venueName}
 			</h2>
 			<table css={tableStyle}>
