@@ -12,8 +12,10 @@ import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { type App as CDKApp, Duration } from 'aws-cdk-lib';
 import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
 import { Metric } from 'aws-cdk-lib/aws-cloudwatch';
+import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
+import { Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
 
@@ -148,30 +150,44 @@ export class RenderingCDKStack extends CDKStack {
 		 */
 
 		/** Scale out policy on latency above 0.2s */
-		new StepScalingPolicy(this, 'LatencyScaleUpPolicy', {
-			autoScalingGroup: ec2app.autoScalingGroup,
-			metric: latencyMetric,
-			scalingSteps: [
-				{
-					// No scaling up effect between 0 and 0.2s latency
-					change: 0,
-					lower: 0,
-					upper: 0.2,
-				},
-				{
-					// When latency is higher than 0.2s we scale up by 50%
-					change: 50,
-					lower: 0.2,
-				},
-				{
-					// When latency is higher than 0.3s we scale up by 80%
-					change: 80,
-					lower: 0.3,
-				},
-			],
-			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
-			evaluationPeriods: 1,
-		});
+		const scaleOutPolicy = new StepScalingPolicy(
+			this,
+			'LatencyScaleUpPolicy',
+			{
+				autoScalingGroup: ec2app.autoScalingGroup,
+				metric: latencyMetric,
+				scalingSteps: [
+					{
+						// No scaling up effect between 0 and 0.2s latency
+						change: 0,
+						lower: 0,
+						upper: 0.2,
+					},
+					{
+						// When latency is higher than 0.2s we scale up by 50%
+						change: 50,
+						lower: 0.2,
+					},
+					{
+						// When latency is higher than 0.3s we scale up by 80%
+						change: 80,
+						lower: 0.3,
+					},
+				],
+				adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
+				evaluationPeriods: 1,
+			},
+		);
+
+		const criticalAlertsTopic = Topic.fromTopicArn(
+			this,
+			'CriticalAlertsTopic',
+			`arn:aws:sns:${region}:${this.account}:Frontend-${stage}-CriticalAlerts`,
+		);
+		const criticalAlertsSnsAction = new SnsAction(criticalAlertsTopic);
+
+		/** Adds a notification action to the scale out policy alarm */
+		scaleOutPolicy.upperAlarm?.addAlarmAction(criticalAlertsSnsAction);
 
 		/** Scale in policy on latency below 0.15s */
 		new StepScalingPolicy(this, 'LatencyScaleDownPolicy', {
