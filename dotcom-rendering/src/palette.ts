@@ -3963,6 +3963,40 @@ const mostViewedFooterHoverLight: PaletteFunction = () =>
 const mostViewedFooterHoverDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
+const mostViewedTabBorderDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
+
+const mostViewedTabBorderLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 300);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[300];
+	}
+};
+
 const richLinkTextLight: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis) return sourcePalette.news[300];
 	switch (theme) {
@@ -5290,6 +5324,10 @@ const paletteColours = {
 	'--most-viewed-headline': {
 		light: mostViewedHeadlineLight,
 		dark: mostViewedHeadlineDark,
+	},
+	'--most-viewed-tab-border': {
+		light: mostViewedTabBorderLight,
+		dark: mostViewedTabBorderDark,
 	},
 	'--link-kicker-text': {
 		light: linkKickerTextLight,

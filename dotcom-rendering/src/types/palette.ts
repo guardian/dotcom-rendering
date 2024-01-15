@@ -25,7 +25,6 @@ export type Palette = {
 		imageTitle: Colour;
 		speechBubble: Colour;
 		headlineTag: Colour;
-		mostViewedTab: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
