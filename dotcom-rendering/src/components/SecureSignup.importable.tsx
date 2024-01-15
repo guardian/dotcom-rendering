@@ -54,12 +54,7 @@ const flexParentStyles = css`
 const inputContainerStyles = css`
 	margin-right: ${space[3]}px;
 	margin-bottom: ${space[2]}px;
-	flex-basis: 335px;
 	flex-shrink: 1;
-`;
-
-const removeFlexBasis = css`
-	flex-basis: 0;
 `;
 
 const textInputStyles = css`
@@ -79,10 +74,6 @@ const buttonCssOverrides = css`
 	flex-basis: 118px;
 	flex-shrink: 0;
 	margin-bottom: ${space[2]}px;
-`;
-
-const hideElement = css`
-	display: none;
 `;
 
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
@@ -255,7 +246,6 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
 		void resolveEmailIfSignedIn().then((email) => {
-			console.log('resolved email:', email);
 			setSignedInUserEmail(email);
 		});
 	}, []);
@@ -329,7 +319,6 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 		sendTracking(newsletterId, 'open-captcha', renderingTarget);
 		recaptchaRef.current?.execute();
 	};
-
 	return (
 		<>
 			<form
@@ -345,26 +334,30 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 					text="Enter your email address"
 					cssOverrides={css`
 						${labelStyles};
-						${!!signedInUserEmail && hideElement};
+						display: ${!signedInUserEmail
+							? 'inline-block'
+							: 'none'};
 					`}
 				/>
 
 				<div css={flexParentStyles}>
 					<div
-						css={[
-							inputContainerStyles,
-							signedInUserEmail && removeFlexBasis,
-						]}
+						css={css`
+							${inputContainerStyles};
+							flex-basis: ${!signedInUserEmail ? '335px' : '0'};
+						`}
 					>
 						<TextInput
 							hideLabel={true}
 							name="email"
 							label="Enter your email address"
 							type="email"
-							value={signedInUserEmail ?? 'testvalue'}
+							value={signedInUserEmail}
 							cssOverrides={css`
 								${textInputStyles};
-								${!!signedInUserEmail && hideElement};
+								display: ${!signedInUserEmail
+									? 'inline-block'
+									: 'none'};
 							`}
 						/>
 					</div>
@@ -374,7 +367,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 						type="submit"
 						cssOverrides={buttonCssOverrides}
 					>
-						Sign upp
+						Sign up
 					</Button>
 				</div>
 			</form>
