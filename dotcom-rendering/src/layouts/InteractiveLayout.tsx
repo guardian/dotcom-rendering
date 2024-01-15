@@ -438,6 +438,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										switches={article.config.switches}
 										isAdFreeUser={article.isAdFreeUser}
 										isSensitive={article.config.isSensitive}
+										editionId={article.editionId}
 									/>
 								</div>
 							</GridItem>

@@ -772,6 +772,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										switches={article.config.switches}
 										isSensitive={article.config.isSensitive}
 										isAdFreeUser={article.isAdFreeUser}
+										editionId={article.editionId}
 									/>
 								</div>
 							</GridItem>

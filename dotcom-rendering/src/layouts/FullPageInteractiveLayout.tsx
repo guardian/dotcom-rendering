@@ -20,6 +20,7 @@ import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
+import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { renderElement } from '../lib/renderElement';
@@ -48,6 +49,7 @@ type RendererProps = {
 	isSensitive: boolean;
 	abTests: ServerSideTests;
 	switches: Switches;
+	editionId: EditionId;
 };
 
 const Renderer = ({
@@ -61,6 +63,7 @@ const Renderer = ({
 	isSensitive,
 	abTests,
 	switches,
+	editionId,
 }: RendererProps) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -81,6 +84,7 @@ const Renderer = ({
 			isSensitive,
 			abTests,
 			switches,
+			editionId,
 		});
 
 		switch (element._type) {
@@ -338,6 +342,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
+						editionId={article.editionId}
 					/>
 				</article>
 			</Section>

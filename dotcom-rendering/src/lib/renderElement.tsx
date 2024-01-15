@@ -64,6 +64,7 @@ import {
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
+import type { EditionId } from './edition';
 
 type Props = {
 	format: ArticleFormat;
@@ -81,6 +82,7 @@ type Props = {
 	switches: Switches;
 	isPinnedPost?: boolean;
 	abTests: ServerSideTests;
+	editionId: EditionId;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -135,6 +137,7 @@ export const renderElement = ({
 	isSensitive,
 	isPinnedPost,
 	abTests,
+	editionId,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -692,6 +695,7 @@ export const renderElement = ({
 							authorName={authorName}
 							dateCreated={dateCreated}
 							alt={alt}
+							editionId={editionId}
 						/>
 					);
 				}
@@ -710,6 +714,7 @@ export const renderElement = ({
 							authorName={authorName}
 							youtubeHtml={youtubeHtml}
 							dateCreated={dateCreated}
+							editionId={editionId}
 						/>
 					);
 				}
@@ -721,6 +726,7 @@ export const renderElement = ({
 							description={witnessTypeDataText.description}
 							authorName={witnessTypeDataText.authorName}
 							dateCreated={witnessTypeDataText.dateCreated}
+							editionId={editionId}
 						/>
 					);
 				}
@@ -796,6 +802,7 @@ export const RenderArticleElement = ({
 	switches,
 	isPinnedPost,
 	abTests,
+	editionId,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -815,6 +822,7 @@ export const RenderArticleElement = ({
 		switches,
 		isPinnedPost,
 		abTests,
+		editionId,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

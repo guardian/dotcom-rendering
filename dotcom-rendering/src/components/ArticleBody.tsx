@@ -229,6 +229,7 @@ export const ArticleBody = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					abTests={abTests}
+					editionId={editionId}
 				/>
 			</div>
 		</>

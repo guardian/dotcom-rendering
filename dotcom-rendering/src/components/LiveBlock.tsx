@@ -84,6 +84,7 @@ export const LiveBlock = ({
 					abTests={abTests}
 					switches={switches}
 					isPinnedPost={isPinnedPost}
+					editionId={editionId}
 				/>
 			))}
 			<footer
