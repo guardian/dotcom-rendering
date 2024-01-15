@@ -268,8 +268,7 @@ export const lazyFetchEmailWithTimeout =
 	() => {
 		return new Promise((resolve) => {
 			setTimeout(() => resolve(null), 1000);
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
-			getEmail(idapiUrl).then((email) => {
+			void getEmail(idapiUrl).then((email) => {
 				if (email) {
 					resolve(email);
 				} else {
