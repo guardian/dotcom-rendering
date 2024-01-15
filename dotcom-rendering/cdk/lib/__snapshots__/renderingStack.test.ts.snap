@@ -708,7 +708,12 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "StepAdjustments": [
           {
             "MetricIntervalLowerBound": 0,
+            "MetricIntervalUpperBound": 0.09999999999999998,
             "ScalingAdjustment": 50,
+          },
+          {
+            "MetricIntervalLowerBound": 0.09999999999999998,
+            "ScalingAdjustment": 80,
           },
         ],
       },
