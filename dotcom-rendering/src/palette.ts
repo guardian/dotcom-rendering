@@ -2330,7 +2330,7 @@ const onwardContentCardBackgroundDark: PaletteFunction = ({
 							return pillarPalette(theme, 200);
 					}
 				default:
-					return sourcePalette.neutral[0];
+					return sourcePalette.neutral[10];
 			}
 	}
 };
@@ -3884,7 +3884,7 @@ const carouselArrowDark: PaletteFunction = () => sourcePalette.neutral[0];
 const carouselArrowBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 const carouselArrowBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[100];
+	sourcePalette.neutral[86];
 
 const carouselArrowBackgroundHoverLight: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
