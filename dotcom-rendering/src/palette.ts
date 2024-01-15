@@ -3884,7 +3884,7 @@ const carouselArrowDark: PaletteFunction = () => sourcePalette.neutral[0];
 const carouselArrowBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 const carouselArrowBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[100];
+	sourcePalette.neutral[86];
 
 const carouselArrowBackgroundHoverLight: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
