@@ -104,10 +104,6 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 export const handleFront: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('front');
 	const front = enhanceFront(body);
-	console.log(
-		'*** front',
-		JSON.stringify(front.pressedPage.collections[0]?.curated?.[0]?.image),
-	);
 	const { html, prefetchScripts } = renderFront({
 		front,
 	});
