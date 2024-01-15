@@ -18,6 +18,7 @@ import { useEffect, useRef, useState } from 'react';
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { lazyFetchEmailWithTimeout } from '../lib/contributions';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -53,7 +54,6 @@ const flexParentStyles = css`
 const inputContainerStyles = css`
 	margin-right: ${space[3]}px;
 	margin-bottom: ${space[2]}px;
-	flex-basis: 335px;
 	flex-shrink: 1;
 `;
 
@@ -120,6 +120,14 @@ const buildFormData = (
 	}
 
 	return formData;
+};
+
+const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
+	const { idApiUrl } = window.guardian.config.page;
+	if (!idApiUrl) return;
+	const fetchedEmail = await lazyFetchEmailWithTimeout(idApiUrl)();
+	if (!fetchedEmail) return;
+	return fetchedEmail;
 };
 
 const postFormData = async (
@@ -223,6 +231,9 @@ const sendTracking = (
 export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
+	const [signedInUserEmail, setSignedInUserEmail] = useState<
+		string | undefined
+	>(undefined);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
@@ -234,6 +245,9 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
+		void resolveEmailIfSignedIn().then((email) => {
+			setSignedInUserEmail(email);
+		});
 	}, []);
 	const { renderingTarget } = useConfig();
 
@@ -305,7 +319,6 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 		sendTracking(newsletterId, 'open-captcha', renderingTarget);
 		recaptchaRef.current?.execute();
 	};
-
 	return (
 		<>
 			<form
@@ -319,17 +332,33 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			>
 				<Label
 					text="Enter your email address"
-					cssOverrides={labelStyles}
+					cssOverrides={css`
+						${labelStyles};
+						display: ${!signedInUserEmail
+							? 'inline-block'
+							: 'none'};
+					`}
 				/>
 
 				<div css={flexParentStyles}>
-					<div css={inputContainerStyles}>
+					<div
+						css={css`
+							${inputContainerStyles};
+							flex-basis: ${!signedInUserEmail ? '335px' : '0'};
+						`}
+					>
 						<TextInput
 							hideLabel={true}
 							name="email"
 							label="Enter your email address"
 							type="email"
-							cssOverrides={textInputStyles}
+							value={signedInUserEmail}
+							cssOverrides={css`
+								${textInputStyles};
+								display: ${!signedInUserEmail
+									? 'inline-block'
+									: 'none'};
+							`}
 						/>
 					</div>
 					<Button
