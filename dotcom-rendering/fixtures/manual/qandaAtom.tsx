@@ -1,4 +1,4 @@
-// Non-expanded version for Cypress tests
+// Non-expanded version for e2e tests
 export const imageStory = {
 	id: '78014307-ca67-47dc-b524-d5f24f3dbcd8',
 	title: 'What is bitcoin?',

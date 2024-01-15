@@ -960,6 +960,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 														article.config
 															.keywordIds
 													}
+													editionId={
+														article.editionId
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1110,6 +1113,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													lang={article.lang}
 													isRightToLeftLang={
 														article.isRightToLeftLang
+													}
+													editionId={
+														article.editionId
 													}
 												/>
 												{pagination.totalPages > 1 && (

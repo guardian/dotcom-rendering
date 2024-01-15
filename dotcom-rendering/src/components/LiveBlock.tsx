@@ -1,4 +1,6 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
+import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
 import { LastUpdated } from './LastUpdated';
@@ -19,6 +21,7 @@ type Props = {
 	isLiveUpdate?: boolean;
 	isPinnedPost: boolean;
 	pinnedPostId?: string;
+	editionId: EditionId;
 };
 
 export const LiveBlock = ({
@@ -35,15 +38,17 @@ export const LiveBlock = ({
 	isLiveUpdate,
 	isPinnedPost,
 	pinnedPostId,
+	editionId,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 
 	// Decide if the block has been updated or not
-	const showLastUpdated: boolean =
-		!!block.blockLastUpdatedDisplay &&
-		block.blockFirstPublished !== undefined &&
-		block.blockLastUpdated !== undefined &&
-		block.blockLastUpdated > block.blockFirstPublished;
+	const lastUpdated =
+		!isUndefined(block.blockFirstPublished) &&
+		!isUndefined(block.blockLastUpdated) &&
+		block.blockLastUpdated > block.blockFirstPublished
+			? block.blockLastUpdated
+			: undefined;
 
 	const isOriginalPinnedPost = !isPinnedPost && block.id === pinnedPostId;
 
@@ -96,14 +101,12 @@ export const LiveBlock = ({
 					size="small"
 					context="LiveBlock"
 				/>
-				{showLastUpdated &&
-					block.blockLastUpdated !== undefined &&
-					!!block.blockLastUpdatedDisplay && (
-						<LastUpdated
-							lastUpdated={block.blockLastUpdated}
-							lastUpdatedDisplay={block.blockLastUpdatedDisplay}
-						/>
-					)}
+				{!isUndefined(lastUpdated) && (
+					<LastUpdated
+						lastUpdated={lastUpdated}
+						editionId={editionId}
+					/>
+				)}
 			</footer>
 		</LiveBlockContainer>
 	);

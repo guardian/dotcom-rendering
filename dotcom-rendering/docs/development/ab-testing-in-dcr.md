@@ -29,7 +29,7 @@ The library docs above explain the integration and the API.
 import { useAB } from '../lib/useAB';
 
 // Example usage of AB Tests
-// Used in the Cypress tests as smoke test of the AB tests framework integration
+// Used in the e2e tests as smoke test of the AB tests framework integration
 const ABTestAPI = useAB()?.api;
 
 // We can check if a user is in a variant, returns a boolean

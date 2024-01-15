@@ -604,6 +604,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
+										editionId={article.editionId}
 									/>
 								</ArticleContainer>
 							</GridItem>

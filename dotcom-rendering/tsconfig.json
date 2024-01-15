@@ -16,12 +16,5 @@
 		},
 		"preserveConstEnums": true
 	},
-	"exclude": [
-		"cypress",
-		"./cypress.config.js",
-		"storybook-static",
-		"target",
-		"dist",
-		"node_modules"
-	]
+	"exclude": ["storybook-static", "target", "dist", "node_modules"]
 }

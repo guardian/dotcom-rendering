@@ -1,4 +1,5 @@
 import { Hide } from '@guardian/source-react-components';
+import type { EditionId } from '../lib/edition';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
@@ -15,6 +16,7 @@ import { hasRelevantTopics, TopicFilterBank } from './TopicFilterBank';
 type Props = {
 	format: ArticleFormat;
 	blocks: Block[];
+	editionId: EditionId;
 	pinnedPost?: Block;
 	host?: string;
 	pageId: string;
@@ -62,6 +64,7 @@ export const LiveBlogRenderer = ({
 	filterKeyEvents = false,
 	availableTopics,
 	selectedTopics,
+	editionId,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
@@ -90,6 +93,7 @@ export const LiveBlogRenderer = ({
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
 							isPinnedPost={true}
+							editionId={editionId}
 						/>
 					</PinnedPost>
 				</>
@@ -143,6 +147,7 @@ export const LiveBlogRenderer = ({
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				pinnedPost={pinnedPost}
+				editionId={editionId}
 			/>
 			{isWeb && blocks.length > 4 && (
 				<Island

@@ -205,10 +205,10 @@ export const Liveness = ({
 
 	useEffect(() => {
 		/**
-		 * This is a utility used by our Cypress end to end tests
+		 * This is a utility used by our e2e tests
 		 *
 		 * Rather than expect these scripts to depend on polling, we
-		 * expose this function to allow Cypress to manually trigger
+		 * expose this function to allow tests to manually trigger
 		 * updates with whatever html and properties it wants
 		 *
 		 */

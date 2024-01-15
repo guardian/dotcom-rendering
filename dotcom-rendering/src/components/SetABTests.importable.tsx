@@ -1,10 +1,9 @@
-import { AB } from '@guardian/ab-core';
 import type { CoreAPIConfig } from '@guardian/ab-core';
+import { AB } from '@guardian/ab-core';
 import { getCookie, log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
-import { getCypressSwitches } from '../experiments/cypress-switches';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 import { setABTests } from '../lib/useAB';
@@ -67,10 +66,6 @@ export const SetABTests = ({
 			);
 		}
 
-		// Get the forced switches to use for when running within cypress
-		// Is empty object if not in cypress
-		const cypressAbSwitches = getCypressSwitches();
-
 		const allForcedTestVariants = {
 			...forcedTestVariants,
 			...getForcedParticipationsFromUrl(window.location.hash),
@@ -79,13 +74,12 @@ export const SetABTests = ({
 		const ab = new AB({
 			mvtId,
 			pageIsSensitive,
-			abTestSwitches: {
-				...abTestSwitches,
-				...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
-			},
+			abTestSwitches,
 			arrayOfTestObjects: tests,
 			forcedTestVariants: allForcedTestVariants,
 			ophanRecord: ophan.record,
+			serverSideTests: {},
+			errorReporter: () => void 0,
 		});
 		const allRunnableTests = ab.allRunnableTests(tests);
 		const participations = runnableTestsToParticipations(allRunnableTests);

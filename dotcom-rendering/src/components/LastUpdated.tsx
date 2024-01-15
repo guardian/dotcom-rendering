@@ -1,11 +1,13 @@
 import { css } from '@emotion/react';
 import { palette, textSans } from '@guardian/source-foundations';
+import type { EditionId } from '../lib/edition';
+import { DateTime } from './DateTime';
 
 const LastUpdated = ({
-	lastUpdatedDisplay,
+	editionId,
 	lastUpdated,
 }: {
-	lastUpdatedDisplay: string;
+	editionId: EditionId;
 	lastUpdated: number;
 }) => {
 	return (
@@ -17,23 +19,12 @@ const LastUpdated = ({
 				color: ${palette.neutral[46]};
 			`}
 		>
-			<time
-				dateTime={new Date(lastUpdated).toISOString()}
-				title={`Last updated ${new Date(lastUpdated).toLocaleDateString(
-					'en-GB',
-					{
-						hour: '2-digit',
-						minute: '2-digit',
-						weekday: 'long',
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric',
-						timeZoneName: 'long',
-					},
-				)}`}
-			>
-				{`Updated at ${lastUpdatedDisplay}`}
-			</time>
+			Updated at&nbsp;
+			<DateTime
+				date={new Date(lastUpdated)}
+				editionId={editionId}
+				show="time"
+			/>
 		</div>
 	);
 };

@@ -1,5 +1,0 @@
-/*
- * We group Cypress spec files into these parallel folders
- * so that we can run them in parallel in CI. See
- * the .github/workflows directory for more details
- */

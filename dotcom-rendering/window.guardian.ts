@@ -69,7 +69,6 @@ declare global {
 		 * This gives support across all 3 cases.
 		 */
 		guardianPolyfilledImport: (url: string) => Promise<any>; // can't be nested beyond top level
-		Cypress: any; // for checking if running within cypress
 		guCmpHotFix: {
 			initialised?: boolean;
 			cmp: CMP;
