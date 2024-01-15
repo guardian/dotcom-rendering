@@ -81,9 +81,9 @@ flowchart TD
     -   A resize observer monitors changes in the clients height and passes updated ad positions to Bridget if both the client height and the ad coordinates have changed it we can [update the ads][7]
 
 [1]: https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/model/enhance-ad-placeholders.ts
-[2]: https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/lib/renderElement.tsx#L479
-[3]: https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/layouts/LiveLayout.tsx#L1148
-[4]: https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/layouts/StandardLayout.tsx#L484
-[5]: https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/components/AdPortals.importable.tsx#L116
-[6]: https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/components/AdPortals.importable.tsx#L143
-[7]: https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/components/AdPortals.importable.tsx#L152
+[2]: https://github.com/guardian/dotcom-rendering/blob/d610bdbecea17e48a52403b1f45a407d1c82762f/dotcom-rendering/src/lib/renderElement.tsx#L473-L474
+[3]: https://github.com/guardian/dotcom-rendering/blob/d610bdbecea17e48a52403b1f45a407d1c82762f/dotcom-rendering/src/layouts/LiveLayout.tsx#L1203
+[4]: https://github.com/guardian/dotcom-rendering/blob/d610bdbecea17e48a52403b1f45a407d1c82762f/dotcom-rendering/src/layouts/StandardLayout.tsx#L494-L496
+[5]: https://github.com/guardian/dotcom-rendering/blob/d610bdbecea17e48a52403b1f45a407d1c82762f/dotcom-rendering/src/components/AdPortals.importable.tsx#L139-L140
+[6]: https://github.com/guardian/dotcom-rendering/blob/d610bdbecea17e48a52403b1f45a407d1c82762f/dotcom-rendering/src/components/AdPortals.importable.tsx#L184-L186
+[7]: https://github.com/guardian/dotcom-rendering/blob/d610bdbecea17e48a52403b1f45a407d1c82762f/dotcom-rendering/src/components/AdPortals.importable.tsx#L188C4-L205
