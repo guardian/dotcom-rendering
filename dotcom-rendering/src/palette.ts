@@ -4814,6 +4814,31 @@ const lastUpdatedText: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
+const designTagText: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[800];
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
+
+const designTagBackground: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Sport:
+		case Pillar.Lifestyle:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 300);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+	}
+};
 // ----- Palette ----- //
 
 /**
@@ -5688,6 +5713,14 @@ const paletteColours = {
 	'--last-updated-text': {
 		light: lastUpdatedText,
 		dark: lastUpdatedText,
+	},
+	'--design-tag-text': {
+		light: designTagText,
+		dark: designTagText,
+	},
+	'--design-tag-background': {
+		light: designTagBackground,
+		dark: designTagBackground,
 	},
 } satisfies PaletteColours;
 

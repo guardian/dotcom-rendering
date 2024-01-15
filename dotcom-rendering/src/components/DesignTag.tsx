@@ -2,19 +2,18 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { headline, space, until } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { palette } from '../palette';
 
-const tagStyles = (palette: Palette) => css`
-	background-color: ${palette.background.designTag};
-	color: ${palette.text.designTag};
+const tagStyles = css`
+	background-color: ${palette('--design-tag-background')};
+	color: ${palette('--design-tag-text')};
 	display: inline-block;
 	padding: 2px 0 4px 0;
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	line-height: 115%;
 	box-shadow:
-		6px 0 0 ${palette.background.headlineTag},
-		-6px 0 0 ${palette.background.headlineTag};
+		6px 0 0 ${palette('--design-tag-background')},
+		-6px 0 0 ${palette('--design-tag-background')};
 	box-decoration-break: clone;
 	${until.tablet} {
 		${headline.xxxsmall({ fontWeight: 'bold' })}
@@ -58,16 +57,9 @@ const Margins = ({
 	}
 };
 
-const Tag = ({
-	children,
-	format,
-}: {
-	children: React.ReactNode;
-	format: ArticleFormat;
-}) => {
-	const palette = decidePalette(format);
-	return <div css={tagStyles(palette)}>{children}</div>;
-};
+const Tag = ({ children }: { children: React.ReactNode }) => (
+	<div css={tagStyles}>{children}</div>
+);
 
 const TagLink = ({
 	children,
@@ -108,7 +100,7 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 		case ArticleDesign.Analysis:
 			return (
 				<Margins format={format}>
-					<Tag format={format}>
+					<Tag>
 						<TagLink href="/tone/analysis">Analysis</TagLink>
 					</Tag>
 				</Margins>
@@ -116,7 +108,7 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 		case ArticleDesign.Explainer:
 			return (
 				<Margins format={format}>
-					<Tag format={format}>
+					<Tag>
 						<TagLink href="/tone/explainers">Explainer</TagLink>
 					</Tag>
 				</Margins>
@@ -124,7 +116,7 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 		case ArticleDesign.Interview:
 			return (
 				<Margins format={format}>
-					<Tag format={format}>
+					<Tag>
 						<TagLink href="/tone/interview">Interview</TagLink>
 					</Tag>
 				</Margins>
@@ -132,7 +124,7 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 		case ArticleDesign.Letter:
 			return (
 				<Margins format={format}>
-					<Tag format={format}>
+					<Tag>
 						<TagLink href="/tone/letters">Letters</TagLink>
 					</Tag>
 				</Margins>
@@ -140,7 +132,7 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 		case ArticleDesign.Obituary:
 			return (
 				<Margins format={format}>
-					<Tag format={format}>
+					<Tag>
 						<TagLink href="/tone/obituaries">Obituary</TagLink>
 					</Tag>
 				</Margins>
@@ -148,7 +140,7 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 		case ArticleDesign.Review:
 			return (
 				<Margins format={format}>
-					<Tag format={format}>
+					<Tag>
 						<TagLink href="/tone/reviews">Review</TagLink>
 					</Tag>
 				</Margins>
@@ -156,7 +148,7 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 		case ArticleDesign.Timeline:
 			return (
 				<Margins format={format}>
-					<Tag format={format}>
+					<Tag>
 						<TagLink href="/tone/timelines">Timeline</TagLink>
 					</Tag>
 				</Margins>
@@ -164,7 +156,7 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 		case ArticleDesign.Profile:
 			return (
 				<Margins format={format}>
-					<Tag format={format}>
+					<Tag>
 						<TagLink href="/tone/profiles">Profile</TagLink>
 					</Tag>
 				</Margins>
