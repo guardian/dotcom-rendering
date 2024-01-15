@@ -3,6 +3,7 @@ name: DCR Request for comments
 about: Tell us about a feature that you're planning to implement in dotcom rendering
 title: '[RFC]'
 labels: RFC, dotcom-rendering
+projects: ['guardian/88']
 assignees: ''
 ---
 
