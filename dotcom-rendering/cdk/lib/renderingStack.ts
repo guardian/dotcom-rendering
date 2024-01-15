@@ -128,22 +128,26 @@ export class RenderingCDKStack extends CDKStack {
 			metricName: 'TargetResponseTime',
 			namespace: 'AWS/ApplicationELB',
 			period: Duration.seconds(30),
-			statistic: 'Average',
+			statistic: 'Average', // TODO - should we use p90?
 		});
 
 		/** Scaling policies ASCII diagram
 		 *
 		 * Metric value (latency in seconds)
-		 *  0              0.2                  infinity
-		 * ----------------------------------------------
-		 *        - 1       |         + 100%           |
-		 * ----------------------------------------------
+		 *  0         0.15         0.2         infinity
+		 * --------------------------------------------
+		 *      - 1    |     0      |     + 50%       |
+		 * --------------------------------------------
 		 * Instance change
 		 *
 		 * -
-		 * When scaling up, we use percentage change (+100% each interval)
+		 * When scaling up, we use percentage change (+50% each interval)
 		 * When scaling down, we use absolute change (-1 each interval)
+		 * We take no scaling actions when latency is between 0.15s and 0.2s to avoid flapping
+		 * @see https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#step-scaling-considerations
 		 */
+
+		/** Scale out policy on latency above 0.2s */
 		new StepScalingPolicy(this, 'LatencyScaleUpPolicy', {
 			autoScalingGroup: ec2app.autoScalingGroup,
 			metric: latencyMetric,
@@ -155,8 +159,8 @@ export class RenderingCDKStack extends CDKStack {
 					upper: 0.2,
 				},
 				{
-					// When latency is higher than 0.2s we scale up by 100%
-					change: 100,
+					// When latency is higher than 0.2s we scale up by 50%
+					change: 50,
 					lower: 0.2,
 				},
 			],
@@ -164,19 +168,20 @@ export class RenderingCDKStack extends CDKStack {
 			evaluationPeriods: 1,
 		});
 
+		/** Scale in policy on latency below 0.15s */
 		new StepScalingPolicy(this, 'LatencyScaleDownPolicy', {
 			autoScalingGroup: ec2app.autoScalingGroup,
 			metric: latencyMetric,
 			scalingSteps: [
 				{
-					// No scaling down effect when latency is higher than 0.2s
+					// No scaling down effect when latency is higher than 0.15s
 					change: 0,
-					lower: 0.2,
+					lower: 0.15,
 				},
 				{
-					// When latency is lower than 0.2s we scale down by 1
+					// When latency is lower than 0.15s we scale down by 1
 					change: -1,
-					upper: 0.2,
+					upper: 0.15,
 					lower: 0,
 				},
 			],

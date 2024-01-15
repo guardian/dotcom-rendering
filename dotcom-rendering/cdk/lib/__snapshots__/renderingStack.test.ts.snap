@@ -638,7 +638,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Namespace": "AWS/ApplicationELB",
         "Period": 30,
         "Statistic": "Average",
-        "Threshold": 0.2,
+        "Threshold": 0.15,
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
@@ -708,7 +708,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "StepAdjustments": [
           {
             "MetricIntervalLowerBound": 0,
-            "ScalingAdjustment": 100,
+            "ScalingAdjustment": 50,
           },
         ],
       },
