@@ -10,6 +10,7 @@ import fetchMock from 'fetch-mock';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
+import { palette } from '../palette';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Section } from './Section';
@@ -257,7 +258,10 @@ const sportFormat = {
 export const Headlines: StoryObj = ({ format }: StoryProps) => {
 	mockCommentCount();
 	return (
-		<Section fullWidth={true}>
+		<Section
+			fullWidth={true}
+			backgroundColour={palette('--article-background')}
+		>
 			<Carousel
 				heading="More on this story"
 				trails={trails}
@@ -278,7 +282,10 @@ Headlines.decorators = [
 export const SingleItemCarousel = () => {
 	mockCommentCount();
 	return (
-		<Section fullWidth={true}>
+		<Section
+			fullWidth={true}
+			backgroundColour={palette('--article-background')}
+		>
 			<Carousel
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
@@ -324,7 +331,10 @@ export const SingleOpinionCarousel = () => {
 	};
 
 	return (
-		<Section fullWidth={true}>
+		<Section
+			fullWidth={true}
+			backgroundColour={palette('--article-background')}
+		>
 			<Carousel
 				heading="More on this story"
 				trails={[comment]}
@@ -350,7 +360,10 @@ export const Immersive = () => {
 	mockCommentCount();
 	return (
 		<>
-			<Section fullWidth={true}>
+			<Section
+				fullWidth={true}
+				backgroundColour={palette('--article-background')}
+			>
 				<Carousel
 					heading="Sport"
 					trails={immersiveTrails}
@@ -394,7 +407,10 @@ export const SpecialReportAlt = () => {
 		trail.format = specialReportAltFormat;
 
 	return (
-		<Section fullWidth={true}>
+		<Section
+			fullWidth={true}
+			backgroundColour={palette('--article-background')}
+		>
 			<Carousel
 				heading="SpecialReportAlt"
 				trails={specialReportTrails}
@@ -604,7 +620,10 @@ export const AllCards = () => {
 	];
 
 	return (
-		<Section fullWidth={true}>
+		<Section
+			fullWidth={true}
+			backgroundColour={palette('--article-background')}
+		>
 			<Carousel
 				heading="All the card types"
 				trails={allCardTypesTrail}
@@ -617,6 +636,9 @@ export const AllCards = () => {
 	);
 };
 AllCards.storyName = 'Carousel with all card types';
+AllCards.decorators = [
+	splitTheme([defaultFormat], { orientation: 'vertical' }),
+];
 
 export const FrontCarousel = () => (
 	<>
