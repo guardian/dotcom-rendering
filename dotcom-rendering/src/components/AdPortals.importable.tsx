@@ -70,7 +70,9 @@ const adsHaveMoved = (
 	});
 
 const updateAds = (positions: BridgetAdSlot[]) =>
-	getCommercialClient().updateAdverts(positions);
+	getCommercialClient()
+		.updateAdverts(positions)
+		.catch(() => console.error('Error updating adverts'));
 
 const debounceUpdateAds = libDebounce(updateAds, 100, { leading: true });
 
@@ -151,7 +153,8 @@ export const AdPortals = ({
 						)[0],
 					);
 				}
-			});
+			})
+			.catch(() => console.error('Error setting up ads'));
 	}, []);
 
 	/**
@@ -183,7 +186,9 @@ export const AdPortals = ({
 		) {
 			adPositions.current = calculateAdPositions(adSlots.current);
 			bodyHeight.current = document.body.clientHeight;
-			void getCommercialClient().insertAdverts(adPositions.current);
+			void getCommercialClient()
+				.insertAdverts(adPositions.current)
+				.catch(() => console.error('Error inserting ads'));
 
 			resizeObserver = new ResizeObserver((entries) => {
 				if (
@@ -209,9 +214,9 @@ export const AdPortals = ({
 	}, [adPlaceholders]);
 
 	const handleClickSupportButton = () => {
-		void getAcquisitionsClient().launchPurchaseScreen(
-			PurchaseScreenReason.hideAds,
-		);
+		void getAcquisitionsClient()
+			.launchPurchaseScreen(PurchaseScreenReason.hideAds)
+			.catch(() => console.error('Error launching purchase screen'));
 	};
 
 	const renderAdSlot = (id: string, index: number) => (

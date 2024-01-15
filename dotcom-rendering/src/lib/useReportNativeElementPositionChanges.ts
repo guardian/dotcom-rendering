@@ -2,8 +2,7 @@ import type { AdSlot } from '@guardian/bridget/AdSlot';
 import type { IRect } from '@guardian/bridget/Rect';
 import type { VideoSlot } from '@guardian/bridget/VideoSlot';
 import { useEffect, useRef } from 'react';
-import { getVideoClient } from './bridgetApi';
-import { getCommercialClient } from './bridgetApi';
+import { getCommercialClient, getVideoClient } from './bridgetApi';
 
 type Slot = AdSlot | VideoSlot;
 
@@ -40,20 +39,16 @@ export const useReportNativeElementPositionChanges = (
 
 	useEffect(() => {
 		const positionChangedCallback = function (): void {
-			try {
-				if (positionChanged(adSlots, previous?.adSlots)) {
-					void getCommercialClient().updateAdverts(adSlots);
-				}
-			} catch (error) {
-				console.log('Exception updating ads');
+			if (positionChanged(adSlots, previous?.adSlots)) {
+				void getCommercialClient()
+					.updateAdverts(adSlots)
+					.catch(() => console.error('Exception updating ads'));
 			}
 
-			try {
-				if (positionChanged(videoSlots, previous?.videoSlots)) {
-					void getVideoClient().updateVideos(videoSlots);
-				}
-			} catch (error) {
-				console.log('Exception updating videos');
+			if (positionChanged(videoSlots, previous?.videoSlots)) {
+				void getVideoClient()
+					.updateVideos(videoSlots)
+					.catch(() => console.error('Exception updating videos'));
 			}
 		};
 
