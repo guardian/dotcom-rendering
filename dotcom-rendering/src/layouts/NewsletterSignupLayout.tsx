@@ -458,6 +458,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 											}
 										/>
 									</Island>
+									<NewsletterPrivacyMessage />
 								</>
 							)}
 						</Column>
