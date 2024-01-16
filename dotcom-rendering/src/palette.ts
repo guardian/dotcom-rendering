@@ -589,6 +589,8 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
+const bylineYellowBoxColour: PaletteFunction = () => sourcePalette.neutral[7];
+
 const bylineHoverLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Analysis:
@@ -4872,6 +4874,10 @@ const paletteColours = {
 	'--byline-hover': {
 		light: bylineHoverLight,
 		dark: bylineHoverDark,
+	},
+	'--byline-yellowbox-anchor-colour': {
+		light: bylineYellowBoxColour,
+		dark: bylineYellowBoxColour,
 	},
 	'--callout-prompt': {
 		light: calloutPromptLight,

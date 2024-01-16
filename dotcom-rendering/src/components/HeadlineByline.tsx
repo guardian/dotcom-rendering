@@ -36,7 +36,7 @@ const yellowBoxStyles = (format: ArticleFormat) => css`
 	box-decoration-break: clone;
 
 	a {
-		color: inherit;
+		color: ${schemedPalette('--byline-yellowbox-anchor-colour')};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
