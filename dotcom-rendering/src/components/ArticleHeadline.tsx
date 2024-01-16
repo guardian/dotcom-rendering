@@ -225,6 +225,10 @@ const ageWarningMargins = (format: ArticleFormat) =>
 				}
 		  `;
 
+const backgroundStyles = css`
+	background-color: ${themePalette('--age-warning-wrapper-background')};
+`;
+
 const WithAgeWarning = ({
 	tags,
 	webPublicationDateDeprecated,
@@ -241,7 +245,7 @@ const WithAgeWarning = ({
 	if (age) {
 		return (
 			<>
-				<div css={[ageWarningMargins(format)]}>
+				<div css={[backgroundStyles, ageWarningMargins(format)]}>
 					<AgeWarning age={age} />
 				</div>
 				{children}
