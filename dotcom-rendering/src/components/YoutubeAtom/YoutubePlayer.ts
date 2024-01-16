@@ -1,6 +1,6 @@
 import type { AdsConfig } from '@guardian/commercial';
 import { log } from '@guardian/libs';
-import { loadYouTubeAPI } from './loadYouTubeIframeApi';
+import { loadYouTubeAPI } from './loadYouTubeApi';
 
 type EmbedConfig = {
 	embedConfig: {

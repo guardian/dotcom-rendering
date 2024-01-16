@@ -13,7 +13,7 @@ const loadScripts = (enableIma = false) => {
 	}
 	let scripts;
 	if (enableIma) {
-		log('dotcom', 'loadYT: loading YT & IMA script');
+		log('dotcom', 'loadYouTubeAPI: loading YT & IMA script');
 		scripts = [
 			/**
 			 * The IMA version of the iframe api script can only be fetched from
@@ -25,7 +25,7 @@ const loadScripts = (enableIma = false) => {
 			loadScript('//imasdk.googleapis.com/js/sdkloader/ima3.js'),
 		];
 	} else {
-		log('dotcom', 'loadYT: loading YT script');
+		log('dotcom', 'loadYouTubeAPI: loading YT script');
 		scripts = [loadScript('https://www.youtube.com/iframe_api')];
 	}
 	scriptsPromise = Promise.all(scripts);
@@ -47,7 +47,7 @@ const youtubeAPIReady = () => {
 
 	youtubeAPIReadyPromise = new Promise((resolve) => {
 		window.onYouTubeIframeAPIReady = () => {
-			log('dotcom', 'loadYT: resolving YTAPI promise');
+			log('dotcom', 'loadYouTubeAPI: resolving YTAPI promise');
 			resolve(window.YT);
 		};
 	});
@@ -58,7 +58,7 @@ const loadYouTubeAPI = (enableIma = false): Promise<typeof YT> => {
 	/* If another part of the code has already loaded youtube api, return early. */
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- @types/youtube insists that window.YT cannot be undefined. This is very much untrue.
 	if (window.YT?.Player instanceof Function) {
-		log('dotcom', 'loadYT: returning window.YT');
+		log('dotcom', 'loadYouTubeAPI: returning window.YT');
 		return Promise.resolve(window.YT);
 	}
 
