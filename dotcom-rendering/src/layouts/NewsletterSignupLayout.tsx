@@ -447,7 +447,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 
 									<Island
 										priority="feature"
-										defer={{ until: 'idle' }}
+										defer={{ until: 'visible' }}
 									>
 										<SecureSignup
 											newsletterId={

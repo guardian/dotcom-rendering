@@ -18,7 +18,7 @@ import { useEffect, useRef, useState } from 'react';
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { lazyFetchEmailWithTimeout } from '../lib/contributions';
+import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -74,6 +74,21 @@ const buttonCssOverrides = css`
 	flex-basis: 118px;
 	flex-shrink: 0;
 	margin-bottom: ${space[2]}px;
+`;
+
+const errorContainerStyles = css`
+	display: flex;
+	align-items: flex-start;
+	${until.tablet} {
+		flex-wrap: wrap;
+	}
+	button {
+		margin-left: ${space[1]}px;
+		background-color: ${palette('--recaptcha-button')};
+		:hover {
+			background-color: ${palette('--recaptcha-button-hover')};
+		}
+	}
 `;
 
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
@@ -231,9 +246,7 @@ const sendTracking = (
 export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
-	const [signedInUserEmail, setSignedInUserEmail] = useState<
-		string | undefined
-	>(undefined);
+	const [signedInUserEmail, setSignedInUserEmail] = useState<string>();
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
@@ -245,9 +258,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
-		void resolveEmailIfSignedIn().then((email) => {
-			setSignedInUserEmail(email);
-		});
+		void resolveEmailIfSignedIn().then(setSignedInUserEmail);
 	}, []);
 	const { renderingTarget } = useConfig();
 
@@ -324,11 +335,11 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			<form
 				onSubmit={handleSubmit}
 				id={`secure-signup-${newsletterId}`}
-				css={css`
-					display: ${hasResponse || isWaitingForResponse
-						? 'none'
-						: 'block'};
-				`}
+				style={
+					hasResponse || isWaitingForResponse
+						? { display: 'none' }
+						: { display: 'block' }
+				}
 			>
 				<Label
 					text="Enter your email address"
@@ -342,10 +353,14 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 
 				<div css={flexParentStyles}>
 					<div
-						css={css`
-							${inputContainerStyles};
-							flex-basis: ${!signedInUserEmail ? '335px' : '0'};
-						`}
+						css={[
+							inputContainerStyles,
+							css`
+								flex-basis: ${!signedInUserEmail
+									? '335px'
+									: '0'};
+							`,
+						]}
 					>
 						<TextInput
 							hideLabel={true}
@@ -353,12 +368,14 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 							label="Enter your email address"
 							type="email"
 							value={signedInUserEmail}
-							cssOverrides={css`
-								${textInputStyles};
-								display: ${!signedInUserEmail
-									? 'inline-block'
-									: 'none'};
-							`}
+							cssOverrides={[
+								textInputStyles,
+								css`
+									display: ${!signedInUserEmail
+										? 'inline-block'
+										: 'none'};
+								`,
+							]}
 						/>
 					</div>
 					<Button
@@ -385,26 +402,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 						<SuccessMessage text={successDescription} />
 					</div>
 				) : (
-					<div
-						css={css`
-							display: flex;
-							align-items: flex-start;
-							${until.tablet} {
-								flex-wrap: wrap;
-							}
-							button {
-								margin-left: ${space[1]}px;
-								background-color: ${palette(
-									'--recaptcha-button',
-								)};
-								:hover {
-									background-color: ${palette(
-										'--recaptcha-button-hover',
-									)};
-								}
-							}
-						`}
-					>
+					<div css={errorContainerStyles}>
 						<ErrorMessageWithAdvice text={`Sign up failed.`} />
 						<Button
 							size="small"

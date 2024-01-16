@@ -51,11 +51,11 @@ export default meta;
 
 type Story = StoryObj<Props>;
 export const Default: Story = {
-	storyName: 'Basic ContributionsEpic',
+	name: 'Basic ContributionsEpic',
 };
 
 export const WithBackgroundImage: Story = {
-	storyName: 'ContributionsEpic with background image',
+	name: 'ContributionsEpic with background image',
 	args: {
 		...meta.args,
 		variant: {
@@ -70,7 +70,7 @@ export const WithBackgroundImage: Story = {
 };
 
 export const WithBylineAndHeadshot: Story = {
-	storyName: 'ContributionsEpic with byline + headshot image',
+	name: 'ContributionsEpic with byline + headshot image',
 	args: {
 		...meta.args,
 		variant: {
@@ -102,7 +102,7 @@ export const WithBylineAndHeadshot: Story = {
 };
 
 export const WithBylineOnly: Story = {
-	storyName: 'ContributionsEpic with byline only',
+	name: 'ContributionsEpic with byline only',
 	args: {
 		...meta.args,
 		variant: {
@@ -129,7 +129,7 @@ export const WithBylineOnly: Story = {
 };
 
 export const WithReminder: Story = {
-	storyName: 'ContributionsEpic with reminder',
+	name: 'ContributionsEpic with reminder',
 	args: {
 		...meta.args,
 		variant: {
@@ -148,7 +148,7 @@ export const WithReminder: Story = {
 };
 
 export const WithReminderPrefilled: Story = {
-	storyName: 'ContributionsEpic with reminder pre-filled',
+	name: 'ContributionsEpic with reminder pre-filled',
 	args: {
 		...meta.args,
 		variant: {
@@ -173,7 +173,7 @@ export const WithReminderPrefilled: Story = {
 };
 
 export const WithReminderAndSignInLink: Story = {
-	storyName: 'ContributionsEpic with reminder and sign-in link',
+	name: 'ContributionsEpic with reminder and sign-in link',
 	args: {
 		...meta.args,
 		variant: {
@@ -192,7 +192,7 @@ export const WithReminderAndSignInLink: Story = {
 };
 
 export const WithTicker: Story = {
-	storyName: 'ContributionsEpic with ticker',
+	name: 'ContributionsEpic with ticker',
 	args: {
 		...meta.args,
 		variant: {
@@ -218,7 +218,7 @@ export const WithTicker: Story = {
 };
 
 export const WithAboveArticleCount: Story = {
-	storyName: 'ContributionsEpic with article count above',
+	name: 'ContributionsEpic with article count above',
 	args: {
 		...meta.args,
 		variant: {
@@ -236,7 +236,7 @@ export const WithAboveArticleCount: Story = {
 };
 
 export const WithAboveTopReaderArticleCount: Story = {
-	storyName: 'ContributionsEpic with top reader article count above',
+	name: 'ContributionsEpic with top reader article count above',
 	args: {
 		...meta.args,
 		variant: {
@@ -254,7 +254,7 @@ export const WithAboveTopReaderArticleCount: Story = {
 };
 
 export const WithAboveArticleCountNoConsent: Story = {
-	storyName: 'ContributionsEpic with article count above but no consent',
+	name: 'ContributionsEpic with article count above but no consent',
 	args: {
 		...meta.args,
 		variant: {
@@ -272,7 +272,7 @@ export const WithAboveArticleCountNoConsent: Story = {
 };
 
 export const WithChoiceCards: Story = {
-	storyName: 'ContributionsEpic with choice cards',
+	name: 'ContributionsEpic with choice cards',
 	args: {
 		...meta.args,
 		variant: {
@@ -314,7 +314,7 @@ export const WithChoiceCards: Story = {
 };
 
 export const WithChoiceCardsAndSignInLink: Story = {
-	storyName: 'ContributionsEpic with choice cards and sign-in link',
+	name: 'ContributionsEpic with choice cards and sign-in link',
 	args: {
 		...meta.args,
 		variant: {
@@ -350,7 +350,7 @@ export const WithChoiceCardsAndSignInLink: Story = {
 };
 
 export const WithSignInLink: Story = {
-	storyName: 'ContributionsEpic with sign-in link',
+	name: 'ContributionsEpic with sign-in link',
 	args: {
 		...meta.args,
 		variant: {
@@ -361,7 +361,7 @@ export const WithSignInLink: Story = {
 };
 
 export const WithoutSupportUrl: Story = {
-	storyName: 'ContributionsEpic without support url',
+	name: 'ContributionsEpic without support url',
 	args: {
 		...meta.args,
 		variant: {
@@ -375,7 +375,7 @@ export const WithoutSupportUrl: Story = {
 };
 
 export const WithNewsletterSignup: Story = {
-	storyName: 'ContributionsEpic with newsletter signup',
+	name: 'ContributionsEpic with newsletter signup',
 	args: {
 		...meta.args,
 		variant: {
@@ -392,7 +392,7 @@ export const WithNewsletterSignup: Story = {
 	},
 };
 export const WithParagraphLinks: Story = {
-	storyName: 'ContributionsEpic with paragraph links',
+	name: 'ContributionsEpic with paragraph links',
 	args: {
 		...meta.args,
 		variant: {
