@@ -343,12 +343,14 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			>
 				<Label
 					text="Enter your email address"
-					cssOverrides={css`
-						${labelStyles};
-						display: ${!signedInUserEmail
-							? 'inline-block'
-							: 'none'};
-					`}
+					cssOverrides={[
+						labelStyles,
+						css`
+							display: ${!signedInUserEmail
+								? 'inline-block'
+								: 'none'};
+						`,
+					]}
 				/>
 
 				<div css={flexParentStyles}>
