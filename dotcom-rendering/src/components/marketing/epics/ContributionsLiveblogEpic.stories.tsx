@@ -38,11 +38,11 @@ export default meta;
 
 type Story = StoryObj<Props>;
 export const Default: Story = {
-	storyName: 'Basic ContributionsLiveblogEpic',
+	name: 'Basic ContributionsLiveblogEpic',
 };
 
 export const WithoutSupportUrl: Story = {
-	storyName: 'ContributionsLiveblogEpic without Support URL',
+	name: 'ContributionsLiveblogEpic without Support URL',
 	args: {
 		...meta.args,
 		variant: {
@@ -57,7 +57,7 @@ export const WithoutSupportUrl: Story = {
 };
 
 export const WithReminderCta: Story = {
-	storyName: 'ContributionsLiveblogEpic with Reminder CTA',
+	name: 'ContributionsLiveblogEpic with Reminder CTA',
 	args: {
 		...meta.args,
 		variant: {
