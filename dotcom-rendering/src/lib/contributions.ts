@@ -21,8 +21,6 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 //  Local storage keys
 const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
 const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
-/** @deprecated */
-const NO_RR_BANNER_TIMESTAMP_KEY = 'gu.noRRBannerTimestamp'; // timestamp of when we were last told not to show a RR banner
 const NO_RR_BANNER_KEY = 'gu.noRRBanner';
 
 // See https://github.com/guardian/support-dotcom-components/blob/main/module-versions.md
@@ -217,36 +215,12 @@ export const hasCmpConsentForBrowserId = (): Promise<boolean> =>
 		});
 	});
 
-/**
- * This is used for old keys that were set using localStorage
- * directly instead of the using the @guardian/libs storage class
- */
-const getBannerTimestamp = (): number | undefined => {
-	try {
-		// eslint-disable-next-line no-restricted-syntax -- we need to handle old keys
-		const item = localStorage.getItem(NO_RR_BANNER_TIMESTAMP_KEY);
-		if (!item) return;
-		const timestamp = parseInt(item, 10);
-		if (Number.isNaN(timestamp)) return;
-		return timestamp;
-	} catch (error) {
-		console.error(error);
-	}
-	return;
-};
-
 const twentyMins = 20 * 60000;
-export const withinLocalNoBannerCachePeriod = (): boolean => {
-	const timestamp = getBannerTimestamp();
-	if (typeof timestamp === 'number') {
-		setLocalNoBannerCachePeriod(timestamp);
-	}
+export const withinLocalNoBannerCachePeriod = (): boolean =>
+	!!storage.local.get(NO_RR_BANNER_KEY);
 
-	return !!storage.local.get(NO_RR_BANNER_KEY);
-};
-
-export const setLocalNoBannerCachePeriod = (timestamp = Date.now()): void =>
-	storage.local.set(NO_RR_BANNER_KEY, true, timestamp + twentyMins);
+export const setLocalNoBannerCachePeriod = (): void =>
+	storage.local.set(NO_RR_BANNER_KEY, true, Date.now() + twentyMins);
 
 // Returns true if banner was closed in the last hour
 const ONE_HOUR_IN_MS = 1000 * 60 * 60;
