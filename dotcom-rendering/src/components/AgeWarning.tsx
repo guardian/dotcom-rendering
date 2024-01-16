@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	palette as sourcePalette,
-	textSans,
-	visuallyHidden,
-} from '@guardian/source-foundations';
+import { from, textSans, visuallyHidden } from '@guardian/source-foundations';
 import { palette } from '../palette';
 import ClockIcon from '../static/icons/clock.svg';
 
@@ -16,7 +11,7 @@ type Props = {
 
 const ageWarningStyles = (isSmall: boolean) => css`
 	${isSmall ? textSans.xxsmall() : textSans.medium()};
-	color: ${sourcePalette.neutral[7]};
+	color: ${palette('--age-warning-text')};
 	background-color: ${palette('--age-warning-background')};
 	display: inline-block;
 

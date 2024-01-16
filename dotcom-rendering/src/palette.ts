@@ -3865,6 +3865,7 @@ const ageWarningBackgroundLight: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
 const ageWarningBackgroundDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
+const ageWarningText: PaletteFunction = () => sourcePalette.neutral[7];
 
 const articleTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const articleTextDark: PaletteFunction = () => sourcePalette.neutral[86];
@@ -5429,6 +5430,10 @@ const paletteColours = {
 	'--age-warning-background': {
 		light: ageWarningBackgroundLight,
 		dark: ageWarningBackgroundDark,
+	},
+	'--age-warning-text': {
+		light: ageWarningText,
+		dark: ageWarningText,
 	},
 	'--series-title-background': {
 		light: seriesTitleBackgroundLight,
