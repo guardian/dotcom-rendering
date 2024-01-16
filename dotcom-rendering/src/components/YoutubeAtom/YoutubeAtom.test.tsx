@@ -28,7 +28,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="123"
+					elementId={123}
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -58,7 +58,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="123"
+					elementId={123}
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -97,7 +97,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="123"
+					elementId={123}
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -128,7 +128,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="123"
+					elementId={123}
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -161,7 +161,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="123"
+					elementId={123}
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -192,7 +192,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="123"
+					elementId={123}
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -222,7 +222,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="123"
+					elementId={123}
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -256,7 +256,7 @@ describe('YoutubeAtom', () => {
 					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 				>
 					<YoutubeAtom
-						elementId="123"
+						elementId={123}
 						title="My Youtube video!"
 						videoId="ZCvZmYlQD8"
 						alt=""
@@ -274,7 +274,7 @@ describe('YoutubeAtom', () => {
 						abTestParticipations={{}}
 					/>
 					<YoutubeAtom
-						elementId="123"
+						elementId={123}
 						title="My Youtube video 2!"
 						videoId="ZCvZmYlQD8"
 						alt=""

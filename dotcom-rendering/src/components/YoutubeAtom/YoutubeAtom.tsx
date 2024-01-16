@@ -1,7 +1,7 @@
 import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import type { ArticleFormat } from '@guardian/libs';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
 import type { VideoCategory } from './YoutubeAtomOverlay';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
@@ -21,8 +21,8 @@ export type VideoEventKey =
 	| 'pause';
 
 type Props = {
-	elementId: string;
 	videoId: string;
+	elementId: 'server' | number;
 	overrideImage?: string | undefined;
 	posterImage?: string | undefined;
 	adTargeting?: AdTargeting;
@@ -134,16 +134,21 @@ export const YoutubeAtom = ({
 	 */
 	const showPlaceholder = (!hasOverlay || overlayClicked) && !playerReady;
 
-	let loadPlayer;
-	if (!hasOverlay) {
-		// load the player if there is no overlay
-		loadPlayer = true;
-	} else if (overlayClicked) {
-		// load the player if the overlay has been clicked
-		loadPlayer = true;
-	} else {
-		loadPlayer = false;
-	}
+	const [loadPlayer, setLoadPlayer] = useState<boolean>(false);
+	useEffect(() => {
+		if (elementId === 'server') {
+			// We may never load the player on the server
+			return;
+		}
+
+		if (!hasOverlay) {
+			// load the player if there is no overlay
+			setLoadPlayer(true);
+		} else if (overlayClicked) {
+			// load the player if the overlay has been clicked
+			setLoadPlayer(true);
+		}
+	}, [elementId, hasOverlay, overlayClicked]);
 
 	/**
 	 * Create a stable callback as it will be a useEffect dependency in YoutubeAtomPlayer
