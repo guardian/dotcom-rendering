@@ -498,12 +498,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 							</div>
 						</Column>
 					</Columns>
-
-					<Hide until="desktop">
-						<div css={topMarginStyle()}>
-							<NewsletterPrivacyMessage />
-						</div>
-					</Hide>
 				</Section>
 
 				{article.storyPackage && (
