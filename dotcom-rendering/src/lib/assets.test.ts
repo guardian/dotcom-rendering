@@ -16,13 +16,9 @@ jest.mock('node:path');
 describe('decideAssetOrigin for stage', () => {
 	it('PROD', () => {
 		expect(decideAssetOrigin('PROD')).toEqual('https://assets.guim.co.uk/');
-		expect(decideAssetOrigin('PROD')).toEqual('https://assets.guim.co.uk/');
 		expect(decideAssetOrigin('prod')).toEqual('https://assets.guim.co.uk/');
 	});
 	it('CODE', () => {
-		expect(decideAssetOrigin('CODE')).toEqual(
-			'https://assets-code.guim.co.uk/',
-		);
 		expect(decideAssetOrigin('CODE')).toEqual(
 			'https://assets-code.guim.co.uk/',
 		);
@@ -32,6 +28,7 @@ describe('decideAssetOrigin for stage', () => {
 	});
 	it('DEV', () => {
 		expect(decideAssetOrigin('DEV')).toEqual('/');
+		expect(decideAssetOrigin('dev')).toEqual('/');
 		expect(decideAssetOrigin(undefined)).toEqual('/');
 	});
 });
