@@ -3861,7 +3861,7 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const ageWarningBackground: PaletteFunction = (format) => {
+const ageWarningWrapperBackground: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.Interview:
 			return articleBackgroundLight(format);
@@ -3869,6 +3869,12 @@ const ageWarningBackground: PaletteFunction = (format) => {
 			return headlineBackgroundLight(format);
 	}
 };
+const ageWarningBackgroundLight: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const ageWarningBackgroundDark: PaletteFunction = () =>
+	sourcePalette.brandAlt[200];
+const ageWarningText: PaletteFunction = () => sourcePalette.neutral[7];
+
 const articleTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const articleTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
@@ -5429,9 +5435,17 @@ const paletteColours = {
 		light: richLinkBorderLight,
 		dark: richLinkBorderDark,
 	},
+	'--age-warning-wrapper-background': {
+		light: ageWarningWrapperBackground,
+		dark: ageWarningWrapperBackground,
+	},
 	'--age-warning-background': {
-		light: ageWarningBackground,
-		dark: ageWarningBackground,
+		light: ageWarningBackgroundLight,
+		dark: ageWarningBackgroundDark,
+	},
+	'--age-warning-text': {
+		light: ageWarningText,
+		dark: ageWarningText,
 	},
 	'--series-title-background': {
 		light: seriesTitleBackgroundLight,
