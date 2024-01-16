@@ -28,7 +28,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="xyz"
+					elementId="123"
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -47,8 +47,8 @@ describe('YoutubeAtom', () => {
 				/>
 			</ConfigProvider>
 		);
-		const { getByTestId } = render(atom);
-		const playerDiv = getByTestId('youtube-video-ZCvZmYlQD8-xyz');
+		const { getAllByTestId } = render(atom);
+		const [playerDiv] = getAllByTestId(/^youtube-video-ZCvZmYlQD8-\d+$/);
 		expect(playerDiv).toBeInTheDocument();
 	});
 
@@ -58,7 +58,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="xyz"
+					elementId="123"
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -78,14 +78,14 @@ describe('YoutubeAtom', () => {
 				/>
 			</ConfigProvider>
 		);
-		const { getByTestId } = render(atom);
-		const overlay = getByTestId('youtube-overlay-ZCvZmYlQD8-xyz');
+		const { getAllByTestId } = render(atom);
+		const [overlay] = getAllByTestId(/^youtube-overlay-ZCvZmYlQD8-\d+$/);
 		expect(overlay).toBeInTheDocument();
 
-		fireEvent.click(getByTestId('youtube-overlay-ZCvZmYlQD8-xyz'));
+		overlay && fireEvent.click(overlay);
 		expect(overlay).not.toBeInTheDocument();
 
-		const playerDiv = getByTestId('youtube-video-ZCvZmYlQD8-xyz');
+		const [playerDiv] = getAllByTestId(/^youtube-video-ZCvZmYlQD8-\d+$/);
 		expect(playerDiv).toBeInTheDocument();
 	});
 
@@ -97,7 +97,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="xyz"
+					elementId="123"
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -116,9 +116,9 @@ describe('YoutubeAtom', () => {
 				/>
 			</ConfigProvider>
 		);
-		const { getByTestId } = render(atom);
-		const playerDiv = getByTestId('youtube-video-ZCvZmYlQD8-xyz');
-		expect(playerDiv.title).toBe(title);
+		const { getAllByTestId } = render(atom);
+		const [playerDiv] = getAllByTestId(/^youtube-video-ZCvZmYlQD8-\d+$/);
+		expect(playerDiv?.title).toBe(title);
 	});
 
 	it('overlay has correct aria-label', () => {
@@ -128,7 +128,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="xyz"
+					elementId="123"
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -148,9 +148,9 @@ describe('YoutubeAtom', () => {
 				/>
 			</ConfigProvider>
 		);
-		const { getByTestId } = render(atom);
-		const overlay = getByTestId('youtube-overlay-ZCvZmYlQD8-xyz');
-		const ariaLabel = overlay.getAttribute('aria-label');
+		const { getAllByTestId } = render(atom);
+		const [overlay] = getAllByTestId(/^youtube-overlay-ZCvZmYlQD8-\d+$/);
+		const ariaLabel = overlay?.getAttribute('aria-label');
 
 		expect(ariaLabel).toBe(`Play video: ${title}`);
 	});
@@ -161,7 +161,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="xyz"
+					elementId="123"
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -179,8 +179,10 @@ describe('YoutubeAtom', () => {
 				/>
 			</ConfigProvider>
 		);
-		const { getByTestId } = render(atom);
-		const placeholder = getByTestId('youtube-placeholder-ZCvZmYlQD8-xyz');
+		const { getAllByTestId } = render(atom);
+		const [placeholder] = getAllByTestId(
+			/^youtube-placeholder-ZCvZmYlQD8-\d+$/,
+		);
 		expect(placeholder).toBeInTheDocument();
 	});
 
@@ -190,7 +192,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="xyz"
+					elementId="123"
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -209,8 +211,8 @@ describe('YoutubeAtom', () => {
 				/>
 			</ConfigProvider>
 		);
-		const { getByTestId } = render(atom);
-		const overlay = getByTestId('youtube-overlay-ZCvZmYlQD8-xyz');
+		const { getAllByTestId } = render(atom);
+		const [overlay] = getAllByTestId(/^youtube-overlay-ZCvZmYlQD8-\d+$/);
 		expect(overlay).toBeInTheDocument();
 	});
 
@@ -220,7 +222,7 @@ describe('YoutubeAtom', () => {
 				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 			>
 				<YoutubeAtom
-					elementId="xyz"
+					elementId="123"
 					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
 					alt=""
@@ -239,11 +241,11 @@ describe('YoutubeAtom', () => {
 				/>
 			</ConfigProvider>
 		);
-		const { getByTestId } = render(atom);
-		const overlay = getByTestId('youtube-overlay-ZCvZmYlQD8-xyz');
+		const { getAllByTestId } = render(atom);
+		const [overlay] = getAllByTestId(/^youtube-overlay-ZCvZmYlQD8-\d+$/);
 		expect(overlay).toBeInTheDocument();
 
-		fireEvent.click(getByTestId('youtube-overlay-ZCvZmYlQD8-xyz'));
+		overlay && fireEvent.click(overlay);
 		expect(overlay).not.toBeInTheDocument();
 	});
 
@@ -254,7 +256,7 @@ describe('YoutubeAtom', () => {
 					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
 				>
 					<YoutubeAtom
-						elementId="xyz"
+						elementId="123"
 						title="My Youtube video!"
 						videoId="ZCvZmYlQD8"
 						alt=""
@@ -272,9 +274,9 @@ describe('YoutubeAtom', () => {
 						abTestParticipations={{}}
 					/>
 					<YoutubeAtom
-						elementId="xyz"
+						elementId="123"
 						title="My Youtube video 2!"
-						videoId="ZCvZmYlQD8_2"
+						videoId="ZCvZmYlQD8"
 						alt=""
 						adTargeting={{ disableAds: true }}
 						eventEmitters={[]}
@@ -292,14 +294,15 @@ describe('YoutubeAtom', () => {
 				</ConfigProvider>
 			</>
 		);
-		const { getByTestId } = render(atom);
-		const overlay1 = getByTestId('youtube-overlay-ZCvZmYlQD8-xyz');
+		const { getAllByTestId } = render(atom);
+		const [overlay1, overlay2] = getAllByTestId(
+			/^youtube-overlay-ZCvZmYlQD8-\d+$/,
+		);
 		expect(overlay1).toBeInTheDocument();
 
-		fireEvent.click(getByTestId('youtube-overlay-ZCvZmYlQD8-xyz'));
+		overlay1 && fireEvent.click(overlay1);
 		expect(overlay1).not.toBeInTheDocument();
 
-		const overlay2 = getByTestId(`youtube-overlay-ZCvZmYlQD8_2-xyz`);
 		expect(overlay2).toBeInTheDocument();
 	});
 });
