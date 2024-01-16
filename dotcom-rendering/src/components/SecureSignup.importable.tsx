@@ -52,7 +52,6 @@ const flexParentStyles = css`
 `;
 
 const inputContainerStyles = css`
-	margin-right: ${space[3]}px;
 	margin-bottom: ${space[2]}px;
 	flex-shrink: 1;
 `;
@@ -360,6 +359,9 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 							css`
 								flex-basis: ${!signedInUserEmail
 									? '335px'
+									: '0'};
+								margin-right: ${!signedInUserEmail
+									? `${space[3]}px`
 									: '0'};
 							`,
 						]}
