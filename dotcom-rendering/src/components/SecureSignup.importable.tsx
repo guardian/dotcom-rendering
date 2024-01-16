@@ -1,15 +1,17 @@
 import { css } from '@emotion/react';
 import type { OphanAction } from '@guardian/libs';
-import { palette, space, until } from '@guardian/source-foundations';
+import { space, textSans, until } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
 	InlineSuccess,
+	Label,
 	Link,
 	SvgReload,
 	SvgSpinner,
+	TextInput,
 } from '@guardian/source-react-components';
-import type { ReactEventHandler } from 'react';
+import type { FormEvent, ReactEventHandler } from 'react';
 import { useEffect, useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
@@ -17,10 +19,9 @@ import { useEffect, useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
-import { useHydrated } from '../lib/useHydrated';
+import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
-import { Placeholder } from './Placeholder';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
@@ -31,17 +32,64 @@ import { Placeholder } from './Placeholder';
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
 type Props = {
-	name: string;
-	styles: string;
-	html: string;
 	newsletterId: string;
 	successDescription: string;
 };
 
-// The ts.dom interface for FontFaceSet does not contain the .add method
-type FontFaceSetWithAdd = FontFaceSet & {
-	add?: { (font: FontFace): void };
-};
+const labelStyles = css`
+	div {
+		${textSans.xsmall({ fontWeight: 'bold' })}
+		color: ${palette('--article-text')};
+		padding-bottom: ${space[1]}px;
+	}
+`;
+
+const flexParentStyles = css`
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	flex-wrap: wrap;
+`;
+
+const inputContainerStyles = css`
+	margin-right: ${space[3]}px;
+	margin-bottom: ${space[2]}px;
+	flex-shrink: 1;
+`;
+
+const textInputStyles = css`
+	height: 36px;
+	margin-top: 0;
+	background-color: ${palette('--article-section-background')};
+	color: ${palette('--article-text')};
+`;
+
+const buttonCssOverrides = css`
+	justify-content: center;
+	background-color: ${palette('--recaptcha-button')};
+	color: ${palette('--recaptcha-button-text')};
+	:hover {
+		background-color: ${palette('--recaptcha-button-hover')};
+	}
+	flex-basis: 118px;
+	flex-shrink: 0;
+	margin-bottom: ${space[2]}px;
+`;
+
+const errorContainerStyles = css`
+	display: flex;
+	align-items: flex-start;
+	${until.tablet} {
+		flex-wrap: wrap;
+	}
+	button {
+		margin-left: ${space[1]}px;
+		background-color: ${palette('--recaptcha-button')};
+		:hover {
+			background-color: ${palette('--recaptcha-button-hover')};
+		}
+	}
+`;
 
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
@@ -87,6 +135,14 @@ const buildFormData = (
 	}
 
 	return formData;
+};
+
+const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
+	const { idApiUrl } = window.guardian.config.page;
+	if (!idApiUrl) return;
+	const fetchedEmail = await lazyFetchEmailWithTimeout(idApiUrl)();
+	if (!fetchedEmail) return;
+	return fetchedEmail;
 };
 
 const postFormData = async (
@@ -168,9 +224,10 @@ const sendTracking = (
 		{
 			action,
 			value,
+			//check if this can be used or needs to be added
 			component: {
 				componentType: 'NEWSLETTER_SUBSCRIPTION',
-				id: `DCR SecureSignupIframe ${newsletterId}`,
+				id: `AR SecureSignup ${newsletterId}`,
 			},
 		},
 		renderingTarget,
@@ -178,10 +235,7 @@ const sendTracking = (
 };
 
 /**
- * A descendent of `EmailSignup` used to prevent users from entering their email
- * on the same page as the one we run third-party scripts on.
- *
- * ## Why does this need to be an Island?
+ * # Secure Signup
  *
  * We can only inject ReCAPTCHA client-side, and need to respond to user input.
  *
@@ -189,18 +243,10 @@ const sendTracking = (
  *
  * [`EmailSignup` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-emailsignup)
  */
-export const SecureSignupIframe = ({
-	name,
-	styles,
-	html,
-	newsletterId,
-	successDescription,
-}: Props) => {
-	const iframeRef = useRef<HTMLIFrameElement>(null);
+export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
-
-	const [iframeHeight, setIFrameHeight] = useState<number>(0);
+	const [signedInUserEmail, setSignedInUserEmail] = useState<string>();
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
@@ -209,22 +255,18 @@ export const SecureSignupIframe = ({
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
+
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
+		void resolveEmailIfSignedIn().then(setSignedInUserEmail);
 	}, []);
-
 	const { renderingTarget } = useConfig();
-
-	const hydrated = useHydrated();
-	if (!hydrated) return <Placeholder height={65} />;
 
 	const hasResponse = typeof responseOk === 'boolean';
 
 	const submitForm = async (token: string): Promise<void> => {
-		const { current: iframe } = iframeRef;
 		const input: HTMLInputElement | null =
-			iframe?.contentDocument?.querySelector('input[type="email"]') ??
-			null;
+			document.querySelector('input[type="email"]') ?? null;
 		const emailAddress: string = input?.value ?? '';
 
 		sendTracking(newsletterId, 'form-submission', renderingTarget);
@@ -275,30 +317,11 @@ export const SecureSignupIframe = ({
 		});
 	};
 
-	const resizeIframe = (requestedHeight = 0): void => {
-		const { current: iframe } = iframeRef;
-		if (!iframe) {
-			return;
-		}
-		// verifiying the body is present before accessing the scrollHeight is necessary
-		// iframe.contentDocument?.body.scrollHeight can cause a TypeError
-		// the typing assumes body is always present on a Document but the use of
-		// srcDoc seems to allow the document to exist without the body.
-
-		const body = iframe.contentDocument?.body;
-		const scrollHeight = body ? body.scrollHeight : 0;
-		setIFrameHeight(Math.max(0, requestedHeight, scrollHeight));
-	};
-
-	const resetIframeHeight = (): void => {
-		resizeIframe();
-	};
-
-	const handleClickInIFrame = (): void => {
+	const handleClick = (): void => {
 		sendTracking(newsletterId, 'click-button', renderingTarget);
 	};
 
-	const handleSubmitInIFrame = (event: Event): void => {
+	const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
 		if (isWaitingForResponse) {
 			return;
@@ -307,112 +330,66 @@ export const SecureSignupIframe = ({
 		sendTracking(newsletterId, 'open-captcha', renderingTarget);
 		recaptchaRef.current?.execute();
 	};
-
-	const attachListenersToIframe = () => {
-		const { current: iframe } = iframeRef;
-		iframe?.contentWindow?.addEventListener('resize', resetIframeHeight);
-		const form = iframe?.contentDocument?.querySelector('form');
-		const button = iframe?.contentDocument?.querySelector('button');
-		button?.addEventListener('click', handleClickInIFrame);
-		form?.addEventListener('submit', handleSubmitInIFrame);
-		resetIframeHeight();
-	};
-
-	const autofillEmailIfSignedIn = async () => {
-		const { idApiUrl } = window.guardian.config.page;
-		const fetchEmail = idApiUrl
-			? lazyFetchEmailWithTimeout(idApiUrl)
-			: undefined;
-		if (!fetchEmail) return;
-
-		const email = await fetchEmail();
-		if (!email) return;
-
-		const { current: iframe } = iframeRef;
-		if (!iframe) return;
-
-		const emailFormField = iframe.contentDocument?.querySelector(
-			'input[name="email"]',
-		);
-		const signUpButton = iframe.contentDocument?.querySelector(
-			'button[type="submit"]',
-		);
-		const labelNodeList = iframe.contentDocument?.querySelectorAll('label');
-
-		labelNodeList &&
-			[...labelNodeList].map((labelNode: HTMLLabelElement) =>
-				labelNode.setAttribute('hidden', 'true'),
-			);
-		emailFormField?.setAttribute('style', 'display: none;');
-		emailFormField?.parentElement?.setAttribute(
-			'style',
-			'flex-basis: 0; margin: 0;',
-		);
-		signUpButton?.setAttribute('style', `margin-top: ${space[2]}px;`);
-		emailFormField?.setAttribute('value', email);
-	};
-
-	const addFontsToIframe = (requiredFontNames: string[]) => {
-		const { current: iframe } = iframeRef;
-
-		// FontFace.add is not supported (IE), allow fallback to system fonts
-		const iframeFontFaceSet = iframe?.contentDocument?.fonts as
-			| undefined
-			| FontFaceSetWithAdd;
-		if (!iframeFontFaceSet?.add) {
-			return;
-		}
-
-		// get all the fontFaces on the parent matching the list of font names
-		const requiredFonts: FontFace[] = [];
-		for (const fontFace of document.fonts) {
-			if (requiredFontNames.includes(fontFace.family)) {
-				requiredFonts.push(fontFace);
-			}
-		}
-
-		// add the fonts to the iframe
-		for (const font of requiredFonts) {
-			try {
-				iframeFontFaceSet.add(font);
-			} catch (error) {
-				// Safari throws an InvalidModificationError
-				// https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/add#exceptions
-			}
-		}
-	};
-
-	const onIFrameLoad = (): void => {
-		attachListenersToIframe();
-		addFontsToIframe(['GuardianTextSans']);
-		void autofillEmailIfSignedIn();
-	};
-
 	return (
 		<>
-			<iframe
-				title={`Sign up to ${name}`}
-				ref={iframeRef}
-				css={css`
-					width: 100%;
-					min-height: 65px;
-					overflow: hidden;
-				`}
-				style={{
-					height: iframeHeight,
-					display:
-						hasResponse || isWaitingForResponse ? 'none' : 'block',
-				}}
-				srcDoc={`
-				<html>
-					<head>
-						${styles}
-					</head>
-					<body style="margin: 0; overflow:hidden;">${html}</body>
-				</html>`}
-				onLoad={onIFrameLoad}
-			/>
+			<form
+				onSubmit={handleSubmit}
+				id={`secure-signup-${newsletterId}`}
+				style={
+					hasResponse || isWaitingForResponse
+						? { display: 'none' }
+						: { display: 'block' }
+				}
+			>
+				<Label
+					text="Enter your email address"
+					cssOverrides={[
+						labelStyles,
+						css`
+							display: ${!signedInUserEmail
+								? 'inline-block'
+								: 'none'};
+						`,
+					]}
+				/>
 
+				<div css={flexParentStyles}>
+					<div
+						css={[
+							inputContainerStyles,
+							css`
+								flex-basis: ${!signedInUserEmail
+									? '335px'
+									: '0'};
+							`,
+						]}
+					>
+						<TextInput
+							hideLabel={true}
+							name="email"
+							label="Enter your email address"
+							type="email"
+							value={signedInUserEmail}
+							cssOverrides={[
+								textInputStyles,
+								css`
+									display: ${!signedInUserEmail
+										? 'inline-block'
+										: 'none'};
+								`,
+							]}
+						/>
+					</div>
+					<Button
+						onClick={handleClick}
+						size="small"
+						type="submit"
+						cssOverrides={buttonCssOverrides}
+					>
+						Sign up
+					</Button>
+				</div>
+			</form>
 			{isWaitingForResponse && (
 				<div>
 					<SvgSpinner isAnnouncedByScreenReader={true} size="small" />
@@ -427,22 +404,7 @@ export const SecureSignupIframe = ({
 						<SuccessMessage text={successDescription} />
 					</div>
 				) : (
-					<div
-						css={css`
-							display: flex;
-							align-items: flex-start;
-							${until.tablet} {
-								flex-wrap: wrap;
-							}
-							button {
-								margin-left: ${space[1]}px;
-								background-color: ${palette.neutral[0]};
-								:hover {
-									background-color: ${palette.neutral[20]};
-								}
-							}
-						`}
-					>
+					<div css={errorContainerStyles}>
 						<ErrorMessageWithAdvice text={`Sign up failed.`} />
 						<Button
 							size="small"
