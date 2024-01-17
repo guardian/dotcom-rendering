@@ -87,7 +87,7 @@ const getLargestImageSize = (
 ) => [...images].sort((a, b) => a.width - b.width).pop();
 
 /** always undefined on the server */
-let index: number | undefined;
+let counter: number | undefined;
 
 export const YoutubeBlockComponent = ({
 	id,
@@ -122,11 +122,11 @@ export const YoutubeBlockComponent = ({
 		abTestsApi?.isUserInVariant('IntegrateIma', 'variant') ?? false;
 	const abTestParticipations = abTests?.participations ?? {};
 
-	const [elementId, setElementId] = useState<number>();
+	const [index, setIndex] = useState<number>();
 
 	useEffect(() => {
-		index ??= 0;
-		setElementId(++index);
+		counter ??= 0;
+		setIndex(++counter);
 	}, []);
 
 	useEffect(() => {
@@ -208,7 +208,7 @@ export const YoutubeBlockComponent = ({
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
 			<YoutubeAtom
-				elementId={elementId ?? 'server'}
+				index={index}
 				videoId={assetId}
 				overrideImage={overrideImage}
 				posterImage={getLargestImageSize(posterImage)?.url}
