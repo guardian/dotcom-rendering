@@ -1,6 +1,6 @@
 import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import { type ArticleFormat, isUndefined } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { useCallback, useState } from 'react';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
 import type { VideoCategory } from './YoutubeAtomOverlay';
@@ -21,7 +21,7 @@ export type VideoEventKey =
 	| 'pause';
 
 type Props = {
-	index?: number;
+	elementId: string;
 	videoId: string;
 	overrideImage?: string | undefined;
 	posterImage?: string | undefined;
@@ -46,7 +46,7 @@ type Props = {
 };
 
 export const YoutubeAtom = ({
-	index,
+	elementId,
 	videoId,
 	overrideImage,
 	posterImage,
@@ -75,7 +75,7 @@ export const YoutubeAtom = ({
 	const [isClosed, setIsClosed] = useState<boolean>(false);
 	const [pauseVideo, setPauseVideo] = useState<boolean>(false);
 
-	const uniqueId = `${videoId}-${index ?? 'server'}`;
+	const uniqueId = `${videoId}-${elementId}`;
 	const enableIma =
 		imaEnabled &&
 		!!adTargeting &&
@@ -142,10 +142,6 @@ export const YoutubeAtom = ({
 		// load the player if the overlay has been clicked
 		loadPlayer = true;
 	} else {
-		loadPlayer = false;
-	}
-
-	if (isUndefined(index)) {
 		loadPlayer = false;
 	}
 

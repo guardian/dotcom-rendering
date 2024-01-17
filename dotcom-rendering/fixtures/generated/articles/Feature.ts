@@ -1455,6 +1455,7 @@ export const Feature: DCRArticle = {
 			duration: 207,
 			altText:
 				"Press Room - 92nd Academy Awards<br>epa08208148 Joaquin Phoenix poses in the press room with the Oscar for Best Actor for his performance in 'Joker' during the 92nd annual Academy Awards ceremony at the Dolby Theatre in Hollywood, California, USA, 09 February 2020. The Oscars are presented for outstanding individual or collective efforts in filmmaking in 24 categories.  EPA/DAVID SWANSON",
+			elementId: 'c7aded24-44a0-42fb-bf42-94d2559c0a25',
 		},
 	],
 	canonicalUrl:
