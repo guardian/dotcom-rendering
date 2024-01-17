@@ -76,7 +76,7 @@ export const Analytics = ({
 									)
 									.replace(
 										'CONSENT_STRING',
-										'$EQUALS({consentState}, insufficient)',
+										'$EQUALS(${consentState}, sufficient)',
 									)
 									.toString()}"
 
@@ -95,7 +95,7 @@ export const Analytics = ({
 									)
 									.replace(
 										'CONSENT_STRING',
-										'$EQUALS({consentState}, sufficient)',
+										'$EQUALS(${consentState}, sufficient)',
 									)
 									.toString()}"
 
