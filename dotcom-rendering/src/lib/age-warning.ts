@@ -4,20 +4,33 @@ export const getAgeWarning = (
 	tags: TagType[],
 	webPublicationDate: string,
 ): string | undefined => {
-	const isRecipe = tags.some((t) => t.id === 'tone/recipes');
 	const isHelp = tags.some((t) => t.id === 'tone/help');
-	const isSignup = tags.some(
-		(t) => t.id === 'signup' || t.id === 'info/newsletter-sign-up',
-	);
+	const isInfo = tags.some((t) => t.id === 'info/info');
+	const isRecipe = tags.some((t) => t.id === 'tone/recipes');
 	const isSudoku = tags.some((t) => t.id === 'lifeandstyle/series/sudoku');
 	const isCrossword = tags.some((t) => t.id === 'crossword');
 	const isKakuro = tags.some((t) => t.id === 'lifeandstyle/series/kakuro');
+	const isScottTrust = tags.some(
+		(t) => t.id === 'the-scott-trust/the-scott-trust',
+	);
+	const isSignup = tags.some(
+		(t) => t.id === 'signup' || t.id === 'info/newsletter-sign-up',
+	);
 
 	let message;
 
 	// Only show an age warning for news or opinion pieces
 	if (
-		!(isRecipe || isHelp || isSignup || isSudoku || isCrossword || isKakuro)
+		!(
+			isHelp ||
+			isInfo ||
+			isScottTrust ||
+			isSignup ||
+			isRecipe ||
+			isSudoku ||
+			isCrossword ||
+			isKakuro
+		)
 	) {
 		const warnLimitDays = 30;
 		const currentDate = new Date();
