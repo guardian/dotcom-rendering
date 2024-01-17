@@ -98,8 +98,9 @@ export const CommentContainer = ({
 	 */
 	const decideShowMoreText = (responseCount: number) => {
 		const remainingResponses = responseCount - 3;
-		if (remainingResponses === 1) return `Show 1 more reply`;
-		return `Show ${remainingResponses} more replies`;
+		return remainingResponses === 1
+			? `Show 1 more reply`
+			: `Show ${remainingResponses} more replies`;
 	};
 
 	useEffect(() => {
@@ -117,6 +118,9 @@ export const CommentContainer = ({
 				setLoading(false);
 			});
 	};
+
+	const addComment = (response: CommentType) =>
+		setResponses([...responses, response]);
 
 	return (
 		<div css={[commentToScrollTo === comment.id && selectedStyles]}>
@@ -209,9 +213,7 @@ export const CommentContainer = ({
 							/>
 							<CommentForm
 								shortUrl={shortUrl}
-								onAddComment={(response) =>
-									setResponses([...responses, response])
-								}
+								onAddComment={addComment}
 								user={user}
 								setCommentBeingRepliedTo={
 									setCommentBeingRepliedTo
