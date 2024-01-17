@@ -35,7 +35,6 @@ type Props = {
 	baseUrl: string;
 	isClosedForComments: boolean;
 	commentToScrollTo?: number;
-	initialPage?: number;
 	pageSizeOverride?: PageSizeType;
 	orderByOverride?: OrderByType;
 	user?: SignedInUser;
@@ -53,7 +52,8 @@ type Props = {
 	onPreview?: (body: string) => Promise<string>;
 	onExpand: () => void;
 	idApiUrl: string;
-	parentPage?: string;
+	page: number;
+	setPage: (page: number) => void;
 };
 
 const footerStyles = css`
@@ -186,7 +186,6 @@ export const Comments = ({
 	baseUrl,
 	shortUrl,
 	isClosedForComments,
-	initialPage,
 	commentToScrollTo,
 	pageSizeOverride,
 	orderByOverride,
@@ -201,7 +200,8 @@ export const Comments = ({
 	onPreview,
 	onExpand,
 	idApiUrl,
-	parentPage,
+	page,
+	setPage,
 }: Props) => {
 	const [filters, setFilters] = useState<FilterOptions>(
 		initialiseFilters({
@@ -216,7 +216,6 @@ export const Comments = ({
 
 	const [loading, setLoading] = useState<boolean>(true);
 	const [totalPages, setTotalPages] = useState<number>(0);
-	const [page, setPage] = useState<number>(initialPage ?? 1);
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
 		useState<CommentType>();
@@ -278,14 +277,6 @@ export const Comments = ({
 		});
 	}, [pageSizeOverride, orderByOverride]);
 
-	// Keep initialPage prop in sync with page
-	useEffect(() => {
-		if (initialPage !== undefined) setPage(initialPage);
-		// We added commentToScrollTo to the deps here because the initialPage alone wasn't triggered the effect
-		// and we want to ensure the discussion rerenders with the right page when the reader clicks Jump To Comment
-		// for a comment on a different page
-	}, [initialPage, commentToScrollTo]);
-
 	// Check if there is a comment to scroll to and if
 	// so, scroll to the div with this id.
 	// We need to do this in javascript like this because the comments list isn't
@@ -327,7 +318,7 @@ export const Comments = ({
 		onExpand();
 		const element = document.getElementById('comment-filters');
 		element?.scrollIntoView();
-	}, [page]);
+	}, [page, onExpand]);
 
 	const toggleMuteStatus = (userId: string) => {
 		let updatedMutes;

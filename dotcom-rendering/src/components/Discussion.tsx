@@ -66,7 +66,7 @@ export const Discussion = ({
 	user,
 	idApiUrl,
 }: Props) => {
-	const [commentPage, setCommentPage] = useState<number>();
+	const [page, setPage] = useState<number>(1);
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
 	const [commentOrderBy, setCommentOrderBy] = useState<
 		'newest' | 'oldest' | 'recommendations'
@@ -101,7 +101,7 @@ export const Discussion = ({
 		if (hashCommentId !== undefined) {
 			getCommentContext(discussionApiUrl, hashCommentId)
 				.then((context) => {
-					setCommentPage(context.page);
+					setPage(context.page);
 					setCommentPageSize(context.pageSize);
 					setCommentOrderBy(context.orderBy);
 					setIsExpanded(true);
@@ -160,7 +160,6 @@ export const Discussion = ({
 					<Comments
 						user={user}
 						baseUrl={discussionApiUrl}
-						initialPage={commentPage}
 						pageSizeOverride={commentPageSize}
 						isClosedForComments={
 							!!isClosedForComments || !enableDiscussionSwitch
@@ -179,6 +178,8 @@ export const Discussion = ({
 							setIsExpanded(true);
 						}}
 						idApiUrl={idApiUrl}
+						page={page}
+						setPage={setPage}
 					/>
 					{!isExpanded && (
 						<div id="discussion-overlay" css={overlayStyles} />
