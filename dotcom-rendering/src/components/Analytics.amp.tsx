@@ -14,6 +14,14 @@ type Props = {
 	analytics: AnalyticsModel;
 };
 
+const componentEvent = encodeURI(
+	JSON.stringify({
+		consentJurisdiction: 'CONTENT_JURISDICTION',
+		consentUUID: 'CLIENT_ID',
+		consent: 'CONSENT_STRING',
+	}),
+);
+
 export const Analytics = ({
 	analytics: {
 		gaTracker,
@@ -42,7 +50,17 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-tcfv2",
 							"vars": {
-								"componentEvent": "%7B%22consentJurisdiction%22:%22TCF%22,%22consentUUID%22:%22\${clientId(consentUUID)}%22,%22consent%22:%22\${consentString}%22%7D"
+								"componentEvent": "${componentEvent
+									.replace('CONTENT_JURISDICTION', 'TCF')
+									.replace(
+										'CLIENT_ID',
+										'${clientId(consentUUID)}',
+									)
+									.replace(
+										'CONSENT_STRING',
+										'${consentString}',
+									)
+									.toString()}"
 							}
 						},
 						"trackPageviewCcpa": {
@@ -50,7 +68,18 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-ccpa",
 							"vars": {
-								"componentEvent": "%7B%22consentJurisdiction%22:%22CCPA%22,%22consentUUID%22:%22\${clientId(ccpaUUID)}%22,%22consent%22:%22\$EQUALS({consentState}, insufficient)%22%7D"
+								"componentEvent": "${componentEvent
+									.replace('CONTENT_JURISDICTION', 'CCPA')
+									.replace(
+										'CLIENT_ID',
+										'${clientId(ccpaUUID)}',
+									)
+									.replace(
+										'CONSENT_STRING',
+										'$EQUALS({consentState}, insufficient)',
+									)
+									.toString()}"
+
 							}
 						},
 						"trackPageviewAus": {
@@ -58,7 +87,18 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-aus",
 							"vars": {
-								"componentEvent": "%7B%22consentJurisdiction%22:%22AUS%22,%22consentUUID%22:%22\${clientId(ccpaUUID)}%22,%22consent%22:%22\$EQUALS({consentState}, sufficient)%22%7D"
+								"componentEvent": "${componentEvent
+									.replace('CONTENT_JURISDICTION', 'AUS')
+									.replace(
+										'CLIENT_ID',
+										'${clientId(ccpaUUID)}',
+									)
+									.replace(
+										'CONSENT_STRING',
+										'$EQUALS({consentState}, sufficient)',
+									)
+									.toString()}"
+
 							}
 						}
 					},
