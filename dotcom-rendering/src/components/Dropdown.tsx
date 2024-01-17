@@ -35,7 +35,6 @@ interface Props {
 	dataLinkName: string;
 	cssOverrides?: SerializedStyles;
 	children?: React.ReactNode;
-	defaultIsExpanded?: boolean;
 }
 
 const ulStyles = css`
@@ -390,9 +389,8 @@ export const Dropdown = ({
 	dataLinkName,
 	cssOverrides,
 	children,
-	defaultIsExpanded = false,
 }: Props) => {
-	const [isExpanded, setIsExpanded] = useState(defaultIsExpanded);
+	const [isExpanded, setIsExpanded] = useState(false);
 	const [noJS, setNoJS] = useState(true);
 	const [buttonRef, setButtonRef] = useState<HTMLButtonElement | null>(null);
 
