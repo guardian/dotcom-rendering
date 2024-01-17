@@ -47,11 +47,19 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 				return (
 					<>
 						<Hide until="leftCol">
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<Badge
+								imageSrc={logo.src}
+								href={logo.link}
+								isFrontNonEditorialBadge={true}
+							/>
 						</Hide>
 						<div css={titleStyle}>
 							<Hide from="leftCol">
-								<Badge imageSrc={logo.src} href={logo.link} />
+								<Badge
+									imageSrc={logo.src}
+									href={logo.link}
+									isFrontNonEditorialBadge={true}
+								/>
 							</Hide>
 							{title}
 						</div>
@@ -86,7 +94,11 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 							`}
 						>
 							Paid for by
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<Badge
+								imageSrc={logo.src}
+								href={logo.link}
+								isFrontNonEditorialBadge={true}
+							/>
 						</div>
 					</div>
 				);
@@ -95,11 +107,19 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 			return (
 				<>
 					<Hide until="leftCol">
-						<Badge imageSrc={logo.src} href={logo.link} />
+						<Badge
+							imageSrc={logo.src}
+							href={logo.link}
+							isFrontNonEditorialBadge={true}
+						/>
 					</Hide>
 					<div css={titleStyle}>
 						<Hide from="leftCol">
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<Badge
+								imageSrc={logo.src}
+								href={logo.link}
+								isFrontNonEditorialBadge={true}
+							/>
 						</Hide>
 						{title}
 					</div>
@@ -118,7 +138,11 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 						{title}
 						<>
 							<p css={labelStyles}>{logo.label}</p>
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<Badge
+								imageSrc={logo.src}
+								href={logo.link}
+								isFrontNonEditorialBadge={true}
+							/>
 							<a href={aboutThisLink} css={aboutThisLinkStyles}>
 								About this content
 							</a>
