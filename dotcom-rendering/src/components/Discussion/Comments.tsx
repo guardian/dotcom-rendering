@@ -53,6 +53,7 @@ type Props = {
 	onPreview?: (body: string) => Promise<string>;
 	onExpand: () => void;
 	idApiUrl: string;
+	parentPage?: string;
 };
 
 const footerStyles = css`
@@ -200,6 +201,7 @@ export const Comments = ({
 	onPreview,
 	onExpand,
 	idApiUrl,
+	parentPage,
 }: Props) => {
 	const [filters, setFilters] = useState<FilterOptions>(
 		initialiseFilters({
@@ -320,14 +322,12 @@ export const Comments = ({
 		onExpand();
 		setFilters(newFilterObject);
 	};
-
-	const onPageChange = (pageNumber: number) => {
+	useEffect(() => {
 		// Pagination also show when the view is not expanded so we want to expand when clicked
 		onExpand();
 		const element = document.getElementById('comment-filters');
 		element?.scrollIntoView();
-		setPage(pageNumber);
-	};
+	}, [page]);
 
 	const toggleMuteStatus = (userId: string) => {
 		let updatedMutes;
@@ -388,9 +388,7 @@ export const Comments = ({
 							<Pagination
 								totalPages={totalPages}
 								currentPage={page}
-								setCurrentPage={(newPage: number) => {
-									onPageChange(newPage);
-								}}
+								setCurrentPage={setPage}
 								commentCount={commentCount}
 								filters={filters}
 							/>
@@ -460,9 +458,7 @@ export const Comments = ({
 				<Pagination
 					totalPages={totalPages}
 					currentPage={page}
-					setCurrentPage={(newPage: number) => {
-						onPageChange(newPage);
-					}}
+					setCurrentPage={setPage}
 					commentCount={commentCount}
 					filters={filters}
 				/>
@@ -506,9 +502,7 @@ export const Comments = ({
 					<Pagination
 						totalPages={totalPages}
 						currentPage={page}
-						setCurrentPage={(newPage: number) => {
-							onPageChange(newPage);
-						}}
+						setCurrentPage={setPage}
 						commentCount={commentCount}
 						filters={filters}
 					/>
