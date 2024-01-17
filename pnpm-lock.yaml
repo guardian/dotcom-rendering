@@ -357,8 +357,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.3.102)(@types/node@18.18.14)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.3.3)
       '@guardian/commercial':
-        specifier: 11.32.1
-        version: 11.32.1(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@1.0.0)(@guardian/identity-auth@1.1.0)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.1.2)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3)
+        specifier: 12.0.0
+        version: 12.0.0(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@1.0.0)(@guardian/identity-auth@1.1.0)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.1.2)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3)
       '@guardian/consent-management-platform':
         specifier: 13.7.1
         version: 13.7.1(@guardian/libs@16.0.0)
@@ -4777,16 +4777,16 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@11.32.1(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@1.0.0)(@guardian/identity-auth@1.1.0)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.1.2)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3):
-    resolution: {integrity: sha512-wAw+9UJHR8BwEYeyhFDx/TbDb9MXjNrG7IVcA4x9WOTlrdCmVSbMXS5IpXABeoH1bhymqLR0Kif1DuOG7Y2Hag==}
+  /@guardian/commercial@12.0.0(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@1.0.0)(@guardian/identity-auth@1.1.0)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.1.2)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3):
+    resolution: {integrity: sha512-fKViYFmMcgMOfKWPFd5RT+zBlVwe52R0PGLDy1OaEobAwWYyt1h9uJYbMSFlXrwqGBoaiOXi8eXOQ6BaYgAy9Q==}
     peerDependencies:
-      '@guardian/ab-core': ^5.0.0
+      '@guardian/ab-core': ^7.0.1
       '@guardian/consent-management-platform': ^13.7.1
-      '@guardian/core-web-vitals': ^5.1.0
+      '@guardian/core-web-vitals': ^6.0.0
       '@guardian/identity-auth': ^1.0.0
       '@guardian/identity-auth-frontend': ^1.0.0
-      '@guardian/libs': ^15.6.4
-      '@guardian/source-foundations': ^13.0.0
+      '@guardian/libs': ^16.0.0
+      '@guardian/source-foundations': ^14.1.2
       '@guardian/support-dotcom-components': ^1.0.7
     dependencies:
       '@changesets/cli': 2.27.1
