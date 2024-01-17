@@ -13,6 +13,7 @@ import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 
 type Props = {
 	id: string;
+	elementId: string;
 	mediaTitle?: string;
 	altText?: string;
 	assetId: string;
@@ -86,11 +87,9 @@ const getLargestImageSize = (
 	}[],
 ) => [...images].sort((a, b) => a.width - b.width).pop();
 
-/** always undefined on the server */
-let counter: number | undefined;
-
 export const YoutubeBlockComponent = ({
 	id,
+	elementId,
 	assetId,
 	mediaTitle,
 	altText,
@@ -121,13 +120,6 @@ export const YoutubeBlockComponent = ({
 	const imaEnabled =
 		abTestsApi?.isUserInVariant('IntegrateIma', 'variant') ?? false;
 	const abTestParticipations = abTests?.participations ?? {};
-
-	const [index, setIndex] = useState<number>();
-
-	useEffect(() => {
-		counter ??= 0;
-		setIndex(++counter);
-	}, []);
 
 	useEffect(() => {
 		const defineConsentState = async () => {
@@ -208,7 +200,7 @@ export const YoutubeBlockComponent = ({
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
 			<YoutubeAtom
-				index={index}
+				elementId={elementId}
 				videoId={assetId}
 				overrideImage={overrideImage}
 				posterImage={getLargestImageSize(posterImage)?.url}
