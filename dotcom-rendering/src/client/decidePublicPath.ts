@@ -5,7 +5,9 @@
  */
 export const decidePublicPath = (): string => {
 	const isDev = process.env.NODE_ENV === 'development';
-	return isDev
+	const isLocalHost = window.location.hostname === 'localhost';
+	// Use relative path if running locally or in CI
+	return isDev || isLocalHost
 		? '/assets/'
 		: `${window.guardian.config.frontendAssetsFullURL}assets/`;
 };
