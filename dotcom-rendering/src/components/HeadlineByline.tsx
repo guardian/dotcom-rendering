@@ -36,7 +36,7 @@ const interviewBylineBoxStyles = (format: ArticleFormat) => css`
 	box-decoration-break: clone;
 
 	a {
-		color: ${schemedPalette('--interview-byline-anchor-colour')};
+		color: ${schemedPalette('--byline-anchor')};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
