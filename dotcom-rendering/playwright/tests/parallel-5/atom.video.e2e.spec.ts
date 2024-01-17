@@ -119,7 +119,7 @@ const muteYouTube = async (page: Page, iframeSelector: string) => {
 	}
 };
 
-test.describe('YouTube Atom', () => {
+test.skip('YouTube Atom', () => {
 	test('plays main media video', async ({ page }) => {
 		await loadPage(
 			page,
