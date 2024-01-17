@@ -1,15 +1,5 @@
-import type {
-	BlockquoteBlockElement,
-	CommentBlockElement,
-	FEElement,
-	ImageBlockElement,
-	RichLinkBlockElement,
-	SubheadingBlockElement,
-	TableBlockElement,
-	TextBlockElement,
-	TweetBlockElement,
-	YoutubeBlockElement,
-} from '../types/content';
+import { isOneOf } from '@guardian/libs';
+import type { FEElement } from '../types/content';
 
 /**
  * Maximum number of inline ads to display on liveblog pages.
@@ -42,7 +32,7 @@ type BlockElementTextData = {
 	lineLength: number; // approx number of characters that fit on a line
 };
 
-type BlockElementHeightData = {
+type BlockElementHeightData<ElementType extends KnownBlockElementType> = {
 	heightExcludingText: number;
 	heightExcludingTextMobile: number;
 	margin: number;
@@ -50,7 +40,7 @@ type BlockElementHeightData = {
 	| {
 			textHeight: BlockElementTextData;
 			textHeightMobile: BlockElementTextData;
-			text: (element: FEElement) => string;
+			text: (element: FEElement & { _type: ElementType }) => string;
 	  }
 	| {
 			textHeight?: never;
@@ -64,28 +54,30 @@ type BlockElementHeightData = {
  * it is possible to use (see FEElement type), but these other elements have not been
  * sighted in a liveblog page (and there's lots of them), so they are not considered for now.
  */
-type KnownBlockElementType =
-	| 'model.dotcomrendering.pageElements.BlockquoteBlockElement'
-	| 'model.dotcomrendering.pageElements.CommentBlockElement'
-	| 'model.dotcomrendering.pageElements.EmbedBlockElement'
-	| 'model.dotcomrendering.pageElements.GuideAtomBlockElement'
-	| 'model.dotcomrendering.pageElements.ImageBlockElement'
-	| 'model.dotcomrendering.pageElements.InteractiveBlockElement'
-	| 'model.dotcomrendering.pageElements.RichLinkBlockElement'
-	| 'model.dotcomrendering.pageElements.SubheadingBlockElement'
-	| 'model.dotcomrendering.pageElements.TableBlockElement'
-	| 'model.dotcomrendering.pageElements.TextBlockElement'
-	| 'model.dotcomrendering.pageElements.TweetBlockElement'
-	| 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement'
-	| 'model.dotcomrendering.pageElements.YoutubeBlockElement';
+const knownElementTypes = [
+	'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+	'model.dotcomrendering.pageElements.CommentBlockElement',
+	'model.dotcomrendering.pageElements.EmbedBlockElement',
+	'model.dotcomrendering.pageElements.GuideAtomBlockElement',
+	'model.dotcomrendering.pageElements.ImageBlockElement',
+	'model.dotcomrendering.pageElements.InteractiveBlockElement',
+	'model.dotcomrendering.pageElements.RichLinkBlockElement',
+	'model.dotcomrendering.pageElements.SubheadingBlockElement',
+	'model.dotcomrendering.pageElements.TableBlockElement',
+	'model.dotcomrendering.pageElements.TextBlockElement',
+	'model.dotcomrendering.pageElements.TweetBlockElement',
+	'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
+	'model.dotcomrendering.pageElements.YoutubeBlockElement',
+] as const satisfies readonly FEElement['_type'][];
+const isKnownElementType = isOneOf(knownElementTypes);
+
+type KnownBlockElementType = (typeof knownElementTypes)[number];
 
 /**
  * Approximations of the height of each type of block element in pixels.
  * "...Mobile" indicates the value is used for devices up to the tablet breakpoint."
  */
-const elementHeightDataMap: {
-	[key in KnownBlockElementType]: BlockElementHeightData;
-} = {
+const elementHeightDataMap = {
 	'model.dotcomrendering.pageElements.BlockquoteBlockElement': {
 		heightExcludingText: 0,
 		heightExcludingTextMobile: 0,
@@ -98,8 +90,7 @@ const elementHeightDataMap: {
 			lineHeight: 23.8,
 			lineLength: 40,
 		},
-		text: (element) =>
-			(element as BlockquoteBlockElement).html.replace(/<[^>]+>/g, ''),
+		text: (element) => element.html.replace(/<[^>]+>/g, ''),
 	},
 	'model.dotcomrendering.pageElements.CommentBlockElement': {
 		heightExcludingText: 68,
@@ -113,8 +104,7 @@ const elementHeightDataMap: {
 			lineHeight: 22,
 			lineLength: 40,
 		},
-		text: (element) =>
-			(element as CommentBlockElement).body.replace(/<[^>]+>/g, ''),
+		text: (element) => element.body.replace(/<[^>]+>/g, ''),
 	},
 	'model.dotcomrendering.pageElements.EmbedBlockElement': {
 		heightExcludingText: 178,
@@ -138,7 +128,7 @@ const elementHeightDataMap: {
 			lineHeight: 19,
 			lineLength: 45,
 		},
-		text: (element) => (element as ImageBlockElement).data.caption ?? '',
+		text: (element) => element.data.caption ?? '',
 	},
 	'model.dotcomrendering.pageElements.InteractiveBlockElement': {
 		heightExcludingText: 537,
@@ -157,7 +147,7 @@ const elementHeightDataMap: {
 			lineHeight: 19.5,
 			lineLength: 39,
 		},
-		text: (element) => (element as RichLinkBlockElement).text,
+		text: (element) => element.text,
 	},
 	'model.dotcomrendering.pageElements.SubheadingBlockElement': {
 		heightExcludingText: 0,
@@ -171,8 +161,7 @@ const elementHeightDataMap: {
 			lineHeight: 23,
 			lineLength: 31,
 		},
-		text: (element) =>
-			(element as SubheadingBlockElement).html.replace(/<[^>]+>/g, ''),
+		text: (element) => element.html.replace(/<[^>]+>/g, ''),
 	},
 	'model.dotcomrendering.pageElements.TableBlockElement': {
 		heightExcludingText: 32,
@@ -186,7 +175,7 @@ const elementHeightDataMap: {
 			lineHeight: 32,
 			lineLength: 100,
 		},
-		text: (element) => (element as TableBlockElement).html,
+		text: (element) => element.html,
 	},
 	'model.dotcomrendering.pageElements.TextBlockElement': {
 		heightExcludingText: 0,
@@ -200,8 +189,7 @@ const elementHeightDataMap: {
 			lineHeight: 23.8,
 			lineLength: 39,
 		},
-		text: (element) =>
-			(element as TextBlockElement).html.replace(/<[^>]+>/g, ''),
+		text: (element) => element.html.replace(/<[^>]+>/g, ''),
 	},
 	'model.dotcomrendering.pageElements.TweetBlockElement': {
 		heightExcludingText: 320,
@@ -215,7 +203,7 @@ const elementHeightDataMap: {
 			lineHeight: 19,
 			lineLength: 42,
 		},
-		text: (element) => (element as TweetBlockElement).html, // Includes all the markup for the tweet, not just the text
+		text: (element) => element.html, // Includes all the markup for the tweet, not just the text
 	},
 	'model.dotcomrendering.pageElements.VideoYoutubeBlockElement': {
 		heightExcludingText: 381,
@@ -234,26 +222,23 @@ const elementHeightDataMap: {
 			lineHeight: 18,
 			lineLength: 45,
 		},
-		text: (element) => (element as YoutubeBlockElement).mediaTitle,
+		text: (element) => element.mediaTitle,
 	},
+} as const satisfies {
+	[key in KnownBlockElementType]: BlockElementHeightData<key>;
 };
 
 export const calculateApproximateElementHeight = (
 	element: FEElement,
 	isMobile: boolean,
 ): number => {
-	// Is there a height estimate for this element type?
-	const isElementTypeKnown = Object.keys(elementHeightDataMap).includes(
-		element._type,
-	);
-	if (!isElementTypeKnown) {
+	if (!isKnownElementType(element._type)) {
 		// Unknown element. Indicates an infrequently used element in liveblogs.
 		// Assume a smallish height as we would rather include too few than too many ads
 		return 200;
 	}
 
-	const elementType = element._type as KnownBlockElementType;
-	const heightData = elementHeightDataMap[elementType];
+	const heightData = elementHeightDataMap[element._type];
 
 	const heightExcludingText = isMobile
 		? heightData.heightExcludingTextMobile
@@ -261,7 +246,7 @@ export const calculateApproximateElementHeight = (
 
 	const estimatedHeightWithoutText = heightExcludingText + heightData.margin;
 
-	if (!heightData.text) {
+	if (!('text' in heightData)) {
 		return estimatedHeightWithoutText;
 	}
 
@@ -271,6 +256,7 @@ export const calculateApproximateElementHeight = (
 		? heightData.textHeightMobile
 		: heightData.textHeight;
 
+	// @ts-expect-error -- the type is too complex to represent TS2590
 	const characterCount = heightData.text(element).length;
 	return (
 		estimatedHeightWithoutText +
