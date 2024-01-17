@@ -20,7 +20,7 @@ const wrapperStyles = css`
 	z-index: 1;
 `;
 
-const yellowBoxStyles = (format: ArticleFormat) => css`
+const interviewBylineBoxStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs
 		? textSans.large({ lineHeight: 'regular' })
 		: headline.xxsmall({
@@ -36,7 +36,7 @@ const yellowBoxStyles = (format: ArticleFormat) => css`
 	box-decoration-break: clone;
 
 	a {
-		color: ${schemedPalette('--byline-yellowbox-anchor-colour')};
+		color: ${schemedPalette('--interview-byline-anchor-colour')};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
@@ -172,7 +172,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case ArticleDesign.Interview:
 					return (
 						<div css={wrapperStyles}>
-							<div css={yellowBoxStyles(format)}>
+							<div css={interviewBylineBoxStyles(format)}>
 								<BylineLink
 									byline={byline}
 									tags={tags}

@@ -589,7 +589,8 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const bylineYellowBoxColour: PaletteFunction = () => sourcePalette.neutral[7];
+const interviewBylineAnchorColour: PaletteFunction = () =>
+	sourcePalette.neutral[7];
 
 const bylineHoverLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
@@ -4875,9 +4876,9 @@ const paletteColours = {
 		light: bylineHoverLight,
 		dark: bylineHoverDark,
 	},
-	'--byline-yellowbox-anchor-colour': {
-		light: bylineYellowBoxColour,
-		dark: bylineYellowBoxColour,
+	'--interview-byline-anchor-colour': {
+		light: interviewBylineAnchorColour,
+		dark: interviewBylineAnchorColour,
 	},
 	'--callout-prompt': {
 		light: calloutPromptLight,
