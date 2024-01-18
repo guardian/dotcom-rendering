@@ -12,7 +12,7 @@ import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
-import { RelativeTime } from './RelativeTime.importable';
+import { DateTime } from './DateTime';
 
 type Props = {
 	id: string;
@@ -163,8 +163,17 @@ export const LatestLinks = ({
 											),
 										}}
 									>
-										<RelativeTime
-											then={block.publishedDateTime}
+										<DateTime
+											date={
+												new Date(
+													block.publishedDateTime,
+												)
+											}
+											display="relative"
+											editionId="UK"
+											showWeekday={false}
+											showDate={true}
+											showTime={false}
 										/>
 									</div>
 									<span className="show-underline">
