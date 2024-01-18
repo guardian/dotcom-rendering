@@ -119,7 +119,7 @@ export const CommentContainer = ({
 			});
 	};
 
-	const addComment = (response: CommentType) =>
+	const onAddComment = (response: CommentType) =>
 		setResponses([...responses, response]);
 
 	return (
@@ -213,7 +213,7 @@ export const CommentContainer = ({
 							/>
 							<CommentForm
 								shortUrl={shortUrl}
-								onAddComment={addComment}
+								onAddComment={onAddComment}
 								user={user}
 								setCommentBeingRepliedTo={
 									setCommentBeingRepliedTo
