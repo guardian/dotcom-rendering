@@ -5,7 +5,7 @@ type Media = {
 /** For displaying embedded, playable videos directly in cards */
 type Video = Media & {
 	type: 'Video';
-	elementId: string;
+	id: string;
 	videoId: string;
 	height: number;
 	width: number;
