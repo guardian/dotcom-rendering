@@ -18,8 +18,7 @@ import { whenVisible } from './whenVisible';
  */
 function hasLightboxHash(name: string) {
 	return (
-		name === 'LightboxJavascript' &&
-		window.location.hash.startsWith('#img-')
+		name === 'LightboxLayout' && window.location.hash.startsWith('#img-')
 	);
 }
 

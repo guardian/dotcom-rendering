@@ -14,9 +14,12 @@ import {
 	SvgCross,
 } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
+import type { ImageForLightbox } from '../types/content';
+import { LightboxJavascript } from './LightboxJavascript';
 
 type Props = {
-	imageCount: number;
+	format: ArticleFormat;
+	images: ImageForLightbox[];
 };
 
 const lightboxStyles = css`
@@ -78,31 +81,6 @@ const navStyles = css`
 		border-left: 1px solid ${palette.neutral[20]};
 	}
 	background-color: ${palette.neutral[7]};
-`;
-
-const ulStyles = css`
-	display: flex;
-	height: 100%;
-	width: 100%;
-	scroll-snap-type: x mandatory;
-	overflow-x: scroll;
-	overflow-y: hidden;
-	scroll-behavior: auto;
-	overscroll-behavior: contain;
-	${from.tablet} {
-		margin-left: ${space[5]}px;
-	}
-	/**
-	 * Hide scrollbars
-	 * See: https://stackoverflow.com/a/38994837
-	 *
-	 * Removing the scrollbars here is okay because we offer multiple other methods for
-	 * navigation which are obvious and accessible to readers
-	 */
-	::-webkit-scrollbar {
-		display: none; /* Safari and Chrome */
-	}
-	scrollbar-width: none; /* Firefox */
 `;
 
 const buttonStyles = css`
@@ -217,7 +195,7 @@ const Selection = ({
 	);
 };
 
-export const LightboxLayout = ({ imageCount }: Props) => {
+export const LightboxLayout = ({ format, images }: Props) => {
 	return (
 		<>
 			<Global
@@ -243,11 +221,7 @@ export const LightboxLayout = ({ imageCount }: Props) => {
 				hidden={true}
 			>
 				<div css={containerStyles}>
-					<ul
-						id="lightbox-images"
-						css={ulStyles}
-						aria-label="All images"
-					></ul>
+					<LightboxJavascript format={format} images={images} />
 					<nav css={navStyles}>
 						<button
 							type="button"
@@ -265,7 +239,7 @@ export const LightboxLayout = ({ imageCount }: Props) => {
 							</span>
 						</button>
 						<Hide until="tablet">
-							<Selection countOfImages={imageCount} />
+							<Selection countOfImages={images.length} />
 						</Hide>
 						<button
 							type="button"

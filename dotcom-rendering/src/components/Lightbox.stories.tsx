@@ -3,13 +3,13 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
+	storage,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { userEvent, within } from '@storybook/testing-library';
 import { useEffect } from 'react';
-import { render } from 'react-dom';
 import type { ImageForLightbox } from '../types/content';
-import { LightboxImages } from './LightboxImages';
-import { LightboxLayout } from './LightboxLayout';
+import { LightboxLayout } from './LightboxLayout.importable';
 
 const testImage: ImageForLightbox = {
 	elementId: 'mockId',
@@ -38,43 +38,12 @@ export default {
 	},
 };
 
-function showLightbox(lightbox: HTMLElement) {
-	lightbox.removeAttribute('hidden');
-}
-
-function showInfo(lightbox: HTMLElement) {
-	lightbox.classList.remove('hide-info');
-}
-
-function hideInfo(lightbox: HTMLElement) {
-	lightbox.classList.add('hide-info');
-}
-
-const Initialise = ({
-	children,
-	shouldShowInfo = true,
-	format,
-	images,
-}: {
-	children: React.ReactNode;
-	shouldShowInfo?: boolean;
-	format: ArticleFormat;
-	images: ImageForLightbox[];
-}) => {
+const Initialise = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {
 		const lightbox =
 			document.querySelector<HTMLDialogElement>('#gu-lightbox');
-		if (!lightbox) return;
-		showLightbox(lightbox);
-		if (shouldShowInfo) {
-			showInfo(lightbox);
-		} else {
-			hideInfo(lightbox);
-		}
-		const imageRoot = document.querySelector('ul#lightbox-images');
-		if (!imageRoot) return;
-		render(<LightboxImages format={format} images={images} />, imageRoot);
-	}, [format, images, shouldShowInfo]);
+		lightbox?.removeAttribute('hidden');
+	}, []);
 
 	return <div style={{ height: '100vh' }}>{children}</div>;
 };
@@ -87,8 +56,8 @@ export const Default = () => {
 	};
 	const images = [{ ...testImage }];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -101,8 +70,8 @@ export const WithTitle = () => {
 	};
 	const images = [{ ...testImage, title: 'Title' }];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -115,8 +84,8 @@ export const WithCredit = () => {
 	};
 	const images = [{ ...testImage, displayCredit: true }];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -129,8 +98,8 @@ export const WithRating = () => {
 	};
 	const images = [{ ...testImage, starRating: 3 }];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -152,8 +121,8 @@ export const WhenLiveBlog = () => {
 		},
 	];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -173,8 +142,8 @@ export const WithEverything = () => {
 		},
 	];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -187,10 +156,23 @@ export const WithoutCaption = () => {
 	};
 	const images = [{ ...testImage }];
 	return (
-		<Initialise shouldShowInfo={false} format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
+};
+/**
+ * We manually click the [i] button to close the caption
+ */
+WithoutCaption.play = async ({
+	canvasElement,
+}: {
+	canvasElement: HTMLElement;
+}) => {
+	const canvas = within(canvasElement);
+	storage.local.clear();
+	await userEvent.click(canvas.getByTitle('Toggle caption [i]'));
+	storage.local.clear();
 };
 
 export const WithSport = () => {
@@ -208,8 +190,8 @@ export const WithSport = () => {
 		},
 	];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -229,8 +211,8 @@ export const WithCulture = () => {
 		},
 	];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -250,8 +232,8 @@ export const WithLifestyle = () => {
 		},
 	];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -271,8 +253,8 @@ export const WithOpinion = () => {
 		},
 	];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -292,8 +274,8 @@ export const WithSpecialReport = () => {
 		},
 	];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -313,8 +295,8 @@ export const WithSpecialReportAlt = () => {
 		},
 	];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
@@ -334,8 +316,8 @@ export const WithLabs = () => {
 		},
 	];
 	return (
-		<Initialise format={format} images={images}>
-			<LightboxLayout imageCount={images.length} />
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
 };
