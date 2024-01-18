@@ -1,5 +1,5 @@
+import type { TagType } from '../types/tag';
 import { getAgeWarning } from './age-warning';
-import { TagType } from '../types/tag';
 
 describe('getAgeWarning', () => {
 	const infoTag: TagType = {
