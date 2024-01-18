@@ -49,6 +49,7 @@ const flexParentStyles = css`
 	flex-direction: row;
 	align-items: flex-start;
 	flex-wrap: wrap;
+	gap: ${space[3]}px;
 `;
 
 const inputContainerStyles = css`
@@ -357,12 +358,9 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 						css={[
 							inputContainerStyles,
 							css`
-								flex-basis: ${!signedInUserEmail
-									? '335px'
-									: '0'};
-								margin-right: ${!signedInUserEmail
-									? `${space[3]}px`
-									: '0'};
+								display: ${!signedInUserEmail
+									? 'inline-block'
+									: 'none'};
 							`,
 						]}
 					>
@@ -372,14 +370,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 							label="Enter your email address"
 							type="email"
 							value={signedInUserEmail}
-							cssOverrides={[
-								textInputStyles,
-								css`
-									display: ${!signedInUserEmail
-										? 'inline-block'
-										: 'none'};
-								`,
-							]}
+							cssOverrides={[textInputStyles]}
 						/>
 					</div>
 					<Button
