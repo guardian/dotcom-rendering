@@ -83,7 +83,10 @@ export const Analytics = ({
 										'CONSENT_STRING',
 										'$EQUALS(${consentState}, sufficient)',
 									)
-									.toString()}"
+									.toString()}",
+								"consentUUID": "\${clientId(ccpaUUID)}",
+								"consent": "$EQUALS(\${consentState}, sufficient)",
+								"consentJurisdiction": "CCPA"
 
 							}
 						},
@@ -102,7 +105,10 @@ export const Analytics = ({
 										'CONSENT_STRING',
 										'$EQUALS(${consentState}, sufficient)',
 									)
-									.toString()}"
+									.toString()}",
+								"consentUUID": "\${clientId(ccpaUUID)}",
+								"consent": "$EQUALS(\${consentState}, sufficient)",
+								"consentJurisdiction": "AUS"
 
 							}
 						}
