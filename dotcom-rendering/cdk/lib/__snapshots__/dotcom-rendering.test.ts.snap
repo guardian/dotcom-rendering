@@ -764,7 +764,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             ],
           },
         ],
-        "AlarmDescription": "Scale up if latency is GreaterThanOrEqualToThreshold of 0.2 over 1 period(s) of 60 seconds",
+        "AlarmDescription": "Scale up if latency is GreaterThanOrEqualToThreshold of 0.3 over 1 period(s) of 60 seconds",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
         "Dimensions": [
           {
@@ -787,7 +787,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
         "Period": 60,
         "Statistic": "Average",
-        "Threshold": 0.2,
+        "Threshold": 0.3,
       },
       "Type": "AWS::CloudWatch::Alarm",
     },

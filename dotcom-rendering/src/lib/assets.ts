@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { isObject, isString, isUndefined } from '@guardian/libs';
+import { isObject, isString } from '@guardian/libs';
 import { BUILD_VARIANT, dcrJavascriptBundle } from '../../webpack/bundles';
 import type { ServerSideTests, Switches } from '../types/config';
 import { makeMemoizedFunction } from './memoize';
@@ -15,30 +15,20 @@ interface AssetHash {
  * @param {'PROD' | 'CODE' | undefined} stage the environment code is executing in
  * @returns {string}
  */
-export const decideAssetOrigin = (
-	stage: string | undefined,
-	isDev: boolean,
-): string => {
+export const decideAssetOrigin = (stage: string | undefined): string => {
 	switch (stage?.toUpperCase()) {
 		case 'PROD':
 			return 'https://assets.guim.co.uk/';
 		case 'CODE':
 			return 'https://assets-code.guim.co.uk/';
-		default: {
-			if (isDev && isUndefined(process.env.HOSTNAME)) {
-				// Use absolute asset paths in development mode
-				// This is so paths are correct when treated as relative to Frontend
-				return 'http://localhost:3030/';
-			} else {
-				return '/';
-			}
-		}
+		default:
+			return '/';
 	}
 };
 
 const isDev = process.env.NODE_ENV === 'development';
 
-export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE, isDev);
+export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
 
 const isAssetHash = (manifest: unknown): manifest is AssetHash =>
 	isObject(manifest) &&

@@ -433,7 +433,7 @@ const bylineBackgroundDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const bylineAnchorLight: PaletteFunction = ({ design, theme }) => {
+const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
 		case ArticleDesign.Analysis:
 			switch (theme) {
@@ -469,11 +469,32 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
 			}
+		case ArticleDesign.Interview:
+			switch (display) {
+				case ArticleDisplay.Showcase:
+				case ArticleDisplay.NumberedList:
+				case ArticleDisplay.Standard:
+					return sourcePalette.neutral[7];
+				case ArticleDisplay.Immersive:
+					switch (theme) {
+						case Pillar.News:
+						case Pillar.Opinion:
+						case Pillar.Sport:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+							return pillarPalette(theme, 400);
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[300];
+						case ArticleSpecial.SpecialReport:
+							return sourcePalette.specialReport[400];
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[100];
+					}
+			}
 		case ArticleDesign.Explainer:
 		case ArticleDesign.Feature:
 		case ArticleDesign.FullPageInteractive:
 		case ArticleDesign.Interactive:
-		case ArticleDesign.Interview:
 		case ArticleDesign.Letter:
 		case ArticleDesign.NewsletterSignup:
 		case ArticleDesign.PhotoEssay:
@@ -513,7 +534,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const bylineAnchorDark: PaletteFunction = ({ design, theme }) => {
+const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
 		case ArticleDesign.Analysis:
 			switch (theme) {
@@ -529,11 +550,32 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.Labs:
 					return sourcePalette.news[500];
 			}
+		case ArticleDesign.Interview:
+			switch (display) {
+				case ArticleDisplay.Showcase:
+				case ArticleDisplay.NumberedList:
+				case ArticleDisplay.Standard:
+					return sourcePalette.neutral[7];
+				case ArticleDisplay.Immersive:
+					switch (theme) {
+						case Pillar.News:
+						case Pillar.Opinion:
+						case Pillar.Sport:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+							return pillarPalette(theme, 500);
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[400];
+						case ArticleSpecial.SpecialReport:
+							return sourcePalette.specialReport[500];
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[700];
+					}
+			}
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
 		case ArticleDesign.Explainer:
 		case ArticleDesign.Feature:
-		case ArticleDesign.Interview:
 		case ArticleDesign.Interactive:
 		case ArticleDesign.PhotoEssay:
 		case ArticleDesign.FullPageInteractive:
@@ -3861,7 +3903,7 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const ageWarningBackground: PaletteFunction = (format) => {
+const ageWarningWrapperBackground: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.Interview:
 			return articleBackgroundLight(format);
@@ -3869,6 +3911,12 @@ const ageWarningBackground: PaletteFunction = (format) => {
 			return headlineBackgroundLight(format);
 	}
 };
+const ageWarningBackgroundLight: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const ageWarningBackgroundDark: PaletteFunction = () =>
+	sourcePalette.brandAlt[200];
+const ageWarningText: PaletteFunction = () => sourcePalette.neutral[7];
+
 const articleTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const articleTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
@@ -5429,9 +5477,17 @@ const paletteColours = {
 		light: richLinkBorderLight,
 		dark: richLinkBorderDark,
 	},
+	'--age-warning-wrapper-background': {
+		light: ageWarningWrapperBackground,
+		dark: ageWarningWrapperBackground,
+	},
 	'--age-warning-background': {
-		light: ageWarningBackground,
-		dark: ageWarningBackground,
+		light: ageWarningBackgroundLight,
+		dark: ageWarningBackgroundDark,
+	},
+	'--age-warning-text': {
+		light: ageWarningText,
+		dark: ageWarningText,
 	},
 	'--series-title-background': {
 		light: seriesTitleBackgroundLight,

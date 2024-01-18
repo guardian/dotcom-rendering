@@ -226,7 +226,7 @@ const ageWarningMargins = (format: ArticleFormat) =>
 		  `;
 
 const backgroundStyles = css`
-	background-color: ${themePalette('--age-warning-background')};
+	background-color: ${themePalette('--age-warning-wrapper-background')};
 `;
 
 const WithAgeWarning = ({

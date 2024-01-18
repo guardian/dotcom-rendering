@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brandBackground } from '@guardian/source-foundations';
+import { userEvent, within } from '@storybook/testing-library';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
 
@@ -155,11 +156,26 @@ export const DropdownExpandedWithNotifications = () => (
 				label="My Account"
 				links={linksWithNotifications}
 				dataLinkName="linkname3"
-				defaultIsExpanded={true}
 			/>
 		</Nav>
 	</Header>
 );
+
+/**
+ * Open the dropdown so that Chromatic can capture the component in its
+ * `expanded` state.
+ */
+DropdownExpandedWithNotifications.play = async ({
+	canvasElement,
+}: {
+	canvasElement: HTMLElement;
+}) => {
+	const canvas = within(canvasElement);
+	// We need to wait for this button to be available, which it isn't initially
+	// because of the noJS behaviour in Dropdown.
+	const button = await canvas.findByTestId('dropdown-button');
+	await userEvent.click(button);
+};
 
 DropdownExpandedWithNotifications.storyName =
 	'Dropdown expanded with notifications';
