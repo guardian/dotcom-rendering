@@ -295,7 +295,7 @@ export class DotcomRendering extends GuStack {
 
 		// Latency scaling alarm
 		const latencyScalingAlarmConfig: DCRAlarmConfig = {
-			threshold: 0.2,
+			threshold: 0.3,
 			period: 60,
 			evaluationPeriod: 1,
 			comparisonOperator: 'GreaterThanOrEqualToThreshold',
