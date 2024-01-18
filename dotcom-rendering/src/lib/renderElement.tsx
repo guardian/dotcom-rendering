@@ -743,7 +743,6 @@ export const renderElement = ({
 						hideCaption={hideCaption}
 						isMainMedia={isMainMedia}
 						id={element.id}
-						elementId={element.elementId}
 						assetId={element.assetId}
 						expired={element.expired}
 						overrideImage={element.overrideImage}

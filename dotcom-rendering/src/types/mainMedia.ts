@@ -5,7 +5,8 @@ type Media = {
 /** For displaying embedded, playable videos directly in cards */
 type Video = Media & {
 	type: 'Video';
-	elementId: string;
+	/** @see https://github.com/guardian/frontend/blob/8e7e4d0e/common/app/model/content/Atom.scala#L159 */
+	id?: string;
 	videoId: string;
 	height: number;
 	width: number;
