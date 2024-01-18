@@ -49,12 +49,13 @@ const flexParentStyles = css`
 	flex-direction: row;
 	align-items: flex-start;
 	flex-wrap: wrap;
+	gap: ${space[3]}px;
 `;
 
 const inputContainerStyles = css`
-	margin-right: ${space[3]}px;
 	margin-bottom: ${space[2]}px;
 	flex-shrink: 1;
+	flex-basis: 335px;
 `;
 
 const textInputStyles = css`
@@ -343,26 +344,18 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			>
 				<Label
 					text="Enter your email address"
-					cssOverrides={[
-						labelStyles,
-						css`
-							display: ${!signedInUserEmail
-								? 'inline-block'
-								: 'none'};
-						`,
-					]}
+					cssOverrides={[labelStyles]}
+					style={{
+						display: signedInUserEmail ? 'none' : undefined,
+					}}
 				/>
 
 				<div css={flexParentStyles}>
 					<div
-						css={[
-							inputContainerStyles,
-							css`
-								flex-basis: ${!signedInUserEmail
-									? '335px'
-									: '0'};
-							`,
-						]}
+						css={[inputContainerStyles]}
+						style={{
+							display: signedInUserEmail ? 'none' : undefined,
+						}}
 					>
 						<TextInput
 							hideLabel={true}
@@ -370,14 +363,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 							label="Enter your email address"
 							type="email"
 							value={signedInUserEmail}
-							cssOverrides={[
-								textInputStyles,
-								css`
-									display: ${!signedInUserEmail
-										? 'inline-block'
-										: 'none'};
-								`,
-							]}
+							cssOverrides={[textInputStyles]}
 						/>
 					</div>
 					<Button
