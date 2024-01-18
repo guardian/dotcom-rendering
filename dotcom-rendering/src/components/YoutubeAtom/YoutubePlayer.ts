@@ -37,7 +37,7 @@ declare global {
 				adsRenderingSettings: google.ima.AdsRenderingSettings,
 			) => void,
 			config: {
-				playerOptions: PlayerOptions;
+				youtubeOptions: PlayerOptions;
 			},
 			onPlayerReadyCallback: (
 				player: Player,
@@ -67,14 +67,14 @@ class YouTubePlayer {
 
 	constructor(
 		id: string,
-		playerOptions: PlayerOptions,
+		youtubeOptions: PlayerOptions,
 		makeAdsRequestCallback: AdsRequestCallback,
 		onPlayerReadyCallback: PlayerReadyCallback,
 		imaAdManagerListeners: (imaManager: ImaManager) => void,
 	) {
 		this.playerPromise = this.setPlayer(
 			id,
-			playerOptions,
+			youtubeOptions,
 			makeAdsRequestCallback,
 			onPlayerReadyCallback,
 			imaAdManagerListeners,
@@ -83,12 +83,14 @@ class YouTubePlayer {
 
 	private async setPlayer(
 		id: string,
-		playerOptions: PlayerOptions,
+		youtubeOptions: PlayerOptions,
 		makeAdsRequestCallback: AdsRequestCallback,
 		onPlayerReadyCallback: PlayerReadyCallback,
 		imaAdManagerListeners: (imaManager: ImaManager) => void,
 	) {
-		const YTAPI = await loadYouTubeAPI(playerOptions.embedConfig.enableIma);
+		const YTAPI = await loadYouTubeAPI(
+			youtubeOptions.embedConfig.enableIma,
+		);
 		const playerPromise = new Promise<SetPlayerResolve>(
 			(resolve, reject) => {
 				try {
@@ -96,7 +98,7 @@ class YouTubePlayer {
 						id,
 						makeAdsRequestCallback,
 						{
-							playerOptions,
+							youtubeOptions,
 						},
 						(player, imaManager) => {
 							this.player = player;
