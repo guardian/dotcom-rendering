@@ -125,7 +125,7 @@ export const KeyEventCard = ({
 						editionId="UK"
 						showWeekday={false}
 						showDate={true}
-						showTime={true}
+						showTime={false}
 					/>
 				</div>
 				<div css={textStyles}>{title}</div>
