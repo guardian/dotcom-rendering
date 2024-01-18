@@ -571,32 +571,62 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						<GridItem area="meta" element="aside">
 							<div>
 								{isApps ? (
-									<Hide from="leftCol">
-										<ArticleMetaApps
-											branding={branding}
-											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
-											byline={article.byline}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											isCommentable={
-												article.isCommentable
-											}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-											ajaxUrl={article.config.ajaxUrl}
-										></ArticleMetaApps>
-									</Hide>
+									<>
+										<Hide from="leftCol">
+											<ArticleMetaApps
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={
+													article.isCommentable
+												}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
+												ajaxUrl={article.config.ajaxUrl}
+											></ArticleMetaApps>
+										</Hide>
+										<Hide until="leftCol">
+											<ArticleMeta
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={
+													article.isCommentable
+												}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
+												ajaxUrl={article.config.ajaxUrl}
+											/>
+										</Hide>
+									</>
 								) : (
 									<ArticleMeta
 										branding={branding}
