@@ -11,6 +11,7 @@ import {
 	SvgSpinner,
 	TextInput,
 } from '@guardian/source-react-components';
+import { getUserClient } from '../lib/bridgetApi';
 import type { FormEvent, ReactEventHandler } from 'react';
 import { useEffect, useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
@@ -122,12 +123,26 @@ const buildFormData = (
 	return formData;
 };
 
-const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
-	const { idApiUrl } = window.guardian.config.page;
-	if (!idApiUrl) return;
-	const fetchedEmail = await lazyFetchEmailWithTimeout(idApiUrl)();
-	if (!fetchedEmail) return;
-	return fetchedEmail;
+const resolveEmailIfSignedIn = async (
+	renderingTarget: RenderingTarget,
+): Promise<string | undefined> => {
+	switch (renderingTarget) {
+		case 'Apps': {
+			return getUserClient()
+				.isPremium()
+				.then((isPremium) => {
+					if (isPremium) return;
+					else return 'testcake@testcake.com';
+				});
+		}
+		case 'Web': {
+			const { idApiUrl } = window.guardian.config.page;
+			if (!idApiUrl) return;
+			const fetchedEmail = await lazyFetchEmailWithTimeout(idApiUrl)();
+			if (!fetchedEmail) return;
+			return fetchedEmail;
+		}
+	}
 };
 
 const postFormData = async (
@@ -242,14 +257,13 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
-
+	const { renderingTarget } = useConfig();
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
-		void resolveEmailIfSignedIn().then((email) => {
+		void resolveEmailIfSignedIn(renderingTarget).then((email) => {
 			setSignedInUserEmail(email);
 		});
-	}, []);
-	const { renderingTarget } = useConfig();
+	}, [renderingTarget]);
 
 	const hasResponse = typeof responseOk === 'boolean';
 
