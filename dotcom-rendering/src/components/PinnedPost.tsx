@@ -173,7 +173,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 							editionId="UK"
 							showWeekday={false}
 							showDate={true}
-							showTime={true}
+							showTime={false}
 						/>
 					</div>
 				)}
