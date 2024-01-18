@@ -345,21 +345,17 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 				<Label
 					text="Enter your email address"
 					cssOverrides={[labelStyles]}
-					style={
-						signedInUserEmail
-							? { display: 'none' }
-							: { display: 'inline-block' }
-					}
+					style={{
+						display: signedInUserEmail ? 'none' : undefined,
+					}}
 				/>
 
 				<div css={flexParentStyles}>
 					<div
 						css={[inputContainerStyles]}
-						style={
-							signedInUserEmail
-								? { display: 'none' }
-								: { display: 'inline-block' }
-						}
+						style={{
+							display: signedInUserEmail ? 'none' : undefined,
+						}}
 					>
 						<TextInput
 							hideLabel={true}
