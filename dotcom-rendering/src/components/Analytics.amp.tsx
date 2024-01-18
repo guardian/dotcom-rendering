@@ -42,12 +42,13 @@ export const Analytics = ({
 				{
 					"requests": {
 						"pageViewWithConsentTest": "http://localhost:8001/receive?componentEvent=\${componentEvent}",
+						"pageViewWithConsentTestParams": "http://localhost:8001/receive?consentJurisdiction=\${consentJurisdiction}&consentUUID=\${consentUUID}&consent=\${consent}",
 						"pageViewWithConsent": "\${additionalBase}&componentEvent=\${componentEvent}"
 					},
 					"triggers": {
 						"trackPageviewTcf": {
 							"on": "visible",
-							"request": "pageViewWithConsentTest",
+							"request": "pageViewWithConsentTestParams",
 							"selector": ".amp-geo-group-tcfv2",
 							"vars": {
 								"componentEvent": "${baseComponentEvent
@@ -60,7 +61,11 @@ export const Analytics = ({
 										'CONSENT_STRING',
 										'${consentString}',
 									)
-									.toString()}"
+									.toString()}",
+								"consentUUID": "\${clientId(consentUUID)}",
+								"consent": "\${consentString}",
+								"consentJurisdiction": "TCF"
+
 							}
 						},
 						"trackPageviewCcpa": {
