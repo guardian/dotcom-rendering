@@ -14,7 +14,7 @@ type Props = {
 	analytics: AnalyticsModel;
 };
 
-const componentEvent = encodeURI(
+const baseComponentEvent = encodeURI(
 	JSON.stringify({
 		consentJurisdiction: 'CONTENT_JURISDICTION',
 		consentUUID: 'CLIENT_ID',
@@ -50,7 +50,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-tcfv2",
 							"vars": {
-								"componentEvent": "${componentEvent
+								"componentEvent": "${baseComponentEvent
 									.replace('CONTENT_JURISDICTION', 'TCF')
 									.replace(
 										'CLIENT_ID',
@@ -68,7 +68,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-ccpa",
 							"vars": {
-								"componentEvent": "${componentEvent
+								"componentEvent": "${baseComponentEvent
 									.replace('CONTENT_JURISDICTION', 'CCPA')
 									.replace(
 										'CLIENT_ID',
@@ -87,7 +87,7 @@ export const Analytics = ({
 							"request": "pageViewWithConsentTest",
 							"selector": ".amp-geo-group-aus",
 							"vars": {
-								"componentEvent": "${componentEvent
+								"componentEvent": "${baseComponentEvent
 									.replace('CONTENT_JURISDICTION', 'AUS')
 									.replace(
 										'CLIENT_ID',
