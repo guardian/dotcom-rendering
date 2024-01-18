@@ -12,6 +12,7 @@ import { palette as themePalette } from '../palette';
 import type { DCRBadgeType } from '../types/badge';
 import type { TagType } from '../types/tag';
 import { Badge } from './Badge';
+import { useConfig } from './ConfigContext';
 import { Hide } from './Hide';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
@@ -179,6 +180,8 @@ export const SeriesSectionLink = ({
 	badge,
 	isMatch,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+	const showBadge = renderingTarget === 'Web' && badge !== undefined;
 	const observerTag = tags.find(
 		(tag) => tag.type === 'Publication' && tag.title === 'The Observer',
 	);
@@ -215,7 +218,7 @@ export const SeriesSectionLink = ({
 						// We have a tag, we're not immersive, show both series and section titles
 						return (
 							// Sometimes the tags/titles are shown inline, sometimes stacked
-							<div css={!badge && rowBelowLeftCol(format)}>
+							<div css={!showBadge && rowBelowLeftCol(format)}>
 								<a
 									href={`${guardianBaseURL}/${tag.id}`}
 									css={[
@@ -319,8 +322,8 @@ export const SeriesSectionLink = ({
 						const title = tag?.title ? tag.title : sectionLabel;
 						const linkExt = tag?.id ? tag.id : sectionUrl;
 						return (
-							<div css={badge && immersiveTitleBadgeStyle}>
-								{badge && (
+							<div css={showBadge && immersiveTitleBadgeStyle}>
+								{showBadge && (
 									<div
 										css={[
 											titleBadgeWrapper,
@@ -340,7 +343,7 @@ export const SeriesSectionLink = ({
 										fontStyles(format),
 										invertedStyle,
 										breakWord,
-										!badge && sectionPadding,
+										!showBadge && sectionPadding,
 										css`
 											color: ${titleColour};
 											background-color: ${themePalette(
@@ -379,7 +382,7 @@ export const SeriesSectionLink = ({
 				// We have a tag, we're not immersive, show both series and section titles
 				return (
 					// Sometimes the tags/titles are shown inline, sometimes stacked
-					<div css={!badge && rowBelowLeftCol(format)}>
+					<div css={!showBadge && rowBelowLeftCol(format)}>
 						<Hide when="above" breakpoint="desktop">
 							{format.design === ArticleDesign.LiveBlog && (
 								<span

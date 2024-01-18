@@ -4,6 +4,7 @@ import { from, until } from '@guardian/source-foundations';
 import type { DCRBadgeType } from '../types/badge';
 import type { TagType } from '../types/tag';
 import { Badge } from './Badge';
+import { useConfig } from './ConfigContext';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
@@ -67,30 +68,35 @@ export const ArticleTitle = ({
 	guardianBaseURL,
 	badge,
 	isMatch,
-}: Props) => (
-	<div css={[sectionStyles, badge && badgeContainer]}>
-		{badge && format.display !== ArticleDisplay.Immersive && (
-			<div css={titleBadgeWrapper}>
-				<Badge imageSrc={badge.imageSrc} href={badge.href} />
+}: Props) => {
+	const { renderingTarget } = useConfig();
+	const showBadge = renderingTarget === 'Web' && badge !== undefined;
+
+	return (
+		<div css={[sectionStyles, showBadge && badgeContainer]}>
+			{showBadge && format.display !== ArticleDisplay.Immersive && (
+				<div css={titleBadgeWrapper}>
+					<Badge imageSrc={badge.imageSrc} href={badge.href} />
+				</div>
+			)}
+			<div
+				css={[
+					showBadge && marginTop,
+					format.display === ArticleDisplay.Immersive &&
+						format.design !== ArticleDesign.PrintShop &&
+						immersiveMargins,
+				]}
+			>
+				<SeriesSectionLink
+					format={format}
+					tags={tags}
+					sectionLabel={sectionLabel}
+					sectionUrl={sectionUrl}
+					guardianBaseURL={guardianBaseURL}
+					badge={badge}
+					isMatch={isMatch}
+				/>
 			</div>
-		)}
-		<div
-			css={[
-				badge && marginTop,
-				format.display === ArticleDisplay.Immersive &&
-					format.design !== ArticleDesign.PrintShop &&
-					immersiveMargins,
-			]}
-		>
-			<SeriesSectionLink
-				format={format}
-				tags={tags}
-				sectionLabel={sectionLabel}
-				sectionUrl={sectionUrl}
-				guardianBaseURL={guardianBaseURL}
-				badge={badge}
-				isMatch={isMatch}
-			/>
 		</div>
-	</div>
-);
+	);
+};

@@ -6,6 +6,7 @@ import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
 import type { DCRBadgeType } from '../types/badge';
 import { Badge } from './Badge';
+import { useConfig } from './ConfigContext';
 import { ShareIcons } from './ShareIcons';
 
 const labelStyles = css`
@@ -137,6 +138,8 @@ export const SubMeta = ({
 	showBottomSocialButtons,
 	badge,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+	const showBadge = renderingTarget === 'Web' && badge !== undefined;
 	const createLinks = () => {
 		const links: BaseLinkType[] = [];
 		if (subMetaSectionLinks.length > 0) links.push(...subMetaSectionLinks);
@@ -156,7 +159,7 @@ export const SubMeta = ({
 					: bottomPadding
 			}
 		>
-			{badge && (
+			{showBadge && (
 				<div css={badgeWrapper}>
 					<Badge imageSrc={badge.imageSrc} href={badge.href} />
 				</div>
