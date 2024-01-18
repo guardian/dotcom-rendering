@@ -144,7 +144,6 @@ export const Video = () => {
 			},
 			{
 				duration: 142,
-				elementId: '27eac530-7088-4541-a1c5-3347a3d837fb',
 				expired: false,
 				mediaTitle:
 					'Nasa launches Perseverance rover in mission to find evidence of life on Mars – video',

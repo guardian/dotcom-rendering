@@ -225,7 +225,7 @@ const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 		if (asset?.platform === 'Youtube') {
 			return {
 				type: 'Video',
-				elementId: mediaAtom.id,
+				id: mediaAtom.id,
 				videoId: asset.id,
 				duration: mediaAtom.duration ?? 0,
 				title: mediaAtom.title,

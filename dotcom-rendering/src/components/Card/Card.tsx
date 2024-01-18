@@ -473,9 +473,9 @@ export const Card = ({
 											defer={{ until: 'visible' }}
 										>
 											<YoutubeBlockComponent
-												id={media.mainMedia.elementId}
-												elementId={
-													media.mainMedia.elementId
+												id={
+													media.mainMedia.id ??
+													'unknown-media-id'
 												}
 												assetId={
 													media.mainMedia.videoId

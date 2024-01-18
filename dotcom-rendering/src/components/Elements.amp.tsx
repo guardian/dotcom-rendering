@@ -345,7 +345,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 				return (
 					<YoutubeBlockComponent
-						key={element.elementId}
+						key={element.id}
 						element={element}
 						pillar={pillar}
 						adTargeting={adTargeting}
