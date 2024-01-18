@@ -19,7 +19,6 @@ export const getAgeWarning = (
 
 	let message;
 
-	// Only show an age warning for news or opinion pieces
 	if (showAge) {
 		const warnLimitDays = 30;
 		const currentDate = new Date();
