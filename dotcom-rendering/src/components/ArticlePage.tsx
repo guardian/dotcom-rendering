@@ -18,8 +18,7 @@ import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
-import { LightboxJavascript } from './LightboxJavascript.importable';
-import { LightboxLayout } from './LightboxLayout';
+import { LightboxLayout } from './LightboxLayout.importable';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
@@ -101,17 +100,14 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			<SkipTo id="navigation" label="Skip to navigation" />
 			{webLightbox && article.imagesForLightbox.length > 0 && (
 				<>
-					<LightboxLayout
-						imageCount={article.imagesForLightbox.length}
-					/>
-					<Island priority="feature" defer={{ until: 'idle' }}>
-						<LightboxHash />
-					</Island>
 					<Island priority="feature" defer={{ until: 'hash' }}>
-						<LightboxJavascript
+						<LightboxLayout
 							format={format}
 							images={article.imagesForLightbox}
 						/>
+					</Island>
+					<Island priority="feature" defer={{ until: 'idle' }}>
+						<LightboxHash />
 					</Island>
 				</>
 			)}

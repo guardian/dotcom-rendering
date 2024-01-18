@@ -1,7 +1,8 @@
+import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
+import { from, space } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 import screenfull from 'screenfull';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxImages } from './LightboxImages';
@@ -516,6 +517,33 @@ const useElementById = (id: string) => {
 	return element;
 };
 
+const ulStyles = css`
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: 100%;
+	height: 100%;
+	width: 100%;
+	scroll-snap-type: x mandatory;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	scroll-behavior: auto;
+	overscroll-behavior: contain;
+	${from.tablet} {
+		margin-left: ${space[5]}px;
+	}
+	/**
+	* Hide scrollbars
+	* See: https://stackoverflow.com/a/38994837
+	*
+	* Removing the scrollbars here is okay because we offer multiple other methods for
+	* navigation which are obvious and accessible to readers
+	*/
+	::-webkit-scrollbar {
+		display: none; /* Safari and Chrome */
+	}
+	scrollbar-width: none; /* Firefox */
+`;
+
 export const LightboxJavascript = ({
 	format,
 	images,
@@ -535,7 +563,6 @@ export const LightboxJavascript = ({
 	 * is so verbose) and we don't want every page view to have to download it, only those that are opening
 	 * lightbox
 	 */
-	const root = useElementById('lightbox-images');
 	const lightbox = useElementById('gu-lightbox');
 	const [initialised, setInitialised] = useState(false);
 
@@ -549,11 +576,12 @@ export const LightboxJavascript = ({
 		setInitialised(true);
 	}, [initialised, lightbox]);
 
-	if (!root || !lightbox) return null;
+	if (!lightbox) return null;
 
 	log('dotcom', '💡 Generating HTML for lightbox images...');
-	return createPortal(
-		<LightboxImages format={format} images={images} />,
-		root,
+	return (
+		<ul css={ulStyles} aria-label="All images">
+			<LightboxImages format={format} images={images} />;
+		</ul>
 	);
 };
