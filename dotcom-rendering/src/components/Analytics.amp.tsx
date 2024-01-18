@@ -16,8 +16,8 @@ type Props = {
 
 const baseComponentEvent = encodeURI(
 	JSON.stringify({
-		consentJurisdiction: 'CONTENT_JURISDICTION',
-		consentUUID: 'CLIENT_ID',
+		consentJurisdiction: 'CONSENT_JURISDICTION',
+		consentUUID: 'CONSENT_UUID',
 		consent: 'CONSENT_STRING',
 	}),
 );
@@ -51,9 +51,9 @@ export const Analytics = ({
 							"selector": ".amp-geo-group-tcfv2",
 							"vars": {
 								"componentEvent": "${baseComponentEvent
-									.replace('CONTENT_JURISDICTION', 'TCF')
+									.replace('CONSENT_JURISDICTION', 'TCF')
 									.replace(
-										'CLIENT_ID',
+										'CONSENT_UUID',
 										'${clientId(consentUUID)}',
 									)
 									.replace(
@@ -69,9 +69,9 @@ export const Analytics = ({
 							"selector": ".amp-geo-group-ccpa",
 							"vars": {
 								"componentEvent": "${baseComponentEvent
-									.replace('CONTENT_JURISDICTION', 'CCPA')
+									.replace('CONSENT_JURISDICTION', 'CCPA')
 									.replace(
-										'CLIENT_ID',
+										'CONSENT_UUID',
 										'${clientId(ccpaUUID)}',
 									)
 									.replace(
@@ -88,9 +88,9 @@ export const Analytics = ({
 							"selector": ".amp-geo-group-aus",
 							"vars": {
 								"componentEvent": "${baseComponentEvent
-									.replace('CONTENT_JURISDICTION', 'AUS')
+									.replace('CONSENT_JURISDICTION', 'AUS')
 									.replace(
-										'CLIENT_ID',
+										'CONSENT_UUID',
 										'${clientId(ccpaUUID)}',
 									)
 									.replace(
