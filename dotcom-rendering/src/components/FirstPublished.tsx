@@ -65,7 +65,9 @@ const FirstPublished = ({
 							date={new Date(firstPublished)}
 							display="relative"
 							editionId="UK"
-							show="date"
+							showWeekday={false}
+							showDate={true}
+							showTime={false}
 						/>
 					</span>
 				)}

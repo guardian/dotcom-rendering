@@ -123,6 +123,9 @@ export const KeyEventCard = ({
 						date={new Date(blockFirstPublished)}
 						display="relative"
 						editionId="UK"
+						showWeekday={false}
+						showDate={true}
+						showTime={true}
 					/>
 				</div>
 				<div css={textStyles}>{title}</div>

@@ -142,7 +142,13 @@ export const CricketScoreboard = ({
 	return (
 		<div css={containerStyle}>
 			<h2 css={screenReaderOnlyStyle}>
-				<DateTime date={date} editionId={editionId} show="date" />
+				<DateTime
+					date={date}
+					editionId={editionId}
+					showWeekday={false}
+					showDate={true}
+					showTime={false}
+				/>
 				{match.competitionName}, {match.venueName}
 			</h2>
 			<table css={tableStyle}>

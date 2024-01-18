@@ -23,7 +23,9 @@ const LastUpdated = ({
 			<DateTime
 				date={new Date(lastUpdated)}
 				editionId={editionId}
-				show="time"
+				showWeekday={false}
+				showDate={false}
+				showTime={true}
 			/>
 		</div>
 	);

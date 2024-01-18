@@ -6,14 +6,21 @@ import { RelativeTime } from './RelativeTime.importable';
 type Props = {
 	date: Date;
 	editionId: EditionId;
-	show?: 'date & time' | 'date' | 'time';
+	showWeekday: boolean;
+	showDate: boolean;
+	showTime: boolean;
 	display?: 'absolute' | 'relative';
 };
+
+const formatWeekday = (date: Date, locale: string, timeZone: string) =>
+	date.toLocaleDateString(locale, {
+		weekday: 'short',
+		timeZone,
+	});
 
 const formatDate = (date: Date, locale: string, timeZone: string) =>
 	date
 		.toLocaleDateString(locale, {
-			weekday: 'short',
 			day: 'numeric',
 			month: 'short',
 			year: 'numeric',
@@ -35,7 +42,9 @@ const formatTime = (date: Date, locale: string, timeZone: string) =>
 export const DateTime = ({
 	date,
 	editionId,
-	show = 'date & time',
+	showWeekday,
+	showDate,
+	showTime,
 	display = 'absolute',
 }: Props) => {
 	const { locale, timeZone } = getEditionFromId(editionId);
@@ -63,8 +72,13 @@ export const DateTime = ({
 				timeZone,
 			})}
 		>
-			{show.includes('date') && formatDate(date, locale, timeZone)}{' '}
-			{show.includes('time') && formatTime(date, locale, timeZone)}
+			{[
+				showWeekday && formatWeekday(date, locale, timeZone),
+				showDate && formatDate(date, locale, timeZone),
+				showTime && formatTime(date, locale, timeZone),
+			]
+				.filter(isString)
+				.join(' ')}
 		</time>
 	);
 };

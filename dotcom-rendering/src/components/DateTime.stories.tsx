@@ -28,27 +28,73 @@ export const UK: Story = {
 };
 
 export const TimeOnly: Story = {
-	args: { date, editionId: 'UK', show: 'time' },
+	args: {
+		date,
+		editionId: 'UK',
+		showWeekday: false,
+		showDate: false,
+		showTime: true,
+	},
 };
 
 export const DateOnly: Story = {
-	args: { date, editionId: 'UK', show: 'date' },
+	args: {
+		date,
+		editionId: 'UK',
+		showWeekday: false,
+		showDate: true,
+		showTime: false,
+	},
+};
+
+export const WeekdayDateOnly: Story = {
+	args: {
+		date,
+		editionId: 'UK',
+		showWeekday: true,
+		showDate: true,
+		showTime: false,
+	},
 };
 
 export const US: Story = {
-	args: { date, editionId: 'US' },
+	args: {
+		date,
+		editionId: 'US',
+		showWeekday: true,
+		showDate: true,
+		showTime: true,
+	},
 };
 
 export const AU: Story = {
-	args: { date, editionId: 'AU' },
+	args: {
+		date,
+		editionId: 'AU',
+		showWeekday: true,
+		showDate: true,
+		showTime: true,
+	},
 };
 
 export const EUR: Story = {
-	args: { date, editionId: 'EUR' },
+	args: {
+		date,
+		editionId: 'EUR',
+		showWeekday: true,
+		showDate: true,
+		showTime: true,
+	},
 };
 
 export const INT: Story = {
-	args: { date, editionId: 'INT' },
+	args: {
+		date,
+		editionId: 'INT',
+		showWeekday: true,
+		showDate: true,
+		showTime: true,
+	},
 };
 
 export default meta;

@@ -171,6 +171,9 @@ export const LatestLinks = ({
 											}
 											display="relative"
 											editionId="UK"
+											showWeekday={false}
+											showDate={true}
+											showTime={false}
 										/>
 									</div>
 									<span className="show-underline">

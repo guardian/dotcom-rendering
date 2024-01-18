@@ -80,7 +80,9 @@ export const CardAge = ({
 				date={new Date(webPublicationDate)}
 				display="relative"
 				editionId="UK"
-				show="date"
+				showWeekday={false}
+				showDate={true}
+				showTime={false}
 			/>
 		</span>
 	);
