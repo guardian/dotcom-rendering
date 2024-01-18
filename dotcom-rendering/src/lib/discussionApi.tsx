@@ -56,7 +56,7 @@ const objAsParams = (obj: any): string => {
 };
 
 //todo: figure out the different return types and consider error handling
-export const getDiscussion = (
+export const getDiscussion = async (
 	shortUrl: string,
 	opts: {
 		orderBy: OrderByType;
@@ -84,56 +84,54 @@ export const getDiscussion = (
 
 	const url = joinUrl(options.baseUrl, 'discussion', shortUrl) + params;
 
-	return fetch(url, {
+	const resp = await fetch(url, {
 		headers: {
 			...options.headers,
 		},
-	})
-		.then((resp) => resp.json())
-		.then((json) => {
-			if (
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-				json.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
-			) {
-				// We need force a refetch with unthreaded set, as we don't know
-				// that this discussion is only available in linear format until
-				// we get the response to tell us
-				return getDiscussion(shortUrl, {
-					...opts,
-					...{ threads: 'unthreaded' },
-				});
-			}
-			return json;
-		})
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	});
+
+	const json = await resp.json();
+
+	if (
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		json.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
+	) {
+		// We need force a refetch with unthreaded set, as we don't know
+		// that this discussion is only available in linear format until
+		// we get the response to tell us
+		return getDiscussion(shortUrl, {
+			...opts,
+			...{ threads: 'unthreaded' },
+		});
+	}
+
+	return json;
 };
 
-export const preview = (body: string): Promise<string> => {
+export const preview = async (body: string): Promise<string> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment/preview') +
 		objAsParams(defaultParams);
 	const data = new URLSearchParams();
 	data.append('body', body);
 
-	return (
-		fetch(url, {
-			method: 'POST',
-			body: data.toString(),
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				...options.headers,
-			},
-		})
-			.then((resp) => resp.json())
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-			.then((json) => json.commentBody)
-			.catch((error) => console.error(`Error fetching ${url}`, error))
-	);
+	const resp = await fetch(url, {
+		method: 'POST',
+		body: data.toString(),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			...options.headers,
+		},
+	});
+	const json = await resp.json();
+
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- YOLO
+	return json.commentBody;
 };
 
 export const comment =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
-	(shortUrl: string, body: string): Promise<CommentResponse> => {
+	async (shortUrl: string, body: string): Promise<CommentResponse> => {
 		const url =
 			joinUrl(options.baseUrl, 'discussion', shortUrl, 'comment') +
 			objAsParams(defaultParams);
@@ -142,23 +140,23 @@ export const comment =
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		return fetch(url, {
+		const resp = await fetch(url, {
 			method: 'POST',
 			body: data.toString(),
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				...options.headers,
-				...(authOptions.headers !== undefined
-					? authOptions.headers
-					: {}),
+				...authOptions.headers,
 			},
 			credentials: authOptions.credentials,
-		}).then((resp) => resp.json());
+		});
+
+		return resp.json();
 	};
 
 export const reply =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
-	(
+	async (
 		shortUrl: string,
 		body: string,
 		parentCommentId: number,
@@ -176,42 +174,41 @@ export const reply =
 		data.append('body', body);
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		return fetch(url, {
+		const resp = await fetch(url, {
 			method: 'POST',
 			body: data.toString(),
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				...options.headers,
-				...(authOptions.headers !== undefined
-					? authOptions.headers
-					: {}),
+				...authOptions.headers,
 			},
 			credentials: authOptions.credentials,
-		}).then((resp) => resp.json());
+		});
+
+		return await resp.json();
 	};
 
 //todo: come back and parse the response properly and set a proper return type for the error case
-export const getPicks = (
+export const getPicks = async (
 	shortUrl: string,
 ): Promise<CommentType[] | undefined> => {
 	const url =
 		joinUrl(options.baseUrl, 'discussion', shortUrl, 'topcomments') +
 		objAsParams(defaultParams);
 
-	return (
-		fetch(url, {
-			headers: {
-				...options.headers,
-			},
-		})
-			.then((resp) => resp.json())
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-			.then((json) => json.discussion.comments)
-			.catch((error) => console.error(`Error fetching ${url}`, error))
-	);
+	const resp = await fetch(url, {
+		headers: {
+			...options.headers,
+		},
+	});
+
+	const json = await resp.json();
+
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- YOLO
+	return json.discussion.comments;
 };
 
-export const reportAbuse = ({
+export const reportAbuse = async ({
 	commentId,
 	categoryId,
 	email,
@@ -241,21 +238,23 @@ export const reportAbuse = ({
 		? getOptionsHeadersWithOkta(authStatus)
 		: undefined;
 
-	return fetch(url, {
+	const resp = await fetch(url, {
 		method: 'POST',
 		body: data.toString(),
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
-			...(authOptions?.headers !== undefined ? authOptions.headers : {}),
+			...authOptions?.headers,
 		},
 		credentials: authOptions?.credentials,
-	}).then((resp) => resp.json());
+	});
+
+	return resp.json();
 };
 
 export const recommend =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
-	(commentId: number): Promise<boolean> => {
+	async (commentId: number): Promise<boolean> => {
 		const url =
 			joinUrl(
 				options.baseUrl,
@@ -278,14 +277,14 @@ export const recommend =
 		}).then((resp) => resp.ok);
 	};
 
-export const addUserName = (
+export const addUserName = async (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 	userName: string,
 ): Promise<UserNameResponse> => {
 	const url = options.idApiUrl + `/user/me/username`;
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-	return fetch(url, {
+	const resp = await fetch(url, {
 		method: 'POST',
 		body: JSON.stringify({
 			publicFields: {
@@ -295,15 +294,15 @@ export const addUserName = (
 		}),
 		headers: {
 			'Content-Type': 'application/json',
-			...(authOptions.headers !== undefined ? authOptions.headers : {}),
+			...authOptions.headers,
 		},
 		credentials: authOptions.credentials,
-	})
-		.then((resp) => resp.json())
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	});
+
+	return resp.json();
 };
 
-export const pickComment = (
+export const pickComment = async (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 	commentId: number,
 ): Promise<CommentResponse> => {
@@ -312,7 +311,7 @@ export const pickComment = (
 		objAsParams(defaultParams);
 
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
-	return fetch(url, {
+	const resp = await fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -320,12 +319,12 @@ export const pickComment = (
 			...(authOptions.headers !== undefined ? authOptions.headers : {}),
 		},
 		credentials: authOptions.credentials,
-	})
-		.then((resp) => resp.json())
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	});
+
+	return resp.json();
 };
 
-export const unPickComment = (
+export const unPickComment = async (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 	commentId: number,
 ): Promise<CommentResponse> => {
@@ -338,20 +337,20 @@ export const unPickComment = (
 		) + objAsParams(defaultParams);
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-	return fetch(url, {
+	const resp = await fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
-			...(authOptions.headers !== undefined ? authOptions.headers : {}),
+			...authOptions.headers,
 		},
 		credentials: authOptions.credentials,
-	})
-		.then((resp) => resp.json())
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	});
+
+	return resp.json();
 };
 
-export const getMoreResponses = (
+export const getMoreResponses = async (
 	commentId: number,
 ): Promise<{
 	status: 'ok' | 'error';
@@ -367,11 +366,11 @@ export const getMoreResponses = (
 			},
 		});
 
-	return fetch(url, {
+	const resp = await fetch(url, {
 		headers: {
 			...options.headers,
 		},
-	})
-		.then((resp) => resp.json())
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	});
+
+	return resp.json();
 };

@@ -52,7 +52,6 @@ const getUser = async ({
  *
  * (No visual story exist)
  */
-
 export const DiscussionContainer = (props: Omit<DiscussionProps, 'user'>) => {
 	const hydrated = useHydrated();
 	const authStatus = useAuthStatus();
