@@ -55,6 +55,7 @@ const flexParentStyles = css`
 const inputContainerStyles = css`
 	margin-bottom: ${space[2]}px;
 	flex-shrink: 1;
+	flex-basis: 335px;
 `;
 
 const textInputStyles = css`
