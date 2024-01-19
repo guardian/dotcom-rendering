@@ -527,8 +527,8 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "GroupDescription": "Allow restricted ingress from CIDR ranges",
         "SecurityGroupIngress": [
           {
-            "CidrIp": "10.0.0.0/8",
-            "Description": "Allow access on port 443 from 10.0.0.0/8",
+            "CidrIp": "10.248.136.0/22",
+            "Description": "Allow access on port 443 from 10.248.136.0/22",
             "FromPort": 443,
             "IpProtocol": "tcp",
             "ToPort": 443,

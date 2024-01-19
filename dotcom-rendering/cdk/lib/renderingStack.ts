@@ -60,7 +60,7 @@ export class RenderingCDKStack extends CDKStack {
 			app: guApp,
 			access: {
 				// Restrict access to this range within the VPC
-				cidrRanges: [Peer.ipv4('10.0.0.0/8')],
+				cidrRanges: [Peer.ipv4('10.248.136.0/22')],
 				scope: AccessScope.INTERNAL,
 			},
 			accessLogging: {
