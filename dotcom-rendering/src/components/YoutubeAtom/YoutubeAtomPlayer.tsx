@@ -283,9 +283,11 @@ const createImaAdsRequestCallback = (
 			clientSideParticipations: abTestParticipations,
 			isSignedIn,
 		});
+		adsRenderingSettings.useStyledNonLinearAds = true;
 		if (window.google) {
 			adsRenderingSettings.uiElements = [
 				window.google.ima.UiElements.AdAttribution,
+				window.google.ima.UiElements.Countdown,
 			];
 		}
 	};
