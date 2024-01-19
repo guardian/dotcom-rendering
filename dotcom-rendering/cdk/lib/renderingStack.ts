@@ -1,45 +1,21 @@
 import { type Alarms, GuEc2App } from '@guardian/cdk';
 import { AccessScope } from '@guardian/cdk/lib/constants';
 import type { NoMonitoring } from '@guardian/cdk/lib/constructs/cloudwatch';
-import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import {
 	GuStack as CDKStack,
 	GuDistributionBucketParameter,
 } from '@guardian/cdk/lib/constructs/core';
 import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
-import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { type App as CDKApp, Duration } from 'aws-cdk-lib';
-import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
-import type { AdjustmentType } from 'aws-cdk-lib/aws-autoscaling';
 import { StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
 import { Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
-import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
+import type { RenderingCDKStackProps } from '../bin/cdk';
 import { getUserData } from './userData';
-
-export interface ScalingPolicies {
-	policies: {
-		scaleOut: {
-			scalingSteps: ScalingInterval[];
-			adjustmentType: AdjustmentType;
-		};
-		scaleIn: {
-			scalingSteps: ScalingInterval[];
-			adjustmentType: AdjustmentType;
-		};
-	};
-}
-
-export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
-	guApp: `${'article' | 'facia' | 'misc' | 'interactive'}-rendering`;
-	domainName: string;
-	instanceSize: InstanceSize;
-	scaling: GuAsgCapacity & ScalingPolicies;
-}
 
 /** DCR infrastructure provisioning via CDK */
 export class RenderingCDKStack extends CDKStack {

@@ -1,5 +1,18 @@
+import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
 import { AdjustmentType } from 'aws-cdk-lib/aws-applicationautoscaling';
-import type { ScalingPolicies } from '../lib/renderingStack';
+
+export interface ScalingPolicies {
+	policies: {
+		scaleOut: {
+			scalingSteps: ScalingInterval[];
+			adjustmentType: AdjustmentType;
+		};
+		scaleIn: {
+			scalingSteps: ScalingInterval[];
+			adjustmentType: AdjustmentType;
+		};
+	};
+}
 
 /** Scaling policies ASCII diagram
  *

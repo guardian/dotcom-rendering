@@ -1,4 +1,4 @@
-import type { RenderingCDKStackProps } from './renderingStack';
+import type { RenderingCDKStackProps } from '../bin/cdk';
 
 interface UserDataProps extends Pick<RenderingCDKStackProps, 'stage'> {
 	guApp: string;

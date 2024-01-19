@@ -1,7 +1,10 @@
+import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
+import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { App } from 'aws-cdk-lib';
 import { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { DotcomRendering } from '../lib/dotcom-rendering';
 import { RenderingCDKStack } from '../lib/renderingStack';
+import type { ScalingPolicies } from './scalingPolicy';
 import { baseScalingPolicies } from './scalingPolicy';
 
 const cdkApp = new App();
@@ -28,6 +31,13 @@ new DotcomRendering(cdkApp, 'DotcomRendering-CODE', {
 	maxCapacity: 4,
 	instanceType: 't4g.micro',
 });
+
+export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
+	guApp: `${'article' | 'facia' | 'misc' | 'interactive'}-rendering`;
+	domainName: string;
+	instanceSize: InstanceSize;
+	scaling: GuAsgCapacity & ScalingPolicies;
+}
 
 /** NEW article stack */
 new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
