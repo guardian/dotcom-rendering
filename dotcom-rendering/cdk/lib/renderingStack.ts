@@ -10,7 +10,9 @@ import { GuCname } from '@guardian/cdk/lib/constructs/dns/dns-records';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { type App as CDKApp, Duration } from 'aws-cdk-lib';
-import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
+import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
+import type { AdjustmentType } from 'aws-cdk-lib/aws-autoscaling';
+import { StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
 import { Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
@@ -19,11 +21,24 @@ import { Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
 
+export interface ScalingPolicies {
+	policies: {
+		scaleOut: {
+			scalingSteps: ScalingInterval[];
+			adjustmentType: AdjustmentType;
+		};
+		scaleIn: {
+			scalingSteps: ScalingInterval[];
+			adjustmentType: AdjustmentType;
+		};
+	};
+}
+
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	guApp: `${'article' | 'facia' | 'misc' | 'interactive'}-rendering`;
 	domainName: string;
 	instanceSize: InstanceSize;
-	scaling: GuAsgCapacity;
+	scaling: GuAsgCapacity & ScalingPolicies;
 }
 
 /** DCR infrastructure provisioning via CDK */
@@ -133,48 +148,15 @@ export class RenderingCDKStack extends CDKStack {
 			statistic: 'Average', // TODO - should we use p90?
 		});
 
-		/** Scaling policies ASCII diagram
-		 *
-		 * Metric value (latency in seconds)
-		 *  0         0.15         0.2         0.3         infinity
-		 * --------------------------------------------------------
-		 *  |   - 1    |     0      |   + 50%   |     + 80%      |
-		 * --------------------------------------------------------
-		 * Instance change
-		 *
-		 * -
-		 * When scaling up, we use percentage change (+50% initially then +80% if particularly high)
-		 * When scaling down, we use absolute change (-1 each interval)
-		 * We take no scaling actions when latency is between 0.15s and 0.2s to avoid flapping
-		 * @see https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#step-scaling-considerations
-		 */
-
-		/** Scale out policy on latency above 0.2s */
+		/** Scale out policy */
 		const scaleOutPolicy = new StepScalingPolicy(
 			this,
 			'LatencyScaleUpPolicy',
 			{
 				autoScalingGroup: ec2app.autoScalingGroup,
 				metric: latencyMetric,
-				scalingSteps: [
-					{
-						// No scaling up effect between 0 and 0.2s latency
-						change: 0,
-						lower: 0,
-						upper: 0.2,
-					},
-					{
-						// When latency is higher than 0.2s we scale up by 50%
-						change: 50,
-						lower: 0.2,
-					},
-					{
-						// When latency is higher than 0.3s we scale up by 80%
-						change: 80,
-						lower: 0.3,
-					},
-				],
-				adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
+				scalingSteps: scaling.policies.scaleOut.scalingSteps,
+				adjustmentType: scaling.policies.scaleOut.adjustmentType,
 				evaluationPeriods: 5,
 			},
 		);
@@ -191,24 +173,12 @@ export class RenderingCDKStack extends CDKStack {
 			scaleOutPolicy.upperAlarm?.addAlarmAction(criticalAlertsSnsAction);
 		}
 
-		/** Scale in policy on latency below 0.15s */
+		/** Scale in policy */
 		new StepScalingPolicy(this, 'LatencyScaleDownPolicy', {
 			autoScalingGroup: ec2app.autoScalingGroup,
 			metric: latencyMetric,
-			scalingSteps: [
-				{
-					// No scaling down effect when latency is higher than 0.15s
-					change: 0,
-					lower: 0.12,
-				},
-				{
-					// When latency is lower than 0.15s we scale down by 1
-					change: -1,
-					upper: 0.12,
-					lower: 0,
-				},
-			],
-			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
+			scalingSteps: scaling.policies.scaleIn.scalingSteps,
+			adjustmentType: scaling.policies.scaleIn.adjustmentType,
 			evaluationPeriods: 10,
 		});
 

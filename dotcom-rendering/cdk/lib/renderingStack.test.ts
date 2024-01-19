@@ -1,6 +1,7 @@
 import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { InstanceSize } from 'aws-cdk-lib/aws-ec2';
+import { baseScalingPolicies } from '../bin/scalingPolicy';
 import { RenderingCDKStack } from './renderingStack';
 
 /**
@@ -14,7 +15,11 @@ describe('The RenderingCDKStack', () => {
 			stage: 'TEST',
 			guApp: 'article-rendering',
 			domainName: 'article-rendering.test.dev-guardianapis.com',
-			scaling: { minimumInstances: 1, maximumInstances: 4 },
+			scaling: {
+				minimumInstances: 1,
+				maximumInstances: 4,
+				policies: baseScalingPolicies,
+			},
 			instanceSize: InstanceSize.MICRO,
 		});
 		const template = Template.fromStack(stack);
