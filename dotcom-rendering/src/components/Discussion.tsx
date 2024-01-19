@@ -3,7 +3,10 @@ import { joinUrl, storage } from '@guardian/libs';
 import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import { getCommentContext } from '../lib/getCommentContext';
+import {
+	getCommentContext,
+	initFiltersFromLocalStorage,
+} from '../lib/getCommentContext';
 import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
 import { palette as themePalette } from '../palette';
@@ -11,7 +14,6 @@ import type { FilterOptions, SignedInUser } from '../types/discussion';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
-import { initFiltersFromLocalStorage } from '../lib/getCommentContext';
 
 export type Props = {
 	discussionApiUrl: string;
