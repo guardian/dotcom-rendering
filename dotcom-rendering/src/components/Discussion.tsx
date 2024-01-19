@@ -121,7 +121,7 @@ export const Discussion = ({
 		}),
 	);
 
-	// If these override props are updated we want to respect them
+	// If these override values are updated we want to respect them
 	useEffect(() => {
 		const newFilters = {
 			...filters,
