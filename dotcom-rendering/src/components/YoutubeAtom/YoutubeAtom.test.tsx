@@ -48,7 +48,7 @@ describe('YoutubeAtom', () => {
 			</ConfigProvider>
 		);
 		const { getAllByTestId } = render(atom);
-		const [playerDiv] = getAllByTestId(/^youtube-video-ZCvZmYlQD8-\d+$/);
+		const [playerDiv] = getAllByTestId(/^youtube-player-ZCvZmYlQD8-\d+$/);
 		expect(playerDiv).toBeInTheDocument();
 	});
 
@@ -85,7 +85,7 @@ describe('YoutubeAtom', () => {
 		overlay && fireEvent.click(overlay);
 		expect(overlay).not.toBeInTheDocument();
 
-		const [playerDiv] = getAllByTestId(/^youtube-video-ZCvZmYlQD8-\d+$/);
+		const [playerDiv] = getAllByTestId(/^youtube-player-ZCvZmYlQD8-\d+$/);
 		expect(playerDiv).toBeInTheDocument();
 	});
 
@@ -117,7 +117,7 @@ describe('YoutubeAtom', () => {
 			</ConfigProvider>
 		);
 		const { getAllByTestId } = render(atom);
-		const [playerDiv] = getAllByTestId(/^youtube-video-ZCvZmYlQD8-\d+$/);
+		const [playerDiv] = getAllByTestId(/^youtube-player-ZCvZmYlQD8-\d+$/);
 		expect(playerDiv?.title).toBe(title);
 	});
 
