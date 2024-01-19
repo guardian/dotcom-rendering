@@ -11,18 +11,16 @@ import {
 	getPicks,
 	initialiseApi,
 } from '../../lib/discussionApi';
-import {
-	type AdditionalHeadersType,
-	type CommentResponse,
-	type CommentType,
-	type FilterOptions,
-	isOrderBy,
-	isPageSize,
-	isThreads,
-	type OrderByType,
-	type PageSizeType,
-	type SignedInUser,
+import type {
+	AdditionalHeadersType,
+	CommentResponse,
+	CommentType,
+	FilterOptions,
+	OrderByType,
+	PageSizeType,
+	SignedInUser,
 } from '../../types/discussion';
+import { isOrderBy, isPageSize, isThreads } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -345,9 +343,8 @@ export const Comments = ({
 		commentElement?.scrollIntoView();
 	};
 
-	// where should the responsibility for this be?
-	const handleSetPage = (page: number) => {
-		setPage(page);
+	const handleSetPage = (pageNumber: number) => {
+		setPage(pageNumber);
 		onExpand();
 	};
 
