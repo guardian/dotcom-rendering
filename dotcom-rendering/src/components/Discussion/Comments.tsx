@@ -16,8 +16,6 @@ import type {
 	CommentResponse,
 	CommentType,
 	FilterOptions,
-	OrderByType,
-	PageSizeType,
 	SignedInUser,
 } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
@@ -31,8 +29,6 @@ type Props = {
 	baseUrl: string;
 	isClosedForComments: boolean;
 	commentToScrollTo?: number;
-	pageSizeOverride?: PageSizeType;
-	orderByOverride?: OrderByType;
 	user?: SignedInUser;
 	additionalHeaders: AdditionalHeadersType;
 	expanded: boolean;
@@ -50,6 +46,8 @@ type Props = {
 	idApiUrl: string;
 	page: number;
 	setPage: (page: number) => void;
+	filters: FilterOptions;
+	setFilters: (filters: FilterOptions) => void;
 };
 
 const footerStyles = css`
@@ -91,37 +89,6 @@ const NoComments = () => (
 	</div>
 );
 
-const rememberFilters = ({ threads, pageSize, orderBy }: FilterOptions) => {
-	storage.local.set('gu.prefs.discussion.threading', threads);
-	storage.local.set('gu.prefs.discussion.pagesize', pageSize);
-	storage.local.set('gu.prefs.discussion.order', orderBy);
-};
-
-const initialiseFilters = ({
-	pageSizeOverride,
-	orderByOverride,
-	permalinkBeingUsed,
-	isClosedForComments,
-}: {
-	pageSizeOverride?: PageSizeType;
-	orderByOverride?: OrderByType;
-	permalinkBeingUsed: boolean;
-	isClosedForComments: boolean;
-}) => {
-	// passing isClosedForComments feels like a smell here... is there a better way to do this?
-	const localFilters =
-		initFiltersFromLocalStorageContext(isClosedForComments);
-	return {
-		// Override if prop given
-		pageSize: pageSizeOverride ?? localFilters.pageSize,
-		orderBy: orderByOverride ?? localFilters.orderBy,
-		threads:
-			localFilters.threads === 'collapsed' && permalinkBeingUsed
-				? 'expanded'
-				: localFilters.threads,
-	};
-};
-
 const readMutes = (): string[] => {
 	const mutes = storage.local.get('gu.prefs.discussion.mutes') ?? [];
 
@@ -137,8 +104,6 @@ export const Comments = ({
 	shortUrl,
 	isClosedForComments,
 	commentToScrollTo,
-	pageSizeOverride,
-	orderByOverride,
 	user,
 	additionalHeaders,
 	expanded,
@@ -152,18 +117,9 @@ export const Comments = ({
 	idApiUrl,
 	page,
 	setPage,
+	filters,
+	setFilters,
 }: Props) => {
-	const [filters, setFilters] = useState<FilterOptions>(
-		initialiseFilters({
-			pageSizeOverride,
-			orderByOverride,
-			permalinkBeingUsed:
-				commentToScrollTo !== undefined &&
-				!Number.isNaN(commentToScrollTo),
-			isClosedForComments,
-		}),
-	);
-
 	const [loading, setLoading] = useState<boolean>(true);
 	const [totalPages, setTotalPages] = useState<number>(0);
 	const [picks, setPicks] = useState<CommentType[]>([]);
@@ -216,17 +172,6 @@ export const Comments = ({
 		void fetchPicks();
 	}, [shortUrl]);
 
-	// If these override props are updated we want to respect them
-	useEffect(() => {
-		setFilters((oldFilters) => {
-			return {
-				...oldFilters,
-				orderBy: orderByOverride ?? oldFilters.orderBy,
-				pageSize: pageSizeOverride ?? oldFilters.pageSize,
-			};
-		});
-	}, [pageSizeOverride, orderByOverride]);
-
 	// Check if there is a comment to scroll to and if
 	// so, scroll to the div with this id.
 	// We need to do this in javascript like this because the comments list isn't
@@ -260,12 +205,6 @@ export const Comments = ({
 
 		setFilters(newFilterObject);
 	};
-
-	useEffect(() => {
-		rememberFilters(filters);
-		// Filters also show when the view is not expanded but we want to expand when they're changed
-		onExpand();
-	}, [filters]);
 
 	useEffect(() => {
 		const element = document.getElementById('comment-filters');
