@@ -172,11 +172,11 @@ export const Comments = ({
 		void fetchPicks();
 	}, [shortUrl]);
 
-	// Check if there is a comment to scroll to and if
-	// so, scroll to the div with this id.
-	// We need to do this in javascript like this because the comments list isn't
-	// loaded on the inital page load and only gets added to the dom later, after
-	// an api call is made.
+	/**
+	 * Verify if there is a comment to scroll to; if found, scroll to the corresponding div.
+	 * This JavaScript is necessary because the comments list isn't initially loaded with the
+	 * page and is added to the DOM later, following an API call.
+	 * */
 	useEffect(() => {
 		if (commentToScrollTo !== undefined) {
 			const commentElement = document.getElementById(
@@ -188,14 +188,12 @@ export const Comments = ({
 
 	const onFilterChange = (newFilterObject: FilterOptions) => {
 		/**
-		 *
-		 * If we're reducing the page size, we might need to adjust the current page to avoid
-		 * requesting non-existent pages. For example, if we initially had 102 comments with a
-		 * page size of 25, the current page could be 5 (showing 2 comments).
-		 *
-		 * If we then change the page size to 50, there's no longer a page 5. To respect the
-		 * reader's desire to stay on the last page, we calculate the maximum possible page
-		 * and use that instead.
+		 * When decreasing the page size, we adjust the current page
+		 * to avoid requesting non-existent pages. For example,
+		 * if we had 102 comments with a page size of 25, and the current
+		 * page was 5 (showing 2 comments), reducing the page size to 50 eliminates page 5.
+		 * To respect the reader's preference to stay on the last page,
+		 * we calculate and use the maximum possible page instead.
 		 */
 		const maxPagePossible = Math.ceil(
 			commentCount / newFilterObject.pageSize,
