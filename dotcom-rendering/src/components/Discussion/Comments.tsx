@@ -20,14 +20,12 @@ import type {
 	PageSizeType,
 	SignedInUser,
 } from '../../types/discussion';
-import { isOrderBy, isPageSize, isThreads } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
 import { LoadingComments } from './LoadingComments';
 import { Pagination } from './Pagination';
 import { TopPicks } from './TopPicks';
-
 type Props = {
 	shortUrl: string;
 	baseUrl: string;
@@ -79,12 +77,6 @@ const picksWrapper = css`
 	justify-content: space-between;
 `;
 
-const DEFAULT_FILTERS = {
-	orderBy: 'newest',
-	pageSize: 100,
-	threads: 'collapsed',
-} as const satisfies FilterOptions;
-
 const NoComments = () => (
 	<div
 		css={css`
@@ -116,57 +108,17 @@ const initialiseFilters = ({
 	permalinkBeingUsed: boolean;
 	isClosedForComments: boolean;
 }) => {
-	const initialisedFilters = initFiltersFromLocalStorage({
-		isClosedForComments,
-	});
+	// passing isClosedForComments feels like a smell here... is there a better way to do this?
+	const localFilters =
+		initFiltersFromLocalStorageContext(isClosedForComments);
 	return {
-		...initialisedFilters,
 		// Override if prop given
-		pageSize: pageSizeOverride ?? initialisedFilters.pageSize,
-		orderBy: orderByOverride ?? initialisedFilters.orderBy,
+		pageSize: pageSizeOverride ?? localFilters.pageSize,
+		orderBy: orderByOverride ?? localFilters.orderBy,
 		threads:
-			initialisedFilters.threads === 'collapsed' && permalinkBeingUsed
+			localFilters.threads === 'collapsed' && permalinkBeingUsed
 				? 'expanded'
-				: initialisedFilters.threads,
-	};
-};
-
-const decideDefaultOrderBy = (isClosedForComment: boolean): OrderByType =>
-	isClosedForComment ? 'oldest' : 'newest';
-
-/**
- * This function handles the fact that some readers have legacy values
- * stored in the browsers
- */
-const checkPageSize = (size: PageSizeType | 'All'): PageSizeType =>
-	size === 'All' ? DEFAULT_FILTERS.pageSize : size;
-
-const initFiltersFromLocalStorage = ({
-	isClosedForComments,
-}: {
-	isClosedForComments: boolean;
-}): FilterOptions => {
-	const orderBy =
-		storage.local.get('gu.prefs.discussion.order') ??
-		decideDefaultOrderBy(isClosedForComments);
-	const threads =
-		storage.local.get('gu.prefs.discussion.threading') ??
-		DEFAULT_FILTERS.threads;
-	const pageSize =
-		storage.local.get('gu.prefs.discussion.pagesize') ??
-		DEFAULT_FILTERS.pageSize;
-
-	// If we found something in LS, use it, otherwise return defaults
-	//todo: stop typecasting these and parse these properly instead
-	return {
-		orderBy: isOrderBy(orderBy)
-			? orderBy
-			: decideDefaultOrderBy(isClosedForComments),
-		threads: isThreads(threads) ? threads : DEFAULT_FILTERS.threads,
-		pageSize:
-			isPageSize(pageSize) || pageSize === 'All'
-				? checkPageSize(pageSize)
-				: DEFAULT_FILTERS.pageSize,
+				: localFilters.threads,
 	};
 };
 
@@ -290,27 +242,31 @@ export const Comments = ({
 	}, [comments, commentToScrollTo]); // Add comments to deps so we rerun this effect when comments are loaded
 
 	const onFilterChange = (newFilterObject: FilterOptions) => {
-		// If we're reducing the pageSize then we may need to override the page we're on to prevent making
-		// requests for pages that don't exist.
-		// E.g. If we used to have 102 comments and a pageSize of 25 then the current page could be 5 (showing 2
-		// comments). If we then change pageSize to be 50 then there is no longer a page 5 and trying to ask for it
-		// from the api would return an error so, in order to respect the readers desire to be on the last page, we
-		// need to work out the maximum page possible and use that instead.
-		let maxPagePossible = Math.floor(
+		/**
+		 *
+		 * If we're reducing the page size, we might need to adjust the current page to avoid
+		 * requesting non-existent pages. For example, if we initially had 102 comments with a
+		 * page size of 25, the current page could be 5 (showing 2 comments).
+		 *
+		 * If we then change the page size to 50, there's no longer a page 5. To respect the
+		 * reader's desire to stay on the last page, we calculate the maximum possible page
+		 * and use that instead.
+		 */
+		const maxPagePossible = Math.ceil(
 			commentCount / newFilterObject.pageSize,
 		);
-		// Add 1 if there is a remainder
-		if (commentCount % newFilterObject.pageSize) {
-			maxPagePossible = maxPagePossible + 1;
-		}
-		// Check
+
 		if (page > maxPagePossible) setPage(maxPagePossible);
 
-		rememberFilters(newFilterObject);
-		// Filters also show when the view is not expanded but we want to expand when they're changed
-		onExpand();
 		setFilters(newFilterObject);
 	};
+
+	useEffect(() => {
+		rememberFilters(filters);
+		// Filters also show when the view is not expanded but we want to expand when they're changed
+		onExpand();
+	}, [filters]);
+
 	useEffect(() => {
 		const element = document.getElementById('comment-filters');
 		element?.scrollIntoView();
@@ -373,7 +329,6 @@ export const Comments = ({
 						<Filters
 							filters={filters}
 							onFilterChange={onFilterChange}
-							totalPages={totalPages}
 							commentCount={commentCount}
 						/>
 						{showPagination && (
@@ -443,7 +398,6 @@ export const Comments = ({
 			<Filters
 				filters={filters}
 				onFilterChange={onFilterChange}
-				totalPages={totalPages}
 				commentCount={commentCount}
 			/>
 			{showPagination && (

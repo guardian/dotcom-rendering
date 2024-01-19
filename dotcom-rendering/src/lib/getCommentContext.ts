@@ -41,17 +41,24 @@ interface FilterOptions {
 	threads: ThreadsType;
 }
 
-const getOrderByType = (value: unknown) =>
-	isString(value) && isOneOf(orderByTypes)(value) ? value : 'newest';
+const getOrderByType = (value: unknown, isClosedForComment?: boolean) =>
+	isString(value) && isOneOf(orderByTypes)(value)
+		? value
+		: isClosedForComment
+		? 'oldest'
+		: 'newest';
 const getThreadType = (value: unknown) =>
 	isString(value) && isOneOf(threadTypes)(value) ? value : 'collapsed';
 const getPageSizeType = (value: unknown) =>
 	typeof value === 'number' && isOneOf(pageSizeTypes)(value) ? value : 25;
 
 /** Retrieves stored values from local storage if available, otherwise it returns defaults */
-const initFiltersFromLocalStorage = (): FilterOptions => {
+export const initFiltersFromLocalStorage = (
+	isClosedForComment?: boolean,
+): FilterOptions => {
 	const orderBy: OrderByType = getOrderByType(
 		storage.local.get('gu.prefs.discussion.order'),
+		isClosedForComment,
 	);
 	const threads: ThreadsType = getThreadType(
 		storage.local.get('gu.prefs.discussion.threading'),
