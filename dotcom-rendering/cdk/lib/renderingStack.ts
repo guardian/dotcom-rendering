@@ -186,8 +186,10 @@ export class RenderingCDKStack extends CDKStack {
 		);
 		const criticalAlertsSnsAction = new SnsAction(criticalAlertsTopic);
 
-		/** Adds a notification action to the scale out policy alarm */
-		scaleOutPolicy.upperAlarm?.addAlarmAction(criticalAlertsSnsAction);
+		/** Adds a notification action in PROD to the scale out policy alarm */
+		if (stage === 'PROD') {
+			scaleOutPolicy.upperAlarm?.addAlarmAction(criticalAlertsSnsAction);
+		}
 
 		/** Scale in policy on latency below 0.15s */
 		new StepScalingPolicy(this, 'LatencyScaleDownPolicy', {
