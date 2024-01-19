@@ -68,25 +68,12 @@ type PlayerListeners = Array<PlayerListener<PlayerListenerName>>;
  */
 type ExtractEventType<T> = T extends YT.PlayerEventHandler<infer X> ? X : never;
 
-const imaAdContainerStyles = css`
-	/*
-		The IMA script gives the following styles to the ad container element:
-			width: [pixel value equal to the youtube iframe's width]
-			height: [pixel value equal to the youtube iframe's height]
-			position: relative;
-			display: block;
-		We need to override these styles to make sure that the ad container overlays
-		the youtube player exactly and to avoid a player-sized white space underneath the ad.
-	*/
-	/* stylelint-disable-next-line declaration-no-important -- we need this to override inline styles added by youtube */
-	width: 100% !important;
-	/* stylelint-disable-next-line declaration-no-important -- we need this to override inline styles added by youtube */
-	height: 100% !important;
-	/* stylelint-disable-next-line declaration-no-important -- we need this to override inline styles added by youtube */
-	position: absolute !important;
+const playerStyles = css`
+	position: absolute;
 	top: 0;
 	left: 0;
-	display: none;
+	width: 100% !important;
+	height: 100% !important;
 `;
 
 const dispatchCustomPlayEvent = (uniqueId: string) => {
@@ -377,8 +364,7 @@ export const YoutubeAtomPlayer = ({
 
 	const adsManager = useRef<google.ima.AdsManager>();
 
-	const id = `youtube-video-${uniqueId}`;
-	const imaAdContainerId = `ima-ad-container-${uniqueId}`;
+	const id = `youtube-player-${uniqueId}`;
 
 	const authStatus = useAuthStatus();
 
@@ -435,8 +421,8 @@ export const YoutubeAtomPlayer = ({
 				player.current = new YouTubePlayer(
 					id,
 					{
-						height,
-						width,
+						height: '100%',
+						width: '100%',
 						videoId,
 						playerVars: {
 							modestbranding: 1,
@@ -522,7 +508,6 @@ export const YoutubeAtomPlayer = ({
 			abTestParticipations,
 			uniqueId,
 			id,
-			imaAdContainerId,
 			playerReadyCallback,
 			deactivateVideo,
 			isSignedIn,
@@ -599,24 +584,16 @@ export const YoutubeAtomPlayer = ({
 	}, []);
 
 	/**
-	 * An element for the YouTube iFrame to hook into the dom
+	 * An element for the YouTube player to hook into the dom
 	 */
 	return (
-		<>
-			<div
-				id={id}
-				data-atom-id={id}
-				data-testid={id}
-				data-atom-type="youtube"
-				title={title}
-			></div>
-			{enableIma && (
-				<div
-					id={imaAdContainerId}
-					data-atom-type="ima-ad-container"
-					css={imaAdContainerStyles}
-				></div>
-			)}
-		</>
+		<div
+			id={id}
+			data-atom-id={id}
+			data-testid={id}
+			data-atom-type="youtube"
+			title={title}
+			css={playerStyles}
+		></div>
 	);
 };
