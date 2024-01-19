@@ -202,6 +202,8 @@ export const Comments = ({
 		if (page > maxPagePossible) setPage(maxPagePossible);
 
 		setFilters(newFilterObject);
+		// Filters also show when the view is not expanded but we want to expand when they're changed
+		onExpand();
 	};
 
 	useEffect(() => {

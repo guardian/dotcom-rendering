@@ -109,8 +109,6 @@ export const Discussion = ({
 
 	useEffect(() => {
 		rememberFilters(filters);
-		// Filters also show when the view is not expanded but we want to expand when they're changed
-		setIsExpanded(true);
 	}, [filters]);
 
 	const handlePermalink = (commentId: number) => {
