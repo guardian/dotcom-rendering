@@ -70,7 +70,8 @@ export const AdConsent = () => {
 							us: ['us', 'ca'],
 							au: ['au', 'nz'],
 
-							// Framework Overrides
+							// Consent framework overrides, the default TCFv2 config is overridden
+							// by the CCPA and AUS configs in these countries
 							ccpa: ['us'],
 							aus: ['au'],
 
