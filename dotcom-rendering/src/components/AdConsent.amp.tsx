@@ -14,17 +14,13 @@ const pubData = {
 
 const queryParams = new URLSearchParams(pubData).toString();
 
+// Default to TCFv2, the CCPA and AUS configs override the options in this config
 const clientConfig = {
 	accountId: 1257,
 	mmsDomain: `https://${sourcepointDomain}`,
 	propertyId: 8791,
 	pmTab: 'purposes',
 	stageCampaign: false,
-	isTCFV2: false,
-};
-
-const clientConfigTcfv2 = {
-	...clientConfig,
 	privacyManagerId: 145885,
 	isTCFV2: true,
 	propertyHref: 'https://theguardian.amp',
@@ -34,9 +30,9 @@ const clientConfigTcfv2 = {
 };
 
 const clientConfigCcpa = {
-	...clientConfig,
 	privacyManagerId: '5eba7ef78c167c47ca8b433d',
 	isCCPA: true,
+	isTCFV2: false,
 	siteHref: 'https://theguardian.amp',
 	getDnsMsgMms: true,
 	alwaysDisplayDns: false,
@@ -47,10 +43,10 @@ const clientConfigCcpa = {
 };
 
 const clientConfigAus = {
-	...clientConfig,
 	propertyId: 14327,
 	privacyManagerId: '5f859e174ed5055e72ce26a6',
 	isCCPA: true,
+	isTCFV2: false,
 	siteHref: 'https://amp.au.theguardian.com',
 	getDnsMsgMms: true,
 	alwaysDisplayDns: false,
@@ -142,7 +138,7 @@ export const AdConsent = () => {
 						consentInstanceId: 'sourcepoint',
 						checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp-v2?authId=${pubData.authId}`,
 						promptUISrc: `https://${sourcepointDomain}/amp/unified/index.html?${queryParams}`,
-						clientConfig: clientConfigTcfv2,
+						clientConfig,
 						geoOverride: {
 							ccpa: {
 								checkConsentHref: `https://${sourcepointDomain}/wrapper/ccpa/amp-v2?authId=${pubData.authId}`,
