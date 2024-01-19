@@ -132,7 +132,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 			return <div css={titleStyle}>{title}</div>;
 		}
 		default: {
-			assertUnreachable(collectionBranding);
+			assertUnreachable();
 			return null;
 		}
 	}
