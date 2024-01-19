@@ -7,12 +7,7 @@ import { getCommentContext } from '../lib/getCommentContext';
 import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
 import { palette as themePalette } from '../palette';
-import type {
-	FilterOptions,
-	OrderByType,
-	PageSizeType,
-	SignedInUser,
-} from '../types/discussion';
+import type { FilterOptions, SignedInUser } from '../types/discussion';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
@@ -69,30 +64,6 @@ const commentIdFromUrl = () => {
 	return parseInt(commentId, 10);
 };
 
-const initialiseFilters = ({
-	pageSizeOverride,
-	orderByOverride,
-	permalinkBeingUsed,
-	isClosedForComments,
-}: {
-	pageSizeOverride?: PageSizeType;
-	orderByOverride?: OrderByType;
-	permalinkBeingUsed: boolean;
-	isClosedForComments: boolean;
-}) => {
-	// passing isClosedForComments feels like a smell here... is there a better way to do this?
-	const localFilters = initFiltersFromLocalStorage(isClosedForComments);
-	return {
-		// Override if prop given
-		pageSize: pageSizeOverride ?? localFilters.pageSize,
-		orderBy: orderByOverride ?? localFilters.orderBy,
-		threads:
-			localFilters.threads === 'collapsed' && permalinkBeingUsed
-				? 'expanded'
-				: localFilters.threads,
-	};
-};
-
 export const Discussion = ({
 	discussionApiUrl,
 	shortUrlId,
@@ -112,34 +83,35 @@ export const Discussion = ({
 		commentIdFromUrl(),
 	);
 	const [filters, setFilters] = useState<FilterOptions>(
-		initialiseFilters({
-			commentPageSize,
-			commentOrderBy,
-			permalinkBeingUsed:
-				hashCommentId !== undefined && !Number.isNaN(hashCommentId),
-			isClosedForComments,
-		}),
+		initFiltersFromLocalStorage(),
 	);
 
-	// If these override values are updated we want to respect them
+	const { commentCount, isClosedForComments } = useDiscussion(
+		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
+	);
+
 	useEffect(() => {
-		const newFilters = {
-			...filters,
-			orderBy: commentOrderBy ?? filters.orderBy,
-			pageSize: commentPageSize ?? filters.pageSize,
-		};
-		setFilters(newFilters);
-	}, [commentPageSize, commentOrderBy]);
+		const permalinkBeingUsed =
+			hashCommentId !== undefined && !Number.isNaN(hashCommentId);
+		const filterByPermalinks =
+			filters.threads === 'collapsed' && permalinkBeingUsed
+				? 'expanded'
+				: undefined;
+		const orderByClosed = isClosedForComments ? 'oldest' : undefined;
+
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			orderBy: commentOrderBy ?? orderByClosed ?? prevFilters.orderBy,
+			pageSize: commentPageSize ?? prevFilters.pageSize,
+			threads: filterByPermalinks ?? prevFilters.threads,
+		}));
+	}, [commentPageSize, commentOrderBy, isClosedForComments, hashCommentId]);
 
 	useEffect(() => {
 		rememberFilters(filters);
 		// Filters also show when the view is not expanded but we want to expand when they're changed
 		setIsExpanded(true);
 	}, [filters]);
-
-	const { commentCount, isClosedForComments } = useDiscussion(
-		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
-	);
 
 	const handlePermalink = (commentId: number) => {
 		window.location.hash = `#comment-${commentId}`;
