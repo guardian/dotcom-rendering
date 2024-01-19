@@ -454,7 +454,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge?.enhanced}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -671,7 +670,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									showBottomSocialButtons={
 										article.showBottomSocialButtons && isWeb
 									}
-									badge={article.badge?.enhanced}
 								/>
 							</ArticleContainer>
 						</GridItem>

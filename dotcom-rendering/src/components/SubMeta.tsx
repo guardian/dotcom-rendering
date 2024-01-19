@@ -4,8 +4,6 @@ import { from, space, textSans, until } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
-import type { DCRBadgeType } from '../types/badge';
-import { Badge } from './Badge';
 import { ShareIcons } from './ShareIcons';
 
 const labelStyles = css`
@@ -13,11 +11,6 @@ const labelStyles = css`
 	display: block;
 	color: ${palette('--sub-meta-label-text')};
 	margin-bottom: 8px;
-`;
-
-const badgeWrapper = css`
-	float: right;
-	margin-top: 6px;
 `;
 
 const bottomPadding = css`
@@ -116,7 +109,6 @@ type Props = {
 	webUrl: string;
 	webTitle: string;
 	showBottomSocialButtons: boolean;
-	badge?: DCRBadgeType;
 };
 
 const syndicationButtonOverrides = css`
@@ -135,7 +127,6 @@ export const SubMeta = ({
 	webUrl,
 	webTitle,
 	showBottomSocialButtons,
-	badge,
 }: Props) => {
 	const createLinks = () => {
 		const links: BaseLinkType[] = [];
@@ -156,11 +147,6 @@ export const SubMeta = ({
 					: bottomPadding
 			}
 		>
-			{badge && (
-				<div css={badgeWrapper}>
-					<Badge imageSrc={badge.imageSrc} href={badge.href} />
-				</div>
-			)}
 			{hasLinks && (
 				<>
 					<span css={labelStyles}>Explore more on these topics</span>

@@ -3306,6 +3306,9 @@
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.YoutubeBlockElement"
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "assetId": {
                     "type": "string"
                 },
@@ -3355,6 +3358,7 @@
             "required": [
                 "_type",
                 "assetId",
+                "elementId",
                 "expired",
                 "id",
                 "mediaTitle"
@@ -4628,7 +4632,7 @@
                     "type": "string"
                 },
                 "href": {
-                    "description": "Href can be an internal path including a series tag or a link to an external sponsor page",
+                    "description": "Href can a link to an external sponsor page",
                     "type": "string"
                 }
             },

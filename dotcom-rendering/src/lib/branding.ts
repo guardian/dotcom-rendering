@@ -138,7 +138,6 @@ export const decideCollectionBranding = ({
 }: {
 	frontBranding: Branding | undefined;
 	couldDisplayFrontBranding: boolean;
-	seriesTag: string | undefined;
 	cards: CardWithBranding[];
 	editionId: EditionId;
 	isContainerBranding: boolean;

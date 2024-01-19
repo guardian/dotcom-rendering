@@ -493,7 +493,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge?.enhanced}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -754,7 +753,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											article.showBottomSocialButtons &&
 											isWeb
 										}
-										badge={article.badge?.enhanced}
 									/>
 								</div>
 							</ArticleContainer>

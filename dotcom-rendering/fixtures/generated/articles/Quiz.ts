@@ -400,8 +400,8 @@ export const Quiz: DCRArticle = {
 						url: '/environment/climate-crisis',
 					},
 					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
+						title: 'Ukraine',
+						url: '/world/ukraine',
 					},
 					{
 						title: 'Football',
@@ -438,6 +438,10 @@ export const Quiz: DCRArticle = {
 								longTitle: 'football/teams',
 							},
 						],
+					},
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
 					},
 					{
 						title: 'Business',
@@ -581,7 +585,7 @@ export const Quiz: DCRArticle = {
 					},
 					{
 						title: 'Cartoons',
-						url: '/cartoons/archive',
+						url: '/tone/cartoons',
 					},
 					{
 						title: 'Opinion videos',
@@ -813,7 +817,7 @@ export const Quiz: DCRArticle = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://app.adjust.com/16xt6hai',
 			},
 			{
 				title: 'Video',
@@ -953,11 +957,11 @@ export const Quiz: DCRArticle = {
 			},
 			{
 				title: 'Live events',
-				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
 			},
 			{
-				title: 'Masterclasses',
-				url: '/guardian-masterclasses',
+				title: 'About Us',
+				url: '/about',
 			},
 			{
 				title: 'Digital Archive',
@@ -1638,7 +1642,7 @@ export const Quiz: DCRArticle = {
 					],
 				},
 			],
-			elementId: '5b0d790d-ed4f-484b-b043-7698d2d9ff44',
+			elementId: '5b74f03b-1a5d-4a56-bd8d-0041893d0541',
 			position: 1,
 			lightbox: {
 				caption:
@@ -2260,7 +2264,7 @@ export const Quiz: DCRArticle = {
 							minScore: 2,
 						},
 					],
-					elementId: 'e79fc641-e195-4db7-9c5d-5cb69a9c87d1',
+					elementId: 'b3843f8e-cbda-4d41-97a0-df1e2a8c2ff7',
 				},
 			],
 			attributes: {
@@ -2423,7 +2427,6 @@ export const Quiz: DCRArticle = {
 			hostedVideoAutoplay: true,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
-			serverShareCounts: true,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,
@@ -2519,7 +2522,7 @@ export const Quiz: DCRArticle = {
 			position: 1,
 			width: 3020,
 			height: 1814,
-			elementId: '5b0d790d-ed4f-484b-b043-7698d2d9ff44',
+			elementId: '5b74f03b-1a5d-4a56-bd8d-0041893d0541',
 			alt: 'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
 			credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
 			caption:
@@ -2536,7 +2539,7 @@ export const Quiz: DCRArticle = {
 				'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
 			masterUrl:
 				'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
-			elementId: '5b0d790d-ed4f-484b-b043-7698d2d9ff44',
+			elementId: '5b74f03b-1a5d-4a56-bd8d-0041893d0541',
 		},
 	],
 };

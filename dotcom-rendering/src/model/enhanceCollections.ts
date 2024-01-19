@@ -65,7 +65,6 @@ export const enhanceCollections = ({
 		const collectionBranding = decideCollectionBranding({
 			frontBranding,
 			couldDisplayFrontBranding: index === indexToShowFrontBranding,
-			seriesTag: collection.config.href,
 			cards: allCards,
 			editionId,
 			isContainerBranding:
