@@ -238,7 +238,7 @@ export const Comments = ({
 		commentElement?.scrollIntoView();
 	};
 
-	const handleSetPage = (pageNumber: number) => {
+	const onPageChange = (pageNumber: number) => {
 		setPage(pageNumber);
 		onExpand();
 	};
@@ -274,7 +274,7 @@ export const Comments = ({
 							<Pagination
 								totalPages={totalPages}
 								currentPage={page}
-								setCurrentPage={handleSetPage}
+								setCurrentPage={onPageChange}
 								commentCount={commentCount}
 								filters={filters}
 							/>
@@ -343,7 +343,7 @@ export const Comments = ({
 				<Pagination
 					totalPages={totalPages}
 					currentPage={page}
-					setCurrentPage={handleSetPage}
+					setCurrentPage={onPageChange}
 					commentCount={commentCount}
 					filters={filters}
 				/>
@@ -387,7 +387,7 @@ export const Comments = ({
 					<Pagination
 						totalPages={totalPages}
 						currentPage={page}
-						setCurrentPage={handleSetPage}
+						setCurrentPage={onPageChange}
 						commentCount={commentCount}
 						filters={filters}
 					/>

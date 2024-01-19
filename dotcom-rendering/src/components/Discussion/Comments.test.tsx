@@ -29,6 +29,12 @@ describe('App', () => {
 				idApiUrl="https://idapi.theguardian.com"
 				page={3}
 				setPage={() => {}}
+				filters={{
+					threads: 'collapsed',
+					pageSize: 25,
+					orderBy: 'newest',
+				}}
+				setFilters={() => {}}
 			/>,
 		);
 
