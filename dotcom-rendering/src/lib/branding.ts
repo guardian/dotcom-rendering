@@ -1,4 +1,3 @@
-import { decideEditorialBadge } from '../model/decideEditorialBadge';
 import type { DCRBadgeType } from '../types/badge';
 import type {
 	Branding,
@@ -121,9 +120,6 @@ export const badgeFromBranding = (
 				href: logo.link,
 			};
 		}
-		case 'editorial': {
-			return collectionBranding.badge;
-		}
 		case undefined: {
 			return undefined;
 		}
@@ -136,7 +132,6 @@ export const badgeFromBranding = (
 export const decideCollectionBranding = ({
 	frontBranding,
 	couldDisplayFrontBranding,
-	seriesTag,
 	cards,
 	editionId,
 	isContainerBranding,
@@ -161,15 +156,6 @@ export const decideCollectionBranding = ({
 			branding: frontBranding,
 			isContainerBranding,
 			hasMultipleBranding: false,
-		};
-	}
-
-	// If the series tag of this collection matches an editorial badge, we should use that
-	const editorialBadge = decideEditorialBadge(seriesTag);
-	if (editorialBadge) {
-		return {
-			kind: 'editorial',
-			badge: editorialBadge,
 		};
 	}
 
