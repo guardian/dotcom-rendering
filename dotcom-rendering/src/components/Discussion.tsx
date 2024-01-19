@@ -10,7 +10,11 @@ import {
 import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
 import { palette as themePalette } from '../palette';
-import type { FilterOptions, SignedInUser } from '../types/discussion';
+import type {
+	FilterOptions,
+	SignedInUser,
+	ThreadsType,
+} from '../types/discussion';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
@@ -95,8 +99,8 @@ export const Discussion = ({
 	useEffect(() => {
 		const permalinkBeingUsed =
 			hashCommentId !== undefined && !Number.isNaN(hashCommentId);
-		const filterByPermalinks =
-			filters.threads === 'collapsed' && permalinkBeingUsed
+		const filterByPermalinks = (threads: ThreadsType) =>
+			threads === 'collapsed' && permalinkBeingUsed
 				? 'expanded'
 				: undefined;
 		const orderByClosed = isClosedForComments ? 'oldest' : undefined;
@@ -105,7 +109,8 @@ export const Discussion = ({
 			...prevFilters,
 			orderBy: commentOrderBy ?? orderByClosed ?? prevFilters.orderBy,
 			pageSize: commentPageSize ?? prevFilters.pageSize,
-			threads: filterByPermalinks ?? prevFilters.threads,
+			threads:
+				filterByPermalinks(prevFilters.threads) ?? prevFilters.threads,
 		}));
 	}, [commentPageSize, commentOrderBy, isClosedForComments, hashCommentId]);
 

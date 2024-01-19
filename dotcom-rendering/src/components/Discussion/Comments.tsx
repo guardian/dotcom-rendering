@@ -24,6 +24,7 @@ import { Filters } from './Filters';
 import { LoadingComments } from './LoadingComments';
 import { Pagination } from './Pagination';
 import { TopPicks } from './TopPicks';
+
 type Props = {
 	shortUrl: string;
 	baseUrl: string;
