@@ -314,11 +314,9 @@ export const Comments = ({
 		setFilters(newFilterObject);
 	};
 	useEffect(() => {
-		// Pagination also show when the view is not expanded so we want to expand when clicked
-		onExpand();
 		const element = document.getElementById('comment-filters');
 		element?.scrollIntoView();
-	}, [page, onExpand]);
+	}, [page]);
 
 	const toggleMuteStatus = (userId: string) => {
 		let updatedMutes;
@@ -345,6 +343,12 @@ export const Comments = ({
 
 		const commentElement = document.getElementById(`comment-${comment.id}`);
 		commentElement?.scrollIntoView();
+	};
+
+	// where should the responsibility for this be?
+	const handleSetPage = (page: number) => {
+		setPage(page);
+		onExpand();
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
@@ -379,7 +383,7 @@ export const Comments = ({
 							<Pagination
 								totalPages={totalPages}
 								currentPage={page}
-								setCurrentPage={setPage}
+								setCurrentPage={handleSetPage}
 								commentCount={commentCount}
 								filters={filters}
 							/>
@@ -449,7 +453,7 @@ export const Comments = ({
 				<Pagination
 					totalPages={totalPages}
 					currentPage={page}
-					setCurrentPage={setPage}
+					setCurrentPage={handleSetPage}
 					commentCount={commentCount}
 					filters={filters}
 				/>
@@ -493,7 +497,7 @@ export const Comments = ({
 					<Pagination
 						totalPages={totalPages}
 						currentPage={page}
-						setCurrentPage={setPage}
+						setCurrentPage={handleSetPage}
 						commentCount={commentCount}
 						filters={filters}
 					/>
