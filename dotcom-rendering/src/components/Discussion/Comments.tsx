@@ -314,7 +314,7 @@ export const Comments = ({
 	useEffect(() => {
 		const element = document.getElementById('comment-filters');
 		element?.scrollIntoView();
-	}, [page, onExpand]);
+	}, [page]);
 
 	const toggleMuteStatus = (userId: string) => {
 		let updatedMutes;
