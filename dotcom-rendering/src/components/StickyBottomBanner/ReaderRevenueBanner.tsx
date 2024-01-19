@@ -1,10 +1,7 @@
 import { css } from '@emotion/react';
 import type { CountryCode } from '@guardian/libs';
 import { getCookie } from '@guardian/libs';
-import {
-	getBanner,
-	getPuzzlesBanner,
-} from '@guardian/support-dotcom-components';
+import { getBanner } from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
 	ModuleData,
@@ -237,64 +234,6 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	return { show: true, meta: { module, meta, fetchEmail } };
 };
 
-export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
-	remoteBannerConfig,
-	isSignedIn,
-	countryCode,
-	contentType,
-	sectionId,
-	shouldHideReaderRevenue,
-	isMinuteArticle,
-	isPaidContent,
-	isSensitive,
-	tags,
-	contributionsServiceUrl,
-	engagementBannerLastClosedAt,
-	subscriptionBannerLastClosedAt,
-	asyncArticleCounts,
-}) => {
-	const isPuzzlesPage =
-		sectionId === 'crosswords' ||
-		tags.some((tag) => tag.type === 'Series' && tag.title === 'Sudoku');
-
-	if (shouldHideReaderRevenue) {
-		// We never serve Reader Revenue banners in this case
-		return { show: false };
-	}
-
-	if (isPuzzlesPage && remoteBannerConfig) {
-		const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
-		const bannerPayload = await buildPayload({
-			isSignedIn,
-			countryCode,
-			contentType,
-			sectionId,
-			shouldHideReaderRevenue,
-			isMinuteArticle,
-			isPaidContent,
-			tags,
-			contributionsServiceUrl,
-			isSensitive,
-			engagementBannerLastClosedAt,
-			subscriptionBannerLastClosedAt,
-			optedOutOfArticleCount,
-			asyncArticleCounts,
-		});
-		return getPuzzlesBanner(contributionsServiceUrl, bannerPayload).then(
-			(response: ModuleDataResponse) => {
-				if (!response.data) {
-					return { show: false };
-				}
-
-				const { module, meta } = response.data;
-				return { show: true, meta: { module, meta } };
-			},
-		);
-	}
-
-	return { show: false };
-};
-
 export type BannerProps = {
 	meta: TestTracking;
 	module: ModuleData;
@@ -381,14 +320,5 @@ export const ReaderRevenueBanner = ({
 		meta={meta}
 		module={module}
 		fetchEmail={fetchEmail}
-	/>
-);
-
-export const PuzzlesBanner = ({ meta, module }: BannerProps) => (
-	<RemoteBanner
-		componentTypeName="ACQUISITIONS_OTHER"
-		displayEvent="puzzles-banner : display"
-		meta={meta}
-		module={module}
 	/>
 );

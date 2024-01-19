@@ -406,9 +406,6 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 						remoteBannerSwitch={
 							!!article.config.switches.remoteBanner
 						}
-						puzzleBannerSwitch={
-							!!article.config.switches.puzzlesBanner
-						}
 						tags={article.tags}
 					/>
 				</Island>

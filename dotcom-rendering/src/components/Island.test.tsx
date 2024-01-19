@@ -414,7 +414,6 @@ describe('Island: server-side rendering', () => {
 						pageId=""
 						keywordIds=""
 						remoteBannerSwitch={true}
-						puzzleBannerSwitch={false}
 						isSensitive={false}
 					/>
 				</ConfigProvider>,
