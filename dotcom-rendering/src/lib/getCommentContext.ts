@@ -49,9 +49,7 @@ const getPageSizeType = (value: unknown) =>
 	typeof value === 'number' && isOneOf(pageSizeTypes)(value) ? value : 25;
 
 /** Retrieves stored values from local storage if available, otherwise it returns defaults */
-export const initFiltersFromLocalStorage = (
-	isClosedForComment?: boolean,
-): FilterOptions => {
+export const initFiltersFromLocalStorage = (): FilterOptions => {
 	const orderBy: OrderByType = getOrderByType(
 		storage.local.get('gu.prefs.discussion.order'),
 	);
