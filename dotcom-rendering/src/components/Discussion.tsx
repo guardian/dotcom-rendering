@@ -106,7 +106,6 @@ export const Discussion = ({
 		const orderByClosed = isClosedForComments ? 'oldest' : undefined;
 
 		setFilters((prevFilters) => ({
-			...prevFilters,
 			orderBy: commentOrderBy ?? orderByClosed ?? prevFilters.orderBy,
 			pageSize: commentPageSize ?? prevFilters.pageSize,
 			threads:
