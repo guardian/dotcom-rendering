@@ -119,7 +119,7 @@ const muteYouTube = async (page: Page, iframeSelector: string) => {
 	}
 };
 
-test.skip('YouTube Atom', () => {
+test.describe('YouTube Atom', () => {
 	test('plays main media video', async ({ page }) => {
 		await loadPage(
 			page,
@@ -160,7 +160,7 @@ test.skip('YouTube Atom', () => {
 		await page.locator(overlaySelector).click();
 
 		// Mute video
-		await muteYouTube(page, `iframe[id^="youtube-video-${videoId}"]`);
+		await muteYouTube(page, `iframe[id^="youtube-player-${videoId}"]`);
 
 		await ophanPlayEventPromise;
 
@@ -210,7 +210,7 @@ test.skip('YouTube Atom', () => {
 		await page.locator(overlaySelector).click();
 
 		// Mute video
-		await muteYouTube(page, `iframe[id^="youtube-video-${videoId}"]`);
+		await muteYouTube(page, `iframe[id^="youtube-player-${videoId}"]`);
 
 		await ophanPlayEventPromise;
 
@@ -277,7 +277,7 @@ test.skip('YouTube Atom', () => {
 
 		await muteYouTube(
 			page,
-			`${mediaDiv} iframe[id^="youtube-video-${videoId}"]`,
+			`${mediaDiv} iframe[id^="youtube-player-${videoId}"]`,
 		);
 
 		// check if the main media video overplay is gone
@@ -366,7 +366,7 @@ test.skip('YouTube Atom', () => {
 		await page.locator(overlaySelector).click();
 
 		// Mute video
-		await muteYouTube(page, `iframe[id^="youtube-video-${videoId}"]`);
+		await muteYouTube(page, `iframe[id^="youtube-player-${videoId}"]`);
 
 		await ophanPlayEventPromise;
 
@@ -416,7 +416,7 @@ test.skip('YouTube Atom', () => {
 
 		await muteYouTube(
 			page,
-			`${mediaDiv} iframe[id^="youtube-video-${videoId}"]`,
+			`${mediaDiv} iframe[id^="youtube-player-${videoId}"]`,
 		);
 
 		// Scroll past the main media video to the third block

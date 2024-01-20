@@ -68,7 +68,7 @@ type PlayerListeners = Array<PlayerListener<PlayerListenerName>>;
  */
 type ExtractEventType<T> = T extends YT.PlayerEventHandler<infer X> ? X : never;
 
-const playerStyles = css`
+const imaPlayerStyles = css`
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -437,13 +437,14 @@ export const YoutubeAtomPlayer = ({
 							onStateChange: onStateChangeListener,
 						},
 					},
+					onReadyListener,
+					enableIma,
 					createImaAdsRequestCallback(
 						adTargeting,
 						consentState,
 						abTestParticipations,
 						isSignedIn,
 					),
-					onReadyListener,
 					createImaManagerListeners(uniqueId),
 				);
 
@@ -595,7 +596,7 @@ export const YoutubeAtomPlayer = ({
 			data-testid={id}
 			data-atom-type="youtube"
 			title={title}
-			css={playerStyles}
+			css={enableIma && imaPlayerStyles}
 		></div>
 	);
 };

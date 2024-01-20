@@ -49,7 +49,7 @@ declare global {
 
 type PlayerListenerName = keyof YT.Events;
 
-type PlayerReadyCallback = (player: YT.Player, imaManager: ImaManager) => void;
+type PlayerReadyCallback = () => void;
 
 type AdsRequestCallback = (
 	adsRequest: { adTagUrl: string },
@@ -58,7 +58,7 @@ type AdsRequestCallback = (
 
 type SetPlayerResolve = {
 	player: YT.Player;
-	imaManager: ImaManager;
+	imaManager?: ImaManager;
 };
 
 class YouTubePlayer {
@@ -68,15 +68,17 @@ class YouTubePlayer {
 	constructor(
 		id: string,
 		youtubeOptions: PlayerOptions,
-		makeAdsRequestCallback: AdsRequestCallback,
 		onPlayerReadyCallback: PlayerReadyCallback,
+		enableIma: boolean,
+		imaAdsRequestCallback: AdsRequestCallback,
 		imaAdManagerListeners: (imaManager: ImaManager) => void,
 	) {
 		this.playerPromise = this.setPlayer(
 			id,
 			youtubeOptions,
-			makeAdsRequestCallback,
 			onPlayerReadyCallback,
+			enableIma,
+			imaAdsRequestCallback,
 			imaAdManagerListeners,
 		);
 	}
@@ -84,32 +86,43 @@ class YouTubePlayer {
 	private async setPlayer(
 		id: string,
 		youtubeOptions: PlayerOptions,
-		makeAdsRequestCallback: AdsRequestCallback,
 		onPlayerReadyCallback: PlayerReadyCallback,
+		enableIma: boolean,
+		imaAdsRequestCallback: AdsRequestCallback,
 		imaAdManagerListeners: (imaManager: ImaManager) => void,
 	) {
-		const YTAPI = await loadYouTubeAPI(
-			youtubeOptions.embedConfig.enableIma,
-		);
+		const YTAPI = await loadYouTubeAPI(enableIma);
 		const playerPromise = new Promise<SetPlayerResolve>(
 			(resolve, reject) => {
 				try {
-					YTAPI.createPlayerForPublishers(
-						id,
-						makeAdsRequestCallback,
-						{
-							youtubeOptions,
-						},
-						(player, imaManager) => {
-							this.player = player;
-							imaAdManagerListeners(imaManager);
-							onPlayerReadyCallback(player, imaManager);
-							resolve({
-								player,
-								imaManager,
-							});
-						},
-					);
+					if (enableIma) {
+						YTAPI.createPlayerForPublishers(
+							id,
+							imaAdsRequestCallback,
+							{
+								youtubeOptions,
+							},
+							(player, imaManager) => {
+								this.player = player;
+								imaAdManagerListeners(imaManager);
+								onPlayerReadyCallback();
+								resolve({
+									player,
+									imaManager,
+								});
+							},
+						);
+					} else {
+						this.player = new YTAPI.Player(id, {
+							...youtubeOptions,
+							events: {
+								onReady: onPlayerReadyCallback,
+								onStateChange:
+									youtubeOptions.events?.onStateChange,
+							},
+						});
+						resolve({ player: this.player });
+					}
 				} catch (e) {
 					this.logError(e as Error);
 					reject(e);

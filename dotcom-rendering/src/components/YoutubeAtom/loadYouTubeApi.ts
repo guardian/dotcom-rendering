@@ -6,7 +6,7 @@ let youtubeAPIReadyPromise: Promise<typeof YT> | undefined;
 const loadScripts = (enableIma = false) => {
 	/**
 	 * Since loadScripts can be called multiple times on the same page for pages with more than one video,
-	 * only attempt to load the scripts if this is the first call and return the same promise otherwise.
+	 * only attempt to load the scripts if this is the first call and otherwise return the same promise.
 	 */
 	if (scriptsPromise) {
 		return scriptsPromise;
