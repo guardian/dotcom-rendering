@@ -16,11 +16,8 @@ import type {
 	CommentResponse,
 	CommentType,
 	FilterOptions,
-	OrderByType,
-	PageSizeType,
 	SignedInUser,
 } from '../../types/discussion';
-import { isOrderBy, isPageSize, isThreads } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -33,8 +30,6 @@ type Props = {
 	baseUrl: string;
 	isClosedForComments: boolean;
 	commentToScrollTo?: number;
-	pageSizeOverride?: PageSizeType;
-	orderByOverride?: OrderByType;
 	user?: SignedInUser;
 	additionalHeaders: AdditionalHeadersType;
 	expanded: boolean;
@@ -52,6 +47,8 @@ type Props = {
 	idApiUrl: string;
 	page: number;
 	setPage: (page: number) => void;
+	filters: FilterOptions;
+	setFilters: (filters: FilterOptions) => void;
 };
 
 const footerStyles = css`
@@ -79,12 +76,6 @@ const picksWrapper = css`
 	justify-content: space-between;
 `;
 
-const DEFAULT_FILTERS = {
-	orderBy: 'newest',
-	pageSize: 100,
-	threads: 'collapsed',
-} as const satisfies FilterOptions;
-
 const NoComments = () => (
 	<div
 		css={css`
@@ -98,77 +89,6 @@ const NoComments = () => (
 		No comments found
 	</div>
 );
-
-const rememberFilters = ({ threads, pageSize, orderBy }: FilterOptions) => {
-	storage.local.set('gu.prefs.discussion.threading', threads);
-	storage.local.set('gu.prefs.discussion.pagesize', pageSize);
-	storage.local.set('gu.prefs.discussion.order', orderBy);
-};
-
-const initialiseFilters = ({
-	pageSizeOverride,
-	orderByOverride,
-	permalinkBeingUsed,
-	isClosedForComments,
-}: {
-	pageSizeOverride?: PageSizeType;
-	orderByOverride?: OrderByType;
-	permalinkBeingUsed: boolean;
-	isClosedForComments: boolean;
-}) => {
-	const initialisedFilters = initFiltersFromLocalStorage({
-		isClosedForComments,
-	});
-	return {
-		...initialisedFilters,
-		// Override if prop given
-		pageSize: pageSizeOverride ?? initialisedFilters.pageSize,
-		orderBy: orderByOverride ?? initialisedFilters.orderBy,
-		threads:
-			initialisedFilters.threads === 'collapsed' && permalinkBeingUsed
-				? 'expanded'
-				: initialisedFilters.threads,
-	};
-};
-
-const decideDefaultOrderBy = (isClosedForComment: boolean): OrderByType =>
-	isClosedForComment ? 'oldest' : 'newest';
-
-/**
- * This function handles the fact that some readers have legacy values
- * stored in the browsers
- */
-const checkPageSize = (size: PageSizeType | 'All'): PageSizeType =>
-	size === 'All' ? DEFAULT_FILTERS.pageSize : size;
-
-const initFiltersFromLocalStorage = ({
-	isClosedForComments,
-}: {
-	isClosedForComments: boolean;
-}): FilterOptions => {
-	const orderBy =
-		storage.local.get('gu.prefs.discussion.order') ??
-		decideDefaultOrderBy(isClosedForComments);
-	const threads =
-		storage.local.get('gu.prefs.discussion.threading') ??
-		DEFAULT_FILTERS.threads;
-	const pageSize =
-		storage.local.get('gu.prefs.discussion.pagesize') ??
-		DEFAULT_FILTERS.pageSize;
-
-	// If we found something in LS, use it, otherwise return defaults
-	//todo: stop typecasting these and parse these properly instead
-	return {
-		orderBy: isOrderBy(orderBy)
-			? orderBy
-			: decideDefaultOrderBy(isClosedForComments),
-		threads: isThreads(threads) ? threads : DEFAULT_FILTERS.threads,
-		pageSize:
-			isPageSize(pageSize) || pageSize === 'All'
-				? checkPageSize(pageSize)
-				: DEFAULT_FILTERS.pageSize,
-	};
-};
 
 const readMutes = (): string[] => {
 	const mutes = storage.local.get('gu.prefs.discussion.mutes') ?? [];
@@ -185,8 +105,6 @@ export const Comments = ({
 	shortUrl,
 	isClosedForComments,
 	commentToScrollTo,
-	pageSizeOverride,
-	orderByOverride,
 	user,
 	additionalHeaders,
 	expanded,
@@ -200,18 +118,9 @@ export const Comments = ({
 	idApiUrl,
 	page,
 	setPage,
+	filters,
+	setFilters,
 }: Props) => {
-	const [filters, setFilters] = useState<FilterOptions>(
-		initialiseFilters({
-			pageSizeOverride,
-			orderByOverride,
-			permalinkBeingUsed:
-				commentToScrollTo !== undefined &&
-				!Number.isNaN(commentToScrollTo),
-			isClosedForComments,
-		}),
-	);
-
 	const [loading, setLoading] = useState<boolean>(true);
 	const [totalPages, setTotalPages] = useState<number>(0);
 	const [picks, setPicks] = useState<CommentType[]>([]);
@@ -264,22 +173,11 @@ export const Comments = ({
 		void fetchPicks();
 	}, [shortUrl]);
 
-	// If these override props are updated we want to respect them
-	useEffect(() => {
-		setFilters((oldFilters) => {
-			return {
-				...oldFilters,
-				orderBy: orderByOverride ?? oldFilters.orderBy,
-				pageSize: pageSizeOverride ?? oldFilters.pageSize,
-			};
-		});
-	}, [pageSizeOverride, orderByOverride]);
-
-	// Check if there is a comment to scroll to and if
-	// so, scroll to the div with this id.
-	// We need to do this in javascript like this because the comments list isn't
-	// loaded on the inital page load and only gets added to the dom later, after
-	// an api call is made.
+	/**
+	 * Verify if there is a comment to scroll to; if found, scroll to the corresponding div.
+	 * This JavaScript is necessary because the comments list isn't initially loaded with the
+	 * page and is added to the DOM later, following an API call.
+	 * */
 	useEffect(() => {
 		if (commentToScrollTo !== undefined) {
 			const commentElement = document.getElementById(
@@ -290,27 +188,25 @@ export const Comments = ({
 	}, [comments, commentToScrollTo]); // Add comments to deps so we rerun this effect when comments are loaded
 
 	const onFilterChange = (newFilterObject: FilterOptions) => {
-		// If we're reducing the pageSize then we may need to override the page we're on to prevent making
-		// requests for pages that don't exist.
-		// E.g. If we used to have 102 comments and a pageSize of 25 then the current page could be 5 (showing 2
-		// comments). If we then change pageSize to be 50 then there is no longer a page 5 and trying to ask for it
-		// from the api would return an error so, in order to respect the readers desire to be on the last page, we
-		// need to work out the maximum page possible and use that instead.
-		let maxPagePossible = Math.floor(
+		/**
+		 * When decreasing the page size, we adjust the current page
+		 * to avoid requesting non-existent pages. For example,
+		 * if we had 102 comments with a page size of 25, and the current
+		 * page was 5 (showing 2 comments), reducing the page size to 50 eliminates page 5.
+		 * To respect the reader's preference to stay on the last page,
+		 * we calculate and use the maximum possible page instead.
+		 */
+		const maxPagePossible = Math.ceil(
 			commentCount / newFilterObject.pageSize,
 		);
-		// Add 1 if there is a remainder
-		if (commentCount % newFilterObject.pageSize) {
-			maxPagePossible = maxPagePossible + 1;
-		}
-		// Check
+
 		if (page > maxPagePossible) setPage(maxPagePossible);
 
-		rememberFilters(newFilterObject);
+		setFilters(newFilterObject);
 		// Filters also show when the view is not expanded but we want to expand when they're changed
 		onExpand();
-		setFilters(newFilterObject);
 	};
+
 	useEffect(() => {
 		const element = document.getElementById('comment-filters');
 		element?.scrollIntoView();
@@ -343,7 +239,7 @@ export const Comments = ({
 		commentElement?.scrollIntoView();
 	};
 
-	const handleSetPage = (pageNumber: number) => {
+	const onPageChange = (pageNumber: number) => {
 		setPage(pageNumber);
 		onExpand();
 	};
@@ -373,14 +269,13 @@ export const Comments = ({
 						<Filters
 							filters={filters}
 							onFilterChange={onFilterChange}
-							totalPages={totalPages}
 							commentCount={commentCount}
 						/>
 						{showPagination && (
 							<Pagination
 								totalPages={totalPages}
 								currentPage={page}
-								setCurrentPage={handleSetPage}
+								setCurrentPage={onPageChange}
 								commentCount={commentCount}
 								filters={filters}
 							/>
@@ -443,14 +338,13 @@ export const Comments = ({
 			<Filters
 				filters={filters}
 				onFilterChange={onFilterChange}
-				totalPages={totalPages}
 				commentCount={commentCount}
 			/>
 			{showPagination && (
 				<Pagination
 					totalPages={totalPages}
 					currentPage={page}
-					setCurrentPage={handleSetPage}
+					setCurrentPage={onPageChange}
 					commentCount={commentCount}
 					filters={filters}
 				/>
@@ -494,7 +388,7 @@ export const Comments = ({
 					<Pagination
 						totalPages={totalPages}
 						currentPage={page}
-						setCurrentPage={handleSetPage}
+						setCurrentPage={onPageChange}
 						commentCount={commentCount}
 						filters={filters}
 					/>

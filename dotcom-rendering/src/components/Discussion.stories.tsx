@@ -65,3 +65,42 @@ Basic.decorators = [
 		{ orientation: 'vertical' },
 	),
 ];
+
+export const Overrides: StoryObj = ({ format }: StoryProps) => {
+	// Aiming to stop flakiness in Chromatic visual diffs by explicitly
+	// setting the desired comments sorting order in local storage
+	storage.local.set('gu.prefs.discussion.order', 'newest');
+
+	// overide the default page size
+	storage.local.set('gu.prefs.discussion.pagesize', 50);
+
+	return (
+		<SectionWrapper>
+			<DiscussionLayout
+				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
+				shortUrlId="/p/4v8kk"
+				format={format}
+				discussionD2Uid="zHoBy6HNKsk"
+				discussionApiClientHeader="nextgen"
+				enableDiscussionSwitch={true}
+				isAdFreeUser={false}
+				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
+			/>
+		</SectionWrapper>
+	);
+};
+
+Overrides.storyName = 'A discussion with page number default overridden to 50';
+Overrides.decorators = [
+	splitTheme(
+		[
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Culture,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
-import type { SignedInUser } from '../../types/discussion';
+import type { FilterOptions, SignedInUser } from '../../types/discussion';
 import { Comments } from './Comments';
 
 export default { component: Comments, title: 'Discussion/App' };
@@ -31,6 +31,12 @@ const format = {
 	theme: Pillar.News,
 };
 
+const filters: FilterOptions = {
+	threads: 'collapsed',
+	pageSize: 25,
+	orderBy: 'newest',
+};
+
 export const LoggedOutHiddenPicks = () => (
 	<div
 		css={css`
@@ -53,6 +59,8 @@ export const LoggedOutHiddenPicks = () => (
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
+			filters={filters}
+			setFilters={() => {}}
 		/>
 	</div>
 );
@@ -88,6 +96,8 @@ export const InitialPage = () => (
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
+			filters={filters}
+			setFilters={() => {}}
 		/>
 	</div>
 );
@@ -97,43 +107,6 @@ InitialPage.decorators = [
 		{
 			...format,
 			theme: Pillar.Lifestyle,
-		},
-	]),
-];
-
-export const Overrides = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl="p/39f5z"
-			pageSizeOverride={50}
-			orderByOverride="recommendations"
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			isClosedForComments={false}
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={true}
-			onPermalinkClick={() => {}}
-			onExpand={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			setPage={() => {}}
-		/>
-	</div>
-);
-Overrides.storyName = 'with page size overridden to 50';
-Overrides.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: Pillar.Opinion,
 		},
 	]),
 ];
@@ -161,6 +134,8 @@ export const LoggedInHiddenNoPicks = () => (
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
+			filters={filters}
+			setFilters={() => {}}
 		/>
 	</div>
 );
@@ -191,6 +166,8 @@ export const LoggedIn = () => (
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
+			filters={filters}
+			setFilters={() => {}}
 		/>
 	</div>
 );
@@ -220,6 +197,8 @@ export const LoggedInShortDiscussion = () => (
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
+			filters={filters}
+			setFilters={() => {}}
 		/>
 	</div>
 );
@@ -248,6 +227,8 @@ export const LoggedOutHiddenNoPicks = () => (
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
+			filters={filters}
+			setFilters={() => {}}
 		/>
 	</div>
 );
@@ -285,6 +266,8 @@ export const Closed = () => (
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
+			filters={filters}
+			setFilters={() => {}}
 		/>
 	</div>
 );
@@ -320,6 +303,8 @@ export const NoComments = () => (
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
+			filters={filters}
+			setFilters={() => {}}
 		/>
 	</div>
 );
@@ -355,6 +340,8 @@ export const LegacyDiscussion = () => (
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
+			filters={filters}
+			setFilters={() => {}}
 		/>
 	</div>
 );
