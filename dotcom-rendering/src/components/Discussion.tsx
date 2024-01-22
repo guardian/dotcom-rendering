@@ -70,6 +70,18 @@ const commentIdFromUrl = () => {
 	return parseInt(commentId, 10);
 };
 
+const filterByPermalinks = (
+	threads: ThreadsType,
+	hashCommentId: Number | undefined,
+) => {
+	const permalinkBeingUsed =
+		hashCommentId !== undefined && !Number.isNaN(hashCommentId);
+
+	return threads === 'collapsed' && permalinkBeingUsed
+		? 'expanded'
+		: undefined;
+};
+
 export const Discussion = ({
 	discussionApiUrl,
 	shortUrlId,
@@ -97,19 +109,14 @@ export const Discussion = ({
 	);
 
 	useEffect(() => {
-		const permalinkBeingUsed =
-			hashCommentId !== undefined && !Number.isNaN(hashCommentId);
-		const filterByPermalinks = (threads: ThreadsType) =>
-			threads === 'collapsed' && permalinkBeingUsed
-				? 'expanded'
-				: undefined;
 		const orderByClosed = isClosedForComments ? 'oldest' : undefined;
 
 		setFilters((prevFilters) => ({
 			orderBy: commentOrderBy ?? orderByClosed ?? prevFilters.orderBy,
 			pageSize: commentPageSize ?? prevFilters.pageSize,
 			threads:
-				filterByPermalinks(prevFilters.threads) ?? prevFilters.threads,
+				filterByPermalinks(prevFilters.threads, hashCommentId) ??
+				prevFilters.threads,
 		}));
 	}, [commentPageSize, commentOrderBy, isClosedForComments, hashCommentId]);
 
