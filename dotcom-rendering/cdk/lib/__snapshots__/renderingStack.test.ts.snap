@@ -665,18 +665,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           {
             "Ref": "LatencyScaleUpPolicyUpperPolicy4A22B34C",
           },
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:aws:sns:eu-west-1:",
-                {
-                  "Ref": "AWS::AccountId",
-                },
-                ":Frontend-TEST-CriticalAlerts",
-              ],
-            ],
-          },
         ],
         "AlarmDescription": "Upper threshold scaling alarm",
         "ComparisonOperator": "GreaterThanOrEqualToThreshold",
