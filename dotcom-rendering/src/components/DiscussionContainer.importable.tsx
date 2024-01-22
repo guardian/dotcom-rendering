@@ -1,9 +1,33 @@
+import { isObject, joinUrl } from '@guardian/libs';
+import { useEffect, useState } from 'react';
+import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
+import { getOptionsHeadersWithOkta } from '../lib/identity';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useHydrated } from '../lib/useHydrated';
+import type { SignedInUser } from '../types/discussion';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
-import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
 import { Placeholder } from './Placeholder';
+
+const getUser = async ({
+	discussionApiUrl,
+	authStatus,
+}: {
+	discussionApiUrl: string;
+	authStatus: SignedInWithCookies | SignedInWithOkta;
+}): Promise<SignedInUser | undefined> => {
+	const data: unknown = await fetch(
+		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
+		getOptionsHeadersWithOkta(authStatus),
+	)
+		.then((r) => r.json())
+		.catch(() => undefined);
+
+	if (!isObject(data)) return;
+	if (!isObject(data.userProfile)) return;
+	const profile = data.userProfile as UserProfile;
+	return { profile, authStatus };
+};
 
 /**
  * A wrapper component that decides if the user is signed in or not.
@@ -29,18 +53,24 @@ import { Placeholder } from './Placeholder';
  * (No visual story exist)
  */
 
-export const DiscussionContainer = (props: DiscussionProps) => {
+export const DiscussionContainer = (props: Omit<DiscussionProps, 'user'>) => {
 	const hydrated = useHydrated();
 	const authStatus = useAuthStatus();
+	const [user, setUser] = useState<SignedInUser>();
+
+	useEffect(() => {
+		if (authStatus.kind === 'Pending') return;
+		if (authStatus.kind === 'SignedOutWithCookies') return;
+		if (authStatus.kind === 'SignedOutWithOkta') return;
+
+		getUser({ discussionApiUrl: props.discussionApiUrl, authStatus })
+			.then(setUser)
+			.catch(() => {
+				// do nothing
+			});
+	}, [authStatus, props.discussionApiUrl]);
 
 	if (!hydrated) return <Placeholder height={324} />;
 
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
-	if (isSignedIn) {
-		return <DiscussionWhenSignedIn authStatus={authStatus} {...props} />;
-	}
-
-	return <Discussion {...props} />;
+	return <Discussion user={user} {...props} />;
 };
