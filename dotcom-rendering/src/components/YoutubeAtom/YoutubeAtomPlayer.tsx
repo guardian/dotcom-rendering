@@ -420,9 +420,9 @@ export const YoutubeAtomPlayer = ({
 					eventEmitters,
 				);
 
-				player.current = new YouTubePlayer(
+				player.current = new YouTubePlayer({
 					id,
-					{
+					youtubeOptions: {
 						height: '100%',
 						width: '100%',
 						videoId,
@@ -439,14 +439,14 @@ export const YoutubeAtomPlayer = ({
 					},
 					onReadyListener,
 					enableIma,
-					createImaAdsRequestCallback(
+					imaAdsRequestCallback: createImaAdsRequestCallback(
 						adTargeting,
 						consentState,
 						abTestParticipations,
 						isSignedIn,
 					),
-					createImaManagerListeners(uniqueId),
-				);
+					imaAdManagerListeners: createImaManagerListeners(uniqueId),
+				});
 
 				/**
 				 * Pause the current video when another video is played

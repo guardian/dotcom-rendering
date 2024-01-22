@@ -51,22 +51,31 @@ type SetPlayerResolve = {
 	imaManager?: YT.ImaManager;
 };
 
+type YouTubePlayerArgs = {
+	id: string;
+	youtubeOptions: PlayerOptions;
+	onReadyListener: PlayerReadyCallback;
+	enableIma: boolean;
+	imaAdsRequestCallback: AdsRequestCallback;
+	imaAdManagerListeners: (imaManager: YT.ImaManager) => void;
+};
+
 class YouTubePlayer {
 	playerPromise: Promise<SetPlayerResolve>;
 	private player?: YT.Player;
 
-	constructor(
-		id: string,
-		youtubeOptions: PlayerOptions,
-		onPlayerReadyCallback: PlayerReadyCallback,
-		enableIma: boolean,
-		imaAdsRequestCallback: AdsRequestCallback,
-		imaAdManagerListeners: (imaManager: YT.ImaManager) => void,
-	) {
+	constructor({
+		id,
+		youtubeOptions,
+		onReadyListener,
+		enableIma,
+		imaAdsRequestCallback,
+		imaAdManagerListeners,
+	}: YouTubePlayerArgs) {
 		this.playerPromise = this.setPlayer(
 			id,
 			youtubeOptions,
-			onPlayerReadyCallback,
+			onReadyListener,
 			enableIma,
 			imaAdsRequestCallback,
 			imaAdManagerListeners,
@@ -76,7 +85,7 @@ class YouTubePlayer {
 	private async setPlayer(
 		id: string,
 		youtubeOptions: PlayerOptions,
-		onPlayerReadyCallback: PlayerReadyCallback,
+		onReadyListener: PlayerReadyCallback,
 		enableIma: boolean,
 		imaAdsRequestCallback: AdsRequestCallback,
 		imaAdManagerListeners: (imaManager: YT.ImaManager) => void,
@@ -95,7 +104,7 @@ class YouTubePlayer {
 							(player, imaManager) => {
 								this.player = player;
 								imaAdManagerListeners(imaManager);
-								onPlayerReadyCallback();
+								onReadyListener();
 								resolve({
 									player,
 									imaManager,
@@ -106,7 +115,7 @@ class YouTubePlayer {
 						this.player = new YTAPI.Player(id, {
 							...youtubeOptions,
 							events: {
-								onReady: onPlayerReadyCallback,
+								onReady: onReadyListener,
 								onStateChange:
 									youtubeOptions.events?.onStateChange,
 							},
