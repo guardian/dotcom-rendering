@@ -128,12 +128,14 @@ const resolveEmailIfSignedIn = async (
 ): Promise<string | undefined> => {
 	switch (renderingTarget) {
 		case 'Apps': {
-			return getUserClient()
-				.isPremium()
-				.then((isPremium) => {
-					if (isPremium) return;
-					else return 'testcake@testcake.com';
-				});
+			return Promise.all([
+				getUserClient().isLoggedIn(),
+				getUserClient().getUserEmail(),
+			]).then(([loggedIn, maybeEmail]) => {
+				if (loggedIn && maybeEmail.email) {
+					return maybeEmail.email;
+				} else return undefined;
+			});
 		}
 		case 'Web': {
 			const { idApiUrl } = window.guardian.config.page;

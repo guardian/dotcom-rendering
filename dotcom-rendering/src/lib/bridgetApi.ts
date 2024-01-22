@@ -8,8 +8,8 @@ import * as Navigation from '@guardian/bridget/Navigation';
 import * as Newsletters from '@guardian/bridget/Newsletters';
 import * as Notifications from '@guardian/bridget/Notifications';
 import * as Tag from '@guardian/bridget/Tag';
-import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
+import * as User from 'bridget/dist/bridget/User';
 import { createAppClient } from './thrift/nativeConnection';
 
 let environmentClient: Environment.Client<void> | undefined = undefined;
