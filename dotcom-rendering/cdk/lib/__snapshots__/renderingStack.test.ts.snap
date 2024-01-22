@@ -633,7 +633,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
             },
           },
         ],
-        "EvaluationPeriods": 1,
+        "EvaluationPeriods": 10,
         "MetricName": "TargetResponseTime",
         "Namespace": "AWS/ApplicationELB",
         "Period": 30,
