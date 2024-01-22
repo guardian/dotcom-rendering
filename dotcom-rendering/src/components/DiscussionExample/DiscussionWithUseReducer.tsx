@@ -47,6 +47,7 @@ const reducer = (state: State, action: Action): State => {
 		case 'postedComment':
 			return {
 				...state,
+				commentEntryText: '',
 				comments: [...state.comments, action.comment],
 				errorMessage: undefined,
 			};

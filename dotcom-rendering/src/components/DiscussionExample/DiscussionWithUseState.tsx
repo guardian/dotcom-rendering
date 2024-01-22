@@ -25,6 +25,7 @@ const DiscussionWithUseState = ({ loadComments, postComment }: Props) => {
 					if (result.kind === 'success') {
 						setErrorMessage(undefined);
 						setComments([...comments, result.value]);
+						setCommentEntryText('');
 					} else {
 						setErrorMessage(`Failed to post! ${result.error}`);
 					}
