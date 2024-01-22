@@ -220,7 +220,11 @@ export const withinLocalNoBannerCachePeriod = (): boolean =>
 	!!storage.local.get(NO_RR_BANNER_KEY);
 
 export const setLocalNoBannerCachePeriod = (): void =>
-	storage.local.set(NO_RR_BANNER_KEY, true, Date.now() + twentyMins);
+	storage.local.set(
+		NO_RR_BANNER_KEY,
+		true,
+		new Date(Date.now() + twentyMins),
+	);
 
 // Returns true if banner was closed in the last hour
 const ONE_HOUR_IN_MS = 1000 * 60 * 60;
