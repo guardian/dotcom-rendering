@@ -124,7 +124,6 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 
 				${from.phablet} {
 					display: inline-flex;
-					flex-direction: column;
 
 					button:first-of-type {
 						margin-right: ${space[5]}px;
@@ -141,7 +140,6 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 							? tagHandler
 							: () => undefined
 					}
-					withExtraBottomMargin={true}
 				/>
 			)}
 			<FollowNotificationsButton
