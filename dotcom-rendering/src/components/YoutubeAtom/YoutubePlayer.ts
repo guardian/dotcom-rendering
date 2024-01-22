@@ -3,33 +3,13 @@ import { log } from '@guardian/libs';
 import type { google } from './ima';
 import { loadYouTubeAPI } from './loadYouTubeApi';
 
-type EmbedConfig = {
-	embedConfig: {
-		relatedChannels: string[];
-		adsConfig: AdsConfig;
-		enableIma: boolean;
-	};
-};
-
-type PlayerOptions = YT.PlayerOptions & EmbedConfig;
-
-export declare class ImaManager {
-	constructor(
-		player: YT.Player,
-		id: string,
-		adContainerId: string,
-		makeAdsRequestCallback: (
-			adsRequest: { adTagUrl: string },
-			adsRenderingSettings: google.ima.AdsRenderingSettings,
-		) => void,
-	);
-	getAdsLoader: () => google.ima.AdsLoader;
-	getAdsManager: () => google.ima.AdsManager;
-}
-
 declare global {
 	// eslint-disable-next-line @typescript-eslint/no-namespace -- YT types are in a namespace
 	namespace YT {
+		export class ImaManager {
+			getAdsLoader: () => google.ima.AdsLoader;
+			getAdsManager: () => google.ima.AdsManager;
+		}
 		export const createPlayerForPublishers: (
 			id: string,
 			makeAdsRequestCallback: (
@@ -47,6 +27,16 @@ declare global {
 	}
 }
 
+type EmbedConfig = {
+	embedConfig: {
+		relatedChannels: string[];
+		adsConfig: AdsConfig;
+		enableIma: boolean;
+	};
+};
+
+type PlayerOptions = YT.PlayerOptions & EmbedConfig;
+
 type PlayerListenerName = keyof YT.Events;
 
 type PlayerReadyCallback = () => void;
@@ -58,7 +48,7 @@ type AdsRequestCallback = (
 
 type SetPlayerResolve = {
 	player: YT.Player;
-	imaManager?: ImaManager;
+	imaManager?: YT.ImaManager;
 };
 
 class YouTubePlayer {
@@ -71,7 +61,7 @@ class YouTubePlayer {
 		onPlayerReadyCallback: PlayerReadyCallback,
 		enableIma: boolean,
 		imaAdsRequestCallback: AdsRequestCallback,
-		imaAdManagerListeners: (imaManager: ImaManager) => void,
+		imaAdManagerListeners: (imaManager: YT.ImaManager) => void,
 	) {
 		this.playerPromise = this.setPlayer(
 			id,
@@ -89,7 +79,7 @@ class YouTubePlayer {
 		onPlayerReadyCallback: PlayerReadyCallback,
 		enableIma: boolean,
 		imaAdsRequestCallback: AdsRequestCallback,
-		imaAdManagerListeners: (imaManager: ImaManager) => void,
+		imaAdManagerListeners: (imaManager: YT.ImaManager) => void,
 	) {
 		const YTAPI = await loadYouTubeAPI(enableIma);
 		const playerPromise = new Promise<SetPlayerResolve>(

@@ -18,7 +18,7 @@ import {
 import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { google } from './ima';
 import type { VideoEventKey } from './YoutubeAtom';
-import type { ImaManager, PlayerListenerName } from './YoutubePlayer';
+import type { PlayerListenerName } from './YoutubePlayer';
 import { YouTubePlayer } from './YoutubePlayer';
 
 type Props = {
@@ -296,7 +296,7 @@ const createImaAdsRequestCallback = (
 };
 
 const createImaManagerListeners = (uniqueId: string) => {
-	return (imaManager: ImaManager) => {
+	return (imaManager: YT.ImaManager) => {
 		const onAdsManagerLoaded = () => {
 			if (window.google) {
 				imaManager
