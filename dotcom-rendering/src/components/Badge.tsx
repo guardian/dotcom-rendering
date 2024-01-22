@@ -1,37 +1,29 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source-foundations';
 
-const articleBadgeSizingStyles = css`
-	height: 42px;
-	${from.leftCol} {
-		height: 54px;
-	}
-`;
-
-const frontBadgeSizingStyles = css`
-	height: 50px;
+const badgeSizingStyles = css`
+	height: auto;
+	width: 100px;
 
 	${from.phablet} {
-		height: 90px;
+		width: 120px;
+	}
+
+	${from.tablet} {
+		width: 140px;
 	}
 
 	${from.leftCol} {
-		height: 100px;
-	}
-
-	${from.wide} {
-		height: 140px;
+		width: 200px;
 	}
 `;
 
-const imageStyles = (isFrontNonEditorialBadge: boolean) => css`
+const imageStyles = css`
 	display: block;
 	width: auto;
 	max-width: 100%;
 	object-fit: contain;
-	${isFrontNonEditorialBadge
-		? frontBadgeSizingStyles
-		: articleBadgeSizingStyles}
+	${badgeSizingStyles}
 `;
 
 const badgeLink = css`
@@ -41,29 +33,12 @@ const badgeLink = css`
 type Props = {
 	imageSrc: string;
 	href: string;
-	isFrontNonEditorialBadge?: boolean;
 };
 
-export const Badge = ({
-	imageSrc,
-	href,
-	isFrontNonEditorialBadge = false,
-}: Props) => {
+export const Badge = ({ imageSrc, href }: Props) => {
 	return (
-		<div
-			css={
-				isFrontNonEditorialBadge
-					? frontBadgeSizingStyles
-					: articleBadgeSizingStyles
-			}
-		>
-			<a href={href} css={badgeLink} role="button">
-				<img
-					css={imageStyles(isFrontNonEditorialBadge)}
-					src={imageSrc}
-					alt=""
-				/>
-			</a>
-		</div>
+		<a href={href} css={badgeLink} role="button">
+			<img css={imageStyles} src={imageSrc} alt="" />
+		</a>
 	);
 };
