@@ -51,6 +51,8 @@ export const LoggedOutHiddenPicks = () => (
 			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
+			page={3}
+			setPage={() => {}}
 		/>
 	</div>
 );
@@ -73,7 +75,6 @@ export const InitialPage = () => (
 	>
 		<Comments
 			shortUrl="p/39f5z"
-			initialPage={3}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
 			additionalHeaders={{
@@ -85,6 +86,8 @@ export const InitialPage = () => (
 			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
+			page={3}
+			setPage={() => {}}
 		/>
 	</div>
 );
@@ -107,7 +110,6 @@ export const Overrides = () => (
 	>
 		<Comments
 			shortUrl="p/39f5z"
-			initialPage={3}
 			pageSizeOverride={50}
 			orderByOverride="recommendations"
 			baseUrl="https://discussion.theguardian.com/discussion-api"
@@ -121,6 +123,8 @@ export const Overrides = () => (
 			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
+			page={3}
+			setPage={() => {}}
 		/>
 	</div>
 );
@@ -155,6 +159,8 @@ export const LoggedInHiddenNoPicks = () => (
 			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
+			page={3}
+			setPage={() => {}}
 		/>
 	</div>
 );
@@ -183,6 +189,8 @@ export const LoggedIn = () => (
 			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
+			page={3}
+			setPage={() => {}}
 		/>
 	</div>
 );
@@ -210,6 +218,8 @@ export const LoggedInShortDiscussion = () => (
 			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
+			page={3}
+			setPage={() => {}}
 		/>
 	</div>
 );
@@ -236,6 +246,8 @@ export const LoggedOutHiddenNoPicks = () => (
 			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
+			page={3}
+			setPage={() => {}}
 		/>
 	</div>
 );
@@ -271,6 +283,8 @@ export const Closed = () => (
 			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
+			page={3}
+			setPage={() => {}}
 		/>
 	</div>
 );
@@ -304,6 +318,8 @@ export const NoComments = () => (
 			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
+			page={3}
+			setPage={() => {}}
 		/>
 	</div>
 );
@@ -337,6 +353,8 @@ export const LegacyDiscussion = () => (
 			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
+			page={3}
+			setPage={() => {}}
 		/>
 	</div>
 );

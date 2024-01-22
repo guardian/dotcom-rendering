@@ -11,18 +11,16 @@ import {
 	getPicks,
 	initialiseApi,
 } from '../../lib/discussionApi';
-import {
-	type AdditionalHeadersType,
-	type CommentResponse,
-	type CommentType,
-	type FilterOptions,
-	isOrderBy,
-	isPageSize,
-	isThreads,
-	type OrderByType,
-	type PageSizeType,
-	type SignedInUser,
+import type {
+	AdditionalHeadersType,
+	CommentResponse,
+	CommentType,
+	FilterOptions,
+	OrderByType,
+	PageSizeType,
+	SignedInUser,
 } from '../../types/discussion';
+import { isOrderBy, isPageSize, isThreads } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -35,7 +33,6 @@ type Props = {
 	baseUrl: string;
 	isClosedForComments: boolean;
 	commentToScrollTo?: number;
-	initialPage?: number;
 	pageSizeOverride?: PageSizeType;
 	orderByOverride?: OrderByType;
 	user?: SignedInUser;
@@ -53,6 +50,8 @@ type Props = {
 	onPreview?: (body: string) => Promise<string>;
 	onExpand: () => void;
 	idApiUrl: string;
+	page: number;
+	setPage: (page: number) => void;
 };
 
 const footerStyles = css`
@@ -185,7 +184,6 @@ export const Comments = ({
 	baseUrl,
 	shortUrl,
 	isClosedForComments,
-	initialPage,
 	commentToScrollTo,
 	pageSizeOverride,
 	orderByOverride,
@@ -200,6 +198,8 @@ export const Comments = ({
 	onPreview,
 	onExpand,
 	idApiUrl,
+	page,
+	setPage,
 }: Props) => {
 	const [filters, setFilters] = useState<FilterOptions>(
 		initialiseFilters({
@@ -214,7 +214,6 @@ export const Comments = ({
 
 	const [loading, setLoading] = useState<boolean>(true);
 	const [totalPages, setTotalPages] = useState<number>(0);
-	const [page, setPage] = useState<number>(initialPage ?? 1);
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
 		useState<CommentType>();
@@ -276,14 +275,6 @@ export const Comments = ({
 		});
 	}, [pageSizeOverride, orderByOverride]);
 
-	// Keep initialPage prop in sync with page
-	useEffect(() => {
-		if (initialPage !== undefined) setPage(initialPage);
-		// We added commentToScrollTo to the deps here because the initialPage alone wasn't triggered the effect
-		// and we want to ensure the discussion rerenders with the right page when the reader clicks Jump To Comment
-		// for a comment on a different page
-	}, [initialPage, commentToScrollTo]);
-
 	// Check if there is a comment to scroll to and if
 	// so, scroll to the div with this id.
 	// We need to do this in javascript like this because the comments list isn't
@@ -320,14 +311,10 @@ export const Comments = ({
 		onExpand();
 		setFilters(newFilterObject);
 	};
-
-	const onPageChange = (pageNumber: number) => {
-		// Pagination also show when the view is not expanded so we want to expand when clicked
-		onExpand();
+	useEffect(() => {
 		const element = document.getElementById('comment-filters');
 		element?.scrollIntoView();
-		setPage(pageNumber);
-	};
+	}, [page]);
 
 	const toggleMuteStatus = (userId: string) => {
 		let updatedMutes;
@@ -354,6 +341,11 @@ export const Comments = ({
 
 		const commentElement = document.getElementById(`comment-${comment.id}`);
 		commentElement?.scrollIntoView();
+	};
+
+	const handleSetPage = (pageNumber: number) => {
+		setPage(pageNumber);
+		onExpand();
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
@@ -388,9 +380,7 @@ export const Comments = ({
 							<Pagination
 								totalPages={totalPages}
 								currentPage={page}
-								setCurrentPage={(newPage: number) => {
-									onPageChange(newPage);
-								}}
+								setCurrentPage={handleSetPage}
 								commentCount={commentCount}
 								filters={filters}
 							/>
@@ -460,9 +450,7 @@ export const Comments = ({
 				<Pagination
 					totalPages={totalPages}
 					currentPage={page}
-					setCurrentPage={(newPage: number) => {
-						onPageChange(newPage);
-					}}
+					setCurrentPage={handleSetPage}
 					commentCount={commentCount}
 					filters={filters}
 				/>
@@ -506,9 +494,7 @@ export const Comments = ({
 					<Pagination
 						totalPages={totalPages}
 						currentPage={page}
-						setCurrentPage={(newPage: number) => {
-							onPageChange(newPage);
-						}}
+						setCurrentPage={handleSetPage}
 						commentCount={commentCount}
 						filters={filters}
 					/>
