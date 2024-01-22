@@ -209,7 +209,7 @@ export class RenderingCDKStack extends CDKStack {
 				},
 			],
 			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
-			evaluationPeriods: 1,
+			evaluationPeriods: 10,
 		});
 
 		// Saves the value of the rendering base URL to SSM for frontend apps to use
