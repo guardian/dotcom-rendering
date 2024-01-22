@@ -111,44 +111,6 @@ InitialPage.decorators = [
 	]),
 ];
 
-// we dont need this now but the logic should be tested in discussion tests
-// export const Overrides = () => (
-// 	<div
-// 		css={css`
-// 			width: 100%;
-// 			max-width: 620px;
-// 		`}
-// 	>
-// 		<Comments
-// 			shortUrl="p/39f5z"
-// 			baseUrl="https://discussion.theguardian.com/discussion-api"
-// 			isClosedForComments={false}
-// 			additionalHeaders={{
-// 				'D2-X-UID': 'testD2Header',
-// 				'GU-Client': 'testClientHeader',
-// 			}}
-// 			expanded={true}
-// 			onPermalinkClick={() => {}}
-// 			onExpand={() => {}}
-// 			apiKey=""
-// 			idApiUrl="https://idapi.theguardian.com"
-// 			page={3}
-// 			setPage={() => {}}
-// 			filters={filters}
-// 			setFilters={() => {}}
-// 		/>
-// 	</div>
-// );
-// Overrides.storyName = 'with page size overridden to 50';
-// Overrides.decorators = [
-// 	splitTheme([
-// 		{
-// 			...format,
-// 			theme: Pillar.Opinion,
-// 		},
-// 	]),
-// ];
-
 export const LoggedInHiddenNoPicks = () => (
 	<div
 		css={css`
