@@ -72,7 +72,7 @@ const commentIdFromUrl = () => {
 
 const filterByPermalinks = (
 	threads: ThreadsType,
-	hashCommentId: Number | undefined,
+	hashCommentId: number | undefined,
 ) => {
 	const permalinkBeingUsed =
 		hashCommentId !== undefined && !Number.isNaN(hashCommentId);
