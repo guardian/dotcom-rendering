@@ -28,13 +28,10 @@ export const Analytics = ({
 	},
 }: Props) => {
 	const scripts: string[] = [
-		// `<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" data-block-on-consent="_till_responded" data-credentials="include">
+		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include">
 			<script type="application/json">
 				{
 					"requests": {
-						"pageViewWithConsentTest": "http://localhost:8001/receive?componentEvent=\${componentEvent}",
-						"pageViewWithConsentTestParams": "http://localhost:8001/receive?consentJurisdiction=\${consentJurisdiction}&consentUUID=\${consentUUID}&consent=\${consent}",
 						"pageViewWithConsent": "\${additionalBase}&consentJurisdiction=\${consentJurisdiction}&consentUUID=\${consentUUID}&consent=\${consent}"
 					},
 					"triggers": {
@@ -51,7 +48,7 @@ export const Analytics = ({
 						},
 						"trackPageviewCcpa": {
 							"on": "visible",
-							"request": "pageViewWithConsentTestParams",
+							"request": "pageViewWithConsent",
 							"selector": ".amp-geo-group-ccpa",
 							"vars": {
 								"consentUUID": "\${clientId(ccpaUUID)}",
@@ -62,7 +59,7 @@ export const Analytics = ({
 						},
 						"trackPageviewAus": {
 							"on": "visible",
-							"request": "pageViewWithConsentTestParams",
+							"request": "pageViewWithConsent",
 							"selector": ".amp-geo-group-aus",
 							"vars": {
 								"consentUUID": "\${clientId(ccpaUUID)}",
