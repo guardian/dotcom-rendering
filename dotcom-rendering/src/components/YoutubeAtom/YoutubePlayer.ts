@@ -94,6 +94,11 @@ class YouTubePlayer {
 		const playerPromise = new Promise<SetPlayerResolve>(
 			(resolve, reject) => {
 				try {
+					/**
+					 * If enableIma is true, YT.createPlayerForPublishers will be called
+					 * If enableIma is false, the standard new YT.Player constructor will be called
+					 * Listeners are set at expected place for each method
+					 */
 					if (enableIma) {
 						YTAPI.createPlayerForPublishers(
 							id,
@@ -101,6 +106,7 @@ class YouTubePlayer {
 							{
 								youtubeOptions,
 							},
+							// onReady callback for YT.createPlayerForPublishers
 							(player, imaManager) => {
 								this.player = player;
 								imaAdManagerListeners(imaManager);

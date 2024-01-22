@@ -51,7 +51,7 @@ type ProgressEvents = {
 };
 
 /**
- *  E.g.
+ *  Player listeners e.g.
  *  name: onReady, onStateChange, etc...
  *  listener: YT.PlayerEventHandler<PlayerEvent>, YT.PlayerEventHandler<OnStateChangeEvent>
  */
@@ -76,6 +76,10 @@ const imaPlayerStyles = css`
 	height: 100%;
 `;
 
+/**
+ * Dispatches a custom play event so that other players listening
+ * for this event will stop playing
+ */
 const dispatchCustomPlayEvent = (uniqueId: string) => {
 	document.dispatchEvent(
 		new CustomEvent(customPlayEventName, {
@@ -85,7 +89,18 @@ const dispatchCustomPlayEvent = (uniqueId: string) => {
 };
 
 /**
- * ProgressEvents are a ref, see below
+ * Create an onStateChange listener that will invoke all eventEmitters
+ * on the following events:
+ *
+ * - play
+ * - pause
+ * - cued
+ * - ended
+ * - 25% progress
+ * - 50% progress
+ * - 75% progress
+ *
+ * progressEvents are refs stored by the main component
  */
 const createOnStateChangeListener =
 	(
@@ -236,7 +251,7 @@ const createOnStateChangeListener =
 	};
 
 /**
- * returns an onReady listener
+ * Creates an onReady listener
  */
 const createOnReadyListener =
 	(
@@ -261,6 +276,10 @@ const createOnReadyListener =
 		setPlayerReady();
 	};
 
+/**
+ * Creates a callback that the IMA manager will use to build an IMA ad request
+ * and sets ad rendering settings
+ */
 const createImaAdsRequestCallback = (
 	adTargeting: AdTargeting | undefined,
 	consentState: ConsentState,
@@ -295,6 +314,9 @@ const createImaAdsRequestCallback = (
 	return adsRequestCallback;
 };
 
+/**
+ * Creates listeners for the IMA manager
+ */
 const createImaManagerListeners = (uniqueId: string) => {
 	return (imaManager: YT.ImaManager) => {
 		const onAdsManagerLoaded = () => {
@@ -450,6 +472,7 @@ export const YoutubeAtomPlayer = ({
 
 				/**
 				 * Pause the current video when another video is played
+				 * Triggered by the CustomEvent sent by each player on play
 				 */
 				const handleCustomPlayEvent = (
 					event: CustomEventInit<CustomPlayEventDetail>,
