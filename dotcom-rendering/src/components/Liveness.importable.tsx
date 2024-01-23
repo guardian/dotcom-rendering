@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
-import { isServer } from '../lib/isServer';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
 
@@ -20,14 +19,6 @@ type Props = {
 	selectedTopics?: Topic[];
 };
 
-const topOfBlog: Element | null = !isServer
-	? window.document.getElementById('top-of-blog')
-	: null;
-
-const toastRoot: Element | null = !isServer
-	? window.document.getElementById('toast-root')
-	: null;
-
 /**
  * insert
  *
@@ -37,7 +28,11 @@ const toastRoot: Element | null = !isServer
  * @param {string} html The block html to be inserted
  * @returns void
  */
-function insert(html: string, enhanceTweetsSwitch: boolean) {
+function insert(
+	html: string,
+	enhanceTweetsSwitch: boolean,
+	topOfBlog: Element,
+) {
 	// Create
 	// ------
 	const template = document.createElement('template');
@@ -57,7 +52,7 @@ function insert(html: string, enhanceTweetsSwitch: boolean) {
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
 	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
-	if (!blogBody || !topOfBlog) return;
+	if (!blogBody) return;
 	// nextSibling? See: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore#example_2
 	blogBody.insertBefore(fragment, topOfBlog.nextSibling);
 
@@ -164,6 +159,14 @@ export const Liveness = ({
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 	const [key, setKey] = useState<string>();
 
+	const [topOfBlog, setTopOfBlog] = useState<Element | null>(null);
+	const [toastRoot, setToastRoot] = useState<Element | null>(null);
+
+	useEffect(() => {
+		setTopOfBlog(document.getElementById('top-of-blog'));
+		setToastRoot(document.getElementById('toast-root'));
+	}, []);
+
 	/**
 	 * This function runs (once) after every successful useApi call. This is useful because it
 	 * allows us to avoid the problems of imperative code being executed multiple times
@@ -175,7 +178,8 @@ export const Liveness = ({
 				// Insert the new blocks in the dom (but hidden)
 				if (onFirstPage) {
 					try {
-						insert(data.html, enhanceTweetsSwitch);
+						topOfBlog &&
+							insert(data.html, enhanceTweetsSwitch, topOfBlog);
 					} catch (e) {
 						console.log('>> failed >>', e);
 					}
@@ -200,7 +204,13 @@ export const Liveness = ({
 				setLatestBlockId(data.mostRecentBlockId);
 			}
 		},
-		[onFirstPage, topOfBlogVisible, numHiddenBlocks, enhanceTweetsSwitch],
+		[
+			enhanceTweetsSwitch,
+			numHiddenBlocks,
+			onFirstPage,
+			topOfBlog,
+			topOfBlogVisible,
+		],
 	);
 
 	useEffect(() => {
@@ -260,7 +270,7 @@ export const Liveness = ({
 		return () => {
 			observer.disconnect();
 		};
-	}, [onFirstPage]);
+	}, [topOfBlog, onFirstPage]);
 
 	/**
 	 * This useEffect sets up a listener for when the page is backgrounded or restored. We
