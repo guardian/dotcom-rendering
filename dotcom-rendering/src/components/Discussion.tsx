@@ -3,6 +3,7 @@ import { storage } from '@guardian/libs';
 import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import { getDiscussion } from '../lib/discussionApi';
 import {
 	getCommentContext,
 	initFiltersFromLocalStorage,
@@ -18,7 +19,6 @@ import type {
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
-import { getDiscussion } from 'src/lib/discussionApi';
 
 export type Props = {
 	discussionApiUrl: string;
