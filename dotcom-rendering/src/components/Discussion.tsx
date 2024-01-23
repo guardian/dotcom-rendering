@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { joinUrl, storage } from '@guardian/libs';
+import { storage } from '@guardian/libs';
 import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
@@ -8,7 +8,6 @@ import {
 	initFiltersFromLocalStorage,
 } from '../lib/getCommentContext';
 import { revealStyles } from '../lib/revealStyles';
-import { useDiscussion } from '../lib/useDiscussion';
 import { palette as themePalette } from '../palette';
 import type {
 	CommentType,
