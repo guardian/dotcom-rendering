@@ -90,12 +90,13 @@ const NoComments = () => (
 	</div>
 );
 
+/** Reads mutes from local storage, if available. */
 const readMutes = (): string[] => {
 	const mutes = storage.local.get('gu.prefs.discussion.mutes') ?? [];
-
 	return Array.isArray(mutes) && mutes.every(isString) ? mutes : [];
 };
 
+/** Writes mutes to local storage. */
 const writeMutes = (mutes: string[]) => {
 	storage.local.set('gu.prefs.discussion.mutes', mutes);
 };
@@ -212,21 +213,18 @@ export const Comments = ({
 		element?.scrollIntoView();
 	}, [page]);
 
-	const toggleMuteStatus = (userId: string) => {
-		let updatedMutes;
-		if (mutes.includes(userId)) {
-			// Already muted, unmute them
-			updatedMutes = mutes.filter((id) => id !== userId);
-		} else {
-			// Add this user to our list of mutes
-			updatedMutes = [...mutes, userId];
-		}
-		// Update local state
-		setMutes(updatedMutes);
-		// Remember these new values
-		writeMutes(updatedMutes);
-	};
+	/** Remember updated mutes locally */
+	useEffect(() => {
+		writeMutes(mutes);
+	}, [mutes]);
 
+	const toggleMuteStatus = (userId: string) => {
+		const updatedMutes = mutes.includes(userId)
+			? mutes.filter((id) => id !== userId) // Already muted, unmute them
+			: [...mutes, userId]; // Add this user to our list of mutes
+
+		setMutes(updatedMutes); // Update local state
+	};
 	const onAddComment = (comment: CommentType) => {
 		// Remove last item from our local array
 		// Replace it with this new comment at the start
