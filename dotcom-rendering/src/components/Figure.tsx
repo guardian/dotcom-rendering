@@ -126,7 +126,7 @@ const roleCss = {
 			width: 140px;
 		}
 		${from.leftCol} {
-			position: relative;
+			position: absolute;
 			margin-left: -160px;
 			width: 140px;
 		}
