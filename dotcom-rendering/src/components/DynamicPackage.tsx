@@ -177,6 +177,7 @@ const Card25_Card25_Card25_Card25 = ({
 							containerType="dynamic/package"
 							showAge={showAge}
 							supportingContent={card.supportingContent}
+							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
 						/>
 					</LI>
