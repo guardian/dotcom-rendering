@@ -131,8 +131,7 @@ export const Comments = ({
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
 		useState<CommentType>();
-	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
-		useState<number>(10);
+	const [numberOfCommentsToShow, setNumberOfCommentsToShow] = useState(10);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
