@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { discussionWithTwoComments } from '../../../fixtures/manual/discussionWithTwoComments';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
+import { discussionWithTwoComments } from '../../../fixtures/manual/discussionWithTwoComments';
 import type { FilterOptions, SignedInUser } from '../../types/discussion';
 import { Comments } from './Comments';
+
 export default { component: Comments, title: 'Discussion/App' };
 
 const { discussion, pages } = discussionMock;

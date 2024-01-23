@@ -8,6 +8,7 @@ import {
 	getCommentContext,
 	initFiltersFromLocalStorage,
 } from '../lib/getCommentContext';
+import { useCommentCount } from '../lib/useCommentCount';
 import { palette as themePalette } from '../palette';
 import type {
 	CommentType,
@@ -96,7 +97,6 @@ export const Discussion = ({
 	const [commentOrderBy, setCommentOrderBy] = useState<
 		'newest' | 'oldest' | 'recommendations'
 	>();
-	const [commentCount, setCommentCount] = useState(0);
 	const [comments, setComments] = useState<CommentType[]>([]);
 	const [isClosedForComments, setIsClosedForComments] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -109,6 +109,8 @@ export const Discussion = ({
 	const [loading, setLoading] = useState(true);
 	const [totalPages, setTotalPages] = useState(0);
 
+	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
+
 	useEffect(() => {
 		setLoading(true);
 		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
@@ -116,13 +118,9 @@ export const Discussion = ({
 				setLoading(false);
 				if (json && json.status !== 'error') {
 					setComments(json.discussion.comments);
-					setCommentCount(json.discussion.topLevelCommentCount);
 					setIsClosedForComments(json.discussion.isClosedForComments);
-					// There's no point showing the view more button if there isn't much more to view
-					if (json.discussion.topLevelCommentCount <= 2)
-						setIsExpanded(true);
 				}
-				if (json?.pages) setTotalPages(json.pages);
+				if (json?.pages != null) setTotalPages(json.pages);
 			})
 			.catch((e) => console.error(`getDiscussion - error: ${String(e)}`));
 	}, [filters, commentPage, shortUrlId]);
@@ -174,6 +172,13 @@ export const Discussion = ({
 				);
 		}
 	}, [discussionApiUrl, hashCommentId]);
+
+	useEffect(() => {
+		// There's no point showing the view more button if there isn't much more to view
+		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
+			setIsExpanded(true);
+		}
+	}, [commentCount]);
 
 	useEffect(() => {
 		if (window.location.hash === '#comments') {
@@ -229,7 +234,7 @@ export const Discussion = ({
 					setPage={setCommentPage}
 					filters={filters}
 					setFilters={setFilters}
-					commentCount={commentCount}
+					commentCount={commentCount ?? 0}
 					loading={loading}
 					totalPages={totalPages}
 					comments={comments}
