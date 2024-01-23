@@ -4,8 +4,10 @@ import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import type { FilterOptions, SignedInUser } from '../../types/discussion';
 import { Comments } from './Comments';
-
+import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
 export default { component: Comments, title: 'Discussion/App' };
+
+const { discussion, pages } = discussionMock;
 
 const aUser: SignedInUser = {
 	profile: {
@@ -45,7 +47,7 @@ export const LoggedOutHiddenPicks = () => (
 		`}
 	>
 		<Comments
-			shortUrl="p/39f5z"
+			shortUrl={discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
 			additionalHeaders={{
@@ -61,10 +63,10 @@ export const LoggedOutHiddenPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={0}
+			commentCount={discussion.commentCount}
 			loading={false}
-			totalPages={0}
-			comments={[]}
+			totalPages={pages}
+			comments={discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -87,7 +89,7 @@ export const InitialPage = () => (
 		`}
 	>
 		<Comments
-			shortUrl="p/39f5z"
+			shortUrl={discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
 			additionalHeaders={{
@@ -103,10 +105,10 @@ export const InitialPage = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={0}
+			commentCount={discussion.commentCount}
 			loading={false}
-			totalPages={0}
-			comments={[]}
+			totalPages={pages}
+			comments={discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -146,10 +148,10 @@ export const LoggedInHiddenNoPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={0}
+			commentCount={discussion.commentCount}
 			loading={false}
-			totalPages={0}
-			comments={[]}
+			totalPages={pages}
+			comments={discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -183,10 +185,10 @@ export const LoggedIn = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={0}
+			commentCount={discussion.commentCount}
 			loading={false}
-			totalPages={0}
-			comments={[]}
+			totalPages={pages}
+			comments={discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -219,10 +221,10 @@ export const LoggedInShortDiscussion = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={0}
+			commentCount={discussion.commentCount}
 			loading={false}
-			totalPages={0}
-			comments={[]}
+			totalPages={pages}
+			comments={discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -254,10 +256,10 @@ export const LoggedOutHiddenNoPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={0}
+			commentCount={discussion.commentCount}
 			loading={false}
-			totalPages={0}
-			comments={[]}
+			totalPages={pages}
+			comments={discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -281,7 +283,7 @@ export const Closed = () => (
 		`}
 	>
 		<Comments
-			shortUrl="p/39f5z"
+			shortUrl={discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={true}
 			user={aUser}
@@ -298,10 +300,10 @@ export const Closed = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={0}
+			commentCount={discussion.commentCount}
 			loading={false}
-			totalPages={0}
-			comments={[]}
+			totalPages={pages}
+			comments={discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -340,10 +342,10 @@ export const NoComments = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={0}
+			commentCount={discussion.commentCount}
 			loading={false}
-			totalPages={0}
-			comments={[]}
+			totalPages={pages}
+			comments={discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -382,10 +384,10 @@ export const LegacyDiscussion = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={0}
+			commentCount={discussion.commentCount}
 			loading={false}
-			totalPages={0}
-			comments={[]}
+			totalPages={pages}
+			comments={discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
