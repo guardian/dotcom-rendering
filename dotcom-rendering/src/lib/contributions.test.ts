@@ -1,10 +1,13 @@
-import { setCookie } from '@guardian/libs';
+import { setCookie, storage } from '@guardian/libs';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecentOneOffContributor,
+	NO_RR_BANNER_KEY,
 	ONE_OFF_CONTRIBUTION_DATE_COOKIE,
 	recentlyClosedBanner,
+	setLocalNoBannerCachePeriod,
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
+	withinLocalNoBannerCachePeriod,
 } from './contributions';
 
 const clearAllCookies = () => {
@@ -165,5 +168,36 @@ describe('recentlyClosedBanner', () => {
 		const lastClosedAt = undefined;
 		const now = new Date('2023-12-07T09:00:00.000Z').getTime();
 		expect(recentlyClosedBanner(lastClosedAt, now)).toEqual(false);
+	});
+});
+
+describe('withinLocalNoBannerCachePeriod', () => {
+	beforeEach(() => {
+		storage.local.remove(NO_RR_BANNER_KEY);
+	});
+
+	it('returns true if not expired', () => {
+		setLocalNoBannerCachePeriod();
+		expect(withinLocalNoBannerCachePeriod()).toEqual(true);
+	});
+
+	it('returns false if expired', () => {
+		const past = new Date('2020-01-01').getTime();
+		setLocalNoBannerCachePeriod(past);
+		expect(withinLocalNoBannerCachePeriod()).toEqual(false);
+	});
+
+	it('returns false if no local storage item', () => {
+		expect(withinLocalNoBannerCachePeriod()).toEqual(false);
+	});
+
+	// The following 2 tests relate to a temporary issue with invalid expiry values - see https://github.com/guardian/csnx/pull/1099
+	it('returns true if expiry is number and not expired', () => {
+		storage.local.set(NO_RR_BANNER_KEY, true, Date.now() + 10000);
+		expect(withinLocalNoBannerCachePeriod()).toEqual(true);
+	});
+	it('returns false if expiry is number and expired', () => {
+		storage.local.set(NO_RR_BANNER_KEY, true, Date.now() - 10000);
+		expect(withinLocalNoBannerCachePeriod()).toEqual(false);
 	});
 });

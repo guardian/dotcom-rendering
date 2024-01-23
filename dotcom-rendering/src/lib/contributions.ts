@@ -21,7 +21,7 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 //  Local storage keys
 const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
 const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
-const NO_RR_BANNER_KEY = 'gu.noRRBanner';
+export const NO_RR_BANNER_KEY = 'gu.noRRBanner';
 
 // See https://github.com/guardian/support-dotcom-components/blob/main/module-versions.md
 export const MODULES_VERSION = 'v3';
@@ -219,8 +219,8 @@ const twentyMins = 20 * 60000;
 export const withinLocalNoBannerCachePeriod = (): boolean =>
 	!!storage.local.get(NO_RR_BANNER_KEY);
 
-export const setLocalNoBannerCachePeriod = (): void =>
-	storage.local.set(NO_RR_BANNER_KEY, true, Date.now() + twentyMins);
+export const setLocalNoBannerCachePeriod = (now: number = Date.now()): void =>
+	storage.local.set(NO_RR_BANNER_KEY, true, now + twentyMins);
 
 // Returns true if banner was closed in the last hour
 const ONE_HOUR_IN_MS = 1000 * 60 * 60;
