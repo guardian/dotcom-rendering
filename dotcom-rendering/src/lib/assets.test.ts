@@ -1,5 +1,4 @@
 import { readFileSync } from 'node:fs';
-import { BUILD_VARIANT } from '../../webpack/bundles';
 import {
 	APPS_SCRIPT,
 	decideAssetOrigin,
@@ -9,6 +8,7 @@ import {
 	WEB_LEGACY_SCRIPT,
 	WEB_VARIANT_SCRIPT,
 } from './assets';
+import { BUILD_VARIANT } from './bundles.mjs';
 
 jest.mock('node:fs');
 jest.mock('node:path');

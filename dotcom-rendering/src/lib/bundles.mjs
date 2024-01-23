@@ -1,3 +1,5 @@
+import { bundles } from '../generated/assets.manifest.mjs';
+
 /**
  * Controls whether we should build the variant bundle.
  *
@@ -9,7 +11,7 @@
  *
  * @type {boolean} prevent TS from narrowing this to its current value
  */
-const BUILD_VARIANT = false;
+const BUILD_VARIANT = bundles.map(String).includes('client.web.variant');
 
 /**
  * Server-side test names for running variant test.
@@ -19,11 +21,8 @@ const BUILD_VARIANT = false;
  *
  * @see https://github.com/guardian/frontend/blob/main/common/app/experiments/Experiments.scala
  *
- * @type {(variant: 'Variant' | 'Control') => import("../src/types/config").ServerSideTestNames}
+ * @type {(variant: 'Variant' | 'Control') => import("../types/config").ServerSideTestNames}
  */
 const dcrJavascriptBundle = (variant) => `dcrJavascriptBundle${variant}`;
 
-module.exports = {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-};
+export { dcrJavascriptBundle, BUILD_VARIANT };

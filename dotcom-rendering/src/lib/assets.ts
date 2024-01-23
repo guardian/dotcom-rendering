@@ -1,8 +1,12 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isObject, isString } from '@guardian/libs';
-import { BUILD_VARIANT, dcrJavascriptBundle } from '../../webpack/bundles';
+import type { bundles } from '../generated/assets.manifest.mjs';
 import type { ServerSideTests, Switches } from '../types/config';
+import { BUILD_VARIANT, dcrJavascriptBundle } from './bundles.mjs';
+// if you get a type error, the manifest file may be missing,
+// you can generate it with `NODE_ENV=production node webpack.config.mjs`
+// it will also be generated when you run `make dev` or `make build`
 import { makeMemoizedFunction } from './memoize';
 
 interface AssetHash {
@@ -53,11 +57,7 @@ const getManifest = makeMemoizedFunction((path: string): AssetHash => {
 	}
 });
 
-export type Build =
-	| 'client.apps'
-	| 'client.web'
-	| 'client.web.variant'
-	| 'client.web.legacy';
+export type Build = (typeof bundles)[number];
 
 type ManifestPath = `./manifest.${Build}.json`;
 
