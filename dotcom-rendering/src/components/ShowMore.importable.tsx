@@ -169,7 +169,7 @@ export const ShowMore = ({
 									>
 										<FrontCard
 											trail={card}
-											imageUrl={undefined}
+											image={undefined}
 											avatarUrl={undefined}
 											containerPalette={containerPalette}
 											showAge={showAge}
