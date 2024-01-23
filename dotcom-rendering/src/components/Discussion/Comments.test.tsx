@@ -36,7 +36,10 @@ describe('App', () => {
 				}}
 				setFilters={() => {}}
 				commentCount={0}
-				setCommentCount={() => {}}
+				loading={false}
+				totalPages={0}
+				comments={[]}
+				setComments={() => {}}
 			/>,
 		);
 

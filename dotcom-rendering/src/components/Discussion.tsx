@@ -11,6 +11,7 @@ import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
 import { palette as themePalette } from '../palette';
 import type {
+	CommentType,
 	FilterOptions,
 	SignedInUser,
 	ThreadsType,
@@ -18,6 +19,7 @@ import type {
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
+import { getDiscussion } from 'src/lib/discussionApi';
 
 export type Props = {
 	discussionApiUrl: string;
@@ -107,16 +109,26 @@ export const Discussion = ({
 	const [filters, setFilters] = useState<FilterOptions>(
 		initFiltersFromLocalStorage(),
 	);
+	const [loading, setLoading] = useState<boolean>(true);
+	const [totalPages, setTotalPages] = useState<number>(0);
+	const [comments, setComments] = useState<CommentType[]>([]);
 
 	useEffect(() => {
-		const {
-			commentCount: fetchedCommentCount,
-			isClosedForComments: fetchedIsClosed,
-		} = useDiscussion(joinUrl(discussionApiUrl, 'discussion', shortUrlId));
-
-		fetchedCommentCount && setCommentCount(fetchedCommentCount);
-		fetchedIsClosed && setIsClosedForComments(fetchedIsClosed);
-	}, [discussionApiUrl, shortUrlId]);
+		setLoading(true);
+		//todo: come back and handle the error case
+		void getDiscussion(shortUrlId, { ...filters, page: commentPage }).then(
+			(json) => {
+				setLoading(false);
+				if (json && json.status !== 'error') {
+					setComments(json.discussion.comments);
+					setCommentCount(json.discussion.topLevelCommentCount);
+					setIsClosedForComments(json.discussion.isClosedForComments);
+				}
+				//todo: come back and parse this properly (apologies for the horribleness)
+				setTotalPages(json?.pages as number);
+			},
+		);
+	}, [filters, commentPage, shortUrlId]);
 
 	useEffect(() => {
 		const orderByClosed = isClosedForComments ? 'oldest' : undefined;
@@ -235,7 +247,10 @@ export const Discussion = ({
 						filters={filters}
 						setFilters={setFilters}
 						commentCount={commentCount}
-						setCommentCount={setCommentCount}
+						loading={loading}
+						totalPages={totalPages}
+						comments={comments}
+						setComments={setComments}
 					/>
 					{!isExpanded && (
 						<div id="discussion-overlay" css={overlayStyles} />

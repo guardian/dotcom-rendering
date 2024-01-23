@@ -6,11 +6,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import {
-	getDiscussion,
-	getPicks,
-	initialiseApi,
-} from '../../lib/discussionApi';
+import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
 	CommentResponse,
@@ -50,7 +46,10 @@ type Props = {
 	filters: FilterOptions;
 	setFilters: (filters: FilterOptions) => void;
 	commentCount: number;
-	setCommentCount: (commentCount: number) => void;
+	loading: boolean;
+	totalPages: number;
+	comments: CommentType[];
+	setComments: (comments: CommentType[]) => void;
 };
 
 const footerStyles = css`
@@ -124,14 +123,14 @@ export const Comments = ({
 	filters,
 	setFilters,
 	commentCount,
-	setCommentCount,
+	loading,
+	totalPages,
+	comments,
+	setComments,
 }: Props) => {
-	const [loading, setLoading] = useState<boolean>(true);
-	const [totalPages, setTotalPages] = useState<number>(0);
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
 		useState<CommentType>();
-	const [comments, setComments] = useState<CommentType[]>([]);
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
 		useState<number>(10);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
@@ -151,20 +150,6 @@ export const Comments = ({
 			return () => clearTimeout(timer);
 		} else return;
 	}, [expanded, comments.length]);
-
-	useEffect(() => {
-		setLoading(true);
-		//todo: come back and handle the error case
-		void getDiscussion(shortUrl, { ...filters, page }).then((json) => {
-			setLoading(false);
-			if (json && json.status !== 'error') {
-				setComments(json.discussion.comments);
-				setCommentCount(json.discussion.topLevelCommentCount);
-			}
-			//todo: come back and parse this properly (apologies for the horribleness)
-			setTotalPages(json?.pages as number);
-		});
-	}, [filters, page, shortUrl]);
 
 	//todo: parse this properly
 	useEffect(() => {
