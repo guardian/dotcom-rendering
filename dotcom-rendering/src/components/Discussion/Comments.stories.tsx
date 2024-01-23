@@ -61,6 +61,11 @@ export const LoggedOutHiddenPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			loading={false}
+			totalPages={0}
+			comments={[]}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -98,6 +103,11 @@ export const InitialPage = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			loading={false}
+			totalPages={0}
+			comments={[]}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -136,6 +146,11 @@ export const LoggedInHiddenNoPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			loading={false}
+			totalPages={0}
+			comments={[]}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -168,6 +183,11 @@ export const LoggedIn = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			loading={false}
+			totalPages={0}
+			comments={[]}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -199,6 +219,11 @@ export const LoggedInShortDiscussion = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			loading={false}
+			totalPages={0}
+			comments={[]}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -229,6 +254,11 @@ export const LoggedOutHiddenNoPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			loading={false}
+			totalPages={0}
+			comments={[]}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -268,6 +298,11 @@ export const Closed = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			loading={false}
+			totalPages={0}
+			comments={[]}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -305,6 +340,11 @@ export const NoComments = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			loading={false}
+			totalPages={0}
+			comments={[]}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -342,6 +382,11 @@ export const LegacyDiscussion = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			loading={false}
+			totalPages={0}
+			comments={[]}
+			setComments={() => {}}
 		/>
 	</div>
 );
