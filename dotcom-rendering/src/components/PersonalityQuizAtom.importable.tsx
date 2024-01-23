@@ -1,13 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import {
-	body,
-	neutral,
-	palette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { body, palette, space, textSans } from '@guardian/source-foundations';
 import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
 import type { KeyboardEvent, MouseEvent } from 'react';
 import { memo, useEffect, useState } from 'react';
@@ -338,8 +332,8 @@ const AnswersGroup = memo(
 					label {
 						:hover {
 							background-color: ${hasSubmittedAnswers
-								? neutral[97]
-								: neutral[86]};
+								? palette.neutral[97]
+								: palette.neutral[86]};
 						}
 						/* TODO: apply same styles on focus (requires source update) */
 					}
@@ -382,7 +376,7 @@ export const MissingAnswers = () => (
 );
 
 const resultWrapperStyles = css`
-	background-color: ${neutral[93]};
+	background-color: ${palette.neutral[93]};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[3]}px;
 	padding: ${space[2]}px;
@@ -390,13 +384,13 @@ const resultWrapperStyles = css`
 
 const resultHeaderStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })}
-	color: ${neutral[20]};
+	color: ${palette.neutral[20]};
 	padding-bottom: ${space[1]}px;
 `;
 
 const resultDescriptionStyles = css`
 	${textSans.medium()}
-	color: ${neutral[46]};
+	color: ${palette.neutral[46]};
 `;
 
 export const Result = ({

@@ -1,12 +1,14 @@
 import { css } from '@emotion/react';
-import { body, headline, neutral, space } from '@guardian/source-foundations';
+import { body, headline, palette, space } from '@guardian/source-foundations';
+import type { EditionId } from '../lib/edition';
 import { palette as themePalette } from '../palette';
 import type { WitnessAssetType } from '../types/content';
+import { DateTime } from './DateTime';
 
 // Wrapper Styles
 const wrapperStyles = css`
 	border-width: 1px;
-	border-color: ${neutral[86]};
+	border-color: ${palette.neutral[86]};
 	border-style: solid;
 `;
 
@@ -33,10 +35,10 @@ const witnessIconStyles = css`
 
 const witnessDetailsWrapperStyles = css`
 	border-width: 1px;
-	border-color: ${neutral[86]};
+	border-color: ${palette.neutral[86]};
 	border-style: solid;
 
-	background-color: ${neutral[97]};
+	background-color: ${palette.neutral[97]};
 `;
 
 // Non Wrapper Styles
@@ -66,6 +68,7 @@ const authorNameStyles = css`
 type WrapperProps = {
 	authorName: string;
 	dateCreated: string;
+	editionId: EditionId;
 	children: React.ReactNode;
 };
 
@@ -73,6 +76,7 @@ const WitnessWrapper = ({
 	authorName,
 	dateCreated,
 	children,
+	editionId,
 }: WrapperProps) => {
 	return (
 		<div css={wrapperStyles}>
@@ -84,7 +88,7 @@ const WitnessWrapper = ({
 						guardian
 						<span
 							css={css`
-								color: ${neutral[46]};
+								color: ${palette.neutral[46]};
 							`}
 						>
 							witness
@@ -112,9 +116,13 @@ const WitnessWrapper = ({
 								${body.small()}
 							`}
 						>
-							<time itemProp="dateCreated" dateTime={dateCreated}>
-								{new Date(dateCreated).toDateString()}
-							</time>
+							<DateTime
+								date={new Date(dateCreated)}
+								editionId={editionId}
+								showWeekday={false}
+								showDate={true}
+								showTime={false}
+							/>
 						</p>
 					</div>
 				</div>
@@ -130,6 +138,7 @@ type ImageProps = {
 	authorName: string;
 	dateCreated: string;
 	alt: string;
+	editionId: EditionId;
 };
 
 export const WitnessImageBlockComponent = ({
@@ -139,6 +148,7 @@ export const WitnessImageBlockComponent = ({
 	authorName,
 	dateCreated,
 	alt,
+	editionId,
 }: ImageProps) => {
 	// witness images seem to always use `mediumoriginalaspectdouble`, but in case that isn't found we use the 1st
 	// asset in the list
@@ -147,7 +157,11 @@ export const WitnessImageBlockComponent = ({
 			(asset) => asset.typeData?.name === 'mediumoriginalaspectdouble',
 		) ?? assets[0];
 	return (
-		<WitnessWrapper authorName={authorName} dateCreated={dateCreated}>
+		<WitnessWrapper
+			authorName={authorName}
+			dateCreated={dateCreated}
+			editionId={editionId}
+		>
 			<>
 				<img
 					css={css`
@@ -184,6 +198,7 @@ type TextProps = {
 	authorName: string;
 	dateCreated: string;
 	description: string;
+	editionId: EditionId;
 };
 
 export const WitnessTextBlockComponent = ({
@@ -191,23 +206,26 @@ export const WitnessTextBlockComponent = ({
 	authorName,
 	dateCreated,
 	description,
+	editionId,
 }: TextProps) => (
-	<WitnessWrapper authorName={authorName} dateCreated={dateCreated}>
-		<>
-			<h3
-				css={titleStyles}
-				itemProp="name"
-				dangerouslySetInnerHTML={{ __html: title }}
+	<WitnessWrapper
+		authorName={authorName}
+		dateCreated={dateCreated}
+		editionId={editionId}
+	>
+		<h3
+			css={titleStyles}
+			itemProp="name"
+			dangerouslySetInnerHTML={{ __html: title }}
+		/>
+		<div itemProp="text">
+			<p
+				css={css`
+					${body.medium()}
+				`}
+				dangerouslySetInnerHTML={{ __html: description }}
 			/>
-			<div itemProp="text">
-				<p
-					css={css`
-						${body.medium()}
-					`}
-					dangerouslySetInnerHTML={{ __html: description }}
-				/>
-			</div>
-		</>
+		</div>
 	</WitnessWrapper>
 );
 
@@ -217,6 +235,7 @@ type VideoProps = {
 	authorName: string;
 	youtubeHtml: string;
 	dateCreated: string;
+	editionId: EditionId;
 };
 
 export const WitnessVideoBlockComponent = ({
@@ -225,32 +244,35 @@ export const WitnessVideoBlockComponent = ({
 	authorName,
 	youtubeHtml,
 	dateCreated,
+	editionId,
 }: VideoProps) => (
-	<WitnessWrapper authorName={authorName} dateCreated={dateCreated}>
-		<>
-			<div
-				css={css`
-					iframe {
-						width: 100%;
-					}
-				`}
-				dangerouslySetInnerHTML={{ __html: youtubeHtml }}
+	<WitnessWrapper
+		authorName={authorName}
+		dateCreated={dateCreated}
+		editionId={editionId}
+	>
+		<div
+			css={css`
+				iframe {
+					width: 100%;
+				}
+			`}
+			dangerouslySetInnerHTML={{ __html: youtubeHtml }}
+		/>
+		<figcaption css={captionStyles}>
+			<h3
+				css={titleStyles}
+				itemProp="name"
+				dangerouslySetInnerHTML={{ __html: title }}
 			/>
-			<figcaption css={captionStyles}>
-				<h3
-					css={titleStyles}
-					itemProp="name"
-					dangerouslySetInnerHTML={{ __html: title }}
+			<div itemProp="description">
+				<p
+					css={css`
+						${body.medium()}
+					`}
+					dangerouslySetInnerHTML={{ __html: description }}
 				/>
-				<div itemProp="description">
-					<p
-						css={css`
-							${body.medium()}
-						`}
-						dangerouslySetInnerHTML={{ __html: description }}
-					/>
-				</div>
-			</figcaption>
-		</>
+			</div>
+		</figcaption>
 	</WitnessWrapper>
 );

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brand, from } from '@guardian/source-foundations';
+import { from, palette } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
@@ -25,7 +25,7 @@ const explicitHeight = css`
 `;
 
 const headerStyles = css`
-	background-color: ${brand[400]};
+	background-color: ${palette.brand[400]};
 `;
 
 type Props = {

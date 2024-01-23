@@ -2,13 +2,9 @@
 import { css } from '@emotion/react';
 import {
 	body,
-	border,
-	brand,
-	brandAlt,
 	brandBackground,
-	error,
 	headline,
-	neutral,
+	palette,
 	textSans,
 } from '@guardian/source-foundations';
 import {
@@ -20,10 +16,10 @@ import {
 
 export const epicChoiceCardCss = `
 	.epicChoiceCard {
-		color: ${neutral[46]};
+		color: ${palette.neutral[46]};
 		cursor: pointer;
 		border-radius: 4px;
-		box-shadow: inset 0 0 0 2px ${border.primary};
+		box-shadow: inset 0 0 0 2px ${palette.neutral[60]};
 		box-sizing: border-box;
 		min-height: 44px;
 		margin: 0 0 8px 0;
@@ -37,13 +33,13 @@ export const epicChoiceCardCss = `
 		text-align: center;
 	}
 	.epicChoiceCard:hover {
-		box-shadow: inset 0 0 0 4px ${brand[500]};
-		color: ${brand[400]};
+		box-shadow: inset 0 0 0 4px ${palette.brand[500]};
+		color: ${palette.brand[400]};
 	}
 	.epicChoiceCardSelected {
-		box-shadow: inset 0 0 0 4px ${brand[500]};
+		box-shadow: inset 0 0 0 4px ${palette.brand[500]};
 		background-color: #e3f6ff;
-		color: ${brand[400]};
+		color: ${palette.brand[400]};
 	}
 `;
 
@@ -67,8 +63,8 @@ const choiceCardContainer = css`
 	margin-top: 8px;
 `;
 const epicStyle = css`
-	border-top: 0.0625rem solid ${brandAlt[400]};
-	background-color: ${neutral[97]};
+	border-top: 0.0625rem solid ${palette.brandAlt[400]};
+	background-color: ${palette.neutral[97]};
 	clear: left;
 	margin-top: 1.5rem;
 	margin-bottom: 1rem;
@@ -98,7 +94,7 @@ const epicParagraphStyle = css`
 	vertical-align: 0%;
 	line-height: 1.5;
 	&::selection {
-		background-color: ${brandAlt[400]};
+		background-color: ${palette.brandAlt[400]};
 	}
 	&:last-of-type {
 		display: inline;
@@ -106,10 +102,10 @@ const epicParagraphStyle = css`
 `;
 const highlightedTextStyle = css`
 	font-size: 1.1rem;
-	background-color: ${brandAlt[400]};
+	background-color: ${palette.brandAlt[400]};
 	padding: 0.125rem;
 	margin-left: 5px;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	text-rendering: optimizeLegibility;
 	font-kerning: normal;
@@ -147,27 +143,27 @@ const transparentButtonStyle = css`
 	${genericButtonStyle}
 	margin: 4px;
 	background-color: transparent;
-	color: ${neutral[7]};
-	border: 1px solid ${neutral[7]};
+	color: ${palette.neutral[7]};
+	border: 1px solid ${palette.neutral[7]};
 	&:hover {
-		background-color: ${neutral[86]};
+		background-color: ${palette.neutral[86]};
 	}
 `;
 const yellowButtonStyle = css`
 	${genericButtonStyle}
 	margin: 4px;
-	background-color: ${brandAlt[400]};
-	color: ${neutral[7]};
-	border: 1px solid ${brandAlt[400]};
+	background-color: ${palette.brandAlt[400]};
+	color: ${palette.neutral[7]};
+	border: 1px solid ${palette.brandAlt[400]};
 	&:hover {
-		background-color: ${brandAlt[300]};
+		background-color: ${palette.brandAlt[300]};
 	}
 `;
 const blueButtonStyle = css`
 	${genericButtonStyle}
-	background-color: ${brand[400]};
-	color: ${neutral[100]};
-	border: 1px solid ${brand[400]};
+	background-color: ${palette.brand[400]};
+	color: ${palette.neutral[100]};
+	border: 1px solid ${palette.brand[400]};
 	margin-bottom: 6px;
 	&:hover {
 		background-color: ${brandBackground.ctaSecondaryHover};
@@ -183,17 +179,17 @@ const genericArrowStyle = css`
 `;
 const darkArrowStyle = css`
 	${genericArrowStyle}
-	fill: ${neutral[7]};
+	fill: ${palette.neutral[7]};
 `;
 const lightArrowStyle = css`
 	${genericArrowStyle}
-	fill: ${neutral[100]};
+	fill: ${palette.neutral[100]};
 `;
 const quadLineStyle = css`
 	background-image: repeating-linear-gradient(
 		to bottom,
-		${neutral[86]},
-		${neutral[86]} 1px,
+		${palette.neutral[86]},
+		${palette.neutral[86]} 1px,
 		transparent 1px,
 		transparent 4px
 	);
@@ -236,22 +232,21 @@ const tickerProgressStyle = css`
 	margin: 0;
 	padding: 0;
 	left: 0;
-	background-color: ${error[400]};
+	background-color: ${palette.error[400]};
 	height: 100%;
 	width: 100%;
 	transform-origin: left;
 `;
-/* stylelint-disable */
 const tickerBackgroundStyle = css`
 	overflow: hidden;
 	position: relative;
 	margin: 5px 0;
 	height: 10px;
 	width: 100%;
+	/* stylelint-disable-next-line color-no-hex */
 	background-color: #dda7a1;
 	border: none;
 `;
-/* stylelint-enable */
 const topLeftStyle = css`
 	${textSans.small({ fontWeight: 'bold' })};
 `;
@@ -264,7 +259,7 @@ const labelStyle = css`
 const goalExceededMarkerStyle = css`
 	width: 1px;
 	height: 100%;
-	border-left: 2px solid ${neutral[7]};
+	border-left: 2px solid ${palette.neutral[7]};
 	position: absolute;
 	top: 0;
 	z-index: 2;
@@ -290,31 +285,31 @@ const reminderFormTopStyle = css`
 	width: 100%;
 `;
 const inputLabelStyle = css`
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	${textSans.medium({ fontWeight: 'bold' })};
 	margin-bottom: 4px;
 `;
 const invalidInputLabelStyle = css`
 	${textSans.medium()};
-	color: ${error[400]};
+	color: ${palette.error[400]};
 	display: flex;
 `;
 const invalidInputSvgStyle = css`
 	width: 30px;
 	height: 30px;
-	fill: ${error[400]};
+	fill: ${palette.error[400]};
 `;
 const emailInputStyle = css`
 	outline: none;
 	width: 100%;
 	border-radius: 0;
-	border: 2px solid ${neutral[60]};
+	border: 2px solid ${palette.neutral[60]};
 	padding: 0 8px;
 	line-height: 1.35;
 	box-sizing: border-box;
 	height: 44px;
 	${textSans.medium()};
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	margin-bottom: 10px;
 `;
 const reminderTermsStyle = css`
@@ -323,7 +318,7 @@ const reminderTermsStyle = css`
 
 	a {
 		text-decoration: underline;
-		color: ${neutral[7]};
+		color: ${palette.neutral[7]};
 	}
 `;
 const successMessageStyle = css`
@@ -331,18 +326,18 @@ const successMessageStyle = css`
 
 	a {
 		text-decoration: underline;
-		color: ${neutral[7]};
+		color: ${palette.neutral[7]};
 	}
 `;
 const reminderErrorStyle = css`
 	${textSans.small({ fontStyle: 'italic' })};
-	color: ${error[400]};
+	color: ${palette.error[400]};
 	font-weight: 600;
 	margin-bottom: 10px;
 `;
 const reminderWrapperStyle = css`
 	#reminderForm.user-invalid #email {
-		border: 4px solid ${error[400]};
+		border: 4px solid ${palette.error[400]};
 	}
 `;
 

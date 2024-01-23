@@ -1,12 +1,9 @@
 import { onConsentChange } from '@guardian/consent-management-platform';
-import { getCookie } from '@guardian/libs';
+import { getCookie, storage } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import type { DCRFrontType } from '../types/front';
 import type { DCRArticle } from '../types/frontend';
-import type { IdApiUserData } from './getIdapiUserData';
-import { getIdApiUserData } from './getIdapiUserData';
-import { eitherInOktaTestOrElse } from './identity';
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
@@ -24,7 +21,7 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 //  Local storage keys
 const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
 const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
-export const NO_RR_BANNER_TIMESTAMP_KEY = 'gu.noRRBannerTimestamp'; // timestamp of when we were last told not to show a RR banner
+const NO_RR_BANNER_KEY = 'gu.noRRBanner';
 
 // See https://github.com/guardian/support-dotcom-components/blob/main/module-versions.md
 export const MODULES_VERSION = 'v3';
@@ -153,8 +150,8 @@ export const hasArticleCountOptOutCookie = (): boolean =>
 	getCookie({ name: OPT_OUT_OF_ARTICLE_COUNT_COOKIE }) !== null;
 
 const removeArticleCountsFromLocalStorage = () => {
-	window.localStorage.removeItem(DAILY_ARTICLE_COUNT_KEY);
-	window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_KEY);
+	storage.local.remove(DAILY_ARTICLE_COUNT_KEY);
+	storage.local.remove(WEEKLY_ARTICLE_COUNT_KEY);
 };
 
 export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
@@ -219,21 +216,11 @@ export const hasCmpConsentForBrowserId = (): Promise<boolean> =>
 	});
 
 const twentyMins = 20 * 60000;
-export const withinLocalNoBannerCachePeriod = (): boolean => {
-	const item = window.localStorage.getItem(NO_RR_BANNER_TIMESTAMP_KEY);
-	if (item && !Number.isNaN(parseInt(item, 10))) {
-		const withinCachePeriod = parseInt(item, 10) + twentyMins > Date.now();
-		if (!withinCachePeriod) {
-			// Expired
-			window.localStorage.removeItem(NO_RR_BANNER_TIMESTAMP_KEY);
-		}
-		return withinCachePeriod;
-	}
-	return false;
-};
+export const withinLocalNoBannerCachePeriod = (): boolean =>
+	!!storage.local.get(NO_RR_BANNER_KEY);
 
 export const setLocalNoBannerCachePeriod = (): void =>
-	window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);
+	storage.local.set(NO_RR_BANNER_KEY, true, Date.now() + twentyMins);
 
 // Returns true if banner was closed in the last hour
 const ONE_HOUR_IN_MS = 1000 * 60 * 60;
@@ -246,38 +233,6 @@ export const recentlyClosedBanner = (
 	}
 	return false;
 };
-
-const getEmail = async (ajaxUrl: string): Promise<string | undefined> =>
-	// TODO Okta: Remove either when at 100% in oktaVariant test, and just use idToken
-	eitherInOktaTestOrElse(
-		(authState) => authState.idToken?.claims.email,
-		() =>
-			getIdApiUserData(ajaxUrl)
-				.then((data: IdApiUserData) => data.user?.primaryEmailAddress)
-				.catch((error) => {
-					window.guardian.modules.sentry.reportError(
-						error,
-						'getEmail',
-					);
-					return undefined;
-				}),
-	);
-
-export const lazyFetchEmailWithTimeout =
-	(idapiUrl: string): (() => Promise<string | null>) =>
-	() => {
-		return new Promise((resolve) => {
-			setTimeout(() => resolve(null), 1000);
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
-			getEmail(idapiUrl).then((email) => {
-				if (email) {
-					resolve(email);
-				} else {
-					resolve(null);
-				}
-			});
-		});
-	};
 
 export const getContributionsServiceUrl = (
 	config: DCRArticle | DCRFrontType,

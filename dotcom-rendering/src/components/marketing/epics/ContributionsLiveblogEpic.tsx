@@ -7,7 +7,6 @@ import { css } from '@emotion/react';
 import { body, headline } from '@guardian/source-foundations';
 import { from } from '@guardian/source-foundations';
 import { palette } from '@guardian/source-foundations';
-import { brandAlt, neutral } from '@guardian/source-foundations';
 import { space } from '@guardian/source-foundations';
 import {
 	containsNonArticleCountPlaceholder,
@@ -27,11 +26,11 @@ import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 
 const container = (clientName: string) => css`
 	padding: 6px 10px 28px 10px;
-	border-top: 1px solid ${brandAlt[400]};
-	border-bottom: 1px solid ${neutral[86]};
-	background: ${neutral[100]};
+	border-top: 1px solid ${palette.brandAlt[400]};
+	border-bottom: 1px solid ${palette.neutral[86]};
+	background: ${palette.neutral[100]};
 
-	border: 1px solid ${neutral[0]};
+	border: 1px solid ${palette.neutral[0]};
 
 	* {
 		::selection {
@@ -75,10 +74,10 @@ const textContainer = css`
 const yellowHeading = (clientName: string) => css`
 	${headline.medium({ fontWeight: 'bold' })};
 	font-size: 28px;
-	background-color: ${brandAlt[400]};
-	border-top: 1px solid ${neutral[0]};
-	border-left: 1px solid ${neutral[0]};
-	border-right: 1px solid ${neutral[0]};
+	background-color: ${palette.brandAlt[400]};
+	border-top: 1px solid ${palette.neutral[0]};
+	border-left: 1px solid ${palette.neutral[0]};
+	border-right: 1px solid ${palette.neutral[0]};
 
 	padding: 8px 10px 12px 10px;
 	${from.tablet} {

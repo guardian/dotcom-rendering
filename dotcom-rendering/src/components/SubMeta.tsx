@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import {
-	from,
-	palette as sourcePalette,
-	space,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { from, space, textSans, until } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
@@ -76,8 +70,8 @@ const listStyleNone = css`
 		),
 		repeating-linear-gradient(
 			to right,
-			${sourcePalette.neutral[86]} 0px,
-			${sourcePalette.neutral[86]} 3px,
+			${palette('--article-border')} 0px,
+			${palette('--article-border')} 3px,
 			transparent 3px,
 			transparent 5px
 		);

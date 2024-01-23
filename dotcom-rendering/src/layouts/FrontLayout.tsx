@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	background,
-	border,
 	brandBackground,
 	brandBorder,
 	brandLine,
@@ -287,7 +286,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							fullWidth={true}
 							showTopBorder={false}
 							backgroundColour={sourcePalette.labs[400]}
-							borderColour={border.primary}
+							borderColour={sourcePalette.neutral[60]}
 							sectionId="labs-header"
 						>
 							<LabsHeader />
@@ -434,8 +433,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										displayName={collection.displayName}
 										trails={trails}
 										mostViewed={front.mostViewed}
-										mostCommented={front.mostCommented}
-										mostShared={front.mostShared}
 										isNetworkFront={front.isNetworkFront}
 										deeplyRead={deeplyReadData}
 										editionId={front.editionId}

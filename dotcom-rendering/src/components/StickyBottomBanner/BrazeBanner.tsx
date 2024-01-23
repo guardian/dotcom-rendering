@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
-import { lazyFetchEmailWithTimeout } from '../../lib/contributions';
+import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import { getOptionsHeadersWithOkta } from '../../lib/identity';
 import type { CanShowResult } from '../../lib/messagePicker';

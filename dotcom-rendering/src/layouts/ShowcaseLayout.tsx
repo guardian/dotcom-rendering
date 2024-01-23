@@ -6,6 +6,7 @@ import {
 	palette as sourcePalette,
 	until,
 } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -15,6 +16,7 @@ import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
@@ -516,9 +518,11 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									pageId={article.pageId}
 									webTitle={article.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
+									abTests={article.config.abTests}
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
+									editionId={article.editionId}
 								/>
 							</div>
 						</GridItem>
@@ -576,26 +580,85 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
-								<ArticleMeta
-									branding={branding}
-									format={format}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									byline={article.byline}
-									tags={article.tags}
-									primaryDateline={
-										article.webPublicationDateDisplay
-									}
-									secondaryDateline={
-										article.webPublicationSecondaryDateDisplay
-									}
-									isCommentable={showComments}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									shortUrlId={article.config.shortUrlId}
-									ajaxUrl={article.config.ajaxUrl}
-								/>
+								{isApps ? (
+									<>
+										<Hide from="leftCol">
+											<ArticleMetaApps
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={
+													article.isCommentable
+												}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
+												ajaxUrl={article.config.ajaxUrl}
+											></ArticleMetaApps>
+										</Hide>
+										<Hide until="leftCol">
+											<ArticleMeta
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={
+													article.isCommentable
+												}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
+												ajaxUrl={article.config.ajaxUrl}
+											/>
+										</Hide>
+									</>
+								) : (
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										ajaxUrl={article.config.ajaxUrl}
+									/>
+								)}
 							</div>
 						</GridItem>
 						<GridItem area="body">
@@ -632,6 +695,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									editionId={article.editionId}
 								/>
 								{showBodyEndSlot && (
 									<Island
@@ -764,29 +828,25 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{isWeb && (
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<OnwardsUpper
-							ajaxUrl={article.config.ajaxUrl}
-							hasRelated={article.hasRelated}
-							hasStoryPackage={article.hasStoryPackage}
-							isAdFreeUser={article.isAdFreeUser}
-							pageId={article.pageId}
-							isPaidContent={!!article.config.isPaidContent}
-							showRelatedContent={
-								article.config.showRelatedContent
-							}
-							keywordIds={article.config.keywordIds}
-							contentType={article.contentType}
-							tags={article.tags}
-							format={format}
-							pillar={format.theme}
-							editionId={article.editionId}
-							shortUrlId={article.config.shortUrlId}
-							discussionApiUrl={article.config.discussionApiUrl}
-						/>
-					</Island>
-				)}
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<OnwardsUpper
+						ajaxUrl={article.config.ajaxUrl}
+						hasRelated={article.hasRelated}
+						hasStoryPackage={article.hasStoryPackage}
+						isAdFreeUser={article.isAdFreeUser}
+						pageId={article.pageId}
+						isPaidContent={!!article.config.isPaidContent}
+						showRelatedContent={article.config.showRelatedContent}
+						keywordIds={article.config.keywordIds}
+						contentType={article.contentType}
+						tags={article.tags}
+						format={format}
+						pillar={format.theme}
+						editionId={article.editionId}
+						shortUrlId={article.config.shortUrlId}
+						discussionApiUrl={article.config.discussionApiUrl}
+					/>
+				</Island>
 
 				{showComments && (
 					<Section
@@ -939,6 +999,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					fullWidth={true}
 					data-print-layout="hide"
 					backgroundColour={themePalette('--apps-footer-background')}
+					borderColour={themePalette('--article-border')}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"

@@ -1,9 +1,7 @@
 import { css, Global } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	brandAlt,
 	focusHalo,
-	neutral,
 	palette as sourcePalette,
 } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
@@ -20,8 +18,7 @@ import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
-import { LightboxJavascript } from './LightboxJavascript.importable';
-import { LightboxLayout } from './LightboxLayout';
+import { LightboxLayout } from './LightboxLayout.importable';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
@@ -60,6 +57,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		adUnit: article.config.adUnit,
 	});
 
+	const isInLightboxTest =
+		article.config.abTests.lightboxVariant === 'variant';
+
+	const webLightbox = renderingTarget === 'Web' && isInLightboxTest;
+
 	return (
 		<StrictMode>
 			<Global
@@ -89,26 +91,23 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 						${focusHalo}
 					}
 					::selection {
-						background: ${brandAlt[400]};
-						color: ${neutral[7]};
+						background: ${sourcePalette.brandAlt[400]};
+						color: ${sourcePalette.neutral[7]};
 					}
 				`}
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			{article.config.switches.lightbox && article.imagesForLightbox && (
+			{webLightbox && article.imagesForLightbox.length > 0 && (
 				<>
-					<LightboxLayout
-						imageCount={article.imagesForLightbox.length}
-					/>
-					<Island priority="feature" defer={{ until: 'idle' }}>
-						<LightboxHash />
-					</Island>
 					<Island priority="feature" defer={{ until: 'hash' }}>
-						<LightboxJavascript
+						<LightboxLayout
 							format={format}
 							images={article.imagesForLightbox}
 						/>
+					</Island>
+					<Island priority="feature" defer={{ until: 'idle' }}>
+						<LightboxHash />
 					</Island>
 				</>
 			)}

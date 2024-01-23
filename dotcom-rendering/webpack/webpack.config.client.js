@@ -37,7 +37,7 @@ const generateName = (build) => {
  */
 const getEntryIndex = (build) => {
 	switch (build) {
-		case 'apps':
+		case 'client.apps':
 			return './src/client/main.apps.ts';
 		default:
 			return './src/client/main.web.ts';
@@ -50,7 +50,7 @@ const getEntryIndex = (build) => {
  */
 const getLoaders = (build) => {
 	switch (build) {
-		case 'web.legacy':
+		case 'client.web.legacy':
 			return [
 				{
 					loader: 'babel-loader',
@@ -78,10 +78,10 @@ const getLoaders = (build) => {
 					},
 				},
 			];
-		case 'apps':
+		case 'client.apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
-		case 'web.variant':
-		case 'web':
+		case 'client.web.variant':
+		case 'client.web':
 			return swcLoader(getBrowserTargets());
 	}
 };
@@ -97,7 +97,7 @@ module.exports = ({ build }) => ({
 	},
 	optimization:
 		// We don't need chunk optimization for apps as we use the 'LimitChunkCountPlugin' to produce just 1 chunk
-		build === 'apps'
+		build === 'client.apps'
 			? undefined
 			: {
 					splitChunks: {
@@ -138,7 +138,7 @@ module.exports = ({ build }) => ({
 		new WebpackManifestPlugin({
 			fileName: `manifest.${build}.json`,
 		}),
-		...(build === 'apps'
+		...(build === 'client.apps'
 			? [
 					new webpack.optimize.LimitChunkCountPlugin({
 						maxChunks: 1,
@@ -186,4 +186,6 @@ module.exports.getLoaders = getLoaders;
  *
  * @param {Build} build */
 const getExternalModules = (build) =>
-	build === 'apps' ? { 'ophan-tracker-js': 'ophan-tracker-js' } : {};
+	build === 'client.apps'
+		? { 'ophan-tracker-js': 'ophan-tracker-js' }
+		: undefined;

@@ -1,19 +1,6 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
-import {
-	border,
-	brandAlt,
-	brandAltBackground,
-	culture,
-	labs,
-	lifestyle,
-	neutral,
-	news,
-	opinion,
-	palette,
-	specialReport,
-	sport,
-} from '@guardian/source-foundations';
+import { brandAltBackground, palette } from '@guardian/source-foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
 import { palette as themePalette } from '../palette';
@@ -21,6 +8,18 @@ import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
 import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
+
+const {
+	brandAlt,
+	culture,
+	lifestyle,
+	news,
+	neutral,
+	opinion,
+	specialReport,
+	sport,
+	labs,
+} = palette;
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
@@ -44,30 +43,6 @@ const textStandfirst = (format: ArticleFormat): string => {
 	)
 		return palette.specialReportAlt[100];
 
-	return BLACK;
-};
-
-const textLastUpdated = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) {
-		switch (format.theme) {
-			case Pillar.News:
-				return news[600];
-			case Pillar.Culture:
-				return culture[600];
-			case Pillar.Lifestyle:
-				return lifestyle[600];
-			case Pillar.Sport:
-				return sport[600];
-			case Pillar.Opinion:
-				return opinion[600];
-			case ArticleSpecial.Labs:
-				return news[600];
-			case ArticleSpecial.SpecialReport:
-				return specialReport[700];
-			case ArticleSpecial.SpecialReportAlt:
-				return news[600];
-		}
-	}
 	return BLACK;
 };
 
@@ -292,7 +267,7 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
 
-	return border.secondary;
+	return palette.neutral[86];
 };
 
 const borderHeadline = (format: ArticleFormat): string => {
@@ -300,7 +275,7 @@ const borderHeadline = (format: ArticleFormat): string => {
 		return 'rgba(255,255,255, 0.2)';
 	}
 	if (format.design === ArticleDesign.DeadBlog) return '#CDCDCD';
-	return border.secondary;
+	return palette.neutral[86];
 };
 
 const borderCardSupporting = (format: ArticleFormat): string => {
@@ -457,10 +432,6 @@ const backgroundFilterButton = (): string => neutral[100];
 const backgroundHeadlineTag = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
-const backgroundMostViewedTab = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme].dark;
-};
-
 const backgroundTreat = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -580,7 +551,6 @@ export const decidePalette = (
 			headlineWhenMatch: textHeadlineWhenMatch(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
-			lastUpdated: textLastUpdated(format),
 			disclaimerLink: textDisclaimerLink(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			filterButton: textFilterButton(),
@@ -602,7 +572,6 @@ export const decidePalette = (
 			lightboxDivider: backgroundLightboxDivider(format),
 			speechBubble: backgroundSpeechBubble(format),
 			headlineTag: backgroundHeadlineTag(format),
-			mostViewedTab: backgroundMostViewedTab(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),

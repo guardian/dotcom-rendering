@@ -173,6 +173,28 @@ module.exports = {
 		'ssr-friendly/no-dom-globals-in-module-scope': 'warn',
 		'ssr-friendly/no-dom-globals-in-react-fc': 'warn',
 
+		'no-restricted-syntax': [
+			'error',
+			{
+				selector: "CallExpression[callee.object.name='localStorage']",
+				message: 'Use @guardian/libs’s storage.local instead',
+			},
+			{
+				selector:
+					"CallExpression[callee.object.object.name='window'][callee.object.property.name='localStorage']",
+				message: 'Use @guardian/libs’s storage.local instead',
+			},
+			{
+				selector: "CallExpression[callee.object.name='sessionStorage']",
+				message: 'Use @guardian/libs’s storage.session instead',
+			},
+			{
+				selector:
+					"CallExpressionCallExpression[callee.object.object.name='window'][callee.object.name='sessionStorage']",
+				message: 'Use @guardian/libs’s storage.session instead',
+			},
+		],
+
 		...rulesToReview,
 		...rulesToEnforce,
 		...rulesToOverrideGuardianConfig,
@@ -198,6 +220,12 @@ module.exports = {
 			files: ['**/**.ts'],
 			rules: {
 				'@typescript-eslint/explicit-module-boundary-types': 'error',
+			},
+		},
+		{
+			files: ['**/**.test.ts', 'playwright/**/*.ts'],
+			rules: {
+				'no-restricted-syntax': 'off', // we allow native localStorage access in tests
 			},
 		},
 		{

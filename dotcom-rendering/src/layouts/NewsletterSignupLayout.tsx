@@ -34,7 +34,7 @@ import { NewsletterFrequency } from '../components/NewsletterFrequency';
 import { NewsletterPrivacyMessage } from '../components/NewsletterPrivacyMessage';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
-import { SecureSignup } from '../components/SecureSignup';
+import { SecureSignup } from '../components/SecureSignup.importable';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
@@ -445,20 +445,20 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 										/>
 									</div>
 
-									<SecureSignup
-										name={promotedNewsletter.name}
-										newsletterId={
-											promotedNewsletter.identityName
-										}
-										successDescription={
-											promotedNewsletter.successDescription
-										}
-										hidePrivacyMessage={true}
-									/>
-
-									<Hide from="desktop">
-										<NewsletterPrivacyMessage />
-									</Hide>
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<SecureSignup
+											newsletterId={
+												promotedNewsletter.identityName
+											}
+											successDescription={
+												promotedNewsletter.successDescription
+											}
+										/>
+									</Island>
+									<NewsletterPrivacyMessage />
 								</>
 							)}
 						</Column>
@@ -488,20 +488,16 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 									pageId={article.pageId}
 									webTitle={article.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
+									abTests={article.config.abTests}
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
 									hideCaption={true}
+									editionId={article.editionId}
 								/>
 							</div>
 						</Column>
 					</Columns>
-
-					<Hide until="desktop">
-						<div css={topMarginStyle()}>
-							<NewsletterPrivacyMessage />
-						</div>
-					</Hide>
 				</Section>
 
 				{article.storyPackage && (

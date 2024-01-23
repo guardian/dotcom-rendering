@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
-import { body, neutral, textSans } from '@guardian/source-foundations';
+import { body, palette, textSans } from '@guardian/source-foundations';
 import sanitise from 'sanitize-html';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 
@@ -49,7 +49,7 @@ const TextStyle = (pillar: ArticleTheme) => css`
 		${body.medium()};
 		font-weight: 300;
 		word-wrap: break-word;
-		color: ${neutral[7]};
+		color: ${palette.neutral[7]};
 	}
 
 	blockquote {

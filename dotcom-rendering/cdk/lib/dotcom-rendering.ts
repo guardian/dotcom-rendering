@@ -237,8 +237,8 @@ export class DotcomRendering extends GuStack {
 			maximumInstances: props.maxCapacity,
 			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
 			userData: getUserData({
-				app,
-				stack,
+				guApp: app,
+				guStack: stack,
 				stage,
 				artifactsBucket,
 			}),
@@ -295,7 +295,7 @@ export class DotcomRendering extends GuStack {
 
 		// Latency scaling alarm
 		const latencyScalingAlarmConfig: DCRAlarmConfig = {
-			threshold: 0.2,
+			threshold: 0.3,
 			period: 60,
 			evaluationPeriod: 1,
 			comparisonOperator: 'GreaterThanOrEqualToThreshold',

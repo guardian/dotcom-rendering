@@ -16,6 +16,7 @@ import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
@@ -394,9 +395,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						pageId={article.pageId}
 						webTitle={article.webTitle}
 						ajaxUrl={article.config.ajaxUrl}
+						abTests={article.config.abTests}
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
+						editionId={article.editionId}
 					/>
 				</div>
 				{mainMedia && (
@@ -592,26 +595,85 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
-								<ArticleMeta
-									branding={branding}
-									format={format}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									byline={article.byline}
-									tags={article.tags}
-									primaryDateline={
-										article.webPublicationDateDisplay
-									}
-									secondaryDateline={
-										article.webPublicationSecondaryDateDisplay
-									}
-									isCommentable={showComments}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									shortUrlId={article.config.shortUrlId}
-									ajaxUrl={article.config.ajaxUrl}
-								/>
+								{isApps ? (
+									<>
+										<Hide when="above" breakpoint="leftCol">
+											<ArticleMetaApps
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={
+													article.isCommentable
+												}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
+												ajaxUrl={article.config.ajaxUrl}
+											></ArticleMetaApps>
+										</Hide>
+										<Hide when="below" breakpoint="leftCol">
+											<ArticleMeta
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={
+													article.isCommentable
+												}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
+												ajaxUrl={article.config.ajaxUrl}
+											/>
+										</Hide>
+									</>
+								) : (
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										ajaxUrl={article.config.ajaxUrl}
+									/>
+								)}
 							</div>
 						</GridItem>
 						<GridItem area="body">
@@ -648,6 +710,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									editionId={article.editionId}
 								/>
 								{showBodyEndSlot && (
 									<Island
@@ -792,31 +855,25 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					</Section>
 				)}
 
-				{isWeb && (
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<OnwardsUpper
-							ajaxUrl={article.config.ajaxUrl}
-							hasRelated={article.hasRelated}
-							hasStoryPackage={article.hasStoryPackage}
-							isAdFreeUser={article.isAdFreeUser}
-							pageId={article.pageId}
-							isPaidContent={
-								article.config.isPaidContent ?? false
-							}
-							showRelatedContent={
-								article.config.showRelatedContent
-							}
-							keywordIds={article.config.keywordIds}
-							contentType={article.contentType}
-							tags={article.tags}
-							format={format}
-							pillar={format.theme}
-							editionId={article.editionId}
-							shortUrlId={article.config.shortUrlId}
-							discussionApiUrl={article.config.discussionApiUrl}
-						/>
-					</Island>
-				)}
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<OnwardsUpper
+						ajaxUrl={article.config.ajaxUrl}
+						hasRelated={article.hasRelated}
+						hasStoryPackage={article.hasStoryPackage}
+						isAdFreeUser={article.isAdFreeUser}
+						pageId={article.pageId}
+						isPaidContent={article.config.isPaidContent ?? false}
+						showRelatedContent={article.config.showRelatedContent}
+						keywordIds={article.config.keywordIds}
+						contentType={article.contentType}
+						tags={article.tags}
+						format={format}
+						pillar={format.theme}
+						editionId={article.editionId}
+						shortUrlId={article.config.shortUrlId}
+						discussionApiUrl={article.config.discussionApiUrl}
+					/>
+				</Island>
 
 				{showComments && (
 					<Section
@@ -966,6 +1023,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					fullWidth={true}
 					data-print-layout="hide"
 					backgroundColour={themePalette('--apps-footer-background')}
+					borderColour={themePalette('--article-border')}
 					padSides={false}
 					showSideBorders={false}
 					element="footer"

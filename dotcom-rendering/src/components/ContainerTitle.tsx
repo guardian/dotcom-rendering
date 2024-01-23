@@ -3,8 +3,7 @@ import {
 	between,
 	body,
 	headline,
-	neutral,
-	news,
+	palette,
 	space,
 	until,
 } from '@guardian/source-foundations';
@@ -30,7 +29,7 @@ const linkStyles = css`
 
 const headerStyles = (fontColour?: string) => css`
 	${headline.xsmall({ fontWeight: 'bold' })};
-	color: ${fontColour ?? neutral[7]};
+	color: ${fontColour ?? palette.neutral[7]};
 	padding-bottom: ${space[1]}px;
 	padding-top: 6px;
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
@@ -44,13 +43,13 @@ const headerStylesWithUrl = css`
 
 const descriptionStyles = (fontColour?: string) => css`
 	${body.medium({ fontWeight: 'medium', lineHeight: 'tight' })};
-	color: ${fontColour ?? neutral[46]};
+	color: ${fontColour ?? palette.neutral[46]};
 	p {
 		/* Handle paragraphs in the description */
 		margin-bottom: ${space[3]}px;
 	}
 	a {
-		color: ${neutral[7]};
+		color: ${palette.neutral[7]};
 		text-decoration: none;
 	}
 `;
@@ -132,7 +131,7 @@ export const ContainerTitle = ({
 				<div css={dateStyles}>
 					<span
 						css={dateTextStyles(
-							overrides?.text.containerDate ?? neutral[0],
+							overrides?.text.containerDate ?? palette.neutral[0],
 						)}
 					>
 						{now.toLocaleString('en-GB', {
@@ -146,7 +145,8 @@ export const ContainerTitle = ({
 								display: block;
 							`,
 							dateTextStyles(
-								overrides?.text.containerDate ?? news[400],
+								overrides?.text.containerDate ??
+									palette.news[400],
 							),
 							bottomMargin,
 						]}

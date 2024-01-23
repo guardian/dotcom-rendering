@@ -3,7 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	headline,
-	neutral,
+	palette,
 	space,
 	textSans,
 	until,
@@ -20,7 +20,7 @@ const wrapperStyles = css`
 	z-index: 1;
 `;
 
-const yellowBoxStyles = (format: ArticleFormat) => css`
+const interviewBylineBoxStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs
 		? textSans.large({ lineHeight: 'regular' })
 		: headline.xxsmall({
@@ -36,7 +36,7 @@ const yellowBoxStyles = (format: ArticleFormat) => css`
 	box-decoration-break: clone;
 
 	a {
-		color: inherit;
+		color: ${schemedPalette('--byline-anchor')};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
@@ -97,7 +97,7 @@ const analysisStyles = css`
 		}
 	}
 	span {
-		color: ${neutral[46]};
+		color: ${palette.neutral[46]};
 	}
 `;
 
@@ -159,6 +159,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 							byline={byline}
 							tags={tags}
 							format={format}
+							isHeadline={true}
 						/>
 					</span>
 				</div>
@@ -171,11 +172,12 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case ArticleDesign.Interview:
 					return (
 						<div css={wrapperStyles}>
-							<div css={yellowBoxStyles(format)}>
+							<div css={interviewBylineBoxStyles(format)}>
 								<BylineLink
 									byline={byline}
 									tags={tags}
 									format={format}
+									isHeadline={true}
 								/>
 							</div>
 						</div>
@@ -195,6 +197,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 									byline={byline}
 									tags={tags}
 									format={format}
+									isHeadline={true}
 								/>
 							</div>
 						</div>
@@ -213,6 +216,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 									byline={byline}
 									tags={tags}
 									format={format}
+									isHeadline={true}
 								/>
 							</div>
 						</div>

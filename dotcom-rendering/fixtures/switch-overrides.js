@@ -2,7 +2,7 @@
  * 🙏 Only put GLOBAL overrides here 🙏
  *
  * Any swtich key value entered here will be used by ALL tests (jest,
- * Storybook, Cypress, etc.) and could cause confusing side effects.
+ * Storybook, Playwright, etc.) and could cause confusing side effects.
  *
  * If you need to override a value for a specific test please consider doing this
  * locally using a spread operator. Eg.:

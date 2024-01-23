@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { Hide } from '@guardian/source-react-components';
 import { isWideEnough } from '../lib/lightbox';
-import type { Switches } from '../types/config';
+import type { ServerSideTests } from '../types/config';
 import type { CartoonBlockElement, Image } from '../types/content';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
@@ -14,10 +14,10 @@ import { Picture } from './Picture';
 type Props = {
 	format: ArticleFormat;
 	element: CartoonBlockElement;
-	switches?: Switches;
+	abTests?: ServerSideTests;
 };
 
-export const CartoonComponent = ({ format, element, switches }: Props) => {
+export const CartoonComponent = ({ format, element, abTests }: Props) => {
 	const { renderingTarget } = useConfig();
 	const smallVariant = element.variants.find(
 		(variant) => variant.viewportSize === 'small',
@@ -25,6 +25,9 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 	const largeVariant = element.variants.find(
 		(variant) => variant.viewportSize === 'large',
 	);
+
+	const isInLightboxTest = abTests?.lightboxVariant === 'variant';
+	const webLightbox = renderingTarget === 'Web' && isInLightboxTest;
 
 	const render = (image: Image) => {
 		const altText = `${element.alt ? `${element.alt}, ` : ''}panel ${
@@ -62,7 +65,7 @@ export const CartoonComponent = ({ format, element, switches }: Props) => {
 					/>
 				)}
 
-				{switches?.lightbox === true &&
+				{webLightbox &&
 					isWideEnough(image) &&
 					element.position !== undefined && (
 						<LightboxLink

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brandAlt, from, textSans } from '@guardian/source-foundations';
+import { from, palette, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import type { EditionId } from '../lib/edition';
@@ -25,7 +25,7 @@ const linkStyles = css`
 	font-size: 1rem;
 	height: fit-content;
 	line-height: 1;
-	color: ${brandAlt[400]};
+	color: ${palette.brandAlt[400]};
 	transition: color 80ms ease-out;
 	text-decoration: none;
 	padding: 7px 0;

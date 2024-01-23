@@ -20,12 +20,13 @@ import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
+import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { renderElement } from '../lib/renderElement';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { Switches } from '../types/config';
+import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { DCRArticle } from '../types/frontend';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
@@ -46,7 +47,9 @@ type RendererProps = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	abTests: ServerSideTests;
 	switches: Switches;
+	editionId: EditionId;
 };
 
 const Renderer = ({
@@ -58,7 +61,9 @@ const Renderer = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
+	abTests,
 	switches,
+	editionId,
 }: RendererProps) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
@@ -77,7 +82,9 @@ const Renderer = ({
 			ajaxUrl,
 			isAdFreeUser,
 			isSensitive,
+			abTests,
 			switches,
+			editionId,
 		});
 
 		switch (element._type) {
@@ -331,9 +338,11 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 						pageId={article.pageId}
 						webTitle={article.webTitle}
 						ajaxUrl={article.config.ajaxUrl}
+						abTests={article.config.abTests}
 						switches={article.config.switches}
 						isAdFreeUser={article.isAdFreeUser}
 						isSensitive={article.config.isSensitive}
+						editionId={article.editionId}
 					/>
 				</article>
 			</Section>

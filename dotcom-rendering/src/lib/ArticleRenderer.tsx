@@ -7,6 +7,7 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
+import type { EditionId } from './edition';
 import { RenderArticleElement } from './renderElement';
 import { withSignInGateSlot } from './withSignInGateSlot';
 
@@ -41,7 +42,8 @@ type Props = {
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests?: ServerSideTests;
+	abTests: ServerSideTests;
+	editionId: EditionId;
 };
 
 export const ArticleRenderer = ({
@@ -62,6 +64,7 @@ export const ArticleRenderer = ({
 	isSensitive,
 	isDev,
 	abTests,
+	editionId,
 }: Props) => {
 	const renderedElements = elements.map((element, index) => {
 		return (
@@ -80,6 +83,7 @@ export const ArticleRenderer = ({
 				isSensitive={isSensitive}
 				switches={switches}
 				abTests={abTests}
+				editionId={editionId}
 			/>
 		);
 	});

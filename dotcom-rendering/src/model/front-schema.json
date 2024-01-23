@@ -372,12 +372,6 @@
                 "$ref": "#/definitions/FETrailType"
             }
         },
-        "mostCommented": {
-            "$ref": "#/definitions/FETrailType"
-        },
-        "mostShared": {
-            "$ref": "#/definitions/FETrailType"
-        },
         "deeplyRead": {
             "type": "array",
             "items": {
@@ -3583,7 +3577,7 @@
                             "type": "string",
                             "const": "Video"
                         },
-                        "elementId": {
+                        "id": {
                             "type": "string"
                         },
                         "videoId": {
@@ -3628,9 +3622,9 @@
                     },
                     "required": [
                         "duration",
-                        "elementId",
                         "expired",
                         "height",
+                        "id",
                         "images",
                         "origin",
                         "title",

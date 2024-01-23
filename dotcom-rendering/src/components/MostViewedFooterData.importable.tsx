@@ -1,15 +1,11 @@
 import { joinUrl, log } from '@guardian/libs';
 import { abTestTest } from '../experiments/tests/ab-test-test';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
-import type {
-	FETrailTabType,
-	FETrailType,
-	TrailTabType,
-} from '../types/trails';
+import { palette } from '../palette';
+import type { FETrailTabType, TrailTabType } from '../types/trails';
 import { MostViewedFooter } from './MostViewedFooter.importable';
 import { Placeholder } from './Placeholder';
 
@@ -52,8 +48,6 @@ function transformTabs(tabs: FETrailTabType[]): TrailTabType[] {
 
 interface MostViewedFooterPayloadType {
 	tabs: FETrailTabType[];
-	mostCommented: FETrailType;
-	mostShared: FETrailType;
 }
 
 export const MostViewedFooterData = ({
@@ -62,7 +56,6 @@ export const MostViewedFooterData = ({
 	ajaxUrl,
 	edition,
 }: Props) => {
-	const palette = decidePalette(format);
 	// Example usage of AB Tests
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
 	const ABTestAPI = useAB()?.api;
@@ -91,20 +84,10 @@ export const MostViewedFooterData = ({
 		return (
 			<MostViewedFooter
 				tabs={transformTabs(tabs)}
-				mostCommented={
-					'mostCommented' in data
-						? decideTrail(data.mostCommented)
-						: undefined
-				}
-				mostShared={
-					'mostShared' in data
-						? decideTrail(data.mostShared)
-						: undefined
-				}
 				abTestCypressDataAttr={abTestCypressDataAttr}
 				variantFromRunnable={variantFromRunnable}
 				sectionId={sectionId}
-				selectedColour={palette.background.mostViewedTab}
+				selectedColour={palette('--most-viewed-tab-border')}
 			/>
 		);
 	}

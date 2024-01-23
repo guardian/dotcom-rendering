@@ -1,5 +1,6 @@
 import { Hide } from '@guardian/source-react-components';
-import type { Switches } from '../types/config';
+import type { EditionId } from '../lib/edition';
+import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
@@ -15,6 +16,7 @@ import { hasRelevantTopics, TopicFilterBank } from './TopicFilterBank';
 type Props = {
 	format: ArticleFormat;
 	blocks: Block[];
+	editionId: EditionId;
 	pinnedPost?: Block;
 	host?: string;
 	pageId: string;
@@ -22,6 +24,7 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	abTests: ServerSideTests;
 	switches: Switches;
 	isLiveUpdate?: boolean;
 	sectionId: string;
@@ -45,6 +48,7 @@ export const LiveBlogRenderer = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
+	abTests,
 	switches,
 	isAdFreeUser,
 	isSensitive,
@@ -60,6 +64,7 @@ export const LiveBlogRenderer = ({
 	filterKeyEvents = false,
 	availableTopics,
 	selectedTopics,
+	editionId,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
@@ -83,10 +88,12 @@ export const LiveBlogRenderer = ({
 							host={host}
 							ajaxUrl={ajaxUrl}
 							isLiveUpdate={isLiveUpdate}
+							abTests={abTests}
 							switches={switches}
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
 							isPinnedPost={true}
+							editionId={editionId}
 						/>
 					</PinnedPost>
 				</>
@@ -135,10 +142,12 @@ export const LiveBlogRenderer = ({
 				host={host}
 				ajaxUrl={ajaxUrl}
 				isLiveUpdate={isLiveUpdate}
+				abTests={abTests}
 				switches={switches}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				pinnedPost={pinnedPost}
+				editionId={editionId}
 			/>
 			{isWeb && blocks.length > 4 && (
 				<Island

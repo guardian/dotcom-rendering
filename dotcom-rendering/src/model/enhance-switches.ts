@@ -1,6 +1,16 @@
+import { isBoolean } from '@guardian/libs';
 import type { Switches } from '../types/config';
 
-export type ABTestSwitches = { [key: `ab${string}`]: boolean | undefined };
+type ABTestSwitches = { [key: `ab${string}`]: boolean };
+type ABTestSwitchesKey = keyof ABTestSwitches;
+type ABTestSwitchesValue = ABTestSwitches[ABTestSwitchesKey];
+
+const isABTestEntry = (
+	entry: [string, boolean | undefined],
+): entry is [ABTestSwitchesKey, ABTestSwitchesValue] => {
+	const [key, value] = entry;
+	return key.startsWith('ab') && isBoolean(value);
+};
 
 /**
  * Switches that start with "ab" are used for AB tests.
@@ -17,7 +27,7 @@ export type ABTestSwitches = { [key: `ab${string}`]: boolean | undefined };
  * @param {Switches} switches
  * @returns {ABTestSwitches} an object containing only AB switches
  */
-export const filterABTestSwitches = (switches: Switches): ABTestSwitches =>
-	Object.fromEntries(
-		Object.entries(switches).filter(([key]) => key.startsWith('ab')),
-	);
+const filterABTestSwitches = (switches: Switches): ABTestSwitches =>
+	Object.fromEntries(Object.entries(switches).filter(isABTestEntry));
+
+export { ABTestSwitches, filterABTestSwitches };

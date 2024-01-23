@@ -3,7 +3,6 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	from,
 	headline,
-	neutral,
 	palette as sourcePalette,
 	space,
 	textSans,
@@ -31,8 +30,8 @@ const TextTreat = ({
 	<li
 		css={css`
 			margin-top: ${space[3]}px;
-			border-left: 1px solid ${borderColour ?? neutral[86]};
-			border-top: 1px solid ${borderColour ?? neutral[86]};
+			border-left: 1px solid ${borderColour ?? sourcePalette.neutral[86]};
+			border-top: 1px solid ${borderColour ?? sourcePalette.neutral[86]};
 			padding-top: ${space[1]}px;
 			padding-left: ${space[2]}px;
 		`}
@@ -138,12 +137,12 @@ const ImageTreat = ({
 									${headline.xxxsmall()};
 									font-size: 16px;
 									background-color: ${index % 2 === 0
-										? neutral[0]
+										? sourcePalette.neutral[0]
 										: backgroundColour};
 									padding: 0 5px 4px;
 									box-decoration-break: clone;
 									position: relative;
-									color: ${neutral[100]};
+									color: ${sourcePalette.neutral[100]};
 									text-decoration: none;
 									:hover {
 										text-decoration: underline;

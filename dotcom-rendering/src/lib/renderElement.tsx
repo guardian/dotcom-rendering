@@ -12,7 +12,7 @@ import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import { EmailSignUpSwitcher } from '../components/EmailSignUpSwitcher';
+import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
@@ -64,6 +64,7 @@ import {
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
+import type { EditionId } from './edition';
 
 type Props = {
 	format: ArticleFormat;
@@ -80,7 +81,8 @@ type Props = {
 	isSensitive: boolean;
 	switches: Switches;
 	isPinnedPost?: boolean;
-	abTests?: ServerSideTests;
+	abTests: ServerSideTests;
+	editionId: EditionId;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -135,10 +137,13 @@ export const renderElement = ({
 	isSensitive,
 	isPinnedPost,
 	abTests,
+	editionId,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
+
+	const isInLightboxTest = abTests.lightboxVariant === 'variant';
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -206,7 +211,7 @@ export const renderElement = ({
 				<CartoonComponent
 					format={format}
 					element={element}
-					switches={switches}
+					abTests={abTests}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
@@ -347,7 +352,7 @@ export const renderElement = ({
 					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -450,7 +455,7 @@ export const renderElement = ({
 					key={index}
 					images={element.images}
 					caption={element.caption}
-					switches={switches}
+					isInLightboxTest={isInLightboxTest}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
@@ -464,7 +469,7 @@ export const renderElement = ({
 				theme: element.newsletter.theme,
 			};
 
-			return <EmailSignUpSwitcher {...emailSignUpProps} />;
+			return <EmailSignUpWrapper {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
@@ -690,6 +695,7 @@ export const renderElement = ({
 							authorName={authorName}
 							dateCreated={dateCreated}
 							alt={alt}
+							editionId={editionId}
 						/>
 					);
 				}
@@ -708,6 +714,7 @@ export const renderElement = ({
 							authorName={authorName}
 							youtubeHtml={youtubeHtml}
 							dateCreated={dateCreated}
+							editionId={editionId}
 						/>
 					);
 				}
@@ -719,6 +726,7 @@ export const renderElement = ({
 							description={witnessTypeDataText.description}
 							authorName={witnessTypeDataText.authorName}
 							dateCreated={witnessTypeDataText.dateCreated}
+							editionId={editionId}
 						/>
 					);
 				}
@@ -735,7 +743,6 @@ export const renderElement = ({
 						hideCaption={hideCaption}
 						isMainMedia={isMainMedia}
 						id={element.id}
-						elementId={element.elementId}
 						assetId={element.assetId}
 						expired={element.expired}
 						overrideImage={element.overrideImage}
@@ -794,6 +801,7 @@ export const RenderArticleElement = ({
 	switches,
 	isPinnedPost,
 	abTests,
+	editionId,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -813,6 +821,7 @@ export const RenderArticleElement = ({
 		switches,
 		isPinnedPost,
 		abTests,
+		editionId,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

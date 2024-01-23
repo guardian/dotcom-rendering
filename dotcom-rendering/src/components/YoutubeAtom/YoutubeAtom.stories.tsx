@@ -55,7 +55,7 @@ export const NoConsent = (): JSX.Element => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -83,7 +83,7 @@ export const NoOverlay = (): JSX.Element => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -118,7 +118,7 @@ export const WithOverrideImage = (): JSX.Element => {
 		<div style={containerStyle}>
 			<OverlayAutoplayExplainer />
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="3jpXAMwRSu4"
 				alt="Microscopic image of COVID"
 				eventEmitters={[
@@ -150,7 +150,7 @@ export const WithPosterImage = (): JSX.Element => {
 		<div style={containerStyle}>
 			<OverlayAutoplayExplainer />
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="N9Cgy-ke5-s"
 				alt=""
 				eventEmitters={[
@@ -185,7 +185,7 @@ export const WithOverlayAndPosterImage = (): JSX.Element => {
 		<div style={containerStyle}>
 			<OverlayAutoplayExplainer />
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="N9Cgy-ke5-s"
 				alt=""
 				eventEmitters={[
@@ -224,7 +224,7 @@ export const GiveConsent = (): JSX.Element => {
 			<button onClick={() => setConsented(true)}>Give consent</button>
 			<div style={containerStyle}>
 				<YoutubeAtom
-					elementId="xyz"
+					index={123}
 					videoId="3jpXAMwRSu4"
 					alt="Microscopic image of COVID"
 					eventEmitters={[
@@ -258,7 +258,7 @@ export const Sticky = (): JSX.Element => {
 			<div>Scroll down...</div>
 			<div style={{ height: '1000px' }}></div>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -292,7 +292,7 @@ export const StickyMainMedia = (): JSX.Element => {
 			<div>Scroll down...</div>
 			<div style={{ height: '1000px' }}></div>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -328,7 +328,7 @@ export const DuplicateVideos = (): JSX.Element => {
 	return (
 		<div style={containerStyleSmall}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -350,7 +350,7 @@ export const DuplicateVideos = (): JSX.Element => {
 			/>
 			<br />
 			<YoutubeAtom
-				elementId="xyz2"
+				index={345}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -388,7 +388,7 @@ export const MultipleStickyVideos = (): JSX.Element => {
 	return (
 		<div style={{ width: '500px', height: '5000px' }}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -411,7 +411,7 @@ export const MultipleStickyVideos = (): JSX.Element => {
 				adTargeting={adTargeting}
 			/>
 			<YoutubeAtom
-				elementId="xyz-2"
+				index={456}
 				videoId="pcMiS6PW8aQ"
 				alt=""
 				eventEmitters={[
@@ -434,7 +434,7 @@ export const MultipleStickyVideos = (): JSX.Element => {
 				adTargeting={adTargeting}
 			/>
 			<YoutubeAtom
-				elementId="xyu"
+				index={789}
 				videoId="3jpXAMwRSu4"
 				alt=""
 				eventEmitters={[
@@ -469,7 +469,7 @@ export const PausesOffscreen = (): JSX.Element => {
 		<div>
 			<div>Scroll down...</div>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -506,7 +506,7 @@ export const NoConsentWithIma = (): JSX.Element => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -534,7 +534,7 @@ export const AdFreeWithIma = (): JSX.Element => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -563,7 +563,7 @@ export const NoOverlayWithIma = (): JSX.Element => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -593,7 +593,7 @@ export const WithOverrideImageWithIma = (): JSX.Element => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="3jpXAMwRSu4"
 				alt="Microscopic image of COVID"
 				eventEmitters={[
@@ -622,7 +622,7 @@ export const WithPosterImageWithIma = (): JSX.Element => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="N9Cgy-ke5-s"
 				alt=""
 				eventEmitters={[
@@ -653,7 +653,7 @@ export const WithOverlayAndPosterImageWithIma = (): JSX.Element => {
 	return (
 		<div style={containerStyle}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="N9Cgy-ke5-s"
 				alt=""
 				eventEmitters={[
@@ -688,7 +688,7 @@ export const GiveConsentWithIma = (): JSX.Element => {
 			<button onClick={() => setConsented(true)}>Give consent</button>
 			<div style={containerStyle}>
 				<YoutubeAtom
-					elementId="xyz"
+					index={123}
 					videoId="3jpXAMwRSu4"
 					alt="Microscopic image of COVID"
 					eventEmitters={[
@@ -722,7 +722,7 @@ export const StickyWithIma = (): JSX.Element => {
 			<div style={{ fontSize: '36px' }}>⬇️</div>
 			<div style={{ height: '1000px' }}></div>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -755,7 +755,7 @@ export const StickyMainMediaWithIma = (): JSX.Element => {
 			<div style={{ fontSize: '36px' }}>⬇️</div>
 			<div style={{ height: '1000px' }}></div>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -786,7 +786,7 @@ export const DuplicateVideosWithIma = (): JSX.Element => {
 	return (
 		<div style={containerStyleSmall}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -808,7 +808,7 @@ export const DuplicateVideosWithIma = (): JSX.Element => {
 			/>
 			<br />
 			<YoutubeAtom
-				elementId="xyz2"
+				index={345}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -840,7 +840,7 @@ export const MultipleStickyVideosWithIma = (): JSX.Element => {
 	return (
 		<div style={{ width: '500px', height: '5000px' }}>
 			<YoutubeAtom
-				elementId="xyz"
+				index={123}
 				videoId="-ZCvZmYlQD8"
 				alt=""
 				eventEmitters={[
@@ -863,7 +863,7 @@ export const MultipleStickyVideosWithIma = (): JSX.Element => {
 				abTestParticipations={{}}
 			/>
 			<YoutubeAtom
-				elementId="xyz-2"
+				index={456}
 				videoId="pcMiS6PW8aQ"
 				alt=""
 				eventEmitters={[
@@ -886,7 +886,7 @@ export const MultipleStickyVideosWithIma = (): JSX.Element => {
 				abTestParticipations={{}}
 			/>
 			<YoutubeAtom
-				elementId="xyu"
+				index={789}
 				videoId="3jpXAMwRSu4"
 				alt=""
 				eventEmitters={[

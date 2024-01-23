@@ -46,17 +46,17 @@ const FollowIcon = ({
 	</div>
 );
 
-const buttonStyles = css`
+const buttonStyles = (withExtraBottomMargin: boolean) => css`
 	${textSans.small()}
 	color: ${palette('--follow-text')};
 	background: none;
 	border: none;
 	display: block;
-	margin-top: ${space[1]}px;
 	margin-left: 0;
 	min-height: ${space[6]}px;
 	padding: 0;
 	text-align: left;
+	${withExtraBottomMargin && `margin-bottom: ${space[2]}px;`}
 `;
 
 const containerStyles = css`
@@ -92,9 +92,14 @@ type ButtonProps = {
 export const FollowNotificationsButton = ({
 	isFollowing,
 	onClickHandler,
-}: ButtonProps) => {
+	withExtraBottomMargin = false,
+}: ButtonProps & { withExtraBottomMargin?: boolean }) => {
 	return (
-		<button onClick={onClickHandler} type="button" css={buttonStyles}>
+		<button
+			onClick={onClickHandler}
+			type="button"
+			css={[buttonStyles(withExtraBottomMargin)]}
+		>
 			<span css={containerStyles}>
 				<FollowIcon
 					isFollowing={isFollowing}
@@ -111,9 +116,14 @@ export const FollowTagButton = ({
 	isFollowing,
 	displayName = '',
 	onClickHandler,
-}: ButtonProps & { displayName: string }) => {
+	withExtraBottomMargin = false,
+}: ButtonProps & { displayName: string; withExtraBottomMargin?: boolean }) => {
 	return (
-		<button onClick={onClickHandler} type="button" css={buttonStyles}>
+		<button
+			onClick={onClickHandler}
+			type="button"
+			css={[buttonStyles(withExtraBottomMargin)]}
+		>
 			<span css={containerStyles}>
 				<FollowIcon
 					isFollowing={isFollowing}

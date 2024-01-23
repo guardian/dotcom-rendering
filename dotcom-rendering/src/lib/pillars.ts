@@ -1,16 +1,18 @@
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial, Pillar } from '@guardian/libs';
-import {
-	border,
+import { palette } from '@guardian/source-foundations';
+
+const {
 	culture,
 	labs,
 	lifestyle,
 	news,
 	opinion,
-	palette,
 	specialReport,
 	sport,
-} from '@guardian/source-foundations';
+	neutral,
+	specialReportAlt,
+} = palette;
 
 type ColourType = string;
 
@@ -145,16 +147,16 @@ export const pillarPalette_DO_NOT_USE: Record<
 		800: specialReport[800],
 	},
 	[ArticleSpecial.SpecialReportAlt]: {
-		dark: palette.specialReportAlt[100],
-		main: palette.specialReportAlt[200],
-		bright: palette.specialReportAlt[300],
-		pastel: palette.specialReportAlt[700],
-		faded: palette.specialReportAlt[800],
-		100: palette.specialReportAlt[100],
-		200: palette.specialReportAlt[200],
-		300: palette.specialReportAlt[300],
-		700: palette.specialReportAlt[700],
-		800: palette.specialReportAlt[800],
+		dark: specialReportAlt[100],
+		main: specialReportAlt[200],
+		bright: specialReportAlt[300],
+		pastel: specialReportAlt[700],
+		faded: specialReportAlt[800],
+		100: specialReportAlt[100],
+		200: specialReportAlt[200],
+		300: specialReportAlt[300],
+		700: specialReportAlt[700],
+		800: specialReportAlt[800],
 	},
 };
 
@@ -184,8 +186,8 @@ Further notes on this function:
 export const neutralBorder = (pillar: ArticleTheme): ColourType => {
 	switch (pillar) {
 		case ArticleSpecial.Labs:
-			return border.primary; // 'dark' theme
+			return neutral[60]; // 'dark' theme
 		default:
-			return border.secondary;
+			return neutral[86];
 	}
 };

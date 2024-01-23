@@ -3,6 +3,7 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
+import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
 import { palette as themePalette } from '../palette';
@@ -16,6 +17,7 @@ import { TableOfContents } from './TableOfContents.importable';
 type Props = {
 	format: ArticleFormat;
 	blocks: Block[];
+	editionId: EditionId;
 	pinnedPost?: Block;
 	host?: string;
 	pageId: string;
@@ -39,7 +41,7 @@ type Props = {
 	filterKeyEvents?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
-	abTests?: ServerSideTests;
+	abTests: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
 	isRightToLeftLang?: boolean;
@@ -131,6 +133,7 @@ export const ArticleBody = ({
 	tableOfContents,
 	lang,
 	isRightToLeftLang = false,
+	editionId,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const language = decideLanguage(lang);
@@ -164,6 +167,7 @@ export const ArticleBody = ({
 					pageId={pageId}
 					webTitle={webTitle}
 					ajaxUrl={ajaxUrl}
+					abTests={abTests}
 					switches={switches}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
@@ -179,6 +183,7 @@ export const ArticleBody = ({
 					availableTopics={availableTopics}
 					selectedTopics={selectedTopics}
 					keywordIds={keywordIds}
+					editionId={editionId}
 				/>
 			</div>
 		);
@@ -224,6 +229,7 @@ export const ArticleBody = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					abTests={abTests}
+					editionId={editionId}
 				/>
 			</div>
 		</>

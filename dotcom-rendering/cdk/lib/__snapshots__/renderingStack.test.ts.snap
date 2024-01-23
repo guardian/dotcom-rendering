@@ -1,0 +1,1279 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The RenderingCDKStack matches the snapshot 1`] = `
+{
+  "Metadata": {
+    "gu:cdk:constructs": [
+      "GuDistributionBucketParameter",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuVpcParameter",
+      "GuSubnetListParameter",
+      "GuSubnetListParameter",
+      "GuEc2App",
+      "GuCertificate",
+      "GuInstanceRole",
+      "GuDescribeEC2Policy",
+      "GuLoggingStreamNameParameter",
+      "GuLogShippingPolicy",
+      "GuGetDistributablePolicy",
+      "GuParameterStoreReadPolicy",
+      "GuAmiParameter",
+      "GuHttpsEgressSecurityGroup",
+      "GuWazuhAccess",
+      "GuAutoScalingGroup",
+      "GuApplicationLoadBalancer",
+      "GuStringParameter",
+      "GuApplicationTargetGroup",
+      "GuHttpsApplicationListener",
+      "GuSecurityGroup",
+      "GuCname",
+    ],
+    "gu:cdk:version": "TEST",
+  },
+  "Outputs": {
+    "LoadBalancerArticlerenderingDnsName": {
+      "Description": "DNS entry for LoadBalancerArticlerendering",
+      "Value": {
+        "Fn::GetAtt": [
+          "LoadBalancerArticlerendering49883BBC",
+          "DNSName",
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "AMIArticlerendering": {
+      "Description": "Amazon Machine Image ID for the app article-rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
+      "Type": "AWS::EC2::Image::Id",
+    },
+    "AccessLoggingBucket": {
+      "Default": "/account/services/access-logging/bucket",
+      "Description": "S3 bucket to store your access logs",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "DistributionBucketName": {
+      "Default": "/account/services/artifact.bucket",
+      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "LoggingStreamName": {
+      "Default": "/account/services/logging.stream.name",
+      "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "VpcId": {
+      "Default": "/account/vpc/primary/id",
+      "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::VPC::Id>",
+    },
+    "articlerenderingPrivateSubnets": {
+      "Default": "/account/vpc/primary/subnets/private",
+      "Description": "A list of private subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
+    },
+    "articlerenderingPublicSubnets": {
+      "Default": "/account/vpc/primary/subnets/public",
+      "Description": "A list of public subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
+    },
+  },
+  "Resources": {
+    "AllowPolicyCloudwatchLogsA783E5B4": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "cloudwatch:*",
+                "logs:*",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyCloudwatchLogsA783E5B4",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyDescribeDecryptKmsE91286F3": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:kms:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":FrontendConfigKey",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyDescribeDecryptKmsE91286F3",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyGetSsmParamsByPathB54B2DE8": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ssm:GetParametersByPath",
+                "ssm:GetParameter",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/frontend/*",
+                    ],
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/dotcom/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AutoScalingGroupArticlerenderingASG8488C3F1": {
+      "Properties": {
+        "HealthCheckGracePeriod": 120,
+        "HealthCheckType": "ELB",
+        "LaunchTemplate": {
+          "LaunchTemplateId": {
+            "Ref": "frontendTESTarticlerendering6160AD1F",
+          },
+          "Version": {
+            "Fn::GetAtt": [
+              "frontendTESTarticlerendering6160AD1F",
+              "LatestVersionNumber",
+            ],
+          },
+        },
+        "MaxSize": "4",
+        "MinSize": "1",
+        "Tags": [
+          {
+            "Key": "App",
+            "PropagateAtLaunch": true,
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "PropagateAtLaunch": true,
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "PropagateAtLaunch": true,
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "LogKinesisStreamName",
+            "PropagateAtLaunch": true,
+            "Value": {
+              "Ref": "LoggingStreamName",
+            },
+          },
+          {
+            "Key": "Stack",
+            "PropagateAtLaunch": true,
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "PropagateAtLaunch": true,
+            "Value": "TEST",
+          },
+          {
+            "Key": "SystemdUnit",
+            "PropagateAtLaunch": true,
+            "Value": "article-rendering.service",
+          },
+        ],
+        "TargetGroupARNs": [
+          {
+            "Ref": "TargetGroupArticlerendering3605E498",
+          },
+        ],
+        "VPCZoneIdentifier": {
+          "Ref": "articlerenderingPrivateSubnets",
+        },
+      },
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+    },
+    "CertificateArticlerendering3297EFD3": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "DomainName": "article-rendering.test.dev-guardianapis.com",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Name",
+            "Value": "ArticleRendering/CertificateArticlerendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "ValidationMethod": "DNS",
+      },
+      "Type": "AWS::CertificateManager::Certificate",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "DescribeEC2PolicyFF5F9295": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "autoscaling:DescribeAutoScalingInstances",
+                "autoscaling:DescribeAutoScalingGroups",
+                "ec2:DescribeTags",
+                "ec2:DescribeInstances",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "describe-ec2-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "GetDistributablePolicyArticlerendering7F5C432B": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:s3:::",
+                    {
+                      "Ref": "DistributionBucketName",
+                    },
+                    "/frontend/TEST/article-rendering/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GetDistributablePolicyArticlerendering7F5C432B",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "GuHttpsEgressSecurityGroupArticlerendering4B299451": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuHttpsEgressSecurityGroupArticlerenderingfromArticleRenderingInternalIngressSecurityGroupArticlerendering10793F4F9000FADBA0B9": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerendering4B299451",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuHttpsEgressSecurityGroupArticlerenderingfromArticleRenderingLoadBalancerArticlerenderingSecurityGroupF4F96B3190008A9DDDD4": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerendering4B299451",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "GuLogShippingPolicy981BFE5A": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "kinesis:Describe*",
+                "kinesis:Put*",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:kinesis:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":stream/",
+                    {
+                      "Ref": "LoggingStreamName",
+                    },
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GuLogShippingPolicy981BFE5A",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "InstanceRoleArticlerendering0D4717E8": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonSSMManagedInstanceCore",
+              ],
+            ],
+          },
+        ],
+        "Path": "/",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "InternalIngressSecurityGroupArticlerendering3856ADE0": {
+      "Properties": {
+        "GroupDescription": "Allow restricted ingress from CIDR ranges",
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "10.0.0.0/8",
+            "Description": "Allow access on port 443 from 10.0.0.0/8",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "InternalIngressSecurityGroupArticlerenderingtoArticleRenderingGuHttpsEgressSecurityGroupArticlerendering338FF4BE9000D56A0676": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerendering4B299451",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "InternalIngressSecurityGroupArticlerenderingtoArticleRenderingWazuhSecurityGroupF05C451A900050F43182": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "WazuhSecurityGroup",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "LatencyScaleDownPolicyLowerAlarm3AAA79CF": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "LatencyScaleDownPolicyLowerPolicy5B8C5A01",
+          },
+        ],
+        "AlarmDescription": "Lower threshold scaling alarm",
+        "ComparisonOperator": "LessThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::GetAtt": [
+                "LoadBalancerArticlerendering49883BBC",
+                "LoadBalancerFullName",
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "TargetGroupArticlerendering3605E498",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 10,
+        "MetricName": "TargetResponseTime",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 30,
+        "Statistic": "Average",
+        "Threshold": 0.15,
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "LatencyScaleDownPolicyLowerPolicy5B8C5A01": {
+      "Properties": {
+        "AdjustmentType": "ChangeInCapacity",
+        "AutoScalingGroupName": {
+          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
+        },
+        "MetricAggregationType": "Average",
+        "PolicyType": "StepScaling",
+        "StepAdjustments": [
+          {
+            "MetricIntervalUpperBound": 0,
+            "ScalingAdjustment": -1,
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "LatencyScaleUpPolicyUpperAlarmB2CCE62D": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "LatencyScaleUpPolicyUpperPolicy4A22B34C",
+          },
+        ],
+        "AlarmDescription": "Upper threshold scaling alarm",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::GetAtt": [
+                "LoadBalancerArticlerendering49883BBC",
+                "LoadBalancerFullName",
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "TargetGroupArticlerendering3605E498",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "TargetResponseTime",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 30,
+        "Statistic": "Average",
+        "Threshold": 0.2,
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "LatencyScaleUpPolicyUpperPolicy4A22B34C": {
+      "Properties": {
+        "AdjustmentType": "PercentChangeInCapacity",
+        "AutoScalingGroupName": {
+          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
+        },
+        "MetricAggregationType": "Average",
+        "PolicyType": "StepScaling",
+        "StepAdjustments": [
+          {
+            "MetricIntervalLowerBound": 0,
+            "MetricIntervalUpperBound": 0.09999999999999998,
+            "ScalingAdjustment": 50,
+          },
+          {
+            "MetricIntervalLowerBound": 0.09999999999999998,
+            "ScalingAdjustment": 80,
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "ListenerArticlerendering9419D5F6": {
+      "Properties": {
+        "Certificates": [
+          {
+            "CertificateArn": {
+              "Ref": "CertificateArticlerendering3297EFD3",
+            },
+          },
+        ],
+        "DefaultActions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "TargetGroupArticlerendering3605E498",
+            },
+            "Type": "forward",
+          },
+        ],
+        "LoadBalancerArn": {
+          "Ref": "LoadBalancerArticlerendering49883BBC",
+        },
+        "Port": 443,
+        "Protocol": "HTTPS",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "LoadBalancerArticlerendering49883BBC": {
+      "Properties": {
+        "LoadBalancerAttributes": [
+          {
+            "Key": "deletion_protection.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.enabled",
+            "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.bucket",
+            "Value": {
+              "Ref": "AccessLoggingBucket",
+            },
+          },
+          {
+            "Key": "access_logs.s3.prefix",
+            "Value": "ELBLogs/frontend/article-rendering/TEST",
+          },
+        ],
+        "Scheme": "internal",
+        "SecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "LoadBalancerArticlerenderingSecurityGroupB13618F9",
+              "GroupId",
+            ],
+          },
+          {
+            "Fn::GetAtt": [
+              "InternalIngressSecurityGroupArticlerendering3856ADE0",
+              "GroupId",
+            ],
+          },
+        ],
+        "Subnets": {
+          "Ref": "articlerenderingPrivateSubnets",
+        },
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "Type": "application",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    },
+    "LoadBalancerArticlerenderingSecurityGroupB13618F9": {
+      "Properties": {
+        "GroupDescription": "Automatically created Security Group for ELB ArticleRenderingLoadBalancerArticlerendering054C3B73",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "LoadBalancerArticlerenderingSecurityGrouptoArticleRenderingGuHttpsEgressSecurityGroupArticlerendering338FF4BE90004762FB02": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "GuHttpsEgressSecurityGroupArticlerendering4B299451",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "LoadBalancerArticlerenderingSecurityGrouptoArticleRenderingWazuhSecurityGroupF05C451A9000FDE30D45": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "WazuhSecurityGroup",
+            "GroupId",
+          ],
+        },
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "LoadBalancerDNS": {
+      "Properties": {
+        "Name": "article-rendering.test.dev-guardianapis.com",
+        "RecordType": "CNAME",
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "LoadBalancerArticlerendering49883BBC",
+              "DNSName",
+            ],
+          },
+        ],
+        "Stage": "TEST",
+        "TTL": 3600,
+      },
+      "Type": "Guardian::DNS::RecordSet",
+    },
+    "ParameterStoreReadArticlerendering1D29E674": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ssm:GetParametersByPath",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter/TEST/frontend/article-rendering",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": [
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter/TEST/frontend/article-rendering/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "parameter-store-read-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "RenderingBaseURLParamAE11E777": {
+      "Properties": {
+        "Description": "The rendering base URL for frontend to call the article-rendering app in the TEST environment",
+        "Name": "/frontend/test/article-rendering.baseURL",
+        "Tags": {
+          "Stack": "frontend",
+          "Stage": "TEST",
+          "gu:cdk:version": "TEST",
+          "gu:repo": "guardian/dotcom-rendering",
+        },
+        "Type": "String",
+        "Value": "https://article-rendering.test.dev-guardianapis.com",
+      },
+      "Type": "AWS::SSM::Parameter",
+    },
+    "TargetGroupArticlerendering3605E498": {
+      "Properties": {
+        "HealthCheckIntervalSeconds": 10,
+        "HealthCheckPath": "/_healthcheck",
+        "HealthCheckProtocol": "HTTP",
+        "HealthCheckTimeoutSeconds": 5,
+        "HealthyThresholdCount": 5,
+        "Port": 9000,
+        "Protocol": "HTTP",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "article-rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "instance",
+        "UnhealthyThresholdCount": 2,
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "WazuhSecurityGroup": {
+      "Properties": {
+        "GroupDescription": "Allow outbound traffic from wazuh agent to manager",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Wazuh event logging",
+            "FromPort": 1514,
+            "IpProtocol": "tcp",
+            "ToPort": 1514,
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Wazuh agent registration",
+            "FromPort": 1515,
+            "IpProtocol": "tcp",
+            "ToPort": 1515,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "WazuhSecurityGroupfromArticleRenderingInternalIngressSecurityGroupArticlerendering10793F4F90003792E165": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "WazuhSecurityGroup",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "InternalIngressSecurityGroupArticlerendering3856ADE0",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "WazuhSecurityGroupfromArticleRenderingLoadBalancerArticlerenderingSecurityGroupF4F96B31900028E630C0": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 9000,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "WazuhSecurityGroup",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerArticlerenderingSecurityGroupB13618F9",
+            "GroupId",
+          ],
+        },
+        "ToPort": 9000,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "frontendTESTarticlerendering6160AD1F": {
+      "DependsOn": [
+        "InstanceRoleArticlerendering0D4717E8",
+      ],
+      "Properties": {
+        "LaunchTemplateData": {
+          "IamInstanceProfile": {
+            "Arn": {
+              "Fn::GetAtt": [
+                "frontendTESTarticlerenderingProfile8DDE1B22",
+                "Arn",
+              ],
+            },
+          },
+          "ImageId": {
+            "Ref": "AMIArticlerendering",
+          },
+          "InstanceType": "t4g.micro",
+          "MetadataOptions": {
+            "HttpTokens": "required",
+          },
+          "SecurityGroupIds": [
+            {
+              "Fn::GetAtt": [
+                "GuHttpsEgressSecurityGroupArticlerendering4B299451",
+                "GroupId",
+              ],
+            },
+            {
+              "Fn::GetAtt": [
+                "WazuhSecurityGroup",
+                "GroupId",
+              ],
+            },
+          ],
+          "TagSpecifications": [
+            {
+              "ResourceType": "instance",
+              "Tags": [
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "ArticleRendering/frontend-TEST-article-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "TEST",
+                },
+              ],
+            },
+            {
+              "ResourceType": "volume",
+              "Tags": [
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "ArticleRendering/frontend-TEST-article-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "TEST",
+                },
+              ],
+            },
+          ],
+          "UserData": {
+            "Fn::Base64": {
+              "Fn::Join": [
+                "",
+                [
+                  "#!/bin/bash -ev
+groupadd frontend
+useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
+cd /home/dotcom-rendering
+aws --region eu-west-1 s3 cp s3://",
+                  {
+                    "Ref": "DistributionBucketName",
+                  },
+                  "/frontend/TEST/article-rendering/article-rendering.tar.gz ./
+tar -zxf article-rendering.tar.gz article-rendering
+chown -R dotcom-rendering:frontend article-rendering
+cd article-rendering
+mkdir /var/log/dotcom-rendering
+chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
+cat > /etc/systemd/system/article-rendering.service << EOF
+[Unit]
+Description=article-rendering
+After=network.target
+[Service]
+WorkingDirectory=/home/dotcom-rendering/article-rendering
+Type=simple
+User=dotcom-rendering
+Group=frontend
+StandardError=journal
+StandardOutput=journal
+Environment=TERM=xterm-256color
+Environment=NODE_ENV=production
+Environment=GU_STAGE=TEST
+Environment=GU_APP=article-rendering
+Environment=GU_STACK=frontend
+ExecStart=make prod
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl enable article-rendering
+systemctl start article-rendering",
+                ],
+              ],
+            },
+          },
+        },
+        "TagSpecifications": [
+          {
+            "ResourceType": "launch-template",
+            "Tags": [
+              {
+                "Key": "gu:cdk:version",
+                "Value": "TEST",
+              },
+              {
+                "Key": "gu:repo",
+                "Value": "guardian/dotcom-rendering",
+              },
+              {
+                "Key": "Name",
+                "Value": "ArticleRendering/frontend-TEST-article-rendering",
+              },
+              {
+                "Key": "Stack",
+                "Value": "frontend",
+              },
+              {
+                "Key": "Stage",
+                "Value": "TEST",
+              },
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::EC2::LaunchTemplate",
+    },
+    "frontendTESTarticlerenderingProfile8DDE1B22": {
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "InstanceRoleArticlerendering0D4717E8",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+  },
+}
+`;

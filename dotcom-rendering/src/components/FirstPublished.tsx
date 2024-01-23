@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import { palette, space, textSans } from '@guardian/source-foundations';
 import { SvgPinned } from '@guardian/source-react-components';
 import { palette as themePalette } from '../palette';
-import { Island } from './Island';
-import { RelativeTime } from './RelativeTime.importable';
+import { DateTime } from './DateTime';
 
 const fallbackDate = (date: Date) =>
 	[date.getHours(), date.getMinutes()]
@@ -57,23 +56,25 @@ const FirstPublished = ({
 				{!isPinnedPost && (
 					<span
 						css={css`
-							color: ${neutral[46]};
+							color: ${palette.neutral[46]};
 							font-weight: bold;
 							margin-right: ${space[2]}px;
 						`}
 					>
-						<Island
-							priority="enhancement"
-							defer={{ until: 'visible' }}
-						>
-							<RelativeTime then={firstPublished}></RelativeTime>
-						</Island>
+						<DateTime
+							date={new Date(firstPublished)}
+							display="relative"
+							editionId="UK"
+							showWeekday={false}
+							showDate={true}
+							showTime={false}
+						/>
 					</span>
 				)}
 				<span
 					css={css`
 						${textSans.xxsmall()};
-						color: ${neutral[46]};
+						color: ${palette.neutral[46]};
 					`}
 				>
 					{firstPublishedDisplay ?? fallbackDate(publishedDate)}
@@ -107,7 +108,7 @@ const FirstPublished = ({
 							align-self: center;
 							margin-left: ${space[2]}px;
 							svg {
-								fill: ${neutral[100]};
+								fill: ${palette.neutral[100]};
 							}
 						`}
 					>

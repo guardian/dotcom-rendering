@@ -1,7 +1,8 @@
 name: 🐞 Bug Report
 description: Let us know about something unexpected that has happened
 title: '[Bug]: '
-labels: ['bug', 'needs-triage']
+labels: ['bug', 'Rota']
+projects: ['guardian/88']
 body:
   - type: markdown
     attributes:

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { log } from '@guardian/libs';
+import { from, space } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
@@ -120,6 +121,14 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 		<div
 			css={css`
 				min-height: 24px;
+
+				${from.phablet} {
+					display: inline-flex;
+
+					button:first-of-type {
+						margin-right: ${space[5]}px;
+					}
+				}
 			`}
 		>
 			{showFollowTagButton && (
@@ -131,6 +140,7 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 							? tagHandler
 							: () => undefined
 					}
+					withExtraBottomMargin={true}
 				/>
 			)}
 			<FollowNotificationsButton

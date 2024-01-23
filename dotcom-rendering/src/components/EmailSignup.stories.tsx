@@ -2,8 +2,9 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { EmailSignup } from './EmailSignup';
+import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Section } from './Section';
-import { SecureSignup } from './SecureSignup';
+import { SecureSignup } from './SecureSignup.importable';
 
 const withSectionWrapper = (Story: typeof NewsTheme) => (
 	<Section
@@ -54,11 +55,10 @@ export const Default = ({
 		theme="opinion"
 	>
 		<SecureSignup
-			name="The Week in Patriarchy"
 			newsletterId="patriarchy"
-			hidePrivacyMessage={hidePrivacyMessage}
 			successDescription="Reviewing the most important stories on feminism and sexism and those fighting for equality"
 		/>
+		{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
 	</EmailSignup>
 );
 
@@ -74,11 +74,10 @@ export const NewsTheme = ({
 		theme="news"
 	>
 		<SecureSignup
-			name="First Edition"
 			newsletterId="morning-briefing"
-			hidePrivacyMessage={hidePrivacyMessage}
 			successDescription="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
 		/>
+		{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
 	</EmailSignup>
 );
 
@@ -94,11 +93,10 @@ export const IrregularFrequency = ({
 		theme="features"
 	>
 		<SecureSignup
-			name="Guardian Documentaries"
 			newsletterId="documentaries"
-			hidePrivacyMessage={hidePrivacyMessage}
 			successDescription="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
 		/>
+		{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
 	</EmailSignup>
 );
 

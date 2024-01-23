@@ -125,8 +125,8 @@ export const MostPopularFooterGrid = ({
 	sectionName = '',
 	hasPageSkin = false,
 }: Props) => {
-	const shortenedMostViewed = mostViewed.trails.slice(0, 5);
-	const shortenedDeeplyRead = deeplyRead.trails.slice(0, 5);
+	const shortenedMostViewed = mostViewed.trails.slice(0, 10);
+	const shortenedDeeplyRead = deeplyRead.trails.slice(0, 10);
 
 	return (
 		<div
@@ -161,7 +161,6 @@ export const MostPopularFooterGrid = ({
 							headlineText={trail.headline}
 							ageWarning={trail.ageWarning}
 							cssOverrides={mostViewedOverridesStyle(j)}
-							image={trail.image}
 							hasPageSkin={hasPageSkin}
 						/>
 					))}
@@ -193,7 +192,6 @@ export const MostPopularFooterGrid = ({
 								j,
 								shortenedMostViewed.length,
 							)}
-							image={trail.image}
 							hasPageSkin={hasPageSkin}
 						/>
 					))}

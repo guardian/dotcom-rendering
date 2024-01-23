@@ -17,10 +17,10 @@ import {
 	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
 	isRecurringContributor,
-	lazyFetchEmailWithTimeout,
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '../../lib/contributions';
+import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
 import type { TagType } from '../../types/tag';
@@ -173,9 +173,10 @@ export const ReaderRevenueEpic = ({
 			'contributions-epic-module',
 		);
 
-		window
-			.guardianPolyfilledImport(module.url)
-			.then((epicModule: { ContributionsEpic: EpicType }) => {
+		import(
+			/* webpackChunkName: "contributions-epic" */ `../marketing/epics/ContributionsEpic`
+		)
+			.then((epicModule) => {
 				endPerformanceMeasure();
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
 			})

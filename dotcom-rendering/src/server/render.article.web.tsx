@@ -11,6 +11,7 @@ import {
 } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
+import { isEditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { getCurrentPillar } from '../lib/layoutHelpers';
@@ -110,8 +111,8 @@ export const renderHtml = ({
 		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
 
 	const legacyScripts = [
-		getPathFromManifest('web.legacy', 'frameworks.js'),
-		getPathFromManifest('web.legacy', 'index.js'),
+		getPathFromManifest('client.web.legacy', 'frameworks.js'),
+		getPathFromManifest('client.web.legacy', 'index.js'),
 	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
 
 	const scriptTags = generateScriptTags([
@@ -251,11 +252,15 @@ export const renderBlocks = ({
 	section,
 	switches,
 	keywordIds,
+	abTests = {},
+	edition,
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
 	// Only currently supported for Web
 	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
+
+	const editionId = isEditionId(edition) ? edition : 'UK';
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -268,6 +273,7 @@ export const renderBlocks = ({
 				ajaxUrl={ajaxUrl}
 				isSensitive={isSensitive}
 				isAdFreeUser={isAdFreeUser}
+				abTests={abTests}
 				switches={switches}
 				isLiveUpdate={true}
 				sectionId={section}
@@ -277,6 +283,7 @@ export const renderBlocks = ({
 				isPaidContent={false}
 				contributionsServiceUrl=""
 				keywordIds={keywordIds}
+				editionId={editionId}
 			/>
 		</ConfigProvider>,
 	);

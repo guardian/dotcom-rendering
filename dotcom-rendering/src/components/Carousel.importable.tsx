@@ -394,6 +394,7 @@ const headerRowStyles = css`
 const headerStyles = css`
 	${headline.xsmall({ fontWeight: 'bold' })};
 	color: ${sourcePalette.neutral[7]};
+	color: ${themePalette('--carousel-text')};
 	${headline.xsmall({ fontWeight: 'bold' })};
 	padding-bottom: ${space[2]}px;
 	padding-top: ${space[1]}px;

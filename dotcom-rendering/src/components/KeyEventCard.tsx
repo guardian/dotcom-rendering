@@ -2,8 +2,7 @@ import { css } from '@emotion/react';
 import { from, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { palette } from '../palette';
-import { Island } from './Island';
-import { RelativeTime } from './RelativeTime.importable';
+import { DateTime } from './DateTime';
 
 interface Props {
 	id: string;
@@ -120,9 +119,14 @@ export const KeyEventCard = ({
 				data-link-name={`key event card | ${cardPosition}`}
 			>
 				<div css={timeStyles}>
-					<Island priority="enhancement" defer={{ until: 'visible' }}>
-						<RelativeTime then={blockFirstPublished} />
-					</Island>
+					<DateTime
+						date={new Date(blockFirstPublished)}
+						display="relative"
+						editionId="UK"
+						showWeekday={false}
+						showDate={true}
+						showTime={false}
+					/>
 				</div>
 				<div css={textStyles}>{title}</div>
 			</Link>

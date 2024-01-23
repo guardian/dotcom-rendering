@@ -76,8 +76,10 @@ export const VideoAsSecond = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);
@@ -121,8 +123,10 @@ export const Title = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);
@@ -140,7 +144,6 @@ export const Video = () => {
 			},
 			{
 				duration: 142,
-				elementId: '27eac530-7088-4541-a1c5-3347a3d837fb',
 				expired: false,
 				mediaTitle:
 					'Nasa launches Perseverance rover in mission to find evidence of life on Mars – video',
@@ -187,8 +190,10 @@ export const Video = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);
@@ -228,8 +233,10 @@ export const RichLink = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);
@@ -260,8 +267,10 @@ export const FirstImage = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);
@@ -316,10 +325,12 @@ export const ImageRoles = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);
@@ -363,10 +374,12 @@ export const Thumbnail = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);
@@ -398,8 +411,10 @@ export const ImageAndTitle = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);
@@ -427,8 +442,10 @@ export const Updated = () => {
 				ajaxUrl=""
 				isAdFreeUser={false}
 				isSensitive={false}
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);
@@ -458,10 +475,12 @@ export const Contributor = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);
@@ -489,10 +508,12 @@ export const NoAvatar = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);
@@ -523,10 +544,12 @@ export const TitleAndContributor = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				editionId="UK"
 			/>
 		</Wrapper>
 	);

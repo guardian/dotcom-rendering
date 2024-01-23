@@ -94,7 +94,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		mainMedia: {
 			type: 'Video',
-			elementId: 'abcdef',
+			id: 'abcdef',
 			videoId: 'abcd',
 			title: 'some title',
 			duration: 378,
@@ -527,7 +527,7 @@ export const trails: [
 		],
 		mainMedia: {
 			type: 'Video',
-			elementId: 'abcdef',
+			id: 'abcdef',
 			videoId: 'abcd',
 			title: 'some title',
 			duration: 378,

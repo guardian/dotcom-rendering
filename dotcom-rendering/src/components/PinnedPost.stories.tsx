@@ -81,8 +81,10 @@ export const Sport = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
+					editionId="UK"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -126,8 +128,10 @@ export const News = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
+					editionId="UK"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -171,8 +175,10 @@ export const Culture = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
+					editionId="UK"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -216,8 +222,10 @@ export const Lifestyle = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
+					editionId="UK"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -261,8 +269,10 @@ export const Opinion = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
+					editionId="UK"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -306,8 +316,10 @@ export const SpecialReport = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
+					editionId="UK"
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -351,8 +363,10 @@ export const Labs = () => {
 					ajaxUrl=""
 					isAdFreeUser={false}
 					isSensitive={false}
+					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
+					editionId="UK"
 				/>
 			</PinnedPost>
 		</Wrapper>

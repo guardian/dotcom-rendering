@@ -3,12 +3,10 @@ import type { Pillar } from '@guardian/libs';
 import { isNonNullable } from '@guardian/libs';
 import {
 	between,
-	brand,
-	brandAlt,
 	brandBackground,
 	brandText,
 	from,
-	neutral,
+	palette,
 	space,
 	textSans,
 	until,
@@ -30,7 +28,7 @@ import { PrivacySettingsLink } from './PrivacySettingsLink.importable';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 // CSS vars
-const footerBorders = `1px solid ${brand[600]}`;
+const footerBorders = `1px solid ${palette.brand[600]}`;
 
 // CSS
 const footer = css`
@@ -80,7 +78,7 @@ const emailSignupButton = css`
 	color: ${brandBackground.primary};
 	background-color: ${brandText.primary};
 	:hover {
-		background-color: ${neutral[86]};
+		background-color: ${palette.neutral[86]};
 	}
 	margin-top: ${space[3]}px;
 `;
@@ -94,7 +92,7 @@ const footerLink = css`
 
 	:hover {
 		text-decoration: underline;
-		color: ${brandAlt[400]};
+		color: ${palette.brandAlt[400]};
 	}
 `;
 
@@ -223,7 +221,7 @@ const footerGrid = css`
 `;
 
 const bttPosition = css`
-	background-color: ${brand[400]};
+	background-color: ${palette.brand[400]};
 	padding: 0 5px;
 	position: absolute;
 	bottom: -21px;

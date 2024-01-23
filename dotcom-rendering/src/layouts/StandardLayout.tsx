@@ -7,6 +7,7 @@ import {
 	space,
 	until,
 } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -17,6 +18,7 @@ import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
@@ -553,9 +555,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									pageId={article.pageId}
 									webTitle={article.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
+									abTests={article.config.abTests}
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
+									editionId={article.editionId}
 								/>
 							</div>
 						</GridItem>
@@ -619,7 +623,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									{format.theme === ArticleSpecial.Labs ? (
+									{isWeb &&
+									format.theme === ArticleSpecial.Labs ? (
 										<GuardianLabsLines />
 									) : (
 										<DecideLines
@@ -633,28 +638,91 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="meta" element="aside">
-							<div css={maxWidth}>
-								<ArticleMeta
-									branding={branding}
-									format={format}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									byline={article.byline}
-									tags={article.tags}
-									primaryDateline={
-										article.webPublicationDateDisplay
-									}
-									secondaryDateline={
-										article.webPublicationSecondaryDateDisplay
-									}
-									isCommentable={showComments}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									shortUrlId={article.config.shortUrlId}
-									ajaxUrl={article.config.ajaxUrl}
-								/>
-							</div>
+							{isApps ? (
+								<>
+									<Hide from="leftCol">
+										<div css={maxWidth}>
+											<ArticleMetaApps
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={
+													article.isCommentable
+												}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
+												ajaxUrl={article.config.ajaxUrl}
+											></ArticleMetaApps>
+										</div>
+									</Hide>
+									<Hide until="leftCol">
+										<div css={maxWidth}>
+											<ArticleMeta
+												branding={branding}
+												format={format}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												byline={article.byline}
+												tags={article.tags}
+												primaryDateline={
+													article.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													article.webPublicationSecondaryDateDisplay
+												}
+												isCommentable={
+													article.isCommentable
+												}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												shortUrlId={
+													article.config.shortUrlId
+												}
+												ajaxUrl={article.config.ajaxUrl}
+											/>
+										</div>
+									</Hide>
+								</>
+							) : (
+								<div css={maxWidth}>
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										ajaxUrl={article.config.ajaxUrl}
+									/>
+								</div>
+							)}
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer format={format}>
@@ -691,6 +759,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									editionId={article.editionId}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
@@ -849,30 +918,25 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</Section>
 				)}
 
-				{isWeb && (
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<OnwardsUpper
-							ajaxUrl={article.config.ajaxUrl}
-							hasRelated={article.hasRelated}
-							hasStoryPackage={article.hasStoryPackage}
-							isAdFreeUser={article.isAdFreeUser}
-							pageId={article.pageId}
-							isPaidContent={!!article.config.isPaidContent}
-							showRelatedContent={
-								article.config.showRelatedContent
-							}
-							keywordIds={article.config.keywordIds}
-							contentType={article.contentType}
-							tags={article.tags}
-							format={format}
-							pillar={format.theme}
-							editionId={article.editionId}
-							shortUrlId={article.config.shortUrlId}
-							discussionApiUrl={article.config.discussionApiUrl}
-						/>
-					</Island>
-				)}
-
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<OnwardsUpper
+						ajaxUrl={article.config.ajaxUrl}
+						hasRelated={article.hasRelated}
+						hasStoryPackage={article.hasStoryPackage}
+						isAdFreeUser={article.isAdFreeUser}
+						pageId={article.pageId}
+						isPaidContent={!!article.config.isPaidContent}
+						showRelatedContent={article.config.showRelatedContent}
+						keywordIds={article.config.keywordIds}
+						contentType={article.contentType}
+						tags={article.tags}
+						format={format}
+						pillar={format.theme}
+						editionId={article.editionId}
+						shortUrlId={article.config.shortUrlId}
+						discussionApiUrl={article.config.discussionApiUrl}
+					/>
+				</Island>
 				{showComments && (
 					<Section
 						fullWidth={true}
@@ -1039,6 +1103,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						backgroundColour={themePalette(
 							'--article-section-background',
 						)}
+						borderColour={themePalette('--article-border')}
 						padSides={false}
 						showSideBorders={false}
 						element="footer"

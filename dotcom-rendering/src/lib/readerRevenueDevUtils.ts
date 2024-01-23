@@ -17,12 +17,12 @@ const readerRevenueCookies = [
 ];
 
 const clearEpicViewLog = (): void =>
-	localStorage.removeItem('gu.contributions.views');
+	storage.local.remove('gu.contributions.views');
 
 const clearBannerLastClosedAt = (): void => {
-	localStorage.removeItem('gu.prefs.engagementBannerLastClosedAt');
-	localStorage.removeItem('gu.prefs.subscriptionBannerLastClosedAt');
-	localStorage.removeItem('gu.noRRBannerTimestamp');
+	storage.local.remove('gu.prefs.engagementBannerLastClosedAt');
+	storage.local.remove('gu.prefs.subscriptionBannerLastClosedAt');
+	storage.local.remove('gu.noRRBannerTimestamp');
 };
 
 const fakeOneOffContributor = (): void =>

@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import { neutral, textSans } from '@guardian/source-foundations';
+import { palette, textSans } from '@guardian/source-foundations';
 import PlusIcon from '../static/icons/plus.svg';
 
 const showMore = css`
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	padding: 0 10px;
 	${textSans.small()};
 	/* Design System: Ideally we want a centring primitive that we can use in these situations */
@@ -18,13 +18,13 @@ const showMore = css`
 		margin-top: -2px;
 		margin-right: 4px;
 		margin-left: 5px;
-		fill: ${neutral[46]};
+		fill: ${palette.neutral[46]};
 		padding-right: 4px;
 	}
 
 	:after {
 		content: '';
-		background-color: ${neutral[86]};
+		background-color: ${palette.neutral[86]};
 		border-radius: 18px;
 		position: absolute;
 		top: 0;
@@ -32,7 +32,7 @@ const showMore = css`
 		bottom: 0;
 		width: 130px;
 		z-index: -1;
-		color: ${neutral[100]};
+		color: ${palette.neutral[100]};
 	}
 `;
 

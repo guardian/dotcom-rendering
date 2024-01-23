@@ -4,8 +4,7 @@ import { textSans, until } from '@guardian/source-foundations';
 import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';
 import type { DCRContainerPalette } from '../../../types/front';
-import { Island } from '../../Island';
-import { RelativeTime } from '../../RelativeTime.importable';
+import { DateTime } from '../../DateTime';
 
 type Props = {
 	format: ArticleFormat;
@@ -77,9 +76,14 @@ export const CardAge = ({
 			css={ageStyles(format, containerPalette, isDynamo, isOnwardContent)}
 		>
 			{showClock && <ClockIcon />}
-			<Island priority="enhancement" defer={{ until: 'visible' }}>
-				<RelativeTime then={new Date(webPublicationDate).getTime()} />
-			</Island>
+			<DateTime
+				date={new Date(webPublicationDate)}
+				display="relative"
+				editionId="UK"
+				showWeekday={false}
+				showDate={true}
+				showTime={false}
+			/>
 		</span>
 	);
 };

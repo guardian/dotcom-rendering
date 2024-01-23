@@ -46,7 +46,9 @@ export const editionList = [
 	},
 ] as const;
 
-export const getEditionFromId = (editionId: EditionId): EditionLinkType => {
+export const getEditionFromId = (
+	editionId: EditionId,
+): (typeof editionList)[number] => {
 	return (
 		editionList.find((edition) => edition.editionId === editionId) ??
 		editionList[0]
