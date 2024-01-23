@@ -159,12 +159,12 @@ export const Liveness = ({
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 	const [key, setKey] = useState<string>();
 
-	const [topOfBlog, settopOfBlog] = useState<Element | null>(null);
-	const [toastRoot, settoastRoot] = useState<Element | null>(null);
+	const [topOfBlog, setTopOfBlog] = useState<Element | null>(null);
+	const [toastRoot, setToastRoot] = useState<Element | null>(null);
 
 	useEffect(() => {
-		settopOfBlog(document.getElementById('top-of-blog'));
-		settoastRoot(document.getElementById('toast-root'));
+		setTopOfBlog(document.getElementById('top-of-blog'));
+		setToastRoot(document.getElementById('toast-root'));
 	}, []);
 
 	/**
