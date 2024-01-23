@@ -1,4 +1,5 @@
 import { setCookie, storage } from '@guardian/libs';
+import MockDate from 'mockdate';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecentOneOffContributor,
@@ -84,6 +85,9 @@ describe('getLastOneOffContributionDate', () => {
 
 describe('isRecentOneOffContributor', () => {
 	beforeEach(clearAllCookies);
+	afterEach(() => {
+		MockDate.reset();
+	});
 
 	it('returns false if there is no one-off contribution cookie', () => {
 		expect(isRecentOneOffContributor()).toBe(false);
@@ -94,7 +98,8 @@ describe('isRecentOneOffContributor', () => {
 			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
 			value: '2018-08-01',
 		});
-		global.Date.now = jest.fn(() => Date.parse('2018-08-07T10:50:34'));
+
+		MockDate.set(Date.parse('2018-08-07T10:50:34'));
 		expect(isRecentOneOffContributor()).toBe(true);
 	});
 
@@ -103,7 +108,7 @@ describe('isRecentOneOffContributor', () => {
 			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
 			value: '2018-08-01',
 		});
-		global.Date.now = jest.fn(() => Date.parse('2018-08-01T13:00:30'));
+		MockDate.set(Date.parse('2018-08-01T13:00:30'));
 		expect(isRecentOneOffContributor()).toBe(true);
 	});
 
@@ -112,7 +117,7 @@ describe('isRecentOneOffContributor', () => {
 			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
 			value: '2018-08-01',
 		});
-		global.Date.now = jest.fn(() => Date.parse('2019-08-01T13:00:30'));
+		MockDate.set(Date.parse('2019-08-01T13:00:30'));
 		expect(isRecentOneOffContributor()).toBe(false);
 	});
 });
@@ -196,6 +201,7 @@ describe('withinLocalNoBannerCachePeriod', () => {
 		storage.local.set(NO_RR_BANNER_KEY, true, Date.now() + 10000);
 		expect(withinLocalNoBannerCachePeriod()).toEqual(true);
 	});
+
 	it('returns false if expiry is number and expired', () => {
 		storage.local.set(NO_RR_BANNER_KEY, true, Date.now() - 10000);
 		expect(withinLocalNoBannerCachePeriod()).toEqual(false);
