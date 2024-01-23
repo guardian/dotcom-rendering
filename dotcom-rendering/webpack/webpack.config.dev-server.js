@@ -27,7 +27,7 @@ module.exports = {
 		},
 		port,
 		static: {
-			directory: path.join(__dirname, '..', '..', 'src', 'static'),
+			directory: path.join(__dirname, '..', 'src', 'static'),
 			publicPath: '/static/frontend',
 		},
 		allowedHosts: ['r.thegulocal.com'],

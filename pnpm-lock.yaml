@@ -345,8 +345,8 @@ importers:
         specifier: 7.0.1
         version: 7.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/braze-components':
-        specifier: 16.3.0
-        version: 16.3.0(@emotion/react@11.11.1)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0)
+        specifier: 17.0.0
+        version: 17.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0)
       '@guardian/bridget':
         specifier: 2.6.0
         version: 2.6.0
@@ -4715,15 +4715,15 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@16.3.0(@emotion/react@11.11.1)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0):
-    resolution: {integrity: sha512-JQ9MkrJx6+7OXxwqPy2lfFNKvvmFGTCbdOedC2KczdLKusKUSWIw3EzLwdoRpgMTXsQSVpqrJ5N/VM3wDsAAxQ==}
+  /@guardian/braze-components@17.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0):
+    resolution: {integrity: sha512-Muj2fzd+gTiOEYMyP7BA5mkVMTbcUVK3IWrHUjnivo/d0cqxtSY0GLbhBTQ6MPwYtXe74H+gCWO3HNAujv0R+A==}
     engines: {node: ^18.15 || ^20.9}
     peerDependencies:
       '@emotion/react': ^11.1.2
-      '@guardian/libs': ^15.1.0
-      '@guardian/source-foundations': ^12.0.0
-      '@guardian/source-react-components': ^15.0.1
-      '@guardian/source-react-components-development-kitchen': ^13.0.1
+      '@guardian/libs': ^16.0.0
+      '@guardian/source-foundations': ^14.1.2
+      '@guardian/source-react-components': ^18.0.0
+      '@guardian/source-react-components-development-kitchen': ^16.0.0
       react: 17.0.2 || 18.2.0
     dependencies:
       '@emotion/react': 11.11.1(@types/react@18.2.45)(react@18.2.0)

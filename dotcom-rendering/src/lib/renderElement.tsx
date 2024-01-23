@@ -211,7 +211,7 @@ export const renderElement = ({
 				<CartoonComponent
 					format={format}
 					element={element}
-					switches={switches}
+					abTests={abTests}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':

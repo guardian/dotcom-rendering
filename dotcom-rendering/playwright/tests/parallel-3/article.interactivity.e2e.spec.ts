@@ -72,11 +72,10 @@ test.describe('Interactivity', () => {
 			context,
 			page,
 		}) => {
-			// The permalink feature is not currently working but once it does we want this test ready to go
 			await disableCMP(context);
 			await loadPage(
 				page,
-				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
+				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comment-154433663`,
 			);
 			await waitForIsland(page, 'DiscussionContainer', {});
 			await expectToBeVisible(page, '[id=comment-154433663]');
