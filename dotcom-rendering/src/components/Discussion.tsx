@@ -96,6 +96,10 @@ export const Discussion = ({
 	const [commentOrderBy, setCommentOrderBy] = useState<
 		'newest' | 'oldest' | 'recommendations'
 	>();
+	const [commentCount, setCommentCount] = useState<number>(0);
+	const [isClosedForComments, setIsClosedForComments] =
+		useState<boolean>(false);
+
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
 		commentIdFromUrl(),
@@ -104,9 +108,15 @@ export const Discussion = ({
 		initFiltersFromLocalStorage(),
 	);
 
-	const { commentCount, isClosedForComments } = useDiscussion(
-		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
-	);
+	useEffect(() => {
+		const {
+			commentCount: fetchedCommentCount,
+			isClosedForComments: fetchedIsClosed,
+		} = useDiscussion(joinUrl(discussionApiUrl, 'discussion', shortUrlId));
+
+		fetchedCommentCount && setCommentCount(fetchedCommentCount);
+		fetchedIsClosed && setIsClosedForComments(fetchedIsClosed);
+	}, [discussionApiUrl, shortUrlId]);
 
 	useEffect(() => {
 		const orderByClosed = isClosedForComments ? 'oldest' : undefined;
@@ -224,6 +234,8 @@ export const Discussion = ({
 						setPage={setCommentPage}
 						filters={filters}
 						setFilters={setFilters}
+						commentCount={commentCount}
+						setCommentCount={setCommentCount}
 					/>
 					{!isExpanded && (
 						<div id="discussion-overlay" css={overlayStyles} />

@@ -49,6 +49,8 @@ type Props = {
 	setPage: (page: number) => void;
 	filters: FilterOptions;
 	setFilters: (filters: FilterOptions) => void;
+	commentCount: number;
+	setCommentCount: (commentCount: number) => void;
 };
 
 const footerStyles = css`
@@ -121,6 +123,8 @@ export const Comments = ({
 	setPage,
 	filters,
 	setFilters,
+	commentCount,
+	setCommentCount,
 }: Props) => {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [totalPages, setTotalPages] = useState<number>(0);
@@ -130,7 +134,6 @@ export const Comments = ({
 	const [comments, setComments] = useState<CommentType[]>([]);
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
 		useState<number>(10);
-	const [commentCount, setCommentCount] = useState<number>(0);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
