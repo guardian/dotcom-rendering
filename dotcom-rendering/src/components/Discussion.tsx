@@ -1,15 +1,16 @@
 import { css } from '@emotion/react';
-import { joinUrl, storage } from '@guardian/libs';
+import { storage } from '@guardian/libs';
 import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import { getDiscussion } from '../lib/discussionApi';
 import {
 	getCommentContext,
 	initFiltersFromLocalStorage,
 } from '../lib/getCommentContext';
-import { useDiscussion } from '../lib/useDiscussion';
 import { palette as themePalette } from '../palette';
 import type {
+	CommentType,
 	FilterOptions,
 	SignedInUser,
 	ThreadsType,
@@ -95,6 +96,10 @@ export const Discussion = ({
 	const [commentOrderBy, setCommentOrderBy] = useState<
 		'newest' | 'oldest' | 'recommendations'
 	>();
+	const [commentCount, setCommentCount] = useState<number>(0);
+	const [isClosedForComments, setIsClosedForComments] =
+		useState<boolean>(false);
+
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
 		commentIdFromUrl(),
@@ -102,10 +107,26 @@ export const Discussion = ({
 	const [filters, setFilters] = useState<FilterOptions>(
 		initFiltersFromLocalStorage(),
 	);
+	const [loading, setLoading] = useState<boolean>(true);
+	const [totalPages, setTotalPages] = useState<number>(0);
+	const [comments, setComments] = useState<CommentType[]>([]);
 
-	const { commentCount, isClosedForComments } = useDiscussion(
-		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
-	);
+	useEffect(() => {
+		setLoading(true);
+		//todo: come back and handle the error case
+		void getDiscussion(shortUrlId, { ...filters, page: commentPage }).then(
+			(json) => {
+				setLoading(false);
+				if (json && json.status !== 'error') {
+					setComments(json.discussion.comments);
+					setCommentCount(json.discussion.topLevelCommentCount);
+					setIsClosedForComments(json.discussion.isClosedForComments);
+				}
+				//todo: come back and parse this properly (apologies for the horribleness)
+				setTotalPages(json?.pages as number);
+			},
+		);
+	}, [filters, commentPage, shortUrlId]);
 
 	useEffect(() => {
 		const orderByClosed = isClosedForComments ? 'oldest' : undefined;
@@ -209,6 +230,11 @@ export const Discussion = ({
 					setPage={setCommentPage}
 					filters={filters}
 					setFilters={setFilters}
+					commentCount={commentCount}
+					loading={loading}
+					totalPages={totalPages}
+					comments={comments}
+					setComments={setComments}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />
