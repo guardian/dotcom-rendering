@@ -305,9 +305,9 @@ const createImaAdsRequestCallback = (
 		adsRenderingSettings.useStyledNonLinearAds = true;
 		if (window.google) {
 			adsRenderingSettings.uiElements = [
-				window.google.ima.UiElements.AdAttribution,
-				window.google.ima.UiElements.Countdown,
-			];
+				window.google.ima.UiElements.AD_ATTRIBUTION,
+				window.google.ima.UiElements.COUNTDOWN,
+			] as const;
 		}
 	};
 
