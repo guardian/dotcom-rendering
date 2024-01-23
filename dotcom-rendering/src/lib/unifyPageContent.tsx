@@ -1,13 +1,16 @@
 import { renderToString } from 'react-dom/server';
+import type { RenderingTarget } from '../types/renderingTarget';
 
 export const unifyPageContent = ({
 	elementCss,
 	elementJs,
 	elementHtml,
+	renderingTarget,
 }: {
 	elementCss?: string;
 	elementJs?: string;
 	elementHtml?: string;
+	renderingTarget: RenderingTarget;
 }): string =>
 	renderToString(
 		<html lang="en">
@@ -21,7 +24,7 @@ export const unifyPageContent = ({
 					<style dangerouslySetInnerHTML={{ __html: elementCss }} />
 				)}
 			</head>
-			<body>
+			<body className={renderingTarget === 'Apps' ? 'in-app' : undefined}>
 				{!!elementHtml && (
 					<div dangerouslySetInnerHTML={{ __html: elementHtml }} />
 				)}

@@ -3,6 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { unifyPageContent } from '../lib/unifyPageContent';
 import { palette } from '../palette';
+import { useConfig } from './ConfigContext';
 
 const containerStyles = css`
 	margin: 0;
@@ -34,23 +35,32 @@ export const InteractiveAtom = ({
 	isMainMedia,
 	format,
 	title,
-}: InteractiveAtomType) => (
-	<div
-		css={[containerStyles, isMainMedia && fullHeightStyles]}
-		data-atom-id={id}
-		data-atom-type="interactive"
-	>
-		<iframe
-			title={title}
-			id={id}
-			css={[
-				styles,
-				isMainMedia &&
-					format.display === ArticleDisplay.Immersive &&
-					fullHeightStyles,
-			]}
-			srcDoc={unifyPageContent({ elementJs, elementCss, elementHtml })}
-			frameBorder="0"
-		/>
-	</div>
-);
+}: InteractiveAtomType) => {
+	const { renderingTarget } = useConfig();
+
+	return (
+		<div
+			css={[containerStyles, isMainMedia && fullHeightStyles]}
+			data-atom-id={id}
+			data-atom-type="interactive"
+		>
+			<iframe
+				title={title}
+				id={id}
+				css={[
+					styles,
+					isMainMedia &&
+						format.display === ArticleDisplay.Immersive &&
+						fullHeightStyles,
+				]}
+				srcDoc={unifyPageContent({
+					elementJs,
+					elementCss,
+					elementHtml,
+					renderingTarget,
+				})}
+				frameBorder="0"
+			/>
+		</div>
+	);
+};

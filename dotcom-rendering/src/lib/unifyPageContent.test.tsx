@@ -8,37 +8,68 @@ describe('unifyPageContent', () => {
 	const elementJs = `console.log('hello world!')`;
 
 	it('should each content', () => {
-		const outputHTML = unifyPageContent({
+		const outputHTMLWeb = unifyPageContent({
 			elementHtml,
 			elementCss,
 			elementJs,
+			renderingTarget: 'Web',
 		});
-		expect(outputHTML).toContain(elementHtml);
-		expect(outputHTML).toContain(elementCss);
-		expect(outputHTML).toContain(elementJs);
+		const outputHTMLApps = unifyPageContent({
+			elementHtml,
+			elementCss,
+			elementJs,
+			renderingTarget: 'Apps',
+		});
+		expect(outputHTMLWeb).toContain(elementHtml);
+		expect(outputHTMLWeb).toContain(elementCss);
+		expect(outputHTMLWeb).toContain(elementJs);
+		expect(outputHTMLApps).toContain(elementHtml);
+		expect(outputHTMLApps).toContain(elementCss);
+		expect(outputHTMLApps).toContain(elementJs);
 	});
 
 	it('should not render style tag', () => {
-		const outputHTML = unifyPageContent({
+		const outputHTMLWeb = unifyPageContent({
 			elementHtml,
 			elementJs,
+			renderingTarget: 'Web',
 		});
-		expect(outputHTML).not.toContain(`<style`);
+		const outputHTMLApps = unifyPageContent({
+			elementHtml,
+			elementJs,
+			renderingTarget: 'Apps',
+		});
+		expect(outputHTMLWeb).not.toContain(`<style`);
+		expect(outputHTMLApps).not.toContain(`<style`);
 	});
 
 	it('should not render div tag', () => {
-		const outputHTML = unifyPageContent({
+		const outputHTMLWeb = unifyPageContent({
 			elementCss,
 			elementJs,
+			renderingTarget: 'Web',
 		});
-		expect(outputHTML).not.toContain(`<div`);
+		const outputHTMLApps = unifyPageContent({
+			elementCss,
+			elementJs,
+			renderingTarget: 'Apps',
+		});
+		expect(outputHTMLWeb).not.toContain(`<div`);
+		expect(outputHTMLApps).not.toContain(`<div`);
 	});
 
 	it('should render successfully when no elementJs', () => {
-		const outputHTML = unifyPageContent({
+		const outputHTMLWeb = unifyPageContent({
 			elementCss,
 			elementHtml,
+			renderingTarget: 'Web',
 		});
-		expect(outputHTML).not.toContain(elementJs);
+		const outputHTMLApps = unifyPageContent({
+			elementCss,
+			elementHtml,
+			renderingTarget: 'Apps',
+		});
+		expect(outputHTMLWeb).not.toContain(elementJs);
+		expect(outputHTMLApps).not.toContain(elementJs);
 	});
 });
