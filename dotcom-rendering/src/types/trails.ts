@@ -1,12 +1,11 @@
 import type { Branding } from './branding';
-import type { DCRSnapType, DCRSupportingContent } from './front';
+import type { DCRFrontImage, DCRSnapType, DCRSupportingContent } from './front';
 import type { MainMedia } from './mainMedia';
 
 interface BaseTrailType {
 	url: string;
 	headline: string;
 	webPublicationDate?: string;
-	image?: string;
 	avatarUrl?: string;
 	mediaDuration?: number;
 	ageWarning?: string;
@@ -39,6 +38,7 @@ export interface TrailType extends BaseTrailType {
 	dataLinkName: string;
 	discussionId?: string;
 	isBoosted?: boolean;
+	image?: DCRFrontImage;
 }
 
 export interface FETrailType extends BaseTrailType {
@@ -56,6 +56,7 @@ export interface FETrailType extends BaseTrailType {
 	carouselImages?: { [key: string]: string };
 	isLiveBlog?: boolean;
 	masterImage?: string;
+	image?: string;
 }
 
 export interface TrailTabType {

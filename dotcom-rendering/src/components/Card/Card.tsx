@@ -14,6 +14,7 @@ import type { Branding } from '../../types/branding';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
+	DCRFrontImage,
 	DCRSlideshowImage,
 	DCRSnapType,
 	DCRSupportingContent,
@@ -63,8 +64,7 @@ export type Props = {
 	byline?: string;
 	showByline?: boolean;
 	webPublicationDate?: string;
-	imageUrl?: string;
-	imageAltText?: string;
+	image?: DCRFrontImage;
 	imagePosition?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
@@ -265,8 +265,7 @@ export const Card = ({
 	byline,
 	showByline,
 	webPublicationDate,
-	imageUrl,
-	imageAltText,
+	image,
 	imagePosition = 'top',
 	imagePositionOnMobile = 'left',
 	imageSize = 'small',
@@ -400,8 +399,8 @@ export const Card = ({
 	const showCommentLinesFooter = isOpinion && !isDynamo && !isOnwardContent;
 
 	const media = getMedia({
-		imageUrl,
-		imageAltText,
+		imageUrl: image?.src,
+		imageAltText: image?.altText,
 		avatarUrl,
 		isCrossword,
 		slideshowImages,
@@ -564,7 +563,7 @@ export const Card = ({
 						<HeadlineWrapper
 							imagePositionOnMobile={imagePositionOnMobile}
 							imagePosition={imagePosition}
-							imageUrl={imageUrl}
+							imageUrl={image?.src}
 							hasStarRating={starRating !== undefined}
 						>
 							<CardHeadline
@@ -593,7 +592,7 @@ export const Card = ({
 							{starRating !== undefined ? (
 								<StarRatingComponent
 									rating={starRating}
-									cardHasImage={imageUrl !== undefined}
+									cardHasImage={!!image}
 								/>
 							) : null}
 							{!!mainMedia && mainMedia.type !== 'Video' && (

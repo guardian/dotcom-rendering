@@ -14,7 +14,11 @@ import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
-import type { DCRContainerPalette, DCRContainerType } from '../types/front';
+import type {
+	DCRContainerPalette,
+	DCRContainerType,
+	DCRFrontImage,
+} from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
@@ -458,7 +462,7 @@ type CarouselCardProps = {
 	webPublicationDate: string;
 	imageLoading: Loading;
 	kickerText?: string;
-	imageUrl?: string;
+	image?: DCRFrontImage;
 	dataLinkName?: string;
 	discussionApiUrl: string;
 	/* Onward content carousels use different card styles (this is currently everything but fronts) */
@@ -474,8 +478,8 @@ type CarouselCardProps = {
 const CarouselCard = ({
 	format,
 	linkTo,
-	imageUrl,
 	headlineText,
+	image,
 	webPublicationDate,
 	kickerText,
 	isFirst,
@@ -510,7 +514,7 @@ const CarouselCard = ({
 				headlineText={headlineText}
 				webPublicationDate={webPublicationDate}
 				kickerText={kickerText}
-				imageUrl={imageUrl}
+				image={image}
 				imageSize={'small'}
 				showClock={!isOnwardContent && true}
 				showAge={true}
@@ -971,7 +975,7 @@ export const Carousel = ({
 								headline: headlineText,
 								webPublicationDate,
 								format: trailFormat,
-								image,
+								image: trailImage,
 								kickerText,
 								branding,
 								discussion,
@@ -982,7 +986,10 @@ export const Carousel = ({
 							// but we rarely if ever expect it not to exist
 							if (!webPublicationDate) return null;
 
-							const imageUrl = image && getSourceImageUrl(image);
+							const image = trailImage && {
+								src: getSourceImageUrl(trailImage.src),
+								altText: trailImage.altText,
+							};
 
 							const imageLoading = i > 3 ? 'lazy' : 'eager';
 
@@ -994,7 +1001,7 @@ export const Carousel = ({
 									linkTo={linkTo}
 									headlineText={headlineText}
 									webPublicationDate={webPublicationDate}
-									imageUrl={imageUrl}
+									image={image}
 									kickerText={kickerText}
 									dataLinkName={`carousel-small-card-position-${i}`}
 									discussionId={
