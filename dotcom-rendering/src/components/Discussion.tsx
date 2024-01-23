@@ -118,6 +118,9 @@ export const Discussion = ({
 					setComments(json.discussion.comments);
 					setCommentCount(json.discussion.topLevelCommentCount);
 					setIsClosedForComments(json.discussion.isClosedForComments);
+					// There's no point showing the view more button if there isn't much more to view
+					if (json.discussion.topLevelCommentCount <= 2)
+						setIsExpanded(true);
 				}
 				if (json?.pages) setTotalPages(json.pages);
 			})
