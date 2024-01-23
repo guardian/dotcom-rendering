@@ -67,11 +67,6 @@ export const Analytics = ({
 								"consentJurisdiction": "AUS"
 							}
 						}
-					},
-					"transport": {
-						"beacon": false,
-						"xhrpost": false,
-						"image": true
 					}
 				}
 			</script>
