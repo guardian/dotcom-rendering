@@ -91,25 +91,23 @@ export const Discussion = ({
 	user,
 	idApiUrl,
 }: Props) => {
-	const [commentPage, setCommentPage] = useState<number>(1);
+	const [commentPage, setCommentPage] = useState(1);
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
 	const [commentOrderBy, setCommentOrderBy] = useState<
 		'newest' | 'oldest' | 'recommendations'
 	>();
-	const [commentCount, setCommentCount] = useState<number>(0);
-	const [isClosedForComments, setIsClosedForComments] =
-		useState<boolean>(false);
-
-	const [isExpanded, setIsExpanded] = useState<boolean>(false);
+	const [commentCount, setCommentCount] = useState(0);
+	const [comments, setComments] = useState<CommentType[]>([]);
+	const [isClosedForComments, setIsClosedForComments] = useState(false);
+	const [isExpanded, setIsExpanded] = useState(false);
 	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
 		commentIdFromUrl(),
 	);
 	const [filters, setFilters] = useState<FilterOptions>(
 		initFiltersFromLocalStorage(),
 	);
-	const [loading, setLoading] = useState<boolean>(true);
-	const [totalPages, setTotalPages] = useState<number>(0);
-	const [comments, setComments] = useState<CommentType[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [totalPages, setTotalPages] = useState(0);
 
 	useEffect(() => {
 		setLoading(true);
@@ -122,8 +120,7 @@ export const Discussion = ({
 					setCommentCount(json.discussion.topLevelCommentCount);
 					setIsClosedForComments(json.discussion.isClosedForComments);
 				}
-				//todo: come back and parse this properly (apologies for the horribleness)
-				setTotalPages(json?.pages as number);
+				if (json?.pages) setTotalPages(json.pages);
 			},
 		);
 	}, [filters, commentPage, shortUrlId]);
