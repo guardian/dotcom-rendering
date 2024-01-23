@@ -1,5 +1,5 @@
 import { onConsentChange } from '@guardian/consent-management-platform';
-import { getCookie } from '@guardian/libs';
+import { getCookie, storage } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import type { DCRFrontType } from '../types/front';
@@ -21,7 +21,7 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 //  Local storage keys
 const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
 const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
-export const NO_RR_BANNER_TIMESTAMP_KEY = 'gu.noRRBannerTimestamp'; // timestamp of when we were last told not to show a RR banner
+const NO_RR_BANNER_KEY = 'gu.noRRBanner';
 
 // See https://github.com/guardian/support-dotcom-components/blob/main/module-versions.md
 export const MODULES_VERSION = 'v3';
@@ -150,10 +150,8 @@ export const hasArticleCountOptOutCookie = (): boolean =>
 	getCookie({ name: OPT_OUT_OF_ARTICLE_COUNT_COOKIE }) !== null;
 
 const removeArticleCountsFromLocalStorage = () => {
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	window.localStorage.removeItem(DAILY_ARTICLE_COUNT_KEY);
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_KEY);
+	storage.local.remove(DAILY_ARTICLE_COUNT_KEY);
+	storage.local.remove(WEEKLY_ARTICLE_COUNT_KEY);
 };
 
 export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
@@ -218,24 +216,11 @@ export const hasCmpConsentForBrowserId = (): Promise<boolean> =>
 	});
 
 const twentyMins = 20 * 60000;
-export const withinLocalNoBannerCachePeriod = (): boolean => {
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	const item = window.localStorage.getItem(NO_RR_BANNER_TIMESTAMP_KEY);
-	if (item && !Number.isNaN(parseInt(item, 10))) {
-		const withinCachePeriod = parseInt(item, 10) + twentyMins > Date.now();
-		if (!withinCachePeriod) {
-			// Expired
-			// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-			window.localStorage.removeItem(NO_RR_BANNER_TIMESTAMP_KEY);
-		}
-		return withinCachePeriod;
-	}
-	return false;
-};
+export const withinLocalNoBannerCachePeriod = (): boolean =>
+	!!storage.local.get(NO_RR_BANNER_KEY);
 
 export const setLocalNoBannerCachePeriod = (): void =>
-	// eslint-disable-next-line no-restricted-syntax -- FIXME-libs-storage
-	window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);
+	storage.local.set(NO_RR_BANNER_KEY, true, Date.now() + twentyMins);
 
 // Returns true if banner was closed in the last hour
 const ONE_HOUR_IN_MS = 1000 * 60 * 60;

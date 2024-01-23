@@ -3306,9 +3306,6 @@
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.YoutubeBlockElement"
                 },
-                "elementId": {
-                    "type": "string"
-                },
                 "assetId": {
                     "type": "string"
                 },
@@ -3358,7 +3355,6 @@
             "required": [
                 "_type",
                 "assetId",
-                "elementId",
                 "expired",
                 "id",
                 "mediaTitle"
@@ -4398,7 +4394,7 @@
                             "type": "string",
                             "const": "Video"
                         },
-                        "elementId": {
+                        "id": {
                             "type": "string"
                         },
                         "videoId": {
@@ -4443,9 +4439,9 @@
                     },
                     "required": [
                         "duration",
-                        "elementId",
                         "expired",
                         "height",
+                        "id",
                         "images",
                         "origin",
                         "title",

@@ -1,15 +1,26 @@
+import { isString, timeAgo } from '@guardian/libs';
 import { type EditionId, getEditionFromId } from '../lib/edition';
+import { Island } from './Island';
+import { RelativeTime } from './RelativeTime.importable';
 
 type Props = {
 	date: Date;
 	editionId: EditionId;
-	show?: 'date & time' | 'date' | 'time';
+	showWeekday: boolean;
+	showDate: boolean;
+	showTime: boolean;
+	display?: 'absolute' | 'relative';
 };
+
+const formatWeekday = (date: Date, locale: string, timeZone: string) =>
+	date.toLocaleDateString(locale, {
+		weekday: 'short',
+		timeZone,
+	});
 
 const formatDate = (date: Date, locale: string, timeZone: string) =>
 	date
 		.toLocaleDateString(locale, {
-			weekday: 'short',
 			day: 'numeric',
 			month: 'short',
 			year: 'numeric',
@@ -28,9 +39,25 @@ const formatTime = (date: Date, locale: string, timeZone: string) =>
 		})
 		.replace(':', '.');
 
-export const DateTime = ({ date, editionId, show = 'date & time' }: Props) => {
+export const DateTime = ({
+	date,
+	editionId,
+	showWeekday,
+	showDate,
+	showTime,
+	display = 'absolute',
+}: Props) => {
 	const { locale, timeZone } = getEditionFromId(editionId);
-	return (
+
+	const epoch = date.getTime();
+	const relativeTime = display === 'relative' && timeAgo(epoch);
+	const isRecent = isString(relativeTime) && relativeTime.endsWith(' ago');
+
+	return isRecent ? (
+		<Island priority="enhancement" defer={{ until: 'visible' }}>
+			<RelativeTime then={epoch} />
+		</Island>
+	) : (
 		<time
 			dateTime={date.toISOString()}
 			data-locale={locale}
@@ -45,8 +72,13 @@ export const DateTime = ({ date, editionId, show = 'date & time' }: Props) => {
 				timeZone,
 			})}
 		>
-			{show.includes('date') && formatDate(date, locale, timeZone)}{' '}
-			{show.includes('time') && formatTime(date, locale, timeZone)}
+			{[
+				showWeekday && formatWeekday(date, locale, timeZone),
+				showDate && formatDate(date, locale, timeZone),
+				showTime && formatTime(date, locale, timeZone),
+			]
+				.filter(isString)
+				.join(' ')}
 		</time>
 	);
 };

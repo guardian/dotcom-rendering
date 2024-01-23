@@ -3577,7 +3577,7 @@
                             "type": "string",
                             "const": "Video"
                         },
-                        "elementId": {
+                        "id": {
                             "type": "string"
                         },
                         "videoId": {
@@ -3622,9 +3622,9 @@
                     },
                     "required": [
                         "duration",
-                        "elementId",
                         "expired",
                         "height",
+                        "id",
                         "images",
                         "origin",
                         "title",

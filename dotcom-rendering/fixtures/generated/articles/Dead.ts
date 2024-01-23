@@ -1974,7 +1974,6 @@ export const Dead: DCRArticle = {
 					],
 					expired: false,
 					duration: 142,
-					elementId: '61b9e0cb-6602-4ccb-bda6-a6d6c3f2eae0',
 				},
 			],
 			attributes: {

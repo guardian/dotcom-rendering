@@ -432,10 +432,6 @@ const backgroundFilterButton = (): string => neutral[100];
 const backgroundHeadlineTag = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
-const backgroundMostViewedTab = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme].dark;
-};
-
 const backgroundTreat = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -576,7 +572,6 @@ export const decidePalette = (
 			lightboxDivider: backgroundLightboxDivider(format),
 			speechBubble: backgroundSpeechBubble(format),
 			headlineTag: backgroundHeadlineTag(format),
-			mostViewedTab: backgroundMostViewedTab(format),
 			filterButton: backgroundFilterButton(),
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),

@@ -120,9 +120,8 @@ const figureStyles = css`
 	height: 100%;
 	justify-content: space-between;
 
-	${until.tablet} {
-		flex-direction: column;
-	}
+	flex-direction: column;
+
 	${from.tablet} {
 		flex-direction: row;
 	}
@@ -178,7 +177,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 
 	useEffect(() => {
 		log('dotcom', '💡 images loaded:', loaded);
-	});
+	}, [loaded]);
 
 	return (
 		<>

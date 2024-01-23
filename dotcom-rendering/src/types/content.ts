@@ -552,7 +552,6 @@ export interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
 
 export interface YoutubeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
-	elementId: string;
 	assetId: string;
 	mediaTitle: string;
 	id: string;

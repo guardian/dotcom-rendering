@@ -16,13 +16,16 @@
 import { mkdir, readdir, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import devServer from './configs/webpack/server.dev.mjs';
+import prodServer from './configs/webpack/server.mjs';
+import { isDev } from './configs/webpack/utils/env.mjs';
 
 const dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const configsDirectory = resolve(dirname, 'configs', 'webpack');
 
-const bundleConfigs = await readdir(configsDirectory).then((files) =>
-	files.filter((file) => file.startsWith('bundle')),
+const clientConfigs = await readdir(configsDirectory).then((files) =>
+	files.filter((file) => file.startsWith('client.')),
 );
 
 // Create a bundles manifest for the TypesScript compiler so we get type safely
@@ -37,13 +40,15 @@ await writeFile(
 
 /** generated from webpack.config.js */
 export const bundles = /** @type {const} @satisfies {readonly string[]} */ ([
-\t${bundleConfigs.map((name) => `"${basename(name, '.mjs')}"`).join(',\n\t')},
+\t${clientConfigs.map((name) => `"${basename(name, '.mjs')}"`).join(',\n\t')},
 ]);
 `,
 	'utf-8',
 );
 
-export default bundleConfigs.map((name) =>
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- can't know what we are importing
-	import(`${configsDirectory}/${name}`).then((config) => config.default),
+export default [isDev ? devServer : prodServer].concat(
+	clientConfigs.map((name) =>
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- can't know what we are importing
+		import(`${configsDirectory}/${name}`).then((config) => config.default),
+	),
 );

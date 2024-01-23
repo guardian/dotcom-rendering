@@ -119,7 +119,9 @@ const WitnessWrapper = ({
 							<DateTime
 								date={new Date(dateCreated)}
 								editionId={editionId}
-								show="date"
+								showWeekday={false}
+								showDate={true}
+								showTime={false}
 							/>
 						</p>
 					</div>

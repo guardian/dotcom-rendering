@@ -6,7 +6,6 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { AdPortals } from './AdPortals.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
-import { AppEmailSignUp } from './AppEmailSignUp.importable';
 import { AppsEpic } from './AppsEpic.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
@@ -18,7 +17,7 @@ import { FocusStyles } from './FocusStyles.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
-import { LightboxJavascript } from './LightboxJavascript.importable';
+import { LightboxJavascript } from './LightboxJavascript';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
@@ -83,22 +82,6 @@ describe('Island: server-side rendering', () => {
 
 	test('AlreadyVisited', () => {
 		expect(() => renderToString(<AlreadyVisited />)).not.toThrow();
-	});
-
-	test('AppEmailSignup', () => {
-		expect(() =>
-			renderToString(
-				<AppEmailSignUp
-					skipToIndex={0}
-					identityName={''}
-					successDescription={''}
-					name={''}
-					description={''}
-					frequency={''}
-					theme={''}
-				/>,
-			),
-		).not.toThrow();
 	});
 
 	test('AppsEpic', () => {

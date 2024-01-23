@@ -4,6 +4,8 @@ import newWeb from './client.web.mjs';
 import newWebLegacy from './client.web.legacy.mjs';
 import newApps from './client.apps.mjs';
 import newServer from './server.mjs';
+import newDevServer from './server.dev.mjs';
+import { isProd } from './utils/env.mjs';
 
 const [server, web, webLegacy, apps] = current;
 
@@ -47,4 +49,4 @@ const compareConfigs = (current, proposed) => {
 compareConfigs(web, newWeb);
 compareConfigs(webLegacy, newWebLegacy);
 compareConfigs(apps, newApps);
-compareConfigs(server, newServer);
+compareConfigs(server, isProd ? newServer : newDevServer);
