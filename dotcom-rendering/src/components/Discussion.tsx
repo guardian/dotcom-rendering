@@ -111,9 +111,8 @@ export const Discussion = ({
 
 	useEffect(() => {
 		setLoading(true);
-		//todo: come back and handle the error case
-		void getDiscussion(shortUrlId, { ...filters, page: commentPage }).then(
-			(json) => {
+		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
+			.then((json) => {
 				setLoading(false);
 				if (json && json.status !== 'error') {
 					setComments(json.discussion.comments);
@@ -121,8 +120,8 @@ export const Discussion = ({
 					setIsClosedForComments(json.discussion.isClosedForComments);
 				}
 				if (json?.pages) setTotalPages(json.pages);
-			},
-		);
+			})
+			.catch((e) => console.error(`getDiscussion - error: ${String(e)}`));
 	}, [filters, commentPage, shortUrlId]);
 
 	useEffect(() => {
