@@ -61,6 +61,8 @@ export const LoggedOutHiddenPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			setCommentCount={() => {}}
 		/>
 	</div>
 );
@@ -98,6 +100,8 @@ export const InitialPage = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			setCommentCount={() => {}}
 		/>
 	</div>
 );
@@ -136,6 +140,8 @@ export const LoggedInHiddenNoPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			setCommentCount={() => {}}
 		/>
 	</div>
 );
@@ -168,6 +174,8 @@ export const LoggedIn = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			setCommentCount={() => {}}
 		/>
 	</div>
 );
@@ -199,6 +207,8 @@ export const LoggedInShortDiscussion = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			setCommentCount={() => {}}
 		/>
 	</div>
 );
@@ -229,6 +239,8 @@ export const LoggedOutHiddenNoPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			setCommentCount={() => {}}
 		/>
 	</div>
 );
@@ -268,6 +280,8 @@ export const Closed = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			setCommentCount={() => {}}
 		/>
 	</div>
 );
@@ -305,6 +319,8 @@ export const NoComments = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			setCommentCount={() => {}}
 		/>
 	</div>
 );
@@ -342,6 +358,8 @@ export const LegacyDiscussion = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			setCommentCount={() => {}}
 		/>
 	</div>
 );

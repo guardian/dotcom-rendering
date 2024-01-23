@@ -35,6 +35,8 @@ describe('App', () => {
 					orderBy: 'newest',
 				}}
 				setFilters={() => {}}
+				commentCount={0}
+				setCommentCount={() => {}}
 			/>,
 		);
 
