@@ -1,3 +1,14 @@
+import type { BaseSchema } from 'valibot';
+import {
+	array,
+	boolean,
+	number,
+	object,
+	optional,
+	recursive,
+	safeParse,
+	string,
+} from 'valibot';
 import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
 import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
@@ -9,6 +20,86 @@ export type CAPIPillar =
 	| 'opinion'
 	| 'lifestyle'
 	| 'labs';
+
+const userProfile: BaseSchema<UserProfile> = object({
+	userId: string(),
+	displayName: string(),
+	webUrl: string(),
+	apiUrl: string(),
+	avatar: string(),
+	secureAvatarUrl: string(),
+	badge: array(object({ name: string() })),
+
+	// only included from /profile/me endpoint
+	privateFields: optional(
+		object({
+			canPostComment: boolean(),
+			isPremoderated: boolean(),
+			hasCommented: boolean(),
+		}),
+	),
+});
+
+export interface UserProfile {
+	userId: string;
+	displayName: string;
+	webUrl: string;
+	apiUrl: string;
+	avatar: string;
+	secureAvatarUrl: string;
+	badge: { name: string }[];
+
+	// only included from /profile/me endpoint
+	privateFields?: {
+		canPostComment: boolean;
+		isPremoderated: boolean;
+		hasCommented: boolean;
+	};
+}
+
+const comment: BaseSchema<CommentType> = object({
+	id: number(),
+	body: string(),
+	date: string(),
+	isoDateTime: string(),
+	status: string(),
+	webUrl: string(),
+	apiUrl: string(),
+	numResponses: optional(number()),
+	numRecommends: number(),
+	isHighlighted: boolean(),
+	userProfile,
+	responseTo: optional(
+		object({
+			displayName: string(),
+			commentApiUrl: string(),
+			isoDateTime: string(),
+			date: string(),
+			commentId: string(),
+			commentWebUrl: string(),
+		}),
+	),
+	responses: optional(array(recursive(() => comment))),
+	metaData: optional(
+		object({
+			commentCount: number(),
+			staffCommenterCount: number(),
+			editorsPickCount: number(),
+			blockedCount: number(),
+			responseCount: number(),
+		}),
+	),
+	discussion: optional(
+		object({
+			key: string(),
+			webUrl: string(),
+			apiUrl: string(),
+			title: string(),
+			isClosedForComments: boolean(),
+			isClosedForRecommendation: boolean(),
+		}),
+	),
+});
 
 export interface CommentType {
 	id: number;
@@ -135,27 +226,10 @@ export type SignedInUser = {
 	authStatus: SignedInWithCookies | SignedInWithOkta;
 };
 
-export interface UserProfile {
-	userId: string;
-	displayName: string;
-	webUrl: string;
-	apiUrl: string;
-	avatar: string;
-	secureAvatarUrl: string;
-	badge: { name: string }[];
-
-	// only included from /profile/me endpoint
-	privateFields?: {
-		canPostComment: boolean;
-		isPremoderated: boolean;
-		hasCommented: boolean;
-	};
-}
-
 export interface DiscussionResponse {
 	status: string;
 	errorCode?: string;
-	page: number;
+	currentPage: number;
 	pages: number;
 	pageSize: number;
 	orderBy: string;
@@ -172,6 +246,37 @@ export interface DiscussionResponse {
 		comments: CommentType[];
 	};
 }
+
+const discussionResponse = object({
+	status: string(),
+	errorCode: optional(string()),
+	currentPage: number(),
+	pages: number(),
+	pageSize: number(),
+	orderBy: string(),
+	discussion: object({
+		key: string(),
+		webUrl: string(),
+		apiUrl: string(),
+		commentCount: number(),
+		topLevelCommentCount: number(),
+		isClosedForComments: boolean(),
+		isClosedForRecommendation: boolean(),
+		isThreaded: boolean(),
+		title: string(),
+		comments: array(comment),
+	}),
+});
+
+export const parseDiscussionResponse = (
+	data: unknown,
+): DiscussionResponse | undefined => {
+	const result = safeParse(discussionResponse, data);
+	if (!result.success) {
+		console.error('DiscussionResponse', result.issues);
+	}
+	return result.success ? result.output : undefined;
+};
 
 export interface DiscussionOptions {
 	orderBy: string;
