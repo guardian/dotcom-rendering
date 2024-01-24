@@ -464,6 +464,7 @@ export const LabsSection = ({
 							<Badge
 								imageSrc={badge.imageSrc}
 								href={badge.href}
+								isInLabsSection={true}
 							/>
 						</div>
 					)}
