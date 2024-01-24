@@ -65,6 +65,8 @@ export const Default = () => (
 		shortUrl={shortUrl}
 		user={aUser}
 		onAddComment={(comment) => {}}
+		isActive={false}
+		setIsActive={() => {}}
 	/>
 );
 Default.storyName = 'default';
@@ -76,6 +78,8 @@ export const Error = () => (
 		shortUrl={'/p/g8g7v'}
 		user={aUser}
 		onAddComment={(comment) => {}}
+		isActive={false}
+		setIsActive={() => {}}
 	/>
 );
 Error.storyName = 'form with errors';
@@ -87,6 +91,8 @@ export const Active = () => (
 		user={aUser}
 		onAddComment={(comment) => {}}
 		commentBeingRepliedTo={aComment}
+		isActive={true}
+		setIsActive={() => {}}
 	/>
 );
 Active.storyName = 'form is active';
@@ -118,6 +124,8 @@ export const Premoderated = () => (
 		}}
 		onAddComment={(comment) => {}}
 		commentBeingRepliedTo={aComment}
+		isActive={true}
+		setIsActive={() => {}}
 	/>
 );
 Premoderated.storyName = 'user is premoderated';

@@ -132,6 +132,9 @@ export const Comments = ({
 		useState<number>(10);
 	const [commentCount, setCommentCount] = useState<number>(0);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
+	const [isCommentFormActive, setIsCommentFormActive] = useState<boolean>(
+		!!commentBeingRepliedTo,
+	);
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
 
@@ -302,6 +305,8 @@ export const Comments = ({
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
 											onRecommend={onRecommend}
+											isActive={isCommentFormActive}
+											setIsActive={setIsCommentFormActive}
 										/>
 									</li>
 								))}
@@ -323,6 +328,8 @@ export const Comments = ({
 					onComment={onComment}
 					onReply={onReply}
 					onPreview={onPreview}
+					isActive={isCommentFormActive}
+					setIsActive={setIsCommentFormActive}
 				/>
 			)}
 			{!!picks.length && (
@@ -375,6 +382,8 @@ export const Comments = ({
 									onPermalinkClick={onPermalinkClick}
 									onRecommend={onRecommend}
 									onReply={onReply}
+									isActive={isCommentFormActive}
+									setIsActive={setIsCommentFormActive}
 								/>
 							</li>
 						))}
@@ -400,6 +409,8 @@ export const Comments = ({
 					onComment={onComment}
 					onReply={onReply}
 					onPreview={onPreview}
+					isActive={isCommentFormActive}
+					setIsActive={setIsCommentFormActive}
 				/>
 			)}
 		</div>

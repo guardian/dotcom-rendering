@@ -66,6 +66,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				isActive={true}
+				setIsActive={() => {}}
 			/>,
 		);
 
@@ -103,6 +105,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				isActive={true}
+				setIsActive={() => {}}
 			/>,
 		);
 
@@ -139,6 +143,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				isActive={true}
+				setIsActive={() => {}}
 			/>,
 		);
 
@@ -176,6 +182,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				isActive={true}
+				setIsActive={() => {}}
 			/>,
 		);
 
