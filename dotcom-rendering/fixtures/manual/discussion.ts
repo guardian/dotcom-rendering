@@ -1,6 +1,8 @@
+import type { DiscussionResponse } from '../../src/types/discussion';
+
 export const discussion = {
 	status: 'ok',
-	page: 1,
+	currentPage: 1,
 	pages: 9,
 	pageSize: 50,
 	orderBy: 'oldest',
@@ -1181,4 +1183,4 @@ export const discussion = {
 			},
 		],
 	},
-};
+} satisfies DiscussionResponse;
