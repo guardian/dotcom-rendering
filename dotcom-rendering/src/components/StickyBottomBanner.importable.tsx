@@ -26,9 +26,7 @@ import {
 	canShowBrazeBanner,
 } from './StickyBottomBanner/BrazeBanner';
 import {
-	canShowPuzzlesBanner,
 	canShowRRBanner,
-	PuzzlesBanner,
 	ReaderRevenueBanner,
 } from './StickyBottomBanner/ReaderRevenueBanner';
 import type {
@@ -166,14 +164,6 @@ const buildRRBannerConfigWith = ({
 	};
 };
 
-const buildPuzzlesBannerConfig = (isEnabled: boolean) =>
-	buildRRBannerConfigWith({
-		id: 'puzzles-banner',
-		BannerComponent: PuzzlesBanner,
-		canShowFn: canShowPuzzlesBanner,
-		isEnabled,
-	});
-
 const buildReaderRevenueBannerConfig = (isEnabled: boolean) =>
 	buildRRBannerConfigWith({
 		id: 'reader-revenue-banner',
@@ -230,10 +220,8 @@ export const StickyBottomBanner = ({
 	pageId,
 	keywordIds,
 	remoteBannerSwitch,
-	puzzleBannerSwitch,
 }: Props & {
 	remoteBannerSwitch: boolean;
-	puzzleBannerSwitch: boolean;
 	isSensitive: boolean;
 }) => {
 	const { renderingTarget } = useConfig();
@@ -263,23 +251,7 @@ export const StickyBottomBanner = ({
 	useOnce(() => {
 		if (!countryCode) return;
 		const CMP = buildCmpBannerConfig();
-		const puzzlesBanner = buildPuzzlesBannerConfig(puzzleBannerSwitch)({
-			isSignedIn,
-			countryCode,
-			isPreview,
-			asyncArticleCounts: asyncArticleCounts as Promise<
-				ArticleCounts | undefined
-			>,
-			contentType,
-			sectionId,
-			shouldHideReaderRevenue,
-			isMinuteArticle,
-			isPaidContent,
-			isSensitive,
-			tags,
-			contributionsServiceUrl,
-			idApiUrl,
-		});
+
 		const readerRevenue = buildReaderRevenueBannerConfig(
 			remoteBannerSwitch,
 		)({
@@ -311,7 +283,7 @@ export const StickyBottomBanner = ({
 			shouldHideReaderRevenue,
 		);
 		const bannerConfig: SlotConfig = {
-			candidates: [CMP, brazeBanner, puzzlesBanner, readerRevenue],
+			candidates: [CMP, brazeBanner, readerRevenue],
 			name: 'banner',
 		};
 

@@ -3,7 +3,6 @@ import {
 	getBanner,
 	getEpic,
 	getLiveblogEpic,
-	getPuzzlesBanner,
 } from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
@@ -40,6 +39,3 @@ export const useSDCLiveblogEpic: UseSDC<EpicPayload> = (baseUrl, payload) =>
 
 export const useSDCBanner: UseSDC<BannerPayload> = (baseUrl, payload) =>
 	useSDC('banner', () => getBanner(baseUrl, payload));
-
-export const useSDCPuzzlesBanner: UseSDC<BannerPayload> = (baseUrl, payload) =>
-	useSDC('puzzles', () => getPuzzlesBanner(baseUrl, payload));

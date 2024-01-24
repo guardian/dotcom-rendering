@@ -733,9 +733,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						remoteBannerSwitch={
 							!!front.config.switches.remoteBanner
 						}
-						puzzleBannerSwitch={
-							!!front.config.switches.puzzlesBanner
-						}
 						tags={[]} // a front doesn't have tags
 					/>
 				</Island>

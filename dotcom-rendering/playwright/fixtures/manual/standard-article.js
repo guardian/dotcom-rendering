@@ -1406,7 +1406,6 @@ export const standardArticle = {
 			verticalVideoSurvey: false,
 			okta: true,
 			abDeeplyReadArticleFooter: false,
-			puzzlesBanner: false,
 			imrWorldwide: true,
 			acast: true,
 			automaticFilters: true,

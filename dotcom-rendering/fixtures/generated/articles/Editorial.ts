@@ -1840,7 +1840,6 @@ export const Editorial: DCRArticle = {
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
-			abPuzzlesBanner: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
 			compareVariantDecision: false,

@@ -1084,9 +1084,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								remoteBannerSwitch={
 									!!article.config.switches.remoteBanner
 								}
-								puzzleBannerSwitch={
-									!!article.config.switches.puzzlesBanner
-								}
 								tags={article.tags}
 							/>
 						</Island>

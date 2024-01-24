@@ -1432,9 +1432,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								remoteBannerSwitch={
 									!!article.config.switches.remoteBanner
 								}
-								puzzleBannerSwitch={
-									!!article.config.switches.puzzlesBanner
-								}
 								tags={article.tags}
 							/>
 						</Island>
