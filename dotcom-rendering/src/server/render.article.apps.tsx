@@ -59,7 +59,7 @@ export const renderArticle = (
 	const clientScripts = [
 		getPathFromManifest('client.apps', 'index.js'),
 		pageHasNonBootInteractiveElements &&
-			`${ASSET_ORIGIN}assets/static/js/curl-with-js-and-domReady.js`,
+			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 	].filter(isString);
 	const scriptTags = generateScriptTags([...clientScripts]);
 
