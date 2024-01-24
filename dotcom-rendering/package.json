@@ -56,7 +56,7 @@
 		"@guardian/eslint-plugin-source-react-components": "21.0.1",
 		"@guardian/identity-auth": "1.1.0",
 		"@guardian/identity-auth-frontend": "1.0.0",
-		"@guardian/libs": "16.0.0",
+		"@guardian/libs": "16.0.1",
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source-foundations": "14.1.2",
 		"@guardian/source-react-components": "18.0.0",
