@@ -19,6 +19,14 @@ export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 	(async () => {
 		recordTypeAndPlatform('article', 'amp');
 		const article = validateAsArticleType(body);
+
+		if (
+			article.format.design === 'InteractiveDesign' ||
+			article.format.design === 'FullPageInteractiveDesign'
+		) {
+			throw new NotRenderableInDCR();
+		}
+
 		const { linkedData } = article;
 		const { config } = article;
 		const elements = await enhance(
