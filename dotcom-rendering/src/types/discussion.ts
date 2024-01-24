@@ -6,14 +6,18 @@ import {
 	number,
 	object,
 	optional,
+	picklist,
 	recursive,
+	safeParse,
 	string,
+	transform,
 	unknown,
 	variant,
 } from 'valibot';
 import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
 import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
+import type { Result } from '../lib/result';
 
 export type CAPIPillar =
 	| 'news'
@@ -141,11 +145,83 @@ export interface CommentType {
 	};
 }
 
-export type CommentResponse = {
-	status: 'ok' | 'error';
-	statusCode: number;
-	message: string;
-	errorCode?: string;
+export type CommentResponseErrorCodes = (typeof errorCodes)[number];
+const errorCodes = [
+	'USERNAME_MISSING',
+	'EMPTY_COMMENT_BODY',
+	'COMMENT_TOO_LONG',
+	'USER_BANNED',
+	'IP_THROTTLED',
+	'DISCUSSION_CLOSED',
+	'PARENT_COMMENT_MODERATED',
+	'COMMENT_RATE_LIMIT_EXCEEDED',
+	'INVALID_PROTOCOL',
+	'AUTH_COOKIE_INVALID',
+	'READ-ONLY-MODE',
+	'API_CORS_BLOCKED',
+	'API_ERROR',
+	'EMAIL_VERIFIED',
+	'EMAIL_VERIFIED_FAIL',
+	'EMAIL_NOT_VALIDATED',
+] as const;
+
+const commentErrorSchema = object({
+	status: literal('error'),
+	errorCode: picklist(errorCodes),
+	message: string(),
+});
+
+const commentResponseSchema = variant('status', [
+	commentErrorSchema,
+	object({
+		status: literal('ok'),
+		// response.errorCode is the id of the comment that was created on the server
+		// it is returned as a string, so we need to cast to an number to be compatible
+		message: transform(string(), (input) => parseInt(input, 10)),
+	}),
+]);
+
+export const parseCommentResponse = (
+	data: unknown,
+): Result<
+	{ code: CommentResponseErrorCodes | 'ParsingError'; message: string },
+	number
+> => {
+	const { success, issues, output } = safeParse(commentResponseSchema, data);
+	if (!success) {
+		console.log(issues, output);
+		return {
+			kind: 'error',
+			error: { code: 'ParsingError', message: 'An error occured' },
+		};
+	}
+
+	return output.status === 'error'
+		? {
+				kind: 'error',
+				error: { code: output.errorCode, message: output.message },
+		  }
+		: { kind: 'ok', value: output.message };
+};
+
+const abuseResponseSchema = variant('status', [
+	object({
+		status: literal('error'),
+		message: string(),
+	}),
+	object({
+		status: literal('ok'),
+	}),
+]);
+
+export const parseAbuseResponse = (data: unknown): Result<string, true> => {
+	const { success, output } = safeParse(abuseResponseSchema, data);
+	if (!success) {
+		return { kind: 'error', error: 'An unknown error occured' };
+	}
+	return output.status === 'ok'
+		? { kind: 'ok', value: true }
+		: { kind: 'error', error: output.message };
 };
 
 type UserNameError = {

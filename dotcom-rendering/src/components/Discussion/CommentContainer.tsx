@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import type { comment, reply } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
 import type {
-	CommentResponse,
 	CommentType,
 	SignedInUser,
 	ThreadsType,
@@ -27,12 +27,8 @@ type Props = {
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
 	onRecommend?: (commentId: number) => Promise<boolean>;
-	onComment?: (shortUrl: string, body: string) => Promise<CommentResponse>;
-	onReply?: (
-		shortUrl: string,
-		body: string,
-		parentCommentId: number,
-	) => Promise<CommentResponse>;
+	onComment?: ReturnType<typeof comment>;
+	onReply?: ReturnType<typeof reply>;
 	onPreview?: (body: string) => Promise<string>;
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;

@@ -6,10 +6,10 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
+import type { comment, reply } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
-	CommentResponse,
 	CommentType,
 	FilterOptions,
 	SignedInUser,
@@ -32,12 +32,8 @@ type Props = {
 	onPermalinkClick: (commentId: number) => void;
 	apiKey: string;
 	onRecommend?: (commentId: number) => Promise<boolean>;
-	onComment?: (shortUrl: string, body: string) => Promise<CommentResponse>;
-	onReply?: (
-		shortUrl: string,
-		body: string,
-		parentCommentId: number,
-	) => Promise<CommentResponse>;
+	onComment?: ReturnType<typeof comment>;
+	onReply?: ReturnType<typeof reply>;
 	onPreview?: (body: string) => Promise<string>;
 	onExpand: () => void;
 	idApiUrl: string;

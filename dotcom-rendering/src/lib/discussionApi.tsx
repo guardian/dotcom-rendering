@@ -2,7 +2,7 @@ import { joinUrl } from '@guardian/libs';
 import { safeParse } from 'valibot';
 import type {
 	AdditionalHeadersType,
-	CommentResponse,
+	CommentResponseErrorCodes,
 	CommentType,
 	DiscussionOptions,
 	GetDiscussionSuccess,
@@ -10,7 +10,11 @@ import type {
 	ThreadsType,
 	UserNameResponse,
 } from '../types/discussion';
-import { discussionApiResponseSchema } from '../types/discussion';
+import {
+	discussionApiResponseSchema,
+	parseAbuseResponse,
+	parseCommentResponse,
+} from '../types/discussion';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
 import { fetchJSON } from './json';
@@ -135,11 +139,17 @@ export const preview = async (body: string): Promise<string> => {
 			...options.headers,
 		},
 	});
+
 	const json = await resp.json();
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- YOLO
 	return json.commentBody;
 };
+
+type CommentResponse = Result<
+	{ code: CommentResponseErrorCodes | GetDiscussionError; message: string },
+	number
+>;
 
 export const comment =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
@@ -152,7 +162,7 @@ export const comment =
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		const resp = await fetch(url, {
+		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			body: data.toString(),
 			headers: {
@@ -163,7 +173,17 @@ export const comment =
 			credentials: authOptions.credentials,
 		});
 
-		return resp.json();
+		if (jsonResult.kind === 'error') {
+			return {
+				kind: 'error',
+				error: {
+					code: jsonResult.error,
+					message: 'Could not retrieve the comment',
+				},
+			};
+		}
+
+		return parseCommentResponse(jsonResult.value);
 	};
 
 export const reply =
@@ -186,7 +206,7 @@ export const reply =
 		data.append('body', body);
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		const resp = await fetch(url, {
+		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			body: data.toString(),
 			headers: {
@@ -197,7 +217,17 @@ export const reply =
 			credentials: authOptions.credentials,
 		});
 
-		return resp.json();
+		if (jsonResult.kind === 'error') {
+			return {
+				kind: 'error',
+				error: {
+					code: jsonResult.error,
+					message: 'Could not retrieve the comment',
+				},
+			};
+		}
+
+		return parseCommentResponse(jsonResult.value);
 	};
 
 //todo: come back and parse the response properly and set a proper return type for the error case
@@ -232,7 +262,7 @@ export const reportAbuse = async ({
 	reason?: string;
 	email?: string;
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
-}): Promise<CommentResponse> => {
+}): Promise<Result<string, true>> => {
 	const url =
 		joinUrl(
 			options.baseUrl,
@@ -250,7 +280,7 @@ export const reportAbuse = async ({
 		? getOptionsHeadersWithOkta(authStatus)
 		: undefined;
 
-	const resp = await fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		body: data.toString(),
 		headers: {
@@ -261,7 +291,14 @@ export const reportAbuse = async ({
 		credentials: authOptions?.credentials,
 	});
 
-	return resp.json();
+	if (jsonResult.kind === 'error') {
+		return {
+			kind: 'error',
+			error: 'An unknown error occured',
+		};
+	}
+
+	return parseAbuseResponse(jsonResult.value);
 };
 
 export const recommend =
@@ -323,7 +360,7 @@ export const pickComment = async (
 		objAsParams(defaultParams);
 
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
-	const resp = await fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -333,7 +370,17 @@ export const pickComment = async (
 		credentials: authOptions.credentials,
 	});
 
-	return resp.json();
+	if (jsonResult.kind === 'error') {
+		return {
+			kind: 'error',
+			error: {
+				code: jsonResult.error,
+				message: 'Could not retrieve the comment',
+			},
+		};
+	}
+
+	return parseCommentResponse(jsonResult.value);
 };
 
 export const unPickComment = async (
@@ -349,7 +396,7 @@ export const unPickComment = async (
 		) + objAsParams(defaultParams);
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-	const resp = await fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -359,7 +406,17 @@ export const unPickComment = async (
 		credentials: authOptions.credentials,
 	});
 
-	return resp.json();
+	if (jsonResult.kind === 'error') {
+		return {
+			kind: 'error',
+			error: {
+				code: jsonResult.error,
+				message: 'Could not retrieve the comment',
+			},
+		};
+	}
+
+	return parseCommentResponse(jsonResult.value);
 };
 
 export const getMoreResponses = async (
