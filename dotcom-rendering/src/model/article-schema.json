@@ -4129,6 +4129,9 @@
                 "masterImage": {
                     "type": "string"
                 },
+                "image": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -4136,9 +4139,6 @@
                     "type": "string"
                 },
                 "webPublicationDate": {
-                    "type": "string"
-                },
-                "image": {
                     "type": "string"
                 },
                 "avatarUrl": {

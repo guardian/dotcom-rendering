@@ -1,13 +1,20 @@
 import { css } from '@emotion/react';
-import { joinUrl } from '@guardian/libs';
+import { joinUrl, storage } from '@guardian/libs';
 import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import { getCommentContext } from '../lib/getCommentContext';
+import {
+	getCommentContext,
+	initFiltersFromLocalStorage,
+} from '../lib/getCommentContext';
 import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
 import { palette as themePalette } from '../palette';
-import type { SignedInUser } from '../types/discussion';
+import type {
+	FilterOptions,
+	SignedInUser,
+	ThreadsType,
+} from '../types/discussion';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
@@ -47,6 +54,12 @@ const positionRelative = css`
 	position: relative;
 `;
 
+const rememberFilters = ({ threads, pageSize, orderBy }: FilterOptions) => {
+	storage.local.set('gu.prefs.discussion.threading', threads);
+	storage.local.set('gu.prefs.discussion.pagesize', pageSize);
+	storage.local.set('gu.prefs.discussion.order', orderBy);
+};
+
 const commentIdFromUrl = () => {
 	const { hash } = window.location;
 	if (!hash.includes('comment')) return;
@@ -55,6 +68,18 @@ const commentIdFromUrl = () => {
 	if (!commentId) return;
 
 	return parseInt(commentId, 10);
+};
+
+const filterByPermalinks = (
+	threads: ThreadsType,
+	hashCommentId: number | undefined,
+) => {
+	const permalinkBeingUsed =
+		hashCommentId !== undefined && !Number.isNaN(hashCommentId);
+
+	return threads === 'collapsed' && permalinkBeingUsed
+		? 'expanded'
+		: undefined;
 };
 
 export const Discussion = ({
@@ -66,7 +91,7 @@ export const Discussion = ({
 	user,
 	idApiUrl,
 }: Props) => {
-	const [commentPage, setCommentPage] = useState<number>();
+	const [commentPage, setCommentPage] = useState<number>(1);
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
 	const [commentOrderBy, setCommentOrderBy] = useState<
 		'newest' | 'oldest' | 'recommendations'
@@ -75,10 +100,29 @@ export const Discussion = ({
 	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
 		commentIdFromUrl(),
 	);
+	const [filters, setFilters] = useState<FilterOptions>(
+		initFiltersFromLocalStorage(),
+	);
 
 	const { commentCount, isClosedForComments } = useDiscussion(
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
+
+	useEffect(() => {
+		const orderByClosed = isClosedForComments ? 'oldest' : undefined;
+
+		setFilters((prevFilters) => ({
+			orderBy: commentOrderBy ?? orderByClosed ?? prevFilters.orderBy,
+			pageSize: commentPageSize ?? prevFilters.pageSize,
+			threads:
+				filterByPermalinks(prevFilters.threads, hashCommentId) ??
+				prevFilters.threads,
+		}));
+	}, [commentPageSize, commentOrderBy, isClosedForComments, hashCommentId]);
+
+	useEffect(() => {
+		rememberFilters(filters);
+	}, [filters]);
 
 	const handlePermalink = (commentId: number) => {
 		window.location.hash = `#comment-${commentId}`;
@@ -160,12 +204,9 @@ export const Discussion = ({
 					<Comments
 						user={user}
 						baseUrl={discussionApiUrl}
-						initialPage={commentPage}
-						pageSizeOverride={commentPageSize}
 						isClosedForComments={
 							!!isClosedForComments || !enableDiscussionSwitch
 						}
-						orderByOverride={commentOrderBy}
 						shortUrl={shortUrlId}
 						additionalHeaders={{
 							'D2-X-UID': discussionD2Uid,
@@ -179,6 +220,10 @@ export const Discussion = ({
 							setIsExpanded(true);
 						}}
 						idApiUrl={idApiUrl}
+						page={commentPage}
+						setPage={setCommentPage}
+						filters={filters}
+						setFilters={setFilters}
 					/>
 					{!isExpanded && (
 						<div id="discussion-overlay" css={overlayStyles} />

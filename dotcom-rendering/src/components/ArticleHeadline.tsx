@@ -44,10 +44,10 @@ const standardFont = css`
 
 const labsFont = css`
 	${textSans.xlarge({ fontWeight: 'bold' })};
-	line-height: 32px;
+	line-height: 2rem;
 	${from.tablet} {
 		${textSans.xxxlarge({ fontWeight: 'bold' })};
-		line-height: 38px;
+		line-height: 2.375rem;
 	}
 `;
 
@@ -60,7 +60,7 @@ const boldFont = css`
 
 const jumboFont = css`
 	${headline.xlarge({ fontWeight: 'bold' })};
-	line-height: 56px;
+	line-height: 3.5rem;
 	${until.desktop} {
 		${headline.medium({ fontWeight: 'bold' })};
 	}
@@ -68,21 +68,20 @@ const jumboFont = css`
 
 const jumboLabsFont = css`
 	${textSans.xxxlarge({ fontWeight: 'bold' })};
-	font-size: 50px;
-	line-height: 56px;
+	font-size: 3.125rem;
+	line-height: 3.5rem;
 	${until.desktop} {
-		${textSans.xxlarge({ fontWeight: 'bold' })};
-		font-size: 34px;
-		line-height: 38px;
+		${textSans.xxxlarge({ fontWeight: 'bold' })};
+		line-height: 2.375rem;
 	}
 `;
 
 const invertedFont = css`
 	${headline.medium({ fontWeight: 'bold' })};
-	line-height: 42px;
+	line-height: 2.625rem;
 	${until.tablet} {
 		${headline.small({ fontWeight: 'bold' })};
-		line-height: 35px;
+		line-height: 2.1875rem;
 	}
 `;
 

@@ -323,6 +323,8 @@ export const enhanceCards = (
 			(editionBranding) => editionBranding.edition.id === editionId,
 		)?.branding;
 
+		const imageSrc = decideImage(faciaCard);
+
 		return {
 			format,
 			dataLinkName,
@@ -336,12 +338,6 @@ export const enhanceCards = (
 							faciaCard.card.webPublicationDateOption,
 					  ).toISOString()
 					: undefined,
-			image: decideImage(faciaCard),
-			/** This property is coupled to the `image` property above.
-			 * There's room to create a codified coupling, but that has more far reaching changes */
-			imageAltText:
-				faciaCard.properties.maybeContent?.trail.trailPicture
-					?.allImages[0]?.fields.altText,
 			kickerText: decideKicker(faciaCard, cardInTagFront, pageId),
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
@@ -380,5 +376,13 @@ export const enhanceCards = (
 			branding,
 			slideshowImages: decideSlideshowImages(faciaCard),
 			showMainVideo: faciaCard.properties.showMainVideo,
+			...(!!imageSrc && {
+				image: {
+					src: imageSrc,
+					altText:
+						faciaCard.properties.maybeContent?.trail.trailPicture
+							?.allImages[0]?.fields.altText ?? '',
+				},
+			}),
 		};
 	});

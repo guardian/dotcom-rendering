@@ -65,7 +65,10 @@ const trails: TrailType[] = [
 			'UK Covid live: England lockdown to be eased in stages, says PM, amid reports of nationwide mass testing',
 		showByline: false,
 		byline: 'Yohannes Lowe',
-		image: 'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
+		image: {
+			src: 'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
+			altText: 'Some test alt text',
+		},
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
@@ -84,7 +87,10 @@ const trails: TrailType[] = [
 			'UK to infect up to 90 healthy volunteers with Covid in world first trial',
 		showByline: false,
 		byline: 'Nicola Davis and agency',
-		image: 'https://media.guim.co.uk/56d554a7c453dc1040f70453a01fefcb227f2055/0_0_3060_1836/master/3060.jpg',
+		image: {
+			src: 'https://media.guim.co.uk/56d554a7c453dc1040f70453a01fefcb227f2055/0_0_3060_1836/master/3060.jpg',
+			altText: 'Some test alt text',
+		},
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
@@ -108,7 +114,10 @@ const trails: TrailType[] = [
 			'Scottish government inadequately prepared for Covid – watchdog',
 		showByline: false,
 		byline: 'Libby Brooks Scotland correspondent',
-		image: 'https://media.guim.co.uk/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg',
+		image: {
+			src: 'https://media.guim.co.uk/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg',
+			altText: 'Some test alt text',
+		},
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
@@ -127,7 +136,10 @@ const trails: TrailType[] = [
 			'‘Encouraging’ signs for Covid vaccine as over-80s deaths fall in England',
 		showByline: false,
 		byline: 'Anna Leach, Ashley Kirk and Pamela Duncan',
-		image: 'https://media.guim.co.uk/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg',
+		image: {
+			src: 'https://media.guim.co.uk/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg',
+			altText: 'Some test alt text',
+		},
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
@@ -146,7 +158,10 @@ const trails: TrailType[] = [
 			'Contact tracing alone has little impact on curbing Covid spread, report finds',
 		showByline: false,
 		byline: 'Nicola Davis and Natalie Grover',
-		image: 'https://media.guim.co.uk/046002abfc13c8cf7f0c40454349eb0e95d842b2/0_147_3884_2331/master/3884.jpg',
+		image: {
+			src: 'https://media.guim.co.uk/046002abfc13c8cf7f0c40454349eb0e95d842b2/0_147_3884_2331/master/3884.jpg',
+			altText: 'Some test alt text',
+		},
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
@@ -165,7 +180,10 @@ const trails: TrailType[] = [
 			'Ethnicity and poverty are Covid risk factors, new Oxford modelling tool shows',
 		showByline: false,
 		byline: 'Sarah Boseley Health editor and Aamna Mohdin Community affairs correspondent',
-		image: 'https://media.guim.co.uk/9e47ac13c7ffc63ee56235e8ef64301d6ed96d03/0_90_3520_2111/master/3520.jpg',
+		image: {
+			src: 'https://media.guim.co.uk/9e47ac13c7ffc63ee56235e8ef64301d6ed96d03/0_90_3520_2111/master/3520.jpg',
+			altText: 'Some test alt text',
+		},
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
@@ -184,7 +202,10 @@ const trails: TrailType[] = [
 			'UK Covid: 799 more deaths and 10,625 new cases reported; Scottish schools in phased return from Monday – as it happened',
 		showByline: false,
 		byline: 'Nicola Slawson',
-		image: 'https://media.guim.co.uk/c01ad5ee63034e0f478959fc7a705c93debf8ba7/0_220_4104_2462/master/4104.jpg',
+		image: {
+			src: 'https://media.guim.co.uk/c01ad5ee63034e0f478959fc7a705c93debf8ba7/0_220_4104_2462/master/4104.jpg',
+			altText: 'Some test alt text',
+		},
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
@@ -203,7 +224,10 @@ const trails: TrailType[] = [
 			'QCovid: how improved algorithm can identify more higher-risk adults',
 		showByline: false,
 		byline: 'Sarah Boseley Health editor',
-		image: 'https://media.guim.co.uk/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg',
+		image: {
+			src: 'https://media.guim.co.uk/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg',
+			altText: 'Some test alt text',
+		},
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
@@ -286,7 +310,10 @@ export const SingleOpinionCarousel = () => {
 			'Golf’s obscene money list shows sport is in danger of losing the plot | Ewan Murray',
 		showByline: true,
 		byline: 'Ewan Murray',
-		image: 'https://i.guim.co.uk/img/media/06ddef097983c7590f45243f2128e4c8dffdcfbf/0_47_4170_2502/master/4170.jpg?width=300&quality=85&auto=format&fit=max&s=79cde35702ccaf33215ac48a2b11f44d',
+		image: {
+			src: 'https://i.guim.co.uk/img/media/06ddef097983c7590f45243f2128e4c8dffdcfbf/0_47_4170_2502/master/4170.jpg?width=300&quality=85&auto=format&fit=max&s=79cde35702ccaf33215ac48a2b11f44d',
+			altText: 'Some test alt text',
+		},
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Opinion,
@@ -408,7 +435,10 @@ export const AllCards = () => {
 			linkText: 'Standard card example',
 			showByline: false,
 			byline: 'Leyland Cecco in Toronto and agencies in New Delhi',
-			image: 'https://media.guim.co.uk/c45cbf03efddcb753c0eafd01b1d0fa5e30ee8c5/0_0_4418_2651/master/4418.jpg',
+			image: {
+				src: 'https://media.guim.co.uk/c45cbf03efddcb753c0eafd01b1d0fa5e30ee8c5/0_0_4418_2651/master/4418.jpg',
+				altText: 'Some test alt text',
+			},
 			format: {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.News,
@@ -424,7 +454,10 @@ export const AllCards = () => {
 			linkText: 'Live blog example',
 			showByline: true,
 			byline: 'Yohannes Lowe',
-			image: 'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
+			image: {
+				src: 'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
+				altText: 'Some test alt text',
+			},
 			format: {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.News,
@@ -443,7 +476,10 @@ export const AllCards = () => {
 			linkText: 'Special report example',
 			showByline: false,
 			byline: 'Jennifer Rankin in Brussels',
-			image: 'https://i.guim.co.uk/img/media/e952252773480240cb4720ba15f23cb30e8a18a0/0_108_3000_1799/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=8def8de1cbc8236aa0f33208a0a45e5d',
+			image: {
+				src: 'https://i.guim.co.uk/img/media/e952252773480240cb4720ba15f23cb30e8a18a0/0_108_3000_1799/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=8def8de1cbc8236aa0f33208a0a45e5d',
+				altText: 'Some test alt text',
+			},
 			ageWarning: '1 year',
 			format: {
 				display: ArticleDisplay.Standard,
@@ -460,7 +496,10 @@ export const AllCards = () => {
 			linkText: 'Opinion card example',
 			showByline: true,
 			byline: 'Kevin Anderson and Simon Oldridge',
-			image: 'https://i.guim.co.uk/img/media/3c5163fb3a3fcb02a94454ad14967020bf015a00/271_0_3111_1868/master/3111.jpg?width=300&quality=85&auto=format&fit=max&s=093127972154c691b8525cbd8a5e6048',
+			image: {
+				src: 'https://i.guim.co.uk/img/media/3c5163fb3a3fcb02a94454ad14967020bf015a00/271_0_3111_1868/master/3111.jpg?width=300&quality=85&auto=format&fit=max&s=093127972154c691b8525cbd8a5e6048',
+				altText: 'Some test alt text',
+			},
 			format: {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Opinion,
@@ -484,7 +523,10 @@ export const AllCards = () => {
 				'Golf’s obscene money list shows sport is in danger of losing the plot | Ewan Murray',
 			showByline: true,
 			byline: 'Ewan Murray',
-			image: 'https://i.guim.co.uk/img/media/06ddef097983c7590f45243f2128e4c8dffdcfbf/0_47_4170_2502/master/4170.jpg?width=300&quality=85&auto=format&fit=max&s=79cde35702ccaf33215ac48a2b11f44d',
+			image: {
+				src: 'https://i.guim.co.uk/img/media/06ddef097983c7590f45243f2128e4c8dffdcfbf/0_47_4170_2502/master/4170.jpg?width=300&quality=85&auto=format&fit=max&s=79cde35702ccaf33215ac48a2b11f44d',
+				altText: 'Some test alt text',
+			},
 			format: {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Sport,
@@ -501,7 +543,10 @@ export const AllCards = () => {
 				'A Christmas snack: Rukmini Iyer’s quick and easy recipe for carrot and brie tart',
 			showByline: false,
 			byline: 'Rukmini Iyer',
-			image: 'https://i.guim.co.uk/img/media/1d07cbd35405c4fdd109d5a22179003a1ce07cde/11_215_3466_2080/master/3466.jpg?width=300&quality=85&auto=format&fit=max&s=9471ec980407e6a06fab1288bbfed493',
+			image: {
+				src: 'https://i.guim.co.uk/img/media/1d07cbd35405c4fdd109d5a22179003a1ce07cde/11_215_3466_2080/master/3466.jpg?width=300&quality=85&auto=format&fit=max&s=9471ec980407e6a06fab1288bbfed493',
+				altText: 'Some test alt text',
+			},
 			format: {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Lifestyle,
@@ -518,7 +563,10 @@ export const AllCards = () => {
 			linkText: 'Video card example',
 			showByline: false,
 			byline: 'Jamie Grierson (now), Martin Belam and Helen Livingstone (earlier)',
-			image: 'https://i.guim.co.uk/img/media/f9684ebaf7096bb24d34854f555351391ff2258e/0_468_5500_3299/master/5500.jpg?width=300&quality=85&auto=format&fit=max&s=10d0a2aa1f6f0d19e569047f9215f588',
+			image: {
+				src: 'https://i.guim.co.uk/img/media/f9684ebaf7096bb24d34854f555351391ff2258e/0_468_5500_3299/master/5500.jpg?width=300&quality=85&auto=format&fit=max&s=10d0a2aa1f6f0d19e569047f9215f588',
+				altText: 'Some test alt text',
+			},
 			format: {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.News,
@@ -534,7 +582,10 @@ export const AllCards = () => {
 			linkText: 'Galleries example',
 			showByline: false,
 			byline: 'Aneesa Ahmed, Ben Beaumont-Thomas and Laura Snapes',
-			image: 'https://i.guim.co.uk/img/media/d912f07f4641f5a2446c0b6c588926359e79e70d/0_0_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=e3ac1514bae6e012f009618480505c11',
+			image: {
+				src: 'https://i.guim.co.uk/img/media/d912f07f4641f5a2446c0b6c588926359e79e70d/0_0_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=e3ac1514bae6e012f009618480505c11',
+				altText: 'Some test alt text',
+			},
 			format: {
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.Culture,
@@ -551,7 +602,10 @@ export const AllCards = () => {
 			linkText: 'Podcast example',
 			showByline: false,
 			byline: 'Ellie Violet Bramley',
-			image: 'https://i.guim.co.uk/img/media/8c3c93289db9c09199ed9c3c0146a2b6ef4d5a20/80_102_2180_1308/master/2180.jpg?width=300&quality=85&auto=format&fit=max&s=4b61a73f2194fe469d85a6940d22a406',
+			image: {
+				src: 'https://i.guim.co.uk/img/media/8c3c93289db9c09199ed9c3c0146a2b6ef4d5a20/80_102_2180_1308/master/2180.jpg?width=300&quality=85&auto=format&fit=max&s=4b61a73f2194fe469d85a6940d22a406',
+				altText: 'Some test alt text',
+			},
 			format: {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Lifestyle,

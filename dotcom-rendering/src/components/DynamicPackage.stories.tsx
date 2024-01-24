@@ -431,7 +431,10 @@ export const SpecialReportWithoutPalette = () => (
 						showLivePlayable: false,
 						isExternalLink: false,
 						webPublicationDate: '2016-04-08T12:15:09.000Z',
-						image: 'https://media.guim.co.uk/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/3000.jpg',
+						image: {
+							src: 'https://media.guim.co.uk/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/3000.jpg',
+							altText: 'An office building',
+						},
 						isBoosted: false,
 						trailText:
 							'As Panama Papers shine light on offshore world, Luke Harding takes a closer look at company exploiting tropical tax havens',

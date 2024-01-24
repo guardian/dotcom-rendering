@@ -74,7 +74,10 @@ export const MiniCard = ({ trail, showImage, containerPalette }: Props) => {
 				cssOverrides={[linkStyles]}
 			>
 				{showImage && !!trail.image && (
-					<MiniCardPicture image={trail.image} alt={trail.headline} />
+					<MiniCardPicture
+						image={trail.image.src}
+						alt={trail.image.altText || trail.headline}
+					/>
 				)}
 				<span>{trail.headline}</span>
 			</Link>
