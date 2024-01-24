@@ -66,8 +66,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				isActive={true}
-				setIsActive={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
 			/>,
 		);
 
@@ -105,8 +105,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				isActive={true}
-				setIsActive={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
 			/>,
 		);
 
@@ -143,8 +143,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				isActive={true}
-				setIsActive={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
 			/>,
 		);
 
@@ -182,8 +182,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				isActive={true}
-				setIsActive={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
 			/>,
 		);
 

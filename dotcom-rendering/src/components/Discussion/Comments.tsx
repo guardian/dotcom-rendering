@@ -305,8 +305,12 @@ export const Comments = ({
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
 											onRecommend={onRecommend}
-											isActive={isCommentFormActive}
-											setIsActive={setIsCommentFormActive}
+											isCommentFormActive={
+												isCommentFormActive
+											}
+											setIsCommentFormActive={
+												setIsCommentFormActive
+											}
 										/>
 									</li>
 								))}
@@ -382,8 +386,10 @@ export const Comments = ({
 									onPermalinkClick={onPermalinkClick}
 									onRecommend={onRecommend}
 									onReply={onReply}
-									isActive={isCommentFormActive}
-									setIsActive={setIsCommentFormActive}
+									isCommentFormActive={isCommentFormActive}
+									setIsCommentFormActive={
+										setIsCommentFormActive
+									}
 								/>
 							</li>
 						))}
