@@ -30,14 +30,11 @@ export interface EditionBranding {
 	branding?: Branding;
 }
 
-/**
- * Branding that can be applied to an entire collection on a front
- */
-export type CollectionBranding = {
+type BaseCollectionBranding<Kind extends BrandingType['name']> = {
 	/**
 	 * A collection has branding that is funded by a third party
 	 */
-	kind: BrandingType['name'];
+	kind: Kind;
 	branding: Branding;
 	/**
 	 * In certain circumstances a collection might display the branding on behalf of an entire front
@@ -54,3 +51,11 @@ export type CollectionBranding = {
 	 */
 	hasMultipleBranding: boolean;
 };
+
+/**
+ * Branding that can be applied to an entire collection on a front
+ */
+export type CollectionBranding =
+	| BaseCollectionBranding<'foundation'>
+	| BaseCollectionBranding<'paid-content'>
+	| BaseCollectionBranding<'sponsored'>;

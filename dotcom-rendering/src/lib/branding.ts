@@ -124,7 +124,7 @@ export const badgeFromBranding = (
 			return undefined;
 		}
 		default: {
-			return assertUnreachable();
+			return assertUnreachable(collectionBranding);
 		}
 	}
 };
