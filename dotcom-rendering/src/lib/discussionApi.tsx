@@ -92,20 +92,15 @@ export const getDiscussion = async (
 
 	const json = await resp.json();
 
-	if (
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		json.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
-	) {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+	return json.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT' ?
 		// We need force a refetch with unthreaded set, as we don't know
 		// that this discussion is only available in linear format until
 		// we get the response to tell us
-		return getDiscussion(shortUrl, {
+		getDiscussion(shortUrl, {
 			...opts,
 			...{ threads: 'unthreaded' },
-		});
-	}
-
-	return json;
+		}) : json
 };
 
 export const preview = async (body: string): Promise<string> => {
