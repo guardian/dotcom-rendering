@@ -305,9 +305,7 @@ export const CommentForm = ({
 		setBody('');
 		setShowPreview(false);
 		setIsActive(false);
-		if (setCommentBeingRepliedTo) {
-			setCommentBeingRepliedTo();
-		}
+		setCommentBeingRepliedTo?.();
 	};
 
 	const submitForm = async () => {
@@ -499,7 +497,8 @@ export const CommentForm = ({
 						setBody(e.target.value || '');
 					}}
 					value={body}
-					onFocus={() => setIsActive(isActive)}
+					onFocus={() => setIsActive(true)}
+					onBlur={() => setIsActive(false)}
 				/>
 				<div css={bottomContainer}>
 					<Row>
