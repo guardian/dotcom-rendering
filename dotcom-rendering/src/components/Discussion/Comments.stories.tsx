@@ -4,12 +4,11 @@ import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
 import { discussionWithTwoComments } from '../../../fixtures/manual/discussionWithTwoComments';
+import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
 import type { FilterOptions, SignedInUser } from '../../types/discussion';
 import { Comments } from './Comments';
 
 export default { component: Comments, title: 'Discussion/App' };
-
-const { discussion, pages } = discussionMock;
 
 const aUser: SignedInUser = {
 	profile: {
@@ -49,7 +48,7 @@ export const LoggedOutHiddenPicks = () => (
 		`}
 	>
 		<Comments
-			shortUrl={discussion.key}
+			shortUrl={discussionMock.discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
 			additionalHeaders={{
@@ -65,10 +64,10 @@ export const LoggedOutHiddenPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={discussion.commentCount}
+			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
-			totalPages={pages}
-			comments={discussion.comments}
+			totalPages={discussionMock.pages}
+			comments={discussionMock.discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -91,7 +90,7 @@ export const InitialPage = () => (
 		`}
 	>
 		<Comments
-			shortUrl={discussion.key}
+			shortUrl={discussionMock.discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
 			additionalHeaders={{
@@ -107,10 +106,10 @@ export const InitialPage = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={discussion.commentCount}
+			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
-			totalPages={pages}
-			comments={discussion.comments}
+			totalPages={discussionMock.pages}
+			comments={discussionMock.discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -150,10 +149,10 @@ export const LoggedInHiddenNoPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={discussion.commentCount}
+			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
-			totalPages={pages}
-			comments={discussion.comments}
+			totalPages={discussionMock.pages}
+			comments={discussionMock.discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -187,10 +186,10 @@ export const LoggedIn = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={discussion.commentCount}
+			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
-			totalPages={pages}
-			comments={discussion.comments}
+			totalPages={discussionMock.pages}
+			comments={discussionMock.discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -258,10 +257,10 @@ export const LoggedOutHiddenNoPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={0}
+			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={0}
-			comments={[]}
+			comments={discussionMock.discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -285,7 +284,7 @@ export const Closed = () => (
 		`}
 	>
 		<Comments
-			shortUrl={discussion.key}
+			shortUrl={discussionMock.discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={true}
 			user={aUser}
@@ -302,10 +301,10 @@ export const Closed = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={discussion.commentCount}
+			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
-			totalPages={pages}
-			comments={discussion.comments}
+			totalPages={discussionMock.pages}
+			comments={discussionMock.discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>
@@ -370,7 +369,7 @@ export const LegacyDiscussion = () => (
 		`}
 	>
 		<Comments
-			shortUrl="p/32255" // A 'legacy' discussion that doesn't allow threading
+			shortUrl={legacyDiscussionWithoutThreading.discussion.key} // A 'legacy' discussion that doesn't allow threading
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
 			additionalHeaders={{
@@ -386,10 +385,12 @@ export const LegacyDiscussion = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
-			commentCount={discussion.commentCount}
+			commentCount={
+				legacyDiscussionWithoutThreading.discussion.commentCount
+			}
 			loading={false}
-			totalPages={pages}
-			comments={discussion.comments}
+			totalPages={legacyDiscussionWithoutThreading.pages}
+			comments={legacyDiscussionWithoutThreading.discussion.comments}
 			setComments={() => {}}
 		/>
 	</div>

@@ -174,6 +174,12 @@ export const Discussion = ({
 	}, [discussionApiUrl, hashCommentId]);
 
 	useEffect(() => {
+		if (window.location.hash === '#comments') {
+			setIsExpanded(true);
+		}
+	}, []);
+
+	useEffect(() => {
 		// There's no point showing the view more button if there isn't much more to view
 		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
 			setIsExpanded(true);
