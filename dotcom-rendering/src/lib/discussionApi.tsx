@@ -93,14 +93,15 @@ export const getDiscussion = async (
 	const json = await resp.json();
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	return json.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT' ?
-		// We need force a refetch with unthreaded set, as we don't know
-		// that this discussion is only available in linear format until
-		// we get the response to tell us
-		getDiscussion(shortUrl, {
-			...opts,
-			...{ threads: 'unthreaded' },
-		}) : json
+	return json.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
+		? // We need force a refetch with unthreaded set, as we don't know
+		  // that this discussion is only available in linear format until
+		  // we get the response to tell us
+		  getDiscussion(shortUrl, {
+				...opts,
+				...{ threads: 'unthreaded' },
+		  })
+		: json;
 };
 
 export const preview = async (body: string): Promise<string> => {
@@ -180,7 +181,7 @@ export const reply =
 			credentials: authOptions.credentials,
 		});
 
-		return await resp.json();
+		return resp.json();
 	};
 
 //todo: come back and parse the response properly and set a proper return type for the error case
