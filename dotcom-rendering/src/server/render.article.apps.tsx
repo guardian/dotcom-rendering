@@ -1,7 +1,11 @@
 import { ArticleDesign, isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
-import { generateScriptTags, getPathFromManifest } from '../lib/assets';
+import {
+	ASSET_ORIGIN,
+	generateScriptTags,
+	getPathFromManifest,
+} from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { createGuardian } from '../model/guardian';
@@ -34,8 +38,30 @@ export const renderArticle = (
 		</ConfigProvider>,
 	);
 
-	const clientScripts = [getPathFromManifest('client.apps', 'index.js')];
-	const scriptTags = generateScriptTags([...clientScripts].filter(isString));
+	// We want to only insert script tags for the elements or main media elements on this page view
+	// so we need to check what elements we have and use the mapping to the the chunk name
+	const elements: FEElement[] = article.blocks
+		.map((block) => block.elements)
+		.flat();
+	const pageHasTweetElements = elements.some(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.TweetBlockElement',
+	);
+	const pageHasNonBootInteractiveElements = elements.some(
+		(element) =>
+			element._type ===
+				'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
+			element.scriptUrl !==
+				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
+	);
+
+	const clientScripts = [
+		getPathFromManifest('client.apps', 'index.js'),
+		pageHasNonBootInteractiveElements &&
+			`${ASSET_ORIGIN}assets/static/js/curl-with-js-and-domReady.js`,
+	].filter(isString);
+	const scriptTags = generateScriptTags([...clientScripts]);
 
 	const initTwitter = `
 <script>
@@ -77,17 +103,6 @@ window.twttr = (function(d, s, id) {
 		googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
 		unknownConfig: article.config,
 	});
-
-	// We want to only insert script tags for the elements or main media elements on this page view
-	// so we need to check what elements we have and use the mapping to the the chunk name
-	const elements: FEElement[] = article.blocks
-		.map((block) => block.elements)
-		.flat();
-	const pageHasTweetElements = elements.some(
-		(element) =>
-			element._type ===
-			'model.dotcomrendering.pageElements.TweetBlockElement',
-	);
 
 	const renderedPage = htmlPageTemplate({
 		css: extractedCss,
