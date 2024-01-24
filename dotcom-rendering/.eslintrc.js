@@ -170,9 +170,6 @@ module.exports = {
 
 		'unicorn/prefer-node-protocol': 'error',
 
-		'ssr-friendly/no-dom-globals-in-module-scope': 'warn',
-		'ssr-friendly/no-dom-globals-in-react-fc': 'warn',
-
 		'no-restricted-syntax': [
 			'error',
 			{
