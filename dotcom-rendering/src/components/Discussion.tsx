@@ -7,7 +7,6 @@ import {
 	getCommentContext,
 	initFiltersFromLocalStorage,
 } from '../lib/getCommentContext';
-import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
 import { palette as themePalette } from '../palette';
 import type {
@@ -163,16 +162,6 @@ export const Discussion = ({
 	}, []);
 
 	useEffect(() => {
-		const pendingElements = document.querySelectorAll<HTMLElement>(
-			'.discussion > .pending',
-		);
-		for (const element of pendingElements) {
-			element.classList.add('reveal');
-			element.classList.remove('pending');
-		}
-	}, []);
-
-	useEffect(() => {
 		// There's no point showing the view more button if there isn't much more to view
 		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
 			setIsExpanded(true);
@@ -181,54 +170,49 @@ export const Discussion = ({
 
 	return (
 		<>
-			<div
-				css={[positionRelative, revealStyles, !isExpanded && fixHeight]}
-				className="discussion"
-			>
-				<div className="pending">
-					<Hide when="above" breakpoint="leftCol">
-						<div
-							data-testid="discussion"
-							css={css`
-								padding-bottom: ${space[2]}px;
-							`}
-						>
-							<SignedInAs
-								enableDiscussionSwitch={enableDiscussionSwitch}
-								user={user?.profile}
-								commentCount={commentCount}
-								isClosedForComments={isClosedForComments}
-							/>
-						</div>
-					</Hide>
-					<Comments
-						user={user}
-						baseUrl={discussionApiUrl}
-						isClosedForComments={
-							!!isClosedForComments || !enableDiscussionSwitch
-						}
-						shortUrl={shortUrlId}
-						additionalHeaders={{
-							'D2-X-UID': discussionD2Uid,
-							'GU-Client': discussionApiClientHeader,
-						}}
-						expanded={isExpanded}
-						commentToScrollTo={hashCommentId}
-						onPermalinkClick={handlePermalink}
-						apiKey="dotcom-rendering"
-						onExpand={() => {
-							setIsExpanded(true);
-						}}
-						idApiUrl={idApiUrl}
-						page={commentPage}
-						setPage={setCommentPage}
-						filters={filters}
-						setFilters={setFilters}
-					/>
-					{!isExpanded && (
-						<div id="discussion-overlay" css={overlayStyles} />
-					)}
-				</div>
+			<div css={[positionRelative, !isExpanded && fixHeight]}>
+				<Hide when="above" breakpoint="leftCol">
+					<div
+						data-testid="discussion"
+						css={css`
+							padding-bottom: ${space[2]}px;
+						`}
+					>
+						<SignedInAs
+							enableDiscussionSwitch={enableDiscussionSwitch}
+							user={user?.profile}
+							commentCount={commentCount}
+							isClosedForComments={isClosedForComments}
+						/>
+					</div>
+				</Hide>
+				<Comments
+					user={user}
+					baseUrl={discussionApiUrl}
+					isClosedForComments={
+						!!isClosedForComments || !enableDiscussionSwitch
+					}
+					shortUrl={shortUrlId}
+					additionalHeaders={{
+						'D2-X-UID': discussionD2Uid,
+						'GU-Client': discussionApiClientHeader,
+					}}
+					expanded={isExpanded}
+					commentToScrollTo={hashCommentId}
+					onPermalinkClick={handlePermalink}
+					apiKey="dotcom-rendering"
+					onExpand={() => {
+						setIsExpanded(true);
+					}}
+					idApiUrl={idApiUrl}
+					page={commentPage}
+					setPage={setCommentPage}
+					filters={filters}
+					setFilters={setFilters}
+				/>
+				{!isExpanded && (
+					<div id="discussion-overlay" css={overlayStyles} />
+				)}
 			</div>
 			{!isExpanded && (
 				<Button
