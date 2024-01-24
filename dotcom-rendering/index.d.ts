@@ -213,7 +213,7 @@ type PageTypeType = {
 	isSensitive: boolean;
 };
 
-type MatchType = 'CricketMatchType' | 'FootballMatchType';
+type MatchType = 'CricketMatchType' | 'FootballMatchType' | 'RugbyMatchType';
 
 type CricketTeam = {
 	name: string;

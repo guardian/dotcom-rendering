@@ -4794,7 +4794,8 @@
         "MatchType": {
             "enum": [
                 "CricketMatchType",
-                "FootballMatchType"
+                "FootballMatchType",
+                "RugbyMatchType"
             ],
             "type": "string"
         },

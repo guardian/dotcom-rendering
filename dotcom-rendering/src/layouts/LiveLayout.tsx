@@ -63,6 +63,7 @@ import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { GetRugbyMatchNav } from '../components/GetRugbyMatchNav.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -297,6 +298,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
 
+	const rugbyMatchUrl =
+		article.matchType === 'RugbyMatchType' ? article.matchUrl : undefined;
+
 	const showTopicFilterBank =
 		!!article.config.switches.automaticFilters &&
 		hasRelevantTopics(article.availableTopics);
@@ -494,6 +498,52 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</Section>
+				) : rugbyMatchUrl ? (
+					<Section
+						showTopBorder={false}
+						backgroundColour={themePalette(
+							'--match-nav-background',
+						)}
+						borderColour={themePalette('--headline-border')}
+						leftContent={
+							<ArticleTitle
+								format={format}
+								tags={article.tags}
+								sectionLabel={article.sectionLabel}
+								sectionUrl={article.sectionUrl}
+								guardianBaseURL={article.guardianBaseURL}
+								badge={article.badge?.enhanced}
+								isMatch={true}
+							/>
+						}
+						leftColSize="wide"
+						padContent={false}
+						verticalMargins={false}
+					>
+						<Hide above="leftCol">
+							<ArticleTitle
+								format={format}
+								tags={article.tags}
+								sectionLabel={article.sectionLabel}
+								sectionUrl={article.sectionUrl}
+								guardianBaseURL={article.guardianBaseURL}
+								badge={article.badge?.enhanced}
+								isMatch={true}
+							/>
+						</Hide>
+
+						<Island priority="critical">
+							<GetRugbyMatchNav
+								matchUrl={rugbyMatchUrl}
+								format={format}
+								headlineString={article.headline}
+								tags={article.tags}
+								webPublicationDateDeprecated={
+									article.webPublicationDateDeprecated
+								}
+							/>
+						</Island>
+					</Section>
 				) : (
 					<Section
 						fullWidth={true}
@@ -516,7 +566,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
-									{!footballMatchUrl && (
+									{!footballMatchUrl && !rugbyMatchUrl && (
 										<ArticleHeadline
 											format={format}
 											headlineString={article.headline}
@@ -539,9 +589,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											size="large"
 										/>
 									</div>
-								) : (
-									<></>
-								)}
+								) : null}
 							</GridItem>
 						</HeadlineGrid>
 					</Section>
