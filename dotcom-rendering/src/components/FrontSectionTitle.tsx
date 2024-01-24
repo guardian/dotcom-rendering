@@ -37,24 +37,6 @@ const aboutThisLinkStyles = css`
 
 export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 	switch (collectionBranding?.kind) {
-		case 'editorial': {
-			const {
-				badge: { imageSrc, href },
-			} = collectionBranding;
-			return (
-				<>
-					<Hide until="leftCol">
-						<Badge imageSrc={imageSrc} href={href} />
-					</Hide>
-					<div css={titleStyle}>
-						<Hide from="leftCol">
-							<Badge imageSrc={imageSrc} href={href} />
-						</Hide>
-						{title}
-					</div>
-				</>
-			);
-		}
 		case 'foundation': {
 			const {
 				branding: { logo },

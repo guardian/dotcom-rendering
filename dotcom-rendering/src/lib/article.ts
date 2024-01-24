@@ -7,7 +7,6 @@ import { enhanceCommercialProperties } from '../model/enhanceCommercialPropertie
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../model/validate';
-import { type FEArticleBadgeType } from '../types/badge';
 import { type DCRArticle } from '../types/frontend';
 import { type RenderingTarget } from '../types/renderingTarget';
 
@@ -19,16 +18,6 @@ const enhancePinnedPost = (
 	return block ? enhanceBlocks([block], format, renderingTarget)[0] : block;
 };
 
-const enhanceBadge = (badge?: FEArticleBadgeType) =>
-	badge
-		? {
-				...badge,
-				enhanced: {
-					href: `/${badge.seriesTag}`,
-					imageSrc: badge.imageUrl,
-				},
-		  }
-		: undefined;
 export const enhanceArticleType = (
 	body: unknown,
 	renderingTarget: RenderingTarget,
@@ -79,6 +68,5 @@ export const enhanceArticleType = (
 		 */
 		imagesForLightbox,
 		imagesForAppsLightbox: appsLightboxImages(imagesForLightbox),
-		badge: enhanceBadge(data.badge),
 	};
 };

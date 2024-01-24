@@ -454,7 +454,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										guardianBaseURL={
 											article.guardianBaseURL
 										}
-										badge={article.badge?.enhanced}
 									/>
 								</div>
 							</GridItem>
@@ -723,7 +722,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							article.showBottomSocialButtons &&
 							renderingTarget === 'Web'
 						}
-						badge={article.badge?.enhanced}
 					/>
 				</Section>
 				{renderAds && (

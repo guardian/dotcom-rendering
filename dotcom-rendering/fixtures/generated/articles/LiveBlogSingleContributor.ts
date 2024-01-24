@@ -1882,7 +1882,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					],
 				},
 			],
-			elementId: 'd9162515-7840-465d-9e13-9e8a6f588d69',
+			elementId: 'bdc84e71-abcc-429b-9d5e-f57553ff2299',
 			position: 1,
 			lightbox: {
 				caption: 'Rishi Sunak and Keir Starmer at PMQs.',
@@ -1899,7 +1899,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>The UK “isn’t being governed” as the Conservative party fights among itself, Keir Starmer has told Rishi Sunak at the <a href="https://www.theguardian.com/politics/2023/dec/13/uk-isnt-being-governed-keir-starmer-tells-sunak">last prime minister’s questions of the year</a>, challenging him in particular on rates of homelessness.</strong></p></li>\n <li><p><strong>Mark Drakeford has announced he is <a href="https://www.theguardian.com/politics/2023/dec/13/mark-drakeford-stepping-down-wales-first-minister-labour">stepping down as the Welsh first minister</a> and a contest for the leadership of Welsh Labour will begin shortly.</strong></p></li>\n <li><p><strong><a href="https://www.theguardian.com/business/2023/dec/13/uk-economy-shrinks-unexpectedly-as-households-feel-squeeze">Britain’s economy shrank unexpectedly</a> by 0.3% in October as households and businesses came under growing pressure amid the cost of living crisis, raising the chances of a recession.</strong></p></li>\n <li><p><strong>The BBC is likely to be <a href="https://www.theguardian.com/football/2023/dec/13/bbc-likely-to-look-into-lineker-tweets-about-tory-mps-says-candidate-for-chair">“looking into” Gary Lineker’s criticism of Conservative politicians</a>, which appear to breach the BBC’s social media guidelines, Samir Shah, the government’s proposed new chair of the corporation, has said.</strong></p></li>\n</ul>',
-					elementId: '8a2286a6-957c-4a35-840e-12f5a5d9af46',
+					elementId: '903267ff-fbda-4621-912b-96d4b2afde4d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2207,7 +2207,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 							],
 						},
 					],
-					elementId: 'c0efb95e-4896-4f6c-81d4-18fe1a711acd',
+					elementId: 'ea09f8a0-be5c-4720-8aee-bc6400db505e',
 					position: 2,
 					lightbox: {
 						caption: 'Keir Starmer at PMQs.',
@@ -2238,22 +2238,22 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As the home affairs committee hearing was ending, <strong>Diana Johnson</strong>, the committee chair, asked about the amount of money spent on the Rwanda scheme.</p>',
-					elementId: '46c446a3-4fe1-4118-ac56-89962c1b061a',
+					elementId: '3743f9f7-93c5-44d1-877e-50d0c4a466a4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>At the end of last week, the Home Office revealed that in addition to the initial £140m spent on the scheme, another £100m was paid in April and £50m is due to be paid next year.</p>',
-					elementId: 'd20a0223-80a5-4213-aad0-ca4572f3c88d',
+					elementId: 'ac3bcd19-4493-4693-babb-7722499f538c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In the Commons yesterday, Yvette Cooper, the shadow home secretary, claimed, on the basis of an answer from James Cleverly, that he was admitting a <a href="https://www.theguardian.com/politics/live/2023/dec/12/tory-rebels-rishi-sunak-rwanda-bill-asylum-keir-starmer-labour-david-cameron-uk-politics-latest?page=with:block-65785add8f0889f38750a45d#block-65785add8f0889f38750a45d">further £100m would be spent</a> in future years.</p>',
-					elementId: 'd229207a-0a57-4ef0-a33e-74b9c45366d0',
+					elementId: 'dc22a2c4-259f-49fc-9f42-4f9ffc05afaa',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But <strong>Michael Tomlinson</strong>, the minister for illegal migration, told Johnson he could just confirm the £100m paid this year and the £50m due to be paid next year. He said information about further payments in the future would be released in due course.</p>',
-					elementId: '225c0aae-2182-4e58-ada4-861a964cbead',
+					elementId: '69bb57af-dd7f-4397-a598-034f487382c7',
 				},
 			],
 			attributes: {
@@ -2278,47 +2278,47 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tom Pursglove</strong>, the minister for legal migration, is now being asked about the changes to family visa rules. (See<a href="https://www.theguardian.com/politics/live/2023/dec/13/james-cleverly-rwanda-bill-immigration-asylum-rishi-sunak-keir-starmer-pmqs-politics-live-latest?page=with:block-6579b1808f0889f38750b330#block-6579b1808f0889f38750b330"> 1.38pm</a>.)</p>',
-					elementId: '94eac008-baae-48bf-af43-e2e4f15d8d58',
+					elementId: '74c32d32-4909-4302-871e-4bab5887b660',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tim Loughton</strong> (Con) says <a href="https://www.theguardian.com/politics/james-cleverly" data-component="auto-linked-tag">James Cleverly</a>, the home secretary, gave an interview saying the new rules would not be retrospectively applied. Is that correct?</p>',
-					elementId: 'da60e836-323f-481a-819d-70bae3c342a6',
+					elementId: 'f3afe879-1f18-43d0-b15b-c73f3eb99a15',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says applications already lodged will be treated under the rules as they are now.</p>',
-					elementId: '2eafdc92-b3b2-4b9a-b94c-b6fb4ff4019f',
+					elementId: 'cb9bc8be-cb55-4024-b943-2232c50774ce',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>And the Home Office does not intend to apply the rules retrospectively.</p>',
-					elementId: '75b8ee27-6648-4d45-b587-99aaa9c47d95',
+					elementId: '4ecac6ce-f883-4299-8344-3b89aaf906e6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: So my constituent reapplying for a visa won’t have to meet the new threshold? And what happens when they have to reapply again in future.</em></p>',
-					elementId: 'ff0c9e7b-4488-440e-8e9e-31fccd017345',
+					elementId: '1b240670-97e5-4f7a-b5f1-946670a1748b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says, in the first case, the new rules will not apply. And, going ahead, he says rules will not be applied through a retrospective prism.</p>',
-					elementId: 'ad373f1c-8410-49d0-a881-ac0a3809e8e0',
+					elementId: 'bd4c4ef8-694f-4717-81ea-fc8a278fff9e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Loughton</strong> says he thinks Pursglove is saying that, for people with visas already, not just the first renewal, but all subsequent renewals will be under the old salary threshold, not the new one. Is that right?</p>',
-					elementId: '349980c7-7187-470e-840a-eb4ffa2a1781',
+					elementId: '2cd19544-8b18-4ba1-8807-0198a1e36ee3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says he needs to be allowed to make the announcement in the proper way.</p>',
-					elementId: '6e085f2f-ee72-49de-aca1-fd6fec7980d9',
+					elementId: '20128882-ee49-4b05-9f81-a72875d3eb2e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But, with a bit of nodding of his head, he seems to reassure Loughton that his understanding is correct.</p>',
-					elementId: 'a81ffd68-9e40-43aa-8c78-7ab3fe91f21e',
+					elementId: '9efb1c27-9735-4623-a759-6b41e2c6bf7c',
 				},
 			],
 			attributes: {
@@ -2344,17 +2344,17 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The <a href="https://committees.parliament.uk/publications/42574/documents/211669/default/">Rycroft letter </a>also includes this charts showing the number of people arriving in the UK since 2020 who have been returned home, divided into Albanians and non-Albanians, and FNOs (foreign national offenders) and non-FNOs.</p>',
-					elementId: 'c3e721be-0baf-4779-9150-64bd305e6165',
+					elementId: '938be01b-531a-49c6-b444-06f8fff0ba3f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Rycroft supplied the information because he could not provide the figures when he was at the committee last month and Lee Anderson, the Tory party deputy chair, <a href="https://www.theguardian.com/politics/live/2023/nov/29/theresa-may-criticise-rishi-sunak-oil-gas-licences-north-sea-green-policy-covid-inquiry-uk-politics-latest?page=with:block-656715998f08e51ddd4b3316#block-656715998f08e51ddd4b3316">asked what the numbers were.</a></p>',
-					elementId: '6bccfdb8-a937-45e1-b7f6-bb6f12ad4580',
+					elementId: '6d8a0b61-94b9-4640-9cf8-e5187e0c147c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The chart shows that only 420 non-Albanians have been sent back.</p>',
-					elementId: 'a30aea50-977d-4880-b4ff-5387baa6f7e5',
+					elementId: '69690879-21ce-4a6e-ba52-06dd8ff5d62d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2642,7 +2642,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 							],
 						},
 					],
-					elementId: '45170d5a-5aaa-4f43-8f99-3d6cb5a71270',
+					elementId: '8ee53fbd-063e-40d9-b9dd-6536fe70910a',
 					position: 3,
 					lightbox: {
 						caption: 'Numbers for small boat returns since 2010',
@@ -2673,12 +2673,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Diana Johnson, the home affairs committee chair, told the committee earlier that the Home Office has said it has spent £22m on the Bibby Stockholm. (See <a href="https://www.theguardian.com/politics/live/2023/dec/13/james-cleverly-rwanda-bill-immigration-asylum-rishi-sunak-keir-starmer-pmqs-politics-live-latest?page=with:block-6579cb018f088e348c76ed20#block-6579cb018f088e348c76ed20">3.21pm</a>.)</p>',
-					elementId: '32b90a5f-5b8c-4a7e-b343-bd48b937f0f7',
+					elementId: '81bd03ba-c701-41cd-a0e6-c3470278ccc1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The <a href="https://committees.parliament.uk/publications/42574/documents/211669/default/">letter</a> from Sir Matthew Rycroft, the permanent secretary, which she was quoting, makes it clear that this figure (£22,450,772, to be precise) only covers the “vessel accommodation services” part of the contract.</p>',
-					elementId: 'bc18025d-0eaf-4839-9e09-e3f15c3606f6',
+					elementId: 'bce8a15d-8f80-495b-977d-2ebf64367830',
 				},
 			],
 			attributes: {
@@ -2703,7 +2703,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The home affairs committee has now published <a href="https://committees.parliament.uk/publications/42574/documents/211669/default/">the latest letter</a> it has received from Sir Matthew Rycroft, permanent secretary at the Home Office. <strong>Diana Johnson</strong>, the chair, has been referring to it during the hearing.</p>',
-					elementId: '81d25891-806a-4c38-bb0a-659f34aa68c9',
+					elementId: '546e05b0-4947-4bb6-b9dd-37b9cf00ed21',
 				},
 			],
 			attributes: {
@@ -2728,17 +2728,17 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Back at the home affairs committee, the MPs were told that 132 of the 154 unaccompanied child asylum seekers who went missing from hotel accommodation were still missing.</p>',
-					elementId: '648c8fbf-2eae-42e5-a73c-e50d6d3741f3',
+					elementId: 'd4f5f2fe-a829-46cb-809e-d5f748e8c67d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Alison Thewliss</strong> (SNP) said this implied the Home Office did not care. If her children were missing, she would want to know where they were.</p>',
-					elementId: 'ed8e8e5b-ec8a-445a-a1b1-29e415c38375',
+					elementId: 'fb4ac669-f0d8-4510-9ef0-3964007405c7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tom Pursglove</strong>, the minister for legal migration, objected strongly. He said he and others at the Home Office did care about what has happened to these children.</p>',
-					elementId: '804853dc-867b-4cbf-a2df-25b77704721a',
+					elementId: '1ec70859-904b-47ca-bad4-d818411a650f',
 				},
 			],
 			attributes: {
@@ -2763,7 +2763,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Michael Gove</strong> will next week announce a relaxation of housing targets for local authorities in England, which developers worry will mean far fewer homes being built amid a housing crisis, <strong>Kiran Stacey</strong> reports.</p>',
-					elementId: '58f525cb-8f58-4288-8b98-ffa8d4e2c83f',
+					elementId: '911201ca-7ab6-462c-aedc-c13154901b89',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -2771,7 +2771,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					text: 'Michael Gove to ease housebuilding targets for councils in England ',
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '25f11981-6623-407c-bbaa-26ed71ea79ec',
+					elementId: 'c9da20e1-253b-40a6-bd7c-2dbce08280b2',
 				},
 			],
 			attributes: {
@@ -2797,17 +2797,17 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>James Daly</strong> (Con) is asking the questions.</p>',
-					elementId: '04fd0fec-237e-4a59-89c2-f0430543986b',
+					elementId: '692aa567-2cbf-4033-a073-1c4d5c208d3b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: Under the Rwanda bill, it is possible for a UK minister to ignore an interim injunction saying a deportation cannot go ahead?</em></p>',
-					elementId: '017422af-b372-47dc-87b0-4bac1f6b0c18',
+					elementId: '5c3feff6-f55b-44c8-99e8-0b55d255291a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Michael Tomlinson</strong>, the minister for illegal migration, says the PM has made it clear that he will not let a foreign court stop a flight leaving. And he says the bill makes it clear that decisons about what should happen are for a UK minister.</p>',
-					elementId: '3ca909f8-57b8-4fbf-973d-973d5b68bacb',
+					elementId: '08d707c6-c02d-46b6-b832-bfb14775e743',
 				},
 			],
 			attributes: {
@@ -2832,47 +2832,47 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Diana Johnson</strong> says the Home Office has revealed that it is spending £22m on the Bibby Stockholm barge.</p>',
-					elementId: 'f01f24ef-302a-4655-9697-4ab8ddae27da',
+					elementId: 'e5acd501-5f85-4728-b049-888d5a5d56e7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: How long is that for?</em></p>',
-					elementId: 'b95d456c-f7ab-4294-b002-3c30fe10d06b',
+					elementId: '584c85fd-4102-4f7a-a310-9837dc3b08e4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says he does not have that figure.</p>',
-					elementId: '909a26eb-348b-494f-9dbe-f61e8d36b075',
+					elementId: 'efb1f091-8088-441f-9910-bc8413257c89',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Johnson</strong> says the Home Office could not give a value-for-money assessment, saying what that per person cost was.</p>',
-					elementId: 'db3aa470-8c67-46b6-849c-ebe7b8f1e63a',
+					elementId: '2aaad2a8-8a9e-4e52-9ad4-415b6158cdbb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says the value for money assessment is being updated.</p>',
-					elementId: '29a34298-17ff-4eb3-aa74-eb4f2ae9e13a',
+					elementId: '4198c58a-dc58-44c7-a7c7-f23aa6869f8c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>He says this is a more cost-effective way of providing accommodation.</p>',
-					elementId: '4da58e45-27f8-4a8c-85e1-1524426dd315',
+					elementId: 'd8691f27-f058-41ab-bc7b-c1294d6bc03b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: How do you know?</em></p>',
-					elementId: '2f93568b-454c-4c31-b607-4cc316d5e74d',
+					elementId: 'cfab6dfb-f865-43ff-8b7b-55e55ef5942c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says they are still looking at the figures.</p>',
-					elementId: 'c07de86f-bc87-450d-93e1-e0c0a81a4e3f',
+					elementId: '49f14117-de8c-4262-8721-87223c42b9b7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>UPDATE:</em> The <a href="https://committees.parliament.uk/publications/42574/documents/211669/default/">letter</a> from Sir Matthew Rycroft, the permanent secretary, which Johnson was quoting, makes it clear that the £22m figure (£22,450,772, to be precise) only covers the “vessel accommodation services” part of the contract.</p>',
-					elementId: '05388c81-0a0e-4e3a-b78a-b9e456af6a44',
+					elementId: '52580203-3e35-4822-8ab5-2663346889de',
 				},
 			],
 			attributes: {
@@ -2898,67 +2898,67 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>At the home affairs committee <strong>Diana Johnson</strong>, the committee chair, is now having a row with <strong>Michael Tomlinson</strong>, the minister for illegal migration.</p>',
-					elementId: '4b5a3307-06f5-4f02-9296-1517152bee29',
+					elementId: '1a13697e-4c69-4ad1-9a2b-b9f9b44fc046',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>She says Tomlinson and his colleagues are being “incredibly disrespectful” in coming to the committee without answers.</p>',
-					elementId: 'ff6432d7-80e4-41ca-b03c-1d2c715b23d8',
+					elementId: '48da4bbc-4184-4502-acd1-ef35e857add8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Lee Anderson</strong>, the Tory deputy chair and a member of the committee, is now asking questions. He also accuses the Home Office team of being “disrespectful”.</p>',
-					elementId: 'c37fd945-df64-4e17-a32a-32cfc1e8b080',
+					elementId: 'da07565f-0004-4390-83db-0ca96c5f4762',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>He asks if Sir Matthew Rycroft, the permanent secretary, and Simon Ridley, the interim second permanent secretary, have got into trouble over how badly prepared they were when they attended the committee last month.</p>',
-					elementId: '0a028644-b569-4aa3-a53b-520e7f415893',
+					elementId: 'a395f0d1-33dc-49c9-923a-66fc8613ab7a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tomlinson</strong> says a follow-up letter has been sent. But if Anderson has not had a satisfactory answer yet, he should get one.</p>',
-					elementId: '6089a1c0-3996-4d84-bd29-259a604a205c',
+					elementId: '231cfc4a-d436-45ff-bfb9-72811eabc3ae',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: Do you keep a weekly or monthly total of how many people have been returned? Is that a good idea?</em></p>',
-					elementId: '9eed308c-92c2-4386-a254-05b96f4cfb74',
+					elementId: '6c5d67b5-fd6c-42f8-b4ce-69989d658d40',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tomlinson</strong> says he thinks that would be a good idea.</p>',
-					elementId: '58c66e25-b2d3-4dc5-bf1e-7754ae3f44be',
+					elementId: 'fbf376d0-244b-4f93-8da0-8acbae25966b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: What good does it do clearing the asylum application backlog? Does that just lead to people claiming support from councils?</em></p>',
-					elementId: '9ccda78a-1cd3-4cc3-9056-d95bd56c8afb',
+					elementId: '96d72eed-9a32-47f9-82dd-b06fcb5fb1cb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says it is helpful to clear the backlog. That means asylum seekers can be removed from hotels.</p>',
-					elementId: 'df872b65-24bb-4cfb-a43e-d331bb16c5f6',
+					elementId: 'b8cb5bab-c84e-4b0b-9ab3-a03755c99d93',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: You have sent us figures saying only 420 non-Albanians have been returned since 2020. Is that acceptable?</em></p>',
-					elementId: '09495ea3-083d-42de-8ccd-8323b9283fbd',
+					elementId: '710823ce-c2e6-4d92-a412-5aadaf5e8d22',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tomlinson</strong> says he wants that figure to be much higher.</p>',
-					elementId: '3b7fc89e-2e41-46a3-9e75-b2fe6b43dc47',
+					elementId: '411c9934-730d-4ca9-973c-6c9fd10c311b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: Do you support having ID cards?</em></p>',
-					elementId: 'd9e61ee2-53f7-41d9-b52d-5ede93965cbe',
+					elementId: '732a06aa-e75a-4ef4-b373-c16c0357ebfa',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tomlinson</strong> says he is cautious about those proposals.</p>',
-					elementId: '6fadab88-8267-486d-a6b8-ff6b9f22cd95',
+					elementId: '16fef19b-3dec-45ed-b45b-af2b33aa738d',
 				},
 			],
 			attributes: {
@@ -3545,7 +3545,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>The UK “isn’t being governed” as the Conservative party fights among itself, Keir Starmer has told Rishi Sunak at the <a href="https://www.theguardian.com/politics/2023/dec/13/uk-isnt-being-governed-keir-starmer-tells-sunak">last prime minister’s questions of the year</a>, challenging him in particular on rates of homelessness.</strong></p></li>\n <li><p><strong>Mark Drakeford has announced he is <a href="https://www.theguardian.com/politics/2023/dec/13/mark-drakeford-stepping-down-wales-first-minister-labour">stepping down as the Welsh first minister</a> and a contest for the leadership of Welsh Labour will begin shortly.</strong></p></li>\n <li><p><strong><a href="https://www.theguardian.com/business/2023/dec/13/uk-economy-shrinks-unexpectedly-as-households-feel-squeeze">Britain’s economy shrank unexpectedly</a> by 0.3% in October as households and businesses came under growing pressure amid the cost of living crisis, raising the chances of a recession.</strong></p></li>\n <li><p><strong>The BBC is likely to be <a href="https://www.theguardian.com/football/2023/dec/13/bbc-likely-to-look-into-lineker-tweets-about-tory-mps-says-candidate-for-chair">“looking into” Gary Lineker’s criticism of Conservative politicians</a>, which appear to breach the BBC’s social media guidelines, Samir Shah, the government’s proposed new chair of the corporation, has said.</strong></p></li>\n</ul>',
-					elementId: '577764a8-dc6d-45d9-b64c-44c8866b6247',
+					elementId: '435ca373-af18-4444-b9eb-8093f45145ab',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3853,7 +3853,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 							],
 						},
 					],
-					elementId: 'd135d8c0-ed7a-4336-a5d3-c2ba8f31be53',
+					elementId: 'a98405b8-7bf2-4658-b857-4750cb1e5d6e',
 				},
 			],
 			attributes: {
@@ -3879,47 +3879,47 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tom Pursglove</strong>, the minister for legal migration, is now being asked about the changes to family visa rules. (See<a href="https://www.theguardian.com/politics/live/2023/dec/13/james-cleverly-rwanda-bill-immigration-asylum-rishi-sunak-keir-starmer-pmqs-politics-live-latest?page=with:block-6579b1808f0889f38750b330#block-6579b1808f0889f38750b330"> 1.38pm</a>.)</p>',
-					elementId: '3bf7cfe7-11ff-479e-8674-88d7db4f9a24',
+					elementId: '2d30377c-0872-4321-85cc-f47385ad863f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tim Loughton</strong> (Con) says <a href="https://www.theguardian.com/politics/james-cleverly" data-component="auto-linked-tag">James Cleverly</a>, the home secretary, gave an interview saying the new rules would not be retrospectively applied. Is that correct?</p>',
-					elementId: 'c4d9b147-7095-43c1-b9a1-d1502fcb1094',
+					elementId: 'a87a4106-681e-4af3-95c7-13853c4ff248',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says applications already lodged will be treated under the rules as they are now.</p>',
-					elementId: 'b507926a-10fd-4fe0-8f81-dacbf1202d76',
+					elementId: '75929cb7-126c-41f5-9729-dc7a512af332',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>And the Home Office does not intend to apply the rules retrospectively.</p>',
-					elementId: 'a2e39684-84b1-4fd0-86e1-9e82d0daef19',
+					elementId: '27b326a0-e9c0-4aac-accf-21b63db8f028',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: So my constituent reapplying for a visa won’t have to meet the new threshold? And what happens when they have to reapply again in future.</em></p>',
-					elementId: '1533fde8-357b-4518-84b5-0e84eb898601',
+					elementId: 'fd42c575-7730-4c95-afb2-a556ae20b6ba',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says, in the first case, the new rules will not apply. And, going ahead, he says rules will not be applied through a retrospective prism.</p>',
-					elementId: '3ac34904-3956-48ec-b344-07d77343a97f',
+					elementId: 'be06bfb4-eece-4276-90a1-e0575bb94d9a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Loughton</strong> says he thinks Pursglove is saying that, for people with visas already, not just the first renewal, but all subsequent renewals will be under the old salary threshold, not the new one. Is that right?</p>',
-					elementId: '4391d635-2614-484d-8cb9-0afa3b6465e8',
+					elementId: 'e4bb86fe-3496-4844-9795-c31993ebb51c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says he needs to be allowed to make the announcement in the proper way.</p>',
-					elementId: '3784ba12-53b0-4bd8-9d39-24d2c451911a',
+					elementId: 'c9e6897b-5e67-4b1a-a1e5-d6b292b5409a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But, with a bit of nodding of his head, he seems to reassure Loughton that his understanding is correct.</p>',
-					elementId: '89fced16-af77-47f0-8d81-595f0222e187',
+					elementId: '5e15c5ba-23f2-4407-be22-a2daf4069ec4',
 				},
 			],
 			attributes: {
@@ -3945,17 +3945,17 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The <a href="https://committees.parliament.uk/publications/42574/documents/211669/default/">Rycroft letter </a>also includes this charts showing the number of people arriving in the UK since 2020 who have been returned home, divided into Albanians and non-Albanians, and FNOs (foreign national offenders) and non-FNOs.</p>',
-					elementId: '1a9acff5-0008-4f85-9aa5-f855653c47b4',
+					elementId: '51400f87-559d-4dd8-9736-8e01c6cea099',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Rycroft supplied the information because he could not provide the figures when he was at the committee last month and Lee Anderson, the Tory party deputy chair, <a href="https://www.theguardian.com/politics/live/2023/nov/29/theresa-may-criticise-rishi-sunak-oil-gas-licences-north-sea-green-policy-covid-inquiry-uk-politics-latest?page=with:block-656715998f08e51ddd4b3316#block-656715998f08e51ddd4b3316">asked what the numbers were.</a></p>',
-					elementId: '005c2f4d-76c4-4fbd-8c1e-68f31fdca619',
+					elementId: 'abfd8e69-5c87-4ebc-b551-4ff21b10610f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The chart shows that only 420 non-Albanians have been sent back.</p>',
-					elementId: 'a0c2dd00-74b9-4d6e-a7ce-b268c7d91b93',
+					elementId: '640d2005-cb68-48ec-a266-af3268782620',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4243,7 +4243,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 							],
 						},
 					],
-					elementId: '530d68e6-edbc-4216-a577-6b7edc043f5c',
+					elementId: '4abb334b-ce9e-475c-ae5d-0e4914947e9c',
 				},
 			],
 			attributes: {
@@ -4269,7 +4269,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Michael Gove</strong> will next week announce a relaxation of housing targets for local authorities in England, which developers worry will mean far fewer homes being built amid a housing crisis, <strong>Kiran Stacey</strong> reports.</p>',
-					elementId: 'b6fd9c22-4bd7-4401-93e7-b636f14c4f70',
+					elementId: '36be4abb-e220-4dab-b57d-2ef3db631f83',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -4277,7 +4277,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					text: 'Michael Gove to ease housebuilding targets for councils in England ',
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '4c476653-adfd-4ad0-9ff5-39341add5716',
+					elementId: 'd7619f7d-2f6e-4380-8596-a51661d2879b',
 				},
 			],
 			attributes: {
@@ -4303,47 +4303,47 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Diana Johnson</strong> says the Home Office has revealed that it is spending £22m on the Bibby Stockholm barge.</p>',
-					elementId: '0480c157-4d71-4cf0-ac98-9c894fdae429',
+					elementId: 'f81f6557-8c3c-4398-8f59-6f0ca42f8811',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: How long is that for?</em></p>',
-					elementId: 'c6ed0923-16eb-40fd-938c-e9f1ec47b8dd',
+					elementId: 'e940e92d-bf6e-42e7-9464-becf977f3e71',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says he does not have that figure.</p>',
-					elementId: '915ee3a1-c724-4e4a-89cb-40b9d70b371d',
+					elementId: 'b1332d2b-b0c7-4041-8ada-a269db4e79f0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Johnson</strong> says the Home Office could not give a value-for-money assessment, saying what that per person cost was.</p>',
-					elementId: 'b66817a9-0beb-44a9-ba6a-d968aeceea97',
+					elementId: '40898d56-727a-4d6d-a88e-d272db7c250f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says the value for money assessment is being updated.</p>',
-					elementId: '5969c3be-0305-438b-977b-7b9e09fe6c49',
+					elementId: '5a024b94-6e66-432b-b9ad-0e77103401c2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>He says this is a more cost-effective way of providing accommodation.</p>',
-					elementId: '4fa67981-6565-4728-b274-d3af9826dc6a',
+					elementId: 'f768cfc0-feac-4906-9565-dc8d82574ade',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: How do you know?</em></p>',
-					elementId: '158953b5-3f22-44ab-b335-90ed50d377d5',
+					elementId: '3732d855-a6df-42fa-8910-206711c2dbcc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says they are still looking at the figures.</p>',
-					elementId: '4a10e3e7-a297-456a-a943-6d04f722c808',
+					elementId: 'd275b447-ee6f-49fd-8db4-2637bd4199d6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>UPDATE:</em> The <a href="https://committees.parliament.uk/publications/42574/documents/211669/default/">letter</a> from Sir Matthew Rycroft, the permanent secretary, which Johnson was quoting, makes it clear that the £22m figure (£22,450,772, to be precise) only covers the “vessel accommodation services” part of the contract.</p>',
-					elementId: 'a930c885-5750-40d4-83cb-aceeef8192e6',
+					elementId: '414da6e7-21fa-457a-a381-42ecc58d955b',
 				},
 			],
 			attributes: {
@@ -4369,67 +4369,67 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>At the home affairs committee <strong>Diana Johnson</strong>, the committee chair, is now having a row with <strong>Michael Tomlinson</strong>, the minister for illegal migration.</p>',
-					elementId: 'd702618a-4fea-4a5b-9ab0-58ff494755f2',
+					elementId: '372e922b-7d4e-452b-8d54-c86e670c7191',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>She says Tomlinson and his colleagues are being “incredibly disrespectful” in coming to the committee without answers.</p>',
-					elementId: '2d277cce-bb96-444a-9ff2-d250f8f4b2a3',
+					elementId: '7e6e89c3-b5c2-4b2b-b026-fb3a13c570e0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Lee Anderson</strong>, the Tory deputy chair and a member of the committee, is now asking questions. He also accuses the Home Office team of being “disrespectful”.</p>',
-					elementId: '61090125-cbdc-4733-833a-1d5dc94d53aa',
+					elementId: '55fa32b1-15f7-46e1-8e3c-bb15fee0ddef',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>He asks if Sir Matthew Rycroft, the permanent secretary, and Simon Ridley, the interim second permanent secretary, have got into trouble over how badly prepared they were when they attended the committee last month.</p>',
-					elementId: '4d635a1f-d3e5-4384-95fa-758f6b3a0c34',
+					elementId: '5b2fd50e-b825-400b-a417-1c573b2d443d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tomlinson</strong> says a follow-up letter has been sent. But if Anderson has not had a satisfactory answer yet, he should get one.</p>',
-					elementId: '9c9005ef-2edd-4b4f-951c-211438ee1d26',
+					elementId: '476e8b80-2958-435e-9a49-01539e8358ac',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: Do you keep a weekly or monthly total of how many people have been returned? Is that a good idea?</em></p>',
-					elementId: '7a6e0464-499c-40af-976d-2899038cf4ed',
+					elementId: '3e554505-3c62-42a3-a54d-13b66661be93',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tomlinson</strong> says he thinks that would be a good idea.</p>',
-					elementId: '2b754306-7bed-4d15-917b-bb96d5aa443d',
+					elementId: '7b5d84c4-4528-43f8-9f09-66747016fa5d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: What good does it do clearing the asylum application backlog? Does that just lead to people claiming support from councils?</em></p>',
-					elementId: 'ee58fd82-4d58-4dd0-9456-dfad5c6b5bc6',
+					elementId: 'b92f47d6-e77b-4042-8f8b-c52994d7887a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Pursglove</strong> says it is helpful to clear the backlog. That means asylum seekers can be removed from hotels.</p>',
-					elementId: '3ddb13e2-b0f6-43bf-8e41-fd7d15f370de',
+					elementId: '3a105ecb-9c11-4dca-ac59-bbe64d97218d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: You have sent us figures saying only 420 non-Albanians have been returned since 2020. Is that acceptable?</em></p>',
-					elementId: 'e9b521ed-4ea3-42d8-993c-d79968eda101',
+					elementId: '4b7569a0-a345-44ca-94da-518776536fd9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tomlinson</strong> says he wants that figure to be much higher.</p>',
-					elementId: '5716b6dc-f580-4136-8356-eb3143df571c',
+					elementId: '183fae88-9a73-4a56-b0b4-e7453ceafea1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Q: Do you support having ID cards?</em></p>',
-					elementId: '2475cca2-2831-4900-9582-4a0debd3db30',
+					elementId: 'db366864-117f-4ac7-a6f8-71558e3347bd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Tomlinson</strong> says he is cautious about those proposals.</p>',
-					elementId: 'b58f79e1-de1b-4e4e-a0d1-ef03262fb151',
+					elementId: 'd8a02c9c-9943-41fc-a0cf-1f68077e269c',
 				},
 			],
 			attributes: {
@@ -4455,12 +4455,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Michael Tomlinson</strong>, the minister for illegal migration, and <strong>Tom Pursglove</strong>, the minister for legal migration, have just started giving evidence to the Commons home affairs committee.</p>',
-					elementId: '2bc4edff-71f1-4251-9367-771c1c2b3cc1',
+					elementId: '93f8d326-8d13-4afb-a99e-8a2418a30dcf',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>There is a live feed <a href="https://www.parliamentlive.tv/Event/Index/cec8841a-ba1a-4179-bb61-2fa939fd7882?_gl=1*8hbw83*_ga*NDY2MTIwNDg5LjE2NjI1NDE0NjA.*_ga_L0NJWDWMGN*MTcwMjQ3Nzc5Ny4xMDMuMS4xNzAyNDc3ODA0LjUzLjAuMA..">here</a>.</p>',
-					elementId: '8dab2e0f-5104-4d58-8bd7-ac35e48287fb',
+					elementId: '661c4106-11e9-4741-a8bf-584474d8bbdd',
 				},
 			],
 			attributes: {
@@ -4486,12 +4486,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>James Cleverly</strong>, the home secretary, is often described at Westminster as a friendly guy, and he has paid a warm tribute to <a href="https://www.theguardian.com/politics/mark-drakeford" data-component="auto-linked-tag">Mark Drakeford</a>, who has announced today that he will stand down as Labour leader in Wales and Welsh first minister before Easter next year. Cleverly posted this on X:</p>',
-					elementId: '4ee4e870-712d-4331-ba15-dc1b73bd2d11',
+					elementId: 'a324f912-a7d1-4f38-aa8c-5d0ec95d93c3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>I never really worked closely with Mark Drakeford, but on the times we did meet and talk I always found him to be a real gent.<br><br>Thank you for your public service, and all the best for the future.</p>\n</blockquote>',
-					elementId: '3169a852-8ab4-4f56-9e0e-a6beee68d930',
+					elementId: '12538702-d815-4488-83ab-dd8b3b3c129b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -4502,27 +4502,27 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: '647fe4d0-328f-4428-8c89-a8e955afeec8',
+					elementId: '983cc2e3-20b5-4598-bf8b-9605ccb6f080',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But Cleverly’s colleagues at CCHQ were not feeling so charitable this morning. They sent out a press release with a quote from <strong>Richard Holden</strong>, the Tory chair, saying:</p>',
-					elementId: 'e699450f-04fa-4e77-8210-bad1dc42d913',
+					elementId: 'ae586078-92fc-4684-91f4-403d94dfa70d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>We thank Mark Drakeford for his service, but Labour’s 25 years of failure running Wales cannot be ignored … With falling schools standards, blanket 20mph speed limits, and blocking meal deals in supermarkets, the Labour government in Wales have been focused on short-term soundbites.</p>\n</blockquote>',
-					elementId: '7947f810-9666-4f83-a803-482f04ab9729',
+					elementId: '18b3de2a-5632-4e6a-8ed0-e21d2033a01c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Many Labour figures have been paying tribute. <strong>Steven Morris</strong> quotes some of them in his <a href="https://www.theguardian.com/politics/2023/dec/13/mark-drakeford-stepping-down-wales-first-minister-labour">story about Drakeford standing down</a>, and here are some more.</p>',
-					elementId: 'c5292599-b9bd-43fa-9ac9-32a599d69d8c',
+					elementId: '2a01f93b-4dce-477a-b48f-910c82bc3210',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>From <strong>Keir Starmer:</strong></p>',
-					elementId: '339eae6c-2ddd-4366-b75c-04be72f8f05e',
+					elementId: 'dbc302ed-ae0d-4309-9426-4d38518129b0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -4533,17 +4533,17 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: '485d1468-b480-4484-8a80-b8115c7ccc81',
+					elementId: '46519e81-8cdd-48d0-b39b-1b1eaa63e918',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>From <strong>Gordon Brown</strong>, the former <a href="https://www.theguardian.com/politics/labour" data-component="auto-linked-tag">Labour</a> PM:</p>',
-					elementId: 'eb75b3e8-bb11-4e0b-a7f8-f319432a3f72',
+					elementId: 'f2ddbfa9-1663-4182-b9cc-92c8285dd239',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>Mark Drakeford has been a brilliant, compassionate and principled leader of Welsh Labour putting social justice right at the top of his mission. He deserves all our gratitude for his years of public service.</p>\n</blockquote>',
-					elementId: '1406b635-8ea4-49c8-b6aa-27e3ec60029f',
+					elementId: 'e20f8a0d-21fb-4ec9-aeff-bcc0c0261118',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -4554,12 +4554,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: '5b0c2691-809e-4d4a-990f-fbc6259ba680',
+					elementId: 'da63536a-5c88-41fc-ae36-a9aa3acda2b8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>From <strong>Ed Miliband</strong>, the former Labour leader and shadow secretary for climate change and net zero:</p>',
-					elementId: '265a792c-21b1-4ef9-8254-f2bfd8f47aaa',
+					elementId: '369b0e30-feeb-4213-9783-8f12b969cf5b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -4570,12 +4570,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: 'dcaa46a4-a921-49f8-b044-47bb4f041ada',
+					elementId: '89916b79-09f2-4458-a51b-a7286339ba9a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>From <strong>Kevin Brennan</strong>, the Cardiff West MP and shadow minister for victims:</p>',
-					elementId: '76a34635-454b-477f-b851-fb09bc9db35d',
+					elementId: '6650445c-6351-4f39-8b9d-5e01b172e87d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -4586,22 +4586,22 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: 'bac6a6eb-2860-4f67-a985-eef43de365a6',
+					elementId: 'd7777229-21b7-4a39-82dd-b3c71400d7ca',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>SNP leaders have paid tribute too.</p>',
-					elementId: '23410922-da89-4e9c-bc90-3fb8c3647461',
+					elementId: 'a464089f-d970-4d6a-8400-d112b781c764',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>From <strong>Nicola Sturgeon</strong>, the former Scottish first minister:</p>',
-					elementId: '209737e0-4d31-4b5e-8e1c-e58fd7be3f8f',
+					elementId: 'eb0789bf-7812-49a6-b735-ea95cf1eb5f2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>Sending my very best wishes to <a href="https://twitter.com/MarkDrakeford?ref_src=twsrc%5Etfw">@MarkDrakeford</a>. He was without doubt one of the most decent, dedicated, principled, and impressive politicians I had the privilege of working with in my time as FM. He will be the hardest of acts to follow.</p>\n</blockquote>',
-					elementId: '65efe307-94ba-4b80-9831-ec40a28248ac',
+					elementId: '0b329516-e4a5-4f93-a296-f4310e1000a9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -4612,17 +4612,17 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: '82c32a5f-a8c3-420e-a1ba-86da0471a975',
+					elementId: '2ec606ab-5956-4d06-8d9f-fe9df99b1d8f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>From <strong>Humza Yousaf</strong>, the Scottish first minister:</p>',
-					elementId: 'd6f4c441-6dce-4a8c-8647-9ed273b63b85',
+					elementId: '94346362-0a97-4d13-a685-f31503776538',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>My thanks to <a href="https://twitter.com/MarkDrakeford?ref_src=twsrc%5Etfw">@MarkDrakeford</a>, a dedicated and principled public servant. A Labour politician willing to call out the damage of Brexit and stand up to Westminster austerity. An ally in defending devolution from repeated Westminster attacks. I wish him all the best for the future</p>\n</blockquote>',
-					elementId: '465e3e58-539c-431f-ba2a-8107d99bfbcf',
+					elementId: '42fc3fad-e45a-445a-8742-f6d80cde9543',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -4633,7 +4633,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: '17b96f61-b441-48eb-8b64-e18ce22b3f3e',
+					elementId: 'a053d9a3-95c9-4ae8-9f86-1c2a0ced1f9e',
 				},
 			],
 			attributes: {
@@ -4659,22 +4659,22 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Many families were shocked last week when the government announced <a href="https://www.theguardian.com/world/2023/dec/05/families-face-being-split-up-by-uk-plan-to-cut-legal-migration-lawyers-say">a huge increase</a> in the income threshold for anyone sponsoring a family visa. The new rules should mean that any Briton earning less than £38,700 will probably not be allowed to bring a foreign spouse to the UK.</p>',
-					elementId: 'c00ec73b-3911-48e9-98e5-41a0401524dc',
+					elementId: '7c7ccdda-a0fb-4e3e-b30f-bee0dfbfc9d3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>During PMQs <strong>Stephen Timms</strong>, the <a href="https://www.theguardian.com/politics/labour" data-component="auto-linked-tag">Labour</a> MP who chairs the work and pensions committee, said the marriage plans of thousands of couples were scuppered by these rules. He asked if families already in the UK would be exempt when their visas were renewed, or whether any transitional exemptions might be in place.</p>',
-					elementId: 'c80eabbe-8b39-4d64-9d23-7007303c3a6c',
+					elementId: '859ba5ef-5e36-4c25-b8ab-5076f837c6ec',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In his reply, <strong>Rishi Sunak</strong> implied the rules would be introduced gradually. He said:</p>',
-					elementId: '3b55387f-d52f-45ce-8566-b383373adf2d',
+					elementId: '7ee4d20c-7725-4a0b-ac3b-e99be8b7dca3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>We have a longstanding principle that anyone bringing dependants to the UK must be able to support them financially – we should not expect this to be at the taxpayer’s expense and the threshold hasn’t been raised in over a decade, it is right that we have now brought it in line with the median salary.</p>\n <p>The family immigration route as he knows does contain provision for exceptional circumstances, but more generally it’s also right, and I can tell him, to look at transitional arrangements to ensure that they are fair and the Home Office are actively looking at this and will set out further information shortly.</p>\n</blockquote>',
-					elementId: '63b29334-654a-4520-b0f0-fb07a604a9f3',
+					elementId: 'cd1d697d-105b-42b7-aaf1-e341f2aeacfd',
 				},
 			],
 			attributes: {
@@ -4700,42 +4700,42 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In his memoir Politics on the Edge, the former cabinet minister turned podcaster Rory Stewart says: “Nine years in politics had been a shocking education in lack of seriousness.” <a href="https://www.theguardian.com/politics/pmqs" data-component="auto-linked-tag">PMQs</a> often shows why this is such a compelling critique of Westminster, but rarely more than today.</p>',
-					elementId: '77adf4e4-26c9-4abf-befb-a52139e17f23',
+					elementId: '099a120e-812e-4622-a155-8460fcb1d482',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It’s the last PMQs before Christmas and so an element of end-of-term cheer was understandable, and expected. But the opening of the sesssion today was just bizarre. First, <a href="https://www.theguardian.com/politics/rishi-sunak" data-component="auto-linked-tag">Rishi Sunak</a> was cheered to the rafters by his MPs as if he were Churchill at the end of WW2, rather than a PM who had just managed to win a vote by postponing the big policy argument until the start of the next year.</p>',
-					elementId: '9e5d2879-ad27-4da5-a456-70678fbf5139',
+					elementId: 'f843faf9-f409-4513-add8-8eecb2b8a24e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Then, after a question about contaminated blood, he took a question from a Tory who seemed to think that the reason the tax burden is so high is all because of the economic modelling methodology used by the OBR. Sunak leaned into this enthusiastically, and started boasting about introducing the biggest tax cuts for a generation. Regular readers – and, indeed, any half-intelligent person who follows current affairs reasonably diligently – will of course know that the tax burden is <a href="https://www.theguardian.com/politics/live/2023/nov/22/jeremy-hunt-autumn-statement-conservatives-labour-rishi-sunak-keir-starmer-pmqs-uk-economy-politics-latest-updates?page=with:block-655e03cf8f084b3cead487b6#block-655e03cf8f084b3cead487b6">approaching a postwar high</a>.</p>',
-					elementId: '680890e9-1e73-4ef6-b418-6b34c5eb57f3',
+					elementId: '6e1296a5-2319-4b53-9160-a977f4832164',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Keir Starmer did not indulge Sunak’s denialism, but he did start off in festive, jokey mode and made some reasonably good gags about Tory disunity. This created a problem when, in his third question, he moved on to problems with the economy and public services. Sunak was able to hit back effectively with the line: “He talks about governing and he spent the first two questions talking about political tittle-tattle, what a joke.”</p>',
-					elementId: 'b67cf38f-ab56-4e99-909d-075876959a97',
+					elementId: '4916c974-f02d-4458-bfbc-96fdf6679cbd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But Starmer then steered the conversation to homelessness, and he had a good jibe about the pomposity of the European Research Group.</p>',
-					elementId: '2da2216a-8417-43e3-9601-1c2b5de37843',
+					elementId: '8f534125-5928-443b-a644-dc0025a2ff47',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>Nearly 140,000 children are going to be homeless this Christmas, that is more than ever before, that is a shocking state of affairs and it should shame this government. Instead of more social housing, housebuilding is set to collapse. Instead of banning no-fault evictions, thousands of families are at risk of homelessness. Rather than indulge in his backbenchers swanning around in their factions and their star chambers pretending to be members of the mafia, when is he going to get a grip and focus on the country?</p>\n</blockquote>',
-					elementId: '53e4e26f-354e-4599-87b8-c7d34bb890c0',
+					elementId: 'eee3ff9f-4b8a-4c65-9aaa-a575198e780f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Sunak’s response was managerial (“tone-deaf”, Starmer called it), but it was in the next exchange where he came unstuck. A good rule in the Commons is that a reply should always match the tone of the question put, which means that sombre/emotive/non-partisan needs a response in kind. Starmer started talking about named families and individuals affected by homelessness and asked Sunak about an 11-year-old boy whose letter to Santa requested a forever home, and no new toys, “just my old toys out of storage”. It was heartbreaking. There was no easy reply available to Sunak, but he should at least have engaged emotionally. Instead, he just started hammering away about a vote in the Lords. This time he really was tone-deaf.</p>',
-					elementId: 'd31dc1e9-175e-4042-ad01-db28a1a0adaa',
+					elementId: '980ec839-c54a-4642-917e-d5cd676c3ecb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Here is the clip.</p>',
-					elementId: 'aefbd119-c3d0-45c0-b91f-ebafa5f48a4a',
+					elementId: '950b2bbc-1247-4717-9307-3523a8e88127',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -4746,12 +4746,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: 'f206e45e-afa7-4d65-a2f5-2a1b7f7dbac2',
+					elementId: 'e407b221-8529-42ad-94f9-48e7d5f085e2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It was hard to tell whether the trap was deliberate or fortuitous – but Sunak fell into it all the same.</p>',
-					elementId: 'b5673463-3185-4c37-a64c-ddae28aeb652',
+					elementId: 'ae15a4fc-b724-40ba-9a0d-7b0a7c758b42',
 				},
 			],
 			attributes: {
@@ -4777,17 +4777,17 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Sir Jeffrey Donaldson</strong>, the DUP leader at Westminster, asks if the government will amend the Internal Market Act to guarantee Northern Ireland has full access to the British market.</p>',
-					elementId: '661a6077-be06-4c77-8a2a-b33417a3693c',
+					elementId: 'e3c69f59-4831-41cb-803d-8933fcda3e65',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Sunak</strong> says he accepts more needs to be done. He says the government is ready to legislate to protect Northern Ireland’s place in the UK internal market, alongside moves to restore power sharing at Stormont.</p>',
-					elementId: '4ef2cead-ceed-4c26-b2ab-20db4e50a6b1',
+					elementId: '95f431b0-a3dd-4af0-b46e-883f38b5b7bd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This implies a deal is close to changing the way the Northern Ireland protocol works, to address DUP concerns and get it to lift its boycott of Stormont. Whether this would involve significant changes to trading rules, or just cosmetic ones, is not clear from these exchanges.</p>',
-					elementId: 'd3f6efe1-556b-432b-973b-a7e12b12ec39',
+					elementId: 'a2da5c17-91c3-443e-b928-277350a3098d',
 				},
 			],
 			attributes: {
@@ -4813,12 +4813,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Rishi Sunak is about to take PMQs. It will be the last of 2023.</p>',
-					elementId: 'b76ed3ba-35e5-4347-a403-9bd59b14322f',
+					elementId: '266c0ce6-1f42-4ca9-a9fc-33b8e1093393',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Here is the list of MPs down to ask a question.</p>',
-					elementId: 'b575254c-d6e6-4850-8b94-4f16f80f782d',
+					elementId: '92aa3682-5a7d-4992-b491-06a509ac31d1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5096,7 +5096,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 							],
 						},
 					],
-					elementId: '59dec722-1421-47ac-8177-b6293c4beea2',
+					elementId: 'f1b9c4d3-17c2-41d7-8312-50c12058ac55',
 				},
 			],
 			attributes: {
@@ -5122,7 +5122,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Mark Drakeford</strong> has announced he is stepping down as the Welsh first minister with immediate effect and a leadership contest will take place, <strong>Steven Morris</strong> reports.</p>',
-					elementId: '688da4c5-07f2-40e3-ad14-bc503d4d2c0d',
+					elementId: '14b1733d-17cd-43c7-97c7-883632e9be43',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -5130,7 +5130,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					text: 'Mark Drakeford to step down as Wales first minister',
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '46335b94-5ce5-47ea-92be-53b34cb938d5',
+					elementId: 'c13fc285-3687-4228-b354-aaf76475c4ad',
 				},
 			],
 			attributes: {
@@ -5156,47 +5156,47 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Whether or not the Rwanda bill is compliant with international law remains a matter of dispute. Some distinguished lawyers says it isn’t, and that was the conclusion of a <a href="https://committees.parliament.uk/publications/42515/documents/211416/default/">briefing</a> from the joint committee on human rights yesterday. Officially, the government claims the bill is complaint. But the bill contains a section 19(1)(b) statement on the face of it from <strong>James Cleverly</strong>, the home secretary, saying he cannot be sure it is compatible with the European convention on human rights, and his language has been slightly evasive. In the Commons yesterday he spoke about the bill being “within the framework of international law” – which may not be quite the same thing.</p>',
-					elementId: '9acd6236-68d8-4dd3-8e07-caf0392751d4',
+					elementId: 'b525997d-77fe-415e-bbb3-bd3650dbf1e0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In his interview on the Today programme interview this morning, Cleverly signalled that, while not wanting to leave the <a href="https://www.theguardian.com/law/european-court-of-human-rights" data-component="auto-linked-tag">European court of human rights</a> (ECtHR), the government does want to change the way it operates.</p>',
-					elementId: '6721ca2a-e856-41af-9e6e-79e687ec4b51',
+					elementId: '1ed5d6e5-a7c4-473e-b228-69db51e7ffd6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Referring to the court and other international institutions, he said:</p>',
-					elementId: '469e000c-abbd-4fe6-a3ec-551d31510f5c',
+					elementId: 'aa932492-4989-4d6b-a036-2f2386ce0e78',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>What we have seen is an unprecedented and new challenge. The scale of organised criminal people smuggling is unprecedented. It is something that has washed across north America, across Europe. We have got to take action.</p>\n <p>I [gave] a speech when I was foreign secretary at the Chatham House thinktank about my view that these postwar institutions, incredibly important, they need to survive, but they also need to reform in order to survive. The circumstances that we are seeing, digitally enabled organised criminal gangs smuggling on an industrial scale, is new. We have to respond to that novelty. And some of those postwar institutions – incredibly important, I desperately want them to survive – have got to recognise the tectonic plates are shifting, and we have to respond to that.</p>\n</blockquote>',
-					elementId: 'bd1373e9-37d2-406a-9763-72e4f65baf29',
+					elementId: '5f3f4aa8-f5ae-4adc-93d0-3c84b01a0320',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Asked why he did not support Tory rightwingers who just want the UK to leave the ECtHR, Cleverly suggested it was better to get the court to change. He said:</p>',
-					elementId: 'c2acf450-aef1-44c7-a62f-c486e8597d46',
+					elementId: '8d802de1-40d7-484c-9847-8c28a7c88043',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>Sometimes countries are in dispute [with the ECtHR]. That is not unusual at all. In fact, that is the norm, rather than the exception. So it may well be that we find ourselves in dispute with international institutions. That happens a lot.</p>\n</blockquote>',
-					elementId: '579f24bc-3a19-4d15-a819-3ffa180e7721',
+					elementId: '0b0fbdec-bb3e-481a-8885-71780b9569c8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Cleverly said the UK had already got the court to reform in some respects its use of emergency injunctions. The first flight to Rwanda was blocked by an injunction from the Strasbourg court, but, partly in response to lobbying from the UK, the court announced last month <a href="file:///Volumes/Downloads/Internet%20Downloads/Changes%20to%20the%20procedure%20for%20interim%20measures%20.pdf">some changes</a> to the way these will operate. Cleverly said:</p>',
-					elementId: 'e89a009c-81b4-4c82-ae44-3e24b1478d97',
+					elementId: 'c4ecc6e2-7710-42c4-abb6-2012c2f1c27f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>We made the case that the way they had been used was not appropriate in our view and the ECtHR have made changes because of our intervention. So you can both be in dispute with an international court, and you can also change an international court. We might need to do both.</p>\n</blockquote>',
-					elementId: '8bb0aa56-e2a1-404a-9a44-667067769d9c',
+					elementId: '949981fa-8923-41e9-87cb-68e6eb1c10d0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This is also an argument that <strong>David Cameron</strong>, the new foreign secretary, made <a href="https://www.theguardian.com/politics/live/2023/dec/05/immigration-rwanda-james-cleverly-robert-jenrick-rishi-sunak-latest-politics-updates?page=with:block-656f43988f080d14db794b7b#block-656f43988f080d14db794b7b">in the House of Lords last week</a>, citing his experience of dealing with the court over voting rights for prisoners.</p>',
-					elementId: '74390e12-5b78-4322-8c35-30137cf1fded',
+					elementId: '191215c9-b1f8-4c99-9810-b0a247da241c',
 				},
 			],
 			attributes: {
@@ -5222,12 +5222,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Rishi Sunak’s favourability ratings have hit a new low, according to <a href="https://yougov.co.uk/politics/articles/48157-sunak-slips-to-worst-ever-favourability-rating-amid-government-rwanda-policy-rows">new polling</a> by <strong>YouGov</strong>.</p>',
-					elementId: '5afaeb62-bdb5-49d9-9168-35c70441a1c9',
+					elementId: '73e43221-0a67-44d7-8d45-55cbfe66e518',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>Rishi Sunak’s net favourability rating slips to a new low of -49 (fieldwork 11-12 Dec)</p>\n <p>Favourable: 21% (-5 from 28-29 Nov)</p>\n <p>Unfavourable: 70% (+5)</p>\n</blockquote>',
-					elementId: 'f5432119-0edb-4097-ae0a-b29733f3c9cb',
+					elementId: '38166406-f5c2-46a5-95a9-acda1782a440',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -5238,12 +5238,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: '405e6bd8-9f75-4a44-92f0-bf5fdea2ef70',
+					elementId: '5c1c67ae-c245-48e9-aad7-7862113b9bd8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>After a year as PM, Rishi Sunak’s net popularity has now fallen to the same level as his party (both -49)<br><br>By contrast, Keir Starmer currently stands at -22 and Labour at -14</p>\n</blockquote>',
-					elementId: '8d069219-9cc8-4379-9557-c090b88dcd0c',
+					elementId: 'aae50a4f-877d-4359-87d9-bec8ad854c33',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -5254,12 +5254,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: '8a031593-34ed-491e-a89d-04beba73bb89',
+					elementId: '3b4a95c8-dc3c-4a13-af8b-fc1905085a73',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>Favourability of senior British politicians (11-12 Dec)</p>\n <p>Keir Starmer: -22</p>\n <p>James Cleverly: -29</p>\n <p>Suella Braverman: -46</p>\n <p>Jeremy Hunt: -47</p>\n <p>Rishi Sunak: -49</p>\n <p>*Politicians with &gt;50% “don’t know” scores*</p>\n <p>Rachel Reeves: -10</p>\n <p>Wes Streeting: -11</p>\n <p>Victoria Atkins: -15</p>\n</blockquote>',
-					elementId: '53ed44de-57c7-46f2-9a9b-c2f8feba7966',
+					elementId: '084b2596-8d2a-4bb8-90d5-466e193e921b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -5270,7 +5270,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: '2aa9d77e-c8eb-44ba-a64f-574ecaaabcf9',
+					elementId: '54621fef-a99d-457b-b332-ca4f4cbdb479',
 				},
 			],
 			attributes: {
@@ -5296,7 +5296,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Sadiq Khan</strong> has warned that ministers’ plans to cut legal migration will lead to a “full blown recruitment crisis” in London, with vacancies in hospitality alone still higher than they were pre-pandemic. <strong>Daniel Boffey</strong> has the story.</p>',
-					elementId: '03b88a05-b2cb-4c50-8777-3b7281affe3a',
+					elementId: '43315938-a94e-4469-ba72-b6c519495c69',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -5304,7 +5304,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					text: 'Sadiq Khan: plans to cut migration will trigger London recruitment crisis',
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '3be35c3c-64d8-4125-b0b7-a5951445eb0d',
+					elementId: '9dfec6e0-98c5-43e0-a826-2142aa221208',
 				},
 			],
 			attributes: {
@@ -5330,17 +5330,17 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>When <a href="https://www.theguardian.com/politics/rishi-sunak" data-component="auto-linked-tag">Rishi Sunak</a> announced that he would respond to the supreme court judgment saying the Rwanda deportation policy was unlawful with a new bill, he described it as emergency legislation, implying it would be rushed through parliament.</p>',
-					elementId: '3ee2448f-ea09-4a9c-92a7-6135d7b09de6',
+					elementId: 'b22bb71c-6f45-428e-af60-afad770345a6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But that is not happening. Although the bill has had a second reading, its remaining Commons stages are not due to be debated until January. And, in an interview this morning, <strong>James Cleverly</strong>, the home secretary, said it would take “some time” for the bill to become law. He told Sky News:</p>',
-					elementId: '3fbec813-51c3-46d7-a9f8-935cb43ea344',
+					elementId: 'c0aef97b-1d51-4537-8fdb-38af8a6451c6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>We’ve got to get this bill through the House of Commons and the House of Lords. That will take some time … We’re going to move quickly but we’re going to make sure we get this right.</p>\n</blockquote>',
-					elementId: 'f3f6d6e3-a47a-49a7-9f0d-8585c75c5494',
+					elementId: 'e01364d6-9594-4d7c-805d-1d82dab637e7',
 				},
 			],
 			attributes: {
@@ -5366,17 +5366,17 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Good morning. <strong>James Cleverly</strong>, the home secretary, has been doing a victory lap media round this morning after the government’s <a href="https://www.theguardian.com/uk-news/2023/dec/12/rishi-sunak-survives-rwanda-bill-commons-vote">bigger-than-expected win</a> in the Rwanda bill vote last night. Tory rebels abstained, rather than voted against, and there were “only” 29 of them – which is barely enough to put the government’s majority at risk, and quite small in the scale of Tory rebellions over recent years.</p>',
-					elementId: 'e208e519-25eb-4227-a75d-4ac74e30fd07',
+					elementId: 'e0f33fcf-91b8-4339-8c62-03e8c0d5155b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But the jeopardy for Rishi Sunak is far from over. The rebels were only abstaining because they believe that they can get significant concessions to the bill when it is debated again over two days in January, and the gap between what the rightwingers are demanding (set out in the European Research Group’s <a href="https://lawyersforbritain.org/wp-content/uploads/2023/12/Rwanda-111223-final-.pdf">legal “star chamber analysis</a>) and the <a href="https://www.theguardian.com/politics/live/2023/dec/12/tory-rebels-rishi-sunak-rwanda-bill-asylum-keir-starmer-labour-david-cameron-uk-politics-latest?page=with:block-657889b68f08c4c875cea0d1#block-657889b68f08c4c875cea0d1">minimal tinkering Sunak seems to be offering</a> is considerable. After the votes on amendments, there will be a final third reading vote on the bill as a whole and at that point some rightwingers say they will try to vote it down if they still don’t like it. Some Tory centrists have also said they will no longer vote for the bill if it’s been subject to an ERG rewrite.</p>',
-					elementId: '617682dc-f942-42a9-94b7-d465b33f1cf4',
+					elementId: 'c27016da-6be6-4ffb-82f5-faec898cc3da',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>That is why most of the front pages today claim the parliamentary threat to Sunak remains very real. When the Guardian, the Daily Mail and the Daily Express all end up using more or less exactly the same headline, there’s a good chance it’s right.</p>',
-					elementId: 'cfaf632c-69ad-4c03-a0c8-8c0af4b2b8ec',
+					elementId: 'c3e1bae5-237f-4cdc-80c6-7ef5e284ce3b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -5387,7 +5387,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: '0d658a37-831e-4963-ae00-d72d7dc08e8f',
+					elementId: '6bdcffe4-3c6e-4fc6-984b-26bbab2d24c0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -5398,7 +5398,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: 'b08115d1-5ab5-4dfb-9a51-e7b43d0a45dc',
+					elementId: '498c0c8c-1816-45d7-9297-558975cba8ba',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -5409,12 +5409,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: '51156b6a-dd53-45df-8b68-9d3549a62554',
+					elementId: '0f6004c8-d808-4018-972c-f74d07bb04d0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>And here are some other headlines on the same theme.</p>',
-					elementId: '487bbf00-5294-438e-ad32-16d48a0193fb',
+					elementId: '39baa5a3-208a-4d7f-b067-c4a1d20b4539',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -5425,7 +5425,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: 'c2ffd638-d78e-4a7a-8fea-2112ec7d9154',
+					elementId: 'afcf063b-f0ea-4c93-b966-dc84e8416549',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -5436,72 +5436,72 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					elementId: 'fc5053a1-0b60-4039-b07d-5fb98425a651',
+					elementId: '0fa27cfb-82ec-4388-bd26-203cad70a5d2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But in his interviews this morning Cleverly played down suggestions that the bill might be killed off in the new year. On Sky News <strong>Kay Burley</strong> asked him to respond to this comment from one unnamed <strong>Tory rebel</strong> quoted <a href="https://www.itv.com/news/2023-12-12/rwanda-pms-last-ditch-attempt-to-see-off-tory-rebellion-over-asylum-bill">in reports</a> this morning.</p>',
-					elementId: 'e1de28b3-a292-4c84-9e6a-ba32419f77a7',
+					elementId: '307229a8-6e29-47a7-a4d6-bec8b2a5111a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>This bill has been allowed to live another day. But without amendments it will be killed next month. It is now up to the government to decide what it wants to do.</p>\n</blockquote>',
-					elementId: 'af81f8f9-2303-4f1b-93d2-9ff4c7bea8e8',
+					elementId: '9b5f2d03-6aab-47f3-ad3a-08d0ca4edee5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Cleverly</strong> did not accept the bill was at risk. Referring to Mark Francois, the chair of the European Research Groups, one of the rightwing Tory factions pushing for a tougher bill, he said:</p>',
-					elementId: 'b22945c6-f297-4667-8c7f-e166c7369bb4',
+					elementId: '9cefd224-4df8-4f79-a98a-ee526e6ccb19',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>I will talk to Mark and I’ll talk to others, of course, to understand their thinking on this and try to harvest their ideas to make things better.</p>\n <p>But I can’t see if someone’s got a concern that the bill might not be as strong as they would like, killing the bill doesn’t strike me as the best way of doing that, because if the bill isn’t on the statute books it can’t possibly succeed.</p>\n</blockquote>',
-					elementId: '3d3d2275-0268-4f19-8588-9712ee6d4690',
+					elementId: '55881148-b437-4057-b9a9-040e01dbddec',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>He also rejected claims some of his Conservative colleagues don’t want the bill to work. He said:</p>',
-					elementId: '1dec10d0-69c7-4487-a3f6-58d24f22282c',
+					elementId: '223f400c-af59-4b1c-bf08-4eee8b19d6ca',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>No, this is absolutely wrong. The Conservative party is united on the desire to get this right and to stop the boats. The Labour party’s position is to try and wreck it.</p>\n</blockquote>',
-					elementId: '2147c4d7-f5a0-40b9-a211-ea68b9be9f81',
+					elementId: '405e0763-8849-4564-a33b-bc3ad7743385',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I will post more from his interviews soon.</p>',
-					elementId: '348941ef-6547-4d8b-b41c-5cd99334e82f',
+					elementId: '0fe4fb18-d8e2-4370-b076-ea25aaf5e97e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Here is the agenda for the day.</p>',
-					elementId: '9b796e69-eefb-46c3-96ca-39a90dfe4aae',
+					elementId: '88361fa3-df5b-4c5d-8df9-2c5eed3b24e4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>9.30am:</em> Michelle Donelan, the science secretary, gives evidence to the Commons science committee about AI governance and other matters.</p>',
-					elementId: '12f4aed6-b8f5-4839-a8d1-4747787f1396',
+					elementId: 'c8b40a27-a8d1-4f94-b37b-a40403e99e89',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>12pm:</em> Rishi Sunak faces <a href="https://www.theguardian.com/politics/keir-starmer" data-component="auto-linked-tag">Keir Starmer</a> at PMQs.</p>',
-					elementId: '015dbfca-71ba-4718-a811-2266d9ba99bd',
+					elementId: '8f556a36-f251-45e6-9219-708efde85c8c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>2.30pm:</em> Michael Tomlinson, the minister for illegal migration, and Tom Pursglove, the minister for legal migration, give evidence to the Commons home affairs committee.</p>',
-					elementId: 'fb51b7b4-f484-4235-8948-32aeb944638b',
+					elementId: 'dee4af2e-2a20-48ee-aa98-6c5b01c74978',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>4pm:</em> Victoria Atkins, the health secretary, gives evidence to the Commons health committee.</p>',
-					elementId: '0f94c5b9-9158-404c-b193-5566eb4a17d4',
+					elementId: '0f0d4582-a3c7-4c84-b9e0-d8aed95efc46',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If you want to contact me, do try the “send us a message” feature. You’ll see it just below the byline – on the left of the screen, if you are reading on a laptop or a desktop. This is for people who want to message me directly. I find it very useful when people message to point out errors (even typos – no mistake is too small to correct). Often I find your questions very interesting, too. I can’t promise to reply to them all, but I will try to reply to as many as I can, either in the comments below the line; privately (if you leave an email address and that seems more appropriate); or in the main blog, if I think it is a topic of wide interest.</p>',
-					elementId: '665b4e6e-deba-4472-bb69-d44ca757c96c',
+					elementId: '6da75885-6e6f-477e-bef9-e37f883c8880',
 				},
 			],
 			attributes: {
@@ -5528,43 +5528,43 @@ export const LiveBlogSingleContributor: DCRArticle = {
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 				html: '<p>In his memoir Politics on the Edge, the former cabinet minister turned podcaster Rory Stewart says: “Nine years in politics had been a shocking education in lack of seriousness.” <a href="https://www.theguardian.com/politics/pmqs" data-component="auto-linked-tag">PMQs</a> often shows why this is such a compelling critique of Westminster, but rarely more than today.</p>',
-				elementId: '2bdc1b64-5aea-4720-9c19-4cf5abd2054e',
+				elementId: '86ed0b82-f268-4fde-9413-c1153f6919a4',
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 				html: '<p>It’s the last PMQs before Christmas and so an element of end-of-term cheer was understandable, and expected. But the opening of the sesssion today was just bizarre. First, <a href="https://www.theguardian.com/politics/rishi-sunak" data-component="auto-linked-tag">Rishi Sunak</a> was cheered to the rafters by his MPs as if he were Churchill at the end of WW2, rather than a PM who had just managed to win a vote by postponing the big policy argument until the start of the next year.</p>',
-				elementId: '4c0c02b2-3a22-4b70-a09a-a86e569b7b07',
+				elementId: 'd5af6bc0-44f4-4a79-a7c8-c7edc18dbd0a',
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 				html: '<p>Then, after a question about contaminated blood, he took a question from a Tory who seemed to think that the reason the tax burden is so high is all because of the economic modelling methodology used by the OBR. Sunak leaned into this enthusiastically, and started boasting about introducing the biggest tax cuts for a generation. Regular readers – and, indeed, any half-intelligent person who follows current affairs reasonably diligently – will of course know that the tax burden is <a href="https://www.theguardian.com/politics/live/2023/nov/22/jeremy-hunt-autumn-statement-conservatives-labour-rishi-sunak-keir-starmer-pmqs-uk-economy-politics-latest-updates?page=with:block-655e03cf8f084b3cead487b6#block-655e03cf8f084b3cead487b6">approaching a postwar high</a>.</p>',
-				elementId: 'e61c1caf-61ad-4bc6-bb8d-1f6b450f3c1d',
+				elementId: '36c97e18-c084-4950-aa7c-2bc37d47728d',
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 				html: '<p>Keir Starmer did not indulge Sunak’s denialism, but he did start off in festive, jokey mode and made some reasonably good gags about Tory disunity. This created a problem when, in his third question, he moved on to problems with the economy and public services. Sunak was able to hit back effectively with the line: “He talks about governing and he spent the first two questions talking about political tittle-tattle, what a joke.”</p>',
-				elementId: 'f43e8d7a-f307-4d87-9bf8-09f10281eade',
+				elementId: '138b87e1-efa2-4fdb-8c91-c536dea29bea',
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 				html: '<p>But Starmer then steered the conversation to homelessness, and he had a good jibe about the pomposity of the European Research Group.</p>',
-				elementId: '80db716a-b427-435c-a868-bb81bec3905c',
+				elementId: '17fd5fb0-4563-4b63-8ad0-c8ea2dd9c690',
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-				elementId: '1d0bccf9-c8dc-4057-aec1-98db82bba5a3',
+				elementId: '05bb5430-de19-48e3-8f03-1959756ea425',
 				html: '<blockquote class="quoted">\n <p>Nearly 140,000 children are going to be homeless this Christmas, that is more than ever before, that is a shocking state of affairs and it should shame this government. Instead of more social housing, housebuilding is set to collapse. Instead of banning no-fault evictions, thousands of families are at risk of homelessness. Rather than indulge in his backbenchers swanning around in their factions and their star chambers pretending to be members of the mafia, when is he going to get a grip and focus on the country?</p>\n</blockquote>',
 				quoted: true,
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 				html: '<p>Sunak’s response was managerial (“tone-deaf”, Starmer called it), but it was in the next exchange where he came unstuck. A good rule in the Commons is that a reply should always match the tone of the question put, which means that sombre/emotive/non-partisan needs a response in kind. Starmer started talking about named families and individuals affected by homelessness and asked Sunak about an 11-year-old boy whose letter to Santa requested a forever home, and no new toys, “just my old toys out of storage”. It was heartbreaking. There was no easy reply available to Sunak, but he should at least have engaged emotionally. Instead, he just started hammering away about a vote in the Lords. This time he really was tone-deaf.</p>',
-				elementId: 'c233380e-6e53-428a-bebb-1c16ecd34de0',
+				elementId: 'b1f6aedc-3811-4ed1-ad19-29fbd04bbf0f',
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 				html: '<p>Here is the clip.</p>',
-				elementId: '32be066a-cf60-4ae4-b742-415fed6bd92b',
+				elementId: 'b948d94c-0cfa-47ab-9221-489a034db185',
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -5575,12 +5575,12 @@ export const LiveBlogSingleContributor: DCRArticle = {
 				role: 'inline',
 				isThirdPartyTracking: false,
 				source: 'Twitter',
-				elementId: 'ed9af07b-e4a4-454d-8b72-8677bc88c0c3',
+				elementId: '6fd08873-6187-4046-a637-a932c469e1bf',
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 				html: '<p>It was hard to tell whether the trap was deliberate or fortuitous – but Sunak fell into it all the same.</p>',
-				elementId: '0ebff38d-5fa8-4b09-b604-bc1987c8e72b',
+				elementId: '4a3e89ad-cb67-441e-a423-44115c98b0c4',
 			},
 		],
 		attributes: {
@@ -5773,7 +5773,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 			position: 1,
 			width: 2560,
 			height: 1536,
-			elementId: 'd9162515-7840-465d-9e13-9e8a6f588d69',
+			elementId: 'bdc84e71-abcc-429b-9d5e-f57553ff2299',
 			alt: 'Rishi Sunak and Keir Starmer at PMQs.',
 			credit: 'Photograph: Parliament Live',
 			caption: 'Rishi Sunak and Keir Starmer at PMQs.',
@@ -5785,7 +5785,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 			position: 2,
 			width: 4000,
 			height: 2667,
-			elementId: 'c0efb95e-4896-4f6c-81d4-18fe1a711acd',
+			elementId: 'ea09f8a0-be5c-4720-8aee-bc6400db505e',
 			alt: 'Keir Starmer at PMQs.',
 			credit: 'Photograph: Jessica Taylor/UK Parliament/Reuters',
 			caption: 'Keir Starmer at PMQs.',
@@ -5799,7 +5799,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 			position: 3,
 			width: 734,
 			height: 355,
-			elementId: '45170d5a-5aaa-4f43-8f99-3d6cb5a71270',
+			elementId: '8ee53fbd-063e-40d9-b9dd-6536fe70910a',
 			alt: 'Numbers for small boat returns since 2010',
 			credit: 'Photograph: Home Office',
 			caption: 'Numbers for small boat returns since 2010',
@@ -5816,7 +5816,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 			caption: 'Rishi Sunak and Keir Starmer at PMQs.',
 			masterUrl:
 				'https://media.guim.co.uk/b8e6f4c55da3c6457d78a52d0460d787750185c0/0_0_2560_1536/master/2560.jpg',
-			elementId: 'd9162515-7840-465d-9e13-9e8a6f588d69',
+			elementId: 'bdc84e71-abcc-429b-9d5e-f57553ff2299',
 		},
 		{
 			width: 4000,
@@ -5825,7 +5825,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 			caption: 'Keir Starmer at PMQs.',
 			masterUrl:
 				'https://media.guim.co.uk/3b429a39d00a55f5cf3953415bb9df9d5ff41d7b/0_0_4000_2667/master/4000.jpg',
-			elementId: 'c0efb95e-4896-4f6c-81d4-18fe1a711acd',
+			elementId: 'ea09f8a0-be5c-4720-8aee-bc6400db505e',
 		},
 		{
 			width: 734,
@@ -5834,7 +5834,7 @@ export const LiveBlogSingleContributor: DCRArticle = {
 			caption: 'Numbers for small boat returns since 2010',
 			masterUrl:
 				'https://media.guim.co.uk/31d343dd9b3b96b63b9f190628db2867fcf92b8c/0_0_734_355/master/734.jpg',
-			elementId: '45170d5a-5aaa-4f43-8f99-3d6cb5a71270',
+			elementId: '8ee53fbd-063e-40d9-b9dd-6536fe70910a',
 		},
 	],
 };

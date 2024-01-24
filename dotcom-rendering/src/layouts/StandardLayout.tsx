@@ -570,7 +570,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge?.enhanced}
 								isMatch={!!footballMatchUrl}
 							/>
 						</GridItem>
@@ -839,7 +838,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										article.showBottomSocialButtons &&
 										renderingTarget === 'Web'
 									}
-									badge={article.badge?.enhanced}
 								/>
 							</ArticleContainer>
 						</GridItem>

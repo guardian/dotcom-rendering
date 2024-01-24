@@ -256,11 +256,11 @@ export const NewsletterSignup: DCRArticle = {
 	beaconURL: '//phar.gu-web.net',
 	hasRelated: true,
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Wed 27 Sep 2023 15.43 BST',
+		'Last modified on Tue 16 Jan 2024 11.19 GMT',
 	editionLongForm: 'UK edition',
 	publication: 'theguardian.com',
 	trailText:
-		'Get our roundup of women’s football for free once a week, featuring the insights of experts such as the former England international Anita Asante',
+		'Get our roundup of women’s football for free twice a week, featuring the insights of experts such as Ada Hegerberg and Anita Asante',
 	subMetaKeywordLinks: [
 		{
 			url: '/football/womensfootball',
@@ -389,8 +389,8 @@ export const NewsletterSignup: DCRArticle = {
 						url: '/environment/climate-crisis',
 					},
 					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
+						title: 'Ukraine',
+						url: '/world/ukraine',
 					},
 					{
 						title: 'Football',
@@ -427,6 +427,10 @@ export const NewsletterSignup: DCRArticle = {
 								longTitle: 'football/teams',
 							},
 						],
+					},
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
 					},
 					{
 						title: 'Business',
@@ -570,7 +574,7 @@ export const NewsletterSignup: DCRArticle = {
 					},
 					{
 						title: 'Cartoons',
-						url: '/cartoons/archive',
+						url: '/tone/cartoons',
 					},
 					{
 						title: 'Opinion videos',
@@ -802,7 +806,7 @@ export const NewsletterSignup: DCRArticle = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://app.adjust.com/16xt6hai',
 			},
 			{
 				title: 'Video',
@@ -942,11 +946,11 @@ export const NewsletterSignup: DCRArticle = {
 			},
 			{
 				title: 'Live events',
-				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
 			},
 			{
-				title: 'Masterclasses',
-				url: '/guardian-masterclasses',
+				title: 'About Us',
+				url: '/about',
 			},
 			{
 				title: 'Digital Archive',
@@ -1118,10 +1122,10 @@ export const NewsletterSignup: DCRArticle = {
 		'og:title':
 			'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
 		'fb:app_id': '180444840287',
-		'article:modified_time': '2023-09-27T14:43:16.000Z',
+		'article:modified_time': '2024-01-16T11:19:45.000Z',
 		'og:image:height': '720',
 		'og:description':
-			'Get our roundup of women’s football for free once a week, featuring the insights of experts such as the former England international Anita Asante',
+			'Get our roundup of women’s football for free twice a week, featuring the insights of experts such as Ada Hegerberg and Anita Asante',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Football',
@@ -1131,7 +1135,7 @@ export const NewsletterSignup: DCRArticle = {
 		'og:site_name': 'the Guardian',
 	},
 	standfirst:
-		'<p>Get our roundup of women’s football for free once a week, featuring the insights of experts such as the former England international Anita Asante</p>',
+		'<p>Get our roundup of women’s football for free twice a week, featuring the insights of experts such as Ada Hegerberg and Anita Asante</p>',
 	sectionUrl: 'football/football',
 	pageId: 'football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 	version: 3,
@@ -1640,7 +1644,7 @@ export const NewsletterSignup: DCRArticle = {
 					],
 				},
 			],
-			elementId: '795c5329-609b-4907-8508-36d4637f58d5',
+			elementId: '77453a2f-6297-435b-bd16-ec3a8eb073b3',
 			position: 1,
 			lightbox: {
 				caption:
@@ -1658,7 +1662,7 @@ export const NewsletterSignup: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Join us as we delve deeper into the wonderful world of women’s football in our weekly newsletter. It is informative, entertaining, global, critical – when needed – and, above all, passionate. Written mainly by <a href="https://www.theguardian.com/profile/julia-belas-trindade">Júlia Belas Trindade</a> and <a href="https://www.theguardian.com/profile/sophie-downey">Sophie Downey</a>, expect guest appearances from stars such as Anita Asante, Ada Hegerberg and many more.</p>',
-					elementId: '08160b15-9bb2-41a1-8529-3efa80e61b9f',
+					elementId: 'b7db1c76-5044-4948-9678-1b4ae05b1057',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -1669,12 +1673,12 @@ export const NewsletterSignup: DCRArticle = {
 					isThirdPartyTracking: false,
 					source: 'The Guardian',
 					sourceDomain: 'theguardian.com',
-					elementId: 'c87e6d6c-7a13-4732-b080-f7229f67ec23',
+					elementId: '1626d5aa-7977-4280-aaff-f4be529a5722',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li>\n <li><p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li>\n</ul>',
-					elementId: 'd02c2a6e-c162-432e-9a5b-e3d56f787546',
+					elementId: 'a72db863-b2ba-49e2-9dd6-b353de41c9c4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
@@ -1682,7 +1686,7 @@ export const NewsletterSignup: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
-					elementId: '23eaa8c7-1433-409b-a3cc-f1cb93252b26',
+					elementId: '11223aca-9c98-4aba-9bc1-8420b0b804b6',
 					dropCap: true,
 				},
 			],
@@ -1700,7 +1704,7 @@ export const NewsletterSignup: DCRArticle = {
 			blockFirstPublishedDisplayNoTimezone: '16.57',
 			contributors: [],
 			primaryDateLine: 'Tue 22 Mar 2022 16.57 GMT',
-			secondaryDateLine: 'Last modified on Wed 27 Sep 2023 15.43 BST',
+			secondaryDateLine: 'Last modified on Tue 16 Jan 2024 11.19 GMT',
 		},
 	],
 	linkedData: [
@@ -1748,7 +1752,7 @@ export const NewsletterSignup: DCRArticle = {
 			datePublished: '2022-03-22T16:57:35.000Z',
 			headline:
 				'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
-			dateModified: '2023-09-27T14:43:16.000Z',
+			dateModified: '2024-01-16T11:19:45.000Z',
 			mainEntityOfPage:
 				'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 		},
@@ -1847,7 +1851,6 @@ export const NewsletterSignup: DCRArticle = {
 			hostedVideoAutoplay: true,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
-			serverShareCounts: true,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,
@@ -1943,7 +1946,7 @@ export const NewsletterSignup: DCRArticle = {
 			position: 1,
 			width: 1508,
 			height: 905,
-			elementId: '795c5329-609b-4907-8508-36d4637f58d5',
+			elementId: '77453a2f-6297-435b-bd16-ec3a8eb073b3',
 			alt: 'Our new women’s football newsletter will arrive in your inbox every Wednesday.',
 			credit: 'Illustration: Guardian Design',
 			caption:
@@ -1960,7 +1963,7 @@ export const NewsletterSignup: DCRArticle = {
 				'Our new women’s football newsletter will arrive in your inbox every Wednesday.',
 			masterUrl:
 				'https://media.guim.co.uk/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/master/1508.png',
-			elementId: '795c5329-609b-4907-8508-36d4637f58d5',
+			elementId: '77453a2f-6297-435b-bd16-ec3a8eb073b3',
 		},
 	],
 };

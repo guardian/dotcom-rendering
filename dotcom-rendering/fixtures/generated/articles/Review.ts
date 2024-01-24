@@ -459,8 +459,8 @@ export const Review: DCRArticle = {
 						url: '/environment/climate-crisis',
 					},
 					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
+						title: 'Ukraine',
+						url: '/world/ukraine',
 					},
 					{
 						title: 'Football',
@@ -497,6 +497,10 @@ export const Review: DCRArticle = {
 								longTitle: 'football/teams',
 							},
 						],
+					},
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
 					},
 					{
 						title: 'Business',
@@ -640,7 +644,7 @@ export const Review: DCRArticle = {
 					},
 					{
 						title: 'Cartoons',
-						url: '/cartoons/archive',
+						url: '/tone/cartoons',
 					},
 					{
 						title: 'Opinion videos',
@@ -872,7 +876,7 @@ export const Review: DCRArticle = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://app.adjust.com/16xt6hai',
 			},
 			{
 				title: 'Video',
@@ -1012,11 +1016,11 @@ export const Review: DCRArticle = {
 			},
 			{
 				title: 'Live events',
-				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
 			},
 			{
-				title: 'Masterclasses',
-				url: '/guardian-masterclasses',
+				title: 'About Us',
+				url: '/about',
 			},
 			{
 				title: 'Digital Archive',
@@ -1727,7 +1731,7 @@ export const Review: DCRArticle = {
 					],
 				},
 			],
-			elementId: 'f77f01b4-6517-4372-80f3-a9cc972384e9',
+			elementId: 'b4f992ea-6a4c-4717-bfd2-edb0cff41b4e',
 			position: 1,
 			lightbox: {
 				caption:
@@ -1745,12 +1749,12 @@ export const Review: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The new season of <a href="https://www.theguardian.com/tv-and-radio/2019/jan/17/sex-education-asa-butterfield-gillian-anderson-netflix">Sex Education</a> (Netflix) opens with a bravura sequence that swiftly takes its place in the pantheon of peen-based comedy greats. Suffice to say that since we left Otis at the end of the <a href="https://www.theguardian.com/tv-and-radio/2019/jan/11/sex-education-review-netflix-asa-butterfield-gillian-anderson">glorious inaugural run</a> having successfully masturbated for the first time, he has taken gleefully to his new hobby and – I don’t know if you know the French expression to encourage reluctant diners, “the appetite comes with eating”? – but we need to come up with the carnal equivalent for his joyful daily pursuits of the big O.</p>',
-					elementId: '02e1500d-400e-4f6f-942c-e80cb0b283c0',
+					elementId: 'dd73001c-d850-4dd5-803b-93ec4069ce0d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The scene establishes the tone of the new season – furiously fast, furiously funny, and not for the faint of heart any more than the first series was. And, just like the first series, it underpins the comedy arising from the sixth form students’ sexual escapades, experiments and baffled queries (“My cum tastes like kimchi! Why do I have a fermented dick?”) with deeper explorations of the main characters and the emotional pressures engendered by bigger problems.</p>',
-					elementId: 'eaba02b6-698b-4189-8a29-a22e6ccc479c',
+					elementId: '652fb2c0-1eb9-4fe6-8e5a-0aff3da1ca56',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
@@ -1765,12 +1769,12 @@ export const Review: DCRArticle = {
 					isThirdPartyTracking: false,
 					source: 'YouTube',
 					sourceDomain: 'youtube-nocookie.com',
-					elementId: '6fbad1d6-b4e9-47dc-b776-48de225b2f9b',
+					elementId: 'cc967543-a89d-4fed-b03f-20a9d2a66570',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>With the help of Miss Sands, Maeve (Emma Mackey) finagles her way back into school and the special ability programme. All she has to do thereafter is wrestle with her unwelcoming and far more privileged peers and the return of her errant mother Erin (Anne-Marie Duff), allegedly clean for a year and with a three-year-old half-sister in tow. Otis (<a href="https://www.theguardian.com/tv-and-radio/2019/dec/28/sex-education-asa-butterfield-feel-more-confident-talking-about-sex">Asa Butterfield</a>) must negotiate his new relationship with Ola (Patricia Allison) while his mother Jean (Gillian Anderson, given a whole heap more to do this time round and rightly relishing every moment) throws more spanners in to his sexual works by dating Ola’s dad. Adam – poor beleaguered Adam (Connor Swindells) – is unjustly expelled from military school and sent back home to a dead-end job and his ever more hateful father. Swindells gives an extraordinary performance with what amounts to barely a hundred lines in the entire eight episodes, and if your heart doesn’t break at at least three points for him then I have no use for you. I don’t want to spoil Eric’s storyline because it doesn’t get going until a few episodes in, but <a href="https://www.theguardian.com/culture/2020/jan/05/ncuti-gatwa-i-will-say-yes-to-anything-sex-education">Ncuti Gatwa</a> remains the find of the age and handles everything thrown at him with such deftness and authenticity that you can only boggle at the fact that Laurie Nunn’s creation is his first major role.</p>',
-					elementId: '11bfa953-5b1a-4570-a486-08765837f031',
+					elementId: 'ec5aac4a-b7bf-4b8e-82e5-2929ee782a45',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2079,7 +2083,7 @@ export const Review: DCRArticle = {
 							],
 						},
 					],
-					elementId: '236239df-9665-4dce-943f-89b1d4faabb5',
+					elementId: '6adb295a-27f0-4564-89ba-7c856807bad8',
 					position: 2,
 					lightbox: {
 						caption:
@@ -2090,12 +2094,12 @@ export const Review: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Every performer is wonderful, not least because the script is wonderful, playing the sex for laughs and the search for intimacy as something serious, good and noble. Not a single character is a cipher – even the smallest parts have a sketched backstory and some good gags. It’s all of a piece with the charm and generosity of spirit that suffuses the whole thing. <a href="https://www.theguardian.com/tv-and-radio/sex-education" data-component="auto-linked-tag">Sex Education</a> sets so many conventions cheerily but firmly aside that you feel like an entire forest of received wisdom is being clear-cut. Light floods in, new growth springs up. Such a sense of revelry and optimism abounds that you can feel it doing your heart and soul good as you watch. And all without missing a comic or emotional beat or deviating from its moral core, which urges us all to connect.</p>',
-					elementId: 'e282025f-623a-4ba7-88bf-98d1b5f88831',
+					elementId: '348a4d7f-d35e-4398-9f95-2df53798e0f3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>So welcome once more, Otis (and your newly excitable penis), Maeve with her troubles to seek, Jackson (Kedar Williams-Stirling) whose mental health plummets to new lows as his swimming career reaches new heights, Aimee through whose experience on a local bus the issue of sexual assault is channelled, and all the magnificent rest of you. Nobody does it better. In fact, nobody does anything quite like it at all.</p>',
-					elementId: 'a7eeaa58-2913-4ab9-98be-ed94904371c7',
+					elementId: '0bb7b5aa-000d-47c0-bbfc-7ab85d5b1572',
 				},
 			],
 			attributes: {
@@ -2259,7 +2263,6 @@ export const Review: DCRArticle = {
 			hostedVideoAutoplay: true,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
-			serverShareCounts: true,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,
@@ -2355,7 +2358,7 @@ export const Review: DCRArticle = {
 			position: 1,
 			width: 6000,
 			height: 3600,
-			elementId: 'f77f01b4-6517-4372-80f3-a9cc972384e9',
+			elementId: 'b4f992ea-6a4c-4717-bfd2-edb0cff41b4e',
 			alt: 'Sex Education.',
 			credit: 'Photograph: Sam Taylor/Netflix',
 			caption:
@@ -2368,7 +2371,7 @@ export const Review: DCRArticle = {
 			position: 2,
 			width: 6000,
 			height: 4000,
-			elementId: '236239df-9665-4dce-943f-89b1d4faabb5',
+			elementId: '6adb295a-27f0-4564-89ba-7c856807bad8',
 			alt: 'Gillian Anderson as Jean.',
 			credit: 'Photograph: Netflix',
 			caption: 'Relishing every moment … Gillian Anderson as Jean.',
@@ -2384,7 +2387,7 @@ export const Review: DCRArticle = {
 				'So brilliant you can only boggle ... Ncuti Gatwa as Eric in Sex Education.',
 			masterUrl:
 				'https://media.guim.co.uk/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg',
-			elementId: 'f77f01b4-6517-4372-80f3-a9cc972384e9',
+			elementId: 'b4f992ea-6a4c-4717-bfd2-edb0cff41b4e',
 		},
 		{
 			width: 6000,
@@ -2393,7 +2396,7 @@ export const Review: DCRArticle = {
 			caption: 'Relishing every moment … Gillian Anderson as Jean.',
 			masterUrl:
 				'https://media.guim.co.uk/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg',
-			elementId: '236239df-9665-4dce-943f-89b1d4faabb5',
+			elementId: '6adb295a-27f0-4564-89ba-7c856807bad8',
 		},
 	],
 };

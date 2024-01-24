@@ -469,8 +469,8 @@ export const Audio: DCRArticle = {
 						url: '/environment/climate-crisis',
 					},
 					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
+						title: 'Ukraine',
+						url: '/world/ukraine',
 					},
 					{
 						title: 'Football',
@@ -507,6 +507,10 @@ export const Audio: DCRArticle = {
 								longTitle: 'football/teams',
 							},
 						],
+					},
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
 					},
 					{
 						title: 'Business',
@@ -650,7 +654,7 @@ export const Audio: DCRArticle = {
 					},
 					{
 						title: 'Cartoons',
-						url: '/cartoons/archive',
+						url: '/tone/cartoons',
 					},
 					{
 						title: 'Opinion videos',
@@ -882,7 +886,7 @@ export const Audio: DCRArticle = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://app.adjust.com/16xt6hai',
 			},
 			{
 				title: 'Video',
@@ -1022,11 +1026,11 @@ export const Audio: DCRArticle = {
 			},
 			{
 				title: 'Live events',
-				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
 			},
 			{
-				title: 'Masterclasses',
-				url: '/guardian-masterclasses',
+				title: 'About Us',
+				url: '/about',
 			},
 			{
 				title: 'Digital Archive',
@@ -1135,6 +1139,10 @@ export const Audio: DCRArticle = {
 					longTitle: 'US politics',
 				},
 				{
+					title: 'Ukraine',
+					url: '/world/ukraine',
+				},
+				{
 					title: 'Soccer',
 					url: '/soccer',
 					children: [
@@ -1149,7 +1157,7 @@ export const Audio: DCRArticle = {
 							longTitle: 'football/tables',
 						},
 						{
-							title: 'Fixtures',
+							title: 'Schedules',
 							url: '/football/fixtures',
 							longTitle: 'football/fixtures',
 						},
@@ -1205,8 +1213,8 @@ export const Audio: DCRArticle = {
 					url: '/email-newsletters',
 				},
 				{
-					title: 'Fight for democracy',
-					url: '/us-news/series/the-fight-for-democracy',
+					title: 'Wellness',
+					url: '/wellness',
 				},
 			],
 		},
@@ -1808,7 +1816,7 @@ export const Audio: DCRArticle = {
 					],
 				},
 			],
-			elementId: 'c8bf2c51-ddb1-4733-b80c-248d7b19ea1a',
+			elementId: '036d3878-73d5-40f9-a48c-85bd88f54ca8',
 			position: 1,
 			lightbox: {
 				caption:
@@ -1826,152 +1834,152 @@ export const Audio: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: "<p>The National Security Agency is currently collecting the telephone records of millions of US customers of Verizon, one of America's largest telecoms providers, under a top secret court order issued in April.</p>",
-					elementId: '12511c1c-5ad9-4262-92fc-88b75a9c07db',
+					elementId: 'a8ce9687-c956-44c9-9e86-1877ec2cf881',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The order, a copy of which has been obtained by the Guardian, <a href="https://www.theguardian.com/world/interactive/2013/jun/06/verizon-telephone-data-court-order">requires Verizon on an "ongoing, daily basis" to give the NSA information on all telephone calls in its systems</a>, both within the US and between the US and other countries.</p>',
-					elementId: '91ce9d5b-1a1b-4270-96f8-e32fc08974bd',
+					elementId: 'ac19b74b-a803-4e66-bb79-53405c1ee552',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The document shows for the first time that under the Obama administration the communication records of millions of US citizens are being collected indiscriminately and in bulk – regardless of whether they are suspected of any wrongdoing.</p>',
-					elementId: 'a8749ef0-13a3-4bae-a5cc-7f4bb737a8b6',
+					elementId: 'cffc9d77-12e6-424d-bb8b-d62d3ae21f85',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The secret Foreign Intelligence Surveillance Court (Fisa) granted the order to the FBI on April 25, giving the government unlimited authority to obtain the data for a specified three-month period ending on July 19.</p>',
-					elementId: '706f246e-bb53-4e9e-9317-63ce0d901694',
+					elementId: '1784775e-4b59-4758-ae37-6824c31affbb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Under the terms of the blanket order, the numbers of both parties on a call are handed over, as is location data, call duration, unique identifiers, and the time and duration of all calls. The contents of the conversation itself are not covered.</p>',
-					elementId: '625fade6-f465-4a49-8f1c-c8c3a92cbc6c',
+					elementId: '22aad739-fe0a-431d-a6bd-1f9f05ffb13f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: "<p>The disclosure is likely to reignite longstanding debates in the US over the proper extent of the government's domestic spying powers.</p>",
-					elementId: 'de86a560-1d15-4d2f-b5be-1b554331afa5',
+					elementId: 'ca45b0cc-5084-4beb-85df-c5f008bdfffb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Under the Bush administration, officials in security agencies had disclosed to reporters the large-scale collection of call records data by the <a href="https://www.theguardian.com/us-news/nsa" data-component="auto-linked-tag">NSA</a>, but this is the first time significant and top-secret documents have revealed the continuation of the practice on a massive scale under President Obama.</p>',
-					elementId: '89ae8a70-d7fb-4f77-9315-7fd763f4e0af',
+					elementId: '039a7177-800f-4da2-830a-f9eb109fa3af',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The unlimited nature of the records being handed over to the NSA is extremely unusual. Fisa court orders typically direct the production of records pertaining to a specific named target who is suspected of being an agent of a terrorist group or foreign state, or a finite set of individually named targets.</p>',
-					elementId: 'b44adcad-61fd-41f5-acb6-237d0e02a91f',
+					elementId: '2cc3c7b2-0676-4115-b7cb-4281be4389be',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The Guardian approached the National Security Agency, the White House and the Department of Justice for comment in advance of publication on Wednesday. All declined. The agencies were also offered the opportunity to raise specific security concerns regarding the publication of the court order.</p>',
-					elementId: 'a16616f9-318a-4dcf-8058-c3fead023c1c',
+					elementId: '89ff9847-18b9-45b0-b05b-58c391da6f5e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: "<p>The court order expressly bars Verizon from disclosing to the public either the existence of the FBI's request for its customers' records, or the court order itself.</p>",
-					elementId: '88750cb8-dd5b-4217-b875-502aca90a9d8',
+					elementId: 'ec2fce71-8c4c-4a49-ad2a-c186d61f008e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>"We decline comment," said Ed McFadden, a Washington-based Verizon spokesman.</p>',
-					elementId: 'b50c9d89-31d8-4b83-91ea-a7b1c88a9d19',
+					elementId: 'e8c8839f-3c18-49bf-a663-57038f27ed51',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The order, signed by Judge Roger Vinson, compels Verizon to produce to the NSA electronic copies of "all call detail records or \'telephony metadata\' created by Verizon for communications between the United States and abroad" or "wholly within the United States, including local telephone calls".</p>',
-					elementId: '4db2125d-93fa-49d5-bb7a-1802cb24c92e',
+					elementId: 'c1f650a2-516e-4ef9-8faf-ca49de190ca3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The order directs Verizon to "continue production on an ongoing daily basis thereafter for the duration of this order". It specifies that the records to be produced include "session identifying information", such as "originating and terminating number", the duration of each call, telephone calling card numbers, trunk identifiers, International Mobile Subscriber Identity (IMSI) number, and "comprehensive communication routing information".</p>',
-					elementId: 'd01ad07b-1eee-461f-acfc-02d0b36ee238',
+					elementId: '293ee3d0-9413-4cac-8aef-5c8dbc9185ad',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The information is classed as "metadata", or transactional information, rather than communications, and so does not require individual warrants to access. The document also specifies that such "metadata" is not limited to the aforementioned items. A 2005 court ruling judged that cell site location data – the nearest cell tower a phone was connected to – was also transactional data, and so could potentially fall under the scope of the order.</p>',
-					elementId: '2160ce15-73c5-4161-aca0-0805183e233e',
+					elementId: '0c16752a-b39e-4dbd-8b78-5ef673464f80',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>While the order itself does not include either the contents of messages or the personal information of the subscriber of any particular cell number, its collection would allow the NSA to build easily a comprehensive picture of who any individual contacted, how and when, and possibly from where, retrospectively.</p>',
-					elementId: 'c5a46370-fbee-4681-b70f-c70109393d51',
+					elementId: '60fa97ab-d87a-4ecc-9e97-e7ebef1a9e4f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It is not known whether Verizon is the only cell-phone provider to be targeted with such an order, although previous reporting has suggested the NSA has collected cell records from all major mobile networks. It is also unclear from the leaked document whether the three-month order was a one-off, or the latest in a series of similar orders.</p>',
-					elementId: '121deb0b-9f6a-49bd-bae7-9a26e62c6ea9',
+					elementId: 'f6190ca1-df0e-43a2-8ad3-8d29778df243',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: "<p>The court order appears to explain the numerous cryptic public warnings by two US senators, Ron Wyden and Mark Udall, about the scope of the Obama administration's surveillance activities.</p>",
-					elementId: 'e2a5044f-62a8-411f-a2ee-59a2c4cecdf5',
+					elementId: '43ea9d80-b7c7-4f88-87b2-154db3dcdf4c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For roughly two years, the two Democrats have been stridently advising the public that the US government is relying on "secret legal interpretations" to claim surveillance powers so broad that the American public would be "stunned" to learn of the kind of domestic spying being conducted.</p>',
-					elementId: '5ec9a19b-3f93-47ae-a77a-9f3061c4afc9',
+					elementId: 'ba97d442-b5e5-4727-ae4a-0769fe5d6472',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Because those activities are classified, the senators, both members of the Senate intelligence committee, have been prevented from specifying which domestic surveillance programs they find so alarming. But the information they have been able to disclose in their public warnings perfectly tracks both the specific law cited by the April 25 court order as well as the vast scope of record-gathering it authorized.</p>',
-					elementId: '8d336a4b-67e0-4ac9-8d26-0eb93f5e16e3',
+					elementId: '51037874-f084-4bc8-adcd-1cd7517d3143',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: "<p>Julian Sanchez, a surveillance expert with the Cato Institute, explained: \"We've certainly seen the government increasingly strain the bounds of 'relevance' to collect large numbers of records at once — everyone at one or two degrees of separation from a target — but vacuuming all metadata up indiscriminately would be an extraordinary repudiation of any pretence of constraint or particularized suspicion.\" The April order requested by the FBI and NSA does precisely that.</p>",
-					elementId: 'e9e4bf2c-4c73-41c4-8292-1532af2a440f',
+					elementId: 'd7ed8a2f-cf92-44b0-9f64-60bacc8ef4f9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The law on which the order explicitly relies is the so-called "business records" provision of the Patriot Act, 50 USC section 1861. That is the provision which Wyden and Udall have repeatedly cited when warning the public of what they believe is the Obama administration\'s extreme interpretation of the law to engage in excessive domestic surveillance.</p>',
-					elementId: '979e5d67-f890-4790-9a76-51566e310aba',
+					elementId: '58d8909d-e5bb-4bb6-9c4b-59f2a62e4166',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In a letter to attorney general Eric Holder last year, they argued that "there is now a significant gap between what most Americans <em>think</em> the law allows and what the government secretly <em>claims</em> the law allows."</p>',
-					elementId: '9b4bf46f-b5c9-4883-8d59-d9740f783640',
+					elementId: '9b78253b-a95e-44cf-a8e7-555abb334ca2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>"We believe," they wrote, "that most Americans would be stunned to learn the details of how these secret court opinions have interpreted" the "business records" provision of the Patriot Act.</p>',
-					elementId: 'cee81749-d882-43ff-ae3f-0904d5d52ef1',
+					elementId: '64eec6b7-a4d8-44ce-ab38-cfb1f00f17e2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Privacy advocates have long warned that allowing the government to collect and store unlimited "metadata" is a highly invasive form of surveillance of citizens\' communications activities. Those records enable the government to know the identity of every person with whom an individual communicates electronically, how long they spoke, and their location at the time of the communication.</p>',
-					elementId: '0db59739-49af-4883-aa5e-4695e697cb61',
+					elementId: '5a17da3f-3244-490c-a81d-976f3ee80d41',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: "<p>Such metadata is what the US government has long attempted to obtain in order to discover an individual's network of associations and communication patterns. The request for the bulk collection of all Verizon domestic telephone records indicates that the agency is continuing some version of the data-mining program begun by the Bush administration in the immediate aftermath of the 9/11 attack.</p>",
-					elementId: 'e86c6f27-86ab-4e27-8448-973c950d64a5',
+					elementId: '2802ee04-8315-4ef0-adff-3838a318541f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The NSA, as part of a program secretly authorized by President Bush on 4 October 2001, implemented a bulk collection program of domestic telephone, internet and email records. A furore erupted in 2006 when USA Today reported that the NSA had "been secretly collecting the phone call records of tens of millions of Americans, using data provided by AT&amp;T, Verizon and BellSouth" and was "using the data to analyze calling patterns in an effort to detect terrorist activity." Until now, there has been no indication that the Obama administration implemented a similar program.</p>',
-					elementId: '33008dd3-0825-4122-be59-b1a212a3ed98',
+					elementId: '00d2fcda-6ba3-4aa8-9615-248f4becc4ea',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: "<p>These recent events reflect how profoundly the NSA's mission has transformed from an agency exclusively devoted to foreign intelligence gathering, into one that focuses increasingly on domestic communications. A 30-year employee of the NSA, William Binney, resigned from the agency shortly after 9/11 in protest at the agency's focus on domestic activities.</p>",
-					elementId: '72ae02ec-3418-4af8-9568-cbd3e5abadcb',
+					elementId: '785d4954-cd0e-40c6-ab08-08ab2b4350e0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In the mid-1970s, Congress, for the first time, investigated the surveillance activities of the US government. Back then, the mandate of the NSA was that it would never direct its surveillance apparatus domestically.</p>',
-					elementId: '1d7c2d46-b0e2-45ea-be0d-8d258f240b4f',
+					elementId: '148366a5-e29b-4bd4-b3de-f87e81cd0bcd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>At the conclusion of that investigation, Frank Church, the Democratic senator from Idaho who chaired the investigative committee, warned: "The NSA\'s capability at any time could be turned around on the American people, and no American would have any privacy left, such is the capability to monitor everything: telephone conversations, telegrams, it doesn\'t matter."</p>',
-					elementId: '60fff0bd-7d06-4fe5-bd33-6642a3328ca3',
+					elementId: '365b2c86-9371-4272-a6fb-402ae1960f76',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Additional reporting by Ewen MacAskill and Spencer Ackerman</em></p>',
-					elementId: '690dc3ca-f62a-46bc-b98c-3053db787795',
+					elementId: '3e54b681-3603-4e16-ab89-774ad8dcbb84',
 				},
 			],
 			attributes: {
@@ -2132,7 +2140,6 @@ export const Audio: DCRArticle = {
 			hostedVideoAutoplay: true,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
-			serverShareCounts: true,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,

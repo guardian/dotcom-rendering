@@ -1,5 +1,4 @@
 import type { EditionId } from '../lib/edition';
-import type { DCRBadgeType } from './badge';
 
 type BrandingLogo = {
 	src: string;
@@ -31,40 +30,32 @@ export interface EditionBranding {
 	branding?: Branding;
 }
 
+type BaseCollectionBranding<Kind extends BrandingType['name']> = {
+	/**
+	 * A collection has branding that is funded by a third party
+	 */
+	kind: Kind;
+	branding: Branding;
+	/**
+	 * In certain circumstances a collection might display the branding on behalf of an entire front
+	 * In that case this property is true
+	 */
+	isFrontBranding: boolean;
+	/**
+	 * In certain circumstances a collection might display the branding only on its own container.
+	 * Is eligible to display a brand logo.
+	 */
+	isContainerBranding: boolean;
+	/**
+	 * In certain circumstances a collection may display multiple brands within one container.
+	 */
+	hasMultipleBranding: boolean;
+};
+
 /**
  * Branding that can be applied to an entire collection on a front
- *
- * The `kind` property here is used to disambiguate the kind of branding
- * a collection can have:
- * - Those funded by a third party
- * - Those that have an editorial badge from a hardcoded set
  */
 export type CollectionBranding =
-	| {
-			/**
-			 * A collection can have branding that is funded by a third party
-			 */
-			kind: BrandingType['name'];
-			branding: Branding;
-			/**
-			 * In certain circumstances a collection might display the branding on behalf of an entire front
-			 * In that case this property is true
-			 */
-			isFrontBranding: boolean;
-			/**
-			 * In certain circumstances a collection might display the branding only on its own container.
-			 * Is eligible to display a brand logo.
-			 */
-			isContainerBranding: boolean;
-			/**
-			 * In certain circumstances a collection may display multiple brands within one container.
-			 */
-			hasMultipleBranding: boolean;
-	  }
-	| {
-			/**
-			 * Collections from certain series can have an 'editorial' badge selected from a hardcoded set
-			 */
-			kind: 'editorial';
-			badge: DCRBadgeType;
-	  };
+	| BaseCollectionBranding<'foundation'>
+	| BaseCollectionBranding<'paid-content'>
+	| BaseCollectionBranding<'sponsored'>;

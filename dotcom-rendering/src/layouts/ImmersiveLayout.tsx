@@ -430,7 +430,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
-									badge={article.badge?.enhanced}
 								/>
 							</Section>
 							<Box>
@@ -520,7 +519,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											guardianBaseURL={
 												article.guardianBaseURL
 											}
-											badge={article.badge?.enhanced}
 										/>
 									</div>
 								)}
@@ -766,7 +764,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									showBottomSocialButtons={
 										article.showBottomSocialButtons && isWeb
 									}
-									badge={article.badge?.enhanced}
 								/>
 							</ArticleContainer>
 						</GridItem>
