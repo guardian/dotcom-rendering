@@ -383,6 +383,9 @@ importers:
       '@guardian/libs':
         specifier: 16.0.1
         version: 16.0.1(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/ophan-tracker-js':
+        specifier: 2.0.4
+        version: 2.0.4
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -755,9 +758,6 @@ importers:
       mockdate:
         specifier: 3.0.5
         version: 3.0.5
-      ophan-tracker-js:
-        specifier: 2.0.2
-        version: 2.0.2
       parse5:
         specifier: 7.1.2
         version: 7.1.2
@@ -5070,6 +5070,11 @@ packages:
       temp: 0.9.4
       yaml: 1.10.2
       yargs: 15.4.1
+    dev: false
+
+  /@guardian/ophan-tracker-js@2.0.4:
+    resolution: {integrity: sha512-kwUNUSfnL8SQwzTlVzInYh7a6VSMFy3zEq2A6Hm7cmKSbl8D7ed03y7ANqquViFuPffRZRQ0IrkJHSbMnsRmrA==}
+    engines: {node: '>=16'}
     dev: false
 
   /@guardian/prettier@5.0.0(prettier@3.0.3)(tslib@2.6.2):
