@@ -93,10 +93,6 @@ export const Discussion = ({
 	idApiUrl,
 }: Props) => {
 	const [commentPage, setCommentPage] = useState(1);
-	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
-	const [commentOrderBy, setCommentOrderBy] = useState<
-		'newest' | 'oldest' | 'recommendations'
-	>();
 	const [comments, setComments] = useState<CommentType[]>([]);
 	const [isClosedForComments, setIsClosedForComments] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -126,16 +122,13 @@ export const Discussion = ({
 	}, [filters, commentPage, shortUrlId]);
 
 	useEffect(() => {
-		const orderByClosed = isClosedForComments ? 'oldest' : undefined;
-
 		setFilters((prevFilters) => ({
-			orderBy: commentOrderBy ?? orderByClosed ?? prevFilters.orderBy,
-			pageSize: commentPageSize ?? prevFilters.pageSize,
+			...filters,
 			threads:
 				filterByPermalinks(prevFilters.threads, hashCommentId) ??
 				prevFilters.threads,
 		}));
-	}, [commentPageSize, commentOrderBy, isClosedForComments, hashCommentId]);
+	}, [hashCommentId]);
 
 	useEffect(() => {
 		rememberFilters(filters);
@@ -163,8 +156,6 @@ export const Discussion = ({
 			getCommentContext(discussionApiUrl, hashCommentId)
 				.then((context) => {
 					setCommentPage(context.page);
-					setCommentPageSize(context.pageSize);
-					setCommentOrderBy(context.orderBy);
 					setIsExpanded(true);
 				})
 				.catch((e) =>
