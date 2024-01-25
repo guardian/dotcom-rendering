@@ -136,6 +136,7 @@ export const Comments = ({
 	const [isCommentFormActive, setIsCommentFormActive] = useState<boolean>(
 		!!commentBeingRepliedTo,
 	);
+	const [error, setError] = useState<string>('');
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
 
@@ -298,6 +299,8 @@ export const Comments = ({
 											setIsCommentFormActive={
 												setIsCommentFormActive
 											}
+											error={error}
+											setError={setError}
 										/>
 									</li>
 								))}
@@ -321,6 +324,8 @@ export const Comments = ({
 					onPreview={onPreview}
 					isActive={isCommentFormActive}
 					setIsActive={setIsCommentFormActive}
+					error={error}
+					setError={setError}
 				/>
 			)}
 			{!!picks.length && (
@@ -377,6 +382,8 @@ export const Comments = ({
 									setIsCommentFormActive={
 										setIsCommentFormActive
 									}
+									error={error}
+									setError={setError}
 								/>
 							</li>
 						))}
@@ -404,6 +411,8 @@ export const Comments = ({
 					onPreview={onPreview}
 					isActive={isCommentFormActive}
 					setIsActive={setIsCommentFormActive}
+					error={error}
+					setError={setError}
 				/>
 			)}
 		</div>

@@ -38,6 +38,8 @@ type Props = {
 	onPreview?: (body: string) => Promise<string>;
 	isActive: boolean;
 	setIsActive: (isActive: boolean) => void;
+	error: string;
+	setError: (error: string) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -219,11 +221,12 @@ export const CommentForm = ({
 	onPreview,
 	isActive,
 	setIsActive,
+	error,
+	setError,
 }: Props) => {
 	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
 	const [body, setBody] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
-	const [error, setError] = useState<string>('');
 	const [info, setInfo] = useState<string>('');
 	const [showPreview, setShowPreview] = useState<boolean>(false);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);

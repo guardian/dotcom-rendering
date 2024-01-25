@@ -32,6 +32,8 @@ type Props = {
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
 	onRecommend?: (commentId: number) => Promise<boolean>;
+	error: string;
+	setError: (error: string) => void;
 };
 
 const commentControlsLink = css`
@@ -301,11 +303,12 @@ export const Comment = ({
 	toggleMuteStatus,
 	onPermalinkClick,
 	onRecommend,
+	error,
+	setError,
 }: Props) => {
 	const [isHighlighted, setIsHighlighted] = useState<boolean>(
 		comment.isHighlighted,
 	);
-	const [error, setError] = useState<string>();
 
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);

@@ -184,6 +184,8 @@ describe('CommentContainer', () => {
 				onPermalinkClick={() => {}}
 				isCommentFormActive={true}
 				setIsCommentFormActive={() => {}}
+				error={''}
+				setError={() => {}}
 			/>,
 		);
 
