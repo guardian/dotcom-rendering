@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentForm } from './CommentForm';
@@ -60,36 +61,44 @@ const aComment: CommentType = {
 	},
 };
 
-export const Default = () => (
-	<CommentForm
-		shortUrl={shortUrl}
-		user={aUser}
-		onAddComment={(comment) => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isActive={false}
-		setIsActive={() => {}}
-		userNameMissing={false}
-		setUserNameMissing={() => {}}
-	/>
-);
+export const Default = () => {
+	const [isActive, setIsActive] = useState(false);
+
+	return (
+		<CommentForm
+			shortUrl={shortUrl}
+			user={aUser}
+			onAddComment={(comment) => {}}
+			isActive={isActive}
+			setIsActive={setIsActive}
+			showPreview={false}
+			setShowPreview={() => {}}
+			userNameMissing={false}
+			setUserNameMissing={() => {}}
+		/>
+	);
+};
 Default.storyName = 'default';
 Default.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
 // This story has a mocked post endpoint that returns an error, see 97d6eab4a98917f63bc96a7ac64f7ca7
-export const Error = () => (
-	<CommentForm
-		shortUrl={'/p/g8g7v'}
-		user={aUser}
-		onAddComment={(comment) => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isActive={false}
-		setIsActive={() => {}}
-		userNameMissing={false}
-		setUserNameMissing={() => {}}
-	/>
-);
+export const Error = () => {
+	const [isActive, setIsActive] = useState(false);
+
+	return (
+		<CommentForm
+			shortUrl={'/p/g8g7v'}
+			user={aUser}
+			onAddComment={(comment) => {}}
+			isActive={isActive}
+			setIsActive={setIsActive}
+			showPreview={false}
+			setShowPreview={() => {}}
+			userNameMissing={false}
+			setUserNameMissing={() => {}}
+		/>
+	);
+};
 Error.storyName = 'form with errors';
 Error.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
