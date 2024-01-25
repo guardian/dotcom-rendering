@@ -357,8 +357,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.3.102)(@types/node@18.18.14)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.3.3)
       '@guardian/commercial':
-        specifier: 12.0.0
-        version: 12.0.0(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@1.0.0)(@guardian/identity-auth@1.1.0)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3)
+        specifier: 13.0.0
+        version: 13.0.0(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@1.0.0)(@guardian/identity-auth@1.1.0)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3)
       '@guardian/consent-management-platform':
         specifier: 13.7.1
         version: 13.7.1(@guardian/libs@16.0.1)
@@ -4780,8 +4780,8 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@12.0.0(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@1.0.0)(@guardian/identity-auth@1.1.0)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3):
-    resolution: {integrity: sha512-fKViYFmMcgMOfKWPFd5RT+zBlVwe52R0PGLDy1OaEobAwWYyt1h9uJYbMSFlXrwqGBoaiOXi8eXOQ6BaYgAy9Q==}
+  /@guardian/commercial@13.0.0(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@1.0.0)(@guardian/identity-auth@1.1.0)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3):
+    resolution: {integrity: sha512-LtRU1c4qu2WJvByDhAKOjD0U4nRxsv5dtaHqYJfq9ROmtenLTvPbIAAAqnNoUZDxv49mbjG9a5LSPv/DhJgbEw==}
     peerDependencies:
       '@guardian/ab-core': ^7.0.1
       '@guardian/consent-management-platform': ^13.7.1
@@ -4799,13 +4799,13 @@ packages:
       '@guardian/identity-auth': 1.1.0(@guardian/libs@16.0.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/identity-auth-frontend': 1.0.0(@guardian/identity-auth@1.1.0)(@guardian/libs@16.0.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/ophan-tracker-js': 2.0.4
       '@guardian/source-foundations': 14.1.2(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/support-dotcom-components': 1.1.1
       '@octokit/core': 4.2.4
       fastdom: 1.0.11
       lodash-es: 4.17.21
-      ophan-tracker-js: 2.0.2
-      prebid.js: github.com/guardian/prebid.js/ee7f43c7c85a5245bbe51920cfed18818866ea7b(tslib@2.6.2)(typescript@5.3.3)
+      prebid.js: github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3)
       process: 0.11.10
       raven-js: 3.27.2
       tslib: 2.6.2
@@ -5021,19 +5021,6 @@ packages:
       typescript: 5.3.3
     dev: false
 
-  /@guardian/libs@15.7.1(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-7Q4iuojbETOxa/VQHj78G7iQyP5cWEGE5Rc12BL6lAo32sX11Qzb3ZpYK/jP3g4OCLlf8jgnL5e4yeeVNw09mg==}
-    peerDependencies:
-      tslib: ^2.5.3
-      typescript: ~5.1.3
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      tslib: 2.6.2
-      typescript: 5.3.3
-    dev: false
-
   /@guardian/libs@16.0.0(tslib@2.6.2)(typescript@5.3.3):
     resolution: {integrity: sha512-2i9cN6htXnvABIGhfqJGb9Bh/DdQOayUjb5ruqBGTiXEeDBHztctdVsi7+rPfMlwyPxQ+0qYLhM19f6J94vvhQ==}
     peerDependencies:
@@ -5073,6 +5060,11 @@ packages:
       temp: 0.9.4
       yaml: 1.10.2
       yargs: 15.4.1
+    dev: false
+
+  /@guardian/ophan-tracker-js@2.0.4:
+    resolution: {integrity: sha512-kwUNUSfnL8SQwzTlVzInYh7a6VSMFy3zEq2A6Hm7cmKSbl8D7ed03y7ANqquViFuPffRZRQ0IrkJHSbMnsRmrA==}
+    engines: {node: '>=16'}
     dev: false
 
   /@guardian/prettier@5.0.0(prettier@3.0.3)(tslib@2.6.2):
@@ -20735,9 +20727,9 @@ packages:
     version: 0.1.0
     dev: false
 
-  github.com/guardian/prebid.js/ee7f43c7c85a5245bbe51920cfed18818866ea7b(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {tarball: https://codeload.github.com/guardian/prebid.js/tar.gz/ee7f43c7c85a5245bbe51920cfed18818866ea7b}
-    id: github.com/guardian/prebid.js/ee7f43c7c85a5245bbe51920cfed18818866ea7b
+  github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {tarball: https://codeload.github.com/guardian/prebid.js/tar.gz/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4}
+    id: github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4
     name: prebid.js
     version: 8.24.0
     engines: {node: '>=8.9.0'}
@@ -20746,7 +20738,7 @@ packages:
       '@babel/plugin-transform-runtime': 7.19.6(@babel/core@7.23.2)
       '@babel/preset-env': 7.22.6(@babel/core@7.23.2)
       '@babel/runtime': 7.23.8
-      '@guardian/libs': 15.7.1(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
       core-js: 3.33.3
       core-js-pure: 3.35.0
       criteo-direct-rsa-validate: 1.1.0
