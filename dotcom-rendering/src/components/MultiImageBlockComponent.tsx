@@ -9,7 +9,7 @@ type Props = {
 	images: ImageBlockElement[];
 	format: ArticleFormat;
 	caption?: string;
-	isInLightboxTest: boolean;
+	lightbox: boolean;
 };
 
 const ieFallback = css`
@@ -103,12 +103,12 @@ const OneImage = ({
 	images,
 	format,
 	caption,
-	isInLightboxTest,
+	lightbox,
 }: {
 	images: [ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-	isInLightboxTest: boolean;
+	lightbox: boolean;
 }) => (
 	<div css={wrapper}>
 		<ImageComponent
@@ -116,7 +116,7 @@ const OneImage = ({
 			element={images[0]}
 			hideCaption={true}
 			role={images[0].role}
-			isInLightboxTest={isInLightboxTest}
+			lightbox={lightbox}
 		/>
 		{!!caption && (
 			<Caption
@@ -132,12 +132,12 @@ const TwoImage = ({
 	images,
 	format,
 	caption,
-	isInLightboxTest,
+	lightbox,
 }: {
 	images: [ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-	isInLightboxTest: boolean;
+	lightbox: boolean;
 }) => (
 	<div css={wrapper}>
 		<SideBySideGrid>
@@ -147,7 +147,7 @@ const TwoImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
-					isInLightboxTest={isInLightboxTest}
+					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -156,7 +156,7 @@ const TwoImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
-					isInLightboxTest={isInLightboxTest}
+					lightbox={lightbox}
 				/>
 			</GridItem>
 		</SideBySideGrid>
@@ -174,12 +174,12 @@ const ThreeImage = ({
 	images,
 	format,
 	caption,
-	isInLightboxTest,
+	lightbox,
 }: {
 	images: [ImageBlockElement, ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-	isInLightboxTest: boolean;
+	lightbox: boolean;
 }) => (
 	<div css={wrapper}>
 		<OneAboveTwoGrid>
@@ -189,7 +189,7 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
-					isInLightboxTest={isInLightboxTest}
+					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -198,7 +198,7 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
-					isInLightboxTest={isInLightboxTest}
+					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="third">
@@ -207,7 +207,7 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[2].role}
-					isInLightboxTest={isInLightboxTest}
+					lightbox={lightbox}
 				/>
 			</GridItem>
 		</OneAboveTwoGrid>
@@ -225,7 +225,7 @@ const FourImage = ({
 	images,
 	format,
 	caption,
-	isInLightboxTest,
+	lightbox,
 }: {
 	images: [
 		ImageBlockElement,
@@ -235,7 +235,7 @@ const FourImage = ({
 	];
 	format: ArticleFormat;
 	caption?: string;
-	isInLightboxTest: boolean;
+	lightbox: boolean;
 }) => (
 	<div css={wrapper}>
 		<GridOfFour>
@@ -245,7 +245,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
-					isInLightboxTest={isInLightboxTest}
+					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -254,7 +254,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
-					isInLightboxTest={isInLightboxTest}
+					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="third">
@@ -263,7 +263,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[2].role}
-					isInLightboxTest={isInLightboxTest}
+					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="forth">
@@ -272,7 +272,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[3].role}
-					isInLightboxTest={isInLightboxTest}
+					lightbox={lightbox}
 				/>
 			</GridItem>
 		</GridOfFour>
@@ -290,7 +290,7 @@ export const MultiImageBlockComponent = ({
 	images,
 	format,
 	caption,
-	isInLightboxTest,
+	lightbox,
 }: Props) => {
 	const [one, two, three, four] = images;
 
@@ -300,7 +300,7 @@ export const MultiImageBlockComponent = ({
 				images={[one, two, three, four]}
 				format={format}
 				caption={caption}
-				isInLightboxTest={isInLightboxTest}
+				lightbox={lightbox}
 			/>
 		);
 	}
@@ -311,7 +311,7 @@ export const MultiImageBlockComponent = ({
 				images={[one, two, three]}
 				format={format}
 				caption={caption}
-				isInLightboxTest={isInLightboxTest}
+				lightbox={lightbox}
 			/>
 		);
 	}
@@ -322,7 +322,7 @@ export const MultiImageBlockComponent = ({
 				images={[one, two]}
 				format={format}
 				caption={caption}
-				isInLightboxTest={isInLightboxTest}
+				lightbox={lightbox}
 			/>
 		);
 	}
@@ -333,7 +333,7 @@ export const MultiImageBlockComponent = ({
 				images={[one]}
 				format={format}
 				caption={caption}
-				isInLightboxTest={isInLightboxTest}
+				lightbox={lightbox}
 			/>
 		);
 	}
