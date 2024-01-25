@@ -30,7 +30,7 @@ type CommentContextType = {
 	discussionKey: string;
 	discussionWebUrl: string;
 	discussionApiUrl: string;
-	orderBy: OrderByType;
+	orderBy: OrderByType | 'mostRecommended'; // the API uses 'mostRecommended' but the frontend uses 'recommendations'
 	pageSize: PageSizeType; // TODO: Review these https://trello.com/c/7v4VDNY0/1326-review-page-size-values
 	page: number;
 };

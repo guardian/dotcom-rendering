@@ -162,9 +162,17 @@ export const Discussion = ({
 		if (hashCommentId !== undefined) {
 			getCommentContext(discussionApiUrl, hashCommentId)
 				.then((context) => {
+					/**
+					 * The Discussion API returns 'mostRecommended' as the orderBy value so
+					 *  we need to parse this to 'recommendations' which is what frontend expects
+					 **/
+					const orderBy =
+						context.orderBy === 'mostRecommended'
+							? 'recommendations'
+							: context.orderBy;
 					setCommentPage(context.page);
 					setCommentPageSize(context.pageSize);
-					setCommentOrderBy(context.orderBy);
+					setCommentOrderBy(orderBy);
 					setIsExpanded(true);
 				})
 				.catch((e) =>
