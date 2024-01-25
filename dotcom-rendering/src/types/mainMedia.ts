@@ -6,7 +6,7 @@ type Media = {
 type Video = Media & {
 	type: 'Video';
 	/** @see https://github.com/guardian/frontend/blob/8e7e4d0e/common/app/model/content/Atom.scala#L159 */
-	id: string;
+	id?: string;
 	videoId: string;
 	height: number;
 	width: number;
