@@ -136,14 +136,13 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
-	abTests,
 	editionId,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
-	const isInLightboxTest = abTests.lightboxVariant === 'variant';
+	const webLightbox = !!switches.lightbox;
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -211,7 +210,7 @@ export const renderElement = ({
 				<CartoonComponent
 					format={format}
 					element={element}
-					abTests={abTests}
+					lightbox={!!switches.lightbox}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
@@ -352,7 +351,7 @@ export const renderElement = ({
 					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
-					isInLightboxTest={isInLightboxTest}
+					lightbox={webLightbox}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -455,7 +454,7 @@ export const renderElement = ({
 					key={index}
 					images={element.images}
 					caption={element.caption}
-					isInLightboxTest={isInLightboxTest}
+					lightbox={webLightbox}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':

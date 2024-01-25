@@ -57,10 +57,8 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		adUnit: article.config.adUnit,
 	});
 
-	const isInLightboxTest =
-		article.config.abTests.lightboxVariant === 'variant';
-
-	const webLightbox = renderingTarget === 'Web' && isInLightboxTest;
+	const webLightbox =
+		renderingTarget === 'Web' && !!article.config.switches.lightbox;
 
 	return (
 		<StrictMode>

@@ -31,7 +31,7 @@ type Props = {
 	starRating?: number;
 	title?: string;
 	isAvatar?: boolean;
-	isInLightboxTest: boolean;
+	lightbox: boolean;
 };
 
 const starsWrapper = css`
@@ -237,7 +237,7 @@ export const ImageComponent = ({
 	starRating,
 	title,
 	isAvatar,
-	isInLightboxTest,
+	lightbox,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
@@ -264,7 +264,7 @@ export const ImageComponent = ({
 	}
 
 	const webLightbox =
-		renderingTarget === 'Web' && isInLightboxTest && isWideEnough(image);
+		renderingTarget === 'Web' && lightbox && isWideEnough(image);
 
 	/**
 	 * We use height and width for two things.
