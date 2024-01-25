@@ -36,6 +36,8 @@ type Props = {
 		parentCommentId: number,
 	) => Promise<CommentResponse>;
 	onPreview?: (body: string) => Promise<string>;
+	isActive: boolean;
+	setIsActive: (isActive: boolean) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -215,10 +217,9 @@ export const CommentForm = ({
 	onComment,
 	onReply,
 	onPreview,
+	isActive,
+	setIsActive,
 }: Props) => {
-	const [isActive, setIsActive] = useState<boolean>(
-		commentBeingRepliedTo ? true : false,
-	);
 	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
 	const [body, setBody] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
@@ -304,9 +305,7 @@ export const CommentForm = ({
 		setBody('');
 		setShowPreview(false);
 		setIsActive(false);
-		if (setCommentBeingRepliedTo) {
-			setCommentBeingRepliedTo();
-		}
+		setCommentBeingRepliedTo?.();
 	};
 
 	const submitForm = async () => {
@@ -499,6 +498,7 @@ export const CommentForm = ({
 					}}
 					value={body}
 					onFocus={() => setIsActive(true)}
+					onBlur={() => setIsActive(false)}
 				/>
 				<div css={bottomContainer}>
 					<Row>

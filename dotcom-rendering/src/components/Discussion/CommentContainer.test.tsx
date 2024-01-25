@@ -66,6 +66,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
 			/>,
 		);
 
@@ -103,6 +105,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
 			/>,
 		);
 
@@ -139,6 +143,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
 			/>,
 		);
 
@@ -176,6 +182,8 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
 			/>,
 		);
 
