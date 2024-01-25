@@ -699,8 +699,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1
       execa:
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 8.0.1
+        version: 8.0.1
       express:
         specifier: 4.18.2
         version: 4.18.2
@@ -4516,7 +4516,7 @@ packages:
       '@octokit/core': 4.2.4
       fastdom: 1.0.11
       lodash-es: 4.17.21
-      prebid.js: github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3)
+      prebid.js: git@github.com+guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3)
       process: 0.11.10
       raven-js: 3.27.2
       tslib: 2.6.2
@@ -5493,7 +5493,7 @@ packages:
     dependencies:
       ansi-html-community: 0.0.8
       common-path-prefix: 3.0.0
-      core-js-pure: 3.34.0
+      core-js-pure: 3.35.0
       error-stack-parser: 2.1.4
       find-up: 5.0.0
       html-entities: 2.4.0
@@ -10862,11 +10862,6 @@ packages:
     resolution: {integrity: sha512-4ZIyeNbW/Cn1wkMMDy+mvrRUxrwFNjKwbhCfQpDd+eLgYipDqp8oGFGtLmhh18EDPKA0g3VUBYOxQGGwvWLVpA==}
     dependencies:
       browserslist: 4.22.2
-    dev: false
-
-  /core-js-pure@3.34.0:
-    resolution: {integrity: sha512-pmhivkYXkymswFfbXsANmBAewXx86UBfmagP+w0wkK06kLsLlTK5oQmsURPivzMkIBQiYq2cjamcZExIwlFQIg==}
-    requiresBuild: true
     dev: false
 
   /core-js-pure@3.35.0:
@@ -16496,12 +16491,6 @@ packages:
     hasBin: true
     dev: false
 
-  /ophan-tracker-js@2.0.2:
-    resolution: {integrity: sha512-cAVIFZbMAUmAhRYSma2Q833DmbWsfH0hySh6BeuKrK2rcvkS8dB8v3AHudHQrASMIzrgHXjbsHB0A9AusFIg2Q==}
-    engines: {node: '>=16'}
-    deprecated: This package has been replaced by @guardian/ophan-tracker-js
-    dev: false
-
   /optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}
     engines: {node: '>= 0.8.0'}
@@ -20791,15 +20780,9 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  github.com/guardian/babel-plugin-px-to-rem/548c5f5bfdfdfc317b86103d27565868bd7d381c:
-    resolution: {tarball: https://codeload.github.com/guardian/babel-plugin-px-to-rem/tar.gz/548c5f5bfdfdfc317b86103d27565868bd7d381c}
-    name: babel-plugin-px-to-rem
-    version: 0.1.0
-    dev: false
-
-  github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {tarball: https://codeload.github.com/guardian/prebid.js/tar.gz/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4}
-    id: github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4
+  git@github.com+guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {commit: 91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4, repo: git@github.com:guardian/prebid.js.git, type: git}
+    id: git@github.com+guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4
     name: prebid.js
     version: 8.24.0
     engines: {node: '>=8.9.0'}
@@ -20825,4 +20808,10 @@ packages:
       - supports-color
       - tslib
       - typescript
+    dev: false
+
+  github.com/guardian/babel-plugin-px-to-rem/548c5f5bfdfdfc317b86103d27565868bd7d381c:
+    resolution: {tarball: https://codeload.github.com/guardian/babel-plugin-px-to-rem/tar.gz/548c5f5bfdfdfc317b86103d27565868bd7d381c}
+    name: babel-plugin-px-to-rem
+    version: 0.1.0
     dev: false
