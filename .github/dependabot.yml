@@ -20,10 +20,37 @@ updates:
     groups:
       # Most storybook dependencies are released with synchronised versions
       # and therefore should be updated together.
+      babel:
+        patterns:
+          - '*babel*'
+      eslint:
+        patterns:
+          - '*eslint*'
+      guardian:
+        patterns:
+          - '@guardian/*'
+      jest:
+        patterns:
+          - 'jest*'
+      react:
+        patterns:
+          - 'react*'
+      remark:
+        patterns:
+          - 'remark*'
       storybook:
         patterns:
-          - '@storybook/*'
-          - 'storybook'
+          - '*storybook*'
+      swc:
+        patterns:
+          - '@swc/*'
+      testing-library:
+        patterns:
+          - '@testing-library/*'
+      webpack:
+        patterns:
+          - '*webpack*'
+          - '*-loader'
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
