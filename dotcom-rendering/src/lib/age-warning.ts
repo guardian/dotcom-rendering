@@ -9,10 +9,10 @@ export const getAgeWarning = (
 		'info/info',
 		'tone/recipes',
 		'lifeandstyle/series/sudoku',
-		'crossword',
+		'type/crossword',
 		'lifeandstyle/series/kakuro',
 		'the-scott-trust/the-scott-trust',
-		'signup',
+		'type/signup',
 		'info/newsletter-sign-up',
 	];
 	const showAge = !tags.some(({ id }) => tagsWithoutAgeWarning.includes(id));
