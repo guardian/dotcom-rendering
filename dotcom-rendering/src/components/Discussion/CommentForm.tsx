@@ -140,6 +140,26 @@ const commentAddOns = css`
 	list-style-type: none;
 `;
 
+const boldComment = css`
+	font-weight: bold;
+`;
+
+const italicComment = css`
+	font-style: italic;
+`;
+
+const strikethroughComment = css`
+	text-decoration: line-through;
+`;
+
+const codeComment = css`
+	font-family: monospace;
+`;
+
+const linkComment = css`
+	text-decoration: underline;
+`;
+
 const bottomContainer = css`
 	width: 100%;
 	display: flex;
@@ -541,44 +561,48 @@ export const CommentForm = ({
 									e.preventDefault();
 									transformText(boldString);
 								}}
-								css={commentAddOns}
+								css={[commentAddOns, boldComment]}
 								data-link-name="formatting-controls-bold"
 								type="button"
+								title="bold"
 							>
-								B
+								bold
 							</button>
 							<button
 								onClick={(e) => {
 									e.preventDefault();
 									transformText(italicsString);
 								}}
-								css={commentAddOns}
+								css={[commentAddOns, italicComment]}
 								data-link-name="formatting-controls-italic"
 								type="button"
+								title="italic"
 							>
-								i
+								italic
 							</button>
 							<button
 								onClick={(e) => {
 									e.preventDefault();
 									transformText(strikethroughString);
 								}}
-								css={commentAddOns}
+								css={[commentAddOns, strikethroughComment]}
 								data-link-name="formatting-controls-strikethrough"
 								type="button"
+								title="strikethrough"
 							>
-								{`S̶`}
+								strikethrough
 							</button>
 							<button
 								onClick={(e) => {
 									e.preventDefault();
 									transformText(codeString);
 								}}
-								css={commentAddOns}
+								css={[commentAddOns, codeComment]}
 								data-link-name="formatting-controls-code"
 								type="button"
+								title="code"
 							>
-								{`<>`}
+								{`<code>`}
 							</button>
 							<button
 								onClick={(e) => {
@@ -588,17 +612,19 @@ export const CommentForm = ({
 								css={commentAddOns}
 								data-link-name="formatting-controls-quote"
 								type="button"
+								title="quote"
 							>
-								"
+								"quote"
 							</button>
 							<button
 								onClick={(e) => {
 									e.preventDefault();
 									transformLink();
 								}}
-								css={commentAddOns}
+								css={[commentAddOns, linkComment]}
 								data-link-name="formatting-controls-link"
 								type="button"
+								title="link"
 							>
 								Link
 							</button>
