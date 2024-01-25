@@ -1,10 +1,25 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source-foundations';
 
-const badgeSizingStyles = css`
-	height: 42px;
+const frontsSectionBadgeSizingStyles = css`
+	height: auto;
+	width: 120px;
+
+	${from.tablet} {
+		width: 140px;
+	}
+
 	${from.leftCol} {
-		height: 54px;
+		width: 200px;
+	}
+`;
+
+const labsSectionBadgeSizingStyles = css`
+	height: auto;
+	width: 100px;
+
+	${from.phablet} {
+		width: 120px;
 	}
 `;
 
@@ -13,7 +28,6 @@ const imageStyles = css`
 	width: auto;
 	max-width: 100%;
 	object-fit: contain;
-	${badgeSizingStyles}
 `;
 
 const badgeLink = css`
@@ -23,14 +37,22 @@ const badgeLink = css`
 type Props = {
 	imageSrc: string;
 	href: string;
+	isInLabsSection?: boolean;
 };
 
-export const Badge = ({ imageSrc, href }: Props) => {
+export const Badge = ({ imageSrc, href, isInLabsSection = false }: Props) => {
 	return (
-		<div css={badgeSizingStyles}>
-			<a href={href} css={badgeLink} role="button">
-				<img css={imageStyles} src={imageSrc} alt="" />
-			</a>
-		</div>
+		<a href={href} css={badgeLink} role="button">
+			<img
+				css={[
+					imageStyles,
+					isInLabsSection
+						? labsSectionBadgeSizingStyles
+						: frontsSectionBadgeSizingStyles,
+				]}
+				src={imageSrc}
+				alt=""
+			/>
+		</a>
 	);
 };
