@@ -132,6 +132,7 @@ export const Comments = ({
 		useState<number>(10);
 	const [commentCount, setCommentCount] = useState<number>(0);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
+	const [showPreview, setShowPreview] = useState<boolean>(false);
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
 
@@ -302,6 +303,8 @@ export const Comments = ({
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
 											onRecommend={onRecommend}
+											showPreview={showPreview}
+											setShowPreview={setShowPreview}
 										/>
 									</li>
 								))}
@@ -323,6 +326,8 @@ export const Comments = ({
 					onComment={onComment}
 					onReply={onReply}
 					onPreview={onPreview}
+					showPreview={showPreview}
+					setShowPreview={setShowPreview}
 				/>
 			)}
 			{!!picks.length && (
@@ -375,6 +380,8 @@ export const Comments = ({
 									onPermalinkClick={onPermalinkClick}
 									onRecommend={onRecommend}
 									onReply={onReply}
+									showPreview={showPreview}
+									setShowPreview={setShowPreview}
 								/>
 							</li>
 						))}
@@ -400,6 +407,8 @@ export const Comments = ({
 					onComment={onComment}
 					onReply={onReply}
 					onPreview={onPreview}
+					showPreview={showPreview}
+					setShowPreview={setShowPreview}
 				/>
 			)}
 		</div>

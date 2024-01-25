@@ -189,6 +189,8 @@ export const defaultStory = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 	/>
 );
 defaultStory.storyName = 'default';
@@ -215,6 +217,8 @@ export const threadedComment = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 	/>
 );
 threadedComment.storyName = 'threaded';
@@ -241,6 +245,8 @@ export const threadedCommentWithShowMore = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
@@ -267,6 +273,8 @@ export const threadedCommentWithLongUsernames = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
@@ -293,6 +301,8 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =

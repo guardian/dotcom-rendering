@@ -36,6 +36,8 @@ type Props = {
 		parentCommentId: number,
 	) => Promise<CommentResponse>;
 	onPreview?: (body: string) => Promise<string>;
+	showPreview: boolean;
+	setShowPreview: (showPreview: boolean) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -215,6 +217,8 @@ export const CommentForm = ({
 	onComment,
 	onReply,
 	onPreview,
+	showPreview,
+	setShowPreview,
 }: Props) => {
 	const [isActive, setIsActive] = useState<boolean>(
 		commentBeingRepliedTo ? true : false,
@@ -224,7 +228,6 @@ export const CommentForm = ({
 	const [previewBody, setPreviewBody] = useState<string>('');
 	const [error, setError] = useState<string>('');
 	const [info, setInfo] = useState<string>('');
-	const [showPreview, setShowPreview] = useState<boolean>(false);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
 	useEffect(() => {
