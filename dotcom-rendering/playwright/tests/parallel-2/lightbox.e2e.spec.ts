@@ -77,9 +77,7 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle, {
-			configOverrides: { abTests: { lightboxVariant: 'variant' } },
-		});
+		await loadPageWithOverrides(page, photoEssayArticle);
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
 
@@ -100,11 +98,7 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle, {
-			configOverrides: {
-				abTests: { lightboxVariant: 'variant' },
-			},
-		});
+		await loadPageWithOverrides(page, photoEssayArticle);
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
 
@@ -122,11 +116,7 @@ test.describe('Lightbox', () => {
 
 	test('should trap focus', async ({ context, page }) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle, {
-			configOverrides: {
-				abTests: { lightboxVariant: 'variant' },
-			},
-		});
+		await loadPageWithOverrides(page, photoEssayArticle);
 
 		await page.locator('article img').first().click({ force: true });
 		await expectToBeVisible(page, '#gu-lightbox');
@@ -171,11 +161,7 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle, {
-			configOverrides: {
-				abTests: { lightboxVariant: 'variant' },
-			},
-		});
+		await loadPageWithOverrides(page, photoEssayArticle);
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
 
@@ -263,11 +249,7 @@ test.describe('Lightbox', () => {
 		}
 
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle, {
-			configOverrides: {
-				abTests: { lightboxVariant: 'variant' },
-			},
-		});
+		await loadPageWithOverrides(page, photoEssayArticle);
 
 		// eq(6) here means the 7th button is clicked (base zero)
 		await page.locator('button.open-lightbox').nth(6).click();
@@ -306,11 +288,7 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle, {
-			configOverrides: {
-				abTests: { lightboxVariant: 'variant' },
-			},
-		});
+		await loadPageWithOverrides(page, photoEssayArticle);
 
 		await page.locator('button.open-lightbox').nth(1).click();
 		await expectToBeVisible(page, '#gu-lightbox');
@@ -357,11 +335,7 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle, {
-			configOverrides: {
-				abTests: { lightboxVariant: 'variant' },
-			},
-		});
+		await loadPageWithOverrides(page, photoEssayArticle);
 
 		await page.locator('button.open-lightbox').nth(1).click();
 		await expectToBeVisible(page, '#gu-lightbox');
@@ -403,11 +377,7 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, LiveBlog, {
-			configOverrides: {
-				abTests: { lightboxVariant: 'variant' },
-			},
-		});
+		await loadPageWithOverrides(page, LiveBlog);
 
 		await page.locator('button.open-lightbox').nth(1).click();
 		await expectToBeVisible(page, '#gu-lightbox');
@@ -434,11 +404,7 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle, {
-			configOverrides: {
-				abTests: { lightboxVariant: 'variant' },
-			},
-		});
+		await loadPageWithOverrides(page, photoEssayArticle);
 
 		await page.locator('button.open-lightbox').nth(1).click();
 		await expectToBeVisible(page, '#gu-lightbox');
@@ -468,11 +434,7 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle, {
-			configOverrides: {
-				abTests: { lightboxVariant: 'variant' },
-			},
-		});
+		await loadPageWithOverrides(page, photoEssayArticle);
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
 		// Open lightbox using the second button on the page (the first is main media)
