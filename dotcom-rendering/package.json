@@ -194,7 +194,7 @@
 		"regenerator-runtime": "0.13.11",
 		"rehype-autolink-headings": "6.1.1",
 		"rehype-slug": "5.1.0",
-		"rehype-stringify": "9.0.3",
+		"rehype-stringify": "10.0.0",
 		"relateurl": "0.2.7",
 		"remark-html": "15.0.2",
 		"remark-parse": "10.0.1",
