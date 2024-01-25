@@ -22,7 +22,7 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
-		"@aws-sdk/client-cloudwatch": "3.350.0",
+		"@aws-sdk/client-cloudwatch": "3.499.0",
 		"@babel/core": "7.23.2",
 		"@babel/helper-compilation-targets": "7.20.0",
 		"@babel/helper-create-regexp-features-plugin": "7.20.5",
@@ -48,7 +48,7 @@
 		"@guardian/bridget": "2.6.0",
 		"@guardian/browserslist-config": "5.0.0",
 		"@guardian/cdk": "50.13.0",
-		"@guardian/commercial": "12.0.0",
+		"@guardian/commercial": "13.0.0",
 		"@guardian/consent-management-platform": "13.7.1",
 		"@guardian/core-web-vitals": "6.0.0",
 		"@guardian/eslint-config": "7.0.1",
@@ -57,6 +57,7 @@
 		"@guardian/identity-auth": "1.1.0",
 		"@guardian/identity-auth-frontend": "1.0.0",
 		"@guardian/libs": "16.0.1",
+		"@guardian/ophan-tracker-js": "2.0.4",
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source-foundations": "14.1.2",
 		"@guardian/source-react-components": "18.0.0",
@@ -181,7 +182,6 @@
 		"lz-string": "1.5.0",
 		"minimatch": "5.1.6",
 		"mockdate": "3.0.5",
-		"ophan-tracker-js": "2.0.2",
 		"parse5": "7.1.2",
 		"postcss-styled-syntax": "0.6.3",
 		"preact": "10.15.1",

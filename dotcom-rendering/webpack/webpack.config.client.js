@@ -179,7 +179,7 @@ module.exports.babelExclude = {
 module.exports.getLoaders = getLoaders;
 
 /**
- * We are making "ophan-tracker-js" external to the apps bundle
+ * We are making "@guardian/ophan-tracker-js" external to the apps bundle
  * because we never expect to use it in apps pages.
  *
  * Tracking is done natively.
@@ -187,5 +187,5 @@ module.exports.getLoaders = getLoaders;
  * @param {Build} build */
 const getExternalModules = (build) =>
 	build === 'client.apps'
-		? { 'ophan-tracker-js': 'ophan-tracker-js' }
+		? { '@guardian/ophan-tracker-js': 'guardian.ophan' }
 		: undefined;
