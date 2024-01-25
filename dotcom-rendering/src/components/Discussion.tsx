@@ -1,15 +1,17 @@
 import { css } from '@emotion/react';
-import { joinUrl, storage } from '@guardian/libs';
+import { storage } from '@guardian/libs';
 import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import { getDiscussion } from '../lib/discussionApi';
 import {
 	getCommentContext,
 	initFiltersFromLocalStorage,
 } from '../lib/getCommentContext';
-import { useDiscussion } from '../lib/useDiscussion';
+import { useCommentCount } from '../lib/useCommentCount';
 import { palette as themePalette } from '../palette';
 import type {
+	CommentType,
 	FilterOptions,
 	SignedInUser,
 	ThreadsType,
@@ -90,22 +92,38 @@ export const Discussion = ({
 	user,
 	idApiUrl,
 }: Props) => {
-	const [commentPage, setCommentPage] = useState<number>(1);
+	const [commentPage, setCommentPage] = useState(1);
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
 	const [commentOrderBy, setCommentOrderBy] = useState<
 		'newest' | 'oldest' | 'recommendations'
 	>();
-	const [isExpanded, setIsExpanded] = useState<boolean>(false);
+	const [comments, setComments] = useState<CommentType[]>([]);
+	const [isClosedForComments, setIsClosedForComments] = useState(false);
+	const [isExpanded, setIsExpanded] = useState(false);
 	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
 		commentIdFromUrl(),
 	);
 	const [filters, setFilters] = useState<FilterOptions>(
 		initFiltersFromLocalStorage(),
 	);
+	const [loading, setLoading] = useState(true);
+	const [totalPages, setTotalPages] = useState(0);
 
-	const { commentCount, isClosedForComments } = useDiscussion(
-		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
-	);
+	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
+
+	useEffect(() => {
+		setLoading(true);
+		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
+			.then((json) => {
+				setLoading(false);
+				if (json && json.status !== 'error') {
+					setComments(json.discussion.comments);
+					setIsClosedForComments(json.discussion.isClosedForComments);
+				}
+				if (json?.pages != null) setTotalPages(json.pages);
+			})
+			.catch((e) => console.error(`getDiscussion - error: ${String(e)}`));
+	}, [filters, commentPage, shortUrlId]);
 
 	useEffect(() => {
 		const orderByClosed = isClosedForComments ? 'oldest' : undefined;
@@ -168,6 +186,19 @@ export const Discussion = ({
 		}
 	}, [commentCount]);
 
+	useEffect(() => {
+		if (window.location.hash === '#comments') {
+			setIsExpanded(true);
+		}
+	}, []);
+
+	useEffect(() => {
+		// There's no point showing the view more button if there isn't much more to view
+		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
+			setIsExpanded(true);
+		}
+	}, [commentCount]);
+
 	return (
 		<>
 			<div css={[positionRelative, !isExpanded && fixHeight]}>
@@ -209,6 +240,11 @@ export const Discussion = ({
 					setPage={setCommentPage}
 					filters={filters}
 					setFilters={setFilters}
+					commentCount={commentCount ?? 0}
+					loading={loading}
+					totalPages={totalPages}
+					comments={comments}
+					setComments={setComments}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />

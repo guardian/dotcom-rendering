@@ -2,6 +2,9 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
+import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
+import { discussionWithTwoComments } from '../../../fixtures/manual/discussionWithTwoComments';
+import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
 import type { FilterOptions, SignedInUser } from '../../types/discussion';
 import { Comments } from './Comments';
 
@@ -45,7 +48,7 @@ export const LoggedOutHiddenPicks = () => (
 		`}
 	>
 		<Comments
-			shortUrl="p/39f5z"
+			shortUrl={discussionMock.discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
 			additionalHeaders={{
@@ -61,6 +64,11 @@ export const LoggedOutHiddenPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={discussionMock.discussion.commentCount}
+			loading={false}
+			totalPages={discussionMock.pages}
+			comments={discussionMock.discussion.comments}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -82,7 +90,7 @@ export const InitialPage = () => (
 		`}
 	>
 		<Comments
-			shortUrl="p/39f5z"
+			shortUrl={discussionMock.discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
 			additionalHeaders={{
@@ -94,14 +102,19 @@ export const InitialPage = () => (
 			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
-			page={3}
+			page={1}
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={discussionMock.discussion.commentCount}
+			loading={false}
+			totalPages={discussionMock.pages}
+			comments={discussionMock.discussion.comments}
+			setComments={() => {}}
 		/>
 	</div>
 );
-InitialPage.storyName = 'with initial page set to 3';
+InitialPage.storyName = 'with initial page set to 1';
 InitialPage.decorators = [
 	splitTheme([
 		{
@@ -136,6 +149,11 @@ export const LoggedInHiddenNoPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={discussionMock.discussion.commentCount}
+			loading={false}
+			totalPages={discussionMock.pages}
+			comments={discussionMock.discussion.comments}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -168,6 +186,11 @@ export const LoggedIn = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={discussionMock.discussion.commentCount}
+			loading={false}
+			totalPages={discussionMock.pages}
+			comments={discussionMock.discussion.comments}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -182,7 +205,7 @@ export const LoggedInShortDiscussion = () => (
 		`}
 	>
 		<Comments
-			shortUrl="p/39f5a" // Two comments"
+			shortUrl={discussionWithTwoComments.discussion.key} // Two comments"
 			isClosedForComments={false}
 			user={aUser}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
@@ -199,6 +222,11 @@ export const LoggedInShortDiscussion = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={discussionWithTwoComments.discussion.commentCount}
+			loading={false}
+			totalPages={discussionWithTwoComments.pages}
+			comments={discussionWithTwoComments.discussion.comments}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -229,6 +257,11 @@ export const LoggedOutHiddenNoPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={discussionMock.discussion.commentCount}
+			loading={false}
+			totalPages={0}
+			comments={discussionMock.discussion.comments}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -251,7 +284,7 @@ export const Closed = () => (
 		`}
 	>
 		<Comments
-			shortUrl="p/39f5z"
+			shortUrl={discussionMock.discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={true}
 			user={aUser}
@@ -268,6 +301,11 @@ export const Closed = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={discussionMock.discussion.commentCount}
+			loading={false}
+			totalPages={discussionMock.pages}
+			comments={discussionMock.discussion.comments}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -305,6 +343,11 @@ export const NoComments = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={0}
+			loading={false}
+			totalPages={0}
+			comments={[]}
+			setComments={() => {}}
 		/>
 	</div>
 );
@@ -326,7 +369,7 @@ export const LegacyDiscussion = () => (
 		`}
 	>
 		<Comments
-			shortUrl="p/32255" // A 'legacy' discussion that doesn't allow threading
+			shortUrl={legacyDiscussionWithoutThreading.discussion.key} // A 'legacy' discussion that doesn't allow threading
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
 			additionalHeaders={{
@@ -342,6 +385,13 @@ export const LegacyDiscussion = () => (
 			setPage={() => {}}
 			filters={filters}
 			setFilters={() => {}}
+			commentCount={
+				legacyDiscussionWithoutThreading.discussion.commentCount
+			}
+			loading={false}
+			totalPages={legacyDiscussionWithoutThreading.pages}
+			comments={legacyDiscussionWithoutThreading.discussion.comments}
+			setComments={() => {}}
 		/>
 	</div>
 );

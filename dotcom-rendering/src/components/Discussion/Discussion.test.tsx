@@ -5,36 +5,21 @@ import {
 	waitForElementToBeRemoved,
 } from '@testing-library/react';
 import { mockRESTCalls } from '../../lib/mockRESTCalls';
-import { Comments } from './Comments';
+import { Discussion } from '../Discussion';
 
 mockRESTCalls();
 
 describe('App', () => {
 	it('should not render the comment form if user is logged out', async () => {
 		render(
-			<Comments
-				shortUrl="p/39f5z"
-				baseUrl="https://discussion.theguardian.com/discussion-api"
-				isClosedForComments={false}
-				additionalHeaders={{
-					'D2-X-UID': 'testD2Header',
-					'GU-Client': 'testClientHeader',
-				}}
-				expanded={false}
-				onPermalinkClick={() => {}}
-				onExpand={() => {
-					// do nothing
-				}}
-				apiKey=""
+			<Discussion
+				user={undefined}
+				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
+				shortUrlId="p/39f5z"
+				discussionD2Uid="testD2Header"
+				discussionApiClientHeader="testClientHeader"
+				enableDiscussionSwitch={true}
 				idApiUrl="https://idapi.theguardian.com"
-				page={3}
-				setPage={() => {}}
-				filters={{
-					threads: 'collapsed',
-					pageSize: 25,
-					orderBy: 'newest',
-				}}
-				setFilters={() => {}}
 			/>,
 		);
 
