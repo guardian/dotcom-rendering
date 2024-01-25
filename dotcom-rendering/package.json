@@ -98,7 +98,7 @@
 		"@types/jest": "29.5.0",
 		"@types/jsdom": "21.1.1",
 		"@types/k6": "0.47.1",
-		"@types/lodash.debounce": "4.0.7",
+		"@types/lodash.debounce": "4.0.9",
 		"@types/lodash.get": "4.4.7",
 		"@types/node": "18.18.14",
 		"@types/parse5": "7.0.0",
