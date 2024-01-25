@@ -161,6 +161,13 @@ export const renderHtml = ({
 
 	const getAmpLink = (tags: TagType[]) => {
 		if (
+			article.format.design === 'InteractiveDesign' ||
+			article.format.design === 'FullPageInteractiveDesign'
+		) {
+			return undefined;
+		}
+
+		if (
 			!isAmpSupported({
 				format: article.format,
 				tags,

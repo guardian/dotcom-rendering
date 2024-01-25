@@ -36,6 +36,8 @@ type Props = {
 	onPreview?: (body: string) => Promise<string>;
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;
+	isCommentFormActive: boolean;
+	setIsCommentFormActive: (isActive: boolean) => void;
 };
 
 const nestingStyles = css`
@@ -89,6 +91,8 @@ export const CommentContainer = ({
 	onPreview,
 	showPreview,
 	setShowPreview,
+	isCommentFormActive,
+	setIsCommentFormActive,
 }: Props) => {
 	// Filter logic
 	const [expanded, setExpanded] = useState<boolean>(threads === 'expanded');
@@ -228,6 +232,8 @@ export const CommentContainer = ({
 								onPreview={onPreview}
 								showPreview={showPreview}
 								setShowPreview={setShowPreview}
+								isActive={isCommentFormActive}
+								setIsActive={setIsCommentFormActive}
 							/>
 						</div>
 					)}

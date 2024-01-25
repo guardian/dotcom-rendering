@@ -67,6 +67,8 @@ export const Default = () => (
 		onAddComment={(comment) => {}}
 		showPreview={false}
 		setShowPreview={() => {}}
+		isActive={false}
+		setIsActive={() => {}}
 	/>
 );
 Default.storyName = 'default';
@@ -80,6 +82,8 @@ export const Error = () => (
 		onAddComment={(comment) => {}}
 		showPreview={false}
 		setShowPreview={() => {}}
+		isActive={false}
+		setIsActive={() => {}}
 	/>
 );
 Error.storyName = 'form with errors';
@@ -93,6 +97,8 @@ export const Active = () => (
 		commentBeingRepliedTo={aComment}
 		showPreview={false}
 		setShowPreview={() => {}}
+		isActive={true}
+		setIsActive={() => {}}
 	/>
 );
 Active.storyName = 'form is active';
@@ -126,6 +132,8 @@ export const Premoderated = () => (
 		commentBeingRepliedTo={aComment}
 		showPreview={false}
 		setShowPreview={() => {}}
+		isActive={true}
+		setIsActive={() => {}}
 	/>
 );
 Premoderated.storyName = 'user is premoderated';

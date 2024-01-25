@@ -38,6 +38,8 @@ type Props = {
 	onPreview?: (body: string) => Promise<string>;
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;
+	isActive: boolean;
+	setIsActive: (isActive: boolean) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -219,10 +221,9 @@ export const CommentForm = ({
 	onPreview,
 	showPreview,
 	setShowPreview,
+	isActive,
+	setIsActive,
 }: Props) => {
-	const [isActive, setIsActive] = useState<boolean>(
-		commentBeingRepliedTo ? true : false,
-	);
 	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
 	const [body, setBody] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
@@ -307,9 +308,7 @@ export const CommentForm = ({
 		setBody('');
 		setShowPreview(false);
 		setIsActive(false);
-		if (setCommentBeingRepliedTo) {
-			setCommentBeingRepliedTo();
-		}
+		setCommentBeingRepliedTo?.();
 	};
 
 	const submitForm = async () => {
