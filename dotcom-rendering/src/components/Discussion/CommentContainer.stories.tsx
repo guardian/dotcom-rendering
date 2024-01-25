@@ -311,6 +311,8 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		onPermalinkClick={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =
