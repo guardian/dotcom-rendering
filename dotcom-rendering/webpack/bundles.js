@@ -23,7 +23,11 @@ const BUILD_VARIANT = false;
  */
 const dcrJavascriptBundle = (variant) => `dcrJavascriptBundle${variant}`;
 
+/** @type {(variant: 'Variant' | 'Control') => import("../../src/types/config").ServerSideTestNames} */
+const ophanNextBundle = (variant) => `ophanNext${variant}`;
+
 module.exports = {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
+	ophanNextBundle,
 };

@@ -95,6 +95,14 @@ module.exports = ({ build }) => ({
 		index: getEntryIndex(build),
 		debug: './src/client/debug/debug.ts',
 	},
+	resolve: {
+		alias: {
+			'ophan-tracker-js':
+				build === 'web.variant'
+					? '@guardian/ophan-tracker-js'
+					: 'ophan-tracker-js',
+		},
+	},
 	optimization:
 		// We don't need chunk optimization for apps as we use the 'LimitChunkCountPlugin' to produce just 1 chunk
 		build === 'client.apps'
