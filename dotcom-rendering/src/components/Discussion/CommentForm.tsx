@@ -498,7 +498,6 @@ export const CommentForm = ({
 					}}
 					value={body}
 					onFocus={() => setIsActive(true)}
-					onBlur={() => setIsActive(false)}
 				/>
 				<div css={bottomContainer}>
 					<Row>
