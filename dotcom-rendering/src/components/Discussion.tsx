@@ -71,16 +71,19 @@ const commentIdFromUrl = () => {
 	return parseInt(commentId, 10);
 };
 
-const filterByPermalinks = (
-	threads: ThreadsType,
+const remapFilters = (
+	filters: FilterOptions,
 	hashCommentId: number | undefined,
 ) => {
 	const permalinkBeingUsed =
 		hashCommentId !== undefined && !Number.isNaN(hashCommentId);
 
-	return threads === 'collapsed' && permalinkBeingUsed
-		? 'expanded'
-		: undefined;
+	if (!permalinkBeingUsed) return filters;
+	if (filters.threads !== 'collapsed') return filters;
+	return {
+		...filters,
+		threads: 'expanded',
+	} satisfies FilterOptions;
 };
 
 export const Discussion = ({
@@ -121,14 +124,7 @@ export const Discussion = ({
 			.catch((e) => console.error(`getDiscussion - error: ${String(e)}`));
 	}, [filters, commentPage, shortUrlId]);
 
-	useEffect(() => {
-		setFilters((prevFilters) => ({
-			...filters,
-			threads:
-				filterByPermalinks(prevFilters.threads, hashCommentId) ??
-				prevFilters.threads,
-		}));
-	}, [hashCommentId]);
+	const validFilters = remapFilters(filters, hashCommentId);
 
 	useEffect(() => {
 		rememberFilters(filters);
@@ -163,19 +159,6 @@ export const Discussion = ({
 				);
 		}
 	}, [discussionApiUrl, hashCommentId]);
-
-	useEffect(() => {
-		if (window.location.hash === '#comments') {
-			setIsExpanded(true);
-		}
-	}, []);
-
-	useEffect(() => {
-		// There's no point showing the view more button if there isn't much more to view
-		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
-			setIsExpanded(true);
-		}
-	}, [commentCount]);
 
 	useEffect(() => {
 		if (window.location.hash === '#comments') {
@@ -229,8 +212,11 @@ export const Discussion = ({
 					idApiUrl={idApiUrl}
 					page={commentPage}
 					setPage={setCommentPage}
-					filters={filters}
-					setFilters={setFilters}
+					filters={validFilters}
+					setFilters={(newFilters) => {
+						setHashCommentId(undefined);
+						setFilters(newFilters);
+					}}
 					commentCount={commentCount ?? 0}
 					loading={loading}
 					totalPages={totalPages}
