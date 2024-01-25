@@ -1,6 +1,6 @@
 export const legacyDiscussionWithoutThreading = {
 	status: 'ok',
-	page: 1,
+	currentPage: 1,
 	pages: 1,
 	pageSize: 100,
 	orderBy: 'oldest',

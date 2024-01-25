@@ -9,7 +9,7 @@ import rehypeStringify from 'rehype-stringify';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
-import * as zod from 'zod';
+import { array, boolean, number, object, parse, string } from 'valibot';
 
 const dir = resolve(fileURLToPath(import.meta.url), '../../../dist/stats');
 
@@ -33,18 +33,18 @@ const componentsDirectory = resolve(
 	'../../../src/components',
 );
 
-const chunk = zod.object({
-	label: zod.string(),
-	isAsset: zod.boolean(),
-	statSize: zod.number(),
-	parsedSize: zod.number(),
-	gzipSize: zod.number(),
+const chunk = object({
+	label: string(),
+	isAsset: boolean(),
+	statSize: number(),
+	parsedSize: number(),
+	gzipSize: number(),
 });
 
 /** Sorted by gzipSize */
 const getBundleReport = () =>
 	readFile(resolve(dir, 'client.web-bundles.json'), 'utf-8')
-		.then((bundle_data) => zod.array(chunk).parse(JSON.parse(bundle_data)))
+		.then((bundle_data) => parse(array(chunk), JSON.parse(bundle_data)))
 		.then((report) => report.sort((a, b) => b.gzipSize - a.gzipSize));
 
 /**

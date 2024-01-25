@@ -9,6 +9,7 @@ import type {
 	ThreadsType,
 	UserNameResponse,
 } from '../types/discussion';
+import { parseDiscussionResponse } from '../types/discussion';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
 
@@ -90,10 +91,10 @@ export const getDiscussion = async (
 		},
 	});
 
-	const json = await resp.json();
+	const discussionResponse = parseDiscussionResponse(await resp.json());
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	return json.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
+	return discussionResponse?.errorCode ===
+		'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
 		? // We need force a refetch with unthreaded set, as we don't know
 		  // that this discussion is only available in linear format until
 		  // we get the response to tell us
@@ -101,7 +102,7 @@ export const getDiscussion = async (
 				...opts,
 				...{ threads: 'unthreaded' },
 		  })
-		: json;
+		: discussionResponse;
 };
 
 export const preview = async (body: string): Promise<string> => {
