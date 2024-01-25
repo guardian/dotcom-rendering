@@ -13,7 +13,7 @@ const BASE_URL = `http://localhost:${PORT}`;
 const loadPage = async (
 	page: Page,
 	path: string,
-	waitUntil: 'load' | 'domcontentloaded' = 'domcontentloaded',
+	waitUntil: 'load' | 'domcontentloaded' = 'load',
 	region = 'GB',
 	preventSupportBanner = true,
 ): Promise<void> => {
