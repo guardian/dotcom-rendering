@@ -14,7 +14,6 @@ import type {
 	CommentType,
 	FilterOptions,
 	SignedInUser,
-	ThreadsType,
 } from '../types/discussion';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
