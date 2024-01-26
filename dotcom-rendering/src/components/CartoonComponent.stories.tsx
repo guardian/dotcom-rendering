@@ -58,6 +58,7 @@ export const Cartoon = () => {
 						theme: Pillar.News,
 					}}
 					element={cartoon}
+					lightbox={true}
 				/>
 			</Figure>
 		</Wrapper>
@@ -84,6 +85,7 @@ export const CartoonWithoutCredit = () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					lightbox={true}
 				/>
 			</Figure>
 		</Wrapper>
@@ -110,6 +112,7 @@ export const CartoonWithNoMobileImages = () => {
 						design: ArticleDesign.Standard,
 						theme: Pillar.News,
 					}}
+					lightbox={true}
 				/>
 			</Figure>
 		</Wrapper>

@@ -91,5 +91,5 @@ export default merge(base(import.meta.url), {
 	// We are making "ophan-tracker-js" external to the apps bundle
 	// because we never expect to use it in apps pages.
 	// Tracking is done natively.
-	externals: { 'ophan-tracker-js': 'ophan-tracker-js' },
+	externals: { '@guardian/ophan-tracker-js': 'guardian.ophan' },
 });

@@ -23,7 +23,7 @@ const interceptOphanPlayEvent = ({ page, id }: { page: Page; id: string }) => {
 	return page.waitForRequest((request) => {
 		const matchUrl = request
 			.url()
-			.startsWith('http://ophan.theguardian.com/img/2?');
+			.startsWith('https://ophan.theguardian.com/img/2?');
 		const searchParams = new URLSearchParams(request.url());
 		const videoSearchParam = searchParams.get('video');
 		const expectedVideoSearchParam = JSON.stringify({
