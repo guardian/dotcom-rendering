@@ -13,6 +13,7 @@ import type {
 import { discussionApiResponseSchema } from '../types/discussion';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
+import { fetchJSON } from './json';
 import type { Result } from './result';
 
 const options = {
@@ -58,7 +59,7 @@ const objAsParams = (obj: any): string => {
 	return '?' + params;
 };
 
-type GetDiscussionError = 'Parsing error' | 'ApiError' | 'NetworkError';
+type GetDiscussionError = 'ParsingError' | 'ApiError' | 'NetworkError';
 
 //todo: figure out the different return types and consider error handling
 export const getDiscussion = async (
@@ -89,19 +90,13 @@ export const getDiscussion = async (
 
 	const url = joinUrl(options.baseUrl, 'discussion', shortUrl) + params;
 
-	const json = (await fetch(url, {
-		headers: {
-			...options.headers,
-		},
-	})
-		.then((r) => r.json())
-		.catch(() => undefined)) as unknown;
+	const jsonResult = await fetchJSON(url, { headers: options.headers });
 
-	if (!json) return { kind: 'error', error: 'NetworkError' };
+	if (jsonResult.kind === 'error') return jsonResult;
 
-	const result = safeParse(discussionApiResponseSchema, json);
+	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
 	if (!result.success) {
-		return { kind: 'error', error: 'Parsing error' };
+		return { kind: 'error', error: 'ParsingError' };
 	}
 	if (
 		result.output.status === 'error' &&
