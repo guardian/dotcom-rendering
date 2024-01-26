@@ -134,6 +134,7 @@ export const Comments = ({
 		!!commentBeingRepliedTo,
 	);
 	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
+	const [body, setBody] = useState('');
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
 
@@ -302,6 +303,8 @@ export const Comments = ({
 											setUserNameMissing={
 												setUserNameMissing
 											}
+											body={body}
+											setBody={setBody}
 										/>
 									</li>
 								))}
@@ -329,6 +332,8 @@ export const Comments = ({
 					setIsActive={setIsCommentFormActive}
 					userNameMissing={userNameMissing}
 					setUserNameMissing={setUserNameMissing}
+					body={body}
+					setBody={setBody}
 				/>
 			)}
 			{!!picks.length && (
@@ -389,6 +394,8 @@ export const Comments = ({
 									}
 									userNameMissing={userNameMissing}
 									setUserNameMissing={setUserNameMissing}
+									body={body}
+									setBody={setBody}
 								/>
 							</li>
 						))}
@@ -420,6 +427,8 @@ export const Comments = ({
 					setIsActive={setIsCommentFormActive}
 					userNameMissing={userNameMissing}
 					setUserNameMissing={setUserNameMissing}
+					body={body}
+					setBody={setBody}
 				/>
 			)}
 		</div>

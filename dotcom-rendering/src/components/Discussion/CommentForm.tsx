@@ -34,6 +34,8 @@ type Props = {
 	setIsActive: (isActive: boolean) => void;
 	userNameMissing: boolean;
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
+	body: string;
+	setBody: (body: string) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -223,8 +225,9 @@ export const CommentForm = ({
 	setIsActive,
 	userNameMissing,
 	setUserNameMissing,
+	body,
+	setBody,
 }: Props) => {
-	const [body, setBody] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
 	const [error, setError] = useState<string>('');
 	const [info, setInfo] = useState<string>('');
