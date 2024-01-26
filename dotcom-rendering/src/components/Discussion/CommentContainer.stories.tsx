@@ -189,6 +189,8 @@ export const defaultStory = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
 	/>
@@ -217,6 +219,8 @@ export const threadedComment = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
 	/>
@@ -245,6 +249,8 @@ export const threadedCommentWithShowMore = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
 	/>
@@ -273,6 +279,8 @@ export const threadedCommentWithLongUsernames = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
 	/>
@@ -301,6 +309,8 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
 	/>

@@ -65,6 +65,8 @@ export const Default = () => (
 		shortUrl={shortUrl}
 		user={aUser}
 		onAddComment={(comment) => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isActive={false}
 		setIsActive={() => {}}
 	/>
@@ -78,6 +80,8 @@ export const Error = () => (
 		shortUrl={'/p/g8g7v'}
 		user={aUser}
 		onAddComment={(comment) => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isActive={false}
 		setIsActive={() => {}}
 	/>
@@ -91,6 +95,8 @@ export const Active = () => (
 		user={aUser}
 		onAddComment={(comment) => {}}
 		commentBeingRepliedTo={aComment}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isActive={true}
 		setIsActive={() => {}}
 	/>
@@ -124,6 +130,8 @@ export const Premoderated = () => (
 		}}
 		onAddComment={(comment) => {}}
 		commentBeingRepliedTo={aComment}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isActive={true}
 		setIsActive={() => {}}
 	/>

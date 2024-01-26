@@ -133,6 +133,7 @@ export const Comments = ({
 		useState<CommentType>();
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] = useState(10);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
+	const [showPreview, setShowPreview] = useState<boolean>(false);
 	const [isCommentFormActive, setIsCommentFormActive] = useState<boolean>(
 		!!commentBeingRepliedTo,
 	);
@@ -292,6 +293,8 @@ export const Comments = ({
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
 											onRecommend={onRecommend}
+											showPreview={showPreview}
+											setShowPreview={setShowPreview}
 											isCommentFormActive={
 												isCommentFormActive
 											}
@@ -319,6 +322,8 @@ export const Comments = ({
 					onComment={onComment}
 					onReply={onReply}
 					onPreview={onPreview}
+					showPreview={showPreview}
+					setShowPreview={setShowPreview}
 					isActive={isCommentFormActive}
 					setIsActive={setIsCommentFormActive}
 				/>
@@ -373,6 +378,8 @@ export const Comments = ({
 									onPermalinkClick={onPermalinkClick}
 									onRecommend={onRecommend}
 									onReply={onReply}
+									showPreview={showPreview}
+									setShowPreview={setShowPreview}
 									isCommentFormActive={isCommentFormActive}
 									setIsCommentFormActive={
 										setIsCommentFormActive
@@ -402,6 +409,8 @@ export const Comments = ({
 					onComment={onComment}
 					onReply={onReply}
 					onPreview={onPreview}
+					showPreview={showPreview}
+					setShowPreview={setShowPreview}
 					isActive={isCommentFormActive}
 					setIsActive={setIsCommentFormActive}
 				/>

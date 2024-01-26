@@ -34,6 +34,8 @@ type Props = {
 		parentCommentId: number,
 	) => Promise<CommentResponse>;
 	onPreview?: (body: string) => Promise<string>;
+	showPreview: boolean;
+	setShowPreview: (showPreview: boolean) => void;
 	isCommentFormActive: boolean;
 	setIsCommentFormActive: (isActive: boolean) => void;
 };
@@ -87,6 +89,8 @@ export const CommentContainer = ({
 	onComment,
 	onReply,
 	onPreview,
+	showPreview,
+	setShowPreview,
 	isCommentFormActive,
 	setIsCommentFormActive,
 }: Props) => {
@@ -226,6 +230,8 @@ export const CommentContainer = ({
 								onComment={onComment}
 								onReply={onReply}
 								onPreview={onPreview}
+								showPreview={showPreview}
+								setShowPreview={setShowPreview}
 								isActive={isCommentFormActive}
 								setIsActive={setIsCommentFormActive}
 							/>
