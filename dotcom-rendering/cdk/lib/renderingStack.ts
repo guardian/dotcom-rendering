@@ -175,7 +175,7 @@ export class RenderingCDKStack extends CDKStack {
 					},
 				],
 				adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
-				evaluationPeriods: 1,
+				evaluationPeriods: 5,
 			},
 		);
 
