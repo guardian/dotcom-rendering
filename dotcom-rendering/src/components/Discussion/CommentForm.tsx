@@ -171,6 +171,10 @@ const bottomContainer = css`
 	align-content: space-between;
 `;
 
+const wrappingRow = css`
+	flex-flow: wrap;
+`;
+
 const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 	<div
 		css={css`
@@ -521,7 +525,7 @@ export const CommentForm = ({
 					onFocus={() => setIsActive(true)}
 				/>
 				<div css={bottomContainer}>
-					<Row>
+					<Row cssOverrides={wrappingRow}>
 						<>
 							<PillarButton
 								type="submit"
@@ -556,7 +560,7 @@ export const CommentForm = ({
 						</>
 					</Row>
 					{isActive && (
-						<Row>
+						<Row cssOverrides={wrappingRow}>
 							<button
 								onClick={(e) => {
 									e.preventDefault();
