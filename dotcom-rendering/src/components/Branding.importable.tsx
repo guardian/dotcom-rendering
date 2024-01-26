@@ -83,7 +83,7 @@ function decideLogo(
 				<source
 					width={maybeDarkLogo.dimensions.width}
 					height={maybeDarkLogo.dimensions.height}
-					srcSet={maybeDarkLogo.src}
+					srcSet={encodeURI(maybeDarkLogo.src)}
 					media={`(max-width: ${breakpoints.desktop - 1}px)`}
 				/>
 			)}
@@ -92,7 +92,7 @@ function decideLogo(
 				<source
 					width={branding.logoForDarkBackground.dimensions.width}
 					height={branding.logoForDarkBackground.dimensions.height}
-					srcSet={branding.logoForDarkBackground.src}
+					srcSet={encodeURI(branding.logoForDarkBackground.src)}
 					media={'(prefers-color-scheme: dark)'}
 				/>
 			)}
@@ -100,7 +100,7 @@ function decideLogo(
 			<img
 				width={branding.logo.dimensions.width}
 				height={branding.logo.dimensions.height}
-				src={branding.logo.src}
+				src={encodeURI(branding.logo.src)}
 				alt={branding.sponsorName}
 			/>
 		</picture>
