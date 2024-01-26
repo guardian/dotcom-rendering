@@ -638,7 +638,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Namespace": "AWS/ApplicationELB",
         "Period": 30,
         "Statistic": "Average",
-        "Threshold": 0.15,
+        "Threshold": 0.12,
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
