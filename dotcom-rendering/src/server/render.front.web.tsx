@@ -8,7 +8,6 @@ import {
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { getHttp3Url } from '../lib/getHttp3Url';
 import { polyfillIO } from '../lib/polyfill.io';
 import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';
@@ -86,10 +85,6 @@ export const renderFront = ({
 		</ConfigProvider>,
 	);
 
-	// Evaluating the performance of HTTP3 over HTTP2
-	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 = false } = front.config.switches;
-
 	const build = getModulesBuild({
 		switches: front.config.switches,
 		tests: front.config.abTests,
@@ -107,14 +102,11 @@ export const renderFront = ({
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ?? front.config.commercialBundleUrl,
-	]
-		.filter(isString)
-		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
-
+	].filter(isString);
 	const legacyScripts = [
 		getPathFromManifest('client.web.legacy', 'frameworks.js'),
 		getPathFromManifest('client.web.legacy', 'index.js'),
-	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	];
 	const scriptTags = generateScriptTags([
 		...prefetchScripts,
 		...legacyScripts,
@@ -151,7 +143,6 @@ export const renderFront = ({
 		description: front.pressedPage.seoData.description,
 		guardian,
 		keywords,
-		offerHttp3,
 		renderingTarget: 'Web',
 		hasPageSkin: front.config.hasPageSkin,
 		weAreHiring: !!front.config.switches.weAreHiring,
@@ -180,10 +171,6 @@ export const renderTagFront = ({
 		</ConfigProvider>,
 	);
 
-	// Evaluating the performance of HTTP3 over HTTP2
-	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 = false } = tagFront.config.switches;
-
 	const build = getModulesBuild({
 		switches: tagFront.config.switches,
 		tests: tagFront.config.abTests,
@@ -202,14 +189,11 @@ export const renderTagFront = ({
 		getPathFromManifest(build, 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ??
 			tagFront.config.commercialBundleUrl,
-	]
-		.filter(isString)
-		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
-
+	].filter(isString);
 	const legacyScripts = [
 		getPathFromManifest('client.web.legacy', 'frameworks.js'),
 		getPathFromManifest('client.web.legacy', 'index.js'),
-	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	];
 	const scriptTags = generateScriptTags([
 		...prefetchScripts,
 		...legacyScripts,
@@ -246,7 +230,6 @@ export const renderTagFront = ({
 		description: tagFront.header.description,
 		guardian,
 		keywords,
-		offerHttp3,
 		renderingTarget: 'Web',
 		weAreHiring: !!tagFront.config.switches.weAreHiring,
 	});

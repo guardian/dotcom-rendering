@@ -1,5 +1,4 @@
 import CleanCSS from 'clean-css';
-import { getHttp3Url } from '../lib/getHttp3Url';
 
 type FontFamily =
 	| 'GH Guardian Headline'
@@ -253,19 +252,13 @@ const fontList: FontDisplay[] = [
 const getFontUrl = (path: string): string =>
 	`https://assets.guim.co.uk/static/frontend/${path}`;
 
-export const getFontsCss = (offerHttp3 = false): string => {
+export const getFontsCss = (): string => {
 	let fontCss = '';
 
 	for (const font of fontList) {
-		let woff2 = getFontUrl(font.woff2);
-		let woff = getFontUrl(font.woff);
-		let ttf = getFontUrl(font.ttf);
-
-		if (offerHttp3) {
-			woff2 = getHttp3Url(woff2);
-			woff = getHttp3Url(woff);
-			ttf = getHttp3Url(ttf);
-		}
+		const woff2 = getFontUrl(font.woff2);
+		const woff = getFontUrl(font.woff);
+		const ttf = getFontUrl(font.ttf);
 
 		fontCss += `
 			@font-face {
