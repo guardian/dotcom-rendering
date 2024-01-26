@@ -112,15 +112,21 @@ export const Discussion = ({
 	useEffect(() => {
 		setLoading(true);
 		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
-			.then((json) => {
-				setLoading(false);
-				if (json && json.status !== 'error') {
-					setComments(json.discussion.comments);
-					setIsClosedForComments(json.discussion.isClosedForComments);
+			.then((result) => {
+				if (result.kind === 'error') {
+					console.error(`getDiscussion - error: ${result.error}`);
+					return;
 				}
-				if (json?.pages != null) setTotalPages(json.pages);
+
+				setLoading(false);
+				const { pages, discussion } = result.value;
+				setComments(discussion.comments);
+				setIsClosedForComments(discussion.isClosedForComments);
+				setTotalPages(pages);
 			})
-			.catch((e) => console.error(`getDiscussion - error: ${String(e)}`));
+			.catch(() => {
+				// do nothing
+			});
 	}, [filters, commentPage, shortUrlId]);
 
 	const validFilters = remapFilters(filters, hashCommentId);

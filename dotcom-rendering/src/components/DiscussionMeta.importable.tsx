@@ -3,7 +3,7 @@ import { getOptionsHeadersWithOkta } from '../lib/identity';
 import { useApi } from '../lib/useApi';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCommentCount } from '../lib/useCommentCount';
-import type { DiscussionResponse } from '../types/discussion';
+import type { GetDiscussionSuccess } from '../types/discussion';
 import { SignedInAs } from './SignedInAs';
 
 type Props = {
@@ -20,7 +20,7 @@ export const DiscussionMeta = ({
 	const authStatus = useAuthStatus();
 	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
-	const { data: discussionData } = useApi<DiscussionResponse>(
+	const { data: discussionData } = useApi<GetDiscussionSuccess>(
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 		{
 			// The default for dedupingInterval is 2 seconds but we want to wait longer here because the cache time

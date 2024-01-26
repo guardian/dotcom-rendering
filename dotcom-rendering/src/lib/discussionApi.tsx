@@ -1,17 +1,20 @@
 import { joinUrl } from '@guardian/libs';
+import { safeParse } from 'valibot';
 import type {
 	AdditionalHeadersType,
 	CommentResponse,
 	CommentType,
 	DiscussionOptions,
-	DiscussionResponse,
+	GetDiscussionSuccess,
 	OrderByType,
 	ThreadsType,
 	UserNameResponse,
 } from '../types/discussion';
-import { parseDiscussionResponse } from '../types/discussion';
+import { discussionApiResponseSchema } from '../types/discussion';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
+import { fetchJSON } from './json';
+import type { Result } from './result';
 
 const options = {
 	// Defaults
@@ -56,6 +59,8 @@ const objAsParams = (obj: any): string => {
 	return '?' + params;
 };
 
+type GetDiscussionError = 'ParsingError' | 'ApiError' | 'NetworkError';
+
 //todo: figure out the different return types and consider error handling
 export const getDiscussion = async (
 	shortUrl: string,
@@ -65,7 +70,7 @@ export const getDiscussion = async (
 		threads: ThreadsType;
 		page: number;
 	},
-): Promise<DiscussionResponse | undefined> => {
+): Promise<Result<GetDiscussionError, GetDiscussionSuccess>> => {
 	const apiOpts: DiscussionOptions = {
 		...defaultParams,
 		...{
@@ -85,24 +90,34 @@ export const getDiscussion = async (
 
 	const url = joinUrl(options.baseUrl, 'discussion', shortUrl) + params;
 
-	const resp = await fetch(url, {
-		headers: {
-			...options.headers,
-		},
-	});
+	const jsonResult = await fetchJSON(url, { headers: options.headers });
 
-	const discussionResponse = parseDiscussionResponse(await resp.json());
+	if (jsonResult.kind === 'error') return jsonResult;
 
-	return discussionResponse?.errorCode ===
-		'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
-		? // We need force a refetch with unthreaded set, as we don't know
-		  // that this discussion is only available in linear format until
-		  // we get the response to tell us
-		  getDiscussion(shortUrl, {
-				...opts,
-				...{ threads: 'unthreaded' },
-		  })
-		: discussionResponse;
+	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
+	if (!result.success) {
+		return { kind: 'error', error: 'ParsingError' };
+	}
+	if (
+		result.output.status === 'error' &&
+		// We need force a refetch with unthreaded set, as we don't know
+		// that this discussion is only available in linear format until
+		// we get the response to tell us
+		result.output.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
+	) {
+		return getDiscussion(shortUrl, {
+			...opts,
+			...{ threads: 'unthreaded' },
+		});
+	}
+	if (result.output.status === 'error') {
+		return {
+			kind: 'error',
+			error: 'ApiError',
+		};
+	}
+
+	return { kind: 'ok', value: result.output };
 };
 
 export const preview = async (body: string): Promise<string> => {
