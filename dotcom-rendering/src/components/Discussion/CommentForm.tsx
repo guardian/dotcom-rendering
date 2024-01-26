@@ -564,7 +564,7 @@ export const CommentForm = ({
 								css={[commentAddOns, boldComment]}
 								data-link-name="formatting-controls-bold"
 								type="button"
-								title="bold"
+								title="Bold"
 							>
 								bold
 							</button>
@@ -576,7 +576,7 @@ export const CommentForm = ({
 								css={[commentAddOns, italicComment]}
 								data-link-name="formatting-controls-italic"
 								type="button"
-								title="italic"
+								title="Italic"
 							>
 								italic
 							</button>
@@ -588,7 +588,7 @@ export const CommentForm = ({
 								css={[commentAddOns, strikethroughComment]}
 								data-link-name="formatting-controls-strikethrough"
 								type="button"
-								title="strikethrough"
+								title="Strikethrough"
 							>
 								strikethrough
 							</button>
@@ -600,7 +600,7 @@ export const CommentForm = ({
 								css={[commentAddOns, codeComment]}
 								data-link-name="formatting-controls-code"
 								type="button"
-								title="code"
+								title="Code"
 							>
 								{`<code>`}
 							</button>
@@ -612,7 +612,7 @@ export const CommentForm = ({
 								css={commentAddOns}
 								data-link-name="formatting-controls-quote"
 								type="button"
-								title="quote"
+								title="Quote"
 							>
 								"quote"
 							</button>
@@ -624,7 +624,7 @@ export const CommentForm = ({
 								css={[commentAddOns, linkComment]}
 								data-link-name="formatting-controls-link"
 								type="button"
-								title="link"
+								title="Link"
 							>
 								Link
 							</button>
