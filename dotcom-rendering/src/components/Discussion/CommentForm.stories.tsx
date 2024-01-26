@@ -78,6 +78,8 @@ export const Default = () => {
 			setUserNameMissing={() => {}}
 			body={body}
 			setBody={setBody}
+			previewBody={''}
+			setPreviewBody={() => {}}
 		/>
 	);
 };
@@ -103,6 +105,8 @@ export const Error = () => {
 			setUserNameMissing={setUserNameMissing}
 			body={body}
 			setBody={setBody}
+			previewBody={''}
+			setPreviewBody={() => {}}
 		/>
 	);
 };
@@ -126,6 +130,8 @@ export const Active = () => {
 			setUserNameMissing={() => {}}
 			body={body}
 			setBody={setBody}
+			previewBody={''}
+			setPreviewBody={() => {}}
 		/>
 	);
 };
@@ -169,6 +175,8 @@ export const Premoderated = () => {
 			setUserNameMissing={() => {}}
 			body={body}
 			setBody={setBody}
+			previewBody={''}
+			setPreviewBody={() => {}}
 		/>
 	);
 };

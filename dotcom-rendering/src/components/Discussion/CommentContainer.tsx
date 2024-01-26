@@ -38,6 +38,8 @@ type Props = {
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 	body: string;
 	setBody: (body: string) => void;
+	previewBody: string;
+	setPreviewBody: (body: string) => void;
 };
 
 const nestingStyles = css`
@@ -97,6 +99,8 @@ export const CommentContainer = ({
 	setUserNameMissing,
 	body,
 	setBody,
+	previewBody,
+	setPreviewBody,
 }: Props) => {
 	// Filter logic
 	const [expanded, setExpanded] = useState<boolean>(threads === 'expanded');
@@ -242,6 +246,8 @@ export const CommentContainer = ({
 								setUserNameMissing={setUserNameMissing}
 								body={body}
 								setBody={setBody}
+								previewBody={previewBody}
+								setPreviewBody={setPreviewBody}
 							/>
 						</div>
 					)}
