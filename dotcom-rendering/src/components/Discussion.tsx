@@ -115,7 +115,7 @@ type Action =
 	  }
 	| { type: 'expandComments' }
 	| { type: 'addComment'; comment: CommentType }
-	| { type: 'updateCommentPage'; commentPage: number; isExpanded: boolean }
+	| { type: 'updateCommentPage'; commentPage: number; shouldExpand: boolean }
 	| {
 			type: 'updateFilters';
 			filters: FilterOptions;
@@ -145,7 +145,7 @@ const reducer = (state: State, action: Action): State => {
 			return {
 				...state,
 				commentPage: action.commentPage,
-				isExpanded: action.isExpanded,
+				isExpanded: action.shouldExpand ? true : state.isExpanded,
 			};
 		case 'updateFilters':
 			return {
@@ -230,8 +230,11 @@ export const Discussion = ({
 		if (hashCommentId !== undefined) {
 			getCommentContext(discussionApiUrl, hashCommentId)
 				.then((context) => {
-					setCommentPage(context.page);
-					setIsExpanded(true);
+					dispatch({
+						type: 'updateCommentPage',
+						commentPage: context.page,
+						shouldExpand: true,
+					});
 				})
 				.catch((e) =>
 					console.error(`getCommentContext - error: ${String(e)}`),
@@ -290,11 +293,11 @@ export const Discussion = ({
 					}}
 					idApiUrl={idApiUrl}
 					page={commentPage}
-					setPage={(page: number) => {
+					setPage={(page: number, shouldExpand: boolean) => {
 						dispatch({
 							type: 'updateCommentPage',
 							commentPage: page,
-							isExpanded: true,
+							shouldExpand,
 						});
 					}}
 					filters={validFilters}

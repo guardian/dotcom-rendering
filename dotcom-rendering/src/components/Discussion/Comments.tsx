@@ -38,7 +38,7 @@ type Props = {
 	onExpand: () => void;
 	idApiUrl: string;
 	page: number;
-	setPage: (page: number) => void;
+	setPage: (page: number, shouldExpand: boolean) => void;
 	filters: FilterOptions;
 	setFilters: (filters: FilterOptions) => void;
 	commentCount: number;
@@ -190,7 +190,7 @@ export const Comments = ({
 			commentCount / newFilterObject.pageSize,
 		);
 
-		if (page > maxPagePossible) setPage(maxPagePossible);
+		if (page > maxPagePossible) setPage(maxPagePossible, false);
 
 		setFilters(newFilterObject);
 		// Filters also show when the view is not expanded but we want to expand when they're changed
@@ -227,7 +227,7 @@ export const Comments = ({
 	};
 
 	const onPageChange = (pageNumber: number) => {
-		setPage(pageNumber);
+		setPage(pageNumber, true);
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
