@@ -140,27 +140,6 @@ const commentAddOns = css`
 	list-style-type: none;
 `;
 
-const boldComment = css`
-	font-weight: bold;
-`;
-
-const italicComment = css`
-	font-style: italic;
-`;
-
-const strikethroughComment = css`
-	text-decoration: line-through;
-`;
-
-const codeComment = css`
-	/* stylelint-disable-next-line property-disallowed-list -- we don't want this font from Source */
-	font-family: monospace;
-`;
-
-const linkComment = css`
-	text-decoration: underline;
-`;
-
 const bottomContainer = css`
 	width: 100%;
 	display: flex;
@@ -566,7 +545,8 @@ export const CommentForm = ({
 									e.preventDefault();
 									transformText(boldString);
 								}}
-								css={[commentAddOns, boldComment]}
+								css={commentAddOns}
+								style={{ fontWeight: 'bold' }}
 								data-link-name="formatting-controls-bold"
 								type="button"
 								title="Bold"
@@ -578,7 +558,8 @@ export const CommentForm = ({
 									e.preventDefault();
 									transformText(italicsString);
 								}}
-								css={[commentAddOns, italicComment]}
+								css={commentAddOns}
+								style={{ fontStyle: 'italic' }}
 								data-link-name="formatting-controls-italic"
 								type="button"
 								title="Italic"
@@ -590,7 +571,8 @@ export const CommentForm = ({
 									e.preventDefault();
 									transformText(strikethroughString);
 								}}
-								css={[commentAddOns, strikethroughComment]}
+								css={commentAddOns}
+								style={{ textDecoration: 'line-through' }}
 								data-link-name="formatting-controls-strikethrough"
 								type="button"
 								title="Strikethrough"
@@ -602,7 +584,8 @@ export const CommentForm = ({
 									e.preventDefault();
 									transformText(codeString);
 								}}
-								css={[commentAddOns, codeComment]}
+								css={commentAddOns}
+								style={{ fontFamily: 'monospace' }}
 								data-link-name="formatting-controls-code"
 								type="button"
 								title="Code"
@@ -626,7 +609,8 @@ export const CommentForm = ({
 									e.preventDefault();
 									transformLink();
 								}}
-								css={[commentAddOns, linkComment]}
+								css={commentAddOns}
+								style={{ textDecoration: 'underline' }}
 								data-link-name="formatting-controls-link"
 								type="button"
 								title="Link"
