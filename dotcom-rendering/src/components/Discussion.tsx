@@ -290,7 +290,13 @@ export const Discussion = ({
 					}}
 					idApiUrl={idApiUrl}
 					page={commentPage}
-					setPage={setCommentPage}
+					setPage={(page: number) => {
+						dispatch({
+							type: 'updateCommentPage',
+							commentPage: page,
+							isExpanded: true,
+						});
+					}}
 					filters={validFilters}
 					setFilters={(newFilters) => {
 						dispatch({
