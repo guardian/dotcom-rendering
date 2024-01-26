@@ -66,8 +66,12 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
 				isCommentFormActive={true}
 				setIsCommentFormActive={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
 			/>,
 		);
 
@@ -105,8 +109,12 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
 				isCommentFormActive={true}
 				setIsCommentFormActive={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
 			/>,
 		);
 
@@ -143,8 +151,12 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
 				isCommentFormActive={true}
 				setIsCommentFormActive={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
 			/>,
 		);
 
@@ -182,8 +194,12 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
 				isCommentFormActive={true}
 				setIsCommentFormActive={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
 			/>,
 		);
 

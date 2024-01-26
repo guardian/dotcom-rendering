@@ -133,9 +133,11 @@ export const Comments = ({
 		useState<CommentType>();
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] = useState(10);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
+	const [showPreview, setShowPreview] = useState<boolean>(false);
 	const [isCommentFormActive, setIsCommentFormActive] = useState<boolean>(
 		!!commentBeingRepliedTo,
 	);
+	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
 
@@ -292,11 +294,17 @@ export const Comments = ({
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
 											onRecommend={onRecommend}
+											showPreview={showPreview}
+											setShowPreview={setShowPreview}
 											isCommentFormActive={
 												isCommentFormActive
 											}
 											setIsCommentFormActive={
 												setIsCommentFormActive
+											}
+											userNameMissing={userNameMissing}
+											setUserNameMissing={
+												setUserNameMissing
 											}
 										/>
 									</li>
@@ -319,8 +327,12 @@ export const Comments = ({
 					onComment={onComment}
 					onReply={onReply}
 					onPreview={onPreview}
+					showPreview={showPreview}
+					setShowPreview={setShowPreview}
 					isActive={isCommentFormActive}
 					setIsActive={setIsCommentFormActive}
+					userNameMissing={userNameMissing}
+					setUserNameMissing={setUserNameMissing}
 				/>
 			)}
 			{!!picks.length && (
@@ -373,10 +385,14 @@ export const Comments = ({
 									onPermalinkClick={onPermalinkClick}
 									onRecommend={onRecommend}
 									onReply={onReply}
+									showPreview={showPreview}
+									setShowPreview={setShowPreview}
 									isCommentFormActive={isCommentFormActive}
 									setIsCommentFormActive={
 										setIsCommentFormActive
 									}
+									userNameMissing={userNameMissing}
+									setUserNameMissing={setUserNameMissing}
 								/>
 							</li>
 						))}
@@ -402,8 +418,12 @@ export const Comments = ({
 					onComment={onComment}
 					onReply={onReply}
 					onPreview={onPreview}
+					showPreview={showPreview}
+					setShowPreview={setShowPreview}
 					isActive={isCommentFormActive}
 					setIsActive={setIsCommentFormActive}
+					userNameMissing={userNameMissing}
+					setUserNameMissing={setUserNameMissing}
 				/>
 			)}
 		</div>

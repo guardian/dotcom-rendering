@@ -36,8 +36,12 @@ type Props = {
 		parentCommentId: number,
 	) => Promise<CommentResponse>;
 	onPreview?: (body: string) => Promise<string>;
+	showPreview: boolean;
+	setShowPreview: (showPreview: boolean) => void;
 	isActive: boolean;
 	setIsActive: (isActive: boolean) => void;
+	userNameMissing: boolean;
+	setUserNameMissing: (isUserNameMissing: boolean) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -217,15 +221,17 @@ export const CommentForm = ({
 	onComment,
 	onReply,
 	onPreview,
+	showPreview,
+	setShowPreview,
 	isActive,
 	setIsActive,
+	userNameMissing,
+	setUserNameMissing,
 }: Props) => {
-	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
 	const [body, setBody] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
 	const [error, setError] = useState<string>('');
 	const [info, setInfo] = useState<string>('');
-	const [showPreview, setShowPreview] = useState<boolean>(false);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
 	useEffect(() => {

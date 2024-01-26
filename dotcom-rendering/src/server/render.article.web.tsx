@@ -13,7 +13,6 @@ import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { isEditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { getHttp3Url } from '../lib/getHttp3Url';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractGA } from '../model/extract-ga';
@@ -69,10 +68,6 @@ export const renderHtml = ({
 		.map((block) => block.elements)
 		.flat();
 
-	// Evaluating the performance of HTTP3 over HTTP2
-	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 = false } = article.config.switches;
-
 	const pageHasNonBootInteractiveElements = elements.some(
 		(element) =>
 			element._type ===
@@ -106,14 +101,11 @@ export const renderHtml = ({
 		process.env.COMMERCIAL_BUNDLE_URL ?? article.config.commercialBundleUrl,
 		pageHasNonBootInteractiveElements &&
 			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-	]
-		.filter(isString)
-		.map((script) => (offerHttp3 ? getHttp3Url(script) : script));
-
+	].filter(isString);
 	const legacyScripts = [
 		getPathFromManifest('client.web.legacy', 'frameworks.js'),
 		getPathFromManifest('client.web.legacy', 'index.js'),
-	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	];
 
 	const scriptTags = generateScriptTags([
 		...prefetchScripts,
@@ -232,7 +224,6 @@ window.twttr = (function(d, s, id) {
 			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
 				? initTwitter
 				: undefined,
-		offerHttp3,
 		canonicalUrl,
 		renderingTarget: 'Web',
 		weAreHiring: !!article.config.switches.weAreHiring,
