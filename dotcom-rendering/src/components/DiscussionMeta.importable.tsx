@@ -3,34 +3,13 @@ import { getOptionsHeadersWithOkta } from '../lib/identity';
 import { useApi } from '../lib/useApi';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCommentCount } from '../lib/useCommentCount';
+import type { GetDiscussionSuccess } from '../types/discussion';
 import { SignedInAs } from './SignedInAs';
 
 type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	enableDiscussionSwitch: boolean;
-};
-
-/** @deprecated when we unify the state we will no longer need this extra network call */
-type DiscussionResponse = {
-	// status: string;
-	// errorCode?: string;
-	// currentPage: number;
-	// pages: number;
-	// pageSize: number;
-	// orderBy: string;
-	discussion: {
-		// key: string;
-		// webUrl: string;
-		// apiUrl: string;
-		// commentCount: number;
-		// topLevelCommentCount: number;
-		isClosedForComments: boolean;
-		// isClosedForRecommendation: boolean;
-		// isThreaded: boolean;
-		// title: string;
-		// comments: CommentType[];
-	};
 };
 
 export const DiscussionMeta = ({
@@ -41,7 +20,7 @@ export const DiscussionMeta = ({
 	const authStatus = useAuthStatus();
 	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
-	const { data: discussionData } = useApi<DiscussionResponse>(
+	const { data: discussionData } = useApi<GetDiscussionSuccess>(
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 		{
 			// The default for dedupingInterval is 2 seconds but we want to wait longer here because the cache time
