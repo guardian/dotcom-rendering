@@ -235,7 +235,7 @@ const discussionApiErrorSchema = object({
 	errorCode: optional(string()),
 });
 
-export type DiscussionSuccess = {
+export type GetDiscussionSuccess = {
 	status: 'ok';
 	currentPage: number;
 	pages: number;

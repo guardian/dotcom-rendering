@@ -1,4 +1,4 @@
-import type { DiscussionSuccess } from '../../src/types/discussion';
+import type { GetDiscussionSuccess } from '../../src/types/discussion';
 
 export const discussionNoTopComments = {
 	status: 'ok',
@@ -18,4 +18,4 @@ export const discussionNoTopComments = {
 		webUrl: 'https://www.theguardian.com/music/2014/jul/25/stevie-nicks-ro-release-double-album-of-songs-from-her-past',
 		comments: [],
 	},
-} satisfies DiscussionSuccess;
+} satisfies GetDiscussionSuccess;

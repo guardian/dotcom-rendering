@@ -1,4 +1,4 @@
-import type { DiscussionSuccess } from '../../src/types/discussion';
+import type { GetDiscussionSuccess } from '../../src/types/discussion';
 
 export const discussionWithTwoComments = {
 	status: 'ok',
@@ -63,4 +63,4 @@ export const discussionWithTwoComments = {
 			},
 		],
 	},
-} satisfies DiscussionSuccess;
+} satisfies GetDiscussionSuccess;

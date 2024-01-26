@@ -5,7 +5,7 @@ import type {
 	CommentResponse,
 	CommentType,
 	DiscussionOptions,
-	DiscussionSuccess,
+	GetDiscussionSuccess,
 	OrderByType,
 	ThreadsType,
 	UserNameResponse,
@@ -69,7 +69,7 @@ export const getDiscussion = async (
 		threads: ThreadsType;
 		page: number;
 	},
-): Promise<Result<GetDiscussionError, DiscussionSuccess>> => {
+): Promise<Result<GetDiscussionError, GetDiscussionSuccess>> => {
 	const apiOpts: DiscussionOptions = {
 		...defaultParams,
 		...{
