@@ -309,7 +309,7 @@ export const Discussion = ({
 			{!isExpanded && (
 				<Button
 					onClick={() => {
-						setIsExpanded(true);
+						dispatch({ type: 'expandComments' });
 						dispatchCommentsExpandedEvent();
 					}}
 					icon={<SvgPlus />}
