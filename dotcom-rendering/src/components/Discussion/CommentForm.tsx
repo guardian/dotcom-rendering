@@ -40,6 +40,8 @@ type Props = {
 	setShowPreview: (showPreview: boolean) => void;
 	isActive: boolean;
 	setIsActive: (isActive: boolean) => void;
+	userNameMissing: boolean;
+	setUserNameMissing: (isUserNameMissing: boolean) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -223,8 +225,9 @@ export const CommentForm = ({
 	setShowPreview,
 	isActive,
 	setIsActive,
+	userNameMissing,
+	setUserNameMissing,
 }: Props) => {
-	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
 	const [body, setBody] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
 	const [error, setError] = useState<string>('');

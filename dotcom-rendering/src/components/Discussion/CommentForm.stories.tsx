@@ -69,6 +69,8 @@ export const Default = () => (
 		setShowPreview={() => {}}
 		isActive={false}
 		setIsActive={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 Default.storyName = 'default';
@@ -84,6 +86,8 @@ export const Error = () => (
 		setShowPreview={() => {}}
 		isActive={false}
 		setIsActive={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 Error.storyName = 'form with errors';
@@ -99,6 +103,8 @@ export const Active = () => (
 		setShowPreview={() => {}}
 		isActive={true}
 		setIsActive={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 Active.storyName = 'form is active';
@@ -134,6 +140,8 @@ export const Premoderated = () => (
 		setShowPreview={() => {}}
 		isActive={true}
 		setIsActive={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 Premoderated.storyName = 'user is premoderated';

@@ -193,6 +193,8 @@ export const defaultStory = () => (
 		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 defaultStory.storyName = 'default';
@@ -223,6 +225,8 @@ export const threadedComment = () => (
 		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 threadedComment.storyName = 'threaded';
@@ -253,6 +257,8 @@ export const threadedCommentWithShowMore = () => (
 		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
@@ -283,6 +289,8 @@ export const threadedCommentWithLongUsernames = () => (
 		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
@@ -313,6 +321,8 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =
