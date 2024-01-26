@@ -9,13 +9,11 @@ const BASE_URL = `http://localhost:${PORT}`;
  * - default the base url and port
  * - default the geo region to GB
  * - prevent the support banner from showing
- * - abort all ophan requests
- * - use default waitUntil: 'domcontentloaded' rather than 'load' to speed up tests
  */
 const loadPage = async (
 	page: Page,
 	path: string,
-	waitUntil: 'load' | 'domcontentloaded' = 'domcontentloaded',
+	waitUntil: 'load' | 'domcontentloaded' = 'load',
 	region = 'GB',
 	preventSupportBanner = true,
 ): Promise<void> => {
@@ -32,12 +30,8 @@ const loadPage = async (
 			);
 		}
 	}, region);
-	// Abort all ophan requests as they hang and stop the page from firing the 'load' event
-	await page.route(/ophan.theguardian.com/, async (route) => {
-		await route.abort();
-	});
-	// Use default waitUntil: 'domcontentloaded' rather than 'load' to speed up tests
-	// If this causes any issues use 'load' instead
+	// The default waitUntil: 'load' ensures all requests have completed
+	// For specific cases that do not rely on JS use 'domcontentloaded' to speed up tests
 	await page.goto(`${BASE_URL}${path}`, { waitUntil });
 };
 
