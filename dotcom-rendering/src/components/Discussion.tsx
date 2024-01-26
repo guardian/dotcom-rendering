@@ -167,16 +167,17 @@ export const Discussion = ({
 	user,
 	idApiUrl,
 }: Props) => {
-	const [commentPage, setCommentPage] = useState(1);
-	const [comments, setComments] = useState<CommentType[]>([]);
-	const [isClosedForComments, setIsClosedForComments] = useState(false);
-	const [isExpanded, setIsExpanded] = useState(false);
-	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
-		commentIdFromUrl(),
-	);
-	const [filters, setFilters] = useState<FilterOptions>(
-		initFiltersFromLocalStorage(),
-	);
+	const [
+		{
+			comments,
+			isClosedForComments,
+			isExpanded,
+			commentPage,
+			filters,
+			hashCommentId,
+		},
+		dispatch,
+	] = useReducer(reducer, initialState);
 	const [loading, setLoading] = useState(true);
 	const [totalPages, setTotalPages] = useState(0);
 
