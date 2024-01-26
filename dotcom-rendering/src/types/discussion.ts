@@ -2,6 +2,7 @@ import type { BaseSchema } from 'valibot';
 import {
 	array,
 	boolean,
+	integer,
 	literal,
 	number,
 	object,
@@ -175,9 +176,13 @@ const commentResponseSchema = variant('status', [
 	commentErrorSchema,
 	object({
 		status: literal('ok'),
-		// response.errorCode is the id of the comment that was created on the server
-		// it is returned as a string, so we need to cast to an number to be compatible
-		message: transform(string(), (input) => parseInt(input, 10)),
+		message: transform(
+			string(),
+			// response.errorCode is the id of the comment that was created on the server
+			// it is returned as a string, so we need to cast to an number to be compatible
+			(input) => Number(input),
+			number([integer()]),
+		),
 	}),
 ]);
 
