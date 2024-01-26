@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  prebid.js: github:guardian/prebid.js#91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4
+
 importers:
 
   .:
@@ -16494,12 +16497,6 @@ packages:
   /opener@1.5.2:
     resolution: {integrity: sha512-ur5UIdyw5Y7yEj9wLzhqXiy6GZ3Mwx0yGI+5sMn2r0N0v3cKJvUmFH5yPP+WXh9e0xfyzyJX95D8l088DNFj7A==}
     hasBin: true
-    dev: false
-
-  /ophan-tracker-js@2.0.2:
-    resolution: {integrity: sha512-cAVIFZbMAUmAhRYSma2Q833DmbWsfH0hySh6BeuKrK2rcvkS8dB8v3AHudHQrASMIzrgHXjbsHB0A9AusFIg2Q==}
-    engines: {node: '>=16'}
-    deprecated: This package has been replaced by @guardian/ophan-tracker-js
     dev: false
 
   /optionator@0.9.3:
