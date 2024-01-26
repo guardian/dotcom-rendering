@@ -15,7 +15,7 @@ new DotcomRendering(cdkApp, 'DotcomRendering-PROD', {
 	...sharedProps,
 	app: 'rendering',
 	stage: 'PROD',
-	minCapacity: 24,
+	minCapacity: 27,
 	maxCapacity: 120,
 	instanceType: 't4g.small',
 });
