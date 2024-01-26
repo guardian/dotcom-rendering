@@ -152,6 +152,7 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				filters: action.filters,
 				hashCommentId: undefined,
+				isExpanded: true,
 			};
 		default:
 			return state;
