@@ -293,8 +293,10 @@ export const Discussion = ({
 					setPage={setCommentPage}
 					filters={validFilters}
 					setFilters={(newFilters) => {
-						setHashCommentId(undefined);
-						setFilters(newFilters);
+						dispatch({
+							type: 'updateFilters',
+							filters: newFilters,
+						});
 					}}
 					commentCount={commentCount ?? 0}
 					loading={loading}
