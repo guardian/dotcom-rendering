@@ -241,14 +241,14 @@ export const Discussion = ({
 
 	useEffect(() => {
 		if (window.location.hash === '#comments') {
-			setIsExpanded(true);
+			dispatch({ type: 'expandComments' });
 		}
 	}, []);
 
 	useEffect(() => {
 		// There's no point showing the view more button if there isn't much more to view
 		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
-			setIsExpanded(true);
+			dispatch({ type: 'expandComments' });
 		}
 	}, [commentCount]);
 
@@ -286,7 +286,7 @@ export const Discussion = ({
 					onPermalinkClick={handlePermalink}
 					apiKey="dotcom-rendering"
 					onExpand={() => {
-						setIsExpanded(true);
+						dispatch({ type: 'expandComments' });
 					}}
 					idApiUrl={idApiUrl}
 					page={commentPage}
