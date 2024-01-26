@@ -153,6 +153,7 @@ const strikethroughComment = css`
 `;
 
 const codeComment = css`
+	/* stylelint-disable-next-line property-disallowed-list -- we don't want this font from Source */
 	font-family: monospace;
 `;
 
