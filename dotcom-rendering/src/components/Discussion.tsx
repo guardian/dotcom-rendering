@@ -214,7 +214,7 @@ export const Discussion = ({
 		// Put this comment id into the hashCommentId state which will
 		// trigger an api call to get the comment context and then expand
 		// and reload the discussion based on the resuts
-		setHashCommentId(commentId);
+		dispatch({ type: 'updateHashCommentId', hashCommentId: commentId });
 		return false;
 	};
 
