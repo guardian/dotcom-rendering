@@ -111,7 +111,6 @@ window.twttr = (function(d, s, id) {
 		scriptTags,
 		guardian,
 		renderingTarget: 'Apps',
-		offerHttp3: false,
 		weAreHiring: !!article.config.switches.weAreHiring,
 		canonicalUrl: article.canonicalUrl,
 		initTwitter:
