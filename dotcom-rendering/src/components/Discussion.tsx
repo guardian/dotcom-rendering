@@ -311,7 +311,9 @@ export const Discussion = ({
 					loading={loading}
 					totalPages={totalPages}
 					comments={comments}
-					setComments={setComments}
+					setComment={(comment: CommentType) => {
+						dispatch({ type: 'addComment', comment });
+					}}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />

@@ -45,7 +45,7 @@ type Props = {
 	loading: boolean;
 	totalPages: number;
 	comments: CommentType[];
-	setComments: (comments: CommentType[]) => void;
+	setComment: (comment: CommentType) => void;
 };
 
 const footerStyles = css`
@@ -122,7 +122,7 @@ export const Comments = ({
 	loading,
 	totalPages,
 	comments,
-	setComments,
+	setComment,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -217,10 +217,7 @@ export const Comments = ({
 	const onAddComment = (comment: CommentType) => {
 		// Remove last item from our local array
 		// Replace it with this new comment at the start
-		setComments([comment, ...comments.slice(0, -1)]);
-
-		// It's possible to post a comment without the view being expanded
-		onExpand();
+		setComment(comment);
 
 		const commentElement = document.getElementById(`comment-${comment.id}`);
 		commentElement?.scrollIntoView();
