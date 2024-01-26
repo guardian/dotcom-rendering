@@ -1,4 +1,4 @@
-import { SerializedStyles, css } from '@emotion/react';
+import { css, type SerializedStyles } from '@emotion/react';
 
 type Props = {
 	children: React.ReactNode;
