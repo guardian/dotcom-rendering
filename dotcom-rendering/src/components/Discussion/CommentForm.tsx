@@ -154,6 +154,10 @@ const bottomContainer = css`
 	align-content: space-between;
 `;
 
+const wrappingRow = css`
+	flex-flow: wrap;
+`;
+
 const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 	<div
 		css={css`
@@ -506,7 +510,7 @@ export const CommentForm = ({
 					onFocus={() => setIsActive(true)}
 				/>
 				<div css={bottomContainer}>
-					<Row>
+					<Row cssOverrides={wrappingRow}>
 						<>
 							<PillarButton
 								type="submit"
@@ -541,17 +545,19 @@ export const CommentForm = ({
 						</>
 					</Row>
 					{isActive && (
-						<Row>
+						<Row cssOverrides={wrappingRow}>
 							<button
 								onClick={(e) => {
 									e.preventDefault();
 									transformText(boldString);
 								}}
 								css={commentAddOns}
+								style={{ fontWeight: 'bold' }}
 								data-link-name="formatting-controls-bold"
 								type="button"
+								title="Bold"
 							>
-								B
+								bold
 							</button>
 							<button
 								onClick={(e) => {
@@ -559,10 +565,12 @@ export const CommentForm = ({
 									transformText(italicsString);
 								}}
 								css={commentAddOns}
+								style={{ fontStyle: 'italic' }}
 								data-link-name="formatting-controls-italic"
 								type="button"
+								title="Italic"
 							>
-								i
+								italic
 							</button>
 							<button
 								onClick={(e) => {
@@ -570,10 +578,12 @@ export const CommentForm = ({
 									transformText(strikethroughString);
 								}}
 								css={commentAddOns}
+								style={{ textDecoration: 'line-through' }}
 								data-link-name="formatting-controls-strikethrough"
 								type="button"
+								title="Strikethrough"
 							>
-								{`S̶`}
+								strikethrough
 							</button>
 							<button
 								onClick={(e) => {
@@ -581,10 +591,12 @@ export const CommentForm = ({
 									transformText(codeString);
 								}}
 								css={commentAddOns}
+								style={{ fontFamily: 'monospace' }}
 								data-link-name="formatting-controls-code"
 								type="button"
+								title="Code"
 							>
-								{`<>`}
+								{`<code>`}
 							</button>
 							<button
 								onClick={(e) => {
@@ -594,8 +606,9 @@ export const CommentForm = ({
 								css={commentAddOns}
 								data-link-name="formatting-controls-quote"
 								type="button"
+								title="Quote"
 							>
-								"
+								"quote"
 							</button>
 							<button
 								onClick={(e) => {
@@ -603,8 +616,10 @@ export const CommentForm = ({
 									transformLink();
 								}}
 								css={commentAddOns}
+								style={{ textDecoration: 'underline' }}
 								data-link-name="formatting-controls-link"
 								type="button"
+								title="Link"
 							>
 								Link
 							</button>

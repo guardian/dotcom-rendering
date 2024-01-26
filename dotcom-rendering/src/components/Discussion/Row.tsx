@@ -1,14 +1,15 @@
-import { css } from '@emotion/react';
+import { css, type SerializedStyles } from '@emotion/react';
 
-type Props = { children: React.ReactNode };
+type Props = {
+	children: React.ReactNode;
+	cssOverrides?: SerializedStyles | SerializedStyles[];
+};
 
-export const Row = ({ children }: Props) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: row;
-		`}
-	>
-		{children}
-	</div>
+const rowStyles = css`
+	display: flex;
+	flex-direction: row;
+`;
+
+export const Row = ({ children, cssOverrides }: Props) => (
+	<div css={[rowStyles, cssOverrides]}>{children}</div>
 );
