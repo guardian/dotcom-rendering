@@ -168,6 +168,8 @@ export const Comments = ({
 		useState(COMMENT_BATCH);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
 	const [error, setError] = useState<string>('');
+	const [previewBody, setPreviewBody] = useState<string>('');
+	const [body, setBody] = useState('');
 
 	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
 
@@ -342,6 +344,8 @@ export const Comments = ({
 											setPreviewBody={
 												setReplyFormPreviewBody
 											}
+											body={body}
+											setBody={setBody}
 										/>
 									</li>
 								))}
@@ -371,6 +375,8 @@ export const Comments = ({
 					setUserNameMissing={setTopFormUserMissing}
 					previewBody={topForm.previewBody}
 					setPreviewBody={setTopFormPreviewBody}
+					body={body}
+					setBody={setBody}
 				/>
 			)}
 			{!!picks.length && (
@@ -429,6 +435,8 @@ export const Comments = ({
 									setUserNameMissing={setReplyFormUserMissing}
 									previewBody={replyForm.previewBody}
 									setPreviewBody={setReplyFormPreviewBody}
+									body={body}
+									setBody={setBody}
 								/>
 							</li>
 						))}
@@ -461,6 +469,8 @@ export const Comments = ({
 					setUserNameMissing={setBottomFormUserMissing}
 					previewBody={bottomForm.previewBody}
 					setPreviewBody={setBottomFormPreviewBody}
+					body={body}
+					setBody={setBody}
 				/>
 			)}
 		</div>
