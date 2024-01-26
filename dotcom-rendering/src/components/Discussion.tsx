@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
 import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { getDiscussion } from '../lib/discussionApi';
 import {
 	getCommentContext,
@@ -87,6 +87,75 @@ const remapToValidFilters = (
 		...filters,
 		threads: 'expanded',
 	} satisfies FilterOptions;
+};
+
+type State = {
+	comments: CommentType[];
+	isClosedForComments: boolean;
+	isExpanded: boolean;
+	commentPage: number;
+	filters: FilterOptions;
+	hashCommentId: number | undefined;
+};
+
+const initialState: State = {
+	comments: [],
+	isClosedForComments: false,
+	isExpanded: false,
+	commentPage: 1,
+	filters: initFiltersFromLocalStorage(),
+	hashCommentId: commentIdFromUrl(),
+};
+
+type Action =
+	| {
+			type: 'commentsLoaded';
+			comments: CommentType[];
+			isClosedForComments: boolean;
+	  }
+	| { type: 'expandComments' }
+	| { type: 'addComment'; comment: CommentType }
+	| { type: 'updateCommentPage'; commentPage: number; isExpanded: boolean }
+	| {
+			type: 'updateFilters';
+			filters: FilterOptions;
+	  }
+	| { type: 'updateHashCommentId'; hashCommentId: number | undefined };
+
+const reducer = (state: State, action: Action): State => {
+	switch (action.type) {
+		case 'commentsLoaded':
+			return {
+				...state,
+				comments: action.comments,
+				isClosedForComments: action.isClosedForComments,
+			};
+		case 'addComment':
+			return {
+				...state,
+				comments: [action.comment, ...state.comments.slice(0, -1)],
+				isExpanded: true,
+			};
+		case 'expandComments':
+			return {
+				...state,
+				isExpanded: true,
+			};
+		case 'updateCommentPage':
+			return {
+				...state,
+				commentPage: action.commentPage,
+				isExpanded: action.isExpanded,
+			};
+		case 'updateFilters':
+			return {
+				...state,
+				filters: action.filters,
+				hashCommentId: undefined,
+			};
+		default:
+			return state;
+	}
 };
 
 export const Discussion = ({
