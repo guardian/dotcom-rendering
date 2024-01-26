@@ -252,26 +252,20 @@ const fontList: FontDisplay[] = [
 const getFontUrl = (path: string): string =>
 	`https://assets.guim.co.uk/static/frontend/${path}`;
 
-export const getFontsCss = (): string => {
-	let fontCss = '';
+const rawFontsCss = fontList
+	.map(
+		(font) => `
+@font-face {
+	font-family: "${font.family}";
+	src: url(${getFontUrl(font.woff2)}) format("woff2"),
+			url(${getFontUrl(font.woff)}) format("woff"),
+			url(${getFontUrl(font.ttf)}) format("truetype");
+	font-weight: ${font.weight};
+	font-style: ${font.style};
+	font-display: swap;
+}
+`,
+	)
+	.join('\n');
 
-	for (const font of fontList) {
-		const woff2 = getFontUrl(font.woff2);
-		const woff = getFontUrl(font.woff);
-		const ttf = getFontUrl(font.ttf);
-
-		fontCss += `
-			@font-face {
-				font-family: "${font.family}";
-				src: url(${woff2}) format("woff2"),
-						url(${woff}) format("woff"),
-						url(${ttf}) format("truetype");
-				font-weight: ${font.weight};
-				font-style: ${font.style};
-				font-display: swap;
-			}
-		`;
-	}
-
-	return new CleanCSS().minify(fontCss).styles;
-};
+export const fontsCss = new CleanCSS().minify(rawFontsCss).styles;
