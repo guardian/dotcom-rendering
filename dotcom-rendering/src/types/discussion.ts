@@ -2,12 +2,14 @@ import type { BaseSchema } from 'valibot';
 import {
 	array,
 	boolean,
+	literal,
 	number,
 	object,
 	optional,
 	recursive,
-	safeParse,
 	string,
+	unknown,
+	variant,
 } from 'valibot';
 import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
@@ -226,30 +228,38 @@ export type SignedInUser = {
 	authStatus: SignedInWithCookies | SignedInWithOkta;
 };
 
-export interface DiscussionResponse {
-	status: string;
-	errorCode?: string;
+const discussionApiErrorSchema = object({
+	status: literal('error'),
+	statusCode: number(),
+	message: string(),
+	errorCode: optional(string()),
+});
+
+export type DiscussionSuccess = {
+	status: 'ok';
 	currentPage: number;
 	pages: number;
 	pageSize: number;
 	orderBy: string;
-	discussion: {
-		key: string;
-		webUrl: string;
-		apiUrl: string;
-		commentCount: number;
-		topLevelCommentCount: number;
-		isClosedForComments: boolean;
-		isClosedForRecommendation: boolean;
-		isThreaded: boolean;
-		title: string;
-		comments: CommentType[];
-	};
-}
+	discussion: DiscussionData;
+	switches?: unknown;
+};
 
-const discussionResponse = object({
-	status: string(),
-	errorCode: optional(string()),
+type DiscussionData = {
+	key: string;
+	webUrl: string;
+	apiUrl: string;
+	commentCount: number;
+	topLevelCommentCount: number;
+	isClosedForComments: boolean;
+	isClosedForRecommendation: boolean;
+	isThreaded: boolean;
+	title: string;
+	comments: CommentType[];
+};
+
+const discussionApiSuccessSchema = object({
+	status: literal('ok'),
 	currentPage: number(),
 	pages: number(),
 	pageSize: number(),
@@ -266,17 +276,13 @@ const discussionResponse = object({
 		title: string(),
 		comments: array(comment),
 	}),
+	switches: unknown(),
 });
 
-export const parseDiscussionResponse = (
-	data: unknown,
-): DiscussionResponse | undefined => {
-	const result = safeParse(discussionResponse, data);
-	if (!result.success) {
-		console.error('DiscussionResponse', result.issues);
-	}
-	return result.success ? result.output : undefined;
-};
+export const discussionApiResponseSchema = variant('status', [
+	discussionApiErrorSchema,
+	discussionApiSuccessSchema,
+]);
 
 export interface DiscussionOptions {
 	orderBy: string;
