@@ -62,12 +62,12 @@ export const LoggedOutHiddenPicks = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			handleFilterChange={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -103,12 +103,12 @@ export const InitialPage = () => (
 			page={1}
 			setPage={() => {}}
 			filters={filters}
-			handleFilterChange={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -145,12 +145,12 @@ export const LoggedInHiddenNoPicks = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			handleFilterChange={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -181,12 +181,12 @@ export const LoggedIn = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			handleFilterChange={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -216,16 +216,15 @@ export const LoggedInShortDiscussion = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			handleFilterChange={() => {}}
 			commentCount={discussionWithTwoComments.discussion.commentCount}
 			loading={false}
 			totalPages={discussionWithTwoComments.pages}
 			comments={discussionWithTwoComments.discussion.comments}
 			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
-LoggedInShortDiscussion.storyName = 'when logged in but only two comments made';
 LoggedInShortDiscussion.decorators = [splitTheme([format])];
 
 export const LoggedOutHiddenNoPicks = () => (
@@ -250,12 +249,12 @@ export const LoggedOutHiddenNoPicks = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			handleFilterChange={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={0}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -293,12 +292,12 @@ export const Closed = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			handleFilterChange={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -334,12 +333,12 @@ export const NoComments = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			handleFilterChange={() => {}}
 			commentCount={0}
 			loading={false}
 			totalPages={0}
 			comments={[]}
 			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -375,7 +374,6 @@ export const LegacyDiscussion = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			handleFilterChange={() => {}}
 			commentCount={
 				legacyDiscussionWithoutThreading.discussion.commentCount
 			}
@@ -383,6 +381,7 @@ export const LegacyDiscussion = () => (
 			totalPages={legacyDiscussionWithoutThreading.pages}
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
 			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
