@@ -135,6 +135,7 @@ export const Comments = ({
 	);
 	const [error, setError] = useState<string>('');
 	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
+	const [previewBody, setPreviewBody] = useState<string>('');
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
 
@@ -305,6 +306,8 @@ export const Comments = ({
 											setUserNameMissing={
 												setUserNameMissing
 											}
+											previewBody={previewBody}
+											setPreviewBody={setPreviewBody}
 										/>
 									</li>
 								))}
@@ -334,6 +337,8 @@ export const Comments = ({
 					setError={setError}
 					userNameMissing={userNameMissing}
 					setUserNameMissing={setUserNameMissing}
+					previewBody={previewBody}
+					setPreviewBody={setPreviewBody}
 				/>
 			)}
 			{!!picks.length && (
@@ -396,6 +401,8 @@ export const Comments = ({
 									setError={setError}
 									userNameMissing={userNameMissing}
 									setUserNameMissing={setUserNameMissing}
+									previewBody={previewBody}
+									setPreviewBody={setPreviewBody}
 								/>
 							</li>
 						))}
@@ -429,6 +436,8 @@ export const Comments = ({
 					setError={setError}
 					userNameMissing={userNameMissing}
 					setUserNameMissing={setUserNameMissing}
+					previewBody={previewBody}
+					setPreviewBody={setPreviewBody}
 				/>
 			)}
 		</div>

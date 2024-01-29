@@ -36,6 +36,8 @@ type Props = {
 	setError: (error: string) => void;
 	userNameMissing: boolean;
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
+	previewBody: string;
+	setPreviewBody: (previewBody: string) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -227,9 +229,10 @@ export const CommentForm = ({
 	setError,
 	userNameMissing,
 	setUserNameMissing,
+	previewBody,
+	setPreviewBody,
 }: Props) => {
 	const [body, setBody] = useState<string>('');
-	const [previewBody, setPreviewBody] = useState<string>('');
 	const [info, setInfo] = useState<string>('');
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -431,11 +434,10 @@ export const CommentForm = ({
 	if (userNameMissing && body) {
 		return (
 			<FirstCommentWelcome
-				body={body}
 				error={error}
 				submitForm={submitUserName}
 				cancelSubmit={() => setUserNameMissing(false)}
-				onPreview={onPreview}
+				previewBody={previewBody}
 			/>
 		);
 	}
