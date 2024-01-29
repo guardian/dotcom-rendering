@@ -49,30 +49,18 @@ jobs:
           role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           mask-aws-account-id: true
 
-      # Existing rendering app deployment
-      - name: Upload existing rendering app to RiffRaff
+      # All rendering apps deployment
+      - name: Upload rendering apps to RiffRaff
         uses: guardian/actions-riff-raff@v3
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          projectName: dotcom:rendering
-          configPath: riff-raff-rendering.yaml
-          buildNumberOffset: 38860
+          projectName: dotcom:rendering-all
+          configPath: riff-raff.yaml
           contentDirectories: |
             rendering-cfn:
               - rendering-cfn
             rendering:
               - rendering
-            frontend-static:
-              - frontend-static
-
-      # All (new) rendering apps deployment
-      - name: Upload (new) rendering apps to RiffRaff
-        uses: guardian/actions-riff-raff@v3
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          projectName: dotcom:rendering-all
-          configPath: riff-raff-rendering-all.yaml
-          contentDirectories: |
             article-rendering-cfn:
               - article-rendering-cfn
             article-rendering:

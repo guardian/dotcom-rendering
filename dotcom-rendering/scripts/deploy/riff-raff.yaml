@@ -26,6 +26,26 @@ deployments:
           value: public, max-age=315360000, immutable # one year in seconds
       prefixStack: false
       publicReadAcl: false
+  # rendering cloudformation
+  rendering-cfn:
+    template: cloudformation
+    parameters:
+      templateStagePaths:
+        CODE: DotcomRendering-CODE.template.json
+        PROD: DotcomRendering-PROD.template.json
+      cloudFormationStackByTags: false
+      cloudFormationStackName: rendering
+      amiParameter: AMIRendering
+  # rendering autoscaling
+  rendering:
+    type: autoscaling
+    parameters:
+      bucketSsmKey: /account/services/dotcom-artifact.bucket
+      # Default is 900 (15 mins), this is 25 mins
+      secondsToWait: 1500
+    dependencies:
+      - frontend-static
+      - rendering-cfn
   # article-rendering cloudformation
   article-rendering-cfn:
     template: cloudformation

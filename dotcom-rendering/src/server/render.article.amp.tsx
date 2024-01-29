@@ -8,7 +8,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { ConfigProvider } from '../components/ConfigContext';
 import { epicChoiceCardCss } from '../components/Epic.amp';
 import { stickyAdLabelCss } from '../components/StickyAd.amp';
-import { getFontsCss } from '../lib/fonts-css';
+import { fontsCss } from '../lib/fonts-css';
 import type { Config } from '../types/configContext';
 
 interface RenderToStringResult {
@@ -103,7 +103,7 @@ export const renderArticle = ({
     ${scripts.join(' ')}
 
     <style amp-custom>
-        ${getFontsCss()}
+        ${fontsCss}
         ${resets.resetCSS}
         ${css}
 		${stickyAdLabelCss}

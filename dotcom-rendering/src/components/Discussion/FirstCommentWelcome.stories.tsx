@@ -8,7 +8,7 @@ export const defaultStory = () => (
 	<FirstCommentWelcome
 		submitForm={() => Promise.resolve()}
 		cancelSubmit={() => undefined}
-		previewBody="My first comment!!"
+		previewBody="My first <b>comment</b>!!"
 	/>
 );
 defaultStory.storyName = 'Welcome message';
