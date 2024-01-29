@@ -116,11 +116,8 @@ type Action =
 	| { type: 'expandComments' }
 	| { type: 'addComment'; comment: CommentType }
 	| { type: 'updateCommentPage'; commentPage: number; shouldExpand: boolean }
-	| {
-			type: 'updateFilters';
-			filters: FilterOptions;
-	  }
-	| { type: 'updateHashCommentId'; hashCommentId: number | undefined };
+	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
+	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -147,12 +144,13 @@ const reducer = (state: State, action: Action): State => {
 				commentPage: action.commentPage,
 				isExpanded: action.shouldExpand ? true : state.isExpanded,
 			};
-		case 'updateFilters':
+		case 'filterChange':
 			return {
 				...state,
 				filters: action.filters,
 				hashCommentId: undefined,
 				isExpanded: true,
+				commentPage: action.commentPage ?? state.commentPage,
 			};
 		default:
 			return state;
@@ -289,9 +287,6 @@ export const Discussion = ({
 					commentToScrollTo={hashCommentId}
 					onPermalinkClick={handlePermalink}
 					apiKey="dotcom-rendering"
-					onExpand={() => {
-						dispatch({ type: 'expandComments' });
-					}}
 					idApiUrl={idApiUrl}
 					page={commentPage}
 					setPage={(page: number, shouldExpand: boolean) => {
@@ -302,18 +297,22 @@ export const Discussion = ({
 						});
 					}}
 					filters={validFilters}
-					setFilters={(newFilters) => {
-						dispatch({
-							type: 'updateFilters',
-							filters: newFilters,
-						});
-					}}
 					commentCount={commentCount ?? 0}
 					loading={loading}
 					totalPages={totalPages}
 					comments={comments}
 					setComment={(comment: CommentType) => {
 						dispatch({ type: 'addComment', comment });
+					}}
+					handleFilterChange={(
+						newFilters: FilterOptions,
+						page?: number,
+					) => {
+						dispatch({
+							type: 'filterChange',
+							filters: newFilters,
+							commentPage: page,
+						});
 					}}
 				/>
 				{!isExpanded && (

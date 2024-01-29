@@ -35,17 +35,16 @@ type Props = {
 	onComment?: ReturnType<typeof comment>;
 	onReply?: ReturnType<typeof reply>;
 	onPreview?: typeof preview;
-	onExpand: () => void;
 	idApiUrl: string;
 	page: number;
 	setPage: (page: number, shouldExpand: boolean) => void;
 	filters: FilterOptions;
-	setFilters: (filters: FilterOptions) => void;
 	commentCount: number;
 	loading: boolean;
 	totalPages: number;
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
+	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 };
 
 const footerStyles = css`
@@ -112,17 +111,16 @@ export const Comments = ({
 	onComment,
 	onReply,
 	onPreview,
-	onExpand,
 	idApiUrl,
 	page,
 	setPage,
 	filters,
-	setFilters,
 	commentCount,
 	loading,
 	totalPages,
 	comments,
 	setComment,
+	handleFilterChange,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -190,9 +188,11 @@ export const Comments = ({
 			commentCount / newFilterObject.pageSize,
 		);
 
-		if (page > maxPagePossible) setPage(maxPagePossible, false);
-
-		setFilters(newFilterObject);
+		if (page > maxPagePossible) {
+			handleFilterChange(filters, maxPagePossible);
+		} else {
+			handleFilterChange(filters);
+		}
 	};
 
 	useEffect(() => {
