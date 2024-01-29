@@ -124,7 +124,6 @@ type Action =
 	| { type: 'updateCommentPage'; commentPage: number; shouldExpand: boolean }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
-	| { type: 'updateTotalPages'; totalPages: number }
 	| { type: 'setLoading'; loading: boolean };
 
 const reducer = (state: State, action: Action): State => {
