@@ -11,7 +11,6 @@ import type {
 } from '../../types/discussion';
 import { Comment } from './Comment';
 import { CommentForm } from './CommentForm';
-import { CommentReplyPreview } from './CommentReplyPreview';
 import { PillarButton } from './PillarButton';
 
 type Props = {
@@ -232,9 +231,6 @@ export const CommentContainer = ({
 							id={`comment-reply-form-${commentBeingRepliedTo.id}`}
 							css={nestingStyles}
 						>
-							<CommentReplyPreview
-								commentBeingRepliedTo={commentBeingRepliedTo}
-							/>
 							<CommentForm
 								shortUrl={shortUrl}
 								onAddComment={onAddComment}
