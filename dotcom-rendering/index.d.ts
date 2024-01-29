@@ -76,12 +76,6 @@ type ArticleDesign = import('@guardian/libs').ArticleDesign;
 type ArticleTheme = import('@guardian/libs').ArticleTheme;
 type ArticleFormat = import('@guardian/libs').ArticleFormat;
 
-// This is an object that allows you Type defaults of the designTypes.
-// The return type looks like: { Feature: any, Live: any, ...}
-// and can be used to add TypeSafety when needing to override a style in a designType
-
-type DesignTypesObj = { [key in ArticleDesign]: any };
-
 type SharePlatform =
 	| 'facebook'
 	| 'twitter'
@@ -126,7 +120,6 @@ interface ReaderRevenueCategories {
 	gifting?: string;
 }
 
-type ReaderRevenueCategory = 'contribute' | 'subscribe' | 'support';
 interface ReaderRevenuePositions {
 	header: ReaderRevenueCategories;
 	footer: ReaderRevenueCategories;
@@ -203,18 +196,6 @@ type ContentType =
 	| 'signup'
 	| 'userid';
 
-type PageTypeType = {
-	hasShowcaseMainElement: boolean;
-	isFront: boolean;
-	isLiveblog: boolean;
-	isMinuteArticle: boolean;
-	isPaidContent: boolean;
-	isPreview: boolean;
-	isSensitive: boolean;
-};
-
-type MatchType = 'CricketMatchType' | 'FootballMatchType';
-
 type CricketTeam = {
 	name: string;
 	home: boolean;
@@ -278,15 +259,6 @@ interface FENavType {
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
-/**
- * KeyEventsRequest is the expected body format for POST requests made to /KeyEvents
- */
-interface FEKeyEventsRequest {
-	keyEvents: Block[];
-	format: FEFormat;
-	filterKeyEvents: boolean;
-}
-
 type CardImageType = 'picture' | 'avatar' | 'crossword' | 'slideshow' | 'video';
 
 type SmallHeadlineSize =
@@ -300,20 +272,6 @@ type SmallHeadlineSize =
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
 type LeftColSize = 'compact' | 'wide';
-
-type CardPercentageType =
-	| '25%'
-	| '33.333%'
-	| '50%'
-	| '66.666%'
-	| '75%'
-	| '100%';
-
-type HeadlineLink = {
-	to: string; // the href for the anchor tag
-	visitedColour?: string; // a custom colour for the :visited state
-	preventFocus?: boolean; // if true, stop the link from being tabbable and focusable
-};
 
 type UserBadge = {
 	name: string;
@@ -354,21 +312,6 @@ type EventType = {
 	eventType: 'substitution' | 'dismissal' | 'booking';
 };
 
-type MatchReportType = {
-	id: string;
-	isResult: boolean;
-	homeTeam: TeamType;
-	awayTeam: TeamType;
-	competition: {
-		fullName: string;
-	};
-	isLive: boolean;
-	venue: string;
-	comments: string;
-	minByMinUrl: string;
-	reportUrl: string;
-};
-
 interface Topic {
 	type: TopicType;
 	value: string;
@@ -380,31 +323,6 @@ type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 interface MessageUs {
 	formId: string;
 	formFields: import('./src/types/content').MessageUsFieldType[];
-}
-
-// ----------------- //
-// General DataTypes //
-// ----------------- //
-
-interface BaseTrailType {
-	url: string;
-	headline: string;
-	webPublicationDate?: string;
-	image?: string;
-	avatarUrl?: string;
-	mediaType?: MediaType;
-	mediaDuration?: number;
-	ageWarning?: string;
-	byline?: string;
-	showByline?: boolean;
-	kickerText?: string;
-	shortUrl?: string;
-	commentCount?: number;
-	starRating?: number;
-	linkText?: string;
-	branding?: import('./src/types/branding').Branding;
-	isSnap?: boolean;
-	snapData?: import('./src/types/front').DCRSnapType;
 }
 
 // ------------

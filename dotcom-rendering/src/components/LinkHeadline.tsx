@@ -5,6 +5,12 @@ import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
 
+type HeadlineLink = {
+	to: string; // the href for the anchor tag
+	visitedColour?: string; // a custom colour for the :visited state
+	preventFocus?: boolean; // if true, stop the link from being tabbable and focusable
+};
+
 type Props = {
 	headlineText: string; // The text shown
 	format: ArticleFormat;
