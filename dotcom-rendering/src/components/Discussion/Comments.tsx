@@ -152,15 +152,14 @@ export const Comments = ({
 		} else return;
 	}, [expanded, comments.length]);
 
-	//todo: parse this properly
 	useEffect(() => {
-		const fetchPicks = async () => {
-			const json = await getPicks(shortUrl);
-			if (json !== undefined) {
-				setPicks(json);
+		void getPicks(shortUrl).then((result) => {
+			if (result.kind === 'error') {
+				console.error(result.error);
+				return;
 			}
-		};
-		void fetchPicks();
+			setPicks(result.value);
+		});
 	}, [shortUrl]);
 
 	/**
