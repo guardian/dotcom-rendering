@@ -167,9 +167,9 @@ export const AbuseReportForm = ({
 			authStatus,
 		})
 			.then((response) => {
-				if (response.status !== 'ok') {
+				if (response.kind === 'error') {
 					// Fallback to errors returned from the API
-					setErrors({ ...errors, response: response.message });
+					setErrors({ ...errors, response: response.error });
 				} else {
 					setSuccessMessage('Report submitted');
 				}
