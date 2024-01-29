@@ -167,6 +167,13 @@ const reducer = (state: State, action: Action): State => {
 				loading: action.loading,
 			};
 		}
+		case 'updateHashCommentId': {
+			return {
+				...state,
+				hashCommentId: action.hashCommentId,
+				isExpanded: true,
+			};
+		}
 		default:
 			return state;
 	}
@@ -199,6 +206,7 @@ export const Discussion = ({
 
 	useEffect(() => {
 		const id = commentIdFromUrl();
+		console.log('id', id);
 		if (id !== undefined) {
 			dispatch({
 				type: 'updateHashCommentId',
