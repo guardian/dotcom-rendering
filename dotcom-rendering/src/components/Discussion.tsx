@@ -112,7 +112,7 @@ export const Discussion = ({
 	const [totalPages, setTotalPages] = useState(0);
 
 	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
-
+	console.log('testing code deploys');
 	useEffect(() => {
 		setLoading(true);
 		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
