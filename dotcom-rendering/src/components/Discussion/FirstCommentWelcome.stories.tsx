@@ -6,9 +6,9 @@ export default { title: 'Discussion/FirstCommentWelcome' };
 
 export const defaultStory = () => (
 	<FirstCommentWelcome
-		body="My first message ever!!"
 		submitForm={() => Promise.resolve()}
 		cancelSubmit={() => undefined}
+		previewBody="My first comment!!"
 	/>
 );
 defaultStory.storyName = 'Welcome message';
@@ -27,10 +27,10 @@ defaultStory.decorators = [
 
 export const CommentWithError = () => (
 	<FirstCommentWelcome
-		body="My first message ever!!"
 		error="This is a custom user name error message"
 		submitForm={() => Promise.resolve()}
 		cancelSubmit={() => undefined}
+		previewBody="My first comment!!"
 	/>
 );
 CommentWithError.storyName = 'Welcome message with error';

@@ -74,6 +74,8 @@ describe('CommentContainer', () => {
 				setError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
+				previewBody=""
+				setPreviewBody={() => {}}
 			/>,
 		);
 
@@ -119,6 +121,8 @@ describe('CommentContainer', () => {
 				setError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
+				previewBody=""
+				setPreviewBody={() => {}}
 			/>,
 		);
 
@@ -163,6 +167,8 @@ describe('CommentContainer', () => {
 				setError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
+				previewBody=""
+				setPreviewBody={() => {}}
 			/>,
 		);
 
@@ -208,6 +214,8 @@ describe('CommentContainer', () => {
 				setError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
+				previewBody=""
+				setPreviewBody={() => {}}
 			/>,
 		);
 

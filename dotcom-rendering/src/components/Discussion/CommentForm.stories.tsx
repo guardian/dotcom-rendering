@@ -77,6 +77,8 @@ export const Default = () => {
 			setUserNameMissing={() => {}}
 			error={''}
 			setError={() => {}}
+			previewBody=""
+			setPreviewBody={() => {}}
 		/>
 	);
 };
@@ -102,6 +104,8 @@ export const Error = () => {
 			setUserNameMissing={setUserNameMissing}
 			error={''}
 			setError={() => {}}
+			previewBody=""
+			setPreviewBody={() => {}}
 		/>
 	);
 };
@@ -123,6 +127,8 @@ export const Active = () => (
 		setError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
+		previewBody=""
+		setPreviewBody={() => {}}
 	/>
 );
 Active.storyName = 'form is active';
@@ -162,6 +168,8 @@ export const Premoderated = () => (
 		setError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
+		previewBody=""
+		setPreviewBody={() => {}}
 	/>
 );
 Premoderated.storyName = 'user is premoderated';
