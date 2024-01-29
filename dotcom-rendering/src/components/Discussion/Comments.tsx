@@ -213,10 +213,7 @@ export const Comments = ({
 		setMutes(updatedMutes); // Update local state
 	};
 	const onAddComment = (comment: CommentType) => {
-		// Remove last item from our local array
-		// Replace it with this new comment at the start
 		setComment(comment);
-
 		const commentElement = document.getElementById(`comment-${comment.id}`);
 		commentElement?.scrollIntoView();
 	};

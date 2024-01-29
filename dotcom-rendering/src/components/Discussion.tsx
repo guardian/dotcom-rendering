@@ -139,7 +139,7 @@ const reducer = (state: State, action: Action): State => {
 		case 'addComment':
 			return {
 				...state,
-				comments: [action.comment, ...state.comments.slice(0, -1)],
+				comments: [action.comment, ...state.comments.slice(0, -1)], // Remove last item from our local array Replace it with this new comment at the start
 				isExpanded: true,
 			};
 		case 'expandComments':
@@ -199,8 +199,7 @@ export const Discussion = ({
 
 	useEffect(() => {
 		const id = commentIdFromUrl();
-
-		if (id) {
+		if (id !== undefined) {
 			dispatch({
 				type: 'updateHashCommentId',
 				hashCommentId: id,
