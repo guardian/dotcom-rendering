@@ -6,6 +6,11 @@ import {
 	mockSubscribe,
 } from '../../storybook/mocks';
 
+export default {
+	component: BrazeEndOfArticleComponent,
+	title: 'Components/Braze/UKNewsletterEpic',
+};
+
 export const defaultStory = () => {
 	const brazeMessageProps = {
 		slotName: 'EndOfArticle',
