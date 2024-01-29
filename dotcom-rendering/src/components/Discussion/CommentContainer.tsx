@@ -122,9 +122,13 @@ export const CommentContainer = ({
 	const expand = (commentId: number) => {
 		setLoading(true);
 		getMoreResponses(commentId)
-			.then((json) => {
+			.then((result) => {
+				if (result.kind === 'error') {
+					console.error(result.error);
+					return;
+				}
 				setExpanded(true);
-				setResponses(json.comment.responses ?? []);
+				setResponses(result.value);
 			})
 			.finally(() => {
 				setLoading(false);
