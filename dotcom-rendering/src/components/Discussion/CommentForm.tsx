@@ -13,7 +13,11 @@ import {
 	reply as defaultReply,
 } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
-import type { CommentType, SignedInUser } from '../../types/discussion';
+import type {
+	CommentType,
+	SignedInUser,
+	UserProfile,
+} from '../../types/discussion';
 import { FirstCommentWelcome } from './FirstCommentWelcome';
 import { PillarButton } from './PillarButton';
 import { Preview } from './Preview';

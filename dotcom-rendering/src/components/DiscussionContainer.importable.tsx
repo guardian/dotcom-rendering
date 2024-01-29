@@ -4,7 +4,7 @@ import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
 import { getOptionsHeadersWithOkta } from '../lib/identity';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useHydrated } from '../lib/useHydrated';
-import type { SignedInUser } from '../types/discussion';
+import type { SignedInUser, UserProfile } from '../types/discussion';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
 import { Placeholder } from './Placeholder';
@@ -25,7 +25,7 @@ const getUser = async ({
 
 	if (!isObject(data)) return;
 	if (!isObject(data.userProfile)) return;
-	const profile = data.userProfile as UserProfile;
+	const profile = data.userProfile as unknown as UserProfile;
 	return { profile, authStatus };
 };
 
