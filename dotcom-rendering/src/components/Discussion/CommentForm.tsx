@@ -629,7 +629,9 @@ export const CommentForm = ({
 				</div>
 			</form>
 
-			{showPreview && <Preview previewHtml={previewBody} />}
+			{showPreview && (
+				<Preview previewHtml={previewBody} showSpout={true} />
+			)}
 		</>
 	);
 };
