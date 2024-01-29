@@ -2,6 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css, ThemeProvider } from '@emotion/react';
 import { body, space } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
+import { useState } from 'react';
 import type { ReminderButtonColorStyles } from '../styles/colorData';
 import { contributionsTheme } from '../styles/colorData';
 import type { FetchEmail } from '../types/dcrTypes';
@@ -100,7 +101,7 @@ export const ReminderCtaButton = ({
 	fetchEmail,
 	colors = defaultReminderCtaButtonColors,
 	showPrivacyText,
-}: ReminderCtaButtonProps): JSX.Element => {
+}: ReminderCtaButtonProps) => {
 	const { reminderCta, reminderPeriod, reminderLabel } =
 		buildReminderFields();
 	const [remindState, setRemindState] =
