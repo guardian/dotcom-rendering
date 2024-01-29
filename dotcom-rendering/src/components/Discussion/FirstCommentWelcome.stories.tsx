@@ -8,7 +8,7 @@ export const defaultStory = () => (
 	<FirstCommentWelcome
 		submitForm={() => Promise.resolve()}
 		cancelSubmit={() => undefined}
-		previewBody=""
+		previewBody="My first comment!!"
 	/>
 );
 defaultStory.storyName = 'Welcome message';
@@ -30,7 +30,7 @@ export const CommentWithError = () => (
 		error="This is a custom user name error message"
 		submitForm={() => Promise.resolve()}
 		cancelSubmit={() => undefined}
-		previewBody=""
+		previewBody="My first comment!!"
 	/>
 );
 CommentWithError.storyName = 'Welcome message with error';

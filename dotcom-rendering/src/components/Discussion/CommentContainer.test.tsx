@@ -75,7 +75,7 @@ describe('CommentContainer', () => {
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
-				setPreviewBody={() => undefined}
+				setPreviewBody={() => {}}
 			/>,
 		);
 
@@ -122,7 +122,7 @@ describe('CommentContainer', () => {
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
-				setPreviewBody={() => undefined}
+				setPreviewBody={() => {}}
 			/>,
 		);
 
@@ -168,7 +168,7 @@ describe('CommentContainer', () => {
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
-				setPreviewBody={() => undefined}
+				setPreviewBody={() => {}}
 			/>,
 		);
 
@@ -215,7 +215,7 @@ describe('CommentContainer', () => {
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
-				setPreviewBody={() => undefined}
+				setPreviewBody={() => {}}
 			/>,
 		);
 
