@@ -108,6 +108,29 @@ const comment: BaseSchema<CommentType> = object({
 	),
 });
 
+const discussionApiCommentSuccessSchema = variant('status', [
+	object({
+		status: literal('error'),
+	}),
+	object({
+		status: literal('ok'),
+		comment,
+	}),
+]);
+
+export const parseCommentRepliesResponse = (
+	data: unknown,
+): Result<'ParsingError' | 'ApiError', CommentType[]> => {
+	const result = safeParse(discussionApiCommentSuccessSchema, data);
+	if (!result.success) {
+		return { kind: 'error', error: 'ParsingError' };
+	}
+	if (result.output.status === 'error') {
+		return { kind: 'error', error: 'ApiError' };
+	}
+	return { kind: 'ok', value: result.output.comment.responses ?? [] };
+};
+
 export interface CommentType {
 	id: number;
 	body: string;

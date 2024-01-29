@@ -13,6 +13,7 @@ import type {
 import {
 	discussionApiResponseSchema,
 	parseAbuseResponse,
+	parseCommentRepliesResponse,
 	parseCommentResponse,
 } from '../types/discussion';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
@@ -421,10 +422,7 @@ export const unPickComment = async (
 
 export const getMoreResponses = async (
 	commentId: number,
-): Promise<{
-	status: 'ok' | 'error';
-	comment: CommentType;
-}> => {
+): Promise<Result<GetDiscussionError, CommentType[]>> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment', commentId.toString()) +
 		objAsParams({
@@ -435,11 +433,13 @@ export const getMoreResponses = async (
 			},
 		});
 
-	const resp = await fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		headers: {
 			...options.headers,
 		},
 	});
 
-	return resp.json();
+	if (jsonResult.kind === 'error') return jsonResult;
+
+	return parseCommentRepliesResponse(jsonResult.value);
 };
