@@ -106,7 +106,7 @@ const initialState: State = {
 	isExpanded: false,
 	commentPage: 1,
 	filters: initFiltersFromLocalStorage(),
-	hashCommentId: commentIdFromUrl(),
+	hashCommentId: undefined,
 	totalPages: 0,
 	loading: true,
 };
@@ -197,6 +197,16 @@ export const Discussion = ({
 
 	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
+	useEffect(() => {
+		const id = commentIdFromUrl();
+
+		if (id) {
+			dispatch({
+				type: 'updateHashCommentId',
+				hashCommentId: id,
+			});
+		}
+	}, []);
 	useEffect(() => {
 		dispatch({ type: 'setLoading', loading: true });
 		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
