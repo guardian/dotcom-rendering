@@ -30,18 +30,24 @@ jobs:
       # We want to avoid uploading the uncompressed files to our riffraff bucket
       # so we create our tarball outside the rendering/ folder, then delete the contents of rendering/
       # and finally move the tarball into rendering
-      - name: Compress existing rendering server files
+      - name: Compress rendering app server files
         run: |
           tar -zcf rendering.tar.gz rendering
           rm -r rendering/*
           mv rendering.tar.gz rendering/
 
       # TODO - add other rendering apps when ready
-      - name: Compress article-rendering server files
+      - name: Compress article-rendering app server files
         run: |
           tar -zcf article-rendering.tar.gz article-rendering
           rm -r article-rendering/*
           mv article-rendering.tar.gz article-rendering/
+
+      - name: Compress facia-rendering app server files
+        run: |
+          tar -zcf facia-rendering.tar.gz facia-rendering
+          rm -r facia-rendering/*
+          mv facia-rendering.tar.gz facia-rendering/
 
       - uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -64,6 +70,10 @@ jobs:
             article-rendering-cfn:
               - article-rendering-cfn
             article-rendering:
+              - article-rendering
+            facia-rendering-cfn:
+              - article-rendering-cfn
+            facia-rendering:
               - article-rendering
             frontend-static:
               - frontend-static

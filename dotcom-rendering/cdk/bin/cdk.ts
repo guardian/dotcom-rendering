@@ -64,20 +64,20 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 });
 
 /** Facia */
-// new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
-// 	guApp: 'facia-rendering',
-// 	stage: 'CODE',
-//	domainName: 'facia-rendering.code.dev-guardianapis.com',
-// 	scaling: { minimumInstances: 1, maximumInstances: 2 },
-// 	instanceSize: InstanceSize.MICRO,
-// });
-// new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
-// 	guApp: 'facia-rendering',
-// 	stage: 'PROD',
-//	domainName: 'facia-rendering.guardianapis.com',
-// 	scaling: { minimumInstances: 1, maximumInstances: 2 },
-// 	instanceSize: InstanceSize.MICRO,
-// });
+new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
+	guApp: 'facia-rendering',
+	stage: 'CODE',
+	domainName: 'facia-rendering.code.dev-guardianapis.com',
+	scaling: { minimumInstances: 1, maximumInstances: 2 },
+	instanceSize: InstanceSize.SMALL,
+});
+new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
+	guApp: 'facia-rendering',
+	stage: 'PROD',
+	domainName: 'facia-rendering.guardianapis.com',
+	scaling: { minimumInstances: 4, maximumInstances: 20 },
+	instanceSize: InstanceSize.SMALL,
+});
 
 /** Misc */
 // new RenderingCDKStack(cdkApp, 'MiscRendering-CODE', {
