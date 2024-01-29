@@ -16496,12 +16496,6 @@ packages:
     hasBin: true
     dev: false
 
-  /ophan-tracker-js@2.0.2:
-    resolution: {integrity: sha512-cAVIFZbMAUmAhRYSma2Q833DmbWsfH0hySh6BeuKrK2rcvkS8dB8v3AHudHQrASMIzrgHXjbsHB0A9AusFIg2Q==}
-    engines: {node: '>=16'}
-    deprecated: This package has been replaced by @guardian/ophan-tracker-js
-    dev: false
-
   /optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}
     engines: {node: '>= 0.8.0'}

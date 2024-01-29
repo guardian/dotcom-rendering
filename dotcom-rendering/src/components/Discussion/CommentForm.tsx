@@ -13,11 +13,7 @@ import {
 	reply as defaultReply,
 } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
-import type {
-	CommentResponse,
-	CommentType,
-	SignedInUser,
-} from '../../types/discussion';
+import type { CommentType, SignedInUser } from '../../types/discussion';
 import { FirstCommentWelcome } from './FirstCommentWelcome';
 import { PillarButton } from './PillarButton';
 import { Preview } from './Preview';
@@ -29,17 +25,17 @@ type Props = {
 	onAddComment: (response: CommentType) => void;
 	setCommentBeingRepliedTo?: () => void;
 	commentBeingRepliedTo?: CommentType;
-	onComment?: (shortUrl: string, body: string) => Promise<CommentResponse>;
-	onReply?: (
-		shortUrl: string,
-		body: string,
-		parentCommentId: number,
-	) => Promise<CommentResponse>;
+	onComment?: ReturnType<typeof defaultComment>;
+	onReply?: ReturnType<typeof defaultReply>;
 	onPreview?: (body: string) => Promise<string>;
+	showPreview: boolean;
+	setShowPreview: (showPreview: boolean) => void;
 	isActive: boolean;
 	setIsActive: (isActive: boolean) => void;
 	error: string;
 	setError: (error: string) => void;
+	userNameMissing: boolean;
+	setUserNameMissing: (isUserNameMissing: boolean) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -152,6 +148,10 @@ const bottomContainer = css`
 	align-content: space-between;
 `;
 
+const wrappingRow = css`
+	flex-flow: wrap;
+`;
+
 const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 	<div
 		css={css`
@@ -219,16 +219,18 @@ export const CommentForm = ({
 	onComment,
 	onReply,
 	onPreview,
+	showPreview,
+	setShowPreview,
 	isActive,
 	setIsActive,
 	error,
 	setError,
+	userNameMissing,
+	setUserNameMissing,
 }: Props) => {
-	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
 	const [body, setBody] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
 	const [info, setInfo] = useState<string>('');
-	const [showPreview, setShowPreview] = useState<boolean>(false);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
 	useEffect(() => {
@@ -318,88 +320,92 @@ export const CommentForm = ({
 		if (body) {
 			const comment = onComment ?? defaultComment(user.authStatus);
 			const reply = onReply ?? defaultReply(user.authStatus);
-			const response: CommentResponse = commentBeingRepliedTo
+			const response = commentBeingRepliedTo
 				? await reply(shortUrl, body, commentBeingRepliedTo.id)
 				: await comment(shortUrl, body);
 			// Check response message for error states
-			if (response.errorCode === 'USERNAME_MISSING') {
-				// Reader has never posted before and needs to choose a username
-				setUserNameMissing(true);
-			} else if (response.errorCode === 'EMPTY_COMMENT_BODY') {
-				setError('Please write a comment.');
-			} else if (response.errorCode === 'COMMENT_TOO_LONG') {
-				setError(
-					'Your comment must be fewer than 5000 characters long.',
-				);
-			} else if (response.errorCode === 'USER_BANNED') {
-				setError(
-					'Commenting has been disabled for this account (<a href="/community-faqs#321a">why?</a>).',
-				);
-			} else if (response.errorCode === 'IP_THROTTLED') {
-				setError(
-					'Commenting has been temporarily blocked for this IP address (<a href="/community-faqs">why?</a>).',
-				);
-			} else if (response.errorCode === 'DISCUSSION_CLOSED') {
-				setError(
-					'Sorry your comment can not be published as the discussion is now closed for comments.',
-				);
-			} else if (response.errorCode === 'PARENT_COMMENT_MODERATED') {
-				setError(
-					'Sorry the comment can not be published as the comment you replied to has been moderated since.',
-				);
-			} else if (response.errorCode === 'COMMENT_RATE_LIMIT_EXCEEDED') {
-				setError(
-					'You can only post one comment every minute. Please try again in a moment.',
-				);
-			} else if (response.errorCode === 'INVALID_PROTOCOL') {
-				setError(`Sorry your comment can not be published as it was not sent over
+			if (response.kind === 'error') {
+				if (response.error.code === 'USERNAME_MISSING') {
+					// Reader has never posted before and needs to choose a username
+					setUserNameMissing(true);
+				} else if (response.error.code === 'EMPTY_COMMENT_BODY') {
+					setError('Please write a comment.');
+				} else if (response.error.code === 'COMMENT_TOO_LONG') {
+					setError(
+						'Your comment must be fewer than 5000 characters long.',
+					);
+				} else if (response.error.code === 'USER_BANNED') {
+					setError(
+						'Commenting has been disabled for this account (<a href="/community-faqs#321a">why?</a>).',
+					);
+				} else if (response.error.code === 'IP_THROTTLED') {
+					setError(
+						'Commenting has been temporarily blocked for this IP address (<a href="/community-faqs">why?</a>).',
+					);
+				} else if (response.error.code === 'DISCUSSION_CLOSED') {
+					setError(
+						'Sorry your comment can not be published as the discussion is now closed for comments.',
+					);
+				} else if (response.error.code === 'PARENT_COMMENT_MODERATED') {
+					setError(
+						'Sorry the comment can not be published as the comment you replied to has been moderated since.',
+					);
+				} else if (
+					response.error.code === 'COMMENT_RATE_LIMIT_EXCEEDED'
+				) {
+					setError(
+						'You can only post one comment every minute. Please try again in a moment.',
+					);
+				} else if (response.error.code === 'INVALID_PROTOCOL') {
+					setError(`Sorry your comment can not be published as it was not sent over
                   a secure channel. Please report us this issue using the technical issue link
                   in the page footer.`);
-			} else if (response.errorCode === 'AUTH_COOKIE_INVALID') {
-				setError(
-					'Sorry, your comment was not published as you are no longer signed in. Please sign in and try again.',
-				);
-			} else if (response.errorCode === 'READ-ONLY-MODE') {
-				setError(`Sorry your comment can not currently be published as
+				} else if (response.error.code === 'AUTH_COOKIE_INVALID') {
+					setError(
+						'Sorry, your comment was not published as you are no longer signed in. Please sign in and try again.',
+					);
+				} else if (response.error.code === 'READ-ONLY-MODE') {
+					setError(`Sorry your comment can not currently be published as
                   commenting is undergoing maintenance but will be back shortly. Please try
                   again in a moment.`);
-			} else if (response.errorCode === 'API_CORS_BLOCKED') {
-				setError(`Could not post due to your internet settings, which might be
+				} else if (response.error.code === 'API_CORS_BLOCKED') {
+					setError(`Could not post due to your internet settings, which might be
                  controlled by your provider. Please contact your administrator
                  or disable any proxy servers or VPNs and try again.`);
-			} else if (response.errorCode === 'API_ERROR') {
-				setError(`Sorry, there was a problem posting your comment. Please try
+				} else if (response.error.code === 'API_ERROR') {
+					setError(`Sorry, there was a problem posting your comment. Please try
                   another browser or network connection.  Reference code `);
-			} else if (response.errorCode === 'EMAIL_VERIFIED') {
-				setInfo(
-					'Sent. Please check your email to verify your email address. Once verified post your comment.',
-				);
-			} else if (response.errorCode === 'EMAIL_VERIFIED_FAIL') {
-				// TODO: Support resending verification email
-				setError(`We are having technical difficulties. Please try again later or
+				} else if (response.error.code === 'EMAIL_VERIFIED') {
+					setInfo(
+						'Sent. Please check your email to verify your email address. Once verified post your comment.',
+					);
+				} else if (response.error.code === 'EMAIL_VERIFIED_FAIL') {
+					// TODO: Support resending verification email
+					setError(`We are having technical difficulties. Please try again later or
             <a href="#">
             <strong>resend the verification</strong></a>.`);
-			} else if (response.errorCode === 'EMAIL_NOT_VALIDATED') {
-				// TODO: Support resending verification email
-				setError(`Please confirm your email address to comment.<br />
+				} else if (response.error.code === 'EMAIL_NOT_VALIDATED') {
+					// TODO: Support resending verification email
+					setError(`Please confirm your email address to comment.<br />
             If you can't find the email, we can
             <a href="#">
             <strong>resend the verification email</strong></a> to your email
             address.`);
-			} else if (response.status === 'ok') {
+				} else {
+					setError(
+						'Sorry, there was a problem posting your comment.',
+					);
+				}
+			} else {
 				onAddComment(
 					simulateNewComment(
-						// response.errorCode is the id of the comment that was created on the server
-						// it is returned as a string, so we need to cast to an number to be compatable
-						parseInt(response.message),
+						response.value,
 						body,
 						user.profile,
 						commentBeingRepliedTo,
 					),
 				);
 				resetForm();
-			} else {
-				setError('Sorry, there was a problem posting your comment.');
 			}
 		}
 	};
@@ -503,7 +509,7 @@ export const CommentForm = ({
 					onFocus={() => setIsActive(true)}
 				/>
 				<div css={bottomContainer}>
-					<Row>
+					<Row cssOverrides={wrappingRow}>
 						<>
 							<PillarButton
 								type="submit"
@@ -538,17 +544,19 @@ export const CommentForm = ({
 						</>
 					</Row>
 					{isActive && (
-						<Row>
+						<Row cssOverrides={wrappingRow}>
 							<button
 								onClick={(e) => {
 									e.preventDefault();
 									transformText(boldString);
 								}}
 								css={commentAddOns}
+								style={{ fontWeight: 'bold' }}
 								data-link-name="formatting-controls-bold"
 								type="button"
+								title="Bold"
 							>
-								B
+								bold
 							</button>
 							<button
 								onClick={(e) => {
@@ -556,10 +564,12 @@ export const CommentForm = ({
 									transformText(italicsString);
 								}}
 								css={commentAddOns}
+								style={{ fontStyle: 'italic' }}
 								data-link-name="formatting-controls-italic"
 								type="button"
+								title="Italic"
 							>
-								i
+								italic
 							</button>
 							<button
 								onClick={(e) => {
@@ -567,10 +577,12 @@ export const CommentForm = ({
 									transformText(strikethroughString);
 								}}
 								css={commentAddOns}
+								style={{ textDecoration: 'line-through' }}
 								data-link-name="formatting-controls-strikethrough"
 								type="button"
+								title="Strikethrough"
 							>
-								{`S̶`}
+								strikethrough
 							</button>
 							<button
 								onClick={(e) => {
@@ -578,10 +590,12 @@ export const CommentForm = ({
 									transformText(codeString);
 								}}
 								css={commentAddOns}
+								style={{ fontFamily: 'monospace' }}
 								data-link-name="formatting-controls-code"
 								type="button"
+								title="Code"
 							>
-								{`<>`}
+								{`<code>`}
 							</button>
 							<button
 								onClick={(e) => {
@@ -591,8 +605,9 @@ export const CommentForm = ({
 								css={commentAddOns}
 								data-link-name="formatting-controls-quote"
 								type="button"
+								title="Quote"
 							>
-								"
+								"quote"
 							</button>
 							<button
 								onClick={(e) => {
@@ -600,8 +615,10 @@ export const CommentForm = ({
 									transformLink();
 								}}
 								css={commentAddOns}
+								style={{ textDecoration: 'underline' }}
 								data-link-name="formatting-controls-link"
 								type="button"
+								title="Link"
 							>
 								Link
 							</button>

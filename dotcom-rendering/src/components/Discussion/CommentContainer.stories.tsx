@@ -189,10 +189,14 @@ export const defaultStory = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 defaultStory.storyName = 'default';
@@ -219,10 +223,14 @@ export const threadedComment = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 threadedComment.storyName = 'threaded';
@@ -249,10 +257,14 @@ export const threadedCommentWithShowMore = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
@@ -279,10 +291,14 @@ export const threadedCommentWithLongUsernames = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
@@ -309,10 +325,14 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
 		isCommentFormActive={false}
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =

@@ -1,17 +1,24 @@
 import { joinUrl } from '@guardian/libs';
+import { safeParse } from 'valibot';
 import type {
 	AdditionalHeadersType,
-	CommentResponse,
+	CommentResponseErrorCodes,
 	CommentType,
 	DiscussionOptions,
-	DiscussionResponse,
+	GetDiscussionSuccess,
 	OrderByType,
 	ThreadsType,
 	UserNameResponse,
 } from '../types/discussion';
-import { parseDiscussionResponse } from '../types/discussion';
+import {
+	discussionApiResponseSchema,
+	parseAbuseResponse,
+	parseCommentResponse,
+} from '../types/discussion';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
+import { fetchJSON } from './json';
+import type { Result } from './result';
 
 const options = {
 	// Defaults
@@ -56,6 +63,8 @@ const objAsParams = (obj: any): string => {
 	return '?' + params;
 };
 
+type GetDiscussionError = 'ParsingError' | 'ApiError' | 'NetworkError';
+
 //todo: figure out the different return types and consider error handling
 export const getDiscussion = async (
 	shortUrl: string,
@@ -65,7 +74,7 @@ export const getDiscussion = async (
 		threads: ThreadsType;
 		page: number;
 	},
-): Promise<DiscussionResponse | undefined> => {
+): Promise<Result<GetDiscussionError, GetDiscussionSuccess>> => {
 	const apiOpts: DiscussionOptions = {
 		...defaultParams,
 		...{
@@ -85,24 +94,34 @@ export const getDiscussion = async (
 
 	const url = joinUrl(options.baseUrl, 'discussion', shortUrl) + params;
 
-	const resp = await fetch(url, {
-		headers: {
-			...options.headers,
-		},
-	});
+	const jsonResult = await fetchJSON(url, { headers: options.headers });
 
-	const discussionResponse = parseDiscussionResponse(await resp.json());
+	if (jsonResult.kind === 'error') return jsonResult;
 
-	return discussionResponse?.errorCode ===
-		'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
-		? // We need force a refetch with unthreaded set, as we don't know
-		  // that this discussion is only available in linear format until
-		  // we get the response to tell us
-		  getDiscussion(shortUrl, {
-				...opts,
-				...{ threads: 'unthreaded' },
-		  })
-		: discussionResponse;
+	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
+	if (!result.success) {
+		return { kind: 'error', error: 'ParsingError' };
+	}
+	if (
+		result.output.status === 'error' &&
+		// We need force a refetch with unthreaded set, as we don't know
+		// that this discussion is only available in linear format until
+		// we get the response to tell us
+		result.output.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
+	) {
+		return getDiscussion(shortUrl, {
+			...opts,
+			...{ threads: 'unthreaded' },
+		});
+	}
+	if (result.output.status === 'error') {
+		return {
+			kind: 'error',
+			error: 'ApiError',
+		};
+	}
+
+	return { kind: 'ok', value: result.output };
 };
 
 export const preview = async (body: string): Promise<string> => {
@@ -120,11 +139,17 @@ export const preview = async (body: string): Promise<string> => {
 			...options.headers,
 		},
 	});
+
 	const json = await resp.json();
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- YOLO
 	return json.commentBody;
 };
+
+type CommentResponse = Result<
+	{ code: CommentResponseErrorCodes | GetDiscussionError; message: string },
+	number
+>;
 
 export const comment =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
@@ -137,7 +162,7 @@ export const comment =
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		const resp = await fetch(url, {
+		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			body: data.toString(),
 			headers: {
@@ -148,7 +173,17 @@ export const comment =
 			credentials: authOptions.credentials,
 		});
 
-		return resp.json();
+		if (jsonResult.kind === 'error') {
+			return {
+				kind: 'error',
+				error: {
+					code: jsonResult.error,
+					message: 'Could not retrieve the comment',
+				},
+			};
+		}
+
+		return parseCommentResponse(jsonResult.value);
 	};
 
 export const reply =
@@ -171,7 +206,7 @@ export const reply =
 		data.append('body', body);
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		const resp = await fetch(url, {
+		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			body: data.toString(),
 			headers: {
@@ -182,7 +217,17 @@ export const reply =
 			credentials: authOptions.credentials,
 		});
 
-		return resp.json();
+		if (jsonResult.kind === 'error') {
+			return {
+				kind: 'error',
+				error: {
+					code: jsonResult.error,
+					message: 'Could not retrieve the comment',
+				},
+			};
+		}
+
+		return parseCommentResponse(jsonResult.value);
 	};
 
 //todo: come back and parse the response properly and set a proper return type for the error case
@@ -217,7 +262,7 @@ export const reportAbuse = async ({
 	reason?: string;
 	email?: string;
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
-}): Promise<CommentResponse> => {
+}): Promise<Result<string, true>> => {
 	const url =
 		joinUrl(
 			options.baseUrl,
@@ -235,7 +280,7 @@ export const reportAbuse = async ({
 		? getOptionsHeadersWithOkta(authStatus)
 		: undefined;
 
-	const resp = await fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		body: data.toString(),
 		headers: {
@@ -246,7 +291,14 @@ export const reportAbuse = async ({
 		credentials: authOptions?.credentials,
 	});
 
-	return resp.json();
+	if (jsonResult.kind === 'error') {
+		return {
+			kind: 'error',
+			error: 'An unknown error occured',
+		};
+	}
+
+	return parseAbuseResponse(jsonResult.value);
 };
 
 export const recommend =
@@ -308,7 +360,7 @@ export const pickComment = async (
 		objAsParams(defaultParams);
 
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
-	const resp = await fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -318,7 +370,17 @@ export const pickComment = async (
 		credentials: authOptions.credentials,
 	});
 
-	return resp.json();
+	if (jsonResult.kind === 'error') {
+		return {
+			kind: 'error',
+			error: {
+				code: jsonResult.error,
+				message: 'Could not retrieve the comment',
+			},
+		};
+	}
+
+	return parseCommentResponse(jsonResult.value);
 };
 
 export const unPickComment = async (
@@ -334,7 +396,7 @@ export const unPickComment = async (
 		) + objAsParams(defaultParams);
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-	const resp = await fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -344,7 +406,17 @@ export const unPickComment = async (
 		credentials: authOptions.credentials,
 	});
 
-	return resp.json();
+	if (jsonResult.kind === 'error') {
+		return {
+			kind: 'error',
+			error: {
+				code: jsonResult.error,
+				message: 'Could not retrieve the comment',
+			},
+		};
+	}
+
+	return parseCommentResponse(jsonResult.value);
 };
 
 export const getMoreResponses = async (

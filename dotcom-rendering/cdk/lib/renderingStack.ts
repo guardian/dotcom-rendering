@@ -175,7 +175,7 @@ export class RenderingCDKStack extends CDKStack {
 					},
 				],
 				adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
-				evaluationPeriods: 1,
+				evaluationPeriods: 5,
 			},
 		);
 
@@ -199,12 +199,12 @@ export class RenderingCDKStack extends CDKStack {
 				{
 					// No scaling down effect when latency is higher than 0.15s
 					change: 0,
-					lower: 0.15,
+					lower: 0.12,
 				},
 				{
 					// When latency is lower than 0.15s we scale down by 1
 					change: -1,
-					upper: 0.15,
+					upper: 0.12,
 					lower: 0,
 				},
 			],

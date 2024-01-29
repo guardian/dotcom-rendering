@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import type { comment, reply } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
 import type {
-	CommentResponse,
 	CommentType,
 	SignedInUser,
 	ThreadsType,
@@ -27,17 +27,17 @@ type Props = {
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
 	onRecommend?: (commentId: number) => Promise<boolean>;
-	onComment?: (shortUrl: string, body: string) => Promise<CommentResponse>;
-	onReply?: (
-		shortUrl: string,
-		body: string,
-		parentCommentId: number,
-	) => Promise<CommentResponse>;
+	onComment?: ReturnType<typeof comment>;
+	onReply?: ReturnType<typeof reply>;
 	onPreview?: (body: string) => Promise<string>;
+	showPreview: boolean;
+	setShowPreview: (showPreview: boolean) => void;
 	isCommentFormActive: boolean;
 	setIsCommentFormActive: (isActive: boolean) => void;
 	error: string;
 	setError: (error: string) => void;
+	userNameMissing: boolean;
+	setUserNameMissing: (isUserNameMissing: boolean) => void;
 };
 
 const nestingStyles = css`
@@ -89,10 +89,14 @@ export const CommentContainer = ({
 	onComment,
 	onReply,
 	onPreview,
+	showPreview,
+	setShowPreview,
 	isCommentFormActive,
 	setIsCommentFormActive,
 	error,
 	setError,
+	userNameMissing,
+	setUserNameMissing,
 }: Props) => {
 	// Filter logic
 	const [expanded, setExpanded] = useState<boolean>(threads === 'expanded');
@@ -234,10 +238,14 @@ export const CommentContainer = ({
 								onComment={onComment}
 								onReply={onReply}
 								onPreview={onPreview}
+								showPreview={showPreview}
+								setShowPreview={setShowPreview}
 								isActive={isCommentFormActive}
 								setIsActive={setIsCommentFormActive}
 								error={error}
 								setError={setError}
+								userNameMissing={userNameMissing}
+								setUserNameMissing={setUserNameMissing}
 							/>
 						</div>
 					)}

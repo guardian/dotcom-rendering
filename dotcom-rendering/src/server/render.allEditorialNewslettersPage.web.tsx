@@ -6,7 +6,6 @@ import {
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { getHttp3Url } from '../lib/getHttp3Url';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
@@ -36,10 +35,6 @@ export const renderEditorialNewslettersPage = ({
 		</ConfigProvider>,
 	);
 
-	// Evaluating the performance of HTTP3 over HTTP2
-	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 = false } = newslettersPage.config.switches;
-
 	const build = getModulesBuild({
 		switches: newslettersPage.config.switches,
 		tests: newslettersPage.config.abTests,
@@ -58,12 +53,12 @@ export const renderEditorialNewslettersPage = ({
 		getPathFromManifest(build, 'index.js'),
 		process.env.COMMERCIAL_BUNDLE_URL ??
 			newslettersPage.config.commercialBundleUrl,
-	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	];
 
 	const legacyScripts = [
 		getPathFromManifest('client.web.legacy', 'frameworks.js'),
 		getPathFromManifest('client.web.legacy', 'index.js'),
-	].map((script) => (offerHttp3 ? getHttp3Url(script) : script));
+	];
 
 	const scriptTags = generateScriptTags([
 		...prefetchScripts,
@@ -96,7 +91,6 @@ export const renderEditorialNewslettersPage = ({
 		description: newslettersPage.description,
 		guardian,
 		keywords: '',
-		offerHttp3,
 		renderingTarget: 'Web',
 		weAreHiring: !!newslettersPage.config.switches.weAreHiring,
 	});

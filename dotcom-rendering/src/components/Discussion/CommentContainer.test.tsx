@@ -66,10 +66,14 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
 				isCommentFormActive={true}
 				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
 			/>,
 		);
 
@@ -107,10 +111,14 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
 				isCommentFormActive={true}
 				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
 			/>,
 		);
 
@@ -147,10 +155,14 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
 				isCommentFormActive={true}
 				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
 			/>,
 		);
 
@@ -188,10 +200,14 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
 				isCommentFormActive={true}
 				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
 			/>,
 		);
 

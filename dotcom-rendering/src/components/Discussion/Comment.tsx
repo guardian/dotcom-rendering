@@ -317,8 +317,8 @@ export const Comment = ({
 		setError('');
 
 		const response = await pickComment(staffUser.authStatus, comment.id);
-		if (response.status === 'error') {
-			setError(response.message);
+		if (response.kind === 'error') {
+			setError(response.error.message);
 		} else {
 			setIsHighlighted(true);
 		}
@@ -327,8 +327,8 @@ export const Comment = ({
 	const unPick = async (staffUser: SignedInUser) => {
 		setError('');
 		const response = await unPickComment(staffUser.authStatus, comment.id);
-		if (response.status === 'error') {
-			setError(response.message);
+		if (response.kind === 'error') {
+			setError(response.error.message);
 		} else {
 			setIsHighlighted(false);
 		}

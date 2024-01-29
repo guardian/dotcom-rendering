@@ -14,7 +14,6 @@ import type {
 	CommentType,
 	FilterOptions,
 	SignedInUser,
-	ThreadsType,
 } from '../types/discussion';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
@@ -71,16 +70,19 @@ const commentIdFromUrl = () => {
 	return parseInt(commentId, 10);
 };
 
-const filterByPermalinks = (
-	threads: ThreadsType,
+const remapFilters = (
+	filters: FilterOptions,
 	hashCommentId: number | undefined,
 ) => {
 	const permalinkBeingUsed =
 		hashCommentId !== undefined && !Number.isNaN(hashCommentId);
 
-	return threads === 'collapsed' && permalinkBeingUsed
-		? 'expanded'
-		: undefined;
+	if (!permalinkBeingUsed) return filters;
+	if (filters.threads !== 'collapsed') return filters;
+	return {
+		...filters,
+		threads: 'expanded',
+	} satisfies FilterOptions;
 };
 
 export const Discussion = ({
@@ -93,10 +95,6 @@ export const Discussion = ({
 	idApiUrl,
 }: Props) => {
 	const [commentPage, setCommentPage] = useState(1);
-	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
-	const [commentOrderBy, setCommentOrderBy] = useState<
-		'newest' | 'oldest' | 'recommendations'
-	>();
 	const [comments, setComments] = useState<CommentType[]>([]);
 	const [isClosedForComments, setIsClosedForComments] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -114,28 +112,24 @@ export const Discussion = ({
 	useEffect(() => {
 		setLoading(true);
 		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
-			.then((json) => {
-				setLoading(false);
-				if (json && json.status !== 'error') {
-					setComments(json.discussion.comments);
-					setIsClosedForComments(json.discussion.isClosedForComments);
+			.then((result) => {
+				if (result.kind === 'error') {
+					console.error(`getDiscussion - error: ${result.error}`);
+					return;
 				}
-				if (json?.pages != null) setTotalPages(json.pages);
+
+				setLoading(false);
+				const { pages, discussion } = result.value;
+				setComments(discussion.comments);
+				setIsClosedForComments(discussion.isClosedForComments);
+				setTotalPages(pages);
 			})
-			.catch((e) => console.error(`getDiscussion - error: ${String(e)}`));
+			.catch(() => {
+				// do nothing
+			});
 	}, [filters, commentPage, shortUrlId]);
 
-	useEffect(() => {
-		const orderByClosed = isClosedForComments ? 'oldest' : undefined;
-
-		setFilters((prevFilters) => ({
-			orderBy: commentOrderBy ?? orderByClosed ?? prevFilters.orderBy,
-			pageSize: commentPageSize ?? prevFilters.pageSize,
-			threads:
-				filterByPermalinks(prevFilters.threads, hashCommentId) ??
-				prevFilters.threads,
-		}));
-	}, [commentPageSize, commentOrderBy, isClosedForComments, hashCommentId]);
+	const validFilters = remapFilters(filters, hashCommentId);
 
 	useEffect(() => {
 		rememberFilters(filters);
@@ -163,8 +157,6 @@ export const Discussion = ({
 			getCommentContext(discussionApiUrl, hashCommentId)
 				.then((context) => {
 					setCommentPage(context.page);
-					setCommentPageSize(context.pageSize);
-					setCommentOrderBy(context.orderBy);
 					setIsExpanded(true);
 				})
 				.catch((e) =>
@@ -172,19 +164,6 @@ export const Discussion = ({
 				);
 		}
 	}, [discussionApiUrl, hashCommentId]);
-
-	useEffect(() => {
-		if (window.location.hash === '#comments') {
-			setIsExpanded(true);
-		}
-	}, []);
-
-	useEffect(() => {
-		// There's no point showing the view more button if there isn't much more to view
-		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
-			setIsExpanded(true);
-		}
-	}, [commentCount]);
 
 	useEffect(() => {
 		if (window.location.hash === '#comments') {
@@ -238,8 +217,11 @@ export const Discussion = ({
 					idApiUrl={idApiUrl}
 					page={commentPage}
 					setPage={setCommentPage}
-					filters={filters}
-					setFilters={setFilters}
+					filters={validFilters}
+					setFilters={(newFilters) => {
+						setHashCommentId(undefined);
+						setFilters(newFilters);
+					}}
 					commentCount={commentCount ?? 0}
 					loading={loading}
 					totalPages={totalPages}
