@@ -178,19 +178,13 @@ export const Comments = ({
 	}, [comments, commentToScrollTo]); // Add comments to deps so we rerun this effect when comments are loaded
 
 	const onFilterChange = (newFilterObject: FilterOptions) => {
-		/**
-		 * When decreasing the page size, we adjust the current page
-		 * to avoid requesting non-existent pages. For example,
-		 * if we had 102 comments with a page size of 25, and the current
-		 * page was 5 (showing 2 comments), reducing the page size to 50 eliminates page 5.
-		 * To respect the reader's preference to stay on the last page,
-		 * we calculate and use the maximum possible page instead.
-		 */
-		const maxPagePossible = Math.ceil(
-			commentCount / newFilterObject.pageSize,
-		);
-
-		if (page > maxPagePossible) setPage(maxPagePossible);
+		if (filters.pageSize !== newFilterObject.pageSize) {
+			//This calculation decides which page the user should be on after changing the number of comments per page.
+			const desiredPage = Math.ceil(
+				(page * filters.pageSize) / newFilterObject.pageSize,
+			);
+			setPage(desiredPage);
+		}
 
 		setFilters(newFilterObject);
 		// Filters also show when the view is not expanded but we want to expand when they're changed
