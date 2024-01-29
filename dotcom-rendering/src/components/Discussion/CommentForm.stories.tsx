@@ -75,6 +75,8 @@ export const Default = () => {
 			setShowPreview={() => {}}
 			userNameMissing={false}
 			setUserNameMissing={() => {}}
+			error={''}
+			setError={() => {}}
 		/>
 	);
 };
@@ -98,6 +100,8 @@ export const Error = () => {
 			setShowPreview={() => {}}
 			userNameMissing={userNameMissing}
 			setUserNameMissing={setUserNameMissing}
+			error={''}
+			setError={() => {}}
 		/>
 	);
 };
