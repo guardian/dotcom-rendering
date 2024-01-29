@@ -8,13 +8,13 @@ import type {
 	GetDiscussionSuccess,
 	OrderByType,
 	ThreadsType,
-	UserNameResponse,
 } from '../types/discussion';
 import {
 	discussionApiResponseSchema,
 	parseAbuseResponse,
 	parseCommentRepliesResponse,
 	parseCommentResponse,
+	postUsernameResponseSchema,
 } from '../types/discussion';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
@@ -337,11 +337,11 @@ export const recommend =
 export const addUserName = async (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 	userName: string,
-): Promise<UserNameResponse> => {
+): Promise<Result<string, true>> => {
 	const url = options.idApiUrl + `/user/me/username`;
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-	const resp = await fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		body: JSON.stringify({
 			publicFields: {
@@ -356,7 +356,25 @@ export const addUserName = async (
 		credentials: authOptions.credentials,
 	});
 
-	return resp.json();
+	if (jsonResult.kind === 'error') {
+		return jsonResult;
+	}
+
+	const result = safeParse(postUsernameResponseSchema, jsonResult.value);
+
+	if (!result.success) {
+		return { kind: 'error', error: 'An unknown error occured' };
+	}
+	if (result.output.status === 'error') {
+		return {
+			kind: 'error',
+			error: result.output.errors
+				.map(({ message }) => message)
+				.join('\n'),
+		};
+	}
+
+	return { kind: 'ok', value: true };
 };
 
 export const pickComment = async (
