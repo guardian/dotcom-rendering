@@ -231,24 +231,31 @@ export const reply =
 		return parseCommentResponse(jsonResult.value);
 	};
 
-//todo: come back and parse the response properly and set a proper return type for the error case
 export const getPicks = async (
 	shortUrl: string,
-): Promise<CommentType[] | undefined> => {
+): Promise<Result<GetDiscussionError, CommentType[]>> => {
 	const url =
 		joinUrl(options.baseUrl, 'discussion', shortUrl, 'topcomments') +
 		objAsParams(defaultParams);
 
-	const resp = await fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		headers: {
 			...options.headers,
 		},
 	});
 
-	const json = await resp.json();
+	if (jsonResult.kind === 'error') return jsonResult;
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- YOLO
-	return json.discussion.comments;
+	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
+
+	if (!result.success) {
+		return { kind: 'error', error: 'ParsingError' };
+	}
+	if (result.output.status === 'error') {
+		return { kind: 'error', error: 'ApiError' };
+	}
+
+	return { kind: 'ok', value: result.output.discussion.comments };
 };
 
 export const reportAbuse = async ({

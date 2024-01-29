@@ -1,6 +1,8 @@
+import type { GetDiscussionSuccess } from '../../src/types/discussion';
+
 export const topPicks = {
 	status: 'ok',
-	page: 1,
+	currentPage: 1,
 	pages: 1,
 	pageSize: 50,
 	orderBy: 'oldest',
@@ -65,4 +67,4 @@ export const topPicks = {
 			},
 		],
 	},
-};
+} satisfies GetDiscussionSuccess;
