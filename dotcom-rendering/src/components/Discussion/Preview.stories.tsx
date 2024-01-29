@@ -10,7 +10,10 @@ export const PreviewStory = () => (
 			width: 700px;
 		`}
 	>
-		<Preview previewHtml="<p>This is some preview text</p>" />
+		<Preview
+			showSpout={true}
+			previewHtml="<p>This is some preview text</p>"
+		/>
 	</div>
 );
 PreviewStory.storyName = 'default';
@@ -22,7 +25,10 @@ export const PreviewStoryLinebreaks = () => (
 			width: 700px;
 		`}
 	>
-		<Preview previewHtml="<p>Hello world!<br>this is a line break </p> <p>this is two</p> <p><br>this is three</p>" />
+		<Preview
+			showSpout={true}
+			previewHtml="<p>Hello world!<br>this is a line break </p> <p>this is two</p> <p><br>this is three</p>"
+		/>
 	</div>
 );
 PreviewStoryLinebreaks.storyName = 'Preview comment with linebreaks';

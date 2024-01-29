@@ -7,6 +7,7 @@ import {
 
 type Props = {
 	previewHtml: string;
+	showSpout: boolean;
 };
 
 const previewStyle = css`
@@ -63,9 +64,9 @@ const spout = css`
 	border-right-style: inset;
 `;
 
-export const Preview = ({ previewHtml }: Props) => (
+export const Preview = ({ previewHtml, showSpout }: Props) => (
 	<>
-		<div css={spout} />
+		{showSpout && <div css={spout} />}
 		<div
 			css={previewStyle}
 			dangerouslySetInnerHTML={{ __html: previewHtml || '' }}
