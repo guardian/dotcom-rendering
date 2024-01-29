@@ -10,7 +10,7 @@ import { AB } from '@guardian/ab-core';
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
-import { getFontsCss } from '../src/lib/fonts-css';
+import { fontsCss } from '../src/lib/fonts-css';
 
 import { resets } from '@guardian/source-foundations';
 
@@ -44,7 +44,7 @@ setABTests(
 );
 
 // Add base css for the site
-let css = `${getFontsCss()}${resets.resetCSS}`;
+let css = `${fontsCss}${resets.resetCSS}`;
 let head = document.getElementsByTagName('head')[0];
 let style = document.createElement('style');
 head.appendChild(style);
