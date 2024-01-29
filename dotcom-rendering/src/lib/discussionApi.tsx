@@ -249,6 +249,7 @@ export const getPicks = async (
 	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
 
 	if (!result.success) {
+		console.error(result.issues);
 		return { kind: 'error', error: 'ParsingError' };
 	}
 	if (result.output.status === 'error') {
