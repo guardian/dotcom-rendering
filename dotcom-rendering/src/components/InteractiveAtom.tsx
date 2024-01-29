@@ -2,13 +2,15 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { unifyPageContent } from '../lib/unifyPageContent';
+import { palette } from '../palette';
 
 const containerStyles = css`
 	margin: 0;
 `;
 
-const fullWidthStyles = css`
+const styles = css`
 	width: 100%;
+	background-color: ${palette('--interactive-atom-background')};
 `;
 const fullHeightStyles = css`
 	height: 100%;
@@ -42,7 +44,7 @@ export const InteractiveAtom = ({
 			title={title}
 			id={id}
 			css={[
-				fullWidthStyles,
+				styles,
 				isMainMedia &&
 					format.display === ArticleDisplay.Immersive &&
 					fullHeightStyles,

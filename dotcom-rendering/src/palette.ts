@@ -4862,6 +4862,10 @@ const lastUpdatedText: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
+const interactiveAtomBackgroundLight: PaletteFunction = () => 'transparent';
+const interactiveAtomBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
 // ----- Palette ----- //
 
 /**
@@ -5744,6 +5748,10 @@ const paletteColours = {
 	'--last-updated-text': {
 		light: lastUpdatedText,
 		dark: lastUpdatedText,
+	},
+	'--interactive-atom-background': {
+		light: interactiveAtomBackgroundLight,
+		dark: interactiveAtomBackgroundDark,
 	},
 } satisfies PaletteColours;
 
