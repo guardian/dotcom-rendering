@@ -18,6 +18,7 @@ import type {
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
+import { assertUnreachable } from 'src/lib/assert-unreachable';
 
 export type Props = {
 	discussionApiUrl: string;
@@ -175,6 +176,7 @@ const reducer = (state: State, action: Action): State => {
 			};
 		}
 		default:
+			assertUnreachable(action);
 			return state;
 	}
 };
