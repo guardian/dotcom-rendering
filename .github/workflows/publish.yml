@@ -50,12 +50,12 @@ jobs:
           mask-aws-account-id: true
 
       # All rendering apps deployment
-      - name: Upload (new) rendering apps to RiffRaff
+      - name: Upload rendering apps to RiffRaff
         uses: guardian/actions-riff-raff@v3
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: dotcom:rendering-all
-          configPath: riff-raff-rendering-all.yaml
+          configPath: riff-raff.yaml
           contentDirectories: |
             rendering-cfn:
               - rendering-cfn
