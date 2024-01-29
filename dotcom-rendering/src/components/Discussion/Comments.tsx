@@ -133,11 +133,25 @@ export const Comments = ({
 	const [isCommentFormActive, setIsCommentFormActive] = useState<boolean>(
 		!!commentBeingRepliedTo,
 	);
-	const [error, setError] = useState<string>('');
+	const [error, setError] = useState<Map<any, any>>(new Map());
 	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
 	const [previewBody, setPreviewBody] = useState<string>('');
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
+
+	const updateState = (
+		stateSetter: (arg0: (prevState: any) => Map<unknown, unknown>) => void,
+		commentBeingRepliedTo: unknown,
+		newState: unknown,
+	) => {
+		stateSetter((prevState) => {
+			const newMap = new Map(prevState);
+			newMap.set(commentBeingRepliedTo, newState);
+			return newMap;
+		});
+	};
+
+	updateState(setError, commentBeingRepliedTo?.id ?? '', error);
 
 	useEffect(() => {
 		if (expanded) {
@@ -299,8 +313,17 @@ export const Comments = ({
 											setIsCommentFormActive={
 												setIsCommentFormActive
 											}
-											error={error}
-											setError={setError}
+											error={error.get(
+												commentBeingRepliedTo?.id ?? '',
+											)}
+											setError={(newError) =>
+												updateState(
+													setError,
+													commentBeingRepliedTo?.id ??
+														'',
+													newError,
+												)
+											}
 											userNameMissing={userNameMissing}
 											setUserNameMissing={
 												setUserNameMissing
@@ -332,8 +355,14 @@ export const Comments = ({
 					setShowPreview={setShowPreview}
 					isActive={isCommentFormActive}
 					setIsActive={setIsCommentFormActive}
-					error={error}
-					setError={setError}
+					error={error.get(commentBeingRepliedTo?.id ?? '')}
+					setError={(newError) =>
+						updateState(
+							setError,
+							commentBeingRepliedTo?.id ?? '',
+							newError,
+						)
+					}
 					userNameMissing={userNameMissing}
 					setUserNameMissing={setUserNameMissing}
 					previewBody={previewBody}
@@ -396,8 +425,16 @@ export const Comments = ({
 									setIsCommentFormActive={
 										setIsCommentFormActive
 									}
-									error={error}
-									setError={setError}
+									error={error.get(
+										commentBeingRepliedTo?.id ?? '',
+									)}
+									setError={(newError) =>
+										updateState(
+											setError,
+											commentBeingRepliedTo?.id ?? '',
+											newError,
+										)
+									}
 									userNameMissing={userNameMissing}
 									setUserNameMissing={setUserNameMissing}
 									previewBody={previewBody}
@@ -431,8 +468,14 @@ export const Comments = ({
 					setShowPreview={setShowPreview}
 					isActive={isCommentFormActive}
 					setIsActive={setIsCommentFormActive}
-					error={error}
-					setError={setError}
+					error={error.get(commentBeingRepliedTo?.id ?? '')}
+					setError={(newError) =>
+						updateState(
+							setError,
+							commentBeingRepliedTo?.id ?? '',
+							newError,
+						)
+					}
 					userNameMissing={userNameMissing}
 					setUserNameMissing={setUserNameMissing}
 					previewBody={previewBody}
