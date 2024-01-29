@@ -43,6 +43,9 @@ type Props = {
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
+	setTopFormActive: (isActive: boolean) => void;
+	setReplyFormActive: (isActive: boolean) => void;
+	setBottomFormActive: (isActive: boolean) => void;
 };
 
 const footerStyles = css`
@@ -117,6 +120,9 @@ export const Comments = ({
 	comments,
 	setComment,
 	handleFilterChange,
+	setTopFormActive,
+	setReplyFormActive,
+	setBottomFormActive,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -317,7 +323,7 @@ export const Comments = ({
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
 					isActive={isCommentFormActive}
-					setIsActive={setIsCommentFormActive}
+					setIsActive={setTopFormActive}
 					error={error}
 					setError={setError}
 					userNameMissing={userNameMissing}
@@ -378,9 +384,7 @@ export const Comments = ({
 									showPreview={showPreview}
 									setShowPreview={setShowPreview}
 									isCommentFormActive={isCommentFormActive}
-									setIsCommentFormActive={
-										setIsCommentFormActive
-									}
+									setIsCommentFormActive={setReplyFormActive}
 									error={error}
 									setError={setError}
 									userNameMissing={userNameMissing}
@@ -413,7 +417,7 @@ export const Comments = ({
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
 					isActive={isCommentFormActive}
-					setIsActive={setIsCommentFormActive}
+					setIsActive={setBottomFormActive}
 					error={error}
 					setError={setError}
 					userNameMissing={userNameMissing}

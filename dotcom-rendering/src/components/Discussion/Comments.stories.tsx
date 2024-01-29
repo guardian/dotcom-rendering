@@ -75,6 +75,9 @@ export const LoggedOutHiddenPicks = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
 		/>
 	</div>
 );
@@ -116,6 +119,9 @@ export const InitialPage = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
 		/>
 	</div>
 );
@@ -158,6 +164,9 @@ export const LoggedInHiddenNoPicks = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
 		/>
 	</div>
 );
@@ -194,6 +203,9 @@ export const LoggedIn = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
 		/>
 	</div>
 );
@@ -229,6 +241,9 @@ export const LoggedInShortDiscussion = () => (
 			comments={discussionWithTwoComments.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
 		/>
 	</div>
 );
@@ -262,6 +277,9 @@ export const LoggedOutHiddenNoPicks = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
 		/>
 	</div>
 );
@@ -305,6 +323,9 @@ export const Closed = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
 		/>
 	</div>
 );
@@ -346,6 +367,9 @@ export const NoComments = () => (
 			comments={[]}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
 		/>
 	</div>
 );
@@ -389,6 +413,9 @@ export const LegacyDiscussion = () => (
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
 		/>
 	</div>
 );
