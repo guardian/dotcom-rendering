@@ -205,12 +205,11 @@ export const Discussion = ({
 	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
 	useEffect(() => {
-		const id = commentIdFromUrl();
-		console.log('id', id);
-		if (id !== undefined) {
+		const newHashCommentId = commentIdFromUrl();
+		if (newHashCommentId !== undefined) {
 			dispatch({
 				type: 'updateHashCommentId',
-				hashCommentId: id,
+				hashCommentId: newHashCommentId,
 			});
 		}
 	}, []);
