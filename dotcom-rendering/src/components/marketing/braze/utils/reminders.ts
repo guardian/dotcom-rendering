@@ -1,4 +1,4 @@
-import { isStorybook, isTest } from '../utils/env';
+import { isStorybook, isTest } from './env';
 
 export type ReminderPlatform = 'WEB' | 'AMP';
 
