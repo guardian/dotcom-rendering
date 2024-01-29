@@ -34,6 +34,8 @@ type Props = {
 	setShowPreview: (showPreview: boolean) => void;
 	isCommentFormActive: boolean;
 	setIsCommentFormActive: (isActive: boolean) => void;
+	error: string;
+	setError: (error: string) => void;
 	userNameMissing: boolean;
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 };
@@ -91,6 +93,8 @@ export const CommentContainer = ({
 	setShowPreview,
 	isCommentFormActive,
 	setIsCommentFormActive,
+	error,
+	setError,
 	userNameMissing,
 	setUserNameMissing,
 }: Props) => {
@@ -142,6 +146,8 @@ export const CommentContainer = ({
 				toggleMuteStatus={toggleMuteStatus}
 				onPermalinkClick={onPermalinkClick}
 				onRecommend={onRecommend}
+				error={error}
+				setError={setError}
 			/>
 
 			<>
@@ -169,6 +175,8 @@ export const CommentContainer = ({
 										)}
 										toggleMuteStatus={toggleMuteStatus}
 										onPermalinkClick={onPermalinkClick}
+										error={error}
+										setError={setError}
 									/>
 								</li>
 							))}
@@ -234,6 +242,8 @@ export const CommentContainer = ({
 								setShowPreview={setShowPreview}
 								isActive={isCommentFormActive}
 								setIsActive={setIsCommentFormActive}
+								error={error}
+								setError={setError}
 								userNameMissing={userNameMissing}
 								setUserNameMissing={setUserNameMissing}
 							/>

@@ -133,6 +133,7 @@ export const Comments = ({
 	const [isCommentFormActive, setIsCommentFormActive] = useState<boolean>(
 		!!commentBeingRepliedTo,
 	);
+	const [error, setError] = useState<string>('');
 	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
@@ -298,6 +299,8 @@ export const Comments = ({
 											setIsCommentFormActive={
 												setIsCommentFormActive
 											}
+											error={error}
+											setError={setError}
 											userNameMissing={userNameMissing}
 											setUserNameMissing={
 												setUserNameMissing
@@ -327,6 +330,8 @@ export const Comments = ({
 					setShowPreview={setShowPreview}
 					isActive={isCommentFormActive}
 					setIsActive={setIsCommentFormActive}
+					error={error}
+					setError={setError}
 					userNameMissing={userNameMissing}
 					setUserNameMissing={setUserNameMissing}
 				/>
@@ -387,6 +392,8 @@ export const Comments = ({
 									setIsCommentFormActive={
 										setIsCommentFormActive
 									}
+									error={error}
+									setError={setError}
 									userNameMissing={userNameMissing}
 									setUserNameMissing={setUserNameMissing}
 								/>
@@ -418,6 +425,8 @@ export const Comments = ({
 					setShowPreview={setShowPreview}
 					isActive={isCommentFormActive}
 					setIsActive={setIsCommentFormActive}
+					error={error}
+					setError={setError}
 					userNameMissing={userNameMissing}
 					setUserNameMissing={setUserNameMissing}
 				/>

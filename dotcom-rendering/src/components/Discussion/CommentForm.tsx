@@ -32,6 +32,8 @@ type Props = {
 	setShowPreview: (showPreview: boolean) => void;
 	isActive: boolean;
 	setIsActive: (isActive: boolean) => void;
+	error: string;
+	setError: (error: string) => void;
 	userNameMissing: boolean;
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 };
@@ -221,12 +223,13 @@ export const CommentForm = ({
 	setShowPreview,
 	isActive,
 	setIsActive,
+	error,
+	setError,
 	userNameMissing,
 	setUserNameMissing,
 }: Props) => {
 	const [body, setBody] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
-	const [error, setError] = useState<string>('');
 	const [info, setInfo] = useState<string>('');
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 

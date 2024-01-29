@@ -75,6 +75,8 @@ export const Default = () => {
 			setShowPreview={() => {}}
 			userNameMissing={false}
 			setUserNameMissing={() => {}}
+			error={''}
+			setError={() => {}}
 		/>
 	);
 };
@@ -82,6 +84,7 @@ Default.storyName = 'default';
 Default.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
 // This story has a mocked post endpoint that returns an error, see 97d6eab4a98917f63bc96a7ac64f7ca7
+
 export const Error = () => {
 	const [isActive, setIsActive] = useState(false);
 	const [userNameMissing, setUserNameMissing] = useState(false);
@@ -97,9 +100,12 @@ export const Error = () => {
 			setShowPreview={() => {}}
 			userNameMissing={userNameMissing}
 			setUserNameMissing={setUserNameMissing}
+			error={''}
+			setError={() => {}}
 		/>
 	);
 };
+
 Error.storyName = 'form with errors';
 Error.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
@@ -113,6 +119,8 @@ export const Active = () => (
 		setShowPreview={() => {}}
 		isActive={true}
 		setIsActive={() => {}}
+		error={''}
+		setError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 	/>
@@ -150,6 +158,8 @@ export const Premoderated = () => (
 		setShowPreview={() => {}}
 		isActive={true}
 		setIsActive={() => {}}
+		error={''}
+		setError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 	/>
