@@ -70,7 +70,11 @@ const commentIdFromUrl = () => {
 	return parseInt(commentId, 10);
 };
 
-const remapFilters = (
+/**
+ * If a permalink is used and the threading is set to collapsed, this function remaps the threading filter to expanded.
+ * We do this to ensure that threads are expanded in the UI while respecting the user's local preference.
+ */
+const remapToValidFilters = (
 	filters: FilterOptions,
 	hashCommentId: number | undefined,
 ) => {
@@ -129,7 +133,7 @@ export const Discussion = ({
 			});
 	}, [filters, commentPage, shortUrlId]);
 
-	const validFilters = remapFilters(filters, hashCommentId);
+	const validFilters = remapToValidFilters(filters, hashCommentId);
 
 	useEffect(() => {
 		rememberFilters(filters);
