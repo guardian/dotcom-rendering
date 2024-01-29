@@ -96,6 +96,7 @@ type State = {
 	commentPage: number;
 	filters: FilterOptions;
 	hashCommentId: number | undefined;
+	totalPages: number;
 };
 
 const initialState: State = {
@@ -105,6 +106,7 @@ const initialState: State = {
 	commentPage: 1,
 	filters: initFiltersFromLocalStorage(),
 	hashCommentId: commentIdFromUrl(),
+	totalPages: 0,
 };
 
 type Action =
@@ -117,7 +119,8 @@ type Action =
 	| { type: 'addComment'; comment: CommentType }
 	| { type: 'updateCommentPage'; commentPage: number; shouldExpand: boolean }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
-	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number };
+	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
+	| { type: 'updateTotalPages'; totalPages: number };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -152,6 +155,11 @@ const reducer = (state: State, action: Action): State => {
 				isExpanded: true,
 				commentPage: action.commentPage ?? state.commentPage,
 			};
+		case 'updateTotalPages':
+			return {
+				...state,
+				totalPages: action.totalPages,
+			};
 		default:
 			return state;
 	}
@@ -174,11 +182,11 @@ export const Discussion = ({
 			commentPage,
 			filters,
 			hashCommentId,
+			totalPages,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
 	const [loading, setLoading] = useState(true);
-	const [totalPages, setTotalPages] = useState(0);
 
 	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
