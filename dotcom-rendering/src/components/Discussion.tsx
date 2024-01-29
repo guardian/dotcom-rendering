@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
 import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { getDiscussion } from '../lib/discussionApi';
 import {
 	getCommentContext,
@@ -97,6 +97,7 @@ type State = {
 	filters: FilterOptions;
 	hashCommentId: number | undefined;
 	totalPages: number;
+	loading: boolean;
 };
 
 const initialState: State = {
@@ -107,6 +108,7 @@ const initialState: State = {
 	filters: initFiltersFromLocalStorage(),
 	hashCommentId: commentIdFromUrl(),
 	totalPages: 0,
+	loading: true,
 };
 
 type Action =
@@ -114,13 +116,15 @@ type Action =
 			type: 'commentsLoaded';
 			comments: CommentType[];
 			isClosedForComments: boolean;
+			totalPages: number;
 	  }
 	| { type: 'expandComments' }
 	| { type: 'addComment'; comment: CommentType }
 	| { type: 'updateCommentPage'; commentPage: number; shouldExpand: boolean }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
-	| { type: 'updateTotalPages'; totalPages: number };
+	| { type: 'updateTotalPages'; totalPages: number }
+	| { type: 'setLoading'; loading: boolean };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -129,6 +133,8 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				comments: action.comments,
 				isClosedForComments: action.isClosedForComments,
+				totalPages: action.totalPages,
+				loading: false,
 			};
 		case 'addComment':
 			return {
@@ -155,11 +161,12 @@ const reducer = (state: State, action: Action): State => {
 				isExpanded: true,
 				commentPage: action.commentPage ?? state.commentPage,
 			};
-		case 'updateTotalPages':
+		case 'setLoading': {
 			return {
 				...state,
-				totalPages: action.totalPages,
+				loading: action.loading,
 			};
+		}
 		default:
 			return state;
 	}
@@ -183,15 +190,15 @@ export const Discussion = ({
 			filters,
 			hashCommentId,
 			totalPages,
+			loading,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
-	const [loading, setLoading] = useState(true);
 
 	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
 	useEffect(() => {
-		setLoading(true);
+		dispatch({ type: 'setLoading', loading: true });
 		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
 			.then((result) => {
 				if (result.kind === 'error') {
@@ -199,11 +206,14 @@ export const Discussion = ({
 					return;
 				}
 
-				setLoading(false);
 				const { pages, discussion } = result.value;
-				setComments(discussion.comments);
-				setIsClosedForComments(discussion.isClosedForComments);
-				setTotalPages(pages);
+
+				dispatch({
+					type: 'commentsLoaded',
+					comments: discussion.comments,
+					isClosedForComments: discussion.isClosedForComments,
+					totalPages: pages,
+				});
 			})
 			.catch(() => {
 				// do nothing
