@@ -22,6 +22,7 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { Crossword } from '../components/Crossword.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -699,41 +700,52 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer format={format}>
-								<ArticleBody
-									format={format}
-									blocks={article.blocks}
-									pinnedPost={article.pinnedPost}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									switches={article.config.switches}
-									isSensitive={article.config.isSensitive}
-									isAdFreeUser={article.isAdFreeUser}
-									sectionId={article.config.section}
-									shouldHideReaderRevenue={
-										article.shouldHideReaderRevenue
-									}
-									tags={article.tags}
-									isPaidContent={
-										!!article.config.isPaidContent
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									contentType={article.contentType}
-									isPreview={article.config.isPreview}
-									idUrl={article.config.idUrl ?? ''}
-									isDev={!!article.config.isDev}
-									keywordIds={article.config.keywordIds}
-									abTests={article.config.abTests}
-									tableOfContents={article.tableOfContents}
-									lang={article.lang}
-									isRightToLeftLang={
-										article.isRightToLeftLang
-									}
-									editionId={article.editionId}
-								/>
+								{article.crossword ? (
+									<Island priority="critical">
+										<Crossword
+											id={article.crossword.id}
+											crossword={article.crossword}
+										/>
+									</Island>
+								) : (
+									<ArticleBody
+										format={format}
+										blocks={article.blocks}
+										pinnedPost={article.pinnedPost}
+										host={host}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										ajaxUrl={article.config.ajaxUrl}
+										switches={article.config.switches}
+										isSensitive={article.config.isSensitive}
+										isAdFreeUser={article.isAdFreeUser}
+										sectionId={article.config.section}
+										shouldHideReaderRevenue={
+											article.shouldHideReaderRevenue
+										}
+										tags={article.tags}
+										isPaidContent={
+											!!article.config.isPaidContent
+										}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										contentType={article.contentType}
+										isPreview={article.config.isPreview}
+										idUrl={article.config.idUrl ?? ''}
+										isDev={!!article.config.isDev}
+										keywordIds={article.config.keywordIds}
+										abTests={article.config.abTests}
+										tableOfContents={
+											article.tableOfContents
+										}
+										lang={article.lang}
+										isRightToLeftLang={
+											article.isRightToLeftLang
+										}
+										editionId={article.editionId}
+									/>
+								)}
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
 										<Island

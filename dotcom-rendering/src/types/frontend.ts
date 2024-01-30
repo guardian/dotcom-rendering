@@ -1,3 +1,4 @@
+import type { GuardianCrossword } from 'mycrossword';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { FEArticleBadgeType } from './badge';
@@ -115,6 +116,7 @@ export interface FEArticleType {
 	showTableOfContents: boolean;
 	lang?: string;
 	isRightToLeftLang?: boolean;
+	crossword?: GuardianCrossword;
 }
 
 type PageTypeType = {
