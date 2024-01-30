@@ -6,7 +6,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { comment, reply } from '../../lib/discussionApi';
+import type { comment, preview, reply } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
@@ -34,7 +34,7 @@ type Props = {
 	onRecommend?: (commentId: number) => Promise<boolean>;
 	onComment?: ReturnType<typeof comment>;
 	onReply?: ReturnType<typeof reply>;
-	onPreview?: (body: string) => Promise<string>;
+	onPreview?: typeof preview;
 	onExpand: () => void;
 	idApiUrl: string;
 	page: number;

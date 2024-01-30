@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import type { comment, reply } from '../../lib/discussionApi';
+import type { comment, preview, reply } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
 import type {
 	CommentType,
@@ -29,7 +29,7 @@ type Props = {
 	onRecommend?: (commentId: number) => Promise<boolean>;
 	onComment?: ReturnType<typeof comment>;
 	onReply?: ReturnType<typeof reply>;
-	onPreview?: (body: string) => Promise<string>;
+	onPreview?: typeof preview;
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;
 	isCommentFormActive: boolean;

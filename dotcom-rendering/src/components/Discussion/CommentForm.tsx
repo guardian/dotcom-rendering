@@ -31,7 +31,7 @@ type Props = {
 	commentBeingRepliedTo?: CommentType;
 	onComment?: ReturnType<typeof defaultComment>;
 	onReply?: ReturnType<typeof defaultReply>;
-	onPreview?: (body: string) => Promise<string>;
+	onPreview?: typeof defaultPreview;
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;
 	isActive: boolean;
@@ -292,16 +292,18 @@ export const CommentForm = ({
 	const fetchShowPreview = async () => {
 		if (!body) return;
 
-		try {
-			const preview = onPreview ?? defaultPreview;
-			const response = await preview(body);
-			setPreviewBody(response);
-			setShowPreview(true);
-		} catch (e) {
+		const preview = onPreview ?? defaultPreview;
+		const response = await preview(body);
+
+		if (response.kind === 'error') {
 			setError('Preview request failed, please try again');
 			setPreviewBody('');
 			setShowPreview(false);
+			return;
 		}
+
+		setPreviewBody(response.value);
+		setShowPreview(true);
 	};
 
 	const resetForm = () => {

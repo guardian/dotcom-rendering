@@ -1,4 +1,4 @@
-import { joinUrl } from '@guardian/libs';
+import { isObject, isString, joinUrl } from '@guardian/libs';
 import { safeParse } from 'valibot';
 import type {
 	AdditionalHeadersType,
@@ -125,14 +125,16 @@ export const getDiscussion = async (
 	return { kind: 'ok', value: result.output };
 };
 
-export const preview = async (body: string): Promise<string> => {
+export const preview = async (
+	body: string,
+): Promise<Result<GetDiscussionError, string>> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment/preview') +
 		objAsParams(defaultParams);
 	const data = new URLSearchParams();
 	data.append('body', body);
 
-	const resp = await fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		body: data.toString(),
 		headers: {
@@ -141,10 +143,14 @@ export const preview = async (body: string): Promise<string> => {
 		},
 	});
 
-	const json = await resp.json();
+	if (jsonResult.kind === 'error') return jsonResult;
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- YOLO
-	return json.commentBody;
+	return isObject(jsonResult.value) && isString(jsonResult.value.commentBody)
+		? { kind: 'ok', value: jsonResult.value.commentBody }
+		: {
+				kind: 'error',
+				error: 'ParsingError',
+		  };
 };
 
 type CommentResponse = Result<
