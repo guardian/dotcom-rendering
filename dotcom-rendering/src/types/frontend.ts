@@ -1,3 +1,4 @@
+import type { GuardianCrossword } from 'mycrossword';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
@@ -118,6 +119,7 @@ export interface FEArticleType {
 	showTableOfContents: boolean;
 	lang?: string;
 	isRightToLeftLang?: boolean;
+	crossword?: GuardianCrossword;
 }
 
 type MatchType = 'CricketMatchType' | 'FootballMatchType';
