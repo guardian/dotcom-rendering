@@ -23,7 +23,7 @@
 		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {
-		"@guardian/prettier": "5.0.0",
+		"@guardian/prettier": "8.0.0",
 		"chromatic": "^6.19.9",
 		"husky": "^8.0.3",
 		"lint-staged": "15.2.0",
