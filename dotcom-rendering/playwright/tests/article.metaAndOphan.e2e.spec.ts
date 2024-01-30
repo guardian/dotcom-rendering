@@ -1,7 +1,7 @@
 import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 import { expectToBeVisible, expectToExist } from 'playwright/lib/locators';
-import { loadPage } from '../../lib/load-page';
+import { loadPage } from '../lib/load-page';
 
 const expectMetaContentValue = async (
 	page: Page,

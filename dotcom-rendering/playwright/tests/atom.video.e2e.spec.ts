@@ -2,9 +2,9 @@ import { isUndefined } from '@guardian/libs';
 import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 import { expectToBeVisible, expectToNotExist } from 'playwright/lib/locators';
-import { cmpAcceptAll, cmpRejectAll } from '../../lib/cmp';
-import { waitForIsland } from '../../lib/islands';
-import { fetchAndloadPageWithOverrides } from '../../lib/load-page';
+import { cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
+import { waitForIsland } from '../lib/islands';
+import { fetchAndloadPageWithOverrides } from '../lib/load-page';
 
 type YouTubeEmbedConfig = {
 	adsConfig: {

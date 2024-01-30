@@ -4,7 +4,7 @@ import { cmpAcceptAll } from 'playwright/lib/cmp';
 import { addCookie, clearCookie } from 'playwright/lib/cookies';
 import { loadPageNoOkta } from 'playwright/lib/load-page';
 import { stubResponse } from 'playwright/lib/network';
-import { Standard as standardArticle } from '../../../fixtures/generated/articles/Standard';
+import { Standard as standardArticle } from '../../fixtures/generated/articles/Standard';
 
 const idapiIdentifiersResponse = {
 	id: '000000000',

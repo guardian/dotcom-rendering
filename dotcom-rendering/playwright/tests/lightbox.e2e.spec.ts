@@ -6,8 +6,8 @@ import {
 	expectToBeVisible,
 	expectToNotBeVisible,
 } from 'playwright/lib/locators';
-import { Live as LiveBlog } from '../../../fixtures/generated/articles/Live';
-import { PhotoEssay as photoEssayArticle } from '../../../fixtures/generated/articles/PhotoEssay';
+import { Live as LiveBlog } from '../../fixtures/generated/articles/Live';
+import { PhotoEssay as photoEssayArticle } from '../../fixtures/generated/articles/PhotoEssay';
 
 // LIGHTBOX RL notes
 // reload pops an open lightbox out of fullscreen

@@ -10,8 +10,8 @@ import {
 	expectToNotExist,
 } from 'playwright/lib/locators';
 import { stubResponse } from 'playwright/lib/network';
-import { match1, match2 } from '../../fixtures/cricket-match';
-import { disableCMP } from '../../lib/cmp';
+import { match1, match2 } from '../fixtures/cricket-match';
+import { disableCMP } from '../lib/cmp';
 
 const blogUrl =
 	'https://www.theguardian.com/australia-news/live/2022/feb/22/australia-news-live-updates-scott-morrison-nsw-trains-coronavirus-covid-omicron-weather';
