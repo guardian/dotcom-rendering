@@ -363,3 +363,9 @@ export type DropdownOptionType = {
 	disabled?: boolean;
 	isActive?: boolean;
 };
+
+export const pickResponseSchema = object({
+	status: literal('ok'),
+	statusCode: literal(200),
+	message: string(),
+});
