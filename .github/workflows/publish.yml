@@ -72,8 +72,8 @@ jobs:
             article-rendering:
               - article-rendering
             facia-rendering-cfn:
-              - article-rendering-cfn
+              - facia-rendering-cfn
             facia-rendering:
-              - article-rendering
+              - facia-rendering
             frontend-static:
               - frontend-static
