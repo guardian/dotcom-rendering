@@ -10,6 +10,14 @@ import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
 import type { DCRContainerPalette } from '../../../types/front';
 
+type CardPercentageType =
+	| '25%'
+	| '33.333%'
+	| '50%'
+	| '66.666%'
+	| '75%'
+	| '100%';
+
 /**
  * This value needs to match the one set
  * in the `verticalDividerWithBottomOffset`

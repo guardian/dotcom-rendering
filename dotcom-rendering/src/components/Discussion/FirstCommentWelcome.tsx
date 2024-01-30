@@ -4,21 +4,8 @@ import { Link, TextInput } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { palette as schemedPalette } from '../../palette';
 import { PillarButton } from './PillarButton';
+import { Preview } from './Preview';
 import { Row } from './Row';
-
-const previewStyle = css`
-	padding: ${space[2]}px;
-	background-color: ${schemedPalette('--first-comment-preview')};
-	color: inherit;
-	margin-bottom: ${space[5]}px;
-	position: relative;
-	min-height: ${space[9]}px;
-
-	/* p is returned by API and this is the only way to apply styles */
-	p {
-		padding-left: ${space[2]}px;
-	}
-`;
 
 const textStyling = css`
 	${textSans.small()};
@@ -122,10 +109,7 @@ export const FirstCommentWelcome = ({
 					Please preview your comment below and click ‘post’ when
 					you’re happy with it.
 				</Text>
-				<div
-					css={[previewStyle, textStyling]}
-					dangerouslySetInnerHTML={{ __html: previewBody || '' }}
-				/>
+				<Preview previewHtml={previewBody} showSpout={false} />
 				<Row>
 					<PillarButton
 						onClick={() => void submitForm(userName)}

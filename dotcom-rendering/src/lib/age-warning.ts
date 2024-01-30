@@ -4,15 +4,23 @@ export const getAgeWarning = (
 	tags: TagType[],
 	webPublicationDate: string,
 ): string | undefined => {
-	const isNews = tags.some((t) => t.id === 'tone/news');
-	const isOpinion = tags.some((t) => t.id === 'tone/comment');
-	const isCottonCapital = tags.some(
-		(t) => t.id === 'news/series/cotton-capital',
-	);
+	const tagsWithoutAgeWarning = [
+		'tone/help',
+		'info/info',
+		'tone/recipes',
+		'lifeandstyle/series/sudoku',
+		'type/crossword',
+		'lifeandstyle/series/kakuro',
+		'the-scott-trust/the-scott-trust',
+		'type/signup',
+		'info/newsletter-sign-up',
+		'guardian-live-events/guardian-live-events',
+	];
+	const showAge = !tags.some(({ id }) => tagsWithoutAgeWarning.includes(id));
+
 	let message;
 
-	// Only show an age warning for news or opinion pieces
-	if ((isNews || isOpinion) && !isCottonCapital) {
+	if (showAge) {
 		const warnLimitDays = 30;
 		const currentDate = new Date();
 		const dateThreshold = new Date();

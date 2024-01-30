@@ -239,11 +239,10 @@ requests.push(
 		.then((res) => res.json())
 		.then((json) => {
 			// Write the new fixture data
-			const contents = `${HEADER}export const matchReport: MatchReportType = ${JSON.stringify(
-				json,
-				null,
-				4,
-			)}`;
+			const contents = `${HEADER}
+import type { MatchReportType } from '../../src/types/matchReport';
+
+export const matchReport: MatchReportType = ${JSON.stringify(json, null, 4)}`;
 			return fs.writeFile(
 				`${root}/fixtures/generated/match-report.ts`,
 				contents,

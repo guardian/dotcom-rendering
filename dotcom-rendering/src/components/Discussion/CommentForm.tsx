@@ -13,7 +13,11 @@ import {
 	reply as defaultReply,
 } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
-import type { CommentType, SignedInUser } from '../../types/discussion';
+import type {
+	CommentType,
+	SignedInUser,
+	UserProfile,
+} from '../../types/discussion';
 import { FirstCommentWelcome } from './FirstCommentWelcome';
 import { PillarButton } from './PillarButton';
 import { Preview } from './Preview';
@@ -162,19 +166,33 @@ const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 	/>
 );
 
+/**
+ * The returned object below is a simulation of the comment that was created that
+ * we add to our local state so that the reader has immediate feedback.
+ * We do this because the API has a 1 minute cache expiry so simply refreshing
+ * the main list of comments often will not return the comment just added.
+ *
+ * Edge case: If the user _does_ refresh then this local state will be overridden
+ * by the new API response and - if the refresh was within 60 seconds - the
+ * reader's comment will not be present. The same edge case exists in frontend.
+ */
 const simulateNewComment = (
 	commentId: number,
 	body: string,
-	user: UserProfile,
+	userProfile: UserProfile,
 	commentBeingRepliedTo?: CommentType,
 ): CommentType => {
-	// The returned object below is a simulation of the comment that was created that
-	// we add to our local state so that the reader has immediate feedback. We do
-	// this because the api has a 1 minute cache expiry so simply refreshing the
-	// main list of comments often won't return the comment just added.
-	// Edge case: If the user _does_ refresh then this local state will be overridden
-	// by the new api response and - if the refresh was within 60 seconds - the
-	// reader's comment will not be present. The same edge case exists in frontend.
+	const responseTo = commentBeingRepliedTo
+		? {
+				displayName: commentBeingRepliedTo.userProfile.displayName,
+				commentApiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentBeingRepliedTo.id}`,
+				isoDateTime: commentBeingRepliedTo.isoDateTime,
+				date: commentBeingRepliedTo.date,
+				commentId: String(commentBeingRepliedTo.id),
+				commentWebUrl: `https://discussion.theguardian.com/comment-permalink/${commentBeingRepliedTo.id}`,
+		  }
+		: undefined;
+
 	return {
 		id: commentId,
 		body,
@@ -185,30 +203,9 @@ const simulateNewComment = (
 		apiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentId}`,
 		numRecommends: 0,
 		isHighlighted: false,
-		userProfile: {
-			userId: user.userId,
-			displayName: user.displayName,
-			webUrl: user.webUrl,
-			apiUrl: user.apiUrl,
-			avatar: user.avatar,
-			secureAvatarUrl: user.secureAvatarUrl,
-			badge: user.badge,
-		},
-		...(commentBeingRepliedTo
-			? {
-					responseTo: {
-						displayName:
-							commentBeingRepliedTo.userProfile.displayName,
-						commentApiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentBeingRepliedTo.id}`,
-						isoDateTime: commentBeingRepliedTo.isoDateTime,
-						date: commentBeingRepliedTo.date,
-						commentId: String(commentBeingRepliedTo.id),
-						commentWebUrl: `https://discussion.theguardian.com/comment-permalink/${commentBeingRepliedTo.id}`,
-					},
-			  }
-			: {
-					responses: [],
-			  }),
+		userProfile,
+		responses: [],
+		responseTo,
 	};
 };
 
@@ -421,13 +418,12 @@ export const CommentForm = ({
 		}
 
 		const response = await addUserName(user.authStatus, userName);
-		if (response.status === 'ok') {
+		if (response.kind === 'ok') {
 			// If we are able to submit userName we should continue with submitting comment
 			void submitForm();
 			setUserNameMissing(false);
 		} else {
-			response.errors &&
-				setError(response.errors[0]?.message ?? 'unknown error');
+			setError(response.error);
 		}
 	};
 
@@ -629,7 +625,9 @@ export const CommentForm = ({
 				</div>
 			</form>
 
-			{showPreview && <Preview previewHtml={previewBody} />}
+			{showPreview && (
+				<Preview previewHtml={previewBody} showSpout={true} />
+			)}
 		</>
 	);
 };
