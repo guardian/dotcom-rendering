@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { tweetBlock } from 'playwright/fixtures/manual/tweet-block';
+import { tweetBlock } from 'playwright/fixtures/tweet-block';
 import { getIframeBody } from 'playwright/lib/iframe';
 import { waitForIsland } from 'playwright/lib/islands';
 import { loadPage } from 'playwright/lib/load-page';
@@ -10,7 +10,7 @@ import {
 	expectToNotExist,
 } from 'playwright/lib/locators';
 import { stubResponse } from 'playwright/lib/network';
-import { match1, match2 } from '../../fixtures/manual/cricket-match';
+import { match1, match2 } from '../../fixtures/cricket-match';
 import { disableCMP } from '../../lib/cmp';
 
 const blogUrl =
