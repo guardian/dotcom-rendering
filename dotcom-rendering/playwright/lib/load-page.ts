@@ -1,5 +1,5 @@
 import type { Page } from '@playwright/test';
-import type { DCRArticle } from '../../src/types/frontend';
+import type { DCRArticle, FEArticleType } from '../../src/types/frontend';
 
 const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
@@ -41,7 +41,7 @@ const loadPage = async (
  */
 const loadPageWithOverrides = async (
 	page: Page,
-	article: DCRArticle,
+	article: DCRArticle | FEArticleType,
 	overrides?: {
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
@@ -95,4 +95,32 @@ const loadPageNoOkta = async (
 	});
 };
 
-export { BASE_URL, loadPage, loadPageWithOverrides, loadPageNoOkta };
+/**
+ * Fetch the page json from PROD then load it as a POST with overrides
+ */
+const fetchAndloadPageWithOverrides = async (
+	page: Page,
+	url: string,
+	overrides?: {
+		configOverrides?: Record<string, unknown>;
+		switchOverrides?: Record<string, unknown>;
+	},
+): Promise<void> => {
+	const article = (await fetch(`${url}.json?dcr`).then((res) =>
+		res.json(),
+	)) as FEArticleType;
+	return loadPageWithOverrides(page, article, {
+		configOverrides: overrides?.configOverrides,
+		switchOverrides: {
+			...overrides?.switchOverrides,
+		},
+	});
+};
+
+export {
+	BASE_URL,
+	loadPage,
+	loadPageWithOverrides,
+	loadPageNoOkta,
+	fetchAndloadPageWithOverrides,
+};
