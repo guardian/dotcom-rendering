@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
-import { disableCMP } from 'playwright/lib/cmp';
-import { waitForIsland } from 'playwright/lib/islands';
-import { loadPage } from 'playwright/lib/load-page';
+import { disableCMP } from '../lib/cmp';
+import { waitForIsland } from '../lib/islands';
+import { loadPage } from '../lib/load-page';
 import { expectToBeVisible } from '../lib/locators';
 
 const blogUrl =

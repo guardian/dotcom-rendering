@@ -1,8 +1,5 @@
 import type { BrowserContext, Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { addCookie, clearCookie } from 'playwright/lib/cookies';
-import { getIframeBody } from 'playwright/lib/iframe';
-import { expectToBeVisible, expectToNotExist } from 'playwright/lib/locators';
 import { Labs as labsArticle } from '../../fixtures/generated/articles/Labs';
 import { Standard as standardArticle } from '../../fixtures/generated/articles/Standard';
 import {
@@ -12,7 +9,10 @@ import {
 	SUBSCRIPTION_HEADER,
 } from '../../src/lib/signInAfterCheckOutText';
 import { CMP_LAYER1_IFRAME, cmpAcceptAll, disableCMP } from '../lib/cmp';
+import { addCookie, clearCookie } from '../lib/cookies';
+import { getIframeBody } from '../lib/iframe';
 import { loadPageWithOverrides } from '../lib/load-page';
+import { expectToBeVisible, expectToNotExist } from '../lib/locators';
 
 const setArticleCount = async (page: Page, dailyArticleCount: number) => {
 	await page.evaluate((n) => {

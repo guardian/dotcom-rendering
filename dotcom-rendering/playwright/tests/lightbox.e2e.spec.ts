@@ -1,13 +1,10 @@
 import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { disableCMP } from 'playwright/lib/cmp';
-import { loadPageWithOverrides } from 'playwright/lib/load-page';
-import {
-	expectToBeVisible,
-	expectToNotBeVisible,
-} from 'playwright/lib/locators';
 import { Live as LiveBlog } from '../../fixtures/generated/articles/Live';
 import { PhotoEssay as photoEssayArticle } from '../../fixtures/generated/articles/PhotoEssay';
+import { disableCMP } from '../lib/cmp';
+import { loadPageWithOverrides } from '../lib/load-page';
+import { expectToBeVisible, expectToNotBeVisible } from '../lib/locators';
 
 // LIGHTBOX RL notes
 // reload pops an open lightbox out of fullscreen
