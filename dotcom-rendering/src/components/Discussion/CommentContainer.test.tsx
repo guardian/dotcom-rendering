@@ -2,6 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
+import type { Result } from '../../lib/result';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
@@ -19,6 +20,16 @@ const commentWithoutReply = {
 	responses: [],
 } satisfies CommentType;
 
+const commentResponseError = {
+	kind: 'error',
+	error: { code: 'NetworkError', message: 'Mocked' },
+} as const satisfies Result<unknown, unknown>;
+
+const commentResponseSuccess = {
+	kind: 'ok',
+	value: 123456,
+} as const satisfies Result<unknown, unknown>;
+
 const aUser: SignedInUser = {
 	profile: {
 		userId: 'abc123',
@@ -34,6 +45,8 @@ const aUser: SignedInUser = {
 			hasCommented: true,
 		},
 	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseSuccess),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 

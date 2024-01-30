@@ -104,6 +104,11 @@ const longBothReplyCommentData: CommentType = {
 	},
 };
 
+const commentResponseError = {
+	kind: 'error',
+	error: { code: 'NetworkError', message: 'Mocked' },
+} as const;
+
 const user: SignedInUser = {
 	profile: {
 		userId: 'abc123',
@@ -119,6 +124,8 @@ const user: SignedInUser = {
 			hasCommented: true,
 		},
 	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseError),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -137,6 +144,8 @@ const staffUser: SignedInUser = {
 			hasCommented: true,
 		},
 	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseError),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
