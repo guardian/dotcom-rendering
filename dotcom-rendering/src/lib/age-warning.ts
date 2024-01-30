@@ -14,6 +14,7 @@ export const getAgeWarning = (
 		'the-scott-trust/the-scott-trust',
 		'type/signup',
 		'info/newsletter-sign-up',
+		'guardian-live-events/guardian-live-events',
 	];
 	const showAge = !tags.some(({ id }) => tagsWithoutAgeWarning.includes(id));
 
