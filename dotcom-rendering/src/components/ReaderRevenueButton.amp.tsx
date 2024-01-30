@@ -70,7 +70,7 @@ type Props = {
 	nav: NavType;
 	linkLabel: string;
 	rrLink: ReaderRevenuePosition;
-	rrCategory: ReaderRevenueCategory;
+	rrCategory: 'contribute' | 'subscribe' | 'support';
 	rightAlignIcon?: boolean;
 };
 

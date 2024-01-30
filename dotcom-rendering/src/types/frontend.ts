@@ -120,6 +120,18 @@ export interface FEArticleType {
 	isRightToLeftLang?: boolean;
 }
 
+type MatchType = 'CricketMatchType' | 'FootballMatchType';
+
+type PageTypeType = {
+	hasShowcaseMainElement: boolean;
+	isFront: boolean;
+	isLiveblog: boolean;
+	isMinuteArticle: boolean;
+	isPaidContent: boolean;
+	isPreview: boolean;
+	isSensitive: boolean;
+};
+
 /**
  * The `DCRArticle` type models the `FEArticleType` in addition to any enhancements DCR makes after
  * receiving the data from Frontend.

@@ -373,7 +373,7 @@ const discussionApiSuccessSchema = object({
 		webUrl: string(),
 		apiUrl: string(),
 		commentCount: number(),
-		topLevelCommentCount: number(),
+		topLevelCommentCount: optional(number(), 0),
 		isClosedForComments: boolean(),
 		isClosedForRecommendation: boolean(),
 		isThreaded: boolean(),
