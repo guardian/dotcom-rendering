@@ -18,19 +18,22 @@ const loadPage = async (
 	region = 'GB',
 	preventSupportBanner = true,
 ): Promise<void> => {
-	await page.addInitScript((regionProvided) => {
-		// force geo region
-		window.localStorage.setItem(
-			'gu.geo.override',
-			JSON.stringify({ value: regionProvided }),
-		);
-		if (preventSupportBanner) {
+	await page.addInitScript(
+		(args) => {
+			// force geo region
 			window.localStorage.setItem(
-				'gu.prefs.engagementBannerLastClosedAt',
-				`{"value":"${new Date().toISOString()}"}`,
+				'gu.geo.override',
+				JSON.stringify({ value: args.region }),
 			);
-		}
-	}, region);
+			if (args.preventSupportBanner) {
+				window.localStorage.setItem(
+					'gu.prefs.engagementBannerLastClosedAt',
+					`{"value":"${new Date().toISOString()}"}`,
+				);
+			}
+		},
+		{ region, preventSupportBanner },
+	);
 	// The default waitUntil: 'load' ensures all requests have completed
 	// For specific cases that do not rely on JS use 'domcontentloaded' to speed up tests
 	await page.goto(`${BASE_URL}${path}`, { waitUntil });
