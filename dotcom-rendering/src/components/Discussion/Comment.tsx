@@ -318,9 +318,9 @@ export const Comment = ({
 
 		const response = await pickComment(staffUser.authStatus, comment.id);
 		if (response.kind === 'error') {
-			setError(response.error.message);
+			setError(response.error);
 		} else {
-			setIsHighlighted(true);
+			setIsHighlighted(response.value);
 		}
 	};
 
@@ -328,9 +328,9 @@ export const Comment = ({
 		setError('');
 		const response = await unPickComment(staffUser.authStatus, comment.id);
 		if (response.kind === 'error') {
-			setError(response.error.message);
+			setError(response.error);
 		} else {
-			setIsHighlighted(false);
+			setIsHighlighted(response.value);
 		}
 	};
 

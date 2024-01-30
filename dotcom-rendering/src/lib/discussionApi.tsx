@@ -14,6 +14,7 @@ import {
 	parseAbuseResponse,
 	parseCommentRepliesResponse,
 	parseCommentResponse,
+	pickResponseSchema,
 	postUsernameResponseSchema,
 } from '../types/discussion';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
@@ -380,7 +381,7 @@ export const addUserName = async (
 export const pickComment = async (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 	commentId: number,
-): Promise<CommentResponse> => {
+): Promise<Result<GetDiscussionError, true>> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'highlight') +
 		objAsParams(defaultParams);
@@ -391,28 +392,24 @@ export const pickComment = async (
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
-			...(authOptions.headers !== undefined ? authOptions.headers : {}),
+			...authOptions.headers,
 		},
 		credentials: authOptions.credentials,
 	});
 
-	if (jsonResult.kind === 'error') {
-		return {
-			kind: 'error',
-			error: {
-				code: jsonResult.error,
-				message: 'Could not retrieve the comment',
-			},
-		};
-	}
+	if (jsonResult.kind === 'error') return jsonResult;
 
-	return parseCommentResponse(jsonResult.value);
+	const result = safeParse(pickResponseSchema, jsonResult.value);
+
+	if (!result.success) return { kind: 'error', error: 'ParsingError' };
+
+	return { kind: 'ok', value: true };
 };
 
 export const unPickComment = async (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 	commentId: number,
-): Promise<CommentResponse> => {
+): Promise<Result<GetDiscussionError, false>> => {
 	const url =
 		joinUrl(
 			options.baseUrl,
@@ -420,8 +417,8 @@ export const unPickComment = async (
 			commentId.toString(),
 			'unhighlight',
 		) + objAsParams(defaultParams);
-	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
+	const authOptions = getOptionsHeadersWithOkta(authStatus);
 	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		headers: {
@@ -432,17 +429,13 @@ export const unPickComment = async (
 		credentials: authOptions.credentials,
 	});
 
-	if (jsonResult.kind === 'error') {
-		return {
-			kind: 'error',
-			error: {
-				code: jsonResult.error,
-				message: 'Could not retrieve the comment',
-			},
-		};
-	}
+	if (jsonResult.kind === 'error') return jsonResult;
 
-	return parseCommentResponse(jsonResult.value);
+	const result = safeParse(pickResponseSchema, jsonResult.value);
+
+	if (!result.success) return { kind: 'error', error: 'ParsingError' };
+
+	return { kind: 'ok', value: false };
 };
 
 export const getMoreResponses = async (
