@@ -418,13 +418,12 @@ export const CommentForm = ({
 		}
 
 		const response = await addUserName(user.authStatus, userName);
-		if (response.status === 'ok') {
+		if (response.kind === 'ok') {
 			// If we are able to submit userName we should continue with submitting comment
 			void submitForm();
 			setUserNameMissing(false);
 		} else {
-			response.errors &&
-				setError(response.errors[0]?.message ?? 'unknown error');
+			setError(response.error);
 		}
 	};
 
