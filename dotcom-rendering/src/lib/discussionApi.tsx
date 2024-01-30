@@ -391,7 +391,7 @@ export const pickComment = async (
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
-			...(authOptions.headers !== undefined ? authOptions.headers : {}),
+			...authOptions.headers,
 		},
 		credentials: authOptions.credentials,
 	});
@@ -420,8 +420,8 @@ export const unPickComment = async (
 			commentId.toString(),
 			'unhighlight',
 		) + objAsParams(defaultParams);
-	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
+	const authOptions = getOptionsHeadersWithOkta(authStatus);
 	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		headers: {
