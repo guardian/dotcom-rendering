@@ -3,6 +3,7 @@ import { storage } from '@guardian/libs';
 import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useReducer } from 'react';
+import { assertUnreachable } from '../lib/assert-unreachable';
 import { getDiscussion } from '../lib/discussionApi';
 import {
 	getCommentContext,
@@ -18,7 +19,6 @@ import type {
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
-import { assertUnreachable } from 'src/lib/assert-unreachable';
 
 export type Props = {
 	discussionApiUrl: string;
