@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test';
+import { validateAsArticleType } from '../../src/model/validate';
 import type { DCRArticle, FEArticleType } from '../../src/types/frontend';
 
 const PORT = 9000;
@@ -106,9 +107,9 @@ const fetchAndloadPageWithOverrides = async (
 		switchOverrides?: Record<string, unknown>;
 	},
 ): Promise<void> => {
-	const article = (await fetch(`${url}.json?dcr`).then((res) =>
-		res.json(),
-	)) as FEArticleType;
+	const article = validateAsArticleType(
+		await fetch(`${url}.json?dcr`).then((res) => res.json()),
+	);
 	return loadPageWithOverrides(page, article, {
 		configOverrides: overrides?.configOverrides,
 		switchOverrides: {
@@ -119,8 +120,8 @@ const fetchAndloadPageWithOverrides = async (
 
 export {
 	BASE_URL,
-	loadPage,
-	loadPageWithOverrides,
-	loadPageNoOkta,
 	fetchAndloadPageWithOverrides,
+	loadPage,
+	loadPageNoOkta,
+	loadPageWithOverrides,
 };
