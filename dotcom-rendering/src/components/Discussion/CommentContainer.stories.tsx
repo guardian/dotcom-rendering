@@ -133,6 +133,11 @@ const commentDataWithLongThread: CommentType = {
 	},
 };
 
+const commentResponseError = {
+	kind: 'error',
+	error: { code: 'NetworkError', message: 'Mocked' },
+} as const;
+
 const aUser: SignedInUser = {
 	profile: {
 		userId: 'abc123',
@@ -148,6 +153,8 @@ const aUser: SignedInUser = {
 			hasCommented: true,
 		},
 	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseError),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -189,6 +196,16 @@ export const defaultStory = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
+		isCommentFormActive={false}
+		setIsCommentFormActive={() => {}}
+		error={''}
+		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
+		previewBody=""
+		setPreviewBody={() => {}}
 	/>
 );
 defaultStory.storyName = 'default';
@@ -215,6 +232,16 @@ export const threadedComment = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
+		isCommentFormActive={false}
+		setIsCommentFormActive={() => {}}
+		error={''}
+		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
+		previewBody=""
+		setPreviewBody={() => {}}
 	/>
 );
 threadedComment.storyName = 'threaded';
@@ -241,6 +268,16 @@ export const threadedCommentWithShowMore = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
+		isCommentFormActive={false}
+		setIsCommentFormActive={() => {}}
+		error={''}
+		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
+		previewBody=""
+		setPreviewBody={() => {}}
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
@@ -267,6 +304,16 @@ export const threadedCommentWithLongUsernames = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
+		isCommentFormActive={false}
+		setIsCommentFormActive={() => {}}
+		error={''}
+		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
+		previewBody=""
+		setPreviewBody={() => {}}
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
@@ -293,6 +340,16 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		showPreview={false}
+		setShowPreview={() => {}}
+		isCommentFormActive={false}
+		setIsCommentFormActive={() => {}}
+		error={''}
+		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
+		previewBody=""
+		setPreviewBody={() => {}}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =

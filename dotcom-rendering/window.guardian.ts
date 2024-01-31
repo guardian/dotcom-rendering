@@ -8,7 +8,6 @@ import type {
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type { OphanRecordFunction } from './src/client/ophan/ophan';
 import type { google } from './src/components/YoutubeAtom/ima';
-import type { ImaManager } from './src/components/YoutubeAtom/YoutubeAtomPlayer';
 import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
 import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
 import type { Guardian } from './src/model/guardian';
@@ -80,9 +79,7 @@ declare global {
 		};
 		mockLiveUpdate: (data: LiveUpdateType) => void;
 		google?: typeof google;
-		YT?: {
-			ImaManager: typeof ImaManager;
-		};
+		YT?: typeof YT;
 		onYouTubeIframeAPIReady?: () => void;
 	}
 }

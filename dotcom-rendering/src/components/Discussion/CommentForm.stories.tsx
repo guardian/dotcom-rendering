@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentForm } from './CommentForm';
@@ -12,6 +13,11 @@ const defaultFormat = {
 	display: ArticleDisplay.Standard,
 	theme: Pillar.News,
 };
+
+const commentResponseError = {
+	kind: 'error',
+	error: { code: 'NetworkError', message: 'Mocked' },
+} as const;
 
 const aUser: SignedInUser = {
 	profile: {
@@ -28,6 +34,8 @@ const aUser: SignedInUser = {
 			hasCommented: true,
 		},
 	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseError),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -60,24 +68,55 @@ const aComment: CommentType = {
 	},
 };
 
-export const Default = () => (
-	<CommentForm
-		shortUrl={shortUrl}
-		user={aUser}
-		onAddComment={(comment) => {}}
-	/>
-);
+export const Default = () => {
+	const [isActive, setIsActive] = useState(false);
+
+	return (
+		<CommentForm
+			shortUrl={shortUrl}
+			user={aUser}
+			onAddComment={(comment) => {}}
+			isActive={isActive}
+			setIsActive={setIsActive}
+			showPreview={false}
+			setShowPreview={() => {}}
+			userNameMissing={false}
+			setUserNameMissing={() => {}}
+			error={''}
+			setError={() => {}}
+			previewBody=""
+			setPreviewBody={() => {}}
+		/>
+	);
+};
 Default.storyName = 'default';
 Default.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
 // This story has a mocked post endpoint that returns an error, see 97d6eab4a98917f63bc96a7ac64f7ca7
-export const Error = () => (
-	<CommentForm
-		shortUrl={'/p/g8g7v'}
-		user={aUser}
-		onAddComment={(comment) => {}}
-	/>
-);
+
+export const Error = () => {
+	const [isActive, setIsActive] = useState(false);
+	const [userNameMissing, setUserNameMissing] = useState(false);
+
+	return (
+		<CommentForm
+			shortUrl={'/p/g8g7v'}
+			user={aUser}
+			onAddComment={(comment) => {}}
+			isActive={isActive}
+			setIsActive={setIsActive}
+			showPreview={false}
+			setShowPreview={() => {}}
+			userNameMissing={userNameMissing}
+			setUserNameMissing={setUserNameMissing}
+			error={''}
+			setError={() => {}}
+			previewBody=""
+			setPreviewBody={() => {}}
+		/>
+	);
+};
+
 Error.storyName = 'form with errors';
 Error.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
@@ -87,6 +126,16 @@ export const Active = () => (
 		user={aUser}
 		onAddComment={(comment) => {}}
 		commentBeingRepliedTo={aComment}
+		showPreview={false}
+		setShowPreview={() => {}}
+		isActive={true}
+		setIsActive={() => {}}
+		error={''}
+		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
+		previewBody=""
+		setPreviewBody={() => {}}
 	/>
 );
 Active.storyName = 'form is active';
@@ -118,6 +167,16 @@ export const Premoderated = () => (
 		}}
 		onAddComment={(comment) => {}}
 		commentBeingRepliedTo={aComment}
+		showPreview={false}
+		setShowPreview={() => {}}
+		isActive={true}
+		setIsActive={() => {}}
+		error={''}
+		setError={() => {}}
+		userNameMissing={false}
+		setUserNameMissing={() => {}}
+		previewBody=""
+		setPreviewBody={() => {}}
 	/>
 );
 Premoderated.storyName = 'user is premoderated';

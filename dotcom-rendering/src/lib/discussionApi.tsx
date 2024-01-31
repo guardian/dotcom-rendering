@@ -1,16 +1,26 @@
-import { joinUrl } from '@guardian/libs';
+import { isObject, isString, joinUrl } from '@guardian/libs';
+import { safeParse } from 'valibot';
 import type {
 	AdditionalHeadersType,
-	CommentResponse,
+	CommentResponseErrorCodes,
 	CommentType,
 	DiscussionOptions,
-	DiscussionResponse,
+	GetDiscussionSuccess,
 	OrderByType,
 	ThreadsType,
-	UserNameResponse,
+} from '../types/discussion';
+import {
+	discussionApiResponseSchema,
+	parseAbuseResponse,
+	parseCommentRepliesResponse,
+	parseCommentResponse,
+	pickResponseSchema,
+	postUsernameResponseSchema,
 } from '../types/discussion';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
+import { fetchJSON } from './json';
+import type { Result } from './result';
 
 const options = {
 	// Defaults
@@ -55,8 +65,10 @@ const objAsParams = (obj: any): string => {
 	return '?' + params;
 };
 
+type GetDiscussionError = 'ParsingError' | 'ApiError' | 'NetworkError';
+
 //todo: figure out the different return types and consider error handling
-export const getDiscussion = (
+export const getDiscussion = async (
 	shortUrl: string,
 	opts: {
 		orderBy: OrderByType;
@@ -64,7 +76,7 @@ export const getDiscussion = (
 		threads: ThreadsType;
 		page: number;
 	},
-): Promise<DiscussionResponse | undefined> => {
+): Promise<Result<GetDiscussionError, GetDiscussionSuccess>> => {
 	const apiOpts: DiscussionOptions = {
 		...defaultParams,
 		...{
@@ -84,56 +96,72 @@ export const getDiscussion = (
 
 	const url = joinUrl(options.baseUrl, 'discussion', shortUrl) + params;
 
-	return fetch(url, {
-		headers: {
-			...options.headers,
-		},
-	})
-		.then((resp) => resp.json())
-		.then((json) => {
-			if (
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-				json.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
-			) {
-				// We need force a refetch with unthreaded set, as we don't know
-				// that this discussion is only available in linear format until
-				// we get the response to tell us
-				return getDiscussion(shortUrl, {
-					...opts,
-					...{ threads: 'unthreaded' },
-				});
-			}
-			return json;
-		})
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	const jsonResult = await fetchJSON(url, { headers: options.headers });
+
+	if (jsonResult.kind === 'error') return jsonResult;
+
+	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
+	if (!result.success) {
+		return { kind: 'error', error: 'ParsingError' };
+	}
+	if (
+		result.output.status === 'error' &&
+		// We need force a refetch with unthreaded set, as we don't know
+		// that this discussion is only available in linear format until
+		// we get the response to tell us
+		result.output.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
+	) {
+		return getDiscussion(shortUrl, {
+			...opts,
+			...{ threads: 'unthreaded' },
+		});
+	}
+	if (result.output.status === 'error') {
+		return {
+			kind: 'error',
+			error: 'ApiError',
+		};
+	}
+
+	return { kind: 'ok', value: result.output };
 };
 
-export const preview = (body: string): Promise<string> => {
+export const preview = async (
+	body: string,
+): Promise<Result<GetDiscussionError, string>> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment/preview') +
 		objAsParams(defaultParams);
 	const data = new URLSearchParams();
 	data.append('body', body);
 
-	return (
-		fetch(url, {
-			method: 'POST',
-			body: data.toString(),
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				...options.headers,
-			},
-		})
-			.then((resp) => resp.json())
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-			.then((json) => json.commentBody)
-			.catch((error) => console.error(`Error fetching ${url}`, error))
-	);
+	const jsonResult = await fetchJSON(url, {
+		method: 'POST',
+		body: data.toString(),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			...options.headers,
+		},
+	});
+
+	if (jsonResult.kind === 'error') return jsonResult;
+
+	return isObject(jsonResult.value) && isString(jsonResult.value.commentBody)
+		? { kind: 'ok', value: jsonResult.value.commentBody }
+		: {
+				kind: 'error',
+				error: 'ParsingError',
+		  };
 };
+
+type CommentResponse = Result<
+	{ code: CommentResponseErrorCodes | GetDiscussionError; message: string },
+	number
+>;
 
 export const comment =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
-	(shortUrl: string, body: string): Promise<CommentResponse> => {
+	async (shortUrl: string, body: string): Promise<CommentResponse> => {
 		const url =
 			joinUrl(options.baseUrl, 'discussion', shortUrl, 'comment') +
 			objAsParams(defaultParams);
@@ -142,23 +170,33 @@ export const comment =
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		return fetch(url, {
+		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			body: data.toString(),
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				...options.headers,
-				...(authOptions.headers !== undefined
-					? authOptions.headers
-					: {}),
+				...authOptions.headers,
 			},
 			credentials: authOptions.credentials,
-		}).then((resp) => resp.json());
+		});
+
+		if (jsonResult.kind === 'error') {
+			return {
+				kind: 'error',
+				error: {
+					code: jsonResult.error,
+					message: 'Could not retrieve the comment',
+				},
+			};
+		}
+
+		return parseCommentResponse(jsonResult.value);
 	};
 
 export const reply =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
-	(
+	async (
 		shortUrl: string,
 		body: string,
 		parentCommentId: number,
@@ -176,42 +214,58 @@ export const reply =
 		data.append('body', body);
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		return fetch(url, {
+		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			body: data.toString(),
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				...options.headers,
-				...(authOptions.headers !== undefined
-					? authOptions.headers
-					: {}),
+				...authOptions.headers,
 			},
 			credentials: authOptions.credentials,
-		}).then((resp) => resp.json());
+		});
+
+		if (jsonResult.kind === 'error') {
+			return {
+				kind: 'error',
+				error: {
+					code: jsonResult.error,
+					message: 'Could not retrieve the comment',
+				},
+			};
+		}
+
+		return parseCommentResponse(jsonResult.value);
 	};
 
-//todo: come back and parse the response properly and set a proper return type for the error case
-export const getPicks = (
+export const getPicks = async (
 	shortUrl: string,
-): Promise<CommentType[] | undefined> => {
+): Promise<Result<GetDiscussionError, CommentType[]>> => {
 	const url =
 		joinUrl(options.baseUrl, 'discussion', shortUrl, 'topcomments') +
 		objAsParams(defaultParams);
 
-	return (
-		fetch(url, {
-			headers: {
-				...options.headers,
-			},
-		})
-			.then((resp) => resp.json())
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-			.then((json) => json.discussion.comments)
-			.catch((error) => console.error(`Error fetching ${url}`, error))
-	);
+	const jsonResult = await fetchJSON(url, {
+		headers: {
+			...options.headers,
+		},
+	});
+
+	if (jsonResult.kind === 'error') return jsonResult;
+
+	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
+
+	if (!result.success) {
+		return { kind: 'error', error: 'ParsingError' };
+	}
+	if (result.output.status === 'error') {
+		return { kind: 'error', error: 'ApiError' };
+	}
+
+	return { kind: 'ok', value: result.output.discussion.comments };
 };
 
-export const reportAbuse = ({
+export const reportAbuse = async ({
 	commentId,
 	categoryId,
 	email,
@@ -223,7 +277,7 @@ export const reportAbuse = ({
 	reason?: string;
 	email?: string;
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
-}): Promise<CommentResponse> => {
+}): Promise<Result<string, true>> => {
 	const url =
 		joinUrl(
 			options.baseUrl,
@@ -241,21 +295,30 @@ export const reportAbuse = ({
 		? getOptionsHeadersWithOkta(authStatus)
 		: undefined;
 
-	return fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		body: data.toString(),
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
-			...(authOptions?.headers !== undefined ? authOptions.headers : {}),
+			...authOptions?.headers,
 		},
 		credentials: authOptions?.credentials,
-	}).then((resp) => resp.json());
+	});
+
+	if (jsonResult.kind === 'error') {
+		return {
+			kind: 'error',
+			error: 'An unknown error occured',
+		};
+	}
+
+	return parseAbuseResponse(jsonResult.value);
 };
 
 export const recommend =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
-	(commentId: number): Promise<boolean> => {
+	async (commentId: number): Promise<boolean> => {
 		const url =
 			joinUrl(
 				options.baseUrl,
@@ -278,14 +341,14 @@ export const recommend =
 		}).then((resp) => resp.ok);
 	};
 
-export const addUserName = (
+export const addUserName = async (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 	userName: string,
-): Promise<UserNameResponse> => {
+): Promise<Result<string, true>> => {
 	const url = options.idApiUrl + `/user/me/username`;
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-	return fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		body: JSON.stringify({
 			publicFields: {
@@ -295,40 +358,64 @@ export const addUserName = (
 		}),
 		headers: {
 			'Content-Type': 'application/json',
-			...(authOptions.headers !== undefined ? authOptions.headers : {}),
+			...authOptions.headers,
 		},
 		credentials: authOptions.credentials,
-	})
-		.then((resp) => resp.json())
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	});
+
+	if (jsonResult.kind === 'error') {
+		return jsonResult;
+	}
+
+	const result = safeParse(postUsernameResponseSchema, jsonResult.value);
+
+	if (!result.success) {
+		return { kind: 'error', error: 'An unknown error occured' };
+	}
+	if (result.output.status === 'error') {
+		return {
+			kind: 'error',
+			error: result.output.errors
+				.map(({ message }) => message)
+				.join('\n'),
+		};
+	}
+
+	return { kind: 'ok', value: true };
 };
 
-export const pickComment = (
+export const pickComment = async (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 	commentId: number,
-): Promise<CommentResponse> => {
+): Promise<Result<GetDiscussionError, true>> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'highlight') +
 		objAsParams(defaultParams);
 
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
-	return fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
-			...(authOptions.headers !== undefined ? authOptions.headers : {}),
+			...authOptions.headers,
 		},
 		credentials: authOptions.credentials,
-	})
-		.then((resp) => resp.json())
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	});
+
+	if (jsonResult.kind === 'error') return jsonResult;
+
+	const result = safeParse(pickResponseSchema, jsonResult.value);
+
+	if (!result.success) return { kind: 'error', error: 'ParsingError' };
+
+	return { kind: 'ok', value: true };
 };
 
-export const unPickComment = (
+export const unPickComment = async (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 	commentId: number,
-): Promise<CommentResponse> => {
+): Promise<Result<GetDiscussionError, false>> => {
 	const url =
 		joinUrl(
 			options.baseUrl,
@@ -336,27 +423,30 @@ export const unPickComment = (
 			commentId.toString(),
 			'unhighlight',
 		) + objAsParams(defaultParams);
-	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-	return fetch(url, {
+	const authOptions = getOptionsHeadersWithOkta(authStatus);
+	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
-			...(authOptions.headers !== undefined ? authOptions.headers : {}),
+			...authOptions.headers,
 		},
 		credentials: authOptions.credentials,
-	})
-		.then((resp) => resp.json())
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	});
+
+	if (jsonResult.kind === 'error') return jsonResult;
+
+	const result = safeParse(pickResponseSchema, jsonResult.value);
+
+	if (!result.success) return { kind: 'error', error: 'ParsingError' };
+
+	return { kind: 'ok', value: false };
 };
 
-export const getMoreResponses = (
+export const getMoreResponses = async (
 	commentId: number,
-): Promise<{
-	status: 'ok' | 'error';
-	comment: CommentType;
-}> => {
+): Promise<Result<GetDiscussionError, CommentType[]>> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment', commentId.toString()) +
 		objAsParams({
@@ -367,11 +457,13 @@ export const getMoreResponses = (
 			},
 		});
 
-	return fetch(url, {
+	const jsonResult = await fetchJSON(url, {
 		headers: {
 			...options.headers,
 		},
-	})
-		.then((resp) => resp.json())
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	});
+
+	if (jsonResult.kind === 'error') return jsonResult;
+
+	return parseCommentRepliesResponse(jsonResult.value);
 };

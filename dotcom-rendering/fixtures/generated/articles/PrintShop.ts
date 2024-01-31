@@ -395,8 +395,8 @@ export const PrintShop: DCRArticle = {
 						url: '/environment/climate-crisis',
 					},
 					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
+						title: 'Ukraine',
+						url: '/world/ukraine',
 					},
 					{
 						title: 'Football',
@@ -433,6 +433,10 @@ export const PrintShop: DCRArticle = {
 								longTitle: 'football/teams',
 							},
 						],
+					},
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
 					},
 					{
 						title: 'Business',
@@ -576,7 +580,7 @@ export const PrintShop: DCRArticle = {
 					},
 					{
 						title: 'Cartoons',
-						url: '/cartoons/archive',
+						url: '/tone/cartoons',
 					},
 					{
 						title: 'Opinion videos',
@@ -808,7 +812,7 @@ export const PrintShop: DCRArticle = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://app.adjust.com/16xt6hai',
 			},
 			{
 				title: 'Video',
@@ -948,11 +952,11 @@ export const PrintShop: DCRArticle = {
 			},
 			{
 				title: 'Live events',
-				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
 			},
 			{
-				title: 'Masterclasses',
-				url: '/guardian-masterclasses',
+				title: 'About Us',
+				url: '/about',
 			},
 			{
 				title: 'Digital Archive',
@@ -1671,7 +1675,7 @@ export const PrintShop: DCRArticle = {
 							],
 						},
 					],
-					elementId: 'e93115b3-a54b-4806-9b85-91dd06ec7faf',
+					elementId: '2ef3bf12-e028-4930-bc12-ea30805e46af',
 					position: 1,
 					lightbox: {
 						credit: 'Photograph: Gerry Cranham/Offside',
@@ -1680,42 +1684,42 @@ export const PrintShop: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
-					elementId: '76506b98-26c6-40a2-b11a-d0f217e3e8fd',
+					elementId: '0c4b4b61-0a7b-46c9-9d8c-8a02f6abae91',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
-					elementId: '81f95bfd-54fa-4b6b-ac62-12601d3c5259',
+					elementId: 'e6aad1be-0407-48f1-aa6e-7a996a1a78a5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Words: Jonny Weeks</em></p>',
-					elementId: '623b27f7-9312-4d28-a648-4fb721cb54fa',
+					elementId: 'd53b70bf-b310-403d-a44a-0552d2a224ea',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
-					elementId: 'd9e395b9-f566-4642-b577-0997a67a84e2',
+					elementId: '2939a3ae-840d-45cf-be61-d4fb867b2a2c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
-					elementId: '892f4138-d51b-4856-bfa2-c40667ff7fad',
+					elementId: '0dd0bb74-8ce2-4384-828a-bbc74338a779',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
-					elementId: '4f9c7533-cd11-441c-9ce9-a6f286c3283e',
+					elementId: 'e7363eee-0ed5-43ae-b937-f5ba5dd91b2e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
-					elementId: '99048de4-2943-4173-9897-4fb21c7eb596',
+					elementId: '5e6da508-3aca-4ab3-b4cf-6ce482c3d9f0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
-					elementId: '44940819-955b-4e5e-8293-91a12c5f490c',
+					elementId: 'fc2ca112-db64-49c2-a5e9-df5006cbf814',
 				},
 			],
 			attributes: {
@@ -1812,7 +1816,6 @@ export const PrintShop: DCRArticle = {
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
-			abPuzzlesBanner: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
 			compareVariantDecision: false,
@@ -1879,7 +1882,6 @@ export const PrintShop: DCRArticle = {
 			hostedVideoAutoplay: true,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
-			serverShareCounts: true,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,
@@ -1975,7 +1977,7 @@ export const PrintShop: DCRArticle = {
 			position: 1,
 			width: 3855,
 			height: 2755,
-			elementId: 'e93115b3-a54b-4806-9b85-91dd06ec7faf',
+			elementId: '2ef3bf12-e028-4930-bc12-ea30805e46af',
 			alt: 'Bobby Moore in 1973',
 			credit: 'Photograph: Gerry Cranham/Offside',
 			displayCredit: false,
@@ -1988,7 +1990,7 @@ export const PrintShop: DCRArticle = {
 			credit: 'Photograph: Gerry Cranham/Offside',
 			masterUrl:
 				'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg',
-			elementId: 'e93115b3-a54b-4806-9b85-91dd06ec7faf',
+			elementId: '2ef3bf12-e028-4930-bc12-ea30805e46af',
 		},
 	],
 };

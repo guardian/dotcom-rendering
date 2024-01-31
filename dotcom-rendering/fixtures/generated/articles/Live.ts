@@ -4500,7 +4500,6 @@ export const Live: DCRArticle = {
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
-			abPuzzlesBanner: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
 			compareVariantDecision: false,
@@ -4586,6 +4585,7 @@ export const Live: DCRArticle = {
 			inizio: true,
 			prebidHeaderBidding: true,
 			a9HeaderBidding: true,
+			lightbox: true,
 		},
 		keywordIds:
 			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',

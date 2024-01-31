@@ -1,6 +1,8 @@
+import type { GetDiscussionSuccess } from '../../src/types/discussion';
+
 export const shortDiscussion = {
 	status: 'ok',
-	page: 1,
+	currentPage: 1,
 	pages: 0,
 	pageSize: 100,
 	orderBy: 'oldest',
@@ -57,4 +59,4 @@ export const shortDiscussion = {
 			},
 		],
 	},
-};
+} satisfies GetDiscussionSuccess;

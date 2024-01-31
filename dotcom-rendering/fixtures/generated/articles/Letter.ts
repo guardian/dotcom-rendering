@@ -344,8 +344,8 @@ export const Letter: DCRArticle = {
 						url: '/environment/climate-crisis',
 					},
 					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
+						title: 'Ukraine',
+						url: '/world/ukraine',
 					},
 					{
 						title: 'Football',
@@ -382,6 +382,10 @@ export const Letter: DCRArticle = {
 								longTitle: 'football/teams',
 							},
 						],
+					},
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
 					},
 					{
 						title: 'Business',
@@ -525,7 +529,7 @@ export const Letter: DCRArticle = {
 					},
 					{
 						title: 'Cartoons',
-						url: '/cartoons/archive',
+						url: '/tone/cartoons',
 					},
 					{
 						title: 'Opinion videos',
@@ -757,7 +761,7 @@ export const Letter: DCRArticle = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://app.adjust.com/16xt6hai',
 			},
 			{
 				title: 'Video',
@@ -897,11 +901,11 @@ export const Letter: DCRArticle = {
 			},
 			{
 				title: 'Live events',
-				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
 			},
 			{
-				title: 'Masterclasses',
-				url: '/guardian-masterclasses',
+				title: 'About Us',
+				url: '/about',
 			},
 			{
 				title: 'Digital Archive',
@@ -928,6 +932,10 @@ export const Letter: DCRArticle = {
 		currentPillarTitle: 'Lifestyle',
 		subNavSections: {
 			links: [
+				{
+					title: 'Wellness',
+					url: '/wellness',
+				},
 				{
 					title: 'Fashion',
 					url: '/fashion',
@@ -1581,7 +1589,7 @@ export const Letter: DCRArticle = {
 					],
 				},
 			],
-			elementId: 'f5267243-b7d6-4ee0-8700-3ddcc98c87f9',
+			elementId: 'dd8282cf-70a7-46bb-af1b-457a01275815',
 			position: 1,
 			lightbox: {
 				caption:
@@ -1599,17 +1607,17 @@ export const Letter: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
-					elementId: 'ffdbeee3-2861-4531-90f8-fbddb7f6cc79',
+					elementId: '3581a25f-8127-457d-bc58-c68cd0604ff1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><span data-dcr-style="bullet"></span> In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
-					elementId: 'd601e8d2-679a-4252-a123-226b028c00ea',
+					elementId: '78d3a912-0a0f-427c-abbe-2ca6f0b2dcef',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<footer><p><span data-dcr-style="bullet"></span> Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p></footer>',
-					elementId: 'cb42489a-26dc-4027-9491-4e00fa32a9c0',
+					elementId: '7a1f8007-af0e-478a-aec0-4e5a7569087c',
 				},
 			],
 			attributes: {
@@ -1704,7 +1712,6 @@ export const Letter: DCRArticle = {
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
-			abPuzzlesBanner: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
 			compareVariantDecision: false,
@@ -1771,7 +1778,6 @@ export const Letter: DCRArticle = {
 			hostedVideoAutoplay: true,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
-			serverShareCounts: true,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,
@@ -1867,7 +1873,7 @@ export const Letter: DCRArticle = {
 			position: 1,
 			width: 1969,
 			height: 1569,
-			elementId: 'f5267243-b7d6-4ee0-8700-3ddcc98c87f9',
+			elementId: 'dd8282cf-70a7-46bb-af1b-457a01275815',
 			alt: 'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975.',
 			credit: 'Photograph: taken from picture library',
 			caption:
@@ -1884,7 +1890,7 @@ export const Letter: DCRArticle = {
 				'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
 			masterUrl:
 				'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
-			elementId: 'f5267243-b7d6-4ee0-8700-3ddcc98c87f9',
+			elementId: 'dd8282cf-70a7-46bb-af1b-457a01275815',
 		},
 	],
 };

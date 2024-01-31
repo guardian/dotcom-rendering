@@ -5,61 +5,6 @@ import { decideCollectionBranding } from './branding';
 const logo = {} as Branding['logo'];
 
 describe('decideCollectionBranding', () => {
-	it('use editorial badge (even with valid branding on cards) if series is defined', () => {
-		const cardBranding = {
-			brandingType: { name: 'paid-content' as const },
-			sponsorName: 'foo',
-			aboutThisLink: '',
-			logo,
-		};
-		const collectionBranding = decideCollectionBranding({
-			frontBranding: undefined,
-			couldDisplayFrontBranding: false,
-			seriesTag: 'politics/series/road-to-the-vote',
-			cards: [
-				{
-					properties: {
-						editionBrandings: [
-							{
-								edition: { id: 'UK' },
-								branding: cardBranding,
-							},
-						],
-					},
-				},
-				{
-					properties: {
-						editionBrandings: [
-							{
-								edition: { id: 'UK' },
-								branding: cardBranding,
-							},
-						],
-					},
-				},
-				{
-					properties: {
-						editionBrandings: [
-							{
-								edition: { id: 'UK' },
-								branding: cardBranding,
-							},
-						],
-					},
-				},
-			],
-			editionId: 'UK',
-			isContainerBranding: false,
-		});
-		expect(collectionBranding).toStrictEqual({
-			kind: 'editorial',
-			badge: {
-				imageSrc: `/static/frontend/badges/EUReferendumBadge.svg`,
-				href: `/politics/series/road-to-the-vote`,
-			},
-		});
-	});
-
 	it('picks branding from a card by their edition', () => {
 		const cards = [
 			{
@@ -90,7 +35,6 @@ describe('decideCollectionBranding', () => {
 		const ukBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards,
 			editionId: 'UK',
 			isContainerBranding: false,
@@ -110,7 +54,6 @@ describe('decideCollectionBranding', () => {
 		const usBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards,
 			editionId: 'US',
 			isContainerBranding: false,
@@ -139,7 +82,6 @@ describe('decideCollectionBranding', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards: [
 				{
 					properties: {
@@ -187,7 +129,6 @@ describe('decideCollectionBranding', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards: [
 				{
 					properties: {
@@ -235,7 +176,6 @@ describe('decideCollectionBranding', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards: [
 				{
 					properties: {
@@ -263,7 +203,6 @@ describe('decideCollectionBranding', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards: [
 				{
 					properties: {
@@ -327,7 +266,6 @@ describe('decideCollectionBranding', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards: [
 				{
 					properties: {
@@ -377,7 +315,6 @@ describe('decideCollectionBranding', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards: [
 				{
 					properties: {
@@ -435,7 +372,6 @@ describe('decideCollectionBranding', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards: [
 				{
 					properties: {
@@ -489,7 +425,6 @@ describe('decideCollectionBranding', () => {
 		const collectionBranding = decideCollectionBranding({
 			frontBranding: undefined,
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards: [
 				{
 					properties: {
@@ -548,7 +483,6 @@ describe('decideCollectionBranding', () => {
 				logo,
 			},
 			couldDisplayFrontBranding: true,
-			seriesTag: undefined,
 			cards: [],
 			editionId: 'UK',
 			isContainerBranding: false,
@@ -576,7 +510,6 @@ describe('decideCollectionBranding', () => {
 				logo,
 			},
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards: [],
 			editionId: 'UK',
 			isContainerBranding: false,
@@ -599,7 +532,6 @@ describe('decideCollectionBranding', () => {
 				logo,
 			},
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards: [
 				{
 					properties: {
@@ -659,7 +591,6 @@ describe('decideCollectionBranding', () => {
 				logo,
 			},
 			couldDisplayFrontBranding: false,
-			seriesTag: undefined,
 			cards: [
 				{
 					properties: {

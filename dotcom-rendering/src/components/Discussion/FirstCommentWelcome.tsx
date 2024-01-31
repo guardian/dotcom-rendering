@@ -1,33 +1,11 @@
 import { css } from '@emotion/react';
 import { headline, space, textSans } from '@guardian/source-foundations';
 import { Link, TextInput } from '@guardian/source-react-components';
-import { useEffect, useState } from 'react';
-import { preview as defaultPreview } from '../../lib/discussionApi';
+import { useState } from 'react';
 import { palette as schemedPalette } from '../../palette';
 import { PillarButton } from './PillarButton';
+import { Preview } from './Preview';
 import { Row } from './Row';
-
-type Props = {
-	body: string;
-	error?: string;
-	submitForm: (userName: string) => Promise<void>;
-	cancelSubmit: () => void;
-	onPreview?: (body: string) => Promise<string>;
-};
-
-const previewStyle = css`
-	padding: ${space[2]}px;
-	background-color: ${schemedPalette('--first-comment-preview')};
-	color: inherit;
-	margin-bottom: ${space[5]}px;
-	position: relative;
-	min-height: ${space[9]}px;
-
-	/* p is returned by API and this is the only way to apply styles */
-	p {
-		padding-left: ${space[2]}px;
-	}
-`;
 
 const textStyling = css`
 	${textSans.small()};
@@ -53,28 +31,20 @@ const textInputStyles = css`
 	color: inherit;
 `;
 
+type Props = {
+	error?: string;
+	submitForm: (userName: string) => Promise<void>;
+	cancelSubmit: () => void;
+	previewBody: string;
+};
+
 export const FirstCommentWelcome = ({
-	body,
 	error = '',
 	submitForm,
 	cancelSubmit,
-	onPreview,
+	previewBody,
 }: Props) => {
-	const [previewBody, setPreviewBody] = useState<string>('');
 	const [userName, setUserName] = useState<string>('');
-
-	useEffect(() => {
-		const fetchShowPreview = async () => {
-			try {
-				const preview = onPreview ?? defaultPreview;
-				const response = await preview(body);
-				setPreviewBody(response);
-			} catch (e) {
-				setPreviewBody('');
-			}
-		};
-		void fetchShowPreview();
-	}, [body, onPreview]);
 
 	return (
 		<div
@@ -139,10 +109,7 @@ export const FirstCommentWelcome = ({
 					Please preview your comment below and click ‘post’ when
 					you’re happy with it.
 				</Text>
-				<div
-					css={[previewStyle, textStyling]}
-					dangerouslySetInnerHTML={{ __html: previewBody || '' }}
-				/>
+				<Preview previewHtml={previewBody} showSpout={false} />
 				<Row>
 					<PillarButton
 						onClick={() => void submitForm(userName)}

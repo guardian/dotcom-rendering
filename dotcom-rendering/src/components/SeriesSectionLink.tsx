@@ -9,9 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { palette as themePalette } from '../palette';
-import type { DCRBadgeType } from '../types/badge';
 import type { TagType } from '../types/tag';
-import { Badge } from './Badge';
 import { Hide } from './Hide';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
@@ -22,7 +20,6 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	badge?: DCRBadgeType;
 	isMatch?: boolean;
 };
 
@@ -139,12 +136,6 @@ const breakWord = css`
 	word-break: break-word;
 `;
 
-const titleBadgeWrapper = css`
-	margin-bottom: ${space[1]}px;
-	margin-top: ${space[1]}px;
-	margin-right: ${space[2]}px;
-`;
-
 const sectionPadding = css`
 	padding-left: 10px;
 	${from.mobileLandscape} {
@@ -155,28 +146,12 @@ const sectionPadding = css`
 	}
 `;
 
-const immersiveTitleBadgeStyle = css`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	padding-bottom: 0px;
-	max-width: max-content;
-	line-height: 1.15;
-	/* Offset parent container margins when Immersive */
-	margin-bottom: -10px;
-	background-color: ${themePalette('--series-title-background')};
-	box-shadow:
-		-6px 0 0 0 ${themePalette('--series-title-background')},
-		6px 0 0 0 ${themePalette('--series-title-background')};
-`;
-
 export const SeriesSectionLink = ({
 	format,
 	tags,
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
-	badge,
 	isMatch,
 }: Props) => {
 	const observerTag = tags.find(
@@ -215,7 +190,7 @@ export const SeriesSectionLink = ({
 						// We have a tag, we're not immersive, show both series and section titles
 						return (
 							// Sometimes the tags/titles are shown inline, sometimes stacked
-							<div css={!badge && rowBelowLeftCol(format)}>
+							<div css={rowBelowLeftCol(format)}>
 								<a
 									href={`${guardianBaseURL}/${tag.id}`}
 									css={[
@@ -319,28 +294,14 @@ export const SeriesSectionLink = ({
 						const title = tag?.title ? tag.title : sectionLabel;
 						const linkExt = tag?.id ? tag.id : sectionUrl;
 						return (
-							<div css={badge && immersiveTitleBadgeStyle}>
-								{badge && (
-									<div
-										css={[
-											titleBadgeWrapper,
-											sectionPadding,
-										]}
-									>
-										<Badge
-											imageSrc={badge.imageSrc}
-											href={badge.href}
-										/>
-									</div>
-								)}
-
+							<div>
 								<a
 									css={[
 										sectionLabelLink,
 										fontStyles(format),
 										invertedStyle,
 										breakWord,
-										!badge && sectionPadding,
+										sectionPadding,
 										css`
 											color: ${titleColour};
 											background-color: ${themePalette(
@@ -379,7 +340,7 @@ export const SeriesSectionLink = ({
 				// We have a tag, we're not immersive, show both series and section titles
 				return (
 					// Sometimes the tags/titles are shown inline, sometimes stacked
-					<div css={!badge && rowBelowLeftCol(format)}>
+					<div css={rowBelowLeftCol(format)}>
 						<Hide when="above" breakpoint="desktop">
 							{format.design === ArticleDesign.LiveBlog && (
 								<span

@@ -3,6 +3,7 @@ import type { ConsentState } from '@guardian/consent-management-platform/dist/ty
 import { body, palette, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import type { Switches } from '../../src/types/config';
 import { trackVideoInteraction } from '../client/ga/ga';
 import { getOphan } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
@@ -33,6 +34,7 @@ type Props = {
 	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
 	showTextOverlay?: boolean;
+	switches?: Switches;
 };
 
 const expiredOverlayStyles = (overrideImage?: string) =>
@@ -108,6 +110,7 @@ export const YoutubeBlockComponent = ({
 	kickerText,
 	pauseOffscreenVideo = false,
 	showTextOverlay,
+	switches,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -118,9 +121,12 @@ export const YoutubeBlockComponent = ({
 
 	const abTests = useAB();
 	const abTestsApi = abTests?.api;
-	const imaEnabled =
-		abTestsApi?.isUserInVariant('IntegrateIma', 'variant') ?? false;
 	const abTestParticipations = abTests?.participations ?? {};
+
+	const imaAbTest =
+		abTestsApi?.isUserInVariant('IntegrateIma', 'variant') ?? false;
+	const imaSwitch = switches?.youtubeIma ?? false;
+	const imaEnabled = imaAbTest || imaSwitch;
 
 	const [index, setIndex] = useState<number>();
 

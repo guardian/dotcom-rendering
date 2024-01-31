@@ -242,25 +242,6 @@ export const TreatsStory = () => {
 };
 TreatsStory.storyName = 'with treats and date header';
 
-export const WithEditorialBadge = () => {
-	return (
-		<FrontSection
-			title="Section"
-			discussionApiUrl={discussionApiUrl}
-			collectionBranding={{
-				kind: 'editorial',
-				badge: {
-					href: 'world/series/the-new-arrivals',
-					imageSrc: 'badges/new-arrivals.png',
-				},
-			}}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
-};
-WithEditorialBadge.storyName = 'with editorial badge';
-
 /**
  * Use the same logo for each of the stories with branding
  */

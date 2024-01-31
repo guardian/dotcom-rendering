@@ -1275,11 +1275,12 @@ export namespace google {
 			/**
 			 * Displays the "Ad" text in the ad UI. Must be present to show the countdown timer.
 			 */
-			AdAttribution = 'adAttribution',
+			// eslint-disable-next-line @typescript-eslint/naming-convention -- this is the correct key
+			AD_ATTRIBUTION = 'adAttribution',
 			/**
 			 * Ad attribution is required for a countdown timer to be displayed. Both UiElements.COUNTDOWN and UiElements.AD_ATTRIBUTION must be present in AdsRenderingSettings.uiElements.
 			 */
-			Countdown = 'countdown',
+			COUNTDOWN = 'countdown',
 		}
 
 		/**

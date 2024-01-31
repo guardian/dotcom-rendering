@@ -30,18 +30,24 @@ jobs:
       # We want to avoid uploading the uncompressed files to our riffraff bucket
       # so we create our tarball outside the rendering/ folder, then delete the contents of rendering/
       # and finally move the tarball into rendering
-      - name: Compress existing rendering server files
+      - name: Compress rendering app server files
         run: |
           tar -zcf rendering.tar.gz rendering
           rm -r rendering/*
           mv rendering.tar.gz rendering/
 
       # TODO - add other rendering apps when ready
-      - name: Compress article-rendering server files
+      - name: Compress article-rendering app server files
         run: |
           tar -zcf article-rendering.tar.gz article-rendering
           rm -r article-rendering/*
           mv article-rendering.tar.gz article-rendering/
+
+      - name: Compress facia-rendering app server files
+        run: |
+          tar -zcf facia-rendering.tar.gz facia-rendering
+          rm -r facia-rendering/*
+          mv facia-rendering.tar.gz facia-rendering/
 
       - uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -49,33 +55,25 @@ jobs:
           role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           mask-aws-account-id: true
 
-      # Existing rendering app deployment
-      - name: Upload existing rendering app to RiffRaff
+      # All rendering apps deployment
+      - name: Upload rendering apps to RiffRaff
         uses: guardian/actions-riff-raff@v3
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          projectName: dotcom:rendering
-          configPath: riff-raff-rendering.yaml
-          buildNumberOffset: 38860
+          projectName: dotcom:rendering-all
+          configPath: riff-raff.yaml
           contentDirectories: |
             rendering-cfn:
               - rendering-cfn
             rendering:
               - rendering
-            frontend-static:
-              - frontend-static
-
-      # All (new) rendering apps deployment
-      - name: Upload (new) rendering apps to RiffRaff
-        uses: guardian/actions-riff-raff@v3
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          projectName: dotcom:rendering-all
-          configPath: riff-raff-rendering-all.yaml
-          contentDirectories: |
             article-rendering-cfn:
               - article-rendering-cfn
             article-rendering:
               - article-rendering
+            facia-rendering-cfn:
+              - facia-rendering-cfn
+            facia-rendering:
+              - facia-rendering
             frontend-static:
               - frontend-static

@@ -2,7 +2,8 @@ import { joinUrl } from '@guardian/libs';
 import { getOptionsHeadersWithOkta } from '../lib/identity';
 import { useApi } from '../lib/useApi';
 import { useAuthStatus } from '../lib/useAuthStatus';
-import { useDiscussion } from '../lib/useDiscussion';
+import { useCommentCount } from '../lib/useCommentCount';
+import type { GetDiscussionSuccess, UserProfile } from '../types/discussion';
 import { SignedInAs } from './SignedInAs';
 
 type Props = {
@@ -17,12 +18,18 @@ export const DiscussionMeta = ({
 	enableDiscussionSwitch,
 }: Props) => {
 	const authStatus = useAuthStatus();
+	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
-	const { commentCount, isClosedForComments } = useDiscussion(
+	const { data: discussionData } = useApi<GetDiscussionSuccess>(
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
+		{
+			// The default for dedupingInterval is 2 seconds but we want to wait longer here because the cache time
+			// for a discussion is at least 15 seconds
+			dedupingInterval: 8000,
+		},
 	);
 
-	const { data } = useApi<{ userProfile: UserProfile }>(
+	const { data: userData } = useApi<{ userProfile: UserProfile }>(
 		authStatus.kind === 'SignedInWithOkta' ||
 			authStatus.kind === 'SignedInWithCookies'
 			? joinUrl(
@@ -40,9 +47,9 @@ export const DiscussionMeta = ({
 	return (
 		<SignedInAs
 			enableDiscussionSwitch={enableDiscussionSwitch}
-			user={data?.userProfile}
+			user={userData?.userProfile}
 			commentCount={commentCount}
-			isClosedForComments={isClosedForComments}
+			isClosedForComments={discussionData?.discussion.isClosedForComments}
 		/>
 	);
 };

@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import type { comment, preview, reply } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
 import type {
-	CommentResponse,
 	CommentType,
 	SignedInUser,
 	ThreadsType,
@@ -27,13 +27,19 @@ type Props = {
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
 	onRecommend?: (commentId: number) => Promise<boolean>;
-	onComment?: (shortUrl: string, body: string) => Promise<CommentResponse>;
-	onReply?: (
-		shortUrl: string,
-		body: string,
-		parentCommentId: number,
-	) => Promise<CommentResponse>;
-	onPreview?: (body: string) => Promise<string>;
+	onComment?: ReturnType<typeof comment>;
+	onReply?: ReturnType<typeof reply>;
+	onPreview?: typeof preview;
+	showPreview: boolean;
+	setShowPreview: (showPreview: boolean) => void;
+	isCommentFormActive: boolean;
+	setIsCommentFormActive: (isActive: boolean) => void;
+	error: string;
+	setError: (error: string) => void;
+	userNameMissing: boolean;
+	setUserNameMissing: (isUserNameMissing: boolean) => void;
+	previewBody: string;
+	setPreviewBody: (previewBody: string) => void;
 };
 
 const nestingStyles = css`
@@ -85,6 +91,16 @@ export const CommentContainer = ({
 	onComment,
 	onReply,
 	onPreview,
+	showPreview,
+	setShowPreview,
+	isCommentFormActive,
+	setIsCommentFormActive,
+	error,
+	setError,
+	userNameMissing,
+	setUserNameMissing,
+	previewBody,
+	setPreviewBody,
 }: Props) => {
 	// Filter logic
 	const [expanded, setExpanded] = useState<boolean>(threads === 'expanded');
@@ -110,9 +126,13 @@ export const CommentContainer = ({
 	const expand = (commentId: number) => {
 		setLoading(true);
 		getMoreResponses(commentId)
-			.then((json) => {
+			.then((result) => {
+				if (result.kind === 'error') {
+					console.error(result.error);
+					return;
+				}
 				setExpanded(true);
-				setResponses(json.comment.responses ?? []);
+				setResponses(result.value);
 			})
 			.finally(() => {
 				setLoading(false);
@@ -134,6 +154,8 @@ export const CommentContainer = ({
 				toggleMuteStatus={toggleMuteStatus}
 				onPermalinkClick={onPermalinkClick}
 				onRecommend={onRecommend}
+				error={error}
+				setError={setError}
 			/>
 
 			<>
@@ -161,6 +183,8 @@ export const CommentContainer = ({
 										)}
 										toggleMuteStatus={toggleMuteStatus}
 										onPermalinkClick={onPermalinkClick}
+										error={error}
+										setError={setError}
 									/>
 								</li>
 							))}
@@ -219,9 +243,17 @@ export const CommentContainer = ({
 									setCommentBeingRepliedTo
 								}
 								commentBeingRepliedTo={commentBeingRepliedTo}
-								onComment={onComment}
-								onReply={onReply}
 								onPreview={onPreview}
+								showPreview={showPreview}
+								setShowPreview={setShowPreview}
+								isActive={isCommentFormActive}
+								setIsActive={setIsCommentFormActive}
+								error={error}
+								setError={setError}
+								userNameMissing={userNameMissing}
+								setUserNameMissing={setUserNameMissing}
+								previewBody={previewBody}
+								setPreviewBody={setPreviewBody}
 							/>
 						</div>
 					)}

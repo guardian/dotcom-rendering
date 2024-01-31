@@ -1,6 +1,31 @@
 import type { AdsConfig } from '@guardian/commercial';
 import { log } from '@guardian/libs';
-import { loadYouTubeAPI } from './loadYouTubeIframeApi';
+import type { google } from './ima';
+import { loadYouTubeAPI } from './loadYouTubeApi';
+
+declare global {
+	// eslint-disable-next-line @typescript-eslint/no-namespace -- YT types are in a namespace
+	namespace YT {
+		export class ImaManager {
+			getAdsLoader: () => google.ima.AdsLoader;
+			getAdsManager: () => google.ima.AdsManager;
+		}
+		export const createPlayerForPublishers: (
+			id: string,
+			makeAdsRequestCallback: (
+				adsRequest: { adTagUrl: string },
+				adsRenderingSettings: google.ima.AdsRenderingSettings,
+			) => void,
+			config: {
+				youtubeOptions: PlayerOptions;
+			},
+			onPlayerReadyCallback: (
+				player: Player,
+				imaManager: ImaManager,
+			) => void,
+		) => void;
+	}
+}
 
 type EmbedConfig = {
 	embedConfig: {
@@ -12,28 +37,103 @@ type EmbedConfig = {
 
 type PlayerOptions = YT.PlayerOptions & EmbedConfig;
 
-// PlayerEvent, OnStateChangeEvent, etc.
-export type PlayerListenerName = keyof YT.Events;
+type PlayerListenerName = keyof YT.Events;
 
-export class YouTubePlayer {
-	playerPromise: Promise<YT.Player>;
-	private _player?: YT.Player;
+type PlayerReadyCallback = () => void;
 
-	constructor(id: string, playerOptions: PlayerOptions) {
-		this.playerPromise = this.setPlayer(id, playerOptions);
+type AdsRequestCallback = (
+	adsRequest: { adTagUrl: string },
+	adsRenderingSettings: google.ima.AdsRenderingSettings,
+) => void;
+
+type SetPlayerResolve = {
+	player: YT.Player;
+	imaManager?: YT.ImaManager;
+};
+
+type YouTubePlayerArgs = {
+	id: string;
+	youtubeOptions: PlayerOptions;
+	onReadyListener: PlayerReadyCallback;
+	enableIma: boolean;
+	imaAdsRequestCallback: AdsRequestCallback;
+	imaAdManagerListeners: (imaManager: YT.ImaManager) => void;
+};
+
+class YouTubePlayer {
+	playerPromise: Promise<SetPlayerResolve>;
+	private player?: YT.Player;
+
+	constructor({
+		id,
+		youtubeOptions,
+		onReadyListener,
+		enableIma,
+		imaAdsRequestCallback,
+		imaAdManagerListeners,
+	}: YouTubePlayerArgs) {
+		this.playerPromise = this.setPlayer(
+			id,
+			youtubeOptions,
+			onReadyListener,
+			enableIma,
+			imaAdsRequestCallback,
+			imaAdManagerListeners,
+		);
 	}
 
-	private async setPlayer(id: string, playerOptions: PlayerOptions) {
-		const YTAPI = await loadYouTubeAPI(playerOptions.embedConfig.enableIma);
-		const playerPromise = new Promise<YT.Player>((resolve, reject) => {
-			try {
-				this._player = new YTAPI.Player(id, playerOptions);
-				resolve(this._player);
-			} catch (e) {
-				this.logError(e as Error);
-				reject(e);
-			}
-		});
+	private async setPlayer(
+		id: string,
+		youtubeOptions: PlayerOptions,
+		onReadyListener: PlayerReadyCallback,
+		enableIma: boolean,
+		imaAdsRequestCallback: AdsRequestCallback,
+		imaAdManagerListeners: (imaManager: YT.ImaManager) => void,
+	) {
+		const YTAPI = await loadYouTubeAPI(enableIma);
+		const playerPromise = new Promise<SetPlayerResolve>(
+			(resolve, reject) => {
+				try {
+					/**
+					 * If enableIma is true, YT.createPlayerForPublishers will be called
+					 * If enableIma is false, the standard new YT.Player constructor will be called
+					 * Listeners are set at expected place for each method
+					 */
+					if (enableIma) {
+						YTAPI.createPlayerForPublishers(
+							id,
+							imaAdsRequestCallback,
+							{
+								youtubeOptions,
+							},
+							// onReady callback for YT.createPlayerForPublishers
+							(player, imaManager) => {
+								this.player = player;
+								imaAdManagerListeners(imaManager);
+								onReadyListener();
+								resolve({
+									player,
+									imaManager,
+								});
+							},
+						);
+					} else {
+						this.player = new YTAPI.Player(id, {
+							...youtubeOptions,
+							events: {
+								onReady: onReadyListener,
+								onStateChange:
+									youtubeOptions.events?.onStateChange,
+							},
+						});
+						resolve({ player: this.player });
+					}
+				} catch (e) {
+					this.logError(e as Error);
+					reject(e);
+				}
+			},
+		);
 		return playerPromise;
 	}
 
@@ -43,7 +143,7 @@ export class YouTubePlayer {
 
 	getPlayerState(): Promise<YT.PlayerState | void> {
 		return this.playerPromise
-			.then((player) => {
+			.then(({ player }) => {
 				return player.getPlayerState();
 			})
 			.catch((e: Error) => this.logError(e));
@@ -51,7 +151,7 @@ export class YouTubePlayer {
 
 	playVideo(): Promise<void> {
 		return this.playerPromise
-			.then((player) => {
+			.then(({ player }) => {
 				player.playVideo();
 			})
 			.catch((e: Error) => this.logError(e));
@@ -59,7 +159,7 @@ export class YouTubePlayer {
 
 	pauseVideo(): Promise<void> {
 		return this.playerPromise
-			.then((player) => {
+			.then(({ player }) => {
 				player.pauseVideo();
 			})
 			.catch((e: Error) => this.logError(e));
@@ -67,7 +167,7 @@ export class YouTubePlayer {
 
 	stopVideo(): Promise<void> {
 		return this.playerPromise
-			.then((player) => {
+			.then(({ player }) => {
 				player.stopVideo();
 			})
 			.catch((e: Error) => this.logError(e));
@@ -79,9 +179,11 @@ export class YouTubePlayer {
 	): void {
 		/**
 		 * If the YouTube API hasn't finished loading,
-		 * this._player may be undefined in which case removeEventListener
+		 * this.player may be undefined in which case removeEventListener
 		 * will fail silently.
 		 */
-		this._player?.removeEventListener<T>(eventName, listener);
+		this.player?.removeEventListener<T>(eventName, listener);
 	}
 }
+
+export { PlayerListenerName, YouTubePlayer };

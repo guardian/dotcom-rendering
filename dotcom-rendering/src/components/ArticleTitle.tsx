@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { from, until } from '@guardian/source-foundations';
-import type { DCRBadgeType } from '../types/badge';
+import { from } from '@guardian/source-foundations';
 import type { TagType } from '../types/tag';
-import { Badge } from './Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
@@ -12,7 +10,6 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	badge?: DCRBadgeType;
 	isMatch?: boolean;
 };
 
@@ -23,25 +20,6 @@ const sectionStyles = css`
 	${from.leftCol} {
 		flex-direction: column;
 	}
-`;
-
-const titleBadgeWrapper = css`
-	margin-bottom: 6px;
-	margin-top: 6px;
-	${until.leftCol} {
-		display: flex;
-		margin-right: 10px;
-	}
-`;
-
-const badgeContainer = css`
-	display: flex;
-	padding-top: 3px;
-	padding-bottom: 6px;
-`;
-
-const marginTop = css`
-	margin-top: 6px;
 `;
 
 const immersiveMargins = css`
@@ -65,18 +43,11 @@ export const ArticleTitle = ({
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
-	badge,
 	isMatch,
 }: Props) => (
-	<div css={[sectionStyles, badge && badgeContainer]}>
-		{badge && format.display !== ArticleDisplay.Immersive && (
-			<div css={titleBadgeWrapper}>
-				<Badge imageSrc={badge.imageSrc} href={badge.href} />
-			</div>
-		)}
+	<div css={[sectionStyles]}>
 		<div
 			css={[
-				badge && marginTop,
 				format.display === ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.PrintShop &&
 					immersiveMargins,
@@ -88,7 +59,6 @@ export const ArticleTitle = ({
 				sectionLabel={sectionLabel}
 				sectionUrl={sectionUrl}
 				guardianBaseURL={guardianBaseURL}
-				badge={badge}
 				isMatch={isMatch}
 			/>
 		</div>

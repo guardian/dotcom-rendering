@@ -11,6 +11,8 @@
  *    gen-fixtures.js directly.
  */
 
+import type { MatchReportType } from '../../src/types/matchReport';
+
 export const matchReport: MatchReportType = {
 	id: '4287704',
 	isResult: true,

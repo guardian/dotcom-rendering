@@ -27,8 +27,10 @@ const basicCardProps: CardProps = {
 		'The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives',
 	headlineSize: 'medium',
 	kickerText: '',
-	imageUrl:
-		'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg',
+	image: {
+		src: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg',
+		altText: 'some alt text',
+	},
 	imagePosition: 'top',
 	isExternalLink: false,
 	showLivePlayable: false,

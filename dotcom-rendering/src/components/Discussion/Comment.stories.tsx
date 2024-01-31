@@ -104,6 +104,11 @@ const longBothReplyCommentData: CommentType = {
 	},
 };
 
+const commentResponseError = {
+	kind: 'error',
+	error: { code: 'NetworkError', message: 'Mocked' },
+} as const;
+
 const user: SignedInUser = {
 	profile: {
 		userId: 'abc123',
@@ -119,6 +124,8 @@ const user: SignedInUser = {
 			hasCommented: true,
 		},
 	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseError),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -137,6 +144,8 @@ const staffUser: SignedInUser = {
 			hasCommented: true,
 		},
 	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseError),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -155,6 +164,8 @@ export const Root = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 Root.storyName = 'A root comment on desktop view';
@@ -175,6 +186,8 @@ export const RootMobile = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 RootMobile.storyName = 'A root comment on mobile view';
@@ -205,6 +218,8 @@ export const ReplyComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 ReplyComment.storyName = 'A reply on desktop view';
@@ -235,6 +250,8 @@ export const MobileReply = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 MobileReply.storyName = 'A reply on mobile view';
@@ -265,6 +282,8 @@ export const LongMobileReply = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 LongMobileReply.storyName = 'A long username reply on mobile view';
@@ -295,6 +314,8 @@ export const LongBothMobileReply = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 LongBothMobileReply.storyName = 'Both long usernames replying on mobile view';
@@ -328,6 +349,8 @@ export const PickedComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 PickedComment.storyName = 'Picked Comment';
@@ -352,6 +375,8 @@ export const StaffUserComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 StaffUserComment.storyName = 'Staff User Comment';
@@ -376,6 +401,8 @@ export const ContributorUserComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 ContributorUserComment.storyName = 'Contributor User Comment';
@@ -403,6 +430,8 @@ export const PickedStaffUserComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 PickedStaffUserComment.storyName = 'with staff and picked badges on desktop';
@@ -428,6 +457,8 @@ export const PickedStaffUserCommentMobile = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 PickedStaffUserCommentMobile.storyName =
@@ -462,6 +493,8 @@ export const ContributorUserCommentDesktop = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 ContributorUserCommentDesktop.storyName =
@@ -488,6 +521,8 @@ export const ContributorUserCommentMobile = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 ContributorUserCommentMobile.storyName =
@@ -520,6 +555,8 @@ export const LoggedInAsModerator = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 LoggedInAsModerator.storyName = 'Logged in as moderator';
@@ -545,6 +582,8 @@ export const LoggedInAsUser = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 LoggedInAsUser.storyName = 'Logged in as normal user';
@@ -569,6 +608,8 @@ export const BlockedComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 BlockedComment.storyName = 'Blocked comment';
@@ -593,6 +634,8 @@ export const MutedComment = () => (
 		isMuted={true}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 MutedComment.storyName = 'Muted comment';
@@ -617,6 +660,8 @@ export const ClosedForComments = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
+		error={''}
+		setError={() => {}}
 	/>
 );
 ClosedForComments.storyName = 'A closed comment on desktop view';

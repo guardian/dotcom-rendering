@@ -2,8 +2,7 @@ import { resets, palette as sourcePalette } from '@guardian/source-foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
-import { getFontsCss } from '../lib/fonts-css';
-import { getHttp3Url } from '../lib/getHttp3Url';
+import { fontsCss } from '../lib/fonts-css';
 import type { Guardian } from '../model/guardian';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { GIT_COMMIT_HASH } from './prout';
@@ -22,7 +21,6 @@ type BaseProps = {
 	initTwitter?: string;
 	canonicalUrl?: string;
 	renderingTarget: RenderingTarget;
-	offerHttp3: boolean;
 	hasPageSkin?: boolean;
 	weAreHiring: boolean;
 };
@@ -36,21 +34,21 @@ interface AppProps extends BaseProps {
 	renderingTarget: 'Apps';
 }
 
-const getFontPreloadTags = (offerHttp3: boolean) => {
-	/**
-	 * Preload the following woff2 font files
-	 * TODO: Identify critical fonts to preload
-	 */
-	const fontFiles = [
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
-	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
+/**
+ * Preload the following woff2 font files
+ * TODO: Identify critical fonts to preload
+ */
+const fontFiles = [
+	'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
+	'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
+] as const;
 
-	return fontFiles.map(
+const fontPreloadTags = fontFiles
+	.map(
 		(fontFile) =>
 			`<link rel="preload" href="${fontFile}" as="font" crossorigin>`,
-	);
-};
+	)
+	.join('\n');
 
 export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	const {
@@ -67,7 +65,6 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		initTwitter,
 		canonicalUrl,
 		renderingTarget,
-		offerHttp3,
 		hasPageSkin = false,
 		weAreHiring,
 	} = props;
@@ -246,11 +243,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: '<!-- no Amp link -->'
 				}
 
-				${
-					renderingTarget === 'Web'
-						? getFontPreloadTags(props.offerHttp3).join('\n')
-						: ''
-				}
+				${renderingTarget === 'Web' ? fontPreloadTags : ''}
 
                 ${openGraphMetaTags ?? '<!-- no Open Graph meta tags -->'}
 
@@ -369,7 +362,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: ''
 				}
                 ${scriptTags.join('\n')}
-                <style class="webfont">${getFontsCss(offerHttp3)}</style>
+                <style class="webfont">${fontsCss}</style>
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">

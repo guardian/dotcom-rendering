@@ -332,8 +332,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
-	const showComments = isWeb && article.isCommentable && !isPaidContent;
+	const showComments = article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
@@ -570,7 +569,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge?.enhanced}
 								isMatch={!!footballMatchUrl}
 							/>
 						</GridItem>
@@ -839,7 +837,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										article.showBottomSocialButtons &&
 										renderingTarget === 'Web'
 									}
-									badge={article.badge?.enhanced}
 								/>
 							</ArticleContainer>
 						</GridItem>
@@ -1083,9 +1080,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								}
 								remoteBannerSwitch={
 									!!article.config.switches.remoteBanner
-								}
-								puzzleBannerSwitch={
-									!!article.config.switches.puzzlesBanner
 								}
 								tags={article.tags}
 							/>

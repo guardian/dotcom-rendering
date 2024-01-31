@@ -246,8 +246,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
-	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
-	const showComments = isWeb && article.isCommentable && !isPaidContent;
+	const showComments = article.isCommentable && !isPaidContent;
 
 	const mainMedia = article.mainMediaElements[0];
 
@@ -430,7 +429,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
-									badge={article.badge?.enhanced}
 								/>
 							</Section>
 							<Box>
@@ -520,7 +518,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											guardianBaseURL={
 												article.guardianBaseURL
 											}
-											badge={article.badge?.enhanced}
 										/>
 									</div>
 								)}
@@ -766,7 +763,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									showBottomSocialButtons={
 										article.showBottomSocialButtons && isWeb
 									}
-									badge={article.badge?.enhanced}
 								/>
 							</ArticleContainer>
 						</GridItem>
@@ -1007,9 +1003,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								}
 								remoteBannerSwitch={
 									!!article.config.switches.remoteBanner
-								}
-								puzzleBannerSwitch={
-									!!article.config.switches.puzzlesBanner
 								}
 								tags={article.tags}
 							/>

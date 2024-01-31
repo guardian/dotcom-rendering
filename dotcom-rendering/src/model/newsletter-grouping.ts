@@ -12,6 +12,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Get started',
 			newsletters: [
 				'morning-briefing', // First Edition
+				'saturday-edition',
 				'word-of-mouth', // Feast
 				'this-is-europe',
 				'the-guide-staying-in',
@@ -107,6 +108,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Get started',
 			newsletters: [
 				'us-morning-newsletter', // First Thing
+				'saturday-edition',
 				'today-us', // Headlines US
 				'trump-on-trial',
 				'reclaim-your-brain',
@@ -190,6 +192,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'International correspondents',
 			newsletters: [
 				'morning-briefing', // First Edition
+				'saturday-edition',
 				'morning-mail',
 				'afternoon-update',
 				'first-dog',
@@ -204,6 +207,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'morning-mail',
 				'afternoon-update',
+				'saturday-edition',
 				'first-dog',
 				'the-rural-network',
 				'reclaim-your-brain',

@@ -434,8 +434,8 @@ export const Picture: DCRArticle = {
 						url: '/environment/climate-crisis',
 					},
 					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
+						title: 'Ukraine',
+						url: '/world/ukraine',
 					},
 					{
 						title: 'Football',
@@ -472,6 +472,10 @@ export const Picture: DCRArticle = {
 								longTitle: 'football/teams',
 							},
 						],
+					},
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
 					},
 					{
 						title: 'Business',
@@ -615,7 +619,7 @@ export const Picture: DCRArticle = {
 					},
 					{
 						title: 'Cartoons',
-						url: '/cartoons/archive',
+						url: '/tone/cartoons',
 					},
 					{
 						title: 'Opinion videos',
@@ -847,7 +851,7 @@ export const Picture: DCRArticle = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://app.adjust.com/16xt6hai',
 			},
 			{
 				title: 'Video',
@@ -987,11 +991,11 @@ export const Picture: DCRArticle = {
 			},
 			{
 				title: 'Live events',
-				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
 			},
 			{
-				title: 'Masterclasses',
-				url: '/guardian-masterclasses',
+				title: 'About Us',
+				url: '/about',
 			},
 			{
 				title: 'Digital Archive',
@@ -1028,7 +1032,7 @@ export const Picture: DCRArticle = {
 				},
 				{
 					title: 'Cartoons',
-					url: '/cartoons/archive',
+					url: '/tone/cartoons',
 				},
 				{
 					title: 'Opinion videos',
@@ -1121,8 +1125,7 @@ export const Picture: DCRArticle = {
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
 	},
-	standfirst:
-		'<p>Former adviser Dominic Cummings has alleged that Boris Johnson hatched a ‘possibly illegal’ plan for donors to pay to renovate his flat</p>\n<ul>\n <li><a href="https://www.theguardian.com/politics/2022/feb/09/what-we-know-boris-johnson-downing-street-flat-renovation">What do we know about Boris Johnson’s Downing Street flat renovation?</a></li>\n</ul>',
+	standfirst: '',
 	sectionUrl: 'politics/boris-johnson',
 	pageId: 'commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 	version: 3,
@@ -1653,7 +1656,7 @@ export const Picture: DCRArticle = {
 					],
 				},
 			],
-			elementId: '874a4854-821b-412c-af9d-68f7312ad5a0',
+			elementId: 'ab1de12d-941d-4420-87fb-57990a02b6ba',
 			position: 1,
 			lightbox: {
 				credit: 'Illustration: Nicola Jennings/The Guardian',
@@ -1739,7 +1742,6 @@ export const Picture: DCRArticle = {
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
-			abPuzzlesBanner: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
 			compareVariantDecision: false,
@@ -1806,7 +1808,6 @@ export const Picture: DCRArticle = {
 			hostedVideoAutoplay: true,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
-			serverShareCounts: true,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,
@@ -1902,7 +1903,7 @@ export const Picture: DCRArticle = {
 			position: 1,
 			width: 3031,
 			height: 1819,
-			elementId: '874a4854-821b-412c-af9d-68f7312ad5a0',
+			elementId: 'ab1de12d-941d-4420-87fb-57990a02b6ba',
 			alt: "Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with 'Sleaze' paint",
 			credit: 'Illustration: Nicola Jennings/The Guardian',
 			displayCredit: true,
@@ -1915,7 +1916,7 @@ export const Picture: DCRArticle = {
 			credit: 'Illustration: Nicola Jennings/The Guardian',
 			masterUrl:
 				'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg',
-			elementId: '874a4854-821b-412c-af9d-68f7312ad5a0',
+			elementId: 'ab1de12d-941d-4420-87fb-57990a02b6ba',
 		},
 	],
 };

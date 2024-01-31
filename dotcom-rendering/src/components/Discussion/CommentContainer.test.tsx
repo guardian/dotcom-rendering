@@ -2,23 +2,33 @@ import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
+import type { Result } from '../../lib/result';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
 mockRESTCalls();
 
-// @ts-expect-error -- We know this is not `undefined`
-const firstCommentResponse: CommentType = comment.responses[0];
+const firstCommentResponse = comment.responses[0];
 
-const commentWithReply: CommentType = {
+const commentWithReply = {
 	...comment,
 	responses: [firstCommentResponse],
-};
+} satisfies CommentType;
 
-const commentWithoutReply: CommentType = {
+const commentWithoutReply = {
 	...comment,
 	responses: [],
-};
+} satisfies CommentType;
+
+const commentResponseError = {
+	kind: 'error',
+	error: { code: 'NetworkError', message: 'Mocked' },
+} as const satisfies Result<unknown, unknown>;
+
+const commentResponseSuccess = {
+	kind: 'ok',
+	value: 123456,
+} as const satisfies Result<unknown, unknown>;
 
 const aUser: SignedInUser = {
 	profile: {
@@ -35,6 +45,8 @@ const aUser: SignedInUser = {
 			hasCommented: true,
 		},
 	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseSuccess),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -57,7 +69,7 @@ describe('CommentContainer', () => {
 		const { getByTestId, queryByText, getByText, rerender } = render(
 			<CommentContainer
 				shortUrl=""
-				comment={commentWithoutReply} //TODO: should be comments with reponses
+				comment={commentWithoutReply}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -66,6 +78,16 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
+				error={''}
+				setError={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
+				previewBody=""
+				setPreviewBody={() => {}}
 			/>,
 		);
 
@@ -94,7 +116,7 @@ describe('CommentContainer', () => {
 		rerender(
 			<CommentContainer
 				shortUrl=""
-				comment={commentWithoutReply} //TODO: should be comments with reponses
+				comment={commentWithoutReply}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -103,6 +125,16 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
+				error={''}
+				setError={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
+				previewBody=""
+				setPreviewBody={() => {}}
 			/>,
 		);
 
@@ -130,7 +162,7 @@ describe('CommentContainer', () => {
 		const { getByTestId, queryByText, getByText, rerender } = render(
 			<CommentContainer
 				shortUrl=""
-				comment={commentWithReply} //TODO: should be comments with reponses
+				comment={commentWithReply}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -139,6 +171,16 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
+				error={''}
+				setError={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
+				previewBody=""
+				setPreviewBody={() => {}}
 			/>,
 		);
 
@@ -158,7 +200,7 @@ describe('CommentContainer', () => {
 			expect(mockSetCommentBeingRepliedTo).toHaveBeenCalledTimes(1),
 		);
 
-		// make sure the new comment appeats
+		// make sure the new comment appears
 		await waitFor(() => {
 			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
 		});
@@ -167,7 +209,7 @@ describe('CommentContainer', () => {
 		rerender(
 			<CommentContainer
 				shortUrl=""
-				comment={commentWithoutReply} //TODO: should be comments with reponses
+				comment={commentWithoutReply}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -176,6 +218,16 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
+				showPreview={false}
+				setShowPreview={() => {}}
+				isCommentFormActive={true}
+				setIsCommentFormActive={() => {}}
+				error={''}
+				setError={() => {}}
+				userNameMissing={false}
+				setUserNameMissing={() => {}}
+				previewBody=""
+				setPreviewBody={() => {}}
 			/>,
 		);
 

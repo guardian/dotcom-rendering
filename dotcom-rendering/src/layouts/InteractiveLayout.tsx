@@ -224,8 +224,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const isApps = renderingTarget === 'Apps';
 	const isWeb = renderingTarget === 'Web';
 
-	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
-	const showComments = isWeb && article.isCommentable && !isPaidContent;
+	const showComments = article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
@@ -454,7 +453,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										guardianBaseURL={
 											article.guardianBaseURL
 										}
-										badge={article.badge?.enhanced}
 									/>
 								</div>
 							</GridItem>
@@ -723,7 +721,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							article.showBottomSocialButtons &&
 							renderingTarget === 'Web'
 						}
-						badge={article.badge?.enhanced}
 					/>
 				</Section>
 				{renderAds && (
@@ -930,9 +927,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								}
 								remoteBannerSwitch={
 									!!article.config.switches.remoteBanner
-								}
-								puzzleBannerSwitch={
-									!!article.config.switches.puzzlesBanner
 								}
 								tags={article.tags}
 							/>

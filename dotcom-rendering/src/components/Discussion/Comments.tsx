@@ -6,14 +6,10 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import {
-	getDiscussion,
-	getPicks,
-	initialiseApi,
-} from '../../lib/discussionApi';
+import type { preview } from '../../lib/discussionApi';
+import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
-	CommentResponse,
 	CommentType,
 	FilterOptions,
 	SignedInUser,
@@ -36,19 +32,17 @@ type Props = {
 	onPermalinkClick: (commentId: number) => void;
 	apiKey: string;
 	onRecommend?: (commentId: number) => Promise<boolean>;
-	onComment?: (shortUrl: string, body: string) => Promise<CommentResponse>;
-	onReply?: (
-		shortUrl: string,
-		body: string,
-		parentCommentId: number,
-	) => Promise<CommentResponse>;
-	onPreview?: (body: string) => Promise<string>;
-	onExpand: () => void;
+	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
-	setPage: (page: number) => void;
+	setPage: (page: number, shouldExpand: boolean) => void;
 	filters: FilterOptions;
-	setFilters: (filters: FilterOptions) => void;
+	commentCount: number;
+	loading: boolean;
+	totalPages: number;
+	comments: CommentType[];
+	setComment: (comment: CommentType) => void;
+	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 };
 
 const footerStyles = css`
@@ -90,12 +84,13 @@ const NoComments = () => (
 	</div>
 );
 
+/** Reads mutes from local storage, if available. */
 const readMutes = (): string[] => {
 	const mutes = storage.local.get('gu.prefs.discussion.mutes') ?? [];
-
 	return Array.isArray(mutes) && mutes.every(isString) ? mutes : [];
 };
 
+/** Writes mutes to local storage. */
 const writeMutes = (mutes: string[]) => {
 	storage.local.set('gu.prefs.discussion.mutes', mutes);
 };
@@ -111,26 +106,30 @@ export const Comments = ({
 	onPermalinkClick,
 	apiKey,
 	onRecommend,
-	onComment,
-	onReply,
 	onPreview,
-	onExpand,
 	idApiUrl,
 	page,
 	setPage,
 	filters,
-	setFilters,
+	commentCount,
+	loading,
+	totalPages,
+	comments,
+	setComment,
+	handleFilterChange,
 }: Props) => {
-	const [loading, setLoading] = useState<boolean>(true);
-	const [totalPages, setTotalPages] = useState<number>(0);
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
 		useState<CommentType>();
-	const [comments, setComments] = useState<CommentType[]>([]);
-	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
-		useState<number>(10);
-	const [commentCount, setCommentCount] = useState<number>(0);
+	const [numberOfCommentsToShow, setNumberOfCommentsToShow] = useState(10);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
+	const [showPreview, setShowPreview] = useState<boolean>(false);
+	const [isCommentFormActive, setIsCommentFormActive] = useState<boolean>(
+		!!commentBeingRepliedTo,
+	);
+	const [error, setError] = useState<string>('');
+	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
+	const [previewBody, setPreviewBody] = useState<string>('');
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
 
@@ -149,28 +148,13 @@ export const Comments = ({
 	}, [expanded, comments.length]);
 
 	useEffect(() => {
-		setLoading(true);
-		//todo: come back and handle the error case
-		void getDiscussion(shortUrl, { ...filters, page }).then((json) => {
-			setLoading(false);
-			if (json && json.status !== 'error') {
-				setComments(json.discussion.comments);
-				setCommentCount(json.discussion.topLevelCommentCount);
+		void getPicks(shortUrl).then((result) => {
+			if (result.kind === 'error') {
+				console.error(result.error);
+				return;
 			}
-			//todo: come back and parse this properly (apologies for the horribleness)
-			setTotalPages(json?.pages as number);
+			setPicks(result.value);
 		});
-	}, [filters, page, shortUrl]);
-
-	//todo: parse this properly
-	useEffect(() => {
-		const fetchPicks = async () => {
-			const json = await getPicks(shortUrl);
-			if (json !== undefined) {
-				setPicks(json);
-			}
-		};
-		void fetchPicks();
 	}, [shortUrl]);
 
 	/**
@@ -196,15 +180,16 @@ export const Comments = ({
 		 * To respect the reader's preference to stay on the last page,
 		 * we calculate and use the maximum possible page instead.
 		 */
+
 		const maxPagePossible = Math.ceil(
 			commentCount / newFilterObject.pageSize,
 		);
 
-		if (page > maxPagePossible) setPage(maxPagePossible);
-
-		setFilters(newFilterObject);
-		// Filters also show when the view is not expanded but we want to expand when they're changed
-		onExpand();
+		if (page > maxPagePossible) {
+			handleFilterChange(newFilterObject, maxPagePossible);
+		} else {
+			handleFilterChange(newFilterObject);
+		}
 	};
 
 	useEffect(() => {
@@ -212,36 +197,26 @@ export const Comments = ({
 		element?.scrollIntoView();
 	}, [page]);
 
+	/** Remember updated mutes locally */
+	useEffect(() => {
+		writeMutes(mutes);
+	}, [mutes]);
+
 	const toggleMuteStatus = (userId: string) => {
-		let updatedMutes;
-		if (mutes.includes(userId)) {
-			// Already muted, unmute them
-			updatedMutes = mutes.filter((id) => id !== userId);
-		} else {
-			// Add this user to our list of mutes
-			updatedMutes = [...mutes, userId];
-		}
-		// Update local state
-		setMutes(updatedMutes);
-		// Remember these new values
-		writeMutes(updatedMutes);
+		const updatedMutes = mutes.includes(userId)
+			? mutes.filter((id) => id !== userId) // Already muted, unmute them
+			: [...mutes, userId]; // Add this user to our list of mutes
+
+		setMutes(updatedMutes); // Update local state
 	};
-
 	const onAddComment = (comment: CommentType) => {
-		// Remove last item from our local array
-		// Replace it with this new comment at the start
-		setComments([comment, ...comments.slice(0, -1)]);
-
-		// It's possible to post a comment without the view being expanded
-		onExpand();
-
+		setComment(comment);
 		const commentElement = document.getElementById(`comment-${comment.id}`);
 		commentElement?.scrollIntoView();
 	};
 
 	const onPageChange = (pageNumber: number) => {
-		setPage(pageNumber);
-		onExpand();
+		setPage(pageNumber, true);
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
@@ -304,6 +279,22 @@ export const Comments = ({
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
 											onRecommend={onRecommend}
+											showPreview={showPreview}
+											setShowPreview={setShowPreview}
+											isCommentFormActive={
+												isCommentFormActive
+											}
+											setIsCommentFormActive={
+												setIsCommentFormActive
+											}
+											error={error}
+											setError={setError}
+											userNameMissing={userNameMissing}
+											setUserNameMissing={
+												setUserNameMissing
+											}
+											previewBody={previewBody}
+											setPreviewBody={setPreviewBody}
 										/>
 									</li>
 								))}
@@ -322,9 +313,17 @@ export const Comments = ({
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}
-					onComment={onComment}
-					onReply={onReply}
 					onPreview={onPreview}
+					showPreview={showPreview}
+					setShowPreview={setShowPreview}
+					isActive={isCommentFormActive}
+					setIsActive={setIsCommentFormActive}
+					error={error}
+					setError={setError}
+					userNameMissing={userNameMissing}
+					setUserNameMissing={setUserNameMissing}
+					previewBody={previewBody}
+					setPreviewBody={setPreviewBody}
 				/>
 			)}
 			{!!picks.length && (
@@ -376,7 +375,18 @@ export const Comments = ({
 									toggleMuteStatus={toggleMuteStatus}
 									onPermalinkClick={onPermalinkClick}
 									onRecommend={onRecommend}
-									onReply={onReply}
+									showPreview={showPreview}
+									setShowPreview={setShowPreview}
+									isCommentFormActive={isCommentFormActive}
+									setIsCommentFormActive={
+										setIsCommentFormActive
+									}
+									error={error}
+									setError={setError}
+									userNameMissing={userNameMissing}
+									setUserNameMissing={setUserNameMissing}
+									previewBody={previewBody}
+									setPreviewBody={setPreviewBody}
 								/>
 							</li>
 						))}
@@ -399,9 +409,17 @@ export const Comments = ({
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}
-					onComment={onComment}
-					onReply={onReply}
 					onPreview={onPreview}
+					showPreview={showPreview}
+					setShowPreview={setShowPreview}
+					isActive={isCommentFormActive}
+					setIsActive={setIsCommentFormActive}
+					error={error}
+					setError={setError}
+					userNameMissing={userNameMissing}
+					setUserNameMissing={setUserNameMissing}
+					previewBody={previewBody}
+					setPreviewBody={setPreviewBody}
 				/>
 			)}
 		</div>

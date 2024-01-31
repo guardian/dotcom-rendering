@@ -32,6 +32,8 @@ type Props = {
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
 	onRecommend?: (commentId: number) => Promise<boolean>;
+	error: string;
+	setError: (error: string) => void;
 };
 
 const commentControlsLink = css`
@@ -301,11 +303,12 @@ export const Comment = ({
 	toggleMuteStatus,
 	onPermalinkClick,
 	onRecommend,
+	error,
+	setError,
 }: Props) => {
 	const [isHighlighted, setIsHighlighted] = useState<boolean>(
 		comment.isHighlighted,
 	);
-	const [error, setError] = useState<string>();
 
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
@@ -314,20 +317,20 @@ export const Comment = ({
 		setError('');
 
 		const response = await pickComment(staffUser.authStatus, comment.id);
-		if (response.status === 'error') {
-			setError(response.message);
+		if (response.kind === 'error') {
+			setError(response.error);
 		} else {
-			setIsHighlighted(true);
+			setIsHighlighted(response.value);
 		}
 	};
 
 	const unPick = async (staffUser: SignedInUser) => {
 		setError('');
 		const response = await unPickComment(staffUser.authStatus, comment.id);
-		if (response.status === 'error') {
-			setError(response.message);
+		if (response.kind === 'error') {
+			setError(response.error);
 		} else {
-			setIsHighlighted(false);
+			setIsHighlighted(response.value);
 		}
 	};
 

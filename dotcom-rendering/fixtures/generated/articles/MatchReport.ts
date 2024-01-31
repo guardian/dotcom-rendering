@@ -395,8 +395,8 @@ export const MatchReport: DCRArticle = {
 						url: '/environment/climate-crisis',
 					},
 					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
+						title: 'Ukraine',
+						url: '/world/ukraine',
 					},
 					{
 						title: 'Football',
@@ -433,6 +433,10 @@ export const MatchReport: DCRArticle = {
 								longTitle: 'football/teams',
 							},
 						],
+					},
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
 					},
 					{
 						title: 'Business',
@@ -576,7 +580,7 @@ export const MatchReport: DCRArticle = {
 					},
 					{
 						title: 'Cartoons',
-						url: '/cartoons/archive',
+						url: '/tone/cartoons',
 					},
 					{
 						title: 'Opinion videos',
@@ -808,7 +812,7 @@ export const MatchReport: DCRArticle = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://app.adjust.com/16xt6hai',
 			},
 			{
 				title: 'Video',
@@ -948,11 +952,11 @@ export const MatchReport: DCRArticle = {
 			},
 			{
 				title: 'Live events',
-				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
 			},
 			{
-				title: 'Masterclasses',
-				url: '/guardian-masterclasses',
+				title: 'About Us',
+				url: '/about',
 			},
 			{
 				title: 'Digital Archive',
@@ -1648,7 +1652,7 @@ export const MatchReport: DCRArticle = {
 					],
 				},
 			],
-			elementId: '1fbd8ede-fcd3-42d3-9e07-d555ec62535b',
+			elementId: 'a272ceb0-15ac-4349-a1e9-449e275094ea',
 			position: 1,
 			lightbox: {
 				caption:
@@ -1666,17 +1670,17 @@ export const MatchReport: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>When does a blip become something more major? Whatever this sticky patch is for <a href="https://www.theguardian.com/football/norwichcity" data-component="auto-linked-tag">Norwich City</a>, it is impossible to ignore the changing landscape at the top of the Championship after Swansea cut their lead at the summit to two points courtesy of goals by André Ayew and Conor Hourihane.</p>',
-					elementId: '09f75521-c657-46c4-9dbd-d870bc4a7c4f',
+					elementId: 'a31bb984-2c18-467f-9224-f4136b4fdd8a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Norwich may have fired blanks for the fourth successive game but Hourihane is on quite the streak, with a superb strike here his third goal since arriving on loan from Aston Villa a fortnight ago. It looks an increasingly shrewd piece of business.</p>',
-					elementId: '4e5ccbc2-2708-4a0c-84ae-49130746419d',
+					elementId: '9749d84a-b280-46a9-8374-6bcf7f9575fd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea have a game in hand on the leaders but Brentford and Reading, both of whom also have games up their sleeve, will be equally encouraged by a Norwich team stuck in a rut. Ayew capitalised on an uncharacteristic error by Tim Krul to open the scoring before Hourihane sent a rasping strike beyond the Norwich goalkeeper from distance after the interval.</p>',
-					elementId: '6288fd30-0c4e-4249-9e05-c4fb2e8a9f25',
+					elementId: 'eabe1cd2-0e59-4657-b786-d94775aec56c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -1684,37 +1688,37 @@ export const MatchReport: DCRArticle = {
 					text: "Tim Krul: 'The way we play at Norwich is similar to Holland'",
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '8e3286f0-8019-4344-87e4-b8ba5e0eea39',
+					elementId: 'ddbcfe4f-005d-4aed-833c-3b287870ecff',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea should have had a late penalty too, but the referee Simon Hooper waved away appeals despite Ben Gibson appearing to fell the substitute Jordan Morris after Grant Hanley collided with the all-action Connor Roberts.</p>',
-					elementId: 'dd63726b-7e64-4ef8-b0df-c06dddc476f6',
+					elementId: 'aaf03457-6d86-41ee-ad88-51ae6084f3db',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>On the eve of this game, Swansea’s unpopular American owners gave a rare interview in which they broke their silence on a multitude of longstanding issues but also made a point of stressing they have not been “taking a victory lap” on the back of their impressive start under Steve Cooper.</p>',
-					elementId: '17a07176-8229-4405-9cf4-5e6d5b8763d0',
+					elementId: '6228e33c-933a-4cf9-a6c2-d63399ff56b0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“There were no expectations at the start of the season so I think it would be unfair to start doing it [building them] now with 19 games to go,” Cooper said. “There are clubs not even in the top 10 with much more resources than us but we’re going well and enjoying the journey and that’s how we work.”</p>',
-					elementId: 'b32cc34f-352f-4073-a105-e3907930885d',
+					elementId: '6e1453cc-1d82-4a64-9d83-0dc4e645d028',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Perhaps it was kidology but Daniel Farke had been at pains to play down the significance of the occasion after stuttering to a point at Millwall on Tuesday. Todd Cantwell, among those of interest to the watching England Under-21s manager Aidy Boothroyd, showed touches of class, setting Teemu Pukki free with a wonderfully weighted pass and later Kenny McLean after twirling away from Matt Grimes but the killer instinct again eluded them.</p>',
-					elementId: 'f1fd39e9-4d57-4955-bead-3fa5728bddd7',
+					elementId: 'f7944fa4-d204-40ee-93a6-4f8e46eb71ab',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea seized the advantage three minutes before the interval but the goal was a tragicomedy from a Norwich perspective. Krul flapped at Roberts’ in-swinging corner and when the ball dropped, Marc Guehi, another player on Boothroyd’s radar, scooped the ball away from the Norwich goalkeeper’s grasp, allowing Swansea to feast on the leftovers. Jake Bidwell tried his luck and then Ayew fired in his ninth goal of the season. Farke sought a response and Freddie Woodman saved superbly to keep out Grant Hanley’s header on the brink of the interval after the captain met Przemyslaw Placheta’s free-kick.</p>',
-					elementId: '2a315da9-65db-4a01-a349-40ea0f00e3c3',
+					elementId: 'fae1402d-8b50-458a-937b-e37df2799123',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Krul came out early to limber up for the second half but, before Norwich had a chance to write the wrongs, they found themselves two goals down. Jay Fulton gobbled up possession following a loose pass by McLean and played a sliderule pass infield to Hourihane, who joined on loan last month in search of regular game time. The midfielder steadied himself with first touch and then arrowed a piercing left-footed strike into the corner with his second.</p>',
-					elementId: '8a2aef9f-4aa1-40dc-9426-f1af9d091dd8',
+					elementId: '8c170641-b76f-41f9-b300-8d92eb679dca',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -1727,17 +1731,17 @@ export const MatchReport: DCRArticle = {
 					sourceDomain: 'theguardian.com',
 					caption:
 						'<strong>The Fiver: sign up and get our daily football email.</strong>',
-					elementId: 'c7a4f314-7cfa-4eff-9aad-0dd96b3fb303',
+					elementId: 'fe041f56-ff32-456a-8cc9-988311c3c4cc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We didn’t think he was going to come in and score three goals in first three league games, but we’ll take it,” said Cooper. “As soon as it fell to Conor I think everybody in the stadium thought ‘there’s a good chance of this going in.’ Once we lost Morgan [Gibbs-White, who returned to Wolves], I felt we needed a player you fancy to get goals. Conor’s numbers are really good.”</p>',
-					elementId: '3b53cee1-a140-4769-8537-eac194548712',
+					elementId: 'bddf2b83-50ab-4c37-9072-f6df420585a0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Krul shook his head in disbelief and Farke admitted his players are hurting. “When you lose such a spotlight game, of course, you are disappointed,” he said. “I will allow my players to be disappointed because it’s important to feel this and be greedy for this next game. We want this winning feeling back.”</p>',
-					elementId: '554c5438-b97f-4d96-b105-96e2a43bf956',
+					elementId: '09eaac91-441c-49f6-ae38-9413f4d0e573',
 				},
 			],
 			attributes: {
@@ -1835,7 +1839,6 @@ export const MatchReport: DCRArticle = {
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
-			abPuzzlesBanner: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
 			compareVariantDecision: false,
@@ -1902,7 +1905,6 @@ export const MatchReport: DCRArticle = {
 			hostedVideoAutoplay: true,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
-			serverShareCounts: true,
 			autoRefresh: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,
@@ -1998,7 +2000,7 @@ export const MatchReport: DCRArticle = {
 			position: 1,
 			width: 1713,
 			height: 1028,
-			elementId: '1fbd8ede-fcd3-42d3-9e07-d555ec62535b',
+			elementId: 'a272ceb0-15ac-4349-a1e9-449e275094ea',
 			alt: 'André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.',
 			credit: 'Photograph: Kieran McManus/BPI/Shutterstock',
 			caption:
@@ -2015,7 +2017,7 @@ export const MatchReport: DCRArticle = {
 				'André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.',
 			masterUrl:
 				'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg',
-			elementId: '1fbd8ede-fcd3-42d3-9e07-d555ec62535b',
+			elementId: 'a272ceb0-15ac-4349-a1e9-449e275094ea',
 		},
 	],
 };

@@ -146,19 +146,15 @@ const copyFrontendStatic = () => {
 
 const copyRiffRaff = () => {
 	log(' - copying riffraff yaml');
-	return cpy(
-		['riff-raff-rendering.yaml', 'riff-raff-rendering-all.yaml'],
-		target,
-		{
-			cwd: dirname,
-		},
-	);
+	return cpy(['riff-raff.yaml'], target, {
+		cwd: dirname,
+	});
 };
 
 Promise.all([
 	...copyApp('rendering'), // existing rendering app
-	...copyApp('article-rendering'), // new article-rendering app
-	// ...copyApp('facia-rendering'), // To be implemented
+	...copyApp('article-rendering'),
+	...copyApp('facia-rendering'),
 	// ...copyApp('misc-rendering'), // To be implemented
 	// ...copyApp('interactive-rendering'), // To be implemented
 	...copyFrontendStatic(),

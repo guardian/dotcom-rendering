@@ -1,5 +1,4 @@
 import CleanCSS from 'clean-css';
-import { getHttp3Url } from '../lib/getHttp3Url';
 
 type FontFamily =
 	| 'GH Guardian Headline'
@@ -253,32 +252,20 @@ const fontList: FontDisplay[] = [
 const getFontUrl = (path: string): string =>
 	`https://assets.guim.co.uk/static/frontend/${path}`;
 
-export const getFontsCss = (offerHttp3 = false): string => {
-	let fontCss = '';
+const rawFontsCss = fontList
+	.map(
+		(font) => `
+@font-face {
+	font-family: "${font.family}";
+	src: url(${getFontUrl(font.woff2)}) format("woff2"),
+			url(${getFontUrl(font.woff)}) format("woff"),
+			url(${getFontUrl(font.ttf)}) format("truetype");
+	font-weight: ${font.weight};
+	font-style: ${font.style};
+	font-display: swap;
+}
+`,
+	)
+	.join('\n');
 
-	for (const font of fontList) {
-		let woff2 = getFontUrl(font.woff2);
-		let woff = getFontUrl(font.woff);
-		let ttf = getFontUrl(font.ttf);
-
-		if (offerHttp3) {
-			woff2 = getHttp3Url(woff2);
-			woff = getHttp3Url(woff);
-			ttf = getHttp3Url(ttf);
-		}
-
-		fontCss += `
-			@font-face {
-				font-family: "${font.family}";
-				src: url(${woff2}) format("woff2"),
-						url(${woff}) format("woff"),
-						url(${ttf}) format("truetype");
-				font-weight: ${font.weight};
-				font-style: ${font.style};
-				font-display: swap;
-			}
-		`;
-	}
-
-	return new CleanCSS().minify(fontCss).styles;
-};
+export const fontsCss = new CleanCSS().minify(rawFontsCss).styles;
