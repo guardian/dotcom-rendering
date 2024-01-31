@@ -12,6 +12,7 @@ import {
 import { useCommentCount } from '../lib/useCommentCount';
 import { palette as themePalette } from '../palette';
 import type {
+	CommentForm,
 	CommentType,
 	FilterOptions,
 	SignedInUser,
@@ -99,9 +100,14 @@ type State = {
 	hashCommentId: number | undefined;
 	totalPages: number;
 	loading: boolean;
-	topForm: { isActive: boolean };
-	replyForm: { isActive: boolean };
-	bottomForm: { isActive: boolean };
+	topForm: CommentForm;
+	replyForm: CommentForm;
+	bottomForm: CommentForm;
+};
+
+const initialCommentFormState = {
+	isActive: false,
+	userNameMissing: false,
 };
 
 const initialState: State = {
@@ -113,9 +119,9 @@ const initialState: State = {
 	hashCommentId: undefined,
 	totalPages: 0,
 	loading: true,
-	topForm: { isActive: false },
-	replyForm: { isActive: false },
-	bottomForm: { isActive: false },
+	topForm: initialCommentFormState,
+	replyForm: initialCommentFormState,
+	bottomForm: initialCommentFormState,
 };
 
 type Action =
@@ -133,7 +139,10 @@ type Action =
 	| { type: 'setLoading'; loading: boolean }
 	| { type: 'setTopFormActive'; isActive: boolean }
 	| { type: 'setReplyFormActive'; isActive: boolean }
-	| { type: 'setBottomFormActive'; isActive: boolean };
+	| { type: 'setBottomFormActive'; isActive: boolean }
+	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
+	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
+	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -186,19 +195,46 @@ const reducer = (state: State, action: Action): State => {
 		case 'setTopFormActive': {
 			return {
 				...state,
-				topForm: { isActive: action.isActive },
+				topForm: { ...state.topForm, isActive: action.isActive },
 			};
 		}
 		case 'setReplyFormActive': {
 			return {
 				...state,
-				replyForm: { isActive: action.isActive },
+				replyForm: { ...state.replyForm, isActive: action.isActive },
 			};
 		}
 		case 'setBottomFormActive': {
 			return {
 				...state,
-				bottomForm: { isActive: action.isActive },
+				bottomForm: { ...state.bottomForm, isActive: action.isActive },
+			};
+		}
+		case 'setTopFormUserMissing': {
+			return {
+				...state,
+				topForm: {
+					...state.topForm,
+					userNameMissing: action.userNameMissing,
+				},
+			};
+		}
+		case 'setReplyFormUserMissing': {
+			return {
+				...state,
+				replyForm: {
+					...state.replyForm,
+					userNameMissing: action.userNameMissing,
+				},
+			};
+		}
+		case 'setBottomFormUserMissing': {
+			return {
+				...state,
+				bottomForm: {
+					...state.bottomForm,
+					userNameMissing: action.userNameMissing,
+				},
 			};
 		}
 
@@ -389,9 +425,27 @@ export const Discussion = ({
 					setBottomFormActive={(isActive) =>
 						dispatch({ type: 'setBottomFormActive', isActive })
 					}
-					isTopFormActive={topForm.isActive}
-					isReplyFormActive={replyForm.isActive}
-					isBottomFormActive={bottomForm.isActive}
+					setTopFormUserMissing={(userNameMissing) =>
+						dispatch({
+							type: 'setTopFormUserMissing',
+							userNameMissing,
+						})
+					}
+					setReplyFormUserMissing={(userNameMissing) =>
+						dispatch({
+							type: 'setReplyFormUserMissing',
+							userNameMissing,
+						})
+					}
+					setBottomFormUserMissing={(userNameMissing) =>
+						dispatch({
+							type: 'setBottomFormUserMissing',
+							userNameMissing,
+						})
+					}
+					topForm={topForm}
+					replyForm={replyForm}
+					bottomForm={bottomForm}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />
