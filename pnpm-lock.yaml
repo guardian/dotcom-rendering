@@ -49,7 +49,7 @@ importers:
         version: 11.11.0
       '@emotion/jest':
         specifier: 11.11.0
-        version: 11.11.0(@types/jest@29.5.0)
+        version: 11.11.0(@types/jest@29.5.11)
       '@emotion/react':
         specifier: 11.11.1
         version: 11.11.1(@types/react@18.2.45)(react@18.2.0)
@@ -141,8 +141,8 @@ importers:
         specifier: 3.2.9
         version: 3.2.9
       '@types/jest':
-        specifier: 29.5.0
-        version: 29.5.0
+        specifier: 29.5.11
+        version: 29.5.11
       '@types/jsdom':
         specifier: 16.2.15
         version: 16.2.15
@@ -207,11 +207,11 @@ importers:
         specifier: 5.5.4
         version: 5.5.4(webpack@5.89.0)
       jest:
-        specifier: 29.5.0
-        version: 29.5.0(@types/node@18.18.14)
+        specifier: 29.7.0
+        version: 29.7.0(@types/node@18.18.14)
       jest-environment-jsdom:
-        specifier: 29.5.0
-        version: 29.5.0
+        specifier: 29.7.0
+        version: 29.7.0
       jsdom:
         specifier: 16.7.0
         version: 16.7.0
@@ -241,7 +241,7 @@ importers:
         version: 0.19.0
       ts-jest:
         specifier: 29.1.1
-        version: 29.1.1(@babel/core@7.23.2)(esbuild@0.18.20)(jest@29.5.0)(typescript@5.3.3)
+        version: 29.1.1(@babel/core@7.23.2)(esbuild@0.18.20)(jest@29.7.0)(typescript@5.3.3)
       ts-loader:
         specifier: 9.4.3
         version: 9.4.3(typescript@5.3.3)(webpack@5.89.0)
@@ -498,8 +498,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0
       '@types/jest':
-        specifier: 29.5.0
-        version: 29.5.0
+        specifier: 29.5.11
+        version: 29.5.11
       '@types/jsdom':
         specifier: 21.1.1
         version: 21.1.1
@@ -729,11 +729,11 @@ importers:
         specifier: 3.1.1
         version: 3.1.1
       jest:
-        specifier: 29.5.0
-        version: 29.5.0(@types/node@18.18.14)
+        specifier: 29.7.0
+        version: 29.7.0(@types/node@18.18.14)
       jest-environment-jsdom:
-        specifier: 29.5.0
-        version: 29.5.0
+        specifier: 29.7.0
+        version: 29.7.0
       jsdom:
         specifier: 22.1.0
         version: 22.1.0
@@ -3843,7 +3843,7 @@ packages:
     resolution: {integrity: sha512-gJB6HLm5rYwSLI6PQa+X1t5CFGrv1J1TWG+sOyMCeKz2ojaj6Fnl/rZEspogG+cvqbt4AE/2eIyD2QfLKTBNlQ==}
     dev: false
 
-  /@emotion/jest@11.11.0(@types/jest@29.5.0):
+  /@emotion/jest@11.11.0(@types/jest@29.5.11):
     resolution: {integrity: sha512-XZlnmdUZ32YjQnInsCFk/plKpkV/NXN1Ab4YoNvXN887MeR3Hr5ZsTyoblIW8AWwdfQiZHHphaPMb56lk6Ofdw==}
     peerDependencies:
       '@types/jest': ^26.0.14 || ^27.0.0 || ^28.0.0 || ^29.0.0
@@ -3856,7 +3856,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.20.13
       '@emotion/css-prettifier': 1.1.3
-      '@types/jest': 29.5.0
+      '@types/jest': 29.5.11
       chalk: 4.1.2
       specificity: 0.4.1
       stylis: 4.2.0
@@ -4516,7 +4516,7 @@ packages:
       '@octokit/core': 4.2.4
       fastdom: 1.0.11
       lodash-es: 4.17.21
-      prebid.js: github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3)
+      prebid.js: git@github.com+guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3)
       process: 0.11.10
       raven-js: 3.27.2
       tslib: 2.6.2
@@ -5493,7 +5493,7 @@ packages:
     dependencies:
       ansi-html-community: 0.0.8
       common-path-prefix: 3.0.0
-      core-js-pure: 3.34.0
+      core-js-pure: 3.35.1
       error-stack-parser: 2.1.4
       find-up: 5.0.0
       html-entities: 2.4.0
@@ -8402,8 +8402,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.3
     dev: false
 
-  /@types/jest@29.5.0:
-    resolution: {integrity: sha512-3Emr5VOl/aoBwnWcH/EFQvlSAmjV+XtV9GGu5mwdYew5vhQh0IUZx/60x0TzHDu09Bi7HMx10t/namdJw5QIcg==}
+  /@types/jest@29.5.11:
+    resolution: {integrity: sha512-S2mHmYIVe13vrm6q4kN6fLYYAka15ALQki/vgDC3mIukEOx8WJlv0kQPM+d4w8Gp6u0uSdKND04IlTXBv0rwnQ==}
     dependencies:
       expect: 29.7.0
       pretty-format: 29.7.0
@@ -8687,7 +8687,7 @@ packages:
   /@types/testing-library__jest-dom@5.14.5:
     resolution: {integrity: sha512-SBwbxYoyPIvxHbeHxTZX2Pe/74F/tX2/D3mMvzabdeJ25bBojfW0TyB8BHrbq/9zaaKICJZjLP+8r6AeZMFCuQ==}
     dependencies:
-      '@types/jest': 29.5.0
+      '@types/jest': 29.5.11
     dev: false
 
   /@types/thrift@0.10.17:
@@ -10864,13 +10864,8 @@ packages:
       browserslist: 4.22.2
     dev: false
 
-  /core-js-pure@3.34.0:
-    resolution: {integrity: sha512-pmhivkYXkymswFfbXsANmBAewXx86UBfmagP+w0wkK06kLsLlTK5oQmsURPivzMkIBQiYq2cjamcZExIwlFQIg==}
-    requiresBuild: true
-    dev: false
-
-  /core-js-pure@3.35.0:
-    resolution: {integrity: sha512-f+eRYmkou59uh7BPcyJ8MC76DiGhspj1KMxVIcF24tzP8NA9HVa1uC7BTW2tgx7E1QVCzDzsgp7kArrzhlz8Ew==}
+  /core-js-pure@3.35.1:
+    resolution: {integrity: sha512-zcIdi/CL3MWbBJYo5YCeVAAx+Sy9yJE9I3/u9LkFABwbeaPhTMRWraM8mYFp9jW5Z50hOy7FVzCc8dCrpZqtIQ==}
     requiresBuild: true
     dev: false
 
@@ -14647,8 +14642,8 @@ packages:
       pretty-format: 29.7.0
     dev: false
 
-  /jest-environment-jsdom@29.5.0:
-    resolution: {integrity: sha512-/KG8yEK4aN8ak56yFVdqFDzKNHgF4BAymCx2LbPNPsUshUlfAl0eX402Xm1pt+eoG9SLZEUVifqXtX8SK74KCw==}
+  /jest-environment-jsdom@29.7.0:
+    resolution: {integrity: sha512-k9iQbsf9OyOfdzWH8HDmrRT0gSIcX+FLNW7IQq94tFX0gynPwqDTW0Ho6iMVNjGz/nb+l/vW3dWM2bbLLpkbXA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     peerDependencies:
       canvas: ^2.5.0
@@ -14934,8 +14929,8 @@ packages:
       supports-color: 8.1.1
     dev: false
 
-  /jest@29.5.0(@types/node@18.18.14):
-    resolution: {integrity: sha512-juMg3he2uru1QoXX078zTa7pO85QyB9xajZc6bU+d9yEGwrKX6+vGmJQ3UdVZsvTEUARIdObzH68QItim6OSSQ==}
+  /jest@29.7.0(@types/node@18.18.14):
+    resolution: {integrity: sha512-NIy3oAFp9shda19hy4HK0HRTWKtPJmGdnvywu01nOqNC2vZg+Z+fvJDxpMQA88eb2I9EcafcdjYgsDthnYTvGw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
     peerDependencies:
@@ -15361,16 +15356,16 @@ packages:
       wrap-ansi: 9.0.0
     dev: false
 
-  /live-connect-common@3.0.3:
-    resolution: {integrity: sha512-ZPycT04ROBUvPiksnLTunrKC3ROhBSeO99fQ+4qMIkgKwP2CvS44L7fK+0WFV4nAi+65KbzSng7JWcSlckfw8w==}
+  /live-connect-common@3.1.1:
+    resolution: {integrity: sha512-sV0oUvJnaTN41f30hOo3wDjZL2y8TYu5BQKvlxmek7Agpe2AGGN/dsPA8i2sHkessRKpcTfrPjmpnG2bIxq7Gg==}
     engines: {node: '>=18'}
     dev: false
 
-  /live-connect-js@6.3.4:
-    resolution: {integrity: sha512-lg2XeCaj/eEbK66QGGDEdz9IdT/K3ExZ83Qo6xGVLdP5XJ33xAUCk/gds34rRTmpIwUfAnboOpyj3UoYtS3QUQ==}
+  /live-connect-js@6.4.5:
+    resolution: {integrity: sha512-MVlUGMmy3BbyFKvzMy2GItMMUzEc0XY308MoOQ3BNvT1zy4NXjIvxEXEvx0I9jRz21UZthxZpjzHxT/hbLD3ug==}
     engines: {node: '>=18'}
     dependencies:
-      live-connect-common: 3.0.3
+      live-connect-common: 3.1.1
       tiny-hashes: 1.0.1
     dev: false
 
@@ -19245,7 +19240,7 @@ packages:
     engines: {node: '>=6.10'}
     dev: false
 
-  /ts-jest@29.1.1(@babel/core@7.23.2)(esbuild@0.18.20)(jest@29.5.0)(typescript@5.3.3):
+  /ts-jest@29.1.1(@babel/core@7.23.2)(esbuild@0.18.20)(jest@29.7.0)(typescript@5.3.3):
     resolution: {integrity: sha512-D6xjnnbP17cC85nliwGiL+tpoKN0StpgE0TeOjXQTU6MVCfsB4v7aW05CgQ/1OywGb0x/oy9hHFnN+sczTiRaA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -19270,7 +19265,7 @@ packages:
       bs-logger: 0.2.6
       esbuild: 0.18.20
       fast-json-stable-stringify: 2.1.0
-      jest: 29.5.0(@types/node@18.18.14)
+      jest: 29.7.0(@types/node@18.18.14)
       jest-util: 29.7.0
       json5: 2.2.3
       lodash.memoize: 4.1.2
@@ -20785,15 +20780,9 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  github.com/guardian/babel-plugin-px-to-rem/548c5f5bfdfdfc317b86103d27565868bd7d381c:
-    resolution: {tarball: https://codeload.github.com/guardian/babel-plugin-px-to-rem/tar.gz/548c5f5bfdfdfc317b86103d27565868bd7d381c}
-    name: babel-plugin-px-to-rem
-    version: 0.1.0
-    dev: false
-
-  github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {tarball: https://codeload.github.com/guardian/prebid.js/tar.gz/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4}
-    id: github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4
+  git@github.com+guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {commit: 91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4, repo: git@github.com:guardian/prebid.js.git, type: git}
+    id: git@github.com+guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4
     name: prebid.js
     version: 8.24.0
     engines: {node: '>=8.9.0'}
@@ -20804,7 +20793,7 @@ packages:
       '@babel/runtime': 7.23.8
       '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
       core-js: 3.33.3
-      core-js-pure: 3.35.0
+      core-js-pure: 3.35.1
       criteo-direct-rsa-validate: 1.1.0
       crypto-js: 4.2.0
       dlv: 1.1.3
@@ -20812,11 +20801,17 @@ packages:
       express: 4.18.2
       fun-hooks: 0.9.10
       just-clone: 1.0.2
-      live-connect-js: 6.3.4
+      live-connect-js: 6.4.5
     optionalDependencies:
       fsevents: 2.3.3
     transitivePeerDependencies:
       - supports-color
       - tslib
       - typescript
+    dev: false
+
+  github.com/guardian/babel-plugin-px-to-rem/548c5f5bfdfdfc317b86103d27565868bd7d381c:
+    resolution: {tarball: https://codeload.github.com/guardian/babel-plugin-px-to-rem/tar.gz/548c5f5bfdfdfc317b86103d27565868bd7d381c}
+    name: babel-plugin-px-to-rem
+    version: 0.1.0
     dev: false
