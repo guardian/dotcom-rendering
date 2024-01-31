@@ -81,6 +81,7 @@ const getLoaders = (build) => {
 		case 'client.apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'client.web.variant':
+		case 'client.web.ophan-next':
 		case 'client.web':
 			return swcLoader(getBrowserTargets());
 	}
@@ -98,7 +99,7 @@ module.exports = ({ build }) => ({
 	resolve: {
 		alias: {
 			'ophan-tracker-js':
-				build === 'web.variant'
+				build === 'client.web.ophan-next'
 					? '@guardian/ophan-tracker-js'
 					: 'ophan-tracker-js',
 		},

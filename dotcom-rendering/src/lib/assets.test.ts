@@ -104,6 +104,14 @@ describe('getModulesBuild', () => {
 		expect(build).toBe('client.web');
 	});
 
+	it('should support Ophan next build when in test', () => {
+		const build = getModulesBuild({
+			tests: { ophanNextVariant: 'variant' },
+			switches: {},
+		});
+		expect(build).toBe('client.web.ophan-next');
+	});
+
 	it('should support variant build when in test, if enabled', () => {
 		const build = getModulesBuild({
 			tests: { dcrJavascriptBundleVariant: 'variant' },
