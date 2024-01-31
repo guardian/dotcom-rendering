@@ -184,14 +184,15 @@ export const Comments = ({
 		 * To respect the reader's preference to stay on the last page,
 		 * we calculate and use the maximum possible page instead.
 		 */
+
 		const maxPagePossible = Math.ceil(
 			commentCount / newFilterObject.pageSize,
 		);
 
 		if (page > maxPagePossible) {
-			handleFilterChange(filters, maxPagePossible);
+			handleFilterChange(newFilterObject, maxPagePossible);
 		} else {
-			handleFilterChange(filters);
+			handleFilterChange(newFilterObject);
 		}
 	};
 
