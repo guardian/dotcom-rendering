@@ -1,5 +1,6 @@
 import type { Page } from '@playwright/test';
-import type { DCRArticle } from '../../src/types/frontend';
+import { validateAsArticleType } from '../../src/model/validate';
+import type { DCRArticle, FEArticleType } from '../../src/types/frontend';
 
 const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
@@ -17,19 +18,22 @@ const loadPage = async (
 	region = 'GB',
 	preventSupportBanner = true,
 ): Promise<void> => {
-	await page.addInitScript((regionProvided) => {
-		// force geo region
-		window.localStorage.setItem(
-			'gu.geo.override',
-			JSON.stringify({ value: regionProvided }),
-		);
-		if (preventSupportBanner) {
+	await page.addInitScript(
+		(args) => {
+			// force geo region
 			window.localStorage.setItem(
-				'gu.prefs.engagementBannerLastClosedAt',
-				`{"value":"${new Date().toISOString()}"}`,
+				'gu.geo.override',
+				JSON.stringify({ value: args.region }),
 			);
-		}
-	}, region);
+			if (args.preventSupportBanner) {
+				window.localStorage.setItem(
+					'gu.prefs.engagementBannerLastClosedAt',
+					`{"value":"${new Date().toISOString()}"}`,
+				);
+			}
+		},
+		{ region, preventSupportBanner },
+	);
 	// The default waitUntil: 'load' ensures all requests have completed
 	// For specific cases that do not rely on JS use 'domcontentloaded' to speed up tests
 	await page.goto(`${BASE_URL}${path}`, { waitUntil });
@@ -41,7 +45,7 @@ const loadPage = async (
  */
 const loadPageWithOverrides = async (
 	page: Page,
-	article: DCRArticle,
+	article: DCRArticle | FEArticleType,
 	overrides?: {
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
@@ -95,4 +99,32 @@ const loadPageNoOkta = async (
 	});
 };
 
-export { BASE_URL, loadPage, loadPageWithOverrides, loadPageNoOkta };
+/**
+ * Fetch the page json from PROD then load it as a POST with overrides
+ */
+const fetchAndloadPageWithOverrides = async (
+	page: Page,
+	url: string,
+	overrides?: {
+		configOverrides?: Record<string, unknown>;
+		switchOverrides?: Record<string, unknown>;
+	},
+): Promise<void> => {
+	const article = validateAsArticleType(
+		await fetch(`${url}.json?dcr`).then((res) => res.json()),
+	);
+	return loadPageWithOverrides(page, article, {
+		configOverrides: overrides?.configOverrides,
+		switchOverrides: {
+			...overrides?.switchOverrides,
+		},
+	});
+};
+
+export {
+	BASE_URL,
+	fetchAndloadPageWithOverrides,
+	loadPage,
+	loadPageNoOkta,
+	loadPageWithOverrides,
+};

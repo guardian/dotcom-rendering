@@ -4,6 +4,7 @@ import {
 	boolean,
 	integer,
 	literal,
+	minLength,
 	number,
 	object,
 	optional,
@@ -15,6 +16,10 @@ import {
 	unknown,
 	variant,
 } from 'valibot';
+import type {
+	comment as onComment,
+	reply as onReply,
+} from '../lib/discussionApi';
 import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
 import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
@@ -252,63 +257,20 @@ export const parseAbuseResponse = (data: unknown): Result<string, true> => {
 		: { kind: 'error', error: output.message };
 };
 
-type UserNameError = {
-	message: string;
-	description: string;
-	context: string;
-};
-
-type UserConsents = {
-	id: string;
-	actor: string;
-	version: number;
-	consented: boolean;
-	timestamp: string;
-	privacyPolicyVersion: number;
-};
-
-type UserGroups = {
-	path: string;
-	packageCode: string;
-};
-
-type UserNameUser = {
-	dates: { accountCreatedDate: string };
-	consents: UserConsents[];
-	userGroups: UserGroups[];
-	publicFields: {
-		username: string;
-		displayName: string;
-	};
-	statusFields: {
-		userEmailValidated: boolean;
-	};
-	privateFields: {
-		legacyPackages: string;
-		legacyProducts: string;
-		// Optional fields. See scala @ https://github.com/guardian/identity/blob/07142212b1571d5f8e0a60585c6511abb3620f8c/identity-model-play/src/main/scala/com/gu/identity/model/play/PrivateFields.scala#L5-L18
-		brazeUuid?: string;
-		puzzleUuid?: string;
-		googleTagId?: string;
-		firstName?: string;
-		secondName?: string;
-		registrationIp?: string;
-		lastActiveIpAddress?: string;
-		registrationType?: string;
-		registrationPlatform?: string;
-		telephoneNumber?: string;
-		title?: string;
-	};
-	primaryEmailAddress: string;
-	id: string;
-	hasPassword: boolean;
-};
-
-export type UserNameResponse = {
-	status: 'ok' | 'error';
-	user: UserNameUser;
-	errors?: UserNameError[];
-};
+export const postUsernameResponseSchema = variant('status', [
+	object({
+		status: literal('error'),
+		errors: array(
+			object({
+				message: string(),
+			}),
+			[minLength(1)],
+		),
+	}),
+	object({
+		status: literal('ok'),
+	}),
+]);
 
 const orderBy = ['newest', 'oldest', 'recommendations'] as const;
 export const isOrderBy = guard(orderBy);
@@ -329,6 +291,8 @@ export interface FilterOptions {
 
 export type SignedInUser = {
 	profile: UserProfile;
+	onComment: ReturnType<typeof onComment>;
+	onReply: ReturnType<typeof onReply>;
 	authStatus: SignedInWithCookies | SignedInWithOkta;
 };
 
@@ -405,3 +369,9 @@ export type DropdownOptionType = {
 	disabled?: boolean;
 	isActive?: boolean;
 };
+
+export const pickResponseSchema = object({
+	status: literal('ok'),
+	statusCode: literal(200),
+	message: string(),
+});

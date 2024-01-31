@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
-import { cmpAcceptAll, cmpRejectAll } from '../../lib/cmp';
-import { loadPage } from '../../lib/load-page';
+import { cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
+import { loadPage } from '../lib/load-page';
 
 const firstPage =
 	'https://www.theguardian.com/uk-news/2021/jun/04/police-flabbergasted-at-time-it-took-london-bridge-terrorist-to-die-inquest-hears';

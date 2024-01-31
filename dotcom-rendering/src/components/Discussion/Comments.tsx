@@ -6,7 +6,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { comment, reply } from '../../lib/discussionApi';
+import type { preview } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
@@ -32,20 +32,17 @@ type Props = {
 	onPermalinkClick: (commentId: number) => void;
 	apiKey: string;
 	onRecommend?: (commentId: number) => Promise<boolean>;
-	onComment?: ReturnType<typeof comment>;
-	onReply?: ReturnType<typeof reply>;
-	onPreview?: (body: string) => Promise<string>;
-	onExpand: () => void;
+	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
-	setPage: (page: number) => void;
+	setPage: (page: number, shouldExpand: boolean) => void;
 	filters: FilterOptions;
-	setFilters: (filters: FilterOptions) => void;
 	commentCount: number;
 	loading: boolean;
 	totalPages: number;
 	comments: CommentType[];
-	setComments: (comments: CommentType[]) => void;
+	setComment: (comment: CommentType) => void;
+	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 };
 
 const footerStyles = css`
@@ -109,20 +106,17 @@ export const Comments = ({
 	onPermalinkClick,
 	apiKey,
 	onRecommend,
-	onComment,
-	onReply,
 	onPreview,
-	onExpand,
 	idApiUrl,
 	page,
 	setPage,
 	filters,
-	setFilters,
 	commentCount,
 	loading,
 	totalPages,
 	comments,
-	setComments,
+	setComment,
+	handleFilterChange,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -186,15 +180,16 @@ export const Comments = ({
 		 * To respect the reader's preference to stay on the last page,
 		 * we calculate and use the maximum possible page instead.
 		 */
+
 		const maxPagePossible = Math.ceil(
 			commentCount / newFilterObject.pageSize,
 		);
 
-		if (page > maxPagePossible) setPage(maxPagePossible);
-
-		setFilters(newFilterObject);
-		// Filters also show when the view is not expanded but we want to expand when they're changed
-		onExpand();
+		if (page > maxPagePossible) {
+			handleFilterChange(newFilterObject, maxPagePossible);
+		} else {
+			handleFilterChange(newFilterObject);
+		}
 	};
 
 	useEffect(() => {
@@ -215,20 +210,13 @@ export const Comments = ({
 		setMutes(updatedMutes); // Update local state
 	};
 	const onAddComment = (comment: CommentType) => {
-		// Remove last item from our local array
-		// Replace it with this new comment at the start
-		setComments([comment, ...comments.slice(0, -1)]);
-
-		// It's possible to post a comment without the view being expanded
-		onExpand();
-
+		setComment(comment);
 		const commentElement = document.getElementById(`comment-${comment.id}`);
 		commentElement?.scrollIntoView();
 	};
 
 	const onPageChange = (pageNumber: number) => {
-		setPage(pageNumber);
-		onExpand();
+		setPage(pageNumber, true);
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
@@ -325,8 +313,6 @@ export const Comments = ({
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}
-					onComment={onComment}
-					onReply={onReply}
 					onPreview={onPreview}
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
@@ -389,7 +375,6 @@ export const Comments = ({
 									toggleMuteStatus={toggleMuteStatus}
 									onPermalinkClick={onPermalinkClick}
 									onRecommend={onRecommend}
-									onReply={onReply}
 									showPreview={showPreview}
 									setShowPreview={setShowPreview}
 									isCommentFormActive={isCommentFormActive}
@@ -424,8 +409,6 @@ export const Comments = ({
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}
-					onComment={onComment}
-					onReply={onReply}
 					onPreview={onPreview}
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}

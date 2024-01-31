@@ -459,19 +459,6 @@ export const mockRESTCalls = (): typeof fetchMock => {
 				},
 				{ overwriteRoutes: false },
 			)
-
-			// Post comment
-			.post(
-				/.*discussion.theguardian.com\/discussion-api\/discussion\/.*/,
-				{
-					status: 200,
-					body: {
-						status: 'ok',
-						message: mockedMessageID,
-					},
-				},
-				{ overwriteRoutes: false },
-			)
 			// Get discussion
 			.get(
 				/.*discussion.theguardian.com\/discussion-api\/discussion\/.*/,

@@ -1,10 +1,10 @@
 import type { Page } from '@playwright/test';
 import { test } from '@playwright/test';
-import { cmpAcceptAll } from 'playwright/lib/cmp';
-import { addCookie, clearCookie } from 'playwright/lib/cookies';
-import { loadPageNoOkta } from 'playwright/lib/load-page';
-import { stubResponse } from 'playwright/lib/network';
-import { Standard as standardArticle } from '../../../fixtures/generated/articles/Standard';
+import { Standard as standardArticle } from '../../fixtures/generated/articles/Standard';
+import { cmpAcceptAll } from '../lib/cmp';
+import { addCookie, clearCookie } from '../lib/cookies';
+import { loadPageNoOkta } from '../lib/load-page';
+import { stubResponse } from '../lib/network';
 
 const idapiIdentifiersResponse = {
 	id: '000000000',

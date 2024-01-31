@@ -8,9 +8,7 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import {
 	addUserName,
-	comment as defaultComment,
 	preview as defaultPreview,
-	reply as defaultReply,
 } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
 import type {
@@ -29,9 +27,7 @@ type Props = {
 	onAddComment: (response: CommentType) => void;
 	setCommentBeingRepliedTo?: () => void;
 	commentBeingRepliedTo?: CommentType;
-	onComment?: ReturnType<typeof defaultComment>;
-	onReply?: ReturnType<typeof defaultReply>;
-	onPreview?: (body: string) => Promise<string>;
+	onPreview?: typeof defaultPreview;
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;
 	isActive: boolean;
@@ -215,8 +211,6 @@ export const CommentForm = ({
 	user,
 	setCommentBeingRepliedTo,
 	commentBeingRepliedTo,
-	onComment,
-	onReply,
 	onPreview,
 	showPreview,
 	setShowPreview,
@@ -292,16 +286,18 @@ export const CommentForm = ({
 	const fetchShowPreview = async () => {
 		if (!body) return;
 
-		try {
-			const preview = onPreview ?? defaultPreview;
-			const response = await preview(body);
-			setPreviewBody(response);
-			setShowPreview(true);
-		} catch (e) {
+		const preview = onPreview ?? defaultPreview;
+		const response = await preview(body);
+
+		if (response.kind === 'error') {
 			setError('Preview request failed, please try again');
 			setPreviewBody('');
 			setShowPreview(false);
+			return;
 		}
+
+		setPreviewBody(response.value);
+		setShowPreview(true);
 	};
 
 	const resetForm = () => {
@@ -318,11 +314,9 @@ export const CommentForm = ({
 		setInfo('');
 
 		if (body) {
-			const comment = onComment ?? defaultComment(user.authStatus);
-			const reply = onReply ?? defaultReply(user.authStatus);
 			const response = commentBeingRepliedTo
-				? await reply(shortUrl, body, commentBeingRepliedTo.id)
-				: await comment(shortUrl, body);
+				? await user.onReply(shortUrl, body, commentBeingRepliedTo.id)
+				: await user.onComment(shortUrl, body);
 			// Check response message for error states
 			if (response.kind === 'error') {
 				if (response.error.code === 'USERNAME_MISSING') {
@@ -418,13 +412,12 @@ export const CommentForm = ({
 		}
 
 		const response = await addUserName(user.authStatus, userName);
-		if (response.status === 'ok') {
+		if (response.kind === 'ok') {
 			// If we are able to submit userName we should continue with submitting comment
 			void submitForm();
 			setUserNameMissing(false);
 		} else {
-			response.errors &&
-				setError(response.errors[0]?.message ?? 'unknown error');
+			setError(response.error);
 		}
 	};
 

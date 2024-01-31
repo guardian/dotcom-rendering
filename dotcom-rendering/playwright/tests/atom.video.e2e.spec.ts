@@ -1,10 +1,10 @@
 import { isUndefined } from '@guardian/libs';
 import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { expectToBeVisible, expectToNotExist } from 'playwright/lib/locators';
-import { cmpAcceptAll, cmpRejectAll } from '../../lib/cmp';
-import { waitForIsland } from '../../lib/islands';
-import { loadPage } from '../../lib/load-page';
+import { cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
+import { waitForIsland } from '../lib/islands';
+import { fetchAndloadPageWithOverrides } from '../lib/load-page';
+import { expectToBeVisible, expectToNotExist } from '../lib/locators';
 
 type YouTubeEmbedConfig = {
 	adsConfig: {
@@ -121,9 +121,10 @@ const muteYouTube = async (page: Page, iframeSelector: string) => {
 
 test.describe('YouTube Atom', () => {
 	test('plays main media video', async ({ page }) => {
-		await loadPage(
+		await fetchAndloadPageWithOverrides(
 			page,
-			'/Article/https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
+			'https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
+			{ switchOverrides: { youtubeIma: false } },
 		);
 		await cmpAcceptAll(page);
 
@@ -171,9 +172,10 @@ test.describe('YouTube Atom', () => {
 	});
 
 	test('plays in body video', async ({ page }) => {
-		await loadPage(
+		await fetchAndloadPageWithOverrides(
 			page,
-			'/Article/https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
+			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
+			{ switchOverrides: { youtubeIma: false } },
 		);
 		await cmpAcceptAll(page);
 
@@ -223,9 +225,10 @@ test.describe('YouTube Atom', () => {
 	test('each video plays when the same video exists both in body and in main media of a blog', async ({
 		page,
 	}) => {
-		await loadPage(
+		await fetchAndloadPageWithOverrides(
 			page,
-			'/Article/https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates?dcr=true',
+			'https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
+			{ switchOverrides: { youtubeIma: false } },
 		);
 		await cmpAcceptAll(page);
 
@@ -327,10 +330,12 @@ test.describe('YouTube Atom', () => {
 	});
 
 	test('plays the video if the reader rejects consent', async ({ page }) => {
-		await loadPage(
+		await fetchAndloadPageWithOverrides(
 			page,
-			'/Article/https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
+			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
+			{ switchOverrides: { youtubeIma: false } },
 		);
+
 		await cmpRejectAll(page);
 
 		await waitForIsland(page, 'YoutubeBlockComponent');
@@ -379,9 +384,10 @@ test.describe('YouTube Atom', () => {
 	test('video is sticky when the user plays a video then scrolls the video out of the viewport', async ({
 		page,
 	}) => {
-		await loadPage(
+		await fetchAndloadPageWithOverrides(
 			page,
-			'/Article/https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates?dcr=true',
+			'https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
+			{ switchOverrides: { youtubeIma: false } },
 		);
 		await cmpAcceptAll(page);
 
