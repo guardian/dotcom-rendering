@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
 import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
+import { assertUnreachable } from '../lib/assert-unreachable';
 import { getDiscussion } from '../lib/discussionApi';
 import {
 	getCommentContext,
@@ -89,6 +90,96 @@ const remapToValidFilters = (
 	} satisfies FilterOptions;
 };
 
+type State = {
+	comments: CommentType[];
+	isClosedForComments: boolean;
+	isExpanded: boolean;
+	commentPage: number;
+	filters: FilterOptions;
+	hashCommentId: number | undefined;
+	totalPages: number;
+	loading: boolean;
+};
+
+const initialState: State = {
+	comments: [],
+	isClosedForComments: false,
+	isExpanded: false,
+	commentPage: 1,
+	filters: initFiltersFromLocalStorage(),
+	hashCommentId: undefined,
+	totalPages: 0,
+	loading: true,
+};
+
+type Action =
+	| {
+			type: 'commentsLoaded';
+			comments: CommentType[];
+			isClosedForComments: boolean;
+			totalPages: number;
+	  }
+	| { type: 'expandComments' }
+	| { type: 'addComment'; comment: CommentType }
+	| { type: 'updateCommentPage'; commentPage: number; shouldExpand: boolean }
+	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
+	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
+	| { type: 'setLoading'; loading: boolean };
+
+const reducer = (state: State, action: Action): State => {
+	switch (action.type) {
+		case 'commentsLoaded':
+			return {
+				...state,
+				comments: action.comments,
+				isClosedForComments: action.isClosedForComments,
+				totalPages: action.totalPages,
+				loading: false,
+			};
+		case 'addComment':
+			return {
+				...state,
+				comments: [action.comment, ...state.comments.slice(0, -1)], // Remove last item from our local array Replace it with this new comment at the start
+				isExpanded: true,
+			};
+		case 'expandComments':
+			return {
+				...state,
+				isExpanded: true,
+			};
+		case 'updateCommentPage':
+			return {
+				...state,
+				commentPage: action.commentPage,
+				isExpanded: action.shouldExpand ? true : state.isExpanded,
+			};
+		case 'filterChange':
+			return {
+				...state,
+				filters: action.filters,
+				hashCommentId: undefined,
+				isExpanded: true,
+				commentPage: action.commentPage ?? state.commentPage,
+			};
+		case 'setLoading': {
+			return {
+				...state,
+				loading: action.loading,
+			};
+		}
+		case 'updateHashCommentId': {
+			return {
+				...state,
+				hashCommentId: action.hashCommentId,
+				isExpanded: true,
+			};
+		}
+		default:
+			assertUnreachable(action);
+			return state;
+	}
+};
+
 export const Discussion = ({
 	discussionApiUrl,
 	shortUrlId,
@@ -98,23 +189,33 @@ export const Discussion = ({
 	user,
 	idApiUrl,
 }: Props) => {
-	const [commentPage, setCommentPage] = useState(1);
-	const [comments, setComments] = useState<CommentType[]>([]);
-	const [isClosedForComments, setIsClosedForComments] = useState(false);
-	const [isExpanded, setIsExpanded] = useState(false);
-	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
-		commentIdFromUrl(),
-	);
-	const [filters, setFilters] = useState<FilterOptions>(
-		initFiltersFromLocalStorage(),
-	);
-	const [loading, setLoading] = useState(true);
-	const [totalPages, setTotalPages] = useState(0);
+	const [
+		{
+			comments,
+			isClosedForComments,
+			isExpanded,
+			commentPage,
+			filters,
+			hashCommentId,
+			totalPages,
+			loading,
+		},
+		dispatch,
+	] = useReducer(reducer, initialState);
 
 	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
 	useEffect(() => {
-		setLoading(true);
+		const newHashCommentId = commentIdFromUrl();
+		if (newHashCommentId !== undefined) {
+			dispatch({
+				type: 'updateHashCommentId',
+				hashCommentId: newHashCommentId,
+			});
+		}
+	}, []);
+	useEffect(() => {
+		dispatch({ type: 'setLoading', loading: true });
 		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
 			.then((result) => {
 				if (result.kind === 'error') {
@@ -122,11 +223,14 @@ export const Discussion = ({
 					return;
 				}
 
-				setLoading(false);
 				const { pages, discussion } = result.value;
-				setComments(discussion.comments);
-				setIsClosedForComments(discussion.isClosedForComments);
-				setTotalPages(pages);
+
+				dispatch({
+					type: 'commentsLoaded',
+					comments: discussion.comments,
+					isClosedForComments: discussion.isClosedForComments,
+					totalPages: pages,
+				});
 			})
 			.catch(() => {
 				// do nothing
@@ -144,7 +248,7 @@ export const Discussion = ({
 		// Put this comment id into the hashCommentId state which will
 		// trigger an api call to get the comment context and then expand
 		// and reload the discussion based on the resuts
-		setHashCommentId(commentId);
+		dispatch({ type: 'updateHashCommentId', hashCommentId: commentId });
 		return false;
 	};
 
@@ -160,8 +264,11 @@ export const Discussion = ({
 		if (hashCommentId !== undefined) {
 			getCommentContext(discussionApiUrl, hashCommentId)
 				.then((context) => {
-					setCommentPage(context.page);
-					setIsExpanded(true);
+					dispatch({
+						type: 'updateCommentPage',
+						commentPage: context.page,
+						shouldExpand: true,
+					});
 				})
 				.catch((e) =>
 					console.error(`getCommentContext - error: ${String(e)}`),
@@ -171,14 +278,14 @@ export const Discussion = ({
 
 	useEffect(() => {
 		if (window.location.hash === '#comments') {
-			setIsExpanded(true);
+			dispatch({ type: 'expandComments' });
 		}
 	}, []);
 
 	useEffect(() => {
 		// There's no point showing the view more button if there isn't much more to view
 		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
-			setIsExpanded(true);
+			dispatch({ type: 'expandComments' });
 		}
 	}, [commentCount]);
 
@@ -215,22 +322,33 @@ export const Discussion = ({
 					commentToScrollTo={hashCommentId}
 					onPermalinkClick={handlePermalink}
 					apiKey="dotcom-rendering"
-					onExpand={() => {
-						setIsExpanded(true);
-					}}
 					idApiUrl={idApiUrl}
 					page={commentPage}
-					setPage={setCommentPage}
-					filters={validFilters}
-					setFilters={(newFilters) => {
-						setHashCommentId(undefined);
-						setFilters(newFilters);
+					setPage={(page: number, shouldExpand: boolean) => {
+						dispatch({
+							type: 'updateCommentPage',
+							commentPage: page,
+							shouldExpand,
+						});
 					}}
+					filters={validFilters}
 					commentCount={commentCount ?? 0}
 					loading={loading}
 					totalPages={totalPages}
 					comments={comments}
-					setComments={setComments}
+					setComment={(comment: CommentType) => {
+						dispatch({ type: 'addComment', comment });
+					}}
+					handleFilterChange={(
+						newFilters: FilterOptions,
+						page?: number,
+					) => {
+						dispatch({
+							type: 'filterChange',
+							filters: newFilters,
+							commentPage: page,
+						});
+					}}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />
@@ -239,7 +357,7 @@ export const Discussion = ({
 			{!isExpanded && (
 				<Button
 					onClick={() => {
-						setIsExpanded(true);
+						dispatch({ type: 'expandComments' });
 						dispatchCommentsExpandedEvent();
 					}}
 					icon={<SvgPlus />}

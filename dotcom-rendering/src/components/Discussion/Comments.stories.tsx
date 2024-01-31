@@ -57,18 +57,17 @@ export const LoggedOutHiddenPicks = () => (
 			}}
 			expanded={false}
 			onPermalinkClick={() => {}}
-			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			setFilters={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
-			setComments={() => {}}
+			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -99,18 +98,17 @@ export const InitialPage = () => (
 			}}
 			expanded={true}
 			onPermalinkClick={() => {}}
-			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={1}
 			setPage={() => {}}
 			filters={filters}
-			setFilters={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
-			setComments={() => {}}
+			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -142,18 +140,17 @@ export const LoggedInHiddenNoPicks = () => (
 			}}
 			expanded={false}
 			onPermalinkClick={() => {}}
-			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			setFilters={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
-			setComments={() => {}}
+			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -179,18 +176,17 @@ export const LoggedIn = () => (
 			}}
 			expanded={true}
 			onPermalinkClick={() => {}}
-			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			setFilters={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
-			setComments={() => {}}
+			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -215,22 +211,20 @@ export const LoggedInShortDiscussion = () => (
 			}}
 			expanded={true}
 			onPermalinkClick={() => {}}
-			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			setFilters={() => {}}
 			commentCount={discussionWithTwoComments.discussion.commentCount}
 			loading={false}
 			totalPages={discussionWithTwoComments.pages}
 			comments={discussionWithTwoComments.discussion.comments}
-			setComments={() => {}}
+			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
-LoggedInShortDiscussion.storyName = 'when logged in but only two comments made';
 LoggedInShortDiscussion.decorators = [splitTheme([format])];
 
 export const LoggedOutHiddenNoPicks = () => (
@@ -250,18 +244,17 @@ export const LoggedOutHiddenNoPicks = () => (
 			}}
 			expanded={false}
 			onPermalinkClick={() => {}}
-			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			setFilters={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={0}
 			comments={discussionMock.discussion.comments}
-			setComments={() => {}}
+			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -294,18 +287,17 @@ export const Closed = () => (
 			}}
 			expanded={true}
 			onPermalinkClick={() => {}}
-			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			setFilters={() => {}}
 			commentCount={discussionMock.discussion.commentCount}
 			loading={false}
 			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
-			setComments={() => {}}
+			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -336,18 +328,17 @@ export const NoComments = () => (
 			}}
 			expanded={false}
 			onPermalinkClick={() => {}}
-			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			setFilters={() => {}}
 			commentCount={0}
 			loading={false}
 			totalPages={0}
 			comments={[]}
-			setComments={() => {}}
+			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
@@ -378,20 +369,19 @@ export const LegacyDiscussion = () => (
 			}}
 			expanded={false}
 			onPermalinkClick={() => {}}
-			onExpand={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			setFilters={() => {}}
 			commentCount={
 				legacyDiscussionWithoutThreading.discussion.commentCount
 			}
 			loading={false}
 			totalPages={legacyDiscussionWithoutThreading.pages}
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
-			setComments={() => {}}
+			setComment={() => {}}
+			handleFilterChange={() => {}}
 		/>
 	</div>
 );
