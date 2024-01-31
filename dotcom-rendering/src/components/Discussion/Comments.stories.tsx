@@ -33,6 +33,7 @@ const aUser: SignedInUser = {
 	},
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
+	onRecommend: () => Promise.resolve(true),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 

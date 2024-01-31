@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import type { comment, preview, reply } from '../../lib/discussionApi';
+import type { preview } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
 import type {
 	CommentType,
@@ -26,9 +26,6 @@ type Props = {
 	mutes: string[];
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
-	onRecommend?: (commentId: number) => Promise<boolean>;
-	onComment?: ReturnType<typeof comment>;
-	onReply?: ReturnType<typeof reply>;
 	onPreview?: typeof preview;
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;
@@ -87,9 +84,6 @@ export const CommentContainer = ({
 	mutes,
 	toggleMuteStatus,
 	onPermalinkClick,
-	onRecommend,
-	onComment,
-	onReply,
 	onPreview,
 	showPreview,
 	setShowPreview,
@@ -153,7 +147,6 @@ export const CommentContainer = ({
 				isMuted={mutes.includes(comment.userProfile.userId)}
 				toggleMuteStatus={toggleMuteStatus}
 				onPermalinkClick={onPermalinkClick}
-				onRecommend={onRecommend}
 				error={error}
 				setError={setError}
 			/>

@@ -1,19 +1,18 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import { SvgArrowUpStraight } from '@guardian/source-react-components';
+import type { MouseEventHandler } from 'react';
 import { useState } from 'react';
-import { recommend as recommendDefault } from '../../lib/discussionApi';
-import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
 import { palette as themePalette } from '../../palette';
+import type { SignedInUser } from '../../types/discussion';
 import { Row } from './Row';
 
 type Props = {
 	commentId: number;
 	initialCount: number;
 	alreadyRecommended: boolean;
-	authStatus?: SignedInWithCookies | SignedInWithOkta;
+	user?: SignedInUser;
 	userMadeComment: boolean;
-	onRecommend?: (commentId: number) => Promise<boolean>;
 };
 
 const countStyles = css`
@@ -51,40 +50,37 @@ export const RecommendationCount = ({
 	commentId,
 	initialCount,
 	alreadyRecommended,
-	authStatus,
+	user,
 	userMadeComment,
-	onRecommend,
 }: Props) => {
 	const [count, setCount] = useState(initialCount);
 	const [recommended, setRecommended] = useState(alreadyRecommended);
-	const isSignedIn = authStatus !== undefined;
 
-	const tryToRecommend = isSignedIn
-		? () => {
-				const newCount = count + 1;
-				setCount(newCount);
-				setRecommended(true);
-				const recommend = onRecommend ?? recommendDefault(authStatus);
+	const tryToRecommend: MouseEventHandler<HTMLButtonElement> = () => {
+		if (!user) return;
 
-				recommend(commentId)
-					.then((accepted) => {
-						if (!accepted) {
-							setCount(newCount - 1);
-							setRecommended(alreadyRecommended);
-						}
-					})
-					// TODO: do some error handling
-					.catch(() => undefined);
-		  }
-		: undefined;
+		const newCount = count + 1;
+		setCount(newCount);
+		setRecommended(true);
+
+		user.onRecommend(commentId)
+			.then((accepted) => {
+				if (!accepted) {
+					setCount(newCount - 1);
+					setRecommended(alreadyRecommended);
+				}
+			})
+			// TODO: do some error handling
+			.catch(() => undefined);
+	};
 
 	return (
 		<Row>
 			<div css={countStyles}>{count}</div>
 			<button
-				css={buttonStyles(recommended, isSignedIn)}
+				css={buttonStyles(recommended, !!user)}
 				onClick={tryToRecommend}
-				disabled={recommended || !isSignedIn || userMadeComment}
+				disabled={recommended || !user || userMadeComment}
 				data-link-name="Recommend comment"
 				aria-label="Recommend comment"
 				type="button"
