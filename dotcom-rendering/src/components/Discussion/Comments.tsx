@@ -6,7 +6,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { comment, preview, reply } from '../../lib/discussionApi';
+import type { preview } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
@@ -32,8 +32,6 @@ type Props = {
 	onPermalinkClick: (commentId: number) => void;
 	apiKey: string;
 	onRecommend?: (commentId: number) => Promise<boolean>;
-	onComment?: ReturnType<typeof comment>;
-	onReply?: ReturnType<typeof reply>;
 	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
@@ -108,8 +106,6 @@ export const Comments = ({
 	onPermalinkClick,
 	apiKey,
 	onRecommend,
-	onComment,
-	onReply,
 	onPreview,
 	idApiUrl,
 	page,
@@ -317,8 +313,6 @@ export const Comments = ({
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}
-					onComment={onComment}
-					onReply={onReply}
 					onPreview={onPreview}
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
@@ -381,7 +375,6 @@ export const Comments = ({
 									toggleMuteStatus={toggleMuteStatus}
 									onPermalinkClick={onPermalinkClick}
 									onRecommend={onRecommend}
-									onReply={onReply}
 									showPreview={showPreview}
 									setShowPreview={setShowPreview}
 									isCommentFormActive={isCommentFormActive}
@@ -416,8 +409,6 @@ export const Comments = ({
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}
-					onComment={onComment}
-					onReply={onReply}
 					onPreview={onPreview}
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}

@@ -16,6 +16,10 @@ import {
 	unknown,
 	variant,
 } from 'valibot';
+import type {
+	comment as onComment,
+	reply as onReply,
+} from '../lib/discussionApi';
 import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
 import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
@@ -287,6 +291,8 @@ export interface FilterOptions {
 
 export type SignedInUser = {
 	profile: UserProfile;
+	onComment: ReturnType<typeof onComment>;
+	onReply: ReturnType<typeof onReply>;
 	authStatus: SignedInWithCookies | SignedInWithOkta;
 };
 
