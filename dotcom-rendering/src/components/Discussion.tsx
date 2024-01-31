@@ -227,6 +227,9 @@ export const Discussion = ({
 			hashCommentId,
 			totalPages,
 			loading,
+			topForm,
+			replyForm,
+			bottomForm,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
@@ -386,6 +389,9 @@ export const Discussion = ({
 					setBottomFormActive={(isActive) =>
 						dispatch({ type: 'setBottomFormActive', isActive })
 					}
+					isTopFormActive={topForm.isActive}
+					isReplyFormActive={replyForm.isActive}
+					isBottomFormActive={bottomForm.isActive}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />
