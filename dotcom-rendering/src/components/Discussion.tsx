@@ -99,6 +99,9 @@ type State = {
 	hashCommentId: number | undefined;
 	totalPages: number;
 	loading: boolean;
+	topForm: { isActive: boolean };
+	replyForm: { isActive: boolean };
+	bottomForm: { isActive: boolean };
 };
 
 const initialState: State = {
@@ -110,6 +113,9 @@ const initialState: State = {
 	hashCommentId: undefined,
 	totalPages: 0,
 	loading: true,
+	topForm: { isActive: false },
+	replyForm: { isActive: false },
+	bottomForm: { isActive: false },
 };
 
 type Action =
@@ -124,7 +130,10 @@ type Action =
 	| { type: 'updateCommentPage'; commentPage: number; shouldExpand: boolean }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
-	| { type: 'setLoading'; loading: boolean };
+	| { type: 'setLoading'; loading: boolean }
+	| { type: 'setTopFormActive'; isActive: boolean }
+	| { type: 'setReplyFormActive'; isActive: boolean }
+	| { type: 'setBottomFormActive'; isActive: boolean };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -174,6 +183,25 @@ const reducer = (state: State, action: Action): State => {
 				isExpanded: true,
 			};
 		}
+		case 'setTopFormActive': {
+			return {
+				...state,
+				topForm: { isActive: action.isActive },
+			};
+		}
+		case 'setReplyFormActive': {
+			return {
+				...state,
+				replyForm: { isActive: action.isActive },
+			};
+		}
+		case 'setBottomFormActive': {
+			return {
+				...state,
+				bottomForm: { isActive: action.isActive },
+			};
+		}
+
 		default:
 			assertUnreachable(action);
 			return state;
@@ -199,6 +227,9 @@ export const Discussion = ({
 			hashCommentId,
 			totalPages,
 			loading,
+			topForm,
+			replyForm,
+			bottomForm,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
@@ -349,6 +380,18 @@ export const Discussion = ({
 							commentPage: page,
 						});
 					}}
+					setTopFormActive={(isActive) =>
+						dispatch({ type: 'setTopFormActive', isActive })
+					}
+					setReplyFormActive={(isActive) =>
+						dispatch({ type: 'setReplyFormActive', isActive })
+					}
+					setBottomFormActive={(isActive) =>
+						dispatch({ type: 'setBottomFormActive', isActive })
+					}
+					isTopFormActive={topForm.isActive}
+					isReplyFormActive={replyForm.isActive}
+					isBottomFormActive={bottomForm.isActive}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />
