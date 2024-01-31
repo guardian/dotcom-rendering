@@ -33,14 +33,33 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
 	guApp: 'article-rendering',
 	stage: 'CODE',
 	domainName: 'article-rendering.code.dev-guardianapis.com',
-	scaling: { minimumInstances: 1, maximumInstances: 2 },
+	scaling: { minimumInstances: 1, maximumInstances: 4 },
 	instanceSize: InstanceSize.MICRO,
 });
 new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	guApp: 'article-rendering',
 	stage: 'PROD',
 	domainName: 'article-rendering.guardianapis.com',
-	scaling: { minimumInstances: 18, maximumInstances: 120 },
+	scaling: {
+		minimumInstances: 18,
+		maximumInstances: 120,
+		policy: {
+			scalingStepsOut: [
+				// No scaling up effect when latency is lower than 0.2s
+				{ lower: 0, upper: 0.2, change: 0 },
+				// When latency is higher than 0.2s we scale up by 50%
+				{ lower: 0.2, change: 50 },
+				// When latency is higher than 0.3s we scale up by 80%
+				{ lower: 0.3, change: 80 },
+			],
+			scalingStepsIn: [
+				// No scaling down effect when latency is higher than 0.12s
+				{ lower: 0.12, change: 0 },
+				// When latency is lower than 0.12s we scale down by 1
+				{ upper: 0.12, lower: 0, change: -1 },
+			],
+		},
+	},
 	instanceSize: InstanceSize.SMALL,
 });
 

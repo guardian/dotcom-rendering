@@ -14,7 +14,21 @@ describe('The RenderingCDKStack', () => {
 			stage: 'TEST',
 			guApp: 'article-rendering',
 			domainName: 'article-rendering.test.dev-guardianapis.com',
-			scaling: { minimumInstances: 1, maximumInstances: 4 },
+			scaling: {
+				minimumInstances: 1,
+				maximumInstances: 4,
+				policy: {
+					scalingStepsOut: [
+						{ lower: 0, upper: 0.2, change: 0 },
+						{ lower: 0.2, change: 50 },
+						{ lower: 0.3, change: 80 },
+					],
+					scalingStepsIn: [
+						{ lower: 0.15, change: 0 },
+						{ upper: 0.15, lower: 0, change: -1 },
+					],
+				},
+			},
 			instanceSize: InstanceSize.MICRO,
 		});
 		const template = Template.fromStack(stack);
