@@ -29,7 +29,7 @@ const fileExists = async (glob) => {
 	// Check that the manifest files exist
 	await fileExists('manifest.client.web.json');
 	await fileExists('manifest.client.web.legacy.json');
-	await fileExists('manifest.web.ophan-next.json');
+	await fileExists('manifest.client.web.ophan-next.json');
 	if (BUILD_VARIANT) await fileExists('manifest.client.web.variant.json');
 
 	// Check that the manifest files return values for all the chunks
