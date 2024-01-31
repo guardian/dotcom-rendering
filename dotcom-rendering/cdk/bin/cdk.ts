@@ -69,7 +69,7 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
 	stage: 'CODE',
 	domainName: 'facia-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 4 },
-	instanceSize: InstanceSize.SMALL,
+	instanceSize: InstanceSize.MICRO,
 });
 new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 	guApp: 'facia-rendering',
