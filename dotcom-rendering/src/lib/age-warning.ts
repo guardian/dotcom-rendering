@@ -15,6 +15,7 @@ export const getAgeWarning = (
 		'type/signup',
 		'info/newsletter-sign-up',
 		'guardian-live-events/guardian-live-events',
+		'news/series/cotton-capital',
 	];
 	const showAge = !tags.some(({ id }) => tagsWithoutAgeWarning.includes(id));
 
