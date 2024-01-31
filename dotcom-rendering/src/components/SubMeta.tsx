@@ -4,7 +4,8 @@ import { from, space, textSans, until } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
-import { ShareIcons } from './ShareIcons';
+import { Island } from './Island';
+import { ShareButton } from './ShareButton.importable';
 
 const labelStyles = css`
 	${textSans.xxsmall()};
@@ -170,21 +171,9 @@ export const SubMeta = ({
 						justify-content: space-between;
 					`}
 				>
-					<ShareIcons
-						pageId={pageId}
-						webTitle={webTitle}
-						format={format}
-						displayIcons={[
-							'facebook',
-							'twitter',
-							'email',
-							'linkedIn',
-							'whatsApp',
-							'messenger',
-						]}
-						size="medium"
-						context="SubMeta"
-					/>
+					<Island priority="feature" defer={{ until: 'idle' }}>
+						<ShareButton />
+					</Island>
 					<div css={syndicationButtonOverrides}>
 						{format.design === ArticleDesign.Interactive ? null : (
 							<LinkButton

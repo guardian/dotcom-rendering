@@ -35,7 +35,7 @@ import { NewsletterPrivacyMessage } from '../components/NewsletterPrivacyMessage
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
 import { SecureSignup } from '../components/SecureSignup.importable';
-import { ShareIcons } from '../components/ShareIcons';
+import { ShareButton } from '../components/ShareButton.importable';
 import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -421,18 +421,12 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 								<span css={shareSpanStyle}>
 									Tell your friends
 								</span>
-								<ShareIcons
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									format={format}
-									displayIcons={[
-										'facebook',
-										'twitter',
-										'email',
-									]}
-									size="medium"
-									context="ArticleMeta"
-								/>
+								<Island
+									priority="feature"
+									defer={{ until: 'idle' }}
+								>
+									<ShareButton />
+								</Island>
 							</div>
 
 							{!!promotedNewsletter && (

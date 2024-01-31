@@ -3,9 +3,10 @@ import { isUndefined } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
+import { Island } from './Island';
 import { LastUpdated } from './LastUpdated';
 import { LiveBlockContainer } from './LiveBlockContainer';
-import { ShareIcons } from './ShareIcons';
+import { ShareButton } from './ShareButton.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -93,15 +94,9 @@ export const LiveBlock = ({
 					justify-content: space-between;
 				`}
 			>
-				<ShareIcons
-					pageId={pageId}
-					blockId={block.id}
-					webTitle={webTitle}
-					displayIcons={['facebook', 'twitter']}
-					format={format}
-					size="small"
-					context="LiveBlock"
-				/>
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<ShareButton size="xsmall" />
+				</Island>
 				{!isUndefined(lastUpdated) && (
 					<LastUpdated
 						lastUpdated={lastUpdated}
