@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
@@ -78,6 +79,9 @@ export const LoggedOutHiddenPicks = () => (
 			setTopFormActive={() => {}}
 			setReplyFormActive={() => {}}
 			setBottomFormActive={() => {}}
+			isTopFormActive={false}
+			isReplyFormActive={false}
+			isBottomFormActive={false}
 		/>
 	</div>
 );
@@ -122,6 +126,9 @@ export const InitialPage = () => (
 			setTopFormActive={() => {}}
 			setReplyFormActive={() => {}}
 			setBottomFormActive={() => {}}
+			isTopFormActive={false}
+			isReplyFormActive={false}
+			isBottomFormActive={false}
 		/>
 	</div>
 );
@@ -135,118 +142,141 @@ InitialPage.decorators = [
 	]),
 ];
 
-export const LoggedInHiddenNoPicks = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl="p/abc123"
-			isClosedForComments={false}
-			user={aUser}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={false}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			setPage={() => {}}
-			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
-			loading={false}
-			totalPages={discussionMock.pages}
-			comments={discussionMock.discussion.comments}
-			setComment={() => {}}
-			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
-		/>
-	</div>
-);
+export const LoggedInHiddenNoPicks = () => {
+	const [isActive, setActive] = useState(false);
+
+	return (
+		<div
+			css={css`
+				width: 100%;
+				max-width: 620px;
+			`}
+		>
+			<Comments
+				shortUrl="p/abc123"
+				isClosedForComments={false}
+				user={aUser}
+				baseUrl="https://discussion.theguardian.com/discussion-api"
+				additionalHeaders={{
+					'D2-X-UID': 'testD2Header',
+					'GU-Client': 'testClientHeader',
+				}}
+				expanded={false}
+				onPermalinkClick={() => {}}
+				apiKey=""
+				idApiUrl="https://idapi.theguardian.com"
+				page={3}
+				setPage={() => {}}
+				filters={filters}
+				commentCount={discussionMock.discussion.commentCount}
+				loading={false}
+				totalPages={discussionMock.pages}
+				comments={discussionMock.discussion.comments}
+				setComment={() => {}}
+				handleFilterChange={() => {}}
+				setTopFormActive={() => {}}
+				setReplyFormActive={setActive}
+				setBottomFormActive={() => {}}
+				isTopFormActive={false}
+				isReplyFormActive={isActive}
+				isBottomFormActive={false}
+			/>
+		</div>
+	);
+};
 LoggedInHiddenNoPicks.storyName =
 	'when logged in, with no picks and not expanded';
 LoggedInHiddenNoPicks.decorators = [splitTheme([format])];
 
-export const LoggedIn = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl="p/abc123"
-			isClosedForComments={false}
-			user={aUser}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={true}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			setPage={() => {}}
-			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
-			loading={false}
-			totalPages={discussionMock.pages}
-			comments={discussionMock.discussion.comments}
-			setComment={() => {}}
-			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
-		/>
-	</div>
-);
+export const LoggedIn = () => {
+	const [isReplyFormActive, setReplyFormActive] = useState(false);
+	const [isBottomFormActive, setBottomFormActive] = useState(false);
+
+	return (
+		<div
+			css={css`
+				width: 100%;
+				max-width: 620px;
+			`}
+		>
+			<Comments
+				shortUrl="p/abc123"
+				isClosedForComments={false}
+				user={aUser}
+				baseUrl="https://discussion.theguardian.com/discussion-api"
+				additionalHeaders={{
+					'D2-X-UID': 'testD2Header',
+					'GU-Client': 'testClientHeader',
+				}}
+				expanded={true}
+				onPermalinkClick={() => {}}
+				apiKey=""
+				idApiUrl="https://idapi.theguardian.com"
+				page={3}
+				setPage={() => {}}
+				filters={filters}
+				commentCount={discussionMock.discussion.commentCount}
+				loading={false}
+				totalPages={discussionMock.pages}
+				comments={discussionMock.discussion.comments}
+				setComment={() => {}}
+				handleFilterChange={() => {}}
+				setTopFormActive={() => {}}
+				setReplyFormActive={setReplyFormActive}
+				setBottomFormActive={setBottomFormActive}
+				isTopFormActive={false}
+				isReplyFormActive={isReplyFormActive}
+				isBottomFormActive={isBottomFormActive}
+			/>
+		</div>
+	);
+};
 LoggedIn.storyName = 'when logged in and expanded';
 LoggedIn.decorators = [lightDecorator([format])];
 
-export const LoggedInShortDiscussion = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl={discussionWithTwoComments.discussion.key} // Two comments"
-			isClosedForComments={false}
-			user={aUser}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={true}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			setPage={() => {}}
-			filters={filters}
-			commentCount={discussionWithTwoComments.discussion.commentCount}
-			loading={false}
-			totalPages={discussionWithTwoComments.pages}
-			comments={discussionWithTwoComments.discussion.comments}
-			setComment={() => {}}
-			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
-		/>
-	</div>
-);
+export const LoggedInShortDiscussion = () => {
+	const [isTopFormActive, setTopFormActive] = useState(false);
+	const [isReplyFormActive, setReplyFormActive] = useState(false);
+
+	return (
+		<div
+			css={css`
+				width: 100%;
+				max-width: 620px;
+			`}
+		>
+			<Comments
+				shortUrl={discussionWithTwoComments.discussion.key} // Two comments"
+				isClosedForComments={false}
+				user={aUser}
+				baseUrl="https://discussion.theguardian.com/discussion-api"
+				additionalHeaders={{
+					'D2-X-UID': 'testD2Header',
+					'GU-Client': 'testClientHeader',
+				}}
+				expanded={true}
+				onPermalinkClick={() => {}}
+				apiKey=""
+				idApiUrl="https://idapi.theguardian.com"
+				page={3}
+				setPage={() => {}}
+				filters={filters}
+				commentCount={discussionWithTwoComments.discussion.commentCount}
+				loading={false}
+				totalPages={discussionWithTwoComments.pages}
+				comments={discussionWithTwoComments.discussion.comments}
+				setComment={() => {}}
+				handleFilterChange={() => {}}
+				setTopFormActive={setTopFormActive}
+				setReplyFormActive={setReplyFormActive}
+				setBottomFormActive={() => {}}
+				isTopFormActive={isTopFormActive}
+				isReplyFormActive={isReplyFormActive}
+				isBottomFormActive={false}
+			/>
+		</div>
+	);
+};
 LoggedInShortDiscussion.decorators = [splitTheme([format])];
 
 export const LoggedOutHiddenNoPicks = () => (
@@ -280,6 +310,9 @@ export const LoggedOutHiddenNoPicks = () => (
 			setTopFormActive={() => {}}
 			setReplyFormActive={() => {}}
 			setBottomFormActive={() => {}}
+			isTopFormActive={false}
+			isReplyFormActive={false}
+			isBottomFormActive={false}
 		/>
 	</div>
 );
@@ -326,6 +359,9 @@ export const Closed = () => (
 			setTopFormActive={() => {}}
 			setReplyFormActive={() => {}}
 			setBottomFormActive={() => {}}
+			isTopFormActive={false}
+			isReplyFormActive={false}
+			isBottomFormActive={false}
 		/>
 	</div>
 );
@@ -370,6 +406,9 @@ export const NoComments = () => (
 			setTopFormActive={() => {}}
 			setReplyFormActive={() => {}}
 			setBottomFormActive={() => {}}
+			isTopFormActive={false}
+			isReplyFormActive={false}
+			isBottomFormActive={false}
 		/>
 	</div>
 );
@@ -416,6 +455,9 @@ export const LegacyDiscussion = () => (
 			setTopFormActive={() => {}}
 			setReplyFormActive={() => {}}
 			setBottomFormActive={() => {}}
+			isTopFormActive={false}
+			isReplyFormActive={false}
+			isBottomFormActive={false}
 		/>
 	</div>
 );
