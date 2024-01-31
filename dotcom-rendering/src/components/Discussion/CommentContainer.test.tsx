@@ -7,18 +7,17 @@ import { CommentContainer } from './CommentContainer';
 
 mockRESTCalls();
 
-// @ts-expect-error -- We know this is not `undefined`
-const firstCommentResponse: CommentType = comment.responses[0];
+const firstCommentResponse = comment.responses[0];
 
-const commentWithReply: CommentType = {
+const commentWithReply = {
 	...comment,
 	responses: [firstCommentResponse],
-};
+} satisfies CommentType;
 
-const commentWithoutReply: CommentType = {
+const commentWithoutReply = {
 	...comment,
 	responses: [],
-};
+} satisfies CommentType;
 
 const aUser: SignedInUser = {
 	profile: {
