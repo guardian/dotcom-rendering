@@ -139,7 +139,7 @@ const reducer = (state: State, action: Action): State => {
 		case 'addComment':
 			return {
 				...state,
-				comments: [action.comment, ...state.comments.slice(0, -1)], // Remove last item from our local array Replace it with this new comment at the start
+				comments: [action.comment, ...state.comments],
 				isExpanded: true,
 			};
 		case 'expandComments':
