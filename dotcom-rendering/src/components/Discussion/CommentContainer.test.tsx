@@ -57,7 +57,7 @@ describe('CommentContainer', () => {
 		const { getByTestId, queryByText, getByText, rerender } = render(
 			<CommentContainer
 				shortUrl=""
-				comment={commentWithoutReply} //TODO: should be comments with reponses
+				comment={commentWithoutReply}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -104,7 +104,7 @@ describe('CommentContainer', () => {
 		rerender(
 			<CommentContainer
 				shortUrl=""
-				comment={commentWithoutReply} //TODO: should be comments with reponses
+				comment={commentWithoutReply}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -150,7 +150,7 @@ describe('CommentContainer', () => {
 		const { getByTestId, queryByText, getByText, rerender } = render(
 			<CommentContainer
 				shortUrl=""
-				comment={commentWithReply} //TODO: should be comments with reponses
+				comment={commentWithReply}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -188,7 +188,7 @@ describe('CommentContainer', () => {
 			expect(mockSetCommentBeingRepliedTo).toHaveBeenCalledTimes(1),
 		);
 
-		// make sure the new comment appeats
+		// make sure the new comment appears
 		await waitFor(() => {
 			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
 		});
@@ -197,7 +197,7 @@ describe('CommentContainer', () => {
 		rerender(
 			<CommentContainer
 				shortUrl=""
-				comment={commentWithoutReply} //TODO: should be comments with reponses
+				comment={commentWithoutReply}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
