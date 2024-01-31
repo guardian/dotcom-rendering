@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
-import { Standard as standardArticle } from '../../../fixtures/generated/articles/Standard';
-import { disableCMP } from '../../lib/cmp';
-import { addCookie } from '../../lib/cookies';
-import { waitForIsland } from '../../lib/islands';
-import { loadPageNoOkta } from '../../lib/load-page';
-import { stubResponse } from '../../lib/network';
+import { Standard as standardArticle } from '../../fixtures/generated/articles/Standard';
+import { disableCMP } from '../lib/cmp';
+import { addCookie } from '../lib/cookies';
+import { waitForIsland } from '../lib/islands';
+import { loadPageNoOkta } from '../lib/load-page';
+import { stubResponse } from '../lib/network';
 
 const profileResponse = {
 	status: 'ok',

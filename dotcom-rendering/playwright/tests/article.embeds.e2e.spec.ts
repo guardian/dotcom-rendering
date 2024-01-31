@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
-import { getIframeBody } from 'playwright/lib/iframe';
-import { waitForIsland } from 'playwright/lib/islands';
-import { expectToBeVisible } from 'playwright/lib/locators';
-import { cmpAcceptAll } from '../../lib/cmp';
-import { loadPage } from '../../lib/load-page';
+import { cmpAcceptAll } from '../lib/cmp';
+import { getIframeBody } from '../lib/iframe';
+import { waitForIsland } from '../lib/islands';
+import { loadPage } from '../lib/load-page';
+import { expectToBeVisible } from '../lib/locators';
 
 test.describe('Embeds', () => {
 	test.describe('AMP', () => {

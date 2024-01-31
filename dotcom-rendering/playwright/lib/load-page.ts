@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test';
+import { validateAsArticleType } from '../../src/model/validate';
 import type { DCRArticle, FEArticleType } from '../../src/types/frontend';
 
 const PORT = 9000;
@@ -17,19 +18,22 @@ const loadPage = async (
 	region = 'GB',
 	preventSupportBanner = true,
 ): Promise<void> => {
-	await page.addInitScript((regionProvided) => {
-		// force geo region
-		window.localStorage.setItem(
-			'gu.geo.override',
-			JSON.stringify({ value: regionProvided }),
-		);
-		if (preventSupportBanner) {
+	await page.addInitScript(
+		(args) => {
+			// force geo region
 			window.localStorage.setItem(
-				'gu.prefs.engagementBannerLastClosedAt',
-				`{"value":"${new Date().toISOString()}"}`,
+				'gu.geo.override',
+				JSON.stringify({ value: args.region }),
 			);
-		}
-	}, region);
+			if (args.preventSupportBanner) {
+				window.localStorage.setItem(
+					'gu.prefs.engagementBannerLastClosedAt',
+					`{"value":"${new Date().toISOString()}"}`,
+				);
+			}
+		},
+		{ region, preventSupportBanner },
+	);
 	// The default waitUntil: 'load' ensures all requests have completed
 	// For specific cases that do not rely on JS use 'domcontentloaded' to speed up tests
 	await page.goto(`${BASE_URL}${path}`, { waitUntil });
@@ -106,9 +110,9 @@ const fetchAndloadPageWithOverrides = async (
 		switchOverrides?: Record<string, unknown>;
 	},
 ): Promise<void> => {
-	const article = (await fetch(`${url}.json?dcr`).then((res) =>
-		res.json(),
-	)) as FEArticleType;
+	const article = validateAsArticleType(
+		await fetch(`${url}.json?dcr`).then((res) => res.json()),
+	);
 	return loadPageWithOverrides(page, article, {
 		configOverrides: overrides?.configOverrides,
 		switchOverrides: {
@@ -119,8 +123,8 @@ const fetchAndloadPageWithOverrides = async (
 
 export {
 	BASE_URL,
-	loadPage,
-	loadPageWithOverrides,
-	loadPageNoOkta,
 	fetchAndloadPageWithOverrides,
+	loadPage,
+	loadPageNoOkta,
+	loadPageWithOverrides,
 };

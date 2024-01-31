@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
-import { Standard as standardArticle } from '../../../fixtures/generated/articles/Standard';
-import { disableCMP } from '../../lib/cmp';
-import { addCookie } from '../../lib/cookies';
-import { loadPageNoOkta } from '../../lib/load-page';
+import { Standard as standardArticle } from '../../fixtures/generated/articles/Standard';
+import { disableCMP } from '../lib/cmp';
+import { addCookie } from '../lib/cookies';
+import { loadPageNoOkta } from '../lib/load-page';
 
 test.describe('User cookies tests', () => {
 	test(`Request to user features API is sent when no user features expiry cookie`, async ({

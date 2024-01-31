@@ -1,12 +1,12 @@
 import { expect, test } from '@playwright/test';
-import { disableCMP } from '../../lib/cmp';
-import { waitForIsland } from '../../lib/islands';
-import { loadPage } from '../../lib/load-page';
+import { disableCMP } from '../lib/cmp';
+import { waitForIsland } from '../lib/islands';
+import { loadPage } from '../lib/load-page';
 import {
 	expectLocatorToNotExist,
 	expectToBeVisible,
 	expectToExist,
-} from '../../lib/locators';
+} from '../lib/locators';
 
 const qandaUrl =
 	'https://www.theguardian.com/technology/2018/sep/19/time-to-regulate-bitcoin-says-treasury-committee-report';

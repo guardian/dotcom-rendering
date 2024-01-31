@@ -1,14 +1,13 @@
 import { devices, expect, test } from '@playwright/test';
+import { disableCMP } from '../lib/cmp';
+import { waitForIsland } from '../lib/islands';
+import { loadPage } from '../lib/load-page';
 import {
 	expectToBeVisible,
 	expectToExist,
 	expectToNotBeVisible,
 	expectToNotExist,
-} from 'playwright/lib/locators';
-import { disableCMP } from '../../lib/cmp';
-import { waitForIsland } from '../../lib/islands';
-import { loadPage } from '../../lib/load-page';
-import { mockApis } from '../../lib/mocks'; // TODO e2e is this required?
+} from '../lib/locators';
 
 const articleUrl =
 	'https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit';
@@ -128,7 +127,7 @@ test.describe('Interactivity', () => {
 		});
 	});
 
-	test.describe('When most viewed is mocked', () => {
+	test.describe('Most viewed', () => {
 		test('should change the list of most viewed items when a tab is clicked', async ({
 			context,
 			page,
@@ -156,7 +155,6 @@ test.describe('Interactivity', () => {
 					.filter({ hasText: 'Across The Guardian' }),
 			).toBeVisible();
 
-			await mockApis(page);
 			await expectToBeVisible(page, '[data-testid=tab-body-0]');
 			await expectToNotBeVisible(page, '[data-testid=tab-body-1]');
 			await page.locator('[data-testid=tab-heading-1]').click();

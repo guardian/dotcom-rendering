@@ -1,9 +1,9 @@
 import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { cmpAcceptAll } from '../../lib/cmp';
-import { waitForIsland } from '../../lib/islands';
-import { loadPage } from '../../lib/load-page';
-import { expectToBeVisible } from '../../lib/locators';
+import { cmpAcceptAll } from '../lib/cmp';
+import { waitForIsland } from '../lib/islands';
+import { loadPage } from '../lib/load-page';
+import { expectToBeVisible } from '../lib/locators';
 
 const paidContentPage =
 	'https://www.theguardian.com/the-future-of-sustainable-entrepreneurship/2023/jun/01/take-your-sustainable-business-to-the-next-level-win-your-own-retail-space-at-one-of-londons-westfield-centres';
