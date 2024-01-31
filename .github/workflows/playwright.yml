@@ -12,7 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [1, 2, 3, 4, 5, 6]
+        # keep aligned with the number of shards used by `playwright test`
+        group: [1, 2, 3, 4, 5, 6, 7, 8]
     services:
       DCR:
         image: ${{ inputs.container-image }}
@@ -30,7 +31,7 @@ jobs:
         working-directory: ./dotcom-rendering
 
       - name: Run Playwright
-        run: pnpm playwright test parallel-${{ matrix.group }}
+        run: pnpm playwright test --shard=${{ matrix.group }}/8
         working-directory: ./dotcom-rendering
 
       - uses: actions/upload-artifact@v3

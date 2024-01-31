@@ -243,8 +243,6 @@ export const CommentContainer = ({
 									setCommentBeingRepliedTo
 								}
 								commentBeingRepliedTo={commentBeingRepliedTo}
-								onComment={onComment}
-								onReply={onReply}
 								onPreview={onPreview}
 								showPreview={showPreview}
 								setShowPreview={setShowPreview}

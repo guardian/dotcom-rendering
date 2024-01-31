@@ -133,6 +133,11 @@ const commentDataWithLongThread: CommentType = {
 	},
 };
 
+const commentResponseError = {
+	kind: 'error',
+	error: { code: 'NetworkError', message: 'Mocked' },
+} as const;
+
 const aUser: SignedInUser = {
 	profile: {
 		userId: 'abc123',
@@ -148,6 +153,8 @@ const aUser: SignedInUser = {
 			hasCommented: true,
 		},
 	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseError),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 

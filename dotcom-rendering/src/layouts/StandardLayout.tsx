@@ -332,8 +332,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	/** Mobile articles with comments should be filtered in MAPI but we leave this in for clarity **/
-	const showComments = isWeb && article.isCommentable && !isPaidContent;
+	const showComments = article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
 

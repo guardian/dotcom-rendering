@@ -66,7 +66,26 @@ deployments:
     dependencies:
       - frontend-static
       - article-rendering-cfn
+  # facia-rendering cloudformation
+  facia-rendering-cfn:
+    template: cloudformation
+    parameters:
+      templateStagePaths:
+        CODE: FaciaRendering-CODE.template.json
+        PROD: FaciaRendering-PROD.template.json
+      cloudFormationStackByTags: false
+      cloudFormationStackName: facia-rendering
+      amiParameter: AMIFaciarendering
+  # facia-rendering autoscaling
+  facia-rendering:
+    type: autoscaling
+    parameters:
+      bucketSsmKey: /account/services/dotcom-artifact.bucket
+      # Default is 900 (15 mins), this is 25 mins
+      secondsToWait: 1500
+    dependencies:
+      - frontend-static
+      - facia-rendering-cfn
   # To be implemented:
-  # - facia-rendering
   # - misc-rendering
   # - interactive-rendering

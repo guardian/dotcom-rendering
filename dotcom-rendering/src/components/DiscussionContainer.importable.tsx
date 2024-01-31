@@ -1,5 +1,6 @@
 import { isObject, joinUrl } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { comment, reply } from '../lib/discussionApi';
 import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
 import { getOptionsHeadersWithOkta } from '../lib/identity';
 import { useAuthStatus } from '../lib/useAuthStatus';
@@ -26,7 +27,12 @@ const getUser = async ({
 	if (!isObject(data)) return;
 	if (!isObject(data.userProfile)) return;
 	const profile = data.userProfile as unknown as UserProfile;
-	return { profile, authStatus };
+	return {
+		profile,
+		onComment: comment(authStatus),
+		onReply: reply(authStatus),
+		authStatus,
+	};
 };
 
 /**

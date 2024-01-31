@@ -1,8 +1,8 @@
 import { isUndefined } from '@guardian/libs';
 import type { Page } from '@playwright/test';
 import { test } from '@playwright/test';
-import { cmpAcceptAll, cmpRejectAll, disableCMP } from '../../lib/cmp';
-import { loadPage } from '../../lib/load-page';
+import { cmpAcceptAll, cmpRejectAll, disableCMP } from '../lib/cmp';
+import { loadPage } from '../lib/load-page';
 
 const articleUrl =
 	'https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit';
