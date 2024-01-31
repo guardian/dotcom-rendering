@@ -60,7 +60,7 @@ if (
 }
 
 if (window.guardian.config.tests[ophanNextBundle('Variant')] === 'variant') {
-	Sentry.setTag('dcr.bundle', 'ophanEsm');
+	Sentry.setTag('dcr.bundle', 'ophanNext');
 }
 
 export const reportError = (error: Error, feature?: string): void => {
