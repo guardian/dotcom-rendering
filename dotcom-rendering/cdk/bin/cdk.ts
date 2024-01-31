@@ -64,20 +64,39 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 });
 
 /** Facia */
-// new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
-// 	guApp: 'facia-rendering',
-// 	stage: 'CODE',
-//	domainName: 'facia-rendering.code.dev-guardianapis.com',
-// 	scaling: { minimumInstances: 1, maximumInstances: 2 },
-// 	instanceSize: InstanceSize.MICRO,
-// });
-// new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
-// 	guApp: 'facia-rendering',
-// 	stage: 'PROD',
-//	domainName: 'facia-rendering.guardianapis.com',
-// 	scaling: { minimumInstances: 1, maximumInstances: 2 },
-// 	instanceSize: InstanceSize.MICRO,
-// });
+new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
+	guApp: 'facia-rendering',
+	stage: 'CODE',
+	domainName: 'facia-rendering.code.dev-guardianapis.com',
+	scaling: { minimumInstances: 1, maximumInstances: 4 },
+	instanceSize: InstanceSize.MICRO,
+});
+new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
+	guApp: 'facia-rendering',
+	stage: 'PROD',
+	domainName: 'facia-rendering.guardianapis.com',
+	scaling: {
+		minimumInstances: 4,
+		maximumInstances: 20,
+		policy: {
+			scalingStepsOut: [
+				// No scaling up effect when latency is lower than 0.3s
+				{ lower: 0, upper: 0.3, change: 0 },
+				// When latency is higher than 0.3s we scale up by 50%
+				{ lower: 0.3, change: 50 },
+				// When latency is higher than 0.4s we scale up by 80%
+				{ lower: 0.4, change: 80 },
+			],
+			scalingStepsIn: [
+				// No scaling down effect when latency is higher than 0.25s
+				{ lower: 0.25, change: 0 },
+				// When latency is lower than 0.25s we scale down by 1
+				{ upper: 0.25, lower: 0, change: -1 },
+			],
+		},
+	},
+	instanceSize: InstanceSize.SMALL,
+});
 
 /** Misc */
 // new RenderingCDKStack(cdkApp, 'MiscRendering-CODE', {

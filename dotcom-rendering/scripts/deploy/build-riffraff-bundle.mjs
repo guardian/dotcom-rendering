@@ -153,8 +153,8 @@ const copyRiffRaff = () => {
 
 Promise.all([
 	...copyApp('rendering'), // existing rendering app
-	...copyApp('article-rendering'), // new article-rendering app
-	// ...copyApp('facia-rendering'), // To be implemented
+	...copyApp('article-rendering'),
+	...copyApp('facia-rendering'),
 	// ...copyApp('misc-rendering'), // To be implemented
 	// ...copyApp('interactive-rendering'), // To be implemented
 	...copyFrontendStatic(),
