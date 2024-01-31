@@ -98,10 +98,10 @@ module.exports = ({ build }) => ({
 	},
 	resolve: {
 		alias: {
-			'ophan-tracker-js':
+			'@guardian/ophan-tracker-js':
 				build === 'client.web.ophan-next'
-					? '@guardian/ophan-tracker-js'
-					: 'ophan-tracker-js',
+					? '@guardian/ophan-tracker-js-next'
+					: '@guardian/ophan-tracker-js',
 		},
 	},
 	optimization:
