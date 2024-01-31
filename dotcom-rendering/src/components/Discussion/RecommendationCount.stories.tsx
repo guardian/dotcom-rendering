@@ -8,7 +8,7 @@ export default { title: 'Discussion/RecommendationCount' };
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const;
 
 const aUser = {
