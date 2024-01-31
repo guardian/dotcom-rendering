@@ -3384,7 +3384,7 @@ const pullQuoteIconDark: PaletteFunction = (format: ArticleFormat) => {
 		: text;
 };
 
-const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
+const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
@@ -3438,7 +3438,7 @@ const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
 	}
 };
 
-const shareIconFillDark: PaletteFunction = () => sourcePalette.neutral[60];
+const shareButtonDark: PaletteFunction = () => sourcePalette.neutral[60];
 
 const shareIconFillBlogLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
@@ -5297,9 +5297,9 @@ const paletteColours = {
 		light: subNavLink,
 		dark: subNavLink,
 	},
-	'--share-icon-fill': {
-		light: shareIconFillLight,
-		dark: shareIconFillDark,
+	'--share-button': {
+		light: shareButtonLight,
+		dark: shareButtonDark,
 	},
 	'--share-icon-blog-fill': {
 		light: shareIconFillBlogLight,

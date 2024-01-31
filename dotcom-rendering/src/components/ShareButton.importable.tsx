@@ -22,14 +22,14 @@ const buttonStyles = css`
 
 const buttonColor = css`
 	${buttonStyles};
-	color: ${themePalette('--share-icon-fill')};
+	color: ${themePalette('--share-button')};
 	svg {
-		fill: ${themePalette('--share-icon-fill')};
+		fill: ${themePalette('--share-button')};
 		margin-left: 0;
 	}
 	:hover {
-		background-color: ${themePalette('--share-icon-fill')};
-		border-color: ${themePalette('--share-icon-fill')};
+		background-color: ${themePalette('--share-button')};
+		border-color: ${themePalette('--share-button')};
 		color: ${palette.neutral[100]};
 		svg {
 			fill: ${palette.neutral[100]};
