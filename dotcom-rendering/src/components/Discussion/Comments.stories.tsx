@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
@@ -32,6 +33,7 @@ const aUser: SignedInUser = {
 	},
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
+	onRecommend: () => Promise.resolve(true),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -46,6 +48,8 @@ const filters: FilterOptions = {
 	pageSize: 25,
 	orderBy: 'newest',
 };
+
+const defaultCommentForm = { isActive: false, userNameMissing: false };
 
 export const LoggedOutHiddenPicks = () => (
 	<div
@@ -75,6 +79,15 @@ export const LoggedOutHiddenPicks = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
 		/>
 	</div>
 );
@@ -116,6 +129,15 @@ export const InitialPage = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
 		/>
 	</div>
 );
@@ -129,109 +151,159 @@ InitialPage.decorators = [
 	]),
 ];
 
-export const LoggedInHiddenNoPicks = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl="p/abc123"
-			isClosedForComments={false}
-			user={aUser}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={false}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			setPage={() => {}}
-			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
-			loading={false}
-			totalPages={discussionMock.pages}
-			comments={discussionMock.discussion.comments}
-			setComment={() => {}}
-			handleFilterChange={() => {}}
-		/>
-	</div>
-);
+export const LoggedInHiddenNoPicks = () => {
+	const [isActive, setActive] = useState(false);
+
+	return (
+		<div
+			css={css`
+				width: 100%;
+				max-width: 620px;
+			`}
+		>
+			<Comments
+				shortUrl="p/abc123"
+				isClosedForComments={false}
+				user={aUser}
+				baseUrl="https://discussion.theguardian.com/discussion-api"
+				additionalHeaders={{
+					'D2-X-UID': 'testD2Header',
+					'GU-Client': 'testClientHeader',
+				}}
+				expanded={false}
+				onPermalinkClick={() => {}}
+				apiKey=""
+				idApiUrl="https://idapi.theguardian.com"
+				page={3}
+				setPage={() => {}}
+				filters={filters}
+				commentCount={discussionMock.discussion.commentCount}
+				loading={false}
+				totalPages={discussionMock.pages}
+				comments={discussionMock.discussion.comments}
+				setComment={() => {}}
+				handleFilterChange={() => {}}
+				setTopFormActive={() => {}}
+				setReplyFormActive={setActive}
+				setBottomFormActive={() => {}}
+				setTopFormUserMissing={() => {}}
+				setReplyFormUserMissing={() => {}}
+				setBottomFormUserMissing={() => {}}
+				topForm={defaultCommentForm}
+				replyForm={{ ...defaultCommentForm, isActive }}
+				bottomForm={defaultCommentForm}
+			/>
+		</div>
+	);
+};
 LoggedInHiddenNoPicks.storyName =
 	'when logged in, with no picks and not expanded';
 LoggedInHiddenNoPicks.decorators = [splitTheme([format])];
 
-export const LoggedIn = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl="p/abc123"
-			isClosedForComments={false}
-			user={aUser}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={true}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			setPage={() => {}}
-			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
-			loading={false}
-			totalPages={discussionMock.pages}
-			comments={discussionMock.discussion.comments}
-			setComment={() => {}}
-			handleFilterChange={() => {}}
-		/>
-	</div>
-);
+export const LoggedIn = () => {
+	const [isReplyFormActive, setReplyFormActive] = useState(false);
+	const [isBottomFormActive, setBottomFormActive] = useState(false);
+
+	return (
+		<div
+			css={css`
+				width: 100%;
+				max-width: 620px;
+			`}
+		>
+			<Comments
+				shortUrl="p/abc123"
+				isClosedForComments={false}
+				user={aUser}
+				baseUrl="https://discussion.theguardian.com/discussion-api"
+				additionalHeaders={{
+					'D2-X-UID': 'testD2Header',
+					'GU-Client': 'testClientHeader',
+				}}
+				expanded={true}
+				onPermalinkClick={() => {}}
+				apiKey=""
+				idApiUrl="https://idapi.theguardian.com"
+				page={3}
+				setPage={() => {}}
+				filters={filters}
+				commentCount={discussionMock.discussion.commentCount}
+				loading={false}
+				totalPages={discussionMock.pages}
+				comments={discussionMock.discussion.comments}
+				setComment={() => {}}
+				handleFilterChange={() => {}}
+				setTopFormActive={() => {}}
+				setReplyFormActive={setReplyFormActive}
+				setBottomFormActive={setBottomFormActive}
+				setTopFormUserMissing={() => {}}
+				setReplyFormUserMissing={() => {}}
+				setBottomFormUserMissing={() => {}}
+				topForm={defaultCommentForm}
+				replyForm={{
+					...defaultCommentForm,
+					isActive: isReplyFormActive,
+				}}
+				bottomForm={{
+					...defaultCommentForm,
+					isActive: isBottomFormActive,
+				}}
+			/>
+		</div>
+	);
+};
 LoggedIn.storyName = 'when logged in and expanded';
 LoggedIn.decorators = [lightDecorator([format])];
 
-export const LoggedInShortDiscussion = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl={discussionWithTwoComments.discussion.key} // Two comments"
-			isClosedForComments={false}
-			user={aUser}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={true}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			setPage={() => {}}
-			filters={filters}
-			commentCount={discussionWithTwoComments.discussion.commentCount}
-			loading={false}
-			totalPages={discussionWithTwoComments.pages}
-			comments={discussionWithTwoComments.discussion.comments}
-			setComment={() => {}}
-			handleFilterChange={() => {}}
-		/>
-	</div>
-);
+export const LoggedInShortDiscussion = () => {
+	const [isTopFormActive, setTopFormActive] = useState(false);
+	const [isReplyFormActive, setReplyFormActive] = useState(false);
+
+	return (
+		<div
+			css={css`
+				width: 100%;
+				max-width: 620px;
+			`}
+		>
+			<Comments
+				shortUrl={discussionWithTwoComments.discussion.key} // Two comments"
+				isClosedForComments={false}
+				user={aUser}
+				baseUrl="https://discussion.theguardian.com/discussion-api"
+				additionalHeaders={{
+					'D2-X-UID': 'testD2Header',
+					'GU-Client': 'testClientHeader',
+				}}
+				expanded={true}
+				onPermalinkClick={() => {}}
+				apiKey=""
+				idApiUrl="https://idapi.theguardian.com"
+				page={3}
+				setPage={() => {}}
+				filters={filters}
+				commentCount={discussionWithTwoComments.discussion.commentCount}
+				loading={false}
+				totalPages={discussionWithTwoComments.pages}
+				comments={discussionWithTwoComments.discussion.comments}
+				setComment={() => {}}
+				handleFilterChange={() => {}}
+				setTopFormActive={setTopFormActive}
+				setReplyFormActive={setReplyFormActive}
+				setBottomFormActive={() => {}}
+				setTopFormUserMissing={() => {}}
+				setReplyFormUserMissing={() => {}}
+				setBottomFormUserMissing={() => {}}
+				topForm={{ ...defaultCommentForm, isActive: isTopFormActive }}
+				replyForm={{
+					...defaultCommentForm,
+					isActive: isReplyFormActive,
+				}}
+				bottomForm={defaultCommentForm}
+			/>
+		</div>
+	);
+};
 LoggedInShortDiscussion.decorators = [splitTheme([format])];
 
 export const LoggedOutHiddenNoPicks = () => (
@@ -262,6 +334,15 @@ export const LoggedOutHiddenNoPicks = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
 		/>
 	</div>
 );
@@ -305,6 +386,15 @@ export const Closed = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
 		/>
 	</div>
 );
@@ -346,6 +436,15 @@ export const NoComments = () => (
 			comments={[]}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
 		/>
 	</div>
 );
@@ -389,6 +488,15 @@ export const LegacyDiscussion = () => (
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
 		/>
 	</div>
 );

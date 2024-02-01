@@ -12,6 +12,7 @@ import {
 import { useCommentCount } from '../lib/useCommentCount';
 import { palette as themePalette } from '../palette';
 import type {
+	CommentForm,
 	CommentType,
 	FilterOptions,
 	SignedInUser,
@@ -99,6 +100,14 @@ type State = {
 	hashCommentId: number | undefined;
 	totalPages: number;
 	loading: boolean;
+	topForm: CommentForm;
+	replyForm: CommentForm;
+	bottomForm: CommentForm;
+};
+
+const initialCommentFormState = {
+	isActive: false,
+	userNameMissing: false,
 };
 
 const initialState: State = {
@@ -110,6 +119,9 @@ const initialState: State = {
 	hashCommentId: undefined,
 	totalPages: 0,
 	loading: true,
+	topForm: initialCommentFormState,
+	replyForm: initialCommentFormState,
+	bottomForm: initialCommentFormState,
 };
 
 type Action =
@@ -124,7 +136,13 @@ type Action =
 	| { type: 'updateCommentPage'; commentPage: number; shouldExpand: boolean }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
-	| { type: 'setLoading'; loading: boolean };
+	| { type: 'setLoading'; loading: boolean }
+	| { type: 'setTopFormActive'; isActive: boolean }
+	| { type: 'setReplyFormActive'; isActive: boolean }
+	| { type: 'setBottomFormActive'; isActive: boolean }
+	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
+	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
+	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -139,7 +157,7 @@ const reducer = (state: State, action: Action): State => {
 		case 'addComment':
 			return {
 				...state,
-				comments: [action.comment, ...state.comments.slice(0, -1)], // Remove last item from our local array Replace it with this new comment at the start
+				comments: [action.comment, ...state.comments],
 				isExpanded: true,
 			};
 		case 'expandComments':
@@ -174,6 +192,52 @@ const reducer = (state: State, action: Action): State => {
 				isExpanded: true,
 			};
 		}
+		case 'setTopFormActive': {
+			return {
+				...state,
+				topForm: { ...state.topForm, isActive: action.isActive },
+			};
+		}
+		case 'setReplyFormActive': {
+			return {
+				...state,
+				replyForm: { ...state.replyForm, isActive: action.isActive },
+			};
+		}
+		case 'setBottomFormActive': {
+			return {
+				...state,
+				bottomForm: { ...state.bottomForm, isActive: action.isActive },
+			};
+		}
+		case 'setTopFormUserMissing': {
+			return {
+				...state,
+				topForm: {
+					...state.topForm,
+					userNameMissing: action.userNameMissing,
+				},
+			};
+		}
+		case 'setReplyFormUserMissing': {
+			return {
+				...state,
+				replyForm: {
+					...state.replyForm,
+					userNameMissing: action.userNameMissing,
+				},
+			};
+		}
+		case 'setBottomFormUserMissing': {
+			return {
+				...state,
+				bottomForm: {
+					...state.bottomForm,
+					userNameMissing: action.userNameMissing,
+				},
+			};
+		}
+
 		default:
 			assertUnreachable(action);
 			return state;
@@ -199,6 +263,9 @@ export const Discussion = ({
 			hashCommentId,
 			totalPages,
 			loading,
+			topForm,
+			replyForm,
+			bottomForm,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
@@ -349,6 +416,36 @@ export const Discussion = ({
 							commentPage: page,
 						});
 					}}
+					setTopFormActive={(isActive) =>
+						dispatch({ type: 'setTopFormActive', isActive })
+					}
+					setReplyFormActive={(isActive) =>
+						dispatch({ type: 'setReplyFormActive', isActive })
+					}
+					setBottomFormActive={(isActive) =>
+						dispatch({ type: 'setBottomFormActive', isActive })
+					}
+					setTopFormUserMissing={(userNameMissing) =>
+						dispatch({
+							type: 'setTopFormUserMissing',
+							userNameMissing,
+						})
+					}
+					setReplyFormUserMissing={(userNameMissing) =>
+						dispatch({
+							type: 'setReplyFormUserMissing',
+							userNameMissing,
+						})
+					}
+					setBottomFormUserMissing={(userNameMissing) =>
+						dispatch({
+							type: 'setBottomFormUserMissing',
+							userNameMissing,
+						})
+					}
+					topForm={topForm}
+					replyForm={replyForm}
+					bottomForm={bottomForm}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />

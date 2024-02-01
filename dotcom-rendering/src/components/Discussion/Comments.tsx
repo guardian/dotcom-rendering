@@ -12,6 +12,7 @@ import type {
 	AdditionalHeadersType,
 	CommentType,
 	FilterOptions,
+	CommentForm as Form,
 	SignedInUser,
 } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
@@ -43,6 +44,15 @@ type Props = {
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
+	setTopFormActive: (isActive: boolean) => void;
+	setReplyFormActive: (isActive: boolean) => void;
+	setBottomFormActive: (isActive: boolean) => void;
+	setTopFormUserMissing: (isUserMissing: boolean) => void;
+	setReplyFormUserMissing: (isUserMissing: boolean) => void;
+	setBottomFormUserMissing: (isUserMissing: boolean) => void;
+	topForm: Form;
+	replyForm: Form;
+	bottomForm: Form;
 };
 
 const footerStyles = css`
@@ -117,6 +127,15 @@ export const Comments = ({
 	comments,
 	setComment,
 	handleFilterChange,
+	setTopFormActive,
+	setReplyFormActive,
+	setBottomFormActive,
+	setTopFormUserMissing,
+	setReplyFormUserMissing,
+	setBottomFormUserMissing,
+	topForm,
+	replyForm,
+	bottomForm,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -124,11 +143,7 @@ export const Comments = ({
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] = useState(10);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
 	const [showPreview, setShowPreview] = useState<boolean>(false);
-	const [isCommentFormActive, setIsCommentFormActive] = useState<boolean>(
-		!!commentBeingRepliedTo,
-	);
 	const [error, setError] = useState<string>('');
-	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
 	const [previewBody, setPreviewBody] = useState<string>('');
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
@@ -234,9 +249,8 @@ export const Comments = ({
 					<div css={picksWrapper}>
 						<TopPicks
 							comments={picks.slice(0, 2)}
-							authStatus={user?.authStatus}
+							user={user}
 							onPermalinkClick={onPermalinkClick}
-							onRecommend={onRecommend}
 						/>
 					</div>
 				) : (
@@ -278,20 +292,21 @@ export const Comments = ({
 											mutes={mutes}
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
-											onRecommend={onRecommend}
 											showPreview={showPreview}
 											setShowPreview={setShowPreview}
 											isCommentFormActive={
-												isCommentFormActive
+												replyForm.isActive
 											}
 											setIsCommentFormActive={
-												setIsCommentFormActive
+												setReplyFormActive
 											}
 											error={error}
 											setError={setError}
-											userNameMissing={userNameMissing}
+											userNameMissing={
+												replyForm.userNameMissing
+											}
 											setUserNameMissing={
-												setUserNameMissing
+												setReplyFormUserMissing
 											}
 											previewBody={previewBody}
 											setPreviewBody={setPreviewBody}
@@ -316,12 +331,12 @@ export const Comments = ({
 					onPreview={onPreview}
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
-					isActive={isCommentFormActive}
-					setIsActive={setIsCommentFormActive}
+					isActive={topForm.isActive}
+					setIsActive={setTopFormActive}
 					error={error}
 					setError={setError}
-					userNameMissing={userNameMissing}
-					setUserNameMissing={setUserNameMissing}
+					userNameMissing={topForm.userNameMissing}
+					setUserNameMissing={setTopFormUserMissing}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
 				/>
@@ -329,9 +344,8 @@ export const Comments = ({
 			{!!picks.length && (
 				<TopPicks
 					comments={picks}
-					authStatus={user?.authStatus}
+					user={user}
 					onPermalinkClick={onPermalinkClick}
-					onRecommend={onRecommend}
 				/>
 			)}
 			<Filters
@@ -374,17 +388,14 @@ export const Comments = ({
 									mutes={mutes}
 									toggleMuteStatus={toggleMuteStatus}
 									onPermalinkClick={onPermalinkClick}
-									onRecommend={onRecommend}
 									showPreview={showPreview}
 									setShowPreview={setShowPreview}
-									isCommentFormActive={isCommentFormActive}
-									setIsCommentFormActive={
-										setIsCommentFormActive
-									}
+									isCommentFormActive={replyForm.isActive}
+									setIsCommentFormActive={setReplyFormActive}
 									error={error}
 									setError={setError}
-									userNameMissing={userNameMissing}
-									setUserNameMissing={setUserNameMissing}
+									userNameMissing={replyForm.userNameMissing}
+									setUserNameMissing={setReplyFormUserMissing}
 									previewBody={previewBody}
 									setPreviewBody={setPreviewBody}
 								/>
@@ -412,12 +423,12 @@ export const Comments = ({
 					onPreview={onPreview}
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
-					isActive={isCommentFormActive}
-					setIsActive={setIsCommentFormActive}
+					isActive={bottomForm.isActive}
+					setIsActive={setBottomFormActive}
 					error={error}
 					setError={setError}
-					userNameMissing={userNameMissing}
-					setUserNameMissing={setUserNameMissing}
+					userNameMissing={bottomForm.userNameMissing}
+					setUserNameMissing={setBottomFormUserMissing}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
 				/>
