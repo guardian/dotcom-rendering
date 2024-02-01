@@ -108,6 +108,7 @@ type State = {
 const initialCommentFormState = {
 	isActive: false,
 	userNameMissing: false,
+	info: '',
 };
 
 const initialState: State = {
@@ -142,7 +143,10 @@ type Action =
 	| { type: 'setBottomFormActive'; isActive: boolean }
 	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean };
+	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
+	| { type: 'setTopFormInfo'; info: string }
+	| { type: 'setReplyFormInfo'; info: string }
+	| { type: 'setBottomFormInfo'; info: string };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -234,6 +238,33 @@ const reducer = (state: State, action: Action): State => {
 				bottomForm: {
 					...state.bottomForm,
 					userNameMissing: action.userNameMissing,
+				},
+			};
+		}
+		case 'setTopFormInfo': {
+			return {
+				...state,
+				topForm: {
+					...state.topForm,
+					info: action.info,
+				},
+			};
+		}
+		case 'setReplyFormInfo': {
+			return {
+				...state,
+				replyForm: {
+					...state.replyForm,
+					info: action.info,
+				},
+			};
+		}
+		case 'setBottomFormInfo': {
+			return {
+				...state,
+				bottomForm: {
+					...state.bottomForm,
+					info: action.info,
 				},
 			};
 		}
@@ -441,6 +472,24 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormUserMissing',
 							userNameMissing,
+						})
+					}
+					setTopFormInfo={(info) =>
+						dispatch({
+							type: 'setTopFormInfo',
+							info,
+						})
+					}
+					setReplyFormInfo={(info) =>
+						dispatch({
+							type: 'setReplyFormInfo',
+							info,
+						})
+					}
+					setBottomFormInfo={(info) =>
+						dispatch({
+							type: 'setBottomFormInfo',
+							info,
 						})
 					}
 					topForm={topForm}

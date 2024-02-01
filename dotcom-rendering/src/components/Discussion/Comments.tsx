@@ -50,6 +50,9 @@ type Props = {
 	setTopFormUserMissing: (isUserMissing: boolean) => void;
 	setReplyFormUserMissing: (isUserMissing: boolean) => void;
 	setBottomFormUserMissing: (isUserMissing: boolean) => void;
+	setTopFormInfo: (info: string) => void;
+	setReplyFormInfo: (info: string) => void;
+	setBottomFormInfo: (info: string) => void;
 	topForm: Form;
 	replyForm: Form;
 	bottomForm: Form;
@@ -133,6 +136,9 @@ export const Comments = ({
 	setTopFormUserMissing,
 	setReplyFormUserMissing,
 	setBottomFormUserMissing,
+	setTopFormInfo,
+	setReplyFormInfo,
+	setBottomFormInfo,
 	topForm,
 	replyForm,
 	bottomForm,
@@ -310,6 +316,8 @@ export const Comments = ({
 											}
 											previewBody={previewBody}
 											setPreviewBody={setPreviewBody}
+											info={replyForm.info}
+											setInfo={setReplyFormInfo}
 										/>
 									</li>
 								))}
@@ -339,6 +347,8 @@ export const Comments = ({
 					setUserNameMissing={setTopFormUserMissing}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
+					info={topForm.info}
+					setInfo={setTopFormInfo}
 				/>
 			)}
 			{!!picks.length && (
@@ -398,6 +408,8 @@ export const Comments = ({
 									setUserNameMissing={setReplyFormUserMissing}
 									previewBody={previewBody}
 									setPreviewBody={setPreviewBody}
+									info={replyForm.info}
+									setInfo={setReplyFormInfo}
 								/>
 							</li>
 						))}
@@ -431,6 +443,8 @@ export const Comments = ({
 					setUserNameMissing={setBottomFormUserMissing}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
+					info={bottomForm.info}
+					setInfo={setBottomFormInfo}
 				/>
 			)}
 		</div>

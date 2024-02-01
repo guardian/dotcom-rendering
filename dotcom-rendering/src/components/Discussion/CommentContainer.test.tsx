@@ -89,6 +89,8 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				info={''}
+				setInfo={() => {}}
 			/>,
 		);
 
@@ -136,6 +138,8 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				info={''}
+				setInfo={() => {}}
 			/>,
 		);
 
@@ -182,6 +186,8 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				info={''}
+				setInfo={() => {}}
 			/>,
 		);
 
@@ -229,6 +235,8 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				info={''}
+				setInfo={() => {}}
 			/>,
 		);
 
