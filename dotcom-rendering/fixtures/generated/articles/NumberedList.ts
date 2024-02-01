@@ -2273,11 +2273,6 @@ export const NumberedList: DCRArticle = {
 			],
 			elementId: '581ccb1a-fc70-407b-9ab7-922eb891cf11',
 			position: 1,
-			lightbox: {
-				caption:
-					'Which is the best premium smartphone for you? Check out this guide to the top mobile phones including iPhone, Samsung, Huawei, OnePlus and Google. ',
-				credit: 'Photograph: Samuel Gibbs/The Guardian',
-			},
 		},
 	],
 	canonicalUrl:
@@ -2687,11 +2682,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: 'e6459a65-6e9f-49e4-912a-a2baa8308bdd',
 					position: 2,
-					lightbox: {
-						caption:
-							'The OnePlus 7T Pro has a massive, gorgeous screen, is the fastest-feeling phone by miles and has a competition-beating in-display fingerprint scanner.',
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					starRating: 5,
 				},
 				{
@@ -3107,11 +3097,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: '294b32b2-5b2d-46ca-b6e7-9f8a69d3b28f',
 					position: 3,
-					lightbox: {
-						caption:
-							'Apple’s smallest new iPhone 11 Pro is also the best combination of size, screen, performance, battery life, size and camera.',
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					starRating: 5,
 				},
 				{
@@ -3527,11 +3512,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: 'e6d66468-5b49-4a1c-89e1-f0a7c2222414',
 					position: 4,
-					lightbox: {
-						caption:
-							'A big, beautiful screen in a smaller phone, the Galaxy S10 is the sweet spot in Samsung’s flagship smartphone line.',
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					starRating: 5,
 				},
 				{
@@ -3942,11 +3922,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: 'e8e0be5c-2772-49df-bd16-9635b73bbc1a',
 					position: 5,
-					lightbox: {
-						caption:
-							'The Huawei P30 Pro has a large, beautiful screen, long battery life and a game-changing camera with exceptional low-light performance, 5x optical zoom and up to 50x digital zoom.',
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					starRating: 5,
 				},
 				{
@@ -4357,11 +4332,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: 'd6d39e23-a345-442d-bc03-6c5f9a5610ea',
 					position: 6,
-					lightbox: {
-						caption:
-							'The OnePlus 7T offers most of what makes the OnePlus 7T Pro the best phone going, but in a smaller, cheaper package.',
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					starRating: 5,
 				},
 				{
@@ -4785,9 +4755,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: '636735e1-2369-41a7-8f65-b6760fa58cab',
 					position: 7,
-					lightbox: {
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					isAvatar: true,
 				},
 				{
@@ -5141,9 +5108,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: '21e6e862-1688-44c5-9714-d5195bc87f04',
 					position: 8,
-					lightbox: {
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					isAvatar: true,
 				},
 				{
@@ -5502,9 +5466,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: '1f42922c-d0c9-4b47-8031-7671b4ed7e94',
 					position: 9,
-					lightbox: {
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					isAvatar: true,
 				},
 				{
@@ -5858,9 +5819,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: '6da1ebce-8f69-4f3c-9c2e-a20c578ac443',
 					position: 10,
-					lightbox: {
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					isAvatar: true,
 				},
 				{
@@ -6209,9 +6167,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: '816dc0fb-32c5-4bbe-97ae-0e1a7dcacf63',
 					position: 11,
-					lightbox: {
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					isAvatar: true,
 				},
 				{
@@ -6560,9 +6515,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: 'f31187d6-1987-4f06-89e4-2e07bdde0505',
 					position: 12,
-					lightbox: {
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					isAvatar: true,
 				},
 				{
@@ -6921,9 +6873,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: '89946037-e88a-45e2-8fb7-3a0be61a1df0',
 					position: 13,
-					lightbox: {
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					isAvatar: true,
 				},
 				{
@@ -7272,9 +7221,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: 'dd161a7b-2b45-495a-b455-d1278a34872b',
 					position: 14,
-					lightbox: {
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					isAvatar: true,
 				},
 				{
@@ -7633,9 +7579,6 @@ export const NumberedList: DCRArticle = {
 					],
 					elementId: '1790c32a-9082-4044-b5d4-8edb4b278a76',
 					position: 15,
-					lightbox: {
-						credit: 'Photograph: Samuel Gibbs/The Guardian',
-					},
 					isAvatar: true,
 				},
 				{

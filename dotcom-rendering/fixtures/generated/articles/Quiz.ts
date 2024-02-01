@@ -1644,11 +1644,6 @@ export const Quiz: DCRArticle = {
 			],
 			elementId: '5b74f03b-1a5d-4a56-bd8d-0041893d0541',
 			position: 1,
-			lightbox: {
-				caption:
-					'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
-				credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
-			},
 		},
 	],
 	canonicalUrl:

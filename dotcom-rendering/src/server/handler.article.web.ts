@@ -69,7 +69,11 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		// The content if body is not checked
 		body as FEBlocksRequest;
 
-	const enhancedBlocks = enhanceBlocks(blocks, format, 'Web');
+	const enhancedBlocks = enhanceBlocks(blocks, format, {
+		renderingTarget: 'Web',
+		promotedNewsletter: undefined,
+		imagesForLightbox: [],
+	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
 		format,

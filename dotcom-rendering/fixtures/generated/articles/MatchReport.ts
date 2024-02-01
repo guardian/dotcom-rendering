@@ -1654,11 +1654,6 @@ export const MatchReport: DCRArticle = {
 			],
 			elementId: 'a272ceb0-15ac-4349-a1e9-449e275094ea',
 			position: 1,
-			lightbox: {
-				caption:
-					'André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.',
-				credit: 'Photograph: Kieran McManus/BPI/Shutterstock',
-			},
 		},
 	],
 	canonicalUrl:
