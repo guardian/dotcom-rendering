@@ -18,6 +18,7 @@ import {
 } from 'valibot';
 import type {
 	comment as onComment,
+	recommend as onRecommend,
 	reply as onReply,
 } from '../lib/discussionApi';
 import type { Guard } from '../lib/guard';
@@ -293,6 +294,7 @@ export type SignedInUser = {
 	profile: UserProfile;
 	onComment: ReturnType<typeof onComment>;
 	onReply: ReturnType<typeof onReply>;
+	onRecommend: ReturnType<typeof onRecommend>;
 	authStatus: SignedInWithCookies | SignedInWithOkta;
 };
 
@@ -375,3 +377,8 @@ export const pickResponseSchema = object({
 	statusCode: literal(200),
 	message: string(),
 });
+
+export type CommentForm = {
+	isActive: boolean;
+	userNameMissing: boolean;
+};
