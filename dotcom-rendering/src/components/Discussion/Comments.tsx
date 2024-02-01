@@ -55,6 +55,9 @@ type Props = {
 	setTopFormPreviewBody: (previewBody: string) => void;
 	setReplyFormPreviewBody: (previewBody: string) => void;
 	setBottomFormPreviewBody: (previewBody: string) => void;
+	setTopFormBody: (body: string) => void;
+	setReplyFormBody: (body: string) => void;
+	setBottomFormBody: (body: string) => void;
 	topForm: Form;
 	replyForm: Form;
 	bottomForm: Form;
@@ -157,6 +160,9 @@ export const Comments = ({
 	setTopFormPreviewBody,
 	setReplyFormPreviewBody,
 	setBottomFormPreviewBody,
+	setTopFormBody,
+	setReplyFormBody,
+	setBottomFormBody,
 	topForm,
 	replyForm,
 	bottomForm,
@@ -169,7 +175,6 @@ export const Comments = ({
 	const [mutes, setMutes] = useState<string[]>(readMutes());
 	const [error, setError] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
-	const [body, setBody] = useState('');
 
 	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
 
@@ -344,8 +349,8 @@ export const Comments = ({
 											setPreviewBody={
 												setReplyFormPreviewBody
 											}
-											body={body}
-											setBody={setBody}
+											body={replyForm.body}
+											setBody={setReplyFormBody}
 										/>
 									</li>
 								))}
@@ -375,8 +380,8 @@ export const Comments = ({
 					setUserNameMissing={setTopFormUserMissing}
 					previewBody={topForm.previewBody}
 					setPreviewBody={setTopFormPreviewBody}
-					body={body}
-					setBody={setBody}
+					body={topForm.body}
+					setBody={setTopFormBody}
 				/>
 			)}
 			{!!picks.length && (
@@ -435,8 +440,8 @@ export const Comments = ({
 									setUserNameMissing={setReplyFormUserMissing}
 									previewBody={replyForm.previewBody}
 									setPreviewBody={setReplyFormPreviewBody}
-									body={body}
-									setBody={setBody}
+									body={replyForm.body}
+									setBody={setReplyFormBody}
 								/>
 							</li>
 						))}
@@ -469,8 +474,8 @@ export const Comments = ({
 					setUserNameMissing={setBottomFormUserMissing}
 					previewBody={bottomForm.previewBody}
 					setPreviewBody={setBottomFormPreviewBody}
-					body={body}
-					setBody={setBody}
+					body={bottomForm.body}
+					setBody={setBottomFormBody}
 				/>
 			)}
 		</div>
