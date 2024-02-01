@@ -28,7 +28,8 @@ export const Analytics = ({
 	},
 }: Props) => {
 	const scripts: string[] = [
-		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include">
+		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
+		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-block-on-consent="_till_responded" data-credentials="include">
 			<script type="application/json">
 				{
 					"requests": {
@@ -38,7 +39,7 @@ export const Analytics = ({
 						"trackPageviewTcf": {
 							"on": "visible",
 							"request": "pageViewWithConsent",
-							"selector": ".amp-geo-group-tcfv2",
+							"selector": ".amp-geo-group-eea",
 							"vars": {
 								"consentUUID": "\${clientId(consentUUID)}",
 								"consent": "\${consentString}",
