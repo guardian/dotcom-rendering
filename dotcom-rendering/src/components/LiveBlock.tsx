@@ -95,7 +95,12 @@ export const LiveBlock = ({
 				`}
 			>
 				<Island priority="feature" defer={{ until: 'idle' }}>
-					<ShareButton size="xsmall" />
+					<ShareButton
+						size="xsmall"
+						pageId={pageId}
+						blockId={block.id}
+						webTitle={webTitle}
+					/>
 				</Island>
 				{!isUndefined(lastUpdated) && (
 					<LastUpdated

@@ -172,7 +172,7 @@ export const SubMeta = ({
 					`}
 				>
 					<Island priority="feature" defer={{ until: 'idle' }}>
-						<ShareButton />
+						<ShareButton pageId={pageId} webTitle={webTitle} />
 					</Island>
 					<div css={syndicationButtonOverrides}>
 						{format.design === ArticleDesign.Interactive ? null : (

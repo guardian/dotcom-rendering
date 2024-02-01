@@ -1,5 +1,4 @@
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { ShareButton } from './ShareButton.importable';
 
 export default {
@@ -7,8 +6,8 @@ export default {
 	title: 'Components/ShareButton',
 };
 
-export const Small = ({}: StoryProps) => {
-	return <ShareButton />;
+export const Small = () => {
+	return <ShareButton pageId={'123'} webTitle={'The the'} />;
 };
 Small.storyName = 'Small';
 Small.decorators = [splitTheme()];

@@ -425,7 +425,10 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 									priority="feature"
 									defer={{ until: 'idle' }}
 								>
-									<ShareButton />
+									<ShareButton
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+									/>
 								</Island>
 							</div>
 
