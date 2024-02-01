@@ -8,6 +8,7 @@ import { runnableTestsToParticipations } from '../experiments/lib/ab-participati
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 import { setABTests } from '../lib/useAB';
 import type { ABTestSwitches } from '../model/enhance-switches';
+import type { ServerSideTests } from '../types/config';
 import { useConfig } from './ConfigContext';
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
 	forcedTestVariants?: CoreAPIConfig['forcedTestVariants'];
 	isDev: boolean;
 	pageIsSensitive: CoreAPIConfig['pageIsSensitive'];
+	serverSideTests: ServerSideTests;
 };
 
 /**
@@ -33,6 +35,7 @@ export const SetABTests = ({
 	pageIsSensitive,
 	abTestSwitches,
 	forcedTestVariants,
+	serverSideTests,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const [ophan, setOphan] = useState<Awaited<ReturnType<typeof getOphan>>>();
@@ -78,8 +81,12 @@ export const SetABTests = ({
 			arrayOfTestObjects: tests,
 			forcedTestVariants: allForcedTestVariants,
 			ophanRecord: ophan.record,
-			serverSideTests: {},
-			errorReporter: () => void 0,
+			serverSideTests,
+			errorReporter: (e) =>
+				window.guardian.modules.sentry.reportError(
+					e instanceof Error ? e : Error(String(e)),
+					'ab-tests',
+				),
 		});
 		const allRunnableTests = ab.allRunnableTests(tests);
 		const participations = runnableTestsToParticipations(allRunnableTests);
@@ -93,7 +100,14 @@ export const SetABTests = ({
 		ab.registerImpressionEvents(allRunnableTests);
 		ab.registerCompleteEvents(allRunnableTests);
 		log('dotcom', 'AB tests initialised');
-	}, [abTestSwitches, forcedTestVariants, isDev, pageIsSensitive, ophan]);
+	}, [
+		abTestSwitches,
+		forcedTestVariants,
+		isDev,
+		pageIsSensitive,
+		ophan,
+		serverSideTests,
+	]);
 
 	// we don’t render anything
 	return null;
