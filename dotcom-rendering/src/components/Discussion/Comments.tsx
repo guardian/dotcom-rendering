@@ -50,6 +50,9 @@ type Props = {
 	setTopFormUserMissing: (isUserMissing: boolean) => void;
 	setReplyFormUserMissing: (isUserMissing: boolean) => void;
 	setBottomFormUserMissing: (isUserMissing: boolean) => void;
+	setTopFormError: (error: string) => void;
+	setReplyFormError: (error: string) => void;
+	setBottomFormError: (error: string) => void;
 	topForm: Form;
 	replyForm: Form;
 	bottomForm: Form;
@@ -133,6 +136,9 @@ export const Comments = ({
 	setTopFormUserMissing,
 	setReplyFormUserMissing,
 	setBottomFormUserMissing,
+	setTopFormError,
+	setReplyFormError,
+	setBottomFormError,
 	topForm,
 	replyForm,
 	bottomForm,
@@ -143,7 +149,6 @@ export const Comments = ({
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] = useState(10);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
 	const [showPreview, setShowPreview] = useState<boolean>(false);
-	const [error, setError] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
@@ -300,8 +305,8 @@ export const Comments = ({
 											setIsCommentFormActive={
 												setReplyFormActive
 											}
-											error={error}
-											setError={setError}
+											error={replyForm.error}
+											setError={setReplyFormError}
 											userNameMissing={
 												replyForm.userNameMissing
 											}
@@ -333,8 +338,8 @@ export const Comments = ({
 					setShowPreview={setShowPreview}
 					isActive={topForm.isActive}
 					setIsActive={setTopFormActive}
-					error={error}
-					setError={setError}
+					error={topForm.error}
+					setError={setTopFormError}
 					userNameMissing={topForm.userNameMissing}
 					setUserNameMissing={setTopFormUserMissing}
 					previewBody={previewBody}
@@ -392,8 +397,8 @@ export const Comments = ({
 									setShowPreview={setShowPreview}
 									isCommentFormActive={replyForm.isActive}
 									setIsCommentFormActive={setReplyFormActive}
-									error={error}
-									setError={setError}
+									error={replyForm.error}
+									setError={setReplyFormError}
 									userNameMissing={replyForm.userNameMissing}
 									setUserNameMissing={setReplyFormUserMissing}
 									previewBody={previewBody}
@@ -425,8 +430,8 @@ export const Comments = ({
 					setShowPreview={setShowPreview}
 					isActive={bottomForm.isActive}
 					setIsActive={setBottomFormActive}
-					error={error}
-					setError={setError}
+					error={bottomForm.error}
+					setError={setBottomFormError}
 					userNameMissing={bottomForm.userNameMissing}
 					setUserNameMissing={setBottomFormUserMissing}
 					previewBody={previewBody}

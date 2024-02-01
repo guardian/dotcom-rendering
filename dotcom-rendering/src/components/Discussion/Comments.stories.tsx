@@ -49,7 +49,11 @@ const filters: FilterOptions = {
 	orderBy: 'newest',
 };
 
-const defaultCommentForm = { isActive: false, userNameMissing: false };
+const defaultCommentForm = {
+	isActive: false,
+	userNameMissing: false,
+	error: '',
+};
 
 export const LoggedOutHiddenPicks = () => (
 	<div
@@ -85,6 +89,9 @@ export const LoggedOutHiddenPicks = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -135,6 +142,9 @@ export const InitialPage = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -189,6 +199,9 @@ export const LoggedInHiddenNoPicks = () => {
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={{ ...defaultCommentForm, isActive }}
 				bottomForm={defaultCommentForm}
@@ -239,6 +252,9 @@ export const LoggedIn = () => {
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={{
 					...defaultCommentForm,
@@ -294,6 +310,9 @@ export const LoggedInShortDiscussion = () => {
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
 				topForm={{ ...defaultCommentForm, isActive: isTopFormActive }}
 				replyForm={{
 					...defaultCommentForm,
@@ -340,6 +359,9 @@ export const LoggedOutHiddenNoPicks = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -392,6 +414,9 @@ export const Closed = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -442,6 +467,9 @@ export const NoComments = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -494,6 +522,9 @@ export const LegacyDiscussion = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
