@@ -142,12 +142,12 @@ export const Active = () => {
 			setShowPreview={() => {}}
 			isActive={true}
 			setIsActive={() => {}}
-		error={''}
-		setError={() => {}}
+			error={''}
+			setError={() => {}}
 			userNameMissing={false}
 			setUserNameMissing={() => {}}
-		previewBody=""
-		setPreviewBody={() => {}}
+			previewBody=""
+			setPreviewBody={() => {}}
 			body={body}
 			setBody={setBody}
 		/>
@@ -189,12 +189,12 @@ export const Premoderated = () => {
 			setShowPreview={() => {}}
 			isActive={true}
 			setIsActive={() => {}}
-		error={''}
-		setError={() => {}}
+			error={''}
+			setError={() => {}}
 			userNameMissing={false}
 			setUserNameMissing={() => {}}
-		previewBody=""
-		setPreviewBody={() => {}}
+			previewBody=""
+			setPreviewBody={() => {}}
 			body={body}
 			setBody={setBody}
 		/>

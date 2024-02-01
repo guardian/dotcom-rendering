@@ -224,8 +224,6 @@ export const CommentForm = ({
 	body,
 	setBody,
 }: Props) => {
-	const [body, setBody] = useState<string>('');
-	const [previewBody, setPreviewBody] = useState<string>('');
 	const [info, setInfo] = useState<string>('');
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
