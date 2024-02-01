@@ -20,16 +20,16 @@ import { Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
 
-type ScalingPolicy = {
-	scalingStepsOut: ScalingInterval[];
-	scalingStepsIn: ScalingInterval[];
-};
-
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
-	guApp: `${'article' | 'facia' | 'misc' | 'interactive'}-rendering`;
+	guApp: `${'article' | 'facia' | 'interactive'}-rendering`;
 	domainName: string;
 	instanceSize: InstanceSize;
-	scaling: GuAsgCapacity & { policy?: ScalingPolicy };
+	scaling: GuAsgCapacity & {
+		policy?: {
+			scalingStepsOut: ScalingInterval[];
+			scalingStepsIn: ScalingInterval[];
+		};
+	};
 }
 
 /** DCR infrastructure provisioning via CDK */
