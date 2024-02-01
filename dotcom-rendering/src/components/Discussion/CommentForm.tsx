@@ -96,12 +96,6 @@ const errorTextStyles = css`
 	color: ${text.error};
 `;
 
-const infoTextStyles = css`
-	margin: 0;
-	${textSans.xxsmall()};
-	color: ${text.supporting};
-`;
-
 const msgContainerStyles = css`
 	margin-top: 8px;
 `;
@@ -224,7 +218,6 @@ export const CommentForm = ({
 	setPreviewBody,
 }: Props) => {
 	const [body, setBody] = useState<string>('');
-	const [info, setInfo] = useState<string>('');
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
 	useEffect(() => {
@@ -302,7 +295,6 @@ export const CommentForm = ({
 
 	const resetForm = () => {
 		setError('');
-		setInfo('');
 		setBody('');
 		setShowPreview(false);
 		setIsActive(false);
@@ -311,7 +303,6 @@ export const CommentForm = ({
 
 	const submitForm = async () => {
 		setError('');
-		setInfo('');
 
 		if (body) {
 			const response = commentBeingRepliedTo
@@ -367,10 +358,6 @@ export const CommentForm = ({
 				} else if (response.error === 'API_ERROR') {
 					setError(`Sorry, there was a problem posting your comment. Please try
                   another browser or network connection.  Reference code `);
-				} else if (response.error === 'EMAIL_VERIFIED') {
-					setInfo(
-						'Sent. Please check your email to verify your email address. Once verified post your comment.',
-					);
 				} else if (response.error === 'EMAIL_VERIFIED_FAIL') {
 					// TODO: Support resending verification email
 					setError(`We are having technical difficulties. Please try again later or
@@ -445,11 +432,6 @@ export const CommentForm = ({
 							css={[errorTextStyles, linkStyles]}
 							dangerouslySetInnerHTML={{ __html: error }}
 						/>
-					</div>
-				)}
-				{!!info && (
-					<div css={msgContainerStyles}>
-						<p css={[infoTextStyles, linkStyles]}>{info}</p>
 					</div>
 				)}
 				{isActive && (
