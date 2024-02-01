@@ -2,7 +2,6 @@ import { isObject, isString, joinUrl } from '@guardian/libs';
 import { safeParse } from 'valibot';
 import type {
 	AdditionalHeadersType,
-	CommentResponseErrorCodes,
 	CommentType,
 	DiscussionOptions,
 	GetDiscussionSuccess,
@@ -155,7 +154,9 @@ export const preview = async (
 };
 
 type CommentResponse = Result<
-	{ code: CommentResponseErrorCodes | GetDiscussionError; message: string },
+	| 'NetworkError'
+	| 'ApiError'
+	| (ReturnType<typeof parseCommentResponse> & { kind: 'error' })['error'],
 	number
 >;
 
@@ -181,15 +182,7 @@ export const comment =
 			credentials: authOptions.credentials,
 		});
 
-		if (jsonResult.kind === 'error') {
-			return {
-				kind: 'error',
-				error: {
-					code: jsonResult.error,
-					message: 'Could not retrieve the comment',
-				},
-			};
-		}
+		if (jsonResult.kind === 'error') return jsonResult;
 
 		return parseCommentResponse(jsonResult.value);
 	};
@@ -225,15 +218,7 @@ export const reply =
 			credentials: authOptions.credentials,
 		});
 
-		if (jsonResult.kind === 'error') {
-			return {
-				kind: 'error',
-				error: {
-					code: jsonResult.error,
-					message: 'Could not retrieve the comment',
-				},
-			};
-		}
+		if (jsonResult.kind === 'error') return jsonResult;
 
 		return parseCommentResponse(jsonResult.value);
 	};

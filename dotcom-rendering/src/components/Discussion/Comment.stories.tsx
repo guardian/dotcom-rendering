@@ -106,7 +106,7 @@ const longBothReplyCommentData: CommentType = {
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const;
 
 const user: SignedInUser = {

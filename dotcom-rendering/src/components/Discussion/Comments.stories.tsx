@@ -13,7 +13,7 @@ export default { component: Comments, title: 'Discussion/App' };
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const;
 
 const aUser: SignedInUser = {

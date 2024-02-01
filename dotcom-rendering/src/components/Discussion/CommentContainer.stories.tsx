@@ -135,7 +135,7 @@ const commentDataWithLongThread: CommentType = {
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const;
 
 const aUser: SignedInUser = {
