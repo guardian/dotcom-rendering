@@ -13,6 +13,7 @@ import type {
 	CommentType,
 	FilterOptions,
 	CommentForm as Form,
+	FormType,
 	SignedInUser,
 } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
@@ -44,15 +45,9 @@ type Props = {
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
-	setTopFormActive: (isActive: boolean) => void;
-	setReplyFormActive: (isActive: boolean) => void;
-	setBottomFormActive: (isActive: boolean) => void;
-	setTopFormUserMissing: (isUserMissing: boolean) => void;
-	setReplyFormUserMissing: (isUserMissing: boolean) => void;
-	setBottomFormUserMissing: (isUserMissing: boolean) => void;
-	setTopFormError: (error: string) => void;
-	setReplyFormError: (error: string) => void;
-	setBottomFormError: (error: string) => void;
+	setFormActive: (isActive: boolean, form: FormType) => void;
+	setFormUserMissing: (isUserMissing: boolean, form: FormType) => void;
+	setFormError: (error: string, form: FormType) => void;
 	topForm: Form;
 	replyForm: Form;
 	bottomForm: Form;
@@ -130,15 +125,9 @@ export const Comments = ({
 	comments,
 	setComment,
 	handleFilterChange,
-	setTopFormActive,
-	setReplyFormActive,
-	setBottomFormActive,
-	setTopFormUserMissing,
-	setReplyFormUserMissing,
-	setBottomFormUserMissing,
-	setTopFormError,
-	setReplyFormError,
-	setBottomFormError,
+	setFormActive,
+	setFormUserMissing,
+	setFormError,
 	topForm,
 	replyForm,
 	bottomForm,
@@ -302,17 +291,27 @@ export const Comments = ({
 											isCommentFormActive={
 												replyForm.isActive
 											}
-											setIsCommentFormActive={
-												setReplyFormActive
-											}
+											setIsCommentFormActive={(
+												isActive,
+											) => {
+												setFormActive(
+													isActive,
+													'reply',
+												);
+											}}
 											error={replyForm.error}
-											setError={setReplyFormError}
+											setError={(error) => {
+												setFormError(error, 'reply');
+											}}
 											userNameMissing={
 												replyForm.userNameMissing
 											}
-											setUserNameMissing={
-												setReplyFormUserMissing
-											}
+											setUserNameMissing={(isMissing) => {
+												setFormUserMissing(
+													isMissing,
+													'reply',
+												);
+											}}
 											previewBody={previewBody}
 											setPreviewBody={setPreviewBody}
 										/>
@@ -337,11 +336,13 @@ export const Comments = ({
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
 					isActive={topForm.isActive}
-					setIsActive={setTopFormActive}
+					setIsActive={(isActive) => setFormActive(isActive, 'top')}
 					error={topForm.error}
-					setError={setTopFormError}
+					setError={(error) => setFormError(error, 'top')}
 					userNameMissing={topForm.userNameMissing}
-					setUserNameMissing={setTopFormUserMissing}
+					setUserNameMissing={(isMissing) =>
+						setFormUserMissing(isMissing, 'top')
+					}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
 				/>
@@ -396,11 +397,17 @@ export const Comments = ({
 									showPreview={showPreview}
 									setShowPreview={setShowPreview}
 									isCommentFormActive={replyForm.isActive}
-									setIsCommentFormActive={setReplyFormActive}
+									setIsCommentFormActive={(isActive) =>
+										setFormActive(isActive, 'reply')
+									}
 									error={replyForm.error}
-									setError={setReplyFormError}
+									setError={(error) =>
+										setFormError(error, 'reply')
+									}
 									userNameMissing={replyForm.userNameMissing}
-									setUserNameMissing={setReplyFormUserMissing}
+									setUserNameMissing={(isMissing) =>
+										setFormUserMissing(isMissing, 'reply')
+									}
 									previewBody={previewBody}
 									setPreviewBody={setPreviewBody}
 								/>
@@ -429,11 +436,15 @@ export const Comments = ({
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
 					isActive={bottomForm.isActive}
-					setIsActive={setBottomFormActive}
+					setIsActive={(isActive) =>
+						setFormActive(isActive, 'bottom')
+					}
 					error={bottomForm.error}
-					setError={setBottomFormError}
+					setError={(error) => setFormError(error, 'bottom')}
 					userNameMissing={bottomForm.userNameMissing}
-					setUserNameMissing={setBottomFormUserMissing}
+					setUserNameMissing={(isMissing) =>
+						setFormUserMissing(isMissing, 'bottom')
+					}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
 				/>

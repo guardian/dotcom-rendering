@@ -383,3 +383,5 @@ export type CommentForm = {
 	userNameMissing: boolean;
 	error: string;
 };
+
+export type FormType = 'top' | 'reply' | 'bottom';

@@ -15,6 +15,7 @@ import type {
 	CommentForm,
 	CommentType,
 	FilterOptions,
+	FormType,
 	SignedInUser,
 } from '../types/discussion';
 import { Comments } from './Discussion/Comments';
@@ -138,15 +139,26 @@ type Action =
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
 	| { type: 'setLoading'; loading: boolean }
-	| { type: 'setTopFormActive'; isActive: boolean }
-	| { type: 'setReplyFormActive'; isActive: boolean }
-	| { type: 'setBottomFormActive'; isActive: boolean }
-	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setTopFormError'; error: string }
-	| { type: 'setReplyFormError'; error: string }
-	| { type: 'setBottomFormError'; error: string };
+	| {
+			type: 'setFormActive';
+			isActive: boolean;
+			form: FormType;
+	  }
+	| {
+			type: 'setFormActive';
+			isActive: boolean;
+			form: FormType;
+	  }
+	| {
+			type: 'setFormUserMissing';
+			userNameMissing: boolean;
+			form: FormType;
+	  }
+	| {
+			type: 'setFormError';
+			error: string;
+			form: FormType;
+	  };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -196,77 +208,99 @@ const reducer = (state: State, action: Action): State => {
 				isExpanded: true,
 			};
 		}
-		case 'setTopFormActive': {
-			return {
-				...state,
-				topForm: { ...state.topForm, isActive: action.isActive },
-			};
+
+		case 'setFormActive': {
+			switch (action.form) {
+				case 'top': {
+					return {
+						...state,
+						topForm: {
+							...state.topForm,
+							isActive: action.isActive,
+						},
+					};
+				}
+				case 'reply': {
+					return {
+						...state,
+						replyForm: {
+							...state.replyForm,
+							isActive: action.isActive,
+						},
+					};
+				}
+				case 'bottom': {
+					return {
+						...state,
+						bottomForm: {
+							...state.bottomForm,
+							isActive: action.isActive,
+						},
+					};
+				}
+			}
 		}
-		case 'setReplyFormActive': {
-			return {
-				...state,
-				replyForm: { ...state.replyForm, isActive: action.isActive },
-			};
+		case 'setFormUserMissing': {
+			switch (action.form) {
+				case 'top': {
+					return {
+						...state,
+						topForm: {
+							...state.topForm,
+							userNameMissing: action.userNameMissing,
+						},
+					};
+				}
+				case 'reply': {
+					return {
+						...state,
+						replyForm: {
+							...state.replyForm,
+							userNameMissing: action.userNameMissing,
+						},
+					};
+				}
+				case 'bottom': {
+					return {
+						...state,
+						bottomForm: {
+							...state.bottomForm,
+							userNameMissing: action.userNameMissing,
+						},
+					};
+				}
+			}
 		}
-		case 'setBottomFormActive': {
-			return {
-				...state,
-				bottomForm: { ...state.bottomForm, isActive: action.isActive },
-			};
-		}
-		case 'setTopFormUserMissing': {
-			return {
-				...state,
-				topForm: {
-					...state.topForm,
-					userNameMissing: action.userNameMissing,
-				},
-			};
-		}
-		case 'setReplyFormUserMissing': {
-			return {
-				...state,
-				replyForm: {
-					...state.replyForm,
-					userNameMissing: action.userNameMissing,
-				},
-			};
-		}
-		case 'setBottomFormUserMissing': {
-			return {
-				...state,
-				bottomForm: {
-					...state.bottomForm,
-					userNameMissing: action.userNameMissing,
-				},
-			};
-		}
-		case 'setTopFormError': {
-			return {
-				...state,
-				topForm: {
-					...state.topForm,
-					error: action.error,
-				},
-			};
-		}
-		case 'setReplyFormError': {
-			return {
-				...state,
-				replyForm: {
-					...state.replyForm,
-					error: action.error,
-				},
-			};
-		}
-		case 'setBottomFormError': {
-			return {
-				...state,
-				bottomForm: {
-					...state.bottomForm,
-					error: action.error,
-				},
-			};
+		case 'setFormError': {
+			switch (action.form) {
+				case 'top': {
+					return {
+						...state,
+						topForm: {
+							...state.topForm,
+							error: action.error,
+						},
+					};
+				}
+				case 'reply': {
+					return {
+						...state,
+						replyForm: {
+							...state.replyForm,
+							error: action.error,
+						},
+					};
+				}
+				case 'bottom': {
+					return {
+						...state,
+						bottomForm: {
+							...state.bottomForm,
+							error: action.error,
+						},
+					};
+				}
+			}
 		}
 
 		default:
@@ -447,49 +481,28 @@ export const Discussion = ({
 							commentPage: page,
 						});
 					}}
-					setTopFormActive={(isActive) =>
-						dispatch({ type: 'setTopFormActive', isActive })
-					}
-					setReplyFormActive={(isActive) =>
-						dispatch({ type: 'setReplyFormActive', isActive })
-					}
-					setBottomFormActive={(isActive) =>
-						dispatch({ type: 'setBottomFormActive', isActive })
-					}
-					setTopFormUserMissing={(userNameMissing) =>
+					setFormActive={(isActive: boolean, form: FormType) =>
 						dispatch({
-							type: 'setTopFormUserMissing',
+							type: 'setFormActive',
+							isActive,
+							form,
+						})
+					}
+					setFormUserMissing={(
+						userNameMissing: boolean,
+						form: FormType,
+					) =>
+						dispatch({
+							type: 'setFormUserMissing',
 							userNameMissing,
+							form,
 						})
 					}
-					setReplyFormUserMissing={(userNameMissing) =>
+					setFormError={(error: string, form: FormType) =>
 						dispatch({
-							type: 'setReplyFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setBottomFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setBottomFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setTopFormError={(error) =>
-						dispatch({
-							type: 'setTopFormError',
+							type: 'setFormError',
 							error,
-						})
-					}
-					setReplyFormError={(error) =>
-						dispatch({
-							type: 'setReplyFormError',
-							error,
-						})
-					}
-					setBottomFormError={(error) =>
-						dispatch({
-							type: 'setBottomFormError',
-							error,
+							form,
 						})
 					}
 					topForm={topForm}
