@@ -2,8 +2,7 @@
  * @jest-environment jsdom
  */
 
-import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { NewsletterEpic } from '.';
 
 describe('NewsletterEpic', () => {
@@ -21,7 +20,7 @@ describe('NewsletterEpic', () => {
 
 		it('calls subscribeToNewsletter with the correct id', async () => {
 			const subscribeToNewsletter = jest.fn(() => Promise.resolve());
-			// eslint-disable-next-line @typescript-eslint/no-empty-function
+			// eslint-disable-next-line @typescript-eslint/no-empty-function -- This is just a stub
 			const noOpClickHandler = () => {};
 
 			render(
@@ -60,7 +59,7 @@ describe('NewsletterEpic', () => {
 
 		it('renders thank you when successful', async () => {
 			const subscribeToNewsletter = () => Promise.resolve();
-			// eslint-disable-next-line @typescript-eslint/no-empty-function
+			// eslint-disable-next-line @typescript-eslint/no-empty-function -- This is just a stub
 			const noOpClickHandler = () => {};
 
 			render(
