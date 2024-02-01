@@ -281,6 +281,7 @@ export const Discussion = ({
 			});
 		}
 	}, []);
+
 	useEffect(() => {
 		dispatch({ type: 'setLoading', loading: true });
 		void getDiscussion(shortUrlId, { ...filters, page: commentPage })

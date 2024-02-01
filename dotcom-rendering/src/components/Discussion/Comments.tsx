@@ -178,13 +178,13 @@ export const Comments = ({
 	 * page and is added to the DOM later, following an API call.
 	 * */
 	useEffect(() => {
-		if (commentToScrollTo !== undefined) {
-			const commentElement = document.getElementById(
-				`comment-${commentToScrollTo}`,
-			);
-			commentElement?.scrollIntoView();
-		}
-	}, [comments, commentToScrollTo]); // Add comments to deps so we rerun this effect when comments are loaded
+		if (loadingMore) return;
+		if (commentToScrollTo === undefined) return;
+
+		document
+			.getElementById(`comment-${commentToScrollTo}`)
+			?.scrollIntoView();
+	}, [comments, commentToScrollTo, loadingMore]); // Add comments to deps so we rerun this effect when comments are loaded
 
 	const onFilterChange = (newFilterObject: FilterOptions) => {
 		/**
