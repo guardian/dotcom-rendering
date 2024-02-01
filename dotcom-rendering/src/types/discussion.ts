@@ -377,3 +377,8 @@ export const pickResponseSchema = object({
 	statusCode: literal(200),
 	message: string(),
 });
+
+export type CommentForm = {
+	isActive: boolean;
+	userNameMissing: boolean;
+};

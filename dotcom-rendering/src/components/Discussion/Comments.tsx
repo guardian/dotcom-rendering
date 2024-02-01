@@ -12,6 +12,7 @@ import type {
 	AdditionalHeadersType,
 	CommentType,
 	FilterOptions,
+	CommentForm as Form,
 	SignedInUser,
 } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
@@ -46,9 +47,12 @@ type Props = {
 	setTopFormActive: (isActive: boolean) => void;
 	setReplyFormActive: (isActive: boolean) => void;
 	setBottomFormActive: (isActive: boolean) => void;
-	isTopFormActive: boolean;
-	isReplyFormActive: boolean;
-	isBottomFormActive: boolean;
+	setTopFormUserMissing: (isUserMissing: boolean) => void;
+	setReplyFormUserMissing: (isUserMissing: boolean) => void;
+	setBottomFormUserMissing: (isUserMissing: boolean) => void;
+	topForm: Form;
+	replyForm: Form;
+	bottomForm: Form;
 };
 
 const footerStyles = css`
@@ -126,9 +130,12 @@ export const Comments = ({
 	setTopFormActive,
 	setReplyFormActive,
 	setBottomFormActive,
-	isTopFormActive,
-	isReplyFormActive,
-	isBottomFormActive,
+	setTopFormUserMissing,
+	setReplyFormUserMissing,
+	setBottomFormUserMissing,
+	topForm,
+	replyForm,
+	bottomForm,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -137,7 +144,6 @@ export const Comments = ({
 	const [mutes, setMutes] = useState<string[]>(readMutes());
 	const [showPreview, setShowPreview] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
-	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
 	const [previewBody, setPreviewBody] = useState<string>('');
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
@@ -289,16 +295,18 @@ export const Comments = ({
 											showPreview={showPreview}
 											setShowPreview={setShowPreview}
 											isCommentFormActive={
-												isReplyFormActive
+												replyForm.isActive
 											}
 											setIsCommentFormActive={
 												setReplyFormActive
 											}
 											error={error}
 											setError={setError}
-											userNameMissing={userNameMissing}
+											userNameMissing={
+												replyForm.userNameMissing
+											}
 											setUserNameMissing={
-												setUserNameMissing
+												setReplyFormUserMissing
 											}
 											previewBody={previewBody}
 											setPreviewBody={setPreviewBody}
@@ -323,12 +331,12 @@ export const Comments = ({
 					onPreview={onPreview}
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
-					isActive={isTopFormActive}
+					isActive={topForm.isActive}
 					setIsActive={setTopFormActive}
 					error={error}
 					setError={setError}
-					userNameMissing={userNameMissing}
-					setUserNameMissing={setUserNameMissing}
+					userNameMissing={topForm.userNameMissing}
+					setUserNameMissing={setTopFormUserMissing}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
 				/>
@@ -382,12 +390,12 @@ export const Comments = ({
 									onPermalinkClick={onPermalinkClick}
 									showPreview={showPreview}
 									setShowPreview={setShowPreview}
-									isCommentFormActive={isReplyFormActive}
+									isCommentFormActive={replyForm.isActive}
 									setIsCommentFormActive={setReplyFormActive}
 									error={error}
 									setError={setError}
-									userNameMissing={userNameMissing}
-									setUserNameMissing={setUserNameMissing}
+									userNameMissing={replyForm.userNameMissing}
+									setUserNameMissing={setReplyFormUserMissing}
 									previewBody={previewBody}
 									setPreviewBody={setPreviewBody}
 								/>
@@ -415,12 +423,12 @@ export const Comments = ({
 					onPreview={onPreview}
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
-					isActive={isBottomFormActive}
+					isActive={bottomForm.isActive}
 					setIsActive={setBottomFormActive}
 					error={error}
 					setError={setError}
-					userNameMissing={userNameMissing}
-					setUserNameMissing={setUserNameMissing}
+					userNameMissing={bottomForm.userNameMissing}
+					setUserNameMissing={setBottomFormUserMissing}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
 				/>
