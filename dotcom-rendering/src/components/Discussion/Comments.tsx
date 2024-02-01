@@ -243,9 +243,8 @@ export const Comments = ({
 					<div css={picksWrapper}>
 						<TopPicks
 							comments={picks.slice(0, 2)}
-							authStatus={user?.authStatus}
+							user={user}
 							onPermalinkClick={onPermalinkClick}
-							onRecommend={onRecommend}
 						/>
 					</div>
 				) : (
@@ -287,7 +286,6 @@ export const Comments = ({
 											mutes={mutes}
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
-											onRecommend={onRecommend}
 											showPreview={showPreview}
 											setShowPreview={setShowPreview}
 											isCommentFormActive={
@@ -338,9 +336,8 @@ export const Comments = ({
 			{!!picks.length && (
 				<TopPicks
 					comments={picks}
-					authStatus={user?.authStatus}
+					user={user}
 					onPermalinkClick={onPermalinkClick}
-					onRecommend={onRecommend}
 				/>
 			)}
 			<Filters
@@ -383,7 +380,6 @@ export const Comments = ({
 									mutes={mutes}
 									toggleMuteStatus={toggleMuteStatus}
 									onPermalinkClick={onPermalinkClick}
-									onRecommend={onRecommend}
 									showPreview={showPreview}
 									setShowPreview={setShowPreview}
 									isCommentFormActive={isReplyFormActive}

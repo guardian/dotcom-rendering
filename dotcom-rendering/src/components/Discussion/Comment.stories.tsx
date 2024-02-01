@@ -126,6 +126,7 @@ const user: SignedInUser = {
 	},
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
+	onRecommend: () => Promise.resolve(true),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -146,6 +147,7 @@ const staffUser: SignedInUser = {
 	},
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
+	onRecommend: () => Promise.resolve(true),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 

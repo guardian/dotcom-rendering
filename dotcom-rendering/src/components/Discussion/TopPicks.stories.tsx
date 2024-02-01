@@ -1,7 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { SignedInWithCookies } from '../../lib/identity';
-import type { CommentType } from '../../types/discussion';
+import type { CommentType, SignedInUser } from '../../types/discussion';
 import { TopPicks } from './TopPicks';
 
 export default { component: TopPicks, title: 'Discussion/TopPicks' };
@@ -56,12 +55,37 @@ const commentWithShortBody: CommentType = {
 	...comment,
 	body: "<p>It's still there FrankDeFord - and thanks, I will pass that on</p>",
 };
-const signedInStatus: SignedInWithCookies = { kind: 'SignedInWithCookies' };
+
+const commentResponseError = {
+	kind: 'error',
+	error: { code: 'NetworkError', message: 'Mocked' },
+} as const;
+
+const aUser = {
+	profile: {
+		userId: 'abc123',
+		displayName: 'Jane Smith',
+		webUrl: '',
+		apiUrl: '',
+		avatar: '',
+		secureAvatarUrl: '',
+		badge: [],
+		privateFields: {
+			canPostComment: true,
+			isPremoderated: false,
+			hasCommented: true,
+		},
+	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseError),
+	onRecommend: () => Promise.resolve(true),
+	authStatus: { kind: 'SignedInWithCookies' },
+} satisfies SignedInUser;
 
 export const SingleComment = () => (
 	<TopPicks
 		comments={[commentWithShortBody]}
-		authStatus={signedInStatus}
+		user={aUser}
 		onPermalinkClick={() => {}}
 	/>
 );
@@ -76,7 +100,7 @@ export const MultiColumn = () => (
 			commentWithShortBody,
 			commentWithShortBody,
 		]}
-		authStatus={signedInStatus}
+		user={aUser}
 		onPermalinkClick={() => {}}
 	/>
 );
@@ -101,7 +125,7 @@ export const SingleColumn = () => (
 			commentWithShortBody,
 			commentWithShortBody,
 		]}
-		authStatus={signedInStatus}
+		user={aUser}
 		onPermalinkClick={() => {}}
 	/>
 );

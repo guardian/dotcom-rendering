@@ -31,7 +31,6 @@ type Props = {
 	isMuted: boolean;
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
-	onRecommend?: (commentId: number) => Promise<boolean>;
 	error: string;
 	setError: (error: string) => void;
 };
@@ -302,7 +301,6 @@ export const Comment = ({
 	isMuted,
 	toggleMuteStatus,
 	onPermalinkClick,
-	onRecommend,
 	error,
 	setError,
 }: Props) => {
@@ -529,12 +527,10 @@ export const Comment = ({
 								commentId={comment.id}
 								initialCount={comment.numRecommends}
 								alreadyRecommended={false}
-								authStatus={user?.authStatus}
-								onRecommend={onRecommend}
+								user={user}
 								userMadeComment={
-									!!user &&
-									user.profile.userId ===
-										comment.userProfile.userId
+									user?.profile.userId ===
+									comment.userProfile.userId
 								}
 							/>
 						)}

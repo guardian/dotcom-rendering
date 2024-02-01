@@ -1,12 +1,36 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { SignedInWithCookies } from '../../lib/identity';
 import { palette as themePalette } from '../../palette';
+import type { SignedInUser } from '../../types/discussion';
 import { RecommendationCount } from './RecommendationCount';
 
 export default { title: 'Discussion/RecommendationCount' };
 
-const signedInStatus: SignedInWithCookies = { kind: 'SignedInWithCookies' };
+const commentResponseError = {
+	kind: 'error',
+	error: { code: 'NetworkError', message: 'Mocked' },
+} as const;
+
+const aUser = {
+	profile: {
+		userId: 'abc123',
+		displayName: 'Jane Smith',
+		webUrl: '',
+		apiUrl: '',
+		avatar: '',
+		secureAvatarUrl: '',
+		badge: [],
+		privateFields: {
+			canPostComment: true,
+			isPremoderated: false,
+			hasCommented: true,
+		},
+	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseError),
+	onRecommend: () => Promise.resolve(true),
+	authStatus: { kind: 'SignedInWithCookies' },
+} satisfies SignedInUser;
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -31,7 +55,7 @@ export const NeverRecommended = () => (
 			commentId={123}
 			initialCount={383}
 			alreadyRecommended={false}
-			authStatus={signedInStatus}
+			user={aUser}
 			userMadeComment={false}
 		/>
 	</Wrapper>
@@ -44,7 +68,7 @@ export const AlreadyRecommended = () => (
 			commentId={123}
 			initialCount={83}
 			alreadyRecommended={true}
-			authStatus={signedInStatus}
+			user={aUser}
 			userMadeComment={false}
 		/>
 	</Wrapper>
@@ -69,7 +93,7 @@ export const OwnPost = () => (
 			commentId={123}
 			initialCount={83}
 			alreadyRecommended={false}
-			authStatus={signedInStatus}
+			user={aUser}
 			userMadeComment={true}
 		/>
 	</Wrapper>
