@@ -1,11 +1,10 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import {
-	from,
-	breakpoints,
-	space,
 	body,
+	breakpoints,
+	from,
 	headline,
+	space,
 } from '@guardian/source-foundations';
 
 const emptyImage =
@@ -63,9 +62,7 @@ type HeaderSectionProps = {
 // We use a picture element here with an empty image for < tablet so that we
 // don't load an image unnecessarily when we're not going to render it (which would be
 // the case with an img tag)
-export const HeaderSection: React.FC<HeaderSectionProps> = (
-	props: HeaderSectionProps,
-) => {
+export const HeaderSection = (props: HeaderSectionProps) => {
 	const {
 		authoredEpicImageUrl,
 		authoredEpicImageAltText,
@@ -78,7 +75,7 @@ export const HeaderSection: React.FC<HeaderSectionProps> = (
 	return (
 		<div css={headerStyles.container}>
 			<div css={headerStyles.leftContainer}>
-				{authoredEpicHeader && (
+				{!!authoredEpicHeader && (
 					<span css={headerStyles.text}>{authoredEpicHeader}</span>
 				)}
 			</div>
@@ -108,7 +105,7 @@ export const HeaderSection: React.FC<HeaderSectionProps> = (
 					>
 						{authoredEpicBylineName}
 					</p>
-					{authoredEpicBylineCopy1 && (
+					{!!authoredEpicBylineCopy1 && (
 						<p
 							css={[
 								headerStyles.imageCaption,
@@ -118,7 +115,7 @@ export const HeaderSection: React.FC<HeaderSectionProps> = (
 							{authoredEpicBylineCopy1}
 						</p>
 					)}
-					{authoredEpicBylineCopy2 && (
+					{!!authoredEpicBylineCopy2 && (
 						<p css={headerStyles.imageCaption}>
 							{authoredEpicBylineCopy2}
 						</p>
