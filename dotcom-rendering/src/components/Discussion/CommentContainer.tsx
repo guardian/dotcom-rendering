@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import type { preview } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
 import type {
+	CommentFormId,
 	CommentType,
 	SignedInUser,
 	ThreadsType,
@@ -15,7 +16,7 @@ import { CommentReplyPreview } from './CommentReplyPreview';
 import { PillarButton } from './PillarButton';
 
 type Props = {
-	formId: 'top' | 'reply' | 'bottom';
+	formId: CommentFormId;
 	comment: CommentType;
 	isClosedForComments: boolean;
 	shortUrl: string;
@@ -31,10 +32,7 @@ type Props = {
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;
 	isCommentFormActive: boolean;
-	setIsCommentFormActive: (
-		isActive: boolean,
-		formId: 'top' | 'reply' | 'bottom',
-	) => void;
+	setIsCommentFormActive: (isActive: boolean, formId: CommentFormId) => void;
 	error: string;
 	setError: (error: string) => void;
 	userNameMissing: boolean;

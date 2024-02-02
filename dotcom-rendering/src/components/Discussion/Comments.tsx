@@ -14,6 +14,7 @@ import type {
 	FilterOptions,
 	CommentForm as Form,
 	SignedInUser,
+	CommentFormId,
 } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
@@ -44,10 +45,7 @@ type Props = {
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
-	setFormActive: (
-		isActive: boolean,
-		formId: 'top' | 'reply' | 'bottom',
-	) => void;
+	setFormActive: (isActive: boolean, formId: CommentFormId) => void;
 	setTopFormUserMissing: (isUserMissing: boolean) => void;
 	setReplyFormUserMissing: (isUserMissing: boolean) => void;
 	setBottomFormUserMissing: (isUserMissing: boolean) => void;

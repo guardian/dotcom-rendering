@@ -375,6 +375,8 @@ export const pickResponseSchema = object({
 	message: string(),
 });
 
+export type CommentFormId = 'top' | 'reply' | 'bottom';
+
 export type CommentForm = {
 	isActive: boolean;
 	userNameMissing: boolean;
