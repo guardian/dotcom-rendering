@@ -105,7 +105,7 @@ type State = {
 	bottomForm: CommentForm;
 };
 
-const initialCommentFormState = {
+const initialCommentFormState: CommentForm = {
 	isActive: false,
 	userNameMissing: false,
 };
@@ -137,9 +137,11 @@ type Action =
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
 	| { type: 'setLoading'; loading: boolean }
-	| { type: 'setTopFormActive'; isActive: boolean }
-	| { type: 'setReplyFormActive'; isActive: boolean }
-	| { type: 'setBottomFormActive'; isActive: boolean }
+	| {
+			type: 'setFormActive';
+			isActive: boolean;
+			formId: 'top' | 'reply' | 'bottom';
+	  }
 	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean };
@@ -192,23 +194,33 @@ const reducer = (state: State, action: Action): State => {
 				isExpanded: true,
 			};
 		}
-		case 'setTopFormActive': {
-			return {
-				...state,
-				topForm: { ...state.topForm, isActive: action.isActive },
-			};
-		}
-		case 'setReplyFormActive': {
-			return {
-				...state,
-				replyForm: { ...state.replyForm, isActive: action.isActive },
-			};
-		}
-		case 'setBottomFormActive': {
-			return {
-				...state,
-				bottomForm: { ...state.bottomForm, isActive: action.isActive },
-			};
+		case 'setFormActive': {
+			switch (action.formId) {
+				case 'top':
+					return {
+						...state,
+						topForm: {
+							...state.topForm,
+							isActive: action.isActive,
+						},
+					};
+				case 'reply':
+					return {
+						...state,
+						replyForm: {
+							...state.replyForm,
+							isActive: action.isActive,
+						},
+					};
+				case 'bottom':
+					return {
+						...state,
+						bottomForm: {
+							...state.bottomForm,
+							isActive: action.isActive,
+						},
+					};
+			}
 		}
 		case 'setTopFormUserMissing': {
 			return {
@@ -417,15 +429,9 @@ export const Discussion = ({
 							commentPage: page,
 						});
 					}}
-					setTopFormActive={(isActive) =>
-						dispatch({ type: 'setTopFormActive', isActive })
-					}
-					setReplyFormActive={(isActive) =>
-						dispatch({ type: 'setReplyFormActive', isActive })
-					}
-					setBottomFormActive={(isActive) =>
-						dispatch({ type: 'setBottomFormActive', isActive })
-					}
+					setFormActive={(isActive, formId) => {
+						dispatch({ type: 'setFormActive', isActive, formId });
+					}}
 					setTopFormUserMissing={(userNameMissing) =>
 						dispatch({
 							type: 'setTopFormUserMissing',

@@ -188,6 +188,7 @@ const format = {
 
 export const defaultStory = () => (
 	<CommentContainer
+		formId={'top'}
 		comment={commentData}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
@@ -224,6 +225,7 @@ defaultStory.decorators = [
 
 export const threadedComment = () => (
 	<CommentContainer
+		formId={'top'}
 		comment={commentDataThreaded}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
@@ -260,6 +262,7 @@ threadedComment.decorators = [
 
 export const threadedCommentWithShowMore = () => (
 	<CommentContainer
+		formId={'top'}
 		comment={commentDataThreadedWithLongThread}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
@@ -296,6 +299,7 @@ threadedCommentWithShowMore.decorators = [
 
 export const threadedCommentWithLongUsernames = () => (
 	<CommentContainer
+		formId={'top'}
 		comment={commentDataThreadedWithLongUserNames}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
@@ -332,6 +336,7 @@ threadedCommentWithLongUsernames.decorators = [
 
 export const threadedCommentWithLongUsernamesMobile = () => (
 	<CommentContainer
+		formId={'top'}
 		comment={commentDataThreadedWithLongUserNames}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"

@@ -69,6 +69,7 @@ describe('CommentContainer', () => {
 
 		const { getByTestId, queryByText, getByText, rerender } = render(
 			<CommentContainer
+				formId={'top'}
 				shortUrl=""
 				comment={commentWithoutReply}
 				user={aUser}
@@ -116,6 +117,7 @@ describe('CommentContainer', () => {
 		// rerender with updated commentBeingRepliedTo
 		rerender(
 			<CommentContainer
+				formId={'top'}
 				shortUrl=""
 				comment={commentWithoutReply}
 				user={aUser}
@@ -162,6 +164,7 @@ describe('CommentContainer', () => {
 
 		const { getByTestId, queryByText, getByText, rerender } = render(
 			<CommentContainer
+				formId={'top'}
 				shortUrl=""
 				comment={commentWithReply}
 				user={aUser}
@@ -209,6 +212,7 @@ describe('CommentContainer', () => {
 		// rerender with updated commentBeingRepliedTo
 		rerender(
 			<CommentContainer
+				formId={'top'}
 				shortUrl=""
 				comment={commentWithoutReply}
 				user={aUser}

@@ -74,6 +74,7 @@ export const Default = () => {
 
 	return (
 		<CommentForm
+			formId={'top'}
 			shortUrl={shortUrl}
 			user={aUser}
 			onAddComment={(comment) => {}}
@@ -101,6 +102,7 @@ export const Error = () => {
 
 	return (
 		<CommentForm
+			formId={'top'}
 			shortUrl={'/p/g8g7v'}
 			user={aUser}
 			onAddComment={(comment) => {}}
@@ -123,6 +125,7 @@ Error.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
 export const Active = () => (
 	<CommentForm
+		formId={'top'}
 		shortUrl={shortUrl}
 		user={aUser}
 		onAddComment={(comment) => {}}
@@ -154,6 +157,7 @@ Active.decorators = [
 
 export const Premoderated = () => (
 	<CommentForm
+		formId={'top'}
 		shortUrl={shortUrl}
 		user={{
 			...aUser,
