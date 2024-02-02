@@ -1,5 +1,5 @@
 import { containsNonAllowedPlaceholder } from './placeholders';
-import type { BrazeMessageProps } from './index';
+import type { BrazeMessageProps } from './Epic';
 
 export const COMPONENT_NAME = 'Epic';
 

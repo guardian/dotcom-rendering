@@ -3,7 +3,7 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import { NewsletterEpic } from '.';
+import { NewsletterEpic } from './NewsletterEpic';
 
 describe('NewsletterEpic', () => {
 	describe('when the sign up button is clicked', () => {

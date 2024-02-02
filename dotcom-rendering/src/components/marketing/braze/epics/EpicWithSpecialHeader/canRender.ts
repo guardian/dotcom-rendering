@@ -1,6 +1,6 @@
 import { isImageUrlAllowed } from '../../utils/images';
 import { canRender as epicCanRender } from '../Epic/canRender';
-import type { BrazeMessageProps } from '../Epic/index';
+import type { BrazeMessageProps } from '../Epic/Epic';
 
 export const COMPONENT_NAME = 'EpicWithSpecialHeader';
 

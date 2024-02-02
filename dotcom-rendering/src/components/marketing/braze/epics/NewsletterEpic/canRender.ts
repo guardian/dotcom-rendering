@@ -1,5 +1,5 @@
 import { isImageUrlAllowed } from '../../utils/images';
-import type { BrazeMessageProps } from './index';
+import type { BrazeMessageProps } from './NewsletterEpic';
 
 export const COMPONENT_NAME = 'NewsletterEpic';
 

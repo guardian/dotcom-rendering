@@ -1,12 +1,12 @@
 import type { NewsletterSubscribeCallback } from '../../types/dcrTypes';
 import type { TrackClick } from '../../utils/tracking';
-import { NewsletterEpic } from '../NewsletterEpic';
+import { NewsletterEpic } from '../NewsletterEpic/NewsletterEpic';
 import { canRender, COMPONENT_NAME } from './canRender';
 
-const IMAGE_URL =
-	'https://i.guim.co.uk/img/media/d0944e021b1cc7426f515fecc8034f12b7862041/0_0_784_784/master/784.png?width=196&quality=45&auto=format&s=cca73e857c5093f39ef7a2a9dc2e7ce7';
+const newsletterId = '4156';
 
-const newsletterId = '4300';
+const IMAGE_URL =
+	'https://i.guim.co.uk/img/media/568c6031be78dab6f6c28336010884f3ebd0f97c/0_0_1936_1936/master/1936.png?width=196&quality=45&auto=format&s=2a3630e9625620d5726c31c5cdbf4772';
 
 export type BrazeMessageProps = {
 	header?: string;
@@ -22,7 +22,7 @@ export type Props = {
 	trackClick: TrackClick;
 };
 
-export const USNewsletterEpic = (props: Props) => {
+export const UKNewsletterEpic = (props: Props) => {
 	if (!canRender(props.brazeMessageProps)) {
 		return <></>;
 	}

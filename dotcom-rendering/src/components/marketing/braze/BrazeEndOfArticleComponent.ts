@@ -8,36 +8,36 @@ import { buildBrazeMessageComponent } from './buildBrazeMessageComponent';
 import {
 	COMPONENT_NAME as AU_NEWSLETTER_EPIC_NAME,
 	AUNewsletterEpic,
-} from './epics/AUNewsletterEpic';
+} from './epics/AUNewsletterEpic/AUNewsletterEpic';
 import {
 	DownToEarthNewsletterEpic,
 	COMPONENT_NAME as DTE_NEWSLETTER_EPIC_NAME,
-} from './epics/DownToEarthNewsletterEpic';
-import { Epic, COMPONENT_NAME as EPIC_NAME } from './epics/Epic';
+} from './epics/DownToEarthNewsletterEpic/DownToEarthNewsletterEpic';
+import { Epic, COMPONENT_NAME as EPIC_NAME } from './epics/Epic/Epic';
 import {
 	EpicNewsletter_AU_AfternoonUpdate,
 	COMPONENT_NAME as EPICNEWSLETTER_AU_AFTERNOONUPDATE_NAME,
-} from './epics/EpicNewsletter_AU_AfternoonUpdate';
+} from './epics/EpicNewsletter_AU_AfternoonUpdate/EpicNewsletter_AU_AfternoonUpdate';
 import {
 	EpicNewsletter_TheGuide,
 	COMPONENT_NAME as EPICNEWSLETTER_THEGUIDE_NAME,
-} from './epics/EpicNewsletter_TheGuide';
+} from './epics/EpicNewsletter_TheGuide/EpicNewsletter_TheGuide';
 import {
 	COMPONENT_NAME as EPIC_WITH_HEADER_IMAGE_NAME,
 	EpicWithSpecialHeader,
-} from './epics/EpicWithSpecialHeader';
+} from './epics/EpicWithSpecialHeader/EpicWithSpecialHeader';
 import {
 	NewsletterEpic,
 	COMPONENT_NAME as NEWSLETTEREPIC_NAME,
-} from './epics/NewsletterEpic';
+} from './epics/NewsletterEpic/NewsletterEpic';
 import {
 	COMPONENT_NAME as UK_NEWSLETTER_EPIC_NAME,
 	UKNewsletterEpic,
-} from './epics/UKNewsletterEpic';
+} from './epics/UKNewsletterEpic/UKNewsletterEpic';
 import {
 	COMPONENT_NAME as US_NEWSLETTER_EPIC_NAME,
 	USNewsletterEpic,
-} from './epics/USNewsletterEpic';
+} from './epics/USNewsletterEpic/USNewsletterEpic';
 import type { FetchEmail, NewsletterSubscribeCallback } from './types/dcrTypes';
 import type { BrazeClickHandler, SubmitComponentEvent } from './utils/tracking';
 

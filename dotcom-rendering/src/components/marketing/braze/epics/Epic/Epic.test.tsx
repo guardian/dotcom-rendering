@@ -4,8 +4,8 @@
 
 import { fireEvent, render } from '@testing-library/react';
 import type { FetchEmail } from '../../types/dcrTypes';
-import type { BrazeMessageProps } from '.';
-import { Epic } from '.';
+import type { BrazeMessageProps } from './Epic';
+import { Epic } from './Epic';
 
 const mockFetchEmail: FetchEmail = () => {
 	console.log(`fetchEmail invoked`);

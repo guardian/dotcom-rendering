@@ -1,4 +1,4 @@
-import type { BrazeMessageProps } from '.';
+import type { BrazeMessageProps } from './USNewsletterEpic';
 
 export const COMPONENT_NAME = 'USNewsletterEpic';
 
