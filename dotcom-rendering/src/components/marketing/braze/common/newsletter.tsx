@@ -135,7 +135,7 @@ const frequencyStyles = {
 		top: 2px;
 		margin-right: 4px;
 		svg {
-			fill: #999999;
+			fill: ${neutral[60]};
 			height: 16px;
 			width: 16px;
 		}

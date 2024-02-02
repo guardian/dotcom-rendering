@@ -27,10 +27,13 @@ const getButtonStyles = (styles: PrimaryButtonColorStyles) => {
 			margin: ${space[1]}px ${space[2]}px ${space[1]}px 0;
 		`,
 		contributionButtonOverrides: css`
+			/* stylelint-disable-next-line declaration-no-important */
 			background-color: ${styles.styleButtonBackground} !important;
+			/* stylelint-disable-next-line declaration-no-important */
 			color: ${styles.styleButton} !important;
 
 			:hover {
+				/* stylelint-disable-next-line declaration-no-important */
 				background-color: ${styles.styleButtonHover} !important;
 			}
 		`,

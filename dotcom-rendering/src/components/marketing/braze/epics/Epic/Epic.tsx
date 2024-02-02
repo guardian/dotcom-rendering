@@ -4,6 +4,7 @@ import {
 	brand,
 	brandAlt,
 	headline,
+	neutral,
 	news,
 	space,
 } from '@guardian/source-foundations';
@@ -39,8 +40,8 @@ const styles = {
 	`,
 	epicContainer: css`
 		padding: ${space[1]}px ${space[2]}px ${space[3]}px;
-		border-top: 1px solid #ffe500;
-		background-color: #f6f6f6;
+		border-top: 1px solid ${brandAlt[400]};
+		background-color: ${neutral[97]};
 		display: flex;
 		flex-direction: column;
 		${body.medium()}

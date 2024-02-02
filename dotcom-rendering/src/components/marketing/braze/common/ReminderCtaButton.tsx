@@ -43,10 +43,13 @@ const getButtonStyles = (styles: ReminderButtonColorStyles) => {
 			margin-top: ${space[3]}px;
 		`,
 		remindMeButtonOverrides: css`
+			/* stylelint-disable-next-line declaration-no-important */
 			background-color: ${styles.styleReminderButtonBackground} !important;
+			/* stylelint-disable-next-line declaration-no-important */
 			color: ${styles.styleReminderButton} !important;
 
 			:hover {
+				/* stylelint-disable-next-line declaration-no-important */
 				background-color: ${styles.styleReminderButtonHover} !important;
 			}
 		`,
