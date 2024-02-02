@@ -9,6 +9,7 @@ import { useEffect, useRef } from 'react';
 import { preview as defaultPreview } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
 import type {
+	CommentFormId,
 	CommentType,
 	SignedInUser,
 	UserProfile,
@@ -19,7 +20,7 @@ import { Preview } from './Preview';
 import { Row } from './Row';
 
 type Props = {
-	formId: 'top' | 'reply' | 'bottom';
+	formId: CommentFormId;
 	shortUrl: string;
 	user: SignedInUser;
 	onAddComment: (response: CommentType) => void;
@@ -29,10 +30,7 @@ type Props = {
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;
 	isActive: boolean;
-	setIsActive: (
-		isActive: boolean,
-		formId: 'top' | 'reply' | 'bottom',
-	) => void;
+	setIsActive: (isActive: boolean, formId: CommentFormId) => void;
 	error: string;
 	setError: (error: string) => void;
 	userNameMissing: boolean;

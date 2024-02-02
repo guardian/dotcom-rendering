@@ -12,6 +12,7 @@ import {
 import { palette as themePalette } from '../palette';
 import type {
 	CommentForm,
+	CommentFormId,
 	CommentType,
 	FilterOptions,
 	SignedInUser,
@@ -147,7 +148,7 @@ type Action =
 	| {
 			type: 'setFormActive';
 			isActive: boolean;
-			formId: 'top' | 'reply' | 'bottom';
+			formId: CommentFormId;
 	  }
 	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
