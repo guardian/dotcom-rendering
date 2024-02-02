@@ -12,17 +12,17 @@ export const replaceNonArticleCountPlaceholders = (
 		return '';
 	}
 
-	content = content.replace(
+	let transformedContent = content.replace(
 		/%%CURRENCY_SYMBOL%%/g,
 		getLocalCurrencySymbol(countryCode),
 	);
 
 	const countryName = getCountryName(countryCode) ?? '';
-	content = countryName
-		? content.replace(/%%COUNTRY_NAME%%/g, countryName)
-		: content;
+	transformedContent = countryName
+		? transformedContent.replace(/%%COUNTRY_NAME%%/g, countryName)
+		: transformedContent;
 
-	return content;
+	return transformedContent;
 };
 
 // Nb. don't attempt to use lookbehind (?<!) here, as IE 11 will break alas

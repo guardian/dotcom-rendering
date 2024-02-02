@@ -1,5 +1,5 @@
 import { canRender } from './canRender';
-import { BrazeMessageProps } from './Epic';
+import type { BrazeMessageProps } from './Epic';
 
 describe('canRender', () => {
 	it('returns true when data from Braze is valid', () => {
