@@ -34,7 +34,10 @@ type Props = {
 	error: string;
 	setError: (error: string) => void;
 	userNameMissing: boolean;
-	setUserNameMissing: (isUserNameMissing: boolean) => void;
+	setUserNameMissing: (
+		isUserNameMissing: boolean,
+		formId: CommentFormId,
+	) => void;
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
 	body: string;
@@ -315,7 +318,7 @@ export const CommentForm = ({
 			if (response.kind === 'error') {
 				if (response.error === 'USERNAME_MISSING') {
 					// Reader has never posted before and needs to choose a username
-					setUserNameMissing(true);
+					setUserNameMissing(true, formId);
 				} else if (response.error === 'EMPTY_COMMENT_BODY') {
 					setError('Please write a comment.');
 				} else if (response.error === 'COMMENT_TOO_LONG') {
@@ -398,7 +401,7 @@ export const CommentForm = ({
 		if (response.kind === 'ok') {
 			// If we are able to submit userName we should continue with submitting comment
 			void submitForm();
-			setUserNameMissing(false);
+			setUserNameMissing(false, formId);
 		} else {
 			setError(response.error);
 		}
@@ -409,7 +412,7 @@ export const CommentForm = ({
 			<FirstCommentWelcome
 				error={error}
 				submitForm={submitUserName}
-				cancelSubmit={() => setUserNameMissing(false)}
+				cancelSubmit={() => setUserNameMissing(false, formId)}
 				previewBody={previewBody}
 			/>
 		);

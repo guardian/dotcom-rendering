@@ -45,9 +45,10 @@ type Props = {
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 	setFormActive: (isActive: boolean, formId: CommentFormId) => void;
-	setTopFormUserMissing: (isUserMissing: boolean) => void;
-	setReplyFormUserMissing: (isUserMissing: boolean) => void;
-	setBottomFormUserMissing: (isUserMissing: boolean) => void;
+	setUserNameMissing: (
+		isUserNameMissing: boolean,
+		formId: CommentFormId,
+	) => void;
 	setTopFormError: (error: string) => void;
 	setReplyFormError: (error: string) => void;
 	setBottomFormError: (error: string) => void;
@@ -152,9 +153,7 @@ export const Comments = ({
 	setComment,
 	handleFilterChange,
 	setFormActive,
-	setTopFormUserMissing,
-	setReplyFormUserMissing,
-	setBottomFormUserMissing,
+	 setUserNameMissing,
 	setTopFormError,
 	setReplyFormError,
 	setBottomFormError,
@@ -347,7 +346,7 @@ export const Comments = ({
 												replyForm.userNameMissing
 											}
 											setUserNameMissing={
-												setReplyFormUserMissing
+												setUserNameMissing
 											}
 											previewBody={replyForm.previewBody}
 											setPreviewBody={
@@ -383,7 +382,7 @@ export const Comments = ({
 					error={topForm.error}
 					setError={setTopFormError}
 					userNameMissing={topForm.userNameMissing}
-					setUserNameMissing={setTopFormUserMissing}
+					setUserNameMissing={setUserNameMissing}
 					previewBody={topForm.previewBody}
 					setPreviewBody={setTopFormPreviewBody}
 					body={topForm.body}
@@ -444,7 +443,7 @@ export const Comments = ({
 									error={replyForm.error}
 									setError={setReplyFormError}
 									userNameMissing={replyForm.userNameMissing}
-									setUserNameMissing={setReplyFormUserMissing}
+									setUserNameMissing={setUserNameMissing}
 									previewBody={replyForm.previewBody}
 									setPreviewBody={setReplyFormPreviewBody}
 									body={replyForm.body}
@@ -480,7 +479,7 @@ export const Comments = ({
 					error={bottomForm.error}
 					setError={setBottomFormError}
 					userNameMissing={bottomForm.userNameMissing}
-					setUserNameMissing={setBottomFormUserMissing}
+					setUserNameMissing={setUserNameMissing}
 					previewBody={bottomForm.previewBody}
 					setPreviewBody={setBottomFormPreviewBody}
 					body={bottomForm.body}
