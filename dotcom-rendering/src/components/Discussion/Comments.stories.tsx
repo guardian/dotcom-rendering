@@ -50,6 +50,12 @@ const filters: FilterOptions = {
 
 const defaultCommentForm = { isActive: false, userNameMissing: false };
 
+const defaultCommentForms = {
+	top: defaultCommentForm,
+	reply: defaultCommentForm,
+	bottom: defaultCommentForm,
+};
+
 export const LoggedOutHiddenPicks = () => (
 	<div
 		css={css`
@@ -80,9 +86,7 @@ export const LoggedOutHiddenPicks = () => (
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
 			setUserNameMissing={() => {}}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
+			commentForms={defaultCommentForms}
 		/>
 	</div>
 );
@@ -126,9 +130,7 @@ export const InitialPage = () => (
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
 			setUserNameMissing={() => {}}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
+			commentForms={defaultCommentForms}
 		/>
 	</div>
 );
@@ -142,43 +144,43 @@ InitialPage.decorators = [
 	]),
 ];
 
-export const LoggedInHiddenNoPicks = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl="p/abc123"
-			isClosedForComments={false}
-			user={aUser}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={false}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			setPage={() => {}}
-			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
-			loading={false}
-			totalPages={discussionMock.pages}
-			comments={discussionMock.discussion.comments}
-			setComment={() => {}}
-			handleFilterChange={() => {}}
-			setFormActive={() => {}}
-			setUserNameMissing={() => {}}
-			topForm={defaultCommentForm}
-			replyForm={{ ...defaultCommentForm }}
-			bottomForm={defaultCommentForm}
-		/>
-	</div>
-);
+export const LoggedInHiddenNoPicks = () => {
+	return (
+		<div
+			css={css`
+				width: 100%;
+				max-width: 620px;
+			`}
+		>
+			<Comments
+				shortUrl="p/abc123"
+				isClosedForComments={false}
+				user={aUser}
+				baseUrl="https://discussion.theguardian.com/discussion-api"
+				additionalHeaders={{
+					'D2-X-UID': 'testD2Header',
+					'GU-Client': 'testClientHeader',
+				}}
+				expanded={false}
+				onPermalinkClick={() => {}}
+				apiKey=""
+				idApiUrl="https://idapi.theguardian.com"
+				page={3}
+				setPage={() => {}}
+				filters={filters}
+				commentCount={discussionMock.discussion.commentCount}
+				loading={false}
+				totalPages={discussionMock.pages}
+				comments={discussionMock.discussion.comments}
+				setComment={() => {}}
+				handleFilterChange={() => {}}
+				setFormActive={() => {}}
+				setUserNameMissing={() => {}}
+				commentForms={defaultCommentForms}
+			/>
+		</div>
+	);
+};
 
 LoggedInHiddenNoPicks.storyName =
 	'when logged in, with no picks and not expanded';
@@ -215,13 +217,7 @@ export const LoggedIn = () => (
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
 			setUserNameMissing={() => {}}
-			topForm={defaultCommentForm}
-			replyForm={{
-				...defaultCommentForm,
-			}}
-			bottomForm={{
-				...defaultCommentForm,
-			}}
+			commentForms={defaultCommentForms}
 		/>
 	</div>
 );
@@ -260,11 +256,7 @@ export const LoggedInShortDiscussion = () => (
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
 			setUserNameMissing={() => {}}
-			topForm={{ ...defaultCommentForm }}
-			replyForm={{
-				...defaultCommentForm,
-			}}
-			bottomForm={defaultCommentForm}
+			commentForms={defaultCommentForms}
 		/>
 	</div>
 );
@@ -300,9 +292,7 @@ export const LoggedOutHiddenNoPicks = () => (
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
 			setUserNameMissing={() => {}}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
+			commentForms={defaultCommentForms}
 		/>
 	</div>
 );
@@ -348,9 +338,7 @@ export const Closed = () => (
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
 			setUserNameMissing={() => {}}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
+			commentForms={defaultCommentForms}
 		/>
 	</div>
 );
@@ -394,9 +382,7 @@ export const NoComments = () => (
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
 			setUserNameMissing={() => {}}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
+			commentForms={defaultCommentForms}
 		/>
 	</div>
 );
@@ -442,9 +428,7 @@ export const LegacyDiscussion = () => (
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
 			setUserNameMissing={() => {}}
-			topForm={defaultCommentForm}
-			replyForm={defaultCommentForm}
-			bottomForm={defaultCommentForm}
+			commentForms={defaultCommentForms}
 		/>
 	</div>
 );
