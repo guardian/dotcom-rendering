@@ -101,9 +101,7 @@ type State = {
 	hashCommentId: number | undefined;
 	totalPages: number;
 	loading: boolean;
-	topForm: CommentForm;
-	replyForm: CommentForm;
-	bottomForm: CommentForm;
+	commentForms: Record<CommentFormId, CommentForm>;
 };
 
 const initialCommentFormState: CommentForm = {
@@ -120,9 +118,11 @@ const initialState: State = {
 	hashCommentId: undefined,
 	totalPages: 0,
 	loading: true,
-	topForm: initialCommentFormState,
-	replyForm: initialCommentFormState,
-	bottomForm: initialCommentFormState,
+	commentForms: {
+		top: initialCommentFormState,
+		reply: initialCommentFormState,
+		bottom: initialCommentFormState,
+	} as const,
 };
 
 type Action =
@@ -198,60 +198,32 @@ const reducer = (state: State, action: Action): State => {
 			};
 		}
 		case 'setFormActive': {
-			switch (action.formId) {
-				case 'top':
-					return {
-						...state,
-						topForm: {
-							...state.topForm,
-							isActive: action.isActive,
-						},
-					};
-				case 'reply':
-					return {
-						...state,
-						replyForm: {
-							...state.replyForm,
-							isActive: action.isActive,
-						},
-					};
-				case 'bottom':
-					return {
-						...state,
-						bottomForm: {
-							...state.bottomForm,
-							isActive: action.isActive,
-						},
-					};
-			}
+			const commentForms = state.commentForms;
+			const currentForm = commentForms[action.formId];
+			currentForm.isActive = action.isActive;
+			const updatedForm = { [action.formId]: currentForm };
+
+			return {
+				...state,
+				commentForms: {
+					...commentForms,
+					...updatedForm,
+				},
+			};
 		}
 		case 'setUserNameMissing': {
-			switch (action.formId) {
-				case 'top':
-					return {
-						...state,
-						topForm: {
-							...state.topForm,
-							userNameMissing: action.userNameMissing,
-						},
-					};
-				case 'reply':
-					return {
-						...state,
-						replyForm: {
-							...state.replyForm,
-							userNameMissing: action.userNameMissing,
-						},
-					};
-				case 'bottom':
-					return {
-						...state,
-						bottomForm: {
-							...state.bottomForm,
-							userNameMissing: action.userNameMissing,
-						},
-					};
-			}
+			const commentForms = state.commentForms;
+			const currentForm = commentForms[action.formId];
+			currentForm.userNameMissing = action.userNameMissing;
+			const updatedForm = { [action.formId]: currentForm };
+
+			return {
+				...state,
+				commentForms: {
+					...commentForms,
+					...updatedForm,
+				},
+			};
 		}
 
 		default:
@@ -279,9 +251,7 @@ export const Discussion = ({
 			hashCommentId,
 			totalPages,
 			loading,
-			topForm,
-			replyForm,
-			bottomForm,
+			commentForms,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
@@ -443,9 +413,7 @@ export const Discussion = ({
 							formId,
 						})
 					}
-					topForm={topForm}
-					replyForm={replyForm}
-					bottomForm={bottomForm}
+					commentForms={commentForms}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />

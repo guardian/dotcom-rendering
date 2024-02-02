@@ -50,9 +50,7 @@ type Props = {
 		isUserNameMissing: boolean,
 		formId: CommentFormId,
 	) => void;
-	topForm: Form;
-	replyForm: Form;
-	bottomForm: Form;
+	commentForms: Record<CommentFormId, Form>;
 };
 
 const footerStyles = css`
@@ -129,9 +127,7 @@ export const Comments = ({
 	handleFilterChange,
 	setFormActive,
 	setUserNameMissing,
-	topForm,
-	replyForm,
-	bottomForm,
+	commentForms,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -291,22 +287,23 @@ export const Comments = ({
 											onPermalinkClick={onPermalinkClick}
 											showPreview={showPreview}
 											setShowPreview={setShowPreview}
-											isCommentFormActive={
-												replyForm.isActive
-											}
-											setIsCommentFormActive={
-												setFormActive
-											}
+											previewBody={previewBody}
+											setPreviewBody={setPreviewBody}
 											error={error}
 											setError={setError}
-											userNameMissing={
-												replyForm.userNameMissing
+											setIsCommentFormActive={
+												setFormActive
 											}
 											setUserNameMissing={
 												setUserNameMissing
 											}
-											previewBody={previewBody}
-											setPreviewBody={setPreviewBody}
+											isCommentFormActive={
+												commentForms['reply'].isActive
+											}
+											userNameMissing={
+												commentForms['reply']
+													.userNameMissing
+											}
 										/>
 									</li>
 								))}
@@ -329,11 +326,11 @@ export const Comments = ({
 					onPreview={onPreview}
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
-					isActive={topForm.isActive}
+					isActive={commentForms['top'].isActive}
 					setIsActive={setFormActive}
 					error={error}
 					setError={setError}
-					userNameMissing={topForm.userNameMissing}
+					userNameMissing={commentForms['top'].userNameMissing}
 					setUserNameMissing={setUserNameMissing}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
@@ -389,11 +386,15 @@ export const Comments = ({
 									onPermalinkClick={onPermalinkClick}
 									showPreview={showPreview}
 									setShowPreview={setShowPreview}
-									isCommentFormActive={replyForm.isActive}
+									isCommentFormActive={
+										commentForms['reply'].isActive
+									}
 									setIsCommentFormActive={setFormActive}
 									error={error}
 									setError={setError}
-									userNameMissing={replyForm.userNameMissing}
+									userNameMissing={
+										commentForms['reply'].userNameMissing
+									}
 									setUserNameMissing={setUserNameMissing}
 									previewBody={previewBody}
 									setPreviewBody={setPreviewBody}
@@ -423,11 +424,11 @@ export const Comments = ({
 					onPreview={onPreview}
 					showPreview={showPreview}
 					setShowPreview={setShowPreview}
-					isActive={bottomForm.isActive}
+					isActive={commentForms['bottom'].isActive}
 					setIsActive={setFormActive}
 					error={error}
 					setError={setError}
-					userNameMissing={bottomForm.userNameMissing}
+					userNameMissing={commentForms['bottom'].userNameMissing}
 					setUserNameMissing={setUserNameMissing}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
