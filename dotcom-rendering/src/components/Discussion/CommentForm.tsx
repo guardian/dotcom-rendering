@@ -19,6 +19,7 @@ import { Preview } from './Preview';
 import { Row } from './Row';
 
 type Props = {
+	formId: 'top' | 'reply' | 'bottom';
 	shortUrl: string;
 	user: SignedInUser;
 	onAddComment: (response: CommentType) => void;
@@ -28,7 +29,10 @@ type Props = {
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;
 	isActive: boolean;
-	setIsActive: (isActive: boolean) => void;
+	setIsActive: (
+		isActive: boolean,
+		formId: 'top' | 'reply' | 'bottom',
+	) => void;
 	error: string;
 	setError: (error: string) => void;
 	userNameMissing: boolean;
@@ -199,6 +203,7 @@ const simulateNewComment = (
 };
 
 export const CommentForm = ({
+	formId,
 	shortUrl,
 	onAddComment,
 	user,
@@ -297,7 +302,7 @@ export const CommentForm = ({
 		setError('');
 		setBody('');
 		setShowPreview(false);
-		setIsActive(false);
+		setIsActive(false, formId);
 		setCommentBeingRepliedTo?.();
 	};
 
@@ -473,7 +478,7 @@ export const CommentForm = ({
 						setBody(e.target.value || '');
 					}}
 					value={body}
-					onFocus={() => setIsActive(true)}
+					onFocus={() => setIsActive(true, formId)}
 				/>
 				<div css={bottomContainer}>
 					<Row cssOverrides={wrappingRow}>

@@ -43,9 +43,10 @@ type Props = {
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
-	setTopFormActive: (isActive: boolean) => void;
-	setReplyFormActive: (isActive: boolean) => void;
-	setBottomFormActive: (isActive: boolean) => void;
+	setFormActive: (
+		isActive: boolean,
+		formId: 'top' | 'reply' | 'bottom',
+	) => void;
 	setTopFormUserMissing: (isUserMissing: boolean) => void;
 	setReplyFormUserMissing: (isUserMissing: boolean) => void;
 	setBottomFormUserMissing: (isUserMissing: boolean) => void;
@@ -152,9 +153,7 @@ export const Comments = ({
 	comments,
 	setComment,
 	handleFilterChange,
-	setTopFormActive,
-	setReplyFormActive,
-	setBottomFormActive,
+	setFormActive,
 	setTopFormUserMissing,
 	setReplyFormUserMissing,
 	setBottomFormUserMissing,
@@ -317,6 +316,7 @@ export const Comments = ({
 								{comments.slice(0, 2).map((comment) => (
 									<li key={comment.id}>
 										<CommentContainer
+											formId={'reply'}
 											comment={comment}
 											isClosedForComments={
 												isClosedForComments
@@ -341,7 +341,7 @@ export const Comments = ({
 												replyForm.isActive
 											}
 											setIsCommentFormActive={
-												setReplyFormActive
+												setFormActive
 											}
 											error={replyForm.error}
 											setError={setReplyFormError}
@@ -373,6 +373,7 @@ export const Comments = ({
 		<div data-component="discussion" css={commentColumnWrapperStyles}>
 			{user && !isClosedForComments && (
 				<CommentForm
+					formId={'top'}
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}
@@ -380,7 +381,7 @@ export const Comments = ({
 					showPreview={topForm.showPreview}
 					setShowPreview={setTopFormShowPreview}
 					isActive={topForm.isActive}
-					setIsActive={setTopFormActive}
+					setIsActive={setFormActive}
 					error={topForm.error}
 					setError={setTopFormError}
 					userNameMissing={topForm.userNameMissing}
@@ -422,6 +423,7 @@ export const Comments = ({
 						.map((comment) => (
 							<li key={comment.id}>
 								<CommentContainer
+									formId={'reply'}
 									comment={comment}
 									isClosedForComments={isClosedForComments}
 									shortUrl={shortUrl}
@@ -440,7 +442,7 @@ export const Comments = ({
 									showPreview={replyForm.showPreview}
 									setShowPreview={setReplyFormShowPreview}
 									isCommentFormActive={replyForm.isActive}
-									setIsCommentFormActive={setReplyFormActive}
+									setIsCommentFormActive={setFormActive}
 									error={replyForm.error}
 									setError={setReplyFormError}
 									userNameMissing={replyForm.userNameMissing}
@@ -468,6 +470,7 @@ export const Comments = ({
 			)}
 			{user && !isClosedForComments && comments.length > 10 && (
 				<CommentForm
+					formId={'bottom'}
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}
@@ -475,7 +478,7 @@ export const Comments = ({
 					showPreview={bottomForm.showPreview}
 					setShowPreview={setBottomFormShowPreview}
 					isActive={bottomForm.isActive}
-					setIsActive={setBottomFormActive}
+					setIsActive={setFormActive}
 					error={bottomForm.error}
 					setError={setBottomFormError}
 					userNameMissing={bottomForm.userNameMissing}

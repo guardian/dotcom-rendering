@@ -15,6 +15,7 @@ import { CommentReplyPreview } from './CommentReplyPreview';
 import { PillarButton } from './PillarButton';
 
 type Props = {
+	formId: 'top' | 'reply' | 'bottom';
 	comment: CommentType;
 	isClosedForComments: boolean;
 	shortUrl: string;
@@ -30,7 +31,10 @@ type Props = {
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;
 	isCommentFormActive: boolean;
-	setIsCommentFormActive: (isActive: boolean) => void;
+	setIsCommentFormActive: (
+		isActive: boolean,
+		formId: 'top' | 'reply' | 'bottom',
+	) => void;
 	error: string;
 	setError: (error: string) => void;
 	userNameMissing: boolean;
@@ -76,6 +80,7 @@ export const avatar = (avatarSize: number) => css`
 `;
 
 export const CommentContainer = ({
+	formId,
 	comment,
 	isClosedForComments,
 	user,
@@ -237,6 +242,7 @@ export const CommentContainer = ({
 								commentBeingRepliedTo={commentBeingRepliedTo}
 							/>
 							<CommentForm
+								formId={formId}
 								shortUrl={shortUrl}
 								onAddComment={onAddComment}
 								user={user}

@@ -89,9 +89,7 @@ export const LoggedOutHiddenPicks = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
+			setFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
@@ -153,9 +151,7 @@ export const InitialPage = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
+			setFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
@@ -189,7 +185,6 @@ InitialPage.decorators = [
 ];
 
 export const LoggedInHiddenNoPicks = () => {
-	const [isActive, setActive] = useState(false);
 	const [body, setBody] = useState('');
 
 	return (
@@ -222,9 +217,7 @@ export const LoggedInHiddenNoPicks = () => {
 				comments={discussionMock.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
-				setTopFormActive={() => {}}
-				setReplyFormActive={setActive}
-				setBottomFormActive={() => {}}
+				setFormActive={() => {}}
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
@@ -241,7 +234,7 @@ export const LoggedInHiddenNoPicks = () => {
 				setReplyFormBody={setBody}
 				setBottomFormBody={() => {}}
 				topForm={defaultCommentForm}
-				replyForm={{ ...defaultCommentForm, isActive, body }}
+				replyForm={{ ...defaultCommentForm, body }}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>
@@ -253,9 +246,6 @@ LoggedInHiddenNoPicks.storyName =
 LoggedInHiddenNoPicks.decorators = [splitTheme([format])];
 
 export const LoggedIn = () => {
-	const [isTopFormActive, setTopFormActive] = useState(false);
-	const [isReplyFormActive, setReplyFormActive] = useState(false);
-	const [isBottomFormActive, setBottomFormActive] = useState(false);
 	const [topFormBody, setTopFormBody] = useState('');
 	const [replyFormBody, setReplyFormBody] = useState('');
 	const [bottomFormBody, setBottomFormBody] = useState('');
@@ -290,9 +280,7 @@ export const LoggedIn = () => {
 				comments={discussionMock.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
-				setTopFormActive={setTopFormActive}
-				setReplyFormActive={setReplyFormActive}
-				setBottomFormActive={setBottomFormActive}
+				setFormActive={() => {}}
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
@@ -308,19 +296,13 @@ export const LoggedIn = () => {
 				setTopFormBody={setTopFormBody}
 				setReplyFormBody={setReplyFormBody}
 				setBottomFormBody={setBottomFormBody}
-				topForm={{
-					...defaultCommentForm,
-					isActive: isTopFormActive,
-					body: topFormBody,
-				}}
+				topForm={{...defaultCommentForm, body: topFormBody }}
 				replyForm={{
 					...defaultCommentForm,
-					isActive: isReplyFormActive,
 					body: replyFormBody,
 				}}
 				bottomForm={{
 					...defaultCommentForm,
-					isActive: isBottomFormActive,
 					body: bottomFormBody,
 				}}
 				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
@@ -332,8 +314,6 @@ LoggedIn.storyName = 'when logged in and expanded';
 LoggedIn.decorators = [lightDecorator([format])];
 
 export const LoggedInShortDiscussion = () => {
-	const [isTopFormActive, setTopFormActive] = useState(false);
-	const [isReplyFormActive, setReplyFormActive] = useState(false);
 	const [topFormBody, setTopFormBody] = useState('');
 	const [replyFormBody, setReplyFormBody] = useState('');
 
@@ -367,9 +347,7 @@ export const LoggedInShortDiscussion = () => {
 				comments={discussionWithTwoComments.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
-				setTopFormActive={setTopFormActive}
-				setReplyFormActive={setReplyFormActive}
-				setBottomFormActive={() => {}}
+				setFormActive={() => {}}
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
@@ -385,14 +363,9 @@ export const LoggedInShortDiscussion = () => {
 				setTopFormBody={setTopFormBody}
 				setReplyFormBody={setReplyFormBody}
 				setBottomFormBody={() => {}}
-				topForm={{
-					...defaultCommentForm,
-					isActive: isTopFormActive,
-					body: topFormBody,
-				}}
+				topForm={{ ...defaultCommentForm, body: topFormBody, }}
 				replyForm={{
 					...defaultCommentForm,
-					isActive: isReplyFormActive,
 					body: replyFormBody,
 				}}
 				bottomForm={defaultCommentForm}
@@ -432,9 +405,7 @@ export const LoggedOutHiddenNoPicks = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
+			setFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
@@ -498,9 +469,7 @@ export const Closed = () => (
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
+			setFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
@@ -560,9 +529,7 @@ export const NoComments = () => (
 			comments={[]}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
+			setFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
@@ -624,9 +591,7 @@ export const LegacyDiscussion = () => (
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
+			setFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}

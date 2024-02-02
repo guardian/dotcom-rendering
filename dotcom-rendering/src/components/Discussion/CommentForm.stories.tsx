@@ -77,6 +77,7 @@ export const Default = () => {
 
 	return (
 		<CommentForm
+			formId={'top'}
 			shortUrl={shortUrl}
 			user={aUser}
 			onAddComment={(comment) => {}}
@@ -107,6 +108,7 @@ export const Error = () => {
 
 	return (
 		<CommentForm
+			formId={'top'}
 			shortUrl={'/p/g8g7v'}
 			user={aUser}
 			onAddComment={(comment) => {}}
@@ -134,6 +136,7 @@ export const Active = () => {
 
 	return (
 		<CommentForm
+		formId={'top'}
 			shortUrl={shortUrl}
 			user={aUser}
 			onAddComment={(comment) => {}}
@@ -171,6 +174,7 @@ export const Premoderated = () => {
 
 	return (
 		<CommentForm
+		formId={'top'}
 			shortUrl={shortUrl}
 			user={{
 				...aUser,
