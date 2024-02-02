@@ -36,7 +36,10 @@ type Props = {
 	error: string;
 	setError: (error: string) => void;
 	userNameMissing: boolean;
-	setUserNameMissing: (isUserNameMissing: boolean) => void;
+	setUserNameMissing: (
+		isUserNameMissing: boolean,
+		formId: CommentFormId,
+	) => void;
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
 };

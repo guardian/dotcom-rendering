@@ -143,9 +143,11 @@ type Action =
 			isActive: boolean;
 			formId: CommentFormId;
 	  }
-	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean };
+	| {
+			type: 'setUserNameMissing';
+			userNameMissing: boolean;
+			formId: CommentFormId;
+	  };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -223,32 +225,33 @@ const reducer = (state: State, action: Action): State => {
 					};
 			}
 		}
-		case 'setTopFormUserMissing': {
-			return {
-				...state,
-				topForm: {
-					...state.topForm,
-					userNameMissing: action.userNameMissing,
-				},
-			};
-		}
-		case 'setReplyFormUserMissing': {
-			return {
-				...state,
-				replyForm: {
-					...state.replyForm,
-					userNameMissing: action.userNameMissing,
-				},
-			};
-		}
-		case 'setBottomFormUserMissing': {
-			return {
-				...state,
-				bottomForm: {
-					...state.bottomForm,
-					userNameMissing: action.userNameMissing,
-				},
-			};
+		case 'setUserNameMissing': {
+			switch (action.formId) {
+				case 'top':
+					return {
+						...state,
+						topForm: {
+							...state.topForm,
+							userNameMissing: action.userNameMissing,
+						},
+					};
+				case 'reply':
+					return {
+						...state,
+						replyForm: {
+							...state.replyForm,
+							userNameMissing: action.userNameMissing,
+						},
+					};
+				case 'bottom':
+					return {
+						...state,
+						bottomForm: {
+							...state.bottomForm,
+							userNameMissing: action.userNameMissing,
+						},
+					};
+			}
 		}
 
 		default:
@@ -433,22 +436,11 @@ export const Discussion = ({
 					setFormActive={(isActive, formId) => {
 						dispatch({ type: 'setFormActive', isActive, formId });
 					}}
-					setTopFormUserMissing={(userNameMissing) =>
+					setUserNameMissing={(userNameMissing, formId) =>
 						dispatch({
-							type: 'setTopFormUserMissing',
+							type: 'setUserNameMissing',
 							userNameMissing,
-						})
-					}
-					setReplyFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setReplyFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setBottomFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setBottomFormUserMissing',
-							userNameMissing,
+							formId,
 						})
 					}
 					topForm={topForm}

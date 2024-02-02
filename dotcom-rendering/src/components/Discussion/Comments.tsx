@@ -46,9 +46,10 @@ type Props = {
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 	setFormActive: (isActive: boolean, formId: CommentFormId) => void;
-	setTopFormUserMissing: (isUserMissing: boolean) => void;
-	setReplyFormUserMissing: (isUserMissing: boolean) => void;
-	setBottomFormUserMissing: (isUserMissing: boolean) => void;
+	setUserNameMissing: (
+		isUserNameMissing: boolean,
+		formId: CommentFormId,
+	) => void;
 	topForm: Form;
 	replyForm: Form;
 	bottomForm: Form;
@@ -127,9 +128,7 @@ export const Comments = ({
 	setComment,
 	handleFilterChange,
 	setFormActive,
-	setTopFormUserMissing,
-	setReplyFormUserMissing,
-	setBottomFormUserMissing,
+	setUserNameMissing,
 	topForm,
 	replyForm,
 	bottomForm,
@@ -304,7 +303,7 @@ export const Comments = ({
 												replyForm.userNameMissing
 											}
 											setUserNameMissing={
-												setReplyFormUserMissing
+												setUserNameMissing
 											}
 											previewBody={previewBody}
 											setPreviewBody={setPreviewBody}
@@ -335,7 +334,7 @@ export const Comments = ({
 					error={error}
 					setError={setError}
 					userNameMissing={topForm.userNameMissing}
-					setUserNameMissing={setTopFormUserMissing}
+					setUserNameMissing={setUserNameMissing}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
 				/>
@@ -395,7 +394,7 @@ export const Comments = ({
 									error={error}
 									setError={setError}
 									userNameMissing={replyForm.userNameMissing}
-									setUserNameMissing={setReplyFormUserMissing}
+									setUserNameMissing={setUserNameMissing}
 									previewBody={previewBody}
 									setPreviewBody={setPreviewBody}
 								/>
@@ -429,7 +428,7 @@ export const Comments = ({
 					error={error}
 					setError={setError}
 					userNameMissing={bottomForm.userNameMissing}
-					setUserNameMissing={setBottomFormUserMissing}
+					setUserNameMissing={setUserNameMissing}
 					previewBody={previewBody}
 					setPreviewBody={setPreviewBody}
 				/>

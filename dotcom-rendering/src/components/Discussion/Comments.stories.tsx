@@ -79,9 +79,7 @@ export const LoggedOutHiddenPicks = () => (
 			setComment={() => {}}
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
+			setUserNameMissing={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -127,9 +125,7 @@ export const InitialPage = () => (
 			setComment={() => {}}
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
+			setUserNameMissing={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -176,9 +172,7 @@ export const LoggedInHiddenNoPicks = () => (
 			setComment={() => {}}
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
+			setUserNameMissing={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={{ ...defaultCommentForm }}
 			bottomForm={defaultCommentForm}
@@ -220,9 +214,7 @@ export const LoggedIn = () => (
 			setComment={() => {}}
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
+			setUserNameMissing={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={{
 				...defaultCommentForm,
@@ -267,9 +259,7 @@ export const LoggedInShortDiscussion = () => (
 			setComment={() => {}}
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
+			setUserNameMissing={() => {}}
 			topForm={{ ...defaultCommentForm }}
 			replyForm={{
 				...defaultCommentForm,
@@ -309,9 +299,7 @@ export const LoggedOutHiddenNoPicks = () => (
 			setComment={() => {}}
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
+			setUserNameMissing={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -359,9 +347,7 @@ export const Closed = () => (
 			setComment={() => {}}
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
+			setUserNameMissing={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -407,9 +393,7 @@ export const NoComments = () => (
 			setComment={() => {}}
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
+			setUserNameMissing={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -457,9 +441,7 @@ export const LegacyDiscussion = () => (
 			setComment={() => {}}
 			handleFilterChange={() => {}}
 			setFormActive={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
+			setUserNameMissing={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
