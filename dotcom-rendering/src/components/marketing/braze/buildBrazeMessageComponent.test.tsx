@@ -10,7 +10,7 @@ const noOp = () => {};
 
 describe('buildBrazeMessageComponent', () => {
 	it('renders the correct component when a valid componentName is passed', () => {
-		const ExampleComponent = () => <></>;
+		const ExampleComponent = jest.fn(() => <></>);
 
 		const mappings = {
 			ExampleComponent,
@@ -32,7 +32,7 @@ describe('buildBrazeMessageComponent', () => {
 	});
 
 	it('renders nothing when an invalid componentName is passed', () => {
-		const ExampleComponent = () => <></>;
+		const ExampleComponent = jest.fn(() => <></>);
 		const mappings = {
 			ExampleComponent,
 		};
