@@ -91,6 +91,48 @@ const remapToValidFilters = (
 	} satisfies FilterOptions;
 };
 
+/**
+ * Finds the matching comment for which to expand the replies,
+ * and replaces its responses with a new list.
+
+ * @example
+ * ```txt
+ * Comment ID: 1234
+ *
+ * Before
+ * ━━ 1233
+ * ━┳ 1234
+ *  ┣━ 0001
+ *  ┣━ 0002
+ *  ┡━ 0003
+ *  ┆  (show 4 more replies)
+ * ━━ 1235
+ *
+ * After
+ * ━━ 1233
+ * ━┳ 1234
+ *  ┣━ 0001
+ *  ┣━ 0002
+ *  ┣━ 0003
+ *  ┣━ 0004
+ *  ┣━ 0005
+ *  ┣━ 0006
+ *  ┗━ 0007
+ * ━━ 1235
+ * ```
+ */
+export const replaceMatchingCommentResponses =
+	(action: Action & { type: 'expandCommentReplies' }) =>
+	(comment: CommentType): CommentType => {
+		const responses =
+			comment.id === action.commentId
+				? action.responses
+				: comment.responses?.map(
+						replaceMatchingCommentResponses(action),
+				  );
+		return { ...comment, responses };
+	};
+
 type State = {
 	comments: CommentType[];
 	isClosedForComments: boolean;
