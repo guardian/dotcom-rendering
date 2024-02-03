@@ -1,4 +1,4 @@
-import type { CommentType, UserProfile } from '../types/discussion';
+import type { CommentType, UserProfile } from '../lib/discussion';
 import { replaceMatchingCommentResponses } from './Discussion';
 
 describe('Discussion', () => {

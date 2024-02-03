@@ -4,18 +4,18 @@ import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
+import type {
+	CommentForm,
+	CommentType,
+	FilterOptions,
+	SignedInUser,
+} from '../lib/discussion';
 import { getDiscussion, type reportAbuse } from '../lib/discussionApi';
 import {
 	getCommentContext,
 	initFiltersFromLocalStorage,
 } from '../lib/getCommentContext';
 import { palette as themePalette } from '../palette';
-import type {
-	CommentForm,
-	CommentType,
-	FilterOptions,
-	SignedInUser,
-} from '../types/discussion';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
@@ -554,7 +554,6 @@ export const Discussion = ({
 	}, []);
 
 	useEffect(() => {
-		console.log({ commentCount });
 		// There's no point showing the view more button if there isn't much more to view
 		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
 			dispatch({ type: 'expandComments' });

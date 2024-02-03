@@ -6,13 +6,13 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useRef } from 'react';
-import { preview as defaultPreview } from '../../lib/discussionApi';
-import { palette as schemedPalette } from '../../palette';
 import type {
 	CommentType,
 	SignedInUser,
 	UserProfile,
-} from '../../types/discussion';
+} from '../../lib/discussion';
+import { preview as defaultPreview } from '../../lib/discussionApi';
+import { palette as schemedPalette } from '../../palette';
 import { FirstCommentWelcome } from './FirstCommentWelcome';
 import { PillarButton } from './PillarButton';
 import { Preview } from './Preview';

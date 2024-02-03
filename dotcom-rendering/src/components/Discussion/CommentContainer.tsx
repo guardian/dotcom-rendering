@@ -2,13 +2,13 @@ import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { preview, reportAbuse } from '../../lib/discussionApi';
-import { getMoreResponses } from '../../lib/discussionApi';
 import type {
 	CommentType,
 	SignedInUser,
 	ThreadsType,
-} from '../../types/discussion';
+} from '../../lib/discussion';
+import type { preview, reportAbuse } from '../../lib/discussionApi';
+import { getMoreResponses } from '../../lib/discussionApi';
 import { Comment } from './Comment';
 import { CommentForm } from './CommentForm';
 import { CommentReplyPreview } from './CommentReplyPreview';

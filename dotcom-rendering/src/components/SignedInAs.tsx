@@ -6,9 +6,9 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import type { UserProfile } from '../lib/discussion';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 import { palette as themePalette } from '../palette';
-import type { UserProfile } from '../types/discussion';
 
 type Props = {
 	commentCount?: number;

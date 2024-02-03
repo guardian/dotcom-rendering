@@ -20,7 +20,7 @@ jobs:
       packages: write
     steps:
       - name: Delete packages
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'dotcom-rendering'
           package-type: 'container'

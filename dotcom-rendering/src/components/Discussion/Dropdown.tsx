@@ -6,8 +6,8 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
+import type { DropdownOptionType } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
-import type { DropdownOptionType } from '../../types/discussion';
 
 type Props = {
 	id: string;

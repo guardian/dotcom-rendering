@@ -6,15 +6,15 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { preview, reportAbuse } from '../../lib/discussionApi';
-import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
 	CommentType,
 	FilterOptions,
 	CommentForm as Form,
 	SignedInUser,
-} from '../../types/discussion';
+} from '../../lib/discussion';
+import type { preview, reportAbuse } from '../../lib/discussionApi';
+import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
