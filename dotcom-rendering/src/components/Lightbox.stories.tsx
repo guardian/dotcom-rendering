@@ -3,7 +3,6 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
-	storage,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { userEvent, within } from '@storybook/testing-library';
@@ -171,9 +170,13 @@ WithoutCaption.play = async ({
 	canvasElement: HTMLElement;
 }) => {
 	const canvas = within(canvasElement);
-	storage.local.clear();
-	await userEvent.click(canvas.getByTitle('Toggle caption [i]'));
-	storage.local.clear();
+	const element = canvas.getByTitle('Toggle caption [i]');
+	// eslint-disable-next-line no-restricted-syntax -- acceptable in a story
+	localStorage.clear();
+	await userEvent.click(element);
+	await userEvent.clear(element);
+	// eslint-disable-next-line no-restricted-syntax -- acceptable in a story
+	localStorage.clear();
 };
 
 export const WithSport = () => {
