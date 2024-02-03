@@ -55,6 +55,20 @@ type Props = {
 	bottomForm: Form;
 };
 
+/**
+ * Size of comment batching to speed up rendering.
+ *
+ * We want react to complete the current work and render,
+ * without trying to batch this update before resetting
+ * the number of comments to the total comment amount.
+ *
+ * This allows a quick render of minimal comments and then immediately begin rendering
+ * the remaining comments.
+ *
+ * @see https://github.com/guardian/discussion-rendering/pull/477
+ */
+const COMMENT_BATCH = 10;
+
 const footerStyles = css`
 	display: flex;
 	justify-content: flex-end;
@@ -140,27 +154,34 @@ export const Comments = ({
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
 		useState<CommentType>();
-	const [numberOfCommentsToShow, setNumberOfCommentsToShow] = useState(10);
+	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
+		useState(COMMENT_BATCH);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
 	const [showPreview, setShowPreview] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
 
-	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
+	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
 
 	useEffect(() => {
-		if (expanded) {
-			// We want react to complete the current work and render, without trying to batch this update
-			// before resetting the number of comments
-			// to the total comment amount.
-			// This allows a quick render of minimal comments and then immediately begin rendering
-			// the remaining comments.
-			const timer = setTimeout(() => {
-				setNumberOfCommentsToShow(comments.length);
-			}, 0);
-			return () => clearTimeout(timer);
-		} else return;
-	}, [expanded, comments.length]);
+		setNumberOfCommentsToShow(COMMENT_BATCH);
+	}, [comments]);
+
+	useEffect(() => {
+		if (!expanded) return;
+		if (numberOfCommentsToShow === comments.length) return;
+
+		const newNumberOfCommentsToShow = Math.min(
+			numberOfCommentsToShow + COMMENT_BATCH,
+			comments.length,
+		);
+
+		const timer = setTimeout(() => {
+			setNumberOfCommentsToShow(newNumberOfCommentsToShow);
+		}, 0);
+
+		return () => clearTimeout(timer);
+	}, [expanded, comments.length, numberOfCommentsToShow, loadingMore]);
 
 	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
@@ -178,13 +199,13 @@ export const Comments = ({
 	 * page and is added to the DOM later, following an API call.
 	 * */
 	useEffect(() => {
-		if (loadingMore) return;
+		if (loadingMore) return; // the comment may not yet be in the DOM
 		if (commentToScrollTo === undefined) return;
 
 		document
 			.getElementById(`comment-${commentToScrollTo}`)
 			?.scrollIntoView();
-	}, [comments, commentToScrollTo, loadingMore]); // Add comments to deps so we rerun this effect when comments are loaded
+	}, [loadingMore, commentToScrollTo]);
 
 	const onFilterChange = (newFilterObject: FilterOptions) => {
 		/**
