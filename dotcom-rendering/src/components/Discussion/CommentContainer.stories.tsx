@@ -130,7 +130,7 @@ const commentDataWithLongThread: CommentType = {
 		staffCommenterCount: 1,
 		editorsPickCount: 0,
 		blockedCount: 0,
-		responseCount: 5,
+		responseCount: 3,
 	},
 };
 
