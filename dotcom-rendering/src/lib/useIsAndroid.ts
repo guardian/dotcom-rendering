@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import type { RenderingTarget } from '../types/renderingTarget';
+import { useConfig } from '../components/ConfigContext';
 
 /**
  * @deprecated this is a temporary solution to handle the fact
  * that horizontal scrolling is broken in the android app for
  * web views
  */
-export const useIsAndroid = (
-	renderingTarget: RenderingTarget,
-): boolean | undefined => {
+export const useIsAndroid = (): boolean | undefined => {
+	const { renderingTarget } = useConfig();
+
 	const [isAndroid, setIsAndroid] = useState<boolean | undefined>(
 		renderingTarget === 'Web' ? false : undefined,
 	);

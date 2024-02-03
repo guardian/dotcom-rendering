@@ -6,7 +6,6 @@ import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { TagType } from '../types/tag';
-import { useConfig } from './ConfigContext';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Placeholder } from './Placeholder';
 import { Section } from './Section';
@@ -210,8 +209,7 @@ export const OnwardsUpper = ({
 	shortUrlId,
 	discussionApiUrl,
 }: Props) => {
-	const { renderingTarget } = useConfig();
-	const isAndroid = useIsAndroid(renderingTarget);
+	const isAndroid = useIsAndroid();
 
 	const hydrated = useHydrated();
 	if (isAndroid) return null;
