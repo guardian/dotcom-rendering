@@ -26,8 +26,10 @@ const isLightboxable = (width: number, height: number): boolean =>
  * Older legacy images use a different url format so we need to use a different
  * approach when extracting the id of the image
  */
-const decideImageId = (image: ImageForLightbox): string | undefined => {
-	const url = new URL(image.masterUrl);
+const decideImageId = ({
+	masterUrl,
+}: Pick<ImageForLightbox, 'masterUrl'>): string | undefined => {
+	const url = new URL(masterUrl);
 	switch (url.hostname) {
 		case 'media.guim.co.uk': {
 			// E.g.
@@ -152,5 +154,7 @@ export const buildLightboxImages = (
 				image,
 			]),
 		).values(),
-	];
+	]
+		.sort((a, b) => a.position - b.position)
+		.map((image, index) => ({ ...image, position: index + 1 }));
 };
